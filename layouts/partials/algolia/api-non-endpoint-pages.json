@@ -1,0 +1,42 @@
+{{- /* Indexes the non-endpoint API pages (overview, using-the-api, scopes, rate-limits)
+       into the search index (Typesense).
+       These pages have type: api, so the main search loop in list.search.json skips them.
+       Mirrors the main loop's logic: per-h2-section records, plus a full-page-record
+       fallback for pages that build headings with the {{< h2 >}} shortcode (which produces
+       no Hugo .Fragments headings). */ -}}
+{{ $hugo_context := .context }}
+{{ $apiPages := slice
+    ($hugo_context.Site.GetPage "/api/latest")
+    ($hugo_context.Site.GetPage "/api/latest/using-the-api")
+    ($hugo_context.Site.GetPage "/api/latest/scopes")
+    ($hugo_context.Site.GetPage "/api/latest/rate-limits")
+}}
+{{ range $apiPages }}
+  {{ with . }}
+    {{ $page := . }}
+    {{ $title := $page.Params.integration_title | default $page.Title }}
+    {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
+    {{ $tags := $page.Params.algolia.tags }}
+    {{ $rank := $page.Params.algolia.rank | default 10 }}
+    {{ $category := $page.Params.algolia.category | default "API" }}
+    {{ $subcategory := $page.Params.algolia.subcategory | default "API Reference" }}
+
+    {{- /* per-h2-section records (works for pages with real markdown headings, e.g. scopes) */ -}}
+    {{- partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
+
+    {{- /* full-page record when the page has no markdown headings (h2 shortcode pages) */ -}}
+    {{- $headingCount := (len $page.Fragments.HeadingsMap) | default 0 -}}
+    {{- if eq $headingCount 0 -}}
+        {{- $object_id := md5 (print $page.Language.Lang "/" $page.File.Path) -}}
+        {{- $record := (dict
+            "objectID" $object_id "id" $object_id "title" $title
+            "section_header" "" "content" $content "type" $page.Type
+            "relpermalink" $page.RelPermalink "distinct_base_url" $page.RelPermalink
+            "full_url" $page.Permalink "language" $page.Language.Lang
+            "category" $category "subcategory" $subcategory "rank" $rank
+            "order" -1 "tags" (slice)) -}}
+        {{- if $tags -}}{{- $record = merge $record (dict "tags" $tags) -}}{{- end -}}
+        {{- $hugo_context.Scratch.Add "algoliaindex" $record -}}
+    {{- end -}}
+  {{ end }}
+{{ end }}
