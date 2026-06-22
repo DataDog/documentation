@@ -2,7 +2,7 @@
 title: Navegar por el Explorer
 ---
 
-{{< img src="service_management/events/explorer/navigate.png" alt="Cómo navegar por el Events Explorer" style="width:100%;" >}}
+{{< img src="events/explorer/navigate.png" alt="Cómo navegar por el Events Explorer" style="width:100%;" >}}
 
 ## Información general
 
@@ -14,7 +14,7 @@ Haz clic en cualquier evento en el Events Explorer para abrir el panel lateral d
 
 ### Pestaña de atributos
 
-{{< img src="service_management/events/explorer/event-attribute.png" alt="Un ejemplo de la pestaña Atributos del evento" style="width:100%;" >}}
+{{< img src="events/explorer/event-attribute.png" alt="Un ejemplo de la pestaña Atributos del evento" style="width:100%;" >}}
 
 La pestaña de atributos del panel lateral muestra los atributos del evento como JSON. Haz clic en un atributo para añadirlo o excluirlo de la consulta existente, o a fin de añadir una columna para este atributo.
 

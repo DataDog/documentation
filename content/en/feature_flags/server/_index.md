@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/implementation_patterns/serverless/"
+  tag: "Documentation"
+  text: "Serverless environments and Feature Flags"
 ---
 
 ## Overview
@@ -33,6 +36,8 @@ This guide covers the common setup required for all server-side SDKs, including 
   {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
+
+For serverless runtimes, see [Serverless Environments][5] for the Agent-based architecture and limitations.
 
 ## Prerequisites
 
@@ -142,3 +147,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
+[5]: /feature_flags/implementation_patterns/serverless/

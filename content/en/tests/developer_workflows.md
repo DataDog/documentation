@@ -49,11 +49,13 @@ You can enable test summaries in pull requests with the following steps:
 1. Install the [GitHub integration][4]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
    1. Give the application read and write permissions for pull requests.
-1. Navigate to the [Test Optimization Settings page][3].
-1. Select the repository where you want to enable test summaries.
-1. Toggle **GitHub Comments**.
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][3].
+1. Choose where to apply the setting:
+   - Select the **Organization** tab to enable PR Comments for every repository by default.
+   - Select the **Repository-specific** tab to enable PR Comments for a single repository.
+1. Under **General**, toggle **PR Comments** on.
 
-{{< img src="ci/enable-settings-github-comments.png" alt="The Test Optimization Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
+{{< img src="ci/enable-settings-github-comments-1.png" alt="The PR Comments toggle on the CI/CD Settings page." style="width:100%;">}}
 
 Comments only appear on pull requests that have run at least one test for an enabled repository.
 
@@ -167,7 +169,7 @@ IDE plugins and extensions are required to view your test in your IDE.
 
 [1]: /continuous_integration/guides/pull_request_comments/
 [2]: https://plugins.jetbrains.com/plugin/19495-datadog/versions
-[3]: https://app.datadoghq.com/ci/settings/test-optimization
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /integrations/github/
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
