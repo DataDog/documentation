@@ -18,6 +18,9 @@ further_reading:
 - link: "/security/application_security/setup/kubernetes/istio"
   tag: "Documentation"
   text: "App and API Protection for Istio"
+- link: "/security/application_security/setup/nginx/ingress-controller"
+  tag: "Documentation"
+  text: "App and API Protection for ingress-nginx"
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB App and API Protection Rules"
@@ -39,7 +42,7 @@ App and API Protection for Kubernetes automatically configures supported ingress
 ### What performs the automatic configuration?
 
 App and API Protection for Kubernetes uses a Kubernetes controller (running in the Datadog Cluster Agent) that:
-- **Automatically detects** supported proxies in your cluster (Envoy Gateway, Istio)
+- **Automatically detects** supported proxies in your cluster (Envoy Gateway)
 - **Configures proxies** to route traffic through an external Application Security processor
 - **Enables threat detection** for all traffic passing through your ingress layer
 - **Simplifies operations** through centralized configuration with Helm
@@ -47,8 +50,6 @@ App and API Protection for Kubernetes uses a Kubernetes controller (running in t
 ### Supported proxies
 
 - **Envoy Gateway**: Automatically creates `EnvoyExtensionPolicy` resources
-- **Istio**: Automatically creates `EnvoyFilter` resources in the Istio system namespace for Istio-managed Kubernetes Gateway API GatewayClasses
-- **Istio (native Gateway)**: Automatically configures native Istio Gateway resources
 
 More proxies are available through manual installation on the global [setup page][10].
 
@@ -69,7 +70,6 @@ More proxies are available through manual installation on the global [setup page
 ### Proxy compatibility
 - For specific proxy version compatibility, see:
   - [Envoy Gateway compatibility][8]
-  - [Istio compatibility][9]
 
 ## Prerequisites
 
@@ -79,7 +79,6 @@ Before enabling App and API Protection for Kubernetes, verify that you have:
 - [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
 - One or more supported proxies installed:
   - [Envoy Gateway][2]
-  - [Istio][3]
 - [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
 ## How it works
@@ -99,7 +98,6 @@ In sidecar mode, the security processor runs as a container injected directly in
 
 - You prefer not to manage a separate processor deployment and service
 - You want the processor co-located with each gateway pod
-- You are using Istio with the automated configuration (see [Enabling App and API Protection for Istio][7])
 
 ### Setup
 
@@ -149,7 +147,6 @@ In external mode, you deploy a single, centralized Application Security processo
 -  **Automatic Proxy Detection**: The controller watches for supported proxy resources in your cluster using Kubernetes informers.
 -  **Automatic Configuration**: When proxies are detected, the controller creates the necessary configuration:
    - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the security processor service
-   - For Istio: Creates `EnvoyFilter` resources in the Istio system namespace
 -  **Traffic Processing**: Gateways route traffic to the security processor through the Kubernetes service for security analysis.
 
 ### Benefits
@@ -162,7 +159,7 @@ In external mode, you deploy a single, centralized Application Security processo
 
 ### Step 1: Deploy the security processor
 
-Deploy the security processor service, which analyzes traffic forwarded from your gateways. For proxy-specific deployment details, see the [Envoy Gateway][6] or [Istio][7] documentation.
+Deploy the security processor service, which analyzes traffic forwarded from your gateways. For proxy-specific deployment details, see the [Envoy Gateway][6] documentation.
 
 Example deployment:
 
@@ -309,12 +306,6 @@ For **Envoy Gateway**, check that `EnvoyExtensionPolicy` resources were created:
 kubectl get envoyextensionpolicy -A
 ```
 
-For **Istio**, check that `EnvoyFilter` resources were created:
-
-```bash
-kubectl get envoyfilter -n istio-system
-```
-
 The Datadog Cluster Agent produces events for each operation that results in failure or success done in the cluster.
 
 #### Test traffic processing
@@ -334,7 +325,7 @@ Send requests through your gateway and verify they appear in the Datadog [App an
 | `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
 | `mode` | N/A | String | `""`; when empty, defaults to sidecar | Injection mode: `"sidecar"` or `"external"` |
 | `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
-| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"`, `"istio-gateway"` |
+| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"` |
 | `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the security processor Kubernetes Service |
 | `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the security processor service is deployed |
 | `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | Full service address override |
@@ -359,8 +350,6 @@ datadog:
 ### Proxy types
 
 - `envoy-gateway`: Configures Envoy Gateway using `EnvoyExtensionPolicy` resources
-- `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace for Istio-managed Kubernetes Gateway API GatewayClasses
-- `istio-gateway`: Configures native Istio Gateway using `EnvoyFilter` resources
 
 ### Opting out specific resources
 
@@ -391,7 +380,7 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
 
 ### Automatic configuration not detecting proxies
 
-**Symptom**: No `EnvoyExtensionPolicy` or `EnvoyFilter` resources are created.
+**Symptom**: No `EnvoyExtensionPolicy` resources are created.
 
 **Solutions**:
 - Check that `autoDetect` is set to `true` or proxies are manually specified
@@ -399,13 +388,13 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
 - Verify that your proxies are installed and have the expected Kubernetes resources (Gateway, GatewayClass)
 - Try manually specifying proxy types using the `proxies` parameter
 
-### EnvoyExtensionPolicy or EnvoyFilter not created
+### EnvoyExtensionPolicy not created
 
 **Symptom**: The controller is running but configuration resources are missing.
 
 **Solutions**:
 - Check Cluster Agent logs for RBAC permission errors
-- Verify the Cluster Agent service account has permissions to create `EnvoyExtensionPolicy` or `EnvoyFilter` resources
+- Verify the Cluster Agent service account has permissions to create `EnvoyExtensionPolicy` resources
 - Verify that the processor service exists and is accessible
 - Check for conflicting existing policies or filters
 
@@ -439,7 +428,6 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
 **Solutions**:
 - Verify the Cluster Agent ClusterRole includes permissions for:
   - `gateway.envoyproxy.io/envoyextensionpolicies`
-  - `networking.istio.io/envoyfilters`
   - `gateway.networking.k8s.io/gateways`
   - `gateway.networking.k8s.io/gatewayclasses`
 - Check that the ClusterRoleBinding references the correct service account
@@ -451,12 +439,9 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
 
 [1]: /containers/kubernetes/installation/
 [2]: https://gateway.envoyproxy.io/
-[3]: https://istio.io/
 [4]: /agent/remote_config/?tab=helm#enabling-remote-configuration
 [5]: https://app.datadoghq.com/security/appsec
 [6]: /security/application_security/setup/kubernetes/envoy-gateway
-[7]: /security/application_security/setup/kubernetes/istio
 [8]: /security/application_security/setup/compatibility/envoy-gateway
-[9]: /security/application_security/setup/compatibility/istio
 [10]: /security/application_security/setup/kubernetes/
 [11]: /security/application_security/
