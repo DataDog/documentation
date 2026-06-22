@@ -30,6 +30,7 @@ These OTLP metric types are mapped to Datadog metric types:
 - COUNT
 - GAUGE
 - DISTRIBUTION
+- HISTOGRAM (Explicit, Exponential)
 
 A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
@@ -68,44 +69,21 @@ OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregati
 
 OTLP defines two histogram types for representing value distributions:
 
-- **Histogram (Explicit Bucket)**: Uses fixed, user-defined or SDK-default bucket boundaries. Each bucket counts how many measured values fall within its bounds. Also stores sum, count, and optional min/max.
-- **ExponentialHistogram**: Uses dynamically computed bucket boundaries based on a scale parameter (`base = 2^(2^(-scale))`), which allows high dynamic range with small relative error. Datadog supports scales in the range `[-4, 8]`.
+- **Explicit Bucket Histogram**: Uses fixed, user-defined or SDK-default bucket boundaries. Each bucket counts how many measured values fall within its bounds. Also stores sum, count, and optional min/max.
+- **Exponential Histogram**: Uses dynamically computed bucket boundaries based on a scale parameter (`base = 2^(2^(-scale))`), which allows high dynamic range with small relative error. Datadog supports scales in the range `[-4, 8]`.
 
-*Aggregation temporality*, which can be cumulative or delta, determines the mapping for both histogram types:
+Both types have one feature that influences the mapping:
 
-- **Delta (default and recommended)**: Time windows don't overlap. Explicit Bucket and Exponential Histograms are ingested natively and reported as Datadog distributions. The original bucket structure is preserved; no conversion to DDSketch occurs. Histograms with a count of 0 are dropped.
-- **Cumulative**: Time windows extend from a fixed start point. The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
+- *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
-**Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for instructions on configuring your SDK or Collector to emit delta temporality.
+The default mapping for both histogram temporality types is as follows:
+
+- **Delta (Default and Recommended)**: Explicit Bucket and Exponential Histograms are ingested natively and stored with their original bucket structure preserved. Histograms with a count of 0 are dropped.
+- **Cumulative**: The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
+
+**Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for configuration instructions.
 
 Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
-
-The Datadog Agent and the OpenTelemetry Collector OTLP Exporter allow changing the Histogram export in the `histogram` subsection.
-- If the `mode` is set to `counters`, the following metrics are produced:
-
-`<METRIC_NAME>.bucket`, tagged by `lower_bound` and `upper_bound`
-: Bucket count in the time window for the bucket with the specified lower and upper bounds.<br>
-**Datadog In-App Type**: COUNT
-
-- If the `send_aggregation_metrics` flag is enabled, the following metrics are produced:
-
-`<METRIC_NAME>.sum`
-: Sum of the values submitted during the time window.<br>
-**Datadog In-App Type**: COUNT
-
-`<METRIC_NAME>.count`
-: Number of values submitted during the time window.<br>
-**Datadog In-App Type**: COUNT
-
-`<METRIC_NAME>.min`
-: Minimum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: OTLP Exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0. <br>
-**Datadog In-App Type**: GAUGE
-
-`<METRIC_NAME>.max`
-: Maximum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: OTLP Exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0.<br>
-**Datadog In-App Type**: GAUGE
-
-**Note**: `send_aggregation_metrics` is useful only when not using the distributions mode. For OTLP Exporter versions earlier than v0.75.0 or Datadog Agent versions earlier than v6.45.0 and v7.45.0, use `send_count_sum_metrics` instead.
 
 [3]: /opentelemetry/guide/otlp_delta_temporality/
 
