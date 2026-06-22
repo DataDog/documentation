@@ -71,7 +71,6 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
       <span class={`${cl("mobile-nav__hamburger-bar")} icon-bar`} />
       <span class={`${cl("mobile-nav__hamburger-bar")} icon-bar`} />
       <span class={`${cl("mobile-nav__hamburger-bar")} icon-bar`} />
-      <span class={`${cl("mobile-nav__hamburger-bar")} icon-bar`} />
     </button>
   );
 }

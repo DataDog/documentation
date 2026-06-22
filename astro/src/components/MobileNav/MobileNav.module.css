@@ -249,16 +249,16 @@
   margin-top: 4px;
 }
 
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(2) {
-  transform: rotate(45deg) translateY(2.5px) translateX(6px);
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
 }
 
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(3) {
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(2) {
   opacity: 0;
 }
 
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(4) {
-  transform: rotate(-45deg) translateY(-2.5px) translateX(6px);
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 @media (min-width: 992px) {
