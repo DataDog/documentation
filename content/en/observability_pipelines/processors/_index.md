@@ -73,12 +73,14 @@ These are the available processors:
 {{% tab "Metrics" %}}
 
 - [Aggregate][1]
-- [Filter][2]
-- [Tag Control][3]
+- [Edit Tags][2]
+- [Filter][3]
+- [Tag Control][4]
 
 [1]: /observability_pipelines/processors/aggregate/
-[2]: /observability_pipelines/processors/filter/
-[3]: /observability_pipelines/processors/tag_control/
+[2]: /observability_pipelines/processors/edit_tags/
+[3]: /observability_pipelines/processors/filter/
+[4]: /observability_pipelines/processors/tag_control/
 
 {{% /tab %}}
 {{< /tabs >}}
