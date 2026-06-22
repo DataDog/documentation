@@ -28,7 +28,7 @@ To set up the Tag Cardinality Control processor:
 1. Enter a cardinality limit for the maximum number of distinct values per tag. This limit is applied to all metrics that match the filter query.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 
-{{< img src="observability_pipelines/processors/tag_cardinality_control_settings.png" alt="The Tag Cardinality Control processor set to a cardinality limit of 200 and to drop tag when the limit is reached." style="width:60%;" >}}
+{{< img src="observability_pipelines/processors/tag_cardinality_control_settings.png" alt="The Tag Cardinality Control processor set to a cardinality limit of 200 and to drop tag when the limit is reached." style="width:40%;" >}}
 
 ### Optional per-metric override settings
 
