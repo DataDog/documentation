@@ -47,7 +47,7 @@ If you want to set a cardinality limit for a specific metric:
         - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used.
             - **Note**: The tag values are only reset with a Worker restart or a pipeline configuration update, even if the Tag Cardinality Control processor isn't updated.
         - **Exclude from limit**: Excludes metrics with the specified tag from being counted toward the cardinality limit.
-    1. Enter the limit for the maximum number of tag keys.
+    1. Enter the limit for the maximum number of tag key values.
     1. Click **Add Override**.
 
 {{< img src="observability_pipelines/processors/tag_cardinality_control_overrides.png" alt="The per-metric override panel with a custom limit set to 100 with per-tag overrides for the host tag excluded from the limit and the region tag limited to five." style="width:80%;" >}}
