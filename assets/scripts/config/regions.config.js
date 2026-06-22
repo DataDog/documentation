@@ -160,7 +160,7 @@ export default {
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
     ap2: 'gold.intake.ap2.datadoghq.com',
     gov2: 'agent-http-intake.logs.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'gold.intake.uk1.datadoghq.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
   agent_http_port: {
@@ -193,7 +193,7 @@ export default {
     ap1: 'http-intake.logs.ap1.datadoghq.com',
     ap2: 'gold.intake.ap2.datadoghq.com',
     gov2: 'http-intake.logs.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'gold.intake.uk1.datadoghq.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
   http_endpoint_full: {
@@ -325,7 +325,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_containers_service_name: {
@@ -336,7 +336,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-07f22a32140efaae5',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_logs_agent_service_name: {
@@ -347,7 +347,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_logs_user_service_name: {
@@ -358,7 +358,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_metrics_service_name: {
@@ -369,7 +369,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_process_service_name: {
@@ -380,7 +380,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-0fe52c96bfb6c5d0e',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_profiling_service_name: {
@@ -391,7 +391,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_traces_service_name: {
@@ -402,7 +402,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-08989912d1ef253f4',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_dbm_service_name: {
@@ -413,7 +413,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_remote_config_service_name: {
@@ -424,7 +424,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10',
     gov2: 'The private link service for US2-FED is not supported.',
-    uk1: 'TODO',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-0755097b02a34f9e7',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_customer_access_id: {
@@ -556,7 +556,7 @@ export default {
     ap1: 'api.ap1.datadoghq.com',
     ap2: 'orchid.intake.ap2.datadoghq.com',
     gov2: 'api.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'orchid.intake.uk1.datadoghq.com',
     gov: 'api.ddog-gov.com'
   },
   metrics_endpoint: {
@@ -578,7 +578,7 @@ export default {
     ap1: 'metrics.agent.ap1.datadoghq.com',
     ap2: 'beige.intake.ap2.datadoghq.com',
     gov2: 'metrics.agent.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'beige.intake.uk1.datadoghq.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
   containers_endpoint: {
@@ -600,7 +600,7 @@ export default {
     ap1: 'orchestrator.ap1.datadoghq.com',
     ap2: 'linen.intake.ap2.datadoghq.com',
     gov2: 'orchestrator.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'linen.intake.uk1.datadoghq.com',
     gov: 'orchestrator.ddog-gov.com'
   },
   process_endpoint: {
@@ -622,7 +622,7 @@ export default {
     ap1: 'process.ap1.datadoghq.com',
     ap2: 'bisque.intake.ap2.datadoghq.com',
     gov2: 'process.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'bisque.intake.uk1.datadoghq.com',
     gov: 'process.ddog-gov.com'
   },
   profiling_endpoint: {
@@ -644,7 +644,7 @@ export default {
     ap1: 'intake.profile.ap1.datadoghq.com',
     ap2: 'cyan.intake.ap2.datadoghq.com',
     gov2: 'intake.profile.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'cyan.intake.uk1.datadoghq.com',
     gov: 'intake.profile.ddog-gov.com'
   },
   traces_endpoint: {
@@ -666,7 +666,7 @@ export default {
     ap1: 'trace.agent.ap1.datadoghq.com',
     ap2: 'lime.intake.ap2.datadoghq.com',
     gov2: 'trace.agent.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'lime.intake.uk1.datadoghq.com',
     gov: 'trace.agent.ddog-gov.com'
   },
   dbm_endpoint: {
@@ -688,7 +688,7 @@ export default {
     ap1: 'dbm-metrics-intake.ap1.datadoghq.com',
     ap2: 'white.intake.ap2.datadoghq.com',
     gov2: 'dbm-metrics-intake.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'white.intake.uk1.datadoghq.com',
     gov: 'dbm-metrics-intake.ddog-gov.com'
   },
   remote_config_endpoint: {
@@ -710,7 +710,7 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov2: 'config.us2.ddog-gov.com',
-    uk1: 'TODO',
+    uk1: 'violet.intake.uk1.datadoghq.com',
     gov: 'config.ddog-gov.com'
   },
   org_management_max_session_duration: {
