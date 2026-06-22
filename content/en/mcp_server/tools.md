@@ -567,7 +567,7 @@ Fetches full details and attributes for one or more data entities by their entit
 ### `get_data_entity_hierarchy`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Fetches the containment hierarchy (ancestors and descendants) for one or more entities. Use this for containment navigation—for example, finding which schema and database a table belongs to, or listing the columns in a table. Not for data lineage (use `get_data_entity_lineage` for that).
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities. Use this for containment navigation, such as finding which schema and database a table belongs to, or listing the columns in a table. This tool is for containment, not data lineage (use `get_data_entity_lineage` for lineage).
 
 - What schema and database does this table belong to?
 - List all columns in the `orders` table.
@@ -585,7 +585,7 @@ Fetches the live reachable lineage subgraph from one or more anchor entities. Re
 ### `summarize_data_entity_lineage`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Gets aggregate statistics about the lineage graph reachable from anchor entities—counts and breakdowns by node type, depth, and attributes—without returning the full node and edge payload. Use this before `get_data_entity_lineage` when working with large or unknown graphs.
+Gets aggregate statistics about the lineage graph reachable from anchor entities, such as counts and breakdowns by node type, depth, and attributes, without returning the full node and edge payload. Use this before `get_data_entity_lineage` when working with large or unknown graphs.
 
 - How many tables does `fct_revenue` depend on upstream?
 - What types of entities are downstream from this Spark job?
@@ -611,7 +611,7 @@ Retrieves data quality metrics timeseries data for a given data observability mo
 ### `get_spark_job_health`
 *Toolset: **data-observability***\
 *Permissions Required: `APM Read`*\
-Retrieves detailed health metrics for a single Spark or Databricks job run, including duration, CPU time, executor allocation, memory usage, shuffle read, spill, and skew. Can look up a run by trace ID or search by job name.
+Retrieves detailed health metrics for a single Spark or Databricks job run, including duration, CPU time, executor allocation, memory usage, shuffle read, spill, and skew. Accepts either a trace ID or a job name to identify the run.
 
 - Show me the health metrics for the latest run of the `process_orders` Spark job.
 - What were the worst-performing stages in Spark job trace `abc123`?
