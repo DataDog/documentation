@@ -1443,6 +1443,10 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_timeframe:
+          $ref: "#/components/schemas/DashboardDefaultTimeframeSetting"
+          description: The default timeframe applied when opening the dashboard. Set to `null` to clear.
+          nullable: true
         description:
           description: Description of the dashboard.
           nullable: true
@@ -1557,6 +1561,11 @@ components:
       required:
         - data
       type: object
+    DashboardDefaultTimeframeSetting:
+      description: The default timeframe applied when opening the dashboard. Set to `null` to clear the dashboard's default timeframe.
+      oneOf:
+        - $ref: "#/components/schemas/DashboardLiveTimeframe"
+        - $ref: "#/components/schemas/DashboardFixedTimeframe"
     DashboardDeleteResponse:
       description: Response from the delete dashboard call.
       properties:
@@ -1564,6 +1573,36 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardFixedTimeframe:
+      description: A fixed dashboard timeframe.
+      properties:
+        from:
+          description: Start time in milliseconds since epoch.
+          example: 1712080128000
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in milliseconds since epoch.
+          example: 1712083128000
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: "#/components/schemas/DashboardFixedTimeframeType"
+      required:
+        - type
+        - from
+        - to
+      type: object
+    DashboardFixedTimeframeType:
+      description: Type of fixed timeframe.
+      enum:
+        - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+        - FIXED
     DashboardGlobalTime:
       description: Object containing the live span selection for the dashboard.
       properties:
@@ -1672,6 +1711,32 @@ components:
             $ref: "#/components/schemas/DashboardList"
           type: array
       type: object
+    DashboardLiveTimeframe:
+      description: A live dashboard timeframe.
+      properties:
+        type:
+          $ref: "#/components/schemas/DashboardLiveTimeframeType"
+        unit:
+          $ref: "#/components/schemas/WidgetLiveSpanUnit"
+        value:
+          description: Value of the live timeframe span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - type
+        - value
+        - unit
+      type: object
+    DashboardLiveTimeframeType:
+      description: Type of live timeframe.
+      enum:
+        - live
+      example: live
+      type: string
+      x-enum-varnames:
+        - LIVE
     DashboardReflowType:
       description: |-
         Reflow type for a **new dashboard layout** dashboard. Set this only when layout type is 'ordered'.
