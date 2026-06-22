@@ -55,14 +55,14 @@ This document goes through the following:
 
 ## Supported actions by data source
 
-The action you can apply to matched sensitive data depends on the data source. The following table shows which actions Sensitive Data Scanner supports for each telemetry data source:
+The action you can apply to matched sensitive data depends on the data source. The following table shows which actions Sensitive Data Scanner supports for each data source:
 
-| Action           | Logs | APM | RUM | Events |
-|------------------|------|-----|-----|--------|
-| Redact           | Yes  | Yes | Yes | Yes    |
-| Partially redact | Yes  | Yes | Yes | Yes    |
-| Hash             | Yes  | Yes | Yes | Yes    |
-| Mask             | Yes  | No  | No  | No     |
+| Action           | Logs | APM | RUM | Events | Agent Observability |
+|------------------|------|-----|-----|--------|---------------------|
+| Redact           | Yes  | Yes | Yes | Yes    | Yes                 |
+| Partially redact | Yes  | Yes | Yes | Yes    | Yes                 |
+| Hash             | Yes  | Yes | Yes | Yes    | Yes                 |
+| Mask             | Yes  | No  | No  | No     | No                  |
 
 **Note**: Sensitive Data Scanner does not redact sensitive data in cloud storage resources. For cloud storage, Sensitive Data Scanner performs detection only. See [Set Up Sensitive Data Scanner for Cloud Storage][17] for more information.
 
