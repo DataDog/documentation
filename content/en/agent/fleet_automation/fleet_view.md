@@ -115,22 +115,17 @@ Each row is a cluster managed by the [Datadog Operator][5] or Helm chart. The cl
 
 ### Prerequisites for Kubernetes view
 
-Most of the Kubernetes view is available without any prerequisite version. Specific capabilities have the following requirements:
+Most Kubernetes view features are available without version requirements. Specific capabilities require:
 
-**View configuration**
-- `DatadogAgent` custom resource: Datadog Operator v1.24 or later
-- Helm Chart values (`values.yaml`): Datadog Helm Chart v3.157.0 or later
+| Capability | Requirement |
+|---|---|
+| View `DatadogAgent` configuration | Datadog Operator v1.24 or later |
+| View Helm Chart values | Datadog Helm Chart v3.157.0 or later |
+| Edit configuration | [Remote Configuration][6] enabled and Datadog Operator v1.27 or later |
+| View integrations on a Cluster Agent | Agent v7.72.0 or later |
+| View integration status on a Cluster Agent | Agent v7.79.0 or later |
 
-**Edit configuration from Fleet View**
-- [Remote Configuration][6] enabled for your organization, and Datadog Operator v1.27 or later (you cannot edit Helm Chart values from Fleet View)
-- The following flags set in your [Operator configuration][7]:
-  - `remoteConfigEnabled`
-  - `remoteUpdatesEnabled`
-  - `createControllerRevisions`
-
-**View integrations running on a Cluster Agent**
-- Integrations list: Agent v7.72.0 or later
-- Integration status in the list: Agent v7.79.0 or later
+To edit configuration from Fleet View, also set the following flags in your [Operator configuration][7]: `remoteConfigEnabled`, `remoteUpdatesEnabled`, and `createControllerRevisions`. Editing Helm Chart values from Fleet View is not supported.
 
 ### View Kubernetes clusters
 
