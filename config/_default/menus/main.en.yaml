@@ -9735,6 +9735,11 @@ menu:
       parent: product_analytics
       identifier: pa_data_collected
       weight: 5
+    - name: Server-Side Events
+      url: product_analytics/data_collected/server_side_events
+      parent: pa_data_collected
+      identifier: pa_data_collected_server_side_events
+      weight: 501
     - name: Experiments
       url: experiments/
       pre: experiment-wui

@@ -177,4 +177,4 @@ Use the following features to inform your product change decisions, such as chan
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
 [21]: /api/latest/product-analytics/#send-server-side-events
-[22]: /product_analytics/guide/server_side_events/
+[22]: /product_analytics/data_collected/server_side_events/
