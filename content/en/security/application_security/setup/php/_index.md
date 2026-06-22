@@ -45,4 +45,4 @@ aliases:
 ## Additional Resources
 
 - [Troubleshooting Guide](/security/application_security/setup/php/troubleshooting)
-- [Compatibility Information](/security/application_security/setup/php/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/php)

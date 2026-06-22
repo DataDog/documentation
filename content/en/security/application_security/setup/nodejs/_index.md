@@ -60,4 +60,4 @@ further_reading:
 ## Additional Resources
 
 - [Troubleshooting Guide](./troubleshooting)
-- [Compatibility Information](./compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/nodejs)

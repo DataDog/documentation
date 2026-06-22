@@ -65,4 +65,4 @@ further_reading:
 - [Compatibility Information][2]
 
 [1]: /security/application_security/setup/java/troubleshooting
-[2]: /security/application_security/setup/java/compatibility
+[2]: /security/application_security/setup/compatibility/java

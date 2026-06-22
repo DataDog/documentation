@@ -64,5 +64,5 @@ further_reading:
 
 ## Additional Resources
 
-- [Compatibility Information](/security/application_security/setup/ruby/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/ruby)
 - [Troubleshooting Guide](/security/application_security/setup/ruby/troubleshooting)
