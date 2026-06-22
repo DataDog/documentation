@@ -2,12 +2,12 @@
 title: Custom Jobs using OpenLineage
 description: "Monitor jobs from in-house tools, custom pipelines, and orchestrators that don't have native Datadog integrations."
 further_reading:
-  - link: '/data_observability/'
-    tag: 'Documentation'
-    text: 'Data Observability Overview'
-  - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
-    tag: 'Documentation'
-    text: 'Set up Datadog Agent for OpenLineage Proxy'
+    - link: '/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Overview'
+    - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
+      tag: 'Documentation'
+      text: 'Set up Datadog Agent for OpenLineage Proxy'
 ---
 
 <div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
@@ -76,7 +76,6 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
       }'
 ```
 
-
 {{% /tab %}}
 
 {{% tab "OpenLineage Python client (HTTP transport)" %}}
@@ -127,7 +126,6 @@ event = RunEvent(
 
 client.emit(event)
 ```
-
 
 {{% /tab %}}
 
@@ -195,11 +193,12 @@ export OPENLINEAGE__TRANSPORT__TYPE=datadog
 client = OpenLineageClient.from_environment()
 ```
 
-
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Step 2: Send a `RUNNING` event (optional)
+
+Note: This step is optional. If you only need to capture job completion status, skip to [Step 3](#step-3-send-a-complete-or-fail-event).
 
 While the job is in progress, send a `RUNNING` event to track it in Datadog's Jobs Monitoring. Use the same `runId` from the `START` event.
 
@@ -519,16 +518,16 @@ To connect your custom job's lineage to datasets already tracked by Datadog's na
 
 Datadog resolves datasets into a hierarchy of account, database, schema, and table. If a name has fewer parts than expected (for example, `database.table` instead of `database.schema.table`), Datadog falls back to the nearest higher-order node in the lineage graph.
 
-| Platform | Namespace | Name |
-|---|---|---|
-| BigQuery | `bigquery` | `{project}.{dataset}.{table}` |
-| Snowflake | `snowflake://{org}-{account}` | `{database}.{schema}.{table}` |
-| Redshift | `redshift://{aws_account_id}:{region}:{cluster}` | `{database}.{schema}.{table}` |
-| PostgreSQL | `postgres://{host}:{port}` | `{database}.{schema}.{table}` |
-| Databricks | `databricks://{workspace-url}` | `{database}.{schema}.{table}` |
-| Trino | `trino://{host}:{port}` | `{catalog}.{schema}.{table}` |
-| AWS Glue | `arn:aws:glue:{region}:{accountId}` | `{database}.{table}` |
-| S3 | `s3://{bucket}` | `{path}` |
+| Platform   | Namespace                                        | Name                          |
+| ---------- | ------------------------------------------------ | ----------------------------- |
+| BigQuery   | `bigquery`                                       | `{project}.{dataset}.{table}` |
+| Snowflake  | `snowflake://{org}-{account}`                    | `{database}.{schema}.{table}` |
+| Redshift   | `redshift://{aws_account_id}:{region}:{cluster}` | `{database}.{schema}.{table}` |
+| PostgreSQL | `postgres://{host}:{port}`                       | `{database}.{schema}.{table}` |
+| Databricks | `databricks://{workspace-url}`                   | `{database}.{schema}.{table}` |
+| Trino      | `trino://{host}:{port}`                          | `{catalog}.{schema}.{table}`  |
+| AWS Glue   | `arn:aws:glue:{region}:{accountId}`              | `{database}.{table}`          |
+| S3         | `s3://{bucket}`                                  | `{path}`                      |
 
 For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
@@ -563,17 +562,17 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 Use `custom` for custom jobs. The values below are used by Datadog's native integrations. Using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
-| Value | Platform |
-|---|---|
-| `custom` | Custom or unsupported platforms |
-| `SPARK` | Apache Spark (native integration only; do not use for custom jobs) |
-| `AIRFLOW` | Apache Airflow |
-| `DBT` | dbt |
-| `BIGQUERY` | Google BigQuery |
-| `SNOWFLAKE` | Snowflake |
-| `TRINO` | Trino |
-| `ICEBERG` | Apache Iceberg |
-| `TABLEAU` | Tableau |
+| Value       | Platform                                                           |
+| ----------- | ------------------------------------------------------------------ |
+| `custom`    | Custom or unsupported platforms                                    |
+| `SPARK`     | Apache Spark (native integration only; do not use for custom jobs) |
+| `AIRFLOW`   | Apache Airflow                                                     |
+| `DBT`       | dbt                                                                |
+| `BIGQUERY`  | Google BigQuery                                                    |
+| `SNOWFLAKE` | Snowflake                                                          |
+| `TRINO`     | Trino                                                              |
+| `ICEBERG`   | Apache Iceberg                                                     |
+| `TABLEAU`   | Tableau                                                            |
 
 #### `processingType` values
 
@@ -587,12 +586,12 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 
 ### Other supported facets
 
-| Facet | What Datadog does |
-|---|---|
-| `parent` | Creates parent-child job hierarchy in the lineage graph |
-| `errorMessage` | Generates error spans with `error.message` and `error.stack` tags |
-| `tags` | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
-| `sql` | Parses and masks the SQL query; generates query events |
+| Facet          | What Datadog does                                                                  |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `parent`       | Creates parent-child job hierarchy in the lineage graph                            |
+| `errorMessage` | Generates error spans with `error.message` and `error.stack` tags                  |
+| `tags`         | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
+| `sql`          | Parses and masks the SQL query; generates query events                             |
 
 ## Further reading
 
