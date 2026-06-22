@@ -1,6 +1,8 @@
 ---
-title: Debug with Bits
+title: Bits Live Debugger
 description: Use Bits Code to create and manage Live Debugger sessions through a conversational interface.
+aliases:
+- /tracing/live_debugger/debug-with-bits/
 further_reading:
 - link: "/bits_ai/bits_ai_dev_agent/"
   tag: "Documentation"
@@ -14,22 +16,22 @@ further_reading:
 ---
 
 {{< beta-callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}
-Debug with Bits is in Preview. Request access to join the waiting list.
+Bits Live Debugger is in Preview. Request access to join the waiting list.
 {{< /beta-callout >}}
 
 ## Overview
 
-Debug with Bits brings a conversational interface to Live Debugger for investigating running services through natural language. Describe what you want to investigate, and Bits places logpoints, retrieves variable snapshots, and interprets results. After Bits identifies a root cause, it can suggest code fixes.
+Bits Live Debugger brings a conversational interface to Live Debugger for investigating running services through natural language. Describe what you want to investigate, and Bits places logpoints, retrieves variable snapshots, and interprets results. After Bits identifies a root cause, it can suggest code fixes.
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
 <div class="alert alert-info">
-Debug with Bits uses <a href="/bits_ai/bits_ai_dev_agent/">Bits Code</a>, which may impact billing.
+Bits Live Debugger uses <a href="/bits_ai/bits_ai_dev_agent/">Bits Code</a>, which may impact billing.
 </div>
 
 ## Prerequisites
 
-Before using Debug with Bits:
+Before using Bits Live Debugger:
 
 - [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
@@ -53,7 +55,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 ## Start a debugging session
 
 1. Go to [Live Debugger][4] in Datadog.
-1. In the Debug with Bits chatbox, describe the issue you want to investigate. Select the target service and environment before submitting the prompt.
+1. In the Bits Live Debugger chatbox, describe the issue you want to investigate. Select the target service and environment before submitting the prompt.
 
    Bits then works through the investigation automatically:
    - It analyzes relevant code paths in the connected source code repository and may ask follow-up questions to form a hypothesis.
