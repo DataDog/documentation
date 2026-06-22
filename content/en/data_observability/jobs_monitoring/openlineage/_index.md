@@ -198,7 +198,7 @@ client = OpenLineageClient.from_environment()
 
 ## Step 2: Send a `RUNNING` event (optional)
 
-Note: This step is optional. If you only need to capture job completion status, skip to [Step 3](#step-3-send-a-complete-or-fail-event).
+**Note**: This step is optional. `RUNNING` events will allow you to see job's status before it finishes. If you only need to capture job completion status, skip to [Step 3](#step-3-send-a-complete-or-fail-event).
 
 While the job is in progress, send a `RUNNING` event to track it in Datadog's Jobs Monitoring. Use the same `runId` from the `START` event.
 
