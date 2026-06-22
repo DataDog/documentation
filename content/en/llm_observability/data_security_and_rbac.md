@@ -33,14 +33,6 @@ Agent Observability integrates with [Sensitive Data Scanner][3], which helps pre
 
 By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
-Sensitive Data Scanner scanning for Agent Observability uses a managed scanning group that Datadog creates automatically when you first open the [Agent Observability Settings page][4]. You cannot create additional scanning groups or delete the managed group.
-
-You can customize the rules in the managed group:
-
-- Add predefined rules from the [Scanning Rule Library][5].
-- Disable rules you do not need.
-- Add custom rules to detect additional sensitive data patterns.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -48,6 +40,4 @@ You can customize the rules in the managed group:
 [1]: /account_management/rbac/data_access
 [2]: /llm_observability/instrumentation/sdk/#span-processing
 [3]: /security/sensitive_data_scanner/
-[4]: https://app.datadoghq.com/sensitive-data-scanner/configuration/llm-spans
-[5]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 
