@@ -2,19 +2,25 @@
 title: Custom Jobs using OpenLineage
 description: "Monitor jobs from in-house tools, custom pipelines, and orchestrators that don't have native Datadog integrations."
 further_reading:
-  - link: '/data_observability/'
-    tag: 'Documentation'
-    text: 'Data Observability Overview'
-  - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
-    tag: 'Documentation'
-    text: 'Set up Datadog Agent for OpenLineage Proxy'
+    - link: '/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Overview'
+    - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
+      tag: 'Documentation'
+      text: 'Set up Datadog Agent for OpenLineage Proxy'
 ---
 
 <div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
 
 ## Overview
 
-Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. Use custom jobs when you need to:
+Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. With custom jobs, you can:
+
+- Detect failing and long-running jobs
+- Pinpoint and resolve the root cause of failed and long-running jobs
+- Understand upstream dependencies and downstream data consumers with data lineage
+
+Use custom jobs when you need to:
 
 - Capture lineage from systems Datadog doesn't integrate with natively, such as in-house tools or custom ETL scripts
 - Emit lineage events for jobs or orchestrators where a native Datadog integration isn't available
@@ -76,7 +82,6 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
       }'
 ```
 
-
 {{% /tab %}}
 
 {{% tab "OpenLineage Python client (HTTP transport)" %}}
@@ -127,7 +132,6 @@ event = RunEvent(
 
 client.emit(event)
 ```
-
 
 {{% /tab %}}
 
@@ -195,11 +199,319 @@ export OPENLINEAGE__TRANSPORT__TYPE=datadog
 client = OpenLineageClient.from_environment()
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+## Step 2: Send a `RUNNING` event (optional)
+
+**Note**: This step is optional. `RUNNING` events let you see a job's status before it finishes. If you only need to capture job completion status, skip to [Step 3](#step-3-send-a-complete-or-fail-event).
+
+While the job is in progress, send a `RUNNING` event to track it in Datadog's Jobs Monitoring. Use the same `runId` from the `START` event.
+
+{{< tabs >}}
+{{% tab "Direct HTTP with curl" %}}
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:02:00Z",
+        "eventType": "RUNNING",
+        "run": { "runId": "<RUN_UUID>" },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (HTTP transport)" %}}
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+running_event = RunEvent(
+    eventType=RunState.RUNNING,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(running_event)
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (Datadog transport)" %}}
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+running_event = RunEvent(
+    eventType=RunState.RUNNING,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(running_event)
+```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Step 2: Verify in Datadog
+## Step 3: Send a `COMPLETE` or `FAIL` event
+
+When the job finishes, send a `COMPLETE` or `FAIL` event using the same `runId` from the `START` event.
+
+{{< tabs >}}
+{{% tab "Direct HTTP with curl" %}}
+
+**Success**
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:05:00Z",
+        "eventType": "COMPLETE",
+        "run": { "runId": "<RUN_UUID>" },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+**Failure**
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:05:00Z",
+        "eventType": "FAIL",
+        "run": {
+          "runId": "<RUN_UUID>",
+          "facets": {
+            "errorMessage": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/1-0-1/ErrorMessageRunFacet.json",
+              "message": "Job failed: division by zero",
+              "programmingLanguage": "Python",
+              "stackTrace": "Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            }
+          }
+        },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (HTTP transport)" %}}
+
+**Success**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+
+complete_event = RunEvent(
+    eventType=RunState.COMPLETE,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(complete_event)
+```
+
+**Failure**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import error_message_run
+
+fail_event = RunEvent(
+    eventType=RunState.FAIL,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(
+        runId="<RUN_UUID>",  # same runId as START
+        facets={
+            "errorMessage": error_message_run.ErrorMessageRunFacet(
+                message="Job failed: division by zero",
+                programmingLanguage="Python",
+                stackTrace="Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            )
+        }
+    ),
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(fail_event)
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (Datadog transport)" %}}
+
+**Success**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+complete_event = RunEvent(
+    eventType=RunState.COMPLETE,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(complete_event)
+```
+
+**Failure**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job, error_message_run
+
+fail_event = RunEvent(
+    eventType=RunState.FAIL,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(
+        runId="<RUN_UUID>",  # same runId as START
+        facets={
+            "errorMessage": error_message_run.ErrorMessageRunFacet(
+                message="Job failed: division by zero",
+                programmingLanguage="Python",
+                stackTrace="Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            )
+        }
+    ),
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(fail_event)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Step 4: Verify in Datadog
 
 After sending your events, check the following:
 
@@ -212,16 +524,16 @@ To connect your custom job's lineage to datasets already tracked by Datadog's na
 
 Datadog resolves datasets into a hierarchy of account, database, schema, and table. If a name has fewer parts than expected (for example, `database.table` instead of `database.schema.table`), Datadog falls back to the nearest higher-order node in the lineage graph.
 
-| Platform | Namespace | Name |
-|---|---|---|
-| BigQuery | `bigquery` | `{project}.{dataset}.{table}` |
-| Snowflake | `snowflake://{org}-{account}` | `{database}.{schema}.{table}` |
-| Redshift | `redshift://{aws_account_id}:{region}:{cluster}` | `{database}.{schema}.{table}` |
-| PostgreSQL | `postgres://{host}:{port}` | `{database}.{schema}.{table}` |
-| Databricks | `databricks://{workspace-url}` | `{database}.{schema}.{table}` |
-| Trino | `trino://{host}:{port}` | `{catalog}.{schema}.{table}` |
-| AWS Glue | `arn:aws:glue:{region}:{accountId}` | `{database}.{table}` |
-| S3 | `s3://{bucket}` | `{path}` |
+| Platform   | Namespace                                        | Name                          |
+| ---------- | ------------------------------------------------ | ----------------------------- |
+| BigQuery   | `bigquery`                                       | `{project}.{dataset}.{table}` |
+| Snowflake  | `snowflake://{org}-{account}`                    | `{database}.{schema}.{table}` |
+| Redshift   | `redshift://{aws_account_id}:{region}:{cluster}` | `{database}.{schema}.{table}` |
+| PostgreSQL | `postgres://{host}:{port}`                       | `{database}.{schema}.{table}` |
+| Databricks | `databricks://{workspace-url}`                   | `{database}.{schema}.{table}` |
+| Trino      | `trino://{host}:{port}`                          | `{catalog}.{schema}.{table}`  |
+| AWS Glue   | `arn:aws:glue:{region}:{accountId}`              | `{database}.{table}`          |
+| S3         | `s3://{bucket}`                                  | `{path}`                      |
 
 For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
@@ -256,17 +568,17 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 Use `custom` for custom jobs. The values below are used by Datadog's native integrations. Using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
-| Value | Platform |
-|---|---|
-| `custom` | Custom or unsupported platforms |
-| `SPARK` | Apache Spark (native integration only; do not use for custom jobs) |
-| `AIRFLOW` | Apache Airflow |
-| `DBT` | dbt |
-| `BIGQUERY` | Google BigQuery |
-| `SNOWFLAKE` | Snowflake |
-| `TRINO` | Trino |
-| `ICEBERG` | Apache Iceberg |
-| `TABLEAU` | Tableau |
+| Value       | Platform                                                           |
+| ----------- | ------------------------------------------------------------------ |
+| `custom`    | Custom or unsupported platforms                                    |
+| `SPARK`     | Apache Spark (native integration only; do not use for custom jobs) |
+| `AIRFLOW`   | Apache Airflow                                                     |
+| `DBT`       | dbt                                                                |
+| `BIGQUERY`  | Google BigQuery                                                    |
+| `SNOWFLAKE` | Snowflake                                                          |
+| `TRINO`     | Trino                                                              |
+| `ICEBERG`   | Apache Iceberg                                                     |
+| `TABLEAU`   | Tableau                                                            |
 
 #### `processingType` values
 
@@ -280,12 +592,12 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 
 ### Other supported facets
 
-| Facet | What Datadog does |
-|---|---|
-| `parent` | Creates parent-child job hierarchy in the lineage graph |
-| `errorMessage` | Generates error spans with `error.message` and `error.stack` tags |
-| `tags` | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
-| `sql` | Parses and masks the SQL query; generates query events |
+| Facet          | What Datadog does                                                                  |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `parent`       | Creates parent-child job hierarchy in the lineage graph                            |
+| `errorMessage` | Generates error spans with `error.message` and `error.stack` tags                  |
+| `tags`         | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
+| `sql`          | Parses and masks the SQL query; generates query events                             |
 
 ## Further reading
 
