@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method uses the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method uses the [NGINX Dynamic Modules capability][201] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
 
 {{% rum-browser-auto-instrumentation-limitations %}}
 
 ## Prerequisites
 
-The [Datadog Agent][2] is installed and configured.
+The [Datadog Agent][202] is installed and configured.
 
 ## Setup
 
@@ -128,7 +128,7 @@ Use this method if you cannot run the installation script or need full control o
 
 ## Updating your RUM application
 
-You can update your RUM application settings at any time. From the [Application Management][3] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
+You can update your RUM application settings at any time. From the [Application Management][203] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
 
 ### Sampling rates
 
@@ -140,7 +140,7 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ### NGINX stops responding
 
-If NGINX stops serving requests after installation, contact [Datadog support][4] with the following information:
+If NGINX stops serving requests after installation, contact [Datadog support][204] with the following information:
 
 - Your NGINX configuration file
 - Any relevant error logs
@@ -178,102 +178,102 @@ To manually remove RUM from your auto-instrumented web server:
 
 | NGINX version | amd64 | arm 64 |
 |---------------|-------|--------|
-| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][5] | [ngx_http_datadog-arm64-1.25.0][6] |
-| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][7] | [ngx_http_datadog-arm64-1.25.1][8] |
-| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][9] | [ngx_http_datadog-arm64-1.25.2][10] |
-| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][11] | [ngx_http_datadog-arm64-1.25.3][12] |
-| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][13] | [ngx_http_datadog-arm64-1.25.4][14] |
-| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][15] | [ngx_http_datadog-arm64-1.25.5][16] |
-| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][17] | [ngx_http_datadog-arm64-1.26.0][18] |
-| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][19] | [ngx_http_datadog-arm64-1.26.1][20] |
-| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][21] | [ngx_http_datadog-arm64-1.26.2][22] |
-| 1.26.3 | [ngx_http_datadog-amd64-1.26.3][23] | [ngx_http_datadog-arm64-1.26.3][24] |
-| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][25] | [ngx_http_datadog-arm64-1.27.0][26] |
-| 1.27.1 | [ngx_http_datadog-amd64-1.27.1][27] | [ngx_http_datadog-arm64-1.27.1][28] |
-| 1.27.2 | [ngx_http_datadog-amd64-1.27.2][29] | [ngx_http_datadog-arm64-1.27.2][30] |
-| 1.27.3 | [ngx_http_datadog-amd64-1.27.3][31] | [ngx_http_datadog-arm64-1.27.3][32] |
-| 1.27.4 | [ngx_http_datadog-amd64-1.27.4][33] | [ngx_http_datadog-arm64-1.27.4][34] |
-| 1.27.5 | [ngx_http_datadog-amd64-1.27.5][35] | [ngx_http_datadog-arm64-1.27.5][36] |
-| 1.28.0 | [ngx_http_datadog-amd64-1.28.0][37] | [ngx_http_datadog-arm64-1.28.0][38] |
-| 1.28.1 | [ngx_http_datadog-amd64-1.28.1][39] | [ngx_http_datadog-arm64-1.28.1][40] |
-| 1.28.2 | [ngx_http_datadog-amd64-1.28.2][41] | [ngx_http_datadog-arm64-1.28.2][42] |
-| 1.28.3 | [ngx_http_datadog-amd64-1.28.3][43] | [ngx_http_datadog-arm64-1.28.3][44] |
-| 1.29.0 | [ngx_http_datadog-amd64-1.29.0][45] | [ngx_http_datadog-arm64-1.29.0][46] |
-| 1.29.1 | [ngx_http_datadog-amd64-1.29.1][47] | [ngx_http_datadog-arm64-1.29.1][48] |
-| 1.29.2 | [ngx_http_datadog-amd64-1.29.2][49] | [ngx_http_datadog-arm64-1.29.2][50] |
-| 1.29.3 | [ngx_http_datadog-amd64-1.29.3][51] | [ngx_http_datadog-arm64-1.29.3][52] |
-| 1.29.4 | [ngx_http_datadog-amd64-1.29.4][53] | [ngx_http_datadog-arm64-1.29.4][54] |
-| 1.29.5 | [ngx_http_datadog-amd64-1.29.5][55] | [ngx_http_datadog-arm64-1.29.5][56] |
-| 1.29.6 | [ngx_http_datadog-amd64-1.29.6][57] | [ngx_http_datadog-arm64-1.29.6][58] |
-| 1.29.7 | [ngx_http_datadog-amd64-1.29.7][59] | [ngx_http_datadog-arm64-1.29.7][60] |
-| 1.29.8 | [ngx_http_datadog-amd64-1.29.8][61] | [ngx_http_datadog-arm64-1.29.8][62] |
-| 1.30.0 | [ngx_http_datadog-amd64-1.30.0][63] | [ngx_http_datadog-arm64-1.30.0][64] |
+| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][205] | [ngx_http_datadog-arm64-1.25.0][206] |
+| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][207] | [ngx_http_datadog-arm64-1.25.1][208] |
+| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][209] | [ngx_http_datadog-arm64-1.25.2][210] |
+| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][211] | [ngx_http_datadog-arm64-1.25.3][212] |
+| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][213] | [ngx_http_datadog-arm64-1.25.4][214] |
+| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][215] | [ngx_http_datadog-arm64-1.25.5][216] |
+| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][217] | [ngx_http_datadog-arm64-1.26.0][218] |
+| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][219] | [ngx_http_datadog-arm64-1.26.1][220] |
+| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][221] | [ngx_http_datadog-arm64-1.26.2][222] |
+| 1.26.3 | [ngx_http_datadog-amd64-1.26.3][223] | [ngx_http_datadog-arm64-1.26.3][224] |
+| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][225] | [ngx_http_datadog-arm64-1.27.0][226] |
+| 1.27.1 | [ngx_http_datadog-amd64-1.27.1][227] | [ngx_http_datadog-arm64-1.27.1][228] |
+| 1.27.2 | [ngx_http_datadog-amd64-1.27.2][229] | [ngx_http_datadog-arm64-1.27.2][230] |
+| 1.27.3 | [ngx_http_datadog-amd64-1.27.3][231] | [ngx_http_datadog-arm64-1.27.3][232] |
+| 1.27.4 | [ngx_http_datadog-amd64-1.27.4][233] | [ngx_http_datadog-arm64-1.27.4][234] |
+| 1.27.5 | [ngx_http_datadog-amd64-1.27.5][235] | [ngx_http_datadog-arm64-1.27.5][236] |
+| 1.28.0 | [ngx_http_datadog-amd64-1.28.0][237] | [ngx_http_datadog-arm64-1.28.0][238] |
+| 1.28.1 | [ngx_http_datadog-amd64-1.28.1][239] | [ngx_http_datadog-arm64-1.28.1][240] |
+| 1.28.2 | [ngx_http_datadog-amd64-1.28.2][241] | [ngx_http_datadog-arm64-1.28.2][242] |
+| 1.28.3 | [ngx_http_datadog-amd64-1.28.3][243] | [ngx_http_datadog-arm64-1.28.3][244] |
+| 1.29.0 | [ngx_http_datadog-amd64-1.29.0][245] | [ngx_http_datadog-arm64-1.29.0][246] |
+| 1.29.1 | [ngx_http_datadog-amd64-1.29.1][247] | [ngx_http_datadog-arm64-1.29.1][248] |
+| 1.29.2 | [ngx_http_datadog-amd64-1.29.2][249] | [ngx_http_datadog-arm64-1.29.2][250] |
+| 1.29.3 | [ngx_http_datadog-amd64-1.29.3][251] | [ngx_http_datadog-arm64-1.29.3][252] |
+| 1.29.4 | [ngx_http_datadog-amd64-1.29.4][253] | [ngx_http_datadog-arm64-1.29.4][254] |
+| 1.29.5 | [ngx_http_datadog-amd64-1.29.5][255] | [ngx_http_datadog-arm64-1.29.5][256] |
+| 1.29.6 | [ngx_http_datadog-amd64-1.29.6][257] | [ngx_http_datadog-arm64-1.29.6][258] |
+| 1.29.7 | [ngx_http_datadog-amd64-1.29.7][259] | [ngx_http_datadog-arm64-1.29.7][260] |
+| 1.29.8 | [ngx_http_datadog-amd64-1.29.8][261] | [ngx_http_datadog-arm64-1.29.8][262] |
+| 1.30.0 | [ngx_http_datadog-amd64-1.30.0][263] | [ngx_http_datadog-arm64-1.30.0][264] |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
-[2]: /agent/
-[3]: https://app.datadoghq.com/rum/list
-[4]: /help
-[5]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.0.so.tgz
-[6]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.0.so.tgz
-[7]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.1.so.tgz
-[8]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.1.so.tgz
-[9]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.2.so.tgz
-[10]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.2.so.tgz
-[11]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.3.so.tgz
-[12]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.3.so.tgz
-[13]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.4.so.tgz
-[14]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.4.so.tgz
-[15]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.5.so.tgz
-[16]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.5.so.tgz
-[17]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.0.so.tgz
-[18]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.0.so.tgz
-[19]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.1.so.tgz
-[20]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.1.so.tgz
-[21]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.2.so.tgz
-[22]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
-[23]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.3.so.tgz
-[24]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.3.so.tgz
-[25]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
-[26]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
-[27]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.1.so.tgz
-[28]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.1.so.tgz
-[29]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.2.so.tgz
-[30]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.2.so.tgz
-[31]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.3.so.tgz
-[32]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
-[33]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
-[34]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
-[35]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.5.so.tgz
-[36]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.5.so.tgz
-[37]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.0.so.tgz
-[38]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.0.so.tgz
-[39]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.1.so.tgz
-[40]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.1.so.tgz
-[41]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.2.so.tgz
-[42]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.2.so.tgz
-[43]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.3.so.tgz
-[44]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.3.so.tgz
-[45]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.0.so.tgz
-[46]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.0.so.tgz
-[47]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.1.so.tgz
-[48]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.1.so.tgz
-[49]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.2.so.tgz
-[50]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.2.so.tgz
-[51]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.3.so.tgz
-[52]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.3.so.tgz
-[53]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.4.so.tgz
-[54]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.4.so.tgz
-[55]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.5.so.tgz
-[56]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.5.so.tgz
-[57]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.6.so.tgz
-[58]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.6.so.tgz
-[59]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.7.so.tgz
-[60]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.7.so.tgz
-[61]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.8.so.tgz
-[62]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.8.so.tgz
-[63]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.30.0.so.tgz
-[64]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.30.0.so.tgz
+[201]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
+[202]: /agent/
+[203]: https://app.datadoghq.com/rum/list
+[204]: /help
+[205]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.0.so.tgz
+[206]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.0.so.tgz
+[207]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.1.so.tgz
+[208]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.1.so.tgz
+[209]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.2.so.tgz
+[210]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.2.so.tgz
+[211]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.3.so.tgz
+[212]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.3.so.tgz
+[213]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.4.so.tgz
+[214]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.4.so.tgz
+[215]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.5.so.tgz
+[216]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.5.so.tgz
+[217]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.0.so.tgz
+[218]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.0.so.tgz
+[219]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.1.so.tgz
+[220]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.1.so.tgz
+[221]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.2.so.tgz
+[222]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
+[223]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.3.so.tgz
+[224]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.3.so.tgz
+[225]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
+[226]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
+[227]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.1.so.tgz
+[228]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.1.so.tgz
+[229]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.2.so.tgz
+[230]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.2.so.tgz
+[231]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.3.so.tgz
+[232]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
+[233]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
+[234]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
+[235]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.5.so.tgz
+[236]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.5.so.tgz
+[237]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.0.so.tgz
+[238]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.0.so.tgz
+[239]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.1.so.tgz
+[240]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.1.so.tgz
+[241]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.2.so.tgz
+[242]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.2.so.tgz
+[243]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.28.3.so.tgz
+[244]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.28.3.so.tgz
+[245]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.0.so.tgz
+[246]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.0.so.tgz
+[247]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.1.so.tgz
+[248]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.1.so.tgz
+[249]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.2.so.tgz
+[250]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.2.so.tgz
+[251]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.3.so.tgz
+[252]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.3.so.tgz
+[253]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.4.so.tgz
+[254]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.4.so.tgz
+[255]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.5.so.tgz
+[256]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.5.so.tgz
+[257]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.6.so.tgz
+[258]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.6.so.tgz
+[259]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.7.so.tgz
+[260]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.7.so.tgz
+[261]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.29.8.so.tgz
+[262]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.8.so.tgz
+[263]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.30.0.so.tgz
+[264]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.30.0.so.tgz
