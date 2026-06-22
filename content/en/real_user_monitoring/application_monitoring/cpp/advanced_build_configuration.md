@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-This page covers build configuration topics beyond the standard CMake setup described in [C / C++ Monitoring Setup][1], including instructions for integrating the SDK into projects that don't use CMake.
+This page covers build configuration topics beyond the standard CMake setup described in [C / C++ Monitoring Setup][1]. It includes instructions for integrating the SDK into projects that don't use CMake.
 
 ## CMake targets and datadog_enable()
 
@@ -64,7 +64,7 @@ See [`DatadogConvenience.cmake`][2] for a full definition of `datadog_install()`
 
 ## Customizing the SDK build
 
-If you use `FetchContent` to build the SDK from source as part of your project's build, or if you build your own precompiled binaries to integrate into a non-CMake build, you can customize the build with CMake options:
+You can customize the SDK build with CMake options when building from source using `FetchContent` or when creating precompiled binaries for a non-CMake build:
 
 - In a `CMakeList.txt` or `.cmake` file: `set(DD_CRASH_MODE inprocess)`
 - When configuring the project with `cmake`: `cmake -DDD_CRASH_MODE=inprocess ...`

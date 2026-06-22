@@ -7,11 +7,11 @@ If you haven't set up the C++ SDK yet, follow the [in-app setup instructions][1]
 
 ## Instrument your application
 
-The C++ SDK is a low-level library that is not coupled to a UI framework. As such, it does not automatically instrument your application: user interactions and changes in application state must be manually recorded by calling the appropriate RUM API.
+The C++ SDK is a low-level library that is not coupled to a UI framework. As such, it does not automatically instrument your application. User interactions and changes in application state must be manually recorded by calling the appropriate RUM API.
 
 ### Track views
 
-A RUM session is organized into views, each representing a distinct screen, scene, or state in your application, such as a level, menu, or settings panel. All actions, resources, and errors are associated with the current view.
+A RUM session is organized into views. Each view represents a distinct screen, scene, or state in your application, such as a level, menu, or settings panel. All actions, resources, and errors are associated with the current view.
 
 Each view is identified by a `key` string that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous one.
 

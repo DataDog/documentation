@@ -75,7 +75,7 @@ For more detailed information on CMake setup, see [Advanced Build Configuration]
 {% /tab %}
 {% tab label="Other build systems" %}
 
-If you're not using CMake, download precompiled binaries or build the SDK from source with CMake, then point your compiler and linker to the appropriate headers and libraries. For example, in a `Makefile`:
+If you're not using CMake, download precompiled binaries or build the SDK from source with CMake. Then point your compiler and linker to the appropriate headers and libraries. For example, in a `Makefile`:
 
 ```makefile
 INCLUDES = -Iexternal/datadog-sdk/include
@@ -421,7 +421,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 {% /tab %}
 {% /tabs %}
 
-After the SDK is correctly configured, tracking consent is granted, and your calls to RUM API functions like `StartView()` are being executed, you should see periodic console output indicating that the SDK is uploading data:
+After the SDK is correctly configured and tracking consent is granted, you should see periodic console output when calling RUM API functions like `StartView()`. This indicates that the SDK is uploading data:
 
 ```
 [DATADOG DEBUG] Initiating HTTP request
