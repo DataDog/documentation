@@ -36,7 +36,7 @@ By default, RUM collects common attributes for all events and the event-specific
 | `date`             | integer | Start of the event in milliseconds from epoch. |
 | `service`          | string  | The [unified service name][2] for this application. |
 | `env`              | string  | The environment tag (for example, `production` or `staging`). |
-| `version`          | string  | The application version set with `SetApplicationVersion()`. |
+| `version`          | string  | The application version set with `SetVersion()`. |
 | `type`             | string  | The type of the event (for example, `view` or `error`). |
 
 ### Operating system
@@ -183,7 +183,7 @@ The SDK stores events on disk before uploading them to Datadog. Events are prese
 
 [1]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#custom-attributes
 [2]: /getting_started/tagging/unified_service_tagging/
-[3]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#event-storage-location
+[3]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#application-storage-path
 [4]: /data_security/real_user_monitoring/#geolocation
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#track-user-and-account-information
 [6]: /data_security/real_user_monitoring/#ip-address

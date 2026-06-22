@@ -7,7 +7,7 @@ If you haven't set up the C++ SDK yet, follow the [in-app setup instructions][1]
 
 ## Instrument your application
 
-The C++ SDK is a low-level library that it not coupled to a UI framework. As such, it does not automatically instrument your application: user interactions and changes in application state must be manually recording by calling the appropriate RUM API.
+The C++ SDK is a low-level library that is not coupled to a UI framework. As such, it does not automatically instrument your application: user interactions and changes in application state must be manually recorded by calling the appropriate RUM API.
 
 ### Track views
 
