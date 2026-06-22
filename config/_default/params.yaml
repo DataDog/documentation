@@ -209,7 +209,7 @@ allowedRegions:
     weight: 33
     domain: uk1.datadoghq.com
     exact_domains:
-      - "TODO.oncall.datadoghq.com"
+      - "scarlet.oncall.datadoghq.com"
       - "browser-intake-uk1-datadoghq.com"
   - name: US1-FED
     value: gov
