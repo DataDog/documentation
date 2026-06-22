@@ -16,9 +16,9 @@ The Tag Cardinality Control processor is in Preview. Contact your account manage
 
 ## Overview
 
-The Tag Cardinality Control processor limits the number of tag values for each metric. For example, a metric with unbounded tag keys, such as `userID`, can cause the metric's cardinality to spike and impact ingestion and indexing costs.
+The Tag Cardinality Control processor limits the number of tag values for each metric. For example, a metric with unbounded tag keys, such as `userID`, can cause the metric's cardinality to spike and impact ingestion and indexing costs. To prevent these unexpected spikes, use the processor to set a cardinality limit for metrics that match the filter query, and either drop metrics received after the limit has been reached or drop the tags for those metrics.
 
-Use the processor to set a cardinality limit for metrics that match the filter query, and either drop metrics received after the limit has been reached or drop the tags for those metrics. Optionally, set up overrides to set a limit for a specific metric or to exclude the metric from any cardinality limits. For each per-metric override, you can also set a custom limit for individual tags within the metric, or exclude the tag from the per-metric cardinality limit.
+Optionally, you can also configure [per-metric overrides](#optional-per-metric-override-settings) to set a limit for a specific metric or to exclude the metric from any cardinality limits. For each per-metric override, you can also set a custom limit for individual tags within the metric, or exclude the tag from the per-metric cardinality limit.
 
 ## Setup
 
