@@ -34,12 +34,13 @@ To deploy BYOC Logs on AWS, you must configure:
 
 ### AWS credentials
 
-When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][4] and looks for credentials in this order:
+When starting a node, BYOC Logs uses the default credential provider chain from the [AWS SDK for Rust][4] to find AWS credentials in this order:
 
-1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
+1. Environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, with `AWS_SESSION_TOKEN` as an optional addition for temporary credentials.
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
-3. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.
-4. Instance profile credentials, used on Amazon EC2 instances, and delivered through the Amazon EC2 metadata service.
+3. Web Identity Token, loaded when `AWS_WEB_IDENTITY_TOKEN_FILE` and `AWS_ROLE_ARN` are set. This is the mechanism used by [EKS IAM Roles for Service Accounts][5] (IRSA). To use IRSA, annotate the BYOC service account with `eks.amazonaws.com/role-arn` and configure an OIDC trust policy on the target IAM role.
+4. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.
+5. Instance profile credentials, used on Amazon EC2 instances and delivered through the Amazon EC2 metadata service.
 
 An error is returned if no credentials are found in the chain.
 
@@ -209,7 +210,7 @@ echo ""
    <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
    </div>
 
-   Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined [in the chart's `values.yaml`][5].
+   Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined [in the chart's `values.yaml`][6].
 
    ```shell
    # Show default values
@@ -345,7 +346,7 @@ helm uninstall <RELEASE_NAME> \
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][6]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][7]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 
@@ -354,6 +355,7 @@ helm uninstall <RELEASE_NAME> \
 [1]: /byoc-logs/operate/sizing/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
-[4]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
-[6]: /byoc-logs/ingest/agent/
+[4]: https://docs.aws.amazon.com/sdk-for-rust/latest/dg/credentials.html
+[5]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+[6]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
+[7]: /byoc-logs/ingest/agent/
