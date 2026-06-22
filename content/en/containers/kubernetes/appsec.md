@@ -56,7 +56,6 @@ For the list of supported proxies and proxy-specific setup steps, see the [setup
 ### Sidecar mode
 - Requires Datadog Cluster Agent 7.80.2 or later
 - Each gateway pod runs its own processor instance, which increases per-pod resource usage
-- Datadog Operator does not support sidecar mode configuration
 
 ### External mode
 - Requires Datadog Cluster Agent 7.80.2 or later
@@ -97,7 +96,10 @@ In sidecar mode, the security processor runs as a container injected directly in
 
 ### Setup
 
-Add the following to your Helm `values.yaml`. No `processor.service.*` values are needed because the injector handles processor deployment automatically.
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`. No `processor.service.*` values are needed because the injector handles processor deployment automatically.
 
 ```yaml
 datadog:
@@ -113,25 +115,47 @@ Install or upgrade the Datadog Helm chart (v3.153+):
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
-<div class="alert alert-warning">
-  Datadog Operator does not support sidecar mode configuration. Use Helm to configure sidecar mode.
-</div>
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+This option requires Datadog Operator v1.27.1+.
+
+Add annotations to your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+    agent.datadoghq.com/appsec.injector.mode: "sidecar"
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Sidecar configuration reference
 
-All sidecar parameters are nested under `datadog.appsec.injector.sidecar` in your Helm `values.yaml`:
+All sidecar parameters are available as Helm values nested under `datadog.appsec.injector.sidecar`, or as `DatadogAgent` annotations (Datadog Operator v1.27.1+):
 
-| Helm Parameter | Type | Default | Description |
-|----------------|------|---------|-------------|
-| `sidecar.image` | String | `ghcr.io/datadog/dd-trace-go/service-extensions-callout` | Sidecar container image |
-| `sidecar.imageTag` | String | `v2.6.0` | Sidecar container image tag |
-| `sidecar.port` | Integer | `8080` | gRPC listening port for the sidecar processor |
-| `sidecar.healthPort` | Integer | `8081` | Health check port for the sidecar processor |
-| `sidecar.bodyParsingSizeLimit` | Integer | `0` | Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely. |
-| `sidecar.resources.requests.cpu` | String | `10m` | CPU request for the sidecar container |
-| `sidecar.resources.requests.memory` | String | `128Mi` | Memory request for the sidecar container |
-| `sidecar.resources.limits.cpu` | String | `""` | CPU limit for the sidecar container (optional) |
-| `sidecar.resources.limits.memory` | String | `""` | Memory limit for the sidecar container (optional) |
+| Helm Parameter | Datadog Operator Annotation | Type | Default | Description |
+|----------------|----------------------------|------|---------|-------------|
+| `sidecar.image` | `agent.datadoghq.com/appsec.sidecar.image` | String | `ghcr.io/datadog/dd-trace-go/service-extensions-callout` | Sidecar container image |
+| `sidecar.imageTag` | `agent.datadoghq.com/appsec.sidecar.image_tag` | String | `v2.6.0` | Sidecar container image tag |
+| `sidecar.port` | `agent.datadoghq.com/appsec.sidecar.port` | Integer | `8080` | gRPC listening port for the sidecar processor |
+| `sidecar.healthPort` | `agent.datadoghq.com/appsec.sidecar.health_port` | Integer | `8081` | Health check port for the sidecar processor |
+| `sidecar.bodyParsingSizeLimit` | `agent.datadoghq.com/appsec.sidecar.body_parsing_size_limit` | Integer | `0` | Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely. |
+| `sidecar.resources.requests.cpu` | `agent.datadoghq.com/appsec.sidecar.resources.requests.cpu` | String | `10m` | CPU request for the sidecar container |
+| `sidecar.resources.requests.memory` | `agent.datadoghq.com/appsec.sidecar.resources.requests.memory` | String | `128Mi` | Memory request for the sidecar container |
+| `sidecar.resources.limits.cpu` | `agent.datadoghq.com/appsec.sidecar.resources.limits.cpu` | String | `""` | CPU limit for the sidecar container (optional) |
+| `sidecar.resources.limits.memory` | `agent.datadoghq.com/appsec.sidecar.resources.limits.memory` | String | `""` | Memory limit for the sidecar container (optional) |
 
 ## Set up external mode
 
@@ -232,7 +256,7 @@ Point the Datadog Cluster Agent at your security processor service using Helm or
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-This option requires Datadog Operator v1.22.0+.
+This option requires Datadog Operator v1.27.1+.
 
 Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your security processor service:
 
@@ -243,14 +267,9 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
+    agent.datadoghq.com/appsec.injector.mode: "external"
     agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
     agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
-spec:
-  override:
-    clusterAgent:
-      env:
-        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
-          value: "external"
 ```
 
 Apply the configuration:
@@ -314,7 +333,7 @@ Send requests through your gateway and verify they appear in the Datadog [App an
 | Helm Parameter | Datadog Operator Annotation | Type | Default | Description |
 |----------------|----------------------------|------|---------|-------------|
 | `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
-| `mode` | N/A | String | `""`; when empty, defaults to sidecar | Injection mode: `"sidecar"` or `"external"` |
+| `mode` | `agent.datadoghq.com/appsec.injector.mode` | String | `""`; when empty, defaults to sidecar | Injection mode: `"sidecar"` or `"external"` |
 | `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
 | `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. For valid values, see the [setup page][10]. |
 | `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the security processor Kubernetes Service |
