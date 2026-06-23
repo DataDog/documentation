@@ -20,20 +20,20 @@ When you create a Synthetic test, Datadog automatically creates an associated mo
 
 <div class="alert alert-info">You can only create <strong>Synthetic test monitors</strong> within the <a href="https://app.datadoghq.com/synthetics/tests">Synthetic Monitoring</a> section of the application. The general <a href="https://app.datadoghq.com/monitors">Monitors</a> page is used for creating other types of monitors, such as those based on metrics, logs, or processes.</div>
 
-Create a monitor in the **Monitor** section of a new or existing Synthetic test to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
+Create a monitor in the {{< ui >}}Monitor{{< /ui >}} section of a new or existing Synthetic test to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
 Monitor messages in Synthetic Monitoring consist of:
 
-- **Title**: The name of the monitor.
-- **Custom message**: Optional text written when creating the monitor.
-- **Auto-appended summary**: Includes failing locations, error messages, and links to the test.
-- **Footer**: Includes details from the last failed test run. </br><br>
+- {{< ui >}}Title{{< /ui >}}: The name of the monitor.
+- {{< ui >}}Custom message{{< /ui >}}: Optional text written when creating the monitor.
+- {{< ui >}}Auto-appended summary{{< /ui >}}: Includes failing locations, error messages, and links to the test.
+- {{< ui >}}Footer{{< /ui >}}: Includes details from the last failed test run. </br><br>
 
 {{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test_2.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
 ## View and manage Synthetic monitors
 
-- Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
+- Customize the monitor name to search for it on the [{{< ui >}}Manage Monitors{{< /ui >}}][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
 
 - The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
 
@@ -45,7 +45,7 @@ Depending on your incident management strategy, you may want to involve multiple
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle_2.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-To enable renotification, toggle **Enable renotification** and select a time interval from the dropdown menu.
+To enable renotification, toggle {{< ui >}}Enable renotification{{< /ui >}} and select a time interval from the dropdown menu.
 
 For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see [Understanding Synthetic Monitor Alerting][7].
 
