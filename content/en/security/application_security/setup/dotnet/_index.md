@@ -10,6 +10,7 @@ aliases:
   - /security/application_security/threats_detection/dotnet
   - /security/application_security/setup/threat_detection/dotnet
   - /security/application_security/enabling/dotnet
+  - /security/application_security/setup/dotnet/compatibility
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"

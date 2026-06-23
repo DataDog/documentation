@@ -9,6 +9,7 @@ aliases:
   - /security/application_security/setup/threat_detection/python
   - /security/application_security/setup/standalone/python
   - /security/application_security/enabling/python
+  - /security/application_security/setup/python/compatibility
 further_reading:
 - link: "/security/application_security/how-it-works/add-user-info/?tab=python"
   tag: "Documentation"

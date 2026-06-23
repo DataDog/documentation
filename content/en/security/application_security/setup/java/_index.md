@@ -10,6 +10,7 @@ aliases:
   - /security/application_security/enabling/tracing_libraries/threat_detection/java
   - /security/application_security/enabling/java
   - /security/application_security/threats/setup/standalone/java
+  - /security/application_security/setup/java/compatibility
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"

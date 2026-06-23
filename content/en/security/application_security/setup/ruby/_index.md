@@ -10,6 +10,7 @@ aliases:
   - /security/application_security/setup/standalone/ruby
   - /security/application_security/setup/threat_detection/ruby
   - /security/application_security/enabling/ruby
+  - /security/application_security/setup/ruby/compatibility
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
