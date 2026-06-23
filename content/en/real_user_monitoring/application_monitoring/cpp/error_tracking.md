@@ -139,13 +139,22 @@ To get human-readable function names and line numbers in your crash reports, upl
 To verify that crash reporting is working:
 
 1. Run your application with crash reporting enabled.
-2. Trigger a crash. The simplest way is to dereference a null pointer:
+2. Trigger a crash. The simplest way is to use a direct system call:
 
-   ```cpp
-   // Trigger a test crash — do not use in production
-   int* p = nullptr;
-   *p = 0;
-   ```
+{{< tabs >}}
+{{% tab "POSIX" %}}
+```cpp
+#include <signal.h>
+raise(SIGSEGV);
+```
+{{% /tab %}}
+{{% tab "Windows" %}}
+```c
+#include <windows.h>
+RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 3. Relaunch the application. The crash report is uploaded during the next launch.
 4. After a few seconds, navigate to [Error Tracking][1] in Datadog to confirm the crash report appears.

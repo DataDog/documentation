@@ -421,7 +421,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 {% /tab %}
 {% /tabs %}
 
-After the SDK is correctly configured and tracking consent is granted, you should see periodic console output when calling RUM API functions like `StartView()`. This indicates that the SDK is uploading data:
+After the SDK is correctly configured and tracking consent is granted, you should see periodic console output. Output like this indicates that the SDK is uploading data:
 
 ```
 [DATADOG DEBUG] Initiating HTTP request

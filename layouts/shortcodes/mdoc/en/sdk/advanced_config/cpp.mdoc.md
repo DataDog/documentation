@@ -11,9 +11,9 @@ The C++ SDK is a low-level library that is not coupled to a UI framework. As suc
 
 ### Track views
 
-A RUM session is organized into views. Each view represents a distinct screen, scene, or state in your application, such as a level, menu, or settings panel. All actions, resources, and errors are associated with the current view.
+A RUM session is organized into views. Each view represents a distinct user-facing screen, scene, or state in your application. All actions, resources, and errors are associated with the current view.
 
-Each view is identified by a `key` string that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous one.
+Each view has a string `key` that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous view.
 
 {% tabs %}
 {% tab label="C++" %}
@@ -51,7 +51,7 @@ dd_rum_stop_view(rum, "gameplay_level1", NULL);
 Actions record user interactions in the context of the current view. The SDK supports two kinds:
 
 - **Discrete actions** (`AddAction`): momentary events such as a button press. No explicit stop is required.
-- **Continuous actions** (`StartAction` / `StopAction`): events that span a duration, such as a drag or scroll.
+- **Continuous actions** (`StartAction` / `StopAction`): events that span a duration of up to 10 seconds, such as a drag or scroll.
 
 Available action types are `Tap`, `Click`, `Scroll`, `Swipe`, and `Custom`. Only one non-`Custom` action may be active at a time; `AddAction` with type `Custom` is always accepted regardless of other active actions.
 
@@ -381,7 +381,7 @@ The **handler** controls what happens when a message is emitted. Supply a callba
 {% tab label="C++" %}
 
 ```cpp
-config.SetDiagnosticHandler([](const datadog::DiagnosticMessage& message) {
+config.SetDiagnosticHandler([&](const datadog::DiagnosticMessage& message) {
     my_logger.write(message.text);
 });
 
@@ -525,7 +525,7 @@ dd_rum_stop_session(rum);
 
 In C++, `Core` and `Rum` are managed as `std::shared_ptr` references. The SDK stops automatically when the last reference to the core is released, so no explicit cleanup is required in typical usage.
 
-To stop the SDK before it goes out of scope—for example, to reinitialize with different configuration—call `Stop()` explicitly:
+To stop the SDK before it goes out of scope, call `Stop()` explicitly:
 
 ```cpp
 core->Stop();
