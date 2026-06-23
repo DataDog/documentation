@@ -151,11 +151,11 @@ Bits AI Memories lets teams add rule-specific context that Bits AI uses when ass
 
 In the SAST rule side panel, expand the false positive reports accordion to review reports shared by your organization for the selected rule. Use the custom context tab in the same section to add guidance for future Bits AI assessments. Memories apply at the organization and rule level for SAST. They apply only to security category SAST rules in Datadog's default rulesets and do not apply to custom rules.
 
-### Agentic Bits AI assessments
+### Agentic false positive filtering
 
-For supported SAST rules, Bits AI assessments use an agentic approach to gather repository context before classifying findings. Bits AI can read related files and search for symbols and patterns. It can also inspect nearby directory structure to verify definitions, call paths, sanitizers, and framework wiring that are not visible in a single file.
+For supported SAST rules, Bits AI uses an agentic approach to gather repository context before classifying findings. Bits AI can read related files and search for symbols and patterns. It can also inspect nearby directory structure to verify definitions, call paths, sanitizers, and framework wiring that are not visible in a single file.
 
-This extra context helps Bits AI distinguish true positives from false positives for findings that depend on cross-file behavior. Agentic Bits AI assessments apply to SAST findings only.
+This extra context helps Bits AI distinguish true positives from false positives for findings that depend on cross-file behavior. Agentic false positive filtering applies to SAST findings only.
 
 ## Remediation
 
