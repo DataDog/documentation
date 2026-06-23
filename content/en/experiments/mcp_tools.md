@@ -57,7 +57,7 @@ https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?tools
 
 See [Set Up the Datadog MCP Server][3] for full connection instructions and toolset configuration.
 
-For feature flag management tools used alongside experiments — creating flags, syncing allocations, checking canary results — see [Feature Flags MCP Tools][4].
+For feature flag management tools used alongside experiments — creating flags, syncing allocations, checking canary results. For more information, see [Feature Flags MCP Tools][4].
 
 ## Available tools
 
@@ -73,7 +73,7 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 : Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
 : *Permissions required: `Product Analytics Experiments Read`*
 
-### Lifecycle management
+### Life cycle management
 
 `create-experiment`
 : Creates a new experiment with a name, hypothesis, subject type, and primary metric.
