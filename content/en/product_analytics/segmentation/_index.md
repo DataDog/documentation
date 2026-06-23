@@ -35,7 +35,7 @@ To create a segment using Product Analytics data:
 
 2. Select a **condition** for the users in the segment:
       - **performed event(s)**
-      - **have attribute(s)** — includes any custom attributes you've imported. To import custom attributes, see [User and Account Profiles][4].
+      - **have attribute(s)**: includes any custom attributes you've imported. To import custom attributes, see [User and Account Profiles][4].
 
 <div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
@@ -86,7 +86,7 @@ The following example maps the Product Analytics attribute `@usr.id` to the colu
 
 {{% collapse-content title="Account segments" level="h4" expanded=false id="segment-accounts" %}}
 
-Account segments group accounts—such as organizations or companies—based on their attributes or the events their users performed. Use them to analyze groups like accounts with ARR over $100k or accounts that adopted a specific feature.
+Account segments group accounts—such as organizations or companies—based on their attributes or the events their users performed. Use them to analyze groups like accounts with ARR over a specific amount or accounts that adopted a specific feature.
 
 To create an account segment:
 
