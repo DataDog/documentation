@@ -25,12 +25,13 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 <div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
 
-Datadog provides two Agent-based collection methods. You can use either method on its own or combine both:
+Datadog provides three Agent-based collection methods. You can use one method on its own or combine multiple methods:
 
 | Method | When to use |
 |--------|-------------|
 | **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
 | **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
+| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run network path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
 
 ### Scheduled tests
 
@@ -173,7 +174,7 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
     ```
 
-  3. Restart the Agent after making these configuration changes to start seeing network paths.
+3. Restart the Agent after making these configuration changes to start seeing network paths.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -230,8 +231,9 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
    datadog:
      traceroute:
        enabled: true
+   ```
 
-2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][kubernetes-annotations].
 
    ```yaml
    apiVersion: v1
@@ -277,8 +279,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
    ```
     If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+[kubernetes-annotations]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -329,7 +330,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For full configuration details, reference the [example config][agent-config-template], or use the following:
 
     ```yaml
     network_path:
@@ -371,8 +372,6 @@ Agent `v7.73+` is required.
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
-
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -396,7 +395,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For full configuration details, reference the [example config][agent-config-template], or use the following:
 
     ```yaml
     network_path:
@@ -438,15 +437,13 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][helm-chart] and the documentation for [Kubernetes and Integrations][kubernetes-helm].
 
 ```yaml
 datadog:
@@ -494,14 +491,80 @@ datadog:
     #     type: include
 
 ```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+[helm-chart]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[kubernetes-helm]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Filter syntax
+### Dynamic Tests for NetFlow (Experimental)
+
+<div class="alert alert-info">Dynamic Tests for NetFlow are experimental and require Agent <code>v7.81+</code>. To enable this feature, contact Datadog Support or your account team.</div>
+
+Configure Dynamic Tests for NetFlow to run network path tests from the Agent host to destination IPs observed in your NetFlow flows. Dynamic Tests for NetFlow do not require [Cloud Network Monitoring][1] or `network_path.connections_monitoring.enabled`.
+
+Dynamic Tests for NetFlow run from the Datadog Agent that collects NetFlow traffic. They do not run from the NetFlow exporter, router, or original flow source. Deploy the Agent close enough to the observed flow sources for traceroutes from that Agent to represent the paths you want to investigate.
+
+**Prerequisites**:
+
+- [NetFlow Monitoring][6] must be configured and receiving flows.
+- Agent `v7.81+` is required.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable Dynamic Tests for NetFlow in `/etc/datadog-agent/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     netflow_monitoring:
+       enabled: true
+     collector:
+       monitor_ip_without_domain: true
+   ```
+
+   `monitor_ip_without_domain: true` is required because NetFlow dynamic paths target observed destination IP addresses and the network path collector skips IP-only targets by default.
+
+3. Restart the Agent after making these configuration changes.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable Dynamic Tests for NetFlow in `%ProgramData%\Datadog\datadog.yaml`:
+
+   ```yaml
+   network_path:
+     netflow_monitoring:
+       enabled: true
+     collector:
+       monitor_ip_without_domain: true
+   ```
+
+   `monitor_ip_without_domain: true` is required because NetFlow dynamic paths target observed destination IP addresses and the network path collector skips IP-only targets by default.
+
+3. Restart the Agent after making these configuration changes.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After the Agent reports paths, open the [Network Path][4] UI and filter for `origin:netflow` to view paths generated from NetFlow traffic.
+
+### Filter syntax
 
 Configure filters to include or exclude domains and IPs, allowing you to:
 
@@ -509,12 +572,12 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
+The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because NetFlow dynamic paths target observed destination IP addresses.
+
 To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
 ```yaml
 network_path:
-  connections_monitoring:
-    enabled: true
   collector:
     filters:
       # exclude single domain
@@ -596,8 +659,21 @@ If no data appears in the [Network Path][4] UI, the feature may not be fully ena
 
 2. At least one Network Path feature must be active, such as:
 
-   - [Individual paths](#monitor-individual-paths) configured through the `conf.d/network_path.d` file.
-   - Experimental [network traffic paths](#network-traffic-paths-experimental) configured by enabling both `network_path.connections_monitoring` and [Cloud Network Monitoring][1](CNM).
+   - [Scheduled tests](#scheduled-tests) configured through the `conf.d/network_path.d` file.
+   - [Dynamic tests](#dynamic-tests) configured by enabling both `network_path.connections_monitoring.enabled` and [Cloud Network Monitoring][1].
+   - [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental) configured by enabling `network_path.netflow_monitoring.enabled` and [NetFlow Monitoring][6].
+
+### No Dynamic Tests for NetFlow data in the UI
+
+If no NetFlow-origin paths appear in the [Network Path][4] UI, verify the following:
+
+1. The Agent is version `7.81+`.
+2. [NetFlow Monitoring][6] is enabled and receiving flows.
+3. The traceroute module is enabled in `system-probe.yaml`.
+4. `network_path.netflow_monitoring.enabled` and `network_path.collector.monitor_ip_without_domain` are set to `true` in `datadog.yaml`.
+5. Your `network_path.collector.filters` configuration does not exclude the destination IPs you expect to monitor.
+
+Then filter the Network Path UI for `origin:netflow`.
 
 ### Error: status code: 404
 
@@ -620,7 +696,5 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
-[15]: /synthetics/network_path_tests/
-
-
-
+[6]: /network_monitoring/netflow/
+[agent-config-template]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
