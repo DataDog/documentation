@@ -24,7 +24,7 @@ further_reading:
 
 Metric monitors are useful for a continuous stream of data. Any metric sent to Datadog can be alerted upon if they cross a threshold over a given period of time.
 
-To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][1] and select the **Metric** monitor type.
+To create a metric monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][1] and select the {{< ui >}}Metric{{< /ui >}} monitor type.
 
 ## Choose the detection method
 
@@ -169,13 +169,13 @@ If the value is between zero and one, a leading zero is required. For example, `
 
 #### Data window
 
-`Require` or `Do not require` a full window of data for evaluation.
+{{< ui >}}Require{{< /ui >}} or {{< ui >}}Do not require{{< /ui >}} a full window of data for evaluation.
 
 This setting allows you to change when the alerting engine considers a monitor as a candidate for evaluation.
 
-**Do not require** (Default): A monitor is evaluated as soon as it is recognized. Consider using this value if your data points might be sparse. With this configuration, the monitor evaluates even if there is a single data point in the evaluation timeframe.
+{{< ui >}}Do not require{{< /ui >}} (Default): A monitor is evaluated as soon as it is recognized. Consider using this value if your data points might be sparse. With this configuration, the monitor evaluates even if there is a single data point in the evaluation timeframe.
 
-**Require**: A monitor is not evaluated until the evaluation window is considered to be `filled` with data. To be notified if there is data over the entire evaluation timeframe, use this option.
+{{< ui >}}Require{{< /ui >}}: A monitor is not evaluated until the evaluation window is considered to be `filled` with data. To be notified if there is data over the entire evaluation timeframe, use this option.
 
 To define if the evaluation timeframe is `filled` with data, the timeframe is split into smaller buckets.
 
@@ -210,7 +210,7 @@ For instructions on the advanced alert options (no data, auto resolve), see the 
 
 ## Notifications
 
-For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Further Reading
 
