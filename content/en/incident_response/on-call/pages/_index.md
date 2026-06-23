@@ -72,7 +72,7 @@ Send a Page from the Datadog platform, or through a tool like Slack or Microsoft
 
 1. Go to [**On-Call** > **Teams**][2].
 1. Find the Team you want to page. Select **Page**.
-   {{< img src="incident_response/on-call/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/pages/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
 1. Enter a **Page title** and add more context in the **Description** field. Select **Page**.
 
 Pages sent manually through Datadog are always `high` urgency.
@@ -91,7 +91,7 @@ To receive Page notifications in Slack, see [Routing Rules][4].
 
 Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Click a Page to open its side panel and take action, or select the checkbox next to one or more Pages to bulk-edit them.
 
-{{< img src="incident_response/on-call/on-call-pages-list.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each Page's name, status, Team, responders, and creation date" style="width:100%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-pages-list.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each Page's name, status, Team, responders, and creation date" style="width:100%;" >}}
 
 ### Acknowledge a Page
 
@@ -104,7 +104,7 @@ To acknowledge a Page:
 
 The Page status changes to `Acknowledged`.
 
-{{< img src="incident_response/on-call/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
 
 ### Reassign a Page
 
@@ -115,7 +115,7 @@ To reassign a Page:
 1. Click the Page to open its side panel.
 1. Under **Next Steps**, select **Reassign**. This opens a **Reassign Page** modal.
 
-   {{< img src="incident_response/on-call/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:60%;" >}}
+   {{< img src="incident_response/on-call/pages/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:60%;" >}}
 
 1. Select the user or Team to reassign to.
 1. Optionally, add a comment explaining the handoff.
@@ -146,7 +146,7 @@ To declare an incident:
 1. Under **Next Steps**, select **Declare Incident**.
 1. Review and adjust the pre-filled details as needed.
 
-   {{< img src="incident_response/on-call/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
+   {{< img src="incident_response/on-call/pages/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
 
 1. Select **Declare Incident** to confirm.
 
@@ -156,7 +156,7 @@ For guidance on incident severity levels and responder roles, see [Incident Mana
 
 The Page timeline is an activity log that records when the Page was triggered, who was notified, and how escalation progressed. You can add your own comments to provide context for other responders.
 
-{{< img src="incident_response/on-call/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:60%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:60%;" >}}
 
 Use comments to:
 - Document what you've already investigated or ruled out
