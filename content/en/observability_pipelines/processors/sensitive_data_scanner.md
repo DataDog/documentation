@@ -26,7 +26,7 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 To set up the processor:
 
 1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query. See [Search Syntax][1] for more information.
-1. Click **Add Scanning Rule**.
+1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select one of the following:
 
 {{< tabs >}}
@@ -34,33 +34,33 @@ To set up the processor:
 
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
-1. In the **Define rule target and conditions** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
-1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
-    - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
-    - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
-    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
-1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
+1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
+    - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
+    - {{< ui >}}Partially Redact{{< /ui >}}: Replaces a specified portion of all matched data. In the {{< ui >}}Redact{{< /ui >}} section, specify the number of characters you want to redact and which part of the matched data to redact.
+    - {{< ui >}}Hash{{< /ui >}}: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
+1. Optionally, click {{< ui >}}Add Field{{< /ui >}} to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Add additional keywords
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
 1. Navigate to your [pipeline][1].
-1. In the Sensitive Data Scanner processor with the rule you want to edit, click **Manage Scanning Rules**.
-1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. Click **Update**.
+1. In the Sensitive Data Scanner processor with the rule you want to edit, click {{< ui >}}Manage Scanning Rules{{< /ui >}}.
+1. Toggle {{< ui >}}Use recommended keywords{{< /ui >}} if you want the rule to use them. Otherwise, add your own keywords to the {{< ui >}}Create keyword dictionary{{< /ui >}} field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. Click {{< ui >}}Update{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 {{% tab "Custom rules" %}}
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
+1. In the {{< ui >}}Define match conditions{{< /ui >}} section, specify the regex pattern to use for matching against events in the {{< ui >}}Define the regex{{< /ui >}} field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -72,19 +72,19 @@ After adding scanning rules from the library, you can edit each rule separately 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. In the **Define rule target and conditions** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. Enter sample data in the {{< ui >}}Add sample data{{< /ui >}} field to verify that your regex pattern is valid.
+1. For {{< ui >}}Create keyword dictionary{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
-1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
-    - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
-    - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
-    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
-1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
+1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
+    - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
+    - {{< ui >}}Partially Redact{{< /ui >}}: Replaces a specified portion of all matched data. In the {{< ui >}}Redact{{< /ui >}} section, specify the number of characters you want to redact and which part of the matched data to redact.
+    - {{< ui >}}Hash{{< /ui >}}: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
+1. Optionally, click {{< ui >}}Add Field{{< /ui >}} to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
-1. Click **Add Rule**.
+1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 [1]: /logs/guide/regex_log_parsing/
 
@@ -98,9 +98,9 @@ To delete a rule in the Sensitive Data Scanner:
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
-1. Click **Manage Scanning Rules**.
+1. Click {{< ui >}}Manage Scanning Rules{{< /ui >}}.
 1. Select the rule you want to delete.
-1. Click **Delete**.
+1. Click {{< ui >}}Delete{{< /ui >}}.
 
 ### Path notation example
 
@@ -295,7 +295,7 @@ Rules that are enabled but not used consume unnecessary resources. Check the Sen
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
-1. Click **View Scanning Rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
+1. Click {{< ui >}}View Scanning Rules{{< /ui >}} to open the side panel and see {{< ui >}}Matches in the last 24 hours{{< /ui >}} for each rule.
 
 See [Delete a rule](#delete-a-rule) to delete an unused rule.
 
@@ -305,7 +305,7 @@ The time it takes the Sensitive Data Scanner to scan an event roughly scales wit
 
 - If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
 
-- Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define rule target and conditions** step in [Set up the processor](#set-up-the-processor-in-the-ui).
+- Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the {{< ui >}}Define rule target and conditions{{< /ui >}} step in [Set up the processor](#set-up-the-processor-in-the-ui).
 
 ### Evaluate and benchmark performance optimizations
 
@@ -318,7 +318,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 1. Navigate to [Metrics Explorer][11].
 1. In the metric field, enter `pipelines.component_latency_seconds`.
-1. In the **from** field, enter the tag `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
+1. In the {{< ui >}}from{{< /ui >}} field, enter the tag `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 

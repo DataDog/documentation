@@ -326,25 +326,25 @@ service:
 Once configured, you can view your OpenTelemetry Collector configuration and build information in various locations:
 
 ### Fleet Automation
-1. Navigate to **[Integrations > Fleet Automation][7]**.
+1. Navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}][7].
 2. Filter for OTel Collector hosts using the Collector facets, then click a host.
-3. In the side panel, select the **Info** tab to view build information.
-4. Select the **Configurations** tab to view the full YAML file or a pipeline visualization of your OTel Collector configurations.
+3. In the side panel, select the {{< ui >}}Info{{< /ui >}} tab to view build information.
+4. Select the {{< ui >}}Configurations{{< /ui >}} tab to view the full YAML file or a pipeline visualization of your OTel Collector configurations.
 
 {{< img src="/agent/fleet_automation/fleet-automation-yaml-view.png" alt="View OTel Collector configuration YAMLs in Fleet Automation" style="width:100%;" >}}
 
 ### Infrastructure List (Host List)
 
-1. Navigate to **[Infrastructure > Hosts][2]** in your Datadog account.
+1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Hosts{{< /ui >}}][2] in your Datadog account.
 2. Click on any host running the OpenTelemetry Collector (**Note**: Filter by `field:apps:otel` to only show Collector instances).
-3. In the host details panel, select the **OTel Collector** tab to see build info and full Collector configuration.
+3. In the host details panel, select the {{< ui >}}OTel Collector{{< /ui >}} tab to see build info and full Collector configuration.
 
 ### Resource Catalog
 
-1. Navigate to **[Infrastructure > Resource Catalog][3]** in your Datadog account
+1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resource Catalog{{< /ui >}}][3] in your Datadog account
 2. Filter for hosts or search for your Collector instances.
 3. Click on any host running the OpenTelemetry Collector.
-4. Scroll down to **Collector** to see build info and full Collector configuration.
+4. Scroll down to {{< ui >}}Collector{{< /ui >}} to see build info and full Collector configuration.
 
 ## Local HTTP server
 
