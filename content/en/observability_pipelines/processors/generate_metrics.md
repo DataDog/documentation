@@ -26,7 +26,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 
 ### Add a metric
 
-<div class="alert alert-warning">The Generate Metrics processor uses the <code>timestamp</code> field on a log to set the metric's timestamp. If the <code>timestamp</code> field is a string value, the time when the log is processed is used instead. To use the log's `timestamp` field, see <a href="#convert-string-timestamp-to-timestamp-format">Convert string timestamp to timestamp format</a>.</div>
+<div class="alert alert-warning">The Generate Metrics processor uses the <code>timestamp</code> field on a log to set the metric's timestamp. If the log <code>timestamp</code> field is a string value, the log's processing time is used instead. See <a href="#convert-string-timestamp-to-timestamp-format">Convert string timestamp to timestamp format</a> for more information.</div>
 
  1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
@@ -89,7 +89,7 @@ To create a distribution metric that measures the average time it takes for an A
 
 ## Convert string timestamp to timestamp format
 
-If your logs have timestamps in string format, you must convert the string to a timestamp type before sending logs to the Generate Metrics processor. The Generate Metrics processor can only use the log `timestamp` field to set the metric timestamp if the log field is a timestamp type. If the `timestamp` field is a string, the time when the log is processed is used instead.
+The Generate Metrics processor can only use the log `timestamp` field to set the metric timestamp if the log field is a timestamp type. If the `timestamp` field is a string, the time when the log is processed is used instead. To use the log `timestamp`, you must convert the string to a timestamp type before sending logs to the Generate Metrics processor.
 
 To convert a string timestamp to timestamp format:
 
