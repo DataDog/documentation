@@ -96,7 +96,7 @@ After you enable OTLP export and your service receives traffic, confirm that tra
 
 ### Next steps
 
-Enabling OTLP export configures the SDK side only. To collect the data and forward it to Datadog, set up a receiver in [Send Data to Datadog][11]. For most workloads, Datadog recommends the [DDOT Collector][9].
+Enabling OTLP export configures the SDK side only. To collect the data and forward it to Datadog, set up a receiver in [Send Data to Datadog][11].
 
 ### Current limitations
 
