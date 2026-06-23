@@ -3,219 +3,212 @@ aliases:
 - /es/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
 - /es/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
 - /es/graphing/dashboards/template_variables/
-description: Utiliza variables de plantilla para filtrar dinámicamente los widgets
-  del dashboard por etiquetas, atributos y facetas para una exploración flexible de
-  los datos.
+description: Utilice variables de plantilla para filtrar dinámicamente los widgets
+  de los tableros por etiquetas, atributos y facetas para una exploración de datos
+  flexible.
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-executive-dashboards
-  tag: Blog
-  text: Diseñar dashboards ejecutivos eficaces con Datadog
-- link: https://www.datadoghq.com/blog/zendesk-cost-optimization
-  tag: Blog
-  text: 'Optimización de Datadog a escala: Observabilidad rentable en Zendesk'
-- link: https://www.datadoghq.com/blog/template-variable-associated-values/
-  tag: Blog
-  text: Usa variables de plantilla asociadas para redefinir tus dashboards
-- link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
-  tag: Blog
-  text: Acelerar flujos de trabajo de dashboards con la sintaxis dinámica de variables
-    de plantilla
-- link: https://www.datadoghq.com/blog/template-variable-available-values/
-  tag: Blog
-  text: Filtrar dashboards más rápidamente con los valores disponibles de variables
-    de plantilla
 - link: /dashboards/
   tag: Documentación
-  text: Crear dashboards en Datadog
+  text: Cree tableros en Datadog
 - link: /dashboards/sharing/
   tag: Documentación
-  text: Compartir gráficos fuera de Datadog
+  text: Comparta sus gráficos fuera de Datadog
 - link: /dashboards/widgets/
   tag: Documentación
-  text: Descubre widgets para tus dashboards
-title: Variables de plantilla
+  text: Descubra widgets para su tablero
+- link: https://www.datadoghq.com/blog/datadog-executive-dashboards
+  tag: Blog
+  text: Diseñe tableros ejecutivos efectivos con Datadog
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization
+  tag: Blog
+  text: 'Optimizando Datadog a gran escala: Observabilidad rentable en Zendesk'
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: Blog
+  text: Utilice variables de plantilla asociadas para refinar sus tableros
+- link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
+  tag: Blog
+  text: Acelere los flujos de trabajo de los tableros con la sintaxis dinámica de
+    variables de plantilla
+- link: https://www.datadoghq.com/blog/template-variable-available-values/
+  tag: Blog
+  text: Filtre tableros más rápido con los valores disponibles de variables de plantilla
+title: Variables de Plantilla
 ---
+## Resumen {#overview}
 
-## Información general
+Las variables de plantilla le permiten filtrar o agrupar dinámicamente los widgets en un tablero. Cree vistas guardadas a partir de sus selecciones de variables de plantilla para organizar y navegar por sus visualizaciones mediante las selecciones desplegables.
 
-Las variables de plantilla permiten filtrar o agrupar dinámicamente los widgets de un dashboard. Puedes crear vistas guardadas a partir de tus selecciones de variables de plantilla para organizar y navegar por tus visualizaciones a través de las selecciones desplegables.
+Una variable de plantilla se define por:
 
-Una variable de plantilla se determina por:
+* {{< ui >}}Tag or Attribute{{< /ui >}}:
+    * Etiqueta: Si sigue el [formato de etiquetado recomendado][1] (`<KEY>:<VALUE>`), la *Etiqueta* es el `<KEY>`.
+    * Atributo: Utiliza una [faceta o medida como la variable de plantilla](#logs-apm-and-rum-queries).
+* {{< ui >}}Name{{< /ui >}}: Un nombre único para la variable de plantilla que aparece en las consultas del tablero. Las variables de plantilla se nombran automáticamente según la etiqueta o atributo seleccionado.
+* {{< ui >}}Default Value{{< /ui >}}: El valor de la etiqueta o atributo que aparece automáticamente cuando se carga el tablero. Por defecto es `*`.
+* {{< ui >}}Available Values{{< /ui >}}: Los valores de la etiqueta o atributo disponibles para selección en el menú desplegable. Por defecto es `(all)`. La lista de valores disponibles siempre incluye `*`, que consulta todos los valores de la etiqueta o atributo.
 
-* **Tag or Attribute** (Etiqueta o atributo):
-    * Etiqueta: Si aplicas el [formato de etiquetado][1] recomendado (`<KEY>:<VALUE>`), la *Etiqueta* es la `<KEY>`.
-    * Atributo: Usa una [faceta o medida como variable de plantilla](#logs-apm-and-rum-queries).
-* **Name** (Nombre): Un nombre único para la variable de plantilla que aparece en las consultas del dashboard. Las variables de plantilla reciben automáticamente el nombre de la etiqueta o atributo seleccionado.
-* **Default Value** (Valor predeterminado): El valor de la etiqueta o el atributo que aparece automáticamente cuando se carga el dashboard. El valor por defecto es `*`.
-* **Available Values** (Valores disponibles): Los valores de la etiqueta o el atributo disponibles en el menú desplegable. Por defecto, `(all)`. La lista de valores disponibles siempre incluye `*`, que consulta todos los valores de la etiqueta o el atributo.
+### Valores de variables de plantilla {#template-variable-values}
+Los valores de las variables de plantilla (valores disponibles mediante los menús desplegables de variables de plantilla) se completan según las fuentes que utilizan los widgets en el tablero. Por ejemplo, si su tablero tiene widgets que consultan registros, solo se muestran los valores de los registros. Si su tablero tiene widgets que consultan registros, métricas y RUM, se muestran los valores de registros, métricas y RUM.
 
-### Valores de las variables de plantilla
-Los valores de las variables de plantilla (valores disponibles mediante los menús desplegables de variables de plantilla) se rellenan en función de las sources (fuentes) que utilizan los widgets del dashboard. Por ejemplo, si tu dashboard tiene widgets que consultan registros, solo se muestran los valores de los logs. Si tu dashboard tiene widgets que consultan logs, métricas y RUM, se mostrarán los valores de los logs, las métricas y el RUM.
+Para la mayoría de las fuentes, los valores de las variables de plantilla son relevantes para el marco de tiempo global de su tablero. Por ejemplo:
+- Si el marco de tiempo de su tablero está configurado para los últimos 15 minutos, solo se muestran los valores de las variables de plantilla de los últimos 15 minutos. 
+- Si el marco de tiempo de su tablero está configurado para el 15 de agosto pasado de 12:00 a.m. a 11:59 p.m., solo se muestran los valores de ese marco de tiempo.
 
-Para la mayoría de las sources (fuentes), los valores de las variables de plantilla son relevantes para el marco temporal global de tu dashboard. Por ejemplo:
-- Si el intervalo de tiempo de tu dashboard se configura en los últimos 15 minutos, solo se mostrarán los valores de las variables de plantilla de los últimos 15 minutos. 
-- Si el marco temporal de tu dashboard está configurado para durar el 15 de agosto de 12:00 a 23:59, solo se mostrarán los valores de ese marco temporal.
-
-| Fuente de datos                                     | Periodo de consulta de datos   |
+| Fuente de datos                                     | Período de consulta de datos   |
 |--------------------------------------           |---------------------|
 | Métricas                                         | Ahora - 48 horas      |
-| Coste de la nube                                      | Ahora - 48 horas      |
-| Todas las demás sources (fuentes)                               | Marco temporal del dashboard |
+| Costo en la nube                                      | Ahora - 48 horas      |
+| Todas las demás fuentes                               | Marco de tiempo del tablero |
 
-**Nota**: Si no ves la etiqueta o el atributo que buscas, puede deberse a que esos datos no se hayan comunicado a Datadog recientemente. Además, todos los datos consultados para las variables de plantilla están sujetos a la política de conservación de datos. Para más información, consulta [Datos históricos][4].
+**Nota**: Si no ve la etiqueta o atributo que está buscando, puede ser porque esos datos no se han reportado a Datadog recientemente. Además, todos los datos consultados para las variables de plantilla están sujetos a la política de retención de datos. Para más información, consulte [Datos Históricos][4].
 
-## Añadir una variable de plantilla
-Si las variables de plantilla ya están definidas, consulta [Editar una variable de plantilla](#edit-a-template-variable). Si tu dashboard no tiene ninguna variable de plantilla, puedes hacer clic en el icono del signo de interrogación para abrir un modal de ayuda sobre cómo utilizar las variables del dashboard.
-
-{{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Menú de Variable de entorno que muestra la opción Configurar los valores desplegables" style="width:70%;" >}}
-
-Para añadir una variable de plantilla en un dashboard:
-1. Haz clic en **Add Variable** (Añadir variable).
-1. Puedes añadir tipos de variables **Filter** (Filtrar) y **Group by** (Agrupar por).
-   1. Filtrar: añade una etiqueta o atributo para filtrar las consultas y visualizaciones del dashboard.
-   1. Agrupar por: añade una etiqueta o atributo para mostrar un desglose de los grupos dentro de tus datos.<br>**Nota**: `Group by` solo es compatible con determinados widgets---Series temporales, Tabla, Mapa de árbol, Gráfico de barras, Comodín, Distribución, Lista principal, Mapa de calor, Gráfico circular, Geomapa, Cambio, Gráfico de dispersión, Valor de consulta, Mapa de hosts y Resumen de SLO.
-1. (Opcional) Después de seleccionar una etiqueta, haz clic en el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables), para cambiar el nombre de la variable y establecer valores predeterminados o disponibles.
-1. Haz clic en **Save** (Guardar).
-1. Para añadir más variables de plantilla, consulta [Editar una variable de plantilla](#edit-a-template-variable)
+### Diseño del tablero {#dashboard-layout}
+Para evitar que las variables saturen el encabezado, el panel muestra un pequeño subconjunto. Puede hacer clic en el botón **+ N** para ver las N variables adicionales presentes en su tablero. 
 
 
-## Editar una variable de plantilla
+Si necesita ver todas las variables a la vez mientras se desplaza, haga clic en **Expandir variables de plantilla**. 
 
-Para editar una variable de plantilla o añadir variables:
-1. Pasa el ratón por encima del encabezado del dashboard y haz clic en el botón **Edit** (Editar).
-1. En el modo de edición, haz clic en una variable de plantilla y realiza cambios en la ventana emergente.
-1. Para reorganizar las variables en el encabezado, pasa el cursor sobre una variable, y luego haz clic y arrastra el asa del icono de arrastre.
-1. Haz clic en el icono **+ (plus)** (+ (más)) para añadir una nueva variable de plantilla.
-1. (Opcional) Después de seleccionar una etiqueta, haz clic en el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables), para cambiar el nombre de la variable y establecer valores predeterminados o disponibles.
-  {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Ventana emergente del modo de edición de una variable de plantilla que muestra el icono de arrastre y te permite volver a acomodar el orden" style="width:100%;" >}}
 
-## Aplicar una variable de plantilla a widgets
+## Agregue una variable de plantilla {#add-a-template-variable}
+Para agregar una variable de plantilla en un tablero:
+1. Haga clic en {{< ui >}}Add Variable{{< /ui >}} (o en {{< ui >}}+{{< /ui >}} si ya existen variables de plantilla)
+2. Seleccione de una lista de variables de plantilla recomendadas o busque la etiqueta específica que tenga en mente.
+4. Seleccione los widgets a los que se aplicará esta variable de plantilla.
+6. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Para añadir una variable de plantilla a las consultas de widgets:
-1. Haz clic en el botón **Edit** (Editar) del encabezado del dashboard.
-1. En el modo de edición, haz clic en una variable de plantilla para abrir su ventana emergente.
-1. Haz clic en **Select Widgets** (Seleccionar widgets), para entrar al modo de selección de widgets.
-1. El banner muestra el número de fuentes que utilizan la variable. En el ejemplo siguiente, la variable de plantilla `env` se utiliza en 20 gráficos del dashboard:
-  {{< img src="dashboards/template_variables/apply_template_variable_to_widgets.png" alt="Ejemplo de dashboard que muestra la confirmación para aplicar la variable de plantilla 'env' a 20 widgets" style="width:100%;" >}}
-1. Haz clic en widgets individuales para obtener una vista previa del gráfico con la variable de plantilla interpolada.
-1. Para añadir o eliminar de todos los widgets de un grupo, selecciona la casilla de verificación situada en la esquina derecha del grupo.
-1. Para añadir o eliminar de todos los widgets del dashboard, haz clic en **Select All** (Seleccionar todo) o **Deselect All** (Deseleccionar todo) en el banner de selección.
-1. Haz clic en **Save** (Guardar) o en  **X** en el banner para salir del modo de selección de widgets.
 
-## Vistas guardadas
+### Configure la variable de plantilla {#configure-template-variable}
+Cuando el panel lateral de la variable de plantilla esté abierto, puede:
+* Aplique (o quite) esta variable a los widgets seleccionados (note las opciones {{< ui >}}Select All{{< /ui >}} o {{< ui >}}Deselect All{{< /ui >}})
+* Alterne entre filtrar y agrupar
+* Cambie el nombre de visualización de la variable (mostrado en el encabezado y en la consulta del widget)
+* Seleccione un valor predeterminado del menú desplegable
+* Previsualice los valores del menú desplegable y configúrelos más a fondo con una consulta de búsqueda
 
-### Crear
 
-1. Haz clic en el menú desplegable **Saved Views** (Vistas guardadas) a la izquierda de las variables de plantilla en tu dashboard. Al actualizar el valor de una variable de plantilla, dicho valor no se guarda automáticamente en una vista.
-1. Para guardar los valores actuales de las variables de plantilla en una vista, selecciona **Save selections as view** (Guardar selecciones como vista) en el menú desplegable **Saved Views** (Vistas guardadas).
-1. Introduce un nombre único para la vista con una descripción en opcional.
-1. Haz clic en **Save** (Guardar).
+## Edite una variable de plantilla {#edit-a-template-variable}
+1. Pase el cursor sobre la variable de plantilla en el encabezado del tablero y haga clic en **Editar**. El panel lateral de la variable de plantilla aparece.
+2. Utilice las opciones del panel para personalizar la variable o aplicarla a más widgets.
 
-{{< img src="/dashboards/template_variables/saved_view_create.png" alt="Crear vistas guardadas seleccionando guardar las elecciones como vista" style="width:100%;" >}}
 
-La vista guardada aparecerá en el menú desplegable. Haz clic en ella para recuperar los valores de las variables de plantilla que habías guardado anteriormente.
+## Vistas guardadas {#saved-views}
 
-### Borrar
+### Cree {#create}
 
-1. Haz clic en el menú desplegable de vistas guardadas y pasa el ratón por encima de la vista guardada que desees.
-1. Haz clic en **Delete View** (Eliminar vista).
+1. Haga clic en el menú desplegable {{< ui >}}Saved Views{{< /ui >}} a la izquierda de las variables de plantilla en su tablero. Cuando actualiza el valor de una variable de plantilla, el valor no se guarda automáticamente en una vista.
+1. Para guardar los valores actuales de sus variables de plantilla en una vista, seleccione {{< ui >}}Save selections as view{{< /ui >}} del menú desplegable {{< ui >}}Saved Views{{< /ui >}}.
+1. Ingrese un nombre único para la vista con una descripción opcional.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-### Modificar
+{{< img src="/dashboards/template_variables/saved_view_create.png" alt="Cree vistas guardadas seleccionando guardar selecciones como vista" style="width:100%;" >}}
 
-La **vista por defecto** sólo puede editarse cambiando los valores por defecto de las variables de plantilla. Para editar la vista por defecto:
-1. Pasa el ratón por encima de las plantillas.
-1. Haz clic en **Edit** (Editar) cuando aparezca el botón.
-1. Haz clic en **Done** (Listo) para guardar.
+Su vista guardada aparece en el menú desplegable. Haga clic en la vista para recuperar los valores de variables de plantilla que guardó previamente.
 
-Para modificar valores de variables de plantilla para otras vistas guardadas:
-1. Selecciona la vista guardada deseada en el menú desplegable.
+### Elimine {#delete}
+
+1. Haga clic en el menú desplegable de vistas guardadas y pase el cursor sobre la vista guardada deseada.
+1. Haga clic en {{< ui >}}Delete View{{< /ui >}}.
+
+### Modifique {#modify}
+
+El {{< ui >}}Default view{{< /ui >}} solo puede ser editado cambiando los valores predeterminados de las variables de plantilla. Para editar la Vista Predeterminada:
+1. Pase el cursor sobre las plantillas.
+1. Haga clic en {{< ui >}}Edit{{< /ui >}} cuando aparezca el botón.
+Haga clic en  para guardar.
+1. Haga clic en {{< ui >}}Done{{< /ui >}} para guardar.
+
+Para modificar los valores de las variables de plantilla para otras vistas guardadas:
+1. Seleccione la vista guardada deseada del menú desplegable.
+Edite las variables de plantilla para tener los nuevos modelos deseados.
+Abra el menú desplegable nuevamente.
+Haga clic en .
 1. Edite las variables de plantilla para tener los nuevos modelos deseados.
-1. Vuelve a abrir el menú desplegable.
-1. Haz clic en **Save Changes** (Guardar cambios).
+1. Abra el menú desplegable nuevamente.
+1. Haga clic en {{< ui >}}Save Changes{{< /ui >}}.
 
-{{< img src="/dashboards/template_variables/saved_views_update_template_variable.png" alt="Modificar las variables de plantilla de tus vistas guardadas" style="width:100%;" >}}
+{{< img src="/dashboards/template_variables/saved_views_update_template_variable.png" alt="Modifique las variables de plantilla de sus vistas guardadas" style="width:100%;" >}}
 
 Para editar el título y la descripción:
-1. Pasa el ratón por encima de la vista guardada deseada en el menú desplegable.
-1. Haz clic en **Edit** (Editar).
-1. Modifica el título o la descripción.
-1. Haz clic en **Save** (Guardar).
+1. Pase el cursor sobre la vista guardada deseada del menú desplegable.
+1. Haga clic en {{< ui >}}Edit{{< /ui >}}.
+1. Modifique el título o la descripción.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-## Utilización
+## Uso {#usage}
 
 Las variables de plantilla se utilizan en widgets y superposiciones de eventos.
 
-### Consultas de logs, APM y RUM
+### Registros, consultas de APM y RUM {#logs-apm-and-rum-queries}
 
-Las variables de plantilla funcionan con widgets de logs, APM, y RUM, ya que comparten las mismas etiquetas. Puedes definir variables de plantilla de logs, APM, y RUM, en función de las facetas. Estas variables empiezan por `@`,; por ejemplo: `@http.status_code`.
+Las variables de plantilla funcionan con widgets de registros, APM y RUM porque comparten las mismas etiquetas. Puedes definir variables de plantilla de registros, APM y RUM basadas en facetas. Estas variables comienzan con `@`, por ejemplo: `@http.status_code`.
 
-En los widgets de log, APM y RUM, se pueden utilizar comodines en mitad de un valor (por ejemplo, `eng*@example.com`) o varios comodines en un valor (por ejemplo, `*prod*`).
+En widgets de registros, APM y RUM, puedes usar comodines en medio de un valor (por ejemplo, `eng*@example.com`) o usar múltiples comodines en un valor (por ejemplo, `*prod*`).
 
-**Nota**: Si se utiliza la opción **Add to all** (Añadir a todos) para este tipo de variable de plantilla, esta se añade a todos los widgets de log, APM y RUM.
+**Nota**: Usar {{< ui >}}Add to all{{< /ui >}} para este tipo de variable de plantilla agrega la variable a todos los widgets de log, APM y RUM.
 
-### Widgets
+### Widgets {#widgets}
 
-Al crear o editar un widget, las variables de plantilla de filtro existentes se muestran como opciones en el campo `from`, y las variables de plantilla de Agrupar por existentes se muestran como opciones a continuación del campo `by`. Por ejemplo, si configuras la variable de plantilla `environment`, la opción `$environment` estará disponible como variable dinámica en el widget.
+Al crear o editar un widget, las variables de plantilla de filtro existentes se muestran como opciones en el campo `from`, y las variables de plantilla de agrupación existentes se muestran como opciones después del campo `by`. Por ejemplo, si configuras la variable de plantilla `environment`, la opción `$environment` está disponible como una variable dinámica en el widget.
 
-{{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="La variable de plantilla puede definirse de forma dinámica en los widgets" style="width:100%;">}}
+{{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="La variable de plantilla se puede establecer dinámicamente en los widgets." style="width:100%;">}}
 
-Al seleccionar **production** (producción) para el valor `environment`, los widgets con la variable `$environment` se incluyen en el entorno de producción de forma dinámica.
+Al seleccionar **producción** para el valor `environment`, se limitan dinámicamente los widgets con la variable `$environment` al entorno de producción.
 
-Cuando se cambia el valor de una variable de plantilla, la URL del dashboard se actualiza para incluir el nuevo valor con el formato `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. Por ejemplo, si en un dashboard la variable de plantilla `$env` se cambia por `prod`, el parámetro URL será `&tpl_var_env=prod`.
+Cuando cambia el valor de una variable de plantilla, la URL del tablero se actualiza para reflejar el valor de la variable de plantilla con el formato `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. Por ejemplo, un tablero con la variable de plantilla `$env` cambiada a `prod` tendría el parámetro de URL `&tpl_var_env=prod`.
 
-Para incluir el valor en la consulta, añádelo con la sintaxis `$<TEMPLATE_VARIABLE_NAME>.value`. Por ejemplo, con una variable de plantilla denominada `service`, utiliza `env:staging-$service.value`.
+Para incluir el valor en la consulta, añádalo con la sintaxis `$<TEMPLATE_VARIABLE_NAME>.value`. Por ejemplo, con una variable de plantilla llamada `service`, use `env:staging-$service.value`.
 
-Pasa el ratón por encima de los campos de la variable de plantilla para ver de un rápido vistazo los widgets que utilizan esa variable resaltados en el dashboard.
+Pase el cursor sobre los campos de la variable de plantilla para ver de un vistazo los widgets que utilizan esa variable resaltados en el tablero.
 
-#### Variables de plantilla asociadas
+#### Variables de plantilla asociadas {#associated-template-variables}
 
-Al seleccionar un valor de una variable de plantilla, los valores asociados se muestran en la parte superior del selector. Los valores asociados se determinan a partir de otros valores de variables de plantilla seleccionados en la página, e identifican perfectamente los valores relacionados sin tener que configurar nada más,
+Al seleccionar un valor de variable de plantilla, los valores asociados se muestran en la parte superior del selector. Los valores asociados se calculan a partir de otros valores de variables de plantilla seleccionados en la página, e identifican sin problemas los valores relacionados sin ninguna configuración.
 
-#### Texto
+#### Texto {#text}
 
-En el caso de widgets basados en texto, puedes mostrar la etiqueta o el atributo de una variable y su valor con `$<TEMPLATE_VARIABLE_NAME>`, su clave con `$<TEMPLATE_VARIABLE_NAME>.key` o su valor con `$<TEMPLATE_VARIABLE_NAME>.value`. Esto puede ir después de cualquier carácter no alfanumérico y puede ir seguido de un espacio en blanco o de cualquiera de los siguientes caracteres: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|` y `?`.
+Para widgets basados en texto, puede mostrar la etiqueta/atributo y el valor de una variable de plantilla con `$<TEMPLATE_VARIABLE_NAME>`, su clave con `$<TEMPLATE_VARIABLE_NAME>.key`, o su valor con `$<TEMPLATE_VARIABLE_NAME>.value`. Esto puede venir después de cualquier carácter no alfanumérico, y puede ser seguido por un espacio en blanco o cualquiera de los siguientes caracteres: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, y `?`.
 
-**Nota**: No se admite la sintaxis comodín a continuación de una variable de plantilla.
+**Nota**: La sintaxis de comodín no es compatible después de una variable de plantilla.
 
-Por ejemplo, con una variable de plantilla denominada `env`, con una etiqueta o un atributo `environment` y con un valor seleccionado como `dev`:
+Por ejemplo, con una variable de plantilla llamada `env`, con etiqueta/atributo `environment`, y con un valor seleccionado de `dev`:
 * `$env` muestra `environment:dev`
 * `$env.key` muestra `environment`
 * `$env.value` muestra `dev`
 * `$env*` busca el valor exacto `dev*` NO `dev{dynamic-wildcard-value}`
 
-### Superposiciones de eventos
+### Superposición de eventos {#events-overlay}
 
-Utiliza la opción de búsqueda de superposiciones de eventos con las variables de plantilla para encontrar eventos que compartan unas etiquetas específicas con las métricas de tu dashboard. Esta búsqueda se aplica a través de un gráfico individual.
+Utilice la búsqueda de superposición de eventos con variables de plantilla para encontrar eventos que compartan ciertas etiquetas con las métricas en su tablero. La búsqueda de superposición de eventos se aplica a través de un gráfico individual.
 
-Es posible capturar directamente los valores de las variables de plantilla del dashboard utilizando la sintaxis `$<TEMPLATE_VARIABLE_KEY>.value` en el campo de búsqueda de eventos.
+Los valores de las variables de plantilla del tablero pueden ser capturados directamente utilizando la sintaxis `$<TEMPLATE_VARIABLE_KEY>.value` en el campo de búsqueda de eventos.
 
-**Nota**: Las variables de plantilla del dashboard deben ser etiquetas de métricas, no de eventos.
+**Nota**: Las variables de plantilla del tablero deben ser etiquetas de métricas, no etiquetas de eventos.
 
-#### Dashboard
+#### Tablero {#dashboard}
 
-Desde tu dashboard, busca eventos con variables de plantilla. Para ello, utiliza el siguiente formato:
+Desde su tablero, busque eventos con variables de plantilla utilizando el formato:
 
 ```text
 <TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 ```
 
-Por ejemplo, si se busca `region:$region.value` con un valor `us-east1` para la variable de plantilla `region`, se muestran los eventos con la etiqueta `region:us-east1`. Además, el momento en que se produjeron los eventos está marcado con barras rosas en los gráficos.
+Por ejemplo, buscar `region:$region.value` con un valor de `us-east1` para la variable de plantilla `region` muestra eventos etiquetados con `region:us-east1`. Además, el tiempo de los eventos está marcado por barras rosas en los gráficos.
 
-comas para hacer búsquedas con múltiples variables de plantilla. Por ejemplo: `role:$role.value,env:$env.value`
+Utilice comas para buscar utilizando múltiples variables de plantilla, por ejemplo: `role:$role.value,env:$env.value`
 
-**Nota**: Cuando pulses *enter* (introducir) para buscar, `$region.value` se actualiza al valor del menú desplegable de la variable de plantilla.
+**Nota**: Una vez que presione *enter* para buscar, `$region.value` se actualiza al valor en el menú desplegable de la variable de plantilla.
 
-#### Widgets
+#### Widgets {#widgets-1}
 
-Desde tus widgets, superpón el cronograma de los eventos. Para ello, utiliza las variables de plantilla con el siguiente formato:
+Desde sus widgets, superponga el tiempo de los eventos utilizando variables de plantilla con el formato:
 
 ```text
 $<TEMPLATE_VARIABLE_NAME>
 ```
 
-Por ejemplo, introduce `$region` en la casilla de búsqueda de eventos superpuestos. De este modo se buscan los eventos con el valor en el menú desplegable de la variable de plantilla `region`.
+Por ejemplo, ingrese `$region` en el cuadro de búsqueda de superposición de eventos. Esto busca eventos con el valor en el menú desplegable de la variable de plantilla `region`.
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
