@@ -112,7 +112,7 @@ The simulation is retrospective: it re-prices your on-demand usage from the sele
 
 ### Run a simulation
 
-1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**. If none of your AWS accounts are eligible to own a Savings Plan, the simulator shows an empty state instead.
+1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
 2. Choose the {{< ui >}}Savings Plan Type{{< /ui >}}: {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
 3. Set your commitment preferences (use {{< ui >}}Edit{{< /ui >}} to change them):
    - {{< ui >}}Owner Account{{< /ui >}}: The AWS account that would own the Savings Plan.
