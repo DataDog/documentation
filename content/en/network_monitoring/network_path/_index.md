@@ -37,7 +37,7 @@ Network Path supports multiple Agent-based collection methods. You can use one m
 
 - **[Scheduled tests][6]**: Monitor specific network paths by defining source-destination pairs in the Agent configuration file. Use scheduled tests to continuously monitor a known set of endpoints, such as critical APIs or partner services.
 - **[Dynamic tests][7]**: Automatically discover and monitor network paths based on actual network traffic observed by [Cloud Network Monitoring][8]. Use dynamic tests for broad visibility without manually listing every destination.
-- **[Dynamic Tests for NetFlow][10]**: Automatically run network path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][11]. Use Dynamic Tests for NetFlow to add hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations.
+- **[Dynamic Tests for NetFlow][10]**: Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][11]. Use Dynamic Tests for NetFlow to add hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations.
 
 To create Network Path tests in Synthetic Monitoring instead, see [Network Path Testing in Synthetic Monitoring][9].
 

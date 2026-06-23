@@ -31,7 +31,7 @@ Datadog provides three Agent-based collection methods. You can use one method on
 |--------|-------------|
 | **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
 | **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
-| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run network path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
+| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
 
 ### Scheduled tests
 
@@ -507,7 +507,7 @@ datadog:
 
 <div class="alert alert-info">Dynamic Tests for NetFlow are experimental and require Agent <code>v7.81+</code>. To enable this feature, contact Datadog Support or your account team.</div>
 
-Configure Dynamic Tests for NetFlow to run network path tests from the Agent host to destination IPs observed in your NetFlow flows. Dynamic Tests for NetFlow do not require [Cloud Network Monitoring][1] or `network_path.connections_monitoring.enabled`.
+Configure Dynamic Tests for NetFlow to run Network Path tests from the Agent host to destination IPs observed in NetFlow records. Dynamic Tests for NetFlow do not require [Cloud Network Monitoring][1] or `network_path.connections_monitoring.enabled`.
 
 Dynamic Tests for NetFlow run from the Datadog Agent that collects NetFlow traffic. They do not run from the NetFlow exporter, router, or original flow source. Deploy the Agent close enough to the observed flow sources for traceroutes from that Agent to represent the paths you want to investigate.
 
@@ -536,7 +536,7 @@ Dynamic Tests for NetFlow run from the Datadog Agent that collects NetFlow traff
        monitor_ip_without_domain: true
    ```
 
-   `monitor_ip_without_domain: true` is required because NetFlow dynamic paths target observed destination IP addresses and the network path collector skips IP-only targets by default.
+   `monitor_ip_without_domain: true` is required because Dynamic Tests for NetFlow target observed destination IP addresses and the Network Path collector skips IP-only targets by default.
 
 3. Restart the Agent after making these configuration changes.
 
@@ -560,7 +560,7 @@ Dynamic Tests for NetFlow run from the Datadog Agent that collects NetFlow traff
        monitor_ip_without_domain: true
    ```
 
-   `monitor_ip_without_domain: true` is required because NetFlow dynamic paths target observed destination IP addresses and the network path collector skips IP-only targets by default.
+   `monitor_ip_without_domain: true` is required because Dynamic Tests for NetFlow target observed destination IP addresses and the Network Path collector skips IP-only targets by default.
 
 3. Restart the Agent after making these configuration changes.
 
@@ -577,7 +577,7 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because NetFlow dynamic paths target observed destination IP addresses.
+The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
 
 To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
@@ -670,7 +670,7 @@ If no data appears in the [Network Path][4] UI, the feature may not be fully ena
 
 ### No Dynamic Tests for NetFlow data in the UI
 
-If no NetFlow-origin paths appear in the [Network Path][4] UI, verify the following:
+If no paths with `origin:netflow` appear in the [Network Path][4] UI, verify the following:
 
 1. The Agent is version `7.81+`.
 2. [NetFlow Monitoring][6] is enabled and receiving flows.
