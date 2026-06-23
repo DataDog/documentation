@@ -56,7 +56,7 @@ The top of the Patterns page shows three metrics from your most recent run:
 
 Above the topic table, a scatter plot compares your patterns against each other. Each bubble represents one topic, with the Y axis showing the number of interactions and the X axis showing the metric selected in the Dimension dropdown (for example, total errors). Use this chart to spot outliers — topics with unexpectedly high error rates or latency relative to their volume.
 
-{{< img src="llm_observability/Patterns.png" alt="The Patterns page displays traces grouped by topic." style="width:100%;" >}}
+{{< img src="llm_observability/patterns_landing_page.png" alt="The Patterns page displays traces grouped by topic." style="width:100%;" >}}
 
 ### Navigate the topic list
 The topic table provides a hierarchical view of all discovered topics. Each topic shows:
@@ -77,7 +77,7 @@ Expand parent topics to see their sub-topics and examine specific areas of your 
 Click any topic name to open the detail view. The detail view shows a summary of what the topic represents, the total interaction count, and an interactions table with the child topic label, input text, and timestamp for each interaction. Search the table by keyword to find specific examples.
 
 
-{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
+{{< img src="llm_observability/patterns_topic_details.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
 
 ### Export and act on interactions
 From the interactions table inside a topic's detail view, you can act on the interactions in that cluster:
