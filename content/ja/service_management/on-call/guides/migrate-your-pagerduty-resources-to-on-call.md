@@ -28,7 +28,7 @@ title: PagerDuty リソースを Datadog On-Call に移行する
 1. [On-Call Teams list][2] にアクセスし、**Add Team to On-Call** > **Import team from PagerDuty** を選択します。Datadog が PagerDuty からすべてのチームを読み込みます。
 1. 移行するチームを選び、**Next** を選択します。プレビュー ペインに、チームのメンバーと設定が表示されます。
 
-{{< img src="service_management/oncall/pagerduty_migration_import_team.png" alt="PagerDuty のチーム一覧を表示し、選択したチームのプレビューを示す UI" style="width:95%;" >}}
+{{< img src="incident_response/on-call/pagerduty_migration_import_team.png" alt="PagerDuty のチーム一覧を表示し、選択したチームのプレビューを示す UI" style="width:95%;" >}}
 
 ### チームとメンバーをマッピングする
 
@@ -38,7 +38,7 @@ title: PagerDuty リソースを Datadog On-Call に移行する
 
    - **Create a new team**: 画面の案内に従ってチーム名を入力します。Datadog が PagerDuty チームの構成とメンバーを基に、新しいチームを作成します。
 
-   {{< img src="service_management/oncall/pagerduty_migration_map_users.png" alt="PagerDuty ユーザーを Datadog ユーザーにマッピングする、または新しいユーザーを招待するための UI" style="width:95%;" >}}
+   {{< img src="incident_response/on-call/pagerduty_migration_map_users.png" alt="PagerDuty ユーザーを Datadog ユーザーにマッピングする、または新しいユーザーを招待するための UI" style="width:95%;" >}}
 
 1. 未マップのユーザーを扱う
 
@@ -57,13 +57,13 @@ title: PagerDuty リソースを Datadog On-Call に移行する
 - **Alert priority**: 優先度と影響度に応じてアラートを振り分けます。
 - **Start from scratch**: チームの運用に合わせて、ルーティング ルールを一からカスタマイズします。
 
-{{< img src="service_management/oncall/pagerduty_migration_select_routing_rule_template.png" alt="ルーティング ルール テンプレート ('All alerts to escalation policy'、'Business hours'、'Alert priority' など) を表示する UI" style="width:95%;" >}}
+{{< img src="incident_response/on-call/pagerduty_migration_select_routing_rule_template.png" alt="ルーティング ルール テンプレート ('All alerts to escalation policy'、'Business hours'、'Alert priority' など) を表示する UI" style="width:95%;" >}}
 
 ### エスカレーション ポリシーとスケジュールを再利用する
 
 ルーティング ルールの編集時に、作り直す代わりに既存の PagerDuty エスカレーション ポリシーとスケジュールをインポートできます。
 
-{{< img src="service_management/oncall/pagerduty_migration_migrate_escalation_policies_and_schedules.png" alt="既存の PagerDuty エスカレーション ポリシーとスケジュールを選択する UI" style="width:95%;" >}}
+{{< img src="incident_response/on-call/pagerduty_migration_migrate_escalation_policies_and_schedules.png" alt="既存の PagerDuty エスカレーション ポリシーとスケジュールを選択する UI" style="width:95%;" >}}
 
 インポートした設定は Datadog が自動的に適用します。ポリシーとスケジュールは、後からいつでも変更できます。
 

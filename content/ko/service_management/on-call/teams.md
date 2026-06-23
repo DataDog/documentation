@@ -26,13 +26,13 @@ On-Call Teams는 [Datadog Teams][1]의 확장입니다. On-Call Teams는 [Teams]
   {{% /tab %}}
   {{< /tabs >}}
 1. 기본 에스컬레이션 정책을 추가합니다.
-   {{< img src="service_management/oncall/escalation_policy_blank.png" alt="새로운 에스컬레이션 정책 설정 뷰. 제안받은 세 가지 스케줄을 알립니다." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/escalation_policy_blank.png" alt="새로운 에스컬레이션 정책 설정 뷰. 제안받은 세 가지 스케줄을 알립니다." style="width:80%;" >}}
    - Datadog은 팀에 대한 _Interrupt Handler_, _Primary_, _Secondary_ 스케줄을 자동으로 제안합니다. 다음 단계에서 이러한 스케줄을 정의할 수 있습니다.
    - 다른 팀이 소유한 기존 스케줄에 알림을 보낼 수도 있습니다.
 
    자세한 내용은 [에스컬레이션 정책][5]을 참조하세요.
 1. 이전 단계에서 만든 스케줄을 정의합니다.
-   {{< img src="service_management/oncall/schedule_blank.png" alt="새 스케줄 설정 뷰." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/schedule_blank.png" alt="새 스케줄 설정 뷰." style="width:80%;" >}}
    - **Schedule Time Zone**: 스케줄을 운영할 시간대를 선택하세요. 인수인계 시간 등 다른 설정은 이 선택에 따라 적용됩니다.
    - **Schedule Rotations**: 원하는 로테이션을 추가하세요.
    자세한 내용은 [스케줄][6]을 참조하세요.
