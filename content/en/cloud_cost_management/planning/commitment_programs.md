@@ -124,7 +124,7 @@ The simulation is retrospective: it re-prices your on-demand usage from the sele
 
 If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout with the suggested hourly commitment, term, and payment option. Click the callout to apply those settings to the simulation. Cost Optimization Hub currently generates these recommendations for Compute Savings Plans only.
 
-For Datadog to read these recommendations, your AWS integration IAM role must include the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. If they're missing, add them to your IAM policy manually; for steps, see [Permissions for AWS Cost Optimization Hub recommendations][5].
+To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][5].
 
 ### Interpret the results
 
