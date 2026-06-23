@@ -69,8 +69,6 @@ Sensitive data can also be unintentionally moved to cloud storage resources when
 
 Sensitive Data Scanner scans telemetry data (logs, APM spans, RUM events, and events), Agent Observability traces, cloud storage, and code repositories.
 
-### Supported actions by data source
-
 The action you can apply to matched sensitive data depends on the data source. The following table shows which obfuscation actions are supported for each telemetry source and for Agent Observability:
 
 | Action           | Logs | APM | RUM | Events | Agent Observability |
