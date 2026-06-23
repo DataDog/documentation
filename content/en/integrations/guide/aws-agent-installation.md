@@ -56,21 +56,26 @@ You approve one CloudFormation stack, one time, during initial setup. After that
 
 ## Install the Agent
 
-You can start Agent installation from any of these entry points:
+<!-- TODO(DOCS-14545): at publish, add in-app deep links to both entry points — the AWS setup flow (https://app.datadoghq.com/integrations?category=AWS&integrationId=amazon-web-services) and the Fleet Automation Install Agents page (https://app.datadoghq.com/fleet/install-agent/latest?platform=aws). Confirm stable prod URLs once the rollout completes. -->
 
-- **AWS integration setup**: Enable the Agent installation toggle, shown alongside log and resource collection. This installs the Agent on all eligible EC2 and EKS resources.
-- **Quick Start page**: Select the Agent installation action shown after your AWS account is connected.
-- **Fleet Automation**: Open the AWS Install Agents page at any time.
+You can start Agent installation from these entry points:
 
-<!-- TODO(DOCS-14545): confirm exact entry-point labels and navigation paths at launch (pending AWS team). -->
+- **AWS integration setup**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection, then choose to install on EC2 instances, EKS clusters, or both. The Agent installs on all eligible resources of the types you select.
+- **Fleet Automation**: Open the AWS Install Agents page at any time to select specific resources.
 
-The Quick Start and Fleet Automation entry points open the AWS Install Agents page, where you choose which resources to instrument:
+<!-- TODO(DOCS-14545): per AWS team, surfacing the Agent install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
+
+The Agent installation toggle appears during setup:
+
+{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) and Kubernetes (EKS) workload toggles turned on." style="width:80%;" >}}
+
+To install from the AWS Install Agents page:
 
 1. Opt in to all eligible resources, or select specific EC2 instances and EKS clusters from the resource list.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. The installation proceeds automatically, and Datadog reports progress as Agents come online.
 
-<!-- TODO(DOCS-14545): add install-flow screenshots (setup toggle, resource-selection/Manage Agents page) once the UI is final. -->
+<!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
 
 ## Verify the installation
 
@@ -115,3 +120,4 @@ If installation can't complete because of missing permissions, Datadog shows a n
 [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
 [3]: https://app.datadoghq.com/infrastructure
 [4]: https://docs.datadoghq.com/agent/fleet_automation/
+[5]: https://docs.datadoghq.com/getting_started/integrations/aws/
