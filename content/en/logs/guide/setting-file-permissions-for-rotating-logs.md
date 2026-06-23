@@ -23,7 +23,7 @@ To allow read-only access for the `dd-agent` user, create [access control lists 
 
 ### Verifying ACLs are enabled on your system
 
-[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `datadog-agent` user on a test directory, for example:
+[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `dd-agent` user on a test directory, for example:
 
 ```shell
 mkdir /var/log/test-dir
@@ -32,7 +32,7 @@ setfacl -m u:dd-agent:rx /var/log/test-dir
 getfacl /var/log/test-dir/
 ```
 
-The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
+The permissions set for `dd-agent` appears in the output of getfacl if ACLs are enabled.
 
 {{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" >}}
 
@@ -56,9 +56,9 @@ A default ACL applies to files created in the directory afterward, including tho
 
 ### Setting permissions for log file rotation
 
-If you set a default ACL with the `-d` flag in the previous section, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. A default ACL does not cover every rotation scheme, however. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
+If you set a default ACL with the `-d` flag in the previous section, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. However, a default ACL does not cover every rotation scheme. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
 
-When a default ACL does not apply to your setup, add a rule to logrotate to reset the ACL after each rotation. Avoid defining a rule for log files that another logrotate configuration already manages, because logrotate reports a `duplicate log entry` error when two configurations match the same file. Instead, add a `postrotate` script to the service's existing configuration, or create a separate file for paths that are not already managed:
+When a default ACL does not apply to your setup, add a rule to logrotate to reset the ACL after each rotation. Avoid defining a rule for log files that another logrotate configuration already manages, because logrotate reports an `error: duplicate log entry for <FILE>` message when two configurations match the same file. Instead, add a `postrotate` script to the service's existing configuration, or create a separate file for paths that are not already managed:
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -124,4 +124,4 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux
-[3]: http://xmodulo.com/configure-access-control-lists-acls-linux.html
+[3]: https://www.xmodulo.com/configure-access-control-lists-acls-linux.html
