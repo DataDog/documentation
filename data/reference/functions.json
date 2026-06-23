@@ -6212,7 +6212,7 @@
       "anchor": "decrypt_ip",
       "name": "decrypt_ip",
       "category": "IP",
-      "description": "Decrypts an IP address that was previously encrypted with `encrypt_ip`, restoring the original IP address.\n\nSupported modes:\n\n* `aes128` - Reverses AES-128 ipcrypt-deterministic encryption. Key must be exactly 16 bytes.\n* `pfx` - Reverses prefix-preserving ipcrypt-pfx encryption. Key must be exactly 32 bytes.\n\nThe key and mode must match those used during encryption.",
+      "description": "Decrypts an IP address encrypted with `encrypt_ip`, returning the original IP address.\n\nSupported modes:\n\n* `aes128` - Reverses AES-128 ipcrypt-deterministic encryption. Key must be exactly 16 bytes.\n* `pfx` - Reverses prefix-preserving ipcrypt-pfx encryption. Key must be exactly 32 bytes.\n\nThe key and mode must match those used during encryption.",
       "notices": [],
       "arguments": [
         {
