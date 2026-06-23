@@ -47,7 +47,7 @@ On-Call のスケジュールはレイヤー構造になっており、各レイ
 ### オーバーライド {#overrides}
 オーバーライドは、スケジュールされた On-Call シフトに対して行われる修正のことです。一時的なシフト調整や休日などの変更に対応できます。
 
-{{< img src="incident_response/on-call/schedule_override.png" alt="スケジュールを編集するとき、シフトが選択される。ダイアログが表示され、Override ボタンがある。" style="width:100%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override.png" alt="スケジュールを編集するとき、シフトが選択される。ダイアログが表示され、Override ボタンがある。" style="width:100%;" >}}
 
 シフトを完全または部分的に上書きするには、シフトを選択し、**Override** をクリックします。
 
@@ -55,7 +55,7 @@ On-Call のスケジュールはレイヤー構造になっており、各レイ
 
 On-Call のローテーションに参加していて、シフト中に席を外すことが事前にわかっている場合は、Slack または Microsoft Teams でオーバーライドをリクエストできます。`/dd override` と入力し、上書きしたい時間枠を選択して説明を追加します。これにより、チャンネルにリクエストが送信されます:
 
-{{< img src="incident_response/on-call/schedule_override_request.png" alt="Slack のメッセージ例: Datadog Staging が『@Daljeet がオーバーライドをリクエストしました: スケジュール [Primary] Payments & Transactions (payments-transactions)。開始: 今日13時、終了: 今日15時、所要時間2時間。メモ: Doctor's appointment. Will offer cookies for override.』と表示。末尾に 'Take it' ボタンがある。" style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override_request.png" alt="Slack のメッセージ例: Datadog Staging が『@Daljeet がオーバーライドをリクエストしました: スケジュール [Primary] Payments & Transactions (payments-transactions)。開始: 今日13時、終了: 今日15時、所要時間2時間。メモ: Doctor's appointment. Will offer cookies for override.』と表示。末尾に 'Take it' ボタンがある。" style="width:80%;" >}}
 
 ほかのチャンネルメンバーは **Take it** を選択することで、あなたのシフトをオーバーライドするよう自分のシフトに組み込めます。
 

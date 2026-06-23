@@ -11,7 +11,7 @@ En Datadog On-Call, las políticas de escalado garantizan que los llamados se tr
 Datadog crea una política de escalado predeterminada cuando [incorporas un equipo a On-Call][1].
 
 ## Crea una nueva política de escalado
-{{< img src="incident_response/on-call/escalation_policy_2.png" alt="Política de escalado de ejemplo" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_2.png" alt="Política de escalado de ejemplo" style="width:100%;" >}}
 
 1. Ve a [**On-Call** > **Políticas de escalado**][2].
 1. Selecciona [**+ Nueva política de escalado**][3].
@@ -22,13 +22,13 @@ Datadog crea una política de escalado predeterminada cuando [incorporas un equi
        1. Selecciona uno de los siguientes métodos de notificación: `Notify All`, `Round Robin`. Para obtener más detalles, consulta los [tipos de notificación de las políticas de escalado](#escalation-policy-step-notification-types).
        1. Especifica cuántos minutos tiene el destinatario para acusar recibo del llamado antes de que se escale al siguiente nivel.
    Por ejemplo, lo siguiente notificará al usuario de guardia actual cuando se active un llamado. Se escalará a Jane Doe si John no se acusa recibo del llamado en un plazo de 5 minutos.
-   {{< img src="incident_response/on-call/escalation_policy_2_steps_v2.png" alt="Política de escalado configurada para notificar al usuario de guardia previsto y escalar el llamado a Jane Doe si no se acusa recibo del llamado luego de 5 minutos." style="width:100%;" >}}
+   {{< img src="incident_response/on-call/escalation_policies/escalation_policy_2_steps_v2.png" alt="Política de escalado configurada para notificar al usuario de guardia previsto y escalar el llamado a Jane Doe si no se acusa recibo del llamado luego de 5 minutos." style="width:100%;" >}}
 1. Define cuántas veces se repetirán los pasos si nadie acusa recibo del llamado.
 1. Selecciona si Datadog debe actualizar automáticamente el estado del llamado a **Resuelto** después de ejecutar todas las reglas y repeticiones.
 
 ## Tipos de notificación de pasos de la política de escalado
 En cada paso de una política de escalado, puedes mantener el comportamiento estándar `Notify All` u optar por `Round Robin`.
-{{< img src="incident_response/on-call/escalation_policy_notification_type.png" alt="Selector del tipo de notificación en la creación de la política de escalado" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notification_type.png" alt="Selector del tipo de notificación en la creación de la política de escalado" style="width:100%;" >}}
 
 ### Notificar a todos (por defecto)
 Notifica a todos los objetivos del paso al mismo tiempo.
@@ -56,7 +56,7 @@ Si quieres que el llamado pase al siguiente objetivo del round robin, utiliza un
 En cada paso de una política de escalado, puedes notificar a usuarios individuales, a equipos enteros o a quien esté de guardia en un horario.
 
 ### Cronogramas
-{{< img src="incident_response/on-call/escalation_policy_notify_schedule.png" alt="Paso de política de escalado de ejemplo que notifica un cronograma" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_schedule.png" alt="Paso de política de escalado de ejemplo que notifica un cronograma" style="width:100%;" >}}
 
 Las políticas de escalado pueden notificar a quien esté de guardia según un cronograma predefinido. El sistema checks el cronograma y notifica a la persona o al grupo que está de guardia activamente durante la incidencia. El uso de cronogramas es beneficioso para lo siguiente:
 
@@ -66,10 +66,10 @@ Las políticas de escalado pueden notificar a quien esté de guardia según un c
 
 Si no hay nadie de guardia para un horario determinado, el paso de escalado se omite lentamente y el proceso avanza sin retrasos ni interrupciones. La interfaz de usuario indica que se ha omitido el escalado.
 
-{{< img src="incident_response/on-call/escalation_policy_schedule_skipped.png" alt="Política de escalado de ejemplo que indica un escalado omitido debido a que no había ninguna persona de guardia" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_schedule_skipped.png" alt="Política de escalado de ejemplo que indica un escalado omitido debido a que no había ninguna persona de guardia" style="width:100%;" >}}
 
 ### Usuarios
-{{< img src="incident_response/on-call/escalation_policy_notify_user.png" alt="Política de escalado de ejemplo que especifica un usuario en la política de escalado" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_user.png" alt="Política de escalado de ejemplo que especifica un usuario en la política de escalado" style="width:100%;" >}}
 
 Puedes incluir usuarios específicos en una política de escalado para asegurarte de que siempre se notifique a las personas clave en el caso de un llamado. Los casos de uso más comunes para avisar directamente a un usuario son los siguientes:
 
@@ -78,7 +78,7 @@ Puedes incluir usuarios específicos en una política de escalado para asegurart
 - Dirigir alertas a personal de reserva si el contacto principal no está disponible.
 
 ### Equipos
-{{< img src="incident_response/on-call/escalation_policy_notify_team.png" alt="Política de escalado de ejemplo que notifica a un equipo entero" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_team.png" alt="Política de escalado de ejemplo que notifica a un equipo entero" style="width:100%;" >}}
 
 Los casos de uso más comunes para avisar a un equipo entero son los siguientes:
 

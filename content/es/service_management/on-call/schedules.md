@@ -47,7 +47,7 @@ Para enviar una página a la persona de guardia para un cronograma determinado, 
 ### Anulaciones {#overrides}
 Las anulaciones son modificaciones realizadas en los turnos de guardia programados. Pueden adaptarse a cambios como ajustes temporales de turnos y vacaciones.
 
-{{< img src="incident_response/on-call/schedule_override.png" alt="Cuando se edita un cronograma, se selecciona un turno. Aparece un cuadro de diálogo con un botón Anular." style="width:100%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override.png" alt="Cuando se edita un cronograma, se selecciona un turno. Aparece un cuadro de diálogo con un botón Anular." style="width:100%;" >}}
 
 Para anular total o parcialmente un turno, selecciona el turno y haz clic en **Override** (Anular).
 
@@ -55,7 +55,7 @@ Para anular total o parcialmente un turno, selecciona el turno y haz clic en **O
 
 Si formas parte de una rotación On-Call y sabes que estarás fuera de la oficina durante tu turno, puedes solicitar una anulación en Slack o Microsoft Teams. Escribe `/dd override`, selecciona la franja horaria que deseas anular y añade una descripción. Esto envía una solicitud al canal:
 
-{{< img src="incident_response/on-call/schedule_override_request.png" alt="En Slack, un mensaje de Datadog Staging dice: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' Un botón etiquetado 'Take it' (Aceptar) aparece al final del mensaje." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override_request.png" alt="En Slack, un mensaje de Datadog Staging dice: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' Un botón etiquetado 'Take it' (Aceptar) aparece al final del mensaje." style="width:80%;" >}}
 
 Otros miembros del canal pueden seleccionar **Take it** (Aceptar) para programarse a sí mismos y anular tu turno.
 

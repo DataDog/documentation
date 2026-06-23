@@ -28,7 +28,7 @@ Al recrear la cconfiguración de tus servicios de guardia utilizando únicamente
 1. Consulta la [lista de equipos de On-Call][2] y selecciona **Add Team to On‐Call** > **Import team from PagerDuty** (Añadir equipo a On-Call > Importar equipo desde PagerDuty). Datadog carga todos tus equipos desde PagerDuty.
 1. Elige el equipo que quieres migrar y selecciona **Next** (Siguiente). Un panel de vista previa muestra los miembros del equipo y la configuración.
 
-{{< img src="incident_response/on-call/pagerduty_migration_import_team.png" alt="Interfaz de usuario que enumera equipos de PagerDuty y muestra una vista previa del equipo seleccionado" style="width:95%;" >}}
+{{< img src="incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call/pagerduty_migration_import_team.png" alt="Interfaz de usuario que enumera equipos de PagerDuty y muestra una vista previa del equipo seleccionado" style="width:95%;" >}}
 
 ### Asignar el equipo y sus miembros
 
@@ -38,7 +38,7 @@ Al recrear la cconfiguración de tus servicios de guardia utilizando únicamente
 
    - **Crear un nuevo equipo**: Introduce un nombre de equipo cuando se te pida hacerlo. Datadog crea el equipo utilizando la estructura y los miembros de tu equipo de PagerDuty.
 
-   {{< img src="incident_response/on-call/pagerduty_migration_map_users.png" alt="Interfaz de usuario para asignar usuarios de PagerDuty a usuarios de Datadog o para invitar nuevos usuarios" style="width:95%;" >}}
+   {{< img src="incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call/pagerduty_migration_map_users.png" alt="Interfaz de usuario para asignar usuarios de PagerDuty a usuarios de Datadog o para invitar nuevos usuarios" style="width:95%;" >}}
 
 1. Gestionar usuarios no asignados:
 
@@ -57,13 +57,13 @@ Elige una plantilla para definir cómo llegan las alertas al equipo:
 - **Prioridad de las alertas**: Enruta las alertas en función de su prioridad e impacto.
 - **Empezar desde cero**: Personaliza las reglas de enrutamiento para adaptarlas a los flujos de trabajo de tu equipo.
 
-{{< img src="incident_response/on-call/pagerduty_migration_select_routing_rule_template.png" alt="Interfaz de usuario con plantillas de reglas de enrutamiento como por ejemplo 'Todas las alertas a la política de escalado', 'Horario laboral' y 'Prioridad de las alertas'" style="width:95%;" >}}
+{{< img src="incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call/pagerduty_migration_select_routing_rule_template.png" alt="Interfaz de usuario con plantillas de reglas de enrutamiento como por ejemplo 'Todas las alertas a la política de escalado', 'Horario laboral' y 'Prioridad de las alertas'" style="width:95%;" >}}
 
 ### Reutilizar las políticas de escalado y los horarios
 
 Al editar las reglas de enrutamiento, puedes importar las políticas de escalado y los horarios de PagerDuty existentes, en lugar de volver a crearlos.
 
-{{< img src="incident_response/on-call/pagerduty_migration_migrate_escalation_policies_and_schedules.png" alt="Interfaz de usuario para seleccionar políticas de escalado y horarios de PagerDuty" style="width:95%;" >}}
+{{< img src="incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call/pagerduty_migration_migrate_escalation_policies_and_schedules.png" alt="Interfaz de usuario para seleccionar políticas de escalado y horarios de PagerDuty" style="width:95%;" >}}
 
 Datadog aplica automáticamente las configuraciones importadas. Puedes cambiar las políticas y horarios en cualquier momento. 
 
