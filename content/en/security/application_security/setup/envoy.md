@@ -175,5 +175,5 @@ For additional details on the Envoy integration compatibilities, refer to the [E
 [5]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: /tracing/trace_collection/library_config/go/
-[8]: /security/application_security/threat_protection/policies/library_configuration/
+[8]: /security/application_security/policies/library_configuration/
 [9]: /security/application_security/setup/compatibility/envoy

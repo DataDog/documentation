@@ -702,7 +702,7 @@ In this guide, you did the following:
 
 This is general guidance. Depending on your applications and environments, there might be a need for additional response strategies.
 
-[1]: /security/application_security/threat_protection/account_takeover_protection/
+[1]: /security/application_security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
 [3]: /security/application_security/setup/compatibility/
 [4]: /remote_configuration
@@ -716,7 +716,7 @@ This is general guidance. Depending on your applications and environments, there
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
-[15]: /security/application_security/threat_protection/account_takeover_protection/#attacker-strategies
+[15]: /security/application_security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
 [17]: /security/notifications/
 [18]: https://app.datadoghq.com/security/configuration/notification-rules/new?notificationData=
@@ -735,4 +735,4 @@ This is general guidance. Depending on your applications and environments, there
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
 [33]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[34]: /security/application_security/threat_protection/policies/inapp_waf_rules/
+[34]: /security/application_security/policies/inapp_waf_rules/

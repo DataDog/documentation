@@ -134,8 +134,8 @@ For information on disabling AAP or its features, see the following:
 [10]: /security/application_security/troubleshooting/#disabling-aap
 [11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /security/application_security/troubleshooting/#disabling-code-security
-[13]: /security/application_security/threat_protection/exploit-prevention/#library-compatibility
-[14]: /security/application_security/threat_protection/exploit-prevention/
-[15]: /security/application_security/threat_protection/waf-integration/
+[13]: /security/application_security/exploit-prevention/#library-compatibility
+[14]: /security/application_security/exploit-prevention/
+[15]: /security/application_security/waf-integration/
 [16]: /security/application_security/setup/
 [17]: /security/application_security/api_posture/endpoint_scanning/

@@ -138,7 +138,7 @@ Additionally, you can click **Explore in graph view** to see the requests in the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threat_protection/security_signals/
+[1]: /security/application_security/security_signals/
 [2]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
 [3]: /security/detection_rules/
 [4]: https://app.datadoghq.com/security/ai-guard/signals

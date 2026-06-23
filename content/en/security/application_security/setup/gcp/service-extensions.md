@@ -524,5 +524,5 @@ For additional details on the GCP Service Extensions integration compatibilities
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: /tracing/trace_collection/library_config/go/
-[8]: /security/application_security/threat_protection/policies/library_configuration/
+[8]: /security/application_security/policies/library_configuration/
 [9]: /security/application_security/setup/compatibility/gcp-service-extensions

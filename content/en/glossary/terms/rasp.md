@@ -7,4 +7,4 @@ core_product:
 ---
 RASP is a security technology that detects and prevents attacks in real time.
 
-For more information about RASP, see the <a href='/security/application_security/threat_protection/exploit-prevention/'>App and API Protection documentation</a>.
+For more information about RASP, see the <a href='/security/application_security/exploit-prevention/'>App and API Protection documentation</a>.

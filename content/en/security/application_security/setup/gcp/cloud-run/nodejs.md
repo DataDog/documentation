@@ -122,5 +122,5 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 [3]: https://app.datadoghq.com/security/appsec
 [4]: /security/application_security/serverless/compatibility
 [5]: /actions/workflows/
-[6]: /security/application_security/threat_protection/waf-integration/
+[6]: /security/application_security/waf-integration/
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
