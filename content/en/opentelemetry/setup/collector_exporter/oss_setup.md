@@ -223,7 +223,9 @@ For cloud-specific environments, add the appropriate resource detection detector
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
-See the [full configuration files][5] for an optional config to gather additional metadata about the system.
+See the [full configuration files][500] for an optional config to gather additional metadata about the system.
+
+[500]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
