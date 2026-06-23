@@ -16,7 +16,7 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 Configure the Splunk HEC destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
 **Notes**:
-- The Splunk index you send your metrics to must be a metrics index. If you send them to an events index, you can't view the metrics in Splunk using any metrics type queries, such as `mcatalog` and `mstats`.
+- The Splunk index you send your metrics to must be a metrics index. If you send your metrics to an events index, you can't view them in Splunk using any metrics type queries, such as `mcatalog` and `mstats`.
 - If you don't attach your index to the Splunk authentication token you are using for Observability Pipelines, you must enter the name of the [index](#splunk-index) when you set up the destination.
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
@@ -32,17 +32,17 @@ After you select the Splunk HEC destination in the pipeline UI:
 
 #### Default namespace
 
-Enter a default namespace to use as a prefix for metrics that don't already have one. The namespace is prepended to the metric name with a period (`.`), such as `service.cpu.usage` where `service` is the namespace.
+Enter a default namespace to use as a prefix for metrics that don't already have a namespace. The namespace is prepended to the metric name with a period (`.`). For example, in `service.cpu.usage`, `service` is the namespace.
 
 #### Compression
 
-If you want to compress your metrics with gzip, select **gzip** in the dropdown menu. The default compression is **None**.
+To compress your metrics with gzip, select **gzip** in the dropdown menu. The default compression is **None**.
 
 #### Splunk index
 
-Enter the name of the Splunk metrics index to which you are sending metrics. See [template syntax][6] if you want to route metrics to different indexes based on specific fields in your metrics.
+Enter the name of the Splunk metrics index to which you are sending metrics. See [template syntax][6] to route metrics to different indexes based on specific fields.
 
-**Note**: This **Index** field is only optional if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk metrics index.
+**Note**: The **Index** field is optional only if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk metrics index.
 
 #### Source
 
@@ -50,7 +50,7 @@ Enter a source value to add the source field to your metrics.
 
 #### Source type override
 
-Set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][6] if you want to route metrics to different source types based on specific fields in your metrics.
+Set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][6] to route metrics to different source types based on specific fields.
 
 #### Buffering
 
@@ -82,7 +82,7 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+A batch of events is flushed when one of the following parameters is met. See [event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
 |----------------|-------------------|-------------------|
