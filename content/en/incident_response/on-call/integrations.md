@@ -25,7 +25,25 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
   {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
   {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
   {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
+  {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios.png" alt="Nagios" title="Nagios" >}}
 {{< /card-grid >}}
+
+## Other tools
+
+If your tool is not listed above, use the [Datadog Events API][1] to trigger On-Call pages from any source that can make an HTTP request.
+
+Post an event with the following parameters:
+
+| Parameter | Value |
+|-----------|-------|
+| `alert_type` | `error` |
+| `aggregation_key` | A string that groups related alerts into a single Page. |
+| `title` | A short description of the alert. |
+| `text` | Include `@oncall-<team_handle>` to route the Page to the correct On-Call team. |
+
+The `@oncall-<team_handle>` mention in `text` determines which On-Call team receives the Page. Replace `<team_handle>` with your team's handle as configured in Datadog.
+
+[1]: https://docs.datadoghq.com/api/latest/events/post-an-event/
 
 ## Further Reading
 
