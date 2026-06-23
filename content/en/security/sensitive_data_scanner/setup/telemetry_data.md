@@ -53,19 +53,6 @@ This document goes through the following:
 - [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data)
 - [How to redact sensitive data in tags](#redact-sensitive-data-in-tags)
 
-## Supported actions by data source
-
-The action you can apply to matched sensitive data depends on the data source. The following table shows which actions Sensitive Data Scanner supports for each data source:
-
-| Action           | Logs | APM | RUM | Events | Agent Observability |
-|------------------|------|-----|-----|--------|---------------------|
-| Redact           | Yes  | Yes | Yes | Yes    | Yes                 |
-| Partially redact | Yes  | Yes | Yes | Yes    | Yes                 |
-| Hash             | Yes  | Yes | Yes | Yes    | Yes                 |
-| Mask             | Yes  | No  | No  | No     | No                  |
-
-**Note**: Sensitive Data Scanner does not redact sensitive data in cloud storage resources. For cloud storage, Sensitive Data Scanner performs detection only. See [Set Up Sensitive Data Scanner for Cloud Storage][17] for more information.
-
 ## Setup
 
 ### Permissions
@@ -389,4 +376,3 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags
-[17]: /security/sensitive_data_scanner/setup/cloud_storage/

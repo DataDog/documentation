@@ -65,6 +65,19 @@ Sensitive data can also be unintentionally moved to cloud storage resources when
 
 **Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][1].
 
+## Supported actions by data source
+
+The action you can apply to matched sensitive data depends on the data source. The following table shows which actions Sensitive Data Scanner supports for each data source:
+
+| Action           | Logs | APM | RUM | Events | Agent Observability |
+|------------------|------|-----|-----|--------|---------------------|
+| Redact           | Yes  | Yes | Yes | Yes    | Yes                 |
+| Partially redact | Yes  | Yes | Yes | Yes    | Yes                 |
+| Hash             | Yes  | Yes | Yes | Yes    | Yes                 |
+| Mask             | Yes  | No  | No  | No     | No                  |
+
+Cloud storage and code repository (Secret Scanning) scanning is detection only. Obfuscation actions are not available for these data sources.
+
 ## Scan telemetry data
 
 {{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="Five different sensitive findings detected where two have critical priority, one has medium priority, and two are info." style="width:100%;" >}}
