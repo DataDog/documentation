@@ -1,10 +1,14 @@
 ---
-title: OpenTelemetry API Support
+title: Using Datadog SDKs with OpenTelemetry
 aliases:
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
   - /opentelemetry/instrument/api_support/
+  - /opentelemetry/instrument/dd_sdks/otlp_trace_export/
 further_reading:
+    - link: '/opentelemetry/setup/ddot_collector/'
+      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
+      tag: 'Documentation'
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
       tag: 'Documentation'
@@ -21,7 +25,83 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products. 
+Datadog SDKs work with OpenTelemetry in two ways:
+
+- They can export telemetry in [OpenTelemetry Protocol (OTLP)][8] format to any OTLP-compatible receiver or backend.
+- They provide an implementation of the [OpenTelemetry API][1], so you can instrument your services with vendor-neutral APIs while still taking advantage of Datadog's native implementation, features, and products.
+
+## Export data in OTLP format
+
+{{< callout url="#" btn_hidden="true" header="Preview">}}
+OTLP export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
+{{< /callout >}}
+
+Datadog SDKs can export telemetry in [OTLP][8] format to any OTLP-compatible receiver or backend, including [DDOT][9] or any OpenTelemetry Collector. During Preview, OTLP export supports traces only.
+
+### Prerequisites
+
+OTLP export sends data to a receiver rather than directly to Datadog. Before you enable it, you need an OTLP-compatible receiver that is configured to forward data to Datadog, such as the [DDOT Collector][9] or an [OpenTelemetry Collector][7].
+
+For production workloads, Datadog recommends DDOT for batching, performance, and processing benefits. You aren't required to use DDOT, but the receiver must be reachable from your instrumented service.
+
+### Language support
+
+Select your language to see the minimum SDK version and supported OTLP protocols.
+
+{{< programming-lang-wrapper langs="java,python,nodejs,go,.net" >}}
+
+{{< programming-lang lang="java" >}}
+- **Minimum version**: v1.62.0
+- **Supported protocols**: `http/protobuf` (default), `grpc`
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+- **Minimum version**: v4.8.0
+- **Supported protocols**: `http/json`
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+- **Minimum version**: v5.98.0
+- **Supported protocols**: `http/json`
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+- **Minimum version**: v2.8.0
+- **Supported protocols**: `http/protobuf`
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".net" >}}
+- **Minimum version**: v3.41.0
+- **Supported protocols**: `http/json` (default), `http/protobuf` (v3.45.0+)
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+### Enable OTLP trace export
+
+To export traces in OTLP format, set the following environment variables on the instrumented service:
+
+```shell
+OTEL_TRACES_EXPORTER=otlp
+DD_TRACE_OTEL_ENABLED=true
+```
+
+By default, traces are sent to `http://localhost:4318/v1/traces`.
+
+To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][2] documentation for details.
+
+### Verify
+
+After you enable OTLP export and your service receives traffic, confirm that traces appear in the [Trace Explorer][10]. If traces don't arrive, verify that your receiver is running, reachable at the configured endpoint, and forwarding data to Datadog.
+
+### Current limitations
+
+- OTLP trace export is in Preview and supports core APM functionality for automatic and manually created traces. Other Datadog features and capabilities may not be supported, or may require the Datadog Agent even if traces are not sent through it.
+- Traces are exported with Datadog semantics. For example, an HTTP status code is represented as `http.status_code` in Datadog semantics and `http.response.status_code` in OTel semantics.
+
+## OpenTelemetry API support
+
+Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products.
 
 The telemetry produced by your running code can be processed, analyzed, and monitored alongside Datadog's native telemetry, allowing you to take advantage of Datadog's unified platform and products like [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5], and [Live Processes][6].
 
@@ -62,3 +142,6 @@ To learn more, follow the link for your language:
 [5]: /security/application_security/
 [6]: /infrastructure/process
 [7]: /opentelemetry/setup/collector_exporter/
+[8]: https://opentelemetry.io/docs/specs/otlp/
+[9]: /opentelemetry/setup/ddot_collector/
+[10]: /tracing/trace_explorer/
