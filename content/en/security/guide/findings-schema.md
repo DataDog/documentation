@@ -1764,10 +1764,6 @@ There are eleven different categories for security findings. Click on a category
 {{% /tab %}}
 {{< /tabs >}}
 
-## Linking to findings
-
-The direct URL for a finding in Datadog varies by finding type. Use `/security/finding/[finding_id]`, where `[finding_id]` is the root-level `finding_id` value, to open the finding in the appropriate explorer. This format is useful when linking from AI agents or automations.
-
 ## Schema Reference
 
 The following sections describe all available attributes in the Security Findings schema, organized by namespace.
@@ -2321,6 +2317,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><code>architectures</code></td>
       <td>array (string)</td>
       <td><strong>Path:</strong> <code>@container_image.architectures</code><br>Architectures associated with the container image.</td>
+    </tr>
+    <tr>
+      <td><code>base_image</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@container_image.base_image</code><br>Base image this container image is built on. A base image is itself a container image and may have its own <code>base_image</code>. Absent when no base image is identified.</td>
     </tr>
     <tr>
       <td><code>git_repository_url</code></td>
@@ -5613,6 +5614,11 @@ Evidence used to determine whether the function is reachable.
   </thead>
   <tbody>
     <tr>
+      <td><code>is_supported</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.is_supported</code><br><code>true</code> if reachability analysis is supported for this finding, <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
       <td><code>locations</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations</code><br>Array of code locations where the function is called.</td>
@@ -5621,6 +5627,11 @@ Evidence used to determine whether the function is reachable.
       <td><code>not_supported_reason</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.not_supported_reason</code><br>Reason why reachability analysis is not supported for this finding. Valid values: <code>language_not_supported</code>, <code>vulnerable_symbol_not_available</code>.</td>
+    </tr>
+    <tr>
+      <td><code>unreachable_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.unreachable_at</code><br>Timestamp in milliseconds (UTC) at which the finding will transition to unreachable if the vulnerable function has not been called.</td>
     </tr>
   </tbody>
 </table>
@@ -5639,29 +5650,14 @@ Array of code locations where the function is called.
   </thead>
   <tbody>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_end</code><br>Ending column position.</td>
-    </tr>
-    <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_start</code><br>Starting column position.</td>
-    </tr>
-    <tr>
       <td><code>filename</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.filename</code><br>Relative path to the file.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
-    </tr>
-    <tr>
-      <td><code>line_end</code></td>
+      <td><code>last_detected_at</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.line_end</code><br>Ending line number.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.last_detected_at</code><br>Timestamp in milliseconds (UTC) of the most recent detection of this function at the code location.</td>
     </tr>
     <tr>
       <td><code>line_start</code></td>
@@ -5672,11 +5668,6 @@ Array of code locations where the function is called.
       <td><code>symbol</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.symbol</code><br>Symbol name at the code location.</td>
-    </tr>
-    <tr>
-      <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.url</code><br>URL to view the file online (for example, in GitHub), highlighting the code location.</td>
     </tr>
   </tbody>
 </table>
@@ -6402,6 +6393,11 @@ Information specific to vulnerabilities.
       <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br><code>true</code> if the vulnerability is classified as an emerging threat; <code>false</code> otherwise.</td>
     </tr>
     <tr>
+      <td><code>is_inherited_from_base_image</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@vulnerability.is_inherited_from_base_image</code><br><code>true</code> if the vulnerability originates in a base image layer, <code>false</code> if it originates in a layer added by the container image author.</td>
+    </tr>
+    <tr>
       <td><code>last_commit</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@vulnerability.last_commit</code><br>The commit in which the vulnerability was fixed.</td>
@@ -6769,11 +6765,6 @@ Linear issue attached to the case.
       <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.status</code><br>Current status of the Linear issue.</td>
     </tr>
     <tr>
-      <td><code>team_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.team_id</code><br>UUID of the Linear team that owns the issue.</td>
-    </tr>
-    <tr>
       <td><code>url</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.url</code><br>Full URL to the Linear issue.</td>
@@ -6947,6 +6938,42 @@ Metadata about user-defined severity modifications applied to the finding.
       <td><code>description</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@workflow.severity_override.description</code><br>Description of the user-defined severity modification applied to the finding.</td>
+    </tr>
+    <tr>
+      <td><code>updated_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.updated_at</code><br>Timestamp in milliseconds (UTC) when the manual severity override was applied.</td>
+    </tr>
+    <tr>
+      <td><code>updated_by</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.updated_by</code><br>User who applied the manual severity override.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Updated By
+
+User who applied the manual severity override.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.updated_by.id</code><br>Unique identifier of the user in UUID format.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.updated_by.name</code><br>Display name of the user.</td>
     </tr>
   </tbody>
 </table>

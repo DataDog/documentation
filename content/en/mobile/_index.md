@@ -54,17 +54,17 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### QR code
 
-1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click **Log in to Mobile App** for the organization you are currently logged into. This pops up a QR code.
+1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click {{< ui >}}Log in to Mobile App{{< /ui >}} for the organization you are currently logged into. This pops up a QR code.
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
 
-**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
+**Note**: If you click the {{< ui >}}Log in to Mobile App{{< /ui >}} button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
 
 ##### Manual entry
 
-1. To manually enter the SAML ID, open the Datadog Mobile app and press the "Using Single Sign-On (SAML)?" button.
-2. Press the "Use another method to login" button, and enter the SAML ID manually.
+1. To manually enter the SAML ID, open the Datadog Mobile app and press the {{< ui >}}Using Single Sign-On (SAML)?{{< /ui >}} button.
+2. Press the {{< ui >}}Use another method to login{{< /ui >}} button, and enter the SAML ID manually.
 
-By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
+By clicking {{< ui >}}Authorize{{< /ui >}} when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
 ##### SAML IdP initiated login
 
@@ -77,28 +77,28 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ### Switch organizations
 
-To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**.
+To switch organizations, navigate to the {{< ui >}}Settings{{< /ui >}} page on the mobile app and click on {{< ui >}}Organization{{< /ui >}}.
 
 **Note**: You may need to reauthenticate when you switch organizations.
 
 ### Log out
-To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure.
+To log out, navigate to the {{< ui >}}Settings{{< /ui >}} page on the mobile app and click on {{< ui >}}Log Out{{< /ui >}}. Confirm {{< ui >}}Yes{{< /ui >}} that you are sure.
 
 ## On-Call
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
+{{< img src="mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
+{{< img src="mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
+The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping {{< ui >}}Escalate{{< /ui >}} prompts you to confirm the escalation to the next policy level. Tapping {{< ui >}}Declare Incident{{< /ui >}} prompts you to enter a title and provide relevant incident attributes.
 
 You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits Investigation monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
@@ -113,12 +113,12 @@ If you only need to access On-Call on mobile and want to restrict access to sens
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -127,20 +127,20 @@ On the Incidents page, you can view, search, and filter all incidents that you h
 
 ### Create an incident
 
-1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
-2. Tap the **+** button in the top right corner.
+1. Navigate to the incident list by tapping on the {{< ui >}}Incidents{{< /ui >}} tab in the bottom bar.
+2. Tap the {{< ui >}}+{{< /ui >}} button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
 ## Notification Center
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_notification_center.png" alt="ios Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/ios_notification_center.png" alt="ios Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_notification_center.png" alt="Android Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/android_notification_center.png" alt="Android Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -152,12 +152,12 @@ The Notification Center lists all push notifications received so that notificati
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS dashboard page showing list of dashboards with search and filter options">}}
+{{< img src="mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android dashboard page showing list of dashboards with search and filter options">}}
+{{< img src="mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -174,12 +174,12 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS monitors page showing list of monitors with search and filter options">}}
+{{< img src="mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android monitors page showing list of monitors with search and filter options">}}
+{{< img src="mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -195,12 +195,12 @@ For example, to filter on metric monitors related to the SRE team that is being 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS notebooks page showing list of notebooks with search and filter options">}}
+{{< img src="mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android notebooks page showing list of notebooks with search and filter options">}}
+{{< img src="mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -214,12 +214,12 @@ On the Notebooks page, you can view and search all of the notebooks that you hav
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS traces page showing list of traces with search and filter options">}}
+{{< img src="mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS traces page showing list of traces with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android traces page showing list of traces with search and filter options">}}
+{{< img src="mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android traces page showing list of traces with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -236,12 +236,12 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS logs page showing list of logs with search and filter options">}}
+{{< img src="mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS logs page showing list of logs with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android logs page showing list of logs with search and filter options">}}
+{{< img src="mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android logs page showing list of logs with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -260,12 +260,12 @@ You can also group by log patterns and select different log attributes for clust
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS services page showing list of services with search and filter options">}}
+{{< img src="mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS services page showing list of services with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android services page showing list of services with search and filter options">}}
+{{< img src="mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android services page showing list of services with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -277,12 +277,12 @@ On the Services page, you can view, search and filter all services that you have
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="/service_management/mobile/bits_chat_ios_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the iOS Datadog mobile app with a user query about a service">}}
+{{< img src="/mobile/bits_chat_ios_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the iOS Datadog mobile app with a user query about a service">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/bits_chat_android_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the Android Datadog mobile app with a user query about a service">}}
+{{< img src="mobile/bits_chat_android_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the Android Datadog mobile app with a user query about a service">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -293,12 +293,12 @@ On the Bits AI home page, you can ask questions about your system or active inci
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
+{{< img src="mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
+{{< img src="mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{< /tabs >}}

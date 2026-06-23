@@ -1030,7 +1030,7 @@
     "request_schema_description": "Request object for deleting Test Optimization service settings."
   },
   "UpdateTestOptimizationServiceSettings": {
-    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; null or omitted fields are left unchanged.",
+    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; setting a field to `null` is a no-op.\nTo reset a setting to inherit from the repository level, use the corresponding `<setting>_inherit` field.\nThe `pr_comments_enabled` field is ignored as it cannot be overridden at the service level.",
     "summary": "Update Test Optimization service settings",
     "request_description": "",
     "request_schema_description": "Request object for updating Test Optimization service settings."
@@ -1532,6 +1532,10 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListSharedDashboardsByDashboardId": {
+    "description": "Retrieve shared dashboards associated with the specified dashboard.",
+    "summary": "List shared dashboards for a dashboard"
+  },
   "CreateDashboardSecureEmbed": {
     "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
     "summary": "Create a secure embed for a dashboard",
@@ -1559,6 +1563,14 @@
   "GetDashboardUsage": {
     "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for a dashboard"
+  },
+  "GetDataObservabilityMonitorRunStatus": {
+    "description": "Retrieves the current status of a data observability monitor run. Poll this endpoint after triggering a run to determine when evaluation is complete.",
+    "summary": "Get data observability monitor run status"
+  },
+  "RunDataObservabilityMonitor": {
+    "description": "Manually triggers a run for a data observability monitor. Only monitors that are not scheduled (manually-runnable) can be triggered this way.",
+    "summary": "Run a data observability monitor"
   },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
@@ -1633,7 +1645,7 @@
     "request_schema_description": "Parameters for updating a deployment gate."
   },
   "TriggerDeploymentGatesEvaluation": {
-    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.",
+    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.\n\nWhen the `configuration` attribute is provided, rules are evaluated inline from that configuration\nand no pre-configured gate is required. When `configuration` is omitted, rules are resolved from the\ngate pre-configured for the given service and environment through the Datadog UI, API, or Terraform.",
     "summary": "Trigger a deployment gate evaluation",
     "request_description": "",
     "request_schema_description": "Request body for triggering a deployment gate evaluation."
@@ -1862,6 +1874,22 @@
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
     "summary": "Unarchive a feature flag"
   },
+  "CreateVariantForFeatureFlag": {
+    "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
+    "summary": "Add a variant to a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to create a variant."
+  },
+  "DeleteVariantFromFeatureFlag": {
+    "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Delete a variant"
+  },
+  "UpdateVariantForFeatureFlag": {
+    "description": "Updates the name and value of an existing variant on a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Update a variant",
+    "request_description": "",
+    "request_schema_description": "Request to update an existing variant's name and value."
+  },
   "ListForms": {
     "description": "Get all forms for the authenticated user's organization.",
     "summary": "List forms"
@@ -1915,6 +1943,14 @@
     "summary": "Upsert and publish a form version",
     "request_description": "",
     "request_schema_description": "A request to upsert and publish a form version in a single transaction."
+  },
+  "ListGlobalOrgs": {
+    "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
+    "summary": "List global orgs"
+  },
+  "ListGovernanceInsights": {
+    "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
+    "summary": "List governance insights"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -2330,9 +2366,29 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "ListGoogleChatOrganizations": {
+    "description": "Get a list of all Google Chat organization bindings in the Datadog Google Chat integration.",
+    "summary": "Get all Google Chat organization bindings"
+  },
   "GetSpaceByDisplayName": {
     "description": "Get the resource name and organization binding ID of a space in the Datadog Google Chat integration.",
     "summary": "Get space information by display name"
+  },
+  "DeleteGoogleChatOrganization": {
+    "description": "Delete a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Delete a Google Chat organization binding"
+  },
+  "GetGoogleChatOrganization": {
+    "description": "Get a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Get a Google Chat organization binding"
+  },
+  "DeleteGoogleChatDelegatedUser": {
+    "description": "Delete the delegated user for a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Delete the delegated user"
+  },
+  "GetGoogleChatDelegatedUser": {
+    "description": "Get the delegated user for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get the delegated user"
   },
   "ListOrganizationHandles": {
     "description": "Get a list of all organization handles from the Datadog Google Chat integration.",
@@ -2357,6 +2413,30 @@
     "summary": "Update organization handle",
     "request_description": "Organization handle payload.",
     "request_schema_description": "Update organization handle request."
+  },
+  "ListGoogleChatTargetAudiences": {
+    "description": "Get a list of all target audiences for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get all target audiences"
+  },
+  "CreateGoogleChatTargetAudience": {
+    "description": "Create a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Create a target audience",
+    "request_description": "Target audience payload.",
+    "request_schema_description": "Create target audience request."
+  },
+  "DeleteGoogleChatTargetAudience": {
+    "description": "Delete a target audience from a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Delete a target audience"
+  },
+  "GetGoogleChatTargetAudience": {
+    "description": "Get a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get a target audience"
+  },
+  "UpdateGoogleChatTargetAudience": {
+    "description": "Update a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Update a target audience",
+    "request_description": "Target audience payload.",
+    "request_schema_description": "Update target audience request."
   },
   "ListJiraAccounts": {
     "description": "Get all Jira accounts for the organization.",
@@ -2417,6 +2497,10 @@
     "summary": "Update tenant-based handle",
     "request_description": "Tenant-based handle payload.",
     "request_schema_description": "Update tenant-based handle request."
+  },
+  "DeleteMSTeamsUserBinding": {
+    "description": "Delete the user binding for a given tenant from the Datadog Microsoft Teams integration.",
+    "summary": "Delete user binding"
   },
   "ListWorkflowsWebhookHandles": {
     "description": "Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.",
@@ -2581,6 +2665,10 @@
   "ListServiceNowUsers": {
     "description": "Get all users for a ServiceNow instance.",
     "summary": "List ServiceNow users"
+  },
+  "ListSlackUserBindings": {
+    "description": "List all Slack user bindings for a given Datadog user from the Datadog Slack integration.",
+    "summary": "List Slack user bindings"
   },
   "DeleteStatuspageAccount": {
     "description": "Delete the Statuspage account configured for your organization.",
@@ -2967,6 +3055,50 @@
     "request_description": "Search spans payload.",
     "request_schema_description": "Request body for searching LLM Observability spans."
   },
+  "ListLLMObsPatternsClusteredPoints": {
+    "description": "List the data points grouped into a topic. For a parent topic, points from all\nof its leaf topics are returned.",
+    "summary": "List patterns clustered points"
+  },
+  "ListLLMObsPatternsConfigs": {
+    "description": "List all patterns configurations for the organization.",
+    "summary": "List patterns configurations"
+  },
+  "UpsertLLMObsPatternsConfig": {
+    "description": "Create a new patterns configuration, or update an existing one when a configuration ID is provided.",
+    "summary": "Create or update a patterns configuration",
+    "request_description": "Patterns configuration payload.",
+    "request_schema_description": "Request to create or update an LLM Observability patterns configuration."
+  },
+  "GetLLMObsPatternsConfig": {
+    "description": "Retrieve the patterns configuration for the organization.",
+    "summary": "Get a patterns configuration"
+  },
+  "DeleteLLMObsPatternsConfig": {
+    "description": "Delete a patterns configuration by its ID.",
+    "summary": "Delete a patterns configuration"
+  },
+  "ListLLMObsPatternsRuns": {
+    "description": "List the completed patterns runs for a configuration.",
+    "summary": "List patterns runs"
+  },
+  "TriggerLLMObsPatterns": {
+    "description": "Start a patterns run for a given configuration. The run executes asynchronously.",
+    "summary": "Trigger a patterns run",
+    "request_description": "Trigger patterns payload.",
+    "request_schema_description": "Request to trigger an LLM Observability patterns run."
+  },
+  "GetLLMObsPatternsRunStatus": {
+    "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
+    "summary": "Get patterns run status"
+  },
+  "ListLLMObsPatternsTopics": {
+    "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
+    "summary": "List patterns topics"
+  },
+  "ListLLMObsPatternsTopicsWithClusteredPoints": {
+    "description": "List the topics discovered by a patterns run, with the clustered points attached\ninline to each leaf topic. When no run is specified, the most recent completed\nrun is used.",
+    "summary": "List patterns topics with clustered points"
+  },
   "ListLLMObsDatasets": {
     "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
     "summary": "List LLM Observability datasets"
@@ -3062,6 +3194,12 @@
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
     "summary": "List events for an LLM Observability experiment"
+  },
+  "UpdateLoginOrgConfigsMaxSessionDuration": {
+    "description": "Update the maximum session duration for the current organization.\nThe duration is specified in seconds.",
+    "summary": "Update the maximum session duration",
+    "request_description": "",
+    "request_schema_description": "A request to update the maximum session duration for an organization."
   },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
@@ -3911,12 +4049,6 @@
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
     "summary": "List findings"
   },
-  "MuteFindings": {
-    "description": "Mute or unmute findings.",
-    "summary": "Mute or unmute a batch of findings",
-    "request_description": "### Attributes\n\nAll findings are updated with the same attributes. The request body must include at least two attributes: `muted` and `reason`.\nThe allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding IDs to be updated.",
-    "request_schema_description": "The new bulk mute finding request."
-  },
   "GetFinding": {
     "description": "Returns a single finding with message and resource configuration.",
     "summary": "Get a finding"
@@ -4217,6 +4349,16 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "GetRumSdkConfig": {
+    "description": "Retrieve a RUM SDK configuration by its identifier.",
+    "summary": "Get a RUM SDK configuration"
+  },
+  "UpdateRumSdkConfig": {
+    "description": "Update an existing RUM SDK configuration by its identifier.\nReturns the updated configuration when successful.",
+    "summary": "Update a RUM SDK configuration",
+    "request_description": "The RUM SDK configuration update.",
+    "request_schema_description": "Request body for updating a RUM SDK configuration."
+  },
   "ListReplayHeatmapSnapshots": {
     "description": "List heatmap snapshots.",
     "summary": "List replay heatmap snapshots"
@@ -4344,20 +4486,6 @@
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
-  },
-  "ListHardcodedRetentionFilters": {
-    "description": "Get the list of hardcoded retention filters for a RUM application.",
-    "summary": "Get all hardcoded retention filters"
-  },
-  "GetHardcodedRetentionFilter": {
-    "description": "Get a single hardcoded retention filter for a RUM application.",
-    "summary": "Get a hardcoded retention filter"
-  },
-  "UpdateHardcodedRetentionFilter": {
-    "description": "Update the cross-product sample rates of a hardcoded retention filter for a RUM application.\nOnly fields whose matching flag in `cross_product_sampling_editability` is `true` can be updated.\nAny other field is read-only and cannot be sent in the payload.\nReturns the updated hardcoded retention filter when the request is successful.",
-    "summary": "Update a hardcoded retention filter",
-    "request_description": "New cross-product sample rates for the hardcoded retention filter.",
-    "request_schema_description": "The hardcoded retention filter body to update."
   },
   "OrderRetentionFilters": {
     "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
@@ -4735,6 +4863,10 @@
     "description": "Get the risk score for a specific entity by its ID. Returns security risk assessment including risk score, severity, detected signals, misconfigurations, and identity risks.",
     "summary": "Get Entity Risk Score"
   },
+  "GetAsmServiceByName": {
+    "description": "Retrieve Application Security details for services matching the given name.\nReturns Application Security activation, compatibility, and product enablement\ninformation for each matching `(service, environment)` pair, along with a count\nof services that have Application Security Management (Threats) enabled.",
+    "summary": "Get Application Security details for a service"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
@@ -4748,6 +4880,96 @@
     "summary": "Assign or unassign security findings",
     "request_description": "",
     "request_schema_description": "Request to assign or unassign security findings."
+  },
+  "ListSecurityFindingsAutomationDueDateRules": {
+    "description": "Get all due date rules for the current organization.",
+    "summary": "Get all due date rules"
+  },
+  "CreateSecurityFindingsAutomationDueDateRule": {
+    "description": "Create a new due date rule for the current organization.",
+    "summary": "Create a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule create request."
+  },
+  "ReorderSecurityFindingsAutomationDueDateRules": {
+    "description": "Reorder the list of due date rules for the current organization.",
+    "summary": "Reorder due date rules",
+    "request_description": "",
+    "request_schema_description": "The body of the due date rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationDueDateRule": {
+    "description": "Delete an existing due date rule by ID.",
+    "summary": "Delete a due date rule"
+  },
+  "GetSecurityFindingsAutomationDueDateRule": {
+    "description": "Get the details of a due date rule by ID.",
+    "summary": "Get a due date rule"
+  },
+  "UpdateSecurityFindingsAutomationDueDateRule": {
+    "description": "Update an existing due date rule by ID.",
+    "summary": "Update a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule update request."
+  },
+  "ListSecurityFindingsAutomationMuteRules": {
+    "description": "Get all mute rules for the current organization.",
+    "summary": "Get all mute rules"
+  },
+  "CreateSecurityFindingsAutomationMuteRule": {
+    "description": "Create a new mute rule for the current organization.",
+    "summary": "Create a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule create request."
+  },
+  "ReorderSecurityFindingsAutomationMuteRules": {
+    "description": "Reorder the list of mute rules for the current organization.",
+    "summary": "Reorder mute rules",
+    "request_description": "",
+    "request_schema_description": "The body of the mute rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationMuteRule": {
+    "description": "Delete an existing mute rule by ID.",
+    "summary": "Delete a mute rule"
+  },
+  "GetSecurityFindingsAutomationMuteRule": {
+    "description": "Get the details of a mute rule by ID.",
+    "summary": "Get a mute rule"
+  },
+  "UpdateSecurityFindingsAutomationMuteRule": {
+    "description": "Update an existing mute rule by ID.",
+    "summary": "Update a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule update request."
+  },
+  "ListSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Get all ticket creation rules for the current organization.",
+    "summary": "Get all ticket creation rules"
+  },
+  "CreateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Create a new ticket creation rule for the current organization.",
+    "summary": "Create a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule create request."
+  },
+  "ReorderSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Reorder the list of ticket creation rules for the current organization.",
+    "summary": "Reorder ticket creation rules",
+    "request_description": "",
+    "request_schema_description": "The body of the ticket creation rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Delete an existing ticket creation rule by ID.",
+    "summary": "Delete a ticket creation rule"
+  },
+  "GetSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Get the details of a ticket creation rule by ID.",
+    "summary": "Get a ticket creation rule"
+  },
+  "UpdateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Update an existing ticket creation rule by ID.",
+    "summary": "Update a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule update request."
   },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
@@ -4822,6 +5044,12 @@
   "GetIndicatorOfCompromise": {
     "description": "Get detailed information about a specific indicator of compromise (IoC).",
     "summary": "Get an indicator of compromise"
+  },
+  "CreateIoCTriageState": {
+    "description": "Set the triage state of an indicator of compromise (IoC). This creates or\nupdates the triage state for the indicator in your organization.",
+    "summary": "Create or update an indicator triage state",
+    "request_description": "The triage state to set for the indicator.",
+    "request_schema_description": "Request body for creating or updating an indicator triage state."
   },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
@@ -5165,6 +5393,10 @@
     "description": "Convert an existing rule from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert an existing rule from JSON to Terraform"
   },
+  "RestoreSecurityMonitoringRule": {
+    "description": "Restores a custom detection rule to a previously saved historical version.\nOnly custom rules can be restored. Default and partner rules return 400.\nThe restore creates a new version entry; it does not overwrite history.",
+    "summary": "Restore a rule to a historical version"
+  },
   "TestExistingSecurityMonitoringRule": {
     "description": "Test an existing rule.",
     "summary": "Test an existing rule",
@@ -5389,16 +5621,6 @@
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
   },
-  "ListIncidentServices": {
-    "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
-    "summary": "Get a list of all incident services"
-  },
-  "CreateIncidentService": {
-    "description": "Creates a new incident service.",
-    "summary": "Create a new incident service",
-    "request_description": "Incident Service Payload.",
-    "request_schema_description": "Create request with an incident service payload."
-  },
   "ListServiceDefinitions": {
     "description": "Get a list of all service definitions from the Datadog Service Catalog.",
     "summary": "Get all service definitions"
@@ -5416,20 +5638,6 @@
   "GetServiceDefinition": {
     "description": "Get a single service definition from the Datadog Service Catalog.",
     "summary": "Get a single service definition"
-  },
-  "DeleteIncidentService": {
-    "description": "Deletes an existing incident service.",
-    "summary": "Delete an existing incident service"
-  },
-  "GetIncidentService": {
-    "description": "Get details of an incident service. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident services.",
-    "summary": "Get details of an incident service"
-  },
-  "UpdateIncidentService": {
-    "description": "Updates an existing incident service. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing incident service",
-    "request_description": "Incident Service Payload.",
-    "request_schema_description": "Update request with an incident service payload."
   },
   "ListSecurityMonitoringHistsignals": {
     "description": "List hist signals.",
@@ -5820,6 +6028,16 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a degradation."
   },
+  "SoftDeleteDegradationUpdate": {
+    "description": "Soft-deletes a degradation update.",
+    "summary": "Soft delete degradation update"
+  },
+  "EditDegradationUpdate": {
+    "description": "Edits a specific degradation update.",
+    "summary": "Edit degradation update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a degradation update."
+  },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",
     "summary": "Schedule maintenance",
@@ -6016,6 +6234,34 @@
     "summary": "Patch a global variable",
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
+  },
+  "ListTagPolicies": {
+    "description": "Retrieve all tag policies for the organization. Optionally include disabled or deleted\npolicies, filter by telemetry source, and include each policy's current compliance score\nvia the `include=score` query parameter.",
+    "summary": "List tag policies"
+  },
+  "CreateTagPolicy": {
+    "description": "Create a new tag policy for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`policy_id`, `version`, and the timestamp/audit fields are assigned by the server.",
+    "summary": "Create a tag policy",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a new tag policy."
+  },
+  "DeleteTagPolicy": {
+    "description": "Delete a tag policy. By default the policy is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe policy permanently.",
+    "summary": "Delete a tag policy"
+  },
+  "GetTagPolicy": {
+    "description": "Retrieve a single tag policy by ID. Optionally include the policy's current compliance\nscore via the `include=score` query parameter. Policies belonging to other organizations\ncannot be retrieved.",
+    "summary": "Get a tag policy"
+  },
+  "UpdateTagPolicy": {
+    "description": "Update one or more attributes of an existing tag policy. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The policy's\n`source` cannot be changed after creation.",
+    "summary": "Update a tag policy",
+    "request_description": "",
+    "request_schema_description": "Payload for updating an existing tag policy. Only the supplied fields are modified."
+  },
+  "GetTagPolicyScore": {
+    "description": "Retrieve the compliance score for a single tag policy. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the policy. A `null` score indicates that\nno relevant telemetry was found.",
+    "summary": "Get a tag policy compliance score"
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
@@ -6265,7 +6511,7 @@
     "summary": "Get projected cost across your account"
   },
   "GetUsageSummaryAvailableFields": {
-    "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
   },
   "GetUsageAttributionTypes": {
@@ -6353,6 +6599,10 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListWorkflows": {
+    "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
+    "summary": "List workflows"
   },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

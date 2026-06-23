@@ -603,7 +603,7 @@ DogStatsD y StatsD son en general similares, sin embargo, DogStatsD contiene car
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Enviar métricas a Datadog con DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Enviar eventos a Datadog con DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Enviar eventos a Datadog con DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Enviar checks de servicio a Datadog con DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -618,7 +618,7 @@ Si te interesa aprender más sobre el formato de datagram utilizado por DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /es/metrics/custom_metrics/
-[6]: /es/service_management/events/guides/dogstatsd/
+[6]: /es/events/guides/dogstatsd/
 [7]: /es/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /es/getting_started/tagging/unified_service_tagging
 [9]: /es/developers/dogstatsd/datagram_shell/

@@ -483,7 +483,7 @@ Veillez à mettre à jour toutes les références au numéro de version dans la 
 
 [1]: https://docs.datadoghq.com/fr/agent/
 [2]: https://docs.datadoghq.com/fr/metrics/
-[3]: https://docs.datadoghq.com/fr/service_management/events/
+[3]: https://docs.datadoghq.com/fr/events/
 [4]: /fr/developers/service_checks/
 [5]: https://docs.datadoghq.com/fr/logs/log_collection/agent_checks/
 [6]: https://docs.datadoghq.com/fr/agent/guide/integration-management/?tab=linux#install
