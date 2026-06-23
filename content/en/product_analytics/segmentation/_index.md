@@ -17,7 +17,7 @@ After creating a segment, you can reuse it across charts and dashboards to compa
 
 ## Build a segment
 To create a segment:
-1. Navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and click **Create Segment**.
+1. Navigate to [{{< ui >}}Digital Experience Monitoring{{< /ui >}} > {{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Segments{{< /ui >}}][1] and click {{< ui >}}Create Segment{{< /ui >}}.
    
 1. Then, select a data source:
    - [Product Analytics data](#segment-pana): Define users based on their activity in your product.
@@ -29,15 +29,15 @@ To create a segment:
 
 To create a segment using Product Analytics data:
 
-1. Select **Product Analytics** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+1. Select {{< ui >}}Product Analytics{{< /ui >}} on the [{{< ui >}}Create a new segment{{< /ui >}}](https://app.datadoghq.com/product-analytics/segments/create) page.
 
-2. Select a **condition** for the users in the segment:
-      - **performed event(s)**
-      - **have attribute(s)**
+2. Select a {{< ui >}}condition{{< /ui >}} for the users in the segment:
+      - {{< ui >}}performed event(s){{< /ui >}}
+      - {{< ui >}}have attribute(s){{< /ui >}}
 
 <div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
-3. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
+3. Add {{< ui >}}filters{{< /ui >}} to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
    In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
@@ -45,10 +45,10 @@ To create a segment using Product Analytics data:
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
-<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button:
+<p class="text-black">With the filtering and segmentation capabilities on the {{< ui >}}Users & Segments{{< /ui >}} page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the {{< ui >}}Create Segment{{< /ui >}} button:
 {{< img src="product_analytics/segmentation/segment_create_button_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 
-Or, directly click <strong>Create Segment</strong> to select your data source:
+Or, directly click {{< ui >}}Create Segment{{< /ui >}} to select your data source:
 
 {{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
@@ -70,9 +70,9 @@ If you already have a list of users, for example, from a survey, experiment, or 
 
 To create a segment using an uploaded list of users from your own file:
 
-1. Select **CSV File** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+1. Select {{< ui >}}CSV File{{< /ui >}} on the [{{< ui >}}Create a new segment{{< /ui >}}](https://app.datadoghq.com/product-analytics/segments/create) page.
 
-2. Click **Browse files** to upload your CSV file.
+2. Click {{< ui >}}Browse files{{< /ui >}} to upload your CSV file.
 
 The file needs a column containing either user IDs or user emails so the data can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
 
