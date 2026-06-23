@@ -59,6 +59,8 @@ def find_integration(integrations_repos, integration_name):
         branch = cfg['branch']
         is_github = cfg['github']
         location = os.path.join('..', repo)
+        if not os.path.isdir(location):
+            continue
         dirs = [f.name for f in os.scandir(location) if f.is_dir()]
         dirs = filter_out_dots(dirs)
         for dir_name in dirs:
@@ -78,7 +80,7 @@ def find_integration(integrations_repos, integration_name):
                 url = f'https://github.com/DataDog/{repo}/blob/{branch}/{dir_name}/README.md'
                 found.append(f'{readme_path}\n- {url}')
             else:
-                found.append(f'{readme_path}\n- {app_id} is published through the publishing platform')
+                found.append(f'{readme_path}\n- {integration_name} is published through the publishing platform')
             break  # short-circuit within this repo; continue to other repos
     if len(found) == 0:
         print(f'\nIntegration "{integration_name}" not found. Check the spelling and try again.')
@@ -93,5 +95,5 @@ parser = argparse.ArgumentParser(description="Find an integration")
 parser.add_argument('integration', help="The app-id of the integration to search for (for example, rapdev-box)", type=str)
 args = parser.parse_args()
 
-integrations = update_repos(integrations_repos)
+update_repos(integrations_repos)
 find_integration(integrations_repos, args.integration)
