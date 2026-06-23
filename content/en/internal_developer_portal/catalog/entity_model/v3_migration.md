@@ -11,11 +11,14 @@ further_reading:
 - link: "/internal_developer_portal/catalog/entity_model/custom_entities"
   tag: "Documentation"
   text: "Create custom entity types"
+- link: "https://github.com/DataDog/pup/blob/main/src/commands/idp/migrate.rs"
+  tag: "Source code"
+  text: "pup idp migrate-schema source"
 ---
 
 ## Overview
 
-The `pup idp migrate-schema` command converts existing Service YAML files in the Datadog Internal Developer Portal (IDP) Catalog from v1, v2, v2.1, or v2.2 to the [v3 entity format][1]. It handles field remapping, link type normalization, companion entity generation, and output validation against the official v3 JSON schemas before writing to disk.
+Use the [`pup idp migrate-schema`][1] command to migrate your existing service YAML files from v1, v2, v2.1, or v2.2 to the [v3 entity format][2]. The command handles field remapping, link type normalization, companion entity generation, and output validation against the official v3 JSON schemas before writing to disk.
 
 <div class="alert alert-info">
 <code>pup idp migrate-schema</code> does not require Datadog authentication. You do not need to run <code>pup auth login</code> first.
@@ -23,7 +26,7 @@ The `pup idp migrate-schema` command converts existing Service YAML files in the
 
 ## Prerequisites
 
-Install `pup`:
+Install [`pup`][3]:
 
 ```shell
 brew tap datadog-labs/pack
@@ -32,7 +35,7 @@ brew install pup
 
 **Note**: If `pup` is already installed, run `brew upgrade pup` to use the latest version.
 
-## What gets migrated
+## Migrated fields
 
 The following fields are remapped from v1, v2, v2.1, or v2.2 to their v3 destinations:
 
@@ -80,7 +83,7 @@ Where would you like to write the output?
 
 - **Option 1** writes the migrated content to `entity.datadog.yaml` in the same directory and deletes the original file.
 - **Option 2** prompts for a path and writes there.
-- **Option 3** prints the migrated YAML to stdout — useful for reviewing or piping.
+- **Option 3** prints the migrated YAML to stdout, useful for reviewing or piping without writing.
 
 If the migrated output fails validation, you are prompted to abort or write anyway:
 
@@ -124,18 +127,9 @@ cd ~/my-repo
 pup idp migrate-schema
 ```
 
-## Preview migrated YAML without writing
-
-To preview the migration output without touching any files, use option `3` at the prompt or pipe through stdout:
-
-```shell
-pup idp migrate-schema service.datadog.yaml
-# choose option 3 at the prompt
-```
-
 ## Companion system entities
 
-If your v1 or v2 definitions include an `application:` field, the command generates a companion `kind: system` entity and appends to the output file. Duplicate system names across a multi-document file are deduplicated into a single entity.
+If your v1 or v2 definitions include an `application:` field, the command generates a companion `kind: system` entity and appends the companion entity to the output file. Duplicate system names across a multi-document file are deduplicated into a single entity.
 
 **Input (v2):**
 
@@ -180,4 +174,12 @@ After migration, the tool fetches the official v3 JSON schemas from the public `
     [spec/lifecycle] "depreciated" is not one of ["experimental","active","deprecated","end-of-life"]
 ```
 
-Validation failures are warnings — they do not block you from writing the output, but should be resolved before merging the definition to the repo.
+Validation failures are warnings — they do not block you from writing the output, but should be resolved before merging the definition into your repository.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/pup/blob/main/src/commands/idp/migrate.rs
+[2]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#version-details
+[3]: https://github.com/DataDog/pup/blob/main/README.md

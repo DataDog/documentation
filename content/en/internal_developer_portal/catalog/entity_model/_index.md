@@ -310,6 +310,8 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit a
 ### Migrating to v3.0
 v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
 
+To migrate existing service YAML files from v1, v2, v2.1, or v2.2 to v3, see [Migrate Your Service Definitions to v3][7].
+
 ### API reference documentation
 To create, get, and delete definitions for all entity types like endpoints, systems, datastores, and queues, see the [Catalog API reference][8].
 
@@ -319,6 +321,7 @@ To create, get, and delete definitions for all entity types like endpoints, syst
 [4]: https://en.wikipedia.org/wiki/Glob_(programming)
 [5]: /api/latest/software-catalog/
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
+[7]: /internal_developer_portal/catalog/entity_model/v3_migration
 [8]: /api/latest/software-catalog/
 
 {{% /tab %}}
