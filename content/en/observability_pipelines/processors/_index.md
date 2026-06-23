@@ -73,7 +73,7 @@ These are the available processors:
 {{% tab "Metrics" %}}
 
 - [Filter][1]
-- [Tag Control][2]
+- [Tag Allow and Block List][2]
 
 [1]: /observability_pipelines/processors/filter/
 [2]: /observability_pipelines/processors/tag_allow_block_list/
