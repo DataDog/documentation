@@ -19,7 +19,7 @@ The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prev
 
 ## Setting permissions using ACLs
 
-To allow read-only access for the `dd-agent` user, create [access control lists (ACLs)][1] and modify logrotate to persist the permission changes, as described in the following sections.
+To allow read-only access for the `dd-agent` user, create [access control lists (ACLs)][1] and modify logrotate to persist the permission changes.
 
 ### Verifying ACLs are enabled on your system
 
@@ -50,13 +50,13 @@ To make new log files inherit this access automatically, set a default ACL on th
 setfacl -R -d -m u:dd-agent:rx /var/log/apache
 ```
 
-A default ACL applies to files created in the directory afterward, including those that log rotation creates. This reduces the need for the logrotate rule described in the next section. Files that already exist when you set the default ACL are unaffected, so run both commands above.
+A default ACL applies to files created in the directory afterward, including those that log rotation creates. This reduces the need for a separate logrotate rule. Files that already exist when you set the default ACL are unaffected, so run both commands above.
 
 [Learn more about how to configure ACLs on Linux][3]
 
 ### Setting permissions for log file rotation
 
-If you set a default ACL with the `-d` flag in the previous section, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. However, a default ACL does not cover every rotation scheme. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
+If you set a default ACL with the `-d` flag, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. However, a default ACL does not cover every rotation scheme. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
 
 When a default ACL does not apply to your setup, add a rule to logrotate to reset the ACL after each rotation. Avoid defining a rule for log files that another logrotate configuration already manages, because logrotate reports an `error: duplicate log entry for <FILE>` message when two configurations match the same file. Instead, add a `postrotate` script to the service's existing configuration, or create a separate file for paths that are not already managed:
 
