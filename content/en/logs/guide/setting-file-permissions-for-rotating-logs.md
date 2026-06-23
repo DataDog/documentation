@@ -23,7 +23,7 @@ To allow read-only access for the `dd-agent` user, create [access control lists 
 
 ### Verifying ACLs are enabled on your system
 
-[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `dd-agent` user on a test directory, for example:
+[ACLs need to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `dd-agent` user on a test directory, for example:
 
 ```shell
 mkdir /var/log/test-dir
@@ -44,7 +44,7 @@ After you verify ACLs are enabled, grant read and execute permissions for the `d
 setfacl -R -m u:dd-agent:rx /var/log/apache
 ```
 
-To make new log files inherit this access automatically, set a *default* ACL on the directory with the `-d` flag:
+To make new log files inherit this access automatically, set a default ACL on the directory with the `-d` flag:
 
 ```shell
 setfacl -R -d -m u:dd-agent:rx /var/log/apache
