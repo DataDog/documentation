@@ -108,7 +108,7 @@ Pipeline events sent with the `status` set to `running` have the same `unique_id
 Job events can also be sent while a job is still running by setting the `status` to `running`. As with running pipelines, all events for the same job share the same `id` and `pipeline_unique_id`. A running job consists of the following events:
 
 1. The initial running job event with the `status` set to `running`.
-2. The final job event with a terminal status (such as `success` or `error`) and the same `id`.
+2. The final job event with a terminal status (such as `success` or `error`) and the same `id` and `pipeline_unique_id`.
 
 A running job event does not require an `end` time. The `end` time is set when the final job event is sent.
 
