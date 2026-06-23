@@ -1,0 +1,35 @@
+{{- /*
+  Pre-redesign homepage product grid (`nav_sections` from data/partials/home.yaml).
+  Kept alive only to serve the `legacy` arm of the homepage A/B test. Delete this
+  partial and the matching wrapper in layouts/index.html once the experiment ends.
+*/ -}}
+{{- $datafile := site.Data.partials.home -}}
+<div class="container">
+{{ range $i, $nav_section := $datafile.nav_sections }}
+    <section class="row nav-tiles mb-2">
+        {{ range $i, $tile := $nav_section }}
+            {{ $.Scratch.Set "sectionName" "" }}
+            {{ range $i, $section := $tile }}
+                {{ if $section.name }}
+                    {{ $.Scratch.Set "sectionName" $section.name }}
+                    <div class="col-12">
+                        <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                    </div>
+                {{ end }}
+                {{ range $i, $navtile := $section.navtiles }}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+                        <a class="d-flex flex-column align-items-center w-100 small font-semibold"
+                           href="{{ $navtile.link | absLangURL }}"
+                           data-track-section="{{ $.Scratch.Get "sectionName" }}"
+                           data-track-tile-title="{{ $navtile.title }}">
+                            {{ partial "icon" (dict "name" $navtile.icon "size" "18px" "color" "transparent") }}
+                            {{ $navtile.title }}
+                            <span class="font-regular text-center smaller">{{ $navtile.desc }}</span>
+                        </a>
+                    </div>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    </section>
+{{ end }}
+</div>

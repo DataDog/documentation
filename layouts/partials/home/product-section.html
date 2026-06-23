@@ -38,7 +38,7 @@
                     {{- range $product.columns }}
                     <div class="product-section__column">
                         {{- range .subheaders }}
-                        {{ partial "home/product-subheader" . }}
+                        {{ partial "home/product-subheader" (dict "subheader" . "section_title" $product.title) }}
                         {{- end }}
                     </div>
                     {{- end }}

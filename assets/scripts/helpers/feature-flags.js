@@ -48,3 +48,6 @@ export const initializeFeatureFlags = () => {
 
 export const getBooleanFlag = (client, key, defaultValue = false) =>
     client?.getBooleanValue(key, defaultValue) ?? defaultValue;
+
+export const getStringFlag = (client, key, defaultValue = '') =>
+    client?.getStringValue(key, defaultValue) ?? defaultValue;
