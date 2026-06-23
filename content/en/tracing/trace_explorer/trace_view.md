@@ -117,6 +117,16 @@ To view additional information about the service entry spans for each node, hove
 {{% /tab %}}
 {{< /tabs >}}
 
+### Focus on a span
+In the waterfall and flame graph visualizations, you can focus on a span to narrow the view to that span and its children. This is useful for large traces, where focusing lets you isolate and investigate a specific group of operations without the rest of the trace adding noise.
+
+In the flame graph, select a span, then click the focus icon next to the minimap. In the waterfall, hover over a span and click the focus icon on its right side. The visualization rescales with the selected span as the new root, and its descendants fill the timeline. To return to the full trace, reset the focus.
+
+{{< img src="/tracing/trace_view/flamegraph-focus-on-span.mp4" alt="Flamegraph focus on span" video="true" style="width:90%;">}}
+{{< img src="tracing/trace_view/waterfall-focus-on-spans.mp4" alt="Waterfall focus on span" video="true" style="width:90%;">}}
+
+<div class="alert alert-info">Focusing only changes what is displayed. It does not filter spans out of search results or alter the underlying trace.</div>
+
 ### Trace preview
 When a trace size exceeds 100MB, it cannot be fully visualized using the default trace side panel. In such cases, Trace Preview mode is enabled. This mode returns only the most critical spans to help you continue your investigation. These include:
 
@@ -158,7 +168,9 @@ Example: `service:web-ui`
 
 ## More information
 
-The height-adjustable bottom of the Trace View shows selected span and trace information. 
+The height-adjustable bottom of the Trace View shows selected span and trace information.
+
+<div class="alert alert-tip">On traces that contain errors, click <strong>Investigate With Bits AI</strong> in the trace detail panel to launch an automated investigation. Bits AI walks the span tree to identify where the request failed and correlates findings with associated logs. For more information, see <a href="/bits_ai/bits_chat/#trace-analysis">Trace analysis</a>.</div>
 
 The span header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
 

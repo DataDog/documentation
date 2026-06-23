@@ -8,7 +8,17 @@ further_reading:
 - link: "/agent/troubleshooting/send_a_flare/"
   tag: "Documentation"
   text: "Send a flare"
+- link: "/containers/kubernetes/installation/"
+  tag: "Documentation"
+  text: "Install the Datadog Agent on Kubernetes"
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).<br><br>
+Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents and Upgrading SDKs are not supported for your selected Datadog site ({{< region-param key=dd_site_name >}}).
+</div>
+{{< /site-region >}}
 
 Use [Fleet View][1] to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues.
 
@@ -24,13 +34,14 @@ For each OTel Collector, you can see:
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
-- Pipeline visualization of the Collector
+- Pipeline and topology views of the Collector
 
 ## Prerequisites
 
 - Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- To enable the upstream OTel Collector configuration view, set the [Datadog Extension][4] in your collector configuration file.
 - Agent integration configuration is enabled by default in Agent version 7.49.0 or later. To enable it manually on older versions, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
+
+<div class="alert alert-info">Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> to display OpenTelemetry Collector configuration, pipelines, and topology. Configure the extension before using the OTel Collector features described on this page.</div>
 
 ## Examine a Datadog Agent or OpenTelemetry Collector
 
@@ -38,14 +49,44 @@ Select a Datadog Agent or OTel Collector to view its configuration, connected in
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
 
-## Visualize an OTel Collector pipeline
+## Search and filter
 
-The {{< ui >}}Pipeline Visualization{{< /ui >}} toggle in the {{< ui >}}Configurations{{< /ui >}} tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
-- Validate telemetry routing between configured OTel Collector components.
-- Spot unexpected data drops along the OTel Collector pipeline.
-- Inspect specific component configuration YAML snippets by hovering over any component.
+Use the search bar at the top of Fleet View to find specific Agents, OTel Collectors, or clusters across your fleet. You can:
 
-{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline visualization showing telemetry routing between OTel Collector components." style="width:100%;" >}}
+- Perform free-text search by hostname or cluster name
+- Filter by host and Agent tags, such as operating system, environment (`env`), team, and enabled products (`products_enabled`)
+
+## Visualize OTel pipelines
+
+The {{< ui >}}Configuration{{< /ui >}} tab for an OTel Collector includes {{< ui >}}Pipeline{{< /ui >}} and {{< ui >}}Topology{{< /ui >}} views. These views provide end-to-end visibility into how telemetry flows through your OTel pipelines.
+
+To access these views:
+
+1. Navigate to [**Fleet Automation**][1].
+1. Filter for OTel Collectors.
+1. Select a Collector to open the detail panel.
+1. Click the {{< ui >}}Configuration{{< /ui >}} tab.
+1. Select {{< ui >}}Pipeline{{< /ui >}} or {{< ui >}}Topology{{< /ui >}} from the {{< ui >}}View as{{< /ui >}} options.
+
+### Pipeline view
+
+The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
+
+- Validate telemetry routing between configured receivers, processors, and exporters.
+- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
+- Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
+
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
+
+### Topology view
+
+The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
+
+- Validate telemetry routing across Collectors in a DaemonSet-to-gateway architecture.
+- Spot data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle to overlay data flow rates on each edge.
+- Investigate pipeline issues by examining active monitor alerts surfaced on Collector nodes.
+
+{{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Topology view showing DaemonSet Collectors forwarding through gateway Collectors to Datadog." style="width:100%;" >}}
 
 ## View Agent Audit Trail events
 
@@ -64,6 +105,53 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 
 {{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The support tab for an Agent with the Send Flare button." style="width:100%;" >}}
 
+## Kubernetes view
+
+The Kubernetes view lets you see Datadog Agents and OTel Collectors running in Kubernetes environments. It provides a unified view of your fleet across both host-based and containerized infrastructure.
+
+By default, Fleet View lists infrastructure as individual hosts. Use the {{< ui >}}View by infra type{{< /ui >}} toggle to switch to the [Kubernetes view][4], which shows Agents by Kubernetes cluster instead.
+
+Each row is a cluster managed by the [Datadog Operator][5] or Helm chart. The cluster's Node Agents, Cluster Agent, and Cluster Check Runners appear grouped together rather than as individual hosts.
+
+### Prerequisites for Kubernetes view
+
+Most Kubernetes view features are available without version requirements. Specific capabilities require:
+
+| Capability | Requirement |
+|---|---|
+| View `DatadogAgent` configuration | Datadog Operator v1.24 or later |
+| View Helm Chart values | Datadog Helm Chart v3.157.0 or later |
+| Edit configuration | [Remote Configuration][6] enabled and Datadog Operator v1.27 or later |
+| View integrations on a Cluster Agent | Agent v7.72.0 or later |
+| View integration status on a Cluster Agent | Agent v7.79.0 or later |
+
+To edit configuration from Fleet View, also set the following flags in your [Operator configuration][7]: `remoteConfigEnabled`, `remoteUpdatesEnabled`, and `createControllerRevisions`. Editing Helm Chart values from Fleet View is not supported.
+
+### View Kubernetes clusters
+
+Clusters are listed alphabetically by cluster name. The table lists each cluster's name, deployment method (Datadog Operator or Helm), namespace, Agent version, Agent pod status, readiness, age, and number of restarts.
+
+To find a specific cluster, you can [search](#search-and-filter) by cluster name.
+
+Click a cluster to view:
+
+- Cluster details, such as environment and tags
+- Cluster-level Agents (Cluster Agent and Cluster Check Runners)
+- Node Agents
+
+On the {{< ui >}}Configuration{{< /ui >}} tab, you can view configuration:
+
+- **Datadog Operator v1.24 or later**: View the `DatadogAgent` custom resource configuration. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab.
+- **Datadog Helm Chart v3.157.0 or later**: View the Helm Chart values (`values.yaml`).
+
+### Limitations
+
+Compared to the default view, the Kubernetes view has the following limitations:
+
+- You cannot send remote support flares.
+- You can see which OTel Collectors are running, but you cannot view their configuration in the Kubernetes view.
+- Fleet Automation API access is not available.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -71,4 +159,7 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [3]: /agent/configuration/agent-configuration-files/
-[4]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
+[4]: https://app.datadoghq.com/fleet?view_by=clusters
+[5]: /containers/datadog_operator
+[6]: /agent/guide/setup_remote_config
+[7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

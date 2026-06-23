@@ -32,7 +32,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3].
+If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3]. Then, follow the steps in the [Error Tracking documentation to enable Kotlin Crash Reporting and Error Tracking][4].
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
@@ -65,15 +65,15 @@ NdkCrashReports.enable()
 
 #### Add ANR reporting
 
-An "Application Not Responding" ([ANR][4]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+An "Application Not Responding" ([ANR][5]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK.
 
-ANRs are only reported through RUM (not through logs). For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][5].
+ANRs are only reported through RUM (not through logs). For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][6].
 
 ### iOS
 
-**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. See other dependencies in the [setup][10] instructions.
+**Note**: Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled. See other dependencies in the [setup][11] instructions.
 
 All uncaught exceptions resulting in a crash are reported by the Kotlin Multiplatform SDK.
 
@@ -83,13 +83,13 @@ App hangs are an iOS-specific type of error that happens when the application is
 
 By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method.
 
-App hangs are only reported through RUM (not through logs). For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
+App hangs are only reported through RUM (not through logs). For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][7].
 
 ## Get deobfuscated stack traces
 
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][7], [iOS][8].
+Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][8], [iOS][9].
 
 ## Limitations
 
@@ -102,7 +102,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
-- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][10] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 
 ## Test your implementation
@@ -129,10 +129,11 @@ To test your implementation:
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
-[4]: https://developer.android.com/topic/performance/vitals/anr
-[5]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
-[6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
-[8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
-[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
-[10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
+[4]: /error_tracking/frontend/mobile/kotlin-multiplatform
+[5]: https://developer.android.com/topic/performance/vitals/anr
+[6]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
+[7]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[8]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
+[9]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
+[10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
+[11]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
