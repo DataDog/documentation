@@ -20,6 +20,8 @@ further_reading:
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Individual teams are less incentivized to be proactive in helping manage this growth because they have limited insights into the costs of the metrics and tags they're submitting.
 
+<div class="alert alert-info">For customers on the <a href="https://docs.datadoghq.com/account_management/billing/metric_name_pricing/">Metric Name Pricing model</a>, see the <a href="https://docs.datadoghq.com/metrics/guide/metric_name_pricing_experience/">guide</a> to optimize your metric usage.</div>
+
 Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][3], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
 With the Metrics Volume Management page you can access the following in real-time: 
