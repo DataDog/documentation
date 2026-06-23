@@ -643,6 +643,36 @@ An example task definition:
 
 Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
 
+## Upgrade the Worker
+
+To upgrade the Worker, update the `image` field in your container definition to the new version, replacing `<WORKER_VERSION>` with the version you want to use (such as `2.17.0`):
+
+```json
+"image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
+```
+
+After updating the task definition, restart the ECS tasks to use the updated image.
+
+**Note**: If your container definition uses the `latest` tag instead of a pinned version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
+
+{% /if %}
+
+<!-- Docker -->
+{% if equals($platform, "docker") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker, update the image version in your `docker run` command or `docker-compose.yml` file to `datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use (such as `2.17.0`). Then restart the container.
+
+{% /if %}
+
+<!-- CloudFormation -->
+{% if equals($platform, "cloudformation") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker, update the Worker image version in your CloudFormation stack and redeploy it.
+
 {% /if %}
 
 <!-- UI, API, Terraform - Kubernetes -->
