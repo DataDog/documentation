@@ -1,11 +1,16 @@
 ---
-title: Tag Control Processor
+title: Tag Allow and Block List
 description: Learn how to use the Tag Control processor for metrics.
 disable_toc: false
-code_lang: metrics
-type: multi-code-lang
-weight: 2
+aliases:
+  - /observability_pipelines/processors/tag_control/metrics
+products:
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
