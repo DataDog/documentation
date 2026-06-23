@@ -233,7 +233,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
        enabled: true
    ```
 
-2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][kubernetes-annotations].
+2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
 
    ```yaml
    apiVersion: v1
@@ -279,7 +279,8 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
    ```
     If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
-[kubernetes-annotations]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -330,7 +331,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][agent-config-template], or use the following:
+    For full configuration details, reference the [example config][3], or use the following:
 
     ```yaml
     network_path:
@@ -372,6 +373,8 @@ Agent `v7.73+` is required.
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -395,7 +398,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][agent-config-template], or use the following:
+    For full configuration details, reference the [example config][3], or use the following:
 
     ```yaml
     network_path:
@@ -437,13 +440,15 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
+[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][helm-chart] and the documentation for [Kubernetes and Integrations][kubernetes-helm].
+**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
 datadog:
@@ -491,8 +496,8 @@ datadog:
     #     type: include
 
 ```
-[helm-chart]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
-[kubernetes-helm]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 
 
 {{% /tab %}}
@@ -697,4 +702,4 @@ If you encounter an error like the following:
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 [6]: /network_monitoring/netflow/
-[agent-config-template]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[15]: /synthetics/network_path_tests/
