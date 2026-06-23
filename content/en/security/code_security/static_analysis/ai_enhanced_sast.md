@@ -155,7 +155,7 @@ In the SAST rule side panel, expand the false positive reports accordion to revi
 
 For supported SAST rules, Bits AI uses an agentic approach to gather repository context before classifying findings. Bits AI can read related files and search for symbols and patterns. It can also inspect nearby directory structure to verify definitions, call paths, sanitizers, and framework wiring that are not visible in a single file.
 
-This extra context helps Bits AI distinguish true positives from false positives for findings that depend on cross-file behavior. Agentic false positive filtering applies to SAST findings only.
+This extra context helps Bits AI distinguish true positives from false positives for findings that depend on cross-file behavior. Agentic false positive filtering applies only to SAST findings.
 
 ## Remediation
 
