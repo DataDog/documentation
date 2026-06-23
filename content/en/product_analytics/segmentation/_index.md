@@ -17,7 +17,7 @@ After creating a segment, you can reuse it across charts and dashboards to compa
 
 ## Build a segment
 To create a segment:
-1. Navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and click **Create Segment**.
+1. Navigate to **[Digital Experience Monitoring > Product Analytics > Users > Segments][1]** and click **Create Segment**.
    
 1. Under **Define your audience**, select the type of profiles to include in the segment:
    - **Users**: Create a segment of individual users.
@@ -35,7 +35,7 @@ To create a segment using Product Analytics data:
 
 2. Select a **condition** for the users in the segment:
       - **performed event(s)**
-      - **have attribute(s)**
+      - **have attribute(s)** — includes any custom attributes you've imported. To import custom attributes, see [User and Account Profiles][4].
 
 <div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
@@ -100,7 +100,7 @@ To create an account segment:
 
 Add one or both conditions:
 - **Performed events**: Matches accounts where at least one user performed the specified event.
-- **Have attributes**: Filter by account properties such as ARR, start date, account IDs, or any imported account attributes.
+- **Have attributes**: Filter by account properties such as ARR, start date, account IDs, or any imported account attributes. To import custom attributes, see [User and Account Profiles][4].
 
 **Importing with CSV**
 
@@ -121,6 +121,21 @@ Filter the Analytics Explorer visualization to see how a segment uses your produ
 
 {{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
+### In Funnels
+
+Filter a funnel to a specific segment, or compare multiple segments side by side to see how conversion rates differ between groups.
+
+- To filter a funnel by segment, select **Filter by** and choose your segment.
+- To compare segments, select **Compare**, then choose **By property or segment** and select the segments you want to compare.
+
+{{< img src="product_analytics/segmentation/filter_by_segment.png" alt="A funnel analysis filtered by a user segment." style="width:100%;">}}
+
+### In Retention
+
+Apply a segment to a retention analysis to measure how well a specific group of users returns to your product over time. When building a retention graph, select a segment under **Define users** to scope the analysis to that group. You can also use the `group by` function to break down retention across event attributes, such as device type or country.
+
+{{< img src="product_analytics/segmentation/retention_analysis_segments.png" alt="A retention analysis scoped to a user segment." style="width:100%;">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -128,3 +143,4 @@ Filter the Analytics Explorer visualization to see how a segment uses your produ
 [1]: https://app.datadoghq.com/product-analytics/segments
 [2]: /integrations/guide/reference-tables/?tab=manualupload#validation-rules
 [3]: https://app.datadoghq.com/product-analytics/profiles
+[4]: /product_analytics/profiles
