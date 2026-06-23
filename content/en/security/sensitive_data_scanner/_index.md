@@ -78,7 +78,7 @@ The action you can apply to matched sensitive data depends on the data source. T
 | Hash             | Yes  | Yes | Yes | Yes    | Yes                 |
 | Mask             | Yes  | No  | No  | No     | No                  |
 
-Cloud storage and code repository (Secret Scanning) scanning is detection only. Obfuscation actions are not available for these data sources.
+<div class="alert alert-info">For cloud storage and code repositories (Secret Scanning), Sensitive Data Scanner can detect sensitive data but cannot apply obfuscation actions to it.</div>
 
 ### Telemetry data
 
