@@ -31,6 +31,11 @@ Developers and DevOps engineers implementing observability solutions. They're te
 - Are `further_reading` links relevant and non-duplicative?
 - Are reference links free of duplicates or unused entries?
 - Does the title match how it's linked from other pages?
+- If the file is new and public (no `private: true`), has the page been added to the menu file (`config/_default/menus/main.en.yaml`) so it shows up in the side-nav?
+
+## Areas to avoid
+
+Avoid feedback on product decisions that are outside the scope of a documentation change — for example, whether a feature, field, or UI element is named appropriately, whether a feature should work differently, or whether a capability should exist at all. Focus on whether the documentation accurately and clearly describes what the product does.
 
 ## Style Guide (Vale Rules)
 
@@ -63,6 +68,7 @@ Other style rules:
 - Avoid temporal words that age poorly: currently, now, will, won't
 - Use imperative voice for instructions ("Run the command" not "You should run the command")
 - Be direct and concise—developers want facts, not fluff
+- Use numbered reference-style markdown links and place the link definition at the bottom of the page. For encapsulating Hugo shortcodes like `site-region` or `tab`, the link definition goes just before the closing tag.
 
 For complete style guidance, see [CONTRIBUTING.md](../CONTRIBUTING.md) in the repository.
 All vale rules can be found in the [datadog-vale](https://github.com/DataDog/datadog-vale) repository.
@@ -71,6 +77,7 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 
 **Use inline comments for all feedback:**
 - For each specific issue, suggestion, or style violation, create an inline comment on the exact line using the `mcp__github_inline_comment__create_inline_comment` tool
+- Always include the file path and line number in your comment (e.g., `path/to/file.md:42`) so the location is easy to spot
 - Include the issue type in your comment: "**Issue**:", "**Suggestion**:", or "**Style**:"
 - **When you have a specific fix to propose, use GitHub's suggestion format so the author can apply it with one click:**
   ```suggestion

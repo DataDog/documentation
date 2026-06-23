@@ -5,7 +5,7 @@ algolia:
   tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits ai assistant", "bits assistant", "mcp"]
   rank: 75
 further_reading:
-- link: "/bits_ai/bits_assistant/"
+- link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
 - link: "/mcp_server/"
@@ -18,10 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Budgets"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Cloud Cost skill is in Preview" >}}
-The Cloud Cost skill runs in Bits Chat. Fill out the Bits Chat Preview form to request access.
-{{< /callout >}}
 
 ## Overview
 
@@ -99,9 +95,24 @@ After the initial summary, Bits Chat can:
 
 The [Datadog MCP Server][10] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
 
-To use an external AI agent, [set up the Datadog MCP Server][11]. If your MCP client filters toolsets, include the `core` toolset to use the metric tools that can query Cloud Cost Management data.
+To use an external AI agent, [set up the Datadog MCP Server][11]. If your MCP client filters toolsets, you must enable the relevant toolset before the agent can call its tools:
 
-Cloud Cost Management data is available through the core metric tools:
+- Enable the `cost` toolset to list cost-saving recommendations with [`cost_recommendations`][16].
+- Enable the `core` toolset to query Cloud Cost Management metrics with the metric tools.
+
+### List cost-saving recommendations
+
+The `cost` toolset provides the [`cost_recommendations`][16] tool, which lists your organization's cost-saving recommendations ranked by estimated potential daily savings (highest first). It supports filtering by cloud provider, recommendation type, status, savings threshold, and resource tags. This tool requires the `Cloud Cost Management Read` permission.
+
+Example prompts for the `cost` toolset:
+
+- `What are my top cloud cost-saving recommendations?`
+- `How much could I save per day, and how many open recommendations do I have?`
+- `Show me open AWS recommendations for my Kubernetes clusters.`
+
+### Query Cloud Cost Management metrics
+
+The `core` toolset provides the metric tools that can query Cloud Cost Management data:
 
 | MCP tool                          | Usage                                 |
 | --------------------------------- | ------------------------------------- |
@@ -110,7 +121,7 @@ Cloud Cost Management data is available through the core metric tools:
 
 Ask your agent to set `use_cloud_cost` to `true` for Cloud Cost Management metrics, such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
 
-Example prompts for MCP-connected agents:
+Example prompts for the `core` toolset:
 
 - `Use Datadog MCP to query cloud cost data. Set use_cloud_cost=true and show daily all.cost grouped by provider for the last 30 complete days.`
 - `Use get_datadog_metric_context with use_cloud_cost=true to find available tags for aws.cost.net.amortized.shared.resources.allocated, then group EC2 costs by team.`
@@ -122,7 +133,7 @@ For connection instructions, supported clients, and toolset configuration, see [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_assistant/
+[1]: /bits_ai/bits_chat/
 [2]: https://app.datadoghq.com/cost/monitor/monitors
 [3]: https://app.datadoghq.com/cost/monitor/anomalies
 [4]: https://app.datadoghq.com/cost/summarize/overview
@@ -137,3 +148,4 @@ For connection instructions, supported clients, and toolset configuration, see [
 [13]: /mcp_server/tools/#get_datadog_metric_context
 [14]: /mcp_server/tools/
 [15]: /notebooks/
+[16]: /mcp_server/tools/#cost_recommendations

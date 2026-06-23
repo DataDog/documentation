@@ -55,9 +55,11 @@ To create a Data Observability monitor in Datadog, navigate to [**Data Observabi
 
 First, select whether to monitor the **Table** or **Column** level:
 
-{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Choose data to monitor: entity type selector, query input, and lineage relationship filter" style="width:60%;" >}}
 
-Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
+Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field.
+
+**Filter by name or location:**
 
 | Filter | Example | Description |
 |---|---|---|
@@ -66,7 +68,29 @@ Then, use the **Edit** tab to search for tables, views, or columns by typing `ke
 | Database | `database:ANALYTICS_DB` | Match by database. |
 | Account | `account:my_account` | Match by account. |
 
-Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
+**Filter by tag:**
+
+Filter on any tag applied to your data assets by using the tag key as the filter key. For example, if your assets are tagged with `owner`, `platform`, or `environment`, search on those tags directly:
+
+| Example | Description |
+|---|---|
+| `owner:data-platform-team` | Match assets tagged with `owner:data-platform-team`. |
+| `platform:snowflake` | Match assets tagged with `platform:snowflake`. |
+| `environment:production` | Match assets tagged with `environment:production`. |
+
+Tag filters support the same `*` wildcards and quoting as name filters, for example, `owner:data-*` or `platform:"Snowflake Prod"`.
+
+**Filter by computed attribute:**
+
+In addition to your own tags, Datadog computes attributes for your data assets that you can filter on. The available computed attribute is:
+
+| Attribute | Values | Description |
+|---|---|---|
+| `lineage_score` | `0.00`, `0.10`, `0.30`, `0.50`, `0.70`, `0.90`, or `1.00` | A relative measure of how connected an asset is in your lineage graph, based on how many downstream assets depend on it compared to other assets of the same type. Higher values identify the tables, views, and columns that the downstream consumers depend on. |
+
+`lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
+
+Combine any of these filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
 **Examples:**
 
@@ -75,14 +99,14 @@ Combine filters with `AND` or `OR`, use parentheses to group conditions, and pre
 | All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
 | All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
 | Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
+| Tables owned by a specific team | `owner:data-platform-team` |
+| The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
+
+**Filter by lineage relationship:**
+
+To scope your selection to assets that are connected to another asset in your lineage graph, click **Add Lineage Filter**. Choose **Upstream of** or **Downstream of**, then select a specific asset or use the same `key:value` filters to match a set of assets. For example, monitor every table that is upstream of a critical dashboard, or every column downstream of a specific source table.
 
 A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
-
-Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
-
-{{< code-block lang="text" >}}
-search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
-{{< /code-block >}}
 
 ## Select your metric type
 
@@ -172,6 +196,7 @@ Set how often the monitor evaluates your data:
 
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
+- **Manual**: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule so enough historical data can accumulate for modeling to be useful. Currently, the UI does not support default metrics like row counts and freshness, so this workflow only applies to custom or column-level metrics.
 
 ### Set alert conditions
 
@@ -274,3 +299,4 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 [7]: https://app.datadoghq.com/data-obs/monitors
 [8]: /monitors/configuration/?tab=thresholdalert#thresholds
 [9]: /help/
+[10]: /api/latest/data-observability/
