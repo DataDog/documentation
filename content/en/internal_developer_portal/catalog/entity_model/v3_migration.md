@@ -1,6 +1,6 @@
 ---
 title: Migrate Your Service Definitions to v3
-disable_toc: false
+description: Use the pup idp migrate-schema command to convert service YAML files from v1, v2, v2.1, or v2.2 to the v3 entity format.
 further_reading:
 - link: "/internal_developer_portal/catalog/entity_model"
   tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The `pup idp migrate-schema` command converts existing Service YAML files in the Datadog IDP Catalog from v1, v2, v2.1, or v2.2 to the [v3 entity format][1]. It handles field remapping, link type normalization, companion entity generation, and validates the output against the official v3 JSON schemas before writing anything to disk.
+The `pup idp migrate-schema` command converts existing Service YAML files in the Datadog Internal Developer Portal (IDP) Catalog from v1, v2, v2.1, or v2.2 to the [v3 entity format][1]. It handles field remapping, link type normalization, companion entity generation, and output validation against the official v3 JSON schemas before writing to disk.
 
 <div class="alert alert-info">
 <code>pup idp migrate-schema</code> does not require Datadog authentication. You do not need to run <code>pup auth login</code> first.
@@ -30,17 +30,13 @@ brew tap datadog-labs/pack
 brew install pup
 ```
 
-Upgrade `pup` to the latest version:
-
-```shell
-brew upgrade pup
-```
+**Note**: If `pup` is already installed, run `brew upgrade pup` to use the latest version.
 
 ## What gets migrated
 
-The following fields are remapped from v1/v2/v2.x to their v3 destinations:
+The following fields are remapped from v1, v2, v2.1, or v2.2 to their v3 destinations:
 
-| Source field (v1/v2/v2.x) | v3 destination |
+| Source field (v1, v2, v2.1, or v2.2) | v3 destination |
 |---|---|
 | `dd-service` / `info.dd-service` | `metadata.name` |
 | `display-name` / `display_name` | `metadata.displayName` |
@@ -62,7 +58,7 @@ The following fields are remapped from v1/v2/v2.x to their v3 destinations:
 | `extensions` | `extensions` (preserved as-is) |
 | Unknown top-level fields | Moved into `extensions` |
 
-Link types are also normalized: `wiki` → `doc`, `code` → `repo`, `url`/`oncall` → `other`.
+Link types are also normalized: `wiki` → `doc`, `code` → `repo`, `url` and `oncall` → `other`.
 
 ## Migrate a single file
 
@@ -113,13 +109,13 @@ Found 4 catalog files:
 Enter number to migrate one, or "all" to migrate all:
 ```
 
-When migrating all files, a single confirmation is required upfront and all files are migrated in parallel. A summary is printed at the end:
+When migrating all files, the command asks for a single confirmation, then migrates all files in parallel. The command prints a summary:
 
 ```
 Migrated 4 files • 6 services • 2 systems • 0 invalid • 1.2s
 ```
 
-## Auto-discover from the current directory
+## Autodiscover from the current directory
 
 If no path is given, `pup` searches the current working directory recursively:
 
@@ -130,7 +126,7 @@ pup idp migrate-schema
 
 ## Preview migrated YAML without writing
 
-To preview the migration output without touching any files, use option `3` at the prompt or pipe via stdout:
+To preview the migration output without touching any files, use option `3` at the prompt or pipe through stdout:
 
 ```shell
 pup idp migrate-schema service.datadog.yaml
@@ -139,7 +135,7 @@ pup idp migrate-schema service.datadog.yaml
 
 ## Companion system entities
 
-If your v1/v2 definitions include an `application:` field, a companion `kind: system` entity is automatically generated and appended to the output file. Duplicate system names across a multi-document file are deduplicated into a single entity.
+If your v1 or v2 definitions include an `application:` field, the command generates a companion `kind: system` entity and appends to the output file. Duplicate system names across a multi-document file are deduplicated into a single entity.
 
 **Input (v2):**
 
@@ -175,7 +171,7 @@ spec:
 
 ## Validation
 
-After migrating, the tool fetches the official v3 JSON schemas from the public `DataDog/schema` GitHub repository and validates each entity. Results are printed inline:
+After migration, the tool fetches the official v3 JSON schemas from the public `DataDog/schema` GitHub repository and validates each entity. Results are printed inline:
 
 ```
 ✓ VALID    [service] payment-service
