@@ -9720,21 +9720,26 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
     - name: Identity Resolution
       url: product_analytics/profiles/identity_resolution
       parent: pa_profiles
       identifier: pa_identity_resolution
-      weight: 401
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
     - name: Server-Side Events
       url: product_analytics/data_collected/server_side_events
       parent: pa_data_collected
