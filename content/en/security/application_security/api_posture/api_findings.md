@@ -31,4 +31,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
    - Use **Reference Links** for developer education or code review.
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/finding
-[2]: /security/application_security/policies/custom_rules/
+[2]: /security/application_security/threat_protection/policies/custom_rules/

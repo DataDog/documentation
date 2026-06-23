@@ -185,13 +185,13 @@ Key points:
 [2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec
 [3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec/events#BlockingSecurityEvent
 [4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec/events#IsSecurityError
-[5]: /security/application_security/policies/#customize-protection-behavior
+[5]: /security/application_security/threat_protection/policies/#customize-protection-behavior
 [6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#TrackUserLoginFailure
 [7]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#SetUser
 [8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#MonitorParsedHTTPBody
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#MonitorHTTPResponseBody
 [10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#TrackUserLoginSuccess
-[11]: /security/application_security/policies/custom_rules/#business-logic-abuse-detection-rule
+[11]: /security/application_security/threat_protection/policies/custom_rules/#business-logic-abuse-detection-rule
 [12]: https://github.com/DataDog/orchestrion
 [13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec#TrackCustomEvent
 [14]: /security/application_security/how-it-works/#built-in-protection

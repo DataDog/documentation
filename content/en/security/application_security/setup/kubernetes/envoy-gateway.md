@@ -321,7 +321,7 @@ For additional details on the Envoy Gateway integration compatibilities, see the
 [6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [7]: https://github.com/DataDog/dd-trace-go
 [8]: /tracing/trace_collection/library_config/go/
-[9]: /security/application_security/policies/library_configuration/
+[9]: /security/application_security/threat_protection/policies/library_configuration/
 [10]: https://gateway-api.sigs.k8s.io/api-types/referencegrant/
 [11]: /security/application_security/setup/compatibility/envoy-gateway
 [12]: /security/application_security/

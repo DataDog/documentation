@@ -266,7 +266,7 @@ For additional details on the underlying compatibility, see the [GCP Service Ext
 [7]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 [8]: https://github.com/DataDog/dd-trace-go
 [9]: /tracing/trace_collection/library_config/go/
-[10]: /security/application_security/policies/library_configuration/
+[10]: /security/application_security/threat_protection/policies/library_configuration/
 [11]: https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_health_check
 [12]: https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gke-service-extensions
 [13]: /security/application_security/setup/compatibility/gcp-service-extensions
