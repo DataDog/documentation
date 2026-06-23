@@ -10,6 +10,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/product-data-best-practices"
     tag: "Blog"
     text: "What your product data is actually saying"
+aliases:
+  - /product_analytics/guide/action_management/
 ---
 
 ## Overview
