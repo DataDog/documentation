@@ -26,20 +26,12 @@ Bits Chat helps you search and act across Datadog using natural language. Bits C
 
 Ask Bits Chat questions across these categories:
 
-### Investigate issues and remediate number 2
-- `Summarize high severity incidents that have occurred in the last day`
-- `What's causing 400 errors on the checkout endpoint in the last hour?`
-- `Why is the error rate spiking on the web-store service?`
-- `What is the root cause of this error? How did it propagate and what is the impact on users?`
-- `What could cause 500 errors on this API endpoint?`
-
-
 ### Investigate issues and remediate
 - `Summarize high severity incidents that have occurred in the last day`
 - `What's causing 400 errors on the checkout endpoint in the last hour?`
 - `Why is the error rate spiking on the web-store service?`
 - `What is the root cause of this error? How did it propagate and what is the impact on users?`
-- `What could cause 500 errors on this API endpoint? 2`
+- `What could cause 500 errors on this API endpoint?`
 
 ### Explore and analyze telemetry
 - `Which services have the most errors right now?`
