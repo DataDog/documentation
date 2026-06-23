@@ -92,7 +92,11 @@ To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the
 
 ### Verify
 
-After you enable OTLP export and your service receives traffic, confirm that traces appear in the [Trace Explorer][10]. If traces don't arrive, verify that your receiver is running, reachable at the configured endpoint, and forwarding data to Datadog.
+After you enable OTLP export and your service receives traffic, confirm that traces appear in the [Trace Explorer][10]. If traces don't arrive, verify that your [receiver][11] is running, reachable at the configured endpoint, and forwarding data to Datadog.
+
+### Next steps
+
+Enabling OTLP export configures the SDK side only. To collect the data and forward it to Datadog, set up a receiver in [Send Data to Datadog][11]. For most workloads, Datadog recommends the [DDOT Collector][9].
 
 ### Current limitations
 
@@ -145,3 +149,4 @@ To learn more, follow the link for your language:
 [8]: https://opentelemetry.io/docs/specs/otlp/
 [9]: /opentelemetry/setup/ddot_collector/
 [10]: /tracing/trace_explorer/
+[11]: /opentelemetry/setup/
