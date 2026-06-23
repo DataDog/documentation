@@ -223,7 +223,7 @@ A workload or Service can be the target of only one `DatadogInstrumentation` res
 
 Resource status confirms that the configuration was accepted. To confirm that the resulting checks are scheduled, run `agent configcheck` in the Node Agent running on a node where the target workload is scheduled.
 
-Checks configured through a `DatadogInstrumentation` resource list `instrumentation-checks` as the configuration provider, and `datadoginstrumentation:<NAMESPACE>/<CR_NAME>` as the configuration source. The following example shows the output for a `redisdb` check scheduled from a resource that targets a Redis service:
+Checks configured through a `DatadogInstrumentation` resource list `instrumentation-checks` as the configuration provider, and `datadoginstrumentation:<NAMESPACE>/<CR_NAME>` as the configuration source. The following example shows the output for a `redisdb` check scheduled from a resource that targets a Redis workload:
 
 ```text
 > agent configcheck
