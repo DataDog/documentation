@@ -6264,7 +6264,7 @@
       "anchor": "encrypt_ip",
       "name": "encrypt_ip",
       "category": "IP",
-      "description": "Encrypts an IP address, transforming it into a different valid IP address of the same version.\n\nSupported modes:\n\n* `aes128` - Scrambles the IP using AES-128 encryption (ipcrypt-deterministic). Accepts IPv4 or IPv6; key must be exactly 16 bytes.\n* `pfx` - Prefix-preserving encryption (ipcrypt-pfx), maintaining network hierarchy so addresses in the same subnet encrypt to addresses sharing the same prefix. Key must be exactly 32 bytes.\n\nEncryption is deterministic: the same input IP, key, and mode always produce the same output.",
+      "description": "Encrypts an IP address, transforming it into a different valid IP address of the same version.\n\nSupported modes:\n\n* `aes128` - Scrambles the IP using AES-128 encryption (ipcrypt-deterministic). Accepts IPv4 or IPv6; key must be exactly 16 bytes.\n* `pfx` - Prefix-preserving encryption (ipcrypt-pfx), that maintains network hierarchy so addresses in the same subnet encrypt to addresses sharing the same prefix. Key must be exactly 32 bytes.\n\nEncryption is deterministic: the same input IP, key, and mode always produce the same output.",
       "notices": [],
       "arguments": [
         {
