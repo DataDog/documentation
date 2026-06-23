@@ -16,10 +16,6 @@ further_reading:
   text: "Network Path Overview"
 ---
 
-{{< callout url=# btn_hidden="true" header="Join the Preview!">}}
-The Network Path monitor is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support.
-{{< /callout >}}
-
 ## Overview
 
 [Network Path][1] provides a visual representation of network traffic flow from its origin to its destination. After you enable Network Path for your organization, you can create a Network Path monitor to alert you when a Network Path metric crosses a set threshold. For example, you can monitor packet loss percentage between a specific source and destination and be alerted when this percentage breaches a configured threshold.
