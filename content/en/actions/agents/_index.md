@@ -16,10 +16,6 @@ further_reading:
   text: "AI Credits"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Bits Agent Builder is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or perform any action from the [Action Catalog][7].
