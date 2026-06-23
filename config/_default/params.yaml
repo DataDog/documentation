@@ -280,6 +280,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
@@ -305,7 +306,7 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   byoti: [gov, gov2]
-  case_management: [gov,gov2]
+  case_management: [gov2]
   ci_visibility: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]
@@ -314,6 +315,7 @@ unsupported_sites:
   configuration_at_runtime: [gov,gov2]
   confluence: [gov,gov2]
   confluent_cloud_integration: [gov,gov2]
+  containers_autoscaling: [gov,gov2]
   containers_kubernetes_appsec: [gov,gov2]
   continuous_delivery: [gov,gov2]
   continuous_integration: [gov,gov2]
@@ -324,6 +326,7 @@ unsupported_sites:
   data_observability: [gov,gov2]
   data_streams: [gov,gov2]
   datadog_disaster_recovery: [gov,gov2]
+  deployment_gates: [gov,gov2]
   dora_metrics: [gov,gov2]
   dynamic_instrumentation: [gov,gov2]
   dynamic_quotas: [gov,gov2]

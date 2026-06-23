@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: Documentación
   text: Más información sobre la clasificación y notificación de casos
 title: Correlación basada en patrones
@@ -12,7 +12,7 @@ La correlación basada en patrones te permite controlar cómo se correlacionan l
 
 Para empezar, Datadog sugiere automáticamente [correlaciones basadas en patrones][1], en función de tu entorno. Haz clic en cualquiera de las recomendaciones para abrir la página de configuración correspondiente al patrón recomendado. Los campos de configuración ya están rellenados.
 
-{{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="Patrones de correlación recomendados con el panel de vista previa que muestra los posibles casos que crearía el patrón" style="width:100%;" >}}
+{{< img src="events/correlation/pattern/recommended_patterns_preview.png" alt="Patrones de correlación recomendados con el panel de vista previa que muestra los posibles casos que crearía el patrón" style="width:100%;" >}}
 
 
 ## Crear un patrón
@@ -23,7 +23,7 @@ Para crear un patrón:
 1. Puedes ajustar un patrón sugerido haciendo clic en **+ Continue With Pattern** (+ Continuar con el patrón). Esto le llevará a la página de configuración para realizar ajustes adicionales. También puedes crear tu propio patrón haciendo clic en **+ Personalize From Scratch** (+ Personalizar desde cero).
 
 Primero, los eventos se deduplican en alertas en función de la clave de agregación de eventos. Luego, las alertas se correlacionan con un caso en función de la configuración. 
-{{< img src="service_management/events/correlation/correlation_helper.mp4" alt="Cuando los eventos coinciden con las fuentes definidas, se filtran y se deduplican en alertas. Las alertas se correlacionan en función de los atributos de agrupación y sus eventos se deduplican dentro del periodo de tiempo definido, antes de que el proceso se repita en un nuevo caso. Puedes modificar esta configuración en los parámetros." vídeo=true >}}
+{{< img src="events/correlation/correlation_helper.mp4" alt="Cuando los eventos coinciden con las fuentes definidas, se filtran y se deduplican en alertas. Las alertas se correlacionan en función de los atributos de agrupación y sus eventos se deduplican dentro del periodo de tiempo definido, antes de que el proceso se repita en un nuevo caso. Puedes modificar esta configuración en los parámetros." vídeo=true >}}
 Para obtener más información sobre cómo enviar eventos con claves de agregación, consulta el [envío de eventos a Datadog][5]. Los eventos sin claves de agregación se deduplican en una única alerta dentro del periodo de tiempo.
 
 ### Patrones sugeridos
@@ -67,7 +67,7 @@ Previsualiza los posibles patrones y casos que tu configuración podría crear. 
 
 Utiliza estos datos para previsualizar el impacto de tus correlaciones y comprender el resultado esperado de un patrón.
 
-{{< img src="service_management/events/correlation/pattern/preview_pattern_output.png" alt="Configuración de una correlación basada en patrones donde se resalta el panel de vista previa que muestra el número de eventos ingeridos que coinciden con la configuración, la cantidad de esos eventos que generan alertas, la cantidad de deduplicación que podría ocurrir y el número de casos que resultarían." style="width:100%;" >}}
+{{< img src="events/correlation/pattern/preview_pattern_output.png" alt="Configuración de una correlación basada en patrones donde se resalta el panel de vista previa que muestra el número de eventos ingeridos que coinciden con la configuración, la cantidad de esos eventos que generan alertas, la cantidad de deduplicación que podría ocurrir y el número de casos que resultarían." style="width:100%;" >}}
 
 **Nota**: El título por defecto en la vista previa del caso es la primera alerta en correlación. Luego de guardar un patrón, el título de caso de la gestión de eventos se genera de forma inteligente.
 
@@ -86,6 +86,6 @@ Después de actualizar un patrón existente, todos los casos activos se dejarán
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/rule/new 
-[3]: /es/service_management/events/explorer/facets/#create-a-facet
-[4]: /es/service_management/events/explorer/facets
-[5]: /es/service_management/events/ingest/
+[3]: /es/events/explorer/facets/#create-a-facet
+[4]: /es/events/explorer/facets
+[5]: /es/events/ingest/

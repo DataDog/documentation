@@ -7,12 +7,12 @@ aliases:
 - /es/real_user_monitoring/session_replay/browser/developer_tools
 - /es/product_analytics/session_replay/browser/developer_tools
 description: Aprende cómo capturar y reproducir visualmente la experiencia de navegación
-  web o de aplicaciones móviles de tus usuarios con Session Replay.
+  web o de aplicaciones móviles de tus usuarios con la reproducción de sesión.
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: Blog
-  text: Utiliza Datadog Session Replay para ver los recorridos de los usuarios en
-    tiempo real
+  text: Utiliza la reproducción de sesión de Datadog para ver los recorridos de los
+    usuarios en tiempo real
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
   text: Utiliza el análisis de embudos para comprender y optimizar los flujos clave
@@ -20,7 +20,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
   tag: Blog
   text: Reproduce visualmente los problemas que enfrentan los usuarios con Zendesk
-    y Datadog Session Replay
+    y la Reproducción de Sesiones de Datadog
 - link: /real_user_monitoring/explorer
   tag: Documentación
   text: Visualiza tus datos de RUM en el Explorador
@@ -30,28 +30,28 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-rum
   tag: Centro de Aprendizaje
   text: Introducción a la Monitorización de Usuarios Reales (RUM)
-title: Session Replay
+title: Reproducción de sesión
 ---
 ## Descripción General
  {#overview}
 
-Session Replay amplía tu monitoreo de la experiencia del usuario al permitirte capturar y reproducir visualmente la experiencia de navegación web o de aplicaciones móviles de tus usuarios. Session Replay está disponible tanto en [RUM][1] como en [Product Analytics][2], ayudándote a identificar y reproducir errores, comprender los recorridos de los usuarios y obtener información sobre los patrones de uso y las fallas de diseño de tu aplicación.
+La reproducción de sesión amplía tu monitoreo de la experiencia del usuario al permitirte capturar y reproducir visualmente la experiencia de navegación web o de aplicaciones móviles de tus usuarios. La reproducción de sesión está disponible tanto en [RUM][1] como en [Product Analytics][2], ayudándote a identificar y reproducir errores, comprender los recorridos de los usuarios y obtener información sobre los patrones de uso y las fallas de diseño de tu aplicación.
 
-## Browser Session Replay
+## Reproducción de sesión del navegador
  {#browser-session-replay}
 
-Browser Session Replay amplía tu monitoreo de la experiencia del usuario al permitirte capturar y reproducir visualmente la experiencia de navegación web de tus usuarios. Combinada con los datos de rendimiento de RUM, Session Replay es beneficiosa para la identificación, reproducción y resolución de errores, y proporciona información sobre los patrones de uso y las fallas de diseño de tu aplicación web.
+La reproducción de sesión del navegador amplía tu monitoreo de la experiencia del usuario al permitirte capturar y reproducir visualmente la experiencia de navegación web de tus usuarios. Combinada con los datos de rendimiento de RUM, la reproducción de sesión es beneficiosa para la identificación, reproducción y resolución de errores, y proporciona información sobre los patrones de uso y las fallas de diseño de tu aplicación web.
 
 El SDK del Navegador RUM es [código abierto][3] y aprovecha el proyecto de código abierto [rrweb][4].
 
-Aprende más sobre [Session Replay for Browsers][5].
+Aprende más sobre la [reproducción de sesión para navegadores][5].
 
-## Mobile Session Replay
+## Reproducción de sesión móvil
  {#mobile-session-replay}
 
-Mobile Session Replay amplía la visibilidad de tus aplicaciones móviles al reproducir visualmente cada interacción del usuario, como toques, deslizamientos y desplazamientos. Está disponible para aplicaciones nativas tanto en Android como en iOS. Reproducir visualmente las interacciones del usuario en tus aplicaciones facilita la reproducción de fallos y errores, así como entender el recorrido del usuario para realizar mejoras en la interfaz de usuario.
+La reproducción de sesión móvil amplía la visibilidad de tus aplicaciones móviles al reproducir visualmente cada interacción del usuario, como toques, deslizamientos y desplazamientos. Está disponible para aplicaciones nativas tanto en Android como en iOS. Reproducir visualmente las interacciones del usuario en tus aplicaciones facilita la reproducción de fallos y errores, así como entender el recorrido del usuario para realizar mejoras en la interfaz de usuario.
 
-Aprende más sobre [Session Replay for Mobile][6].
+Aprende más sobre la [reproducción de sesión para móviles][6].
 
 ## Resúmenes impulsados por IA y capítulos inteligentes
  {#ai-powered-summaries-and-smart-chapters}
@@ -62,11 +62,11 @@ Los resúmenes y capítulos inteligentes te brindan contexto sobre lo que sucedi
 
 **Los resúmenes** describen la intención del usuario, acciones clave, señales de fricción y resultado. Momentos específicos en el resumen están hipervinculados para que puedas saltar directamente a ese punto en la reproducción. En la lista de sesiones, pasa el cursor sobre una reproducción para previsualizar el resumen, o abre la reproducción directamente. Si una sesión ha sido resumida antes, el resumen aparece instantáneamente cuando abres la reproducción.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="Resumen impulsado por IA en el reproductor de Session Replay, mostrando la intención del usuario, acciones clave, señales de fricción y momentos hipervinculados." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="Resumen impulsado por IA en el reproductor de reproducción de sesión, mostrando la intención del usuario, acciones clave, señales de fricción y momentos hipervinculados." style="width:100%;" >}}
 
 **Los capítulos inteligentes** segmentan automáticamente la línea de tiempo de la reproducción en etapas etiquetadas del recorrido del usuario. Por ejemplo, en una sesión de comercio electrónico, los capítulos podrían incluir "Explorar iluminación", "Comprar ropa de cama y sillas", y "Revisar carrito y pagar". Los capítulos aparecen cuando pasas el cursor sobre la línea de tiempo y en el menú desplegable de los controles del reproductor, permitiéndote saltar directamente entre ellos.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Menú desplegable de capítulos inteligentes en el reproductor de Session Replay mostrando etapas etiquetadas del recorrido del usuario." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Menú desplegable de capítulos inteligentes en el reproductor de reproducción de sesión mostrando etapas etiquetadas del recorrido del usuario." style="width:100%;" >}}
 
 Los resúmenes impulsados por IA y los capítulos inteligentes se generan para sesiones con al menos cuatro acciones de usuario y una duración de al menos 45 segundos.
 
@@ -75,7 +75,7 @@ Los resúmenes impulsados por IA y los capítulos inteligentes se generan para s
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Esta función no es compatible con tu sitio <a href="/getting_started/site">Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Si requiere esta capacidad, comuníquese con <a href="/help/">Soporte de Datadog</a>.</div>{{< /site-region >}}
 
-Los comentarios de Session Replay permiten a su equipo colaborar en errores, problemas de usabilidad y otras observaciones directamente dentro de una reproducción.
+Los comentarios de la reproducción de sesión permiten a su equipo colaborar en errores, problemas de usabilidad y otras observaciones directamente dentro de una reproducción.
 
 Con los comentarios, usted puede:
 
@@ -84,20 +84,20 @@ Con los comentarios, usted puede:
 - Copiar un enlace a cualquier comentario y compartirlo externamente. El enlace abre la reproducción en el momento anotado con ese hilo de comentarios abierto.
 - Responder en el hilo para colaborar dentro de una reproducción, y editar o eliminar sus propios comentarios según sea necesario.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Reproductor de Session Replay con comentarios con marca de tiempo en la línea de tiempo y una pestaña de Comentarios abierta con respuestas en hilo." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Reproductor de reproducción de sesión con comentarios con marca de tiempo en la línea de tiempo y una pestaña de Comentarios abierta con respuestas en hilo." style="width:100%;" >}}
 
-Para encontrar reproducciones que necesiten su atención, use las listas de reproducción predeterminadas de **Todas las menciones a mí** y **Reproducciones comentadas**. Vea [Session Replay Playlists][7] para más detalles.
+Para encontrar reproducciones que necesiten su atención, use las listas de reproducción predeterminadas de **Todas las menciones a mí** y **Reproducciones comentadas**. Vea [Listas de reproducción de sesión][7] para más detalles.
 
 ## Extender la retención de datos
  {#extend-data-retention}
 
-Por defecto, los datos de Session Replay se retienen durante 30 días.
+Por defecto, los datos de reproducción de sesión se retienen durante 30 días.
 
-Para extender la retención de datos de Session Replay a 15 meses, puede habilitar _Retención Extendida_ en reproducciones de sesiones individuales. Estas sesiones deben ser no activas (el usuario ha completado su experiencia).
+Para extender la retención de datos de reproducción de sesión a 15 meses, puede habilitar _Retención Extendida_ en reproducciones de sesiones individuales. Estas sesiones deben ser no activas (el usuario ha completado su experiencia).
 
-Para acceder a cualquier Session Replay en un momento posterior, Datadog recomienda guardar la URL o agregarla a una [Lista de reproducción][7].
+Para acceder a cualquier reproducción de sesión en un momento posterior, Datadog recomienda guardar la URL o agregarla a una [Lista de reproducción][7].
 
-La Retención Extendida solo se aplica a Session Replay y no incluye los eventos asociados. Los 15 meses comienzan cuando se habilita la Retención Extendida, no cuando se recopila la sesión.
+La Retención Extendida solo se aplica a la Reproducción de Sesión y no incluye los eventos asociados. Los 15 meses comienzan cuando se habilita la Retención Extendida, no cuando se recopila la sesión.
 
 Puedes desactivar la Retención Extendida en cualquier momento. Si la reproducción de la sesión aún está dentro de su período predeterminado de retención de 30 días, la reproducción expira al final de la ventana inicial de 30 días. Si desactivas la Retención Extendida en una reproducción de sesión que tiene más de 30 días, la reproducción expira de inmediato.
 
@@ -121,12 +121,12 @@ Para ver tu propio historial de reproducciones, consulta la lista de reproducci�
 ## Listas de reproducción
  {#playlists}
 
-Puedes crear una playlist de Session Replays para organizarlas según cualquier patrón que notes. Aprende más sobre [Session Replay Playlists][7].
+Puedes crear una lista de reproducción de Reproducciones de Sesión para organizarlas según cualquier patrón que notes. Aprende más sobre [Listas de Reproducción de Reproducciones de Sesión][7].
 
 ## Herramientas de Desarrollo
  {#dev-tools}
 
-Las Herramientas de Desarrollo son un panel de depuración integrado en Session Replay que expone información clave durante la reproducción. Úsalo para identificar problemas, rastrear solicitudes y entender cuellos de botella en el rendimiento, todo sin reproducir el problema tú mismo. Las herramientas de desarrollo están disponibles para sesiones de [RUM][1].
+Las Herramientas de Desarrollo son un panel de depuración integrado en la Reproducción de Sesión que expone información clave durante la reproducción. Úsalo para identificar problemas, rastrear solicitudes y entender cuellos de botella en el rendimiento, todo sin reproducir el problema tú mismo. Las herramientas de desarrollo están disponibles para sesiones de [RUM][1].
 
 Aprenda más sobre las herramientas de desarrollo para [navegador][11] y [móvil][12].
 
