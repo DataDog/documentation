@@ -19,7 +19,7 @@ The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prev
 
 ## Setting permissions using ACLs
 
-In order to allow read-only access for `datadog-agent` only, [create ACLs and modify logrotate to persist the permissions changes][1].
+To allow read-only access for the `dd-agent` user, create [access control lists (ACLs)][1] and modify logrotate to persist the permission changes, as described in the following sections.
 
 ### Verifying ACLs are enabled on your system
 
@@ -38,17 +38,27 @@ The permissions set for `datadog-agent` appears in the output of getfacl if ACLs
 
 ### Granting dd-agent read and execute permissions on log directories
 
-Once you have verified ACLs are enabled, grant read and execute permissions for the `datadog-agent` user on the appropriate directories for log collection. For example, to grant access to `/var/log/apache` , run:
+After you verify ACLs are enabled, grant read and execute permissions for the `dd-agent` user on the appropriate directories for log collection. A plain `setfacl -m` command applies the ACL only to the directory itself, not to the log files already inside it. Use the `-R` (recursive) flag to also grant access to existing files. For example, to grant access to `/var/log/apache`, run:
 
 ```shell
-setfacl -m u:dd-agent:rx /var/log/apache
+setfacl -R -m u:dd-agent:rx /var/log/apache
 ```
 
-[Learn more about how to configure ACLs on linux][3]
+To make new log files inherit this access automatically, set a *default* ACL on the directory with the `-d` flag:
+
+```shell
+setfacl -R -d -m u:dd-agent:rx /var/log/apache
+```
+
+A default ACL applies to files created in the directory afterward, including those that log rotation creates. This reduces the need for the logrotate rule described in the next section. Files that already exist when you set the default ACL are unaffected, so run both commands above.
+
+[Learn more about how to configure ACLs on Linux][3]
 
 ### Setting permissions for log file rotation
 
-Setting the permissions once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
+If you set a default ACL with the `-d` flag in the previous section, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. A default ACL does not cover every rotation scheme, however. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
+
+When a default ACL does not apply to your setup, add a rule to logrotate to reset the ACL after each rotation. Avoid defining a rule for log files that another logrotate configuration already manages, because logrotate reports a `duplicate log entry` error when two configurations match the same file. Instead, add a `postrotate` script to the service's existing configuration, or create a separate file for paths that are not already managed:
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -59,8 +69,8 @@ Example file:
 ```text
 /var/log/apache/*.log {
  postrotate
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/access.log
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/error.log
+ /usr/bin/setfacl -m u:dd-agent:rx /var/log/apache/access.log
+ /usr/bin/setfacl -m u:dd-agent:rx /var/log/apache/error.log
  endscript
 }
 ```
