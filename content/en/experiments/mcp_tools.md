@@ -61,73 +61,9 @@ For feature flag management tools used alongside experiments — creating flags,
 
 ## Available tools
 
-The `experiments` toolset exposes the following tools to your AI client. When you ask a question in natural language, your AI client calls these tools on your behalf. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1]. Each tool lists the [Datadog permissions][7] required to use it.
+The `experiments` toolset exposes tools to your AI client. When you ask a question in natural language, your AI client calls these tools on your behalf.
 
-### Listing and browsing
-
-`list-experiments`
-: Lists experiments for the organization. Accepts an optional name search query, limit, and offset for pagination.
-: *Permissions required: `Product Analytics Experiments Read`*
-
-`get-experiment`
-: Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
-: *Permissions required: `Product Analytics Experiments Read`*
-
-### Lifecycle management
-
-`create-experiment`
-: Creates a new experiment with a name, hypothesis, subject type, and primary metric.
-: *Permissions required: `Product Analytics Experiments Write`*
-
-`link-feature-flag-to-experiment`
-: Links a feature flag to an experiment.
-: *Permissions required: `Product Analytics Experiments Write`*
-
-`start-experiment`
-: Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
-: *Permissions required: `Product Analytics Experiments Write`*
-
-`conclude-experiment`
-: Concludes a running experiment with a permanent winning variant decision.
-: *Permissions required: `Product Analytics Experiments Write`*
-
-`cancel-experiment`
-: Cancels a running experiment with a required reason.
-: *Permissions required: `Product Analytics Experiments Write`*
-
-### Diagnostics and results
-
-`get-experiment-diagnostics`
-: Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get-experiment-results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
-: *Permissions required: `Product Analytics Experiments Read`*
-
-`get-experiment-results`
-: Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
-: *Permissions required: `Product Analytics Experiments Read`*
-
-`explore-experiment-results`
-: Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get-experiment-results` for questions like "how does this look for mobile users?" or "how did this trend over the last week?"
-: *Permissions required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*
-
-`list-experiment-segmentation-properties`
-: Lists the assignment properties an experiment can be split by. Call this before `explore-experiment-results` to get valid property IDs — do not guess them.
-: *Permissions required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*
-
-`get-experiment-segmentation-property-values`
-: Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore-experiment-results` to avoid invalid filter strings.
-: *Permissions required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*
-
-### Metric investigation
-
-`get-metric-definition`
-: Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field pointing to `aggregate_rum_events` or `run_analytics_query` along with the structured filter and aggregation parameters needed to assemble the call. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
-: *Permissions required: `Product Analytics Metrics Read`*
-
-### Troubleshooting
-
-`diagnose-experiment-run-failure`
-: Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. This tool is for pipeline execution failures (tasks that crashed, timed out, or errored) — use `get-experiment-diagnostics` for result quality and SRM issues instead.
-: *Permissions required: `Product Analytics Experiments Read`*
+For a full reference of the `experiments` tools including permissions and example prompts, see [Datadog MCP Server Tools][7].
 
 ## Further reading
 
@@ -139,4 +75,4 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 [4]: /feature_flags/feature_flag_mcp_server/
 [5]: /feature_flags/feature_flag_mcp_server/#check-feature-flag-implementation
 [6]: /bits_ai/
-[7]: /account_management/rbac/permissions/
+[7]: /mcp_server/tools/#experiments
