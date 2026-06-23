@@ -4726,11 +4726,11 @@
     "summary": "Get schema"
   },
   "ListSCIMUsers": {
-    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.\nResponses include the Datadog roles assigned to each user in the `roles` attribute.",
     "summary": "List users"
   },
   "CreateSCIMUser": {
-    "description": "Create a new user.",
+    "description": "Create a new user.\nTo assign Datadog roles to the user, include a `roles` array containing role UUIDs in the `value` field.",
     "summary": "Create user",
     "request_description": "",
     "request_schema_description": "Definition of a user."
@@ -4740,17 +4740,17 @@
     "summary": "Delete user"
   },
   "GetSCIMUser": {
-    "description": "Get a single user using the `user_uuid`.",
+    "description": "Get a single user using the `user_uuid`.\nThe response includes the Datadog roles assigned to the user in the `roles` attribute.",
     "summary": "Get user"
   },
   "PatchSCIMUser": {
-    "description": "Patch the user with the given `user_uuid`.",
+    "description": "Patch the user with the given `user_uuid`.\nTo update Datadog roles, send an operation with `path` set to `roles` and `value` set to an array of role objects containing role UUIDs.",
     "summary": "Patch user",
     "request_description": "",
     "request_schema_description": "Request object for patching a user."
   },
   "UpdateSCIMUser": {
-    "description": "Update the user with the given `user_uuid`.",
+    "description": "Update the user with the given `user_uuid`.\nTo update Datadog roles, include a `roles` array containing role UUIDs in the `value` field.",
     "summary": "Update user",
     "request_description": "",
     "request_schema_description": "Definition of a user."
