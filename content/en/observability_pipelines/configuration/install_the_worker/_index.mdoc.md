@@ -645,7 +645,7 @@ Depending on your use case, configure either an [Application Load Balancer][22] 
 
 ## Upgrade the Worker
 
-To upgrade the Worker, update the `image` field in your container definition to the new version, replacing `<WORKER_VERSION>` with the version you want to use (such as `2.17.0`):
+To upgrade the Worker, update the `image` field in your container definition to the new version, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
 
 ```json
 "image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
@@ -662,7 +662,7 @@ After updating the task definition, restart the ECS tasks to use the updated ima
 
 ## Upgrade the Worker
 
-To upgrade the Worker, update the image version in your `docker run` command or `docker-compose.yml` file to `datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use (such as `2.17.0`). Then restart the container.
+To upgrade the Worker, update the image version in your `docker run` command or `docker-compose.yml` file to `datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`. Then restart the container.
 
 {% /if %}
 
