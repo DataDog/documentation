@@ -57,7 +57,7 @@ https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?tools
 
 See [Set Up the Datadog MCP Server][3] for full connection instructions and toolset configuration.
 
-For feature flag management tools used alongside experiments — creating flags, syncing allocations, checking canary results — see [Feature Flags MCP Tools][4].
+For feature flag management tools used alongside experiments — creating flags, syncing allocations, checking canary results. For more information, see [Feature Flags MCP Tools][4].
 
 ## Available tools
 
