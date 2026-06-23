@@ -551,7 +551,7 @@ Searches for data entities in the data catalog. Supports filtering by name (with
 ### `get_data_catalog_schema`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Returns the entity type schema for every platform the organization has data in. Discovers active platforms (Snowflake, BigQuery, Databricks, dbt, and so on), their entity types, the containment hierarchy, and the filterable attribute names. Call this at the start of a data catalog conversation to learn which platforms, entity types, and filters are available.
+Returns the entity type schema for every platform the organization has data in. Discovers active platforms (Snowflake, BigQuery, Databricks, dbt, and so on), their entity types, the containment hierarchy, the filterable attribute names, and the default metrics available for each entity type (such as `dataset.freshness`). Call this at the start of a data catalog conversation to learn which platforms, entity types, and filters are available.
 
 - What platforms and entity types are in my data catalog?
 - Which attributes can I filter on when searching for Snowflake tables?
@@ -561,7 +561,7 @@ Returns the entity type schema for every platform the organization has data in. 
 *Permissions Required: `Monitors Read` or `APM Read`*\
 Fetches full details and attributes for one or more data entities by their entity IDs. Returns owner, tags, display name, platform, schema, database, account, and all other attributes. Use `search_data_entities` first to find entity IDs.
 
-- Get full details for entity `a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4`.
+- Get full details for entity `<entity_id>`.
 - Show me the owner and tags for this Snowflake table.
 
 ### `get_data_entity_hierarchy`
@@ -594,7 +594,7 @@ Gets aggregate statistics about the lineage graph reachable from anchor entities
 ### `rank_data_entities_by_lineage_degree`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Ranks entities by their transitive lineage connectivity using a pre-built snapshot. Returns parent-level entities ranked by how many other entities they connect to (downstream or upstream). Useful for identifying the most critical or widely consumed tables.
+Ranks entities by their transitive lineage connectivity using a pre-built snapshot. Returns entities such as tables, dashboards, and jobs ranked by how many other entities they connect to (downstream or upstream). Useful for identifying the most critical or widely consumed tables.
 
 - Which tables have the most downstream consumers?
 - Rank tables by upstream dependency count to find raw ingestion points.
@@ -650,7 +650,7 @@ Ranks database tables by query activity, broken out by user type (human analysts
 Gets the custom user-defined descriptions for data entities by their IDs. Returns a map of entity ID to description with created and updated timestamps.
 
 - Show me the custom descriptions for these three tables.
-- What description has been set for entity `a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4`?
+- What description has been set for entity `<entity_id>`?
 
 ### `update_entity_description`
 *Toolset: **data-observability***\
@@ -658,7 +658,7 @@ Gets the custom user-defined descriptions for data entities by their IDs. Return
 Sets or updates the custom user-defined description for a data entity.
 
 - Set the description of the `orders` table to "Contains all customer orders."
-- Update the description for entity `a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4`.
+- Update the description for entity `<entity_id>`.
 
 ### `get_entity_tags`
 *Toolset: **data-observability***\
