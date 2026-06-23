@@ -15,13 +15,13 @@ further_reading:
 
 {{% logs-tcp-disclaimer %}}
 
-{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" %}}
 <div class="alert alert-danger">
     TCP is not available for the {{< region-param key="dd_site_name" >}} site. Contact <a href="/help/">support</a> for more information.
 </div>
 {{% /site-region %}}
 
-{{% site-region region="us,uk1" %}}
+{{% site-region region="us" %}}
 ## Overview
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
@@ -228,69 +228,6 @@ If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for Ce
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{% /site-region %}}
-{{% site-region region="uk1" %}}
-
-```conf
-# Basic configuration
-global
-    log 127.0.0.1 local0
-    maxconn 4096
-    stats socket /tmp/haproxy
-# Some sane defaults
-defaults
-    log     global
-    option  dontlognull
-    retries 3
-    option  redispatch
-    timeout client 5s
-    timeout server 5s
-    timeout connect 5s
-# This declares a view into HAProxy statistics, on port 3833
-# You do not need credentials to view this page and you can
-# turn it off once you are done with setup.
-listen stats
-    bind *:3833
-    mode http
-    stats enable
-    stats uri /
-# This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
-# For HAProxy 1.8 and newer
-resolvers my-dns
-    nameserver dns1 <DNS_SERVER_IP>:53
-    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
-    resolve_retries 3
-    timeout resolve 2s
-    timeout retry 1s
-    accepted_payload_size 8192
-    hold valid 10s
-    hold obsolete 60s
-# This declares the endpoint where your Agents connects for
-# sending Logs (e.g the value of "logs.config.logs_dd_url")
-frontend logs_frontend
-    bind *:10514
-    mode tcp
-    default_backend datadog-logs
-# This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontends defined above are proxied to
-# Datadog's public endpoints.
-backend datadog-logs
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server datadog agent-intake.logs.uk1.datadoghq.com:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
-```
-
-Download the certificate with the following command:
-
-* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat)
-
-If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
-
-After the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.uk1.datadoghq.com` fails over to another IP.
-
-{{% /site-region %}}
 
 {{% /tab %}}
 
@@ -350,27 +287,6 @@ stream {
         listen 10514; #listen for logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
-    }
-}
-```
-
-{{% /site-region %}}
-{{% site-region region="uk1" %}}
-
-```conf
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-events {
-    worker_connections 1024;
-}
-# TCP Proxy for Datadog Agent
-stream {
-    server {
-        listen 10514; #listen for logs
-        proxy_ssl on;
-        proxy_pass agent-intake.logs.uk1.datadoghq.com:443;
     }
 }
 ```

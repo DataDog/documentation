@@ -39,7 +39,7 @@ You can manage your time zone, time format, visual accessibility preference, and
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,gov2,ap1,ap2" >}}
+{{< site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" >}}
 <div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
