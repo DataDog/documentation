@@ -1874,6 +1874,22 @@
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
     "summary": "Unarchive a feature flag"
   },
+  "CreateVariantForFeatureFlag": {
+    "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
+    "summary": "Add a variant to a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to create a variant."
+  },
+  "DeleteVariantFromFeatureFlag": {
+    "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Delete a variant"
+  },
+  "UpdateVariantForFeatureFlag": {
+    "description": "Updates the name and value of an existing variant on a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Update a variant",
+    "request_description": "",
+    "request_schema_description": "Request to update an existing variant's name and value."
+  },
   "ListForms": {
     "description": "Get all forms for the authenticated user's organization.",
     "summary": "List forms"
