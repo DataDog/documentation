@@ -4,7 +4,7 @@ description: Allow workflows and apps to interact with private network services 
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/
-- actions/app_builder/private_actions/
+- service_management/app_builder/private_actions/
 further_reading:
 - link: "actions/connections"
   tag: "Documentation"

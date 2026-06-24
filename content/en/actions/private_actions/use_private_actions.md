@@ -4,7 +4,7 @@ description: Set up and use private action runners to interact with services on 
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/use_private_actions
-- actions/app_builder/private_actions/use_private_actions
+- service_management/app_builder/private_actions/use_private_actions
 further_reading:
 - link: "actions/connections"
   tag: "Documentation"
