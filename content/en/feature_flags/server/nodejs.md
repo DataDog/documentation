@@ -129,7 +129,14 @@ app.get('/my-endpoint', async (req, res) => {
 Defer the wait to request time when you want the server to start listening immediately while still evaluating against real configuration data. Store the initialization promise, then await it in each request handler before evaluating flags. Requests that arrive before initialization completes wait for it to finish.
 
 ```javascript
-const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature);
+// Attach the catch once, at creation. This logs a failed initialization a
+// single time and keeps the shared promise from rejecting on every request;
+// evaluations return default values until the provider receives its first
+// configuration.
+const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature)
+  .catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  });
 const client = OpenFeature.getClient();
 
 app.get('/my-endpoint', async (req, res) => {
@@ -141,14 +148,9 @@ app.get('/my-endpoint', async (req, res) => {
     companyID: req.session?.companyID
   };
 
-  try {
-    // Wait for initialization if necessary
-    await initializationPromise;
-  } catch (err) {
-    // Initialization failed; the evaluations below return default values
-    // until the provider receives its first configuration.
-    console.error('Datadog feature flag provider failed to initialize', err);
-  }
+  // Wait for initialization if necessary. The promise is already handled
+  // above, so awaiting it here never throws, even if initialization failed.
+  await initializationPromise;
 
   // Note: evaluations are synchronous, but return a Promise type
   //       to follow the OpenFeature provider specifications
