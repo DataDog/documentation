@@ -38,7 +38,7 @@ Click **Add tag rule**.
 
 ### Add a tag rule
 
-{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The tag control settings panel" style="width:55%;" >}}
+{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The tag block and allow list settings panel" style="width:55%;" >}}
 
 1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline. See [Search Syntax][2] for more information.
 1. In the **Configure tags** section, choose whether to **Include tags** or **Exclude tags**.
@@ -49,5 +49,5 @@ Click **Add tag rule**.
     - Note: You can select up to 15 tags.
 1. Click **Save**.
 
-[1]: /may/op-metrics-pipelines-components/getting_started/tagging/#define-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /observability_pipelines/search_syntax/metrics/
