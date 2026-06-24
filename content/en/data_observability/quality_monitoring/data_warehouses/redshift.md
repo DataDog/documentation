@@ -20,6 +20,7 @@ Datadog supports both provisioned Redshift clusters and Redshift Serverless work
 
 Before you begin, make sure you have:
 
+- An [AWS account connected in Datadog][3].
 - A Redshift superuser or database user with the ability to create roles and grant privileges.
 - If your Redshift cluster or workgroup restricts network access by IP, add Datadog webhook IPs to your VPC security group inbound rules. For the list of IPs, see the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
@@ -184,3 +185,4 @@ After the initial sync completes, create a [Data Observability monitor][2] to st
 
 [1]: https://app.datadoghq.com/datasets/settings/integrations
 [2]: /monitors/types/data_observability/
+[3]: /integrations/amazon-web-services/

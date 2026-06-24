@@ -22,7 +22,7 @@ If you're [using the Iceberg framework in AWS Glue][5], you can see metadata fro
 Before you begin, make sure you have:
 
 - An AWS account with Glue Iceberg tables you want to monitor.
-- The [Datadog AWS integration][1] configured for the account.
+- An [AWS account connected in Datadog][1].
 - IAM permissions to modify the Datadog role's policies.
 - (Optional) AWS Lake Formation access if you use it to manage table permissions.
 
