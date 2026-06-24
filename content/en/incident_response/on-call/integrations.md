@@ -26,6 +26,7 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
   {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
   {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
   {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios.png" alt="Nagios" title="Nagios" >}}
+  {{< image-card href="/integrations/catchpoint/#events" src="integrations_logos/catchpoint.png" alt="Catchpoint" title="Catchpoint" >}}
 {{< /card-grid >}}
 
 ## Other tools
