@@ -653,7 +653,7 @@ To upgrade the Worker, update the `image` field in your container definition to 
 
 After updating the task definition, restart the ECS tasks to use the updated image.
 
-**Note**: If your container definition uses the `latest` tag instead of a pinned version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
+**Note**: If your container definition doesn't specify a version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
 
 {% /if %}
 
