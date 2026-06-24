@@ -212,7 +212,6 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
 | [bunyan][55]     | `>=1`     | Fully supported |
-| [paperplane][56] | `>=2.3.2` | Fully supported |
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
 
@@ -301,7 +300,6 @@ For additional information or to discuss [leave a comment on this GitHub issue][
 [53]: https://github.com/kriskowal/q
 [54]: https://github.com/cujojs/when
 [55]: https://github.com/trentm/node-bunyan
-[56]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [57]: http://getpino.io
 [58]: https://github.com/winstonjs/winston
 [59]: https://github.com/laverdet/node-fibers
