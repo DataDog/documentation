@@ -28,31 +28,30 @@ A breakout is purely additive: the overall metric is still calculated across all
 You define breakouts when you [create or edit a metric][1]. Breakouts are supported for metrics built on Product Analytics, Real User Monitoring (RUM), and [warehouse][2] data.
 
 1. Navigate to the [Metrics page][3] in Datadog Product Analytics and create a new metric or open an existing one.
-1. Configure the [metric definition][1] as usual.
+1. Configure the [metric definition][1].
 1. In the {{< ui >}}Split by Metric Properties{{< /ui >}} section, click {{< ui >}}Add Property{{< /ui >}}.
 1. Select a {{< ui >}}Property{{< /ui >}} to break out by (for example, **Country**, **Device Type**, or **Browser**). The available properties come from the metric's data source. For warehouse metrics, the property must be a column on the metric's [SQL model][2].
-1. In the {{< ui >}}Values{{< /ui >}} column, select the property values you want to break out (for example, **CA**, **US**, and **UK**). Datadog lists the most frequently observed values for the property, ordered by frequency.
+1. In the {{< ui >}}Values{{< /ui >}} column, select the property values you want to break out (for example, **CA**, **US**, and **UK**). Datadog lists up to 50 of the most frequently observed values for the property, ordered by frequency.
 1. (Optional) Click {{< ui >}}Add Property{{< /ui >}} again to break out by additional properties, or click the trash icon to remove a property.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/metric_property_breakouts/config.png" alt="The Split by Metric Properties section of the metric form showing a table with a Property column set to Country and a Values column with CA, US, and UK selected, and an Add Property button below." style="width:90%;" >}}
 
-Datadog automatically discovers the values available for each property (up to 50 of the most frequent values). If you don't see the value you need, it may be too infrequent to appear in the discovered set.
+If you don't see the value you need, it may be too infrequent to appear in the discovered set.
 
 ## View broken-out results
 
 After an experiment runs against a metric that has breakouts configured, you can reveal the per-value results in the experiment's results scorecard.
 
 1. Open your experiment's [results][4] and switch to the confidence-interval view.
-1. Hover over a metric that has breakouts configured and open its actions.
-1. Click {{< ui >}}Split by Metric Properties{{< /ui >}}.
+1. Hover over a metric that has breakouts configured to reveal its row actions, then click the {{< ui >}}Split by Metric Properties{{< /ui >}} icon.
 1. Select the properties you want to break out by, then click {{< ui >}}Apply{{< /ui >}}.
 
 A {{< ui >}}Property{{< /ui >}} column appears. The parent metric row is labeled {{< ui >}}Overall{{< /ui >}}, and each selected property value appears as a sub-row (for example, **Country: UK**) with its own per-subject values, relative lift, and confidence interval.
 
 {{< img src="/product_analytics/experiment/metric_property_breakouts/scorecard.png" alt="An experiment Decision Metrics scorecard with a Property column. The Demo Server Revenue primary metric row is labeled Overall with a 35.9% relative lift, and sub-rows labeled Country: UK, Country: US, and Country: CA each show their own control and treatment values, relative lift, and confidence interval bars." style="width:90%;" >}}
 
-To remove a breakout, open the metric's actions again and click {{< ui >}}Hide splits by {{< /ui >}} the property name.
+To remove a breakout, open the metric's actions again and click the hide action for that property (for example, {{< ui >}}Hide splits by Country{{< /ui >}}).
 
 <div class="alert alert-info">Splitting and hiding breakouts is a display option that does not change the experiment or metric configuration, so anyone viewing the experiment can apply it. Breakouts are available in the confidence-interval view.</div>
 
