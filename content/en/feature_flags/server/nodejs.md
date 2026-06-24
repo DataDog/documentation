@@ -100,7 +100,7 @@ Blocking startup until the provider is ready, as shown above, works well for mos
 
 ### Accepting default values before initialization
 
-Call `setProvider` without awaiting when responsiveness during startup matters more than serving real values for the first few requests. The client returns default values until Remote Configuration loads in the background.
+Call `setProvider` without waiting for initialization when responsiveness during startup matters more than serving real values for the first few requests. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
