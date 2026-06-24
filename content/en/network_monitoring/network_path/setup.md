@@ -678,6 +678,8 @@ If no paths with `origin:netflow` appear in the [Network Path][4] UI, verify the
 4. `network_path.netflow_monitoring.enabled` and `network_path.collector.monitor_ip_without_domain` are set to `true` in `datadog.yaml`.
 5. Your `network_path.collector.filters` configuration does not exclude the destination IPs you expect to monitor.
 
+Dynamic Tests for NetFlow automatically skip NetFlow records whose source IP is assigned to the Agent host before destination filters are evaluated. This prevents self-scheduling loops and is expected behavior. For NAT or alias cases where Agent-sourced traffic appears from another source IP, use `network_path.collector.source_excludes` to exclude those source IPs.
+
 Then filter the Network Path UI for `origin:netflow`.
 
 ### Error: status code: 404
