@@ -18,14 +18,17 @@ You can create multiple named Patterns, each scoped to a different application, 
 
 ## How it works
 
-Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using your  [connected LLM provider account][1], giving you an interpretable view of production behavior without manual tagging.
+Patterns uses a mix of calls to your [connected LLM provider account][1] and text embeddings to give you an interpretable view of production behavior without manual tagging.
 
 When you run a Pattern, it:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
-2. Analyzes interactions based on what you configure it to detect — such as user intent or span kind
-3. Names each cluster with an AI-generated topic label and summary
-4. Organizes clusters into a parent-child topic hierarchy
+2. Summarizes each interaction with AI generated text
+3. Computes text embedding of these summaries using a self-hosted, open source model
+4. Forms clusters using Machine Learning (UMAP and HDBSCAN)
+5. Review each cluster and generate meaningful topics with AI generated text
+6. Attributes each interaction to a single topic
+7. Builds a hierarchy using AI by grouping similar topics together
 
 Each topic shows its interaction volume and share of total traffic. Interactions that don't fit any cluster are collected into an Outliers group.
 
@@ -33,12 +36,12 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 
 1. Click **+ New Pattern**
 2. Enter a **Pattern Name**
-3. Under **Clustering model**, select your LLM Provider, Account, and Model — these are used to generate topic names and summaries.
+3. Under **Clustering model**, select your LLM Provider, Account, and Model — these are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic.
 4. Under **Scope**, configure:
    - **Time window:** The lookback period for interactions to analyze
    - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.
    - **Sampling Rate:** The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
-5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.intent}} to detect patterns by intent, or {{meta.span.kind}} to analyze by span kind. Click *Template Examples* to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
+5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.input.value}} to analyze patterns by user input, or {{meta.span.kind}} to analyze by span kind. Click *Template Examples* to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
 6. Click **Save**   
 
 ## Explore your Patterns
