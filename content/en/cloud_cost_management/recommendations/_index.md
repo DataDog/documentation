@@ -607,7 +607,6 @@ Below are the available cloud cost recommendation categories and their descripti
 | Terminate | Resources with signals that the resource is unused or very low utilization signals. Consider terminating or deleting these resources to reduce your costs. |
 | Migrate | Resources with moderately low utilization signals or other inefficiencies. Consider adjusting the instance type or other parameters. |
 | Downsize | Resources that are under-utilized or over-provisioned. Consider adjusting the size or other parameters to reduce costs. |
-| Purchase | Resources with on-demand charges and extended uptime. Purchasing a reservation or Savings Plan can reduce the amortized cost of the resource. |
 | Configure | Resources with configuration options that can be adjusted to reduce costs without changing capacity or terminating the resource. |
 
 ## Prerequisites
