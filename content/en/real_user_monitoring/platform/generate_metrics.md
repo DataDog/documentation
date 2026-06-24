@@ -25,7 +25,7 @@ further_reading:
 
 Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the Datadog RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
 
-RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
+RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months. After you create a custom metric, see [Create Charts with RUM Custom Metrics][17] to add it to a dashboard.
 
 **Note:** Custom metrics are computed based on 100% of the ingested RUM traffic, not only the data retained in the RUM Explorer. This ensures accurate metrics even when using [RUM without Limits][16] retention filters that may retain only a subset of your sessions.
 
@@ -124,3 +124,4 @@ You can use RUM-based custom metrics for the following actions:
 [14]: /monitors/types/forecasts/
 [15]: /service_level_objectives/metric/
 [16]: /real_user_monitoring/rum_without_limits/
+[17]: /real_user_monitoring/guide/create-charts-with-rum-custom-metrics
