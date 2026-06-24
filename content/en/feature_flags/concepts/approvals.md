@@ -24,7 +24,7 @@ Approvals help you control what changes are made to feature flags and by whom. I
 {{< img src="getting_started/feature_flags/environment-approvals.png" alt="Edit Environment dialog with Mark as production environment and Require feature flag approval options." style="width:100%;" >}}
 
 
-After you enable approvals, subsequent changes that impact application behavior in that environment require approval from a user with edit access to the flag. Examples include:
+After you enable approvals, subsequent changes that impact application behavior in that environment require approval from another user with the **Editor** role on the flag before they can be applied. Examples include:
 
 - Enabling or disabling a flag
 - Modifying targeting rules
@@ -61,14 +61,19 @@ When you make a change that requires approval, a **Submit Changes For Review** m
 
 You can delete a pending change after creating it if you need to modify the submission.
 
-### Approve or reject
+### Approve, reject, or apply
 
-Approvers see a diff, a description of the change, and the affected environment. They can approve or reject the change.
+Approvers see a diff, a description of the change, and the affected environment. From the approval request, they can:
 
-<div class="alert alert-warning">
-Approving a change <strong>applies the change automatically</strong>.
-</div>
+- **Reject** the change suggestion
+- **Approve** the change suggestion without applying it
+- **Approve & apply** the change in one step
 
+Approving a change suggestion does not apply it. The approved change remains visible on the flag, and you can apply it at any time after approval.
+
+### Apply approved changes
+
+After a change is approved, apply it when you are ready for it to take effect in the affected environment. You do not need to submit the change for review again.
 
 ### Override approvals
 
