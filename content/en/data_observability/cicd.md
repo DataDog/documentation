@@ -21,6 +21,8 @@ further_reading:
 
 ## Overview
 
+{{< img src="data_observability/cicd/cicd-overview.png" alt="The CI/CD feature report page" style="width:100%;" >}}
+
 Data Observability CI/CD checks run automatically when you open a pull request that modifies dbt models. The checks give you the information you need to decide whether a change is safe to merge.
 
 Datadog posts the results as a comment on your pull request, and the comment updates each time you push new changes to the PR. A full report is also available in the Datadog app, and you'll get a link to it in the PR comment.
@@ -45,7 +47,7 @@ Connect your [source-control provider](/integrations/#cat-source-control). CI/CD
 
 Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project as part of setting up your CI/CD checks.
 
-From the CI/CD settings, click to "Add CI/CD Checks". Pick the dbt project you want to add checks for, as well as the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog will automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
+From the CI/CD settings, click to "Add CI/CD Checks", then pick the dbt project you want to add checks for and select the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog will automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
 
 {{< img src="data_observability/cicd/cicd-connection.png" alt="The CI/CD feature creation page" style="width:100%;" >}}
 
