@@ -127,11 +127,11 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `create_datadog_security_detection_rule`
-: Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the required payload grammar, then supply a complete rule payload. Automatically tags the created rule with `datadog_mcp:created`. On success, returns the full rule including its server-assigned ID.
+: Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the required payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
 : *Permissions required: `Security Monitoring Rules Write`*
 
 `update_datadog_security_detection_rule`
-: Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need to change, and submit the full updated object. Automatically tags the updated rule with `datadog_mcp:updated`. Cannot update Datadog-shipped default rules. On success, returns the full updated rule.
+: Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need to change, and submit the full updated object. Cannot update Datadog-shipped default rules. On success, returns the full updated rule.
 : *Permissions required: `Security Monitoring Rules Write`*
 
 `delete_datadog_security_detection_rules`

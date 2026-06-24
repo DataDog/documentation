@@ -1196,7 +1196,7 @@ Retrieves security detection rules. Supports two modes: provide `rule_id` to get
 ### `create_datadog_security_detection_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. Automatically tags the created rule with `datadog_mcp:created`. On success, returns the full rule including its server-assigned ID.
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
 
 - Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
 - Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
@@ -1205,7 +1205,7 @@ Creates a new detection rule. Call `get_datadog_security_detection_rules_schema`
 ### `update_datadog_security_detection_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Automatically tags the updated rule with `datadog_mcp:updated`. Cannot update Datadog-shipped default rules.
+Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
 
 - Update the threshold on my brute force detection rule from 10 to 20 failed logins.
 - Add a new case to detection rule `abc-123-def` that fires at critical severity.
