@@ -13,7 +13,7 @@ To get started, [set up AAP][2] on your services so they report security traces.
 
 ## How Threat Protection works
 
-Threat Protection brings together several capabilities, all built on the same live application data. With them, you can:
+Threat Protection brings together several capabilities, all built on live application traffic data. With Threat Protection, you can:
 
 - Detect and investigate threats with [Security Signals][3]. Datadog creates a security signal when it detects a threat from a detection rule, so you can triage, filter, and investigate attacks in the Signals Explorer.
 - Block attacks and attackers with [Policies][4]. Block malicious IP addresses and users in real time from the Datadog UI, manually or through automated rules.
