@@ -44,19 +44,19 @@ After you verify ACLs are enabled, grant read and execute permissions for the `d
 setfacl -R -m u:dd-agent:rx /var/log/apache
 ```
 
-To make new log files inherit this access automatically, set a default ACL on the directory with the `-d` flag:
+To have new log files inherit this access automatically, set a default ACL on the directory with the `-d` flag:
 
 ```shell
 setfacl -R -d -m u:dd-agent:rx /var/log/apache
 ```
 
-A default ACL applies to files created in the directory afterward, including those that log rotation creates. This reduces the need for a separate logrotate rule. Files that already exist when you set the default ACL are unaffected, so run both commands above.
+A default ACL only applies to files created in the directory after the default has been set, including those that log rotation creates. This reduces the need for a separate logrotate rule. Files that already exist when you set the default ACL are unaffected, so run both commands above.
 
 [Learn more about how to configure ACLs on Linux][3]
 
 ### Setting permissions for log file rotation
 
-If you set a default ACL with the `-d` flag, log files that rotation creates inherit `dd-agent` access automatically, and no further configuration is required. However, a default ACL does not cover every rotation scheme. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
+If you set a default ACL with the `-d` flag, log files created by a rotation inherit `dd-agent` access automatically, and no further configuration is required. However, a default ACL does not cover every rotation scheme. For example, a configuration that uses `copytruncate` keeps the original file (and its ACL) in place rather than creating a new file.
 
 When a default ACL does not apply to your setup, add a rule to logrotate to reset the ACL after each rotation. Avoid defining a rule for log files that another logrotate configuration already manages, because logrotate reports an `error: duplicate log entry for <FILE>` message when two configurations match the same file. Instead, add a `postrotate` script to the service's existing configuration, or create a separate file for paths that are not already managed:
 
