@@ -21,7 +21,9 @@ Use Observability Pipelines' Amazon Data Firehose source to receive logs from Am
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Amazon Data Firehose address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Amazon Data Firehose address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the Amazon Data Firehose source in the pipeline UI, enter the identifier for your Amazon Data Firehose address. If you leave it blank, the [default](#secret-defaults) is used.
 
@@ -29,7 +31,7 @@ After you select the Amazon Data Firehose source in the pipeline UI, enter the i
 
 #### AWS authentication
 
-Select an **AWS authentication** option. If you select **Assume role**:
+Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >}}Assume role{{< /ui >}}:
 1. Enter the ARN of the IAM role you want to assume.
 1. Optionally, enter the assumed role session name and external ID.
 

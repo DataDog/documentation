@@ -9,15 +9,13 @@ further_reading:
   text: "Meet the new Bits Investigation: Deeper reasoning, twice as fast"
 ---
 
-## Start a Bits Investigation
+## Start a Bits investigation
 
-You can launch a Bits Investigation from several entry points:
+You can launch a Bits investigation from several entry points:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
-- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages)
-- [APM latency Watchdog stories](#apm-latency-watchdog-stories)
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
 - [General prompt](#general-prompt)
 
@@ -40,28 +38,12 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### APM latency (Preview)
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits Investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
-#### APM latency graphs on service pages
-
-1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click {{< ui >}}Investigate{{< /ui >}}.
-1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
-1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}} to run a deeper investigation.
-
-#### APM latency Watchdog stories
-
-On a Watchdog APM latency story, click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
-
 ### Synthetic tests (Preview)
 
 <div class="alert alert-info">
-Bits Investigations started from Synthetic Browser and API tests are in Preview.</div>
+Bits investigations started from Synthetic Browser and API tests are in Preview.</div>
 
-When a Synthetic Browser or API test monitor triggers, you can launch a Bits Investigation to identify the root cause. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
 #### From the Synthetic test details page
 
@@ -94,7 +76,7 @@ Bad example:
 You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits Investigation automatically uses the entire thread as investigation context.
 
 <div class="alert alert-info">
-Starting Bits Investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
+Starting Bits investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
 
 ### Enable automatic investigations
 
@@ -125,12 +107,12 @@ Bits is able to run investigations on the following monitor types:
   - SLOs (Preview)
   - Synthetics API and Browser tests (Preview)
 
-## How Bits Investigation investigates
-When Bits Investigation investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits Investigation updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
+## How Bits investigates
+When Bits investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
 
-At the end of an investigation, Bits Investigation either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
+At the end of an investigation, Bits either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
 
-{{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits Investigation built and tested" style="width:100%;" >}}
+{{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits built and tested" style="width:100%;" >}}
 
 ### Supported data sources
 Bits uses the following data sources during investigations:
@@ -149,7 +131,7 @@ Bits uses the following data sources during investigations:
 - Database Monitoring
 - Continuous Profiler
 
-<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits Investigation correlate data more accurately.</div>
+<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
 
 #### Third-party integrations
 - Grafana
@@ -165,19 +147,17 @@ Third-party integrations are in Preview for all customers.</div>
 For best practices on maximizing the effectiveness of investigations, see [Knowledge sources][9].
 
 ### Investigation display modes
-There are two display modes: Agent Trace and Investigation.
+There are two display modes: Investigation Steps and Hypothesis Tree.
 
-While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the {{< ui >}}Agent Trace{{< /ui >}} view. This provides a real-time, detailed record of the agent’s reasoning process.
+While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the {{< ui >}}Investigation Steps{{< /ui >}} view. This provides a real-time, detailed record of the agent’s reasoning process.
 
-Once the investigation is complete, you can switch to the {{< ui >}}Investigation{{< /ui >}} view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
+Once the investigation is complete, you can switch to the {{< ui >}}Hypothesis Tree{{< /ui >}} view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
 
 
 ## Reports
 
 The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits Investigation on your on-call efficiency.
 
-[1]: https://app.datadoghq.com/apm/home
-[2]: /tracing/guide/latency_investigator/
 [3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
 [4]: /change_tracking
 [5]: https://app.datadoghq.com/bits-ai/monitors/supported

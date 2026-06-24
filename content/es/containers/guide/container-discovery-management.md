@@ -4,68 +4,67 @@ aliases:
 - /es/agent/kubernetes/management
 - /es/agent/guide/autodiscovery-management
 - /es/containers/guide/autodiscovery-management
-description: Controla qué contenedores monitoriza el Datadog Agent mediante la configuración
-  de reglas de detección y patrones de inclusión/exclusión.
+description: Controle qué contenedores el Datadog Agent monitorea configurando reglas
+  de Autodiscovery y patrones de inclusión/exclusión.
 further_reading:
 - link: /containers/kubernetes/integrations/
   tag: Documentación
-  text: Configurar integraciones con Autodiscovery en Kubernetes
+  text: Configure integraciones con Autodiscovery en Kubernetes.
 - link: /containers/docker/integrations/
   tag: Documentación
-  text: Configurar integraciones con Autodiscovery en Docker
-title: Gestión de detección de contenedores
+  text: Configure integraciones con Autodiscovery en Docker.
+title: Gestión del Descubrimiento de Contenedores
 ---
+Por defecto, el Datadog Agent descubre automáticamente todos los contenedores disponibles. Este documento describe cómo restringir el perímetro de descubrimiento del Datadog Agent y limitar la recolección de datos a un subconjunto de contenedores.
 
-En forma predeterminada, el Datadog Agent detecta automáticamente todos los contenedores disponibles. En este documento se describe cómo restringir el perímetro de detección del Datadog Agent y limitar la recopilación de datos a un subconjunto de contenedores.
+## Patrones de descubrimiento de contenedores {#container-discovery-patterns}
 
-## Patrones de detección de contenedores
+En un entorno de contenedores, debe desplegar el Datadog Agent una vez por servidor. Cada Datadog Agent desplegado descubre y monitorea automáticamente todos los contenedores en su respectivo servidor. Cuando se habilita la opción de registros [`containerCollectAll` opción][1], el Datadog Agent recolecta registros de todos los contenedores descubiertos.
 
-En un entorno de contenedores, debes desplegar el Datadog Agent una vez por host. Cada Datadog Agent desplegado detecta y monitoriza en forma automática todos los contenedores en tu respectivo host. Cuando se activa la [opción `containerCollectAll`][1] de logs, el Agent recopila los logs de todos los contenedores detectados.
+Puede ajustar las reglas de descubrimiento para el Datadog Agent y restringir la recolección de métricas y registros. Cualquier contenedor restringido de la recolección de métricas también está restringido para cualquier integración del Datadog Agent basada en [Autodiscovery][2].
 
-Puedes ajustar las reglas de detección del Agent para restringir la recopilación de métricas y logs. Cualquier contenedor que tenga restringida la recopilación de métricas también está restringido para cualquier integración del Agent basada en [Autodiscovery][2].
+Puede establecer excepciones de dos maneras:
 
-Puedes establecer excepciones de dos maneras:
+- Proporcione variables de entorno al contenedor del Datadog Agent como una lista de permitidos/bloqueados de contenedores. Recomendado si tiene una lista de nombres de contenedores, imágenes o namespaces para excluir en todo el clúster.
+- Agregue anotaciones a sus pods de Kubernetes para bloquear pods o contenedores individuales. Recomendado si necesita exclusiones más precisas.
 
-- Proporciona variables de entorno al contenedor del Datadog Agent como una lista de contenedores permitidos/bloqueados. Recomendado si tienes una lista de nombres de contenedores, imágenes o espacios de nombres que excluir para todo el clúster.
-- Añade anotaciones a tus pods de Kubernetes para bloquear pods o contenedores individuales. Recomendado si necesitas exclusiones precisas.
+**Nota**: Las métricas `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` y `.stopped.total` no se ven afectadas por estas configuraciones y siempre cuentan todos los contenedores.
 
-**Nota**: Las métricas `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` y `.stopped.total` no se verán afectadas por estos ajustes y siempre contabilizan todos los contenedores.
+## Coincidencia de patrones simple {#simple-pattern-matching}
 
-## Concordancia de patrones simple
-
-Utiliza las variables de entorno de la tabla siguiente para configurar el filtrado de contenedores. Cada inclusión o exclusión se define como una lista de cadenas de expresiones regulares separadas por espacios. Puedes incluir o excluir contenedores en función de su:
+Utilice las variables de entorno en la tabla a continuación para configurar el filtrado de contenedores. Cada inclusión o exclusión se define como una lista de cadenas regex separadas por espacios. Puede incluir o excluir contenedores según su:
 
 - nombre del contenedor (`name`)
 - nombre de la imagen del contenedor (`image`)
-- Espacio de nombres (`kube_namespace`) de Kubernetes
+- espacio de nombres de Kubernetes (`kube_namespace`)
 
 <div class="alert alert-danger">
 
-El parámetro `name` solo se aplica a los nombres de contenedor, no a los nombres de pod, aunque el contenedor se ejecute en un pod de Kubernetes.
+El parámetro `name` solo se aplica a los nombres de contenedores, no a los nombres de pods, incluso si el contenedor se ejecuta en un pod de Kubernetes.
 
 </div>
 
-### Variables de entorno
+### Variables de entorno {#environment-variables}
 
-En el **Agent v7.20 o posterior**, utiliza las siguientes variables de entorno para excluir contenedores por nombre de imagen, nombre de contenedor o espacio de nombres de Kubernetes. Los logs y las métricas no se recopilan de los contenedores excluidos.
+En **Datadog Agent v7.20+**, utilice las siguientes variables de entorno para excluir contenedores por nombre de imagen, nombre de contenedor o espacio de nombres de Kubernetes. No se recopilan registros ni métricas de los contenedores excluidos.
 
 | Variable de entorno           | Descripción                                         |
 | ------------------------------ | --------------------------------------------------- |
-| `DD_CONTAINER_EXCLUDE`         | Lista de contenedores a excluir.                 |
-| `DD_CONTAINER_EXCLUDE_METRICS` | Lista de contenedores cuyas métricas están excluidas. |
-| `DD_CONTAINER_EXCLUDE_LOGS`    | Lista de contenedores cuyos logs están excluidos.    |
-| `DD_CONTAINER_INCLUDE`         | Lista de contenedores a incluir.                 |
-| `DD_CONTAINER_INCLUDE_METRICS` | Lista de contenedores cuyas métricas están incluidas. |
-| `DD_CONTAINER_INCLUDE_LOGS`    | Lista de contenedores cuyos logs están incluidos.    |
+| `DD_CONTAINER_EXCLUDE`         | Lista de bloqueo de contenedores a excluir.                 |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Lista de bloqueo de contenedores cuyas métricas están excluidas. |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | Lista de bloqueo de contenedores cuyos registros están excluidos.    |
+| `DD_CONTAINER_INCLUDE`         | Lista de permitidos de contenedores a incluir.                 |
+| `DD_CONTAINER_INCLUDE_METRICS` | Lista de permitidos de contenedores cuyas métricas están incluidas. |
+| `DD_CONTAINER_INCLUDE_LOGS`    | Lista de permitidos de contenedores cuyos registros están incluidos.    |
 
-{{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
+{{% collapse-content title="Configuración de variables de entorno" level="h4" expanded=false id="setting-environment-variables" %}}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-En Datadog Operator, configura estas variables de entorno en `spec.override.nodeAgent.env`.
+En el Datadog Operator, configure estas variables de entorno bajo `spec.override.nodeAgent.env`.
 
-##### Ejemplo
+##### Ejemplo {#example}
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -86,7 +85,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-En su gráfico de Helm, suministre una cadena separada por espacios a uno o más de los siguientes:
+En su gráfico de Helm, proporcione una cadena separada por espacios a uno o más de los siguientes:
 - `datadog.containerExclude`
 - `datadog.containerInclude`
 - `datadog.containerExcludeLogs`
@@ -94,7 +93,7 @@ En su gráfico de Helm, suministre una cadena separada por espacios a uno o más
 - `datadog.containerExcludeMetrics`
 - `datadog.containerIncludeMetrics`
 
-##### Ejemplo
+##### Ejemplo {#example-1}
 
 ```yaml
 datadog:
@@ -103,17 +102,17 @@ datadog:
 ```
 
 {{% /tab %}}
-{{% tab "Agent en contenedores" %}}
+{{% tab "Agente en contenedor" %}}
 
-En entornos en los que no se utiliza Datadog Operator ni Helm, se pueden pasar las siguientes variables de entorno al contenedor del Agent al inicio.
+En entornos en los que no utiliza el Datadog Operator o Helm, las siguientes variables de entorno pueden pasarse al contenedor del Datadog Agent al inicio.
 
-##### Ejemplo de Docker
+##### Ejemplo de Docker {#example-docker}
 
 ```shell
 docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
 ```
 
-##### Ejemplo de ECS
+##### Ejemplo de ECS {#example-ecs}
 
 ```json
 "environment": [
@@ -132,11 +131,11 @@ docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
 
 <div class="alert alert-info">
 
-Los filtros de nombre de imagen (`image`) coinciden en todos los nombres completos de la imagen, incluido el registro y la tag (etiqueta) o resumen de la imagen (por ejemplo, `dockerhub.io/NGINX:1.13.1`).
+Los filtros de nombre de imagen (`image`) se aplican a todo el nombre de la imagen, incluyendo el registro y la etiqueta o digest de la imagen (por ejemplo, `dockerhub.io/nginx:1.13.1`).
 
 </div>
 
-#### Ejemplos
+#### Ejemplos {#examples}
 
 Para excluir el contenedor con el nombre `dd-agent`:
 
@@ -144,13 +143,13 @@ Para excluir el contenedor con el nombre `dd-agent`:
 DD_CONTAINER_EXCLUDE = "name:^dd-agent$"
 ```
 
-Para excluir los contenedores que utilizan la imagen `dockercloud/network-daemon`, incluidas todas las tags (etiquetas) y los resúmenes:
+Para excluir contenedores que utilizan la imagen `dockercloud/network-daemon`, incluyendo todas las etiquetas y digests:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon(@sha256)?:.*
 ```
 
-Para excluir contenedores mediante la imagen `dockercloud/network-daemon:1.13.0`:
+Para excluir contenedores que utilizan la imagen `dockercloud/network-daemon:1.13.0`:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon:1.13.0$"
@@ -162,7 +161,7 @@ Para excluir cualquier contenedor cuya imagen contenga la palabra `agent`:
 DD_CONTAINER_EXCLUDE = "image:agent"
 ```
 
-Para excluir cualquier contenedor que utilice la imagen `foo` independientemente del registro:
+Para excluir cualquier contenedor que utilice la imagen `foo` sin importar el registro:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:^.*/foo(@sha256)?:.*"
@@ -174,27 +173,27 @@ Para excluir todos los contenedores:
 DD_CONTAINER_EXCLUDE = "name:.*"
 ```
 
-También puedes utilizar `image:.*` o `kube_namespace:.*`. La configuración de `.*` sin un prefijo `name:`, `image:` o `kube_namespace:` no funciona.
+Alternativamente, también puede usar `image:.*` o `kube_namespace:.*`. Configurar `.*` sin un prefijo `name:`, `image:` o `kube_namespace:` no funciona.
 
-### Comportamiento de inclusión y exclusión
+### Comportamiento de inclusión y exclusión {#inclusion-and-exclusion-behavior}
 
-En general, la inclusión tiene prioridad sobre la exclusión. Por ejemplo, para sólo monitorizar las imágenes `ubuntu` o `debian`, primero excluye todas las demás imágenes y luego especifique qué imágenes incluir:
+Generalmente, la inclusión tiene prioridad sobre la exclusión. Por ejemplo, para monitorear solo imágenes `ubuntu` o `debian`, primero excluya todas las demás imágenes y luego especifique cuáles imágenes incluir:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
 
-La única excepción a esta regla son las anotaciones de exclusión de pods como `ad.datadoghq.com/exclude`. Cuando una aplicación tiene una anotación de exclusión configurada en `true`, esta tiene prioridad y el contenedor queda excluido de ser autodetectado para su monitorización. Por ejemplo, tener una condición que incluya cada contenedor como `DD_CONTAINER_INCLUDE = "image:.*"` no garantiza que un contenedor sea incluido si tiene una anotación de exclusión establecida en él. Consulta [Gestión de detección de contenedores - configuración de exclusión de pods](#pod-exclude-configuration) para obtener más información.
+La única excepción a esta regla son las anotaciones de exclusión de pod como `ad.datadoghq.com/exclude`. Cuando una aplicación tiene una anotación de exclusión establecida en `true`, esto tiene prioridad, y el contenedor es excluido de ser autodetectado para monitoreo. Por ejemplo, tener una condición que incluya todos los contenedores como `DD_CONTAINER_INCLUDE = "image:.*"` no garantiza que un contenedor esté incluido si tiene una anotación de exclusión establecida en él. Consulte [Gestión de Descubrimiento de Contenedores - Configuración de exclusión de Pod](#pod-exclude-configuration) para más información.
 
-No puedes mezclar reglas de inclusión/exclusión entre categorías. Por ejemplo, si quieres incluir un contenedor con el nombre de imagen `foo` y excluir solo las métricas de un contenedor con el nombre de imagen `bar`, lo siguiente **no es suficiente**:
+No puede mezclar reglas de inclusión/exclusión entre categorías. Por ejemplo, si desea incluir un contenedor con el nombre de imagen `foo` y excluir solo las métricas de un contenedor con el nombre de imagen `bar`, lo siguiente es **no suficiente**:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
-Será mejor que utilices lo siguiente:
+En su lugar, usa:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
@@ -202,20 +201,20 @@ DD_CONTAINER_INCLUDE_METRICS = "image:^docker.io/library/foo(@sha256)?:.*"
 DD_CONTAINER_INCLUDE_LOGS = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
-No existe una interacción entre las listas globales y las listas selectivas (logs y métricas). En otras palabras, no se puede excluir un contenedor globalmente (`DD_CONTAINER_EXCLUDE`) y luego incluirlo con `DD_CONTAINER_INCLUDE_LOGS` y `DD_CONTAINER_INCLUDE_METRICS`.
+No hay interacción entre las listas globales y las listas selectivas (registros y métricas). En otras palabras, no puedes excluir un contenedor globalmente (`DD_CONTAINER_EXCLUDE`) y luego incluirlo con `DD_CONTAINER_INCLUDE_LOGS` y `DD_CONTAINER_INCLUDE_METRICS`.
 
-### Contenedores pausados
+### Pausar contenedores {#pause-containers}
 
-El Datadog Agent excluye los contenedores de Kubernetes y OpenShift pausados en forma predeterminada. Esto impide la recopilación de sus métricas y su recuento como contenedores facturables. De todas maneras, se siguen contabilizando en las métricas de count de contenedores como `kubernetes.containers.running` y `docker.containers.running`.
+El Agente de Datadog excluye los contenedores de pausa de Kubernetes y OpenShift por defecto. Esto impide su recolección de métricas y que se cuenten como contenedores facturables. Aún se cuentan en las métricas de conteo de contenedores como `kubernetes.containers.running` y `docker.containers.running`.
 
-Para desactivar este comportamiento e incluir la monitorización de los contenedores pausados:
+Para deshabilitar este comportamiento e incluir la monitorización de los contenedores de pausa:
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-En el Datadog Operator, configura estas variables de entorno como `spec.override.nodeAgent.env`.
+En Datadog Operator, establece estas variables de entorno bajo `spec.override.nodeAgent.env`.
 
-##### Ejemplo
+##### Ejemplo {#example-2}
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -236,9 +235,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-En tu gráfico de Helm, establece `datadog.excludePauseContainer` como `true` o `false`.
+En su chart de Helm, establezca `datadog.excludePauseContainer` en `true` o `false`.
 
-##### Ejemplo
+##### Ejemplo {#example-3}
 
 ```yaml
 datadog:
@@ -248,39 +247,39 @@ datadog:
 ```
 
 {{% /tab %}}
-{{% tab "Agent en contenedores" %}}
+{{% tab "Agente en contenedor" %}}
 
-En los entornos en los que no utilizas Helm o el Operator, puedes transferir las siguientes variables de entorno al contenedor del Agent en el inicio.
+En entornos en los que no utiliza Helm o el Datadog Operator, las siguientes variables de entorno pueden pasarse al contenedor del Datadog Agent al inicio.
 
-Establece `DD_EXCLUDE_PAUSE_CONTAINER` como `false`.
+Establezca `DD_EXCLUDE_PAUSE_CONTAINER` en `false`.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Exclusión anticipada del CEL
+## Exclusión CEL avanzada {#advanced-cel-exclusion}
 
-En el **Agent v7.73+**, puedes utilizar la opción de configuración `cel_workload_exclude` para filtrar contenedores de Autodiscovery. Esta función te permite definir reglas [Common Expression Langauge][3] para seleccionar contenedores que deben excluirse de la recopilación de telemetría.
+En **Datadog Agent v7.73+**, puede usar la opción de configuración `cel_workload_exclude` para filtrar contenedores de Autodiscovery. Esta función le permite definir reglas de [Common Expression Language][3] para identificar contenedores que deben ser excluidos de la recolección de telemetría.
 
-Utiliza los siguientes atributos para representar el objeto de contenedor en tus reglas de filtrado:
+Utilice los siguientes atributos para representar el objeto contenedor en sus reglas de filtrado:
 
 | Atributo                   | Descripción                                                             |
 |-----------------------------|-------------------------------------------------------------------------|
 | `container.name`            | El nombre del contenedor.                                              |
-| `container.image.reference` | La referencia completa de la imagen del contenedor (registro, repositorio, tag/resumen). |
+| `container.image.reference` | La referencia completa de la imagen del contenedor (registro, repositorio, etiqueta/digest). |
 | `container.pod.name`        | El nombre del pod que ejecuta el contenedor.                              |
 | `container.pod.namespace`   | El espacio de nombres de Kubernetes del pod.                                    |
-| `container.pod.annotations` | Las anotaciones aplicadas al pod (mapa clave-valor).                     |
+| `container.pod.annotations` | Las anotaciones aplicadas al pod (mapa de clave-valor).                     |
 
-### Estructura de la configuración
+### Estructura de configuración {#configuration-structure}
 
-La opción de configuración `cel_workload_exclude` se estructura como una lista de conjuntos de reglas evaluadas como OR lógicos, donde un contenedor se excluye si coincide con alguna regla. Cada conjunto de reglas define los `products` que deben excluirse y el CEL correspondiente `rules` que debe coincidir con los contenedores.
+La opción de configuración `cel_workload_exclude` está estructurada como una lista de conjuntos de reglas evaluadas como OR lógicos, donde un contenedor es excluido si coincide con alguna regla. Cada conjunto de reglas define el `products` a excluir y el correspondiente CEL `rules` para coincidir con los contenedores.
 
-El campo `products` acepta `metrics`, `logs` y `global` (excluye el contenedor de todos los productos de la lista).
+El campo `products` acepta `metrics`, `logs` y `global` (excluir contenedor de todos los productos listados).
 
 <div class="alert alert-danger">
-Si la configuración contiene errores estructurales o problemas de sintaxis de CEL, el Agent sale con un error para evitar la recopilación de telemetría no deseada que podría afectar a la facturación.
+Si la configuración contiene errores estructurales o problemas de sintaxis CEL, el Datadog Agent sale con un error para evitar la recopilación de telemetría no intencionada que podría afectar la facturación.
 </div>
 
-En el siguiente ejemplo, las métricas y los logs se excluyen para cualquier contenedor con `NGINX` en su nombre que se ejecute en el espacio de nombres `staging`. Además, se excluyen los logs de cualquier contenedor que ejecute la imagen `redis` O cualquier contenedor dentro de un pod que tenga la anotación `low_priority: "true"`. El [archivo de configuración del Agent][4] se puede actualizar directamente como se ve en este ejemplo.
+En el ejemplo a continuación, se excluyen métricas y registros para cualquier contenedor con `nginx` en su nombre que se ejecute en el espacio de nombres `staging`. Además, se excluyen registros para cualquier contenedor que ejecute la imagen `redis`, o cualquier contenedor dentro de un pod que tenga la anotación `low_priority: "true"`. El [archivo de configuración del Agent][4] se puede actualizar directamente como se ve en este ejemplo.
 
 ```yaml
 # datadog.yaml
@@ -296,18 +295,18 @@ cel_workload_exclude:
       - container.pod.annotations["low_priority"] == "true"
 ```
 
-También puedes configurar la exclusión de cargas de trabajo respaldada por CEL utilizando uno de los siguientes métodos:
-- Configura la variable de entorno `DD_CEL_WORKLOAD_EXCLUDE` con una cadena con formato JSON que contenga tus reglas, en cualquier configuración del Agent en contenedores.
-- Para Datadog Operator o Helm Chart, añade tus reglas de CEL a la opción de configuración correspondiente (como se muestra en los ejemplos siguientes).
+También puede configurar la exclusión de carga de trabajo respaldada por CEL utilizando uno de los siguientes métodos:
+- Establezca la variable de entorno `DD_CEL_WORKLOAD_EXCLUDE` con una cadena en formato JSON que contenga sus reglas, en cualquier configuración de Agent en contenedores.
+- Para el Operador de Datadog o Helm Chart, agregue sus reglas CEL a la opción de configuración apropiada (como se muestra en los ejemplos a continuación).
 
-{{% collapse-content title="Configuring CEL exclusion rules" level="h4" expanded=false id="setting-environment-variables" %}}
+{{% collapse-content title="Configurando reglas de exclusión CEL" level="h4" expanded=false id="setting-environment-variables" %}}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-En Datadog Operator (>=v1.23.0), utiliza las opciones `spec.override.nodeAgent.celWorkloadExclude` y `spec.override.clusterAgent.celWorkloadExclude`.
+En Datadog Operator (>=v1.23.0), utilice las opciones `spec.override.nodeAgent.celWorkloadExclude` y `spec.override.clusterAgent.celWorkloadExclude`.
 
-##### Ejemplo
+##### Ejemplo {#example-4}
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -336,9 +335,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-En tu gráfico de Helm, utiliza la opción de configuración `datadog.celWorkloadExclude`.
+En su gráfico de Helm, utilice la opción de configuración `datadog.celWorkloadExclude`.
 
-##### Ejemplo
+##### Ejemplo {#example-5}
 
 ```yaml
 datadog:
@@ -350,17 +349,17 @@ datadog:
 ```
 
 {{% /tab %}}
-{{% tab "Agent en contenedores" %}}
+{{% tab "Agente en contenedor" %}}
 
-En los entornos en los que no utilizas Helm o el Operator, puedes transferir las siguientes variables de entorno al contenedor del Agent en el inicio.
+En entornos donde no esté utilizando Helm o el Operator, las siguientes variables de entorno pueden pasarse al contenedor del Agent al inicio.
 
-##### Ejemplo de Docker
+##### Ejemplo de Docker {#example-docker-1}
 
 ```shell
 docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
 ```
 
-##### Ejemplo de ECS
+##### Ejemplo de ECS {#example-ecs-1}
 
 ```json
 "environment": [
@@ -377,9 +376,9 @@ docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Validating configuration option" level="h4" expanded=false id="validating-configuration-option" %}}
+{{% collapse-content title="Validando la opción de configuración" level="h4" expanded=false id="validating-configuration-option" %}}
 
-Utiliza el comando `agent workloadfilter verify-cel` para validar la sintaxis de tu configuración antes del despliegue. Acepta entradas de YAML o JSON a través de stdin. El siguiente ejemplo muestra cómo la validación detecta un error de campo no definido:
+Utilice el comando `agent workloadfilter verify-cel` para validar la sintaxis de su configuración antes de la implementación. Acepta entrada en YAML o JSON a través de stdin. El siguiente ejemplo demuestra la validación que captura un error de campo indefinido:
 
 ```json
 ### cel-config.json
@@ -424,7 +423,7 @@ Error: CEL compilation failed
 
 {{% /collapse-content %}}
 
-#### Ejemplos de normas
+#### Reglas de ejemplo {#example-rules}
 
 Para excluir el contenedor con una anotación de pod específica:
 
@@ -438,48 +437,54 @@ Para excluir el contenedor en espacios de nombres sin la subcadena `-dev`:
 !container.pod.namespace.matches("-dev")
 ```
 
-Para excluir el contenedor con el nombre `NGINX-server` solo en el espacio de nombres `prod`:
+Para excluir el contenedor con el nombre `nginx-server` solo en el espacio de nombres `prod`:
 
 ```yaml
 container.name == "nginx-server" && container.pod.namespace == "prod"
 ```
 
-Para excluir el contenedor que ejecuta una imagen con la subcadena `NGINX`:
+Para excluir el contenedor que ejecuta una imagen con la subcadena `nginx`:
 
 ```yaml
 container.image.reference.matches("nginx")
 ```
 
-Para excluir el contenedor utilizando la lógica agrupada (por ejemplo, un nombre de contenedor específico en cualquiera de los dos espacios de nombres):
+Para excluir el contenedor utilizando lógica agrupada (por ejemplo, un nombre de contenedor específico en cualquiera de dos espacios de nombres):
 
 ```yaml
 container.name == "redis" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
 ```
 
-Para excluir contenedores en función del nombre del propietario del pod (por ejemplo, dirigirse a todos los contenedores creados por un Deployment o CronJob llamado `my-app`):
+Para excluir contenedores basados en el nombre del propietario de su pod (por ejemplo, apuntando a todos los contenedores creados por un Deployment o CronJob llamado `my-app`):
 
 ```yaml
 container.pod.name.startsWith("my-app")
 ```
 
-## Configuración de exclusión de pods
+Para **incluir únicamente** contenedores en un conjunto particular de namespaces:
 
-En el **Agent v7.45 o posterior** puedes incluir anotaciones en tus pods de Kubernetes para controlar Autodiscovery. Configura las siguientes anotaciones con el valor `"true"` para añadir reglas de exclusión.
+```yaml
+!(container.pod.namespace in ["foo", "bar", "baz"])
+```
+
+## Configuración de exclusión de pod {#pod-exclude-configuration}
+
+En **Agent v7.45+** puede establecer anotaciones en sus pods de Kubernetes para controlar Autodiscovery. Establezca las siguientes anotaciones con el valor `"true"` para agregar reglas de exclusión.
 
 | Anotación                                          | Descripción                                                                      |
 | --------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ad.datadoghq.com/exclude`                          | Excluye todo el pod                                                          |
-| `ad.datadoghq.com/logs_exclude`                     | Excluye la recopilación de logs de todo el pod                                      |
-| `ad.datadoghq.com/metrics_exclude`                  | Excluye la recopilación de métricas de todo el pod                                   |
-| `ad.datadoghq.com/<CONTAINER_NAME>.exclude`         | Excluye el contenedor con `<CONTAINER_NAME>` en el pod                        |
-| `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excluye la recopilación de logs del contenedor con `<CONTAINER_NAME>` en el pod    |
-| `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excluye la recopilación de métricas del contenedor con `<CONTAINER_NAME>` en el pod |
+| `ad.datadoghq.com/logs_exclude`                     | Excluye la recolección de registros de todo el pod |
+| `ad.datadoghq.com/metrics_exclude`                  | Excluye la recolección de métricas de todo el pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.exclude`         | Excluye el contenedor con `<CONTAINER_NAME>` en el pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excluye la recolección de registros del contenedor con `<CONTAINER_NAME>` en el pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excluye la recolección de métricas del contenedor con `<CONTAINER_NAME>` en el pod |
 
-La anotación `ad.datadoghq.com/exclude` configurada en el pod de aplicación tiene la máxima prioridad. Esto significa que incluso si un contenedor coincide con la inclusión a través de `DD_CONTAINER_INCLUDE`, el Agent sigue ignorando la monitorización para ese contenedor. Lo mismo se aplica para las respectivas configuraciones de filtrado específicas para métricas y logs.
+La anotación `ad.datadoghq.com/exclude` establecida en el pod de la aplicación tiene la máxima prioridad. Esto significa que incluso si un contenedor coincide con la inclusión a través de `DD_CONTAINER_INCLUDE`, el Agent aún ignora la supervisión de ese contenedor. Lo mismo se aplica a las configuraciones de filtrado específicas para métricas y registros.
 
-Cuando se aplican exclusiones basadas en anotaciones, el Agent check todas las anotaciones de exclusión relevantes en el contenedor. Por ejemplo, al configurar logs para un contenedor NGINX, el Agent buscará anotaciones `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/NGINX.exclude` o `ad.datadoghq.com/NGINX.logs_exclude` para ser `true` en el pod. Lo mismo se aplica a las métricas.
+Al aplicar exclusiones basadas en anotaciones, el Agent verifica todas las anotaciones de exclusión relevantes en el contenedor. Por ejemplo, al configurar registros para un contenedor NGINX, el Agent buscará las anotaciones `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/nginx.exclude` o `ad.datadoghq.com/nginx.logs_exclude` que estén `true` en el pod. Lo mismo se aplica a las métricas.
 
-#### Excluir todo el pod
+#### Excluye todo el pod {#exclude-the-entire-pod}
 
 ```yaml
 apiVersion: apps/v1
@@ -496,7 +501,7 @@ spec:
         #(...)
 ```
 
-#### Excluir la recopilación de logs de un contenedor
+#### Excluye la recolección de registros de un contenedor {#exclude-log-collection-from-a-container}
 
 ```yaml
 apiVersion: apps/v1
@@ -516,9 +521,9 @@ spec:
           #(...)
 ```
 
-### Tolerar pods no listos
+### Tolerar pods no listos {#tolerate-unready-pods}
 
-Por defecto, los pods `unready` se ignoran cuando el Datadog Agent programa checks. Por lo tanto, las métricas, los checks de servicios y los logs no se recopilan de estos pods. Para anular este comportamiento, configura la anotación `ad.datadoghq.com/tolerate-unready` como `"true"`. Por ejemplo:
+Por defecto, `unready` los pods son ignorados cuando el Datadog Agent programa verificaciones. Por lo tanto, no se recopilan métricas, verificaciones de servicio ni registros de estos pods. Para anular este comportamiento, establezca la anotación `ad.datadoghq.com/tolerate-unready` en `"true"`. Por ejemplo:
 
 ```yaml
 apiVersion: v1
@@ -531,17 +536,17 @@ metadata:
   ...
 ```
 
-## Configuración de seguridad
+## Configuración de seguridad {#security-configuration}
 
-En el **Agent v7.70+**, puedes restringir la monitorización de la seguridad para contenedores específicos, de modo que solo se te facturen los contenedores que desees que se monitoricen. Esta funcionalidad no es compatible con Datadog Operator.
+En **Agent v7.70+**, puede restringir la supervisión de seguridad para contenedores específicos, de modo que solo se le cobre por los contenedores que desea tener supervisados. Esta funcionalidad no es compatible con el Datadog Operator.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-| Función                               | Incluir contenedor                                   | Excluir contenedor                                   |
+| Funcionalidad                               | Incluir contenedor                                   | Excluir contenedor                                   |
 |---------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
-| [Errores de configuración de Cloud Security][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
-| [Vulnerabilidades de Cloud Security][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
+| [Cloud Security Misconfigurations][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
+| [Cloud Security Vulnerabilities][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
 | [Workload Protection][3]              | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
 
 [1]: /es/security/cloud_security_management/misconfigurations/
@@ -549,7 +554,7 @@ En el **Agent v7.70+**, puedes restringir la monitorización de la seguridad par
 [3]: /es/security/workload_protection/
 {{% /tab %}}
 {{% tab "Archivo de configuración" %}}
-Para [Vulnerabilidades de Cloud Security][1], puedes utilizar el siguiente formato en tu archivo de configuración para incluir o excluir contenedores:
+Para [Cloud Security Vulnerabilities][1], puede usar el siguiente formato en su archivo de configuración para incluir o excluir contenedores:
 
 ```
 ---
@@ -560,13 +565,13 @@ sbom:
 ```
 [1]: /es/security/cloud_security_management/vulnerabilities
 {{% /tab %}}
-{{% tab "Agent en contenedores" %}}
-En entornos donde no se utiliza Helm ni el Operator, las siguientes variables de entorno pueden pasarse al contenedor del Agent al inicio.
+{{% tab "Agente en contenedor" %}}
+En entornos donde no esté utilizando Helm o el Operator, las siguientes variables de entorno pueden pasarse al contenedor del Agent al inicio.
 
-| Función                               | Incluir contenedor                              | Excluir contenedor                              |
+| Funcionalidad                               | Incluir contenedor                              | Excluir contenedor                              |
 |---------------------------------------|------------------------------------------------|------------------------------------------------|
-| [Errores de configuración de Cloud Security][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
-| [Vulnerabilidades de Cloud Security][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
+| [Cloud Security Misconfigurations][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
+| [Cloud Security Vulnerabilities][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
 | [Workload Protection][3]              | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
 
 [1]: /es/security/cloud_security_management/misconfigurations/
@@ -575,7 +580,7 @@ En entornos donde no se utiliza Helm ni el Operator, las siguientes variables de
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

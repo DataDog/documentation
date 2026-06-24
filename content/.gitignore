@@ -76,6 +76,11 @@
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/integrated_libraries.md
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup.md
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/troubleshooting.md
+/*/real_user_monitoring/application_monitoring/maui/advanced_configuration.md
+/*/real_user_monitoring/application_monitoring/maui/data_collected.md
+/*/real_user_monitoring/application_monitoring/maui/frustration_signals.md
+/*/real_user_monitoring/application_monitoring/maui/setup.md
+/*/real_user_monitoring/application_monitoring/maui/troubleshooting.md
 /*/real_user_monitoring/application_monitoring/react_native/advanced_configuration.md
 /*/real_user_monitoring/application_monitoring/react_native/data_collected.md
 /*/real_user_monitoring/application_monitoring/react_native/frustration_signals.md
@@ -103,3 +108,5 @@
 /*/tracing/error_tracking/error_grouping.md
 /*/tracing/trace_collection/custom_instrumentation/server-side/_index.md
 /*/dd_e2e/cdocs/components/card_grid.md
+/*/real_user_monitoring/application_monitoring/browser/setup/_index.md
+/*/observability_pipelines/configuration/install_the_worker/_index.md

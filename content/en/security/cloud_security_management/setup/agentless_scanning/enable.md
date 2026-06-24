@@ -129,6 +129,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
+1. Select the **Add a Single AWS Account** and **CloudFormation** options.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that has [Remote Configuration][3] enabled.
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
@@ -140,8 +141,13 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Click the AWS account where you want to deploy the Agentless scanner, which opens the side panel.
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **CloudFormation**.
+1. Select the AWS region that corresponds to the CloudFormation stack.
 1. Select an API key that has [Remote Configuration][3] enabled.
-1. Toggle the features you want to enable, such as **Vulnerability Management** or **Sensitive Data Scanner**.
+1. Copy the new application key Datadog generates.
+1. Choose to either:
+   - Use an existing scanner, then select the scanner you want to use.
+   - Deploy a nwe scanner.
+1. Toggle the features you want to enable, such as **Agentless Vulnerability Management** or **Sensitive Data Scanning for Cloud Storage**.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click **Done**.
 
@@ -157,9 +163,9 @@ This setup deploys the delegate role required for [cross-account scanning](/secu
 
 #### Prerequisites
 
-1. Access to the AWS management account.
-1. [Trusted Access with AWS Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html) must be enabled for CloudFormation StackSets.
-1. Agentless Scanning is already configured in your central scanning account (see above).
+- Access to the AWS management account
+- [Trusted Access with AWS Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html) must be enabled for CloudFormation StackSets
+- Agentless Scanning already configured in your central scanning account ([see above](#aws-cloudformation-setup))
 
 #### Deploy the StackSet
 
@@ -194,7 +200,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
-1. Under **Choose a method for adding your AWS account**, select **Manually**.
+1. Select the **Add a Single AWS Account** and **Manually** options.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
 1. Select the **I confirm that the Datadog IAM Role has been added to the AWS Account** checkbox.
 1. Enter the **AWS Account ID** and **AWS Role Name**.
@@ -207,7 +213,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Select the **I confirm the Terraform module is installed** checkbox.
+1. Select the **I confirm the Datadog Agentless Scanner was installed using Terraform** checkbox.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -245,9 +251,9 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
    - **Terraform state**: By default, it creates an Azure Storage Account in the **scanner** subscription. To reuse an existing storage account in the scanner resource group instead, set `TF_STATE_STORAGE_ACCOUNT` before you run the command; the script does not create a new account when that variable is set.
    - **Resource providers**: When possible, it registers these resource providers in the scanner subscription: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed. The **Vulnerability Scanning** modal opens.
-1. Turn on the **Vulnerability Scanning** toggle.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Azure Cloud Shell**.
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
 1. Select the **Azure subscriptions** you want to scan.
 1. Configure the scanner:
@@ -275,8 +281,8 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed.
-1. Toggle **Vulnerability Scanning** to the on position.
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
 1. Click **Done**.
@@ -310,7 +316,8 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
    - If you see a 403 error on **Setting up Terraform state storage**, see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Under the account that contains the project where you want to deploy the Agentless scanner, click **Enable** for that project. Expand the account or project list first if it is collapsed. The **Vulnerability Scanning** modal opens.
+1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
 1. Select the **GCP projects** you want to scan.
@@ -326,8 +333,9 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Under the account that contains the project where you want to deploy the Agentless scanner, click **Enable** for that project. Expand the account or project list first if it is collapsed.
-1. Toggle **Vulnerability Scanning** to the on position.
+1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme).
 1. Click **Done**.
 {{% /collapse-content %}}
@@ -361,10 +369,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
 1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
-1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-1. Under **How would you like to set up Agentless Scanning?**, click **Terraform**.
-1. Under **Enable Features**, beside **Enable Agentless Vulnerability management**, switch the toggle to the off position.
-1. Click **Done**.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -372,10 +377,8 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 {{% tab "Azure" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
-1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" alt="Edit" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
-1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
-1. Click **Done**.
+1. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -383,10 +386,8 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 {{% tab "GCP" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to disable Agentless Scanning.
-1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" alt="Edit" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
-1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
-1. Click **Done**.
+1. Expand the account containing the project where you want to disable Agentless Scanning. Click the project to open the side panel that contains its settings.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 

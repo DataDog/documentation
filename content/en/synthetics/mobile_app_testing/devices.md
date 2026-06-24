@@ -23,18 +23,13 @@ multifiltersearch:
       id: us
   data:
     # Android devices
-    - device: Google Pixel 6a
-      os: Android 13
+    - device: Google Pixel 4a
+      os: Android 11
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Google Pixel 8
-      os: Android 14
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Google Pixel 8 Pro
-      os: Android 14
+    - device: Google Pixel 5
+      os: Android 12
       platform: Android
       eu: 'Yes'
       us: 'Yes'
@@ -53,23 +48,53 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Google Pixel 6 Pro (Unlocked)
+    - device: Google Pixel 8
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 8 Pro
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 9
+      os: Android 15
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 9 Pro
+      os: Android 15
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 9 Pro XL
+      os: Android 15
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S21
       os: Android 12
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Google Pixel 5
-      os: Android 12
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Google Pixel 4a
+    - device: Samsung Galaxy S21
       os: Android 11
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Google Pixel 4 XL (Unlocked)
-      os: Android 10
+    - device: Samsung Galaxy S22 Ultra 5G
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S23
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S23 Ultra
+      os: Android 13
       platform: Android
       eu: 'Yes'
       us: 'Yes'
@@ -78,7 +103,7 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Samsung Galaxy S24+
+    - device: Samsung Galaxy S24 Plus
       os: Android 14
       platform: Android
       eu: 'Yes'
@@ -88,38 +113,8 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Samsung Galaxy S23
-      os: Android 14
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy S23
-      os: Android 13
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy S23 Ultra
-      os: Android 13
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy S22 Ultra 5G
-      os: Android 12
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy S21
-      os: Android 12
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy S21
+    - device: Samsung Galaxy Tab S7
       os: Android 11
-      platform: Android
-      eu: 'Yes'
-      us: 'Yes'
-    - device: Samsung Galaxy A51
-      os: Android 10
       platform: Android
       eu: 'Yes'
       us: 'Yes'
@@ -128,38 +123,23 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Samsung Galaxy Tab S7
+    - device: Google Pixel 3a XL
       os: Android 11
       platform: Android
-      eu: 'Yes'
+      eu: 'No'
       us: 'Yes'
     - device: Google Pixel 6 (Unlocked)
       os: Android 12
       platform: Android
       eu: 'No'
       us: 'Yes'
-    - device: Google Pixel 3a XL
-      os: Android 11
-      platform: Android
-      eu: 'No'
-      us: 'Yes'
-    - device: LG Stylo 6
-      os: Android 10
-      platform: Android
-      eu: 'No'
-      us: 'Yes'
-    - device: Samsung Galaxy S23+
-      os: Android 13
-      platform: Android
-      eu: 'No'
-      us: 'Yes'
-    - device: Samsung Galaxy S22 5G
-      os: Android 13
-      platform: Android
-      eu: 'No'
-      us: 'Yes'
-    - device: Samsung Galaxy S22+ 5G
+    - device: Google Pixel 6 Pro (Unlocked)
       os: Android 12
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy A71
+      os: Android 11
       platform: Android
       eu: 'No'
       us: 'Yes'
@@ -173,74 +153,59 @@ multifiltersearch:
       platform: Android
       eu: 'No'
       us: 'Yes'
-    - device: Samsung Galaxy Note 20
-      os: Android 11
+    - device: Samsung Galaxy S22 5G
+      os: Android 13
       platform: Android
       eu: 'No'
       us: 'Yes'
-    - device: Samsung Galaxy A71
-      os: Android 11
+    - device: Samsung Galaxy S22+ 5G
+      os: Android 12
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S23
+      os: Android 13
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S23+
+      os: Android 13
       platform: Android
       eu: 'No'
       us: 'Yes'
     # Apple devices
-    - device: iPhone 16
-      os: iOS 18
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 16 Pro
-      os: iOS 18
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 16 Pro Max
-      os: iOS 18
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 15
-      os: iOS 18
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 15
-      os: iOS 17
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 15 Pro
-      os: iOS 17
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 15 Pro Max
-      os: iOS 17
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 14
+    - device: iPad (2022)
       os: iOS 16
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 14 Pro
-      os: iOS 17
+    - device: iPad Air 4 (2020)
+      os: iOS 14
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 14 Pro
+    - device: 'iPad Pro 11" (2022)'
       os: iOS 16
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 14 Plus
+    - device: iPad Pro 13 (2025)
+      os: iOS 26
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 11 Pro
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12
       os: iOS 16
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 14 Pro Max
-      os: iOS 16
+    - device: iPhone 12
+      os: iOS 15
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
@@ -259,133 +224,93 @@ multifiltersearch:
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 13 Pro Max
-      os: iOS 17
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12 Pro Max
-      os: iOS 15
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12
-      os: iOS 16
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12
-      os: iOS 15
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12 Pro
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 11
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 11 Pro
-      os: iOS 15
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone XR
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone X
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 8
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 8
-      os: iOS 13
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone SE (2020)
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone 12 Pro Max
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
     - device: iPhone 13 Pro
       os: iOS 15
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPad Pro 11" (2022)
-      os: iOS 16
+    - device: iPhone 13 Pro Max
+      os: iOS 17
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPad (2022)
-      os: iOS 16
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPad Pro 12.9" (2022)
-      os: iOS 16
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPad Air 4 (2020)
-      os: iOS 14
-      platform: Apple
-      eu: 'Yes'
-      us: 'Yes'
-    - device: iPhone SE (2022)
+    - device: iPhone 13 Pro Max
       os: iOS 15
       platform: Apple
-      eu: 'No'
+      eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 12 Mini
+    - device: iPhone 14
       os: iOS 16
       platform: Apple
-      eu: 'No'
+      eu: 'Yes'
       us: 'Yes'
-    - device: iPhone 12 Mini
-      os: iOS 14
-      platform: Apple
-      eu: 'No'
-      us: 'Yes'
-    - device: iPhone 11
+    - device: iPhone 14 Plus
       os: iOS 16
       platform: Apple
-      eu: 'No'
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro Max
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15 Pro Max
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 16
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 16 Pro
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 16 Pro Max
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 17
+      os: iOS 26
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 17 Pro
+      os: iOS 26
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 17 Pro Max
+      os: iOS 26
+      platform: Apple
+      eu: 'Yes'
       us: 'Yes'
     - device: iPad (2022)
       os: iOS 17
-      platform: Apple
-      eu: 'No'
-      us: 'Yes'
-    - device: iPad Air (2022)
-      os: iOS 15
-      platform: Apple
-      eu: 'No'
-      us: 'Yes'
-    - device: iPad Mini 2021
-      os: iOS 15
       platform: Apple
       eu: 'No'
       us: 'Yes'
@@ -394,7 +319,17 @@ multifiltersearch:
       platform: Apple
       eu: 'No'
       us: 'Yes'
-    - device: iPad Pro 5th Gen (2021)
+    - device: iPad Air (2022)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Mini (5th Gen)
+      os: iOS 14
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Mini 2021
       os: iOS 15
       platform: Apple
       eu: 'No'
@@ -404,8 +339,33 @@ multifiltersearch:
       platform: Apple
       eu: 'No'
       us: 'Yes'
-    - device: iPad Mini (5th Gen)
-      os: iOS 14
+    - device: 'iPad Pro 12.9" (2022)'
+      os: iOS 16
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Pro 5th Gen (2021)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 11
+      os: iOS 16
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 12 Mini
+      os: iOS 16
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 15 Pro
+      os: iOS 17
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone SE (2022)
+      os: iOS 15
       platform: Apple
       eu: 'No'
       us: 'Yes'

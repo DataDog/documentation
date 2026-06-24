@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: ドキュメント
   text: ケースのトリアージと通知について
 title: パターンに基づく相関
@@ -12,7 +12,7 @@ title: パターンに基づく相関
 
 まずは、Datadog はお客様の環境に応じて[パターンに基づく相関][1]を自動的に提案します。推奨パターンの構成を開くには、推奨パターンのいずれかをクリックします。構成フィールドは事前に入力されています。
 
-{{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="相関の推奨パターンと、パターンが作成する可能性のあるケースを示すプレビューパネル" style="width:100%;" >}}
+{{< img src="events/correlation/pattern/recommended_patterns_preview.png" alt="相関の推奨パターンと、パターンが作成する可能性のあるケースを示すプレビューパネル" style="width:100%;" >}}
 
 
 ## パターンの作成
@@ -23,7 +23,7 @@ title: パターンに基づく相関
 1. 推奨パターンを調整するには、**+ Continue With Pattern** をクリックします。これにより、調整を追加するための事前に入力された構成ページに移動します。または、**+ Personalize From Scratch** をクリックして独自のパターンを作成することもできます。
 
 まず、イベントはイベント集計キーに基づいて重複排除されてアラートにまとめられます。次に、アラートは構成に基づいてケースに相関付けられます。
-{{< img src="service_management/events/correlation/correlation_helper.mp4" alt="イベントが定義されたソース、フィルターに一致すると、重複排除されてアラートにまとめられます。アラートはグループ化属性に基づいて相関され、そのイベントは、新しいケースでプロセスが繰り返される前に、定義されたタイムウィンドウ内で重複排除されます。これらの構成は設定で変更できます" video=true >}}
+{{< img src="events/correlation/correlation_helper.mp4" alt="イベントが定義されたソース、フィルターに一致すると、重複排除されてアラートにまとめられます。アラートはグループ化属性に基づいて相関され、そのイベントは、新しいケースでプロセスが繰り返される前に、定義されたタイムウィンドウ内で重複排除されます。これらの構成は設定で変更できます" video=true >}}
 集計キーでイベントを送信する方法については、[Datadog にイベントを送信する][5]を参照してください。集計キーのないイベントは、重複排除されて時間枠内で 1 つのアラートにまとめられます。
 
 ### 提案パターン
@@ -67,7 +67,7 @@ title: パターンに基づく相関
 
 このデータを使用して、相関の影響をプレビューし、パターンの期待される出力を理解します。
 
-{{< img src="service_management/events/correlation/pattern/preview_pattern_output.png" alt="プレビューパネルをハイライトするパターンに基づく相関の構成。パネルには、構成に一致する取り込みイベントの数、それらのイベントのうちどれだけのアラートが発生するか、どれだけの重複排除が発生するか、その結果発生するケースの数が表示されます。" style="width:100%;" >}}
+{{< img src="events/correlation/pattern/preview_pattern_output.png" alt="プレビューパネルをハイライトするパターンに基づく相関の構成。パネルには、構成に一致する取り込みイベントの数、それらのイベントのうちどれだけのアラートが発生するか、どれだけの重複排除が発生するか、その結果発生するケースの数が表示されます。" style="width:100%;" >}}
 
 **注**: プレビューケースのデフォルトタイトルは、相関の最初のアラートです。パターンを保存すると、イベント管理ケースのタイトルがインテリジェントに生成されます。
 
@@ -86,6 +86,6 @@ title: パターンに基づく相関
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/rule/new 
-[3]: /ja/service_management/events/explorer/facets/#create-a-facet
-[4]: /ja/service_management/events/explorer/facets
-[5]: /ja/service_management/events/ingest/
+[3]: /ja/events/explorer/facets/#create-a-facet
+[4]: /ja/events/explorer/facets
+[5]: /ja/events/ingest/

@@ -14,15 +14,24 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback.
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
 Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][28] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, such as a new APM Recommendation or flaky test.
 
-To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
+To get started with Bits Code, [set up a source code integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
 Learn how your Bits Code usage is billed on [AI Credits][27].
+
+## Supported source code providers
+Bits Code supports the following source code providers:
+- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
+- **GitLab**: GitLab.com
+
+The following plans are not supported:
+- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
+- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
@@ -38,7 +47,7 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
 ### View and manage sessions
-On **[Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
+On **[Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR.
 
 Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
@@ -74,18 +83,18 @@ Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on gen
 
 ### Automations
 
-[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
+[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull or merge request (optionally in draft mode) or a Slack notification.
 
 You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
-### Pull request collaboration
+### Pull or merge request collaboration
 
-Bits Code integrates with GitHub to:
-- Create pull requests, generating titles and descriptions based on your repository's pull request template
-- Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
+Bits Code integrates with [source code providers](#supported-source-code-providers) to:
+- Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
+- Iterate on pull or merge requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
-Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
+Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
 
 ## Limitations
 
@@ -107,7 +116,6 @@ Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in
 [10]: /profiler/automated_analysis/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
-[14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
 [16]: /bits_ai/bits_chat/
 [17]: /bits_ai/bits_ai_sre/
@@ -121,3 +129,6 @@ Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in
 [27]: /account_management/billing/ai_credits/
 [28]: /bits_ai/bits_ai_dev_agent/automations/
 [29]: https://app.datadoghq.com/code/automations
+[30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
+[31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
+[32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/

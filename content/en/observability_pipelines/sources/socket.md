@@ -21,13 +21,15 @@ Use Observability Pipelines' Socket source to send logs to the Worker over a soc
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the Socket source in the pipeline UI:
 
 1.  Enter the identifier for your socket address. If you leave it blank, the [default](#secret-defaults) is used.
-1. In the **Mode** dropdown menu, select the socket type to use.
-1. In the **Framing** dropdown menu, select how to delimit the stream of events.
+1. In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select the socket type to use.
+1. In the {{< ui >}}Framing{{< /ui >}} dropdown menu, select how to delimit the stream of events.
     <table>
         <colgroup>
             <col style="width:40%">
