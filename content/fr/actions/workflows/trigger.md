@@ -40,7 +40,7 @@ Vous pouvez déclencher un workflow manuellement ou automatiquement et un workfl
 
 Un workflow peut soit s'exécuter avec l'identité de l'utilisateur qui en est propriétaire, soit avec l'identité d'un compte de service associé au workflow. Pour obtenir plus d'informations sur les comptes de service, consultez la section [Comptes de service pour Workflow Automation][1].
 
-{{< img src="actions/workflows/multiple-triggers.png" alt="Un workflow avec plusieurs déclencheurs" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/multiple-triggers.png" alt="Un workflow avec plusieurs déclencheurs" style="width:100%;" >}}
 
 ## Déclencheurs manuels
 
@@ -84,10 +84,10 @@ Pour exécuter le workflow, procédez comme suit :
 1. Utilisez le nom de mention du workflow pour rechercher votre workflow et sélectionnez-le dans le menu déroulant. Seuls les workflows avec des déclencheurs de monitor apparaissent dans la liste.<br>Une mention pour le monitor apparaît dans le champ de message de notification, au format `@workflow-name` s'il ne prend aucun paramètre d'entrée ou `@workflow-name(param="")` s'il prend des paramètres d'entrée.
 1. Si le workflow prend des paramètres d'entrée :
     1. Cliquez sur **Configure Inputs** à côté du nom et de l'ID du monitor.
-        {{< img src="actions/workflows/monitor-configure-inputs-arrow.png" alt="Un workflow attaché avec un lien Configure Inputs disponible" style="width:100%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-arrow.png" alt="Un workflow attaché avec un lien Configure Inputs disponible" style="width:100%;" >}}
     1. Saisissez les valeurs pour les paramètres d'entrée.<br>**Remarque** : les valeurs peuvent inclure des variables de modèle de message de monitor. Pour voir une liste des variables disponibles, cliquez sur **Use Message Template Variables** dans le coin supérieur droit de la section **Configure notifications & automations**. 
     <br>Les paramètres se remplissent dans la mention dans le champ de message de notification.<br>Par exemple, si vous configurez un workflow nommé `@workflow-test-inputs` pour avoir les paramètres suivants :
-        {{< img src="actions/workflows/monitor-configure-inputs-modal.png" alt="Panneau Configure Inputs avec les valeurs définies comme suit : im_a_string sur 'abc', im_a_number sur 123, im_a_boolean basculé sur true, et i_have_a_default_value sur 'override this'" style="width:70%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-modal.png" alt="Panneau Configure Inputs avec les valeurs définies comme suit : im_a_string sur 'abc', im_a_number sur 123, im_a_boolean basculé sur true, et i_have_a_default_value sur 'override this'" style="width:70%;" >}}
         la mention devient `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
 1. Enregistrez le monitor.
 
@@ -142,7 +142,7 @@ Ajoutez le workflow à votre règle de notification :
 1. Sélectionnez le workflow dans le menu déroulant. Seuls les workflows avec des déclencheurs de sécurité apparaissent dans la liste.
 1. Cliquez sur **Save**.
 
-{{< img src="actions/workflows/notification-rule-trigger2.png" alt="Ajoutez le nom du workflow à la section recipient d'une règle de notification" >}}
+{{< img src="actions/workflows/trigger/notification-rule-trigger2.png" alt="Ajoutez le nom du workflow à la section recipient d'une règle de notification" >}}
 
 Chaque fois que la règle de notification se déclenche, elle déclenche une exécution de workflow.
 
@@ -268,7 +268,7 @@ Vous pouvez déclencher un workflow enfant depuis un autre workflow à l'aide de
 
 Si le workflow enfant a des [paramètres d'entrée][5], ces paramètres apparaissent comme des champs obligatoires dans l'action Trigger Workflow. Dans l'exemple ci-dessous, le paramètre d'entrée **service_name** est obligatoire car `service_name` est défini comme paramètre d'entrée dans le workflow enfant.
 
-{{< img src="actions/workflows/trigger-workflow-step.png" alt="Le paramètre d'entrée service_name est obligatoire dans le workflow enfant" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/trigger-workflow-step.png" alt="Le paramètre d'entrée service_name est obligatoire dans le workflow enfant" style="width:100%;" >}}
 
 ### Accéder au résultat d'un workflow enfant
 

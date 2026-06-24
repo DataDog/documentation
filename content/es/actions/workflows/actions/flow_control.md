@@ -30,13 +30,13 @@ Utiliza [Acciones lógicas][1] para añadir una lógica de control a tu workflow
 
 Puedes ramificar la ruta de ejecución de tu workflow (UI) / proceso (generic) en función de la evaluación de una o más sentencias que definas. En la siguiente captura de pantalla, una acción de **If condition** (condición if) determina el siguiente step (UI) / paso (generic) en el workflow (UI) / proceso (generic) según si el código de estado de una acción de solicitud HTTP anterior devuelve `200`.
 
-{{< img src="actions/workflows/if-condition.png" alt="El lienzo del workflow (UI) / proceso (generic) con una acción de condición if seleccionada y la pestaña de configuración abierta. La sección Sentencias está resaltada con dos sentencias en las que se especifica que el estado de una solicitud anterior debe ser 200." >}}
+{{< img src="actions/workflows/actions/flow_control/if-condition.png" alt="El lienzo del workflow (UI) / proceso (generic) con una acción de condición if seleccionada y la pestaña de configuración abierta. La sección Sentencias está resaltada con dos sentencias en las que se especifica que el estado de una solicitud anterior debe ser 200." >}}
 
 ## Sentencia switch
 
 Utiliza la acción de sentencia Switch para manejar múltiples rutas de ramificación en un solo step (UI) / paso (generic). Especifica una expresión de conmutación y compárala con uno o varios valores de case (incidencia). Si no coincide ningún case (incidencia), se ejecuta una rama predeterminada en su lugar. En el siguiente ejemplo, una sentencia Switch enruta el workflow (UI) / proceso (generic) según si el código de estado de una solicitud HTTP anterior es `200`, `403`, `404`, `500` u otro valor.
 
-{{< img src="actions/workflows/switch-statement.png" alt="El lienzo del workflow (UI) / proceso (generic) que muestra una acción de sentencia Switch denominada ramificación 'Make_request.status' en varias cases (incidencias) para diferentes códigos de estado HTTP. Cada case (incidencia) envía un mensaje Slack diferente y la rama predeterminada arroja un error inesperado si ninguna otra case (incidencia) coincide." >}}
+{{< img src="actions/workflows/actions/flow_control/switch-statement.png" alt="El lienzo del workflow (UI) / proceso (generic) que muestra una acción de sentencia Switch denominada ramificación 'Make_request.status' en varias cases (incidencias) para diferentes códigos de estado HTTP. Cada case (incidencia) envía un mensaje Slack diferente y la rama predeterminada arroja un error inesperado si ninguna otra case (incidencia) coincide." >}}
 
 ## Inactividad
 
@@ -48,7 +48,7 @@ La acción de **For loop** (bucle For) permite ejecutar un conjunto de acciones 
 
 En el ejemplo siguiente, un bucle for itera una lista de incidents (incidentes) y envía un mensaje Slack para cualquier incident (incidente) que tenga más de una semana de antigüedad.
 
-{{< img src="actions/workflows/iteration2.png" alt="Un workflow (UI) / proceso (generic) con un bucle for. El bucle itera una lista de incidents (incidentes) y envía un mensaje a un canal slack si el incident (incidente) tiene más de una semana de antigüedad." style="width:100%;" >}}
+{{< img src="actions/workflows/actions/flow_control/iteration2.png" alt="Un workflow (UI) / proceso (generic) con un bucle for. El bucle itera una lista de incidents (incidentes) y envía un mensaje a un canal slack si el incident (incidente) tiene más de una semana de antigüedad." style="width:100%;" >}}
 
 Para añadir un bucle for a tu workflow (UI) / proceso (generic):
 1. Haz clic en el icono más (**+**) del lienzo del workflow (UI) / proceso (generic) para abrir el catálogo de acciones.
@@ -67,7 +67,7 @@ La acción de **While loop** (Bucle While) te permite ejecutar un conjunto de ac
 
 El siguiente ejemplo utiliza un bucle while para paginar la API AWS S3 List Buckets para una aplicación.
 
-{{< img src="actions/workflows/iteration3.png" alt="Un workflow (UI) / proceso (generic) con un bucle while. El workflow (UI) / proceso (generic) utiliza un bucle while para paginar la API de AWS S3 List Buckets para una aplicación." style="width:100%;" >}}
+{{< img src="actions/workflows/actions/flow_control/iteration3.png" alt="Un workflow (UI) / proceso (generic) con un bucle while. El workflow (UI) / proceso (generic) utiliza un bucle while para paginar la API de AWS S3 List Buckets para una aplicación." style="width:100%;" >}}
 
 Para añadir un bucle while a tu workflow (UI) / proceso (generic):
 1. Haz clic en el icono más (**+**) del lienzo del workflow (UI) / proceso (generic) para abrir el catálogo de acciones.

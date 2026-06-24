@@ -35,7 +35,7 @@ You can trigger a workflow manually or automatically and a workflow can have mul
 
 A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
-{{< img src="actions/workflows/multiple-triggers.png" alt="A workflow with multiple triggers" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/multiple-triggers.png" alt="A workflow with multiple triggers" style="width:100%;" >}}
 
 ## Manual triggers
 
@@ -79,10 +79,10 @@ To run the workflow:
 1. Use the workflow mention name to search for your workflow and select it from the dropdown. Only workflows with monitor triggers appear in the list.<br>A mention for the monitor appears in the notification message field, in the format `@workflow-name` if it takes no input parameters or `@workflow-name(param="")` if it takes input parameters.
 1. If the workflow takes input parameters:
     1. Click {{< ui >}}Configure Inputs{{< /ui >}} next to the monitor name and ID.
-        {{< img src="actions/workflows/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
     1. Enter values for the input parameters.<br>**Note**: Values can include monitor message template variables. To see a list of available variables, click {{< ui >}}Use Message Template Variables{{< /ui >}} in the upper-right of the {{< ui >}}Configure notifications & automations{{< /ui >}} section.
     <br>The parameters populate in the mention within the notification message field.<br>For example, if you configure a workflow named `@workflow-test-inputs` to have the following parameters:
-        {{< img src="actions/workflows/monitor-configure-inputs-modal.png" alt="Configure Inputs panel with values set as follows: im_a_string to 'abc', im_a_number to 123, im_a_boolean toggled to true, and i_have_a_default_value to 'override this'" style="width:70%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-modal.png" alt="Configure Inputs panel with values set as follows: im_a_string to 'abc', im_a_number to 123, im_a_boolean toggled to true, and i_have_a_default_value to 'override this'" style="width:70%;" >}}
         the mention changes to `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
 1. Save the monitor.
 
@@ -131,7 +131,7 @@ Add the workflow to your notification rule:
 1. Select the workflow from the drop-down. Only workflows with security triggers appear in the list.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="actions/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+{{< img src="actions/workflows/trigger/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the notification rule fires, it triggers a workflow run.
 
@@ -272,7 +272,7 @@ You can trigger a child workflow from another workflow using the {{< ui >}}Trigg
 
 If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the `service_name` input parameter is required because `service_name` is set as an input parameter in the child workflow.
 
-{{< img src="actions/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
 ### Access the result of a child workflow
 

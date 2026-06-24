@@ -35,7 +35,7 @@ Puedes activar un proceso manual o automáticamente y un proceso puede tener mú
 
 Un proceso puede ejecutarse con la identidad del usuario propietario o con la identidad de una cuenta de servicio asociada al proceso. Para más información sobre las cuentas de servicio, consulta [Cuentas de servicio para Workflow Automation][1].
 
-{{< img src="actions/workflows/multiple-triggers.png" alt="Un proceso con múltiples activadores" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/multiple-triggers.png" alt="Un proceso con múltiples activadores" style="width:100%;" >}}
 
 ## Activadores manuales
 
@@ -79,10 +79,10 @@ Para ejecutar el flujo de trabajo:
 1. Utiliza el nombre de la mención del proceso para buscar tu proceso y selecciónalo en el menú desplegable. Sólo aparecen en la lista los procesos con activadores de monitor.<br>En el campo de mensaje de notificación aparece una mención para el monitor, con el formato `@workflow (UI) / proceso (generic)-name` si no toma parámetros de entrada o `@workflow (UI) / proceso (generic)-name(param="")` si toma parámetros de entrada.
 1. Si el proceso toma parámetros de entrada:
     1. Haz clic en **Configure Inputs** (Configurar entradas) junto al nombre e ID del monitor.
-        {{< img src="actions/workflows/monitor-configure-inputs-arrow.png" alt="Un proceso adjunto con un enlace Configurar entradas disponible" style="width:100%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-arrow.png" alt="Un proceso adjunto con un enlace Configurar entradas disponible" style="width:100%;" >}}
     1. Introduce los valores de los parámetros de entrada.<br>**Nota**: Los valores pueden incluir variables de plantilla de mensajes del monitor. Para ver una lista de las variables disponibles, haz clic en **Use Message Template Variables** (Utilizar variables de plantilla de mensaje) en la parte superior derecha de la sección **Configure notifications & automations** (Configurar notificaciones y automatizaciones).
     <br>Los parámetros se rellenan en la mención dentro del campo de mensaje de notificación.<br>Por ejemplo, si configuras un proceso llamado `@workflow (UI) / proceso (generic)-test-inputs` para que tenga los siguientes parámetros:
-        {{< img src="actions/workflows/monitor-configure-inputs-modal.png" alt="Configura el panel Entradas con los valores establecidos de la siguiente manera: im_a_string en 'abc', im_a_number en 123, im_a_boolean en true y i_have_a_default_value en 'override this'" style="width:70%;" >}}
+        {{< img src="actions/workflows/trigger/monitor-configure-inputs-modal.png" alt="Configura el panel Entradas con los valores establecidos de la siguiente manera: im_a_string en 'abc', im_a_number en 123, im_a_boolean en true y i_have_a_default_value en 'override this'" style="width:70%;" >}}
         la mención cambia a `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
 1. Guarda el monitor.
 
@@ -261,7 +261,7 @@ Puedes desencadenar un proceso secundario desde otro proceso utilizando la acci�
 
 Si el flujo de trabajo secundario tiene [parámetros de entrada][5], estos aparecerán como campos obligatorios en la acción Trigger Workflow (Activar flujo de trabajo). En el ejemplo siguiente, el parámetro de entrada **service_name** es obligatorio, ya que `service_name` está configurado como parámetro de entrada en el flujo de trabajo secundario.
 
-{{< img src="actions/workflows/trigger-workflow-step.png" alt="El flujo de trabajo secundario requiere el parámetro de entrada service_name" style="width:100%;" >}}
+{{< img src="actions/workflows/trigger/trigger-workflow-step.png" alt="El flujo de trabajo secundario requiere el parámetro de entrada service_name" style="width:100%;" >}}
 
 ### Acceder al resultado de un proceso secundario
 
