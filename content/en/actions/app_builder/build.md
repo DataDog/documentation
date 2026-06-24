@@ -215,8 +215,8 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 [2]: https://app.datadoghq.com/app-builder/blueprints
 [3]: /service_management/app_builder/embedded_apps
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
-[5]: /service_management/workflows/connections
-[6]: /service_management/workflows
+[5]: /actions/connections
+[6]: /actions/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://chat.datadoghq.com/
 [9]: /service_management/app_builder/components

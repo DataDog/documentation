@@ -7,7 +7,7 @@ aliases:
 - /service_management/workflows/limits
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/build"
+- link: "/actions/workflows/build"
   tag: "Documentation"
   text: "Build Workflows"
 ---
@@ -61,6 +61,6 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
 
-[1]: /service_management/workflows/actions/flow_control/#for-loop
-[2]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-workflow
+[1]: /actions/workflows/actions/flow_control/#for-loop
+[2]: /actions/workflows/trigger/#trigger-a-workflow-from-a-workflow
 [9]: https://chat.datadoghq.com/

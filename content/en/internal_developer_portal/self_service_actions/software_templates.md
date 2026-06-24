@@ -13,7 +13,7 @@ further_reading:
 - link: "/service_management/app_builder/"
   tag: "Documentation"
   text: "Learn about App Builder"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Learn about Workflows"
 ---
@@ -123,12 +123,12 @@ The following actions are available for Catalog in Datadog App Builder and Workf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/
+[1]: /actions/workflows/
 [2]: /service_management/app_builder/
 [3]: https://app.datadoghq.com/workflow
 [4]: https://www.cookiecutter.io/
 [5]: https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md
-[6]: /service_management/workflows/build/#create-a-custom-workflow
+[6]: /actions/workflows/build/#create-a-custom-workflow
 [7]: /actions/actions_catalog/
 [9]: https://app.datadoghq.com/app-builder/blueprints
 [10]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=create-new-s3-bucket&viewMode=edit

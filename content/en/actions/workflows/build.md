@@ -17,7 +17,7 @@ further_reading:
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
-- link: "/service_management/workflows/variables"
+- link: "/actions/workflows/variables"
   tag: "Documentation"
   text: "Variables and Parameters"
 ---
@@ -198,15 +198,15 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
-[3]: /service_management/workflows/trigger
+[3]: /actions/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/actions/#testing-expressions-and-functions
+[6]: /actions/workflows/actions/#testing-expressions-and-functions
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://chat.datadoghq.com/
-[11]: /service_management/workflows/test_and_debug/#test-a-step
-[12]: /service_management/workflows/variables/
+[11]: /actions/workflows/test_and_debug/#test-a-step
+[12]: /actions/workflows/variables/
 [13]: /api/latest/workflow-automation/
-[14]: /service_management/workflows/variables/#context-variables
+[14]: /actions/workflows/variables/#context-variables

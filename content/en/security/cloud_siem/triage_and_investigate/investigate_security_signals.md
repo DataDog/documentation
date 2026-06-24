@@ -226,7 +226,7 @@ You can also launch this query directly from the signal panel:
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: /incident_response/case_management/
 [7]: /incident_response/incident_management/
-[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[8]: /actions/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /security/cloud_security_management/workflows/
 [10]: /security/threat_intelligence
 [11]: /security/suppressions/#create-a-suppression-rule

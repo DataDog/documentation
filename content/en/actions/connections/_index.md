@@ -213,7 +213,7 @@ To delete a connection group:
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
 [6]: /integrations/
-[8]: /service_management/workflows/actions/
+[8]: /actions/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
 [11]: https://chat.datadoghq.com/

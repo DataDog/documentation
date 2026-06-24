@@ -55,4 +55,4 @@ further_reading:
 [1]: https://app.datadoghq.com/security/siem/content-packs
 [2]: /security/detection_rules/
 [3]: /security/cloud_siem/triage_and_investigate/investigator
-[4]: /service_management/workflows/
+[4]: /actions/workflows/

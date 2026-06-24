@@ -7,7 +7,7 @@ aliases:
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
-- link: "/service_management/workflows/build"
+- link: "/actions/workflows/build"
   tag: "Documentation"
   text: "Build workflows"
 - link: "/account_management/audit_trail/"
@@ -111,7 +111,7 @@ To track billing for your workflow executions, perform the following steps:
 
 [1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /service_management/workflows/build/#workflow-notifications
+[3]: /actions/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Aworkflow_automation
 [6]: https://app.datadoghq.com/billing/usage-attribution

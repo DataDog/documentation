@@ -8,7 +8,7 @@ further_reading:
 - link: "/cloud_cost_management/recommendations/"
   tag: "Documentation"
   text: "Cloud Cost Recommendations"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
 
@@ -111,7 +111,7 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 [2]: /cloud_cost_management/recommendations/#recommendation-action-taking
 [3]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [4]: /cloud_cost_management/recommendations/#prerequisites
-[5]: /service_management/workflows/connections/
+[5]: /actions/connections/
 [6]: https://app.datadoghq.com/cost/optimize/automations
 [7]: /actions/connections/
-[8]: /service_management/workflows/connections/#connection-groups
+[8]: /actions/connections/#connection-groups

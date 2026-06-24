@@ -10,10 +10,10 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/build"
+- link: "/actions/workflows/build"
   tag: "Documentation"
   text: "Build workflows"
-- link: "/service_management/workflows/trigger"
+- link: "/actions/workflows/trigger"
   tag: "Documentation"
   text: "Trigger workflows"
 ---

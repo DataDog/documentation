@@ -4,7 +4,7 @@ description: Trigger automated workflows directly from dashboards to resolve iss
 widget_type: run_workflow
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
 ---

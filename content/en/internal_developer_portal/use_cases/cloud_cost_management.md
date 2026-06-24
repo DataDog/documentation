@@ -49,4 +49,4 @@ Datadog offers preconfigured [Workflow blueprints][3] to help you build cost man
 [2]: /internal_developer_portal/scorecards/
 [3]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [4]: /internal_developer_portal/catalog/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/

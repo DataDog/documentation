@@ -8,7 +8,7 @@ aliases:
 algolia:
   tags: ['workflow variables', 'variables', 'mutable']
 further_reading:
-- link: "/service_management/workflows/actions/flow_control#for-loop"
+- link: "/actions/workflows/actions/flow_control#for-loop"
   tag: "Documentation"
   text: "Use a for loop to perform an action iteratively"
 
@@ -144,10 +144,10 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
 
 [1]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.core/com.datadoghq.core.setVariable
-[2]: /service_management/workflows/actions/flow_control#for-loop
+[2]: /actions/workflows/actions/flow_control#for-loop
 [3]: https://chat.datadoghq.com/
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
-[5]: /service_management/workflows/trigger
+[5]: /actions/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
-[7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
-[8]: /service_management/workflows/expressions/#inline-javascript-expressions
+[7]: /actions/workflows/trigger/#access-the-result-of-a-child-workflow
+[8]: /actions/workflows/expressions/#inline-javascript-expressions

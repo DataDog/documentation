@@ -75,7 +75,7 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 
 [1]: /metrics/metrics-without-limits/
 [2]: /monitors/configuration/#multi-alert
-[3]: /service_management/workflows/
+[3]: /actions/workflows/
 [4]: https://app.datadoghq.com/workflow/blueprints/manage-metrics-without-limits-suggested-tags
 [5]: /integrations/slack/
 [6]: /account_management/billing/usage_metrics/

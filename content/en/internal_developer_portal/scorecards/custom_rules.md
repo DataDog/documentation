@@ -127,7 +127,7 @@ You can also link an existing workflow to any custom rule that already generates
 [2]: /api/latest/service-scorecards/
 [3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
-[5]: /service_management/workflows/build/
+[5]: /actions/workflows/build/
 [6]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.dd.softwarecatalog.listCatalogEntity
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop
 [8]: /api/latest/service-scorecards/

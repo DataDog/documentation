@@ -65,4 +65,4 @@ To edit or delete a Workflow, click **Manage Reports** on the Scorecards page an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /service_management/workflows/
+[2]: /actions/workflows/

@@ -9,7 +9,7 @@ further_reading:
 - link: "service_management/app_builder/connections"
   tag: "Documentation"
   text: "App Builder Connections"
-- link: "service_management/workflows/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "Workflow Connections"
 - link: "actions/private_actions/use_private_actions"
@@ -51,7 +51,7 @@ While setting up your Private Action Runners, you can enable observability metri
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/connections/
+[1]: /actions/connections/
 [2]: /agent/
 [3]: https://github.com/DataDog/helm-charts/tree/main/charts/private-action-runner
 [4]: /actions/private_actions/use_private_actions

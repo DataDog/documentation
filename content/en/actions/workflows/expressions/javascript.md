@@ -91,4 +91,4 @@ See the test and debug page to learn how to [test a workflow step][3].
 
 [1]: https://lodash.com/
 [2]: /actions/workflows/variables/
-[3]: /service_management/workflows/test_and_debug/#test-a-step
+[3]: /actions/workflows/test_and_debug/#test-a-step
