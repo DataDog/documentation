@@ -87,7 +87,7 @@ This manual approach allows you to create more targeted blocking rules when the 
 
 ## Block an attacker cluster with one click
 
-After an attacker cluster is identified, you can directly generate an In-App WAF custom rule in the UI that matches its attributes, without needing to write regex.
+After an attacker cluster is identified, you can directly generate an In-App WAF custom rule in the UI that matches the cluster attributes, without needing to write regex.
 
 To block a cluster:
 
