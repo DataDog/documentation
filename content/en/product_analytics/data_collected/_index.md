@@ -11,6 +11,9 @@ further_reading:
 - link: "/real_user_monitoring/application_monitoring/android/data_collected/"
   tag: "Documentation"
   text: "RUM Android Data Collected"
+- link: "/product_analytics/data_collected/server_side_events/"
+  tag: "Documentation"
+  text: "Track Server-Side Events"
 ---
 
 ## Overview
