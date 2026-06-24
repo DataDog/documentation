@@ -1958,6 +1958,20 @@
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
   },
+  "ListGovernanceControls": {
+    "description": "Retrieve the list of governance controls configured for the organization. Each control pairs a\ndetection definition with the organization's current detection, notification, and mitigation\nconfiguration, along with counts of active and mitigated detections.",
+    "summary": "List governance controls"
+  },
+  "GetGovernanceControl": {
+    "description": "Retrieve a single governance control by its detection type, including the organization's current\ndetection, notification, and mitigation configuration and detection counts.",
+    "summary": "Get a governance control"
+  },
+  "UpdateGovernanceControl": {
+    "description": "Update the detection, notification, and mitigation configuration of a governance control. Only\nthe attributes present in the request are modified. Changing the mitigation type or its\nparameters may require additional permissions.",
+    "summary": "Update a governance control",
+    "request_description": "",
+    "request_schema_description": "A request to update a governance control."
+  },
   "ListGovernanceInsights": {
     "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
     "summary": "List governance insights"
