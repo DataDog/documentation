@@ -61,7 +61,7 @@ When using an evaluation delay, the evaluation graph does not match the timing o
 
 ### Metric aggregation method
 
-You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The History and Edit Page use the aggregation methods from your queries while the Evaluation Graph uses the aggregation method determined by the **Evaluate the** option.
+You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The History and Edit Page use the aggregation methods from your queries while the Evaluation Graph uses the aggregation method determined by the {{< ui >}}Evaluate the{{< /ui >}} option.
 
 Depending on the aggregation method you are choosing in your monitor setup, this can show a different value compared to what you are seeing on the edit page. For example, if your monitor queries are using AVG but you are looking to alert on the MINIMUM value over the last X minutes/hours, then the evaluation graph shows the MIN value while your history/edit page graphs shows the AVG values. This is because the monitor is alerting on the aggregation method set in the monitor evaluation, not the aggregation method set in the metric query.
 
@@ -81,7 +81,7 @@ Monitor edit page configuration fields:
 - Monitor evaluation window: the `last 5 minutes`
 
 Transfer the same configuration to the Notebook Query Value widget.
-1. The widget dropdown should display **Query Value**.
+1. The widget dropdown should display {{< ui >}}Query Value{{< /ui >}}.
 1. Select the timeframe corresponding to the data point you are troubleshooting.
 1. Input the metric query from your monitor configuration: `proc.test_process.cpu.total_pct`. Add the metric aggregation `p95 by`.
 1. Verify the evaluation matches the monitor evaluation, `percentile (p95)`.
@@ -110,14 +110,14 @@ Monitor edit page configuration fields:
 Transfer the same configuration to the Notebook Query Value widget one metric at a time.
 
 **Metric a**
-1. The widget dropdown should display **Query Value**.
+1. The widget dropdown should display {{< ui >}}Query Value{{< /ui >}}.
 1. Select the timeframe corresponding to 5 minutes around 13:55:29. In this case, 13:50 - 13:55 (1:50 - 1:55).
 1. Input the metric query from your monitor configuration: `proc.test_process.cpu.total_pct`. Add the metric aggregation `avg`.
 
 {{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formulas_query_a.png" alt="Query value widget showing a metric with the avg aggregation" style="width:80%;" >}}
 
 **Metric b**
-1. The widget dropdown should display **Query Value**.
+1. The widget dropdown should display {{< ui >}}Query Value{{< /ui >}}.
 1. Select the timeframe corresponding to 5 minutes around 13:55:29. In this case, 13:50 - 13:55 (1:50 - 1:55).
 1. Input the metric query from your monitor configuration: `system.cpu.user`. Add the metric aggregation `avg`.
 

@@ -28,8 +28,19 @@ Workload Identity Federation lets you authenticate the Datadog Terraform provide
 AWS is the only supported cloud provider.
 
 Workload Identity Federation is available for the following:
-- **Terraform provider**: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.
-- **Datadog Agent**: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+<li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.</li>
+</ul>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+</ul>
+{{< /site-region >}}
 
 ## How it works: AWS authentication process
 

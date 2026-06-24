@@ -46,7 +46,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. In Claude, click the **+** icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
+1. In Claude, click the {{< ui >}}+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
@@ -167,8 +167,8 @@ Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin include
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
-   - From the Cursor Marketplace, open the [Datadog Plugin][1] and click **Add to Cursor**.
-   - In Cursor, navigate to **Cursor Settings** > **Plugins**, then search for the Datadog plugin and click **Add to Cursor**.
+   - From the Cursor Marketplace, open the [Datadog Plugin][1] and click {{< ui >}}Add to Cursor{{< /ui >}}.
+   - In Cursor, navigate to {{< ui >}}Cursor Settings{{< /ui >}} > {{< ui >}}Plugins{{< /ui >}}, then search for the Datadog plugin and click {{< ui >}}Add to Cursor{{< /ui >}}.
 
 1. After installation of the plugin, type `/ddsetup` in the agent chat to perform first-time setup.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
@@ -209,7 +209,7 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 
 {{% tab "Gemini CLI" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
@@ -351,7 +351,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. Click the `Start` element that appears in the editor to start the server. You are prompted to log in through OAuth.
+1. Click the {{< ui >}}Start{{< /ui >}} element that appears in the editor to start the server. You are prompted to log in through OAuth.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -484,7 +484,7 @@ Datadog's [Cursor and VS Code extension][1] provides a configuration assistant f
 1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
 1. Sign in to your Datadog account.
 1. **Restart the IDE.**
-1. Run the `Datadog: Open MCP Configuration Assistant` and follow the guidance to configure the Datadog MCP Server.
+1. Run the {{< ui >}}Datadog: Open MCP Configuration Assistant{{< /ui >}} and follow the guidance to configure the Datadog MCP Server.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
@@ -678,8 +678,8 @@ MCP Server tools require the following [Datadog user role permissions][22]:
 
 In addition to `mcp_read` or `mcp_write`, users need the standard Datadog permissions for the underlying resource. For example, using an MCP tool that reads monitors requires both `mcp_read` and the [Monitors Read][24] permission. See [Datadog Role Permissions][25] for the full list of resource-level permissions.
 
-Users with the **Datadog Standard Role** have both MCP Server permissions by default. If your organization uses [custom roles][23], add the permissions manually:
-1. Go to [**Organization Settings > Roles**][26] as an administrator, and click the role you want to update.
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server permissions by default. If your organization uses [custom roles][23], add the permissions manually:
+1. Go to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Roles{{< /ui >}}][26] as an administrator, and click the role you want to update.
 1. Click {{< ui >}}Edit Role{{< /ui >}} (pencil icon).
 1. Under the permissions list, select the {{< ui >}}MCP Read{{< /ui >}} and {{< ui >}}MCP Write{{< /ui >}} checkboxes.
 1. Select any other resource-level permissions you need for the role.
@@ -715,7 +715,7 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Adding OAuth clients
 
-You can allow-list your redirect URLs in [Organization Preferences][27] under `MCP OAuth Redirect URLs`. 
+You can allow-list your redirect URLs in [{{< ui >}}Organization Preferences{{< /ui >}}][27] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 

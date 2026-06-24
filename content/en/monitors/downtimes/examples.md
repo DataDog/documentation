@@ -103,7 +103,7 @@ And then in the cURL command, use: `"start": '"${start}"'`.
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [Manage Downtime page][1] and schedule a new downtime. Select `recurring`:
+Open the [Manage Downtime page][1] and schedule a new downtime. Select {{< ui >}}recurring{{< /ui >}}:
 
 {{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the weekend" style="width:100%;" >}}
 
@@ -174,7 +174,7 @@ Optionally, add a `message` to your Downtime to let others know the reason and p
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [Manage Downtime page][1] and schedule a new downtime. Select `recurring`:
+Open the [Manage Downtime page][1] and schedule a new downtime. Select {{< ui >}}recurring{{< /ui >}}:
 
 {{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" style="width:100%;" >}}
 
@@ -249,7 +249,7 @@ Optionally, add a `message` to your Downtime to let others know the reason and p
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [Manage Downtime page][1] and add a new downtime. Select `recurring`:
+Open the [Manage Downtime page][1] and add a new downtime. Select {{< ui >}}recurring{{< /ui >}}:
 
 {{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" style="width:100%;" >}}
 
@@ -328,7 +328,7 @@ Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your D
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [Manage Downtime page][1] and add a new downtime. Select `recurring` and then select `Use RRULE`.
+Open the [Manage Downtime page][1] and add a new downtime. Select {{< ui >}}recurring{{< /ui >}} and then select {{< ui >}}Use RRULE{{< /ui >}}.
 
 {{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Downtimes configuration using recurring RRULE schedule to mute alerts on the 2nd Tuesday of every month" style="width:100%;">}}
 

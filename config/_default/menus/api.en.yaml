@@ -11743,6 +11743,42 @@ menu:
       url: /api/latest/feature-flags/
       identifier: feature-flags
       generated: true
+    - name: Update a variant
+      url: /api/latest/feature-flags/update-a-variant/
+      identifier: feature-flags-update-a-variant
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateVariantForFeatureFlag
+        unstable: []
+        order: 21
+    - name: Delete a variant
+      url: /api/latest/feature-flags/delete-a-variant/
+      identifier: feature-flags-delete-a-variant
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteVariantFromFeatureFlag
+        unstable: []
+        order: 20
+    - name: Add a variant to a feature flag
+      url: /api/latest/feature-flags/add-a-variant-to-a-feature-flag/
+      identifier: feature-flags-add-a-variant-to-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVariantForFeatureFlag
+        unstable: []
+        order: 22
     - name: Unarchive a feature flag
       url: /api/latest/feature-flags/unarchive-a-feature-flag/
       identifier: feature-flags-unarchive-a-feature-flag
