@@ -86,10 +86,14 @@ Most applications also run other asynchronous startup tasks, such as opening dat
 ```javascript
 // Start feature flag setup alongside your other startup tasks, then await them together.
 const [, db] = await Promise.all([
-  OpenFeature.setProviderAndWait(tracer.openfeature),
+  // Catch here so a failed provider init does not reject the whole batch.
+  // Evaluations return default values until the provider receives its config.
+  OpenFeature.setProviderAndWait(tracer.openfeature).catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  }),
   connectToDatabase(), // your application's other async startup work
 ]);
-// The provider is ready and `db` is connected; start handling requests.
+// db is connected and the server can start; flags use defaults until ready.
 ```
 
 Blocking startup until the provider is ready, as shown above, works well for most applications. If your application must start serving requests before initialization completes, choose one of the following strategies.
