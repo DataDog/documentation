@@ -31,13 +31,17 @@ You define breakouts when you [create or edit a metric][1]. Breakouts are suppor
 1. Configure the [metric definition][1].
 1. In the {{< ui >}}Split by Metric Properties{{< /ui >}} section, click {{< ui >}}Add Property{{< /ui >}}.
 1. Select a {{< ui >}}Property{{< /ui >}} to break out by (for example, **Country**, **Device Type**, or **Browser**). The available properties come from the metric's data source. For warehouse metrics, the property must be a column on the metric's [SQL model][2].
-1. In the {{< ui >}}Values{{< /ui >}} column, select the property values you want to break out (for example, **CA**, **US**, and **UK**). Datadog lists up to 50 of the most frequently observed values for the property, ordered by frequency.
+1. In the {{< ui >}}Values{{< /ui >}} column, select the property values you want to break out (for example, **CA**, **US**, and **UK**).
 1. (Optional) Click {{< ui >}}Add Property{{< /ui >}} again to break out by additional properties, or click the trash icon to remove a property.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/metric_property_breakouts/config.png" alt="The Split by Metric Properties section of the metric form showing a table with a Property column set to Country and a Values column with CA, US, and UK selected, and an Add Property button below." style="width:90%;" >}}
 
-If you don't see the value you need, it may be too infrequent to appear in the discovered set.
+### How property values are discovered
+
+Datadog discovers the available values for each property automatically. It scans the metric's data source over the previous 30 days and keeps the 50 most frequently observed values, ordered by how often they occur. This list refreshes once per day.
+
+If you don't see a value you expect, it might occur too infrequently to rank among the top 50 values, or it might not have appeared in the data source within the last 30 days.
 
 ## View broken-out results
 
