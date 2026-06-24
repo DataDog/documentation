@@ -31,7 +31,7 @@ You can create a Time Slice SLO through the following ways:
 
 ### Create an SLO from the create page
 
-{{< img src="service_management/service_level_objectives/time_slice/time-slice-creation.png" alt="Configuration options to create a Time Slice SLO" style="width:90%;" >}}
+{{< img src="service_level_objectives/time_slice/time-slice-creation.png" alt="Configuration options to create a Time Slice SLO" style="width:90%;" >}}
 
 1. Navigate to [**SLOs**][1].
 2. Click **+ New SLO** to open up the Create SLO page.
@@ -48,7 +48,7 @@ You can create a Time Slice SLO through the following ways:
 
 Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click **Export to Time Slice SLO**.
 
-{{< img src="service_management/service_level_objectives/time_slice/monitor-time-slice-export.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
+{{< img src="service_level_objectives/time_slice/monitor-time-slice-export.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
 
 ### Import from a monitor
 
@@ -58,27 +58,27 @@ From the **Create or Edit SLO** page, under **Define your SLI**, click **Import 
 
 **Note**: Time Slice SLOs do not support rolling periods. Rolling periods do not transfer from a monitor query to a Time Slice query. 
 
-{{< img src="service_management/service_level_objectives/time_slice/import_from_monitor.png" alt="Highlighted option to Import From Monitor in the Define your SLI section of an SLO configuration" style="width:90%;" >}}
+{{< img src="service_level_objectives/time_slice/import_from_monitor.png" alt="Highlighted option to Import From Monitor in the Define your SLI section of an SLO configuration" style="width:90%;" >}}
 
 ## Uptime calculations
 
 To calculate the uptime percentage for a Time Slice SLOs, Datadog cuts the timeseries into equal-duration intervals, called "slices". The length of the interval configurable with options of 1 or 5 minutes: 
 
-{{< img src="service_management/service_level_objectives/time_slice/time-slice-granularity.png" alt="Time Slice SLO detail panel of application latency uptime with groups" style="width:100%;" >}}
+{{< img src="service_level_objectives/time_slice/time-slice-granularity.png" alt="Time Slice SLO detail panel of application latency uptime with groups" style="width:100%;" >}}
 
 The space and time aggregation are determined by the metric query. For more information on time and space aggregation, see the [metrics][2] documentation. 
 
 For each slice, there is a single value for the timeseries, and the uptime condition (such as `value < 1`) is evaluated for each slice. If the condition is met, the slice is considered uptime:
 
-{{< img src="service_management/service_level_objectives/time_slice/time-slice-good.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
+{{< img src="service_level_objectives/time_slice/time-slice-good.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
 
 Otherwise, it is considered downtime:
 
-{{< img src="service_management/service_level_objectives/time_slice/time-slice-bad.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
+{{< img src="service_level_objectives/time_slice/time-slice-bad.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
 
 In the example below, there is a Time Slice SLO configured with 5-minute time slices, and exactly one point in the timeseries violates the uptime condition. In this case, the condition is that the p95 latency is less than or equal to 2.5 seconds. Since the total time period shown is 12 hours (720 minutes), and 715 minutes are considered uptime (720 min total time - 5 min downtime), the uptime percentage is 715/720 * 100 = 99.305%
 
-{{< img src="service_management/service_level_objectives/time_slice/uptime_latency.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:100%;" >}}
+{{< img src="service_level_objectives/time_slice/uptime_latency.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:100%;" >}}
 
 ### Groups and overall uptime
 
@@ -86,7 +86,7 @@ Time Slice SLOs allow you to track uptime for individual groups, where groups ar
 
 When groups are present, uptime is calculated for each individual group. However, overall uptime works differently. In order to match existing monitor SLO functionality, Time Slice SLOs use the same definition of overall uptime. When **all** groups have uptime, it is considered overall uptime. Conversely, if **any** group has downtime, it is considered overall downtime. Overall uptime is always less than the uptime for any individual group.
 
-{{< img src="service_management/service_level_objectives/time_slice/uptime_latency_groups.png" alt="Time Slice SLO detail panel of application latency uptime with groups" style="width:100%;" >}}
+{{< img src="service_level_objectives/time_slice/uptime_latency_groups.png" alt="Time Slice SLO detail panel of application latency uptime with groups" style="width:100%;" >}}
 
 In the example above, environment "prod" has 5 minutes of downtime over a 12 hour (720 minute) period, resulting in approximately 715/720 * 100 = 99.305% of uptime. Environment "dev" also had 5 minutes of downtime, resulting in the same uptime. This means that overall downtime--when either datacenter prod or dev had downtime--was 10 minutes (since there is no overlap), resulting in approximately (720-10)/720 * 100 = 98.611% uptime.
 

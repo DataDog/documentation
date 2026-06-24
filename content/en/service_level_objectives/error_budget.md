@@ -26,7 +26,7 @@ Error budget alerts are available for the following SLO types:
 
 For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives][3].
 
-{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
+{{< img src="service_level_objectives/error_budget/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
 
 ## Monitor creation
 
@@ -38,7 +38,7 @@ over the past `target` number of days.
 4. Add [Notification information][5] in the **Configure notifications and automations** section.
 5. Click the **Create & Set Alert** button on the SLO configuration page.
 
-{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
+{{< img src="service_level_objectives/error_budget/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
 
 ### Alerting for SLOs with groups
 
