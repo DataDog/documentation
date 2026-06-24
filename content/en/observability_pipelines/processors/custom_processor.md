@@ -30,6 +30,7 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Convert syslog values](#convert) to read-able values.
 - Enrich values by using [enrichment tables](#enrichment).
 - [Manipulate IP values](#ip).
+- Calculate [geographic distances](#map) and bearing with haversine.
 - [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
 - Manipulate event [paths](#path).
 
@@ -63,6 +64,7 @@ To set up this processor:
     {{< nextlink href="observability_pipelines/processors/custom_processor/#debug" >}}Debug{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#enrichment" >}}Enrichment{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#ip" >}}IP{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/custom_processor/#map" >}}Map{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#number" >}}Number{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#object" >}}Object{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#parse" >}}Parse{{< /nextlink >}}
