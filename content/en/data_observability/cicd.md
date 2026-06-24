@@ -17,15 +17,6 @@ further_reading:
     - link: '/data_observability/jobs_monitoring/'
       tag: 'Documentation'
       text: 'Jobs Monitoring'
-    - link: '/data_observability/jobs_monitoring/dbt/?tab=dbtcloud'
-      tag: 'Documentation'
-      text: 'dbt Cloud'
-    - link: '/data_observability/jobs_monitoring/dbt/?tab=dbtcore'
-      tag: 'Documentation'
-      text: 'dbt Core'
-    - link: 'integrations/#cat-source-control'
-      tag: 'Documentation'
-      text: 'Source Control'
 ---
 
 ## Overview
@@ -50,8 +41,9 @@ Drift Detection compares the data produced by your models before and after your 
 
 ### 1. Connect your source control provider and dbt project
 
-- Connect your [source-control provider][7]. CI/CD Checks currently support Github and GitLab.
-- Connect your [dbt Cloud][5] or [dbt Core][6] project to Datadog. You can also connect your dbt project as part of setting up your CI/CD checks.
+Connect your [source-control provider](integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
+
+Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project as part of setting up your CI/CD checks.
 
 From the CI/CD settings, click to "Add CI/CD Checks". Pick the dbt project you want to add checks for, as well as the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog will automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
 
