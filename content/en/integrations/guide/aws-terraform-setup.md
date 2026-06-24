@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/managing-datadog-with-terraform/"
   tag: "Blog"
   text: "Managing Datadog with Terraform"
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 ---
 
 Using [Terraform][1], you can create the Datadog IAM role, policy document, and the Datadog-AWS integration with a single `terraform apply` command.
@@ -877,6 +880,8 @@ See the [Terraform Registry][2] for further example usage and the full list of o
 {{< /site-region >}}
 
 3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][4] to see metrics sent by your AWS services and infrastructure.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
