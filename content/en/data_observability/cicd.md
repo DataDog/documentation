@@ -45,9 +45,9 @@ Drift Detection compares the data produced by your models before and after your 
 
 Connect your [source-control provider](/integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
 
-Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project as part of setting up your CI/CD checks.
+Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project while configuring CI/CD checks.
 
-From the CI/CD settings, click to "Add CI/CD Checks", then pick the dbt project you want to add checks for and select the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog will automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
+From the CI/CD settings, click to "Add CI/CD Checks", then pick the dbt project you want to add checks for and select the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog should be able to automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
 
 {{< img src="data_observability/cicd/cicd-connection.png" alt="The CI/CD feature creation page" style="width:100%;" >}}
 
@@ -87,8 +87,8 @@ Drift detection compares the current state of your data to a baseline and flags 
 **dbt core**
 | Setting | Description |
 | - | - |
-| `CI Job Name` | if the open-lineage job that kicks off your ci process is different from the one you selected before, specify its name here |
-| `CI Job Namespace` | this is the `OPENLINEAGE_NAMESPACE` associated with the ci job above |
+| `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job your selected before, but you should specify it here. |
+| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` associated with the ci job above. By default, `dbt` will be used. |
 
 ## Further Reading
 
