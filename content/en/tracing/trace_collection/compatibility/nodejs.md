@@ -31,9 +31,9 @@ When a release has changes that could go in multiple semver categories, the high
 
 _Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
 
-For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
+For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, Datadog applies security and bug patches whenever possible.
 
-If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
+If you have any questions or concerns about Datadog's support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
 
 ### Node.js Version Support
 
