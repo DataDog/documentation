@@ -2,7 +2,7 @@
 title: Status Events
 description: "View and manage monitor events on the status page including quick actions, event details, and troubleshooting tools."
 further_reading:
-- link: "service_management/events/"
+- link: "events/"
   tag: "Documentation"
   text: "Event Management"
 ---
@@ -21,7 +21,7 @@ For each event, you can access quick actions and view related assets, like dashb
 
 To explore each individual event for more information, including associated tags and actions:
 
-1. From the monitor status page, scroll down to the **Event timeline.**
+1. From the monitor status page, scroll down to the {{< ui >}}Event timeline{{< /ui >}}.
 2. Click on an event in the timeline to view event details.
 
 Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations.
@@ -32,11 +32,11 @@ With Quick Actions, you can take action without leaving the status page. Respond
 
 | Action | Description |
 | :---- | :---- |
-| Mute  | Create a [downtime][1] to mute monitor alerts. |
-| Resolve | Temporarily set the monitor status to `OK` until its next evaluation. |
-| Declare Incident | Escalate monitor alerts with [Incident Management][2]. |
-| Create Case | Create a [case][3] to keep track of this alert investigation without leaving Datadog. |
-| Run Workflow | Run [Workflow][4] Automation with predefined snippets to run mitigation actions. |
+| {{< ui >}}Mute{{< /ui >}}  | Create a [downtime][1] to mute monitor alerts. |
+| {{< ui >}}Resolve{{< /ui >}} | Temporarily set the monitor status to `OK` until its next evaluation. |
+| {{< ui >}}Declare Incident{{< /ui >}} | Escalate monitor alerts with [Incident Management][2]. |
+| {{< ui >}}Create Case{{< /ui >}} | Create a [case][3] to keep track of this alert investigation without leaving Datadog. |
+| {{< ui >}}Run Workflow{{< /ui >}} | Run [Workflow][4] Automation with predefined snippets to run mitigation actions. |
 
 ### Resolve
 
@@ -44,7 +44,7 @@ You can resolve a monitor alert from the status page [Header][5] or Event detail
 
 If a monitor is alerting because its current data corresponds to the `ALERT` state, using `resolve` will cause the state to temporarily switch from `ALERT` to `OK`, and then back to `ALERT`. Therefore, `resolve` is not meant for acknowledging the alert or instructing Datadog to ignore it.
 
-Manually resolving a monitor is useful when data is reported intermittently. For example, after an alert is triggered, the monitor may stop receiving data, preventing it from evaluating alert conditions and recovering to the `OK` state. In such cases, the `resolve` function or the `Automatically resolve monitor after X hours` changes the monitor back to an `OK` state.
+Manually resolving a monitor is useful when data is reported intermittently. For example, after an alert is triggered, the monitor may stop receiving data, preventing it from evaluating alert conditions and recovering to the `OK` state. In such cases, the `resolve` function or the {{< ui >}}Automatically resolve monitor after X hours{{< /ui >}} changes the monitor back to an `OK` state.
 
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
@@ -56,8 +56,8 @@ For each event, access troubleshooting information to help responders quickly un
 
 | Troubleshooting component     | Description    |
 | ---  | ----------- |
-| Dependency Map | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
-| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the [Change Tracking][6] documentation. |
+| {{< ui >}}Dependency Map{{< /ui >}} | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
+| {{< ui >}}Change Tracking{{< /ui >}} | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the [Change Tracking][6] documentation. |
 
 
 ## Further reading

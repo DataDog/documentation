@@ -59,7 +59,7 @@ Para crear un [monitor de métricas][8] que se active con las alertas de Statusp
 
 [1]: https://www.atlassian.com/software/statuspage
 [2]: /es/integrations/statuspage
-[3]: /es/service_management/events/explorer/
+[3]: /es/events/explorer/
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/event/explorer
 [6]: /es/dashboards/guide/custom_time_frames/

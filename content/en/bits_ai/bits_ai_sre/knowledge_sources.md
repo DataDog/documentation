@@ -11,19 +11,19 @@ Bits Investigation improves over time by combining three distinct sources of kno
 - [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks
-Think of onboarding Bits Investigation as you would a new teammate: the more context you provide, the better it can investigate.
+Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
 You can either add step-by-step troubleshooting instructions directly in the monitor message or link to a Confluence page that contains those instructions.
 
 - **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers, such as a dashboard, logs, traces, or a notebook with key widgets. Links don't need special formatting; plain URLs work.
 
-Because these links are user-defined, you have control over what Bits Investigation reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
+Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
 - **Notebooks**: Monitors can link to notebooks that contain instructions on how to troubleshoot the monitor or related service. Notebooks support markdown as well as Datadog queries, giving the agent instructions on how to best perform root cause analysis.
 
-- **Confluence integration**: If your runbooks live in Confluence, link the relevant pages in the monitor message. During an investigation, Bits Investigation reads the page, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its recommendations.
+- **Confluence integration**: If your runbooks live in Confluence, link the relevant pages in the monitor message. During an investigation, Bits reads the page, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its recommendations.
 
-To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits Investigation to conduct more accurate and effective investigations.
+To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits to conduct more accurate and effective investigations.
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -103,18 +103,18 @@ Rule:
 
 ## Feedback and memories
 
-At the end of an investigation, let Bits Investigation know whether the conclusion it made was correct.
+At the end of an investigation, let Bits know whether the conclusion it made was correct.
 
 {{< img src="bits_ai/help_bits_ai_learn_2.png" alt="Post-investigation root cause feedback flow" style="width:100%;" >}}
 
-If the conclusion was inaccurate, provide Bits Investigation with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Your feedback should:
+If the conclusion was inaccurate, provide Bits with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Your feedback should:
 - Identify the actual root cause (not just observed effects or symptoms)
 - Specify relevant services, components, or metrics
 - Include telemetry links that point to the root cause
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
-All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits Investigation dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits Investigation to adapt to your environment, becoming more accurate and efficient with each investigation.
+All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits to adapt to your environment, becoming more accurate and efficient with each investigation.
 
 To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
 

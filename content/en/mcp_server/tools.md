@@ -446,6 +446,21 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -1106,7 +1121,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][64] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][65] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -1159,39 +1174,39 @@ Updates the triage state or assignee of one or more security signals in bulk (up
 - Set all open signals for `service:checkout` to under review and assign them to me.
 - Mark signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` as archived with reason "testing".
 
-### `get_datadog_ioc_filter_values`
+### `search_datadog_security_ioc_indicators`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Discover filterable fields and their values for [IoC Explorer][64]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
-
-- What fields are available for IoC indicator filters?
-- Show me the available indicator types and how many of each exist.
-- Get the values for the `categories` filter scoped to high-score indicators.
-
-### `get_datadog_ioc_indicator`
-*Toolset: **security***\
-*Permissions Required: `Security Signals Read`*\
-Retrieve full detail for one [IoC Explorer][64] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
-
-- Get details for the threat indicator `192.0.2.1`.
-- Show me everything we know about `malicious.example.com`.
-
-### `list_datadog_ioc_indicators`
-*Toolset: **security***\
-*Permissions Required: `Security Signals Read`*\
-List [IoC Explorer][64] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_ioc_indicator` for full detail and `triage_datadog_ioc_indicator` to mark reviewed.
+List [IoC Explorer][65] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_security_ioc_indicator` for full detail and `update_datadog_security_ioc_indicator_triage` to mark reviewed.
 
 - Show me the highest-scoring malicious IP indicators.
 - List IoC indicators in the `residential_proxy` category with a Medium or higher score.
 - Show me threat indicators that have not been reviewed yet.
 
-### `triage_datadog_ioc_indicator`
+### `get_datadog_security_ioc_indicator`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Retrieve full detail for one [IoC Explorer][65] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
+
+- Get details for the threat indicator `192.0.2.1`.
+- Show me everything we know about `malicious.example.com`.
+
+### `update_datadog_security_ioc_indicator_triage`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Write`*\
-Set the triage state of an [IoC Explorer][64] indicator.
+Set the triage state of an [IoC Explorer][65] indicator.
 
 - Mark indicator `192.0.2.1` as reviewed.
 - Set `evil-domain.example.com` back to not reviewed.
+
+### `get_datadog_security_ioc_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Discover filterable fields and their values for [IoC Explorer][65]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
+
+- What fields are available for IoC indicator filters?
+- Show me the available indicator types and how many of each exist.
+- Get the values for the `categories` filter scoped to high-score indicators.
 
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
@@ -1202,22 +1217,14 @@ Returns the authoring reference and schema for detection rules. Covers supported
 - Show me the schema for sequence detection rules.
 - What tag conventions and query syntax does the detection rules API use?
 
-### `list_datadog_security_detection_rules`
+### `get_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
-- Which rules are configured for impossible travel detection?
-
-### `get_datadog_security_detection_rule`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-
 - Get the full definition of detection rule `abc-123-def`.
-- Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
 
 ### `get_datadog_security_suppressions`
@@ -1400,6 +1407,23 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
+
+### `get_datadog_code_coverage_pr_summary`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+- Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
+- What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches per-file code coverage line data for a repository commit, branch, or pull request. Returns executable lines, covered lines, and added lines for each file. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided to filter results.
+
+- Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
+- Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
@@ -1613,4 +1637,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
-[64]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[64]: /cloud_cost_management/
+[65]: /security/cloud_siem/triage_and_investigate/ioc_explorer/

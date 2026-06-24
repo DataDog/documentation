@@ -27,7 +27,7 @@ title: インシデント通知
 
 ## すべての通知を表示
 
-{{< img src="/service_management/incidents/notification/incident_notifications_sent.png" alt="Notifications タブに表示される送信済メッセージの例一覧" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/investigate/notification/incident_notifications_sent.png" alt="Notifications タブに表示される送信済メッセージの例一覧" style="width:90%;" >}}
 
 インシデントの **Notifications タブ** では、通知が **Drafts** と **Sent** に分類されます。両リストには次の情報が表示されます:
 - 通知の (予定された) 受信者
