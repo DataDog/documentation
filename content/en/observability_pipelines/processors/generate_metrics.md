@@ -13,7 +13,7 @@ products:
 
 Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query, and send the metrics to your destination.
 
-**Note**: The metrics generated are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
+**Note**: The metrics generated from logs and routed to Datadog are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
 ## Setup
 
@@ -37,7 +37,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 ### Configure a metrics destination
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-Sending generated metrics to a metrics destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is in Preview. Contact your account manager to request access.
+Sending metrics generated from logs to the Splunk HEC, Elasticsearch, or HTTP/S Client destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 <div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker versions 2.18 and later.<br><br>If you upgrade to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor, you must delete the previous Generate Metrics processor and add and configure a new Generate Metrics processor to be able to select a destination other than Datadog Metrics.</div>
