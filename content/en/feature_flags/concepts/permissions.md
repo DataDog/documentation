@@ -31,7 +31,7 @@ Assign these permissions through [Datadog roles](/account_management/rbac/).
 
 Restrict edit access on a specific flag by selecting **Settings > Permissions** on the flag details page:
 
-{{< img src="getting_started/feature_flags/flag-grace-modal.png" alt="Flag Grace modal on the feature flag settings page for choosing who can edit the flag." style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/flag-grace-modal.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:100%;" >}}
 
 You can limit edit access to:
 

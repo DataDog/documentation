@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Approvals help you control what changes are made to feature flags and by whom. In addition to [granular access control](/feature_flags/concepts/permissions/), you can require approvals for changes to certain flags or production environments before those changes take effect.
+Approvals help you control what changes are made to feature flags and by whom. In addition to [granular access control](/feature_flags/concepts/permissions), you can require approvals for changes to certain flags or production environments before those changes take effect.
 
 ## Require approvals on an environment
 
@@ -48,7 +48,7 @@ Enabling or disabling approvals on an existing flag requires the organization pe
 2. Open **Settings > Approvals**.
 3. Toggle **Require approval on changes to this flag for all production environments**.
 
-{{< img src="getting_started/feature_flags/flag-approvals-modal.png" alt="Approvals modal on a feature flag with Require approval on changes to this flag for all production environments toggle and Save." style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/flag-approvals-modal.png" alt="Approvals modal on a feature flag showing the Require approval on changes to this flag for all production environments toggle and a Save button." style="width:100%;" >}}
 
 ## Approval workflow
 
@@ -57,7 +57,7 @@ Enabling or disabling approvals on an existing flag requires the organization pe
 When you make a change that requires approval, a **Submit Changes For Review** modal appears. The modal prompts you to:
 
 - Enter a description of the change
-- Select a notification channel (for example Slack or Microsoft Teams) for the approval request
+- Select a notification channel (for example, Slack or Microsoft Teams) for the approval request
 
 You can delete a pending change after creating it if you need to modify the submission.
 
@@ -77,12 +77,12 @@ After a change is approved, apply it when you are ready for it to take effect in
 
 ### Override approvals
 
-The **Feature Flag Approvals Override** organization permission does two things:
+The **Feature Flag Approvals Override** organization permission serves two purposes:
 
-- **Existing flags:** It is required to turn on required approvals for a flag that already exists (in addition to [granular edit access](/feature_flags/concepts/permissions/) on that flag).
-- **Workflow bypass:** It allows holders to bypass or override the approvals workflow when the product exposes that option, so changes can proceed without the usual review and approval steps.
+- **Existing flags:** Required to enable approvals for a flag that already exists (in addition to [granular edit access](/feature_flags/concepts/permissions) on that flag).
+- **Workflow bypass:** Allows holders to bypass the approvals workflow where that option is available, so changes can proceed without the usual review and approval steps.
 
-Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles](/account_management/rbac/); see [Permissions and Access Control](/feature_flags/concepts/permissions/) for related Feature Flags permissions.
+Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles](/account_management/rbac/); see [Permissions and Access Control](/feature_flags/concepts/permissions) for related Feature Flags permissions.
 
 ## Find flags with pending approvals
 
