@@ -1255,7 +1255,7 @@
     "summary": "Delete budget"
   },
   "GetBudget": {
-    "description": "Get a budget",
+    "description": "Get a budget by ID. Pass `actual=true` or `forecast=true` to include cost data in the response. Use `start` and `end` (millisecond epochs, both required) to set the cost window. When `forecast=true`, each entry also includes `ootb_forecast` (the ML forecast before overrides) and `custom_forecast` (`null` if no override is set, a number if one is).",
     "summary": "Get budget"
   },
   "DeleteCustomForecast": {
