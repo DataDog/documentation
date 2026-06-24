@@ -36,8 +36,8 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 After you select the Splunk HEC source in the pipeline UI:
 
 1. Enter the identifier for your Splunk HEC address. If you leave it blank, the [default](#secret-defaults) is used.
-1. Only enable **Store HEC token** if you want to do one of the following:
-    - Use a Splunk HEC destination with the **From Source** token strategy.
+1. Only enable {{< ui >}}Store HEC token{{< /ui >}} if you want to do one of the following:
+    - Use a Splunk HEC destination with the {{< ui >}}From Source{{< /ui >}} token strategy.
     - Use an Enrichment Table processor to map Splunk HEC tokens from a local file.
 
 ### Optional TLS settings

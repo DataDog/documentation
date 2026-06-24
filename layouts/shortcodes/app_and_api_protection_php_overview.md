@@ -3,7 +3,7 @@
 ## Overview
 App and API Protection leverages the [Datadog PHP library](https://github.com/DataDog/dd-trace-php/) to monitor and secure your PHP service. The library integrates seamlessly with your existing application without requiring code changes.
 
-For detailed compatibility information, including supported PHP versions, frameworks, and deployment environments, see [PHP Compatibility Requirements](/security/application_security/setup/php/compatibility).
+For detailed compatibility information, including supported PHP versions, frameworks, and deployment environments, see [PHP Compatibility Requirements](/security/application_security/setup/compatibility/php).
 
 {{ if $showSetup }}
 This guide explains how to set up App and API Protection (AAP) for PHP applications. The setup involves:

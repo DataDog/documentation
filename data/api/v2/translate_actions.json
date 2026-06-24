@@ -1238,6 +1238,12 @@
   "ValidateCsvBudget": {
     "summary": "Validate CSV budget"
   },
+  "UpsertCustomForecast": {
+    "description": "Create or replace the custom forecast for an existing budget.\nPass an empty `entries` list to delete the custom forecast for the budget.",
+    "summary": "Create or replace a budget's custom forecast",
+    "request_description": "",
+    "request_schema_description": "Request body to upsert (create or replace) the custom forecast for a budget."
+  },
   "ValidateBudget": {
     "description": "Validate a budget configuration without creating or modifying it",
     "summary": "Validate budget",
@@ -1249,8 +1255,12 @@
     "summary": "Delete budget"
   },
   "GetBudget": {
-    "description": "Get a budget",
+    "description": "Get a budget by ID. Pass `actual=true` or `forecast=true` to include cost data in the response. Use `start` and `end` (millisecond epochs, both required) to set the cost window. When `forecast=true`, each entry also includes `ootb_forecast` (the ML forecast before overrides) and `custom_forecast` (`null` if no override is set, a number if one is).",
     "summary": "Get budget"
+  },
+  "DeleteCustomForecast": {
+    "description": "Delete the custom forecast for a budget.",
+    "summary": "Delete a budget's custom forecast"
   },
   "ListBudgets": {
     "description": "List budgets.",
@@ -1947,6 +1957,20 @@
   "ListGlobalOrgs": {
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
+  },
+  "ListGovernanceControls": {
+    "description": "Retrieve the list of governance controls configured for the organization. Each control pairs a\ndetection definition with the organization's current detection, notification, and mitigation\nconfiguration, along with counts of active and mitigated detections.",
+    "summary": "List governance controls"
+  },
+  "GetGovernanceControl": {
+    "description": "Retrieve a single governance control by its detection type, including the organization's current\ndetection, notification, and mitigation configuration and detection counts.",
+    "summary": "Get a governance control"
+  },
+  "UpdateGovernanceControl": {
+    "description": "Update the detection, notification, and mitigation configuration of a governance control. Only\nthe attributes present in the request are modified. Changing the mitigation type or its\nparameters may require additional permissions.",
+    "summary": "Update a governance control",
+    "request_description": "",
+    "request_schema_description": "A request to update a governance control."
   },
   "ListGovernanceInsights": {
     "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
@@ -4742,11 +4766,11 @@
     "summary": "Get schema"
   },
   "ListSCIMUsers": {
-    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.\nResponses include the Datadog roles assigned to each user in the `roles` attribute.",
     "summary": "List users"
   },
   "CreateSCIMUser": {
-    "description": "Create a new user.",
+    "description": "Create a new user.\nTo assign Datadog roles to the user, include a `roles` array containing role UUIDs in the `value` field.",
     "summary": "Create user",
     "request_description": "",
     "request_schema_description": "Definition of a user."
@@ -4756,17 +4780,17 @@
     "summary": "Delete user"
   },
   "GetSCIMUser": {
-    "description": "Get a single user using the `user_uuid`.",
+    "description": "Get a single user using the `user_uuid`.\nThe response includes the Datadog roles assigned to the user in the `roles` attribute.",
     "summary": "Get user"
   },
   "PatchSCIMUser": {
-    "description": "Patch the user with the given `user_uuid`.",
+    "description": "Patch the user with the given `user_uuid`.\nTo update Datadog roles, send an operation with `path` set to `roles` and `value` set to an array of role objects containing role UUIDs.",
     "summary": "Patch user",
     "request_description": "",
     "request_schema_description": "Request object for patching a user."
   },
   "UpdateSCIMUser": {
-    "description": "Update the user with the given `user_uuid`.",
+    "description": "Update the user with the given `user_uuid`.\nTo update Datadog roles, include a `roles` array containing role UUIDs in the `value` field.",
     "summary": "Update user",
     "request_description": "",
     "request_schema_description": "Definition of a user."
@@ -5496,19 +5520,19 @@
     "request_schema_description": "Request body for updating the triage state or assignee of a security signal."
   },
   "BulkExportSecurityMonitoringTerraformResources": {
-    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
+    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.\nA maximum of 1000 resources can be exported in a single request.\nFor `rules`, partner rules cannot be exported and return a 400 error.",
     "summary": "Export security monitoring resources to Terraform",
     "request_description": "The resource IDs to export.",
     "request_schema_description": "Request body for bulk exporting security monitoring resources to Terraform."
   },
   "ConvertSecurityMonitoringTerraformResource": {
-    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions` or `critical_assets`.",
+    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.",
     "summary": "Convert security monitoring resource to Terraform",
     "request_description": "The resource JSON to convert.",
     "request_schema_description": "Request body for converting a security monitoring resource JSON to Terraform."
   },
   "ExportSecurityMonitoringTerraformResource": {
-    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions` or `critical_assets`.",
+    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.\nFor `rules`, partner rules cannot be exported and return a 400 error.",
     "summary": "Export security monitoring resource to Terraform"
   },
   "ListScanningGroups": {

@@ -10392,6 +10392,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Delete a budget's custom forecast
+      url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-delete-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomForecast
+        unstable:
+          - v2
+        order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
       identifier: cloud-cost-management-get-budget
@@ -10428,6 +10441,19 @@ menu:
           - ValidateBudget
         unstable: []
         order: 35
+    - name: Create or replace a budget's custom forecast
+      url: /api/latest/cloud-cost-management/create-or-replace-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-create-or-replace-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCustomForecast
+        unstable:
+          - v2
+        order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
       identifier: cloud-cost-management-validate-csv-budget
@@ -12549,6 +12575,49 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
+    - name: Governance Controls
+      url: /api/latest/governance-controls/
+      identifier: governance-controls
+      generated: true
+    - name: Update a governance control
+      url: /api/latest/governance-controls/update-a-governance-control/
+      identifier: governance-controls-update-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControl
+        unstable:
+          - v2
+        order: 4
+    - name: Get a governance control
+      url: /api/latest/governance-controls/get-a-governance-control/
+      identifier: governance-controls-get-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControl
+        unstable:
+          - v2
+        order: 3
+    - name: List governance controls
+      url: /api/latest/governance-controls/list-governance-controls/
+      identifier: governance-controls-list-governance-controls
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControls
+        unstable:
+          - v2
+        order: 2
     - name: Governance Insights
       url: /api/latest/governance-insights/
       identifier: governance-insights
