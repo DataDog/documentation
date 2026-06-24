@@ -25,7 +25,7 @@ Burn rate alerts are available for the following SLO types:
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
 - [Time Slice SLOs][7]
 
-{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
+{{< img src="service_level_objectives/burn_rate/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
 ## How Burn Rate Alerts work
 

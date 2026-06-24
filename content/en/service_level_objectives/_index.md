@@ -121,7 +121,7 @@ To create, edit, and delete status corrections, users require the `slos_correcti
 
 Restrict access to individual SLOs by specifying a list of [roles][10] that are allowed to edit it.
 
-{{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
+{{< img src="service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
 
 1. Click on the SLO to open the details side panel.
 1. Click the cog icon in the upper right of the panel.
@@ -155,13 +155,13 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][14], available on the [Apple App Store][15] and [Google Play Store][16].
 
-{{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
+{{< img src="service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
 ### SLO tags
 
@@ -170,13 +170,13 @@ SLO tags can be used for filtering on the [SLO manage page][2], creating [SLO sa
 - When you create or edit an SLO, you can add tags
 - From the SLO list view, you can add and update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
 
-{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
+{{< img src="service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
 
 ### SLO burn rate indicator
 
 Burn rate indicators use a rolling 2-hour window to evaluate which SLOs are consuming their error budget too quickly. Burn rate indicators appear next to the applicable SLO names on the [SLO manage page][2].
 
-{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="The SLO manage page in Datadog. A red icon appears next to the name of an SLO in the list. Mousing over the red icon displays a modal with further information, a burn rate visualization, and a link to the SLO's corresponding service page." style="width:80%;" >}}
+{{< img src="service_level_objectives/slo_burn_rate_indicator.png" alt="The SLO manage page in Datadog. A red icon appears next to the name of an SLO in the list. Mousing over the red icon displays a modal with further information, a burn rate visualization, and a link to the SLO's corresponding service page." style="width:80%;" >}}
 
 There are two possible indicator types:
 - A red icon indicating a critical burn rate above 6 in the past 2 hours.
@@ -262,11 +262,11 @@ To get a full list of all SLO audit events, enter the search query `tags:(audit 
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
-{{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
+{{< img src="service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
 
 You can also use the "Audit History" tab in the SLO details to view all audit events for an individual SLO:
 
-{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="SLO details audit history tab" >}}
+{{< img src="service_level_objectives/slo_audit_history_tab.png" alt="SLO details audit history tab" >}}
 
 With [Event Monitors][28], you can set up notifications to track SLO audit events. For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
@@ -326,7 +326,7 @@ To access SLO status corrections in the UI:
 6. Optionally add **Notes**.
 7. Click **Apply Correction**.
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
@@ -334,13 +334,13 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
 
-{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
+{{< img src="service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
 ## SLO calendar view
 
 The SLO Calendar View is available on the [SLO manage page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
+{{< img src="service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
 
 ## Further Reading
 

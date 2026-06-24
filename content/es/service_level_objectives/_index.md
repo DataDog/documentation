@@ -121,7 +121,7 @@ Para crear, editar y eliminar correcciones de estado, los usuarios requieren los
 
 Restringa el acceso a SLOs individuales especificando una lista de [roles][10] que están autorizados a editarlos.
 
-{{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Opción de permisos de SLO en el menú de engranaje">}}
+{{< img src="service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Opción de permisos de SLO en el menú de engranaje">}}
 
 1. Haga clic en el SLO para abrir el panel lateral de detalles.
 1. Haga clic en el ícono de engranaje en la parte superior derecha del panel.
@@ -155,13 +155,13 @@ Para realizar una búsqueda, utilice las casillas de verificación de la izquier
 
 *Agrupe sus SLOs por *cualquier etiqueta para obtener una vista resumida de sus datos. Puede analizar rápidamente cuántos SLOs hay en cada estado (incumplido, advertencia, OK y sin datos), agrupados por servicio, equipo, recorrido del usuario, nivel o cualquier otra etiqueta establecida en sus SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Vista resumida de SLOs agrupados por Teams" style="width:100%;" >}}
+{{< img src="service_level_objectives/slo_group_by_new.png" alt="Vista resumida de SLOs agrupados por Teams" style="width:100%;" >}}
 
 Ordene los SLOs por las columnas de *estado* y *presupuesto de error* para priorizar cuáles SLOs necesitan su atención. La lista de SLOs muestra los detalles de los SLOs durante la ventana de tiempo principal seleccionada en su [configuración](#configuration). Todas las demás ventanas de tiempo de configuración están disponibles para ver en el panel lateral individual. Abra el panel lateral de detalles de SLO haciendo clic en la fila de la tabla correspondiente.
 
 **Nota**: Puede ver sus SLOs desde la pantalla de inicio de su dispositivo móvil descargando la [aplicación móvil de Datadog][14], disponible en la [Apple App Store][15] y [Google Play Store][16].
 
-{{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs en iOS y Android">}}
+{{< img src="service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs en iOS y Android">}}
 
 ### Etiquetas de SLO {#slo-tags}
 
@@ -170,13 +170,13 @@ Las etiquetas de SLO se pueden usar para filtrar en la [SLO manage page][2], cre
 - Cuando crea o edita un SLO, puede agregar etiquetas
 - Desde la vista de lista de SLOs, puede agregar y actualizar etiquetas en bloque utilizando las opciones desplegables *Editar Etiquetas* y *[Edit Teams][18]* en la parte superior de la lista de SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="La página de lista de SLOs muestra el menú desplegable Editar Etiquetas para la edición masiva de etiquetas." >}}
+{{< img src="service_level_objectives/slo_bulk_tag.png" alt="La página de lista de SLOs muestra el menú desplegable Editar Etiquetas para la edición masiva de etiquetas." >}}
 
 ### Indicador de tasa de quema SLO {#slo-burn-rate-indicator}
 
 Los indicadores de tasa de quema utilizan una ventana móvil de 2 horas para evaluar cuáles SLOs están consumiendo su presupuesto de error demasiado rápido. Los indicadores de tasa de quema aparecen junto a los nombres de SLO aplicables en la [SLO manage page][2].
 
-{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="La SLO manage page en Datadog. Un ícono rojo aparece junto al nombre de un SLO en la lista. Al pasar el mouse sobre el ícono rojo, se muestra un modal con más información, una visualización de la tasa de quema y un enlace a la página de servicio correspondiente del SLO." style="width:80%;" >}}
+{{< img src="service_level_objectives/slo_burn_rate_indicator.png" alt="La SLO manage page en Datadog. Un ícono rojo aparece junto al nombre de un SLO en la lista. Al pasar el mouse sobre el ícono rojo, se muestra un modal con más información, una visualización de la tasa de quema y un enlace a la página de servicio correspondiente del SLO." style="width:80%;" >}}
 
 Hay dos tipos de indicadores posibles:
 - Un ícono rojo que indica una tasa de quema crítica superior a 6 en las últimas 2 horas.
@@ -262,11 +262,11 @@ Para obtener una lista completa de todos los eventos de auditoría de SLO, ingre
 
 **Nota:** Si no ve eventos aparecer en la interfaz de usuario, asegúrese de establecer el marco de tiempo de Event Explorer a un período más largo, por ejemplo, los últimos 7 días.
 
-{{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="Eventos de auditoría de SLO" >}}
+{{< img src="service_level_objectives/slo-audit-events.png" alt="Eventos de auditoría de SLO" >}}
 
 También puede usar la pestaña "Historial de Auditoría" en los detalles del SLO para ver todos los eventos de auditoría de un SLO individual:
 
-{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="Pestaña de historial de auditoría de detalles del SLO" >}}
+{{< img src="service_level_objectives/slo_audit_history_tab.png" alt="Pestaña de historial de auditoría de detalles del SLO" >}}
 
 Con [Event Monitors][28], puede configurar notificaciones para rastrear eventos de auditoría de SLO. Por ejemplo, si desea ser notificado cuando se modifique la configuración de un SLO específico, configure un Event Monitor para rastrear el texto `[SLO Modified]` sobre las etiquetas `audit,slo_id:<SLO ID>`.
 
@@ -326,7 +326,7 @@ Para acceder a las correcciones de estado de SLO en la interfaz de usuario:
 6. Opcionalmente, agregue **Notes**.
 7. Haga clic en **Apply Correction**.
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO Correction UI" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO Correction UI" style="width:80%;">}}
 
 Para ver, editar y eliminar correcciones de estado existentes, haga clic en la pestaña **Corrections** en la parte superior del panel lateral detallado de un SLO.
 
@@ -334,13 +334,13 @@ Para ver, editar y eliminar correcciones de estado existentes, haga clic en la p
 
 Para SLOs basados en métricas y Time Slice SLOs con Status Corrections, hay un interruptor en la vista de detalles del SLO que le permite habilitar o deshabilitar correcciones en la interfaz de usuario. El interruptor controla los gráficos y los datos en la sección "History" de la vista de detalles del SLO. **Nota:** Su estado general de SLO y presupuesto de errores siempre tomarán en cuenta las correcciones de estado.
 
-{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="Interfaz de usuario de corrección de SLO" style="width:100%;">}}
+{{< img src="service_level_objectives/correction-toggle.png" alt="Interfaz de usuario de corrección de SLO" style="width:100%;">}}
 
 ## Visualización del calendario de SLO {#slo-calendar-view}
 
 La Visualización del Calendario de SLO está disponible en la [página de gestión de SLO][2]. En la esquina superior derecha, cambie de la visualización "Principal" a la "Diaria", "Semanal" o "Mensual" para ver 12 meses de datos históricos del estado del SLO. La Visualización del Calendario es compatible con SLOs basados en métricas y SLOs de intervalo de tiempo.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="Visualización del calendario de SLO" >}}
+{{< img src="service_level_objectives/slo-calendar-view-2.png" alt="Visualización del calendario de SLO" >}}
 
 ## Lectura adicional {#further-reading}
 
