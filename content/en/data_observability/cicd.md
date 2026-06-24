@@ -41,7 +41,7 @@ Drift Detection compares the data produced by your models before and after your 
 
 ### 1. Connect your source control provider and dbt project
 
-Connect your [source-control provider](integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
+Connect your [source-control provider](/integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
 
 Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project as part of setting up your CI/CD checks.
 
