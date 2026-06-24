@@ -229,7 +229,7 @@ Navigate to the [Log Archiving & Forwarding page][6] and select {{< ui >}}Add a 
 
 #### Datadog tags
 
-Use this optional configuration step to:  
+Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][13] permission.
