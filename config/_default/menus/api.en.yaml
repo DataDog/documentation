@@ -12575,6 +12575,49 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
+    - name: Governance Controls
+      url: /api/latest/governance-controls/
+      identifier: governance-controls
+      generated: true
+    - name: Update a governance control
+      url: /api/latest/governance-controls/update-a-governance-control/
+      identifier: governance-controls-update-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControl
+        unstable:
+          - v2
+        order: 4
+    - name: Get a governance control
+      url: /api/latest/governance-controls/get-a-governance-control/
+      identifier: governance-controls-get-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControl
+        unstable:
+          - v2
+        order: 3
+    - name: List governance controls
+      url: /api/latest/governance-controls/list-governance-controls/
+      identifier: governance-controls-list-governance-controls
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControls
+        unstable:
+          - v2
+        order: 2
     - name: Governance Insights
       url: /api/latest/governance-insights/
       identifier: governance-insights
