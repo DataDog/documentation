@@ -41,7 +41,7 @@ experience for adding `env`, `service`, and `version` (see [Unified Service Tagg
 
 ### Example with Winston and Express
 
-Here's a simple example using Winston with Express:
+Here's an example using Winston with Express:
 
 ```javascript
 // init tracer first
