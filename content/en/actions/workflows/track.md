@@ -24,7 +24,7 @@ This page explains how to track different kinds of workflow activity and workflo
 
 The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][2] and search for {{< ui >}}Workflows Overview{{< /ui >}}.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
 
 
 ## View workflow edits and runs in Audit Trail

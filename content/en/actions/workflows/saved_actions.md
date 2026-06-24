@@ -31,7 +31,7 @@ Use the _Saved Actions_ feature to store and reuse an action and its parameters.
 1. If you want anyone in your organization to have access to the action, toggle {{< ui >}}Usable by others in the organization{{< /ui >}}.
 1. Verify the configuration details for the action and click {{< ui >}}Save Action Configuration{{< /ui >}}.
 
-{{< img src="service_management/workflows/save_action_1.mp4" alt="Click the Saved Action icon to save an action for later use." video="true" width=80% >}}
+{{< img src="actions/workflows/save_action_1.mp4" alt="Click the Saved Action icon to save an action for later use." video="true" width=80% >}}
 
 ## Use a saved action in your workflow
 
@@ -57,7 +57,7 @@ To find a saved action:
 
 If you did not create the action, you cannot edit it directly. Instead select the {{< ui >}}Clone{{< /ui >}} icon to copy it and make your configuration changes. You cannot delete an action that you did not create.
 
-{{< img src="service_management/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
+{{< img src="actions/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
 
 ## Further Reading
 

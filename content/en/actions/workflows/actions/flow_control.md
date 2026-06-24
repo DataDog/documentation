@@ -22,13 +22,13 @@ Use [Logic actions][1] to add control logic to your workflow. For example, you c
 
 You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an {{< ui >}}If condition{{< /ui >}} action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
 
-{{< img src="service_management/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
+{{< img src="actions/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
 
 ## Switch statement
 
 Use the Switch statement action to handle multiple branching paths in a single step. Specify a switch expression and compare it against one or more case values. If no case matches, a default branch runs instead. In the example below, a Switch statement routes the workflow based on whether the status code from a previous HTTP request is `200`, `403`, `404`, `500`, or another value.
 
-{{< img src="service_management/workflows/switch-statement.png" alt="The workflow canvas showing a Switch statement action named 'Make_request.status' branching into multiple cases for different HTTP status codes. Each case sends a different Slack message, and the default branch throws an unexpected error if no other case matches." >}}
+{{< img src="actions/workflows/switch-statement.png" alt="The workflow canvas showing a Switch statement action named 'Make_request.status' branching into multiple cases for different HTTP status codes. Each case sends a different Slack message, and the default branch throws an unexpected error if no other case matches." >}}
 
 ## Sleep
 
@@ -40,7 +40,7 @@ The {{< ui >}}For loop{{< /ui >}} action allows you to execute a set of actions 
 
 In the example below, a for loop iterates over a list of incidents and sends a Slack message for any incident that is more than a week old.
 
-{{< img src="service_management/workflows/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
+{{< img src="actions/workflows/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
 
 To add a for loop to your workflow:
 1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
@@ -59,7 +59,7 @@ The {{< ui >}}While loop{{< /ui >}} action allows you to execute a set of action
 
 The following example uses a while loop to paginate the AWS S3 List Buckets API for an App.
 
-{{< img src="service_management/workflows/iteration3.png" alt="A workflow with a while loop. The workflow uses a while loop to paginate the AWS S3 List Buckets API for an App." style="width:100%;" >}}
+{{< img src="actions/workflows/iteration3.png" alt="A workflow with a while loop. The workflow uses a while loop to paginate the AWS S3 List Buckets API for an App." style="width:100%;" >}}
 
 To add a while loop to your workflow:
 1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.

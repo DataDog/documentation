@@ -19,7 +19,7 @@ The Run Workflow widget allows you to automate critical tasks from dashboards. T
 1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
 1. Enter a title for the widget and click {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
+{{< img src="dashboards/widgets/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click {{< ui >}}Run Workflow{{< /ui >}} on your dashboard widget.

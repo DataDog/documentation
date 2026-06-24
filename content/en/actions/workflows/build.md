@@ -85,15 +85,15 @@ You can edit a step in the workflow at any time by clicking on it. Click and dra
 
 #### Shortcuts and canvas tools
 
-To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the {{< ui >}}Keyboard{{< /ui >}} {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the {{< ui >}}Keyboard{{< /ui >}} {{< img src="actions/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
 
-The {{< ui >}}Zoom out{{< /ui >}} {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, {{< ui >}}Zoom in{{< /ui >}} {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and {{< ui >}}Reset viewport{{< /ui >}} {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
+The {{< ui >}}Zoom out{{< /ui >}} {{< img src="actions/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, {{< ui >}}Zoom in{{< /ui >}} {{< img src="actions/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and {{< ui >}}Reset viewport{{< /ui >}} {{< img src="actions/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
 
-The {{< ui >}}Auto layout{{< /ui >}} {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
+The {{< ui >}}Auto layout{{< /ui >}} {{< img src="actions/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
 
-The {{< ui >}}Add annotation{{< /ui >}} {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
+The {{< ui >}}Add annotation{{< /ui >}} {{< img src="actions/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
 
-{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
+{{< img src="actions/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
 
 ## Test a step
 
@@ -161,7 +161,7 @@ You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the {{< ui >}}Error path{{< /ui >}} icon {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
+1. Click and drag the {{< ui >}}Error path{{< /ui >}} icon {{< img src="actions/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click {{< ui >}}Save{{< /ui >}} to apply your changes.
@@ -178,7 +178,7 @@ To add a condition:
    - Only the current step's output variables can be used in a custom conditional statement.
 1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
 
-{{< img src="service_management/workflows/wait-until-condition2.png" alt="An example of wait until condition" style="width:100%;" >}}
+{{< img src="actions/workflows/wait-until-condition2.png" alt="An example of wait until condition" style="width:100%;" >}}
 
 ## Edit a workflow with JSON
 

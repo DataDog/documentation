@@ -50,7 +50,7 @@ You can use a workflow's {{< ui >}}Run History{{< /ui >}} to debug a failed step
 
 Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
 
-{{< img src="service_management/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
+{{< img src="actions/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
 
 The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
 

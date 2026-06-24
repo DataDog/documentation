@@ -27,7 +27,7 @@ The action uses the following inline expression in the {{< ui >}}From{{< /ui >}}
 ${ Math.floor(now() / 1000) - 60 }
 ```
 
-{{< img src="/service_management/workflows/timestamp.png" alt="An inline expression using the now() lowdash function" style="width:90%;" >}}
+{{< img src="/actions/workflows/timestamp.png" alt="An inline expression using the now() lowdash function" style="width:90%;" >}}
 
 #### Increment a value
 
@@ -38,7 +38,7 @@ The action uses the following inline expression in the {{< ui >}}Desired capacit
 ${ Steps.Describe_auto_scaling_group.autoScalingGroup.DesiredCapacity + 1 }
 ```
 
-{{< img src="/service_management/workflows/increment.png" alt="An inline expression that increments the desired capacity by one" style="width:90%;" >}}
+{{< img src="/actions/workflows/increment.png" alt="An inline expression that increments the desired capacity by one" style="width:90%;" >}}
 
 ## JavaScript expression actions
 
