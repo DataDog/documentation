@@ -1762,24 +1762,26 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
-    - name: Widget Public URLs
+    - name: Widget Share URLs
       identifier: dashboards_sharing_widget_public_urls
       url: dashboards/sharing/widget_public_urls
+      parent: dashboards_sharing
+      weight: 1003
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1004
+      weight: 1005
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1005
+      weight: 1006
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -4697,9 +4699,9 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
-    - name: Debug with Bits
-      url: tracing/live_debugger/debug-with-bits/
-      identifier: live_debugger_debug_with_bits
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger/
+      identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
     - name: Error Tracking
@@ -6330,6 +6332,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_history
       weight: 307
+    - name: Feature Flag Graphs
+      url: feature_flags/concepts/flag_graphs
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_graphs
+      weight: 308
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
@@ -9713,21 +9720,26 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
     - name: Identity Resolution
       url: product_analytics/profiles/identity_resolution
       parent: pa_profiles
       identifier: pa_identity_resolution
-      weight: 401
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
     - name: Experiments
       url: experiments/
       pre: experiment-wui

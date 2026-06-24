@@ -1238,6 +1238,12 @@
   "ValidateCsvBudget": {
     "summary": "Validate CSV budget"
   },
+  "UpsertCustomForecast": {
+    "description": "Create or replace the custom forecast for an existing budget.\nPass an empty `entries` list to delete the custom forecast for the budget.",
+    "summary": "Create or replace a budget's custom forecast",
+    "request_description": "",
+    "request_schema_description": "Request body to upsert (create or replace) the custom forecast for a budget."
+  },
   "ValidateBudget": {
     "description": "Validate a budget configuration without creating or modifying it",
     "summary": "Validate budget",
@@ -1251,6 +1257,10 @@
   "GetBudget": {
     "description": "Get a budget",
     "summary": "Get budget"
+  },
+  "DeleteCustomForecast": {
+    "description": "Delete the custom forecast for a budget.",
+    "summary": "Delete a budget's custom forecast"
   },
   "ListBudgets": {
     "description": "List budgets.",
@@ -1873,6 +1883,22 @@
   "UnarchiveFeatureFlag": {
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
     "summary": "Unarchive a feature flag"
+  },
+  "CreateVariantForFeatureFlag": {
+    "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
+    "summary": "Add a variant to a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to create a variant."
+  },
+  "DeleteVariantFromFeatureFlag": {
+    "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Delete a variant"
+  },
+  "UpdateVariantForFeatureFlag": {
+    "description": "Updates the name and value of an existing variant on a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of applying the change immediately. Use the returned suggestion `id` to approve or reject the change. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
+    "summary": "Update a variant",
+    "request_description": "",
+    "request_schema_description": "Request to update an existing variant's name and value."
   },
   "ListForms": {
     "description": "Get all forms for the authenticated user's organization.",
@@ -5480,19 +5506,19 @@
     "request_schema_description": "Request body for updating the triage state or assignee of a security signal."
   },
   "BulkExportSecurityMonitoringTerraformResources": {
-    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
+    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.\nA maximum of 1000 resources can be exported in a single request.\nFor `rules`, partner rules cannot be exported and return a 400 error.",
     "summary": "Export security monitoring resources to Terraform",
     "request_description": "The resource IDs to export.",
     "request_schema_description": "Request body for bulk exporting security monitoring resources to Terraform."
   },
   "ConvertSecurityMonitoringTerraformResource": {
-    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions` or `critical_assets`.",
+    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.",
     "summary": "Convert security monitoring resource to Terraform",
     "request_description": "The resource JSON to convert.",
     "request_schema_description": "Request body for converting a security monitoring resource JSON to Terraform."
   },
   "ExportSecurityMonitoringTerraformResource": {
-    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions` or `critical_assets`.",
+    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions`, `critical_assets`, `security_filters`, or `rules`.\nFor `rules`, partner rules cannot be exported and return a 400 error.",
     "summary": "Export security monitoring resource to Terraform"
   },
   "ListScanningGroups": {

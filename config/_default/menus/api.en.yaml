@@ -10392,6 +10392,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Delete a budget's custom forecast
+      url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-delete-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomForecast
+        unstable:
+          - v2
+        order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
       identifier: cloud-cost-management-get-budget
@@ -10428,6 +10441,19 @@ menu:
           - ValidateBudget
         unstable: []
         order: 35
+    - name: Create or replace a budget's custom forecast
+      url: /api/latest/cloud-cost-management/create-or-replace-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-create-or-replace-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCustomForecast
+        unstable:
+          - v2
+        order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
       identifier: cloud-cost-management-validate-csv-budget
@@ -11743,6 +11769,42 @@ menu:
       url: /api/latest/feature-flags/
       identifier: feature-flags
       generated: true
+    - name: Update a variant
+      url: /api/latest/feature-flags/update-a-variant/
+      identifier: feature-flags-update-a-variant
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateVariantForFeatureFlag
+        unstable: []
+        order: 21
+    - name: Delete a variant
+      url: /api/latest/feature-flags/delete-a-variant/
+      identifier: feature-flags-delete-a-variant
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteVariantFromFeatureFlag
+        unstable: []
+        order: 20
+    - name: Add a variant to a feature flag
+      url: /api/latest/feature-flags/add-a-variant-to-a-feature-flag/
+      identifier: feature-flags-add-a-variant-to-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVariantForFeatureFlag
+        unstable: []
+        order: 22
     - name: Unarchive a feature flag
       url: /api/latest/feature-flags/unarchive-a-feature-flag/
       identifier: feature-flags-unarchive-a-feature-flag

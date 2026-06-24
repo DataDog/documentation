@@ -148,9 +148,9 @@ Live Debugger data might contain sensitive information, especially when using th
 1. Use the built-in [sensitive data scrubbing][1] mechanisms.
 2. Use [Sensitive Data Scanner][17] to identify and redact sensitive information based on regular expressions.
 
-### Debug with Bits
+### Bits Live Debugger
 
-[Debug with Bits][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
+[Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
 
@@ -195,4 +195,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
-[23]: /tracing/live_debugger/debug-with-bits/
+[23]: /tracing/live_debugger/bits-live-debugger/

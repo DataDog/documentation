@@ -25,9 +25,9 @@ Ideal for engineers and SREs managing alert workflows, Draft Monitors provide cl
 
 To create and store monitors in a draft state:
 
-1. Navigate to [**Monitors > New Monitor**][1].  
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][1].  
 2. [Configure the monitor][2] (add your query, specify conditions, and optionally set notifications). Notification handles set in a draft are only used after the monitor is published. 
-3. Click **Save as Draft**. No alerts are sent from this draft monitor.
+3. Click {{< ui >}}Save as Draft{{< /ui >}}. No alerts are sent from this draft monitor.
 
 {{< img src="/monitors/draft/save_as_draft.png" alt="Save as Draft button in the monitor creation interface" style="width:100%;" >}}
 
@@ -35,16 +35,16 @@ To create and store monitors in a draft state:
 
 When your monitor is ready:
 
-1. Open the draft from [**Monitors List**][3] by using the draft status facet or filter by `status:draft`.  
+1. Open the draft from [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `status:draft`.  
 2. Review the configuration.  
-3. Click **Publish Monitor.**  
+3. Click {{< ui >}}Publish Monitor{{< /ui >}}.  
 4. This publishes your monitor and begins alerting based on your conditions.
 
 ## Manage draft monitors
 
 <!-- TODO Add image of Monitors List filtered to view drafts, and final QA of instructions with UI-->
 
-Find draft monitors from the [**Monitors List**][3] by using the draft status facet or filter by `draft_status:draft`. Drafts appear with a **Draft** label on the monitor status page and in the monitor list. Drafts expire after 6 months without updates, but you can delete draft monitors at any time.
+Find draft monitors from the [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `draft_status:draft`. Drafts appear with a {{< ui >}}Draft{{< /ui >}} label on the monitor status page and in the monitor list. Drafts expire after 6 months without updates, but you can delete draft monitors at any time.
 
 ## Permissions
 
