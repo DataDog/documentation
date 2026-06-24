@@ -86,7 +86,7 @@ Puede implementar controles tanto para volúmenes de tramos indexados como inger
     * Agregue respondedores o asigne tipos de respondedores
     * Cree, modifique o asigne seguimientos de incidentes
     * Genere un postmortem
-  * No se convierte _ en un usuario activo_ cuando:
+  * No se convierte _en un usuario activo_ cuando:
     * Declare, visualice o busque incidentes
     * Únase a canales, reuniones o llamadas de terceros que estén conectados al incidente
     * Publique mensajes en el canal de Slack del incidente o en el canal de Microsoft Teams (incluso si el mensaje se sincroniza automáticamente con la línea de tiempo del incidente)

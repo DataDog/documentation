@@ -24,7 +24,7 @@ title: カスタム Agent チェックの書き方
 
 ### 構成 {#configuration}
 
-1. システムの `conf.d`` ディレクトリに移動します。`conf.d` ディレクトリの場所の詳細については、[Agent 構成ファイル][2]を参照してください。
+1. システムの `conf.d` ディレクトリに移動します。`conf.d` ディレクトリの場所の詳細については、[Agent 構成ファイル][2]を参照してください。
 2. `conf.d` ディレクトリに、新しい Agent チェック用の新しい構成ファイルを作成します。ファイルに `custom_checkvalue.yaml` という名前を付けます。
 3. ファイルを編集して、以下を含めます。
    {{< code-block lang="yaml" filename="conf.d/custom_checkvalue.yaml" >}}
