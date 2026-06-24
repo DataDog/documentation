@@ -4,9 +4,9 @@ description: Set up and use private action runners to interact with services on 
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/use_private_actions
-- service_management/app_builder/private_actions/use_private_actions
+- actions/app_builder/private_actions/use_private_actions
 further_reading:
-- link: "service_management/app_builder/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "App Builder Connections"
 - link: "service_management/workflows/connections"
@@ -912,7 +912,7 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 [10]: https://app.datadoghq.com/workflow/
 [11]: https://app.datadoghq.com/app-builder/
 [12]: /service_management/workflows/build
-[13]: /service_management/app_builder/build
+[13]: /actions/app_builder/build
 [14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [16]: /actions/private_actions/
 [17]: /account_management/rbac/

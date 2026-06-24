@@ -4,7 +4,7 @@ further_reading:
     - link: 'https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html'
       tag: 'AWS Developer Guide'
       text: 'Restarting state machine executions with redrive in Step Functions'
-    - link: "/service_management/app_builder/"
+    - link: "/actions/app_builder/"
       tag: "Documentation"
       text: "Datadog App Builder"
 ---
@@ -37,4 +37,4 @@ A redrive may not always share the same sampling decision as the original execut
 [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
 [2]: https://app.datadoghq.com/functions?cloud=aws&entity_view=step_functions
 [3]: https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html
-[4]: /service_management/app_builder/
+[4]: /actions/app_builder/

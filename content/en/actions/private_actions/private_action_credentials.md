@@ -3,7 +3,7 @@ title: Handling Private Action Credentials
 description: Configure credentials for private actions including HTTP, Jenkins, PostgreSQL, MongoDB, and Temporal authentication methods.
 aliases:
 - service_management/workflows/private_actions/private_action_credentials
-- service_management/app_builder/private_actions/private_action_credentials
+- actions/app_builder/private_actions/private_action_credentials
 disable_toc: false
 ---
 

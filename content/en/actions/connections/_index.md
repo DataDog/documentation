@@ -5,7 +5,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder documentation"
 - link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"

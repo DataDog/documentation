@@ -148,6 +148,6 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 [3]: https://chat.datadoghq.com/
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
 [5]: /service_management/workflows/trigger
-[6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
+[6]: /actions/app_builder/queries/#return-workflow-results-to-an-app
 [7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
 [8]: /service_management/workflows/expressions/#inline-javascript-expressions
