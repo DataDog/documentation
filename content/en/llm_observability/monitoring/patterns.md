@@ -14,6 +14,9 @@ further_reading:
 - link: "/llm_observability/experiments/datasets"
   tag: "Documentation"
   text: "Learn about Datasets"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.

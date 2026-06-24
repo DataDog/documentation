@@ -43,6 +43,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
 
 ---
 
