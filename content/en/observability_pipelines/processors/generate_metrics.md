@@ -40,7 +40,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 Sending metrics generated from logs to the Splunk HEC, Elasticsearch, or HTTP/S Client destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
-<div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker versions 2.18 and later.<br><br>If you upgrade to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor, you must delete the previous Generate Metrics processor and add and configure a new Generate Metrics processor to be able to select a destination other than Datadog Metrics.</div>
+<div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker versions 2.18 and later.<br><br>If you upgrade to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor and you want to select a destination other than Datadog Metrics, you must:<br>&nbsp;&nbsp;&nbsp;&nbsp;1. Delete the previous Generate Metrics processor.<br>&nbsp;&nbsp;&nbsp;&nbsp;2. Add and configure a new Generate Metrics processor.</div>
 
 {{< img src="observability_pipelines/processors/generate_metrics_destination.png" alt="The Generate Metrics processor with the select a destination highlighted." style="width:50%;" >}}
 
