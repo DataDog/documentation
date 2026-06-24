@@ -1659,6 +1659,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_620504950",
+      "description": "Validate an observability pipeline with ClickHouse destination arrow_stream format returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1238441879",
+      "description": "Validate an observability pipeline with ClickHouse destination returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1785209526",
       "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
     },
@@ -1711,6 +1721,11 @@
       "group": "observability_pipelines",
       "suffix": "_2899320203",
       "description": "Validate an observability pipeline with source secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_337125830",
+      "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [

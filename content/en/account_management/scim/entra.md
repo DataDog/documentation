@@ -78,13 +78,13 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 | `jobTitle`                       | `title`                        |
 | `mail`                           | `emails[type eq "work"].value` |
 | `displayName`                    | `name.formatted`               |
-| `roles`                          | `roles`                        |
+| `AppRoleAssignmentsComplex([appRoleAssignments])` | `roles`               |
 
    {{< img src="/account_management/scim/ad-users-2.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
 7. After you set your mappings, click {{< ui >}}Save{{< /ui >}}.
 
-To provision a user's Datadog role (built-in or custom), map the `roles` attribute as shown above. Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9], using the role UUID as `value` and the role name as `display`. If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
+To provision a user's Datadog role (built-in or custom), map the `roles` attribute as shown above, using the `AppRoleAssignmentsComplex([appRoleAssignments])` expression for the Microsoft Entra ID attribute. Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9]. If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
 
 ### Group attributes
 

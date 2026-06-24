@@ -621,7 +621,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
 ### Failed connections 
 
-Failed Connections allows collection and reporting of TCP failures including [resets, refusals, and timeouts][14]. This feature is enabled by default in Agent version `7.59+`, and it is accessible on the [CNM Analytics][15] page in the **Customize** menu by turning on the **Failures** toggle.
+Failed Connections allows collection and reporting of TCP failures including [resets, refusals, and timeouts][14]. This feature is enabled by default in Agent version `7.59+`, and it is accessible on the [CNM Analytics][15] page in the {{< ui >}}Customize{{< /ui >}} menu by turning on the {{< ui >}}Failures{{< /ui >}} toggle.
 
 **Note**: If some Agents in your infrastructure are running a version earlier than `7.59`, you might encounter failures being under-reported. CNM advises maintaining the same Agent version across _all_ hosts.
 

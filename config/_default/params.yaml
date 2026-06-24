@@ -313,7 +313,7 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   byoti: [gov, gov2]
-  case_management: [gov,gov2]
+  case_management: [gov2]
   ci_visibility: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]

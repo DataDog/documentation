@@ -4,6 +4,9 @@ description: "Process, enrich, control, and manage your logs from the Logs Confi
 aliases:
   - /logs/processing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
   text: "PCI DSS Compliance"
