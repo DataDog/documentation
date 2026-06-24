@@ -28,26 +28,26 @@ For organizations that remain multi-organization, Organizational Groups introduc
 Organizational Groups lets administrators manage multiple Datadog organizations as a single unit. Instead of configuring roles, policies, and settings individually per organization, administrators define them once at the group level and push them to member organizations.
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
-- **Push policies from group to member organizations.** Define custom roles, access policies, and session settings in the owner org and apply them to member organizations.
+- **Push policies from group to member organizations.** Define custom roles, access policies, and session settings in the owner organization and apply them to member organizations.
 
 {{< img src="account_management/org-groups-policies.png" alt="Organization Settings in Datadog showing the Organizational Groups policies section" style="width:100%;" >}}
 
 ## How it works
 
-### Org types
+### Organization types
 
-Every organization in an organizational group falls into at least one of the following roles:
+Every organization in an organizational group falls into at least one of the following types:
 
-| Role | Description |
+| Types | Description |
 | ---------- | ----------------- |
 | **Owner** | Creates and manages the organizational group. Sets policies and enforcement tiers for all member organizations. |
-| **Member** | Governed by the group. An organization belongs to exactly one organizational group at a time. An owner org can also be a member of its own organizational group. |
+| **Member** | Governed by the group. An organization belongs to exactly one organizational group at a time. An owner organization can also be a member of its own organizational group. |
 
-Org admins in the owner org have access to the **Organizational Groups** page in **Organization Settings**, where they can manage group members and policies.
+Admins in the owner organization have access to the **Organizational Groups** page in **Organization Settings**, where they can manage group members and policies.
 
 ### Organizational group policies
 
-An organizational group policy targets a specific organization configuration and pairs it with a value and an enforcement tier. Policies are created by the owner org and applied to all member organizations.
+An organizational group policy targets a specific organization configuration and pairs it with a value and an enforcement tier. Policies are created by the owner organization and applied to all member organizations.
 
 #### Enforcement tiers
 
@@ -64,7 +64,7 @@ Each organizational group policy has an enforcement tier that controls how much 
 
 ### For new multi-organization deployments
 
-If your use case requires multi-organization, Organizational Groups gives you centralized controls to manage it from a single owner org.
+If your use case requires multi-organization, Organizational Groups gives you centralized controls to manage it from a single owner organization.
 
 ### For existing multi-organization customers considering consolidation
 
