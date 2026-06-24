@@ -77,11 +77,13 @@ AI-native SAST uses a two-phase approach:
 
 ### Supported languages
 
-| Language | Status      |
-| -------- | ----------- |
-| Java     | Available   |
-| Python   | Available   |
-| Go       | Available   |
+| Language   | Status      |
+| ---------- | ----------- |
+| Java       | Available   |
+| Python     | Available   |
+| Go         | Available   |
+| C#         | Available   |
+| JavaScript | Available   |
 
 ### Detected vulnerability types
 
@@ -102,7 +104,7 @@ AI-native SAST detects the following vulnerability types:
 - [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
 - [CWE-284: Broken Access Control (IDOR)](https://cwe.mitre.org/data/definitions/284.html)
-- [CWE-1427: Server-Side Template Injection](https://cwe.mitre.org/data/definitions/1427.html)
+- [CWE-1427: Prompt Injection](https://cwe.mitre.org/data/definitions/1427.html)
   {{% /collapse-content %}}
 
 <!-- ## AI-powered detection
@@ -142,6 +144,12 @@ To narrow down your initial list for triage, in [Vulnerabilities][6], turn on th
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
+
+### Bits AI Memories
+
+Bits AI Memories lets teams add rule-specific context that Bits AI uses when assessing SAST findings. Use memories to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details that help Bits AI interpret findings for that rule.
+
+In the SAST rule side panel, expand the false positive reports accordion to review reports shared by your organization for the selected rule. Use the custom context tab in the same section to add guidance for future Bits AI assessments. Memories apply at the organization and rule level for SAST. They apply only to security category SAST rules in Datadog's default rulesets and do not apply to custom rules.
 
 ## Remediation
 

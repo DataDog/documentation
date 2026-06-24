@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/oncall/handover-automation.png" alt="The Handover Automation section on an On-Call team page" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation.png" alt="The Handover Automation section on an On-Call team page" style="width:80%;" >}}
 
 Handover automations run automatically when on-call duty passes from one person to another. They handle tasks that teams typically manage with custom scripts, such as notifying other systems about who's on-call, updating internal chat channels, or triggering downstream workflows.
 
@@ -73,13 +73,13 @@ For example, you can use this action to:
 
 Posts a handover summary to a Slack channel showing who is handing off to whom for each selected schedule. You can also include an AI-generated shift summary.
 
-{{< img src="service_management/oncall/handover-automation-slack-message.png" alt="Example Slack handover message showing shift change details" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-slack-message.png" alt="Example Slack handover message showing shift change details" style="width:80%;" >}}
 
 #### Update channel topic
 
 Updates a Slack channel topic when a shift changes. Use numbered variables (`{{1}}`, `{{2}}`, and so on) in a customizable template to reference responders in schedule order. For example, `On-call: {{1}} (backup: {{2}})` resolves to the primary and secondary on-call responders when the shift changes.
 
-{{< img src="service_management/oncall/handover-automation-slack-channel-topic.png" alt="Configuration form for the Slack Update channel topic automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-slack-channel-topic.png" alt="Configuration form for the Slack Update channel topic automation" style="width:80%;" >}}
 
 Channel topics have a character limit. The UI validates the template before saving.
 
@@ -87,13 +87,13 @@ Channel topics have a character limit. The UI validates the template before savi
 
 Sends a direct message to the incoming on-call responder when their shift begins.
 
-{{< img src="service_management/oncall/handover-automation-slack-direct-message.png" alt="Configuration form for the Slack Send a direct message automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-slack-direct-message.png" alt="Configuration form for the Slack Send a direct message automation" style="width:80%;" >}}
 
 #### Update user group
 
 Updates the members of a Slack user group to match the current on-call responders for the selected schedules.
 
-{{< img src="service_management/oncall/handover-automation-slack-update-group.png" alt="Configuration form for the Slack Update user group automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-slack-update-group.png" alt="Configuration form for the Slack Update user group automation" style="width:80%;" >}}
 
 **Note**: This action requires `usergroups:read` and `usergroups:write` permissions on the Datadog Slack app. If these permissions are missing, the UI displays a warning with a link to enable them.
 
@@ -103,19 +103,19 @@ Updates the members of a Slack user group to match the current on-call responder
 
 Posts a handover summary to a Microsoft Teams channel showing who is handing off to whom for each selected schedule. You can also include an AI-generated shift summary.
 
-{{< img src="service_management/oncall/handover-automation-ms-teams-message.png" alt="Configuration form for the Microsoft Teams Send message automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-ms-teams-message.png" alt="Configuration form for the Microsoft Teams Send message automation" style="width:80%;" >}}
 
 #### Update channel description
 
 Updates a Microsoft Teams channel description when a shift changes. Use numbered variables (`{{1}}`, `{{2}}`, and so on) in a customizable template to reference responders in schedule order. For example, `On-call: {{1}} (backup: {{2}})` resolves to the primary and secondary on-call responders when the shift changes.
 
-{{< img src="service_management/oncall/handover-automation-ms-teams-channel-topic.png" alt="Configuration form for the Microsoft Teams Update channel description automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-ms-teams-channel-topic.png" alt="Configuration form for the Microsoft Teams Update channel description automation" style="width:80%;" >}}
 
 #### Send a direct message
 
 Sends a direct message to the incoming on-call responder when their shift begins.
 
-{{< img src="service_management/oncall/handover-automation-ms-teams-direct-message.png" alt="Configuration form for the Microsoft Teams Send a direct message automation" style="width:80%;" >}}
+{{< img src="incident_response/on-call/automations/handover-automation-ms-teams-direct-message.png" alt="Configuration form for the Microsoft Teams Send a direct message automation" style="width:80%;" >}}
 
 ## Troubleshooting
 

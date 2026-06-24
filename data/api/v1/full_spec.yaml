@@ -6289,6 +6289,190 @@ components:
       type: string
       x-enum-varnames:
         - ARITHMETIC_PROCESSOR
+    LogsArrayMapArithmeticSubProcessor:
+      description: |-
+        An arithmetic sub-processor for use inside an array-map processor.
+        Unlike the top-level arithmetic processor, `is_enabled` is not supported.
+      properties:
+        expression:
+          description: Arithmetic operation to perform.
+          example: $sourceElem.count * 2
+          type: string
+        is_replace_missing:
+          default: false
+          description: Replace missing attribute values with 0.
+          type: boolean
+        name:
+          description: Name of the sub-processor.
+          type: string
+        target:
+          description: Target attribute path for the result.
+          example: $targetElem.doubled
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsArithmeticProcessorType"
+      required:
+        - expression
+        - target
+        - type
+      type: object
+    LogsArrayMapAttributeRemapper:
+      description: |-
+        An attribute remapper sub-processor for use inside an array-map processor.
+        Unlike the top-level attribute remapper, `is_enabled`, `source_type`, and
+        `target_type` are not supported.
+      properties:
+        name:
+          description: Name of the sub-processor.
+          type: string
+        override_on_conflict:
+          default: false
+          description: Override the target element if already set.
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        sources:
+          description: Array of source attribute paths.
+          example:
+            - $sourceElem.id
+          items:
+            type: string
+          type: array
+        target:
+          description: Target attribute path.
+          example: $targetElem.uid
+          type: string
+        target_format:
+          $ref: "#/components/schemas/TargetFormatType"
+        type:
+          $ref: "#/components/schemas/LogsAttributeRemapperType"
+      required:
+        - sources
+        - target
+        - type
+      type: object
+    LogsArrayMapCategorySubProcessor:
+      description: |-
+        A category sub-processor for use inside an array-map processor.
+        Unlike the top-level category processor, `is_enabled` is not supported.
+      properties:
+        categories:
+          description: Array of filters to match against a log and the corresponding value to assign.
+          items:
+            $ref: "#/components/schemas/LogsCategoryProcessorCategory"
+          type: array
+        name:
+          description: Name of the sub-processor.
+          type: string
+        target:
+          description: Target attribute path for the category value.
+          example: $targetElem.level
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsCategoryProcessorType"
+      required:
+        - categories
+        - target
+        - type
+      type: object
+    LogsArrayMapProcessor:
+      description: |-
+        The array-map processor transforms each element of a source array by applying
+        sub-processors in order and collecting the results into a target array.
+        Results can be written to a new array, to the source array (in-place), or to
+        an existing target array. Sub-processors can read from `$sourceElem.<field>`
+        (object element field), bare `$sourceElem` (primitive element), or any parent
+        log attribute path. Sub-processors write to `$targetElem.<field>` (object
+        output field) or bare `$targetElem` (primitive output).
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        preserve_source:
+          default: true
+          description: |-
+            When `false` and `source != target`, the source attribute is removed after
+            processing. Cannot be `false` when `source == target`.
+          type: boolean
+        processors:
+          description: |-
+            Sub-processors applied to each element. Allowed types: `attribute-remapper`,
+            `string-builder-processor`, `arithmetic-processor`, `category-processor`.
+          items:
+            $ref: "#/components/schemas/LogsArrayMapSubProcessor"
+          type: array
+        source:
+          description: |-
+            Attribute path of the source array. Elements are read-only via `$sourceElem`
+            inside sub-processors.
+          example: detail.resource.s3BucketDetails
+          type: string
+        target:
+          description: |-
+            Attribute path of the output array. Sub-processors write to `$targetElem`
+            (or `$targetElem.<field>`) to build each output element.
+          example: ocsf.resources
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsArrayMapProcessorType"
+      required:
+        - source
+        - target
+        - processors
+        - type
+      type: object
+    LogsArrayMapProcessorType:
+      default: array-map-processor
+      description: Type of logs array-map processor.
+      enum:
+        - array-map-processor
+      example: array-map-processor
+      type: string
+      x-enum-varnames:
+        - ARRAY_MAP_PROCESSOR
+    LogsArrayMapStringBuilderSubProcessor:
+      description: |-
+        A string builder sub-processor for use inside an array-map processor.
+        Unlike the top-level string builder processor, `is_enabled` is not supported.
+      properties:
+        is_replace_missing:
+          default: false
+          description: Replace missing attribute values with an empty string.
+          type: boolean
+        name:
+          description: Name of the sub-processor.
+          type: string
+        target:
+          description: Target attribute path for the result.
+          example: $targetElem.label
+          type: string
+        template:
+          description: Formula with one or more attributes and raw text.
+          example: item-%{$sourceElem.id}
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsStringBuilderProcessorType"
+      required:
+        - template
+        - target
+        - type
+      type: object
+    LogsArrayMapSubProcessor:
+      description: |-
+        A sub-processor used inside an array-map processor.
+        Allowed types: `attribute-remapper`, `string-builder-processor`,
+        `arithmetic-processor`, `category-processor`.
+      oneOf:
+        - $ref: "#/components/schemas/LogsArrayMapAttributeRemapper"
+        - $ref: "#/components/schemas/LogsArrayMapArithmeticSubProcessor"
+        - $ref: "#/components/schemas/LogsArrayMapStringBuilderSubProcessor"
+        - $ref: "#/components/schemas/LogsArrayMapCategorySubProcessor"
     LogsArrayProcessor:
       description: |-
         A processor for extracting, aggregating, or transforming values from JSON arrays within your logs.
@@ -7344,6 +7528,7 @@ components:
         - $ref: "#/components/schemas/LogsDecoderProcessor"
         - $ref: "#/components/schemas/LogsSchemaProcessor"
         - $ref: "#/components/schemas/LogsExcludeAttributeProcessor"
+        - $ref: "#/components/schemas/LogsArrayMapProcessor"
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -20003,6 +20188,9 @@ components:
             description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
+        captureNetworkPayloads:
+          description: Capture HTTP request/response headers and bodies for Fetch/XHR calls made during browser tests.
+          type: boolean
         checkCertificateRevocation:
           description: |-
             For SSL tests, whether or not the test should fail on revoked certificate in stapled OCSP.
@@ -23021,10 +23209,11 @@ components:
       description: |-
         Response with hourly report of all data billed by Datadog for all organizations.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours in the current date for all organizations.
@@ -24318,14 +24507,16 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSummaryDateOrg:
       description: |-
         Global hourly report of all data billed by Datadog for a given organization.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         account_name:
           description: The account name.
@@ -25637,15 +25828,17 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSummaryResponse:
       description: |-
         Response summarizing all usage aggregated across the months in the request for
         all organizations, and broken down by month and by organization.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours in the current month for all organizations.
@@ -26984,6 +27177,7 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSyntheticsAPIHour:
       description: Number of Synthetics API tests run for each hour for a given organization.
       properties:
@@ -44541,11 +44735,12 @@ paths:
       description: |-
         Get all usage across your account.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map of `UsageSummaryResponse`, `UsageSummaryDate`, and
-        `UsageSummaryDateOrg` instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at each response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields on `UsageSummaryResponse`, `UsageSummaryDate`, and
+        `UsageSummaryDateOrg` are accessible through each object's `additionalProperties` map.
+        Existing typed-field getters are unchanged. New billing dimensions will not have
+        typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key at each response level.
 
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
       operationId: GetUsageSummary
