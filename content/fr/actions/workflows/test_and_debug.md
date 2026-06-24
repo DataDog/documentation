@@ -55,7 +55,7 @@ Vous pouvez utiliser le **Run History** d'un workflow pour déboguer une étape 
 
 Cliquer sur une étape ayant échoué vous donne les entrées, les sorties et le contexte d'exécution pour l'étape, ainsi que le message d'erreur associé. L'exemple ci-dessous montre une étape _GitHub pull request status_ ayant échoué. Le message d'erreur montre que l'étape a échoué en raison d'autorisations manquantes :
 
-{{< img src="service_management/workflows/failed-step4.png" alt="Un workflow avec une étape ayant échoué." >}}
+{{< img src="actions/workflows/failed-step4.png" alt="Un workflow avec une étape ayant échoué." >}}
 
 L'historique d'exécution initial d'un workflow fournit un panneau avec la liste des exécutions de workflow précédentes et si chaque exécution a réussi ou échoué. Les échecs incluent un lien vers l'étape de workflow ayant échoué. Cliquez sur une exécution de workflow dans la liste pour l'inspecter. Vous pouvez revenir à l'historique d'exécution initial à tout moment en cliquant n'importe où sur le canevas du workflow.
 

@@ -33,7 +33,7 @@ Utilisez la fonction _Saved Actions_ (Actions enregistrées) pour stocker et ré
 1. Si vous voulez que n'importe quel autre membre de votre organisation ait accès à l'action, cochez **Usable by others in the organization**.
 1. Vérifiez les détails de la configuration de l'action et cliquez sur **Save Action Configuration**.
 
-{{< img src="service_management/workflows/save_action_1.mp4" alt="Cliquez sur l'icône Saved Action pour enregistrer une action pour l'utiliser plus tard." video="true" width=80% >}}
+{{< img src="actions/workflows/save_action_1.mp4" alt="Cliquez sur l'icône Saved Action pour enregistrer une action pour l'utiliser plus tard." video="true" width=80% >}}
 
 ## Utiliser une action enregistrée dans votre workflow
 
@@ -59,7 +59,7 @@ Pour rechercher une action enregistrée :
 
 Si vous n'avez pas créé l'action, vous ne pouvez pas la modifier directement. Sélectionnez plutôt l'icône **Clone** pour la copier et apporter vos modifications à la configuration. Vous ne pouvez pas supprimer une action que vous n'avez pas créée.
 
-{{< img src="service_management/workflows/edit_saved_action.png" alt="Prévisualiser, modifier ou supprimer une action enregistrée depuis le catalogue des actions." style="width:80%;" >}}
+{{< img src="actions/workflows/edit_saved_action.png" alt="Prévisualiser, modifier ou supprimer une action enregistrée depuis le catalogue des actions." style="width:80%;" >}}
 
 ## Pour aller plus loin
 

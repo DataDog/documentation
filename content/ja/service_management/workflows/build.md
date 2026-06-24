@@ -82,15 +82,15 @@ title: ワークフローの構築
 
 #### ショートカットとキャンバス ツール
 
-ワークフロー ビルダー キャンバスのキーボードおよびマウスのショートカットを表示するには、`?` を入力します (Shift + `/`)。または **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} ボタンをクリックします。ショートカットの一覧が表示されます。 
+ワークフロー ビルダー キャンバスのキーボードおよびマウスのショートカットを表示するには、`?` を入力します (Shift + `/`)。または **Keyboard** {{< img src="actions/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} ボタンをクリックします。ショートカットの一覧が表示されます。 
 
-**Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}、**Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}、および **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} の各ボタンでビューポートの表示方法を制御します。 
+**Zoom out** {{< img src="actions/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}、**Zoom in** {{< img src="actions/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}、および **Reset viewport** {{< img src="actions/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} の各ボタンでビューポートの表示方法を制御します。 
 
-**Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} ボタンは、ワークフローの各ステップを整列および分配します。 
+**Auto layout** {{< img src="actions/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} ボタンは、ワークフローの各ステップを整列および分配します。 
 
-**Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} ボタンで、ワークフローにアノテーション ノートを追加できます。これらのノートには、太字や斜体、リンク、リストなどのテキスト フォーマットを追加できるフォーマット バーが用意されています。アノテーションは Markdown で入力することもできます。 
+**Add annotation** {{< img src="actions/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} ボタンで、ワークフローにアノテーション ノートを追加できます。これらのノートには、太字や斜体、リンク、リストなどのテキスト フォーマットを追加できるフォーマット バーが用意されています。アノテーションは Markdown で入力することもできます。 
 
-{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="空のアノテーション。上部にフォーマット バーが表示されている" style="width:70%;" >}}
+{{< img src="actions/workflows/workflow-annotation-with-bar.png" alt="空のアノテーション。上部にフォーマット バーが表示されている" style="width:70%;" >}}
 
 ## ステップをテストする
 
@@ -144,7 +144,7 @@ title: ワークフローの構築
 
 エラー パスを追加するには:
 1. エラー パスを追加したいステップにカーソルを合わせます。
-1. **Error path** アイコン {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} をクリックしてドラッグし、キャンバス上に新しいエラー パスを配置します。
+1. **Error path** アイコン {{< img src="actions/workflows/error-path-icon.png" inline="true" style="width:24px;">}} をクリックしてドラッグし、キャンバス上に新しいエラー パスを配置します。
 1. エラー パスに追加するステップを選択します。
 1. ステップを構成した後は、さらにステップを追加したり、エラー パスをメインのワークフロー パスに統合したりできます。
 1. エラー パスのステップ構成が完了したら、**Save** をクリックして変更を適用します。
@@ -161,7 +161,7 @@ title: ワークフローの構築
    - カスタム条件式で使用できるのは、現在のステップの出力変数のみです。
 1. ワークフローの最大待機時間を入力します。条件が時間内に満たされない場合、そのステップは失敗します。
 
-{{< img src="service_management/workflows/wait-until-condition2.png" alt="Wait until condition の例" style="width:100%;" >}}
+{{< img src="actions/workflows/wait-until-condition2.png" alt="Wait until condition の例" style="width:100%;" >}}
 
 ## JSON でワークフローを編集する
 

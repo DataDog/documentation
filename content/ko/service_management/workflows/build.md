@@ -82,15 +82,15 @@ title: 워크플로 구축
 
 #### 바로 가기 및 캔버스 도구
 
-워크플로 빌더 캔버스에 대한 키보드 및 마우스 단축키를 보려면 `?`(shift+`/`)를 입력하거나 **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} 버튼을 클릭합니다. 단축키 목록이 나타납니다.
+워크플로 빌더 캔버스에 대한 키보드 및 마우스 단축키를 보려면 `?`(shift+`/`)를 입력하거나 **Keyboard** {{< img src="actions/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} 버튼을 클릭합니다. 단축키 목록이 나타납니다.
 
-**Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}} 및 **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} 버튼으로 뷰포트 표시 방식을 제어할 수 있습니다.
+**Zoom out** {{< img src="actions/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="actions/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}} 및 **Reset viewport** {{< img src="actions/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} 버튼으로 뷰포트 표시 방식을 제어할 수 있습니다.
 
-**Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} 버튼으로 워크플로 단계를 정렬하고 배포할 수 있습니다.
+**Auto layout** {{< img src="actions/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} 버튼으로 워크플로 단계를 정렬하고 배포할 수 있습니다.
 
-**Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} 버튼을 사용하면 워크플로에 주석 메모를 추가할 수 있습니다. 이 노트에는 굵게, 이탤릭체, 링크, 목록 등 다양한 텍스트 서식을 추가할 수 있는 서식 표시줄이 있습니다. 마크다운에서 주석을 입력할 수도 있습니다.
+**Add annotation** {{< img src="actions/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} 버튼을 사용하면 워크플로에 주석 메모를 추가할 수 있습니다. 이 노트에는 굵게, 이탤릭체, 링크, 목록 등 다양한 텍스트 서식을 추가할 수 있는 서식 표시줄이 있습니다. 마크다운에서 주석을 입력할 수도 있습니다.
 
-{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="위에 서식 표시줄이 표시된 빈 주석" style="width:70%;" >}}
+{{< img src="actions/workflows/workflow-annotation-with-bar.png" alt="위에 서식 표시줄이 표시된 빈 주석" style="width:70%;" >}}
 
 ## 단계 테스트
 
@@ -144,7 +144,7 @@ title: 워크플로 구축
 
 오류 경로를 추가하는 방법:
 1. 오류 경로를 추가하려는 단계 위로 마우스를 가져갑니다.
-1. **오류 경로** 아이콘 {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}}을 클릭하고 드래그하여 캔버스에 새 오류 경로를 배치합니다.
+1. **오류 경로** 아이콘 {{< img src="actions/workflows/error-path-icon.png" inline="true" style="width:24px;">}}을 클릭하고 드래그하여 캔버스에 새 오류 경로를 배치합니다.
 1. 오류 경로에 추가할 워크플로 단계를 선택합니다.
 1. 단계를 구성한 후 오류 경로에 단계를 더 추가하고 오류 경로를 기본 워크플로 경로로 다시 병합할 수도 있습니다.
 1. 오류 경로 단계 구성을 완료했으면 **Save**을 클릭하여 변경 사항을 적용합니다.
@@ -161,7 +161,7 @@ title: 워크플로 구축
    - 커스텀 조건문에는 현재 단계의 출력 변수만 사용할 수 있습니다.
 1. 워크플로의 최대 대기 시간을 입력합니다. 조건이 제시간에 충족되지 않으면 단계가 실패합니다.
 
-{{< img src="service_management/workflows/wait-until-condition2.png" alt="대기 조건 예" style="width:100%;" >}}
+{{< img src="actions/workflows/wait-until-condition2.png" alt="대기 조건 예" style="width:100%;" >}}
 
 ## JSON을 통한 워크플로 편집
 
