@@ -100,6 +100,51 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 {{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
 
+## Savings Plan simulation
+
+<div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level.</div>
+
+Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
+
+The simulation is retrospective: it re-prices your on-demand usage from the selected period as if the Savings Plan had been active, and shows what your cost and savings _would have been_. It does not forecast future usage.
+
+{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing input parameters, summary metrics, and a time series chart of projected commitment coverage." style="width:100%;" >}}
+
+### Run a simulation
+
+1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
+2. Choose the {{< ui >}}Savings Plan Type{{< /ui >}}: {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
+3. Set your commitment preferences (use {{< ui >}}Edit{{< /ui >}} to change them):
+   - {{< ui >}}Owner Account{{< /ui >}}: The AWS account that would own the Savings Plan.
+   - {{< ui >}}Term{{< /ui >}}: {{< ui >}}1 Year{{< /ui >}} or {{< ui >}}3 Years{{< /ui >}}.
+   - {{< ui >}}Payment Model{{< /ui >}}: {{< ui >}}No Upfront{{< /ui >}}, {{< ui >}}Partial Upfront{{< /ui >}}, or {{< ui >}}All Upfront{{< /ui >}}.
+4. Enter an {{< ui >}}Additional Hourly Commitment{{< /ui >}}: the amount per hour ($/hour) you want to model.
+5. Set {{< ui >}}Simulate against usage during{{< /ui >}} to the historical period to evaluate the commitment against. This defaults to the past 30 days.
+6. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
+
+If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout with the suggested hourly commitment, term, and payment option. Click the callout to apply those settings to the simulation. Cost Optimization Hub currently generates these recommendations for Compute Savings Plans only.
+
+To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][5].
+
+### Interpret the results
+
+All simulation outputs are estimates based on your historical usage over the selected lookback window. Actual savings depend on your future usage and how AWS applies Savings Plan discounts across your accounts.
+
+Savings Plans are shared across a [Consolidated Billing Family][2], so a commitment can apply to usage in multiple accounts. The simulation estimates how the modeled commitment would be distributed across your accounts; actual distribution depends on AWS's application logic.
+
+If Datadog doesn't have complete cost data for the selected period, the simulator warns you that the results are based on incomplete data.
+
+Results appear in two sections:
+
+- {{< ui >}}Estimated Impact{{< /ui >}}: Compares your key metrics before and after the simulated commitment, alongside a {{< ui >}}Simulated Cost{{< /ui >}} chart over the selected period.
+- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Breaks down the estimated cost and coverage by AWS service.
+
+### Best practices
+
+- When an AWS recommendation is shown, apply it as a starting point, then adjust the hourly commitment to compare scenarios.
+- Choose a usage period that reflects your typical usage. Avoid periods with unusual spikes or gaps if you want a representative estimate.
+- Treat the results as directional guidance for sizing a commitment, not as a guarantee of future savings.
+
 ## Example use cases
 
 ### Identify underutilized commitments
@@ -142,3 +187,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
+[2]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
+[3]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
+[4]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
+[5]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
