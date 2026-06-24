@@ -22,7 +22,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Ku
 
 ### Install the Datadog Agent on your Kubernetes cluster
 
-If you have already [installed the Datadog Agent on your Kubernetes cluster][1], ensure that you have enabled the [Datadog Admission Controller][2]. You can then go to the next step, [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
+If you have already [installed the Datadog Agent on your Kubernetes cluster][1], make sure you've enabled the [Datadog Admission Controller][2]. You can then go to the next step, [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
 
 You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
@@ -147,9 +147,9 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 ### Enable Single Step Instrumentation
 
-Single Step Instrumentation (SSI) injects the Java tracer into your Spark driver and executor pods at startup. It works regardless of whether your Spark driver runs in **cluster mode** (as a dedicated Kubernetes pod) or **client mode** (as a process inside your submitter pod, for example an Airflow scheduler or worker).
+Single Step Instrumentation (SSI) injects the Java tracer into your Spark driver and executor pods at startup. It works regardless of whether your Spark driver runs in **cluster mode** (as a dedicated Kubernetes pod) or **client mode** (as a process inside your submitter pod; for example, an Airflow scheduler or worker).
 
-Spark automatically sets `spark-role: driver` on driver pods and `spark-role: executor` on executor pods. If you run Spark in client mode, the driver runs inside your submitter pod rather than a dedicated Kubernetes pod. In that case, replace `spark-role: driver` with the labels that identify your submitter pod. To find those labels, run:
+Spark automatically sets `spark-role: driver` on driver pods and `spark-role: executor` on executor pods. In client mode, replace `spark-role: driver` with the labels that identify your submitter pod instead. To find those labels, run:
 
 ```shell
 kubectl get pod <SUBMITTER_POD_NAME> -n <NAMESPACE> --show-labels
@@ -158,7 +158,7 @@ kubectl get pod <SUBMITTER_POD_NAME> -n <NAMESPACE> --show-labels
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Requires [Datadog Operator][8] version 1.13.0 or later.
+Requires [Datadog Operator][100] version 1.13.0 or later.
 
 Add the `features.apm.instrumentation` section to your `datadog-agent.yaml` and apply it:
 
@@ -168,7 +168,7 @@ features:
     instrumentation:
       enabled: true
       enabledNamespaces:
-        - <NAMESPACE>
+        - <NAMESPACE>  # namespace where your Spark jobs run
       targets:
         - name: spark-driver
           podSelector:
@@ -194,6 +194,8 @@ features:
 kubectl apply -f /path/to/your/datadog-agent.yaml
 ```
 
+[100]: https://github.com/DataDog/datadog-operator/releases
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -205,7 +207,7 @@ datadog:
     instrumentation:
       enabled: true
       enabledNamespaces:
-        - <NAMESPACE>
+        - <NAMESPACE>  # namespace where your Spark jobs run
       targets:
         - name: spark-driver
           podSelector:
@@ -234,7 +236,7 @@ helm upgrade <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-After applying, restart the targeted pods for the init container to be injected.
+After applying the configuration, restart the targeted pods. SSI injects the init container into each pod on startup.
 
 
 ## Validation
@@ -247,11 +249,10 @@ In Datadog, view the [Data Observability: Jobs Monitoring][5] page to see a list
 
 To attach service, environment, and version tags to your job traces, pass the following JVM options in your spark-submit configuration or `spark-defaults.conf`:
 
-`spark.driver.extraJavaOptions`
-: `-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>`
-
-`spark.executor.extraJavaOptions`
-: `-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>`
+```
+spark.driver.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>
+spark.executor.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>
+```
 
 ### Tag spans at runtime
 
@@ -267,4 +268,3 @@ To attach service, environment, and version tags to your job traces, pass the fo
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
-[8]: https://github.com/DataDog/datadog-operator/releases
