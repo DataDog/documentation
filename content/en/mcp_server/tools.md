@@ -1207,6 +1207,8 @@ Creates a new detection rule. Call `get_datadog_security_detection_rules_schema`
 *Permissions Required: `Security Monitoring Rules Write`*\
 Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
 
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
 - Update the threshold on my brute force detection rule from 10 to 20 failed logins.
 - Add a new case to detection rule `abc-123-def` that fires at critical severity.
 - Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.

@@ -131,7 +131,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Rules Write`*
 
 `update_datadog_security_detection_rule`
-: Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need to change, and submit the full updated object. Cannot update Datadog-shipped default rules. On success, returns the full updated rule.
+: Updates an existing custom detection rule by replacing it wholesale. Use this to enable or disable a rule, change thresholds, add cases, and more. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need to change, and submit the full updated object. Cannot update Datadog-shipped default rules. On success, returns the full updated rule.
 : *Permissions required: `Security Monitoring Rules Write`*
 
 `delete_datadog_security_detection_rules`
