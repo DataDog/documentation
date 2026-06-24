@@ -38,7 +38,7 @@ Click **Add tag rule**.
 
 ### Add a tag rule
 
-{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The tag block and allow list settings panel" style="width:55%;" >}}
+{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The Tag Block and Allow List settings panel" style="width:55%;" >}}
 
 1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline. See [Search Syntax][2] for more information.
 1. In the **Configure tags** section, choose whether to **Include tags** or **Exclude tags**.
