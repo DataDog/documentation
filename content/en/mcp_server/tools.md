@@ -1216,7 +1216,7 @@ Updates an existing custom detection rule by replacing it entirely. Call `get_da
 ### `delete_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted — default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
 
 - Delete detection rule `abc-123-def`.
 - Remove these three test detection rules I created earlier.
