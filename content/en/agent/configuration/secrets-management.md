@@ -1364,7 +1364,7 @@ api_key: 'ENC[SOFTWARE\Datadog\secrets:api_key]'
 
 Reference secrets using the format `ENC[<registry-path>:<value-name>]`, where `registry-path` is the subpath beneath the root key and `value-name` is the registry value to read.
 
-By default the root key is `HKLM`. To use a different hive, set `root_key` — accepted values are `HKLM`, `HKCU`, `HKCR`, `HKU`, and `HKCC` (long forms such as `HKEY_LOCAL_MACHINE` are also accepted):
+By default the root key is `HKLM`. To use a different hive, set `root_key`. Accepted values are `HKLM`, `HKCU`, `HKCR`, `HKU`, and `HKCC` (long forms such as `HKEY_LOCAL_MACHINE` are also accepted):
 
 ```yaml
 secret_backend_type: windows.regkey
