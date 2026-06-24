@@ -388,6 +388,8 @@ Agent `v7.73+` is required.
 
 2. Enable `network_path` to monitor CNM connections by creating or editing the `%ProgramData%\Datadog\datadog.yaml` file:
 
+Note: If enabling Network Path on [End User Devices][6], skip this step. 
+
     ```yaml
     network_path:
       connections_monitoring:
@@ -620,6 +622,7 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[6]: https://docs.datadoghq.com/infrastructure/end_user_device_monitoring/
 [15]: /synthetics/network_path_tests/
 
 
