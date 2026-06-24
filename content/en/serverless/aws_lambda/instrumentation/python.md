@@ -421,6 +421,10 @@ To configure Datadog using SST v3, follow these steps:
 
 {{% svl-lambda-vpc %}}
 
+## Durable Function
+
+{{% svl-lambda-durable-function %}}
+
 ## What's next?
 
 - Add custom tags to your telemetry by using the `DD_TAGS` environment variable
