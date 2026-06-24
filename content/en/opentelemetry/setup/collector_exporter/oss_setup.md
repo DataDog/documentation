@@ -28,6 +28,8 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 <div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
 
+<div class="alert alert-info">This setup supports bare metal, VMs, and Kubernetes, including managed distributions such as Amazon EKS and Google GKE. Standard EKS has been tested; EKS auto mode has not. This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda.</div>
+
 ## Prerequisites
 
 - [OpenTelemetry Collector Contrib][1] v0.152.0 or later
