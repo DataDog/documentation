@@ -9791,16 +9791,21 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_global_lift
       weight: 9
+    - name: Metric Property Breakouts
+      url: experiments/metric_property_breakouts
+      parent: pa_experiments
+      identifier: pa_experiments_metric_property_breakouts
+      weight: 10
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 10
+      weight: 11
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 11
+      weight: 12
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
