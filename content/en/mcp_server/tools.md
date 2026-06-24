@@ -1205,7 +1205,7 @@ Creates a new detection rule. Call `get_datadog_security_detection_rules_schema`
 ### `update_datadog_security_detection_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Updates an existing custom detection rule by replacing it wholesale. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
 
 - Enable detection rule `abc-123-def`.
 - Disable the brute force detection rule.
