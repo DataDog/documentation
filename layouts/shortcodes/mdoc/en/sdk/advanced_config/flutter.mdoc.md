@@ -210,7 +210,7 @@ To enable Datadog [distributed tracing][13], you must set the `DatadogConfigurat
 
 ### Capture resource headers
 
-When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio interceptor, and GQL Link). This option is disabled by default.
+When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
 
 Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
 
@@ -228,7 +228,7 @@ With no arguments, `ResourceHeadersExtractor` captures a predefined set of safe 
 | Request | `cache-control`, `content-type` |
 | Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
 
-To capture additional headers on top of the defaults, pass them through `captureHeaders`. To skip the defaults, set `includeDefaults: false`.
+To capture additional headers in addition to the defaults, pass them through `captureHeaders`. To skip the defaults, set `includeDefaults: false`.
 
 ```dart
 DatadogRumConfiguration(
@@ -245,7 +245,7 @@ Sensitive headers, such as tokens and API keys, are filtered out automatically, 
 
 ### Track resources from other packages
 
-While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
+While [Datadog Tracking HTTP Client][10] can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
 
 ## Enrich user sessions
 
