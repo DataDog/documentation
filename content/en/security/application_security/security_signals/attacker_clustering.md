@@ -87,13 +87,13 @@ This manual approach allows you to create more targeted blocking rules when the 
 
 ## Block an attacker cluster in one click
 
-After an attacker cluster is identified, you can generate an In-App WAF custom rule that matches its attributes directly from the UI — no regex writing required.
+After an attacker cluster is identified, you can generate an In-App WAF custom rule that matches its attributes directly from the UI without writing regex.
 
 To block a cluster:
 
 1. Open the **Attacker Explorer** and select the **Cluster** grouping.
 2. Click on a cluster to open its side panel.
-3. Click **Create In-App WAF rule** in the cluster header. The In-App WAF custom rule form opens pre-filled with the generated conditions — one condition per blocking attribute, combined with AND logic.
+3. Click **Create In-App WAF rule** in the cluster header. The In-App WAF custom rule form opens pre-filled with the generated conditions, one condition per blocking attribute, combined with AND logic.
 4. Review the conditions and adjust if needed, then save the rule.
 
 You can also click the **Create In-App WAF rule** icon from a cluster row in the clusters table inside a security signal.
@@ -114,7 +114,7 @@ The following cluster attributes can be converted to WAF conditions:
 
 Attributes that have no tracer-time WAF address (for example, `@http.useragent_details.*`) cannot be converted. When a cluster contains unsupported attributes, the button is disabled and a tooltip lists the attributes that prevent rule generation.
 
-**Note:** Generated rules default to monitoring mode. You can switch to blocking mode using the behaviour toggle in the rule form before saving.
+**Note:** Generated rules default to monitoring mode. You can switch to blocking mode using the behavior toggle in the rule form before saving.
 
 ## Further reading
 
