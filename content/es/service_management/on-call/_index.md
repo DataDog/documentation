@@ -17,7 +17,7 @@ title: On-Call
 
 Datadog On-Call integra la monitorización, la localización de personas y la respuesta a incidencias en una sola plataforma.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Información general sobre cómo se enrutan los localizadores. Desde un monitor, incidente, señal de seguridad o llamada a la API, el localizador se envía a un equipo (por ejemplo, 'payments-team'), luego a reglas de enrutamiento (por ejemplo, según la prioridad), luego a una política de escalado. Entonces, se lo puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="Información general sobre cómo se enrutan los localizadores. Desde un monitor, incidente, señal de seguridad o llamada a la API, el localizador se envía a un equipo (por ejemplo, 'payments-team'), luego a reglas de enrutamiento (por ejemplo, según la prioridad), luego a una política de escalado. Entonces, se lo puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
 
 ## Conceptos
 
@@ -31,15 +31,15 @@ Datadog On-Call integra la monitorización, la localización de personas y la re
 
 Los **Equipos** son la unidad organizativa central de Datadog On-Call. Cuando se activa una notificación en Datadog, se envía un **localizador** al equipo de On-Call designado.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notificación que menciona un equipo de On-Call." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notificación que menciona un equipo de On-Call." style="width:80%;" >}}
 
 Cada Team posee **políticas de escalado** y **cronogramas**. Las políticas de escalado definen cómo se envía un localizador a varios cronogramas, como _Checkout Operations - Interrupt Handler_, _Primary_ y _Secondary_ en la siguiente captura de pantalla. Cada equipo también puede configurar **reglas de enrutamiento** para enrutar localizadores a diferentes políticas de escalado.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="Un ejemplo de política de escalada." style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="Un ejemplo de política de escalada." style="width:80%;" >}}
 
 Un cronograma define las horas específicas en las que los miembros del equipo están asignados para responder a los localizadores. Los cronogramas organizan y gestionan la disponibilidad de los miembros del equipo en diferentes zonas horarias y turnos.
 
-{{< img src="service_management/oncall/schedule.png" alt="Un cronograma de ejempo, con múltiples capas para horas laborables de JP, UE y EE. UU." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="Un cronograma de ejempo, con múltiples capas para horas laborables de JP, UE y EE. UU." style="width:80%;" >}}
 
 ## Control de acceso preciso
 

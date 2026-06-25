@@ -10,6 +10,8 @@ further_reading:
     text: 'AWS Integration'
 ---
 
+<div class="alert alert-info">Jobs Monitoring for AWS Glue is in Preview.</div>
+
 ## Overview
 
 [Data Observability: Jobs Monitoring][6] gives visibility into the performance and reliability of your AWS Glue jobs.

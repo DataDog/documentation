@@ -728,6 +728,15 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
 
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1192,6 +1201,34 @@ Retrieves security detection rules. Supports two modes: provide `rule_id` to get
 - Show me detection rules tagged with `source:cloudtrail`.
 - Get the full definition of detection rule `abc-123-def`.
 - What thresholds and group-by fields does this detection rule use?
+
+### `create_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+
+- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
+- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
+- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+
+### `update_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
+- Update the threshold on my brute force detection rule from 10 to 20 failed logins.
+- Add a new case to detection rule `abc-123-def` that fires at critical severity.
+- Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+
+- Delete detection rule `abc-123-def`.
+- Remove these three test detection rules I created earlier.
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\

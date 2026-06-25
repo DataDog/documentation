@@ -32,30 +32,30 @@ Define which monitors you want the downtime to target. There are three different
 
 You can choose to temporarily mute one specific monitor. For example, if the monitor is sending many alerts at the moment or if it is the only monitor impacted by an upcoming maintenance.
 
-In the downtime configuration, select **By Monitor Name** and search for the monitor in question.
+In the downtime configuration, select {{< ui >}}By Monitor Name{{< /ui >}} and search for the monitor in question.
 
 ### Target multiple monitors based on monitor tags
 
 <div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
 
-Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target.
+Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select {{< ui >}}By Monitor Tags{{< /ui >}} and enter the monitor tags that you want to target.
 
 **Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` AND `team:automations`.
 
 ### Target all monitors
 
-For both `By Monitor Name` or `By Monitor Tags` options, you can scope to target all monitors by selecting the first item in the dropdown menu labeled `All Monitors`.
+For both {{< ui >}}By Monitor Name{{< /ui >}} or {{< ui >}}By Monitor Tags{{< /ui >}} options, you can scope to target all monitors by selecting the first item in the dropdown menu labeled {{< ui >}}All Monitors{{< /ui >}}.
 
 ## Granularly scope downtimes
 
 Use group scope to apply additional filters to your downtime and have granular control over which monitors to mute. The group scope of a downtime is matched **after** the monitor specific target. If you target multiple monitors by using monitor tags, it first needs to find monitors that are tagged accordingly before it matches the group scope.
 
-The examples in this guide show how the `Group scope` may be applied to monitors where [multi alert grouping][2] is configured
+The examples in this guide show how the {{< ui >}}Group scope{{< /ui >}} may be applied to monitors where [multi alert grouping][2] is configured
 
 ### Mute monitors for a specific tag
 
-1. To schedule a downtime on only one group (in this case, `service:web-store`), enter that group in the `Group scope` field.
-2. Click **Preview affected monitors** to verify that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
+1. To schedule a downtime on only one group (in this case, `service:web-store`), enter that group in the {{< ui >}}Group scope{{< /ui >}} field.
+2. Click {{< ui >}}Preview affected monitors{{< /ui >}} to verify that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
 
 {{< img src="monitors/downtimes/downtime_example_byname.png" alt="Downtime example of 'By Monitor Name' with preview of affected monitors" style="width:90%;">}}
 
@@ -72,8 +72,8 @@ This mutes any alerts that includes the tag `service:web-store`, for example:
 
 ### Mute monitors scoped to multiple tags
 
-1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the `Group scope` field.
-2. Click **Preview affected monitors** to verify the monitors that are in scope.
+1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the {{< ui >}}Group scope{{< /ui >}} field.
+2. Click {{< ui >}}Preview affected monitors{{< /ui >}} to verify the monitors that are in scope.
 3. After the scheduled downtime begins, alerts are muted for the group:
 `env:prod` **AND** `service:web-store`
 
@@ -115,7 +115,7 @@ If you are running your application and infrastructure on multiple environments,
 2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
 3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
 4. This downtime is constrained to the group `service:web-store`.
-5. Click **Preview affected monitors** to verify the monitors that are in scope. In this example, it shows both monitors have the group `service:web-store` in scope.
+5. Click {{< ui >}}Preview affected monitors{{< /ui >}} to verify the monitors that are in scope. In this example, it shows both monitors have the group `service:web-store` in scope.
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="downtime example of 'By Monitor Tags' with preview of affected monitors" style="width:80%;">}}
 

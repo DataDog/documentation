@@ -92,7 +92,7 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 }, ddkafka.WithDataStreams())
 ```
 
-If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure:
+If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure. The `ctx` returned by `ExtractFromBase64Carrier` carries the upstream DSM pathway. Pass it to `SetDataStreamsCheckpointWithParams` when you produce, then inject it into the outbound message with `InjectToBase64Carrier`. Passing `context.Background()` at the produce site creates a new pathway root and breaks end-to-end visibility. This happens, for example, in a worker goroutine that has lost the consume `ctx`.
 
 3. Extract the context from headers
 
@@ -104,6 +104,41 @@ If a service consumes data from one point and produces to another point, propaga
     ```go
     datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
     ```
+
+##### Goroutines and channels
+
+Go channels and goroutines do not carry `context.Context` automatically. If your service fans consumed messages out to worker goroutines before producing, pass the consume `ctx` to the produce site by including it in the work item you send over the channel:
+
+```go
+type job struct {
+    ctx     context.Context
+    payload []byte
+}
+
+// consume side
+ctx, _ = tracer.SetDataStreamsCheckpointWithParams(
+    datastreams.ExtractFromBase64Carrier(context.Background(), ddsarama.NewConsumerMessageCarrier(msg)),
+    options.CheckpointParams{PayloadSize: int64(len(msg.Value))},
+    "direction:in", "type:kafka", "topic:"+inTopic, "group:"+group,
+)
+// context.WithoutCancel preserves the pathway if the handler's ctx is canceled before the worker runs (Go 1.21+)
+jobs <- job{ctx: context.WithoutCancel(ctx), payload: msg.Value}
+
+// worker goroutine
+for j := range jobs {
+    out := &sarama.ProducerMessage{Topic: outTopic, Value: sarama.ByteEncoder(j.payload)}
+    ctx, ok := tracer.SetDataStreamsCheckpointWithParams(j.ctx,
+        options.CheckpointParams{PayloadSize: int64(out.Value.Length())},
+        "direction:out", "type:kafka", "topic:"+outTopic)
+    if ok {
+        datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(out))
+    }
+    producer.SendMessage(out)
+}
+```
+
+- **Fan-out**: When one consumed message fans out to multiple produce calls, pass the same consume `ctx` to each produce checkpoint. Each call creates its own child node in the pathway.
+- **Fan-in**: When many consumed messages merge into one produce call, combine the inbound contexts with `datastreams.MergeContexts(ctxs...)` before producing.
 
 #### Other queuing technologies or protocols
 
