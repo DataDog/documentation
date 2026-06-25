@@ -79,7 +79,7 @@ npx skills add datadog-labs/agent-skills \
   --full-depth -y
 ```
 
-Restart Claude Code after installing for the skill to appear.
+The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
 
 ### Example prompts
 
@@ -303,3 +303,4 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [19]: https://nodejs.org
 [20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
 [21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
+[22]: https://github.com/antfu/skills-cli
