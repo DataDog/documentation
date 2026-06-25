@@ -8,16 +8,21 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 
 Prompts often refer to the "Hugo docs". This refers either to the general Hugo site setup (footer, header, etc.) or the API docs content specifically, depending on the context of the request.
 
-## Operating instructions
+## Global operating instructions
 
-- After you implement something, list any best practices you used that aren't well known.
+- Respond concisely. Be blunt.
+- Don't read anything in `astro/docs`. That's for humans.
+- Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step.
 - If you recommend a different approach than what was asked for, query the user before proceeding.
+- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
 
 ## Testing
 
-- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
+- When possible, test files should be localized with the code they're testing.
 - Use `npm run test:unit` for the headless tests and `npm run test:browser` for browser tests; `npm run test` runs both. Don't run vitest directly, it will fail to set necessary env variables.
 - While developing, run only the tests relevant to your change — `npm run test:unit -- <path>` for unit tests, or `npm run test:browser -- <file>` for browser tests. Run the full `npm run test` (both suites) once before considering the feature done, to catch broader regressions.
+- Components should have both unit and browser tests, with browser tests covering just the cases that unit tests cannot.
+- Where possible, use the stable (non-hashed) BEM class as a selector, and as a verification of the component state (for example, use the relevant stable BEM class to verify that the correct tab is active). When a non-BEM direct property is very straightforward to check (like visibility), you can check that too.
 
 ## Stay inside `astro/`
 
@@ -63,30 +68,92 @@ Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocke
 
 The unit Vitest config redirects live spec imports to these fixtures via a plugin in [vitest.unit.config.ts](./vitest.unit.config.ts); the integration config deliberately does not, so it validates against the real upstream data.
 
-## References
+## Components
 
-Read these additional files as needed, when they are relevant to the task you're performing. Each checklist may link to sub-checklists or reference docs — only follow those links if the sub-topic applies to your current task.
+- Use CSS modules with full BEM classes, for compatibility with `classListFactory` (which generates the `cl` function that applies hashed BEM classes automatically based on a static BEM class name).
+- Use `i18n` to localize strings where possible, or use a `TODO` comment if Hugo does not yet have the desired i18n string. Pass `i18n` labels to Preact using a `labels` prop.
+- Pass inline svgs to Preact using an `svgs` prop.
+- If a component is static (not interactive, no JS needed), use vanilla Astro.
+- If a component is interactive, use Preact.
+- Where possible, each component should have its own isolated scope.
+- In cases when giving a Preact component an isolated scope would require you to pass very large props (like the pre-rendered HTML of a tab, or a very large data blob for an API schema table), use a [hybrid approach](#hybrid-example) where a vanilla Astro component does most of the rendering, and a small Preact component controls interactivity. Do not do this unless the props would be large otherwise, because isolated JS scope is strongly preferred!
 
-If a link in a checklist or reference doc is broken, stop and flag it.
+### `cl()` usage example
 
-Read [docs/css/checklists/all.md](docs/css/checklists/all.md) before
-- adding HTML to the project
-- adding CSS to the project
-- revising existing project CSS
+`cl` applies both the hashed CSS module class and the plain static class, so both are present in the rendered HTML.
 
-Read [docs/components/checklists/all.md](docs/components/checklists/all.md) before
-- revising an existing component
-- creating a new component
+```astro
+---
+import styles from "./Alert.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
-Read [docs/components/checklists/markdoc_tag.md](docs/components/checklists/markdoc_tag.md) before
-- adding or changing a Markdoc tag or node override (`markdoc.config.mjs` / `markdoc.schema.mjs`)
-- writing or changing a Markdoc `transform`
+const cl = classListFactory(styles);
+---
 
-Read [docs/api/checklists/all.md](docs/api/checklists/all.md) before 
-- changing how the OpenAPI spec is parsed, resolved, or built into view shapes (`src/lib/api/`)
-- adding or changing a field on an API view shape or its Zod schema
-- adding or updating API spec test fixtures or snapshots
+<div class={cl("alert", `alert--${level}`)}>
+  <strong class={cl("alert__label")}>{label}</strong>
+  <slot />
+</div>
+```
 
-Read [docs/testing/checklists/all.md](docs/testing/checklists/all.md) before
-- writing or updating tests
-- adding test fixtures or snapshot baselines
+### Hybrid example
+
+```astro
+---
+// Disclosure.astro
+import { DisclosureToggle } from "./DisclosureToggle";
+
+const rootId = "disclosure-1";
+const contentId = `${rootId}-content`;
+---
+
+<div id={rootId}>
+  <DisclosureToggle
+    client:idle
+    externalContext={{
+      scope: rootId,
+      entries: { contentEl: contentId },
+    }}
+  />
+  <div id={contentId}>
+    <slot />
+  </div>
+</div>
+```
+
+```tsx
+// DisclosureToggle.tsx
+import { useEffect, useRef, useState } from "preact/hooks";
+import {
+  loadExternalContext,
+  type ExternalContext,
+} from "@lib/componentUtils/loadExternalContext";
+
+interface Props {
+  externalContext: ExternalContext<{ contentEl: string }>;
+}
+
+export function DisclosureToggle({ externalContext }: Props) {
+  const [open, setOpen] = useState(true);
+  const contentRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const loaded = loadExternalContext(externalContext);
+    if (!loaded) return;
+    contentRef.current = loaded.contentEl;
+  }, []);
+
+  const handleToggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (contentRef.current) {
+      contentRef.current.hidden = next;
+    }
+  };
+
+  return (
+    <button onClick={handleToggle} aria-expanded={open}>
+      {open ? "Collapse" : "Expand"}
+    </button>
+  );
+}
