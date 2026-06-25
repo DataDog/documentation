@@ -16754,6 +16754,18 @@ menu:
       url: /api/latest/report-schedules/
       identifier: report-schedules
       generated: true
+    - name: Toggle a report schedule
+      url: /api/latest/report-schedules/toggle-a-report-schedule/
+      identifier: report-schedules-toggle-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ToggleReportSchedule
+        unstable: []
+        order: 4
     - name: Update a report schedule
       url: /api/latest/report-schedules/update-a-report-schedule/
       identifier: report-schedules-update-a-report-schedule
@@ -16767,6 +16779,54 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get a report schedule
+      url: /api/latest/report-schedules/get-a-report-schedule/
+      identifier: report-schedules-get-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedule
+        unstable: []
+        order: 3
+    - name: Delete a report schedule
+      url: /api/latest/report-schedules/delete-a-report-schedule/
+      identifier: report-schedules-delete-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteReportSchedule
+        unstable: []
+        order: 7
+    - name: Get report schedules for a resource
+      url: /api/latest/report-schedules/get-report-schedules-for-a-resource/
+      identifier: report-schedules-get-report-schedules-for-a-resource
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedulesForResource
+        unstable: []
+        order: 5
+    - name: List report schedules
+      url: /api/latest/report-schedules/list-report-schedules/
+      identifier: report-schedules-list-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReportSchedules
+        unstable: []
+        order: 6
     - name: Create a report schedule
       url: /api/latest/report-schedules/create-a-report-schedule/
       identifier: report-schedules-create-a-report-schedule
