@@ -7,17 +7,17 @@ The [Services][1] explorer aggregates findings, vulnerabilities, and runtime sig
 
 Review your services for the following:
 
-- **Vulnerability risk:** The **Vulnerability Risk** column shows aggregated SCA and IAST results for each service. Vulnerable services have components needing patching or upgrading.
-- **Signals and attacks:** Click a service to see charts showing ongoing detections for active exploit attempts or recurring attack patterns.
-- **Sensitive data exposure:** Services processing PII (such as SSNs or emails) demand stricter controls and monitoring.
-- **Coverage and mode:** Use the **App & API Protection In Monitoring Mode**, **App & API Protection In Blocking Mode**, and the **Inactive** facet to identify where App and API Protection is enabled and enforcing runtime protection.
-- **Trend graphs:** The **Trend** column indicates activity and attack frequency over time.
+- {{< ui >}}Vulnerability risk{{< /ui >}}: The {{< ui >}}Vulnerability Risk{{< /ui >}} column shows aggregated SCA and IAST results for each service. Vulnerable services have components needing patching or upgrading.
+- {{< ui >}}Signals and attacks{{< /ui >}}: Click a service to see charts showing ongoing detections for active exploit attempts or recurring attack patterns.
+- {{< ui >}}Sensitive data exposure{{< /ui >}}: Services processing PII (such as SSNs or emails) demand stricter controls and monitoring.
+- {{< ui >}}Coverage and mode{{< /ui >}}: Use the {{< ui >}}App & API Protection In Monitoring Mode{{< /ui >}}, {{< ui >}}App & API Protection In Blocking Mode{{< /ui >}}, and the {{< ui >}}Inactive{{< /ui >}} facet to identify where App and API Protection is enabled and enforcing runtime protection.
+- {{< ui >}}Trend graphs{{< /ui >}}: The {{< ui >}}Trend{{< /ui >}} column indicates activity and attack frequency over time.
 
 ## Coverage
 
-The **Coverage** column shows the active protection and analysis capabilities for each service. Use **Coverage** to measure the completeness of your protection stack.
+The {{< ui >}}Coverage{{< /ui >}} column shows the active protection and analysis capabilities for each service. Use {{< ui >}}Coverage{{< /ui >}} to measure the completeness of your protection stack.
 
-For example, here are some use cases for **Coverage**:
+For example, here are some use cases for {{< ui >}}Coverage{{< /ui >}}:
 
 - **Runtime protection coverage with App and API Protection**: 
   - Identify the services in **Monitoring** or **Blocking** mode.

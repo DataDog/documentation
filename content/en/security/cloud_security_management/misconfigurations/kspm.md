@@ -52,7 +52,7 @@ For an in-depth explanation on how the security posture score works, see [Securi
 
 ### View security posture score for Kubernetes deployments
 
-To view the security posture score for your Kubernetes deployments, navigate to the [**Security** > **Compliance**][9] page and locate the CIS Kubernetes frameworks reports.
+To view the security posture score for your Kubernetes deployments, navigate to the [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Compliance{{< /ui >}}][9] page and locate the CIS Kubernetes frameworks reports.
 
 ### View detailed reports for Kubernetes frameworks
 

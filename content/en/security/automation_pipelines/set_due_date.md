@@ -22,10 +22,10 @@ Configure due date rules to ensure findings are addressed within your specified 
 
 ## Create a due date rule
 
-1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Set Due Date**. The Create a New Rule page opens.
-1. Under **Rule name**, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [Findings Automation][2]. Click {{< ui >}}Add a New Rule{{< /ui >}}, then select {{< ui >}}Set Due Date{{< /ui >}}. The Create a New Rule page opens.
+1. Under {{< ui >}}Rule name{{< /ui >}}, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
 1. Add your rule criteria into the following fields:
-    - **Any of these types**: The types of findings that the rule should check for. Available types include:
+    - {{< ui >}}Any of these types{{< /ui >}}: The types of findings that the rule should check for. Available types include:
       - Runtime Code Vulnerability
       - Static Code Vulnerability
       - Library Vulnerability
@@ -37,14 +37,14 @@ Configure due date rules to ensure findings are addressed within your specified 
       - Attack Path
       - Identity Risk
       - API Security
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
+    - {{< ui >}}Any of these tags or attributes{{< /ui >}}: The resource tags or attributes that must match for the rule to apply.
 1. Set a due date for each severity level that needs one.
-1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under **Calculate due dates from**, select the base date for the SLA clock:
-   - **First Seen Date**: Starts the SLA clock when Datadog first detects the finding.
-   - **Fix-Available Date**: Starts the SLA clock when a patch is published for the vulnerability. Useful when you don't want teams to breach SLA on advisories they can't yet remediate.
+1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under {{< ui >}}Calculate due dates from{{< /ui >}}, select the base date for the SLA clock:
+   - {{< ui >}}First Seen Date{{< /ui >}}: Starts the SLA clock when Datadog first detects the finding.
+   - {{< ui >}}Fix-Available Date{{< /ui >}}: Starts the SLA clock when a patch is published for the vulnerability. Useful when you don't want teams to breach SLA on advisories they can't yet remediate.
 
    For all other finding types, First Seen Date is always used.
-1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
+1. Click {{< ui >}}Save{{< /ui >}}. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Where due dates appear
 

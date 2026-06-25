@@ -96,9 +96,9 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 
 1. Sign in to [AWS Management Console][6].
 2. Navigate to the ECS section.
-3. On the left menu, select **Task Definitions**, and then select **Create new Task Definition with JSON**. Alternatively, choose an existing Fargate task definition.
+3. On the left menu, select {{< ui >}}Task Definitions{{< /ui >}}, and then select {{< ui >}}Create new Task Definition with JSON{{< /ui >}}. Alternatively, choose an existing Fargate task definition.
 4. To create a new task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
-5. Click **Create** to create the task definition.
+5. Click {{< ui >}}Create{{< /ui >}} to create the task definition.
 
 #### AWS CLI
 

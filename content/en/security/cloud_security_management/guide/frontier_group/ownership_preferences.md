@@ -310,12 +310,12 @@ There are several ways to create and update the table:
 This approach is best for getting started or making occasional updates.
 
 1. Prepare your CSV file (see [Complete example](#complete-example)).
-2. In Datadog, go to **Integrations** > [**Reference Tables**][6].
-3. Click **New Reference Table**.
+2. In Datadog, go to {{< ui >}}Integrations{{< /ui >}} > [{{< ui >}}Reference Tables{{< /ui >}}][6].
+3. Click {{< ui >}}New Reference Table{{< /ui >}}.
 4. Upload your CSV file.
 5. Set the table name to `k9_ownership_preferences`.
 6. Choose `id` as the primary key.
-7. Click **Save**.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 To update your reference table, upload a new CSV to the same table to fully replace its contents.
 
@@ -326,12 +326,12 @@ Manual uploads support files up to 4 MB.
 This approach is best for automated, recurring updates. Store your CSV in a cloud storage bucket so Datadog can periodically import it.
 
 1. Upload your CSV to an **Amazon S3 bucket**, **Azure Blob Storage container**, or **Google Cloud Storage bucket**.
-2. In Datadog, go to **Integrations** > [**Reference Tables**][6].
-3. Click **New Reference Table** and select **Cloud Storage** as the source.
+2. In Datadog, go to {{< ui >}}Integrations{{< /ui >}} > [{{< ui >}}Reference Tables{{< /ui >}}][6].
+3. Click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Cloud Storage{{< /ui >}} as the source.
 4. Provide the storage path and credentials (IAM role for S3, connection string for Azure, service account for GCS).
 5. Set the table name to `k9_ownership_preferences`.
 6. Choose `id` as the primary key.
-7. Click **Save**.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 Datadog periodically re-imports the file, so it automatically picks up updates to the CSV in your bucket.
 

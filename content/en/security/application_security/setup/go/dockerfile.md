@@ -254,7 +254,7 @@ do
 done
 ```
 
-A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][8] in Datadog**.
+A few minutes after you enable your application and exercise it, threat information appears in the [{{< ui >}}Application Trace and Signals Explorer{{< /ui >}}][8] in Datadog.
 
 ## Further Reading
 

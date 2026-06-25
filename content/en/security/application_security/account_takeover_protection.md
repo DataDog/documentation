@@ -105,17 +105,17 @@ AAP highlights the most relevant information and suggests actions to take based 
 
 **Compromised Users**
 
-Compromised and targeted users can be reviewed and blocked within **Signals** and **Traces**.
+Compromised and targeted users can be reviewed and blocked within {{< ui >}}Signals{{< /ui >}} and {{< ui >}}Traces{{< /ui >}}.
 
 **Signals**
 
-Individual users can be blocked in **Signals** using **Targeted Users**.
+Individual users can be blocked in {{< ui >}}Signals{{< /ui >}} using {{< ui >}}Targeted Users{{< /ui >}}.
 
 {{<img src="security/ato/compromised_users_signals2.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
 **Traces**
 
-Individual users can be blocked on **Traces**, in **User**. Click on any user to show this option.
+Individual users can be blocked on {{< ui >}}Traces{{< /ui >}}, in {{< ui >}}User{{< /ui >}}. Click on any user to show this option.
 
 {{<img src="security/ato/traces_block_user.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
@@ -178,7 +178,7 @@ Here are three critical components for success in mitigating these attacks:
 
 ### Know your trends
 
-Use the [Threats Overview][11] to monitor business logic trends, such as spikes in failed logins against your services.
+Use the [{{< ui >}}Threats Overview{{< /ui >}}][11] to monitor business logic trends, such as spikes in failed logins against your services.
 
 {{<img src="security/ato/threats_overview2.png" alt="Threats Overview" style="width:100%;">}}
 
@@ -234,13 +234,13 @@ Review the following best practices for protection.
 
 Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies.
 
-If you do not have a policy, review your existing detections and start with the suggested responses in **Signals**. Build your policy based on the most relevant actions taken over time.
+If you do not have a policy, review your existing detections and start with the suggested responses in {{< ui >}}Signals{{< /ui >}}. Build your policy based on the most relevant actions taken over time.
 
 #### Users
 
-In **Signals**, the **What Happened** and **Targeted Users** sections provide examples of the attempted usernames.
+In {{< ui >}}Signals{{< /ui >}}, the {{< ui >}}What Happened{{< /ui >}} and {{< ui >}}Targeted Users{{< /ui >}} sections provide examples of the attempted usernames.
 
-The **Traces** section identifies if the users exist. Understanding if users exist can influence your incident response decisions.
+The {{< ui >}}Traces{{< /ui >}} section identifies if the users exist. Understanding if users exist can influence your incident response decisions.
 
 Develop an incident response plan using the following post compromise steps:
 

@@ -31,10 +31,10 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
 
 ## Create an inbox rule
 
-1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Add to Security Inbox**. The Create a New Rule page opens.
-1. Under **Rule name**, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [Findings Automation][2]. Click {{< ui >}}Add a New Rule{{< /ui >}}, then select {{< ui >}}Add to Security Inbox{{< /ui >}}. The Create a New Rule page opens.
+1. Under {{< ui >}}Rule name{{< /ui >}}, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
 1. Add your rule criteria into the following fields:
-    - **Any of these types**: The types of findings that the rule should check for. Available types include:
+    - {{< ui >}}Any of these types{{< /ui >}}: The types of findings that the rule should check for. Available types include:
       - Misconfiguration
       - Attack Path
       - Identity Risk
@@ -42,9 +42,9 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
       - Library Vulnerability
       - Container Image Vulnerability
       - Host Vulnerability
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. To add severity criteria to the rule, click **Add Severity**.
-1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
+    - {{< ui >}}Any of these tags or attributes{{< /ui >}}: The resource tags or attributes that must match for the rule to apply.
+1. To add severity criteria to the rule, click {{< ui >}}Add Severity{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Rule matching order
 

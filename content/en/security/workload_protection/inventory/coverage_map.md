@@ -43,18 +43,18 @@ Click an orange hexagon to view a host with policy rules in error.
 
 Policies are displayed with the following statuses:
 
-- **Fully Loaded:** all of the policy's rules pass.
-- **Partially Loaded:** some of the policy's rules fail.
-- **Fully Rejected:** the entire policy is failing.
+- {{< ui >}}Fully Loaded{{< /ui >}}: all of the policy's rules pass.
+- {{< ui >}}Partially Loaded{{< /ui >}}: some of the policy's rules fail.
+- {{< ui >}}Fully Rejected{{< /ui >}}: the entire policy is failing.
 
 ## Use cases
 
 Here are some ways to use Coverage to improve your workload security.
 
 ### Detect and remediate policy deployment issues
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can address policy deployment issues:
-1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the Coverage map, assets with policy deployment problems are displayed as orange hexagons.
-2. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, and so on.
+From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can address policy deployment issues:
+1. In {{< ui >}}Incomplete infrastructure coverage{{< /ui >}}, click {{< ui >}}Warning{{< /ui >}}, and then select the policies in {{< ui >}}Security coverage needs attention{{< /ui >}}. In the Coverage map, assets with policy deployment problems are displayed as orange hexagons.
+2. Review the list of deployed policies. Policies are highlighted with statuses such as {{< ui >}}Partially Loaded{{< /ui >}}, {{< ui >}}Fully Rejected{{< /ui >}}, and so on.
 3. In the policy details, do one of the following:
    - [Edit a policy][4].
    - View a policy's rule errors, and then [edit them][4] as needed.
@@ -62,30 +62,30 @@ From the **Incomplete infrastructure coverage** status card on the Coverage page
 
 ### Identify assets missing Workload Protection
 
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can review assets without full Workload Protection (WP):
+From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can review assets without full Workload Protection (WP):
 
-1. In **Improve infrastructure coverage**, click **NO WP**. **NO WP** shows how many hosts are running the Datadog Agent without Workload Protection enabled.
-2. Click **Inspect Hosts Without WP**. Fleet Automation appears, allowing you to [set up Workload Protection][3].
+1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO WP{{< /ui >}}. {{< ui >}}NO WP{{< /ui >}} shows how many hosts are running the Datadog Agent without Workload Protection enabled.
+2. Click {{< ui >}}Inspect Hosts Without WP{{< /ui >}}. Fleet Automation appears, allowing you to [set up Workload Protection][3].
 
 ### Identify assets missing key features
 
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can find assets with gaps in protection.
+From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can find assets with gaps in protection.
 
-1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
-2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
-   1. Click **Inspect Hosts Without Agent**. The Resource Catalog appears, allowing you to address hosts missing agents.
-3. Filter by **Agent Version** to detect outdated agents lacking recent security updates.
+1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}INFO{{< /ui >}} to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
+2. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO AGENT{{< /ui >}}. {{< ui >}}NO AGENT{{< /ui >}} shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
+   1. Click {{< ui >}}Inspect Hosts Without Agent{{< /ui >}}. The Resource Catalog appears, allowing you to address hosts missing agents.
+3. Filter by {{< ui >}}Agent Version{{< /ui >}} to detect outdated agents lacking recent security updates.
 4. Update the Agent to ensure complete coverage.
 
 ### Search assets by MITRE ATT&CK techniques and tactics
 
-From the **Filter by tactics, techniques, and policy types** status card on the Coverage page, built-in filters for **Tactics**, **Techniques**, and **Policies** show exactly which parts of the MITRE ATT&CK framework are covered.
+From the {{< ui >}}Filter by tactics, techniques, and policy types{{< /ui >}} status card on the Coverage page, built-in filters for {{< ui >}}Tactics{{< /ui >}}, {{< ui >}}Techniques{{< /ui >}}, and {{< ui >}}Policies{{< /ui >}} show exactly which parts of the MITRE ATT&CK framework are covered.
 
 To use these filters to strengthen detection and response alignment with proven MITRE ATT&CK framework threat models, do the following:
 
-1. Click **Tactics** to filter for high-priority tactics (for example, `TA004-privilege-escalation`, `TA004-persistence`), to ensure those are protected across all hosts.
-2. After the map updates for the tactic you selected, click **Techniques** and select a technique to identify gaps in technique coverage for critical systems.
-3. Click **Policies** and select a policy type to see the distribution of policies across the filtered infrastructure.
+1. Click {{< ui >}}Tactics{{< /ui >}} to filter for high-priority tactics (for example, `TA004-privilege-escalation`, `TA004-persistence`), to ensure those are protected across all hosts.
+2. After the map updates for the tactic you selected, click {{< ui >}}Techniques{{< /ui >}} and select a technique to identify gaps in technique coverage for critical systems.
+3. Click {{< ui >}}Policies{{< /ui >}} and select a policy type to see the distribution of policies across the filtered infrastructure.
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
@@ -94,7 +94,7 @@ For information about the MITRE ATT&CK map available in SIEM or Workload Protect
 You can use Coverage to test and iterate on custom security rules:
 
 1. Write and deploy a [new custom rule][4].
-2. In **Coverage**, search for the rule by rule ID, policy ID, or hostname.
+2. In {{< ui >}}Coverage{{< /ui >}}, search for the rule by rule ID, policy ID, or hostname.
 3. Confirm that the agent has loaded the rule successfully.
 4. If errors appear, review the details, fix the rule, and redeploy.
 

@@ -73,7 +73,7 @@ To set up the App and API Protection Service Extension in GCP, use the Google Cl
 4. Add the instance group with the service extension VM as a backend to this backend service.
 
 5. Configure the Traffic Service Extension callout:
-    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension.
+    1. In the Google Cloud console, go to {{< ui >}}Service Extensions{{< /ui >}} and create a new Service Extension.
     2. Select your load balancer type.
     3. Select `Traffic extensions` as the type.
     4. Select your forwarding rules.
@@ -81,10 +81,10 @@ To set up the App and API Protection Service Extension in GCP, use the Google Cl
 
 6. Create an Extension Chain
 
-    1. To send all traffic to the extension, insert `true` in the **Match condition**.
-    2. For **Programability type**, select `Callouts`.
+    1. To send all traffic to the extension, insert `true` in the {{< ui >}}Match condition{{< /ui >}}.
+    2. For {{< ui >}}Programability type{{< /ui >}}, select {{< ui >}}Callouts{{< /ui >}}.
     3. Select the backend service you created in the previous step.
-    4. In **Events**, select **only** `Request Headers` and `Response Headers`. These are required. Do not select the bodies events. These are supported out-of-the-box by configuring the Service Extension callout with the body processing size limit.
+    4. In {{< ui >}}Events{{< /ui >}}, select **only** {{< ui >}}Request Headers{{< /ui >}} and {{< ui >}}Response Headers{{< /ui >}}. These are required. Do not select the bodies events. These are supported out-of-the-box by configuring the Service Extension callout with the body processing size limit.
     5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
     <br>

@@ -9,7 +9,7 @@ further_reading:
   text: "Protection"
 ---
  
-This topic describes how to use **Attackers Explorer** to investigate and block Flagged Attackers.
+This topic describes how to use {{< ui >}}Attackers Explorer{{< /ui >}} to investigate and block Flagged Attackers.
 
 ## Overview
 
@@ -35,14 +35,14 @@ To understand the difference between the different explorers, review these appro
 
 Each explorer focuses on a specific use case:
 
-- **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
-- **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Users Explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+- {{< ui >}}Signal Explorer{{< /ui >}}: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
+- {{< ui >}}Trace Explorer{{< /ui >}}: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- {{< ui >}}Users Explorer{{< /ui >}}: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
   - Pivoting to other explorers
-- **Attackers Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
+- {{< ui >}}Attackers Explorer{{< /ui >}}: List of Flagged and Suspicious Attackers. Interactions include: 
   - Bulk actions for attacker analytics and blocking
   - Drill-down into the history of any attacker
   - Search
@@ -63,7 +63,7 @@ There are two sections to the Attackers Explorer:
 
 ### Investigate an attacker
 
-1. In **View by**, click **IP**, **User Agent**, **ASN**, or **Cluster**.
+1. In {{< ui >}}View by{{< /ui >}}, click {{< ui >}}IP{{< /ui >}}, {{< ui >}}User Agent{{< /ui >}}, {{< ui >}}ASN{{< /ui >}}, or {{< ui >}}Cluster{{< /ui >}}.
 2. Click on any row to view the details pane for the attacker.
 
 <!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attackers Explorer"  >}} -->
@@ -74,45 +74,45 @@ An attacker can be blocked or added to the Passlist from its details.
 
 Details common to all attacker views:
 
-- **Blocking Status:** Indicates whether the attacker IP is actively being blocked, helping you confirm if immediate action is needed.
-- **Threat Intelligence:** Show Datadog definitions **Suspicious** or **Flagged**.
-- **Last Information:** Provides contextual network origin (for example, route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
-- **Associated Users:** Shows which user accounts (if any) were affected or linked to the IP, assisting with lateral movement tracking and potential account compromise identification.
-- **Security Traces:** Visualizes the timeline and volume of suspicious activity (for example, **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
+- {{< ui >}}Blocking Status{{< /ui >}}: Indicates whether the attacker IP is actively being blocked, helping you confirm if immediate action is needed.
+- {{< ui >}}Threat Intelligence{{< /ui >}}: Show Datadog definitions **Suspicious** or **Flagged**.
+- {{< ui >}}Last Information{{< /ui >}}: Provides contextual network origin (for example, route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
+- {{< ui >}}Associated Users{{< /ui >}}: Shows which user accounts (if any) were affected or linked to the IP, assisting with lateral movement tracking and potential account compromise identification.
+- {{< ui >}}Security Traces{{< /ui >}}: Visualizes the timeline and volume of suspicious activity (for example, **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
 
 View-specific details:
 
 - IP:
-  - **Threat Intel:** See [Threat Intelligence][4].
-  - **History:** Displays past activity to detect patterns or repeated attacks.
-  - **Associated Users:** Identifies user accounts associated with the IP.
-  - **Endpoint Requests:** Lists HTTP requests to reveal attack methods or targets.
-  - **Signals:** Displays triggered detections to assess threat severity.
-  - **Clusters:** Points to affected app clusters to gauge impact scope.
-  - **Top User Agents:** Lists the most frequent user agents used by the attacker (for example, scripts, scanners, or browsers), helping to identify automation tools or custom clients involved in the attack.
+  - {{< ui >}}Threat Intel{{< /ui >}}: See [Threat Intelligence][4].
+  - {{< ui >}}History{{< /ui >}}: Displays past activity to detect patterns or repeated attacks.
+  - {{< ui >}}Associated Users{{< /ui >}}: Identifies user accounts associated with the IP.
+  - {{< ui >}}Endpoint Requests{{< /ui >}}: Lists HTTP requests to reveal attack methods or targets.
+  - {{< ui >}}Signals{{< /ui >}}: Displays triggered detections to assess threat severity.
+  - {{< ui >}}Clusters{{< /ui >}}: Points to affected app clusters to gauge impact scope.
+  - {{< ui >}}Top User Agents{{< /ui >}}: Lists the most frequent user agents used by the attacker (for example, scripts, scanners, or browsers), helping to identify automation tools or custom clients involved in the attack.
 - User Agent:
-  - **Associated IPs**: Displays IPs using the same User Agent, with trace counts and recent activity bars per IP.
-  - **Associated Users** Lists user accounts tied to this User Agent, helping detect possible account compromise.
-  - **Blocking History**: Shows past blocks on the User Agent, useful for spotting repeated offenses.
-  - **Endpoint Requests**: Detail which endpoints were targeted and how often.
-  - **Signals**: Shows triggered alerts from this User Agent, flagging rule violations or suspicious behavior.
+  - {{< ui >}}Associated IPs{{< /ui >}}: Displays IPs using the same User Agent, with trace counts and recent activity bars per IP.
+  - {{< ui >}}Associated Users{{< /ui >}}: Lists user accounts tied to this User Agent, helping detect possible account compromise.
+  - {{< ui >}}Blocking History{{< /ui >}}: Shows past blocks on the User Agent, useful for spotting repeated offenses.
+  - {{< ui >}}Endpoint Requests{{< /ui >}}: Detail which endpoints were targeted and how often.
+  - {{< ui >}}Signals{{< /ui >}}: Shows triggered alerts from this User Agent, flagging rule violations or suspicious behavior.
 - ASN:
-  - **AS:** Identifies the Autonomous System, helping to trace malicious traffic back to its network owner or hosting provider.
-  - **Signals:** Shows the volume and severity of security alerts (for example, CRITICAL, HIGH), indicating how active or threatening the ASN's traffic is.
-  - **Services:** Lists affected services and environments, helping you understand which parts of the infrastructure are being targeted.
-  - **Last activity:** Indicates the most recent time malicious activity was observed from this ASN, helping prioritize investigation of current threats.
-  - **Traffic Distribution:** Visualizes the proportion of normal vs suspicious traffic, helping analysts assess if an ASN is primarily used for attacks or mixed usage.
+  - {{< ui >}}AS{{< /ui >}}: Identifies the Autonomous System, helping to trace malicious traffic back to its network owner or hosting provider.
+  - {{< ui >}}Signals{{< /ui >}}: Shows the volume and severity of security alerts (for example, CRITICAL, HIGH), indicating how active or threatening the ASN's traffic is.
+  - {{< ui >}}Services{{< /ui >}}: Lists affected services and environments, helping you understand which parts of the infrastructure are being targeted.
+  - {{< ui >}}Last activity{{< /ui >}}: Indicates the most recent time malicious activity was observed from this ASN, helping prioritize investigation of current threats.
+  - {{< ui >}}Traffic Distribution{{< /ui >}}: Visualizes the proportion of normal vs suspicious traffic, helping analysts assess if an ASN is primarily used for attacks or mixed usage.
 - Cluster:
-  - **Similarity Overview:** Shows shared attributes across IPs, user agents, locations, and domains.
-    - **IPs per ASN:** Identifies autonomous systems used by attackers.
-    - **IPs per User Agent:** Detects automation, spoofing, or reuse across campaigns.
-    - **IPs per Location:** Identifies geographic distribution of attacking IPs.
-    - **IPs per Domain:** Traces attacker infrastructure and detects suspicious domains.
-  - **Threat Intel Category:** Classifies the type of threat.
-  - **Threat Intel Intention:** Indicates the likely purpose of the malicious activity.
-  - **Users per IP:** Measures breadth of compromise or impersonation.
-  - **Services:** Identifies impacted services and environments.
-  - **Cluster Activity:** Displays behavioral trends and enables trace inspection.
+  - {{< ui >}}Similarity Overview{{< /ui >}}: Shows shared attributes across IPs, user agents, locations, and domains.
+    - {{< ui >}}IPs per ASN{{< /ui >}}: Identifies autonomous systems used by attackers.
+    - {{< ui >}}IPs per User Agent{{< /ui >}}: Detects automation, spoofing, or reuse across campaigns.
+    - {{< ui >}}IPs per Location{{< /ui >}}: Identifies geographic distribution of attacking IPs.
+    - {{< ui >}}IPs per Domain{{< /ui >}}: Traces attacker infrastructure and detects suspicious domains.
+  - {{< ui >}}Threat Intel Category{{< /ui >}}: Classifies the type of threat.
+  - {{< ui >}}Threat Intel Intention{{< /ui >}}: Indicates the likely purpose of the malicious activity.
+  - {{< ui >}}Users per IP{{< /ui >}}: Measures breadth of compromise or impersonation.
+  - {{< ui >}}Services{{< /ui >}}: Identifies impacted services and environments.
+  - {{< ui >}}Cluster Activity{{< /ui >}}: Displays behavioral trends and enables trace inspection.
 
 
 ### Best practices for blocking with Attackers Explorer
@@ -127,57 +127,57 @@ To block an individual IP temporarily or permanently, do the following:
 
 {{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with AAP Attackers Explorer"  >}}
 
-1. Click `Block` on the row.
+1. Click {{< ui >}}Block{{< /ui >}} on the row.
 2. Choose a blocking duration.
 
 ## Block IPs in bulk
 
-You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Compare and Block** option. 
+You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's {{< ui >}}Compare and Block{{< /ui >}} option. 
 
-**Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
+{{< ui >}}Compare and Block{{< /ui >}} provides metrics about the IPs to help you block with safety and confidence. For example, {{< ui >}}Similarity Overview{{< /ui >}} and {{< ui >}}Activity{{< /ui >}}, described later in this topic.
 
 To compare and block IPs in bulk, do the following:
 1. Filter the list of Attackers with a search or facets.
 2. Select multiple IPs.
-3. Select the **Compare and Block** option.
+3. Select the {{< ui >}}Compare and Block{{< /ui >}} option.
     
-    In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
+    In the following example, the selected IPs are from the same location and appear to be related. The {{< ui >}}Compare and Block{{< /ui >}} option opens the {{< ui >}}Block selected attackers{{< /ui >}} view, showing metrics and attributes for the selected IP addresses.
 
     {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attackers Explorer group blocking"  >}}
 
-4. To block attackers, click **Block**.
+4. To block attackers, click {{< ui >}}Block{{< /ui >}}.
 
 ## Block selected attackers metrics
 
-When you select the **Compare and Block** option, the **Block selected attackers** view opens, showing metrics and attributes for the selected IP addresses.
+When you select the {{< ui >}}Compare and Block{{< /ui >}} option, the {{< ui >}}Block selected attackers{{< /ui >}} view opens, showing metrics and attributes for the selected IP addresses.
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attackers Explorer group blocking"  >}}
 
 <div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the last 30 days.</a></div>
 
-The **Block selected attackers** view metrics are explained in the following sections.
+The {{< ui >}}Block selected attackers{{< /ui >}} view metrics are explained in the following sections.
 
 ### Selected IPs
 
-Contains the IPs selected from the explorer. Deselecting an IP removes it from the metrics sections and **Block** action.
+Contains the IPs selected from the explorer. Deselecting an IP removes it from the metrics sections and {{< ui >}}Block{{< /ui >}} action.
 
 ### Similarity overview
 
 Each column exists to help block with confidence and safety. The provided attributes are also used by AAP's Attacker Similarity feature.
 
-ASNs
+{{< ui >}}ASNs{{< /ui >}}
 : Autonomous System Numbers. Attacks with large numbers of IP addresses might originate from the same ASN, especially when attacks originate from data centers and cloud IPs.
 
-User Agents
+{{< ui >}}User Agents{{< /ui >}}
 : Attackers, commercial scanners, and your own software might use predictable user agents that can help qualify what should be included or excluded from blocking.
 
-Location
+{{< ui >}}Location{{< /ui >}}
 : Companies might have policies or serviceable markets that determine what countries they allow traffic from.
 
-Domain
+{{< ui >}}Domain{{< /ui >}}
 : The owner of the ASN. This is helpful when an organization owns multiple ASNs.
 
-Users per IPs
+{{< ui >}}Users per IPs{{< /ui >}}
 : The number of users who have authenticated from the IP. IPs with large numbers of logins might indicate a load balancer or many users from the same location, like a company site.
 
 ### Activity

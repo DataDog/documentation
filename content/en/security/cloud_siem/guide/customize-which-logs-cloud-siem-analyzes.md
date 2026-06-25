@@ -99,30 +99,30 @@ The Security Filters Configuration section lists every Security Filter, its quer
 
 ### Create a Security Filter
 
-1. In Datadog, go to **Security** > **Cloud SIEM** > [**Settings**][4].
-1. Scroll to the **Security Filters Configuration** section and click it to expand it.
-1. In the **Security Filters Configuration** section, click **+ New Security Filter**. The New Security Filter window opens.
-1. In the **New Security Filter** window, enter:
-   - **Name:** A short, descriptive name (for example, `AWS CloudTrail`).
-   - **Query:** The log query that selects the logs Cloud SIEM should analyze (for example, `source:cloudtrail`).
-   - **Exclusion filters** (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click **+ New Exclusion Filter** and enter an exclusion query.
-   - **Filter status:** Set to **Active** to enable the filter on save.
-1. Review the **Preview** pane to confirm the filter matches the logs you expect.
-1. Click **Save**.
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][4].
+1. Scroll to the {{< ui >}}Security Filters Configuration{{< /ui >}} section and click it to expand it.
+1. In the {{< ui >}}Security Filters Configuration{{< /ui >}} section, click {{< ui >}}+ New Security Filter{{< /ui >}}. The New Security Filter window opens.
+1. In the {{< ui >}}New Security Filter{{< /ui >}} window, enter:
+   - {{< ui >}}Name{{< /ui >}}: A short, descriptive name (for example, `AWS CloudTrail`).
+   - {{< ui >}}Query{{< /ui >}}: The log query that selects the logs Cloud SIEM should analyze (for example, `source:cloudtrail`).
+   - {{< ui >}}Exclusion filters{{< /ui >}} (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click {{< ui >}}+ New Exclusion Filter{{< /ui >}} and enter an exclusion query.
+   - {{< ui >}}Filter status{{< /ui >}}: Set to {{< ui >}}Active{{< /ui >}} to enable the filter on save.
+1. Review the {{< ui >}}Preview{{< /ui >}} pane to confirm the filter matches the logs you expect.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="security/cloud_siem/guide/siem_settings_add_security-filter_empty.png" alt="The New Security Filter dialog with empty Name and Query fields, no exclusion filters, Filter status set to Active, and a Preview pane showing live log ingestion statistics" style="width:100%;" >}}
 
 ### Edit or disable a Security Filter
 
-1. In the **Security Filters Configuration** section, click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon on the filter row.
-2. In the **Edit Security Filter** dialog, update the name, query, exclusions, or filter status.
-3. Click **Save**.
+1. In the {{< ui >}}Security Filters Configuration{{< /ui >}} section, click the {{< ui >}}Edit{{< /ui >}} {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon on the filter row.
+2. In the {{< ui >}}Edit Security Filter{{< /ui >}} dialog, update the name, query, exclusions, or filter status.
+3. Click {{< ui >}}Save{{< /ui >}}.
 
-To disable a filter without deleting it, set **Filter status** to inactive. The filter remains saved so you can re-enable it later.
+To disable a filter without deleting it, set {{< ui >}}Filter status{{< /ui >}} to inactive. The filter remains saved so you can re-enable it later.
 
 ### Delete a Security Filter
 
-In the **Security Filters Configuration** section, click the **Delete** icon {{< img src="icons/delete.png" inline="true" style="width:14px;">}} on the filter row, then confirm the deletion.
+In the {{< ui >}}Security Filters Configuration{{< /ui >}} section, click the {{< ui >}}Delete{{< /ui >}} icon {{< img src="icons/delete.png" inline="true" style="width:14px;">}} on the filter row, then confirm the deletion.
 
 The built-in `all ingested logs` filter cannot be deleted, but you can disable it.
 
@@ -334,7 +334,7 @@ If a log you expect Cloud SIEM to analyze is not producing signals, work through
    - A query against a field not present at filter-evaluation time returns zero matches.
    - A query against a field whose availability depends on Pipeline configuration returns matches only when the corresponding Pipeline processor is configured.
 3. **Validate the combined effect of all filters.**
-   - In the UI, expand the **Preview** pane in the Security Filters Configuration section to stream the logs that reach analysis after every enabled filter is applied.
+   - In the UI, expand the {{< ui >}}Preview{{< /ui >}} pane in the Security Filters Configuration section to stream the logs that reach analysis after every enabled filter is applied.
    - With the API, send a `GET` request to list all filters and review the combined `query` and `exclusion_filters` payloads.
 
 ## Useful tags and attributes for Security Filter queries

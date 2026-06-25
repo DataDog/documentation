@@ -30,7 +30,7 @@ Use Workflow Automation with [Cloud Security][2] to automate your security-relat
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
+Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the {{< ui >}}Run Workflow{{< /ui >}} button in the {{< ui >}}Next Steps{{< /ui >}} box at the top of the side panel.
 
 When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in subsequent steps. In the following examples, the trigger event is a new security finding.
 
@@ -40,26 +40,26 @@ You can build a workflow using a preconfigured flow from an out-of-the-box bluep
 
 ### Block access to Amazon S3 bucket via Slack
 
-This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
+This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking {{< ui >}}Approve{{< /ui >}} or {{< ui >}}Reject{{< /ui >}}, you can automatically block access to the S3 bucket or decline to take action.
 
 **Note**: To build this workflow, you must configure the [Slack integration][5].
 
 #### Initialize the workflow
 
-1. On the [Workflow Automation page][4], click **New Workflow**.
-1. Click **Add Trigger** > **Security**. 
+1. On the [Workflow Automation page][4], click {{< ui >}}New Workflow{{< /ui >}}.
+1. Click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Security{{< /ui >}}. 
 
    **Note**: A workflow must include a security trigger before you can run it. 
 
    The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title (`{{ Source.securityFinding.attributes.title }}`).
-1. Enter a name for the workflow and click **Save**.
+1. Enter a name for the workflow and click {{< ui >}}Save{{< /ui >}}.
 
 #### Add JS function
 
-Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the misconfiguration's tags.
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the misconfiguration’s tags.
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
+2. Search for the {{< ui >}}JS Function{{< /ui >}} action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and paste the following in the script editor:
    {{< code-block lang="javascript" >}}
     // Gets the region info from the misconfiguration tags
@@ -80,26 +80,26 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
 #### Add Slack action
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **Make a decision** action for Slack and select it to add it as a step on your workflow canvas.
+2. Search for the {{< ui >}}Make a decision{{< /ui >}} action for Slack and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
-    - **Workspace**: The name of your Slack workspace.
-    - **Channel**: The channel to send the Slack message to.
-    - **Prompt text**: The text that appears immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Source.securityFinding.attributes.resource_name }}` in region `{{ Steps.GetRegion.data }}`?"
+    - {{< ui >}}Workspace{{< /ui >}}: The name of your Slack workspace.
+    - {{< ui >}}Channel{{< /ui >}}: The channel to send the Slack message to.
+    - {{< ui >}}Prompt text{{< /ui >}}: The text that appears immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Source.securityFinding.attributes.resource_name }}` in region `{{ Steps.GetRegion.data }}`?"
 
 ##### Approve workflow
 
-1. Under **Approve** on the workflow canvas, click the plus (`+`) icon to add another step.
-2. Search for the **Block Public Access** action for Amazon S3 and select it to add it as a step on your workflow canvas.
+1. Under {{< ui >}}Approve{{< /ui >}} on the workflow canvas, click the plus (`+`) icon to add another step.
+2. Search for the {{< ui >}}Block Public Access{{< /ui >}} action for Amazon S3 and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
-    - **Connection**: The name of the workflow connection for the AWS integration.
-    - **Region**: `{{ Steps.GetRegion.data }}`
-    - **Bucket name**: `{{ Source.securityFinding.attributes.resource_name }}`
-4. Under the **Block public access** step on the workflow canvas, click the plus (`+`) icon to add another step.
-5. Search for the **Send message** action for Slack and select it to add it as a step on your workflow canvas.
+    - {{< ui >}}Connection{{< /ui >}}: The name of the workflow connection for the AWS integration.
+    - {{< ui >}}Region{{< /ui >}}: `{{ Steps.GetRegion.data }}`
+    - {{< ui >}}Bucket name{{< /ui >}}: `{{ Source.securityFinding.attributes.resource_name }}`
+4. Under the {{< ui >}}Block public access{{< /ui >}} step on the workflow canvas, click the plus (`+`) icon to add another step.
+5. Search for the {{< ui >}}Send message{{< /ui >}} action for Slack and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
-    - **Workspace**: The name of your Slack workspace.
-    - **Channel**: The channel to send the Slack message to.
-    - **Message text**: The text that appears in the Slack message. For example:
+    - {{< ui >}}Workspace{{< /ui >}}: The name of your Slack workspace.
+    - {{< ui >}}Channel{{< /ui >}}: The channel to send the Slack message to.
+    - {{< ui >}}Message text{{< /ui >}}: The text that appears in the Slack message. For example:
     {{< code-block lang="text" >}}
     S3 bucket `{{ Source.securityFinding.attributes.resource_name }}` successfully blocked. AWS API response: 
     ```{{ Steps.Block_public_access }}```
@@ -109,13 +109,13 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
 
 ##### Reject workflow
 
-1. Under **Reject** on the workflow canvas, click the plus (`+`) icon to add another step.
-2. Search for the **Send message** action for Slack and select it to add it as a step on your workflow canvas.
+1. Under {{< ui >}}Reject{{< /ui >}} on the workflow canvas, click the plus (`+`) icon to add another step.
+2. Search for the {{< ui >}}Send message{{< /ui >}} action for Slack and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
-    - **Workspace**: The name of your Slack workspace.
-    - **Channel**: The channel to send the Slack message to.
-    - **Message text**: The text that appears in the Slack message, for example, "User declined the action".
-4. Click **Save**.
+    - {{< ui >}}Workspace{{< /ui >}}: The name of your Slack workspace.
+    - {{< ui >}}Channel{{< /ui >}}: The channel to send the Slack message to.
+    - {{< ui >}}Message text{{< /ui >}}: The text that appears in the Slack message, for example, "User declined the action".
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Automatically create and assign a Jira issue
 
@@ -125,30 +125,30 @@ This example creates an automated ticket routing workflow that creates and assig
 
 #### Initialize the workflow
 
-1. On the [Workflow Automation page][4], click **New Workflow**.
-1. Click **Add Trigger** > **Security**. 
+1. On the [Workflow Automation page][4], click {{< ui >}}New Workflow{{< /ui >}}.
+1. Click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Security{{< /ui >}}. 
 
    **Note**: A workflow must include a security trigger before you can run it. 
    
    The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
-1. Enter a name for the workflow and click **Save**.
+1. Enter a name for the workflow and click {{< ui >}}Save{{< /ui >}}.
 
 #### Add Jira action
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **Create issue** Jira action and select it to add it as a step on your workflow canvas.
+2. Search for the {{< ui >}}Create issue{{< /ui >}} Jira action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
-    - **Jira account**: The URL of your Jira account.
-    - **Project**: `{{ Source.securityFinding.tags_value.team }}`
-    - **Summary**: `{{ Source.securityFinding.attributes.title }}`
-4. Click **Save**.
+    - {{< ui >}}Jira account{{< /ui >}}: The URL of your Jira account.
+    - {{< ui >}}Project{{< /ui >}}: `{{ Source.securityFinding.tags_value.team }}`
+    - {{< ui >}}Summary{{< /ui >}}: `{{ Source.securityFinding.attributes.title }}`
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Trigger a workflow
 
 You can trigger an existing workflow from the misconfiguration or identity risks explorers, as well as when you have a resource open in a side panel.
-- In an explorer, hover over the resource, click the **Actions** dropdown that appears, then click **Run workflow**.
+- In an explorer, hover over the resource, click the {{< ui >}}Actions{{< /ui >}} dropdown that appears, then click {{< ui >}}Run workflow{{< /ui >}}.
   {{< img src="security/cspm/run_workflow_explorer.png" alt="Running a workflow on a resource from the misconfigurations explorer" style="width:100%;" >}}
-- In the side panel, in the **Next Steps** section, **Run Workflow**, and select a workflow to run.
+- In the side panel, in the {{< ui >}}Next Steps{{< /ui >}} section, {{< ui >}}Run Workflow{{< /ui >}}, and select a workflow to run.
   {{< img src="security/cspm/run_workflow_next_steps.png" alt="Running a workflow from the Next Steps section of a side panel" style="width:30%;" >}}
 
 The workflow must have a security trigger to appear in the list of workflows you can run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.

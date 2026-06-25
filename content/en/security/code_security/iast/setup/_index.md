@@ -240,7 +240,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 
-To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
@@ -446,7 +446,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 ### Finishing setup
 
 1. Restart your service.
-2. To see Runtime Code Analysis (IAST) in action, browse your service and find IAST vulnerabilities in the [Runtime Code (IAST) Vulnerability Explorer][4].
+2. To see Runtime Code Analysis (IAST) in action, browse your service and find IAST vulnerabilities in the [{{< ui >}}Runtime Code (IAST) Vulnerability Explorer{{< /ui >}}][4].
 
 If you need additional assistance, contact [Datadog support][5].
 

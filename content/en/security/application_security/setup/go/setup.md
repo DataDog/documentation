@@ -141,7 +141,7 @@ do
 done
 ```
 
-A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][14] in Datadog**.
+A few minutes after you enable your application and exercise it, threat information appears in the [{{< ui >}}Application Trace and Signals Explorer{{< /ui >}}][14] in Datadog.
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 

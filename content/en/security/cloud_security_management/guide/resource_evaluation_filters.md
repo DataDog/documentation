@@ -37,38 +37,38 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **AWS** section and click the account you want to create resource evaluation filters for. A side panel with configuration options for that account opens.
-1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
+1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}} page][1], click {{< ui >}}Cloud Integrations{{< /ui >}}.
+1. Expand the {{< ui >}}AWS{{< /ui >}} section and click the account you want to create resource evaluation filters for. A side panel with configuration options for that account opens.
+1. Under {{< ui >}}Evaluation Filters{{< /ui >}}, click {{< ui >}}Limit to Specific Resources{{< /ui >}}. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **Azure** section and click the subscription you want to create resource evaluation filters for. A side panel with configuration options for that subscription opens.
-1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
+1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}} page][1], click {{< ui >}}Cloud Integrations{{< /ui >}}.
+1. Expand the {{< ui >}}Azure{{< /ui >}} section and click the subscription you want to create resource evaluation filters for. A side panel with configuration options for that subscription opens.
+1. Under {{< ui >}}Evaluation Filters{{< /ui >}}, click {{< ui >}}Limit to Specific Resources{{< /ui >}}. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **GCP** section and click the project you want to create resource evaluation filters for. A side panel with configuration options for that project opens.
-1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
+1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}} page][1], click {{< ui >}}Cloud Integrations{{< /ui >}}.
+1. Expand the {{< ui >}}GCP{{< /ui >}} section and click the project you want to create resource evaluation filters for. A side panel with configuration options for that project opens.
+1. Under {{< ui >}}Evaluation Filters{{< /ui >}}, click {{< ui >}}Limit to Specific Resources{{< /ui >}}. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{% tab "OCI" %}}
 
-1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **OCI** section.
-1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
+1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}} page][1], click {{< ui >}}Cloud Integrations{{< /ui >}}.
+1. Expand the {{< ui >}}OCI{{< /ui >}} section.
+1. Under {{< ui >}}Resource Evaluation Filters{{< /ui >}}, click the {{< ui >}}Plus{{< /ui >}} (+) icon.
 1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 

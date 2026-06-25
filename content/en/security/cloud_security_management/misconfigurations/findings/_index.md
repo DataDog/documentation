@@ -26,18 +26,18 @@ In addition to reviewing and responding to misconfigurations, you can set notifi
 
 ## Misconfigurations
 
-A misconfiguration is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a misconfiguration is generated with a **Pass** or **Fail** status. Resources are evaluated in increments between 15 minutes and four hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
+A misconfiguration is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a misconfiguration is generated with a {{< ui >}}Pass{{< /ui >}} or {{< ui >}}Fail{{< /ui >}} status. Resources are evaluated in increments between 15 minutes and four hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
 ## Explore your cloud misconfigurations
 
 Misconfigurations are displayed on the [Misconfigurations Findings page][1].
-- Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed.
-  - Group misconfigurations by any facet, custom property, or tag (or **None** to view misconfigurations individually), so you can find patterns of failed misconfigurations and prioritize your remediation efforts accordingly.
-- Hover over **Views**, then select an existing view to apply, or click **Save as new view** to use your explorer settings again in the future.
+- Aggregate misconfigurations by rule using the {{< ui >}}Group by{{< /ui >}} filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed.
+  - Group misconfigurations by any facet, custom property, or tag (or {{< ui >}}None{{< /ui >}} to view misconfigurations individually), so you can find patterns of failed misconfigurations and prioritize your remediation efforts accordingly.
+- Hover over {{< ui >}}Views{{< /ui >}}, then select an existing view to apply, or click {{< ui >}}Save as new view{{< /ui >}} to use your explorer settings again in the future.
 
 {{< img src="security/csm/findings_page_2.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
 
-You can click **View All** to view a complete list of resources affected by a misconfiguration, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
+You can click {{< ui >}}View All{{< /ui >}} to view a complete list of resources affected by a misconfiguration, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
 
 {{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 

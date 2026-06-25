@@ -23,8 +23,8 @@ There are two ways to see which Cloud SIEM product your organization is using:
   In either case, follow the instructions in the <a href="#settings">Check the Cloud SIEM settings page</a> section to determine which product your organization is using.
 </div>
 
-1. In Datadog, go to the **Plan & Usage** > [**Usage & Cost**][1] page.
-1. Scroll to the **Usage Summary** section and click the **Security** tab.
+1. In Datadog, go to the {{< ui >}}Plan & Usage{{< /ui >}} > [{{< ui >}}Usage & Cost{{< /ui >}}][1] page.
+1. Scroll to the {{< ui >}}Usage Summary{{< /ui >}} section and click the {{< ui >}}Security{{< /ui >}} tab.
 1. Find the tile that indicates which Cloud SIEM product your organization is using:
    <table>
      <thead>
@@ -35,19 +35,19 @@ There are two ways to see which Cloud SIEM product your organization is using:
      </thead>
      <tbody>
        <tr>
-         <td><strong>Security Analyzed and Indexed Logs</strong><br />
+         <td><strong>{{< ui >}}Security Analyzed and Indexed Logs{{< /ui >}}</strong><br />
            {{< img src="security/cloud_siem/guide/tile_security_analyzed_indexed_logs.png" alt="Tile labelled with 'Security Analyzed and Indexed Logs,' in addition to a usage amount, and indication of whether that usage was on-demand" width="50%">}}
          </td>
          <td>Standalone</td>
        </tr>
        <tr>
-         <td><strong>Cloud SIEM - Analyzed Logs (Add-On)</strong><br />
+         <td><strong>{{< ui >}}Cloud SIEM - Analyzed Logs (Add-On){{< /ui >}}</strong><br />
            {{< img src="security/cloud_siem/guide/tile_analyzed_logs_add_on.png" alt="Tile labelled with 'Cloud SIEM - Analyzed Logs (Add-On),' in addition to a usage amount, and indication of whether that usage was on-demand" width="50%">}}
          </td>
          <td>Add-on with Flex Logs</td>
        </tr>
        <tr>
-         <td><strong>SIEM - Analyzed Logs</strong><br />
+         <td><strong>{{< ui >}}SIEM - Analyzed Logs{{< /ui >}}</strong><br />
            {{< img src="security/cloud_siem/guide/tile_analyzed_logs.png" alt="Tile labelled with 'SIEM - Analyzed Logs,' in addition to a usage amount, and indication of whether that usage was on-demand" width="50%">}}
          </td>
          <td>Legacy</td>
@@ -57,7 +57,7 @@ There are two ways to see which Cloud SIEM product your organization is using:
 
 ## Check the Cloud SIEM settings page{#settings}
 
-In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a **Core Configuration** or **Settings** section, which indicates the Cloud SIEM product your organization is using.
+In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a {{< ui >}}Core Configuration{{< /ui >}} or {{< ui >}}Settings{{< /ui >}} section, which indicates the Cloud SIEM product your organization is using.
 <table>
   <thead>
     <tr>
@@ -67,19 +67,19 @@ In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a **C
   </thead>
   <tbody>
     <tr>
-      <td><strong>Core Configuration</strong> section with <strong>Index Configuration</strong><br />
+      <td>{{< ui >}}Core Configuration{{< /ui >}} section with {{< ui >}}Index Configuration{{< /ui >}}<br />
         {{< img src="security/cloud_siem/guide/config_core_index.png" alt="Configuration settings including a Core Configuration heading, which contains an Index Configuration section" width="80%">}}
       </td>
       <td>Standalone</td>
     </tr>
     <tr>
-      <td><strong>Core Configuration</strong> section with <strong>Security Filters Configuration</strong><br />
+      <td>{{< ui >}}Core Configuration{{< /ui >}} section with {{< ui >}}Security Filters Configuration{{< /ui >}}<br />
         {{< img src="security/cloud_siem/guide/config_core_security_filters.png" alt="Configuration settings including a Core Configuration heading, which contains an Index Configuration section" width="80%">}}
       </td>
       <td>Add-on with Flex Logs</td>
     </tr>
     <tr>
-      <td><strong>Sources</strong> table<br />
+      <td>{{< ui >}}Sources{{< /ui >}} table<br />
         {{< img src="security/cloud_siem/guide/config_sources.png" alt="Configuration settings including a Sources table" width="80%">}}
       </td>
       <td>Legacy</td>

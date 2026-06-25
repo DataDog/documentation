@@ -144,7 +144,7 @@ Cloud Security includes [Workload Protection][12], [Misconfigurations][11], [Ide
 
 {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 
-To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ##  App and API Protection
 

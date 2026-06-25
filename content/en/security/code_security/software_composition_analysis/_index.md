@@ -86,8 +86,8 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 ### View findings by repository
 
 The [Repositories Explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
-* The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA
-* The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
+* The {{< ui >}}Library Vulnerabilities{{< /ui >}} tab contains the vulnerable library versions found by Datadog SCA
+* The {{< ui >}}Library Catalog{{< /ui >}} tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
 Recommended steps for remediating detected vulnerabilities can be found in the side panel for each vulnerability in SCA. Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
 
@@ -149,11 +149,11 @@ You can create a bidirectional ticket in Jira or ServiceNow directly from any fi
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
 
 <div class="alert alert-info">Muting is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services cannot be muted.</div>
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Vulnerabilities Explorer][11] to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [Vulnerabilities Explorer][11] to review muted findings.
 
 ### Library vulnerability context in APM
 

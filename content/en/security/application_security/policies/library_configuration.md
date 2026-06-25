@@ -45,7 +45,7 @@ You can add an entry to the passlist, which ignore events from a rule, to elimin
 
 To add a passlist entry, do one of the following:
 
-- Click on a signal in [AAP Signals][4] and click the **Add Entry** link next to the **Add to passlist** suggested action. This method automatically adds an entry for the targeted service.
+- Click on a signal in [AAP Signals][4] and click the {{< ui >}}Add Entry{{< /ui >}} link next to the {{< ui >}}Add to passlist{{< /ui >}} suggested action. This method automatically adds an entry for the targeted service.
 - Navigate to [Passlist Configuration][5] and manually configure a new passlist entry based on your own criteria.
 
 **Note**: Requests (traces) that match a passlist entry are not billed.

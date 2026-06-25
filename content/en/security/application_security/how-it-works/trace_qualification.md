@@ -8,7 +8,7 @@ aliases:
 
 App and API Protection (AAP) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. AAP trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
 
-Filter by the **Qualification** facet in the AAP [Traces Explorer][1] to view the possible qualification results:
+Filter by the {{< ui >}}Qualification{{< /ui >}} facet in the AAP [Traces Explorer][1] to view the possible qualification results:
 
 
 ## Qualification outcomes

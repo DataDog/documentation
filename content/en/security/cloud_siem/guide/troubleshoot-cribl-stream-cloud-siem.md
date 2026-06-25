@@ -28,7 +28,7 @@ This guide explains the root cause of this behavior and how to configure your Cr
 
 ## How Cribl sends data by default
 
-When Cribl forwards logs to Datadog without a pipeline and using passthrough, and the **Message Field** in the Datadog destination is left blank, Cribl wraps the entire event—including the raw log line, timestamp, host, source, and any other fields—into a JSON string and places it inside the `message` field. For example:
+When Cribl forwards logs to Datadog without a pipeline and using passthrough, and the {{< ui >}}Message Field{{< /ui >}} in the Datadog destination is left blank, Cribl wraps the entire event—including the raw log line, timestamp, host, source, and any other fields—into a JSON string and places it inside the `message` field. For example:
 
 ```json
 [
@@ -45,7 +45,7 @@ In this format, the actual log content is buried inside a stringified JSON objec
 
 ## Configure Cribl to forward logs correctly
 
-To fix this, configure the **Message Field** in your Cribl Datadog destination to use `_raw`. This tells Cribl to extract only the raw log content and send it as the `message` value, dropping the JSON wrapper. With this setting in place, Datadog receives the log in the correct format, which allows Datadog to parse the log correctly through the appropriate log pipeline:
+To fix this, configure the {{< ui >}}Message Field{{< /ui >}} in your Cribl Datadog destination to use `_raw`. This tells Cribl to extract only the raw log content and send it as the `message` value, dropping the JSON wrapper. With this setting in place, Datadog receives the log in the correct format, which allows Datadog to parse the log correctly through the appropriate log pipeline:
 
 ```json
 [
@@ -58,8 +58,8 @@ To fix this, configure the **Message Field** in your Cribl Datadog destination t
 ]
 ```
 
-1. In Cribl Stream, navigate to **Routing** and open your **Datadog destination** configuration.
-2. Under the **Message Field** setting, enter `_raw`.
+1. In Cribl Stream, navigate to {{< ui >}}Routing{{< /ui >}} and open your {{< ui >}}Datadog destination{{< /ui >}} configuration.
+2. Under the {{< ui >}}Message Field{{< /ui >}} setting, enter `_raw`.
 3. Set the `ddsource` field to the correct value for your log source (for example, `crowdstrike` for CrowdStrike Falcon logs). This value determines which Datadog log pipeline, dashboards, and detection rules are applied.
 4. Save and deploy your changes.
 

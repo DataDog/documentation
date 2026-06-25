@@ -28,9 +28,9 @@ There are a series of steps that must run successfully for threat information to
 
 You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
@@ -163,20 +163,20 @@ If your service is a PHP service, explicitly set the environment variable to `DD
 
 If AAP was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15].
-  2. Select **App & API Protection in Monitoring Mode**.
-  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  2. Select {{< ui >}}App & API Protection in Monitoring Mode{{< /ui >}}.
+  3. In the {{< ui >}}App & API Protection{{< /ui >}} facet, enable {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}}, and {{< ui >}}Ready to block{{< /ui >}}.
   4. Click on a service.
-  5. In **Capabilities** > **App & API Protection** > **Threat Detection**, click **Deactivate**.
+  5. In {{< ui >}}Capabilities{{< /ui >}} > {{< ui >}}App & API Protection{{< /ui >}} > {{< ui >}}Threat Detection{{< /ui >}}, click {{< ui >}}Deactivate{{< /ui >}}.
 
-<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a {{< ui >}}Deactivate{{< /ui >}} button. If AAP was activated using local configuration, the {{< ui >}}Deactivate{{< /ui >}} button is not an option.</div>
 
 ### Bulk disable
 
 To disable AAP on your services in bulk, do the following: 
   1. Go to [Services][15].
-  2. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  2. In the {{< ui >}}App & API Protection{{< /ui >}} facet, enable {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}}, and {{< ui >}}Ready to block{{< /ui >}}.
   3. Select the checkboxes for the services where you want to disable threat detection.
-  4. In **Bulk Actions**, select **Deactivate threat detection on (number of) services**.
+  4. In {{< ui >}}Bulk Actions{{< /ui >}}, select {{< ui >}}Deactivate threat detection on (number of) services{{< /ui >}}.
 
 
 

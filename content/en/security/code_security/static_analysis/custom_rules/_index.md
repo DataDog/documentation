@@ -37,13 +37,13 @@ Install the [Datadog VS Code Extension][6] from the VS Code marketplace and keep
 
 ### Open the editor
 
-**To create a new rule**, open the command palette (**Cmd+Shift+P** / **Ctrl+Shift+P**) and run:
+**To create a new rule**, open the command palette ({{< ui >}}Cmd+Shift+P{{< /ui >}} / {{< ui >}}Ctrl+Shift+P{{< /ui >}}) and run:
 
 ```
 Datadog: New DDSA Rule
 ```
 
-**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
+**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select {{< ui >}}Datadog Code Security > Open in DDSA Rule Editor{{< /ui >}}.
 
 The [template repository](#manage-rules-with-the-template-repository) includes a `.ddsainclude` file that automatically opens matching rule YAML files in the editor.
 
@@ -60,7 +60,7 @@ The editor has four panels:
 
 ### Test your rule
 
-As you write, violations appear as squiggly underlines in the code sample panel in real-time. To run your rule against an entire directory, switch to the **Scan results** tab in the top-right panel.
+As you write, violations appear as squiggly underlines in the code sample panel in real-time. To run your rule against an entire directory, switch to the {{< ui >}}Scan results{{< /ui >}} tab in the top-right panel.
 
 ### Rule metadata
 
@@ -68,9 +68,9 @@ The collapsible sidebar lets you set rule metadata such as name, description, ca
 
 ### Save your rule
 
-- **Cmd/Ctrl+S**: Save to the current file
-- **Shift+Cmd/Ctrl+S**: Save as a new file
-- **Export button**: Validates required fields and saves as a YAML file
+- {{< ui >}}Cmd/Ctrl+S{{< /ui >}}: Save to the current file
+- {{< ui >}}Shift+Cmd/Ctrl+S{{< /ui >}}: Save as a new file
+- {{< ui >}}Export{{< /ui >}} button: Validates required fields and saves as a YAML file
 
 ## Manage rules with the template repository
 
@@ -78,14 +78,14 @@ As an alternative to managing custom rules in Datadog, the [datadog-custom-rules
 
 ### Get started
 
-1. Click **Use this template** on the [datadog-custom-rules-template][5] repository to create your own copy.
+1. Click {{< ui >}}Use this template{{< /ui >}} on the [datadog-custom-rules-template][5] repository to create your own copy.
 2. Add your Datadog credentials as GitHub secrets. See [Authentication](#authentication).
 3. Rename `rulesets/my-custom-rules/` or add new ruleset directories under `rulesets/`.
 4. Push to `main`. The GitHub Action uploads your rules automatically.
 
 ### Authentication
 
-1. In your GitHub repository, go to **Settings → Secrets and variables → Actions**.
+1. In your GitHub repository, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Secrets and variables{{< /ui >}} > {{< ui >}}Actions{{< /ui >}}.
 2. Add three secrets:
    - `DD_API_KEY` — your Datadog API key
    - `DD_APP_KEY` — your Datadog Application key
@@ -100,7 +100,7 @@ On every push to `main`, the GitHub Action runs `upload.py`, which:
 
 Only changed rules trigger API calls—unchanged rules are skipped.
 
-To run a sync manually, in to your GitHub repository, go to the **Actions** tab, select **Upload Custom Rules**, and click **Run workflow**.
+To run a sync manually, in to your GitHub repository, go to the {{< ui >}}Actions{{< /ui >}} tab, select {{< ui >}}Upload Custom Rules{{< /ui >}}, and click {{< ui >}}Run workflow{{< /ui >}}.
 
 ### Rule file format
 

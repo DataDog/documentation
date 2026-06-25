@@ -16,7 +16,7 @@ aliases:
 
 ## Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Threat Protection (new)** option selected, the Agent is installed and configured to enable AAP. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the {{< ui >}}Enable Threat Protection (new){{< /ui >}} option selected, the Agent is installed and configured to enable AAP. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_threat_detection_2.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and Threat Protection." style="width:100%;" >}}

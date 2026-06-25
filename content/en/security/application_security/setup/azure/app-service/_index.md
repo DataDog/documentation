@@ -38,7 +38,7 @@ Only *web applications* are supported. Azure Functions are not supported.
 
 ## Setup
 ### Set application settings
-To enable AAP on your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
+To enable AAP on your application, begin by adding the following key-value pairs under {{< ui >}}Application Settings{{< /ui >}} in your Azure configuration settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
@@ -74,7 +74,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 {{< tabs >}}
 {{% tab "Node, .NET, PHP, Python" %}}
-Go to **General settings** and add the following to the **Startup Command** field:
+Go to {{< ui >}}General settings{{< /ui >}} and add the following to the {{< ui >}}Startup Command{{< /ui >}} field:
 
 ```
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.14.0/datadog_wrapper | bash
@@ -100,7 +100,7 @@ To see App and API Protection threat detection in action, send known attack patt
    ```sh
    curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```
-A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
+A few minutes after you enable your application and exercise it, **threat information appears in the [{{< ui >}}Application Signals Explorer{{< /ui >}}][3]**.
 
 ## Further reading
 

@@ -28,17 +28,17 @@ Attack Traffic Sources
 ## Best practices
 
 1. Review trends and adopt a protection policy that meets your posture needs.
-2. Regularly review the **Exposed Services** widget in **Attack Surface Area** to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
+2. Regularly review the {{< ui >}}Exposed Services{{< /ui >}} widget in {{< ui >}}Attack Surface Area{{< /ui >}} to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
-5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
+5. Use {{< ui >}}Attack Traffic Sources{{< /ui >}} to compare the attack traffic sources with your expected customer locations.
 6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
 
 ### Using powerpacks
 
-When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
+When adding a widget to a [new dashboard][1] in Datadog, choose the {{< ui >}}Powerpacks{{< /ui >}} section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
  
-Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
+Each section in the {{< ui >}}Attack Summary{{< /ui >}} page corresponds to a dedicated powerpack.
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/security/appsec/threat

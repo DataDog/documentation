@@ -27,10 +27,10 @@ Configure mute rules to streamline security alerts by automatically filtering ou
 
 ## Create a mute rule
 
-1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Mute**. The Create a New Rule page opens.
-1. Under **Rule name**, enter a descriptive name for the rule; for example, "Compensating control in place for account payment-prod".
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [Findings Automation][2]. Click {{< ui >}}Add a New Rule{{< /ui >}}, then select {{< ui >}}Mute{{< /ui >}}. The Create a New Rule page opens.
+1. Under {{< ui >}}Rule name{{< /ui >}}, enter a descriptive name for the rule; for example, "Compensating control in place for account payment-prod".
 1. Add your rule criteria into the following fields:
-    - **Any of these types**: The types of findings that the rule should check for. Available types include:
+    - {{< ui >}}Any of these types{{< /ui >}}: The types of findings that the rule should check for. Available types include:
       - Runtime Code Vulnerability
       - Static Code Vulnerability
       - Library Vulnerability
@@ -42,19 +42,19 @@ Configure mute rules to streamline security alerts by automatically filtering ou
       - Attack Path
       - Identity Risk
       - API Security
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. To add severity criteria to the rule, click **Add Severity**.
+    - {{< ui >}}Any of these tags or attributes{{< /ui >}}: The resource tags or attributes that must match for the rule to apply.
+1. To add severity criteria to the rule, click {{< ui >}}Add Severity{{< /ui >}}.
 1. Specify the mute reason and duration:
-    - **Reason for muting**: The reason for muting the finding. Available reasons include:
+    - {{< ui >}}Reason for muting{{< /ui >}}: The reason for muting the finding. Available reasons include:
       - False Positive
       - Risk Accepted
       - Pending fix
       - No Fix
       - Duplicate
       - Other
-    - **Rule expiration**: The date on which the rule expires.
-    - **Further description for muting reason**: Optional box for additional details.
-1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
+    - {{< ui >}}Rule expiration{{< /ui >}}: The date on which the rule expires.
+    - {{< ui >}}Further description for muting reason{{< /ui >}}: Optional box for additional details.
+1. Click {{< ui >}}Save{{< /ui >}}. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Rule matching order
 

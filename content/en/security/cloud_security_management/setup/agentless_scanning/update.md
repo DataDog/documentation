@@ -14,10 +14,10 @@ further_reading:
 Datadog recommends updating the CloudFormation stack regularly so you can get access to new features and bug fixes as they are released.
 
 1. Log in to your AWS console and go to the CloudFormation Stacks page.
-1. Expand the parent **DatadogIntegration** stack to reveal its nested sub-stacks. Select the **DatadogIntegration-DatadogAgentlessScanning-...** sub-stack, click **Update**, then click **Update nested stack**.
-1. Click **Replace existing template**.
-1. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][1]. Paste that URL into the **Amazon S3 URL** field.
-1. Click **Next** to advance through the next several pages without modifying them, then submit the form.
+1. Expand the parent **DatadogIntegration** stack to reveal its nested sub-stacks. Select the **DatadogIntegration-DatadogAgentlessScanning-...** sub-stack, click {{< ui >}}Update{{< /ui >}}, then click {{< ui >}}Update nested stack{{< /ui >}}.
+1. Click {{< ui >}}Replace existing template{{< /ui >}}.
+1. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][1]. Paste that URL into the {{< ui >}}Amazon S3 URL{{< /ui >}} field.
+1. Click {{< ui >}}Next{{< /ui >}} to advance through the next several pages without modifying them, then submit the form.
 
 ## Update the Terraform module
 

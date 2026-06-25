@@ -28,7 +28,7 @@ To view data in the IOC Explorer, all of the following must be true:
 
 ## Use the IOC Explorer
 
-To access the IOC Explorer in Datadog, go to **Security** > **Cloud SIEM** > **Investigate** > [**IOC Explorer**][1].
+To access the IOC Explorer in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][1].
 
 ### Query and filter indicators of compromise
 
@@ -47,7 +47,7 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 
 ### Understand OCSF matching
 
-You can turn the **OCSF Matching** toggle on or off to have more control over how Datadog identifies IOC matches.
+You can turn the {{< ui >}}OCSF Matching{{< /ui >}} toggle on or off to have more control over how Datadog identifies IOC matches.
 - Turn the toggle **on** if you want **higher-confidence matches** tied to normalized security attributes.
   
   When the toggle is on, IOC matches only appear in the Explorer if values appear in mapped OCSF fields, such as the source IP, destination IP, or client IP. This helps ensure the match reflects the structured meaning of the data, rather than just the presence of the IOC somewhere in the raw log.
@@ -58,8 +58,8 @@ You can turn the **OCSF Matching** toggle on or off to have more control over ho
 #### Example
 
 Alice sends Bob an email whose message body mentions `192.0.2.100`, an IP address that is an IOC.
-- If the OCSF Matching toggle is **on**, Datadog only matches IOCs found in relevant mapped OCSF fields, such as normalized source or destination IP address fields in the email event. Because `192.0.2.100` appears only in the message body and not in a mapped OCSF field, it does not appear in the IOC Explorer.
-- If the OCSF Matching toggle is **off**, Datadog matches `192.0.2.100` because it searches the full event payload, including unstructured text such as the message body. The IOC appears in the IOC Explorer.
+- If the OCSF Matching toggle is {{< ui >}}on{{< /ui >}}, Datadog only matches IOCs found in relevant mapped OCSF fields, such as normalized source or destination IP address fields in the email event. Because `192.0.2.100` appears only in the message body and not in a mapped OCSF field, it does not appear in the IOC Explorer.
+- If the OCSF Matching toggle is {{< ui >}}off{{< /ui >}}, Datadog matches `192.0.2.100` because it searches the full event payload, including unstructured text such as the message body. The IOC appears in the IOC Explorer.
 
 ### Get more context on an indicator of compromise
 
@@ -78,11 +78,11 @@ In the IOC Explorer, click an indicator of compromise to view additional informa
 It's important to have proper context for the severity score for an indicator, so you can properly prioritize investigations. For example, [IP addresses][5] can be volatile and require frequent reassessments as a result.
 
 In the IOC Explorer side panel, you can see the factors that contribute to the severity score. Severity score starts from a base score based on classification, and increases or decreases based on additional factors:
-- **Classification**: The base score associated with the indicator's category and intent
-- **Corroboration**: Whether the indicator appears on multiple threat intelligent feeds
-- **Persistence**: How long threat intelligence feeds have been reporting on the indicator
-- **Hosting Type**: Used for IP and domain entity types; evaluates whether the hosting infrastructure type is commonly used for attacks
-- **Signal Activity**: Whether the indicator has been observed in Signals
+- {{< ui >}}Classification{{< /ui >}}: The base score associated with the indicator's category and intent
+- {{< ui >}}Corroboration{{< /ui >}}: Whether the indicator appears on multiple threat intelligent feeds
+- {{< ui >}}Persistence{{< /ui >}}: How long threat intelligence feeds have been reporting on the indicator
+- {{< ui >}}Hosting Type{{< /ui >}}: Used for IP and domain entity types; evaluates whether the hosting infrastructure type is commonly used for attacks
+- {{< ui >}}Signal Activity{{< /ui >}}: Whether the indicator has been observed in Signals
 
 ## Further reading
 

@@ -40,24 +40,24 @@ To create Jira issues for Cloud Security security issues, you must configure the
 To create a Jira issue for one or more resources impacted by a misconfiguration:
 
 1. On the [Misconfigurations explorer][1], select a misconfiguration.
-2. Under **Resources Impacted**, select one or more findings.
-3. On the **Actions** dropdown menu that appears on top, select **Create Jira Issue**.
+2. Under {{< ui >}}Resources Impacted{{< /ui >}}, select one or more findings.
+3. On the {{< ui >}}Actions{{< /ui >}} dropdown menu that appears on top, select {{< ui >}}Create Jira Issue{{< /ui >}}.
 4. Choose whether to create a single issue or multiple issues (one issue for each resource).
 5. Select a Jira account.
 6. Select the Jira project you want to assign the issue to.
 7. Select the issue type from the available options. Depending on the issue type, you may be required to enter additional information.
-8. Click **Create Issue**.
+8. Click {{< ui >}}Create Issue{{< /ui >}}.
 
 You can also create a Jira issue from the standalone issue side panel.
 
-1. On the [Misconfigurations explorer][1], set the Group By filter to **Resources**.
+1. On the [Misconfigurations explorer][1], set the Group By filter to {{< ui >}}Resources{{< /ui >}}.
 2. Select a resource.
-3. On the **Misconfigurations** tab, select a misconfiguration.
-4. Click **Create Jira Issue**.
+3. On the {{< ui >}}Misconfigurations{{< /ui >}} tab, select a misconfiguration.
+4. Click {{< ui >}}Create Jira Issue{{< /ui >}}.
 5. Select a Jira account.
 6. Select the Jira project you want to assign the issue to.
 7. Select the issue type from the available options. Depending on the issue type, you may be required to enter additional information.
-8. Click **Create Issue**.
+8. Click {{< ui >}}Create Issue{{< /ui >}}.
 
 After you create the issue, a link to the Jira issue is displayed on the side panel.
 
@@ -70,24 +70,24 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 To create a Jira issue for one or more resources impacted by an identity risk:
 
 1. On the [Identity Risks explorer][1], select an identity risk.
-2. Under **Resources Impacted**, select one or more findings.
-3. On the **Actions** dropdown menu that appears on top, select **Create Jira Issue**.
+2. Under {{< ui >}}Resources Impacted{{< /ui >}}, select one or more findings.
+3. On the {{< ui >}}Actions{{< /ui >}} dropdown menu that appears on top, select {{< ui >}}Create Jira Issue{{< /ui >}}.
 4. Choose whether to create a single issue or multiple issues (one issue for each resource).
 5. Select a Jira account.
 6. Select the Jira project you want to assign the issue to.
 7. Select the issue type from the available options. Depending on the issue type, you may be required to enter additional information.
-8. Click **Create Issue**.
+8. Click {{< ui >}}Create Issue{{< /ui >}}.
 
 You can also create a Jira issue from the standalone issue side panel.
 
-1. On the [Identity Risks explorer][1], set the Group By filter to **Resources**.
+1. On the [Identity Risks explorer][1], set the Group By filter to {{< ui >}}Resources{{< /ui >}}.
 2. Select a resource.
-3. On the **Misconfigurations** tab, select an identity risk.
-4. Click **Create Jira Issue**.
+3. On the {{< ui >}}Misconfigurations{{< /ui >}} tab, select an identity risk.
+4. Click {{< ui >}}Create Jira Issue{{< /ui >}}.
 5. Select a Jira account.
 6. Select the Jira project you want to assign the issue to.
 7. Select the issue type from the available options. Depending on the issue type, you may be required to enter additional information.
-8. Click **Create Issue**.
+8. Click {{< ui >}}Create Issue{{< /ui >}}.
 
 After you create the issue, a link to the Jira issue is displayed on the side panel.
 

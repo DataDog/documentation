@@ -97,7 +97,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
     export DATADOG_SITE="<DATADOG_SITE>"
     ```
 
-    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct **Datadog site** is selected on the right-hand side of this page).
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct {{< ui >}}Datadog site{{< /ui >}} is selected on the right-hand side of this page).
 
 5. Configure the Datadog API key:
 

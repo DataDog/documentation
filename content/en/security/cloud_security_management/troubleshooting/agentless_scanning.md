@@ -36,14 +36,14 @@ the identity running the script does not have permission to create or manage GCS
 
 **Fix (choose one):**
 
-1. **Grant Storage permissions** on the scanner project to the user (or service account) running the script. For example, grant **Storage Admin** (`roles/storage.admin`) on that project, or a custom role that includes `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update`.
+1. **Grant Storage permissions** on the scanner project to the user (or service account) running the script. For example, grant {{< ui >}}Storage Admin{{< /ui >}} (`roles/storage.admin`) on that project, or a custom role that includes `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update`.
 2. **Reuse an existing bucket:** Use a bucket that already exists (create it with an identity that has Storage permissions if needed), then set `TF_STATE_BUCKET` to that bucket name when running the script. The script will use the existing bucket for Terraform state and will not try to create one.
 
 ## Deployment fails due to VPC creation restrictions
 
 If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
 
-To fix this, use the [**custom VPC**][8] option during setup to deploy the scanner into an existing VPC instead of creating a new one.
+To fix this, use the [{{< ui >}}custom VPC{{< /ui >}}][8] option during setup to deploy the scanner into an existing VPC instead of creating a new one.
 
 ## Scanner instances appear as vulnerable hosts
 

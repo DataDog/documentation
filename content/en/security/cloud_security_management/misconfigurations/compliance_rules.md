@@ -37,24 +37,24 @@ Cloud Security Misconfigurations uses the following rule types to validate the c
 
 To filter the default compliance rules by cloud provider:
 
-1. Navigate to the [**Misconfiguration Rules**][13] page.
-2. Choose one of the following values from the **Tag** facet.
-    - **AWS**: `cloud_provider:aws`
-    - **Azure**: `cloud_provider:azure`
-    - **Google Cloud**: `cloud_provider:gcp`
-    - **OCI**: `cloud_provider:oci`
-    - **Docker**: `framework:cis-docker`
-    - **Kubernetes**: `framework:cis-kubernetes`
+1. Navigate to the [{{< ui >}}Misconfiguration Rules{{< /ui >}}][13] page.
+2. Choose one of the following values from the {{< ui >}}Tag{{< /ui >}} facet.
+    - {{< ui >}}AWS{{< /ui >}}: `cloud_provider:aws`
+    - {{< ui >}}Azure{{< /ui >}}: `cloud_provider:azure`
+    - {{< ui >}}Google Cloud{{< /ui >}}: `cloud_provider:gcp`
+    - {{< ui >}}OCI{{< /ui >}}: `cloud_provider:oci`
+    - {{< ui >}}Docker{{< /ui >}}: `framework:cis-docker`
+    - {{< ui >}}Kubernetes{{< /ui >}}: `framework:cis-kubernetes`
 
 ## Customize how your environment is scanned by each rule
 
 Customization of a cloud configuration query directly is not supported at this time, but you can customize how your environment is scanned by each rule.
 
-On the [Rules][13] page, select a rule to open its details page. Under **Exclude benign activity with suppression queries**, set the filtering logic for how the rule scans your environment.
+On the [{{< ui >}}Rules{{< /ui >}}][13] page, select a rule to open its details page. Under {{< ui >}}Exclude benign activity with suppression queries{{< /ui >}}, set the filtering logic for how the rule scans your environment.
 
-For example, you can exclude resources tagged with `env:staging` using the **This rule will not generate a misconfiguration if there is a match with any of the following suppression queries** function. You can also limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a misconfiguration if there is a match with any of the following queries** function.
+For example, you can exclude resources tagged with `env:staging` using the {{< ui >}}This rule will not generate a misconfiguration if there is a match with any of the following suppression queries{{< /ui >}} function. You can also limit the scope for a certain rule to resources tagged with `compliance:pci` using the {{< ui >}}Only generate a misconfiguration if there is a match with any of the following queries{{< /ui >}} function.
 
-After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
+After you customize a rule, click {{< ui >}}Update Rule{{< /ui >}} at the bottom of the page to apply your changes.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
 
@@ -69,7 +69,7 @@ Regular audits of all compliance rules are performed to maintain high fidelity s
 The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
-    - Signal side panel's **Rule Details > Playbook** section
+    - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - Misconfigurations side panel
     - [Rule editor][23] for that specific rule
 2. After the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.

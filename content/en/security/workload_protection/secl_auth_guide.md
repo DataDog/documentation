@@ -22,6 +22,7 @@ In summary, the Agent rule finds raw behavior and the detection rule turns it in
 
 <div class="alert alert-info">This guide describes how to create rule expressions manually, but Workload Protection also provides the <b>Assisted rule creator</b> wizard to walk you through creating the Agent and detections rules together. See <a href="/security/workload_protection/workload_security_rules/custom_rules/?tab=host#create-the-custom-agent-and-detection-rules-together">Create the custom Agent and detection rules together.</a></div>
 
+
 ### Agent expression syntax
 
 The standard format of a SECL expression is:
@@ -43,10 +44,10 @@ open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
 Here's a summary of the process:
 
 1. Go to Workload Protection [Policies][1].
-2. Click **New Policy** to create a policy, or select an existing policy from the list to open it.
-3. In the policy, click **Add Agent Rule**, and then click **Manual rule creator**.
-4. In **Define the agent expression**, enter your expression using the following steps.
-5. Select **Linux** or **Windows**. Most expression fields are OS-specific.
+2. Click {{< ui >}}New Policy{{< /ui >}} to create a policy, or select an existing policy from the list to open it.
+3. In the policy, click {{< ui >}}Add Agent Rule{{< /ui >}}, and then click {{< ui >}}Manual rule creator{{< /ui >}}.
+4. In {{< ui >}}Define the agent expression{{< /ui >}}, enter your expression using the following steps.
+5. Select {{< ui >}}Linux{{< /ui >}} or {{< ui >}}Windows{{< /ui >}}. Most expression fields are OS-specific.
 6. Choose a trigger (event type). Choose a trigger that aligns with the behavior you want to catch, but not everything that could happen.
    - Examples: `exec`, `open`, `connect`, `create`, `dns`, etc.
 7. Anchor the trigger on one or two stable fields. Example:
@@ -62,7 +63,7 @@ Here's a summary of the process:
 
 ### Test the rule
 
-To view Agent events that match the expression, view the rule details, and then click **View Events**. The [Agent Events explorer][2] opens and displays the Agent events that match the expression. In **Agent Events**, you can see the raw telemetry: every kernel/OS event that matched the SECL rule before suppression or aggregation.
+To view Agent events that match the expression, view the rule details, and then click {{< ui >}}View Events{{< /ui >}}. The [Agent Events explorer][2] opens and displays the Agent events that match the expression. In {{< ui >}}Agent Events{{< /ui >}}, you can see the raw telemetry: every kernel/OS event that matched the SECL rule before suppression or aggregation.
 
 When viewing raw Agent events, do the following:
 1. Confirm the rule is firing on the intended activity.

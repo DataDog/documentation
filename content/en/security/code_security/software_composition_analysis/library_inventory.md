@@ -13,7 +13,7 @@ This combined visibility helps you distinguish between theoretical dependencies 
 
 ## Static view
 
-The **Static** view lists all libraries referenced in your repositories as detected by **Static SCA**.
+The {{< ui >}}Static{{< /ui >}} view lists all libraries referenced in your repositories as detected by {{< ui >}}Static SCA{{< /ui >}}.
 
 Static SCA analyzes dependency files and source code to identify all declared third-party libraries, regardless of whether they are used at runtime. Use this view to:
 
@@ -26,7 +26,7 @@ Static data updates on every repository scan.
 
 ## Runtime view
 
-The **Runtime** view lists only the libraries actively used by your services in production or other monitored environments, as detected by **Runtime SCA**.
+The {{< ui >}}Runtime{{< /ui >}} view lists only the libraries actively used by your services in production or other monitored environments, as detected by {{< ui >}}Runtime SCA{{< /ui >}}.
 
 Runtime SCA observes loaded dependencies through the Datadog SDK, enabling you to:
 
@@ -47,10 +47,10 @@ The panel includes the following sections.
 
 Displays key information about the selected library and version, including:
 
-* **Security status** (count of Critical, High, Medium, Low vulnerabilities)  
-* **License type**  
-* **Version status** (older version, actively maintained, deprecated, etc.)  
-* **Popularity** and download statistics when available
+* {{< ui >}}Security status{{< /ui >}} (count of Critical, High, Medium, Low vulnerabilities)  
+* {{< ui >}}License type{{< /ui >}}  
+* {{< ui >}}Version status{{< /ui >}} (older version, actively maintained, deprecated, etc.)  
+* {{< ui >}}Popularity{{< /ui >}} and download statistics when available
 
 This section provides a snapshot of the security and maintenance posture of the dependency.
 
@@ -58,7 +58,7 @@ This section provides a snapshot of the security and maintenance posture of the 
 
 ### Repositories
 
-Shows all repositories where this library is referenced, as detected by **Static SCA**.
+Shows all repositories where this library is referenced, as detected by {{< ui >}}Static SCA{{< /ui >}}.
 
 For each repository, you can see:
 
@@ -74,7 +74,7 @@ Use this view to understand how widely the library is used across your codebase.
 
 ### Services
 
-Shows all services that load this library at runtime, as detected by **Runtime SCA**.
+Shows all services that load this library at runtime, as detected by {{< ui >}}Runtime SCA{{< /ui >}}.
 
 For each service, you can view:
 
@@ -107,9 +107,9 @@ The license table in this section is based on the **Choose a License Appendix**:
 
 It summarizes the license's:
 
-* **Permissions**  
-* **Conditions**  
-* **Limitations**
+* {{< ui >}}Permissions{{< /ui >}}  
+* {{< ui >}}Conditions{{< /ui >}}  
+* {{< ui >}}Limitations{{< /ui >}}
 
 Additionally, Datadog identifies **license risks**, including:
 
@@ -163,9 +163,9 @@ Datadog supports the following SBOM formats:
 
 To export an SBOM:
 
-1. Navigate to [**Code Security > Inventory > Libraries**][1].
+1. Navigate to [{{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Inventory{{< /ui >}} > {{< ui >}}Libraries{{< /ui >}}][1].
 1. (Optional) Apply filters to scope the export to a subset of libraries (for example, by repository, service, or environment).
-1. Click **Export SBOM** and choose **CycloneDX 1.6** or **SPDX 2.3**.
+1. Click {{< ui >}}Export SBOM{{< /ui >}} and choose {{< ui >}}CycloneDX 1.6{{< /ui >}} or {{< ui >}}SPDX 2.3{{< /ui >}}.
 1. Download the generated file.
 
 <div class="alert alert-info">The exported SBOM reflects the libraries currently visible in the inventory, including any active filters. Adjust your filters before exporting to scope the SBOM to the libraries you want to include.</div>
@@ -174,8 +174,8 @@ To export an SBOM:
 
 To get started with Library Inventory:
 
-1. Enable **Static SCA** to detect libraries in your repositories. See [static setup][2] to get started.
-2. Enable **Runtime SCA** to identify libraries actually used during execution. See [runtime setup][3] to get started.
+1. Enable {{< ui >}}Static SCA{{< /ui >}} to detect libraries in your repositories. See [static setup][2] to get started.
+2. Enable {{< ui >}}Runtime SCA{{< /ui >}} to identify libraries actually used during execution. See [runtime setup][3] to get started.
 3. Use both views together to understand both your full dependency footprint and your real runtime exposure.
 4. (Optional) [Export an SBOM](#export-a-software-bill-of-materials-sbom) of your libraries in CycloneDX 1.6 or SPDX 2.3 format.
 

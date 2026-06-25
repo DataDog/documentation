@@ -31,7 +31,7 @@ AI Guard protects against prompt injection, jailbreaking, and sensitive data exf
 - Exposure to untrusted data
 - Outbound communication
 
-AI Guard also detects sensitive data such as personally identifiable information (PII) and secrets in LLM inputs and outputs. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure. To see your AI agents and services mapped out, including how they interact with each other and which ones AI Guard is protecting, go to the [Discover][5] page.
+AI Guard also detects sensitive data such as personally identifiable information (PII) and secrets in LLM inputs and outputs. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure. To see your AI agents and services mapped out, including how they interact with each other and which ones AI Guard is protecting, go to the [{{< ui >}}Discover{{< /ui >}}][5] page.
 
 To quickly evaluate a conversation without any code or setup, use the [AI Guard Playground][4] to submit user input, assistant output, and tool calls, and see the evaluation result in real time.
 

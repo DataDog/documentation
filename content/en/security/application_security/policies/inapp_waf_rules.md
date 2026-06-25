@@ -45,7 +45,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## Custom In-App WAF rules
 
-Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **App and API Protection** -> **Policies** -> **In-App WAF** -> [**Custom Rules**][4].
+Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}} > [{{< ui >}}Custom Rules{{< /ui >}}][4].
 
 **Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests.
 
@@ -70,14 +70,14 @@ Suggested rules use cases include:
 
 To use a suggested rule, do one of the following:
 - Create a custom rule from a suggested rule:
-  1. In [Suggested Rules][5], select one or more rules and click **Create Selected Suggested Rules**.
-  2. In **Create suggested custom In-App WAF rules**, click **Create rules**. This creates custom In-App WAF rules to monitor the security activities of the rules you selected.
+  1. In [Suggested Rules][5], select one or more rules and click {{< ui >}}Create Selected Suggested Rules{{< /ui >}}.
+  2. In {{< ui >}}Create suggested custom In-App WAF rules{{< /ui >}}, click {{< ui >}}Create rules{{< /ui >}}. This creates custom In-App WAF rules to monitor the security activities of the rules you selected.
 - Modify a suggested rule to create a custom rule:
-  1. In [Suggested Rules][5], identify a rule you want to use and click **View suggested rule**.
-  2. In **Add a new Business Logic**, edit the rule as needed.
-  3. Click **Continue in In-App WAF**.
-  4. In **Define your custom rule**, make any further changes.
-  5. Click **Save Rule**.
+  1. In [Suggested Rules][5], identify a rule you want to use and click {{< ui >}}View suggested rule{{< /ui >}}.
+  2. In {{< ui >}}Add a new Business Logic{{< /ui >}}, edit the rule as needed.
+  3. Click {{< ui >}}Continue in In-App WAF{{< /ui >}}.
+  4. In {{< ui >}}Define your custom rule{{< /ui >}}, make any further changes.
+  5. Click {{< ui >}}Save Rule{{< /ui >}}.
 
 
 ## Configure an AAP In-App WAF rule
@@ -86,12 +86,12 @@ Blocking on a service is defined through the policy rules. Three Datadog default
 
 Services using a policy are visible directly in the policy management page.
 
-1. In Datadog, navigate to [Security > App and API Protection > Policies > In-App WAF][2].
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}}][2].
 
    {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
 
-2. Click on the three dots to the right of one of the policies, and select **Download Configuration of this Policy** to download the configuration file to your local machine.
-3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled AAP services.
+2. Click on the three dots to the right of one of the policies, and select {{< ui >}}Download Configuration of this Policy{{< /ui >}} to download the configuration file to your local machine.
+3. Optionally, select {{< ui >}}Apply this Policy to Services{{< /ui >}} to apply a default policy to one or more of your protection enabled AAP services.
 
    **Note:** A policy can be applied to one or more services, but a service can only contain one _policy_.
 

@@ -51,7 +51,7 @@ Attacker clustering is computed using the following request attributes:
 * HTTP request headers (for example, `accept-encoding`, `content-type`)
 * [Datadog attacker fingerprinting][2]
 
-When the attacker attributes are identified, they are displayed on the signal side panel and **Signals** page. Attacker attributes can be a combination of the attributes listed above.
+When the attacker attributes are identified, they are displayed on the signal side panel and {{< ui >}}Signals{{< /ui >}} page. Attacker attributes can be a combination of the attributes listed above.
 
 {{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an AAP signals with attacker attributes identified"  >}}
 
@@ -91,14 +91,14 @@ After an attacker cluster is identified, you can directly generate an In-App WAF
 
 To block a cluster:
 
-1. Open the **Attacker Explorer** and select the **Cluster** grouping.
+1. Open the {{< ui >}}Attacker Explorer{{< /ui >}} and select the {{< ui >}}Cluster{{< /ui >}} grouping.
 2. Click a cluster to open its side panel.
-3. Click **Create In-App WAF rule** in the cluster header. The In-App WAF custom rule form opens pre-filled with the generated conditions, one condition per blocking attribute, combined with AND logic.
+3. Click {{< ui >}}Create In-App WAF rule{{< /ui >}} in the cluster header. The In-App WAF custom rule form opens pre-filled with the generated conditions, one condition per blocking attribute, combined with AND logic.
 4. Review the conditions and adjust if needed, then save the rule.
 
-Alternatively, inside a security signal, you can click the **Create In-App WAF rule** icon on the cluster row in the clusters table.
+Alternatively, inside a security signal, you can click the {{< ui >}}Create In-App WAF rule{{< /ui >}} icon on the cluster row in the clusters table.
 
-If a matching blocking rule already exists for a cluster, the button changes to **View In-App WAF rule** and links directly to the existing rule.
+If a matching blocking rule already exists for a cluster, the button changes to {{< ui >}}View In-App WAF rule{{< /ui >}} and links directly to the existing rule.
 
 {{< img src="security/application_security/threats/block-cluster-button.png" alt="The attacker cluster side panel with the Create In-App WAF rule button highlighted" >}}
 

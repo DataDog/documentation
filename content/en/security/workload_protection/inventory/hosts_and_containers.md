@@ -26,13 +26,13 @@ The [Hosts and Containers][1] inventory supports several common DevSecOps use ca
 To identify hosts where runtime threat detection is not configured:
 
 1. In [Hosts and Containers][1], set the following facets to **false**:
-   - **Workload Protection Enabled**
-   - **Misconfigurations Enabled**
-   - **Hosts VM Enabled**
-   - **Containers VM Enabled**
+   - {{< ui >}}Workload Protection Enabled{{< /ui >}}
+   - {{< ui >}}Misconfigurations Enabled{{< /ui >}}
+   - {{< ui >}}Hosts VM Enabled{{< /ui >}}
+   - {{< ui >}}Containers VM Enabled{{< /ui >}}
    
    The hosts and containers missing one or more of these features are shown with an orange icon. This list flags coverage gaps that expose the workload to undetected process, file, or network-level threats.
-2. For remediation guidance, hover over the icon for a feature and click **Configure**.
+2. For remediation guidance, hover over the icon for a feature and click {{< ui >}}Configure{{< /ui >}}.
 
 <div class="alert alert-info">
 Filter by <b>Containers VM Enabled: true</b> to ensure scanning is also applied to container workloads running inside a VM context.
@@ -42,7 +42,7 @@ Filter by <b>Containers VM Enabled: true</b> to ensure scanning is also applied 
 
 To validate Agent health:
 
-1. In the **Agent Version** column, look for older versions identified with yellow labels.
+1. In the {{< ui >}}Agent Version{{< /ui >}} column, look for older versions identified with yellow labels.
    
    Yellow labels indicate versions that might not support all security features.
 2. Click a version label (for example, 7.69.1), and select **Filter by agent_version:[number]**. 
@@ -55,16 +55,16 @@ Hosts without CSM Misconfigurations enabled can't surface IAM, logging, or encry
 
 To check whether posture checks are enabled for a host:
 
-1. In [Hosts and Containers][1], set the **Misconfigurations Enabled** facet to **false**.
+1. In [Hosts and Containers][1], set the {{< ui >}}Misconfigurations Enabled{{< /ui >}} facet to **false**.
 
    The hosts and containers without CSM Misconfigurations enabled are indicated by an orange icon. 
-2. For remediation guidance, hover over the **CSM Misconfigurations** icon and click **Configure**.
+2. For remediation guidance, hover over the {{< ui >}}CSM Misconfigurations{{< /ui >}} icon and click {{< ui >}}Configure{{< /ui >}}.
 
 See Cloud Security Vulnerabilities [deployment methods][6].
 
 ### Cluster-level tracking
 
-The **Cluster Name** column links hosts to logical infrastructure boundaries like Kubernetes clusters. Filter on a cluster by clicking its name and selecting **Filter by cluster_name:[name]**.
+The {{< ui >}}Cluster Name{{< /ui >}} column links hosts to logical infrastructure boundaries like Kubernetes clusters. Filter on a cluster by clicking its name and selecting **Filter by cluster_name:[name]**.
 
 Filtering on a cluster confirms whether protections are applied uniformly. This ensures protections are applied consistently across environments and regions.
 
@@ -74,11 +74,11 @@ Filtering on a cluster confirms whether protections are applied uniformly. This 
 
 Typically, hosts missing critical features like **Workload Protection** or **Host/Container Vulnerability Scanning** are triaged first. 
 
-Hover over a feature icon and click **Configure** to see remediation steps for all feature gaps. This enables triage without context switching.
+Hover over a feature icon and click {{< ui >}}Configure{{< /ui >}} to see remediation steps for all feature gaps. This enables triage without context switching.
 
 ### Compliance evidence
 
-[Hosts and Containers][1] provides a live audit view for workload security posture. Filters such as **Workload Protection Enabled** and **Agent Version** demonstrate control coverage for frameworks such as SOC 2, PCI DSS, or FedRAMP.
+[Hosts and Containers][1] provides a live audit view for workload security posture. Filters such as {{< ui >}}Workload Protection Enabled{{< /ui >}} and {{< ui >}}Agent Version{{< /ui >}} demonstrate control coverage for frameworks such as SOC 2, PCI DSS, or FedRAMP.
 
 
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/hosts

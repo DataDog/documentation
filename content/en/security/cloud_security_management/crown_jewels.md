@@ -61,16 +61,16 @@ Every finding on the Crown Jewels list is tagged with `@risk.is_crown_jewel:true
 
 This propagation lets you use `@risk.is_crown_jewel:true` as a filter or facet in:
 
-- **Vulnerability Explorer** to focus remediation on findings tied to critical resources.
-- **Misconfiguration Explorer** to scope hardening work to the assets that matter most.
-- **Notifications** to route notifications differently for crown jewel assets.
-- **Findings Automation** to define custom remediation patterns for findings related to crown jewels.
+- {{< ui >}}Vulnerability Explorer{{< /ui >}} to focus remediation on findings tied to critical resources.
+- {{< ui >}}Misconfiguration Explorer{{< /ui >}} to scope hardening work to the assets that matter most.
+- {{< ui >}}Notifications{{< /ui >}} to route notifications differently for crown jewel assets.
+- {{< ui >}}Findings Automation{{< /ui >}} to define custom remediation patterns for findings related to crown jewels.
 
 You can combine the filter with other criteria; for example, you can filter the Vulnerability Explorer to `severity:critical` AND `@risk.is_crown_jewel:true`.
 
 ## Review and edit the list
 
-To view your Crown Jewels, go to **Security** > **Settings** > **Cloud Security** > [**Crown Jewels**][1]. Datadog automatically populates the list with entries showing:
+To view your Crown Jewels, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Cloud Security{{< /ui >}} > [{{< ui >}}Crown Jewels{{< /ui >}}][1]. Datadog automatically populates the list with entries showing:
 
 - The resource type and name.
 - The detection signal that triggered inclusion.
@@ -78,8 +78,8 @@ To view your Crown Jewels, go to **Security** > **Settings** > **Cloud Security*
 
 Treat the automatically generated list as a draft that you can curate so it reflects what is actually critical to your business. You can:
 
-- **Remove** entries that do not match your understanding of what is critical (for example, a service flagged because of a low-value URL string).
-- **Add** resources Datadog did not auto-detect but that you know are critical to your business.
+- {{< ui >}}Remove{{< /ui >}} entries that do not match your understanding of what is critical (for example, a service flagged because of a low-value URL string).
+- {{< ui >}}Add{{< /ui >}} resources Datadog did not auto-detect but that you know are critical to your business.
 
 ## Privacy and data handling
 

@@ -58,7 +58,7 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
 {{< /card-grid >}}
 
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
-To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
+To get started, go to the [{{< ui >}}Code Security{{< /ui >}} setup page][12] or see the [Setup documentation][9].
 
 ## Integrate into the development lifecycle
 
@@ -74,10 +74,10 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< /whatsnext >}}
 
 ## Search and filter results
-After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
+After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [{{< ui >}}Code Security Repositories{{< /ui >}} page][1]. Click on a repository to analyze {{< ui >}}Code Vulnerabilities{{< /ui >}} and {{< ui >}}Code Quality{{< /ui >}} results from Static Code Analysis.
 
-* The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
-* The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
+* The {{< ui >}}Code Vulnerabilities{{< /ui >}} tab contains the violations found by Datadog's rules in the [Security category][2].
+* The {{< ui >}}Code Quality{{< /ui >}} tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
 To filter your results, use the facets to the left of the list, or search. Results can be [filtered by service or team facets][13].
 
@@ -89,9 +89,9 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
-- **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
-- **Event**: JSON metadata regarding the violation.
+- {{< ui >}}Details{{< /ui >}}: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
+- {{< ui >}}Remediation{{< /ui >}}: One or more code fixes that can resolve the violation, with options for remediation.
+- {{< ui >}}Event{{< /ui >}}: JSON metadata regarding the violation.
 
 ### Filter out false positives
 For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
@@ -123,14 +123,14 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 If GitHub is your source code manager, you can push a code change to fix a SAST issue directly from Datadog in two ways.
 
 #### Open a pull request
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
+If your GitHub app's {{< ui >}}Pull Requests{{< /ui >}} permission is set to {{< ui >}}Read & Write{{< /ui >}}, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. View a specific SAST result in Code Security.
-2. Click **Fix Violation** in the side panel of the result.
-3. Select **Open a Pull Request**.
+2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
+3. Select {{< ui >}}Open a Pull Request{{< /ui >}}.
 4. Enter a pull request title and commit message.
-5. Click **Create PR**.
+5. Click {{< ui >}}Create PR{{< /ui >}}.
 
 #### Commit directly to the current branch
 You can also fix a vulnerability by committing directly to the branch the result was found on.
@@ -138,8 +138,8 @@ You can also fix a vulnerability by committing directly to the branch the result
 To commit a suggested fix:
 
 1. View a specific SAST result in Code Security.
-2. Click **Fix Violation** in the side panel of the result.
-3. Click **Commit to current branch**.
+2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
+3. Click {{< ui >}}Commit to current branch{{< /ui >}}.
 
 ## Report false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.

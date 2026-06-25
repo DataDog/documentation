@@ -38,12 +38,12 @@ If you use a pre-made query, the technical details automatically populate in the
 
 Whether you're using an automatically generated query or creating one yourself, you can use the query builder to refine your results.
 
-1. Under **Build your own query**, beside **Search for**, select a resource type from the list.
-1. (Optional) To add additional details about the resource type you selected, click **+**, then click **Where**. In the field that appears, select a tag and enter a value for that tag to filter by.
-1. (Optional) To filter by an additional resource type, click **+**, then click **That**. In the field that appears, select a relationship you want the additional resource type to have to the one above. If another **Where** field appears, specify additional tag values for this resource type.
-1. Add additional resource types and tag values as required. You can also click the **Delete** icon to remove a condition, or click **Clear query** to start over.
+1. Under {{< ui >}}Build your own query{{< /ui >}}, beside {{< ui >}}Search for{{< /ui >}}, select a resource type from the list.
+1. (Optional) To add additional details about the resource type you selected, click {{< ui >}}+{{< /ui >}}, then click {{< ui >}}Where{{< /ui >}}. In the field that appears, select a tag and enter a value for that tag to filter by.
+1. (Optional) To filter by an additional resource type, click {{< ui >}}+{{< /ui >}}, then click {{< ui >}}That{{< /ui >}}. In the field that appears, select a relationship you want the additional resource type to have to the one above. If another {{< ui >}}Where{{< /ui >}} field appears, specify additional tag values for this resource type.
+1. Add additional resource types and tag values as required. You can also click the {{< ui >}}Delete{{< /ui >}} icon to remove a condition, or click {{< ui >}}Clear query{{< /ui >}} to start over.
 
-As you modify the query, Security Graph automatically updates to show relevant resources. Beside **View**, you can click **Graph** to view the resources in a relationship graph, or click **Table** to see them in a table instead.
+As you modify the query, Security Graph automatically updates to show relevant resources. Beside {{< ui >}}View{{< /ui >}}, you can click {{< ui >}}Graph{{< /ui >}} to view the resources in a relationship graph, or click {{< ui >}}Table{{< /ui >}} to see them in a table instead.
 
 ## Learn more about a resource
 

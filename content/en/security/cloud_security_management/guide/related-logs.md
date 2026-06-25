@@ -31,21 +31,21 @@ Set up [Azure Activity Logs][5].
 
 ## View related logs
 
-1. On the **Findings** page, in the [Misconfigurations explorer][2], open a misconfiguration for a supported resource type.
-1. Click the **Related Logs** tab. Datadog queries your cloud logs for events related to the cloud resource.
+1. On the {{< ui >}}Findings{{< /ui >}} page, in the [Misconfigurations explorer][2], open a misconfiguration for a supported resource type.
+1. Click the {{< ui >}}Related Logs{{< /ui >}} tab. Datadog queries your cloud logs for events related to the cloud resource.
 
 ### Search through a larger time frame
 
 By default, Related Logs searches the last two weeks of related cloud logs. To extend the search to a larger time frame:
 
-1. While viewing a misconfiguration's related logs, click **View All Related Logs**. The search used to populate the list opens in Log Explorer.
+1. While viewing a misconfiguration's related logs, click {{< ui >}}View All Related Logs{{< /ui >}}. The search used to populate the list opens in Log Explorer.
 1. In the upper-right corner, change the timeframe of the search.
 
 **Note**: Related Logs only display cloud logs within your retention period. To store logs for an extended period of time in a cost-effective manner, Datadog recommends using [Flex Logs][3].
 
 ### Search through Flex Logs
 
-If your organization uses Flex Logs, toggle **Include Flex logs** in the **Related Logs** tab to display related audit logs stored as Flex Logs.
+If your organization uses Flex Logs, toggle {{< ui >}}Include Flex logs{{< /ui >}} in the {{< ui >}}Related Logs{{< /ui >}} tab to display related audit logs stored as Flex Logs.
 
 ## Sample generated queries
 

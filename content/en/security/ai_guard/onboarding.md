@@ -49,7 +49,7 @@ To create monitors for alerting at certain thresholds, you can use [Datadog Moni
 
 ### APM monitor
 
-Follow the instructions to create a new [APM monitor][10], with its scope set to **Trace Analytics**.
+Follow the instructions to create a new [APM monitor][10], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
 
 - To monitor evaluation traffic, use the query `@ai_guard.action: (DENY OR ABORT)`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.

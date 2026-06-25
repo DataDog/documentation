@@ -25,7 +25,7 @@ AAP security signals are created when Datadog detects a threat based on a detect
 The Signals Explorer displays the following columns.
 
 Severity
-: There are five severity states: **Info**, **Low**, **Medium**, **High**, and **Critical**. **High** and **Critical** indicate a major impact to service availability or active compromise.
+: There are five severity states: {{< ui >}}Info{{< /ui >}}, {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, {{< ui >}}High{{< /ui >}}, and {{< ui >}}Critical{{< /ui >}}. {{< ui >}}High{{< /ui >}} and {{< ui >}}Critical{{< /ui >}} indicate a major impact to service availability or active compromise.
 
 Title
 : The name of the signal. Titles might update when new data is correlated, altering the assessed impact of the attack.
@@ -34,28 +34,28 @@ Service/Env
 : The service and environment identified in the attack. Hover over the service name to link to the service page and code repo, and to see who is on-call for the service.
 
 Entities
-: The attackers and the victims of an attack. Attackers are identified by IP addresses. Victims are identified as authenticated users. Hover over the IP list and then click an IP to see details such as **Threat Intelligence** and **Security Activity**.
+: The attackers and the victims of an attack. Attackers are identified by IP addresses. Victims are identified as authenticated users. Hover over the IP list and then click an IP to see details such as {{< ui >}}Threat Intelligence{{< /ui >}} and {{< ui >}}Security Activity{{< /ui >}}.
 
 Triage State
-: You can assign a responder and set a triage state for the signal. Available states are **Open**, **Under Review**, and **Archived**.
+: You can assign a responder and set a triage state for the signal. Available states are {{< ui >}}Open{{< /ui >}}, {{< ui >}}Under Review{{< /ui >}}, and {{< ui >}}Archived{{< /ui >}}.
 
 Creation Date
 : The date when the signal was first created. Signals are sorted by date by default.
 
 ## Filter security signals
 
-To filter the security signals in the [Signals Explorer][2], use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the **Signal State** facet on the facet panel.
+To filter the security signals in the [Signals Explorer][2], use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the {{< ui >}}Signal State{{< /ui >}} facet on the facet panel.
 
 ## Triage a signal
 
 You can triage a signal by assigning it to a user for further investigation. The assigned user can then track their review by updating the signal's status.
 
-1. On the [Signals Explorer][2] page, click the user profile icon in the **Triage State** column.
+1. On the [Signals Explorer][2] page, click the user profile icon in the {{< ui >}}Triage State{{< /ui >}} column.
 2. Select a user to assign the signal.
-3. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is **Open**.
-    - **Open**: The signal has not yet been resolved.
-    - **Under Review**: The signal is actively being investigated. From the **Under Review** state, you can move the signal to **Archived** or **Open** as needed.
-    - **Archived**: The detection that caused the signal has been resolved. From the **Archived** state, you can move the signal back to **Open** if it's within 30 days of when the signal was originally detected.
+3. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is {{< ui >}}Open{{< /ui >}}.
+    - {{< ui >}}Open{{< /ui >}}: The signal has not yet been resolved.
+    - {{< ui >}}Under Review{{< /ui >}}: The signal is actively being investigated. From the {{< ui >}}Under Review{{< /ui >}} state, you can move the signal to {{< ui >}}Archived{{< /ui >}} or {{< ui >}}Open{{< /ui >}} as needed.
+    - {{< ui >}}Archived{{< /ui >}}: The detection that caused the signal has been resolved. From the {{< ui >}}Archived{{< /ui >}} state, you can move the signal back to {{< ui >}}Open{{< /ui >}} if it's within 30 days of when the signal was originally detected.
 
 **Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for App and API Protection.
 
@@ -71,10 +71,10 @@ Declare an incident if:
 If you don't know whether you should declare an incident, notify other users and increase severity appropriately.
 
 1. On the [Signals Explorer][2] page, select a security signal to open its details panel.
-2. On the signal panel, click **Declare Incident** or select the dropdown arrow and select **Add to an existing incident**.
-3. When you declare a new incident, in the **Declare Incident** settings, configure the incident by specifying details such as the severity level and incident commander.
+2. On the signal panel, click {{< ui >}}Declare Incident{{< /ui >}} or select the dropdown arrow and select {{< ui >}}Add to an existing incident{{< /ui >}}.
+3. When you declare a new incident, in the {{< ui >}}Declare Incident{{< /ui >}} settings, configure the incident by specifying details such as the severity level and incident commander.
    1. Estimate impact. Severity levels go from SEV-1 (critical) to SEV-5 (minor impact). When in doubt, always choose the higher severity.
-4. Click **Declare Incident**.
+4. Click {{< ui >}}Declare Incident{{< /ui >}}.
 
 ## Run a workflow
 
@@ -82,46 +82,46 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 
 1. Make sure the workflow you want to run has a security trigger.
 2. On the [Signals Explorer][2] page, open a security signal.
-3. In the **Respond** section, click **Run Workflow**.
-4. In **Run a workflow**, select the workflow you want to run or click **New Workflow**.
+3. In the {{< ui >}}Respond{{< /ui >}} section, click {{< ui >}}Run Workflow{{< /ui >}}.
+4. In {{< ui >}}Run a workflow{{< /ui >}}, select the workflow you want to run or click {{< ui >}}New Workflow{{< /ui >}}.
    - Depending on the workflow you select, you might be required to enter additional input parameters.
-   - If you selected **New Workflow**, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5].
-5. Click **Run**.
+   - If you selected {{< ui >}}New Workflow{{< /ui >}}, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5].
+5. Click {{< ui >}}Run{{< /ui >}}.
 
 ## Review and remediate
 
 1. On the [Signals Explorer][2] page, open a security signal.
-2. In the signal details, view each of the sections, such as **What Happened**, **Activity Summary**, and **Detection Rule**.
-3. Review the **Next Steps** and take action:
-    -  Click **Block all Attacking IPs** (by specific duration or permanently).
-    -  Click **Automated Attacker Blocking** (based on [detection][10] rules). This setting requires the App and API Protection **Protect Write** permission.
-    -  Click **[Block with Edge WAF][11]**.
+2. In the signal details, view each of the sections, such as {{< ui >}}What Happened{{< /ui >}}, {{< ui >}}Activity Summary{{< /ui >}}, and {{< ui >}}Detection Rule{{< /ui >}}.
+3. Review the {{< ui >}}Next Steps{{< /ui >}} and take action:
+    -  Click {{< ui >}}Block all Attacking IPs{{< /ui >}} (by specific duration or permanently).
+    -  Click {{< ui >}}Automated Attacker Blocking{{< /ui >}} (based on [detection][10] rules). This setting requires the App and API Protection **Protect Write** permission.
+    -  Click [{{< ui >}}Block with Edge WAF{{< /ui >}}][11].
 
 ## Bulk actions
 
-When you select one or more signals, you can use **Bulk Actions** to perform the following.
+When you select one or more signals, you can use {{< ui >}}Bulk Actions{{< /ui >}} to perform the following.
 
 ### Set state
 
-Set the triage state to **Open**, **Under Review**, or **Archived**.
+Set the triage state to {{< ui >}}Open{{< /ui >}}, {{< ui >}}Under Review{{< /ui >}}, or {{< ui >}}Archived{{< /ui >}}.
 
 ### Assign the signal to users
 
-Select **Assign selection** and then select the user(s) to assign to the signal.
+Select {{< ui >}}Assign selection{{< /ui >}} and then select the user(s) to assign to the signal.
 
-Select **Remove all assignments** to reset the signal assignment to none.
+Select {{< ui >}}Remove all assignments{{< /ui >}} to reset the signal assignment to none.
 
 ### Case management
 
 Datadog [Case Management][6] offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations.
 
 1. On the [Signals Explorer][2] page, select a security signal.
-2. In **Bulk Actions**, select **Create a case**.
-3. Select **Create a case** or **Add to an existing case** to add the signal to an existing case.
+2. In {{< ui >}}Bulk Actions{{< /ui >}}, select {{< ui >}}Create a case{{< /ui >}}.
+3. Select {{< ui >}}Create a case{{< /ui >}} or {{< ui >}}Add to an existing case{{< /ui >}} to add the signal to an existing case.
 4. Enter a title and optional description.
-5. Click **Create Case**.
+5. Click {{< ui >}}Create Case{{< /ui >}}.
 
-When you click **Create Case**, you are directed to Case Management and the project you selected.
+When you click {{< ui >}}Create Case{{< /ui >}}, you are directed to Case Management and the project you selected.
 
 ## Saved views
 
@@ -138,11 +138,11 @@ A view contains the explorer's current selections for:
 - Displayed facets
 - Aggregate by detection rule
 
-1. To save a view, configure the explorer to display the view you want and then click **Save**.
+1. To save a view, configure the explorer to display the view you want and then click {{< ui >}}Save{{< /ui >}}.
 2. Enter a name for the view, and then select the teams you want to share the view with.
-3. Click **Save**.
+3. Click {{< ui >}}Save{{< /ui >}}.
 
-To see all of the saved views, click **Views** next to the **Signals Explorer** page title.
+To see all of the saved views, click {{< ui >}}Views{{< /ui >}} next to the {{< ui >}}Signals Explorer{{< /ui >}} page title.
 
 ## Further Reading
 

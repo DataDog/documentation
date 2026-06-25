@@ -39,7 +39,7 @@ Both can be set up independently, but it is recommended to first set up the conv
 
 ## Convert AWS WAF logs to traces
 
-First, **enable** the conversion of logs to traces on the [Settings page][4].
+First, **enable** the conversion of logs to traces on the [{{< ui >}}Settings{{< /ui >}} page][4].
 
 Then, ensure the web ACLs table contains request metrics as well as logs and traces.
 
@@ -117,7 +117,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
 {{% /tab %}}
 {{< /tabs >}}
 
-After setup is complete, click **Block New Attackers** on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
+After setup is complete, click {{< ui >}}Block New Attackers{{< /ui >}} on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
 
 [1]: /integrations/amazon-web-services/
 [2]: /integrations/amazon_waf/

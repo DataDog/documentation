@@ -12,10 +12,10 @@ further_reading:
 ---
 
 To export the list of misconfigurations from the [Misconfigurations explorer][1] as a CSV:
-1. Beside **Group by**, click **None**.
-1. Click **Download as CSV**.
+1. Beside {{< ui >}}Group by{{< /ui >}}, click {{< ui >}}None{{< /ui >}}.
+1. Click {{< ui >}}Download as CSV{{< /ui >}}.
 1. Select the maximum number of misconfigurations to export. You can export up to 50,000 misconfigurations.
-1. Click **Download as CSV**.
+1. Click {{< ui >}}Download as CSV{{< /ui >}}.
 
 {{< img src="security/cspm/findings/export-csv.png" alt="The Export Misconfigurations as CSV dialog box with option to specify the maximum number of misconfigurations to export" style="width:65%;">}}
 

@@ -29,10 +29,10 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
 
 ## Create a ticket creation rule
 
-1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Create Ticket**. The Create a New Rule page opens.
-1. Under **Rule name**, enter a descriptive name for the rule; for example, "Critical vulnerabilities for engineering team".
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [Findings Automation][2]. Click {{< ui >}}Add a New Rule{{< /ui >}}, then select {{< ui >}}Create Ticket{{< /ui >}}. The Create a New Rule page opens.
+1. Under {{< ui >}}Rule name{{< /ui >}}, enter a descriptive name for the rule; for example, "Critical vulnerabilities for engineering team".
 1. Add your rule criteria into the following fields:
-    - **Any of these types**: The types of findings that the rule should check for. Available types include:
+    - {{< ui >}}Any of these types{{< /ui >}}: The types of findings that the rule should check for. Available types include:
       - Runtime Code Vulnerability
       - Static Code Vulnerability
       - Library Vulnerability
@@ -44,22 +44,22 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
       - Attack Path
       - Identity Risk
       - API Security
-    - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. To add severity criteria to the rule, click **Add Severity**.
+    - {{< ui >}}Any of these tags or attributes{{< /ui >}}: The resource tags or attributes that must match for the rule to apply.
+1. To add severity criteria to the rule, click {{< ui >}}Add Severity{{< /ui >}}.
 1. Select the ticketing system and configure the ticket destination:
-   - **Jira**
-     - **Jira Account**: Select the Atlassian instance to use.
-     - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
-     - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
-     - **Assignee** (optional): Specify a user to assign automatically created tickets to.
-     - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-     - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
-   - **Case Management**
-     - **Case Management Project**: Select an existing Case Management project, or create one.
-     - **Assignee** (optional): Specify a user to assign automatically created cases to.
-1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
-1. To test the rule before saving, click **Test Rule**, select a matching finding, and click **Run Test**. After the test completes, you can view the created ticket or detach the test ticket from the finding.
-1. Click **Save**. The rule applies to new findings only. It can take up to a few minutes after a finding is detected to create the corresponding ticket.
+   - {{< ui >}}Jira{{< /ui >}}
+     - {{< ui >}}Jira Account{{< /ui >}}: Select the Atlassian instance to use.
+     - {{< ui >}}Space{{< /ui >}}: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+     - {{< ui >}}Ticket Type{{< /ui >}}: Select the type of Jira issue to create, for example, {{< ui >}}Task{{< /ui >}}.
+     - {{< ui >}}Assignee{{< /ui >}} (optional): Specify a user to assign automatically created tickets to.
+     - To add more fields to the Jira ticket Datadog creates, use {{< ui >}}Add Optional Field{{< /ui >}}.
+     - Expand {{< ui >}}Data Sync Settings{{< /ui >}} to review or update the linked Case Management project and bidirectional sync configuration.
+   - {{< ui >}}Case Management{{< /ui >}}
+     - {{< ui >}}Case Management Project{{< /ui >}}: Select an existing Case Management project, or create one.
+     - {{< ui >}}Assignee{{< /ui >}} (optional): Specify a user to assign automatically created cases to.
+1. Under {{< ui >}}Rate limit{{< /ui >}}, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
+1. To test the rule before saving, click {{< ui >}}Test Rule{{< /ui >}}, select a matching finding, and click {{< ui >}}Run Test{{< /ui >}}. After the test completes, you can view the created ticket or detach the test ticket from the finding.
+1. Click {{< ui >}}Save{{< /ui >}}. The rule applies to new findings only. It can take up to a few minutes after a finding is detected to create the corresponding ticket.
 
 **Note**: Ticket creation rules only create tickets for new findings. Datadog does not create retroactive tickets for existing findings when you create a rule.
 

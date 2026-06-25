@@ -86,10 +86,10 @@ Optionally, sampling rates can be set between 10% and 99% for each product. This
 
 For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
 
-- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
-- **Partially redact**: Replace a specific portion of all matching values.
-- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
-- **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
+- **{{< ui >}}Redact{{< /ui >}}**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- **{{< ui >}}Partially redact{{< /ui >}}**: Replace a specific portion of all matching values.
+- **{{< ui >}}Hash{{< /ui >}}**: Replace the entire matched data with a non-reversible unique identifier.
+- **{{< ui >}}Mask{{< /ui >}}** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
 
 **Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
@@ -116,9 +116,9 @@ Agent Observability scanning uses a managed configuration model that differs fro
 
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
-- **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
-- **Partially redact**: Replace a specific portion of all matching values.
-- **Hash**: Replace the entire matched data with a non-reversible unique identifier.
+- **{{< ui >}}Redact{{< /ui >}}**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- **{{< ui >}}Partially redact{{< /ui >}}**: Replace a specific portion of all matching values.
+- **{{< ui >}}Hash{{< /ui >}}**: Replace the entire matched data with a non-reversible unique identifier.
 
 To configure scanning for Agent Observability data, navigate to the [Agent Observability Settings page][18] in Sensitive Data Scanner settings. For more information about Agent Observability, see the [Agent Observability documentation][20].
 
@@ -166,7 +166,7 @@ See [Investigate Sensitive Data Findings][14] for more information on triaging s
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 

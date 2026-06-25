@@ -29,14 +29,14 @@ You can create and deploy different custom policies containing rules you want to
 ### Create a policy
 
 1. Go to [Policies][3].
-2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
-3. Enter a name for the policy and click **Create**.
+2. Click {{< ui >}}New Policy{{< /ui >}}. You can also open an existing policy, click {{< ui >}}Actions{{< /ui >}}, and clone it.
+3. Enter a name for the policy and click {{< ui >}}Create{{< /ui >}}.
    The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
-5. In **New Rule**, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
-6. Click **Edit** next to **Deployed on 0 agents**. 
+5. In {{< ui >}}New Rule{{< /ui >}}, add custom Agent rules to the policy. For details, see [Create the custom Agent and detection rules together][14].
+6. Click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Deployed on 0 agents{{< /ui >}}. 
 7. Add tags to the policy to target specific infrastructure.
-8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm.
+8. To deploy the policy, toggle the switch next to {{< ui >}}Policy is disabled{{< /ui >}} and confirm.
 
 ### Pin a Datadog-managed policy to its current version
 
@@ -50,9 +50,9 @@ To pin a policy, do the following:
 
 1. Go to [Policies][3].
 2. Click a Datadog-managed policy.
-3. In **Version**, click the pin option.
+3. In {{< ui >}}Version{{< /ui >}}, click the pin option.
    If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][19].
-4. Click **Pin**. To unpin the policy version, click the pin option again.
+4. Click {{< ui >}}Pin{{< /ui >}}. To unpin the policy version, click the pin option again.
 
 ### Conflicting rules
 
@@ -65,8 +65,8 @@ When two policies deployed to the same host contain the same rule with a differe
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
 1. Go to [Agent Configuration][3].
-2. Open a policy and click **Edit**.
-3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
+2. Open a policy and click {{< ui >}}Edit{{< /ui >}}.
+3.  Enter tags and click {{< ui >}}Apply{{< /ui >}}. If the policy is enabled, the policy is applied to the tag targets.
 
 When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agents. For example, `Tags match 144 agents`. 
 
@@ -83,8 +83,8 @@ For more information, see [Workload Protection Detection Rules][7].
 
 You can create custom rules using these methods:
 
-- **Simple:** Use the **Assisted rule creator** to create the custom Agent and detection rules together.
-  - For steps on using the **Assisted rule creator**, see [Create the custom Agent and detection rules together][1].
+- **Simple:** Use the {{< ui >}}Assisted rule creator{{< /ui >}} to create the custom Agent and detection rules together.
+  - For steps on using the {{< ui >}}Assisted rule creator{{< /ui >}}, see [Create the custom Agent and detection rules together][1].
 - **Advanced:**  Create custom Agent and detection rules individually by defining their threat detection expressions. 
   - For steps on this method, see [Create a custom agent rule][2] and create a custom detection rule.
 
@@ -92,7 +92,7 @@ You can create custom rules using these methods:
 
 When you create an Agent configuration policy it contains the default Agent rules only. You can add custom Agent rules to the policy to apply specific rules to specific Agents.
 
-When you add an Agent configuration policy you can use the **Assisted rule creator** option to create the Agent and dependent detection rules together. This method ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than creating the Agent and detection rules separately and then referencing the Agent rules in the detection rules.
+When you add an Agent configuration policy you can use the {{< ui >}}Assisted rule creator{{< /ui >}} option to create the Agent and dependent detection rules together. This method ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than creating the Agent and detection rules separately and then referencing the Agent rules in the detection rules.
 
 As you define the rules using this tool, the threat expressions generated for these rules are displayed in the tool.
 
@@ -100,19 +100,19 @@ To use the Assisted rule creator:
 
 1. Go to [Agent Configuration][3].
 2. Create or open a policy.
-3. In **Add Agent Rule**, select **Assisted rule creator**.
+3. In {{< ui >}}Add Agent Rule{{< /ui >}}, select {{< ui >}}Assisted rule creator{{< /ui >}}.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
-   - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
-   - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
+   - To detect nonstandard and suspicious changes to files, select {{< ui >}}File integrity monitoring (FIM){{< /ui >}}.
+   - To track and analyze system software processes for malicious behavior or policy violations, select {{< ui >}}Process activity monitoring{{< /ui >}}.
    - Enter the file/process names or paths to monitor. 
 5. Specify more conditions. Enter any arguments to add to the [threat rule expression][16]. For example, the argument `foo` is added as `process.argv in ["foo"]`.
 6. Set severity and notification lists. 
    - Select the severity for the signal generated when this threat is detected. 
    - Select notification lists to notify when a signal is generated.
 7. Add the rule name and description.
-8. Select **Create _N_ Rules**.
-9. In **Generate Rules**, select **Confirm**. The rules are generated.
-10. Select **Finish**. The policy displays the new rules.
+8. Select {{< ui >}}Create _N_ Rules{{< /ui >}}.
+9. In {{< ui >}}Generate Rules{{< /ui >}}, select {{< ui >}}Confirm{{< /ui >}}. The rules are generated.
+10. Select {{< ui >}}Finish{{< /ui >}}. The policy displays the new rules.
 
 ## Create a custom Agent rule
 
@@ -120,10 +120,10 @@ You can create a custom Agent rule and deploy it as part of a new Agent policy. 
 
 1. Go to [Agent Configuration][3].
 2. Create or open a policy.
-3. In **Actions**, select **Manual rule creator**.
+3. In {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Manual rule creator{{< /ui >}}.
 4. Add a name and description for the rule.
-5. In **Expression**, define the Agent expression using [Datadog Security Language (SECL) syntax][16].
-6. Click **Create Agent Rule**. This automatically navigates you back to the policy page.
+5. In {{< ui >}}Expression{{< /ui >}}, define the Agent expression using [Datadog Security Language (SECL) syntax][16].
+6. Click {{< ui >}}Create Agent Rule{{< /ui >}}. This automatically navigates you back to the policy page.
 
 After you create a custom Agent rule, the change is saved along with other pending rule updates. To apply the change to your environment, deploy the updated custom policy to the Agent.
 
@@ -131,17 +131,17 @@ After you create a custom Agent rule, the change is saved along with other pendi
 
 To perform remote configuration, you use the Datadog UI to apply policies to infrastructure. When you enable a policy, it is applied to the infrastructure identified by the policy's tags.
 
-1. On the **Agent Configuration** page, hover over a policy and click **Apply Tags & Deploy Policy**. You can also open a policy and click **Apply Tags & Deploy Policy**.
+1. On the {{< ui >}}Agent Configuration{{< /ui >}} page, hover over a policy and click {{< ui >}}Apply Tags & Deploy Policy{{< /ui >}}. You can also open a policy and click {{< ui >}}Apply Tags & Deploy Policy{{< /ui >}}.
 2. Add tags to identify the target infrastructure.
-3. Select **Enabled**.
-4. Click **Apply**. The policy is applied to all infrastructure targeted by the policy tags.
+3. Select {{< ui >}}Enabled{{< /ui >}}.
+4. Click {{< ui >}}Apply{{< /ui >}}. The policy is applied to all infrastructure targeted by the policy tags.
 
 ### Manual deployment
 
 To perform manual deployment, you create the policy and its rules in the Datadog UI, download it, and then upload it to the Agent(s) where you want it applied.
 
-1. On the **Agent Configuration** page, open a policy.
-2. In Actions, select **Download Policy**.
+1. On the {{< ui >}}Agent Configuration{{< /ui >}} page, open a policy.
+2. In Actions, select {{< ui >}}Download Policy{{< /ui >}}.
 
 Next, use the following instructions to upload the policy file to each host.
 
@@ -193,10 +193,10 @@ You can use Remote Configuration in the Datadog UI to automatically deploy the c
 
 To enable a policy using Remote Configuration in the Datadog UI, do the following:
 
-1. On [Agent Configuration][3], hover over a policy and click **Apply Tags & Deploy Policy**. You can also open a policy and click **Apply Tags & Deploy Policy**.
+1. On [Agent Configuration][3], hover over a policy and click {{< ui >}}Apply Tags & Deploy Policy{{< /ui >}}. You can also open a policy and click {{< ui >}}Apply Tags & Deploy Policy{{< /ui >}}.
 2. Add tags to identify the target infrastructure.
-3. Select **Enabled**.
-4. Click **Apply**. The policy is applied to all infrastructure targeted by the policy tags.
+3. Select {{< ui >}}Enabled{{< /ui >}}.
+4. Click {{< ui >}}Apply{{< /ui >}}. The policy is applied to all infrastructure targeted by the policy tags.
 
 If you disable a policy, its rules are no longer applied to the infrastructure identified by its tags.
 
@@ -204,18 +204,18 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 
 ## Create a custom detection rule
 
-After you upload the new default policy file to the Agent, navigate to the [**Threat Detection Rules**][3] page.
+After you upload the new default policy file to the Agent, navigate to the [{{< ui >}}Threat Detection Rules{{< /ui >}}][3] page.
 
-1. On [Agent Configuration][3], select **New Rule**, and then select **Manual rule creator**.
+1. On [Agent Configuration][3], select {{< ui >}}New Rule{{< /ui >}}, and then select {{< ui >}}Manual rule creator{{< /ui >}}.
 2. **Select a rule type:**
-   1. In **Detection rule types**, select **Workload Security**. 
-   2. Select a detection method such as **Threshold** or **New Value**.
+   1. In {{< ui >}}Detection rule types{{< /ui >}}, select {{< ui >}}Workload Security{{< /ui >}}. 
+   2. Select a detection method such as {{< ui >}}Threshold{{< /ui >}} or {{< ui >}}New Value{{< /ui >}}.
 3. **Define search queries:**
    1. Configure a new Workload Protection rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
       {{< img src="security/cws/workload_security_rules/define_runtime_expression2.png" alt="Adding a rule to the search queries field" >}}  
     
-   2. Enter a query so that a trigger is only generated when a value is met. You can also enter suppression queries in the **Suppression Rules**, so that a trigger is not generated when the specified values are met.
+   2. Enter a query so that a trigger is only generated when a value is met. You can also enter suppression queries in the {{< ui >}}Suppression Rules{{< /ui >}}, so that a trigger is not generated when the specified values are met.
 4. **Set rule cases:**
    1. Set a [rule case][9] for the trigger and severity.
    2. Define the logic for when this rule triggers a security signal. For example, `a>0` means a security signal triggers as long as the rule condition set in the search query is met at least once in the sliding time window.
@@ -229,12 +229,12 @@ Datadog recommends including a remediation [runbook][10] in the body. As noted i
 
 ## Disable default Agent rules
 
-1. To disable an Agent rule, navigate to the [**Agent Configuration**][6] page and select the policy using the rule.
+1. To disable an Agent rule, navigate to the [{{< ui >}}Agent Configuration{{< /ui >}}][6] page and select the policy using the rule.
 2. In the policy, open the rule.
-3. Next to the rule's title, click **Monitoring**, and then select **Disable Rule**.
-4. Click **Save Changes**.
+3. Next to the rule's title, click {{< ui >}}Monitoring{{< /ui >}}, and then select {{< ui >}}Disable Rule{{< /ui >}}.
+4. Click {{< ui >}}Save Changes{{< /ui >}}.
 
-You can also disable a rule by setting the **Then...** section of a rule to **Do Nothing**.
+You can also disable a rule by setting the {{< ui >}}Then...{{< /ui >}} section of a rule to {{< ui >}}Do Nothing{{< /ui >}}.
 
 [1]:#create-the-custom-agent-and-detection-rules-together
 [2]:#create-a-custom-agent-rule

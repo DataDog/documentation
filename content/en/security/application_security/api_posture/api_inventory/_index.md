@@ -13,8 +13,8 @@ further_reading:
 
 Inventory consists of two explorers:
 
-- **[API Endpoints][2]**: The API Endpoints explorer catalogs your individual endpoints, surfacing shadow APIs (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan APIs (documented endpoints without traffic), and helps you prioritize the endpoints most at risk.
-- **[Services][3]**: The Services explorer aggregates findings, vulnerabilities, and runtime signals by service, so you can assess each service's risk and security coverage.
+- [{{< ui >}}API Endpoints{{< /ui >}}][2]: The API Endpoints explorer catalogs your individual endpoints, surfacing shadow APIs (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan APIs (documented endpoints without traffic), and helps you prioritize the endpoints most at risk.
+- [{{< ui >}}Services{{< /ui >}}][3]: The Services explorer aggregates findings, vulnerabilities, and runtime signals by service, so you can assess each service's risk and security coverage.
 
 To detect and respond to weaknesses, attacks, or misconfigurations on these endpoints, use [API Findings][4]. In the API Endpoints explorer, each row displays a findings chip that opens the related finding in API Findings.
 

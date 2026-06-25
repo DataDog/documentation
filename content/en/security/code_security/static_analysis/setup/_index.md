@@ -18,7 +18,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SAST in-app, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][1].
 
 ## Select where to run Static Code Analysis scans
 ### Scan with Datadog-hosted scanning
@@ -28,7 +28,7 @@ You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infras
 - [GitLab.com and GitLab Self-Managed][20]
 - [Azure DevOps][19]
 
-To get started, navigate to the [**Code Security** page][1].
+To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -52,9 +52,9 @@ Configure a GitHub App with the [GitHub integration tile][1] and set up the [sou
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
-- `Content: Read`, which allows you to see code snippets displayed in Datadog
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][3], as well as open pull requests to [fix vulnerabilities][4]
-- `Checks: Read & Write`, which allows you to create checks on SAST violations to block pull requests
+- {{< ui >}}Content: Read{{< /ui >}}, which allows you to see code snippets displayed in Datadog
+- {{< ui >}}Pull Request: Read & Write{{< /ui >}}, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][3], as well as open pull requests to [fix vulnerabilities][4]
+- {{< ui >}}Checks: Read & Write{{< /ui >}}, which allows you to create checks on SAST violations to block pull requests
 
 [1]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [2]: /integrations/guide/source-code-integration
@@ -85,7 +85,7 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 {{% tab "Other" %}}
 
 If you are using another source code management provider, configure Static Code Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the {{< ui >}}Code Security{{< /ui >}} page.
 
 {{% /tab %}}
 {{< /tabs >}}

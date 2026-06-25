@@ -44,7 +44,7 @@ Case Management is supported for all security products that use signals or findi
 - App and API Protection (in [Signals][6] and [Findings][12])
 - Workload Protection (in [Signals][7] and [Findings][13])
 
-Open any signal or finding in these products or do a bulk selection of findings in the explorers, and use the **Create Ticket** button to create a case in Datadog.
+Open any signal or finding in these products or do a bulk selection of findings in the explorers, and use the {{< ui >}}Create Ticket{{< /ui >}} button to create a case in Datadog.
 
 
 ## Bidirectional ticket syncing
@@ -89,19 +89,19 @@ The following steps set up bidirectional syncing with Jira and verify that setup
    2. A [webhook for the Jira integration][8]. Configuring a webhook enables cases created in Case Management to automatically create issues in Jira and keep both resources synced.
    3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
    4. The [Jira integration is configured within the project][3].
-      1. Enable the **Sync data between Case Management and Jira** option.
-      2. In **Title**, select **Two-way sync**.
-      3. Complete the remaining settings, and then click **Save changes**.
+      1. Enable the {{< ui >}}Sync data between Case Management and Jira{{< /ui >}} option.
+      2. In {{< ui >}}Title{{< /ui >}}, select {{< ui >}}Two-way sync{{< /ui >}}.
+      3. Complete the remaining settings, and then click {{< ui >}}Save changes{{< /ui >}}.
 2. Verify that bidirectional Case Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
-   2. Locate the ticketing dropdown option in the explorer or finding page and select **Jira**. The button opens a **Jira Ticket** modal.
-   3. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
+   2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Jira{{< /ui >}}. The button opens a {{< ui >}}Jira Ticket{{< /ui >}} modal.
+   3. Verify that the {{< ui >}}Case Management  <-> Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
 {{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management  <-> Jira Integration** section, ensure that you have completed the prerequisites.
+If you do not see the {{< ui >}}Case Management  <-> Jira Integration{{< /ui >}} section, ensure that you have completed the prerequisites.
 
 [2]: /integrations/jira/
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
@@ -117,18 +117,18 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog ServiceNow integration][21].
-      1. Go to **Settings > Integrations > ServiceNow > Case Management**.
+      1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}ServiceNow{{< /ui >}} > {{< ui >}}Case Management{{< /ui >}}.
       2. Choose `Datadog Cases ITSM` as the case table for bidirectional sync. 
    2. A [Case Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, Datadog creates a project when you create a ticket.
    3. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].     
-   2. Locate the ticketing dropdown option in the explorer or finding page and select **ServiceNow**. The button opens a **ServiceNow Ticket** modal.
-   3. Verify that the bidirectional sync is enabled for the configured **Instance** and **Assignment Group**.
+   2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}ServiceNow{{< /ui >}}. The button opens a {{< ui >}}ServiceNow Ticket{{< /ui >}} modal.
+   3. Verify that the bidirectional sync is enabled for the configured {{< ui >}}Instance{{< /ui >}} and {{< ui >}}Assignment Group{{< /ui >}}.
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management <-> ServiceNow Integration** section, ensure that you have completed the prerequisites.
+If you do not see the {{< ui >}}Case Management <-> ServiceNow Integration{{< /ui >}} section, ensure that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
@@ -145,36 +145,36 @@ If you do not see the **Case Management <-> ServiceNow Integration** section, en
 The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
-2. Locate the **Ticketing** icon dropdown option for a finding in the explorer or under **Next Steps** in the finding page.
+2. Locate the {{< ui >}}Ticketing{{< /ui >}} icon dropdown option for a finding in the explorer or under {{< ui >}}Next Steps{{< /ui >}} in the finding page.
 3. You can also select up to 50 findings at a time to create multiple tickets or one ticket for multiple findings.
 4. Select the third-party tool from the dropdown.
 5. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
-1. Open the **Jira Ticket** modal. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
+1. Open the {{< ui >}}Jira Ticket{{< /ui >}} modal. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
 2. Complete the following settings:
-   1. **Jira account:** select the Jira account where you want the ticket created.
-   2. **Jira Project:** select the Jira project to use.
-   3. **Jira work type:** select the Jira work type to create.
-   4. **Assignee and Priority:** optionally select the assigned user and priority.
-3. To add more fields to the Jira ticket Datadog creates, use **Add Optional Field** to add the fields.
-4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
-5. Click **Create**.
+   1. {{< ui >}}Jira account:{{< /ui >}} select the Jira account where you want the ticket created.
+   2. {{< ui >}}Jira Project:{{< /ui >}} select the Jira project to use.
+   3. {{< ui >}}Jira work type:{{< /ui >}} select the Jira work type to create.
+   4. {{< ui >}}Assignee and Priority:{{< /ui >}} optionally select the assigned user and priority.
+3. To add more fields to the Jira ticket Datadog creates, use {{< ui >}}Add Optional Field{{< /ui >}} to add the fields.
+4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**:
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow ticket" level="h4" expanded=false %}}
-1. Open the **ServiceNow Ticket** modal. You can use a new or existing ticket. Let's look at creating a new ServiceNow ticket.
+1. Open the {{< ui >}}ServiceNow Ticket{{< /ui >}} modal. You can use a new or existing ticket. Let's look at creating a new ServiceNow ticket.
 2. Complete the following settings:
-   1. **Instance:** select the ServiceNow instance where you want the ticket created.
-   2. **Assignment group:** select the ServiceNow group to assign the ticket to.
+   1. {{< ui >}}Instance:{{< /ui >}} select the ServiceNow instance where you want the ticket created.
+   2. {{< ui >}}Assignment group:{{< /ui >}} select the ServiceNow group to assign the ticket to.
 3. If you are creating a ticket for multiple findings, choose a creation mode:
-   - **Single Ticket:** creates a single aggregated ticket linked to all selected findings.
-   - **Multiple Tickets:** creates an individual ticket for each selected finding.
-4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
-5. Click **Create**.
+   - {{< ui >}}Single Ticket:{{< /ui >}} creates a single aggregated ticket linked to all selected findings.
+   - {{< ui >}}Multiple Tickets:{{< /ui >}} creates an individual ticket for each selected finding.
+4. View {{< ui >}}Data Sync Settings{{< /ui >}} to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**:
 - Bidirectional sync is supported for `ITSM` mode only. `ITOM` events do not support bidirectional sync.
@@ -188,7 +188,7 @@ The following steps create a bidirectional ticket for a Security finding.
 
 {{% tab "Jira" %}}
 
-Existing bidirectional Jira tickets are listed in the finding's **Ticketing** or **Next Steps** sections.
+Existing bidirectional Jira tickets are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.
 
 Here's an example from a Static Code (SAST) finding:
 
@@ -202,18 +202,18 @@ Details such as assignee and status are provided along with a timeline of the Ji
 
 Closed Jira tickets are green.
 
-In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
 [1]: /incident_response/case_management/
 {{% /tab %}}
 
 {{% tab "ServiceNow" %}}
 
-Existing bidirectional ServiceNow tickets are listed in the finding's **Ticketing** or **Next Steps** sections.
+Existing bidirectional ServiceNow tickets are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.
 
 Hover over the ServiceNow ticket to see its details, including status, priority, and a timeline of changes synced between ServiceNow and Datadog.
 
-In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
 [1]: /incident_response/case_management/
 {{% /tab %}}
@@ -231,7 +231,7 @@ Similarly, if at least one open finding is attached to a closed ticket (because 
 
 ### Bidirectional Case Management facets
 
-There are several case management facets under **Triage**, including:
+There are several case management facets under {{< ui >}}Triage{{< /ui >}}, including:
 
 - Case Key
 - Jira Key

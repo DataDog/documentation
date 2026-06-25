@@ -30,29 +30,29 @@ To view the list of the available resource types for your custom rules, see [Clo
 To clone a rule:
 
 1. Find the rule you want to copy by doing one of the following:
-   - Navigate to the [**Misconfigurations Rules**][1] page. Select a rule you want to copy to open its details page.
-   - Navigate to the [**Misconfigurations explorer**][2]. Select a misconfiguration to open its details, then select **Edit Rule**.
+   - Navigate to the [{{< ui >}}Misconfigurations Rules{{< /ui >}}][1] page. Select a rule you want to copy to open its details page.
+   - Navigate to the [{{< ui >}}Misconfigurations explorer{{< /ui >}}][2]. Select a misconfiguration to open its details, then select {{< ui >}}Edit Rule{{< /ui >}}.
 2. Make any changes you want for your new rule.
-3. Scroll to the bottom of the details page and click **Clone Rule**.
+3. Scroll to the bottom of the details page and click {{< ui >}}Clone Rule{{< /ui >}}.
 
 ## Creating rules
 
 To create a rule from scratch:
 
-1. Navigate to the [**Misconfigurations Rules**][1] page.
-2. Click **New Rule** in the upper-right.
-3. Select **Cloud Configuration** as the rule type.
+1. Navigate to the [{{< ui >}}Misconfigurations Rules{{< /ui >}}][1] page.
+2. Click {{< ui >}}New Rule{{< /ui >}} in the upper-right.
+3. Select {{< ui >}}Cloud Configuration{{< /ui >}} as the rule type.
 4. Specify the cloud resource types you are writing the rule for.
 5. Write the rule logic using [Rego][3], a policy-as-code language, either from scratch or by using the Datadog template. Read [Writing Custom Rules with Rego][4] for more information. Note that you can mark a resource as "pass", "fail", or "skip". If you do not mark a resource, it will be interpreted as "skip".
 
    {{< img src="security/cspm/custom_rules/custom_rules_first_half.png" alt="Custom Rules Steps" width="100%">}}
 
 6. Exclude benign activity by specifying queries to include or remove certain resources from misconfigurations.
-7. Validate the logic of your rule by selecting resources and clicking **Test Rule**. See which resources passed and failed, along with corresponding resource tags.
+7. Validate the logic of your rule by selecting resources and clicking {{< ui >}}Test Rule{{< /ui >}}. See which resources passed and failed, along with corresponding resource tags.
 8. Specify a severity (`Critical`, `High`, `Medium`, `Low`, or `Info`) for the rule.
-9. In **Say what's happening**, write a description and instructions for investigating and remediating the Finding.
+9. In {{< ui >}}Say what's happening{{< /ui >}}, write a description and instructions for investigating and remediating the Finding.
 10. Specify tags to apply to the result misconfigurations. Read [Tagging misconfigurations](#tagging-misconfigurations) for more information.
-11. Click **Save Rule**.
+11. Click {{< ui >}}Save Rule{{< /ui >}}.
 
     {{< img src="security/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
 

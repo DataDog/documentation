@@ -33,10 +33,10 @@ To understand the difference between the different explorers, review these secur
 
 Each explorer focuses on a specific use case:
 
-- **Signals explorer**: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Traces Explorer.
-- **Traces explorer**: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Attackers explorer**: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
-- **Users explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+- {{< ui >}}Signals explorer{{< /ui >}}: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Traces Explorer.
+- {{< ui >}}Traces explorer{{< /ui >}}: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- {{< ui >}}Attackers explorer{{< /ui >}}: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
+- {{< ui >}}Users explorer{{< /ui >}}: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
@@ -52,23 +52,23 @@ The main sections in the Users explorer are:
 - The list of users with security metrics. 
   - Click a user to examine their risks, IPs, locations, endpoints, and signals. 
   - You can block an individual user from the list or its details drawer.
-  - To block multiple users, select one or more users and click **Compare and Block**.
+  - To block multiple users, select one or more users and click {{< ui >}}Compare and Block{{< /ui >}}.
 
 ## Block a user
 
 To block an individual user, do the following: 
 
-1. Click **Block** in the user's row, and choose a blocking duration.
-2. In **Select Security Responses**, select **Block with Datadog's Library**.
+1. Click {{< ui >}}Block{{< /ui >}} in the user's row, and choose a blocking duration.
+2. In {{< ui >}}Select Security Responses{{< /ui >}}, select {{< ui >}}Block with Datadog's Library{{< /ui >}}.
    
    Permanently or temporarily blocked authenticated users are added to the [Denylist][6]. Manage the list on the Datadog [Denylist][7] page.
 
 
 ## Compare and block multiple users
 
-When you select two or more users, you can use the **Compare and Block** button to compare datapoints across potentially compromised users.
+When you select two or more users, you can use the {{< ui >}}Compare and Block{{< /ui >}} button to compare datapoints across potentially compromised users.
 
-When you click **Compare and Block**, several metrics are displayed in **Block selected users**. These metrics help you detect whether you are dealing with **a single attacker**, **a larger coordinated campaign**, or **widespread credential exposure**.
+When you click {{< ui >}}Compare and Block{{< /ui >}}, several metrics are displayed in {{< ui >}}Block selected users{{< /ui >}}. These metrics help you detect whether you are dealing with **a single attacker**, **a larger coordinated campaign**, or **widespread credential exposure**.
 
 Here's a breakdown of the benefits of comparing each datapoint across two (or more) compromised users.
 

@@ -253,9 +253,9 @@ sast:
 
 #### Ignore for a specific instance
 
-To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code. Violations suppressed with `no-dd-sa` are shown as **suppressed**, rather than omitted entirely, so you can search and audit them.
+To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code. Violations suppressed with `no-dd-sa` are shown as {{< ui >}}suppressed{{< /ui >}}, rather than omitted entirely, so you can search and audit them.
 
-On the [Repositories page][1], suppressed violations appear with `is_suppressed: true`. In the [Vulnerabilities explorer][2], they appear with `status: muted` and `workflow.mute.reason: muted_in_code`.
+On the [{{< ui >}}Repositories{{< /ui >}} page][1], suppressed violations appear with `is_suppressed: true`. In the [{{< ui >}}Vulnerabilities explorer{{< /ui >}}][2], they appear with `status: muted` and `workflow.mute.reason: muted_in_code`.
 
 For example, in the following Python code snippet, the line `foo = 1` would be suppressed in Static Code Analysis scans.
 
