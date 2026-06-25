@@ -82,8 +82,17 @@ database_monitoring:
     aurora:
       enabled: true
 ```
-
+If your agent is on running on AWS Fargate for Amazon ECS, you must use [Agent version 7.54.0][12] or above and specify the region as follows:
+```yaml
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      region: your-region
+```
 By default, the listener only discovers Aurora clusters in the account and region where the Agent is running, and only those with the `datadoghq.com/scrape:true` tag. You can also configure the listener to discover clusters with specific tags.
+
+
 
 To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
