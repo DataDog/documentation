@@ -85,7 +85,7 @@ This section guides you through creating two roles, `ACME Admin` and `ACME User`
 {{% tab "UI" %}}
 
 1. Navigate to the [Roles section][1] in the Datadog Organization Settings.
-1. Click **New Role** to create `ACME Admin` and `ACME User`roles.
+1. Click {{< ui >}}New Role{{< /ui >}} to create `ACME Admin` and `ACME User`roles.
 1. Assign Standard Access and basic permissions, such as Logs Read Index Data and Logs Live Tail.
 
 {{< img src="logs/guide/rbac/add_role.png" alt="Add a new role" style="width:90%;">}}

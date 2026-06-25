@@ -17,6 +17,9 @@ further_reading:
 - link: "/tracing/services/deployment_tracking/"
   tag: "Documentation"
   text: "Deployment Tracking"
+- link: "/feature_flags/"
+  tag: "Documentation"
+  text: "Datadog Feature Flags"
 - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
   tag: "Documentation"
   text: "LaunchDarkly"
@@ -34,7 +37,7 @@ further_reading:
   text: "Unify visibility into changes to your services and dependencies"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 

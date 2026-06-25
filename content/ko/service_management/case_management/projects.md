@@ -13,7 +13,7 @@ title: 프로젝트
 
 ## 프로젝트 생성하기
 
-{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Case management Settings에서 새 프로젝트 페이지 생성" style="width:100%;" >}}
+{{< img src="incident_response/case_management/projects/projects_create_a_project_cropped.png" alt="Case management Settings에서 새 프로젝트 페이지 생성" style="width:100%;" >}}
 
 프로젝트를 생성하려면:
 1. Projects 보기에서 **New Project**를 선택하거나 왼쪽 탐색 모음에서 *Your Projects* 옆에 있는 **+** 아이콘을 클릭합니다.
@@ -24,7 +24,7 @@ title: 프로젝트
 
 ##  프로젝트 참여하기
 
-{{< img src="/service_management/case_management/projects/join_a_project_cropped.png" alt="프로젝트에 참여하기 위한 버튼 옵션을 보여주는 프로젝트 페이지" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/projects/join_a_project_cropped.png" alt="프로젝트에 참여하기 위한 버튼 옵션을 보여주는 프로젝트 페이지" style="width:100%;" >}}
 
 왼쪽 탐색 모음에 있는 **Projects** 보기에서 조직 내의 프로젝트를 찾으세요. 누구나 모든 프로젝트를 보고 참여할 수 있습니다. 또한 프로젝트 구성원인지 여부에 관계없이 누구나 어떤 프로젝트에서든 케이스를 만들고 할당할 수 있습니다.
 

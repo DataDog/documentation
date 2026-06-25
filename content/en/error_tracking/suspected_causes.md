@@ -14,11 +14,11 @@ Datadog assigns a suspected cause label to issues at creation time. The suspecte
 
 The suspected cause can be one of the following categories:
 
-- **Code Exception**: An error was caused by a flaw in the code.
-- **Failed Request**: An API endpoint responded with an error status code.
-- **Illegal Object Access**: The code accessed an object that was null or undefined.
-- **Invalid Argument**: A function was called with an invalid argument.
-- **Network**: A server took long to respond, or the network was slow.
+- {{< ui >}}Code Exception{{< /ui >}}: An error was caused by a flaw in the code.
+- {{< ui >}}Failed Request{{< /ui >}}: An API endpoint responded with an error status code.
+- {{< ui >}}Illegal Object Access{{< /ui >}}: The code accessed an object that was null or undefined.
+- {{< ui >}}Invalid Argument{{< /ui >}}: A function was called with an invalid argument.
+- {{< ui >}}Network{{< /ui >}}: A server took long to respond, or the network was slow.
 
 Suspected causes can be used as filters in search, enabling you to locate relevant issues.
 

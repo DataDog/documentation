@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/correlation/
+- link: events/correlation/
   tag: Documentation
   text: En savoir plus sur la corrélation d'événements
 title: Analyses à partir de cas et d'événements
@@ -13,7 +13,7 @@ Suivez la charge de travail de vos équipes en établissant des graphiques et en
 
 ## Métriques de scénarios
 
-{{< img src="service_management/events/correlation/case_analytics.png" alt="Configurer des analyses de scénarios" style="width:100%;" >}}
+{{< img src="events/correlation/case_analytics.png" alt="Configurer des analyses de scénarios" style="width:100%;" >}}
 
 
 Vous pouvez interroger les analyses de scénarios dans une variété de widgets présentant des graphiques pour analyser la productivité de vos équipes et identifier des modèles de problèmes. Affichez des graphiques d'analyses dans des dashboards et des notebooks. Pour commencer, dans la configuration du widget, sélectionnez **Cases** dans le menu déroulant de la source de données sous la section *Graph your data*. 
@@ -34,7 +34,7 @@ Les widgets suivants prennent en charge les analyses de scénarios :
 
 Décomposez des métriques d'événements par source, host, service, et plus encore. Découvrez d'où proviennent vos alertes problématiques et apprenez si votre charge opérationnelle augmente ou diminue au fil du temps.
 
-{{< img src="service_management/events/correlation/event_analytics.png" alt="Configurer l'analyse d'événements" style="width:100%;" >}}
+{{< img src="events/correlation/event_analytics.png" alt="Configurer l'analyse d'événements" style="width:100%;" >}}
 
 Pour commencer, dans la configuration du widget, sélectionnez **Events** dans la liste déroulante de la source de données sous la section *Graph your data*. 
 

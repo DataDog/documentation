@@ -21,13 +21,14 @@ Datadog recommends you update your Datadog Agent with every [minor and patch][6]
 
 
 ## Upgrade between minor versions of the Agent
+
 ### Upgrade remotely with Fleet Automation
 
-[Fleet Automation][8] enables you to centrally manage your fleet of Datadog Agents. Fleet Automation includes [Remote Agent Management][2], which allows you to remotely upgrade Agents across non-containerized Linux and Windows environments. See [Remote Agent Management: Upgrade your Datadog Agents][7].
+[Fleet Automation][2] enables you to centrally manage your fleet of Datadog Agents. Fleet Automation includes remote Agent management, which allows you to remotely upgrade Agents across non-containerized Linux and Windows environments. See [Upgrade Agents][7].
 
 ### Upgrade with script or configuration management tooling
-Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script.
 
+Follow the [in-app instructions][4] to upgrade Datadog Agents across container, host-based, and Infrastructure as Code (IaC) tool-managed environments. The guided flow generates an Agent installation command tailored to your platform for upgrading the Agent. By default, the command installs the latest version of the Agent. To upgrade to a specific minor version, set `DD_AGENT_MINOR_VERSION=<TARGET_MINOR>` before running the script.
 
 ## Upgrade between major versions of the Agent
 
@@ -106,10 +107,9 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/python-3/
-[2]: /agent/fleet_automation/remote_management
-[3]: /agent/fleet_automation/remote_management/#setup
+[2]: /agent/fleet_automation/
+[3]: /agent/fleet_automation/#set-up-fleet-automation
 [4]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [6]: https://github.com/DataDog/datadog-agent/releases?page=1
-[7]: /agent/fleet_automation/remote_management/#upgrade-your-agents
-[8]: /agent/fleet_automation/
+[7]: /agent/fleet_automation/upgrade_agents/

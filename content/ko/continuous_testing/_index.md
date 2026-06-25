@@ -57,7 +57,15 @@ gRPC 및 WebSockets을 포함하는 다양한 프로토콜, 프레임워크 및 
 
 플랫폼 한 개로 테스트를 실행하고 문제를 해결해 애플리케이션 개발 속도를 높이세요.  다음 CI 공급자 또는 [Slack][18]이나 Jira[19]와 같은 협업 도구를 선택해 워크플로우를 병합하고 컨텍스트 전환에 대비하세요.
 
-{{< partial name="continuous_testing/ct-getting-started.html" >}}
+{{< card-grid card_width="115px" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
+{{< /card-grid >}}
 
 </br>
 

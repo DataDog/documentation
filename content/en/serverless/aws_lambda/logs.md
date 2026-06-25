@@ -1,5 +1,9 @@
 ---
 title: Log Collection for AWS Lambda
+further_reading:
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 ---
 
 <div class="alert alert-info">If you are using the <a href="https://docs.datadoghq.com/serverless/libraries_integrations/extension/">Datadog Lambda extension</a>, log collection is <strong>enabled by default</strong>. </div>
@@ -149,6 +153,10 @@ If you are using a runtime or custom logger that isn't supported, follow these s
     2. Clone the default Lambda log pipeline, which is read-only.
     3. Enable the cloned pipeline and disable the default one.
     4. Update the [Grok parser][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /serverless/libraries_integrations/extension/
 [4]: /serverless/libraries_integrations/forwarder/

@@ -26,7 +26,20 @@ Se admiten las siguientes capacidades de AAP en relación con la biblioteca de r
 Selecciona el lenguaje de tu aplicación para obtener más información sobre la compatibilidad de frameworks y funciones.
 
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="php/" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="nginx/" src="integrations_logos/nginx.png" alt="nginx" >}}
+  {{< image-card href="envoy/" src="integrations_logos/envoy.png" alt="envoy" >}}
+  {{< image-card href="istio/" src="integrations_logos/istio.png" alt="istio" >}}
+  {{< image-card href="gcp-service-extensions/" src="integrations_logos/google_cloud_platform.png" alt="GCP Service Extensions" >}}
+  {{< image-card href="haproxy/" src="integrations_logos/haproxy.png" alt="HAProxy" >}}
+{{< /card-grid >}}
 
 <br>
 

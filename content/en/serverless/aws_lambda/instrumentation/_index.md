@@ -11,11 +11,14 @@ further_reading:
     - link: "/integrations/amazon_lambda/"
       tag: "Documentation"
       text: "AWS Lambda Integration"
+    - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+      tag: "Learning Center"
+      text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 ---
 
 ## Overview
 
-Instrument your AWS Lambda applications with a Datadog Lambda Extension to collect traces, enhanced metrics, and custom metrics. The Datadog Lambda Extension is analogous to using the Datadog Agent and Datadog tracing libraries for host-based infrastructure and applications.
+Instrument your AWS Lambda applications with a Datadog Lambda Extension to collect traces, enhanced metrics, and custom metrics. The Datadog Lambda Extension is analogous to using the Datadog Agent and Datadog SDKs for host-based infrastructure and applications.
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="A diagram that shows how Datadog receives telemetry from your instrumented AWS Lambda application. Your Lambda application, instrumented with a Datadog Lambda Library, sends logs, traces, enhanced metrics, and custom metrics to the Datadog Lambda Extension, which then pushes this data to Datadog." style="width:100%;" >}}
 
@@ -27,9 +30,24 @@ A sample application is [available on GitHub][6] with instructions on how to dep
 
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
 
+## Use the Datadog MCP server
+
+Use the [Datadog MCP server][9] to set up monitoring for your AWS Lambda containers with AI assistance. After you connect, try a prompt like:
+
+```shell
+Help me monitor my AWS Lambda functions with Datadog
+```
+
 ## Instrumentation instructions
 
-{{< partial name="serverless/getting-started-languages.html" >}}
+{{< card-grid card_width="30%" image_width="200" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 ## Advanced configurations
 
@@ -51,3 +69,4 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
+[9]: /agentic_onboarding/setup

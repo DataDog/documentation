@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
   tag: "Blog"
   text: "Don't fear the Agent"
+- link: "https://learn.datadoghq.com/courses/agent-on-host"
+  tag: "Learning Center"
+  text: "The Agent on a Host"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra
@@ -197,6 +200,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
 [12]: /agent/configuration/agent-log-files/
-[13]: /agent/fleet_automation/remote_management/#remotely-upgrade-your-agents
+[13]: /agent/fleet_automation/upgrade_agents/
 [14]: /agent/troubleshooting/send_a_flare/?tab=agent#send-a-flare-from-the-datadog-site
 [15]: /agent/fleet_automation

@@ -22,7 +22,7 @@ Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
-APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
+Datadog SDK integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 | Propagation mode | Description |
 |:-----------------|:------------|
@@ -81,7 +81,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 For `full` mode with Java and .NET:
 
-<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the Datadog SDK overwrites it.</div>
 
 - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
 - Prerequisites:
@@ -426,7 +426,7 @@ Enable the database monitoring propagation feature using one of the following me
    DD_DBM_PROPAGATION_MODE=full
    ```
 
-* Set the tracer to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
+* Set the SDK to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
@@ -501,7 +501,7 @@ When viewing a [Query Sample][37] in Database Monitoring, if the associated trac
 ### Visualize the downstream database hosts of APM services
 
 On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring, and determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's database dependencies:
-1. Select the service in the [Software Catalog][26] to open a details panel.
+1. Select the service in the [Catalog][26] to open a details panel.
 1. Select {{< ui >}}Service Page{{< /ui >}} in the panel.
 1. On the Service page, select the {{< ui >}}Databases{{< /ui >}} section.
 1. Within the Databases section, select the {{< ui >}}Databases{{< /ui >}} tab.

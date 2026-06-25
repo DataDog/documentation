@@ -5,40 +5,24 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
-  - link: "https://www.datadoghq.com/blog/monitor-rust-otel/"
-    tag: "Blog"
-    text: "How to monitor your Rust applications with OpenTelemetry"
+  - link: "https://learn.datadoghq.com/courses/getting-started-apm"
+    tag: "Learning Center"
+    text: "Getting Started with APM Metrics and Traces"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
   - link: "https://www.datadoghq.com/blog/apm-security-view/"
     tag: "Blog"
     text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
-  - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
-    tag: "Blog"
-    text: "Monitor your Linux web apps on Azure App Service with Datadog"
-  - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
-    tag: "Blog"
-    text: "Manage API performance, security, and ownership with Datadog API Catalog"
-  - link: "https://www.datadoghq.com/blog/software-catalog/"
-    tag: "Blog"
-    text: "Improve developer experience and collaboration with Software Catalog"
-  - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
-    tag: "Blog"
-    text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to boost your APM understanding"
-  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
-    tag: "Blog"
-    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
   - link: "https://www.datadoghq.com/blog/pubsub-cloud-run-tracing"
     tag: "Blog"
     text: "Trace Google Pub/Sub workloads in Cloud Run with Datadog"
   - link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
     tag: "Blog"
     text: "Analyzing round trip query latency"
-
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -72,7 +56,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+For setups that require more customization, Datadog supports custom instrumentation with Datadog SDKs and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 

@@ -17,6 +17,8 @@ further_reading:
 
 Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
 
+You can also use the Enrichment Table processor with a lookup file to map to secrets, such as a Datadog API key, Splunk HEC tokens, or custom header in an HTTP request, for filtering and routing logs. See [Use a secret as a source attribute](#use-a-secret-as-a-source-attribute) for more information.
+
 ### When to use this processor
 
 The following are use cases for enriching logs from integrations.
@@ -71,23 +73,23 @@ In Datadog's Snowflake integration documentation, see [Reference Tables][3] for 
 
 To set up the Enrichment Table processor:
 
-1. Click **Add enrichment**.
-1. Define a **filter query**. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
-1. In the **Set lookup mapping** section, select the type of lookup dataset you want to use.
+1. Click {{< ui >}}Add enrichment{{< /ui >}}.
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
+1. In the {{< ui >}}Set lookup mapping{{< /ui >}} section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}
 
   1. Select the Reference Table in the dropdown menu. See [Using reference tables](#using-reference-tables) for more information.
-  1. Click **Manage** to go to the Reference Tables configuration page.
+  1. Click {{< ui >}}Manage{{< /ui >}} to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
       - Observability Pipelines enriches logs with all columns in the table by default. Each column in the table is added as an attribute to the log, where the attribute name is the column name and the attribute value is the column value.
       - If you want to enrich your logs with specific columns from your Reference Table, select the columns' corresponding attributes in the dropdown menu.
   1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
       - Associated with a [Service Account][2] (not a personal Datadog user account).
       - Limited to the [`reference_tables_read`][3] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment example](#enrichment-example) for more information.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Click **Save**.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /account_management/api-app-keys/#application-keys
 [2]: /account_management/org_settings/service_accounts#service-account-application-keys
@@ -98,10 +100,13 @@ To set up the Enrichment Table processor:
 
   1. Enter the file path.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
-  1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table.
-  1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object.
-  1. Click **Save**.
+  1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment example](#enrichment-example) for more information.
+  1. ({{< tooltip glossary="preview" case="title" >}}) If you are using a secret as a source attribute, toggle {{< ui >}}Use Secret as source attribute{{< /ui >}} to enable it.
+      - Select the type of secret ({{< ui >}}Datadog API Key{{< /ui >}} or {{< ui >}}Splunk HEC token{{< /ui >}}).
+      - See [Use a secret as a source attribute example](#use-a-secret-as-a-source-attribute) for more information.
+  1. If you are not using a secret, enter the source attribute of the log. The source attribute's value is used as the key to match against the column name in your local file.
+  1. Enter the target attribute. The target attribute's value stores the information found in the file as a JSON object.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
@@ -111,17 +116,17 @@ To set up the Enrichment Table processor:
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the source attribute of the log. The source attribute's value is what you want Observabiity Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Click **Save**.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
   {{< /tabs >}}
 
-##### Enrichment file example
+### Enrichment example
 
 For this example:
 
-- This is the Reference Table that the enrichment processor uses:
+- This is the Reference Table or file that the enrichment processor uses:
   | merch_id | merchant_name   | city      | state    |
   | -------- | --------------- | --------- | -------- |
   | 803      | Andy's Ottomans | Boise     | Idaho    |
@@ -142,6 +147,38 @@ merchant_info {
     "state":"Colorado"
 }
 ```
+
+### Use a secret as a source attribute
+
+For the file lookup option, you can enable {{< ui >}}Use Secret as source attribute{{< /ui >}} to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file. The secret is used as the key to match against the column name in your local file.
+
+**Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable {{< ui >}}Store HEC token{{< /ui >}} on the source.
+
+#### Splunk HEC example
+
+For example, if you want to filter and route logs based on Splunk HEC tokens:
+
+1. Enable {{< ui >}}Store HEC token{{< /ui >}} on the Splunk HEC source to store the token in the event metadata.
+1. Use the file lookup option in the Enrichment Table processor to use the HEC token stored in the event metadata as a lookup key. The Worker enriches the event so you can filter and route logs based on that value.
+
+Example of a local lookup CSV file with Splunk HEC tokens mapped to a value:
+
+| Splunk HEC token (secret) | HEC token value |
+| ------------------------- | --------------- |
+| `abcdef`                  | `hec_token_one` |
+| `uvwxyz`                  | `hec_token_two` |
+
+For this example, enter `Splunk HEC token (secret)` as the column name when you set up the processor. If `token_value` is the target attribute path, this is the HEC token value added to an example log:
+
+```
+{
+  "message": "this is a test"
+  "token_value": "hec_token_one"
+}
+
+```
+
+You can filter and route logs based on `token_value: hec_token_one`.
 
 ## How the processor works
 
@@ -245,3 +282,4 @@ The metrics below are common to all processors consuming the same Reference Tabl
 [6]: /integrations/databricks/?tab=useaserviceprincipalforoauth#reference-table-configuration
 [7]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 [8]: /observability_pipelines/search_syntax/logs/
+[9]: /observability_pipelines/sources/splunk_hec/?tab=secretsmanagement

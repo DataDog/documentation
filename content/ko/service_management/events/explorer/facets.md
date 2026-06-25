@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/explorer/attributes
+- link: events/explorer/attributes
   tag: 설명서
   text: 예약된 속성에 대해 알아보기
 title: 패싯
@@ -12,7 +12,7 @@ title: 패싯
 
 패싯에서는 속성 또는 태그의 고유 구성 요소를 표시하고, 표시되는 이벤트의 수와 같이 기본 분석 결과를 제공합니다. 패싯을 사용하면 주어진 속성을 기반으로 데이터세트를 피벗하거나 필터링할 수 있습니다. 필터링하려면 보고 싶은 값을 하나 선택하세요.
 
-{{< img src="service_management/events/explorer/facets-location.png" alt="패싯 측면 패널" style="width:100%;" >}}
+{{< img src="events/explorer/facets-location.png" alt="패싯 측면 패널" style="width:100%;" >}}
 
 ### 패싯 생성
 

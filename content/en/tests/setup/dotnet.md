@@ -210,7 +210,7 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
-**Note**: When using Test Impact Analysis, the tracer's built-in code coverage is enabled by default.
+**Note**: When using Test Impact Analysis, the SDK's built-in code coverage is enabled by default.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 

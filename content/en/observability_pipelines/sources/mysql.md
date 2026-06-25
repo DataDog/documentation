@@ -110,7 +110,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. To reset the checkpoint value in the MySQL source:
     1. Navigate to [Observability Pipelines][1].
     1. Click on your pipeline and click.
-    1. In the MySQL source, enter the destination's last checkpoint value in the **Checkpoint value** field.
+    1. In the MySQL source, enter the destination's last checkpoint value in the {{< ui >}}Checkpoint value{{< /ui >}} field.
 
 #### External tools for validating queries
 
@@ -133,17 +133,23 @@ Store the SQL query that the Worker executes in a local file.
 - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - The file must be in the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information.
 
-## Set up the source while setting up a pipeline
+## Setup
 
 Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-1. Enter the connection string.
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+After you select the MySQL source in the pipeline UI:
+
+1. Enter the identifier for your URI connection string. If you leave it blank, the [default](#secret-defaults) is used.
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
       - **Note**: All file paths are made relative to the configuration data directory. For example, if the SQL file path is `/var/lib/observability-pipelines-worker/config/config/db_queries/query.sql`, enter the path `/db_queries/query.sql`.
-5. Select your query type (**Batch** or **Incremental**). See [Query types](#query-types) for more information.
-    - For **Incremental**:
+5. Select your query type ({{< ui >}}Batch{{< /ui >}} or {{< ui >}}Incremental{{< /ui >}}). See [Query types](#query-types) for more information.
+    - For {{< ui >}}Incremental{{< /ui >}}:
       1. Define the [incremental column](#incremental-columns).
       1. Set the starting [checkpoint value](#checkpoint-values).
 6. Define your query scheduling using cron syntax. These are cron syntax examples for different query schedules:
@@ -154,11 +160,25 @@ Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, 
     | Every 1 min                | `*/1 * * * *`   |
     | Once daily at 8 AM         | `0 8 * * *`     |
 
-## Set the environment variables
+## Secret defaults
 
-- URI connection string
-  - The URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
-  - Stored as environment variable: `DB_SOURCE_DATABASE_CONNECTION_STRING`
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- MySQL URI connection string identifier:
+	- References the URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
+	- The default identifier is `SOURCE_MYSQL_CONNECTION_STRING`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Limits and requirements
 

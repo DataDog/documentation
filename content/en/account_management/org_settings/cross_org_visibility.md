@@ -14,7 +14,7 @@ Cross-organization visibility allows customers to share data between different o
 This document explains:
 - What cross-organization visibility [enables](#capabilities)
 - How to [share](#create-a-connection) data across your organizations
-- How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from your other organizations
+- How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) or [API query](#in-the-api-1) with data from your other organizations
 
 ## Capabilities
 
@@ -105,10 +105,11 @@ The following screenshot shows an example of a cross-organization formula query.
 The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. However, you can manage a dashboard containing widgets with cross-org queries through Terraform by exporting the dashboard to JSON.
 </div>
 
-You can define cross-organization queries in the following endpoint:
-- [Timeseries][8]
+You can include cross-organization data in Dashboard and Notebook widget JSON with the `cross_org_uuids` field. The same field is available in the Metrics API formula query endpoints:
+- [Query timeseries data across multiple products][8]
+- [Query scalar data across multiple products][15]
 
-When you define a widget in the Dashboard API, use the `cross_org_uuids` parameter in the JSON widget definition payload to identify the source organization in a cross-organization query.
+When you define a widget in the Dashboard API or send a Metrics API formula query request, use the `cross_org_uuids` parameter in each query object. The parameter identifies the source organization in a cross-organization query.
 
 The `cross_org_uuids` parameter is optional. If you omit `cross_org_uuids`, the query runs on the same organization in which you defined the widget.
 
@@ -200,3 +201,4 @@ To restore general access to a cross-organization connection with restricted acc
 [12]: /account_management/rbac/granular_access
 [13]: /account_management/rbac/data_access/
 [14]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[15]: /api/latest/metrics/#query-scalar-data-across-multiple-products

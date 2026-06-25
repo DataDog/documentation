@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog APM SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 
 ## Troubleshooting methods
 
@@ -89,7 +89,7 @@ To enable debug logs:
  
    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
    env:
-     - name: DD_TRACE_DEBUG    # debug logging for the tracer
+     - name: DD_TRACE_DEBUG    # debug logging for the SDK
        value: "true"
      - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
        value: "true"
@@ -103,7 +103,7 @@ There are several configuration mechanisms that can block or alter injection beh
 
 ### Storage requirements
 
-SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+SSI downloads language SDKs and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
 
 <div style="text-align:center;">
   <pre><code>[sum of the language library sizes]
@@ -169,7 +169,13 @@ The value should be a JSON string that applies the necessary security context to
 
 ### Custom instrumentation
 
-Custom instrumentation still requires you to import the tracing library. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
+Custom instrumentation still requires you to import the SDK. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
+
+## General troubleshooting
+
+### SSI continues running after setting DD_TRACE_ENABLED=false
+
+Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. The [injector][11] runs before the SDK evaluates its environment variables, so SDK-level environment variables have no effect on SSI. To disable or remove SSI, see your platform's [SSI setup page][12].
 
 ## Environment-specific troubleshooting
 
@@ -300,7 +306,7 @@ SSI does not inject into applications that already use a `-javaagent` option or 
 
 ### Ruby
 
-Ruby injection modifies the `Gemfile` to add the Datadog tracing library. If injection support is later removed, the application may fail to start due to the missing dependency.
+Ruby injection modifies the `Gemfile` to add the Datadog SDK. If injection support is later removed, the application may fail to start due to the missing dependency.
 
 To resolve this, restore the original `Gemfile`. If you still want to use APM after removing injection, run `bundle install` to download the gem.
 
@@ -379,3 +385,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/fleet
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[11]: /tracing/guide/injectors/
+[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications

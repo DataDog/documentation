@@ -70,7 +70,7 @@ There are no required integrations for PHP.
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`.
 - Ensure there are no Agent transmission errors related to spans in your [tracer logs][10].
-- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
+- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application SDK.
 
 ### Check if spans are successfully transmitted to Datadog
 

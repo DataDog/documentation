@@ -1,26 +1,62 @@
 ---
 title: OpenTelemetry Instrumentation
+description: Instrument LLM applications with OpenTelemetry using GenAI semantic conventions and send traces to Agent Observability without the Datadog SDK.
 ---
 
 ## Overview
-By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in LLM Observability.
+By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in Agent Observability.
 
-LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Datadog LLM Observability SDK or a Datadog Agent.
+Agent Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Agent Observability SDK or a Datadog Agent.
 
 ## Prerequisites
 
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation. When referencing spans, provide <code>span_id</code> and <code>trace_id</code> as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's <code>int(hex_span_id, 16)</code> to convert a hex span ID to its decimal equivalent.
+## Supported features
 
-For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+### Evaluations
 
-You can also use OpenTelemetry spans inside <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a>. By setting <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+To send [external evaluations directly to the API](/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
+
+### Prompt Tracking
+
+For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation).
+
+### Experiments
+
+You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+
+### Span links
+
+Use [OpenTelemetry span links][9] on your GenAI spans to express non-parent-child relationships, such as when one span's output feeds another span's input. When two linked spans are in the same trace, the link appears as an edge in that trace's **Execution Graph**, so you can see how data flows between sibling spans (for example, a tool's output feeding a downstream LLM call).
+
+{{< img src="llm_observability/instrumentation/otel-span-links-execution-graph.png" alt="Execution Graph for a multi-agent content-pipeline trace. The orchestrator contains research-agent, writer-agent, and editor-agent, connected by span-link edges that show data flowing from a search_web tool into the research LLM, then from research to writer to editor." style="width:100%;" >}}
+
+Use `from` and `to` attributes to indicate the direction of the data flow:
+
+```python
+from opentelemetry import trace
+from opentelemetry.trace import Link
+
+tracer = trace.get_tracer(__name__)
+
+# A tool span whose output feeds a downstream LLM call.
+with tracer.start_as_current_span("lookup_order") as tool_span:
+    tool_span.set_attribute("gen_ai.operation.name", "execute_tool")
+    tool_ctx = tool_span.get_span_context()
+
+# The LLM span links back to the tool span: its output became this span's input.
+link = Link(context=tool_ctx, attributes={"from": "output", "to": "input"})
+with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
+    llm_span.set_attribute("gen_ai.operation.name", "chat")
+```
+
+<div class="alert alert-info">A span link that points to a span in a different trace is stored, but is not drawn in the Execution Graph, which visualizes a single trace.</div>
 
 ## Setup
 
-To send OpenTelemetry traces to LLM Observability, configure your OpenTelemetry exporter with the following settings:
+To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
 
 ### Configuration
 
@@ -44,7 +80,7 @@ This environment variable enables version 1.37+-compliant OpenTelemetry traces f
 
 **Note**:
 * If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. See your library's documentation for the appropriate configuration method.
-* When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your LLM Observability access controls. See [Data Access Control][8] for more information.
+* When using OpenTelemetry instrumentation, some data sent to Agent Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your Agent Observability access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
 
@@ -54,24 +90,83 @@ If you are using the [`strands-agents` library][5], you need to set an additiona
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by LLM Observability.
+This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by Agent Observability.
 
 ### Instrumentation
 
-To generate traces compatible with LLM Observability, do one of the following:
+To generate traces compatible with Agent Observability, do one of the following:
 
 - Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1].
 - Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
 
-After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
+After your application starts sending data, the traces automatically appear in the [{{< ui >}}Agent Observability Traces{{< /ui >}} page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
 <div class="alert alert-danger">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
 <li/> OpenInference is not supported.
-<li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
+<li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the Agent Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 </ul>
 </div>
+
+## Tested frameworks and libraries
+
+These frameworks and libraries have been tested with Agent Observability. Any framework that emits [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans is supported.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.26.0 |
+| [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.51.0 |
+| [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 1.32.0 |
+| [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64.0 |
+| [AWS Bedrock][28] | [`opentelemetry-instrumentation-botocore`][29] | >= 1.31.57 |
+| [LangChain][30] | [`opentelemetry-instrumentation-langchain`][31] | >= 0.3.21 |
+| [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.14.12 |
+| [Strands Agents][5] | Native | >= 1.11.0 |
+| [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
+
+[5]: https://pypi.org/project/strands-agents/
+[20]: https://platform.openai.com/docs/api-reference/introduction
+[21]: https://pypi.org/project/opentelemetry-instrumentation-openai-v2/
+[22]: https://docs.anthropic.com/en/api/
+[23]: https://pypi.org/project/opentelemetry-instrumentation-anthropic/
+[24]: https://ai.google.dev/gemini-api/docs
+[25]: https://pypi.org/project/opentelemetry-instrumentation-google-genai/
+[26]: https://cloud.google.com/vertex-ai/generative-ai/docs/overview
+[27]: https://pypi.org/project/opentelemetry-instrumentation-vertexai/
+[28]: https://docs.aws.amazon.com/bedrock/latest/userguide/
+[29]: https://pypi.org/project/opentelemetry-instrumentation-botocore/
+[30]: https://python.langchain.com/docs/introduction/
+[31]: https://pypi.org/project/opentelemetry-instrumentation-langchain/
+[32]: https://docs.llamaindex.ai/
+[33]: https://pypi.org/project/opentelemetry-instrumentation-llamaindex/
+[34]: https://www.traceloop.com/openllmetry
+[35]: https://pypi.org/project/traceloop-sdk/
+{{% /tab %}}
+{{% tab "Node.js" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.19.0 |
+
+[40]: https://platform.openai.com/docs/api-reference/introduction
+[41]: https://www.npmjs.com/package/@opentelemetry/instrumentation-openai
+{{% /tab %}}
+{{% tab "Java" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [Spring AI][50] | Native (through [Micrometer][51]) | >= 1.0.0 |
+| [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.31.0 |
+| [AWS Bedrock][53] | [OpenTelemetry Java Agent][54] | AWS SDK >= 2.2 |
+
+[50]: https://docs.spring.io/spring-ai/reference/
+[51]: https://micrometer.io/
+[52]: https://docs.langchain4j.dev/
+[53]: https://docs.aws.amazon.com/bedrock/latest/userguide/
+[54]: https://opentelemetry.io/docs/zero-code/java/agent/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Examples
 
@@ -92,7 +187,7 @@ os.environ["AWS_DEFAULT_REGION"] = "<YOUR_AWS_REGION>"
 # Enable latest GenAI semantic conventions (1.37)
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
-# Configure OTLP endpoint to send traces to Datadog LLM Observability
+# Configure OTLP endpoint to send traces to Agent Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
@@ -204,7 +299,7 @@ with tracer.start_as_current_span(
 provider.force_flush()
 ```
 
-After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
+After running this example, search for `ml_app:simple-llm-example` in the Agent Observability UI to find the generated trace.
 
 ### Using OpenLLMetry
 
@@ -249,11 +344,11 @@ client.chat.completions.create(
 provider.force_flush(timeout_millis=5000)
 ```
 
-After running this example, search for `ml_app:simple-openllmetry-test` in the LLM Observability UI to find the generated trace.
+After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
 
 ## Attribute mapping reference
 
-This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as OpenLLMetry to Datadog' LLM Observability span schema.
+This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as OpenLLMetry to Datadog's Agent Observability span schema.
 
 <div class="alert alert-info">OpenLLMetry-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> section.</div>
 
@@ -261,7 +356,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Base span attributes
 
-| OTLP Field | LLM Observability Field | Notes |
+| OTLP Field | Agent Observability Field | Notes |
 |------------|--------------|-------|
 | `resource.attributes.service.name` | `ml_app`, `tags.service` | |
 | `name` | `name` | Overridden by `gen_ai.tool.name` if present |
@@ -274,7 +369,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Span kind resolution
 
-| `gen_ai.operation.name` | LLM Observability `span.kind` |
+| `gen_ai.operation.name` | Agent Observability `span.kind` |
 |-------------------------|-------------------|
 | `generate_content`, `chat`, `text_completion`, `completion` | `llm` |
 | `embeddings`, `embedding` | `embedding` |
@@ -284,7 +379,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Model information
 
-| OTel Attribute | LLM Observability Field | Notes |
+| OTel Attribute | Agent Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.operation.name` | `meta.span.kind` | See resolution table above |
 | `gen_ai.provider.name` | `meta.model_provider` | Falls back to `gen_ai.system`, then `custom` |
@@ -293,7 +388,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Token usage metrics
 
-| OTel Attribute | LLM Observability Field |
+| OTel Attribute | Agent Observability Field |
 |----------------|--------------|
 | `gen_ai.usage.input_tokens` | `metrics.input_tokens` |
 | `gen_ai.usage.output_tokens` | `metrics.output_tokens` |
@@ -305,7 +400,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
 
-| OTel Attribute | LLM Observability Field |
+| OTel Attribute | Agent Observability Field |
 |----------------|--------------|
 | `gen_ai.request.seed` | `metadata.seed` |
 | `gen_ai.request.frequency_penalty` | `metadata.frequency_penalty` |
@@ -318,7 +413,7 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 
 #### Tool attributes
 
-| OTel Attribute | LLM Observability Field | Notes |
+| OTel Attribute | Agent Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.tool.name` | `name` | Overrides span name |
 | `gen_ai.tool.call.id` | `metadata.tool_id` | |
@@ -330,13 +425,27 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 
 #### Session and conversation
 
-| OTel Attribute | LLM Observability Field | Notes |
+| OTel Attribute | Agent Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | Also added to `metadata.conversation_id` and tags |
 
+When an APM trace's top-most span is not a gen_ai span (for example, an HTTP handler that invokes several LLMs in parallel), Agent Observability produces a separate Agent Observability trace for each top-level gen_ai span in that APM trace. To keep these split traces grouped together in the UI, set `gen_ai.conversation.id` to the same value on each gen_ai span within the APM trace: Agent Observability groups by `session_id`, so the resulting traces appear together even though they have distinct Agent Observability trace IDs. This is the same attribute used for cross-request conversation grouping.
+
+#### Span links
+
+Span links you set on a GenAI span appear as `span_links` on the corresponding Agent Observability span.
+
+| OTel span link field | Agent Observability Field | Notes |
+|----------------------|--------------|-------|
+| `trace_id` | `span_links[].trace_id` | 128-bit trace IDs are emitted as hex. A link to a span in the same trace resolves to that span's Agent Observability trace ID. |
+| `span_id` | `span_links[].span_id` | Decimal |
+| `attributes` | `span_links[].attributes` | Dots in attribute keys are replaced with underscores (for example, `messaging.operation` becomes `messaging_operation`). |
+
+Links between spans in the same trace are drawn as edges in that trace's Execution Graph.
+
 #### Response attributes
 
-| OTel Attribute | LLM Observability Field |
+| OTel Attribute | Agent Observability Field |
 |----------------|--------------|
 | `gen_ai.response.model` | `meta.model_name` |
 | `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
@@ -348,7 +457,7 @@ Input and output messages are extracted from the following sources, in priority 
 1. Direct attributes: `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`
 2. Span events (`meta["events"]`) with name `gen_ai.client.inference.operation.details`
 
-| OTel Source | LLM Observability Field | Notes |
+| OTel Source | Agent Observability Field | Notes |
 |-------------|--------------|-------|
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (others) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
@@ -356,7 +465,7 @@ Input and output messages are extracted from the following sources, in priority 
 
 ##### Embedding spans
 
-| OTel Source | LLM Observability Field |
+| OTel Source | Agent Observability Field |
 |-------------|--------------|
 | `gen_ai.input.messages` | `meta.input.documents` |
 | N/A | `meta.output.value` = `[N embedding(s) returned]` |
@@ -369,7 +478,7 @@ Tags are placed directly on the span:
 - Unknown `gen_ai.*` keys are added with prefix stripped
 - Filtered out: `_dd.*`, `llm.*`, `ddtags`, `events`, and already specifically mapped `gen_ai.*` keys
 
-<div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to LLM Observability span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
+<div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to Agent Observability span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
 
 ### OpenLLMetry attribute mappings
 
@@ -379,7 +488,7 @@ This section documents OpenLLMetry-specific attribute mappings that differ from 
 
 `llm.request.type` is used as a fallback when `gen_ai.operation.name` is absent.
 
-| `llm.request.type` | LLM Observability `span.kind` |
+| `llm.request.type` | Agent Observability `span.kind` |
 |--------------------|-------------------|
 | `chat` | `llm` |
 | `completion` | `llm` |
@@ -389,13 +498,13 @@ This section documents OpenLLMetry-specific attribute mappings that differ from 
 
 #### Model information
 
-| OpenLLMetry Attribute | LLM Observability Field | Notes |
+| OpenLLMetry Attribute | Agent Observability Field | Notes |
 |-----------------------|--------------|-------|
 | `gen_ai.system` | `meta.model_provider` | Fallback when `gen_ai.provider.name` absent |
 
 #### Token usage metrics
 
-| OpenLLMetry Attribute | LLM Observability Field | Notes |
+| OpenLLMetry Attribute | Agent Observability Field | Notes |
 |-----------------------|--------------|-------|
 | `llm.usage.total_tokens` | `metrics.total_tokens` | Fallback when `gen_ai.usage.total_tokens` absent |
 
@@ -451,7 +560,7 @@ When `role = "tool"` and `tool_call_id` are present, the message is converted to
 
 For embedding spans, documents are extracted from prompt content attributes.
 
-| OpenLLMetry Source | LLM Observability Field |
+| OpenLLMetry Source | Agent Observability Field |
 |--------------------|--------------|
 | `gen_ai.prompt.<index>.content` | `meta.input.documents[].text` |
 
@@ -465,7 +574,7 @@ The following OpenLLMetry-specific attributes are filtered from tags:
 
 ## Supported semantic conventions
 
-LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
+Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
 
 - LLM operations with `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model`, and other gen_ai attributes
 - Operation inputs/outputs on direct span attributes or via span events
@@ -474,9 +583,9 @@ LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic co
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
-## Disabling LLM Observability conversion
+## Disabling Agent Observability conversion
 
-If you'd only like your generative AI spans to remain in APM and not appear in LLM Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to LLM Observability.
+If you'd only like your generative AI spans to remain in APM and not appear in Agent Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to Agent Observability.
 
 ### Using environment variables
 
@@ -496,11 +605,11 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable LLM Observability conversion for this entire trace
+    # Disable Agent Observability conversion for this entire trace
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 
-[1]: https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/#spans
+[1]: https://github.com/open-telemetry/semantic-conventions-genai
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
@@ -508,4 +617,5 @@ with tracer.start_as_current_span("my-span") as span:
 [6]: /llm_observability/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
+[9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 

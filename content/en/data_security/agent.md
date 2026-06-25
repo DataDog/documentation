@@ -91,7 +91,7 @@ For more information, see the [Secrets Management][14] documentation.
 
 ## Telemetry collection
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake.
 
@@ -168,6 +168,7 @@ agent diagnose show-metadata agent-telemetry
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
+| transactions.input_bytes                    | Incoming transaction payload size in bytes                                                                             |
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
 | **Database**                                |                                                                                                                        |

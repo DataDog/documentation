@@ -15,7 +15,7 @@ disable_sidebar: true
 
 ## Overview
 
-Datadog products and visualizations are built on metrics and tags that follow specific naming patterns. Therefore, Datadog maps incoming OpenTelemetry metrics to the appropriate Datadog metric format. This mapping process may create additional metrics, but these do not affect Datadog billing.
+Datadog products and visualizations are built on metrics and tags that follow specific naming patterns. Datadog automatically maps incoming OpenTelemetry metrics to the appropriate Datadog metric format. You don't need to configure these mappings yourself. This mapping process may create additional metrics, but these do not affect Datadog billing.
 
 <div class="alert alert-info"><strong>Want to unify OpenTelemetry and Datadog metrics in your queries?</strong> Learn how to <a href="/metrics/open_telemetry/query_metrics">query across Datadog and OpenTelemetry metrics</a> from the Metrics Query Editor.</div>
 

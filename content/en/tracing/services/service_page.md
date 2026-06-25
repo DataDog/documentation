@@ -7,7 +7,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
@@ -22,6 +22,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
+  tag: "Learning Center"
+  text: "Getting Started with APM Metrics and Traces"
+- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
+  tag: "Learning Center"
+  text: "Diagnosing Application Bugs with Datadog APM"
 algolia:
   tags: ['service page']
 ---
@@ -30,7 +36,7 @@ algolia:
 
 ## Overview
 
-Selecting a service on the Software Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
@@ -56,7 +62,7 @@ Service health integrates multiple signals (monitors, incidents, and Watchdog In
 
 Service health is available in several places in Datadog:
 
-1. [Software Catalog][23]
+1. [Catalog][23]
 2. Service pages
 3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies.
 4. Service pills
@@ -105,6 +111,8 @@ Datadog provides out-of-the-box graphs for any given service. Use the dropdown a
 {{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs" style="width:100%;">}}
 
 {{% apm-ootb-graphs %}}
+
+<div class="alert alert-tip">When you hover over a latency spike in the latency graph, click <strong>Investigate With Bits AI</strong> to launch an automated investigation. Bits AI analyzes tag divergence and bottlenecks across the affected traces. For more information, see <a href="/bits_ai/bits_chat/#latency-investigations">Latency investigations</a>.</div>
 
 ### Export
 
