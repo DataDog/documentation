@@ -1,6 +1,5 @@
 ---
 title: Custom Entities
-description: Define custom entity types in Catalog to represent components unique to your organization, such as libraries, pipelines, or ML models.
 disable_toc: false
 aliases:
   - /internal_developer_portal/software_catalog/entity_model/custom_entities

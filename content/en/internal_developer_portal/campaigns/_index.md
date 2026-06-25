@@ -1,6 +1,5 @@
 ---
 title: Campaigns
-description: Coordinate time-bound engineering initiatives by grouping Scorecard rules under a shared goal and tracking adoption across entities and teams.
 site_support_id: idp
 further_reading:
 - link: "/internal_developer_portal/scorecards/"

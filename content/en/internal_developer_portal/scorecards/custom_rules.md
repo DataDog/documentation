@@ -1,6 +1,5 @@
 ---
 title: Custom rules
-description: Create custom Scorecard rules through the Scorecards API or Workflow Automation to codify your organization's expectations for software components.
 aliases:
   - /tracing/software_catalog/scorecards/custom_rules
   - /tracing/service_catalog/scorecards/custom_rules

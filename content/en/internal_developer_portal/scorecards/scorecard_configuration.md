@@ -1,6 +1,5 @@
 ---
 title: Scorecard Configuration
-description: Configure out-of-the-box Scorecards for Production Readiness, Observability Best Practices, and Ownership and Documentation, and learn how scores are calculated.
 aliases:
   - /tracing/software_catalog/scorecards/scorecard_configuration
   - /tracing/service_catalog/scorecards/scorecard_configuration

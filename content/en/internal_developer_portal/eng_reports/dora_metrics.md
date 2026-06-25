@@ -1,6 +1,5 @@
 ---
 title: DORA Metrics
-description: View organization-wide software delivery velocity and stability metrics, broken down by service, team, and environment, with historical trends and scheduled reports.
 aliases:
 - /software_catalog/eng_reports/dora_metrics
 further_reading:

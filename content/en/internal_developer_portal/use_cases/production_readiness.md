@@ -1,6 +1,5 @@
 ---
 title: Evaluate Production Readiness
-description: Use Catalog to assess monitoring coverage, enforce governance best practices, and identify security and cost optimization opportunities before services go to production.
 aliases:
   - /tracing/software_catalog/use_cases/production_readiness
   - /software_catalog/use_cases/production_readiness

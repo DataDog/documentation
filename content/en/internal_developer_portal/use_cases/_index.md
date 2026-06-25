@@ -1,6 +1,5 @@
 ---
 title: Use Cases
-description: Learn how teams use Datadog Internal Developer Portal to centralize knowledge, streamline processes, and improve operational efficiency.
 aliases:
   - /tracing/service_catalog/guides
   - /service_catalog/guides

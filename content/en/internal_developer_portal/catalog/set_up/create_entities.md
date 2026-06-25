@@ -1,6 +1,5 @@
 ---
 title: Create Entities
-description: Add entity definitions to Catalog through the Datadog UI or by automating imports with GitHub, Terraform, or the Datadog API.
 disable_toc: false
 aliases:
   - /software_catalog/set_up/new_to_datadog ## aliases for New to Datadog page

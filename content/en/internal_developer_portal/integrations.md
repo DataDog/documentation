@@ -1,6 +1,5 @@
 ---
 title: Integrations
-description: Connect IDP with third-party tools including PagerDuty, OpsGenie, GitHub, Jira, and CI/CD platforms to enrich Catalog metadata and automate actions.
 aliases:
   - /tracing/software_catalog/integrations
   - /tracing/service_catalog/integrations

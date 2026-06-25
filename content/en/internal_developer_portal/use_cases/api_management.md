@@ -1,6 +1,5 @@
 ---
 title: Simplify API Management
-description: Use Catalog to centralize API discovery, ownership, and governance so developers can find, reuse, and maintain APIs across your organization.
 aliases:
   - /tracing/software_catalog/guides/api_management
   - /software_catalog/guides/api_management

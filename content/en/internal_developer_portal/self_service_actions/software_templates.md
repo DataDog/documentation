@@ -1,6 +1,5 @@
 ---
 title: Software Templates
-description: Create reusable Software Templates in Catalog to help developers provision infrastructure and scaffold microservices that align with your organization's best practices.
 aliases:
   - /service_catalog/software_templates
   - /software_catalog/software_templates

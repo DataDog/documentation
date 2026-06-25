@@ -1,6 +1,5 @@
 ---
 title: Import Entities
-description: Sync entities from Backstage or ServiceNow CMDB into Datadog Catalog using the Backstage plugin, API, Terraform, or the GitHub integration.
 disable_toc: false
 aliases:
   - /software_catalog/import_entries_integrations/     ## aliases for Import Entries from Backstage page 

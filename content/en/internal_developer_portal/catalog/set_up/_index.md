@@ -1,6 +1,5 @@
 ---
 title: Set Up Catalog
-description: Populate Catalog by discovering entities from Datadog telemetry, creating entity definitions manually, or importing from third-party sources like Backstage and ServiceNow.
 aliases:
   - /software_catalog/set_up
   - /tracing/software_catalog/guides/validating-service-definition  ## aliases for Validating Service Definition page

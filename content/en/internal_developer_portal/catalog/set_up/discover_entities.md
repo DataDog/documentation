@@ -1,6 +1,5 @@
 ---
 title: Discover Entities
-description: Learn how Catalog automatically discovers entities from APM, USM, and RUM, and how to import additional entities from infrastructure metrics and logs.
 disable_toc: false
 aliases:
   - /software_catalog/set_up/existing_datadog_user ## aliases for Existing Datadog User page

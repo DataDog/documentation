@@ -1,6 +1,5 @@
 ---
 title: Accelerate Developer Onboarding
-description: Use Catalog and Software Templates to give new developers quick access to documentation, runbooks, and automated onboarding workflows that reduce time-to-first-commit.
 aliases:
   - /tracing/software_catalog/guides/dev_onboarding
   - /software_catalog/guides/dev_onboarding

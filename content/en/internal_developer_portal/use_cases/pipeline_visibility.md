@@ -1,6 +1,5 @@
 ---
 title: Streamline the Development Lifecycle with CI Visibility
-description: Use the Catalog Delivery tab to monitor CI pipeline performance, track static analysis violations, and improve pre-production reliability for your services.
 aliases:
   - /tracing/software_catalog/use_cases/pipeline_visibility
   - /service_catalog/use_cases/pipeline_visibility

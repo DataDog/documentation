@@ -1,6 +1,5 @@
 ---
 title: Engineering Reports
-description: Access executive-level reports on reliability, DORA metrics, and Scorecard performance to identify gaps and drive improvements across engineering teams.
 cascade:
   site_support_id: idp
 further_reading:

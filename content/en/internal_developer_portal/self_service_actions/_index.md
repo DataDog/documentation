@@ -1,6 +1,5 @@
 ---
 title: Self-Service Actions
-description: Platform teams can define and share templates that let developers provision infrastructure, scaffold services, manage deployments, and automate tasks with one click.
 cascade:
   site_support_id: idp
 aliases:
