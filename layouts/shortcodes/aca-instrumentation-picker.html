@@ -1,0 +1,28 @@
+<div class="aca-instrumentation-picker" data-base-path="/serverless/azure_container_apps">
+  <h3 id="choose-instrumentation-method">Step 1: Choose an instrumentation method</h3>
+  <div class="aca-instrumentation-picker__methods" role="group" aria-labelledby="choose-instrumentation-method">
+    <button type="button" class="aca-instrumentation-picker__method is-selected" data-method="in_container" aria-pressed="true">
+      <span class="aca-instrumentation-picker__method-title">In-Container</span>
+      <span class="aca-instrumentation-picker__method-desc">Single container; no extra sidecar overhead, lower cost</span>
+    </button>
+    <button type="button" class="aca-instrumentation-picker__method" data-method="sidecar" aria-pressed="false">
+      <span class="aca-instrumentation-picker__method-title">Sidecar</span>
+      <span class="aca-instrumentation-picker__method-desc">Two containers; Agent isolation, better for performance-sensitive workloads</span>
+    </button>
+  </div>
+
+  <h3 id="choose-language">Step 2: Choose your language</h3>
+  <div class="aca-instrumentation-picker__languages" role="group" aria-labelledby="choose-language">
+    <button type="button" class="aca-instrumentation-picker__language is-selected" data-lang="python" data-lang-label="Python" aria-pressed="true">Python</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="nodejs" data-lang-label="Node.js" aria-pressed="false">Node.js</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="go" data-lang-label="Go" aria-pressed="false">Go</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="java" data-lang-label="Java" aria-pressed="false">Java</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="dotnet" data-lang-label=".NET" aria-pressed="false">.NET</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="ruby" data-lang-label="Ruby" aria-pressed="false">Ruby</button>
+    <button type="button" class="aca-instrumentation-picker__language" data-lang="php" data-lang-label="PHP" aria-pressed="false">PHP</button>
+  </div>
+
+  <a class="btn btn-primary aca-instrumentation-picker__cta" href="/serverless/azure_container_apps/in_container/python/">
+    Go to In-Container setup for Python &rarr;
+  </a>
+</div>

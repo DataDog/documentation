@@ -12,6 +12,7 @@ import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
 import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
+import { initAllAcaInstrumentationPickers } from './components/aca-instrumentation-picker';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -130,6 +131,10 @@ const doOnLoad = () => {
     }
 
     initCardGrid();
+
+    if (document.querySelector('.aca-instrumentation-picker')) {
+        initAllAcaInstrumentationPickers();
+    }
 
     // Only initialize the expression language evaluator if the page contains an expression evaluator.
     if (document.querySelector('.expression-evaluator')) {

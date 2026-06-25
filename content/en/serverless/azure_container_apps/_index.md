@@ -22,18 +22,14 @@ further_reading:
 ---
 
 ## Overview
-Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides standard metrics and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a Serverless Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics][4] are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
+
+This guide shows you how to instrument your [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/overview) workloads to send traces, metrics, and logs to Datadog. Choose an instrumentation method and your application language to get setup instructions for your environment.
 
 {{< img src="serverless/azure_container_apps/aca_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure Container Apps selected." style="width:100%;" >}}
 
-## Choosing an Instrumentation Method
+## Instrument your application
 
-To instrument your Azure Container App with Datadog, choose one of two options:
-
-{{% aca-container-options %}}
-
-- [**In-Container**][2]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
-- [**Sidecar**][3]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
+{{< aca-instrumentation-picker >}}
 
 ## Comparison: In-Container versus sidecar instrumentation
 
@@ -44,13 +40,8 @@ To instrument your Azure Container App with Datadog, choose one of two options:
 | Cost overhead                 | Less than sidecar (no extra container).                  | Extra vCPU/memory. Overallocating the sidecar wastes cost; underallocating leads to premature scaling.                                                       |
 | Logging                       | Direct stdout/stderr access.                             | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation             | In rare cases, Datadog Agent bugs can affect your app.   | Datadog Agent faults are isolated.                                                                                                                           |
+| Best for                      | Simpler setup, lower cost, and direct log piping.        | Multiple containers per service, Agent isolation, and performance-sensitive workloads.                                                                       |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /integrations/azure/#log-collection
-[2]: /serverless/azure_container_apps/in_container
-[3]: /serverless/azure_container_apps/sidecar
-[4]: /integrations/azure-container-apps/#metrics
