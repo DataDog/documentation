@@ -41,7 +41,7 @@ To ensure the actual changes made to your Lambda functions are expected, try set
 
 ## Collect debugging logs
 
-Enable verbose debugging logs by setting the environment variable `DD_LOG_LEVEL` to `debug` on your Lambda functions. If you are using the [Datadog Forwarder Lambda function][2] for data forwarding from logs, also set `DD_LOG_LEVEL` to `debug` on the Forwarder Lambda function.
+Enable verbose debugging logs by setting the environment variable `DD_LOG_LEVEL` to `debug` on your Lambda functions. Debug logs are sent to the corresponding Lambda function's CloudWatch log group. If you are using the [Datadog Forwarder Lambda function][2] for data forwarding from logs, also set `DD_LOG_LEVEL` to `debug` on the Forwarder Lambda function. 
 
 If you have issues with tracing, set the environment variable `DD_TRACE_DEBUG` to `true` for extra debugging logs from the Datadog Tracer.
 
