@@ -1,6 +1,9 @@
 ---
-title: Manage Subject Types
+title: Subject Types
 description: Configure subject types so Datadog can randomize experiments and join exposures to metrics.
+aliases:
+  - /experiments/subject_types
+  - /experiments/subject_types/
 further_reading:
 - link: "/experiments/plan_and_launch_experiments"
   tag: "Documentation"
@@ -105,5 +108,5 @@ When Datadog computes experiment results, it joins experiment exposures to Produ
 
 [1]: /experiments/plan_and_launch_experiments/
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
-[3]: /experiments/analysis_methods/
+[3]: /experiments/statistics/analysis_methods/
 [4]: /experiments/guide/connecting_a_data_warehouse/

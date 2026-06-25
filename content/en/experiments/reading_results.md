@@ -46,4 +46,4 @@ Subject-level properties are based on attributes at the initial time of exposure
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/
-[2]: /experiments/analysis_methods
+[2]: /experiments/statistics/analysis_methods

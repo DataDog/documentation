@@ -3,14 +3,16 @@ title: Cumulative Impact
 description: Aggregate the noise-adjusted effect of every experiment a team has run against a metric to estimate the total movement over time.
 aliases:
   - /product_analytics/experimentation/cumulative_impact/
+  - /experiments/cumulative_impact
+  - /experiments/cumulative_impact/
 further_reading:
 - link: "/experiments/reading_results"
   tag: "Documentation"
   text: "Reading Experiment Results"
-- link: "/experiments/minimum_detectable_effect"
+- link: "/experiments/statistics/minimum_detectable_effect"
   tag: "Documentation"
   text: "Minimum Detectable Effects"
-- link: "/experiments/analysis_methods"
+- link: "/experiments/statistics/analysis_methods"
   tag: "Documentation"
   text: "Analysis Methods"
 ---
@@ -202,4 +204,4 @@ Cumulative impact requires at least five experiments with non-failing diagnostic
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /experiments/minimum_detectable_effect/
+[1]: /experiments/statistics/minimum_detectable_effect/
