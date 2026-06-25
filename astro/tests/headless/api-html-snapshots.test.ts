@@ -28,7 +28,7 @@ interface AuditPage {
 }
 
 /**
- * Audit set per the README. Each entry covers a meaningful rendering
+ * Audit set. Each entry covers a meaningful rendering
  * variation. Static pages and category landing pages are sampled at
  * the page level; representative operation pages exercise the per-op
  * route added by the shorter-API-pages migration.

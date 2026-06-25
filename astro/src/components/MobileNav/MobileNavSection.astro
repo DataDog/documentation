@@ -10,6 +10,7 @@ import type { DocsNavNode } from "@lib/componentUtils/docsNavMenu";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import Self from "./MobileNavSection.astro";
+import { HUGO_ORIGIN } from "@config/origins";
 
 interface Props {
   node: DocsNavNode;
@@ -19,7 +20,17 @@ interface Props {
 
 const { node, level, open = false } = Astro.props;
 const cl = classListFactory(styles);
-const hasChildren = node.children.length > 0;
+// Hugo's mobile nav only expands top-level sections; subsections are plain links.
+const hasChildren = level === 0 && node.children.length > 0;
+
+// API docs (/api/...) are served by this Astro site; all other links go to Hugo.
+function resolveNavHref(href: string | null): string {
+  if (!href) return HUGO_ORIGIN + "/";
+  if (href.startsWith("/api/")) return href;
+  if (href.startsWith("http://") || href.startsWith("https://")) return href;
+  if (href.startsWith("#")) return href;
+  return HUGO_ORIGIN + href;
+}
 ---
 
 {
@@ -49,7 +60,7 @@ const hasChildren = node.children.length > 0;
             <a
               class={`${cl("link")} mobile-nav__link`}
               style={`--depth:${level + 1}`}
-              href={node.href}
+              href={resolveNavHref(node.href)}
             >
               {node.label}
             </a>
@@ -67,7 +78,7 @@ const hasChildren = node.children.length > 0;
       class={`${cl("link")} mobile-nav__link`}
       data-level={level}
       style={`--depth:${level}`}
-      href={node.href ?? "/"}
+      href={resolveNavHref(node.href)}
     >
       {node.label}
     </a>

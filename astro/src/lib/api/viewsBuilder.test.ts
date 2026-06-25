@@ -29,8 +29,16 @@ import {
 } from './schemas/views';
 import {
   CATEGORY_AUDIT_CASES,
+  FIXTURE_ONLY_CATEGORY_AUDIT_CASES,
   ENDPOINT_AUDIT_CASES,
 } from '../../../tests/fixtures/api/auditCases';
+
+// The frozen fixture also covers categories retired from the live spec
+// (e.g. screenboards); the integration test skips those, the unit layer keeps them.
+const ALL_CATEGORY_AUDIT_CASES = [
+  ...CATEGORY_AUDIT_CASES,
+  ...FIXTURE_ONLY_CATEGORY_AUDIT_CASES,
+];
 
 describe('viewsBuilder snapshots', () => {
   describe('getCategoriesView', () => {
@@ -61,7 +69,7 @@ describe('viewsBuilder snapshots', () => {
   });
 
   describe('getCategoryViewBySlug', () => {
-    for (const { slug, label } of CATEGORY_AUDIT_CASES) {
+    for (const { slug, label } of ALL_CATEGORY_AUDIT_CASES) {
       it(`${slug} (${label})`, async () => {
         const result = await getCategoryViewBySlug(slug);
         ApiCategorySchema.parse(result);

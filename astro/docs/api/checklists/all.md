@@ -36,7 +36,7 @@ Read [docs/api/reference/pipeline.md](../reference/pipeline.md) first to underst
 
 - Unit tests run against the **frozen** trimmed fixture in [tests/fixtures/api/](../../../tests/fixtures/api/), wired by [vitest.unit.config.ts](../../../vitest.unit.config.ts). The integration test [viewsBuilder.full-spec.test.ts](../../../tests/integration/viewsBuilder.full-spec.test.ts) validates shapes against the **live** upstream spec. Know which you're affecting.
 
-- If your change needs spec data (a tag, path, or operation) not present in the fixture, add it to the retained set in [scripts/generate-test-fixture.mjs](../../../scripts/generate-test-fixture.mjs) (`KEEP_TAGS`), then regenerate with `npm run generate-fixture` followed by `npm test -- -u`. The full `components` section is preserved so internal `$ref`s still resolve — don't trim it.
+- The fixtures are **frozen and hand-maintained** — there is no regeneration step. If your change needs spec data (a tag, path, operation, or schema) not present in the fixture, edit the fixture YAML in [tests/fixtures/api/](../../../tests/fixtures/api/) directly to add it, then update snapshots with `npm test -- -u` and review the diff. When you add a schema, make sure every `$ref` it introduces also resolves within the fixture (the fixture keeps only the schemas reachable from the retained paths, plus a capped `WidgetDefinition.oneOf`, so add any newly referenced schemas too).
 
 - New curated audit cases (categories or endpoints exercised by snapshots) are added to [tests/fixtures/api/auditCases.ts](../../../tests/fixtures/api/auditCases.ts) so they're covered, not just present in the fixture.
 

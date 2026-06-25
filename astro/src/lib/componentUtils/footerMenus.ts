@@ -10,7 +10,7 @@
 import { parse as parseYaml } from "yaml";
 import { z } from "zod";
 import menusRaw from "@websites-modules/config/_default/menus/menus.en.yaml?raw";
-import { CORP_ORIGIN } from "@config/typesense";
+import { CORP_ORIGIN } from "@config/origins";
 import { i18n } from "@lib/i18n/i18n";
 import { getFooterProductLinks } from "@lib/componentUtils/menuData";
 

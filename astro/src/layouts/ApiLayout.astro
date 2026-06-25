@@ -115,7 +115,7 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     align-items: center;
     margin: 0 calc(-1 * var(--space-xl)) var(--space-md) -29px;
     position: sticky;
-    top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
     z-index: 5;
     background: var(--color-bg);
     padding: var(--space-sm) var(--space-xl) 0 29px;
@@ -123,13 +123,13 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
 
   @media (min-width: 992px) {
     .api-toolbar {
-      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+      top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
       transition: top 0.2s ease-in-out;
     }
 
     :global([data-scrolled]) .api-toolbar {
       top: calc(
-        var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled)
+        var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled)
       );
     }
   }

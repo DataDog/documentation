@@ -2,9 +2,9 @@
   width: var(--sidebar-width);
   flex-shrink: 0;
   position: sticky;
-  top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+  top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
   align-self: flex-start;
-  max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height));
+  max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height));
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -20,14 +20,14 @@
 
 @media (min-width: 992px) {
   .api-side-nav {
-    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
-    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop));
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop));
     transition: top 0.2s ease-in-out, max-height 0.2s ease-in-out;
   }
 
   :global([data-scrolled]) .api-side-nav {
-    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled));
-    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop-scrolled));
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled));
+    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop-scrolled));
   }
 }
 

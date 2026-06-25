@@ -1,18 +1,32 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import type { BannerParams } from '@lib/componentUtils/bannerData';
 
 const title = 'Announcement Banner';
+
+// A representative configured banner. The live site config carries no banner
+// when no campaign is active (`BaseLayout` then renders nothing), so this page
+// passes a per-page override to demonstrate the "there is a banner" state and
+// give the visual regression test a stable target. Passing it through
+// `BaseLayout` also sets the `announcement` body class, so the header and body
+// offset reserve the banner's height — exactly as on a live campaign page.
+const demoBanner: BannerParams = {
+  desktop_message: '<span>Datadog is coming to a city near you. <strong>See the schedule.</strong></span>',
+  mobile_message: '<span>Datadog events near you</span>',
+  background_color: '#632ca6',
+  external_link: 'https://example.com/events',
+};
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} announcementBanner={demoBanner}>
   <div class="docs-page">
     <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
     <div class="prose">
       <h1>AnnouncementBanner</h1>
 
-      <p>Fixed site-wide banner rendered at the top of every page by <code>BaseLayout</code>. Ported from the Hugo <code>announcement_banner</code> partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner you see above this content is the component itself.</p>
+      <p>Fixed site-wide banner rendered at the top of every page by <code>BaseLayout</code>. Ported from the Hugo <code>announcement_banner</code> partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner pinned above this content is a configured demo instance (see <code>override</code> below).</p>
 
-      <p>The banner reads its copy from the mocked <code>announcement_banner</code> block in <code>mocked-dependencies/hugo_site/config/_default/params.en.yaml</code>.</p>
+      <p>The banner has two states, mirroring Hugo's <code>{`{{ if $announce }}`}</code> guard: when an <code>announcement_banner</code> is configured it renders; when none is configured (the live default with no active campaign) it renders nothing.</p>
 
       <h2>Properties</h2>
       <table>

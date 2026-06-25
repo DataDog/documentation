@@ -1,4 +1,4 @@
-import { HUGO_ORIGIN } from "@config/typesense";
+import { HUGO_ORIGIN } from "@config/origins";
 import type { TypesenseHit, MultiSearchResponse } from "@lib/search/typesense";
 
 export interface NormalizedHit {

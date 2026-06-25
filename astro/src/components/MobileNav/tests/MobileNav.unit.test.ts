@@ -5,6 +5,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import preactRenderer from "@astrojs/preact/server.js";
 import MobileNav from "../MobileNav.astro";
 import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
+import { HUGO_ORIGIN } from "@config/origins";
 
 async function renderMobileNav(): Promise<Document> {
   const container = await AstroContainer.create();
@@ -58,12 +59,26 @@ describe("MobileNav.astro", () => {
     );
   });
 
-  it("renders nested child links at build time (SEO)", async () => {
+  it("renders nested child links pointing to Hugo at build time (SEO)", async () => {
     const doc = await renderMobileNav();
-    // "Getting Started" lives under Essentials and resolves to a root-relative URL.
-    const gettingStarted = doc.querySelector('a[href="/getting_started/"]');
+    // "Getting Started" is a Hugo docs page, so its link is absolute with HUGO_ORIGIN.
+    const gettingStarted = doc.querySelector(
+      `a[href="${HUGO_ORIGIN}/getting_started/"]`,
+    );
     expect(gettingStarted).not.toBeNull();
     expect(gettingStarted?.textContent).toContain("Getting Started");
+  });
+
+  it("keeps API links relative (Astro) and makes non-API links absolute (Hugo)", async () => {
+    const doc = await renderMobileNav();
+    // The "API" child of Essentials has url /api/latest/..., so it stays relative.
+    const apiLink = doc.querySelector('a[href^="/api/"]');
+    expect(apiLink).not.toBeNull();
+    // A non-API link like Getting Started must be absolute with HUGO_ORIGIN.
+    const hugoLink = doc.querySelector(
+      `a[href^="${HUGO_ORIGIN}/getting_started/"]`,
+    );
+    expect(hugoLink).not.toBeNull();
   });
 
   it("renders every top-level section from the menu tree", async () => {

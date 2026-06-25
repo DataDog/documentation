@@ -15,7 +15,9 @@
   position: fixed;
   right: 0;
   left: 0;
-  top: var(--hugo-banner-height);
+  /* Offset by the banner only when one is configured (see
+     --hugo-active-banner-height); otherwise the header sits at the top. */
+  top: var(--hugo-active-banner-height);
   align-items: center;
   box-shadow: var(--hugo-header-shadow);
   background-color: var(--color-bg);

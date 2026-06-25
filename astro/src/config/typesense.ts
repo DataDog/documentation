@@ -33,7 +33,3 @@ export function getTypesenseConfig(): TypesenseEnv {
   return preview;
 }
 
-// TODO: These belong elsewhere, once the project
-// has a defined config structure
-export const HUGO_ORIGIN = import.meta.env.SITE as string;
-export const CORP_ORIGIN = "https://www.datadoghq.com";

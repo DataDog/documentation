@@ -3,19 +3,10 @@ import { test, expect } from '@playwright/test';
 const PAGE_WITH_CONTENT = '/docs/test_pages/components/header/';
 
 test.describe('Header — Hugo-identical dimensions and behavior', () => {
-  test('banner is 30px tall, fixed, and spans the viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 1400, height: 900 });
-    await page.goto(PAGE_WITH_CONTENT);
-
-    const banner = page.locator('.announcement-banner');
-    const box = await banner.boundingBox();
-    expect(box).not.toBeNull();
-    expect(Math.round(box!.height)).toBe(30);
-    expect(Math.round(box!.y)).toBe(0);
-    expect(Math.round(box!.width)).toBe(1400);
-  });
-
-  test('header is 130px tall at ≥992px', async ({ page }) => {
+  // PAGE_WITH_CONTENT carries no announcement banner, so the header sits at the
+  // very top (y:0). The banner-present case — where the header is offset below a
+  // 30px banner — is covered in the AnnouncementBanner browser tests.
+  test('header is 130px tall at ≥992px and sits at the top with no banner', async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
 
@@ -23,10 +14,10 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     const box = await header.boundingBox();
     expect(box).not.toBeNull();
     expect(Math.round(box!.height)).toBe(130);
-    expect(Math.round(box!.y)).toBe(30);
+    expect(Math.round(box!.y)).toBe(0);
   });
 
-  test('header is 60px tall below the 992px breakpoint', async ({ page }) => {
+  test('header is 60px tall below the 992px breakpoint and sits at the top with no banner', async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
 
@@ -34,7 +25,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     const box = await header.boundingBox();
     expect(box).not.toBeNull();
     expect(Math.round(box!.height)).toBe(60);
-    expect(Math.round(box!.y)).toBe(30);
+    expect(Math.round(box!.y)).toBe(0);
   });
 
   test('header snaps to 65px after scrolling past the 30px threshold on desktop', async ({ page }) => {
@@ -132,13 +123,13 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
         })
         .first();
 
-    // Essentials renders open (contains the API docs), so its child sections are
-    // revealed. "Getting Started" is itself a collapsible sub-section, so its
-    // summary toggle is visible even though its own nested links stay collapsed.
+    // Essentials renders open (contains the API docs), so its child links are
+    // revealed. Only top-level sections collapse; subsections (like "Getting
+    // Started") are plain links, matching Hugo's mobile nav.
     const essentials = topSectionByLabel('Essentials');
     await expect(essentials).toHaveAttribute('open', '');
     await expect(
-      essentials.locator('.mobile-nav__section-toggle', { hasText: 'Getting Started' }).first(),
+      essentials.locator('.mobile-nav__link', { hasText: 'Getting Started' }).first(),
     ).toBeVisible();
 
     // A different section starts collapsed and opens on click — independently

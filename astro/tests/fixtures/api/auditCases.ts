@@ -25,8 +25,20 @@ export const CATEGORY_AUDIT_CASES: readonly CategoryAuditCase[] = [
   { slug: 'aws-integration', label: 'mixed v1+v2, deprecated + unstable' },
   { slug: 'monitors', label: 'mixed v1+v2, deprecated + unstable' },
   { slug: 'dashboard-lists', label: 'category-level deprecated, has endpoints' },
-  { slug: 'screenboards', label: 'empty deprecated category, 0 endpoints' },
   { slug: 'usage-metering', label: 'large, all GET, many deprecated' },
+];
+
+/**
+ * Categories that no longer exist in the live spec but are preserved in the
+ * frozen fixture for shape coverage. The integration test (live spec) skips
+ * these; only the unit snapshot tests (frozen fixture) exercise them.
+ *
+ * `screenboards` was a deprecated empty category (0 endpoints) that upstream
+ * has since removed entirely. It's exactly the kind of edge case a frozen
+ * fixture is meant to keep stable, so it stays covered at the unit layer.
+ */
+export const FIXTURE_ONLY_CATEGORY_AUDIT_CASES: readonly CategoryAuditCase[] = [
+  { slug: 'screenboards', label: 'empty deprecated category, 0 endpoints (retired upstream)' },
 ];
 
 export const ENDPOINT_AUDIT_CASES: readonly EndpointAuditCase[] = [

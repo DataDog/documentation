@@ -18,7 +18,7 @@ import {
   flattenSearchResult,
   type MultiSearchResponse,
 } from "@lib/search/typesense";
-import { HUGO_ORIGIN } from "@config/typesense";
+import { HUGO_ORIGIN } from "@config/origins";
 
 afterEach(() => {
   cleanup();

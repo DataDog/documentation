@@ -4,6 +4,7 @@ import AnnouncementBanner from '@components/AnnouncementBanner/AnnouncementBanne
 import Header from '@components/Header/Header.astro';
 import Footer from '@components/Footer/Footer.astro';
 import { stripLocalePrefix, type Locale } from '@lib/i18n/locale';
+import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
@@ -24,6 +25,8 @@ interface Props {
   lang?: Locale;
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
+  /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
+  announcementBanner?: BannerParams;
 }
 
 const {
@@ -34,7 +37,14 @@ const {
   ogType = 'article',
   lang: langProp,
   hreflang,
+  announcementBanner,
 } = Astro.props;
+
+// Resolve the banner the same way the component does, so the body's
+// `announcement` class (which drives the header/body offset) stays in lockstep
+// with whether a banner actually renders. Mirrors Hugo's `hasAnnouncementBanner`.
+const bannerParams = announcementBanner ?? getBannerParams();
+const hasBanner = Object.keys(bannerParams).length > 0;
 
 const lang: Locale = langProp ?? stripLocalePrefix(Astro.url.pathname).lang;
 const localeDefaults = getLocaleDefaults(lang);
@@ -147,8 +157,8 @@ const hreflangResolved = hreflang?.map((h) => ({
       })();
     </script>
   </head>
-  <body>
-    <AnnouncementBanner />
+  <body class:list={[{ announcement: hasBanner }]}>
+    <AnnouncementBanner override={announcementBanner} />
     <Header />
     <div class="base-layout__body">
       <slot />
@@ -214,12 +224,12 @@ const hreflangResolved = hreflang?.map((h) => ({
     </script>
     <style>
       .base-layout__body {
-        padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+        padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
       }
 
       @media (min-width: 992px) {
         .base-layout__body {
-          padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+          padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
         }
       }
 

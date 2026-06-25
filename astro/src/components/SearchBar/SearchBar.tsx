@@ -3,11 +3,8 @@ import { createPortal } from "preact/compat";
 import styles from "./SearchBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { multiSearch } from "@lib/search/typesense";
-import {
-  getTypesenseConfig,
-  HUGO_ORIGIN,
-  type TypesenseEnv,
-} from "@config/typesense";
+import { getTypesenseConfig, type TypesenseEnv } from "@config/typesense";
+import { HUGO_ORIGIN } from "@config/origins";
 import {
   CATEGORY_ORDER,
   groupHits,

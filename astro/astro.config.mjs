@@ -31,6 +31,10 @@ function deriveSiteUrl() {
 export default defineConfig({
   site: deriveSiteUrl(),
   integrations: [markdoc(), preact()],
+  // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
+  // dev server, which pollutes browser-test selectors and screenshots. Disabled
+  // so dev output matches prod for tests; it isn't used in development anyway.
+  devToolbar: { enabled: false },
   build: {
     inlineStylesheets: "always",
   },

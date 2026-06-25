@@ -8,12 +8,12 @@
     "build:en": "SKIP_TRANSLATIONS=true astro build",
     "preview": "astro preview --port 4322",
     "preview:proxied": "PROXIED=1 astro preview --port 4321",
-    "test": "npm run test:unit && npm run test:browser",
-    "test:unit": "vitest run",
-    "generate-fixture": "node scripts/generate-test-fixture.mjs",
+    "test": "npm run test:headless && npm run test:browser",
+    "test:headless": "vitest run",
     "test:browser": "USE_DEV_SERVER=true playwright test",
-    "test:browser:strict": "SKIP_TRANSLATIONS=true playwright test --grep-invert i18n",
-    "test:browser:i18n": "playwright test --grep i18n"
+    "test-ai": "npm run test:headless-ai && npm run test:browser-ai",
+    "test:headless-ai": "vitest run --reporter=dot --silent",
+    "test:browser-ai": "USE_DEV_SERVER=true playwright test --reporter=dot"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

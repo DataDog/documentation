@@ -3,6 +3,12 @@
    once Hugo itself is deprecated. */
 :root {
   --hugo-banner-height: 30px;
+  /* Effective banner offset applied to the fixed header's `top` and the body's
+     padding-top. The announcement banner only renders when one is configured
+     (mirrors Hugo's `hasAnnouncementBanner`), so this collapses to 0 by default
+     and is opted back in by `body.announcement` (set in BaseLayout). Without
+     this, a suppressed banner leaves a 30px gap at the top of every page. */
+  --hugo-active-banner-height: 0px;
   --hugo-header-height: 60px;                  /* <992px */
   --hugo-header-height-desktop: 130px;         /* ≥992px, resting */
   --hugo-header-height-desktop-scrolled: 65px; /* ≥992px, after .main-nav-scrolled */
@@ -114,6 +120,12 @@
   --hugo-modal-overlay: rgba(0, 0, 0, 0.5);
   --hugo-modal-border-radius: 6px;
   --hugo-modal-max-width: 500px;
+}
+
+/* When a banner is configured, BaseLayout adds `announcement` to <body>; the
+   fixed header and body padding then reserve the banner's height. */
+body.announcement {
+  --hugo-active-banner-height: var(--hugo-banner-height);
 }
 
 [data-theme='dark'] {
