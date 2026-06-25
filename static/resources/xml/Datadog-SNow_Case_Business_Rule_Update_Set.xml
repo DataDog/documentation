@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2023-07-25 20:57:16">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Datadog">28a41a50db032200c1e6771ebf961998</application>
+<application_name>Datadog</application_name>
+<application_scope>x_datad_datadog</application_scope>
+<application_version>1.2.1</application_version>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Datadog Case Business Rule</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>695df73097d83110d8eab376f053af3c</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2023-07-25 20:57:16</sys_created_on>
+<sys_id>71fdf77097d83110d8eab376f053af35</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2023-07-25 20:57:16</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Datadog">28a41a50db032200c1e6771ebf961998</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_1d8dbb3097d83110d8eab376f053afe5</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;false&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;em_alert&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="em_alert"&gt;source=Datadog^type=26ba3bf897983110d8eab376f053af3d^incidentISNOTEMPTY^additional_infoVALCHANGES^EQ&lt;item endquery="false" field="source" goto="false" newquery="false" operator="=" or="false" value="Datadog"/&gt;&lt;item display_table="em_event_type" display_value="Datadog Case" endquery="false" field="type" goto="false" newquery="false" operator="=" or="false" value="26ba3bf897983110d8eab376f053af3d"/&gt;&lt;item endquery="false" field="incident" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/&gt;&lt;item endquery="false" field="additional_info" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Datadog Case Alert Update&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var record = new GlideRecord('incident');
+	record.addQuery("sys_id", current.incident.sys_id);
+	record.query();
+	record.next();
+	record.work_notes = JSON.parse(current.additional_info.toString()).work_note;
+	record.update();
+
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-07-25 20:57:02&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;1d8dbb3097d83110d8eab376f053afe5&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Datadog Case Alert Update&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Datadog" source="x_datad_datadog"&gt;28a41a50db032200c1e6771ebf961998&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Datadog"&gt;28a41a50db032200c1e6771ebf961998&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_1d8dbb3097d83110d8eab376f053afe5&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-07-25 20:57:02&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;after&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=1d8dbb3097d83110d8eab376f053afe5"/&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1303122381</payload_hash>
+<remote_update_set display_value="Datadog Case Business Rule">71fdf77097d83110d8eab376f053af35</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2023-07-25 20:57:16</sys_created_on>
+<sys_id>35fdf77097d83110d8eab376f053af35</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1898ed750d20000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2023-07-25 20:57:16</sys_updated_on>
+<table>em_alert</table>
+<target_name>Datadog Case Alert Update</target_name>
+<type>Business Rule</type>
+<update_domain>global</update_domain>
+<update_guid>eaedfb30ddd83110fe49e961fc737e00</update_guid>
+<update_guid_history>eaedfb30ddd83110fe49e961fc737e00:1303122381</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
