@@ -1,6 +1,6 @@
 ---
-title: Tag Allow/Block List
-description: Learn how to use the Tag Allow/Block List processor for metrics.
+title: Tags Allow/Block List
+description: Learn how to use the Tags Allow/Block List processor for metrics.
 disable_toc: false
 aliases:
   - /observability_pipelines/processors/tag_control/metrics/
