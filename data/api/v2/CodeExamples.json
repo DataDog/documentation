@@ -1669,6 +1669,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_253109967",
+      "description": "Validate an observability pipeline with ClickHouse destination with all fields set returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1785209526",
       "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
     },
