@@ -45,9 +45,19 @@
       {{- end -}}
   {{- end -}}
 
-  {{- /* Build the list of (header, html) segments to index. */ -}}
+  {{- /* Build the list of segments to index. Each segment is a dict with:
+           header: display section header
+           html:   the HTML block
+           tab:    the tab's data-lang ("" for non-tab segments), used for the ?tab= link
+           anchor: the heading anchor ("" when there is no enclosing heading) */ -}}
+  {{- $baseAnchor := $baseHeader | anchorize -}}
   {{- $segments := slice -}}
   {{- if $tabSplit -}}
+      {{- /* Capture any intro content before the first tab, so it isn't dropped. */ -}}
+      {{- $preTab := index (split $html (index $tabOpens 0)) 0 -}}
+      {{- if gt (len (trim ($preTab | plainify) " \r\n\t")) 2 -}}
+          {{- $segments = $segments | append (dict "header" $baseHeader "html" $preTab "tab" "" "anchor" $baseAnchor) -}}
+      {{- end -}}
       {{- range $open := $tabOpens -}}
           {{- $after := index (split $html $open) 1 -}}
           {{- $nextOpen := index (findRE $tabRe $after 1) 0 | default "" -}}
@@ -59,20 +69,26 @@
           {{- if (findRE `title="` $open) -}}
               {{- $tabTitle = (replaceRE `(?s).*?title="([^"]*)".*` "$1" $open) | htmlUnescape | safeHTML -}}
           {{- end -}}
+          {{- $tabLang := "" -}}
+          {{- if (findRE `data-lang="` $open) -}}
+              {{- $tabLang = replaceRE `(?s).*?data-lang="([^"]*)".*` "$1" $open -}}
+          {{- end -}}
           {{- $h := $tabTitle -}}
           {{- if and $baseHeader $tabTitle -}}
               {{- $h = print $baseHeader " - " $tabTitle -}}
           {{- else if not $tabTitle -}}
               {{- $h = $baseHeader -}}
           {{- end -}}
-          {{- $segments = $segments | append (dict "header" $h "html" $block) -}}
+          {{- $segments = $segments | append (dict "header" $h "html" $block "tab" $tabLang "anchor" $baseAnchor) -}}
       {{- end -}}
   {{- else -}}
-      {{- $segments = $segments | append (dict "header" $baseHeader "html" $html) -}}
+      {{- $segments = $segments | append (dict "header" $baseHeader "html" $html "tab" "" "anchor" $baseAnchor) -}}
   {{- end -}}
 
   {{- range $segments -}}
       {{- $section_header := .header -}}
+      {{- $section_tab := .tab -}}
+      {{- $section_anchor := .anchor -}}
       {{- $section_content := .html | plainify | htmlUnescape | safeHTML -}}
       {{- if and (ne $section_header "Further Reading") (ne (trim $section_content " \r\n\t") "") -}}
           {{- $words := split $section_content " " -}}
@@ -86,14 +102,28 @@
           {{- end -}}
           {{- range $i, $c := $chunked -}}
               {{- if gt (len $c) 2 -}}
-                  {{- $anchor := $section_header | anchorize -}}
+                  {{- /* objectID keeps using the (possibly combined) section header anchor so
+                         IDs stay unique and stable across builds. */ -}}
+                  {{- $id_anchor := $section_header | anchorize -}}
                   {{- $hdr := $section_header -}}
                   {{- if $page.Params.exclude_headers_from_search -}}
                       {{- $hdr = "" -}}
                   {{- end -}}
-                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $anchor "_" $i "_" $order -}}
-                  {{- $full_url := print $page.Permalink "#" $anchor -}}
-                  {{- $relpermalink := print $page.RelPermalink "#" $anchor -}}
+                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i "_" $order -}}
+                  {{- /* Link target: tab segments open the tab via ?tab=<data-lang> (and scroll
+                         to the enclosing heading anchor if present); non-tab segments link to
+                         the heading anchor. */ -}}
+                  {{- $url_suffix := "" -}}
+                  {{- if $section_tab -}}
+                      {{- $url_suffix = print "?tab=" $section_tab -}}
+                      {{- if $section_anchor -}}
+                          {{- $url_suffix = print $url_suffix "#" $section_anchor -}}
+                      {{- end -}}
+                  {{- else if $section_anchor -}}
+                      {{- $url_suffix = print "#" $section_anchor -}}
+                  {{- end -}}
+                  {{- $full_url := print $page.Permalink $url_suffix -}}
+                  {{- $relpermalink := print $page.RelPermalink $url_suffix -}}
                   {{- $hugo_context.Scratch.Add "algoliaindex" (
                       dict "objectID" $object_id
                       "id" $object_id
