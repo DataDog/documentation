@@ -65,8 +65,8 @@ Flame graphs can be included in Dashboards and Notebooks with the [Profiling Fla
 
 When viewing an aggregated profile (averaged across multiple profiles), the flame graph shows how consistent the displayed values are across the individual profiles that make up the aggregate.
 
-- **Root frame**: The average value is followed by `±N%` — for example, `123ms ±32%`. This is half the interquartile range (IQR/2) expressed as a percentage of the average. Click the **?** icon on the root frame for a full explanation.
-- **Individual frames**: Frames with moderate or high variability show a `!` advisory in their tooltip — for example, `Variability: ±32% (IQR/2). Individual profiles differ substantially.` — signaling that the aggregated value may not be representative of every profile in the aggregate.
+- **Root frame**: The average value is followed by `±N%`, such as `123ms ±32%`. This is half the interquartile range (IQR/2) expressed as a percentage of the average. Click the **?** icon on the root frame for a full explanation.
+- **Individual frames**: Frames with moderate or high variability show a `!` advisory in their tooltip, such as `Variability: ±32% (IQR/2). Individual profiles differ substantially.`, signaling that the aggregated value may not be representative of every profile in the aggregate.
 
 A low `±N%` means individual profiles behave consistently. A high value suggests the service behavior differs significantly between profiles; try filtering by a tag (such as `version` or `host`) or examining individual profiles to isolate the source of variability.
 
@@ -171,7 +171,7 @@ Timeline view is currently not supported for Full Host profiling
 
 For each runtime, there is a broad set of metrics available, which you can see [listed by timeseries][3].
 
-When viewing an aggregated timeseries, a shaded band is drawn around the metric line to represent cross-profile variability. Hovering a data point shows the value and its variability — for example, `123ms ±10% (IQR/2)`. The band width and percentage represent half the interquartile range (IQR/2): a robust measure of how much individual profiles vary around the displayed average, expressed as a percentage of that average.
+When viewing an aggregated timeseries, a shaded band is drawn around the metric line to represent cross-profile variability. Hovering over a datapoint shows the value and its variability, such as `123ms ±10% (IQR/2)`. The band width and percentage represent half the interquartile range (IQR/2): a robust measure of how much individual profiles vary around the displayed average, expressed as a percentage of that average.
 
 ### Call graph
 
