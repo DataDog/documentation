@@ -100,7 +100,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - The communication between your datadog components and Datadog is encrypted using HTTPS and is authenticated and authorized using your Datadog API key except in the case of private action runners where a JWT token is used instead.
 - Only users with the [`api_keys_write`][5] permission are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
-- When Remote Configuration is enabled, components periodically perform a connectivity test to Datadog over TLS on port 8042/TCP. This is a raw TLS connection rather than HTTPS. This test is used for protocol development; it includes no customer data and no customer-identifying information. This connection is used only while Remote Configuration is enabled.
+- When Remote Configuration is enabled, components periodically perform a connectivity test to Datadog over TLS on port 8042/TCP. This is a raw TLS connection rather than HTTPS. This test is used for protocol development; it includes no customer data and no customer-identifying information. This connection is used only while Remote Configuration is enabled and can be safely blocked without affecting functionality.
 
 ### Role-based access
 
