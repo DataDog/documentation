@@ -53,7 +53,7 @@ Alternative methods are available for specific use cases, such as maintaining a 
     Best for: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/agentless" >}}
-    <h3>Direct OTLP Ingest (Preview)</h3>
+    <h3>Direct OTLP Ingest</h3>
     Best for: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
     {{< /nextlink >}}
 {{< /whatsnext >}}
