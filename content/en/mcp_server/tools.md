@@ -1329,7 +1329,7 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -1632,3 +1632,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
+[65]: /code_coverage/
+[66]: /delivery_performance/dora_metrics/
