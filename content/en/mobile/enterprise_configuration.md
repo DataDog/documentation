@@ -30,6 +30,11 @@ The mobile app supports all default MDM capabilities for [iOS][2] and [Android][
 **Default Value**: Null <br>
 **Description**: Define the organization `public_id` (available through the [API endpoint for listing your managed organizations][4]) passed as a parameter during login. If `datadogDefaultLoginOrganizationUUID` has been set, it takes precedence over the `public_id`.
 
+`externalBrowserLoginPolicy`<br>
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: Control external browser login behavior. Accepts `force` to always use an external browser for login (the login button opens the login URL in the default browser), or `disable` to block external browser login (the login from an external browser button is never shown).
+
 `disableSharing`<br>
 : **Type**: Boolean <br>
 **Default Value**: False <br>
