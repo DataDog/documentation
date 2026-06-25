@@ -92,7 +92,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow.
 
 {{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
-{{< img src="/service_management/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
 
 1. Ensure the Jira integration is configured.
 1. In Case Management project settings, enable **Jira** for manual Jira issue creation from the project.
@@ -157,9 +157,31 @@ Manual incident declaration during high event volumes can cause delays and incre
 
 Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**.
 
-{{< img src="/service_management/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
+{{< img src="/incident_response/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
 
 When enabled, any case that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
+
+## Slack mirroring
+With the Slack integration, replies in Slack notification threads linked to a case are automatically mirrored to the case activity timeline. This keeps the case context up to date without requiring manual updates in Datadog. Slack thread mirroring to cases is supported for:
+- [Slack notifications][8] generated from Case Management
+- Slack notifications generated from Monitors using [case handles][7]
+- Slack threads for cases created directly from Slack using the [Slack integration][9]
+
+**To configure Slack thread mirroring**:
+
+Make sure the [Slack integration][9] is configured for your Datadog organization.
+
+Slack thread mirroring is enabled by default for all Case Management projects. To disable it for a specific project:
+1. Navigate to [**Project Settings**][1] and click on a project to expand its settings.
+1. In the expanded menu, click **Integrations** > **Slack**.
+1. Toggle off **Slack thread mirroring**.
+
+### How it works
+
+- For any case notifications sent to Slack, activity in the notification thread is mirrored back to the case.
+- Mirrored activity includes any text replies (attachments are not supported). Each mirrored message shows the Slack user's name and Slack as the source.
+- Multiple Slack threads can mirror comments into a single case. 
+- Mirroring is one-directional: messages flow from Slack to the case, not from the case to Slack.
 
 ## Further Reading
 
@@ -171,3 +193,6 @@ When enabled, any case that meets your specified query criteria (at any point in
 [4]: /incident_response/on-call/
 [5]: /integrations/linear/
 [6]: /integrations/linear/#configure-a-linear-webhook
+[7]: /incident_response/case_management/create_case#automatic-case-creation
+[8]: /incident_response/case_management/notifications_integrations#notifications
+[9]: /integrations/slack/?tab=datadogforslack

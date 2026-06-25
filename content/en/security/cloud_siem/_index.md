@@ -57,6 +57,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+  tag: "Learning Center"
+  text: "Introduction to Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
+  tag: "Learning Center"
+  text: "Automate Threat Investigation and Remediation with Security Workflows"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}

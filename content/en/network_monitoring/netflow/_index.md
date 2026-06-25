@@ -26,13 +26,13 @@ The NetFlow view displays traffic metrics aggregated by device and interface. Us
 
 Use the left-hand navigation to explore additional NetFlow views:
 
-- **Traffic Volume**: Overall flow metrics by device and interface.
-- **Device Health**: Status and utilization of monitored devices.
-- **Flows**: Detailed individual flow records.
-- **Conversations**: Aggregated source–destination pairs.
-- **Autonomous Systems**: Flow data grouped by Autonomous System Numbers (ASNs).
-- **Geo IP**: Flow data grouped by geographic origin/destination.
-- **Source Ports / Destination Ports / Protocols / Flags**: Traffic breakdown by packet metadata.
+- {{< ui >}}Traffic Volume{{< /ui >}}: Overall flow metrics by device and interface.
+- {{< ui >}}Device Health{{< /ui >}}: Status and utilization of monitored devices.
+- {{< ui >}}Flows{{< /ui >}}: Detailed individual flow records.
+- {{< ui >}}Conversations{{< /ui >}}: Aggregated source–destination pairs.
+- {{< ui >}}Autonomous Systems{{< /ui >}}: Flow data grouped by Autonomous System Numbers (ASNs).
+- {{< ui >}}Geo IP{{< /ui >}}: Flow data grouped by geographic origin/destination.
+- {{< ui >}}Source Ports / Destination Ports / Protocols / Flags{{< /ui >}}: Traffic breakdown by packet metadata.
 
 ## Installation
 
@@ -91,7 +91,7 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
-From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload the CSV file containing your custom enrichments.
+From the {{< ui >}}Configuration{{< /ui >}} tab in NetFlow, click {{< ui >}}+ Add Enrichment{{< /ui >}} to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
 
@@ -99,7 +99,7 @@ From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload 
 
 You can also add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
-From the [**Enrichment** settings page][10], click **+ Add Enrichment** to add mappings manually or upload a CSV file to add mappings in bulk.
+From the [{{< ui >}}Enrichment{{< /ui >}} settings page][10], click {{< ui >}}+ Add Enrichment{{< /ui >}} to add mappings manually or upload a CSV file to add mappings in bulk.
 
 ### Reverse DNS private IP enrichment
 
@@ -107,7 +107,7 @@ Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames as
 
 By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
-Search for **DNS** in the **+ Filter** menu to locate flows associated with Reverse DNS IP enrichment:
+Search for DNS in the {{< ui >}}+ Filter{{< /ui >}} menu to locate flows associated with Reverse DNS IP enrichment:
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Filter menu enhanced to show the reverse DNS destination and source facets" width="100%" >}}
 
@@ -115,19 +115,19 @@ Search for **DNS** in the **+ Filter** menu to locate flows associated with Reve
 
 ## IP details
 
-In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display rich metadata about the IP and a link to **View Related Network Connections** where you can inspect the connectivity in more detail.
+In the **Conversations** view, you can view the Public IP address of the Destination IP. Hover over the IP to display rich metadata about the IP and a link to {{< ui >}}View Related Network Connections{{< /ui >}} where you can inspect the connectivity in more detail.
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Hover over an IP address to display the IP details and View Related Network Connections" width="100%" >}}
 
 ## Flow diagram
 
-You can visualize the flows in NetFlow Monitoring by clicking on the **Flows** menu and hovering over a flow from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
+You can visualize the flows in NetFlow Monitoring by clicking on the {{< ui >}}Flows{{< /ui >}} menu and hovering over a flow from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
 
 ## NetFlow monitor
 
-Click on the **Create Monitor** icon from any of the views to create a [NetFlow monitor][6]. When creating the monitor, consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+Click on the {{< ui >}}Create Monitor{{< /ui >}} icon from any of the views to create a [NetFlow monitor][6]. When creating the monitor, consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
 
 {{< img src="network_device_monitoring/netflow/create_monitor.png" alt="Flows view in NetFlow monitoring with the create monitor link highlighted." width="100%" >}}
 
@@ -244,7 +244,7 @@ With conversation stitching, you can:
 - Identify true initiators and responders so that source and destination widgets reflect accurate roles
 - Remove noise where servers incorrectly appear as top sources
 
-To toggle between stitched (bidirectional) and unstitched (unidirectional) views, navigate to any endpoint-based NetFlow view and use the **Bidirectional** toggle under the time picker.
+To toggle between stitched (bidirectional) and unstitched (unidirectional) views, navigate to any endpoint-based NetFlow view and use the {{< ui >}}Bidirectional{{< /ui >}} toggle under the time picker.
 
 {{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="Conversation stitching toggle in the NetFlow view" width="100%" >}}
 

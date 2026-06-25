@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - log facets
 aliases:
 - /fr/logs/facets
 description: Facettes de log et volet des facettes
@@ -8,226 +11,228 @@ further_reading:
   text: Effectuer des analyses de logs
 - link: logs/explorer/patterns
   tag: Documentation
-  text: Détecter les patterns dans vos logs
+  text: Détecter les modèles dans vos logs
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Apprendre à traiter vos logs
 - link: logs/explorer/saved_views
   tag: Documentation
-  text: Configurer automatiquement votre vue Log Explorer
+  text: Configurer automatiquement votre vue Log Explorer
+- link: https://learn.datadoghq.com/courses/log-explorer
+  tag: Centre d'apprentissage
+  text: Commencer avec Log Explorer
 title: Facettes de log
 ---
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}
 
-{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facettes dans le Facet Explorer" video=true style="width:100%;">}}
+## Aperçu {#overview}
 
-## Présentation
+Les facettes sont des étiquettes et des attributs définis par l'utilisateur à partir de vos logs indexés. Elles sont destinées à l'analyse des données qualitatives ou quantitatives. Ainsi, vous pouvez les utiliser dans votre Log Explorer pour :
 
-Les facettes sont des tags et des attributs définis par les utilisateurs à partir de vos logs indexés. Ils servent à effectuer des analyses de données qualitatives ou quantitatives. Vous pouvez donc les utiliser dans votre vue Log Explorer pour :
-
-- [Effectuer des recherches dans vos logs][1]
-- [Définir des patterns de logs][2]
-- [Réaliser des analyses de logs][3]
+- [Rechercher dans vos logs][1]
+- [Définir des modèles de logs][2]
+- [Effectuer des analyses de logs][3]
 
 Grâce aux facettes, vous pouvez également manipuler vos logs dans vos [log monitors][4], dans les widgets de logs des [dashboards][5] ainsi que dans les [notebooks][6].
 
-**Remarque** : le [traitement des logs][7], la [recherche pour le live tailing][8], les [recherches dans le Log Explorer][30], la [création de métriques][10] à partir de logs, la transmission d'[archives][11] ou la [réintégration][12] ne nécessitent pas l'utilisation de facettes. De même, vous n'avez pas besoin de définir une facette pour transmettre des logs par l'intermédiaire des [pipelines][13] et des [index][14] via des filtres, ou pour exclure des logs d'un index ou les échantillonner avec [des filtres d'exclusion][15].
+**Remarque** : Vous n'avez pas besoin de facettes pour supporter [log processing][7], [livetail search][8], [log explorer search][9], [metric generation][10] à partir des logs, [archive forwarding][11] ou [rehydration][12]. Vous n'avez également pas besoin de facettes pour acheminer les logs vers [Pipelines][13] et [Indexes][14] avec des filtres, ou pour exclure ou échantillonner des logs des indexes avec [exclusion filters][15]. 
 
 Pour ces cas d'utilisation, les fonctionnalités de remplissage automatique reposent sur des facettes existantes. Cependant, vous pouvez également saisir des valeurs correspondant aux logs entrants.
 
-### Facettes qualitatives
+### Facettes qualitatives {#qualitative-facets}
 
-#### Dimensions
+#### Dimensions {#dimensions}
 
-Les dimensions vous permettent d'accomplir les tâches suivantes :
+Les facettes qualitatives vous permettent d'accomplir les tâches suivantes :
 
-- **Obtenir des informations relatives** pour certaines valeurs. Vous pouvez par exemple créer une facette sur `http.network.client.geoip.country.iso_code` pour visualiser les principaux pays concernés par chaque erreur 5XX dans vos logs d'accès Web [NGINX][16], en bénéficiant d'informations supplémentaires fournies par le [processeur GeoIP][17] Datadog.
-- **Compter des valeurs uniques**. Vous pouvez par exemple créer une facette sur `user.email` à partir de vos logs [Kong][18] afin de déterminer le nombre d'utilisateurs se connectant chaque jour à votre site Web.
-- **Filtrer** régulièrement vos logs selon des valeurs données. Vous pouvez par exemple créer une facette sur le [tag][19] `environment` pour réduire vos recherches aux environnements de production, de développement et intermédiaires.
+- Pour **obtenir des insights relatifs** aux valeurs. Par exemple, créez une facette sur `http.network.client.geoip.country.iso_code` pour voir les pays les plus impactés par le nombre d'erreurs 5XX sur vos logs d'accès web [NGINX][16], enrichis avec le Datadog [GeoIP Processor][17].
+- Pour **compter les valeurs uniques**. Par exemple, créez une facette sur `user.email` à partir de vos logs [Kong][18] pour savoir combien d'utilisateurs se connectent chaque jour à votre site web.
+- Pour **filtrer fréquemment vos logs selon des valeurs particulières.** Par exemple, créez une facette sur un `environment`[tag][19] pour restreindre le dépannage aux environnements de développement, staging ou production.
 
-**Remarque** : bien que vous n'ayez pas besoin de créer des facettes pour appliquer un filtre basé sur des valeurs d'attributs, vous pouvez réduire votre durée de résolution en définissant des facettes sur les attributs que vous utilisez régulièrement.
+**Remarque** : Bien qu'il ne soit pas nécessaire de créer des facettes pour filtrer sur les valeurs d'attribut, les définir sur des attributs que vous utilisez souvent lors des enquêtes peut aider à réduire votre temps de résolution.
 
-#### Types
+#### Types {#types}
 
-Les facettes qualitatives peuvent être des chaînes ou des nombres (entiers). Une dimension de type « string » fonctionnera peu importe votre utilisation. Cependant, les dimensions de type « integer » vous permettent de bénéficier d'une fonctionnalité supplémentaire, à savoir les filtres de plage. Par exemple, `http.status_code:[200 TO 299]` est une requête valide s'appliquant à une dimension de type « integer ». Consultez la [syntaxe de recherche][1] pour en savoir plus.
+Les facettes qualitatives peuvent avoir un type chaîne ou numérique (entier). Bien que l'attribution d'un type chaîne à une dimension fonctionne dans tous les cas, l'utilisation de types entiers sur une dimension permet un filtrage par plage sur toutes les capacités mentionnées ci-dessus. Par exemple, `http.status_code:[200 TO 299]` est une requête valide à utiliser sur une dimension de type entier. Voir [la syntaxe de recherche][1] pour référence.
 
-### Facettes quantitatives
-#### Mesures
+### Facettes quantitatives {#quantitative-facets}
+#### Mesures {#measures}
 
 Les mesures vous permettent d'accomplir les tâches suivantes :
 
-- **Agréger des valeurs** à partir de plusieurs logs. Vous pouvez par exemple créer une mesure sur la taille des carrés transmis par le [cache Varnish][20] d'un serveur cartographique pour surveiller le débit quotidien **moyen**, ou consulter les principaux référents selon la **somme** des tailles de carrés demandées.
-- **Appliquer un filtre de plage** à vos logs. Vous pouvez par exemple créer une mesure sur le temps d'exécution des tâches [Ansible][21] et visualiser la liste des serveurs qui enregistrent le plus d'exécutions dépassant la barre des 10 secondes.
-- **Trier des logs** par rapport à une valeur. Vous pouvez par exemple créer une mesure sur le montant des paiements réalisés via votre microservice [Python][22], puis effectuer une recherche dans l'ensemble des logs, en commençant par celui comportant le montant le plus élevé.
+- Pour **agréger des valeurs** provenant de plusieurs logs. Par exemple, créez une mesure sur la taille des tuiles servies par le [cache Varnish][20] d'un serveur de cartes et suivez le **débit** moyen quotidien, ou les référents les plus importants par **somme** de la taille des tuiles demandées.
+- Pour **appliquer un filtre de plage** à vos logs. Par exemple, créez une mesure sur le temps d'exécution des tâches [Ansible][21] et affichez la liste des serveurs ayant le plus d'exécutions prenant plus de 10s.
+- Pour **trier les logs** par rapport à cette valeur. Par exemple, créez une mesure sur le montant des paiements effectués avec votre microservice [Python][22]. Vous pouvez ensuite rechercher tous les logs, en commençant par celui avec le montant le plus élevé.
 
-#### Types
+#### Types {#types-1}
 
-Les mesures disposent d'un nombre entier (long) ou d'une double valeur. Ces deux types de valeurs proposent des fonctionnalités équivalentes.
+Les mesures disposent d'un entier (long) ou d'une double valeur. Ces deux types proposent des fonctionnalités équivalentes.
 
-#### Unités
+#### Unités {#units}
 
-Les mesures ont une unité de **temps** ou de **taille** afin de gérer les ordres de grandeur au moment de la requête et de l'affichage.
+Les mesures prennent en charge les unités de **temps** ou de **taille** pour faciliter la gestion des ordres de grandeur lors de l'exécution des requêtes et de l'affichage.
 
 | type        | unité(s)                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | BYTES       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
-| DURÉE        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
+| TIME        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
 
-L'unité est une propriété de la mesure, et non du champ. Imaginons par exemple une mesure `duration` exprimée en nanosecondes. Vous disposez de logs du service `service:A`, pour lesquels `duration:1000` désigne une durée de 1 000 millisecondes, et d'autres logs du service `service:B`, pour lesquels `duration:500` désigne une durée de 500 microsecondes :
+L'unité est une propriété de la mesure elle-même, et non du champ. Par exemple, considérons une mesure de `duration` en nanosecondes : vous avez des journaux de `service:A` où `duration:1000` représente 1000 millisecondes, et d'autres journaux de `service:B` où `duration:500` représente 500 microsecondes :
 
-1. Grâce au [processeur arithmétique][23], vous pouvez faire en sorte que les durées de tous vos logs entrants soient exprimées en nanosecondes. Pour ce faire, appliquez le multiplicateur `*1000000` aux logs de `service:A` et le multiplicateur `*1000` aux logs de `service:B`.
-2. Appliquez le filtre `duration:>20ms` (voir la [syntaxe de recherche][1] pour en savoir plus) pour interroger systématiquement les logs des deux services à la fois et pour afficher un résultat agrégé ayant pour valeur maximale `1 min`.
+1. Mettez à l'échelle la durée en nanosecondes pour tous les logs entrants avec le [arithmetic processor][23]. `*1000000`Utilisez un multiplicateur sur les logs de `service:A`, et `*1000` un multiplicateur sur les logs de `service:B`.
+2. Utilisez `duration:>20ms` (voir [search syntax][1] pour référence) pour interroger de manière cohérente les logs des deux services à la fois, et voir un résultat agrégé de max `1 min`.
 
-## Volet des facettes
+## Facet panel {#facet-panel}
 
-La barre de recherche fournit un grand nombre de fonctionnalités interactives vous permettant de filtrer et regrouper vos données. Toutefois, dans la plupart des situations, il est plus simple d'utiliser le volet des facettes pour parcourir vos données. Ouvrez une facette pour consulter une synthèse de son contenu en fonction du contexte de la requête actuellement appliquée.
+La barre de recherche fournit l'ensemble d'interactions le plus complet pour filtrer et regrouper vos données. Cependant, dans la plupart des cas, le Facet panel est probablement un moyen plus simple de naviguer dans vos données. Ouvrez une facette pour voir un résumé de son contenu pour le périmètre de la requête actuelle.
 
-L'interface des **facettes (qualitatives)** propose une top list des valeurs uniques et indique le nombre de logs correspondant à chacune de ces valeurs :
+**Facets (qualitative)** viennent avec une liste des valeurs uniques, et un compte des logs correspondant à chacune d'elles :
 
-{{< img src="logs/explorer/facet/dimension_facet.png" alt="Facette de dimension" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet.png" alt="Dimension Facet" style="width:30%;">}}
 
-Cliquez sur une des valeurs pour affiner la requête de recherche. Cela filtre la recherche sur cette valeur unique et sur toutes les valeurs associées. Cochez des cases pour ajouter une valeur à la liste des valeurs ou la supprimer. Vous pouvez également effectuer une recherche sur le contenu :
+Ciblez la requête de recherche en cliquant sur l'une ou l'autre valeur. Cliquer sur une valeur active la recherche sur cette valeur unique et toutes les valeurs. Cliquer sur des cases à cocher ajoute ou retire cette valeur spécifique de la liste de toutes les valeurs, vous pouvez également rechercher son contenu :
 
-{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="Remplissage automatique des facettes" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="Autocomplétion de facette" style="width:30%;">}}
 
-Les **mesures** disposent d'un curseur vous permettant de définir une valeur maximale ainsi qu'une valeur minimale. Utilisez le curseur, ou saisissez des valeurs numériques, pour restreindre la requête de recherche.
+**Mesures** viennent avec un curseur indiquant les valeurs minimales et maximales. Utilisez le curseur, ou saisissez des valeurs numériques, pour cibler la requête de recherche à différentes limites.
 
-{{< img src="logs/explorer/facet/measure_facet.png" alt="Facette de mesures" style="width:30%;">}}
+{{< img src="logs/explorer/facet/measure_facet.png" alt="Measures facet" style="width:30%;">}}
 
-### Masquer des facettes
+### Hide facets {#hide-facets}
 
-Votre organisation dispose d'un large ensemble de facettes permettant à de nombreuses équipes d'exploiter différents cas d'utilisation à l'aide des logs. Toutefois, il est probable que vous utilisiez seulement quelques-unes de ces facettes, en fonction de la situation à résoudre. Vous pouvez donc masquer les facettes dont vous ne vous servez pas régulièrement, afin de conserver uniquement les facettes pertinentes qui vous aideront à parvenir à vos fins.
+Votre organisation dispose d'une collection complète de facettes pour répondre à son ensemble complet de cas d'utilisation à travers toutes les différentes équipes utilisant des journaux. Cependant, il est probable qu'un sous-ensemble de ces facettes soit précieux pour vous dans un contexte de dépannage spécifique. Masquez les facettes dont vous n'avez pas besoin de manière routinière, afin de ne conserver que les facettes les plus pertinentes pour vos sessions de dépannage.
+1. Dans le [Logs Explorer][30], trouvez la facette que vous souhaitez masquer.
+1. Cliquez sur l'icône en forme de rouage à côté de la facette.
+1. Sélectionnez {{< ui >}}Hide Facet{{< /ui >}}.
 
-{{< img src="logs/explorer/facet/hide_facet.png" alt="Masquer une facette" style="width:30%;">}}
+Les facettes masquées sont toujours visibles dans la recherche de facettes (voir la section [Filter Facet](#filter-facets)) au cas où vous en auriez besoin. Démasquez les facettes masquées à partir de là.
 
-Les facettes masquées peuvent toujours faire l'objet de recherche en cas de besoin (voir la section [Filtrer des facettes](#filtrer-des-facettes)). Vous pouvez afficher à nouveau les facettes masquées depuis la fonctionnalité de recherche de facettes.
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Afficher de nouveau une facette" style="width:30%;">}}
+Les facettes masquées sont également invisibles dans l'auto-complétion de la barre de recherche et dans les menus déroulants (tels que measure, group-by) dans l'analyse pour le Log Explorer. Cependant, les facettes masquées sont toujours valides pour les requêtes de recherche (au cas où vous copieriez-collez un lien log-explorer par exemple).
 
-Les facettes masquées ne sont pas proposées automatiquement dans la barre de recherche et ne peuvent pas être sélectionnées dans les menus déroulants (de mesure ou encore de regroupement) utilisés pour effectuer des analyses dans la vue Log Explorer. Cependant, vous pouvez indiquer des facettes masquées dans vos requêtes de recherche (par exemple, en collant un lien du Log Explorer).
+Les facettes masquées n'ont aucun impact en dehors du Log Explorer (par exemple, le suivi en direct, les moniteurs ou les définitions de widgets dans les tableaux de bord).
 
-Les facettes masquées servent uniquement dans la vue Log Explorer. Elles ne sont d'aucune utilité pour les autres fonctionnalités, telles que le live tailing, les monitors ou les définitions de widget dans les dashboards.
+#### Hidden facets and teammates {#hidden-facets-and-teammates}
 
-#### Facettes masquées pour les membres d'équipe
+Masquer des facettes est spécifique à votre propre contexte de dépannage et n'impacte pas la vue de vos coéquipiers, sauf si vous mettez à jour un [Saved View][24]. Les facettes masquées font partie du contexte enregistré dans un Saved View.
 
-Lorsque vous masquez des facettes, vous les retirez de votre contexte de dépannage. Cela n'a donc aucune incidence sur la vue des autres membres de votre équipe, sauf si vous mettez à jour une [vue enregistrée][24]. En effet, les facettes masquées font partie du contexte capturé au sein d'une vue enregistrée.
+### Group facets {#group-facets}
 
-### Regrouper des facettes
+Les facets sont regroupés en thèmes significatifs pour faciliter la navigation dans la liste des facets. L'attribution ou la réattribution d'un groupe à un facet n'affecte que l'affichage dans la liste des facets et n'a aucun impact sur les capacités de recherche et d'analyse.
 
-Afin de faciliter la navigation dans leur liste, les facettes sont regroupées selon différents thèmes pertinents. Les opérations d'attribution ou de réattribution d'une facette à un groupe servent uniquement à modifier l'apparence de la liste des facettes. Cela n'a aucune incidence sur les fonctionnalités de recherche et d'analyse.
-
-{{< img src="logs/explorer/facet/group_facets.png" alt="Regrouper une facette" style="width:30%;">}}
+{{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
 
 Pour regrouper des facettes :
 
-1. Cliquez sur l'icône en forme d'engrenage correspondant à la facette.
-2. Sélectionnez **Edit facet**.
-3. Cliquez sur la section **Advanced options** pour la développer.
-4. Dans le champ **Group**, saisissez le nom du groupe dans lequel vous souhaitez inclure la facette.
-5. Cliquez sur **Update**.
+1. Cliquez sur le rouage pour le facet.
+2. Sélectionnez {{< ui >}}Edit facet{{< /ui >}}.
+3. Cliquez sur la section {{< ui >}}Advanced options{{< /ui >}} pour l'agrandir.
+4. Dans le {{< ui >}}Group{{< /ui >}} champ, entrez le nom du groupe dans lequel vous souhaitez que le facet se trouve.
+5. Cliquez sur {{< ui >}}Update{{< /ui >}}.
 
-### Filtrer des facettes
+### Filter facets {#filter-facets}
 
-Utilisez la zone de recherche pour les facettes afin d'affiner la liste des facettes et d'accéder plus facilement à celles dont vous avez besoin. La recherche de facette réduit le nombre de résultats affichés en se basant à la fois sur le nom d'affichage des facettes et sur le nom de leur champ.
+Utilisez la zone de recherche sur les facets pour réduire la liste complète des facets et naviguer plus rapidement vers celle avec laquelle vous devez interagir. Facet search utilise à la fois le facet display name et le facet field name pour cibler les résultats.
 
-{{< img src="logs/explorer/facet/search_facet.png" alt="Rechercher une facette" style="width:30%;">}}
+{{< img src="logs/explorer/facet/search_facet.png" alt="Search Facet" style="width:30%;">}}
 
-### Facettes avec alias
+### Aliased facets {#aliased-facets}
 
-Certaines facettes peuvent avoir un alias (voir la section [Alias de facettes](#alias-de-facettes)). Ces facettes peuvent tout de même être utilisées pour explorer vos données. Néanmoins, elles sont considérées comme obsolètes :
+Certaines facets peuvent avoir été aliasées (voir la section [alias facet](#alias-facets)). Les aliased facets sont toujours valides pour slicing and dicing, mais sont considérées comme deprecated par votre organisation :
 
-{{< img src="logs/explorer/facet/aliased_facet.png" alt="Facette avec alias" style="width:30%;">}}
+{{< img src="logs/explorer/facet/aliased_facet.png" alt="Aliased Facet" style="width:30%;">}}
 
-Lors du dépannage d'un problème, vous êtes davantage susceptible de trouver le contenu d'autres équipes (et de la vôtre) dans une facette _standard_ plutôt que dans une facette _avec alias_. Cette logique simplifie la corrélation de contenu provenant de différentes sources.
+Lors du dépannage, il est plus probable que vous trouviez du contenu d'autres équipes (en plus du contenu de votre équipe) dans le _standard_ facet plutôt que dans le _aliased_ facet. Cela rend la corrélation sur le contenu d'origines diverses plus simple.
 
-Lorsqu'une facette avec alias figure dans votre liste de facettes, nous vous conseillons d'accéder plutôt à la facette _standard_. Pour ce faire, cliquez sur l'option **switch to alias**. Cette opération masque la facette avec alias et affiche la facette standard correspondante. Si cette manipulation entraîne la mise à jour d'une vue enregistrée, enregistrez d'abord la vue, afin que l'alias s'applique à tous les utilisateurs de la vue.
+Si vous voyez une facette aliasée dans votre liste de facettes, envisagez d'utiliser la facette _standard_ à la place en cliquant sur l'élément de menu {{< ui >}}switch to alias{{< /ui >}}. Cette action cache la facette aliasée et révèle la facette standard. Si cela vous oblige à mettre à jour une vue enregistrée, envisagez de sauvegarder la vue enregistrée afin que l'aliasing s'applique à tous ceux qui utilisent cette vue enregistrée.
 
 {{< img src="logs/explorer/facet/switch_facet.png" alt="Changer de facette" style="width:30%;">}}
 
-Si vous cherchez à diagnostiquer une erreur en étudiant l'ancien contenu (avant que votre organisation n'ait appliqué un alias à votre facette), il peut être pertinent de conserver la version _avec alias_ de la facette.
+Vous souhaiterez peut-être conserver la version non standard _aliasée_ de la facette si vous dépannez du contenu ancien (avant que l'aliasing pour cette facette ait été configuré par votre organisation).
 
-## Gérer les facettes
+## Gérer les facettes {#manage-facets}
 
-### Facettes par défaut
+### Facettes prêtes à l'emploi {#out-of-the-box-facets}
 
-La plupart des facettes courantes fournies par défaut, comme `Host` et `Service`, vous permettent de commencer directement votre diagnostic dès lors que vos logs sont transmis aux index de logs.
+La plupart des facettes courantes telles que `Host` et `Service` sont prêtes à l'emploi, vous pouvez donc commencer à dépanner immédiatement une fois que vos journaux sont intégrés dans les index de journaux.
 
 Vous pouvez accéder par défaut aux facettes sur les [attributs réservés][25] ainsi que sur la plupart des [attributs standard][26].
 
-### Facette d'index
+### Facette d'index {#index-facet}
 
-Les facettes d'index sont des facettes particulières qui vous sont uniquement proposées lorsque votre organisation dispose de [plusieurs index][27] ou lorsque vous possédez des [vues historiques][28] actives. Ces facettes vous permettent de filtrer votre requête sur un sous-ensemble d'index.
+La facette d'index est une facette spécifique qui n'apparaît que si votre organisation dispose de [plusieurs index][27], et/ou si vous avez des [vues historiques][28] actives. Utilisez cette facette si vous souhaitez restreindre votre requête à un sous-ensemble de vos index.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Créer une facette" style="width:30%;">}}
 
-### Créer des facettes
+### Créer des facettes {#create-facets}
 
-À titre de bonne pratique, essayez toujours d'utiliser une facette existante, plutôt que d'en créer une (voir la section [Alias de facettes](#alias-de-facettes)). En utilisant une seule facette pour des informations similaires, vous favorisez la collaboration entre les différentes équipes.
+Par souci de bonne pratique, envisagez toujours d'utiliser une facette existante plutôt que d'en créer une nouvelle (voir la section [facettes alias](#alias-facets)). Utiliser une facette unique pour des informations de nature similaire favorise la collaboration entre équipes.
 
 Pour créer une facette sur un tableau d'objets JSON, il faut d'abord utiliser un [grok parser][29] pour extraire l'attribut, puis créer une facette pour cet attribut.
 
-**Remarque** : une fois votre facette créée, elle récupère **tous les nouveaux logs**. Pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 1 000 facettes.
+**Remarque** : Une fois qu'une facette est créée, son contenu est peuplé **pour tous les nouveaux journaux**. Pour une utilisation optimale de la solution de gestion des journaux, Datadog recommande d'utiliser au maximum 1000 facettes.
 
-#### Volet latéral des logs
+#### Panneau latéral des journaux {#log-side-panel}
 
-La solution la plus simple pour créer une facette consiste à utiliser le volet latéral des logs. En effet, la plupart des informations sur la facette, telles que le nom du champ ou le type sous-jacent des données, sont automatiquement remplies. Il vous suffit simplement de vérifier la véracité de ces informations. Depuis la [vue Log Explorer][1], accédez au log de votre choix qui comporte le champ sur lequel vous souhaitez créer une facette. Ouvrez le volet latéral de ce log, cliquez sur le champ pertinent (dans les tags ou dans les attributs), puis créez votre facette :
+Le moyen le plus simple de créer une facette est de l'ajouter depuis le panneau latéral des journaux, où la plupart des détails de la facette—comme le nom du champ ou le type de données sous-jacent—sont pré-remplis et il ne s'agit que de vérifier. Naviguez dans l'[Explorateur de journaux][1] vers le journal d'intérêt portant le champ sur lequel créer une facette. Ouvrez le panneau latéral pour ce journal, cliquez sur le champ correspondant (soit dans les tags, soit dans les attributs) et créez une facette à partir de là :
 
-- Si la valeur du champ correspond à une chaîne, vous pouvez uniquement créer une facette.
-- Si la valeur du champ correspond à un nombre, vous pouvez créer une facette ou une mesure.
+- Si le champ a une valeur de chaîne, seule la création de facette est disponible.
+- Si le champ a une valeur numérique, la création de facette et de mesure est disponible.
 
-{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Créer une facette à partir d'un attribut" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Créer une facette à partir de l'attribut" style="width:30%;">}}
 
-**Remarque** : nous vous conseillons de ne pas utiliser plus de 1 000 facettes.
+**Remarque** : En tant que meilleure pratique, il est recommandé de ne pas utiliser plus de 1000 facettes.
 
-#### Liste des facettes
+#### Liste des facettes {#facet-list}
 
-Si vous ne souhaitez ou ne pouvez pas rechercher un log spécifique, créez une facette directement depuis le volet des facettes, à l'aide du bouton _add facet_.
+Dans le cas où trouver un journal correspondant n'est pas une option, créez une nouvelle facette directement depuis le panneau des facettes en utilisant le bouton _ajouter une facette_.
 
-Définissez le nom (à savoir la clé) du champ sous-jacent de votre facette.
+Définissez le nom (à savoir, la clé) du champ sous-jacent de votre facette.
 
-- Utilisez le nom de la clé du tag pour les tags.
-- Utilisez le chemin d'attribut pour les attributs, en ajoutant le préfixe `@`.
+- Utilisez le nom de clé de tag pour les tags.
+- Utilisez le chemin d'attribut pour les attributs, avec `@` préfixe.
 
-Grâce à la fonctionnalité de remplissage automatique, qui se base sur le contenu des logs des vues actuelles, vous pouvez définir facilement un nom de champ adéquat. Toutefois, sachez que vous pouvez indiquer n'importe quelle valeur, surtout si aucun log correspondant n'est transmis à vos index.
+L'autocomplétion basée sur le contenu des journaux des vues actuelles vous aide à définir le nom de champ approprié. Mais vous pouvez utiliser pratiquement n'importe quelle valeur ici, en particulier dans le cas où vous n'avez pas encore de journaux correspondants circulant dans vos index.
 
-{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Créer une facette de toute pièce" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Créer une facette à partir de zéro" style="width:30%;">}}
 
-### Alias de facettes
+### Alias facettes {#alias-facets}
 
 Vous pouvez rassembler du contenu similaire au sein d'une seule facette afin que vos différentes équipes puissent conjointement diagnostiquer en toute simplicité les erreurs et effectuer des analyses. Consultez la section relative aux [conventions de nommage][26] pour en savoir plus.
 
-Les alias vous permettent de corriger de façon harmonieuse les problèmes d'alignement des équipes découlant d'incohérences des conventions de nommage. Grâce à cette solution, tous les utilisateurs de votre organisation peuvent commencer à utiliser les nouvelles facettes standard.
+Utilisez l'aliasing comme option pour réaligner en douceur les équipes qui s'appuient sur des conventions de nommage incohérentes. Avec l'aliasing, vous pouvez faire en sorte que tous utilisent la facette standard définie pour votre organisation.
 
-#### Créer un alias entre une facette et une autre facette
+#### Aliasing facette à facette {#aliasing-facet-to-facet}
 
 Ce type d'alias constitue la solution idéale si plusieurs de vos équipes ont créé de nombreuses facettes rassemblant du contenu similaire.
 
-Lorsque vous créez un alias depuis une facette _avec alias_ vers une facette _standard_ :
+Lors de l'aliasing d'une facette _aliasée_ vers une facette _standard_ :
 
-- Les utilisateurs peuvent choisir d'utiliser les facettes standard ou celles avec alias pour leurs processus de dépannage. Il peut être préférable d'utiliser la version standard, car celle-ci simplifie la corrélation du contenu provenant de diverses sources caractérisées par une certaine hétérogénéité.
-- Les utilisateurs sont invités à utiliser les facettes standard plutôt que les facettes avec alias.
+- Les utilisateurs peuvent utiliser soit des facettes aliasées, soit des facettes standard pour le dépannage. Vous pouvez préférer la standard, qui facilite la corrélation du contenu provenant de sources diverses et potentiellement hétérogènes.
+- Les utilisateurs sont incités à utiliser la facette standard à la place de celle aliasée.
 
-Pour créer un alias pour une facette vers une facette standard, sélectionnez l'option `Alias to...` dans le menu des facettes. Choisissez parmi toutes les facettes [standard][14] de votre organisation pour définir votre destination.
+Pour aliaser une facette vers une standard, sélectionnez l'élément d'action {{< ui >}}Alias to...{{< /ui >}} dans le menu de la facette. Choisissez les facettes de destination parmi toutes les facettes [standard][14] existantes pour votre organisation.
 
-{{< img src="logs/explorer/facet/alias_modal.png" alt="Fenêtre Alias" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
-#### Créer un alias entre un attribut et une facette
+#### Aliasing attribut à facette {#aliasing-attribute-to-facet}
 
-Ce type d'alias s'avère particulièrement utile pour gérer les logs transmis par de nouvelles sources. Plutôt que de créer une facette pour un champ sur ces logs, qui deviendrait obsolète après la création d'un alias vers une facette standard, créez directement un alias entre le champ et une facette existante :
+C'est la meilleure option si vous intégrez des journaux provenant de nouvelles sources. Plutôt que de créer une facette pour un champ sur ces journaux, et juste après de déprécier cette facette en l'aliasant à une facette standard, aliaser directement le champ à une facette existante :
 
-{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias de facette à partir d'un attribut" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facette à partir d'attribut" style="width:30%;">}}
 
-## Supprimer une facette
+## Supprimer une facette {#delete-a-facet}
 
-<div class="alert alert-warning">Toute suppression d'une facette actuellement utilisée dans des index, monitors, dashboards ou requêtes de restriction ou par d'autres équipes peut entraîner des erreurs de configuration.</div>
+<div class="alert alert-warning">Supprimer une facette qui est utilisée dans des index, des moniteurs, des tableaux de bord, des requêtes de restriction ou par d'autres équipes peut entraîner des ruptures de configurations.</div>
 
 Pour supprimer une facette, procédez comme suit :
 
-- Cliquez sur **Showing xx of xx** en haut du volet des facettes.
+- Cliquez sur {{< ui >}}Showing xx of xx{{< /ui >}} en haut du panneau des facettes.
 - Recherchez votre facette.
-- Cliquez sur l'icône en forme de crayon en regard de votre facette.
-- Cliquez sur **Delete**.
+- Cliquez sur l'icône de crayon pour votre facette.
+- Cliquez sur {{< ui >}}Delete{{< /ui >}}.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -239,7 +244,7 @@ Pour supprimer une facette, procédez comme suit :
 [6]: /fr/notebooks/
 [7]: /fr/logs/log_configuration/processors
 [8]: /fr/logs/live_tail/
-[9]: /fr/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[9]: /fr/logs/explorer/
 [10]: /fr/logs/logs_to_metrics/
 [11]: /fr/logs/archives/
 [12]: /fr/logs/archives/rehydrating/
@@ -247,17 +252,17 @@ Pour supprimer une facette, procédez comme suit :
 [14]: /fr/logs/indexes/#indexes-filters
 [15]: /fr/logs/indexes/#exclusion-filters
 [16]: /fr/integrations/nginx/
-[17]: /fr/logs/log_configuration/processors/#geoip-parser
+[17]: /fr/logs/log_configuration/processors/geoip_parser/
 [18]: /fr/integrations/kong/
 [19]: /fr/getting_started/tagging/assigning_tags/
 [20]: /fr/integrations/varnish/
 [21]: /fr/integrations/ansible/
 [22]: /fr/integrations/python/
-[23]: /fr/logs/log_configuration/processors/#arithmetic-processor
+[23]: /fr/logs/log_configuration/processors/arithmetic_processor/
 [24]: /fr/logs/explorer/saved_views/
 [25]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /fr/logs/log_configuration/attributes_naming_convention
 [27]: /fr/logs/indexes/#indexes
 [28]: /fr/logs/log_configuration/rehydrating
 [29]: /fr/logs/log_configuration/parsing/?tab=matchers#nested-json
-[30]: /fr/logs/explorer/
+[30]: https://app.datadoghq.com/logs

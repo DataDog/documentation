@@ -413,6 +413,7 @@ class Program
 | Library           | Versions | NuGet package                     | Integration Name     | Setup instructions            |
 | ----------------- | -------- | --------------------------------- | -------------------- | ----------------------------- |
 | Azure Service Bus | 7.14.0+ | [Azure.Messaging.ServiceBus][2]  | `AzureServiceBus`    | See `Azure SDK` section below |
+| Quartz            | 3.1.0+  | [Quartz][30]                     | `Quartz`             | `DD_TRACE_OTEL_ENABLED=true`  |
 
 ### Azure SDK
 
@@ -421,6 +422,7 @@ The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the 
 [1]: https://opentelemetry.io/docs/languages/net/libraries/#use-natively-instrumented-libraries
 [2]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
 [3]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[30]: https://www.nuget.org/packages/Quartz
 {{% /tab %}}
 
 {{% tab "Ruby" %}}

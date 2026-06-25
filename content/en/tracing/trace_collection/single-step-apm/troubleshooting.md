@@ -171,6 +171,12 @@ The value should be a JSON string that applies the necessary security context to
 
 Custom instrumentation still requires you to import the SDK. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
 
+## General troubleshooting
+
+### SSI continues running after setting DD_TRACE_ENABLED=false
+
+Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. The [injector][11] runs before the SDK evaluates its environment variables, so SDK-level environment variables have no effect on SSI. To disable or remove SSI, see your platform's [SSI setup page][12].
+
 ## Environment-specific troubleshooting
 
 ### Host and Docker environments
@@ -379,3 +385,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/fleet
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[11]: /tracing/guide/injectors/
+[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications

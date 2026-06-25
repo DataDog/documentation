@@ -45,6 +45,12 @@ multifiltersearch:
     - name: Recommendation Prerequisites
       id: recommendation_prerequisites
   data:
+    - category: Configure
+      cloud_provider: Anthropic
+      resource_type: Anthropic API Key
+      recommendation_type: Enable Anthropic Prompt Caching
+      recommendation_description: Identifies Anthropic API keys with no prompt caching usage and recommends enabling prompt caching to reduce input token costs.
+      recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
     - category: Migrate
       cloud_provider: AWS
       resource_type: Auto Scaling Group
@@ -261,6 +267,12 @@ multifiltersearch:
       recommendation_type: Terminate MQ Broker
       recommendation_description: An MQ broker with 0 connections.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: RDS Instance
+      recommendation_type: Downsize RDS Instance
+      recommendation_description: RDS instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
+      recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
     - category: Downsize
       cloud_provider: AWS
       resource_type: RDS Instance
@@ -592,6 +604,8 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -602,6 +616,7 @@ Below are the available cloud cost recommendation categories and their descripti
 | Migrate | Resources with moderately low utilization signals or other inefficiencies. Consider adjusting the instance type or other parameters. |
 | Downsize | Resources that are under-utilized or over-provisioned. Consider adjusting the size or other parameters to reduce costs. |
 | Purchase | Resources with on-demand charges and extended uptime. Purchasing a reservation or Savings Plan can reduce the amortized cost of the resource. |
+| Configure | Resources with configuration options that can be adjusted to reduce costs without changing capacity or terminating the resource. |
 
 ## Prerequisites
 
@@ -638,10 +653,26 @@ Assign a status to each recommendation to track cost optimization progress acros
 | {{< ui >}}Completed{{< /ui >}} | The recommended action has been taken or is no longer relevant. |
 | {{< ui >}}Dismissed{{< /ui >}} | No work is planned for this recommendation over the time frame specified when dismissing. |
 
+### Filter recommendations by status
+
+Use the status tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to filter the list by status. The available tabs are {{< ui >}}Open{{< /ui >}}, {{< ui >}}In Progress{{< /ui >}}, {{< ui >}}Completed{{< /ui >}}, and {{< ui >}}Dismissed{{< /ui >}}. Each tab displays the total estimated savings for recommendations in that status.
+
+### Track savings by status
+
+Each status tab displays the total estimated savings for recommendations in that status:
+
+- {{< ui >}}Open{{< /ui >}}: Potential savings from recommendations that have not been triaged.
+- {{< ui >}}In Progress{{< /ui >}}: Estimated savings from recommendations with work underway.
+- {{< ui >}}Completed{{< /ui >}}: Realized savings from recommendations where the recommended action has been taken.
+- {{< ui >}}Dismissed{{< /ui >}}: Estimated savings from recommendations that have been dismissed.
+
 ### Change a recommendation status
 
-1. Click a recommendation in the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] list to open the side panel.
-1. Use the status dropdown to select a new status.
+You can change a recommendation status in three ways:
+
+- **Bulk update**: Select one or more recommendations in {{< ui >}}Active Recommendations{{< /ui >}}, then choose a status from the toolbar above the table to apply it to all selected recommendations.
+- **From the table**: Use the status dropdown in the {{< ui >}}Status{{< /ui >}} column to select a new status directly from the recommendation list.
+- **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
@@ -653,8 +684,9 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
-- **[Bits AI Dev Agent][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, the Bits AI Dev Agent creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up the Bits AI Dev Agent][13] to use this feature.
+- **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
+- **[Cost Optimization Automation][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
@@ -680,3 +712,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
 [13]: /bits_ai/bits_ai_dev_agent/setup
 [14]: /bits_ai/bits_ai_dev_agent/
+[15]: /cloud_cost_management/recommendations/cost_optimization_automation/
+[16]: /mcp_server/tools/#cost_recommendations

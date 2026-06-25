@@ -20,6 +20,7 @@ This instrumentation method uses `serverless-init` and provides the following ad
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
 - Support for submitting custom metrics using DogStatsD.
+- [Enhanced metrics][18] distinguished with the `azure.app_services.enhanced.*` namespace.
 
 ### Prerequisites
 
@@ -153,3 +154,4 @@ Share the content of the **Log stream** with [Datadog Support][17].
 [15]: /tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [17]: /help
+[18]: /integrations/azure-app-services/#metrics

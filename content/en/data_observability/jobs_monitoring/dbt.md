@@ -30,18 +30,48 @@ Create a service token in dbt Cloud so Datadog can access your account's metadat
 2. Click on {{< ui >}}+ Create Service Token{{< /ui >}}.
 3. Provide a name for the token.
 4. Set the token permissions:
-   - For dbt Cloud Enterprise plan, ensure that the token has {{< ui >}}Developer{{< /ui >}} permissions.
-   - For dbt Cloud Team plan, ensure that the token has {{< ui >}}Account Admin{{< /ui >}} permissions.
+   - If you create the webhook in dbt Cloud yourself, use the {{< ui >}}Stakeholder/Read-Only{{< /ui >}} permission set scoped to the relevant dbt Cloud projects.
+   - If Datadog creates and manages the webhook, use {{< ui >}}Developer{{< /ui >}} permissions for the dbt Cloud Enterprise plan or {{< ui >}}Account Admin{{< /ui >}} permissions for the dbt Cloud Team plan.
 5. Click {{< ui >}}Save{{< /ui >}} and copy the generated API token.
 
 ## Connect your dbt Cloud account to Datadog
 
-Use the API token to configure the integration in Datadog.
+Use the API token to configure the integration in Data Observability.
 
-1. Navigate to Datadog's [dbt Cloud integration tile][1].
-2. If you have already created a dbt Cloud integration account, make sure you have updated it with the API token with permissions described above.
-3. If not, create a new account. Fill in the {{< ui >}}Account Name{{< /ui >}}, {{< ui >}}Account Id{{< /ui >}}, {{< ui >}}Account Url{{< /ui >}}, and {{< ui >}}API Token{{< /ui >}} sections.
-4. Click {{< ui >}}Save{{< /ui >}} to save your settings.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
+2. In the {{< ui >}}dbt Cloud{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.
+3. If you have already created a dbt Cloud integration account, make sure you have updated it with the API token with permissions described above.
+4. If not, create an account. Fill in the {{< ui >}}Account Name{{< /ui >}}, {{< ui >}}Account Id{{< /ui >}}, {{< ui >}}Account Url{{< /ui >}}, and {{< ui >}}API Token{{< /ui >}} sections.
+5. Click {{< ui >}}Save{{< /ui >}} to save your settings.
+
+## Configure webhooks
+
+In Data Observability settings, expand the dbt Cloud account and choose how Datadog receives dbt Cloud job run events.
+
+### Create the webhook in dbt Cloud yourself
+
+Use this option if you want to use a {{< ui >}}Stakeholder/Read-Only{{< /ui >}} service token for artifact ingestion.
+
+1. Select {{< ui >}}I'll manage the webhook in dbt Cloud myself{{< /ui >}}.
+2. Copy the Datadog webhook URL.
+3. In dbt Cloud, go to {{< ui >}}Account Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} > {{< ui >}}Create New Webhook{{< /ui >}}.
+4. Paste the Datadog webhook URL into the webhook URL field.
+5. Enable the {{< ui >}}Job Run Started{{< /ui >}} and {{< ui >}}Job Run Completed{{< /ui >}} events. To scope ingestion to specific jobs, select those jobs in the dbt Cloud webhook configuration.
+6. Save the webhook in dbt Cloud.
+7. Copy the HMAC secret from dbt Cloud, paste it into the {{< ui >}}HMAC secret from dbt Cloud{{< /ui >}} field in Datadog, and click {{< ui >}}Save{{< /ui >}}.
+
+**Note**: After saving, webhooks you create yourself can take up to 5 minutes to start accepting traffic from dbt Cloud.
+
+If you remove a user-managed webhook configuration in Datadog later, delete the webhook from dbt Cloud manually.
+
+### Let Datadog manage the webhook
+
+Use this option if you want Datadog to create and maintain the webhook in dbt Cloud.
+
+1. Select {{< ui >}}Datadog-managed{{< /ui >}}.
+2. Click {{< ui >}}Save{{< /ui >}}.
+
+This mode requires a dbt Cloud token with {{< ui >}}Developer{{< /ui >}} permissions for the dbt Cloud Enterprise plan or {{< ui >}}Account Admin{{< /ui >}} permissions for the dbt Cloud Team plan.
 
 ## What's next
 
@@ -49,8 +79,8 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 {{< img src="data_observability/data-obs-dbt-cloud-final.png" alt="Data Observability overview showing dbt job runs as a stacked bar chart over time and a table of connected dbt Cloud accounts with their status." style="width:100%;" >}}
 
-[1]: https://app.datadoghq.com/integrations/dbt-cloud
-[2]: https://app.datadoghq.com/datasets/catalog?integration=dbt
+[1]: https://app.datadoghq.com/data-obs/settings/integrations
+[2]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
 
 {{% /tab %}}
 
@@ -116,7 +146,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 [3]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [4]: /getting_started/site/#access-the-datadog-site
 [5]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
-[6]: https://app.datadoghq.com/datasets/catalog?integration=dbt
+[6]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
 [7]: https://docs.getdbt.com/docs/running-a-dbt-project/run-your-dbt-projects
 
 {{% /tab %}}
@@ -125,4 +155,3 @@ After your next dbt job run, you should start seeing job run and lineage data in
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-

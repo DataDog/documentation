@@ -28,16 +28,16 @@ The following are required to send Okta logs to Observability Pipelines using Am
 1. Navigate to [Observability Pipelines][1].
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source.
-1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][2] for the defaults used.
-1. Select your authorization strategy. If you selected **Plain**:
-    - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][2] for the defaults used.
-1. In the **Decoding** dropdown menu, select **Bytes**.
-1. Toggle the switch to **Enable TLS**.
-    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][2] for the defaults used.
+1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Secret defaults][2] for the defaults used.
+1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
+    - Enter the identifiers for the HTTP/S Server username and password. See [Secret defaults][2] for the defaults used.
+1. In the {{< ui >}}Decoding{{< /ui >}} dropdown menu, select {{< ui >}}Bytes{{< /ui >}}.
+1. Toggle the switch to {{< ui >}}Enable TLS{{< /ui >}}.
+    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Secret defaults][2] for the defaults used.
     - The following certificate and key files are required.
-      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
-      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
-      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.
+      - {{< ui >}}Server Certificate Path{{< /ui >}}: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
+      - {{< ui >}}CA Certificate Path{{< /ui >}}: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
+      - {{< ui >}}Private Key Path{{< /ui >}}: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.
       - **Notes**:
         - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][5] for more information.
         - The file must be readable by the `observability-pipelines-worker` group and user.
@@ -50,11 +50,11 @@ The following are required to send Okta logs to Observability Pipelines using Am
     sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
     sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
     ```
-1. After you set up your destinations and processors, click **Next: Install**.
+1. After you set up your destinations and processors, click {{< ui >}}Next: Install{{< /ui >}}.
 
 ### Install the Worker
 
-1. On the **Install** page, select your platform in the dropdown menu.
+1. On the {{< ui >}}Install{{< /ui >}} page, select your platform in the dropdown menu.
 1. Follow the instructions on the page to install the Worker based on your platform. See [Install the Worker][3] for details.
 1. After installing the Worker, change ownership of the certificates so the Observability Pipelines Worker can read them:
     ```shell
@@ -93,8 +93,8 @@ Follow the [Add an AWS EventBridge log stream][4] instructions to:
 After configuring the Amazon EventBridge, you can view your Okta logs in [Log Explorer][6].
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#set-secrets
-[3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
+[2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#secret-defaults
+[3]: /observability_pipelines/configuration/install_the_worker/
 [4]: https://help.okta.com/en-us/content/topics/reports/log-streaming/add-aws-eb-log-stream.htm
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/logs

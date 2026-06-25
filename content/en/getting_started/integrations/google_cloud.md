@@ -74,6 +74,8 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 
 ### Metric collection
 
+{{% google-cloud-collection-scope %}}
+
 <div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
 
 #### Required IAM permissions
@@ -90,18 +92,18 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
 
 {{% collapse-content title="1. Create a Google Cloud service account in the default project" level="h5" %}}
 1. Open your [Google Cloud console][401].
-2. Navigate to **IAM & Admin** > **Service Accounts**.
-3. Click **Create service account** at the top.
+2. Navigate to {{< ui >}}IAM & Admin{{< /ui >}} > {{< ui >}}Service Accounts{{< /ui >}}.
+3. Click {{< ui >}}Create service account{{< /ui >}} at the top.
 4. Give the service account a unique name.
-5. Click **Done** to complete creating the service account.
+5. Click {{< ui >}}Done{{< /ui >}} to complete creating the service account.
 
 [401]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
 {{% collapse-content title="2. Add the service account at the organization or folder level" level="h5" %}}
-1. In the Google Cloud console, go to the **IAM** page.
+1. In the Google Cloud console, go to the {{< ui >}}IAM{{< /ui >}} page.
 2. Select a folder or organization.
-3. To grant a role to a principal that does not already have other roles on the resource, click **Grant Access**, then enter the email of the service account you created earlier.
+3. To grant a role to a principal that does not already have other roles on the resource, click {{< ui >}}Grant Access{{< /ui >}}, then enter the email of the service account you created earlier.
 4. Enter the service account's email address.
 5. Assign the following roles:
    - [Compute Viewer][402] provides **read-only** access to get and list Compute Engine resources
@@ -109,7 +111,7 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
    - [Cloud Asset Viewer][404] provides **read-only** access to cloud assets metadata
    - [Browser][405] provides **read-only** access to browse the hierarchy of a project
    - [Service Usage Consumer][406] (**optional**, for multi-project environments) provides [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution)
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
 
@@ -123,8 +125,8 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
 {{% collapse-content title="3. Add the Datadog principal to your service account" level="h5" %}}
 **Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
 
-1. In Datadog, navigate to **Integrations** > [**Google Cloud Platform**][407].
-2. Click **Add Google Cloud Account**.
+1. In Datadog, navigate to {{< ui >}}Integrations{{< /ui >}} > [{{< ui >}}Google Cloud Platform{{< /ui >}}][407].
+2. Click {{< ui >}}Add Google Cloud Account{{< /ui >}}.
 If you have no configured projects, you are automatically redirected to this page.
 3. Copy your Datadog principal and keep it for the next section.
 
@@ -132,25 +134,25 @@ If you have no configured projects, you are automatically redirected to this pag
 
 **Note**: Keep this window open for Section 4.
 
-4. In the [Google Cloud console][409], under the **Service Accounts** menu, find the service account you created in Section 1.
-5. Go to the **Permissions** tab and click **Grant Access**.
+4. In the [Google Cloud console][409], under the {{< ui >}}Service Accounts{{< /ui >}} menu, find the service account you created in Section 1.
+5. Go to the {{< ui >}}Permissions{{< /ui >}} tab and click {{< ui >}}Grant Access{{< /ui >}}.
 
 {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google Cloud console interface, showing the Permissions tab under Service Accounts." style="width:70%;">}}
 
-6. Paste your Datadog principal into the **New principals** text box.
-7. Assign the role of **Service Account Token Creator**.
-8. Click **Save**.
+6. Paste your Datadog principal into the {{< ui >}}New principals{{< /ui >}} text box.
+7. Assign the role of {{< ui >}}Service Account Token Creator{{< /ui >}}.
+8. Click {{< ui >}}Save{{< /ui >}}.
 
 [407]: https://app.datadoghq.com/integrations/google-cloud-platform
 [409]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
 {{% collapse-content title="4. Complete the integration setup in Datadog" level="h5" %}}
-1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. On this page, find the email associated with this Google service account. It has the format `<SA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com`.
+1. In your Google Cloud console, navigate to the {{< ui >}}Service Account{{< /ui >}} > {{< ui >}}Details{{< /ui >}} tab. On this page, find the email associated with this Google service account. It has the format `<SA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com`.
 2. Copy this email.
 3. Return to the integration configuration tile in Datadog (where you copied your Datadog principal in the previous section).
-4. Paste the email you copied in **Add Service Account Email**.
-5. Click **Verify and Save Account**.
+4. Paste the email you copied in {{< ui >}}Add Service Account Email{{< /ui >}}.
+5. Click {{< ui >}}Verify and Save Account{{< /ui >}}.
 {{% /collapse-content %}}
 
 Metrics appear in Datadog approximately **15 minutes** after setup.
@@ -165,7 +167,7 @@ Metrics appear in Datadog approximately **15 minutes** after setup.
 
 ### Prerequisites
 
-To use the Quick Start method, your Datadog user role must be able to create API and application keys. If you're using a [Datadog-managed role][202], you must have the **Datadog Admin role**. If you're using a [custom role][203], your role needs to have at least the `api_keys_write` and `user_app_keys` permissions.
+To use the Quick Start method, your Datadog user role must be able to create API and application keys. If you're using a [Datadog-managed role][202], you must have the {{< ui >}}Datadog Admin role{{< /ui >}}. If you're using a [custom role][203], your role needs to have at least the `api_keys_write` and `user_app_keys` permissions.
 
 ### Choose Quick Start setup if...
 
@@ -175,24 +177,24 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][200], select **+ Add GCP Account**.
-2. Click **Quick Start**.
-3. Click **Copy** in the setup script section.<br>
+1. In the [Google Cloud integration page][200], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Click {{< ui >}}Quick Start{{< /ui >}}.
+3. Click {{< ui >}}Copy{{< /ui >}} in the setup script section.<br>
    **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.
-4. Click **Open Google Cloud Shell**, or go to [Google Cloud Shell][204].
+4. Click {{< ui >}}Open Google Cloud Shell{{< /ui >}}, or go to [Google Cloud Shell][204].
 5. Paste the script into the shell prompt and run it.
 6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
-7. Under **Provide Service Account Details**:
+7. Under {{< ui >}}Provide Service Account Details{{< /ui >}}:
    1. Give the service account a name.
    2. Select the project to contain the service account.
-8. Configure **Metric Collection** (optional).
+8. Configure {{< ui >}}Metric Collection{{< /ui >}} (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
    5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
    **Note**: `VM Instance` filtering does not impact related `gcp.logging.*` metrics and does not cause any billing impact for those metrics.
-9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
+9. Configure {{< ui >}}Resource Collection{{< /ui >}} (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. A summary of the changes to be made is displayed. If confirmed, the script:
     - Enables the required APIs
     - Assigns the necessary permissions to monitor each selected project and folder
@@ -215,22 +217,22 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][500], select **+ Add GCP Account**.
-2. Select **Terraform**.
-3. Under **Provide GCP Resources**, add any project IDs and folder IDs to be monitored.
+1. In the [Google Cloud integration page][500], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Select {{< ui >}}Terraform{{< /ui >}}.
+3. Under {{< ui >}}Provide GCP Resources{{< /ui >}}, add any project IDs and folder IDs to be monitored.
 4. Select any folders and projects to be monitored.
-5. Under **Provide Service Account Details**:
+5. Under {{< ui >}}Provide Service Account Details{{< /ui >}}:
    1. Give the service account a name.
    2. Select the project to contain the service account.
-6. Configure **Metric Collection** (optional).
+6. Configure {{< ui >}}Metric Collection{{< /ui >}} (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
    5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
-7. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
-8. Copy the provided **Terraform Code**.
-9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
+7. Configure {{< ui >}}Resource Collection{{< /ui >}} (attributes and configuration information of the resources in your Google Cloud environment).
+8. Copy the provided {{< ui >}}Terraform Code{{< /ui >}}.
+9. Paste the code into a `.tf` file, and run the {{< ui >}}Initialize and apply the Terraform{{< /ui >}} command. If successful, the command:
    - Enables the required APIs
    - Assigns the necessary permissions to monitor each selected project and folder
    - Completes the integration setup in Datadog
@@ -247,24 +249,24 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 ### Instructions
 
-1. In the [Google Cloud integration page][600], select **+ Add GCP Account**.
-2. Click **Manual**.
-3. Copy the **Datadog Principal** value, and click **Open the Google Console**.
+1. In the [Google Cloud integration page][600], select {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Click {{< ui >}}Manual{{< /ui >}}.
+3. Copy the {{< ui >}}Datadog Principal{{< /ui >}} value, and click {{< ui >}}Open the Google Console{{< /ui >}}.
 4. Create a service account:
-   1. Give the service account a descriptive name, and click **Create and continue**.
-   2. Under **Permissions**, search for and add the **Service Account Token Creator** role from the dropdown, and click **Continue**.
-   3. Under **Principals with access**, paste the **Datadog Principal** value into the **Service account users role** field, and click **Done**.
-5. Click the service account link under the **Email** column.
-6. Copy the **Email** value.
-7. In Datadog, paste the service account email in the **Add Service Account Email** section.
-8. Configure **Metric Collection** (optional).
+   1. Give the service account a descriptive name, and click {{< ui >}}Create and continue{{< /ui >}}.
+   2. Under {{< ui >}}Permissions{{< /ui >}}, search for and add the {{< ui >}}Service Account Token Creator{{< /ui >}} role from the dropdown, and click {{< ui >}}Continue{{< /ui >}}.
+   3. Under {{< ui >}}Principals with access{{< /ui >}}, paste the {{< ui >}}Datadog Principal{{< /ui >}} value into the {{< ui >}}Service account users role{{< /ui >}} field, and click {{< ui >}}Done{{< /ui >}}.
+5. Click the service account link under the {{< ui >}}Email{{< /ui >}} column.
+6. Copy the {{< ui >}}Email{{< /ui >}} value.
+7. In Datadog, paste the service account email in the {{< ui >}}Add Service Account Email{{< /ui >}} section.
+8. Configure {{< ui >}}Metric Collection{{< /ui >}} (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
    5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
-9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
-10. Click **Verify and Save Account**.
+9. Configure {{< ui >}}Resource Collection{{< /ui >}} (attributes and configuration information of the resources in your Google Cloud environment, optional).
+10. Click {{< ui >}}Verify and Save Account{{< /ui >}}.
 
 [600]: https://app.datadoghq.com/integrations/google-cloud-platform
 {{% /collapse-content %}}
@@ -275,7 +277,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 #### Validation
 
-To view your metrics, use the left menu to navigate to **Metrics** > **Summary** and search for `gcp`:
+To view your metrics, use the left menu to navigate to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} and search for `gcp`:
 
 {{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metric Summary page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
 
@@ -330,7 +332,7 @@ You can choose which services and resources to collect metrics from. This can he
 
 {{% collapse-content title="Limit metric collection by Google Cloud service, and by granular metric filters" level="h4" %}}
 
-Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect the metric namespaces to exclude.
+Under the {{< ui >}}Metric Collection{{< /ui >}} tab in Datadog's [Google Cloud integration page][11], deselect the metric namespaces to exclude.
 
 To apply granular metric filtering for enabled services, click on the service in question and apply your filters in the `Add filters for gcp.<service>` field.
 
@@ -349,11 +351,13 @@ To apply granular metric filtering for enabled services, click on the service in
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Limit metric collection by Google Cloud region, and by global resources" level="h4" %}}
+{{% collapse-content title="Limit metric collection by Google Cloud region and by global resources" level="h4" %}}
 
-Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect which regions to exclude from metrics collection.
+Under the {{< ui >}}Metric Collection{{< /ui >}} tab in Datadog's [Google Cloud integration page][11], deselect which regions to exclude from metrics collection.
 
-You can also specify additional locations not listed and disable any global metrics not associated with a region.
+If a region or location value isn't shown in the checkboxes, add it in the {{< ui >}}Additional Locations{{< /ui >}} field. The filter performs an exact match against the label value reported by Google Cloud, so enter values exactly as they appear on your resources (for example, `us-central`).
+
+You can also disable any global metrics not associated with a region.
 
 {{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
 
@@ -361,7 +365,7 @@ You can also specify additional locations not listed and disable any global metr
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
 1. Assign a tag (such as `datadog:true`) to the hosts or Cloud Run instances you want to monitor with Datadog.
-2. Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], enter the tags in the **Limit Metric Collection Filters** textbox. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
+2. Under the {{< ui >}}Metric Collection{{< /ui >}} tab in Datadog's [Google Cloud integration page][11], enter the tags in the {{< ui >}}Limit Metric Collection Filters{{< /ui >}} textbox. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
@@ -374,15 +378,13 @@ In the below example, only Google Cloud hosts with the label `datadog:true` are 
 
 {{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="The fields to limit metric collection in the Google Cloud integration tile" style="width:100%;" >}}
 
-#### Best practices for monitoring multiple projects
-
-##### Enable per-project cost and API quota attribution
+#### Enable per-project cost and API quota attribution
 
 By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
 
 To enable this feature:
 1. Ensure that the Datadog service account has the [Service Usage Consumer][410] role at the desired scope (folder or organization).
-2. Click the **Enable Per Project Quota** toggle in the **Projects** tab of the [Google Cloud integration page][411].
+2. Click the {{< ui >}}Enable Per Project Quota{{< /ui >}} toggle in the {{< ui >}}Projects{{< /ui >}} tab of the [Google Cloud integration page][411].
 
 [410]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
 [411]: https://app.datadoghq.com/integrations/google-cloud-platform/
@@ -440,7 +442,7 @@ Datadog's [Google Cloud Cost Management][45] provides insights for engineering a
 Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
 To use this feature, see [Getting Started with Cloud SIEM][46].
 
-To view security findings from [Google Cloud Security Command Center][47] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab and follow the setup instructions on the [Google Cloud Security Command Center guide][48].
+To view security findings from [Google Cloud Security Command Center][47] in Cloud SIEM, toggle the {{< ui >}}Enable collection of security findings{{< /ui >}} option under the {{< ui >}}Security Findings{{< /ui >}} tab and follow the setup instructions on the [Google Cloud Security Command Center guide][48].
 
 {{< img src="integrations/google_cloud_platform/security_findings.png" alt="The security findings tab in the Google Cloud integration tile" style="width:90%;" >}}
 
@@ -449,7 +451,7 @@ To view security findings from [Google Cloud Security Command Center][47] in Clo
 Datadog Cloud Security delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
 Check out the [Setting up Cloud Security guide][49] to get started.
 
-After setting up Cloud Security, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and Cloud Security. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
+After setting up Cloud Security, toggle the {{< ui >}}Enable Resource Collection{{< /ui >}} option under the {{< ui >}}Resource Collection{{< /ui >}} tab to start collecting configuration data for the [Resource Catalog][50] and Cloud Security. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/resource_collection.png" alt="The resource collection tab in the Google Cloud integration tile" style="width:100%;" >}}
 

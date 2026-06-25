@@ -20,7 +20,7 @@ Automated Analysis automatically detects performance issues in your applications
 
 - A high-level summary explaining the issue and why it matters
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
-- Recommended next steps to help you resolve the issue
+- Recommended next steps to help you resolve the issue, with optional auto-generated fixes from [Bits Code][2]
 
 This reduces the profiling expertise needed to identify and resolve performance issues in your applications that might otherwise go unnoticed.
 
@@ -29,7 +29,7 @@ This reduces the profiling expertise needed to identify and resolve performance 
 ## Explore insights
 Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
 
-- In the **Insights** section at the top of the page
+- In the {{< ui >}}Insights{{< /ui >}} section at the top of the page
 {{< img src="profiler/profiling_automated_analysis_section.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
 
 - Within a flame graph view
@@ -52,6 +52,9 @@ Each row represents an insight type, summarizing:
 - Priority (high, medium or low)
 
 You can filter insights by insight name, runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
+
+## Take action on insights
+While viewing an insight, see {{< ui >}}Next Steps{{< /ui >}} to view Datadog recommendations for improvements. Alternatively, click {{< ui >}}Fix with Bits{{< /ui >}} to have [Bits Code][2] generate a fix.
 
 ## Supported insights
 
@@ -135,4 +138,5 @@ Automated Analysis supports finding the following insights:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/profiling/explorer
+[2]: /bits_ai/bits_ai_dev_agent/
 

@@ -79,7 +79,7 @@ The following variables work only in postmortem templates. They are not availabl
 | `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
 
 ## AI variables
-{{< site-region region="gov" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 AI variables are available in notification and postmortem templates. Your organization must have AI enabled.
 
