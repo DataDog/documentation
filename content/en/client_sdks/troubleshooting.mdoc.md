@@ -37,6 +37,11 @@ content_filters:
 {% partial file="sdk/troubleshooting/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+{% partial file="sdk/troubleshooting/maui.mdoc.md" /%}
+{% /if %}
+
 <!-- Roku -->
 {% if equals($platform, "roku") %}
 {% partial file="sdk/troubleshooting/roku.mdoc.md" /%}

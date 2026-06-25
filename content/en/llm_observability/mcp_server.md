@@ -1,16 +1,16 @@
 ---
-title: LLM Observability MCP and Skills
-description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
+title: Agent Observability MCP and Skills
+description: "Connect AI agents to your Agent Observability traces and experiments using the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/llm_observability/experiments"
   tag: "Documentation"
-  text: "Set up and use LLM Observability Experiments"
+  text: "Set up and use Agent Observability Experiments"
 - link: "/llm_observability/monitoring"
   tag: "Documentation"
-  text: "Monitor your application with LLM Observability"
+  text: "Monitor your application with Agent Observability"
 - link: "/llm_observability/guide/claude_code_skills"
   tag: "Guide"
   text: "Analyze LLM Applications with Claude Code Skills"
@@ -18,22 +18,22 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [Datadog MCP Server][1] enables AI agents to access your [Agent Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Setup
 
 Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` toolset enabled.
 
-<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
 
 ### Prerequisites
 
-- A Datadog account with permission to access LLM Observability data.
+- A Datadog account with permission to access Agent Observability data.
 - An MCP-compatible client (for example, Claude Code, Codex CLI, Cursor, Gemini CLI, or Kiro CLI).
 
 ### Endpoint
 
-The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the LLM Observability and core toolsets.
+The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
@@ -158,7 +158,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -172,7 +172,7 @@ The skills require the `llmobs` MCP toolset to be connected. If you have not alr
 
 ```shell
 claude mcp add --scope user --transport http "datadog-llmo-mcp" \
-  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
 ```
 
 Restart Claude Code after running both commands for the skills to appear.
@@ -190,7 +190,7 @@ Restart Claude Code after running both commands for the skills to appear.
 
 #### Session classification
 
-`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: LLM Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: Agent Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
 
 ```
 /llm-obs-session-classify session_id=<SESSION_ID>
@@ -251,7 +251,7 @@ For a complete guide to these skills and a recommended end-to-end workflow, see 
 
 ## Use cases
 
-The LLM Observability MCP tools enable AI-assisted workflows for:
+The Agent Observability MCP tools enable AI-assisted workflows for:
 
 - **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
@@ -259,6 +259,7 @@ The LLM Observability MCP tools enable AI-assisted workflows for:
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
+- **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
 
 ## Available tools
 
@@ -321,6 +322,29 @@ The `llmobs` toolset includes the following tools:
 `delete_llmobs_evaluator`
 : Delete an LLM-judge evaluator configuration by name.
 
+### Patterns tools
+
+`list_llmobs_pattern_configs`
+: List all Patterns configurations for the org. Returns each config's `id`, `name`, `evp_query`, sampling settings, and timestamps. Start here to find a `config_id`.
+
+`get_llmobs_pattern_config`
+: Get the most-recently-modified Patterns configuration for the org.
+
+`get_llmobs_pattern_run_status`
+: Get the status and per-activity progress of the most recent Patterns run for a config. Use this to check whether clustering is running, completed, or failed before reading topics.
+
+`list_llmobs_pattern_runs`
+: List all completed Patterns runs for a config, newest first. Returns each run's `id`, `status`, timestamps, and the `config_snapshot` used.
+
+`get_llmobs_patterns`
+: Get the topic hierarchy discovered by a Patterns run. Topics are organized into levels, each with a `name`, `description`, and `point_count`. Omit `run_id` to read the most recent completed run.
+
+`get_llmobs_patterns_with_points`
+: Get the topic hierarchy for a run with span IDs inlined on each leaf topic. Set `include_metrics=true` to also include per-span duration, cost, token counts, and evaluations.
+
+`get_llmobs_pattern_points`
+: Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
+
 ## Recommended workflows
 
 ### Trace analysis
@@ -341,6 +365,15 @@ The `llmobs` toolset includes the following tools:
 4. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
 5. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
 
+### Patterns analysis
+
+1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
+2. **Check run status**: Use `get_llmobs_pattern_run_status` to verify the most recent run is complete.
+3. **Read topics**: Use `get_llmobs_patterns` to get the full topic hierarchy with names, descriptions, and coherence scores.
+4. **Inspect spans**: Use `get_llmobs_patterns_with_points` to get topics with span IDs inlined, or `get_llmobs_pattern_points` to page through the spans of a specific topic.
+5. **Analyze span content**: Use `get_llmobs_span_details` or `get_llmobs_span_content` with the `span_id` values from the previous step to inspect the actual inputs, outputs, and metadata of individual spans within a topic.
+6. **Browse past runs**: Use `list_llmobs_pattern_runs` to see historical runs and pass a specific `run_id` to compare topic distributions over time.
+
 ## Example prompts
 
 After connecting, try prompts like:
@@ -355,7 +388,7 @@ After connecting, try prompts like:
 
 ## Combine with other Datadog tools
 
-The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with LLM Observability analysis.
+The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with Agent Observability analysis.
 
 ### Export analysis to Datadog Notebooks
 
@@ -375,7 +408,7 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/setup/
+[1]: /mcp_server/setup/
 [2]: /llm_observability/
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/

@@ -69,7 +69,7 @@ In a Datadog environment with parent and child organizations where the setting i
 
 **Note**: Even when tags are not enforced on the parent org, the child org still inherits the tags from the parent org.
 
-1. Ensure you have the RUM Settings Write permission.
+1. Verify you have the RUM Settings Write and Usage Edit permissions.
 2. Navigate to **Digital Experience** > **Real User Monitoring** > **Manage Applications** > **Enforce Usage Attribution**.
 3. Click the toggle to **Enforce tags for usage attribution on all applications**. With this enabled, apps can only be created or updated if all tags are set.
 

@@ -17,26 +17,28 @@ Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
 Configure the OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the OpenSearch destination in the pipeline UI:
 
 1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#secret-defaults) is used.
-1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
-	- **Bulk** mode
+1. In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select {{< ui >}}Bulk{{< /ui >}} or {{< ui >}}Data streams{{< /ui >}}.
+	- {{< ui >}}Bulk{{< /ui >}} mode
 		- Uses OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
-		- To configure **Bulk** mode:
-			- In the **Index** field, optionally enter the name of the OpenSearch index. You can use [template syntax][3] to dynamically route logs to different indexes based on specific fields in your logs, for example `logs-{{service}}`.
-	- **Data streams** mode
+		- To configure {{< ui >}}Bulk{{< /ui >}} mode:
+			- In the {{< ui >}}Index{{< /ui >}} field, optionally enter the name of the OpenSearch index. You can use [template syntax][3] to dynamically route logs to different indexes based on specific fields in your logs, for example `logs-{{service}}`.
+	- {{< ui >}}Data streams{{< /ui >}} mode
 		- Uses  [OpenSearch Data Streams][5] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for timeseries log data.
 		- Choose this mode when you want OpenSearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default`) by entering the following information:
-			- In the **Type** field, enter the category of data being ingested, for example `logs`.
-			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
-			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
+		- To configure {{< ui >}}Data streams{{< /ui >}} mode, optionally define the data stream name (default is `logs-generic-default`) by entering the following information:
+			- In the {{< ui >}}Type{{< /ui >}} field, enter the category of data being ingested, for example `logs`.
+			- In the {{< ui >}}Dataset{{< /ui >}} field, specify the format or data source that describes the structure, for example `apache`.
+			- In the {{< ui >}}Namespace{{< /ui >}} field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
 
 ### Optional settings

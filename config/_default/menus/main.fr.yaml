@@ -2217,11 +2217,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -6187,26 +6182,21 @@ menu:
       parent: security_platform
       identifier: security_access_control
       weight: 8
-    - name: Account Takeover Protection
-      url: security/account_takeover_protection
-      parent: security_platform
-      identifier: security_ato_protection
-      weight: 9
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 9
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 10
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 12
+      weight: 11
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -6656,21 +6646,26 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
+    - name: Account Takeover Protection
+      url: security/application_security/account_takeover_protection/
+      parent: application_security
+      identifier: security_ato_protection
+      weight: 9
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
       identifier: asm_api_security
-      weight: 9
+      weight: 10
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 10
+      weight: 11
     - name: Dépannage
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 11
+      weight: 12
     - name: Sensitive Data Scanner
       url: /security/sensitive_data_scanner/
       pre: sensitive-data-scanner

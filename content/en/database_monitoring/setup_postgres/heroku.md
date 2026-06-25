@@ -73,6 +73,36 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+Create the following function in the database to enable column-level table statistics collection from `pg_stats`:
+
+``` sql
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+To enable column statistics collection on the Agent, add the following to your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][8].
+
 ## Configuring the Postgres integration
 
 Configure the Datadog Agent to enable the Postgres integration, using one of the following two options.
@@ -220,3 +250,4 @@ The database connection is now configured. To enable additional features, such a
 [4]: https://devcenter.heroku.com/articles/heroku-postgres-plans
 [6]: /database_monitoring/schema_explorer
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[8]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection

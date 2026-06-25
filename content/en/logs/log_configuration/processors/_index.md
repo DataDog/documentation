@@ -22,6 +22,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/integration-pipelines"
   tag: "Learning Center"
   text: "Process Logs Out of the Box with Integration Pipelines"
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
 algolia:
   tags: ["logs processors", "logs parsing", "Extracting Attributes", "Remapping attributes"]
 ---
@@ -50,6 +53,7 @@ In [log configuration settings][1], you can configure processors such as the [Gr
     {{< nextlink href="logs/log_configuration/processors/remapper">}}<strong>Attribute Remapper</strong>: Remap source attributes or tags to another target attribute or tag.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/category_processor">}}<strong>Category Processor</strong>: Add a new attribute to a log based on a search query match, for grouping and classification.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/decoder_processor">}}<strong>Decoder Processor</strong>: Translate binary-to-text encoded fields (such as Base64 or Hex) into their original representation.{{< /nextlink >}}
+    {{< nextlink href="logs/log_configuration/processors/exclude_attribute_processor">}}<strong>Exclude Attribute Processor</strong>: Remove a specified attribute from your logs during pipeline processing.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/geoip_parser">}}<strong>GeoIP Parser</strong>: Extract continent, country, subdivision, or city information from an IP address attribute.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/grok_parser">}}<strong>Grok Parser</strong>: Create custom parsing rules to extract and structure data from log messages or specific attributes.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/log_date_remapper">}}<strong>Log Date Remapper</strong>: Assign one or more attributes as the official timestamp for your logs.{{< /nextlink >}}

@@ -288,6 +288,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2882802132",
+      "description": "Create a new dashboard with hostmap infra widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1200099236",
       "description": "Create a new dashboard with hostmap widget"
     },
@@ -403,6 +408,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2844071429",
+      "description": "Create a new dashboard with sankey widget and RUM data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_258152475",
       "description": "Create a new dashboard with sankey widget and network data source"
     },
@@ -410,11 +420,6 @@
       "group": "dashboards",
       "suffix": "_373890042",
       "description": "Create a new dashboard with sankey widget and product analytics data source"
-    },
-    {
-      "group": "dashboards",
-      "suffix": "_2932151909",
-      "description": "Create a new dashboard with sankey widget and rum data source"
     },
     {
       "group": "dashboards",
@@ -725,6 +730,26 @@
   "CreateLogsPipeline": [
     {
       "group": "logs_pipelines",
+      "suffix": "_3996915493",
+      "description": "Create a pipeline with Array Map Processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2402034476",
+      "description": "Create a pipeline with Array Map Processor using arithmetic sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1185292896",
+      "description": "Create a pipeline with Array Map Processor using category sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_104735144",
+      "description": "Create a pipeline with Array Map Processor with preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_1248402480",
       "description": "Create a pipeline with Array Processor Append Operation returns \"OK\" response"
     },
@@ -958,6 +983,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "_1326388368",
       "description": "Create an SLO correction with rrule returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2888963657",
+      "description": "Create an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "UpdateSLOCorrection": [
@@ -965,6 +995,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "",
       "description": "Update an SLO correction returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2949191256",
+      "description": "Update an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "CreateSLO": [

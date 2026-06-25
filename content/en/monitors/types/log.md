@@ -36,7 +36,7 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 ## Monitor creation
 
-To create a log monitor in Datadog, use the main navigation: [**Monitors > New Monitor > Logs**][3].
+To create a log monitor in Datadog, use the main navigation: [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Logs{{< /ui >}}][3].
 
 <div class="alert alert-info">There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -46,12 +46,18 @@ As you define the search query, the graph above the search fields updates.
 
 1. Construct a search query using the same logic as a [Log Explorer search][4]. Note that [Flex Tier logs][10], which can be shown in Log Explorer, are not supported for monitors. Only Standard Tier logs are supported.
 2. Choose to monitor over a log count, [facet][5], an attribute, or [measure][6]:
-    * **Monitor over a log count**: Use the search bar (optional) and do **not** select an attribute or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
-    * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}Monitor over a log count{{< /ui >}}: Use the search bar (optional) and do **not** select an attribute or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
+    * {{< ui >}}Monitor over a facet or an attribute{{< /ui >}}: If a an attribute is selected, the monitor alerts over the {{< ui >}}Unique value count{{< /ui >}} of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
+    * {{< ui >}}Monitor over measure{{< /ui >}}: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
 
-   Datadog aggregates all logs matching the query into groups based on the values of tags, attributes, and up to four facets. When there are multiple dimensions, you can select the number of top or bottom values for each dimension.
+   Datadog aggregates all logs matching the query into groups based on the values of tags, attributes, and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+   * **1 facet**: 1000 top values
+   * **2 facets**: 30 top values per facet (at most 900 groups)
+   * **3 facets**: 10 top values per facet (at most 1000 groups)
+   * **4 facets**: 5 top values per facet (at most 625 groups)
+
+   If there are multiple queries or formulas defined in a log monitor, you can select the number of top or bottom values for each dimension.
 
    The total limit, irrespective of the number of facets, is 1000 top values. If you increase this above 1000, Datadog adjusts the top values for the other dimensions to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth, which defaults to 5 top values.
 
@@ -62,8 +68,8 @@ As you define the search query, the graph above the search fields updates.
    * **Fourth facet**: 2 top values
 
 4. Configure the alerting grouping strategy (optional):
-    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
+    * {{< ui >}}Simple-Alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
+    * {{< ui >}}Multi Alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
 ### Set alert conditions
 
@@ -96,7 +102,7 @@ For detailed instructions on the advanced alert options (evaluation delay, new g
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][8] page.
 
 #### Log samples and breaching values toplist
 
@@ -113,7 +119,7 @@ When a logs monitor is triggered, samples or values can be added to the notifica
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
-To disable log samples, uncheck the box at the bottom of the **Configure notification & automations** section. The text next to the box is based on your monitor's grouping (as stated above).
+To disable log samples, uncheck the box at the bottom of the {{< ui >}}Configure notification & automations{{< /ui >}} section. The text next to the box is based on your monitor's grouping (as stated above).
 
 #### Examples
 

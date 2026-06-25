@@ -1,6 +1,6 @@
 ---
 title: HTTP API Reference
-description: Reference documentation for the LLM Observability HTTP API, used to send LLM traces and spans to Datadog from applications in any language.
+description: Reference documentation for the Agent Observability HTTP API, used to send LLM traces and spans to Datadog from applications in any language.
 aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The LLM Observability HTTP API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, Node.js, or Java, you can use the [LLM Observability SDKs][1].
+The Agent Observability HTTP API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, Node.js, or Java, you can use the [Agent Observability SDKs][1].
 
 The API accepts spans with timestamps no more than 24 hours old, allowing limited backfill of delayed data.
 
@@ -55,6 +55,7 @@ Method
     "attributes": {
       "ml_app": "weather-bot",
       "session_id": "1",
+      "feedback_join_key": "weather-request-123",
       "tags": [
         "service:weather-bot",
         "env:staging",
@@ -216,7 +217,7 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### Prompt
 
-<div class="alert alert-info">LLM Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
+<div class="alert alert-info">Agent Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
 
 {{< tabs >}}
 {{% tab "Model" %}}
@@ -224,7 +225,7 @@ If the request is successful, the API responds with a 202 network code and an em
 |----------------------|--------|--------------------------|
 | id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
 | name | string | Human-readable name for the prompt. |
-| version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content. |
+| version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, Agent Observability automatically generates a version by computing a hash of the template content. |
 | template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
 | chat_template | [[Message]](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
 | variables | Dict[key (string), string] | Variables used to render the template. Keys correspond to placeholder names in the template. |
@@ -309,6 +310,7 @@ Type: `Dict[key (string), float64]`
 | apm_trace_id | string      | The ID of the associated APM trace. Defaults to match the `trace_id` field.   |
 | metrics     | Dict[key (string), float64]           | Datadog metrics to collect. See [Metrics](#metrics) for common metric names.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
+| feedback_join_key | string | A customer-defined key used to connect feedback to this span. Overrides the top-level `feedback_join_key` field. For details, see [End-User Feedback][4]. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |
 | service | string | The service name. |
 | ml_app | string | The LLM application name for this span. Overrides the top-level `ml_app` field. |
@@ -326,6 +328,7 @@ Type: `Dict[key (string), float64]`
 | spans [*required*]  | [[Span](#span)] | A list of spans.           |
 | tags                | [[Tag](#tag)]   | A list of top-level tags to apply to each span.        |
 | session_id          | string              | The session the list of spans belongs to. Can be overridden or set on individual spans as well. |
+| feedback_join_key   | string              | A customer-defined key used to connect feedback to the spans in the payload. Can be overridden or set on individual spans as well. For details, see [End-User Feedback][4]. |
 
 #### Tag
 
@@ -350,7 +353,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 <div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
-Use this endpoint to send evaluations to Datadog at the span, trace, or session level.
+Use this endpoint to send evaluations and end-user feedback to Datadog. Evaluations can be associated with spans, traces, or sessions. End-user feedback can be associated with spans, traces, sessions, or a customer-defined feedback join key.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
@@ -358,12 +361,19 @@ Endpoint
 Method
 : `POST`
 
-Use the `eval_scope` field to set the granularity of the evaluation:
+Use the `eval_scope` field to set the granularity of an evaluation:
 
 - **`span`** (default): The evaluation is associated with a specific span. Use `join_on` to identify the target span with a tag key-value pair or a span ID and trace ID combination.
 - **`trace`**: The evaluation is associated with an entire trace. Use `join_on` to identify the root span of the trace.
 - **`session`**: The evaluation is associated with a session. Provide `session_id` instead of `join_on`.
 
+To submit feedback, set `event_kind` to `feedback`. Feedback events must include `submitter.id`, omit `join_on`, and provide exactly one target field: `span_id`, `trace_id`, `session_id`, or `feedback_join_key`. If `eval_scope` is omitted, Datadog infers it from the target field.
+
+Use `feedback_join_key` when feedback applies to an external entity, such as an incident ID, report ID, task ID, or release check ID, instead of a single span, trace, or session. To make the feedback appear with related telemetry, set the same `feedback_join_key` on the related spans when you submit them with the [Spans API](#spans-api) or by adding a `feedback_join_key:incident-1234` tag through [Enriching spans][5].
+
+To create dashboard widgets from feedback, create the widget as you would for an evaluation and add the filter `@event_kind:feedback`.
+
+<div class="alert alert-info">Support for filtering spans, traces, or sessions by feedback is not available. For example, you cannot yet filter traces to only traces with thumbs-down feedback. Use dashboards scoped to <code>@event_kind:feedback</code> instead.</div>
 
 ### Request
 
@@ -448,6 +458,20 @@ Use the `eval_scope` field to set the granularity of the evaluation:
             },
             "passed_checks": ["coherence", "relevance", "factuality"]
           }
+        },
+        {
+          "event_kind": "feedback",
+          "feedback_join_key": "weather-request-123",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1765990800016,
+          "metric_type": "text",
+          "label": "user_comment",
+          "text_value": "The response did not answer whether I needed a jacket.",
+          "assessment": "fail",
+          "submitter": {
+            "id": "user-123",
+            "type": "user"
+          }
         }
       ]
     }
@@ -464,7 +488,7 @@ Use the `eval_scope` field to set the granularity of the evaluation:
 | Field   | Type                        | Description                              | Guaranteed |
 |---------|-----------------------------|------------------------------------------|------------|
 | ID      | string                      | Response UUID generated upon submission. | Yes        |
-| metrics | [[EvalMetric](#evalmetric)] | A list of evaluations.                   | Yes        |
+| metrics | [[EvalMetric](#evalmetric)] | A list of evaluations or feedback events. | Yes        |
 {{% /tab %}}
 
 {{% tab "Example" %}}
@@ -540,6 +564,22 @@ Use the `eval_scope` field to set the granularity of the evaluation:
             },
             "passed_checks": ["coherence", "relevance", "factuality"]
           }
+        },
+        {
+          "id": "fedbk34-h4i5-6j78-9k01-lmn2opq3rst4",
+          "event_kind": "feedback",
+          "eval_scope": "external",
+          "feedback_join_key": "weather-request-123",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1765990800016,
+          "metric_type": "text",
+          "label": "user_comment",
+          "text_value": "The response did not answer whether I needed a jacket.",
+          "assessment": "fail",
+          "submitter": {
+            "id": "user-123",
+            "type": "user"
+          }
         }
       ]
     }
@@ -555,28 +595,43 @@ Use the `eval_scope` field to set the granularity of the evaluation:
 
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
-| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations each associated with a span. |
-| tags        | [[Tag](#tag)] | A list of tags to apply to all the evaluations in the payload.       |
+| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations or feedback events. |
+| tags        | [[Tag](#tag)] | A list of tags to apply to all the evaluations or feedback events in the payload. |
 
 #### EvalMetric
 
 | Field                                                              | Type                | Description                                                                                            |
 |--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
 | ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
-| eval_scope                                                         | string              | The granularity of the evaluation: `"span"` (default), `"trace"`, or `"session"`.                     |
-| join_on [*required for span and trace scope*]                      | [[JoinOn](#joinon)] | How the evaluation is joined to a span or trace. Required when `eval_scope` is `"span"` or `"trace"`. Must be absent when `eval_scope` is `"session"`. |
-| session_id [*required for session scope*]                          | string              | The session ID the evaluation is associated with. Required when `eval_scope` is `"session"`. Must be absent when `eval_scope` is `"span"` or `"trace"`. |
+| event_kind                                                         | string              | The kind of event. Accepted values are `"evaluation"` and `"feedback"`. Defaults to `"evaluation"` when omitted. |
+| eval_scope                                                         | string              | The granularity of the event: `"span"` (default for evaluations), `"trace"`, `"session"`, or `"external"` for feedback targeted by `feedback_join_key`. For feedback, this can be omitted and inferred from the target field. |
+| join_on [*required for span and trace scope evaluations*]          | [[JoinOn](#joinon)] | How an evaluation is joined to a span or trace. Required for evaluations when `eval_scope` is `"span"` or `"trace"`. Must be absent for feedback and for session evaluations. |
+| span_id                                                            | string              | For feedback, the ID of the span the feedback is associated with. Use this as one of the feedback target fields. |
+| trace_id                                                           | string              | For feedback, the ID of the trace the feedback is associated with. Use this as one of the feedback target fields. |
+| session_id [*required for session scope evaluations*]              | string              | The session ID the event is associated with. Required for evaluations when `eval_scope` is `"session"`. For feedback, use this as one of the feedback target fields. Must be absent when non-feedback `eval_scope` is `"span"` or `"trace"`. |
+| feedback_join_key                                                  | string              | For feedback, a customer-defined key for feedback that applies to an external entity instead of a single span, trace, or session. Must be absent for evaluations. |
+| submitter [*required for feedback*]                                | [Submitter](#submitter) | The user, agent, or other entity that submitted the feedback. |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
-| metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, `"boolean"`, or `"json"`.                          |
-| label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
-| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
-| score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
-| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
-| json_value [*required if the metric_type is "json"*]               | Dict[key (string), value] | A JSON object value of the evaluation.                                                           |
+| metric_type [*required*]                                           | string              | The value type: `"categorical"`, `"score"`, `"boolean"`, `"json"`, or `"text"`. The `"text"` type is supported only for feedback events. |
+| label [*required*]                                                 | string              | The unique name or label for the provided evaluation or feedback.                                      |
+| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category value.                                                              |
+| score_value [*required if the metric_type is "score"*]             | number              | A score value.                                                                                         |
+| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value.                                                                                       |
+| json_value [*required if the metric_type is "json"*]               | Dict[key (string), value] | A JSON object value.                                                                              |
+| text_value [*required if the metric_type is "text"*]               | string              | A text value. This is supported only for feedback events and is useful for free-text feedback.          |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
+
+For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`, or `feedback_join_key`. If you provide `eval_scope`, it must match the target field: `span_id` maps to `"span"`, `trace_id` maps to `"trace"`, `session_id` maps to `"session"`, and `feedback_join_key` maps to `"external"`.
+
+#### Submitter
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id [*required*] | string | Identifier for the user, agent, or other entity that submitted the feedback. |
+| type | string | Category for the submitter. Recommended values are `user` and `agent`. |
 
 #### JoinOn
 
@@ -614,3 +669,5 @@ Use the `eval_scope` field to set the granularity of the evaluation:
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
+[4]: /llm_observability/evaluations/end_user_feedback
+[5]: /llm_observability/instrumentation/sdk/?tab=python#enriching-spans

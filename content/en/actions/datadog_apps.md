@@ -2,6 +2,9 @@
 title: Apps
 description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
 further_reading:
+- link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
+  tag: "Blog"
+  text: "Ship internal applications from your AI Agent with Datadog Apps"
 - link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder"
@@ -12,6 +15,10 @@ further_reading:
   tag: "Documentation"
   text: "Access and Authentication"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
+Datadog Apps is in Preview. Use this form to request access.
+{{< /callout >}}
 
 ## Overview
 
@@ -33,7 +40,7 @@ Choose Apps when you need:
   ```shell
   node --version
   ```
-- A Datadog **API key** and an **application key** with [Actions API Access][5] enabled. For instructions on creating keys, see [API and Application Keys][6].
+- Optional: A Datadog **API key** and an **application key** with [Actions API Access][5] enabled. Required for API-key-backed build telemetry (build metrics and Error Tracking sourcemap uploads) and for CI/CD uploads. For instructions, see [API and Application Keys][6].
 
   To enable Actions API Access on an application key:
 
@@ -62,20 +69,15 @@ The scaffolded project includes:
 
 ## Develop your app locally
 
-1. Set your Datadog credentials as environment variables:
-
-   ```shell
-   export DD_API_KEY="<YOUR_API_KEY>"
-   export DD_APP_KEY="<YOUR_APPLICATION_KEY>"
-   ```
-
-2. Start the development server:
-
+1. Start the development server:
    ```shell
    npm run dev
    ```
+2. Open the URL shown in the terminal (for example, `http://localhost:5173/`) to preview your app.
 
-3. Open the URL shown in the terminal (for example, `http://localhost:5173/`) to preview your app.
+When the dev server needs to call Datadog, such as when running a backend function locally, it uses OAuth by default. If authorization is required, the command opens a browser prompt. After authorization completes, the token is cached in your operating system credential store.
+
+If you set both `DD_API_KEY` and `DD_APP_KEY`, the generated app uses those keys instead of OAuth.
 
 ### Backend functions
 
@@ -143,12 +145,15 @@ Use `npm run upload` to build and upload the app to Datadog. This runs `vite bui
 npm run upload
 ```
 
+Uploads use OAuth by default and may open a browser authorization flow the first time. If you set both `DD_API_KEY` and `DD_APP_KEY`, uploads use API and application key authentication instead.
+
 The following environment variables are available:
 
 | Variable | Description |
 |---|---|
-| `DD_API_KEY` | Datadog API key. |
-| `DD_APP_KEY` | Datadog application key. |
+| `DD_API_KEY` | Optional. Datadog API key used with `DD_APP_KEY` for local development and uploads. Also enables API-key-backed build telemetry, such as build metrics and Error Tracking sourcemap uploads. |
+| `DD_APP_KEY` | Optional. Application key used with `DD_API_KEY` for local development and uploads. |
+| `DD_APPS_AUTH_METHOD` | Optional. Set to `oauth` or `apiKey` to override the generated app's authentication method. |
 | `DD_APPS_VERSION_NAME` | Optional. The version name for the uploaded app version. Must be a unique string per app. If unset, Datadog assigns a version name. |
 | `DD_APPS_UPLOAD_ASSETS` | If set, uploads built assets to Datadog. Set automatically by `npm run upload`. |
 
@@ -177,6 +182,8 @@ To change an app's UI or logic, update the code in your local project and re-upl
 ## Set up CI/CD with GitHub Actions
 
 To automatically upload your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][11] GitHub Action. This action builds your app and uploads it to Datadog.
+
+CI/CD uploads require API and application key authentication. Create a Datadog API key and an application key with [Actions API Access][5] enabled, then store them as GitHub secrets.
 
 If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
@@ -230,7 +237,15 @@ jobs:
 
 ### Authentication errors
 
-Authentication errors (such as 401 or `Missing authentication token`) and backend function call failures usually point to missing or invalid credentials. Verify that `DD_API_KEY` and `DD_APP_KEY` are set, and that the application key has [Actions API Access][5] enabled.
+For local development and uploads, OAuth authentication errors may have one of these causes:
+
+- The OAuth browser flow did not complete.
+- The cached OAuth token is invalid.
+- `auth.site` does not match your Datadog site.
+
+Rerun the command and complete the browser authorization flow.
+
+If you use API and application key authentication, authentication errors usually point to missing or invalid credentials. Backend function call failures can have the same cause. Verify that `DD_API_KEY` and `DD_APP_KEY` are set, and that the application key has [Actions API Access][5] enabled.
 
 ### Build succeeds but nothing uploads
 
@@ -238,7 +253,7 @@ Make sure you ran `npm run upload` (not `npm run build`), and that `dryRun` in `
 
 ### Node.js version errors during scaffolding
 
-The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even on a supported version, upgrade to v22. Use a version manager such as [nvm][16], [Volta][17], or [fnm][18], or download from [nodejs.org][19].
+The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even on a supported version, upgrade to v22. Use a version manager such as [nvm][16], [Volta][17], or [fnm][18], or download from the [Node.js website][19].
 
 ## Further reading
 

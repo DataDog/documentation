@@ -29,7 +29,7 @@ With Error Tracking enabled for your organization, you can create an Error Track
 
 ## Create an Error Tracking monitor
 
-To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Error Tracking**][3].
+To create an Error Tracking monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][3].
 
 <div class="alert alert-info">There is a default limit of 1000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
 
@@ -49,9 +49,9 @@ There are two types of alerting conditions you can configure your Error Tracking
 {{% tab "New Issue" %}}
 #### Issues to alert on
 
-New issue monitors alert on issues that are in the **For Review** state and meet your alerting conditions. Regressions are automatically transitioned to the For Review state, so they are monitored by default with New Issue monitors. For more information on states, see [Issue States][1].
+New issue monitors alert on issues that are in the {{< ui >}}For Review{{< /ui >}} state and meet your alerting conditions. Regressions are automatically transitioned to the For Review state, so they are monitored by default with New Issue monitors. For more information on states, see [Issue States][1].
 
-Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+Select {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 
 <div class="alert alert-info">New Issue monitors only consider issues that were created or regressed after the monitor was created or last edited. These monitors have a 24-hour lookback period.</div>
 
@@ -70,11 +70,11 @@ Monitor triggers when any new issue is detected (the number of errors is greater
 
 1. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
-    - **Error Occurrences**: Triggers when the error count is `above`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above`.
+    - {{< ui >}}Error Occurrences{{< /ui >}}: Triggers when the error count is `above`.
+    - {{< ui >}}Impacted Users{{< /ui >}}: Triggers when the number of impacted user emails is `above`.
+    - {{< ui >}}Impacted Sessions{{< /ui >}}: Triggers when the number of impacted session IDs is `above`.
 
-    If you select **All** or **Backend** issues, only the **Error Occurrences** option is available.
+    If you select {{< ui >}}All{{< /ui >}} or {{< ui >}}Backend{{< /ui >}} issues, only the {{< ui >}}Error Occurrences{{< /ui >}} option is available.
 
     You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
 
@@ -90,7 +90,7 @@ Monitor triggers when any new issue is detected (the number of errors is greater
 #### Programmatic management
 
 If you are using Terraform or custom scripts using our public APIs to manage your monitors, you need to specify some clauses in the monitor query:
-* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. **Note**: you can only use one at a time.
+* Add the source you want to target between {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, and {{< ui >}}Backend{{< /ui >}} issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. **Note**: you can only use one at a time.
 * Make sure to use the `.new()` clause for new issue monitors.
 
 Example:
@@ -106,18 +106,18 @@ error-tracking("{filter}").source("backend").new().rollup("count").by("@issue.id
 {{% tab "High Impact" %}}
 #### Issues to alert on
 
-High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
+High Impact monitors alert on issues that are {{< ui >}}For Review{{< /ui >}} or {{< ui >}}Reviewed{{< /ui >}} and that meet your alerting conditions. Read more about [Issue States][1].
 
-Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+Select {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 
 #### Define alert threshold
 1. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
-    - **Error Occurrences**: Triggers when the error count is `above`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above`.
+    - {{< ui >}}Error Occurrences{{< /ui >}}: Triggers when the error count is `above`.
+    - {{< ui >}}Impacted Users{{< /ui >}}: Triggers when the number of impacted user emails is `above`.
+    - {{< ui >}}Impacted Sessions{{< /ui >}}: Triggers when the number of impacted session IDs is `above`.
 
-    If you select **All** or **Backend** issues, only the **Error Occurrences** option is available.
+    If you select {{< ui >}}All{{< /ui >}} or {{< ui >}}Backend{{< /ui >}} issues, only the {{< ui >}}Error Occurrences{{< /ui >}} option is available.
 
     You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
 
@@ -130,7 +130,7 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 #### Programmatic management
 
 If you are using Terraform or custom scripts using our public APIs to manage your monitors, you need to specify some clauses in the monitor query:
-* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. **Note**: you can only use one at a time.
+* Add the source you want to target between {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, and {{< ui >}}Backend{{< /ui >}} issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. **Note**: you can only use one at a time.
 * Make sure to use the `.impact()` clause for high impact monitors.
 
 Example:
@@ -145,7 +145,7 @@ error-tracking("{filter}").source("browser").impact().rollup("count").by("@issue
 
 ### Notifications
 
-To display triggering tags in the notification title, click **Include triggering tags in notification title**.
+To display triggering tags in the notification title, click {{< ui >}}Include triggering tags in notification title{{< /ui >}}.
 
 In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
 for alert message notifications:
@@ -158,14 +158,14 @@ for alert message notifications:
 * `{{issue.attributes.error.category}}`
 * `{{issue.attributes.error.handling}}`
 
-For more information about the **Configure notifications and automations** section, see [Notifications][5].
+For more information about the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see [Notifications][5].
 
 Select multi alert to receive a notification per issue. This is the intended experience for Error Tracking monitors.
 
 ### Muting monitors
 Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues.
 
-**Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
+{{< ui >}}Ignored{{< /ui >}} issues are errors requiring no additional investigation or action. By marking issues as {{< ui >}}Ignored{{< /ui >}}, these issues are automatically muted from monitor notifications.
 
 ## Troubleshooting
 
@@ -177,10 +177,10 @@ As a result, Datadog does not recommend using `issue.age` and `issue.regression.
 **Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be `@issue.age` or `issue.age`.
 
 ### New Issue monitors are generating too much noise
-New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
+New Issue monitors trigger alerts on issues marked {{< ui >}}For Review{{< /ui >}} that meet your alerting criteria. If issues are not properly triaged (marked as {{< ui >}}Reviewed{{< /ui >}}, {{< ui >}}Ignored{{< /ui >}}, or {{< ui >}}Resolved{{< /ui >}}), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
 
 If your monitors are generating too much noise, consider the following adjustments:
-- **Triage your alerts**: Set issues to **Reviewed**, **Ignored**, or **Resolved** when appropriate
+- **Triage your alerts**: Set issues to {{< ui >}}Reviewed{{< /ui >}}, {{< ui >}}Ignored{{< /ui >}}, or {{< ui >}}Resolved{{< /ui >}} when appropriate
 - **Expand the evaluation time window**: The default evaluation window is 1 day. If errors occur infrequently (for example, every other day), the monitor may switch between OK and ALERT states. Expanding the window helps prevent re-triggering and keeps the monitor in the ALERT state.
 - **Increase the alerting threshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
 

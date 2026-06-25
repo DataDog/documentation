@@ -2,14 +2,14 @@
 title: Configure Integrations and Settings
 ---
 
-Set up integrations to extend Bits AI SRE’s capabilities:
+Set up integrations to extend Bits Investigation's capabilities:
 - [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
 - [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
 - [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations.
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies an issue that can be resolved in code.
+Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
 
 ### GitHub
 To configure GitHub:
@@ -18,7 +18,7 @@ To configure GitHub:
 
 ## Send investigation findings to ITSM and collaboration platforms
 
-By default, all investigations are listed on the [Bits AI Investigations][1] page.
+By default, all investigations are listed on the [Bits Investigations][1] page.
 
 For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below.
 
@@ -27,7 +27,7 @@ For monitor alert investigations, a summary of the findings is available on the 
 
 1. Ensure the [Datadog Slack app][3] is installed in your Slack workspace.
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
+1. Lastly, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
 
 <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
@@ -37,11 +37,11 @@ For monitor alert investigations, a summary of the findings is available on the 
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
 
 <div class="alert alert-info">
-The Microsoft Teams integration with Bits AI SRE is in Preview for all customers.</div>
+The Microsoft Teams integration with Bits Investigation is in Preview for all customers.</div>
 
 ### Datadog Case Management
 
-Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits AI SRE automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
+Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
 
 To set up Case Management, and the Jira and ServiceNow integrations:
 1. Create a [Case Management project][5] for your team.
@@ -61,11 +61,11 @@ To set up On-Call, in your monitor, go to {{< ui >}}Configure notifications and 
 ## Pull context from knowledge bases
 
 ### Confluence
-Bits AI SRE integrates with Confluence to:
+Bits Investigation integrates with Confluence to:
 - Find relevant documentation and runbooks to support its monitor alert investigations
 - Let you interact with your Confluence content directly through chat
 
-To set up Bits AI SRE to use Confluence:
+To set up Bits Investigation to use Confluence:
 
 1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][7].
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. If you don't enable account crawling, Bits can still use Confluence to inform its investigation plan.
@@ -74,7 +74,7 @@ To set up Bits AI SRE to use Confluence:
 
 ## Configure permissions
 
-There are two RBAC permissions that apply to Bits AI SRE:
+There are two RBAC permissions that apply to Bits Investigation:
 
 | Name                                                    | Description                            | Default role           |
 |:--------------------------------------------------------|:---------------------------------------|:-----------------------|
@@ -83,10 +83,15 @@ There are two RBAC permissions that apply to Bits AI SRE:
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
 
+### Disable Bits Investigation
+
+To prevent your organization from using Bits Investigation, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
+
+Or, an admin can disable all AI products billable through AI Credits using the org-level toggle in [Plan & Usage > AI Credits][16]. For details, see [Admin controls for AI Credits][17].
+
 ## Configure rate limits
 
-Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
-
+Rate limits define the maximum number of automatic investigations Bits can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
 
 ### Types of rate limits
 
@@ -95,13 +100,13 @@ Per monitor limit
 : **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
 Organization limit
-: Defines the total number of automatic investigations Bits AI SRE can run across your entire organization within 24 hours.
+: Defines the total number of automatic investigations Bits can run across your entire organization within 24 hours.
 : **Default:** No limit.
 
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Rate Limits{{< /ui >}}][10].
+1. Navigate to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Rate Limits{{< /ui >}}][10].
 2. Toggle on the rate limit you want to enable.
 3. Set the maximum number of investigations you want to run within a rolling 24-hour window.
 4. Click {{< ui >}}Save{{< /ui >}}.
@@ -118,18 +123,16 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 
 ## Actions
 
-Bits AI SRE provides three [Actions][15]:
+Bits Investigation provides three [Actions][15]:
 - Trigger Investigation
 - Get Investigation
 - List Investigations
 
 You can use these Actions to build Workflows, Agents, and Apps tailored to your use case.
 
-<!-- Commenting out until API Docs are merged
 ## API
 
-You can trigger and retrieve investigation details programmatically [via API][16].
--->
+You can trigger and retrieve investigations programmatically [via API][18].
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /monitors/notify
@@ -146,7 +149,6 @@ You can trigger and retrieve investigation details programmatically [via API][16
 [13]: /integrations/github/
 [14]: /source_code/service-mapping
 [15]: /actions/workflows/actions/
-
-<!-- Commenting out until API Docs are merged
-[16]: /api/latest/?tab=java
--->
+[16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
+[17]: /account_management/billing/ai_credits/#admin-controls
+[18]: /api/latest/bits-ai/

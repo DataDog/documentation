@@ -11,17 +11,23 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Learn about Application Performance Monitoring (APM)"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Node.js tracer (`dd-trace`).
 
 ## Prerequisites
 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
 - **Datadog [API key][3]** configured on the Agent
 - **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
 - **@openfeature/server-sdk** version ~1.20.0
@@ -33,6 +39,22 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 ```shell
 npm install dd-trace @openfeature/server-sdk
 ```
+
+Enable the provider with environment variables:
+
+```shell
+# Required: Enable the feature flags provider
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Optional: Enable flag evaluation metrics
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+```
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+
+Or enable the provider in code:
 
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
@@ -115,6 +137,8 @@ app.get('/my-endpoint', async (req, res) => {
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an `EvaluationContext`. The evaluation context can include user or session information used to determine which flag variations should be returned. Call the `OpenFeature.setContext` method before evaluating flags to ensure proper targeting.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ## Evaluate flags
 

@@ -315,7 +315,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section. See the following examples:
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click {{< ui >}}Use message template variables{{< /ui >}} in the {{< ui >}}Configure notifications & automations{{< /ui >}} section. See the following examples:
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
@@ -364,7 +364,7 @@ The following table contains all available attributes:
 
 {{% collapse-content title="Query group by service" level="h5" %}}
 
-If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Software Catalog][10].
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Catalog][10].
 
 Service metadata variables:
 
@@ -384,7 +384,7 @@ For Docs and Links you can also access a specific item with the following syntax
 
 You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click {{< ui >}}{{ Add Variable{{< /ui >}} and select from the expanded menu options.</div>
 
 | Monitor type             | Variable syntax                                         |
 |--------------------------|--------------------------------------------------------|
@@ -705,7 +705,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
@@ -724,8 +724,8 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
-[10]: /software_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml
+[10]: /internal_developer_portal/catalog/entity_model/
+[11]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [12]: /monitors/types/log/
 [13]: /monitors/types/apm/?tab=analytics
 [14]: /monitors/types/error_tracking/

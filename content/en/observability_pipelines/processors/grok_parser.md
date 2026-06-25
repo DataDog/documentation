@@ -32,22 +32,22 @@ See [Parsing][1] for more information on Datadog's Grok patterns.
 
 ## Setup
 
-To set up the grok parser, define a **filter query**. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][3] for more information.
+To set up the grok parser, define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][3] for more information.
 
 To test log samples for out-of-the-box rules:
-1. Click the **Preview Library Rules** button.
+1. Click the {{< ui >}}Preview Library Rules{{< /ui >}} button.
 1. Search or select a source in the dropdown menu.
 1. Enter a log sample to test the parsing rules for that source.
 
 To add a custom parsing rule:
 
-1. Click **Add Custom Rule**.
-1. If you want to clone a library rule, select **Clone library rule** and then the library source from the dropdown menu.
-1. If you want to create a custom rule, select **Custom** and then enter the `source`. The parsing rules are applied to logs with that `source`.
+1. Click {{< ui >}}Add Custom Rule{{< /ui >}}.
+1. If you want to clone a library rule, select {{< ui >}}Clone library rule{{< /ui >}} and then the library source from the dropdown menu.
+1. If you want to create a custom rule, select {{< ui >}}Custom{{< /ui >}} and then enter the `source`. The parsing rules are applied to logs with that `source`.
 1. Enter log samples to test the parsing rules.
 1. Enter the rules for parsing the logs. See [Parsing][1] for more information on writing parsing rules with Datadog Grok patterns.<br>**Note**: The `url`, `useragent`, and `csv` filters are not available.
-1. Click **Advanced Settings** if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
-1. Click **Add Rule**.
+1. Click {{< ui >}}Advanced Settings{{< /ui >}} if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
+1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
