@@ -264,5 +264,5 @@ To find your account name, go to the [Slack integration tile][5] and check the
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[16]: /bits_ai/bits_ai_dev_agent/
+[16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/

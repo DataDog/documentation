@@ -2,6 +2,8 @@
 title: Take Action
 aliases:
 - /bits_ai/bits_ai_sre/remediate_issues/
+- /bits_ai/bits_investigation/remediate_issues/
+- /bits_ai/bits_ai_sre/take_action/
 ---
 
 ## Suggested code fixes from Bits Code
@@ -25,5 +27,5 @@ Supported actions include:
 
 Bits Investigation automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.
 
-[1]: /bits_ai/bits_ai_dev_agent/setup/
-[2]: /bits_ai/bits_ai_dev_agent
+[1]: /bits_ai/bits_code/setup/
+[2]: /bits_ai/bits_code

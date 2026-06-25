@@ -710,7 +710,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
-[13]: /bits_ai/bits_ai_dev_agent/setup
-[14]: /bits_ai/bits_ai_dev_agent/
+[13]: /bits_ai/bits_code/setup
+[14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
 [16]: /mcp_server/tools/#cost_recommendations
