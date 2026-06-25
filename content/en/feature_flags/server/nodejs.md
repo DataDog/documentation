@@ -85,7 +85,7 @@ Most applications also run other asynchronous startup tasks, such as opening dat
 
 ```javascript
 // Start feature flag setup alongside your other startup tasks, then await them together.
-const [, db] = await Promise.all([
+const [_, db] = await Promise.all([
   // Catch here so a failed provider init does not reject the whole batch.
   // Evaluations return default values until the provider receives its config.
   OpenFeature.setProviderAndWait(tracer.openfeature).catch((err) => {
