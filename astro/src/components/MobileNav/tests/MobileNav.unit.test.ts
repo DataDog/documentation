@@ -51,9 +51,9 @@ describe("MobileNav.astro", () => {
     expect(sectionByLabel(doc, "Infrastructure")).toBeDefined();
   });
 
-  it("opens the Essentials section by default and leaves others closed", async () => {
+  it("renders all sections collapsed by default", async () => {
     const doc = await renderMobileNav();
-    expect(sectionByLabel(doc, "Essentials")?.hasAttribute("open")).toBe(true);
+    expect(sectionByLabel(doc, "Essentials")?.hasAttribute("open")).toBe(false);
     expect(sectionByLabel(doc, "Infrastructure")?.hasAttribute("open")).toBe(
       false,
     );

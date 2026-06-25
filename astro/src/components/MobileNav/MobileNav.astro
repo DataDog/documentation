@@ -23,13 +23,13 @@ import { i18n } from "@lib/i18n/i18n";
 
 interface Props {
   lang?: Locale;
+  showToggle?: boolean;
 }
 
-const { lang = DEFAULT_LOCALE } = Astro.props;
+const { lang = DEFAULT_LOCALE, showToggle = true } = Astro.props;
 const cl = classListFactory(styles);
 
 const tree = getDocsNavTree(lang);
-const ESSENTIALS_ID = "essentials_heading";
 
 // TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
@@ -46,14 +46,16 @@ const searchAriaLabel = "Search";
 ---
 
 <div id="mobile-nav-root">
-  <MobileNavToggle
-    client:load
-    labels={toggleLabels}
-    externalContext={{
-      scope: "mobile-nav-root",
-      entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
-    }}
-  />
+  {showToggle && (
+    <MobileNavToggle
+      client:load
+      labels={toggleLabels}
+      externalContext={{
+        scope: "mobile-nav-root",
+        entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
+      }}
+    />
+  )}
 
   <div id="mobile-nav-bg" class={cl("bg")}></div>
 
@@ -92,7 +94,6 @@ const searchAriaLabel = "Search";
             <MobileNavSection
               node={node}
               level={0}
-              open={node.identifier === ESSENTIALS_ID}
             />
           </li>
         ))

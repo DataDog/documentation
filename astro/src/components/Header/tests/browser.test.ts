@@ -108,7 +108,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await expect(bg).toBeVisible();
   });
 
-  test('mobile nav accordion: Essentials is open by default and another section toggles', async ({ page }) => {
+  test('mobile nav accordion: all sections collapsed by default, sections toggle independently', async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
@@ -123,22 +123,16 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
         })
         .first();
 
-    // Essentials renders open (contains the API docs), so its child links are
-    // revealed. Only top-level sections collapse; subsections (like "Getting
-    // Started") are plain links, matching Hugo's mobile nav.
+    // All sections start collapsed.
     const essentials = topSectionByLabel('Essentials');
-    await expect(essentials).toHaveAttribute('open', '');
-    await expect(
-      essentials.locator('.mobile-nav__link', { hasText: 'Getting Started' }).first(),
-    ).toBeVisible();
+    await expect(essentials).not.toHaveAttribute('open', '');
 
-    // A different section starts collapsed and opens on click — independently
-    // of Essentials (multiple sections may be open at once, as in Hugo).
+    // Sections open on click and multiple may be open at once (matching Hugo).
     const infrastructure = topSectionByLabel('Infrastructure');
     await expect(infrastructure).not.toHaveAttribute('open', '');
     await infrastructure.locator('.mobile-nav__section-toggle').first().click();
     await expect(infrastructure).toHaveAttribute('open', '');
-    await expect(essentials).toHaveAttribute('open', '');
+    await expect(essentials).not.toHaveAttribute('open', '');
   });
 });
 

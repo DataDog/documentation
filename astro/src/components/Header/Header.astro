@@ -5,6 +5,7 @@ import ProductMegaMenu from "./ProductMegaMenu.tsx";
 import { LogoDownloadPanel } from "./LogoDownloadPanel.tsx";
 import HeaderScroll from "./HeaderScroll.astro";
 import MobileNav from "@components/MobileNav/MobileNav.astro";
+import MobileNavToggle, { type MobileNavLabels } from "@components/MobileNav/MobileNavToggle.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
@@ -24,6 +25,10 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 const logoPanelArrowSvg = iconHtml("modal-up-arrow");
 
 // TODO: Use i18n for translation
+const mobileNavToggleLabels: MobileNavLabels = {
+  "Toggle navigation": "Toggle navigation",
+};
+
 const logoPanelLabels = {
   eyebrow: "Looking for Datadog logos?",
   body: "You can find the logo assets on our press page.",
@@ -207,10 +212,19 @@ const logoPanelLabels = {
             height="40"
           />
         </a>
-        <MobileNav />
+        <MobileNavToggle
+          client:load
+          labels={mobileNavToggleLabels}
+          externalContext={{
+            scope: "mobile-nav-root",
+            entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
+          }}
+        />
       </div>
     </div>
   </nav>
 </div>
+
+<MobileNav showToggle={false} />
 
 <HeaderScroll />

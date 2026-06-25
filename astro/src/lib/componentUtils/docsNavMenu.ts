@@ -86,8 +86,9 @@ function resolveUrl(url: string | undefined, lang: Locale): string | null {
   return localizedHref(lang, `/${url.replace(/^\/+/, "")}`);
 }
 
+// Hugo treats weight 0 (and missing) as "sort last", not first.
 const byWeight = (a: MenuEntry, b: MenuEntry) =>
-  (a.weight ?? 0) - (b.weight ?? 0);
+  (a.weight || Infinity) - (b.weight || Infinity);
 
 function buildTree(entries: MenuEntry[], lang: Locale): DocsNavNode[] {
   const childrenByParent = new Map<string | undefined, MenuEntry[]>();
