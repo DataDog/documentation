@@ -22,6 +22,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/integration-pipelines"
   tag: "Learning Center"
   text: "Process Logs Out of the Box with Integration Pipelines"
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
 algolia:
   tags: ["logs processors", "logs parsing", "Extracting Attributes", "Remapping attributes"]
 ---

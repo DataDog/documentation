@@ -1193,6 +1193,34 @@ Retrieves security detection rules. Supports two modes: provide `rule_id` to get
 - Get the full definition of detection rule `abc-123-def`.
 - What thresholds and group-by fields does this detection rule use?
 
+### `create_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+
+- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
+- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
+- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+
+### `update_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
+- Update the threshold on my brute force detection rule from 10 to 20 failed logins.
+- Add a new case to detection rule `abc-123-def` that fires at critical severity.
+- Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+
+- Delete detection rule `abc-123-def`.
+- Remove these three test detection rules I created earlier.
+
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Read`*\
@@ -1373,6 +1401,23 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
+
+### `get_datadog_code_coverage_pr_summary`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+- Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
+- What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches per-file code coverage line data for a repository commit, branch, or pull request. Returns executable lines, covered lines, and added lines for each file. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided to filter results.
+
+- Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
+- Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\

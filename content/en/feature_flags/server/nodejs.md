@@ -11,6 +11,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Learn about Application Performance Monitoring (APM)"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -41,10 +47,12 @@ Enable the provider with environment variables:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 Or enable the provider in code:
 

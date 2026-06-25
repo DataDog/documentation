@@ -30,7 +30,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 After you select the Syslog source in the pipeline UI:
 
 1. Enter the identifier for your syslog address. If you leave it blank, the [default](#secret-defaults) is used.
-1. In the **Socket Type** dropdown menu, select the communication protocol you want to use: **TCP** or **UDP**.
+1. In the {{< ui >}}Socket Type{{< /ui >}} dropdown menu, select the communication protocol you want to use: {{< ui >}}TCP{{< /ui >}} or {{< ui >}}UDP{{< /ui >}}.
 
 ### Optional TLS settings
 
