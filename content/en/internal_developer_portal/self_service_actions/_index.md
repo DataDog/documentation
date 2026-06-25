@@ -1,5 +1,7 @@
 ---
 title: Self-Service Actions
+cascade:
+  site_support_id: idp
 aliases:
   - /software_catalog/actions
   - /software_catalog/self-service

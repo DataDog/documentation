@@ -1,5 +1,6 @@
 ---
 title: External Provider Status
+site_support_id: idp
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
   tag: "Blog"

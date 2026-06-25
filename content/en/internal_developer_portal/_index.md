@@ -1,6 +1,5 @@
 ---
 title: Internal Developer Portal
-disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog

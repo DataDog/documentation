@@ -1,5 +1,6 @@
 ---
 title: Campaigns
+site_support_id: idp
 further_reading:
 - link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"

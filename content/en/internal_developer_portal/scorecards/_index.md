@@ -1,5 +1,7 @@
 ---
 title: Scorecards
+cascade:
+  site_support_id: idp
 aliases:
   - /tracing/software_catalog/scorecards
   - /tracing/service_catalog/scorecards

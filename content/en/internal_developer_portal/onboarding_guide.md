@@ -1,5 +1,6 @@
 ---
 title: Onboard with Internal Developer Portal
+site_support_id: idp
 further_reading:
   - link: 'https://app.datadoghq.com/idp/get-started'
     tag: 'App'
