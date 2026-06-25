@@ -88,7 +88,6 @@ The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and 
 - `Upload and publish this Datadog App.`
 - `Set up CI/CD for this Datadog App.`
 - `Troubleshoot this Datadog Apps authentication error.`
-- `Query app data with DDSQL or the Action Catalog.`
 
 ## Develop your app locally
 
