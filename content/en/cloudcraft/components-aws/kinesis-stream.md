@@ -11,11 +11,11 @@ Use the Kinesis Stream component to represent real-time data streams from your A
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate item**: Rotate the Kinesis component and change its direction.
-- **Shards**: Enter the number of shards for the Kinesis data stream.
-- **PUT units (M)**: Enter the number of `PUT` payload units for the Kinesis data stream, in millions.
-- **Extended data retention**: Extend the storage of the Kinesis data stream beyond 24 hours.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the Kinesis component and change its direction.
+- {{< ui >}}Shards{{< /ui >}}: Enter the number of shards for the Kinesis data stream.
+- {{< ui >}}PUT units (M){{< /ui >}}: Enter the number of `PUT` payload units for the Kinesis data stream, in millions.
+- {{< ui >}}Extended data retention{{< /ui >}}: Extend the storage of the Kinesis data stream beyond 24 hours.
 
 ## API
 

@@ -1,10 +1,13 @@
 ---
-title: Telemetry Data
+title: Set Up Sensitive Data Scanner for Telemetry Data
+description: Set up Sensitive Data Scanner scanning groups and rules to detect and redact sensitive data in Datadog logs, APM spans, RUM events, and events from Event Management. Covers permissions, Terraform resources, sampling, and excluded namespaces.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
   - /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
   - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  - /security/sensitive_data_scanner/guide/redact_uuids_in_logs/
+  - /security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs/
 further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
@@ -59,6 +62,12 @@ By default, users with the Datadog Admin role have access to view and set up sca
 If a scanning rule uses the **mask** action (only available for logs) for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
+
+### Guided setup
+
+When you set up Sensitive Data Scanner for the first time, or when your organization has no scanning groups configured, Datadog provides an in-app guided setup. Open the [Sensitive Data Scanner][5] settings page and follow the on-screen steps to select the data you want to scan, create a scanning group, and add scanning rules. This is the recommended way to get started.
+
+To configure scanning groups and rules manually, or to adjust an existing configuration, follow the sections below.
 
 ### Add a scanning group
 
@@ -115,6 +124,7 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
@@ -147,6 +157,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
@@ -364,7 +375,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
-[10]: /logs/log_configuration/processors/?tab=ui#remapper
+[10]: /logs/log_configuration/processors/remapper/
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/

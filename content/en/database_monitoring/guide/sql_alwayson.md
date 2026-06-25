@@ -16,21 +16,21 @@ further_reading:
 
 The Database Monitoring AlwaysOn Clusters view enables you to detect data synchronization issues, understand availability group behavior, and identify cluster bottlenecks in SQL Server availability groups.
 
-To access the AlwaysOn Clusters view, navigate to the **APM** > **Database Monitoring** > **Databases** tab and select **AlwaysOn Clusters**.
+To access the AlwaysOn Clusters view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab and select {{< ui >}}AlwaysOn Clusters{{< /ui >}}.
 
 ## Determine the health of your nodes
 
 Use the AlwaysOn Clusters view to evaluate the health of your SQL Server availability groups. When selected, the page shows a color-coded visualization based on the current status of the primary (P) and secondary (S) nodes in each availability group.
 
-To identify groups that are experiencing issues, use the status filters to show groups with nodes that are **Reverting**, **Not Synchronizing**, and so forth. You can also use the timeseries graphs to spot unusual performance activity in your clusters based on log, redo, and secondary lag time metrics.
+To identify groups that are experiencing issues, use the status filters to show groups with nodes that are {{< ui >}}Reverting{{< /ui >}}, {{< ui >}}Not Synchronizing{{< /ui >}}, and so forth. You can also use the timeseries graphs to spot unusual performance activity in your clusters based on log, redo, and secondary lag time metrics.
 
 {{< img src="database_monitoring/dbm_alwayson.png" alt="View SQL Server AlwaysOn groups" style="width:100%;">}}
 
 ## Analyze historical metrics
 
-To evaluate how node synchronization states have fluctuated over time, select an availability group to open the details side panel. The **Historical Synchronization States** graph at the top of the panel shows the status of each node over the selected timeframe.
+To evaluate how node synchronization states have fluctuated over time, select an availability group to open the details side panel. The {{< ui >}}Historical Synchronization States{{< /ui >}} graph at the top of the panel shows the status of each node over the selected timeframe.
 
-View additional information about all replicas and their associated databases on the **Replicas** tab. You can also use the timeseries graphs on the **Metrics** tab to spot abnormal behavior in individual replicas and databases based on send, redo, and lag metrics.
+View additional information about all replicas and their associated databases on the {{< ui >}}Replicas{{< /ui >}} tab. You can also use the timeseries graphs on the {{< ui >}}Metrics{{< /ui >}} tab to spot abnormal behavior in individual replicas and databases based on send, redo, and lag metrics.
 
 {{< img src="database_monitoring/dbm_alwayson_history.png" alt="View SQL Server AlwaysOn groups" style="width:80%;">}}
 

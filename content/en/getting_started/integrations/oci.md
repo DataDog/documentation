@@ -28,7 +28,7 @@ Use this guide to get started with monitoring your Oracle Cloud Infrastructure (
 
 Your OCI user account needs the following:
 
-- The **Identity Domain Administrator** role
+- The {{< ui >}}Identity Domain Administrator{{< /ui >}} role
 - Ability to create a user, user group, and dynamic group in the Identity Domain
 - Ability to create policies in the root compartment
 
@@ -54,12 +54,12 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 
 ### Configure the Datadog OCI integration tile
 
-1. Go to the [Datadog OCI integration tile][3] and click **Add New Tenancy**.
+1. Go to the [Datadog OCI integration tile][3] and click {{< ui >}}Add New Tenancy{{< /ui >}}.
 
 2. Select or create a Datadog API key to use for the integration.
 3. Create a Datadog application key.
 4. Enable or disable logs using the toggle.
-5. Click **Create OCI Stack**. This opens the Oracle Resource Manager in the OCI console to complete deployment.
+5. Click {{< ui >}}Create OCI Stack{{< /ui >}}. This opens the Oracle Resource Manager in the OCI console to complete deployment.
 
    **Note**: Deploy this stack only once per tenancy.
 
@@ -68,29 +68,29 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 1. In the OCI console, accept the Oracle Terms of Use.
 2. Leave the option to use custom Terraform providers unchecked.
 3. Use the default working directory, or optionally choose a different one.
-4. Click **Next**.
-5. Leave the **(Optional) Choose specific subnet(s)** section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.
+4. Click {{< ui >}}Next{{< /ui >}}.
+5. Leave the {{< ui >}}(Optional) Choose specific subnet(s){{< /ui >}} section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.
    
    **Advanced option**: To use existing subnets (maximum of one per OCI region), provide the subnet OCIDs (one per line, without commas). Format: `ocid1.subnet.oc[0-9].*`. Example: `ocid1.subnet.oc1.iad.abcedfgh`.
    If you're using existing subnets, ensure each VCN has HTTP egress through NAT Gateway, a Service Gateway for "All Services In Oracle Services Network", appropriate route table rules, and security rules for HTTP requests.
 
-6. Leave the **(Optional) Choose a User** section blank. QuickStart creates a new Group and User in your current OCI Identity Domain, simplifying IAM setup.
+6. Leave the {{< ui >}}(Optional) Choose a User{{< /ui >}} section blank. QuickStart creates a new Group and User in your current OCI Identity Domain, simplifying IAM setup.
    
-   **Advanced option**: To use an existing Group and User, provide both the **Group ID** and **User ID** OCIDs. The user must be a member of the specified group.
+   **Advanced option**: To use an existing Group and User, provide both the {{< ui >}}Group ID{{< /ui >}} and {{< ui >}}User ID{{< /ui >}} OCIDs. The user must be a member of the specified group.
 
-7. Leave the **(Optional) Advanced configuration** section blank for most use cases.
+7. Leave the {{< ui >}}(Optional) Advanced configuration{{< /ui >}} section blank for most use cases.
    
    **Advanced options**:
-   - **Compartment**: Specify an existing compartment for Datadog-created resources (default creates a new "Datadog" compartment).
-   - **Domain**: Provide an Identity Domain OCID to override where the User and Group are created. Requires the **Identity Domain Administrator** role in that domain.
-   - **Resource tags**: Provide a list of defined tags to be added to all OCI resources deployed by the Datadog QuickStart stack. Enter one tag per line. Do not add commas. Each defined tag should be in the format: `namespace.key:value`. For example, `CostCenter.Environment:prod`. If left blank, no defined tags are added to the OCI resources deployed by the Datadog QuickStart stack.
+   - {{< ui >}}Compartment{{< /ui >}}: Specify an existing compartment for Datadog-created resources (default creates a new "Datadog" compartment).
+   - {{< ui >}}Domain{{< /ui >}}: Provide an Identity Domain OCID to override where the User and Group are created. Requires the {{< ui >}}Identity Domain Administrator{{< /ui >}} role in that domain.
+   - {{< ui >}}Resource tags{{< /ui >}}: Provide a list of defined tags to be added to all OCI resources deployed by the Datadog QuickStart stack. Enter one tag per line. Do not add commas. Each defined tag should be in the format: `namespace.key:value`. For example, `CostCenter.Environment:prod`. If left blank, no defined tags are added to the OCI resources deployed by the Datadog QuickStart stack.
 
-8. Click **Next**.
-9. Click **Create**, and wait up to 30 minutes for the deployment to complete.
+8. Click {{< ui >}}Next{{< /ui >}}.
+9. Click {{< ui >}}Create{{< /ui >}}, and wait up to 30 minutes for the deployment to complete.
 
 ### Complete the setup in Datadog
 
-Return to the [Datadog OCI integration tile][3] and click **Ready!**
+Return to the [Datadog OCI integration tile][3] and click {{< ui >}}Ready!{{< /ui >}}
 
 ### Validation
 
@@ -106,15 +106,15 @@ After completing the setup, a configuration tab for the tenancy becomes availabl
 
 ### Add regions
 
-On the **General** tab, select the regions for data collection from the **Regions** checkbox list. Region selections apply to the entire tenancy, for both metrics and logs.
+On the {{< ui >}}General{{< /ui >}} tab, select the regions for data collection from the {{< ui >}}Regions{{< /ui >}} checkbox list. Region selections apply to the entire tenancy, for both metrics and logs.
 
 **Note**: If you used the QuickStart setup method, and afterward subscribed to a new OCI region, reapply the initial setup stack in ORM. The new region then becomes available in the Datadog OCI tile.
 
 ### Metric and log collection
 
-Use the **Metric collection** and **Log collection** tabs to configure which metrics and logs are sent to Datadog.
+Use the {{< ui >}}Metric collection{{< /ui >}} and {{< ui >}}Log collection{{< /ui >}} tabs to configure which metrics and logs are sent to Datadog.
 
-**Note**: Filters are evaluated in order: **Selected Services** acts as the primary toggle for data collection from a service, then compartment tag filters are applied, and finally resource tag filters.
+**Note**: Filters are evaluated in order: {{< ui >}}Selected Services{{< /ui >}} acts as the primary toggle for data collection from a service, then compartment tag filters are applied, and finally resource tag filters.
 
 #### Enable or disable all collection
 
@@ -122,13 +122,13 @@ Both the metric and log collection tabs have a main toggle to disable collection
 
 #### Limit collection to specific OCI services
 
-Use the **Selected Services** section to enable or disable collection from individual OCI services. Disabling a service stops all collection from it, regardless of any resource tag filters configured for it. When a service is enabled, resource tag filters can further narrow collection to specific resources within that service. Resources without a matching inclusion tag are excluded.
+Use the {{< ui >}}Selected Services{{< /ui >}} section to enable or disable collection from individual OCI services. Disabling a service stops all collection from it, regardless of any resource tag filters configured for it. When a service is enabled, resource tag filters can further narrow collection to specific resources within that service. Resources without a matching inclusion tag are excluded.
 
 **Note**: Service toggle changes may take up to 5 minutes to take effect.
 
 {{% collapse-content title="Tag filter syntax" level="h5" id="tag-filter-syntax" %}}
 
-The **Compartment Tags** and **Limit Collection to Specific Resources** sections accept comma-separated `key:value` OCI tags. Prefix a tag with `!` to negate it. The comma separator behaves differently depending on the tag types used:
+The {{< ui >}}Compartment Tags{{< /ui >}} and {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} sections accept comma-separated `key:value` OCI tags. Prefix a tag with `!` to negate it. The comma separator behaves differently depending on the tag types used:
 
 - **Positive tags only**: OR logic—included if the OCI object has **any** of the listed tags.
 - **Negative tags only** (prefixed with `!`): OR logic—excluded if **any** of the negated tags is present.
@@ -143,17 +143,17 @@ For example:
 
 #### Limit collection by compartment
 
-Use the **Compartment Tags** section to include or exclude specific compartments based on OCI compartment tags. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
+Use the {{< ui >}}Compartment Tags{{< /ui >}} section to include or exclude specific compartments based on OCI compartment tags. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
 
 **Note**: In OCI, tags are not inherited by child compartments; each compartment must be tagged individually. After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog.
 
 #### Limit collection to specific resources
 
-Use the **Limit Collection to Specific Resources** section to define which resources send their metrics or logs to Datadog. Select an OCI service from the dropdown, then specify the resource tags to target. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
+Use the {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} section to define which resources send their metrics or logs to Datadog. Select an OCI service from the dropdown, then specify the resource tags to target. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
 
 ### Resource collection
 
-On the **Resource Collection** tab of the [Datadog OCI integration tile][3], click the **Enable Resource Collection** toggle. Resources are visible in the [Datadog Resource Catalog][7].
+On the {{< ui >}}Resource Collection{{< /ui >}} tab of the [Datadog OCI integration tile][3], click the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle. Resources are visible in the [Datadog Resource Catalog][7].
 
 ## Get more from the Datadog platform
 

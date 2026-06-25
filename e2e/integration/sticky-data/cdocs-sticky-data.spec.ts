@@ -1,20 +1,8 @@
-import { test, expect, type Page } from '@playwright/test';
-import { hideOverlays } from '../../helpers';
+import { test, expect } from '@playwright/test';
+import { clickPill, expectHidden, expectVisible, hideOverlays, pill } from '../../helpers';
 
 const CONTENT_FILTERING_URL = '/dd_e2e/cdocs/integration/content_filtering/';
 const STICKY_DATA_URL = '/dd_e2e/cdocs/integration/sticky_data/';
-
-// --- Selectors ---
-
-/** Returns a selector for a filter pill button. */
-function pill(filterId: string, optionId: string): string {
-    return `button.cdoc-pill[data-filter-id="${filterId}"][data-option-id="${optionId}"]`;
-}
-
-/** Returns a selector for a toggleable content block by its data-description. */
-function toggleable(description: string): string {
-    return `.cdoc__toggleable[data-description="${description}"]`;
-}
 
 // Content descriptions on the sticky data page
 const STICKY_DESCRIPTIONS: Record<string, string> = {
@@ -22,22 +10,6 @@ const STICKY_DESCRIPTIONS: Record<string, string> = {
     kotlin: 'Programming Language is Kotlin',
     java: 'Programming Language is Java'
 };
-
-// --- Helpers ---
-
-async function clickPill(page: Page, filterId: string, optionId: string) {
-    await page.click(pill(filterId, optionId));
-}
-
-async function expectVisible(page: Page, description: string) {
-    const el = page.locator(toggleable(description));
-    await expect(el).not.toHaveClass(/cdoc__hidden/);
-}
-
-async function expectHidden(page: Page, description: string) {
-    const el = page.locator(toggleable(description));
-    await expect(el).toHaveClass(/cdoc__hidden/);
-}
 
 // --- Tests ---
 

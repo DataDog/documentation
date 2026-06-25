@@ -1,5 +1,6 @@
 ---
 title: Dynamic Metric Quotas
+description: "Automate custom metric quotas with Workflow Automation to control account, team, and metric-level usage."
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
@@ -41,32 +42,32 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 
 #### Create a workflow from the blueprint
 
-1. Open this [workflow blueprint][8], and click ***Create from Blueprint***.
-2. Click the green Monitor tile on the workflow canvas, and enable the ***Automatic triggering*** toggle. 
-3. Copy the workflow's ***Mention handle*** for use in the metric monitor steps described below.
+1. Open this [workflow blueprint][8], and click {{< ui >}}Create from Blueprint{{< /ui >}}.
+2. Click the green Monitor tile on the workflow canvas, and enable the {{< ui >}}Automatic triggering{{< /ui >}} toggle. 
+3. Copy the workflow's {{< ui >}}Mention handle{{< /ui >}} for use in the metric monitor steps described below.
 
 #### Configure a metric monitor
 
 1. Create a [metric monitor][9].
-2. In the **Choose the detection method** section, Datadog recommends using the `Threshold Alert` monitor type. You can also use Change or Anomaly Detection.
-3. In the **Define the metric** section, select `datadog.estimated_usage.metrics.custom.by_metric` as your metric name and choose the `sum by` space aggregator. 
-4. Under **Set alert conditions**, define your quota threshold.
-5. Under **Configure notifications & automations**, update the monitor notification message and include the workflow mention handle from the previous section. A sample notification message can look like the following:
+2. In the {{< ui >}}Choose the detection method{{< /ui >}} section, Datadog recommends using the `Threshold Alert` monitor type. You can also use Change or Anomaly Detection.
+3. In the {{< ui >}}Define the metric{{< /ui >}} section, select `datadog.estimated_usage.metrics.custom.by_metric` as your metric name and choose the `sum by` space aggregator. 
+4. Under {{< ui >}}Set alert conditions{{< /ui >}}, define your quota threshold.
+5. Under {{< ui >}}Configure notifications & automations{{< /ui >}}, update the monitor notification message and include the workflow mention handle from the previous section. A sample notification message can look like the following:
 ```
     {{#is_alert}}
     @workflow-mwl-workflow-tags_4aab2
     {{/is_alert}}
 
 ```
-7. Select **Multi Alert** to send a notification for each account, team, metric name, or other tag specified in the `sum by` field.
-8. Click **Create** to create the metric monitor.
+7. Select {{< ui >}}Multi Alert{{< /ui >}} to send a notification for each account, team, metric name, or other tag specified in the `sum by` field.
+8. Click {{< ui >}}Create{{< /ui >}} to create the metric monitor.
 
 #### Complete the workflow configuration
 
 1. The workflow blueprint contains several Slack (or Microsoft Teams) integration tiles that need to be updated. For each tile, input the channel or specific user(s) responsible for granting permission to Datadog to apply these cost-optimizing metric configurations on your behalf.
-2. On the workflow canvas, click ***Save***.
-3. Click **Publish**.
-4. Click on **Run**, select **Test from Monitor**, and input the metric monitor ID. Now you can start automatically managing your custom metrics costs.
+2. On the workflow canvas, click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Publish{{< /ui >}}.
+4. Click on {{< ui >}}Run{{< /ui >}}, select {{< ui >}}Test from Monitor{{< /ui >}}, and input the metric monitor ID. Now you can start automatically managing your custom metrics costs.
 
 ## Further reading
 

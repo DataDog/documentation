@@ -25,7 +25,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog PHP tracing library (see [version requirements][1])
+- Datadog PHP SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -38,7 +38,7 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog PHP tracing library:
+Install the Datadog PHP SDK:
 
 ```bash
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
@@ -77,7 +77,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 Start your PHP application with the settings described above.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -87,5 +87,5 @@ If you encounter issues while setting up App and API Protection for your PHP app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/php/compatibility
+[1]: /security/application_security/setup/compatibility/php
 [2]: /security/application_security/setup/php/troubleshooting

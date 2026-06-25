@@ -41,12 +41,18 @@
     {{ $tagSlug := $baseDir }}
     {{ $.Scratch.Set "translate_tags" (dict) }}
     {{ $.Scratch.Set "translate_actions" (dict) }}
+    <!-- Try both v1 and v2 translation files so tags that only exist in one version still translate. -->
     {{ if ne $.Page.Lang "en"}}
-        {{ if (fileExists (print "data/api/" $apiVersion "/translate_tags." $.Page.Lang ".json")) }}
-          {{ $.Scratch.Set "translate_tags" (index (index $.Site.Data.api $apiVersion) (print "translate_tags." $.Page.Lang)) }}
-        {{ end }}
-        {{ if (fileExists (print "data/api/" $apiVersion "/translate_actions." $.Page.Lang ".json")) }}
-          {{ $.Scratch.Set "translate_actions" (index (index $.Site.Data.api $apiVersion) (print "translate_actions." $.Page.Lang)) }}
+        {{ range $v := (slice "v1" "v2") }}
+            {{ if (fileExists (print "data/api/" $v "/translate_tags." $.Page.Lang ".json")) }}
+                {{ $tagsForVersion := (index (index $.Site.Data.api $v) (print "translate_tags." $.Page.Lang)) }}
+                {{ if (index $tagsForVersion $tagSlug) }}
+                    {{ $.Scratch.Set "translate_tags" $tagsForVersion }}
+                {{ end }}
+            {{ end }}
+            {{ if (fileExists (print "data/api/" $v "/translate_actions." $.Page.Lang ".json")) }}
+                {{ $.Scratch.Set "translate_actions" (index (index $.Site.Data.api $v) (print "translate_actions." $.Page.Lang)) }}
+            {{ end }}
         {{ end }}
     {{ end }}
     {{ $translate_tags := ($.Scratch.Get "translate_tags") }}
@@ -64,9 +70,9 @@
 {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
 <!-- lets show the intro text -->
-{{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag) }}
+{{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag "dot" $dot) }}
 
-<!-- Loop over the menu to determine what to pull in -->
+<!-- Render a compact summary block per endpoint, linking to the full per-endpoint page -->
 {{ range (where .Sites.Default.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := sort .Children ".Params.order" "asc" }}
 

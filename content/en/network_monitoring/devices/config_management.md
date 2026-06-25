@@ -8,8 +8,6 @@ further_reading:
 site_support_id: network_config_management
 ---
 
-<div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
-
 ## Overview
 
 Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)][1] to include configuration awareness and change tracking. NCM allows you to:
@@ -20,12 +18,9 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
-**Note**: NCM is read-only in Preview. 
-
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
-- Install the custom Datadog Agent build provided by your Datadog representative.
 
 ## Setup
 
@@ -94,14 +89,14 @@ Network Configuration Management is accessible from the NDM device view in Netwo
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the NDM device view.
+3. Open the {{< ui >}}Configuration{{< /ui >}} tab in the NDM device view.
 
    {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
-   - **All**: Shows both running and startup configurations
-   - **Running**: The active, live configuration running on the device
-   - **Startup**: The saved configuration that loads when the device boots
+   - {{< ui >}}All{{< /ui >}}: Shows both running and startup configurations
+   - {{< ui >}}Running{{< /ui >}}: The active, live configuration running on the device
+   - {{< ui >}}Startup{{< /ui >}}: The saved configuration that loads when the device boots
 
 ### Time picker and retention
 
@@ -127,7 +122,7 @@ You can scroll through the configuration to investigate the device state during 
 To see what changed between configuration versions:
 
 1. Select two configurations from the history list or timeline using the checkboxes. 
-2. Click **Compare Two Configs** to open the comparison view.
+2. Click {{< ui >}}Compare Two Configs{{< /ui >}} to open the comparison view.
 
    {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 
@@ -144,6 +139,25 @@ When you compare two configuration versions, the AI summary automatically:
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
 
+## Supported device profiles
+
+NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent, matched automatically based on your device's operating system, and updated through Agent releases.
+
+For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
+
+| Vendor | OS | Profile | Min. Agent version | Running | Startup |
+|---|---|---|---|---|---|
+| Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-W | `aosw` | 7.75.0 | {{< X >}} | |
+| Cisco | IOS | `cisco-ios` | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | NX-OS | `nxos` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | DellOS10 | `dellos10` | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | TMOS | `tmos` | 7.76.0 | {{< X >}} | |
+| FortiGate | FortiOS | `fortios` | 7.77.0 | {{< X >}} | |
+| Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
+| Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,3 +169,4 @@ When you compare two configuration versions, the AI summary automatically:
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
+[8]: https://github.com/DataDog/datadog-agent/tree/main/pkg/networkconfigmanagement/profile/default_profiles

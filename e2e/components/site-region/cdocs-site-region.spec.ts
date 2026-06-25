@@ -29,4 +29,17 @@ test.describe('Cdocs site region component', () => {
         await page.click('.js-region-select .btn');
         await page.click('.js-region-select .dropdown-item[data-value="us"]');
     });
+
+    test('multi-region block is visible for each matching site', async ({ page }) => {
+        const multiRegion = page.locator('[data-region="us,eu"]');
+        await expect(multiRegion).not.toHaveClass(/d-none/);
+
+        await page.click('.js-region-select .btn');
+        await page.click('.js-region-select .dropdown-item[data-value="eu"]');
+        await expect(multiRegion).not.toHaveClass(/d-none/);
+
+        await page.click('.js-region-select .btn');
+        await page.click('.js-region-select .dropdown-item[data-value="us3"]');
+        await expect(multiRegion).toHaveClass(/d-none/);
+    });
 });

@@ -17,7 +17,7 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 
-Explore inferred services in the [Software Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
+Explore inferred services in the [Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
 {{< tabs >}}
@@ -142,7 +142,7 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-**Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
+**Note**: Peer attribute values that match IP address formats are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
 #### Precedence of peer tags
 
@@ -162,20 +162,20 @@ If the highest priority tag, such as `peer.db.name`, is not captured as part of 
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported SDK languages and integrations.
 
 <div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
-[1]: /software_catalog/
+[1]: /internal_developer_portal/catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
 [5]: /tracing/services/renaming_rules/
 
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
 
 {{< /site-region >}}

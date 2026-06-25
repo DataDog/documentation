@@ -40,7 +40,7 @@ Clean up monitors that are not providing value and replace long-term mutes with 
 
 Audit monitors that have been muted for a long period of time to understand which are actually needed or useful. Some monitors might be muted for a good reason and you want to avoid deleting them.
 
-To see those monitors, navigate to the [Monitor Quality][1] page and find the list for monitors that have been muted for more than 60 days. You can also find muted monitors on the [**Monitors List**][8] with the query `muted_elapsed:<number_of_days>d`.
+To see those monitors, navigate to the [Monitor Quality][1] page and find the list for monitors that have been muted for more than 60 days. You can also find muted monitors on the [{{< ui >}}Monitors List{{< /ui >}}][8] with the query `muted_elapsed:<number_of_days>d`.
 
 After you have your list, you can either take action on each monitor from the Monitor Quality page or do a bulk deletion of monitors with steps 2 and 3.
 
@@ -133,7 +133,7 @@ To delete, use the same process in the [Delete Monitors command](#3-delete-the-m
 Misconfigured monitors are active monitors that may have a proper use, but are inefficient because you won't be notified. These misconfigurations undermine the monitor's reliability and make debugging or triaging harder. Cleaning these up ensures your alerts are accurate, actionable, and integrated into your observability workflows.
 
 ### Broken handle
-Use the [**Monitor Quality page**][4] to visualize which monitors have a broken handle. Notifications from these monitors can't reach its destination.
+Use the [{{< ui >}}Monitor Quality{{< /ui >}} page][4] to visualize which monitors have a broken handle. Notifications from these monitors can't reach its destination.
 
 **Datadog recommends** reviewing the monitors' recipients to ensure proper delivery, or deleting the monitor.
 
@@ -204,18 +204,18 @@ For more information, see [Composite Monitor][11].
 | Best Practice | Description | Implementation |
 |---------------|-------------|----------------|
 | **Eliminate redundancy** | Avoid creating multiple monitors that track the same signal with slightly different scopes (such as by region, team, or environment). | Use **group-by monitors with tags**, which are easier to manage and scale. |
-| **Set clear ownership** | Every monitor should have a clear owner to route alerts to the right responders and avoid confusion. | Use `team:` tags and notification handles (`@slack-xyz`, `@pagerduty-twilio`). Use the **Creator** filter on the [Monitors List][8] to audit the most frequent monitor creators. |
-| **Review noisy or dormant monitors** | Monitors that alert too often or never alert at all can cause fatigue or signal a misconfiguration. | Use the [**Monitor Quality page**][4] to identify and clean up noisy, broken, or outdated monitors. |
+| **Set clear ownership** | Every monitor should have a clear owner to route alerts to the right responders and avoid confusion. | Use `team:` tags and notification handles (`@slack-xyz`, `@pagerduty-twilio`). Use the {{< ui >}}Creator{{< /ui >}} filter on the [Monitors List][8] to audit the most frequent monitor creators. |
+| **Review noisy or dormant monitors** | Monitors that alert too often or never alert at all can cause fatigue or signal a misconfiguration. | Use the [{{< ui >}}Monitor Quality{{< /ui >}} page][4] to identify and clean up noisy, broken, or outdated monitors. |
 | **Leverage monitor templates** | For common patterns (such as RED metrics or API latency), use templates to reduce duplication and ensure standardization. | Use [reusable templates][5] to reduce duplication and ensure standardization across teams. |
 | **Establish a Tagging Policy** | Consistent and meaningful tags allow you to easily filter, group, and route monitors. | Use consistent tags (such as `service:`, `env:`, `team:`) and establish a [Tagging Policy][6]. This enables scoped dashboards, alerts, and compliance tracking. |
-| **Monitor Quality Dashboard** | Visualize trends in monitor hygiene across teams, services, and environments to proactively identify gaps and track improvements. | Set up a [**Monitor Quality dashboard**](#template-monitor-quality-dashboard) to track improvements over time and prioritize cleanup efforts at scale. |
+| **Monitor Quality Dashboard** | Visualize trends in monitor hygiene across teams, services, and environments to proactively identify gaps and track improvements. | Set up a [Monitor Quality dashboard](#template-monitor-quality-dashboard) to track improvements over time and prioritize cleanup efforts at scale. |
 
 ## Template Monitor Quality dashboard
 
 To help you get started, import the following JSON dashboard definition directly into your Datadog account.
 
-1. In the app, navigate to [**Dashboards**][9] and click **New Dashboard**.
-2. At the top of the page, click **Configure** and select **Import dashboard JSON...**.
+1. In the app, navigate to [{{< ui >}}Dashboards{{< /ui >}}][9] and click {{< ui >}}New Dashboard{{< /ui >}}.
+2. At the top of the page, click {{< ui >}}Configure{{< /ui >}} and select {{< ui >}}Import dashboard JSON...{{< /ui >}}.
 3. Copy and paste the following JSON to build out a Monitor Quality dashboard:
 
 ```json

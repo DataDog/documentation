@@ -247,8 +247,8 @@ framework you're using, such as the Django or Flask integration.
  To troubleshoot this step of the process, do the following:
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`.
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][7].
-- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][10].
+- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application SDK.
 
 ### Check if spans are successfully transmitted to Datadog
 
@@ -270,14 +270,14 @@ Below are additional troubleshooting steps for specific languages.
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
-The Java library uses [SLF4J][1] for logging. Add the following runtime flags so that the tracer logs to a file:
+The Java library uses [SLF4J][1] for logging. Add the following runtime flags so that the SDK logs to a file:
 
 ```java
  -Ddatadog.slf4j.simpleLogger.defaultLogLevel=info
  -Ddatadog.slf4j.simpleLogger.logFile=dd.log
 ```
 
-After the service starts, the tracer logs to the specified file. Datadog recommends using `INFO` for the log level because `DEBUG` logs are verbose.
+After the service starts, the SDK logs to the specified file. Datadog recommends using `INFO` for the log level because `DEBUG` logs are verbose.
 
 [1]: https://www.slf4j.org/
 {{< /programming-lang >}}
@@ -353,7 +353,7 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 
 #### Confirm AAP is enabled in the running application
 
-[Tracer startup logs][1] show the tracer configuration and whether AAP is enabled or not. If `appsec` is `true`, then AAP is enabled and running.
+[Tracer startup logs][1] show the SDK configuration and whether AAP is enabled or not. If `appsec` is `true`, then AAP is enabled and running.
 
 For example, the following startup log shows that AAP is disabled:
 
@@ -379,12 +379,12 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][2] f
    1. If you don't see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
    1. If `appsec_enabled` is `false`, then AAP was not enabled correctly. See [installation instructions][4].
    1. If `appsec_enabled` is not in the startup logs, the latest AAP version needs to be installed. See [installation instructions][4].
-2. Confirm that the tracer is working by looking for relevant traces on the APM dashboard.<br />
-    AAP relies on the tracer, so if you don't see traces, then the tracer might not be working. See [APM Troubleshooting][5].
+2. Confirm that the SDK is working by looking for relevant traces on the APM dashboard.<br />
+    AAP relies on the SDK, so if you don't see traces, then the SDK might not be working. See [APM Troubleshooting][5].
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
    1. If `@datadog/native-appsec` is not found, then the installation is incorrect.
    1. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
-   1. If the tracer still does not work, you might be running an unsupported runtime.
+   1. If the SDK still does not work, you might be running an unsupported runtime.
 4. To enable logs, add the following environment variables:
     ```
     DD_TRACE_DEBUG=1
@@ -416,9 +416,9 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
   
    If this log is not present, AAP is not running.
 
-2. Is the tracer working? Can you see relevant traces on the APM dashboard?
+2. Is the SDK working? Can you see relevant traces on the APM dashboard?
 
-   AAP relies on the tracer. If you don't see traces, then the tracer might not be working. See [APM Troubleshooting][2].
+   AAP relies on the SDK. If you don't see traces, then the SDK might not be working. See [APM Troubleshooting][2].
 
 
 [1]: https://app.datadoghq.com/security/appsec/
@@ -450,7 +450,7 @@ If you do not see those logs, check the following:
 
 - If the correct AAP environment variables are set for your application process.
 - The latest gem version is installed.
-- The tracer is configured correctly and sending APM traces to your APM dashboard.
+- The SDK is configured correctly and sending APM traces to your APM dashboard.
 
 #### Is AAP called for each HTTP request?
 
@@ -489,7 +489,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 ```
 If you don't see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value.
 
-#### Is the tracer sending traces with security data?
+#### Is the SDK sending traces with security data?
 AAP data is sent with APM traces. To confirm that AAP correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
@@ -526,21 +526,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Confirm AAP is enabled
-
-You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
-
-1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
-
-If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
-
-AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
-
 ### Confirm tracer versions are updated
 
-See the App and API Protection product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the App and API Protection product set up documentation to validate you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 

@@ -27,6 +27,7 @@ Learn how to set up App and API Protection (AAP) on your Windows services by sel
 </div>
 
 {{< appsec-integrations >}}
+  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/windows" >}}
   {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs/windows" >}}
   {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/windows" >}}
   {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/setup/dotnet/windows" >}}

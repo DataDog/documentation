@@ -10,42 +10,52 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: Documentación
   text: Integración de AWS Lambda
-title: Instrumentar aplicaciones AWS Lambda
+title: Instrumentar aplicaciones de AWS Lambda
 ---
+## Descripción general {#overview}
 
-## Información general
+Instrumente sus aplicaciones de AWS Lambda con Datadog Lambda Extension para recopilar trazas, métricas mejoradas y métricas personalizadas. La Datadog Lambda Extension es análoga a usar el Datadog Agent y los SDK de Datadog para infraestructura y aplicaciones basadas en host.
 
-Instrumenta tus aplicaciones AWS Lambda con una biblioteca Lambda de Datadog para recopilar traces (trazas), métricas mejoradas y métricas personalizadas.
+{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Un diagrama que muestra cómo Datadog recibe telemetría de su aplicación de AWS Lambda instrumentada. Su aplicación Lambda, instrumentada con Datadog Lambda Library, envía registros, trazas, métricas mejoradas y métricas personalizadas a Datadog Lambda Extension, que luego envía estos datos a Datadog." style="width:100%;" >}}
 
-{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Un diagrama en el que se muestra cómo recibe Datadog la telemetría desde tu aplicación instrumentada AWS Lambda. Tu aplicación Lambda, instrumentada una biblioteca Datadog Lambda, envía logs, traces (trazas), métricas mejoradas y métricas personalizadas a la Extensión Datadog Lambda, que luego envía estos datos a Datadog." style="width:100%;" >}}
+## Inicio rápido {#quick-start}
 
-## Inicio rápido
+Para comenzar, [regístrese para obtener una cuenta de Datadog][1] si aún no la tiene. Luego, siga el [flujo de instalación en la aplicación en Fleet Automation][8] para AWS Lambda para instrumentar sus funciones Lambda. Esta configuración de inicio rápido permite que sus funciones envíen métricas, registros y trazas en tiempo real a Datadog.
 
-Para empezar, [regístrate para obtener una cuenta en Datadog ][1] si aún no tienes una. A continuación, sigue el [flujo de instalación dentro de la aplicación en Fleet Automation][8] para AWS Lambda para instrumentar tus funciones Lambda. Esta configuración de inicio rápido permite a tus funciones enviar métricas, logs y traces (trazas) en tiempo real a Datadog.
+Una aplicación de muestra está [disponible en GitHub][6] con instrucciones sobre cómo desplegar con múltiples entornos de ejecución y herramientas de infraestructura como código.
 
-Hay una aplicación de muestra [disponible en GitHub][6] con instrucciones sobre cómo desplegarla con múltiples tiempos de ejecución y herramientas de infraestructura como código.
+El proceso de inicio rápido configura sus funciones Lambda sobre la marcha. Para instrumentar funciones Lambda de manera permanente, consulte las instrucciones detalladas en la siguiente sección.
 
-El proceso de inicio rápido configura tus funciones Lambda sobre la marcha. Para instrumentar funciones Lambda de forma permanente, consulta las instrucciones detalladas de la siguiente sección.
+## Usar el servidor MCP de Datadog {#use-the-datadog-mcp-server}
 
-## Instrucciones de instrumentación
+Utilice el [Datadog MCP server][9] para configurar el monitoreo de sus contenedores de AWS Lambda con asistencia de IA. Después de conectarse, pruebe un aviso como:
 
-Para los tiempos de ejecución de Node.js y Python, puedes utilizar la [instrumentación remota][5] para añadir instrumentación a tus funciones de AWS Lambda y mantenerlas instrumentadas de forma segura. Consulta [Instrumentación remota para AWS Lambda][5].
+```shell
+Help me monitor my AWS Lambda functions with Datadog
+```
 
-Para otros tiempos de ejecución Lambda (o para instrumentar tus funciones Node.js o Python sin instrumentación remota) consulta las instrucciones detalladas de instrumentación:
+## Instrucciones de instrumentación {#instrumentation-instructions}
 
-{{< partial name="serverless/getting-started-languages.html" >}}
+{{< card-grid card_width="30%" image_width="200" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
-## Configuraciones avanzadas
+## Configuraciones avanzadas {#advanced-configurations}
 
-Una vez que hayas terminado con la instrumentación y hayas instalado la recopilación de telemetría, puedes utilizar [Configurar Serverless Monitoring para AWS Lambda][3] para:
+Después de haber terminado con la instrumentación y de haber configurado la recolección de telemetría, puede usar [Configurar Serverless Monitoring for AWS Lambda][3] para:
 
-- conectar tus métricas, trazas y logs mediante etiquetas (tags);
-- recopilar telemetría de recursos de AWS como API Gateway, AppSync y Step Functions;
-- capturar las cargas útiles de solicitud y respuesta para invocaciones de Lambda individuales;
-- vincular los errores de tus funciones de Lambda con tu código fuente;
-- filtrar o borrar información confidencial de logs o trazas.
+- Conecte sus métricas, trazas y registros usando etiquetas
+- Recolecte telemetría de recursos de AWS como API Gateway, AppSync y Step Functions
+- Capture las cargas útiles de solicitud y respuesta para invocaciones individuales de Lambda
+- Vincule los errores de sus funciones Lambda a su código fuente
+- Filtre o elimine información sensible de registros o trazas
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -55,3 +65,4 @@ Una vez que hayas terminado con la instrumentación y hayas instalado la recopil
 [5]: /es/serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
+[9]: /es/agentic_onboarding/setup

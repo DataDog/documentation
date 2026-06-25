@@ -68,7 +68,7 @@ services:
       retries: 5
 
   datadog-agent:
-    image: gcr.io/datadoghq/agent:7.76.2
+    image: gcr.io/datadoghq/agent:7.80.0
     depends_on:
       kafka:
         condition: service_healthy

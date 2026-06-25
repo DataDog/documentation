@@ -6,9 +6,6 @@ aliases:
     - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
-- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
-  tag: "Blog"
-  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -23,7 +20,7 @@ further_reading:
   text: Anomalies function
 - link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
   tag: "Blog"
-  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
+  text: "Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring"
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']
@@ -37,7 +34,7 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 ## Monitor creation
 
-To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Anomaly*.
+To create an [anomaly monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Anomaly{{< /ui >}}.
 
 ### Define the metric
 
@@ -47,8 +44,8 @@ Any metric reporting to Datadog is available for monitors. For more information,
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
 {{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" style="width:80%;">}}
 
-* The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
-* The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
+* The {{< ui >}}Historical View{{< /ui >}} allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
+* The {{< ui >}}Evaluation Preview{{< /ui >}} is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
 
 ### Set alert conditions
 
@@ -61,9 +58,9 @@ Trigger window
 : How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
 Recovery window
-: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the {{< ui >}}Recovery Window{{< /ui >}} to the same value as the {{< ui >}}Trigger Window{{< /ui >}}. 
 
-**Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
+**Note**: The range of accepted values for the {{< ui >}}Recovery Window{{< /ui >}} depends on the {{< ui >}}Trigger Window{{< /ui >}} and the {{< ui >}}Alert Threshold{{< /ui >}} to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
 Example:
 * `Threshold`: 50%
 * `Trigger window`: 4h
@@ -76,7 +73,7 @@ The range of accepted values for the recovery window is between 49 minutes (`4h*
 
 ### Advanced options
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under {{< ui >}}Advanced Options{{< /ui >}}.
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds" style="width:80%;">}}
 
@@ -163,7 +160,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ## Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][10] page.
 
 ## API
 

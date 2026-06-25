@@ -36,8 +36,8 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
 1. Download the latest Windows Datadog Agent installer file (MSI) to the SCCM server from the [Agent page][2].
 1. In SCCM, create an application and use the location of the Datadog Agent MSI.
    {{< img src="/agent/basic_agent_usage/sccm/sccm-deployable-app.png" alt="Create a new application and use the Datadog Agent MSI as the target MSI." style="height:100%;" >}}
-1. Click **Next** until you get to the **General Information** page.
-1. Under **Installation program**, paste the following command, replacing `MY_API_KEY` with your API key:
+1. Click {{< ui >}}Next{{< /ui >}} until you get to the {{< ui >}}General Information{{< /ui >}} page.
+1. Under {{< ui >}}Installation program{{< /ui >}}, paste the following command, replacing `MY_API_KEY` with your API key:
 
    ```powershell
    start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datadoghq.com"
@@ -45,24 +45,24 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
 
    For more installation options, see full list of [installation variables][3].
 
-1. Ensure that **Install behavior** is set to **Install for system**.
-1. Click **Next** and follow the prompts to create the application.
+1. Ensure that {{< ui >}}Install behavior{{< /ui >}} is set to {{< ui >}}Install for system{{< /ui >}}.
+1. Click {{< ui >}}Next{{< /ui >}} and follow the prompts to create the application.
    {{< img src="/agent/basic_agent_usage/sccm/sccm-install-command.png" alt="Enter an installation program command and ensure that the install behavior is set to install for system." style="width:80%;" >}}
-1. To verify the application has been created, look for it in **Software Library** > **Overview** > **Application Management** > **Applications**.
+1. To verify the application has been created, look for it in {{< ui >}}Software Library{{< /ui >}} > {{< ui >}}Overview{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Applications{{< /ui >}}.
 
 ### Deploy the Datadog Agent application
 
 <div class="alert alert-danger">Before deploying the Datadog Agent application, make sure you've installed and configured <a href="https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/install-and-configure-distribution-points">Distribution Points</a> in Configuration Manager</div>
 
-1. Go to **Software Library** > **Overview** > **Application Management** > **Applications** and select the Datadog Agent application you created earlier.
-1. From the **Home** tab in the **Deployment** group, select **Deploy**.
+1. Go to {{< ui >}}Software Library{{< /ui >}} > {{< ui >}}Overview{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Applications{{< /ui >}} and select the Datadog Agent application you created earlier.
+1. From the {{< ui >}}Home{{< /ui >}} tab in the {{< ui >}}Deployment{{< /ui >}} group, select {{< ui >}}Deploy{{< /ui >}}.
 
 ### Agent configuration
 
 SCCM packages allow you to deploy configuration files to your Datadog Agents, overwriting their default settings. An Agent configuration consists of a `datadog.yaml` configuration file and optional `conf.yaml` files for each integration. You must create a package for each configuration file you want to deploy.
 
 1. Collect your `datadog.yaml` and `conf.yaml` files in a local SCCM machine folder. See the [sample `config_template.yaml` file][4] for all available configuration options.
-1. Create an SCCM Package and select **Standard program**.
+1. Create an SCCM Package and select {{< ui >}}Standard program{{< /ui >}}.
 1. Select the location that contains the configuration file that you want to deploy to your Agents.
 1. Select a [Device collection][5] to deploy the changes to.
 1. Configure deployment settings to pre-install the package on the targets immediately.

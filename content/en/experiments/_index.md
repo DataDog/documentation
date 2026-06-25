@@ -2,6 +2,9 @@
 title: Experiments
 description: Plan, run, and analyze randomized experiments across your stack with Datadog Experiments.
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
@@ -31,8 +34,10 @@ After configuring a data source, follow these steps to launch your experiment:
 
 1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. A feature flag is required to launch your experiment.
 1. **[Create a metric][4]** to evaluate your experiment.
-1. **[Create an experiment][5]** to define your hypothesis and optionally calculate a [sample size][8].
+1. **[Create an experiment][5]** to define your hypothesis, choose an [analysis method][11], and optionally calculate a [sample size][8].
 1. **[Launch your experiment][7]** to see the impact of your change on business outcomes, user journey, and application performance.
+
+After your team has run several experiments against the same metric, use [Cumulative Impact][12] to see a noise-adjusted estimate of how much your experiments have moved that metric over time.
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
@@ -49,3 +54,5 @@ After configuring a data source, follow these steps to launch your experiment:
 [8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
 [9]: /getting_started/feature_flags/#feature-flags-sdks
 [10]: /experiments/guide/
+[11]: /experiments/analysis_methods
+[12]: /experiments/cumulative_impact

@@ -66,7 +66,7 @@ Para ver tus incidentes, ve a la page (página) [Incidentes][1] para ver una fue
 
 También puedes ver tu lista de incidentes desde la pantalla de inicio de tu dispositivo móvil y gestionar/crear incidentes descargando la [aplicación móvil de Datadog][3], disponible en [Apple App Store][4] y [Google Play Store][5].
 
-{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dos vistas en la aplicación móvil de Datadog: una que muestra una lista de incidentes con detalles muy claros sobre cada incidente y una que muestra un panel detallado para un incidente único">}}
+{{< img src="incident_response/incident_management/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dos vistas en la aplicación móvil de Datadog: una que muestra una lista de incidentes con detalles muy claros sobre cada incidente y una que muestra un panel detallado para un incidente único">}}
 
 
 ## Descripción de la incidencia

@@ -23,11 +23,11 @@ further_reading:
 To share a graph:
 
 1. From the graph you want to share, click the pencil icon in the upper right corner.
-1. Under the *Graph your data* section, select the **Share** tab.
+1. Under the {{< ui >}}Graph your data{{< /ui >}} section, select the {{< ui >}}Share{{< /ui >}} tab.
 1. Pick a timeframe for your graph.
 1. Pick a graph size.
 1. Choose to include the legend or not.
-1. Get the embed code with the **Generate embed code** button.
+1. Get the embed code with the {{< ui >}}Generate embed code{{< /ui >}} button.
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
 
@@ -37,9 +37,9 @@ All shared graphs are listed in the [Public Sharing Settings page][1]. You can a
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Organization Settings > Public Sharing > Shared Graphs**][2] to see a list of all shared graphs.
+1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Public Sharing{{< /ui >}} > {{< ui >}}Shared Graphs{{< /ui >}}][2] to see a list of all shared graphs.
 2. Find your graph by using the search bar or by sorting the table columns.
-3. Click on the **Revoke** button next to the graph you want to stop sharing.
+3. Click on the {{< ui >}}Revoke{{< /ui >}} button next to the graph you want to stop sharing.
 
 ## API
 

@@ -25,7 +25,7 @@ further_reading:
       text: "Reduce costs and enhance security with cross-region Datadog connectivity using AWS PrivateLink"
 ---
 
-{{% site-region region="us3,us5,eu,gov" %}}
+{{% site-region region="us3,us5,eu,gov,gov2" %}}
 <div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
@@ -44,14 +44,15 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 ## Connect from the same region
 
 1. Connect the AWS Management Console to the region of your choice.
-1. From the VPC Dashboard, under **PrivateLink and Lattice**, select **Endpoints**.
-1. Click **Create Endpoint**:
+1. From the VPC Dashboard, under {{< ui >}}PrivateLink and Lattice{{< /ui >}}, select {{< ui >}}Endpoints{{< /ui >}}.
+1. Click {{< ui >}}Create Endpoint{{< /ui >}}:
    {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
-1. Select **Find service by name**.
+1. Select {{< ui >}}Find service by name{{< /ui >}}.
 1. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -64,10 +65,17 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][14].
+4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][14].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
-6. Make sure that for **Enable DNS name**, _Enable for this endpoint_ is checked:
+6. Make sure that for {{< ui >}}Enable DNS name{{< /ui >}}, _Enable for this endpoint_ is checked:
 
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:80%;" >}}
 
@@ -75,7 +83,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-8. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+8. Click {{< ui >}}Create endpoint{{< /ui >}} at the bottom of the screen. If successful, the following is displayed:
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
 
@@ -108,30 +116,31 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 {{< tabs >}}
 {{% tab "Cross-region PrivateLink endpoints" %}}
 1. Connect the AWS Management Console to the region of your choice.
-1. From the VPC Dashboard, under **PrivateLink and Lattice**, select **Endpoints**.
-1. Click **Create Endpoint**:
+1. From the VPC Dashboard, under {{< ui >}}PrivateLink and Lattice{{< /ui >}}, select {{< ui >}}Endpoints{{< /ui >}}.
+1. Click {{< ui >}}Create Endpoint{{< /ui >}}:
    {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
 1. Configure the VPC interface endpoint settings
-   1. Optionally, fill in the **Name tag**.
-   1. Under **Type**, select **PrivateLink Ready partner services**.
+   1. Optionally, fill in the {{< ui >}}Name tag{{< /ui >}}.
+   1. Under {{< ui >}}Type{{< /ui >}}, select {{< ui >}}PrivateLink Ready partner services{{< /ui >}}.
 1. Discover and configure the interface endpoint with cross-region support:
-   1. Under **Service name**, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
-   1. Under **Service region**, click **Enable Cross Region endpoint** and select **{{< region-param key="aws_private_link_cross_region" >}}**.
-   1. Click **Verify service** and wait for a _Service name verified_ notification.
+   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
+   1. Under {{< ui >}}Service region{{< /ui >}}, click {{< ui >}}Enable Cross Region endpoint{{< /ui >}} and select **{{< region-param key="aws_private_link_cross_region" >}}**.
+   1. Click {{< ui >}}Verify service{{< /ui >}} and wait for a _Service name verified_ notification.
       **Note:** If you aren't able to verify the service after completing the steps above, reach out to [Datadog Support][1].
-1. Under **Network Settings**, select a VPC to deploy the VPC Interface endpoint with.
-1. Ensure the option to **Enable DNS name** is checked.
-1. Under **Subnets**, select one or more subnets in your VPC for the interface endpoint.
-1. Under **Security Groups**, select a security group to control what can send traffic to the VPC endpoint.
+1. Under {{< ui >}}Network Settings{{< /ui >}}, select a VPC to deploy the VPC Interface endpoint with.
+1. Ensure the option to {{< ui >}}Enable DNS name{{< /ui >}} is checked.
+1. Under {{< ui >}}Subnets{{< /ui >}}, select one or more subnets in your VPC for the interface endpoint.
+1. Under {{< ui >}}Security Groups{{< /ui >}}, select a security group to control what can send traffic to the VPC endpoint.
 
    **Note**: The security group must accept inbound traffic on TCP port 443.
-1. Optionally, provide a **Name tag** and click **Create endpoint**.
-1. Allow a few minutes for the endpoint status to update from **Pending** to **Available**. This may take up to 10 minutes. If it is taking longer than expected, reach out to [Datadog Support][1].
+1. Optionally, provide a {{< ui >}}Name tag{{< /ui >}} and click {{< ui >}}Create endpoint{{< /ui >}}.
+1. Allow a few minutes for the endpoint status to update from {{< ui >}}Pending{{< /ui >}} to {{< ui >}}Available{{< /ui >}}. This may take up to 10 minutes. If it is taking longer than expected, reach out to [Datadog Support][1].
 
-After the endpoint status is updated to **Available**, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
+After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
 
 ## PrivateLink service names
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -144,6 +153,14 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
+For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
 
 **Note**: Cross-region PrivateLink doesn't emit CloudWatch metrics. See [CloudWatch metrics for AWS PrivateLink][2] for more information.
 
@@ -156,11 +173,12 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 
 {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:80%;" >}}
 
-2. Select **Find service by name**.
+2. Select {{< ui >}}Find service by name{{< /ui >}}.
 3. Fill the _Service Name_ text box according to the service you want to establish AWS PrivateLink for:
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink service name                                                               |
 |---------------------------|----------------------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
@@ -173,16 +191,23 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
+4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][1].
 
-5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select **Enable DNS name** as VPC peering requires DNS to be manually configured.
+5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select {{< ui >}}Enable DNS name{{< /ui >}} as VPC peering requires DNS to be manually configured.
 
 6. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-7. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+7. Click {{< ui >}}Create endpoint{{< /ui >}} at the bottom of the screen. If successful, the following is displayed:
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 
@@ -200,6 +225,7 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
+{{% site-region region="ap1" %}}
   | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
   | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -212,6 +238,13 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
   | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command:
 
@@ -229,7 +262,7 @@ Use the list below to map service and DNS name to different parts of Datadog:
 
 This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
-2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
+2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the {{< ui >}}Alias{{< /ui >}} option, then under {{< ui >}}Route traffic to{{< /ui >}}, choose {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
@@ -302,6 +335,138 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [15]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [16]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [17]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+
+{{% site-region region="us" %}}
+## VPC Endpoint Service IDs
+
+US1 uses a two-level DNS architecture for PrivateLink. Every customer-facing DNS record maps to a dedicated `color.intake.datadoghq.com` VPC endpoint address. Setting up a VPC endpoint for a given anchor address covers all customer-facing records that map to it.
+
+Use the following table to identify which VPC endpoints to set up for the Datadog features you use. Wildcard entries match any subdomain not otherwise listed.
+
+**Note**: In the table below, `---` indicates a direct VPC service endpoint with no intermediate anchor address.
+| Name | Anchor | VPC Endpoint Service ID |
+|---|---|---|
+| `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
+| `webhooks-http-intake.logs.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
+| `*.integrations.otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `opamp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `mcp.datadoghq.com` | `cornsilk.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-058a75ceea85a9175` |
+| `agenthealth-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ci-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cicodescan-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `citestcov-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `citestcycle-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cloudplatform-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `contimage-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `contlcycle-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cws-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `debugger-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `error-tracking-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `event-management-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `event-platform-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `feed-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `instrumentation-telemetry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `kubeops-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `llmobs-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ndm-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ndmflow-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `netpath-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ocimetrics-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `resources-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sbom-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sds-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sentry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `snmp-traps-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `softinv-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `iam-rum-intake.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `rum-http-intake.logs.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `rum.browser-intake-datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `data-obs-intake.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
+| `trace.agent.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
+| `network-devices.datadoghq.com` | `olive.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-05e3bfec4501e714d` |
+| `*.api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `*.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `intake.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `agent-http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| `http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
+| `metrics.agent.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
+| `orchestrator.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
+| `process.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
+| `intake.profile.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
+| `dbm-metrics-intake.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501` |
+| `config.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d` |
+
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+## VPC Endpoint Service IDs
+
+AP2 uses a two-level DNS architecture for PrivateLink. Every customer-facing DNS record maps to a dedicated `color.intake.ap2.datadoghq.com` VPC endpoint address. Setting up a VPC endpoint for a given anchor address covers all customer-facing records that map to it.
+
+Use the following table to identify which VPC endpoints to set up for the Datadog features you use. More specific DNS records take precedence over wildcards—for example, `trace.agent.ap2.datadoghq.com` resolves to `lime.intake.ap2.datadoghq.com` even though `*.agent.ap2.datadoghq.com` points to `beige.intake.ap2.datadoghq.com`.
+
+| Name | Anchor | VPC Endpoint Service ID |
+|---|---|---|
+| `gcp-intake.logs.ap2.datadoghq.com` | `aqua.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273` |
+| `*.agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
+| `agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
+| `process.ap2.datadoghq.com` | `bisque.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5` |
+| `*.integrations.otlp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `opamp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `otlp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `agenthealth-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `awsmetrics-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ci-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cicodescan-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cireport-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `citestcov-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `citestcycle-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cloudplatform-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `contimage-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `contlcycle-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cspm-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cws-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `debugger-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `error-tracking-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `event-management-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `intake.profile.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `kubeops-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `llmobs-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ndm-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ndmflow-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `netpath-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ocimetrics-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `resources-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sbom-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sds-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sentry-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `snmp-traps-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `softinv-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `webhook-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `agent-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `eventbridge-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `lambda-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `obpipeline-intake.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `live.logs.ap2.datadoghq.com` | `indigo.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e` |
+| `data-obs-intake.ap2.datadoghq.com` | `lime.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09` |
+| `trace.agent.ap2.datadoghq.com` | `lime.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09` |
+| `orchestrator.ap2.datadoghq.com` | `linen.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902` |
+| `*.synthetics.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `api.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `quota.browser-intake-ap2-datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `synthetics.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `sourcemap-intake.ap2.datadoghq.com` | `plum.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5` |
+| `config.ap2.datadoghq.com` | `violet.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10` |
+| `dbm-metrics-intake.ap2.datadoghq.com` | `white.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448` |
+| `dbquery-intake.ap2.datadoghq.com` | `white.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448` |
+{{% /site-region %}}
 
 {{% /site-region %}}
 

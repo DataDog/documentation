@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/service_management/incidents/investigate/timeline/timeline_tab.png" alt="Example incident showing the Timeline tab" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/timeline/timeline_tab.png" alt="Example incident showing the Timeline tab" style="width:100%;" >}}
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made.
 
@@ -27,6 +27,7 @@ Each cell has its own content type that indicates the kind of information the ce
 | Integration update | Any changes made through the Incident Management product's [integrations][1].
 | Task               | Any changes made to incident tasks in the Post-Incident section of the Incident Details page.
 | Notification sent  | An update when a manual notification is sent by an incident responder.
+| Meeting Chat       | Any messages sent in a video conferencing meeting's chat.
 
 ### Responder notes
 
@@ -43,7 +44,7 @@ Graph definitions are stored using share URLs for graphs if enabled in your [Org
 To upload an image to be hosted by Datadog, drop an image file into the text box field above the timeline. This adds the image as an individual cell in the timeline.
 
 You can also add an image to an existing cell:  
-{{< img src="/service_management/incidents/investigate/timeline/timeline_cell_add_image.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/timeline/timeline_cell_add_image.png" alt="Your image description" style="width:100%;" >}}
 1. Click the pencil icon to edit a cell.  
 2. Click the image icon and locate the image in your file directory.  
 3. You can use any of the following options to upload an image to be hosted by Datadog:  

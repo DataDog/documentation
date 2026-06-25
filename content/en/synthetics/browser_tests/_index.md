@@ -5,27 +5,30 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "/synthetics/guide/version_history/"
-  tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
-  tag: "Blog"
-  text: "Best practices for creating end-to-end tests"
-- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
-  tag: 'Learning Center'
-  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with Browser Tests"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "External Site"
-  text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
   tag: "Blog"
   text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "External Site"
+  text: "Create and manage Synthetic Browser Tests with Terraform"
 ---
 
 ## Overview
@@ -91,8 +94,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Request Options" %}}
 
-   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
-
+   * **Disable CORS**: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
+   * **Disable CSP**: Select to prevent the Content Security Policy (CSP) from blocking your test.
+   * **Capture HTTP payloads**: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [Resources tab][3] of your test results to view request and response headers and body.
    * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
@@ -102,6 +106,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
+[3]: /synthetics/browser_tests/test_results#resources
    {{% /tab %}}
 
    {{% tab "Certificate" %}}

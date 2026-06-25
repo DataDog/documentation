@@ -77,4 +77,4 @@ Datadog::Tracing.trace('my.operation') { logger.warn('This is a traced operation
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[1]: /logs/log_configuration/processors/trace_remapper/

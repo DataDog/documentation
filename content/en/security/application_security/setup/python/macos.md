@@ -23,7 +23,7 @@ further_reading:
 - Homebrew (recommended for Agent installation)
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -36,7 +36,7 @@ Install the Datadog Agent by following the [setup instructions for macOS](/agent
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog Python tracing library:
+Install the Datadog Python SDK:
 
 ```bash
 pip install ddtrace
@@ -78,7 +78,7 @@ ddtrace-run python app.py
 
 Start your Python application with the configured settings.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -88,5 +88,5 @@ If you encounter issues while setting up App and API Protection for your Python 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/python/compatibility
+[1]: /security/application_security/setup/compatibility/python
 [2]: /security/application_security/setup/python/troubleshooting

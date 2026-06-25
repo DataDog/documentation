@@ -13,7 +13,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 </div>
 
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
@@ -22,7 +22,7 @@ For the capabilities and limitations of this feature, see [SCIM][1].
 
 ## Prerequisites
 
-SCIM in Datadog is an advanced feature available with the Infrastructure Pro and Infrastructure Enterprise plans
+SCIM in Datadog is an advanced feature available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans
 
 This documentation assumes your organization manages user identities using an identity provider.
 
@@ -32,32 +32,56 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
 ## Select the Datadog application in the Okta application gallery
 
-1. In your Okta portal, go to **Applications**
-2. Click **Browse App Catalog**
+1. In your Okta portal, go to {{< ui >}}Applications{{< /ui >}}
+2. Click {{< ui >}}Browse App Catalog{{< /ui >}}
 3. Type "Datadog" in the search box
 4. Select the Datadog application
-5. Click **Add Integration**
+5. Click {{< ui >}}Add Integration{{< /ui >}}
 
 **Note:** If you already have Datadog configured with Okta, select your existing Datadog application.
 
 ## Configure automatic user provisioning
 
-1. In the application management screen, select **Provisioning** in the left panel
-2. Click **Configure API integration**.
-3. Select **Enable API integration**.
-4. Complete the **Credentials** section as follows:
-    - **Base URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
-    - **API Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
+1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel
+2. Click {{< ui >}}Configure API integration{{< /ui >}}.
+3. Select {{< ui >}}Enable API integration{{< /ui >}}.
+4. Complete the {{< ui >}}Credentials{{< /ui >}} section as follows:
+    - {{< ui >}}Base URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - {{< ui >}}API Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Okta Admin Credentials configuration screen">}}
 
-5. Click **Test API Credentials**, and wait for the message confirming that the credentials are verified.
-6. Click **Save**. The settings section appears.
-7. Next to **Provisioning to App** , select **Edit** to enable the features:
-    - **Create Users**
-    - **Update User Attributes**
-    - **Deactivate Users**
-8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
+5. Click {{< ui >}}Test API Credentials{{< /ui >}}, and wait for the message confirming that the credentials are verified.
+6. Click {{< ui >}}Save{{< /ui >}}. The settings section appears.
+7. Next to {{< ui >}}Provisioning to App{{< /ui >}} , select {{< ui >}}Edit{{< /ui >}} to enable the features:
+    - {{< ui >}}Create Users{{< /ui >}}
+    - {{< ui >}}Update User Attributes{{< /ui >}}
+    - {{< ui >}}Deactivate Users{{< /ui >}}
+8. Under {{< ui >}}Datadog Attribute Mappings{{< /ui >}}, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
+
+### Map the Datadog role attribute
+
+To provision a user's Datadog role (built-in or custom) through SCIM, add an explicit mapping for the `roles` attribute. Okta does not map this attribute by default.
+
+Datadog's SCIM role support follows the SCIM multi-valued attribute convention defined in [RFC 7643][8], using the role UUID as `value` and the role name as `display`:
+
+```json
+{
+  "roles": [
+    { "value": "<DATADOG_ROLE_UUID>", "display": "<DATADOG_ROLE_NAME>" }
+  ]
+}
+```
+
+1. In {{< ui >}}Directory{{< /ui >}} > {{< ui >}}Profile Editor{{< /ui >}}, select the Okta user profile, then click {{< ui >}}Add Attribute{{< /ui >}} to create a `roles` attribute:
+    - {{< ui >}}Data type{{< /ui >}}: **string**
+    - {{< ui >}}Display name{{< /ui >}}: **Roles**
+    - {{< ui >}}Variable name{{< /ui >}}: **roles**
+    - For {{< ui >}}Enum{{< /ui >}}, select {{< ui >}}Define enumerated list of values{{< /ui >}} and add one entry per Datadog role, using the role name as the display name and the role UUID as the value. You can find a role's UUID in the role's URL on your [Organization Settings][9] page. Add any custom roles the same way.
+2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
+3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
+
+If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
 
 ## Configure automatic team provisioning
 
@@ -67,12 +91,12 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 
 ### Create a new team in Datadog
 
-1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
+1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
 {{< img src="/account_management/scim/okta/pushed-groups.png" alt="Okta pushed groups configuration interface">}}
-1. Click the **Push Groups** button. The pushed groups interface opens.
+1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.
 1. Select the Okta group you want to push to Datadog.
-1. In the **Match result & push action** column, ensure **Create group** is selected.
-1. Click **Save**.
+1. In the {{< ui >}}Match result & push action{{< /ui >}} column, ensure {{< ui >}}Create group{{< /ui >}} is selected.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally. It may take a minute or two before the team appears in Datadog.
 
@@ -84,13 +108,13 @@ You can map an existing Datadog Team to an Okta group. Establishing a link from 
 
 **Note:** In order to synchronize an existing Datadog Team with an Okta group, the two names must match exactly.
 
-1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
-1. Click the **Push Groups** button. The pushed groups interface opens.
+1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
+1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.
 1. Select the Okta group you want to synchronize with a Datadog Team.
-1. In the **Match result & push action** column, ensure **Create group** is selected.
-1. Click **Save**.
+1. In the {{< ui >}}Match result & push action{{< /ui >}} column, ensure {{< ui >}}Create group{{< /ui >}} is selected.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-**Note:** When you select **Create group**, Okta displays a **No match found** message. You can ignore this message and proceed with creating the group to establish synchronization.
+**Note:** When you select {{< ui >}}Create group{{< /ui >}}, Okta displays a {{< ui >}}No match found{{< /ui >}} message. You can ignore this message and proceed with creating the group to establish synchronization.
 
 ### Delete the connection between an Okta group and a Datadog Team
 
@@ -100,27 +124,27 @@ You have two options for disconnecting an Okta group from a Datadog Team, with d
 
 This procedure allows you to manage team membership in Datadog instead of Okta. The team members stay unchanged.
 
-1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
-1. Click the **Push Groups** button. The pushed groups interface opens.
+1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
+1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.
 1. Select the Okta group you want to unlink from its Datadog Team.
-1. In the **Match result & push action** column, select **Unlink Pushed Group**. A dialog box appears.
-1. Select **Leave the group in the target app**.
-1. Click **Unlink**.
-1. Click **Save**.
+1. In the {{< ui >}}Match result & push action{{< /ui >}} column, select {{< ui >}}Unlink Pushed Group{{< /ui >}}. A dialog box appears.
+1. Select {{< ui >}}Leave the group in the target app{{< /ui >}}.
+1. Click {{< ui >}}Unlink{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 #### Remove team members from Datadog
 
 This procedure allows you to manage team membership in Datadog instead of Okta and removes the team members from the Datadog Team.
 
-1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
-1. Click the **Push Groups** button. The pushed groups interface opens.
+1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
+1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.
 1. Select the Okta group you want to unlink from its Datadog Team.
-1. In the **Match result & push action** column, select **Unlink Pushed Group**. A dialog box appears.
-1. Select **Delete the group in the target app (recommended)**.
-1. Click **Unlink**.
-1. Click **Save**.
+1. In the {{< ui >}}Match result & push action{{< /ui >}} column, select {{< ui >}}Unlink Pushed Group{{< /ui >}}. A dialog box appears.
+1. Select {{< ui >}}Delete the group in the target app (recommended){{< /ui >}}.
+1. Click {{< ui >}}Unlink{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-**Note:** Contrary to the name of the option, selecting **Delete the group in the target app** does _not_ delete the team in Datadog. Instead, it removes all members from the team and removes the link between the group in Okta and the Datadog Team.
+**Note:** Contrary to the name of the option, selecting {{< ui >}}Delete the group in the target app{{< /ui >}} does _not_ delete the team in Datadog. Instead, it removes all members from the team and removes the link between the group in Okta and the Datadog Team.
 
 ## Further Reading
 
@@ -133,3 +157,5 @@ This procedure allows you to manage team membership in Datadog instead of Okta a
 [5]: /account_management/org_settings/service_accounts
 [6]: /account_management/teams/manage/#manage-teams-through-an-identity-provider
 [7]: https://app.datadoghq.com/teams
+[8]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
+[9]: https://app.datadoghq.com/organization-settings/roles

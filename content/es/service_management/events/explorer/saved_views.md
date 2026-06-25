@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /service_management/events/explorer/
+- link: /events/explorer/
   tag: Documentación
   text: Más información sobre Events Explorer
 title: Vistas guardadas
@@ -46,5 +46,5 @@ En la entrada de la vista predeterminada del panel **Views** (Vistas), puedes:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/event/explorer
-[2]: /es/service_management/events/explorer/searching
-[3]: /es/service_management/events/explorer/searching
+[2]: /es/events/explorer/searching
+[3]: /es/events/explorer/searching

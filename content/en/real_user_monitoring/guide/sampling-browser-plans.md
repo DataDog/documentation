@@ -45,8 +45,7 @@ Two initialization parameters are available to control how the session is tracke
 
 To track 100% of your sessions as Browser RUM:
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -56,10 +55,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -69,10 +67,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -82,10 +79,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -95,12 +91,11 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
 To track 100% of your sessions as Browser RUM & Session Replay:
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -110,10 +105,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -123,10 +117,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -136,11 +129,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-
-<details>
-  <summary>before<code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -150,7 +141,7 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
 Use the slider to set the percentage of Browser RUM & Session Replay sessions collected from the percentage of total user sessions collected for your application.
 
@@ -158,8 +149,7 @@ Use the slider to set the percentage of Browser RUM & Session Replay sessions co
 
 If you set `sessionSampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of sessions are dropped, 30% of sessions are collected as Browser RUM, and 30% of sessions are collected as Browser RUM & Session Replay.
 
-<details open>
-  <summary>Latest version</summary>
+{{% collapse-content title="Latest version" level="h4" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -169,10 +159,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.30.0</code></summary>
+{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -182,10 +171,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.20.0</code></summary>
+{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -195,10 +183,9 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-  <summary>before<code>v4.10.2</code></summary>
+{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -208,7 +195,7 @@ datadogRum.init({
 });
 ```
 
-</details>
+{{% /collapse-content %}}
 
 From v5.0.0, to track 100% of the sessions that reach a custom state as Browser RUM & Session Replay:
 

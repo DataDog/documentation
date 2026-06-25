@@ -19,10 +19,10 @@ The following login methods are available:
 
 ## Enabling or disabling a default login method
 
-As an organization manager, you can enable or disable the default login methods for your organization. New organizations start with **Datadog Username and Password** and **Sign in with Google** enabled and configured for all organizations and users. After you configure SAML, **Sign in with SAML** is also enabled.
+As an organization manager, you can enable or disable the default login methods for your organization. New organizations start with {{< ui >}}Datadog Username and Password{{< /ui >}} and {{< ui >}}Sign in with Google{{< /ui >}} enabled and configured for all organizations and users. After you configure SAML, {{< ui >}}Sign in with SAML{{< /ui >}} is also enabled.
 
 1. Navigate to [Login Methods][3].
-2. Set the **Enabled by Default** setting for each method to `On` or `Off`, according to your organization's preference or policy requirements.
+2. Set the {{< ui >}}Enabled by Default{{< /ui >}} setting for each method to {{< ui >}}On{{< /ui >}} or {{< ui >}}Off{{< /ui >}}, according to your organization's preference or policy requirements.
 3. Confirm your selection.
 
 **Note**: You cannot disable all login methods for an organization. At least one login method must be enabled by default for your organization.
@@ -32,10 +32,10 @@ As an organization manager, you can enable or disable the default login methods 
 For enhanced security, organization managers can enforce [Multi-factor Authentication][4] (MFA) for all users in the organization that log in with an email and password.
 
 1. Navigate to [Login Methods][3].
-2. Set the **Require Multi-Factor Authentication** setting to `On` or `Off`, according to your organization's preference or policy requirements.
+2. Set the {{< ui >}}Require Multi-Factor Authentication{{< /ui >}} setting to {{< ui >}}On{{< /ui >}} or {{< ui >}}Off{{< /ui >}}, according to your organization's preference or policy requirements.
 3. Confirm your selection.
 
-Setting **Require Multi-Factor Authentication** to `On` has two effects:
+Setting {{< ui >}}Require Multi-Factor Authentication{{< /ui >}} to {{< ui >}}On{{< /ui >}} has two effects:
 - Users that log in with an email and password must register a second authentication factor before accessing the organization.
 - In Login Methods, a link to [**View users without MFA**][5] appears. Click on the link to see the users list, filtered on users without MFA.
 
@@ -43,7 +43,7 @@ The setting to require multi-factor authentication is independent of the default
 
 ## Reviewing user overrides
 
-Using overrides, you can change the available login methods for individual users. In the following example, **Sign in with Google** is Off by default in the organization, but one user has it enabled by having an override set.
+Using overrides, you can change the available login methods for individual users. In the following example, {{< ui >}}Sign in with Google{{< /ui >}} is Off by default in the organization, but one user has it enabled by having an override set.
 
 {{< img src="account_management/login_methods_enabled_off.png" alt="Login method disabled, with user override enabled" style="width:80%;">}}
 
