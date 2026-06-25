@@ -963,6 +963,12 @@ const tracer = require('dd-trace').init({
 const { llmobs } = tracer;
 tracer.use('langchain', true);
 ```
+{{% /tab %}}
+{{% tab "Java" %}}
+
+## Overview
+
+Support for the OpenAI Java Client Library is coming soon. Stay tuned for updates on automatic instrumentation and tracing for Java-based LLM applications.
 
 [1]: /llm_observability/instrumentation/sdk?tab=nodejs#in-code-setup
 {{% /tab %}}
