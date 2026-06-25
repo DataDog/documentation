@@ -28,6 +28,12 @@ Prompts often refer to the "Hugo docs". This refers either to the general Hugo s
 - Components should have both unit and browser tests, with browser tests covering just the cases that unit tests cannot.
 - Where possible, use the stable (non-hashed) BEM class as a selector, and as a verification of the component state (for example, use the relevant stable BEM class to verify that the correct tab is active). When a non-BEM direct property is very straightforward to check (like visibility), you can check that too.
 
+## CSS
+
+- Where possible, use design tokens, not hardcoded values. This is to support dark mode, alternative views offering larger font sizes, etc.
+- Where applicable, provide a dark mode style for an element using the design tokens.
+- In terms of their names, design tokens should be reusable, not tightly coupled to a specific component. Follow the existing naming conventions.
+
 ## Stay inside `astro/`
 
 Do not edit any files outside the `astro/` directory. Everything outside this folder belongs to the live Hugo site.

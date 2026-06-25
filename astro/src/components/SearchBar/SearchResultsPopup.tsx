@@ -19,6 +19,7 @@ export type Selection =
 interface Props {
   popupRef: { current: HTMLDivElement | null };
   rect: PopupRect | null;
+  variant: "default" | "mobile";
   grouped: Map<string, NormalizedHit[]> | null;
   selectedHit: NormalizedHit | null;
   aiSelected: boolean;
@@ -29,20 +30,33 @@ interface Props {
 export default function SearchResultsPopup({
   popupRef,
   rect,
+  variant,
   grouped,
   selectedHit,
   aiSelected,
   noResultsLabel,
   totalHits,
 }: Props) {
+  const isMobile = variant === "mobile";
+  // The default (side-nav) popup is a fixed 50vw set in CSS. The mobile popup
+  // instead matches the search bar's own width so it sits flush beneath the
+  // full-width mobile input.
+  const style = rect
+    ? {
+        top: `${rect.top}px`,
+        left: `${rect.left}px`,
+        ...(isMobile ? { width: `${rect.width}px` } : {}),
+      }
+    : undefined;
   return (
     <div
       ref={popupRef}
-      class={cl("search-bar__popup")}
+      class={cl(
+        "search-bar__popup",
+        isMobile && "search-bar__popup--mobile",
+      )}
       role="listbox"
-      style={
-        rect ? { top: `${rect.top}px`, left: `${rect.left}px` } : undefined
-      }
+      style={style}
     >
       <div
         class={cl(

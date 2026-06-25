@@ -44,6 +44,15 @@ describe("MobileNav.astro", () => {
     expect(doc.querySelector(".mobile-nav__search")).not.toBeNull();
   });
 
+  it("renders the functional SearchBar island inside the search slot", async () => {
+    const doc = await renderMobileNav();
+    // The dead placeholder <input> is replaced by the shared SearchBar island,
+    // server-rendered to its static markup inside the search slot.
+    const searchSlot = doc.querySelector(".mobile-nav__search");
+    expect(searchSlot?.querySelector(".search-bar")).not.toBeNull();
+    expect(searchSlot?.querySelector(".search-bar__input")).not.toBeNull();
+  });
+
   it("renders the documentation menu as an accordion of sections", async () => {
     const doc = await renderMobileNav();
     // Top-level sections from main.en.yaml render as collapsible sections.

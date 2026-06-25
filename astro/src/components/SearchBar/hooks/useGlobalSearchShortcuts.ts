@@ -6,6 +6,12 @@ interface Args {
   wrapperRef: { current: HTMLElement | null };
   setOpen: Dispatch<StateUpdater<boolean>>;
   setQuery: Dispatch<StateUpdater<string>>;
+  /**
+   * When false, the page-wide listener is not attached. Used by the mobile-nav
+   * SearchBar: it shares the page with the API side-nav SearchBar, and only one
+   * instance may own the global `/` and Cmd/Ctrl+K shortcuts. Defaults to true.
+   */
+  enabled?: boolean;
 }
 
 /**
@@ -18,8 +24,10 @@ export function useGlobalSearchShortcuts({
   wrapperRef,
   setOpen,
   setQuery,
+  enabled = true,
 }: Args) {
   useEffect(() => {
+    if (!enabled) return;
     const onKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
       const tag = target?.tagName?.toLowerCase() ?? "";
@@ -51,5 +59,5 @@ export function useGlobalSearchShortcuts({
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [inputRef, wrapperRef, setOpen, setQuery]);
+  }, [inputRef, wrapperRef, setOpen, setQuery, enabled]);
 }

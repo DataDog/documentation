@@ -43,9 +43,12 @@ function makeSearch(fixture: { results: any[] }) {
   return vi.fn().mockResolvedValue(fixtureToResponse(fixture));
 }
 
-function mount(fixture: { results: any[] } = basicFixture) {
+function mount(
+  fixture: { results: any[] } = basicFixture,
+  variant?: "default" | "mobile",
+) {
   const search = makeSearch(fixture);
-  const utils = render(h(SearchBar as any, { env, search, labels }));
+  const utils = render(h(SearchBar as any, { env, search, labels, variant }));
   return { ...utils, search };
 }
 
@@ -99,6 +102,26 @@ describe("SearchBar — query renders results", () => {
       document.querySelectorAll(".search-category__label"),
     ).map((el) => el.textContent);
     expect(labels).toEqual(["API"]);
+  });
+});
+
+describe("SearchBar — popup variant", () => {
+  it("marks the popup with the mobile modifier under the mobile variant", async () => {
+    const user = userEvent.setup();
+    mount(basicFixture, "mobile");
+    await typeAndWait(user, "dashboard");
+
+    expect(document.querySelector(".search-bar__popup")).toBeTruthy();
+    expect(document.querySelector(".search-bar__popup--mobile")).toBeTruthy();
+  });
+
+  it("does not add the mobile modifier under the default variant", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    expect(document.querySelector(".search-bar__popup")).toBeTruthy();
+    expect(document.querySelector(".search-bar__popup--mobile")).toBeFalsy();
   });
 });
 
@@ -226,6 +249,33 @@ describe("SearchBar — global keyboard shortcuts", () => {
     const input =
       document.querySelector<HTMLInputElement>(".search-bar__input")!;
     expect(document.activeElement).toBe(input);
+  });
+
+  it("the mobile variant ignores the global forward-slash shortcut", async () => {
+    const user = userEvent.setup();
+    // Two SearchBars coexist on every page (API side nav + mobile nav). The
+    // mobile one must NOT grab `/` so it can't steal focus from the side-nav
+    // bar or focus its own (often hidden) input.
+    mount(basicFixture, "mobile");
+
+    document.body.focus();
+    await user.keyboard("/");
+
+    const input =
+      document.querySelector<HTMLInputElement>(".search-bar__input")!;
+    expect(document.activeElement).not.toBe(input);
+  });
+
+  it("the mobile variant ignores the global Cmd+K shortcut", async () => {
+    const user = userEvent.setup();
+    mount(basicFixture, "mobile");
+
+    document.body.focus();
+    await user.keyboard("{Meta>}k{/Meta}");
+
+    const input =
+      document.querySelector<HTMLInputElement>(".search-bar__input")!;
+    expect(document.activeElement).not.toBe(input);
   });
 
   it("Escape clears the query and blurs the input", async () => {

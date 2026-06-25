@@ -16,6 +16,9 @@ import MobileNavToggle, {
   type MobileNavLabels,
 } from "./MobileNavToggle.tsx";
 import MobileNavSection from "./MobileNavSection.astro";
+import SearchBar, {
+  type SearchBarLabels,
+} from "@components/SearchBar/SearchBar";
 import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
 import { CORP_ORIGIN } from "@config/origins";
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
@@ -41,8 +44,14 @@ const quicknav = [
   { label: i18n("docs") || "Docs", href: localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
   { label: i18n("api"), href: localizedHref(lang, "/api/"), icon: "nav_mobile_api", alt: "api" },
 ];
-const searchPlaceholder = "Search documentation...";
-const searchAriaLabel = "Search";
+// TODO: replace hardcoded English with i18n() once authoritative translation
+// keys exist for these strings in the Hugo i18n bundle.
+const searchLabels: SearchBarLabels = {
+  Search: "Search",
+  "Search documentation": "Search documentation",
+  "Search documentation...": "Search documentation...",
+  "No results.": "No results.",
+};
 ---
 
 <div id="mobile-nav-root">
@@ -78,13 +87,8 @@ const searchAriaLabel = "Search";
       }
     </div>
 
-    <div class={cl("searchWrap")}>
-      <input
-        class={`${cl("searchInput")} mobile-nav__search`}
-        type="search"
-        placeholder={searchPlaceholder}
-        aria-label={searchAriaLabel}
-      />
+    <div class={`${cl("searchWrap")} mobile-nav__search`}>
+      <SearchBar client:load variant="mobile" labels={searchLabels} />
     </div>
 
     <ul class={`${cl("list")} mobile-nav__list`}>

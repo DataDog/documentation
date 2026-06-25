@@ -118,6 +118,14 @@
   padding: var(--space-sm) 0;
 }
 
+/* Mobile-nav placement: the popup width is set inline to match the full-width
+   search bar, so drop the 50vw cap. It still sits above the mobile-nav overlay
+   (z-index 99) thanks to the base popup's z-index. */
+.search-bar__popup--mobile {
+  width: auto;
+  max-width: none;
+}
+
 .search-bar__ai-suggestion {
   margin: 0 var(--space-sm) var(--space-sm);
   padding: var(--space-sm) var(--space-md);

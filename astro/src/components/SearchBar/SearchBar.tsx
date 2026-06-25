@@ -39,13 +39,25 @@ interface Props {
    */
   search?: SearchFn;
   labels: SearchBarLabels;
+  /**
+   * "default" is the API side-nav placement (50vw popup, owns the global
+   * keyboard shortcuts). "mobile" is the mobile-nav placement: a full-width
+   * popup and no global `/` / Cmd+K binding, so it can't conflict with the
+   * side-nav instance that coexists on the same page.
+   */
+  variant?: "default" | "mobile";
 }
 
 const DEBOUNCE_MS = 200;
 
 const cl = classListFactory(styles);
 
-export default function SearchBar({ env, search, labels }: Props) {
+export default function SearchBar({
+  env,
+  search,
+  labels,
+  variant = "default",
+}: Props) {
   const config = useMemo(() => env ?? getTypesenseConfig(), [env]);
   const searchFn = search ?? multiSearch;
 
@@ -89,7 +101,13 @@ export default function SearchBar({ env, search, labels }: Props) {
     setSelection({ kind: "none" });
   }, [hits]);
 
-  useGlobalSearchShortcuts({ inputRef, wrapperRef, setOpen, setQuery });
+  useGlobalSearchShortcuts({
+    inputRef,
+    wrapperRef,
+    setOpen,
+    setQuery,
+    enabled: variant !== "mobile",
+  });
   useOutsideClick([wrapperRef, popupRef], () => setOpen(false));
 
   const totalHits = flatHits.length;
@@ -183,6 +201,7 @@ export default function SearchBar({ env, search, labels }: Props) {
           <SearchResultsPopup
             popupRef={popupRef}
             rect={popupRect}
+            variant={variant}
             grouped={grouped}
             selectedHit={selectedHit}
             aiSelected={selection.kind === "ai"}

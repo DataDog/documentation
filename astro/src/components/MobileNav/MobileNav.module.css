@@ -94,20 +94,18 @@
   height: auto;
 }
 
-/* --- Search --- */
+/* --- Search ---
+   Wraps the shared SearchBar island in a bordered box so it reads as a search
+   field (matching Hugo's mobile search input). The SearchBar provides the icon,
+   input, and dropdown; this wrapper supplies the border and rounded corners.
+   overflow:hidden clips the inner form to the rounded corners. */
 
 .searchWrap {
-  padding: 12px 14px;
-}
-
-.searchInput {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid var(--hugo-nav-gray-light);
-  border-radius: 4px;
-  background: #ffffff;
-  color: var(--hugo-nav-text);
+  margin: var(--space-sm) var(--space-md);
+  border: var(--border-width) solid var(--hugo-nav-gray-light);
+  border-radius: var(--border-radius);
+  background: var(--color-bg);
+  overflow: hidden;
 }
 
 /* --- Accordion menu --- */
