@@ -688,6 +688,33 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+### `create_datadog_published_analysis`
+*Toolset: **ddsql***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a Published Analysis from a computational notebook cell. A Published Analysis can be used as a data source in future analyses.
+
+- Publish the analysis cell from this notebook as a Published Analysis.
+- Make a Published Analysis from this cell.
+- Create a Published Analysis from the final SQL cell in this notebook.
+
+### `update_datadog_published_analysis`
+*Toolset: **ddsql***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Updates an existing Published Analysis by re-syncing it with the current notebook cell definitions. Use this after `edit_datadog_notebook` reports that a Published Analysis is out of sync.
+
+- Sync the Published Analysis.
+- Update the out-of-sync Published Analysis.
+- Refresh the Published Analysis with the latest notebook changes.
+
+### `delete_datadog_published_analysis`
+*Toolset: **ddsql***\
+*Permissions Required: `Notebooks Write`*\
+Deletes an existing Published Analysis so it can no longer be used as a data source. A Published Analysis can be found using `ddsql_schema_search_tables`, then deleted by `id`.
+
+- Delete the Published Analysis named "Checkout latency analysis".
+- Unpublish the Published Analysis I just created.
+- Delete Published Analysis `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
