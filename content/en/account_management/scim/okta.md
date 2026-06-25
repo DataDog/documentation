@@ -13,7 +13,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 </div>
 
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
@@ -22,7 +22,7 @@ For the capabilities and limitations of this feature, see [SCIM][1].
 
 ## Prerequisites
 
-SCIM in Datadog is an advanced feature available with the Infrastructure Pro and Infrastructure Enterprise plans
+SCIM in Datadog is an advanced feature available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans
 
 This documentation assumes your organization manages user identities using an identity provider.
 
@@ -58,6 +58,30 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
     - {{< ui >}}Update User Attributes{{< /ui >}}
     - {{< ui >}}Deactivate Users{{< /ui >}}
 8. Under {{< ui >}}Datadog Attribute Mappings{{< /ui >}}, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
+
+### Map the Datadog role attribute
+
+To provision a user's Datadog role (built-in or custom) through SCIM, add an explicit mapping for the `roles` attribute. Okta does not map this attribute by default.
+
+Datadog's SCIM role support follows the SCIM multi-valued attribute convention defined in [RFC 7643][8], using the role UUID as `value` and the role name as `display`:
+
+```json
+{
+  "roles": [
+    { "value": "<DATADOG_ROLE_UUID>", "display": "<DATADOG_ROLE_NAME>" }
+  ]
+}
+```
+
+1. In {{< ui >}}Directory{{< /ui >}} > {{< ui >}}Profile Editor{{< /ui >}}, select the Okta user profile, then click {{< ui >}}Add Attribute{{< /ui >}} to create a `roles` attribute:
+    - {{< ui >}}Data type{{< /ui >}}: **string**
+    - {{< ui >}}Display name{{< /ui >}}: **Roles**
+    - {{< ui >}}Variable name{{< /ui >}}: **roles**
+    - For {{< ui >}}Enum{{< /ui >}}, select {{< ui >}}Define enumerated list of values{{< /ui >}} and add one entry per Datadog role, using the role name as the display name and the role UUID as the value. You can find a role's UUID in the role's URL on your [Organization Settings][9] page. Add any custom roles the same way.
+2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
+3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
+
+If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
 
 ## Configure automatic team provisioning
 
@@ -133,3 +157,5 @@ This procedure allows you to manage team membership in Datadog instead of Okta a
 [5]: /account_management/org_settings/service_accounts
 [6]: /account_management/teams/manage/#manage-teams-through-an-identity-provider
 [7]: https://app.datadoghq.com/teams
+[8]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
+[9]: https://app.datadoghq.com/organization-settings/roles

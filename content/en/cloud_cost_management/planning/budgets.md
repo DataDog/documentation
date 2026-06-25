@@ -28,17 +28,17 @@ You can create two types of budgets:
 To create a basic budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2] or [Terraform][3].
-1. Click the {{< ui >}}Create a New Budget{{< /ui >}} button.
+1. Click {{< ui >}}New Budget{{< /ui >}}.
 1. Click {{< ui >}}Basic{{< /ui >}} to create a basic budget.
 1. You can either add budget information by {{< ui >}}uploading a CSV{{< /ui >}} using the provided template in the UI, or {{< ui >}}enter your budget directly{{< /ui >}} using the details below.
 
-   {{< img src="cloud_cost/budgets/budget-upload-your-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
+   {{< img src="cloud_cost/budgets/budget-create-basic-1.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
 
    - {{< ui >}}Budget Name{{< /ui >}}: Enter a name for your budget.
    - {{< ui >}}Start Date{{< /ui >}}: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - {{< ui >}}End Date{{< /ui >}}: Set an end date for the budget (can be in the future).
    - {{< ui >}}Provider(s){{< /ui >}}: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
-   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify the dimension to track (such as team, service, or environment). Then, define the specific values directly in the budget table. For example, to create budgets for the top four teams, select "team" as the dimension, and add the teams as rows in the table. You can select an existing tag value or add a new one to track future spend.
 
 1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the {{< ui >}}copy{{< /ui >}} button.
 
@@ -57,7 +57,7 @@ To create a basic budget:
 To create a hierarchical budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
-1. Click the {{< ui >}}Create a New Budget{{< /ui >}} button.
+1. Click {{< ui >}}New Budget{{< /ui >}}.
 1. Click {{< ui >}}Hierarchical{{< /ui >}} to create a hierarchical budget.
 1. Enter your budget information using the details below.
 
@@ -67,7 +67,7 @@ To create a hierarchical budget:
    - {{< ui >}}Scope to Provider(s){{< /ui >}}: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
    - {{< ui >}}Parent Level{{< /ui >}}: Select the parent-level tag.
    - {{< ui >}}Child Level{{< /ui >}}: Select child-level tag.
-   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify the dimension to track (such as team, service, or environment). Then, define the specific values directly in the budget table. For example, to create budgets for the top four teams, select "team" as the dimension, and add the teams as rows in the table. You can select an existing tag value or add a new one to track future spend.
 
 1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the {{< ui >}}copy{{< /ui >}} button.
 
@@ -139,9 +139,86 @@ To view detailed forecast information in a budget, click {{< ui >}}View Performa
 
 Learn more about how [forecasting][3] works and data requirements.
 
+## Customize your budget forecast
+
+Datadog automatically generates a **Bits forecast** for each budget, projecting future costs from your historical spend. When you have knowledge that the Bits forecast cannot capture, such as a planned product launch, migration, seasonal demand, or retired workloads, you can override it with your own values. This override is called a **custom forecast**.
+
+Custom forecast values are:
+
+- Editable with the `ccm_forecast_write` permission (see [Permissions](#permissions)).
+- Editable for the current and future months.
+
+For [hierarchical budgets](#set-up-budgets), you edit custom forecast values at the child level. The parent level reflects the sum of its children.
+
+Once set, your custom values take precedence over the Bits forecast on the budget status page, in the forecast totals on the Budgets page, and in [budget monitors][2].
+
+### Add or edit custom forecast values
+
+{{< tabs >}}
+{{% tab "When creating a budget" %}}
+
+1. Follow the steps in [Set up budgets](#set-up-budgets) to start creating a budget.
+1. Toggle {{< ui >}}Customize Bits Forecast{{< /ui >}} to display forecast columns interleaved with the budget columns. Each month shows a {{< ui >}}Budget{{< /ui >}} column and a {{< ui >}}Forecast{{< /ui >}} column.
+
+  {{< img src="cloud_cost/budgets/cust-fcst-during-create.png" alt="Toggle Customize Bits Forecast to display forecast columns" style="width:100%;">}}
+
+1. Each forecast cell displays the Bits forecast as a gray placeholder. Enter a dollar amount to override it. Negative values are not allowed.
+
+   The preview chart updates as you edit, so you can review the final forecast before saving.
+
+  {{< img src="cloud_cost/budgets/cust-fcst-during-create-table.png" alt="Toggle Customize Bits Forecast to display forecast columns" style="width:100%;">}}
+
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+{{% /tab %}}
+{{% tab "When editing a budget" %}}
+
+1. On the [Budgets page][1], click the edit icon for a budget.
+
+   The forecast columns appear automatically if you have the `ccm_forecast_write` permission. Each forecast cell displays your saved override, or the Bits forecast as a gray placeholder when no override exists.
+
+1. Enter or change a dollar amount in any forecast cell. Negative values are not allowed.
+1. To compare your overrides against the original automatic values, toggle {{< ui >}}Show Bits AI forecast{{< /ui >}} to display a read-only Bits AI column next to each forecast column.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/cost/plan/budgets
+
+{{% /tab %}}
+{{< /tabs >}}
+
+While editing, the appearance of each forecast cell indicates its state:
+
+| Cell appearance | Meaning |
+|---|---|
+| Gray text | Bits forecast placeholder: no override is set for this cell. |
+| Black text | A saved custom forecast override. |
+| Black text with a blue outline | An override you entered but have not saved yet. |
+
+To remove an override, clear the cell. The cell reverts to the gray Bits forecast placeholder.
+
+<div class="alert alert-info">Datadog saves the budget first, and then saves the custom forecast. If the budget saves but the custom forecast does not, a notification prompts you to retry from the edit page.</div>
+
+### How custom forecasts are used
+
+- **Budget status**: The budget status page and the forecast totals on the Budgets page include your custom forecast.
+- **Budget monitors**: When [budget monitors][2] evaluate, a custom forecast takes precedence over the Bits forecast when one is present.
+- **CSV export**: Downloading a budget as a CSV includes the custom forecast values where they are set.
+- **Deleting a budget**: Deleting a budget also deletes its associated custom forecast values.
+
+## Permissions
+
+| Action | Required Permission |
+|--------|---------------------|
+| View budgets | `cloud_cost_management_read` |
+| Create, edit, or delete a budget | `ccm_budget_write` |
+| Edit custom forecast values | `ccm_forecast_write` |
+
+For the full list of CCM permissions, see the [Permissions documentation][4].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /cloud_cost_management/cost_changes/monitors/
 [3]: /cloud_cost_management/planning/forecasting
+[4]: /cloud_cost_management/setup/permissions

@@ -1,5 +1,6 @@
 ---
 title: Calculating the 'system.mem.used' metric
+description: "Understand how Datadog calculates the system.mem.used metric and why values can differ from other system tools."
 aliases:
   - /agent/faq/how-is-the-system-mem-used-metric-calculated/
 further_reading:

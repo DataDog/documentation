@@ -317,6 +317,13 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
 		exit 1; \
 	fi;
+	@if [ "$(BUILD_SCRIPT_BRANCH)" != "main" ]; then \
+		echo -e "\n\033[0;31m##########################################################################"; \
+		echo -e "# WARNING: BUILD_SCRIPT_BRANCH is set to '$(BUILD_SCRIPT_BRANCH)'"; \
+		echo -e "# You are NOT using the main branch for build scripts."; \
+		echo -e "# If this is unintentional, update BUILD_SCRIPT_BRANCH in Makefile.config"; \
+		echo -e "##########################################################################\033[0m\n"; \
+	fi;
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
 	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \

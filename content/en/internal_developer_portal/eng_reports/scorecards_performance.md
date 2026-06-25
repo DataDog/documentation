@@ -3,7 +3,7 @@ title: Scorecards Performance
 aliases:
 - /software_catalog/eng_reports/scorecards_performance
 further_reading:
-- link: "software_catalog/scorecards/"
+- link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"
   text: "Datadog Scorecards"
 - link: "dashboards/"

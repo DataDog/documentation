@@ -28,27 +28,30 @@ This approach ensures that cluster-level metrics are collected only once, preven
 
 ## Setup
 
-To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state-metrics` and configure both of the above OpenTelemetry Collectors in your cluster.
+To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state-metrics` and configure both OpenTelemetry Collectors in your cluster. The reference configurations in this guide also set up the **[Kubernetes Explorer][10]**.
 
 ### Prerequisites
 
 * **Helm**: The setup uses Helm to deploy resources. To install Helm, see the [official Helm documentation][2].
-* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.130.0` image or newer.
+* **Helm chart**: OpenTelemetry Collector [Helm chart][9] v0.156.2 or later.
+* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.154.0` image or newer.
 
 ### Installation
 
 #### 1. Install kube-state-metrics
 
-Run the following commands to add the `prometheus-community` Helm repository and install `kube-state-metrics`:
+Add the `prometheus-community` Helm repository and install `kube-state-metrics`:
+
 ```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 helm install kube-state-metrics prometheus-community/kube-state-metrics
 ```
 
-#### 2. Create a Datadog API Key Secret
+#### 2. Create a Datadog API key secret
 
-Create a Kubernetes secret to store your Datadog API key securely.
+Create a Kubernetes secret to store your Datadog API key:
+
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
 kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
@@ -57,36 +60,30 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 #### 3. Install the OpenTelemetry Collectors
 
 1. Add the OpenTelemetry Helm chart repository:
+
    ```sh
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    helm repo update
    ```
 
-1. Download the configuration files for the two Collectors:
+2. Download the reference configuration files:
    - [cluster-collector.yaml][3]
    - [daemonset-collector.yaml][4]
 
-1. Set your cluster name as an environment variable and use Helm to deploy both the Cluster and Node Collectors. Make sure the paths to the YAML files are correct.
+3. Deploy both Collectors. The Cluster Collector (Deployment) collects cluster-level objects and metrics; the Node Collector (DaemonSet) collects node-level metrics:
 
-   ```bash
-   # Set your cluster name
-   export K8S_CLUSTER_NAME="<YOUR_CLUSTER_NAME>"
-
+   ```sh
    # Install the Node Collector (DaemonSet)
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.130.0 \
-     --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
-     --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
+     --set image.tag=0.154.0
 
    # Install the Cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.130.0 \
-     --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
-     --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
+     --set image.tag=0.154.0
    ```
 
 ## Correlating traces with infrastructure metrics
@@ -164,6 +161,12 @@ The `k8sclusterreceiver` collects cluster-level metrics, such as the status and 
 
 {{< mapping-table resource="k8scluster.csv">}}
 
+### Count connector
+
+The [count connector][11] generates object-count metrics by counting the number of metric series that pass through the pipeline. It produces the following metrics:
+
+{{< mapping-table resource="count-connector.csv">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -172,7 +175,8 @@ The `k8sclusterreceiver` collects cluster-level metrics, such as the status and 
 [2]: https://helm.sh/docs/intro/install/
 [3]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/cluster-collector.yaml
 [4]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
-[5]: /opentelemetry/schema_semantics/metrics_mapping/
-[6]: https://app.datadoghq.com/metric/summary
 [7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#opentelemetry
 [8]: https://github.com/kubernetes/kube-state-metrics
+[9]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
+[10]: /containers/monitoring/kubernetes_explorer/
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/countconnector

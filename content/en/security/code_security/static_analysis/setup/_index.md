@@ -11,7 +11,7 @@ algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -270,10 +270,10 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
-[22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[22]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [27]: /security/code_security/static_analysis/configuration/
-[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/

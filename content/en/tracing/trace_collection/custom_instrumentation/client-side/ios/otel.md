@@ -181,6 +181,27 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .us2_fed,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}

@@ -67,7 +67,7 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 ## Notification recipients
 Datadog recommends using [monitor notification rules][22] to manage monitor notifications. With notification rules you can automate which notification recipients are added to a monitor based on predefined sets of conditions. Create different rules to route monitor alerts based on the tags of the monitor notification so you don't have to manually set up recipients nor notification routing logic for each individual monitor.
 
-In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
+In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click {{< ui >}}@ Add Mention{{< /ui >}}, {{< ui >}}Add Workflow{{< /ui >}}, or {{< ui >}}Add Case{{< /ui >}}.
 
 An @notification must have a space between it and the last line character:
 
@@ -75,18 +75,20 @@ An @notification must have a space between it and the last line character:
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-{{% collapse-content title="Email" level="h4" expanded=false %}}
-{{% notifications-email %}}
+{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% notifications-integrations %}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Teams" level="h4" expanded=false %}}
-If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][7] documentation.
+{{% notifications-teams %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% collapse-content title="Cases" level="h4" expanded=false %}}
+{{% notifications-cases %}}
+{{% /collapse-content %}}
 
-{{% notifications-integrations %}}
-
+{{% collapse-content title="Email" level="h4" expanded=false %}}
+{{% notifications-email %}}
 {{% /collapse-content %}}
 
 ### Bulk editing monitor @-handles
@@ -103,14 +105,14 @@ Before you add a workflow to a monitor, [add a monitor trigger to the workflow][
 
 After you add the monitor trigger, [add an existing workflow to your monitor][10] or create a new workflow. To create a new workflow from the monitors page:
 
-1. Click **Add Workflow**.
-1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
+1. Click {{< ui >}}Add Workflow{{< /ui >}}.
+1. Click the {{< ui >}}+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][11].
 
 ## Incidents
-Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on **Add Incident** and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][12].
+Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on {{< ui >}}Add Incident{{< /ui >}} and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][12].
 
 When an incident is created from a monitor, the incident's [field values][13] are automatically populated based on the monitor's tags. For example, if your monitor has a tag `service:payments`, the incident's service field will be set to "payments". To receive notifications for these incidents, make sure the monitor's tags align with your incident notification rules. **Note**: Incident notification rules are configured separately from monitor notification rules and need to be set up independently. For more information, see [Incident Notification][14].
 
@@ -124,10 +126,10 @@ Monitor notifications include content such as the monitor's query, the @-mention
 
 The options are:
 
-- **Default**: No content is hidden.
-- **Hide Query**: Remove the monitor's query from the notification message.
-- **Hide Handles**: Remove the @-mentions that are used in the notification message.
-- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
+- {{< ui >}}Default{{< /ui >}}: No content is hidden.
+- {{< ui >}}Hide Query{{< /ui >}}: Remove the monitor's query from the notification message.
+- {{< ui >}}Hide Handles{{< /ui >}}: Remove the @-mentions that are used in the notification message.
+- {{< ui >}}Hide All{{< /ui >}}: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
 
 **Note**: Depending on the integration, some content may not be displayed by default.
 
@@ -147,7 +149,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Configure notifications and automations` section.
+* In the {{< ui >}}Renotification message{{< /ui >}} field in the {{< ui >}}Configure notifications and automations{{< /ui >}} section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
@@ -193,7 +195,7 @@ Find more information on this feature in [Configure Monitors][18]
 
 ## Test notifications
 
-After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
+After defining your monitor, test the notifications with the {{< ui >}}Test Notifications{{< /ui >}} button at the bottom right of the monitor page.
 
 Test notifications are supported for the [monitor types][19]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
@@ -201,7 +203,7 @@ Test notifications are supported for the [monitor types][19]: host, metric, anom
 
     {{< img src="/monitors/notifications/test_notification_modal.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
-1. Click **Run Test** to send notifications to the people and services listed in the monitor.
+1. Click {{< ui >}}Run Test{{< /ui >}} to send notifications to the people and services listed in the monitor.
 
 ### Events
 
@@ -229,7 +231,6 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/variables/#conditional-variables
-[7]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
 [8]: /service_management/workflows/
 [9]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor

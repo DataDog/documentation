@@ -192,7 +192,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
 
 | Product/Functionality                                                                                               | Port | Protocol | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |

@@ -1,5 +1,6 @@
 ---
 title: Metric Type Modifiers
+description: "Use the as_count and as_rate in-app modifiers to switch metrics between count and rate representations."
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
@@ -65,12 +66,24 @@ Depending on the metric type you applied them to, the behavior differs:
 * Effect of `as_rate()`:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
+  * Floors the query rollup interval to the metric's metadata interval. Queries requested at a rollup interval smaller than the metric's submission interval are silently raised to match the metadata interval.
+  * Rescales each complete bucket post-aggregation by `min(metadata_interval, rollup_interval) / rollup_interval`. When the rollup interval equals the metadata interval, this is a no-op, and the bucket value equals the post-aggregation `SUM`. When the rollup interval is larger than the metadata interval, the value becomes the time-mean of the `per-second` rate samples in that bucket. For example, for a metric submitted every `60 seconds` queried with a `1800 second` rollup interval, `as_rate()` returns `post_aggregation / 30` for each complete bucket.
+  * Rescales the rightmost partial bucket (when the query end time is not aligned to a rollup boundary) so that it represents the mean of the samples actually observed in that partial window, instead of an artificially low value.
+
+  **Note**: If a `RATE` metric has no metadata interval set, none of the rescaling steps above are applied, and the time aggregator falls back to `AVG` instead of `SUM`.
+
+  **Note**: For example, when validating this, use the formula `(post_aggregation / rollup_interval) * min(metadata_interval, rollup_interval)` in [Advanced graphing][2]. The expression cannot be plotted directly in a basic timeseries query widget, because it depends on the active rollup interval as a numeric value.
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
+[2]: /dashboards/querying/#advanced-graphing
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-`GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on them.
+`GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on how a gauge is stored or displayed in the Metrics Explorer.
+
+**Note**: In monitors, applying `as_count()` to a gauge metric changes the evaluation path for rollup-dependent functions like `pct_change()`:
+- Without `as_count()`: the function is applied per-bucket and those values are summed over the evaluation window, which can produce large negative values for sparse gauges.
+- With `as_count()`: the timeseries is bucketed and aggregated before the function is applied, matching the intended window-level computation.
 
 {{% /tab %}}
 {{< /tabs >}}

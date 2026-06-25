@@ -56,7 +56,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#remapper
+[3]: /logs/log_configuration/processors/remapper/
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "With Log integration" %}}
@@ -84,7 +84,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#trace-remapper
+[3]: /logs/log_configuration/processors/trace_remapper/
    {{% /tab %}}
    {{< /tabs >}}
 
