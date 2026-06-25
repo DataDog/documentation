@@ -4926,6 +4926,11 @@ menu:
       parent: dbm
       identifier: dbm_setup_architecture
       weight: 2
+    - name: Oracle Configurations
+      url: database_monitoring/architecture/oracle/
+      parent: dbm_setup_architecture
+      identifier: dbm_architecture_oracle
+      weight: 4
     - name: Setting Up Postgres
       url: database_monitoring/setup_postgres/
       parent: dbm
