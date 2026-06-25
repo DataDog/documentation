@@ -85,6 +85,37 @@ This manual approach allows you to create more targeted blocking rules when the 
 
 {{< img src="security/application_security/threats/custom-clusters.png" alt="An AAP signal with custom clusters sorted by the attacker attributes"  >}}
 
+## Block an attacker cluster with one click
+
+After an attacker cluster is identified, you can directly generate an In-App WAF custom rule in the UI that matches the cluster attributes, without needing to write regex.
+
+To block a cluster:
+
+1. Open the **Attacker Explorer** and select the **Cluster** grouping.
+2. Click a cluster to open its side panel.
+3. Click **Create In-App WAF rule** in the cluster header. The In-App WAF custom rule form opens pre-filled with the generated conditions, one condition per blocking attribute, combined with AND logic.
+4. Review the conditions and adjust if needed, then save the rule.
+
+Alternatively, inside a security signal, you can click the **Create In-App WAF rule** icon on the cluster row in the clusters table.
+
+If a matching blocking rule already exists for a cluster, the button changes to **View In-App WAF rule** and links directly to the existing rule.
+
+{{< img src="security/application_security/threats/block-cluster-button.png" alt="The attacker cluster side panel with the Create In-App WAF rule button highlighted" >}}
+
+### Supported attributes
+
+The following cluster attributes can be converted to WAF conditions:
+
+- HTTP user-agent (`@http.useragent`)
+- HTTP request headers (`@http.request.headers.*`)
+- Client IP (`@http.client_ip`)
+- User ID (`@usr.id`)
+- Datadog attacker fingerprint sub-attributes (`@appsec.fingerprint.*`)
+
+Attributes that are not evaluated by the WAF at request time (for example, `@http.useragent_details.*`) cannot be converted. When a cluster contains unsupported attributes, the button is disabled and a tooltip lists the attributes that prevent rule generation.
+
+**Note**: Generated rules default to monitoring mode. You can switch to blocking mode using the behavior toggle in the rule form before saving.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

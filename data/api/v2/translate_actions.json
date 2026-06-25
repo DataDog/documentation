@@ -4409,11 +4409,33 @@
     "request_description": "",
     "request_schema_description": "Request body for creating a report schedule."
   },
+  "ListReportSchedules": {
+    "description": "List dashboard and integration dashboard report schedules for the organization.\nThe response is paginated and can be filtered by title, author UUID, or recipients.\nRequires the `generate_dashboard_reports` permission.",
+    "summary": "List report schedules"
+  },
+  "GetReportSchedulesForResource": {
+    "description": "Get all report schedules that target a dashboard or integration dashboard resource.\nRequires a reporting read permission appropriate to the targeted resource type.",
+    "summary": "Get report schedules for a resource"
+  },
+  "DeleteReportSchedule": {
+    "description": "Delete a report schedule by its unique identifier. The response returns the deleted schedule.\nRequires a reporting write permission appropriate to the targeted resource type and schedule ownership.",
+    "summary": "Delete a report schedule"
+  },
+  "GetReportSchedule": {
+    "description": "Get a report schedule by its unique identifier.\nRequires a reporting read permission appropriate to the targeted resource type.",
+    "summary": "Get a report schedule"
+  },
   "PatchReportSchedule": {
     "description": "Update an existing scheduled report by its identifier. The editable attributes\nare replaced with the supplied values; the targeted resource (`resource_id` and\n`resource_type`) cannot be changed after creation.\nRequires the `generate_dashboard_reports` permission and schedule ownership.",
     "summary": "Update a report schedule",
     "request_description": "",
     "request_schema_description": "Request body for updating a report schedule."
+  },
+  "ToggleReportSchedule": {
+    "description": "Activate or pause a report schedule by setting its status to `active` or `inactive`.\nRequires a reporting write permission appropriate to the targeted resource type and schedule ownership.",
+    "summary": "Toggle a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for toggling a report schedule."
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
