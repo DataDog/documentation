@@ -1349,7 +1349,7 @@ The following Windows services are supported:
 
 ##### Prerequisites
 
-This backend is supported on Windows only. The registry key must be readable by `ddagentuser`, the account the Agent runs under. Keys under `HKLM` are readable by all local users by default. Datadog recommends restricting the ACL so only `ddagentuser` and `SYSTEM` can read the key.
+This backend is supported on Windows only. The registry key must be readable by the account the Datadog Agent runs under (by default `ddagentuser`). Keys under `HKLM` are readable by all local users by default. Datadog recommends restricting the ACL so only `ddagentuser` and `SYSTEM` can read the key.
 
 ##### Configuration example
 
