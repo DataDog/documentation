@@ -62,7 +62,7 @@ The following instructions assume that you have configured an EC2 cluster. See t
 
 **Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 ## FIPS Compliance
 
 Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.

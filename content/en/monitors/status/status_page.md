@@ -17,6 +17,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-status-page/"
   tag: "Blog"
   text: "Quickly get rich, actionable context for alerts with Datadog's new Monitor Status page"
+- link: "https://learn.datadoghq.com/courses/getting-started-monitors"
+  tag: "Learning Center"
+  text: "Getting Started with Monitors"
+
 ---
 
 ## Overview
@@ -40,7 +44,7 @@ The header contains the monitor's metadata, including:
 - Associated services (if available)
 - Tags
 
-On the right, you'll find the **Edit**, **Clone**, **Export**, **Permissions** and **Delete** buttons.
+On the right, you'll find the {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Clone{{< /ui >}}, {{< ui >}}Export{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}} and {{< ui >}}Delete{{< /ui >}} buttons.
 
 From the header, you can resolve the monitor. Resolving from the header resolves all groups in the alert and sets the monitor status to `OK` (all groups). The `resolve` function temporarily changes the monitor status to `OK` until its next evaluation, but the next evaluation proceeds as normal based on current data. To resolve from the Event details, see [Status Events][1].
 
@@ -52,7 +56,7 @@ Additionally, view and manage downtimes impacting this monitor and create new on
 
  {{< img src="/monitors/status/evaluated_data_graph_1.png" alt="Example monitor evaluation graph" style="width:100%;" >}}
 
-You can troubleshoot monitor alerts by viewing your data through graphs. Toggle between the **Evaluated Data**, **Source Data**, and **Transitions** graphs to investigate which groups are causing the alert. The graphing component also contains details on the monitor query, configured monitor evaluation, and notification information. To learn more about each graph, see the [Monitor status graphs][2] documentation.
+You can troubleshoot monitor alerts by viewing your data through graphs. Toggle between the {{< ui >}}Evaluated Data{{< /ui >}}, {{< ui >}}Source Data{{< /ui >}}, and {{< ui >}}Transitions{{< /ui >}} graphs to investigate which groups are causing the alert. The graphing component also contains details on the monitor query, configured monitor evaluation, and notification information. To learn more about each graph, see the [Monitor status graphs][2] documentation.
 
 Use the template variables to scope down the monitor page to specific groups, select the attributes you want to filter by.
 

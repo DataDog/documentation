@@ -27,6 +27,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
   tag: "Blog"
   text: "How to build reliable and accurate synthetic tests for your mobile apps"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
 cascade:
   algolia:
     tags: ['mobile_testing']

@@ -38,8 +38,8 @@ Live Process Monitors are best used in the following scenarios:
 
 There are two ways to create a Live Process Monitor:
 
-- Using the main navigation: **Monitors --> New Monitor --> Live Process**.
-- On the [Processes page][4], search for a process you want to monitor. Then click the dropdown menu next to **+New Metric** and click **Create monitor**.
+- Using the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Live Process{{< /ui >}}.
+- On the [Processes page][4], search for a process you want to monitor. Then click the dropdown menu next to {{< ui >}}+New Metric{{< /ui >}} and click {{< ui >}}Create monitor{{< /ui >}}.
 
 ### Select processes
 
@@ -68,9 +68,9 @@ If you cannot scope processes down to the granularity you would like using tags,
 
 #### Alert grouping
 
-`Simple Alert` (default): aggregates alerts over all reporting sources. You receive one alert when the aggregated value meets the set conditions.
+{{< ui >}}Simple Alert{{< /ui >}} (default): aggregates alerts over all reporting sources. You receive one alert when the aggregated value meets the set conditions.
 
-`Multi Alert`: applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
+{{< ui >}}Multi Alert{{< /ui >}}: applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
 
 ### Set alert conditions
 
@@ -91,7 +91,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][6] page.
 
 ## Further Reading
 

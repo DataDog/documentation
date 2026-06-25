@@ -28,7 +28,7 @@ title: Notificaciones de Harness
 ---
 ## Información general
 
-Harness es una plataforma CI/CD de autoservicio que permite a ingenieros y DevOps crear, probar, desplegar y comprobar software bajo demanda. Con esta integración, puedes enviar notificaciones de eventos de pipelines de Harness a Datadog de forma continua, lo que te garantiza una visibilidad en tiempo real de las actualizaciones críticas de pipelines en tus flujos de trabajo de monitorización existentes. Estas notificaciones están disponibles en el [Explorador de eventos](https://docs.datadoghq.com/service_management/events/explorer/) de Datadog y se muestran en el dashboard predefinido.
+Harness es una plataforma CI/CD de autoservicio que permite a ingenieros y DevOps crear, probar, desplegar y comprobar software bajo demanda. Con esta integración, puedes enviar notificaciones de eventos de pipelines de Harness a Datadog de forma continua, lo que te garantiza una visibilidad en tiempo real de las actualizaciones críticas de pipelines en tus flujos de trabajo de monitorización existentes. Estas notificaciones están disponibles en el [Explorador de eventos](https://docs.datadoghq.com/events/explorer/) de Datadog y se muestran en el dashboard predefinido.
 
 **Nota**: La posibilidad de configurar las notificaciones de Datadog en Harness está detrás de un indicador de función. Ponte en contacto con el [servicio de asistencia de Harness](mailto:support@harness.io) para activar esta función. Consulta la [documentación de Harness](https://developer.harness.io/docs/continuous-delivery/x-platform-cd-features/cd-steps/notify-users-of-pipeline-events/#datadog-notifications) para obtener más información sobre esta integración.
 

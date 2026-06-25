@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner
+description: Discover, classify, and optionally redact sensitive data such as PII, credentials, and credit card numbers across Datadog logs, APM spans, RUM events, Agent Observability traces, events, and Amazon S3 buckets with Sensitive Data Scanner.
 disable_toc: false
 aliases:
   - /account_management/org_settings/sensitive_data_detection
@@ -56,7 +57,7 @@ Sensitive data, such as credit card numbers, API keys, IP addresses, and persona
 - APM spans
 - Code repositories
 - Events from Event Management
-- LLM Observability traces
+- Agent Observability traces
 - RUM events
 - Telemetry data, such as application logs
 
@@ -104,13 +105,13 @@ Use [Observability Pipelines][5] to collect and process your logs within your en
 
 See [Set Up Pipelines][7] for more information.
 
-## Scan LLM Observability data
+## Scan Agent Observability data
 
-Sensitive Data Scanner can scan [Datadog LLM Observability][20] traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata.
+Sensitive Data Scanner can scan [Agent Observability][20] traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata.
 
-LLM Observability scanning uses a managed configuration model that differs from telemetry data scanning, where LLM Observability scanning has:
+Agent Observability scanning uses a managed configuration model that differs from telemetry data scanning, where Agent Observability scanning has:
 
-- **One managed scanning group**: A default scanning group is automatically created for your organization when you first access the [LLM Observability Settings page][18]. You cannot create additional scanning groups or delete the managed group.
+- **One managed scanning group**: A default scanning group is automatically created for your organization when you first access the [Agent Observability Settings page][18]. You cannot create additional scanning groups or delete the managed group.
 - **Customizable rules**: You can modify existing rules, disable rules you don't need, or add custom scanning rules to detect additional sensitive data patterns.
 
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
@@ -119,7 +120,7 @@ For each scanning rule, one of the following actions can be applied to matched s
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 
-To configure scanning for LLM Observability data, navigate to the [LLM Observability Settings page][18] in Sensitive Data Scanner settings. For more information about LLM Observability, see the [LLM Observability documentation][20].
+To configure scanning for Agent Observability data, navigate to the [Agent Observability Settings page][18] in Sensitive Data Scanner settings. For more information about Agent Observability, see the [Agent Observability documentation][20].
 
 ## Scan cloud storage
 

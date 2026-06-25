@@ -154,6 +154,29 @@ const config = new DatadogProviderConfiguration(
 );
 ```
 {{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'US2_FED',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
 {{< site-region region="ap1" >}}
 ```js
 import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';

@@ -488,7 +488,7 @@ Además de cualquier cambio en el código, se requiere lo siguiente cuando se ac
 [15]: /es/developers/integrations/check_references/#service-check-file
 [16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [17]: https://docs.datadoghq.com/es/agent/
-[18]: https://docs.datadoghq.com/es/service_management/events/
+[18]: https://docs.datadoghq.com/es/events/
 [19]: https://desktop.github.com/
 [20]: https://docs.datadoghq.com/es/developers/integrations/create_a_tile
 [21]: https://github.com/Datadog/integrations-extras

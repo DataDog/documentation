@@ -23,18 +23,22 @@ You can also [forward third-party log to syslog](#forward-third-party-logs-to-sy
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section are for setting up the source in the UI.
 
-To configure your Syslog source:
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the syslog address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-danger">Only enter the identifiers for the syslog address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+{{% observability_pipelines/secrets_env_var_note %}}
 
-1. Enter the identifier for your syslog address. If you leave it blank, the [default](#set-secrets) is used.
-1. In the **Socket Type** dropdown menu, select the communication protocol you want to use: **TCP** or **UDP**.
+After you select the Syslog source in the pipeline UI:
+
+1. Enter the identifier for your syslog address. If you leave it blank, the [default](#secret-defaults) is used.
+1. In the {{< ui >}}Socket Type{{< /ui >}} dropdown menu, select the communication protocol you want to use: {{< ui >}}TCP{{< /ui >}} or {{< ui >}}UDP{{< /ui >}}.
 
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 
-## Set secrets
+{{% observability_pipelines/tls_settings_mtls %}}
+
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

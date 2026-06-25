@@ -51,7 +51,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">
   <em>Setting up S3 Log Archives using Role Delegation is in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
 </div>
@@ -74,7 +74,7 @@ Changing the access type on an existing AWS account is a destructive operation. 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial or AWS GovCloud regions.
 {{< /site-region >}}
 4. Copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][3].
@@ -86,17 +86,11 @@ Datadog assumes this role to collect data on your behalf.
 
 1. Go to the AWS [IAM Console][4] and click `Create role`.
 2. Select **AWS account** for the trusted entity type, and **Another AWS account**.
-{{< site-region region="us,us3,us5,eu" >}}
-3. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+3. Enter {{< region-param key="aws_customer_access_id" code="true" >}} as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
-{{< site-region region="ap1" >}}
-3. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
-{{< /site-region >}}
-{{< site-region region="ap2" >}}
-3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< site-region region="gov,gov2" >}}
+3. If the AWS account you want to integrate is a GovCloud account, enter {{< region-param key="aws_customer_access_govcloud_id" code="true" >}} as the `Account ID`, otherwise enter {{< region-param key="aws_customer_access_id" code="true" >}}. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 **Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
 
@@ -131,6 +125,38 @@ This policy defines the permissions necessary for the Datadog integration role t
 5. Click **Save**.
 6. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
+### Troubleshoot IAM role issues
+
+If the integration does not appear to be working after setup, verify the following:
+
+**Common trust policy mistakes:**
+- The **Account ID** in the trust policy must match the Datadog account ID for your [Datadog site][8]. Verify that the **DATADOG SITE** selector on this page is set correctly.
+- The **External ID** in the trust policy must match the value shown in the [AWS integration configuration page][1]. External IDs are regenerated after 48 hours if not used.
+- The role ARN entered in Datadog must exactly match the role ARN in AWS, including capitalization.
+
+**Validate the integration in Datadog:**
+
+After configuring the role, return to the [AWS integration page][1] and save the configuration. Datadog validates the role by attempting to assume it from Datadog's own AWS account. If the role cannot be assumed, an error message appears in the UI. See [Error: Datadog is not authorized to perform sts:AssumeRole][9] for detailed troubleshooting steps.
+
+**Service Control Policies (SCPs):**
+
+If your AWS account is part of an AWS Organization, [Service Control Policies][10] can block the integration even when the IAM role and trust policy are correct. See [Missing metrics][11] in the troubleshooting guide for details.
+
+**Permissions boundaries:**
+
+A [permissions boundary][12] sets the maximum permissions a role can have. Effective permissions are the intersection of the role's identity-based policies and the boundary policy. If the boundary does not include an action required by the Datadog integration, AWS returns `AccessDenied` for that action, and the integration tile may show `Datadog is not authorized to monitor some of your services` even when the integration role policy appears to grant the action.
+
+To check whether a permissions boundary is attached to your integration role:
+
+- **Console**: In the AWS IAM console, open the role, and check the **Permissions boundary** tab.
+- **CLI**: Run the following command:
+  ```
+  aws iam get-role --role-name <DATADOG-INTEGRATION-ROLE> \
+    --query 'Role.{PermissionsBoundary:PermissionsBoundary,RoleName:RoleName}'
+  ```
+
+To resolve the issue, coordinate with your IAM or security team to ensure the boundary policy includes the required Datadog integration actions.
+
 <div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
 \*{{% mainland-china-disclaimer %}}
@@ -142,6 +168,11 @@ This policy defines the permissions necessary for the Datadog integration role t
 [5]: /integrations/amazon_web_services/#resource-collection
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [7]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
+[8]: /getting_started/site/
+[9]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
+[10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+[11]: /integrations/guide/aws-integration-troubleshooting/#missing-metrics
+[12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
@@ -177,6 +208,7 @@ Changing the access type on an existing AWS account is a destructive operation. 
 \*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
 {{% /tab %}}
 {{< /tabs >}}
 

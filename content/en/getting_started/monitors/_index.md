@@ -35,7 +35,7 @@ This guide covers:
 
 ## Prerequisites
 
-Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to **[Integrations > Agent][3]** to view installation instructions.
+Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][3] to view installation instructions.
 
 To verify that the Datadog Agent is running, check that your [Infrastructure List][4] in Datadog is populated.
 
@@ -50,12 +50,12 @@ Automatic Monitors can include:
 - Kubernetes monitors (pod restarts, node health)
 - APM monitors (error rates or latency per service)
 
-You can view these monitors immediately on the Datadog [**Monitors**][17] page.
+You can view these monitors immediately on the Datadog [{{< ui >}}Monitors{{< /ui >}}][17] page.
 From there, you can edit, clone, or disable them like any other monitor.
 
 ## Create a monitor
 
-To create a monitor, navigate to **[Monitors > New Monitor][5]** and select **Metric**.
+To create a monitor, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][5] and select {{< ui >}}Metric{{< /ui >}}.
 
 ## Configure
 
@@ -69,7 +69,7 @@ The main components of monitor configuration are:
 
 ### Choose the detection method
 
-When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
+When you create a metric monitor, {{< ui >}}Threshold Alert{{< /ui >}} is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
 
 ### Define the metric
 
@@ -123,13 +123,13 @@ Send notifications to your team through email, Slack, PagerDuty, and more. You c
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members using the `@team` handle.
+To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
 ### Permissions
 
-Click **Edit Access** to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select `Notify` to be alerted when the monitor is modified.
+Click {{< ui >}}Edit Access{{< /ui >}} to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select {{< ui >}}Notify{{< /ui >}} to be alerted when the monitor is modified.
 
 {{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
 

@@ -50,12 +50,15 @@ pnpm add @datadog/openfeature-browser @openfeature/angular-sdk @openfeature/web-
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials:
+Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```typescript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 
 const provider = new DatadogProvider({
+  // Required client-side Datadog credentials
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
@@ -70,6 +73,8 @@ Import the `OpenFeatureModule` in your Angular module and configure it using the
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an evaluation context. The evaluation context includes user or session information used to determine which flag variations should be returned. Reference these attributes in your targeting rules to control who sees each variant.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 <div class="alert alert-info">The <code>targetingKey</code> is used as the randomization subject for percentage-based targeting. When a flag targets a percentage of subjects (for example, 50%), the <code>targetingKey</code> determines which "bucket" a user falls into. Users with the same <code>targetingKey</code> always receive the same variant for a given flag.</div>
 
@@ -489,9 +494,67 @@ export class MyComponent {
 }
 {{< /code-block >}}
 
+## Configure browser provider options
+
+The Angular provider uses the Datadog browser provider, which also supports these optional settings:
+
+| Option | Default | Use |
+| --- | --- | --- |
+| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
+| `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
+| `customHeaders` | unset | Add headers to flag-fetch requests. |
+| `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` is exported from `@openfeature/web-sdk`, which is already installed for Angular Feature Flags.
+
+{{< code-block lang="typescript" >}}
+import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
+import { FeatureFlagService, OpenFeatureModule } from '@openfeature/angular-sdk';
+import { TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+};
+
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    imports: [
+      OpenFeatureModule.forRoot({
+        provider: new TypedInMemoryProvider(flags),
+        context: { targetingKey: 'test-user' },
+      }),
+    ],
+  }).compileComponents();
+});
+
+afterEach(() => {
+  TestBed.resetTestingModule();
+});
+
+it('uses in-memory flag values', async () => {
+  const flagService = TestBed.inject(FeatureFlagService);
+  const details = await firstValueFrom(flagService.getBooleanDetails('new_checkout_button', false));
+
+  expect(details.value).toBe(true);
+});
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Register the in-memory provider before injecting services or rendering components that read flags.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/docs/reference/sdks/client/web/angular/
-
+[2]: /account_management/api-app-keys/#client-tokens

@@ -1,5 +1,6 @@
 ---
 title: Metrics Units
+description: "Set units on your metrics so values display at the right order of magnitude on graphs and widgets."
 aliases:
 - /developers/metrics/metrics_units
 - /developers/metrics/units/
@@ -18,7 +19,7 @@ Metric units are displayed in places such as on timeseries graphs, query value w
 
 {{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units" style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: k, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
 
 For example, if you have a datapoint that is 3,000,000,000:
 
@@ -29,11 +30,11 @@ Click the full screen button on the top right-hand corner of the graph to see th
 
 {{< img src="metrics/units/metrics_units.png" alt="The units of a metric graph in full screen mode" style="width:100%;">}}
 
-On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 {{< img src="metrics/units/metrics_info.png" alt="The Metrics Info option from the expanded context menu (three vertical dots)" style="width:100%;">}}
 
-To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click **Edit** under **Metadata** and select a unit, such as `bit` or `byte` from the dropdown menu.
+To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click {{< ui >}}Edit{{< /ui >}} under {{< ui >}}Metadata{{< /ui >}} and select a unit, such as `bit` or `byte` from the dropdown menu.
 
 ## Unit list
 
@@ -66,7 +67,7 @@ The following units may be associated with metrics submitted to Datadog:
 
 ### Unitless formatting
 
-For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
+For unitless metrics, Datadog uses the [SI prefixes][2] `k`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
 
 #### Examples
 
@@ -74,7 +75,7 @@ For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. 
 |------------------------|-----------|
 | 1                      | 1         |
 | 2.7182818284           | 2.72      |
-| 1337                   | 1.34K     |
+| 1337                   | 1.34k     |
 | 31536000               | 31.54M    |
 | 4294967296             | 4.29G     |
 | 18446744073709552000   | 2e19      |
@@ -128,3 +129,4 @@ Time units between a minute and a year are split into multiple units to be more 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
 [3]: /dashboards/guide/unit-override/
+

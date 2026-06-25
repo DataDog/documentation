@@ -7,7 +7,7 @@ function initCopyCode () {
     addCopyButton(['shell', 'json', 'yaml', 'sql', 'bash', 'hcl', 'python'])
 
     // Add Event Listener
-    const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal .copy-icon']);
+    const copyButtons = document.querySelectorAll(['.js-copy-button', '.js-copy-inline-button', '#tryRuleModal .copy-icon']);
 
     if (copyButtons.length) {
         copyButtons.forEach(btn => {
@@ -60,6 +60,7 @@ function copyCode (btn){
 
 function getCode (btn){
     return btn.closest('.code-snippet')?.querySelector('code')  // for markdown fenced code blocks
+    || btn.closest('.copyable-inline-code')?.querySelector('code')  // for inline copyable code
     || btn.previousElementSibling.querySelector('td:last-child code'); // for try-rule modal code examples on the static analysis rule pages
 }
 
@@ -70,6 +71,18 @@ function updateCopyBtnText(btn){
         setTimeout(function() {
             btn.textContent = "Copy"
         }, 1000)
+    }else if(btn?.classList.contains('js-copy-inline-button')){
+        // if inline copy button clicked, swap icons
+        const copyIcon = btn.querySelector('.icon-copy-wui');
+        const checkIcon = btn.querySelector('.icon-check-bold');
+        if (copyIcon && checkIcon) {
+            copyIcon.style.display = 'none';
+            checkIcon.style.display = 'inline';
+            setTimeout(function() {
+                copyIcon.style.display = 'inline';
+                checkIcon.style.display = 'none';
+            }, 1000)
+        }
     }else{
         // if copy icon clicked in the try-rule modal, change the tooltip
         const copyTooltip = Tooltip.getInstance(btn);

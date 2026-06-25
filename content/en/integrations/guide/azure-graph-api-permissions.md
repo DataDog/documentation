@@ -1,5 +1,6 @@
 ---
 title: Microsoft Graph API Permissions for Monitoring Azure
+description: "Grant Microsoft Graph API permissions to your Azure app registration so the Datadog-Azure integration can fetch tenant details."
 
 further_reading:
   - link: "/integrations/azure/"
@@ -18,10 +19,16 @@ To fetch Azure app registration details, the [Datadog-Azure integration][1] requ
 3. Click **+ Add a permission**.
 4. In the panel that opens, select **Microsoft Graph**.
 5. On the next page, select **Application permissions**. Then, under _Select permissions_, search for and enable each of the following permissions. 
+   - `AdministrativeUnit.Read.All`
    - `Application.Read.All`
+   - `AuditLog.Read.All`
    - `Directory.Read.All`
+   - `Domain.Read.All`
    - `Group.Read.All`
    - `Policy.Read.All`
+   - `PrivilegedAssignmentSchedule.Read.AzureADGroup`
+   - `PrivilegedEligibilitySchedule.Read.AzureADGroup`
+   - `RoleManagement.Read.All`
    - `User.Read.All`
      
    Click the checkbox on the left, and click the **Add permissions** button at the bottom to add each permission.

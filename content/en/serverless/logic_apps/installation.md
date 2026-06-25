@@ -95,9 +95,13 @@ See [Log Indexes][6] for more information.
 
 **Note**: Indexing logs may incur additional costs. Consider your retention requirements and budget when configuring indexes.
 
-## See your Logic App metrics, logs, and traces in Datadog
+## See your Logic App traces in Datadog
 
-After invoking your Logic App, go to the [**Serverless app**][2] in Datadog. Search for `service:<CUSTOM_VALUE>` to see the relevant logs and traces associated with that Logic App. If you set the `service` tag on your Logic App to a custom value, search for `service:<CUSTOM_VALUE>`.
+After invoking your Logic App:
+
+1. In Datadog, go to [**APM > Traces**][4].
+2. Select **Live Search** in the upper right corner.
+3. Search for `operation_name:azure.logicapps` to find your traces.
 
 If you cannot see your traces, see [Troubleshooting][7].
 
@@ -106,7 +110,6 @@ If you cannot see your traces, see [Troubleshooting][7].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/azure-automated-log-forwarding/
-[2]: https://app.datadoghq.com/functions
 [3]: /integrations/azure/
 [4]: https://app.datadoghq.com/apm/traces?query=operation_name%3Aazure.logicapps
 [5]: /tracing/trace_pipeline/trace_retention/
