@@ -25,11 +25,10 @@ Configure the Splunk HEC destination when you [set up a pipeline][5]. You can se
 
 After you select the Splunk HEC destination in the pipeline UI:
 
-1. For the **Token strategy** dropdown menu:
-	- Only select **From Source** if you are using a [Splunk HEC source][8] and have enabled **Store HEC token** on the source. Otherwise, an error occurs and you cannot proceed to install the Worker. This option forwards the token received by Observability Pipelines onto the Splunk HEC destination.
-	- If you use the default **Custom** token strategy, enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-
+1. For the {{< ui >}}Token strategy{{< /ui >}} dropdown menu:
+	- Only select {{< ui >}}From Source{{< /ui >}} if you are using a [Splunk HEC source][8] and have enabled {{< ui >}}Store HEC token{{< /ui >}} on the source. Otherwise, an error occurs and you cannot proceed to install the Worker. This option forwards the token received by Observability Pipelines onto the Splunk HEC destination.
+	- If you use the default {{< ui >}}Custom{{< /ui >}} token strategy, enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
@@ -49,8 +48,8 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 
 #### Encoding
 
-Select the **Encoding** in the dropdown menu (**JSON** or **Raw**).
-- If you selected **JSON**, optionally click **Add Field** to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
+Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}}).
+- If you selected {{< ui >}}JSON{{< /ui >}}, optionally click {{< ui >}}Add Field{{< /ui >}} to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
 
 #### Buffering
 
@@ -74,9 +73,9 @@ Select the **Encoding** in the dropdown menu (**JSON** or **Raw**).
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 

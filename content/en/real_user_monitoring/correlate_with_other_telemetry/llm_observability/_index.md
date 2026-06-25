@@ -109,8 +109,8 @@ async def agent_loop(
 ## Navigating between RUM and Agent Observability
 After configuration is complete, you can navigate between correlated data:
 
-- **From RUM to LLM**: In a RUM session, click the "LLM Traces" button in the side panel header to view associated AI interactions.
-- **From LLM to RUM**: In an LLM trace, click the "RUM Session" link to view the corresponding user session replay.
+- **From RUM to LLM**: In a RUM session, click the {{< ui >}}LLM Traces{{< /ui >}} button in the side panel header to view associated AI interactions.
+- **From LLM to RUM**: In an LLM trace, click the {{< ui >}}RUM Session{{< /ui >}} link to view the corresponding user session replay.
 
 ## Further reading
 

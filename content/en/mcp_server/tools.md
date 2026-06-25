@@ -446,6 +446,21 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -712,6 +727,15 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
 
 ## Feature Flags
 
@@ -1168,23 +1192,43 @@ Returns the authoring reference and schema for detection rules. Covers supported
 - Show me the schema for sequence detection rules.
 - What tag conventions and query syntax does the detection rules API use?
 
-### `list_datadog_security_detection_rules`
+### `get_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
-- Which rules are configured for impossible travel detection?
-
-### `get_datadog_security_detection_rule`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-
 - Get the full definition of detection rule `abc-123-def`.
-- Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
+
+### `create_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+
+- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
+- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
+- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+
+### `update_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
+- Update the threshold on my brute force detection rule from 10 to 20 failed logins.
+- Add a new case to detection rule `abc-123-def` that fires at critical severity.
+- Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+
+- Delete detection rule `abc-123-def`.
+- Remove these three test detection rules I created earlier.
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
@@ -1366,6 +1410,23 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
+
+### `get_datadog_code_coverage_pr_summary`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+- Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
+- What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches per-file code coverage line data for a repository commit, branch, or pull request. Returns executable lines, covered lines, and added lines for each file. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided to filter results.
+
+- Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
+- Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
@@ -1579,3 +1640,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
+[64]: /cloud_cost_management/

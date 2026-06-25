@@ -31,7 +31,7 @@ After you select the Amazon Data Firehose source in the pipeline UI, enter the i
 
 #### AWS authentication
 
-Select an **AWS authentication** option. If you select **Assume role**:
+Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >}}Assume role{{< /ui >}}:
 1. Enter the ARN of the IAM role you want to assume.
 1. Optionally, enter the assumed role session name and external ID.
 

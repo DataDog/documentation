@@ -5,10 +5,6 @@ aliases:
 ---
 
 ## Suggested code fixes from Bits Code
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Suggested code fixes from Bits Code is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 After Bits Investigation helps you identify a root cause, it can also help you take action as quickly as possible.
 
 Bits Investigation integrates with [Bits Code][2] to automatically generate code fixes. Bits Code connects to GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.

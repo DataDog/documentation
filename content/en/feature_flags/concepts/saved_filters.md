@@ -74,7 +74,7 @@ A single edit can change targeting behavior across many flags at once.
 
 Editing saved filters requires feature flag write access. Governance settings on the flags that use a filter can block some changes:
 
-- **Permission restrictions**: A saved filter can have its own access restrictions. If you do not have permission to edit a filter, request access from the filter's panel.
+- **Permission restrictions on downstream flags**: If a saved filter is used by a flag with granular permission restrictions, you must be among the users or teams allowed to modify that flag. If you are not, you cannot edit the saved filter.
 - **Change approvals on downstream flags**: If a saved filter is used by flags that require approval for changes, edits to the filter are blocked until those requirements are satisfied. This helps prevent an upstream filter change from bypassing approval on the flags that depend on it.
 
 ## Archive a saved filter

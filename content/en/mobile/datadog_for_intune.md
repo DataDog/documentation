@@ -26,9 +26,9 @@ For those looking to create a custom configuration using the mobile app bundle I
 To get started, an Intune and Azure admin needs to configure the required settings. These are the **minimum** necessary steps to ensure Datadog for Intune functions correctly. Additional policies, such as those for configuration or conditional access, can be set up later.
 
 ### Step 1: Add Datadog for Intune to Microsoft Intune admin center
-1. Open your [Microsoft Intune admin center][1], navigate to the **Apps** tab, and click **Add** under the appropriate **App type** (iOS/iPadOS or Android):
-   - For iOS/iPadOS: Select **"iOS store app"**, then search for "Datadog Intune."
-   - For Android: Select **"Android store app"**, then copy the required details from the [Google Play store page][2].
+1. Open your [Microsoft Intune admin center][1], navigate to the {{< ui >}}Apps{{< /ui >}} tab, and click {{< ui >}}Add{{< /ui >}} under the appropriate {{< ui >}}App type{{< /ui >}} (iOS/iPadOS or Android):
+   - For iOS/iPadOS: Select {{< ui >}}iOS store app{{< /ui >}}, then search for "Datadog Intune."
+   - For Android: Select {{< ui >}}Android store app{{< /ui >}}, then copy the required details from the [Google Play store page][2].
 2. Assign the app to the relevant users and/or groups.
 
 For additional guidance on adding an application to Intune, read Microsoft's [Intune Quickstart Guide][3].
@@ -36,11 +36,11 @@ For additional guidance on adding an application to Intune, read Microsoft's [In
 ### Step 2: Apply an app protection policy
 To enable users to register and sign in securely, an **App Protection Policy** must be applied. This ensures access to the app is protected by Microsoft Intune security settings.
 
-1. In the [admin center][1], go to the **Apps** tab and select **App Protection Policies**.
+1. In the [admin center][1], go to the {{< ui >}}Apps{{< /ui >}} tab and select {{< ui >}}App Protection Policies{{< /ui >}}.
 2. Create a policy for the appropriate platform (iOS and Android require separate policies).
-3. Click **Select custom apps** and add **Datadog Intune** to the policy. If you can't see it, ensure you have completed [step 1](#step-1-add-datadog-for-intune-to-microsoft-intune-admin-center).
+3. Click {{< ui >}}Select custom apps{{< /ui >}} and add **Datadog Intune** to the policy. If you can't see it, ensure you have completed [step 1](#step-1-add-datadog-for-intune-to-microsoft-intune-admin-center).
 4. Configure your **security settings** and assign the policy to targeted users or groups.
-5. Click **Save**.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note:** It may take some time for the new App Protection Policy to be applied to all devices. You can verify the setup by following [Microsoft's guidance][5].
 
@@ -49,10 +49,10 @@ In this step, switch from the Intune admin center to the Azure portal for Micros
 
 Admin consent is required before users can register successfully. Follow these steps:
 
-1. Open [Microsoft Entra-ID][7] (formerly Azure Active Directory) and go to **Enterprise Applications**.
+1. Open [Microsoft Entra-ID][7] (formerly Azure Active Directory) and go to {{< ui >}}Enterprise Applications{{< /ui >}}.
 2. Search for **"Datadog"**:
    - If it isn't listed, click **Add**, then search for "Datadog" in the Microsoft Entra Gallery.
-3. Select **Permissions**, then click **Grant admin consent for \<your organization name\>**.
+3. Select {{< ui >}}Permissions{{< /ui >}}, then click {{< ui >}}Grant admin consent for \<your organization name\>{{< /ui >}}.
 
 For additional support with application management settings, see the [Microsoft documentation][8].
 
@@ -67,7 +67,7 @@ Permissions are automatically added when configuring the application:
 | Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User's App Management device | Delegated |
 
 **Notes:**
-- The mobile app only uses these two permissions. When granting consent you may see more permissions, because the mobile app shares the same Microsoft Entra application as the web app and the [Microsoft Teams Integration](https://docs.datadoghq.com/integrations/microsoft_teams). If you're not using it, you can revoke those permissions from the **Permissions** tab on the page in [step 3](#step-3-grant-admin-consent-for-your-organization).
+- The mobile app only uses these two permissions. When granting consent you may see more permissions, because the mobile app shares the same Microsoft Entra application as the web app and the [Microsoft Teams Integration](https://docs.datadoghq.com/integrations/microsoft_teams). If you're not using it, you can revoke those permissions from the {{< ui >}}Permissions{{< /ui >}} tab on the page in [step 3](#step-3-grant-admin-consent-for-your-organization).
 - While `DeviceManagementManagedApps.Read` exists, it is an MS Graph API permission, and the mobile app requires a MAM permission. `DeviceManagementManagedApps.ReadWrite` is the only MAM permission available, but the mobile app only reads and doesn't write anything. For more information on how to grant `DeviceManagementManagedApps.ReadWrite` permission, follow these [steps][15].
 
 ## Deploying Datadog Intune to mobile devices
@@ -92,8 +92,8 @@ If users encounter issues while registering their devices for Datadog Intune, ad
 
 If registration issues persist, contact us at [support@datadoghq.com][14] with the Intune Diagnostics attached. To collect diagnostics:
 
-1. On the login screen, tap **View Intune Diagnostics.**
-2. Select **Get Started** and then **Share Logs.**
+1. On the login screen, tap {{< ui >}}View Intune Diagnostics{{< /ui >}}.
+2. Select {{< ui >}}Get Started{{< /ui >}} and then {{< ui >}}Share Logs{{< /ui >}}.
 
 ## Further Reading
 
