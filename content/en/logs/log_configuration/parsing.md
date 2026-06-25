@@ -531,7 +531,12 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
   "app": "program",
   "logger": {
     "thread_id": 123
-  }
+  },
+  "server": "server.1"
+  "method": "GET",
+  "status_code": 200,
+  "url": "https://app.datadoghq.com/logs/pipelines",
+  "duration": 123456
 }
 ```
 
