@@ -69,9 +69,51 @@ public void onUserInteraction() {
 {% /tab %}
 {% /tabs %}
 
-### Enrich resources
+### Capture resource headers
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the builder of the `DatadogInterceptor`.
+When [tracking resources automatically][6], you can capture HTTP request and response headers on RUM Resources by calling `trackResourceHeaders` on the `DatadogInterceptor.Builder`.
+
+Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
+
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+val interceptor = DatadogInterceptor.Builder(tracedHosts)
+    .trackResourceHeaders()
+    .build()
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+DatadogInterceptor interceptor = new DatadogInterceptor.Builder(tracedHosts)
+    .trackResourceHeaders()
+    .build();
+```
+
+{% /tab %}
+{% /tabs %}
+
+With no arguments, `trackResourceHeaders` captures a predefined set of common headers:
+
+| Direction | Headers |
+|-----------|---------|
+| Request | `cache-control`, `content-type` |
+| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
+
+To capture additional headers on top of the defaults, configure a `ResourceHeadersExtractor` and pass it to `trackResourceHeaders`. To skip the defaults, set `includeDefaults = false`.
+
+{% alert level="info" %}
+Sensitive headers, such as tokens and API keys, are filtered out automatically, even if you list them explicitly.
+{% /alert %}
+
+### Custom resource attributes
+
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` to the `DatadogInterceptor.Builder` to add custom attributes to each tracked network request.
+
+For example, if you want to surface an OkHttp request tag as a custom attribute on the resource, create an implementation as follows:
 
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -83,10 +125,7 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
         response: Response?,
         throwable: Throwable?
     ): Map<String, Any?> {
-        val headers = request.headers
-        return headers.names().associate {
-            "headers.${it.lowercase(Locale.US)}" to headers.values(it).first()
-        }
+        return mapOf("request.kind" to request.tag(String::class.java).orEmpty())
     }
 }
 ```
@@ -104,13 +143,8 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
             @Nullable Throwable throwable
     ) {
         Map<String, Object> result = new HashMap<>();
-        Headers headers = request.headers();
-
-        for (String key : headers.names()) {
-            String attrName = "headers." + key.toLowerCase(Locale.US);
-            result.put(attrName, headers.values(key).get(0));
-        }
-
+        String kind = request.tag(String.class);
+        result.put("request.kind", kind != null ? kind : "");
         return result;
     }
 }
@@ -274,7 +308,7 @@ You can use the following methods in `Configuration.Builder` when creating the D
 : Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 `useSite(DatadogSite)`
-: Switches target data to EU1, US1, US3, US5, US1_FED, AP1 and AP2 sites.
+: Switches target data to EU1, US1, US3, US5, US1_FED, US2_FED, AP1, and AP2 sites.
 
 `setFirstPartyHostsWithHeaderType`
 : Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.

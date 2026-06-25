@@ -8,7 +8,7 @@ algolia:
 ---
 
 <div class="alert alert-info">
-SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 </div>
 
 <div class="alert alert-danger">
@@ -25,7 +25,7 @@ For capabilities and limitations of this feature, see [SCIM][1].
 
 ## Prerequisites
 
-SCIM in Datadog is an advanced feature available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM in Datadog is an advanced feature available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 
 This documentation assumes your organization manages user identities using an identity provider.
 
@@ -78,10 +78,13 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 | `jobTitle`                       | `title`                        |
 | `mail`                           | `emails[type eq "work"].value` |
 | `displayName`                    | `name.formatted`               |
+| `AppRoleAssignmentsComplex([appRoleAssignments])` | `roles`               |
 
    {{< img src="/account_management/scim/ad-users-2.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
 7. After you set your mappings, click {{< ui >}}Save{{< /ui >}}.
+
+To provision a user's Datadog role (built-in or custom), map the `roles` attribute as shown above, using the `AppRoleAssignmentsComplex([appRoleAssignments])` expression for the Microsoft Entra ID attribute. Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9]. If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
 
 ### Group attributes
 
@@ -95,3 +98,4 @@ Group mapping is not supported.
 [6]: https://entra.microsoft.com/
 [7]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator
 [8]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior
+[9]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2

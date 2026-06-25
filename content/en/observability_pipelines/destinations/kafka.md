@@ -27,15 +27,17 @@ Common scenarios when you might use this destination:
 
 ## Setup
 
-Set up the Kafka destination and its environment variables when you [set up a pipeline][5]. The information below is configured in the pipelines UI.
+Configure the Kafka destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
-### Set up the destination
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-danger">Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+{{% observability_pipelines/secrets_env_var_note %}}
 
-1. Enter the identifier for your Kafka bootstrap servers. If you leave it blank, the [default](#set-secrets) is used.
+After you select the Kafka destination in the pipeline UI:
+
+1. Enter the identifier for your Kafka bootstrap servers. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the name of the topic you want to send logs to.
-1. In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
+1. In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select either {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw message{{< /ui >}} as the output format.
 
 {{< img src="observability_pipelines/destinations/kafka_settings.png" alt="The Kafka destination with sample values" style="width:30%;" >}}
 
@@ -47,15 +49,15 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ##### Enable SASL authentication
 
-1. Toggle the switch to enable **SASL Authentication**.
-1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#set-secrets) are used.
-1. Select the mechanism (**PLAIN**, **SCHRAM-SHA-256**, or **SCHRAM-SHA-512**) in the dropdown menu.
+1. Toggle the switch to enable {{< ui >}}SASL Authentication{{< /ui >}}.
+1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
+1. Select the mechanism ({{< ui >}}PLAIN{{< /ui >}}, {{< ui >}}SCHRAM-SHA-256{{< /ui >}}, or {{< ui >}}SCHRAM-SHA-512{{< /ui >}}) in the dropdown menu.
 
 ##### Enable compression
 
-1. Toggle switch to **Enable Compression**.
-1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
-1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
+1. Toggle switch to {{< ui >}}Enable Compression{{< /ui >}}.
+1. In the {{< ui >}}Compression Algorithm{{< /ui >}} dropdown menu, select a compression algorithm ({{< ui >}}gzip{{< /ui >}}, {{< ui >}}zstd{{< /ui >}}, {{< ui >}}lz4{{< /ui >}}, or {{< ui >}}snappy{{< /ui >}}).
+1. (Optional) Select a {{< ui >}}Compression Level{{< /ui >}} in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
 ##### Buffering
 
@@ -63,22 +65,22 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ##### Advanced options
 
-Click **Advanced** if you want to set any of the following fields:
+Click {{< ui >}}Advanced{{< /ui >}} if you want to set any of the following fields:
 
-1. **Message Key Field**: Specify which log field contains the message key for partitioning, grouping, and ordering.
-1. **Headers Key**: Specify which log field contains your Kafka headers. If left blank, no headers are written.
-1. **Message Timeout (ms)**: Local message timeout, in milliseconds. Default is `300,000 ms`.
-1. **Socket Timeout (ms)**: Default timeout, in milliseconds, for network requests. Default is `60,000 ms`.
-1. **Rate Limit Events**: The maximum number of requests the Kafka client can send within the rate limit time window. Default is no rate limit.
-1. **Rate Limit Time Window (secs)**: The time window used for the rate limit option.
+1. {{< ui >}}Message Key Field{{< /ui >}}: Specify which log field contains the message key for partitioning, grouping, and ordering.
+1. {{< ui >}}Headers Key{{< /ui >}}: Specify which log field contains your Kafka headers. If left blank, no headers are written.
+1. {{< ui >}}Message Timeout (ms){{< /ui >}}: Local message timeout, in milliseconds. Default is `300,000 ms`.
+1. {{< ui >}}Socket Timeout (ms){{< /ui >}}: Default timeout, in milliseconds, for network requests. Default is `60,000 ms`.
+1. {{< ui >}}Rate Limit Events{{< /ui >}}: The maximum number of requests the Kafka client can send within the rate limit time window. Default is no rate limit.
+1. {{< ui >}}Rate Limit Time Window (secs){{< /ui >}}: The time window used for the rate limit option.
     - This setting has no effect if the rate limit for events is not set.
-    - Default is `1 second` if **Rate Limit Events** is set, but **Rate Limit Time Window** is not set.
-1. To add additional [librdkafka options](#librdkafka-options), click **Add Option** and select an option in the dropdown menu.
+    - Default is `1 second` if {{< ui >}}Rate Limit Events{{< /ui >}} is set, but {{< ui >}}Rate Limit Time Window{{< /ui >}} is not set.
+1. To add additional [librdkafka options](#librdkafka-options), click {{< ui >}}Add Option{{< /ui >}} and select an option in the dropdown menu.
     1. Enter a value for that option.
     1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
-    1. Click **Add Option** to add another librdkafka option.
+    1. Click {{< ui >}}Add Option{{< /ui >}} to add another librdkafka option.
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -154,3 +156,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [8]: /observability_pipelines/monitoring/metrics/
 [9]: /observability_pipelines/destinations/#event-batching
+[10]: /observability_pipelines/configuration/set_up_pipelines/
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

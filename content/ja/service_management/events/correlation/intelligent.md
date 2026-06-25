@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: ドキュメント
   text: ケースのトリアージと通知について
 title: インテリジェントな相関付け
@@ -16,17 +16,17 @@ title: インテリジェントな相関付け
 1. そこから、自分の組織から作成されたインテリジェントな相関付けをプレビューすることができます。
 
 
-{{< img src="service_management/events/correlation/intelligent/intelligent_config_updated.png" alt="インテリジェントな相関付けの構成" style="width:100%;" >}}
+{{< img src="events/correlation/intelligent/intelligent_config_updated.png" alt="インテリジェントな相関付けの構成" style="width:100%;" >}}
 
 
 ## 最初のケースの受信
 
-{{< img src="service_management/events/correlation/intelligent/intelligent_project.png" alt="Event Management - Intelligent Correlation" style="width:100%;" >}}
+{{< img src="events/correlation/intelligent/intelligent_project.png" alt="Event Management - Intelligent Correlation" style="width:100%;" >}}
 
 [Event Correlations][3] に移動すると、**Intelligent Correlation** というプロジェクトが見つかります。このプロジェクトから、インテリジェントな相関付けにより作成されたケースを見ることができます。
 
 インテリジェントな相関付けは、関連するアラートを見つけた後、自動的にケースを生成します。
-{{< img src="service_management/events/correlation/intelligent/intelligent_correlation.png" alt="インテリジェントな相関付けから作成されたケースのケース詳細ページの Investigation タブに表示された関連アラート" style="width:100%;" >}}
+{{< img src="events/correlation/intelligent/intelligent_correlation.png" alt="インテリジェントな相関付けから作成されたケースのケース詳細ページの Investigation タブに表示された関連アラート" style="width:100%;" >}}
 
 
 

@@ -71,6 +71,10 @@ cascade:
     category: Documentation
     subcategory: Integrations
     tags: ['event viewer']
+- _target:
+    path: /integrations/confluent-cloud
+    lang: en
+  site_support_id: confluent_cloud_integration
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

@@ -25,6 +25,10 @@ further_reading:
     - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
       tag: Blog
       text: Accelerate investigations with AI-powered log parsing
+    - link: "https://learn.datadoghq.com/courses/log-explorer"
+      tag: "Learning Center"
+      text: "Getting Started with Log Explorer"
+
 ---
 
 ## Overview
@@ -35,7 +39,7 @@ The [**Log Explorer**][1] is your home base for log troubleshooting and explorat
 
 ## Search and filter
 
-**Search** and **Filter** on logs to narrow down, broaden, or shift your focus on a subset of logs tailored to your current interest.
+{{< ui >}}Search{{< /ui >}} and {{< ui >}}Filter{{< /ui >}} on logs to narrow down, broaden, or shift your focus on a subset of logs tailored to your current interest.
 
   - To learn more about searching for logs in the Log Explorer, read [Search Logs][3].
   - To start creating queries and using facets in the Log Explorer, read [Log Search Syntax][4].
@@ -43,19 +47,19 @@ The [**Log Explorer**][1] is your home base for log troubleshooting and explorat
 
 ## Analyze
 
-**Group** your queried logs into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. 
+{{< ui >}}Group{{< /ui >}} your queried logs into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. 
 
 To start identifying patterns and aggregating logs by subsets of events, see [Log Analytics][6].
 
 ## Visualize
 
-**Visualize** the outcome of your filters and aggregations to better understand your logs and gather decisive information. For example, you can view your logs in a list to organize your log data into columns, or in a timeseries graph to measure your log data over time. 
+{{< ui >}}Visualize{{< /ui >}} the outcome of your filters and aggregations to better understand your logs and gather decisive information. For example, you can view your logs in a list to organize your log data into columns, or in a timeseries graph to measure your log data over time. 
 
 To start visualizing log data in the Log Explorer, see [Log Visualizations][7].
 
 ## Export
 
-You can also **export** your Log Explorer view to reuse it later or in different contexts. 
+You can also {{< ui >}}export{{< /ui >}} your Log Explorer view to reuse it later or in different contexts. 
 
 To learn how to export your log queries and visualizations, see [Export Logs][8].
 

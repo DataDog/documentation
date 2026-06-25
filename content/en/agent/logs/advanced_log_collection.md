@@ -614,6 +614,7 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 **Note**:
 - The Agent requires read and execute permissions on a directory to list all the available files in it.
 - The path and exclude_paths values are case sensitive.
+- Starting in Agent version 7.76.0, recursive globs (`**`) are supported in `path` and `exclude_paths` when you set `logs_config.enable_recursive_glob: true` in `datadog.yaml`. This is disabled by default.
 
 ### Prioritize tailed files by modification time
 

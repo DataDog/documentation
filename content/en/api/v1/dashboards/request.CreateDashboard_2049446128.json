@@ -1,0 +1,36 @@
+{
+  "title": "Example-Dashboard",
+  "layout_type": "ordered",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "point_plot",
+        "requests": [
+          {
+            "request_type": "data_projection",
+            "query": {
+              "query_string": "service:web-store",
+              "data_source": "logs"
+            },
+            "projection": {
+              "type": "point_plot",
+              "dimensions": [
+                {
+                  "column": "host",
+                  "dimension": "group"
+                },
+                {
+                  "column": "@duration",
+                  "dimension": "y"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

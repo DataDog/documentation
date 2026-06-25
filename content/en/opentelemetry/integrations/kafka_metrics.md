@@ -271,7 +271,7 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 **Note:** In Datadog `-` gets translated to `_`. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
 
-See [OpenTelemetry Metrics Mapping][9] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][9].
 
 ## Full example configuration
 

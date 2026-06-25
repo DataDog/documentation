@@ -13,9 +13,9 @@ To view information about the Observability Pipelines Workers running for an act
 
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
-1. Click the **Workers** tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
-1. To view the Workers' statuses and versions, click the **Latest Deployment & Setup** tab.
-1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to Log Management.
+1. Click the {{< ui >}}Workers{{< /ui >}} tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
+1. To view the Workers' statuses and versions, click the {{< ui >}}Latest Deployment & Setup{{< /ui >}} tab.
+1. To see the Workers' logs, click the cog at the top right side of the page, then select {{< ui >}}View OPW Logs{{< /ui >}}. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to Log Management.
 
 ## Inspect events sent through your pipeline to identify setup issues
 
@@ -175,6 +175,16 @@ The quota processor is synchronized across all Workers in a Datadog organization
 - The Worker prints `Failed to sync quota state errors`.
 - [Contact support][20] if you want to increase the default number of Workers per organization.
 
+###  Error converting timestamp field
+
+If you are using the Databricks (Zerobus) destination and see a Worker error similar to the below, check if the timestamps on your logs are in string format:
+
+```
+Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
+```
+
+If your log timestamps are in string format and your Databricks table has a timestamp column declared as `TIMESTAMP` type, you must convert the string timestamp to timestamp format. See [Convert string timestamps to timestamp format][22] for more information.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -196,3 +206,4 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
 [21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
+[22]: /observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format

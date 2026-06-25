@@ -1,6 +1,7 @@
 ---
 title: Cdocs e2e tests
 draft: true
+private: true
 ---
 
 This folder contains a collection of pages used for e2e tests. These pages are not published to production.
@@ -46,6 +47,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * [Callout](/dd_e2e/cdocs/components/callout)
 * Variations of the callout component render as expected on initial page load.
 ---
+* [Card grid](/dd_e2e/cdocs/components/card_grid)
+* Variations of the card-grid and image-card components render as expected on initial page load.
+---
 * [Check mark](/dd_e2e/cdocs/components/check_mark)
 * Variations of the check mark component render as expected on initial page load.
 ---
@@ -57,6 +61,12 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 ---
 * [Definition list](/dd_e2e/cdocs/components/definition_list)
 * Variations of the definition list component render as expected on initial page load.
+---
+* [Glossary tooltip](/dd_e2e/cdocs/components/glossary_tooltip)
+* Variations of the glossary tooltip component render as expected on initial page load.
+---
+* [Icon](/dd_e2e/cdocs/components/icon)
+* Variations of the icon component render as expected on initial page load.
 ---
 * [Image](/dd_e2e/cdocs/components/image)
 * Variations of the image component render as expected on initial page load.

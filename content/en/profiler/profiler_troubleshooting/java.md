@@ -215,6 +215,8 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+<div class="alert alert-info">JFR template overrides are applied at JVM startup. After you create or modify an override file, restart the application for the changes to take effect.</div>
+
 ### Advanced Linux settings for CPU profiles
 
 The CPU profiler engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
@@ -280,7 +282,7 @@ jdk.OldObjectSample#enabled=false
 
 {{% /tab %}}
 {{% tab "Datadog Profiler" %}}
-If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
+If you are using the preview feature of live heap profiling, you can tune the overhead by changing the percentage
 of the tracked allocation samples.
 ```shell
 # track only 10% of the allocation samples

@@ -15,6 +15,10 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/log-analytics-with-notebooks
   tag: Learning Center
   text: Log Analytics with Notebooks
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
+
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
@@ -34,10 +38,10 @@ Notebooks are collaborative text editors that allow you to embed Datadog graphs 
 
 ## Adding data to your notebook
 
-To run complex queries in a notebook, first add a **Data Source** cell. There are two ways to do this:
+To run complex queries in a notebook, first add a {{< ui >}}Data Source{{< /ui >}} cell. There are two ways to do this:
 
 **From a notebook**:
-1. Type `/datasource` and press <kbd>Enter</kbd>, or click the **Data Source** tile at the bottom of the page.
+1. Type `/datasource` and press <kbd>Enter</kbd>, or click the {{< ui >}}Data Source{{< /ui >}} tile at the bottom of the page.
 2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.<br/>
 **Note**: if there is a data source you want that is not available, request it [here][5].
 3. Enter your query. Reserved attributes from the filtered logs are automatically added as columns.
@@ -45,8 +49,8 @@ To run complex queries in a notebook, first add a **Data Source** cell. There ar
 **From the [Log Explorer][1]**:
 
 1. Enter your query in the Log Explorer.
-2. Click **Analyze in Notebooks**.
-3. Check the **Use as a computational data source** box and select the notebook you want to use.
+2. Click {{< ui >}}Analyze in Notebooks{{< /ui >}}.
+3. Check the {{< ui >}}Use as a computational data source{{< /ui >}} box and select the notebook you want to use.
 4. A data source cell is added to the selected notebook with the same query you entered in the Log Explorer. By default, the columns shown in the Log Explorer are included in the data source cell.
 
 ## Configuring a data source cell
@@ -67,20 +71,20 @@ Regardless of how you create the data source cell, you can modify the query usin
 
 You can add or modify columns in your data source cell. There are two ways to adjust the columns:
 
-- In the preview section, click **columns** to search through available attributes for your data source.
+- In the preview section, click {{< ui >}}columns{{< /ui >}} to search through available attributes for your data source.
 - In the preview, click on a row to open the detail side panel. Click the attribute you want to add as a column, and from the pop up option, select Add "@your_column" to your "@your_datasource" dataset.
 
 {{< img src="/notebooks/analysis_features/add_column_to_dataset.png" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}}
 
 ### Calculated fields queries
 
-You can take existing Log Explorer queries that include [Calculated Fields][4] and open them in Notebooks. To transfer these queries from the Log Explorer, click **More** and select **Analyze in Notebooks**. The Calculated Fields automatically convert into a Transformation cell.
+You can take existing Log Explorer queries that include [Calculated Fields][4] and open them in Notebooks. To transfer these queries from the Log Explorer, click {{< ui >}}More{{< /ui >}} and select {{< ui >}}Analyze in Notebooks{{< /ui >}}. The Calculated Fields automatically convert into a Transformation cell.
 
 You can also create Calculated Fields directly within a notebook to define a computed field from existing data sources. These fields can be reused in subsequent analysis:
 1. Open a Workspace with a data source.
 1. Add a [Transformation cell](#transformation-cell).
-1. Click **More operations**.
-1. Select **Calculate**.
+1. Click {{< ui >}}More operations{{< /ui >}}.
+1. Select {{< ui >}}Calculate{{< /ui >}}.
 
 {{< img src="/logs/workspace/calculated_fields_transformation_cell.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
 
@@ -111,10 +115,10 @@ After adding the transformation cell, you can add any number of transformation o
 
 You can also transform your data using SQL by adding an analysis cell to your notebook.
 
-1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd>, or click the **SQL Query** tile at the bottom of the page.
+1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
 2. In the source dataset dropdown, select the data source you want to transform.
 3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].
-4. Click **Run** in the top-right corner of the analysis cell to execute your query.
+4. Click {{< ui >}}Run{{< /ui >}} in the top-right corner of the analysis cell to execute your query.
 
 {{< img src="/notebooks/analysis_features/analysis_cell_example.png" alt="Example of an analysis cell with SQL query transforming data in a notebook" style="width:100%;" >}}
 
@@ -124,21 +128,21 @@ You can graph the data you've transformed using analysis cells inside a notebook
 
 To graph your data:
 
-1. Type `/graph` and press <kbd>Enter</kbd>, or click the **graph dataset** tile at the bottom of the page.
+1. Type `/graph` and press <kbd>Enter</kbd>, or click the {{< ui >}}graph dataset{{< /ui >}} tile at the bottom of the page.
 2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.
 3. Select your visualization type from the graph menu and press <kbd>Enter</kbd>.
 
 ## Viewing and exporting data
 
-For any analysis cell that includes a dataset preview, you can view the full 100-row preview by clicking the **View dataset** button.
+For any analysis cell that includes a dataset preview, you can view the full 100-row preview by clicking the {{< ui >}}View dataset{{< /ui >}} button.
 
 ### Export your query to a dashboard
 
-You can save the results of any analysis cell to a dashboard by clicking **Save to Dashboard** and selecting an existing dashboard, or create a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard.
+You can save the results of any analysis cell to a dashboard by clicking {{< ui >}}Save to Dashboard{{< /ui >}} and selecting an existing dashboard, or create a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard.
 
 {{< img src="/notebooks/analysis_features/analysis_cell_save_to_dashboard.png" alt="Example of saving an analysis cell to a dashboard from a notebook" style="width:100%;" >}}
 
-If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating **unpublished changes**. After you publish those changes, the updates sync to **all** dashboards where the query is used.
+If you update the published cell or any upstream cells, a badge appears in the upper-right corner of the cell indicating {{< ui >}}unpublished changes{{< /ui >}}. After you publish those changes, the updates sync to **all** dashboards where the query is used.
 
 **Note**: By default, the dataset is tied to the global time frame of the **dashboard**, not to the time frame of the notebook. However, you have the ability to set a custom time frame on the dashboard widget.
 
@@ -159,7 +163,7 @@ With scheduled reports, you can automatically receive query results from noteboo
 
 To schedule a report on an analysis cell:
 
-1. Open the dropdown next to **Save to Dashboard** and select **Schedule report**.
+1. Open the dropdown next to {{< ui >}}Save to Dashboard{{< /ui >}} and select {{< ui >}}Schedule report{{< /ui >}}.
 
    {{< img src="/notebooks/analysis_features/schedule_report_from_cell_v2.png" alt="Dropdown menu showing the Schedule report option highlighted" style="width:50%;" >}}
 
@@ -173,7 +177,7 @@ To schedule a report on an analysis cell:
 
 4. Add email recipients. 
     - The email associated with your Datadog account is included automatically. To remove it, hover over your email and click the trash icon. 
-    - To preview the report before saving the schedule, click **Send Test Email**. 
+    - To preview the report before saving the schedule, click {{< ui >}}Send Test Email{{< /ui >}}. 
 
     **Note**: Only Enterprise and Pro accounts can send reports to email addresses that aren't associated with registered Datadog users.
     
@@ -181,26 +185,26 @@ To schedule a report on an analysis cell:
     {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:90%;" >}}
 
 5. Add Slack recipients. 
-   - Click on the **Slack** tab, then choose a workspace and channel. 
+   - Click on the {{< ui >}}Slack{{< /ui >}} tab, then choose a workspace and channel. 
      - If no workspaces appear, verify that the Datadog [Slack Integration][6] is installed. 
      - Public channels are listed automatically. To send to a private channel, invite the Datadog Slack bot to your channel.
-   - To preview the message, add a channel and click **Send Test Message.**
+   - To preview the message, add a channel and click {{< ui >}}Send Test Message{{< /ui >}}.
 
    {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Slack recipient selection in the report scheduling modal" style="width:100%;" >}}
 
 6. Add Microsoft Teams recipients.
-   - Click on the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel**.
+   - Click on the {{< ui >}}Microsoft Teams{{< /ui >}} tab, then choose a {{< ui >}}Tenant{{< /ui >}}, {{< ui >}}Team{{< /ui >}}, and {{< ui >}}Channel{{< /ui >}}.
      - Ensure the [Microsoft Teams integration][7] is installed in your Datadog organization.
      - The Datadog app must be added to the target Team in Microsoft Teams.
-   - To preview the message, add a channel and click **Send Test Message.**
+   - To preview the message, add a channel and click {{< ui >}}Send Test Message{{< /ui >}}.
 
 7.  Save your schedule.
 
-You can view, search, edit, and delete existing report schedules from the **Reports** tab:
+You can view, search, edit, and delete existing report schedules from the {{< ui >}}Reports{{< /ui >}} tab:
 
 {{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:90%;" >}}
 
-**Note**: To schedule reports and view other users' schedules, users need the **CSV Report Schedules Write** permission. To edit other users' schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
+**Note**: To schedule reports and view other users' schedules, users need the `CSV Report Schedules Write` permission. To edit other users' schedules, users need the `CSV Report Schedules Manage` permission. These permissions can be granted by a user with the `Org Management` permission.
 
 ## Further reading
 

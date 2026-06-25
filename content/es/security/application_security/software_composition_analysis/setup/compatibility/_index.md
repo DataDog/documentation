@@ -18,7 +18,15 @@ Se admiten las siguientes capacidades ASM asociadas a la librería de rastreo de
 
 Selecciona el lenguaje de tu aplicación para obtener más información sobre la compatibilidad de marcos y funciones.
 
-{{< partial name="security-platform/appsec-languages-sca.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="php/" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+{{< /card-grid >}}
 
 <br>
 

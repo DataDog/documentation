@@ -11,6 +11,9 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+  - link: "https://learn.datadoghq.com/courses/dd-api-automation-iac"
+    tag: "Learning Center"
+    text: "Datadog API: Automation and Infrastructure as Code"
 cascade:
     algolia:
         rank: 10
@@ -20,7 +23,7 @@ algolia:
   tags: ['api']
 ---
 
-{{< h2 >}}API Reference{{< /h2 >}}
+{{< h2-with-copy-btn >}}API Reference{{< /h2-with-copy-btn >}}
 
 The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call the API, uses status codes to indicate the success or failure of requests, returns JSON from all requests, and uses standard HTTP response codes. Use the Datadog API to access the Datadog platform programmatically.
 
@@ -235,7 +238,14 @@ async fn main() {
 
 Or check out the libraries directly:
 
-{{< partial name="api/sdk-languages.html" >}}
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 </br>
 Trying to get started with the application instead? Check out Datadog's general [Getting Started docs][7].
 

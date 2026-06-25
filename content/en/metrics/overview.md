@@ -1,5 +1,6 @@
 ---
 title: Metrics Overview Page
+description: "Use the Metrics Overview page to explore your metric sources, generate metrics from Datadog products, and enable advanced platform features."
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
@@ -31,7 +32,7 @@ This section shows all of your metric sources, the additional processing and con
 
 ### Metric Sources
 
-The **Metric Sources** column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][2] scoped to that source. Your Datadog metrics can originate from the following sources:
+The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click on any of the sources to open the [Summary page][2] scoped to that source. Your Datadog metrics can originate from the following sources:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][3] collects metrics from the hosts where it's installed and forwards them to Datadog. These metrics could originate from:
@@ -55,10 +56,10 @@ In total, Datadog has more than {{< translate key="integration_count" >}} integr
 
 ### Configurable Processing
 
-The **Configurable Processing** column lists the various advanced configuration options that you can use to increase the value of your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
+The {{< ui >}}Configurable Processing{{< /ui >}} column lists the various advanced configuration options that you can use to increase the value of your metrics. Click on any of the options for more information and a link to the relevant configuration screen.
 
 {{% collapse-content title="Optimize your custom metrics costs with Metrics without Limits™" level="h4" %}}
-[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization. Your use of Metrics without Limits™ is reflected in the top section of the Overview page as **Selected Metrics**. For more information about managing your custom metrics costs, see [Best Practices for Custom Metrics Governance][22].
+[Metrics without Limits™][19] helps you manage custom metric costs by indexing only the metric tags most valuable to your organization. Your use of Metrics without Limits™ is reflected in the top section of the Overview page as {{< ui >}}Selected Metrics{{< /ui >}}. For more information about managing your custom metrics costs, see [Best Practices for Custom Metrics Governance][22].
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Enable percentiles on distribution metrics" level="h4" %}}
@@ -95,7 +96,7 @@ Some products incorporate standard metrics to surface insights out of the box (f
 
 ### Available Metrics
 
-The **Available Metrics** column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Volume Management page][26] for more detailed insights.
+The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Volume Management page][26] for more detailed insights.
 
 ## Your metrics by source
 
@@ -105,7 +106,7 @@ This section contains a tree map that outlines your metric sources and their res
 
 ## Generate metrics from any source
 
-Clicking on any of the options below brings you to the corresponding product's Generate Metrics page, where you can create custom metrics from that product:
+Clicking on any of the options below brings you to the corresponding product's {{< ui >}}Generate Metrics{{< /ui >}} page, where you can create custom metrics from that product:
    - [Ingested logs][14]
    - [Ingested spans][15]
    - [RUM events][16]

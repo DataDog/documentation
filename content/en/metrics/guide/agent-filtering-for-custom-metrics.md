@@ -1,6 +1,7 @@
 
 ---
 title: Agent-Side Filtering for Custom Metrics
+description: "Filter out unused custom metrics at the Datadog Agent to reduce ingested and indexed metric volume."
 aliases:
 - /metrics/guide/agent-filtering-for-dogstatsd-custom-metrics/
 further_reading:
@@ -50,12 +51,12 @@ Policy updates are deployed to Agents in 1-2 minutes.
 
 ### From the Metrics Settings page
 
-1. Click **+ Create Policy**.
-2. Click **Filter metrics**.
+1. Click {{< ui >}}+ Create Policy{{< /ui >}}.
+2. Click {{< ui >}}Filter metrics{{< /ui >}}.
 3. Provide a description for the new policy.
-4. Select the metrics to filter from the **Metrics to Filter** dropdown, or click **Upload CSV**.
-   - If you choose to upload a CSV, select the file and click **Open**. You can use multiple CSVs to create the policy.
-5. When you're satisfied with the list of metrics to filter, click **Save and Filter**.
+4. Select the metrics to filter from the {{< ui >}}Metrics to Filter{{< /ui >}} dropdown, or click {{< ui >}}Upload CSV{{< /ui >}}.
+   - If you choose to upload a CSV, select the file and click {{< ui >}}Open{{< /ui >}}. You can use multiple CSVs to create the policy.
+5. When you're satisfied with the list of metrics to filter, click {{< ui >}}Save and Filter{{< /ui >}}.
 
 ### From the Metrics Summary page
 
@@ -66,10 +67,10 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 
 1. Enter a metric query in the search bar.
 2. Click the three vertical dots button on the right-hand side of the screen.
-3. Click **Filter metrics**.
-4. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
-5. Review the **Metrics to Filter**. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
-6. Click **Save and Filter**.
+3. Click {{< ui >}}Filter metrics{{< /ui >}}.
+4. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, click {{< ui >}}New Policy{{< /ui >}}. Provide a description for the policy.
+5. Review the {{< ui >}}Metrics to Filter{{< /ui >}}. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+6. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_from_metric_query.mp4" alt="Creating a metric filtering policy from a metric query" video="true" >}}
 
@@ -77,10 +78,10 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 {{% tab "From the policy editor" %}}
 
 1. Click the three vertical dots button on the right-hand side of the screen.
-2. Click **Filter metrics**.
-3. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
-4. Enter a metric query in the **Metrics to Filter** field, or select metrics individually from the dropdown. Click `X` on the right side of any row to remove a metric from the list.
-5. Click **Save and Filter**.
+2. Click {{< ui >}}Filter metrics{{< /ui >}}.
+3. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, click {{< ui >}}New Policy{{< /ui >}}. Provide a description for the policy.
+4. Enter a metric query in the {{< ui >}}Metrics to Filter{{< /ui >}} field, or select metrics individually from the dropdown. Click `X` on the right side of any row to remove a metric from the list.
+5. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_with_policy_editor.mp4" alt="Creating a metric filtering policy from the policy editor" video="true" >}}
 
@@ -88,12 +89,12 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 {{% tab "From CSV upload" %}}
 
 1. Click the three vertical dots button on the right-hand side of the screen.
-2. Click **Filter metrics**.
-3. In the **Choose policy** dropdown, click **New Policy**. Provide a description for the policy.
-4. Click **Upload CSV** to the right of the **Metrics to Filter** field.
-5. Select the CSV file, and click **Open**.
-6. Review the metrics listed. Click `X` on the right side of any row to remove a metric from the list. If needed, upload additional CSV files, or add metrics through the **Metrics to Filter** field.
-7. Click **Save and Filter**.
+2. Click {{< ui >}}Filter metrics{{< /ui >}}.
+3. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, click {{< ui >}}New Policy{{< /ui >}}. Provide a description for the policy.
+4. Click {{< ui >}}Upload CSV{{< /ui >}} to the right of the {{< ui >}}Metrics to Filter{{< /ui >}} field.
+5. Select the CSV file, and click {{< ui >}}Open{{< /ui >}}.
+6. Review the metrics listed. Click `X` on the right side of any row to remove a metric from the list. If needed, upload additional CSV files, or add metrics through the {{< ui >}}Metrics to Filter{{< /ui >}} field.
+7. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_with_csv_upload.mp4" alt="Creating a metric filtering policy with a CSV file upload" video="true" >}}
 
@@ -107,10 +108,10 @@ You can edit a metric filtering policy from the [Metrics Settings page][1] or th
 ### From the Metrics Settings page
 
 1. Click the policy to edit.
-2. Click **Edit**.
-3. Select the metrics to filter from the **Metrics to Filter** dropdown, or click **Upload CSV**.
-   - If you choose to upload a CSV, select the file and click **Open**.
-4. Click **Save and Filter**.
+2. Click {{< ui >}}Edit{{< /ui >}}.
+3. Select the metrics to filter from the {{< ui >}}Metrics to Filter{{< /ui >}} dropdown, or click {{< ui >}}Upload CSV{{< /ui >}}.
+   - If you choose to upload a CSV, select the file and click {{< ui >}}Open{{< /ui >}}.
+4. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
 
@@ -123,10 +124,10 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 
 1. Enter a metric query in the search bar.
 2. Click the three vertical dots button on the right-hand side of the screen.
-3. Click **Filter metrics**.
-4. In the **Choose policy** dropdown, select the policy to edit.
-5. Review the **Metrics to Filter** and **Existing metrics in policy** lists. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
-6. Click **Save and Filter**.
+3. Click {{< ui >}}Filter metrics{{< /ui >}}.
+4. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, select the policy to edit.
+5. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+6. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_with_metric_query.mp4" alt="Editing a metric filtering policy with a metric query" video="true" >}}
 
@@ -134,21 +135,21 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 {{% tab "From the policy editor" %}}
 
 1. Click the three vertical dots button on the right-hand side of the screen.
-2. Click **Filter metrics**.
-3. In the **Choose policy** dropdown, select the policy to edit.
-4. Select metrics individually from the **Metrics to Filter** dropdown. Click `X` on the right side of any row to remove a metric from the list.
-5. Click **Save and Filter**.
+2. Click {{< ui >}}Filter metrics{{< /ui >}}.
+3. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, select the policy to edit.
+4. Select metrics individually from the {{< ui >}}Metrics to Filter{{< /ui >}} dropdown. Click `X` on the right side of any row to remove a metric from the list.
+5. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{% /tab %}}
 {{% tab "From CSV upload" %}}
 
 1. Click the three vertical dots button on the right-hand side of the screen.
-2. Click **Filter metrics**.
-3. In the **Choose policy** dropdown, select the policy to edit.
-4. Click **Upload CSV** to the right of the **Metrics to Filter** field.
-5. Select the CSV file, and click **Open**.
-6. Review the **Metrics to Filter** and **Existing metrics in policy** lists. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
-7. Click **Save and Filter**.
+2. Click {{< ui >}}Filter metrics{{< /ui >}}.
+3. In the {{< ui >}}Choose policy{{< /ui >}} dropdown, select the policy to edit.
+4. Click {{< ui >}}Upload CSV{{< /ui >}} to the right of the {{< ui >}}Metrics to Filter{{< /ui >}} field.
+5. Select the CSV file, and click {{< ui >}}Open{{< /ui >}}.
+6. Review the {{< ui >}}Metrics to Filter{{< /ui >}} and {{< ui >}}Existing metrics in policy{{< /ui >}} lists. Click `X` on the right side of any row to remove a metric from the list, or click {{< ui >}}+ Include More Metrics{{< /ui >}} to add metrics to the list.
+7. Click {{< ui >}}Save and Filter{{< /ui >}}.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -157,32 +158,32 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 
 You can view all your policies and filtered metrics from the [Metrics Settings page][1].
 
-**Click on the [settings button][1]**: 
+Click on the [settings button][1]: 
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_summary.png" alt="The settings button on the metric summary page" style="width:100%;" >}}
 
-**Click on Metrics in the navigation bar** and go straight to settings:
+Click on {{< ui >}}Metrics{{< /ui >}} in the navigation bar and go straight to settings:
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_nav.png" alt="The settings option from the expanded Metrics panel in Datadog" style="width:100%;" >}}
 
 ### View all policies
 
-Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the {{< ui >}}Policies{{< /ui >}} tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the {{< ui >}}Show Sidebar{{< /ui >}} button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" inline="true" width="22" >}}.
 
 Click on any metric filtering policy to open its detail view for edits or deletion.
 
 ### View all filtered metrics
 
-Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the {{< ui >}}Filtered Metrics{{< /ui >}} tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the {{< ui >}}Show Sidebar{{< /ui >}} button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" inline="true" width="22" >}}.
 
-Click on a filtered metric's attached policies in the **ATTACHED POLICIES** column for edits or deletion.
+Click on a filtered metric's attached policies in the {{< ui >}}ATTACHED POLICIES{{< /ui >}} column for edits or deletion.
 
 ## Delete policies
 
 You can delete metric filtering policies from the [Metrics Settings page][1].
 
 1. Click on the metric filtering policy to delete.
-2. Select **Delete** in the top-right corner of the page.
+2. Select {{< ui >}}Delete{{< /ui >}} in the top-right corner of the page.
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/delete_policy.png" alt="The delete policy button on a metric filtering policy detail view" style="width:100%;" >}}
 

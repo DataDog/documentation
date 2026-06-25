@@ -1,0 +1,43 @@
+{
+  "data": {
+    "attributes": {
+      "title": "Past API Outage",
+      "updates": [
+        {
+          "components_affected": [
+            {
+              "id": "4e9d3726-bdd7-0079-613c-e9aaba89eb01",
+              "status": "degraded"
+            }
+          ],
+          "description": "We detected elevated error rates in the API.",
+          "started_at": "2021-11-11T10:11:11+00:00",
+          "status": "investigating"
+        },
+        {
+          "components_affected": [
+            {
+              "id": "4e9d3726-bdd7-0079-613c-e9aaba89eb01",
+              "status": "degraded"
+            }
+          ],
+          "description": "Root cause identified as a misconfigured deployment.",
+          "started_at": "2021-11-11T10:41:11+00:00",
+          "status": "identified"
+        },
+        {
+          "components_affected": [
+            {
+              "id": "4e9d3726-bdd7-0079-613c-e9aaba89eb01",
+              "status": "operational"
+            }
+          ],
+          "description": "The issue has been resolved and API is operating normally.",
+          "started_at": "2021-11-11T11:11:11+00:00",
+          "status": "resolved"
+        }
+      ]
+    },
+    "type": "degradations"
+  }
+}

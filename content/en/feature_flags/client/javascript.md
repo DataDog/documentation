@@ -45,13 +45,16 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials:
+Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
+  // Required client-side Datadog credentials
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
@@ -62,6 +65,8 @@ const provider = new DatadogProvider({
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an evaluation context. The evaluation context includes user or session information used to determine which flag variations should be returned. Reference these attributes in your targeting rules to control who sees each variant.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="javascript" >}}
 const evaluationContext = {
@@ -199,9 +204,68 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Configure browser provider options
+
+The web provider also supports these optional settings:
+
+| Option | Default | Use |
+| --- | --- | --- |
+| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
+| `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
+| `customHeaders` | unset | Add headers to flag-fetch requests. |
+| `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
+
+Unlike the server-side SDK, the Web SDK evaluates flags synchronously after initialization. Still `await` `setProviderAndWait` once in `beforeEach` to ensure the provider is ready.
+
+{{< code-block lang="javascript" >}}
+import { beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+  ui_theme: {
+    variants: { dark: 'dark', light: 'light' },
+    defaultVariant: 'light',
+    disabled: false,
+  },
+};
+
+beforeEach(async () => {
+  await OpenFeature.setProviderAndWait(new TypedInMemoryProvider(flags));
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('new checkout button is enabled by default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('new_checkout_button', false)).toBe(true);
+});
+
+test('missing flag returns default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('does-not-exist', false)).toBe(false);
+});
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Omitting any of these fails TypeScript compilation; at runtime, evaluating an unknown flag key returns the supplied default. Prefer `TypedInMemoryProvider` over the deprecated `InMemoryProvider` for type-checked flag configurations. The same test pattern works with Jest + jsdom; swap the `vitest` imports for `@jest/globals` and add `jest-environment-jsdom` to your project.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
-
+[2]: /account_management/api-app-keys/#client-tokens

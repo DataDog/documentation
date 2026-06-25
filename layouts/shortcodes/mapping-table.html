@@ -1,8 +1,8 @@
-{{/*  
+{{/*
     Render a HTML table from a CSV file located in the assets/_data/semantic-core directory (Global resource).
-    CSV file should be a 2D array with the first array/row as the header. 
+    CSV file should be a 2D array with the first array/row as the header.
 
-    Note: 
+    Note:
     - csv files mounted from websites-sources: https://github.com/DataDog/websites-sources/tree/main/assets/_data/semantic-core
     - csv files cannot be mounted to the ./data directory (https://gohugo.io/content-management/data-sources/)
 
@@ -12,25 +12,49 @@
 {{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}
 {{ $resource := resources.Get $resource_path}}
 
+{{/* Only render these columns from the csv */}}
+{{ $allowed_cols := slice "otel" "description" "filter"}}
+
 {{ if $resource }}
+{{ $rows := unmarshal $resource }}
+{{ $headers := index $rows 0 }}
 <div class="table-wrapper">
     <table class="table-fixed">
         <thead>
             <tr>
-            {{ range (index (unmarshal $resource) 0) }}
-                {{ $header := cond (eq . "dd") "Datadog" .}}
-                <th>{{ $header | upper }}</th>
+            {{ range $headers }}
+                {{ if in $allowed_cols . }}
+                    <th>{{ . | upper }}</th>
+                {{ end }}
             {{ end }}
             </tr>
         </thead>
         <tbody>
-        {{ range $index, $row := (unmarshal $resource) }}
+        {{/* Get column indices of "otel" and "filter" to form the composite dedupe key */}}
+        {{ $otel_idx := 0 }}
+        {{ $filter_idx := 0 }}
+        {{ range $i, $h := $headers }}
+            {{ if eq $h "otel" }}{{ $otel_idx = $i }}{{ end }}
+            {{ if eq $h "filter" }}{{ $filter_idx = $i }}{{ end }}
+        {{ end }}
+
+        {{ $unique_vals := newScratch }}
+        {{ range $index, $row := $rows }}
             {{ if $index }}
-                <tr>
-                {{ range $row }}
-                    <td>{{ . | markdownify }}</td>
+                {{/* Build a composite key from otel+filter vals so rows with the same metric name
+                     but different filter are treated as distinct */}}
+                {{ $dedupe_key := print (index $row $otel_idx) "|" (index $row $filter_idx) }}
+                {{/* Deduplicate: skips the row if $unique_vals already recorded the $dedupe_key */}}
+                {{ if not ($unique_vals.Get $dedupe_key) }}
+                    {{ $unique_vals.Set $dedupe_key true }}
+                    <tr>
+                    {{ range $i, $cell := $row }}
+                        {{ if in $allowed_cols (index $headers $i) }}
+                            <td>{{ $cell | markdownify }}</td>
+                        {{ end }}
+                    {{ end }}
+                    </tr>
                 {{ end }}
-                </tr>
             {{ end }}
         {{ end }}
         </tbody>

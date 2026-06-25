@@ -31,6 +31,8 @@ grant select on v_$dataguard_config to c##datadog ;
 grant select on v_$dataguard_stats to c##datadog ;
 grant select on v_$transaction to c##datadog;
 grant select on v_$locked_object to c##datadog;
+grant select on v_$lock to c##datadog;
+grant select on gv_$lock to c##datadog;
 grant select on dba_objects to c##datadog;
 grant select on cdb_data_files to c##datadog;
 grant select on dba_data_files to c##datadog;
