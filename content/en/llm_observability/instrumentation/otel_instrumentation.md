@@ -54,6 +54,8 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 <div class="alert alert-info">A span link that points to a span in a different trace is stored, but is not drawn in the Execution Graph, which visualizes a single trace.</div>
 
+For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+
 ## Setup
 
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:

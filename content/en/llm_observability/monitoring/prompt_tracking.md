@@ -45,28 +45,58 @@ Set the attribute on any LLM span:
 import json
 
 span.set_attribute("_dd.ml_obs.prompt_tracking", json.dumps({
-    "name": "greeting-prompt",
-    "version": "v1",
-    "template": "Hello {{name}}, tell me about {{topic}}",
-    "variables": {"name": "Alice", "topic": "weather"}
+    "name": "support-rag-prompt",
+    "version": "v2",
+    "chat_template": [
+        {
+            "role": "system",
+            "content": "You are a helpful customer support assistant for {{product_name}}. Use only the provided context to answer questions. If the answer is not in the context, say so."
+        },
+        {
+            "role": "user",
+            "content": "Context:\n{{retrieved_docs}}\n\nQuestion: {{question}}"
+        }
+    ],
 }))
 ```
 {{% /tab %}}
 {{% tab "JavaScript" %}}
 ```javascript
 span.setAttribute("_dd.ml_obs.prompt_tracking", JSON.stringify({
-    name: "greeting-prompt",
-    version: "v1",
-    template: "Hello {{name}}, tell me about {{topic}}",
-    variables: { name: "Alice", topic: "weather" }
+    name: "support-rag-prompt",
+    version: "v2",
+    chat_template: [
+        {
+            role: "system",
+            content: "You are a helpful customer support assistant for {{product_name}}. Use only the provided context to answer questions. If the answer is not in the context, say so."
+        },
+        {
+            role: "user",
+            content: "Context:\n{{retrieved_docs}}\n\nQuestion: {{question}}"
+        }
+    ]
 }));
 ```
 {{% /tab %}}
 {{% tab "Go" %}}
 ```go
-span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
-    `{"name":"greeting-prompt","version":"v1","template":"Hello {{name}}, tell me about {{topic}}","variables":{"name":"Alice","topic":"weather"}}`,
-))
+import "encoding/json"
+
+promptData, _ := json.Marshal(map[string]any{
+    "name":    "support-rag-prompt",
+    "version": "v2",
+    "chat_template": []map[string]string{
+        {
+            "role":    "system",
+            "content": "You are a helpful customer support assistant for {{product_name}}. Use only the provided context to answer questions. If the answer is not in the context, say so.",
+        },
+        {
+            "role":    "user",
+            "content": "Context:\n{{retrieved_docs}}\n\nQuestion: {{question}}",
+        },
+    },
+})
+span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking", string(promptData)))
 ```
 {{% /tab %}}
 {{< /tabs >}}
