@@ -21233,9 +21233,27 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    TimeseriesWidgetAnomalyDetection:
+      description: Anomaly detection configuration for a timeseries widget.
+      properties:
+        detection_sensitivity:
+          $ref: "#/components/schemas/TimeseriesWidgetAnomalyDetectionSensitivity"
+      required:
+        - detection_sensitivity
+      type: object
+    TimeseriesWidgetAnomalyDetectionSensitivity:
+      description: Sensitivity level for anomaly detection. Use `never_detect` to disable anomaly detection.
+      enum:
+        - never_detect
+      example: never_detect
+      type: string
+      x-enum-varnames:
+        - NEVER_DETECT
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time.
       properties:
+        anomaly_detection:
+          $ref: "#/components/schemas/TimeseriesWidgetAnomalyDetection"
         custom_links:
           description: List of custom links.
           items:
