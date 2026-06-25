@@ -233,7 +233,7 @@ class ErrorBoundary extends React.Component {
 
 ### Script error
 
-For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows an error with the minimal message "Script error."
+For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the {{< ui >}}Error Details{{< /ui >}} tab shows an error with the minimal message "Script error."
 
 {{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
 
