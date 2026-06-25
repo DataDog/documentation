@@ -48,7 +48,7 @@ Replace `USERNAME` and `PASSWORD` with your username and password.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/http_basic.json`.
 
-{{< img src="service_management/par-http-basic-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_basic.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-basic-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_basic.json'" style="width:80%;" >}}
 
 ### Token authentication
 
@@ -74,7 +74,7 @@ Replace `TOKEN1`, `TOKEN2`, `VALUE1`, and `VALUE2` with your token names and val
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/http_token.json`.
 
-{{< img src="service_management/par-http-token-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-token-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_token.json'" style="width:80%;" >}}
 
 ### No authentication
 
@@ -82,7 +82,7 @@ This connection type is suitable for HTTP endpoints that do not require authenti
 
 To configure this connection, specify the endpoint URL:
 
-{{< img src="service_management/par-http-no-auth-credentials.png" alt="An HTTP connection without authentication" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-no-auth-credentials.png" alt="An HTTP connection without authentication" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
@@ -120,7 +120,7 @@ Replace `GITLAB_API_TOKEN` and `GITLAB_URL` with your credentials.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/gitlab_token.json`.
 
-{{< img src="service_management/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/gitlab_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/gitlab_token.json'" style="width:80%;" >}}
 
 [201]: https://docs.gitlab.com/ee/api/
 {{% /tab %}}
@@ -163,7 +163,7 @@ Replace `USERNAME`, `API_TOKEN`, and `DOMAIN` with your credentials.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/jenkins_token.json`.
 
-{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/jenkins_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/jenkins_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -215,7 +215,7 @@ Replace `USERNAME`, `PASSWORD`, `SRV_HOST`, and `DATABASE` with your credentials
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/mongodb_srv_token.json`.
 
-{{< img src="service_management/par-mongodb-srv-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-mongodb-srv-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
 
 ### Standard authentication
 
@@ -273,7 +273,7 @@ Replace `USERNAME`, `PASSWORD`, `HOST`, `PORT`, `DATABASE`, `AUTH_SOURCE`, and `
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/mongodb_standard_token.json`.
 
-{{< img src="service_management/par-mongodb-standard-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-mongodb-standard-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -341,7 +341,7 @@ Replace the example values with your credentials.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/postgresql_token.json`.
 
-{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
@@ -407,7 +407,7 @@ Replace `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE`, `SERVER_ROOT_CA_CERTIFICATE`, 
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json`.
 
-{{< img src="service_management/par-temporal-mtls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-mtls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
 
 ### TLS authentication
 
@@ -445,7 +445,7 @@ Replace `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE`, and `SERVER_ROOT_CA_CERTIFICAT
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/temporal_TLS_token.json`.
 
-{{< img src="service_management/par-temporal-tls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-tls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
 
 ### No authentication
 
@@ -460,7 +460,7 @@ The connection type requires the following credentials:
 
 For this connection type, you do not need to create a credential file since the address is not a secret and is stored directly in Datadog. To configure, provide the server address:
 
-{{< img src="service_management/par-temporal-no-tls-credentials.png" alt="An unsecured temporal connection" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-no-tls-credentials.png" alt="An unsecured temporal connection" style="width:80%;" >}}
 
 {{% /tab %}}
 
