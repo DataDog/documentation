@@ -119,8 +119,6 @@ To create a dynamic metric:
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
-{{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric instrumentation" >}}
-
 Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method or line is invoked.
 
 Dynamic Instrumentation supports the following metric types:
@@ -138,8 +136,6 @@ To create a dynamic span:
 1. Select **Span** as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
 
-{{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span instrumentation" >}}
-
 You can use a *dynamic span* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
 ### Creating dynamic span tags
@@ -156,8 +152,6 @@ To create a dynamic span tag:
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
-
-{{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag instrumentation" >}}
 
 You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].
 
