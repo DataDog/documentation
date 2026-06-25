@@ -356,7 +356,7 @@ Your web views appear in the [RUM Explorer][5] with associated `service` and `so
 
 To access your web views:
 
-1. Navigate to **Digital Experiences > Real User Monitoring > (Sessions) Explorer**.
+1. Navigate to {{< ui >}}Digital Experiences{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}(Sessions) Explorer{{< /ui >}}.
 2. Create a query to filter on the following:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
@@ -369,7 +369,7 @@ To access your web views:
 
    Any service with the web icon indicates a webview.
 
-From here, you can hover over a session event and click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
+From here, you can hover over a session event and click {{< ui >}}Open View waterfall{{< /ui >}} to navigate from the session to a resource waterfall visualization in the view's {{< ui >}}Performance{{< /ui >}} tab.
 
 ## Billing implications
 
