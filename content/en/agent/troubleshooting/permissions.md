@@ -46,7 +46,30 @@ If those files are **NOT** owned by the `dd-agent` user, change the ownership wi
 ```text
 sudo chown -R dd-agent:dd-agent /var/log/datadog/
 ```
+## Granting the Agent permission to read application log files (without changing file ownership)
 
+Many application logs belong to other system users (for example nginx, postgres, or a custom application user). Changing file ownership can break the application, so Datadog recommends using POSIX ACLs instead. ACLs let you grant the Datadog Agent read access without modifying the original file owner.
+
+The Agent requires:
+	•	Read (r) permission on log files
+	•	Execute (x) permission on directories, so it can traverse them to reach the files
+
+Example: Allow the Agent to read logs from `/var/log/myapp/`
+
+Grant the Datadog Agent recursive read and execute permissions:
+
+```
+sudo setfacl -R -m u:dd-agent:rx /var/log/myapp/
+```
+Ensure that new files created in this directory inherit the same ACL:
+```
+sudo setfacl -R -d -m u:dd-agent:rx /var/log/myapp/
+```
+You can verify ACLs by running:
+```
+getfacl /var/log/myapp/
+```
+You should see entries that grant dd-agent read and execute permissions.
 [More information on the Agent logs locations][2].
 
 ## Agent socket permission issues
