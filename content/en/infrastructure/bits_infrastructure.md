@@ -3,7 +3,7 @@ title: Bits Infrastructure Operations
 description: Use Bits Infrastructure Operations to detect, prioritize, and automatically remediate infrastructure issues.
 ---
 
-{{< callout url=https://www.datadoghq.com/product-preview/bits-infrastructure-operations/
+{{< callout url="https://www.datadoghq.com/product-preview/bits-infrastructure-operations/"
  btn_hidden="false" header="Join the Preview!">}}
 Bits Infrastructure Operations is in Preview. Use this form to submit your request today.
 {{< /callout >}}
