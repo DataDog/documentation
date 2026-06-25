@@ -163,13 +163,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Copilot CLI" %}}
 
-Install the Datadog plugin from the [`awesome-copilot` Plugin Marketplace](https://awesome-copilot.github.com/). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/copilot-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration to avoid conflicts.
+Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository. If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the Datadog plugin:
     <pre><code>copilot plugin install datadog@awesome-copilot</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Copilot.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
@@ -177,7 +177,7 @@ Install the Datadog plugin from the [`awesome-copilot` Plugin Marketplace](https
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/copilot-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/copilot-plugin">copilot-plugin</a> repository for all available slash commands and configuration options.</div>
 
 {{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="copilot-manual" %}}
 If the plugin is not available to you, point Copilot at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
@@ -199,7 +199,6 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -706,6 +705,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
+| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][65] recommended. |
 | [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
@@ -891,3 +891,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [61]: /getting_started/profiler/
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
+[64]: https://github.com/features/copilot/cli
+[65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
