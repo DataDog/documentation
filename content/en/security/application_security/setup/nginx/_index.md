@@ -38,4 +38,4 @@ Learn how to set up App and API Protection (AAP) on your NGINX proxy by selectin
 
 [1]: https://github.com/DataDog/nginx-datadog/
 [2]: /security/application_security/setup/php/troubleshooting
-[3]: /security/application_security/setup/php/compatibility
+[3]: /security/application_security/setup/compatibility/nginx

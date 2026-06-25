@@ -10392,6 +10392,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Delete a budget's custom forecast
+      url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-delete-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomForecast
+        unstable:
+          - v2
+        order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
       identifier: cloud-cost-management-get-budget
@@ -10428,6 +10441,19 @@ menu:
           - ValidateBudget
         unstable: []
         order: 35
+    - name: Create or replace a budget's custom forecast
+      url: /api/latest/cloud-cost-management/create-or-replace-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-create-or-replace-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCustomForecast
+        unstable:
+          - v2
+        order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
       identifier: cloud-cost-management-validate-csv-budget
@@ -12549,6 +12575,49 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
+    - name: Governance Controls
+      url: /api/latest/governance-controls/
+      identifier: governance-controls
+      generated: true
+    - name: Update a governance control
+      url: /api/latest/governance-controls/update-a-governance-control/
+      identifier: governance-controls-update-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControl
+        unstable:
+          - v2
+        order: 4
+    - name: Get a governance control
+      url: /api/latest/governance-controls/get-a-governance-control/
+      identifier: governance-controls-get-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControl
+        unstable:
+          - v2
+        order: 3
+    - name: List governance controls
+      url: /api/latest/governance-controls/list-governance-controls/
+      identifier: governance-controls-list-governance-controls
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControls
+        unstable:
+          - v2
+        order: 2
     - name: Governance Insights
       url: /api/latest/governance-insights/
       identifier: governance-insights
@@ -16685,6 +16754,18 @@ menu:
       url: /api/latest/report-schedules/
       identifier: report-schedules
       generated: true
+    - name: Toggle a report schedule
+      url: /api/latest/report-schedules/toggle-a-report-schedule/
+      identifier: report-schedules-toggle-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ToggleReportSchedule
+        unstable: []
+        order: 4
     - name: Update a report schedule
       url: /api/latest/report-schedules/update-a-report-schedule/
       identifier: report-schedules-update-a-report-schedule
@@ -16698,6 +16779,54 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get a report schedule
+      url: /api/latest/report-schedules/get-a-report-schedule/
+      identifier: report-schedules-get-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedule
+        unstable: []
+        order: 3
+    - name: Delete a report schedule
+      url: /api/latest/report-schedules/delete-a-report-schedule/
+      identifier: report-schedules-delete-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteReportSchedule
+        unstable: []
+        order: 7
+    - name: Get report schedules for a resource
+      url: /api/latest/report-schedules/get-report-schedules-for-a-resource/
+      identifier: report-schedules-get-report-schedules-for-a-resource
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedulesForResource
+        unstable: []
+        order: 5
+    - name: List report schedules
+      url: /api/latest/report-schedules/list-report-schedules/
+      identifier: report-schedules-list-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReportSchedules
+        unstable: []
+        order: 6
     - name: Create a report schedule
       url: /api/latest/report-schedules/create-a-report-schedule/
       identifier: report-schedules-create-a-report-schedule

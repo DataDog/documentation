@@ -2345,12 +2345,7 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Corrélation des problèmes
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
-    - name: Identifier des Commits suspects
+    - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits

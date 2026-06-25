@@ -36,6 +36,11 @@ content_filters:
 {% partial file="sdk/data_collected/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
+<!-- C / C++ -->
+{% if equals($platform, "cpp") %}
+{% partial file="sdk/data_collected/cpp.mdoc.md" /%}
+{% /if %}
+
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
 {% partial file="sdk/data_collected/maui.mdoc.md" /%}
