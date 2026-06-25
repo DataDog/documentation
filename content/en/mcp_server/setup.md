@@ -161,6 +161,56 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 [1]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Copilot CLI" %}}
+
+Install the Datadog plugin from the [`awesome-copilot` Plugin Marketplace](https://awesome-copilot.github.com/). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/copilot-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration to avoid conflicts.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. Install the Datadog plugin:
+    <pre><code>copilot plugin install datadog@awesome-copilot</code></pre>
+
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
+
+1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. After any making any configuration change, restart `copilot` and reauthenticate the Datadog MCP Server.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/copilot-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+
+{{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="copilot-manual" %}}
+If the plugin is not available to you, point Copilot at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+1. Run in terminal:
+    <pre><code>copilot mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+   Alternatively, add to `~/.copilot/mcp-config.json`:
+    <pre><code>{
+      "servers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+         }
+       }
+    }</code></pre>
+
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
+{{% /collapse-content %}}
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "Cursor" %}}
 
 Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
