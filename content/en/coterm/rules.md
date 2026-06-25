@@ -13,7 +13,7 @@ further_reading:
   text: "Using CoTerm"
 ---
 
-You can configure CoTerm to take specific actions when it intercepts certain commands by adding lints and rules to your `.ddcoterm/config.yaml` file under `process_config`. 
+You can configure CoTerm to take specific actions when it intercepts certain commands by adding lints and rules to your `.ddcoterm/config.yaml` file under `process_config`.
 
 These lints and rules are written in [Lua][1]. For syntax and further details, see [Lua's documentation][2].
 
@@ -50,10 +50,10 @@ process_config:
             local user_message = "Proceed with caution. This command may disrupt your Kubernetes cluster setup."
             local approver_message = "Ensure that the user has documented a rollback plan before approving."
             return matches, user_message, approver_message
-          actions: ["record", "logs", "process_info", "approval"]
+          actions: ["record", "process_info", "approval"]
         # Record all other executions of kubectl scale, but don't require approval and don't bother with messages for users+approvers
         - rule: has_arg("scale")
-          actions: ["record", "logs", "process_info"]
+          actions: ["record", "process_info"]
         # For all other kubectl commands, just run the command with ~zero overhead; no recording, no requiring approval
         - rule: true
           actions: []
@@ -74,7 +74,6 @@ Each `rule` returns 1-3 values: `boolean, [string], [string]`.
 CoTerm can take the following actions when `rule` returns `true`:
 
 - `record`: Record the terminal session and send it to Datadog.
-- `logs`: Generate Datadog logs, containing searchable snapshots of terminal output.
 - `process_info`: Record all processes launched inside the terminal session and generate an event for each process.
 - `approval`: Require approval before running the command.
 - `incidents`: Associate the recording with the [Datadog Incident][6] that the user is responding to, if any. If the user is responding to more than one incident, they are prompted to pick one.
@@ -92,7 +91,7 @@ You can specify actions for CoTerm to take in a number of different ways. CoTerm
 1. **CLI flags**: If you specify actions in CLI flags (such as `--save-level`, `--approval`), CoTerm takes only the actions specified through these CLI flags. This overrides all other configurations.
 2. **Lua configuration file**: If no CLI flags specify actions, but a Lua rule in `.ddcoterm/config.yaml` evaluates to `true`, CoTerm takes the actions specified with the first rule that evaluates to `true`. Overrides all configurations other than CLI flags.
 3. **`process_config.default_actions`**: If no CLI flags specify actions, and no Lua rules match, CoTerm takes the actions specified in `process_config.default_actions` in `.ddcoterm/config.yaml`, if any.
-4. **Default actions**: If no CLI flags specify actions, no Lua rules match, and `process_config.default_actions` is not set, CoTerm takes the following actions: `["record", "logs", "process_info"]`.
+4. **Default actions**: If no CLI flags specify actions, no Lua rules match, and `process_config.default_actions` is not set, CoTerm takes the following actions: `["record", "process_info"]`.
 
 ## Lua environment and helper functions
 
