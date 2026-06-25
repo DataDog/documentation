@@ -686,7 +686,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode. In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter is subject to constraints described in the `resourceAttributesProvider` section below.
+- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) when using automatic mode. In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter is subject to constraints described in the `resourceAttributesProvider` section below.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 {% alert level="info" %}
@@ -775,7 +775,7 @@ RUM.enable(
 - For media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`), `data` is always `nil`. The full response body is never buffered in SDK memory to prevent out-of-memory crashes.
 - For all other response types, `data` is capped at 512 KB. If the response body exceeds this limit, `data` contains a truncated prefix.
 
-In automatic mode (tasks using completion handlers), the full response body is always available.
+When using automatic mode (without `URLSessionInstrumentation.enableDurationBreakdown`), the full response body is always available.
 
 #### Capture resource headers
 
