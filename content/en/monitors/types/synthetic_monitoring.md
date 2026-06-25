@@ -67,6 +67,10 @@ Conditional alerting
 
 For more information, see [Synthetic Monitoring notifications][6].
 
+## Launch a Bits Investigation
+
+When a Synthetic Browser or API test monitor enters an alert state, you can launch a [Bits Investigation][8] to identify the root cause. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration. You can also toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically when it alerts.
+
 ## Best practices
 
 - Always include a default `@notification` (outside any conditions) to prevent dropped messages.
@@ -84,3 +88,4 @@ For more information, see [Synthetic Monitoring notifications][6].
 [5]: /monitors/notify/#renotify
 [6]: /synthetics/notifications
 [7]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+[8]: /bits_ai/bits_ai_sre/investigate_issues/

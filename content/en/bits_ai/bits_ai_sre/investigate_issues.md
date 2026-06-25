@@ -28,20 +28,17 @@ You can invoke Bits on an individual monitor alert or warn event from several en
 1. Click {{< ui >}}Investigate Recent Alerts{{< /ui >}} and select an alert.
 
 #### Option 2: Monitor status page
-Navigate to the monitor status page of a [Bits Investigation-supported monitor](#supported-monitors) and click {{< ui >}}Investigate with Bits Investigation{{< /ui >}} in the top-right corner.
+Navigate to the monitor status page of a [Bits Investigation-supported monitor](#supported-monitors) and click {{< ui >}}Launch Bits Investigation{{< /ui >}} in the top-right corner.
 
 #### Option 3: Monitor event side panel
-In the monitor event side panel of a [Bits Investigation-supported monitor](#supported-monitors), click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+In the monitor event side panel of a [Bits Investigation-supported monitor](#supported-monitors), click {{< ui >}}Launch Bits Investigation{{< /ui >}}.
 
 #### Option 4: Slack
 To use the Slack integration, [connect your Slack workspace to Bits Investigation][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### Synthetic tests (Preview)
-
-<div class="alert alert-info">
-Bits investigations started from Synthetic Browser and API tests are in Preview.</div>
+### Synthetic tests
 
 When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
@@ -49,9 +46,11 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits inv
 
 1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the {{< ui >}}Timeline{{< /ui >}} section.
 1. Select the {{< ui >}}Alert Triggered{{< /ui >}} event for the failing test run.
-1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+1. Click {{< ui >}}Launch Bits Investigation{{< /ui >}}.
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
+
+{{< img src="bits_ai/synthetics_bits_investigation.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Launch Bits Investigation button in the Next Steps panel" style="width:100%;" >}}
 
 #### From a Synthetic monitor
 
@@ -88,7 +87,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 
 #### For a single monitor
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
-1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Launch Bits Investigation{{< /ui >}}.
 
 <div class="alert alert-info"><ul><li>Enabling automatic investigations using the Datadog API or Terraform is not supported.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
@@ -105,7 +104,7 @@ Bits is able to run investigations on the following monitor types:
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Composites
   - SLOs (Preview)
-  - Synthetics API and Browser tests (Preview)
+  - Synthetics API and Browser tests
 
 ## How Bits investigates
 When Bits investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
