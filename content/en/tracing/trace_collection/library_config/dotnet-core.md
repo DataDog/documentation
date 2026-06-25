@@ -90,7 +90,7 @@ To configure the SDK using a JSON file, create `datadog.json` in the instrumente
   "DD_TRACE_AGENT_URL": "http://localhost:8126",
   "DD_ENV": "prod",
   "DD_SERVICE": "MyService",
-  "DD_VERSION": "abc123",
+  "DD_VERSION": "abc123"
 }
 ```
 
