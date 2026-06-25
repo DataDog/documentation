@@ -103,7 +103,7 @@ nav_sections:
         link: watchdog/
         icon: watchdog
         desc: アプリケーションとインフラストラクチャーの異常を検出し、表面化する
-      - title: LLM Observability
+      - title: Agent Observability
         link: llm_observability/
         icon: llm-observability
         desc: LLM アプリケーションを追跡、監視、保護する

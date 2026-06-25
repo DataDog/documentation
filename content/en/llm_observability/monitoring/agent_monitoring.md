@@ -6,13 +6,13 @@ aliases:
 further_reading:
   - link: "https://www.datadoghq.com/blog/openai-agents-llm-observability/"
     tag: "Blog"
-    text: "Monitor your OpenAI agents with Datadog LLM Observability"
+    text: "Monitor your OpenAI agents with Datadog Agent Observability"
   - link: "https://www.datadoghq.com/blog/monitor-ai-agents/"
     tag: "Blog"
     text: "Monitor, troubleshoot, and improve AI agents with Datadog"
   - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
     tag: "Blog"
-    text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+    text: "Monitor agents built on Amazon Bedrock with Datadog Agent Observability"
 ---
 
 ## Overview

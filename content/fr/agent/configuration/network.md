@@ -56,7 +56,7 @@ Ce comportement peut être désactivé dans la version 7.72.0 et ultérieure en 
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[LLM Observability][23]
+[Agent Observability][23]
 : `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Images de conteneurs][13]

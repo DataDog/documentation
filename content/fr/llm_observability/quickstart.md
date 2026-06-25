@@ -11,11 +11,11 @@ further_reading:
 title: Prise en main
 ---
 
-Cette page montre comment utiliser le SDK LLM Observability de Datadog pour instrumenter une application LLM en Python, Node.js ou Java.
+Cette page montre comment utiliser le SDK Agent Observability de Datadog pour instrumenter une application LLM en Python, Node.js ou Java.
 
 ### Prérequis
 
-LLM Observability nécessite une clé d'API Datadog si vous n’avez pas d'Agent Datadog en cours d'exécution. Retrouvez votre clé d'API [dans Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+Agent Observability nécessite une clé d'API Datadog si vous n’avez pas d'Agent Datadog en cours d'exécution. Retrouvez votre clé d'API [dans Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### Configuration
 
@@ -91,7 +91,7 @@ LLM Observability nécessite une clé d'API Datadog si vous n’avez pas d'Agent
 
 ### Afficher les traces
 
-Envoyez des requêtes à votre application qui déclenchent des appels LLM, puis consultez les traces dans l'onglet Traces de la page LLM Observability dans Datadog. Si vous ne voyez aucune trace, assurez-vous d'utiliser une bibliothèque prise en charge. Sinon, vous devrez peut-être instrumenter manuellement les appels LLM de votre application.
+Envoyez des requêtes à votre application qui déclenchent des appels LLM, puis consultez les traces dans l'onglet Traces de la page Agent Observability dans Datadog. Si vous ne voyez aucune trace, assurez-vous d'utiliser une bibliothèque prise en charge. Sinon, vous devrez peut-être instrumenter manuellement les appels LLM de votre application.
 
 
 ### Étapes suivantes
@@ -104,7 +104,7 @@ Une fois que des traces sont envoyées depuis votre application, vous pouvez :
 
 ## Exemple d'application "Hello World"
 
-Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour commencer à explorer LLM Observability.
+Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour commencer à explorer Agent Observability.
 
 
 {{< tabs >}}

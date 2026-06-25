@@ -13,7 +13,7 @@ further_reading:
     text: Run experiments to test improvements
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
-    text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
+    text: "Annotate traces to improve LLM quality with Datadog Agent Observability"
   - link: /api/latest/llm-observability/
     tag: API
     text: Agent Observability API reference

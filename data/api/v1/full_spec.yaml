@@ -10814,11 +10814,11 @@ components:
           format: double
           type: number
         llm_observability_percentage:
-          description: The percentage of LLM Observability usage by tag(s).
+          description: The percentage of Agent Observability usage by tag(s).
           format: double
           type: number
         llm_observability_usage:
-          description: The LLM Observability usage by tag(s).
+          description: The Agent Observability usage by tag(s).
           format: double
           type: number
         llm_spans_percentage:
@@ -24019,27 +24019,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_min_spend_sum:
-          description: Sum of all LLM observability minimum spend over all hours in the current date for all organizations.
+          description: Sum of all Agent Observability minimum spend over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_sum:
-          description: Sum of all LLM observability sessions over all hours in the current date for all organizations.
+          description: Sum of all Agent Observability sessions over all hours in the current date for all organizations.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_sum:
@@ -25336,27 +25336,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_min_spend_sum:
-          description: Shows the sum of all LLM Observability minimum spend over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability minimum spend over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_sum:
-          description: Shows the sum of all LLM observability sessions over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability sessions over all hours in the current date for the given org.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_sum:
@@ -26670,27 +26670,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_agg_sum:
-          description: Sum of all LLM observability sessions for all hours in the current month for all organizations.
+          description: Sum of all Agent Observability sessions for all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_min_spend_agg_sum:
-          description: Minimum spend for LLM observability sessions for all hours in the current month for all organizations.
+          description: Minimum spend for Agent Observability sessions for all hours in the current month for all organizations.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_agg_sum:

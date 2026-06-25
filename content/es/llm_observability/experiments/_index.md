@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/llm_observability/experiments_preview
-description: Utilización de la función Experimentos de LLM Observability
+description: Utilización de la función Experimentos de Agent Observability
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-experiments/
   tag: Blog
@@ -10,9 +10,9 @@ private: true
 title: Experimentos
 ---
 
-{{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, vista de Experimentos. Encabezado: 'Comparación de 12 experimentos en 9 campos'. Visualización de gráfico de líneas en la que se grafica la precisión, corrección, duración, costo estimado y otras métricas de distintos experimentos." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/filtered_experiments.png" alt="Agent Observability, vista de Experimentos. Encabezado: 'Comparación de 12 experimentos en 9 campos'. Visualización de gráfico de líneas en la que se grafica la precisión, corrección, duración, costo estimado y otras métricas de distintos experimentos." style="width:100%;" >}}
 
-LLM Observability [Experimentos][9] es compatible con todo el ciclo de vida de la creación de aplicaciones y agentes LLM. Te ayuda a comprender cómo afectan al rendimiento los cambios en los avisos, los modelos, los proveedores o la arquitectura del sistema. Con esta función, puedes:
+Agent Observability [Experimentos][9] es compatible con todo el ciclo de vida de la creación de aplicaciones y agentes LLM. Te ayuda a comprender cómo afectan al rendimiento los cambios en los avisos, los modelos, los proveedores o la arquitectura del sistema. Con esta función, puedes:
 
 - Crear conjuntos de datos y versiones
 - Ejecución y gestión de experimentos
@@ -20,13 +20,13 @@ LLM Observability [Experimentos][9] es compatible con todo el ciclo de vida de l
 
 ## Instalación
 
-1. Instala el kit de desarrollo de software (SDK) de Python de LLM Observability de Datadog:
+1. Instala el kit de desarrollo de software (SDK) de Python de Agent Observability de Datadog:
 
    ```shell
    pip install ddtrace>=3.15.0
    ```
 
-2. Activar LLM Observability:
+2. Activar Agent Observability:
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -278,7 +278,7 @@ Datadog admite los siguientes tipos de evaluadores de resumen:
    Este ejemplo genera una cadena, pero se puede generar un diccionario como salida para almacenar cualquier información intermedia y comparar en los evaluadores.
 
    Puedes rastrear las diferentes partes de tu tarea de experimento (workflow (UI) / proceso (generic), llamadas a herramientas, etc.) utilizando los [mismos decoradores de rastreo][12] que utilizas en producción.
-   Si utilizas un [marco admitido][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability rastrea y anota automáticamente las llamadas a marcos y bibliotecas de LLM y te proporciona una observabilidad predefinida de las llamadas que realiza tu aplicación de LLM.
+   Si utilizas un [marco admitido][13] (OpenAI, Amazon Bedrock, etc.), Agent Observability rastrea y anota automáticamente las llamadas a marcos y bibliotecas de LLM y te proporciona una observabilidad predefinida de las llamadas que realiza tu aplicación de LLM.
 
 
 4. Define funciones de evaluadores.

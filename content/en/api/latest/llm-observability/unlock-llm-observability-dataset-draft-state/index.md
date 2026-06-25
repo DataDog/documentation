@@ -1,3 +1,3 @@
 ---
-title: Unlock LLM Observability dataset draft state
+title: Unlock Agent Observability dataset draft state
 ---

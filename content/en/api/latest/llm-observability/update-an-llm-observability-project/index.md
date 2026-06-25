@@ -1,3 +1,3 @@
 ---
-title: Update an LLM Observability project
+title: Update an Agent Observability project
 ---

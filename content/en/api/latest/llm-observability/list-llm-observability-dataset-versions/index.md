@@ -1,3 +1,3 @@
 ---
-title: List LLM Observability dataset versions
+title: List Agent Observability dataset versions
 ---

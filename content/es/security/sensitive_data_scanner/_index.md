@@ -46,7 +46,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
   text: Obtener visibilidad en los flujos de trabajo de Strands Agents con Datadog
-    LLM Observability
+    Agent Observability
 - link: https://www.datadoghq.com/blog/observability-pipelines-mssp
   tag: Blog
   text: Simplificar la recolección y agregación de registros para MSSPs con Datadog
@@ -63,7 +63,7 @@ Los datos sensibles, como números de tarjetas de crédito, claves de API, direc
 - Tramos de APM
 - Repositorios de código
 - Eventos de Event Management
-- Trazas de LLM Observability
+- Trazas de Agent Observability
 - Eventos de RUM
 - Datos de telemetría, como registros de aplicaciones
 
@@ -117,7 +117,7 @@ El Escáner de Datos Sensibles puede escanear trazas de [Observabilidad de LLM d
 
 El escaneo de Observabilidad de LLM utiliza un modelo de configuración gestionada que difiere del escaneo de datos de telemetría, donde el escaneo de Observabilidad de LLM tiene:
 
-- **Un grupo de escaneo gestionado**: Se crea automáticamente un grupo de escaneo predeterminado para su organización cuando accede por primera vez a la [LLM Observability Settings page][18]. No puede crear grupos de escaneo adicionales ni eliminar el grupo gestionado.
+- **Un grupo de escaneo gestionado**: Se crea automáticamente un grupo de escaneo predeterminado para su organización cuando accede por primera vez a la [Agent Observability Settings page][18]. No puede crear grupos de escaneo adicionales ni eliminar el grupo gestionado.
 - **Reglas personalizables**: Puede modificar reglas existentes, desactivar las que no necesite o agregar reglas de escaneo personalizadas para detectar patrones adicionales de datos sensibles.
 
 Para cada regla de escaneo, se puede aplicar una de las siguientes acciones a los datos sensibles coincidentes:
@@ -126,7 +126,7 @@ Para cada regla de escaneo, se puede aplicar una de las siguientes acciones a lo
 - **Redactar parcialmente**: Reemplace una porción específica de todos los valores coincidentes.
 - **Hash**: Reemplace todos los datos coincidentes con un identificador único no reversible.
 
-Para configurar el escaneo de datos de LLM Observability, navegue a la [LLM Observability Settings page][18] en la configuración de Sensitive Data Scanner. Para más información sobre LLM Observability, consulte la [LLM Observability documentation][20].
+Para configurar el escaneo de datos de Agent Observability, navegue a la [Agent Observability Settings page][18] en la configuración de Sensitive Data Scanner. Para más información sobre Agent Observability, consulte la [Agent Observability documentation][20].
 
 ## Escanear almacenamiento en la nube {#scan-cloud-storage}
 

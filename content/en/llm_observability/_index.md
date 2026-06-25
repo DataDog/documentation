@@ -6,19 +6,19 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
   tag: "Blog"
-  text: "Building reliable dashboard agents with Datadog LLM Observability"
+  text: "Building reliable dashboard agents with Datadog Agent Observability"
 - link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
   tag: Blog
   text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+  text: Datadog Agent Observability natively supports OpenTelemetry GenAI Semantic Conventions
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
-  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+  text: Gain visibility into Strands Agents workflows with Datadog Agent Observability
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
-  text: "Monitor your Anthropic applications with Datadog LLM Observability"
+  text: "Monitor your Anthropic applications with Datadog Agent Observability"
 - link: "https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/"
   tag: "Blog"
   text: "Best practices for monitoring LLM prompt injection attacks to protect sensitive data"
@@ -30,7 +30,7 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
   tag: "Blog"
-  text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+  text: "Monitor agents built on Amazon Bedrock with Datadog Agent Observability"
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
@@ -39,7 +39,7 @@ further_reading:
   text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
-  text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+  text: "How we cut our NLQ agent debugging time from hours to minutes with Agent Observability"
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"

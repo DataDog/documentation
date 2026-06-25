@@ -1,3 +1,3 @@
 ---
-title: Clone an LLM Observability dataset
+title: Clone an Agent Observability dataset
 ---

@@ -14,12 +14,12 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Rastrea, compara y optimiza tus prompts LLM con Datadog LLM Observability
-title: Referencia del SDK de LLM Observability
+  text: Rastrea, compara y optimiza tus prompts LLM con Datadog Agent Observability
+title: Referencia del SDK de Agent Observability
 ---
 ## Descripción general {#overview}
 
-Los SDK de LLM Observability de Datadog proveen instrumentación automática, así como APIs de instrumentación manual, para ofrecer observabilidad e información sobre tus aplicaciones LLM.
+Los SDK de Agent Observability de Datadog proveen instrumentación automática, así como APIs de instrumentación manual, para ofrecer observabilidad e información sobre tus aplicaciones LLM.
 
 ## Configuración {#setup}
 
@@ -46,7 +46,7 @@ Los SDK de LLM Observability de Datadog proveen instrumentación automática, as
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- Has descargado el último [`dd-trace-java` JAR][1]. El SDK de LLM Observability es compatible con `dd-trace-java` v1.51.0+ (se requiere Java 8+).
+- Has descargado el último [`dd-trace-java` JAR][1]. El SDK de Agent Observability es compatible con `dd-trace-java` v1.51.0+ (se requiere Java 8+).
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -56,9 +56,9 @@ Los SDK de LLM Observability de Datadog proveen instrumentación automática, as
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Habilita LLM Observability ejecutando tu aplicación usando el comando `ddtrace-run` y especificando las variables de entorno requeridas.
+Habilita Agent Observability ejecutando tu aplicación usando el comando `ddtrace-run` y especificando las variables de entorno requeridas.
 
-**Nota**: `ddtrace-run` activa automáticamente todas las integraciones de LLM Observability.
+**Nota**: `ddtrace-run` activa automáticamente todas las integraciones de Agent Observability.
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -73,7 +73,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : requerido - _entero o cadena_
-<br />Alterna para habilitar el envío de datos a LLM Observability. Debería estar configurado en `1` o `true`.
+<br />Alterna para habilitar el envío de datos a Agent Observability. Debería estar configurado en `1` o `true`.
 
 `DD_LLMOBS_ML_APP`
 : opcional - _cadena_
@@ -92,7 +92,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Habilita LLM Observability ejecutando tu aplicación con `NODE_OPTIONS="--import dd-trace/initialize.mjs"` y especificando las variables de entorno requeridas.
+Habilita Agent Observability ejecutando tu aplicación con `NODE_OPTIONS="--import dd-trace/initialize.mjs"` y especificando las variables de entorno requeridas.
 
 **Nota**: `dd-trace/initialize.mjs` activa automáticamente todas las integraciones de APM.
 
@@ -109,7 +109,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : requerido - _entero o cadena_
-<br />Alterna para habilitar el envío de datos a LLM Observability. Debería estar configurado en `1` o `true`.
+<br />Alterna para habilitar el envío de datos a Agent Observability. Debería estar configurado en `1` o `true`.
 
 `DD_LLMOBS_ML_APP`
 : opcional - _cadena_
@@ -128,7 +128,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Habilita LLM Observability ejecutando tu aplicación con `dd-trace-java` y especificando los parámetros requeridos como variables de entorno o propiedades del sistema.
+Habilita Agent Observability ejecutando tu aplicación con `dd-trace-java` y especificando los parámetros requeridos como variables de entorno o propiedades del sistema.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -146,7 +146,7 @@ Puedes proporcionar los siguientes parámetros como variables de entorno (por ej
 
 `DD_LLMOBS_ENABLED` o `dd.llmobs.enabled`
 : requerido - _entero o cadena_
-<br />Alternar para habilitar el envío de datos a LLM Observability. Debería estar configurado en `1` o `true`.
+<br />Alternar para habilitar el envío de datos a Agent Observability. Debería estar configurado en `1` o `true`.
 
 `DD_LLMOBS_ML_APP` o `dd.llmobs.ml.app`
 : opcional - _cadena_
@@ -169,12 +169,12 @@ Puedes proporcionar los siguientes parámetros como variables de entorno (por ej
 
 {{% collapse-content title="Configuración en código" level="h3" expanded=false id="in-code-setup" %}}
 
-En lugar de usar [configuración de línea de comandos](#command-line-setup), también puedes habilitar LLM Observability programáticamente.
+En lugar de usar [configuración de línea de comandos](#command-line-setup), también puedes habilitar Agent Observability programáticamente.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Utiliza la función `LLMObs.enable()` para habilitar LLM Observability.
+Utiliza la función `LLMObs.enable()` para habilitar Agent Observability.
 
 <div class="alert alert-info">
 No uses este método de configuración con el <code>ddtrace-run</code> comando.
@@ -283,7 +283,7 @@ Establece los siguientes valores como variables de entorno. No se pueden configu
 
 {{% collapse-content title="Configuración de AWS Lambda" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-Para instrumentar una función existente de AWS Lambda con LLM Observability, puedes utilizar la Extensión de Datadog y las respectivas capas de lenguaje.
+Para instrumentar una función existente de AWS Lambda con Agent Observability, puedes utilizar la Extensión de Datadog y las respectivas capas de lenguaje.
 
 1. Abre un Cloudshell en la consola de AWS.
 2. Instala el cliente de Datadog CLI.
@@ -302,7 +302,7 @@ Si ya tienes o prefieres usar un secreto en Secrets Manager, puedes establecer l
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Instala tu función Lambda con LLM Observability (esto requiere al menos la versión 77 de la capa de extensión de Datadog).
+4. Instala tu función Lambda con Agent Observability (esto requiere al menos la versión 77 de la capa de extensión de Datadog).
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -326,9 +326,9 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Invoca tu función Lambda y verifica que las trazas de LLM Observability sean visibles en la interfaz de usuario de Datadog.
+4. Invoca tu función Lambda y verifica que las trazas de Agent Observability sean visibles en la interfaz de usuario de Datadog.
 
-Limpia manualmente las trazas de LLM Observability utilizando el método `flush` antes de que la función Lambda retorne.
+Limpia manualmente las trazas de Agent Observability utilizando el método `flush` antes de que la función Lambda retorne.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -358,7 +358,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-Después de instalar el SDK y ejecutar tu aplicación, deberías esperar ver algunos datos en LLM Observability provenientes de la auto-instrumentación. La instrumentación manual puede ser utilizada para capturar marcos personalizados o operaciones de bibliotecas que aún no son compatibles.
+Después de instalar el SDK y ejecutar tu aplicación, deberías esperar ver algunos datos en Agent Observability provenientes de la auto-instrumentación. La instrumentación manual puede ser utilizada para capturar marcos personalizados o operaciones de bibliotecas que aún no son compatibles.
 
 ## Instrumentación manual {#manual-instrumentation}
 
@@ -404,7 +404,7 @@ Para trazar un tramo, utiliza `llmobs.wrap(options, function)` como un envoltori
 
 Los tipos de tramo son requeridos y se especifican en el objeto `options` que se pasa a las funciones de trazado `llmobs` (`trace`, `wrap` y `decorate`). Consulta la [documentación de Tipos de tramos][1] para una lista de tramos soportados.
 
-**Nota:** Los tramos con un tipo de tramo inválido no se envían a LLM Observability.
+**Nota:** Los tramos con un tipo de tramo inválido no se envían a Agent Observability.
 
 ### Captura automática de argumentos/salida/nombre de función {#automatic-function-argumentoutputname-capturing}
 
@@ -1939,11 +1939,11 @@ function answerQuestion(text) {
 
 ### Seguimiento de versiones {#version-tracking}
 
-LLM Observability proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión al calcular un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, LLM Observability utiliza la etiqueta de versión que especificaste en lugar de generar una automáticamente.
+Agent Observability proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión al calcular un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, Agent Observability utiliza la etiqueta de versión que especificaste en lugar de generar una automáticamente.
 
 El sistema de versionado funciona de la siguiente manera:
-- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, LLM Observability calcula un hash del contenido de `template` o `chat_template` para generar automáticamente un identificador de versión numérico.
-- **Versionado manual**: Cuando se proporciona una etiqueta `version`, LLM Observability utiliza tu etiqueta de versión especificada exactamente como se proporcionó.
+- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, Agent Observability calcula un hash del contenido de `template` o `chat_template` para generar automáticamente un identificador de versión numérico.
+- **Versionado manual**: Cuando se proporciona una etiqueta `version`, Agent Observability utiliza tu etiqueta de versión especificada exactamente como se proporcionó.
 - **Historial de versiones**: Tanto las versiones auto-generadas como las manuales se mantienen en el historial de versiones para rastrear la evolución del prompt a lo largo del tiempo.
 
 Esto te brinda la flexibilidad de confiar en la gestión automática de versiones basada en cambios en el contenido de la plantilla, o mantener el control total sobre el versionado con tus propias etiquetas de versión.

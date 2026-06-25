@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog LLM Observability prend en charge nativement les conventions sémantiques
+  text: Datadog Agent Observability prend en charge nativement les conventions sémantiques
     OpenTelemetry GenAI
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog

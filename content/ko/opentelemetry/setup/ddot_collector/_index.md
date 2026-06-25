@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: 블로그
-  text: Datadog LLM Observability는 OpenTelemetry GenAI 시맨틱 규칙을 기본적으로 지원합니다.
+  text: Datadog Agent Observability는 OpenTelemetry GenAI 시맨틱 규칙을 기본적으로 지원합니다.
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: 블로그
   text: DDOT 게이트웨이를 통해 OpenTelemetry 파이프라인을 중앙에서 관리 및 제어

@@ -869,9 +869,9 @@ Te guía a través de la integración de clústeres de Kubernetes con Datadog.
 
 ### `llm_observability_onboarding` {#llm-observability-onboarding}
 *Conjunto de herramientas: **integración***\
-Te guía a través de la integración de LLM Observability en Datadog.
+Te guía a través de la integración de Agent Observability en Datadog.
 
-- Ayúdame a configurar LLM Observability para mi aplicación de IA.
+- Ayúdame a configurar Agent Observability para mi aplicación de IA.
 
 ### `test_optimization_onboarding` {#test-optimization-onboarding}
 *Conjunto de herramientas: **integración***\

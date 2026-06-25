@@ -1,3 +1,3 @@
 ---
-title: Update LLM Observability dataset records
+title: Update Agent Observability dataset records
 ---

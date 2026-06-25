@@ -12,10 +12,10 @@ further_reading:
       text: 'Agent Observability SDK Reference'
     - link: https://www.datadoghq.com/blog/llm-prompt-tracking
       tag: Blog
-      text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+      text: Track, compare, and optimize your LLM prompts with Datadog Agent Observability
     - link: https://www.datadoghq.com/blog/mcp-client-monitoring
       tag: Blog
-      text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
+      text: Gain end-to-end visibility into MCP clients with Datadog Agent Observability
 ---
 
 ## Overview

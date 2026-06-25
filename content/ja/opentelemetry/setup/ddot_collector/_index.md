@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: ブログ
-  text: Datadog LLM Observability は、OpenTelemetry GenAI セマンティック規約をネイティブにサポートしています
+  text: Datadog Agent Observability は、OpenTelemetry GenAI セマンティック規約をネイティブにサポートしています
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: ブログ
   text: DDOT ゲートウェイを使用して、OpenTelemetry パイプラインを一元管理します

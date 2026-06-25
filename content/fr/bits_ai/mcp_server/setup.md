@@ -485,7 +485,7 @@ Point de terminaison sélectionné ({{< region-param key="dd_site_name" >}}) : <
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -577,7 +577,7 @@ Outils pour [Gestion des cas][42], y compris la création, la recherche et la mi
 - `error-tracking`: Outils pour interagir avec le suivi des erreurs de Datadog [Error Tracking][32]
 - `feature-flags`: Outils pour gérer les [drapeaux de fonctionnalités][35], permettant de créer, lister et mettre à jour les drapeaux ainsi que leurs environnements.
 - `kubernetes`: Outils pour rechercher et décrire les ressources [Kubernetes][51] et récupérer des manifestes dans tous les clusters.
-- `llmobs`: Outils pour rechercher et analyser les spans et les expériences [LLM Observability][36].
+- `llmobs`: Outils pour rechercher et analyser les spans et les expériences [Agent Observability][36].
 - `networks`: Outils pour l'analyse de [Surveillance du réseau cloud][37] et [Surveillance des appareils réseau][38].
 - `onboarding`: Outils d'intégration agentique pour une configuration et une installation guidées de Datadog.
 - `product-analytics`: Outils pour interagir avec les requêtes d'analyse de produit [Product Analytics][41].

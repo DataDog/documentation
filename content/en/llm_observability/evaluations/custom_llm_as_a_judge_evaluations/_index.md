@@ -7,7 +7,7 @@ further_reading:
   text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
-  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+  text: Gain visibility into Strands Agents workflows with Datadog Agent Observability
 - link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
   tag: "Blog"
   text: "Building an LLM evaluation framework: best practices"

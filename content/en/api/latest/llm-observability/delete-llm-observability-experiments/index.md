@@ -1,3 +1,3 @@
 ---
-title: Delete LLM Observability experiments
+title: Delete Agent Observability experiments
 ---

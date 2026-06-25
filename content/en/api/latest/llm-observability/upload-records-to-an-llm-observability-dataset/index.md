@@ -1,3 +1,3 @@
 ---
-title: Upload records to an LLM Observability dataset
+title: Upload records to an Agent Observability dataset
 ---

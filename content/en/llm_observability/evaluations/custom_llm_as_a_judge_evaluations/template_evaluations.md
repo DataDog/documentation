@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to set up Agent Observability"
 - link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
   tag: "Blog"
-  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
+  text: "Detect hallucinations in your RAG LLM applications with Datadog Agent Observability"
 aliases:
   - /llm_observability/evaluations/agent_evaluations
   - /llm_observability/evaluations/managed_evaluations/agent_evaluations

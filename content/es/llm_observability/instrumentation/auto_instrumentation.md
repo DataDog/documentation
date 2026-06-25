@@ -10,17 +10,17 @@ further_reading:
   text: Referencia del SDK de Observabilidad de LLM
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Realice un seguimiento, compare y optimice sus prompts de LLM con LLM Observability
+  text: Realice un seguimiento, compare y optimice sus prompts de LLM con Agent Observability
     de Datadog.
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
   text: Obtenga visibilidad de extremo a extremo en los clientes de MCP con Datadog
-    LLM Observability
-title: Instrumentación automática para LLM Observability
+    Agent Observability
+title: Instrumentación automática para Agent Observability
 ---
 ## Resumen
 
-LLM Observability de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas LLM compatibles a través de varias [integraciones LLM](#llm-integrations). Cuando [ejecute su aplicación con el LLM Observability SDK][2], estas integraciones LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin necesidad de cambiar su código.
+Agent Observability de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas LLM compatibles a través de varias [integraciones LLM](#llm-integrations). Cuando [ejecute su aplicación con el Agent Observability SDK][2], estas integraciones LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin necesidad de cambiar su código.
 
 <div class="alert alert-info">La instrumentación automática funciona para llamadas a <a href="#supported-frameworks-and-libraries">marcos y bibliotecas compatibles</a>. Para rastrear otras llamadas (por ejemplo: llamadas a API, consultas a bases de datos, funciones internas), consulte la <a href="/llm_observability/instrumentation/sdk">referencia del SDK de Observabilidad de LLM</a> para saber cómo agregar instrumentación manual.</div>
 
@@ -102,7 +102,7 @@ Para usar este cargador personalizado, ejecute su aplicación con la siguiente o
 {{% /collapse-content %}}
 
 {{% collapse-content title="Soporte para aplicaciones empaquetadas (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
-Para usar integraciones LLM Observability en aplicaciones empaquetadas (esbuild, Webpack), debe excluir los módulos de estas integraciones del empaquetado.
+Para usar integraciones Agent Observability en aplicaciones empaquetadas (esbuild, Webpack), debe excluir los módulos de estas integraciones del empaquetado.
 
 ##### esbuild
 Si está utilizando esbuild, consulte [Empaquetado con el rastreador de Node.js](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
@@ -177,7 +177,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog LLM Observability también admite cualquier marco que emita nativamente <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">tramos compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Consulte <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
+<div class="alert alert-info">Datadog Agent Observability también admite cualquier marco que emita nativamente <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">tramos compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Consulte <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
 
 ## Integraciones de LLM
 
@@ -643,7 +643,7 @@ El proveedor (OpenAI vs Azure OpenAI) se detecta automáticamente según el `bas
 {{< tabs >}}
 {{% tab "Python" %}}
 La integración de Agentes de OpenAI convierte el [trazado incorporado][1] del [OpenAI Agents SDK][2] en
-lo convierte al formato de LLM Observability y lo envía al producto de LLM Observability de Datadog agregando un procesador de trazas de Datadog.
+lo convierte al formato de Agent Observability y lo envía al producto de Agent Observability de Datadog agregando un procesador de trazas de Datadog.
 
 Las siguientes operaciones son compatibles:
 - [`traces`][3]
@@ -691,7 +691,7 @@ La integración de Pydantic AI instrumenta los siguientes métodos:
 {{% collapse-content title="Agentes de Strands" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-A partir de [v1.11.0][1], [Agentes de Strands][2] emite de manera nativa tramos compatibles con [convenciones semánticas de OpenTelemetry GenAI v1.37][3], que Datadog LLM Observability ingiere automáticamente sin requerir el tracer de Datadog.
+A partir de [v1.11.0][1], [Agentes de Strands][2] emite de manera nativa tramos compatibles con [convenciones semánticas de OpenTelemetry GenAI v1.37][3], que Datadog Agent Observability ingiere automáticamente sin requerir el tracer de Datadog.
 
 Para instrucciones de configuración y un ejemplo completo, consulte [Instrumentación de OpenTelemetry — Usando Agentes de Strands][4].
 
@@ -706,7 +706,7 @@ Para instrucciones de configuración y un ejemplo completo, consulte [Instrument
 {{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-La integración del [Vercel AI SDK][1] traza automáticamente la generación de texto y objetos, embeddings y llamadas a herramientas al interceptar los tramos de OpenTelemetry creados por el núcleo subyacente del [Vercel AI SDK][2] y convertirlos en tramos de Datadog LLM Observability.
+La integración del [Vercel AI SDK][1] traza automáticamente la generación de texto y objetos, embeddings y llamadas a herramientas al interceptar los tramos de OpenTelemetry creados por el núcleo subyacente del [Vercel AI SDK][2] y convertirlos en tramos de Datadog Agent Observability.
 
 ### Métodos rastreados
 - [Generación de texto][3]:
@@ -741,14 +741,14 @@ async function main () {
     ...
     experimental_telemetry: {
       isEnabled: true,
-      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog Agent Observability
     }
   });
 
   result = await generateText({
     model: openai('gpt-4o'),
     ...
-  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+  }); // since no tracer is passed in, the integration will enable it to still send Agent Observability spans
 }
 ```
 

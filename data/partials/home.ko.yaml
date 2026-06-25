@@ -103,7 +103,7 @@ nav_sections:
         link: watchdog/
         icon: watchdog
         desc: 애플리케이션 및 인프라스트럭처의 이상 징후를 감지하고 표면화합니다.
-      - title: LLM Observability
+      - title: Agent Observability
         link: llm_observability/
         icon: llm-observability
         desc: "LLM 애플리케이션을 트레이스, 모니터링하고 보안을 유지합니다."

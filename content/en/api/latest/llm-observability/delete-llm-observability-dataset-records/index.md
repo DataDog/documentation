@@ -1,3 +1,3 @@
 ---
-title: Delete LLM Observability dataset records
+title: Delete Agent Observability dataset records
 ---

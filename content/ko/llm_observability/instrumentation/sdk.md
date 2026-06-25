@@ -14,12 +14,12 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: 블로그
-  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
-title: LLM Observability SDK 참조
+  text: Datadog Agent Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
+title: Agent Observability SDK 참조
 ---
 ## 개요 {#overview}
 
-Datadog의 LLM Observability SDK는 자동 계측과 수동 계측 API를 모두 제공하여 LLM 애플리케이션에 대한 관측 가능성과 인사이트를 제공합니다.
+Datadog의 Agent Observability SDK는 자동 계측과 수동 계측 API를 모두 제공하여 LLM 애플리케이션에 대한 관측 가능성과 인사이트를 제공합니다.
 
 ## 설정 {#setup}
 
@@ -46,7 +46,7 @@ Datadog의 LLM Observability SDK는 자동 계측과 수동 계측 API를 모두
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- 최신 [`dd-trace-java` JAR][1] 파일을 다운로드해야 합니다. LLM Observability SDK는 `dd-trace-java` v1.51.0 이상에서 지원됩니다(Java 8 이상 필요).
+- 최신 [`dd-trace-java` JAR][1] 파일을 다운로드해야 합니다. Agent Observability SDK는 `dd-trace-java` v1.51.0 이상에서 지원됩니다(Java 8 이상 필요).
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -56,9 +56,9 @@ Datadog의 LLM Observability SDK는 자동 계측과 수동 계측 API를 모두
 
 {{< tabs >}}
 {{% tab "Python" %}}
-`ddtrace-run` 명령을 사용하여 애플리케이션을 실행하고 필수 환경 변수를 지정하여 LLM Observability를 활성화합니다.
+`ddtrace-run` 명령을 사용하여 애플리케이션을 실행하고 필수 환경 변수를 지정하여 Agent Observability를 활성화합니다.
 
-**참고**: : `ddtrace-run`은 모든 LLM Observability 통합을 자동으로 활성화합니다.
+**참고**: : `ddtrace-run`은 모든 Agent Observability 통합을 자동으로 활성화합니다.
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -73,7 +73,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : 필수 - _integer 또는 string_
-<br />LLM Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
+<br />Agent Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
 
 `DD_LLMOBS_ML_APP`
 : 선택 사항 - _string_
@@ -92,7 +92,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-`NODE_OPTIONS="--import dd-trace/initialize.mjs"`를 사용하여 애플리케이션을 실행하고 필수 환경 변수를 지정하여 LLM Observability를 활성화합니다.
+`NODE_OPTIONS="--import dd-trace/initialize.mjs"`를 사용하여 애플리케이션을 실행하고 필수 환경 변수를 지정하여 Agent Observability를 활성화합니다.
 
 **참고**: : `dd-trace/initialize.mjs`는 모든 APM 통합을 자동으로 활성화합니다.
 
@@ -109,7 +109,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : 필수 - _integer 또는 string_
-<br />LLM Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
+<br />Agent Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
 
 `DD_LLMOBS_ML_APP`
 : 선택 사항 - _string_
@@ -128,7 +128,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 {{% /tab %}}
 {{% tab "Java" %}}
 
-`dd-trace-java`를 사용하여 애플리케이션을 실행하고 필수 파라미터를 환경 변수 또는 시스템 속성으로 지정하여 LLM Observability를 활성화합니다.
+`dd-trace-java`를 사용하여 애플리케이션을 실행하고 필수 파라미터를 환경 변수 또는 시스템 속성으로 지정하여 Agent Observability를 활성화합니다.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -146,7 +146,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_LLMOBS_ENABLED` 또는 `dd.llmobs.enabled`
 : 필수 - _integer 또는 string_
-<br />LLM Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
+<br />Agent Observability로 데이터 전송을 활성화하는 토글입니다. `1` 또는 `true`로 설정해야 합니다.
 
 `DD_LLMOBS_ML_APP` 또는 `dd.llmobs.ml.app`
 : 선택 사항 - _string_
@@ -169,12 +169,12 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 {{% collapse-content title="인코드 설정" level="h3" expanded=false id="in-code-setup" %}}
 
-[명령줄 설정](#command-line-setup) 대신 프로그래밍 방식으로도 LLM Observability를 활성화할 수 있습니다.
+[명령줄 설정](#command-line-setup) 대신 프로그래밍 방식으로도 Agent Observability를 활성화할 수 있습니다.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-`LLMObs.enable()` 함수를 사용하여 LLM Observability를 활성화합니다.
+`LLMObs.enable()` 함수를 사용하여 Agent Observability를 활성화합니다.
 
 <div class="alert alert-info">
 이 설정 방식은 <code>ddtrace-run</code> 명령과 함께 사용하지 마세요.
@@ -229,7 +229,7 @@ LLMObs.enable(
 이 설정 방식은 <code>dd-trace/initialize.mjs</code> 명령과 함께 사용하지 마세요.
 </div>
 
-`init()` 함수를 사용하여 LLM Observability를 활성화합니다.
+`init()` 함수를 사용하여 Agent Observability를 활성화합니다.
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -283,7 +283,7 @@ const llmobs = tracer.llmobs;
 
 {{% collapse-content title="AWS Lambda 설정" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-기존 AWS Lambda 함수를 LLM Observability로 계측하려면 Datadog 확장 및 해당 언어 레이어를 사용할 수 있습니다.
+기존 AWS Lambda 함수를 Agent Observability로 계측하려면 Datadog 확장 및 해당 언어 레이어를 사용할 수 있습니다.
 
 1. AWS 콘솔에서 CloudShell을 엽니다.
 2. Datadog CLI 클라이언트를 설치합니다.
@@ -302,7 +302,7 @@ export DD_SITE=<YOUR_DATADOG_SITE>
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. LLM Observability를 사용하도록 Lambda 함수를 설치합니다(Datadog 확장 레이어 버전 77 이상 필요).
+4. Agent Observability를 사용하도록 Lambda 함수를 설치합니다(Datadog 확장 레이어 버전 77 이상 필요).
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -326,9 +326,9 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Lambda 함수를 호출한 후 Datadog UI에서 LLM Observability 트레이스가 표시되는지 확인합니다.
+4. Lambda 함수를 호출한 후 Datadog UI에서 Agent Observability 트레이스가 표시되는지 확인합니다.
 
-Lambda 함수가 반환되기 전에 `flush` 메서드를 사용하여 LLM Observability 트레이스를 수동으로 플러시합니다.
+Lambda 함수가 반환되기 전에 `flush` 메서드를 사용하여 Agent Observability 트레이스를 수동으로 플러시합니다.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -358,7 +358,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-SDK를 설치하고 애플리케이션을 실행하면 자동 계측을 통해 LLM Observability에 일부 데이터가 표시되는 것을 확인할 수 있습니다. 아직 지원되지 않는 라이브러리에서 생성된 사용자 지정 프레임워크나 작업을 수집하려면 수동 계측을 사용할 수 있습니다.
+SDK를 설치하고 애플리케이션을 실행하면 자동 계측을 통해 Agent Observability에 일부 데이터가 표시되는 것을 확인할 수 있습니다. 아직 지원되지 않는 라이브러리에서 생성된 사용자 지정 프레임워크나 작업을 수집하려면 수동 계측을 사용할 수 있습니다.
 
 ## 수동 계측 {#manual-instrumentation}
 
@@ -404,7 +404,7 @@ with LLMObs.llm(model="gpt-4o"):
 
 스팬 종류는 필수이며, `llmobs` 추적 함수(`trace`, `wrap`, `decorate`)에 전달되는 `options` 객체에서 지정합니다. 지원되는 스팬 종류의 목록은 [스팬 종류 설명서][1]를 참조하세요.
 
-**참고:** 유효하지 않은 스팬 종류의 스팬은 LLM Observability에 제출되지 않습니다.
+**참고:** 유효하지 않은 스팬 종류의 스팬은 Agent Observability에 제출되지 않습니다.
 
 ### 함수 인수/출력/이름 자동 캡처 {#automatic-function-argumentoutputname-capturing}
 
@@ -1808,7 +1808,7 @@ function ragWorkflow(userQuestion) {
 
 ## 프롬프트 추적 {#prompt-tracking}
 
-LLM 스팬에 구조화된 프롬프트 메타데이터를 첨부하여 결과를 재현하고, 변경 사항을 감사하며, 버전 간 프롬프트 성능을 비교할 수 있습니다. 템플릿을 사용할 때 LLM Observability는 템플릿 콘텐츠 변경에 따라 [버전 추적](#version-tracking) 기능도 제공합니다.
+LLM 스팬에 구조화된 프롬프트 메타데이터를 첨부하여 결과를 재현하고, 변경 사항을 감사하며, 버전 간 프롬프트 성능을 비교할 수 있습니다. 템플릿을 사용할 때 Agent Observability는 템플릿 콘텐츠 변경에 따라 [버전 추적](#version-tracking) 기능도 제공합니다.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1939,11 +1939,11 @@ function answerQuestion(text) {
 
 ### 버전 추적 {#version-tracking}
 
-LLM Observability는 명시적인 버전이 지정되지 않은 경우 프롬프트에 대해 자동 버전 관리를 제공합니다. 프롬프트 메타데이터에 `template` 또는 `chat_template`을 제공하고 `version` 태그를 지정하지 않으면 시스템은 템플릿 콘텐츠의 해시를 계산하여 자동으로 버전을 생성합니다. 반대로 `version` 태그를 지정하면, LLM Observability는 자동 생성 버전 대신 사용자가 지정한 버전 레이블을 사용합니다.
+Agent Observability는 명시적인 버전이 지정되지 않은 경우 프롬프트에 대해 자동 버전 관리를 제공합니다. 프롬프트 메타데이터에 `template` 또는 `chat_template`을 제공하고 `version` 태그를 지정하지 않으면 시스템은 템플릿 콘텐츠의 해시를 계산하여 자동으로 버전을 생성합니다. 반대로 `version` 태그를 지정하면, Agent Observability는 자동 생성 버전 대신 사용자가 지정한 버전 레이블을 사용합니다.
 
 버전 관리 시스템은 다음과 같이 작동합니다.
-- **자동 버전 관리**: `version` 태그가 지정되지 않으면 LLM Observability는 `template` 또는 `chat_template` 콘텐츠의 해시를 계산하여 숫자 버전 식별자를 자동 생성합니다.
-- **수동 버전 관리**: `version` 태그가 지정되면 LLM Observability는 사용자가 지정한 버전 레이블을 그대로 사용합니다.
+- **자동 버전 관리**: `version` 태그가 지정되지 않으면 Agent Observability는 `template` 또는 `chat_template` 콘텐츠의 해시를 계산하여 숫자 버전 식별자를 자동 생성합니다.
+- **수동 버전 관리**: `version` 태그가 지정되면 Agent Observability는 사용자가 지정한 버전 레이블을 그대로 사용합니다.
 - **버전 기록**: 자동 생성 버전과 수동 지정 버전 모두 버전 기록에 유지되어 시간 경과에 따른 프롬프트 변화를 추적할 수 있습니다.
 
 이렇게 하면 템플릿 내용 변경에 따른 자동 버전 관리에 의존할 수도 있고, 직접 버전 라벨을 지정하여 버전 관리를 완전히 제어할 수도 있는 유연성을 제공합니다.
@@ -1953,7 +1953,7 @@ LLM/임베딩 스팬에 토큰 메트릭(자동 비용 추적용) 또는 비용 
 
 자동 계측을 사용하는 경우, 토큰 및 비용 메트릭은 스팬에 자동으로 표시됩니다. 수동으로 계측하는 경우, 아래 지침을 따릅니다.
 
-<div class="alert alert-info">이 문맥에서 "토큰 메트릭" 및 "비용 메트릭"은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/monitoring/metrics/">Datadog 플랫폼의 LLM Observability 메트릭</a>과는 별개의 개념입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>및 <code>output_cost</code>)의 경우 Datadog는 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
+<div class="alert alert-info">이 문맥에서 "토큰 메트릭" 및 "비용 메트릭"은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/monitoring/metrics/">Datadog 플랫폼의 Agent Observability 메트릭</a>과는 별개의 개념입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>및 <code>output_cost</code>)의 경우 Datadog는 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2012,7 +2012,7 @@ def llm_call(prompt):
 
 ## 평가 {#evaluations}
 
-LLM Observability SDK는 평가를 Datadog에 내보내고 제출할 수 있는 메서드를 제공합니다.
+Agent Observability SDK는 평가를 Datadog에 내보내고 제출할 수 있는 메서드를 제공합니다.
 
 <div class="alert alert-info">풍부한 결과 메타데이터를 갖춘 재사용 가능한 클래스 기반 평가기(<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>)를 구축하려면 <a href="/llm_observability/guide/evaluation_developer_guide/">평가 개발자 가이드</a>를 참조하세요.</div>
 
@@ -2079,7 +2079,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> 는 더 이상 사용되지 않으며 ddtrace의 다음 주요 버전(4.0)에서 제거될 예정입니다. 마이그레이션하려면, 사용 중인 <code>LLMObs.submit_evaluation_for</code> 호출의 이름을 <code>LLMObs.submit_evaluation</code>으로 변경하세요.</div>
 
-**참고**: 사용자 지정 평가는 사용자가 구현하고 호스팅하는 평가자입니다. Datadog이 내장 평가기를 사용해 자동으로 계산하는 기본 제공 평가와는 다릅니다. 애플리케이션용 기본 제공 평가를 구성하려면 Datadog의 [**LLM Observability** > **Settings** > **Evaluations**][1] 페이지를 사용하세요.
+**참고**: 사용자 지정 평가는 사용자가 구현하고 호스팅하는 평가자입니다. Datadog이 내장 평가기를 사용해 자동으로 계산하는 기본 제공 평가와는 다릅니다. 애플리케이션용 기본 제공 평가를 구성하려면 Datadog의 [**Agent Observability** > **Settings** > **Evaluations**][1] 페이지를 사용하세요.
 
 `LLMObs.submit_evaluation()` 메서드는 다음 인수를 허용합니다.
 
@@ -2659,7 +2659,7 @@ def separate_task(workflow_span):
 
 ####  서버리스 환경에서 강제 플러시 {#force-flushing-in-serverless-environments}
 
-`LLMObs.flush()`는 모든 버퍼링된 LLM Observability 데이터를 Datadog 백엔드로 전송하는 블로킹 함수입니다. 이는 서버리스 환경에서 모든 LLM Observability 트레이스가 제출될 때까지 애플리케이션 종료를 방지하는 데 유용할 수 있습니다.
+`LLMObs.flush()`는 모든 버퍼링된 Agent Observability 데이터를 Datadog 백엔드로 전송하는 블로킹 함수입니다. 이는 서버리스 환경에서 모든 Agent Observability 트레이스가 제출될 때까지 애플리케이션 종료를 방지하는 데 유용할 수 있습니다.
 
 ###  여러 애플리케이션 추적하기 {#tracing-multiple-applications}
 
@@ -2729,7 +2729,7 @@ function processMessage () {
 
 ### TypeScript의 함수 데코레이터 {#function-decorators-in-typescript}
 
-Node.js LLM Observability SDK는 TypeScript 애플리케이션을 위한 함수 데코레이터 역할을 하는 `llmobs.decorate` 함수를 제공합니다. 이 함수의 추적 동작은 `llmobs.wrap`과 동일합니다.
+Node.js Agent Observability SDK는 TypeScript 애플리케이션을 위한 함수 데코레이터 역할을 하는 `llmobs.decorate` 함수를 제공합니다. 이 함수의 추적 동작은 `llmobs.wrap`과 동일합니다.
 
 ####  예시 {#example-34}
 
@@ -2756,7 +2756,7 @@ class MyAgent {
 
 ###  서버리스 환경에서 강제 플러시 {#force-flushing-in-serverless-environments-1}
 
-`llmobs.flush()`는 모든 버퍼링된 LLM Observability 데이터를 Datadog 백엔드로 전송하는 블로킹 함수입니다. 이는 서버리스 환경에서 모든 LLM Observability 트레이스가 제출될 때까지 애플리케이션 종료를 방지하는 데 유용할 수 있습니다.
+`llmobs.flush()`는 모든 버퍼링된 Agent Observability 데이터를 Datadog 백엔드로 전송하는 블로킹 함수입니다. 이는 서버리스 환경에서 모든 Agent Observability 트레이스가 제출될 때까지 애플리케이션 종료를 방지하는 데 유용할 수 있습니다.
 
 ### 여러 애플리케이션 추적하기 {#tracing-multiple-applications-1}
 

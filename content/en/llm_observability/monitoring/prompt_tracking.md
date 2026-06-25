@@ -5,7 +5,7 @@ description: Use Prompt Tracking to track your prompt templates and versions.
 further_reading:
   - link: https://www.datadoghq.com/blog/llm-prompt-tracking
     tag: Blog
-    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+    text: Track, compare, and optimize your LLM prompts with Datadog Agent Observability
 
 ---
 

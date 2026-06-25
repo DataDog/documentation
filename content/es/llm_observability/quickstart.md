@@ -11,11 +11,11 @@ further_reading:
 title: Quickstart
 ---
 
-Esta página demuestra el uso de del kit de desarrollo de software (SDK) de LLM Observability de Datadog para instrumentar una aplicación de LLM Python, Node.js, o Java.
+Esta página demuestra el uso de del kit de desarrollo de software (SDK) de Agent Observability de Datadog para instrumentar una aplicación de LLM Python, Node.js, o Java.
 
 ### Requisitos previos
 
-LLM Observability requiere una clave de API de Datadog si no tienes un Datadog Agent en funcionamiento. Encuentra tu clave de API [en Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+Agent Observability requiere una clave de API de Datadog si no tienes un Datadog Agent en funcionamiento. Encuentra tu clave de API [en Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### Configuración
 
@@ -91,7 +91,7 @@ LLM Observability requiere una clave de API de Datadog si no tienes un Datadog A
 
 ### Ver trazas
 
-Realiza solicitudes a tu aplicación al activar llamadas a LLM y, luego, visualiza las trazas en la pestaña **Traces** (Trazas) [de la página **LLM Observability**][3] en Datadog. Si no ves ninguna traza, asegúrate de que estás utilizando una biblioteca compatible. De lo contrario, puede que tengas que instrumentar manualmente las llamadas a LLM de tu aplicación.
+Realiza solicitudes a tu aplicación al activar llamadas a LLM y, luego, visualiza las trazas en la pestaña **Traces** (Trazas) [de la página **Agent Observability**][3] en Datadog. Si no ves ninguna traza, asegúrate de que estás utilizando una biblioteca compatible. De lo contrario, puede que tengas que instrumentar manualmente las llamadas a LLM de tu aplicación.
 
 
 ### Siguientes pasos
@@ -104,7 +104,7 @@ Después de que se envíen las trazas de tu solicitud, puedes:
 
 ## Ejemplo de la aplicación "Hello World"
 
-A continuación, encontrarás una sencilla aplicación que puedes utilizar para empezar a explorar el producto LLM Observability.
+A continuación, encontrarás una sencilla aplicación que puedes utilizar para empezar a explorar el producto Agent Observability.
 
 
 {{< tabs >}}

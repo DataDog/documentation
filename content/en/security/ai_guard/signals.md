@@ -132,7 +132,7 @@ When you click on a span in the explorer, you can see:
 - Whether the request included sensitive data, and if so, what type of sensitive data
 - Additional tags, which you can use to filter spans in the explorer
 
-Additionally, you can click **Explore in graph view** to see the requests in the conversation graphed out, or view the span in [APM][8] or [LLM Observability][9].
+Additionally, you can click **Explore in graph view** to see the requests in the conversation graphed out, or view the span in [APM][8] or [Agent Observability][9].
 
 ## Further reading
 

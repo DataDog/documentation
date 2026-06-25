@@ -4,11 +4,11 @@ title: Servicios de proxy de traces (trazas)
 
 ## Información general
 
-Al igual que las aplicaciones tradicionales, una aplicación de LLM puede abarcar varios microservicios. Con LLM Observability, si uno de estos servicios es un proxy o puerta de enlace de LLM, puedes rastrear llamadas de LLM en una trace (traza) completa de extremo a extremo y capturar la ruta de solicitud completa de todos los servicios.
+Al igual que las aplicaciones tradicionales, una aplicación de LLM puede abarcar varios microservicios. Con Agent Observability, si uno de estos servicios es un proxy o puerta de enlace de LLM, puedes rastrear llamadas de LLM en una trace (traza) completa de extremo a extremo y capturar la ruta de solicitud completa de todos los servicios.
 
-## Activación de LLM Observability para un servicio de proxy o puerta de enlace
+## Activación de Agent Observability para un servicio de proxy o puerta de enlace
 
-Para habilitar LLM Observability para un servicio de proxy o puerta de enlace utilizado por varias aplicaciones de ML, puedes configurarlo sin especificar un nombre de aplicación de ML. En su lugar, configura el nombre del servicio. Esto te permite [filtrar spans (tramos) específicos de ese servicio de proxy o puerta de enlace en la observabilidad de LLM](#observing-llm-gateway-and-proxy-services).
+Para habilitar Agent Observability para un servicio de proxy o puerta de enlace utilizado por varias aplicaciones de ML, puedes configurarlo sin especificar un nombre de aplicación de ML. En su lugar, configura el nombre del servicio. Esto te permite [filtrar spans (tramos) específicos de ese servicio de proxy o puerta de enlace en la observabilidad de LLM](#observing-llm-gateway-and-proxy-services).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -40,7 +40,7 @@ const llmobs = tracer.llmobs;
 {{< /tabs >}}
 
 
-Si tienes un servicio que orquesta aplicaciones de ML que envían solicitudes a un proxy o puerta de enlace de LLM, habilita LLM Observability con el nombre de la aplicación de ML:
+Si tienes un servicio que orquesta aplicaciones de ML que envían solicitudes a un proxy o puerta de enlace de LLM, habilita Agent Observability con el nombre de la aplicación de ML:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -97,7 +97,7 @@ main();
 {{% /tab %}}
 {{< /tabs >}}
 
-Cuando la aplicación de LLM realiza una solicitud al servicio de proxy o puerta de enlace, el SDK LLM Observability propaga automáticamente el nombre de la aplicación de ML desde la aplicación de LLM original. El nombre de la aplicación de ML propagado tiene prioridad sobre el nombre de la aplicación de ML especificado en el servicio de proxy o puerta de enlace.
+Cuando la aplicación de LLM realiza una solicitud al servicio de proxy o puerta de enlace, el SDK Agent Observability propaga automáticamente el nombre de la aplicación de ML desde la aplicación de LLM original. El nombre de la aplicación de ML propagado tiene prioridad sobre el nombre de la aplicación de ML especificado en el servicio de proxy o puerta de enlace.
 
 ## Observación de los servicios de puerta de enlace y proxy de LLM
 

@@ -2,9 +2,9 @@
 description: Monitoriza tus tokens y costos de LLM.
 title: Costo
 ---
-{{< img src="llm_observability/cost_tracking_overview.png" alt="Visualización de costos de una aplicación en LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/cost_tracking_overview.png" alt="Visualización de costos de una aplicación en Agent Observability." style="width:100%;" >}}
 
-LLM Observability de Datadog calcula automáticamente un costo estimado de cada solicitud de LLM, utilizando los modelos de precios públicos de los proveedores y los counts de tokens anotados en los spans (tramos) de LLM/integración.
+Agent Observability de Datadog calcula automáticamente un costo estimado de cada solicitud de LLM, utilizando los modelos de precios públicos de los proveedores y los counts de tokens anotados en los spans (tramos) de LLM/integración.
 
 Al agregar esta información en todas las traces (trazas) y aplicaciones, puedes obtener información sobre los patrones de uso de tus modelos de LLM y su efecto en el gasto global.
 
@@ -42,15 +42,15 @@ Datadog calcula automáticamente el costo de las solicitudes de LLM realizadas a
 - Google Gemini: [Precios de Gemini][7]
 
 ## Métricas
-Encontrarás las métricas de costos en [Métricas de LLM Observability][8].
+Encontrarás las métricas de costos en [Métricas de Agent Observability][8].
 
 Las métricas de costos incluyen una tag (etiqueta) `source` para indicar dónde se originó el valor:
 - `source:auto` — calculado automáticamente
 - `source:user` — provisto manualmente
 
 
-## Ver costos en LLM Observability
-Visualiza tu aplicación en LLM Observability y selecciona **Costs** (Costos) a la izquierda. Las funciones _Vista de costos_:
+## Ver costos en Agent Observability
+Visualiza tu aplicación en Agent Observability y selecciona **Costs** (Costos) a la izquierda. Las funciones _Vista de costos_:
 - Información general de alto nivel del uso de tu LLM a lo largo del tiempo, incluidos el **Total Cost** (Costo total), el **Cost Change** (Cambio de costo), el **Total Tokens** (Total de tokens) y el **Token Change** (Cambio de tokens).
 - **Desglose por tipo de token**: Desglose del uso de tokens, junto con los costos asociados.
 - **Desglose por proveedor/modelo** o **identificación/versión de avisos**: Costo y uso de tokens desglosados por proveedor y modelo de LLM o por avisos individuales o versiones de avisos (con tecnología de [Rastreo de avisos][9])

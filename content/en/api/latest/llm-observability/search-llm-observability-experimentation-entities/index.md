@@ -1,3 +1,3 @@
 ---
-title: Search LLM Observability experimentation entities
+title: Search Agent Observability experimentation entities
 ---

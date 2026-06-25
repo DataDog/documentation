@@ -5,7 +5,7 @@ description: Learn how to instrument and monitor MCP clients with Agent Observab
 further_reading:
   - link: https://www.datadoghq.com/blog/mcp-client-monitoring
     tag: Blog
-    text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
+    text: Gain end-to-end visibility into MCP clients with Datadog Agent Observability
 
 ---
 

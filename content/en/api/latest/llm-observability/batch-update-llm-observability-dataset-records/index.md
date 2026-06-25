@@ -1,3 +1,3 @@
 ---
-title: Batch update LLM Observability dataset records
+title: Batch update Agent Observability dataset records
 ---

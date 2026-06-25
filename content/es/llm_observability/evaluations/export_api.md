@@ -4,13 +4,13 @@ title: API de exportación
 
 ## Información general
 
-La API de exportación de LLM Observability proporciona endpoints para recuperar datos de tramos (spans). Estos endpoints te permiten acceder mediante programación a tus datos de LLM Observability para ejecutar evaluaciones externas y exportar tramos para su almacenamiento sin conexión.
+La API de exportación de Agent Observability proporciona endpoints para recuperar datos de tramos (spans). Estos endpoints te permiten acceder mediante programación a tus datos de Agent Observability para ejecutar evaluaciones externas y exportar tramos para su almacenamiento sin conexión.
 
 <div class="alert alert-info">Por defecto, exportamos tramos de los últimos 15 minutos. Si necesitas buscar fuera de este intervalo de tiempo, especifica un intervalo de tiempo en tu solicitud.</div>
 
 ## Buscar tramos
 
-Utiliza este endpoint para buscar y filtrar tramos de LLM Observability utilizando criterios específicos.
+Utiliza este endpoint para buscar y filtrar tramos de Agent Observability utilizando criterios específicos.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/llm-obs/v1/spans/events/search`
@@ -92,7 +92,7 @@ EOF
 
 ## Lista de tramos
 
-Utiliza este endpoint para recuperar una lista de tramos de LLM Observability.
+Utiliza este endpoint para recuperar una lista de tramos de Agent Observability.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/llm-obs/v1/spans/events`

@@ -14,12 +14,12 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Suivez, comparez et optimisez vos prompts LLM avec Datadog LLM Observability.
-title: Référence SDK LLM Observability
+  text: Suivez, comparez et optimisez vos prompts LLM avec Datadog Agent Observability.
+title: Référence SDK Agent Observability
 ---
 ## Aperçu {#overview}
 
-Les SDK LLM Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une visibilité et des informations sur vos applications LLM.
+Les SDK Agent Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une visibilité et des informations sur vos applications LLM.
 
 ## Configuration {#setup}
 
@@ -46,7 +46,7 @@ Les SDK LLM Observability de Datadog fournissent une instrumentation automatique
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- Vous avez téléchargé le dernier [`dd-trace-java` JAR][1]. Le SDK LLM Observability est pris en charge dans `dd-trace-java` v1.51.0+ (Java 8+ requis).
+- Vous avez téléchargé le dernier [`dd-trace-java` JAR][1]. Le SDK Agent Observability est pris en charge dans `dd-trace-java` v1.51.0+ (Java 8+ requis).
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -56,9 +56,9 @@ Les SDK LLM Observability de Datadog fournissent une instrumentation automatique
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Activez LLM Observability en exécutant votre application avec la commande `ddtrace-run` et en spécifiant les variables d'environnement requises.
+Activez Agent Observability en exécutant votre application avec la commande `ddtrace-run` et en spécifiant les variables d'environnement requises.
 
-**Remarque**: `ddtrace-run` active automatiquement toutes les intégrations LLM Observability.
+**Remarque**: `ddtrace-run` active automatiquement toutes les intégrations Agent Observability.
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -73,7 +73,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : requis - _entier ou chaîne_
-<br />Basculer pour activer la soumission des données à LLM Observability. Doit être défini sur `1` ou `true`.
+<br />Basculer pour activer la soumission des données à Agent Observability. Doit être défini sur `1` ou `true`.
 
 `DD_LLMOBS_ML_APP`
 : optionnel - _chaîne_
@@ -92,7 +92,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Activez LLM Observability en exécutant votre application avec `NODE_OPTIONS="--import dd-trace/initialize.mjs"` et en spécifiant les variables d'environnement requises.
+Activez Agent Observability en exécutant votre application avec `NODE_OPTIONS="--import dd-trace/initialize.mjs"` et en spécifiant les variables d'environnement requises.
 
 **Remarque**: `dd-trace/initialize.mjs` active automatiquement toutes les intégrations APM.
 
@@ -109,7 +109,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : requis - _entier ou chaîne_
-<br />Basculer pour activer la soumission des données à LLM Observability. Doit être défini sur `1` ou `true`.
+<br />Basculer pour activer la soumission des données à Agent Observability. Doit être défini sur `1` ou `true`.
 
 `DD_LLMOBS_ML_APP`
 : optionnel - _chaîne_
@@ -128,7 +128,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Activez LLM Observability en exécutant votre application avec `dd-trace-java` et en spécifiant les paramètres requis en tant que variables d'environnement ou propriétés système.
+Activez Agent Observability en exécutant votre application avec `dd-trace-java` et en spécifiant les paramètres requis en tant que variables d'environnement ou propriétés système.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -146,7 +146,7 @@ Vous pouvez fournir les paramètres suivants en tant que variables d'environneme
 
 `DD_LLMOBS_ENABLED` ou `dd.llmobs.enabled`
 :  requis - _ entier ou chaîne _
-<br />Basculer pour activer la soumission des données à LLM Observability. Doit être défini sur `1` ou `true`.
+<br />Basculer pour activer la soumission des données à Agent Observability. Doit être défini sur `1` ou `true`.
 
 `DD_LLMOBS_ML_APP` ou `dd.llmobs.ml.app`
 :  optionnel - _ chaîne _
@@ -169,12 +169,12 @@ Vous pouvez fournir les paramètres suivants en tant que variables d'environneme
 
 {{% collapse-content title="Configuration dans le code" level="h3" expanded=false id="in-code-setup" %}}
 
-Au lieu d'utiliser la [configuration en ligne de commande](#command-line-setup), vous pouvez également activer LLM Observability par programmation.
+Au lieu d'utiliser la [configuration en ligne de commande](#command-line-setup), vous pouvez également activer Agent Observability par programmation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Utilisez la `LLMObs.enable()`fonction pour activer LLM Observability.
+Utilisez la `LLMObs.enable()`fonction pour activer Agent Observability.
 
 <div class="alert alert-info">
 Ne pas utiliser cette méthode de configuration avec le <code>ddtrace-run</code> commande.
@@ -229,7 +229,7 @@ LLMObs.enable(
 Ne pas utiliser cette méthode de configuration avec le <code>dd-trace/initialize.mjs</code> commande.
 </div>
 
-Utilisez la `init()`fonction pour activer LLM Observability.
+Utilisez la `init()`fonction pour activer Agent Observability.
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -328,7 +328,7 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 
 4. Invoquez votre fonction Lambda et vérifiez que les traces d'Observabilité LLM sont visibles dans l'interface utilisateur Datadog.
 
-Videz manuellement les traces LLM Observability en utilisant la méthode `flush` avant que la fonction Lambda ne renvoie.
+Videz manuellement les traces Agent Observability en utilisant la méthode `flush` avant que la fonction Lambda ne renvoie.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -358,7 +358,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-Après avoir installé le SDK et exécuté votre application, vous devriez vous attendre à voir des données dans LLM Observability grâce à l'auto-instrumentation. L'instrumentation manuelle peut être utilisée pour capturer des frameworks ou des opérations personnalisés provenant de bibliothèques qui ne sont pas encore prises en charge.
+Après avoir installé le SDK et exécuté votre application, vous devriez vous attendre à voir des données dans Agent Observability grâce à l'auto-instrumentation. L'instrumentation manuelle peut être utilisée pour capturer des frameworks ou des opérations personnalisés provenant de bibliothèques qui ne sont pas encore prises en charge.
 
 ## Instrumentation manuelle {#manual-instrumentation}
 
@@ -404,7 +404,7 @@ Pour tracer un span, utilisez `llmobs.wrap(options, function)` comme un wrapper 
 
 Les types de span sont requis et sont spécifiés sur l'objet `options` passé aux fonctions de traçage `llmobs` (`trace`, `wrap` et `decorate`). Consultez la [documentation des types de span][1] pour une liste des types de span pris en charge.
 
-**Remarque :** Les spans avec un type de span invalide ne sont pas soumis à LLM Observability.
+**Remarque :** Les spans avec un type de span invalide ne sont pas soumis à Agent Observability.
 
 ### Capture automatique des arguments/résultats/noms de fonction {#automatic-function-argumentoutputname-capturing}
 
@@ -2659,7 +2659,7 @@ def separate_task(workflow_span):
 
 #### Forcer le vidage dans des environnements sans serveur {#force-flushing-in-serverless-environments}
 
-`LLMObs.flush()` est une fonction bloquante qui soumet toutes les données d'observabilité LLM mises en mémoire tampon au backend Datadog. Cela peut être utile dans des environnements sans serveur pour empêcher une application de se fermer tant que toutes les traces LLM Observability ne sont pas soumises.
+`LLMObs.flush()` est une fonction bloquante qui soumet toutes les données d'observabilité LLM mises en mémoire tampon au backend Datadog. Cela peut être utile dans des environnements sans serveur pour empêcher une application de se fermer tant que toutes les traces Agent Observability ne sont pas soumises.
 
 ### Tracer plusieurs applications {#tracing-multiple-applications}
 
@@ -2756,7 +2756,7 @@ class MyAgent {
 
 ### Forcer le vidage dans des environnements sans serveur {#force-flushing-in-serverless-environments-1}
 
-`llmobs.flush()` est une fonction bloquante qui soumet toutes les données d'observabilité LLM mises en mémoire tampon au backend Datadog. Cela peut être utile dans des environnements sans serveur pour empêcher une application de se fermer tant que toutes les traces LLM Observability ne sont pas soumises.
+`llmobs.flush()` est une fonction bloquante qui soumet toutes les données d'observabilité LLM mises en mémoire tampon au backend Datadog. Cela peut être utile dans des environnements sans serveur pour empêcher une application de se fermer tant que toutes les traces Agent Observability ne sont pas soumises.
 
 ### Tracer plusieurs applications {#tracing-multiple-applications-1}
 

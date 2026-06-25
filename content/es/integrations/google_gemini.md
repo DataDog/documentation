@@ -3,7 +3,7 @@ app_id: google-gemini
 app_uuid: 93179a9e-98f8-48fe-843a-59f9c9bb84df
 assets:
   dashboards:
-    LLM Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
+    Agent Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
   integration:
     auto_install: false
     events:
@@ -64,14 +64,14 @@ tile:
 
 Monitoriza, soluciona problemas y evalúa tus aplicaciones basadas en LLM, como chatbots o herramientas de extracción de datos, utilizando [Google Gemini][1].
 
-Si estás creando aplicaciones LLM, utiliza LLM Observability de Datadog para investigar la causa de origen de los problemas, monitorizar el rendimiento operativo, y evaluar la calidad, la privacidad y la seguridad de tus aplicaciones LLM.
+Si estás creando aplicaciones LLM, utiliza Agent Observability de Datadog para investigar la causa de origen de los problemas, monitorizar el rendimiento operativo, y evaluar la calidad, la privacidad y la seguridad de tus aplicaciones LLM.
 
-Consulta el [vídeo de la vista de rastreo de LLM Observability][2] para ver un ejemplo de cómo puedes investigar una traza.
+Consulta el [vídeo de la vista de rastreo de Agent Observability][2] para ver un ejemplo de cómo puedes investigar una traza.
 
 ## Configuración
 
-### LLM Observability: Obtén una visibilidad de extremo a extremo de tu aplicación LLM con Google Gemini
-Puedes activar LLM Observability en diferentes entornos. Sigue la configuración correspondiente en función de tu escenario:
+### Agent Observability: Obtén una visibilidad de extremo a extremo de tu aplicación LLM con Google Gemini
+Puedes activar Agent Observability en diferentes entornos. Sigue la configuración correspondiente en función de tu escenario:
 
 #### Instalación para Python
 
@@ -120,9 +120,9 @@ Puedes activar LLM Observability en diferentes entornos. Sigue la configuración
 
 **Nota**: Si el Agent se ejecuta en un puerto o host personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` en consecuencia.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless:
+##### Si estás ejecutando Agent Observability en un entorno serverless:
 
-Activa LLM Observability configurando las siguientes variables de entorno:
+Activa Agent Observability configurando las siguientes variables de entorno:
 
   ```shell
      DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -141,7 +141,7 @@ Los siguientes métodos se rastrean tanto para operaciones síncronas como asín
 Estos métodos no requieren ninguna configuración adicional.
 
 ##### Validación
-Comprueba si LLM Observability captura correctamente los tramos, verificando la creación exitosa de tramos en tus logs de aplicación. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
+Comprueba si Agent Observability captura correctamente los tramos, verificando la creación exitosa de tramos en tus logs de aplicación. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
 
   ```shell
   ddtrace-run --info
