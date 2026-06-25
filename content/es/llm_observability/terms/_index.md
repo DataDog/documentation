@@ -7,16 +7,16 @@ aliases:
 further_reading:
 - link: /llm_observability/setup
   tag: Documentación
-  text: Aprende a configurar LLM Observability
+  text: Aprende a configurar Agent Observability
 - link: /llm_observability/submit_evaluations
   tag: Guía
-  text: Enviar evaluaciones a LLM Observability
-title: Términos y conceptos de LLM Observability
+  text: Enviar evaluaciones a Agent Observability
+title: Términos y conceptos de Agent Observability
 ---
 
 ## Información general
 
-La interfaz de usuario de LLM Observability proporciona muchas herramientas para solucionar problemas de rendimiento de conversaciones y correlacionar datos en todo el producto, lo que te permite encontrar y resolver problemas en modelos de lenguaje de gran tamaño (LLM).
+La interfaz de usuario de Agent Observability proporciona muchas herramientas para solucionar problemas de rendimiento de conversaciones y correlacionar datos en todo el producto, lo que te permite encontrar y resolver problemas en modelos de lenguaje de gran tamaño (LLM).
 
 | Concepto | Descripción |
 |---|---|
@@ -38,9 +38,9 @@ Un tramo consta de los siguientes atributos:
 
 ### Tipos de tramos
 
-LLM Observability categoriza los tramos por su *tipo de tramo*, que define el tipo de trabajo que realiza el tramo. Esto puede brindarte información más granular sobre las operaciones que realiza tu aplicación de LLM.
+Agent Observability categoriza los tramos por su *tipo de tramo*, que define el tipo de trabajo que realiza el tramo. Esto puede brindarte información más granular sobre las operaciones que realiza tu aplicación de LLM.
 
-LLM Observability admite los siguientes tipos de tramo:
+Agent Observability admite los siguientes tipos de tramo:
 
 | Tipo      | Representa   | ¿Tramo raíz válido?   | Ejemplos |
 |-----------|--------------|--------------|-------------|
@@ -52,7 +52,7 @@ LLM Observability admite los siguientes tipos de tramo:
 | [Inserción](#embedding-tramo (span)) | Una llamada a un modelo o una función que devuelve una inserción. | No | Una llamada a text-embedding-ada-002. |
 | [Recuperación](#retrieval-span) | Una operación de recuperación de datos de una base de conocimientos externa. | No | Una llamada a una base de datos vectorial que devuelve una matriz de documentos clasificados. |
 
-Para obtener instrucciones sobre cómo crear tramos desde tu aplicación, incluidos los ejemplos de código, consulta [Rastreo de tramos][2] en la documentación de LLM Observability SDK para Python.
+Para obtener instrucciones sobre cómo crear tramos desde tu aplicación, incluidos los ejemplos de código, consulta [Rastreo de tramos][2] en la documentación de Agent Observability SDK para Python.
 
 #### Tramo de LLM
 
@@ -106,7 +106,7 @@ Los tramos de recuperación generalmente no tienen tramos secundarios, ya que re
 
 ## Trazas
 
-LLM Observability admite la observabilidad de aplicaciones de LLM con diferentes niveles de complejidad. Según la estructura y la complejidad de tus trazas, puedes utilizar las siguientes funciones de LLM Observability:
+Agent Observability admite la observabilidad de aplicaciones de LLM con diferentes niveles de complejidad. Según la estructura y la complejidad de tus trazas, puedes utilizar las siguientes funciones de Agent Observability:
 
 ### LLM Inference Monitoring
 
@@ -114,7 +114,7 @@ Las trazas de inferencia de LLM se componen de un único tramo de LLM.
 
 {{< img src="llm_observability/llm-observability-llm-span.png" alt="Un único tramo de LLM" style="width:100%;" >}}
 
-El rastreo de inferencias de LLM individuales desbloquea funciones básicas de LLM Observability, lo que te permite:
+El rastreo de inferencias de LLM individuales desbloquea funciones básicas de Agent Observability, lo que te permite:
 
 1. Rastrear las entradas y salidas de tus llamadas de LLM.
 2. Rastrear el uso de tokens, las tasas de error y las latencias de tus llamadas de LLM.
@@ -151,13 +151,13 @@ Para ver un ejemplo detallado, consulta el [notebook Jupyter de monitorización 
 
 ## Evaluaciones
 
-LLM Observability ofrece checks de calidad y métricas listas para usar para evaluar la calidad y la eficacia de tus conversaciones de LLM, incluidas evaluaciones de sentimientos, relevancia de temas y satisfacción del usuario. Con las evaluaciones, puedes comprender el rendimiento de las conversaciones y mejorar las respuestas de tu aplicación de LLM. Esto mejora la experiencia del usuario y garantiza resultados valiosos y precisos.
+Agent Observability ofrece checks de calidad y métricas listas para usar para evaluar la calidad y la eficacia de tus conversaciones de LLM, incluidas evaluaciones de sentimientos, relevancia de temas y satisfacción del usuario. Con las evaluaciones, puedes comprender el rendimiento de las conversaciones y mejorar las respuestas de tu aplicación de LLM. Esto mejora la experiencia del usuario y garantiza resultados valiosos y precisos.
 
-Además de evaluar conversaciones, LLM Observability se integra con [Sensitive Data Scanner][5], que ayuda a prevenir la fuga de datos al identificar y marcar cualquier información confidencial (como datos personales, información financiera o información confidencial) que pueda estar presente en las conversaciones.
+Además de evaluar conversaciones, Agent Observability se integra con [Sensitive Data Scanner][5], que ayuda a prevenir la fuga de datos al identificar y marcar cualquier información confidencial (como datos personales, información financiera o información confidencial) que pueda estar presente en las conversaciones.
 
-Al escanear de forma proactiva los datos confidenciales, LLM Observability garantiza que las conversaciones permanezcan seguras y cumplan con las normas de protección de datos. Esta capa adicional de seguridad refuerza el compromiso de Datadog de mantener la confidencialidad y la integración de las interacciones de los usuarios con LLM.
+Al escanear de forma proactiva los datos confidenciales, Agent Observability garantiza que las conversaciones permanezcan seguras y cumplan con las normas de protección de datos. Esta capa adicional de seguridad refuerza el compromiso de Datadog de mantener la confidencialidad y la integración de las interacciones de los usuarios con LLM.
 
-LLM Observability asocia las evaluaciones con tramos individuales para que puedas ver las entradas y salidas que llevaron a una evaluación específica. Si bien Datadog proporciona evaluaciones listas para usar para tus trazas, también puedes [enviar tus propias evaluaciones][6] a LLM Observability.
+Agent Observability asocia las evaluaciones con tramos individuales para que puedas ver las entradas y salidas que llevaron a una evaluación específica. Si bien Datadog proporciona evaluaciones listas para usar para tus trazas, también puedes [enviar tus propias evaluaciones][6] a Agent Observability.
 
 ### Evaluaciones de calidad
 
@@ -173,7 +173,7 @@ Este check identifica y marca las entradas del usuario que se desvían de los te
 
 Este check identifica instancias en las que el LLM no entrega una respuesta apropiada, lo que puede ocurrir debido a limitaciones en el conocimiento o la comprensión del LLM, ambigüedad en la consulta del usuario o la complejidad del tema.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="Una evaluación de Falta de respuesta detectada por un LLM en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="Una evaluación de Falta de respuesta detectada por un LLM en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -183,7 +183,7 @@ Este check identifica instancias en las que el LLM no entrega una respuesta apro
 
 Este check identifica los casos en los que el LLM genera respuestas en un idioma o dialecto diferente al que utiliza el usuario, lo que puede generar confusión o problemas de comunicación. Este check garantiza que las respuestas del LLM sean claras, pertinentes y adecuadas según las preferencias y necesidades lingüísticas del usuario.
 
-{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="Una evaluación de Desajuste lingüístico detectada por un modelo de código abierto en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="Una evaluación de Desajuste lingüístico detectada por un modelo de código abierto en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -193,7 +193,7 @@ Este check identifica los casos en los que el LLM genera respuestas en un idioma
 
 Este check ayuda a comprender el estado de ánimo general de la conversación, medir la satisfacción del usuario, identificar tendencias de sentimientos e interpretar las respuestas emocionales. Este check clasifica con precisión el sentimiento del texto, lo que proporciona información para mejorar las experiencias del usuario y adaptar las respuestas para satisfacer mejor sus necesidades.
 
-{{< img src="llm_observability/evaluations/sentiment_1.png" alt="Una evaluación de Sentimiento detectada por un LLM en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_1.png" alt="Una evaluación de Sentimiento detectada por un LLM en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -205,7 +205,7 @@ Este check ayuda a comprender el estado de ánimo general de la conversación, m
 
 Este check evalúa cada instrucción de entrada del usuario y la respuesta de la aplicación de LLM en busca de contenido tóxico. Este check identifica y marca el contenido tóxico para garantizar que las interacciones sigan siendo respetuosas y seguras.
 
-{{< img src="llm_observability/evaluations/toxicity_1.png" alt="Una evaluación de Toxicidad detectada por un LLM en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_1.png" alt="Una evaluación de Toxicidad detectada por un LLM en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -215,7 +215,7 @@ Este check evalúa cada instrucción de entrada del usuario y la respuesta de la
 
 Este check identifica intentos de autores malintencionados o no autorizados de manipular las respuestas del LLM o redirigir la conversación de formas no previstas por el autor original. Este check mantiene la integridad y autenticidad de las interacciones entre los usuarios y el LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="Una evaluación de Inyección de instrucción detectada por un LLM en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="Una evaluación de Inyección de instrucción detectada por un LLM en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -225,11 +225,11 @@ Este check identifica intentos de autores malintencionados o no autorizados de m
 
 Este check garantiza que la información confidencial se maneje de forma adecuada y segura, reduciendo el riesgo de violaciones de datos o acceso no autorizado.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="Una evaluación de Seguridad y protección detectada por Sensitive Data Scanner en LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="Una evaluación de Seguridad y protección detectada por Sensitive Data Scanner en Agent Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
-| Evaluación de entradas y salidas | Sensitive Data Scanner | Con la tecnología de [Sensitive Data Scanner][5], LLM Observability escanea, identifica y redacta información confidencial dentro de los pares instrucción-respuesta de la aplicación de LLM. Esto incluye información personal, información financiera, registros médicos o cualquier otro dato que requiera protección debido a problemas de privacidad o seguridad. |
+| Evaluación de entradas y salidas | Sensitive Data Scanner | Con la tecnología de [Sensitive Data Scanner][5], Agent Observability escanea, identifica y redacta información confidencial dentro de los pares instrucción-respuesta de la aplicación de LLM. Esto incluye información personal, información financiera, registros médicos o cualquier otro dato que requiera protección debido a problemas de privacidad o seguridad. |
 
 ## Referencias adicionales
 

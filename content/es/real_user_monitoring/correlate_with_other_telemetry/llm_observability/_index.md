@@ -4,27 +4,27 @@ algolia:
   - llmobs
   - agentes ia
   - llm
-description: Conecta sesiones RUM con LLM Observability para realizar un seguimiento
+description: Conecta sesiones RUM con Agent Observability para realizar un seguimiento
   de las interacciones de los usuarios con los agentes de IA y comprender el recorrido
   completo del usuario.
 further_reading:
 - link: /llm_observability/sdk
   tag: Documentación
-  text: Referencia del SDK de LLM Observability
-title: Correlacionar LLM Observability con RUM
+  text: Referencia del SDK de Agent Observability
+title: Correlacionar Agent Observability con RUM
 ---
 
 ## Información general
-Correlaciona sesiones RUM y LLM Observability para obtener más visibilidad sobre cómo interactúa tu aplicación web con los agentes de IA. Esta correlación te ayuda a comprender el recorrido completo del usuario conectando las interacciones del usuario frontend con el procesamiento de IA backend.
+Correlaciona sesiones RUM y Agent Observability para obtener más visibilidad sobre cómo interactúa tu aplicación web con los agentes de IA. Esta correlación te ayuda a comprender el recorrido completo del usuario conectando las interacciones del usuario frontend con el procesamiento de IA backend.
 
-El enlace entre RUM y LLM Observability se crea reenviando el ID de la sesión RUM al SDK de LLM Observability.
+El enlace entre RUM y Agent Observability se crea reenviando el ID de la sesión RUM al SDK de Agent Observability.
 
 ## Requisitos previos
 
 Antes de empezar, asegúrate de que tienes:
 - El [SDK del navegador RUM][1] instalado y configurado en tu aplicación web
-- El [SDK de LLM Observability][2] instalado en tu servicio backend
-- Datadog cuenta con [RUM][3] y [LLM Observability][4] activados
+- El [SDK de Agent Observability][2] instalado en tu servicio backend
+- Datadog cuenta con [RUM][3] y [Agent Observability][4] activados
 - El endpoint del agente de IA al que tu aplicación web puede llamar
 
 ## Configuración
@@ -64,7 +64,7 @@ Actualiza tu aplicación web para incluir el ID de sesión RUM en cada llamada a
 
 ### Paso 3: Actualizar tu manejador backend
 
-Modifica tu código del lado del servidor para extraer el ID de sesión y trasladarlo al SDK de LLM Observability. Para una configuración detallada de LLM Observability, consulta la [guía de configuración de LLM Observability][4].
+Modifica tu código del lado del servidor para extraer el ID de sesión y trasladarlo al SDK de Agent Observability. Para una configuración detallada de Agent Observability, consulta la [guía de configuración de Agent Observability][4].
 
 ```python
 # Read the session_id from the incoming request
@@ -94,11 +94,11 @@ class MessagesHandler:
             handler.send_error(500, str(e))
 ```
 
-Utiliza el SDK de LLM Observability para instrumentar tu agente y tus herramientas e indica al SDK de LLM Observability cuál debe ser el `session_id`.
+Utiliza el SDK de Agent Observability para instrumentar tu agente y tus herramientas e indica al SDK de Agent Observability cuál debe ser el `session_id`.
 
 ### Paso 4: Instrumentar tu agente de IA
 
-Utiliza el SDK de LLM Observability para instrumentar tu agente y asociarlo a la sesión RUM. Para una referencia detallada, consulta la [documentación del SDK de LLM Observability][4].
+Utiliza el SDK de Agent Observability para instrumentar tu agente y asociarlo a la sesión RUM. Para una referencia detallada, consulta la [documentación del SDK de Agent Observability][4].
 ```python
 async def agent_loop(
     session_id,
@@ -111,7 +111,7 @@ async def agent_loop(
     # Rest of your agent code
 ```
 
-## Navegación entre RUM y LLM Observability
+## Navegación entre RUM y Agent Observability
 Una vez finalizada la configuración, podrás navegar entre los datos correlacionados:
 
 - **De RUM a LLM**: En una sesión RUM, haz clic en el botón "LLM Traces" (Trazas de LLM) en la cabecera del panel lateral para ver las interacciones de IA asociadas.

@@ -36,9 +36,9 @@ title: Nvidia NIM
 \`### Installation
 NVIDIA NIM 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) 패키지에 포함되어 있어 서버에 추가로 설치할 필요가 없습니다.
 
-#### LLM Observability: LLM 애플리케이션에서 NVIDIA Nim으로 이루어지는 호출을 엔드투엔드 가시화
+#### Agent Observability: LLM 애플리케이션에서 NVIDIA Nim으로 이루어지는 호출을 엔드투엔드 가시화
 
-NVIDIA NIM은 OpenAI 클라이언트를 사용하여 [NVIDIA NIM](https://www.nvidia.com/en-us/ai/)의 API 호출을 처리합니다. NVIDIA NIM을 사용하여 애플리케이션을 모니터링하고 LLM Observability를 설정하려면 [OpenAI 통합](https://docs.datadoghq.com/integrations/openai) 설명서를 따르세요.
+NVIDIA NIM은 OpenAI 클라이언트를 사용하여 [NVIDIA NIM](https://www.nvidia.com/en-us/ai/)의 API 호출을 처리합니다. NVIDIA NIM을 사용하여 애플리케이션을 모니터링하고 Agent Observability를 설정하려면 [OpenAI 통합](https://docs.datadoghq.com/integrations/openai) 설명서를 따르세요.
 \`
 
 ### 설정

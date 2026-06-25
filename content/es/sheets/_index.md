@@ -83,7 +83,7 @@ Crea tablas y analiza los datos extraídos de las siguientes fuentes de datos:
 | Consultas de bases de datos     | [Database Monitoring][16] |
 | Eventos               | [Event Management][14] |
 | infraestructura       | [Editor de DDSQL][6] |
-| LLM Observability    | [LLM Observability][13] |
+| Agent Observability    | [Agent Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Métricas              | [Metrics Explorer][7] |
 | Real User Monitoring | [RUM Explorer][8]  |

@@ -6,18 +6,18 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog LLM Observability admite de forma nativa las convenciones semánticas
+  text: Datadog Agent Observability admite de forma nativa las convenciones semánticas
     GenAI de OpenTelemetry
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
   text: Realizar un seguimiento, comparar y optimizar tus mensajes de LLM con Datadog
-    LLM Observability
+    Agent Observability
 title: Referencia de la API HTTP
 ---
 
 ## Información general
 
-La API HTTP de LLM Observability proporciona una interfaz para que los desarrolladores envíen trazas (traces) y tramos (spans) relacionados con LLM a Datadog. Si tu aplicación está escrita en Python, Node.js o Java, puedes utilizar los [SDK de LLM Observability][1].
+La API HTTP de Agent Observability proporciona una interfaz para que los desarrolladores envíen trazas (traces) y tramos (spans) relacionados con LLM a Datadog. Si tu aplicación está escrita en Python, Node.js o Java, puedes utilizar los [SDK de Agent Observability][1].
 
 La API acepta tramos con marcas de tiempo de no más de 24 horas de antigüedad, lo que permite un relleno limitado de datos atrasados.
 
@@ -177,14 +177,14 @@ Si la solicitud tiene éxito, la API responde con un código de red 202 y un cue
 
 #### Mensaje
 
-<div class="alert alert-info">LLM Observability registra las nuevas versiones de las plantillas cuando se actualiza el valor de <code>template</code> o <code>chat_template</code>. Si se espera que la entrada cambie entre invocaciones, extrae las partes dinámicas en una variable.</div>
+<div class="alert alert-info">Agent Observability registra las nuevas versiones de las plantillas cuando se actualiza el valor de <code>template</code> o <code>chat_template</code>. Si se espera que la entrada cambie entre invocaciones, extrae las partes dinámicas en una variable.</div>
 
 {{< tabs >}}
 {{% tab "Modelo" %}}
 | Campo | Tipo | Descripción |
 |----------------------|--------|--------------------------|
 | id | string | Identificador lógico para este modelo de solicitud. Debe ser único por `ml_app`.|
-| version | string | Etiqueta de versión para el mensaje (por ejemplo, "1.0.0"). Si no se proporciona, LLM Observability genera automáticamente una versión calculando un hash del contenido de la plantilla.|
+| version | string | Etiqueta de versión para el mensaje (por ejemplo, "1.0.0"). Si no se proporciona, Agent Observability genera automáticamente una versión calculando un hash del contenido de la plantilla.|
 | template | string | Formulario de plantilla de cadena única. Utiliza la sintaxis de parámetros (como `{{variable_name}}`) para incrustar variables. No debe configurarse con `chat_template`.|
 | chat_template | [[Mensaje]](#mensaje) | Formulario de plantilla multimensaje. Utiliza la sintaxis de parámetros (como `{{variable_name}}`) para incrustar variables en el contenido del mensaje. No debe configurarse con `template`. |
 | variables | Dict[key (string), string] | Variables utilizadas para representar la plantilla. Las claves corresponden a los nombres de los parámetros de la plantilla. |

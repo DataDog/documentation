@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+  text: Datadog Agent Observability natively supports OpenTelemetry GenAI Semantic Conventions
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
   text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway

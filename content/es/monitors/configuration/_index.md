@@ -48,7 +48,7 @@ El gráfico de datos evaluados muestra cómo su monitor habría evaluado los dat
 - Vista previa de quién sería notificado (incluyendo las reglas de notificación)
 - Identifica rápidamente configuraciones incorrectas antes de guardar.
 
-Esta función es compatible con seguimientos de Métricas, Registros, APM, RUM, Eventos, Auditoría, Base de Datos, LLM Observability y Despliegue.
+Esta función es compatible con seguimientos de Métricas, Registros, APM, RUM, Eventos, Auditoría, Base de Datos, Agent Observability y Despliegue.
 
 {{% /tab %}}
 

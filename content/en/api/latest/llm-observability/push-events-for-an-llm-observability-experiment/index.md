@@ -1,3 +1,3 @@
 ---
-title: Push events for an LLM Observability experiment
+title: Push events for an Agent Observability experiment
 ---

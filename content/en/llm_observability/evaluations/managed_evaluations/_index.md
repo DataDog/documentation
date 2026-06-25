@@ -4,7 +4,7 @@ description: Learn how to configure managed evaluations for your LLM application
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
-  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+  text: Gain visibility into Strands Agents workflows with Datadog Agent Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about Agent Observability terms and concepts"

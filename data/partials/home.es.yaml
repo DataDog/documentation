@@ -103,7 +103,7 @@ nav_sections:
         link: watchdog/
         icon: watchdog
         desc: Detecta y muestra anomalías en aplicaciones e infraestructura
-      - title: LLM Observability
+      - title: Agent Observability
         link: llm_observability/
         icon: llm-observability
         desc: "Rastrea, monitorea y asegura tus aplicaciones de LLM"

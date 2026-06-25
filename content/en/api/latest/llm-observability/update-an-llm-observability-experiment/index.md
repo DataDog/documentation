@@ -1,3 +1,3 @@
 ---
-title: Update an LLM Observability experiment
+title: Update an Agent Observability experiment
 ---

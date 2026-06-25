@@ -10,7 +10,7 @@ further_reading:
       text: 'Create and manage monitors to notify your teams when it matters.'
     - link: https://www.datadoghq.com/blog/llm-prompt-tracking
       tag: Blog
-      text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+      text: Track, compare, and optimize your LLM prompts with Datadog Agent Observability
 ---
 
 After you instrument your application with Agent Observability, you can access Agent Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.

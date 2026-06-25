@@ -76,7 +76,7 @@ Azure OpenAI permite el desarrollo de copilotos y aplicaciones de IA generativa 
 
 ## Configuración
 
-### LLM Observability: visibilidad de extremo a extremo en tu aplicación de LLM mediante Azure OpenAI.
+### Agent Observability: visibilidad de extremo a extremo en tu aplicación de LLM mediante Azure OpenAI.
 
 Puedes habilitar la observabilidad de LLM en diferentes entornos. Sigue la configuración adecuada en función de tu caso:
 
@@ -129,7 +129,7 @@ docker run -d \
 
 **Nota**: Si el Agent se ejecuta en un host o puerto personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` según corresponda.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless (funciones de Azure):
+##### Si estás ejecutando Agent Observability en un entorno serverless (funciones de Azure):
 
 Habilita la observabilidad de LLM al configurar las siguientes variables de entorno:
 
@@ -141,7 +141,7 @@ DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLM
 
 ##### Rastreo automático de Azure OpenAI
 
-La integración de Azure OpenAI se activa automáticamente cuando se configura LLM Observability. Esto captura la latencia, los errores, los mensajes de entrada y salida, así como el uso de tokens para las llamadas de Azure OpenAI.
+La integración de Azure OpenAI se activa automáticamente cuando se configura Agent Observability. Esto captura la latencia, los errores, los mensajes de entrada y salida, así como el uso de tokens para las llamadas de Azure OpenAI.
 
 Los siguientes métodos son rastreados tanto para operaciones síncronas como asíncronas de Azure OpenAI:
 
@@ -154,7 +154,7 @@ Estos métodos no requieren ninguna configuración adicional.
 
 ##### Validación
 
-Valida que LLM Observability capture tramos de manera adecuada al comprobar los logs de tu aplicación a fin de verificar si se crean de forma correcta. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
+Valida que Agent Observability capture tramos de manera adecuada al comprobar los logs de tu aplicación a fin de verificar si se crean de forma correcta. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
 
 ```shell
 ddtrace-run --info
@@ -184,7 +184,7 @@ Si aún no lo has hecho, configura primero la [integración de Microsoft Azure][
 
 ## Información general
 
-_LLM Observability_ de Datadog te permite evaluar tu aplicación de LLM usando tus modelos de Azure OpenAI. Sigue los pasos que se indican a continuación para establecer tu recurso de Azure OpenAI y configurarlo para realizar evaluaciones.
+_Agent Observability_ de Datadog te permite evaluar tu aplicación de LLM usando tus modelos de Azure OpenAI. Sigue los pasos que se indican a continuación para establecer tu recurso de Azure OpenAI y configurarlo para realizar evaluaciones.
 
 ## Requisitos previos
 
@@ -195,7 +195,7 @@ _LLM Observability_ de Datadog te permite evaluar tu aplicación de LLM usando t
 
 ## Configuración
 
-### Configurar LLM Observability de Datadog
+### Configurar Agent Observability de Datadog
 
 1. Ve a **Integrations > Azure OpenAI** (Integraciones > Azure OpenAI).
 2. En la pestaña **Configure** (Configurar), haz clic en **Add New** (Añadir nuevo).
@@ -219,7 +219,7 @@ _LLM Observability_ de Datadog te permite evaluar tu aplicación de LLM usando t
 
 4. Haz clic en la marca para guardar.
 
-5. Navega a **LLM Observability > Settings** (LLM Observability > Configuración) para crear y ejecutar evaluaciones para tu aplicación de LLM instrumentada.
+5. Navega a **Agent Observability > Settings** (Agent Observability > Configuración) para crear y ejecutar evaluaciones para tu aplicación de LLM instrumentada.
 
 ## Recursos adicionales
 

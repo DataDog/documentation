@@ -1,5 +1,5 @@
 ---
-description: Ejecute un LLM Observability dashboard localmente para inspeccionar las
+description: Ejecute un Agent Observability dashboard localmente para inspeccionar las
   trazas del agente de codificación y de la aplicación en su navegador sin una cuenta
   de Datadog.
 further_reading:
@@ -8,17 +8,17 @@ further_reading:
   text: README de Lapdog en GitHub
 - link: /llm_observability/instrumentation/sdk
   tag: Documentación
-  text: Instrumente su aplicación con LLM Observability SDK.
+  text: Instrumente su aplicación con Agent Observability SDK.
 - link: /llm_observability/instrumentation/auto_instrumentation
   tag: Documentación
-  text: Auto-instrumentación para LLM Observability.
+  text: Auto-instrumentación para Agent Observability.
 title: Lapdog
 ---
 ## Descripción general {#overview}
 
-Lapdog es una herramienta de desarrollo local para LLM Observability. Ejecute un agente en `localhost:8126` que capture cada span, prompt, llamada a herramienta y costo de su aplicación LLM, o de un agente de codificación como Claude Code, Codex o Pi, y transmita estos datos a un dashboard en el navegador en [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No se requiere una cuenta de Datadog.
+Lapdog es una herramienta de desarrollo local para Agent Observability. Ejecute un agente en `localhost:8126` que capture cada span, prompt, llamada a herramienta y costo de su aplicación LLM, o de un agente de codificación como Claude Code, Codex o Pi, y transmita estos datos a un dashboard en el navegador en [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No se requiere una cuenta de Datadog.
 
-Lapdog está construido sobre el agente de prueba de código abierto [Datadog APM test agent][1]. También puede reenviar la telemetría capturada a Datadog para que los mismos datos aparezcan en LLM Observability junto con su tráfico de producción.
+Lapdog está construido sobre el agente de prueba de código abierto [Datadog APM test agent][1]. También puede reenviar la telemetría capturada a Datadog para que los mismos datos aparezcan en Agent Observability junto con su tráfico de producción.
 
 ## Lo que obtiene {#what-you-get}
 
@@ -93,7 +93,7 @@ Si ha cambiado el puerto local, sustitúyalo desde la {{< ui >}}Collecting sessi
 
 ## Reenviar eventos a Datadog {#forward-events-to-datadog}
 
-Para enviar eventos capturados a LLM Observability en Datadog de forma dual, configure su clave de API y pase `--forward`:
+Para enviar eventos capturados a Agent Observability en Datadog de forma dual, configure su clave de API y pase `--forward`:
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude

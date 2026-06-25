@@ -70,10 +70,10 @@ docker run -d \
 
 **Nota**: Si el Agent se ejecuta en un puerto o host personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` en consecuencia.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless (AWS Lambda):
+##### Si estás ejecutando Agent Observability en un entorno serverless (AWS Lambda):
 
 1. Instala las capas de Lambda **Datadog-Python** y **Datadog-Extension** como parte de tu configuración de AWS Lambda.
-1. Activa LLM Observability configurando las siguientes variables de entorno:
+1. Activa Agent Observability configurando las siguientes variables de entorno:
 
 ```shell
    DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>

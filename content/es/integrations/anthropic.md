@@ -20,7 +20,7 @@ Utiliza la integración de Anthropic para monitorizar, solucionar problemas y ev
 Si creas aplicaciones de LLM, usa la observabilidad de LLM para investigar la causa raíz de los problemas,
 monitorizar el rendimiento operativo y evaluar la calidad, la privacidad y la seguridad de tus aplicaciones de LLM.
 
-Consulta el [vídeo de la vista de rastreo de LLM Observability](https://imgix.datadoghq.com/video/products/llm-observability/expedite-troubleshooting.mp4?fm=webm&fit=max) para ver un ejemplo de cómo puedes investigar una traza (trace).
+Consulta el [vídeo de la vista de rastreo de Agent Observability](https://imgix.datadoghq.com/video/products/llm-observability/expedite-troubleshooting.mp4?fm=webm&fit=max) para ver un ejemplo de cómo puedes investigar una traza (trace).
 
 ## Configuración
 
@@ -28,7 +28,7 @@ Consulta el [vídeo de la vista de rastreo de LLM Observability](https://imgix.d
 
 ## Información general
 
-LLM Observability de Datadog permite la monitorización de extremo a extremo de tu aplicación LLM utilizando modelos Anthropic. Sigue los pasos que se indican a continuación para configurar tu integración de Anthropic para evaluaciones LLM.
+Agent Observability de Datadog permite la monitorización de extremo a extremo de tu aplicación LLM utilizando modelos Anthropic. Sigue los pasos que se indican a continuación para configurar tu integración de Anthropic para evaluaciones LLM.
 
 ## Requisitos previos
 
@@ -42,7 +42,7 @@ LLM Observability de Datadog permite la monitorización de extremo a extremo de 
 1. Inicia sesión en tu [dashboard de Anthropic](https://console.anthropic.com/login?selectAccount=true&returnTo=%2Fdashboard%3F).
 1. Ve a **API keys** (Claves de API) en tu perfil.
 1. Haz clic en el botón **Create Key** (Crear clave).
-   - Para LLM Observability, asegúrate de que la clave de API tiene permiso de **escritura** para las **funcionalidades del modelo**. Esto permite a Datadog invocar modelos en tu cuenta de Anthropic.
+   - Para Agent Observability, asegúrate de que la clave de API tiene permiso de **escritura** para las **funcionalidades del modelo**. Esto permite a Datadog invocar modelos en tu cuenta de Anthropic.
 1. Copia en el portapapeles la clave de API creada.
 
 ### 2. Configurar la integración de Anthropic para Datadog
@@ -54,7 +54,7 @@ LLM Observability de Datadog permite la monitorización de extremo a extremo de 
 
 ### Notas adicionales
 
-- Esta integración permite a LLM Observability hacer un seguimiento del rendimiento del modelo Anthropic.
+- Esta integración permite a Agent Observability hacer un seguimiento del rendimiento del modelo Anthropic.
 - No se requieren permisos adicionales más allá de habilitar el acceso de escritura para las funcionalidades del modelo.
 
 ## Recursos adicionales
@@ -63,7 +63,7 @@ LLM Observability de Datadog permite la monitorización de extremo a extremo de 
 
 ### Observabilidad de LLM: obtén visibilidad integral de tu aplicación de LLM con Anthropic
 
-Puedes activar LLM Observability en diferentes entornos. Sigue la configuración adecuada en función de tu escenario:
+Puedes activar Agent Observability en diferentes entornos. Sigue la configuración adecuada en función de tu escenario:
 
 #### Instalación para Python
 
@@ -114,10 +114,10 @@ docker run -d \
 
 **Nota**: Si el Agent se ejecuta en un puerto o host personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` en consecuencia.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless (AWS Lambda):
+##### Si estás ejecutando Agent Observability en un entorno serverless (AWS Lambda):
 
 1. Instala las capas de Lambda **Datadog-Python** y **Datadog-Extension** como parte de tu configuración de AWS Lambda.
-1. Activa LLM Observability configurando las siguientes variables de entorno:
+1. Activa Agent Observability configurando las siguientes variables de entorno:
 
 ```shell
    DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>

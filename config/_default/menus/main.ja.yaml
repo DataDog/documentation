@@ -4709,7 +4709,7 @@ menu:
       identifier: datasets
       parent: data_observability
       weight: 100000
-    - name: LLM Observability
+    - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
       identifier: llm_obs

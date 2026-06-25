@@ -1,3 +1,3 @@
 ---
-title: Aggregate LLM Observability experimentation
+title: Aggregate Agent Observability experimentation
 ---

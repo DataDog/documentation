@@ -12,13 +12,13 @@ further_reading:
     text: "Create and monitor LLM experiments with Datadog"
   - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
     tag: Blog
-    text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+    text: Datadog Agent Observability natively supports OpenTelemetry GenAI Semantic Conventions
   - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
     tag: "Blog"
     text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
   - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
     tag: "Blog"
-    text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+    text: "How we cut our NLQ agent debugging time from hours to minutes with Agent Observability"
 ---
 
 {{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
