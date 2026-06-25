@@ -328,7 +328,7 @@ You can add custom instrumentation by using code. Suppose you want to further in
    ```python
    from ddtrace import tracer
    ```
-3. Inside the `try` block, at about line 28, add the following `with` statement:
+3. Inside the `try` block, at about line 41, add the following `with` statement:
 
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
