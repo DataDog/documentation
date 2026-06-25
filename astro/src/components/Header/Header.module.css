@@ -294,7 +294,7 @@
 .header__mobile-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   padding: 0 12px;
 }
@@ -305,8 +305,13 @@
   }
 }
 
+.header__mobile-logo-link {
+  display: flex;
+  align-items: center;
+}
+
 .header__mobile-logo {
-  display: inline-block;
+  display: block;
   width: 157px;
   height: 40px;
 }
