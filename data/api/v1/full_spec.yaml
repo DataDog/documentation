@@ -34934,7 +34934,7 @@ paths:
                           host: i-0123
                           service: test-service
                           tags:
-                            - team:A
+                            - team:B
                           timestamp: "2020-05-26T13:36:14Z"
                         id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
                     status: done
