@@ -3,7 +3,9 @@ on:
   pull_request:
     paths:
     - 'content/en/**/*'
+    - 'hugo/content/en/**/*'
     - 'layouts/shortcodes/**/*.md'
+    - 'hugo/layouts/shortcodes/**/*.md'
     - '!**/*.json'
 
 permissions:
@@ -18,6 +20,8 @@ jobs:
   vale:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      HUGO_ROOT: 'hugo/'  # TODO: Remove once HUGO_DIR repo var is set; replace with ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
     steps:
     - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
@@ -50,12 +54,12 @@ jobs:
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
         vale "${CHANGED_FILES}" \
-          --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
+          --output=${HUGO_ROOT}local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
 
     - name: Parse Vale output
       if: steps.changed_lines.outputs.changed_files
       env:
         CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |
-        python local/bin/py/vale/vale_annotations.py \
+        python ${HUGO_ROOT}local/bin/py/vale/vale_annotations.py \
           --git_data="${CHANGED_LINES}"

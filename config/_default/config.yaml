@@ -135,6 +135,8 @@ module:
       lang: es
     - source: static
       target: static
+    - source: ../static/images
+      target: static/images
     - source: layouts
       target: layouts
       excludeFiles:
@@ -144,6 +146,8 @@ module:
       target: data
     - source: static
       target: assets
+    - source: ../static/images
+      target: assets/images
     - source: assets
       target: assets
     - source: i18n
