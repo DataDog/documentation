@@ -364,9 +364,9 @@ The **Summary** panel identifies unique issues causing failures across test runs
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
-## Investigate with Bits AI SRE
+## Investigate with Bits Investigation
 
-To identify the root cause of a failing Synthetic HTTP test, launch a [Bits AI SRE investigation][18]. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+To identify the root cause of a failing Synthetic HTTP test, launch a [Bits Investigation][18]. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
 ## Permissions
 

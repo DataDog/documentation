@@ -229,9 +229,9 @@ To troubleshoot a failed test, review the failures on the **Activity** tab or th
 
 With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the {{< ui >}}Traces{{< /ui >}} tab.
 
-### Investigate with Bits AI SRE
+### Investigate with Bits Investigation
 
-To identify the root cause of a failing Synthetic API test, launch a [Bits AI SRE investigation][16]. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+To identify the root cause of a failing Synthetic API test, launch a [Bits Investigation][16]. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
 ## Further Reading
 

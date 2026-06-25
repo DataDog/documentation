@@ -41,18 +41,18 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 ### APM latency (Preview)
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits AI SRE investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+Bits Investigation started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 #### APM latency graphs on service pages
 
 1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click {{< ui >}}Investigate{{< /ui >}}.
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
-1. Click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}} to run a deeper investigation.
+1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}} to run a deeper investigation.
 
 #### APM latency Watchdog stories
 
-On a Watchdog APM latency story, click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
+On a Watchdog APM latency story, click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
 ### Synthetic tests
 
@@ -66,7 +66,7 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits inv
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
 
-{{< img src="bits_ai/synthetics_investigate_sre.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Investigate with Bits AI SRE button in the Next Steps panel" style="width:100%;" >}}
+{{< img src="bits_ai/synthetics_investigate_sre.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Investigate with Bits Investigation button in the Next Steps panel" style="width:100%;" >}}
 
 #### From a Synthetic monitor
 

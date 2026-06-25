@@ -67,9 +67,9 @@ Conditional alerting
 
 For more information, see [Synthetic Monitoring notifications][6].
 
-## Investigate with Bits AI SRE
+## Investigate with Bits Investigation
 
-When a Synthetic Browser or API test monitor enters an alert state, you can launch a [Bits AI SRE investigation][8] to identify the root cause. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration. You can also toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically when it alerts.
+When a Synthetic Browser or API test monitor enters an alert state, you can launch a [Bits Investigation][8] to identify the root cause. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration. You can also toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically when it alerts.
 
 ## Best practices
 
