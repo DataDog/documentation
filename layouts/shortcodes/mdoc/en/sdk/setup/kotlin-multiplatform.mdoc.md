@@ -75,21 +75,21 @@ cocoapods {
 
 If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
 
-1. Click on your project in Xcode and go to the {{< ui >}}Package Dependencies{{< /ui >}} tab.
+1. Click on your project in Xcode and go to the {% ui %}Package Dependencies{% /ui %} tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
 3. Select the version from the table above.
-4. Click on the necessary application target and open the {{< ui >}}General{{< /ui >}} tab.
-5. Scroll down to the {{< ui >}}Frameworks, Libraries, and Embedded Content{{< /ui >}} section and add the dependencies mentioned above.
+4. Click on the necessary application target and open the {% ui %}General{% /ui %} tab.
+5. Scroll down to the {% ui %}Frameworks, Libraries, and Embedded Content{% /ui %} section and add the dependencies mentioned above.
 {% /step %}
 
 {% step title="Specify application details in the UI" %}
 
-1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][4].
+1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][4].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][5].
 
 {% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][6] instead.
+If you've purchased Error Tracking as a standalone product (without RUM), navigate to [{% ui %}Error Tracking{% /ui %} > {% ui %}Settings{% /ui %} > {% ui %}Browser and Mobile{% /ui %} > {% ui %}Add an Application{% /ui %}][6] instead.
 {% /alert %}
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][7] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.

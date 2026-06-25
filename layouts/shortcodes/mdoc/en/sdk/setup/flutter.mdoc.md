@@ -10,7 +10,7 @@ This page describes how to instrument your applications for [Real User Monitorin
 {% stepper level="h4" %}
 
 {% step title="Specify application details in the UI" %}
-1. In Datadog, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][3].
+1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][3].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 
@@ -94,7 +94,7 @@ For more information on available configuration options, see the [DatadogConfigu
 
 To secure data, you must use a client token. You cannot use Datadog API keys to configure the Datadog [Flutter Plugin][8].
 
-* If you are using RUM, set up a {{< ui >}}Client Token{{< /ui >}} and {{< ui >}}Application ID{{< /ui >}}.
+* If you are using RUM, set up a {% ui %}Client Token{% /ui %} and {% ui %}Application ID{% /ui %}.
 * If you are only using Logs, initialize the library with a client token.
 {% /step %}
 
@@ -169,9 +169,9 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 To manage user data collection settings for client IP or geolocation data:
 
-1. Go to {{< ui >}}Manage Applications{{< /ui >}}.
+1. Go to {% ui %}Manage Applications{% /ui %}.
 2. Select your application.
-3. Click {{< ui >}}User Data Collection{{< /ui >}}, then toggle the settings to enable/disable {{< ui >}}Collect geolocation data{{< /ui >}} and {{< ui >}}Collect client IP data{{< /ui >}}.
+3. Click {% ui %}User Data Collection{% /ui %}, then toggle the settings to enable/disable {% ui %}Collect geolocation data{% /ui %} and {% ui %}Collect client IP data{% /ui %}.
 
 For more information about the data collected, see [Flutter Data Collected][4].
 {% /step %}
