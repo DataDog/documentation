@@ -75,7 +75,7 @@ The dependency map is only available for service-entry span resources.
 [9]: /tracing/guide/service_overrides/
 {{< /site-region >}}
 
-### Frontend Impact
+## Frontend Impact
 
 Datadog provides you visibility into how a web resource impacts your frontend applications. You can understand what frontend view is sending requests to the resource and identify views that are experiencing high latency or errors from the resource. 
 
