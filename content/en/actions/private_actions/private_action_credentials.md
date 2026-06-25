@@ -341,7 +341,7 @@ Replace the example values with your credentials.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/postgresql_token.json`.
 
-{{< img src="actions/private_actions/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/postgresql_token.json'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
