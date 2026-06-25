@@ -1,5 +1,6 @@
 ---
 title: Custom Reports
+description: Embed existing Datadog dashboards into the IDP Overview page to give all users access to key engineering insights in one place.
 further_reading:
 - link: "dashboards/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Plugins
+description: Build and deploy custom full-stack applications natively within Datadog using local development workflows, the Datadog CLI, React, and serverless backend functions.
 further_reading:
 - link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
