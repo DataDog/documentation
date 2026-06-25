@@ -67,6 +67,29 @@ The scaffolded project includes:
 | `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][9] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`, `upload`) |
 
+## Use the `datadog-app` skill
+
+The [`datadog-app` agent skill][20] gives AI coding agents Datadog Apps workflow guidance for scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
+
+### Install
+
+```shell
+npx skills add datadog-labs/agent-skills \
+  --skill datadog-app \
+  --full-depth -y
+```
+
+Restart Claude Code after installing for the skill to appear.
+
+### Example prompts
+
+- `Scaffold a Datadog App called my-app.`
+- `Run this Datadog App locally.`
+- `Upload and publish this Datadog App.`
+- `Set up CI/CD for this Datadog App.`
+- `Troubleshoot this Datadog Apps authentication error.`
+- `Query app data with DDSQL or the Action Catalog.`
+
 ## Develop your app locally
 
 1. Start the development server:
@@ -278,3 +301,5 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [17]: https://volta.sh
 [18]: https://github.com/Schniz/fnm
 [19]: https://nodejs.org
+[20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
+[21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
