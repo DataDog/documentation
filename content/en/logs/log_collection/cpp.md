@@ -580,5 +580,5 @@ Before data is uploaded to Datadog, it is stored in cleartext in the application
 [4]: https://github.com/DataDog/dd-sdk-cpp/releases
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
 [6]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration
-[7]: /logs/processing/attributes_naming_convention/
+[7]: /logs/log_configuration/attributes_naming_convention/
 [8]: /getting_started/tagging/

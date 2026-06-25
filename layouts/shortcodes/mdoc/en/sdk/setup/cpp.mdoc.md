@@ -98,7 +98,7 @@ For more detailed information on build configuration, see [Advanced Build Config
 
 1. Navigate to [**Digital Experience** > **Add an Application**][2].
 2. Select `C++` as the application type and enter an application name to generate a unique RUM application ID and client token.
-3. Copy the application ID and client token—you need them to initialize the SDK.
+3. Copy the application ID and client token. You need them to initialize the SDK.
 
 {% /step %}
 

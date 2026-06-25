@@ -154,7 +154,7 @@ dd_rum_add_error(rum, DD_RUM_ERROR_SOURCE_SOURCE,
 
 ### Track operations
 
-Operations let you measure multi-step workflows—such as login, checkout, or file upload—that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
+Operations let you measure multi-step workflows (such as login, checkout, or file upload) that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
 
 {% alert level="info" %}
 The operations API is in preview and may change in future releases.
@@ -318,7 +318,7 @@ To add extra properties to the current user without replacing the existing user 
 
 ### Account information
 
-A parallel API is available for associating an account—such as an organization, workspace, or tenant—with the current session.
+A parallel API is available for associating an account (such as an organization, workspace, or tenant) with the current session.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
@@ -375,7 +375,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_ERROR);
 {% /tab %}
 {% /tabs %}
 
-The **handler** controls what happens when a message is emitted. Supply a callback to route SDK messages into your own logging system. The `text` field in the message is only valid during the handler invocation—copy it if you need to store it persistently.
+The **handler** controls what happens when a message is emitted. Supply a callback to route SDK messages into your own logging system. The `text` field in the message is only valid during the handler invocation - copy it if you need to store it persistently.
 
 {% tabs %}
 {% tab label="C++" %}
