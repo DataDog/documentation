@@ -181,9 +181,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                            |
    | `DD_SITE`    | [Datadog site][13] - Set this tag if you are in a different site. **Default** is US1 `datadoghq.com` |
 
-8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+8. **Add Service Label in the {{< ui >}}info panel{{< /ui >}}**. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function.
+   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the {{< ui >}}info panel{{< /ui >}} of your function.
    | Name      | Value                                                       |
    |-----------|-------------------------------------------------------------|
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
@@ -369,8 +369,8 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 
 ## What's next?
 
-- You can view your Cloud Run Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
-- You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
+- You can view your Cloud Run Functions traces in [{{< ui >}}Trace Explorer{{< /ui >}}][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
+- You can use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Cloud Run Functions{{< /ui >}}][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
 
 ## Troubleshooting
 
