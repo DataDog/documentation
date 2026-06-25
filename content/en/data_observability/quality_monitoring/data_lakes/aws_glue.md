@@ -23,6 +23,7 @@ Before you begin, make sure you have:
 
 - An AWS account with Glue Iceberg tables you want to monitor.
 - An [AWS account connected in Datadog][1].
+  - Log forwarding is not required for Data Observability.
 - IAM permissions to modify the Datadog role's policies.
 - (Optional) AWS Lake Formation access if you use it to manage table permissions.
 
