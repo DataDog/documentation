@@ -702,6 +702,11 @@ menu:
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
+    - name: OTLP Export
+      url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+      identifier: otel-otlp-export-dd-sdk
+      parent: otel-dd-sdk-parent
+      weight: 3020
     - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var

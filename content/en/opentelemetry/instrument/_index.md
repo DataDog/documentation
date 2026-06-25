@@ -27,7 +27,7 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
 Use the OpenTelemetry Tracing APIs with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set. Datadog SDKs can also export telemetry in OpenTelemetry Protocol (OTLP) format to any OTLP-compatible receiver or backend.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/#export-data-in-otlp-format" >}}Export telemetry from the Datadog SDK in OTLP format{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}Export telemetry from the Datadog SDK in OTLP format{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/api_support" >}}Use the Datadog SDK with OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure the Datadog SDK with OpenTelemetry SDK environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
