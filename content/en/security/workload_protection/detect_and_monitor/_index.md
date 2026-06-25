@@ -55,6 +55,13 @@ Workload Protection leverages threat intelligence databases to enrich your [Agen
 - Explore the threat intelligence databases that are provided Out Of The Box (OOTB) to Workload Protection
 - Import your own threat intelligence database and configure it to work with Workload Protection
 
+## Content Packs
+
+Workload Protection provides targeted, Datadog-crafted [Content Packs][10] built for specific software stacks, threat vectors, and emerging vulnerabilities. The [Content Packs][10] page will help you:
+- Explore and enable Content Packs for key workload security use cases
+- Deploy optional detections only to the workloads where they apply
+- Stay current with emerging threats through Datadog-managed rule updates
+
 [1]: /security/workload_protection/detect_and_monitor/agent_rules
 [2]: /security/workload_protection/investigate_and_triage/agent_events
 [3]: /security/workload_protection/detect_and_monitor/detection_rules
@@ -64,3 +71,4 @@ Workload Protection leverages threat intelligence databases to enrich your [Agen
 [7]: /security/workload_protection/detect_and_monitor/threat_intelligence
 [8]: /security/configuration/notification-rules
 [9]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
+[10]: /security/workload_protection/detect_and_monitor/content_packs

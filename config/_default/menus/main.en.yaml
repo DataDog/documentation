@@ -8085,6 +8085,11 @@ menu:
       parent: workload_protection_detect_and_monitor
       identifier: workload_protection_detect_and_monitor_threat_intelligence
       weight: 40
+    - name: Content Packs
+      url: security/workload_protection/detect_and_monitor/content_packs
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_content_packs
+      weight: 50
     - name: Investigate and Triage
       url: security/workload_protection/investigate_and_triage
       parent: workload_protection
