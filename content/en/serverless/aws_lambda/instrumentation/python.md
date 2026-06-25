@@ -63,7 +63,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 5. Configure the Datadog API key
 
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -74,6 +74,15 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     ```sh
     export DATADOG_API_KEY="<DATADOG_API_KEY>"
     ```
+    The Datadog Lambda Extension supports two formats for the secret value:
+    - **Plain string**: the secret value is used directly as the API key.
+    - J**SON object**: if the secret value is a JSON object, the extension extracts the `dd_api_key` field and uses its value as the API key. This is useful if you store the Datadog API key alongside other credentials in a single     
+  secret: 
+    ```sh
+    { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
+    ``` 
+     The field name `dd_api_key` is fixed and cannot be customized. If the secret is not valid JSON or does not contain `dd_api_key`, the extension falls back to using the raw secret string. Existing plain-string secrets continue to work unchanged.
+     **Note**: JSON-formatted secrets require Datadog Lambda Extension v96 or later. 
 
 6. Instrument your Lambda functions
 
