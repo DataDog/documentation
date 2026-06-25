@@ -79,7 +79,7 @@ try {
 }
 ```
 
-The examples use ESM modules, where `await` is available at the top level. In CommonJS, wrap top-level `await` in an async function.
+These examples use ESM modules, where `await` is available at the top level. In CommonJS, wrap top-level `await` in an async function.
 
 Most applications also run other asynchronous startup tasks, such as opening database connections or loading configuration. Start their promises together with the provider promise and await them as a group, so total startup time stays close to the slowest task instead of the sum of all of them:
 
@@ -93,14 +93,14 @@ const [, db] = await Promise.all([
   }),
   connectToDatabase(), // your application's other async startup work
 ]);
-// db is connected and the server can start; flags use defaults until ready.
+// db is connected and the server can start; flags evaluate against real configuration, or fall back to defaults if initialization failed.
 ```
 
 Blocking startup until the provider is ready, as shown above, works well for most applications. If your application must start serving requests before initialization completes, choose one of the following strategies.
 
 ### Accepting default values before initialization
 
-Call `setProvider` without waiting for initialization when responsiveness during startup matters more than serving real values for the first few requests. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
+When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
@@ -130,7 +130,7 @@ app.get('/my-endpoint', async (req, res) => {
 
 ### Waiting for provider initialization
 
-Defer the wait to request time when you want the server to start listening immediately while still evaluating against real configuration data. Store the initialization promise, then await it in each request handler before evaluating flags. Requests that arrive before initialization completes wait for it to finish.
+When you want the server to start listening immediately while still evaluating against real configuration data, you can defer the wait to request time. Store the initialization promise, then await it in each request handler before evaluating flags. Requests that arrive before initialization completes wait for it to finish.
 
 ```javascript
 // Attach the catch once, at creation. This logs a failed initialization a
