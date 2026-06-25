@@ -13422,6 +13422,82 @@ menu:
         unstable:
           - v2
         order: 50
+    - name: Integration Accounts
+      url: /api/latest/integration-accounts/
+      identifier: integration-accounts
+      generated: true
+    - name: Update integration account
+      url: /api/latest/integration-accounts/update-integration-account/
+      identifier: integration-accounts-update-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAmsIntegrationAccount
+        unstable: []
+        order: 5
+    - name: Get integration account
+      url: /api/latest/integration-accounts/get-integration-account/
+      identifier: integration-accounts-get-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAmsIntegrationAccount
+        unstable: []
+        order: 4
+    - name: Delete integration account
+      url: /api/latest/integration-accounts/delete-integration-account/
+      identifier: integration-accounts-delete-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAmsIntegrationAccount
+        unstable: []
+        order: 6
+    - name: Get account schema for an integration
+      url: /api/latest/integration-accounts/get-account-schema-for-an-integration/
+      identifier: integration-accounts-get-account-schema-for-an-integration
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAmsIntegrationAccountSchema
+        unstable: []
+        order: 1
+    - name: Create integration account
+      url: /api/latest/integration-accounts/create-integration-account/
+      identifier: integration-accounts-create-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAmsIntegrationAccount
+        unstable: []
+        order: 3
+    - name: List integration accounts
+      url: /api/latest/integration-accounts/list-integration-accounts/
+      identifier: integration-accounts-list-integration-accounts
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAmsIntegrationAccounts
+        unstable: []
+        order: 2
     - name: Integrations
       url: /api/latest/integrations/
       identifier: integrations
