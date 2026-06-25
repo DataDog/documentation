@@ -21,22 +21,20 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs work with OpenTelemetry in two ways:
+Use Datadog SDKs with OpenTelemetry in two ways: export telemetry in [OpenTelemetry Protocol (OTLP)][1] format, or instrument your services with the [OpenTelemetry API][2].
 
-- They can export telemetry in [OpenTelemetry Protocol (OTLP)][1] format to any OTLP-compatible receiver or backend.
-- They provide an implementation of the [OpenTelemetry API][2], so you can instrument your services with vendor-neutral APIs while still taking advantage of Datadog's native implementation, features, and products.
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
+    <h3>Export data in OTLP format</h3>
+    Export telemetry from a Datadog SDK in OTLP format to DDOT or any OpenTelemetry Collector. In Preview; supports traces only.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support/" >}}
+    <h3>Use the OpenTelemetry API</h3>
+    Instrument your services with vendor-neutral OpenTelemetry APIs while taking advantage of Datadog's native features and products.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
-## Export data in OTLP format
-
-Datadog SDKs can export telemetry in [OTLP][1] format to any OTLP-compatible receiver or backend, including [DDOT][3] or any OpenTelemetry Collector. During Preview, OTLP export supports traces only.
-
-For prerequisites, language support, setup steps, and limitations, see [Export Traces from Datadog SDKs in OTLP Format][4].
-
-## OpenTelemetry API support
-
-Datadog SDKs provide an implementation of the [OpenTelemetry API][2] for traces, metrics, and logs. You can maintain vendor-neutral instrumentation of your services while still taking advantage of Datadog's native platform and products like [Continuous Profiler][5], [Data Streams Monitoring][6], [App and API Protection][7], and [Live Processes][8].
-
-For setup steps and per-language guidance, see [OpenTelemetry API support][9].
+<div class="alert alert-info"><strong>Not sure which approach is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
 
 ## Further reading
 
@@ -44,10 +42,3 @@ For setup steps and per-language guidance, see [OpenTelemetry API support][9].
 
 [1]: https://opentelemetry.io/docs/specs/otlp/
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/
-[3]: /opentelemetry/setup/ddot_collector/
-[4]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
-[5]: /profiler/
-[6]: /data_streams/
-[7]: /security/application_security/
-[8]: /infrastructure/process
-[9]: /opentelemetry/instrument/dd_sdks/api_support/
