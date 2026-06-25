@@ -21,18 +21,18 @@ The following table summarizes the Cloud Security features available relative to
 | AWS Fargate ECS/EKS | {{< X >}}              |                   |                 |                | ECS Fargate only   |
 
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
-| Resources monitored | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
-|---------------------|-------------------|-----------------|----------------|--------------------|
-| AWS Resources/IAM   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
-| Azure Resources/IAM | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
-| GCP Resources/IAM   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
-| OCI Resources/IAM   | {{< X >}}         |                 |                | {{< X >}}          |
-| Kubernetes Cluster  | {{< X >}}         |                 |                |                    |
-| Docker Host         | {{< X >}}         |                 |                |                    |
-| Linux Host          | {{< X >}}         | {{< X >}}       |                | {{< X >}}          |
-| Windows Host        |                   | {{< X >}}       |                | {{< X >}}          |
-| Docker Container    |                   |                 |                | {{< X >}}          |
-| Container Image     |                   | {{< X >}}       |                | {{< X >}}          |
+| Resources monitored             | Misconfigurations | Vulnerabilities | Identity Risks | Agentless Scanning |
+|---------------------------------|-------------------|-----------------|----------------|--------------------|
+| AWS Resources                   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| Azure Resources                 | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| GCP Resources                   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| OCI Resources                   | {{< X >}}         |                 |                |                    |
+| Kubernetes Cluster              | {{< X >}}         |                 |                |                    |
+| Docker Host                     | {{< X >}}         |                 |                |                    |
+| Linux Host                      | {{< X >}}         | {{< X >}}       |                | {{< X >}}          |
+| Windows Host                    |                   | {{< X >}}       |                | {{< X >}}          |
+| Docker Container                |                   |                 |                | {{< X >}}          |
+| Container Image                 |                   | {{< X >}}       |                | {{< X >}}          |
 
 **Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
