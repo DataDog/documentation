@@ -9,6 +9,8 @@ further_reading:
 
 ---
 
+<div class="alert alert-info">Sequence detection is not available for the Legacy product.</a></div>
+
 ## Overview
 
 The sequence method enables you to detect multi-stage attacks by identifying ordered patterns of related events, such as initial access, privilege escalation, and data exfiltration.
