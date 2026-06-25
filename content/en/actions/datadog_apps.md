@@ -69,7 +69,7 @@ The scaffolded project includes:
 
 ## Use the `datadog-app` skill
 
-The [`datadog-app` agent skill][20] gives AI coding agents Datadog Apps workflow guidance for scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
+The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
 
 ### Install
 
