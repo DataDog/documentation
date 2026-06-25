@@ -43,15 +43,15 @@ Before implementing Early Flake Detection, you must configure [Test Optimization
 
 ### Configuration
 
-After you set up your Datadog library for Test Optimization, configure Early Flake Detection in [**CI/CD Optimization settings**][7]. You can apply the setting at the organization, repository, or test service level.
+After you set up your Datadog library for Test Optimization, configure Early Flake Detection in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/early_flake_detection_test_settings-1.png" alt="Early Flake Detection toggle in CI/CD Settings." style="width:100%" >}}
 
-1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][7].
+1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][7].
 1. Choose where to apply the setting:
-   - Select the **Organization** tab to update the organization default.
-   - Select the **Repository-specific** tab to override the default for a single repository, or to apply an override to one of its test services.
-1. Under **Prevention**, toggle **Early Flake Detection** on.
+   - Select the {{< ui >}}Organization{{< /ui >}} tab to update the organization default.
+   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to override the default for a single repository, or to apply an override to one of its test services.
+1. Under {{< ui >}}Prevention{{< /ui >}}, toggle {{< ui >}}Early Flake Detection{{< /ui >}} on.
 
 ## Compatibility
 {{< tabs >}}
@@ -130,7 +130,7 @@ You can use the following facets to query sessions that run Early Flake Detectio
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, open [**CI/CD Optimization settings**][7], find your repository or test service, and toggle Early Flake Detection off.
+If you suspect there are issues with Early Flake Detection, open [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7], find your repository or test service, and toggle Early Flake Detection off.
 
 ### A new test is not being retried
 
