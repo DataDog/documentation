@@ -20,7 +20,8 @@ import './components/accordion-auto-open';
 import './components/product-section-collapse';
 import './components/signup';
 import './components/conversational-search';
-import './components/home-experiment';
+// TEMPORARY: home A/B experiment disabled while RUM ingestion is being investigated.
+// import './components/home-experiment';
 import './components/stepper';
 
 // Add Bootstrap Tooltip across docs

@@ -97,16 +97,9 @@
 
         </main>
 
-        {{- if eq .Site.Language.Lang "en" }}
-            <div data-home-variant-content="new">
-                {{ partial "home/products-browse.html" . }}
-            </div>
-            <div data-home-variant-content="legacy" hidden>
-                {{ partial "home/legacy.html" . }}
-            </div>
-        {{- else }}
-            {{ partial "home/products-browse.html" . }}
-        {{- end }}
+        {{/* TEMPORARY: home A/B experiment disabled while RUM ingestion is being investigated.
+             Re-enable by restoring the data-home-variant-content wrappers and the home-experiment import in main-dd-js.js. */}}
+        {{ partial "home/products-browse.html" . }}
     </div>
 
     {{ partial "footer/footer.html" . }}
