@@ -99,8 +99,19 @@ IaC Security analyzes infrastructure-as-code to detect misconfigurations before 
 
 With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
 
-## Supply Chain Security
-Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
+## Supply Chain Security (Preview)
+Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines. 
+
+Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious, vulnerable, or recently published packages before they are installed.
+Every package install is evaluated against Datadog's malicious package feed (powered by **Guarddog**), known vulnerability advisories, and configurable recency thresholds. When a package is flagged, installation is blocked immediately with a clear, actionable message(on both developer laptops and CI runners).
+
+As a Datadog product, SCFW goes beyond individual developer protection with:
+
+- Centralized policy management to define org-wide block lists, allow lists, and behavioral rules directly from the Datadog AppSec UI
+- Event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed
+- Coverage reporting to track which developers and repositories are protected, identify gaps, and measure your organization's supply chain security posture over time 
+
+[Request access to the Preview][11].
 
 ## Code Security MCP Server (Preview)
 The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
