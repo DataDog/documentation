@@ -22,7 +22,7 @@ Network monitors cover the TCP and HTTP checks available in the Agent. For detai
 
 ## Monitor creation
 
-To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
+To create a [network monitor][3] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Network{{< /ui >}}.
 
 ### Network status
 
@@ -40,7 +40,7 @@ Select the scope to monitor by choosing host names, tags, or choose `All Monitor
 
 #### Set alert conditions
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+In this section, choose between a {{< ui >}}Check Alert{{< /ui >}} or {{< ui >}}Cluster Alert{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
@@ -68,7 +68,7 @@ A cluster alert calculates the percent of checks in a given status and compares 
 
 Set up a cluster alert:
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+1. Decide whether or not to group your checks according to a tag. {{< ui >}}Ungrouped{{< /ui >}} calculates the status percentage across all sources. {{< ui >}}Grouped{{< /ui >}} calculates the status percentage on a per-group basis.
 
 2. Select the percentage for the alert threshold.
 
@@ -81,7 +81,7 @@ See the [Monitor configuration][4] documentation for information on [No data][5]
 
 #### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][8] page.
 
 ### Network metric
 

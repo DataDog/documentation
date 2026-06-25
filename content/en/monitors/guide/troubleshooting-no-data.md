@@ -26,17 +26,17 @@ Begin with [Key configuration settings](#key-configuration-settings) to check th
 When a monitor shows `No Data` but you expect it to have data, check these three settings first:
 
 Evaluation window (alert timeframe)
-: Found under **Evaluation Details**, this setting defines the time period the monitor uses to evaluate your query. A window that's too small may not capture enough data points.
+: Found under {{< ui >}}Evaluation Details{{< /ui >}}, this setting defines the time period the monitor uses to evaluate your query. A window that's too small may not capture enough data points.
 
 Evaluation delay / New group delay
-: Found under **Advanced Options**, this setting adds a delay before the monitor evaluates data. This is crucial for metrics that report with a delay, such as cloud provider metrics.
+: Found under {{< ui >}}Advanced Options{{< /ui >}}, this setting adds a delay before the monitor evaluates data. This is crucial for metrics that report with a delay, such as cloud provider metrics.
   - **AWS and crawler-based metrics**: Minimum 15 minutes (900 seconds) delay recommended.
   - See [New Group Delay][1] for more details on handling sparse data.
 
 Require a full window of data
-: Found under **Advanced Options**, this setting determines whether the monitor requires a complete evaluation window of data before alerting.
-  - **Do not require**: Monitor evaluates on partial data (recommended for sparse metrics).
-  - **Require**: Monitor waits for a full window before evaluating.
+: Found under {{< ui >}}Advanced Options{{< /ui >}}, this setting determines whether the monitor requires a complete evaluation window of data before alerting.
+  - {{< ui >}}Do not require{{< /ui >}}: Monitor evaluates on partial data (recommended for sparse metrics).
+  - {{< ui >}}Require{{< /ui >}}: Monitor waits for a full window before evaluating.
 
 {{< img src="/monitors/guide/troubleshooting_no_data/key_configuration_ui.png" alt="Key configuration settings in monitor configuration UI" style="width:80%;" >}}
 
@@ -64,7 +64,7 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 - Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. Different types of groups have different retention periods:
   - **Standard Monitors**: Groups age out after 24 hours.
   - **Host/Service Checks**: Groups age out after 48 hours.
-  - **Custom**: This can be extended through the **Missing data options** setting (**If a group stops reporting data, resolve after X hours**).
+  - **Custom**: This can be extended through the {{< ui >}}Missing data options{{< /ui >}} setting ({{< ui >}}If a group stops reporting data, resolve after X hours{{< /ui >}}).
 
 {{% /collapse-content %}}
 
@@ -79,7 +79,7 @@ Data exists but doesn't appear consistently or arrives late.
 2. Look for gaps between data points or inconsistent reporting intervals, which indicate sparse or delayed metrics.
 
 #### Possible solutions
-- In [Metric monitor Advanced Options][6], enable the **"Do not require a full window of data for evaluation"** setting.
+- In [Metric monitor Advanced Options][6], enable the {{< ui >}}Do not require a full window of data for evaluation{{< /ui >}} setting.
 - Increase the evaluation window to capture more data points.
 - Add an evaluation delay to account for data ingestion delays.
 - For aggregations like `avg`, `min`, and `max`, consider a larger timeframe.
@@ -96,7 +96,7 @@ The monitor shows `No Data` even though data exists. If your query contains a [`
 #### Why this happens
 Rollups aggregate metric data into buckets. If the monitor doesn't have at least one complete bucket, it reports `No Data`. Additionally, rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. A monitor may evaluate an incomplete rollup interval containing only a small sample of data, which can result in `No Data`.
 
-For example, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the **Require Full Window** option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
+For example, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the {{< ui >}}Require Full Window{{< /ui >}} option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
 #### Solution
 <div class="alert alert-tip">Unless you are monitoring one aggregated value over a long period or monitoring sparse metrics (typically over 24 hours), Datadog recommends avoiding rollups in monitor queries. For more information on rollups, see <a href="/dashboards/functions/rollup/#rollups-in-monitors">Rollups in monitors</a>.</div>
@@ -164,9 +164,9 @@ Graph each part of the arithmetic expression separately to confirm which query i
 ## Troubleshooting missing No Data alerts
 
 If you expect a `No Data` alert but don't receive one, make sure you have the required settings:
-1. **If data is missing** must be set to **Show NO DATA and notify**.
+1. {{< ui >}}If data is missing{{< /ui >}} must be set to {{< ui >}}Show NO DATA and notify{{< /ui >}}.
     {{< img src="/monitors/guide/troubleshooting_no_data/enabling_no_data_notifications.png" alt="Enabling No Data notifications in monitor configuration" style="width:90%;" >}}
-2. **Notification message** must:
+2. {{< ui >}}Notification message{{< /ui >}} must:
    - Apply to all state changes (without conditional blocks), or
    - Include the `{{#is_no_data}}` template variable.
    ```
@@ -180,7 +180,7 @@ If you expect a `No Data` alert but don't receive one, make sure you have the re
 If your monitor still isn't alerting as expected, verify the following:
   - Set the `No Data` timeframe to at least 2x the evaluation window.
   - Remove conditional blocks that exclude `No Data` from the notification message, or add the `{{#is_no_data}}` template variable.
-  - Confirm that **No Data notification** is enabled in your monitor configuration.
+  - Confirm that {{< ui >}}No Data notification{{< /ui >}} is enabled in your monitor configuration.
 
 ## Further reading
 

@@ -50,6 +50,14 @@ To generate accurate forecasts, CCM requires:
 - **At least 64 consecutive days of cost data**: This helps ensure the model has sufficient information to identify meaningful patterns. If fewer days are available, the model pads the remaining days with zeros to generate a forecast.
 - **Recent data**: The model uses up to the last 64 days of your cost history to generate predictions.
 
+## Bits and custom forecasts
+
+The forecast that Datadog generates automatically from your historical spend is called the **Bits forecast**. Because it is trend-based, it projects past patterns forward but cannot account for planned business events, such as a product launch, migration, or seasonal demand.
+
+In [budgets][3], you can override the Bits forecast with your own monthly values, called a **custom forecast**. Datadog overlays your custom forecast on the Bits forecast, so your overrides take precedence wherever you set them. Budgets and budget monitors use the forecast with your overrides by default.
+
+To set custom forecast values, see [Customize your budget forecast][4].
+
 ## View forecasts in reports
 
 Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts on Cost reports and Budget reports.
@@ -104,9 +112,13 @@ To view detailed forecast information:
 
 {{< img src="cloud_cost/forecasts/updated_budget_status_forecast-1.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
 
+By default, Datadog combines the automatic Bits forecast with any custom forecast values you set in budgets. To override the Bits forecast with your own monthly values, see [Customize your budget forecast][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/analyze/reports
 [2]: https://app.datadoghq.com/cost/plan/budgets
+[3]: /cloud_cost_management/planning/budgets
+[4]: /cloud_cost_management/planning/budgets#customize-your-budget-forecast

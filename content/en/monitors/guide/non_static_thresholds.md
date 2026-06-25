@@ -174,7 +174,7 @@ The second monitor calculates the error rate. Create a query on the number of er
 
 #### Composite monitor
 
-The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an **ALERT** state. 
+The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an {{< ui >}}ALERT{{< /ui >}} state. 
 
 {{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}}
 

@@ -29,7 +29,7 @@ This reduces the profiling expertise needed to identify and resolve performance 
 ## Explore insights
 Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
 
-- In the **Insights** section at the top of the page
+- In the {{< ui >}}Insights{{< /ui >}} section at the top of the page
 {{< img src="profiler/profiling_automated_analysis_section.png" alt="The Automated Analysis banner displaying insights detected for a given service" style="width:100%;">}}
 
 - Within a flame graph view
@@ -54,7 +54,7 @@ Each row represents an insight type, summarizing:
 You can filter insights by insight name, runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
 
 ## Take action on insights
-While viewing an insight, see **Next Steps** to view Datadog recommendations for improvements. Alternatively, click **Fix with Bits** to have [Bits Code][2] generate a fix.
+While viewing an insight, see {{< ui >}}Next Steps{{< /ui >}} to view Datadog recommendations for improvements. Alternatively, click {{< ui >}}Fix with Bits{{< /ui >}} to have [Bits Code][2] generate a fix.
 
 ## Supported insights
 

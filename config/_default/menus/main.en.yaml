@@ -2181,6 +2181,11 @@ menu:
       parent: catalog_entity_model
       identifier: catalog_ai_generated_systems
       weight: 1023
+    - name: Migrate to v3
+      url: internal_developer_portal/catalog/entity_model/v3_migration
+      parent: catalog_entity_model
+      identifier: catalog_v3_migration
+      weight: 1024
     - name: Troubleshooting
       url: internal_developer_portal/catalog/troubleshooting
       parent: catalog
@@ -2357,11 +2362,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -3498,16 +3498,21 @@ menu:
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
       weight: 807
+    - name: DatadogGenericResource CRD
+      url: containers/datadog_operator/crd_ddgr
+      identifier: containers_datadog_operator_crd_ddgr
+      parent: containers_datadog_operator
+      weight: 808
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 809
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -9720,21 +9725,31 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
     - name: Identity Resolution
       url: product_analytics/profiles/identity_resolution
       parent: pa_profiles
       identifier: pa_identity_resolution
-      weight: 401
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
+    - name: Server-Side Events
+      url: product_analytics/data_collected/server_side_events
+      parent: pa_data_collected
+      identifier: pa_data_collected_server_side_events
+      weight: 601
     - name: Experiments
       url: experiments/
       pre: experiment-wui

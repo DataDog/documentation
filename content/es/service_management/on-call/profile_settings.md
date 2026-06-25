@@ -17,7 +17,7 @@ Debes [configurar tu configuración del perfil][1] antes de poder recibir locali
 Ve a [Mi perfil de On-Call][1] para configurar tus parámetros.
 
 ### Métodos de contacto
-{{< img src="service_management/oncall/contact_methods.png" alt="Añadir métodos de contacto en la configuración del perfil de On-Call. Se configuran un número de teléfono, un correo electrónico y un dispositivo móvil. El número de teléfono está en el estado de movimiento del mouse, en el que se muestra 'Test llamada' y 'Test opciones de SMS" style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/contact_methods.png" alt="Añadir métodos de contacto en la configuración del perfil de On-Call. Se configuran un número de teléfono, un correo electrónico y un dispositivo móvil. El número de teléfono está en el estado de movimiento del mouse, en el que se muestra 'Test llamada' y 'Test opciones de SMS" style="width:100%;" >}}
    - Debes añadir manualmente tu correo electrónico o número de teléfono. Después, la pantalla te solicitará tu consentimiento para localizarte por SMS. Si das tu consentimiento, aparecerá un distintivo verde junto a tu número de teléfono, que indica que puede utilizarse para las siguientes preferencias de notificación por SMS.
    - Si la [aplicación móvil][2] de Datadog está instalada en tu dispositivo, este aparecerá automáticamente en esta lista. Check tus parámetros en la aplicación móvil para asegurarte de que tu dispositivo pueda recibir notificaciones.
    - Datadog te recomienda que realices un test de cada uno de tus métodos de contacto. Pasa el mouse por encima de tu método de contacto para ver las opciones de test.
@@ -36,7 +36,7 @@ Las preferencias de notificaciones te permiten decidir cómo y cuándo **recibes
 El sistema realiza un ciclo por las preferencias de notificaciones configuradas hasta que confirmes la recepción del localizador o este se transfiera a la siguiente persona de guardia, tal y como se define en la [política de escalado][6].
 
 #### Notificaciones de mucha urgencia
-{{< img src="service_management/oncall/high_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de mucha urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de mucha urgencia' configura el sistema para notificar a un número de teléfono de inmediato a fin de que se responda rápidamente a localizadores críticos" style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/high_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de mucha urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de mucha urgencia' configura el sistema para notificar a un número de teléfono de inmediato a fin de que se responda rápidamente a localizadores críticos" style="width:100%;" >}}
 
 Configura tus localizadores de mucha urgencia (alertas de monitor P1, amenazas a la seguridad SEV-1, incidencias SEV-1, etc.), para exigir atención y elevación inmediatas.
 
@@ -48,12 +48,12 @@ Por ejemplo, puedes configurar On-Call para iniciar con una notificación push, 
 - Planifica cuidadosamente las políticas de elevación para evitar que se pierdan respuestas durante las emergencias.
 
 #### Notificaciones de poca urgencia
-{{< img src="service_management/oncall/low_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de poca urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de poca urgencia' configura el sistema para notificar por correo electrónico de inmediato pero no escalarlo más" style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/low_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de poca urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de poca urgencia' configura el sistema para notificar por correo electrónico de inmediato pero no escalarlo más" style="width:100%;" >}}
 
 Configura tus localizadores de poca urgencia (cuestiones no bloqueantes, señales informativas, etc.), para minimizar las interrupciones y asegurarte al mismo tiempo de mantenerte informado. Por ejemplo, puedes decidir notificarte sólo a ti mismo por correo electrónico.
 
 ### Otras notificaciones
-{{< img src="service_management/oncall/settings_shift_reminder.png" alt="Configurar un recordatorio de turno en la configuración del perfil de On-Call. Se configura un recordatorio de turno para notificar a un número de teléfono 10 minutos antes de que comience el turno" style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/settings_shift_reminder.png" alt="Configurar un recordatorio de turno en la configuración del perfil de On-Call. Se configura un recordatorio de turno para notificar a un número de teléfono 10 minutos antes de que comience el turno" style="width:100%;" >}}
 
 En **Otras notificaciones**, puedes optar por recibir un **Recordatorio de turno** antes de que comience tu turno de On-Call.
 
