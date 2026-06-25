@@ -118,12 +118,37 @@
   padding: var(--space-sm) 0;
 }
 
-/* Mobile-nav placement: the popup width is set inline to match the full-width
-   search bar, so drop the 50vw cap. It still sits above the mobile-nav overlay
-   (z-index 99) thanks to the base popup's z-index. */
+/* Mobile-nav placement: the popup fills the mobile nav edge to edge, with the
+   search bar as its top edge. Width is set inline to match the full-width search
+   bar (so the 50vw cap is dropped); `bottom: 0` stretches it from the inline
+   `top` (the bar's bottom) down to the bottom of the screen. Borders, rounding,
+   and shadow are removed so it reads as a flush panel rather than a floating
+   card. It still sits above the mobile-nav overlay (z-index 99) via the base
+   popup's z-index. */
 .search-bar__popup--mobile {
   width: auto;
   max-width: none;
+  margin-top: 0;
+  bottom: 0;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Match Hugo's mobile results: a narrow first column (subcategory) at a quarter
+   of the row, the rest for the title/snippet — vs. the wider side-nav column. */
+.search-bar__popup--mobile .search-hit__link {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  column-gap: var(--space-sm);
+}
+
+/* Bump the result text from the dense side-nav size up to Hugo's mobile size
+   (~14px / --font-size-sm), which reads far better at a phone viewport. */
+.search-bar__popup--mobile .search-hit__subcategory,
+.search-bar__popup--mobile .search-hit__title,
+.search-bar__popup--mobile .search-hit__snippet {
+  font-size: var(--font-size-sm);
 }
 
 .search-bar__ai-suggestion {

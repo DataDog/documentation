@@ -95,17 +95,20 @@
 }
 
 /* --- Search ---
-   Wraps the shared SearchBar island in a bordered box so it reads as a search
-   field (matching Hugo's mobile search input). The SearchBar provides the icon,
-   input, and dropdown; this wrapper supplies the border and rounded corners.
-   overflow:hidden clips the inner form to the rounded corners. */
+   The shared SearchBar island spans the full width of the mobile nav. It needs
+   only a bottom border: the quick-links row above it already draws a matching
+   bottom border that serves as the search field's top edge. */
 
 .searchWrap {
-  margin: var(--space-sm) var(--space-md);
-  border: var(--border-width) solid var(--hugo-nav-gray-light);
-  border-radius: var(--border-radius);
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
   background: var(--color-bg);
-  overflow: hidden;
+}
+
+/* Give the input a taller touch target than the side-nav default. Targets the
+   plain BEM class `cl()` also emits, so it stays scoped to the mobile nav. */
+.searchWrap :global(.search-bar__input) {
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
 }
 
 /* --- Accordion menu --- */
