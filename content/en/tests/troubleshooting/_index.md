@@ -94,6 +94,24 @@ The total time is defined as the sum of the maximum test session durations.
 1. The maximum duration of a test session grouped by the test session fingerprint is calculated.
 2. The maximum test session durations are summed.
 
+## Invalid Git information
+
+Datadog native testing libraries read CI metadata environment variables to determine Git tags, such as `git.commit.sha`, which identifies the commit checked out when the job starts. CI providers define these environment variables when the job starts, so any Git change after that point can cause incorrectly reported Git metadata.
+
+This can happen when a GitHub Actions workflow uses `actions/checkout` with a non-default [`ref` input][19], or when a job runs manual Git operations after checkout:
+
+```yaml
+run: |
+  git checkout -b another-branch
+  git commit -m "new commit"
+```
+
+If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly. For GitHub Actions, you can set `DD_GIT_COMMIT_SHA` from `GITHUB_SHA`:
+
+```yaml
+DD_GIT_COMMIT_SHA=$GITHUB_SHA
+```
+
 ## The test status numbers are not what is expected
 
 The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined not only by its suite and name, but by its test parameters and test configurations as well.
@@ -203,3 +221,5 @@ To lower overhead, set `isolate: false` in your Vitest config file, or pass `--n
 [16]: /tests/network/
 [17]: https://vitest.dev/config/isolate
 [18]: https://github.com/nodejs/import-in-the-middle
+[19]: https://github.com/actions/checkout#usage
+[20]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#collecting-git-metadata
