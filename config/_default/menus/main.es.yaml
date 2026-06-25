@@ -6,7 +6,7 @@ menu:
     - name: En la aplicación
       identifier: platform_heading
       weight: 2000000
-    - name: Respuesta a incidentes
+    - name: Incident Response
       identifier: incident_response_heading
       weight: 3000000
     - name: Acciones y remediaciones
@@ -39,7 +39,7 @@ menu:
     - name: Observabilidad de IA
       identifier: ai_observability_heading
       weight: 13000000
-    - name: Gestión de registros
+    - name: Log Management
       identifier: log_management_heading
       weight: 14000000
     - name: Administración
@@ -86,7 +86,7 @@ menu:
       url: getting_started/dashboards/
       parent: getting_started
       weight: 6
-    - name: Monitoreo de Base de Datos
+    - name: Database Monitoring
       identifier: getting_started_database_monitoring
       url: getting_started/database_monitoring/
       parent: getting_started
@@ -141,7 +141,7 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1205
       parent: getting_started_integrations
-    - name: Portal Interno de Desarrolladores
+    - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
       parent: getting_started
@@ -181,7 +181,7 @@ menu:
       url: getting_started/search/product_specific_reference
       parent: getting_started_search
       weight: 1901
-    - name: Repetición de Sesión
+    - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
@@ -191,22 +191,22 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 21
-    - name: Protección de Aplicaciones y API
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
       weight: 2101
-    - name: Seguridad en la Nube
+    - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
       weight: 2102
-    - name: SIEM en la Nube
+    - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
       weight: 2103
-    - name: Seguridad de Código
+    - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
@@ -226,12 +226,12 @@ menu:
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
       weight: 2301
-    - name: Banderas de Características
+    - name: Feature Flags
       identifier: getting_started_feature_flags
       url: getting_started/feature_flags/
       parent: getting_started_software_delivery
       weight: 2302
-    - name: Optimización de Pruebas
+    - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
@@ -266,7 +266,7 @@ menu:
       url: getting_started/synthetics/mobile_app_testing
       parent: getting_started_synthetics
       weight: 2403
-    - name: Pruebas Continuas
+    - name: Continuous Testing
       identifier: getting_started_continuous_testing
       url: getting_started/continuous_testing/
       parent: getting_started_synthetics
@@ -301,7 +301,7 @@ menu:
       url: getting_started/teams/
       parent: getting_started
       weight: 27
-    - name: Automatización de Flujos de Trabajo
+    - name: Workflow Automation
       identifier: getting_started_workflow_automation
       url: getting_started/workflow_automation/
       parent: getting_started
@@ -545,7 +545,7 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
-    - name: Automatización de flota
+    - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
       parent: agent
@@ -1920,7 +1920,7 @@ menu:
       weight: 11
       parent: alerting
       identifier: alerting_guide
-    - name: Objetivos de Nivel de Servicio
+    - name: Service Level Objectives
       url: service_level_objectives/
       pre: slos
       weight: 70000
@@ -2264,12 +2264,12 @@ menu:
       parent: idp_use_cases
       identifier: idp_use_cases_api_management
       weight: 1001
-    - name: CCM
+    - name: Cloud Cost Management
       url: internal_developer_portal/use_cases/cloud_cost_management
       parent: idp_use_cases
       identifier: idp_use_cases_cloud_cost_management
       weight: 1002
-    - name: Protección de Aplicaciones y API
+    - name: App and API Protection
       url: internal_developer_portal/use_cases/appsec_management
       parent: idp_use_cases
       identifier: idp_use_cases_appsec_management
@@ -2294,7 +2294,7 @@ menu:
       parent: idp_use_cases
       identifier: idp_use_cases_incident_response
       weight: 1007
-    - name: Visibilidad del pipeline CI
+    - name: CI Pipeline Visibility
       url: internal_developer_portal/use_cases/pipeline_visibility
       parent: idp_use_cases
       identifier: idp_use_cases_pipeline_visibility
@@ -2385,7 +2385,7 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_replays
       weight: 103
-    - name: RUM
+    - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking_frontend
       identifier: error_tracking_rum
@@ -2810,7 +2810,7 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
-    - name: Gestión de casos
+    - name: Case Management
       url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
@@ -2879,7 +2879,7 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
-    - name: Automatización de Flujos de Trabajo
+    - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
       identifier: workflows
@@ -2946,7 +2946,7 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
-    - name: Constructor de aplicaciones
+    - name: App Builder
       url: actions/app_builder/
       pre: app-builder
       identifier: app_builder
@@ -3141,7 +3141,7 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_security
       weight: 103
-    - name: Gestión de Costos en la Nube
+    - name: Cloud Cost Management
       url: datadog_cloudcraft/overlays/ccm/
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_ccm
@@ -3177,7 +3177,7 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_changes
       weight: 10003
-    - name: Monitoreo del Servicio Universal
+    - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
@@ -3216,7 +3216,7 @@ menu:
       parent: infrastructure_heading
       weight: 60000
       pre: container
-    - name: Monitoreo de Contenedores
+    - name: Container Monitoring
       url: containers/monitoring
       parent: containers
       identifier: infrastructure_livecontainers
@@ -3331,7 +3331,7 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
       weight: 405
-    - name: Protección de aplicaciones y API
+    - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
@@ -3793,7 +3793,7 @@ menu:
       identifier: serverless_guides
       parent: serverless
       weight: 12
-    - name: Monitoreo de red
+    - name: Network Monitoring
       url: network_monitoring/
       pre: network
       identifier: nm_parent
@@ -3994,7 +3994,7 @@ menu:
       parent: network_path
       identifier: network_path_glossary
       weight: 508
-    - name: Gestión de Almacenamiento
+    - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
       identifier: storage_management
@@ -4377,7 +4377,7 @@ menu:
       parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_ios
       weight: 20322
-    - name: Instrumentación Dinámica
+    - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
       parent: tracing_trace_collection
@@ -5214,7 +5214,7 @@ menu:
       parent: dbm
       identifier: dbm_guides
       weight: 20
-    - name: Monitoreo de Flujos de Datos
+    - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
       identifier: data_streams
@@ -5540,7 +5540,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 401
-    - name: Escáner de Datos Sensibles
+    - name: Sensitive Data Scanner
       url: llm_observability/evaluations/sensitive_data_scanner
       parent: llm_obs_evaluations
       identifier: llm_obs_sensitive_data_scanner
@@ -5905,7 +5905,7 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_explore
       weight: 2
-    - name: Optimización de Pruebas
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
@@ -6106,7 +6106,7 @@ menu:
       parent: tests
       identifier: tests_developer_workflows
       weight: 11
-    - name: Cobertura de Código
+    - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
@@ -6136,7 +6136,7 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 17
-    - name: Cobertura de Código
+    - name: Code Coverage
       url: code_coverage/
       pre: ci
       parent: software_delivery_heading
@@ -6224,7 +6224,7 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
-    - name: Banderas de Funciones
+    - name: Feature Flags
       url: feature_flags/
       pre: signpost
       parent: software_delivery_heading
@@ -6392,12 +6392,12 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 1
-    - name: Seguridad del código
+    - name: Code Security
       url: ide_plugins/idea/code_security/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
       weight: 101
-    - name: Seguimiento de errores
+    - name: Error Tracking
       url: ide_plugins/idea/error_tracking/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_error_tracking
@@ -6417,7 +6417,7 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
-    - name: Seguridad del código
+    - name: Code Security
       url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_security
@@ -6442,7 +6442,7 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_live_debugger
       weight: 105
-    - name: Canalizaciones de Observabilidad
+    - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
       identifier: observability_pipelines
@@ -7963,7 +7963,7 @@ menu:
       url: /security/code_security/guides/
       parent: code_security
       weight: 8
-    - name: Seguridad en la Nube
+    - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
       pre: cloud-security-management
@@ -8154,7 +8154,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_agentless_scanning
       weight: 1203
-    - name: Protección de aplicaciones y API
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
@@ -8911,7 +8911,7 @@ menu:
       parent: journey_monitoring
       identifier: journey_monitoring_uptime
       weight: 3
-    - name: RUM
+    - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
       identifier: rum
@@ -9719,7 +9719,7 @@ menu:
       parent: product_analytics
       identifier: pa_troubleshooting
       weight: 7
-    - name: reproducción de sesión
+    - name: Session Replay
       url: session_replay/
       pre: play-circle
       identifier: session_replay

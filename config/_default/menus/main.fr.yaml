@@ -6,7 +6,7 @@ menu:
     - name: "Dans l'application"
       identifier: platform_heading
       weight: 2000000
-    - name: Réponse aux incidents
+    - name: Incident Response
       identifier: incident_response_heading
       weight: 3000000
     - name: Actions et remédiations
@@ -141,7 +141,7 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1205
       parent: getting_started_integrations
-    - name: Portail interne pour les développeurs
+    - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
       parent: getting_started
@@ -181,7 +181,7 @@ menu:
       url: getting_started/search/product_specific_reference
       parent: getting_started_search
       weight: 1901
-    - name: Session Replay
+    - name: Session Replay
       identifier: getting_started_session_replay
       url: getting_started/session_replay/
       parent: getting_started
@@ -191,7 +191,7 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 21
-    - name: Protection des applications et des API
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
@@ -201,12 +201,12 @@ menu:
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
       weight: 2102
-    - name: Cloud SIEM
+    - name: Cloud SIEM
       identifier: getting_started_cloud_siem
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
       weight: 2103
-    - name: Sécurité du code
+    - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started_security
@@ -226,12 +226,12 @@ menu:
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
       weight: 2301
-    - name: Drapeaux de fonctionnalités
+    - name: Feature Flags
       identifier: getting_started_feature_flags
       url: getting_started/feature_flags/
       parent: getting_started_software_delivery
       weight: 2302
-    - name: Optimisation des tests
+    - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
@@ -266,7 +266,7 @@ menu:
       url: getting_started/synthetics/mobile_app_testing
       parent: getting_started_synthetics
       weight: 2403
-    - name: Tests continus
+    - name: Continuous Testing
       identifier: getting_started_continuous_testing
       url: getting_started/continuous_testing/
       parent: getting_started_synthetics
@@ -2113,7 +2113,7 @@ menu:
       parent: watchdog_top_level
       weight: 6
       identifier: watchdog_faulty_cloud_saas_api_detection
-    - name: Portail interne pour les développeurs
+    - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui
       parent: platform_heading
@@ -2269,7 +2269,7 @@ menu:
       parent: idp_use_cases
       identifier: idp_use_cases_cloud_cost_management
       weight: 1002
-    - name: Protection des applications et des API
+    - name: App and API Protection
       url: internal_developer_portal/use_cases/appsec_management
       parent: idp_use_cases
       identifier: idp_use_cases_appsec_management
@@ -2289,12 +2289,12 @@ menu:
       parent: idp_use_cases
       identifier: idp_use_cases_production_readiness
       weight: 1006
-    - name: Réponse aux incidents
+    - name: Incident Response
       url: internal_developer_portal/use_cases/incident_response
       parent: idp_use_cases
       identifier: idp_use_cases_incident_response
       weight: 1007
-    - name: Visibilité du pipeline CI
+    - name: CI Pipeline Visibility
       url: internal_developer_portal/use_cases/pipeline_visibility
       parent: idp_use_cases
       identifier: idp_use_cases_pipeline_visibility
@@ -2304,7 +2304,7 @@ menu:
       parent: internal_developer_portal
       identifier: idp_onboarding_guide
       weight: 11
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
       parent: platform_heading
@@ -2460,7 +2460,7 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_linear
       weight: 101
-    - name: Gestion des cas
+    - name: Case Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
@@ -2486,12 +2486,12 @@ menu:
       parent: platform_heading
       identifier: change_tracking
       weight: 140000
-    - name: Drapeaux de fonctionnalités
+    - name: Feature Flags
       url: change_tracking/feature_flags/
       parent: change_tracking
       identifier: change_tracking_feature_flags
       weight: 1
-    - name: Gestion des événements
+    - name: Event Management
       url: events/
       pre: events
       identifier: events
@@ -2810,7 +2810,7 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
-    - name: Gestion des cas
+    - name: Case Management
       url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
@@ -3216,7 +3216,7 @@ menu:
       parent: infrastructure_heading
       weight: 60000
       pre: container
-    - name: Surveillance des conteneurs
+    - name: Container Monitoring
       url: containers/monitoring
       parent: containers
       identifier: infrastructure_livecontainers
@@ -3331,7 +3331,7 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
       weight: 405
-    - name: Protection des applications et des API
+    - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
@@ -3598,7 +3598,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_configuration
       weight: 107
-    - name: Profiler en continu
+    - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
@@ -3793,7 +3793,7 @@ menu:
       identifier: serverless_guides
       parent: serverless
       weight: 12
-    - name: Surveillance réseau
+    - name: Network Monitoring
       url: network_monitoring/
       pre: network
       identifier: nm_parent
@@ -3994,7 +3994,7 @@ menu:
       parent: network_path
       identifier: network_path_glossary
       weight: 508
-    - name: Gestion du stockage
+    - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
       identifier: storage_management
@@ -4377,7 +4377,7 @@ menu:
       parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_ios
       weight: 20322
-    - name: Instrumentation dynamique
+    - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
       parent: tracing_trace_collection
@@ -4697,7 +4697,7 @@ menu:
       identifier: live_debugger_debug_with_bits
       parent: live_debugger
       weight: 1
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
       identifier: tracing_error_tracking
@@ -4812,7 +4812,7 @@ menu:
       identifier: tracing_troubleshooting_go_instrumentation
       parent: tracing_troubleshooting
       weight: 1411
-    - name: Profiler en continu
+    - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
       identifier: profiler
@@ -5540,7 +5540,7 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 401
-    - name: Scanner de données sensibles
+    - name: Sensitive Data Scanner
       url: llm_observability/evaluations/sensitive_data_scanner
       parent: llm_obs_evaluations
       identifier: llm_obs_sensitive_data_scanner
@@ -5905,7 +5905,7 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_explore
       weight: 2
-    - name: Optimisation des tests
+    - name: Test Optimization
       url: tests/
       pre: ci
       parent: software_delivery_heading
@@ -6106,7 +6106,7 @@ menu:
       parent: tests
       identifier: tests_developer_workflows
       weight: 11
-    - name: Couverture du code
+    - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
@@ -6136,7 +6136,7 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 17
-    - name: Couverture du code
+    - name: Code Coverage
       url: code_coverage/
       pre: ci
       parent: software_delivery_heading
@@ -6224,7 +6224,7 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
-    - name: Drapeaux de fonctionnalités
+    - name: Feature Flags
       url: feature_flags/
       pre: signpost
       parent: software_delivery_heading
@@ -6392,12 +6392,12 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 1
-    - name: Sécurité du code
+    - name: Code Security
       url: ide_plugins/idea/code_security/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
       weight: 101
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: ide_plugins/idea/error_tracking/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_error_tracking
@@ -6417,7 +6417,7 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
-    - name: Sécurité du code
+    - name: Code Security
       url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_security
@@ -6442,7 +6442,7 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_live_debugger
       weight: 105
-    - name: "Pipelines d'observabilité"
+    - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
       identifier: observability_pipelines
@@ -6708,7 +6708,7 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
       weight: 315
-    - name: Scanner de données sensibles
+    - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
@@ -7284,7 +7284,7 @@ menu:
       url: logs/explorer/archive_search/
       parent: log_explorer
       weight: 515
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
       identifier: log_management_error_tracking
@@ -7435,7 +7435,7 @@ menu:
       parent: cloudprem_ingest
       identifier: cloudprem_ingest_agent
       weight: 401
-    - name: "Pipelines d'observabilité"
+    - name: Observability Pipelines
       url: /byoc-logs/ingest/observability_pipelines
       parent: cloudprem_ingest
       identifier: cloudprem_ingest_op
@@ -7611,7 +7611,7 @@ menu:
       parent: security_platform
       identifier: security_guides
       weight: 13
-    - name: Cloud SIEM
+    - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
       parent: security_platform_heading
@@ -7757,7 +7757,7 @@ menu:
       parent: cloud_siem
       identifier: siem_data_security
       weight: 12
-    - name: Sécurité du code
+    - name: Code Security
       identifier: code_security
       url: /security/code_security/
       parent: security_platform_heading
@@ -7848,7 +7848,7 @@ menu:
       url: /security/code_security/software_composition_analysis/cve_explorer/
       parent: software_composition_analysis
       weight: 5
-    - name: Analyse de secrets
+    - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
       parent: code_security
@@ -8154,7 +8154,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_agentless_scanning
       weight: 1203
-    - name: Protection des applications et des API
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
@@ -8346,7 +8346,7 @@ menu:
       identifier: ai_guard_signals
       parent: ai_guard
       weight: 3
-    - name: Protection des charges de travail
+    - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
       parent: security_platform_heading
@@ -8442,7 +8442,7 @@ menu:
       parent: workload_protection
       identifier: workload_protection_troubleshooting
       weight: 206
-    - name: Scanner de données sensibles
+    - name: Sensitive Data Scanner
       url: /security/sensitive_data_scanner/
       pre: sensitive-data-scanner
       identifier: sensitive_data_scanner
@@ -8789,7 +8789,7 @@ menu:
       url: data_security/synthetics/
       parent: synthetics
       weight: 12
-    - name: Tests continus
+    - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
       identifier: continuous_testing
@@ -8987,7 +8987,7 @@ menu:
       parent: rum_browser
       identifier: rum_frustration_signals
       weight: 110
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: real_user_monitoring/application_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
@@ -9482,7 +9482,7 @@ menu:
       parent: rum_feature_flag_tracking
       identifier: rum_feature_flag_tracking_use
       weight: 702
-    - name: Suivi des erreurs
+    - name: Error Tracking
       url: real_user_monitoring/error_tracking/
       parent: rum
       identifier: rum_error_tracking
@@ -9592,7 +9592,7 @@ menu:
       url: data_security/real_user_monitoring/
       parent: rum
       weight: 15
-    - name: Analyse des produits
+    - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
       identifier: product_analytics
@@ -9719,7 +9719,7 @@ menu:
       parent: product_analytics
       identifier: pa_troubleshooting
       weight: 7
-    - name: Session Replay
+    - name: Session Replay
       url: session_replay/
       pre: play-circle
       identifier: session_replay
@@ -10116,7 +10116,7 @@ menu:
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
       weight: 1512
-    - name: Réponse aux incidents
+    - name: Incident Response
       identifier: account_management_billing_incident_response
       url: account_management/billing/incident_response/
       parent: account_management_billing
@@ -10192,7 +10192,7 @@ menu:
       url: data_security/agent/
       parent: data_security
       weight: 1
-    - name: Cloud SIEM
+    - name: Cloud SIEM
       identifier: data_security_cloud_siem
       url: data_security/cloud_siem/
       parent: data_security
@@ -10212,7 +10212,7 @@ menu:
       url: data_security/real_user_monitoring/
       parent: data_security
       weight: 5
-    - name: Surveillance Synthetics
+    - name: Synthetic Monitoring
       identifier: data_security_synthetic_monitoring
       url: data_security/synthetics/
       parent: data_security
