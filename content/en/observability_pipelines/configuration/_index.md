@@ -81,7 +81,7 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from [OpenTelemetry][4] can either be incremental or absolute based on their temporality. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
+Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from OpenTelemetry can either be incremental or absolute based on their [temporality][4]. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
 
 | Metric Type | Incremental                      | Absolute                               |
 |-------------|----------------------------------|----------------------------------------|
