@@ -797,6 +797,16 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
+    - name: Managed Platforms Endpoint
+      url: /opentelemetry/setup/otlp_ingest/managed_platforms
+      parent: otel-setup-intake-endpoint
+      weight: 40233
+      identifier: otel_setup_managed_platforms
+    - name: Serverless Endpoint
+      url: /opentelemetry/setup/otlp_ingest/serverless
+      parent: otel-setup-intake-endpoint
+      weight: 40234
+      identifier: otel_setup_serverless
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -1545,52 +1555,57 @@ menu:
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
-      weight: 100
+      weight: 101
     - name: Take Action
       url: bits_ai/bits_ai_sre/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
-      weight: 200
+      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 300
+      weight: 103
     - name: Knowledge Sources
       url: bits_ai/bits_ai_sre/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 400
+      weight: 104
     - name: Chat with Bits Investigation
       url: bits_ai/bits_ai_sre/chat_bits_ai_sre
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 500
+      weight: 105
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
+      parent: bits_ai
+      weight: 2
     - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 2
+      weight: 3
     - name: Setup
       url: bits_ai/bits_ai_dev_agent/setup
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
-      weight: 200
+      weight: 301
     - name: Automations
       url: bits_ai/bits_ai_dev_agent/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
-      weight: 300
+      weight: 302
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
@@ -1747,24 +1762,26 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
-    - name: Widget Public URLs
+    - name: Widget Share URLs
       identifier: dashboards_sharing_widget_public_urls
       url: dashboards/sharing/widget_public_urls
+      parent: dashboards_sharing
+      weight: 1003
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1004
+      weight: 1005
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1005
+      weight: 1006
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -2164,6 +2181,11 @@ menu:
       parent: catalog_entity_model
       identifier: catalog_ai_generated_systems
       weight: 1023
+    - name: Migrate to v3
+      url: internal_developer_portal/catalog/entity_model/v3_migration
+      parent: catalog_entity_model
+      identifier: catalog_v3_migration
+      weight: 1024
     - name: Troubleshooting
       url: internal_developer_portal/catalog/troubleshooting
       parent: catalog
@@ -2340,11 +2362,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -3481,16 +3498,21 @@ menu:
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
       weight: 807
+    - name: DatadogGenericResource CRD
+      url: containers/datadog_operator/crd_ddgr
+      identifier: containers_datadog_operator_crd_ddgr
+      parent: containers_datadog_operator
+      weight: 808
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 809
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -3744,34 +3766,29 @@ menu:
       identifier: serverless_logic_apps
       weight: 8
     - name: Google
-      url: serverless/google
+      url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_google
       weight: 3
-    - name: Google Cloud Run
-      url: serverless/google_cloud_run
-      parent: serverless_google
-      identifier: serverless_gcr
-      weight: 9
-    - name: Containers
+    - name: Cloud Run Containers
       url: serverless/google_cloud_run/containers
-      parent: serverless_gcr
-      weight: 901
+      parent: serverless_google
+      weight: 301
       identifier: serverless_gcr_containers
-    - name: Jobs (Preview)
+    - name: Cloud Run Jobs (Preview)
       url: serverless/google_cloud_run/jobs
-      parent: serverless_gcr
-      weight: 902
+      parent: serverless_google
+      weight: 302
       identifier: serverless_gcr_jobs
-    - name: Functions
+    - name: Cloud Run Functions
       url: serverless/google_cloud_run/functions
-      parent: serverless_gcr
-      weight: 903
+      parent: serverless_google
+      weight: 303
       identifier: serverless_gcr_functions
-    - name: Functions (1st generation)
+    - name: Cloud Run Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
-      parent: serverless_gcr
-      weight: 904
+      parent: serverless_google
+      weight: 304
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
@@ -4682,9 +4699,9 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
-    - name: Debug with Bits
-      url: tracing/live_debugger/debug-with-bits/
-      identifier: live_debugger_debug_with_bits
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger/
+      identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
     - name: Error Tracking
@@ -5375,7 +5392,7 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
-    - name: Logs Correlation 
+    - name: Logs Correlation
       url: data_observability/jobs_monitoring/airflow_log_context
       identifier: jobs_monitoring_airflow_log_context
       parent: jobs_monitoring_airflow
@@ -5890,6 +5907,16 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
+    - name: Just-In-Time (JIT) Gates
+      url: deployment_gates/setup/jit/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_jit
+      weight: 1
+    - name: Preconfigured Gates
+      url: deployment_gates/setup/preconfigured/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_preconfigured
+      weight: 2
     - name: Explore
       url: deployment_gates/explore/
       parent: deployment_gates
@@ -6285,21 +6312,46 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
       weight: 303
+    - name: Saved Filters
+      url: feature_flags/concepts/saved_filters
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_saved_filters
+      weight: 304
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 304
+      weight: 305
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 305
+      weight: 306
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 306
+      weight: 307
+    - name: Feature Flag Graphs
+      url: feature_flags/concepts/flag_graphs
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_graphs
+      weight: 308
+    - name: Implementation Patterns
+      url: feature_flags/implementation_patterns
+      parent: feature_flags
+      identifier: feature_flags_implementation_patterns
+      weight: 4
+    - name: OpenTelemetry
+      url: feature_flags/implementation_patterns/opentelemetry
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_opentelemetry
+      weight: 401
+    - name: Serverless
+      url: feature_flags/implementation_patterns/serverless
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_serverless
+      weight: 402
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -6397,11 +6449,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 103
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6427,11 +6474,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
       weight: 104
-    - name: Live Debugger
-      url: ide_plugins/vscode/live_debugger/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_live_debugger
-      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -6453,46 +6495,51 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_set_up_pipelines
       weight: 102
+    - name: Pipeline Simulation
+      url: observability_pipelines/configuration/pipeline_simulation/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_pipeline_simulation
+      weight: 103
     - name: Install the Worker
       url: observability_pipelines/configuration/install_the_worker/
       identifier: observability_pipelines_install_the_worker
       parent: observability_pipelines_configuration
-      weight: 103
+      weight: 104
     - name: Advanced Worker Configuration
       url: observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
       parent: observability_pipelines_install_the_worker
       identifier: observability_pipelines_advanced_worker_configurations
-      weight: 10301
+      weight: 10401
     - name: Run Multiple Pipelines on a Host
       identifier: observability_run_multiple_pipelines_on_a_host
       url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_install_the_worker
-      weight: 10302
+      weight: 10402
     - name: Secrets Management
       url: observability_pipelines/configuration/secrets_management
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_secrets_management
-      weight: 104
+      weight: 105
     - name: Live Capture
       identifier: observability_pipelines/configuration/live_capture/
       url: /observability_pipelines/configuration/live_capture/
       parent: observability_pipelines_configuration
-      weight: 105
+      weight: 106
     - name: Update Existing Pipelines
       url: observability_pipelines/configuration/update_existing_pipelines
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
-      weight: 106
+      weight: 107
     - name: Export Pipeline
       url: observability_pipelines/configuration/export_pipeline_configuration/
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
-      weight: 107
+      weight: 108
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 108
+      weight: 109
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -7064,41 +7111,51 @@ menu:
       url: logs/log_collection/kotlin_multiplatform/
       parent: log_collection
       weight: 107
+    - name: C / C++
+      identifier: log_cpp
+      url: logs/log_collection/cpp/
+      parent: log_collection
+      weight: 108
+    - name: .NET MAUI
+      identifier: log_maui
+      url: logs/log_collection/maui/
+      parent: log_collection
+      weight: 109
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 108
+      weight: 110
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 109
+      weight: 111
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 110
+      weight: 112
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 111
+      weight: 113
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 112
+      weight: 114
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 113
+      weight: 115
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 114
+      weight: 116
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
@@ -8468,6 +8525,11 @@ menu:
       identifier: sds_guides
       parent: sensitive_data_scanner
       weight: 3
+    - name: Troubleshooting
+      url: /security/sensitive_data_scanner/troubleshooting/
+      identifier: sds_troubleshooting
+      parent: sensitive_data_scanner
+      weight: 4
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
@@ -9272,6 +9334,46 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 109
+    - name: C / C++
+      url: real_user_monitoring/application_monitoring/cpp
+      parent: application_monitoring
+      identifier: rum_cpp
+      weight: 205
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/cpp/setup
+      parent: rum_cpp
+      identifier: rum_cpp_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/application_monitoring/cpp/error_tracking
+      parent: rum_cpp
+      identifier: rum_cpp_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/cpp/data_collected
+      parent: rum_cpp
+      identifier: rum_cpp_data_collected
+      weight: 104
+    - name: Advanced Build Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_build_configuration
+      weight: 105
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/cpp/troubleshooting
+      parent: rum_cpp
+      identifier: rum_cpp_troubleshooting
+      weight: 106
+    - name: Supported Versions
+      url: real_user_monitoring/application_monitoring/cpp/supported_versions
+      parent: rum_cpp
+      identifier: rum_cpp_supported_versions
+      weight: 107
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
@@ -9337,6 +9439,46 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
       weight: 106
+    - name: .NET MAUI
+      url: real_user_monitoring/application_monitoring/maui
+      parent: application_monitoring
+      identifier: rum_mobile_maui
+      weight: 208
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/maui/setup
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/application_monitoring/maui/error_tracking
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/maui/advanced_configuration
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_advanced_config
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/maui/data_collected
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_data_collected
+      weight: 104
+    - name: Mobile Vitals
+      url: real_user_monitoring/application_monitoring/maui/mobile_vitals
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_mobile_vitals
+      weight: 105
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/maui/frustration_signals
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_frustration_signals
+      weight: 106
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/maui/troubleshooting
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_troubleshooting
+      weight: 109
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
@@ -9623,16 +9765,31 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
+    - name: Identity Resolution
+      url: product_analytics/profiles/identity_resolution
+      parent: pa_profiles
+      identifier: pa_identity_resolution
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
+    - name: Server-Side Events
+      url: product_analytics/data_collected/server_side_events
+      parent: pa_data_collected
+      identifier: pa_data_collected_server_side_events
+      weight: 601
     - name: Experiments
       url: experiments/
       pre: experiment-wui

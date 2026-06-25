@@ -155,7 +155,7 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 #### Bundling with esbuild
 
-This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+This library provides esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
 Here's an example of how one might use `dd-trace` with esbuild:
 
@@ -188,10 +188,58 @@ esbuild.build({
 })
 ```
 
+#### Bundling with Webpack
+
+This library provides experimental Webpack support in the form of a Webpack plugin. To use the plugin, make sure you have `dd-trace@5.94.0+` installed, and then require the `dd-trace/webpack` module when building your bundle.
+
+The following example shows how to use `dd-trace` with Webpack:
+
+```javascript
+const path = require('path')
+const webpack = require('webpack')
+const DatadogWebpackPlugin = require('dd-trace/webpack')
+
+const compiler = webpack({
+  entry: 'main.js',
+  target: 'node',
+  externalsType: 'commonjs',
+  output: {
+    filename: 'out.js',
+    path: __dirname,
+    hashFunction: 'sha256',
+  },
+  externals: [
+    // Node.js built-in not in Webpack's default list for target: 'node'
+    'diagnostics_channel',
+
+    // dead code paths introduced by knex
+    'pg',
+    'mysql2',
+    'better-sqlite3',
+    'sqlite3',
+    'mysql',
+    'oracledb',
+    'pg-query-stream',
+    'tedious',
+    '@yaacovcr/transform',
+
+    // optional native dd-trace modules
+    '@datadog/native-appsec',
+    '@datadog/native-iast-taint-tracking',
+    '@datadog/native-metrics',
+    '@datadog/pprof',
+    '@datadog/libdatadog',
+  ],
+  plugins: [
+    new DatadogWebpackPlugin(),
+  ],
+})
+```
+
 #### Bundling with Next.js
 
-If you are using Next.js or another framework relying on webpack to bundle your application, add a declaration
-similar to the one for webpack inside your `next.config.js` configuration file:
+If you are using Next.js to bundle your application, add a declaration
+similar to the one for Webpack inside your `next.config.js` configuration file:
 
 ```javascript
 /** @type {import('next').NextConfig} */

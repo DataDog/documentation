@@ -37,9 +37,9 @@ Multi-View AI Investigation is available for Browser RUM applications only.
 1. Open the [Optimization page][2] for your application.
 2. Select a view and one of the supported vitals.
 3. The Optimization page surfaces two elements for the selected (view × vital) pair:
-   - A **summary** at the top with an at-a-glance overview of the issues detected.
-   - Up to three **recommendation cards** below the summary. Each card represents a candidate root cause, ordered by impact.
-4. Click **Investigate** on a card to launch the agent on that issue.
+   - A {{< ui >}}summary{{< /ui >}} at the top with an at-a-glance overview of the issues detected.
+   - Up to three {{< ui >}}recommendation cards{{< /ui >}} below the summary. Each card represents a candidate root cause, ordered by impact.
+4. Click {{< ui >}}Investigate{{< /ui >}} on a card to launch the agent on that issue.
 
 {{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="Optimization page for a Largest Contentful Paint metric, showing the p75 distribution, time series, and ranked recommendation cards with an Investigate button on each card." style="width:100%;" >}}
 
@@ -58,7 +58,7 @@ The richer the data available, the more precise the analysis. Correlating RUM wi
 
 ## Read the results
 
-When you click **Investigate** on a recommendation card, a side panel opens and the agent streams its analysis in real time. Each investigation produces:
+When you click {{< ui >}}Investigate{{< /ui >}} on a recommendation card, a side panel opens and the agent streams its analysis in real time. Each investigation produces:
 
 - **A step-by-step timeline** describing how the metric is built from your application code: which resources load, when scripts execute, and where time is spent during the vital window.
 - **A root-cause explanation** with the supporting evidence the agent considered.
@@ -70,8 +70,8 @@ When you click **Investigate** on a recommendation card, a side panel opens and 
 
 After an investigation completes, you can act on findings without leaving the panel:
 
-- **Fix with Bits**: Opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
-- **Save to a Notebook**: Exports the full timeline and findings to a [Notebook][5] to share with your team.
+- {{< ui >}}Fix with Bits{{< /ui >}}: Opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
+- {{< ui >}}Save to a Notebook{{< /ui >}}: Exports the full timeline and findings to a [Notebook][5] to share with your team.
 
 ## Further reading
 
