@@ -5,8 +5,8 @@ import { defineConfig } from 'vitest/config';
 // Each project file uses its own getViteConfig() call, giving it an isolated
 // Vite server and module graph:
 //
-//   unit        headless + component tests, frozen 8-category fixture
-//   integration full-spec shape validation, live Hugo data
+//   fixture     headless + component tests, frozen 8-category fixture
+//   live        full-spec shape validation, live Hugo data
 //
 // Run a single project:
 //   vitest run --config vitest.unit.config.ts

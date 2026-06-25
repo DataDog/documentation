@@ -57,7 +57,7 @@ const frozenApiSpecPlugin: Plugin = {
 export default getViteConfig({
   plugins: [frozenApiSpecPlugin],
   test: {
-    name: "unit",
+    name: "fixture",
     include: [
       "tests/headless/**/*.test.ts",
       "src/components/**/tests/unit.test.ts",

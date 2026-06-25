@@ -5,7 +5,7 @@ import { getViteConfig } from "astro/config";
 // @hugo-site/data/api resolves to the live Hugo spec.
 export default getViteConfig({
   test: {
-    name: "integration",
+    name: "live",
     include: ["tests/integration/**/*.test.ts"],
   },
 });
