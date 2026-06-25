@@ -1,0 +1,102 @@
+{{ $dot := . }}
+{{ $processor_name := .Page.Params.processor_name | default "" }}
+{{ $dot.Scratch.Set "json" "" }}
+{{ $dot.Scratch.Set "html" "" }}
+{{ $dot.Scratch.Set "found_processor" false }}
+
+{{ with .Site.GetPage "/api/v1/logs-pipelines/_index.md" }}
+  {{ with .Resources.Match "processors.json" }}
+    {{ range . }}
+        {{ $data := . | unmarshal }}
+        {{ if $processor_name }}
+            {{/* Look for specific processor type in the processors.json data */}}
+            {{ $req := (index $data $processor_name) }}
+            {{ if $req }}
+                {{ $dot.Scratch.Set "found_processor" true }}
+                
+                {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+
+                {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
+
+                {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                {{ $dot.Scratch.Set "html" (index $req "html") }}
+            {{ else }}
+                {{ warnf "Could not find processor type %q in processors.json" $processor_name }}
+            {{ end }}
+        {{ else }}
+            {{/* If no specific processor requested, show all available processors */}}
+            {{ $allProcessors := dict }}
+            {{ range $processorType, $processorData := $data }}
+                {{ $allProcessors = merge $allProcessors (dict $processorType $processorData) }}
+            {{ end }}
+            
+            {{/* Create a combined example showing all processor types */}}
+            {{ $combinedExample := dict "processors" (slice) }}
+            {{ range $processorType, $processorData := $data }}
+                {{ $processorExample := dict "type" $processorType "name" (printf "My %s processor" $processorType) "is_enabled" true }}
+                {{ $combinedExample = merge $combinedExample (dict "processors" (append $combinedExample.processors $processorExample)) }}
+            {{ end }}
+            
+            {{ $jsonifiedData := $combinedExample | jsonify (dict "indent" "  ") }}
+            {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+            {{ $dot.Scratch.Set "html" "All available processor types are shown in the example above." }}
+        {{ end }}
+      {{ end }}
+  {{ end }}
+{{ end }}
+{{ $json := ($dot.Scratch.Get "json") }}
+{{ $html := ($dot.Scratch.Get "html") }}
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="">
+
+    <ul class="nav nav-tabs border-none response-toggle">
+        <li class="nav-item">
+            <a class="nav-link me-1 js-model-link active" href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link me-1 js-example-link" href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
+        <p class="mb-3">Use the <a href="/api/v1/logs-pipelines/">Datadog Log Pipeline API endpoint</a> with the following processor and JSON payload:</p>
+        <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+          <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
+          <div class="col-12">
+            <div class="row table-header">
+              <div class="col-3 column">
+                <p class="font-semibold">{{ i18n "field" }}</p>
+              </div>
+              <div class="col-2 column">
+                <p class="font-semibold">{{ i18n "type" }}</p>
+              </div>
+              <div class="col-2 column text-center">
+                <p class="font-semibold">Required</p>
+              </div>
+              <div class="col-5 column">
+                <p class="font-semibold">{{ i18n "description" }}</p>
+              </div>
+            </div>
+            {{ $html | safeHTML }}
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane js-tab-example" id="example">
+        <div class="code-snippet-wrapper">
+          <div class="code-snippet append-copy-btn">
+            {{ print $json | safeHTML }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
