@@ -81,7 +81,7 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from [OpenTelemetry][7] can either be incremental or absolute based on their temporality. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
+Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from [OpenTelemetry][4] can either be incremental or absolute based on their temporality. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
 
 | Metric Type | Incremental                      | Absolute                               |
 |-------------|----------------------------------|----------------------------------------|
@@ -121,6 +121,7 @@ See [Metric Types][3] for more information.
 [1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /metrics/types/?tab=gauge#metric-types
+[4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -135,4 +136,3 @@ See [Metric Types][3] for more information.
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[7]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
