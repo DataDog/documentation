@@ -46,7 +46,7 @@ Enter the name of the Splunk metrics index to which you are sending metrics. See
 
 #### Source
 
-Enter a source value to add the source field to your metrics.
+Enter a value to add the `source` field to your metrics.
 
 #### Source type override
 
