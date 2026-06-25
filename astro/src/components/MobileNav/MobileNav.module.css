@@ -8,14 +8,14 @@
 .mobileNav {
   transition: right 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   position: fixed;
   top: var(--hugo-header-height);
   right: -500px;
   overflow-y: auto;
   height: calc(100% - var(--hugo-header-height));
   z-index: var(--hugo-mobile-nav-z);
-  padding-bottom: 20px;
+  padding-bottom: var(--space-md);
   box-sizing: border-box;
 }
 
@@ -66,8 +66,8 @@
 .quicknav {
   display: flex;
   align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--hugo-nav-gray-light);
+  padding: var(--space-sm) 0;
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
 }
 
 .quicknavLink {
@@ -76,13 +76,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   color: var(--hugo-nav-text);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
-  padding: 4px 0;
+  padding: var(--space-xs) 0;
 }
 
 .quicknavLink:hover {
@@ -121,13 +121,13 @@
 
 .list > li {
   list-style: none;
-  border-bottom: 1px solid var(--hugo-nav-gray-light);
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
 }
 
 /* A section's left indent grows with its depth in the tree (--depth set inline). */
 .section,
 .link {
-  --indent: calc(14px + var(--depth, 0) * 16px);
+  --indent: calc(22px + var(--depth, 0) * 16px);
 }
 
 .section {
@@ -139,9 +139,9 @@
   align-items: center;
   list-style: none;
   cursor: pointer;
-  padding: 12px 36px 12px var(--indent);
+  padding: 12px var(--space-xl) 12px var(--indent);
   color: var(--hugo-nav-text);
-  font-size: 18px;
+  font-size: var(--font-size-base);
 }
 
 /* Hide the native disclosure triangle. */
@@ -155,7 +155,7 @@
 /* Top-level sections read as headings, matching Hugo's uppercase, semibold. */
 .section[data-level="0"] > .sectionToggle {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .sectionToggle:hover {
@@ -173,7 +173,7 @@
   fill: none;
   stroke: var(--hugo-nav-text);
   stroke-miterlimit: 10;
-  stroke-width: 2px;
+  stroke-width: var(--border-width-thick);
 }
 
 /* Rotate the caret and brand-color the header when its section is open. */
@@ -203,17 +203,17 @@
 
 .link {
   display: block;
-  padding: 8px 14px 8px var(--indent);
+  padding: var(--space-sm) 14px var(--space-sm) var(--indent);
   color: var(--hugo-nav-text);
   text-decoration: none;
-  font-size: 16px;
+  font-size: var(--font-size-sm);
 }
 
 /* Top-level leaf links match the heading styling of top-level sections. */
 .link[data-level="0"] {
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
 }
 
 .link:hover {
@@ -225,10 +225,10 @@
 .mobile-nav__hamburger {
   position: relative;
   margin-left: auto;
-  padding: 9px 10px;
+  padding: var(--space-sm) 10px;
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 }
@@ -240,13 +240,13 @@
 .mobile-nav__hamburger-bar {
   display: block;
   width: 22px;
-  height: 2px;
+  height: var(--border-width-thick);
   border-radius: 1px;
   background-color: var(--hugo-nav-text);
 }
 
 .mobile-nav__hamburger-bar + .mobile-nav__hamburger-bar {
-  margin-top: 4px;
+  margin-top: var(--space-xs);
 }
 
 .mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(1) {
