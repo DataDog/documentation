@@ -1,5 +1,6 @@
 ---
 title: External Provider Status
+description: Monitor real-time operational status of third-party services such as payment gateways, cloud platforms, and APIs to detect provider disruptions early.
 site_support_id: idp
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
