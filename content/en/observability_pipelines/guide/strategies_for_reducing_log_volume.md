@@ -6,7 +6,7 @@ further_reading:
   tag: "documentation"
   text: "Set up a pipeline"
 - link: "/observability_pipelines/processors/"
-  tag: "documemtation"
+  tag: "documentation"
   text: "Observability Pipelines processors"
 ---
 

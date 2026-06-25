@@ -14,6 +14,9 @@ further_reading:
     - link: '/continuous_integration/tests'
       tag: 'Documentation'
       text: 'Explore Test Results and Performance'
+    - link: '/tests/test_parallelization/'
+      tag: 'Documentation'
+      text: 'Set up Test Parallelization'
     - link: '/tests/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting Test Optimization'
@@ -26,7 +29,6 @@ Supported languages:
 | Language | Version |
 | -------- | ------- |
 | Ruby     | >= 2.7  |
-| JRuby    | >= 9.4  |
 
 Supported test frameworks:
 

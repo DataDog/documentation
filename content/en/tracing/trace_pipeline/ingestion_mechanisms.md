@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#improving-tracing-efficiency-through-targeted-changes"
   tag: "Blog"
   text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
+  tag: "Learning Center"
+  text: "APM Rate Limiting and Retention"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
@@ -278,6 +282,23 @@ C++ does not provide integrations for automatic instrumentation, but it's used b
 [1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
 [2]: /tracing/trace_collection/proxy_setup
 {{% /tab %}}
+{{% tab "Rust" %}}
+**Local configuration**
+
+For Rust applications, set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5},{"sample_rate": 0.1}]'
+```
+
+Configure a rate limit by setting the `DD_TRACE_RATE_LIMIT` environment variable to the maximum traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [Rust SDK documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/rust
+{{% /tab %}}
 {{% tab ".NET" %}}
 For .NET applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
@@ -295,7 +316,7 @@ $env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 }
 ```
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/internal_developer_portal/catalog/">Catalog</a> UI.</div>
 
 Configure a rate limit by setting the `DD_TRACE_RATE_LIMIT` environment variable to the maximum traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
@@ -396,7 +417,7 @@ The head-based sampling mechanism can be overridden at the SDK level. For exampl
 
 - Set Manual Drop on a span to make sure that **no** child span is ingested. The [error and rare samplers](#error-and-rare-traces) are ignored in the Agent.
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,rust" >}}
 {{< programming-lang lang="java" >}}
 
 Manually keep a trace:
@@ -682,6 +703,11 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 ```
 
 {{< /programming-lang >}}
+{{< programming-lang lang="rust" >}}
+
+<div class="alert alert-info">The Rust SDK uses the OpenTelemetry API and does not support the Datadog <code>ManualKeep</code>/<code>ManualDrop</code> tags. To force keep or drop a trace in Rust, set the OpenTelemetry <code>sampling.priority</code> attribute on the root span using <a href="/tracing/trace_collection/custom_instrumentation/rust">custom instrumentation</a>.</div>
+
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 Set Manual Keep before context propagation. If set after context propagation, the entire trace may not be kept across services. Because this decision is set at the tracing client, the trace can still be dropped by the Agent or server based on sampling rules.
@@ -800,6 +826,15 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 ```
 
 [1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
+{{% /tab %}}
+{{% tab "Rust" %}}
+For Rust applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
 {{% /tab %}}
 {{% tab ".NET" %}}
 Starting from version [v2.18.0][1], for .NET applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.

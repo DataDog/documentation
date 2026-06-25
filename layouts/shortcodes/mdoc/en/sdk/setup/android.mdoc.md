@@ -16,7 +16,7 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ### Manual setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Declare the Android SDK as a dependency" %}
 Declare [dd-sdk-android-rum][4] and the [Gradle plugin][5] as dependencies in your **application module's** `build.gradle` file.
@@ -262,6 +262,49 @@ public class SampleApplication extends Application {
         Configuration configuration =
                 new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.US1_FED)
+                        .build();
+
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="gov2" %}
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
+            )
+            .useSite(DatadogSite.US2_FED)
+            .build()
+
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+                        .useSite(DatadogSite.US2_FED)
                         .build();
 
         Datadog.initialize(this, configuration, trackingConsent);

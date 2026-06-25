@@ -171,6 +171,7 @@ The Azure portal Function App UI changes frequently. Use this path only if the C
 [108]: https://app.datadoghq.com/logs
 [109]: https://learn.microsoft.com/azure/azure-functions/create-first-function-vs-code-node
 [110]: https://learn.microsoft.com/azure/azure-functions/functions-run-local
+
 {{% /tab %}}
 
 {{< /tabs >}}

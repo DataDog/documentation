@@ -7,15 +7,15 @@ aliases:
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
-  text: "Learn about LLM Observability"
+  text: "Learn about Agent Observability"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability Key Terms and Concepts"
+  text: "Learn about Agent Observability Key Terms and Concepts"
 - link: "/llm_observability/experiments/datasets"
   tag: "Documentation"
   text: "Learn about Datasets"
 ---
-{{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.
 {{< /callout >}}
 
@@ -25,13 +25,13 @@ Patterns automatically clusters your LLM application's production traffic into m
 
 ## How it works
 
-Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
+Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using your connected LLM provider account, giving you an interpretable view of production behavior without manual tagging. Patterns supports OpenAI as the LLM provider.
 
 When you run a pipeline, Patterns:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
-2. Embeds interactions semantically and clusters them
-3. Names each cluster with an AI-generated label and summary using Datadog's in-house models
+2. Analyzes interactions based on their semantics, such as user intent
+3. Names each cluster with an AI-generated topic label and summary using your [connected LLM provider account][1]
 4. Organizes clusters into a parent-child topic hierarchy
 
 Each topic shows its interaction volume, share of total traffic, and a coherence score — a measure of how semantically similar the interactions within the topic are to each other (0.0–1.0). Interactions that don't fit any cluster are collected into an Outliers group.
@@ -41,11 +41,11 @@ Each topic shows its interaction volume, share of total traffic, and a coherence
 ### Read the summary metrics
 
 The top of the Patterns page shows three metrics from your most recent run:
-- **Total interactions**: How many interactions were analyzed
-- **Identified topics**: The total number of distinct topics found, including parent and child topics
-- **Classified**: The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
+- {{< ui >}}Total interactions{{< /ui >}}: How many interactions were analyzed
+- {{< ui >}}Identified topics{{< /ui >}}: The total number of distinct topics found, including parent and child topics
+- {{< ui >}}Classified{{< /ui >}}: The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
 
-A high **Classified** percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types or a filter that spans very different use cases.
+A high {{< ui >}}Classified{{< /ui >}} percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types or a filter that spans very different use cases.
 
 {{< img src="llm_observability/Patterns.png" alt="The Patterns page displays traces grouped by topic." style="width:100%;" >}}
 
@@ -101,3 +101,5 @@ Scope your pipeline filter to spans with poor quality scores or failed evaluatio
 ### Track how traffic evolves
 
 Re-run the pipeline periodically and compare topic distributions over time. When a new topic appears near the top that wasn't there last month, this indicates that your users have found a new use case (or a new failure mode).
+
+[1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/

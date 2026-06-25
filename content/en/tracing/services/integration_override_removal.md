@@ -28,7 +28,7 @@ Before you remove integration overrides:
 | Language   | Minimum supported version |
 |------------|---------------------------|
 | C++        | All versions supported    |
-| Dotnet     | [3.4.0][1]                |
+| .NET       | [3.4.0][1]                |
 | Go         | [1.55.0][2]               |
 | Java       | [1.20.0][3]               |
 | Node.js    | [3.37.0][13]-3.x or [4.16.0][4]               |
@@ -40,7 +40,7 @@ Before you remove integration overrides:
 
 To remove integration overrides in Datadog:
 
-1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
+1. Navigate to **Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
    {{< img src="tracing/guide/base_service/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 

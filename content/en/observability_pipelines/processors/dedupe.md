@@ -17,13 +17,13 @@ The Deduplicate processor removes copies of data to reduce volume and noise. It 
 
 To set up the Deduplicate processor:
 
-1. Define a **filter query**. Only logs that match the specified filter query are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
-1. In the **Type of deduplication** dropdown menu, select whether you want to `Match` on or `Ignore` the fields specified below.
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. In the {{< ui >}}Type of deduplication{{< /ui >}} dropdown menu, select whether you want to `Match` on or `Ignore` the fields specified below.
     - If `Match` is selected, then after a log passes through, future logs that have the same values for all of the fields you specify below are removed.
     - If `Ignore` is selected, then after a log passes through, future logs that have the same values for all of their fields, *except* the ones you specify below, are removed.
-1.  Enter the fields you want to match on, or ignore. At least one field is required, and you can specify a maximum of three fields.
+1. Enter the fields you want to match on, or ignore. At least one field is required, and you can specify a maximum of three fields.
     - Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example) below.
-1. Click **Add field** to add additional fields you want to filter on.
+1. Click {{< ui >}}Add field{{< /ui >}} to add additional fields you want to filter on.
 
 ### Optional settings
 
@@ -38,23 +38,8 @@ The default cache size is 5,000 messages (recommended). The cached messages are 
 
 ### Path notation example
 
-For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 [1]: /observability_pipelines/search_syntax/logs/

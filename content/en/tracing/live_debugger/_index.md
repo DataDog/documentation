@@ -1,6 +1,10 @@
 ---
 title: Live Debugger
 description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
+aliases:
+- '/ide_plugins/idea/live_debugger/'
+- '/developers/ide_plugins/idea/live_debugger/'
+- '/ide_plugins/vscode/live_debugger/'
 further_reading:
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
@@ -11,9 +15,6 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
-- link: "/ide_plugins/idea/live_debugger/"
-  tag: "Documentation"
-  text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
@@ -67,7 +68,16 @@ it to **Enabled**.
 
 If in-app enablement isn't available, follow the instructions below for your target language:
 
-{{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/go" src="integrations_logos/go-metro.png" alt="Go" >}}
+{{< /card-grid >}}
 
 <div class="alert alert-info">
 <b>Why DI instructions?</b>
@@ -106,10 +116,6 @@ Live Debugger.
 
 ## Using Live Debugger
 
-<div class="alert alert-info">
-<b>Rather debug in your IDE?</b>
-Try using Live Debugger directly from JetBrains! <a href="/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
-
 ### Creating and using a Debug Session
 
 A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
@@ -141,6 +147,10 @@ Live Debugger data might contain sensitive information, especially when using th
 
 1. Use the built-in [sensitive data scrubbing][1] mechanisms.
 2. Use [Sensitive Data Scanner][17] to identify and redact sensitive information based on regular expressions.
+
+### Bits Live Debugger
+
+[Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
 
@@ -185,3 +195,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[23]: /tracing/live_debugger/bits-live-debugger/

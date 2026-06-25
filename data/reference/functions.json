@@ -435,8 +435,40 @@
         },
         {
           "title": "Chunks do not respect unicode code point boundaries",
-          "source": "chunks(\"ab你好\", 4)",
-          "return": "[\"ab�\",\"�好\"]"
+          "source": "chunks(\"ab\u4f60\u597d\", 4)",
+          "return": "[\"ab\ufffd\",\"\ufffd\u597d\"]"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "pop",
+      "name": "pop",
+      "category": "Array",
+      "description": "Removes the last item from the `value` array, returning a new array without the last element.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The array to pop from.",
+          "required": true,
+          "type": [
+            "array"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "array"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Pop an item from an array",
+          "source": "pop([1, 2, 3])",
+          "return": "[1,2]"
         }
       ],
       "deprecated": false,
@@ -2493,12 +2525,12 @@
         },
         {
           "title": "UTF-8 string with bytes segmentation",
-          "source": "floor(shannon_entropy(\"test123%456.فوائد.net.\"), precision: 4)",
+          "source": "floor(shannon_entropy(\"test123%456.\u0641\u0648\u0627\u0626\u062f.net.\"), precision: 4)",
           "return": "4.0784"
         },
         {
           "title": "UTF-8 string with grapheme segmentation",
-          "source": "floor(shannon_entropy(\"test123%456.فوائد.net.\", segmentation: \"grapheme\"), precision: 4)",
+          "source": "floor(shannon_entropy(\"test123%456.\u0641\u0648\u0627\u0626\u062f.net.\", segmentation: \"grapheme\"), precision: 4)",
           "return": "3.9362"
         }
       ],
@@ -2556,12 +2588,12 @@
       "examples": [
         {
           "title": "Sieve with regex",
-          "source": "sieve(\"test123%456.فوائد.net.\", r'[a-z0-9.]')",
+          "source": "sieve(\"test123%456.\u0641\u0648\u0627\u0626\u062f.net.\", r'[a-z0-9.]')",
           "return": "\"test123456..net.\""
         },
         {
           "title": "Custom replacements",
-          "source": "sieve(\"test123%456.فوائد.net.\", r'[a-z.0-9]', replace_single: \"X\", replace_repeated: \"<REMOVED>\")",
+          "source": "sieve(\"test123%456.\u0641\u0648\u0627\u0626\u062f.net.\", r'[a-z.0-9]', replace_single: \"X\", replace_repeated: \"<REMOVED>\")",
           "return": "\"test123X456.<REMOVED>.net.\""
         }
       ],
@@ -3509,7 +3541,7 @@
       "examples": [
         {
           "title": "strlen",
-          "source": "strlen(\"ñandú\")",
+          "source": "strlen(\"\u00f1and\u00fa\")",
           "return": "5"
         }
       ],
@@ -3943,17 +3975,17 @@
         {
           "title": "Decode EUC-KR string",
           "source": "decode_charset!(decode_base64!(\"vsiz58fPvLy/5A==\"), \"euc-kr\")",
-          "return": "\"안녕하세요\""
+          "return": "\"\uc548\ub155\ud558\uc138\uc694\""
         },
         {
           "title": "Decode EUC-JP string",
           "source": "decode_charset!(decode_base64!(\"pLOk86TLpMGkzw==\"), \"euc-jp\")",
-          "return": "\"こんにちは\""
+          "return": "\"\u3053\u3093\u306b\u3061\u306f\""
         },
         {
           "title": "Decode GB2312 string",
           "source": "decode_charset!(decode_base64!(\"xOO6ww==\"), \"gb2312\")",
-          "return": "\"你好\""
+          "return": "\"\u4f60\u597d\""
         }
       ],
       "deprecated": false,
@@ -4140,7 +4172,7 @@
         {
           "title": "Decode a punycode encoded internationalized domain name",
           "source": "decode_punycode!(\"www.xn--caf-dma.com\")",
-          "return": "\"www.café.com\""
+          "return": "\"www.caf\u00e9.com\""
         },
         {
           "title": "Decode an ASCII only string",
@@ -4150,7 +4182,7 @@
         {
           "title": "Ignore validation",
           "source": "decode_punycode!(\"xn--8hbb.xn--fiba.xn--8hbf.xn--eib.\", validate: false)",
-          "return": "\"١٠.٦٦.٣٠.٥.\""
+          "return": "\"\u0661\u0660.\u0666\u0666.\u0663\u0660.\u0665.\""
         }
       ],
       "deprecated": false,
@@ -4389,17 +4421,17 @@
       "examples": [
         {
           "title": "Encode UTF8 string to EUC-KR",
-          "source": "encode_base64(encode_charset!(\"안녕하세요\", \"euc-kr\"))",
+          "source": "encode_base64(encode_charset!(\"\uc548\ub155\ud558\uc138\uc694\", \"euc-kr\"))",
           "return": "\"vsiz58fPvLy/5A==\""
         },
         {
           "title": "Encode UTF8 string to EUC-JP",
-          "source": "encode_base64(encode_charset!(\"こんにちは\", \"euc-jp\"))",
+          "source": "encode_base64(encode_charset!(\"\u3053\u3093\u306b\u3061\u306f\", \"euc-jp\"))",
           "return": "\"pLOk86TLpMGkzw==\""
         },
         {
           "title": "Encode UTF8 string to GB2312",
-          "source": "encode_base64(encode_charset!(\"你好\", \"gb2312\"))",
+          "source": "encode_base64(encode_charset!(\"\u4f60\u597d\", \"gb2312\"))",
           "return": "\"xOO6ww==\""
         }
       ],
@@ -4818,12 +4850,12 @@
       "examples": [
         {
           "title": "Encode an internationalized domain name",
-          "source": "encode_punycode!(\"www.café.com\")",
+          "source": "encode_punycode!(\"www.caf\u00e9.com\")",
           "return": "\"www.xn--caf-dma.com\""
         },
         {
           "title": "Encode an internationalized domain name with mixed case",
-          "source": "encode_punycode!(\"www.CAFé.com\")",
+          "source": "encode_punycode!(\"www.CAF\u00e9.com\")",
           "return": "\"www.xn--caf-dma.com\""
         },
         {
@@ -6177,6 +6209,110 @@
   ],
   "IP": [
     {
+      "anchor": "decrypt_ip",
+      "name": "decrypt_ip",
+      "category": "IP",
+      "description": "Decrypts an IP address encrypted with `encrypt_ip`, returning the original IP address.\n\nSupported modes:\n\n* `aes128` - Reverses AES-128 ipcrypt-deterministic encryption. Key must be exactly 16 bytes.\n* `pfx` - Reverses prefix-preserving ipcrypt-pfx encryption. Key must be exactly 32 bytes.\n\nThe key and mode must match those used during encryption.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "ip",
+          "description": "The encrypted IP address to decrypt (IPv4 or IPv6).",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "key",
+          "description": "The decryption key as raw bytes. Must match the key used for encryption: 16 bytes for `aes128`, 32 bytes for `pfx`.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "mode",
+          "description": "The decryption mode: `aes128` or `pfx`. Must match the mode used for encryption.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`ip` is not a valid IP address.",
+        "`mode` is not a supported mode (`aes128` or `pfx`).",
+        "`key` length does not match the mode requirements (16 bytes for `aes128`, 32 bytes for `pfx`)."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Decrypt an encrypted IPv4 address",
+          "source": "decrypt_ip!(\"72b9:a747:f2e9:72af:76ca:5866:6dcf:c3b0\", key: \"sixteen byte key\", mode: \"aes128\")",
+          "return": "\"192.168.1.1\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "encrypt_ip",
+      "name": "encrypt_ip",
+      "category": "IP",
+      "description": "Encrypts an IP address, transforming it into a different valid IP address of the same version.\n\nSupported modes:\n\n* `aes128` - Scrambles the IP using AES-128 encryption (ipcrypt-deterministic). Accepts IPv4 or IPv6; key must be exactly 16 bytes.\n* `pfx` - Prefix-preserving encryption (ipcrypt-pfx), that maintains network hierarchy so addresses in the same subnet encrypt to addresses sharing the same prefix. Key must be exactly 32 bytes.\n\nEncryption is deterministic: the same input IP, key, and mode always produce the same output.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "ip",
+          "description": "The IP address to encrypt (IPv4 or IPv6).",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "key",
+          "description": "The encryption key as raw bytes. Must be 16 bytes for `aes128` mode or 32 bytes for `pfx` mode.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        },
+        {
+          "name": "mode",
+          "description": "The encryption mode: `aes128` or `pfx`.",
+          "required": true,
+          "type": [
+            "string"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [
+        "`ip` is not a valid IP address.",
+        "`mode` is not a supported mode (`aes128` or `pfx`).",
+        "`key` length does not match the mode requirements (16 bytes for `aes128`, 32 bytes for `pfx`)."
+      ],
+      "return": {
+        "types": [
+          "string"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Encrypt an IPv4 address",
+          "source": "encrypt_ip!(\"192.168.1.1\", key: \"sixteen byte key\", mode: \"aes128\")",
+          "return": "\"72b9:a747:f2e9:72af:76ca:5866:6dcf:c3b0\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "ip_aton",
       "name": "ip_aton",
       "category": "IP",
@@ -7397,7 +7533,7 @@
           "enum": {
             "ns": "Nanoseconds (1 billion nanoseconds in a second)",
             "us": "Microseconds (1 million microseconds in a second)",
-            "µs": "Microseconds (1 million microseconds in a second)",
+            "\u00b5s": "Microseconds (1 million microseconds in a second)",
             "ms": "Milliseconds (1 thousand microseconds in a second)",
             "cs": "Centiseconds (100 centiseconds in a second)",
             "ds": "Deciseconds (10 deciseconds in a second)",
@@ -7775,7 +7911,7 @@
         },
         {
           "name": "lossy",
-          "description": "Whether to parse the JSON in a lossy manner. Replaces invalid UTF-8 characters\nwith the Unicode character `�` (U+FFFD) if set to true, otherwise returns an error\nif there are any invalid UTF-8 characters present.",
+          "description": "Whether to parse the JSON in a lossy manner. Replaces invalid UTF-8 characters\nwith the Unicode character `\ufffd` (U+FFFD) if set to true, otherwise returns an error\nif there are any invalid UTF-8 characters present.",
           "required": false,
           "default": true,
           "type": [
@@ -8512,12 +8648,12 @@
         },
         {
           "title": "Parse URL with internationalized domain name",
-          "source": "parse_url!(\"https://www.café.com\")",
+          "source": "parse_url!(\"https://www.caf\u00e9.com\")",
           "return": "{\"scheme\":\"https\",\"username\":\"\",\"password\":\"\",\"host\":\"www.xn--caf-dma.com\",\"port\":null,\"path\":\"/\",\"query\":{},\"fragment\":null}"
         },
         {
           "title": "Parse URL with mixed case internationalized domain name",
-          "source": "parse_url!(\"https://www.CAFé.com\")",
+          "source": "parse_url!(\"https://www.CAF\u00e9.com\")",
           "return": "{\"scheme\":\"https\",\"username\":\"\",\"password\":\"\",\"host\":\"www.xn--caf-dma.com\",\"port\":null,\"path\":\"/\",\"query\":{},\"fragment\":null}"
         }
       ],
@@ -9230,6 +9366,78 @@
           "title": "Coerce to a string (float)",
           "source": "to_string(52.2)",
           "return": "\"52.2\""
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    }
+  ],
+  "Map": [
+    {
+      "anchor": "haversine",
+      "name": "haversine",
+      "category": "Map",
+      "description": "Calculates the [haversine](https://en.wikipedia.org/wiki/Haversine_formula) great-circle distance and bearing between two geographic coordinates.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "latitude1",
+          "description": "Latitude of the first point in decimal degrees.",
+          "required": true,
+          "type": [
+            "float"
+          ]
+        },
+        {
+          "name": "longitude1",
+          "description": "Longitude of the first point in decimal degrees.",
+          "required": true,
+          "type": [
+            "float"
+          ]
+        },
+        {
+          "name": "latitude2",
+          "description": "Latitude of the second point in decimal degrees.",
+          "required": true,
+          "type": [
+            "float"
+          ]
+        },
+        {
+          "name": "longitude2",
+          "description": "Longitude of the second point in decimal degrees.",
+          "required": true,
+          "type": [
+            "float"
+          ]
+        },
+        {
+          "name": "measurement_unit",
+          "description": "Unit for the returned distance: `kilometers` or `miles`.",
+          "required": false,
+          "type": [
+            "string"
+          ],
+          "default": "kilometers"
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "object"
+        ]
+      },
+      "examples": [
+        {
+          "title": "Calculate distance and bearing in kilometers",
+          "source": "haversine(0.0, 0.0, 10.0, 10.0)",
+          "return": "{\"bearing\":44.561,\"distance\":1568.5227233}"
+        },
+        {
+          "title": "Calculate distance in miles",
+          "source": "haversine(0.0, 0.0, 10.0, 10.0, measurement_unit: \"miles\")",
+          "return": "{\"bearing\":44.561,\"distance\":974.6348468}"
         }
       ],
       "deprecated": false,

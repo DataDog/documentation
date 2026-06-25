@@ -60,7 +60,7 @@ Pour créer un [monitor de métrique][8] qui se déclenche sur les alertes de St
 
 [1]: https://www.atlassian.com/software/statuspage
 [2]: /fr/integrations/statuspage
-[3]: /fr/service_management/events/explorer/
+[3]: /fr/events/explorer/
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/event/explorer
 [6]: /fr/dashboards/guide/custom_time_frames/

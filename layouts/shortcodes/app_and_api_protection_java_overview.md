@@ -3,7 +3,7 @@
 ## Overview
 App and API Protection leverages the [Datadog Java library](https://github.com/DataDog/dd-trace-java/) to monitor and secure your Java service. The library integrates seamlessly with your existing application without requiring code changes.
 
-For detailed compatibility information, including supported Java versions, frameworks, and deployment environments, see [Java Compatibility Requirements](/security/application_security/setup/java/compatibility).
+For detailed compatibility information, including supported Java versions, frameworks, and deployment environments, see [Java Compatibility Requirements](/security/application_security/setup/compatibility/java).
 
 {{ if $showSetup }}
 This guide explains how to set up App and API Protection (AAP) for Java applications. The setup involves:
