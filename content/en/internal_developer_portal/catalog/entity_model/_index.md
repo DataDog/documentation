@@ -1,5 +1,6 @@
 ---
 title: Entity Model
+description: Learn how Catalog uses YAML-based definition schemas to store and display metadata about services, systems, datastores, queues, and other entity types.
 aliases:
   - /software_catalog/service_definitions/
   - /software_catalog/adding_metadata

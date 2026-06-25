@@ -1,5 +1,6 @@
 ---
 title: Exploring Endpoints
+description: Browse, search, and filter HTTP endpoints in the Catalog's Endpoints list to view performance metrics, ownership, and dependency data.
 further_reading:
 - link: "/internal_developer_portal/catalog/"
   tag: "Documentation"

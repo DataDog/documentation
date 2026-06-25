@@ -1,5 +1,6 @@
 ---
 title: Plugins
+description: Build, deploy, and manage fully custom applications natively within Datadog using local development workflows and the Datadog CLI.
 further_reading:
 - link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
