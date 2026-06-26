@@ -23,7 +23,7 @@ To configure Squid, edit the configuration file. This file is usually located at
 
 Edit your `squid.conf` configuration file so that Squid can accept local traffic and forward it to the necessary Datadog intakes.
 
-The simplest approach uses a wildcard to allow all subdomains of your Datadog site:
+For most setups, a wildcard rule that allows all subdomains of your Datadog site is sufficient:
 
 ```conf
 http_port 0.0.0.0:3128
