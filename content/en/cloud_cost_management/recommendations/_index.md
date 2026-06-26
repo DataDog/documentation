@@ -441,6 +441,12 @@ multifiltersearch:
       recommendation_type: Downsize Azure VM Instance
       recommendation_description: VM instance that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Migrate Azure VM Instance to Arm
+      recommendation_description: VM instance that can be migrated to an equivalent Arm instance type.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance
