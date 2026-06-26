@@ -28,6 +28,11 @@
   color: var(--color-text-muted);
 }
 
+.search-bar__input--mobile::placeholder {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
 /* Hide the browser-default clear button (Hugo strips it the same way in
    `searchbar-with-dropdown.scss`) so the input behaves like a plain text box. */
 .search-bar__input::-webkit-search-decoration,
@@ -58,6 +63,10 @@
 
 .search-bar__submit:hover {
   color: var(--color-brand);
+}
+
+.search-bar__submit--mobile {
+  padding-left: 22px;
 }
 
 /* Visual hint that `/` focuses the input. Ported from Hugo's

@@ -66,7 +66,7 @@
 .quicknav {
   display: flex;
   align-items: center;
-  padding: var(--space-sm) 0;
+  padding: var(--space-md) 0;
   border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
 }
 
@@ -82,7 +82,7 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-xs);
   text-transform: uppercase;
-  padding: var(--space-xs) 0;
+  padding: var(--space-sm) 0;
 }
 
 .quicknavLink:hover {
@@ -107,9 +107,10 @@
 /* Give the input a taller touch target than the side-nav default. Targets the
    plain BEM class `cl()` also emits, so it stays scoped to the mobile nav. */
 .searchWrap :global(.search-bar__input) {
-  padding-top: var(--space-sm);
-  padding-bottom: var(--space-sm);
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
 }
+
 
 /* --- Accordion menu --- */
 
@@ -203,10 +204,15 @@
 
 .link {
   display: block;
-  padding: var(--space-sm) 14px var(--space-sm) var(--indent);
+  padding: var(--space-xs) 14px var(--space-xs) var(--indent);
   color: var(--hugo-nav-text);
   text-decoration: none;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
+}
+
+/* Sub-level links use black, matching Hugo's $black color for sub-menus. */
+.link:not([data-level="0"]) {
+  color: var(--color-text);
 }
 
 /* Top-level leaf links match the heading styling of top-level sections. */
@@ -246,19 +252,33 @@
 }
 
 .mobile-nav__hamburger-bar + .mobile-nav__hamburger-bar {
-  margin-top: var(--space-xs);
+  margin-top: 4px;
 }
 
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(2) {
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar {
   opacity: 0;
 }
 
-.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+.mobile-nav__hamburger--open::before,
+.mobile-nav__hamburger--open::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 2px;
+  margin-top: -1px;
+  margin-left: -8.5px;
+  border-radius: 1px;
+  background-color: var(--hugo-nav-text);
+}
+
+.mobile-nav__hamburger--open::before {
+  transform: rotate(45deg);
+}
+
+.mobile-nav__hamburger--open::after {
+  transform: rotate(-45deg);
 }
 
 @media (min-width: 992px) {
