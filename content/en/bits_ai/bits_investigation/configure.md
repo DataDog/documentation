@@ -1,5 +1,7 @@
 ---
 title: Configure Integrations and Settings
+aliases:
+- /bits_ai/bits_ai_sre/configure/
 ---
 
 Set up integrations to extend Bits Investigation's capabilities:
@@ -142,7 +144,7 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [6]: https://app.datadoghq.com/cases/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac
-[9]: /bits_ai/bits_ai_sre/investigate_issues#manually-start-an-investigation
+[9]: /bits_ai/bits_investigation/investigate_issues#manually-start-an-investigation
 [10]: https://app.datadoghq.com/bits-ai/settings/rate-limits
 [11]: /account_management/audit_trail/events/#bits-ai-sre
 [12]: /integrations/microsoft-teams/?tab=datadogapprecommended

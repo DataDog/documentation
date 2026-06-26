@@ -3,6 +3,8 @@ title: Investigate Issues
 description: "Use Bits Investigation to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 aliases:
 - /bits_ai/bits_ai_sre/investigate_alerts/
+- /bits_ai/bits_investigation/investigate_alerts/
+- /bits_ai/bits_ai_sre/investigate_issues/
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
   tag: "Blog"
@@ -158,12 +160,12 @@ Once the investigation is complete, you can switch to the {{< ui >}}Hypothesis T
 
 The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits Investigation on your on-call efficiency.
 
-[3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
+[3]: /bits_ai/bits_investigation/configure/#configure-knowledge-base-integrations
 [4]: /change_tracking
 [5]: https://app.datadoghq.com/bits-ai/monitors/supported
 [6]: https://app.datadoghq.com/monitors/manage
-[8]: /bits_ai/bits_ai_sre/configure#slack
-[9]: /bits_ai/bits_ai_sre/knowledge_sources/
+[8]: /bits_ai/bits_investigation/configure#slack
+[9]: /bits_ai/bits_investigation/knowledge_sources/
 [10]: /incident_response/on-call/pages/#page-from-notifications
 [14]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai
