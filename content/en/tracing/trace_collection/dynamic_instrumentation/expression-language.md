@@ -8,15 +8,13 @@ aliases:
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
+The Dynamic Instrumentation Expression Language helps you formulate metric instrumentation expressions, span tag values, and instrumentation conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
 Examples:
 - `someVar.someField`
 - `request.headers["Host"]`
 - `any(post.tags, {@it == "debugger"})`
 - `@duration > 10 && len(p.data) < 100`
-
-{{< img src="tracing/dynamic_instrumentation/expressions.png" alt="Example log probe with expressions" style="width:100%;" >}}
 
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
@@ -32,13 +30,13 @@ Try [autocomplete and search (in Preview)][6] for an improved user experience us
 
 ## Applications
 
-Expressions can be used to produce metrics or logs, and as conditions to emit filtered data.
+Expressions can be used to produce metrics and as conditions to emit filtered data.
 
 For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
 
-Logs can be emitted using templates. In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value.
+In span tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Tag value expressions can evaluate to any value.
 
-Probe conditions must evaluate to a Boolean, for example:
+Instrumentation conditions must evaluate to a Boolean, for example:
  - `startsWith(user.name, "abc")`
  - `len(str) > 20`
  - `a == b`
@@ -88,7 +86,7 @@ The following examples assume a variable named `mySequence` with value `[1,2,3,4
 
 ## Try your own conditions
 
-This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether a log line will be generated when instrumenting a method.
+This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether data is captured when instrumenting a method.
 
 Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
 
