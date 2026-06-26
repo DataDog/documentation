@@ -6510,6 +6510,10 @@
     "request_description": "",
     "request_schema_description": "Team permission setting update request"
   },
+  "ListTestExamples": {
+    "description": "Get a list of all test examples.",
+    "summary": "List test examples"
+  },
   "UpdateFlakyTests": {
     "description": "Update the state of multiple flaky tests in Flaky Test Management.",
     "summary": "Update flaky test states",

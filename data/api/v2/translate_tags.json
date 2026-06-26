@@ -507,6 +507,10 @@
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
   },
+  "test-examples": {
+    "name": "Test Examples",
+    "description": "Manage test example resources."
+  },
   "test-optimization": {
     "name": "Test Optimization",
     "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."

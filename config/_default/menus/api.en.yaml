@@ -20147,6 +20147,22 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Test Examples
+      url: /api/latest/test-examples/
+      identifier: test-examples
+      generated: true
+    - name: List test examples
+      url: '#list-test-examples'
+      identifier: test-examples-list-test-examples
+      parent: test-examples
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTestExamples
+        unstable: []
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization
