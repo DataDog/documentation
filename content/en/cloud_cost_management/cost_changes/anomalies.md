@@ -38,11 +38,11 @@ To distinguish between true anomalies and expected fluctuations, Datadog's algor
 
 <div class="alert alert-danger">Custom anomaly detection is in Preview.</div>
 
-By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how anomalies are detected per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
+By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
 
 To customize anomaly detection:
 
-1. On the [Anomalies tab][1], click {{< ui >}}Configure{{< /ui >}}.
+1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}}.
 1. In the {{< ui >}}Configure Cost Anomalies{{< /ui >}} panel, select a provider. A checkmark indicates that the provider uses custom settings, and an empty circle indicates that it uses Datadog's default settings.
 1. Adjust the following settings for the selected provider:
    - **Detection dimension**: The dimension that Datadog detects cost anomalies on (for example, service or charge description). This setting is required.
@@ -50,7 +50,7 @@ To customize anomaly detection:
    - **Breakdown tags**: Up to five additional tags used to break down detected anomalies, helping [Watchdog Explains][2] identify what's driving each anomaly. A set of default tags is always included and cannot be removed.
 1. Click {{< ui >}}Save{{< /ui >}}. Changes apply to anomalies detected going forward.
 
-To return a provider to Datadog's default settings, select the provider, click {{< ui >}}Revert{{< /ui >}}, and then save.
+To return a provider to Datadog's default settings, select the provider, click {{< ui >}}Revert{{< /ui >}}, and then click {{< ui >}}Save{{< /ui >}}.
 
 ## View cost anomalies
 
