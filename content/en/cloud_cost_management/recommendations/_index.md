@@ -445,7 +445,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Migrate Azure VM Instance to Arm
-      recommendation_description: VM instance that can be migrated to an equivalent Arm (Ampere/Cobalt) instance type.
+      recommendation_description: VM instance that can be migrated to an equivalent Arm instance type.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
