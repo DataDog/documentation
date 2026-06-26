@@ -2,6 +2,8 @@
 title: Knowledge Sources
 aliases:
 - /bits_ai/bits_ai_sre/help_bits_learn/
+- /bits_ai/bits_investigation/help_bits_learn/
+- /bits_ai/bits_ai_sre/knowledge_sources/
 
 ---
 

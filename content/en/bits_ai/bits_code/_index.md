@@ -1,5 +1,7 @@
 ---
 title: Bits Code
+aliases:
+- /bits_ai/bits_ai_dev_agent/
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
@@ -110,15 +112,15 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [3]: /profiler/
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
-[6]: /bits_ai/bits_ai_dev_agent/setup/
+[6]: /bits_ai/bits_code/setup/
 [7]: https://app.datadoghq.com/code
-[8]: /bits_ai/bits_ai_sre/
+[8]: /bits_ai/bits_investigation/
 [10]: /profiler/automated_analysis/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
 [16]: /bits_ai/bits_chat/
-[17]: /bits_ai/bits_ai_sre/
+[17]: /bits_ai/bits_investigation/
 [20]: /tracing/
 [21]: /tracing/recommendations/
 [22]: /cloud_cost_management/
@@ -127,7 +129,7 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [25]: /security/code_security/iac_security/
 [26]: /security/code_security/software_composition_analysis/
 [27]: /account_management/billing/ai_credits/
-[28]: /bits_ai/bits_ai_dev_agent/automations/
+[28]: /bits_ai/bits_code/automations/
 [29]: https://app.datadoghq.com/code/automations
 [30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency

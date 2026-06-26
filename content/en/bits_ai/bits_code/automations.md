@@ -1,9 +1,11 @@
 ---
 title: Automations
+aliases:
+- /bits_ai/bits_ai_dev_agent/automations/
 disable_toc: false
 description: Create Bits Code automations that run sessions on a schedule or in response to Datadog signals.
 further_reading:
-- link: "/bits_ai/bits_ai_dev_agent/"
+- link: "/bits_ai/bits_code/"
   tag: "Documentation"
   text: "Bits Code"
 ---
@@ -102,8 +104,8 @@ You can pause or resume any automation, but you can only edit or delete automati
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_ai_dev_agent/#sessions
-[2]: /bits_ai/bits_ai_dev_agent/setup/
+[1]: /bits_ai/bits_code/#sessions
+[2]: /bits_ai/bits_code/setup/
 [3]: https://app.datadoghq.com/code/automations
 [4]: /integrations/slack/
 [5]: /internal_developer_portal/catalog/
