@@ -86,10 +86,10 @@ Optionally, sampling rates can be set between 10% and 99% for each product. This
 
 For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
 
-- **{{< ui >}}Redact{{< /ui >}}**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
-- **{{< ui >}}Partially redact{{< /ui >}}**: Replace a specific portion of all matching values.
-- **{{< ui >}}Hash{{< /ui >}}**: Replace the entire matched data with a non-reversible unique identifier.
-- **{{< ui >}}Mask{{< /ui >}}** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
+- {{< ui >}}Redact{{< /ui >}}: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- {{< ui >}}Partially redact{{< /ui >}}: Replace a specific portion of all matching values.
+- {{< ui >}}Hash{{< /ui >}}: Replace the entire matched data with a non-reversible unique identifier.
+- {{< ui >}}Mask{{< /ui >}} (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
 
 **Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
