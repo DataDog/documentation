@@ -1,6 +1,9 @@
 ---
-title: Create Exposure SQL Models
+title: Exposure SQL Models
 description: Use Exposure SQL Models to analyze experiments randomized outside Datadog Feature Flags.
+aliases:
+  - /experiments/exposure_sql
+  - /experiments/exposure_sql/
 further_reading:
 - link: "/experiments/guide/connecting_a_data_warehouse/"
   tag: "Documentation"
