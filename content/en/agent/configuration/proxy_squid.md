@@ -93,7 +93,7 @@ Modify the DatadogAgent custom resource to include the following:
 ```yaml
 spec:
   global:
-    proxy:
+    env:
       http: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
       https: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
 ```
