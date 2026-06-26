@@ -45,7 +45,11 @@ Drift Detection compares the data produced by your models before and after your 
 
 Connect your [source-control provider](/integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
 
+Connect the [supported datasource account](/add-do-ci-cd/data_observability/quality_monitoring/#supported-data-sources) where your dbt models are run.
+
 Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project while configuring CI/CD checks.
+
+### 2. Select dbt Project and Repository
 
 From the CI/CD settings, click to "Add CI/CD Checks", then pick the dbt project you want to add checks for and select the main job for the project: this is the job that has the most knowledge of your dbt schema. Datadog should be able to automatically infer the repository for your dbt project from your source-control provider, but if it doesn't, you can manually select it.
 
@@ -55,7 +59,7 @@ From the CI/CD settings, click to "Add CI/CD Checks", then pick the dbt project 
 
 If your dbt project doesn't live at the root of your repository, you can specify the path to your dbt project in the advanced settings.
 
-### 2. Configure checks
+### 3. Configure checks
 
 Each of the available checks can be enabled independently. Enabling all checks will yield the richest reports.
 
@@ -70,7 +74,7 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 #### Drift Detection
 
-Drift detection compares the current state of your data to a baseline and flags any deviations. Its additional settings are:
+Drift detection compares the current state of your data to a baseline and flags any deviations. In order for Datadog to understand which models were run as part of a CI pipeline, you _must_ send open-lineage events from your CI job. See [open-lineage setup documentation](/data_observability/jobs_monitoring/openlineage) for more info. Drift detection settings are as follows:
 
 **General Settings**
 | Setting | Description |
@@ -88,7 +92,7 @@ Drift detection compares the current state of your data to a baseline and flags 
 | Setting | Description |
 | - | - |
 | `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job your selected before, but you should specify it again here.|
-| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job above. [see environment variables documentation](/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables). If you're not setting this environment variable, you don't need to specify it here.|
+| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job above. [see environment variables documentation](/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables). If you're not setting this environment variable when you send open-lineage events, you don't need to specify it here.|
 
 ## Further Reading
 
