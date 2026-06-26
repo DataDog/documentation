@@ -16,7 +16,7 @@ Session Replay bridges the gap between user analysis and visually reproducing er
 
 ## Use RUM to identify how widespread a user issue is
 
-In this example, we noticed that a lot of users were complaining about getting an issue upon clicking the **Checkout** button. After investigating the [RUM frustration signals dashboard][1], we confirmed in the RUM Explorer that there were nearly 3,000 instances of this error type occurring in just one week:
+In this example, we noticed that a lot of users were complaining about getting an issue upon clicking the {{< ui >}}Checkout{{< /ui >}} button. After investigating the [RUM frustration signals dashboard][1], we confirmed in the RUM Explorer that there were nearly 3,000 instances of this error type occurring in just one week:
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue-1.png" alt="Use RUM to identify how many instances of an error type occurred in a week" style="width:100%;">}}
 

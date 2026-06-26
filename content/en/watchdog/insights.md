@@ -49,20 +49,20 @@ Expand the carousel for an overview. The highest priority insights (based on `In
 
 {{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Log Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" style="width:100%;">}}
 
-Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
+Click {{< ui >}}View all{{< /ui >}} to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
 Every outlier comes with embedded interactions and a side panel with troubleshooting information. Each Insight's interactions and side panel vary based on the Watchdog Insight type.
 
 ### Filter on Insight query
 
-To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip {{< ui >}}Filter on Insight{{< /ui >}}. The page refreshes to show a list of entries corresponding to the insight.
 **Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
 ### Share an outlier
 
-To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
+To share a given outlier, click on it in the insight panel to open the details side panel. Click the {{< ui >}}Copy Link{{< /ui >}} button at the top of the details panel:
 
 {{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
 
@@ -270,7 +270,7 @@ When reviewing failed test runs, you can see the number of error outliers on the
 
 {{< img src="watchdog/synthetics_watchdog_outlier.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
-To view the error outlier message, click on the outlier. Then, on the test step side panel, click the **Errors & Warnings** tab.
+To view the error outlier message, click on the outlier. Then, on the test step side panel, click the {{< ui >}}Errors & Warnings{{< /ui >}} tab.
 
 {{< img src="watchdog/outlier_step_error_2.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 

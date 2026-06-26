@@ -10,7 +10,7 @@ description: Create custom grok rules to parse the full message or specific attr
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
 
-{{< img src="service_management/events/grok-parser.png" alt="Parsing example 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="Parsing example 1" style="width:80%;">}}
 
 
 Click {{< ui >}}Parse My Events{{< /ui >}} to kickstart a set of three parsing rules for the events flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of events if needed. This feature requires that the corresponding events are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.

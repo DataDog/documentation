@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-[Bits Code][8] integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
+[Bits Code][8] integrates with [source code providers][11] to open, update, and iterate on pull or merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
@@ -15,20 +15,20 @@ If your organization uses custom roles, an admin must add this permission manual
 
 ## Setup
 
-1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
+Set up Bits Code for one of the [supported source code providers][11].
 
+{{< tabs >}}
+
+{{% tab "GitHub" %}}
+1. Install the [GitHub integration][1]. For full installation and configuration steps, see the [GitHub integration guide][2].
 1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
-
    1. To enable basic Bits Code functionality, set the following permissions:
-
       - {{< ui >}}Repository permissions{{< /ui >}}
         - Repository contents: Read & write
         - Pull requests: Read & write
       - {{< ui >}}Subscribe to events{{< /ui >}}
         - Push
-
    1. (Optional) To allow Bits Code to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
-
        - {{< ui >}}Repository permissions{{< /ui >}}
          - Checks: Read  
          - Commit statuses: Read only 
@@ -37,6 +37,26 @@ If your organization uses custom roles, an admin must add this permission manual
          - Check suite  
          - Issue comment  
          - Status
+
+[1]: https://app.datadoghq.com/integrations/github
+[2]: /integrations/github/
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+1. Install the [GitLab Source Code integration][1]. For full installation and configuration steps, see the [GitLab Source Code integration guide][2].
+1. Verify that the GitLab [service account][3] meets the following requirements:
+   - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
+   - The service account's personal access token must have the following [scopes][6]: `api`, `write_repository`, and `read_user`.
+
+[1]: https://app.datadoghq.com/integrations/gitlab-source-code
+[2]: /integrations/gitlab-source-code/
+[3]: https://docs.gitlab.com/user/profile/service_accounts/
+[4]: https://docs.gitlab.com/user/permissions/#default-roles
+[5]: https://docs.gitlab.com/user/permissions/#groups
+[6]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Additional configuration  
 
@@ -51,21 +71,27 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in Bits Code settings under [{{< ui >}}Repositories{{< /ui >}}][5] > {{< ui >}}Service Repository Mapping{{< /ui >}}.
 
 ### Enable auto-push
-To enable auto-push, so Bits Code can push commits directly to a branch, navigate to **Bits Code** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
 
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before Bits Code can push it.
+Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+
+To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
+
+
+#### Security considerations
+
+Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data Bits Code works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+
+To balance safety and automation, you can configure auto-push behavior in [Datadog][6] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
 
 ### Configure custom instructions
 
 Bits Code ingests custom instruction files from your repository, including:
-
 - `.cursorrules`
 - `.windsurfrules`
 - `copilot-instructions.md`
 - `CLAUDE.md`
 - `AGENTS.md`
 - `agent.md`
-
 
 You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
@@ -112,17 +138,17 @@ Bits Code runs the setup command at startup and can use any tools installed in y
 
 ## Troubleshooting
 
-### Creation of PRs fails unexpectedly
+### Creation of GitHub PRs fails unexpectedly
 
-In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][2].
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in the [GitHub integration][2].
 
 **Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
 [1]: /account_management/rbac/permissions/#bits-ai
 [2]: https://app.datadoghq.com/integrations/github
-[3]: /integrations/github/
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
-[7]: /bits_ai/bits_ai_dev_agent/#start-a-code-session
+[7]: /bits_ai/bits_ai_dev_agent/#start-a-session
 [8]: /bits_ai/bits_ai_dev_agent/
+[11]: /bits_ai/bits_ai_dev_agent/#supported-source-code-providers

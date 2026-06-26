@@ -7,13 +7,19 @@ aliases:
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
-  text: "Learn about LLM Observability"
+  text: "Learn about Agent Observability"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability Key Terms and Concepts"
+  text: "Learn about Agent Observability Key Terms and Concepts"
 - link: "/llm_observability/experiments/datasets"
   tag: "Documentation"
   text: "Learn about Datasets"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
+- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
+  tag: "Learning Center"
+  text: "Tracing LLM Applications"
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.
@@ -101,5 +107,9 @@ Scope your pipeline filter to spans with poor quality scores or failed evaluatio
 ### Track how traffic evolves
 
 Re-run the pipeline periodically and compare topic distributions over time. When a new topic appears near the top that wasn't there last month, this indicates that your users have found a new use case (or a new failure mode).
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/

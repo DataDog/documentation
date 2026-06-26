@@ -24,13 +24,13 @@ This guide covers the following ways of troubleshooting and configuring monitors
 
 You can use a dashboard widget, a notebook, or even an [existing monitor's history graph][1] and hover over the datapoints to see if the datapoints seem continuous, as opposed to straight lines filling the gaps between each point.
 
-In a notebook, or widget, select the **Bars** display option to see the points of data and their frequency.
+In a notebook, or widget, select the {{< ui >}}Bars{{< /ui >}} display option to see the points of data and their frequency.
 
 A metric displayed in a widget may look like this:
 
 {{< img src="monitors/guide/sparse_metrics/line_graph_sparse.png" alt="Metric graph with Line graph display going up and down in straight lines" style="width:90%;" >}}
 
-But when the **Bars** style is applied, it looks like this:
+But when the {{< ui >}}Bars{{< /ui >}} style is applied, it looks like this:
 
 {{< img src="monitors/guide/sparse_metrics/bar_graph_sparse.png" alt="Same data as the Metric Line graph above, except with bars for each datapoint, highlighting gaps in between bars of sparse metrics" style="width:90%;" >}}
 
@@ -42,17 +42,17 @@ If the graph editor does not have multiple options to change the graph style, yo
 
 Is this a [metric][3], [change][4], [anomaly][5], [forecast][6], or [outlier][7] monitor? Adjust the following settings:
 
-* Under *Advanced options*, select **Do not require** a full window of data for evaluation.
-* Is the data often delayed? Consider adding time (in seconds) to the monitor evaluation delay. Under *Advanced options* add a value to the **Delay monitor evaluation by X seconds** field.
-* Adjust the evaluation (avg by, max by, min by, sum by) based on the expected frequency. The default evaluation is **avg by**, which may not be suited for sparse metrics.
-* If you are using the **avg by** aggregator, consider adding an [interpolation function][2] like `default_zero()` to ensure the gaps in the metric are evaluated as zero.
+* Under {{< ui >}}Advanced options{{< /ui >}}, select {{< ui >}}Do not require{{< /ui >}} a full window of data for evaluation.
+* Is the data often delayed? Consider adding time (in seconds) to the monitor evaluation delay. Under {{< ui >}}Advanced options{{< /ui >}} add a value to the {{< ui >}}Delay monitor evaluation by X seconds{{< /ui >}} field.
+* Adjust the evaluation (avg by, max by, min by, sum by) based on the expected frequency. The default evaluation is {{< ui >}}avg by{{< /ui >}}, which may not be suited for sparse metrics.
+* If you are using the {{< ui >}}avg by{{< /ui >}} aggregator, consider adding an [interpolation function][2] like `default_zero()` to ensure the gaps in the metric are evaluated as zero.
 * If you are using arithmetic in your query, take a look at [Monitor Arithmetic and Sparse Metrics][8] for some further guidance.
 
 ## Event-based monitor 
 
 Is this a [log][9], [event][10], [audit trail][11], or [error tracking][12] monitor? Look at the following:
 
-* Verify the "Missing data" setting corresponds to your expected monitor behavior: **Evaluate as zero**, **Show NO DATA**, **Show NO DATA and notify**, or **Show OK**
+* Verify the "Missing data" setting corresponds to your expected monitor behavior: {{< ui >}}Evaluate as zero{{< /ui >}}, {{< ui >}}Show NO DATA{{< /ui >}}, {{< ui >}}Show NO DATA and notify{{< /ui >}}, or {{< ui >}}Show OK{{< /ui >}}
   {{< img src="monitors/guide/sparse_metrics/data_is_missing.png" alt="Selection options for missing data in the 'Set alert conditions' section of monitor configurations" style="width:80%;" >}}
 * Adjust the evaluation period. If datapoints are expected to be available every 30 minutes, then the evaluation period should account for that.
 

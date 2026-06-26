@@ -320,7 +320,7 @@ You may have cases where users are starting several feature operations in parall
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
-After you've configured the SDK APIs, you can monitor your operations by navigating to **RUM > Performance Monitoring > Operations**.
+After you've configured the SDK APIs, you can monitor your operations by navigating to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}.
 
 Datadog groups together all operations with the same name into a catalog.
 
@@ -336,6 +336,10 @@ Both metrics are retained for 15 months, and include several dimensions:
 - `operation.failure_reason`, which can be an error, or abandoned, or other
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
+
+## Investigate root causes with AI
+
+You can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
 
 ## Configure retention filters
 
@@ -364,3 +368,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
+[8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/

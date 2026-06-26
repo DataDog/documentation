@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/explorer/attributes
+- link: events/explorer/attributes
   tag: Documentation
   text: En savoir plus sur les attributs réservés
 title: Facettes
@@ -12,7 +12,7 @@ Par défaut, Datadog indexe les attributs d'événement sous la forme de facette
 
 Une facette présente les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre d'événements représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher.
 
-{{< img src="service_management/events/explorer/facets-location.png" alt="Volet latéral des facettes" style="width:100%;" >}}
+{{< img src="events/explorer/facets-location.png" alt="Volet latéral des facettes" style="width:100%;" >}}
 
 ### Créer une facette
 

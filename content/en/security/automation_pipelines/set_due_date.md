@@ -38,7 +38,12 @@ Configure due date rules to ensure findings are addressed within your specified 
       - Identity Risk
       - API Security
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. Set a due date for each severity level that needs one. The due date starts from when the matching finding was discovered, not when the rule was created.
+1. Set a due date for each severity level that needs one.
+1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under **Calculate due dates from**, select the base date for the SLA clock:
+   - **First Seen Date**: Starts the SLA clock when Datadog first detects the finding.
+   - **Fix-Available Date**: Starts the SLA clock when a patch is published for the vulnerability. Useful when you don't want teams to breach SLA on advisories they can't yet remediate.
+
+   For all other finding types, First Seen Date is always used.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Where due dates appear

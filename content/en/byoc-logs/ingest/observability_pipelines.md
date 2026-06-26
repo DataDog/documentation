@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs:
+Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC (Bring Your Own Cloud) Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs:
 1. [**Create and configure the pipeline**](#create-and-configure-an-observability-pipeline) - Define your pipeline configuration (source, processors, destination) in the Observability Pipelines UI. This creates the pipeline definition that will be used by the Worker.
 2. [**Deploy the Observability Pipelines Worker**](##deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration. The Worker must be running and listening for logs before the Agent can connect to it.
 3. [**Configure the Datadog Agent**](#configure-the-datadog-agent) - Point the Agent to send logs to the deployed Worker. This step must come last because the Agent needs the Worker's address to be available.

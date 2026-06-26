@@ -19,11 +19,13 @@ Configure the Socket destination when you [set up a pipeline][2]. You can set up
 
 After you select the Socket destination in the pipeline UI:
 
-<div class="alert alert-danger">Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</a></div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 1. Enter the identifier for your address. If you leave it blank, the [default](#secret-defaults) is used.
-1.  In the **Mode** dropdown menu, select the socket type to use.
-1.  In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
+1.  In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select the socket type to use.
+1.  In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select either {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw message{{< /ui >}} as the output format.
 
 ### Optional settings
 
@@ -57,9 +59,9 @@ After you select the Socket destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 The Socket destination does not batch events.
 

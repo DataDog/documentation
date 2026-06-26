@@ -4,11 +4,12 @@ aliases:
 - /ja/tracing/setup/docker/
 - /ja/agent/apm/docker
 - /ja/agent/docker/apm
+description: Datadog Agent を使用して、Docker コンテナで実行されているアプリケーションからの APM トレース収集を構成する
 further_reading:
 - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
   tag: ソースコード
   text: ソースコード
-- link: /integrations/amazon_ecs/#トレースの収集
+- link: /integrations/amazon_ecs/#trace-collection
   tag: ドキュメント
   text: ECS アプリケーションをトレースする
 - link: /agent/docker/log/
@@ -22,21 +23,20 @@ further_reading:
   text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/docker/tag/
   tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
+  text: コンテナから送信された全データにタグを割り当てる
 title: Docker アプリケーションのトレース
 ---
-
-Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`gcr.io/datadoghq/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
+Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`registry.datadoghq.com/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
 
 このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
-<div class="alert alert-info">コンテナ化されたアプリ (Agent とアプリが別々のコンテナで動作している) からトレースを収集する場合、以下の説明の代わりに、トレーシングライブラリをアプリケーションに自動的に挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">ライブラリの挿入</a>をお読みください。</div>
+<div class="alert alert-info">コンテナ化されたアプリ (Agent とアプリが別々のコンテナで動作している) からトレースを収集する場合、以下の説明の代わりに、SDK をアプリケーションに自動的に挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers"> ライブラリの挿入</a>をお読みください。</div>
 
-## ホストからのトレース
+## ホストからのトレース {#tracing-from-the-host}
 
-`docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で _自分のホストからのみ_ トレースを利用できます。
+`docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で_自分のホストからのみ_トレースを利用できます。
 
-_任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp` を使用します。
+_任意のホスト_からトレースを利用するには、代わりに `-p 8126:8126/tcp` を使用します。
 
 たとえば、次のコマンドを使用すると、Agent はユーザーのホストからのみトレースを受信します。
 
@@ -53,7 +53,7 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
@@ -65,100 +65,100 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Docker APM Agent の環境変数
+## Docker APM Agent の環境変数 {#docker-apm-agent-environment-variables}
 
-Use the following environment variables to configure tracing for the Docker Agent. See the [sample `config_template.yaml` file][8] for more details.
+以下の環境変数を使用して、Datadog Agent を構成します。詳細については、[サンプル `config_template.yaml` ファイル][8]を参照してください。
 
-`DD_API_KEY`                      
-: required - _string_
-<br/>Your [Datadog API key][1].
+`DD_API_KEY`                     
+: 必須 - _文字列_
+<br/>[Datadog API キー][1]。
 
 `DD_SITE`
-: optional - _string_
-<br/>Your [Datadog site][7]. Set this to `{{< region-param key="dd_site" >}}`.
+: オプション - _文字列_
+<br/>[Datadog サイト][7]。これを次に設定します。`{{< region-param key="dd_site" >}}`.
 <br/>**Default**: `datadoghq.com`
 
-`DD_APM_ENABLED`                   
-: optional - _Boolean_ - **default**: `true`
-<br/>When set to `true` (default), the Datadog Agent accepts traces and trace metrics.
+`DD_APM_ENABLED`                  
+: オプション - _Boolean_ - **デフォルト**: `true`
+<br/>`true` に設定すると (デフォルト)、Datadog Agent はトレースとトレースメトリクスを受け付けます。
 
-`DD_APM_RECEIVER_PORT`             
-: optional - _integer_ - **default**: `8126` 
-<br/>Sets the port on which the Datadog Agent's trace receiver listens. Set to `0` to disable the HTTP receiver.
+`DD_APM_RECEIVER_PORT`            
+: オプション - _整数_ - **デフォルト**: `8126`
+<br/>Datadog Agent のトレースレシーバーがリスニングするポートを設定します。`0` を設定すると、HTTP レシーバーが無効になります。
 
-`DD_APM_RECEIVER_SOCKET`           
-: optional - _string_
-<br/>To collect your traces through UNIX Domain Sockets, provide the path to the UNIX socket. If set, this takes priority over hostname and port configuration, and must point to a valid socket file. 
+`DD_APM_RECEIVER_SOCKET`          
+: オプション - _文字列_
+<br/>UNIX Domain Sockets からトレースを収集するには、UNIX ソケットのパスを指定します。設定した場合、これはホスト名およびポート構成よりも優先され、有効なソケットファイルを指定する必要があります。
 
-`DD_APM_NON_LOCAL_TRAFFIC`         
-: optional - _Boolean_ - **default**: `false`
-<br/>When set to `true`, the Datadog Agent listens to non-local traffic. If you are [tracing from other containers](#tracing-from-other-containers), set this environment variable to `true`. 
+`DD_APM_NON_LOCAL_TRAFFIC`        
+: オプション - _Boolean_ - **デフォルト**: `false`
+<br/>`true` に設定されている場合、Datadog Agent は非ローカルトラフィックをリスニングします。[他のコンテナからのトレース](#tracing-from-other-containers)を行っている場合は、この環境変数を `true` に設定します。
 
-`DD_APM_DD_URL`                    
-: optional - _string_
-<br/>To use a proxy for APM, provide the endpoint and port as `<ENDPOINT>:<PORT>`. The proxy must be able to handle TCP connections.
+`DD_APM_DD_URL`                   
+: オプション - _文字列_
+<br/>APM のプロキシを使用するには、エンドポイントおよびポートを `<ENDPOINT>:<PORT>` として指定します。プロキシは TCP 接続を扱える必要があります。
 
-`DD_APM_CONNECTION_LIMIT`          
-: required - _integer_ - **default**: `2000`
-<br/>Sets the maximum APM connections for a 30 second time window. See [Agent Rate Limits][6] for more details.
+`DD_APM_CONNECTION_LIMIT`         
+: 必須 - _整数_ - **デフォルト**: `2000`
+<br/>30 秒のタイムウィンドウに対する最大 APM 接続を設定します。詳細については、[Agent 率制限][6]を参照してください。
 
-`DD_APM_IGNORE_RESOURCES`          
-: optional - _[string]_ 
-<br/>Provides an exclusion list of resources for the Datadog Agent to ignore. If a trace's resource name matches one or more of the regular expressions on this list, the trace is not sent to Datadog. 
-<br/>Example: `"GET /ignore-me","(GET\|POST) and-also-me"`.                                                                                                                                                                                                                                                                                   
+`DD_APM_IGNORE_RESOURCES`         
+: オプション - _[文字列]_
+<br/>Datadog Agent が無視するリソースの除外リストを提供します。トレースのリソース名がこのリストの 1 つ以上の正規表現に一致する場合、そのトレースは Datadog に送信されません。
+<br/>例: `"GET /ignore-me","(GET\|POST) and-also-me"`。                                                                                                                                                                                                                                                                                  
 
-`DD_APM_FILTER_TAGS_REQUIRE`       
-: optional - _object_
-<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these tags. See [Ignoring Unwanted Resources in APM][5]. 
+`DD_APM_FILTER_TAGS_REQUIRE`      
+: オプション - _オブジェクト_
+<br/>タグベースのトレースフィルタリングのルールを定義します。Datadog に送信されるようにするには、トレースがこれらのタグを持っている必要があります。[APM で不要なリソースを無視する][5]を参照してください。
 
-`DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
-: optional - _object_
-<br/>Supported in Agent 7.49+. Defines rules for tag-based trace filtering with regular expressions. To be sent to Datadog, traces must have tags that match these regex patterns. 
+`DD_APM_FILTER_TAGS_REGEX_REQUIRE`
+: オプション - _オブジェクト_
+<br/>エージェント 7.49+ でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。Datadog に送信されるようにするには、トレースがこれらの正規表現パターンに一致するタグを持っている必要があります。
 
-`DD_APM_FILTER_TAGS_REJECT`        
-: optional - _object_ 
-<br/>Defines rules for tag-based trace filtering. If a trace has these tags, it is not sent to Datadog. See [Ignoring Unwanted Resources in APM][5] for more details. 
+`DD_APM_FILTER_TAGS_REJECT`       
+: オプション - _オブジェクト_
+<br/>タグベースのトレースフィルタリングのルールを定義します。トレースがこれらのタグを持っている場合、Datadog に送信されません。詳細については、[APM で不要なリソースを無視する][5]を参照してください。
 
-`DD_APM_FILTER_TAGS_REGEX_REJECT`  
-: optional - _object_ 
-<br/>Supported in Agent 7.49+. Defines rules for tag-based trace filtering with regular expressions. If a trace has tags that match these regex patterns, the trace is not sent to Datadog. 
+`DD_APM_FILTER_TAGS_REGEX_REJECT` 
+: オプション - _オブジェクト_
+<br/>エージェント 7.49+ でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。トレースがこれらの正規表現パターンに一致するタグを持っている場合、そのトレースは Datadog に送信されません。
 
-`DD_APM_REPLACE_TAGS`              
-: optional - _[object]_ 
-<br/>Defines a set of rules to [replace or remove tags that contain potentially sensitive information][2].
+`DD_APM_REPLACE_TAGS`             
+: オプション - _[オブジェクト]_
+<br/>[潜在的な機密情報を含むタグを置換または削除する][2]ための一連のルールを定義します。
 
-`DD_HOSTNAME`                      
-: optional - _string_ - **default**: automatically detected 
-<br/>Sets the hostname to use for metrics if automatic hostname detection fails, or when running the Datadog Cluster Agent.
+`DD_HOSTNAME`                     
+: オプション - _文字列_ - **デフォルト**: 自動検出 
+<br/>自動ホスト名検出が失敗した場合、または Datadog Cluster Agent を実行する場合に、メトリクスに使用するホスト名を設定します。
 
-`DD_DOGSTATSD_PORT`                
-: optional - _integer_ - **default**: `8125` 
-<br/>Sets the DogStatsD port.
+`DD_DOGSTATSD_PORT`               
+: オプション - _整数_ - **デフォルト**: `8125`
+<br/>DogStatsD ポートを設定します。
 
-`DD_PROXY_HTTPS`                   
-: optional - _string_
-<br/>To use a [proxy][4] to connect to the internet, provide the URL. 
+`DD_PROXY_HTTPS`                  
+: オプション - _文字列_
+<br/>インターネットに接続するために[プロキシ][4]を使用するには、URL を提供します。
 
-`DD_BIND_HOST`                     
-: optional - _string_ - **default**: `localhost` 
-<br/>Sets the host to listen on for DogStatsD and traces.
+`DD_BIND_HOST`                    
+: オプション - _文字列_ - **デフォルト**: `localhost`
+<br/>DogStatsD とトレースをリスニングするホストを設定します。
 
-`DD_LOG_LEVEL`                     
-: optional - _string_ - **default**: `info` 
-<br/>Sets the minimum logging level. Valid options: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`.
+`DD_LOG_LEVEL`                    
+: オプション - _文字列_ - **デフォルト**: `info`
+<br/>最小ログレベルを設定します。有効なオプション: `trace`、`debug`、`info`、`warn`、`error`、`critical`、および `off`。
 
-## 他のコンテナからのトレース
+## 他のコンテナからのトレース {#tracing-from-other-containers}
 
 DogStatsD と同様に、[Docker ネットワーク](#docker-network)または [Docker ホスト IP](#docker-host-ip) を使用して、他のコンテナから Agent にトレースを送信できます。
 
-### Docker ネットワーク
+### Docker ネットワーク {#docker-network}
 
 最初に、ユーザー定義のブリッジネットワークを作成します。
 
@@ -171,7 +171,7 @@ docker network create <NETWORK_NAME>
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{% tab "標準的な方法" %}}
 
 ```bash
 # Datadog Agent
@@ -186,8 +186,8 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
-# アプリケーション
+              registry.datadoghq.com/agent:latest
+# Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
               -e DD_AGENT_HOST=datadog-agent \
@@ -209,8 +209,8 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
-# アプリケーション
+              registry.datadoghq.com/agent:latest
+# Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
               -e DD_AGENT_HOST=datadog-agent \
@@ -221,10 +221,10 @@ docker run -d --name app \
 {{% /tab %}}
 {{< /tabs >}}
 
-これで `app` コンテナ内のホスト名 `datadog-agent` が公開されます。
-`docker-compose` を使用している場合、`<NETWORK_NAME>` パラメーターは、`docker-compose.yml` の `networks` セクションに定義されている名前になります。
+これで、`app` コンテナ内のホスト名 `datadog-agent` が公開されます。
+`docker-compose` を使用している場合、`<NETWORK_NAME>` パラメーターは `docker-compose.yml` の `networks` セクションに定義されている名前になります。
 
-このアドレスにトレースを送信するには、アプリケーショントレーサーを構成する必要があります。アプリケーションコンテナで、Agent コンテナ名として `DD_AGENT_HOST`、Agent Trace ポートとして `DD_TRACE_AGENT_PORT` を使用して、環境変数を設定します。上の例では、ホストに `datadog-agent`、ポートに `8126` を使用しています。（デフォルト値なので設定する必要はありません。）
+このアドレスにトレースを送信するには、アプリケーション SDK を構成する必要があります。アプリケーションコンテナで、Agent コンテナ名として `DD_AGENT_HOST`、Agent Trace ポートとして `DD_TRACE_AGENT_PORT` を使用し、環境変数を設定します。上の例では、ホストに `datadog-agent`、ポートに `8126` を使用しています (デフォルト値なので設定する必要はありません)。
 
 または、サポートされている言語ごとに、以下の例を参照して Agent ホストを手動で設定します。
 
@@ -277,10 +277,14 @@ end
 
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
 
 func main() {
     tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
@@ -306,23 +310,23 @@ const tracer = require('dd-trace').init({
 インスツルメンテーションされたアプリを起動する前に変数を設定します。
 
 ```bash
-# 環境変数
+# Environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
-# コンテナ
+# For containers
 export DD_AGENT_HOST=datadog-agent
 export DD_TRACE_AGENT_PORT=8126
 
-# アプリケーションの開始
+# Start your application
 dotnet example.dll
 ```
 
 環境変数 `CORECLR_PROFILER_PATH` の値は、アプリケーションが動作しているシステムに応じて変化します。
 
-   オペレーティングシステムとプロセスアーキテクチャ | CORECLR_PROFILER_PATH 値
+   オペレーティングシステムとプロセスアーキテクチャ |  CORECLR_PROFILER_PATH の値
    ------------------------------------------|----------------------------
    Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
    Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
@@ -336,9 +340,9 @@ dotnet example.dll
 
 {{< /programming-lang-wrapper >}}
 
-### Docker ホスト IP
+### Docker ホスト IP {#docker-host-ip}
 
-Agent コンテナポート `8126` は、直接ホストにリンクしている必要があります。
+Agent コンテナポート `8126` は、ホストに直接リンクしている必要があります。
 このコンテナのデフォルトのルートにレポートを送信するようにアプリケーショントレーサーを構成します (デフォルトのルートは `ip route` コマンドを使用して決定)。
 
 次の Python Tracer の例では、デフォルトのルートを `172.17.0.1` と仮定しています。
@@ -349,8 +353,8 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
-### Unix Domain Socket (UDS)
-To submit traces via socket, the socket should be mounted to the Agent container and your application container.
+### Unix ドメインソケット (UDS) {#unix-domain-socket-uds}
+ソケットを介してトレースを送信するには、ソケットを Agent コンテナおよびアプリケーションコンテナにマウントする必要があります。
 
 ```bash
 # Datadog Agent
@@ -367,7 +371,7 @@ docker run -d --name datadog-agent \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
@@ -376,9 +380,9 @@ docker run -d --name app \
               company/app:latest
 ```
 
-Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
+トレーサー設定については、[言語ごとの APM インスツルメンテーションドキュメント][3]を参照してください。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

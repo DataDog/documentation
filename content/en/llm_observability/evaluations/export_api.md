@@ -1,17 +1,17 @@
 ---
 title: Export API
-description: Reference for the LLM Observability Export API, which provides endpoints to search and retrieve span data for external evaluations or offline storage.
+description: Reference for the Agent Observability Export API, which provides endpoints to search and retrieve span data for external evaluations or offline storage.
 ---
 
 ## Overview
 
-The LLM Observability Export API provides endpoints to retrieve span data. These endpoints allow you to programmatically access your LLM Observability data for running external evaluations and exporting spans for offline storage.
+The Agent Observability Export API provides endpoints to retrieve span data. These endpoints allow you to programmatically access your Agent Observability data for running external evaluations and exporting spans for offline storage.
 
 <div class="alert alert-info">By default, we export spans from the past 15 minutes. If you need to search outside of this timeframe, please specify a time range in your request.</div>
 
 ## Search spans
 
-Use this endpoint to search and filter LLM Observability spans based on specific criteria.
+Use this endpoint to search and filter Agent Observability spans based on specific criteria.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/llm-obs/v1/spans/events/search`
@@ -93,7 +93,7 @@ EOF
 
 ## List spans
 
-Use this endpoint to retrieve a list of LLM Observability spans.
+Use this endpoint to retrieve a list of Agent Observability spans.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/llm-obs/v1/spans/events`

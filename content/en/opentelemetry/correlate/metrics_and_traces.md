@@ -63,10 +63,10 @@ For correlation to work, the `host.name` (or `container.id`) attribute on your t
 
 After your application is sending traces and the Collector is sending host metrics, you can see the correlation in the APM Trace View.
 
-1. Navigate to [**APM** > **Traces**][3].
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][3].
 2. Find and click on a trace from your instrumented service.
 3. In the trace's flame graph, select a span that ran on the instrumented host.
-4. In the details panel, click the **Infrastructure** tab. You should see the host metrics, like CPU and memory utilization, from the host that executed that part of the request.
+4. In the details panel, click the {{< ui >}}Infrastructure{{< /ui >}} tab. You should see the host metrics, like CPU and memory utilization, from the host that executed that part of the request.
 
 This allows you to immediately determine if a spike in host metrics corresponds with the performance of a specific request.
 

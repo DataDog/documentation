@@ -6,7 +6,7 @@ further_reading:
 - link: /dashboards/
   tag: Documentation
   text: Présentation des dashboards
-title: Configurer un monitor
+title: Configurer
 ---
 
 ## Présentation

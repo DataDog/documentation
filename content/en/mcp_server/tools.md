@@ -18,7 +18,7 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and LLM Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -446,11 +446,26 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
@@ -695,6 +710,15 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `analyze_datadog_error_tracking_errors`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read` and `Timeseries`*\
+Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregations, and numerical analysis. Operates on individual error samples, not Issues (groups of errors).
+
+- Count errors by service in the last hour.
+- Show me the top error types in the checkout service over the past week.
+- Break down errors by version to identify which deployment introduced an issue.
+
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
@@ -703,6 +727,15 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
 
 ## Feature Flags
 
@@ -866,9 +899,9 @@ Guides you through onboarding Kubernetes clusters to Datadog.
 
 ### `llm_observability_onboarding`
 *Toolset: **onboarding***\
-Guides you through onboarding LLM Observability in Datadog.
+Guides you through onboarding Agent Observability in Datadog.
 
-- Help me set up LLM Observability for my AI application.
+- Help me set up Agent Observability for my AI application.
 
 ### `test_optimization_onboarding`
 *Toolset: **onboarding***\
@@ -891,6 +924,115 @@ Guides you through onboarding serverless applications to Datadog, including AWS 
 Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
+
+## Profiling
+Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+
+### `get_profiling_profile_types`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns available profile types and families for a given query context (query string and time range) or a trace/span context. Use this first to discover what is queryable.
+
+- Show me what profile types are available for `service:checkout-api` in the last hour.
+- What profile families are available for trace `7d5d747be160e280504c099d984bcfe0`?
+- List the profile types available in my production environment.
+
+### `get_profiling_services`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Lists profiled services and their profiling families in scope. Results are unordered and do not imply importance or activity level.
+
+- List all services with profiling enabled in production.
+- Show me which services have JVM profiling data.
+- What services are profiled in the payments team's environment?
+
+### `get_profiling_runtime_ids`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns individual profiled runtime IDs (processes or containers) in scope. Defaults to the top-1 by CPU; the limit parameter controls how many.
+
+- Show me the top 10 runtime IDs by CPU for `service:checkout-api`.
+- Get the highest-CPU runtime for my Go service.
+- List profiled runtime IDs for the payments service in the last hour.
+
+### `get_profiling_service_insights`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns pre-computed service insights, including a high-level summary, contextual signals (affected methods, packages, processes), and recommended next steps.
+
+- Show me profiling insights for `service:checkout-api`.
+- What performance issues are flagged on the payments service?
+- Get profiling recommendations for my Java service.
+
+### `explore_profiling_flame_graph`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns top-N stack traces by value contribution for a given profile type. Supports filtering by frame, endpoint, or attribute regex. Single-service. Accepts either `service:family` or a traceContext.
+
+- Show me the CPU flame graph for `service:checkout-api` over the last hour.
+- Find the top allocation hotspots for the payments service.
+- Explore the flame graph for trace `7d5d747be160e280504c099d984bcfe0`.
+
+### `explore_profiling_call_graph`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a call-graph view (caller-to-callee edges) of hot functions for a given profile type. Defaults to the top 20 nodes, a 5% cutoff, and 5 edges per node. Single-service.
+
+- Show me the call graph for hot CPU functions in `service:checkout-api`.
+- What functions call into the slowest paths in my Go service?
+- Get the allocation call graph for the payments service.
+
+### `explore_profiling_timeline`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a timeline of lane groups (threads, garbage collection, and so on) with CPU and I/O activity. Supports a critical-path mode (Go-only; requires traceContext) to identify latency bottlenecks within a span.
+
+- Show me the thread timeline for `service:checkout-api` over the last 15 minutes.
+- Find the critical path for trace `abc123` in my Go service.
+- Explore garbage collection and CPU activity around the latency spike.
+
+### `get_profiling_timeseries`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns profiling data aggregated as timeseries (rate metrics). Best for trends, cross-service comparison, and regression detection. Supports groupBy on frame fields, contexts, and tags.
+
+- Show me CPU profile timeseries for `service:checkout-api` over the last 24 hours.
+- Compare allocation rates across my Java services grouped by version.
+- Detect profile regressions over the last week grouped by deployment.
+
+### `get_profiling_tag_names`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Discovers available tag names (such as service, host, env, version, family, runtime-id, kube_*) for filtering profiling data. Returns up to 50 results, sorted by relevance.
+
+- What tag names are available for filtering profiling data in production?
+- List profiling tag names for `service:checkout-api`.
+
+### `get_profiling_tag_values`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns values for a specific profiling tag (for example, all values of the service tag). Returns up to 50 results, sorted by frequency.
+
+- Which versions of the payments service do we have profiling data for in the past hour?
+- What are the two datacenters with most profiling data available for `service:checkout-api`?
+
+### `get_profiling_fields`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Discovers frame and context facet fields (such as `@stack.function` and `@labels.trace_endpoint`) usable in `get_profiling_timeseries` groupBy and filter parameters. Scoped by sampleType.
+
+- What frame fields can I group by for CPU profiles?
+- Show me available facet fields for allocation profiles.
+- List context fields I can filter timeseries by for `service:checkout-api`.
+
+### `get_profiling_field_values`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns values for a specific frame or context field discovered with `get_profiling_fields`. Sorted by frequency.
+
+- Show me the top values for `@stack.function` in my CPU profiles.
+- Get the top endpoint values from `@labels.trace_endpoint`.
+- List values for the package field in allocation profiles.
 
 ## Reference Tables
 
@@ -925,6 +1067,21 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
+## Remote Actions
+
+<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
+
+Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a [restricted shell interpreter][63]. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
+
+### `datadog_remote_action_restricted_shell_run_command`
+*Toolset: **remote-actions***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
+
+- Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
+- Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
+- Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
+
 ## RUM
 
 Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
@@ -941,7 +1098,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
@@ -1035,23 +1192,43 @@ Returns the authoring reference and schema for detection rules. Covers supported
 - Show me the schema for sequence detection rules.
 - What tag conventions and query syntax does the detection rules API use?
 
-### `list_datadog_security_detection_rules`
+### `get_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
-- Which rules are configured for impossible travel detection?
-
-### `get_datadog_security_detection_rule`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-
 - Get the full definition of detection rule `abc-123-def`.
-- Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
+
+### `create_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+
+- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
+- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
+- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+
+### `update_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
+- Update the threshold on my brute force detection rule from 10 to 20 failed logins.
+- Add a new case to detection rule `abc-123-def` that fires at critical severity.
+- Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+
+- Delete detection rule `abc-123-def`.
+- Remove these three test detection rules I created earlier.
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
@@ -1088,36 +1265,80 @@ Deletes a suppression rule.
 - Delete suppression `sup-456-xyz`.
 - Remove the suppression that was silencing the brute force detection rule.
 
-### `security_findings_schema`
+### `get_datadog_security_findings_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_datadog_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
 - What fields are available for security findings?
 - Show me the schema for library vulnerability findings.
 - Get the full schema including descriptions for misconfiguration findings.
 
-### `analyze_security_findings`
+### `analyze_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read` and `Timeseries`*\
-Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `get_datadog_security_findings_schema` first to discover available fields, then use this tool to query.
 
 - Show me the top 10 rules with the most critical findings.
 - Count open findings grouped by severity and finding type.
 - Find library vulnerabilities with exploits available, grouped by resource.
 
-### `search_security_findings`
+### `search_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+Fallback tool for retrieving full security finding details. Prefer `analyze_datadog_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
 
 - Get full details for critical findings in my AWS environment.
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
 
+### `get_datadog_security_findings_ticket_suggestions`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+
+- What Jira projects can I use to create tickets for security findings?
+- Show me available ServiceNow projects for ticketing.
+- Which Case Management projects are most used for findings?
+
+### `create_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
+Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+
+- Create a Jira ticket for these critical findings in project SECURITY.
+- Open a Case Management case for the findings from this rule.
+- Create a ServiceNow ticket for these library vulnerabilities.
+
+### `detach_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Write`*\
+Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+
+- Detach these findings from their linked Jira ticket.
+- Remove the case association for these findings.
+
+### `mute_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Mutes or unmutes security findings to suppress them from alerts and dashboards. Requires a mute reason (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, or `OTHER`) and supports an optional description and expiration date.
+
+- Mute these findings as false positives.
+- Mute this misconfiguration as accepted risk with a 90-day expiration.
+- Unmute findings that were previously marked as pending fix.
+
+### `assign_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
+
+- Assign these critical findings to the security team lead.
+- Unassign findings that are no longer relevant.
+- Assign all findings from this rule to me.
+
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -1190,6 +1411,23 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
 
+### `get_datadog_code_coverage_pr_summary`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+- Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
+- What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches per-file code coverage line data for a repository commit, branch, or pull request. Returns executable lines, covered lines, and added lines for each file. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided to filter results.
+
+- Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
+- Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
+
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
@@ -1208,8 +1446,8 @@ Retrieves the Flaky Tests Management policies configured for a repository, inclu
 
 ### `search_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+*Permissions Required: `DORA Metrics Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID.
 
 - Show me deployments for the `checkout` service in the last 7 days.
 - Get details for DORA deployment `abc123`.
@@ -1217,8 +1455,8 @@ Searches DORA deployment events with filters, or fetches full details for a sing
 
 ### `aggregate_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+*Permissions Required: `Timeseries`*\
+Returns DORA metrics (deployment frequency, change lead time, change failure rate, recovery time) for a service, team, or repo, as scalar values or timeseries. Use for questions about software delivery performance over a time window.
 
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
@@ -1396,7 +1634,12 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [55]: /containers/monitoring/kubernetes_explorer/
 [60]: /security/detection_rules/
 [61]: /security/suppressions/
+[62]: /getting_started/profiler/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[63]: /agent/guide/rshell/
+[64]: /cloud_cost_management/
+[65]: /code_coverage/
+[66]: /delivery_performance/dora_metrics/

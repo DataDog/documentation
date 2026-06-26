@@ -6,7 +6,7 @@ title: Grok 파서
 원시 이벤트의 전체 메시지 또는 특정 속성을 파싱하는 커스텀 grok 규칙을 만듭니다. 모범 사례로, grok 프로세서 내에서 최대 10개의 파싱 규칙을 사용하는 것이 좋습니다.
 
 
-{{< img src="service_management/events/grok-parser.png" alt="파싱 예제 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="파싱 예제 1" style="width:80%;">}}
 
 
 **내 이벤트 파싱**을 클릭하여 기본 파이프라인을 통해 흐르는 이벤트에 대한 세 가지 파싱 규칙 세트를 시작합니다. 속성 이름을 구체화하고, 필요한 경우 다른 유형의 이벤트에 대한 새 규칙을 추가합니다. 이 기능을 사용하려면 해당 이벤트가 인덱싱되어 실제로 수신되는 상태여야 합니다. 작동을 위해 임시로 예외 필터를 비활성화하거나 샘플링할 수 있습니다.
@@ -657,5 +657,5 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /ko/service_management/events/pipelines_and_processors/date_remapper
-[4]: /ko/service_management/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter
+[3]: /ko/events/pipelines_and_processors/date_remapper
+[4]: /ko/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter
