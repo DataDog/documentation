@@ -1547,32 +1547,32 @@ menu:
       parent: platform_heading
       weight: 100000
     - name: Bits Investigation
-      url: bits_ai/bits_ai_sre
+      url: bits_ai/bits_investigation
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
     - name: Investigate Issues
-      url: bits_ai/bits_ai_sre/investigate_issues
+      url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
     - name: Take Action
-      url: bits_ai/bits_ai_sre/take_action
+      url: bits_ai/bits_investigation/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 102
     - name: Bits Investigation Integrations and Settings
-      url: bits_ai/bits_ai_sre/configure
+      url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 103
     - name: Knowledge Sources
-      url: bits_ai/bits_ai_sre/knowledge_sources
+      url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 104
     - name: Chat with Bits Investigation
-      url: bits_ai/bits_ai_sre/chat_bits_ai_sre
+      url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 105
@@ -1582,17 +1582,17 @@ menu:
       parent: bits_ai
       weight: 2
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
       weight: 3
     - name: Setup
-      url: bits_ai/bits_ai_dev_agent/setup
+      url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 301
     - name: Automations
-      url: bits_ai/bits_ai_dev_agent/automations
+      url: bits_ai/bits_code/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
@@ -2181,6 +2181,11 @@ menu:
       parent: catalog_entity_model
       identifier: catalog_ai_generated_systems
       weight: 1023
+    - name: Migrate to v3
+      url: internal_developer_portal/catalog/entity_model/v3_migration
+      parent: catalog_entity_model
+      identifier: catalog_v3_migration
+      weight: 1024
     - name: Troubleshooting
       url: internal_developer_portal/catalog/troubleshooting
       parent: catalog
@@ -2348,7 +2353,7 @@ menu:
       identifier: error_tracking_error_grouping
       weight: 4
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
       weight: 5
@@ -2357,11 +2362,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -3498,16 +3498,21 @@ menu:
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
       weight: 807
+    - name: DatadogGenericResource CRD
+      url: containers/datadog_operator/crd_ddgr
+      identifier: containers_datadog_operator_crd_ddgr
+      parent: containers_datadog_operator
+      weight: 808
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 809
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -7111,46 +7116,51 @@ menu:
       url: logs/log_collection/kotlin_multiplatform/
       parent: log_collection
       weight: 107
+    - name: C / C++
+      identifier: log_cpp
+      url: logs/log_collection/cpp/
+      parent: log_collection
+      weight: 108
     - name: .NET MAUI
       identifier: log_maui
       url: logs/log_collection/maui/
       parent: log_collection
-      weight: 108
+      weight: 109
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 108
+      weight: 110
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 109
+      weight: 111
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 110
+      weight: 112
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 111
+      weight: 113
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 112
+      weight: 114
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 113
+      weight: 115
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 114
+      weight: 116
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
@@ -9329,6 +9339,46 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 109
+    - name: C / C++
+      url: real_user_monitoring/application_monitoring/cpp
+      parent: application_monitoring
+      identifier: rum_cpp
+      weight: 205
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/cpp/setup
+      parent: rum_cpp
+      identifier: rum_cpp_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/application_monitoring/cpp/error_tracking
+      parent: rum_cpp
+      identifier: rum_cpp_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/cpp/data_collected
+      parent: rum_cpp
+      identifier: rum_cpp_data_collected
+      weight: 104
+    - name: Advanced Build Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_build_configuration
+      weight: 105
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/cpp/troubleshooting
+      parent: rum_cpp
+      identifier: rum_cpp_troubleshooting
+      weight: 106
+    - name: Supported Versions
+      url: real_user_monitoring/application_monitoring/cpp/supported_versions
+      parent: rum_cpp
+      identifier: rum_cpp_supported_versions
+      weight: 107
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
@@ -9720,21 +9770,31 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
     - name: Identity Resolution
       url: product_analytics/profiles/identity_resolution
       parent: pa_profiles
       identifier: pa_identity_resolution
-      weight: 401
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
+    - name: Server-Side Events
+      url: product_analytics/data_collected/server_side_events
+      parent: pa_data_collected
+      identifier: pa_data_collected_server_side_events
+      weight: 601
     - name: Experiments
       url: experiments/
       pre: experiment-wui

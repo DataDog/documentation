@@ -287,7 +287,7 @@ autoscaler:
       - type: Percent
         value: 50
         periodSeconds: 120
-    stabilizationWindowSeconds: 600
+    stabilizationWindowSeconds: 130
     strategy: Max
   scaleDown:
     rules:

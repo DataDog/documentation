@@ -236,9 +236,11 @@ Use this optional configuration step to:
 
 #### Define maximum scan size
 
-Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Archive Search or Rehydration on your Log Archives.
 
-For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
+For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
+
+**Note**: To reduce the volume of data scanned during [Archive Search][16], consider configuring [Partition Attributes](#archive-search-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute-preview) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
 #### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
 
