@@ -126,8 +126,7 @@ spec:
   config:
     checks:
       - integration: openmetrics
-        containerImage:
-          - <CONTAINER_IMAGE>
+        containerName: <CONTAINER_NAME>
         initConfig: {}
         instances:
           - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>"
@@ -146,7 +145,6 @@ With the following configuration placeholder values:
 | `<WORKLOAD_NAMESPACE>`                   | Namespace that contains the target workload and the `DatadogInstrumentation` resource.             |
 | `<WORKLOAD_NAME>`                        | Name of the workload targeted by the `DatadogInstrumentation` resource.                            |
 | `<CONTAINER_NAME>`                       | Matches the name of the container that exposes the metrics.                                        |
-| `<CONTAINER_IMAGE>`                      | Matches the image of the container that exposes the metrics.                                       |
 | `<PROMETHEUS_ENDPOINT>`                  | URL path for the metrics served by the container, in Prometheus format.                            |
 | `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                               |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                 |
@@ -234,7 +232,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% /tab %}}
    {{% tab "DatadogInstrumentation CRD" %}}
 
-   **Note:** Configuring checks with the `DatadogInstrumentation` custom resource requires Datadog Agent version 7.81 or higher.
+   **Note:** Configuring checks with the `DatadogInstrumentation` custom resource requires Datadog Agent and Cluster Agent version 7.82 or higher.
 
    The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation before applying this resource, because annotations take precedence over `DatadogInstrumentation` resources.
 
@@ -252,8 +250,7 @@ For a full list of available parameters for instances, including `namespace` and
      config:
        checks:
          - integration: openmetrics
-           containerImage:
-             - prometheus # the image short name
+           containerName: prometheus-example
            initConfig: {}
            instances:
              - openmetrics_endpoint: "http://%%host%%:%%port%%/metrics"

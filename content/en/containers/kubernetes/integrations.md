@@ -368,14 +368,14 @@ spec:
   config:
     checks:
       - integration: <INTEGRATION_NAME>
-        containerImage:
-          - <CONTAINER_IMAGE>
+        containerName: <CONTAINER_NAME>
         initConfig:
           <INIT_CONFIG>
         instances:
           - <INSTANCES_CONFIG>
-        logs:
-          - <LOGS_CONFIG>
+    logs:
+      - containerName: <CONTAINER_NAME>
+        <LOGS_CONFIG>
 ```
 
 For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with the DatadogInstrumentation CRD][29].
