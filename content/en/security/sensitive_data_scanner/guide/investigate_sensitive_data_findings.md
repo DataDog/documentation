@@ -19,9 +19,14 @@ further_reading:
 
 ## Overview
 
-Datadog's Sensitive Data Scanner helps prevent sensitive data leaks by identifying, classifying, and optionally redacting sensitive data. Use the [Findings][1] page to investigate findings, understand their scope, and take action.
+Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by identifying, classifying, and optionally redacting sensitive data. When a sensitive data finding is found, you might have the following questions:
 
-For logs, a new Findings explorer groups findings by log pattern and surfaces representative log entries. This makes it easier to confirm whether a finding is a true positive and trace it back to its source. For APM, RUM, and Events findings, the existing **Sensitive Data Rule Findings** experience applies.
+- What sensitive data has been exposed?
+- What is the priority of the sensitive data exposure?
+- How severe is the finding in terms of spread and volume?
+- Where did the sensitive data come from?
+
+The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data findings so that you can investigate, collaborate, and document your findings, and answer those questions.
 
 {{< img src="sensitive_data_scanner/findings_20251014.png" alt="The Findings page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
@@ -34,23 +39,13 @@ Navigate to the [Findings][1] page to see all sensitive data findings within the
 
 The Logs Findings explorer is an updated experience for investigating log findings. To access it, click **Try the new version** in the blue banner at the top of the Telemetry tab. APM, RUM, and Events findings are not available in this explorer. To view those findings, click **Go back** in the banner.
 
-### Triage log findings
+To investigate a log finding:
 
-Use **Group by** to organize your findings:
-
-- **Rule**: See which scanning rules are generating the most exposure.
-- **Logs Pattern**: See the specific log formats where sensitive data appears.
-- **Service**: Scope findings by service to assign remediation work to service owners.
-
-To surface findings where sensitive data is actively exposed, filter by **Leaking** in the **Match State** facet.
-
-### Investigate a log finding
-
-Click a finding to open the detail panel:
-
-1. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
-2. Expand **Example Logs** to see representative affected log entries. Click **Show log** on any entry to view the full log.
-3. Check **First Detected** and **Last Detected** to understand how long the exposure has been active.
+1. Use **Group by** to organize findings by **Rule**, **Logs Pattern**, or **Service**. To surface findings where sensitive data is actively exposed, filter by **Leaking** in the **Match State** facet.
+2. Click a finding to open the detail panel.
+3. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
+4. Expand **Example Logs** to see representative affected log entries. Click **Show log** on any entry to view the full log.
+5. Check **First Detected** and **Last Detected** to understand how long the exposure has been active.
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
