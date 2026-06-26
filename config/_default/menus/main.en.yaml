@@ -1547,32 +1547,32 @@ menu:
       parent: platform_heading
       weight: 100000
     - name: Bits Investigation
-      url: bits_ai/bits_ai_sre
+      url: bits_ai/bits_investigation
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
     - name: Investigate Issues
-      url: bits_ai/bits_ai_sre/investigate_issues
+      url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
     - name: Take Action
-      url: bits_ai/bits_ai_sre/take_action
+      url: bits_ai/bits_investigation/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 102
     - name: Bits Investigation Integrations and Settings
-      url: bits_ai/bits_ai_sre/configure
+      url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 103
     - name: Knowledge Sources
-      url: bits_ai/bits_ai_sre/knowledge_sources
+      url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 104
     - name: Chat with Bits Investigation
-      url: bits_ai/bits_ai_sre/chat_bits_ai_sre
+      url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 105
@@ -1582,17 +1582,17 @@ menu:
       parent: bits_ai
       weight: 2
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
       weight: 3
     - name: Setup
-      url: bits_ai/bits_ai_dev_agent/setup
+      url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 301
     - name: Automations
-      url: bits_ai/bits_ai_dev_agent/automations
+      url: bits_ai/bits_code/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
@@ -2353,7 +2353,7 @@ menu:
       identifier: error_tracking_error_grouping
       weight: 4
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
       weight: 5

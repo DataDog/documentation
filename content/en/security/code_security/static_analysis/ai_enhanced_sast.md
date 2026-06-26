@@ -205,7 +205,7 @@ You can also view all remediation sessions on [**Sessions**][7].
 [6]: https://app.datadoghq.com/security/code-security/sast
 [7]: https://app.datadoghq.com/code
 [9]: /bits_ai/
-[10]: /bits_ai/bits_ai_dev_agent
+[10]: /bits_ai/bits_code
 [11]: https://app.datadoghq.com/code/settings
-[13]: /bits_ai/bits_ai_dev_agent/automations
+[13]: /bits_ai/bits_code/automations
 [14]: https://app.datadoghq.com/code/automations
