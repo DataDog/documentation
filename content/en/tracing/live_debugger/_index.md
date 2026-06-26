@@ -105,7 +105,7 @@ Live Debugger generates logs that are sent to Datadog and appear alongside your 
 If you use [Exclusion filters][11], make sure Live Debugger logs are not filtered:
 
 1. Create a logs index and [configure it][12] to the desired retention with **no sampling**.
-2. Set the filter to match on the `source:dd_debugger` tag. All Dynamic Instrumentation logs have this source.
+2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
 ### Link your source code
