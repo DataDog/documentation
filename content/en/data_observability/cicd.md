@@ -87,7 +87,7 @@ Drift detection compares the current state of your data to a baseline and flags 
 **dbt core**
 | Setting | Description |
 | - | - |
-| `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job your selected before, but you should specify again it here.|
+| `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job your selected before, but you should specify it again here.|
 | `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job above. [see environment variables documentation](/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables). If you're not setting this environment variable, you don't need to specify it here.|
 
 ## Further Reading
