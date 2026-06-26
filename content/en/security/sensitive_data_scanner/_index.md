@@ -76,7 +76,7 @@ The action you can apply to matched sensitive data depends on the data source. T
 | Redact           | Yes  | Yes | Yes | Yes    | Yes                 |
 | Partially redact | Yes  | Yes | Yes | Yes    | Yes                 |
 | Hash             | Yes  | Yes | Yes | Yes    | Yes                 |
-| Mask             | Yes  | No  | No  | No     | No                  |
+| Mask             | Yes  | Yes | Yes | No     | No                  |
 
 <div class="alert alert-info">For cloud storage and code repositories (Secret Scanning), Sensitive Data Scanner can detect sensitive data but cannot apply obfuscation actions to it.</div>
 
