@@ -25,9 +25,10 @@ You can configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy.
 
 ## Configure the Datadog Agent
 
-There are two options for configuring the Datadog Agent to use a proxy.
+There are several options for configuring the Datadog Agent to use a proxy depending on your deployment method.
 - You can use the Agent configuration file.
 - You can use environment variables. Environment variables override configuration file settings.
+- For Kubernetes deployments, you can configure the proxy through Helm or the Datadog Operator.
 
 ### Configuration file
 
@@ -78,6 +79,48 @@ DD_NO_PROXY_NONEXACT_MATCH=true
 
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```
+
+### Kubernetes
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`:
+
+```yaml
+datadog:
+  env:
+    - name: DD_PROXY_HTTP
+      value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+    - name: DD_PROXY_HTTPS
+      value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+    - name: DD_PROXY_NO_PROXY
+      value: "<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
+    - name: DD_NO_PROXY_NONEXACT_MATCH
+      value: "true"
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Add the following to your `DatadogAgent` CR:
+
+```yaml
+spec:
+  global:
+    env:
+      - name: DD_PROXY_HTTP
+        value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+      - name: DD_PROXY_HTTPS
+        value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+      - name: DD_PROXY_NO_PROXY
+        value: "<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
+      - name: DD_NO_PROXY_NONEXACT_MATCH
+        value: "true"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## `NO_PROXY` Accepted Values
 
