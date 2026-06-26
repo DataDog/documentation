@@ -24,7 +24,7 @@ Use an integration monitor to check if an installed [integration][1] is running.
 
 To create an [integration monitor][2] in Datadog:
 
-1. Use the main navigation: *Monitors --> New Monitor --> Integration*.
+1. Use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Integration{{< /ui >}}.
 2. Search for an integration or select it from the list or images.
 
 ### Integration metric
@@ -46,7 +46,7 @@ Select the scope to monitor by choosing host names, tags, or choose `All Monitor
 
 #### Set alert conditions
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+In this section, choose between a {{< ui >}}Check Alert{{< /ui >}} or {{< ui >}}Cluster Alert{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
@@ -63,7 +63,7 @@ Set up the check alert:
 
     Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
 
-3. If the integration check reports an `UNKNOWN` status, choose `Do not notify` or `Notify` for Unknown status.
+3. If the integration check reports an `UNKNOWN` status, choose {{< ui >}}Do not notify{{< /ui >}} or {{< ui >}}Notify{{< /ui >}} for Unknown status.
 
     If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
 
@@ -80,7 +80,7 @@ A cluster alert calculates the percent of checks in a given status and compares 
 
 Set up a cluster alert:
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. Decide whether or not to group your checks according to a tag. {{< ui >}}Ungrouped{{< /ui >}} calculates the status percentage across all sources. {{< ui >}}Grouped{{< /ui >}} calculates the status percentage on a per group basis.
 
 2. Select the percentage for the alert threshold.
 
@@ -98,7 +98,7 @@ See the [Monitor configuration][5] documentation for information on [No data][6]
 
 #### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][9] page.
 
 ## Further Reading
 

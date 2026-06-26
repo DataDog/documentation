@@ -18,7 +18,6 @@ title: Guides sur les monitors
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alerte en cas d'absence de changement d'une valeur{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Créer des alertes de cluster pour les monitors basés sur des métriques{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Créer des dépendances pour des monitors{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Exporter des alertes de monitor au format CSV{{< /nextlink >}}
     {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}Recevoir une alerte lorsqu'un tag spécifique ne transmet plus de données{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Seuils de rétablissement{{< /nextlink >}}
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Modifier la configuration des alertes avec un statut No Data pour les monitors basés sur des métriques{{< /nextlink >}}

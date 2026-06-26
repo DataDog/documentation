@@ -1,6 +1,12 @@
 ---
 title: Send AWS Services Logs With The Datadog Lambda Function
 further_reading:
+- link: "https://learn.datadoghq.com/courses/send-aws-logs"
+  tag: "Learning Center"
+  text: "Send AWS Logs"
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
@@ -13,9 +19,6 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
-- link: "https://learn.datadoghq.com/courses/send-aws-logs"
-  tag: "Learning Center"
-  text: "Send AWS Logs"
 
 ---
 
