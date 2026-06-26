@@ -1,5 +1,6 @@
 ---
 title: Instrument Your Applications
+description: Instrument your applications with OpenTelemetry and Datadog SDKs to collect, visualize, and analyze traces across your services and infrastructure.
 aliases:
     - /opentelemetry/guide/otel_api_tracing_interoperability
 further_reading:

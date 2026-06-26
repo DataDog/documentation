@@ -36,6 +36,19 @@ Use Datadog SDKs with OpenTelemetry in two ways: export telemetry in [OpenTeleme
 
 <div class="alert alert-info"><strong>Not sure which approach is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
 
+## Configure and extend
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}
+    <h3>Instrumentation Libraries</h3>
+    Add OpenTelemetry instrumentation libraries to capture telemetry from third-party components alongside Datadog SDK instrumentation.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}
+    <h3>Configuration</h3>
+    Configure Datadog SDKs with OpenTelemetry SDK environment variables.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

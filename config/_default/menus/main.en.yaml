@@ -707,19 +707,19 @@ menu:
       identifier: otel-otlp-export-dd-sdk
       parent: otel-dd-sdk-parent
       weight: 3020
-    - name: Configuration
-      url: opentelemetry/config/environment_variable_support/
-      identifier: otel_env_var
-      parent: otel-dd-sdk-parent
-      weight: 3021
     - name: APIs
       url: /opentelemetry/instrument/dd_sdks/api_support
       identifier: otel-api-dd-sdk
       parent: otel-dd-sdk-parent
-      weight: 3022
+      weight: 3021
     - name: Instrumentation Libraries
       url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
+      parent: otel-dd-sdk-parent
+      weight: 3022
+    - name: Configuration
+      url: opentelemetry/config/environment_variable_support/
+      identifier: otel_env_var
       parent: otel-dd-sdk-parent
       weight: 3023
     - name: Send Data to Datadog
