@@ -4,34 +4,33 @@ aliases:
 further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus logs
+  text: Aprende a procesar tus registros
 - link: /logs/log_configuration/parsing
   tag: Documentación
-  text: Obtén más información sobre el parseo
+  text: Aprende más sobre el parseo
 - link: /logs/explorer/
   tag: Documentación
-  text: Aprende a explorar tus logs
+  text: Aprende a explorar tus registros
 - link: /logs/explorer/#visualize
   tag: Documentación
-  text: Realizar análisis de los logs
+  text: Realiza análisis de registros
 - link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: Documentación
-  text: Conectar logs y trazas (traces)
+  text: Conecta registros y trazas
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: FAQ
-  text: Guía para solucionar problemas relacionados con la recopilación de logs
+  tag: PREGUNTAS FRECUENTES
+  text: Guía de solución de problemas de recolección de registros
 - link: https://www.datadoghq.com/blog/java-logging-guide/
   tag: Blog
-  text: Cómo recopilar, personalizar y estandarizar logs de Java
+  text: Cómo recolectar, personalizar y estandarizar registros de Java
 - link: /glossary/#tail
   tag: Glosario
-  text: Entrada de glosario para "tail" (cola)
-title: Recopilación de logs de Java
+  text: Entrada del glosario para "seguimiento de las últimas líneas"
+title: Recolección de registros de Java
 ---
+Para enviar tus registros a Datadog, registra en un archivo y haz el seguimiento de las últimas líneas [tail][1] de ese archivo con tu Datadog Agent.
 
-Para enviar tus logs a Datadog, loguea un archivo y [supervisa][14] ese archivo con tu Datadog Agent.
-
-Las stack traces de los logs típicos de Java se dividen en varias líneas, lo que dificulta que puedan asociarse al evento de log original. Por ejemplo:
+Las trazas de pila de los registros típicos de Java se dividen en múltiples líneas, lo que dificulta asociarlas al evento de registro original. Por ejemplo:
 
 ```java
 //4 events generated when only one is expected!
@@ -41,25 +40,25 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-Para remediar este problema, configura tu biblioteca de registro de logs para que genere tus logs en formato JSON. De esta forma podrás:
+Para abordar este problema, configura tu biblioteca de registro para producir tus registros en formato JSON. Al registrar en JSON, tú:
 
-* Garantizar que la stack trace se asocia correctamente al evento de log.
-* Garantizar que todos los atributos del evento de log (como la gravedad, el nombre del logger y el nombre del subproceso) se extraen correctamente.
-* Obtener acceso a los atributos de [Mapped Diagnostic Context (MDC)][1] que puedes añadir a cualquier evento de log.
-* Evitar la necesidad de crear [reglas de parseo personalizadas][2].
+* Asegúrate de que la traza de pila esté correctamente envuelta en el evento de registro.
+* Asegúrate de que todos los atributos del evento de registro (como severidad, nombre del registrador y nombre del hilo) estén correctamente extraídos.
+* Obtén acceso a los atributos del [Contexto de Diagnóstico Mapeado (MDC)][2], que puedes adjuntar a cualquier evento de registro.
+* Evita la necesidad de [reglas de análisis personalizadas][3].
 
-Las siguientes instrucciones muestran ejemplos de configuración para las bibliotecas de registro de logs Log4j, Log4j 2 y Logback.
+Las siguientes instrucciones muestran ejemplos de configuración para las bibliotecas de registro Log4j, Log4j 2 y Logback.
 
-## Configurar el registrador
+## Configura tu registrador {#configure-your-logger}
 
-### Formato JSON
+### Formato JSON {#json-format}
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Para Log4j, loguea en formato JSON utilizando el módulo [log4j-over-slf4j][1] de SLF4J combinado con Logback. `log4j-over-slf4j` sustituye sin problemas a Log4j en tu aplicación, por lo que no tendrás que realizar ningún cambio en el código.
+Para Log4j, registra en formato JSON utilizando el módulo SLF4J [log4j-over-slf4j][1] combinado con Logback. `log4j-over-slf4j` reemplaza limpiamente a Log4j en tu aplicación, por lo que no necesitas hacer ningún cambio en el código.
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
+1. En tu archivo `pom.xml`, reemplaza la dependencia `log4j.jar` con una dependencia `log4j-over-slf4j.jar`, y agrega las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -77,9 +76,9 @@ Para Log4j, loguea en formato JSON utilizando el módulo [log4j-over-slf4j][1] d
       <version>6.6</version>
     </dependency>
     ```
-2. Configura un appender utilizando el diseño JSON en `logback.xml`. Consulta las siguientes configuraciones de ejemplo para archivo y consola.
+2. Configura un appender utilizando el diseño JSON en `logback.xml`. Consulta los siguientes ejemplos de configuraciones para archivo y consola.
 
-    Para el archivo:
+    Para archivo:
 
     ```xml
     <configuration>
@@ -94,7 +93,7 @@ Para Log4j, loguea en formato JSON utilizando el módulo [log4j-over-slf4j][1] d
     </configuration>
     ```
 
-    Para la consola:
+    For console:
 
     ```xml
     <configuration>
@@ -113,16 +112,16 @@ Para Log4j, loguea en formato JSON utilizando el módulo [log4j-over-slf4j][1] d
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Log4j 2 incluye una estructura JSON.
+Log4j 2 incluye un diseño JSON.
 
-1. Configura un appender utilizando el diseño JSON en `log4j2.xml`. Consulta las siguientes configuraciones de ejemplo para el appender de archivo y consola. Para una descripción completa de los complementos de Log4j, consulta [Referencia de complementos de Log4j][1].
-{{% collapse-content title="Appender de archivos" level="h4" %}}
+1. Configura un appender utilizando el diseño JSON en `log4j2.xml`. Consulta los siguientes ejemplos de configuraciones para el appender de archivo y consola. Para una descripción completa de los plugins de Log4j, consulta la [referencia de plugins de Log4j][1].
+{{% collapse-content title="Appender de archivo" level="h4" %}}
 {{< code-block lang="xml" filename="log4j2.xml"  >}}
 <?xml version="1.0" encoding="UTF-8"?>
   <Configuration>
     <Appenders>
       <File name="FILE" fileName="logs/app.log" >
-        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
       </File>
     </Appenders>
     <Loggers>
@@ -136,7 +135,7 @@ Log4j 2 incluye una estructura JSON.
 
 {{% collapse-content title="Appender de consola" level="h4" %}}
 {{< code-block lang="xml" filename="log4j2.xml" >}}
- <?xml version="1.0" encoding="UTF-8"?>
+  <?xml version="1.0" encoding="UTF-8"?>
   <Configuration>
     <Appenders>
       <Console name="console" target="SYSTEM_OUT">
@@ -152,7 +151,7 @@ Log4j 2 incluye una estructura JSON.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Añade el archivo de plantilla de diseño JSON (como `MyLayout.json`) en el directorio `src/main/resources` de tu proyecto Java. Por ejemplo:
+2. Agrega el archivo de plantilla de diseño JSON (como `MyLayout.json`) en el directorio `src/main/resources` de tu proyecto Java. Por ejemplo:
     ```json
     {
        "timestamp":{
@@ -207,7 +206,7 @@ Log4j 2 incluye una estructura JSON.
     }
     ```
 
-3. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
+3. Agrega las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -235,9 +234,9 @@ Log4j 2 incluye una estructura JSON.
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Utiliza el [logstash-logback-encoder][1] para los logs con formato JSON en Logback.
+Utiliza el [logstash-logback-encoder][1] para registros formateados en JSON en Logback.
 
-1. Configura un appender de archivos utilizando el diseño JSON en `logback.xml`. Por ejemplo:
+1. Configura un appender de archivo utilizando el diseño JSON en `logback.xml`. Por ejemplo:
 
     ```xml
     <configuration>
@@ -252,7 +251,7 @@ Utiliza el [logstash-logback-encoder][1] para los logs con formato JSON en Logba
     </configuration>
     ```
 
-2. Añade la dependencia de codificador de Logstash a tu archivo `pom.xml`. Por ejemplo:
+2. Agrega la dependencia del codificador Logstash a tu archivo `pom.xml`. Por ejemplo:
 
     ```xml
     <dependency>
@@ -271,7 +270,7 @@ Utiliza el [logstash-logback-encoder][1] para los logs con formato JSON en Logba
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-Crea una configuración de escritor de JSON basada en la [documentación oficial de Tinylog][1].
+Crea una configuración de escritor JSON basada en la [documentación oficial de Tinylog][1].
 
 
 Utiliza el siguiente formato en un archivo `tinylog.properties`:
@@ -295,12 +294,12 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{< /tabs >}}
 
-### Formato sin procesar
+### Formato en bruto {#raw-format}
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Configura un appender de archivos en `log4j.xml`. Por ejemplo:
+Configura un appender de archivo en `log4j.xml`. Por ejemplo:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -327,7 +326,7 @@ Configura un appender de archivos en `log4j.xml`. Por ejemplo:
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Configura un appender de archivos en `log4j2.xml`. Por ejemplo:
+Configura un appender de archivo en `log4j2.xml`. Por ejemplo:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -349,7 +348,7 @@ Configura un appender de archivos en `log4j2.xml`. Por ejemplo:
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Configurar un anexador de archivos en `logback.xml`. Por ejemplo:
+Configura un appender de archivo en `logback.xml`. Por ejemplo:
 
 ```xml
 <configuration>
@@ -372,7 +371,7 @@ Configurar un anexador de archivos en `logback.xml`. Por ejemplo:
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-Crea una configuración de escritor con salida a un archivo basado en la [documentación oficial de Tinylog][1].
+Crea una configuración de escritor que envíe a un archivo basada en la [documentación oficial de Tinylog][1].
 
 
 Utiliza el siguiente formato en un archivo `tinylog.properties`:
@@ -384,17 +383,17 @@ writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "
 writer.file     = log.txt
 ```
 
-[1]: https://tinylog.org/v2/configuration/#json-writer
+[1]: https://tinylog.org/v2/configuration/#writer
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Inserta los ID de trazas en tus logs
+#### Inyecta ID de traza en tus registros {#inject-trace-ids-into-your-logs}
 
-Si APM está activada para esta aplicación, puedes correlacionar logs y trazas activando la inserción de ID de trazas. Consulta [Conectar logs y trazas Java][3].
+Si APM está habilitado para esta aplicación, puedes correlacionar registros y trazas habilitando la inyección de ID de traza. Consulta [Conectando Registros y Trazas de Java][4].
 
-Si _no_ correlacionas logs y trazas, elimina los parámetros MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de logs incluidos en los ejemplos de configuración anteriores.
+Si no estás _correlacionando_ registros y trazas, elimina los marcadores de posición MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de registro incluidos en los ejemplos de configuración anteriores.
 
-Por ejemplo, si utilizas Log4j 2 pero no correlacionas logs y trazas, elimina el siguiente bloque de la plantilla de diseño de logs de ejemplo, `MyLayout.json`:
+Por ejemplo, si estás utilizando Log4j 2 pero no correlacionando registros y trazas, elimina el siguiente bloque de la plantilla de diseño de registro de ejemplo, `MyLayout.json`:
 
 ```json
 "dd.trace_id":{
@@ -408,12 +407,12 @@ Por ejemplo, si utilizas Log4j 2 pero no correlacionas logs y trazas, elimina el
 ```
 
 
-## Configurar el Datadog Agent
+## Configura el Datadog Agent {#configure-the-datadog-agent}
 
-Cuando tengas la [recopilación de logs activada][4], configura la [recopilación de logs personalizada][5] para supervisar tus logs y enviarlos a Datadog.
+Una vez que [la recolección de registros esté habilitada][5], configura [la recolección de registros personalizada][6] para el seguimiento de las últimas líneas de tus archivos de registro y enviarlos a Datadog.
 
-1. Crea una carpeta `java.d/` en el [directorio de configuración del Agent][6]  `conf.d/`.
-2. Crea un archivo `conf.yaml` en `java.d/` con el siguiente contenido:
+1. Crea una `java.d/` carpeta en el `conf.d/` [directorio de configuración del Agent][7].
+2. Crea un `conf.yaml` archivo en `java.d/` con el siguiente contenido:
 
     ```yaml
     #Log section
@@ -431,30 +430,30 @@ Cuando tengas la [recopilación de logs activada][4], configura la [recopilació
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 
-3. [Reinicia el Agent][7].
-4. Ejecuta el [subcomando de estado del Agent][8] y busca `java` en la sección `Checks` para confirmar que los logs se envían correctamente a Datadog.
+3. [Reinicia el Agent][8].
+4. Ejecuta el [subcomando de estado del Agent][9] y busca `java` en la sección {{< ui >}}Checks{{< /ui >}} para confirmar que los registros se han enviado correctamente a Datadog.
 
-Si los logs están en formato JSON, Datadog [parsea los mensajes del log][9] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][10] para ver tus logs y solucionar problemas relacionados.
+Si los registros están en formato JSON, Datadog automáticamente [analiza los mensajes de registro][10] para extraer los atributos de registro. Utiliza el [Explorador de registros][11] para ver y solucionar problemas en tus registros.
 
-## Registro de logs sin Agent
+## Transmite registros directamente al Agent {#stream-logs-directly-to-the-agent}
 
-En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión. 
+En el caso excepcional en que tu aplicación se esté ejecutando en una máquina a la que no se puede acceder o no puede registrar en un archivo, es posible transmitir registros a Datadog o directamente al Agent de Datadog. Esta no es la configuración recomendada, porque requiere que tu aplicación maneje problemas de conexión.
 
-Para transmitir logs directamente a Datadog:
+Para transmitir registros directamente a Datadog:
 
-1. Añade la biblioteca de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
-2. **Configura Logback** para que envíe logs a Datadog.
+1. Agrega la biblioteca de registro Logback a tu código, o **conecta tu registrador actual a Logback**.
+2. **Configura Logback** para enviar registros a Datadog.
 
-### Crear un puente desde las bibliotecas de registro de logs de Java y Logback
+### Conecta desde bibliotecas de registro de Java a Logback {#bridge-from-java-logging-libraries-to-logback}
 
-Si todavía no utilizas Logback, las bibliotecas de registro de logs se pueden asociar a Logback.
+Si aún no estás utilizando Logback, la mayoría de las bibliotecas de registro comunes pueden conectarse a Logback.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Utiliza el módulo [log4j-over-slf4j][1] de SLF4J con Logback para que envíe logs a otro servidor. `log4j-over-slf4j` sustituye sin problemas Log4j de tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
+Utiliza el módulo SLF4J [log4j-over-slf4j][1] con Logback para enviar registros a otro servidor. `log4j-over-slf4j` reemplaza limpiamente Log4j en tu aplicación para que no tengas que hacer cambios en el código.
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
+1. En tu archivo `pom.xml`, reemplaza la dependencia `log4j.jar` con una dependencia `log4j-over-slf4j.jar`, y agrega las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -472,9 +471,9 @@ Utiliza el módulo [log4j-over-slf4j][1] de SLF4J con Logback para que envíe lo
       <version>6.6</version>
     </dependency>
     ```
-2. Configurar Logback.
+2. Configura Logback.
 
-**Nota:** Como resultado de este cambio, los archivos de configuración Log4j dejarán de recogerse. Migra tu archivo `log4j.properties` a `logback.xml` con el [traductor Log4j][2].
+**Nota:** Como resultado de este cambio, los archivos de configuración de Log4j ya no serán recogidos. Migra tu `log4j.properties` archivo a `logback.xml` con el [traductor de Log4j][2].
 
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
@@ -483,9 +482,9 @@ Utiliza el módulo [log4j-over-slf4j][1] de SLF4J con Logback para que envíe lo
 
 {{% tab "Log4j 2" %}}
 
-Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad de añadir una clave de API como prefijo en los logs. Debido a esto, utiliza el módulo SLF4J [log4j-over-slf4j][1] y Logback. `log4j-to-slf4j.jar` sustituye directamente Log4j 2 en tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
+Log4j 2 permite el registro en un host remoto, pero no ofrece la capacidad de prefijar los registros con una clave API. Debido a esto, utiliza el módulo SLF4J [log4j-over-slf4j][1] y Logback. `log4j-to-slf4j.jar` reemplaza limpiamente Log4j 2 en tu aplicación para que no tengas que hacer ningún cambio en el código. Para usarlo:
 
-1. En tu archivo `pom.xml`, sustituye la dependencia `log4j.jar` por una dependencia `log4j-over-slf4j.jar` y añade las dependencias de Logback. Por ejemplo:
+1. En tu archivo `pom.xml`, reemplaza la dependencia `log4j.jar` con una dependencia `log4j-over-slf4j.jar`, y agrega las dependencias de Logback. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -504,12 +503,12 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
     </dependency>
 
     ```
-2. Configurar Logback.
+2. Configura Logback.
 
 **Notas:**
 
-- Asegúrate de que `log4j-slf4j-impl.jar` **no** se usa según se describe aquí: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
-- Como resultado de esta migración, los archivos de configuración Log4j 2 dejarán de recogerse. Migra tu archivo `log4j.properties` a `logback.xml` con el [traductor Log4j][2].
+- Asegúrate de que `log4j-slf4j-impl.jar` **no** se utilice como se describe aquí: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
+- Como resultado de esta migración, los archivos de configuración de Log4j 2 ya no serán recogidos. Migra tu `log4j.properties` archivo a `logback.xml` con el [traductor de Log4j][2].
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
@@ -517,77 +516,77 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 
 {{< /tabs >}}
 
-### Configurar Logback
+### Configura Logback {#configure-logback}
+Datadog no admite el envío de registros directamente a través de TCP a la ingesta de Datadog. En su lugar, configura Logback a tu Agente local de Datadog, que luego reenvía los registros a Datadog a través de HTTPS con enriquecimiento automático.
 
-{{< site-region region="us3,us5,ap1,ap2,gov" >}}
-  <div class="alert alert-danger">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
-{{< /site-region >}}
+1. [Instala un Agente local de Datadog][12] (v6+ / v7+).
+1. Habilita la recolección de registros en `datadog.yaml`, y asegúrate de que el Agente reenvíe los registros a través de HTTPS (HTTPS es el transporte predeterminado para el Agente v6.19+/v7.19+ y posteriores):
+   ```
+   logs_enabled: true
+   logs_config:
+     # HTTPS is the default. Keep or set this to force HTTPS forwarding.
+     force_use_http: true
+     # (Optional) auto-detect multi-line patterns
+     auto_multi_line_detection: true
+   ```
 
+1. Habilita la recolección de registros en el Agent.
+   ```yaml
+   # /etc/datadog-agent/conf.d/logback.d/conf.yaml
+   logs:
+     - type: tcp
+       port: 10518           # Port the Agent will listen on
+       service: my-java-app  # Your service name (unified service tagging)
+       source: java          # Or a more specific source, e.g., "logback"
+   ```
+1. Reinicia el Agent para aplicar los cambios.
+1. Configura Logback para enviar registros al Agent. Utiliza el [logstash-logback-encoder][13] TCP appender en tu `logback.xml` para reenviar registros al Agent:
+   ```xml
+   <configuration>
+     <appender name="DD_TCP_JSON" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+       <destination>localhost:10518</destination>
+       <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+         <providers>
+           <timestamp/>
+           <pattern>
+             <pattern>
+               {
+                 "message": "%message",
+                 "level": "%level",
+                 "logger": "%logger",
+                 "service": "${DD_SERVICE:-my-java-app}",
+                 "env": "${DD_ENV:-prod}",
+                 "version": "${DD_VERSION:-1.0.0}",
+                 "dd.trace_id": "%X{dd.trace_id}",
+                 "dd.span_id": "%X{dd.span_id}"
+               }
+             </pattern>
+           </pattern>
+           <arguments/>
+           <stackTrace/>
+         </providers>
+       </encoder>
+     </appender>
+   </configuration>
+   ```
+   Luego, haz referencia a él en tu logger raíz:
+   ```xml
+   <root level="INFO">
+     <appender-ref ref="DD_TCP_JSON"/>
+   </root>
+   ```
 
-{{< site-region region="us,eu" >}}
+1. Verifica el reenvío de registros. Ejecuta `datadog-agent status` para confirmar tu TCP listener y revisa el Logs Explorer en busca de entradas etiquetadas con tu servicio.
 
-Utiliza la biblioteca de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
+## Obteniendo más {#getting-further}
 
-1. Configura un appender TCP en tu archivo `logback.xml`. Con esta configuración, tu clave de API se recupera de la variable de entorno `DD_API_KEY`. Alternativamente, puedes insertar tu clave de API directamente en el archivo de configuración:
+Enriquece tus eventos de registro con atributos contextuales.
 
-   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}. 
-    - **US1**: `intake.logs.datadoghq.com:10516`    
-    - **UE**: `tcp-intake.logs.datadoghq.eu:443`
+### Usando el analizador de clave-valor {#using-the-key-value-parser}
 
-    ```xml
-    <configuration>
-      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/app.log</file>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-      </appender>
-      <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination><YOUR REGION INTAKE></destination>
-        <keepAliveDuration>20 seconds</keepAliveDuration>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-                <layout class="ch.qos.logback.classic.PatternLayout">
-                    <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-                </layout>
-              </prefix>
-        </encoder>
-        <ssl />
-      </appender>
+El [analizador de clave-valor][14] extrae cualquier patrón `<KEY>=<VALUE>` reconocido en cualquier evento de registro.
 
-      <root level="DEBUG">
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="JSON_TCP" />
-      </root>
-    </configuration>
-    ```
-
-    **Nota:** Se añade `%mdc{keyThatDoesNotExist}` porque la configuración XML quita los espacios en blanco. Para obtener más información sobre el parámetro prefijo, consulta la [documentación de Logback][12].
-
-2. Añade la dependencia de codificador de Logstash a tu archivo `pom.xml`. Por ejemplo:
-
-    ```xml
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.9</version>
-    </dependency>
-    <dependency>
-      <groupId>net.logstash.logback</groupId>
-      <artifactId>logstash-logback-encoder</artifactId>
-      <version>6.6</version>
-    </dependency>
-    ```
-[11]: https://github.com/logstash/logstash-logback-encoder
-[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-{{< /site-region >}}
-## Para aprender más
-
-Enriquece los eventos de log con atributos contextuales.
-
-### Usar el parseador de valores clave
-
-El [parseador de valores clave][13] extrae cualquier patrón `<KEY>=<VALUE>` que reconoce en un evento de log.
-
-Para enriquecer los eventos de log en Java, puedes reescribir los mensajes en tu código e introduce secuencias `<KEY>=<VALUE>`.
+Para enriquecer tus eventos de registro en Java, puedes reescribir mensajes en tu código e introducir secuencias `<KEY>=<VALUE>`.
 
 Por ejemplo, si tienes:
 
@@ -601,7 +600,7 @@ Puedes cambiarlo a:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-Con el parseador de valores clave activado, cada par se extrae del JSON:
+Con el analizador de clave-valor habilitado, cada par se extrae del JSON:
 
 ```json
 {
@@ -612,13 +611,13 @@ Con el parseador de valores clave activado, cada par se extrae del JSON:
 }
 ```
 
-Puedes explotar el *scope* (contexto) como un campo, y *durationInMs* (duración en minutos) y *quantity* (cantidad) como medidas de log.
+Así que puedes utilizar *scope* como un campo, y *durationInMs* y *quantity* como medidas de registro.
 
-### MDC
+### MDC {#mdc}
 
-Otra opción para enriquecer tus logs es usar la función de [Mapped Diagnostic Contexts (MDC)][1] de Java.
+Otra opción para enriquecer tus registros es usar [Mapped Diagnostic Contexts (MDC)] de Java.
 
-Si utilizas SLF4J, usa el siguiente código Java:
+Si usas SLF4J, utiliza el siguiente código Java:
 
 ```java
 ...
@@ -636,23 +635,23 @@ Para generar este JSON:
 }
 ```
 
-**Nota**: MDC sólo permite tipos de cadena, así que no los utilices para métricas de valor numérico.
+**Nota**: MDC solo permite tipos de cadena, así que no los uses para métricas de valores numéricos.
 
-## Referencias adicionales
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://logback.qos.ch/manual/mdc.html
-[2]: /es/logs/log_configuration/parsing
-[3]: /es/tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /es/agent/logs/?tab=tailfiles#activate-log-collection
-[5]: /es/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /es/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /es/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: /es/logs/log_configuration/parsing/?tab=matchers
-[10]: /es/logs/explorer/#overview
-[11]: https://github.com/logstash/logstash-logback-encoder
-[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[13]: /es/logs/log_configuration/parsing/#key-value-or-logfmt
-[14]: /es/glossary/#tail
+[1]: /es/glossary/#tail
+[2]: http://logback.qos.ch/manual/mdc.html
+[3]: /es/logs/log_configuration/parsing
+[4]: /es/tracing/other_telemetry/connect_logs_and_traces/java/
+[5]: /es/agent/logs/?tab=tailfiles#activate-log-collection
+[6]: /es/agent/logs/?tab=tailfiles#custom-log-collection
+[7]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[8]: /es/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[9]: /es/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: /es/logs/log_configuration/parsing/?tab=matchers
+[11]: /es/logs/explorer/#overview
+[12]: /es/agent/?tab=Host-based
+[13]: https://github.com/logstash/logstash-logback-encoder
+[14]: /es/logs/log_configuration/parsing/#key-value-or-logfmt

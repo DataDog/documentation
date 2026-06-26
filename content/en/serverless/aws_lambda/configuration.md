@@ -48,6 +48,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
 - [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
+- [Authenticate with Workload Identity Federation](#authenticate-with-workload-identity-federation)
 - [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
@@ -791,6 +792,17 @@ The updated service modeling configuration is recommended.
 
 See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
 
+## Authenticate with Workload Identity Federation
+
+Instead of providing a static Datadog API key, you can authenticate the Datadog Lambda extension with [Workload Identity Federation][59]. The extension uses your function's AWS execution role credentials to request a managed Datadog API key that Datadog automatically rotates, so you don't store or rotate a key yourself.
+
+To use Workload Identity Federation:
+
+1. In Datadog, configure an AWS intake mapping that authorizes your function's execution role ARN. For setup steps, see [Set up Workload Identity Federation for the Datadog Agent][59].
+2. Set the `DD_ORG_UUID` environment variable on your function to your Datadog organization UUID. To find it, call the [{{< region-param key="dd_api" >}}/api/v2/current_user][60] endpoint. When `DD_ORG_UUID` is set, the extension authenticates with Workload Identity Federation, which takes precedence over other API key environment variables.
+
+This is available for version 96+ of the Datadog Lambda Extension. Workload Identity Federation for the Agent is available for Enterprise plans only.
+
 ## Reload API key secret periodically
 
 If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to periodically reload the secret. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret is reloaded when the API key is needed to send data, and it has been more than 43200 seconds since the last load.
@@ -866,3 +878,5 @@ If you have trouble configuring your installations, set the environment variable
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
 [58]: /observability_pipelines/sources/lambda_extension/
+[59]: /account_management/workload_identity_federation/#set-up-workload-identity-federation-for-the-datadog-agent
+[60]: https://app.datadoghq.com/api/v2/current_user

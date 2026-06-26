@@ -48,10 +48,10 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% tab "Logs" %}}
 
 1. Navigate to [Observability Pipelines][1].
-1. Select a [template][2] based on your use case or click **New Pipeline** on the top right side of the page.
+1. Select a [template][2] based on your use case or click {{< ui >}}New Pipeline{{< /ui >}} on the top right side of the page.
 1. Select and set up a [log source][3].
 1. Select and set up [destinations][5] for your processed logs.
-1. Click **Edit** on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
+1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
@@ -94,7 +94,7 @@ Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq
 1. Select the [Metric Tag Governance][2] template.
 1. Select and set up a [metrics source][3].
 1. Select and set up [destinations][5] for your processed metrics.
-1. Click **Edit** on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
+1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
@@ -118,15 +118,15 @@ Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq
 
 ### Install the Worker and deploy the pipeline
 
-After you have set up your source, processors, and destinations, click **Next: Install**. See [Install the Worker][12] for instructions on how to install the Worker for your platform. See [Advanced Worker Configurations][5] for bootstrapping options.
+After you have set up your source, processors, and destinations, click {{< ui >}}Next: Install{{< /ui >}}. See [Install the Worker][12] for instructions on how to install the Worker for your platform. See [Advanced Worker Configurations][5] for bootstrapping options.
 
 If you want to make changes to your pipeline after you have deployed it, see [Update Existing Pipelines][11].
 
 ### Enable out-of-the-box monitors for your pipeline
 
 1. Navigate to the [Pipelines][4] page and find your pipeline.
-1. Click **Enable monitors** in the **Monitors** column for your pipeline.
-1. Click **Start** to set up a monitor for one of the suggested use cases.<br>
+1. Click {{< ui >}}Enable monitors{{< /ui >}} in the {{< ui >}}Monitors{{< /ui >}} column for your pipeline.
+1. Click {{< ui >}}Start{{< /ui >}} to set up a monitor for one of the suggested use cases.<br>
     - The metric monitor is configured based on the selected use case. You can update the configuration to further customize it. See the [Metric monitor documentation][13] for more information.
 
 ## Set up a pipeline with the API
@@ -159,7 +159,7 @@ To clone a pipeline in the UI:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to clone.
-1. Click the cog at the top right side of the page, then select **Clone**.
+1. Click the cog at the top right side of the page, then select {{< ui >}}Clone{{< /ui >}}.
 
 ## Delete a pipeline
 
@@ -167,7 +167,7 @@ To delete a pipeline in the UI:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to delete.
-1. Click the cog at the top right side of the page, then select **Delete**.
+1. Click the cog at the top right side of the page, then select {{< ui >}}Delete{{< /ui >}}.
 
 **Note**: You cannot delete an active pipeline. You must stop all Workers for a pipeline before you can delete it.
 

@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
     tag: "Blog"
     text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+    tag: "Learning Center"
+    text: "Investigate with LLM Observability"
 ---
 
 ## Overview
