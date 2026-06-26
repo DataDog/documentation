@@ -131,6 +131,14 @@
 
 }
 
+[data-home-variant-content="legacy"]:not([hidden]) {
+    margin-top: 10px;
+
+    @media (min-width: 768px) {
+        margin-top: 30px;
+    }
+}
+
 .home-content {
     position: relative;
 
