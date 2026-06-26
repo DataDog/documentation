@@ -28,6 +28,8 @@ To create a [process check monitor][2] in Datadog, use the main navigation: {{< 
 
 From the dropdown list, select a process to monitor. Filter the list by entering your search criteria.
 
+**Note**: The process list is populated by the `search_string` values defined in your [Process Check agent configuration][1]. When `exact_match` is set to `false`, those values are interpreted as Python regular expressions using `re.search()`. See the [Process integration documentation][1] for configuration details and escaping examples.
+
 ### Pick monitor scope
 
 Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. Only hosts or tags reporting a status for the selected process are displayed. If you need to exclude certain hosts, use the second field to list names or tags.
