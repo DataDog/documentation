@@ -33,8 +33,8 @@ describe("MobileNavToggle", () => {
     renderWithOverlay();
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
-    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-menu-open")).toBe(false);
-    expect(document.getElementById("mobile-nav-bg")?.classList.contains("mobile-bg-open")).toBe(false);
+    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-nav__panel--open")).toBe(false);
+    expect(document.getElementById("mobile-nav-bg")?.classList.contains("mobile-nav__backdrop--open")).toBe(false);
   });
 
   it("opens the overlay and backdrop on click", async () => {
@@ -46,8 +46,8 @@ describe("MobileNavToggle", () => {
 
     expect(toggle.getAttribute("aria-expanded")).toBe("true");
     expect(toggle.classList.contains("open")).toBe(true);
-    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-menu-open")).toBe(true);
-    expect(document.getElementById("mobile-nav-bg")?.classList.contains("mobile-bg-open")).toBe(true);
+    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-nav__panel--open")).toBe(true);
+    expect(document.getElementById("mobile-nav-bg")?.classList.contains("mobile-nav__backdrop--open")).toBe(true);
     expect(document.documentElement.style.overflow).toBe("hidden");
   });
 
@@ -60,7 +60,7 @@ describe("MobileNavToggle", () => {
     await user.click(toggle);
 
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
-    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-menu-open")).toBe(false);
+    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-nav__panel--open")).toBe(false);
     expect(document.documentElement.style.overflow).toBe("");
   });
 
@@ -70,9 +70,9 @@ describe("MobileNavToggle", () => {
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
 
     await user.click(toggle);
-    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-menu-open")).toBe(true);
+    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-nav__panel--open")).toBe(true);
 
     await user.click(document.getElementById("mobile-nav-bg")!);
-    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-menu-open")).toBe(false);
+    expect(document.getElementById("mobile-nav")?.classList.contains("mobile-nav__panel--open")).toBe(false);
   });
 });

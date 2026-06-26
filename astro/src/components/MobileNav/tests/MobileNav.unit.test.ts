@@ -36,9 +36,11 @@ describe("MobileNav.astro", () => {
     ]);
   });
 
-  it("renders the hamburger toggle and overlay shell", async () => {
+  it("renders the overlay shell (panel, backdrop, search)", async () => {
+    // The hamburger toggle lives in the header's mobile row (see
+    // MobileNavToggle.unit.test.ts), not here; this component renders only the
+    // build-time overlay it manipulates.
     const doc = await renderMobileNav();
-    expect(doc.querySelector(".navbar-toggler")).not.toBeNull();
     expect(doc.querySelector("#mobile-nav")).not.toBeNull();
     expect(doc.querySelector("#mobile-nav-bg")).not.toBeNull();
     expect(doc.querySelector(".mobile-nav__search")).not.toBeNull();

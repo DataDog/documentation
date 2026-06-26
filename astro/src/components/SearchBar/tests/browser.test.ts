@@ -41,7 +41,7 @@ test.describe('SearchBar component — mobile-nav placement', () => {
     const input = mobileSearch.locator('.search-bar__input');
 
     await page.locator('.navbar-toggler').click();
-    await expect(page.locator('#mobile-nav.mobile-menu-open')).toBeVisible();
+    await expect(page.locator('#mobile-nav.mobile-nav__panel--open')).toBeVisible();
 
     await expect(mobileSearch).toBeVisible();
     await input.click();

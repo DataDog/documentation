@@ -82,7 +82,7 @@ The unit Vitest config redirects live spec imports to these fixtures via a plugi
 
 ## Components
 
-- Use CSS modules with full BEM classes, for compatibility with `classListFactory` (which generates the `cl` function that applies hashed BEM classes automatically based on a static BEM class name).
+- Use CSS modules with full BEM classes, for compatibility with `classListFactory` (which generates the `cl` function that applies hashed BEM classes automatically based on a static BEM class name). Name every class `block`, `block__element`, or `block__element--modifier` — never a shorthand or camelCase name.
 - Use `i18n` to localize strings where possible, or use a `TODO` comment if Hugo does not yet have the desired i18n string. Pass `i18n` labels to Preact using a `labels` prop.
 - Pass inline svgs to Preact using an `svgs` prop.
 - If a component is static (not interactive, no JS needed), use vanilla Astro.

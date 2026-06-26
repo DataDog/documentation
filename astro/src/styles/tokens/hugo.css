@@ -65,8 +65,20 @@
 
   /* Hugo mobile-nav overlay */
   --hugo-mobile-nav-bg-opacity: 0.5;
+  --hugo-mobile-nav-bg-color: #000000;          /* backdrop scrim, faded in via opacity */
   --hugo-mobile-nav-width-md: 400px;
-  --hugo-mobile-nav-padding-top: 90px;
+  --hugo-mobile-nav-offscreen-x: -500px;        /* panel's resting right offset (off-screen) */
+  --hugo-mobile-nav-quicknav-icon-size: 21px;
+  --hugo-mobile-nav-indent-base: 22px;          /* accordion indent at depth 0 */
+  --hugo-mobile-nav-indent-step: 16px;          /* added per nesting level */
+  --hugo-mobile-nav-caret-offset: 22px;         /* caret inset from the section's right edge */
+  --hugo-mobile-nav-link-padding-end: 14px;
+  --hugo-mobile-nav-hamburger-padding-x: 10px;
+  --hugo-mobile-nav-hamburger-bar-width: 22px;
+  --hugo-mobile-nav-hamburger-bar-radius: 1px;
+  --hugo-mobile-nav-hamburger-bar-gap: 4px;     /* gap between the three closed bars */
+  --hugo-mobile-nav-hamburger-bar-offset-x: -8.5px; /* centers the rotated open-state bars */
+  --hugo-mobile-nav-search-submit-padding-start: 22px;
 
   /* Hugo button gradient (GET STARTED FREE) */
   --hugo-btn-gradient-start: #3023ae;

@@ -23,7 +23,10 @@ const cl = classListFactory(styles);
 // Hugo's mobile nav only expands top-level sections; subsections are plain links.
 const hasChildren = level === 0 && node.children.length > 0;
 
-// API docs (/api/...) are served by this Astro site; all other links go to Hugo.
+// Second-stage href resolution: `docsNavMenu.getDocsNavTree` already localizes
+// and root-relativizes each URL; here we choose the origin. API docs (/api/...)
+// are served by this Astro site, so they stay relative; all other links point
+// at the Hugo site.
 function resolveNavHref(href: string | null): string {
   if (!href) return HUGO_ORIGIN + "/";
   if (href.startsWith("/api/")) return href;
@@ -36,29 +39,29 @@ function resolveNavHref(href: string | null): string {
 {
   hasChildren ? (
     <details
-      class={`${cl("section")} mobile-nav__section`}
+      class={cl("mobile-nav__section")}
       data-level={level}
       style={`--depth:${level}`}
       open={open}
     >
-      <summary class={`${cl("sectionToggle")} mobile-nav__section-toggle`}>
+      <summary class={cl("mobile-nav__section-toggle")}>
         <span>{node.label}</span>
-        <span class={`${cl("caret")} mobile-nav__caret`} aria-hidden="true">
+        <span class={cl("mobile-nav__caret")} aria-hidden="true">
           <svg viewBox="0 0 17.78 10.51" width="18">
             <polyline
-              class={cl("caretArrow")}
+              class={cl("mobile-nav__caret-arrow")}
               points="16.92 1.14 8.92 9.14 0.92 1.14"
             />
           </svg>
         </span>
       </summary>
-      <ul class={`${cl("sublist")} mobile-nav__sublist`}>
+      <ul class={cl("mobile-nav__sublist")}>
         {/* A section that is itself a page stays reachable via its own link,
             matching Hugo's "add parent url as a child nav item". */}
         {node.href && (
           <li>
             <a
-              class={`${cl("link")} mobile-nav__link`}
+              class={cl("mobile-nav__link")}
               style={`--depth:${level + 1}`}
               href={resolveNavHref(node.href)}
             >
@@ -75,7 +78,7 @@ function resolveNavHref(href: string | null): string {
     </details>
   ) : (
     <a
-      class={`${cl("link")} mobile-nav__link`}
+      class={cl("mobile-nav__link")}
       data-level={level}
       style={`--depth:${level}`}
       href={resolveNavHref(node.href)}

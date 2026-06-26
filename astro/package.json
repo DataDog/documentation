@@ -12,7 +12,7 @@
     "test:headless": "vitest run",
     "test:browser": "USE_DEV_SERVER=true playwright test",
     "test-ai": "npm run test:headless-ai && npm run test:browser-ai",
-    "test:headless-ai": "vitest run --reporter=dot --silent",
+    "test:headless-ai": "vitest run --reporter=dot --silent=true",
     "test:browser-ai": "USE_DEV_SERVER=true playwright test --reporter=dot"
   },
   "dependencies": {

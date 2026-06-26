@@ -66,7 +66,7 @@
 }
 
 .search-bar__submit--mobile {
-  padding-left: 22px;
+  padding-left: var(--hugo-mobile-nav-search-submit-padding-start);
 }
 
 /* Visual hint that `/` focuses the input. Ported from Hugo's

@@ -2,19 +2,17 @@
 /**
  * Mobile navigation overlay, ported from Hugo's `mobile-documentation.html`:
  * a quick-links row (Home / Docs / API with icons), a search box, and the full
- * documentation menu rendered as a `<details>` accordion. "Essentials" is open
- * by default because it contains the API docs.
+ * documentation menu rendered as a `<details>` accordion, all sections collapsed
+ * by default.
  *
  * The menu tree is large, so it is rendered here at build time and never
  * serialized into a Preact island. Only the small `MobileNavToggle` island
- * (hamburger + open/close) is hydrated; it manipulates the already-rendered
- * overlay via element references.
+ * (hamburger + open/close) is hydrated; it lives in the header's mobile row
+ * (see Header.astro) and manipulates this already-rendered overlay via element
+ * references, so this component renders only the backdrop and panel.
  */
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import MobileNavToggle, {
-  type MobileNavLabels,
-} from "./MobileNavToggle.tsx";
 import MobileNavSection from "./MobileNavSection.astro";
 import SearchBar, {
   type SearchBarLabels,
@@ -26,19 +24,15 @@ import { i18n } from "@lib/i18n/i18n";
 
 interface Props {
   lang?: Locale;
-  showToggle?: boolean;
 }
 
-const { lang = DEFAULT_LOCALE, showToggle = true } = Astro.props;
+const { lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
 
 const tree = getDocsNavTree(lang);
 
 // TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
-const toggleLabels: MobileNavLabels = {
-  "Toggle navigation": "Toggle navigation",
-};
 const quicknav = [
   { label: i18n("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
   { label: i18n("docs") || "Docs", href: localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
@@ -55,26 +49,15 @@ const searchLabels: SearchBarLabels = {
 ---
 
 <div id="mobile-nav-root">
-  {showToggle && (
-    <MobileNavToggle
-      client:load
-      labels={toggleLabels}
-      externalContext={{
-        scope: "mobile-nav-root",
-        entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
-      }}
-    />
-  )}
+  <div id="mobile-nav-bg" class={cl("mobile-nav__backdrop")}></div>
 
-  <div id="mobile-nav-bg" class={cl("bg")}></div>
-
-  <div id="mobile-nav" class={cl("mobileNav")}>
-    <div class={`${cl("quicknav")} mobile-nav__quicknav`}>
+  <div id="mobile-nav" class={cl("mobile-nav__panel")}>
+    <div class={cl("mobile-nav__quicknav")}>
       {
         quicknav.map((item) => (
-          <a class={cl("quicknavLink")} href={item.href}>
+          <a class={cl("mobile-nav__quicknav-link")} href={item.href}>
             <img
-              class={cl("quicknavIcon")}
+              class={cl("mobile-nav__quicknav-icon")}
               src={`/images/icons/${item.icon}.png`}
               width="21"
               height="21"
@@ -87,18 +70,15 @@ const searchLabels: SearchBarLabels = {
       }
     </div>
 
-    <div class={`${cl("search")} mobile-nav__search`}>
+    <div class={cl("mobile-nav__search")}>
       <SearchBar client:load variant="mobile" labels={searchLabels} />
     </div>
 
-    <ul class={`${cl("list")} mobile-nav__list`}>
+    <ul class={cl("mobile-nav__list")}>
       {
         tree.map((node) => (
           <li>
-            <MobileNavSection
-              node={node}
-              level={0}
-            />
+            <MobileNavSection node={node} level={0} />
           </li>
         ))
       }

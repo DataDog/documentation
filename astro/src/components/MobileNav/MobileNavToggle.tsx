@@ -24,9 +24,10 @@ interface Props {
 /**
  * The hamburger button plus the open/close behavior for the mobile overlay.
  * The overlay and its (large) menu tree live in the DOM already; this island
- * only flips the Hugo-compatible `mobile-menu-open` / `mobile-bg-open` classes
- * and the body scroll lock. The toggle is applied synchronously in the click
- * handler so the panel never lags behind the button state.
+ * only flips the plain `mobile-nav__panel--open` / `mobile-nav__backdrop--open`
+ * modifier classes (it can't reference the hashed module names) and the body
+ * scroll lock. The toggle is applied synchronously in the click handler so the
+ * panel never lags behind the button state.
  */
 export default function MobileNavToggle({ labels, externalContext }: Props) {
   const [open, setOpen] = useState(false);
@@ -34,8 +35,8 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
   const backdropRef = useRef<HTMLElement | null>(null);
 
   function applyOpen(next: boolean) {
-    overlayRef.current?.classList.toggle("mobile-menu-open", next);
-    backdropRef.current?.classList.toggle("mobile-bg-open", next);
+    overlayRef.current?.classList.toggle("mobile-nav__panel--open", next);
+    backdropRef.current?.classList.toggle("mobile-nav__backdrop--open", next);
     document.documentElement.style.overflow = next ? "hidden" : "";
   }
 
