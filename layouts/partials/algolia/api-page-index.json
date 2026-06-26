@@ -23,10 +23,9 @@
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
 
-{{/* PATH-INDEXING TOGGLE: uncomment the line below to append "METHOD /path" to the
-     content field so endpoint REST paths become searchable. Appended at the END so it
-     doesn't pollute the start of the auto-embedded content. Left commented out for now. */}}
-{{/* {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }} */}}
+{{/* Append "METHOD /path" to the content field so endpoint REST paths are searchable.
+     Appended at the END so it doesn't pollute the start of the auto-embedded content. */}}
+{{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
 
 {{ $endpoint_slug := $section_header | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
