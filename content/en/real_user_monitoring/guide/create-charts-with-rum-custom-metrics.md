@@ -36,7 +36,7 @@ The following table maps common RUM use cases to widget types:
 
 | Use case | Recommended widget |
 |---|---|
-| Error rate or session count over time | timeseries |
+| Error rate or session count over time | Timeseries |
 | Top pages by load time | Top List |
 | Single KPI such as crash-free rate | Query Value |
 | Distribution of load times (requires [percentile aggregation][1]) | Distribution |
