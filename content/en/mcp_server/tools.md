@@ -1271,7 +1271,7 @@ Creates or updates a custom RUM metric. Checks immutable fields before updating 
 
 ### `delete_rum_metric`
 *Toolset: **rum***\
-*Permissions Required: `RUM Generate Metrics`*\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
 Permanently deletes a custom RUM metric by ID. This operation is destructive and idempotent.
 
 - Delete the custom RUM metric `rum.view.my_custom_metric`.
