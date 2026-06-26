@@ -1115,6 +1115,93 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_secu
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
 
+### `get_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Read`*\
+Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
+
+- List all App & API Protection passlist entries.
+- Show me active WAF exclusion filters.
+- Check existing passlist suppressions before I add a new one.
+
+### `upsert_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
+
+- Add a WAF passlist entry for service "checkout-service" on endpoint "/api/pay" to ignore rule "sqli-detection".
+- Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
+- Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
+
+### `delete_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Deletes an existing WAF exclusion filter (passlist) entry.
+
+- Delete WAF exclusion filter "passlist-abc-123".
+- Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
+
+### `get_datadog_security_denylist`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Read`*\
+Lists blocked IPs, users, and user agents (denylist entries) with support for filtering and token-aware truncation.
+
+- List all blocked entities on the AppSec denylist.
+- Show me blocked IP addresses from yesterday.
+- Check if IP "198.51.100.42" is on the security denylist.
+
+### `upsert_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Adds or updates a denylist block for an IP, user, or user agent with an expiration.
+
+- Block IP "198.51.100.42" on the denylist for 24 hours.
+- Add user "attacker_user_99" to the blocked entities denylist.
+- Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
+
+### `delete_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Unblocks a previously denylisted entity by setting its expiration in the past.
+
+- Unblock IP "198.51.100.42" on the denylist.
+- Remove user "attacker_user_99" from the blocked entities list.
+
+### `get_datadog_security_aap_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Read`*\
+Reads App & API Protection (AAP) WAF custom rules, either retrieving a single rule by ID or enumerating all rules.
+
+- List all custom WAF rules for my organization.
+- Get the definition of AAP custom rule "rule-xyz-123".
+- Show me custom security response rules.
+
+### `upsert_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Creates or updates an AAP WAF custom rule across the attack attempt, business logic, or security response categories. Action can block live traffic.
+
+- Create a custom WAF rule to block requests containing path "/admin" under the business logic category.
+- Update AAP custom rule "rule-xyz-123" to monitor traffic instead of block.
+- Upsert a custom rule for attack attempts matching pattern "union select" in the query string.
+
+### `delete_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Write`*\
+Deletes an AAP custom WAF rule.
+
+- Delete custom WAF rule "rule-xyz-123".
+- Remove the AAP custom rule that blocks "/admin" traffic.
+
+### `get_datadog_security_aap_blocking_config`
+*Toolset: **security***\
+*Permissions Required: `AppSec Protection Read`*\
+Retrieves the organization's App & API Protection (AAP) blocking status and default blocking behavior.
+
+- Get the default WAF blocking behavior for our organization.
+- Is AppSec blocking active in our environment?
+- Show me the AAP blocking configuration.
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).

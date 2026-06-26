@@ -127,6 +127,48 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Deletes a suppression rule.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
+### App & API Protection
+
+`get_datadog_security_passlist`
+: Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
+: *Permissions required: `AppSec Protection Read`*
+
+`upsert_datadog_security_passlist`
+: Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
+: *Permissions required: `AppSec Protection Write`*
+
+`delete_datadog_security_passlist`
+: Deletes an existing WAF exclusion filter (passlist) entry.
+: *Permissions required: `AppSec Protection Write`*
+
+`get_datadog_security_denylist`
+: Lists blocked IPs, users, and user agents (denylist entries) with support for filtering and token-aware truncation.
+: *Permissions required: `AppSec Protection Read`*
+
+`upsert_datadog_security_denylist_entry`
+: Adds or updates a denylist block for an IP, user, or user agent with an expiration.
+: *Permissions required: `AppSec Protection Write`*
+
+`delete_datadog_security_denylist_entry`
+: Unblocks a previously denylisted entity by setting its expiration in the past.
+: *Permissions required: `AppSec Protection Write`*
+
+`get_datadog_security_aap_custom_rules`
+: Reads App & API Protection (AAP) WAF custom rules, either retrieving a single rule by ID or enumerating all rules.
+: *Permissions required: `AppSec Protection Read`*
+
+`upsert_datadog_security_aap_custom_rule`
+: Creates or updates an AAP WAF custom rule across the attack attempt, business logic, or security response categories. Action can block live traffic.
+: *Permissions required: `AppSec Protection Write`*
+
+`delete_datadog_security_aap_custom_rule`
+: Deletes an AAP custom WAF rule.
+: *Permissions required: `AppSec Protection Write`*
+
+`get_datadog_security_aap_blocking_config`
+: Retrieves the organization's App & API Protection (AAP) blocking status and default blocking behavior.
+: *Permissions required: `AppSec Protection Read`*
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
