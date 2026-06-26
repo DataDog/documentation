@@ -16,10 +16,6 @@ further_reading:
   text: "Getting Started with Test Optimization"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
