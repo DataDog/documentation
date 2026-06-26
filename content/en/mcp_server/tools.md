@@ -204,6 +204,15 @@ Search Datadog RUM events using advanced query syntax.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
+### `aggregate_rum_events`
+*Toolset: **core***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
+
+- Count JavaScript errors by page in the last 24 hours.
+- Show me the p95 loading time grouped by country for my main RUM application.
+- How many sessions had a Core Web Vitals failure this week?
+
 ### `create_datadog_notebook`
 *Toolset: **core***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
@@ -1210,9 +1219,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
-
-<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1253,6 +1260,22 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
+
+- Create a custom RUM metric that counts page views on the checkout page, grouped by country.
+- Update the filter on my "error-rate-by-service" custom metric to exclude bot traffic.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Generate Metrics`*\
+Permanently deletes a custom RUM metric by ID. This operation is destructive and idempotent.
+
+- Delete the custom RUM metric with ID "my-custom-metric".
+- Remove the "legacy-page-views" RUM metric from my organization.
 
 ## Security
 
