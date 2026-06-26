@@ -116,9 +116,9 @@ Agent Observability scanning uses a managed configuration model that differs fro
 
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
-- **{{< ui >}}Redact{{< /ui >}}**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
-- **{{< ui >}}Partially redact{{< /ui >}}**: Replace a specific portion of all matching values.
-- **{{< ui >}}Hash{{< /ui >}}**: Replace the entire matched data with a non-reversible unique identifier.
+- {{< ui >}}Redact{{< /ui >}}: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
+- {{< ui >}}Partially redact{{< /ui >}}: Replace a specific portion of all matching values.
+- {{< ui >}}Hash{{< /ui >}}: Replace the entire matched data with a non-reversible unique identifier.
 
 To configure scanning for Agent Observability data, navigate to the [Agent Observability Settings page][18] in Sensitive Data Scanner settings. For more information about Agent Observability, see the [Agent Observability documentation][20].
 
