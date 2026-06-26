@@ -31,6 +31,7 @@
         {{ end }}
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
+        {{/* $endpoint_path is the REST path (map key, e.g. "/api/v1/..."); $method is the HTTP verb (map key, e.g. "get"). Both are forwarded so api-page-index.json can make the path searchable via the content field. */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
             {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
@@ -61,6 +62,7 @@
         {{ end }}
 
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
+        {{/* $endpoint_path is the REST path (map key, e.g. "/api/v2/..."); $method is the HTTP verb (map key, e.g. "get"). Both are forwarded so api-page-index.json can make the path searchable via the content field. */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
             {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
