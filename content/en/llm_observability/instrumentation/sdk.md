@@ -90,7 +90,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans, so a trace is always kept or dropped as a whole. The decision is also propagated to downstream services, keeping distributed traces intact. This client-side sampling happens before ingestion and is independent of in-app controls such as [automation rules][2]. It does not affect [APM trace sampling][3], and APM sampling does not drop Agent Observability data.
+<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). This sampling is independent of in-app controls such as [automation rules][2] and [APM trace sampling][3].
 
 `DD_API_KEY`
 : optional - _string_
@@ -132,7 +132,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
-<br />The proportion of traces to sample for Agent Observability, between `0.0` (drop everything) and `1.0` (keep everything). The sampling decision is computed once on the root span, inherited by all of its child spans, and propagated to downstream services, so a distributed trace is kept or dropped as a whole. Spans are always sent to Datadog, and the sampling decision is applied during ingestion. This is independent of in-app controls such as [automation rules][2], and does not affect [APM trace sampling][3].
+<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). This sampling is independent of in-app controls such as [automation rules][2] and [APM trace sampling][3].
 
 `DD_API_KEY`
 : optional - _string_
@@ -222,7 +222,7 @@ LLMObs.enable(
 
 `sample_rate`
 : optional - _float_
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans, so a trace is always kept or dropped as a whole. Values outside the `[0.0, 1.0]` range are ignored. This takes precedence over `DD_LLMOBS_SAMPLE_RATE`; if not provided, this defaults to the value of that environment variable (`1.0` if unset).
+<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). If unset, this defaults to `DD_LLMOBS_SAMPLE_RATE`, but otherwise takes precedence over the environment variable.
 
 `site`
 : optional - _string_
@@ -276,7 +276,7 @@ const llmobs = tracer.llmobs;
 
 `sampleRate`
 : optional - _number_
-<br />The proportion of traces to sample for Agent Observability, between `0` and `1` (inclusive). The sampling decision is computed once on the root span, inherited by all of its child spans, and propagated to downstream services, so a distributed trace is kept or dropped as a whole. This takes precedence over `DD_LLMOBS_SAMPLE_RATE`; if not provided, it defaults to the value of that environment variable (`1` if unset).
+<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). If unset, this defaults to `DD_LLMOBS_SAMPLE_RATE`, but otherwise takes precedence over the environment variable.
 
 **Options for general tracer configuration**:
 
