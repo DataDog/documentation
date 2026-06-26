@@ -5,8 +5,8 @@
 {{ $lang := .lang }}
 {{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
 {{ $endpoint_data := .endpoint_data }}
-{{ $endpoint_path := .endpoint_path }} {{/* REST path, e.g. "/api/v2/..." (used only by the commented-out path-indexing toggle below) */}}
-{{ $method := .method }}            {{/* HTTP verb, e.g. "get" (used only by the commented-out path-indexing toggle below) */}}
+{{ $endpoint_path := .endpoint_path }}
+{{ $method := .method }}
 {{ $api_v1_translate_actions := .api_v1_translate_actions }}
 {{ $api_v2_translate_actions := .api_v2_translate_actions }}
 
@@ -23,8 +23,7 @@
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
 
-{{/* Append "METHOD /path" to the content field so endpoint REST paths are searchable.
-     Appended at the END so it doesn't pollute the start of the auto-embedded content. */}}
+{{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
 {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
 
 {{ $endpoint_slug := $section_header | anchorize }}
