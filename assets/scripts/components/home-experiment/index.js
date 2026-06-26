@@ -2,13 +2,14 @@ import { initializeFeatureFlags, getStringFlag } from 'scripts/helpers/feature-f
 import { bindHomeTracking } from './tracking';
 
 const FLAG_KEY = 'docs-home-products-browse-experiment';
-const DEFAULT_VARIANT = 'new';
+const DEFAULT_VARIANT = 'legacy';
 
 const newEl = document.querySelector('[data-home-variant-content="new"]');
 const legacyEl = document.querySelector('[data-home-variant-content="legacy"]');
 
 if (newEl && legacyEl) {
     initializeFeatureFlags().then((client) => {
+        console.log('[home-experiment] feature flags initialized', client);
         const variant = getStringFlag(client, FLAG_KEY, DEFAULT_VARIANT);
         if (variant === 'legacy') {
             newEl.setAttribute('hidden', '');
