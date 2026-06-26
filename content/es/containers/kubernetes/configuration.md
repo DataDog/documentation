@@ -3,45 +3,44 @@ aliases:
 - /es/integrations/faq/gathering-kubernetes-events
 - /es/agent/kubernetes/event_collection
 - /es/agent/kubernetes/configuration
-description: Opciones de configuración adicionales para APM, logs, procesos, eventos
-  y otras funciones después de instalar el Datadog Agent
-title: Configurar mejor el Datadog Agent en Kubernetes
+description: Opciones de configuración adicionales para APM, registros, procesos,
+  eventos y otras capacidades después de instalar el Agente de Datadog
+title: Configurar aún más el Agente de Datadog en Kubernetes
 ---
+## Descripción general {#overview}
 
-## Información general
+Después de haber instalado el Agente de Datadog en su entorno de Kubernetes, puede elegir opciones de configuración adicionales.
 
-Después de haber instalado el Datadog Agent en tu entorno de Kubernetes, puedes elegir opciones de configuración adicionales.
-
-### Habilita a Datadog para recopilar:
-- [Trazas (traces) (APM)](#enable-apm-and-tracing)
+### Habilitar a Datadog para recopilar: {#enable-datadog-to-collect}
+- [Trazas (APM)](#enable-apm-and-tracing)
 - [Eventos de Kubernetes](#enable-kubernetes-event-collection)
 - [CNM](#enable-cnm-collection)
-- [Logs](#enable-log-collection)
+- [Registros](#enable-log-collection)
 - [Procesos](#enable-process-collection)
 
-### Otras capacidades
-- [Datadog Cluster Agent](#datadog-cluster-agent)
+### Otras capacidades {#other-capabilities}
+- [Agente de Clúster de Datadog](#datadog-cluster-agent)
 - [Integraciones](#integrations)
 - [Vista de contenedores](#containers-view)
-- [Orchestrator Explorer](#orchestrator-explorer)
+- [Explorador de Orquestador](#orchestrator-explorer)
 - [Servidor de métricas externas](#custom-metrics-server)
 
-### Más configuraciones
+### Más configuraciones {#more-configurations}
 - [Variables de entorno](#environment-variables)
-- [Métricas personalizadas de DogStatsD](#configure-dogstatsd)
-- [Asignación de etiqueta (tag)](#configure-tag-mapping)
+- [DogStatsD para métricas personalizadas](#configure-dogstatsd)
+- [Mapeo de etiquetas](#configure-tag-mapping)
 - [Secretos](#using-secret-files)
 - [Ignorar contenedores](#ignore-containers)
-- [Tiempo de ejecución del servidor de la API de Kubernetes](#kubernetes-api-server-timeout)
-- [Configuración del proxy](#proxy-settings)
-- [Autodiscovery](#Autodiscovery)
-- [Definir nombre de clúster](#set-cluster-name)
-- [Miscelánea](#miscellaneous)
+- [Tiempo de espera del servidor API de Kubernetes](#kubernetes-api-server-timeout)
+- [Configuraciones de proxy](#proxy-settings)
+- [Autodiscovery](#autodiscovery)
+- [Establecer nombre del clúster](#set-cluster-name)
+- [Varios](#miscellaneous)
 
-## Activar APM y rastreo
+## Habilitar APM y trazado {#enable-apm-and-tracing}
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
 Edita tu `datadog-agent.yaml` para establecer `features.apm.enabled` en `true`.
 
@@ -65,9 +64,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-En Helm, APM está **habilitado por defecto** sobre la canalización de UDS o Windows.
+En Helm, APM está **habilitado por defecto** sobre UDS o tubería con nombre de Windows.
 
-Para comprobarlo, asegúrate de que `datadog.apm.socketEnabled` está configurado como `true` en tu `values.yaml`.
+Para verificar, asegúrate de que `datadog.apm.socketEnabled` esté establecido en `true` en tu `values.yaml`.
 
 ```yaml
 datadog:
@@ -78,16 +77,16 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para obtener más información, consulta [Recopilación de trazas de Kubernetes][16].
+Para más información, consulta [Colección de trazas de Kubernetes][16].
 
-## Activar la recopilación de eventos de Kubernetes
+## Habilitar colección de eventos de Kubernetes {#enable-kubernetes-event-collection}
 
-Utiliza el [Datadog Cluster Agent][2] para recopilar eventos de Kubernetes.
+Usa el [Agente de Clúster de Datadog][2] para recopilar eventos de Kubernetes. 
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-La recopilación de eventos está activada por defecto por el Datadog Operator. Esto se puede gestionar en la configuración `features.eventCollection.collectKubernetesEvents` en tu `datadog-agent.yaml`.
+La colección de eventos está habilitada por defecto por el Operador de Datadog. Esto se puede gestionar en la configuración `features.eventCollection.collectKubernetesEvents` en tu `datadog-agent.yaml`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -108,7 +107,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Para recopilar eventos de Kubernetes con el Datadog Cluster Agent, asegúrate de que las opciones `clusterAgent.enabled`, `datadog.collectEvents` y `clusterAgent.rbac.create` están configuradas como `true` en tu archivo `datadog-values.yaml`.
+Para recopilar eventos de Kubernetes con el Agente de Clúster de Datadog, asegúrate de que las opciones `clusterAgent.enabled`, `datadog.collectEvents` y `clusterAgent.rbac.create` estén establecidas en `true` en tu archivo `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -119,7 +118,7 @@ clusterAgent:
     create: true
 ```
 
-Si no deseas utilizar la opción de Cluster Agent, puedes hacer que un Node Agent recopila eventos de Kubernetes configurando las opciones `datadog.leaderElection`, `datadog.collectEvents` y `agents.rbac.create` como `true` en tu archivo `datadog-values.yaml`.
+Si no deseas usar el Agente de Clúster, aún puedes tener un Agente de Nodo que recopile eventos de Kubernetes estableciendo las opciones `datadog.leaderElection`, `datadog.collectEvents` y `agents.rbac.create` en `true` en tu archivo `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -135,14 +134,14 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para la configuración de DaemonSet, consulta [Recopilación de eventos de Cluster Agent en DaemonSet][14].
+Para la configuración de DaemonSet, consulte [Recopilación de eventos del Cluster Agent de DaemonSet][14].
 
-## Activar la recopilación de CNM
+## Habilitar la colección de CNM {#enable-cnm-collection}
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-En tu `datadog-agent.yaml`, define `features.npm.enabled` como `true`.
+En su `datadog-agent.yaml`, configure `features.npm.enabled` a `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -159,7 +158,7 @@ spec:
       enabled: true
 ```
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -168,7 +167,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Actualiza tu `datadog-values.yaml` con la siguiente configuración:
+Actualice su `datadog-values.yaml` con la siguiente configuración:
 
 ```yaml
 datadog:
@@ -177,7 +176,7 @@ datadog:
     enabled: true
 ```
 
-A continuación, actualiza tu tabla de Helm:
+Luego actualice su gráfico de Helm:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -186,13 +185,13 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-Para ver más información, consulta [Cloud Network Monitoring][18].
+Para más información, consulte [Monitoreo de red en la nube][18].
 
-## Activar la recopilación de log
+## Habilitar la colección de registro {#enable-log-collection}
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-En tu `datadog-agent.yaml`, establece `features.logCollection.enabled` y `features.logCollection.containerCollectAll` en `true`.
+{{% tab "Operador de Datadog" %}}
+En su `datadog-agent.yaml`, configure `features.logCollection.enabled` y `features.logCollection.containerCollectAll` a `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -210,7 +209,7 @@ spec:
       containerCollectAll: true
 ```
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -218,7 +217,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Actualiza tu `datadog-values.yaml` con la siguiente configuración:
+Actualice su `datadog-values.yaml` con la siguiente configuración:
 
 ```yaml
 datadog:
@@ -228,7 +227,7 @@ datadog:
     containerCollectAll: true
 ```
 
-A continuación, actualiza tu tabla de Helm:
+Luego actualice su gráfico de Helm:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -236,13 +235,13 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-Para obtener más información, consulta [Recopilación de log de Kubernetes][17].
+Para más información, consulte [Colección de registro de Kubernetes][17].
 
-## Activar la recopilación de procesos
+## Habilitar la colección de procesos {#enable-process-collection}
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-En tu `datadog-agent.yaml`, establece `features.liveProcessCollection.enabled` en `true`.
+{{% tab "Operador de Datadog" %}}
+En su `datadog-agent.yaml`, configure `features.liveProcessCollection.enabled` a `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -259,7 +258,7 @@ spec:
       enabled: true
 ```
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -267,7 +266,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Actualiza tu `datadog-values.yaml` con la siguiente configuración:
+Actualice su `datadog-values.yaml` con la siguiente configuración:
 
 ```yaml
 datadog:
@@ -277,7 +276,7 @@ datadog:
     processCollection: true
 ```
 
-A continuación, actualiza tu tabla de Helm:
+Luego actualice su gráfico de Helm:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -285,21 +284,21 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-Para obtener más información, consulta [Live Processes][23]
-## Datadog Cluster Agent
+Para más información, consulte [Live Processes][23]
+## Datadog Cluster Agent {#datadog-cluster-agent}
 
-Datadog Cluster Agent proporciona un enfoque optimizado y centralizado para recopilar datos de monitorización del clúster. Datadog recomienda encarecidamente el uso de Cluster Agent para la monitorización de Kubernetes.
+El Datadog Cluster Agent proporciona un enfoque centralizado y simplificado para la recopilación de datos de seguimiento a nivel de clúster. Datadog recomienda encarecidamente utilizar el Cluster Agent para monitorear Kubernetes.
 
-Datadog Operator v1.0.0+ y tabla de Helm v2.7.0+ **habilitan por defecto el Cluster Agent **. No es necesaria ninguna otra configuración.
+El operador de Datadog v1.0.0+ y el gráfico de Helm v2.7.0+ **habilitan el Cluster Agent por defecto**. No se requiere configuración adicional.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-El Datadog Operator v1.0.0+ habilita el Cluster Agent por defecto. El Operator crea los RBAC necesarios y despliega Cluster Agent. Ambos Agents utilizan la misma clave de API.
+El operador de Datadog v1.0.0+ habilita el agente de clúster por defecto. El operador crea los RBAC necesarios y despliega el agente de clúster. Ambos Agentes utilizan la misma clave de API.
 
-El Operador genera automáticamente un token aleatorio en un `Secret` de Kubernetes que lo compartirán el Datadog Agent y Cluster Agent para una comunicación segura.
+El Operador genera automáticamente un token aleatorio en un Kubernetes `Secret` que será compartido por el Datadog Agent y el Cluster Agent para una comunicación segura. 
 
-Puedes especificar manualmente este token en el campo `global.clusterAgentToken` de tu `datadog-agent.yaml`:
+Puedes especificar manualmente este token en el campo `global.clusterAgentToken` en tu `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -314,7 +313,7 @@ spec:
     clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
 ```
 
-También puedes especificar este token haciendo referencia al nombre de un `Secret` existente y a la clave de datos que contiene este token:
+Alternativamente, puedes especificar este token haciendo referencia al nombre de un `Secret` existente y la clave de datos que contiene este token:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -331,9 +330,9 @@ spec:
       keyName: <KEY_NAME>
 ```
 
-**Nota**: Cuando se configura manualmente, este token debe tener 32 caracteres alfanuméricos.
+**Nota**: Cuando se establece manualmente, este token debe tener 32 caracteres alfanuméricos.
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -342,18 +341,18 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-La tabla de Helm v2.7.0+ activa por defecto el Cluster Agent.
+El gráfico de Helm v2.7.0+ habilita el Cluster Agent por defecto.
 
-Para comprobarlo, asegúrate de que `clusterAgent.enabled` está configurado como `true` en tu `datadog-values.yaml`:
+Para verificación, asegúrate de que `clusterAgent.enabled` esté configurado en `true` en tu `datadog-values.yaml`:
 
 ```yaml
 clusterAgent:
   enabled: true
 ```
 
-Helm genera automáticamente un token aleatorio en un `Secret` de Kubernetes compartido por el Datadog Agent y Cluster Agent para una comunicación segura.
+Helm genera automáticamente un token aleatorio en un Kubernetes `Secret` que será compartido por el Agente de Datadog y el Agente de Clúster para una comunicación segura. 
 
-Puedes especificar manualmente este token en el campo `clusterAgent.token` de tu `datadog-agent.yaml`:
+Puedes especificar manualmente este token en el campo `clusterAgent.token` en tu `datadog-agent.yaml`:
 
 ```yaml
 clusterAgent:
@@ -361,7 +360,7 @@ clusterAgent:
   token: <DATADOG_CLUSTER_AGENT_TOKEN>
 ```
 
-Alternativamente, puedes especificar este token haciendo referencia al nombre de un `Secret` existente, donde el token se encuentra en una clave llamada `token`:
+Alternativamente, puedes especificar este token haciendo referencia al nombre de un `Secret` existente, donde el token está en una clave llamada `token`:
 
 ```yaml
 clusterAgent:
@@ -372,15 +371,15 @@ clusterAgent:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para más información, consulta la [documentación de Datadog Cluster Agent][2].
+Para más información, consulta la [documentación del Agente de Clúster de Datadog][2].
 
-## Servidor de métricas personalizadas
+## Servidor de métricas personalizadas {#custom-metrics-server}
 
-Para utilizar la función [servidor de métricas personalizadas][22] de Cluster Agent, debes proporcionar una [clave de aplicación][24] de Datadog y activar el proveedor de métricas.
+Para utilizar la función de [servidor de métricas personalizadas][22] del Agente de Clúster, debes proporcionar una [clave de aplicación][24] de Datadog y habilitar el proveedor de métricas.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-En `datadog-agent.yaml`, proporcione una clave de aplicación en `spec.global.credentials.appKey` y establece `features.externalMetricsServer.enabled` en `true`.
+{{% tab "Operador de Datadog" %}}
+En `datadog-agent.yaml`, proporciona una clave de aplicación bajo `spec.global.credentials.appKey` y establece `features.externalMetricsServer.enabled` en `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -398,14 +397,14 @@ spec:
       enabled: true
 ```
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
-En `datadog-values.yaml`, proporcione una clave de aplicación en `datadog.appKey` y establece `clusterAgent.metricsProvider.enabled` en `true`.
+En `datadog-values.yaml`, proporciona una clave de aplicación bajo `datadog.appKey` y establece `clusterAgent.metricsProvider.enabled` en `true`.
 
 ```yaml
 datadog:
@@ -418,7 +417,7 @@ clusterAgent:
     enabled: true
 ```
 
-A continuación, actualiza tu tabla de Helm:
+Luego actualice su gráfico de Helm:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -427,20 +426,20 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-## Integraciones
+## Integraciones {#integrations}
 
-Una vez que Agent esté funcionando en tu clúster, utiliza [la característica Autodiscovery de Datadog][5] para recopilar métricas y logs automáticamente de tus pods.
+Una vez que el Agente esté en funcionamiento en tu clúster, utiliza la función de [Autodiscovery de Datadog][5] para recopilar métricas y registro automáticamente de tus pods.
 
-## Vista de contenedores
+## Visualización de contenedores {#containers-view}
 
-Para utilizar el [Explorador de contenedores][3] de Datadog, active el Agent de proceso. Datadog Operator y la tabla de Helm **habilitan el Agent de proceso por defecto**. No es necesario ninguna otra configuración.
+Para utilizar el [Explorador de contenedores][3] de Datadog, habilita el Agente de Procesos. El Operador de Datadog y el gráfico de Helm **habilitan el Agente de Procesos por defecto**. No se requiere configuración adicional.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-De manera predeterminada, el Datadog Operator habilita el Process Agent.
+El Operador de Datadog habilita el Agente de Procesos por defecto. 
 
-Para comprobarlo, asegúrate de que `features.liveContainerCollection.enabled` está configurado como `true` en tu `datadog-agent.yaml`:
+Para verificación, asegúrate de que `features.liveContainerCollection.enabled` esté configurado en `true` en tu `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -456,7 +455,7 @@ spec:
     liveContainerCollection:
       enabled: true
 ```
-En algunas configuraciones, el Process Agent y Cluster Agent no pueden detectar de manera automática un nombre de clúster de Kubernetes. Si esto ocurre, la función no se inicia y aparece la siguiente advertencia en el log del Cluster Agent: `Orchestrator explorer enabled but no cluster name set: disabling`. En este caso, debes definir `datadog.clusterName` con tu nombre de clúster en `values.yaml`.
+En algunas configuraciones, el Agente de Procesos y el Agente de Clúster no pueden detectar automáticamente el nombre de un clúster de Kubernetes. Si esto sucede, la función no se inicia y la siguiente advertencia se muestra en el registro del Agente de Clúster: `Orchestrator explorer enabled but no cluster name set: disabling`. En este caso, debes establecer `spec.global.clusterName` como el nombre de tu clúster en `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -477,9 +476,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-La tabla de Helm activa el Agent de proceso por defecto. 
+El gráfico de Helm habilita el Agente de Proceso por defecto.
 
-Para comprobarlo, asegúrate de que `processAgent.enabled` está configurado como `true` en tu `datadog-values.yaml`:
+Para verificación, asegúrate de que `processAgent.enabled` esté configurado en `true` en tu `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -488,7 +487,7 @@ datadog:
     enabled: true
 ```
 
-En algunas configuraciones, el Process Agent y Cluster Agent no pueden detectar de manera automática un nombre de clúster de Kubernetes. Si esto ocurre, la función no se inicia y aparece la siguiente advertencia en el log del Cluster Agent: `Orchestrator explorer enabled but no cluster name set: disabling.`. En este caso, debes definir`datadog.clusterName` con tu nombre de clúster en `values.yaml`.
+En algunas configuraciones, el Agente de Procesos y el Agente de Clúster no pueden detectar automáticamente el nombre de un clúster de Kubernetes. Si esto sucede, la función no se inicia y la siguiente advertencia se muestra en el registro del Agente de Clúster: `Orchestrator explorer enabled but no cluster name set: disabling.`. En este caso, debes establecer `datadog.clusterName` como el nombre de tu clúster en `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -504,20 +503,20 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para conocer las restricciones de los nombres de clúster válidos, consulta [Definir el nombre de clúster](#set-cluster-name).
+Para restricciones sobre nombres de clúster válidos, consulta [Establecer nombre de clúster](#set-cluster-name).
 
-Consulta la documentación [Vista de contenedores][15] para obtener información adicional.
+Consulta la documentación de la [Containers view][15] para información adicional.
 
-## Orchestrator Explorer
+## Orchestrator Explorer {#orchestrator-explorer}
 
-El Datadog Operator y la tabla de Helm **habilitan por defecto el [Orchestrator Explorer][20] de Datadog**. No es necesario ninguna otra configuración.
+El Datadog Operator y el Helm chart **habilitan por defecto [Orchestrator Explorer][20] de Datadog**. No se requiere configuración adicional.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Orchestrator Explorer está activado por defecto en el Datadog Operator. 
+El Orchestrator Explorer está habilitado en el Datadog Operator por defecto. 
 
-Para comprobarlo, asegúrate de que el parámetro `features.orchestratorExplorer.enabled` está configurado como `true` en tu `datadog-agent.yaml`:
+Para verificación, asegúrese de que el parámetro `features.orchestratorExplorer.enabled` esté establecido en `true` en su `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -534,7 +533,7 @@ spec:
       enabled: true
 ```
 
-En algunas configuraciones, el Process Agent y Cluster Agent no pueden detectar de manera automática un nombre de clúster de Kubernetes. Si esto ocurre, la función no se inicia y aparece la siguiente advertencia en el log del Cluster Agent: `Orchestrator explorer enabled but no cluster name set: disabling`. En este caso, debes definir `datadog.clusterName` con tu nombre de clúster en `values.yaml`.
+En algunas configuraciones, el Agente de Procesos y el Agente de Clúster no pueden detectar automáticamente el nombre de un clúster de Kubernetes. Si esto sucede, la función no se inicia y la siguiente advertencia se muestra en el registro del Agente de Clúster: `Orchestrator explorer enabled but no cluster name set: disabling`. En este caso, debe establecer `spec.global.clusterName` como el nombre de su clúster en `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -556,9 +555,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-La tabla de Helm habilita Orchestrator Explorer por defecto.
+El gráfico de Helm habilita el Explorador de Orquestador por defecto.
 
-Para comprobarlo, asegúrate de que el parámetro `orchestratorExplorer.enabled` está configurado como `true` en tu archivo `datadog-values.yaml`:
+Para verificación, asegúrate de que el parámetro `orchestratorExplorer.enabled` esté establecido en `true` en tu archivo `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -569,7 +568,7 @@ datadog:
     enabled: true
 ```
 
-En algunas configuraciones, el Process Agent y Cluster Agent no pueden detectar de manera automática un nombre de clúster de Kubernetes. Si esto ocurre, la función no se inicia y aparece la siguiente advertencia en el log del Cluster Agent: `Orchestrator explorer enabled but no cluster name set: disabling.` En este caso, debes establecer `datadog.clusterName` con tu nombre de clúster en `values.yaml`.
+En algunas configuraciones, el Agente de Procesos y el Agente de Clúster no pueden detectar automáticamente el nombre de un clúster de Kubernetes. Si esto sucede, la función no se inicia y la siguiente advertencia se muestra en el registro del Agente de Clúster: `Orchestrator explorer enabled but no cluster name set: disabling.`. En este caso, debe establecer `datadog.clusterName` como el nombre de su clúster en `values.yaml`.
 
 ```yaml
 datadog:
@@ -585,81 +584,81 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para conocer las restricciones de los nombres de clúster válidos, consulta [Definir el nombre de clúster](#set-cluster-name).
+Para restricciones sobre nombres de clúster válidos, consulta [Establecer nombre de clúster](#set-cluster-name).
 
-Consulta la [documentación de Orchestrator Explorer][21] para obtener información adicional.
+Consulta la [Orchestrator Explorer documentation][21] para información adicional.
 
-## Configuración básica
+## Configuración básica {#basic-configuration}
 
-Utiliza los siguientes campos de configuración para configurar el Datadog Agent.
+Utilice los siguientes campos de configuración para configurar el Agente de Datadog.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
 | Parámetro (v2alpha1) |  Descripción |
 | --------------------------- | ----------- |
-| `global.credentials.apiKey` |  Configura tu clave de API Datadog. |
-| `global.credentials.apiSecret.secretName` | En lugar de `global.credentials.apiKey`, indica el nombre de un `Secret` de Kubernetes que contenga tu clave de API de Datadog.|
-| `global.credentials.apiSecret.keyName` | En lugar de `global.credentials.apiKey`, proporciona la clave del `Secret` de Kubernetes nombrada en `global.credentials.apiSecret.secretName`.|
-| `global.credentials.appKey` |  Configura tu clave de aplicación de Datadog. Si utilizas el servidor de métricas externas, debes configurar una clave de aplicación de Datadog para el acceso de lectura a tus métricas. |
-| `global.credentials.appSecret.secretName` | En lugar de `global.credentials.apiKey`, indica el nombre de un `Secret` de Kubernetes que contenga la clave de tu aplicación de Datadog.|
-| `global.credentials.appSecret.keyName` | En lugar de `global.credentials.apiKey`, proporciona la clave del `Secret` de Kubernetes nombrada en `global.credentials.appSecret.secretName`.|
-| `global.logLevel` | Establece la intensidad del registro. Esto puede ser anulado por el contenedor. Los niveles de log válidos son: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`. Por defecto: `info`. |
-| `global.registry` | Registro de imágenes a utilizar para todas las imágenes de Agent. Por defecto: `gcr.io/datadoghq`. |
-| `global.site` | Establece el [sitio de entrada][1] de Datadog al que se envían los datos del Agent. Tu sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrate de seleccionar el SITIO correcto a la derecha). |
-| `global.tags` | Un lista de etiquetas para adjuntar a cada métrica, evento y check de servicio recopilados. |
+| `global.credentials.apiKey` |  Configure su clave de API de Datadog. |
+| `global.credentials.apiSecret.secretName` | En lugar de `global.credentials.apiKey`, proporcione el nombre de un `Secret` de Kubernetes que contenga su clave de API de Datadog.|
+| `global.credentials.apiSecret.keyName` | En lugar de `global.credentials.apiKey`, proporcione la clave del `Secret` de Kubernetes nombrado en `global.credentials.apiSecret.secretName`.|
+| `global.credentials.appKey` |  Configure su clave de aplicación de Datadog. Si está utilizando el servidor de métricas externo, debe establecer una clave de aplicación de Datadog para el acceso de lectura a sus métricas. |
+| `global.credentials.appSecret.secretName` | En lugar de `global.credentials.apiKey`, proporcione el nombre de un `Secret` de Kubernetes que contenga su clave de aplicación de Datadog.|
+| `global.credentials.appSecret.keyName` | En lugar de `global.credentials.apiKey`, proporcione la clave del `Secret` de Kubernetes nombrado en `global.credentials.appSecret.secretName`.|
+| `global.logLevel` | Establece la verbosidad de los registros. Esto puede ser anulado por el contenedor. Los niveles de registro válidos son: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`. Predeterminado: `info`. |
+| `global.registry` | Registro de imágenes a utilizar para todas las imágenes del Agente. Predeterminado: `gcr.io/datadoghq`. |
+| `global.site` | Establece el [sitio de recepción][1] de Datadog al cual se envían los datos del Agente. Su sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrese de que el SITIO correcto esté seleccionado a la derecha). |
+| `global.tags` | Una lista de etiquetas para adjuntar a cada métrica, evento y verificación de servicio recolectados. |
 
-Para obtener una lista completa de los campos de configuración del Datadog Operator, consulta la [especificación del Operator v2alpha1][2]. Para ver versiones anteriores, consulta [Migración de CRD de Datadog Agents a v2alpha1][3]. Los campos de configuración también pueden consultarse mediante `kubectl explain datadogagent --recursive`.
+Para una lista completa de campos de configuración para el Datadog Operator, consulte la [especificación del Operador v2alpha1][2]. Para versiones anteriores, consulte [Migrar CRDs de DatadogAgent a v2alpha1][3]. Los campos de configuración también se pueden consultar utilizando `kubectl explain datadogagent --recursive`.
 
 [1]: /es/getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [3]: /es/containers/guide/v2alpha1_migration/
 {{% /tab %}}
 {{% tab "Helm" %}}
-| Helm | Descripción |
-| ---- | ----------- |
-| `datadog.apiKey` | Configura tu clave de API de Datadog. |
-| `datadog.apiKeyExistingSecret` | En lugar de `datadog.apiKey`, proporciona el nombre de un `Secret` de Kubernetes existente que contenga tu clave de API de Datadog, configurada con el nombre de clave `api-key`. |
-| `datadog.appKey` | Configura tu clave de aplicación de Datadog. Si utilizas el servidor de métricas externas, debes configurar una clave de aplicación de Datadog para el acceso de lectura a tus métricas. |
-| `datadog.appKeyExistingSecret` | En lugar de `datadog.appKey`, proporciona el nombre de un `Secret` de Kubernetes existente que contenga tu clave de aplicación de Datadog, configurada con el nombre de clave `app-key`. |
-| `datadog.logLevel` | Establece la verbosidad del registro. Esto puede ser anulado por el contenedor. Los niveles válidos de log son: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`. Por defecto: `info`. |
-| `registry` | Registro de imagen a utilizar para todas las imágenes del Agent. Por defecto: `gcr.io/datadoghq`. |
-| `datadog.site` | Establece el [sitio de entrada][1] de Datadog al que se envían los datos del Agent. Tu sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrate de seleccionar el SITIO correcto a la derecha). |
-| `datadog.tags` | Un lista de etiquetas para adjuntar a cada métrica, evento y check de servicio recopilados. |
+|  Helm | Descripción |
+|  ---- | ----------- |
+|  `datadog.apiKey` | Configure su clave de API de Datadog. |
+| `datadog.apiKeyExistingSecret` | En lugar de `datadog.apiKey`, proporcione el nombre de un `Secret` de Kubernetes existente que contenga su clave de API de Datadog, configurada con el nombre de clave `api-key`. |
+|  `datadog.appKey` | Configure su clave de aplicación de Datadog. Si está utilizando el servidor de métricas externo, debe establecer una clave de aplicación de Datadog para el acceso de lectura a sus métricas. |
+| `datadog.appKeyExistingSecret` | En lugar de `datadog.appKey`, proporcione el nombre de un `Secret` de Kubernetes existente que contenga su clave de aplicación de Datadog, configurada con el nombre de clave `app-key`. |
+| `datadog.logLevel` | Establece la verbosidad de los registros. Esto puede ser anulado por el contenedor. Los niveles de registro válidos son: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`. Predeterminado: `info`. |
+| `registry` | Registro de imágenes a utilizar para todas las imágenes del Agente. Predeterminado: `gcr.io/datadoghq`. |
+| `datadog.site` | Establece el [sitio de recepción][1] de Datadog al que se envían los datos del Agente. Su sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrese de que el SITIO correcto esté seleccionado a la derecha). |
+| `datadog.tags` | Una lista de etiquetas para adjuntar a cada métrica, evento y verificación de servicio recolectados. |
 
-Si deseas consultar la lista completa de las variables de entorno para la tabla de Helm, consulta la [ lista completa de opciones][2] para `datadog-values.yaml`.
+Para una lista completa de variables de entorno para el gráfico de Helm, consulte la [lista completa de opciones][2] para `datadog-values.yaml`.
 
 [1]: /es/getting_started/site
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#all-configuration-options
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
-| Variable de Ent | Descripción |
+| Variable de entorno         | Descripción                                                                                                                                                                                                                                                                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_API_KEY` | Tu Datadog clave de API (**obligatorio**) |
-| `DD_ENV` | Establece la etiqueta global `env` para todos los datos emitidos.                                                                                                                                                                                                                                                                                                  |
-| `DD_HOSTNAME` | Nombre de host a utilizar para métricas (si falla la detección automática) | | | 
-| `DD_TAGS` | Etiquetas de host separadas por espacios. Por ejemplo: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
-| `DD_SITE` | Sitio de destino para tus métricas, trazas y logs. Tu `DD_SITE` es {{< region-param key="dd_site" code="true">}}. Por defecto es `datadoghq.com`.                                                                                                                                                                                               |
-| `DD_DD_URL` | Opcional para anular la URL de envío de métrica.                                                                                                                                                                                                                                                                                      |
-| `DD_URL` (6.36+/7.36+) | Alias para `DD_DD_URL`. Ignorado si `DD_DD_URL` ya está configurado.                                                                                                                                                                                                                                                                                    |
-| `DD_CHECK_RUNNERS` | El Agent ejecuta todos los checks de forma concurrente por defecto (valor por defecto = `4` ejecutores). Para ejecutar checks secuencialmente, ajusta el valor en `1`. Si necesitas ejecutar un número elevado de checks (o checks lentos), el componente `collector-queue` podría retrasarse y el check de estado podría fallar. Puede aumentar el número de ejecutores para iniciar checks en paralelo. |
-| `DD_LEADER_ELECTION` | Si se están ejecutando múltiples instancias del Agent en tu clúster, establece esta variable en `true` para evitar la duplicación de la recopilación de eventos.                                                                                                                                                                                                                         |
+| `DD_API_KEY`         | Su clave de API de Datadog (**requerida**)                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`             | Establece la etiqueta global `env` para todos los datos emitidos.                                                                                                                                                                                                                                                                                                  |
+| `DD_HOSTNAME`        | Nombre de servidor a utilizar para métricas (si la autodetección falla)                                                                                                                                                                                                                                                                                             |
+| `DD_TAGS`            | Etiquetas de servidor separadas por espacios. Por ejemplo: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
+| `DD_SITE`            | Sitio de destino para sus métricas, trazas y registros. Su `DD_SITE` es {{< region-param key="dd_site" code="true">}}. Por defecto es `datadoghq.com`.                                                                                                                                                                                               |
+| `DD_DD_URL`          | Configuración opcional para anular la URL para la presentación de métricas.                                                                                                                                                                                                                                                                                      |
+| `DD_URL` (6.36+/7.36+)            | Alias para `DD_DD_URL`. Ignorado si `DD_DD_URL` ya está configurado.                                                                                                                                                                                                                                                                                    |
+| `DD_CHECK_RUNNERS`   | El Agente ejecuta todas las verificaciones de manera concurrente por defecto (valor predeterminado = `4` ejecutores). Para ejecutar las verificaciones de manera secuencial, establezca el valor en `1`. Si necesita ejecutar un gran número de verificaciones (o verificaciones lentas), el componente `collector-queue` podría quedarse atrás y fallar la verificación de salud. Puede aumentar el número de ejecutores para ejecutar verificaciones en paralelo. |
+| `DD_LEADER_ELECTION` | Si múltiples instancias del Agente están ejecutándose en su clúster, establezca esta variable en `true` para evitar la duplicación de la recolección de eventos.                                                                                                                                                                                                                         |
 {{% /tab %}}
 {{< /tabs >}}
 
-## Variables de entorno
-El Datadog Agent en contenedores puede configurarse utilizando variables de entorno. Para una amplia lista de las variables de entorno compatibles, consulta la sección [variables de entorno][26] de la documentación del Docker Agent.
+## Variables de entorno {#environment-variables}
+El Agente de Datadog en contenedores se puede configurar utilizando variables de entorno. Para una lista extensa de variables de entorno soportadas, consulte la sección de [Variables de entorno][26] de la documentación del Agente de Docker.
 
-### Ejemplos
+### Ejemplos {#examples}
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Al utilizar el Datadog Operator, puedes establecer variables de entorno adicionales en `override` para un componente con `[key].env []object`, o para un contenedor con `[key].containers.[key].env []object`. Se admiten las siguientes claves: 
+Al usar el Datadog Operator, puede establecer variables de entorno adicionales en `override` para un componente con `[key].env []object`, o para un contenedor con `[key].containers.[key].env []object`. Las siguientes claves son soportadas: 
 
 - `nodeAgent`
 - `clusterAgent`
 - `clusterChecksRunner`
 
-Los ajustes de contenedor tienen prioridad sobre los ajustes de componente.
+Las configuraciones a nivel de contenedor tienen prioridad sobre cualquier configuración a nivel de componente.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -696,7 +695,8 @@ clusterAgent:
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
-Añade variables de entorno al DaemonSet o al despliegue (para Datadog Cluster Agent).
+Agregue variables de entorno al DaemonSet o al Deployment (para el Agente de Clúster de Datadog).
+
 ```yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -716,38 +716,38 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configurar DogStatsD
+## Configurar DogStatsD {#configure-dogstatsd}
 
-DogStatsD puede enviar métricas personalizadas sobre UDP con el protocolo StatsD. **DogStatsD está habilitado por defecto por Datadog Operator y Helm**. Consulta la [documentación de DogStatsD][19] para obtener más información.
+DogStatsD puede enviar métricas personalizadas a través de UDP con el protocolo StatsD. **DogStatsD está habilitado por defecto por el Datadog Operator y Helm**. Consulte la [documentación de DogStatsD][19] para más información.
 
-Puedes utilizar las siguientes variables de entorno para configurar DogStatsD con DaemonSet:
+Puede usar las siguientes variables de entorno para configurar DogStatsD con DaemonSet:
 
-| Variable de entorno                     | Descripción                                                                                                                                                |
+| Variable de Entorno                     | Descripción                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Escucha los paquetes de DogStatsD de otros contenedores (obligatorio para enviar métricas personalizadas).                                                                       |
-| `DD_HISTOGRAM_PERCENTILES`       | Los percentiles de histogramas para calcular (separados por espacios). Por defecto es `0.95`.                                                                         |
+| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Escuchar paquetes de DogStatsD de otros contenedores (requerido para enviar métricas personalizadas).                                                                       |
+| `DD_HISTOGRAM_PERCENTILES`       | Los percentiles del histograma a calcular (separados por espacios). El valor por defecto es `0.95`.                                                                         |
 | `DD_HISTOGRAM_AGGREGATES`        | Los agregados del histograma a calcular (separados por espacios). El valor por defecto es `"max median avg count"`.                                                          |
-| `DD_DOGSTATSD_SOCKET`            | La ruta al socket Unix que se va a escuchar. Debe estar en un volumen montado en `rw`.                                                                                    |
-| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Habilita la detección y el etiquetado de contenedores para las métricas del socket Unix.                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | Etiquetas adicionales para anexar a todas las métricas, los eventos y los checks de servicios recibidos por este servidor de DogStatsD, por ejemplo: `"env:golden group:retrievers"`. |
+| `DD_DOGSTATSD_SOCKET`            | Ruta al socket Unix para escuchar. Debe estar en un `rw` volumen montado.                                                                                    |
+| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Habilitar la detección y etiquetado de contenedores para métricas de socket Unix.                                                                                            |
+| `DD_DOGSTATSD_TAGS`              | Etiquetas adicionales para agregar a todas las métricas, eventos y verificaciones de servicio recibidos por este servidor DogStatsD, por ejemplo: `"env:golden group:retrievers"`. |
 
-## Configurar la asignación de etiquetas
+## Configurar el mapeo de etiquetas {#configure-tag-mapping}
 
 Datadog recopila automáticamente etiquetas comunes de Kubernetes.
 
-Además, puedes asignar etiquetas de nodos de Kubernetes, etiquetas de pods y anotaciones a las etiquetas de Datadog. Utiliza las siguientes variables de entorno para configurar esta asignación:
+Además, puede mapear las etiquetas de los nodos de Kubernetes, las etiquetas de los pods y las anotaciones a las etiquetas de Datadog. Utilice las siguientes variables de entorno para configurar este mapeo:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
 | Parámetro (v2alpha1) |  Descripción |
 | --------------------------- |  ----------- |
-| `global.namespaceLabelsAsTags` |  Proporciona una asignación entre las etiquetas de espacio de nombres de Kubernetes y etiquetas de Datadog. `<KUBERNETES_NAMESPACE_LABEL>: <DATADOG_TAG_KEY>` |
-| `global.nodeLabelsAsTags` | Proporciona una asignación entre las etiquetas de nodo de Kubernetes y etiquetas de Datadog. `<KUBERNETES_NODE_LABEL>: <DATADOG_TAG_KEY>` |
-| `global.podAnnotationsAsTags` |  Proporciona una asignación entre anotaciones de Kubernetes y etiquetas de Datadog. `<KUBERNETES_ANNOTATION>: <DATADOG_TAG_KEY>` |
-| `global.podLabelsAsTags` |  Proporciona una asignación entre las etiquetas de Kubernetes y las etiquetas de Datadog. `<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>` |
+| `global.namespaceLabelsAsTags` |  Proporcionar un mapeo de las etiquetas de espacio de nombres de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_NAMESPACE_LABEL>: <DATADOG_TAG_KEY>` |
+| `global.nodeLabelsAsTags` | Proporcionar un mapeo de las etiquetas de nodos de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_NODE_LABEL>: <DATADOG_TAG_KEY>` |
+| `global.podAnnotationsAsTags` |  Proporcionar un mapeo de las anotaciones de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_ANNOTATION>: <DATADOG_TAG_KEY>` |
+| `global.podLabelsAsTags` |  Proporcionar un mapeo de las etiquetas de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>` |
 
-### Ejemplos
+### Ejemplos {#examples-1}
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -779,12 +779,12 @@ spec:
 
 |  Helm | Descripción |
 | --------------------------- | ----------- |
-|  `datadog.namespaceLabelsAsTags` | Proporciona una asignación entre las etiquetas de espacio de nombres de Kubernetes y etiquetas de Datadog. `<KUBERNETES_NAMESPACE_LABEL>: <DATADOG_TAG_KEY>` |
-|  `datadog.nodeLabelsAsTags` | Proporciona una asignación entre las etiquetas de nodo de Kubernetes y etiquetas de Datadog. `<KUBERNETES_NODE_LABEL>: <DATADOG_TAG_KEY>` |
-|  `datadog.podAnnotationsAsTags` | Proporciona una asignación entre anotaciones de Kubernetes y etiquetas de Datadog. `<KUBERNETES_ANNOTATION>: <DATADOG_TAG_KEY>` |
-|  `datadog.podLabelsAsTags` | Proporciona una asignación entre las etiquetas de Kubernetes y las etiquetas de Datadog. `<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>` |
+|  `datadog.namespaceLabelsAsTags` | Proporcionar un mapeo de las etiquetas de espacio de nombres de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_NAMESPACE_LABEL>: <DATADOG_TAG_KEY>` |
+|  `datadog.nodeLabelsAsTags` | Proporcionar un mapeo de las etiquetas de nodos de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_NODE_LABEL>: <DATADOG_TAG_KEY>` |
+|  `datadog.podAnnotationsAsTags` | Proporcionar un mapeo de las anotaciones de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_ANNOTATION>: <DATADOG_TAG_KEY>` |
+|  `datadog.podLabelsAsTags` | Proporcionar un mapeo de las etiquetas de Kubernetes a las etiquetas de Datadog. `<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>` |
 
-### Ejemplos
+### Ejemplos {#examples-2}
 
 ```yaml
 datadog:
@@ -808,27 +808,27 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Usar archivos secretos
+## Usando archivos secretos {#using-secret-files}
 
-Las credenciales de integración pueden almacenarse en los secretos de Docker o Kubernetes y utilizarse en las plantillas de Autodiscovery. Para obtener más información, consulta [Gestión de secretos][12].
+Las credenciales de integración se pueden almacenar en secretos de Docker o Kubernetes y utilizarse en plantillas de Autodiscovery. Para más información, consulte [Gestión de Secretos][12].
 
-## Ignora los contenedores
+## Ignorar contenedores {#ignore-containers}
 
-Excluye contenedores de la recopilación de logs, métricas y Autodiscovery. Datadog excluye los contenedores `pause` de Kubernetes y OpenShift por defecto. Estas listas de permisos y denegaciones se aplican únicamente a Autodiscovery; las trazas y DogStatsD no se ven afectados. Estas variables de entorno admiten expresiones regulares en sus valores.
+Excluya contenedores de la recopilación de registros, la recopilación de métricas y la Autodiscovery. Datadog excluye `pause` contenedores de Kubernetes y OpenShift por defecto. Estas listas de permitidos y bloqueados se aplican solo a Autodiscovery; las trazas y DogStatsD no se ven afectados. Estas variables de entorno admiten expresiones regulares en sus valores.
 
-Consulta la página [Gestión de detección de contenedores][13] para ver ejemplos.
+Consulte la página de [Gestión de Descubrimiento de Contenedores][13] para ejemplos.
 
-**Nota**: Las métricas `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` y `.stopped.total` no se ven afectadas por estos ajustes. Se cuentan todos los contenedores.
+**Nota**: Las métricas `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` y `.stopped.total` no se ven afectadas por estas configuraciones. Todos los contenedores son contados.
 
-## Tiempo de espera del servidor de API de Kubernetes
+## Tiempo de espera del servidor API de Kubernetes {#kubernetes-api-server-timeout}
 
-Por defecto, [el check de las métricas centrales de estado de Kubernetes][25] espera 10 segundos para recibir una respuesta del servidor de la API de Kubernetes. En el caso de clústeres de gran tamaño, es posible que se agote el tiempo de espera y se pierdan métricas.
+Por defecto, la [verificación de Métricas del Estado de Kubernetes][25] espera 10 segundos para una respuesta del servidor API de Kubernetes. Para clústeres grandes, la solicitud puede agotar el tiempo, lo que resulta en métricas faltantes.
 
-Puedes evitarlo al configurar la variable de entorno `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` en un valor superior al predeterminado de 10 segundos.
+Puede evitar esto configurando la variable de entorno `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` a un valor más alto que el tiempo predeterminado de 10 segundos.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Actualiza tu `datadog-agent.yaml` con la siguiente configuración:
+Actualice su `datadog-agent.yaml` con la siguiente configuración:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -843,7 +843,7 @@ spec:
           value: <value_greater_than_10>
 ```
 
-A continuación, aplica la nueva configuración:
+Luego aplique la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -851,7 +851,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Actualiza tu `datadog-values.yaml` con la siguiente configuración:
+Actualice su `datadog-values.yaml` con la siguiente configuración:
 
 ```yaml
 clusterAgent:
@@ -860,7 +860,7 @@ clusterAgent:
       value: <value_greater_than_10>
 ```
 
-A continuación, actualiza tu tabla de Helm:
+Luego actualice su Helm chart:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -868,28 +868,28 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-## Parámetros del proxy
+## Configuraciones de proxy {#proxy-settings}
 
-A partir del Agent v6.4.0 (y v6.5.0 para el Trace Agent), se pueden sobreescribir los valores de configuración de proxy del Agent con las siguientes variables de entorno:
+A partir de la versión 6.4.0 del Agente (y de la 6.5.0 para el Trace Agent), puede anular las configuraciones de proxy del Agente con las siguientes variables de entorno:
 
-| Variable de entorno             | Descripción                                                            |
+| Variable de Entorno             | Descripción                                                            |
 |--------------------------|------------------------------------------------------------------------|
-| `DD_PROXY_HTTP`          | Una URL HTTP para usar como proxy para las solicitudes `http`.                     |
-| `DD_PROXY_HTTPS`         | Una URL HTTPS para usar como proxy para las solicitudes `https`.                   |
-| `DD_PROXY_NO_PROXY`      | Una lista separada por espacios de las URL para las que no se debe usar ningún proxy.      |
-| `DD_SKIP_SSL_VALIDATION` | Una opción para comprobar si el Agent tiene problemas para conectarse a Datadog. |
+| `DD_PROXY_HTTP`          | Una URL HTTP para usar como proxy para solicitudes de `http`.                     |
+| `DD_PROXY_HTTPS`         | Una URL HTTPS para usar como proxy para solicitudes de `https`.                   |
+| `DD_PROXY_NO_PROXY`      | Una lista de URLs separadas por espacios para las cuales no se debe usar proxy.      |
+| `DD_SKIP_SSL_VALIDATION` | Una opción para probar si el Agente tiene problemas para conectarse a Datadog. |
 
-## Definir el nombre de clúster
+## Establecer el nombre del clúster {#set-cluster-name}
 
-Algunas capacidades requieren que se defina un nombre de clúster Kubernetes. Un nombre de clúster válido debe ser único y debe estar separado por puntos, con las siguientes restricciones:
+Algunas capacidades requieren que establezca un nombre de clúster de Kubernetes. Un nombre de clúster válido debe ser único y estar separado por puntos, con las siguientes restricciones:
 
-- Sólo puede contener letras minúsculas, números y guiones
-- Debe empezar por una letra
-- La longitud total debe ser inferior o igual a 80 caracteres
+- Puede contener solo letras minúsculas, números y guiones
+- Debe comenzar con una letra
+- La longitud total es menor o igual a 80 caracteres
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Define `spec.global.clusterName` con tu nombre de clúster en `datadog-agent.yaml`:
+Establezca `spec.global.clusterName` como el nombre de su clúster en `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -903,7 +903,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Define `datadog.clusterName` con tu nombre de clúster en `datadog-values.yaml`.
+Establezca `datadog.clusterName` como el nombre de su clúster en `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -913,23 +913,23 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Autodiscovery
+## Autodiscovery {#autodiscovery}
 
 | Variable de entorno                 | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_LISTENERS`               | Oyentes de Autodiscovery para ejecutar.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `DD_EXTRA_LISTENERS`         | Oyentes de Autodiscovery adicionales para ejecutar. Se añaden además de las variables definidas en la sección `listeners` del archivo de configuración `datadog.yaml`.                                                                                                                                                                                                                                                                                                                                    |
-| `DD_CONFIG_PROVIDERS`        | Los proveedores a los que el Agent debe llamar para recopilar las configuraciones de check. Los proveedores disponibles son: <br>`kubelet`: maneja plantillas incrustadas en anotaciones de pods. <br>`docker`: maneja plantillas incrustadas en etiquetas de contenedor. <br> `clusterchecks`: recupera configuraciones de check de clúster del Cluster Agent . <br>`kube_services`: controla servicios de Kubernetes para checks de clústeres. |
-| `DD_EXTRA_CONFIG_PROVIDERS`  | Proveedores de configuración de Autodiscovery adicionales a utilizar. Se añaden además de las variables definidas en la sección `config_providers` del archivo de configuración `datadog.yaml`. |
+| `DD_LISTENERS`               | Listeners de Autodiscovery para ejecutar.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `DD_EXTRA_LISTENERS`         | Listeners de Autodiscovery adicionales para ejecutar. Se añaden además de las variables definidas en la sección `listeners` del archivo de configuración `datadog.yaml`.                                                                                                                                                                                                                                                                                                                                    |
+| `DD_CONFIG_PROVIDERS`        | Los proveedores que el Agente debe llamar para recopilar configuraciones de verificación. Los proveedores disponibles son: <br>`kubelet` - Maneja plantillas incrustadas en anotaciones de pod. <br>`docker` - Maneja plantillas incrustadas en etiquetas de contenedor. <br>`clusterchecks` - Recupera configuraciones de verificación a nivel de clúster desde el Cluster Agent. <br>`kube_services` - Observa los servicios de Kubernetes para verificaciones de clúster. |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | Proveedores adicionales de configuración de Autodiscovery para usar. Se añaden además de las variables definidas en la sección `config_providers` del archivo de configuración `datadog.yaml`. |
 
-## Miscelánea
+## Varios {#miscellaneous}
 
 | Variable de entorno                        | Descripción                                                                                                                                                                                                                                                         |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Sobreescribe la detección automática del origen del contenedor para forzar un único origen. Por ejemplo: `"docker"`, `"ecs_fargate"`, `"kubelet"`. Esto ya no es necesario a partir de Agent v7.35.0.                                                                                                     |
-| `DD_HEALTH_PORT`                    | Configura esto como `5555` para exponer el check de estado del Agent en el puerto `5555`.                                                                                                                                                                                                 |
-| `DD_CLUSTER_NAME`                   | Establece un identificador de clústeres de Kubernetes personalizado para evitar colisiones de alias de host. El nombre del clúster puede tener un máximo de 40 caracteres con las siguientes restricciones: solo letras minúsculas, números y guiones. Debe empezar por una letra. Debe terminar con un número o una letra. |
-| `DD_COLLECT_KUBERNETES_EVENTS ` | Habilita la recopilación de eventos con el Agent. Si estás ejecutando varias instancias del Agent en tu clúster, configura también `DD_LEADER_ELECTION` en `true`.                                                                                                                       |
+| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Anula la detección automática de la fuente del contenedor para forzar una única fuente. p. ej. `"docker"`, `"ecs_fargate"`, `"kubelet"`. Esto ya no es necesario desde la versión 7.35.0 del Agente.                                                                                                     |
+| `DD_HEALTH_PORT`                    | Establezca esto en `5555` para exponer la verificación de salud del Agente en el puerto `5555`.                                                                                                                                                                                                 |
+| `DD_CLUSTER_NAME`                   | Establezca un identificador de clúster de Kubernetes personalizado para evitar colisiones de alias de host. El nombre del clúster puede tener hasta 40 caracteres con las siguientes restricciones: solo letras minúsculas, números y guiones. Debe comenzar con una letra. Debe terminar con un número o una letra. |
+| `DD_COLLECT_KUBERNETES_EVENTS ` | Habilitar la recopilación de eventos con el Agente. Si está ejecutando múltiples instancias del Agente en su clúster, establezca `DD_LEADER_ELECTION` en `true` también.                                                                                                                       |
 
 
 [1]: /es/agent/
@@ -943,7 +943,7 @@ datadog:
 [16]: /es/containers/kubernetes/apm
 [17]: /es/containers/kubernetes/log
 [18]: /es/network_monitoring/cloud_network_monitoring/
-[19]: /es/developers/dogstatsd
+[19]: /es/extend/dogstatsd
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /es/infrastructure/containers/orchestrator_explorer
 [22]: /es/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm

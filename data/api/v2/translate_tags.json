@@ -223,6 +223,14 @@
     "name": "Google Chat Integration",
     "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
   },
+  "governance-controls": {
+    "name": "Governance Controls",
+    "description": "Governance Controls pair a detection definition with an organization's detection, notification,\nand mitigation configuration within the Governance Console. Each control reports how a class of\ngovernance issue (such as unused API keys or unqueried metrics) is detected and remediated, along\nwith counts of active and mitigated detections."
+  },
+  "governance-insights": {
+    "name": "Governance Insights",
+    "description": "Governance Insights surface key usage, configuration, and best-practice signals for an\norganization within the Governance Console. Each insight reports a current value (and,\noptionally, a previous value for comparison) along with the query used to compute it, so\nthat the Console can render trends and highlight areas that need attention."
+  },
   "high-availability-multiregion": {
     "name": "High Availability MultiRegion",
     "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
@@ -354,6 +362,10 @@
   "rum-insights": {
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "rum-remote-config": {
+    "name": "RUM Remote Config",
+    "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
   },
   "reference-tables": {
     "name": "Reference Tables",

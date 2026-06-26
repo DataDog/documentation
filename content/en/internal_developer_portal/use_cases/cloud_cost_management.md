@@ -1,5 +1,6 @@
 ---
 title: Manage and Optimize Cloud Costs
+description: Monitor cost anomalies and enforce tagging compliance at the team level by combining Catalog, Scorecards, and Cloud Cost Management.
 aliases:
   - /tracing/software_catalog/guides/cloud_cost_management
   - /software_catalog/guides/cloud_cost_management
