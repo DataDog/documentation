@@ -262,7 +262,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
     ```
 
     * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
-    * replace `<DD_API_KEY>` with your valid [Datadog API key][7].
+    * Replace `<DD_API_KEY>` with your valid [Datadog API key][7].
 
     **Optional:**
     * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for the `env` tag on all DAGs in the Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
