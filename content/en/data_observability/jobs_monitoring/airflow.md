@@ -250,10 +250,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 1. Verify that your Astro Runtime includes `apache-airflow-providers-openlineage` 1.11.0 or later and `openlineage-python` 1.23.0 or later. If you manage Airflow dependencies in your deployment image, pin compatible versions in your Dockerfile before configuring transport.
 
-2. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
-
-    - [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
-    - [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
+2. To set up the OpenLineage provider, define the following environment variables.
 
     ```shell
     OPENLINEAGE__TRANSPORT__TYPE=composite
@@ -270,6 +267,11 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
     **Optional:**
     * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for the `env` tag on all DAGs in the Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
     * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider.
+
+    You can configure these variables in your Astronomer deployment using either of the following methods:
+
+    - [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
+    - [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
 
     See the [Astronomer official guide][10] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
 
@@ -378,13 +380,49 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
 
-| Airflow version | Recommended `apache-airflow-providers-openlineage` version | Required dependency minimums | Notes |
-|---|---|---|---|
-| Airflow 2.11 or later, including Airflow 3 | `2.18.0` | `apache-airflow-providers-common-sql>=1.32.0`<br/>`apache-airflow-providers-common-compat>=1.15.0`<br/>`openlineage-integration-common>=1.47.0`<br/>`openlineage-python>=1.47.0` | This is the newest provider release. Provider `2.9.0` and later requires Airflow 2.11 or later. |
-| Airflow 2.10.x | `2.8.0` | `apache-airflow-providers-common-sql>=1.20.0`<br/>`apache-airflow-providers-common-compat>=1.8.0`<br/>`openlineage-integration-common>=1.38.0`<br/>`openlineage-python>=1.38.0` | This is the newest provider release compatible with Airflow 2.10. Provider `2.9.0` and later requires Airflow 2.11 or later. |
-| Airflow 2.9.x | `2.2.0` | `apache-airflow-providers-common-sql>=1.20.0`<br/>`apache-airflow-providers-common-compat>=1.4.0`<br/>`openlineage-integration-common>=1.31.0`<br/>`openlineage-python>=1.31.0` | This is the newest provider release compatible with Airflow 2.9. Provider `2.3.0` and later requires Airflow 2.10 or later. |
-| Airflow 2.8.x | `1.14.0` | `apache-airflow-providers-common-sql>=1.20.0`<br/>`apache-airflow-providers-common-compat>=1.2.1`<br/>`openlineage-integration-common>=1.24.2`<br/>`openlineage-python>=1.24.2` | This is the newest provider release compatible with Airflow 2.8. Provider `2.0.0` and later requires Airflow 2.9 or later. |
-| Airflow 2.7.x | `1.10.0` | `apache-airflow-providers-common-sql>=1.6.0`<br/>`openlineage-integration-common>=1.16.0`<br/>`openlineage-python>=1.16.0` | This is the newest provider release compatible with Airflow 2.7. Provider `1.11.0` and later requires Airflow 2.8 or later. For Airflow 2.7 and 2.8, add the extra configuration variables shown in the setup steps. If you use Amazon MWAA 2.7.2, see the MWAA upgrade guide for Datadog-patched wheels. |
+**Airflow 2.11 or later, including Airflow 3**
+: **Recommended provider version**: `2.18.0`
+: **Required dependency minimums**:
+: - `apache-airflow-providers-common-sql>=1.32.0`
+: - `apache-airflow-providers-common-compat>=1.15.0`
+: - `openlineage-integration-common>=1.47.0`
+: - `openlineage-python>=1.47.0`
+: **Notes**: This is the newest provider release. Provider `2.9.0` and later requires Airflow 2.11 or later.
+
+**Airflow 2.10.x**
+: **Recommended provider version**: `2.8.0`
+: **Required dependency minimums**:
+: - `apache-airflow-providers-common-sql>=1.20.0`
+: - `apache-airflow-providers-common-compat>=1.8.0`
+: - `openlineage-integration-common>=1.38.0`
+: - `openlineage-python>=1.38.0`
+: **Notes**: This is the newest provider release compatible with Airflow 2.10. Provider `2.9.0` and later requires Airflow 2.11 or later.
+
+**Airflow 2.9.x**
+: **Recommended provider version**: `2.2.0`
+: **Required dependency minimums**:
+: - `apache-airflow-providers-common-sql>=1.20.0`
+: - `apache-airflow-providers-common-compat>=1.4.0`
+: - `openlineage-integration-common>=1.31.0`
+: - `openlineage-python>=1.31.0`
+: **Notes**: This is the newest provider release compatible with Airflow 2.9. Provider `2.3.0` and later requires Airflow 2.10 or later.
+
+**Airflow 2.8.x**
+: **Recommended provider version**: `1.14.0`
+: **Required dependency minimums**:
+: - `apache-airflow-providers-common-sql>=1.20.0`
+: - `apache-airflow-providers-common-compat>=1.2.1`
+: - `openlineage-integration-common>=1.24.2`
+: - `openlineage-python>=1.24.2`
+: **Notes**: This is the newest provider release compatible with Airflow 2.8. Provider `2.0.0` and later requires Airflow 2.9 or later.
+
+**Airflow 2.7.x**
+: **Recommended provider version**: `1.10.0`
+: **Required dependency minimums**:
+: - `apache-airflow-providers-common-sql>=1.6.0`
+: - `openlineage-integration-common>=1.16.0`
+: - `openlineage-python>=1.16.0`
+: **Notes**: This is the newest provider release compatible with Airflow 2.7. Provider `1.11.0` and later requires Airflow 2.8 or later. For Airflow 2.7 and 2.8, add the extra configuration variables shown in the setup steps. If you use Amazon MWAA 2.7.2, see the MWAA upgrade guide for Datadog-patched wheels.
 
 Review the [OpenLineage provider changelog](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html) before upgrading, because provider releases can change the minimum supported Airflow version or add required dependency constraints.
 
