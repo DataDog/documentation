@@ -11,7 +11,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual"
+      }
     },
     {
       "operationId": "CreateDashboardList",
@@ -21,7 +32,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual"
+      }
     },
     {
       "operationId": "GetDashboardList",
@@ -31,7 +53,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual/{list_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}"
+      }
     },
     {
       "operationId": "UpdateDashboardList",
@@ -41,7 +74,18 @@
       "versions": [
         "v1"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual/{list_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}"
+      }
     },
     {
       "operationId": "DeleteDashboardList",
@@ -51,7 +95,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual/{list_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual/{list_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual/{list_id}"
+      }
     }
   ],
   "deprecated": true

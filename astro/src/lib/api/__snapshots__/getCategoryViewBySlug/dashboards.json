@@ -11,7 +11,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
     },
     {
       "operationId": "GetDashboard",
@@ -21,7 +32,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
     },
     {
       "operationId": "ListDashboards",
@@ -31,7 +53,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
     },
     {
       "operationId": "UpdateDashboard",
@@ -41,7 +74,18 @@
       "versions": [
         "v1"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
     },
     {
       "operationId": "DeleteDashboard",
@@ -51,7 +95,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
     },
     {
       "operationId": "DeleteDashboards",
@@ -61,7 +116,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
     },
     {
       "operationId": "RestoreDashboards",
@@ -71,7 +137,18 @@
       "versions": [
         "v1"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
     },
     {
       "operationId": "CreatePublicDashboard",
@@ -81,7 +158,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public"
+      }
     },
     {
       "operationId": "GetPublicDashboard",
@@ -91,7 +179,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
     },
     {
       "operationId": "UpdatePublicDashboard",
@@ -101,7 +200,18 @@
       "versions": [
         "v1"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
     },
     {
       "operationId": "SendPublicDashboardInvitation",
@@ -111,7 +221,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
     },
     {
       "operationId": "GetPublicDashboardInvitations",
@@ -121,7 +242,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
     },
     {
       "operationId": "DeletePublicDashboard",
@@ -131,7 +263,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
     },
     {
       "operationId": "DeletePublicDashboardInvitation",
@@ -141,7 +284,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
     }
   ],
   "deprecated": false

@@ -1,0 +1,79 @@
+---
+/**
+ * Compact per-endpoint summary block for an API category landing page:
+ * an H2 that links to the full endpoint page, plus the endpoint's method and
+ * region-aware URL pattern. Mirrors the Hugo `endpoint-summary.html` partial.
+ *
+ * The H2 keeps the operation slug as its `id` so existing
+ * `/api/.../#endpoint-slug` deep links still scroll to the matching block.
+ * Region URLs render one `[data-region]` variant each; the global region CSS
+ * (see styles/global.css) shows only the active region's URL.
+ */
+import ApiMethodBadge from "@components/ApiMethodBadge/ApiMethodBadge.astro";
+import { getDefaultRegions } from "@lib/api/regionResolver";
+import styles from "./ApiEndpointSummary.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+interface Props {
+  summary: string;
+  href: string;
+  anchorId: string;
+  method: string;
+  regionUrls: Record<string, string>;
+  deprecated?: boolean;
+  unstable?: boolean;
+}
+
+const {
+  summary,
+  href,
+  anchorId,
+  method,
+  regionUrls,
+  deprecated = false,
+  unstable = false,
+} = Astro.props;
+
+const allRegions = getDefaultRegions();
+const cl = classListFactory(styles);
+
+// TODO: replace the literal "deprecated"/"preview" badge text with i18n keys
+// once authoritative translations exist in the Hugo i18n bundle.
+---
+
+<div class={cl("api-endpoint-summary")}>
+  <h2 class={cl("api-endpoint-summary__heading")} id={anchorId}>
+    <a class={cl("api-endpoint-summary__link")} href={href}>
+      {summary}
+      <span class={cl("api-endpoint-summary__arrow")} aria-hidden="true">&rarr;</span>
+    </a>
+    {deprecated && (
+      <span class={cl("api-endpoint-summary__badge", "api-endpoint-summary__badge--deprecated")}>
+        deprecated
+      </span>
+    )}
+    {unstable && (
+      <span class={cl("api-endpoint-summary__badge", "api-endpoint-summary__badge--preview")}>
+        preview
+      </span>
+    )}
+  </h2>
+  <div class={cl("api-endpoint-summary__url-line")}>
+    <ApiMethodBadge method={method} />
+    {allRegions.map((region) => {
+      const url = regionUrls?.[region.key];
+      return url ? (
+        <code class={cl("api-endpoint-summary__path")} data-region={region.key}>
+          {url}
+        </code>
+      ) : (
+        <code
+          class={cl("api-endpoint-summary__path", "api-endpoint-summary__path--unsupported")}
+          data-region={region.key}
+        >
+          Not supported in the {region.label} region
+        </code>
+      );
+    })}
+  </div>
+</div>

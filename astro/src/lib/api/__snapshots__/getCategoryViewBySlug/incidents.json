@@ -11,7 +11,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents"
+      }
     },
     {
       "operationId": "GetIncident",
@@ -21,7 +32,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}"
+      }
     },
     {
       "operationId": "UpdateIncident",
@@ -31,7 +53,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}"
+      }
     },
     {
       "operationId": "DeleteIncident",
@@ -41,7 +74,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}"
+      }
     },
     {
       "operationId": "CreateIncidentPostmortemAttachment",
@@ -51,7 +95,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/postmortems"
+      }
     },
     {
       "operationId": "SearchIncidents",
@@ -61,7 +116,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/search",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/search",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/search",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/search",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/search",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/search",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/search"
+      }
     },
     {
       "operationId": "ListIncidentImpacts",
@@ -71,7 +137,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts"
+      }
     },
     {
       "operationId": "CreateIncidentImpact",
@@ -81,7 +158,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts"
+      }
     },
     {
       "operationId": "DeleteIncidentImpact",
@@ -91,7 +179,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts/{impact_id}"
+      }
     },
     {
       "operationId": "CreateIncidentIntegration",
@@ -101,7 +200,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations"
+      }
     },
     {
       "operationId": "GetIncidentIntegration",
@@ -111,7 +221,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentIntegration",
@@ -121,7 +242,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}"
+      }
     },
     {
       "operationId": "DeleteIncidentIntegration",
@@ -131,7 +263,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id}"
+      }
     },
     {
       "operationId": "ListIncidentTodos",
@@ -141,7 +284,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos"
+      }
     },
     {
       "operationId": "CreateIncidentTodo",
@@ -151,7 +305,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos"
+      }
     },
     {
       "operationId": "GetIncidentTodo",
@@ -161,7 +326,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentTodo",
@@ -171,7 +347,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}"
+      }
     },
     {
       "operationId": "DeleteIncidentTodo",
@@ -181,7 +368,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id}"
+      }
     },
     {
       "operationId": "CreateIncidentType",
@@ -191,7 +389,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/types",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/types",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/types",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/types",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/types",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/types",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/types"
+      }
     },
     {
       "operationId": "ListIncidentTypes",
@@ -201,7 +410,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/types",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/types",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/types",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/types",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/types",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/types",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/types"
+      }
     },
     {
       "operationId": "GetIncidentType",
@@ -211,7 +431,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentType",
@@ -221,7 +452,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}"
+      }
     },
     {
       "operationId": "DeleteIncidentType",
@@ -231,7 +473,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id}"
+      }
     },
     {
       "operationId": "ListIncidentNotificationTemplates",
@@ -241,7 +494,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-templates",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-templates"
+      }
     },
     {
       "operationId": "CreateIncidentNotificationTemplate",
@@ -251,7 +515,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-templates",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-templates"
+      }
     },
     {
       "operationId": "GetIncidentNotificationTemplate",
@@ -261,7 +536,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}"
+      }
     },
     {
       "operationId": "UpdateIncidentNotificationTemplate",
@@ -271,7 +557,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}"
+      }
     },
     {
       "operationId": "DeleteIncidentNotificationTemplate",
@@ -281,7 +578,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id}"
+      }
     },
     {
       "operationId": "ListIncidentNotificationRules",
@@ -291,7 +599,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-rules",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-rules"
+      }
     },
     {
       "operationId": "CreateIncidentNotificationRule",
@@ -301,7 +620,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-rules",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-rules"
+      }
     },
     {
       "operationId": "GetIncidentNotificationRule",
@@ -311,7 +641,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}"
+      }
     },
     {
       "operationId": "UpdateIncidentNotificationRule",
@@ -321,7 +662,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}"
+      }
     },
     {
       "operationId": "DeleteIncidentNotificationRule",
@@ -331,7 +683,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id}"
+      }
     },
     {
       "operationId": "ListIncidentAttachments",
@@ -341,7 +704,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments"
+      }
     },
     {
       "operationId": "CreateIncidentAttachment",
@@ -351,7 +725,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments"
+      }
     },
     {
       "operationId": "DeleteIncidentAttachment",
@@ -361,7 +746,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentAttachment",
@@ -371,7 +767,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id}"
+      }
     },
     {
       "operationId": "GetGlobalIncidentSettings",
@@ -381,7 +788,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/settings",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/settings",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/settings",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/settings",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/settings"
+      }
     },
     {
       "operationId": "UpdateGlobalIncidentSettings",
@@ -391,7 +809,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/settings",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/settings",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/settings",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/settings",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/settings"
+      }
     },
     {
       "operationId": "ListGlobalIncidentHandles",
@@ -401,7 +830,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles"
+      }
     },
     {
       "operationId": "CreateGlobalIncidentHandle",
@@ -411,7 +851,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles"
+      }
     },
     {
       "operationId": "UpdateGlobalIncidentHandle",
@@ -421,7 +872,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles"
+      }
     },
     {
       "operationId": "DeleteGlobalIncidentHandle",
@@ -431,7 +893,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles"
+      }
     },
     {
       "operationId": "ListIncidentPostmortemTemplates",
@@ -441,7 +914,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates"
+      }
     },
     {
       "operationId": "CreateIncidentPostmortemTemplate",
@@ -451,7 +935,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates"
+      }
     },
     {
       "operationId": "GetIncidentPostmortemTemplate",
@@ -461,7 +956,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentPostmortemTemplate",
@@ -471,7 +977,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}"
+      }
     },
     {
       "operationId": "DeleteIncidentPostmortemTemplate",
@@ -481,7 +998,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id}"
+      }
     },
     {
       "operationId": "ImportIncident",
@@ -491,7 +1019,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/import",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/import",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/import",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/import",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/import",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/import",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/import"
+      }
     },
     {
       "operationId": "ListIncidents",
@@ -501,7 +1040,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents"
+      }
     },
     {
       "operationId": "ListIncidentIntegrations",
@@ -511,7 +1061,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations"
+      }
     },
     {
       "operationId": "ListIncidentUserDefinedFields",
@@ -521,7 +1082,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields"
+      }
     },
     {
       "operationId": "CreateIncidentUserDefinedField",
@@ -531,7 +1103,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields"
+      }
     },
     {
       "operationId": "GetIncidentUserDefinedField",
@@ -541,7 +1124,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}"
+      }
     },
     {
       "operationId": "UpdateIncidentUserDefinedField",
@@ -551,7 +1145,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}"
+      }
     },
     {
       "operationId": "DeleteIncidentUserDefinedField",
@@ -561,7 +1166,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id}"
+      }
     }
   ],
   "deprecated": false

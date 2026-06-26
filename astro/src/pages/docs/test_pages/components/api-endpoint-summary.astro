@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiEndpointSummary from '@components/ApiEndpointSummary/ApiEndpointSummary.astro';
+import RegionSelectorIsland from '@components/RegionSelector/RegionSelectorIsland.astro';
+
+const title = 'ApiEndpointSummary';
+
+const regionUrls = {
+  us: 'https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}',
+  eu: 'https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}',
+};
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiEndpointSummary</h1>
+
+      <p>
+        Compact per-endpoint block for an API category landing page: a heading
+        that links to the full endpoint page, plus the endpoint's method and
+        region-aware URL. Each region URL renders as a hidden
+        <code>[data-region]</code> variant; only the active region shows. Use
+        the selector below to switch sites and watch the URL update.
+      </p>
+
+      <RegionSelectorIsland />
+
+      <h2>Examples</h2>
+
+      <h3>Standard endpoint</h3>
+      <ApiEndpointSummary
+        summary="Get a dashboard"
+        href="/api/latest/dashboards/get-a-dashboard/"
+        anchorId="get-a-dashboard"
+        method="GET"
+        regionUrls={regionUrls}
+      />
+
+      <h3>Deprecated endpoint</h3>
+      <ApiEndpointSummary
+        summary="Get all dashboards"
+        href="/api/latest/dashboards/get-all-dashboards/"
+        anchorId="get-all-dashboards"
+        method="DELETE"
+        regionUrls={regionUrls}
+        deprecated={true}
+      />
+
+      <h3>Preview (unstable) endpoint</h3>
+      <ApiEndpointSummary
+        summary="Create a dashboard"
+        href="/api/latest/dashboards/create-a-dashboard/"
+        anchorId="create-a-dashboard"
+        method="POST"
+        regionUrls={{ us: regionUrls.us }}
+        unstable={true}
+      />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

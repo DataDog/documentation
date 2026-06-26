@@ -19,6 +19,11 @@ export const ApiOperationStubSchema = z
     menuOrder: z.number(),
     versions: z.array(ApiVersionSchema),
     method: z.string(),
+    deprecated: z.boolean(),
+    unstable: z.boolean(),
+    // Region-keyed endpoint URLs for the primary (newest) version, used by the
+    // category landing page to render each endpoint's method + URL summary.
+    regionUrls: z.record(z.string(), z.string()),
   })
   .strict();
 

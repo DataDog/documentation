@@ -24,6 +24,9 @@ const dashboards: ApiCategory = {
       menuOrder: 1,
       versions: ['v1'] as const,
       method: 'GET',
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
     },
     {
       operationId: 'createDashboard',
@@ -32,6 +35,9 @@ const dashboards: ApiCategory = {
       menuOrder: 2,
       versions: ['v1'] as const,
       method: 'POST',
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
     },
   ],
 };
@@ -49,6 +55,9 @@ const monitors: ApiCategory = {
       menuOrder: 1,
       versions: ['v1'] as const,
       method: 'POST',
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
     },
   ],
 };

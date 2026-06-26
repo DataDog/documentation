@@ -11,7 +11,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor"
+      }
     },
     {
       "operationId": "ListMonitors",
@@ -21,7 +32,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor"
+      }
     },
     {
       "operationId": "UpdateMonitor",
@@ -31,7 +53,18 @@
       "versions": [
         "v1"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}"
+      }
     },
     {
       "operationId": "GetMonitor",
@@ -41,7 +74,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}"
+      }
     },
     {
       "operationId": "DeleteMonitor",
@@ -51,7 +95,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}"
+      }
     },
     {
       "operationId": "CheckCanDeleteMonitor",
@@ -61,7 +116,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/can_delete",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/can_delete",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/can_delete",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/can_delete",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/can_delete",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/can_delete",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/can_delete"
+      }
     },
     {
       "operationId": "ValidateMonitor",
@@ -71,7 +137,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/validate",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/validate",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/validate",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/validate",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/validate",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/validate",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/validate"
+      }
     },
     {
       "operationId": "ValidateExistingMonitor",
@@ -81,7 +158,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}/validate",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/validate",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/validate",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/validate",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/validate",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/validate",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/validate"
+      }
     },
     {
       "operationId": "GetMonitorConfigPolicy",
@@ -91,7 +179,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}"
+      }
     },
     {
       "operationId": "SearchMonitors",
@@ -101,7 +200,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/search",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/search",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/search",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/search",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/search",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/search",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/search"
+      }
     },
     {
       "operationId": "ListMonitorConfigPolicies",
@@ -111,7 +221,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/policy",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/policy",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/policy",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/policy",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/policy",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/policy",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/policy"
+      }
     },
     {
       "operationId": "SearchMonitorGroups",
@@ -121,7 +242,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/groups/search",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/groups/search",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/groups/search",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/groups/search",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/groups/search",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/groups/search",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/groups/search"
+      }
     },
     {
       "operationId": "CreateMonitorConfigPolicy",
@@ -131,7 +263,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/policy",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/policy",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/policy",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/policy",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/policy",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/policy",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/policy"
+      }
     },
     {
       "operationId": "UnmuteMonitor",
@@ -141,7 +284,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}/unmute",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/unmute",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/unmute",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/unmute",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/unmute",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/unmute",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/unmute"
+      }
     },
     {
       "operationId": "UpdateMonitorConfigPolicy",
@@ -151,7 +305,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}"
+      }
     },
     {
       "operationId": "MuteMonitor",
@@ -161,7 +326,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/monitor/{monitor_id}/mute",
+        "us3": "https://api.us3.datadoghq.com/api/v1/monitor/{monitor_id}/mute",
+        "us5": "https://api.us5.datadoghq.com/api/v1/monitor/{monitor_id}/mute",
+        "eu": "https://api.datadoghq.eu/api/v1/monitor/{monitor_id}/mute",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/monitor/{monitor_id}/mute",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/monitor/{monitor_id}/mute",
+        "gov": "https://api.ddog-gov.com/api/v1/monitor/{monitor_id}/mute"
+      }
     },
     {
       "operationId": "DeleteMonitorConfigPolicy",
@@ -171,7 +347,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/policy/{policy_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/policy/{policy_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/policy/{policy_id}"
+      }
     },
     {
       "operationId": "UnmuteAllMonitors",
@@ -181,7 +368,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/v1/monitor/unmute_all",
+        "us3": "https://api.us3.datadoghq.com/v1/monitor/unmute_all",
+        "us5": "https://api.us5.datadoghq.com/v1/monitor/unmute_all",
+        "eu": "https://api.datadoghq.eu/v1/monitor/unmute_all",
+        "ap1": "https://api.ap1.datadoghq.com/v1/monitor/unmute_all",
+        "ap2": "https://api.ap2.datadoghq.com/v1/monitor/unmute_all",
+        "gov": "https://api.ddog-gov.com/v1/monitor/unmute_all"
+      }
     },
     {
       "operationId": "GetMonitorNotificationRule",
@@ -191,7 +389,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}"
+      }
     },
     {
       "operationId": "MuteAllMonitors",
@@ -201,7 +410,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/v1/monitor/mute_all",
+        "us3": "https://api.us3.datadoghq.com/v1/monitor/mute_all",
+        "us5": "https://api.us5.datadoghq.com/v1/monitor/mute_all",
+        "eu": "https://api.datadoghq.eu/v1/monitor/mute_all",
+        "ap1": "https://api.ap1.datadoghq.com/v1/monitor/mute_all",
+        "ap2": "https://api.ap2.datadoghq.com/v1/monitor/mute_all",
+        "gov": "https://api.ddog-gov.com/v1/monitor/mute_all"
+      }
     },
     {
       "operationId": "GetMonitorNotificationRules",
@@ -211,7 +431,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/notification_rule",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/notification_rule",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/notification_rule",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/notification_rule",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/notification_rule"
+      }
     },
     {
       "operationId": "CreateMonitorNotificationRule",
@@ -221,7 +452,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/notification_rule",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/notification_rule",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/notification_rule",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/notification_rule",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/notification_rule"
+      }
     },
     {
       "operationId": "UpdateMonitorNotificationRule",
@@ -231,7 +473,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}"
+      }
     },
     {
       "operationId": "DeleteMonitorNotificationRule",
@@ -241,7 +494,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/notification_rule/{rule_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/notification_rule/{rule_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/notification_rule/{rule_id}"
+      }
     },
     {
       "operationId": "GetMonitorUserTemplate",
@@ -251,7 +515,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}"
+      }
     },
     {
       "operationId": "ListMonitorUserTemplates",
@@ -261,7 +536,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template"
+      }
     },
     {
       "operationId": "CreateMonitorUserTemplate",
@@ -271,7 +557,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template"
+      }
     },
     {
       "operationId": "UpdateMonitorUserTemplate",
@@ -281,7 +578,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PUT"
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}"
+      }
     },
     {
       "operationId": "DeleteMonitorUserTemplate",
@@ -291,7 +599,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template/{template_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}"
+      }
     },
     {
       "operationId": "ValidateMonitorUserTemplate",
@@ -301,7 +620,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template/validate",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template/validate",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template/validate",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template/validate",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template/validate",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template/validate",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template/validate"
+      }
     },
     {
       "operationId": "ValidateExistingMonitorUserTemplate",
@@ -311,7 +641,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/monitor/template/{template_id}/validate",
+        "us3": "https://api.us3.datadoghq.com/api/v2/monitor/template/{template_id}/validate",
+        "us5": "https://api.us5.datadoghq.com/api/v2/monitor/template/{template_id}/validate",
+        "eu": "https://api.datadoghq.eu/api/v2/monitor/template/{template_id}/validate",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/monitor/template/{template_id}/validate",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/monitor/template/{template_id}/validate",
+        "gov": "https://api.ddog-gov.com/api/v2/monitor/template/{template_id}/validate"
+      }
     }
   ],
   "deprecated": false

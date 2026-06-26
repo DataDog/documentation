@@ -480,6 +480,9 @@ function buildOperationStub(group: RawOperation[], lang: Locale): ApiOperationSt
     (min, op) => Math.min(min, op.operation["x-menu-order"] ?? 999),
     Infinity,
   );
+  // The category landing page summarizes each endpoint using its primary
+  // (newest) version — the one shown as the active tab on the operation page.
+  const spec = getOpenApiDocument(latest.version);
   return {
     operationId,
     summary: action.summary ?? latest.operation.summary ?? "",
@@ -487,6 +490,9 @@ function buildOperationStub(group: RawOperation[], lang: Locale): ApiOperationSt
     menuOrder: Number.isFinite(menuOrder) ? menuOrder : 999,
     versions: group.map((op) => op.version),
     method: latest.method.toUpperCase(),
+    deprecated: latest.operation.deprecated === true,
+    unstable: !!latest.operation["x-unstable"],
+    regionUrls: buildRegionUrlsForOperation(spec, latest),
   };
 }
 

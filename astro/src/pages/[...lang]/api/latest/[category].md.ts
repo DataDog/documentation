@@ -1,27 +1,25 @@
 /**
  * AST-based plaintext rendering of each category summary page.
  *
- * Equivalent to `[category].md.ts`, but builds the page as Markdoc nodes
- * — heading, optional deprecation alert, description paragraph, and an
- * Actions section with a bullet list of operation links — then runs the
- * result through `format()`.
+ * Builds the page as Markdoc nodes — heading, optional deprecation alert,
+ * description paragraph, and one summary block per endpoint (heading linking
+ * to the endpoint page, plus its method + URL) — then runs the result through
+ * `format()`. Mirrors the HTML category page in `[category].astro`.
  */
 
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { ApiOperationStub } from "@lib/api/schemas/views";
 import {
   getCategoryStubsView,
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
+import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
 import {
   buildMarkdocStr,
   heading,
-  inline,
-  link,
-  list,
-  listItem,
   nodesFromMd,
 } from "@lib/plaintext/helpers";
 
@@ -70,9 +68,8 @@ export const GET: APIRoute = async ({ params }) => {
     contents.push(...nodesFromMd(category.description.trim()));
   }
 
-  if (category.operations.length > 0) {
-    contents.push(heading(2, "Actions"));
-    contents.push(operationsList(category.operations, categoryBaseHref));
+  for (const operation of category.operations) {
+    contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
   }
 
   const body = buildMarkdocStr(contents);
@@ -82,12 +79,9 @@ export const GET: APIRoute = async ({ params }) => {
   });
 };
 
-function operationsList(
-  operations: { summary: string; slug: string }[],
+function endpointSummaryNodes(
+  operation: ApiOperationStub,
   baseHref: string,
-): MarkdocNode {
-  const items = operations.map((op) => {
-    return listItem([inline([link(`${baseHref}${op.slug}/`, op.summary)])]);
-  });
-  return list("unordered", items);
+): MarkdocNode[] {
+  return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
 }

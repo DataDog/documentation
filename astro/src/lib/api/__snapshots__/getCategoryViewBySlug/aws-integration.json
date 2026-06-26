@@ -11,7 +11,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
     },
     {
       "operationId": "ListAWSNamespaces",
@@ -21,7 +32,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/available_namespaces",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/available_namespaces"
+      }
     },
     {
       "operationId": "CreateNewAWSExternalID",
@@ -32,7 +54,18 @@
         "v2",
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/generate_new_external_id",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/generate_new_external_id"
+      }
     },
     {
       "operationId": "CreateAWSTagFilter",
@@ -42,7 +75,18 @@
       "versions": [
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
     },
     {
       "operationId": "DeleteAWSTagFilter",
@@ -52,7 +96,18 @@
       "versions": [
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
     },
     {
       "operationId": "GetAWSAccount",
@@ -62,7 +117,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
     },
     {
       "operationId": "DeleteAWSAccount",
@@ -73,7 +139,18 @@
         "v2",
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
     },
     {
       "operationId": "ListAvailableAWSNamespaces",
@@ -83,7 +160,18 @@
       "versions": [
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/available_namespace_rules",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/available_namespace_rules"
+      }
     },
     {
       "operationId": "UpdateAWSAccount",
@@ -94,7 +182,18 @@
         "v2",
         "v1"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
     },
     {
       "operationId": "GetAWSIntegrationIAMPermissions",
@@ -104,7 +203,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions"
+      }
     },
     {
       "operationId": "ListAWSAccounts",
@@ -115,7 +225,18 @@
         "v2",
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts"
+      }
     },
     {
       "operationId": "GetAWSIntegrationIAMPermissionsStandard",
@@ -125,7 +246,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions/standard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/standard"
+      }
     },
     {
       "operationId": "CreateAWSAccount",
@@ -136,7 +268,18 @@
         "v2",
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts"
+      }
     },
     {
       "operationId": "GetAWSIntegrationIAMPermissionsResourceCollection",
@@ -146,7 +289,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions/resource_collection",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/resource_collection"
+      }
     },
     {
       "operationId": "UpdateAWSAccountCCMConfig",
@@ -156,7 +310,18 @@
       "versions": [
         "v2"
       ],
-      "method": "PATCH"
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
     },
     {
       "operationId": "DeleteAWSAccountCCMConfig",
@@ -166,7 +331,18 @@
       "versions": [
         "v2"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
     },
     {
       "operationId": "ListAWSEventBridgeSources",
@@ -177,7 +353,18 @@
         "v2",
         "v1"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
     },
     {
       "operationId": "CreateAWSEventBridgeSource",
@@ -188,7 +375,18 @@
         "v2",
         "v1"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
     },
     {
       "operationId": "DeleteAWSEventBridgeSource",
@@ -199,7 +397,18 @@
         "v2",
         "v1"
       ],
-      "method": "DELETE"
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
     },
     {
       "operationId": "GetAWSAccountCCMConfig",
@@ -209,7 +418,18 @@
       "versions": [
         "v2"
       ],
-      "method": "GET"
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
     },
     {
       "operationId": "CreateAWSAccountCCMConfig",
@@ -219,7 +439,18 @@
       "versions": [
         "v2"
       ],
-      "method": "POST"
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
     }
   ],
   "deprecated": false

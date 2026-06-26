@@ -2,8 +2,7 @@
 import ApiLayout from '@layouts/ApiLayout.astro';
 import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import Alert from '@components/Alert/Alert.astro';
-import WhatsNext from '@components/WhatsNext/WhatsNext.astro';
-import NextLink from '@components/WhatsNext/NextLink.astro';
+import ApiEndpointSummary from '@components/ApiEndpointSummary/ApiEndpointSummary.astro';
 import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
 import { renderMarkdown } from '@lib/api/markdownRenderer';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
@@ -42,7 +41,6 @@ if (!current) {
   return new Response(null, { status: 404 });
 }
 
-const validOpSlugs = current.operations.map((op) => op.slug);
 const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 ---
 
@@ -62,38 +60,16 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   {current.description && (
     <div set:html={renderMarkdown(current.description)} />
   )}
-  {current.operations.length > 0 && (
-    <WhatsNext desc="Actions:">
-      {current.operations.map((op) => (
-        <NextLink href={`${categoryBaseHref}${op.slug}/`}>
-          {op.summary}
-        </NextLink>
-      ))}
-    </WhatsNext>
-  )}
+  {current.operations.map((op) => (
+    <ApiEndpointSummary
+      summary={op.summary}
+      href={`${categoryBaseHref}${op.slug}/`}
+      anchorId={op.slug}
+      method={op.method}
+      regionUrls={op.regionUrls}
+      deprecated={op.deprecated}
+      unstable={op.unstable}
+    />
+  ))}
 </ApiLayout>
-
-{/*
-  Backward-compat hop: links from the Hugo era of the form
-  `/api/latest/<cat>/#<op-slug>` should land on the new per-operation page.
-  When the hash is version-suffixed (e.g. `#list-all-aws-integrations-v1`),
-  redirect to the bare operation page and preserve the hash so the matching
-  version tab activates on load. Browsers do not send the hash to the server,
-  so this must run client-side.
-*/}
-<script is:inline define:vars={{ baseHref: categoryBaseHref, validOpSlugs }}>
-  (function () {
-    if (!window.location.hash) return;
-    const slug = window.location.hash.slice(1);
-    if (!slug) return;
-    if (validOpSlugs.includes(slug)) {
-      window.location.replace(baseHref + slug + '/');
-      return;
-    }
-    const versionMatch = slug.match(/^(.+)-(v\d+)$/);
-    if (versionMatch && validOpSlugs.includes(versionMatch[1])) {
-      window.location.replace(baseHref + versionMatch[1] + '/#' + slug);
-    }
-  })();
-</script>
 

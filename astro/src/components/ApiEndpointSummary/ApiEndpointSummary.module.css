@@ -1,0 +1,73 @@
+.api-endpoint-summary {
+  margin-bottom: var(--space-xl);
+}
+
+.api-endpoint-summary__heading {
+  margin: 0 0 var(--space-sm);
+}
+
+.api-endpoint-summary__link {
+  /* Keep the heading's own color rather than the link color (Hugo parity). */
+  color: inherit;
+  text-decoration: none;
+}
+
+.api-endpoint-summary__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.api-endpoint-summary__arrow {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  /* Smaller than the heading text, matching Hugo's `fs-4` arrow. */
+  font-size: 0.7em;
+  /* Nudge up so it sits on the heading's optical center (Hugo parity). */
+  vertical-align: 0.1em;
+}
+
+.api-endpoint-summary__badge {
+  display: inline-block;
+  margin-left: var(--space-sm);
+  padding: 0 var(--space-xs);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+  border: var(--border-width) solid;
+  border-radius: var(--border-radius);
+}
+
+.api-endpoint-summary__badge--deprecated {
+  color: var(--color-caution-emphasis);
+  border-color: var(--color-caution);
+}
+
+.api-endpoint-summary__badge--preview {
+  color: var(--color-info-emphasis);
+  border-color: var(--color-info);
+}
+
+.api-endpoint-summary__url-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.api-endpoint-summary__path {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  background: var(--color-highlight-bg);
+  padding: 3px var(--space-sm);
+  border-radius: var(--border-radius);
+  word-break: break-all;
+}
+
+.api-endpoint-summary__path--unsupported {
+  color: var(--color-text-muted);
+  font-style: italic;
+  background: transparent;
+}

@@ -3,7 +3,7 @@ import { renderLlmsTxt } from './llmsTxtRenderer';
 import type { ApiCategory, ApiOperationStub } from './schemas/views';
 
 function op(summary: string, slug: string, method = 'GET'): ApiOperationStub {
-  return { operationId: `id-${slug}`, summary, slug, menuOrder: 1, versions: ['v2'], method };
+  return { operationId: `id-${slug}`, summary, slug, menuOrder: 1, versions: ['v2'], method, deprecated: false, unstable: false, regionUrls: {} };
 }
 
 function cat(name: string, slug: string, operations: ApiOperationStub[] = []): ApiCategory {
