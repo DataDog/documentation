@@ -79,6 +79,36 @@ DD_NO_PROXY_NONEXACT_MATCH=true
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```
 
+## `NO_PROXY` Accepted Values
+
+By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules used for Agent integrations.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+```yaml
+no_proxy_nonexact_match: true
+```
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+```bash
+DD_NO_PROXY_NONEXACT_MATCH=true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
+* A domain name matches that name and all subdomains, for example:
+  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
+  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
+* A domain name with a leading "." matches subdomains only, for example:
+  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
+* A CIDR range matches an IP address within the subnet, for example:
+  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
+* An exact IP address, for example:
+  - `169.254.169.254`
+* A hostname, for example:
+  - `webserver1`
+
 ## Proxy Server Setup Examples
 
 If you don't have an existing proxy server, Datadog recommends using an HTTP proxy like **Squid**.
