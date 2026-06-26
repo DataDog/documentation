@@ -49,7 +49,7 @@ Cuando se aplica el muestreo dinámico, los siguientes pasos son recomendados:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/service_management/events/
+[1]: /es/events/
 [2]: https://app.datadoghq.com/error-tracking/settings/rate-limits
 [3]: /es/logs/error_tracking/manage_data_collection#add-a-rule
 [4]: https://app.datadoghq.com/error-tracking/settings

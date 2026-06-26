@@ -270,6 +270,12 @@ multifiltersearch:
     - category: Downsize
       cloud_provider: AWS
       resource_type: RDS Instance
+      recommendation_type: Downsize RDS Instance
+      recommendation_description: RDS instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
+      recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance Provisioned IOPS
       recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks.
       recommendation_prerequisites: ""
@@ -598,6 +604,8 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -702,6 +710,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
-[13]: /bits_ai/bits_ai_dev_agent/setup
-[14]: /bits_ai/bits_ai_dev_agent/
+[13]: /bits_ai/bits_code/setup
+[14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
+[16]: /mcp_server/tools/#cost_recommendations

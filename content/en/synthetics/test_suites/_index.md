@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for simplified management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. Configure suite-level alerting to receive a consolidated notification when a critical portion of your tests fail, helping you respond more efficiently to issues impacting important workflows. 
+Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for simplified management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. Configure suite-level alerting to get a consolidated notification when a critical portion of your tests fail.
 
 ## Key features
 
@@ -72,6 +72,8 @@ To create a Synthetic Monitoring Test Suite:
 
 When you create a test suite, Datadog automatically generates a service level objective (SLO) for it, with no configuration required. By default, the SLO uses a 7-day rolling window with a 99.9% target.
 
+<div class="alert alert-info">Test suite permissions (view and edit) apply to the suite itself and are independent of the auto-generated SLO's permissions. Access to the SLO is determined by the user's <a href="/service_level_objectives/#permissions">SLO product permissions</a>. A user without test suite edit permissions can still edit the auto-generated SLO if they have SLO edit permissions.</div>
+
 The SLO panel on the Test Suite details page shows the current SLO status and error budget. From this view, you can:
 
 - **[Create alert](#create-an-alert)** to set up alerting when SLO performance degrades significantly. When an alert already exists, hover over the alert indicator to view additional details.
@@ -111,9 +113,9 @@ To update the SLO time window (for example, to 30 days) or target, click the {{<
 
 ## View and manage test suites
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**.
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. You can also access test suites from **Digital Experience > Test Suites**.
 
-To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime** in the bulk actions bar.
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime**.
 
 When viewing a test suite, three tabs are available:
 
@@ -154,7 +156,7 @@ To run a subset of tests:
 
 If some tests fail to appear in a suite:
 
-- Ensure the tests are active and not deleted.
+- Verify the tests are active and not deleted.
 - Confirm you have the necessary permissions to view those tests.
 - Refresh filters or clear search terms when adding tests.
 

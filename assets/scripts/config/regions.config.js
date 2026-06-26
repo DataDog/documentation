@@ -698,6 +698,16 @@ export default {
     gov2: '\n        .useSite(DatadogSite.US2_FED)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
+  maui_site_config: {
+    us: '',
+    us3: '\n    Site = DatadogSite.Us3,',
+    us5: '\n    Site = DatadogSite.Us5,',
+    eu: '\n    Site = DatadogSite.Eu1,',
+    ap1: '\n    Site = DatadogSite.Ap1,',
+    ap2: '\n    Site = DatadogSite.Ap2,',
+    gov2: '\n    Site = DatadogSite.Us1Fed,',
+    gov: '\n    Site = DatadogSite.Us1Fed,'
+  },
   flutter_web_logs_cdn_path: {
     us: 'us1/v6/datadog-logs.js',
     us3: 'us3/v6/datadog-logs.js',
