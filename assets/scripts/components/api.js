@@ -171,6 +171,44 @@ if (dataVersionToggles.length) {
     });
 }
 
+// Date-based API version selector dropdown (x-datadog-api-versioning / x-datadog-api-versioned)
+// Uses event delegation so it works regardless of DOM load order or collapsed sections.
+document.addEventListener('click', (e) => {
+    const item = e.target.closest('.js-api-date-version-item');
+    if (!item) return;
+
+    e.preventDefault();
+
+    const selectedVersion = item.dataset.apiDateVersion;
+    const operationId = item.dataset.operationId;
+
+    if (!selectedVersion || !operationId) return;
+
+    // Update active state on dropdown items
+    document.querySelectorAll(`.js-api-date-version-item[data-operation-id="${operationId}"]`).forEach((i) => {
+        i.classList.toggle('active', i === item);
+    });
+
+    // Update the dropdown button label to show the selected version
+    const dropdown = item.closest('.js-api-date-version-dropdown');
+    if (dropdown) {
+        const label = dropdown.querySelector('.js-api-date-version-label');
+        if (label) {
+            label.textContent = selectedVersion;
+        }
+    }
+
+    // Show the matching version pane (schema + example), hide all others for this operation
+    document.querySelectorAll(`.api-versioned-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
+        pane.classList.toggle('d-none', pane.dataset.apiDateVersion !== selectedVersion);
+    });
+
+    // Update DD-API-VERSION header values in curl examples and SDK notes
+    document.querySelectorAll(`.api-version-header-value[data-operation-id="${operationId}"]`).forEach((el) => {
+        el.textContent = selectedVersion;
+    });
+});
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();

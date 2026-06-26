@@ -139,11 +139,45 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "name": "On-Call Escalation Policy",
+            "name": "Escalation Policy 1",
+            "resolve_page_on_policy_end": true,
+            "retries": 2,
             "steps": [
               {
+                "assignment": "default",
+                "escalate_after_seconds": 3600,
                 "targets": [
-                  {}
+                  {
+                    "id": "00000000-aba1-0000-0000-000000000000",
+                    "type": "users"
+                  },
+                  {
+                    "config": {
+                      "schedule": {
+                        "position": "previous"
+                      }
+                    },
+                    "id": "00000000-aba2-0000-0000-000000000000",
+                    "type": "schedules"
+                  },
+                  {
+                    "id": "00000000-aba3-0000-0000-000000000000",
+                    "type": "teams"
+                  }
+                ]
+              },
+              {
+                "assignment": "round-robin",
+                "escalate_after_seconds": 3600,
+                "targets": [
+                  {
+                    "id": "00000000-aba1-0000-0000-000000000000",
+                    "type": "users"
+                  },
+                  {
+                    "id": "00000000-abb1-0000-0000-000000000000",
+                    "type": "users"
+                  }
                 ]
               }
             ]
@@ -164,21 +198,43 @@
       "json": {
         "data": {
           "attributes": {
-            "name": "On-Call Escalation Policy",
-            "resolve_page_on_policy_end": false,
-            "retries": "integer",
+            "name": "Escalation Policy 1",
+            "resolve_page_on_policy_end": true,
+            "retries": 2,
             "steps": [
               {
-                "assignment": "string",
+                "assignment": "default",
                 "escalate_after_seconds": 3600,
                 "targets": [
+                  {
+                    "id": "00000000-aba1-0000-0000-000000000000",
+                    "type": "users"
+                  },
                   {
                     "config": {
                       "schedule": {
                         "position": "previous"
                       }
                     },
+                    "id": "00000000-aba2-0000-0000-000000000000",
+                    "type": "schedules"
+                  },
+                  {
+                    "id": "00000000-aba3-0000-0000-000000000000",
+                    "type": "teams"
+                  }
+                ]
+              },
+              {
+                "assignment": "round-robin",
+                "escalate_after_seconds": 3600,
+                "targets": [
+                  {
                     "id": "00000000-aba1-0000-0000-000000000000",
+                    "type": "users"
+                  },
+                  {
+                    "id": "00000000-abb1-0000-0000-000000000000",
                     "type": "users"
                   }
                 ]
@@ -540,16 +596,28 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "name": "On-Call Escalation Policy",
+            "name": "Escalation Policy 1",
+            "resolve_page_on_policy_end": false,
+            "retries": 2,
             "steps": [
               {
+                "assignment": "default",
+                "escalate_after_seconds": 3600,
+                "id": "00000000-aba1-0000-0000-000000000000",
                 "targets": [
-                  {}
+                  {
+                    "id": "00000000-aba1-0000-0000-000000000000",
+                    "type": "users"
+                  },
+                  {
+                    "id": "00000000-aba2-0000-0000-000000000000",
+                    "type": "schedules"
+                  }
                 ]
               }
             ]
           },
-          "id": "00000000-aba1-0000-0000-000000000000",
+          "id": "a3000000-0000-0000-0000-000000000000",
           "relationships": {
             "teams": {
               "data": [
@@ -566,29 +634,28 @@
       "json": {
         "data": {
           "attributes": {
-            "name": "On-Call Escalation Policy",
+            "name": "Escalation Policy 1",
             "resolve_page_on_policy_end": false,
-            "retries": "integer",
+            "retries": 2,
             "steps": [
               {
-                "assignment": "string",
+                "assignment": "default",
                 "escalate_after_seconds": 3600,
                 "id": "00000000-aba1-0000-0000-000000000000",
                 "targets": [
                   {
-                    "config": {
-                      "schedule": {
-                        "position": "previous"
-                      }
-                    },
                     "id": "00000000-aba1-0000-0000-000000000000",
                     "type": "users"
+                  },
+                  {
+                    "id": "00000000-aba2-0000-0000-000000000000",
+                    "type": "schedules"
                   }
                 ]
               }
             ]
           },
-          "id": "00000000-aba1-0000-0000-000000000000",
+          "id": "a3000000-0000-0000-0000-000000000000",
           "relationships": {
             "teams": {
               "data": [
@@ -740,16 +807,31 @@
           "attributes": {
             "layers": [
               {
-                "effective_date": "2025-01-01T00:00:00Z",
-                "interval": {},
+                "effective_date": "2025-02-03T05:00:00Z",
+                "end_date": "2025-12-31T00:00:00Z",
+                "interval": {
+                  "days": 1
+                },
                 "members": [
-                  {}
+                  {
+                    "user": {
+                      "id": "00000000-aba1-0000-0000-000000000000"
+                    }
+                  }
                 ],
-                "name": "Primary On-Call Layer",
-                "rotation_start": "2025-01-01T00:00:00Z"
+                "name": "Layer 1",
+                "restrictions": [
+                  {
+                    "end_day": "friday",
+                    "end_time": "17:00:00",
+                    "start_day": "monday",
+                    "start_time": "09:00:00"
+                  }
+                ],
+                "rotation_start": "2025-02-01T00:00:00Z"
               }
             ],
-            "name": "Team A On-Call",
+            "name": "On-Call Schedule",
             "time_zone": "America/New_York"
           },
           "relationships": {
@@ -770,11 +852,10 @@
           "attributes": {
             "layers": [
               {
-                "effective_date": "2025-01-01T00:00:00Z",
-                "end_date": "2019-09-19T10:00:00.000Z",
+                "effective_date": "2025-02-03T05:00:00Z",
+                "end_date": "2025-12-31T00:00:00Z",
                 "interval": {
-                  "days": 1,
-                  "seconds": 300
+                  "days": 1
                 },
                 "members": [
                   {
@@ -783,20 +864,19 @@
                     }
                   }
                 ],
-                "name": "Primary On-Call Layer",
+                "name": "Layer 1",
                 "restrictions": [
                   {
-                    "end_day": "string",
-                    "end_time": "string",
-                    "start_day": "string",
-                    "start_time": "string"
+                    "end_day": "friday",
+                    "end_time": "17:00:00",
+                    "start_day": "monday",
+                    "start_time": "09:00:00"
                   }
                 ],
-                "rotation_start": "2025-01-01T00:00:00Z",
-                "time_zone": "America/New_York"
+                "rotation_start": "2025-02-01T00:00:00Z"
               }
             ],
-            "name": "Team A On-Call",
+            "name": "On-Call Schedule",
             "time_zone": "America/New_York"
           },
           "relationships": {
@@ -1135,15 +1215,30 @@
             "layers": [
               {
                 "effective_date": "2025-02-03T05:00:00Z",
-                "interval": {},
+                "end_date": "2025-12-31T00:00:00Z",
+                "interval": {
+                  "seconds": 3600
+                },
                 "members": [
-                  {}
+                  {
+                    "user": {
+                      "id": "00000000-aba1-0000-0000-000000000000"
+                    }
+                  }
                 ],
-                "name": "Primary On-Call Layer",
+                "name": "Layer 1",
+                "restrictions": [
+                  {
+                    "end_day": "friday",
+                    "end_time": "17:00:00",
+                    "start_day": "monday",
+                    "start_time": "09:00:00"
+                  }
+                ],
                 "rotation_start": "2025-02-01T00:00:00Z"
               }
             ],
-            "name": "Primary On-Call",
+            "name": "On-Call Schedule Updated",
             "time_zone": "America/New_York"
           },
           "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
@@ -1167,10 +1262,8 @@
               {
                 "effective_date": "2025-02-03T05:00:00Z",
                 "end_date": "2025-12-31T00:00:00Z",
-                "id": "00000000-0000-0000-0000-000000000001",
                 "interval": {
-                  "days": 1,
-                  "seconds": 300
+                  "seconds": 3600
                 },
                 "members": [
                   {
@@ -1179,20 +1272,19 @@
                     }
                   }
                 ],
-                "name": "Primary On-Call Layer",
+                "name": "Layer 1",
                 "restrictions": [
                   {
-                    "end_day": "string",
-                    "end_time": "string",
-                    "start_day": "string",
-                    "start_time": "string"
+                    "end_day": "friday",
+                    "end_time": "17:00:00",
+                    "start_day": "monday",
+                    "start_time": "09:00:00"
                   }
                 ],
-                "rotation_start": "2025-02-01T00:00:00Z",
-                "time_zone": "America/New_York"
+                "rotation_start": "2025-02-01T00:00:00Z"
               }
             ],
-            "name": "Primary On-Call",
+            "name": "On-Call Schedule Updated",
             "time_zone": "America/New_York"
           },
           "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
@@ -1540,15 +1632,44 @@
           "attributes": {
             "rules": [
               {
+                "actions": null,
+                "policy_id": "",
+                "query": "tags.service:test",
                 "time_restriction": {
                   "restrictions": [
-                    {}
+                    {
+                      "end_day": "monday",
+                      "end_time": "17:00:00",
+                      "start_day": "monday",
+                      "start_time": "09:00:00"
+                    },
+                    {
+                      "end_day": "tuesday",
+                      "end_time": "17:00:00",
+                      "start_day": "tuesday",
+                      "start_time": "09:00:00"
+                    }
                   ],
                   "time_zone": ""
-                }
+                },
+                "urgency": "high"
+              },
+              {
+                "actions": [
+                  {
+                    "channel": "channel",
+                    "type": "send_slack_message",
+                    "workspace": "workspace"
+                  }
+                ],
+                "policy_id": "fad4eee1-13f5-40d8-886b-4e56d8d5d1c6",
+                "query": "",
+                "time_restriction": null,
+                "urgency": "low"
               }
             ]
           },
+          "id": "27590dae-47be-4a7d-9abf-8f4e45124020",
           "type": "team_routing_rules"
         }
       },
@@ -1557,31 +1678,44 @@
           "attributes": {
             "rules": [
               {
-                "actions": [
-                  {
-                    "channel": "CHANNEL",
-                    "type": "send_slack_message",
-                    "workspace": "WORKSPACE"
-                  }
-                ],
-                "policy_id": "string",
-                "query": "string",
+                "actions": null,
+                "policy_id": "",
+                "query": "tags.service:test",
                 "time_restriction": {
                   "restrictions": [
                     {
-                      "end_day": "string",
-                      "end_time": "string",
-                      "start_day": "string",
-                      "start_time": "string"
+                      "end_day": "monday",
+                      "end_time": "17:00:00",
+                      "start_day": "monday",
+                      "start_time": "09:00:00"
+                    },
+                    {
+                      "end_day": "tuesday",
+                      "end_time": "17:00:00",
+                      "start_day": "tuesday",
+                      "start_time": "09:00:00"
                     }
                   ],
                   "time_zone": ""
                 },
+                "urgency": "high"
+              },
+              {
+                "actions": [
+                  {
+                    "channel": "channel",
+                    "type": "send_slack_message",
+                    "workspace": "workspace"
+                  }
+                ],
+                "policy_id": "fad4eee1-13f5-40d8-886b-4e56d8d5d1c6",
+                "query": "",
+                "time_restriction": null,
                 "urgency": "low"
               }
             ]
           },
-          "id": "string",
+          "id": "27590dae-47be-4a7d-9abf-8f4e45124020",
           "type": "team_routing_rules"
         }
       },
@@ -1723,6 +1857,15 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "config": {
+              "address": "foo@bar.com",
+              "formats": [
+                "html"
+              ],
+              "type": "email"
+            }
+          },
           "type": "notification_channels"
         }
       },
@@ -1730,8 +1873,11 @@
         "data": {
           "attributes": {
             "config": {
-              "number": "",
-              "type": "phone"
+              "address": "foo@bar.com",
+              "formats": [
+                "html"
+              ],
+              "type": "email"
             }
           },
           "type": "notification_channels"
@@ -2020,9 +2166,20 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "category": "high_urgency",
+            "channel_settings": {
+              "method": "sms",
+              "type": "phone"
+            },
+            "delay_minutes": 1
+          },
           "relationships": {
             "channel": {
-              "data": {}
+              "data": {
+                "id": "1562fab3-a8c2-49e2-8f3a-28dcda2405e2",
+                "type": "notification_channels"
+              }
             }
           },
           "type": "notification_rules"
@@ -2031,17 +2188,17 @@
       "json": {
         "data": {
           "attributes": {
-            "category": "string",
+            "category": "high_urgency",
             "channel_settings": {
               "method": "sms",
               "type": "phone"
             },
-            "delay_minutes": "integer"
+            "delay_minutes": 1
           },
           "relationships": {
             "channel": {
               "data": {
-                "id": "string",
+                "id": "1562fab3-a8c2-49e2-8f3a-28dcda2405e2",
                 "type": "notification_channels"
               }
             }
@@ -2246,9 +2403,21 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "category": "high_urgency",
+            "channel_settings": {
+              "method": "sms",
+              "type": "phone"
+            },
+            "delay_minutes": 1
+          },
+          "id": "2462ace1-49e2-aab1-xc4f-29cc4ae1105n7",
           "relationships": {
             "channel": {
-              "data": {}
+              "data": {
+                "id": "1562fab3-a8c2-49e2-8f3a-28dcda2405e2",
+                "type": "notification_channels"
+              }
             }
           },
           "type": "notification_rules"
@@ -2257,18 +2426,18 @@
       "json": {
         "data": {
           "attributes": {
-            "category": "string",
+            "category": "high_urgency",
             "channel_settings": {
               "method": "sms",
               "type": "phone"
             },
-            "delay_minutes": "integer"
+            "delay_minutes": 1
           },
-          "id": "string",
+          "id": "2462ace1-49e2-aab1-xc4f-29cc4ae1105n7",
           "relationships": {
             "channel": {
               "data": {
-                "id": "string",
+                "id": "1562fab3-a8c2-49e2-8f3a-28dcda2405e2",
                 "type": "notification_channels"
               }
             }

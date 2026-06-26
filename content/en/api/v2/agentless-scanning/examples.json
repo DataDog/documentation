@@ -341,7 +341,11 @@
     "request": {
       "json_curl": {
         "data": {
-          "id": "",
+          "attributes": {
+            "vuln_containers_os": true,
+            "vuln_host_os": true
+          },
+          "id": "12345678-90ab-cdef-1234-567890abcdef",
           "type": "azure_scan_options"
         }
       },
@@ -352,7 +356,7 @@
             "vuln_containers_os": false,
             "vuln_host_os": false
           },
-          "id": "",
+          "id": "12345678-90ab-cdef-1234-567890abcdef",
           "type": "azure_scan_options"
         }
       },
@@ -570,7 +574,11 @@
     "request": {
       "json_curl": {
         "data": {
-          "id": "",
+          "attributes": {
+            "vuln_containers_os": true,
+            "vuln_host_os": true
+          },
+          "id": "company-project-id",
           "type": "gcp_scan_options"
         }
       },
@@ -581,7 +589,7 @@
             "vuln_containers_os": false,
             "vuln_host_os": false
           },
-          "id": "",
+          "id": "company-project-id",
           "type": "gcp_scan_options"
         }
       },
@@ -736,7 +744,7 @@
     "request": {
       "json_curl": {
         "data": {
-          "id": "",
+          "id": "company-project-id",
           "type": "gcp_scan_options"
         }
       },

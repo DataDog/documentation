@@ -5,6 +5,8 @@
 {{ $endpoint := .endpoint }}
 {{ $version := .version }}
 {{ $securitySchemes := .securitySchemes }}
+{{ $isDateVersioned := .isDateVersioned | default false }}
+{{ $baseVersion := .baseVersion | default "" }}
 {{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
@@ -157,15 +159,15 @@
                                                   {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                               {{- end -}}
                                             {{- end -}}
-                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                                           {{- end -}}
                                       {{- else -}}
-                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                                       {{- end -}}
                                   {{- end -}}
                               {{- end -}}
                           {{- else -}}
-                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                           {{- end -}}
                           </code>
                         </pre>
@@ -214,15 +216,15 @@
                                             {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                         {{- end -}}
                                       {{- end -}}
-                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                                   {{- end -}}
                               {{- else -}}
-                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                               {{- end -}}
                           {{- end -}}
                       {{- end -}}
                   {{- else -}}
-                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion "operationId" $operationid) }}
                   {{- end -}}
                   </code>
                 </pre>
@@ -261,6 +263,11 @@
     {{ $myItems := (index ($s.Get "items") $lang.name) }}
     {{ if gt $numOfCodeExamples 0 }}
     <div class="code-snippet-wrapper js-code-block append-copy-btn" data-code-lang-block="{{ $lang.name }}">
+      {{ if $isDateVersioned }}
+      <div class="alert alert-info py-2 px-3 mb-2 small api-version-sdk-note" data-operation-id="{{ $operationid }}">
+        Include the header <code>DD-API-VERSION: <span class="api-version-header-value" data-operation-id="{{ $operationid }}">{{ $baseVersion }}</span></code> in your request.
+      </div>
+      {{ end }}
       {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">{{ end }}
         {{ range $i, $item := $myItems | first 3 }}
             {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}

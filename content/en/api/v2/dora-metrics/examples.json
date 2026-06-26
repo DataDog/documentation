@@ -223,15 +223,22 @@
     "request": {
       "json_curl": {
         "data": {
-          "attributes": {}
+          "attributes": {
+            "from": "2025-01-01T00:00:00Z",
+            "limit": 100,
+            "query": "service:(shopist OR api-service) env:production team:backend",
+            "sort": "-finished_at",
+            "to": "2025-01-31T23:59:59Z"
+          },
+          "type": "dora_deployments_list_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
             "from": "2025-01-01T00:00:00Z",
-            "limit": 500,
-            "query": "service:(shopist OR api-service OR payment-service) env:(production OR staging) team:(backend OR platform)",
+            "limit": 100,
+            "query": "service:(shopist OR api-service) env:production team:backend",
             "sort": "-finished_at",
             "to": "2025-01-31T23:59:59Z"
           },
@@ -349,7 +356,13 @@
     "request": {
       "json_curl": {
         "data": {
-          "attributes": {},
+          "attributes": {
+            "change_failure": true,
+            "remediation": {
+              "id": "eG42zNIkVjM",
+              "type": "rollback"
+            }
+          },
           "id": "z_RwVLi7v4Y",
           "type": "dora_deployment_patch_request"
         }
@@ -594,15 +607,22 @@
     "request": {
       "json_curl": {
         "data": {
-          "attributes": {}
+          "attributes": {
+            "from": "2025-01-01T00:00:00Z",
+            "limit": 100,
+            "query": "severity:(SEV-1 OR SEV-2) env:production team:backend",
+            "sort": "-started_at",
+            "to": "2025-01-31T23:59:59Z"
+          },
+          "type": "dora_failures_list_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
             "from": "2025-01-01T00:00:00Z",
-            "limit": 500,
-            "query": "severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist OR api-service OR payment-service) team:(backend OR platform OR payments)",
+            "limit": 100,
+            "query": "severity:(SEV-1 OR SEV-2) env:production team:backend",
             "sort": "-started_at",
             "to": "2025-01-31T23:59:59Z"
           },

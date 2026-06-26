@@ -189,8 +189,39 @@
       "json_curl": {
         "data": {
           "attributes": {
+            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
+            "components": [
+              {
+                "name": "API",
+                "position": 0,
+                "type": "component"
+              },
+              {
+                "components": [
+                  {
+                    "name": "Login",
+                    "position": 0,
+                    "type": "component"
+                  },
+                  {
+                    "name": "Settings",
+                    "position": 1,
+                    "type": "component"
+                  }
+                ],
+                "name": "Web App",
+                "position": 1,
+                "type": "group"
+              },
+              {
+                "name": "Webhooks",
+                "position": 2,
+                "type": "component"
+              }
+            ],
             "domain_prefix": "status-page-us1",
             "name": "Status Page US1",
+            "subscriptions_enabled": true,
             "type": "public",
             "visualization_type": "bars_and_uptime_percentage"
           },
@@ -203,13 +234,28 @@
             "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
             "components": [
               {
+                "name": "API",
+                "position": 0,
+                "type": "component"
+              },
+              {
                 "components": [
                   {
-                    "name": "string",
-                    "position": "integer",
+                    "name": "Login",
+                    "position": 0,
+                    "type": "component"
+                  },
+                  {
+                    "name": "Settings",
+                    "position": 1,
                     "type": "component"
                   }
                 ],
+                "name": "Web App",
+                "position": 1,
+                "type": "group"
+              },
+              {
                 "name": "Webhooks",
                 "position": 2,
                 "type": "component"
@@ -647,7 +693,17 @@
     "request": {
       "json_curl": {
         "data": {
-          "attributes": {},
+          "attributes": {
+            "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
+            "domain_prefix": "status-page-us1-east",
+            "email_header_image": "data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF",
+            "enabled": false,
+            "favicon": "data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA",
+            "name": "Status Page US1 East",
+            "subscriptions_enabled": false,
+            "type": "internal",
+            "visualization_type": "bars_only"
+          },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "status_pages"
         }
@@ -656,9 +712,9 @@
         "data": {
           "attributes": {
             "company_logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM",
-            "domain_prefix": "status-page-us1",
+            "domain_prefix": "status-page-us1-east",
             "email_header_image": "data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF",
-            "enabled": true,
+            "enabled": false,
             "favicon": "data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA",
             "name": "Status Page US1",
             "slack_app_icon": "string",
@@ -838,23 +894,13 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "components": [
-              {
-                "name": "",
-                "position": 0,
-                "type": "component"
-              }
-            ],
-            "name": "Web App",
+            "name": "Metrics Intake",
             "position": 0,
-            "type": "group"
+            "type": "component"
           },
           "relationships": {
             "group": {
-              "data": {
-                "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "type": "components"
-              }
+              "data": null
             }
           },
           "type": "components"
@@ -863,23 +909,13 @@
       "json": {
         "data": {
           "attributes": {
-            "components": [
-              {
-                "name": "",
-                "position": 0,
-                "type": "component"
-              }
-            ],
-            "name": "Web App",
+            "name": "Metrics Intake",
             "position": 0,
-            "type": "group"
+            "type": "component"
           },
           "relationships": {
             "group": {
-              "data": {
-                "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "type": "components"
-              }
+              "data": null
             }
           },
           "type": "components"
@@ -1066,7 +1102,10 @@
     "request": {
       "json_curl": {
         "data": {
-          "attributes": {},
+          "attributes": {
+            "name": "Metrics Intake Service",
+            "position": 4
+          },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "components"
         }
@@ -1074,8 +1113,8 @@
       "json": {
         "data": {
           "attributes": {
-            "name": "Web App",
-            "position": 1
+            "name": "Metrics Intake Service",
+            "position": 4
           },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "components"
@@ -1184,9 +1223,10 @@
             "components_affected": [
               {
                 "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "status": "operational"
+                "status": "degraded"
               }
             ],
+            "description": "Our API is experiencing elevated latency. We are investigating the issue.",
             "status": "investigating",
             "title": "Elevated API Latency"
           },
@@ -1199,7 +1239,7 @@
             "components_affected": [
               {
                 "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "status": "operational"
+                "status": "degraded"
               }
             ],
             "description": "Our API is experiencing elevated latency. We are investigating the issue.",
@@ -1568,7 +1608,9 @@
                 "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
                 "status": "operational"
               }
-            ]
+            ],
+            "description": "We've deployed a fix and latency has returned to normal. This issue has been resolved.",
+            "status": "resolved"
           },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "degradations"
@@ -1584,8 +1626,7 @@
               }
             ],
             "description": "We've deployed a fix and latency has returned to normal. This issue has been resolved.",
-            "status": "resolved",
-            "title": "Elevated API Latency"
+            "status": "resolved"
           },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "degradations"
@@ -2168,12 +2209,11 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "components_affected": [
-              {
-                "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "status": "operational"
-              }
-            ]
+            "completed_date": "2026-02-18T20:01:13.332360075Z",
+            "in_progress_description": "We are currently performing maintenance on the API to improve performance for 40 minutes.",
+            "scheduled_description": "We will be performing maintenance on the API to improve performance for 40 minutes.",
+            "start_date": "2026-02-18T19:21:13.332360075Z",
+            "title": "API Maintenance"
           },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "maintenances"
@@ -2182,19 +2222,11 @@
       "json": {
         "data": {
           "attributes": {
-            "completed_date": "2019-09-19T10:00:00.000Z",
-            "completed_description": "string",
-            "components_affected": [
-              {
-                "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
-                "status": "operational"
-              }
-            ],
-            "in_progress_description": "string",
-            "scheduled_description": "string",
-            "start_date": "2019-09-19T10:00:00.000Z",
-            "status": "string",
-            "title": "string"
+            "completed_date": "2026-02-18T20:01:13.332360075Z",
+            "in_progress_description": "We are currently performing maintenance on the API to improve performance for 40 minutes.",
+            "scheduled_description": "We will be performing maintenance on the API to improve performance for 40 minutes.",
+            "start_date": "2026-02-18T19:21:13.332360075Z",
+            "title": "API Maintenance"
           },
           "id": "1234abcd-12ab-34cd-56ef-123456abcdef",
           "type": "maintenances"

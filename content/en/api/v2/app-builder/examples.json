@@ -79,7 +79,15 @@
       "json_curl": {
         "data": [
           {
-            "id": "65bb1f25-52e1-4510-9f8d-22d1516ed693",
+            "id": "aea2ed17-b45f-40d0-ba59-c86b7972c901",
+            "type": "appDefinitions"
+          },
+          {
+            "id": "f69bb8be-6168-4fe7-a30d-370256b6504a",
+            "type": "appDefinitions"
+          },
+          {
+            "id": "ab1ed73e-13ad-4426-b0df-a0ff8876a088",
             "type": "appDefinitions"
           }
         ]
@@ -87,7 +95,15 @@
       "json": {
         "data": [
           {
-            "id": "65bb1f25-52e1-4510-9f8d-22d1516ed693",
+            "id": "aea2ed17-b45f-40d0-ba59-c86b7972c901",
+            "type": "appDefinitions"
+          },
+          {
+            "id": "f69bb8be-6168-4fe7-a30d-370256b6504a",
+            "type": "appDefinitions"
+          },
+          {
+            "id": "ab1ed73e-13ad-4426-b0df-a0ff8876a088",
             "type": "appDefinitions"
           }
         ]
@@ -277,31 +293,52 @@
           "attributes": {
             "components": [
               {
-                "name": "",
+                "events": [],
+                "name": "grid0",
                 "properties": {
                   "children": [
                     {
-                      "name": "",
-                      "properties": {},
-                      "type": "text"
+                      "events": [],
+                      "name": "gridCell0",
+                      "properties": {
+                        "children": [
+                          {
+                            "events": [],
+                            "name": "calloutValue0",
+                            "properties": {
+                              "isDisabled": false,
+                              "isLoading": false,
+                              "isVisible": true,
+                              "label": "CPU Usage",
+                              "size": "sm",
+                              "style": "vivid_yellow",
+                              "unit": "kB",
+                              "value": "42"
+                            },
+                            "type": "calloutValue"
+                          }
+                        ],
+                        "isVisible": "true",
+                        "layout": {
+                          "default": {
+                            "height": 8,
+                            "width": 2,
+                            "x": 0,
+                            "y": 0
+                          }
+                        }
+                      },
+                      "type": "gridCell"
                     }
-                  ],
-                  "isVisible": {
-                    "type": null
-                  }
+                  ]
                 },
                 "type": "grid"
               }
             ],
-            "queries": [
-              {
-                "name": "fetchPendingOrders",
-                "properties": {
-                  "spec": {}
-                },
-                "type": "action"
-              }
-            ]
+            "description": "This is a simple example app",
+            "name": "Example App",
+            "queries": [],
+            "rootInstanceName": "grid0"
           },
           "type": "appDefinitions"
         }
@@ -311,94 +348,52 @@
           "attributes": {
             "components": [
               {
-                "events": [
-                  {
-                    "name": "click",
-                    "type": "triggerQuery"
-                  }
-                ],
-                "id": "string",
-                "name": "",
+                "events": [],
+                "name": "grid0",
                 "properties": {
-                  "backgroundColor": "string",
                   "children": [
                     {
-                      "events": [
-                        {
-                          "name": "click",
-                          "type": "triggerQuery"
-                        }
-                      ],
-                      "id": "string",
-                      "name": "",
+                      "events": [],
+                      "name": "gridCell0",
                       "properties": {
-                        "children": [],
-                        "isVisible": {
-                          "type": "undefined"
+                        "children": [
+                          {
+                            "events": [],
+                            "name": "calloutValue0",
+                            "properties": {
+                              "isDisabled": false,
+                              "isLoading": false,
+                              "isVisible": true,
+                              "label": "CPU Usage",
+                              "size": "sm",
+                              "style": "vivid_yellow",
+                              "unit": "kB",
+                              "value": "42"
+                            },
+                            "type": "calloutValue"
+                          }
+                        ],
+                        "isVisible": "true",
+                        "layout": {
+                          "default": {
+                            "height": 8,
+                            "width": 2,
+                            "x": 0,
+                            "y": 0
+                          }
                         }
                       },
-                      "type": "text"
+                      "type": "gridCell"
                     }
-                  ],
-                  "isVisible": {
-                    "type": "undefined"
-                  }
+                  ]
                 },
                 "type": "grid"
               }
             ],
-            "description": "string",
-            "name": "string",
-            "queries": [
-              {
-                "events": [
-                  {
-                    "name": "click",
-                    "type": "triggerQuery"
-                  }
-                ],
-                "id": "65bb1f25-52e1-4510-9f8d-22d1516ed693",
-                "name": "fetchPendingOrders",
-                "properties": {
-                  "condition": {
-                    "type": "undefined"
-                  },
-                  "debounceInMs": {
-                    "example": "undefined",
-                    "format": "undefined",
-                    "type": "undefined"
-                  },
-                  "mockedOutputs": {
-                    "type": "undefined"
-                  },
-                  "onlyTriggerManually": {
-                    "type": "undefined"
-                  },
-                  "outputs": "${((outputs) => {return outputs.body.data})(self.rawOutputs)}",
-                  "pollingIntervalInMs": {
-                    "example": "undefined",
-                    "format": "undefined",
-                    "minimum": "undefined",
-                    "type": "undefined"
-                  },
-                  "requiresConfirmation": {
-                    "type": "undefined"
-                  },
-                  "showToastOnError": {
-                    "type": "undefined"
-                  },
-                  "spec": {
-                    "type": ""
-                  }
-                },
-                "type": "action"
-              }
-            ],
-            "rootInstanceName": "string",
-            "tags": [
-              "service:webshop-backend",
-              "team:webshop"
-            ]
+            "description": "This is a simple example app",
+            "name": "Example App",
+            "queries": [],
+            "rootInstanceName": "grid0"
           },
           "type": "appDefinitions"
         }
@@ -956,32 +951,54 @@
           "attributes": {
             "components": [
               {
-                "name": "",
+                "events": [],
+                "name": "grid0",
                 "properties": {
                   "children": [
                     {
-                      "name": "",
-                      "properties": {},
-                      "type": "text"
+                      "events": [],
+                      "name": "gridCell0",
+                      "properties": {
+                        "children": [
+                          {
+                            "events": [],
+                            "name": "calloutValue0",
+                            "properties": {
+                              "isDisabled": false,
+                              "isLoading": false,
+                              "isVisible": true,
+                              "label": "CPU Usage",
+                              "size": "sm",
+                              "style": "vivid_yellow",
+                              "unit": "kB",
+                              "value": "42"
+                            },
+                            "type": "calloutValue"
+                          }
+                        ],
+                        "isVisible": "true",
+                        "layout": {
+                          "default": {
+                            "height": 8,
+                            "width": 2,
+                            "x": 0,
+                            "y": 0
+                          }
+                        }
+                      },
+                      "type": "gridCell"
                     }
-                  ],
-                  "isVisible": {
-                    "type": null
-                  }
+                  ]
                 },
                 "type": "grid"
               }
             ],
-            "queries": [
-              {
-                "name": "fetchPendingOrders",
-                "properties": {
-                  "spec": {}
-                },
-                "type": "action"
-              }
-            ]
+            "description": "This is a simple example app",
+            "name": "Example App",
+            "queries": [],
+            "rootInstanceName": "grid0"
           },
+          "id": "9e20cbaf-68da-45a6-9ccf-54193ac29fa5",
           "type": "appDefinitions"
         }
       },
@@ -990,96 +1007,54 @@
           "attributes": {
             "components": [
               {
-                "events": [
-                  {
-                    "name": "click",
-                    "type": "triggerQuery"
-                  }
-                ],
-                "id": "string",
-                "name": "",
+                "events": [],
+                "name": "grid0",
                 "properties": {
-                  "backgroundColor": "string",
                   "children": [
                     {
-                      "events": [
-                        {
-                          "name": "click",
-                          "type": "triggerQuery"
-                        }
-                      ],
-                      "id": "string",
-                      "name": "",
+                      "events": [],
+                      "name": "gridCell0",
                       "properties": {
-                        "children": [],
-                        "isVisible": {
-                          "type": "undefined"
+                        "children": [
+                          {
+                            "events": [],
+                            "name": "calloutValue0",
+                            "properties": {
+                              "isDisabled": false,
+                              "isLoading": false,
+                              "isVisible": true,
+                              "label": "CPU Usage",
+                              "size": "sm",
+                              "style": "vivid_yellow",
+                              "unit": "kB",
+                              "value": "42"
+                            },
+                            "type": "calloutValue"
+                          }
+                        ],
+                        "isVisible": "true",
+                        "layout": {
+                          "default": {
+                            "height": 8,
+                            "width": 2,
+                            "x": 0,
+                            "y": 0
+                          }
                         }
                       },
-                      "type": "text"
+                      "type": "gridCell"
                     }
-                  ],
-                  "isVisible": {
-                    "type": "undefined"
-                  }
+                  ]
                 },
                 "type": "grid"
               }
             ],
-            "description": "string",
-            "name": "string",
-            "queries": [
-              {
-                "events": [
-                  {
-                    "name": "click",
-                    "type": "triggerQuery"
-                  }
-                ],
-                "id": "65bb1f25-52e1-4510-9f8d-22d1516ed693",
-                "name": "fetchPendingOrders",
-                "properties": {
-                  "condition": {
-                    "type": "undefined"
-                  },
-                  "debounceInMs": {
-                    "example": "undefined",
-                    "format": "undefined",
-                    "type": "undefined"
-                  },
-                  "mockedOutputs": {
-                    "type": "undefined"
-                  },
-                  "onlyTriggerManually": {
-                    "type": "undefined"
-                  },
-                  "outputs": "${((outputs) => {return outputs.body.data})(self.rawOutputs)}",
-                  "pollingIntervalInMs": {
-                    "example": "undefined",
-                    "format": "undefined",
-                    "minimum": "undefined",
-                    "type": "undefined"
-                  },
-                  "requiresConfirmation": {
-                    "type": "undefined"
-                  },
-                  "showToastOnError": {
-                    "type": "undefined"
-                  },
-                  "spec": {
-                    "type": ""
-                  }
-                },
-                "type": "action"
-              }
-            ],
-            "rootInstanceName": "string",
-            "tags": [
-              "service:webshop-backend",
-              "team:webshop"
-            ]
+            "description": "This is a simple example app",
+            "name": "Example App",
+            "queries": [],
+            "rootInstanceName": "grid0"
           },
-          "id": "65bb1f25-52e1-4510-9f8d-22d1516ed693",
+          "id": "9e20cbaf-68da-45a6-9ccf-54193ac29fa5",
           "type": "appDefinitions"
         }
       },

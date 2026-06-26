@@ -147,16 +147,27 @@
       "json_curl": {
         "channels": [
           {
-            "account": "jane.doe",
-            "channel_name": "#general"
+            "account": "Main_Account",
+            "channel_name": "#channel_name_main_account",
+            "transfer_all_user_comments": false
+          },
+          {
+            "account": "doghouse",
+            "channel_name": "#channel_name_doghouse",
+            "transfer_all_user_comments": false
           }
         ]
       },
       "json": {
         "channels": [
           {
-            "account": "jane.doe",
-            "channel_name": "#general",
+            "account": "Main_Account",
+            "channel_name": "#channel_name_main_account",
+            "transfer_all_user_comments": false
+          },
+          {
+            "account": "doghouse",
+            "channel_name": "#channel_name_doghouse",
             "transfer_all_user_comments": false
           }
         ]
