@@ -88,7 +88,7 @@ After saving these changes, [restart the Agent][1].
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Modify the DatadogAgent CR to include the following:
+Modify the DatadogAgent custom resource to include the following:
 
 ```yaml
 spec:
