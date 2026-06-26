@@ -61,11 +61,9 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Dynamic Instrumentation
 
-Dynamic Instrumentation supports Java, Python, .NET, and PHP. Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. Each service can be in one of three modes:
+Dynamic Instrumentation supports Java, Python, .NET, and PHP. Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. Select a service and environment to see its current status, then use the **Enable Dynamic Instrumentation** or **Disable Dynamic Instrumentation** action to change it.
 
-- **Automatic**: Eligible services are enabled automatically when you first create an instrumentation.
-- **Enabled**: Dynamic Instrumentation is ready to use on this service in this environment.
-- **Disabled**: This service is explicitly disabled and is not enabled automatically.
+On supported tracer versions, you do not need to enable a service from the Settings page first. Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
 
 #### In-app enablement
 
