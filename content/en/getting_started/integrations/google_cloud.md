@@ -414,6 +414,10 @@ Resource changes collection allows you to monitor infrastructure changes in your
 
 For detailed setup instructions, see the [resource changes collection section][18] of the Google Cloud integration documentation.
 
+## Troubleshooting
+
+{{% google-cloud-troubleshooting %}}
+
 ## Explore related services
 
 ### Private Service Connect
