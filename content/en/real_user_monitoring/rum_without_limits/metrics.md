@@ -22,7 +22,7 @@ further_reading:
 Datadog provides the below out-of-the-box metrics for a comprehensive overview of your application's health over time. To ensure accuracy, these metrics are computed prior to retaining or discarding any sessions. This means that even though you keep 0.01% of your sessions, these metrics are computed based on 100% of the ingested sessions. These metrics are powering the [performance summary][1] to give you an accurate overview of the performance of your apps.
 
 **Notes**:
-- The **Default** cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
+- The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
 - If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
@@ -65,8 +65,8 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 
 Metrics are captured at different points in a session or view life cycle:
 
-- **On detection**: `rum.measure.session` and `rum.measure.view` are captured when a session or view is first detected.
-- **On inactivity**: Metrics such as `rum.measure.session.inactive`, `rum.measure.session.crash_free`, `rum.measure.view.inactive`, and `rum.measure.view.crash_free` are captured when a session or view becomes inactive (that is, when the session or view ends).
+- {{< ui >}}On detection{{< /ui >}}: `rum.measure.session` and `rum.measure.view` are captured when a session or view is first detected.
+- {{< ui >}}On inactivity{{< /ui >}}: Metrics such as `rum.measure.session.inactive`, `rum.measure.session.crash_free`, `rum.measure.view.inactive`, and `rum.measure.view.crash_free` are captured when a session or view becomes inactive (that is, when the session or view ends).
 
 Because a session or view that starts in one time window can end in a different time window, comparing on-detection metrics with on-inactivity metrics over short time windows can produce unexpected results, including ratio values above 100%.
 

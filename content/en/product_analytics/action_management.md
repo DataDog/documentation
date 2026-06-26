@@ -27,21 +27,21 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 
 1. Go to the [Actions][3] page in Datadog and select your application.
 
-2. Select **Visual Labeler**.
+2. Select {{< ui >}}Visual Labeler{{< /ui >}}.
 
-3. Use the **Navigate Site** mode to browse to the location of the actions you want to label.
+3. Use the {{< ui >}}Navigate Site{{< /ui >}} mode to browse to the location of the actions you want to label.
 
-4. When you are ready to label an action, switch to **Label Actions** mode.
+4. When you are ready to label an action, switch to {{< ui >}}Label Actions{{< /ui >}} mode.
 
 5. Click on the element you would like to add as an action.
 
    {{< img src="product_analytics/action_management/pana-label-mode-2.png" alt="Click on and label your actions." style="width:90%;">}}
 
-6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). You can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity.
+6. Select {{< ui >}}New Labeled Action{{< /ui >}} and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). You can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity.
 
    You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
 
-7. Select **Save**.
+7. Select {{< ui >}}Save{{< /ui >}}.
 
 After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
 
@@ -50,13 +50,13 @@ After you define an action, it appears in the list of labeled actions on the [Ac
 Manual labeling is available for both web and mobile applications and does not require the Chrome extension.
 
 1. Go to the [Actions][3] page in Datadog and select your application. 
-2. Select **Add Labeled Action**, then select **Create manually**.
+2. Select {{< ui >}}Add Labeled Action{{< /ui >}}, then select {{< ui >}}Create manually{{< /ui >}}.
 3. Add a label name, description (optional), and tags (optional).
-4. Under **Definition**, define one or more events to track:
-   - **Action Type**: `click` or `custom` events. For `click` events, you can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. 
-   - **Action Name**: Use the drop-down to select an action
-   - **Page Location**: Use the drop-down to target one or more pages
-   Select **Add New Definition** to add a definition.
+4. Under {{< ui >}}Definition{{< /ui >}}, define one or more events to track:
+   - {{< ui >}}Action Type{{< /ui >}}: `click` or `custom` events. For `click` events, you can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. 
+   - {{< ui >}}Action Name{{< /ui >}}: Use the drop-down to select an action
+   - {{< ui >}}Page Location{{< /ui >}}: Use the drop-down to target one or more pages
+   Select {{< ui >}}Add New Definition{{< /ui >}} to add a definition.
 5. Select **Save**.
 
 After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.

@@ -21,23 +21,23 @@ This guide walks through how you can set up Real User Monitoring on your WordPre
 ## Setup
 
 1. Log into your WordPress administration panel.
-2. Under **Plugins**, click on **Add New**.
+2. Under {{< ui >}}Plugins{{< /ui >}}, click on {{< ui >}}Add New{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-1.png" alt="Enable RUM on your WooCommerce store" style="width:30%;">}}
 
-3. Search for **WPCode** and click **Install Now**.
+3. Search for **WPCode** and click {{< ui >}}Install Now{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-2.png" alt="Enable RUM on your WooCommerce store" style="width:50%;">}}
 
-4. After you've installed WPCode, click on **Activate**.
+4. After you've installed WPCode, click on {{< ui >}}Activate{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" style="width:50%;">}}
 
-5. Find the newly added **Code Snippets** section in your WordPress menu, and click **Header & Footer**.
+5. Find the newly added {{< ui >}}Code Snippets{{< /ui >}} section in your WordPress menu, and click {{< ui >}}Header & Footer{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-4.png" alt="Enable RUM on your WooCommerce store" style="width:30%;">}}
 
-6. Initialize the Browser RUM SDK by adding the SDK code snippet inside the **Header** section and save the changes by clicking the **Save** button. For more information about which installation method to choose, see the [RUM Browser Monitoring documentation][1].
+6. Initialize the Browser RUM SDK by adding the SDK code snippet inside the {{< ui >}}Header{{< /ui >}} section and save the changes by clicking the {{< ui >}}Save{{< /ui >}} button. For more information about which installation method to choose, see the [RUM Browser Monitoring documentation][1].
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-5.png" alt="Enable RUM on your WooCommerce store" >}}
 

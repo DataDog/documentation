@@ -7,7 +7,7 @@ aliases:
 - /service_management/incident_management/incident_ai/
 - /incident_response/incident_management/incident_ai
 further_reading:
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Learn about Bits Investigation"
 - link: "/incident_response/incident_management/post_incident/postmortems"
@@ -87,4 +87,4 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][4
 [1]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /incident_response/incident_management/setup_and_configuration/templates
 [3]: /incident_response/incident_management/post_incident/postmortems
-[4]: /bits_ai/bits_ai_sre
+[4]: /bits_ai/bits_investigation

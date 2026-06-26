@@ -22,7 +22,7 @@ This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monito
 
 ## Monitor creation
 
-To create an [SLO alert][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> SLO*.
+To create an [SLO alert][2] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}SLO{{< /ui >}}.
 
 ### Select SLO
 
@@ -38,7 +38,7 @@ Two types of alerts are available:
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 

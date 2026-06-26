@@ -96,7 +96,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled in [**CI/CD Optimization settings**][2].
+\* The feature is opt-in, and needs to be enabled in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][2].
 
 ## Default configurations
 
@@ -178,7 +178,7 @@ When creating a [dashboard][4] or a [notebook][5], you can use CI test data in y
 
 ## Alert on test data
 
-When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the **Export** button.
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 ## Further reading
 

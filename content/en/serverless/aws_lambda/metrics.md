@@ -5,6 +5,10 @@ aliases:
   - /serverless/enhanced_lambda_metrics
   - /serverless/real-time-enhanced-metrics
   - /serverless/real_time_enhanced_metrics
+further_reading:
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 ---
 
 This page discusses metrics for monitoring serverless applications on AWS Lambda. There are 3 ways to get metrics from AWS Lambda:
@@ -479,6 +483,10 @@ Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by defaul
 ### Understanding your metrics usage, volume, and pricing in Datadog
 
 Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [9]: /logs/logs_to_metrics/
 [10]: /tracing/trace_pipeline/generate_metrics/
