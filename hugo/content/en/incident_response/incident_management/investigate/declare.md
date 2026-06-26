@@ -121,8 +121,8 @@ You can declare an incident from individual Handoff Notification cards.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /incident_response/incident_management/setup_and_configuration/information
-[3]: /security/workload_protection/security_signals/#declare-an-incident
-[4]:/security/workload_protection/security_signals/#declare-an-incident
+[3]: /security/workload_protection/investigate_and_triage/security_signals/actions/#declare-an-incident
+[4]:/security/workload_protection/investigate_and_triage/security_signals/actions/#declare-an-incident
 [5]: /incident_response/case_management/view_and_manage
 [6]: /dashboards/guide/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
