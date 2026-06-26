@@ -320,7 +320,7 @@ You may have cases where users are starting several feature operations in parall
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
-After you've configured the SDK APIs, you can monitor your operations by navigating to **RUM > Performance Monitoring > Operations**.
+After you've configured the SDK APIs, you can monitor your operations by navigating to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}.
 
 Datadog groups together all operations with the same name into a catalog.
 

@@ -38,7 +38,7 @@ Datadog monitor-based SLOs support the following monitor types:
 
 ## Setup
 
-On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Uptime**.
+On the [SLO status page][2], click {{< ui >}}+ New SLO{{< /ui >}}. Then, select {{< ui >}}By Monitor Uptime{{< /ui >}}.
 
 ### Define queries
 
@@ -52,7 +52,7 @@ In the search box, start typing the name of a monitor. A list of matching monito
 
 ### Set your SLO targets
 
-Select a **target** percentage, **time window**, and optional **warning** level.
+Select a {{< ui >}}target{{< /ui >}} percentage, {{< ui >}}time window{{< /ui >}}, and optional {{< ui >}}warning{{< /ui >}} level.
 
 The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state. The time window specifies the rolling period the SLO runs its calculation.
 
@@ -73,7 +73,7 @@ If you need finer granularity than the once a minute monitor evaluation, conside
 
 ### Add name and tags
 
-Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO. Select **Create** or **Create & Set Alert** to save your new SLO.
+Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO. Select {{< ui >}}Create{{< /ui >}} or {{< ui >}}Create & Set Alert{{< /ui >}} to save your new SLO.
 
 ## Status calculation
 

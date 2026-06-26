@@ -29,7 +29,7 @@ Browser Monitoring automatically detects user interactions performed during a us
 
 You can accomplish the following objectives:
 
-* Understand the performance of key interactions (for example, a click on the **Add to cart** button)
+* Understand the performance of key interactions (for example, a click on the {{< ui >}}Add to cart{{< /ui >}} button)
 * Quantify feature adoption
 * Identify the steps that led to a specific browser error
 

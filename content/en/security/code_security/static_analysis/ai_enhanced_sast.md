@@ -77,11 +77,13 @@ AI-native SAST uses a two-phase approach:
 
 ### Supported languages
 
-| Language | Status      |
-| -------- | ----------- |
-| Java     | Available   |
-| Python   | Available   |
-| Go       | Available   |
+| Language   | Status      |
+| ---------- | ----------- |
+| Java       | Available   |
+| Python     | Available   |
+| Go         | Available   |
+| C#         | Available   |
+| JavaScript | Available   |
 
 ### Detected vulnerability types
 
@@ -102,7 +104,7 @@ AI-native SAST detects the following vulnerability types:
 - [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
 - [CWE-284: Broken Access Control (IDOR)](https://cwe.mitre.org/data/definitions/284.html)
-- [CWE-1427: Server-Side Template Injection](https://cwe.mitre.org/data/definitions/1427.html)
+- [CWE-1427: Prompt Injection](https://cwe.mitre.org/data/definitions/1427.html)
   {{% /collapse-content %}}
 
 <!-- ## AI-powered detection
@@ -203,7 +205,7 @@ You can also view all remediation sessions on [**Sessions**][7].
 [6]: https://app.datadoghq.com/security/code-security/sast
 [7]: https://app.datadoghq.com/code
 [9]: /bits_ai/
-[10]: /bits_ai/bits_ai_dev_agent
+[10]: /bits_ai/bits_code
 [11]: https://app.datadoghq.com/code/settings
-[13]: /bits_ai/bits_ai_dev_agent/automations
+[13]: /bits_ai/bits_code/automations
 [14]: https://app.datadoghq.com/code/automations

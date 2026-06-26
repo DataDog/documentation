@@ -35,8 +35,8 @@ The [Datadog Agent][2] is installed and configured.
 
 To automatically instrument your RUM application:
 
-1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
-2. Select **Auto-Instrumentation** and **NGINX**.
+1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications Page{{< /ui >}}, click on [{{< ui >}}New Application{{< /ui >}}][4], and select the JavaScript (JS) application type.
+2. Select {{< ui >}}Auto-Instrumentation{{< /ui >}} and {{< ui >}}NGINX{{< /ui >}}.
 3. Configure your application parameters. See [guidance on configuring sampling][5].
 4. Copy and run the installer command to load the Datadog NGINX Module with the RUM SDK Injector onto NGINX.
 5. After the installer successfully installs the SDK Injector, restart NGINX to begin collecting RUM sessions.
@@ -50,7 +50,7 @@ Alternatively, you can [manually](#alternative-installation-method) install and 
 
 ## Updating your RUM application
 
-You can update your RUM application settings at any time. From the [Application Management][4] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
+You can update your RUM application settings at any time. From the [Application Management][4] list, select your RUM application and navigate to the {{< ui >}}SDK Configuration{{< /ui >}} page. Click {{< ui >}}Save Changes{{< /ui >}} after making updates.
 
 ### Sampling rates
 

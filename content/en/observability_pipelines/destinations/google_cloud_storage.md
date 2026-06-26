@@ -52,7 +52,7 @@ Enter a prefix that you want to apply to all key objects.
 
 #### Metadata
 
-1. Click **Add Header** to add metadata.
+1. Click {{< ui >}}Add Header{{< /ui >}} to add metadata.
 1. Enter values for the header name and value.
 
 #### Buffering

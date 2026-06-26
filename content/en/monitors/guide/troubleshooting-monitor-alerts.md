@@ -53,9 +53,9 @@ If metrics are absent from a monitor's evaluation window, and the monitor is not
 
 ### "No Data" status with rollup functions
 
-If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 datapoints within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
+If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 datapoints within the window. If the {{< ui >}}Require Full Window{{< /ui >}} option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
-For most use cases, disable the "Require Full Window" setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
+For most use cases, disable the {{< ui >}}Require Full Window{{< /ui >}} setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
 
 ### Cloud metric delays
 
@@ -85,13 +85,13 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 
 - For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue.
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
-- To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
+- To control alert routing, use [template variables][15] and the separation of {{< ui >}}warning{{< /ui >}} or {{< ui >}}alert{{< /ui >}} states with [conditional variables][16].
 
 ### Missing notifications
 
 If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
-- Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
+- Check [email preferences][17] for the recipient and ensure that {{< ui >}}Notification from monitor alerts{{< /ui >}} is checked.
 - Check the [event stream][18] for events with the string `Error delivering notification`.
 
 ### Opsgenie multi-notifications

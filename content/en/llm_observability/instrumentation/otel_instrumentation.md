@@ -609,7 +609,7 @@ with tracer.start_as_current_span("my-span") as span:
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 
-[1]: https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/#spans
+[1]: https://github.com/open-telemetry/semantic-conventions-genai
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
