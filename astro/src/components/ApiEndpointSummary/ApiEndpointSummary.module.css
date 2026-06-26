@@ -3,7 +3,7 @@
 }
 
 .api-endpoint-summary__heading {
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 var(--space-lg);
 }
 
 .api-endpoint-summary__link {
