@@ -61,9 +61,27 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Dynamic Instrumentation
 
-To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16].
+Dynamic Instrumentation supports Java, Python, .NET, and PHP. Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. Each service can be in one of three modes:
 
-For more detailed instructions, select your runtime below:
+- **Automatic**: Eligible services are enabled automatically when you first create an instrumentation.
+- **Enabled**: Dynamic Instrumentation is ready to use on this service in this environment.
+- **Disabled**: This service is explicitly disabled and is not enabled automatically.
+
+#### In-app enablement
+
+In-app enablement is supported on the following minimum tracer versions:
+
+- [Java][18] ≥ 1.64.0
+- [Python][19] ≥ 4.11.0
+- [.NET][20] ≥ 3.46.0
+
+Datadog recommends keeping your tracer up to date to take advantage of in-app enablement.
+
+#### Manual enablement
+
+Manual enablement is required for PHP, and for older tracer versions of Java, Python, and .NET. You can also choose manual enablement on supported tracer versions if you prefer to manage enablement through environment variables, for example, to enable Dynamic Instrumentation in bulk across many services.
+
+Select your runtime for manual enablement instructions:
 
 {{< card-grid card_width="170px" >}}
   {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
@@ -73,6 +91,7 @@ For more detailed instructions, select your runtime below:
   {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
+<div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment. Enabling or disabling one also enables or disables the other for that service and environment, although the two products have separate permissions and Settings pages.</div>
 
 ### Limitations
 
@@ -169,5 +188,8 @@ You can use a *dynamic span tag* as an alternative to [using Custom Instrumentat
 [13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /dynamic_instrumentation/expression-language
-[16]: https://app.datadoghq.com/dynamic-instrumentation/setup
+[16]: https://app.datadoghq.com/dynamic-instrumentation/settings
 [17]: /dynamic_instrumentation/symdb/
+[18]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[19]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
+[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core

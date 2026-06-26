@@ -14,6 +14,10 @@ further_reading:
 
 Dynamic Instrumentation is a feature of supporting Datadog SDKs. If you are already using [APM to collect traces][1] for your application, ensure your SDK is up-to-date and then enable Dynamic Instrumentation for your application.
 
+For Java, Python, and .NET on recent tracer versions, Dynamic Instrumentation can be enabled in-app from the [Dynamic Instrumentation Settings page][2]. See [Enable Dynamic Instrumentation][3] for details and minimum tracer versions.
+
+The instructions below cover **manual enablement** through environment variables. Manual enablement is required for PHP, and for older tracer versions of Java, Python, and .NET. It is also available on supported tracer versions if you prefer to manage enablement through environment variables instead of in-app.
+
 Select your runtime below to learn how to enable Dynamic Instrumentation for your application:
 
 {{< card-grid card_width="170px" >}}
@@ -29,3 +33,5 @@ Select your runtime below to learn how to enable Dynamic Instrumentation for you
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
+[2]: https://app.datadoghq.com/dynamic-instrumentation/settings
+[3]: /dynamic_instrumentation/#enable-dynamic-instrumentation
