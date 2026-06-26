@@ -72,6 +72,9 @@ net start squid
 
 ### Configure the Datadog Agent
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 Modify the Agent's configuration file (`datadog.yaml`) to include the following:
 
 ```yaml
@@ -81,6 +84,36 @@ proxy:
 ```
 
 After saving these changes, [restart the Agent][1].
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Modify the DatadogAgent CR to include the following:
+
+```yaml
+spec:
+  global:
+    proxy:
+      http: http://127.0.0.1:3128
+      https: http://127.0.0.1:3128
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Modify your `values.yaml` to include the following:
+
+```yaml
+datadog:
+  env:
+    - name: DD_PROXY_HTTP
+      value: http://127.0.0.1:3128
+    - name: DD_PROXY_HTTPS
+      value: http://127.0.0.1:3128
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
 
