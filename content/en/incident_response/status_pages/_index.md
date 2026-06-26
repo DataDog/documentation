@@ -181,6 +181,22 @@ From a status page, select the dropdown next to **Publish Notice**, select **Pub
 
 {{< img src="incident_response/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
 
+### Edit a degradation update
+
+After publishing a degradation update, you can edit its status and message to correct typos, fix an inaccurate status selection, or clarify the description. To edit an update, open the degradation notice on the status page, hover over the update you want to modify, and click the edit icon that appears. Make your changes in the **Edit Update** modal.
+
+{{< img src="incident_response/status_pages/edit_degradation_update.png" alt="Edit Update modal showing Notice Status options and a Message field" style="width:60%;" >}}
+
+Only the **Notice Status** and **Message** fields can be edited. To resolve the notice or update affected components, add a new update instead. Click **Save Changes** to apply the edits.
+
+### Delete a degradation update
+
+To delete an update posted by mistake, open the degradation notice on the status page, hover over the update you want to delete, and click the delete icon that appears. Confirm in the **Delete Update** modal.
+
+{{< img src="incident_response/status_pages/delete_degradation_update.png" alt="Delete Update confirmation modal" style="width:60%;" >}}
+
+Deleting an update replaces it on the timeline with a note indicating it was deleted by the page administrator. This action cannot be undone.
+
 ### Schedule a maintenance window
 
 {{< img src="incident_response/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}

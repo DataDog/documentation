@@ -728,6 +728,15 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
 
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1329,7 +1338,7 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -1632,3 +1641,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
+[65]: /code_coverage/
+[66]: /delivery_performance/dora_metrics/
