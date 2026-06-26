@@ -147,7 +147,10 @@ For a list of available environment variables, defaults, and examples, see [Conf
 Use the following examples as starting points for GitHub Actions and CircleCI.
 
 {{< tabs >}}
-{{% tab "GitHub Actions (Ruby)" %}}
+{{% tab "Ruby" %}}
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
 
 The plan job chooses the CI node count and emits a matrix. The test job downloads the `.testoptimization/` artifact and runs only the files assigned to its matrix node.
 
@@ -231,97 +234,7 @@ jobs:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "GitHub Actions (Python)" %}}
-
-The plan job chooses the CI node count and emits a matrix. The test job downloads the `.testoptimization/` artifact and runs only the files assigned to its matrix node.
-
-{{< code-block lang="yaml" >}}
-name: CI with Test Parallelization
-
-on: [push]
-
-env:
-  DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: python
-  DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: pytest
-  DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
-  DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
-
-jobs:
-  dd_plan:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.dd_plan.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download ddtest binary
-        run: |
-          mkdir -p bin
-          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
-          mv bin/ddtest-linux-amd64 bin/ddtest
-          chmod +x bin/ddtest
-        env:
-          GH_TOKEN: ${{ github.token }}
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install Python dependencies
-        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
-      - name: Configure Datadog Test Optimization
-        uses: datadog/test-visibility-github-action@v2
-        with:
-          languages: python
-          api_key: ${{ secrets.DD_API_KEY }}
-          site: datadoghq.com
-      - id: dd_plan
-        name: Plan test execution
-        run: bin/ddtest plan
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dd-artifacts
-          path: .testoptimization
-          include-hidden-files: true
-
-  dd_test:
-    runs-on: ubuntu-latest
-    needs: [dd_plan]
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.dd_plan.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download ddtest binary
-        run: |
-          mkdir -p bin
-          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
-          mv bin/ddtest-linux-amd64 bin/ddtest
-          chmod +x bin/ddtest
-        env:
-          GH_TOKEN: ${{ github.token }}
-      - uses: actions/download-artifact@v4
-        with:
-          name: dd-artifacts
-          path: .testoptimization
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-      - name: Install Python dependencies
-        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
-      - name: Configure Datadog Test Optimization
-        uses: datadog/test-visibility-github-action@v2
-        with:
-          languages: python
-          api_key: ${{ secrets.DD_API_KEY }}
-          site: datadoghq.com
-      - name: Run tests
-        run: bin/ddtest run --ci-node ${{ matrix.ci_node_index }}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "CircleCI (Ruby)" %}}
+{{% tab "CircleCI" %}}
 
 The setup workflow runs `ddtest plan`, stores `.testoptimization/`, and continues into a test workflow with the selected CI node count.
 
@@ -419,7 +332,103 @@ workflows:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "CircleCI (Python)" %}}
+{{< /tabs >}}
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
+
+The plan job chooses the CI node count and emits a matrix. The test job downloads the `.testoptimization/` artifact and runs only the files assigned to its matrix node.
+
+{{< code-block lang="yaml" >}}
+name: CI with Test Parallelization
+
+on: [push]
+
+env:
+  DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: python
+  DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: pytest
+  DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+  DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
+
+jobs:
+  dd_plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.dd_plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download ddtest binary
+        run: |
+          mkdir -p bin
+          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
+          mv bin/ddtest-linux-amd64 bin/ddtest
+          chmod +x bin/ddtest
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+      - name: Configure Datadog Test Optimization
+        uses: datadog/test-visibility-github-action@v2
+        with:
+          languages: python
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: datadoghq.com
+      - id: dd_plan
+        name: Plan test execution
+        run: bin/ddtest plan
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dd-artifacts
+          path: .testoptimization
+          include-hidden-files: true
+
+  dd_test:
+    runs-on: ubuntu-latest
+    needs: [dd_plan]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.dd_plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download ddtest binary
+        run: |
+          mkdir -p bin
+          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
+          mv bin/ddtest-linux-amd64 bin/ddtest
+          chmod +x bin/ddtest
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dd-artifacts
+          path: .testoptimization
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+      - name: Configure Datadog Test Optimization
+        uses: datadog/test-visibility-github-action@v2
+        with:
+          languages: python
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: datadoghq.com
+      - name: Run tests
+        run: bin/ddtest run --ci-node ${{ matrix.ci_node_index }}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 The setup workflow runs `ddtest plan`, stores `.testoptimization/`, and continues into a test workflow with the selected CI node count.
 
@@ -517,6 +526,9 @@ workflows:
     jobs:
       - test
 {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{< /tabs >}}
