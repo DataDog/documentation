@@ -52,6 +52,7 @@ attributes:
        - **Pipelines, stages, jobs, setups, commands**: 15 months
   - product: Cloud Cost Management
     data_type: |
+       - **Cost metrics**: 15 months
        - **Recommendations**: 90 days
   - product: Cloud Security
     data_type: |

@@ -8,6 +8,9 @@ aliases:
   - /serverless/distributed_tracing/serverless_trace_propagation
   - /serverless/distributed_tracing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 - link: "/tracing/"
   tag: "Documentation"
   text: "Explore Datadog APM"
