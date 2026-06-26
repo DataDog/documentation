@@ -146,8 +146,7 @@ For a list of available environment variables, defaults, and examples, see [Conf
 
 Use the following examples as starting points for GitHub Actions and CircleCI.
 
-{{< tabs >}}
-{{% tab "Ruby" %}}
+{{< collapse-content title="Ruby" level="h3" >}}
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -334,8 +333,9 @@ workflows:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Python" level="h3" >}}
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -530,8 +530,7 @@ workflows:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /collapse-content >}}
 
 ## Use third-party test runners
 
