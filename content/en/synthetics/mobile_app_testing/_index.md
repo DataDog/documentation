@@ -164,18 +164,18 @@ To configure a mobile test to use either EU or US hosted devices:
 
 {{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selecting one or more mobile devices in US and EU regions" video=true >}}
 
-### Device pools
+### Mobile device families
 
-A device pool targets a dynamic set of devices instead of a single, specific device. When a test runs, Datadog selects one of the devices available in the pool at that time. Using a pool increases the availability of your test results and makes your tests more resilient to device changes, such as OS upgrades or device replacements.
+A mobile device family represents a set of devices that share common characteristics, such as a model line or OS version. Instead of choosing a single, specific device, you can choose a family. When a test runs, Datadog runs it on one of the available devices in the family at that time. Choosing a family increases the availability of your test results and makes your tests more resilient to device changes, such as OS upgrades or device replacements.
 
-Datadog provides built-in pools that appear alongside individual devices in the **Select Device(s)** dropdown. Built-in pools include options such as:
+Datadog provides built-in families that appear alongside individual devices in the **Select Device(s)** dropdown. For example:
 
 - **Latest iPhone family on latest iOS version** (iOS)
-- **Any iPhone on latest iOS version** (iOS)
+- **Any iPhone Pro** (iOS)
 - **Latest Pixel family on latest Android version** (Android)
-- **Any Pixel device** (Android)
+- **Any Samsung device** (Android)
 
-Select a pool the same way you select an individual device. A single test can target individual devices, pools, or both.
+Select a family the same way you select an individual device. A single test can target individual devices, families, or both.
 
 ## Test retries
 
