@@ -3,7 +3,7 @@ name: "Check for GIF files"
 on:
   pull_request:
     paths:
-    - 'static/images/**/*'
+    - 'hugo/static/images/**/*'
 
 # Stop the current running job if a new push is made to the PR
 concurrency:
@@ -55,7 +55,7 @@ jobs:
       run: |
         for file in $ALL_CHANGED_FILES; do
           echo "Checking file ${file}..."
-          if [[ "$file" =~ ^static/images/(.*).gif$ ]]; then
+          if [[ "$file" =~ ^hugo/static/images/(.*).gif$ ]]; then
             echo "The file $file is a gif. Please replace with an mp4"
             exit 1
           fi
