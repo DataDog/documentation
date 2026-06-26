@@ -1,6 +1,6 @@
 ---
 title: Configure Autodiscovery with the DatadogInstrumentation CRD
-description: Configure Autodiscovery checks for Kubernetes workloads through the DatadogInstrumentation custom resource instead of pod annotations.
+description: Configure Autodiscovery checks and logs for Kubernetes workloads through the DatadogInstrumentation custom resource instead of pod annotations.
 further_reading:
 - link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
@@ -18,24 +18,24 @@ further_reading:
 
 ## Overview
 
-The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks for specific Kubernetes workloads through a single Kubernetes resource, instead of [pod annotations][2]. With this approach, you can enable, update, and roll back integration configurations without editing pod specs or triggering Agent or application rollouts.
+The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks and logs for specific Kubernetes workloads through a single Kubernetes resource, instead of [pod annotations][2]. With this approach, you can enable, update, and roll back integration configurations without editing pod specs or triggering Agent or application rollouts.
 
 Use the `DatadogInstrumentation` CR when you want to:
 
-- Configure Autodiscovery checks without modifying workload manifests or adding annotations.
+- Configure Autodiscovery checks and logs without modifying workload manifests or adding annotations.
 - Use a structured resource spec with validation instead of raw JSON in annotations.
-- Centrally manage per-workload check configuration as a dedicated, version-controlled Kubernetes resource.
-- Update or remove check configuration without restarting your application pods.
+- Centrally manage per-workload Autodiscovery configuration as a dedicated, version-controlled Kubernetes resource.
+- Update or remove Autodiscovery configuration without restarting your application pods.
 
-The configuration is reconciled by a controller in the [Datadog Cluster Agent][3]. When you create or update a `DatadogInstrumentation` resource, the Cluster Agent validates the target, reports resource status, and schedules checks against the targeted workload.
+The configuration is reconciled by a controller in the [Datadog Cluster Agent][3]. When you create or update a `DatadogInstrumentation` resource, the Cluster Agent validates the target, reports resource status, and applies the Autodiscovery configuration to the targeted workload.
 
 ## Requirements
 
-- Datadog Agent and Cluster Agent v7.81 or later.
+- Datadog Agent and Cluster Agent v7.82 or later.
 
 To install the CRD and enable the controller, use one of the following:
 
-- Datadog Operator v1.28 or later.
+- Datadog Operator v1.29 or later.
 - Datadog Helm chart v2.223.0 or later.
 
 ## Enable the controller
@@ -45,7 +45,7 @@ The `DatadogInstrumentation` controller runs in the Cluster Agent and is disable
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.81.0 or later.
+Opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.82.0 or later.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -99,12 +99,13 @@ If you manage Datadog CRDs separately, install or upgrade the Datadog CRDs Helm 
 helm upgrade --install datadog-crds datadog/datadog-crds
 ```
 
-## Configure a workload check
+## Configure a workload
 
-A `DatadogInstrumentation` resource has two main parts:
+A `DatadogInstrumentation` resource has three main parts:
 
 - `spec.targetRef`: identifies the workload to configure, by `apiVersion`, `kind`, and `name`. The resource and the target workload must be in the same namespace.
-- `spec.config.checks`: defines the Autodiscovery configurations applied to the target.
+- `spec.config.checks`: defines integration checks to run against your workload.
+- `spec.config.logs`: defines logs to collect from your workload.
 
 You can target the following Kubernetes resources:
 
@@ -131,16 +132,16 @@ spec:
   config:
     checks:
       - integration: redisdb
-        containerImage:
-          - redis
+        containerName: redis
         initConfig: {}
         instances:
           - host: "%%host%%"
             port: "6379"
             password: "%%env_REDIS_PASSWORD%%"
-        logs:
-          - source: redis
-            service: redis_service
+    logs:
+      - containerName: redis
+        tags:
+          - env:demo
 ```
 
 Apply the resource:
@@ -155,13 +156,13 @@ Check the resource status:
 kubectl describe datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE>
 ```
 
-Each entry in `checks` accepts the following fields. For workload targets, provide `instances`, `logs`, or both. If neither is provided, the resource is rejected.
+Each entry in `checks` accepts the following fields:
 
 `integration`
 : Required. The name of the Datadog integration to run, for example `redisdb`.
 
-`containerImage`
-: Required for workload targets. Not used for Service targets. A list of container image identifiers to match against the target workload's containers.
+`containerName`
+: Optional. For workload targets, use the pod container name to apply the check to a specific container. Not used for Service targets.
 
 `initConfig`
 : Optional. The `init_config` section for the integration.
@@ -169,8 +170,7 @@ Each entry in `checks` accepts the following fields. For workload targets, provi
 `instances`
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
-`logs`
-: Optional. The log collection configuration for the matching containers.
+Each entry in `logs` accepts the same log collection configuration options as Autodiscovery log annotations, such as `source`, `service`, `tags`, `type`, `path`, and `log_processing_rules`. Each log entry also requires `containerName`, which must match the pod container name.
 
 ### Service targets
 
@@ -178,10 +178,10 @@ To configure an [endpoint check][6], set `targetRef` to a `Service`. Service tar
 
 - Datadog schedules one endpoint check for each endpoint of the Service.
 - `%%host%%` resolves to the endpoint IP.
-- If an endpoint is backed by a Kubernetes Pod, Datadog adds the Pod and container tags collected for that Pod.
+- If an endpoint is backed by a Kubernetes Pod, Datadog adds the Pod tags collected for that Pod.
 - If an endpoint is not backed by a Pod, Datadog converts the check into a regular cluster check without Pod-specific tags.
 
-Service targets do not use `containerImage`; omit that field.
+Service targets do not use `containerName`; omit that field.
 
 Example: configure NGINX for endpoints behind a `Service` named `nginx`:
 
@@ -213,7 +213,7 @@ When more than one configuration source applies to a workload, Datadog resolves 
 2. `DatadogInstrumentation` resources
 3. Static configuration, such as auto-configuration or mounted files
 
-If a workload already has annotation-based Autodiscovery configuration for a check, your `DatadogInstrumentation` configuration does not override it.
+If a workload already has annotation-based Autodiscovery configuration for a check or log collection, your `DatadogInstrumentation` configuration does not override it.
 
 ## One resource per target
 
