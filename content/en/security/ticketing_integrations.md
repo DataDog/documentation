@@ -155,9 +155,7 @@ The following steps set up bidirectional syncing with Linear and verify that set
    2. Locate the ticketing dropdown option in the explorer or finding page and select **Linear**. The button opens a **Linear Issue** modal.
    3. Verify that the **Case Management ↔ Linear Integration** section exists and bidirectional sync is enabled.
 
-<!-- Add a screenshot of the Linear Issue modal when available:
 {{< img src="security/linear_modal.png" alt="Modal used to create a Linear issue for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
--->
 
 You are ready to start creating bidirectional Case Management tickets.
 
