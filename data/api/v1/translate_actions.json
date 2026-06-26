@@ -320,7 +320,7 @@
     "request_schema_description": "Returns the AWS account associated with this integration."
   },
   "DeleteAWSLambdaARN": {
-    "description": "Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.",
+    "description": "**This endpoint is deprecated.** Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.",
     "summary": "Delete an AWS Logs integration",
     "request_description": "Delete AWS Lambda ARN request body.",
     "request_schema_description": "AWS account ID and Lambda ARN."
@@ -330,13 +330,13 @@
     "summary": "List all AWS Logs integrations"
   },
   "CreateAWSLambdaARN": {
-    "description": "Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.",
+    "description": "**This endpoint is deprecated.** Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.",
     "summary": "Add AWS Log Lambda ARN",
     "request_description": "AWS Log Lambda Async request body.",
     "request_schema_description": "AWS account ID and Lambda ARN."
   },
   "CheckAWSLogsLambdaAsync": {
-    "description": "Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input\nis the same as for Enable an AWS service log collection. Subsequent requests will always repeat the above, so this\nendpoint can be polled intermittently instead of blocking.\n\n- Returns a status of 'created' when it's checking if the Lambda exists in the account.\n- Returns a status of 'waiting' while checking.\n- Returns a status of 'checked and ok' if the Lambda exists.\n- Returns a status of 'error' if the Lambda does not exist.",
+    "description": "**This endpoint is deprecated.** Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input\nis the same as for Enable an AWS service log collection. Subsequent requests will always repeat the above, so this\nendpoint can be polled intermittently instead of blocking.\n\n- Returns a status of 'created' when it's checking if the Lambda exists in the account.\n- Returns a status of 'waiting' while checking.\n- Returns a status of 'checked and ok' if the Lambda exists.\n- Returns a status of 'error' if the Lambda does not exist.",
     "summary": "Check that an AWS Lambda Function exists",
     "request_description": "Check AWS Log Lambda Async request body.",
     "request_schema_description": "AWS account ID and Lambda ARN."
@@ -352,7 +352,7 @@
     "request_schema_description": "A list of current AWS services for which Datadog offers automatic log collection."
   },
   "CheckAWSLogsServicesAsync": {
-    "description": "Test if permissions are present to add log-forwarding triggers for the\ngiven services and AWS account. Input is the same as for `EnableAWSLogServices`.\nDone async, so can be repeatedly polled in a non-blocking fashion until\nthe async request completes.\n\n- Returns a status of `created` when it's checking if the permissions exists\n  in the AWS account.\n- Returns a status of `waiting` while checking.\n- Returns a status of `checked and ok` if the Lambda exists.\n- Returns a status of `error` if the Lambda does not exist.",
+    "description": "**This endpoint is deprecated.** Test if permissions are present to add log-forwarding triggers for the\ngiven services and AWS account. Input is the same as for `EnableAWSLogServices`.\nDone async, so can be repeatedly polled in a non-blocking fashion until\nthe async request completes.\n\n- Returns a status of `created` when it's checking if the permissions exists\n  in the AWS account.\n- Returns a status of `waiting` while checking.\n- Returns a status of `checked and ok` if the Lambda exists.\n- Returns a status of `error` if the Lambda does not exist.",
     "summary": "Check permissions for log services",
     "request_description": "Check AWS Logs Async Services request body.",
     "request_schema_description": "A list of current AWS services for which Datadog offers automatic log collection."

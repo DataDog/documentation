@@ -33011,8 +33011,9 @@ paths:
           - aws_configuration_edit
   /api/v1/integration/aws/logs:
     delete:
+      deprecated: true
       description: >-
-        Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.
+        **This endpoint is deprecated.** Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.
       operationId: DeleteAWSLambdaARN
       requestBody:
         content:
@@ -33109,8 +33110,9 @@ paths:
         permissions:
           - aws_configuration_read
     post:
+      deprecated: true
       description: >-
-        Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.
+        **This endpoint is deprecated.** Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.
       operationId: CreateAWSLambdaARN
       requestBody:
         content:
@@ -33159,8 +33161,9 @@ paths:
           - aws_configuration_edit
   /api/v1/integration/aws/logs/check_async:
     post:
+      deprecated: true
       description: |-
-        Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input
+        **This endpoint is deprecated.** Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input
         is the same as for Enable an AWS service log collection. Subsequent requests will always repeat the above, so this
         endpoint can be polled intermittently instead of blocking.
 
@@ -33313,8 +33316,9 @@ paths:
           - aws_configuration_edit
   /api/v1/integration/aws/logs/services_async:
     post:
+      deprecated: true
       description: |-
-        Test if permissions are present to add log-forwarding triggers for the
+        **This endpoint is deprecated.** Test if permissions are present to add log-forwarding triggers for the
         given services and AWS account. Input is the same as for `EnableAWSLogServices`.
         Done async, so can be repeatedly polled in a non-blocking fashion until
         the async request completes.
