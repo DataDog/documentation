@@ -107,9 +107,9 @@ Visit our Investigate and Triage sections to discover the different explorers an
 
 Head to our Respond and Report pages to learn how to configure Workload Protection for automated remediation and team performance reporting. You’ll find guidance on mitigating threats and tracking metrics like Mean Time to Remediation (MTTR).
 
-### Coverage and Posture Management
+### Coverage
 
-Go through our Coverage and Posture category to access the Workload Protection Inventory tools. These tools provide security teams with a unified, real-time view of workload security posture across all compute environments, including hosts, containers, and serverless functions.
+Use [Coverage](/security/workload_protection/inventory) to get a unified, real-time view of Workload Protection posture across hosts, containers, and serverless workloads. Identify policy deployment issues, unprotected assets, and detection gaps before they become exploitable risks.
 
 
 ### Guides
