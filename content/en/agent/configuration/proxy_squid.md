@@ -21,9 +21,9 @@ Install Squid on a host that has connectivity to both your internal Agents and D
 
 To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. For other operating systems, see [Agent configuration directory][6].
 
-Edit your `squid.conf` configuration file so that Squid can accept local traffic and forward it to the necessary Datadog intakes.
+Edit your `squid.conf` configuration file so that Squid is able to accept local traffic and forward it to the necessary Datadog intakes.
 
-For most setups, a wildcard rule that allows all subdomains of your Datadog site is sufficient:
+The simplest approach uses a wildcard to allow all subdomains of your Datadog site:
 
 ```conf
 http_port 0.0.0.0:3128
@@ -37,6 +37,10 @@ http_access allow local manager
 ```
 
 Alternatively, if you require more granular control, you can explicitly list each Datadog endpoint instead of using a wildcard. For the full list of domains and IP ranges the Agent needs to reach, see [Network Traffic][7]. For example:
+
+{{< warning >}}
+The example below only includes a subset of Datadog endpoints. Make sure to include all domains required by the Datadog features you use. See [Network Traffic][7] for the complete list.
+{{< /warning >}}
 
 ```conf
 http_port 0.0.0.0:3128
@@ -106,7 +110,7 @@ After saving these changes, [restart the Agent][1].
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Modify the `DatadogAgent` custom resource to include the following:
+Modify the DatadogAgent CR to include the following:
 
 ```yaml
 spec:
