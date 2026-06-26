@@ -181,7 +181,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                            |
    | `DD_SITE`    | [Datadog site][13] - Set this tag if you are in a different site. **Default** is US1 `datadoghq.com` |
 
-8. **Add Service Label in the {{< ui >}}info panel{{< /ui >}}**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+8. {{< ui >}}Add Service Label in the info panel{{< /ui >}}. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
    Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the {{< ui >}}info panel{{< /ui >}} of your function.
    | Name      | Value                                                       |
