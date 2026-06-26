@@ -160,7 +160,7 @@ Use the [Findings page][13] to see details of sensitive data findings identified
 - A graph of the events associated with the finding to help you pinpoint when a finding started and see how it has progressed.
 - Related cases created for the finding.
 
-See [Investigate Sensitive Data Findings][14] for more information on triaging sensitive data using the Findings page.
+For logs, a new Findings explorer is available that groups findings by log pattern and surfaces representative log entries. See [Investigate Sensitive Data Findings][14] for more information on triaging sensitive data using the Findings page.
 
 ## Review sensitive data trends
 

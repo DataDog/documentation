@@ -19,14 +19,9 @@ further_reading:
 
 ## Overview
 
-Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by identifying, classifying, and optionally redacting sensitive data. When a sensitive data finding is found, you might have the following questions:
+Datadog's Sensitive Data Scanner helps prevent sensitive data leaks by identifying, classifying, and optionally redacting sensitive data. Use the [Findings][1] page to investigate findings, understand their scope, and take action.
 
-- What sensitive data has been exposed?
-- What is the priority of the sensitive data exposure?
-- How severe is the finding in terms of spread and volume?
-- Where did the sensitive data come from?
-
-The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data findings so that you can investigate, collaborate, and document your findings, and answer those questions.
+For logs, a new Findings explorer groups findings by log pattern and surfaces representative log entries. This makes it easier to confirm whether a finding is a true positive and trace it back to its source. For APM, RUM, and Events findings, the existing **Sensitive Data Rule Findings** experience applies.
 
 {{< img src="sensitive_data_scanner/findings_20251014.png" alt="The Findings page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
@@ -35,9 +30,32 @@ The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sens
 Navigate to the [Findings][1] page to see all sensitive data findings within the selected time frame and start investigating them.
 
 {{< tabs >}}
-{{% tab "Telemetry Data" %}}
+{{% tab "Logs" %}}
 
-In the **Sensitive Data Rule Findings** tab, you can filter your sensitive data findings by priority status, case status, and domain.
+The Logs Findings explorer is an updated experience for investigating log findings. To access it, click **Try the new version** in the blue banner at the top of the Telemetry tab. APM, RUM, and Events findings are not available in this explorer. To view those findings, click **Go back** in the banner.
+
+### Triage log findings
+
+Use **Group by** to organize your findings:
+
+- **Rule**: See which scanning rules are generating the most exposure.
+- **Logs Pattern**: See the specific log formats where sensitive data appears.
+- **Service**: Scope findings by service to assign remediation work to service owners.
+
+To surface findings where sensitive data is actively exposed, filter by **Leaking** in the **Match State** facet.
+
+### Investigate a log finding
+
+Click a finding to open the detail panel:
+
+1. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
+2. Expand **Example Logs** to see representative affected log entries. Click **Show log** on any entry to view the full log.
+3. Check **First Detected** and **Last Detected** to understand how long the exposure has been active.
+
+{{% /tab %}}
+{{% tab "APM, RUM, and Events" %}}
+
+On the **Sensitive Data Rule Findings** tab, you can filter your sensitive data findings by priority status, case status, and domain.
 
 To investigate a finding:
 
@@ -55,7 +73,7 @@ To investigate a finding:
    1. Click on a host to see more information about the host in the Infrastructure List page.
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/blast_radius_02_01_2024.png" alt="The findings panel showing the top 10 impacted services" style="width:50%;">}}
 
-   If you want to modify the Scanning Rule that was used to detect the sensitive data finding, click **Modify Rule** at the top of the panel.
+   To modify the Scanning Rule that was used to detect the sensitive data finding, click **Modify Rule** at the top of the panel.
 
 Additionally, you can also:
 - Use [Case Management][1] to track, triage, and investigate the finding, click **Create Case** at the top of the panel. Associated cases are surfaced in the Findings page.
