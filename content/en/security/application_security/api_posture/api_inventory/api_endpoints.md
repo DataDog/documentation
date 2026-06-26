@@ -129,6 +129,38 @@ datadog:
 
 Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
 
+## View and compare API schemas
+
+API Posture builds an OpenAPI schema for each endpoint from the traffic it observes. This *inferred* schema describes what your API exposes in production: its paths, parameters, request and response bodies, and authentication. When your team also publishes a *declared* schema, an OpenAPI definition registered in the Datadog Catalog, you can compare the two to find where the running API has diverged from its documentation.
+
+### View an endpoint's schema
+
+Reading an OpenAPI definition as raw YAML is slow and error-prone, especially for large APIs. To read a schema in a structured form, open an endpoint from the [API Endpoints][1] explorer and view its schema:
+
+- **Preview** (default) lists every operation with its HTTP method, path, and summary. Expand an operation to see its parameters (path, query, and header), request body, responses by status code, security requirements, and operation details. Referenced schemas (`$ref`) are resolved inline so you read the full shape in place.
+- **YAML** shows the raw definition for copying or reading the spec verbatim.
+
+Switch between the two with the **Preview** and **YAML** toggle. Deprecated operations are de-emphasized, and a banner reports validation warnings or errors found in the definition. If a document is not OpenAPI 3.x (for example, Swagger 2.0), the Preview explains the limitation and the YAML view still shows the raw content. For gRPC APIs, the view shows the proto definition instead.
+
+### Compare declared and inferred schemas
+
+An API often diverges from the definition your team published: endpoints add undocumented parameters, return fields that were never specified, or expose paths that no longer match the contract. This *schema drift* is hard to spot by reading two specifications by hand, and it can hide security and compliance risks.
+
+When an endpoint has a declared definition in the Catalog, open its schema to compare the two definitions side by side:
+
+- **Preview** shows the **Declared definition** (left) and the **Inferred definition** (right) in two columns, each rendered with the same interactive viewer.
+- **YAML** shows a split diff that highlights added, removed, and changed lines, with the declared definition as the original and the inferred definition as the modified version.
+- The **drift summary** at the top lists the differences grouped by severity. Select a difference to expand the relevant sections in both Preview columns and scroll the YAML diff to the matching line.
+
+To reduce noise, the inferred schema includes fields that are observed reliably over time and leaves out one-off or rarely seen fields, so the differences reported reflect meaningful drift rather than transient traffic.
+
+To export the inferred schema as an OpenAPI file in JSON or YAML, use the export action in the schema view.
+
+To compare schemas, set up the following:
+
+- To view an inferred schema, [enable AAP][9] on the service so endpoints are discovered from live traffic.
+- To compare against a declared schema, register the API's OpenAPI definition in the Datadog Catalog. See [Create Entities][8].
+
 ## Processing sensitive data
 
 App and API Protection detects and classifies sensitive data processed by your endpoints, tagging each endpoint with the category and type of data found. To see which endpoints process sensitive data and to create custom API data scanners, see [Sensitive Data][16].
