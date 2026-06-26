@@ -231,6 +231,10 @@
     "name": "Governance Insights",
     "description": "Governance Insights surface key usage, configuration, and best-practice signals for an\norganization within the Governance Console. Each insight reports a current value (and,\noptionally, a previous value for comparison) along with the query used to compute it, so\nthat the Console can render trends and highlight areas that need attention."
   },
+  "governance-settings": {
+    "name": "Governance Settings",
+    "description": "Governance Settings cover organization-wide Governance Console configuration, usage limits and\nresource limits, and notification preferences that determine when and how the Console alerts\nusers about governance activity."
+  },
   "high-availability-multiregion": {
     "name": "High Availability MultiRegion",
     "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."

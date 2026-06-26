@@ -12579,6 +12579,84 @@ menu:
       url: /api/latest/governance-controls/
       identifier: governance-controls
       generated: true
+    - name: Mitigate governance detections
+      url: /api/latest/governance-controls/mitigate-governance-detections/
+      identifier: governance-controls-mitigate-governance-detections
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGovernanceMitigation
+        unstable:
+          - v2
+        order: 5
+    - name: Update governance control notification settings
+      url: /api/latest/governance-controls/update-governance-control-notification-settings/
+      identifier: governance-controls-update-governance-control-notification-settings
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 10
+    - name: Get governance control notification settings
+      url: /api/latest/governance-controls/get-governance-control-notification-settings/
+      identifier: governance-controls-get-governance-control-notification-settings
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 9
+    - name: Update a governance control detection
+      url: /api/latest/governance-controls/update-a-governance-control-detection/
+      identifier: governance-controls-update-a-governance-control-detection
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControlDetection
+        unstable:
+          - v2
+        order: 8
+    - name: Get a governance control detection
+      url: /api/latest/governance-controls/get-a-governance-control-detection/
+      identifier: governance-controls-get-a-governance-control-detection
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControlDetection
+        unstable:
+          - v2
+        order: 7
+    - name: List governance control detections
+      url: /api/latest/governance-controls/list-governance-control-detections/
+      identifier: governance-controls-list-governance-control-detections
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControlDetections
+        unstable:
+          - v2
+        order: 6
     - name: Update a governance control
       url: /api/latest/governance-controls/update-a-governance-control/
       identifier: governance-controls-update-a-governance-control
@@ -12635,6 +12713,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Governance Settings
+      url: /api/latest/governance-settings/
+      identifier: governance-settings
+      generated: true
+    - name: List governance resource limits
+      url: /api/latest/governance-settings/list-governance-resource-limits/
+      identifier: governance-settings-list-governance-resource-limits
+      parent: governance-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceResourceLimits
+        unstable:
+          - v2
+        order: 7
+    - name: Update governance notification settings
+      url: /api/latest/governance-settings/update-governance-notification-settings/
+      identifier: governance-settings-update-governance-notification-settings
+      parent: governance-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 9
+    - name: Get governance notification settings
+      url: /api/latest/governance-settings/get-governance-notification-settings/
+      identifier: governance-settings-get-governance-notification-settings
+      parent: governance-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 8
+    - name: List governance limits
+      url: /api/latest/governance-settings/list-governance-limits/
+      identifier: governance-settings-list-governance-limits
+      parent: governance-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceLimits
+        unstable:
+          - v2
+        order: 6
+    - name: Get the governance console configuration
+      url: /api/latest/governance-settings/get-the-governance-console-configuration/
+      identifier: governance-settings-get-the-governance-console-configuration
+      parent: governance-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceConfig
+        unstable:
+          - v2
+        order: 5
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
