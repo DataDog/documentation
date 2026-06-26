@@ -122,7 +122,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## `NO_PROXY` Accepted Values
+## `NO_PROXY` accepted values
 
 By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules used for Agent integrations.
 
