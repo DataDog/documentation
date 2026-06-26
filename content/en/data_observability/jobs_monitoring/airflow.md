@@ -261,7 +261,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
     OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__COMPRESSION=gzip
     ```
 
-    * replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
+    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
     * replace `<DD_API_KEY>` with your valid [Datadog API key][7].
 
     **Optional:**
