@@ -8105,6 +8105,16 @@ menu:
       parent: workload_protection_investigate_and_triage
       identifier: workload_protection_investigate_and_triage_security_signals
       weight: 20
+    - name: Investigate
+      url: security/workload_protection/investigate_and_triage/security_signals/investigate
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_investigate
+      weight: 10
+    - name: Take action
+      url: security/workload_protection/investigate_and_triage/security_signals/actions
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_actions
+      weight: 20
     - name: Findings
       url: security/workload_protection/investigate_and_triage/security_findings
       parent: workload_protection_investigate_and_triage
