@@ -26,7 +26,7 @@
 
 {{/* When the same operationId+summary exists in both v1 and v2, both versions share one endpoint page with version tabs. Disambiguate the records by linking to the tab anchor. */}}
 {{ $other_action := cond (eq $api_version "v1") (index $api_v2_translate_actions $operationId) (index $api_v1_translate_actions $operationId) }}
-{{ if and (ne $other_action nil) (eq $other_action.summary $section_header) }}
+{{ if and (ne $other_action nil) (eq ($other_action.summary | anchorize) ($section_header | anchorize)) }}
     {{ $tab_anchor := (print $section_header "-" $api_version) | anchorize }}
     {{ $full_url = print $full_url "#" $tab_anchor }}
     {{ $relpermalink = print $relpermalink "#" $tab_anchor }}
