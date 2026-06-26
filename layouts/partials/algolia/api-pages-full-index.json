@@ -31,11 +31,13 @@
         {{ end }}
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
+        {{/* $endpoint_path (REST path, map key) and $method (HTTP verb, map key) are forwarded so
+             api-page-index.json's commented-out path-indexing toggle can use them; inert otherwise. */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $action "tags" }}
+                  {{ $tags = $action.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -47,7 +49,9 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v1"
-                            "endpoint_data" .
+                            "endpoint_data" $action
+                            "endpoint_path" $endpoint_path
+                            "method" $method
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
                         )
@@ -59,11 +63,12 @@
         {{ end }}
 
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
+        {{/* Same capture as the v1 loop: $endpoint_path and $method forwarded for the commented-out toggle. */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $action "tags" }}
+                  {{ $tags = $action.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -75,7 +80,9 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v2"
-                            "endpoint_data" .
+                            "endpoint_data" $action
+                            "endpoint_path" $endpoint_path
+                            "method" $method
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
                         )

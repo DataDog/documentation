@@ -5,6 +5,8 @@
 {{ $lang := .lang }}
 {{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
 {{ $endpoint_data := .endpoint_data }}
+{{ $endpoint_path := .endpoint_path }} {{/* REST path, e.g. "/api/v2/..." (used only by the commented-out path-indexing toggle below) */}}
+{{ $method := .method }}            {{/* HTTP verb, e.g. "get" (used only by the commented-out path-indexing toggle below) */}}
 {{ $api_v1_translate_actions := .api_v1_translate_actions }}
 {{ $api_v2_translate_actions := .api_v2_translate_actions }}
 
@@ -20,6 +22,12 @@
 {{ $action_data := index $translate_actions_datafile $operationId }}
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
+
+{{/* PATH-INDEXING TOGGLE: uncomment the line below to append "METHOD /path" to the
+     content field so endpoint REST paths become searchable. Appended at the END so it
+     doesn't pollute the start of the auto-embedded content. Left commented out for now. */}}
+{{/* {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }} */}}
+
 {{ $endpoint_slug := $section_header | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
