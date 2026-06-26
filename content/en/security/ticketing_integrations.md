@@ -95,13 +95,13 @@ The following steps set up bidirectional syncing with Jira and verify that setup
 2. Verify that bidirectional Case Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Locate the ticketing dropdown option in the explorer or finding page and select **Jira**. The button opens a **Jira Ticket** modal.
-   3. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
+   3. Verify that the **Case Management  ↔ Jira Integration** section exists and bidirectional sync is enabled.
 
 {{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management  <-> Jira Integration** section, ensure that you have completed the prerequisites.
+If you do not see the **Case Management  ↔ Jira Integration** section, ensure that you have completed the prerequisites.
 
 [2]: /integrations/jira/
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
@@ -128,7 +128,7 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management <-> ServiceNow Integration** section, ensure that you have completed the prerequisites.
+If you do not see the **Case Management ↔ ServiceNow Integration** section, ensure that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
@@ -147,13 +147,13 @@ The following steps set up bidirectional syncing with Linear and verify that set
    2. A [webhook for the Linear integration][24]. Configuring a webhook keeps cases created in Case Management and their Linear issues synced.
    3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
    4. The [Linear integration is configured within the project][3].
-      1. Enable Linear for the project, and then select a Linear workspace and team for issue creation.
+      1. Enable Linear for the project, and then select a Linear account and team for issue creation.
       2. For each field you want to keep in sync, select **Two-way sync**.
       3. Complete the remaining settings, and then save your changes.
 2. Verify that bidirectional Case Management integration with Linear is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Locate the ticketing dropdown option in the explorer or finding page and select **Linear**. The button opens a **Linear Issue** modal.
-   3. Verify that the **Case Management <-> Linear Integration** section exists and bidirectional sync is enabled.
+   3. Verify that the **Case Management ↔ Linear Integration** section exists and bidirectional sync is enabled.
 
 <!-- Add a screenshot of the Linear Issue modal when available:
 {{< img src="security/linear_modal.png" alt="Modal used to create a Linear issue for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
@@ -161,7 +161,7 @@ The following steps set up bidirectional syncing with Linear and verify that set
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management <-> Linear Integration** section, verify that you have completed the prerequisites.
+If you do not see the **Case Management ↔ Linear Integration** section, verify that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
@@ -218,12 +218,11 @@ The following steps create a bidirectional ticket for a Security finding.
 {{% collapse-content title="Linear issue" level="h4" expanded=false %}}
 1. Open the **Linear Issue** modal. You can use a new or existing issue. Let's look at creating a new Linear issue.
 2. Complete the following settings:
-   1. **Linear workspace:** select the Linear workspace where you want the issue created.
+   1. **Linear account:** select the Linear account where you want the issue created.
    2. **Linear team:** select the Linear team to create the issue in.
-   3. **Linear project:** optionally select a Linear project.
-   4. **Assignee and Priority:** optionally select the assigned user and priority.
-3. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
-4. Click **Create**.
+3. Optionally set a Linear project, labels, assignee, and priority.
+4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click **Create**.
 
 **Notes**:
 - Bidirectional sync with Linear is available for issue attributes such as status, assignee, title, description, priority, and comments.
