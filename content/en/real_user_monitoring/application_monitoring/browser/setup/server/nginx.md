@@ -4,6 +4,7 @@ description: "Configure NGINX server to automatically inject RUM Browser SDK int
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 5
+site_support_id: rum_server_nginx
 aliases:
   - /real_user_monitoring/browser/setup/server/nginx
 further_reading:
@@ -11,10 +12,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 ## Overview
 
