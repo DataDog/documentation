@@ -42,7 +42,7 @@ To get started, follow the instructions below.
     apache-airflow-providers-openlineage==<PROVIDER_VERSION>
     ```
 
-   If your deployment uses constraints, set `apache-airflow-providers-openlineage` in the Airflow constraints file to the same version. Also update every OpenLineage dependency required by that provider release to the minimum versions listed in the [OpenLineage provider version reference](#openlineage-provider-version-reference).
+   If your deployment uses constraints, set `apache-airflow-providers-openlineage` in the Airflow constraints file to the same version. Also, update every OpenLineage dependency required by that provider release to the minimum versions listed in the [OpenLineage provider version reference](#openlineage-provider-version-reference).
 
 4. Configure `openlineage` provider. Choose one of the following configuration options and set the environment variables, making them available to pods where you run Airflow schedulers and Airflow workers:
 
