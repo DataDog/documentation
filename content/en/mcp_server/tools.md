@@ -1266,16 +1266,16 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 *Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
 Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
 
-- Create a custom RUM metric that counts page views on the checkout page, grouped by country.
-- Update the filter on my "error-rate-by-service" custom metric to exclude bot traffic.
+- Create a custom RUM metric `rum.view.checkout_page_views` that counts page views on the checkout page, grouped by country.
+- Update the filter on the `rum.error.error_rate_by_service` custom metric to exclude bot traffic.
 
 ### `delete_rum_metric`
 *Toolset: **rum***\
 *Permissions Required: `RUM Generate Metrics`*\
 Permanently deletes a custom RUM metric by ID. This operation is destructive and idempotent.
 
-- Delete the custom RUM metric with ID "my-custom-metric".
-- Remove the "legacy-page-views" RUM metric from my organization.
+- Delete the custom RUM metric `rum.view.my_custom_metric`.
+- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
 
 ## Security
 
