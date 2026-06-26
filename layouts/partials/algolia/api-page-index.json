@@ -5,8 +5,6 @@
 {{ $lang := .lang }}
 {{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
 {{ $endpoint_data := .endpoint_data }}
-{{ $endpoint_path := .endpoint_path }}
-{{ $method := .method }}
 {{ $api_v1_translate_actions := .api_v1_translate_actions }}
 {{ $api_v2_translate_actions := .api_v2_translate_actions }}
 
@@ -21,10 +19,7 @@
 {{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
 {{ $action_data := index $translate_actions_datafile $operationId }}
 {{ $section_header := $action_data.summary }}
-{{ $section_content := $action_data.description | default "" }}
-
-{{/* Append the HTTP method + REST path so endpoint paths are searchable via the content field (kept at the end to avoid polluting the start of the auto-embedded content). */}}
-{{ $section_content = printf "%s\n\n%s %s" $section_content (upper $method) $endpoint_path | strings.TrimSpace }}
+{{ $section_content := $action_data.description }}
 {{ $endpoint_slug := $section_header | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
