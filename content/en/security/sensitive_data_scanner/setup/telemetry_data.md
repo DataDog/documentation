@@ -96,6 +96,8 @@ Whenever possible, use Datadog's out-of-the-box library rules. These rules are p
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
 
+**Note**: Sensitive Data Scanner supports up to 750 scanning rules per organization for telemetry data (Logs, APM, RUM, and Events). This limit applies across all scanning groups.
+
 To add scanning rules, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
