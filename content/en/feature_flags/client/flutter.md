@@ -1,10 +1,13 @@
 ---
-title: Dart Feature Flags
-description: Set up Datadog Feature Flags for Dart applications.
+title: Dart and Flutter Feature Flags
+description: Set up Datadog Feature Flags for Dart and Flutter applications.
 further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Client-Side Feature Flags"
+- link: "/real_user_monitoring/application_monitoring/flutter/"
+  tag: "Documentation"
+  text: "Flutter Monitoring"
 - link: "https://github.com/DataDog/dd-sdk-flutter/tree/develop/packages/datadog_flags"
   tag: "Source Code"
   text: "datadog_flags source code"
@@ -12,15 +15,21 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument a Dart application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
+This page describes how to instrument Dart and Flutter applications with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can also use this package directly from Dart code.
+The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can use the standalone Dart package directly or register the Flutter plugin integration to derive configuration from `datadog_flutter_plugin`.
 
-<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart, but it is not built on the OpenFeature Dart SDK. Datadog is working on an OpenFeature-provider-based integration for Dart and Flutter. Until that is available, use the APIs on this page directly.</div>
+<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart and Flutter, but it is not built on the OpenFeature Dart SDK. Datadog is working on an OpenFeature-provider-based integration for Dart and Flutter. Until that is available, use the APIs on this page directly.</div>
 
 ## Installation
 
-Install `datadog_flags`:
+For a Flutter app that already uses the Datadog Flutter SDK, install or update `datadog_flutter_plugin`:
+
+{{< code-block lang="bash" >}}
+flutter pub add datadog_flutter_plugin
+{{< /code-block >}}
+
+For standalone Dart usage, install `datadog_flags`:
 
 {{< tabs >}}
 {{% tab "Dart" %}}
@@ -42,7 +51,54 @@ Then import the public API:
 import 'package:datadog_flags/datadog_flags.dart';
 {{< /code-block >}}
 
-## Initialize the SDK
+## Flutter-integrated setup
+
+Use this setup when your Flutter app already initializes `datadog_flutter_plugin`. Add `DatadogFlagsPluginConfiguration` to your existing `DatadogConfiguration` before initializing the Datadog SDK. The plugin derives the client token, environment, site, service, version, and RUM application ID from the Flutter SDK configuration. To create a client token, see [Client tokens][1].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+
+{{< code-block lang="dart" >}}
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
+
+final configuration = DatadogConfiguration(
+  clientToken: '<CLIENT_TOKEN>',
+  env: '<ENV_NAME>',
+  site: DatadogSite.{{< region-param key="dd_site_name" code="true" >}},
+  service: '<SERVICE_NAME>',
+  version: '<APP_VERSION>',
+  rumConfiguration: DatadogRumConfiguration(
+    applicationId: '<RUM_APPLICATION_ID>',
+  ),
+)..addPlugin(const DatadogFlagsPluginConfiguration());
+
+await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
+{{< /code-block >}}
+
+After initialization, retrieve a flags client from the plugin and initialize it with the evaluation context for the current subject:
+
+{{< code-block lang="dart" >}}
+final flags = DatadogSdk.instance.flags;
+if (flags == null) {
+  return;
+}
+
+final flagsClient = flags.sharedClient();
+await flagsClient.initialize(
+  const FlagsEvaluationContext(
+    targetingKey: 'user-123',
+    attributes: {
+      'companyId': 'company-456',
+      'plan': 'enterprise',
+    },
+  ),
+);
+{{< /code-block >}}
+
+Successful evaluations are sent through the Datadog Feature Flags telemetry pipeline. With the Flutter-integrated setup, successful evaluations that return a variant are also added to the active RUM view as feature flag evaluations.
+
+## Standalone Dart setup
+
+Use this setup when you are not using `datadog_flutter_plugin`, or when you want to manage Feature Flags independently from Flutter SDK initialization.
 
 Enable Datadog Feature Flags early in your app startup. For live Feature Flags configuration, `clientToken`, `env`, and `site` are required. To create a client token, see [Client tokens][1].
 
@@ -239,6 +295,30 @@ DatadogFlagsConfiguration(
 : Advanced overrides for tests, proxies, or custom routing.
 
 If `enable()` is called without a `datadogConfig`, the SDK creates no live provider. Evaluations return the caller-provided default with `FlagEvaluationError.providerNotReady`.
+
+For Flutter-integrated setup, pass these options through `DatadogFlagsPluginConfiguration`:
+
+{{< code-block lang="dart" >}}
+final configuration = DatadogConfiguration(
+  clientToken: '<CLIENT_TOKEN>',
+  env: '<ENV_NAME>',
+  site: DatadogSite.{{< region-param key="dd_site_name" code="true" >}},
+  rumConfiguration: DatadogRumConfiguration(
+    applicationId: '<RUM_APPLICATION_ID>',
+  ),
+)..addPlugin(
+    const DatadogFlagsPluginConfiguration(
+      flagsConfiguration: DatadogFlagsConfiguration(
+        trackExposures: true,
+        trackEvaluations: true,
+      ),
+      rumIntegrationEnabled: true,
+    ),
+  );
+{{< /code-block >}}
+
+`rumIntegrationEnabled`
+: When `true` (default), successful evaluations that return a variant are added to the active RUM view as feature flag evaluations. If your app does not use RUM, this option has no effect.
 
 ## Last-known assignment storage
 
