@@ -16,7 +16,7 @@ This page describes how to instrument a Dart application with the Datadog Featur
 
 The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can also use this package directly from Dart code.
 
-<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart, but it is not built on the OpenFeature Dart SDK. Datadog is working on an OpenFeature-provider-based integration for Dart and Flutter. Until that is available, use the APIs on this page directly.</div>
+<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart, but it is not built on the OpenFeature Dart SDK. Use the APIs on this page directly.</div>
 
 ## Installation
 
