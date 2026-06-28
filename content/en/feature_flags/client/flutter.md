@@ -109,7 +109,7 @@ The `targetingKey` is the randomization subject for percentage rollouts. Users w
 
 `targetingKey` is optional. If you initialize a context before a user or organization ID is known, the SDK sends an empty string for the precompute assignment request.
 
-Use separate named clients for separate mobile subjects, such as logged-out and logged-in users or org-level and user-level targeting:
+Use separate named clients for separate evaluation subjects, such as logged-out and logged-in users or org-level and user-level targeting:
 
 {{< code-block lang="dart" >}}
 await orgFlags.initialize(
