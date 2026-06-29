@@ -29,11 +29,12 @@ export const initializeFeatureFlags = () => {
             return null;
         }
         try {
+            const targetingKey = window.DD_RUM?.getInternalContext?.()?.session_id ?? crypto.randomUUID();
+            await OpenFeature.setContext({ targetingKey });
             await OpenFeature.setProviderAndWait(new DatadogProvider({
                 applicationId: config.ddApplicationId,
                 clientToken: config.ddClientToken,
                 env,
-                // Sends exposure events to the FF dashboard. 
                 enableExposureLogging: true
             }));
             return OpenFeature.getClient();
