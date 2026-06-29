@@ -277,6 +277,65 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 
 {{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
 
+### Frontend activity
+The Frontend activity tab connects your backend service to the Real User Monitoring (RUM) journeys, operations and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
+
+
+
+The metrics in this tab are computed from indexed spans that are correlated with RUM data. The header shows how many indexed spans the view is based on, along with the share of total spans that are indexed.
+
+**Prerequisites**
+- RUM is set up for your frontend application.
+- RUM and APM are connected, so that frontend events are correlated with backend traces from this service.
+- RUM Journey and Operations are enabled for your organization.
+
+To populate the Users and Accounts metrics, your RUM SDKs must send the usr.id and account.id attributes. Without these attributes, the journey, operation, and view metrics are still available, but Datadog cannot attribute activity to specific users or accounts.
+
+**Filtering the view**
+
+Use the cascading selectors at the top of the tab to scope the data, moving from the broadest grouping to the most specific:
+
+
+- Journey: a sequence of steps a user takes in your application, defined in Journey Monitoring.
+- Operation: a user operation tracked within a journey.
+- View: an individual RUM view (page or screen) associated with the selected operations.
+
+**Summary metrics**
+
+The summary cards highlight the aggregate frontend impact for the current selection. Each card shows the value over the selected time frame and the change relative to the previous period:
+
+- Users: number of distinct users (usr.id) active in the selected journeys.
+- Accounts: number of distinct accounts (account.id) active in the selected journeys.
+- Requests: number of frontend requests correlated with this service.
+- Avg Conversion: average conversion rate across the selected journeys.
+- P95 Latency: 95th percentile latency experienced by the frontend.
+- Error Rate: percentage of frontend requests that resulted in an error.
+
+**Product Analytics enrichment**
+
+If you use Product Analytics, the Frontend activity tab surfaces enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
+
+ContentFor AI agents: A markdown version of this page is available at https://docs.datadoghq.com/tracing/services/service_page.md. A documentation index is available at /llms.txt.
+Product
+Customers
+Pricing
+Solutions
+DataDog
+About
+Blog
+Login
+Datadog Docs
+
+Search documentation...
+
+Essentials
+
+Getting Startedpasted
+
+[Learn More about Cloud Cost Management][22].
+
+{{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
