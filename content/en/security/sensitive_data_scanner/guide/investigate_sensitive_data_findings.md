@@ -41,7 +41,7 @@ The Logs Findings explorer is an updated experience for investigating log findin
 
 To investigate a log finding:
 
-1. Use {{< ui >}}Group by{{< /ui >}}  to organize findings by {{< ui >}}Rule{{< /ui >}}, {{< ui >}}Logs Pattern{{< /ui >}}, or {{< ui >}}Service{{< /ui >}}. To surface findings where sensitive data is actively exposed, filter by {{< ui >}}Leaking{{< /ui >}} in the {{< ui >}}Match State{{< /ui >}} facet.
+1. Use {{< ui >}}Group by{{< /ui >}} to organize findings by {{< ui >}}Rule{{< /ui >}}, {{< ui >}}Logs Pattern{{< /ui >}}, or {{< ui >}}Service{{< /ui >}}. To surface findings where sensitive data is actively exposed, filter by {{< ui >}}Leaking{{< /ui >}} in the {{< ui >}}Match State{{< /ui >}} facet.
 2. Click a finding to open the detail panel.
 3. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
 4. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
