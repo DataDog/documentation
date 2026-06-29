@@ -25,7 +25,7 @@ further_reading:
 
 Data Observability CI/CD checks run automatically when you open a pull request that modifies dbt models. The checks give you the information you need to decide whether a change is safe to merge.
 
-Datadog posts the results as a comment on your pull request, and the comment updates each time you push new changes to the PR. A full report is also available in the Datadog app, and you'll get a link to it in the PR comment.
+Datadog posts the results as a comment on your pull request, and the comment updates each time you push new changes to the PR. A full report is also available in Datadog, and you get a link to it in the PR comment.
 
 ## Check types
 
@@ -43,11 +43,11 @@ Drift Detection compares the data produced by your models before and after your 
 
 ### 1. Connect your source control provider and dbt project
 
-Connect your [source-control provider](/integrations/#cat-source-control). CI/CD Checks currently support Github and GitLab.
+Connect your [source-control provider][2]. CI/CD checks support GitHub and GitLab.
 
-Connect the [supported datasource account](/add-do-ci-cd/data_observability/quality_monitoring/#supported-data-sources) where your dbt models are run.
+Connect the [supported data source account][3] where your dbt models are run.
 
-Connect your [dbt Cloud](/data_observability/jobs_monitoring/dbt/?tab=dbtcloud) or [dbt Core](/data_observability/jobs_monitoring/dbt/?tab=dbtcore) project to Datadog. You can also connect your dbt project while configuring CI/CD checks.
+Connect your [dbt Cloud][4] or [dbt Core][5] project to Datadog. You can also connect your dbt project while configuring CI/CD checks.
 
 ### 2. Select dbt Project and Repository
 
@@ -61,7 +61,7 @@ If your dbt project doesn't live at the root of your repository, you can specify
 
 ### 3. Configure checks
 
-Each of the available checks can be enabled independently. Enabling all checks will yield the richest reports.
+Each of the available checks can be enabled independently. Enabling all checks yields the richest reports.
 
 #### Impact Lineage
 
@@ -74,14 +74,14 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 #### Drift Detection
 
-Drift detection compares the current state of your data to a baseline and flags any deviations. In order for Datadog to understand which models were run as part of a CI pipeline, you _must_ send open-lineage events from your CI job. See [open-lineage setup documentation](/data_observability/jobs_monitoring/openlineage) for more info. Drift detection settings are as follows:
+Drift detection compares the current state of your data to a baseline and flags any deviations. In order for Datadog to understand which models were run as part of a CI pipeline, you _must_ send open-lineage events from your CI job. See [open-lineage setup documentation][6] for more info. Drift detection settings are as follows:
 
 **General Settings**
 | Setting | Description |
 | - | - |
 | `Run on Draft Pull/Merge Requests` | if you prefer to run this check on draft pull/merge requests, enable this option |
-| `Threshold` | the threshold for drift detection (e.g., 0.1 for 10% drift). If a metric exceeds this threshold, it'll show up as a warning in check results |
-| `Downstream Checks` | when a dbt model changes, drift detection checks will be generated for it and any downstream dbt models. This setting controls how far downstream checks will be run |
+| `Threshold` | the threshold for drift detection (for example, 0.1 for 10% drift). If a metric exceeds this threshold, it shows up as a warning in check results |
+| `Downstream Checks` | when a dbt model changes, drift detection checks are generated for it and any downstream dbt models. This setting controls how far downstream checks run |
 
 **dbt cloud**
 | Setting | Description |
@@ -91,11 +91,17 @@ Drift detection compares the current state of your data to a baseline and flags 
 **dbt core**
 | Setting | Description |
 | - | - |
-| `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job your selected before, but you should specify it again here.|
-| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job above. [see environment variables documentation](/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables). If you're not setting this environment variable when you send open-lineage events, you don't need to specify it here.|
+| `CI Job Name` | The name of the job that runs whenever you update a pull/merge request and materializes your dbt models. This may be the same as the job you selected before, but you should specify it again here.|
+| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job above. [see environment variables documentation][7]. If you're not setting this environment variable when you send open-lineage events, you don't need to specify it here.|
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_observability/lineage/
+[2]: /integrations/#cat-source-control
+[3]: /data_observability/quality_monitoring/#supported-data-sources
+[4]: /data_observability/jobs_monitoring/dbt/?tab=dbtcloud
+[5]: /data_observability/jobs_monitoring/dbt/?tab=dbtcore
+[6]: /data_observability/jobs_monitoring/openlineage/
+[7]: /data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables
