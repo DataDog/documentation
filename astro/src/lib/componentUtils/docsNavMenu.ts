@@ -130,3 +130,53 @@ export function getDocsNavTree(lang: Locale = DEFAULT_LOCALE): DocsNavNode[] {
   }
   return buildTree(entries, lang);
 }
+
+/**
+ * Length of `href`'s match against `pathname`, or 0 if it doesn't match.
+ *
+ * A nav item matches the current page when its href equals the page path or is
+ * a path-segment prefix of it (so `/api/` matches `/api/latest/foo/`). Trailing
+ * slashes are normalized on both sides. The bare root (`/`) is never a match —
+ * the docs home belongs to no expandable section, and most leaf items without
+ * their own URL fall back to `/`, which must not pull every page into a
+ * section. The return value is the normalized prefix length, so callers can
+ * rank competing matches by specificity (longest wins).
+ */
+function matchLength(href: string, pathname: string): number {
+  const hrefPrefix = href.endsWith("/") ? href : `${href}/`;
+  if (hrefPrefix === "/") {
+    return 0;
+  }
+  const pagePath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+  return pagePath.startsWith(hrefPrefix) ? hrefPrefix.length : 0;
+}
+
+/** Best match length for `pathname` anywhere in `node`'s subtree (incl. `node`). */
+function bestMatchLength(node: DocsNavNode, pathname: string): number {
+  let best = node.href ? matchLength(node.href, pathname) : 0;
+  for (const child of node.children) {
+    best = Math.max(best, bestMatchLength(child, pathname));
+  }
+  return best;
+}
+
+/**
+ * Identifier of the top-level section that owns the current page, or `null` if
+ * no section's subtree contains a nav item matching `pathname`. Used to expand
+ * the active section by default (mirroring Hugo's mobile nav). Matching is by
+ * longest path-prefix, so the most specific link wins and the page is
+ * attributed to that link's top-level ancestor.
+ */
+export function findActiveSectionIdentifier(
+  tree: DocsNavNode[],
+  pathname: string,
+): string | null {
+  let best: { identifier: string; length: number } | null = null;
+  for (const section of tree) {
+    const length = bestMatchLength(section, pathname);
+    if (length > 0 && (!best || length > best.length)) {
+      best = { identifier: section.identifier, length };
+    }
+  }
+  return best?.identifier ?? null;
+}

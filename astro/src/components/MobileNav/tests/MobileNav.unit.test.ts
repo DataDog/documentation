@@ -7,13 +7,19 @@ import MobileNav from "../MobileNav.astro";
 import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
 import { HUGO_ORIGIN } from "@config/origins";
 
-async function renderMobileNav(): Promise<Document> {
+async function renderMobileNav(pathname?: string): Promise<Document> {
   const container = await AstroContainer.create();
   container.addServerRenderer({
     renderer: preactRenderer,
     name: "@astrojs/preact",
   });
-  const html = await container.renderToString(MobileNav);
+  const html = await container.renderToString(MobileNav, {
+    // When a pathname is given, drive Astro.url through a request so the
+    // active-section logic can pick the section owning the current page.
+    request: pathname
+      ? new Request(`https://docs.datadoghq.com${pathname}`)
+      : undefined,
+  });
   return new DOMParser().parseFromString(html, "text/html");
 }
 
@@ -62,9 +68,18 @@ describe("MobileNav.astro", () => {
     expect(sectionByLabel(doc, "Infrastructure")).toBeDefined();
   });
 
-  it("renders all sections collapsed by default", async () => {
+  it("renders all sections collapsed when no page owns a section", async () => {
     const doc = await renderMobileNav();
     expect(sectionByLabel(doc, "Essentials")?.hasAttribute("open")).toBe(false);
+    expect(sectionByLabel(doc, "Infrastructure")?.hasAttribute("open")).toBe(
+      false,
+    );
+  });
+
+  it("opens the section owning the current page (API page → Essentials)", async () => {
+    const doc = await renderMobileNav("/api/latest/action-connection/");
+    expect(sectionByLabel(doc, "Essentials")?.hasAttribute("open")).toBe(true);
+    // Only the owning section opens; unrelated sections stay collapsed.
     expect(sectionByLabel(doc, "Infrastructure")?.hasAttribute("open")).toBe(
       false,
     );

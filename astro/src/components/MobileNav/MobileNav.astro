@@ -17,7 +17,10 @@ import MobileNavSection from "./MobileNavSection.astro";
 import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
-import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
+import {
+  getDocsNavTree,
+  findActiveSectionIdentifier,
+} from "@lib/componentUtils/docsNavMenu";
 import { CORP_ORIGIN } from "@config/origins";
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
@@ -30,6 +33,11 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
 
 const tree = getDocsNavTree(lang);
+
+// Expand the section that owns the current page by default, matching Hugo's
+// mobile nav. Computed at build time from the page URL, so it stays correct as
+// the site grows beyond API docs (no per-page hardcoding).
+const activeSectionId = findActiveSectionIdentifier(tree, Astro.url.pathname);
 
 // TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
@@ -78,7 +86,11 @@ const searchLabels: SearchBarLabels = {
       {
         tree.map((node) => (
           <li>
-            <MobileNavSection node={node} level={0} />
+            <MobileNavSection
+              node={node}
+              level={0}
+              open={node.identifier === activeSectionId}
+            />
           </li>
         ))
       }
