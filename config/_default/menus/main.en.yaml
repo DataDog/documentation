@@ -9718,6 +9718,11 @@ menu:
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
+      weight: 11
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
       weight: 12
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
@@ -9805,6 +9810,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui
