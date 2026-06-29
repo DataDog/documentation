@@ -59,7 +59,7 @@ The following risks are calculated for each endpoint.
 
 ## Data sources
 
-In the [API Endpoints][1] explorer, the **{{< ui >}}Data Sources{{< /ui >}}** show where visibility originates.
+In the [API Endpoints][1] explorer, the {{< ui >}}Data Sources{{< /ui >}} show where visibility originates.
 
 The following data sources are explored.
 
@@ -67,19 +67,19 @@ The following data sources are explored.
 
 <div class="alert alert-info">To disable this integration for a specific API, add the <code>dd_skip_endpoint:true</code> tag to the resource.</div>
 
-The Amazon API Gateway service formally defines your API structure. Datadog AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in **{{< ui >}}Inventory{{< /ui >}}**.
+The Amazon API Gateway service formally defines your API structure. Datadog AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in {{< ui >}}Inventory{{< /ui >}}.
 
-Use **{{< ui >}}AWS API Gateway{{< /ui >}}** in **{{< ui >}}Data Source{{< /ui >}}** to gain visibility into these exposed endpoints. You can also use the query `datasource:aws_apigateway`.
+Use {{< ui >}}AWS API Gateway{{< /ui >}} in {{< ui >}}Data Source{{< /ui >}} to gain visibility into these exposed endpoints. You can also use the query `datasource:aws_apigateway`.
 
 ### Catalog
 
-The **{{< ui >}}Catalog{{< /ui >}}** data source shows API endpoints that Datadog learned about from the formal specification uploaded to Datadog. The API specification is attached to, or registered as, a dedicated API component within the IDP service entity.
+The {{< ui >}}Catalog{{< /ui >}} data source shows API endpoints that Datadog learned about from the formal specification uploaded to Datadog. The API specification is attached to, or registered as, a dedicated API component within the IDP service entity.
 
 This source ensures that your API inventory is complete by including all planned and formally documented endpoints.
 
 ### APM traces
 
-The **{{< ui >}}Spans{{< /ui >}}** data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
+The {{< ui >}}Spans{{< /ui >}} data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
 What actions you take depend on each of the attack surfaces:
 
@@ -96,7 +96,7 @@ What actions you take depend on each of the attack surfaces:
 <div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-The **{{< ui >}}Source Code{{< /ui >}}** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
+The {{< ui >}}Source Code{{< /ui >}} data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
 
 To use this data source, configure the [Source Code Integration][12] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
 
@@ -108,7 +108,7 @@ To use this data source, configure the [Source Code Integration][12] with GitHub
 | C#       | ASP.NET Core MVC |
 | Node.js  | Express, Fastify |
 
-To filter for source code endpoints, use **{{< ui >}}Source Code{{< /ui >}}** in the **{{< ui >}}Data Source{{< /ui >}}** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
+To filter for source code endpoints, use {{< ui >}}Source Code{{< /ui >}} in the {{< ui >}}Data Source{{< /ui >}} facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
 
 #### Map source code endpoints to services
 
@@ -160,7 +160,7 @@ Authentication is determined by:
 - Custom [Endpoint Tagging][15] rules that you configured
 
 
-When the type of authentication is available, Datadog reports it in a header through the **{{< ui >}}Authentication Method{{< /ui >}}** facet.
+When the type of authentication is available, Datadog reports it in a header through the {{< ui >}}Authentication Method{{< /ui >}} facet.
 
 ### Supported authentication methods
 

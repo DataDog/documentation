@@ -13,11 +13,11 @@ The impossible travel method detects access from different locations whose dista
 
 {{< img src="security/security_monitoring/detection_rules/impossible_travel_baseline_location.png" alt="A impossible travel rule's query with the baseline locations option highlighted" style="width:100%;" >}}
 
-When you set up a query for your impossible travel rule, you can enable **{{< ui >}}Baseline User Locations{{< /ui >}}** if you want Datadog to learn the common locations for each user before the rule starts creating signals.
+When you set up a query for your impossible travel rule, you can enable {{< ui >}}Baseline User Locations{{< /ui >}} if you want Datadog to learn the common locations for each user before the rule starts creating signals.
 
 #### Baseline user locations disabled
 
-When **{{< ui >}}Baseline User Locations{{< /ui >}}** is disabled (default):
+When {{< ui >}}Baseline User Locations{{< /ui >}} is disabled (default):
 
 - Each log is assessed for whether it contains a location that is impossible to travel to from an already encountered location.
 
@@ -25,7 +25,7 @@ When **{{< ui >}}Baseline User Locations{{< /ui >}}** is disabled (default):
 
 #### Baseline user locations enabled
 
-When **{{< ui >}}Baseline User Locations{{< /ui >}}** is enabled:
+When {{< ui >}}Baseline User Locations{{< /ui >}} is enabled:
 
 - There is a learning period of 24 hours for each user. During this time, Datadog learns the common locations (city and country) for each user and signals are not created.
 - Encountered locations are forgotten after 30 days if they have not been encountered again.

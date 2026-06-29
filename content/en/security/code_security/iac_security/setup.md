@@ -30,15 +30,15 @@ To connect your GitHub repositories and enable PR comments, see the setup instru
 
 After setting up the GitHub integration, enable IaC Security for your repositories.
 
-1. On the [Code Security Setup page][2], expand the **{{< ui >}}Activate scanning for your repositories{{< /ui >}}** section.
-1. Under **{{< ui >}}Select your source code management provider{{< /ui >}}**, select **{{< ui >}}GitHub{{< /ui >}}**.
-1. Under **{{< ui >}}Select where your scans should run{{< /ui >}}**, select **{{< ui >}}Datadog{{< /ui >}}**.
-1. Under **{{< ui >}}Connect your GitHub repositories{{< /ui >}}**, do one of the following:
-    - To connect a new GitHub account, click **{{< ui >}}Add GitHub Account{{< /ui >}}**.
-    - To enable IaC Security for an existing account, click **{{< ui >}}Select repositories{{< /ui >}}**, or **{{< ui >}}Edit{{< /ui >}}** if Code Security is already enabled.
+1. On the [Code Security Setup page][2], expand the {{< ui >}}Activate scanning for your repositories{{< /ui >}} section.
+1. Under {{< ui >}}Select your source code management provider{{< /ui >}}, select {{< ui >}}GitHub{{< /ui >}}.
+1. Under {{< ui >}}Select where your scans should run{{< /ui >}}, select {{< ui >}}Datadog{{< /ui >}}.
+1. Under {{< ui >}}Connect your GitHub repositories{{< /ui >}}, do one of the following:
+    - To connect a new GitHub account, click {{< ui >}}Add GitHub Account{{< /ui >}}.
+    - To enable IaC Security for an existing account, click {{< ui >}}Select repositories{{< /ui >}}, or {{< ui >}}Edit{{< /ui >}} if Code Security is already enabled.
 1. To enable IaC Security, do one of the following:
-    - To enable it for all repositories, toggle **{{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}}** to the ON position.
-    - To enable it for a single repository, toggle the **{{< ui >}}IaC{{< /ui >}}** switch to ON for that repository.
+    - To enable it for all repositories, toggle {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}} to the ON position.
+    - To enable it for a single repository, toggle the {{< ui >}}IaC{{< /ui >}} switch to ON for that repository.
 
 [1]: /security/code_security/dev_tool_int/pull_request_comments/?tab=github#set-up-pull-request-comments
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
@@ -54,15 +54,15 @@ To connect your GitLab repositories and enable PR comments, see the setup instru
 
 After setting up the GitLab integration, enable IaC Security for your repositories.
 
-1. On the [Code Security Setup page][2], expand the **{{< ui >}}Activate scanning for your repositories{{< /ui >}}** section.
-1. Under **{{< ui >}}Select your source code management provider{{< /ui >}}**, select **{{< ui >}}GitLab{{< /ui >}}**.
-1. Under **{{< ui >}}Select where your scans should run{{< /ui >}}**, select **{{< ui >}}Datadog{{< /ui >}}**.
-1. Under **{{< ui >}}Connect your GitLab repositories{{< /ui >}}**, do one of the following:
-    - To connect a new GitLab instance, click **{{< ui >}}Connect GitLab Instance{{< /ui >}}**.
-    - To enable IaC Security for an existing account, click **{{< ui >}}Select repositories{{< /ui >}}**, or **{{< ui >}}Edit{{< /ui >}}** if Code Security is already enabled.
+1. On the [Code Security Setup page][2], expand the {{< ui >}}Activate scanning for your repositories{{< /ui >}} section.
+1. Under {{< ui >}}Select your source code management provider{{< /ui >}}, select {{< ui >}}GitLab{{< /ui >}}.
+1. Under {{< ui >}}Select where your scans should run{{< /ui >}}, select {{< ui >}}Datadog{{< /ui >}}.
+1. Under {{< ui >}}Connect your GitLab repositories{{< /ui >}}, do one of the following:
+    - To connect a new GitLab instance, click {{< ui >}}Connect GitLab Instance{{< /ui >}}.
+    - To enable IaC Security for an existing account, click {{< ui >}}Select repositories{{< /ui >}}, or {{< ui >}}Edit{{< /ui >}} if Code Security is already enabled.
 1. To enable IaC Security, do one of the following:
-    - To enable it for all repositories, toggle **{{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}}** to the ON position.
-    - To enable it for a single repository, toggle the **{{< ui >}}IaC{{< /ui >}}** switch to ON for that repository.
+    - To enable it for all repositories, toggle {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}} to the ON position.
+    - To enable it for a single repository, toggle the {{< ui >}}IaC{{< /ui >}} switch to ON for that repository.
 
 [1]: /integrations/gitlab-source-code/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
@@ -78,15 +78,15 @@ To connect your Azure DevOps repositories and enable PR comments, see the setup 
 
 After setting up the Azure DevOps integration, enable IaC Security for your repositories.
 
-1. On the [Code Security Setup page][2], expand the **{{< ui >}}Activate scanning for your repositories{{< /ui >}}** section.
-1. Under **{{< ui >}}Select your source code management provider{{< /ui >}}**, select **{{< ui >}}Azure DevOps{{< /ui >}}**.
-1. Under **{{< ui >}}Select where your scans should run{{< /ui >}}**, select **{{< ui >}}Datadog{{< /ui >}}**.
-1. Under **{{< ui >}}Connect your Azure DevOps repositories{{< /ui >}}**, do one of the following:
-    - To connect a new Azure DevOps organization, click **{{< ui >}}Connect Microsoft Entra App{{< /ui >}}**.
-    - To enable IaC Security for an existing account, click **{{< ui >}}Select repositories{{< /ui >}}**, or **{{< ui >}}Edit{{< /ui >}}** if Code Security is already enabled.
+1. On the [Code Security Setup page][2], expand the {{< ui >}}Activate scanning for your repositories{{< /ui >}} section.
+1. Under {{< ui >}}Select your source code management provider{{< /ui >}}, select {{< ui >}}Azure DevOps{{< /ui >}}.
+1. Under {{< ui >}}Select where your scans should run{{< /ui >}}, select {{< ui >}}Datadog{{< /ui >}}.
+1. Under {{< ui >}}Connect your Azure DevOps repositories{{< /ui >}}, do one of the following:
+    - To connect a new Azure DevOps organization, click {{< ui >}}Connect Microsoft Entra App{{< /ui >}}.
+    - To enable IaC Security for an existing account, click {{< ui >}}Select repositories{{< /ui >}}, or {{< ui >}}Edit{{< /ui >}} if Code Security is already enabled.
 1. To enable IaC Security, do one of the following:
-    - To enable it for all repositories, toggle **{{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}}** to the ON position.
-    - To enable it for a single repository, toggle the **{{< ui >}}IaC{{< /ui >}}** switch to ON for that repository.
+    - To enable it for all repositories, toggle {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}} to the ON position.
+    - To enable it for a single repository, toggle the {{< ui >}}IaC{{< /ui >}} switch to ON for that repository.
 
 [1]: /integrations/azure-devops-source-code/#source-code-functionality
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup

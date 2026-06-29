@@ -78,7 +78,7 @@ Cloud SIEM OCSF remaps log data in Log Management's [integration pipelines][8]. 
 To view the Integration Pipeline Library for a source:
 
 1. Navigate to [Logs Pipelines][9].
-1. Click **{{< ui >}}Browse Pipeline Library{{< /ui >}}**.
+1. Click {{< ui >}}Browse Pipeline Library{{< /ui >}}.
 1. Search and click on the integration you are interested in (for example, Okta).
 1. To view the OCSF pipelines for Okta, scroll down to the end of the list of processors for the Okta integration.
 

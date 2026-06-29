@@ -70,10 +70,10 @@ When a threat is confirmed, you can contain it directly from the Workload Protec
 
 Four response actions are available from any Workload Protection signal:
 
-- **{{< ui >}}Kill process{{< /ui >}}** to terminate the offending process.
-- **{{< ui >}}Kill container{{< /ui >}}** to terminate the offending container.
-- **{{< ui >}}Isolate process from network{{< /ui >}}** to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
-- **{{< ui >}}Isolate container from network{{< /ui >}}** to block network access for the container, with the same level of control.
+- {{< ui >}}Kill process{{< /ui >}} to terminate the offending process.
+- {{< ui >}}Kill container{{< /ui >}} to terminate the offending container.
+- {{< ui >}}Isolate process from network{{< /ui >}} to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
+- {{< ui >}}Isolate container from network{{< /ui >}} to block network access for the container, with the same level of control.
 
 Response actions are manual and per-signal. Action status is reported in the signal's response table, investigation graph, and events timeline, and every action is recorded in the audit trail.
 

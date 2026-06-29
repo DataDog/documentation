@@ -22,13 +22,13 @@ Use Rule Version History to:
 To see the version history of a rule:
 1. Navigate to [Detection Rules][1].
 1. Click on the rule you are interested in.
-1. In the rule editor, click **{{< ui >}}Version History{{< /ui >}}** to see past changes.
+1. In the rule editor, click {{< ui >}}Version History{{< /ui >}} to see past changes.
 1. Click a specific version to see what changes were made.
-1. Click **{{< ui >}}Open Version Comparison{{< /ui >}}** to see what changed between versions.
+1. Click {{< ui >}}Open Version Comparison{{< /ui >}} to see what changed between versions.
 1. Select the two versions you want to compare.
     - Data highlighted in red indicates data that was modified or removed.
     - Data highlighted in green indicates data that was added.
-1. Click **{{< ui >}}Unified{{< /ui >}}** if you want to see the comparison in the same panel.
+1. Click {{< ui >}}Unified{{< /ui >}} if you want to see the comparison in the same panel.
 
 ## Further reading
 

@@ -47,9 +47,9 @@ Remote Configuration allows Datadog to send configuration data (such as which cl
 
 Remote Configuration is enabled by default on most organizations. To verify this, navigate to the [Remote Configuration][4] settings page. If it is not enabled:
 1. Ensure your RBAC permissions include [`org_management`][7].
-1. From the Remote Configuration [setup page][5], click **{{< ui >}}Enable for your Organization{{< /ui >}}** > **{{< ui >}}Next Step{{< /ui >}}**.
-1. Search for and select the API keys that you want to use with Remote Configuration and click **{{< ui >}}Enable Keys{{< /ui >}}**. 
-1. Click **{{< ui >}}Next Step{{< /ui >}}** > **{{< ui >}}Done{{< /ui >}}**. You do not need to configure Datadog components like the Agent or tracers.
+1. From the Remote Configuration [setup page][5], click {{< ui >}}Enable for your Organization{{< /ui >}} > {{< ui >}}Next Step{{< /ui >}}.
+1. Search for and select the API keys that you want to use with Remote Configuration and click {{< ui >}}Enable Keys{{< /ui >}}. 
+1. Click {{< ui >}}Next Step{{< /ui >}} > {{< ui >}}Done{{< /ui >}}. You do not need to configure Datadog components like the Agent or tracers.
 
 **Notes**:
 - Only AWS accounts that have scanners deployed to them need Remote-Configuration-enabled Datadog API keys.
@@ -95,14 +95,14 @@ You can add a scanner to a new AWS account or an existing AWS account.
 {{% tab "New AWS account" %}}
 
 1. Navigate to the [Sensitive Data Scanner][1] settings page.
-1. On the **{{< ui >}}Storage{{< /ui >}}** tab, in the **{{< ui >}}Cloud Settings{{< /ui >}}** section, click **{{< ui >}}Add AWS accounts by following these steps{{< /ui >}}**.
-1. Leave **{{< ui >}}Automatically using CloudFormation{{< /ui >}}** enabled.
+1. On the {{< ui >}}Storage{{< /ui >}} tab, in the {{< ui >}}Cloud Settings{{< /ui >}} section, click {{< ui >}}Add AWS accounts by following these steps{{< /ui >}}.
+1. Leave {{< ui >}}Automatically using CloudFormation{{< /ui >}} enabled.
 1. Select the AWS region in the dropdown menu.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection. **Note**: Only users with `api_keys_write` permissions can enable Remote Configuration for individual API keys.
-1. If you want to send AWS logs to Datadog, leave **{{< ui >}}Yes{{< /ui >}}** selected.
-1. Select **{{< ui >}}Yes{{< /ui >}}** if you want to use Datadog Cloud Security.
-1. **{{< ui >}}Enable Sensitive Data Scanner{{< /ui >}}** is automatically selected by default. This tells CloudFormation to add the AWS Managed SecurityAudit policy to your Datadog AWS Integration role and enable Agentless Scanning to start scanning your cloud data stores.
-1. Click **{{< ui >}}Launch CloudFormation Template{{< /ui >}}**.
+1. If you want to send AWS logs to Datadog, leave {{< ui >}}Yes{{< /ui >}} selected.
+1. Select {{< ui >}}Yes{{< /ui >}} if you want to use Datadog Cloud Security.
+1. {{< ui >}}Enable Sensitive Data Scanner{{< /ui >}} is automatically selected by default. This tells CloudFormation to add the AWS Managed SecurityAudit policy to your Datadog AWS Integration role and enable Agentless Scanning to start scanning your cloud data stores.
+1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
 
@@ -110,18 +110,18 @@ You can add a scanner to a new AWS account or an existing AWS account.
 {{% tab "Existing AWS account" %}}
 
 1. Navigate to the [Sensitive Data Scanner][1] settings page.
-1. On the **{{< ui >}}Storage{{< /ui >}}** tab, in the **{{< ui >}}AWS{{< /ui >}}** section:
+1. On the {{< ui >}}Storage{{< /ui >}} tab, in the {{< ui >}}AWS{{< /ui >}} section:
     - If you have Agentless scanning already enabled in an account:
       1. Click the pencil icon for the account.
-      1. Toggle **{{< ui >}}Enable Sensitive Data Scanning{{< /ui >}}** on to add the scanner to the account.
-      1. Click **{{< ui >}}Save{{< /ui >}}**.
+      1. Toggle {{< ui >}}Enable Sensitive Data Scanning{{< /ui >}} on to add the scanner to the account.
+      1. Click {{< ui >}}Save{{< /ui >}}.
     - If you don't have Agentless scanning enabled in an account:
       1. Click on the plus icon for the account you want to enable sensitive data scanning for.
       1. Select that you want to add the scanner using CloudFormation.
       1. Select the AWS region in the dropdown menu.
       1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-      1. Toggle **{{< ui >}}Enable Sensitive Data Scanning{{< /ui >}}** on to add the scanner to the account.
-      1. Click **{{< ui >}}Launch CloudFormation Template{{< /ui >}}**.
+      1. Toggle {{< ui >}}Enable Sensitive Data Scanning{{< /ui >}} on to add the scanner to the account.
+      1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
 
@@ -142,7 +142,7 @@ You can deploy Agentless scanners using the [Terraform Module Datadog Agentless 
 
 ## Scanning groups
 
-In the [Cloud Storage][6] settings page, the **{{< ui >}}Scanning Groups{{< /ui >}}** section is read-only. All [library rules][2] are applied within the scanning group.
+In the [Cloud Storage][6] settings page, the {{< ui >}}Scanning Groups{{< /ui >}} section is read-only. All [library rules][2] are applied within the scanning group.
 
 ## Cloud service provider cost
 
@@ -154,7 +154,7 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 1. Navigate to the [Sensitive Data Scanner][6] settings page.
 1. Click the pencil icon next to the account for which you want to disable Agentless scanning.
-1. Toggle **{{< ui >}}Enable Sensitive Data Scanning{{< /ui >}}** to off.
+1. Toggle {{< ui >}}Enable Sensitive Data Scanning{{< /ui >}} to off.
 
 ## Uninstall Agentless scanning
 

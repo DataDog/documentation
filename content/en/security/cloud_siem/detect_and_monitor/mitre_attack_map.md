@@ -23,27 +23,27 @@ The MITRE ATT&CK Framework is a knowledge base used to develop specific threat m
 
 To view detection rules against the MITRE ATT&CK Framework:
 1. Navigate to the [Detection Rules][1] page.
-1. Click the **{{< ui >}}MITRE ATT&CK Map{{< /ui >}}** button located next to **{{< ui >}}Rules List{{< /ui >}}**.
+1. Click the {{< ui >}}MITRE ATT&CK Map{{< /ui >}} button located next to {{< ui >}}Rules List{{< /ui >}}.
 1. Toggle the resize button on the bottom left side of the page to switch between an expanded view and a condensed view.
 
 The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.
 
 **Note**: For the legacy SKU, all ingested logs are analyzed by Cloud SIEM unless [security filters][2] have been set up.
 
-To view the map for all sources, in the **{{< ui >}}Visualize{{< /ui >}}** dropdown menu, select **{{< ui >}}All Sources{{< /ui >}}**. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
+To view the map for all sources, in the {{< ui >}}Visualize{{< /ui >}} dropdown menu, select {{< ui >}}All Sources{{< /ui >}}. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
 
-Click the rule density buttons to visualize the map for a specific number of rules. For example, if you click **{{< ui >}}High 7+{{< /ui >}}**, only tiles that have more than seven rules enabled are shown on the map.
+Click the rule density buttons to visualize the map for a specific number of rules. For example, if you click {{< ui >}}High 7+{{< /ui >}}, only tiles that have more than seven rules enabled are shown on the map.
 
 ### View an attacker technique's information and related rules
 
 To view more information about a technique and the rules monitoring the technique:
 
 1. On the [MITRE ATT&CK Map][3] page, click on a technique tile.
-1. Click **{{< ui >}}Create Custom Rule{{< /ui >}}** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
-1. In the **{{< ui >}}Rules monitoring this Technique{{< /ui >}}** section, you can:
+1. Click {{< ui >}}Create Custom Rule{{< /ui >}} if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
+1. In the {{< ui >}}Rules monitoring this Technique{{< /ui >}} section, you can:
 	1. Enter a search query to filter to specific rules.
   1. Sort by the creation date, rule type, rule name, source, or highest severity.
-  1. Toggle **{{< ui >}}Show deprecated rules{{< /ui >}}** to see deprecated rules for this technique.
+  1. Toggle {{< ui >}}Show deprecated rules{{< /ui >}} to see deprecated rules for this technique.
 
 ### Add attacker technique and tactic tags to custom rules
 
