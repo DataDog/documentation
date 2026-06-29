@@ -43,10 +43,16 @@ To investigate a log finding:
 
 1. Use **Group by** to organize findings by **Rule**, **Logs Pattern**, or **Service**. To surface findings where sensitive data is actively exposed, filter by **Leaking** in the **Match State** facet.
 2. Click a finding to open the detail panel.
-3. In the summary section, review **Match State**, **Service**, **Environment**, and **Total matches** to understand the scope of the exposure.
-4. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
-5. In the **Example Logs** section, expand an entry to inspect its fields and attributes inline, or click **Show log** to open it in Log Explorer.
-6. Check **First Detected** and **Last Detected** at the top of the panel to understand how long the exposure has been active.
+3. At the top of the panel, check **First Detected** and **Last Detected** to understand how long the exposure has been active.
+4. In the summary section, review **Match State**, **Service**, **Environment**, and **Total matches** to understand the scope of the exposure.
+5. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
+6. In the **Example Logs** section, review representative examples of affected logs. Click **Show log** to expand an example and inspect its log message, fields, and attributes inline.
+7. Review **Matches Trend** to see how match volume has changed over the past week. Use **Related Access and Configuration Events** to check whether recent access events or changes to the scanning group or scanning rule line up with changes in match volume.
+
+Additionally, you can also:
+- Use **Generate Code Fix** to create a BitsAI remediation session and draft a pull request that removes or masks the sensitive data from the logs.
+- Use **Apply Targeted Obfuscation** to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
+- Use **Tune Detection Logic** to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
 
 ### Create alerts from log findings
 
