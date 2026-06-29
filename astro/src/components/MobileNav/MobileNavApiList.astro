@@ -1,0 +1,103 @@
+---
+/**
+ * The API documentation menu for the mobile nav, shown on `/api/` pages in
+ * place of the main docs accordion (mirroring Hugo's `mobile-documentation.html`,
+ * which swaps to the API menu when the path is under `/api/`).
+ *
+ * Each category is a link; the active category additionally expands its
+ * operations as a sublist, with the current page highlighted. This matches the
+ * desktop `ApiSideNav` so the mobile and desktop API navs behave the same.
+ *
+ * The inline script scrolls the panel so the current page lands near the top of
+ * the visible area, just below the sticky header.
+ */
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+import styles from "./MobileNav.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { localizedHref, type Locale } from "@lib/i18n/locale";
+
+interface Props {
+  categories: ApiCategoryStub[];
+  activeCategory?: ApiCategory;
+  currentOperationSlug?: string;
+  lang: Locale;
+}
+
+const { categories, activeCategory, currentOperationSlug, lang } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<ul class={cl("mobile-nav__list")}>
+  {
+    categories.map((category) => {
+      const isActiveCategory = category.slug === activeCategory?.slug;
+      const categoryHref = localizedHref(lang, `/api/latest/${category.slug}/`);
+      return (
+        <li>
+          <a
+            href={categoryHref}
+            class:list={[
+              cl("mobile-nav__api-category"),
+              isActiveCategory && cl("mobile-nav__api-category--active"),
+            ]}
+            aria-current={
+              isActiveCategory && !currentOperationSlug ? "page" : undefined
+            }
+          >
+            {category.name}
+          </a>
+          {isActiveCategory && activeCategory && (
+            <ul class={cl("mobile-nav__api-operations")}>
+              {activeCategory.operations.map((operation) => {
+                const isActiveOperation =
+                  operation.slug === currentOperationSlug;
+                return (
+                  <li>
+                    <a
+                      href={`${categoryHref}${operation.slug}/`}
+                      class:list={[
+                        cl("mobile-nav__api-operation"),
+                        isActiveOperation &&
+                          cl("mobile-nav__api-operation--active"),
+                      ]}
+                      aria-current={isActiveOperation ? "page" : undefined}
+                    >
+                      {operation.summary}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>
+
+{/* Scroll the current page near the top of the panel, just below the sticky
+    header, so it's visible the moment the overlay opens. Runs inline at parse
+    time; the panel is laid out (fixed position, fixed height) even while it
+    sits off-screen, so its scrollTop can be set before first paint. */}
+<script is:inline>
+  {
+    const panel = document.getElementById("mobile-nav");
+    const active =
+      panel?.querySelector(".mobile-nav__api-operation--active") ??
+      panel?.querySelector(".mobile-nav__api-category--active");
+    const header = panel?.querySelector(".mobile-nav__header");
+    if (panel && active) {
+      const headerHeight = header
+        ? header.getBoundingClientRect().height
+        : 0;
+      // Leave a small gap below the sticky header so the active item isn't
+      // flush against it.
+      const gap = 12;
+      panel.scrollTop +=
+        active.getBoundingClientRect().top -
+        panel.getBoundingClientRect().top -
+        headerHeight -
+        gap;
+    }
+  }
+</script>

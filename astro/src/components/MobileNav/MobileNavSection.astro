@@ -16,12 +16,15 @@ interface Props {
   node: DocsNavNode;
   level: number;
   open?: boolean;
+  /** Identifier of the node that is the current page, brand-colored when matched. */
+  activePageId?: string;
 }
 
-const { node, level, open = false } = Astro.props;
+const { node, level, open = false, activePageId } = Astro.props;
 const cl = classListFactory(styles);
 // Hugo's mobile nav only expands top-level sections; subsections are plain links.
 const hasChildren = level === 0 && node.children.length > 0;
+const isActivePage = activePageId !== undefined && node.identifier === activePageId;
 
 // Second-stage href resolution: `docsNavMenu.getDocsNavTree` already localizes
 // and root-relativizes each URL; here we choose the origin. API docs (/api/...)
@@ -61,9 +64,13 @@ function resolveNavHref(href: string | null): string {
         {node.href && (
           <li>
             <a
-              class={cl("mobile-nav__link")}
+              class:list={[
+                cl("mobile-nav__link"),
+                isActivePage && cl("mobile-nav__link--active"),
+              ]}
               style={`--depth:${level + 1}`}
               href={resolveNavHref(node.href)}
+              aria-current={isActivePage ? "page" : undefined}
             >
               {node.label}
             </a>
@@ -71,17 +78,21 @@ function resolveNavHref(href: string | null): string {
         )}
         {node.children.map((child) => (
           <li>
-            <Self node={child} level={level + 1} />
+            <Self node={child} level={level + 1} activePageId={activePageId} />
           </li>
         ))}
       </ul>
     </details>
   ) : (
     <a
-      class={cl("mobile-nav__link")}
+      class:list={[
+        cl("mobile-nav__link"),
+        isActivePage && cl("mobile-nav__link--active"),
+      ]}
       data-level={level}
       style={`--depth:${level}`}
       href={resolveNavHref(node.href)}
+      aria-current={isActivePage ? "page" : undefined}
     >
       {node.label}
     </a>

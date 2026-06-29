@@ -14,15 +14,26 @@
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import MobileNavSection from "./MobileNavSection.astro";
+import MobileNavApiList from "./MobileNavApiList.astro";
 import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
 import {
   getDocsNavTree,
   findActiveSectionIdentifier,
+  findActivePageIdentifier,
 } from "@lib/componentUtils/docsNavMenu";
+import {
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+} from "@lib/api/viewsBuilder";
 import { CORP_ORIGIN } from "@config/origins";
-import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import {
+  DEFAULT_LOCALE,
+  localizedHref,
+  stripLocalePrefix,
+  type Locale,
+} from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
 
 interface Props {
@@ -32,12 +43,37 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
 
+// On `/api/` pages, swap the main docs accordion for the API category/operation
+// tree so the current API page is visible and navigable — mirroring Hugo's
+// mobile-documentation.html. The data is derived from the URL at build time
+// (the same builders the API pages use), so no props need to thread through the
+// global header.
+const { lang: pageLang, rest: unprefixedPath } = stripLocalePrefix(
+  Astro.url.pathname,
+);
+const isApiContext = unprefixedPath.startsWith("/api/");
+
+// `/api/latest/{category}/{operation}/` → capture the category and operation.
+const apiPathSegments = unprefixedPath.split("/").filter(Boolean); // ['api','latest',cat?,op?]
+const activeCategorySlug = apiPathSegments[2];
+const currentOperationSlug = apiPathSegments[3];
+
+const apiCategories = isApiContext ? await getCategoryStubsView(pageLang) : [];
+const activeApiCategory =
+  isApiContext && activeCategorySlug
+    ? await getCategoryViewBySlug(activeCategorySlug, pageLang)
+    : undefined;
+
 const tree = getDocsNavTree(lang);
 
 // Expand the section that owns the current page by default, matching Hugo's
 // mobile nav. Computed at build time from the page URL, so it stays correct as
 // the site grows beyond API docs (no per-page hardcoding).
 const activeSectionId = findActiveSectionIdentifier(tree, Astro.url.pathname);
+
+// Identifier of the leaf (or section-landing) link the user is actually on, so
+// it can be brand-colored — distinct from the expanded section above.
+const activePageId = findActivePageIdentifier(tree, Astro.url.pathname);
 
 // TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
@@ -60,40 +96,52 @@ const searchLabels: SearchBarLabels = {
   <div id="mobile-nav-bg" class={cl("mobile-nav__backdrop")}></div>
 
   <div id="mobile-nav" class={cl("mobile-nav__panel")}>
-    <div class={cl("mobile-nav__quicknav")}>
-      {
-        quicknav.map((item) => (
-          <a class={cl("mobile-nav__quicknav-link")} href={item.href}>
-            <img
-              class={cl("mobile-nav__quicknav-icon")}
-              src={`/images/icons/${item.icon}.png`}
-              width="21"
-              height="21"
-              loading="lazy"
-              alt={item.alt}
-            />
-            <span>{item.label}</span>
-          </a>
-        ))
-      }
+    <div class={cl("mobile-nav__header")}>
+      <div class={cl("mobile-nav__quicknav")}>
+        {
+          quicknav.map((item) => (
+            <a class={cl("mobile-nav__quicknav-link")} href={item.href}>
+              <img
+                class={cl("mobile-nav__quicknav-icon")}
+                src={`/images/icons/${item.icon}.png`}
+                width="21"
+                height="21"
+                loading="lazy"
+                alt={item.alt}
+              />
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class={cl("mobile-nav__search")}>
+        <SearchBar client:load variant="mobile" labels={searchLabels} />
+      </div>
     </div>
 
-    <div class={cl("mobile-nav__search")}>
-      <SearchBar client:load variant="mobile" labels={searchLabels} />
-    </div>
-
-    <ul class={cl("mobile-nav__list")}>
-      {
-        tree.map((node) => (
-          <li>
-            <MobileNavSection
-              node={node}
-              level={0}
-              open={node.identifier === activeSectionId}
-            />
-          </li>
-        ))
-      }
-    </ul>
+    {
+      isApiContext ? (
+        <MobileNavApiList
+          categories={apiCategories}
+          activeCategory={activeApiCategory}
+          currentOperationSlug={currentOperationSlug}
+          lang={pageLang}
+        />
+      ) : (
+        <ul class={cl("mobile-nav__list")}>
+          {tree.map((node) => (
+            <li>
+              <MobileNavSection
+                node={node}
+                level={0}
+                open={node.identifier === activeSectionId}
+                activePageId={activePageId}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </div>

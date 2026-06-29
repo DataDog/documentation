@@ -180,3 +180,27 @@ export function findActiveSectionIdentifier(
   }
   return best?.identifier ?? null;
 }
+
+/**
+ * Identifier of the single nav node whose own href most specifically matches
+ * the current page (longest path-prefix), or `null` if none. This is the
+ * *page* to highlight as active — the leaf the user is on, or a
+ * section-that-is-also-a-page when on its landing URL. Distinct from
+ * findActiveSectionIdentifier, which returns that node's top-level ancestor so
+ * the section can be expanded.
+ */
+export function findActivePageIdentifier(
+  tree: DocsNavNode[],
+  pathname: string,
+): string | null {
+  let best: { identifier: string; length: number } | null = null;
+  const visit = (node: DocsNavNode) => {
+    const length = node.href ? matchLength(node.href, pathname) : 0;
+    if (length > 0 && (!best || length > best.length)) {
+      best = { identifier: node.identifier, length };
+    }
+    node.children.forEach(visit);
+  };
+  tree.forEach(visit);
+  return best?.identifier ?? null;
+}

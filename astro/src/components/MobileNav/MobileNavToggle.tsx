@@ -5,6 +5,7 @@ import {
   loadExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
+import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 
 const cl = classListFactory(styles);
 
@@ -31,6 +32,7 @@ interface Props {
  */
 export default function MobileNavToggle({ labels, externalContext }: Props) {
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const overlayRef = useRef<HTMLElement | null>(null);
   const backdropRef = useRef<HTMLElement | null>(null);
 
@@ -46,6 +48,10 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
   }
 
   useEffect(() => {
+    // Signal hydration so tests (and any consumer) can wait for the click
+    // handler to be live before interacting with the toggle.
+    markSelfAsHydrated(buttonRef);
+
     const loaded = loadExternalContext(externalContext);
     if (!loaded) {
       return;
@@ -63,6 +69,7 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       class={`${cl("mobile-nav__hamburger")} ${open ? cl("mobile-nav__hamburger--open") : ""} navbar-toggler ${open ? "open" : ""}`}
       aria-expanded={open}

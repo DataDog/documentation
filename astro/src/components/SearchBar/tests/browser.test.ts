@@ -40,7 +40,8 @@ test.describe('SearchBar component — mobile-nav placement', () => {
     const mobileSearch = page.locator('.mobile-nav__search .search-bar').first();
     const input = mobileSearch.locator('.search-bar__input');
 
-    await page.locator('.navbar-toggler').click();
+    // Wait for the toggle island to hydrate so the click can't race its handler.
+    await page.locator('.navbar-toggler[data-hydrated="true"]').click();
     await expect(page.locator('#mobile-nav.mobile-nav__panel--open')).toBeVisible();
 
     await expect(mobileSearch).toBeVisible();

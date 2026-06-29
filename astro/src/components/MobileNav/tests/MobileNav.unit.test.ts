@@ -5,6 +5,8 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import preactRenderer from "@astrojs/preact/server.js";
 import MobileNav from "../MobileNav.astro";
 import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
+import { getCategoriesView } from "@lib/api/viewsBuilder";
+import type { ApiCategory } from "@lib/api/schemas/views";
 import { HUGO_ORIGIN } from "@config/origins";
 
 async function renderMobileNav(pathname?: string): Promise<Document> {
@@ -29,6 +31,15 @@ function sectionByLabel(doc: Document, label: string): Element | undefined {
   );
 }
 
+// API categories (from the frozen spec fixture) that have at least one
+// operation, so tests can drive the active-category/operation rendering.
+async function getCategoriesWithOperations(): Promise<ApiCategory[]> {
+  const categories = await getCategoriesView();
+  const withOps = categories.filter((cat) => cat.operations.length > 0);
+  expect(withOps.length).toBeGreaterThan(0);
+  return withOps;
+}
+
 describe("MobileNav.astro", () => {
   it("renders the quick-links row with three icons", async () => {
     const doc = await renderMobileNav();
@@ -50,6 +61,21 @@ describe("MobileNav.astro", () => {
     expect(doc.querySelector("#mobile-nav")).not.toBeNull();
     expect(doc.querySelector("#mobile-nav-bg")).not.toBeNull();
     expect(doc.querySelector(".mobile-nav__search")).not.toBeNull();
+  });
+
+  it("groups the quick-links and search into a sticky header above the menu", async () => {
+    // Quick-links and search live in a single header element that is made
+    // sticky in CSS, so they stay pinned while the menu list scrolls beneath.
+    const doc = await renderMobileNav();
+    const header = doc.querySelector(".mobile-nav__header");
+    expect(header).not.toBeNull();
+    expect(header?.querySelector(".mobile-nav__quicknav")).not.toBeNull();
+    expect(header?.querySelector(".mobile-nav__search")).not.toBeNull();
+    // The scrolling menu list is a sibling after the header, not inside it.
+    expect(header?.querySelector(".mobile-nav__list")).toBeNull();
+    expect(header?.nextElementSibling?.classList.contains("mobile-nav__list")).toBe(
+      true,
+    );
   });
 
   it("renders the functional SearchBar island inside the search slot", async () => {
@@ -76,13 +102,64 @@ describe("MobileNav.astro", () => {
     );
   });
 
-  it("opens the section owning the current page (API page → Essentials)", async () => {
-    const doc = await renderMobileNav("/api/latest/action-connection/");
-    expect(sectionByLabel(doc, "Essentials")?.hasAttribute("open")).toBe(true);
-    // Only the owning section opens; unrelated sections stay collapsed.
-    expect(sectionByLabel(doc, "Infrastructure")?.hasAttribute("open")).toBe(
-      false,
+  it("replaces the main docs menu with the API nav on API pages", async () => {
+    // Mirrors Hugo's mobile-documentation.html: on `/api/` pages the menu is
+    // the API category/operation tree, not the main docs accordion.
+    const [category] = await getCategoriesWithOperations();
+    const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+
+    // No main-menu accordion sections (e.g. Essentials/Infrastructure).
+    expect(sectionByLabel(doc, "Essentials")).toBeUndefined();
+    expect(doc.querySelector(".mobile-nav__section")).toBeNull();
+    // The API category list is present instead.
+    expect(doc.querySelectorAll(".mobile-nav__api-category").length).toBeGreaterThan(0);
+  });
+
+  it("expands the active category and highlights the active operation in the API nav", async () => {
+    const [category] = await getCategoriesWithOperations();
+    const operation = category.operations[0];
+    const doc = await renderMobileNav(
+      `/api/latest/${category.slug}/${operation.slug}/`,
     );
+
+    // The active category is the only one rendering its operation sublist.
+    const operationLists = doc.querySelectorAll(".mobile-nav__api-operations");
+    expect(operationLists.length).toBe(1);
+
+    // The active operation carries the active modifier and points at its page.
+    const activeOp = doc.querySelector(".mobile-nav__api-operation--active");
+    expect(activeOp).not.toBeNull();
+    expect(activeOp?.getAttribute("href")).toBe(
+      `/api/latest/${category.slug}/${operation.slug}/`,
+    );
+    expect(activeOp?.getAttribute("aria-current")).toBe("page");
+  });
+
+  it("marks the active category active on a category landing page", async () => {
+    const [category] = await getCategoriesWithOperations();
+    const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+    const activeCat = doc.querySelector(".mobile-nav__api-category--active");
+    expect(activeCat).not.toBeNull();
+    expect(activeCat?.getAttribute("href")).toBe(`/api/latest/${category.slug}/`);
+  });
+
+  it("highlights the active page link (purple + aria-current) in the docs accordion", async () => {
+    // On a non-API page, the active page link itself — not just its expanded
+    // section — is brand-colored. `/getting_started/` renders as a level-1 link
+    // under the (expanded) Essentials section, so it appears in the DOM and is
+    // the longest-prefix match for the page.
+    const doc = await renderMobileNav("/getting_started/");
+    const active = doc.querySelector(".mobile-nav__link--active");
+    expect(active).not.toBeNull();
+    expect(active?.getAttribute("href")).toBe(`${HUGO_ORIGIN}/getting_started/`);
+    expect(active?.getAttribute("aria-current")).toBe("page");
+    // Exactly one link is active — not its ancestors or siblings.
+    expect(doc.querySelectorAll(".mobile-nav__link--active").length).toBe(1);
+  });
+
+  it("highlights no docs link when no page matches", async () => {
+    const doc = await renderMobileNav();
+    expect(doc.querySelector(".mobile-nav__link--active")).toBeNull();
   });
 
   it("renders nested child links pointing to Hugo at build time (SEO)", async () => {

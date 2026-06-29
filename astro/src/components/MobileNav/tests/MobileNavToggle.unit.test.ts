@@ -37,6 +37,14 @@ describe("MobileNavToggle", () => {
     expect(document.getElementById("mobile-nav-bg")?.classList.contains("mobile-nav__backdrop--open")).toBe(false);
   });
 
+  it("marks itself hydrated on mount", () => {
+    // Browser tests wait for this attribute before clicking, so the click
+    // can't race the island's hydration.
+    renderWithOverlay();
+    const toggle = screen.getByRole("button", { name: "Toggle navigation" });
+    expect(toggle.getAttribute("data-hydrated")).toBe("true");
+  });
+
   it("opens the overlay and backdrop on click", async () => {
     const user = userEvent.setup();
     renderWithOverlay();

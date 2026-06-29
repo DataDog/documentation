@@ -62,12 +62,26 @@
   }
 }
 
+/* --- Sticky header (quick-links + search) ---
+   Pinned to the top of the scrolling panel so the Home/Docs/API row and the
+   search field stay visible while the menu list scrolls beneath. The opaque
+   background keeps scrolled-up menu items from showing through, and being a
+   positioned element it paints above the static list without an explicit
+   z-index. */
+
+.mobile-nav__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-bg);
+}
+
 /* --- Quick-links row (Home / Docs / API with icons) --- */
 
 .mobile-nav__quicknav {
   display: flex;
   align-items: center;
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) 0;
   border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
 }
 
@@ -105,11 +119,12 @@
   background: var(--color-bg);
 }
 
-/* Give the input a taller touch target than the side-nav default. Targets the
-   plain BEM class `cl()` also emits, so it stays scoped to the mobile nav. */
+/* Keep a comfortable touch target while staying compact now that the header is
+   sticky. Targets the plain BEM class `cl()` also emits, so it stays scoped to
+   the mobile nav. */
 .mobile-nav__search :global(.search-bar__input) {
-  padding-top: var(--space-md);
-  padding-bottom: var(--space-md);
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -229,6 +244,72 @@
 
 .mobile-nav__link:hover {
   color: var(--hugo-nav-brand-primary);
+}
+
+/* Current page: brand-colored (purple) + semibold so it stands out at a glance,
+   matching the API nav's active treatment. Both classes are chained to match
+   the specificity of `.mobile-nav__link:not([data-level="0"])` above (which
+   sets sub-level links black); declared later, this then wins. */
+.mobile-nav__link.mobile-nav__link--active {
+  color: var(--hugo-nav-brand-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* --- API nav (shown on /api/ pages in place of the docs accordion) ---
+   Categories read as headings (uppercase, semibold) like the top-level docs
+   sections; the active category expands its operations as indented links. The
+   current page is brand-colored (purple) so it stands out at a glance. */
+
+.mobile-nav__api-category {
+  display: block;
+  padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end) var(--space-sm)
+    var(--hugo-mobile-nav-indent-base);
+  color: var(--hugo-nav-text);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.mobile-nav__api-category:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__api-operations {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav__api-operations li {
+  list-style: none;
+  border: none;
+}
+
+/* Tight vertical rhythm (--space-xs, not --space-sm) so more operations fit in
+   the viewport at once — the operation list can be long, and keeping rows close
+   together helps the active page stay visible when the section is anchored. */
+.mobile-nav__api-operation {
+  display: block;
+  padding: var(--space-xs) var(--hugo-mobile-nav-link-padding-end) var(--space-xs)
+    calc(
+      var(--hugo-mobile-nav-indent-base) + var(--hugo-mobile-nav-indent-step)
+    );
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+}
+
+.mobile-nav__api-operation:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+/* Current page: purple + semibold. Applies to whichever level is the active
+   page (operation on an endpoint page, category on a category landing page). */
+.mobile-nav__api-category--active,
+.mobile-nav__api-operation--active {
+  color: var(--hugo-nav-brand-primary);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* --- Hamburger toggle (shown in mobile header row) --- */
