@@ -320,27 +320,6 @@ The summary cards highlight the aggregate frontend impact for the current select
 
 If you use Product Analytics, the Frontend activity tab surfaces enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
 
-ContentFor AI agents: A markdown version of this page is available at https://docs.datadoghq.com/tracing/services/service_page.md. A documentation index is available at /llms.txt.
-Product
-Customers
-Pricing
-Solutions
-DataDog
-About
-Blog
-Login
-Datadog Docs
-
-Search documentation...
-
-Essentials
-
-Getting Startedpasted
-
-[Learn More about Cloud Cost Management][22].
-
-{{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
