@@ -4,6 +4,7 @@ description: "Automatically inject RUM Browser SDK into HTML responses through w
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
+site_support_id: rum_server_auto_instrumentation
 aliases:
   - /real_user_monitoring/browser/setup/server
 further_reading:
@@ -14,10 +15,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 ## Overview
 

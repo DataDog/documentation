@@ -14,7 +14,7 @@ Scheduled rules complement real-time monitoring by ensuring periodic, in-depth a
 ## Create a rule
 
 1. To create a detection rule, navigate to the [Create a New Detection][1] page.
-1. Select **Scheduled Rule**.
+1. Select {{< ui >}}Scheduled Rule{{< /ui >}}.
 
 ## Define your scheduled rule
 
@@ -30,8 +30,8 @@ Choose the query language you want to use.
 {{% collapse-content title="Event Query" level="h4" expanded=false id="threshold-event-query" %}}
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/threshold_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -58,12 +58,12 @@ In Datadog, SQL queries are compatible with data stored in [datasets][2]. You ca
 
 {{< img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%" >}}
 
-1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
-   - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
-   - If you created a dataset, click **Create** so you can use it in your rule.
-2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click **Preview** to see a list of matching results.
+1. Under {{< ui >}}Define Datasets{{< /ui >}}, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the {{< ui >}}New{{< /ui >}} icon to create a dataset from scratch.
+   - If you chose an existing dataset and made changes, click {{< ui >}}Update{{< /ui >}} to apply those changes to that dataset, or {{< ui >}}Clone With Changes{{< /ui >}} to create a dataset with your changes applied.
+   - If you created a dataset, click {{< ui >}}Create{{< /ui >}} so you can use it in your rule.
+2. Under {{< ui >}}Write Queries{{< /ui >}}, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click {{< ui >}}Preview{{< /ui >}} to see a list of matching results.
 
-Rule conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the **Set Conditions** section, such as a count threshold or group-by attribute. A signal is generated when the query results meet those conditions.
+Rule conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the {{< ui >}}Set Conditions{{< /ui >}} section, such as a count threshold or group-by attribute. A signal is generated when the query results meet those conditions.
 
 [1]: /ddsql_reference/
 [2]: https://app.datadoghq.com/security/configuration/datasets
@@ -77,8 +77,8 @@ Rule conditions are applied to the results returned by your SQL queries. Each qu
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/new_value_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -93,8 +93,8 @@ Rule conditions are applied to the results returned by your SQL queries. Each qu
 
 {{< img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/anomaly_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -109,8 +109,8 @@ Rule conditions are applied to the results returned by your SQL queries. Each qu
 
 {{< img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/content_anomaly_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -125,8 +125,8 @@ Rule conditions are applied to the results returned by your SQL queries. Each qu
 
 {{< img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/impossible_travel_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -143,15 +143,15 @@ Rule conditions are applied to the results returned by your SQL queries. Each qu
 
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
+1. If you are an add-on and see the {{< ui >}}Index{{< /ui >}} dropdown menu, select the index of logs you want to analyze.
 1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
+1. In the {{< ui >}}Trigger for each new{{< /ui >}} dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/add_calculated_fields %}}
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
 
-Click **Add Root Query** to add additional queries.
+Click {{< ui >}}Add Root Query{{< /ui >}} to add additional queries.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -161,12 +161,12 @@ Click **Add Root Query** to add additional queries.
 
 {{< img src="security/security_monitoring/detection_rules/signal_correlation_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. Select a rule for **Rule a**.
+1. Select a rule for {{< ui >}}Rule a{{< /ui >}}.
 1. Click the pencil icon to rename the rule.
-1. Use the **correlated by** dropdown to define the correlating attribute.
+1. Use the {{< ui >}}correlated by{{< /ui >}} dropdown to define the correlating attribute.
     - You can select multiple attributes (maximum of 3) to correlate the selected rules.
-1. Select a rule for **Rule b** in the second Rule editor's dropdown.
-    - The attributes and sliding window time frame is automatically set to what was selected for **Rule a**.
+1. Select a rule for {{< ui >}}Rule b{{< /ui >}} in the second Rule editor's dropdown.
+    - The attributes and sliding window time frame is automatically set to what was selected for {{< ui >}}Rule a{{< /ui >}}.
 1. Click the pencil icon to rename the rule.
 
 [1]: /logs/search_syntax/
@@ -334,7 +334,7 @@ You can set specific evaluation time and how often it runs by creating a [custom
 
 {{< img src="security/security_monitoring/detection_rules/custom_schedule.png" alt="The Use custom schedule section with an example" style="width:100%;" >}}
 
-1. Select **Create Custom Schedules**.
+1. Select {{< ui >}}Create Custom Schedules{{< /ui >}}.
 1. Set how often and at what time you want the rule to run.
 
 ### Use RRULE
@@ -357,7 +357,7 @@ The example RRULE runs the scheduled rule once a day at 6:00 AM.
 
 To write a custom RRULE for your detection rule:
 
-1. Select **</> Use RRULE**.
+1. Select {{< ui >}}</> Use RRULE{{< /ui >}}.
 1. Set the date and time for when you want the rule to start.
 1. Input a [RRULE string][4] to set how often you want the rule to run.
 
