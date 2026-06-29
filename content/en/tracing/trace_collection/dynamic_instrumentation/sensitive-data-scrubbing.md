@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs into log messages or add them as span tags.
+Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs as span tags.
 
 While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information.
 
