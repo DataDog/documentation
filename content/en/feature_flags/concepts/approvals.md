@@ -12,16 +12,16 @@ further_reading:
 
 ## Overview
 
-Approvals help you control what changes are made to feature flags and by whom. In addition to [granular access control][ff-permissions], you can require approvals for changes to certain flags or production environments before those changes take effect.
+Approvals help you control what changes are made to feature flags and by whom. In addition to [granular access control][1], you can require approvals for changes to certain flags or production environments before those changes take effect.
 
 ## Require approvals on an environment
 
-1. Navigate to [**Feature Flags > Settings > Environments**][environments-settings].
+1. Navigate to [**Feature Flags > Settings > Environments**][2].
 2. Select the environment you want to configure.
-3. If it is not already a production environment, mark it as a [production environment][prod-environments].
+3. If it is not already a production environment, mark it as a [production environment][3].
 4. Enable the option to require approvals.
 
-{{< img src="feature_flags/concepts/environment-approvals.png" alt="Edit Environment dialog with Mark as production environment and Require feature flag approval options." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/environment-approvals.png" alt="Edit Environment dialog with Mark as production environment and Require feature flag approval options." style="width:65%;" >}}
 
 After you enable approvals, subsequent changes that impact application behavior in that environment require approval before they can be applied. The changes must be approved by another user with write access on the flag. Examples include:
 
@@ -35,7 +35,7 @@ After you enable approvals, subsequent changes that impact application behavior 
 
 When creating a flag, toggle **Require approval on changes to this flag for all production environments** to enable approvals for that flag in every production environment.
 
-{{< img src="feature_flags/concepts/configure-flag-approvals-on-creation.png" alt="Create feature flag flow showing Approvals and notifications with Require approval on changes to this flag for all production environments enabled." style="width:65%;" >}}
+{{< img src="feature_flags/concepts/configure-flag-approvals-on-creation.png" alt="Create feature flag flow showing Approvals and notifications with Require approval on changes to this flag for all production environments enabled." style="width:100%;" >}}
 
 ### Existing flag
 
@@ -76,10 +76,10 @@ After a change is approved, apply it when you are ready for it to take effect in
 
 The **Feature Flag Approvals Override** organization permission serves two purposes:
 
-- **Existing flags:** Required to enable approvals for a flag that already exists (in addition to [granular edit access][ff-permissions] on that flag).
+- **Existing flags:** Required to enable approvals for a flag that already exists (in addition to [granular edit access][1] on that flag).
 - **Workflow bypass:** Allows holders to bypass the approvals workflow where that option is available, so changes can proceed without the usual review and approval steps.
 
-Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][rbac]. For related Feature Flags permissions, see [Permissions and Access Control][ff-permissions].
+Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][4]. For related Feature Flags permissions, see [Permissions and Access Control][1].
 
 ## Find flags with pending approvals
 
@@ -89,7 +89,7 @@ On the Feature Flags search page, toggle the **Pending Approvals** filter to vie
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[environments-settings]: https://app.datadoghq.com/feature-flags/settings/environments
-[prod-environments]: /feature_flags/concepts/environments/#production-environments
-[ff-permissions]: /feature_flags/concepts/permissions
-[rbac]: /account_management/rbac/
+[1]: /feature_flags/concepts/permissions
+[2]: https://app.datadoghq.com/feature-flags/settings/environments
+[3]: /feature_flags/concepts/environments/#production-environments
+[4]: /account_management/rbac/

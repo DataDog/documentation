@@ -26,13 +26,13 @@ Control access at the organization level with the following permissions:
 | **Feature Flag Environment Config Write** | Create and modify environments |
 | **Feature Flag Approvals Override** | Enable or disable approvals on existing flags, and bypass the approvals workflow |
 
-Assign these permissions through [Datadog roles][rbac].
+Assign these permissions through [Datadog roles][1].
 
 ## Granular access on individual flags
 
 Restrict edit access on a specific flag by selecting **Settings > Permissions** on the flag details page:
 
-{{< img src="feature_flags/concepts/flag-grace-modal.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/flag-grace-modal.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:65%;" >}}
 
 You can limit edit access to:
 
@@ -47,4 +47,4 @@ Users without edit access can still view the flag if they have read permissions 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[rbac]: /account_management/rbac/
+[1]: /account_management/rbac/
