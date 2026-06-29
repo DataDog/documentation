@@ -5,7 +5,7 @@ content_filters:
   option_group_id: synthetics_protocol_options
   label: "Test type"
 - trait_id: synthetics_variables
-  option_group_id: synthetics_variables_options
+  option_group_id: synthetics_variables_api_options
   label: "Variables"
 further_reading:
 - link: "/monitors/manage/"
