@@ -17,7 +17,7 @@ further_reading:
 OTLP export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
 {{< /callout >}}
 
-Datadog SDKs can export telemetry in [OTLP][1] format to any OTLP-compatible receiver or backend, including [DDOT][2] or any OpenTelemetry Collector. During Preview, OTLP export supports traces only.
+Datadog SDKs can export traces in [OTLP][1] format to any OTLP-compatible receiver or backend, including [DDOT][2] or any OpenTelemetry Collector.
 
 ## Prerequisites
 

@@ -21,12 +21,12 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Use Datadog SDKs with OpenTelemetry in two ways: export telemetry in [OpenTelemetry Protocol (OTLP)][1] format, or instrument your services with the [OpenTelemetry API][2].
+Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetry in [OpenTelemetry Protocol (OTLP)][1] format controls how telemetry is sent. The [OpenTelemetry API][2] controls how you instrument your services. You can use either on its own or both together.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
-    <h3>Export data in OTLP format</h3>
-    Export telemetry from a Datadog SDK in OTLP format to DDOT or any OpenTelemetry Collector. In Preview; supports traces only.
+    <h3>Export traces in OTLP format</h3>
+    Export traces from a Datadog SDK in OTLP format to DDOT or any OpenTelemetry Collector, instead of sending them directly to Datadog. In Preview.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support/" >}}
     <h3>Use the OpenTelemetry API</h3>
@@ -34,7 +34,7 @@ Use Datadog SDKs with OpenTelemetry in two ways: export telemetry in [OpenTeleme
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-info"><strong>Not sure which approach is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
+<div class="alert alert-info"><strong>Comparing setups?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
 
 ## Configure and extend
 
