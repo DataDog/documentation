@@ -737,6 +737,117 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
 
+## Experiments
+
+Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
+
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `list-experiments`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Lists experiments for the organization, with optional name search, limit, and offset for pagination.
+
+- Show me all running experiments.
+- Find experiments with "checkout" in the name.
+
+### `get-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
+
+- Get the details for experiment `abc123`.
+- What is the current status and linked flag for experiment `abc123`?
+
+### `create-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Creates a new experiment with a name, hypothesis, subject type, and primary metric.
+
+- Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
+
+### `link-feature-flag-to-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Links a feature flag to an experiment.
+
+- Link feature flag `new-checkout-flow` to experiment `abc123`.
+
+### `start-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
+
+- Start experiment `abc123`.
+
+### `conclude-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Concludes a running experiment with a permanent winning variant decision.
+
+- Conclude experiment `abc123` with the treatment variant as the winner.
+
+### `cancel-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Cancels a running experiment with a required reason.
+
+- Cancel experiment `abc123` because an SRM issue was detected.
+
+### `get-experiment-diagnostics`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get-experiment-results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
+
+- Run diagnostics on experiment `abc123` before I look at the results.
+- Is there a sample ratio mismatch in experiment `abc123`?
+
+### `get-experiment-results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
+
+- Show me the results for experiment `abc123`.
+- What is the verdict on the primary metric for experiment `abc123`?
+
+### `explore-experiment-results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get-experiment-results` for deeper analysis.
+
+- Break down the results for experiment `abc123` by device type.
+- How did the lift for experiment `abc123` trend over the last two weeks?
+
+### `list-experiment-segmentation-properties`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Lists the assignment properties an experiment can be split by. Call this before `explore-experiment-results` to get valid property IDs — do not guess them.
+
+- What segmentation properties can I use to break down experiment `abc123`?
+
+### `get-experiment-segmentation-property-values`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore-experiment-results` to avoid invalid filter strings.
+
+- What values are available for the device type property in experiment `abc123`?
+
+### `get-metric-definition`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Metrics Read`*\
+Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field with the structured parameters needed to query the raw event data. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
+
+- What is the event query behind the primary metric for experiment `abc123`?
+- Which MCP tool should I use to investigate why this metric moved?
+
+### `diagnose-experiment-run-failure`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get-experiment-diagnostics` for result quality and SRM issues instead.
+
+- Why did the latest analysis run for experiment `abc123` fail?
+- Diagnose the pipeline failure for experiment `abc123`.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1639,6 +1750,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
 [65]: /code_coverage/
