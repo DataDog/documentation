@@ -20,16 +20,18 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 Configure the HTTP Client destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the HTTP Client destination in the pipeline UI:
 
 1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:
-	- **Basic**:
+1. Select your authorization strategy ({{< ui >}}None{{< /ui >}}, {{< ui >}}Basic{{< /ui >}}, or {{< ui >}}Bearer{{< /ui >}}). If you selected:
+	- {{< ui >}}Basic{{< /ui >}}:
 		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
 		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
-	- **Bearer**:
+	- {{< ui >}}Bearer{{< /ui >}}:
 		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secret-defaults) is used.
 1. JSON is the only available encoder.
 
@@ -37,7 +39,7 @@ After you select the HTTP Client destination in the pipeline UI:
 
 #### Enable compression
 
-Toggle the switch to **Enable Compression**. If enabled:
+Toggle the switch to {{< ui >}}Enable Compression{{< /ui >}}. If enabled:
 1. GZIP is the only available compression algorithm.
 1. Select the compression level you want to use.
 

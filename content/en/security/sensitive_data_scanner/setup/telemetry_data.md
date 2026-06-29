@@ -1,5 +1,6 @@
 ---
-title: Telemetry Data
+title: Set Up Sensitive Data Scanner for Telemetry Data
+description: Set up Sensitive Data Scanner scanning groups and rules to detect and redact sensitive data in Datadog logs, APM spans, RUM events, and events from Event Management. Covers permissions, Terraform resources, sampling, and excluded namespaces.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
@@ -32,7 +33,7 @@ For each scanning rule, one of the following actions can be applied to matched s
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
-- **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
+- **Mask** (available for logs, APM spans, and RUM events): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
 **Notes**:
 - When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
@@ -58,9 +59,15 @@ This document goes through the following:
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-If a scanning rule uses the **mask** action (only available for logs) for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
+If a scanning rule uses the **mask** action for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
+
+### Guided setup
+
+When you set up Sensitive Data Scanner for the first time, or when your organization has no scanning groups configured, Datadog provides an in-app guided setup. Open the [Sensitive Data Scanner][5] settings page and follow the on-screen steps to select the data you want to scan, create a scanning group, and add scanning rules. This is the recommended way to get started.
+
+To configure scanning groups and rules manually, or to adjust an existing configuration, follow the sections below.
 
 ### Add a scanning group
 
@@ -88,6 +95,8 @@ Whenever possible, use Datadog's out-of-the-box library rules. These rules are p
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
+
+**Note**: Sensitive Data Scanner supports up to 750 scanning rules per organization for telemetry data (Logs, APM, RUM, and Events). This limit applies across all scanning groups.
 
 To add scanning rules, perform the following steps:
 

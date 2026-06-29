@@ -4,6 +4,7 @@ description: "Automatically inject RUM Browser SDK into Java servlet-based web a
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 7
+site_support_id: rum_server_java
 aliases:
   - /real_user_monitoring/browser/setup/server/java
 further_reading:
@@ -17,10 +18,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Single Step APM Instrumentation'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -57,9 +54,9 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 **This approach requires no code changes and no manual web server configuration.**
 
-1. Go to the [**Agent Installation**][1] page.
+1. Go to the [{{< ui >}}Agent Installation{{< /ui >}}][1] page.
 2. Select your platform (for example, Linux).
-3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
+3. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, enable {{< ui >}}Real User Monitoring{{< /ui >}} under {{< ui >}}Application Observability{{< /ui >}}.
 
    A RUM application is automatically created for you when you enable this option.
 

@@ -779,6 +779,14 @@ end
 
 <div class="alert alert-info">Datadog can help with migrating flags. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
 
+You can recreate critical flags either manually or with the Datadog Flag Migration CLI.
+
+#### Option 1: Use the Flag Migration CLI
+
+The [Datadog Flag Migration CLI][13] automates the migration of flag definitions, targeting rules, and variations from LaunchDarkly to Datadog. See [Migrate Flags with the Flag Migration CLI][14] to get started.
+
+#### Option 2: Recreate flags manually
+
 1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}.
 2. Ensure that the flag configurations - such as rollout percentages, targeting rules, and variations - are accurately replicated in the new service.
 3. For complex targeting rules, use the evaluation context attributes to implement equivalent logic.
@@ -804,3 +812,5 @@ end
 [10]: /feature_flags/client/react/
 [11]: /feature_flags/client/android/
 [12]: /feature_flags/client/ios/
+[13]: https://github.com/DataDog/dd-flag-migration
+[14]: /feature_flags/guide/migrate_flags_with_cli/

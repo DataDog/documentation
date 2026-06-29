@@ -36,7 +36,7 @@ To optimize your application, ensure you are using:
 
 ## Selecting a vital
 
-Navigate to the [Optimization page][5], found under the [**Digital Experience > Performance Monitoring**][6] tab.
+Navigate to the [Optimization page][5], found under the [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][6] tab.
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/page-selectors.png" alt="You can check the Optimization page for the top most visited pages or specific pages." style="width:100%;" >}}
 
@@ -59,7 +59,7 @@ After selecting a page and vital, analyze performance insights:
 
 - Adjust the time frame in the top-right corner
 - Use dropdowns to filter by attributes
-- Select a group in "Show Filter Breakdown"
+- Select a group in {{< ui >}}Show Filter Breakdown{{< /ui >}}
 - Evaluate vitals at different percentiles
 
 For instance, a pc75 evaluation represents the 75th percentile value, commonly used for CWV.
@@ -72,7 +72,7 @@ The next part of the page helps you visualize exactly what your users are experi
 
 Based on the selected time period and traffic, the Optimization page highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][4], this is where you see a visual of the page.
 
-For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
+For some vitals, you can also select other versions of the page to investigate by clicking {{< ui >}}See a different element{{< /ui >}}.
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/vitals-visualize.png" alt="Select different elements to preview and visualize the user's experience." style="width:100%;" >}}
 

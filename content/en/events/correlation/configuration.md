@@ -3,10 +3,10 @@ title: Configuration
 aliases:
 - /service_management/events/correlation/configuration/
 further_reading:
-- link: "service_management/events/correlation/triage_and_notify"
+- link: "events/correlation/triage_and_notify"
   tag: "Documentation"
   text: "Learn about triaging and notifiying on cases"
-- link: "service_management/events/correlation/analytics"
+- link: "events/correlation/analytics"
   tag: "Documentation"
   text: "Analytics on cases"
 ---
@@ -22,8 +22,8 @@ There are two types of correlations:
 ### Configure Correlation
 
 {{< whatsnext desc=" " >}}
-   {{< nextlink href="service_management/events/correlation/patterns" >}}Pattern-based correlation{{< /nextlink >}}
-   {{< nextlink href="service_management/events/correlation/intelligent" >}}Intelligent correlation{{< /nextlink >}}
+   {{< nextlink href="events/correlation/patterns" >}}Pattern-based correlation{{< /nextlink >}}
+   {{< nextlink href="events/correlation/intelligent" >}}Intelligent correlation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

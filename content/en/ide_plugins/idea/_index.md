@@ -13,26 +13,19 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Logs"
-- link: "/tracing/live_debugger/"
-  tag: "Documentation"
-  text: "Learn more about Live Debugger"
 - link: "/security/code_security/"
   tag: "Documentation"
   text: "Learn more about Code Security"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn more about Source Code Integration"
+cascade:
+  site_support_id: ide_plugins_idea
 ---
-
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
-    The Datadog extension for JetBrains IDEs is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Code Security][24], [Error Tracking][25], [Logs][23], and [Live Debugger][20] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Code Security][24], [Error Tracking][25], and [Logs][23] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
 
 {{< img src="/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -113,16 +106,6 @@ The [**Logs**][23] integration detects log lines in your source code, displays l
 
 Find out more in the [Logs][23] sub-section.
 
-### Live Debugger
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging.
-
-{{< img src="/ide_plugins/idea/live_debugger/tool-window-tab-v2.png" alt="The Live Debugger tab" style="width:100%;" >}}
-
-Find out more in the [Live Debugger][20] sub-section.
-
 ### Code Origin for Spans
 
 <div class="alert alert-info">This feature is in limited support.</div>
@@ -190,8 +173,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [17]: https://www.datadoghq.com/legal/eula/
 [18]: /tests/
 [19]: /continuous_integration/
-[20]: /ide_plugins/idea/live_debugger/
-[21]: /tracing/live_debugger/
 [22]: /tracing/code_origin?tab=java
 [23]: /ide_plugins/idea/logs/
 [24]: /ide_plugins/idea/code_security/

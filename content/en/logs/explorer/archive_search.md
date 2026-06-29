@@ -59,7 +59,7 @@ Before using Archive Search:
 
 ### Permissions
 
-Running an **Archive Search** requires the **`logs_write_historical_views`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
+Running an **Archive Search** requires the **`logs_write_historical_view`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
 
 Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
 

@@ -3,7 +3,7 @@ title: Monitors
 description: "Use the Monitors overlay in Cloudcraft to view monitor states for your resources and services, and investigate alerting monitors with Bits Investigation."
 site_support_id: cloudcraft_monitors_overlay
 further_reading:
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Bits Investigation"
 ---
@@ -14,7 +14,7 @@ The Monitors overlay is in Preview.
 
 ## Overview
 
-The Monitors overlay shows monitors associated with your AWS and Azure resources and services, along with their current state (`Alert`, `Warn`, or `OK`). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
+The Monitors overlay shows monitors associated with your cloud resources and services, along with their current state (`Alert`, `Warn`, or `OK`). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
 
 ## View monitor status
 
@@ -53,4 +53,4 @@ Click a monitor pin on the diagram to open a side panel listing all monitors ass
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_ai_sre/
+[1]: /bits_ai/bits_investigation/
