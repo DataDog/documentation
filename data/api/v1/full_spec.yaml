@@ -45759,6 +45759,7 @@ servers:
           - datadoghq.eu
           - ddog-gov.com
           - us2.ddog-gov.com
+          - uk1.datadoghq.com
       subdomain:
         default: api
         description: The subdomain where the API is deployed.
