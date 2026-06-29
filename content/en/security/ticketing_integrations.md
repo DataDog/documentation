@@ -101,7 +101,7 @@ The following steps set up bidirectional syncing with Jira and verify that setup
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management  ↔ Jira Integration** section, ensure that you have completed the prerequisites.
+If you do not see the **Case Management  ↔ Jira Integration** section, verify that you have completed the prerequisites.
 
 [2]: /integrations/jira/
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
@@ -128,7 +128,7 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Case Management ↔ ServiceNow Integration** section, ensure that you have completed the prerequisites.
+If you do not see the **Case Management ↔ ServiceNow Integration** section, verify that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
@@ -148,7 +148,7 @@ The following steps set up bidirectional syncing with Linear and verify that set
    3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
    4. The [Linear integration is configured within the project][3].
       1. Enable Linear for the project, and then select a Linear account and team for issue creation.
-      2. For each field you want to keep in sync, select **Two-way sync**.
+      2. For each field you want to keep synced, select **Two-way sync**.
       3. Complete the remaining settings, and then save your changes.
 2. Verify that bidirectional Case Management integration with Linear is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
@@ -225,7 +225,6 @@ The following steps create a bidirectional ticket for a Security finding.
 **Notes**:
 - Bidirectional sync with Linear is available for issue attributes such as status, assignee, title, description, priority, and comments.
 - To use an existing issue, provide the Linear issue URL.
-- Only cases using the core statuses of "Open", "In Progress", and "Closed" sync with Linear.
 {{% /collapse-content %}}
 
 ### Manage bidirectional Case Management tickets
