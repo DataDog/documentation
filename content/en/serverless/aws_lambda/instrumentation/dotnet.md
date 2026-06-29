@@ -21,7 +21,7 @@ further_reading:
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [{{< ui >}}Instrument Functions{{< /ui >}}][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
