@@ -29,7 +29,7 @@ further_reading:
 
 {{< product-availability >}}
 
-You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2] and [ServiceNow][21]. For details, see [Case Management integration with third-party ticketing tools][3].
+You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2], [ServiceNow][21], and [Linear][23]. For details, see [Case Management integration with third-party ticketing tools][3].
 
 This page discusses using Datadog Security with Datadog Case Management for ticketing management.
 
@@ -95,13 +95,13 @@ The following steps set up bidirectional syncing with Jira and verify that setup
 2. Verify that bidirectional Case Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Jira{{< /ui >}}. The button opens a {{< ui >}}Jira Ticket{{< /ui >}} modal.
-   3. Verify that the {{< ui >}}Case Management  <-> Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
+   3. Verify that the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
 {{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the {{< ui >}}Case Management  <-> Jira Integration{{< /ui >}} section, ensure that you have completed the prerequisites.
+If you do not see the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [2]: /integrations/jira/
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
@@ -128,13 +128,44 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the {{< ui >}}Case Management <-> ServiceNow Integration{{< /ui >}} section, ensure that you have completed the prerequisites.
+If you do not see the {{< ui >}}Case Management ↔ ServiceNow Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
+
+{{% /tab %}}
+
+{{% tab "Linear" %}}
+
+The following steps set up bidirectional syncing with Linear and verify that setup is successful.
+
+1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
+   1. The [Datadog Linear integration][23].
+   2. A [webhook for the Linear integration][24]. Configuring a webhook keeps cases created in Case Management and their Linear issues synced.
+   3. A [new Case Management project][9]. A project is a container object that holds a set of cases.
+   4. The [Linear integration is configured within the project][3].
+      1. Enable Linear for the project, and then select a Linear account and team for issue creation.
+      2. For each field you want to keep synced, select **Two-way sync**.
+      3. Complete the remaining settings, and then save your changes.
+2. Verify that bidirectional Case Management integration with Linear is working:
+   1. Open [any product supporting bidirectional ticket syncing][20].
+   2. Locate the ticketing dropdown option in the explorer or finding page and select **Linear**. The button opens a **Linear Issue** modal.
+   3. Verify that the **Case Management ↔ Linear Integration** section exists and bidirectional sync is enabled.
+
+{{< img src="security/linear_modal.png" alt="Modal used to create a Linear issue for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
+
+You are ready to start creating bidirectional Case Management tickets.
+
+If you do not see the **Case Management ↔ Linear Integration** section, verify that you have completed the prerequisites.
+
+[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
+[9]: /incident_response/case_management/projects/
+[20]: /security/ticketing_integrations/#supported-products
+[23]: /integrations/linear/
+[24]: /integrations/linear/#configure-a-linear-webhook
 
 {{% /tab %}}
 
@@ -182,6 +213,20 @@ The following steps create a bidirectional ticket for a Security finding.
 - Only ServiceNow incident URLs are supported. Problem and change request URLs are not accepted.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Linear issue" level="h4" expanded=false %}}
+1. Open the **Linear Issue** modal. You can use a new or existing issue.
+2. Complete the following settings:
+   1. **Linear account:** select the Linear account where you want the issue created.
+   2. **Linear team:** select the Linear team to create the issue in.
+3. Optionally set a Linear project, labels, assignee, and priority.
+4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click **Create**.
+
+**Notes**:
+- Bidirectional sync with Linear is available for issue attributes such as status, assignee, title, description, priority, and comments.
+- To use an existing issue, provide the Linear issue URL.
+{{% /collapse-content %}}
+
 ### Manage bidirectional Case Management tickets
 
 {{< tabs >}}
@@ -218,6 +263,21 @@ In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is pro
 [1]: /incident_response/case_management/
 {{% /tab %}}
 
+{{% tab "Linear" %}}
+
+Existing bidirectional Linear issues are listed in the finding's **Ticketing** or **Next Steps** sections.
+
+{{< img src="security/bidir-linear-existing.png" alt="Finding with an existing Linear issue in the Next Steps section." responsive="true" style="width:100%;">}}
+
+Hover over the Linear issue to see its details, including status, assignee, and a timeline of changes synced between Linear and Datadog.
+
+{{< img src="security/bidir-linear-existing-hover.png" alt="Tooltip over a Linear issue pill showing issue status, assignee, and a timeline of changes synced between Linear and Datadog." responsive="true" style="width:100%;">}}
+
+In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+
+[1]: /incident_response/case_management/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 #### Automatic detachment and ticket opening/closing
@@ -235,6 +295,9 @@ There are several case management facets under {{< ui >}}Triage{{< /ui >}}, incl
 
 - Case Key
 - Jira Key
+- Jira Status
+- Linear Issue Key
+- Linear Status
 - Case Status
 - Has ticket attached
 
@@ -271,3 +334,4 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
+[23]: /integrations/linear/
