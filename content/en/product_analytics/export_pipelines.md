@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about Real User Monitoring"
 ---
 
-{{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/export-pipelines/" btn_hidden="false" header="Join the Preview!">}}
 Export Pipelines is in Preview.
 {{< /callout >}}
 <div class="alert alert-info">Once reaching General Availability, Export Pipelines will be a paying add-on SKU.</div>
