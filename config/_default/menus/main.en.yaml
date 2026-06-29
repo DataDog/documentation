@@ -2832,7 +2832,7 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
-    - name: Case Management
+    - name: Work Management
       url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
@@ -2848,7 +2848,7 @@ menu:
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
-    - name: Create a Case
+    - name: Create a Work Item
       url: incident_response/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
@@ -2858,7 +2858,7 @@ menu:
       parent: case_management
       identifier: case_management_customization
       weight: 3
-    - name: View and Manage Cases
+    - name: View and Manage Work Items
       url: incident_response/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
@@ -2868,12 +2868,12 @@ menu:
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
-    - name: Case Automation Rules
+    - name: Work Item Automation Rules
       url: incident_response/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
-    - name: Case Approvals
+    - name: Work Item Approvals
       url: incident_response/case_management/approvals
       parent: case_management
       identifier: case_management_approvals

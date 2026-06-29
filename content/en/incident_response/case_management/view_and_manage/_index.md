@@ -1,5 +1,5 @@
 ---
-title: View and Manage Cases
+title: View and Manage Work Items
 aliases:
 - /service_management/case_management/view_and_manage/
 further_reading:
@@ -8,103 +8,103 @@ further_reading:
   text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "incident_response/case_management/settings"
   tag: "Documentation"
-  text: "Case settings"
+  text: "Work Management settings"
 ---
 
 ## Overview
 
-{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+<!-- {{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Work Management page showing view of all work items, option to select status, and view assigned members" style="width:100%;" >}} -->
 
-On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. Toggle between **List** view and **Board** view: The List view provides a detailed table, and the Board view offers a Kanban board with drag-and-drop functionality.
+On the [Work Management page][1], work items can be sorted by creation date, status, or priority. By default, work items are sorted by creation date. Toggle between **List** view and **Board** view: The List view provides a detailed table, and the Board view offers a Kanban board with drag-and-drop functionality.
 
-To make bulk edits to cases within a project, use the checkboxes to select one or more cases. Then, use the drop-down menus to perform actions in bulk, such as status management, assignment, and archiving. When cases are moved to a different project, the cases are assigned a new case ID. The old case URL does not redirect to the new case.
+To make bulk edits to work items within a project, use the checkboxes to select one or more work items. Then, use the drop-down menus to perform actions in bulk, such as status management, assignment, and archiving. When work items are moved to a different project, they are assigned a new work item ID. The old work item URL does not redirect to the new work item.
 
 ## Keyboard shortcuts
 Use the following keyboard shortcuts for swift navigation:
 
-| Action              | Shortcut       |
-| ------------------  | ----------     |
-| Move up             | `↑` or `K`     |
-| Move down           | `↓` or `J`     |
-| Select case         | `X`            |
-| View selected case  | `Enter` or `O` |
-| Create a case       | `C`            |
-| Set status          | `S`            |
-| Assign to user      | `A`            |
-| Set priority        | `P`            |
-| Move to project     | `V`            |
-| Archive / unarchive | `E`            |
+| Action                   | Shortcut       |
+| ------------------       | ----------     |
+| Move up                  | `↑` or `K`     |
+| Move down                | `↓` or `J`     |
+| Select work item         | `X`            |
+| View selected work item  | `Enter` or `O` |
+| Create a work item       | `C`            |
+| Set status               | `S`            |
+| Assign to user           | `A`            |
+| Set priority             | `P`            |
+| Move to project          | `V`            |
+| Archive / unarchive      | `E`            |
 
-## Search cases
+## Search work items
 
-Within a project, you can search for cases by:
-- **attribute key-value pairs**: For example, to find all cases created from Event Correlation patterns, search for `creation_source:Event Management`. For cases created from individual events, search for `creation_source:Event`.
-- **title**: Surround your search term with double quotes. For example, to find all of your cases containing the term "kubernetes pods" in the title, search for `"kubernetes pods."`
+Within a project, you can search for work items by:
+- **attribute key-value pairs**: For example, to find all work items created from Event Correlation patterns, search for `creation_source:Event Management`. For work items created from individual events, search for `creation_source:Event`.
+- **title**: Surround your search term with double quotes. For example, to find all of your work items containing the term "kubernetes pods" in the title, search for `"kubernetes pods."`
 
-To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority `P2` or `P3`.
+To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns work items of either priority `P2` or `P3`.
 
-Additionally, you can search for cases across all projects using the search bar in the top left corner.
+Additionally, you can search for work items across all projects using the search bar in the top left corner.
 
 ## Create a view
 
-A **view** is a saved query filter that allows you to scope a list of cases down to what's most relevant to you. Projects have default views for each of the statuses: open, in progress, closed, and archived. In addition, there are default views for cases assigned to you and created by you.
+A **view** is a saved query filter that allows you to scope a list of work items down to what's most relevant to you. Projects have default views for each of the statuses: open, in progress, closed, and archived. In addition, there are default views for work items assigned to you and created by you.
 
 To create a custom view:
 1. Select **Add View** from within a project.
 1. Give the view a name.
-1. In the search box, enter a query. The preview refreshes to show you the cases that match the current search query.
+1. In the search box, enter a query. The preview refreshes to show you the work items that match the current search query.
 1. (Optional) Send a notification with third-party tools such as Slack, Microsoft Teams, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. See [Create notifications and tickets ][2] to learn more about the available tools and options.
 1. Click **Save view**.
 
-## Case details
+## Work item details
 
-{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
+<!-- {{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="Work item detail view of an example work item that was escalated" style="width:100%;" >}} -->
 
-The Case Details page acts as the single source of truth on what is going on with the investigation. Each case has the following properties:
+The Work Item Details page acts as the single source of truth on what is going on with the investigation. Each work item has the following properties:
 
 Status
-: All cases default to open upon creation. As you progress through the case, you can change it to in progress and closed. Type `S` to change the status of a case.
+: All work items default to open upon creation. As you progress through the work item, you can change it to in progress and closed. Type `S` to change the status of a work item.
 
 Priority
-: By default, a priority is not defined. You can set the priority of the case to P1 - Critical, P2 - High, P3 - Medium, P4 - Low, P5 - Info. Type `P` to set the priority of a case.
+: By default, a priority is not defined. You can set the priority of the work item to P1 - Critical, P2 - High, P3 - Medium, P4 - Low, P5 - Info. Type `P` to set the priority of a work item.
 
 Assignee
 : Unassigned by default. To assign it to a user, type `A`. To assign it to yourself, type `I`.
 
 Attributes
-: Adding attributes allow for organization and filtering. By default, all cases have the following attributes: team, datacenters, services, environments, and versions.
+: Adding attributes allow for organization and filtering. By default, all work items have the following attributes: team, datacenters, services, environments, and versions.
 
 Archiving
-: Archiving a case removes it from searches. Type `E` to archive a case.
+: Archiving a work item removes it from searches. Type `E` to archive a work item.
 
 Activity timeline
-: Each case automatically creates an activity timeline to capture real-time updates to status, assignee, priority, signals, and any comments added. If you're tagged in a comment, you receive an email. Type `M` to add a comment and `Cmd + Enter` to submit it.
+: Each work item automatically creates an activity timeline to capture real-time updates to status, assignee, priority, signals, and any comments added. If you're tagged in a comment, you receive an email. Type `M` to add a comment and `Cmd + Enter` to submit it.
 
 ## Take action
 
-Use Case Management to gather information, context, and resources to determine the proper action to take. This includes further investigation, escalating to an incident, or closing out a case.
+Use Work Management to gather information, context, and resources to determine the proper action to take. This includes further investigation, escalating to an incident, or closing out a work item.
 
-From an individual case:
+From an individual work item:
 - [Create an investigative notebook][3]: Gather investigation information and collaborate with your team members.
-- [Declare an incident][4]: Escalate a case to an incident and kick off your incident response process.
+- [Declare an incident][4]: Escalate a work item to an incident and kick off your incident response process.
 - Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][5] documentation.
 - Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident.
 - [Meet on CoScreen][6]: Share screens for collaborative debugging.
-- Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
-- [Request approval][7]: Request sign-off from one or more team members before taking action on a case.
+- Close out the work item: Let the team know that no further action is needed. Update the status of the work item to closed.
+- [Request approval][7]: Request sign-off from one or more team members before taking action on a work item.
 
-## Case Analytics
+## Work Management Analytics
 
-{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
+<!-- {{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the work items options selected as a data source" style="width:100%;" >}} -->
 
-Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][8] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
+Work Management Analytics is a queryable data source for aggregated work item statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][8] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
 
-The following widgets support Case Analytics: timeseries, top list, query value, table, tree map, pie chart, change, and list.
+The following widgets support Work Management Analytics: timeseries, top list, query value, table, tree map, pie chart, change, and list.
 
 ## Export
 
-You can export cases directly from a case details page:
-1. From an individual case, click the **More Options** icon at the top right of a case details page.
+You can export work items directly from a work item details page:
+1. From an individual work item, click the **More Options** icon at the top right of a work item details page.
 1. Select **Export to PDF**.
 1. In the print dialog that appears, choose **Save as PDF** as your destination.
 1. Click **Save** to complete the export.

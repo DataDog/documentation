@@ -1,69 +1,69 @@
 ---
-title: Create a Case
+title: Create a Work Item
 aliases:
 - /service_management/case_management/create_case/
 further_reading:
 - link: "/incident_response/case_management/view_and_manage"
   tag: "Documentation"
-  text: "View and Manage Cases"
+  text: "View and Manage Work Items"
 - link: "/incident_response/case_management/customization"
   tag: "Documentation"
-  text: "Case Customization"
+  text: "Work Management Customization"
 
 ---
 
 ## Overview
 
-Cases can be created [manually](#manual-case-creation), [automatically](#automatic-case-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception).
+Work items can be created [manually](#manual-work-item-creation), [automatically](#automatic-work-item-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of work items: standard and security. Work items created from security signals and Sensitive Data Scanner are automatically made security cases. The security work item type has all the features of the standard work item type, along with a mandatory field for specifying the reason for closing a work item (testing, false positive, or one time exception).
 
-## Manual case creation
+## Manual work item creation
 
-1. Navigate to the [Case Management page][1].
-1. Select a project to create the case in. **Note**: A case can only belong to a single project.
-1. Click **New Case**.
-1. Fill in a title for the case.
-1. Select a [case type](#case-types).
+1. Navigate to the [Work Management page][1].
+1. Select a project to create the work item in. **Note**: A work item can only belong to a single project.
+1. Click **New Work Item**. <!-- [TO VERIFY] -->
+1. Fill in a title for the work item.
+1. Select a [work item type](#work-item-types).
 1. Add a title.
 1. (Optional) Add a description.
-1. Click **Create Case** to complete.
+1. Click **Create Work Item** to complete. <!-- [TO VERIFY] -->
 
-You can also create cases manually from the following products:
+You can also create work items manually from the following products:
 
 | Product | Instructions    |
 | ------  | ----------- |
-| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a case**.<br> - In Slack, click **Create case** under a monitor notification. |
-| Security signals | Beside a signal, in the **Cases** column, click the **Create Case** icon. Then, enter the case details in the **Create Case** window that opens. |
-| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a case**. |
-| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
-| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
-| Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create case**. |
-| Sensitive Data Scanner | Click **Create case** next to a Sensitive Data Scanner issue.  |
-| Slack  | Click the **Create Case** button under a monitor notification in Slack.  |
+| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --><br> - In Slack, click **Create work item** <!-- [TO VERIFY] --> under a monitor notification. |
+| Security signals | Beside a signal, in the **Cases** column, click the **Create Case** icon. Then, enter the work item details in the **Create Case** window that opens. |
+| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a work item**. <!-- [TO VERIFY] --> |
+| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --> |
+| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --> |
+| Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create work item**. <!-- [TO VERIFY] --> |
+| Sensitive Data Scanner | Click **Create work item** <!-- [TO VERIFY] --> next to a Sensitive Data Scanner issue.  |
+| Slack  | Click the **Create Work Item** <!-- [TO VERIFY] --> button under a monitor notification in Slack.  |
 
-## Automatic case creation
+## Automatic work item creation
 
-Configure the following products to automatically create cases:
+Configure the following products to automatically create work items:
 | Product | Instructions    |
 | ------  | ----------- |
-| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.<br><br> Toggle on **Auto-close cases when the monitor group resolves** to reduce manual cleanup.|
-| Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
-| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
-| Error Tracking | In Error Tracking, cases are automatically created when an issue is commented on or assigned. |
+| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Work items are automatically created when the monitor transitions to a different status. To only create work items for certain monitor transitions, use [conditional variables][3]. As an example, to create work items only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.<br><br> Toggle on **Auto-close work items when the monitor group resolves** <!-- [TO VERIFY] --> to reduce manual cleanup.|
+| Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create work items.   |
+| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Work Management." <!-- [TO VERIFY] --><br> 2. Select the **Create Work Item** action. <!-- [TO VERIFY] --><br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
+| Error Tracking | In Error Tracking, work items are automatically created when an issue is commented on or assigned. |
 
-## Case types
+## Work item types
 
-Add case types when you are creating a case. Not all case types are available for configuration between manual and automatic creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating cases manually.
+Add work item types when you are creating a work item. Not all work item types are available for configuration between manual and automatic creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating work items manually.
 
-To add and enable custom case types, see [Case Customization][7].
+To add and enable custom work item types, see [Work Management Customization][7].
 
-| Case Type       | Description                                                                 |
+| Work Item Type  | Description                                                                 |
 |------------------|-----------------------------------------------------------------------------|
-| Standard         | A general-purpose case for operational tasks, investigations, and more.     |
+| Standard         | A general-purpose work item for operational tasks, investigations, and more.     |
 | Change Request   | Used in change management workflows to track planned or approved changes.   |
 | Event Management | Integrated with the Event Management product to house correlated events.    |
 | Security         | Used by security teams and products to manage investigations or alerts.     |
 | Error Tracking   | Linked to the Error Tracking product to track and remediate application issues. |
-| Custom Type      | Add a custom case type. For more information, see [Case Customization][7]. |
+| Custom Type      | Add a custom work item type. For more information, see [Work Management Customization][7]. |
 
 ## API
 
