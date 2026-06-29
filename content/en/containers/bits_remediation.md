@@ -65,4 +65,4 @@ When a pod is terminated because the memory usage exceeded its limit, you may be
 [2]: https://app.datadoghq.com/orchestration/explorer/pod
 [3]: https://app.datadoghq.com/code?tab=my-sessions
 [4]: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githubsaasonprem#connect-your-git-repositories-to-datadog
-[5]: /bits_ai/bits_ai_dev_agent/
+[5]: /bits_ai/bits_code/

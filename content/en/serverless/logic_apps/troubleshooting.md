@@ -12,7 +12,7 @@ Follow these steps to diagnose why traces are not appearing in Datadog:
 Check that the Logic App has the required diagnostic setting:
 
 1. In the Azure Portal, open your Logic App
-2. Navigate to **Diagnostic settings** in the left menu
+2. Navigate to {{< ui >}}Diagnostic settings{{< /ui >}} in the left menu
 3. Verify that a diagnostic setting named `datadog_log_forwarding_<ID>` exists
 
 {{< img src="serverless/logic_apps/diagnostic_settings.png" alt="Azure Logic App diagnostic settings showing datadog_log_forwarding configuration" style="width:100%;" >}}
@@ -23,7 +23,7 @@ This setting is automatically created by the [Datadog Azure Automated Log Forwar
 
 Check that logs are being forwarded to Datadog:
 
-1. In Datadog, go to [**Logs > Live Tail**][2]
+1. In Datadog, go to [{{< ui >}}Logs > Live Tail{{< /ui >}}][2]
 2. Search for `@properties.resource.workflowId:*`
 3. Trigger your Logic App workflow a few times if needed
 
@@ -34,8 +34,8 @@ If you don't see any logs:
 
 Check that traces are being generated from the logs:
 
-1. In Datadog, go to [**APM > Traces**][3]
-2. Select **Live Search** in the upper right corner
+1. In Datadog, go to [{{< ui >}}APM > Traces{{< /ui >}}][3]
+2. Select {{< ui >}}Live Search{{< /ui >}} in the upper right corner
 3. Search for `operation_name:azure.logicapps`
 
 If you see logs but no traces, wait a few minutes for logs to be processed and traces to be generated

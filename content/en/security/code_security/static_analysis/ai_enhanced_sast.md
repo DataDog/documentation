@@ -145,11 +145,19 @@ To narrow down your initial list for triage, in [Vulnerabilities][6], turn on th
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
-### Bits AI Memories
+### Bits Memories
 
-Bits AI Memories lets teams add rule-specific context that Bits AI uses when assessing SAST findings. Use memories to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details that help Bits AI interpret findings for that rule.
+Bits Memories lets teams add rule-specific context that Bits AI uses when assessing SAST findings. Use memories to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details that help Bits AI interpret findings for that rule.
 
 In the SAST rule side panel, expand the false positive reports accordion to review reports shared by your organization for the selected rule. Use the custom context tab in the same section to add guidance for future Bits AI assessments. Memories apply at the organization and rule level for SAST. They apply only to security category SAST rules in Datadog's default rulesets and do not apply to custom rules.
+
+### Agentic false positive filtering
+
+Bits AI uses an agentic approach to gather repository context before classifying findings for injection-related SAST rules (for example, SQL injection and command injection). Support for additional rule categories is being rolled out over time.
+
+Bits AI can read related files and search for symbols and patterns. It can also inspect nearby directory structure to verify definitions, call paths, sanitizers, and framework wiring that are not visible in a single file.
+
+The additional repository context helps Bits AI distinguish true positives from false positives for findings that depend on cross-file behavior. Agentic false positive filtering applies only to SAST findings.
 
 ## Remediation
 
@@ -205,7 +213,7 @@ You can also view all remediation sessions on [**Sessions**][7].
 [6]: https://app.datadoghq.com/security/code-security/sast
 [7]: https://app.datadoghq.com/code
 [9]: /bits_ai/
-[10]: /bits_ai/bits_ai_dev_agent
+[10]: /bits_ai/bits_code
 [11]: https://app.datadoghq.com/code/settings
-[13]: /bits_ai/bits_ai_dev_agent/automations
+[13]: /bits_ai/bits_code/automations
 [14]: https://app.datadoghq.com/code/automations
