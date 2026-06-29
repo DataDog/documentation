@@ -37,16 +37,16 @@ Navigate to the [Findings][1] page to see all sensitive data findings within the
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-The Logs Findings explorer is an updated experience for investigating log findings. To access it, click **Try the new version** in the blue banner at the top of the Telemetry tab. APM, RUM, and Events findings are not available in this explorer. To view those findings, click **Go back** in the banner.
+The Logs Findings explorer is an updated experience for investigating log findings. To access it, click {{< ui >}}Try the new version{{< /ui >}} in the blue banner at the top of the Telemetry tab. APM, RUM, and Events findings are not available in this explorer. To view those findings, click {{< ui >}}Go back{{< /ui >}} in the banner.
 
 To investigate a log finding:
 
-1. Use **Group by** to organize findings by **Rule**, **Logs Pattern**, or **Service**. To surface findings where sensitive data is actively exposed, filter by **Leaking** in the **Match State** facet.
+1. Use {{< ui >}}Group by{{< /ui >}}  to organize findings by {{< ui >}}Rule{{< /ui >}} , {{< ui >}}Logs Pattern**, or {{< ui >}}Service{{< /ui >}} . To surface findings where sensitive data is actively exposed, filter by {{< ui >}}Leaking** in the {{< ui >}}Match State** facet.
 2. Click a finding to open the detail panel.
-3. In the summary section, review **Match State**, **Service**, **Environment**, and **Total matches** to understand the scope of the exposure.
-4. Review the **Logs Pattern** to understand the format of the log line where sensitive data was detected.
-5. In the **Example Logs** section, expand an entry to inspect its fields and attributes inline, or click **Show log** to open it in Log Explorer.
-6. Check **First Detected** and **Last Detected** at the top of the panel to understand how long the exposure has been active.
+3. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
+4. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
+5. In the {{< ui >}}Example Logs{{< /ui >}} section, expand an entry to inspect its fields and attributes inline, or click **Show log{{< /ui >}} to open it in Log Explorer.
+6. Check {{< ui >}}First Detected{{< /ui >}} and {{< ui >}}Last Detected{{< /ui >}} at the top of the panel to understand how long the exposure has been active.
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
