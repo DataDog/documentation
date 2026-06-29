@@ -38,15 +38,7 @@ _List widget displaying error tracking issues_
 
 The data sources available in the source dropdown depend on which products are enabled for your organization. The following table lists each data source, the data it displays, and any product requirements. Click a data source in the table to navigate to its configuration options.
 
-Data sources marked _(Preview)_ are in Preview and might not be available in your organization. 
-
-<!--
-TODO before publishing — confirm the following with #dataviz-advanced-analytics:
-- Exact product/requirement names for each source (the "Requirements" column).
-- Which Preview sources are safe to document publicly, and whether any have shipped to GA.
-- Whether to rename the "Recommendations" label to "Cloud Cost Recommendations" (FR raised by support); if it ships, update this table.
-Source of truth: web-ui packages/apps/graphing/toolkit/list-stream/ListStreamSourceSelect.tsx
--->
+Data sources marked _(Preview)_ are in Preview and might not be available in your organization.
 
 | Data source | Description | Requirements |
 |-------------|-------------|--------------|
@@ -77,7 +69,7 @@ Source of truth: web-ui packages/apps/graphing/toolkit/list-stream/ListStreamSou
 | [Watchdog Alerts](#spans-and-watchdog-alerts) | Alerts surfaced by Watchdog. | - |
 | [Workload Protection Agent](#workload-protection-agent-preview) _(Preview)_ | Workload Protection events from the Datadog Agent. | Workload Protection |
 
-**Note:** The **Recommendations** data source displays recommendations from Cloud Cost Management. If Cloud Cost Management is not configured for your organization, the widget displays a `Not Accessible` message. This indicates that the data source requires Cloud Cost Management, rather than that you lack permissions.
+**Note:** The **Recommendations** data source displays Cloud Cost Management recommendations only. APM recommendations are not available as a List widget data source. If Cloud Cost Management is not configured for your organization, the widget displays a `Not Accessible` message. This indicates that the data source requires Cloud Cost Management, rather than that you lack permissions.
 
 ### Options
 
@@ -88,13 +80,6 @@ Each data source has its own configuration. For most data sources, you can:
 - Narrow results with a **search query**.
 
 The following data sources have additional or different options.
-
-<!--
-TODO before publishing — confirm with #dataviz-advanced-analytics:
-- The previous version of this page listed fixed "Sort by" values for RUM, CD deployments, and CI pipelines. In the code, those sources sort by whichever columns are displayed (plus ascending/descending), so the fixed lists were removed. Confirm this is the correct user-facing behavior.
-- Confirm the static sort lists below (Issues, Incidents, Cases, Database Recommendations, Detection Rules) and the Preview-source options.
-- Confirm the logs storage options (Standard Indexes / Standard Indexes + Flex Logs / Online Archives) should be documented here.
--->
 
 #### Cases
 
