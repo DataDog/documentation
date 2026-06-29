@@ -39,7 +39,7 @@ Cost Optimization Automation supports the following AWS recommendation types:
 |---------------------|---------------------|
 | Delete unattached EBS volume | An EBS snapshot is taken before each volume is deleted. |
 | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering | Reversible. The lifecycle configuration can be removed at any time. |
-| Delete unused RDS instance | A final RDS snapshot is taken before each instance is terminated. |
+| Delete unused RDS instance | A final RDS snapshot is taken before each instance is deleted. |
 | Delete extra on-demand backups (DynamoDB) | The two most recent backups are preserved on every run. |
 | Set CloudWatch logs retention policy | Reversible. The retention period can be adjusted or removed at any time. |
 | Delete old EBS snapshots | Snapshots referenced by an AMI are skipped. |
