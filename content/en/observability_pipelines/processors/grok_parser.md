@@ -35,9 +35,9 @@ The Grok Parser processor:
 - A log is only parsed by the first rule it matches, so [the order of your rules matter](#order-of-custom-rules).
 - If you are using Worker versions older than 2.17, your logs must have the `source` or `ddsource` field and the `message` field on your logs for the processor to parse them.
 
-## Setup
-
 {{< img src="observability_pipelines/processors/grok_parser_setup.png" alt="The Grok Parser processor with a filter query and field to parse on field" style="width:50%;" >}}
+
+## Setup
 
 To set up the Grok Parser processor:
 
@@ -50,8 +50,6 @@ To set up the Grok Parser processor:
    - All library rules are automatically applied by default. Disable library rules only if you are relying on custom parsing rules.
 
 ### Create an AI-assisted or custom parsing rule
-
-{{< img src="observability_pipelines/processors/grok_parser_create_rule.png" alt="The Create Parsing Rule modal in the Grok Parser processor" style="width:50%;" >}}
 
 To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing Rules{{< /ui >}} on the Grok Parser processor:
 
@@ -71,6 +69,8 @@ To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing 
 
 If a log is sent to the parser but is not parsed by any rules, the Worker generates a log with the error: `The parser failed to apply rule`.
 
+{{< img src="observability_pipelines/processors/grok_parser_create_rule.png" alt="The Create Parsing Rule modal in the Grok Parser processor" style="width:50%;" >}}
+
 #### Order of custom rules
 
 When you have multiple custom rules for a Grok Parser processor, a log is parsed by the first rule whose query it matches, and then sent to the next step in the pipeline. The processor does not try to match the log to subsequent rules. Therefore, the order of the rules matters if a log might match multiple rules.
@@ -83,9 +83,9 @@ For example, consider a parser with these parsing rules:
 1. Rule Example 2
 1. Rule Example 3
 
-{{< img src="observability_pipelines/processors/grok_parser_rule_order.png" alt="Three parsing rules listed in order in the Grok Parser processor" style="width:50%;" >}}
-
 If a log sent to the parser matches all three rule queries, the log is only parsed by Rule Example 1 because it's listed before rules 2 and 3.
+
+{{< img src="observability_pipelines/processors/grok_parser_rule_order.png" alt="Three parsing rules listed in order in the Grok Parser processor" style="width:50%;" >}}
 
 #### Manually write rules
 
