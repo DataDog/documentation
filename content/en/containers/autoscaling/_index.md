@@ -1,5 +1,7 @@
 ---
 title: Kubernetes Autoscaling
+cascade:
+  site_support_id: containers_autoscaling
 description: Automatically scale Kubernetes workloads using Datadog metrics and intelligent scaling recommendations
 aliases:
 - /containers/monitoring/autoscaling
@@ -26,12 +28,6 @@ further_reading:
   tag: "Blog"
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-  This feature is not available for the Datadog for Government ({{< region-param key="dd_datacenter" >}}) site.
-</div>
-{{< /site-region >}}
 
 Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
 
@@ -236,8 +232,8 @@ There are three ways to enable autoscaling for a workload. Pick the path that ma
 The fastest way to get started is the [Setup page][11] in the Datadog UI. The wizard walks you through five steps: select a cluster, verify Agent and permission requirements, choose an install method, pick a scaling template, and deploy. Templates available in the wizard:
 
 - **Optimize cost**: high CPU utilization target, aggressive scale-down, lowest replica floor. Best for stateless, cost-sensitive workloads.
-- **Optimize balance**: moderate utilization target, balanced scale-up and scale-down. Best for most stateless workloads.
-- **Optimize performance**: conservative utilization target, slow scale-down, higher replica floor. Best for stateful or critical services.
+- **Optimize balance**: moderate utilization target, fast scale-up, balanced scale-down. Best for most stateless workloads.
+- **Optimize performance**: conservative utilization target, fast scale-up, slow scale-down, higher replica floor. Best for stateful or critical services.
 - **Customize**: start from any of the above and tune CPU target, replicas, and stabilization windows yourself.
 
 The Setup wizard is best for trying autoscaling on a single workload, getting hands-on with a recommendation, or onboarding a small set of workloads. (Requires `Workload Scaling Write` and `Autoscaling Manage` permissions.)
@@ -286,7 +282,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 300
+            stabilizationWindowSeconds: 190
         update:
             strategy: Auto
     constraints:
@@ -306,7 +302,7 @@ spec:
 {{% /tab %}}
 {{% tab "Optimize Balance" %}}
 
-Pick this template when you want savings without trading off availability. It's a sensible default for most stateless workloads. The defining setting is the moderate CPU utilization target (70%) paired with a conservative scale-down (20% every 20 minutes) and a two-replica minimum. The controller adds capacity rapidly but removes it slowly.
+Pick this template when you want savings without trading off availability. It's a sensible default for most stateless workloads. The defining setting is the moderate CPU utilization target (70%) paired with a conservative scale-down and a two-replica minimum. The controller adds capacity rapidly but removes it slowly.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -334,7 +330,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         update:
             strategy: Auto
     constraints:
@@ -421,7 +417,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         # Vertical updates disabled — horizontal only
         update:
             strategy: Disabled
@@ -476,9 +472,9 @@ The Cluster Agent ships three built-in profiles and recreates them on startup, s
 
 | Profile | CPU target | Min replicas | Profile of behavior |
 |---|---|---|---|
-| `datadog-optimize-cost` | 85% | 1 | Stateless, cost-sensitive workloads. Fast scale-up and scale-down (5-minute stabilization windows, 50% step every 2 minutes). |
-| `datadog-optimize-balance` | 70% | 2 | Default for most stateless workloads. Balanced 10-minute stabilization windows, conservative scale-down (20% step every 20 minutes). |
-| `datadog-optimize-performance` | 60% | 3 | Stateful or latency-sensitive workloads. Very conservative scale-down (15-minute stabilization windows, 10% step every 30 minutes). |
+| `datadog-optimize-cost` | 85% | 1 | High CPU utilization target, aggressive scale-down, lowest replica floor. Best for stateless, cost-sensitive workloads. |
+| `datadog-optimize-balance` | 70% | 2 | Moderate utilization target, fast scale-up, balanced scale-down. Best for most stateless workloads. |
+| `datadog-optimize-performance` | 60% | 3 | Conservative utilization target, fast scale-up, slow scale-down, higher replica floor. Best for stateful or critical services. |
 
 To activate a profile on a single workload, add the label to the workload's `metadata.labels`:
 
@@ -519,7 +515,7 @@ spec:
     applyPolicy:
       mode: Apply
       scaleUp:
-        stabilizationWindowSeconds: 300
+        stabilizationWindowSeconds: 190
         rules:
           - type: Percent
             value: 50

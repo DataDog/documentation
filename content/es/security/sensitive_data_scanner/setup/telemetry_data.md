@@ -1,141 +1,180 @@
 ---
 aliases:
 - /es/sensitive_data_scanner/setup/telemetry_data
+- /es/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+- /es/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+- /es/security/sensitive_data_scanner/guide/redact_uuids_in_logs/
+- /es/security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs/
 disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/scanning_rules/library_rules
   tag: Documentación
-  text: Más información sobre las reglas de librería predefinidas
+  text: Obtenga más información sobre las reglas de la biblioteca predefinidas
 - link: /security/sensitive_data_scanner/scanning_rules/custom_rules
   tag: Documentación
-  text: Más información sobre la creación de reglas personalizadas
-- link: /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/
-  tag: Documentación
-  text: Prácticas recomendadas para crear reglas de análisis personalizadas
+  text: Obtenga más información sobre la creación de reglas personalizadas
 title: Datos de telemetría
 ---
+## Descripción general {#overview}
 
-## Información general
+El escáner de datos sensibles en la nube escanea datos de telemetría, como los registros de su aplicación, eventos de APM, eventos de RUM y eventos de Event Management. Los datos que pueden ser escaneados y redactados son:
 
-Sensitive Data Scanner en la nube analiza datos de telemetría, como logs, eventos de APM, eventos de RUM y eventos de Event Management de tu aplicación. Los datos que se pueden analizar y redactar son:
+- **Registros**: Todo el contenido de registro estructurado y no estructurado, incluidos el mensaje de registro y los valores de atributos
+- **APM**: Solo los valores de atributos de tramo
+- **RUM**: Solo los valores de atributos de evento
+- **Eventos**: Solo los valores de atributos de evento
 
-- Logs: todo el contenido estructurado y no estructurado de los logs, incluyendo los valores de mensajes y atributos de logs
-- APM: sólo valores de atributos de tramo
-- RUM: sólo valores de atributos de eventos
-- Eventos: sólo valores de atributos de eventos
+Opcionalmente, se pueden establecer tasas de muestreo entre el 10% y el 99% para cada producto. Esto ayuda a gestionar costos cuando comienza, al reducir la cantidad de datos que se escanean en busca de información sensible.
 
-{{< callout url="https://www.datadoghq.com/product-preview/role-based-sensitive-data-unmasking-in-logs" btn_hidden="false" >}}
-El desenmascaramiento de los datos confidenciales en logs está en Vista previa. Para inscribirte, haz clic en <b>Request Access</b> (Solicitar acceso).
-{{< /callout >}}
+Para cada regla de escaneo, se puede aplicar una de las siguientes acciones a los datos sensibles coincidentes:
 
-Envías logs y eventos al backend Datadog, por lo que los datos salen de tu entorno antes de ser redactados. Los logs y eventos se analizan y redactan en el backend Datadog durante su procesamiento, por lo que los datos confidenciales se ocultan antes de que los eventos se indexen y se muestren en la interfaz de usuario de Datadog.
+- **Redactar**: Reemplace todos los datos coincidentes con un solo token que elija, como `[sensitive_data]`.
+- **Redactar parcialmente**: Reemplace una porción específica de todos los valores coincidentes.
+- **Hash**: Reemplace todos los datos coincidentes con un identificador único no reversible.
+- **Enmascarar** (disponible solo para registros): Enmascare todos los valores coincidentes. Los usuarios con el permiso `Data Scanner Unmask` pueden desenmascarar y ver estos datos en Datadog. Consulte [la acción Enmascarar](#mask-action) para más información.
 
-Si no quieres que los datos salgan de tu entorno antes de ser redactados, utiliza [Observability Pipelines][12] y el [procesador Sensitive Data Scanner][13] para analizar y redactar datos confidenciales. Para obtener información sobre cómo configurar un pipeline y sus componentes, consulta [Configurar pipelines][14].
+**Notas**:
+- Al escanear datos muestreados, no podrá seleccionar acciones que ofusquen los datos que se escanean.
+- Sensitive Data Scanner no escanea valores enteros, de punto flotante y dobles. Si el número está en formato de cadena, la cadena se escanea.
 
-Para utilizar Sensitive Data Scanner en la nube, configura un grupo de análisis para definir qué datos analizar y luego añade reglas de análisis para determinar qué información confidencial debe coincidir en los datos.
+Usted envía registros y eventos al backend de Datadog, por lo que los datos salen de su entorno antes de ser redactados. Los registros y eventos se escanean y se redactan en el backend de Datadog durante el procesamiento, por lo que los datos sensibles se redactan antes de que los eventos sean indexados y mostrados en Datadog UI.
 
-Este documento repasa lo siguiente:
+Si no desea que los datos salgan de su entorno antes de ser redactados, utilice [Observability Pipelines][12] y el [procesador de Sensitive Data Scanner][13] para escanear y redactar datos sensibles. Consulte [Set Up Pipelines][14] para obtener información sobre cómo configurar un pipeline y sus componentes.
 
-- [Permisos](#permissions) necesarios para visualizar y configurar Sensitive Data Scanner
-- [Añadir un grupo de análisis](#add-a-scanning-group)
-- [Añadir reglas de análisis](#add-scanning-rules)
-- [Controlar el acceso a logs con datos confidenciales](#control-access-to-logs-with-sensitive-data)
-- [Redactar datos confidenciales en etiquetas](#redact-sensitive-data-in-tags)
+Para usar Sensitive Data Scanner in the Cloud, configure un grupo de escaneo para definir qué datos escanear y luego agregue reglas de escaneo para determinar qué información sensible coincida dentro de los datos.
 
-## Configuración
+Este documento abarca lo siguiente:
 
-### Permisos
+- Los [permisos](#permissions) requeridos para ver y configurar Sensitive Data Scanner.
+- [Agregar un grupo de escaneo](#add-a-scanning-group)
+- [Agregar reglas de escaneo](#add-scanning-rules)
+- [Cómo controlar el acceso a registros con datos sensibles](#control-access-to-logs-with-sensitive-data)
+- [Cómo redactar datos sensibles en etiquetas](#redact-sensitive-data-in-tags)
 
-Por defecto, los usuarios con el rol administrador de Datadog tienen acceso para visualizar y configurar reglas de análisis. Para permitir el acceso a otros usuarios, concede los permisos `data_scanner_read` o `data_scanner_write` en [Cumplimiento][1] a un rol personalizado. Para obtener más información sobre cómo configurar roles y permisos, consulta [Control del acceso][2].
+## Configuración {#setup}
 
-{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="Las secciones de permiso de cumplimiento que muestran permisos de lectura y escritura del Data Scanner" style="width:80%;">}}
+### Permisos {#permissions}
 
-### Añadir un grupo de análisis
+Por defecto, los usuarios con el rol Datadog Admin tienen acceso para ver y configurar reglas de escaneo. Para permitir el acceso a otros usuarios, otorgue los `data_scanner_read` o `data_scanner_write` permisos bajo [Compliance][1] a un rol personalizado. Consulte [Access Control][2] para obtener detalles sobre cómo configurar roles y permisos.
 
-Un grupo de análisis determina qué datos analizar. Consta de un filtro de consulta, un conjunto de botones para activar el análisis de logs, APM, RUM y eventos, y la opción de definir frecuencias de muestreo de entre el 10% y el 99% para cada producto. Para obtener más información sobre los filtros de consulta, consulta la documentación sobre [sintaxis de búsqueda de logs][3].
+Si una regla de escaneo utiliza la acción **enmascarar** (disponible solo para registros) para datos sensibles coincidentes, los usuarios con el permiso `data_scanner_unmask` pueden desenmascarar y ver los datos en Datadog. **Nota**: Datadog no recomienda usar la acción **enmascarar** para credenciales, a menos que tenga un plan para responder y rotar todas las credenciales filtradas. Consulte [Acción de enmascarar](#mask-action) para más información.
 
-Para Terraform, consulta el recurso [Grupo de Datadog Sensitive Data Scanner][4].
+{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="Las secciones de permisos de cumplimiento que muestran los permisos de lectura y escritura del escáner de datos." style="width:80%;">}}
 
-Para configurar un grupo de análisis, realiza los siguientes pasos:
+### Agregar un grupo de escaneo {#add-a-scanning-group}
 
-1. Ve a la página de configuración de [Sensitive Data Scanner][5].
-1. Haz clic en **Add scanning group** (Añadir grupo de análisis). Como alternativa, haz clic en el menú desplegable **Add** (Añadir) situado en la esquina superior derecha de la página y selecciona **Add Scanning Group** (Añadir grupo de análisis).
-1. Introduce un filtro de consulta para los datos que quieres analizar. En la parte superior, haz clic en **APM Spans** (Tramos de APM) para obtener una vista previa de los tramos (spans) filtrados. Haz clic en **Logs** para ver los logs filtrados.
-1. Introduce un nombre y una descripción para el grupo.
-1. Haz clic en los botones de conmutador para activar Sensitive Data Scanner para los productos deseados (por ejemplo, logs, tramos de APM, eventos de RUM y eventos de Datadog).
-1. Opcionalmente, define una frecuencia de muestreo del 10-99% para los productos deseados. Cuando añadas reglas de análisis a un grupo que tenga activado el muestreo, no podrás seleccionar acciones que ofusquen los datos que analizas. Para ofuscar las coincidencias, debes elegir analizar todos los datos que coincidan con el filtro de consulta del grupo.
-1. Haz clic en **Create** (Crear).
+Un grupo de escaneo determina qué datos escanear. Consiste en un filtro de consulta, un conjunto de botones para habilitar el escaneo de registros, APM, RUM y eventos, y la opción de establecer tasas de muestreo entre el 10% y el 99% para cada producto. Consulte la documentación de [Sintaxis de Búsqueda de Registros][3] para aprender más sobre los filtros de consulta.
 
-De manera predeterminada, los grupos de análisis recién creados se encuentran deshabilitados. Para habilitar un grupo de análisis, haz clic en el botón correspondiente en el lado derecho.
+Para Terraform, consulte el recurso de [Grupo de Sensitive Data Scanner de Datadog][4].
 
-### Añadir reglas de análisis
+Para configurar un grupo de escaneo, realice los siguientes pasos:
 
-Una regla de análisis determina qué información confidencial debe coincidir con los datos definidos por un grupo de análisis. Puedes añadir reglas de análisis predefinidas desde la librería de reglas de análisis de Datadog o puedes crear tus propias reglas mediante patrones de expresión regular. Los datos se analizan en el momento de la ingesta durante el procesamiento. Para los logs, esto significa que el análisis se realiza antes de la indexación y otras decisiones de enrutamiento.
+1. Navegue a la página de configuración de [Sensitive Data Scanner][5].
+1. Haga clic en **Agregar grupo de escaneo**. Alternativamente, haga clic en el menú desplegable **Agregar** en la esquina superior derecha de la página y seleccione **Agregar Grupo de Escaneo**.
+1. Ingrese un filtro de consulta para los datos que desea escanear. En la parte superior, haga clic en **APM Spans** para previsualizar los spans filtrados. Haga clic en **Registros** para ver los registros filtrados.
+1. Ingrese un nombre y una descripción para el grupo.
+1. Haga clic en los botones de opción para habilitar Sensitive Data Scanner para los productos que desea (por ejemplo, registros, spans de APM, eventos de RUM y eventos de Datadog).
+1. Opcionalmente, establezca una tasa de muestreo del 10-99% para los productos que desea. Cuando agregue reglas de escaneo a un grupo que tiene el muestreo habilitado, no podrá seleccionar acciones que ofusquen los datos que se escanen. Para ofuscar coincidencias, debe elegir escanear todos los datos que coincidan con el filtro de consulta de su grupo.
+1. Haga clic en **Crear**.
 
-Para Terraform, consulta el recurso [regla de Datadog Sensitive Data Scanner][6].
+Por defecto, un grupo de escaneo recién creado está deshabilitado. Para habilitar un grupo de escaneo, haga clic en el interruptor correspondiente en el lado derecho.
 
-Para añadir reglas de análisis, realiza los siguientes pasos:
+### Agregar reglas de escaneo {#add-scanning-rules}
 
-1. Ve a la página de configuración de [Sensitive Data Scanner][5].
-1. Haz clic en el grupo de análisis en el que quieres añadir las reglas de análisis.
-1. Haz clic en **Add Scanning Rule** (Añadir regla de análisis). Como alternativa, haz clic en el menú desplegable **Add** (Añadir) situado en la esquina superior derecha de la página y selecciona **Add Scanning Rule** (Añadir regla de análisis).
-1. Selecciona si quires añadir una regla de librería o crear una regla de análisis personalizada.
+Una regla de escaneo determina qué información sensible coincidirá dentro de los datos definidos por un grupo de escaneo. Puede agregar reglas de escaneo predefinidas de la Biblioteca de Reglas de Escaneo de Datadog o crear sus propias reglas utilizando patrones de expresiones regulares (regex). Los datos se escanean en el momento de la ingestión durante el procesamiento. Para los registros, esto significa que el escaneo se realiza antes de la indexación y otras decisiones de enrutamiento.
 
-{{% collapse-content title="Añadir regla de análisis desde las reglas de librería" level="p" %}}
+Siempre que sea posible, utilice las reglas de la biblioteca listas para usar de Datadog. Estas reglas son reglas predefinidas que detectan patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, información de red y dispositivos, y más. Cada regla tiene palabras clave recomendadas para el diccionario de palabras clave para refinar la precisión de la coincidencia. También puede [agregar sus propias palabras clave](#add-custom-keywords).
 
-La librería de reglas de análisis contiene reglas predefinidas para detectar patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, etc.
+Para Terraform, consulte el recurso [regla de Sensitive Data Scanner de Datadog][6].
 
-1. Selecciona un grupo de análisis si no has creado esta regla dentro de un grupo de análisis.
-1. En la sección **Add library rules to the scanning group** (Añadir reglas de librería al grupo de análisis), selecciona las reglas de librería que quieres utilizar.
+
+Para agregar reglas de escaneo, realice los siguientes pasos:
+
+1. Navegue a la página de configuración de [Sensitive Data Scanner][5].
+1. Haga clic en el grupo de escaneo donde desea agregar las reglas de escaneo.
+1. Haga clic en **Agregar Regla de Escaneo**. Alternativamente, haga clic en el menú desplegable **Agregar** en la esquina superior derecha de la página y seleccione **Agregar Regla de Escaneo**.
+1. Seleccione si desea agregar una regla de biblioteca o crear una regla de escaneo personalizada.
+
+{{% collapse-content title="Agregar reglas de biblioteca" level="p" id="add-library-rules" %}}
+
+La Biblioteca de Reglas de Escaneo contiene reglas predefinidas para detectar patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización y más.
+
+1. Seleccione un grupo de escaneo si no creó esta regla dentro de un grupo de escaneo.
+1. En el menú desplegable de **Prioridad**, seleccione el nivel de prioridad para la regla según las necesidades de su negocio.
+1. En la sección de **Agregar Reglas de Biblioteca**, seleccione las reglas de biblioteca que desea utilizar.
 {{% sds-scanning-rule %}}
-1. Haz clic en **Add Rules** (Añadir reglas).
+1. Haga clic en **Agregar Reglas**.
 
-#### Añadir palabras clave adicionales
+#### Agregar palabras clave personalizadas {#add-custom-keywords}
 
-Después de añadir reglas de análisis OOTB, puedes editar cada regla por separado y añadir palabras clave adicionales al diccionario de palabras clave.
+Las [palabras clave recomendadas][15] se utilizan por defecto cuando se agregan reglas de biblioteca. Después de agregar reglas de biblioteca, puede editar cada regla por separado y agregar o eliminar palabras clave del diccionario de palabras clave. Por ejemplo, si está escaneando un número de tarjeta de crédito Visa de dieciséis dígitos, puede agregar palabras clave como `visa`, `credit` y `card`.
 
-1. Ve a la página de configuración de [Sensitive Data Scanner][5].
-1. Haz clic en el grupo de análisis con la regla que quieres editar.
-1. Pasa el ratón por encima de la regla y haz clic en el icono del lápiz.
-1. Las palabras clave recomendadas se utilizan por defecto. Para añadir palabras clave adicionales, activa **Use recommended keywords** (Utilizar palabras clave recomendadas) y, a continuación, añade tus palabras clave a la lista. También puedes exigir que estas palabras clave estén dentro de un número determinado de caracteres de una coincidencia. Por defecto, las palabras clave deben estar dentro de los 30 caracteres anteriores a un valor coincidente.
-1. Haz clic en **Update** (Actualizar).
+1. Navegue a la página de configuración de [Sensitive Data Scanner][5].
+1. Haga clic en el grupo de escaneo con la regla que desea editar.
+1. Pase el cursor sobre la regla y luego haga clic en el ícono de lápiz.
+1. En la sección de **Condiciones de Coincidencia**, haga clic en **Palabras Clave Personalizadas**.
+    - Para agregar palabras clave, ingrese una palabra clave y haga clic en el ícono de más para agregar la palabra clave a la lista.
+    - Para eliminar palabras clave, haga clic en el **X** junto a la palabra clave que desea eliminar.
+    - También puede requerir que estas palabras clave estén dentro de un número específico de caracteres de una coincidencia. Por defecto, las palabras clave deben estar dentro de 30 caracteres antes de un valor coincidente.
+    - Para eventos estructurados, las palabras clave también se comparan con los nombres de atributos en la ruta del evento. Los separadores como `-`, `_` y `.` en los nombres de atributos cuentan como límites de palabras, por lo que la palabra clave `card` coincide con un atributo llamado `card_number` o `card-type`. El límite de caracteres no se aplica a la coincidencia de nombres de atributos.
+    - **Nota**: No puede tener más de 20 palabras clave para una regla.
+1. En la sección **Escriba o pegue datos de evento para hacer la prueba de la regla**, agregue datos de evento para evaluar su regla y añada palabras clave para refinar las condiciones de coincidencia.
+1. Haga clic en **Actualizar**.
+
+#### Agregue supresiones {#add-suppressions}
+
+{{% sds-suppressions %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Añadir una regla de análisis personalizada" level="p" %}}
-Puedes crear reglas de análisis personalizadas utilizando patrones de expresiones regulares para analizar datos confidenciales.
+{{% collapse-content title="Agregue una regla personalizada" level="p" id="add-custom-rule"%}}
+Puede crear reglas de escaneo personalizadas utilizando patrones regex para buscar datos sensibles.
 
-1. Selecciona un grupo de análisis si no creaste esta regla dentro de un grupo de análisis.
-1. En la sección **Definir condiciones de coincidencia**, especifique el patrón regex a utilizar para la coincidencia con eventos en el campo **Definir el regex**. Introduzca datos de muestra en el campo **Añadir datos de muestra** para verificar que su patrón regex es válido.<br>
-    Sensitive Data Scanner admite Perl Compatible Regular Expressions (PCRE), pero los siguientes patrones no son compatibles:
-    - Referencias pasadas y captura de subexpresiones (lookarounds)
-    - Afirmaciones de espacio de ancho cero arbitrarias
+1. Seleccione un grupo de escaneo si no creó esta regla dentro de un grupo de escaneo.
+1. Ingrese un nombre para la regla.
+1. En el menú desplegable **Prioridad**, seleccione el nivel de prioridad para la regla según las necesidades de su negocio.
+1. (Opcional) Ingrese una descripción para la regla.
+1. En la sección **Condiciones de coincidencia**, especifique el patrón regex que se utilizará para coincidir con eventos en el campo **Patrón regex**. Defina patrones regex que sean lo más precisos posible porque los patrones genéricos resultan en más falsos positivos.<br>
+    Sensitive Data Scanner admite Expresiones Regulares Compatibles con Perl (PCRE), pero los siguientes patrones no son compatibles:
+    - Referencias de retroceso y subexpresiones de captura (lookarounds)
+    - Afirmaciones de ancho cero arbitrarias
     - Referencias a subrutinas y patrones recursivos
     - Patrones condicionales
-    - Verbos de control del backtracking
-    - La directiva `\C` "single-byte" (que rompe las secuencias UTF-8)
-    - La coincidencia de nueva línea `\R`
-    - La directiva de reinicio de la coincidencia `\K`
-    - Llamadas y código integrado
+    - Verbos de control de retroceso
+    - La directiva `\C` "un solo byte" (que rompe secuencias UTF-8)
+    - La coincidencia de `\R` nueva línea
+    - El `\K` inicio de la directiva de reinicio de coincidencias
+    - Llamadas y código incrustado
     - Agrupación atómica y cuantificadores posesivos
-1. En **Create keyword dictionary** (Crear diccionario de palabras clave), añade palabras clave para mejorar la precisión de la detección cuando coincida con condiciones de expresión regular. Por ejemplo, si estás analizando un número de tarjeta de crédito Visa de dieciséis dígitos, puedes añadir palabras clave como `visa`, `credit` y `card`. También puedes exigir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. Por defecto, las palabras clave deben estar dentro de los 30 caracteres anteriores a un valor coincidente.
+1. Para **verifique el contexto de coincidencia circundante para palabras clave y reduzca el ruido**, agregue palabras clave para refinar la precisión de detección al coincidir condiciones de regex. Por ejemplo, si está escaneando un número de tarjeta de crédito Visa de dieciséis dígitos, puede agregar palabras clave como `visa`, `credit` y `card`.
+    - Para agregar palabras clave, ingrese una palabra clave y haga clic en el ícono de más para agregar la palabra clave a la lista.
+    - Para eliminar palabras clave, haga clic en el **X** junto a la palabra clave que desea eliminar.
+    - También puede requerir que estas palabras clave estén dentro de un número específico de caracteres de una coincidencia. Por defecto, las palabras clave deben estar dentro de 30 caracteres antes de un valor coincidente.
+    - Para eventos estructurados, las palabras clave también se comparan con los nombres de atributos en la ruta del evento. Los separadores como `-`, `_` y `.` en los nombres de atributos cuentan como límites de palabras, por lo que la palabra clave `card` coincide con un atributo llamado `card_number` o `card-type`. El límite de caracteres no se aplica a la coincidencia de nombres de atributos.
+      **Nota**: No puede tener más de 20 palabras clave para una regla.
+{{% sds-suppressions %}}
+1. En la sección **Escriba o pegue datos del evento para probar la regla**, agregue datos del evento para evaluar su regla y agregue palabras clave para refinar las condiciones de coincidencia.
 {{% sds-scanning-rule %}}
-1. Haz clic en **Add Rule** (Añadir regla).
+1. Haga clic en **Agregar Regla**.
+
 {{% /collapse-content %}}
 
 **Notas**:
 
-- Cualquier regla que añadas o actualices solo afectará a los datos que ingresen a Datadog después de que se haya definido la regla.
-- Sensitive Data Scanner no afecta a ninguna regla que definas directamente en el Datadog Agent.
-- Una vez que se añadan las reglas, asegúrate de que se hayan habilitado los botones de los grupos de análisis para comenzar a analizar.
-- Cuando añadas reglas a un grupo de análisis con el muestreo activado, no podrás seleccionar las acciones **redactar**, **redactar parcialmente** o **aplicar hash**. Para una ofuscación completa, desactiva el muestreo en la configuración del grupo de análisis.
+- Cualquier regla que agregue o actualice afecta solo a los datos que ingresan a Datadog después de que se definió la regla.
+- Sensitive Data Scanner no afecta ninguna regla que defina directamente en el Datadog Agent.
+- Después de agregar reglas, asegúrese de que los interruptores para sus grupos de escaneo estén habilitados para comenzar a escanear.
+- Cuando agrega reglas a un grupo de escaneo con muestreo habilitado, no podrá seleccionar las acciones **redactar**, **redactar parcialmente** o **hash**. Para una ofuscación completa, desactive el muestreo en la configuración de su grupo de escaneo.
 
-Consulta [Investigar problemas de datos confidenciales][7] para obtener más información sobre cómo utilizar la página [Resumen][8] para clasificar los problemas de datos confidenciales.
+Consulte [Investigar Hallazgos de Datos Sensibles][7] para obtener detalles sobre la clasificación de datos sensibles utilizando la página [Hallazgos][8].
 
-#### Espacios de nombres excluidos
+#### Espacios de nombres excluidos {#excluded-namespaces}
 
-Existen palabras clave reservadas que la plataforma de Datadog requiere para su funcionamiento. Si alguna de estas palabras se encuentra en un log que está siendo analizado, los 30 caracteres posteriores a la palabra coincidente se ignoran y no se redactan. Por ejemplo, lo que aparece después de la palabra `date` en un log suele ser la marca temporal del evento. Si la marca temporal se redacta accidentalmente, se producirían problemas con el procesamiento del log y se lo podría consultar más tarde. Por lo tanto, el comportamiento de los espacios de nombres excluidos es evitar la redacción involuntaria de información importante para la funcionalidad del producto.
+Existen palabras clave reservadas que la plataforma de Datadog requiere para su funcionalidad. Si alguna de estas palabras se encuentra en un registro que se está escaneando, los 30 caracteres después de la palabra coincidente se ignoran y no se redactan. Por ejemplo, lo que viene después de la palabra `date` en un registro suele ser la marca de tiempo del evento. Si la marca de tiempo se redacta accidentalmente, eso resultaría en problemas para procesar el registro y poder consultarlo más tarde. Por lo tanto, el comportamiento para los espacios de nombres excluidos es prevenir la redacción involuntaria de información importante para la funcionalidad del producto.
 
 Los espacios de nombres excluidos son:
+
+{{% tabs %}}
+{{% tab "Registros" %}}
 
 - `host`
 - `hostname`
@@ -159,54 +198,163 @@ Los espacios de nombres excluidos son:
 - `error.fingerprint`
 - `x-datadog-parent-id`
 
-### Ediar reglas de análisis
+{{% /tab %}}
+{{% tab "Tramos" %}}
 
-1. Ve a la página de configuración de [Sensitive Data Scanner][5].
-1. Pasa el ratón por encima de la regla de análisis que quieres editar y haz clic en el icono **Edit** (Editar) (lápiz).
-   La sección **Define match conditions** (Definir condiciones de coincidencia) muestra la expresión regular que escribiste para tu regla personalizada o una explicación de la regla de análisis de librería que elegiste junto con ejemplos de información confidencial coincidente.
-1. Para asegurarte de que una regla coincide con tus datos, puedes proporcionar una muestra en la sección **Add sample data** (Añadir datos de muestra). Si la regla encuentra coincidencias en los datos de muestra, aparecerá una etiqueta verde **Match** (Coincidencia) junto al campo de entrada.
-1. En **Create keyword dictionary** (Crear diccionario de palabras clave), puedes añadir palabras clave para mejorar la precisión de la detección. Por ejemplo, si buscas un número de tarjeta de crédito Visa de dieciséis dígitos, puedes añadir palabras clave como `visa`, `credit` y `card`.
-1. Elige el número de caracteres antes de una coincidencia en los que debe aparecer la palabra clave. Por defecto, las palabras clave deben estar dentro de los 30 caracteres anteriores a una coincidencia.
-1. Opcionalmente, en **Define rule target and action** (Definir objetivo y acción de la regla), edita las etiquetas que quieres asociar con eventos donde los valores coincidan con la regla. Datadog recomienda utilizar etiquetas `sensitive_data` y `sensitive_data_category`, que pueden utilizarse en búsquedas, dashboards y monitores. Consulta [Control de acceso a logs con datos confidenciales](#control-access-to-logs-with-sensitive-data) para obtener información sobre cómo utilizar etiquetas para determinar quién puede acceder a logs que contengan datos confidenciales.
-1. En **Set priority level** (Establecer nivel de prioridad), elige un valor basado en las necesidades de tu empresa.
-1. Haz clic en **Update** (Actualizar).
+- `metrics._dd.`
+- `metrics.dd.`
+- `metrics._dd1.`
+- `metrics.otel.trace_id`
+- `metrics.otlp.`
+- `metrics._sampling_priority_v1`
+- `metrics._sample_rate`
+- `meta._dd.`
+- `meta.api.endpoint.`
+- `meta.dd.`
+- `meta_struct.dd.`
+- `meta_struct._dd.`
+- `meta_struct.api.endpoint.`
+- `meta_struct.appsec.`
+- `meta_struct.threat_intel.results.`
+- `meta.otel.trace_id`
+- `meta.otel.library.`
+- `meta.otlp.`
+- `trace_id`
+- `span_id`
+- `start`
+- `timestamp`
+- `end`
+- `duration`
+- `parent_id`
+- `type`
+- `resource`
+- `resource_hash`
+- `ingest_size_in_bytes`
+- `ingestion_reason`
+- `error`
+- `flags`
+- `status`
+- `chunk_id`
+- `host`
+- `host_id`
+- `hostname`
+- `env`
+- `service`
+- `operation_name`
+- `name`
+- `version`
+- `meta._dd.error_tracking`
+- `meta.error.fingerprint`
+- `meta.issue`
 
-## Controlar el acceso a logs con datos confidenciales
+{{% /tab %}}
+{{% tab "RUM" %}}
 
-Para controlar quién puede acceder a los logs que contienen datos confidenciales, utiliza etiquetas añadidas por el Sensitive Data Scanner para crear consultas con control de acceso basado en roles (RBAC). Puedes restringir el acceso a personas o equipos específicos hasta que los datos caduquen tras el periodo de retención. Para obtener más información, consulta [Cómo configurar RBAC para logs][9].
+- `application.id`
+- `session.id`
+- `session.initial_view.id`
+- `session.last_view.id`
+- `view.id`
+- `action.id`
+- `resource.id`
+- `geo`
+- `error.fingerprint`
+- `error.binary_images.uuid`
+- `issue`
+- `_dd.trace_id`
+- `_dd.span_id`
+- `_dd.usage_attribution_tag_names`
+- `_dd.error.unminified_frames`
+- `_dd.error.threads`
 
-## Redactar datos confidenciales en etiquetas
+{{% /tab %}}
+{{% /tabs %}}
 
-Para redactar datos confidenciales contenidos en etiquetas, debes [reasignar][10] la etiqueta a un atributo y, a continuación, redactar el atributo. Desmarca `Preserve source attribute` en el procesador de reasignación para que la etiqueta no se conserve durante la reasignación.
+#### Suprimir coincidencias específicas para ignorar datos con riesgo aceptado {#suppress-specific-matches-to-ignore-risk-accepted-data}
 
-Para reasignar la etiqueta a un atributo:
+Utilice supresiones para ignorar coincidencias de datos sensibles que considere operativamente seguras (por ejemplo: dominios de correo electrónico internos o rangos de IP privados).
 
-1. Ve a tu [pipeline de log][11].
-2. Haz clic en **Add Processor** (Agregar procesador).
-3. Selecciona **Remapper** (Reasignador) en el menú desplegable de tipo de procesador.
-4. Nombra el procesador.
-5. Selecciona **Tag key(s)** (Claves de etiqueta).
-6. Introduce la clave de etiqueta.
-7. Introduce un nombre para el atributo al que se reasigna la clave de etiqueta.
-8. Deshabilita **Preserve source attribute** (Preservar atributo de fuente).
-9. Haz clic en **Create** (Crear).
+**Notas**:
+- Las coincidencias suprimidas no son redactadas, enmascaradas ni hashadas.
+- Las coincidencias suprimidas están excluidas de la página de Hallazgos, tableros, alertas y otros flujos de trabajo de informes.
+- Las supresiones se definen por regla dentro de un grupo de escaneo.
+
+#### Escanear o excluir atributos específicos {#scan-or-exclude-specific-attributes}
+
+Para hacer que las coincidencias sean más precisas, también puede hacer una de las siguientes acciones:
+
+- Escanee todo el evento pero excluya ciertos atributos de ser escaneados. Por ejemplo, si está escaneando información personal identificable (PII) como direcciones físicas, podría querer excluir atributos como `ip_address`.
+- Escanee atributos específicos para reducir el alcance de los datos que se escanean. Por ejemplo, si está escaneando direcciones físicas, puede elegir atributos específicos como `street` y `city`.
+
+**Nota**: No utilice el prefijo `@` en la ruta del atributo al especificar nombres de atributos. Por ejemplo, use `function.request.body.password` en lugar de `@function.request.body.password`. El prefijo `@` utilizado en consultas de búsqueda y otras partes de Datadog no es compatible en este campo.
+
+### Editar reglas de escaneo {#edit-scanning-rules}
+
+Para editar reglas de escaneo:
+
+1. Navegue a la página de configuración del [Sensitive Data Scanner][5].
+1. Pase el cursor sobre la regla de escaneo que desea editar y haga clic en el ícono de **Editar** (lápiz).
+1. Realice los cambios que desee para la regla. Dependiendo del tipo de regla que esté editando, consulte [Add library rules](#add-library-rules) o [Add custom rule](#add-custom-rule) para más información sobre cada sección de configuración.
+1. Haga clic en **Actualizar**.
+
+## Controlar el acceso a registros con datos sensibles {#control-access-to-logs-with-sensitive-data}
+
+Para controlar quién puede acceder a registros que contienen datos sensibles, utilice etiquetas añadidas por el Sensitive Data Scanner para construir consultas con control de acceso basado en roles (RBAC). Puede restringir el acceso a individuos o equipos específicos hasta que los datos se eliminen después del período de retención. Consulte [Cómo configurar RBAC para registros][9] para obtener más información.
+
+### Acción de enmascarado {#mask-action}
+
+{{% sds-mask-action %}}
+
+## Redactar datos sensibles en etiquetas {#redact-sensitive-data-in-tags}
+
+Para redactar datos sensibles contenidos en etiquetas, debe [remapear][10] la etiqueta a un atributo y luego redactar el atributo. Desmarque `Preserve source attribute` en el procesador de remapeo para que la etiqueta no se conserve durante el remapeo.
+
+Para remapear la etiqueta a un atributo:
+
+1. Navegue a su [log pipeline][11].
+2. Haga clic en **Add Processor**.
+3. Seleccione **Remapper** en el menú desplegable de tipo de procesador.
+4. Nombre del procesador.
+5. Seleccione **Tag key(s)**.
+6. Ingrese la clave de la etiqueta.
+7. Ingrese un nombre para el atributo al que se remapea la clave de la etiqueta.
+8. Desactive **Preserve source attribute**.
+9. Haga clic en **Create**.
 
 Para redactar el atributo:
 
-1. Ve a tu [grupo de análisis][5].
-2. Haz clic en **Add Scanning Rule** (Añadir regla de análisis).
-3. Comprueba las reglas de librería que quieres utilizar.
-4. Selecciona **Specific Attributes** (Atributos específicos) en **Scan entire event or portion of it** (Analizar el evento completo o una parte).
-5. Introduce el nombre del atributo que creaste anteriormente para especificar que quieres que se analice.
-6. Selecciona la acción deseada cuando haya una coincidencia.
-7. Si lo deseas, añade etiquetas (tags).
-8. Haz clic en **Add Rules** (Añadir reglas).
+1. Navegue a su [scanning group][5].
+2. Haga clic en **Add Scanning Rule**.
+3. Marque las library rules que desea utilizar.
+4. Seleccione **Specific Attributes** para **Scan entire event or portion of it**.
+5. Ingrese el nombre del atributo que creó anteriormente para especificar que desea que se escanee. **Nota**: No utilice el prefijo `@` en la ruta del atributo. Por ejemplo, use `function.request.body.password` en lugar de `@function.request.body.password`. 
+6. Seleccione la acción que desea cuando haya una coincidencia.
+7. Opcionalmente, agregue etiquetas.
+8. Haga clic en **Agregar Reglas**.
 
-## Desactivar Sensitive Data Scanner
+## Registro de rehidratación {#log-rehydration}
 
-Para desactivar por completo el Sensitive Data Scanner, pon el conmutador en **off** (desactivado) para cada grupo de análisis, de modo que queden desactivados.
+Cuando rehidrate registros de un archivo, Sensitive Data Scanner no vuelve a escanear esos registros. En cambio, Datadog restaura los registros exactamente como fueron escritos en el archivo.
 
-## Referencias adicionales
+Si su archivo está configurado para incluir [etiquetas de Datadog][16], y sus reglas de escaneo agregaron etiquetas cuando los registros fueron inicialmente ingeridos y procesados por Sensitive Data Scanner, puede usar esas etiquetas para identificar qué registros rehidratados contenían previamente datos sensibles. Esto le permite filtrar registros rehidratados utilizando consultas como `sensitive_data:<rule_tag_name>`.
+
+Los metadatos de los datos sensibles coincidentes no se almacenan en los registros archivados, por lo que las coincidencias de datos sensibles no se resaltan cuando esos registros son rehidratados. El formato del archivo contiene solo la carga útil del registro original y cualquier etiqueta preservada. No incluye la información posicional que Sensitive Data Scanner utiliza en la interfaz de usuario de Datadog para resaltar visualmente los valores detectados.
+
+Lo que puede hacer con registros rehidratados:
+
+- Si se incluyeron etiquetas en el archivo, filtre los registros que anteriormente coincidieron con las reglas de escaneo.
+- Investigue eventos históricos que contengan datos sensibles.
+
+Lo que **no** puede hacer con registros rehidratados:
+
+- Ver coincidencias de datos sensibles resaltadas en línea en la UI: Las coincidencias permanecen ofuscadas incluso si se eligió mask, redact, partially redact o hash como acción al producirse la coincidencia.
+- Activar escaneos retroactivos: Sensitive Data Scanner no vuelve a escanear registros rehidratados.
+
+## Disable Sensitive Data Scanner {#disable-sensitive-data-scanner}
+
+Para desactivar completamente Sensitive Data Scanner, configure el interruptor en **off** para cada Scanning Group para que estén desactivados.
+
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -216,11 +364,13 @@ Para desactivar por completo el Sensitive Data Scanner, pon el conmutador en **o
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[7]: /es/security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
-[8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
+[7]: /es/security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
+[8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /es/logs/guide/logs-rbac/
-[10]: /es/logs/log_configuration/processors/?tab=ui#remapper
+[10]: /es/logs/log_configuration/processors/remapper/
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /es/observability_pipelines/
 [13]: /es/observability_pipelines/processors/sensitive_data_scanner/
-[14]: /es/observability_pipelines/set_up_pipelines/
+[14]: /es/observability_pipelines/configuration/set_up_pipelines/
+[15]: /es/security/sensitive_data_scanner/scanning_rules/library_rules/
+[16]: /es/logs/log_configuration/archives/?tab=awss3#datadog-tags

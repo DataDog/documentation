@@ -137,7 +137,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 ### Nested Queries
 
-Datadog’s nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
+Datadog's nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
 
 For more information, see the [Nested Queries][13] documentation.
 
@@ -150,15 +150,16 @@ Datadog also supports the ability to graph your metrics, logs, traces, and other
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations; they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
 
-#### Metric arithmetic using an integer
+{{% collapse-content title="Metric arithmetic using an integer" level="h4" %}}
 
-Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
+Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box; in this case: `a * 2`:
 
 {{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
+{{% /collapse-content %}}
 
-#### Arithmetic between two metrics
+{{% collapse-content title="Arithmetic between two metrics" level="h4" %}}
 
 Visualize the percentage of a metric by dividing one metric over another, for example:
 
@@ -168,7 +169,7 @@ jvm.heap_memory / jvm.heap_memory_max
 
 Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {{< ui >}}Add Query{{< /ui >}}. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
-Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
+Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To show only the formula result, see [Hide a query from the visualization](#hide-a-query-from-the-visualization).
 
 {{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
@@ -181,8 +182,13 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+{{% /collapse-content %}}
 
-#### Minimum or Maximum between two queries
+#### Hide a query from the visualization
+
+When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
+
+{{% collapse-content title="Minimum or Maximum between two queries" level="h4" %}}
 
 Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
 
@@ -203,6 +209,19 @@ minimum(status:error, status:warn)
 ```
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="time() function" level="h4" %}}
+
+The `time()` function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
+
+For example, to calculate the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between the present and the timestamp of the backup metric.
+
+```text
+time() - max:backup.last_completed_timestamp{*}
+```
+
+{{% /collapse-content %}}
 
 ### Create an alias
 

@@ -45,13 +45,16 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials. To create a client token, see [Client tokens][2].
+Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
+  // Required client-side Datadog credentials
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
@@ -62,6 +65,8 @@ const provider = new DatadogProvider({
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an evaluation context. The evaluation context includes user or session information used to determine which flag variations should be returned. Reference these attributes in your targeting rules to control who sees each variant.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="javascript" >}}
 const evaluationContext = {
@@ -75,6 +80,8 @@ await OpenFeature.setProviderAndWait(provider, evaluationContext);
 {{< /code-block >}}
 
 <div class="alert alert-info">The <code>targetingKey</code> is used as the randomization subject for percentage-based targeting. When a flag targets a percentage of subjects (for example, 50%), the <code>targetingKey</code> determines which "bucket" a user falls into. Users with the same <code>targetingKey</code> always receive the same variant for a given flag.</div>
+
+Most applications run several asynchronous tasks at startup, such as fetching data from another service or loading configuration. This example shows only feature flag initialization. As a best practice, start all of your startup promises together and await them as a group (for example, with `Promise.all`) right before the results are needed, rather than awaiting each one sequentially. This keeps total startup time close to the slowest task instead of the sum of all of them.
 
 ## Evaluate flags
 
@@ -199,6 +206,21 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Configure browser provider options
+
+The web provider also supports these optional settings:
+
+| Option | Default | Use |
+| --- | --- | --- |
+| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
+| `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
+| `customHeaders` | unset | Add headers to flag-fetch requests. |
+| `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
@@ -249,4 +271,3 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 
 [1]: https://openfeature.dev/
 [2]: /account_management/api-app-keys/#client-tokens
-

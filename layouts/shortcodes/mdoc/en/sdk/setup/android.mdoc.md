@@ -16,7 +16,7 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ### Manual setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Declare the Android SDK as a dependency" %}
 Declare [dd-sdk-android-rum][4] and the [Gradle plugin][5] as dependencies in your **application module's** `build.gradle` file.
@@ -43,9 +43,9 @@ dependencies {
 {% /step %}
 
 {% step title="Specify application details in the UI" %}
-1. Navigate to [**Digital Experience** > **Add an Application**][6].
+1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][6].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][7].
+3. To instrument your web views, click the {% ui %}Instrument your webviews{% /ui %} toggle. For more information, see [Web View Tracking][7].
 4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][8].
 
 {% img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;" /%}

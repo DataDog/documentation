@@ -77,13 +77,11 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-<div class="alert alert-info">Native OpenTelemetry support for the Kubernetes Explorer is in Preview. Contact your account representative to request access.</div>
-
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][100] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][101] orchestrator explorer functionality.
 
 #### Prerequisites
 
-- OpenTelemetry Collector Contrib [v0.153.0][102] or later.
+- OpenTelemetry Collector Contrib [v0.154.0][102] or later.
 - OpenTelemetry Collector [Helm chart][107] v0.156.2 or later.
 - Access enabled on your Datadog instance. Contact your account representative to verify activation.
 
@@ -168,7 +166,7 @@ config:
 
 Add a [`resourcedetection`][105] processor to detect the cluster UID and name.
 
-- The `kubeadm` detector is required to detect the cluster UID (`k8s.cluster.uid`).
+- The `k8s_api` detector is required to detect the cluster UID (`k8s.cluster.uid`).
 - Cluster name detection depends on your cloud provider. Check the [`resourcedetection` processor documentation][105] for supported providers (EKS, AKS, GCP) and required permissions.
 - If your provider is not supported, use a `resource/add-cluster-name` processor to set the cluster name manually. Replace `<YOUR_CLUSTER_NAME>` with your cluster name.
 
@@ -181,12 +179,8 @@ The following examples show two approaches. Use the cloud provider example if yo
 ```yaml
   processors:
     resourcedetection:
-      detectors: [kubeadm, eks]
+      detectors: [k8s_api, eks]
       override: false
-      kubeadm:
-        resource_attributes:
-          k8s.cluster.name:
-            enabled: false
       eks:
         resource_attributes:
           k8s.cluster.name:
@@ -209,7 +203,7 @@ If the `resourcedetection` processor does not support your cloud provider, set t
 ```yaml
   processors:
     resourcedetection:
-      detectors: [kubeadm]
+      detectors: [k8s_api]
       override: false
     resource/add-cluster-name:
       attributes:
@@ -241,15 +235,64 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
+#### 5. Correlate logs, metrics, and traces with Kubernetes Explorer (optional)
+
+To navigate between Kubernetes resources and their related logs, metrics, and traces, add the [`k8sattributes`][108] and [`resourcedetection`][105] processors to your existing collector pipelines. For `resourcedetection` configuration, see [Processors and pipeline](#processors-and-pipeline) above.
+
+```yaml
+processors:
+  k8sattributes:
+    auth_type: "serviceAccount"
+    extract:
+      metadata:
+        - k8s.pod.name
+        - k8s.pod.uid
+        - k8s.deployment.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.replicaset.name
+        - k8s.statefulset.name
+        - k8s.daemonset.name
+        - k8s.cronjob.name
+        - k8s.job.name
+        - k8s.container.name
+    pod_association:
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.uid
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.ip
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.name
+          - from: resource_attribute
+            name: k8s.namespace.name
+      - sources:
+          - from: connection
+
+service:
+  pipelines:
+    logs:
+      processors: [k8sattributes, resourcedetection, ...]
+    metrics:
+      processors: [k8sattributes, resourcedetection, ...]
+    traces:
+      processors: [k8sattributes, resourcedetection, ...]
+```
+
+For a complete reference example, see the [DaemonSet collector configuration][109].
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.153.0
+[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [104]: /getting_started/site/
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [107]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
+[108]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
 [111]: /opentelemetry/integrations/kubernetes_metrics/#setup
 
 {{% /tab %}}

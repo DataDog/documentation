@@ -19,6 +19,10 @@ To use most source code-related features, you must connect your Git repositories
 
 ## Source code management providers
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+{{< /site-region >}}
+
 Datadog supports the following features for the SCM providers listed below. See [Features][1] for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
@@ -43,6 +47,10 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+{{< /site-region >}}
 
 <div class="alert alert-info">
 Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.</br>If your instance is hosted on an internal/private network but exposed through a public DNS alias (recommended), configure the integration using the public hostname, then <a href="/help">contact Datadog Support</a> with both the public hostname and the internal hostname to enable hostname aliasing.

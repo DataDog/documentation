@@ -60,7 +60,7 @@ To use the Datadog MCP server option, connect the Agent Observability MCP server
 
 ```shell
 claude mcp add --scope user --transport http datadog-llmo-mcp \
-  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
 ```
 
 All skills detect the MCP server automatically at startup and use it throughout.

@@ -11,14 +11,10 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
   tag: "Knowledge Center"
   text: "What are AI agents and how do they work?"
-- link: "/bits_ai/ai_credits/"
+- link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
   text: "AI Credits"
 ---
-
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Bits Agent Builder is in Preview.
-{{< /callout >}}
 
 ## Overview
 
