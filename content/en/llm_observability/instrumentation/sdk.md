@@ -95,9 +95,6 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 `DD_MCP_CAPTURE_INTENT`
 : optional - _integer or string_ - **default**: `false`
 <br />When set to `1` or `true`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
-{{% /tab %}}
-
-<br />When set to `1` or `true`, adds an argument to every MCP tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -1971,7 +1968,7 @@ This gives you the flexibility to either rely on automatic version management ba
 
 ## MCP intent capture
 
-To gain insight into why your MCP tools were called, enable intent capture on your MCP server. When enabled, the SDK adds an argument to every MCP tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span, helping you improve your tool definitions and descriptions.
+To gain insight into why your MCP tools were called, enable intent capture on your MCP server. When enabled, the SDK adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span, helping you improve your tool definitions and descriptions.
 
 {{< tabs >}}
 {{% tab "Python" %}}
