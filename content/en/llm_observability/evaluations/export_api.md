@@ -123,7 +123,7 @@ Method
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
-| page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. <br>**Note:** Responses are subject to a 50 MB size limit, and large limits (100+) can increase response time. If your spans contain large inputs or outputs, use a lower limit and paginate with `page[cursor]`. |
+| page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. <br>**Note:** Responses are subject to a 50 MB size limit. Large limits (100+) can increase response time. If your spans contain large inputs or outputs, use a lower limit and paginate with `page[cursor]`. |
 
 #### Code example
 
