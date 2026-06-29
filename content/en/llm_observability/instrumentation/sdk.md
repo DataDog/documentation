@@ -97,7 +97,11 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 <br />When set to `1` or `true`, adds an argument to every MCP tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
 {{% /tab %}}
 
+<br />When set to `1` or `true`, adds an argument to every MCP tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
+
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
+{{% /tab %}}
+
 
 {{% tab "Node.js" %}}
 Enable Agent Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
