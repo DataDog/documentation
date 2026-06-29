@@ -17,6 +17,9 @@ further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/setup'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
+    - link: '/network_monitoring/network_path'
+      tag: 'Documentation'
+      text: 'Network Path'
 ---
 
 ## Overview

@@ -19,6 +19,9 @@ further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
       tag: 'Guide'
       text: 'Detecting Application Availability using Network Insights'
+    - link: '/network_monitoring/network_path'
+      tag: 'Documentation'
+      text: 'Network Path'
 ---
 
 ## Overview
