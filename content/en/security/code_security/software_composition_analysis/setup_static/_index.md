@@ -13,7 +13,7 @@ Datadog Software Composition Analysis (SCA) scans your repositories for open-sou
 
 To get started:
 1. Open [Code Security settings][2].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+2. In {{< ui >}}Activate scanning for your repositories{{< /ui >}}, click {{< ui >}}Manage Repositories{{< /ui >}}.
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
@@ -53,7 +53,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
-To get started, navigate to the [**Code Security** page][2].
+To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
@@ -65,7 +65,7 @@ For these cases, scan using CI pipelines.
 Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
 <div class="alert alert-info">
-You must scan your default branch at least once before results appear in <b>Code Security</b>.
+You must scan your default branch at least once before results appear in {{< ui >}}Code Security{{< /ui >}}.
 </div>
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
