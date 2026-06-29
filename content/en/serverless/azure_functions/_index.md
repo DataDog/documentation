@@ -202,8 +202,8 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
 ## What's next?
 
-- You can view your Azure Functions traces in [Trace Explorer][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
-- You can use the [Serverless > Azure Functions][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
+- You can view your Azure Functions traces in [{{< ui >}}Trace Explorer{{< /ui >}}][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
+- You can use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure Functions{{< /ui >}}][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
 
 ## Profiling
 

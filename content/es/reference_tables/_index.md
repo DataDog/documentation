@@ -3,136 +3,135 @@ aliases:
 - /es/logs/guide/enrichment-tables/
 - /es/logs/guide/reference-tables/
 - /es/integrations/guide/reference-tables
+description: Combina metadatos personalizados con datos de Datadog al subir archivos
+  CSV o conectar almacenamiento en la nube para enriquecer registros, datos de seguridad
+  y análisis.
 further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Uso del procesador de búsquedas para enriquecer logs a partir de una tabla
-    de referencia
+  text: Utiliza el procesador de búsqueda para enriquecer registros a partir de una
+    tabla de referencia
 - link: /logs/explorer/advanced_search#filter-logs-based-on-reference-tables
   tag: Documentación
-  text: Filtrar logs a partir de tablas de referencia
+  text: Filtra registros basados en tablas de referencia
 - link: /sheets/#lookup
   tag: Documentación
-  text: Consulta de hojas
+  text: Búsqueda en Sheets
 - link: /events/pipelines_and_processors/lookup_processor/
   tag: Documentación
-  text: Procesador de búsqueda de eventos
-- link: '/cloud_cost_management/tag_pipelines/#map-multiple-tags'
+  text: Procesador de búsqueda para Eventos
+- link: /cloud_cost_management/tag_pipelines/#map-multiple-tags
   tag: Documentación
-  text: Uso de las tablas de referencia para añadir varias etiquetas (tags) a los
-    datos de costes
+  text: Utiliza tablas de referencia para agregar múltiples etiquetas a los datos
+    de costos
+- link: /metrics/reference_table_joins_with_metrics/
+  tag: Documentación
+  text: Aprende sobre uniones de tablas de referencia con métricas
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
   tag: Blog
-  text: Añade más contexto a tus logs con tablas de referencia
+  text: Agregue más contexto a sus registros con tablas de referencia.
 - link: https://www.datadoghq.com/blog/reference-tables/
   tag: Blog
-  text: Enriquecer tu telemetría existente en Datadog con metadatos personalizados
-    mediante tablas de referencia
+  text: Enriquezca su telemetría existente de Datadog con metadatos personalizados
+    utilizando tablas de referencia.
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/
   tag: Blog
-  text: Añadir más contexto a las detecciones e investigaciones de Cloud SIEM con
-    las tablas de referencia de Datadog
-title: Tablas de referencia
+  text: Agregue más contexto a las detecciones e investigaciones de Cloud SIEM con
+    tablas de referencia de Datadog.
+- link: https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment
+  tag: Blog
+  text: Enriquezca los registros con contexto de CMDB de ServiceNow antes de enrutar
+    a cualquier herramienta de SIEM o de registro.
+- link: https://www.datadoghq.com/blog/observability-pipelines-mssp
+  tag: Blog
+  text: Simplifique la recolección y agregación de registros para MSSPs con Observability
+    Pipelines de Datadog.
+title: Tablas de Referencia
 ---
+## Resumen {#overview}
 
-## Información general
+Las tablas de referencia le permiten combinar metadatos personalizados con la información ya existente en Datadog. Puede definir nuevas entidades, como detalles de clientes, nombres e información de servicios, o direcciones IP, al subir un archivo CSV que contenga una tabla de información. Las entidades están representadas por una clave primaria en una tabla de referencia y los metadatos asociados.
 
-Las tablas de referencia te permiten combinar metadatos personalizados con información ya existente en Datadog. Puedes definir nuevas entidades como detalles de clientes, nombres e información de servicios o direcciones IP cargando un archivo CSV que contenga una tabla de información. Las entidades están representadas por una clave primaria en una tabla de referencia y los metadatos asociados.
+{{< img src="reference_tables/reference_table.png" alt="Una tabla de referencia con datos poblados en las columnas para id de org, nombre de org, org padre, propietario de cuenta y csm" style="width:100%;">}}
 
-{{< img src="reference_tables/reference-table.png" alt="Tabla de referencia con datos rellenados en las columnas de id de organización, nombre de organización, organización principal, propietario de cuenta y csm" style="width:100%;">}}
+Por ejemplo, puede:
 
-Por ejemplo, podrás:
+- **Enriquecer registros y datos de seguridad para investigaciones más rápidas:** Correlacionar registros, trazas y eventos de seguridad con el contexto empresarial actualizado, como nombres de clientes, propietarios de cuentas, inteligencia de amenazas o descripciones de códigos de error, para agilizar la resolución de problemas y el análisis.
+- **Segmentar usuarios y recursos para análisis y gestión de costos específicos:** Agrupar usuarios, clientes o recursos en la nube en segmentos significativos (como niveles de usuario, equipos o unidades de negocio) para un análisis más profundo del producto y una atribución de costos precisa utilizando herramientas como Tag Pipelines.
+- **Mejorar datos para consultas y reportes avanzados:** Unir datos externos de tablas de referencia en Sheets, DDSQL Editor o Notebooks para realizar consultas complejas, agregaciones y construir reportes personalizados sin necesidad de experiencia técnica.
 
-- **Enriquecer los logs y los datos de seguridad para agilizar las investigaciones:** Correlaciona logs, trazas y eventos de seguridad con el contexto empresarial actualizado, como nombres de clientes, propietarios de cuentas, información sobre amenazas o descripciones de códigos de error, para acelerar la resolución de problemas y los análisis.
-- **Agrupar usuarios y recursos para el análisis y la gestión de costes orientados:** Agrupa usuarios, clientes o recursos en la nube en segmentos significativos (como niveles de usuario, equipos o unidades de negocios) para un análisis de productos más profundos y una atribución de costes precisa utilizando herramientas como Tag Pipelines.
-- **Mejorar los datos para realizar consultas e informes avanzados:** Une datos externos de Tablas de referencia en Hojas, Editor DDSQL o Espacios de trabajo de logs para realizar consultas complejas, agregaciones y crear informes personalizados sin conocimientos técnicos.
+## Crear una tabla de referencia {#create-a-reference-table}
 
-## Reglas de validación
-
-Los nombres de las tablas de referencia y los encabezados de las columnas se validan utilizando las siguientes convenciones de nomenclatura y, si es necesario, se actualizan o normalizan automáticamente.
-
-| Regla     | Normalización |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Los nombres y las cabeceras no pueden duplicarse.                                           | Los nombres duplicados se enumeran. Por ejemplo, si `fileid` se utiliza dos veces como nombre, la primera instancia se convierte en `fileid1` y la segunda instancia en `fileid2`. Si se enumera un nombre o encabezado y supera los 56 caracteres, se rechaza y es necesario cambiar su nombre. |
-| Los nombres y encabezados no pueden contener letras mayúsculas.                               | Los nombres con letras mayúsculas se convierten a minúsculas. Esta conversión puede dar lugar a nombres duplicados, que luego se enumeran. Por ejemplo, `Fileid` y `FileID` se convierten en `fileid` y se enumeran en `fileid1` y `fileid2` respectivamente. |
-| Los nombres y los encabezados no pueden contener espacios.                                          | Los espacios que no sean iniciales ni finales se sustituyen por caracteres de subrayado `_`. Se eliminan los espacios iniciales y finales. Por ejemplo, `customer names` se sustituye por `customer_names`. |
-| Los nombres y los encabezados deben empezar por minúscula.                             | Los caracteres en mayúsculas se convierten a minúsculas. Se eliminan los caracteres iniciales que no sean letras. Por ejemplo, `23Two_three` se convierte en `two_three`.   |
-| Los nombres y los encabezados sólo admiten letras minúsculas, números y el carácter `_`. | Los caracteres no admitidos se sustituyen por el carácter de subrayado `_`, a menos que incumpla alguna de las reglas anteriores. En ese caso, los caracteres no admitidos se normalizan mediante la regla correspondiente.               |
-| Los nombres y los encabezados deben tener 56 caracteres o menos.                                  | No se realiza ninguna normalización. Los nombres y los encabezados que tienen más de 56 caracteres se rechazan y es necesario cambiar sus nombres. |
-
-## Crear una tabla de referencia
-
-Datadog admite las siguientes fuentes de datos, incluyendo las integraciones y la carga manual de CSV:
+Datadog admite las siguientes fuentes de datos, incluidas integraciones y carga manual de archivos CSV:
 
 {{< tabs >}}
-{{% tab "Cloud storage" %}}
+{{% tab "Carga manual" %}}
 
-{{% collapse-content title="Carga manual" level="h4" expanded=true %}}
+Haga clic en **Nueva tabla de referencia +**, luego cargue un archivo CSV, nombre las columnas apropiadas y defina la clave primaria para las búsquedas.
 
-Haz clic en **New Reference Table +** (Nueva tabla de referencia +) y luego carga un archivo CSV. Asigna un nombre a las columnas correspondientes y define la clave principal para las búsquedas.
+{{< img src="reference_tables/schema_setup.png" alt="La sección Definir el Esquema muestra una tabla con org_id marcado como la clave primaria y columnas con datos para id de org, nombre de org, org padre, propietario de cuenta y csm. " style="width:100%;">}}
 
-{{< img src="reference_tables/enrichment-table-setup.png" alt="Sección Definir elesquema que muestra una tabla con org_id marcado como clave primaria y las columnas con datos de id de organización, nombre de organización, organización principal, propietario de cuenta y csm" style="width:100%;">}}
+**Nota**: El método de carga manual de CSV admite archivos de hasta 4MB.
 
-**Nota**: El método de carga manual de CSV admite archivos de hasta 4 MB.
-
-{{% /collapse-content %}}
+{{% /tab %}}
+{{% tab "Almacenamiento en la nube" %}}
 
 {{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
 
-Las tablas de referencia pueden extraer automáticamente un archivo CSV de un bucket de Amazon S3 para mantener los datos actualizados. La integración busca cambios en el archivo CSV en S3 y, cuando el archivo se actualiza, sustituye la tabla de referencia con los nuevos datos. Esto también permite la actualización de la API con la API de S3, una vez configurada la tabla de referencia inicial. **Nota**: Las tablas de referencia no se sustituyen si el contenido del archivo CSV no se modifica.
+Las Tablas de Referencia pueden extraer automáticamente un archivo CSV de un bucket de Amazon S3 para mantener sus datos actualizados. La integración busca cambios en el archivo CSV en S3, y cuando el archivo se actualiza, reemplaza la Tabla de Referencia con los nuevos datos. Esto también permite la actualización a través de API con la API de S3 una vez que la Tabla de Referencia inicial está configurada. **Nota**: Las Tablas de Referencia no se reemplazan si el contenido del archivo CSV no ha cambiado.
 
-Para actualizar las tablas de referencia desde S3, Datadog utiliza el rol IAM de tu cuenta AWS que configuraste para la [integración AWS][1]. Si aún no has creado ese rol, [sigue estos pasos][2] para hacerlo. Para permitir que ese rol actualice tus tablas de referencia, agregue la siguiente declaración de permiso a tus políticas IAM. Asegúrate de editar los nombres de los buckets para que coincidan con tu entorno.
+Para actualizar las Tablas de Referencia desde S3, Datadog utiliza el rol IAM en su cuenta de AWS que configuró para la [integración de AWS][1]. Si aún no ha creado ese rol, [siga estos pasos][2] para hacerlo. Para permitir que ese rol actualice sus Tablas de Referencia, agregue la siguiente declaración de permiso a sus políticas IAM. Asegúrese de editar los nombres de los buckets para que coincidan con su entorno.
 
-**Nota**: Si utilizas el cifrado del lado del servidor, puedes cargar tablas de referencia cifradas con claves gestionadas por Amazon S3 (SSE-S3) o claves del servicio AWS Key Management (SSE-KMS).
+**Nota**: Si utiliza cifrado del lado del servidor, puede cargar Tablas de Referencia cifradas con claves gestionadas por Amazon S3 (SSE-S3) o claves del Servicio de Gestión de Claves de AWS (SSE-KMS).
 
 ```json
 {
-    "Statement": [
-        {
-            "Sid": "EnrichmentTablesS3",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                // Grant KMS decrypt permissions if uploading KMS-encrypted object
-                // "kms:Decrypt",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::<MY_BUCKET_NAME_1/*>",
-                "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-            ]
-        }
-    ],
-    "Version": "2012-10-17"
+	"Statement": [
+		{
+			"Sid": "EnrichmentTablesS3",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				// Grant KMS decrypt permissions if uploading KMS-encrypted object
+				// "kms:Decrypt",
+				"s3:ListBucket"
+			],
+			"Resource": [
+				"arn:aws:s3:::<MY_BUCKET_NAME_1/*>",
+				"arn:aws:s3:::<MY_BUCKET_NAME_2>"
+			]
+		}
+	],
+	"Version": "2012-10-17"
 }
 ```
-#### Definir la tabla
+#### Defina la tabla {#define-the-table}
 
-Haz clic en **New Reference Table +** (Nueva tabla de referencia +), selecciona Amazon S3, rellena todos los campos, haz clic para importar y define la clave principal para las búsquedas.
+Haga clic en **Nueva Tabla de Referencia +**, luego agregue un nombre, seleccione Amazon S3, complete todos los campos, haga clic en importar y defina la clave primaria para las búsquedas.
 
-{{< img src="reference_tables/configure-s3-reference-table.png" alt="Sección Cargar tus datos con el cuadro Amazon S3 seleccionado y los datos de cuenta, bucket y ruta de AWS rellenados" style="width:100%;">}}
+{{< img src="reference_tables/s3_table.png" alt="La sección de carga de sus datos con el mosaico de Amazon S3 seleccionado y datos completados para la Cuenta de AWS, Bucket y Ruta" style="width:100%;">}}
 
-**Nota**: El método de carga desde un bucket S3 admite archivos de hasta 200 MB.
+**Nota**: El método de carga desde un bucket de S3 admite archivos de hasta 200MB.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/es/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 
-{{% /collapse-content %}} 
-{{% collapse-content title="Azure Storage" level="h4" id="azure-storage" %}}
+{{% /collapse-content %}}
+{{% collapse-content title="Almacenamiento de Azure" level="h4" id="azure-storage" %}}
 
-1. Si aún no lo has hecho, configura la [integración Azure][1] dentro de la suscripción que contiene la cuenta de almacenamiento desde la que quieres importar tu tabla de referencia. Esto implica la [creación de un registro de aplicación con el que Datadog pueda][2] integrarse.
-2. En el portal Azure, selecciona la cuenta de almacenamiento que almacena los archivos de tu tabla de referencia.
-3. Dentro de tu cuenta de almacenamiento, ve a **Control de acceso (IAM)** y selecciona **Añadir** > **Añadir asignación de roles**.
-4. Introduce y selecciona el rol **Lector de datos blob de almacenamiento**. El rol de [lector de datos blob de almacenamiento][3] permite a Datadog leer y listar contenedores y blobs de almacenamiento.
-5. En la pestaña **Miembros**, haz clic en **+ Select members** (+ Seleccionar miembros). Selecciona el registro de la aplicación que creaste en el paso 1.
+1. Si aún no lo ha hecho, configure la [integración de Azure][1] dentro de la suscripción que tiene la cuenta de almacenamiento desde la cual desea importar su Tabla de Referencia. Esto implica [crear un registro de aplicación con el que Datadog pueda][2] integrarse.
+2. En el Portal de Azure, seleccione la cuenta de almacenamiento que almacena sus archivos de Tabla de Referencia.
+3. Dentro de su cuenta de almacenamiento, navegue a **Control de Acceso (IAM)** y seleccione **Agregar** > **Agregar Asignación de Rol**.
+4. Ingrese y seleccione el **Rol de Lector de Datos de Blob de Almacenamiento**. El [rol de Lector de Datos de Blob de Almacenamiento][3] permite a Datadog leer y listar contenedores de almacenamiento y blobs.
+5. En la pestaña **Miembros**, haga clic en **+ Seleccionar miembros**. Seleccione el registro de aplicación que creó en el Paso 1.
 
-   {{< img src="reference_tables/add_members.png" alt="Sección Miembros en el portal Azure que muestra un miembro seleccionado y los datos de nombre, id de objeto y tipo rellenados" style="width:85%;">}}
+   {{< img src="reference_tables/add_members.png" alt="La sección de Miembros en el Portal de Azure donde se selecciona un miembro y se completan los datos para el Nombre, ID de Objeto y Tipo" style="width:85%;">}}
 
-Después de revisar y asignar el rol, puedes importar a las tablas de referencia desde Azure. La actualización de la configuración de Azure en Datadog puede tardar unos minutos.
+Después de revisar y asignar el rol, puede importar a las tablas de referencia desde Azure. Puede tardar unos minutos en que su configuración de Azure se actualice en Datadog.
 
-{{< img src="reference_tables/azure_storage.png" alt="Cuadro de Azure Storage en la sección Cargar o importar datos del flujo de trabajo de una nueva tabla de referencia" style="width:80%;">}}
+{{< img src="reference_tables/azure_table.png" alt="Un mosaico de Almacenamiento de Azure en la sección de Carga o importación de datos de un nuevo flujo de trabajo de tabla de referencia" style="width:80%;">}}
 
-Para obtener más información, consulta la [documentación de la integración Azure][4].
+Para más información, consulte la [documentación de integración de Azure][4].
 
 **Nota**: La carga desde el almacenamiento de objetos en la nube admite archivos de hasta 200 MB.
 
@@ -141,30 +140,30 @@ Para obtener más información, consulta la [documentación de la integración A
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
 [4]: /es/integrations/azure/
 
-{{% /collapse-content %}} 
-{{% collapse-content title="Google Cloud storage" level="h4" id="google-cloud-storage" %}}
+{{% /collapse-content %}}
+{{% collapse-content title="Almacenamiento de Google Cloud" level="h4" id="google-cloud-storage" %}}
 
-### Google Cloud Storage
+### Almacenamiento de Google Cloud {#google-cloud-storage}
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">Las tablas de referencia no están disponibles para el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">Las Tablas de Referencia no están disponibles para su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
-1. Si no has configurado la integración Google Cloud con Datadog o si estás utilizando archivos de ID de proyectos Google legacy (los proyectos legacy se indican en el cuadro de tu integración GCP), sigue las instrucciones para configurar la [integración Google Cloud Platform][1]. Esto implica la creación de una [cuenta de servicio Google Cloud][2].
+1. Si no ha configurado una integración de Google Cloud con Datadog o está utilizando archivos de ID de proyecto de Google heredados (los proyectos heredados se indican en su mosaico de integración de GCP), siga las instrucciones para configurar la [integración de Google Cloud Platform][1]. Esto implica crear una [cuenta de servicio de Google Cloud][2].
 
-1. Desde la consola de Google Cloud, ve a la página **Cloud Storage**.
+1. Desde la consola de Google Cloud, navegue a la página de **Almacenamiento en la Nube**.
 
-1. Busca el bucket al que quieres conceder acceso y haz clic en él.
+1. Encuentre el bucket al que le gustaría otorgar acceso y haga clic en él.
 
-1. Haz clic en la pestaña **Permisos**. En "Ver por elementos principales", haz clic en el botón **Grant Access** (Conceder acceso).
+1. Haga clic en la pestaña **Permisos**. Bajo "Ver por Principales", haga clic en el botón **Otorgar Acceso**.
 
-1. En la ventana que aparece, en el campo "Nuevos elementos principales", introduce el correo electrónico de la cuenta de servicio que creaste y añadiste al cuadro de GCP en el paso 1. En "Asignar roles", selecciona el rol **Visor de objetos de almacenamiento** y haz clic en **Save** (Guardar).
+1. En la ventana que aparece, en el campo "Nuevos principales", ingrese el correo electrónico de la cuenta de servicio que creó y agregó al mosaico de GCP en el Paso 1. Bajo "Asignar roles", seleccione el rol de **Visualizador de Objetos de Almacenamiento**. Haga clic en **Guardar**.
 
-{{< img src="reference_tables/grant_access.png" alt="Consola de Google Cloud que muestra la configuración para conceder acceso" style="width:100%;" >}}
+{{< img src="reference_tables/grant_access.png" alt="Consola de Google Cloud mostrando la configuración para otorgar acceso" style="width:100%;" >}}
 
-Después de revisar y asignar el rol, puedes importar a las tablas de referencia desde Google Cloud La actualización de la configuración en Datadog puede tardar unos minutos.
+Después de revisar y asignar el rol, puede importar a las tablas de referencia desde Google Cloud. Puede tardar unos minutos en que su configuración se actualice en Datadog.
 
-{{< img src="reference_tables/gcp_upload_import_ui.png" alt="Seleccionar Almacenamiento GCP en Cargar o importar datos al crear una nueva tabla de referencia" style="width:100%;" >}}
+{{< img src="reference_tables/gcp_table.png" alt="Seleccione Almacenamiento de GCP en Cargar o importar datos al crear una nueva tabla de referencia." style="width:100%;" >}}
 
 **Nota**: La carga desde el almacenamiento de objetos en la nube admite archivos de hasta 200 MB.
 
@@ -172,115 +171,145 @@ Después de revisar y asignar el rol, puedes importar a las tablas de referencia
 [2]: /es/integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /collapse-content %}}
+{{% collapse-content title="Terraform" level="h4" id="terraform" %}}
+
+Utilice el recurso [`datadog_reference_table`][9] para gestionar tablas de referencia como infraestructura como código. Configure el recurso con el esquema de su tabla, claves primarias y detalles de acceso al almacenamiento en la nube.
+
+**Nota**: Terraform soporta los mismos límites de tamaño de archivo que las cargas de almacenamiento en la nube. Consulte [límites de la tabla de referencia](#reference-table-limits) para más detalles.
+
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/reference_table
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Integraciones" %}}
+{{% tab "API" %}}
+
+Cree tablas de referencia programáticamente utilizando la [API de Datadog][8].
+
+Utilice el [punto final Crear Tabla de Referencia][10] para crear tablas de referencia desde almacenamiento en la nube o archivos locales.
+- Para fuentes de almacenamiento en la nube (S3, Azure, GCS), proporcione `access_details` en `file_metadata` apuntando a un archivo CSV en el almacenamiento en la nube.
+- Para archivos locales, llame a `POST /api/latest/reference-tables/uploads` para obtener un ID de carga y cargue sus datos CSV. Luego, llame al punto de conexión Crear Tabla de Referencia con el `upload_id` en `file_metadata`.
+
+**Nota**: La API soporta los mismos límites de tamaño de archivo que las cargas de almacenamiento en la nube. Consulte [límites de la tabla de referencia](#reference-table-limits) para más detalles.
+
+[8]: /es/api/latest/reference-tables/
+[10]: /es/api/latest/reference-tables/#create-reference-table
+
+{{% /tab %}}
+{{% tab "Integrations" %}}
 
 {{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Esta tabla de referencia puede utilizarse para añadir atributos adicionales a logs con el [Procesador de búsquedas][1].
+Esta Tabla de Referencia puede ser utilizada para agregar atributos adicionales a los registros con el [Procesador de Búsqueda][1].
 
-## Reglas de validación
+## Reglas de validación {#validation-rules}
 
-Los nombres de las tablas de referencia y los encabezados de las columnas se validan utilizando las siguientes convenciones de nomenclatura y, si es necesario, se actualizan o normalizan automáticamente.
+Los nombres de las Tablas de Referencia y los encabezados de las columnas son validados utilizando las siguientes convenciones de nomenclatura y se actualizan o normalizan automáticamente, si es necesario.
 
 | Regla     | Normalización |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Los nombres y las cabeceras no pueden duplicarse.                                           | Los nombres duplicados se enumeran. Por ejemplo, si `fileid` se utiliza dos veces como nombre, la primera instancia se convierte en `fileid1` y la segunda instancia en `fileid2`. Si se enumera un nombre o encabezado y supera los 56 caracteres, se rechaza y es necesario cambiar su nombre. |
-| Los nombres y encabezados no pueden contener letras mayúsculas.                               | Los nombres con letras mayúsculas se convierten a minúsculas. Esta conversión puede dar lugar a nombres duplicados, que luego se enumeran. Por ejemplo, `Fileid` y `FileID` se convierten en `fileid` y se enumeran en `fileid1` y `fileid2` respectivamente. |
-| Los nombres y los encabezados no pueden contener espacios.                                          | Los espacios que no sean iniciales ni finales se sustituyen por caracteres de subrayado `_`. Se eliminan los espacios iniciales y finales. Por ejemplo, `customer names` se sustituye por `customer_names`. |
-| Los nombres y los encabezados deben empezar por minúscula.                             | Los caracteres en mayúsculas se convierten a minúsculas. Se eliminan los caracteres iniciales que no sean letras. Por ejemplo, `23Two_three` se convierte en `two_three`.   |
-| Los nombres y los encabezados sólo admiten letras minúsculas, números y el carácter `_`. | Los caracteres no admitidos se sustituyen por el carácter de subrayado `_`, a menos que incumpla alguna de las reglas anteriores. En ese caso, los caracteres no admitidos se normalizan mediante la regla correspondiente.               |
-| Los nombres y los encabezados deben tener 56 caracteres o menos.                                  | No se realiza ninguna normalización. Los nombres y los encabezados que tienen más de 56 caracteres se rechazan y es necesario cambiar sus nombres. |
+| Los nombres y encabezados no pueden ser duplicados.											| Los nombres duplicados son enumerados. Por ejemplo, si `fileid` se usa dos veces como nombre, la primera instancia se convierte en `fileid1` y la segunda instancia se convierte en `fileid2`. Si un nombre o encabezado está enumerado y excede los 56 caracteres, es rechazado y necesita ser renombrado. |
+| Los nombres y encabezados no pueden contener letras mayúsculas. 								| Los nombres con letras mayúsculas se convierten a minúsculas. Esta conversión puede resultar en nombres duplicados, que luego son enumerados. Por ejemplo, `Fileid` y `FileID` se convierten en `fileid` y son enumerados como `fileid1` y `fileid2` respectivamente. |
+| Los nombres y encabezados no pueden contener espacios. 											| Los espacios que no son iniciales o finales son reemplazados por caracteres de subrayado `_`. Los espacios iniciales y finales son eliminados. Por ejemplo, `customer names` es reemplazado por `customer_names`. |
+| Los nombres y encabezados deben comenzar con una letra minúscula. 							| Los caracteres en mayúscula se convierten a minúsculas. Los caracteres no alfabéticos al inicio son eliminados. Por ejemplo, `23Two_three` se convierte en `two_three`.	|
+| Los nombres y encabezados solo admiten letras minúsculas, números y el carácter `_`. | Los caracteres no soportados son reemplazados por el carácter guion bajo `_`, a menos que rompa alguna de las reglas anteriores. En ese caso, los caracteres no soportados son normalizados por la regla respectiva.				|
+| Los nombres y encabezados deben tener 56 caracteres o menos. 									| No se realiza ninguna normalización. Los nombres y encabezados que tienen más de 56 caracteres son rechazados y necesitan ser renombrados. |
 
-## Modificar una tabla de referencia
+## Modificar una Tabla de Referencia {#modify-a-reference-table}
 
-Para modificar una tabla de referencia existente con nuevos datos, selecciona una tabla y haz clic en **Update Config** (Actualizar configuración) en la esquina superior derecha.
-El CSV seleccionado se inserta en la tabla, lo que significa que:
+Para modificar una Tabla de Referencia existente con nuevos datos, seleccione una tabla y haga clic en **Update Config** en la esquina superior derecha.
+El CSV seleccionado se inserta o actualiza en la tabla, lo que significa que:
 
-* Se actualizan todas las filas existentes con la misma clave primaria
-* Se añaden todas las filas nuevas
-* Se eliminan todas las filas antiguas que no están en el nuevo archivo
+* Todas las filas existentes con la misma clave primaria son actualizadas
+* Todas las nuevas filas son añadidas
+* Todas las filas antiguas que no están en el nuevo archivo son eliminadas
 
-Una vez guardada la tabla, las filas insertadas se procesan de forma asíncrona y se actualizan en la vista previa. La actualización puede tardar hasta 10 minutos en completarse.
+Una vez que la tabla es guardada, las filas insertadas son procesadas de manera asíncrona y actualizadas en la vista previa. Puede tardar hasta 10 minutos para que la actualización se complete.
 
-## Eliminar una tabla de referencia
+## Exportar una tabla de referencia {#export-a-reference-table}
 
-Para eliminar una tabla de referencia, selecciona una tabla, haz clic en el icono del engranaje en la esquina superior derecha y luego haz clic en **Delete Table** (Eliminar tabla).
-Se eliminará la tabla junto a todas las filas asociadas.
+Para exportar una Tabla de Referencia, seleccione una tabla y haga clic en **Query in DDSQL Editor**. Desde allí, puede usar el [Editor DDSQL][7] para exportar a CSV, tableros y más.
 
-Si hay un Procesador de búsquedas que utiliza una tabla de referencia para el enriquecimiento de los logs, el enriquecimiento se detiene. El enriquecimiento puede tardar hasta 10 minutos en detenerse.
+{{< img src="reference_tables/query_ddsql.png" alt="Vista previa de la tabla con un botón azul etiquetado Consulta en el Editor DDSQL posicionado sobre los resultados" style="width:100%;" >}}
 
-## Monitorizar la actividad de una tabla de referencia
+## Eliminar una Tabla de Referencia {#delete-a-reference-table}
 
-Puedes monitorizar la actividad de una tabla de referencia con [Audit Trail][2] o [Change Events][3]. Para ver el registro de auditoría y los eventos de cambios de una tabla de referencia específica, selecciona la tabla y haz clic en el icono Configuración junto a **Update Config** (Actualizar configuración). Para ver el registro de auditoría, necesitas permisos de gestión de la organización.
+Para eliminar una Tabla de Referencia, seleccione una tabla, haga clic en el ícono de engranaje en la esquina superior derecha y luego haga clic en **Eliminar Tabla**.
+La tabla y todas las filas asociadas son eliminadas.
 
-### Audit Trail
+Si hay un Procesador de Búsqueda utilizando una Tabla de Referencia para el enriquecimiento de registros, entonces el enriquecimiento se detiene. Puede tardar hasta 10 minutos en detenerse el enriquecimiento.
 
-Utiliza el registro de auditoría de las tablas de referencia para realizar un seguimiento de las acciones activadas por el usuario. Los eventos de Audit Trail se envían cuando un usuario carga o importa inicialmente un archivo CSV o cuando un usuario crea, modifica o elimina una tabla de referencia.
+## Monitorear actividad de tabla de referencia {#monitor-reference-table-activity}
 
-El tipo de recurso `reference_table_file` muestra eventos de importación/carga y el tipo de recurso `reference_table` muestra eventos de la tabla de referencia. El registro de auditoría permite observar el contenido de una tabla de referencia.
+Puede monitorear la actividad de la Tabla de Referencia con [Audit Trail][2] o [Eventos de Cambio][3]. Para ver el Audit Trail y los eventos de cambio para una tabla de referencia específica, seleccione la tabla y haga clic en el ícono de Configuración junto a **Actualizar Configuración**. Necesita permisos de gestión de la organización para ver el Audit Trail.
 
-### Eventos de cambios
+### Audit Trail {#audit-trail}
 
-Utiliza los eventos de cambios de las tablas de referencia para realizar un seguimiento de las acciones automatizadas o activadas por el usuario. Se envían cuando se importa un archivo de nube desde un usuario o una actualización automática. (La carga de un archivo local no genera un evento de cambio). Si bien los eventos pueden realizar un seguimiento de las acciones activadas por el usuario, se utilizan principalmente para realizar un seguimiento de las importaciones activadas cuando una tabla de referencia extrae automáticamente un nuevo archivo CSV.
+Utilice el Audit Trail para las Tablas de Referencia para rastrear acciones desencadenadas por el usuario. Los eventos del Audit Trail se envían cuando un usuario carga o importa inicialmente un archivo CSV, o cuando un usuario crea, modifica o elimina una Tabla de Referencia.
 
-Los eventos contienen información sobre el estado de éxito, la ruta y el nombre de la tabla de la importación. Si se produce un error, se proporciona información sobre el tipo de error.
+El `reference_table_file` tipo de activo muestra eventos de importación/carga y el `reference_table` tipo de activo muestra eventos de tabla de referencia. El Audit Trail proporciona visibilidad sobre el contenido de una tabla de referencia.
 
-### Alertas
+### Eventos de cambio {#change-events}
 
-Para recibir alertas sobre los errores encontrados durante las importaciones, utiliza [monitores de eventos][4] para eventos de cambios de la tabla de referencia. Los eventos de cambios de la tabla de referencia se envían desde la fuente `reference_tables`.
+Utilice eventos de cambio para las Tablas de Referencia para rastrear acciones automatizadas o desencadenadas por el usuario. Se envían cuando un archivo en la nube es importado por un usuario o por una actualización automática. (Cargar un archivo local no genera un evento de cambio.) Mientras que los eventos pueden rastrear acciones desencadenadas por el usuario, se utilizan principalmente para rastrear importaciones desencadenadas cuando una tabla de referencia extrae automáticamente un nuevo archivo CSV.
 
-Puedes crear monitores a partir de la pestaña **Monitores** o hacer clic en el icono de configuración situado junto a **New Reference Table +** (Nueva tabla de referencia +) para generar un monitor ya rellenado.
+Los eventos contienen información sobre el estado de éxito, la ruta y el nombre de la tabla de la importación. Si ocurre un error, se proporciona información sobre el tipo de error.
 
-## Límites de la tabla de referencia
-- Una tabla de referencia puede tener hasta 50 columnas
-- El tamaño de un archivo de tabla de referencia cargado a través de la interfaz de usuario puede ser de hasta 4 MB
-- El tamaño de un archivo de tabla de referencia cargado a través de un archivo de bucket de nube puede ser de hasta 200 MB
-- El tamaño de un archivo de tabla de referencia cargado a través de una integración puede ser de hasta 200 MB
-- Puedes tener hasta 100 tablas de referencia por organización
+### Alerting {#alerting}
 
-Si tienes un caso de uso que supera estos límites, ponte en contacto con el [servicio de asistencia][5].
+Para ser alertado sobre errores encontrados durante las importaciones, utilice [Monitores de Eventos][4] para eventos de cambio de la Tabla de Referencia. Los eventos de cambio de la Tabla de Referencia se envían desde la `reference_tables` fuente.
 
-## Frecuencia de actualización automática
+Puede crear monitores desde la pestaña **Monitores**, o hacer clic en el ícono de Configuración junto a **Nueva Tabla de Referencia +** para generar un monitor prellenado.
 
-Las tablas de referencia pueden actualizarse automáticamente, en función de la fuente de los datos:
+## Límites de la Tabla de Referencia {#reference-table-limits}
+Una Tabla de Referencia puede tener hasta 50 columnas.
+El tamaño de un archivo de Tabla de Referencia subido a través de la interfaz de usuario puede ser de hasta 4 MB.
+El tamaño de un archivo de Tabla de Referencia subido a través de un archivo de bucket en la nube puede ser de hasta 200 MB.
+El tamaño de un archivo de Tabla de Referencia subido a través de una integración puede ser de hasta 200 MB.
+- Puede tener hasta 100 Tablas de Referencia por organización.
 
-- **Almacenamiento de archivos en la nube** (Amazon S3, Azure Storage, Google Cloud Storage): cada 5 minutos
-- **Integraciones**: cada hora
-- **Carga manual de archivos CSV**: no se admiten actualizaciones automáticas
+Contacte a [soporte][5] si tiene un caso de uso que excede estos límites.
 
-## Permisos
+## Frecuencia de actualización automática {#automatic-update-frequency}
 
-### Acceso basado en roles
-Para ver las tablas de referencia, los usuarios necesitan el permiso `reference_tables_read`. Para crear o modificar Tablas de referencia, los usuarios necesitan el permiso `reference_tables_write`.
+Las Tablas de Referencia pueden actualizarse automáticamente, dependiendo de la fuente de datos:
 
-Para obtener más información sobre permisos, consulta la [documentación RBAC][6].
+- **Almacenamiento de archivos en la nube** (Amazon S3, Azure Storage, Google Cloud Storage): Cada 5 minutos
+- **Integrations**: Cada hora.
+- **Subidas manuales de CSV**: Las actualizaciones automáticas no son compatibles
 
-### Controles de acceso detallados
-Restringe el acceso a tablas individuales especificando una lista de equipos, roles o usuarios que pueden verlas o editarlas.
+## Permisos {#permissions}
 
-{{< img src="reference_tables/granular_access_permissions.png" alt="La opción del engranaje de permisos que permite configurar permisos de acceso granulares en una tabla" style="width:100%;">}}
+### Acceso basado en roles {#role-based-access}
+Para ver Tablas de Referencia, los usuarios requieren el `reference_tables_read` permiso. Para crear o modificar Tablas de Referencia, los usuarios requieren el `reference_tables_write` permiso.
 
-1. Haz clic en una tabla para abrir su página de información.
-2. Haz clic en el icono de engranaje de la esquina superior derecha.
-3. Selecciona **Permisos** en el menú.
-4. Haz clic en **Restrict Access** (Restringir el acceso).
-5. Utiliza el menú desplegable para seleccionar uno o más equipos, roles o usuarios.
-6. Haz clic en **Add** (Añadir).
-7. Selecciona **Editor** o **Visor**.
-8. Haz clic en **Save** (Guardar) para aplicar los cambios.
+Para más información sobre permisos, consulte la [documentación de RBAC][6].
 
-## Referencias adicionales
+### Controles de acceso granulares {#granular-access-controls}
+Restringa el acceso a tablas individuales especificando una lista de equipos, roles o usuarios que están autorizados a ver o editarlas.
+
+{{< img src="reference_tables/granular_permissions.png" alt="La opción de engranaje de Permisos que admite la configuración de permisos de acceso granulares en una tabla" style="width:100%;">}}
+
+1. Haga clic en una tabla para abrir su página de detalles.
+2. Haga clic en el ícono de engranaje en la esquina superior derecha.
+3. Seleccione **Permisos** del menú.
+4. Haga clic en **Restringir Acceso**.
+5. Utilice el menú desplegable para seleccionar uno o más equipos, roles o usuarios.
+6. Haga clic en **Agregar**.
+7. Seleccione ya sea **Editor** o **Viewer**.
+8. Haga clic en **Guardar** para aplicar los cambios.
+
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/logs/log_configuration/processors/#lookup-processor
+[1]: /es/logs/log_configuration/processors/lookup_processor/
 [2]: /es/account_management/audit_trail/
 [3]: /es/events/
 [4]: /es/monitors/types/event/
 [5]: /es/help/
 [6]: /es/account_management/rbac/permissions/#reference-tables
+[7]: /es/ddsql_editor/#save-and-share-queries

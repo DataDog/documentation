@@ -26,7 +26,7 @@ Here is an example of a monitor when daylight savings time is being taken into a
 
 ## UI
 
-To update an anomaly detection monitor to account for a local timezone in the UI, navigate to **[New monitor > Anomaly monitor][1]**. Under the *Set Alert Conditions* section, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked
+To update an anomaly detection monitor to account for a local timezone in the UI, navigate to [{{< ui >}}New monitor{{< /ui >}} > {{< ui >}}Anomaly monitor{{< /ui >}}][1]. Under the {{< ui >}}Set Alert Conditions{{< /ui >}} section, open the {{< ui >}}Advanced{{< /ui >}} panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked
 
 {{< img src="monitors/guide/how_to_update_anomaly_monitor_timezone/daylight_savings_toggle.png" alt="DST toggle option in the UI" >}}
 

@@ -58,7 +58,7 @@ With [Distributed Tracing][5], you can connect your serverless traces to metrics
 
 AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS.
 
-Monitor metrics and logs from the [AWS Step Functions Integration][13] to view cloud-native telemetry within the Serverless app view.
+Monitor metrics and logs from the [AWS Step Functions Integration][13] to view cloud-native telemetry within the {{< ui >}}Serverless{{< /ui >}} app view.
 
 Identify bugs and bottlenecks with [execution traces][14]. Traces for step functions can be generated from Step Function logs and provide granular execution information, including the state machine execution path, inputs and outputs for each step, and step execution length.
 
@@ -68,7 +68,7 @@ Enhanced Step Function metrics, which appear in Datadog with the prefix `aws.sta
 
 The [Datadog extension for Azure App Service][7] provides tracing capabilities for Azure Web Apps.
 
-Use the [Azure App Service view][8] to:
+Use the [{{< ui >}}Azure App Service{{< /ui >}} view][8] to:
 
 - Quickly identify apps with high latency or errors
 

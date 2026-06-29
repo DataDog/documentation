@@ -65,15 +65,15 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-After you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Optimization settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
+After you have set up your Datadog library for Test Impact Analysis, configure it from [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
 Test Impact Analysis can be configured at three levels, and lower levels can override values from the level above:
 
-- **Organization defaults**: Apply to every repository unless overridden. Open **CI/CD Optimization** > **Settings** > **Repositories**, then select the **Organization** tab.
-- **Repository**: Overrides organization defaults for a specific repository. Open **CI/CD Optimization** > **Settings** > **Repositories**, select the **Repository-specific** tab, and choose a repository.
+- **Organization defaults**: Apply to every repository unless overridden. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, then select the {{< ui >}}Organization{{< /ui >}} tab.
+- **Repository**: Overrides organization defaults for a specific repository. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, select the {{< ui >}}Repository-specific{{< /ui >}} tab, and choose a repository.
 - **Test service**: Overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
 
-At the repository and test service levels, each setting can either **Inherit** the value from the level above or be set to a **Custom** value at the current level.
+At the repository and test service levels, each setting can either {{< ui >}}Inherit{{< /ui >}} the value from the level above or be set to a {{< ui >}}Custom{{< /ui >}} value at the current level.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." style="width:80%" >}}
 

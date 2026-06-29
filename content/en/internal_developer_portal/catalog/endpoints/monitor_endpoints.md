@@ -1,5 +1,6 @@
 ---
 title: Monitoring Endpoints
+description: Create monitors and Synthetic API tests for endpoints to track health, detect performance issues, and maintain reliability standards.
 further_reading:
 - link: "/tracing/api_catalog/get_started/"
   tag: "Documentation"

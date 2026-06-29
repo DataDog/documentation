@@ -1,5 +1,6 @@
 ---
 title: Homepage
+description: The Internal Developer Portal Homepage gives you a centralized view of your team's entities, GitHub pull requests, Jira tickets, and Datadog Cases in one place.
 aliases:  
 - /software_catalog/developer_homepage  
 - /internal_developer_portal/developer_homepage  

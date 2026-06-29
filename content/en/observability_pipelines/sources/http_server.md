@@ -31,7 +31,7 @@ After you select the HTTP/S Server source in the pipeline UI:
 
 1. Enter the identifier for your HTTP/S Server address. If you leave it blank, the [default](#secret-defaults) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
-1. Select your authorization strategy. If you selected **Plain**:
+1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for your HTTP/S Server username and password. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 

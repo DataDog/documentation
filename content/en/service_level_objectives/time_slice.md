@@ -33,20 +33,20 @@ You can create a Time Slice SLO through the following ways:
 
 {{< img src="service_management/service_level_objectives/time_slice/time-slice-creation.png" alt="Configuration options to create a Time Slice SLO" style="width:90%;" >}}
 
-1. Navigate to [**SLOs**][1].
-2. Click **+ New SLO** to open up the Create SLO page.
-3. Select **By Time Slices** to define your SLO measurement. 
+1. Navigate to [{{< ui >}}SLOs{{< /ui >}}][1].
+2. Click {{< ui >}}+ New SLO{{< /ui >}} to open up the Create SLO page.
+3. Select {{< ui >}}By Time Slices{{< /ui >}} to define your SLO measurement. 
 4. Define your uptime condition by choosing a metric query, comparator and threshold. For example, to define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
 5. Configure your SLO to use 1 or 5 minute time slices to calculate uptime.
 6. Choose your timeframe and target
 7. Name and tag your SLO.
-8. Click **Create**.
+8. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Export an existing monitor SLO
 
 <div class="alert alert-info">Only single metric monitor-based SLOs can be exported. SLOs based on non-metric monitors or multiple monitors cannot be exported.</div>
 
-Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click **Export to Time Slice SLO**.
+Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click {{< ui >}}Export to Time Slice SLO{{< /ui >}}.
 
 {{< img src="service_management/service_level_objectives/time_slice/monitor-time-slice-export.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
 
@@ -54,7 +54,7 @@ Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monit
 
 <div class="alert alert-info">Only metric monitor SLOs appear in the monitor selection for import. </div>
 
-From the **Create or Edit SLO** page, under **Define your SLI**, click **Import from Monitor** and select from the dropdown or search in the monitor selector.
+From the {{< ui >}}Create or Edit SLO{{< /ui >}} page, under {{< ui >}}Define your SLI{{< /ui >}}, click {{< ui >}}Import from Monitor{{< /ui >}} and select from the dropdown or search in the monitor selector.
 
 **Note**: Time Slice SLOs do not support rolling periods. Rolling periods do not transfer from a monitor query to a Time Slice query. 
 

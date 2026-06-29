@@ -66,7 +66,7 @@ The flavor (variant) of the application. For stack trace deobfuscation, this mus
 `firstPartyHosts`
 : Optional  
 **Type**: List&lt;String&gt;  
-A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracinHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
+A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracingHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
 
 `firstPartyHostsWithTracingHeaders`
 : Optional  
@@ -208,9 +208,44 @@ To enable Datadog [distributed tracing][13], you must set the `DatadogConfigurat
 
 - `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
+### Capture resource headers
+
+When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
+
+Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
+
+```dart
+DatadogRumConfiguration(
+  applicationId: '<rum-application-id>',
+  trackResourceHeaders: ResourceHeadersExtractor(),
+)
+```
+
+With no arguments, `ResourceHeadersExtractor` captures a predefined set of safe headers:
+
+| Direction | Headers |
+|-----------|---------|
+| Request | `cache-control`, `content-type` |
+| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
+
+To capture additional headers in addition to the defaults, pass them through `captureHeaders`. To skip the defaults, set `includeDefaults: false`.
+
+```dart
+DatadogRumConfiguration(
+  applicationId: '<rum-application-id>',
+  trackResourceHeaders: ResourceHeadersExtractor(
+    captureHeaders: ['x-request-id', 'x-custom-header'],
+  ),
+)
+```
+
+{% alert level="info" %}
+Sensitive headers, such as tokens and API keys, are filtered out automatically, even if you list them explicitly.
+{% /alert %}
+
 ### Track resources from other packages
 
-While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
+While [Datadog Tracking HTTP Client][10] can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
 
 ## Enrich user sessions
 

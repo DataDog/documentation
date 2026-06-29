@@ -315,7 +315,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section. See the following examples:
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click {{< ui >}}Use message template variables{{< /ui >}} in the {{< ui >}}Configure notifications & automations{{< /ui >}} section. See the following examples:
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
@@ -384,7 +384,7 @@ For Docs and Links you can also access a specific item with the following syntax
 
 You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click {{< ui >}}{{ Add Variable{{< /ui >}} and select from the expanded menu options.</div>
 
 | Monitor type             | Variable syntax                                         |
 |--------------------------|--------------------------------------------------------|

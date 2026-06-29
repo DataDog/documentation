@@ -201,7 +201,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
     ```
 
 4. [Restart the Agent][4].
-5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
+5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the {{< ui >}}Checks{{< /ui >}} section:
 
     ```text
     =========
