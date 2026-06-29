@@ -728,6 +728,15 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
 
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1121,7 +1130,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][65] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -1177,7 +1186,7 @@ Updates the triage state or assignee of one or more security signals in bulk (up
 ### `search_datadog_security_ioc_indicators`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-List [IoC Explorer][65] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_security_ioc_indicator` for full detail and `update_datadog_security_ioc_indicator_triage` to mark reviewed.
+List [IoC Explorer][67] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_security_ioc_indicator` for full detail and `update_datadog_security_ioc_indicator_triage` to mark reviewed.
 
 - Show me the highest-scoring malicious IP indicators.
 - List IoC indicators in the `residential_proxy` category with a Medium or higher score.
@@ -1186,7 +1195,7 @@ List [IoC Explorer][65] indicators (IPs, domains, URLs, file hashes) matched aga
 ### `get_datadog_security_ioc_indicator`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Retrieve full detail for one [IoC Explorer][65] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
+Retrieve full detail for one [IoC Explorer][67] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
 
 - Get details for the threat indicator `192.0.2.1`.
 - Show me everything we know about `malicious.example.com`.
@@ -1194,7 +1203,7 @@ Retrieve full detail for one [IoC Explorer][65] indicator by value (score, categ
 ### `update_datadog_security_ioc_indicator_triage`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Write`*\
-Set the triage state of an [IoC Explorer][65] indicator.
+Set the triage state of an [IoC Explorer][67] indicator.
 
 - Mark indicator `192.0.2.1` as reviewed.
 - Set `evil-domain.example.com` back to not reviewed.
@@ -1202,7 +1211,7 @@ Set the triage state of an [IoC Explorer][65] indicator.
 ### `get_datadog_security_ioc_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Discover filterable fields and their values for [IoC Explorer][65]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
+Discover filterable fields and their values for [IoC Explorer][67]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
 
 - What fields are available for IoC indicator filters?
 - Show me the available indicator types and how many of each exist.
@@ -1226,6 +1235,34 @@ Retrieves security detection rules. Supports two modes: provide `rule_id` to get
 - Show me detection rules tagged with `source:cloudtrail`.
 - Get the full definition of detection rule `abc-123-def`.
 - What thresholds and group-by fields does this detection rule use?
+
+### `create_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+
+- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
+- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
+- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+
+### `update_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Updates an existing custom detection rule by replacing it entirely. Call `get_datadog_security_detection_rules` first to fetch the current rule body, modify the fields you need, and submit the full updated object. Cannot update Datadog-shipped default rules.
+
+- Enable detection rule `abc-123-def`.
+- Disable the brute force detection rule.
+- Update the threshold on my brute force detection rule from 10 to 20 failed logins.
+- Add a new case to detection rule `abc-123-def` that fires at critical severity.
+- Change the group-by field on this rule from `@usr.ip` to `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Default rules return 403. Each rule is authorized individually; failures appear in `failed_rules` without aborting the batch.
+
+- Delete detection rule `abc-123-def`.
+- Remove these three test detection rules I created earlier.
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
@@ -1335,7 +1372,7 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -1638,4 +1675,6 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
-[65]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[65]: /code_coverage/
+[66]: /delivery_performance/dora_metrics/
+[67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/

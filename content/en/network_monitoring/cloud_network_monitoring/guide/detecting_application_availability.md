@@ -23,7 +23,7 @@ CNM is designed to track traffic between entities, determine which resources are
 
 To examine the a basic traffic flow between entities, take the following steps:
 
-1. On the [Network Analytics page][1], set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow. Here you can observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
+1. On the [Network Analytics page][1], set your {{< ui >}}View clients as{{< /ui >}} and {{< ui >}}View servers as{{< /ui >}} dropdown filters to group by `service` tags to examine a service-to-service flow. Here you can observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_service_service.png" alt="CNM analytics page, grouping by service to service with Client and Server IP highlighted">}}
 
@@ -51,7 +51,7 @@ To analyze the cause of service latency, take the following steps:
 
 3. Click one of the traffic paths on this page to open the side panel. The side panel provides more detailed telemetry to help you further debug your network dependencies. 
 
-4. While on the side panel view, check the **Flows** tab to determine if the communication protocol is TCP or UDP, and review metrics like RTT, Jitter, and packets sent and received. If you're investigating a high retransmit count, this information can help you identify the cause.
+4. While on the side panel view, check the {{< ui >}}Flows{{< /ui >}} tab to determine if the communication protocol is TCP or UDP, and review metrics like RTT, Jitter, and packets sent and received. If you're investigating a high retransmit count, this information can help you identify the cause.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_flows.png" alt="Side panel of a traffic flow, highlighting the Flows tab">}}
 
@@ -59,29 +59,29 @@ To analyze the cause of service latency, take the following steps:
 
 Datadog CNM consolidates relevant distributed traces, logs, and infrastructure data into a single view, allowing you to identify and trace issues back to the originating request from an application.
 
-In the example below, check the **Traces** tab under Network Analytics to view distributed traces of requests between source and destination endpoints, which can help you pinpoint where application-level errors occur.
+In the example below, check the {{< ui >}}Traces{{< /ui >}} tab under Network Analytics to view distributed traces of requests between source and destination endpoints, which can help you pinpoint where application-level errors occur.
 
 To identify if an issue is an application or network issue, take can use the following steps:
 
-1. Navigate to [**Infrastructure** > **Cloud Network** > **Analytics**][1].  
-2. In the **Summary** graphs, click a line of communication that has a lot of volume and high RTT time:
+1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Cloud Network{{< /ui >}} > {{< ui >}}Analytics{{< /ui >}}][1].  
+2. In the {{< ui >}}Summary{{< /ui >}} graphs, click a line of communication that has a lot of volume and high RTT time:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_isolate_series.png" alt="CNM analytics page, clicking on a path with high RTT Time">}}
 
-3. Click **Isolate this series**. This opens a page that allows you to observe the network traffic only on this line of communication.
-4. While on this page, click into one of the network communications paths, then click the **Flows** tab to observe RTT time:
+3. Click {{< ui >}}Isolate this series{{< /ui >}}. This opens a page that allows you to observe the network traffic only on this line of communication.
+4. While on this page, click into one of the network communications paths, then click the {{< ui >}}Flows{{< /ui >}} tab to observe RTT time:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_rtt.png" alt="CNM sidepanel, highlighting the RTT time column">}}
 
    On this page, CNM correlates network metric round-trip time (RTT) with application request latency, to help identify if the issue is a network or application issue. In this particular example, observe that the RTT time is slightly high but has come down over time and needs to be investigated further.  
      
-5. On this same page, click the **Traces** tab and investigate the **Duration** column: 
+5. On this same page, click the {{< ui >}}Traces{{< /ui >}} tab and investigate the {{< ui >}}Duration{{< /ui >}} column: 
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_traces_duration.png" alt="CNM sidepanel, highlighting the Traces tab and duration column">}}
 
    Observe that although network latency (RTT) is high, the application request latency (Duration) is normal, so in this case, the issue is likely network-related, and there's no need to investigate the app code. 
 
-   Conversely, *if network latency is stable but application latency (Duration) is high*, the problem likely stems from the app, and you can explore code-level traces by clicking on one of the service paths in the **Traces** tab to find the root cause, which takes you to the APM flame graph relative to this service:
+   Conversely, *if network latency is stable but application latency (Duration) is high*, the problem likely stems from the app, and you can explore code-level traces by clicking on one of the service paths in the {{< ui >}}Traces{{< /ui >}} tab to find the root cause, which takes you to the APM flame graph relative to this service:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_apm_traces.png" alt="APM flame graph screenshot after clicking on a service from the CNM sidepanel traces tab">}}
 
@@ -93,7 +93,7 @@ For complex networks in large containerized environments, Datadog's Network Map 
 
 To identify if there might be a communication problem with your Kubernetes pods and their underlying services, perform the following steps:
 
-1. On the [Network Map][2], set the **View** dropdown to `pod_name`, the **By** dropdown to "Client Availability Zone", and set the **Metric** dropdown to "Volume Sent" (this is the [metric][6] you want your edges to represent):
+1. On the [Network Map][2], set the {{< ui >}}View{{< /ui >}} dropdown to `pod_name`, the {{< ui >}}By{{< /ui >}} dropdown to {{< ui >}}Client Availability Zone{{< /ui >}}, and set the {{< ui >}}Metric{{< /ui >}} dropdown to {{< ui >}}Volume Sent{{< /ui >}} (this is the [metric][6] you want your edges to represent):
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map.png" alt="CNM Network Map page showing a clustering example">}}
 

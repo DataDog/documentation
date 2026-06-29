@@ -57,9 +57,9 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 **This approach requires no code changes and no manual web server configuration.**
 
-1. Go to the [**Agent Installation**][1] page.
+1. Go to the [{{< ui >}}Agent Installation{{< /ui >}}][1] page.
 2. Select your platform (for example, Linux).
-3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
+3. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, enable {{< ui >}}Real User Monitoring{{< /ui >}} under {{< ui >}}Application Observability{{< /ui >}}.
 
    A RUM application is automatically created for you when you enable this option.
 

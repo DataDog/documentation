@@ -47,13 +47,13 @@ With this information, developers get instant feedback about their tests results
 You can enable test summaries in pull requests with the following steps:
 
 1. Install the [GitHub integration][4]:
-   1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
+   1. Navigate to the {{< ui >}}Configuration{{< /ui >}} tab on the [GitHub integration tile][6] and click {{< ui >}}+ Create GitHub App{{< /ui >}}.
    1. Give the application read and write permissions for pull requests.
-1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][3].
+1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
 1. Choose where to apply the setting:
-   - Select the **Organization** tab to enable PR Comments for every repository by default.
-   - Select the **Repository-specific** tab to enable PR Comments for a single repository.
-1. Under **General**, toggle **PR Comments** on.
+   - Select the {{< ui >}}Organization{{< /ui >}} tab to enable PR Comments for every repository by default.
+   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to enable PR Comments for a single repository.
+1. Under {{< ui >}}General{{< /ui >}}, toggle {{< ui >}}PR Comments{{< /ui >}} on.
 
 {{< img src="ci/enable-settings-github-comments-1.png" alt="The PR Comments toggle on the CI/CD Settings page." style="width:100%;">}}
 
@@ -67,7 +67,7 @@ With Test Optimization, you can create and open pre-filled GitHub issues with re
 
 You can create pre-filled GitHub issues from three areas within Test Optimization:
 
-- [Commit Overview page (from the **Commits** table)](#commit-overview) 
+- [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview) 
 - [Branch Overview page](#branch-overview)
 - [Test Details side panel](#test-details-view)
 
@@ -77,15 +77,15 @@ The overview page for any commit can be discovered through a particular branch o
 
 {{< img src="ci/github_issues_commit_overview_updated.png" alt="Datadog GitHub issues preview" style="width:100%;">}}
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Open issue in GitHub**. 
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Open issue in GitHub{{< /ui >}}. 
 
 #### Branch Overview
-From this page, click on any row in the **Flaky Tests** table and select **Open issue in GitHub**.
+From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Open issue in GitHub{{< /ui >}}.
 
 {{< img src="ci/github_issues_flaky_test_updated.png" alt="Datadog GitHub issues flaky tests table preview" style="width:100%;">}}
 
 #### Test Details View
-From within a specific test run, click the **Actions** button and select **Open issue in GitHub**. 
+From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Open issue in GitHub{{< /ui >}}. 
 
 {{< img src="ci/github_issues_detail_light.png" alt="Datadog GitHub issues test detail view preview" style="width:100%;">}}
 
@@ -107,7 +107,7 @@ When you update the status of a Jira issue, the status in Case Management update
 
 After you have [set up the Jira integration][7], you can create cases from three areas within Test Optimization:
 
-- [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
+- [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)
 - [Test Runs side panel](#test-runs-view)
 
@@ -119,15 +119,15 @@ The overview page for any commit can be discovered through a particular branch o
 
 {{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**. 
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create case{{< /ui >}}. 
 
 #### Branch Overview
-From this page, click on any row in the **Flaky Tests** table and select **Create case**.
+From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create case{{< /ui >}}.
 
 {{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
 
 #### Test Runs View
-From within a specific test run, click the **Actions** button and select **Create case**. 
+From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create case{{< /ui >}}. 
 
 {{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
 
@@ -139,7 +139,7 @@ For more information about configuring the Jira integration, see the [Case Manag
 
 After detecting a failed and/or flaky test within Datadog, you have the option to open that test in GitHub or your IDE to fix it immediately.
 
-Under the **Error Message** section in the **Overview** tab of a test run, click the **View Code** button to view the relevant lines of code for that test within Visual Studio Code, IntelliJ, or GitHub.
+Under the {{< ui >}}Error Message{{< /ui >}} section in the {{< ui >}}Overview{{< /ui >}} tab of a test run, click the {{< ui >}}View Code{{< /ui >}} button to view the relevant lines of code for that test within Visual Studio Code, IntelliJ, or GitHub.
 
 {{< img src="continuous_integration/error_message_code.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
 
@@ -152,7 +152,7 @@ The order of options in this dropdown changes depending on the language your tes
 
 Optionally, you can set up the [GitHub integration][10] to open the source code for a failed or flaky test in GitHub.
 
-Under the **Source Code** section in the **Overview** tab of a test run, click the **View on GitHub** button to view the relevant lines of code for that test within GitHub.
+Under the {{< ui >}}Source Code{{< /ui >}} section in the {{< ui >}}Overview{{< /ui >}} tab of a test run, click the {{< ui >}}View on GitHub{{< /ui >}} button to view the relevant lines of code for that test within GitHub.
 
 {{< img src="continuous_integration/source_code_integration.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
 
@@ -160,8 +160,8 @@ Under the **Source Code** section in the **Overview** tab of a test run, click t
 
 IDE plugins and extensions are required to view your test in your IDE. 
 
-- If you do not have the VS Code extension installed, click **View in VS Code** to open the extension directly in VS Code for installation.
-- If you do not have the IntelliJ plugin installed, click **View in IntelliJ** to get the extension installation. Compatible Datadog versions can be found on the [Plugin Versions page][2].
+- If you do not have the VS Code extension installed, click {{< ui >}}View in VS Code{{< /ui >}} to open the extension directly in VS Code for installation.
+- If you do not have the IntelliJ plugin installed, click {{< ui >}}View in IntelliJ{{< /ui >}} to get the extension installation. Compatible Datadog versions can be found on the [Plugin Versions page][2].
 
 ## Further reading
 
