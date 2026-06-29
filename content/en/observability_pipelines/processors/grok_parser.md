@@ -16,7 +16,7 @@ further_reading:
 {{< product-availability >}}
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Using per-rule filters and generating parsing rules with AI are in Preview. Contact your account manager to request access.
+Per-rule filters and AI-generated parsing rules are in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview
@@ -70,6 +70,7 @@ To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing 
 {{< img src="observability_pipelines/processors/grok_parser_create_rule.png" alt="The Create Parsing Rule modal in the Grok Parser processor." style="width:50%;" >}}
 
 If a log is sent to the parser but is not parsed by any rules, the Worker generates a log with the error: `The parser failed to apply rule`.
+
 #### Order of custom rules
 
 When you have multiple custom rules for a Grok Parser processor, a log is parsed by the first rule whose query it matches, and then sent to the next step in the pipeline. The processor does not try to match the log to subsequent rules. Therefore, the order of the rules matters if a log might match multiple rules.
