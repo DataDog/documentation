@@ -1076,7 +1076,7 @@ Inserts new rows or updates existing rows in a reference table. If a row with th
 
 ### `create_reference_table`
 *Toolset: **reference-tables***\
-Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty table you can populate with `append_reference_table_rows` or `upsert_reference_table_rows`; cloud-backed mode (`S3`, `GCS`, `AZURE`) syncs from a CSV file in cloud storage. Only `INT32` and `STRING` field types are supported.
+Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty table you can populate with `append_reference_table_rows` or `upsert_reference_table_rows`. Cloud-backed modes (`S3`, `GCS`, `AZURE`) sync from a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
 
 - Create an empty reference table called `service_catalog` with fields for service name, owner team, and tier.
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
