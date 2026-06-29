@@ -66,6 +66,8 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 
 The following are available as a Preview upon request:
 - Cloud costs
+- Containers
+    - **Note:** Autoscaling is not supported
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
