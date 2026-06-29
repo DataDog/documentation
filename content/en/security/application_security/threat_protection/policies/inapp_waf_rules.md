@@ -1,6 +1,7 @@
 ---
 title: In-App WAF Rules
 aliases:
+  - /security/application_security/policies/inapp_waf_rules/
   - /security_platform/application_security/event_rules
   - /security/application_security/event_rules
   - /security/application_security/threats/inapp_waf_rules
@@ -140,9 +141,9 @@ Services using a policy are visible directly in the policy management page.
 
 Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box AAP detection rules or create new ones.
 
-[1]: /security/application_security/policies/custom_rules/
+[1]: /security/application_security/threat_protection/policies/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 [5]: https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules
-[6]: /security/application_security/account_takeover_protection/
+[6]: /security/application_security/threat_protection/account_takeover_protection/

@@ -1,12 +1,13 @@
 ---
 title: Investigate Security Signals
 aliases:
+  - /security/application_security/security_signals/
   - /security/application_security/threats/security_signals
 further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"
     text: "Explore AAP threat detection OOTB rules"
-  - link: "/security/application_security/policies/custom_rules/"
+  - link: "/security/application_security/threat_protection/policies/custom_rules/"
     tag: "Documentation"
     text: "Configure custom AAP threat detection rules"
   - link: "/security/application_security/how-it-works/threat-intelligence/"
@@ -157,5 +158,5 @@ To see all of the saved views, click {{< ui >}}Views{{< /ui >}} next to the {{< 
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/notifications/rules/
 [9]: /account_management/rbac/permissions/#cloud-security-platform
-[10]: /security/application_security/policies/#respond-to-threats-in-real-time-by-automating-attacker-blocking
-[11]: /security/application_security/policies/#blocking-attack-attempts-with-in-app-waf
+[10]: /security/application_security/threat_protection/policies/#respond-to-threats-in-real-time-by-automating-attacker-blocking
+[11]: /security/application_security/threat_protection/policies/#blocking-attack-attempts-with-in-app-waf

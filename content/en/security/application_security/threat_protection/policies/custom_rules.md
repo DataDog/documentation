@@ -1,6 +1,7 @@
 ---
 title: Custom Detection Rules
 aliases:
+  - /security/application_security/policies/custom_rules/
   - /security_platform/application_security/custom_rules
   - /security/application_security/custom_rules
   - /security/application_security/threats/attacker_fingerprint
@@ -8,7 +9,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog App and API Protection"
-- link: "/security/application_security/policies/inapp_waf_rules/"
+- link: "/security/application_security/threat_protection/policies/inapp_waf_rules/"
   tag: "Documentation"
   text: "Creating In-App WAF rules"
 - link: "/security/application_security/troubleshooting"
