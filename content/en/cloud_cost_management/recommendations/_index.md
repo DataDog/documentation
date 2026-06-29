@@ -156,13 +156,13 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: EBS Volume
-      recommendation_type: Terminate Unattached EBS Volume
+      recommendation_type: Delete Unattached EBS Volume
       recommendation_description: Volume that is not attached to an EC2 instance.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: EBS Volume
-      recommendation_type: Terminate Unused EBS Volume
+      recommendation_type: Delete Unused EBS Volume
       recommendation_description: Volume that has no read or write activity.
       recommendation_prerequisites: ""
     - category: Terminate
@@ -294,7 +294,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: RDS Instance
-      recommendation_type: Terminate Unused RDS Instance
+      recommendation_type: Delete Unused RDS Instance
       recommendation_description: RDS instance with 0 database connections and 0 replica lag.
       recommendation_prerequisites: ""
     - category: Terminate
@@ -372,7 +372,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: AKS Cluster
-      recommendation_type: Terminate AKS Cluster
+      recommendation_type: Delete Azure Kubernetes Service Cluster
       recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
     - category: Downsize
@@ -414,14 +414,14 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
-      recommendation_type: Terminate Database for MySQL
-      recommendation_description: Database server with no connections, which can be terminated.
+      recommendation_type: Delete Azure Database for MySQL
+      recommendation_description: Database server with no connections, which can be deleted.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: SQL Server
-      recommendation_type: Terminate SQL Server
-      recommendation_description: SQL Server with no connections, which can be terminated.
+      recommendation_type: Delete Azure SQL Server
+      recommendation_description: SQL Server with no connections, which can be deleted.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -432,8 +432,8 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: SQL Server Database
-      recommendation_type: Terminate SQL Server Database
-      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated.
+      recommendation_type: Delete Azure SQL Server Database
+      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be deleted.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -444,7 +444,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance
-      recommendation_type: Terminate Azure VM Instance
+      recommendation_type: Delete Azure VM
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
@@ -516,7 +516,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: GCP
       resource_type: Compute Instance
-      recommendation_type: Terminate Compute Instance
+      recommendation_type: Delete GCP Compute Instance
       recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
@@ -534,8 +534,8 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: GCP
       resource_type: CloudSQL Instance
-      recommendation_type: Terminate CloudSQL Instance
-      recommendation_description: CloudSQL instances with minimal usage that can be terminated.
+      recommendation_type: Delete Google Cloud SQL Instance
+      recommendation_description: CloudSQL instances with minimal usage that can be deleted.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
