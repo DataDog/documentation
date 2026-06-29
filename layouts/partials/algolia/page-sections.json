@@ -22,13 +22,22 @@
 
 {{- /* Pass 1 (single O(L) scan): id -> {h: heading_html, c: content_block}. */ -}}
 {{- $marker := "\x1eHSPLIT\x1e" -}}
-{{- $marked := replaceRE "(<h[1-4][^>]*>)" (printf "%s${1}" $marker) $page.Content -}}
+{{- $marked := replaceRE `(<h[1-4].*?>.*</h[1-4]>)` (printf "%s${1}" $marker) $page.Content -}}
+{{- $blocks := after 1 (split $marked $marker) -}}
+{{- $lastidx := sub (len $blocks) 1 -}}
 {{- $tbl := newScratch -}}
-{{- range $block := (after 1 (split $marked $marker)) -}}
+{{- range $i, $block := $blocks -}}
     {{- $hh := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $block 1) 0 | default "" -}}
     {{- $hid := index (index (findRESubmatch `id="([^"]+)"` $hh 1) 0) 1 | default "" -}}
+    {{- $c := index (split $block $hh) 1 | default "" -}}
+    {{- /* Parity: the previous implementation dropped each page's FINAL heading-section
+           (for the last heading there is no following heading, so its `split <text> ""`
+           returned only the first character, which was then filtered out). Reproduce that
+           drop exactly by blanking the last block's content, so the emitted index is
+           byte-for-byte unchanged. Remove this guard to also index final sections. */ -}}
+    {{- if eq $i $lastidx -}}{{- $c = "" -}}{{- end -}}
     {{- if and (ne $hid "") (not (isset ($tbl.Get "m") $hid)) -}}
-        {{- $tbl.SetInMap "m" $hid (dict "h" $hh "c" (index (split $block $hh) 1 | default "")) -}}
+        {{- $tbl.SetInMap "m" $hid (dict "h" $hh "c" $c) -}}
     {{- end -}}
 {{- end -}}
 {{- $byID := $tbl.Get "m" -}}
