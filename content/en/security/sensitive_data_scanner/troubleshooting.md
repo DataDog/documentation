@@ -17,10 +17,10 @@ If a Sensitive Data Scanner rule does not match data that you expect it to match
 
 ## An obfuscation action is unavailable
 
-The Sensitive Data Scanner obfuscation actions are **Redact**, **Partially redact**, **Hash**, and **Mask**. If you cannot select one of these actions, check the following causes:
+The Sensitive Data Scanner obfuscation actions are **{{< ui >}}Redact{{< /ui >}}**, **{{< ui >}}Partially redact{{< /ui >}}**, **{{< ui >}}Hash{{< /ui >}}**, and **{{< ui >}}Mask{{< /ui >}}**. If you cannot select one of these actions, check the following causes:
 
-- **Sampling is enabled**: The **Redact**, **Partially redact**, **Hash**, and **Mask** actions are not available when a scanning group has sampling enabled. To use these actions, disable sampling in the scanning group settings so that all data matching the group query filter is scanned.
-- **Mask is supported for logs only**: The **Mask** action is not available for APM, RUM, or Event Management data.
+- **Sampling is enabled**: The **{{< ui >}}Redact{{< /ui >}}**, **{{< ui >}}Partially redact{{< /ui >}}**, **{{< ui >}}Hash{{< /ui >}}**, and **{{< ui >}}Mask{{< /ui >}}** actions are not available when a scanning group has sampling enabled. To use these actions, disable sampling in the scanning group settings so that all data matching the group query filter is scanned.
+- **Mask is supported for logs only**: The **{{< ui >}}Mask{{< /ui >}}** action is not available for APM, RUM, or Event Management data.
 
 ## Further reading
 

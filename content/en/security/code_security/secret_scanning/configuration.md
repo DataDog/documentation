@@ -5,7 +5,7 @@ algolia:
 description: Configure rules for Datadog Secret Scanning, including managed default rules and custom regex rules.
 ---
 
-By default, Datadog Secret Scanning scans enabled repositories with all [rules in the Secrets & Credentials category of Sensitive Data Scanner][1]. You can customize which rules run, modify default rules, and create custom rules on the [**Code** configuration page][2] in SDS.
+By default, Datadog Secret Scanning scans enabled repositories with all [rules in the Secrets & Credentials category of Sensitive Data Scanner][1]. You can customize which rules run, modify default rules, and create custom rules on the [**{{< ui >}}Code{{< /ui >}}** configuration page][2] in SDS.
 ## Scanning groups
 There are two scanning groups that configure Secret Scanning rules.
 ### Managed scanning group
@@ -26,14 +26,14 @@ To customize the severity and keywords of a managed default rule, hover over the
 The edit dialog opens.
 {{< img src="/code_security/secret_scanning/configure_default_rule.png" alt="Edit rule popup" style="width:100%;">}}
 
-After editing the rule and clicking **Update** at the bottom right, the modified rule appears as **Customized** in the managed scanning group.
+After editing the rule and clicking **{{< ui >}}Update{{< /ui >}}** at the bottom right, the modified rule appears as **{{< ui >}}Customized{{< /ui >}}** in the managed scanning group.
 
 {{< img src="/code_security/secret_scanning/disable_rule.png" alt="Customized secret scanning rule in managed group" style="width:100%;">}}
 
 <div class="alert alert-info">Customized rules do not automatically receive severity/default keyword updates from Datadog's security team. To restore a rule to its managed state, hover over a customized rule and click the restore icon at the right. </div>
 
 ### Creating custom rules
-To create a custom rule, go to the custom scanning group and click **Add scanning rule** at the bottom or **Add rule** at the top right. Create your regex rule, then configure the severity and keywords. After they're enabled, your repositories are scanned with the new rules on the next commit.
+To create a custom rule, go to the custom scanning group and click **{{< ui >}}Add scanning rule{{< /ui >}}** at the bottom or **{{< ui >}}Add rule{{< /ui >}}** at the top right. Create your regex rule, then configure the severity and keywords. After they're enabled, your repositories are scanned with the new rules on the next commit.
 
 {{< img src="/code_security/secret_scanning/add_to_custom.png" alt="Add rule to custom group" style="width:100%;">}}
 

@@ -9,30 +9,30 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 ### AWS
 
 1. Navigate to the [AWS Integration configuration page][2] in Datadog.
-1. On the **Configuration** tab, select the account you want to enable Cloud Security on.<br />If you don't see the required account, add it by clicking **Add AWS Account(s)** and following the onscreen prompts.
-1. To turn off infrastructure monitoring on the selected account, under the account number, navigate to the **Metric Collection** tab, then click the **disable metric collection** link. Then, click **Disable Metric Collection** to confirm.
-1. On the **Resource Collection** tab, switch the **Enable Resource Collection** toggle to the on position.
-1. Click **Save** to complete the setup.
+1. On the **{{< ui >}}Configuration{{< /ui >}}** tab, select the account you want to enable Cloud Security on.<br />If you don't see the required account, add it by clicking **{{< ui >}}Add AWS Account(s){{< /ui >}}** and following the onscreen prompts.
+1. To turn off infrastructure monitoring on the selected account, under the account number, navigate to the **{{< ui >}}Metric Collection{{< /ui >}}** tab, then click the **{{< ui >}}disable metric collection{{< /ui >}}** link. Then, click **{{< ui >}}Disable Metric Collection{{< /ui >}}** to confirm.
+1. On the **{{< ui >}}Resource Collection{{< /ui >}}** tab, switch the **{{< ui >}}Enable Resource Collection{{< /ui >}}** toggle to the on position.
+1. Click **{{< ui >}}Save{{< /ui >}}** to complete the setup.
 
 **Note**: In your Cloud Security settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
 ### Azure
 
 1. Navigate to the [Azure Integration configuration page][3] in Datadog.
-1. Select the client ID or subscription you want to enable Cloud Security on.<br />If you don't see the required client ID, add it by clicking **Add New App Registration** and following the onscreen prompts.
-1. To turn off infrastructure monitoring on the selected account, under the client ID, navigate to the **Metric Collection** tab, then turn off the **Enable Metric Collection** toggle. 
-1. On the **Resource Collection** tab, Switch the **Enable Resource Collection** toggle to the on position.
-1. Click **Save** to complete the setup.
+1. Select the client ID or subscription you want to enable Cloud Security on.<br />If you don't see the required client ID, add it by clicking **{{< ui >}}Add New App Registration{{< /ui >}}** and following the onscreen prompts.
+1. To turn off infrastructure monitoring on the selected account, under the client ID, navigate to the **{{< ui >}}Metric Collection{{< /ui >}}** tab, then turn off the **{{< ui >}}Enable Metric Collection{{< /ui >}}** toggle. 
+1. On the **{{< ui >}}Resource Collection{{< /ui >}}** tab, Switch the **{{< ui >}}Enable Resource Collection{{< /ui >}}** toggle to the on position.
+1. Click **{{< ui >}}Save{{< /ui >}}** to complete the setup.
 
 **Note**: In your Cloud Security settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
 ### Google Cloud Platform
 
 1. Navigate to the [Google Cloud Platform configuration page][4] in Datadog.
-1. Select the service account you want to enable Cloud Security on.<br />If you don't see the required account, add it by clicking **Add GCP Account** and following the onscreen prompts.
-1. To turn off infrastructure monitoring on the selected account, under the account name, navigate to the **Metric Collection** tab. Then, above the Metric Collection table, click **Disable All**.
-1. On the **Resource Collection** tab, switch the **Enable Resource Collection** toggle to the on position.
-1. Click **Save** to complete the setup.
+1. Select the service account you want to enable Cloud Security on.<br />If you don't see the required account, add it by clicking **{{< ui >}}Add GCP Account{{< /ui >}}** and following the onscreen prompts.
+1. To turn off infrastructure monitoring on the selected account, under the account name, navigate to the **{{< ui >}}Metric Collection{{< /ui >}}** tab. Then, above the Metric Collection table, click **{{< ui >}}Disable All{{< /ui >}}**.
+1. On the **{{< ui >}}Resource Collection{{< /ui >}}** tab, switch the **{{< ui >}}Enable Resource Collection{{< /ui >}}** toggle to the on position.
+1. Click **{{< ui >}}Save{{< /ui >}}** to complete the setup.
 
 **Note**: In your Cloud Security settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
@@ -43,10 +43,10 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 {{< /site-region >}}
 
 1. Navigate to the [Oracle Cloud Infrastructure configuration page][5] in Datadog.
-1. Select the tenancy you want to enable Cloud Security on.<br />If you don't see the required tenancy, add it by clicking **Add New Tenancy** and following the onscreen prompts.
-1. To turn off infrastructure monitoring on the selected tenancy, under the tenancy name, navigate to the **Metric Collection** tab. Then, above the Metric Collection table, click **Disable All**.
-1. On the **Resource Collection** tab, switch the **Enable Resource Collection** toggle to the on position.
-1. Click **Save** to complete the setup.
+1. Select the tenancy you want to enable Cloud Security on.<br />If you don't see the required tenancy, add it by clicking **{{< ui >}}Add New Tenancy{{< /ui >}}** and following the onscreen prompts.
+1. To turn off infrastructure monitoring on the selected tenancy, under the tenancy name, navigate to the **{{< ui >}}Metric Collection{{< /ui >}}** tab. Then, above the Metric Collection table, click **{{< ui >}}Disable All{{< /ui >}}**.
+1. On the **{{< ui >}}Resource Collection{{< /ui >}}** tab, switch the **{{< ui >}}Enable Resource Collection{{< /ui >}}** toggle to the on position.
+1. Click **{{< ui >}}Save{{< /ui >}}** to complete the setup.
 
 **Note**: In your Cloud Security settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 

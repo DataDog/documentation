@@ -18,17 +18,17 @@ Use the **Service** facet to see each service's endpoints to identify ownership 
 Click a finding to view its details and perform a workflow such as Validate > Investigate > Fix > Track:
 
 1. Validate:
-   - Review **What Happened** and **Detected In** to confirm the detection is accurate (service, endpoint, method).
-   - In **Next Steps**, choose whether to **Mute**, **Create Ticket**, or **Run Workflow** depending on ownership and impact.
+   - Review **{{< ui >}}What Happened{{< /ui >}}** and **{{< ui >}}Detected In{{< /ui >}}** to confirm the detection is accurate (service, endpoint, method).
+   - In **{{< ui >}}Next Steps{{< /ui >}}**, choose whether to **{{< ui >}}Mute{{< /ui >}}**, **{{< ui >}}Create Ticket{{< /ui >}}**, or **{{< ui >}}Run Workflow{{< /ui >}}** depending on ownership and impact.
 2. Investigate:
-   - Use the **Context** tab to examine the endpoint snapshot and attributes (method, path, authentication flags, tags).
-   - **Detected In** provides information for routing ownership and remediation.
-   - In **Detection Rule Query**, you can edit an API finding rule by clicking **See Detection Rule**.
+   - Use the **{{< ui >}}Context{{< /ui >}}** tab to examine the endpoint snapshot and attributes (method, path, authentication flags, tags).
+   - **{{< ui >}}Detected In{{< /ui >}}** provides information for routing ownership and remediation.
+   - In **{{< ui >}}Detection Rule Query{{< /ui >}}**, you can edit an API finding rule by clicking **{{< ui >}}See Detection Rule{{< /ui >}}**.
 3. Fix: 
-   - Follow the guidance under **Remediation**.
+   - Follow the guidance under **{{< ui >}}Remediation{{< /ui >}}**.
 4. Track:
-   - Use **Create Ticket** to link the issue to your tracking system.
-   - Use **Reference Links** for developer education or code review.
+   - Use **{{< ui >}}Create Ticket{{< /ui >}}** to link the issue to your tracking system.
+   - Use **{{< ui >}}Reference Links{{< /ui >}}** for developer education or code review.
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/finding
 [2]: /security/application_security/policies/custom_rules/

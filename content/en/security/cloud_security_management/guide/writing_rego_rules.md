@@ -105,7 +105,7 @@ results contains result if {
 
 This section passes through all resources from the main resource type and evaluates them. It creates an array of results to be processed by the posture management system. The [some][9] keyword declares the local variable `resource`, which comes from the array of main resources. The `eval` rule is executed on every resource, returning a `pass`, `fail`, or `skip`. The `dd_output.format` rule formats the resource and evaluation correctly to be processed by cloud security.
 
-This section of the policy does not need to be modified. Instead, when you select your main resource type in the **Choose your main resource type** dropdown when cloning rules, it is inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose, for example, `gcp_iam_policy`.
+This section of the policy does not need to be modified. Instead, when you select your main resource type in the {{< ui >}}Choose your main resource type{{< /ui >}} dropdown when cloning rules, it is inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose, for example, `gcp_iam_policy`.
 
 ## Other ways to write rules
 
@@ -149,7 +149,7 @@ eval(resource) = "skip" if {
 
 This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges. 
 
-Sometimes you want to examine more than one resource type in your rule. To do this, you can select some related resource types in the dropdown under **Advanced Rule Options**. You can then access the arrays of related resources through `input.resources.related_resource_type`, replacing `related_resource_type` with whatever related resource you would like to access.
+Sometimes you want to examine more than one resource type in your rule. To do this, you can select some related resource types in the dropdown under {{< ui >}}Advanced Rule Options{{< /ui >}}. You can then access the arrays of related resources through `input.resources.related_resource_type`, replacing `related_resource_type` with whatever related resource you would like to access.
 
 When writing a policy for more than one resource type, it can be time consuming to loop through all instances of a related resource type for each main resource. Take the following example:
 

@@ -35,11 +35,11 @@ Create separate log pipelines for each log source you want to remap to OCSF. For
 To create a log pipeline:
 
 1. Navigate to [Log Pipelines][3].
-1. Click **New Pipeline**.
+1. Click **{{< ui >}}New Pipeline{{< /ui >}}**.
 1. Enter a query to filter for logs you want to send to the OCSF processor.
 1. Enter a name for the pipeline.
 1. (Optional) Add tags and a description to indicate the purpose of the pipeline. Pipeline tags do not affect logs, but can be used to filter and search pipelines within the Pipelines page.
-1. Click **Create**.
+1. Click **{{< ui >}}Create{{< /ui >}}**.
 
 ### Create sub-pipelines
 
@@ -51,11 +51,11 @@ Within the pipeline that filters for logs by source (for example, Okta), create 
 To create a sub-pipeline:
 
 1. Click the down arrow next to the pipeline you created for the source.
-1. Click **Add Nested Pipeline**.
+1. Click **{{< ui >}}Add Nested Pipeline{{< /ui >}}**.
 1. Enter a query to filter for logs you want to send to the OCSF processor. For example, if you want to filter for Okta detection events, use the query: `[@eventType:(security.threat.detected OR user.risk.*)]`.
 1. Enter a name for the sub pipeline, such as `Okta OCSF sub-pipeline for class Detection Finding [2004]`.
 1. (Optional) Add tags and a description to indicate the purpose of the pipeline. Pipeline tags do not affect logs, but can be used to filter and search pipelines within the Pipelines page.
-1. Click **Create**.
+1. Click **{{< ui >}}Create{{< /ui >}}**.
 
 ### Add processors for pre-processing logs
 
@@ -73,8 +73,8 @@ See [Processors][4] for more information on the processors you can use to reform
 #### Add an OCSF processor
 
 1. Click the down arrow next to the pipeline for you log source.
-1. Click **Add Processor**.
-1. Select **OCSF Processor**.
+1. Click **{{< ui >}}Add Processor{{< /ui >}}**.
+1. Select **{{< ui >}}OCSF Processor{{< /ui >}}**.
 1. Enter a name for the processor, such as `Okta auth logs`.
 1. Select the OCSF schema version and class you want to use in the dropdown menus.
 1. (Optional) Select the profile in the dropdown menu.
@@ -83,22 +83,22 @@ See [Processors][4] for more information on the processors you can use to reform
 
 ##### Class attribute configuration
 
-The OCSF Processor remaps attributes, including [enumerated (ENUM) attributes][5]. After you select the OCSF schema version and class, the **Define Mapping (OCSF Schema Class Attributes)** section shows attributes that you can configure. You can filter and search for specific attributes or choose to see only required, recommended, or optional attributes. If you do not see an attribute that you want to configure, you can manually add it.
+The OCSF Processor remaps attributes, including [enumerated (ENUM) attributes][5]. After you select the OCSF schema version and class, the **{{< ui >}}Define Mapping (OCSF Schema Class Attributes){{< /ui >}}** section shows attributes that you can configure. You can filter and search for specific attributes or choose to see only required, recommended, or optional attributes. If you do not see an attribute that you want to configure, you can manually add it.
 
 ENUM attributes are configured in the [ENUM attribute configuration](#enum-attribute-configuration) section.
 
-1. For each target attribute, in the **Source attribute** column, enter the attribute name from the source log that corresponds to the OSCF attribute.
-    - You must fill out the **Source attribute** for all required fields.
-    - You can add multiple fields for **Source attribute**. For example, Okta's `user.system.start` logs have either the `eventType` or `legacyEventType` field. You can map both fields to the same OCSF field.
+1. For each target attribute, in the **{{< ui >}}Source attribute{{< /ui >}}** column, enter the attribute name from the source log that corresponds to the OSCF attribute.
+    - You must fill out the **{{< ui >}}Source attribute{{< /ui >}}** for all required fields.
+    - You can add multiple fields for **{{< ui >}}Source attribute{{< /ui >}}**. For example, Okta's `user.system.start` logs have either the `eventType` or `legacyEventType` field. You can map both fields to the same OCSF field.
     - You can also map a field to itself. For example, if you pre-processed a log to decode a base64 value and also added that value to the correct OCSF attribute, you can map that field to itself. In the below image, is remapped to itself because the source attribute entered is the same as the target attribute.
     {{< img src="security/security_monitoring/ocsf/remap_to_itself.png" alt="The attribute configuration table showing the entered source attributed as the same as the OCSF attribute" style="width:100%;" >}}
     - **Notes**:
       - Required root-level attributes cannot be deleted.
     {{< img src="security/security_monitoring/ocsf/required_root_level.png" alt="The attribute configuration table a message saying that root-level attributes cannot be deleted" style="width:100%;" >}}
-1. (Optional) Click **Add Field** if you want to add additional attributes to be mapped. If you want to explore the attributes you can add, click **OCSF Schema Documentation** next to the **Schema configuration** header.
+1. (Optional) Click **{{< ui >}}Add Field{{< /ui >}}** if you want to add additional attributes to be mapped. If you want to explore the attributes you can add, click **{{< ui >}}OCSF Schema Documentation{{< /ui >}}** next to the **{{< ui >}}Schema configuration{{< /ui >}}** header.
 1. Enter the path to the attribute, such as `actor.user.name`, and select the attribute from the dropdown menu.
     - **Note**: If the attribute is not in the dropdown menu, you can manually enter the path to the attribute to add it. The attribute must be in the [OCSF Schema][6] documentation.
-1. Click **add**.
+1. Click **{{< ui >}}add{{< /ui >}}**.
     - If you see the error `Invalid OCSF attribute`, check the [OCSF documentation][6] to make sure you have the correct path.
     - If you see the error `ENUM attribute`, you have to enter the attribute in the [ENUM attribute configuration](#enum-attribute-configuration) section.
 
@@ -117,20 +117,20 @@ An example of mapping severity values:
 | `WARN`    | 3                | `Medium`       |
 | `ERROR`   | 4                | `High`         |
 
-In the **ENUM Attribute Configuration** section of the processor, you define the source log attribute that corresponds to the different attribute IDs. Some attributes are pre-populated based on the class selected.
+In the **{{< ui >}}ENUM Attribute Configuration{{< /ui >}}** section of the processor, you define the source log attribute that corresponds to the different attribute IDs. Some attributes are pre-populated based on the class selected.
 
 1. Click the down arrow next to the enum attribute that you want to configure.
-1. In the **Matching query** field, enter the log attribute that corresponds to this OSCF attribute, such as `severity:info`.
-1. In the **ID** dropdown menu, select the number that corresponds to the log attribute's value.
+1. In the **{{< ui >}}Matching query{{< /ui >}}** field, enter the log attribute that corresponds to this OSCF attribute, such as `severity:info`.
+1. In the **{{< ui >}}ID{{< /ui >}}** dropdown menu, select the number that corresponds to the log attribute's value.
 1. (Optional) Enter a name for the sibling string attribute. See [Enum attributes][5] for more information.
-1. Click **Add**.
-1.  If you added the enum value `Other (99)`, you must enter the fallback values in the **Other fallback value(s)** field.
+1. Click **{{< ui >}}Add{{< /ui >}}**.
+1.  If you added the enum value `Other (99)`, you must enter the fallback values in the **{{< ui >}}Other fallback value(s){{< /ui >}}** field.
 1. Repeat steps 1 to 6 until all required enum attributes are filled out.
-1. (Optional) Click **Add Field** if you want to manually add enum attributes to be mapped.
+1. (Optional) Click **{{< ui >}}Add Field{{< /ui >}}** if you want to manually add enum attributes to be mapped.
     1. Enter the path to the attribute, such as `ocsf.actor.user.name`.
-    1. Click **add**.
+    1. Click **{{< ui >}}add{{< /ui >}}**.
         - If you get an error, see [Errors when manually adding an attribute](#errors-when-manually-adding-an-attribute) for more information.
-1. Click **Create** to add the processor.
+1. Click **{{< ui >}}Create{{< /ui >}}** to add the processor.
 
 #### Errors when manually adding an attribute
 

@@ -256,14 +256,14 @@ See the related reference table documentation for:
 
 #### Troubleshooting cloud imports
 
-If a reference table is not refreshing, open the reference table's settings menu and select **View Change Events**.
+If a reference table is not refreshing, open the reference table's settings menu and select **{{< ui >}}View Change Events{{< /ui >}}**.
 
-**View Change Events** opens a page in **Event Management** showing potential error events for the ingestion. You can also filter in **Event Management** using the reference table name.
+**{{< ui >}}View Change Events{{< /ui >}}** opens a page in **{{< ui >}}Event Management{{< /ui >}}** showing potential error events for the ingestion. You can also filter in **{{< ui >}}Event Management{{< /ui >}}** using the reference table name.
 
 In Datadog Event Management, it may appear that data has been fetched from the cloud, but it can take a few additional minutes for those changes to propagate to Threat Intelligence. Other useful cloud import details to remember:
 
 - The expected latency before updated enrichments are available when a source is uploaded or updated is 10 to 30 minutes.
-- How to know when the updates are applied: The changes are visible in the reference table or in the logs. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
+- How to know when the updates are applied: The changes are visible in the reference table or in the logs. Select the **{{< ui >}}View Change Events{{< /ui >}}** link from settings on the reference table detail page to see the related events.
 - The update replaces the entire table with the new data.
 In case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
 
@@ -271,7 +271,7 @@ In case of a duplicated primary key, the rows with the duplicated key are not wr
 
 To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
-1. For the table you want to see Cloud SIEM threat intelligence data for, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
+1. For the table you want to see Cloud SIEM threat intelligence data for, click the dropdown menu in the **{{< ui >}}Enabled{{< /ui >}}** column and select {{< ui >}}Cloud SIEM{{< /ui >}}.
 
 After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response. A threat intelligence reference table can be shared across multiple security products.
 

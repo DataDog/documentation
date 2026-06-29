@@ -9,7 +9,7 @@ The matching occurs within your application, and none of the sensitive data is s
 
 ## Supported data types
 
-To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
+To see the supported data types (for example, `payment:card`), use the **{{< ui >}}Schema Sensitive Data{{< /ui >}}** facet. You can also see the data type used in the **{{< ui >}}Sensitive Data{{< /ui >}}** column.
 
 ## Create API data scanners
 
@@ -21,13 +21,13 @@ When the scanner detects sensitive data, it tags the API endpoint with the categ
 
 To create an API data scanner and view its results, do the following:
 
-1. In App and API Protection **Policies**, go to [Sensitive Data Detection][3].
-2. Click **New Scanner**.
-3. In **Select your scanner tags**, define the category and type to classify the sensitive data. The scanner tags API endpoints with the format `category:type`.
-4. In **Define conditions on JSON keys and values**, define the JSON key or value conditions to trigger the scanner.
-5. Click **Save Scanner**. The scanner is enabled by default.
+1. In App and API Protection **{{< ui >}}Policies{{< /ui >}}**, go to [Sensitive Data Detection][3].
+2. Click **{{< ui >}}New Scanner{{< /ui >}}**.
+3. In **{{< ui >}}Select your scanner tags{{< /ui >}}**, define the category and type to classify the sensitive data. The scanner tags API endpoints with the format `category:type`.
+4. In **{{< ui >}}Define conditions on JSON keys and values{{< /ui >}}**, define the JSON key or value conditions to trigger the scanner.
+5. Click **{{< ui >}}Save Scanner{{< /ui >}}**. The scanner is enabled by default.
 6. To view the results of the scanner, go to App and API Protection [API Endpoints][4].
-7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Custom scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
+7. In the **{{< ui >}}Schema Sensitive Data{{< /ui >}}** facet, the category and type of your custom scanner is listed in the format `category:type`. Custom scanner `category:type` tags are also visible in the **{{< ui >}}Sensitive Data{{< /ui >}}** column of the explorer.
 
 [1]: /security/application_security/
 [2]: /security/application_security/api_posture/api_inventory/api_endpoints/

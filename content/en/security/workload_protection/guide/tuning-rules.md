@@ -148,7 +148,7 @@ Open the signal details side panel and navigate from one tab to the other to gai
 
 {{< img src="/security/cws/guide/cws-tuning-rules.png" alt="A signal side-panel showing events, logs, and other data related to a signal." width="75%">}}
 
-To define suppression criteria, click on any attribute value and select **Never trigger signals for**.
+To define suppression criteria, click on any attribute value and select **{{< ui >}}Never trigger signals for{{< /ui >}}**.
 
 In this example, assess whether the use of these environment variables were actually preceded by actions that escalated privileges within the process ancestry tree. Tags can indicate where in your infrastructure the action occurred and help in decreasing its severity. With all of this information, you can decide to tune out the rule on any process that has inherited these environment variables.
 
@@ -171,12 +171,12 @@ Signals surface relevant context within security alerts. Although event data can
 
 In Workload Protection, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching. 
 
-1. Go to your chosen signal details side-panel and click the Events tab. 
-2. Click **View in Log Explorer** to navigate to Log Management, which displays the full list of logs that instigate this signal.
+1. Go to your chosen signal details side-panel and click the **{{< ui >}}Events{{< /ui >}}** tab. 
+2. Click **{{< ui >}}View in Log Explorer{{< /ui >}}** to navigate to Log Management, which displays the full list of logs that instigate this signal.
    Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
-3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
+3. Go back to the **{{< ui >}}Events{{< /ui >}}** tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
 4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.
-5. Open the rule in the Rule editor and in the **Exclude benign activity with suppression queries**. Add the list of key-value pairs that you identified as helpful.
+5. Open the rule in the Rule editor and in the **{{< ui >}}Exclude benign activity with suppression queries{{< /ui >}}**. Add the list of key-value pairs that you identified as helpful.
 
 For example, suppose you have a `Java process spawned shell/utility` rule that you want to suppress for the following combination of attributes:
 - `@process.args:+x`
@@ -184,8 +184,7 @@ For example, suppose you have a `Java process spawned shell/utility` rule that y
 - `@process.ancestors.executable.comm:root`
 - `@process.ancestors.executable.args:init`
 
-Enter these key values under **This rule will not generate a signal if there is a match** to suppress undesired signals.
+Enter these key values under **{{< ui >}}This rule will not generate a signal if there is a match{{< /ui >}}** to suppress undesired signals.
 
-If, on the other hand, you want to fire signals under specific conditions by identifying the right set of attributes, specify the combination **Only generate a signal if there is a match**.
-
+If, on the other hand, you want to fire signals under specific conditions by identifying the right set of attributes, specify the combination **{{< ui >}}Only generate a signal if there is a match{{< /ui >}}**.
 

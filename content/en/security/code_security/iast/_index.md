@@ -104,11 +104,11 @@ Because IAST detects vulnerabilities in your first-party code, findings do not h
 
 Click any finding in the [Vulnerabilities Explorer for IAST][1] to open the vulnerability side panel, which gives developers and security engineers the full context needed to fix the issue.
 
-The panel summarizes the finding's severity, vulnerability type, due date, and runtime indicators (such as **Exposed to Attacks** and **Service In Production**), and shows where the vulnerability was confirmed in your code, when it was first and last detected, which service, environment, and team it impacts, and relevant standards references like the CWE. When the [GitHub][7], [GitLab][8], or [Azure DevOps][18] integration is enabled, Datadog also surfaces the commit that introduced the vulnerability and a snippet of the vulnerable code.
+The panel summarizes the finding's severity, vulnerability type, due date, and runtime indicators (such as **{{< ui >}}Exposed to Attacks{{< /ui >}}** and **{{< ui >}}Service In Production{{< /ui >}}**), and shows where the vulnerability was confirmed in your code, when it was first and last detected, which service, environment, and team it impacts, and relevant standards references like the CWE. When the [GitHub][7], [GitLab][8], or [Azure DevOps][18] integration is enabled, Datadog also surfaces the commit that introduced the vulnerability and a snippet of the vulnerable code.
 
-The side panel includes tabs for **Data Flow** (how tainted input reaches the vulnerable sink), **Remediation** (step-by-step guidance and example code for your framework), **Datadog Severity Breakdown** (how runtime context shaped the score), and **More Information** (related references). From the **Next Steps** panel on the right, you can change the finding's status, mute it, create a Jira or ServiceNow ticket, or jump straight to the remediation steps.
+The side panel includes tabs for **{{< ui >}}Data Flow{{< /ui >}}** (how tainted input reaches the vulnerable sink), **{{< ui >}}Remediation{{< /ui >}}** (step-by-step guidance and example code for your framework), **{{< ui >}}Datadog Severity Breakdown{{< /ui >}}** (how runtime context shaped the score), and **{{< ui >}}More Information{{< /ui >}}** (related references). From the **{{< ui >}}Next Steps{{< /ui >}}** panel on the right, you can change the finding's status, mute it, create a Jira or ServiceNow ticket, or jump straight to the remediation steps.
 
-For repeatable workflows, use **Set up Automation** to apply the same actions automatically to new and existing findings that match your criteria. See [Automate triage and remediation](#automate-triage-and-remediation) for details.
+For repeatable workflows, use **{{< ui >}}Set up Automation{{< /ui >}}** to apply the same actions automatically to new and existing findings that match your criteria. See [Automate triage and remediation](#automate-triage-and-remediation) for details.
 
 ### Create tickets from findings
 
@@ -118,9 +118,9 @@ To create tickets in bulk or as part of a repeatable process, use [Automation Pi
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create an Automation Rule][15] for context-aware filtering by tag values (for example, by `service` or `env`). Muting a finding hides it from active triage and excludes it from reports.
+To suppress a finding, click **{{< ui >}}Mute{{< /ui >}}** in the finding details panel. This opens a workflow where you can [create an Automation Rule][15] for context-aware filtering by tag values (for example, by `service` or `env`). Muting a finding hides it from active triage and excludes it from reports.
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Vulnerabilities Explorer for IAST][1] to review muted findings.
+To restore a muted finding, click **{{< ui >}}Unmute{{< /ui >}}** in the details panel. You can also use the **{{< ui >}}Status{{< /ui >}}** filter on the [Vulnerabilities Explorer for IAST][1] to review muted findings.
 
 ### Notify on new findings
 
@@ -128,7 +128,7 @@ Route new IAST findings to the right team as soon as they are detected. Datadog 
 
 ### Automate triage and remediation
 
-Use [Automation Pipelines][14] to apply consistent triage and remediation actions to new and existing IAST findings, without manual intervention. From the **Set up Automation** menu in the finding side panel—or from the Automation Pipelines settings page—you can:
+Use [Automation Pipelines][14] to apply consistent triage and remediation actions to new and existing IAST findings, without manual intervention. From the **{{< ui >}}Set up Automation{{< /ui >}}** menu in the finding side panel—or from the Automation Pipelines settings page—you can:
 
 - [Mute findings][15] that match conditions such as service, environment, or vulnerability type.
 - [Set a due date][14] based on severity and runtime context, so remediation SLAs are enforced automatically.
