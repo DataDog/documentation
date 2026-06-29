@@ -58,15 +58,19 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 
 6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
 
-7. Add percentile aggregations for distribution metrics. You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99). 
-
-   <div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.
+7. Optionally, add percentile aggregations for distribution metrics. See [Percentile aggregation](#percentile-aggregation).
 
 8. Click **Create Metric**.
 
 Your RUM-based custom metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
 
 Datapoints are not created for metrics with historical data. Datapoints for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
+
+### Percentile aggregation
+
+You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99) for distribution metrics.
+
+<div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.</div>
 
 ### Add a RUM-based metric on sessions and views
 

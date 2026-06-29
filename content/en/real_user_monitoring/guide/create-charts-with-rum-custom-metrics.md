@@ -36,10 +36,10 @@ The following table maps common RUM use cases to widget types:
 
 | Use case | Recommended widget |
 |---|---|
-| Error rate or session count over time | timeseries |
+| Error rate or session count over time | Timeseries |
 | Top pages by load time | Top List |
 | Single KPI such as crash-free rate | Query Value |
-| Distribution of load times (requires [percentile aggregation][1]) | Distribution |
+| Distribution of load times (requires [percentile aggregation][3]) | Distribution |
 | Breakdown by country or version | Geomap or Top List |
 
 ## Combine metrics with formulas
@@ -86,3 +86,4 @@ Use a **Distribution** widget with a distribution metric that has percentile agg
 
 [1]: /real_user_monitoring/platform/generate_metrics
 [2]: https://app.datadoghq.com/dashboard/lists
+[3]: /real_user_monitoring/platform/generate_metrics#percentile-aggregation
