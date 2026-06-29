@@ -5407,6 +5407,11 @@ menu:
       identifier: jobs_monitoring_airflow_troubleshooting_dag
       parent: jobs_monitoring_airflow
       weight: 100000
+    - name: Upgrade OpenLineage Provider on Amazon MWAA
+      url: data_observability/jobs_monitoring/airflow_mwaa_upgrade
+      identifier: jobs_monitoring_airflow_mwaa_upgrade
+      parent: jobs_monitoring_airflow
+      weight: 200000
     - name: dbt
       url: data_observability/jobs_monitoring/dbt
       identifier: jobs_monitoring_dbt
