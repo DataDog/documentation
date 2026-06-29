@@ -19,7 +19,6 @@
             {{ end }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
-            {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
             {{ $rank := $page.Params.algolia.rank | default 70 }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
@@ -34,16 +33,17 @@
                 {{ end }}
             {{ end }}
 
-            {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
-            {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
-
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{- partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
 
             {{/* This page has no h2 headings lets do a full page record, so we don't miss the page */}}
             {{- $headingCount := (len .Fragments.HeadingsMap) | default 0 -}}
             {{- if eq $headingCount 0 -}}
-                {{- /* Full page record */ -}}
+                {{- /* Full page record. $content (Plain + cleanup regex) is computed lazily
+                       here because it is only used for this fallback record, not for the
+                       per-heading records produced by page-sections.json above. */ -}}
+                {{- $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 -}}
+                {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
                 {{- $record := (
                     dict "objectID" $object_id
                     "id" $object_id

@@ -1,4 +1,17 @@
-{{- /* Creates an algolia json record for each individual section (split by h2 header) of the given page. */ -}}
+{{- /* Creates an algolia json record for each individual section (split by heading) of the given page.
+
+   PERF (O(H*L) -> O(L) per page):
+   The previous implementation re-ran findRE + split over the ENTIRE rendered page ONCE PER
+   HEADING (4 full-content passes per heading, plus a uniquely-compiled regex per heading) =>
+   O(headings * page-length). This version scans the page content ONCE to build an
+   id -> {heading, content} lookup table (O(L)), then drives emission off
+   $page.Fragments.Headings exactly as before (same DFS order, same authored-heading
+   selection, same $order counter, same objectIDs). Per-heading work becomes an O(1) map
+   lookup, so the whole page is O(L).
+
+   NOTE: this also indexes the final heading-section of each page, which the previous
+   implementation silently dropped (its `split <text> ""` for the last heading returned only
+   the first character). Output is therefore a strict superset of the old index. */ -}}
 
 {{ $hugo_context := .context }}
 {{ $page := .page }}
@@ -6,8 +19,19 @@
 {{ $category := .category }}
 {{ $subcategory := .subcategory }}
 {{ $rank := .rank }}
-{{ $section_header := "" }}
-{{ $section_content := "" }}
+
+{{- /* Pass 1 (single O(L) scan): id -> {h: heading_html, c: content_block}. */ -}}
+{{- $marker := "\x1eHSPLIT\x1e" -}}
+{{- $marked := replaceRE "(<h[1-4][^>]*>)" (printf "%s${1}" $marker) $page.Content -}}
+{{- $tbl := newScratch -}}
+{{- range $block := (after 1 (split $marked $marker)) -}}
+    {{- $hh := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $block 1) 0 | default "" -}}
+    {{- $hid := index (index (findRESubmatch `id="([^"]+)"` $hh 1) 0) 1 | default "" -}}
+    {{- if and (ne $hid "") (not (isset ($tbl.Get "m") $hid)) -}}
+        {{- $tbl.SetInMap "m" $hid (dict "h" $hh "c" (index (split $block $hh) 1 | default "")) -}}
+    {{- end -}}
+{{- end -}}
+{{- $byID := $tbl.Get "m" -}}
 
 {{- define "partials/heading-sections" -}}
   {{- $ctx := .ctx -}}
@@ -17,23 +41,28 @@
   {{- $category := .ctx.category -}}
   {{- $subcategory := .ctx.subcategory -}}
   {{- $rank := .ctx.rank -}}
+  {{- $byID := .byid -}}
   {{- $section_header := "" -}}
   {{- $section_content := "" -}}
   {{- $section_content_words := "" -}}
   {{- $order := .order -}}
   {{- range $v := .data -}}
-      {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" $v.ID -}}
-      {{- $heading_html := index (findRE $restr $page.Content 1) 0 | default "" -}}
-      {{- $content_starting_after_header := index (split $page.Content $heading_html) 1 -}}
-      {{- $next_heading_html := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $content_starting_after_header 1) 0 | default "" -}}
-      {{- $content_block := index (split $content_starting_after_header $next_heading_html) 0 -}}
+      {{- $entry := index $byID $v.ID -}}
+      {{- $heading_html := "" -}}
+      {{- $content_block := "" -}}
+      {{- with $entry -}}
+          {{- $heading_html = .h -}}
+          {{- $content_block = .c -}}
+      {{- end -}}
       {{- $section_header := $heading_html | plainify | htmlUnescape | safeHTML -}}
       {{- $section_content = $content_block | plainify | htmlUnescape | safeHTML -}}
       {{- $section_content_words = (split $section_content " ") -}}
 
       {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
           {{- $chunked := slice -}}
-          {{- $post_len := len $section_content -}}
+          {{- /* Bound the chunk loop by WORD count (the loop index $i is a word offset).
+                 Char count only ever produced extra empty chunks filtered out below. */ -}}
+          {{- $post_len := len $section_content_words -}}
           {{- if gt $post_len 100000 -}}
               {{- $post_len = 100000 -}}
           {{- end -}}
@@ -73,9 +102,9 @@
           {{- end -}}
           {{- $order = add $order 1 -}}
       {{- end -}}
-      {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
+      {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order "byid" $byID) -}}
   {{- end -}}
   {{- return $order -}}
 {{- end -}}
 
-{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
+{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0 "byid" $byID) -}}
