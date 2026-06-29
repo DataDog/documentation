@@ -5,6 +5,7 @@ beta: true
 code_lang: ibm
 type: multi-code-lang
 code_lang_weight: 4
+site_support_id: rum_server_ibm
 aliases:
   - /real_user_monitoring/browser/setup/server/ibm
 further_reading:
@@ -12,10 +13,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 {{< callout header="Preview" btn_hidden="true" >}}
 RUM Auto-Instrumentation for IBM HTTP Server is in Preview.
