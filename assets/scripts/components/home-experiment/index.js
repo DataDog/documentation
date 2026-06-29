@@ -1,4 +1,4 @@
-import { initializeFeatureFlags } from 'scripts/helpers/feature-flags';
+import { initializeFeatureFlags, getStringFlag } from 'scripts/helpers/feature-flags';
 import { bindHomeTracking } from './tracking';
 
 const FLAG_KEY = 'docs-home-products-browse-experiment';
@@ -9,11 +9,7 @@ const legacyEl = document.querySelector('[data-home-variant-content="legacy"]');
 
 if (newEl && legacyEl) {
     initializeFeatureFlags().then((client) => {
-        const details = client?.getStringDetails?.(FLAG_KEY, DEFAULT_VARIANT);
-        console.log('[home-experiment] evaluation details', details);
-        console.log('[home-experiment] OpenFeature context', client?.getContext?.());
-        console.log('[home-experiment] DD_RUM session_id', window.DD_RUM?.getInternalContext?.()?.session_id);
-        const variant = details?.value ?? DEFAULT_VARIANT;
+        const variant = getStringFlag(client, FLAG_KEY, DEFAULT_VARIANT);
         if (variant === 'legacy') {
             newEl.setAttribute('hidden', '');
             legacyEl.removeAttribute('hidden');

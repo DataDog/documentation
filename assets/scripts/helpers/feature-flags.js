@@ -30,7 +30,6 @@ export const initializeFeatureFlags = () => {
         }
         try {
             const targetingKey = window.DD_RUM?.getInternalContext?.()?.session_id ?? crypto.randomUUID();
-            console.log('[Flags] init with targetingKey', targetingKey);
             await OpenFeature.setProviderAndWait(
                 new DatadogProvider({
                     applicationId: config.ddApplicationId,
