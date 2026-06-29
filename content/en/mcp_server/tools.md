@@ -1036,7 +1036,7 @@ Returns values for a specific frame or context field discovered with `get_profil
 
 ## Reference Tables
 
-Tools for managing [Reference Tables][45], including listing tables, reading rows, upserting rows, and creating tables from cloud storage or without a cloud backend.
+Tools for managing [Reference Tables][45], including listing tables, reading rows, upserting rows, and creating tables synced from cloud storage files or as empty tables you populate directly.
 
 ### `list_reference_tables`
 *Toolset: **reference-tables***\
