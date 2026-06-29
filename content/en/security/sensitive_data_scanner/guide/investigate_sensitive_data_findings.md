@@ -48,10 +48,26 @@ To investigate a log finding:
 5. In the **Example Logs** section, expand an entry to inspect its fields and attributes inline, or click **Show log** to open it in Log Explorer.
 6. Check **First Detected** and **Last Detected** at the top of the panel to understand how long the exposure has been active.
 
+### Alert on log findings
+
+The alerting flow for log findings uses [Security Notification Rules](/security/notifications/rules/) instead of log monitors. To create an alert, click **Notify** from the Logs Findings explorer or from an open finding. Datadog opens a new notification rule with the current explorer filters or finding attributes prefilled.
+
+In the notification rule:
+
+1. Keep **Finding** as the source type and scope the rule to Sensitive Data Scanner findings.
+2. Select severity levels and add filters for attributes such as `service`, `env`, `team`, or `rule.id`.
+3. Review the **Preview of Matching Results** panel to confirm the rule matches the intended findings.
+4. Choose whether to aggregate matching findings over a time frame or trigger immediately for each individual finding.
+5. Add notification recipients, such as teams, users, cases, Jira, PagerDuty, Slack, Microsoft Teams, webhooks, or other integrations.
+
+Sensitive Data Scanner finding notifications do not include log samples.
+
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
 
 On the **Sensitive Data Rule Findings** tab, you can filter your sensitive data findings by priority status, case status, and domain.
+
+For APM and RUM, continue to use [telemetry monitors](/security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/) to alert on sensitive data matches. Security Notification Rules for Sensitive Data Scanner findings apply to log findings only.
 
 To investigate a finding:
 
@@ -118,4 +134,3 @@ To investigate a datastore:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
-

@@ -160,6 +160,8 @@ Use the [Findings page][13] to see details of sensitive data findings identified
 - A graph of the events associated with the finding to help you pinpoint when a finding started and see how it has progressed.
 - Related cases created for the finding.
 
+For log findings, you can create a [security notification rule][22] from the Findings page or finding side panel to notify teams when new Sensitive Data Scanner findings match conditions such as severity, service, environment, team, or rule. Notifications do not include log samples, reducing the risk of sending sensitive data to third-party destinations.
+
 See [Investigate Sensitive Data Findings][14] for more information on triaging sensitive data using the Findings page.
 
 ## Review sensitive data trends
@@ -193,3 +195,4 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [19]: /security/sensitive_data_scanner/scanning_rules/library_rules/?category=Secrets+and+credentials#overview
 [20]: /llm_observability/
 [21]: /security/code_security/secret_scanning/
+[22]: /security/notifications/rules/

@@ -1,16 +1,16 @@
 ---
-title: Create Monitors to Alert on Sensitive Data
-description: Best practices for creating monitors that alert on sensitive data matches detected by Sensitive Data Scanner across logs, APM traces, and RUM events.
+title: Create Alerts for Sensitive Data
+description: Create alerts for Sensitive Data Scanner findings with Security Notification Rules for logs, and create monitors for sensitive data matches in APM traces and RUM events.
 further_reading:
   - link: /security/sensitive_data_scanner/
     tag: Documentation
     text: Set up Sensitive Data Scanner
+  - link: /security/notifications/rules/
+    tag: Documentation
+    text: Learn more about security notification rules
   - link: /security/sensitive_data_scanner/scanning_rules/library_rules
     tag: Documentation
     text: Learn more about out-of-the-box library rules
-  - link: /monitors/types/log/
-    tag: Documentation
-    text: Learn to set up log monitors
   - link: /monitors/types/apm/
     tag: Documentation
     text: Learn to set up APM monitors
@@ -20,52 +20,46 @@ further_reading:
 ---
 ## Overview
 
-After setting up Sensitive Data Scanner to detect and redact sensitive information in your telemetry data, you can create monitors to alert when sensitive data matches are detected. This helps you:
+After setting up Sensitive Data Scanner to detect and redact sensitive information in your telemetry data, you can create alerts when sensitive data is detected. This helps you:
 
 - Detect when sensitive data is being logged or transmitted unexpectedly
 - Alert security and compliance teams to potential data exposure
 - Track sensitive data volume trends over time
 - Identify services or teams that need additional security guidance
 
-When Sensitive Data Scanner detects a match, it automatically adds tags to the data that you can use to create targeted monitors. This guide shows you how to create monitors that alert on sensitive data detected across logs, APM traces, and RUM events.
+Use the alerting flow that matches the data type:
+
+- **Logs**: Use [Security Notification Rules][8] for pattern-based Sensitive Data Scanner findings.
+- **APM and RUM**: Use telemetry monitors based on tags that Sensitive Data Scanner adds when it detects matches.
 
 ## Prerequisites
 
-Before creating monitors that alert on sensitive data, ensure you have:
+Before creating alerts for sensitive data, ensure you have:
 
 - Sensitive Data Scanner configured with scanning groups and scanning rules. See [Set up Sensitive Data Scanner][1] for more information.
-- The appropriate [monitor creation permissions][6] in your Datadog account.
+- The appropriate permissions in your Datadog account:
+    - For log finding alerts, Security Notification Rules Read and Write permissions. To view the preview list of matching Sensitive Data Scanner findings, you also need Data Scanner Read permission.
+    - For APM and RUM monitors, [monitor creation permissions][6].
 - An understanding of which types of sensitive data are most critical for your organization to monitor.
 
-## Create monitors by data type
+## Create alerts by data type
 
-Sensitive Data Scanner works across multiple Datadog products: Logs, APM, and RUM. The process for creating monitors differs slightly depending on which data type you're monitoring.
+Sensitive Data Scanner works across multiple Datadog products. The alerting flow differs depending on which data type you're monitoring.
 
 ### Logs
 
-To create a log monitor for sensitive data matches:
+To create a notification rule for log findings:
 
-1. Navigate to **Monitors > New Monitor > [Logs][2]**.
-2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
-    - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:payment_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
-3. Configure the alert conditions based on your needs:
-    - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur within five minutes).
-    - **Group by**: Group by `service`, `env`, or `team` to identify which services are logging sensitive data.
-4. Configure [notifications][7] to alert the appropriate security or compliance teams.
-5. Add a descriptive monitor message that includes:
-    - Which type of sensitive data was detected
-    - Recommended remediation steps (for example, "Review application code to remove sensitive data from logs")
-    - Links to relevant documentation or runbooks
+1. Navigate to the [Sensitive Data Scanner Findings page][9].
+2. In the Logs Findings explorer, filter findings to the scope you want to alert on. For example, filter by severity, `service`, `env`, `team`, or scanning rule.
+3. Click **Notify** from the explorer or from an open finding.
+4. In the new notification rule, keep **Finding** as the source type and scope the rule to Sensitive Data Scanner findings.
+5. Review or adjust the prefilled filters. The **Preview of Matching Results** panel shows which findings match the rule.
+6. Choose whether to aggregate matching findings over a time frame or trigger immediately for each individual finding.
+7. Under **Destination**, add notification recipients, such as teams, users, cases, Jira, PagerDuty, Slack, Microsoft Teams, webhooks, or other integrations.
+8. Click **Save**.
 
-#### Monitor for payment card data in production logs
-
-Use this query to monitor all production logs for payment card matches: `sensitive_data_category:payment_card env:prod`
-
-If you want to be more specific, you can use individual rule tags: `sensitive_data:visa_credit_card env:prod`
-
-#### Monitor for multiple PII types
-
-To reduce false positives, scope your query to multiple specific rule types within a domain:`(sensitive_data:us_social_security_number OR sensitive_data:us_passport) env:prod`
+Sensitive Data Scanner finding notifications include finding context, such as the rule, severity, service, environment, team, and a link to the finding. Notifications do not include log samples.
 
 ### APM
 
@@ -84,7 +78,7 @@ To create an APM monitor for sensitive data in traces:
 
 Use this query to monitor for credentials detected in APM spans: `sensitive_data_category:credentials env:prod`.
 
-If you want to scope to specific credential types, such as AP keys or AWS access keys, use this query:`(sensitive_data:aws_access_key OR sensitive_data:api_key) service:checkout-service`
+If you want to scope to specific credential types, such as API keys or AWS access keys, use this query: `(sensitive_data:aws_access_key OR sensitive_data:api_key) service:checkout-service`
 
 ### RUM
 
@@ -99,38 +93,41 @@ To create a RUM monitor for sensitive data in events:
 
 #### Monitor for email addresses in RUM events
 
-Use this query to monitor for email address detected in RUM events: `sensitive_data:email_address application.name:checkout-app`
+Use this query to monitor for email addresses detected in RUM events: `sensitive_data:email_address application.name:checkout-app`
 
 ## Best practices
 
-### Scope to domain-specific rule sets
+### Scope alerts to high-value findings
 
-To avoid alert fatigue from false positives, scope your monitors to specific domains relevant to your organization. For example:
+To avoid alert fatigue from false positives, start with findings that represent the highest risk for your organization. For example:
 
-- **Financial services**: Use `sensitive_data_category:payment_card` to monitor payment card data.
-- **PII**: Use `sensitive_data_category:pii` to monitor for personally identifiable data.
-- **SaaS applications**: Use `sensitive_data_category:credentials` to monitor API keys and tokens.
+- **Financial services**: Alert on payment card findings.
+- **PII**: Alert on personally identifiable information findings.
+- **SaaS applications**: Alert on credentials, API keys, and tokens.
 
-### Combine with service tags
+For log finding alerts, use notification rule filters such as severity, `service`, `env`, `team`, or scanning rule. For APM and RUM monitors, use domain-specific tags such as `sensitive_data_category:payment_card`, `sensitive_data_category:pii`, or `sensitive_data_category:credentials`.
 
-Combine sensitive data tags with service-specific tags to create targeted monitors, for example: `sensitive_data_category:payment_card service:payment-service env:prod`
+### Combine with service and team context
+
+Combine sensitive data conditions with ownership or runtime context. For example, scope alerts to production services or teams responsible for customer-facing applications.
 
 This approach helps you:
+
 - Reduce noise by focusing on high-risk services
 - Route alerts to the appropriate teams
-- Identify patterns in which services are logging sensitive data
+- Identify patterns in which services are leaking or transmitting sensitive data
 
-### Set appropriate thresholds
+### Set appropriate thresholds for monitors
 
-Start with conservative thresholds and adjust based on your baseline:
+For APM and RUM monitors, start with conservative thresholds and adjust based on your baseline:
 
 1. Monitor sensitive data matches for 1-2 weeks without alerts to establish a baseline.
 2. Set thresholds above your normal baseline to catch anomalies.
 3. For critical data types (for example, payment cards and SSNs), consider setting thresholds lower or alerting on any match.
 
-### Use Case Management to track alert investigations
+### Use Case Management to track investigations
 
-When a sensitive data monitor triggers, use [Case Management][5] to:
+When a sensitive data alert triggers, use [Case Management][5] to:
 - Track the investigation process
 - Document remediation steps taken
 - Link related incidents or findings
@@ -141,9 +138,10 @@ When a sensitive data monitor triggers, use [Case Management][5] to:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/sensitive_data_scanner/setup/telemetry_data/
-[2]: https://app.datadoghq.com/monitors/create/log
 [3]: https://app.datadoghq.com/monitors/create/apm
 [4]: https://app.datadoghq.com/monitors/create/rum
 [5]: /service_management/case_management/
 [6]: /account_management/rbac/permissions/#monitors
 [7]: /monitors/notify/
+[8]: /security/notifications/rules/
+[9]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
