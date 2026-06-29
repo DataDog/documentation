@@ -4032,6 +4032,19 @@ menu:
           - GetVulnerabilityNotificationRules
         unstable: []
         order: 3
+    - name: Import security vulnerabilities
+      url: /api/latest/security-monitoring/import-security-vulnerabilities/
+      identifier: security-monitoring-import-security-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportSecurityVulnerabilities
+        unstable:
+          - v2
+        order: 152
     - name: List vulnerabilities
       url: /api/latest/security-monitoring/list-vulnerabilities/
       identifier: security-monitoring-list-vulnerabilities
