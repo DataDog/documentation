@@ -41,7 +41,7 @@ When you first start the runner, it generates a private key for authentication w
 
 The private action runner continuously polls for tasks from your Datadog account, executes them by interacting with your internal service, and reports the result back to Datadog.
 
-{{< img src="service_management/private_action_runner_-_diagram_workflow.png" alt="Overview diagram illustrating how Private actions work" style="width:90%;" >}}
+{{< img src="actions/private_actions/private_action_runner_-_diagram_workflow.png" alt="Overview diagram illustrating how Private actions work" style="width:90%;" >}}
 
 ## Monitor your Private Action Runners with Datadog Metrics
 

@@ -26,7 +26,7 @@ You can also use private locations to:
 - **Compare the application performance** from inside and outside your internal network.
 - **[Authenticate Synthetic Monitoring tests using Kerberos SSO][16]** for internal Windows-based sites and APIs.
 
-Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** 
+Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the Docker image on [Docker Hub][2] or download the [Windows installer][13].**\*** 
 
 **Note**: Private locations on Docker containers are supported only on the amd64 architecture. If you have any questions about arm64 support, contact [Datadog support][15].
 
@@ -102,7 +102,7 @@ Use your new private location just like a managed location in your Synthetic tes
 
 
 [1]: /continuous_testing/cicd_integrations
-[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[2]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/settings/private-locations
