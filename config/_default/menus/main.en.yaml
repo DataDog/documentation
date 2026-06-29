@@ -6342,6 +6342,16 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 320
+    - name: Approvals
+      url: feature_flags/concepts/approvals
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_approvals
+      weight: 321
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
