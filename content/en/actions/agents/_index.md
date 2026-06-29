@@ -23,7 +23,7 @@ further_reading:
 Bits Agent Builder is in Preview.
 {{< /callout >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Bits Agent Builder integration with Case Management is in Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Case Management integration is in Preview" >}}
 Automatically assign custom agents to work on your Cases.
 {{< /callout >}}
 
