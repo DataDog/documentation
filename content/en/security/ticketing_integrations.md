@@ -214,7 +214,7 @@ The following steps create a bidirectional ticket for a Security finding.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Linear issue" level="h4" expanded=false %}}
-1. Open the **Linear Issue** modal. You can use a new or existing issue. Let's look at creating a new Linear issue.
+1. Open the **Linear Issue** modal. You can use a new or existing issue.
 2. Complete the following settings:
    1. **Linear account:** select the Linear account where you want the issue created.
    2. **Linear team:** select the Linear team to create the issue in.
@@ -271,7 +271,7 @@ Existing bidirectional Linear issues are listed in the finding's **Ticketing** o
 
 Hover over the Linear issue to see its details, including status, assignee, and a timeline of changes synced between Linear and Datadog.
 
-{{< img src="security/bidir-linear-existing-hover.png" alt="Mouseover state showing Linear issue details." responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-linear-existing-hover.png" alt="Tooltip over a Linear issue pill showing issue status, assignee, and a timeline of changes synced between Linear and Datadog." responsive="true" style="width:100%;">}}
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
