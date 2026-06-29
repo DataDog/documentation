@@ -30,13 +30,16 @@ export const initializeFeatureFlags = () => {
         }
         try {
             const targetingKey = window.DD_RUM?.getInternalContext?.()?.session_id ?? crypto.randomUUID();
-            await OpenFeature.setContext({ targetingKey });
-            await OpenFeature.setProviderAndWait(new DatadogProvider({
-                applicationId: config.ddApplicationId,
-                clientToken: config.ddClientToken,
-                env,
-                enableExposureLogging: true
-            }));
+            console.log('[Flags] init with targetingKey', targetingKey);
+            await OpenFeature.setProviderAndWait(
+                new DatadogProvider({
+                    applicationId: config.ddApplicationId,
+                    clientToken: config.ddClientToken,
+                    env,
+                    enableExposureLogging: true
+                }),
+                { targetingKey }
+            );
             return OpenFeature.getClient();
         } catch (error) {
             console.warn('[Flags] Initialization failed:', error);
