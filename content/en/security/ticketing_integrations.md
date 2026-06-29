@@ -268,14 +268,13 @@ In **Datadog Associated Case**, the related Datadog case is provided. Click the 
 
 Existing bidirectional Linear issues are listed in the finding's **Ticketing** or **Next Steps** sections.
 
+{{< img src="security/bidir-linear-existing.png" alt="Finding with an existing Linear issue in the Next Steps section." responsive="true" style="width:100%;">}}
+
 Hover over the Linear issue to see its details, including status, assignee, and a timeline of changes synced between Linear and Datadog.
 
-In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
-
-<!-- Add screenshots of an existing Linear issue on a finding when available:
-{{< img src="security/bidir-linear-existing.png" alt="Finding with an existing Linear issue in the Next Steps section." responsive="true" style="width:100%;">}}
 {{< img src="security/bidir-linear-existing-hover.png" alt="Mouseover state showing Linear issue details." responsive="true" style="width:100%;">}}
--->
+
+In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
 [1]: /incident_response/case_management/
 {{% /tab %}}
