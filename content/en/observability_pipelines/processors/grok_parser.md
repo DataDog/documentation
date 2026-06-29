@@ -21,7 +21,7 @@ Per-rule filters and AI-generated parsing rules are in Preview. Contact your acc
 
 ## Overview
 
-Custom application or non-standard logs can often be hard to parse into structured formats. To address this, use the Grok Parser processor to generate parsing rules using AI, apply library rules for vendor-specific formats (such as Apache, Airflow, and MySQL), or create your own parsing rules. Then, test the rules on sample data to validate the syntax and preview the parsed log output.
+Custom application or non-standard logs can often be hard to parse into structured formats. To address this issue, use the Grok Parser processor to generate parsing rules using AI, apply library rules for vendor-specific formats (such as Apache, Airflow, and MySQL), or create your own parsing rules. Then, test the rules on sample data to validate the syntax and preview the parsed log output.
 
 **Notes**:
 - You must create a separate Grok Parser for each field you want to parse.
@@ -42,8 +42,8 @@ The Grok Parser processor:
 To set up the Grok Parser processor:
 
 1. Define a processor-level filter query. Only logs that match this filter query are sent to the parser. All logs, regardless of whether they are parsed by the processor, are sent to the next step in the pipeline. See [Logs Search Syntax][3] for information on creating queries.
-1. Enter the field to parse on in the log. For example, if you enter `logmessage`, the content of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
-1. Click {{< ui >}}Preview Library Rules{{< /ui >}} if you want to preview preset rules for integrations. You can test out-of-the-box parsing rules with your log samples. See [Library rules](#library-rules) for more information.
+1. Enter the log field to parse on. For example, if you enter `logmessage`, the content of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
+1. Click {{< ui >}}Preview Library Rules{{< /ui >}} to preview preset rules for integrations. You can test out-of-the-box parsing rules with your log samples. See [Library rules](#library-rules) for more information.
 1. Toggle {{< ui >}}Disable library rules{{< /ui >}} on the Grok Parser to disable all library parsing rules.
    <br>**Notes**:
    - You must create a custom parsing rule before you can disable library rules.
@@ -56,13 +56,13 @@ To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing 
 1. Enter a name for the parsing rule.
 1. (Preview) Enter a filter query to define which logs this rule applies to. The Grok Parser runs a rule only if a log matches the per-rule filter query, which lets you apply different parsing rules on different log formats. See [Logs Search Syntax][3] for information on creating queries.
 1. Enter a log sample you want to parse. Samples can be copied from Live Capture or pasted in from another source.
-1. (Preview) Click {{< ui >}}Generate New Rule{{< /ui >}} to have AI generate a new parsing rule based on the sample log. See [Manually write rules](#manually-write-rules) if you want to write your own rules.
-1. Review the parsed log in the {{< ui >}}Preview Changes{{< /ui >}} panel.
-1. Click {{< ui >}}Generate New Rule{{< /ui >}} to re-run the AI rule generator or manually update the rule so the log is parsed correctly. See [Parsing][1] for information on writing parsing rules.
-   <br>**Notes**:
-   - If you re-run the AI rule generator, a new rule is created. You must manually delete previously AI-created rules if you don't want them.
-   - You can run the AI rule generator a maximum of three times per sample.
-1. Repeat steps 3 to 6 to create rules based on additional sample logs. See [Order of custom rules](#order-of-custom-rules) for information on how rule order determines which rule parses a log.
+1. (Preview) Click {{< ui >}}Generate New Rule{{< /ui >}} to have AI generate a new parsing rule based on the sample log. Otherwise, see [Manually write rules](#manually-write-rules) to write your own rules.
+    1. Review the parsed log in the {{< ui >}}Preview Changes{{< /ui >}} panel.
+    1. Click {{< ui >}}Generate New Rule{{< /ui >}} to re-run the AI rule generator or manually update the rule so the log is parsed correctly. See [Parsing][1] for information on writing parsing rules.
+    <br>**Notes**:
+        - If you re-run the AI rule generator, a new rule is created. You must manually delete previously AI-created rules if you don't want them.
+        - You can run the AI rule generator a maximum of three times per sample.
+    1. Repeat step 4 to create rules based on additional sample logs. See [Order of custom rules](#order-of-custom-rules) for information on how rule order determines which rule parses a log.
 1. If you want to add library rules, select a library rule from the {{< ui >}}reference a library rule{{< /ui >}} dropdown menu. You can add multiple library rules. See [Library rules](#library-rules) for more information.
 1. Click {{< ui >}}Advanced Settings{{< /ui >}} if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
@@ -98,7 +98,9 @@ To write parsing rules manually, in the {{< ui >}}Create Parsing Rule{{< /ui >}}
 
 ### Library rules
 
-When a log is sent to the parser, library rules are automatically applied to the log if there is a `source` or `ddsource` field. For example, if a log has `source:mysql`, the parser applies the MySQL library rules to that log. You can also add library rules when you create a custom rule. See [Create an AI-assisted or custom parsing rule](#create-an-ai-assisted-or-custom-parsing-rule) for more information.
+When a log is sent to the parser, library rules are automatically applied to the log if there is a `source` or `ddsource` field. For example, if a log has `source:mysql`, the parser applies the MySQL library rules to that log. To see all available library rules, click {{< ui >}}Preview Library Rules{{< /ui >}} in the Grok Parser processor.
+
+You can also add library rules when you create a custom rule. See [Create an AI-assisted or custom parsing rule](#create-an-ai-assisted-or-custom-parsing-rule) for more information.
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
