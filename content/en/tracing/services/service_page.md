@@ -283,7 +283,7 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 Join Operations/Journey monitoring preview to start using Frontend activity section!
 {{< /callout >}}
 
-The Frontend activity tab connects your backend service to the Real User Monitoring (RUM) journeys, operations and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
+The Frontend activity tab connects your backend service to the Real User Monitoring (RUM) journeys, operations, and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
 
 {{< img src="static/images/tracing/services/service_page/front-end-activity.png" alt="FE-activity" style="width:90%;">}}
 
@@ -294,7 +294,7 @@ The metrics in this tab are computed from indexed spans that are correlated with
 - RUM and APM are connected, so that frontend events are correlated with backend traces from this service.
 - RUM Journey and Operations are enabled for your organization.
 
-To populate the Users and Accounts metrics, your RUM SDKs must send the usr.id and account.id attributes. Without these attributes, the journey, operation, and view metrics are still available, but Datadog cannot attribute activity to specific users or accounts.
+To populate the Users and Accounts metrics, your RUM SDKs must send the `usr.id` and `account.id` attributes. Without these attributes, the journey, operation, and view metrics are still available, but Datadog cannot attribute activity to specific users or accounts.
 
 **Filtering the view**
 
@@ -309,8 +309,8 @@ Use the cascading selectors at the top of the tab to scope the data, moving from
 
 The summary cards highlight the aggregate frontend impact for the current selection. Each card shows the value over the selected time frame and the change relative to the previous period:
 
-- Users: number of distinct users (usr.id) active in the selected journeys.
-- Accounts: number of distinct accounts (account.id) active in the selected journeys.
+- Users: number of distinct users (`usr.id`) active in the selected journeys.
+- Accounts: number of distinct accounts (`account.id`) active in the selected journeys.
 - Requests: number of frontend requests correlated with this service.
 - Avg Conversion: average conversion rate across the selected journeys.
 - P95 Latency: 95th percentile latency experienced by the frontend.
@@ -318,7 +318,7 @@ The summary cards highlight the aggregate frontend impact for the current select
 
 **Product Analytics enrichment**
 
-If you use Product Analytics, the Frontend activity tab surfaces enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
+If you use Product Analytics, the Frontend activity tab shows enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
 
 ## Further Reading
 
