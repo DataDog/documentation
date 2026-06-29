@@ -139,6 +139,10 @@
     }
 }
 
+.home-content:has([data-home-variant-content="legacy"]:not([hidden])) .home-content__blobs {
+    display: none;
+}
+
 .home-content {
     position: relative;
 
