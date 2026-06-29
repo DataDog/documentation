@@ -1036,7 +1036,7 @@ Returns values for a specific frame or context field discovered with `get_profil
 
 ## Reference Tables
 
-Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+Tools for managing [Reference Tables][45], including listing tables, reading rows, appending and upserting rows, and creating tables from cloud storage or as empty local tables.
 
 ### `list_reference_tables`
 *Toolset: **reference-tables***\
@@ -1045,6 +1045,13 @@ Lists and searches [Reference Tables][45] in the organization, with optional fil
 - List all reference tables in my organization.
 - Find reference tables with `customer` in the name.
 - Show me the reference tables sorted by last update time.
+
+### `list_reference_table_rows`
+*Toolset: **reference-tables***\
+Lists all rows in a reference table with optional filtering and pagination. Use `list_reference_tables` first to find the table ID and schema.
+
+- List all rows in the `ip_allowlist` reference table.
+- Show me the first 50 rows of the `customer_tiers` table.
 
 ### `get_reference_table_rows`
 *Toolset: **reference-tables***\
@@ -1060,10 +1067,18 @@ Appends new rows to an existing reference table. This operation only adds rows a
 - Add a new row for user `user003` with name `Carol` and age `28` to the users table.
 - Append these five new account entries to the accounts reference table.
 
+### `upsert_reference_table_rows`
+*Toolset: **reference-tables***\
+Inserts new rows or updates existing rows in a reference table. If a row with the same primary key already exists, its values are overwritten. Use this instead of `append_reference_table_rows` when rows may already exist.
+
+- Update the tier for account `acct-123` in the `customer_tiers` table.
+- Add or update these ten service entries in the `service_catalog` reference table.
+
 ### `create_reference_table`
 *Toolset: **reference-tables***\
-Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
+Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty table you can populate with `append_reference_table_rows` or `upsert_reference_table_rows`; cloud-backed mode (`S3`, `GCS`, `AZURE`) syncs from a CSV file in cloud storage. Only `INT32` and `STRING` field types are supported.
 
+- Create an empty reference table called `service_catalog` with fields for service name, owner team, and tier.
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
