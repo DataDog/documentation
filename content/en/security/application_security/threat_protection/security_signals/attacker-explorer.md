@@ -2,9 +2,10 @@
 title: Attackers Explorer
 disable_toc: false
 aliases:
+  - /security/application_security/security_signals/attacker-explorer/
   - /security/application_security/threats/attacker-explorer
 further_reading:
-- link: "/security/application_security/policies"
+- link: "/security/application_security/threat_protection/policies"
   tag: "Documentation"
   text: "Protection"
 ---

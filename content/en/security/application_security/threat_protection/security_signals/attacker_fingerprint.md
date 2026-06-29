@@ -2,9 +2,10 @@
 title: Attacker Fingerprint
 disable_toc: false
 aliases:
+  - /security/application_security/security_signals/attacker_fingerprint/
   - /security/application_security/threats/attacker_fingerprint
 further_reading:
-- link: "/security/application_security/security_signals/attacker_clustering"
+- link: "/security/application_security/threat_protection/security_signals/attacker_clustering"
   tag: "Documentation"
   text: "Attacker Clustering"
 ---
@@ -72,4 +73,4 @@ Attacker fingerprints are used in the [Attacker Clustering][1] feature. If a sig
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/security_signals/attacker_clustering
+[1]: /security/application_security/threat_protection/security_signals/attacker_clustering

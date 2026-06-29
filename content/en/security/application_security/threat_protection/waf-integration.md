@@ -2,6 +2,7 @@
 title: WAF Integrations
 disable_toc: false
 aliases:
+  - /security/application_security/waf-integration/
   - /security/application_security/threats/waf-integration
 further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
