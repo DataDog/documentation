@@ -150,7 +150,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::TODO:root"]
+      identifiers = ["arn:aws:iam::117348461845:root"]
     }
     condition {
       test     = "StringEquals"
@@ -522,7 +522,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::TODO:root"]
+      identifiers = ["arn:aws:iam::117348461845:root"]
     }
     condition {
       test     = "StringEquals"

@@ -435,7 +435,7 @@ export default {
     ap1: '417141415827',
     ap2: '412381753143',
     gov2: '382742775718',
-    uk1: 'TODO',
+    uk1: '117348461845',
     gov: '392588925713'
   },
   aws_customer_access_govcloud_id: {
