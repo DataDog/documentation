@@ -1,5 +1,7 @@
 ---
 title: Internal Developer Portal
+description: Datadog's Internal Developer Portal unifies live telemetry, metadata, and self-service workflows to standardize software delivery and optimize developer experience.
+disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog

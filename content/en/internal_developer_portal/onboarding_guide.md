@@ -1,6 +1,7 @@
 ---
 title: Onboard with Internal Developer Portal
 site_support_id: idp
+description: A phased implementation guide for platform and engineering leaders setting up Datadog's Internal Developer Portal, from planning and data sources to golden paths.
 further_reading:
   - link: 'https://app.datadoghq.com/idp/get-started'
     tag: 'App'

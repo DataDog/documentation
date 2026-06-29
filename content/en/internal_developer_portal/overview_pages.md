@@ -1,6 +1,7 @@
 ---
 title: Overview Pages
 site_support_id: idp
+description: Internal Developer Portal overview pages give developers a view of their action items and service health, and give engineering managers a high-level view of reliability and scorecard performance.
 aliases:
 - /software_catalog/overview_pages
 further_reading:
