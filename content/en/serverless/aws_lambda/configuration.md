@@ -50,6 +50,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
 - [Authenticate with Workload Identity Federation](#authenticate-with-workload-identity-federation)
 - [Reload API key secret periodically](#reload-api-key-secret-periodically)
+- [Store API key in AWS Secrets Manager](#store-api-key-in-aws-secrets-manager)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -810,6 +811,18 @@ If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also s
 Example use case: For security, every day (86400 seconds), the API key is rotated and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, so the API key is reloaded during the grace period of the old key.
 
 This is available for version 88+ of the Datadog Lambda Extension.
+
+## Store the API key in AWS Secrets Manager
+
+`DD_API_KEY_SECRET_ARN` specifies the ARN of an AWS Secrets Manager secret that stores your Datadog API key. When set, the Datadog Lambda Extension fetches the secret at cold start and uses its value as the API key. Grant the Lambda function's execution role `secretsmanager:GetSecretValue` permission on the referenced ARN.
+
+Starting with version 96, you can store the secret value in one of the following formats:
+- **Plain string**: The extension uses the secret value as the API key.
+- **JSON object**: If the secret value parses as a JSON object containing a `dd_api_key` field, the extension extracts that field's value and uses it as the API key. This is useful when the same secret stores multiple credentials (for example, alongside an app key or other tokens).
+```json
+{ "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
+```
+**Note**: If the JSON object does not contain a `dd_api_key` field, or the value is not valid JSON, the extension falls back to using the raw secret string. The JSON key name is fixed as `dd_api_key` and is not configurable.
 
 ## Troubleshoot
 
