@@ -22,6 +22,9 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Workload Protection
+  url: /security/workload_protection/
+  icon: cloud-security-management
 ---
 
 {{< product-availability >}}
