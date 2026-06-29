@@ -22,7 +22,7 @@ further_reading:
 
 ## Add a RUM custom metric to a dashboard
 
-1. Open an existing dashboard or [create one][2].
+1. Open an existing dashboard or [create a dashboard][2].
 2. Click **Add Widgets** and select a widget type. See [Choose the right widget](#choose-the-right-widget) for guidance.
 3. In the widget editor, set the data source to **Metrics**.
 4. Enter your custom metric name, for example `rum.sessions.count_by_geography`.
@@ -47,12 +47,13 @@ The following table maps common RUM use cases to widget types:
 You can combine multiple RUM custom metrics in a single widget using formulas. This is useful for calculating derived values such as rates and ratios.
 
 For example, to calculate a crash-free rate, create two custom metrics:
-- `rum.sessions.crash_free`—a count of sessions that complete without a crash
+- **`rum.sessions.crash_free`**: A count of sessions that complete without a crash.
+- **`rum.sessions.total`**: A count of all sessions.
 - `rum.sessions.total`—a count of all sessions
 
 In the widget editor, add both metrics as separate queries, then enter the formula `a / b * 100` to calculate the percentage.
 
-{{< img src="real_user_monitoring/guide/create-charts-with-custom-metrics/custom-metrics-formulas-example.png" alt="Widget editor showing two RUM custom metric queries combined with a formula to calculate crash-free rate as a percentage" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/create-charts-with-custom-metrics/custom-metrics-formulas-example.png" alt="Widget editor showing two RUM custom metric queries combined with a formula to calculate crash-free rate as a percentage." style="width:100%;" >}}
 
 ## Use template variables for reusable charts
 
@@ -74,7 +75,7 @@ Use a **Geomap** widget with a custom metric that counts completed checkout sess
 
 ### Monitor crash-free rate by release version
 
-Use a **timeseries** widget with the formula pattern described above to track crash-free rate over time. Group by `version` to compare stability across releases and detect regressions introduced by specific builds.
+Use a **Timeseries** widget with the formula pattern described above to track crash-free rate over time. Group by `version` to compare stability across releases and detect regressions introduced by specific builds.
 
 ### Visualize page load performance trends
 
