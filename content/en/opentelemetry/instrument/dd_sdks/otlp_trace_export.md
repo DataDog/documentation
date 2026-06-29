@@ -14,10 +14,10 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}
-OTLP export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
+OTLP trace export from Datadog SDKs is in Preview. To provide feedback or request support, contact your Datadog account team.
 {{< /callout >}}
 
-Datadog SDKs can export traces in [OTLP][1] format to any OTLP-compatible receiver or backend, including [DDOT][2] or any OpenTelemetry Collector.
+Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receiver, including [DDOT][2] or any OpenTelemetry Collector.
 
 ## Prerequisites
 
