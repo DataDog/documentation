@@ -43,10 +43,10 @@ To investigate a log finding:
 
 1. Use {{< ui >}}Group by{{< /ui >}} to organize findings by {{< ui >}}Rule{{< /ui >}}, {{< ui >}}Logs Pattern{{< /ui >}}, or {{< ui >}}Service{{< /ui >}}. To surface findings where sensitive data is actively exposed, filter by {{< ui >}}Leaking{{< /ui >}} in the {{< ui >}}Match State{{< /ui >}} facet.
 2. Click a finding to open the detail panel.
-3. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
-4. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
-5. In the {{< ui >}}Example Logs{{< /ui >}} section, expand an entry to inspect its fields and attributes inline, or click {{< ui >}}Show log{{< /ui >}} to open it in Log Explorer.
-6. Check {{< ui >}}First Detected{{< /ui >}} and {{< ui >}}Last Detected{{< /ui >}} at the top of the panel to understand how long the exposure has been active.
+3. At the top of the panel, check {{< ui >}}First Detected{{< /ui >}} and {{< ui >}}Last Detected{{< /ui >}} to understand how long the exposure has been active.
+4. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
+5. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
+6. In the {{< ui >}}Example Logs{{< /ui >}} section, review representative examples of affected logs. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline.
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
