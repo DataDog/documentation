@@ -93,7 +93,7 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
 4. Save your settings.
 
 ### Meeting message sync
-You can configure Incident Management to push all incident Microsoft Teams meeting messages to the incident timeline. To enable, toggle on **Sync meeting chat to incident timeline**.
+You can configure Incident Management to push all incident Microsoft Teams meeting messages to the incident timeline. To enable, toggle **Sync meeting chat to incident timeline**.
 
 The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
 
