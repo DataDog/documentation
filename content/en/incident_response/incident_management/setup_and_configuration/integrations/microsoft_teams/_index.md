@@ -48,7 +48,7 @@ After you enable this automation, you can define a **channel name template** for
 
 ### Channel message syncing
 
-You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline. To enable, toggle on **Automatically push Microsoft Teams channel messages to the incident timeline**.
+You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline. To enable, toggle **Automatically push Microsoft Teams channel messages to the incident timeline**.
 
 The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
 
