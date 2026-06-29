@@ -16,12 +16,19 @@ further_reading:
 {{< product-availability >}}
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Per-rule filters and generating parsing rules with AI are in Preview. Contact your account manager to request access.
+Using per-rule filters and generating parsing rules with AI are in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview
 
 Custom application or non-standard logs can often be hard to parse into structured formats. To address this, use the Grok Parser processor to generate parsing rules using AI, apply library rules for vendor-specific formats (such as Apache, Airflow, and MySQL), or create your own parsing rules. Then, test the rules on sample data to validate the syntax and preview the parsed log output.
+
+**Notes**:
+- You must create a separate Grok Parser for each field you want to parse.
+- A log is only parsed by the first rule it matches, so [the order of your rules matters](#order-of-custom-rules).
+- If you are using Worker versions older than 2.17, your logs must have the `source` or `ddsource` field and the `message` field for the processor to parse them.
+
+## Setup
 
 The Grok Parser processor:
 
@@ -30,24 +37,17 @@ The Grok Parser processor:
 1. Uses the rule-level filter query to apply the first parsing rule that matches the log (in Preview).
 1. Overwrites the specified log field with the rule's output, and then sends the log to the next step in the pipeline.
 
-**Notes**:
-- You must create a separate Grok Parser for each field you want to parse.
-- A log is only parsed by the first rule it matches, so [the order of your rules matter](#order-of-custom-rules).
-- If you are using Worker versions older than 2.17, your logs must have the `source` or `ddsource` field and the `message` field on your logs for the processor to parse them.
-
-{{< img src="observability_pipelines/processors/grok_parser_setup.png" alt="The Grok Parser processor with a filter query and field to parse on field" style="width:50%;" >}}
-
-## Setup
+{{< img src="observability_pipelines/processors/grok_parser_setup.png" alt="The Grok Parser processor panel showing the filter query and field-to-parse settings." style="width:50%;" >}}
 
 To set up the Grok Parser processor:
 
 1. Define a processor-level filter query. Only logs that match this filter query are sent to the parser. All logs, regardless of whether they are parsed by the processor, are sent to the next step in the pipeline. See [Logs Search Syntax][3] for information on creating queries.
-1. Enter the field to parse on in the log. For example, if you enter `logmessage`, the contents of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
+1. Enter the field to parse on in the log. For example, if you enter `logmessage`, the content of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
 1. Click {{< ui >}}Preview Library Rules{{< /ui >}} if you want to preview preset rules for integrations. You can test out-of-the-box parsing rules with your log samples. See [Library rules](#library-rules) for more information.
 1. Toggle {{< ui >}}Disable library rules{{< /ui >}} on the Grok Parser to disable all library parsing rules.
    <br>**Notes**:
    - You must create a custom parsing rule before you can disable library rules.
-   - All library rules are automatically applied by default. Disable library rules only if you are relying on custom parsing rules.
+   - Library rules are applied by default. Disable library rules only if you are relying on custom parsing rules.
 
 ### Create an AI-assisted or custom parsing rule
 
@@ -63,21 +63,20 @@ To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing 
    - If you re-run the AI rule generator, a new rule is created. You must manually delete previously AI-created rules if you don't want them.
    - You can run the AI rule generator a maximum of three times per sample.
 1. Repeat steps 3 to 6 to create rules based on additional sample logs. See [Order of custom rules](#order-of-custom-rules) for information on how rule order determines which rule parses a log.
-1. If you want to add library rules, select a library rule from the **reference a library rule** dropdown menu. You can add multiple library rules. See [Library rules](#library-rules) for more information.
+1. If you want to add library rules, select a library rule from the {{< ui >}}reference a library rule{{< /ui >}} dropdown menu. You can add multiple library rules. See [Library rules](#library-rules) for more information.
 1. Click {{< ui >}}Advanced Settings{{< /ui >}} if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
+{{< img src="observability_pipelines/processors/grok_parser_create_rule.png" alt="The Create Parsing Rule modal in the Grok Parser processor." style="width:50%;" >}}
+
 If a log is sent to the parser but is not parsed by any rules, the Worker generates a log with the error: `The parser failed to apply rule`.
-
-{{< img src="observability_pipelines/processors/grok_parser_create_rule.png" alt="The Create Parsing Rule modal in the Grok Parser processor" style="width:50%;" >}}
-
 #### Order of custom rules
 
 When you have multiple custom rules for a Grok Parser processor, a log is parsed by the first rule whose query it matches, and then sent to the next step in the pipeline. The processor does not try to match the log to subsequent rules. Therefore, the order of the rules matters if a log might match multiple rules.
 
 ##### Example
 
-For example, consider a parser with these parsing rules:
+Consider a parser with these parsing rules:
 
 1. Rule Example 1
 1. Rule Example 2
@@ -85,11 +84,11 @@ For example, consider a parser with these parsing rules:
 
 If a log sent to the parser matches all three rule queries, the log is only parsed by Rule Example 1 because it's listed before rules 2 and 3.
 
-{{< img src="observability_pipelines/processors/grok_parser_rule_order.png" alt="Three parsing rules listed in order in the Grok Parser processor" style="width:50%;" >}}
+{{< img src="observability_pipelines/processors/grok_parser_rule_order.png" alt="Three parsing rules listed in order in the Grok Parser processor." style="width:50%;" >}}
 
 #### Manually write rules
 
-To write parsing rules manually, in the **Create Parsing Rule** modal:
+To write parsing rules manually, in the {{< ui >}}Create Parsing Rule{{< /ui >}} modal:
 
 1. Click {{< ui >}}write rules manually{{< /ui >}}.
 1. Enter the rules for parsing the logs. See [Parsing][1] for information on writing parsing rules with Datadog Grok patterns. **Note**: The `url`, `useragent`, and `csv` filters are not available.
