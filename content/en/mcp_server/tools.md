@@ -1036,7 +1036,7 @@ Returns values for a specific frame or context field discovered with `get_profil
 
 ## Reference Tables
 
-Tools for managing [Reference Tables][45], including listing tables, reading rows, appending and upserting rows, and creating tables from cloud storage or as empty local tables.
+Tools for managing [Reference Tables][45], including listing tables, reading rows, upserting rows, and creating tables from cloud storage or without a cloud backend.
 
 ### `list_reference_tables`
 *Toolset: **reference-tables***\
@@ -1062,7 +1062,7 @@ Retrieves specific rows from a reference table by their primary key values. Use 
 
 ### `append_reference_table_rows`
 *Toolset: **reference-tables***\
-Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
+Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field. If rows may already exist, use `upsert_reference_table_rows` instead.
 
 - Add a new row for user `user003` with name `Carol` and age `28` to the users table.
 - Append these five new account entries to the accounts reference table.
