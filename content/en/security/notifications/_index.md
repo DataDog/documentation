@@ -27,7 +27,7 @@ products:
   icon: security-code-security
 - name: Workload Protection
   url: /security/workload_protection/
-  icon: cloud-security-management
+  icon: security-workload-security
 ---
 
 {{< product-availability >}}

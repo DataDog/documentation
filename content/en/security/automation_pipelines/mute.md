@@ -14,7 +14,7 @@ products:
     icon: app-sec
   - name: Workload Protection
     url: /security/workload_protection/
-    icon: cloud-security-management
+    icon: security-workload-security
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
