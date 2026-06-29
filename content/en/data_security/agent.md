@@ -163,8 +163,16 @@ agent diagnose show-metadata agent-telemetry
 | logs.decoded                                | Total number of decoded logs                                                                                           |
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
+| logs.http_connectivity_check                | Count of HTTP connectivity checks, tagged by status (success/failure)                                                  |
+| logs.http_connectivity_failure              | Count of HTTP connectivity check failures, tagged by root cause (dns, tls, timeout, connection, http_status, other)    |
+| logs.http_connectivity_retry_attempt        | Count of HTTP connectivity retry attempts, tagged by status (success/failure)                                          |
+| logs.restart_attempt                        | Count of logs agent restart attempts, tagged by status and target transport                                             |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
+| logs.auto_multi_line_default_total_lines    | Total log lines processed by the detecting aggregator for sources relying on the auto multiline detection default           |
+| logs.auto_multi_line_default_would_combine  | Number of lines that would be combined if auto multiline detection were enabled by default                              |
+| logs.auto_multi_line_default_would_truncate | Number of lines in groups that would be truncated if auto multiline detection were enabled by default                   |
 | logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
+| logs_destination.destination_workers        | Maximum number of active HTTP connections per log destination                                                          |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
