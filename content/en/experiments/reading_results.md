@@ -39,20 +39,27 @@ For each metric, the scorecard displays:
 
 The width and interpretation of the confidence interval depend on the experiment's configured [analysis method][2].
 
-<div class="alert alert-info"><strong>How metrics are calculated</strong><br><br>
-Datadog analyzes experiments at the <strong>subject</strong> level—the unit you configured when you set up the experiment, typically a user. Datadog computes a metric value for each enrolled subject (for example, revenue per user or whether the user completed a signup). These per-subject values form a distribution for each variant. Datadog's statistical engine then compares these distributions between control and treatment.<br><br>
-<strong>Relative lift</strong> measures how much the treatment shifted the average per-subject metric value compared to the control:<br><br>
-<pre><code>Relative lift = (Treatment − Control) / Control</code></pre>
+{{% collapse-content title="How metrics are calculated" level="h4" expanded=false id="how-metrics-are-calculated" %}}
+
+Datadog analyzes experiments at the **subject** level—the unit you configured when you set up the experiment, typically a user. Datadog computes a metric value for each enrolled subject (for example, revenue per user or whether the user completed a signup). These per-subject values form a distribution for each variant. Datadog's statistical engine then compares these distributions between control and treatment.
+
+**Relative lift** measures how much the treatment shifted the average per-subject metric value compared to the control:
+
+```
+Relative lift = (Treatment − Control) / Control
+```
+
 A relative lift of 10% means the treatment group's average per-subject value is 10% higher than the control group's average. Negative lift means the treatment performed worse on average.
-</div>
+
+{{% /collapse-content %}}
 
 ### Confidence intervals
 
-The confidence interval is a range of lift values that the observed data supports. The true lift could fall outside this range, but values inside the interval are more consistent with what the experiment measured.
+The confidence interval is a range of lift values that are consistent with the observed data. The true lift could fall outside this range, but values inside the interval are more consistent with what the experiment measured.
 
-- If the **entire interval is above zero**, the result is statistically significant in the positive direction. The improvement to the metric is unlikely to be attributable to random variation.
+- If the **entire interval is above zero**, the result is statistically significant in the positive direction. An improvement at least this large is unlikely to occur if there is no true effect.
 - If the **entire interval is below zero**, the result is statistically significant in the negative direction. The treatment likely reduced the metric.
-- If the **interval crosses zero**, the result is not statistically significant. The observed lift may have occurred by chance.
+- If the **interval crosses zero**, the result is not statistically significant. The result is consistent with a true effect of zero.
 
 Use the interval width as an indicator of precision: a narrower interval means a more precise estimate of lift; a wider interval means more uncertainty, often because the sample is smaller or the metric is noisy.
 
@@ -65,7 +72,7 @@ Experiments typically enroll only a subset of eligible users. Switch to the {{< 
 For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 - **Control and treatment values**: The average per-subject metric value in each variant—the same values shown on the main scorecard tab.
-- **Coverage**: The estimated proportion of your global metric total that would come from the eligible population under a control-only rollout.
+- **Coverage**: The estimated proportion of your global metric total associated with the experiment's eligible population (excluding the effect of the experiment).
 - **Global lift**: The estimated change to your overall metric totals if the treatment were released to all eligible users. Datadog calculates global lift as the product of coverage and the experiment's local (relative) lift.
 
 ## Exploring results
@@ -98,7 +105,7 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /experiments/
+[1]: /experiments/plan_and_launch_experiments
 [2]: /experiments/analysis_methods
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /real_user_monitoring/
