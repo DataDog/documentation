@@ -68,7 +68,7 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 
 ### No Worker logs in Log Explorer
 
-If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. If Worker logs are not indexed in Log Management, the Latest Deploy and Setup tab displays a perpetual loading state instead of the current worker status. All Worker logs have the tag `source:op_worker`.
+If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. If Worker logs are not indexed in Log Management, the Latest Deploy and Setup tab displays a perpetual loading state instead of the current Worker status. All Worker logs have the tag `source:op_worker`.
 
 ### Duplicate Observability Pipelines logs
 
