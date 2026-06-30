@@ -34,7 +34,7 @@ For example, a customer's metrics may have been crawled at 1:00 p.m, and then at
 
 ### How do you enable this or opt out of Adaptive Polling?
 
-All Datadog orgs and AWS accounts are automatically enrolled in adaptive polling. To opt out, make a request with [Datadog support](https://www.datadoghq.com/support/).
+All Datadog organizations and AWS accounts are automatically enrolled in adaptive polling. To opt out, contact [Datadog support](https://www.datadoghq.com/support/).
 
 ### Unopened dashboards and notebooks
 
