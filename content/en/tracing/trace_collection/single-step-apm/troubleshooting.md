@@ -15,6 +15,147 @@ further_reading:
 
 Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 
+## Injector debug logs
+
+Injector debug logs show what the injector decided for each process: whether injection succeeded, was denied, or was skipped, and why. Use injector logs to diagnose whether and how a tracer was injected. After injection, use [tracer debug logs][13] to diagnose the tracer running inside the process.
+
+### Enable debug mode
+
+Set the following environment variable on the process you want to instrument:
+
+```
+DD_APM_INSTRUMENTATION_DEBUG=true
+```
+
+This raises the injector log level to `DEBUG` and adds `stderr` as a log sink.
+
+The variable must be set in the environment that the injected process inherits:
+
+#### Host
+
+Export the variable before starting the process:
+
+```sh
+export DD_APM_INSTRUMENTATION_DEBUG=true
+./my-service
+```
+
+#### Docker
+
+Add the environment variable to the application container:
+
+```sh
+docker run -e DD_APM_INSTRUMENTATION_DEBUG=true my-image
+```
+
+Debug output appears in the container logs (`docker logs <container>`).
+
+#### Kubernetes
+
+Add the variable to the container spec in your pod template:
+
+{{< code-block lang="yaml" disable_copy="true" >}}
+spec:
+  containers:
+    - name: my-app
+      env:
+        - name: DD_APM_INSTRUMENTATION_DEBUG
+          value: "true"
+{{< /code-block >}}
+
+Alternatively, add the following pod annotation to enable debug mode without editing the container spec:
+
+{{< code-block lang="yaml" disable_copy="true" >}}
+metadata:
+  annotations:
+    admission.datadoghq.com/apm-inject.debug: "true"
+{{< /code-block >}}
+
+Debug output appears in the application pod logs (`kubectl logs <pod>`).
+
+### Review debug logs
+
+#### Where to find the logs
+
+With debug mode enabled, the injector writes to the standard error of the instrumented process:
+
+| Environment | Where to look |
+| --- | --- |
+| Host or shell | The process's terminal, or wherever its `stderr` is redirected |
+| Docker | `docker logs <container>` |
+| Kubernetes | `kubectl logs <pod>` (the application pod, not the Cluster Agent) |
+
+**Note**: By default, the injector writes debug output to `stderr`. To send output to a file instead, set `DD_APM_INSTRUMENTATION_OUTPUT_PATHS` to an absolute path.
+
+#### Successful injection
+
+To confirm that injection occurred, look for the run whose executable matches your runtime. The following example shows a successful Node.js injection:
+
+```
+<DEBUG> ... [linux/process.c:405] process_exe: 'node'
+<DEBUG> ... [linux/process.c:443] Main executable path: '/usr/local/bin/node'
+<DEBUG> ... [workload_selection.c:147] Workload selection allowed injection: continuing
+<DEBUG> ... [workload_selection.c:90] Succesfully loaded policy: 'requirements.bin from SDK policies' from '/opt/datadog-packages/datadog-apm-inject/0.67.0/requirements/nodejs/requirements.bin' [size: 3864]
+<DEBUG> ... [languages.c:71] detected language: 'nodejs'
+<DEBUG> ... [languages.c:72] detected language version: '20.20.2'
+<DEBUG> ... [linux/env_injector.c:38] injection config: DD_TELEMETRY_FORWARDER_PATH=/opt/datadog-packages/datadog-apm-inject/0.67.0/inject/process
+<DEBUG> ... [linux/env_injector.c:38] injection config: DD_TAGS=_dd.injection.mode:k8s
+<DEBUG> ... [linux/env_injector.c:38] injection config: DD_INJECTION_ENABLED=tracer
+<DEBUG> ... [linux/env_injector.c:38] injection config: NODE_OPTIONS=--require /opt/datadog/apm/library/js/node_modules/dd-trace/init.js
+<INFO>  ... [./libinject.c:81] injection duration: 1.066500 ms
+<DEBUG> ... [injection_metadata.c:101] sending injection-metadata telemetry: result='0', result_reason='injection completed successfully'
+<DEBUG> ... [./libinject.c:231] injector finished
+```
+
+| Log line | Meaning |
+| --- | --- |
+| `process_exe: '<exe>'` / `Main executable path: '<path>'` | The process being evaluated. |
+| `Workload selection allowed injection: continuing` | Policy permitted injection. |
+| `Succesfully loaded policy: 'requirements.bin...'` | The language requirements policy for the detected runtime was loaded. |
+| `detected language: '<lang>'` / `detected language version: '<version>'` | The runtime was identified (`nodejs`, `java`, `python`, `ruby`, `dotnet`, `php`) and its version was read. |
+| `injection config: <VAR>=<value>` | Each environment variable the injector set. Seeing `DD_INJECTION_ENABLED=tracer` plus the language-specific variable (`NODE_OPTIONS`, `JAVA_TOOL_OPTIONS`, and so on) confirms the tracing SDK was loaded. |
+| `injection duration: <N> ms` | Injection completed and the elapsed time. |
+| `injection completed successfully` (`result='0'`) | The injector reported a successful injection to telemetry. A non-zero `result` with a different `result_reason` indicates a failure. |
+| `injector finished` | The injector constructor returned. |
+
+#### Common failure scenarios
+
+**Injection disabled**
+
+If `DD_INSTRUMENT_SERVICE_WITH_APM=false` or injection is otherwise disabled:
+
+```
+<DEBUG> ... [libinject.c:115] disabled flag set, not injecting
+```
+
+The injector loaded but intentionally skipped injection. Remove `DD_INSTRUMENT_SERVICE_WITH_APM=false` or set it to `true` to allow injection.
+
+**No runtime detected**
+
+If the process is not a supported language runtime:
+
+```
+<DEBUG> ... [libinject.c:175] No known runtime was detected - not injecting!
+```
+
+The injector ran but the process is not one it instruments (`java`, `python`, `nodejs`, `ruby`, `dotnet`, `php`). This is expected for non-application processes.
+
+**Workload selection denied injection**
+
+```
+<DEBUG> ... [workload_selection.c:149] Workload selection denied injection
+```
+
+A policy prevented injection for this process. The preceding `Evaluating '<policy-name>'` lines show which rule matched and the values it compared.
+
+**Re-exec detected**
+
+```
+<DEBUG> ... [libinject.c:102] Re-exec detected!
+```
+
+The process re-executed itself so the injected environment variables take effect. This is expected behavior. Injection continues in the re-executed process, which produces its own set of debug lines.
+
 ## Troubleshooting methods
 
 You can troubleshoot injection issues in two ways: by using Fleet Automation in Datadog or by manually verifying at the container level.
@@ -336,20 +477,7 @@ When contacting support about injection issues, collect the following informatio
 
    It should be owned by `root` with `644` permissions (`-rw-r--r--`).
 
-1. Enable injector debug logs by setting the environment variable:
-
-   ```
-   DD_APM_INSTRUMENTATION_DEBUG=true
-   ```
-
-   By default, logs are written to stderr.
-
-   - For host injection, you can send logs to a file by setting:
-     ```
-     DD_APM_INSTRUMENTATION_OUTPUT_PATHS=<log_file_path>
-     ```
-
-   - For Docker injection, logs can be viewed using `docker logs` or `docker compose logs`.
+1. Enable injector debug logs and collect the output. For instructions on enabling debug mode and reading the output, see [Injector debug logs](#injector-debug-logs).
 
 1. Provide an Agent flare.
 
@@ -364,12 +492,7 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
   ```
   kubectl describe pod <app pod>
   ```
-- Injector debug logs from the application container:
-  - Set `DD_APM_INSTRUMENTATION_DEBUG: true`
-  - Logs are printed to stderr by default, or can be routed to a file through:
-    ```
-    DD_APM_INSTRUMENTATION_OUTPUT_PATHS=<log_file_path>
-    ```
+- Injector debug logs from the application pod. For instructions, see [Injector debug logs](#injector-debug-logs).
 
 ## Further reading
 
@@ -387,3 +510,4 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 [11]: /tracing/guide/injectors/
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[13]: /tracing/troubleshooting/tracer_debug_logs/
