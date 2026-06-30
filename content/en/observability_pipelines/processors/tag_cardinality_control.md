@@ -25,7 +25,7 @@ Optionally, you can also configure [per-metric overrides](#optional-per-metric-o
 To set up the Tag Cardinality Control processor:
 
 1. Define a filter query. See [Metrics Search Syntax][1] for more information.
-    - Only metrics matching the filter are processed.. 
+    - Only metrics matching the filter are processed.
     - All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Enter a cardinality limit for the maximum number of distinct values per tag. This limit is applied to all metrics that match the filter query.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.

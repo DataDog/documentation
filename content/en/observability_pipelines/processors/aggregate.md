@@ -18,7 +18,7 @@ The Aggregate processor combines multiple metrics with the same tag values into 
 To set up the Aggregate processor:
 
 1. Define a filter query. See [Metrics Search Syntax][1] for information on creating queries.
-    - Only metrics matching the filter are processed.. 
+    - Only metrics matching the filter are processed.
     - All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. In the **Mode** dropdown menu, select the aggregation function to use. See the [Modes](#modes) section for details.
 1. In the **Interval** field, enter the time window in seconds for aggregating metrics. The maximum value is 60 seconds.
