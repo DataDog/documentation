@@ -118,14 +118,14 @@ secret_backend_config:
 
 ##### All `aws_session` options
 
-The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional — when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
 
 | Field | Description |
 |---|---|
 | `aws_region` | AWS region (for example, `us-east-1`). |
 | `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
 | `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
-| `aws_profile` | Named profile from the shared AWS config file (`~/.aws/config`). |
+| `aws_profile` | Named profile from the shared AWS Config file (`~/.aws/config`). |
 | `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
 | `aws_external_id` | External ID to pass when assuming a cross-account role. |
 
@@ -382,14 +382,14 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 ##### All `aws_session` options
 
-The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional — when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
 
 | Field | Description |
 |---|---|
 | `aws_region` | AWS region (for example, `us-east-1`). |
 | `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
 | `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
-| `aws_profile` | Named profile from the shared AWS config file (`~/.aws/config`). |
+| `aws_profile` | Named profile from the shared AWS Config file (`~/.aws/config`). |
 | `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
 | `aws_external_id` | External ID to pass when assuming a cross-account role. |
 
@@ -446,7 +446,7 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 ##### All `azure_session` options
 
-The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional — the Agent falls back to [Default Azure Credential][2001] (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
+The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional—the Agent falls back to [Default Azure Credential][2001] (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
 
 | Field | Description |
 |---|---|
