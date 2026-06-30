@@ -40,15 +40,19 @@ If you want to set a cardinality limit for a specific metric:
     - **Custom limit**: Sets a cardinality limit for this metric.
     - **Exclude from limit**: Excludes this metric from being counted toward the cardinality limit. This is useful when you are tracking an important metric and you don't want to drop any samples or tags due to a cardinality limit.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
-1. If you want to add specific tag overrides for this metric:
-    1. Click **Add Tag Override**.
-    1. Enter the tag key you want to set a limit for.
-    1. Select the override mode in the dropdown menu:
-        - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used.
-            - **Note**: Tag values persist until the Worker restarts or the pipeline configuration is updated. Any pipeline configuration update resets the tag values, even if the update doesn't modify the Tag Cardinality Control processor.
-        - **Exclude from limit**: Excludes metrics with the specified tag from being counted toward the cardinality limit.
-    1. Enter the limit for the maximum number of tag key values.
-    1. Click **Add Override**.
+
+#### Per-tag overrides
+
+To add specific tag overrides for this metric:
+
+1. Click **Add Tag Override**.
+1. Enter the tag key you want to set a limit for.
+1. Select the override mode in the dropdown menu:
+    - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used.
+        - **Note**: Tag values persist until the Worker restarts or the pipeline configuration is updated. Any pipeline configuration update resets the tag values, even if the update doesn't modify the Tag Cardinality Control processor.
+    - **Exclude from limit**: Excludes metrics with the specified tag from being counted toward the cardinality limit.
+1. Enter the limit for the maximum number of tag key values.
+1. Click **Add Override**.
 
 {{< img src="observability_pipelines/processors/tag_cardinality_control_overrides.png" alt="The per-metric override panel with a custom limit set to 100 with per-tag overrides for the host tag excluded from the limit and the region tag limited to five." style="width:80%;" >}}
 
