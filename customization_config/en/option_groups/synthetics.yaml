@@ -24,3 +24,4 @@ synthetics_variables_api_options:
     default: true
   - id: test_info
   - id: local_and_global
+  
