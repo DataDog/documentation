@@ -19,6 +19,7 @@ API Posture brings together several capabilities, all built on the same live API
 - Assess what each API exposes with [API Findings][5] and [Sensitive Data][6]. Findings aggregate the vulnerabilities and misconfigurations tied to your endpoints, and sensitive data tagging shows which endpoints process PII, credentials, or payment data.
 - Verify which endpoints are publicly accessible, and which require authentication, using [Endpoint Scanning][7]. Endpoint Scanning probes your endpoints from outside your environment, rather than inferring behavior from observed traffic.
 - Measure your organization-wide posture in the API Posture section of the [{{< ui >}}Overview{{< /ui >}} page][8]. It shows how your endpoints are discovered, which ones are exposed to attacks or process sensitive data, and your open findings by severity.
+- Track your security posture against industry-standard frameworks with [Compliance][9]. It maps API security detection rules to OWASP API Security Top 10 controls and shows a real-time score of passing and failing controls across your services.
 
 ## Further reading
 
@@ -32,3 +33,4 @@ API Posture brings together several capabilities, all built on the same live API
 [6]: /security/application_security/api_posture/sensitive_data/
 [7]: /security/application_security/api_posture/endpoint_scanning/
 [8]: https://app.datadoghq.com/security/appsec/overview/summary
+[9]: /security/application_security/api_posture/compliance/
