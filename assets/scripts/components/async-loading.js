@@ -6,6 +6,7 @@ import { initCopyCode } from './copy-code';
 import { initCopyPageButton } from './copy-page-button';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
+import { initAllAcaInstrumentationPickers } from './aca-instrumentation-picker';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
@@ -191,6 +192,10 @@ function loadPage(newUrl) {
             }
 
             initializeGroupedListings();
+
+            if (document.querySelector('.aca-instrumentation-picker')) {
+                initAllAcaInstrumentationPickers();
+            }
 
             // if newly requested TOC is NOT disabled
             if (newTOC && newTOC.querySelector('#TableOfContents') && currentTOC) {

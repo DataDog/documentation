@@ -1,0 +1,94 @@
+.aca-instrumentation-picker {
+    margin: 1.5rem 0 2rem;
+
+    h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+    }
+
+    &__methods {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        @media (max-width: 575.98px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__method {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+        width: 100%;
+        padding: 1.125rem 1.175rem;
+        text-align: left;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: border-color 0.15s, box-shadow 0.15s;
+
+        &:hover,
+        &:focus-visible {
+            border-color: $ddpurple;
+            outline: none;
+        }
+
+        &.is-selected {
+            border-color: $ddpurple;
+            box-shadow: 0 0 0 1px $ddpurple;
+        }
+    }
+
+    &__method-title {
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: #000;
+    }
+
+    &__method-desc {
+        font-size: 0.90625rem;
+        color: #6c757d;
+        line-height: 1.4;
+    }
+
+    &__languages {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    &__language {
+        padding: 0.6rem 1.4rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #000;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+
+        &:hover,
+        &:focus-visible {
+            border-color: $ddpurple;
+            outline: none;
+        }
+
+        &.is-selected {
+            color: #fff;
+            background: $ddpurple;
+            border-color: $ddpurple;
+        }
+    }
+
+    &__cta {
+        display: inline-block;
+        margin-top: 0.25rem;
+    }
+}
