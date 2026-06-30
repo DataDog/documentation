@@ -196,7 +196,7 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Get all 500 status code logs from production.
 
 ### `search_datadog_rum_events`
-*Toolset: **core***\
+*Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
 Search Datadog RUM events using advanced query syntax.
 
@@ -205,7 +205,7 @@ Search Datadog RUM events using advanced query syntax.
 - Show recent user interactions on product detail pages.
 
 ### `aggregate_rum_events`
-*Toolset: **core***\
+*Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
 Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
 
@@ -1272,7 +1272,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
-Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Affects data retention and billing. Confirm the change before applying.
+Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
 - Disable the "long tasks" retention filter on my main RUM app.
@@ -1280,7 +1280,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
-Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Affects data retention and billing. Confirm the new order before applying.
+Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
 - Reorder my retention filters so the specific filters are evaluated before the broad ones.
@@ -1288,7 +1288,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
-Permanently deletes a RUM retention filter by ID. This action cannot be undone and affects data retention and billing. Confirm the deletion before applying. This operation is idempotent.
+Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
 - Remove the retention filter with ID `abc-123-def` from my main RUM app.
