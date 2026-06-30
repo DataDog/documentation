@@ -21,7 +21,7 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetry in [OpenTelemetry Protocol (OTLP)][1] format controls how telemetry is sent. The [OpenTelemetry API][2] controls how you instrument your services. You can use either on its own or both together.
+Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetry in [OpenTelemetry Protocol (OTLP)][1] format controls how telemetry is sent. The [OpenTelemetry API][2] controls how you instrument your services. These can be enabled separately, but utilizing them together provides an OpenTelemetry-native experience.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
