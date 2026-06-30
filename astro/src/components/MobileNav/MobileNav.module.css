@@ -212,7 +212,7 @@
 
 .mobile-nav__sublist {
   list-style: none;
-  padding: 0;
+  padding: 0 0 var(--space-sm);
   margin: 0;
 }
 
@@ -262,7 +262,6 @@
 
 .mobile-nav__api-section {
   position: relative;
-  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
 }
 
 .mobile-nav__api-section-toggle {
@@ -321,7 +320,7 @@
 
 .mobile-nav__api-operations {
   list-style: none;
-  padding: 0;
+  padding: 0 0 var(--space-sm);
   margin: 0;
 }
 
