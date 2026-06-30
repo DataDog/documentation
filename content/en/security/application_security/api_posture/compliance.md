@@ -16,6 +16,8 @@ API Posture Compliance lets you continuously evaluate your API security posture 
 
 Unlike [Cloud Security compliance][1], which evaluates cloud infrastructure misconfigurations and identity risks, API Posture Compliance focuses exclusively on **API security findings**: threats and vulnerabilities detected in the traffic reaching your application APIs.
 
+{{< img src="security/application_security/api_posture/aap_compliance_framework_detail.png" alt="The OWASP API Security Top 10 compliance framework detail page in App and API Protection, showing a posture score of 64.7%, top failing findings, rules severity breakdown, and a list of failing rules grouped by requirement." style="width:100%;">}}
+
 ## Supported frameworks
 
 | Framework | Version |
