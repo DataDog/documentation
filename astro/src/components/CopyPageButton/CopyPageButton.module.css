@@ -70,6 +70,11 @@
 .copy-page-button--icon {
     display: none;
     margin-bottom: 0;
+    /* Spacing from the preceding breadcrumb. Lives on the button (not its
+       breadcrumbs__trailing wrapper) so it only applies when the button is
+       shown: while hidden, `display: none` removes the box and its margin,
+       leaving no stray gap after the last crumb. */
+    margin-left: var(--space-xs);
 }
 
 .copy-page-button--icon-visible {

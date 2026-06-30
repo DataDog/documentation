@@ -37,11 +37,11 @@ const hasTrailing = Astro.slots.has("trailing");
                 aria-current={isLast ? "page" : undefined}
               >
                 {crumb.label}
-                {isLast && hasTrailing && (
-                  <span class={cl("breadcrumbs__trailing")}>
-                    <slot name="trailing" />
-                  </span>
-                )}
+              </span>
+            )}
+            {isLast && hasTrailing && (
+              <span class={cl("breadcrumbs__trailing")}>
+                <slot name="trailing" />
               </span>
             )}
           </li>
