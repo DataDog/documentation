@@ -54,7 +54,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 **Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][5] for more information.
 
 ## Missing logs within an execution
-You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`. Using exclusion filters does not impact tracing.
+You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`.
 
 {{< partial name="log-to-trace-indexing-note.html" >}}
 
