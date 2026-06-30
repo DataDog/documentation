@@ -100,6 +100,11 @@ IaC Security analyzes infrastructure-as-code to detect misconfigurations before 
 With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
 
 ## Supply Chain Security (Preview)
+
+{{< callout url=https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc/viewform?edit_requested=true
+ btn_hidden="false" header="Join the Preview!">}}
+Use this form to submit your request to join the Supply Chain Security Preview.
+{{< /callout >}}
 Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
 
 Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
