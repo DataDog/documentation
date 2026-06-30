@@ -32,7 +32,9 @@ test.describe('Mobile nav active API page', () => {
     const panel = page.locator('#mobile-nav.mobile-nav__panel--open');
     await expect(panel).toBeVisible();
 
-    const activeOp = page.locator('.mobile-nav__api-operation--active');
+    const activeOp = page.locator(
+      '.mobile-nav__list--api .mobile-nav__link--active',
+    );
     await expect(activeOp).toHaveCount(1);
     await expect(activeOp).toBeVisible();
     await expect(activeOp).toHaveAttribute('aria-current', 'page');
@@ -43,7 +45,7 @@ test.describe('Mobile nav active API page', () => {
       (el) => getComputedStyle(el).color,
     );
     const inactiveColor = await page
-      .locator('.mobile-nav__api-operation:not(.mobile-nav__api-operation--active)')
+      .locator('.mobile-nav__list--api .mobile-nav__link:not(.mobile-nav__link--active)')
       .first()
       .evaluate((el) => getComputedStyle(el).color);
     expect(activeColor).not.toBe(inactiveColor);

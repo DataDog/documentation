@@ -193,14 +193,29 @@ export function findActivePageIdentifier(
   tree: DocsNavNode[],
   pathname: string,
 ): string | null {
-  let best: { identifier: string; length: number } | null = null;
-  const visit = (node: DocsNavNode) => {
-    const length = node.href ? matchLength(node.href, pathname) : 0;
-    if (length > 0 && (!best || length > best.length)) {
-      best = { identifier: node.identifier, length };
+  // The most specific self-match (by own href) anywhere in a subtree.
+  function bestSelfMatch(
+    node: DocsNavNode,
+  ): { identifier: string; length: number } | null {
+    let best = node.href
+      ? { identifier: node.identifier, length: matchLength(node.href, pathname) }
+      : null;
+    if (best && best.length === 0) best = null;
+    for (const child of node.children) {
+      const childBest = bestSelfMatch(child);
+      if (childBest && (!best || childBest.length > best.length)) {
+        best = childBest;
+      }
     }
-    node.children.forEach(visit);
-  };
-  tree.forEach(visit);
+    return best;
+  }
+
+  let best: { identifier: string; length: number } | null = null;
+  for (const node of tree) {
+    const nodeBest = bestSelfMatch(node);
+    if (nodeBest && (!best || nodeBest.length > best.length)) {
+      best = nodeBest;
+    }
+  }
   return best?.identifier ?? null;
 }

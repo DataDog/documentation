@@ -6,6 +6,7 @@ import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 
 interface Props {
   categories: ApiCategoryStub[];
@@ -82,19 +83,8 @@ const searchLabels: SearchBarLabels = {
       })
     }
   </ul>
-  {
-    /* Inline + after the list so the active section is parsed and the scroll lands before first paint. */
-  }
-  <script is:inline>
-    {
-      const active = document.querySelector(".api-side-nav__category--active");
-      const section = active?.closest("li");
-      const container = active?.closest(".api-side-nav__list");
-      if (section && container) {
-        container.scrollTop +=
-          section.getBoundingClientRect().top -
-          container.getBoundingClientRect().top;
-      }
-    }
-  </script>
+  <ScrollActiveIntoView
+    containerSelector=".api-side-nav__list"
+    activeSelector=".api-side-nav__category--active"
+  />
 </nav>

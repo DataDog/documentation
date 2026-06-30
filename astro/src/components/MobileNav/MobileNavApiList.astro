@@ -3,15 +3,18 @@
  * The API documentation menu for the mobile nav, shown on `/api/` pages in
  * place of the main docs accordion.
  *
- * Each category is a collapsible <details> section with a rotating chevron.
- * The active category starts expanded; all others start collapsed. This lets
- * users browse and navigate to operations in any category without leaving
- * the current page.
+ * Reuses the docs accordion's BEM classes (`mobile-nav__section`,
+ * `mobile-nav__section-toggle`, `mobile-nav__sublist`, `mobile-nav__link`) so
+ * the two trees stay visually identical and share one set of styles — the only
+ * API-specific tweak is the `--compact` operation density. Each category is a
+ * collapsible <details> section; the active category starts expanded so users
+ * can browse and navigate operations without leaving the current page.
  */
 import type { ApiCategory } from "@lib/api/schemas/views";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
+import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 
 interface Props {
   categories: ApiCategory[];
@@ -24,7 +27,7 @@ const { categories, activeCategorySlug, currentOperationSlug, lang } = Astro.pro
 const cl = classListFactory(styles);
 ---
 
-<ul class={cl("mobile-nav__list")}>
+<ul class:list={[cl("mobile-nav__list"), cl("mobile-nav__list--api")]}>
   {
     categories.map((category) => {
       const isActiveCategory = category.slug === activeCategorySlug;
@@ -33,14 +36,13 @@ const cl = classListFactory(styles);
       return (
         <li>
           <details
-            class={cl("mobile-nav__api-section")}
+            class={cl("mobile-nav__section")}
+            data-level="0"
+            style="--depth:0"
             open={isActiveCategory || undefined}
           >
             <summary
-              class:list={[
-                cl("mobile-nav__api-section-toggle"),
-                isCategoryLandingPage && cl("mobile-nav__api-category--active"),
-              ]}
+              class={cl("mobile-nav__section-toggle")}
               aria-current={isCategoryLandingPage ? "page" : undefined}
             >
               <span>{category.name}</span>
@@ -53,7 +55,7 @@ const cl = classListFactory(styles);
                 </svg>
               </span>
             </summary>
-            <ul class={cl("mobile-nav__api-operations")}>
+            <ul class={cl("mobile-nav__sublist")}>
               {category.operations.map((operation) => {
                 const isActiveOperation =
                   isActiveCategory && operation.slug === currentOperationSlug;
@@ -62,10 +64,12 @@ const cl = classListFactory(styles);
                     <a
                       href={`${categoryHref}${operation.slug}/`}
                       class:list={[
-                        cl("mobile-nav__api-operation"),
-                        isActiveOperation &&
-                          cl("mobile-nav__api-operation--active"),
+                        cl("mobile-nav__link"),
+                        cl("mobile-nav__link--compact"),
+                        isActiveOperation && cl("mobile-nav__link--active"),
                       ]}
+                      data-level="1"
+                      style="--depth:1"
                       aria-current={isActiveOperation ? "page" : undefined}
                     >
                       {operation.summary}
@@ -81,27 +85,11 @@ const cl = classListFactory(styles);
   }
 </ul>
 
-{/* Scroll the current page near the top of the panel, just below the sticky
-    header, so it's visible the moment the overlay opens. Runs inline at parse
-    time; the panel is laid out (fixed position, fixed height) even while it
-    sits off-screen, so its scrollTop can be set before first paint. */}
-<script is:inline>
-  {
-    const panel = document.getElementById("mobile-nav");
-    const active =
-      panel?.querySelector(".mobile-nav__api-operation--active") ??
-      panel?.querySelector(".mobile-nav__api-category--active");
-    const header = panel?.querySelector(".mobile-nav__header");
-    if (panel && active) {
-      const headerHeight = header
-        ? header.getBoundingClientRect().height
-        : 0;
-      const gap = 12;
-      panel.scrollTop +=
-        active.getBoundingClientRect().top -
-        panel.getBoundingClientRect().top -
-        headerHeight -
-        gap;
-    }
-  }
-</script>
+{/* Scroll the current page (operation link or active category summary, both
+    marked aria-current) near the top of the panel, just below the sticky
+    header, so it's visible the moment the overlay opens. */}
+<ScrollActiveIntoView
+  containerSelector="#mobile-nav"
+  headerSelector=".mobile-nav__header"
+  gap={12}
+/>

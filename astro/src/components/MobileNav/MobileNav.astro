@@ -25,19 +25,11 @@ import {
 } from "@lib/componentUtils/docsNavMenu";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
-import {
-  DEFAULT_LOCALE,
-  localizedHref,
-  stripLocalePrefix,
-  type Locale,
-} from "@lib/i18n/locale";
+import { localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
 
-interface Props {
-  lang?: Locale;
-}
-
-const { lang = DEFAULT_LOCALE } = Astro.props;
+// All locale-dependent links derive from `pageLang` (read from the URL below),
+// so this component takes no props.
 const cl = classListFactory(styles);
 
 // On `/api/` pages, swap the main docs accordion for the API category/operation
@@ -57,23 +49,31 @@ const currentOperationSlug = apiPathSegments[3];
 
 const apiCategories = isApiContext ? await getCategoriesView(pageLang) : [];
 
-const tree = getDocsNavTree(lang);
+// The docs accordion is only rendered on non-API pages, so skip building its
+// tree (and the active-page lookups) entirely in API context. Everything is
+// keyed off `pageLang` (derived from the URL) so the nav and the page locale
+// can never disagree.
+const tree = isApiContext ? [] : getDocsNavTree(pageLang);
 
 // Expand the section that owns the current page by default, matching Hugo's
 // mobile nav. Computed at build time from the page URL, so it stays correct as
 // the site grows beyond API docs (no per-page hardcoding).
-const activeSectionId = findActiveSectionIdentifier(tree, Astro.url.pathname);
+const activeSectionId = isApiContext
+  ? null
+  : findActiveSectionIdentifier(tree, Astro.url.pathname);
 
 // Identifier of the leaf (or section-landing) link the user is actually on, so
 // it can be brand-colored — distinct from the expanded section above.
-const activePageId = findActivePageIdentifier(tree, Astro.url.pathname);
+const activePageId = isApiContext
+  ? undefined
+  : (findActivePageIdentifier(tree, Astro.url.pathname) ?? undefined);
 
 // TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
 // translations exist in the Hugo i18n bundle.
 const quicknav = [
   { label: i18n("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
-  { label: i18n("docs") || "Docs", href: HUGO_ORIGIN + localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
-  { label: i18n("api"), href: localizedHref(lang, "/api/latest/"), icon: "nav_mobile_api", alt: "api" },
+  { label: i18n("docs") || "Docs", href: HUGO_ORIGIN + localizedHref(pageLang, "/"), icon: "nav_docs", alt: "docs" },
+  { label: i18n("api"), href: localizedHref(pageLang, "/api/latest/"), icon: "nav_mobile_api", alt: "api" },
 ];
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.

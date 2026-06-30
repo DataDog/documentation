@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 // The mobile nav only renders below the 992px breakpoint.
 test.use({ viewport: { width: 390, height: 844 } });
@@ -6,7 +6,7 @@ test.use({ viewport: { width: 390, height: 844 } });
 // Non-API page so the docs accordion (not the API category list) is shown.
 const DOCS_PAGE = '/docs/test_pages/components/header';
 
-async function openMobileNav(page: Parameters<typeof test>[1]['page']) {
+async function openMobileNav(page: Page) {
   await page.goto(DOCS_PAGE);
   await page.locator('.mobile-nav__hamburger[data-hydrated="true"]').click();
   const panel = page.locator('#mobile-nav.mobile-nav__panel--open');

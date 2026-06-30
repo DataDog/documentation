@@ -255,104 +255,13 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* --- API nav (shown on /api/ pages in place of the docs accordion) ---
-   Each API category is a collapsible <details> section, matching the docs
-   accordion pattern. The caret rotates when open; the active section is
-   brand-colored. Operations inside are indented links. */
-
-.mobile-nav__api-section {
-  position: relative;
-}
-
-.mobile-nav__api-section-toggle {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  cursor: pointer;
-  padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--hugo-mobile-nav-indent-base);
-  color: var(--hugo-nav-text);
-  font-size: var(--font-size-base);
-  text-transform: uppercase;
-  font-weight: var(--font-weight-semibold);
-}
-
-.mobile-nav__api-section-toggle::-webkit-details-marker {
-  display: none;
-}
-.mobile-nav__api-section-toggle::marker {
-  content: "";
-}
-
-.mobile-nav__api-section-toggle:hover {
-  color: var(--hugo-nav-brand-primary);
-}
-
-.mobile-nav__api-section[open] > .mobile-nav__api-section-toggle {
-  color: var(--hugo-nav-brand-primary);
-}
-
-.mobile-nav__api-section[open] > .mobile-nav__api-section-toggle .mobile-nav__caret {
-  transform: rotate(180deg);
-}
-
-.mobile-nav__api-section[open]
-  > .mobile-nav__api-section-toggle
-  .mobile-nav__caret-arrow {
-  stroke: var(--hugo-nav-brand-primary);
-}
-
-/* Category landing-page link inside the expanded operations list. Indented
-   one step further than the toggle to visually sit within the expanded section. */
-.mobile-nav__api-category {
-  display: block;
-  padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end) var(--space-sm)
-    var(--hugo-mobile-nav-indent-base);
-  color: var(--hugo-nav-text);
-  text-decoration: none;
-  font-size: var(--font-size-base);
-  text-transform: uppercase;
-  font-weight: var(--font-weight-semibold);
-}
-
-.mobile-nav__api-category:hover {
-  color: var(--hugo-nav-brand-primary);
-}
-
-.mobile-nav__api-operations {
-  list-style: none;
-  padding: 0 0 var(--space-sm);
-  margin: 0;
-}
-
-.mobile-nav__api-operations li {
-  list-style: none;
-  border: none;
-}
-
-/* Tight vertical rhythm (--space-xs, not --space-sm) so more operations fit in
-   the viewport at once — the operation list can be long, and keeping rows close
-   together helps the active page stay visible when the section is anchored. */
-.mobile-nav__api-operation {
-  display: block;
-  padding: var(--space-xs) var(--hugo-mobile-nav-link-padding-end) var(--space-xs)
-    calc(
-      var(--hugo-mobile-nav-indent-base) + var(--hugo-mobile-nav-indent-step)
-    );
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: var(--font-size-base);
-}
-
-.mobile-nav__api-operation:hover {
-  color: var(--hugo-nav-brand-primary);
-}
-
-/* Current page: purple + semibold. Applies to whichever level is the active
-   page (operation on an endpoint page, category on a category landing page). */
-.mobile-nav__api-category--active,
-.mobile-nav__api-operation--active {
-  color: var(--hugo-nav-brand-primary);
-  font-weight: var(--font-weight-semibold);
+/* Tighter vertical rhythm for the API operation list, which can be long: keeping
+   rows close together fits more operations in the viewport and helps the active
+   page stay visible when its section is anchored. Single-class specificity
+   matches `.mobile-nav__link`'s padding shorthand and wins by source order. */
+.mobile-nav__link--compact {
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
 }
 
 /* --- Hamburger toggle (shown in mobile header row) --- */
