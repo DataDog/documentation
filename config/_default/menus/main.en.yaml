@@ -8252,6 +8252,21 @@ menu:
       parent: application_security
       identifier: application_security_overview
       weight: 4
+    - name: API Posture
+      url: security/application_security/overview/api_posture/
+      parent: application_security_overview
+      identifier: application_security_overview_api_posture
+      weight: 1
+    - name: Threat Protection
+      url: security/application_security/overview/threat_protection/
+      parent: application_security_overview
+      identifier: application_security_overview_threat_protection
+      weight: 2
+    - name: Attack Summary
+      url: security/application_security/overview/attack_summary/
+      parent: application_security_overview
+      identifier: application_security_overview_attack_summary
+      weight: 3
     - name: Threat Protection
       url: security/application_security/threat_protection/
       parent: application_security

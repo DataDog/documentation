@@ -1,44 +1,40 @@
 ---
-title: Attack Summary
-aliases:
-  - /security/application_security/threats/threat-overview
-  - /security/application_security/threats/attack-summary
+title: Overview
+disable_toc: false
+further_reading:
+- link: "/security/application_security/overview/api_posture/"
+  tag: "Documentation"
+  text: "API Posture"
+- link: "/security/application_security/overview/threat_protection/"
+  tag: "Documentation"
+  text: "Threat Protection"
+- link: "/security/application_security/overview/attack_summary/"
+  tag: "Documentation"
+  text: "Attack Summary"
 ---
 
-<!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->
+App and API Protection (AAP) provides three overview pages that give you a high-level view of your application and API security. Each page focuses on a different aspect of your security posture and links to the underlying traces, signals, and findings so you can investigate further.
 
-The App and API Protection (AAP) [Attack Summary][2] provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
+## API Posture
 
-Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
+The [API Posture][1] page gives you a security-focused view of your API estate. It shows how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them.
 
-## Sections
+You can tailor this page with the **Customize Page** button in the page header. In the popover, drag sections between the **Visible** and **Hidden** areas to control which sections appear, and reorder visible sections by dragging them. Your changes persist locally so the page keeps your layout on future visits.
 
-Attack Surface Area
-: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that identify potential vulnerabilities.
+## Threat Protection
 
-Attack Traffic
-: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection. They allow users to identify spikes in malicious traffic and patterns.
+The [Threat Protection][2] page shows how well your services are instrumented and protected against attacks. It reports App and API Protection activation coverage, attack and exploit protection, the security signals your services generate, the services most exposed to threats, and trends in attack activity.
 
-Business Logic
-: This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
+You can tailor this page with the **Customize Page** button in the page header. In the popover, drag sections between the **Visible** and **Hidden** areas to control which sections appear, and reorder visible sections by dragging them. Your changes persist locally so the page keeps your layout on future visits.
 
-Attack Traffic Sources
-: A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
+## Attack Summary
 
-## Best practices
+The [Attack Summary][3] page provides a high-level view of attack activity across your applications and APIs. It highlights trends, service exposure, attack traffic, and the impact on business logic, and you can pivot from its widgets to the related traces.
 
-1. Review trends and adopt a protection policy that meets your posture needs.
-2. Regularly review the **Exposed Services** widget in **Attack Surface Area** to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
-3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
-4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
-5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
-6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
+## Further reading
 
-### Using powerpacks
+{{< partial name="whats-next/whats-next.html" >}}
 
-When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
- 
-Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
-
-[1]: https://app.datadoghq.com/dashboard/lists
-[2]: https://app.datadoghq.com/security/appsec/threat
+[1]: /security/application_security/overview/api_posture/
+[2]: /security/application_security/overview/threat_protection/
+[3]: /security/application_security/overview/attack_summary/
