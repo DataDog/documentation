@@ -178,11 +178,27 @@ Live Debugger initializes when your application processes its first HTTP request
 
 Enable Live Debugger in both the Datadog Agent and your application.
 
-In the Agent, add the following to `system-probe.yaml`:
+Enable Live Debugger in the Agent configuration using one of the following methods, depending on how you deploy the Agent:
+
+**Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][104].
 
 ```yaml
 dynamic_instrumentation:
   enabled: true
+```
+
+**Environment variable**: Add the following to your Datadog Agent manifest:
+
+```
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+**Helm**: Add the following to your Helm chart:
+
+```yaml
+datadog:
+  dynamicInstrumentationGo:
+    enabled: true
 ```
 
 Then start your service with the following environment variables:
@@ -199,6 +215,7 @@ After your service restarts, return to the [Live Debugger page][103] to start a 
 [101]: /agent/
 [102]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [103]: https://app.datadoghq.com/debugging/sessions
+[104]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
