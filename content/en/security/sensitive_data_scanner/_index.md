@@ -220,4 +220,4 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [20]: /llm_observability/
 [21]: /security/code_security/secret_scanning/
 [22]: /security/notifications/rules/
-[23]: /security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/
+[23]: /security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data/

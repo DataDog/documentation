@@ -14,7 +14,7 @@ further_reading:
     - link: "/security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/"
       tag: "Documentation"
       text: "Investigate sensitive data findings"
-    - link: "/security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/"
+    - link: "/security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data/"
       tag: "Documentation"
       text: "Create monitors for sensitive data"
 ---

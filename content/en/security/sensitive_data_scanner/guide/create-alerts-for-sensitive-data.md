@@ -1,6 +1,8 @@
 ---
 title: Create Alerts for Sensitive Data
 description: Create alerts for Sensitive Data Scanner findings with Security Notification Rules for logs, and create monitors for sensitive data matches in APM traces and RUM events.
+aliases:
+  - /security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/
 further_reading:
   - link: /security/sensitive_data_scanner/
     tag: Documentation
