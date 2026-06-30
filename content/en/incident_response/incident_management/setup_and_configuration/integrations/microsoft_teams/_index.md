@@ -48,7 +48,7 @@ After you enable this automation, you can define a **channel name template** for
 
 ### Channel message syncing
 
-You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline.
+You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline. To enable, toggle **Automatically push Microsoft Teams channel messages to the incident timeline**.
 
 The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
 
@@ -92,6 +92,41 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
 
+### Meeting message sync
+You can configure Incident Management to push all incident Microsoft Teams meeting messages to the incident timeline. To enable, toggle **Sync meeting chat to incident timeline**.
+
+The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
+
+### Meeting summaries
+
+Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.</div>
+
+#### Enabling meeting summaries
+
+To enable meeting summaries for incident Microsoft Teams meetings:
+
+1. Navigate to [Incident Settings][2].
+2. In Microsoft Teams, select your connected Microsoft Teams tenant.
+3. Toggle on **Enable meeting creation**.
+4. Toggle on **Generate AI meeting summaries**.
+5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
+6. Save your settings.
+
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
+
+#### How meeting summaries work
+
+Meeting summaries are generated for Microsoft Teams meetings attached to an incident.
+
+When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
+
+- The **incident timeline**, under a **Meeting Summary** entry.
+- The **incident chat channel**, both in the meeting card thread and as a message to the channel.
+
+When the meeting ends, a final post-meeting summary is posted to the same locations.
+
 ## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
@@ -114,7 +149,6 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 ## Microsoft Teams commands
 
 For a full list of available `@Datadog` commands, see the [Microsoft Teams integration documentation][5].
-
 
 ## Further reading
 

@@ -7,7 +7,7 @@ aliases:
 - /service_management/incident_management/incident_ai/
 - /incident_response/incident_management/incident_ai
 further_reading:
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Learn about Bits Investigation"
 - link: "/incident_response/incident_management/post_incident/postmortems"
@@ -34,7 +34,7 @@ When you join an incident channel in Slack (connected to Datadog Incident Manage
 
 When an incident is changed to resolved, Incident AI posts a final summary. This is visible to everyone in the channel.
 
-{{< img src="service_management/incidents/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
 ## Related incident detection
 
@@ -70,11 +70,11 @@ Bits Investigation must be enabled for your organization and you can only trigge
 
 When triggered, the agent automatically pulls in the incident's timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
 
-{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits Investigation with root cause findings and a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits Investigation with root cause findings and a View Full Investigation button" >}}
 
 **From the web UI**, you can trigger an investigation directly from the "Investigation" section on the incident overview page.
 
-{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Full Investigation button" >}}
 
 When triggered, the investigation is embedded in the incident web UI, and Bits Investigation appears as a responder in the Responder Roles section of the page.
 
@@ -87,4 +87,4 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][4
 [1]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /incident_response/incident_management/setup_and_configuration/templates
 [3]: /incident_response/incident_management/post_incident/postmortems
-[4]: /bits_ai/bits_ai_sre
+[4]: /bits_ai/bits_investigation

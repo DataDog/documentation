@@ -31,17 +31,17 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
 
-To access this feature, click **Ask** in the search field and type your query.
+To access this feature, click {{< ui >}}Ask{{< /ui >}} in the search field and type your query.
 
 {{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
 
-To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to **Organization Settings > Preferences** and toggle off the Natural Language Queries feature.
+To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Preferences{{< /ui >}} and toggle off the Natural Language Queries feature.
 
 ## Graphing
 
 Use the query editor to customize the graph displayed on the Metrics Explorer page.
 
-You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
+You can specify the time frame in the top right corner of the page. The default is {{< ui >}}Past 1 Hour{{< /ui >}}.
 
 {{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer displaying two queries on a bar graph" style="width:80%;" >}}
 
@@ -49,7 +49,7 @@ Metrics that are not reported in the last 24 hours do not appear in the query ed
 
 ### Scope
 
-Define a filtering scope with the **from** text box by selecting or searching for tag values. For example, you can use the **from** text box to filter metric values from a specific host, cluster, environment, or region.
+Define a filtering scope with the {{< ui >}}from{{< /ui >}} text box by selecting or searching for tag values. For example, you can use the {{< ui >}}from{{< /ui >}} text box to filter metric values from a specific host, cluster, environment, or region.
 
 ### Space aggregation
 
@@ -70,11 +70,11 @@ You can optionally add functions to your query using the function button. Not al
 
 ### Split graph
 
-Use the **Split Graph** button to view the data split into individual graphs by values for tags such as region, service, or environment.
+Use the {{< ui >}}Split Graph{{< /ui >}} button to view the data split into individual graphs by values for tags such as region, service, or environment.
 
 ### Export
 
-Use the **Export** button (<i class="icon-export"></i>) to export your graph:
+Use the {{< ui >}}Export{{< /ui >}} button (<i class="icon-export"></i>) to export your graph:
 
 - Copy a link to the graph for sharing
 - Add it to an [incident][8]

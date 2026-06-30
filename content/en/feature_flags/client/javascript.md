@@ -81,6 +81,8 @@ await OpenFeature.setProviderAndWait(provider, evaluationContext);
 
 <div class="alert alert-info">The <code>targetingKey</code> is used as the randomization subject for percentage-based targeting. When a flag targets a percentage of subjects (for example, 50%), the <code>targetingKey</code> determines which "bucket" a user falls into. Users with the same <code>targetingKey</code> always receive the same variant for a given flag.</div>
 
+Most applications run several asynchronous tasks at startup, such as fetching data from another service or loading configuration. This example shows only feature flag initialization. As a best practice, start all of your startup promises together and await them as a group (for example, with `Promise.all`) right before the results are needed, rather than awaiting each one sequentially. This keeps total startup time close to the slowest task instead of the sum of all of them.
+
 ## Evaluate flags
 
 After the provider is initialized, you can evaluate flags anywhere in your application. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags.

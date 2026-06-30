@@ -26,13 +26,13 @@ Los equipos On-Call son una extensión de [Datadog Teams][1]. Los equipos On-Cal
   {{% /tab %}}
   {{< /tabs >}}
 1. Añade una política de escalada por defecto.
-   {{< img src="service_management/oncall/escalation_policy_blank.png" alt="Vista de configuración de una nueva política de escalada. Notifica tres cronogramas propuestos." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/teams/escalation_policy_blank.png" alt="Vista de configuración de una nueva política de escalada. Notifica tres cronogramas propuestos." style="width:80%;" >}}
    - Datadog propone automáticamente cronogramas _Interrupt Handler_ (Interrumpir identificador), _Primary_ (Primario) y _Secondary_ (Secundario) para tu equipo. Puedes definir estos cronogramas en el siguiente paso. 
    - También puedes notificar un cronograma existente que pertenezca a otro equipo. 
 
    Consulta [Políticas de escalado][5] para obtener más detalles.
 1. Define los cronogramas creados en el paso anterior. 
-   {{< img src="service_management/oncall/schedule_blank.png" alt="Vista de configuración de un nuevo cronograma." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/teams/schedule_blank.png" alt="Vista de configuración de un nuevo cronograma." style="width:80%;" >}}
    - **Zona horaria del cronograma**: selecciona la zona horaria en la que deseas que funcione tu cronograma. Otros ajustes, como los tiempos de transferencia, siguen esta selección.
    - **Rotaciones de cronograma**: añade las rotaciones que desees.
    Consulta [Cronogramas][6] para obtener más información.

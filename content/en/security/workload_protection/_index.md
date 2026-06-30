@@ -62,14 +62,18 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 
 ## Respond to threats
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This feature is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 When a threat is confirmed, you can contain it directly from the Workload Protection signal side panel. This shortens response time and helps preserve forensic state while an investigation continues.
 
 Four response actions are available from any Workload Protection signal:
 
-- **Kill process** to terminate the offending process.
-- **Kill container** to terminate the offending container.
-- **Isolate process from network** to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
-- **Isolate container from network** to block network access for the container, with the same level of control.
+- {{< ui >}}Kill process{{< /ui >}} to terminate the offending process.
+- {{< ui >}}Kill container{{< /ui >}} to terminate the offending container.
+- {{< ui >}}Isolate process from network{{< /ui >}} to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
+- {{< ui >}}Isolate container from network{{< /ui >}} to block network access for the container, with the same level of control.
 
 Response actions are manual and per-signal. Action status is reported in the signal's response table, investigation graph, and events timeline, and every action is recorded in the audit trail.
 
@@ -97,7 +101,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 ## Investigate and remediate security signals
 
-Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+Investigate and triage security signals in the [{{< ui >}}Signals Explorer{{< /ui >}}][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
 <!-- {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}} -->
 

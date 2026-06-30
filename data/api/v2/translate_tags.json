@@ -155,9 +155,17 @@
     "name": "Dashboard Secure Embed",
     "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
   },
+  "dashboard-sharing": {
+    "name": "Dashboard Sharing",
+    "description": "Manage dashboard sharing configurations."
+  },
   "dashboards": {
     "name": "Dashboards",
     "description": "Get usage statistics for the dashboards in your organization, including view\ncounts, last-edit times, widget counts, and quality scores. See the\n[Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more\ninformation."
+  },
+  "data-observability": {
+    "name": "Data Observability",
+    "description": "Manage and run data observability monitors."
   },
   "datasets": {
     "name": "Datasets",
@@ -205,7 +213,7 @@
   },
   "forms": {
     "name": "Forms",
-    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform. You can configure form settings, manage versions, publish forms, and handle sharing configurations."
+    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform.\nYou can configure form settings, manage versions, and publish forms."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -215,6 +223,14 @@
     "name": "Google Chat Integration",
     "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
   },
+  "governance-controls": {
+    "name": "Governance Controls",
+    "description": "Governance Controls pair a detection definition with an organization's detection, notification,\nand mitigation configuration within the Governance Console. Each control reports how a class of\ngovernance issue (such as unused API keys or unqueried metrics) is detected and remediated, along\nwith counts of active and mitigated detections."
+  },
+  "governance-insights": {
+    "name": "Governance Insights",
+    "description": "Governance Insights surface key usage, configuration, and best-practice signals for an\norganization within the Governance Console. Each insight reports a current value (and,\noptionally, a previous value for comparison) along with the query used to compute it, so\nthat the Console can render trends and highlight areas that need attention."
+  },
   "high-availability-multiregion": {
     "name": "High Availability MultiRegion",
     "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
@@ -222,10 +238,6 @@
   "ip-allowlist": {
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
-  },
-  "incident-services": {
-    "name": "Incident Services",
-    "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "incidents": {
     "name": "Incidents",
@@ -287,6 +299,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "network-health-insights": {
+    "name": "Network Health Insights",
+    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
+  },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
     "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
@@ -347,9 +363,9 @@
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
-  "rum-retention-filters-hardcoded": {
-    "name": "RUM Retention Filters Hardcoded",
-    "description": "Manage hardcoded retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) in RUM."
+  "rum-remote-config": {
+    "name": "RUM Remote Config",
+    "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
   },
   "reference-tables": {
     "name": "Reference Tables",
@@ -439,6 +455,10 @@
     "name": "ServiceNow Integration",
     "description": "Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations."
   },
+  "slack-integration": {
+    "name": "Slack Integration",
+    "description": "Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)\ndirectly through the Datadog API."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
@@ -478,6 +498,10 @@
   "synthetics": {
     "name": "Synthetics",
     "description": "Synthetic tests use simulated requests and actions so you can monitor the availability and performance of systems and applications. Datadog supports the following types of synthetic tests:\n- [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\n- [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)\nYou can use the Datadog API to create, manage, and organize tests and test suites programmatically.\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+  },
+  "tag-policies": {
+    "name": "Tag Policies",
+    "description": "Tag Policies define rules that govern which tag values are accepted for a given tag key,\nscoped to a particular telemetry source (such as logs, spans, or metrics). Policies can be\n`blocking` (data not matching the policy is rejected) or `surfacing` (matching data is\nhighlighted but not blocked). Each policy reports a compliance `score` derived from how\nmuch recent telemetry adheres to the policy."
   },
   "teams": {
     "name": "Teams",

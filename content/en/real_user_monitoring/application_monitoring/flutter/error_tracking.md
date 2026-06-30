@@ -9,7 +9,7 @@ aliases:
 
 Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 

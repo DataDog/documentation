@@ -13,11 +13,14 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
       tag: "Learning Center"
       text: "Diagnose Code Performance Issues with Continuous Profiler"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
 
 ---
 
 
-In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
+In the {{< ui >}}Profiles{{< /ui >}} tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof,full_host" >}}
 {{< programming-lang lang="java" >}}
@@ -190,6 +193,14 @@ Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 : Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
 
+Allocated Memory (Preview)
+: The amount of heap memory allocated by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
+
+Allocations (Preview)
+: The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
+
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
@@ -230,7 +241,7 @@ Garbage Collector CPU consumption (v3.19+)
 : The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
-**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
+**Note**: Before .NET 10, {{< ui >}}Allocations{{< /ui >}} and {{< ui >}}Live Heap{{< /ui >}} profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
 
 
 [1]: /profiler/enabling/dotnet/#requirements

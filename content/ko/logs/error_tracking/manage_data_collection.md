@@ -97,4 +97,4 @@ title: 데이터 수집 관리
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /ko/logs/error_tracking/#setup
 [3]: /ko/logs/explorer/search_syntax/
-[4]: /ko/service_management/events/
+[4]: /ko/events/

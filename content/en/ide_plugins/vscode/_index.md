@@ -14,7 +14,7 @@ further_reading:
       text: 'Learn about Source Code Integration'
     - link: '/mcp_server/'
       tag: 'Documentation'
-      text: 'Learn about the Datadog Model Context Protocol (MCP) Server'
+      text: 'Learn about the Datadog MCP Server'
     - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
       tag: 'Blog'
       text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -24,16 +24,11 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
+cascade:
+  site_support_id: ide_plugins_vscode
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
-
-{{% site-region region="gov,gov2" %}}
-
-<div class="alert alert-danger">
-    The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -45,8 +40,6 @@ The extension includes these features:
 
 - [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom rules.
 
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and context from Datadog.
-
 - [**Code Insights**](#code-insights): Stay informed about code and library vulnerabilities without leaving the code.
 
 - [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
@@ -56,8 +49,6 @@ The extension includes these features:
 - [**Logs**](#logs): Gauge log volumes and search logs from your code.
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
-
-- [**Live Debugger**](#live-debugger): Add non-breaking logpoints to running services to capture runtime data without redeploying.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
@@ -81,14 +72,9 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
 
-### MCP Server setup
+### Datadog MCP Server setup
 
-The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
-
-1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
-   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
-
-1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
+Sign in to Datadog using the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
@@ -173,16 +159,6 @@ Find out more in the [Logs][20] sub-section.
 
 Find out more in the [Exception Replay][22] sub-section.
 
-### Live Debugger
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to capture runtime data for debugging without redeploying your code.
-
-{{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
-
-Find out more in the [Live Debugger][23] sub-section.
-
 ## Data and telemetry
 
 Datadog collects certain information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. This data is used to help improve the extension's performance and features, including transitions to and from the extension and the applicable Datadog login page for accessing the Services.
@@ -222,4 +198,3 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [20]: /ide_plugins/vscode/logs/
 [21]: /ide_plugins/vscode/code_insights/
 [22]: /ide_plugins/vscode/exception_replay/
-[23]: /ide_plugins/vscode/live_debugger/

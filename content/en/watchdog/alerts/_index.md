@@ -15,47 +15,47 @@ An alert overview card contains the sections below:
 
 {{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
 
-1. **Status**: The anomaly can be `ongoing`, `resolved`, or `expired`. (An anomaly is `expired` if it has been ongoing for over 48 hours.)
-3. **Timeline**: Describes the time period over which the anomaly occurs.
-4. **Message**: Describes the anomaly.
-5. **Graph**: Visually represents the anomaly.
-6. **Tags**: Shows the scope of the anomaly.
-7. [**Impact**][4] (when available): Describes which users, views, or services the anomaly affects.
+1. {{< ui >}}Status{{< /ui >}}: The anomaly can be `ongoing`, `resolved`, or `expired`. (An anomaly is `expired` if it has been ongoing for over 48 hours.)
+3. {{< ui >}}Timeline{{< /ui >}}: Describes the time period over which the anomaly occurs.
+4. {{< ui >}}Message{{< /ui >}}: Describes the anomaly.
+5. {{< ui >}}Graph{{< /ui >}}: Visually represents the anomaly.
+6. {{< ui >}}Tags{{< /ui >}}: Shows the scope of the anomaly.
+7. [{{< ui >}}Impact{{< /ui >}}][4] (when available): Describes which users, views, or services the anomaly affects.
 
 Clicking anywhere on an alert overview card opens the alerts details pane.
 
-In addition to repeating the information in the alert overview card, the **Overview** tab may contain one or more of the following fields:
+In addition to repeating the information in the alert overview card, the {{< ui >}}Overview{{< /ui >}} tab may contain one or more of the following fields:
 
-* **Expected Bounds**: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
-* **Suggested Next Steps**: Describes steps for investigation and triage of the anomalous behavior.
-* **Monitors**: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
+* {{< ui >}}Expected Bounds{{< /ui >}}: Click the {{< ui >}}Show expected bounds{{< /ui >}} checkbox. The graph changes color to differentiate between expected and anomalous behavior.
+* {{< ui >}}Suggested Next Steps{{< /ui >}}: Describes steps for investigation and triage of the anomalous behavior.
+* {{< ui >}}Monitors{{< /ui >}}: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
-Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
+Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click {{< ui >}}Enable Monitor{{< /ui >}} to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
  
 ## Watchdog Alert Explorer
 
 You can use the time range, search bar, or facets to filter your Watchdog Alerts feed.
 
 * **Time range**: Use the time range selector in the upper right to view alerts detected in a specific time range. You can view any alert that happened in the last 6 months.
-* **Search bar**: Enter text in the **Filter alerts** search box to search over alert titles.
+* **Search bar**: Enter text in the {{< ui >}}Filter alerts{{< /ui >}} search box to search over alert titles.
 * **Facets**: The left side of the Watchdog Alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
 Available facets: 
 
 | All Alerts Group    | Description                                                                     |
 |---------------------|---------------------------------------------------------------------------------|
-| Alert Category      | Display all `apm`, `infrastructure`, or `logs` alerts.                          |
-| Alert Type          | Select alerts using metrics from APM or infrastructure integrations.            |
-| Alert Status        | Select alerts based on their status (`ongoing`, `resolved`, or `expired`).     |
-| APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.                        |
-| Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.|
-| Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
-| End User Impacted   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
-| Root Cause          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
-| Team                | The team owning the impacted services. Enriched from the [Catalog][7].  |
-| Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
-| Log Source          | Only display alerts containing logs from this source.                           |
-| Log Status          | Only display alerts containing logs of this log status.                         |
+| {{< ui >}}Alert Category{{< /ui >}}      | Display all `apm`, `infrastructure`, or `logs` alerts.                          |
+| {{< ui >}}Alert Type{{< /ui >}}          | Select alerts using metrics from APM or infrastructure integrations.            |
+| {{< ui >}}Alert Status{{< /ui >}}        | Select alerts based on their status (`ongoing`, `resolved`, or `expired`).     |
+| {{< ui >}}APM Primary Tag{{< /ui >}}     | The [defined APM primary tag][6] to display alerts from.                        |
+| {{< ui >}}Environment{{< /ui >}}         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.|
+| {{< ui >}}Service{{< /ui >}}             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
+| {{< ui >}}End User Impacted{{< /ui >}}   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
+| {{< ui >}}Root Cause{{< /ui >}}          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
+| {{< ui >}}Team{{< /ui >}}                | The team owning the impacted services. Enriched from the [Catalog][7].  |
+| {{< ui >}}Log Anomaly Type{{< /ui >}}    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
+| {{< ui >}}Log Source{{< /ui >}}          | Only display alerts containing logs from this source.                           |
+| {{< ui >}}Log Status{{< /ui >}}          | Only display alerts containing logs of this log status.                         |
 
 ## Watchdog Alerts coverage
 
@@ -211,7 +211,7 @@ Click on the binoculars icon to see a Watchdog Alert card with more details.
 
 To archive a Watchdog Alert, open the side panel and click the folder icon in the upper-right corner. Archiving hides the alert from the explorer, as well as other places in Datadog, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
 
-To see archived alerts, select the checkbox option to **Show _N_ archived alerts** in the top left of the [Watchdog Alert Explorer][1]. The option is only available if at least one alert is archived. You can see who archived each alert and when it was archived, and restore archived alerts to your feed.
+To see archived alerts, select the checkbox option to {{< ui >}}Show _N_ archived alerts{{< /ui >}} in the top left of the [Watchdog Alert Explorer][1]. The option is only available if at least one alert is archived. You can see who archived each alert and when it was archived, and restore archived alerts to your feed.
 
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 

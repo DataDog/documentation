@@ -52,7 +52,7 @@ When ownership is known, the engine can route findings to the right team instead
 
 1. Deploy the Datadog Agent version 7.79 or later with Cloud Security enabled. See [Setting Up Cloud Security][3].
 2. Enable [Runtime Package Tracking][4] on the Agent to surface the *package in use* signal on vulnerability findings.
-3. Open the [Cloud Security Summary][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [Security Inbox][6].
+3. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
 
 
 ## Further reading

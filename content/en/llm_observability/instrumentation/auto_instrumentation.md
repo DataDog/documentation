@@ -56,6 +56,7 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
 | [LangChain](#langchain)                    | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [MCP](#mcp)                                | >= 1.27.1          | >= 5.99.0 (CJS), >=5.99.0 (ESM)             |
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
@@ -129,7 +130,7 @@ Datadog's LLM integrations capture latency, errors, input parameters, input and 
 {{% tab "Python" %}}
 The [Amazon Bedrock integration][1] provides automatic instrumentation for the Amazon Bedrock Runtime Python SDK's chat model calls (using [Boto3][2]/[Botocore][3]).
 
-**Package name:** `boto3`
+**Package name:** `boto3`\
 **Integration name:** `botocore`
 
 ### Traced methods
@@ -159,7 +160,7 @@ The Amazon Bedrock integration instruments the following methods:
 {{% tab "Node.js" %}}
 The [Amazon Bedrock integration][1] provides automatic tracing for the Amazon Bedrock Runtime Node.js SDK's chat model calls (using [BedrockRuntimeClient][2]).
 
-**Package name:** `@aws-sdk/client-bedrock-runtime`
+**Package name:** `@aws-sdk/client-bedrock-runtime`\
 **Integration name:** `aws-sdk`
 
 ### Traced methods
@@ -183,7 +184,7 @@ The Amazon Bedrock integration instruments the following methods:
 {{% tab "Python" %}}
 The Amazon Bedrock Agents integration provides automatic tracing for the Amazon Bedrock Agents Runtime Python SDK's agent invoke calls (using [Boto3][1]/[Botocore][2]).
 
-**Package name:** `boto3`
+**Package name:** `boto3`\
 **Integration name:** `botocore`
 
 ### Traced methods
@@ -208,7 +209,7 @@ tracing intra-agent steps, you must set <code>enableTrace=True</code> in the <co
 {{% tab "Python" %}}
 The [Anthropic integration][1] provides automatic tracing for the [Anthropic Python SDK's][2] chat message calls.
 
-**Package name:** `anthropic`
+**Package name:** `anthropic`\
 **Integration name:** `anthropic`
 
 ### Traced methods
@@ -229,7 +230,7 @@ The Anthropic integration instruments the following methods:
 {{% tab "Node.js" %}}
 The [Anthropic integration][1] provides automatic tracing for the [Anthropic Node.js SDK's][2] chat message calls.
 
-**Package name:** `@anthropic-ai/sdk`
+**Package name:** `@anthropic-ai/sdk`\
 **Integration name:** `anthropic`
 
 ### Traced methods
@@ -254,7 +255,7 @@ The Anthropic integration instruments the following methods:
 {{% tab "Python" %}}
 The Claude Agent SDK integration provides automatic tracing for agent queries made through the [Claude Agent SDK for Python][1].
 
-**Package name:** `claude-agent-sdk`
+**Package name:** `claude-agent-sdk`\
 **Integration name:** `claude_agent_sdk`
 
 ### Traced methods
@@ -278,7 +279,7 @@ The Claude Agent SDK integration instruments the following methods:
 {{% tab "Python" %}}
 The [CrewAI integration][1] automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][2].
 
-**Package name:** `crewai`
+**Package name:** `crewai`\
 **Integration name:** `crewai`
 
 ### Traced methods
@@ -316,7 +317,7 @@ The CrewAI integration instruments the following methods:
 {{% tab "Python" %}}
 The Google ADK integration provides automatic tracing for agent runs, tool calls, and code executions made through [Google's ADK Python SDK][1].
 
-**Package name:** `google-adk`
+**Package name:** `google-adk`\
 **Integration name:** `google_adk`
 
 ### Traced methods
@@ -342,7 +343,7 @@ Both `run_live` and `run_async` methods are supported.
 {{% tab "Python" %}}
 The Google GenAI integration automatically traces methods in the [Google GenAI Python SDK][1].
 
-**Package name:** `google-genai`
+**Package name:** `google-genai`\
 **Integration name:** `google_genai`
 
 **Note:** The [Google GenAI Python SDK][1] succeeds the Google GenerativeAI SDK, and exposes both Gemini Developer API as well as Vertex.
@@ -367,7 +368,7 @@ The Google GenAI integration automatically traces methods in the [Google GenAI N
 
 **Note:** The [Google GenAI Node.js SDK][1] succeeds the [Google GenerativeAI SDK][6], and exposes both Gemini Developer API as well as Vertex.
 
-**Package name:** `@google/genai`
+**Package name:** `@google/genai`\
 **Integration name:** `google-genai`
 
 ### Traced methods
@@ -392,7 +393,7 @@ The Google GenAI integration instruments the following methods:
 {{% tab "Python" %}}
 The [LangChain integration][1] provides automatic tracing for the [LangChain Python SDK's][2] LLM, chat model, and chain calls.
 
-**Package name:** `langchain`, `langchain_openai`, `langchain_anthropic`, and [other langchain partner packages][10]
+**Package name:** `langchain`, `langchain_openai`, `langchain_anthropic`, and [other langchain partner packages][10]\
 **Integration name:** `langchain`
 
 ### Traced methods
@@ -441,7 +442,7 @@ The LangChain integration instruments the following methods:
 {{% tab "Node.js" %}}
 The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, and OpenAI embeddings calls.
 
-**Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][7]
+**Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][7]\
 **Integration name:** `langchain`
 
 ### Traced methods
@@ -475,7 +476,7 @@ The LangChain integration instruments the following methods:
 {{% tab "Python" %}}
 The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][1].
 
-**Package name:** `langgraph`
+**Package name:** `langgraph`\
 **Integration name:** `langgraph`
 
 ### Traced methods
@@ -497,7 +498,7 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 {{% tab "Python" %}}
 The [LiteLLM integration][1] provides automatic tracing for the [LiteLLM Python SDK][2] and [proxy server router methods][3].
 
-**Package name:** `litellm`
+**Package name:** `litellm`\
 **Integration name:** `litellm`
 
 ### Traced methods
@@ -531,7 +532,7 @@ The LiteLLM integration instruments the following methods:
 {{% tab "Python" %}}
 The Model Context Protocol (MCP) integration instruments client and server tool calls in the [MCP][1] SDK.
 
-**Package name:** `mcp`
+**Package name:** `mcp`\
 **Integration name:** `mcp`
 
 ### Traced methods
@@ -548,6 +549,24 @@ The MCP integration instruments the following methods:
 [2]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
 [3]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
 {{% /tab %}}
+
+{{% tab "Node.js" %}}
+The Model Context Protocol (MCP) integration instruments client tool calls in the [MCP JavaScript SDK][1].
+
+**Package name:** `@modelcontextprotocol/sdk`\
+**Integration name:** `modelcontextprotocol-sdk`
+
+### Traced methods
+
+The MCP integration instruments the following methods:
+
+- [Client Tool Calls][2]:
+  - `Client.callTool()`
+  - `Client.listTools()`
+
+[1]: https://github.com/modelcontextprotocol/typescript-sdk
+[2]: https://github.com/modelcontextprotocol/typescript-sdk/blob/main/docs/client.md#tools
+{{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
 
@@ -556,7 +575,7 @@ The MCP integration instruments the following methods:
 {{% tab "Python" %}}
 The [OpenAI integration][1] provides automatic tracing for the [OpenAI Python SDK's][2] completion and chat completion endpoints to OpenAI and Azure OpenAI.
 
-**Package name:** `openai`
+**Package name:** `openai`\
 **Integration name:** `openai`
 
 ### Traced methods
@@ -588,7 +607,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 {{% tab "Node.js" %}}
 The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, and embeddings endpoints to OpenAI and [Azure OpenAI][3].
 
-**Package name:** `openai`
+**Package name:** `openai`\
 **Integration name:** `openai`
 
 ### Traced methods
@@ -661,7 +680,7 @@ The provider (OpenAI vs Azure OpenAI) is automatically detected based on the `ba
 The OpenAI Agents integration converts the [built-in tracing][1] from the [OpenAI Agents SDK][2] into
 Agent Observability format and sends it to Agent Observability product by adding a Datadog trace processor.
 
-**Package name:** `openai-agents`
+**Package name:** `openai-agents`\
 **Integration name:** `openai_agents`
 
 The following operations are supported:
@@ -693,7 +712,7 @@ The following operations are supported:
 {{% tab "Python" %}}
 The Pydantic AI integration instruments agent invocations and tool calls made using the [Pydantic AI][1] agent framework.
 
-**Package name:** `pydantic-ai`
+**Package name:** `pydantic-ai`\
 **Integration name:** `pydantic_ai`
 
 ### Traced methods
@@ -730,7 +749,7 @@ For setup instructions and a complete example, see [OpenTelemetry Instrumentatio
 {{% tab "Node.js" %}}
 The [Vercel AI SDK][1] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core [Vercel AI SDK][2] and converting them into Agent Observability spans.
 
-**Package name:** `ai`
+**Package name:** `ai`\
 **Integration name:** `ai`
 
 ### Traced methods
@@ -795,7 +814,7 @@ async function main () {
 {{% tab "Python" %}}
 The [Vertex AI integration][1] automatically traces content generation and chat message calls made through [Google's Vertex AI Python SDK][2].
 
-**Package name:** `vertexai`
+**Package name:** `vertexai`\
 **Integration name:** `vertexai`
 
 ### Traced methods
@@ -819,7 +838,7 @@ The Vertex AI integration instruments the following methods:
 {{% tab "Node.js" %}}
 The [Vertex AI integration][1] automatically traces content generation and chat message calls made through [Google's Vertex AI Node.js SDK][2].
 
-**Package name:** `@google-cloud/vertexai`
+**Package name:** `@google-cloud/vertexai`\
 **Integration name:** `google-cloud-vertexai`
 
 ### Traced methods
@@ -846,7 +865,7 @@ The Vertex AI integration instruments the following methods:
 {{% tab "Python" %}}
 The vLLM integration automatically traces request processing and token generation in the [vLLM][1] inference engine. It captures model name, input and output tokens, and latency metrics (time to first token, queue time, prefill time, decode time, and inference time).
 
-**Package name:** `vllm`
+**Package name:** `vllm`\
 **Integration name:** `vllm`
 
 ### Traced methods
