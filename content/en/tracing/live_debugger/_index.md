@@ -92,9 +92,9 @@ setup instructions and limitations also apply here.
 
 The following permissions are required to use Live Debugger:
 
-- **Live Debugger Read** (`live_debugger_read`) - Required to access the Live Debugger page.
-- **Live Debugger Write** (`live_debugger_write`) - Required to create or modify Debug Sessions and logpoints.
-- **Live Debugger Redaction Write** (`live_debugger_redaction_write`) - Required to change the [redaction mode][24] for captured data.
+- **Live Debugger Read** (`live_debugger_read`): Required to access the Live Debugger page.
+- **Live Debugger Write** (`live_debugger_write`): Required to create or modify Debug Sessions and logpoints.
+- **Live Debugger Redaction Write** (`live_debugger_redaction_write`): Required to change the [redaction mode][24] for captured data.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
 
@@ -142,7 +142,7 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. Live Debugger applies automatic mode- and identifier-based redaction to help protect sensitive data before captured data becomes available.
+Live Debugger data might contain sensitive information, especially when using the **Capture Variables** option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
 
 #### Mode-based redaction
 
@@ -151,11 +151,11 @@ Live Debugger has two redaction modes:
 - **Strict Mode**: Redacts all values except numbers and Booleans.
 - **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
-These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common pre-production environments like `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
+These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
 #### Identifier-based redaction
 
-Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Additional language-specific redaction rules are built into each tracer.
+Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Each tracer includes additional language-specific redaction rules.
 
 You can extend redaction behavior through:
 
