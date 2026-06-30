@@ -42,7 +42,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 *Bundled in chart: `0.4.3`.*
 
 #### Changed
-- Reduces search CPU time for date histogram queries by up to 20%, with the largest gains on seven-day windows.
+- Reduces search CPU time for nested date histogram queries by up to 20%, with the largest gains on seven-day windows.
 - Adds a dedicated health check listener on port `7284` for CloudPrem component liveness and readiness checks.
 
 #### Helm chart changes
