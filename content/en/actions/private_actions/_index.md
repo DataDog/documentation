@@ -6,7 +6,7 @@ aliases:
 - service_management/workflows/private_actions/
 - service_management/app_builder/private_actions/
 further_reading:
-- link: "service_management/app_builder/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "App Builder Connections"
 - link: "service_management/workflows/connections"
