@@ -4,17 +4,12 @@ description: Set up Dynamic Instrumentation for Ruby applications to add probes 
 aliases:
     - /dynamic_instrumentation/enabling/ruby/
     - /tracing/dynamic_instrumentation/enabling/ruby
-private: false
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 50
+private: true
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
       text: 'Getting Started with Datadog Agent'
 ---
-
-{{< partial name="dynamic_instrumentation/beta-callout.html" language="Ruby" limitations_anchor="unsupported-features" >}}
 
 Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Ruby.
 
@@ -95,7 +90,6 @@ Dynamic Instrumentation tracks code as it loads. For line probes to work correct
 
 ## Supported features
 
-- [Dynamic Logs][8] (log probes)
 - Line probes (capture variables at a specific line)
 - Method probes (capture method entry and exit)
 - Probe conditions using [Expression Language][11]

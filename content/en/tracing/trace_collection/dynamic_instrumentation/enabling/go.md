@@ -1,10 +1,7 @@
 ---
 title: Enable Dynamic Instrumentation for Go
 description: Set up Dynamic Instrumentation for Go applications to add probes and capture data without code changes.
-private: false
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 70
+private: true
 aliases:
     - /dynamic_instrumentation/enabling/go
 further_reading:
@@ -12,8 +9,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Getting Started with Datadog Agent'
 ---
-
-{{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
 
 Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
 
