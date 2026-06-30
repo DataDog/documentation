@@ -23,7 +23,7 @@ Using API Endpoints you can:
 
 ## Configuration
 
-To view API Endpoints on your services, **you must have App and API Protection Threats Protection enabled**. 
+To view API Endpoints on your services, **you must have App and API Protection Threat Detection enabled**.
 
 For Amazon Web Services (AWS) API Gateway integration, you must set up the following:
 
@@ -49,7 +49,7 @@ For information on what library versions are compatible with API Inventory, see 
 
 ## How it works
 
-API Endpoints gathers security metadata about API traffic by leveraging the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by using the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, helping ensure a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][10] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -81,7 +81,7 @@ This source ensures that your API inventory is complete by including all planned
 
 The {{< ui >}}Spans{{< /ui >}} data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
-What actions you take depend on each of the attack surfaces:
+The actions you take depend on each of the attack surfaces:
 
 - **Vulnerabilities:** Patch any vulnerable libraries surfaced by SCA or Runtime Code Analysis, then redeploy the service.
 - **API findings discovered:** Review each issue in context of the traced service, fix any code or configurations, and then validate using new traces.
@@ -158,7 +158,7 @@ To export the inferred schema as an OpenAPI file in JSON or YAML, use the export
 
 To compare schemas, set up the following:
 
-- To view an inferred schema, [enable AAP][9] on the service so endpoints are discovered from live traffic.
+- To view an inferred schema, [enable App and API Protection][9] on the service so endpoints are discovered from live traffic.
 - To compare against a declared schema, register the API's OpenAPI definition in the Datadog Catalog. See [Create Entities][8].
 
 ## Processing sensitive data
@@ -186,9 +186,9 @@ See [Configuring a client IP header][14] for more information on the required li
 
 Authentication is determined by:
 
-- The presence of `Authorization`, `Token` or `X-Api-Key` headers.
+- The presence of `Authorization`, `Token`, or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
-- The request has responded with a 401 or 403 status code.
+- The endpoint returned a 401 or 403 status code.
 - Custom [Endpoint Tagging][15] rules that you configured
 
 
