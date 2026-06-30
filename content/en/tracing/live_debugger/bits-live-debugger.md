@@ -4,7 +4,7 @@ description: Use Bits Code to create and manage Live Debugger sessions through a
 aliases:
 - /tracing/live_debugger/debug-with-bits/
 further_reading:
-- link: "/bits_ai/bits_ai_dev_agent/"
+- link: "/bits_ai/bits_code/"
   tag: "Documentation"
   text: "Bits Code"
 - link: "/tracing/live_debugger/"
@@ -26,7 +26,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_ai_dev_agent/">Bits Code</a>, which may impact billing.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>, which may impact billing.
 </div>
 
 ## Prerequisites
@@ -83,6 +83,6 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [2]: /tracing/live_debugger/#permissions
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [4]: https://app.datadoghq.com/debugging/sessions
-[5]: /bits_ai/bits_ai_dev_agent/
+[5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
 [7]: /tracing/live_debugger/#requirements-and-setup

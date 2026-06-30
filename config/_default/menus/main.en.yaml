@@ -1547,32 +1547,32 @@ menu:
       parent: platform_heading
       weight: 100000
     - name: Bits Investigation
-      url: bits_ai/bits_ai_sre
+      url: bits_ai/bits_investigation
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
     - name: Investigate Issues
-      url: bits_ai/bits_ai_sre/investigate_issues
+      url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
     - name: Take Action
-      url: bits_ai/bits_ai_sre/take_action
+      url: bits_ai/bits_investigation/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 102
     - name: Bits Investigation Integrations and Settings
-      url: bits_ai/bits_ai_sre/configure
+      url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 103
     - name: Knowledge Sources
-      url: bits_ai/bits_ai_sre/knowledge_sources
+      url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 104
     - name: Chat with Bits Investigation
-      url: bits_ai/bits_ai_sre/chat_bits_ai_sre
+      url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 105
@@ -1582,17 +1582,17 @@ menu:
       parent: bits_ai
       weight: 2
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
       weight: 3
     - name: Setup
-      url: bits_ai/bits_ai_dev_agent/setup
+      url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 301
     - name: Automations
-      url: bits_ai/bits_ai_dev_agent/automations
+      url: bits_ai/bits_code/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
@@ -2181,6 +2181,11 @@ menu:
       parent: catalog_entity_model
       identifier: catalog_ai_generated_systems
       weight: 1023
+    - name: Migrate to v3
+      url: internal_developer_portal/catalog/entity_model/v3_migration
+      parent: catalog_entity_model
+      identifier: catalog_v3_migration
+      weight: 1024
     - name: Troubleshooting
       url: internal_developer_portal/catalog/troubleshooting
       parent: catalog
@@ -2348,7 +2353,7 @@ menu:
       identifier: error_tracking_error_grouping
       weight: 4
     - name: Bits Code
-      url: bits_ai/bits_ai_dev_agent
+      url: bits_ai/bits_code
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
       weight: 5
@@ -2357,11 +2362,6 @@ menu:
       parent: error_tracking
       identifier: error_tracking_monitors
       weight: 6
-    - name: Issue Correlation
-      url: error_tracking/issue_correlation
-      parent: error_tracking
-      identifier: error_tracking_issue_correlation
-      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
@@ -3498,16 +3498,21 @@ menu:
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
       weight: 807
+    - name: DatadogGenericResource CRD
+      url: containers/datadog_operator/crd_ddgr
+      identifier: containers_datadog_operator_crd_ddgr
+      parent: containers_datadog_operator
+      weight: 808
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 809
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -4654,11 +4659,6 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Remapping Rules for Inferred Entities
-      url: tracing/services/inferred_entity_remapping_rules/
-      parent: tracing_services
-      identifier: tracing_inferred_entity_remapping_rules
-      weight: 907
     - name: Service Remapping Rules
       url: tracing/services/service_remapping_rules
       parent: tracing_services
@@ -5402,6 +5402,11 @@ menu:
       identifier: jobs_monitoring_airflow_troubleshooting_dag
       parent: jobs_monitoring_airflow
       weight: 100000
+    - name: Upgrade OpenLineage Provider on Amazon MWAA
+      url: data_observability/jobs_monitoring/airflow_mwaa_upgrade
+      identifier: jobs_monitoring_airflow_mwaa_upgrade
+      parent: jobs_monitoring_airflow
+      weight: 200000
     - name: dbt
       url: data_observability/jobs_monitoring/dbt
       identifier: jobs_monitoring_dbt
@@ -6337,6 +6342,16 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 320
+    - name: Approvals
+      url: feature_flags/concepts/approvals
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_approvals
+      weight: 321
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
@@ -7131,46 +7146,51 @@ menu:
       url: logs/log_collection/kotlin_multiplatform/
       parent: log_collection
       weight: 107
+    - name: C / C++
+      identifier: log_cpp
+      url: logs/log_collection/cpp/
+      parent: log_collection
+      weight: 108
     - name: .NET MAUI
       identifier: log_maui
       url: logs/log_collection/maui/
       parent: log_collection
-      weight: 108
+      weight: 109
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 108
+      weight: 110
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 109
+      weight: 111
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 110
+      weight: 112
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 111
+      weight: 113
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 112
+      weight: 114
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 113
+      weight: 115
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 114
+      weight: 116
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
@@ -8252,38 +8272,43 @@ menu:
       parent: application_security
       identifier: application_security_overview
       weight: 4
-    - name: Security Signals
-      url: security/application_security/security_signals
+    - name: Threat Protection
+      url: security/application_security/threat_protection/
       parent: application_security
-      identifier: application_security_security_signals
+      identifier: application_security_threat_protection
       weight: 5
+    - name: Security Signals
+      url: security/application_security/threat_protection/security_signals
+      parent: application_security_threat_protection
+      identifier: application_security_security_signals
+      weight: 1
     - name: Attackers Explorer
-      url: security/application_security/security_signals/attacker-explorer/
+      url: security/application_security/threat_protection/security_signals/attacker-explorer/
       parent: application_security_security_signals
       identifier: threats_attackers
       weight: 1
     - name: Attacker Fingerprint
-      url: security/application_security/security_signals/attacker_fingerprint/
+      url: security/application_security/threat_protection/security_signals/attacker_fingerprint/
       parent: application_security_security_signals
       identifier: threats_attacker_fingerprint
       weight: 2
     - name: Attacker Clustering
-      url: security/application_security/security_signals/attacker_clustering/
+      url: security/application_security/threat_protection/security_signals/attacker_clustering/
       parent: application_security_security_signals
       identifier: threats_attacker_clustering
       weight: 3
     - name: Users Explorer
-      url: security/application_security/security_signals/users_explorer/
+      url: security/application_security/threat_protection/security_signals/users_explorer/
       parent: application_security_security_signals
       identifier: threats_users
       weight: 4
     - name: Policies
-      url: security/application_security/policies/
-      parent: application_security
+      url: security/application_security/threat_protection/policies/
+      parent: application_security_threat_protection
       identifier: application_security_policies
-      weight: 6
+      weight: 2
     - name: Custom Rules
-      url: security/application_security/policies/custom_rules/
+      url: security/application_security/threat_protection/policies/custom_rules/
       parent: application_security_policies
       identifier: application_security_policies_custom_rules
       weight: 1
@@ -8293,35 +8318,35 @@ menu:
       identifier: application_security_policies_ootb_rules
       weight: 2
     - name: In-App WAF Rules
-      url: security/application_security/policies/inapp_waf_rules/
+      url: security/application_security/threat_protection/policies/inapp_waf_rules/
       parent: application_security_policies
       identifier: application_security_policies_inappwaf_rules
       weight: 3
     - name: Tracing Library Configuration
-      url: security/application_security/policies/library_configuration/
+      url: security/application_security/threat_protection/policies/library_configuration/
       parent: application_security_policies
       identifier: application_security_policies_tracing_lib
       weight: 4
     - name: Exploit Prevention
-      url: security/application_security/exploit-prevention/
-      parent: application_security
+      url: security/application_security/threat_protection/exploit-prevention/
+      parent: application_security_threat_protection
       identifier: exploit_prevention
-      weight: 7
+      weight: 3
     - name: WAF Integrations
-      url: security/application_security/waf-integration/
-      parent: application_security
+      url: security/application_security/threat_protection/waf-integration/
+      parent: application_security_threat_protection
       identifier: aws_waf_int
-      weight: 8
+      weight: 4
     - name: Account Takeover Protection
-      url: security/application_security/account_takeover_protection/
-      parent: application_security
+      url: security/application_security/threat_protection/account_takeover_protection/
+      parent: application_security_threat_protection
       identifier: security_ato_protection
-      weight: 9
+      weight: 5
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 10
+      weight: 6
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
@@ -8356,12 +8381,12 @@ menu:
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 11
+      weight: 7
     - name: Troubleshooting
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 12
+      weight: 8
     - name: AI Guard
       url: /security/ai_guard/
       pre: siem
@@ -9349,6 +9374,46 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 109
+    - name: C / C++
+      url: real_user_monitoring/application_monitoring/cpp
+      parent: application_monitoring
+      identifier: rum_cpp
+      weight: 205
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/cpp/setup
+      parent: rum_cpp
+      identifier: rum_cpp_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/application_monitoring/cpp/error_tracking
+      parent: rum_cpp
+      identifier: rum_cpp_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/cpp/data_collected
+      parent: rum_cpp
+      identifier: rum_cpp_data_collected
+      weight: 104
+    - name: Advanced Build Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_build_configuration
+      weight: 105
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/cpp/troubleshooting
+      parent: rum_cpp
+      identifier: rum_cpp_troubleshooting
+      weight: 106
+    - name: Supported Versions
+      url: real_user_monitoring/application_monitoring/cpp/supported_versions
+      parent: rum_cpp
+      identifier: rum_cpp_supported_versions
+      weight: 107
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
@@ -9740,21 +9805,31 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 3
+    - name: Action Management
+      url: product_analytics/action_management
+      parent: product_analytics
+      identifier: pa_action_management
+      weight: 4
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 4
+      weight: 5
     - name: Identity Resolution
       url: product_analytics/profiles/identity_resolution
       parent: pa_profiles
       identifier: pa_identity_resolution
-      weight: 401
+      weight: 501
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
       identifier: pa_data_collected
-      weight: 5
+      weight: 6
+    - name: Server-Side Events
+      url: product_analytics/data_collected/server_side_events
+      parent: pa_data_collected
+      identifier: pa_data_collected_server_side_events
+      weight: 601
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9811,11 +9886,16 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
       weight: 10
+    - name: Experiments MCP Tools
+      url: experiments/mcp_tools
+      parent: pa_experiments
+      identifier: pa_experiments_mcp_tools
+      weight: 11
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 11
+      weight: 12
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics

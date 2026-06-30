@@ -41,24 +41,24 @@ Agent events are queried and displayed using the standard explorer controls in t
 
 To investigate why an event is listed on the [Agent Events explorer][13], select an event.
 
-The event details include the attributes, [metrics][16], and [processes][15]. **Metrics** links to the host dashboard and **Processes** links to the host [process dashboard][17] and process agent installation steps.
+The event details include the attributes, [metrics][16], and [processes][15]. {{< ui >}}Metrics{{< /ui >}} links to the host dashboard and {{< ui >}}Processes{{< /ui >}} links to the host [process dashboard][17] and process agent installation steps.
 
-In **Path**, the latest process tree is displayed. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
+In {{< ui >}}Path{{< /ui >}}, the latest process tree is displayed. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
 
 <!-- {{< img src="security/csm/agent_events_explorer_details.png" alt="Your image description" style="width:100%;" >}} -->
 
-**Path** is often the best place to start your investigation of an event.
+{{< ui >}}Path{{< /ui >}} is often the best place to start your investigation of an event.
 
 ## Triage Agent events
 
 To triage an event: 
 
-1. Select the event in the **AGENT RULE** column in the [Agent Events explorer][13].
-2. Select **Click to copy**.
+1. Select the event in the {{< ui >}}AGENT RULE{{< /ui >}} column in the [Agent Events explorer][13].
+2. Select {{< ui >}}Click to copy{{< /ui >}}.
 3. Open the [OOTB rules documention][12].
 4. In the search field, paste the copied rule name.
 5. Select the rule from the results.
-6. Review the rule **Goal**, **Strategy**, and follow the steps in **Triage and response**.
+6. Review the rule {{< ui >}}Goal{{< /ui >}}, {{< ui >}}Strategy{{< /ui >}}, and follow the steps in {{< ui >}}Triage and response{{< /ui >}}.
 
 
 [11]: /security/workload_protection/security_signals

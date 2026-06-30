@@ -22,7 +22,7 @@ title: On-Call
 ---
 Datadog On-Call intègre la surveillance, le paging et la réponse aux incidents en une seule plateforme.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Aperçu de la façon dont les Pages sont routées. À partir d'un moniteur, d'un incident, d'un signal de sécurité ou d'un appel API, la Page est envoyée à une Équipe (par exemple, 'équipe-paiements'), puis aux règles de routage (par exemple, en fonction de la priorité) puis à une politique d'escalade. Là, elle peut être envoyée à un planning ou directement à un utilisateur." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="Aperçu de la façon dont les Pages sont routées. À partir d'un moniteur, d'un incident, d'un signal de sécurité ou d'un appel API, la Page est envoyée à une Équipe (par exemple, 'équipe-paiements'), puis aux règles de routage (par exemple, en fonction de la priorité) puis à une politique d'escalade. Là, elle peut être envoyée à un planning ou directement à un utilisateur." style="width:100%;" >}}
 
 ## Concepts {#concepts}
 
@@ -36,15 +36,15 @@ Datadog On-Call intègre la surveillance, le paging et la réponse aux incidents
 
 **Les Équipes** sont l'unité organisationnelle centrale de Datadog On-Call. Lorsqu'une notification est déclenchée dans Datadog, une **Page** est envoyée à l'équipe On-Call désignée.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notification mentionnant une équipe On-Call." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notification mentionnant une équipe On-Call." style="width:80%;" >}}
 
 Chaque équipe possède **des politiques d'escalade** et **des plannings**. Les politiques d'escalade définissent comment une Page est envoyée à divers plannings, tels que _Opérations de caisse - Gestionnaire d'interruption_, _Principal_, et _Secondaire_ dans la capture d'écran suivante. Chaque équipe peut également configurer **des règles de routage** pour acheminer les Pages vers différentes politiques d'escalade.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="Un exemple de politique d'escalade." style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="Un exemple de politique d'escalade." style="width:80%;" >}}
 
 Un planning définit des moments spécifiques où les membres de l'équipe sont assignés pour répondre aux Pages. Les plannings organisent et gèrent la disponibilité des membres de l'équipe à travers différents fuseaux horaires et quarts de travail.
 
-{{< img src="service_management/oncall/schedule.png" alt="Un exemple de planning, avec plusieurs couches pour les heures de bureau JP, EU et US." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="Un exemple de planning, avec plusieurs couches pour les heures de bureau JP, EU et US." style="width:80%;" >}}
 
 ## Contrôle d'accès granulaire {#granular-access-control}
 

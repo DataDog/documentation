@@ -51,18 +51,18 @@ Use the search, filter, and sort features to understand:
 The Metric and Tag search bars provide a set of actions to filter the list of metrics. Enter keywords to search metric names. Type in any tag key value pair in the *Filter by Tag Value* box to filter the list by a specific team, application, or service.
 
 Facets can also filter your metrics by:
-- **Configuration**: Metrics with tag configurations
-- **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
-- **Historical Metrics**: Metrics that have historical metrics ingestion enabled
-- **Query Activity**: Metrics not actively queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
+- {{< ui >}}Configuration{{< /ui >}}: Metrics with tag configurations
+- {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics enabled by percentiles/advanced query capabilities
+- {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled
+- {{< ui >}}Query Activity{{< /ui >}}: Metrics not actively queried in Datadog or by the API in the past 30, 60, or 90 days
+- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
+- {{< ui >}}Distribution Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
 The Volume page displays a list of your metrics reported to Datadog sorted by estimated custom metrics or by the change in volume. To sort metrics by either of these options, click on the column header of the metric table.
 | Column | Description |
 |--------|-------------|
-|**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality (aka custom metrics volume).| 
-|**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the time frame of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. |
+|{{< ui >}}Top 500 Metric Names by Estimated Real-time Cardinality{{< /ui >}} | Identify the top 500 metric names by cardinality (aka custom metrics volume).| 
+|{{< ui >}}Top 500 Metric Names by Change in Volume{{< /ui >}} |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the time frame of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. |
 
 ## Compare a metric's cardinality (volume) over time 
 
@@ -71,8 +71,8 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 When identifying the top 500 metric names by change in volume, you can hover over the number to compare a metric name's number of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][6].
 
 To compare your spiking metric's cardinality over time:
-1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
-2. Select the metric name that you want to view the cardinality over time, and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
+1. Select a time frame in the top right hand corner (the recommended time frame is {{< ui >}}Past 1 Day{{< /ui >}} or {{< ui >}}Past 4 Weeks{{< /ui >}}).
+2. Select the metric name that you want to view the cardinality over time, and in the same row click on the value under the {{< ui >}}Change in Volume{{< /ui >}} column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to alert on this spiking metric. For more information, see the [Change Alert Monitor][2] documentation.
 
 ## Identify less valuable, unqueried metrics
@@ -81,16 +81,16 @@ To compare your spiking metric's cardinality over time:
 
 To start reducing custom metrics costs, start with your largest metric names that aren't actively queried. Datadog's intelligent query insights analyze your queries and surfaces your unqueried metrics over the past 30, 60, or 90 days. This analysis is constantly running in the background ensuring that your unqueried metrics are always up-to-date.
 
-To find the metrics not actively queried, click the time frame of interest in the *Query Activity Facet* box. The list is filtered to show only unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
+To find the metrics not actively queried, click the time frame of interest in the {{< ui >}}Query Activity Facet{{< /ui >}} box. The list is filtered to show only unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
 
 ## How to reduce metric volume and cost
 
 After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Use Metrics without Limits™ on your unqueried metric names to reduce custom metrics volume. 
 
 To configure multiple unqueried metrics at once
-1. Click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][4].
+1. Click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown and select {{< ui >}}Manage Tags{{< /ui >}} to open the [Metrics without Limits™ Tag configuration modal][4].
 2. Specify the metric namespace of the unqueried metrics you'd like to apply a bulk tag configuration to.
-3. Select **Include tags…** and set an empty allowlist of tags.
+3. Select {{< ui >}}Include tags…{{< /ui >}} and set an empty allowlist of tags.
 
 {{< img src="metrics/volume/configure_metrics.png" alt="Configure Metric dropdown at the top of the page highlighting the Manage tags option" style="width:100%;" >}}
 
@@ -101,13 +101,13 @@ In this example, the tag configuration modal shows a metric with a current volum
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_05292025.png" alt="Tag configuration modal showing an example metric with a current volume of 7,139 index metrics and an estimated new volume of 3, with an allowlist of suggested tags" style="width:80%;" >}}
 
 ## Analyze metrics' utility and relative value in Datadog
-Metrics without Limits™ allows you to find metrics that are underused in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Datadog's intelligent query insights surface the popularity and quantity of these related assets so you can evaluate metric utility within your organization. The **Tags** column shows exactly which tags are powering each asset, helping you preserve critical visibility while making data-driven decisions when configuring your metrics.
+Metrics without Limits™ allows you to find metrics that are underused in Datadog with the Metrics Related Assets feature. A metrics related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Datadog's intelligent query insights surface the popularity and quantity of these related assets so you can evaluate metric utility within your organization. The {{< ui >}}Tags{{< /ui >}} column shows exactly which tags are powering each asset, helping you preserve critical visibility while making data-driven decisions when configuring your metrics.
 
 {{< img src="metrics/related_assets_08_05_2025.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
-2. Scroll down to the section of the side panel titled **Related Assets**.
+2. Scroll down to the section of the side panel titled {{< ui >}}Related Assets{{< /ui >}}.
 3. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
 
 ## Identify tags driving up your metric's volume

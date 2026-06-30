@@ -23,7 +23,7 @@ further_reading:
 
 ## Automatic injection
 
-Enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston` when structured application loggers are used. 
+Enables automatic trace ID injection for `bunyan`, `pino`, and `winston` when structured application loggers are used. 
 
 For older tracer versions injection can be enabled the environment variable `DD_LOGS_INJECTION=true` or by configuring the SDK directly:
 
@@ -41,7 +41,7 @@ experience for adding `env`, `service`, and `version` (see [Unified Service Tagg
 
 ### Example with Winston and Express
 
-Here's a simple example using Winston with Express:
+Here's an example using Winston with Express:
 
 ```javascript
 // init tracer first

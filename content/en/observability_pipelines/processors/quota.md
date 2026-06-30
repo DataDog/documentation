@@ -30,31 +30,31 @@ You can also use field-based partitioning, such as `service`, `env`, `status`. E
 
 To set up the quota processor:
 1. Enter a name for the quota processor.
-1. Define a **filter query**. Only logs that match the specified filter query are counted towards the daily limit. See [Search Syntax][6] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are counted towards the daily limit. See [Search Syntax][6] for more information.
     - Logs that match the quota filter and are within the daily quota are sent to the next step in the pipeline.
     - Logs that do not match the quota filter are sent to the next step of the pipeline.
-1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
+1. In the {{< ui >}}Unit for quota{{< /ui >}} dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
-1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.
+1. Optional: Click {{< ui >}}Add Field{{< /ui >}} if you want to set a quota on a specific service or region field.
    1. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.
-      1. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.
-      1. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.
-         - Click **Download as CSV** for an example of how to structure the CSV.
-         - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.
-   1. Click **Add Field** if you want to add another partition.
-1. In the **When quota is met** dropdown menu, select if you want to **drop events**, **keep events**, or **send events to overflow destination**, when the quota has been met.
-   1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
+      1. Select the {{< ui >}}Ignore when missing{{< /ui >}} if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.
+      1. Optional: Click {{< ui >}}Overrides{{< /ui >}} if you want to set different quotas for the partitioned field.
+         - Click {{< ui >}}Download as CSV{{< /ui >}} for an example of how to structure the CSV.
+         - Drag and drop your overrides CSV to upload it. You can also click {{< ui >}}Browse{{< /ui >}} to select the file to upload it. See the [Overrides example](#overrides-example) for more information.
+   1. Click {{< ui >}}Add Field{{< /ui >}} if you want to add another partition.
+1. In the {{< ui >}}When quota is met{{< /ui >}} dropdown menu, select if you want to {{< ui >}}drop events{{< /ui >}}, {{< ui >}}keep events{{< /ui >}}, or {{< ui >}}send events to overflow destination{{< /ui >}}, when the quota has been met.
+   1. If you select {{< ui >}}send events to overflow destination{{< /ui >}}, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][2], [Azure Blob Storage][3], or [Google Cloud Storage][4].
 
 ### Examples
 
 #### Partition example
 
-Use **Partition by** if you want to set a quota on a specific service or region. For example, if you want to set a quota for 10 events per day and group the events by the `service` field, enter `service` into the **Partition by** field.
+Use {{< ui >}}Partition by{{< /ui >}} if you want to set a quota on a specific service or region. For example, if you want to set a quota for 10 events per day and group the events by the `service` field, enter `service` into the {{< ui >}}Partition by{{< /ui >}} field.
 
 #### Example for the "ignore when missing" option
 
-Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example, if the Worker receives the following set of events:
+Select {{< ui >}}Ignore when missing{{< /ui >}} if you want the quota applied only to events that match the partition. For example, if the Worker receives the following set of events:
 
 ```
 {"service":"a", "source":"foo", "message": "..."}
@@ -64,14 +64,14 @@ Select **Ignore when missing** if you want the quota applied only to events that
 {"message": "..."}
 ```
 
-And the **Ignore when missing** is selected, then the Worker:
+And the {{< ui >}}Ignore when missing{{< /ui >}} is selected, then the Worker:
 - creates a set for logs with `service:a` and `source:foo`
 - creates a set for logs with `service:b` and `source:bar`
 - ignores the last three events
 
 The quota is applied to the two sets of logs and not to the last three events.
 
-If the **Ignore when missing** is not selected, the quota is applied to all five events.
+If the {{< ui >}}Ignore when missing{{< /ui >}} is not selected, the quota is applied to all five events.
 
 #### Overrides example
 
