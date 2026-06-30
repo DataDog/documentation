@@ -32,8 +32,8 @@ Click the button below and fill in the form on Azure portal. After completing th
 1. Select **true** for **Send Activity Logs**.
 1. Enter your Datadog API key.
 1. Enter names for your resources.
-1. Click **Create + review**.
-1. After the validation passes, click **Create**.
+1. Click {{< ui >}}Create + review{{< /ui >}}.
+1. After the validation passes, click {{< ui >}}Create{{< /ui >}}.
 
 After the deployment is completed successfully, go to [Log Explorer][1] and enter `service:azure` in the search query to view your Azure logs.
 
@@ -58,78 +58,78 @@ The section walks you through the manual installation steps so that you can send
 If you want to use an existing resource group, skip to Create an Event Hubs namespace.
 
 1. Go to [Azure Resource groups][1] page.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 1. Enter a name for the resource group.
-1. Optionally, click **Next: Tags** if you want to add tags.
-1. Click **Review + create**.
-1. After the validation passes, click **Create**.
+1. Optionally, click {{< ui >}}Next: Tags{{< /ui >}} if you want to add tags.
+1. Click {{< ui >}}Review + create{{< /ui >}}.
+1. After the validation passes, click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an Event Hubs namespace
 
 1. Navigate to [Azure Event Hubs][2].
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 1. In the **Resource group** dropdown menu, select the resource group you want to add the Event Hub to.
 1. Enter a name for the namespace.
 1. Select a location for the namespace.
      **Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
 1. Select a pricing tier.
 1. Leave the throughput units (for standard tier) or processing units (for premium tier) as it is.
-1. Click **Review + create**.
-1. After validation succeeds, click **Create**.
-1. After the deployment is completed successfully, click **Go to resource**.
+1. Click {{< ui >}}Review + create{{< /ui >}}.
+1. After validation succeeds, click {{< ui >}}Create{{< /ui >}}.
+1. After the deployment is completed successfully, click {{< ui >}}Go to resource{{< /ui >}}.
 
 ### Create an event hub
 
-1. In the Event Hubs namespace you just created, click **+ Event Hub**.
+1. In the Event Hubs namespace you just created, click {{< ui >}}+ Event Hub{{< /ui >}}.
 1. Enter a name for the event hub.
 1. Optionally, configure the partition count and retention options.
-1. Click **Review + create**.
-1. After validation succeeds, click **Create**.
+1. Click {{< ui >}}Review + create{{< /ui >}}.
+1. After validation succeeds, click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an Azure Function App
 Create a new Function App. If you are using an existing function app, skip to Add a new function to your Function App.
 
 1. Navigate to [Function App][3].
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 1. Select a resource group for the function app.
 1. Enter a name for the function app.
 1. Leave the selection to deploy to code.
-1. In the **Runtime stack** dropdown menu, select **Node.js**.
+1. In the **Runtime stack** dropdown menu, select {{< ui >}}Node.js{{< /ui >}}.
 1. Select a region for your function app.
 1. Select an operating system and plan type.
-1. Click **Next: Storage**.
+1. Click {{< ui >}}Next: Storage{{< /ui >}}.
 1. Select a storage account in the dropdown menu.
-1. Click **Review + create**.
-1. After validation succeeds, click **Create**.
-1. After the deployment is completed successfully, click **Create a function**.
+1. Click {{< ui >}}Review + create{{< /ui >}}.
+1. After validation succeeds, click {{< ui >}}Create{{< /ui >}}.
+1. After the deployment is completed successfully, click {{< ui >}}Create a function{{< /ui >}}.
 
 ### Add a new function to your Function App
 
-1. Navigate to the function app if you are using an existing one. Click **Functions** in the left side menu.
-1. Click **Create**.
-1. Select **Azure Event Hub trigger**.
+1. Navigate to the function app if you are using an existing one. Click {{< ui >}}Functions{{< /ui >}} in the left side menu.
+1. Click {{< ui >}}Create{{< /ui >}}.
+1. Select {{< ui >}}Azure Event Hub trigger{{< /ui >}}.
 1. Enter a name for the new function.
-1. In **Event Hub connection**, click **New**.
+1. In **Event Hub connection**, click {{< ui >}}New{{< /ui >}}.
 1. In the **Event Hub connection** dropdown menu, select the event hub you created earlier.
-1. Click **OK**.
+1. Click {{< ui >}}OK{{< /ui >}}.
 1. In the **Event Hub name**, enter the name of the event hub you created earlier.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Add the Datadog Azure function
 
 <br />**Note**: The steps described below are based on the Azure Functions Programming Model v3. Datadog's latest [Azure function code][8] has been updated to support the Azure Functions Programming Model v4. If you need guidance on deploying the v4-compatible version or have questions regarding the differences between v3 and v4, contact Datadog Technical Support for assistance.
 
-1. In the new function, select **Code + Test** in the left side menu.
+1. In the new function, select {{< ui >}}Code + Test{{< /ui >}} in the left side menu.
 1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
 1. Replace `<DATADOG_API_KEY>` with your Datadog API on line 22 of the function code.
 1. If you are not using the Datadog US1 site, replace `DD_SITE` with your [Datadog site][5] parameter on line 23 of the function code.
-1. Click **Save**.
-1. Click **Integrations** in the left side menu.
-1. Click **Azure Event Hubs**.
+1. Click {{< ui >}}Save{{< /ui >}}.
+1. Click {{< ui >}}Integrations{{< /ui >}} in the left side menu.
+1. Click {{< ui >}}Azure Event Hubs{{< /ui >}}.
 1. Set `Event parameter name` to `eventHubMessages`.
 1. `Event Hub Cardinality` must be set to `Many`.
 1. Set `Event Hub Data Type` to empty.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 1. Verify your setup is correct by running the function and then checking the Datadog log explorer for the test message. The test log event must be in valid JSON format. For example:
     ```
     {
@@ -143,24 +143,24 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 #### Forward Activity logs to Event Hub
 
 1. Navigate to [Azure Activity log][6].
-1. Click **Export Activity Logs**.
-1. Click **Add diagnostic settings**.
+1. Click {{< ui >}}Export Activity Logs{{< /ui >}}.
+1. Click {{< ui >}}Add diagnostic settings{{< /ui >}}.
 1. Enter a name for the diagnostic setting.
 1. Select the categories of logs you want to send to Datadog.
-1. Select **Stream to an event hub**.
+1. Select {{< ui >}}Stream to an event hub{{< /ui >}}.
 1. Select the event hub namespace created previously.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 #### Forward resource logs to Event Hub
 
 1. Navigate to the resource from which you want to send resource logs.
-1. Under **Monitor** in the left side menu, click **Diagnostic settings**.
-1. Click **Add diagnostic setting**.
+1. Under **Monitor** in the left side menu, click {{< ui >}}Diagnostic settings{{< /ui >}}.
+1. Click {{< ui >}}Add diagnostic setting{{< /ui >}}.
 1. Enter a name for the diagnostic setting.
-1. Select **allLogs**.
-1. Under the **Destination details** section, select **Stream to an event hub**.
+1. Select {{< ui >}}allLogs{{< /ui >}}.
+1. Under the **Destination details** section, select {{< ui >}}Stream to an event hub{{< /ui >}}.
 1. Select the event hub namespace created previously.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 Go to [Log Explorer][7] and enter `service:azure` in the search query to view your Azure logs.
 

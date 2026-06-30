@@ -18,7 +18,7 @@ API Posture brings together several capabilities, all built on the same live API
 - Discover which APIs exist with [API Inventory][4]. Inventory is a continuously updated catalog of the endpoints and services discovered across your environment, including those that are undocumented or no longer in use.
 - Assess what each API exposes with [API Findings][5] and [Sensitive Data][6]. Findings aggregate the vulnerabilities and misconfigurations tied to your endpoints, and sensitive data tagging shows which endpoints process PII, credentials, or payment data.
 - Verify which endpoints are publicly accessible, and which require authentication, using [Endpoint Scanning][7]. Endpoint Scanning probes your endpoints from outside your environment, rather than inferring behavior from observed traffic.
-- Measure your organization-wide posture in the API Posture section of the [Overview page][8]. It shows how your endpoints are discovered, which ones are exposed to attacks or process sensitive data, and your open findings by severity.
+- Measure your organization-wide posture in the API Posture section of the [{{< ui >}}Overview{{< /ui >}} page][8]. It shows how your endpoints are discovered, which ones are exposed to attacks or process sensitive data, and your open findings by severity.
 
 ## Further reading
 

@@ -78,7 +78,11 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-The `counter` metric type is the only `incremental` metric. `gauge`, `distribution`, and `histogram` metric types are `absolute` metrics.
+Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from OpenTelemetry can either be incremental or absolute based on their [temporality][4]. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
+
+| Metric Type | Incremental                      | Absolute                               |
+|-------------|----------------------------------|----------------------------------------|
+| Counter     | Sent as deltas: `+2`, `+4`, `+6` | Sent as cumulative sum: `2`, `6`, `10` |
 
 An example of a metric:
 
@@ -114,6 +118,7 @@ See [Metric Types][3] for more information.
 [1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /metrics/types/?tab=gauge#metric-types
+[4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
 
 {{% /tab %}}
 {{< /tabs >}}

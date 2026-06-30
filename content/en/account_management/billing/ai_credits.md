@@ -7,10 +7,10 @@ further_reading:
 - link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
-- link: "/bits_ai/bits_ai_dev_agent/"
+- link: "/bits_ai/bits_code/"
   tag: "Documentation"
   text: "Bits Code"
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Bits Investigation"
 - link: "/actions/agents/"
@@ -87,9 +87,9 @@ AI Credits are available to all Datadog customers except:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_chat/
-[2]: /bits_ai/bits_ai_dev_agent/
-[3]: /bits_ai/bits_ai_sre/
+[2]: /bits_ai/bits_code/
+[3]: /bits_ai/bits_investigation/
 [4]: /actions/agents/
 [5]: https://www.datadoghq.com/pricing/?site=us&product=ai-credits#products
-[6]: https://app.datadoghq.com/account/login?next=%2Fbilling%2Fbill-overview%3Fdetail_bd%3Dai_credits
+[6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles

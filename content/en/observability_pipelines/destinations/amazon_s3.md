@@ -91,23 +91,23 @@ After you select the Amazon S3 destination in the pipeline UI:
     - **Notes**:
         - Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
         - Do **not** use the same S3 prefix as a [Datadog Archives][2] destination. The Amazon S3 destination writes files in a different format and having both file types in the same prefix can result in rehydration issues.
-1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
-1. Select the encoding you want to use in the **Encoding** dropdown menu (**JSON** or **Parquet**).
-    - **Note**: For **Parquet**, the schema is generated per batch and can vary. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
-1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. If you selected:
-    - **Parquet**: Datadog recommends `snappy` or a low-compression level if you choose `zstd`.
-    - **JSON**: Datadog recommends `gzip`.
+1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu.
+1. Select the encoding you want to use in the {{< ui >}}Encoding{{< /ui >}} dropdown menu ({{< ui >}}JSON{{< /ui >}} or {{< ui >}}Parquet{{< /ui >}}).
+    - **Note**: For {{< ui >}}Parquet{{< /ui >}}, the schema is generated per batch and can vary. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
+1. Select a compression algorithm in the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu. If you selected:
+    - {{< ui >}}Parquet{{< /ui >}}: Datadog recommends `snappy` or a low-compression level if you choose `zstd`.
+    - {{< ui >}}JSON{{< /ui >}}: Datadog recommends `gzip`.
 
 ### Optional settings
 
 #### Batching
 
-1. Enter a maximum batching size and select the unit (**MB** or **GB**) in the dropdown menu. If not configured, the default is `100` MB.
+1. Enter a maximum batching size and select the unit ({{< ui >}}MB{{< /ui >}} or {{< ui >}}GB{{< /ui >}}) in the dropdown menu. If not configured, the default is `100` MB.
 1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
 
 #### AWS authentication
 
-Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. Select **Assume role** only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select **Assume role**:
+Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select {{< ui >}}Assume role{{< /ui >}}. Select {{< ui >}}Assume role{{< /ui >}} only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select {{< ui >}}Assume role{{< /ui >}}:
 1. Enter the ARN of the IAM role you want to assume.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
 1. (Optional) Enter the assumed role session name and external ID.

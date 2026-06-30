@@ -181,5 +181,5 @@ After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdow
 
 [1]: https://app.datadoghq.com/apm/recommendations
 [2]: /database_monitoring/recommendations/
-[3]: /bits_ai/bits_ai_dev_agent/
-[4]: /bits_ai/bits_ai_dev_agent/setup/
+[3]: /bits_ai/bits_code/
+[4]: /bits_ai/bits_code/setup/

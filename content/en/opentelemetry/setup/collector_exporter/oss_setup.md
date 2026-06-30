@@ -223,7 +223,9 @@ For cloud-specific environments, add the appropriate resource detection detector
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
-See the [full configuration files][5] for an optional config to gather additional metadata about the system.
+See the [full configuration files][500] for an optional config to gather additional metadata about the system.
+
+[500]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
@@ -739,10 +741,10 @@ Apply [Unified Service Tagging][4] by setting the `service.name`, `deployment.en
 
 After your application sends telemetry to the Collector, verify that data appears in Datadog:
 
-1. In Datadog, go to **APM > Services** and confirm that your `service.name` appears.
-2. Open **APM > Traces** and search for your service.
-3. Go to **Infrastructure > Host Map** and confirm that the host running the Collector appears.
-4. If you send logs through OTLP, go to **Logs Explorer** and search for your service name.
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}} and confirm that your `service.name` appears.
+2. Open {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}} and search for your service.
+3. Go to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host Map{{< /ui >}} and confirm that the host running the Collector appears.
+4. If you send logs through OTLP, go to {{< ui >}}Logs Explorer{{< /ui >}} and search for your service name.
 
 ## Key components
 
