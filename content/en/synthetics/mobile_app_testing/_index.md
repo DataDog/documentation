@@ -166,7 +166,7 @@ To configure a mobile test to use either EU or US hosted devices:
 
 ### Mobile device families
 
-A mobile device family represents a set of devices that share common characteristics, such as a model line or OS version. Instead of choosing a single, specific device, you can choose a family. When a test runs, Datadog runs it on one of the available devices in the family at that time. Choosing a family increases the availability of your test results and makes your tests more resilient to device changes, such as OS upgrades or device replacements.
+A mobile device family represents a set of devices that share common characteristics, such as a model line or OS version. Instead of choosing a single, specific device, you can choose a family. When a test runs, Datadog runs it on one of the available devices in the family at that time. Choosing a family increases the availability of your test results, because the test can run on any available device in the family rather than depending on a single, specific one.
 
 Datadog provides built-in families that appear alongside individual devices in the **Select Device(s)** dropdown. For example:
 
