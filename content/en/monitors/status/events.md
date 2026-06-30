@@ -67,6 +67,6 @@ For each event, access troubleshooting information to help responders quickly un
 [1]: /monitors/downtimes/?tab=bymonitorname
 [2]: /incident_response/incident_management/
 [3]: /incident_response/case_management/
-[4]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[4]: /actions/workflows/trigger/#trigger-a-workflow-from-a-monitor
 [5]: /monitors/status/status_page/#header
 [6]: /change_tracking

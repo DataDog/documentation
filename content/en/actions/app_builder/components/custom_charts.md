@@ -9,7 +9,7 @@ further_reading:
 - link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/workflows/build/"
+- link: "/actions/workflows/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---

@@ -274,8 +274,8 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 
 <br>Do you have questions or feedback? Join the {{< ui >}}#app-builder{{< /ui >}} channel on the [Datadog Community Slack][8].
 
-[5]: /service_management/workflows/connections
-[6]: /service_management/workflows
+[5]: /actions/connections
+[6]: /actions/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://chat.datadoghq.com/
 [10]: https://app.datadoghq.com/actions/action-catalog/

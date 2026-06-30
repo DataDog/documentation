@@ -8,7 +8,7 @@ further_reading:
 - link: "/cloud_cost_management/recommendations/"
   tag: "Documentation"
   text: "Cloud Cost Recommendations"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
 
@@ -58,7 +58,7 @@ To set up an automation on a recurring schedule for a recommendation type:
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
 1. On the left side of the page, select the recommendation type.
 1. Click **Create New Automation**.
-1. In the {{< ui >}}AWS Connection{{< /ui >}} dropdown menu, select or create a [connection][7]. To act across multiple accounts with one automation, select or create a [connection group][8].
+1. In the {{< ui >}}AWS Connection{{< /ui >}} dropdown menu, select or create a [connection][5]. To act across multiple accounts with one automation, select or create a [connection group][7].
 1. In the {{< ui >}}Define scope{{< /ui >}} section:
     1. Enter tags to restrict the automation to resources matching those tags, such as `env`, `service`, and `team`.
     1. Enter the maximum resources per run to cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
@@ -111,7 +111,6 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 [2]: /cloud_cost_management/recommendations/#recommendation-action-taking
 [3]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [4]: /cloud_cost_management/recommendations/#prerequisites
-[5]: /service_management/workflows/connections/
+[5]: /actions/connections/
 [6]: https://app.datadoghq.com/cost/optimize/automations
-[7]: /actions/connections/
-[8]: /service_management/workflows/connections/#connection-groups
+[7]: /actions/connections/#connection-groups

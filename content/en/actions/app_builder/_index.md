@@ -93,7 +93,7 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][4].
 
 [1]: https://app.datadoghq.com/actions/action-catalog/
-[2]: /service_management/workflows/
+[2]: /actions/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
 [4]: https://chat.datadoghq.com/
 [5]: /actions/app_builder/build/#build-an-app-from-a-blueprint
