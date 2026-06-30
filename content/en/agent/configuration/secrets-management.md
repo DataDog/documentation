@@ -116,6 +116,31 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
+##### All `aws_session` options
+
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional — when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+
+| Field | Description |
+|---|---|
+| `aws_region` | AWS region (for example, `us-east-1`). |
+| `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
+| `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
+| `aws_profile` | Named profile from the shared AWS config file (`~/.aws/config`). |
+| `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
+| `aws_external_id` | External ID to pass when assuming a cross-account role. |
+
+##### `force_string` option
+
+Set `force_string: true` at the top level of `secret_backend_config` to return the raw secret string instead of parsing it as JSON. This is useful when a secret is stored as plain text rather than as a JSON object.
+
+```yaml
+secret_backend_type: aws.secrets
+secret_backend_config:
+  force_string: true
+  aws_session:
+    aws_region: us-east-1
+```
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -354,6 +379,19 @@ api_key: "ENC[/DatadogAgent/Production/ApiKey]"
 property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
+
+##### All `aws_session` options
+
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional — when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+
+| Field | Description |
+|---|---|
+| `aws_region` | AWS region (for example, `us-east-1`). |
+| `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
+| `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
+| `aws_profile` | Named profile from the shared AWS config file (`~/.aws/config`). |
+| `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
+| `aws_external_id` | External ID to pass when assuming a cross-account role. |
 
 {{% /collapse-content %}}
 
@@ -912,8 +950,64 @@ secret_backend_config:
   vault_session:
     vault_auth_type: aws
     vault_aws_role: Name-of-IAM-role-attached-to-machine
-    aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
+    aws_region: us-east-1  # optional, defaults to us-east-1 if not set
 ```
+
+##### All `vault_session` options
+
+The following `vault_session` fields control how the Agent authenticates to Vault.
+
+| Field | Description |
+|---|---|
+| `vault_auth_type` | Authentication method. Supported values: `aws`, `kubernetes`. When unset, AppRole, userpass, or LDAP is used based on which credentials are provided. |
+| `vault_role_id` | AppRole role ID. Use with `vault_secret_id`. |
+| `vault_secret_id` | AppRole secret ID. Use with `vault_role_id`. |
+| `vault_username` | Username for userpass authentication. Use with `vault_password`. |
+| `vault_password` | Password for userpass authentication. Use with `vault_username`. |
+| `vault_ldap_username` | Username for LDAP authentication. Use with `vault_ldap_password`. |
+| `vault_ldap_password` | Password for LDAP authentication. Use with `vault_ldap_username`. |
+| `vault_aws_role` | Vault role name for AWS IAM authentication. Required when `vault_auth_type: aws`. |
+| `vault_aws_iam_server_id` | Value for the `X-Vault-AWS-IAM-Server-ID` header, used to prevent replay attacks. |
+| `aws_region` | AWS region for IAM authentication requests. Defaults to `us-east-1`. |
+| `vault_kubernetes_role` | Vault role name for Kubernetes authentication. Required when `vault_auth_type: kubernetes`. |
+| `vault_kubernetes_jwt` | Kubernetes service account JWT token as a string. |
+| `vault_kubernetes_jwt_path` | Path to the Kubernetes JWT token file. Defaults to `/var/run/secrets/kubernetes.io/serviceaccount/token`. |
+| `vault_kubernetes_mount_path` | Vault mount path for the Kubernetes auth method. |
+| `implicit_auth` | Set to `true` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
+
+##### Other `vault_session` options
+
+The following top-level `secret_backend_config` fields also apply:
+
+| Field | Description |
+|---|---|
+| `vault_address` | Vault server address (for example, `http://myvaultaddress.net`). Can also be set with the `VAULT_ADDR` environment variable. |
+| `vault_token` | Static Vault token. Use when not relying on an auth method. |
+| `vault_namespace` | Vault namespace for Vault Enterprise environments. |
+
+##### TLS configuration (`vault_tls_config`)
+
+To enable mutual TLS or a custom CA, add a `vault_tls_config` block:
+
+```yaml
+secret_backend_type: hashicorp.vault
+secret_backend_config:
+  vault_address: https://myvaultaddress.net
+  vault_tls_config:
+    ca_cert: /path/to/ca.pem
+    client_cert: /path/to/client.pem
+    client_key: /path/to/client-key.pem
+    insecure: false
+```
+
+| Field | Description |
+|---|---|
+| `ca_cert` | Path to a PEM-encoded CA certificate file. |
+| `ca_path` | Path to a directory of PEM-encoded CA certificate files. |
+| `client_cert` | Path to a PEM-encoded client certificate file for mTLS. |
+| `client_key` | Path to the private key file for the client certificate. |
+| `tls_server` | Expected server name for TLS SNI verification. |
+| `insecure` | Set to `true` to disable TLS certificate verification. Not recommended for production. |
 
 {{% /collapse-content %}}
 
@@ -1981,6 +2075,7 @@ instances:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
 
 <!-- Azure KeyVault Links -->
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
