@@ -54,9 +54,7 @@ To open the remediation session, select the API finding from the [**Findings**][
 
 You can also view all remediation sessions on [**Sessions**][4].
 
-
 [1]: https://app.datadoghq.com/security/appsec/inventory/finding
 [2]: /security/application_security/policies/custom_rules/
 [3]: /bits_ai/bits_code
 [4]: https://app.datadoghq.com/code
-
