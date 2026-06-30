@@ -73,7 +73,7 @@ To see App and API Protection threat detection in action, send known attack patt
    ```sh
    curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
-A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [{{< ui >}}Application Signals Explorer{{< /ui >}}][41]**.
 
 ## Connect telemetry using tags
 
@@ -509,7 +509,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
     1. Obtain the Datadog trace ID using `dd-trace` and add it to your log.
     2. Clone the default Lambda log pipeline, which is read-only.
     3. Enable the cloned pipeline and disable the default one.
-    4. Update the [Grok parser][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
+    4. Update the [{{< ui >}}Grok parser{{< /ui >}}][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
 
 ## Link errors to your source code
 

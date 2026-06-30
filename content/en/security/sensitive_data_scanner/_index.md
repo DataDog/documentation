@@ -183,7 +183,7 @@ See [Investigate Sensitive Data Findings][14] for more information on triaging s
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 

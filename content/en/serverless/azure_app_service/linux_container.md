@@ -372,7 +372,7 @@ Redeploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 
 {{% /tab %}}
@@ -467,25 +467,25 @@ Redeploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
 
 #### Sidecar container
 
-1. In the Azure Portal, go to **Deployment Center** and select **Add**.
-2. In the **Edit container** form, provide the following:
-   - **Image source**: Docker Hub or other registries
-   - **Image type**: Public
-   - **Registry server URL**: `index.docker.io`
-   - **Image and tag**: `datadog/serverless-init:latest`
-   - **Port**: 8126
-3. Select **Apply**.
+1. In the Azure Portal, go to {{< ui >}}Deployment Center{{< /ui >}} and select {{< ui >}}Add{{< /ui >}}.
+2. In the {{< ui >}}Edit container{{< /ui >}} form, provide the following:
+   - {{< ui >}}Image source{{< /ui >}}: Docker Hub or other registries
+   - {{< ui >}}Image type{{< /ui >}}: Public
+   - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+   - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+   - {{< ui >}}Port{{< /ui >}}: 8126
+3. Select {{< ui >}}Apply{{< /ui >}}.
 
 #### Application settings
 
-In your **App settings** in Azure, set the following environment variables on both your main container and the sidecar container. Alternatively, set these variables on your main container and enable the **Allow access to all app settings** option.
+In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables on both your main container and the sidecar container. Alternatively, set these variables on your main container and enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
 
 {{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
 

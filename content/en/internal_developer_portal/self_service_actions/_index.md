@@ -1,6 +1,8 @@
 ---
 title: Self-Service Actions
 description: Platform teams can define and share templates that let developers provision infrastructure, scaffold services, manage deployments, and automate tasks with one click.
+cascade:
+  site_support_id: idp
 aliases:
   - /software_catalog/actions
   - /software_catalog/self-service
@@ -11,7 +13,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate incidents faster with App Builder"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "Learn about App Builder"
 - link: "/service_management/workflows/"
@@ -92,7 +94,7 @@ Once your Software Template is configured and tested, publish it so your team ca
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/
-[2]: /service_management/app_builder/
+[2]: /actions/app_builder/
 [3]: https://app.datadoghq.com/workflow
 [4]: https://www.cookiecutter.io/
 [5]: https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md
