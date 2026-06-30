@@ -1,11 +1,8 @@
-/* Title row used at the top of every API page. The H1 takes the available
-   space and the copy-page button is pushed to the trailing edge; the row
-   wraps the button below the title when the row can't fit both. Baseline
-   alignment matches the visual line of the page title, mirroring the
-   docs-site heading pattern. */
+/* Title row used at the top of every API page. The H1 takes available space
+   and the copy-page button is pinned to the trailing edge of the same row.
+   Baseline alignment mirrors the docs-site heading pattern. */
 .api-page-header {
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-sm) var(--space-md);
   margin-bottom: var(--space-md);
