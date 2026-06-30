@@ -159,6 +159,35 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
 
+### View accessibility attributes
+
+The following accessibility-related attributes are automatically collected for each view. Attributes not supported on the platform are omitted from the event.
+
+| Attribute | Type | Description |
+|---|---|---|
+| `view.accessibility.text_size` | string | The user's preferred text size category (for example, `UICTContentSizeCategoryM`). |
+| `view.accessibility.screen_reader_enabled` | Boolean | Whether VoiceOver is active. |
+| `view.accessibility.bold_text_enabled` | Boolean | Whether the system-wide bold text setting is enabled. |
+| `view.accessibility.reduce_transparency_enabled` | Boolean | Whether the system-wide reduce transparency setting is enabled. |
+| `view.accessibility.reduce_motion_enabled` | Boolean | Whether the system-wide reduce motion setting is enabled. |
+| `view.accessibility.button_shapes_enabled` | Boolean | Whether button shapes are enabled. |
+| `view.accessibility.invert_colors_enabled` | Boolean | Whether color inversion is enabled. |
+| `view.accessibility.increase_contrast_enabled` | Boolean | Whether the system-wide increase contrast setting is enabled. |
+| `view.accessibility.assistive_switch_enabled` | Boolean | Whether Switch Control is active. |
+| `view.accessibility.assistive_touch_enabled` | Boolean | Whether AssistiveTouch is active. |
+| `view.accessibility.is_video_autoplay_enabled` | Boolean | Whether video autoplay is enabled. |
+| `view.accessibility.closed_captioning_enabled` | Boolean | Whether closed captioning is enabled for media playback. |
+| `view.accessibility.mono_audio_enabled` | Boolean | Whether mono audio is enabled. |
+| `view.accessibility.shake_to_undo_enabled` | Boolean | Whether the Shake to Undo gesture is enabled. |
+| `view.accessibility.reduced_animations_enabled` | Boolean | Whether the user prefers reduced animations or cross-fade transitions. |
+| `view.accessibility.should_differentiate_without_color` | Boolean | Whether the system differentiates interface elements without relying solely on color. |
+| `view.accessibility.grayscale_enabled` | Boolean | Whether grayscale display mode is enabled. |
+| `view.accessibility.single_app_mode_enabled` | Boolean | Whether the device is locked to a single app through Guided Access. |
+| `view.accessibility.on_off_switch_labels_enabled` | Boolean | Whether on/off switch labels are enabled. |
+| `view.accessibility.speak_screen_enabled` | Boolean | Whether the Speak Screen feature is enabled. |
+| `view.accessibility.speak_selection_enabled` | Boolean | Whether the Speak Selection feature is enabled. |
+| `view.accessibility.rtl_enabled` | Boolean | Whether right-to-left layout direction is active. |
+
 ### Resource attributes
 
 | Attribute                         | Type           | Description                                                                                     |
