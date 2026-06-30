@@ -27,7 +27,7 @@ Integrate Work Management with Error Tracking to create and link Work Management
 
 ## Setup
 
-You need the following [permissions][1] to use the Case Management integration for Error Tracking:
+You need the following [permissions][1] to use the Work Management integration for Error Tracking:
 
 - Error Tracking Read
 - Error Tracking Issue Write

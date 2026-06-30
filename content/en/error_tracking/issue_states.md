@@ -26,7 +26,7 @@ The diagram below shows how the Error Tracking states are updated automatically 
 Error Tracking automatically marks issues as {{< ui >}}REVIEWED{{< /ui >}} if one of the following actions has been taken:
 
 - The issue has been assigned
-- A case has been created from the issue
+- A work item has been created from the issue
 
 {{< img src="error_tracking/auto-review-actions-2.png" alt="Error Tracking automatic review actions" style="width:75%;" >}}
 

@@ -156,7 +156,7 @@ Click on the export icon of any dashboard graph to open an options menu:
 |------------------|----------------------------------------------------|
 | Declare incident | Declare an incident from the graph.                |
 | Add to incident  | Add the graph to an existing incident.             |
-| Create case      | Create a case from the graph.                      |
+| Create work item <!-- [TO VERIFY] --> | Create a work item from the graph. |
 | Save to notebook | Save the graph to a notebook.                      |
 | Link to widget   | Get a link to the widget copied to your clipboard. |
 

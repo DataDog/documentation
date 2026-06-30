@@ -8,7 +8,7 @@ further_reading:
   text: "Learn about Event Correlation"
 ---
 
-<!-- {{< img src="events/correlation/triage/triage.png" alt="Case detail page with an event side panel. Investigate correlated events from a case and analyze related metrics" style="width:100%;" >}} -->
+<!-- {{< img src="events/correlation/triage/triage.png" alt="Work item detail page with an event side panel. Investigate correlated events from a work item and analyze related metrics" style="width:100%;" >}} -->
 
 Event Management correlates related events and automatically consolidates them into a single work item. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
@@ -16,7 +16,7 @@ From the [Correlation][1] page, find the pattern you want to analyze and click {
 
 ## Event Management Work Item
 
-<!-- {{< img src="events/correlation/triage/event_management_case_detail.png" alt="Case detail page - Overview" style="width:100%;" >}} -->
+<!-- {{< img src="events/correlation/triage/event_management_case_detail.png" alt="Work item detail page - Overview" style="width:100%;" >}} -->
 
 
 | Feature | Description | 
