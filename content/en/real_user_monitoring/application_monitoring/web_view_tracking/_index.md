@@ -156,7 +156,7 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
    WebViewTracking.enable(webView, allowedHosts)
    ```
 
-`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 **Note**:
 In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
@@ -180,7 +180,7 @@ import WebKit
 import DatadogWebViewTracking
 
 let webView = WKWebView(...)
-WebViewTracking.enable(webView: webView, hosts: ["example.com"])
+WebViewTracking.enable(webView: webView, hosts: ["example.com", "*.example.com"])
 ```
 
 To disable Web View Tracking:
@@ -188,7 +188,7 @@ To disable Web View Tracking:
 WebViewTracking.disable(webView: webView)
 ```
 
-`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+`hosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}

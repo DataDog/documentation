@@ -806,11 +806,11 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
      implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
    }
    ```
-2. Add `DatadogInterceptor` to your `OkHttpClient`:
+2. Add `DatadogInterceptor` to your `OkHttpClient`. Each host entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`). A wildcard may only match subdomains of a registrable domain, so patterns such as `"*.com"` are rejected:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-   val tracedHosts = listOf("example.com", "example.eu")
+   val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
    val okHttpClient = OkHttpClient.Builder()
      .addInterceptor(
        DatadogInterceptor.Builder(tracedHosts)
@@ -822,7 +822,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-   List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+   List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
      .addInterceptor(
        new DatadogInterceptor.Builder(tracedHosts)
@@ -843,7 +843,7 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracedHosts = listOf("example.com", "example.eu")
+val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
 val okHttpClient =  OkHttpClient.Builder()
   .addInterceptor(
     DatadogInterceptor.Builder(tracedHosts)
@@ -860,7 +860,7 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
   .addInterceptor(
     new DatadogInterceptor.Builder(tracedHosts)

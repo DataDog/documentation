@@ -536,7 +536,7 @@ for (NSString *key in headersWriter.traceHeaderFields) {
 {{< /tabs >}}
 This sets additional tracing headers on your request so your backend can extract the request and continue distributed tracing. Once the request is done, call `span.finish()` within a completion handler. If your backend is also instrumented with [Datadog APM & Distributed Tracing][10], the entire front-to-back trace appears in the Datadog dashboard.
 
-    * To automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Trace configuration with `urlSessionTracking`:
+    * To automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Trace configuration with `urlSessionTracking`. Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`):
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -545,7 +545,7 @@ import DatadogTrace
 Trace.enable(
     with: Trace.Configuration(
         urlSessionTracking: Trace.Configuration.URLSessionTracking(
-            firstPartyHostsTracing: .trace(hosts: ["example.com", "api.yourdomain.com"])
+            firstPartyHostsTracing: .trace(hosts: ["example.com", "api.yourdomain.com", "*.api.yourdomain.com"])
         )
     )
 )
