@@ -22,7 +22,7 @@ Supported actions include:
 - Sending Slack and Microsoft Teams messages
 - Creating incidents in Datadog and PagerDuty
 - Paging engineers via Datadog On-Call
-- Creating cases in Datadog Case Management
+- Creating work items in Datadog Work Management
 - Opening Jira tickets
 
 Bits Investigation automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.

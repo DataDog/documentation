@@ -15,7 +15,7 @@ Use the different principals to control access patterns in your organization and
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Work Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Critical Assets][26]                            | {{< X >}}         | {{< X >}}         | {{< X >}}                           |

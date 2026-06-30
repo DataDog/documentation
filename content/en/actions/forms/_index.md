@@ -19,11 +19,11 @@ Datadog Forms allow you to collect input, analyze responses, and trigger automat
 Some ways you can use forms:
 - Scaffold services from predefined templates.
 - Survey engineering feedback in an internal developer portal (IDP).
-- Create service requests and [cases][1] for security, platform, or IT teams directly from employee form responses.
+- Create service requests and [work items][1] for security, platform, or IT teams directly from employee form responses.
 
 ## Create a form
 
-When creating a form, you can use a blueprint, [import an existing form](#import-a-form), or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements, and some blueprints include a pre-configured automation. Blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
+When creating a form, you can use a blueprint, [import an existing form](#import-a-form), or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements, and some blueprints include a pre-configured automation. Blueprints include Developer Experience Survey, IDP Feedback, Work Management Service Request <!-- [TO VERIFY] -->, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
 
 To create a form:
 1. On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}.

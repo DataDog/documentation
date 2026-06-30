@@ -58,11 +58,11 @@ Declare an incident from [Secret Scanning][15] by clicking **Declare incident** 
 
 {{< img src="/incident_response/incident_management/investigate/declare/declare-secrets.png" alt="Your image description" style="width:90%;" >}}
 
-## From a case
+## From a work item
 
-Declare an incident from [Case Management][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
+Declare an incident from [Work Management][5]. From the individual work item detail page, click **Declare incident**<!-- [TO VERIFY] --> to escalate a work item to an incident.
 
-{{< img src="incident_response/incident_management/investigate/declare/declare_case_management.png" alt="An example case page highlighting the Declare Incident button at the top of the page" style="width:90%;" >}}
+<!-- {{< img src="incident_response/incident_management/investigate/declare/declare_case_management.png" alt="An example case page highlighting the Declare Incident button at the top of the page" style="width:90%;" >}} -->
 
 ## From a graph
 You can declare an incident directly from a graph by clicking the export button on the graph and then clicking **Declare incident**. The incident creation modal appears, and the graph is added to the incident as a signal.

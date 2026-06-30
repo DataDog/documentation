@@ -20,7 +20,7 @@ further_reading:
 
 The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
-From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
+From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create work items and Jira issues to track work toward fixes.
 
 Each flaky test has a stable, unique identifier derived from a hash of the repository ID and the test's fully qualified name. In the Test Optimization Explorer, this is the `@test.fingerprint_fqn` facet. In the [Flaky Tests Management API][18], it is the test's `id`, and you can filter the Search flaky tests endpoint using the `fingerprint_fqn` key. Use this identifier to look up or update a specific test through the API.
 
@@ -111,9 +111,9 @@ For more information about a specific flaky test, use these options in the actio
 - {{< ui >}}View Last Failed Test Run{{< /ui >}}: Open the side panel with the details of the test's most recent failed run.
 - {{< ui >}}View related test executions{{< /ui >}}: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
 
-## Create cases for flaky tests
+## Create work items for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the {{< ui >}}Create Case{{< /ui >}} button or use the actions menu at the end of the row.
+For any flaky test, you can create a work item and use [Work Management][4] to track any work toward remediation. Click the {{< ui >}}Create Work Item{{< /ui >}}<!-- [TO VERIFY] --> button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 

@@ -2482,7 +2482,7 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_linear
       weight: 101
-    - name: Case Management
+    - name: Work Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management

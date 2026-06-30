@@ -41,9 +41,9 @@ attributes:
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
        - **Resource, Long Task, and Vitals Events**: 15 Days
-  - product: Case Management
+  - product: Work Management
     data_type: |
-       - **Cases**: Retained for the duration of the account
+       - **Work items** <!-- [TO VERIFY] -->: Retained for the duration of the account
   - product: CD Visibility
     data_type: |
        - **Deployments**: 30 days

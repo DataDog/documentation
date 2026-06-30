@@ -136,7 +136,7 @@ The following table describes the products in which you can use the team filter:
 |--------------------------------|------------------------------------------------------------------------------------|
 | [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Apps][21]                     | Team handle                                                                        |
-| [Case Management projects][22] | Team handle                                                                        |
+| [Work Management projects][22] | Team handle                                                                        |
 | [Connections][23]              | Team handle                                                                        |
 | [Connection Groups][24]        | Team handle                                                                        |
 | [Cross Org Connections][25]    | Team handle                                                                        |

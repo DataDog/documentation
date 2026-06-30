@@ -18,7 +18,7 @@ further_reading:
   text: "Learn about the Source Code Integration"
 - link: "/incident_response/case_management"
   tag: "Documentation"
-  text: "Learn about Case Management"
+  text: "Learn about Work Management"
 ---
 
 ## Overview
@@ -27,7 +27,7 @@ further_reading:
 
 - [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
 - [Create and open GitHub issues](#create-and-open-github-issues) 
-- [Create Jira issues through Case Management](#create-jira-issues)
+- [Create Jira issues through Work Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 
 These features are available for all Test Optimization customers, and they do not require usage of the [Datadog GitHub integration][4].
@@ -99,39 +99,39 @@ Below is what a pre-filled GitHub issue might look like:
 
 ## Create Jira issues
 
-With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests. 
+With [Work Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests. 
 
-When you update the status of a Jira issue, the status in Case Management updates and reflects the latest case status.
+When you update the status of a Jira issue, the status in Work Management updates and reflects the latest work item status.
 
 ### In-app entry points
 
-After you have [set up the Jira integration][7], you can create cases from three areas within Test Optimization:
+After you have [set up the Jira integration][7], you can create work items from three areas within Test Optimization:
 
 - [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)
 - [Test Runs side panel](#test-runs-view)
 
-You can manually create a Jira issue from a case in [Case Management][9] by clicking `Shift + J`.
+You can manually create a Jira issue from a work item in [Work Management][9] by clicking `Shift + J`.
 
 ### Commit Overview
 
 The overview page for any commit can be discovered through a particular branch or from within any particular test. 
 
-{{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
+<!-- {{< img src="continuous_integration/case_failed_test.png" alt="Create a Work Management work item in the Commit Overview page" style="width:100%;">}} -->
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create case{{< /ui >}}. 
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
 
 #### Branch Overview
-From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create case{{< /ui >}}.
+From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
 
-{{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
+<!-- {{< img src="continuous_integration/case_flaky_test.png" alt="Create a Work Management work item in the Flaky Tests list" style="width:100%;">}} -->
 
 #### Test Runs View
-From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create case{{< /ui >}}. 
+From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
 
-{{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
+<!-- {{< img src="continuous_integration/case_test_runs.png" alt="Create a Work Management work item in the Test Runs side panel" style="width:100%;">}} -->
 
-For more information about configuring the Jira integration, see the [Case Management documentation][7].
+For more information about configuring the Jira integration, see the [Work Management documentation][7].
 
 ## Open tests in GitHub and your IDE
 

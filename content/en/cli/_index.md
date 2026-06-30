@@ -82,7 +82,7 @@ Pup covers most major Datadog product surfaces. See the [command reference][3] f
 | Monitoring and Alerting | Monitors, dashboards, SLOs, synthetics, downtimes, workflows |
 | Security and Compliance | Security rules, signals, findings, audit logs, CSM threats |
 | Infrastructure and Cloud | Hosts, tags, containers, network, AWS/GCP/Azure integrations |
-| Incident and Operations | Incidents, on-call, case management, error tracking, service catalog |
+| Incident and Operations | Incidents, on-call, work management, error tracking, service catalog |
 | CI/CD and Development | CI visibility, test optimization, DORA metrics, deployment gates |
 | Organization and Access | Users, API keys, application keys, organizations |
 | Platform and Configuration | Usage metering, cost management, feature flags, observability pipelines |
