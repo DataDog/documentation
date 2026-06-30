@@ -30,11 +30,11 @@ Custom application or non-standard logs can often be hard to parse into structur
 
 ## Setup
 
-The Grok Parser processor:
+The Grok Parser processor does the following:
 
 1. Uses the processor-level filter query to determine which logs are sent to the parser.
 1. Identifies the specified field to parse on the log.
-1. Uses the rule-level filter query to apply the first parsing rule that matches the log (in Preview).
+1. (Preview) Uses the rule-level filter query to apply the first parsing rule that matches the log.
 1. Overwrites the specified log field with the rule's output, and then sends the log to the next step in the pipeline.
 
 {{< img src="observability_pipelines/processors/grok_parser_setup.png" alt="The Grok Parser processor panel showing the filter query and field-to-parse settings." style="width:50%;" >}}
@@ -83,7 +83,7 @@ Consider a parser with these parsing rules:
 1. Rule Example 2
 1. Rule Example 3
 
-If a log sent to the parser matches all three rule queries, the log is only parsed by Rule Example 1 because it's listed before rules 2 and 3.
+If a log sent to the parser matches all three rule queries, the log is _only_ parsed by Rule Example 1, because it's listed before rules 2 and 3.
 
 {{< img src="observability_pipelines/processors/grok_parser_rule_order.png" alt="Three parsing rules listed in order in the Grok Parser processor." style="width:50%;" >}}
 
