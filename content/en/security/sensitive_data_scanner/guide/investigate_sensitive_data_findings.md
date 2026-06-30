@@ -56,7 +56,7 @@ Additionally, you can also:
 
 ### Create alerts from log findings
 
-To create an alert from a log finding, click {{< ui >}}Notify{{< /ui >}} from the Logs Findings explorer or from an open finding. Datadog opens a new notification rule with the current explorer filters or finding attributes prefilled. For complete instructions, see [Create Alerts for Sensitive Data](/security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/).
+To create an alert from a log finding, click {{< ui >}}Create Notification Rule{{< /ui >}} from the Logs Findings explorer or from a finding side panel. Datadog opens a new notification rule with the current explorer filters or finding attributes prefilled. For complete instructions, see [Create Alerts for Sensitive Data](/security/sensitive_data_scanner/guide/create-monitors-for-sensitive-data/).
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}

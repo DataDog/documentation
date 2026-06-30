@@ -38,7 +38,7 @@ Before creating alerts for sensitive data, ensure you have:
 
 - Sensitive Data Scanner configured with scanning groups and scanning rules. See [Set up Sensitive Data Scanner][1] for more information.
 - The appropriate permissions in your Datadog account:
-    - For log finding alerts, Security Notification Rules Read and Write permissions. To view the preview list of matching Sensitive Data Scanner findings, you also need Data Scanner Read permission.
+    - For log finding alerts, Security Notification Rules Read and Write permissions. To view Sensitive Data Scanner findings, you also need the Data Scanner Read permission.
     - For APM and RUM monitors, [monitor creation permissions][6].
 - An understanding of which types of sensitive data are most critical for your organization to monitor.
 
