@@ -26,14 +26,14 @@ This guide shows you how to achieve that using Datadog [Synthetic Monitoring][1]
 
 To create a [Synthetic API test][3] with `http://example.com/`, see [Create a single API test][4].
 
-When you click **Test URL**, assertions about your website's health populate. Adjust the assertions to match your SLI.
+When you click {{< ui >}}Test URL{{< /ui >}}, assertions about your website's health populate. Adjust the assertions to match your SLI.
 
 ## Configure a SLO widget
 
 ### Create your SLO
 
 1. [Create a new SLO][5] to track your website's uptime based on your Synthetic test results.
-2. Select **Monitor Based** and enter your Synthetic test name.
+2. Select {{< ui >}}Monitor Based{{< /ui >}} and enter your Synthetic test name.
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO configuration" >}}
 
@@ -45,7 +45,7 @@ When you click **Test URL**, assertions about your website's health populate. Ad
 
     {{< img src="synthetics/guide/uptime_slo/slo_notif.png" alt="SLO notification" >}}
 
-5. Click **Save**.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Import your SLO in your Dashboard
 
@@ -59,7 +59,7 @@ When you click **Test URL**, assertions about your website's health populate. Ad
 
     {{< img src="synthetics/guide/uptime_slo/slo_widget_configs.png" alt="SLO widget config" >}}
 
-5. Enter a descriptive title for your widget and click **Done**.
+5. Enter a descriptive title for your widget and click {{< ui >}}Done{{< /ui >}}.
 
     {{< img src="synthetics/guide/uptime_slo/final_dashboard.png" alt="Final Dashboard" >}}
 

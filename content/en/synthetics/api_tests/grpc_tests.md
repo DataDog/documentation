@@ -44,21 +44,21 @@ You may create a test using one of the following options:
 
    - **Create a test from a template**:
 
-       1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-       2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-       3. Click **Save Details** to submit your API test.<br /><br>
+       1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+       2. Click {{< ui >}}+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+       3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test.<br /><br>
           {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
    - **Build a test from scratch**:
 
-       1. To build a test from scratch, click the **+ Start from scratch** template, then select the `gRPC` request type.
-       2. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
-       3. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check.<br /><br>
+       1. To build a test from scratch, click the {{< ui >}}+ Start from scratch{{< /ui >}} template, then select the `gRPC` request type.
+       2. Specify the {{< ui >}}Host{{< /ui >}} and {{< ui >}}Port{{< /ui >}} to run your test on. The default gRPC port is `50051`.
+       3. Select {{< ui >}}Behavior Check{{< /ui >}} to perform a unary call or {{< ui >}}Health Check{{< /ui >}} to perform a health check.<br /><br>
 
       {{< tabs >}}
       {{% tab "Behavior Check" %}}
 
-For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.<br /><br>
+For a behavior check, specify the {{< ui >}}Server Reflection{{< /ui >}} or [upload a {{< ui >}}Proto File{{< /ui >}}][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.<br /><br>
 
 {{< img src="synthetics/api_tests/grpc_behavior_check_test_2.png" alt="Define gRPC request" style="width:90%;" >}}
 
@@ -74,19 +74,19 @@ For a health check, enter the name of the service. Leave this field blank if you
       {{% /tab %}}
       {{< /tabs >}}
 
-   4. Add **Advanced Options** (optional) to your test:
+   4. Add {{< ui >}}Advanced Options{{< /ui >}} (optional) to your test:
 
       {{< tabs >}}
       {{% tab "Request Options" %}}
 
-- **Time out**: Specify the amount of time in seconds before the test times out.
-- **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
-- **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
+- {{< ui >}}Time out{{< /ui >}}: Specify the amount of time in seconds before the test times out.
+- {{< ui >}}Ignore server certificate error{{< /ui >}}: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
+- {{< ui >}}gRPC metadata{{< /ui >}}: Add and define metadata to your gRPC request to pass metadata between services.
 
       {{% /tab %}}
       {{% tab "Authentication" %}}
 
-- **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
+- {{< ui >}}Client certificate{{< /ui >}}: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
 
 <br/>
 
@@ -100,13 +100,13 @@ You can use the `openssl` library to convert your certificates. For example, con
       {{% /tab %}}
       {{< /tabs >}}
 
-   5. **Name** your gRPC test.
+   5. {{< ui >}}Name{{< /ui >}} your gRPC test.
 
-   6. Add Environment **Tags** as well as any other tags to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
+   6. Add Environment {{< ui >}}Tags{{< /ui >}} as well as any other tags to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
 
-   7. Click **Invoke** to try out the request configuration. A response preview is displayed on the right side of your screen.
+   7. Click {{< ui >}}Invoke{{< /ui >}} to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-   8. Click **Create Test** to submit your API test.
+   8. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
 ### Snippets
 
@@ -114,7 +114,7 @@ You can use the `openssl` library to convert your certificates. For example, con
 
 ### Define assertions
 
-Assertions define what an expected test result is. After you click **Send**, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click {{< ui >}}Send{{< /ui >}}, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 {{< tabs >}}
 {{% tab "Behavior Check" %}}
@@ -125,7 +125,7 @@ Assertions define what an expected test result is. After you click **Send**, an 
 | gRPC response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1], [`xpath`][2] | _String_ <br> _[Regex][3]_ |
 | gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ <br> _[Regex][3]_ |
 
-You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_grpc_behavior_check_blur.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
 
@@ -142,7 +142,7 @@ You can create up to 20 assertions per API test by clicking **New Assertion** or
 | healthcheck status | `is`, `is not` | _Integer (ms)_ |
 | gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ |
 
-You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_grpc_health_check.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
 
@@ -155,7 +155,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your gRPC test from. gRPC tests can run from both managed and [private locations][2] depending on your preference for running the test from outside or inside your network.
+Select the {{< ui >}}Locations{{< /ui >}} to run your gRPC test from. gRPC tests can run from both managed and [private locations][2] depending on your preference for running the test from outside or inside your network.
 
 {{% managed-locations %}}
 
@@ -175,7 +175,7 @@ gRPC tests can run:
 
 ### Use variables
 
-You can use the [global variables defined on the **Settings** page][9] in the URL, advanced options, and assertions of your gRPC tests.
+You can use the [global variables defined on the {{< ui >}}Settings{{< /ui >}} page][9] in the URL, advanced options, and assertions of your gRPC tests.
 
 To display your list of variables, type `{{` in your desired field.
 

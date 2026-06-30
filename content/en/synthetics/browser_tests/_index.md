@@ -43,32 +43,32 @@ You may create a test using one of the following options:
 
 ### Create a test from a template
 
-  1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
-  2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-  3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+  1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, {{< ui >}}Steps{{< /ui >}}, and optionally {{< ui >}}Variables{{< /ui >}}.
+  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
-  1. Click the **+** template to start a new Browser Test from scratch.
-  1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
-  1. Add a **name**: The name of your browser test.
-  1. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+  1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+  1. Enter a {{< ui >}}Starting URL{{< /ui >}}: The URL from which your browser test starts the scenario.
+  1. Add a {{< ui >}}name{{< /ui >}}: The name of your browser test.
+  1. Select {{< ui >}}environment and additional tags{{< /ui >}}: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 
   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-  5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+  5. Select {{< ui >}}browsers and devices{{< /ui >}}: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
 
       - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
       - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
       - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
 
-  6. Select **managed and private locations**: Select from a list of [locations](#locations) around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.
+  6. Select {{< ui >}}managed and private locations{{< /ui >}}: Select from a list of [locations](#locations) around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.
 
      **Note**: You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
 
-  7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
-  8. Click **Save & Edit Recording** to submit your Browser Test.
+  7. Set the {{< ui >}}test frequency{{< /ui >}}: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+  8. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Browser Test.
 
 ### Locations
 
@@ -78,12 +78,12 @@ You may create a test using one of the following options:
 
 When setting up a new Synthetic Monitoring browser test, use snippets to automatically fill in your devices and regions, rather than selecting these options manually. The following snippets are available:
 
-* **Screen sizes**: Automatically perform your browser tests on a specifically sized screen across browsers:
-   * **Large**
-   * **Tablet**
-   * **Mobile**
+* {{< ui >}}Screen sizes{{< /ui >}}: Automatically perform your browser tests on a specifically sized screen across browsers:
+   * {{< ui >}}Large{{< /ui >}}
+   * {{< ui >}}Tablet{{< /ui >}}
+   * {{< ui >}}Mobile{{< /ui >}}
 
-* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA).
+* {{< ui >}}Multi-region check{{< /ui >}}: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA).
 </br><br>
 
   {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
@@ -94,12 +94,12 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Request Options" %}}
 
-   * **Disable CORS**: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
-   * **Disable CSP**: Select to prevent the Content Security Policy (CSP) from blocking your test.
-   * **Capture HTTP payloads**: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [Resources tab][3] of your test results to view request and response headers and body.
-   * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
-   * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
-   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
+   * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
+   * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
+   * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
+   * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
+   * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
@@ -111,10 +111,10 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Certificate" %}}
 
-   Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate.
+   Select {{< ui >}}Ignore server certificate error{{< /ui >}} to instruct the test to skip errors in the server certificate.
 
-   * **Client Certificate**: Perform tests on systems that require client certificates by clicking **Upload File** and uploading your certificate file and private key. Only PEM certificates are accepted.
-   * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.
+   * {{< ui >}}Client Certificate{{< /ui >}}: Perform tests on systems that require client certificates by clicking {{< ui >}}Upload File{{< /ui >}} and uploading your certificate file and private key. Only PEM certificates are accepted.
+   * {{< ui >}}Client Certificate Domains{{< /ui >}}: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the {{< ui >}}Value{{< /ui >}} field.
 
    You can include wildcards in the URL.
 
@@ -122,7 +122,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Proxy" %}}
 
-   Enter a URL for a proxy you want to send requests through in the **Proxy URL** field as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
+   Enter a URL for a proxy you want to send requests through in the {{< ui >}}Proxy URL{{< /ui >}} field as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
 
    You can include [global variables](#use-global-variables) in the URL.
 
@@ -130,7 +130,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Privacy" %}}
 
-   Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps.
+   Select {{< ui >}}Do not capture any screenshots for this test{{< /ui >}} to prevent screenshots from being taken in your test steps.
 
    This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Data Security][2].
 
@@ -156,7 +156,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    Enter one or more request patterns to block from loading while the test is run. Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
 
-   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/test_steps). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
+   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/test_steps). View blocked requests in the [{{< ui >}}Resources{{< /ui >}} tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
 
 [1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 
@@ -168,7 +168,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][4] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording.
+You can use the [global variables defined in {{< ui >}}Settings{{< /ui >}}][4] in the {{< ui >}}Starting URL{{< /ui >}} and {{< ui >}}Advanced Options{{< /ui >}} of your browser test details, as well as in your test recording.
 
 To display a list of available variables:
 
@@ -215,7 +215,7 @@ For more information on how Synthetic Monitoring notifications evaluate test res
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+1. Enter a {{< ui >}}message{{< /ui >}} for the browser test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -228,7 +228,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
 
      {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
@@ -246,8 +246,8 @@ A notification is sent according to the set of alerting conditions. Use this sec
    ```
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
-4. Click **Save & Start Recording** to save your test configuration and record your browser steps.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option {{< ui >}}Stop re-notifying on X occurrences{{< /ui >}}.
+4. Click {{< ui >}}Save & Start Recording{{< /ui >}} to save your test configuration and record your browser steps.
 
 For more information, see [Synthetic Monitoring notifications][9].
 
@@ -259,15 +259,15 @@ You can switch tabs in a browser test recording to perform an action on your app
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
+1. Optionally, select {{< ui >}}Open in a pop-up{{< /ui >}} at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in {{< ui >}}Incognito mode{{< /ui >}} to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
 2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][13].
-3. Click **Start Recording** to begin recording your browser test.
+3. Click {{< ui >}}Start Recording{{< /ui >}} to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][14] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][14] available in the upper left corner to enrich your scenario:
    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
 
-   Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
-6. Once you have finished your scenario, click **Save and Launch Test**.
+   Datadog recommends ending your browser test with an [assertion][12] to confirm the journey executed by the browser test resulted in the expected state.
+6. Once you have finished your scenario, click {{< ui >}}Save and Launch Test{{< /ui >}}.
 
 ## Replay your steps
 
@@ -350,13 +350,13 @@ If you are using the [custom role feature][15], add your user to any custom role
 Use [granular access control][17] to limit who has access to your test based on roles, teams, or individual users:
 
 1. Open the permissions section of the form.
-2. Click **Edit Access**.
+2. Click {{< ui >}}Edit Access{{< /ui >}}.
   {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
-3. Click **Restrict Access**.
+3. Click {{< ui >}}Restrict Access{{< /ui >}}.
 4. Select teams, roles, or users.
-5. Click **Add**.
+5. Click {{< ui >}}Add{{< /ui >}}.
 6. Select the level of access you want to associate with each of them.
-7. Click **Done**.
+7. Click {{< ui >}}Done{{< /ui >}}.
 
 <div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 

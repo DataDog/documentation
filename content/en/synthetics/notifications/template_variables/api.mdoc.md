@@ -311,7 +311,7 @@ This section covers three categories of variables:
 
 {% tab label="Traceroute" %}
 `synthetics.attributes.variables.extracted.traceroute`
-: Traceroute hop data, available when **Track number of network hops (TTL)** is enabled in the test
+: Traceroute hop data, available when {% ui %}Track number of network hops (TTL){% /ui %} is enabled in the test
 
 `synthetics.attributes.variables.extracted.traceroute.routers.ip`
 : Router IP address for the hop

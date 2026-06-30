@@ -21,11 +21,11 @@ With private locations, you have a set of out-of-the-box [metrics][1] to keep tr
 
 {{<img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location monitor list" style="width:100%;">}}
 
-In [**Synthetic Monitoring Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
+In [{{< ui >}}Synthetic Monitoring Settings{{< /ui >}}][2], the {{< ui >}}Private Locations{{< /ui >}} tab displays your private locations along with their reporting status and monitor status. 
 
-When you click on a private location, a panel containing **Health** and **Metadata** details appears. The table in the **Health** tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version. 
+When you click on a private location, a panel containing {{< ui >}}Health{{< /ui >}} and {{< ui >}}Metadata{{< /ui >}} details appears. The table in the {{< ui >}}Health{{< /ui >}} tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version. 
 
-In **Monitors**, you can see status warnings such as `ALERT` when something is going wrong with your private location. For example, the private location stops reporting, the private location becomes under-provisioned, or the private location worker runs an outdated image version.
+In {{< ui >}}Monitors{{< /ui >}}, you can see status warnings such as `ALERT` when something is going wrong with your private location. For example, the private location stops reporting, the private location becomes under-provisioned, or the private location worker runs an outdated image version.
 
 {{<img src="synthetics/private_locations/pl_monitoring_side_panel.png" alt="Private location monitoring side panel" style="width:100%;">}}
 
@@ -40,9 +40,9 @@ When you create a private location, four monitors are added to your account:
 | **[Synthetic Private Locations] {{location_id.name}} uses an outdated image version** | This monitor triggers an `ALERT` when the [`synthetics.pl.worker.outdated`][1] metric starts reporting `1` for one of your private locations. This indicates that at least one of your private location workers is running an outdated version of the private location image. Check for the latest image version in the [Google Container Registry][5] or the [Windows Installer List][8] and upgrade your workers to that image version by pulling the `datadog/synthetics-private-location-worker` image with the `latest` tag. |
 | **[Synthetic Private Locations] {{location_id.name}} is taking too long to poll** | This monitor triggers an `ALERT` when the [`synthetics.pl.time_to_poll`][1] metric exceeds 30 seconds on average for 30 minutes for one of your private locations. This indicates that your private location workers are taking too long to poll for test configurations, typically due to being overloaded or resource-constrained. [Vertically or horizontally scale your private location][4] to help ensure sufficient capacity. |
 
-By default, no handle is set in these monitors. To be alerted in case one of your monitors starts failing, add a handle in your monitors' [Notification section][6].
+By default, no handle is set in these monitors. To be alerted in case one of your monitors starts failing, add a handle in your monitors' [{{< ui >}}Notification{{< /ui >}} section][6].
 
-Monitors in the **Monitors** tab either have a group that corresponds to your private location ID or are tagged with `location_id:<ID_OF_THE_PL>`.
+Monitors in the {{< ui >}}Monitors{{< /ui >}} tab either have a group that corresponds to your private location ID or are tagged with `location_id:<ID_OF_THE_PL>`.
 
 > **Note:** Default monitors are created **only once**, when the first private location is created. Deleting a private location and creating a new one does **not** recreate the default monitors.
 

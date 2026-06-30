@@ -24,7 +24,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-After you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+After you click {{< ui >}}Start Recording{{< /ui >}}, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -52,7 +52,7 @@ Datadog records steps you perform on your application, such as selecting an opti
 
 ### Upload file
 
-To record an **Upload** step, either:
+To record an {{< ui >}}Upload{{< /ui >}} step, either:
 
 * Open your desktop from the browser
 * Drag and drop your file in the recording iframe
@@ -73,7 +73,7 @@ Common use cases include:
 
 {{< img src="synthetics/browser_tests/drag_and_drop.mp4" alt="Drag and drop step recorded in a browser test" video="true" width="90%" >}}
 
-To record a drag and drop step, start the recorder and perform the drag and drop action in your application. The recorder detects the drag source and drop target and creates a single **Drag and Drop** step.
+To record a drag and drop step, start the recorder and perform the drag and drop action in your application. The recorder detects the drag source and drop target and creates a single {{< ui >}}Drag and Drop{{< /ui >}} step.
 
 After recording, you can review and edit the drag source element, drop target element, interaction points, and timing settings.
 
@@ -89,11 +89,11 @@ You can manually add and arrange steps on the left corner of the browser test re
 
 Assertions allow you to validate that your browser test is in the state you expect it to be in at any point of a simulated user journey. 
 
-To confirm your test ends in an expected state, you must end your browser tests with an **assertion**.
+To confirm your test ends in an expected state, you must end your browser tests with an assertion.
 
 {{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
-Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
+Some assertions validate the active page, the page the user last interacted with, such as a click or an assertion on a page element.
 
 To create a step, select an assertion type:
 
@@ -112,7 +112,7 @@ Create this assertion step to have your browser test select a page element and c
 
 Create this assertion step to have your browser test select a page element such as a specific `span`, `div`, `h`, or `a`, and confirm that it is present on the page.
 
-Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click **Test**. 
+Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click {{< ui >}}Test{{< /ui >}}. 
 
 #### Test the state of a checkbox or radio button
 
@@ -157,7 +157,7 @@ The JavaScript assertion function contains the following parameters and requires
 
 * `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
-* `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+* `element` (optional): The locator of the element on the page. To set this up, use the {{< ui >}}Select{{< /ui >}} and {{< ui >}}Update{{< /ui >}} target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
 {{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%" >}}
 
@@ -202,7 +202,7 @@ Create this assertion step to test the number of HTTP requests made to a specifi
 
 ### Interaction
 
-In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. Then, you can choose an action type to add an interaction.
+In addition to recording steps based on your browser assertions, you can also manually create steps by clicking {{< ui >}}Interaction{{< /ui >}}. Then, you can choose an action type to add an interaction.
 
 {{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
@@ -218,11 +218,11 @@ Select the email and links you want the browser test to click on. This step brin
 
 #### Navigate to link
 
-Create this navigation step to have your browser test go to a specific page. You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
+Create this navigation step to have your browser test go to a specific page. You must prepend your URLs with `http` or `https` in the {{< ui >}}Enter link URL{{< /ui >}} box.
 
 #### Press key
 
-Add a **Press Key** step to simulate users entering keystrokes. The [Datadog browser test recorder extension][3] can record the following keys:
+Add a {{< ui >}}Press Key{{< /ui >}} step to simulate users entering keystrokes. The [Datadog browser test recorder extension][3] can record the following keys:
 
 * Enter
 * Arrows (up, down, right, and left)
@@ -230,7 +230,7 @@ Add a **Press Key** step to simulate users entering keystrokes. The [Datadog bro
 * Escape
 * Backspace
 
-To press keys that are not automatically recorded, specify the values that need to be pressed in the **Value** field. 
+To press keys that are not automatically recorded, specify the values that need to be pressed in the {{< ui >}}Value{{< /ui >}} field. 
  
  Select `Alt`, `Control`, `Meta`, and `Shift` modifiers to add to the inputted value.
 
@@ -240,15 +240,15 @@ To press keys that are not automatically recorded, specify the values that need 
 
 This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
 
-Select **Hover** and click on an element to add a step.
+Select {{< ui >}}Hover{{< /ui >}} and click on an element to add a step.
 
 #### Drag and drop
 
 Create this interaction step to simulate dragging an element from one location to another. This is useful when refining existing tests or when recording is not practical.
 
-1. Click **Add Step**.
-2. Select **Interaction**.
-3. Choose **Drag and Drop**.
+1. Click {{< ui >}}Add Step{{< /ui >}}.
+2. Select {{< ui >}}Interaction{{< /ui >}}.
+3. Choose {{< ui >}}Drag and Drop{{< /ui >}}.
 4. Select the element to drag.
 5. Select the element to drop onto.
 
@@ -258,20 +258,20 @@ Create this interaction step to simulate dragging an element from one location t
 
 | Option | Description |
 |--------|-------------|
-| **User Specified Locator** (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
-| **Interaction Point** | Where on the element the action occurs: **Center** (default) or **Offset (Top-Left)**. |
-| **Delay before drag** | Pause between mouse press and start of drag (default 0ms). |
-| **Delay before drop** | Pause after reaching the drop target before release (default 0ms). Increase for animated or complex UIs. |
+| {{< ui >}}User Specified Locator{{< /ui >}} (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
+| {{< ui >}}Interaction Point{{< /ui >}} | Where on the element the action occurs: {{< ui >}}Center{{< /ui >}} (default) or {{< ui >}}Offset (Top-Left){{< /ui >}}. |
+| {{< ui >}}Delay before drag{{< /ui >}} | Pause between mouse press and start of drag (default 0ms). |
+| {{< ui >}}Delay before drop{{< /ui >}} | Pause after reaching the drop target before release (default 0ms). Increase for animated or complex UIs. |
 
 #### When to use a custom locator (optional)
 
-Use **User Specified Locator** for the following scenarios:
+Use {{< ui >}}User Specified Locator{{< /ui >}} for the following scenarios:
 
 * **Ghost or overlay elements**: Your application shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
 * **Deep or nested elements**: The draggable/droppable behavior is on a parent, but the recorder picked a child. Inspect the page and choose the parent element that has the right classes or attributes.
 * **Same element for drag and drop**: The recorder used one element as both drag source and drop target. Edit the drop target and select the real destination element.
 
-**Note**: If the draggable element only appears after hovering on another element, add a **Hover** step before the drag and drop step.
+**Note**: If the draggable element only appears after hovering on another element, add a {{< ui >}}Hover{{< /ui >}} step before the drag and drop step.
 
 #### Scroll
 
@@ -281,7 +281,7 @@ Specify the number of pixels you want the browser test to scroll vertically and 
 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Scroll step in a browser test recording Test Scroll Step" style="width:50%;" >}}
 
-By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Target Element** and select an element you want the browser test to scroll on.
+By default, the {{< ui >}}Scroll{{< /ui >}} step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click {{< ui >}}Target Element{{< /ui >}} and select an element you want the browser test to scroll on.
 
 #### Wait
 
@@ -302,53 +302,53 @@ You can run HTTP requests, add [assertions](#add-assertions), and [extract varia
 To define your HTTP request:
 
 1. Enter the URL you wish to test.
-2. Optionally, specify **Advanced Options**:
+2. Optionally, specify {{< ui >}}Advanced Options{{< /ui >}}:
    
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Select this option to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+   * {{< ui >}}Follow redirects{{< /ui >}}: Select this option to have your HTTP test follow up to ten redirects when performing the request.
+   * {{< ui >}}Ignore server certificate error{{< /ui >}}: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * {{< ui >}}Request headers{{< /ui >}}: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
    {{% tab "Authentication" %}}
 
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
-   * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
-   * **NTLM**: Add NTLM authentication credentials. Supports both NTLMv2 and NTLMv1.
-   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password).
+   * {{< ui >}}Client certificate{{< /ui >}}: Authenticate through mTLS by uploading your client certificate and the associated private key.
+   * {{< ui >}}HTTP Basic Auth{{< /ui >}}: Add HTTP basic authentication credentials.
+   * {{< ui >}}Digest Auth{{< /ui >}}: Add Digest authentication credentials. 
+   * {{< ui >}}AWS Signature{{< /ui >}}: Add AWS Access Key ID and Secret Access Key.
+   * {{< ui >}}NTLM{{< /ui >}}: Add NTLM authentication credentials. Supports both NTLMv2 and NTLMv1.
+   * {{< ui >}}OAuth 2.0{{< /ui >}}: Select a Grant Type (Client credentials, or Resource owner password).
 
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the names and values of query parameters that require encoding. 
+   * {{< ui >}}Encode parameters{{< /ui >}}: Add the names and values of query parameters that require encoding. 
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. For file uploads in Browser HTTP steps, the body size is limited to 3MB, while the request body has a maximum size limit of 50 KB.
+   * {{< ui >}}Body type{{< /ui >}}: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * {{< ui >}}Request body{{< /ui >}}: Add the content of your HTTP request body. For file uploads in Browser HTTP steps, the body size is limited to 3MB, while the request body has a maximum size limit of 50 KB.
 
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
 
-   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+   * {{< ui >}}Proxy URL{{< /ui >}}: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * {{< ui >}}Proxy Header{{< /ui >}}: Add headers to include in the HTTP request to the proxy.
 
    {{% /tab %}}
   
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
+   * {{< ui >}}Do not save response body{{< /ui >}}: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 [1]: /data_security/synthetics
    {{% /tab %}}
@@ -356,13 +356,13 @@ To define your HTTP request:
    {{< /tabs >}}
    </br>
 
-3. Click **Send** to try out the request configuration. A response preview appears.
+3. Click {{< ui >}}Send{{< /ui >}} to try out the request configuration. A response preview appears.
 
 {{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Make HTTP Request" style="width:80%;" >}}
 
 ##### Add assertions
 
-Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
+Assertions define what an expected test result is. After you click {{< ui >}}Send{{< /ui >}}, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
 
 | Type            | Operator                                                                                                               | Value type                                               |
 |-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
@@ -377,7 +377,7 @@ HTTP requests can decompress bodies with the following `content-encoding` header
 
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-You can create up to 25 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+You can create up to 25 assertions per step by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview.
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
@@ -385,25 +385,25 @@ You can create up to 25 assertions per step by clicking **New Assertion** or by 
 
 Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Then, you can use the variable in [later steps](#use-variables) of your browser test.
 
-To start parsing a variable, click **Extract a variable from response content**. Then, define the variable:
+To start parsing a variable, click {{< ui >}}Extract a variable from response content{{< /ui >}}. Then, define the variable:
 
-1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+1. Enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with [`regex`][13].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with [`regex`][13], [`JSONPath`][11], or [`XPath`][12].
+   * Extract the value from {{< ui >}}response header{{< /ui >}}: use the full response header of your HTTP request as the variable value or parse it with [`regex`][13].
+   * Extract the value from {{< ui >}}response body{{< /ui >}}: use the full response body of your HTTP request as the variable value or parse it with [`regex`][13], [`JSONPath`][11], or [`XPath`][12].
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
 ### Special actions
 
-You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
+You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as {{< ui >}}Hover{{< /ui >}}, {{< ui >}}Press Key{{< /ui >}}, {{< ui >}}Scroll{{< /ui >}}, and {{< ui >}}Wait{{< /ui >}}.
 
-Create this assertion step manually by clicking **Special Actions** and selecting an action type.
+Create this assertion step manually by clicking {{< ui >}}Special Actions{{< /ui >}} and selecting an action type.
 
 ### Variables
 
-Click **Variables** and select a variable creation type from the dropdown menu. 
+Click {{< ui >}}Variables{{< /ui >}} and select a variable creation type from the dropdown menu. 
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;" >}}
 
@@ -431,7 +431,7 @@ You can select one of the following available builtins:
 `{{ uuid }}`
 : Generates a version 4 universally unique identifier (UUID).
 
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
+To obfuscate local variable values in test results, select {{< ui >}}Hide and obfuscate variable value{{< /ui >}}. Once you have defined the variable string, click {{< ui >}}Add Variable{{< /ui >}}.
 
 #### Element
 
@@ -455,7 +455,7 @@ The JavaScript function comes with the following parameters and requires a retur
 
 * `vars` (optional): A string containing your browser test's [variables](#use-variables) that you can use inside your code. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test already features a `PRICE` variable, call it in your JavaScript snippet using `vars.PRICE`.
 
-* `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+* `element` (optional): The locator of the element on the page. To set this up, use the {{< ui >}}Select{{< /ui >}} and {{< ui >}}Update{{< /ui >}} target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
 {{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%" >}}
 
@@ -497,9 +497,9 @@ A unique mailbox is generated at each test execution to avoid conflicts between 
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
 
-To use an existing browser test as a subtest, click **Add New Subtest**, select a browser test from the dropdown menu under the **From Existing Test** tab, and click **Add Subtest**.
+To use an existing browser test as a subtest, click {{< ui >}}Add New Subtest{{< /ui >}}, select a browser test from the dropdown menu under the {{< ui >}}From Existing Test{{< /ui >}} tab, and click {{< ui >}}Add Subtest{{< /ui >}}.
 
-To convert steps from your current browser test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. By default, a subtest executes in sequence with the previous steps of the parent test. 
+To convert steps from your current browser test into a subtest, click on the {{< ui >}}Extract From Steps{{< /ui >}} tab, select the recorded steps you want to extract, and click {{< ui >}}Convert to Subtest{{< /ui >}}. By default, a subtest executes in sequence with the previous steps of the parent test. 
 
 {{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Add a subtest in a browser test" style="width:60%;" >}}
 
@@ -513,9 +513,9 @@ If it does not make sense for you to run your subtest independently, you can pau
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
 
-1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
+1. Hover over a recorded test step and click the {{< ui >}}Set Cursor{{< /ui >}} icon. A blue line appears above your test step. 
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
-3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
+3. When you complete adding additional steps above your tests step, click {{< ui >}}Clear Cursor{{< /ui >}} to exit.
 
 {{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
@@ -524,7 +524,7 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 To copy a step's Terraform configuration to your clipboard:
 
 1. Hover over a step in the recorder.
-2. Click the **Copy Terraform step snippet** icon.
+2. Click the {{< ui >}}Copy Terraform step snippet{{< /ui >}} icon.
 
 {{< img src="synthetics/guide/export-tests-to-terraform/browser_test_recording_terraform_2.png" alt="The Copy Terraform step snippet icon in the browser test recorder" style="width:80%;" >}}
 
@@ -534,7 +534,7 @@ Paste the configuration into your `.tf` file as part of a `datadog_synthetics_te
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-To use a variable on automatically recorded steps, click the **Inject this variable** icon to input the variable value while recording. 
+To use a variable on automatically recorded steps, click the {{< ui >}}Inject this variable{{< /ui >}} icon to input the variable value while recording. 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Click on the test step to inject the value in your recorder page" video="true" width="100%" >}}
 
@@ -546,11 +546,11 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 
 You can add multiple variables to your browser test recording steps.
 
-In your browser test recording, click the **+ Add Variable** button to add one or more variables to your test:
+In your browser test recording, click the {{< ui >}}+ Add Variable{{< /ui >}} button to add one or more variables to your test:
 
   {{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="Defining a local variable from global variables" width="90%" >}}
 
-In your browser test's recorder, add a step recording, and click **Extract variables from the response(optional)** to extract and use the variables in your browser test:
+In your browser test's recorder, add a step recording, and click {{< ui >}}Extract variables from the response(optional){{< /ui >}} to extract and use the variables in your browser test:
 
   {{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="Injecting a local variable into a field during a browser recording" width="90%" >}}
 
@@ -561,7 +561,7 @@ To edit a browser recording after it's saved:
 - Navigate to [Synthetic Monitoring > Tests.][14]
 - Click on a previously saved browser test.
 - Click the gear icon on the top right hand corner and then click "edit recording".
-- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+- Select multiple or single steps for deletion or replay, then click {{< ui >}}Save & Quit{{< /ui >}}.
 
 {{< img src="synthetics/browser_tests/edit_a_recording.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
 

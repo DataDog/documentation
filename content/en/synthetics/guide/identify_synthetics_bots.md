@@ -84,7 +84,7 @@ A number of [**other APM specific headers**][1] such as `x-datadog-origin: synth
 
 ## Customize requests
 
-You can leverage your API and browser test configuration in **Advanced options** and add specific identifiers to your tests' requests such as **custom headers**, **cookies**, and **request bodies**.
+You can leverage your API and browser test configuration in {{< ui >}}Advanced options{{< /ui >}} and add specific identifiers to your tests' requests such as **custom headers**, **cookies**, and **request bodies**.
 
 ## Browser variables
 

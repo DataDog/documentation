@@ -15,8 +15,8 @@ To clone a Synthetic Monitoring test, use the UI or API endpoints.
 
 ## Use the UI
 
-1. In a Synthetic Monitoring test, click the **Gear** icon on the right.  
-2. Click **Clone** in the dropdown menu.
+1. In a Synthetic Monitoring test, click the {{< ui >}}Gear{{< /ui >}} icon on the right.  
+2. Click {{< ui >}}Clone{{< /ui >}} in the dropdown menu.
 
 {{< img src="synthetics/faq/clone-test.mp4" alt="Cloning your Synthetic tests" video="true" width="90%" >}}
 
