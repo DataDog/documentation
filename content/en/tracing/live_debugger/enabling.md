@@ -1,5 +1,5 @@
 ---
-title: Enable Live Debugger
+title: Enabling Live Debugger
 description: Enable Live Debugger for your applications through environment variables to capture logpoints and variable snapshots without code changes.
 aliases:
     - /tracing/live_debugger/enabling/

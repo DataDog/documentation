@@ -49,14 +49,6 @@ Live Debugger provides:
 
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires the [Datadog Agent][2] (version 7.49.0 or later), an [APM-instrumented application][3], and [Remote Configuration][4].
 
-### Enablement modes
-
-Manage Live Debugger for each service and environment from the Live Debugger **Settings** page. Each service can be in one of three modes:
-
-- **Automatic**: Eligible services are enabled automatically. Switch a service to **Enabled** for a faster debugging experience with debug symbols.
-- **Enabled**: Live Debugger is ready to use on this service in this environment, with faster setup and a better debugging experience.
-- **Disabled**: This service is explicitly disabled and is not enabled automatically.
-
 ### Minimum tracer versions
 
 Live Debugger requires the following minimum tracer versions:
@@ -69,13 +61,31 @@ Live Debugger requires the following minimum tracer versions:
 - [Ruby][9] ≥ 2.35.0
 - [Go][22] ≥ 2.9.0
 
-Older tracer versions might require enabling Live Debugger through an environment variable. See [Enable Live Debugger][25] for manual enablement instructions.
+Older tracer versions might require enabling Live Debugger manually through an environment variable. To enable Live Debugger manually, go to the [manual enablement instructions][25] and select your runtime language.
 
-### Manual enablement
+### Enabling Live Debugger
 
-Manual enablement is required for Ruby and PHP, and for older tracer versions of Java, Python, .NET, Node.js, and Go. You can also choose manual enablement on supported tracer versions if you prefer to manage enablement through environment variables, for example, to enable Live Debugger in bulk across many services. For setup instructions, see [Enable Live Debugger][25].
+<div class="alert alert-info">To use Bits Live Debugger, see the <a href="/tracing/live_debugger/bits-live-debugger/">Bits Live Debugger</a> page for setup instructions.</div>
 
-To enable Bits Live Debugger, see [Bits Live Debugger][23].
+Live Debugger enablement behavior depends on your service's runtime language and tracer version:
+
+- **Java, Python, .NET, and Node.js (recent tracer versions)**: No explicit "Enable" step is required. As long as all prerequisites are met and Live Debugger has not been explicitly disabled for the service and environment, Live Debugger is automatically enabled the first time you start a Debug Session. You can start a session through Bits Live Debugger or by manually creating a logpoint.
+- **Ruby and PHP**: Live Debugger must be enabled manually at the tracer level through environment variables before a debug session can be successfully started. See [manual enablement instructions][25].
+- **Go**: Live Debugger requires a configuration at the Datadog Agent level before it can be enabled on the services running on the same host. After the Agent configuration is added, any services on the same host can be enabled either in-app from the [Live Debugger Settings page][26] or manually through environment variables. See the [manual enablement instructions][25] for the Agent configuration steps.
+
+Disabling Live Debugger on a service and environment can always be done in-app from the [Live Debugger Settings page][26], regardless of runtime language or tracer version.
+
+#### Enablement modes
+
+Each service and environment is in one of three modes on the Live Debugger Settings page:
+
+- **Automatic**: Live Debugger has not been set to Enabled or Disabled yet on this service and environment. This setting changes to **Enabled** automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to **Enabled** in advance.
+- **Enabled**: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
+- **Disabled**: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or tracer version.
+
+#### Manual enablement
+
+Manual configuration steps are required for Ruby, PHP, and Go, as well as for older tracer versions of Java, Python, .NET, and Node.js. You can also choose manual enablement if you prefer to manage enabling and disabling Live Debugger through environment variables. To enable Live Debugger manually, go to the [manual enablement instructions][25] and select your runtime language.
 
 ### Permissions
 
@@ -156,6 +166,10 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 ### Bits Live Debugger
 
+{{< beta-callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}
+Bits Live Debugger is in Preview. Request access to join the waiting list.
+{{< /beta-callout >}}
+
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
@@ -204,3 +218,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [23]: /tracing/live_debugger/bits-live-debugger/
 [24]: #mode-based-redaction
 [25]: /tracing/live_debugger/enabling/
+[26]: https://app.datadoghq.com/debugging/settings
