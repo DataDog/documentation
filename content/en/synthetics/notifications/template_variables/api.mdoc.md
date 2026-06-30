@@ -500,7 +500,6 @@ These variables are available for all API test protocols.
 {% /if %}
 <!-- END Test info variables -->
 
-
 <!-- Variables -->
 {% if equals($synthetics_variables, "local_and_global") %}
 
