@@ -15,10 +15,6 @@ further_reading:
   text: "Custom Instrumentation"
 ---
 
-{{< callout header="false" btn_hidden="true"  >}}
-    The Datadog Rust SDK is in Preview.
-{{< /callout >}}
-
 <div class="alert alert-info">
 The Rust SDK does not provide automatic instrumentation. Tracing is achieved by manually instrumenting your application using the OpenTelemetry API.
 </div>

@@ -13,9 +13,9 @@ To view information about the Observability Pipelines Workers running for an act
 
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
-1. Click the **Workers** tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
-1. To view the Workers' statuses and versions, click the **Latest Deployment & Setup** tab.
-1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to Log Management.
+1. Click the {{< ui >}}Workers{{< /ui >}} tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
+1. To view the Workers' statuses and versions, click the {{< ui >}}Latest Deployment & Setup{{< /ui >}} tab.
+1. To see the Workers' logs, click the cog at the top right side of the page, then select {{< ui >}}View OPW Logs{{< /ui >}}. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to Log Management.
 
 ## Inspect events sent through your pipeline to identify setup issues
 
@@ -68,7 +68,7 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 
 ### No Worker logs in Log Explorer
 
-If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. If Worker logs are not indexed in Log Management, the Latest Deploy and Setup tab displays a perpetual loading state instead of the current Worker status. All Worker logs have the tag `source:op_worker`.
 
 ### Duplicate Observability Pipelines logs
 

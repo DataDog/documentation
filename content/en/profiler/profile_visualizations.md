@@ -33,7 +33,7 @@ further_reading:
 
 {{< img src="profiler/search_profiles4.mp4" alt="Search profiles by tags" video=true >}}
 
-Go to **APM > Profiles** and select a service to view its profiles.
+Go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} and select a service to view its profiles.
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][1]. By default the following facets are available:
 
@@ -55,7 +55,7 @@ The flame graph is the default visualization for Continuous Profiler. The one be
 
 For example, starting from the first row in the previous image, `Thread.run()` called `Thread.runWith(Object, Runnable)`, which called `ThreadPoolExecutor$Worker.run()`, and so on.
 
-The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
+The width of a frame represents how much of the total CPU it consumed. On the right, you can see a {{< ui >}}CPU time by Method{{< /ui >}} top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
 By default, darker frames indicate higher CPU usage, while lighter frames signify lower usage; the most resource-intensive methods are grouped on the leftmost side of the flame graph.
 
@@ -75,8 +75,8 @@ Compared to the flame graph, the timeline view can help you:
 
 To access the timeline view:
 
-1. Go to [**APM** > **Profiles** > **Explorer**][7].
-2. Set the **Visualize as** option to **Thread Timeline**.
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][7].
+2. Set the {{< ui >}}Visualize as{{< /ui >}} option to {{< ui >}}Thread Timeline{{< /ui >}}.
 
 Depending on the runtime and language, the timeline lanes vary:
 
@@ -174,7 +174,7 @@ Edge thickness is used to show time spent calling other methods, while color and
 
 By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15 and 60 seconds.
 
-To view a specific profile, set the **Visualize as** option to **Profile List** and click an item in the list:
+To view a specific profile, set the {{< ui >}}Visualize as{{< /ui >}} option to {{< ui >}}Profile List{{< /ui >}} and click an item in the list:
 
 {{< img src="profiler/profiling_single-profile2.png" alt="Select a single profile" >}}
 

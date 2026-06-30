@@ -24,10 +24,10 @@ The Scanning Rule Library is a collection of predefined rules for detecting comm
 These rules can also be viewed in Datadog:
 
 1. Navigate to [Sensitive Data Scanner][1].
-1. Click **Scanning Rules Library** on the top right side of the page.
+1. Click {{< ui >}}Scanning Rules Library{{< /ui >}} on the top right side of the page.
 1. To add rules from the library to a scanning group:<br />
    1. Select the rules you want to add.<br />
-   1. Click **Add Rules to Scanning Group**.<br />
+   1. Click {{< ui >}}Add Rules to Scanning Group{{< /ui >}}.<br />
    1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
 <div class="alert alert-info">Most library rules are available for all data sources (Logs, APM, RUM, Agent Observability, Observability Pipelines, Secret Scanning, and Cloud Storage). Check the <b>Available For</b> column to see which data sources each rule supports.</div>

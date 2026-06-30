@@ -62,7 +62,7 @@ As a result:
 
 There are two options for this step:
 
-- Use the UI: Click "New Organization" as described in [Managing Multiple Organization Accounts][1].
+- Use the UI: Click {{< ui >}}New Organization{{< /ui >}} as described in [Managing Multiple Organization Accounts][1].
 - Use the API: Use the [Create a child organization][18] endpoint.
 
 ### Retrieve the new client org's org ID
@@ -89,7 +89,7 @@ There are two options for this step:
 
 ### Register the new client details in the DPN portal
 
-- Log in to the [DPN portal][16] and click `+Register Deal` on the Deal Dashboard.
+- Log in to the [DPN portal][16] and click {{< ui >}}+Register Deal{{< /ui >}} on the {{< ui >}}Deal Dashboard{{< /ui >}}.
 
 - Enter the new client details including the new client organization's Org ID to register the new client org.
 

@@ -372,12 +372,12 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
 The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 
 1. Go to the [GitHub integration tile][13].
-2. Click **Link GitHub Account**.
+2. Click {{< ui >}}Link GitHub Account{{< /ui >}}.
 3. Follow the instructions to configure the integration for a personal or organization account.
-4. In **Edit Permissions**, grant `Contents: Read` access.
-5. Click **Create App in GitHub** to finish the app creation process on GitHub.
+4. In {{< ui >}}Edit Permissions{{< /ui >}}, grant `Contents: Read` access.
+5. Click {{< ui >}}Create App in GitHub{{< /ui >}} to finish the app creation process on GitHub.
 6. Give the app a name, for example, `Datadog Test Optimization`.
-7. Click **Install GitHub App** and follow the instructions on GitHub.
+7. Click {{< ui >}}Install GitHub App{{< /ui >}} and follow the instructions on GitHub.
 
 #### Manually providing the `test.source.file` tag
 

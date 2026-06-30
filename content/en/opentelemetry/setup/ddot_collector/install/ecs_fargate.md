@@ -142,7 +142,7 @@ Use the following task definition as a starting point:
 Replace the following placeholders:
 - `<TASK_FAMILY>`: A name for your ECS task definition family.
 - `<DD_API_KEY_SECRET_ARN>`: The ARN of the AWS Secrets Manager secret or SSM Parameter Store parameter that contains your Datadog API key. The task execution role must have `secretsmanager:GetSecretValue` (Secrets Manager) or `ssm:GetParameters` (SSM) permission to retrieve the secret.
-- `<DATADOG_SITE>`: Your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+- `<DATADOG_SITE>`: Your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
 - `<AWS_REGION>`: The AWS region where your ECS tasks run (for example, `us-east-1`).
 - `<APP_CONTAINER_NAME>`: The name of your application container.
 - `<APP_IMAGE>`: Your application container image.
