@@ -47,7 +47,7 @@ To customize anomaly detection:
 1. Adjust the following settings for the selected provider:
    - **Detection dimension**: The dimension that Datadog detects cost anomalies on (for example, service or charge description). This setting is required.
    - **Minimum daily cost**: The minimum daily cost a change must reach before it is flagged as an anomaly (at least 5, in your organization's currency). Increase this value to reduce noise from low-cost changes.
-   - **Breakdown tags**: Up to five additional tags used to break down detected anomalies, helping [Watchdog Explains][2] identify what's driving each anomaly. A set of default tags is always included and cannot be removed.
+   - **Breakdown tags**: Up to five additional tags used to break down detected anomalies, helping the [Cloud Cost skill in Bits Chat][5] identify what's driving each anomaly. A set of default tags is always included and cannot be removed.
 1. Click {{< ui >}}Save{{< /ui >}}. Changes apply to anomalies detected going forward.
 
 To return a provider to Datadog's default settings, select the provider, click {{< ui >}}Revert{{< /ui >}}, and then click {{< ui >}}Save{{< /ui >}}.
@@ -133,3 +133,4 @@ For more help, contact [Datadog Support][4].
 [2]: /dashboards/graph_insights/watchdog_explains
 [3]: /cloud_cost_management/setup/
 [4]: /help/
+[5]: /cloud_cost_management/cloud_cost_skill/
