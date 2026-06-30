@@ -1,0 +1,83 @@
+---
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { ApiSchemaTableNav } from "./ApiSchemaTableNav";
+import SchemaFieldRow from "./SchemaFieldRow.astro";
+import styles from "./ApiSchemaTable.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import { i18n } from "@lib/i18n/i18n";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  fields: SchemaField[];
+  title?: string;
+  showExpandAll?: boolean;
+}
+
+const { fields, title, showExpandAll = true } = Astro.props;
+
+const tableId = generateElementId("schema-table");
+const expandAllId = `${tableId}-expand-all`;
+
+const anyExpandable = fields.some(
+  (f) =>
+    (f.children !== undefined && f.children.length > 0) ||
+    (f.unionOptions !== undefined && f.unionOptions.length > 0),
+);
+const showToolbar = showExpandAll && anyExpandable;
+---
+
+<div id={tableId} class="schema-table">
+  {title && <h4>{title}</h4>}
+  {
+    showToolbar && (
+      <div class={cl("schema-table__toolbar")}>
+        <button
+          id={expandAllId}
+          type="button"
+          class={cl("schema-table__expand-all")}
+        >
+          {/* TODO: translate "Expand All" / "Collapse All" once authoritative
+            translation keys exist in the Hugo i18n bundle. */}
+          <span
+            class={cl(
+              "schema-table__expand-all-label",
+              "schema-table__expand-all-label--expand",
+            )}
+          >
+            Expand All
+          </span>
+          <span
+            class={cl(
+              "schema-table__expand-all-label",
+              "schema-table__expand-all-label--collapse",
+            )}
+            hidden
+          >
+            Collapse All
+          </span>
+        </button>
+      </div>
+    )
+  }
+  <div class={cl("schema-table__table")}>
+    <div class={cl("schema-table__columns")}>
+      <div class={cl("schema-table__columns-name")}>{i18n("name")}</div>{" "}
+      <div class={cl("schema-table__columns-type")}>{i18n("type")}</div>{" "}
+      <div class={cl("schema-table__columns-description")}>
+        {i18n("description")}
+      </div>
+    </div>
+    {fields.map((field) => <SchemaFieldRow field={field} depth={0} />)}
+  </div>
+  <ApiSchemaTableNav
+    client:idle
+    externalContext={{
+      scope: tableId,
+      entries: showToolbar
+        ? { tableEl: tableId, expandAllEl: expandAllId }
+        : { tableEl: tableId },
+    }}
+  />
+</div>

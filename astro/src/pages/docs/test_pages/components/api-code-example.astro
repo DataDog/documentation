@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiCodeExample from '@components/ApiCodeExample/ApiCodeExample.astro';
+import type { CodeExampleSet } from '@components/ApiCodeExample/ApiCodeExample.astro';
+
+const title = 'ApiCodeExample';
+
+const singleExample: CodeExampleSet[] = [
+  {
+    language: 'curl',
+    label: 'Curl',
+    entries: [
+      {
+        description: 'Get a dashboard',
+        code: 'curl -X GET https://api.datadoghq.com/api/v1/dashboard/abc-123',
+        syntax: 'bash',
+      },
+    ],
+  },
+  {
+    language: 'python',
+    label: 'Python',
+    entries: [
+      {
+        description: 'Get a dashboard',
+        code: 'response = api_instance.get_dashboard(dashboard_id=abc_123)',
+        syntax: 'python',
+      },
+    ],
+  },
+];
+
+const multiExample: CodeExampleSet[] = [
+  {
+    language: 'curl',
+    label: 'Curl',
+    entries: [
+      {
+        description: 'Create a dashboard',
+        code: 'curl -X POST https://api.datadoghq.com/api/v1/dashboard',
+        syntax: 'bash',
+      },
+      {
+        description: 'Create a dashboard with widgets',
+        code: 'curl -X POST https://api.datadoghq.com/api/v1/dashboard -d body.json',
+        syntax: 'bash',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiCodeExample</h1>
+
+      <p>Language-tabbed code example display. Shows code in multiple languages with an accordion for multiple examples per language.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>examples</code></td><td><code>CodeExampleSet[]</code></td><td>&mdash;</td><td>Array of code example sets, one per language</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Single example per language</h3>
+      <ApiCodeExample examples={singleExample} />
+
+      <h3>Multiple examples per language (accordion)</h3>
+      <ApiCodeExample examples={multiExample} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

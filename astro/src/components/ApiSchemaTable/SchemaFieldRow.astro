@@ -1,0 +1,124 @@
+---
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { renderMarkdownInline } from "@lib/api/markdownRenderer";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
+import styles from "./ApiSchemaTable.module.css";
+import Self from "./SchemaFieldRow.astro";
+
+const cl = classListFactory(styles);
+
+const ENUM_INLINE_LIMIT = 10;
+const INDENT_PX = 20;
+
+interface Props {
+  field: SchemaField;
+  depth: number;
+}
+
+const { field, depth } = Astro.props;
+
+const hasChildren =
+  (field.children !== undefined && field.children.length > 0) ||
+  (field.unionOptions !== undefined && field.unionOptions.length > 0);
+
+const indent = depth * INDENT_PX;
+const cellNameStyle =
+  indent > 0 ? `padding-left: calc(var(--space-md) + ${indent}px)` : undefined;
+
+const enumValues = field.enumValues ?? [];
+const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
+const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
+---
+
+<div
+  class:list={[
+    cl("schema-table__row"),
+    field.readOnly && cl("schema-table__row--readonly"),
+    field.deprecated && cl("schema-table__row--deprecated"),
+  ]}
+  data-field-name={field.name}
+  data-depth={depth}
+>
+  <div class={cl("schema-table__cell-name")} style={cellNameStyle}>
+    {
+      hasChildren && (
+        <button
+          type="button"
+          class={cl("schema-table__toggle")}
+          aria-expanded="false"
+          aria-label={`Toggle ${field.name}`}
+        >
+          <ExpandChevron />
+        </button>
+      )
+    }
+    <span class={cl("schema-table__name-group")}>
+      <code class={cl("schema-table__name")}>{field.name}</code>
+      {
+        /* TODO: translate "[required]", "DEPRECATED", "Default:", "Allowed enum
+          values:", "Show N more", and "Toggle <field>" once authoritative
+          translation keys exist in the Hugo i18n bundle. */
+      }
+      {
+        field.required && (
+          <span class={cl("schema-table__required")}> [required]</span>
+        )
+      }
+    </span>
+  </div>
+  <div class={cl("schema-table__cell-type")}>
+    <span class={cl("schema-table__type")}>{field.type}</span>
+  </div>
+  <div class={cl("schema-table__cell-description")}>
+    {
+      field.deprecated && (
+        <strong class={cl("schema-table__deprecated-label")}>DEPRECATED</strong>
+      )
+    }
+    <span set:html={renderMarkdownInline(field.description ?? "")} />
+    {
+      field.defaultValue !== undefined && (
+        <span class={cl("schema-table__default")}>
+          {" "}
+          Default: <code>{field.defaultValue}</code>
+        </span>
+      )
+    }
+    {
+      enumValues.length > 0 && (
+        <div class={cl("schema-table__enum")}>
+          Allowed enum values: <code>{enumVisible.join(", ")}</code>
+          {enumRest.length > 0 && (
+            <details class={cl("schema-table__enum-details")}>
+              <summary>Show {enumRest.length} more</summary>
+              <code>{enumRest.join(", ")}</code>
+            </details>
+          )}
+        </div>
+      )
+    }
+  </div>
+</div>
+{
+  hasChildren && (
+    <div class={cl("schema-table__children")} hidden>
+      {field.children?.map((child) => (
+        <Self field={child} depth={depth + 1} />
+      ))}
+      {field.unionOptions?.map((option) => (
+        <Fragment>
+          <div
+            class={cl("schema-table__union-label")}
+            style={`padding-left: ${(depth + 1) * INDENT_PX + 8}px`}
+          >
+            {option.label}
+          </div>
+          {option.fields.map((child) => (
+            <Self field={child} depth={depth + 2} />
+          ))}
+        </Fragment>
+      ))}
+    </div>
+  )
+}

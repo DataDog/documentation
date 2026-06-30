@@ -1,0 +1,675 @@
+<main class="api-main" data-astro-cid-hnecgxtf>
+  <div class="api-toolbar" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
+        <ol class="breadcrumbs__list _breadcrumbs__list_325516">
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/"> Docs </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/api/latest/"> API </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <span
+              class="breadcrumbs__label _breadcrumbs__MOD breadcrumbs__label--current _breadcrumbs__label--current_325516"
+              aria-current="page"
+            >
+              Dashboards
+            </span>
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X1"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+        ssr
+        client="idle"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_ddc1bf copy-page-button--icon _copy-page-button--icon_ddc1bf"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/LanguageSelector/LanguageSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"LanguageSelector","value":true}'
+        await-children
+        ><div class="language-selector _language-selector_edb83c">
+          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
+          ><span class="select _select_d4facd"
+            ><select id="language-select" class="select__control _select__control_d4facd">
+              <option selected value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="es">Español</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <astro-island
+        uid="X3"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/RegionSelector/RegionSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"RegionSelector","value":true}'
+        await-children
+        ><div class="region-selector _region-selector_4de5ea">
+          <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><span class="select _select_d4facd"
+            ><select id="region-select" class="select__control _select__control_d4facd">
+              <option selected value="us">US1</option>
+              <option value="us3">US3</option>
+              <option value="us5">US5</option>
+              <option value="eu">EU</option>
+              <option value="ap1">AP1</option>
+              <option value="ap2">AP2</option>
+              <option value="gov">US1-FED</option>
+              <option value="gov2">US2-FED</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+    </div>
+  </div>
+  <div class="prose" data-astro-cid-hnecgxtf>
+    <div class="api-page-header _api-page-header_f3b303">
+      <h1 class="api-page-header__title _api-page-header__title_f3b303">Dashboards</h1>
+      <div class="api-page-header__copy _api-page-header__copy_f3b303">
+        <astro-island
+          uid="X4"
+          component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+          ssr
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"CopyPageButton","value":true}'
+          await-children
+          ><button aria-label="Copy page" class="copy-page-button _copy-page-button_ddc1bf">
+            <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+                />
+              </svg> </span
+            ><span class="copy-page-button__label _copy-page-button__label_ddc1bf"
+              ><span
+                class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf copy-page-button__label-text--visible _copy-page-button__label-text--visible_ddc1bf"
+                >Copy page</span
+              ><span aria-hidden="true" class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf"
+                >Copied</span
+              ></span
+            ></button
+          ><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <div>
+      <p>
+        Manage all your dashboards, as well as access to your shared dashboards, through the API. See the
+        <a href="https://docs.datadoghq.com/dashboards/">Dashboards page</a> for more information.
+      </p>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-a-new-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/create-a-new-dashboard/"
+        >
+          Create a new dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-a-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/get-a-dashboard/"
+        >
+          Get a dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-all-dashboards">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/get-all-dashboards/"
+        >
+          Get all dashboards
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-a-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/update-a-dashboard/"
+        >
+          Update a dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--put _api-method-badge--put_d09f62">
+          PUT
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-a-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/delete-a-dashboard/"
+        >
+          Delete a dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-dashboards">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/delete-dashboards/"
+        >
+          Delete dashboards
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="restore-deleted-dashboards">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/restore-deleted-dashboards/"
+        >
+          Restore deleted dashboards
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-a-shared-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/create-a-shared-dashboard/"
+        >
+          Create a shared dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-a-shared-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/get-a-shared-dashboard/"
+        >
+          Get a shared dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-a-shared-dashboard">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/update-a-shared-dashboard/"
+        >
+          Update a shared dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--put _api-method-badge--put_d09f62">
+          PUT
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="send-shared-dashboard-invitation-email"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/send-shared-dashboard-invitation-email/"
+        >
+          Send shared dashboard invitation email
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-all-invitations-for-a-shared-dashboard"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/get-all-invitations-for-a-shared-dashboard/"
+        >
+          Get all invitations for a shared dashboard
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="revoke-a-shared-dashboard-url"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/revoke-a-shared-dashboard-url/"
+        >
+          Revoke a shared dashboard URL
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="revoke-shared-dashboard-invitations"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/dashboards/revoke-shared-dashboard-invitations/"
+        >
+          Revoke shared dashboard invitations
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+  </div>
+</main>

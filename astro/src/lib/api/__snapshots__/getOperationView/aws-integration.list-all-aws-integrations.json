@@ -1,0 +1,952 @@
+{
+  "slug": "list-all-aws-integrations",
+  "summary": "List all AWS integrations",
+  "deprecated": false,
+  "variants": [
+    {
+      "operationId": "ListAWSAccounts",
+      "summary": "List all AWS integrations",
+      "slug": "list-all-aws-integrations",
+      "method": "GET",
+      "path": "/api/v2/integration/aws/accounts",
+      "description": "Get a list of AWS Account Integration Configs.",
+      "version": "v2",
+      "deprecated": false,
+      "unstable": false,
+      "permissions": [
+        "aws_configuration_read"
+      ],
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts"
+      },
+      "queryParams": [
+        {
+          "name": "aws_account_id",
+          "type": "string",
+          "required": false,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Optional query parameter to filter accounts by AWS Account ID.\nIf not provided, all accounts are returned."
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "AWS Accounts List object",
+          "schema": [
+            {
+              "name": "data",
+              "type": "[AWSAccountResponseData]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "List of AWS Account Integration Configs.",
+              "children": [
+                {
+                  "name": "attributes",
+                  "type": "object",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "AWS Account response attributes.",
+                  "children": [
+                    {
+                      "name": "account_tags",
+                      "type": "[string]",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Tags to apply to all hosts and metrics reporting for this account. Defaults to `[]`."
+                    },
+                    {
+                      "name": "auth_config",
+                      "type": "oneOf",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Authentication config.",
+                      "unionOptions": [
+                        {
+                          "label": "AWSAuthConfigKeys",
+                          "fields": [
+                            {
+                              "name": "access_key_id",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "AWS Access Key ID."
+                            },
+                            {
+                              "name": "secret_access_key",
+                              "type": "string",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "AWS Secret Access Key."
+                            }
+                          ]
+                        },
+                        {
+                          "label": "AWSAuthConfigRole",
+                          "fields": [
+                            {
+                              "name": "external_id",
+                              "type": "string",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "AWS IAM External ID for associated role."
+                            },
+                            {
+                              "name": "role_name",
+                              "type": "string",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "AWS IAM Role name."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "aws_account_id",
+                      "type": "string",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Account ID."
+                    },
+                    {
+                      "name": "aws_partition",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS partition your AWS account is scoped to. Defaults to `aws`.\nSee [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html)\nin the AWS documentation for more information.",
+                      "enumValues": [
+                        "aws",
+                        "aws-cn",
+                        "aws-us-gov"
+                      ]
+                    },
+                    {
+                      "name": "aws_regions",
+                      "type": "oneOf",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Regions to collect data from. Defaults to `include_all`.",
+                      "unionOptions": [
+                        {
+                          "label": "AWSRegionsIncludeAll",
+                          "fields": [
+                            {
+                              "name": "include_all",
+                              "type": "boolean",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Include all regions."
+                            }
+                          ]
+                        },
+                        {
+                          "label": "AWSRegionsIncludeOnly",
+                          "fields": [
+                            {
+                              "name": "include_only",
+                              "type": "[string]",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Include only these regions."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "created_at",
+                      "type": "string (date-time)",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp of when the account integration was created."
+                    },
+                    {
+                      "name": "logs_config",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Logs Collection config.",
+                      "children": [
+                        {
+                          "name": "lambda_forwarder",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Log Autosubscription configuration for Datadog Forwarder Lambda functions.\nAutomatically set up triggers for existing and new logs for some services,\nensuring no logs from new resources are missed and saving time spent on manual configuration.",
+                          "children": [
+                            {
+                              "name": "lambdas",
+                              "type": "[string]",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "List of Datadog Lambda Log Forwarder ARNs in your AWS account. Defaults to `[]`."
+                            },
+                            {
+                              "name": "log_source_config",
+                              "type": "object",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Log source configuration.",
+                              "children": [
+                                {
+                                  "name": "tag_filters",
+                                  "type": "[AWSLogSourceTagFilter]",
+                                  "required": false,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "List of AWS log source tag filters. Defaults to `[]`.",
+                                  "children": [
+                                    {
+                                      "name": "source",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The AWS log source to which the tag filters defined in `tags` are applied."
+                                    },
+                                    {
+                                      "name": "tags",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The AWS resource tags to filter on for the log source specified by `source`."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "sources",
+                              "type": "[string]",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "List of service IDs set to enable automatic log collection.\nDiscover the list of available services with the\n[Get list of AWS log ready\nservices](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)\nendpoint."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "metrics_config",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Metrics Collection config.",
+                      "children": [
+                        {
+                          "name": "automute_enabled",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Enable EC2 automute for AWS metrics. Defaults to `true`."
+                        },
+                        {
+                          "name": "collect_cloudwatch_alarms",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Enable CloudWatch alarms collection. Defaults to `false`."
+                        },
+                        {
+                          "name": "collect_custom_metrics",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Enable custom metrics collection. Defaults to `false`."
+                        },
+                        {
+                          "name": "enabled",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Enable AWS metrics collection. Defaults to `true`."
+                        },
+                        {
+                          "name": "namespace_filters",
+                          "type": "oneOf",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "AWS Metrics namespace filters. Defaults to `exclude_only`.",
+                          "unionOptions": [
+                            {
+                              "label": "AWSNamespaceFiltersExcludeOnly",
+                              "fields": [
+                                {
+                                  "name": "exclude_only",
+                                  "type": "[string]",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Exclude only these namespaces from metrics collection.\nDefaults to `[\"AWS/SQS\", \"AWS/ElasticMapReduce\", \"AWS/Usage\"]`.\n`AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default\nto reduce your AWS CloudWatch costs from `GetMetricData` API calls."
+                                }
+                              ]
+                            },
+                            {
+                              "label": "AWSNamespaceFiltersIncludeOnly",
+                              "fields": [
+                                {
+                                  "name": "include_only",
+                                  "type": "[string]",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Include only these namespaces."
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "tag_filters",
+                          "type": "[AWSNamespaceTagFilter]",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "AWS Metrics collection tag filters list. Defaults to `[]`.",
+                          "children": [
+                            {
+                              "name": "namespace",
+                              "type": "string",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The AWS service for which the tag filters defined in `tags` will be applied."
+                            },
+                            {
+                              "name": "tags",
+                              "type": "[string]",
+                              "required": false,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "The AWS resource tags to filter on for the service specified by `namespace`."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "modified_at",
+                      "type": "string (date-time)",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": true,
+                      "description": "Timestamp of when the account integration was updated."
+                    },
+                    {
+                      "name": "resources_config",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Resources Collection config.",
+                      "children": [
+                        {
+                          "name": "cloud_security_posture_management_collection",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Enable Cloud Security Management to scan AWS resources for vulnerabilities, misconfigurations,\nidentity risks, and compliance violations. Defaults to `false`.\nRequires `extended_collection` to be set to `true`."
+                        },
+                        {
+                          "name": "extended_collection",
+                          "type": "boolean",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Whether Datadog collects additional attributes and configuration information about the resources\nin your AWS account. Defaults to `true`. Required for `cloud_security_posture_management_collection`."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "traces_config",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "AWS Traces Collection config.",
+                      "children": [
+                        {
+                          "name": "xray_services",
+                          "type": "oneOf",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "AWS X-Ray services to collect traces from. Defaults to `include_only`.",
+                          "unionOptions": [
+                            {
+                              "label": "XRayServicesIncludeAll",
+                              "fields": [
+                                {
+                                  "name": "include_all",
+                                  "type": "boolean",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Include all services."
+                                }
+                              ]
+                            },
+                            {
+                              "label": "XRayServicesIncludeOnly",
+                              "fields": [
+                                {
+                                  "name": "include_only",
+                                  "type": "[string]",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Include only these services."
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "id",
+                  "type": "string",
+                  "required": true,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Unique Datadog ID of the AWS Account Integration Config.\nTo get the config ID for an account, use the\n[List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)\nendpoint and query by AWS Account ID."
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": true,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "AWS Account resource type.",
+                  "enumValues": [
+                    "account"
+                  ],
+                  "defaultValue": "account"
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"account_tags\": [\n          \"env:prod\"\n        ],\n        \"auth_config\": {\n          \"access_key_id\": \"AKIAIOSFODNN7EXAMPLE\",\n          \"secret_access_key\": \"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\"\n        },\n        \"aws_account_id\": \"123456789012\",\n        \"aws_partition\": \"aws\",\n        \"aws_regions\": {\n          \"include_all\": true\n        },\n        \"logs_config\": {\n          \"lambda_forwarder\": {\n            \"lambdas\": [\n              \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n            ],\n            \"log_source_config\": {\n              \"tag_filters\": [\n                {\n                  \"source\": \"s3\",\n                  \"tags\": [\n                    \"env:prod\"\n                  ]\n                }\n              ]\n            },\n            \"sources\": [\n              \"s3\"\n            ]\n          }\n        },\n        \"metrics_config\": {\n          \"automute_enabled\": true,\n          \"collect_cloudwatch_alarms\": false,\n          \"collect_custom_metrics\": false,\n          \"enabled\": true,\n          \"namespace_filters\": {\n            \"exclude_only\": [\n              \"AWS/SQS\",\n              \"AWS/ElasticMapReduce\",\n              \"AWS/Usage\"\n            ]\n          },\n          \"tag_filters\": [\n            {\n              \"namespace\": \"AWS/EC2\",\n              \"tags\": [\n                \"datadog:true\"\n              ]\n            }\n          ]\n        },\n        \"resources_config\": {\n          \"cloud_security_posture_management_collection\": false,\n          \"extended_collection\": true\n        },\n        \"traces_config\": {\n          \"xray_services\": {\n            \"include_all\": false\n          }\n        }\n      },\n      \"id\": \"00000000-abcd-0001-0000-000000000000\",\n      \"type\": \"account\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "403",
+          "description": "Forbidden",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "429",
+          "description": "Too many requests",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "A list of errors."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        }
+      ],
+      "codeExamples": [
+        {
+          "language": "curl",
+          "label": "Curl",
+          "entries": [
+            {
+              "description": "List all AWS integrations curl example",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "syntax": "bash",
+              "regionVariants": {
+                "us": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us3": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us5": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "eu": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap1": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap2": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "gov": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v2/integration/aws/accounts?aws_account_id=123456789012\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "\"\"\"\nList all AWS integrations returns \"AWS Accounts List object\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
+              "syntax": "python"
+            }
+          ]
+        },
+        {
+          "language": "ruby",
+          "label": "Ruby",
+          "entries": [
+            {
+              "description": "",
+              "code": "# List all AWS integrations returns \"AWS Accounts List object\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V2::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
+              "syntax": "ruby"
+            }
+          ]
+        },
+        {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV2.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "java",
+          "label": "Java",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v2.api.AwsIntegrationApi;\nimport com.datadog.api.client.v2.model.AWSAccountsResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountsResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "syntax": "java"
+            }
+          ]
+        },
+        {
+          "language": "typescript",
+          "label": "TypeScript",
+          "entries": [
+            {
+              "description": "",
+              "code": "/**\n * List all AWS integrations returns \"AWS Accounts List object\" response\n */\n\nimport { client, v2 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v2.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v2.AWSAccountsResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "syntax": "typescript"
+            }
+          ]
+        },
+        {
+          "language": "rust",
+          "label": "Rust",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV2::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV2::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "syntax": "rust"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "operationId": "ListAWSAccounts",
+      "summary": "List all AWS integrations",
+      "slug": "list-all-aws-integrations",
+      "method": "GET",
+      "path": "/api/v1/integration/aws",
+      "description": "**This endpoint is deprecated - use the V2 endpoints instead.** List all Datadog-AWS integrations available in your Datadog organization.",
+      "version": "v1",
+      "deprecated": true,
+      "unstable": false,
+      "permissions": [
+        "aws_configuration_read"
+      ],
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws"
+      },
+      "queryParams": [
+        {
+          "name": "account_id",
+          "type": "string",
+          "required": false,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Only return AWS accounts that matches this `account_id`."
+        },
+        {
+          "name": "role_name",
+          "type": "string",
+          "required": false,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Only return AWS accounts that matches this role_name."
+        },
+        {
+          "name": "access_key_id",
+          "type": "string",
+          "required": false,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Only return AWS accounts that matches this `access_key_id`."
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK",
+          "schema": [
+            {
+              "name": "accounts",
+              "type": "[AWSAccount]",
+              "required": false,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "List of enabled AWS accounts.",
+              "children": [
+                {
+                  "name": "access_key_id",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Your AWS access key ID. Only required if your AWS account is a GovCloud or China account."
+                },
+                {
+                  "name": "account_id",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Your AWS Account ID without dashes."
+                },
+                {
+                  "name": "account_specific_namespace_rules",
+                  "type": "object",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "An object (in the form `{\"namespace1\":true/false, \"namespace2\":true/false}`) containing user-supplied overrides\nfor AWS namespace metric collection. **Important**: This field only contains namespaces explicitly configured through API calls,\nnot the comprehensive enabled or disabled status of all namespaces. If a namespace is absent from this field, it uses Datadog's\ninternal defaults (all namespaces enabled by default, except `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage`).\nFor a complete view of all namespace statuses, use the V2 AWS Integration API instead."
+                },
+                {
+                  "name": "cspm_resource_collection_enabled",
+                  "type": "boolean",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Whether Datadog collects cloud security posture management resources from your AWS account. This includes additional resources not covered under the general `resource_collection`.",
+                  "defaultValue": "false"
+                },
+                {
+                  "name": "excluded_regions",
+                  "type": "[string]",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "An array of [AWS regions](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints)\nto exclude from metrics collection."
+                },
+                {
+                  "name": "extended_resource_collection_enabled",
+                  "type": "boolean",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Whether Datadog collects additional attributes and configuration information about the resources in your AWS account. Required for `cspm_resource_collection`.",
+                  "defaultValue": "false"
+                },
+                {
+                  "name": "filter_tags",
+                  "type": "[string]",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2.\nWildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\nOnly hosts that match one of the defined tags\nwill be imported into Datadog. The rest will be ignored.\nHost matching a given tag can also be excluded by adding `!` before the tag.\nFor example, `env:production,instance-type:c1.*,!region:us-east-1`"
+                },
+                {
+                  "name": "host_tags",
+                  "type": "[string]",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Array of tags (in the form `key:value`) to add to all hosts\nand metrics reporting through this integration."
+                },
+                {
+                  "name": "metrics_collection_enabled",
+                  "type": "boolean",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Whether Datadog collects metrics for this AWS account.",
+                  "defaultValue": "true"
+                },
+                {
+                  "name": "resource_collection_enabled",
+                  "type": "boolean",
+                  "required": false,
+                  "deprecated": true,
+                  "readOnly": false,
+                  "description": "Deprecated in favor of 'extended_resource_collection_enabled'. Whether Datadog collects a standard set of resources from your AWS account.",
+                  "defaultValue": "false"
+                },
+                {
+                  "name": "role_name",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Your Datadog role delegation name."
+                },
+                {
+                  "name": "secret_access_key",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "Your AWS secret access key. Only required if your AWS account is a GovCloud or China account."
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"accounts\": [\n    {\n      \"account_id\": \"123456789012\",\n      \"account_specific_namespace_rules\": {\n        \"auto_scaling\": false,\n        \"opswork\": false\n      },\n      \"cspm_resource_collection_enabled\": true,\n      \"excluded_regions\": [\n        \"us-east-1\",\n        \"us-west-2\"\n      ],\n      \"extended_resource_collection_enabled\": true,\n      \"filter_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"host_tags\": [\n        \"$KEY:$VALUE\"\n      ],\n      \"metrics_collection_enabled\": false,\n      \"resource_collection_enabled\": true,\n      \"role_name\": \"DatadogAWSIntegrationRole\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "400",
+          "description": "Bad Request",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "403",
+          "description": "Authentication Error",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "429",
+          "description": "Too many requests",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        }
+      ],
+      "codeExamples": [
+        {
+          "language": "curl",
+          "label": "Curl",
+          "entries": [
+            {
+              "description": "List all AWS integrations curl example",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "syntax": "bash",
+              "regionVariants": {
+                "us": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us3": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us5": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "eu": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap1": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap2": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "gov": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/integration/aws\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "\"\"\"\nList all AWS integrations returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
+              "syntax": "python"
+            }
+          ]
+        },
+        {
+          "language": "ruby",
+          "label": "Ruby",
+          "entries": [
+            {
+              "description": "",
+              "code": "# List all AWS integrations returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
+              "syntax": "ruby"
+            }
+          ]
+        },
+        {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV1.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "java",
+          "label": "Java",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.AwsIntegrationApi;\nimport com.datadog.api.client.v1.model.AWSAccountListResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountListResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "syntax": "java"
+            }
+          ]
+        },
+        {
+          "language": "typescript",
+          "label": "TypeScript",
+          "entries": [
+            {
+              "description": "",
+              "code": "/**\n * List all AWS integrations returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v1.AWSAccountListResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "syntax": "typescript"
+            }
+          ]
+        },
+        {
+          "language": "rust",
+          "label": "Rust",
+          "entries": [
+            {
+              "description": "",
+              "code": "// List all AWS integrations returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV1::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "syntax": "rust"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

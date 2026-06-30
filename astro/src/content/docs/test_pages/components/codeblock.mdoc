@@ -1,0 +1,116 @@
+---
+title: "CodeBlock"
+description: "Astro with Shiki syntax highlighting at build time. Preact islands for CopyButton and CollapseToggle (both client:idle)."
+type: interactive
+---
+
+# CodeBlock
+
+A styled code block for displaying source code with syntax highlighting, an optional filename header, a copy-to-clipboard button, collapsible toggling, and word wrap. Code is highlighted at build time with Shiki. The copy button and collapsible toggle use Preact for client-side hydration.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `content` | `string` | — | The code content to display (provided automatically by fenced code blocks) |
+| `language` | `string` | — | Language identifier for syntax highlighting |
+| `filename` | `string` | — | Filename displayed in the header bar |
+| `wrap` | `boolean` | `false` | Enables word wrapping instead of horizontal scrolling |
+| `collapsible` | `boolean` | `false` | Adds a chevron toggle to show/hide the code content |
+| `disable_copy` | `boolean` | `false` | Hides the copy-to-clipboard button |
+
+## Fenced Code Block Examples
+
+### Without language
+
+```
+This is a plain code block
+with no language specified.
+```
+
+### JavaScript
+
+```javascript
+const greeting = "Hello, world!";
+console.log(greeting);
+```
+
+### Python
+
+```python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+### Markdoc
+
+```markdoc
+{% alert level="info" %}
+This is an informational alert.
+{% /alert %}
+```
+
+## Feature Examples
+
+### With filename
+
+```python {% filename="app.py" %}
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, World!"
+```
+
+### With word wrap
+
+```text {% wrap=true %}
+This is a very long line of text that would normally cause horizontal scrolling but with the wrap option enabled it wraps to the next line instead of overflowing the container horizontally. This demonstrates how the wrap property changes the white-space behavior from pre to normal.
+```
+
+### Collapsible with filename
+
+```yaml {% collapsible=true filename="docker-compose.yml" %}
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
+### Copy disabled
+
+```bash {% disable_copy=true %}
+# This is example output, not meant to be copied
+$ kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+myapp-5d8c4b7f9-abc12   1/1     Running   0          5m
+```
+
+### All options combined
+
+```json {% filename="config.json" collapsible=true wrap=true %}
+{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"my-config","namespace":"default"},"data":{"key":"This is a very long configuration value that demonstrates word wrapping in combination with collapsible and filename features"}}
+```
+
+### Collapsible without filename
+
+```javascript {% collapsible=true %}
+function expensiveComputation() {
+  // This long code block can be collapsed
+  const data = fetchData();
+  const processed = transform(data);
+  return summarize(processed);
+}
+```
+
+### Filename without language highlighting
+
+```text {% filename="README.md" %}
+This is a plain text file displayed with a filename header.
+```

@@ -1,0 +1,292 @@
+---
+import '../styles/global.css';
+import AnnouncementBanner from '@components/AnnouncementBanner/AnnouncementBanner.astro';
+import Header from '@components/Header/Header.astro';
+import Footer from '@components/Footer/Footer.astro';
+import { stripLocalePrefix, type Locale } from '@lib/i18n/locale';
+import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
+import {
+  TWITTER_HANDLE,
+  THEME_COLOR,
+  DEFAULT_OG_IMAGE,
+  getLocaleDefaults,
+} from '@lib/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Full URL or absolute path. Defaults to `Astro.site + Astro.url.pathname`. */
+  canonical?: string;
+  /** Absolute URL of the social-share image. */
+  image?: string;
+  /** OpenGraph type; defaults to "article" to match Hugo. */
+  ogType?: 'website' | 'article';
+  /** Locale for `<html lang>` and per-locale defaults. Auto-detected from URL when omitted. */
+  lang?: Locale;
+  /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
+  hreflang?: Array<{ hreflang: string; href: string }>;
+  /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
+  announcementBanner?: BannerParams;
+}
+
+const {
+  title,
+  description: descriptionProp,
+  canonical: canonicalProp,
+  image: imageProp,
+  ogType = 'article',
+  lang: langProp,
+  hreflang,
+  announcementBanner,
+} = Astro.props;
+
+// Resolve the banner the same way the component does, so the body's
+// `announcement` class (which drives the header/body offset) stays in lockstep
+// with whether a banner actually renders. Mirrors Hugo's `hasAnnouncementBanner`.
+const bannerParams = announcementBanner ?? getBannerParams();
+const hasBanner = Object.keys(bannerParams).length > 0;
+
+const lang: Locale = langProp ?? stripLocalePrefix(Astro.url.pathname).lang;
+const localeDefaults = getLocaleDefaults(lang);
+const description = descriptionProp ?? localeDefaults.metaDescription;
+const siteName = localeDefaults.siteName;
+const image = imageProp ?? DEFAULT_OG_IMAGE;
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
+const ogUrl = canonical;
+// Resolve any relative hreflang hrefs against the site origin.
+const hreflangResolved = hreflang?.map((h) => ({
+  hreflang: h.hreflang,
+  href: h.href.startsWith('http') ? h.href : `${siteOrigin}${h.href}`,
+}));
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={THEME_COLOR} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Schema.org */}
+    <meta itemprop="name" content={title} />
+    <meta itemprop="description" content={description} />
+
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:image" content={image} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="article:author" content="Datadog" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={TWITTER_HANDLE} />
+    <meta name="twitter:creator" content={TWITTER_HANDLE} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    {hreflangResolved?.map((h) => (
+      <link rel="alternate" hreflang={h.hreflang} href={h.href} />
+    ))}
+
+    <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
+    <!-- SCROLL MODE — start (Google Fonts: loaded on demand, not on every page load) -->
+    <noscript><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" /></noscript>
+    <!-- SCROLL MODE — end -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        // SCROLL MODE — start
+        window.__scrollFontsLoaded = false;
+        window.__loadScrollFonts = function () {
+          if (window.__scrollFontsLoaded) { return; }
+          window.__scrollFontsLoaded = true;
+          var gfonts = 'https://fonts.googleapis.com';
+          var gstatic = 'https://fonts.gstatic.com';
+          [[gfonts, false], [gstatic, true]].forEach(function (pair) {
+            var pc = document.createElement('link');
+            pc.rel = 'preconnect';
+            pc.href = pair[0];
+            if (pair[1]) { pc.crossOrigin = ''; }
+            document.head.appendChild(pc);
+          });
+          var l = document.createElement('link');
+          l.rel = 'preload';
+          l.as = 'style';
+          l.href = gfonts + '/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap';
+          l.onload = function () { this.rel = 'stylesheet'; };
+          document.head.appendChild(l);
+        };
+        if (localStorage.getItem('scroll-mode') === 'on') {
+          document.documentElement.setAttribute('data-scroll', 'on');
+          window.__loadScrollFonts();
+        }
+        // SCROLL MODE — end
+      })();
+      (function () {
+        // Resolve the active Datadog region before first paint so region-scoped
+        // content (elements with `data-region`) renders in its final state and
+        // there's no flash of the wrong region. Precedence matches Hugo:
+        // ?site= query param → `site` cookie → default `us`. Referrer-based
+        // sync runs later in the regionState module.
+        var allowed = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
+        var params = new URLSearchParams(window.location.search);
+        var fromQuery = params.get('site');
+        var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
+        var fromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
+        var region = 'us';
+        if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
+          region = fromQuery;
+        } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
+          region = fromCookie;
+        }
+        document.documentElement.setAttribute('data-active-region', region);
+      })();
+    </script>
+  </head>
+  <body class:list={[{ announcement: hasBanner }]}>
+    <AnnouncementBanner override={announcementBanner} />
+    <Header />
+    <div class="base-layout__body">
+      <slot />
+    </div>
+    <Footer />
+    <div id="dev-nav">
+      <a id="components-link" href="/docs/test_pages/" aria-label="Test pages index">🔧</a>
+    </div>
+    <div id="theme-toggles">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+      </button>
+      <!-- SCROLL MODE — start (toggle button) -->
+      <button
+        id="scroll-toggle"
+        type="button"
+        aria-label="Toggle scroll mode"
+      >
+      </button>
+      <!-- SCROLL MODE — end -->
+    </div>
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        function update() {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          update();
+        });
+      })();
+      // SCROLL MODE — start (toggle script)
+      (function () {
+        var btn = document.getElementById('scroll-toggle');
+        function update() {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          btn.textContent = isScroll ? '\uD83D\uDCD6' : '\uD83D\uDCDC';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          var next = isScroll ? 'off' : 'on';
+          if (next === 'on') {
+            document.documentElement.setAttribute('data-scroll', 'on');
+            window.__loadScrollFonts();
+          } else {
+            document.documentElement.removeAttribute('data-scroll');
+          }
+          localStorage.setItem('scroll-mode', next);
+          update();
+        });
+      })();
+      // SCROLL MODE — end
+    </script>
+    <style>
+      .base-layout__body {
+        padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
+      }
+
+      @media (min-width: 992px) {
+        .base-layout__body {
+          padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+        }
+      }
+
+      #dev-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #dev-nav:hover {
+        opacity: 1;
+      }
+      #components-link {
+        display: inline-block;
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+        text-decoration: none;
+      }
+      #components-link:hover {
+        border-color: var(--color-brand);
+      }
+      #theme-toggles {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        gap: var(--space-xs);
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #theme-toggles:hover {
+        opacity: 1;
+      }
+      #theme-toggle,
+      #scroll-toggle {
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+      }
+      #theme-toggle:hover,
+      #scroll-toggle:hover {
+        border-color: var(--color-brand);
+      }
+    </style>
+  </body>
+</html>

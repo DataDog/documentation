@@ -1,0 +1,1740 @@
+<main class="api-main" data-astro-cid-hnecgxtf>
+  <div class="api-toolbar" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
+        <ol class="breadcrumbs__list _breadcrumbs__list_325516">
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/"> Docs </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/api/latest/"> API </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <span
+              class="breadcrumbs__label _breadcrumbs__MOD breadcrumbs__label--current _breadcrumbs__label--current_325516"
+              aria-current="page"
+            >
+              Usage Metering
+            </span>
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X1"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+        ssr
+        client="idle"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_ddc1bf copy-page-button--icon _copy-page-button--icon_ddc1bf"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/LanguageSelector/LanguageSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"LanguageSelector","value":true}'
+        await-children
+        ><div class="language-selector _language-selector_edb83c">
+          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
+          ><span class="select _select_d4facd"
+            ><select id="language-select" class="select__control _select__control_d4facd">
+              <option selected value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="es">Español</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <astro-island
+        uid="X3"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/RegionSelector/RegionSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"RegionSelector","value":true}'
+        await-children
+        ><div class="region-selector _region-selector_4de5ea">
+          <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><span class="select _select_d4facd"
+            ><select id="region-select" class="select__control _select__control_d4facd">
+              <option selected value="us">US1</option>
+              <option value="us3">US3</option>
+              <option value="us5">US5</option>
+              <option value="eu">EU</option>
+              <option value="ap1">AP1</option>
+              <option value="ap2">AP2</option>
+              <option value="gov">US1-FED</option>
+              <option value="gov2">US2-FED</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+    </div>
+  </div>
+  <div class="prose" data-astro-cid-hnecgxtf>
+    <div class="api-page-header _api-page-header_f3b303">
+      <h1 class="api-page-header__title _api-page-header__title_f3b303">Usage Metering</h1>
+      <div class="api-page-header__copy _api-page-header__copy_f3b303">
+        <astro-island
+          uid="X4"
+          component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+          ssr
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"CopyPageButton","value":true}'
+          await-children
+          ><button aria-label="Copy page" class="copy-page-button _copy-page-button_ddc1bf">
+            <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+                />
+              </svg> </span
+            ><span class="copy-page-button__label _copy-page-button__label_ddc1bf"
+              ><span
+                class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf copy-page-button__label-text--visible _copy-page-button__label-text--visible_ddc1bf"
+                >Copy page</span
+              ><span aria-hidden="true" class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf"
+                >Copied</span
+              ></span
+            ></button
+          ><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <div>
+      <p>
+        The usage metering API allows you to get hourly, daily, and monthly usage across multiple facets of Datadog.
+        This API is available to all Pro and Enterprise customers.
+      </p>
+      <p>
+        <strong>Note</strong>: Usage data is delayed by up to 72 hours from when it was incurred. It is retained for 15
+        months.
+      </p>
+      <p>
+        You can retrieve up to 24 hours of hourly usage data for multiple organizations, and up to two months of hourly
+        usage data for a single organization in one request. Learn more on the
+        <a href="https://docs.datadoghq.com/account_management/billing/usage_details/">usage details documentation</a>.
+      </p>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-attribution">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-attribution/"
+        >
+          Get hourly usage attribution
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/hourly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/hourly-attribution </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-monthly-usage-attribution"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-monthly-usage-attribution/"
+        >
+          Get monthly usage attribution
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/monthly-attribution </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/monthly-attribution </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-billable-usage-across-your-account"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-billable-usage-across-your-account/"
+        >
+          Get billable usage across your account
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/billable-summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/billable-summary </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-all-custom-metrics-by-hourly-average"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average/"
+        >
+          Get all custom metrics by hourly average
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/top_avg_metrics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/top_avg_metrics </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-usage-across-your-account"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-usage-across-your-account/"
+        >
+          Get usage across your account
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/summary </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/summary </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-logs-by-index"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-logs-by-index/"
+        >
+          Get hourly usage for logs by index
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/logs_by_index </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/logs_by_index </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-logs-usage-by-retention"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-logs-usage-by-retention/"
+        >
+          Get hourly logs usage by retention
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/logs-by-retention </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/logs-by-retention </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-hosts-and-containers"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers/"
+        >
+          Get hourly usage for hosts and containers
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/hosts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-for-logs">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-logs/"
+        >
+          Get hourly usage for logs
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/logs </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-custom-metrics"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-custom-metrics/"
+        >
+          Get hourly usage for custom metrics
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/timeseries </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/timeseries </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-indexed-spans"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-indexed-spans/"
+        >
+          Get hourly usage for indexed spans
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/indexed-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/indexed-spans </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-synthetics-checks"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks/"
+        >
+          Get hourly usage for synthetics checks
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/synthetics </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/synthetics </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-synthetics-api-checks"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks/"
+        >
+          Get hourly usage for synthetics API checks
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/synthetics_api </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/synthetics_api </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-synthetics-browser-checks"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks/"
+        >
+          Get hourly usage for synthetics browser checks
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/synthetics_browser </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/synthetics_browser </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-for-fargate">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-fargate/"
+        >
+          Get hourly usage for Fargate
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/fargate </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/fargate </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-for-lambda">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-lambda/"
+        >
+          Get hourly usage for Lambda
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/aws_lambda </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-rum-sessions"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-rum-sessions/"
+        >
+          Get hourly usage for RUM sessions
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/rum_sessions </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/rum_sessions </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-network-hosts"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-network-hosts/"
+        >
+          Get hourly usage for network hosts
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/network_hosts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/network_hosts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-network-flows"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-network-flows/"
+        >
+          get hourly usage for network flows
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/network_flows </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/network_flows </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-analyzed-logs"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs/"
+        >
+          Get hourly usage for analyzed logs
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/analyzed_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/analyzed_logs </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-snmp-devices"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-snmp-devices/"
+        >
+          Get hourly usage for SNMP devices
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/snmp </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/snmp </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-ingested-spans"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-ingested-spans/"
+        >
+          Get hourly usage for ingested spans
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/ingested-spans </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/ingested-spans </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-incident-management"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-incident-management/"
+        >
+          Get hourly usage for incident management
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/incident-management </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/incident-management </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-for-iot">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-iot/"
+        >
+          Get hourly usage for IoT
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/iot </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/iot </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-hourly-usage-for-csm-pro">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-csm-pro/"
+        >
+          Get hourly usage for CSM Pro
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/cspm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/cspm </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-cloud-workload-security"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security/"
+        >
+          Get hourly usage for cloud workload security
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/cws </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/cws </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-database-monitoring"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-database-monitoring/"
+        >
+          Get hourly usage for database monitoring
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/dbm </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/dbm </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-sensitive-data-scanner"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner/"
+        >
+          Get hourly usage for sensitive data scanner
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/sds </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/sds </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-rum-units"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-rum-units/"
+        >
+          Get hourly usage for RUM units
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/rum </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/rum </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-profiled-hosts"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts/"
+        >
+          Get hourly usage for profiled hosts
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/profiling </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/profiling </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-ci-visibility"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-ci-visibility/"
+        >
+          Get hourly usage for CI visibility
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/ci-app </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/ci-app </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-online-archive"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-online-archive/"
+        >
+          Get hourly usage for online archive
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/online-archive </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/online-archive </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-hourly-usage-for-audit-logs"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-hourly-usage-for-audit-logs/"
+        >
+          Get hourly usage for audit logs
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/usage/audit_logs </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/usage/audit_logs </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-the-list-of-available-daily-custom-reports"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports/"
+        >
+          Get the list of available daily custom reports
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/daily_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/daily_custom_reports </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-specified-daily-custom-reports"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-specified-daily-custom-reports/"
+        >
+          Get specified daily custom reports
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/daily_custom_reports/{report_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-the-list-of-available-monthly-custom-reports"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports/"
+        >
+          Get the list of available monthly custom reports
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/monthly_custom_reports </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-specified-monthly-custom-reports"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/usage-metering/get-specified-monthly-custom-reports/"
+        >
+          Get specified monthly custom reports
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--deprecated _api-endpoint-summary__badge--deprecated_c91fc2"
+        >
+          deprecated
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v1/monthly_custom_reports/{report_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+  </div>
+</main>

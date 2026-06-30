@@ -1,0 +1,30 @@
+---
+import styles from "./Alert.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { i18n } from "@lib/i18n/i18n";
+import { DEFAULT_LOCALE, isLocale } from "@lib/i18n/locale";
+
+interface Props {
+  level?: "info" | "danger" | "warning" | "tip";
+}
+
+const { level = "info" } = Astro.props;
+const lang = isLocale(Astro.currentLocale)
+  ? Astro.currentLocale
+  : DEFAULT_LOCALE;
+
+const labels: Record<NonNullable<Props["level"]>, string> = {
+  info: i18n("alert_note", lang),
+  danger: i18n("alert_caution", lang),
+  warning: i18n("alert_warning", lang),
+  tip: i18n("alert_tip", lang),
+};
+
+const label = labels[level];
+const cl = classListFactory(styles);
+---
+
+<div class={cl("alert", `alert--${level}`)}>
+  <strong class={cl("alert__label")}>{label}</strong>
+  <slot />
+</div>

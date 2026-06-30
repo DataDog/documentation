@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const title = 'Select';
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Select</h1>
+
+      <p>A thin Preact wrapper around the native <code>&lt;select&gt;</code> element. It provides the shared visual styling used by every dropdown in the Astro API docs — the brand-purple border, hover/focus states, and the Hugo-style chevron indicator drawn with CSS borders (matching <code>.chevron</code>/<code>.chevron-down</code> in the Hugo <code>_dropdown.scss</code>).</p>
+
+      <p>The component is intentionally minimal. State and persistence live in the consuming component (e.g. <code>RegionSelector</code> keeps the region in a signal/state and a cookie); <code>Select</code> only renders the form control.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td><code>string</code></td><td>&mdash;</td><td>Forwarded to the inner <code>&lt;select&gt;</code>. Use this to associate an external <code>&lt;label for=…&gt;</code>.</td></tr>
+          <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>Controlled value of the underlying <code>&lt;select&gt;</code>.</td></tr>
+          <tr><td><code>onChange</code></td><td><code>(e: JSX.TargetedEvent&lt;HTMLSelectElement&gt;) =&gt; void</code></td><td>&mdash;</td><td>Forwarded to the underlying <code>&lt;select&gt;</code>.</td></tr>
+          <tr><td><code>aria-label</code></td><td><code>string</code></td><td>&mdash;</td><td>Accessible label. Required when no <code>&lt;label&gt;</code> element is associated by <code>id</code>.</td></tr>
+          <tr><td><code>children</code></td><td><code>&lt;option&gt;</code> elements</td><td>&mdash;</td><td>Provided as children, exactly as you would write inside a native <code>&lt;select&gt;</code>.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>BEM classes</h2>
+      <table>
+        <thead>
+          <tr><th>Class</th><th>Element</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>select</code></td><td>Outer wrapper that positions the chevron.</td></tr>
+          <tr><td><code>select__control</code></td><td>The native <code>&lt;select&gt;</code> element. Tests should target this class to read state.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Live examples</h2>
+
+      <p>Two consumers render the component:</p>
+      <ul>
+        <li><code>LanguageSelector</code> — in the site header.</li>
+        <li><code>RegionSelector</code> — see the <a href="/docs/test_pages/components/region-selector/">Region Selector</a> test page.</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

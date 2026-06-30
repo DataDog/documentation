@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import type { BannerParams } from '@lib/componentUtils/bannerData';
+
+const title = 'Announcement Banner';
+
+// A representative configured banner. The live site config carries no banner
+// when no campaign is active (`BaseLayout` then renders nothing), so this page
+// passes a per-page override to demonstrate the "there is a banner" state and
+// give the visual regression test a stable target. Passing it through
+// `BaseLayout` also sets the `announcement` body class, so the header and body
+// offset reserve the banner's height — exactly as on a live campaign page.
+const demoBanner: BannerParams = {
+  desktop_message: '<span>Datadog is coming to a city near you. <strong>See the schedule.</strong></span>',
+  mobile_message: '<span>Datadog events near you</span>',
+  background_color: '#632ca6',
+  external_link: 'https://example.com/events',
+};
+---
+
+<BaseLayout title={title} announcementBanner={demoBanner}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>AnnouncementBanner</h1>
+
+      <p>Fixed site-wide banner rendered at the top of every page by <code>BaseLayout</code>. Ported from the Hugo <code>announcement_banner</code> partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner pinned above this content is a configured demo instance (see <code>override</code> below).</p>
+
+      <p>The banner has two states, mirroring Hugo's <code>{`{{ if $announce }}`}</code> guard: when an <code>announcement_banner</code> is configured it renders; when none is configured (the live default with no active campaign) it renders nothing.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>override</code></td><td><code>BannerParams</code></td><td>site params</td><td>Page-level override, matching Hugo's per-page <code>announcement_banner</code> front-matter.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>BannerParams fields</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>desktop_message</code></td><td><code>string</code> (HTML)</td><td>Message shown ≥768px. Rendered with <code>set:html</code> to match Hugo's <code>safeHTML</code>.</td></tr>
+          <tr><td><code>mobile_message</code></td><td><code>string</code> (HTML)</td><td>Message shown &lt;768px. Falls back to <code>desktop_message</code>.</td></tr>
+          <tr><td><code>background_color</code></td><td><code>string</code></td><td>Solid background override. Applied as inline <code>background: &lt;value&gt;</code>.</td></tr>
+          <tr><td><code>gradient_color_one</code> / <code>gradient_color_two</code></td><td><code>string</code></td><td>When both set, override to <code>linear-gradient(45deg, one 0%, two 100%)</code>.</td></tr>
+          <tr><td><code>external_link</code></td><td><code>string</code></td><td>Absolute URL; wraps the banner text in an <code>&lt;a&gt;</code> without the <code>?ref=announcement-banner</code> query string.</td></tr>
+          <tr><td><code>link</code></td><td><code>string</code></td><td>Relative URL; wraps the banner text in an <code>&lt;a&gt;</code> with <code>?ref=announcement-banner</code> appended.</td></tr>
+          <tr><td><code>custom_classes</code></td><td><code>string</code></td><td>Appended to the banner root (e.g. <code>dash-announcement-banner</code>).</td></tr>
+          <tr><td><code>icon</code></td><td><code>string</code></td><td>Name of a websites-modules iconfont icon (not yet implemented).</td></tr>
+          <tr><td><code>icon_color</code></td><td><code>string</code></td><td>Fill color for the icon. Default <code>#9C43FE</code>.</td></tr>
+          <tr><td><code>custom_event_banner</code></td><td><code>boolean</code></td><td>When <code>true</code>, renders the desktop message as a centered <code>&lt;p&gt;</code> with no link.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

@@ -1,0 +1,659 @@
+/* Ported from ~/dd/websites-modules/assets/styles/components/_main-nav.scss.
+   Hugo-identical — pixel values and behaviors must match the Hugo site exactly. */
+
+.header__wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--hugo-header-z);
+}
+
+.header__nav {
+  height: var(--hugo-header-height);
+  display: flex;
+  position: fixed;
+  right: 0;
+  left: 0;
+  /* Offset by the banner only when one is configured (see
+     --hugo-active-banner-height); otherwise the header sits at the top. */
+  top: var(--hugo-active-banner-height);
+  align-items: center;
+  box-shadow: var(--hugo-header-shadow);
+  background-color: var(--color-bg);
+  z-index: var(--hugo-header-z);
+  /* Match Hugo's `logoAnimation` 200ms ease-in-out so the nav height shrinks
+     in lockstep with the bits logo when `.main-nav-scrolled` is added. */
+  transition: height 0.2s ease-in-out;
+}
+
+.header__container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-inline: 12px;
+  margin-inline: auto;
+}
+
+/* Once the user scrolls past the threshold, snap the header to its shrunk
+   height. Hugo does the same thing — `.main-nav-scrolled` applies
+   `tablet-lg:tw-h-[65px]` in the Tailwind nav partial. The transition on
+   `.header__nav` smooths the snap to 200ms ease-in-out. */
+@media (min-width: 992px) {
+  .header__nav {
+    height: var(--hugo-header-height-desktop);
+  }
+
+  :global([data-scrolled]) .header__nav {
+    height: var(--hugo-header-height-desktop-scrolled);
+  }
+}
+
+/* Stepped container max-widths matching Hugo's Bootstrap `.container` with the
+   Datadog overrides. Without these, the container spans 100% of the viewport
+   below 1400px, which — because the left and right <ul>s use flex-grow:1 —
+   pushes the nav items away from the centered logo, so switching between the
+   Hugo and Astro sites produces a visible "jump". */
+@media (min-width: 768px) {
+  .header__container {
+    max-width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .header__container {
+    max-width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header__container {
+    max-width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header__container {
+    max-width: 1336px;
+  }
+}
+
+/* Desktop layout — visible at ≥992px only */
+.header__desktop {
+  display: none;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding-inline: 12px;
+}
+
+@media (min-width: 992px) {
+  .header__desktop {
+    display: flex;
+  }
+}
+
+.header__list-reset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-basis: 0;
+}
+
+.header__left-list {
+  composes: header__list-reset;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.header__right-list {
+  composes: header__list-reset;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.header__menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header__menu-link {
+  display: block;
+  font-size: var(--hugo-nav-item-font-size);
+  font-weight: var(--hugo-nav-item-font-weight);
+  color: var(--hugo-nav-text);
+  padding: var(--hugo-nav-item-padding);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  /* Hugo inherits body line-height (~1.4286) on nav items. Hard-code the
+     same value so the text block matches Hugo's 43.7px tall vs. the prior
+     36px, which left too much whitespace around each item in the 130px bar. */
+  line-height: 1.42857143;
+  font-family: inherit;
+}
+
+.header__menu-link:hover {
+  color: var(--hugo-nav-text-hover);
+}
+
+@media (min-width: 1400px) {
+  .header__menu-link {
+    padding: var(--hugo-nav-item-padding-xxl);
+  }
+}
+
+.header__menu-item--open > .header__menu-link {
+  color: var(--hugo-nav-brand-primary);
+}
+
+/* Logo column */
+.header__logo-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.header__logo-bits {
+  height: 75px;
+  max-width: none;
+  /* Match Hugo's `logoAnimation 200ms ease-in-out`. The CSS `ease` default
+     is front-loaded (fast start, slow end), which read as a faster shrink
+     than Hugo's ease-in-out curve. */
+  transition: height 0.2s ease-in-out;
+}
+
+.header__logo-text {
+  width: 93px;
+  height: 14px;
+  margin-top: 5px;
+  overflow: hidden;
+  font-size: 0;
+}
+
+/* Once the header is fully shrunk: hide the wordmark and shrink the bits
+   logo to its compact size. Hugo triggers the same pair of changes together
+   at the same threshold (see `.main-nav-scrolled` in websites-modules
+   `_main-nav.scss`, with `logoAnimation` 76→50px and `logoTextAnimation`
+   opacity 1→0 both running for 200ms). The wordmark hides instantly because
+   interpolating only `height` while `width` stays fixed at 93px visibly
+   squashes the 807×14 source image. */
+:global([data-scrolled]) .header__logo-text {
+  display: none;
+}
+
+:global([data-scrolled]) .header__logo-bits {
+  height: 50px;
+}
+
+/* Search toggle (not rendered on desktop docs; kept for parity / styling parent) */
+.header__search-toggle {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 21px;
+  color: var(--hugo-nav-text);
+  line-height: 1;
+}
+
+.header__search-toggle svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+@media (min-width: 1400px) {
+  .header__search-toggle-wrap {
+    padding-right: 16px;
+  }
+}
+
+/* Button CTA — GET STARTED FREE. Text is gray (not brand purple): Hugo's
+   `.btn-gradient { color: #632ca6 }` is overridden by the higher-specificity
+   `.main-nav li a { color: #555 }`, so the resting button renders gray to
+   match the other nav items. */
+.header__btn-gradient {
+  position: relative;
+  display: inline-block;
+  background: var(--color-bg);
+  color: var(--hugo-nav-text);
+  border: 0;
+  border-radius: 4px;
+  min-width: 120px;
+  margin-left: 10px;
+  padding: 8.5px 28px 9.5px;
+  font-size: var(--hugo-nav-item-font-size);
+  font-weight: var(--hugo-nav-item-font-weight);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  /* Hugo's .btn-gradient inherits Bootstrap's .btn line-height of 1.5,
+     not the body's 1.428. Hard-code to keep the button the same 45px tall
+     regardless of what the rest of the nav inherits. */
+  line-height: 1.5;
+}
+
+.header__btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    to right,
+    var(--hugo-btn-gradient-start),
+    var(--hugo-btn-gradient-end)
+  );
+  z-index: -2;
+}
+
+.header__btn-gradient:hover,
+:global([data-scrolled]) .header__btn-gradient {
+  color: #ffffff;
+  background: linear-gradient(
+    to right,
+    var(--hugo-btn-gradient-start),
+    var(--hugo-btn-gradient-end)
+  );
+}
+
+/* Responsive label switch — Hugo shows "GET STARTED FREE" at ≥1200px and
+   the shorter "FREE TRIAL" below that (Bootstrap's .d-none.d-xl-block /
+   .d-block.d-xl-none pair). Both spans are in the DOM for SEO / server render;
+   CSS toggles which one is visible. */
+.header__btn-gradient-full {
+  display: none;
+}
+
+.header__btn-gradient-short {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .header__btn-gradient-full {
+    display: block;
+  }
+  .header__btn-gradient-short {
+    display: none;
+  }
+}
+
+/* Mobile row — visible below 992px */
+.header__mobile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 12px;
+}
+
+@media (min-width: 992px) {
+  .header__mobile-row {
+    display: none;
+  }
+}
+
+.header__mobile-logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.header__mobile-logo {
+  display: block;
+  width: 157px;
+  height: 40px;
+}
+
+/* Dropdowns */
+.header__dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 9px;
+  box-sizing: border-box;
+  z-index: 2;
+  box-shadow: var(--hugo-nav-dropdown-shadow);
+  border: 0;
+  border-top: 3px solid var(--hugo-nav-brand-primary);
+  background-color: var(--color-bg);
+  padding: 0.5rem;
+  min-width: 200px;
+  overflow: auto;
+  max-height: 80vh;
+  overscroll-behavior: contain;
+  list-style: none;
+  margin: 0;
+  display: none;
+}
+
+.header__dropdown-menu--open {
+  display: block;
+}
+
+.header__dropdown-menu a {
+  display: block;
+  text-transform: capitalize;
+  font-weight: 300;
+  color: var(--color-text);
+  white-space: nowrap;
+  padding: 7px 11px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.header__dropdown-menu a:hover {
+  color: var(--hugo-nav-text-hover);
+  background: var(--hugo-nav-btn-hover-bg);
+}
+
+/* Solutions menu — 3-column layout */
+.header__solutions-menu {
+  width: var(--hugo-mega-menu-width-lg-down);
+  padding: 0.5rem;
+}
+
+@media (min-width: 992px) {
+  .header__solutions-menu {
+    left: -127px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header__solutions-menu {
+    left: 9px;
+  }
+}
+
+.header__solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header__solutions-column {
+  padding: 0 8px;
+  list-style: none;
+}
+
+.header__solutions-header {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 8px 11px;
+  margin: 0;
+}
+
+.header__solutions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__menu-text {
+  display: inline-flex;
+}
+
+/* BEM block: product-menu */
+
+.product-menu {
+  min-height: var(--hugo-mega-menu-min-height);
+  width: var(--hugo-mega-menu-width);
+  padding: 0 !important;
+  left: var(--hugo-mega-menu-offset-left) !important;
+  font-weight: 400;
+}
+
+@media (max-width: 1399.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-xxl-down);
+    left: var(--hugo-mega-menu-offset-left-xxl-down) !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-xl-down);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-lg-down);
+  }
+}
+
+.product-menu__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: var(--hugo-mega-menu-min-height);
+}
+
+.product-menu__toggle-column {
+  padding: 1rem 1rem 1rem 2rem;
+  border-right: 1px solid var(--hugo-nav-border);
+  position: relative;
+}
+
+.product-menu__detail-column {
+  position: relative;
+}
+
+.product-menu__hype {
+  color: var(--color-text);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+  padding: 28px 12px;
+  margin: 0;
+}
+
+.product-menu__category-list {
+  list-style: none;
+  display: block;
+  margin: 0 0 60px 0;
+  padding: 0;
+}
+
+@media (min-width: 1200px) {
+  .product-menu__category-list {
+    padding-right: 20px;
+  }
+}
+
+.product-menu__category-list li {
+  list-style: none;
+}
+
+.product-menu__category-toggle {
+  all: unset;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+  vertical-align: middle;
+  cursor: pointer;
+  color: var(--hugo-nav-text);
+}
+
+.product-menu__category-toggle:hover {
+  color: var(--hugo-nav-text-hover) !important;
+  background: var(--hugo-nav-btn-hover-bg);
+  border-radius: 4px;
+}
+
+.product-menu__category-toggle--active {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.product-menu__category-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 22px;
+  height: 22px;
+}
+
+.product-menu__category-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu__pricing-link {
+  all: unset;
+  color: var(--hugo-nav-brand-primary);
+  text-transform: uppercase;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  bottom: 40px;
+  left: 2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-menu__pricing-link:hover {
+  color: var(--hugo-nav-text-hover);
+}
+
+.product-menu__pricing-carrot {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.product-menu__pricing-carrot svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu__category {
+  display: none;
+  height: 100%;
+}
+
+.product-menu__category--active {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 40px 25px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  max-height: 80vh;
+}
+
+.product-menu__category-details {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.product-menu__category-description {
+  padding: 28px;
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+
+.product-menu__category-header {
+  font-size: 28px;
+  line-height: 24px;
+  font-weight: 700;
+  padding-bottom: 5px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.product-menu__category-description-text {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  color: #ffffff;
+}
+
+.product-menu__category-description-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 48px;
+  line-height: 48px;
+  margin-right: 20px;
+  color: #ffffff;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.product-menu__category-description-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu__subcategory-header {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.product-menu__subcategory {
+  width: 33%;
+}
+
+.product-menu__subcategory--related {
+  border-left: 1px solid var(--hugo-nav-border);
+  padding-left: 8px;
+}
+
+.product-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-menu__list li a {
+  display: block;
+  padding: 12px;
+  font-size: 18px;
+  line-height: 18px;
+  text-wrap: wrap;
+  text-transform: capitalize;
+  color: var(--color-text);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 300;
+  white-space: normal;
+}
+
+.product-menu__list li a:hover {
+  color: var(--hugo-nav-text-hover);
+  background: var(--hugo-nav-btn-hover-bg);
+}

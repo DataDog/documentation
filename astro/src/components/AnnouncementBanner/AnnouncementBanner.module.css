@@ -1,0 +1,111 @@
+/* Ported from ~/dd/websites-modules/assets/styles/components/_announcement-banner.scss.
+   Hugo-identical — dimensions, colors, and z-index must match exactly. */
+
+.announcement-banner {
+  width: 100%;
+  display: block;
+  line-height: initial;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: var(--hugo-banner-text-color);
+  z-index: var(--hugo-banner-z);
+  height: var(--hugo-banner-height);
+  text-align: center;
+  background: var(--hugo-nav-brand-primary);
+  background-image: linear-gradient(
+    0deg,
+    var(--hugo-banner-gradient-start) 0%,
+    var(--hugo-banner-gradient-end) 100%
+  );
+  font-size: var(--hugo-banner-font-size);
+  font-weight: var(--hugo-nav-item-font-weight);
+}
+
+.announcement-banner a {
+  font-size: var(--hugo-banner-font-size);
+  color: var(--hugo-banner-text-color);
+  font-weight: var(--hugo-nav-item-font-weight);
+  white-space: nowrap;
+  text-decoration: none;
+  /* Hugo's <a> inside the banner is plain inline — no flex, no explicit
+     sizing. The inner `.banner-title-*` span (display:flex, height:100%)
+     handles layout. Centering and sizing the <a> itself adds an extra
+     baseline-alignment layer that pushes the text lower than Hugo's. */
+}
+
+.announcement-banner__title-desktop,
+.announcement-banner__title-mobile {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.announcement-banner__title-desktop {
+  display: none;
+}
+
+.announcement-banner__title-mobile {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .announcement-banner__title-desktop {
+    display: flex;
+  }
+  .announcement-banner__title-mobile {
+    display: none;
+  }
+}
+
+.announcement-banner__custom-event {
+  color: var(--hugo-banner-text-color);
+  font-weight: var(--hugo-nav-item-font-weight);
+  padding: 4px 40px;
+  margin: 0;
+}
+
+/* Variant: dash-announcement-banner — mirrors Hugo's
+   `.announcement .announcement-banner.dash-announcement-banner` font scale.
+   Applied via the outer div's `custom_classes`, so inner spans (which carry
+   the message copy) get the smaller text; `:global()` opts out of the
+   CSS-module scoping for this Hugo-semantic class. */
+:global(.dash-announcement-banner) .announcement-banner__title-mobile {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+:global(.dash-announcement-banner) .announcement-banner__title-desktop span {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+@media (min-width: 992px) {
+  :global(.dash-announcement-banner) .announcement-banner__title-desktop span {
+    font-size: 16px;
+    line-height: 20px;
+    /* Match Hugo: stretch the span to the full 30px bar height and push it
+       down 3px. Text flows from the top of the stretched span, which puts
+       the baseline ~2px higher than a simple `align-items: center` layout —
+       without this Astro's text sits lower than Hugo's. */
+    align-self: stretch;
+    margin-top: 3px;
+  }
+}
+
+.announcement-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.announcement-banner__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}

@@ -1,0 +1,230 @@
+---
+import styles from "./Header.module.css";
+import NavDropdown from "./NavDropdown.tsx";
+import ProductMegaMenu from "./ProductMegaMenu.tsx";
+import { LogoDownloadPanel } from "./LogoDownloadPanel.tsx";
+import HeaderScroll from "./HeaderScroll.astro";
+import MobileNav from "@components/MobileNav/MobileNav.astro";
+import MobileNavToggle, { type MobileNavLabels } from "@components/MobileNav/MobileNavToggle.tsx";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import { i18n } from "@lib/i18n/i18n";
+import { IMAGES_URL } from "@config/images.ts";
+
+const cl = classListFactory(styles);
+
+const headerData = getHeaderData();
+const logoTriggerId = generateElementId("header__logo-column");
+
+const bitsLogoUrl = `${IMAGES_URL}/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75`;
+const textLogoUrl = `${IMAGES_URL}/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807`;
+const mobileLogoUrl = `${IMAGES_URL}/img/datadog_rbg_n_2x.png`;
+const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
+
+const logoPanelArrowSvg = iconHtml("modal-up-arrow");
+
+// TODO: Use i18n for translation
+const mobileNavToggleLabels: MobileNavLabels = {
+  "Toggle navigation": "Toggle navigation",
+};
+
+const logoPanelLabels = {
+  eyebrow: "Looking for Datadog logos?",
+  body: "You can find the logo assets on our press page.",
+  cta: "Download Media Assets",
+};
+---
+
+<div class={cl("header__wrapper")}>
+  <nav class={cl("header__nav")}>
+    <div class={cl("header__container")}>
+      {/* Desktop layout */}
+      <div class={cl("header__desktop")}>
+        <ul class={cl("header__left-list")}>
+          {
+            headerData.product && (
+              <ProductMegaMenu
+                client:load
+                labels={{
+                  trigger: headerData.product.label,
+                  pricing: i18n("view_pricing"),
+                  hype: i18n("product_hype"),
+                }}
+                hrefs={{
+                  product: headerData.product.href,
+                  pricing: `${import.meta.env.SITE}/pricing/`,
+                }}
+                categories={headerData.product.megaCategories}
+                svgs={{ carrot: headerData.product.carrotSvg }}
+              />
+            )
+          }
+
+          {
+            headerData.leftLinks.map((item) => (
+              <li class={cl("header__menu-item")}>
+                <a class={cl("header__menu-link")} href={item.href}>
+                  <span class={cl("header__menu-text")}>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+
+          {
+            headerData.solutions && (
+              <NavDropdown
+                client:load
+                labels={{ trigger: headerData.solutions.label }}
+                href={headerData.solutions.href}
+                identifier="solutions"
+                isSolutions={true}
+              >
+                <div class={cl("header__solutions-grid")}>
+                  {headerData.solutions.columns.map((col) => (
+                    <div class={cl("header__solutions-column")}>
+                      <p class={cl("header__solutions-header")}>{col.label}</p>
+                      <ul class={cl("header__solutions-list")}>
+                        {col.items.map((item) => (
+                          <li>
+                            <a href={item.url}>
+                              <span class={cl("header__menu-text")}>
+                                {item.label}
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </NavDropdown>
+            )
+          }
+        </ul>
+
+        {/* Logo */}
+        <div class="header__logo-slot">
+          <a href="/" id={logoTriggerId} class={cl("header__logo-column")}>
+            <img
+              height="75"
+              class={cl("header__logo-bits")}
+              src={bitsLogoUrl}
+              srcset={`${bitsLogoUrl} 1x, ${bitsLogoUrl}&dpr=2 2x`}
+              alt="Datadog"
+            />
+            <img
+              class={cl("header__logo-text")}
+              height="14"
+              src={textLogoUrl}
+              srcset={`${textLogoUrl} 1x, ${textLogoUrl}&dpr=2 2x`}
+              alt="Datadog"
+            />
+            <LogoDownloadPanel
+              client:load
+              externalContext={{
+                scope: logoTriggerId,
+                entries: { trigger: logoTriggerId },
+              }}
+              labels={logoPanelLabels}
+              svgs={{ arrow: logoPanelArrowSvg }}
+            />
+          </a>
+        </div>
+
+        <ul class={cl("header__right-list")}>
+          {
+            headerData.about && (
+              <NavDropdown
+                client:load
+                labels={{ trigger: headerData.about.label }}
+                href={headerData.about.href}
+                identifier="about"
+              >
+                <ul style="list-style:none;margin:0;padding:0;">
+                  {headerData.about.children.map((child) => (
+                    <li>
+                      <a href={child.href}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </NavDropdown>
+            )
+          }
+          {
+            headerData.blog && (
+              <NavDropdown
+                client:load
+                labels={{ trigger: headerData.blog.label }}
+                href={headerData.blog.href}
+                identifier="blog"
+              >
+                <ul style="list-style:none;margin:0;padding:0;">
+                  {headerData.blog.children.map((child) => (
+                    <li>
+                      <a href={child.href}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </NavDropdown>
+            )
+          }
+          {
+            headerData.login && (
+              <li class={cl("header__menu-item")}>
+                <a class={cl("header__menu-link")} href={headerData.login.href}>
+                  <span class={cl("header__menu-text")}>
+                    {headerData.login.label}
+                  </span>
+                </a>
+              </li>
+            )
+          }
+          {
+            headerData.getStarted && (
+              <li class={cl("header__menu-item")}>
+                <a
+                  class={cl("header__btn-gradient")}
+                  href={headerData.getStarted.href}
+                >
+                  <span class={cl("header__btn-gradient-full")}>
+                    {i18n("get_started_free")}
+                  </span>
+                  <span class={cl("header__btn-gradient-short")}>
+                    {i18n("free_trial")}
+                  </span>
+                </a>
+              </li>
+            )
+          }
+        </ul>
+      </div>
+
+      {/* Mobile row */}
+      <div class={cl("header__mobile-row")}>
+        <a href="/" class={cl("header__mobile-logo-link")}>
+          <img
+            src={mobileLogoUrl}
+            srcset={mobileLogoSrcset}
+            class={cl("header__mobile-logo")}
+            alt="Datadog Logo"
+            width="157"
+            height="40"
+          />
+        </a>
+        <MobileNavToggle
+          client:load
+          labels={mobileNavToggleLabels}
+          externalContext={{
+            scope: "mobile-nav-root",
+            entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
+          }}
+        />
+      </div>
+    </div>
+  </nav>
+</div>
+
+<MobileNav />
+
+<HeaderScroll />

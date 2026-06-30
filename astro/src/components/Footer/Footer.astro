@@ -1,0 +1,191 @@
+---
+/**
+ * Docs-default footer. Port of the `{{- else -}}` branch of
+ * ~/dd/websites-modules/layouts/partials/footer.html. Skips all the
+ * corp-hugo-only trailing modals/scripts and the variant footers
+ * (footer-small, footer-nycactivities, aws-reinvent-2020, footer-slim).
+ */
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import FooterBlurb from "./FooterBlurb.astro";
+import FooterAccordion from "./FooterAccordion.tsx";
+import LanguageSelector from "./LanguageSelector.tsx";
+import FreeTrialModal from "./FreeTrialModal.tsx";
+import SocialIcon from "./SocialIcon.astro";
+import SvgIcon from "./SvgIcon.astro";
+import { getFooterData } from "@lib/componentUtils/footerMenus.ts";
+import { i18n } from "@lib/i18n/i18n";
+import {
+  getTranslations,
+  getNativeLabel,
+  type LangCode,
+} from "@lib/i18n/languageNames";
+import { LOCALES, localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
+
+const cl = classListFactory(styles);
+
+const footer = getFooterData();
+
+const year = new Date().getFullYear();
+
+// Language selector — Astro's i18n routing handles the actual locale switch,
+// so each link is a real localized URL. The footer renders all supported
+// locales; the toolbar instance reuses the same Preact component.
+const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(
+  Astro.url.pathname,
+);
+const currentLang: LangCode = footerLang;
+const translate = getTranslations(currentLang);
+const currentLangOption = {
+  code: currentLang,
+  primary: getNativeLabel(currentLang),
+  secondary: translate(currentLang),
+  href: localizedHref(footerLang, footerLocaleless),
+};
+const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
+  code,
+  primary: getNativeLabel(code),
+  secondary: translate(code),
+  href: localizedHref(code, footerLocaleless),
+}));
+
+// Pre-resolve globe and caret SVGs for the language selector island.
+const svgIcons = import.meta.glob<string>(
+  "../../assets/images/svg-icons/*.svg",
+  { query: "?raw", import: "default", eager: true },
+);
+function inlineSvg(name: string, color: string, size: string): string {
+  const raw = svgIcons[`../../assets/images/svg-icons/${name}`];
+  if (!raw) return "";
+  return raw
+    .replaceAll("default-size", size)
+    .replaceAll("default-fill", color)
+    .replaceAll("default-opacity", "1.0");
+}
+const worldIconHtml = inlineSvg("world.svg", "#ffffff", "16px");
+const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
+
+// Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
+const freeTrialHref = "https://app.datadoghq.com/signup";
+const freeTrialLabel = i18n("free_trial");
+
+---
+
+<footer class={cl("footer")}>
+  <div class={cl("footer__container")}>
+    <FooterBlurb />
+
+    <div class={cl("footer__main-row")}>
+      {/* Trial + download column */}
+      <div class={`${cl("footer__column")} ${cl("footer__column--trial")}`}>
+        <a
+          href={freeTrialHref}
+          class={cl("footer__cta-outline")}
+          data-trigger="free-trial"
+          data-event-category="Signup"
+          data-event-action="Step 1 Footer Initiated"
+        >
+          <span>{freeTrialLabel}</span>
+        </a>
+
+        <p class={cl("footer__download-app")}>{i18n("download_mobile_app")}</p>
+
+        <div class={cl("footer__download-badges")}>
+          <a
+            href="https://apps.apple.com/app/datadog/id1391380318"
+            aria-label="Apple Store Link"
+          >
+            <span class={cl("footer__badge-mobile")}>
+              <SvgIcon src="app-store-badge.svg" color="#ffffff" />
+            </span>
+            <span class={cl("footer__badge-desktop")}>
+              <SvgIcon src="apple.svg" color="#ffffff" />
+            </span>
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.datadog.app"
+            aria-label="Google Play Store Link"
+          >
+            <span class={cl("footer__badge-mobile")}>
+              <SvgIcon src="google-play-badge.svg" color="#ffffff" />
+            </span>
+            <span class={cl("footer__badge-desktop")}>
+              <SvgIcon src="google-play.svg" color="#ffffff" />
+            </span>
+          </a>
+        </div>
+
+        <div
+          class={`${cl("footer__divider")} ${cl("footer__divider--mobile")}`}
+          aria-hidden="true"
+        >
+        </div>
+      </div>
+
+      <FooterAccordion
+        client:visible={{ rootMargin: "500px" }}
+        sections={footer.accordionSections}
+      />
+    </div>
+  </div>
+
+  <div
+    class={`${cl("footer__border-top")} ${cl("footer__border-top--desktop")}`}
+    aria-hidden="true"
+  >
+  </div>
+  <div class={cl("footer__spacer")} aria-hidden="true"></div>
+
+  <div class={cl("footer__container")}>
+    <div class={cl("footer__bottom-row")}>
+      <div class={cl("footer__lang-cell")}>
+        <LanguageSelector
+          client:visible={{ rootMargin: "500px" }}
+          currentLang={currentLangOption}
+          alternates={alternates}
+          worldIconHtml={worldIconHtml}
+          caretIconHtml={caretIconHtml}
+        />
+      </div>
+
+      <div class={cl("footer__legal-cell")}>
+        <span class={cl("footer__copyright")}>&copy; Datadog {year}</span>
+        {
+          footer.sub.map((it, i) => (
+            <span class={cl("footer__legal-item")}>
+              <a href={it.href} class={cl("footer__menu-link")} target={it.target}>
+                {it.label}
+              </a>
+              {i !== footer.sub.length - 1 && <span>&nbsp;|&nbsp;</span>}
+            </span>
+          ))
+        }
+      </div>
+
+      <div class={cl("footer__social-cell")}>
+        {
+          footer.social.map((it, i) => (
+            <span
+              class={`${cl("footer__social-item")} ${i !== footer.social.length - 1 ? cl("footer__social-item--spaced") : ""}`}
+            >
+              <a
+                class={cl("footer__social-link")}
+                href={it.href}
+                aria-label={`${it.label} link`}
+                target={it.target}
+              >
+                <SocialIcon name={it.pre} />
+              </a>
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<FreeTrialModal
+  client:idle
+  title={freeTrialLabel}
+  iframeSrc={freeTrialHref}
+/>

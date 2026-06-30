@@ -58,7 +58,7 @@ menu:
       weight: 1
     - name: API
       identifier: getting_started_api
-      url: getting_started/api/
+      url: api/
       parent: getting_started
       weight: 2
     - name: APM Tracing
@@ -1246,7 +1246,7 @@ menu:
       identifier: administrators_guide_run
       weight: 4
     - name: API
-      url: api/
+      url: /api/latest/action-connection/
       pre: api
       identifier: api
       parent: essentials_heading

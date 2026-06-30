@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const title = 'Footer';
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Footer</h1>
+
+      <p>Site-wide footer rendered at the bottom of every page by <code>BaseLayout</code>. Ported from the docs-default branch of Hugo's <code>footer.html</code> partial — dimensions, colors, and interactions match the Hugo site. Scroll to the bottom of this page to see the footer itself.</p>
+
+      <h2>Sub-components</h2>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Type</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Footer.astro</code></td><td>Astro (static)</td><td>Footer shell — reads menu data at build time and renders the docs blurb, five-column main row, and bottom row statically.</td></tr>
+          <tr><td><code>FooterBlurb.astro</code></td><td>Static</td><td>Docs-only "Can't find something?" intro with the Contact Us CTA.</td></tr>
+          <tr><td><code>FooterAccordion.tsx</code></td><td>Preact island</td><td>Wraps the four menu columns (Product, Resources, About, Blog). Below 992px collapses them into a single-open accordion (default: Resources); above 992px all stay open.</td></tr>
+          <tr><td><code>LanguageSelector.tsx</code></td><td>Preact island</td><td>Bottom-row globe/caret dropdown. Shows the current language plus alternates. English-only for now; add to <code>availableLanguages</code> in <code>Footer.astro</code> when more languages land.</td></tr>
+          <tr><td><code>FreeTrialModal.tsx</code></td><td>Preact island</td><td>Opens when any element with <code>data-trigger="free-trial"</code> is clicked. Embeds the signup flow in an iframe (currently <code>app.datadoghq.com/signup</code>). Close on Escape, backdrop click, or the × button.</td></tr>
+          <tr><td><code>SocialIcon.astro</code></td><td>Static</td><td>Renders a social-network icon with the websites-modules iconfont (<code>&lt;i class="icon-&#123;name&#125;"&gt;</code>) keyed by the <code>pre</code> field in <code>footer_social</code>.</td></tr>
+          <tr><td><code>SvgIcon.astro</code></td><td>Static</td><td>Inlines an SVG from <code>src/assets/images/svg-icons/</code>, performing Hugo's <code>default-*</code> placeholder substitutions for size/color/opacity.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Data flow</h2>
+      <p>Footer data is assembled at build time by <code>getFooterData()</code> in <code>src/lib/componentUtils/footerMenus.ts</code>, which reads <code>config/_default/menus/menus.en.yaml</code> from <code>@websites-modules</code>, sorts by <code>weight</code>, resolves URLs with <code>resolveFooterUrl()</code>, and splits each menu in half for the two-column layout. The Product column comes from <code>getFooterProductLinks()</code> in <code>menuData.ts</code> — flattened and deduped from the header mega-menu tree. The component receives a single view model with named slots (<code>accordionSections</code>, <code>sub</code>, <code>social</code>). The language selector reads from <code>src/lib/i18n/languageNames.ts</code>.</p>
+
+      <h2>Properties (Free-trial modal)</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>title</code></td><td><code>string</code></td><td>(required)</td><td>Modal heading and aria-label</td></tr>
+          <tr><td><code>iframeSrc</code></td><td><code>string</code></td><td>(required)</td><td>URL loaded in the embedded iframe</td></tr>
+        </tbody>
+      </table>
+
+      <p>Swap <code>iframeSrc</code> in <code>Footer.astro</code> to move off <code>app.datadoghq.com/signup</code>.</p>
+
+      <h2>Properties (Language selector)</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>currentLang</code></td><td><code>LanguageOption</code></td><td>(required)</td><td>Current language — <code>&#123; code, primary, secondary, href &#125;</code></td></tr>
+          <tr><td><code>alternates</code></td><td><code>LanguageOption[]</code></td><td><code>[]</code></td><td>Alternate languages; popup reveals these</td></tr>
+          <tr><td><code>worldIconHtml</code></td><td><code>string</code></td><td>(required)</td><td>Pre-inlined globe SVG</td></tr>
+          <tr><td><code>caretIconHtml</code></td><td><code>string</code></td><td>(required)</td><td>Pre-inlined caret SVG</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Dimensions (Hugo-identical)</h2>
+      <table>
+        <thead>
+          <tr><th>Viewport</th><th>Padding</th><th>Layout</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&lt;768px</td><td>1rem top/bottom</td><td>Single column stack; accordion closed except Resources</td></tr>
+          <tr><td>≥768px</td><td>9rem top/bottom</td><td>Stack, accordion active</td></tr>
+          <tr><td>≥992px</td><td>3rem top / 4rem bottom</td><td>Five-column row, all open</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Tokens</h2>
+      <p>See the Hugo-identical section of <code>src/styles/tokens.css</code> (the <code>--hugo-footer-*</code> and <code>--hugo-lang-toggle-*</code> blocks).</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

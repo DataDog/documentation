@@ -1,0 +1,22 @@
+---
+import { iconHtml } from "@lib/componentUtils/menuData.ts";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import styles from "./NavIcon.module.css";
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: string;
+}
+
+const { name, class: className, size } = Astro.props;
+const cl = classListFactory(styles);
+const raw = iconHtml(name) || undefined;
+const style = size ? `width:${size};height:${size}` : undefined;
+---
+
+{raw ? (
+  <span class={`${cl('nav-icon')} ${className ?? ''}`} style={style} set:html={raw} />
+) : (
+  <span class={`${cl('nav-icon', 'nav-icon--missing')} ${className ?? ''}`} style={style} aria-hidden="true" />
+)}

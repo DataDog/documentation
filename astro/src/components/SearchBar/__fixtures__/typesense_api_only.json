@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "found": 2,
+      "hits": [
+        {
+          "document": {
+            "title": "List monitors",
+            "section_header": "",
+            "content": "Returns all monitors visible to the user.",
+            "type": "api",
+            "relpermalink": "/api/latest/monitors/",
+            "language": "en",
+            "category": "API",
+            "subcategory": "Monitors"
+          },
+          "highlights": [
+            { "field": "title", "snippet": "List <mark>monitors</mark>" }
+          ]
+        },
+        {
+          "document": {
+            "title": "Mute a monitor",
+            "section_header": "",
+            "content": "Mute a monitor by ID.",
+            "type": "api",
+            "relpermalink": "/api/latest/monitors/#mute-a-monitor",
+            "language": "en",
+            "category": "API",
+            "subcategory": "Monitors"
+          },
+          "highlights": [
+            { "field": "title", "snippet": "Mute a <mark>monitor</mark>" }
+          ]
+        }
+      ]
+    },
+    { "found": 0, "hits": [] }
+  ]
+}

@@ -107,3 +107,41 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 .alert-tip::after {
   content: '{{ i18n "alert_tip" }}';
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+.main-nav {
+  view-transition-name: main-nav;
+}
+
+.announcement-banner {
+  view-transition-name: announcement-banner;
+}
+
+.sidenav {
+  view-transition-name: sidenav;
+}
+
+::view-transition-group(main-nav),
+::view-transition-group(announcement-banner),
+::view-transition-group(sidenav),
+::view-transition-group(root),
+::view-transition-old(main-nav),
+::view-transition-new(main-nav),
+::view-transition-old(announcement-banner),
+::view-transition-new(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-new(sidenav),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(main-nav),
+::view-transition-old(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-old(root) {
+  display: none;
+}

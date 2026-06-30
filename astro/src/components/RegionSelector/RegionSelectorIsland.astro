@@ -1,0 +1,17 @@
+---
+import { RegionSelector, type RegionSelectorLabels } from './RegionSelector';
+import { buildClientRegions } from '@config/regions';
+
+// Resolve the region list at build time so the `yaml` parser and the full
+// `regions.config.js` data object never reach the client bundle. The slim
+// `ClientRegion[]` shape is serialized as the island's prop.
+const regions = buildClientRegions();
+
+// TODO: replace hardcoded English with i18n() once an authoritative translation
+// key exists for this string in the Hugo i18n bundle.
+const labels: RegionSelectorLabels = {
+  "Datadog site": "Datadog site",
+};
+---
+
+<RegionSelector regions={regions} labels={labels} client:load />

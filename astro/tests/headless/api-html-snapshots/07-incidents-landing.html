@@ -1,0 +1,2533 @@
+<main class="api-main" data-astro-cid-hnecgxtf>
+  <div class="api-toolbar" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
+        <ol class="breadcrumbs__list _breadcrumbs__list_325516">
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/"> Docs </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/api/latest/"> API </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <span
+              class="breadcrumbs__label _breadcrumbs__MOD breadcrumbs__label--current _breadcrumbs__label--current_325516"
+              aria-current="page"
+            >
+              Incidents
+            </span>
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X1"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+        ssr
+        client="idle"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_ddc1bf copy-page-button--icon _copy-page-button--icon_ddc1bf"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/LanguageSelector/LanguageSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"LanguageSelector","value":true}'
+        await-children
+        ><div class="language-selector _language-selector_edb83c">
+          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
+          ><span class="select _select_d4facd"
+            ><select id="language-select" class="select__control _select__control_d4facd">
+              <option selected value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="es">Español</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <astro-island
+        uid="X3"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/RegionSelector/RegionSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"RegionSelector","value":true}'
+        await-children
+        ><div class="region-selector _region-selector_4de5ea">
+          <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><span class="select _select_d4facd"
+            ><select id="region-select" class="select__control _select__control_d4facd">
+              <option selected value="us">US1</option>
+              <option value="us3">US3</option>
+              <option value="us5">US5</option>
+              <option value="eu">EU</option>
+              <option value="ap1">AP1</option>
+              <option value="ap2">AP2</option>
+              <option value="gov">US1-FED</option>
+              <option value="gov2">US2-FED</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+    </div>
+  </div>
+  <div class="prose" data-astro-cid-hnecgxtf>
+    <div class="api-page-header _api-page-header_f3b303">
+      <h1 class="api-page-header__title _api-page-header__title_f3b303">Incidents</h1>
+      <div class="api-page-header__copy _api-page-header__copy_f3b303">
+        <astro-island
+          uid="X4"
+          component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+          ssr
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"CopyPageButton","value":true}'
+          await-children
+          ><button aria-label="Copy page" class="copy-page-button _copy-page-button_ddc1bf">
+            <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+                />
+              </svg> </span
+            ><span class="copy-page-button__label _copy-page-button__label_ddc1bf"
+              ><span
+                class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf copy-page-button__label-text--visible _copy-page-button__label-text--visible_ddc1bf"
+                >Copy page</span
+              ><span aria-hidden="true" class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf"
+                >Copied</span
+              ></span
+            ></button
+          ><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <div>
+      <p>
+        Manage incident response, as well as associated attachments, metadata, and todos. See the
+        <a href="https://docs.datadoghq.com/service_management/incident_management/">Incident Management page</a> for
+        more information.
+      </p>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-an-incident">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident/"
+        >
+          Create an incident
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-the-details-of-an-incident"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-the-details-of-an-incident/"
+        >
+          Get the details of an incident
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-an-existing-incident">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-existing-incident/"
+        >
+          Update an existing incident
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-an-existing-incident">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-existing-incident/"
+        >
+          Delete an existing incident
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-postmortem-attachment">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-postmortem-attachment/"
+        >
+          Create postmortem attachment
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="search-for-incidents">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/search-for-incidents/"
+        >
+          Search for incidents
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/search </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/search </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="list-an-incident-s-impacts">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-an-incident-s-impacts/"
+        >
+          List an incident&#39;s impacts
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-an-incident-impact">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-impact/"
+        >
+          Create an incident impact
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-an-incident-impact">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-impact/"
+        >
+          Delete an incident impact
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="create-an-incident-integration-metadata"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-integration-metadata/"
+        >
+          Create an incident integration metadata
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-incident-integration-metadata-details"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-incident-integration-metadata-details/"
+        >
+          Get incident integration metadata details
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-an-existing-incident-integration-metadata"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-existing-incident-integration-metadata/"
+        >
+          Update an existing incident integration metadata
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="delete-an-incident-integration-metadata"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-integration-metadata/"
+        >
+          Delete an incident integration metadata
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-a-list-of-an-incident-s-todos"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-a-list-of-an-incident-s-todos/"
+        >
+          Get a list of an incident&#39;s todos
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-an-incident-todo">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-todo/"
+        >
+          Create an incident todo
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-incident-todo-details">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-incident-todo-details/"
+        >
+          Get incident todo details
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-an-incident-todo">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-incident-todo/"
+        >
+          Update an incident todo
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-an-incident-todo">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-todo/"
+        >
+          Delete an incident todo
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-an-incident-type">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-type/"
+        >
+          Create an incident type
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/types </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-a-list-of-incident-types">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-a-list-of-incident-types/"
+        >
+          Get a list of incident types
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/types </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/types </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-incident-type-details">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-incident-type-details/"
+        >
+          Get incident type details
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-an-incident-type">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-incident-type/"
+        >
+          Update an incident type
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-an-incident-type">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-type/"
+        >
+          Delete an incident type
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="list-incident-notification-templates"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-incident-notification-templates/"
+        >
+          List incident notification templates
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="create-incident-notification-template"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-incident-notification-template/"
+        >
+          Create incident notification template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-incident-notification-template"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-incident-notification-template/"
+        >
+          Get incident notification template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-incident-notification-template"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-incident-notification-template/"
+        >
+          Update incident notification template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="delete-a-notification-template"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-a-notification-template/"
+        >
+          Delete a notification template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="list-incident-notification-rules"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-incident-notification-rules/"
+        >
+          List incident notification rules
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-rules </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="create-an-incident-notification-rule"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-notification-rule/"
+        >
+          Create an incident notification rule
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-rules </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-an-incident-notification-rule"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-an-incident-notification-rule/"
+        >
+          Get an incident notification rule
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-an-incident-notification-rule"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-incident-notification-rule/"
+        >
+          Update an incident notification rule
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--put _api-method-badge--put_d09f62">
+          PUT
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="delete-an-incident-notification-rule"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-notification-rule/"
+        >
+          Delete an incident notification rule
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="list-incident-attachments">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-incident-attachments/"
+        >
+          List incident attachments
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-incident-attachment">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-incident-attachment/"
+        >
+          Create incident attachment
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-incident-attachment">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-incident-attachment/"
+        >
+          Delete incident attachment
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-incident-attachment">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-incident-attachment/"
+        >
+          Update incident attachment
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-global-incident-settings">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-global-incident-settings/"
+        >
+          Get global incident settings
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/settings </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-global-incident-settings"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-global-incident-settings/"
+        >
+          Update global incident settings
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/settings </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="list-global-incident-handles">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-global-incident-handles/"
+        >
+          List global incident handles
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="create-global-incident-handle"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-global-incident-handle/"
+        >
+          Create global incident handle
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-global-incident-handle"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-global-incident-handle/"
+        >
+          Update global incident handle
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--put _api-method-badge--put_d09f62">
+          PUT
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="delete-global-incident-handle"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-global-incident-handle/"
+        >
+          Delete global incident handle
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="list-postmortem-templates">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/list-postmortem-templates/"
+        >
+          List postmortem templates
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="create-postmortem-template">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-postmortem-template/"
+        >
+          Create postmortem template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-postmortem-template">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-postmortem-template/"
+        >
+          Get postmortem template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="update-postmortem-template">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-postmortem-template/"
+        >
+          Update postmortem template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="delete-postmortem-template">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-postmortem-template/"
+        >
+          Delete postmortem template
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="import-an-incident">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/import-an-incident/"
+        >
+          Import an incident
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/import </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/import </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2 class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2" id="get-a-list-of-incidents">
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-a-list-of-incidents/"
+        >
+          Get a list of incidents
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-a-list-of-an-incident-s-integration-metadata"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata/"
+        >
+          Get a list of an incident&#39;s integration metadata
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-a-list-of-incident-user-defined-fields"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-a-list-of-incident-user-defined-fields/"
+        >
+          Get a list of incident user-defined fields
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="create-an-incident-user-defined-field"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/create-an-incident-user-defined-field/"
+        >
+          Create an incident user-defined field
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--post _api-method-badge--post_d09f62">
+          POST
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="get-an-incident-user-defined-field"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/get-an-incident-user-defined-field/"
+        >
+          Get an incident user-defined field
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+          GET
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="update-an-incident-user-defined-field"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/update-an-incident-user-defined-field/"
+        >
+          Update an incident user-defined field
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--patch _api-method-badge--patch_d09f62">
+          PATCH
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+    <div class="api-endpoint-summary _api-endpoint-summary_c91fc2">
+      <h2
+        class="api-endpoint-summary__heading _api-endpoint-summary__heading_c91fc2"
+        id="delete-an-incident-user-defined-field"
+      >
+        <a
+          class="api-endpoint-summary__link _api-endpoint-summary__link_c91fc2"
+          href="/api/latest/incidents/delete-an-incident-user-defined-field/"
+        >
+          Delete an incident user-defined field
+          <span class="api-endpoint-summary__arrow _api-endpoint-summary__arrow_c91fc2" aria-hidden="true">&rarr;</span>
+        </a>
+        <span
+          class="api-endpoint-summary__badge _api-endpoint-summary__badge_c91fc2 api-endpoint-summary__badge--preview _api-endpoint-summary__badge--preview_c91fc2"
+        >
+          preview
+        </span>
+      </h2>
+      <div class="api-endpoint-summary__url-line _api-endpoint-summary__url-line_c91fc2">
+        <span
+          class="api-method-badge _api-method-badge_d09f62 api-method-badge--delete _api-method-badge--delete_d09f62"
+        >
+          DELETE
+        </span>
+        <code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us">
+          https://api.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us3">
+          https://api.us3.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="us5">
+          https://api.us5.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="eu">
+          https://api.datadoghq.eu/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap1">
+          https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
+          https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
+          https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="gov2"
+        >
+          Not supported in the US2-FED region
+        </code>
+      </div>
+    </div>
+  </div>
+</main>

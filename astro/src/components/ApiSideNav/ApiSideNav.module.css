@@ -1,0 +1,124 @@
+.api-side-nav {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
+  align-self: flex-start;
+  max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height));
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: var(--space-sm) var(--space-md) 0 0;
+  /* box-shadow extends the rail color past the element's left edge so it
+     reaches the viewport edge without adding horizontal overflow.
+     clip-path trims the shadow's vertical overspill so it can't paint over
+     the footer (box-shadow spread inflates equally on all sides). */
+  background: var(--color-gray-lightest);
+  box-shadow: -100vw 0 0 100vw var(--color-gray-lightest);
+  clip-path: inset(0 -100vw);
+}
+
+@media (min-width: 992px) {
+  .api-side-nav {
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop));
+    transition: top 0.2s ease-in-out, max-height 0.2s ease-in-out;
+  }
+
+  :global([data-scrolled]) .api-side-nav {
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled));
+    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop-scrolled));
+  }
+}
+
+.api-side-nav__title {
+  display: block;
+  padding: calc(var(--space-sm) + var(--space-xs)) 0 var(--space-sm) var(--space-md);
+  color: var(--color-brand);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-light);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.api-side-nav__title:hover {
+  color: var(--color-brand-hover);
+}
+
+.api-side-nav__title-api {
+  font-weight: var(--font-weight-semibold);
+}
+
+.api-side-nav__search {
+  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
+}
+
+.api-side-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Soften the bottom edge so list items fade out instead of hard-clipping
+     against the side nav's bottom padding / the footer below. */
+  mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
+}
+
+.api-side-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spacer that lives in the fade zone so the last real item stays opaque
+   when the list is scrolled to the bottom. */
+.api-side-nav__list::after {
+  content: '';
+  display: block;
+  height: var(--space-md);
+  flex-shrink: 0;
+}
+
+.api-side-nav__category {
+  display: block;
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.api-side-nav__category:hover {
+  color: var(--color-brand);
+}
+
+.api-side-nav__category--active {
+  color: var(--color-brand);
+}
+
+.api-side-nav__operations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.api-side-nav__operation {
+  display: block;
+  padding: 0 var(--space-md) 0 var(--space-xl);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.api-side-nav__operation:hover {
+  color: var(--color-brand);
+}
+
+.api-side-nav__operation--active {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-semibold);
+}

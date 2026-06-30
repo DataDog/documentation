@@ -1,0 +1,28 @@
+:root {
+  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.05);
+  --shadow-pill: 2px 5px 12px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.25);
+  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.45);
+  --shadow-brand: 0 -4px 12px rgba(99, 44, 166, 0.08);
+}
+
+[data-theme='dark'] {
+  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.7);
+  --shadow-brand: 0 -4px 12px rgba(155, 109, 215, 0.15);
+}
+
+[data-scroll='on'] {
+  --shadow-sm: 0 0 20px rgba(60, 36, 21, 0.1);
+  --shadow-md: 0 4px 15px rgba(60, 36, 21, 0.2);
+  --shadow-md-hover: 0 4px 15px rgba(60, 36, 21, 0.3);
+  --shadow-brand: 0 -4px 12px rgba(139, 69, 19, 0.1);
+}
+
+[data-theme='dark'][data-scroll='on'] {
+  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.65);
+  --shadow-brand: 0 -4px 12px rgba(196, 148, 58, 0.12);
+}

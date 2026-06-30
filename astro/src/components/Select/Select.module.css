@@ -1,0 +1,55 @@
+.select {
+  position: relative;
+  display: inline-block;
+}
+
+.select__control {
+  appearance: none;
+  background-color: var(--color-gray-lightest);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--border-radius);
+  color: var(--color-brand);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  /* Explicit line-height gives descenders ("g", "y") room — native
+     <select> elements otherwise clip them against the bottom padding. */
+  line-height: 1.4;
+  /* Asymmetric vertical padding (3/5) is an optical centering adjustment;
+     native <select> text renders ~1px low without it. No spacing token
+     expresses the 1px offset. */
+  padding: 3px var(--space-xl) 5px var(--space-sm);
+}
+
+.select__control:hover {
+  border-color: var(--color-brand);
+}
+
+.select__control:focus {
+  outline: var(--border-width-thick) solid var(--color-brand);
+  outline-offset: 1px;
+}
+
+/* Hugo chevron: a square with only right + bottom borders, rotated 45° to
+   form a ▾. Dimensions are pulled from --hugo-chevron-* so the indicator
+   stays pixel-identical to Hugo's `.chevron` even if other border/size
+   tokens drift. box-sizing: border-box matches Hugo's Bootstrap reset —
+   without it the borders would render outside the 8×8 box, making the
+   chevron 25% larger than Hugo's. translateY(-75%) (not -50%) compensates
+   for the rotated shape's visual centroid sitting below its bounding-box
+   center. */
+.select::after {
+  content: '';
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  box-sizing: border-box;
+  width: var(--hugo-chevron-size);
+  height: var(--hugo-chevron-size);
+  border: var(--hugo-chevron-border-width) solid var(--color-brand);
+  border-top: none;
+  border-left: none;
+  transform: translateY(-75%) rotate(45deg);
+  pointer-events: none;
+}

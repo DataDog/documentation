@@ -1,0 +1,131 @@
+---
+title: "Nested content"
+---
+
+# Nested content
+
+Exercises components nested inside other components. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+---
+
+## Tab containing a code block
+
+{% tabs %}
+{% tab label="Python" %}
+Install the client library using pip:
+
+```python
+import datadog
+
+datadog.initialize(api_key="YOUR_API_KEY")
+```
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+{% /tab %}
+{% tab label="Ruby" %}
+Install the client library using gem:
+
+```ruby
+require 'dogapi'
+
+dog = Dogapi::Client.new("YOUR_API_KEY")
+```
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse.
+{% /tab %}
+{% tab label="Go" %}
+Install the client library using go get:
+
+```go
+package main
+
+import (
+    "github.com/DataDog/datadog-api-client-go/v2/api/datadogV1"
+)
+```
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+{% /tab %}
+{% /tabs %}
+
+---
+
+## Tab containing an alert
+
+{% tabs %}
+{% tab label="First" %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+{% alert level="info" %}
+This alert is nested inside a tab panel. Nulla gravida orci a odio, nullam varius turpis.
+{% /alert %}
+
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.
+{% /tab %}
+{% tab label="Second" %}
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+{% alert level="warning" %}
+This warning is nested inside a different tab panel. Integer in mauris eu nibh euismod gravida.
+{% /alert %}
+
+Fusce iaculis ligula nec est. Morbi euismod sagittis libero.
+{% /tab %}
+{% /tabs %}
+
+---
+
+## Tab containing both a code block and an alert
+
+{% tabs %}
+{% tab label="Setup" %}
+{% alert level="tip" %}
+Run this command in a virtual environment to avoid conflicts with system packages.
+{% /alert %}
+
+```bash
+pip install datadog && pip install datadog-api-client
+```
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+{% /tab %}
+{% tab label="Configuration" %}
+{% alert level="warning" %}
+Store your API key in an environment variable, not in source code.
+{% /alert %}
+
+```bash
+export DD_API_KEY="YOUR_API_KEY"
+export DD_APP_KEY="YOUR_APP_KEY"
+```
+
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.
+{% /tab %}
+{% tab label="Verification" %}
+{% alert level="info" %}
+A successful response returns status code 200 with a JSON body.
+{% /alert %}
+
+```python
+from datadog_api_client import ApiClient, Configuration
+
+config = Configuration()
+with ApiClient(config) as api_client:
+    print("Connected successfully")
+```
+{% /tab %}
+{% /tabs %}
+
+---
+
+## Alert containing a list
+
+{% alert level="info" %}
+Before you begin, make sure you have the following:
+
+- A Datadog account with admin permissions
+- An API key and application key
+- Python 3.8 or later installed
+{% /alert %}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.

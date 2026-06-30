@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const title = 'Header';
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Header</h1>
+
+      <p>Site-wide header rendered at the top of every page by <code>BaseLayout</code>. Ported from the Hugo <code>main-nav</code> partial — dimensions, colors, shadows, breakpoints, hover timings, and interactions all match the Hugo site. The header you see above this content is the component itself.</p>
+
+      <h2>Sub-components</h2>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Type</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Header.astro</code></td><td>Astro (static)</td><td>Nav shell — reads menu data at build time and renders logo, left menu, right menu, and hamburger statically for SEO.</td></tr>
+          <tr><td><code>NavDropdown.tsx</code></td><td>Preact island</td><td>Hover-open dropdown used for Solutions, About, and Blog menus. Opens on mouse-enter, closes 150ms after mouse-leave.</td></tr>
+          <tr><td><code>ProductMegaMenu.tsx</code></td><td>Preact island</td><td>The Product dropdown. Holds <code>openCategory</code> state with a 160ms hover debounce; resets to the first category when the dropdown closes.</td></tr>
+          <tr><td><code>LogoDownloadPanel.tsx</code></td><td>Preact island</td><td>Hidden "Looking for Datadog logos?" popover. <code>Header.astro</code> resolves the arrow SVG and labels at build time and mounts the island with <code>client:load</code>. Owns its open/closed state with <code>useState</code>; attaches click handlers to the logo anchor (via <code>externalContext</code>) and the document. Mirrors Hugo's <code>.js-logo-download</code> behavior — open on first click w/ <code>preventDefault</code>, navigate on second, outside-click closes.</td></tr>
+          <tr><td><code>HeaderScroll.astro</code></td><td><code>&lt;script is:inline&gt;</code></td><td>Adds <code>.main-nav-scrolled</code> to <code>&lt;html&gt;</code> once <code>scrollY &gt; 30</code> at ≥992px (matching Hugo's <code>tailwind-main-nav.html</code>). The class snaps the nav from 130→65px, animates the bits logo 75→50px, and hides the wordmark — all via a shared 200ms ease-in-out transition.</td></tr>
+          <tr><td><code>MobileNav.astro</code></td><td>Astro (static)</td><td>Hamburger-triggered right-side overlay. Renders the home/docs/api quick-links (with icons), a functional search bar (the shared <code>SearchBar</code> island in its mobile variant), and the full documentation menu as a <code>&lt;details&gt;</code> accordion built at build time from <code>config/_default/menus/main.en.yaml</code> (the same source as Hugo's mobile nav). All sections are collapsed by default. The large tree is rendered here, never serialized into an island.</td></tr>
+          <tr><td><code>MobileNavSection.astro</code></td><td>Astro (static)</td><td>Recursive renderer for one node of the docs nav tree: a node with children becomes a collapsible <code>&lt;details&gt;</code> with a rotating caret; a leaf becomes a link. Indent grows with depth via an inline <code>--depth</code> custom property.</td></tr>
+          <tr><td><code>MobileNavToggle.tsx</code></td><td>Preact island</td><td>The hamburger button plus open/close behavior. Resolves the already-rendered overlay and backdrop via <code>externalContext</code> and flips the plain <code>mobile-nav__panel--open</code> / <code>mobile-nav__backdrop--open</code> modifier classes; no menu data crosses the island boundary.</td></tr>
+          <tr><td><code>NavIcon.astro</code></td><td>Static</td><td>Renders a websites-modules iconfont icon (<code>&lt;i class="icon-&#123;name&#125;"&gt;</code>) and colors it with <code>currentColor</code>.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Data flow</h2>
+      <p>Menu data is assembled at build time by <code>getHeaderData()</code> in <code>src/lib/componentUtils/menuData.ts</code>, which reads <code>data/menu_data/*.yaml</code> directly from <code>@websites-modules</code>, runs labels through <code>i18n(key)</code>, and resolves URLs so relative paths become <code>https://www.datadoghq.com/…</code>. The component receives a single structured view model with named slots (<code>product</code>, <code>solutions</code>, <code>about</code>, <code>blog</code>, <code>login</code>, <code>getStarted</code>, <code>leftLinks</code>) — no <code>find</code>/<code>filter</code> in the template. The mobile overlay's accordion is sourced separately by <code>getDocsNavTree()</code> in <code>src/lib/componentUtils/docsNavMenu.ts</code> from <code>config/_default/menus/main.en.yaml</code>.</p>
+
+      <h2>Dimensions (Hugo-identical)</h2>
+      <table>
+        <thead>
+          <tr><th>Viewport</th><th>Header height</th><th>Behavior on scroll</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&lt;992px</td><td>60px</td><td>No change</td></tr>
+          <tr><td>≥992px, <code>scrollY ≤ 30</code></td><td>130px</td><td>Resting state.</td></tr>
+          <tr><td>≥992px, <code>scrollY &gt; 30</code></td><td>65px</td><td><code>.main-nav-scrolled</code> is added: the nav, bits logo, and wordmark all transition together over 200ms ease-in-out.</td></tr>
+        </tbody>
+      </table>
+
+      <p>The corresponding tokens live in the Hugo-identical section of <code>src/styles/tokens.css</code>.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

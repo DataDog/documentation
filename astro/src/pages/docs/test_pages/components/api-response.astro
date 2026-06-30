@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiResponse from '@components/ApiResponse/ApiResponse.astro';
+import type { ResponseData } from '@components/ApiResponse/ApiResponse.astro';
+
+const title = 'ApiResponse';
+
+const responses: ResponseData[] = [
+  {
+    statusCode: '200',
+    description: 'OK',
+    schema: [
+      {
+        name: 'data',
+        type: 'object',
+        required: true,
+        deprecated: false,
+        readOnly: false,
+        description: 'The response data.',
+        children: [
+          { name: 'id', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Unique identifier.' },
+          { name: 'type', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Resource type.' },
+        ],
+      },
+    ],
+    examples: [{ name: 'Example response', value: '{ }' }],
+  },
+  {
+    statusCode: '403',
+    description: 'Forbidden',
+    schema: [
+      { name: 'errors', type: '[string]', required: true, deprecated: false, readOnly: false, description: 'A list of errors.' },
+    ],
+    examples: [{ name: 'Error response', value: '{ }' }],
+  },
+  {
+    statusCode: '404',
+    description: 'Not Found',
+    examples: [{ name: 'Not found', value: '{ }' }],
+  },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiResponse</h1>
+
+      <p>A response section with status code tabs, each containing a Model/Example toggle. Model view uses ApiSchemaTable; Example view shows JSON.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>responses</code></td><td><code>ResponseData[]</code></td><td>&mdash;</td><td>Array of response data, one per status code</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Multi-status response</h3>
+      <ApiResponse responses={responses} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

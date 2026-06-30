@@ -1,0 +1,175 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
+import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
+import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
+import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
+import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
+import { stripLocalePrefix } from "@lib/i18n/locale";
+import { buildHreflangAlternates } from "@lib/seo";
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+
+interface Props {
+  title: string;
+  description?: string;
+  categories: ApiCategoryStub[];
+  activeCategory?: ApiCategory;
+  currentOperationSlug?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title,
+  description,
+  categories,
+  activeCategory,
+  currentOperationSlug,
+  breadcrumbs,
+} = Astro.props;
+const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
+  Astro.url.pathname,
+);
+const hreflang = buildHreflangAlternates(unprefixedPath);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={currentLang}
+  hreflang={hreflang}
+>
+  <div class="api-shell">
+    <ApiSideNav
+      categories={categories}
+      activeCategory={activeCategory}
+      currentOperationSlug={currentOperationSlug}
+    />
+    <main class="api-main">
+      <div class="api-toolbar">
+        <div class="api-toolbar__left">
+          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+          <CopyPageButtonIsland lang={currentLang} variant="icon" />
+        </div>
+        <div class="api-toolbar__selectors">
+          <LanguageSelectorIsland
+            currentLang={currentLang}
+            pathname={Astro.url.pathname}
+          />
+          <RegionSelectorIsland />
+        </div>
+      </div>
+      <div class="prose">
+        <slot />
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .api-shell {
+    display: flex;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  /* Hugo caps `.container.container__content` at 1336px from 1400px up
+     (the `.container` @1400px !important rule wins over the base 1440px).
+     Match that step so Astro's page body is never wider than Hugo's. */
+  @media (min-width: 1400px) {
+    .api-shell {
+      max-width: 1336px;
+    }
+  }
+
+  .api-main {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-sm) var(--space-xl) var(--space-xl) 29px;
+  }
+
+  .api-toolbar__left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .api-toolbar__selectors {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .prose :global(h1:first-child) {
+    margin-top: var(--space-lg);
+  }
+
+  /* Negative left/right margin + matching padding extends the toolbar's
+     background across .api-main's left/right padding too. Without it, pill
+     shadows in the scrolling content peek through the unbacked padding
+     strip as they pass beneath the sticky toolbar. */
+  .api-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 calc(-1 * var(--space-xl)) var(--space-md) -29px;
+    position: sticky;
+    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
+    z-index: 5;
+    background: var(--color-bg);
+    padding: var(--space-sm) var(--space-xl) 0 29px;
+  }
+
+  @media (min-width: 992px) {
+    .api-toolbar {
+      top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+      transition: top 0.2s ease-in-out;
+    }
+
+    :global([data-scrolled]) .api-toolbar {
+      top: calc(
+        var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled)
+      );
+    }
+  }
+
+  :global([data-scrolled]) .api-toolbar {
+    padding: var(--space-md) var(--space-xl) var(--space-md) 29px;
+  }
+
+  @media (max-width: 991px) {
+    .api-shell > :global(nav) {
+      display: none;
+    }
+
+    .api-main {
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .api-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+      height: auto;
+      gap: var(--space-md);
+      margin: 0 calc(-1 * var(--space-lg)) 0;
+      padding: var(--space-sm) var(--space-lg) var(--space-md);
+    }
+
+    :global([data-scrolled]) .api-toolbar {
+      padding: var(--space-md) var(--space-lg);
+    }
+  }
+
+  /* Match the header container's max-width/centering at the tablet range so
+     content aligns with the logo and hamburger. Below 768px the header
+     container is also unconstrained, so no max-width is needed there. */
+  /* The header container uses content-box sizing, so max-width: 750px gives
+     a total outer box of 750 + 12 + 12 = 774px. Match that so api-shell
+     centers on the same axis as the header container. */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .api-shell {
+      max-width: 774px;
+    }
+  }
+</style>

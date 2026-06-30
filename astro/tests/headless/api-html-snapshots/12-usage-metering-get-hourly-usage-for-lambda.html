@@ -1,0 +1,1033 @@
+<main class="api-main" data-astro-cid-hnecgxtf>
+  <div class="api-toolbar" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
+        <ol class="breadcrumbs__list _breadcrumbs__list_325516">
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/"> Docs </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/api/latest/"> API </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <span
+              class="breadcrumbs__label _breadcrumbs__MOD breadcrumbs__label--current _breadcrumbs__label--current_325516"
+              aria-current="page"
+            >
+              Get hourly usage for Lambda
+            </span>
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X1"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+        ssr
+        client="idle"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_ddc1bf copy-page-button--icon _copy-page-button--icon_ddc1bf"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/LanguageSelector/LanguageSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"LanguageSelector","value":true}'
+        await-children
+        ><div class="language-selector _language-selector_edb83c">
+          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
+          ><span class="select _select_d4facd"
+            ><select id="language-select" class="select__control _select__control_d4facd">
+              <option selected value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="es">Español</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <astro-island
+        uid="X3"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/RegionSelector/RegionSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"RegionSelector","value":true}'
+        await-children
+        ><div class="region-selector _region-selector_4de5ea">
+          <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><span class="select _select_d4facd"
+            ><select id="region-select" class="select__control _select__control_d4facd">
+              <option selected value="us">US1</option>
+              <option value="us3">US3</option>
+              <option value="us5">US5</option>
+              <option value="eu">EU</option>
+              <option value="ap1">AP1</option>
+              <option value="ap2">AP2</option>
+              <option value="gov">US1-FED</option>
+              <option value="gov2">US2-FED</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+    </div>
+  </div>
+  <div class="prose" data-astro-cid-hnecgxtf>
+    <div class="api-page-header _api-page-header_f3b303">
+      <h1 class="api-page-header__title _api-page-header__title_f3b303">Get hourly usage for Lambda</h1>
+      <div class="api-page-header__copy _api-page-header__copy_f3b303">
+        <astro-island
+          uid="X4"
+          component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+          ssr
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"CopyPageButton","value":true}'
+          await-children
+          ><button aria-label="Copy page" class="copy-page-button _copy-page-button_ddc1bf">
+            <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+                />
+              </svg> </span
+            ><span class="copy-page-button__label _copy-page-button__label_ddc1bf"
+              ><span
+                class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf copy-page-button__label-text--visible _copy-page-button__label-text--visible_ddc1bf"
+                >Copy page</span
+              ><span aria-hidden="true" class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf"
+                >Copied</span
+              ></span
+            ></button
+          ><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <div id="api-endpoint-get-hourly-usage-for-lambda" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+      <astro-island
+        uid="X5"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/Tabs/TabsNav"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"TabsNav","value":true}'
+        await-children
+        ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+          <button
+            role="tab"
+            aria-selected="true"
+            aria-controls="get-hourly-usage-for-lambda-v1"
+            aria-disabled="true"
+            disabled
+            data-tab-index="0"
+            class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+          >
+            v1 (latest)
+          </button>
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <div id="get-hourly-usage-for-lambda-v1" class="tabs__panel tabs__panel--active" role="tabpanel">
+        <section
+          id="get-hourly-usage-for-lambda"
+          class="api-endpoint _api-endpoint_071384"
+          data-operation-id="GetUsageLambda"
+        >
+          <div class="alert _alert_be9a30 alert--warning _alert--warning_be9a30">
+            <strong class="alert__label _alert__label_be9a30">WARNING</strong>
+            This endpoint is deprecated.
+          </div>
+          <div class="api-endpoint__url-line _api-endpoint__url-line_071384">
+            <span class="api-method-badge _api-method-badge_d09f62 api-method-badge--get _api-method-badge--get_d09f62">
+              GET </span
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="us"
+              >https://api.datadoghq.com/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="us3"
+              >https://api.us3.datadoghq.com/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="us5"
+              >https://api.us5.datadoghq.com/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="eu"
+              >https://api.datadoghq.eu/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="ap1"
+              >https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="ap2"
+              >https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda</code
+            ><code class="api-endpoint__path _api-endpoint__path_071384" data-region="gov"
+              >https://api.ddog-gov.com/api/v1/usage/aws_lambda</code
+            ><code
+              class="api-endpoint__path _api-endpoint__path_071384 api-endpoint__path--unsupported _api-endpoint__path--unsupported_071384"
+              data-region="gov2"
+            >
+              Not supported in the US2-FED region
+            </code>
+          </div>
+          <h3>Overview</h3>
+          <p>
+            Get hourly usage for Lambda. <strong>Note:</strong> This endpoint has been deprecated. Hourly usage data for
+            all products is now available in the
+            <a href="https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family"
+              >Get hourly usage by product family API</a
+            >. Refer to
+            <a href="https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/"
+              >Migrating from the V1 Hourly Usage APIs to V2</a
+            >
+            for the associated migration guide.
+          </p>
+          <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
+            <strong>Permissions: </strong><code>usage_read</code>
+          </div>
+          <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
+            <p>
+              OAuth apps require the <code>usage_read</code>
+              authorization scope to access this endpoint.
+            </p>
+          </div>
+          <div class="api-endpoint__section _api-endpoint__section_071384">
+            <h3>Arguments</h3>
+            <div id="schema-table-X22" class="schema-table">
+              <div class="schema-table__table _schema-table__table_d7636a">
+                <div class="schema-table__columns _schema-table__columns_d7636a">
+                  <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                  <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+                  <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
+                    Description
+                  </div>
+                </div>
+                <div class="schema-table__row _schema-table__row_d7636a" data-field-name="start_hr" data-depth="0">
+                  <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                    <span class="schema-table__name-group _schema-table__name-group_d7636a">
+                      <code class="schema-table__name _schema-table__name_d7636a">start_hr</code>
+                      <span class="schema-table__required _schema-table__required_d7636a"> [required]</span>
+                    </span>
+                  </div>
+                  <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                    <span class="schema-table__type _schema-table__type_d7636a">string (date-time)</span>
+                  </div>
+                  <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                    <span
+                      >Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this
+                      hour.</span
+                    >
+                  </div>
+                </div>
+                <div class="schema-table__row _schema-table__row_d7636a" data-field-name="end_hr" data-depth="0">
+                  <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+                    <span class="schema-table__name-group _schema-table__name-group_d7636a">
+                      <code class="schema-table__name _schema-table__name_d7636a">end_hr</code>
+                    </span>
+                  </div>
+                  <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+                    <span class="schema-table__type _schema-table__type_d7636a">string (date-time)</span>
+                  </div>
+                  <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+                    <span
+                      >Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending
+                      <strong>before</strong> this hour.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <astro-island
+                uid="X6"
+                component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/ApiSchemaTable/ApiSchemaTableNav"
+                ssr
+                client="idle"
+                before-hydration-url="astro:scripts/before-hydration.js"
+                opts='{"name":"ApiSchemaTableNav","value":true}'
+                await-children
+                ><span hidden aria-hidden="true"></span
+                ><!--astro:end--></astro-island
+              >
+            </div>
+          </div>
+          <div class="api-response _api-response_d8cf04">
+            <h3 class="api-response__heading _api-response__heading_d8cf04">Response</h3>
+            <div id="api-response-X23" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+              <astro-island
+                uid="X7"
+                component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/Tabs/TabsNav"
+                ssr
+                client="load"
+                before-hydration-url="astro:scripts/before-hydration.js"
+                opts='{"name":"TabsNav","value":true}'
+                await-children
+                ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+                  <button
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="api-response-X23-panel-0"
+                    data-tab-index="0"
+                    class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+                  >
+                    200</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-response-X23-panel-1"
+                    data-tab-index="1"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    400</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-response-X23-panel-2"
+                    data-tab-index="2"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    403</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-response-X23-panel-3"
+                    data-tab-index="3"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    429
+                  </button>
+                </div>
+                <!--astro:end--></astro-island
+              >
+              <div
+                id="api-response-X23-panel-0"
+                role="tabpanel"
+                class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+              >
+                <div class="api-response__panel api-response__panel--200">
+                  <p class="api-response__description _api-response__description_d8cf04">OK</p>
+                </div>
+              </div>
+              <div id="api-response-X23-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-response__panel api-response__panel--400">
+                  <p class="api-response__description _api-response__description_d8cf04">Bad Request</p>
+                </div>
+              </div>
+              <div id="api-response-X23-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-response__panel api-response__panel--403">
+                  <p class="api-response__description _api-response__description_d8cf04">
+                    Forbidden - User is not authorized
+                  </p>
+                </div>
+              </div>
+              <div id="api-response-X23-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-response__panel api-response__panel--429">
+                  <p class="api-response__description _api-response__description_d8cf04">Too many requests</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="api-code-example _api-code-example_c15178">
+            <h3 class="api-code-example__heading _api-code-example__heading_c15178">Code Example</h3>
+            <div id="api-code-example-X24" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+              <astro-island
+                uid="X8"
+                component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/Tabs/TabsNav"
+                ssr
+                client="load"
+                before-hydration-url="astro:scripts/before-hydration.js"
+                opts='{"name":"TabsNav","value":true}'
+                await-children
+                ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+                  <button
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="api-code-example-X24-panel-0"
+                    data-tab-index="0"
+                    class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+                  >
+                    Curl</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-1"
+                    data-tab-index="1"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    Python</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-2"
+                    data-tab-index="2"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    Ruby</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-3"
+                    data-tab-index="3"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    Go</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-4"
+                    data-tab-index="4"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    Java</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-5"
+                    data-tab-index="5"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    TypeScript</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="api-code-example-X24-panel-6"
+                    data-tab-index="6"
+                    class="tabs__button _tabs__button_d3f7cd"
+                  >
+                    Rust
+                  </button>
+                </div>
+                <!--astro:end--></astro-island
+              >
+              <div
+                id="api-code-example-X24-panel-0"
+                role="tabpanel"
+                class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+              >
+                <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X25" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X25-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X9"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X26" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X26-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X10"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"us3.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.us3.datadoghq.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X27" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X27-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X11"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"us5.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.us5.datadoghq.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X28" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X28-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X12"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"datadoghq.eu"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.datadoghq.eu/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X29" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X29-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X13"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ap1.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X30" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X30-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X14"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ap2.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X31" class="code-block _code-block_961fb8" data-language="bash">
+                    <div id="code-block-X31-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X15"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ddog-gov.com"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> GET</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ddog-gov.com/api/v1/usage/aws_lambda?start_hr=</span><span style="color:#000000;--shiki-dark:#E0E0E0">${START_HR}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X32" class="code-block _code-block_961fb8" data-language="python">
+                    <div id="code-block-X32-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X16"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">"""</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datetime </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datetime</span></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> dateutil.relativedelta </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> relativedelta</span></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ApiClient, Configuration</span></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client.v1.api.usage_metering_api </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> UsageMeteringApi</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">configuration = Configuration()</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">with</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ApiClient(configuration) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">as</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api_client:</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    api_instance = UsageMeteringApi(api_client)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    response = api_instance.get_usage_lambda(</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        start_hr=(datetime.now() + relativedelta(days=-</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">5</span><span style="color:#000000;--shiki-dark:#E0E0E0">)),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        end_hr=(datetime.now() + relativedelta(days=-</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">)),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    print</span><span style="color:#000000;--shiki-dark:#E0E0E0">(response)</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X33" class="code-block _code-block_961fb8" data-language="ruby">
+                    <div id="code-block-X33-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X17"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">require</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "datadog_api_client"</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">api_instance = </span><span style="color:#A90D91;--shiki-dark:#D67AD6">DatadogAPIClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">V1</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">UsageMeteringAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">new</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">opts = {</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  end_hr</span><span style="color:#000000;--shiki-dark:#E0E0E0">: (</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Time</span><span style="color:#000000;--shiki-dark:#E0E0E0">.now + -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">86400</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">p</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api_instance.get_usage_lambda((</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Time</span><span style="color:#000000;--shiki-dark:#E0E0E0">.now + -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">5</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">86400</span><span style="color:#000000;--shiki-dark:#E0E0E0">), opts)</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X34" class="code-block _code-block_961fb8" data-language="go">
+                    <div id="code-block-X34-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X18"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">package</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> (</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"context"</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"encoding/json"</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"fmt"</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"os"</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"time"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1"</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">func</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main() {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	ctx := datadog.NewDefaultContext(context.Background())</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	configuration := datadog.NewConfiguration()</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	apiClient := datadog.NewAPIClient(configuration)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	api := datadogV1.NewUsageMeteringApi(apiClient)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	resp, r, err := api.GetUsageLambda(ctx, time.Now().AddDate(</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">, -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">5</span><span style="color:#000000;--shiki-dark:#E0E0E0">), *datadogV1.NewGetUsageLambdaOptionalParameters().WithEndHr(time.Now().AddDate(</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">, -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">)))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">	if</span><span style="color:#000000;--shiki-dark:#E0E0E0"> err != </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">nil</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Error when calling `UsageMeteringApi.GetUsageLambda`: %v</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, err)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Full HTTP response: %v</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, r)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	responseContent, _ := json.MarshalIndent(resp, </span><span style="color:#C41A16;--shiki-dark:#E5736E">""</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"  "</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	fmt.Fprintf(os.Stdout, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Response from `UsageMeteringApi.GetUsageLambda`:</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">%s</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, responseContent)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-4" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X35" class="code-block _code-block_961fb8" data-language="java">
+                    <div id="code-block-X35-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X19"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiException</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">UsageMeteringApi</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">UsageMeteringApi</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">GetUsageLambdaOptionalParameters</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">model</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">UsageLambdaResponse</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> java</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">time</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">OffsetDateTime</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">public</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> class</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> Example</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">  public</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> static</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> void</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main(</span><span style="color:#A90D91;--shiki-dark:#D67AD6">String</span><span style="color:#000000;--shiki-dark:#E0E0E0">[] args) {</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    ApiClient</span><span style="color:#000000;--shiki-dark:#E0E0E0"> defaultClient = ApiClient.getDefaultApiClient();</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    UsageMeteringApi</span><span style="color:#000000;--shiki-dark:#E0E0E0"> apiInstance = </span><span style="color:#A90D91;--shiki-dark:#D67AD6">new</span><span style="color:#000000;--shiki-dark:#E0E0E0"> UsageMeteringApi(defaultClient);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    try</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">      UsageLambdaResponse</span><span style="color:#000000;--shiki-dark:#E0E0E0"> result =</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          apiInstance.getUsageLambda(</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">              OffsetDateTime.now().plusDays(-</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">5</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">              new</span><span style="color:#000000;--shiki-dark:#E0E0E0"> GetUsageLambdaOptionalParameters().endHr(OffsetDateTime.now().plusDays(-</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">)));</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.out.println(result);</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">catch</span><span style="color:#000000;--shiki-dark:#E0E0E0"> (</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiException</span><span style="color:#000000;--shiki-dark:#E0E0E0"> e) {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Exception when calling UsageMeteringApi#getUsageLambda"</span><span style="color:#000000;--shiki-dark:#E0E0E0">);</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Status code: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getCode());</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Reason: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getResponseBody());</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Response headers: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getResponseHeaders());</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      e.printStackTrace();</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  }</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-5" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X36" class="code-block _code-block_961fb8" data-language="typescript">
+                    <div id="code-block-X36-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X20"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">/**</span></span>
+<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"> * Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"> */</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> { client, v1 } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">from</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "@datadog/datadog-api-client"</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> configuration = client.createConfiguration();</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> apiInstance = new v1.UsageMeteringApi(configuration);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> params: </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">UsageMeteringApiGetUsageLambdaRequest</span><span style="color:#000000;--shiki-dark:#E0E0E0"> = {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  startHr: new Date(new Date().getTime() + -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">5</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">86400</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1000</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  endHr: new Date(new Date().getTime() + -</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">86400</span><span style="color:#000000;--shiki-dark:#E0E0E0"> * </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1000</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">apiInstance</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .getUsageLambda(params)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .then((data: </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">UsageLambdaResponse</span><span style="color:#000000;--shiki-dark:#E0E0E0">) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">=></span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    console.log(</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "API called successfully. Returned data: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + JSON.stringify(data)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    );</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  })</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .catch((error: </span><span style="color:#A90D91;--shiki-dark:#D67AD6">any</span><span style="color:#000000;--shiki-dark:#E0E0E0">) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">=></span><span style="color:#000000;--shiki-dark:#E0E0E0"> console.error(error));</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X24-panel-6" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X37" class="code-block _code-block_961fb8" data-language="rust">
+                    <div id="code-block-X37-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X21"
+                        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CodeBlock/CopyButton"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
+                          style="
+                            background-color: #ffffff;
+                            --shiki-dark-bg: #0d1117;
+                            color: #000000;
+                            --shiki-dark: #e0e0e0;
+                          "
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Get hourly usage for Lambda returns "OK" response</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> chrono::{</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">DateTime</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Utc</span><span style="color:#000000;--shiki-dark:#E0E0E0">};</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadog;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadogV1::api_usage_metering::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">GetUsageLambdaOptionalParams</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadogV1::api_usage_metering::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">UsageMeteringAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">#[tokio::main]</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">async</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> fn</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main() {</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> configuration = datadog::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Configuration</span><span style="color:#000000;--shiki-dark:#E0E0E0">::new();</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api = </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">UsageMeteringAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">::with_config(configuration);</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> resp = api</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        .get_usage_lambda(</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            DateTime::parse_from_rfc3339(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"2021-11-06T11:11:11+00:00"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">                .expect(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Failed to parse datetime"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">                .with_timezone(&#x26;</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Utc</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            GetUsageLambdaOptionalParams::default().end_hr(</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">                DateTime::parse_from_rfc3339(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"2021-11-08T11:11:11+00:00"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">                    .expect(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Failed to parse datetime"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">                    .with_timezone(&#x26;</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Utc</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            ),</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        )</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        .</span><span style="color:#A90D91;--shiki-dark:#D67AD6">await</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    if</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> let</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> Ok</span><span style="color:#000000;--shiki-dark:#E0E0E0">(value) = resp {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        println!(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span><span style="color:#C41A16;--shiki-dark:#E5736E">:#?</span><span style="color:#000000;--shiki-dark:#E0E0E0">}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, value);</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">else</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        println!(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span><span style="color:#C41A16;--shiki-dark:#E5736E">:#?</span><span style="color:#000000;--shiki-dark:#E0E0E0">}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, resp.unwrap_err());</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>

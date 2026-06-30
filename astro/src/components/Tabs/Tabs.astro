@@ -1,0 +1,39 @@
+---
+import { TabsNav } from "./TabsNav";
+import styles from "./Tabs.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  id: string;
+  labels: string[];
+  panelIds: string[];
+  /** Force a variant. Default auto-detects pills on overflow. */
+  variant?: "tabs" | "pills";
+  /**
+   * Optional parallel array: when `disabled[i]` is true, button `i` renders
+   * as non-interactive (e.g. a single-version pill on the API operation page).
+   * If omitted, all tabs are interactive.
+   */
+  disabled?: boolean[];
+}
+
+const { id, labels, panelIds, variant, disabled } = Astro.props;
+
+const rootClass = variant === "pills" ? cl("tabs", "tabs--pills") : cl("tabs");
+---
+
+<div id={id} class={rootClass}>
+  <TabsNav
+    client:load
+    labels={labels}
+    externalContext={{
+      scope: id,
+      entries: { tabsEl: id, tabPanelEls: panelIds },
+    }}
+    variant={variant}
+    disabled={disabled}
+  />
+  <slot />
+</div>

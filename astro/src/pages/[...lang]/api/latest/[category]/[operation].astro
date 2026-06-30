@@ -1,0 +1,172 @@
+---
+import ApiLayout from "@layouts/ApiLayout.astro";
+import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
+import Tabs from "@components/Tabs/Tabs.astro";
+import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
+import {
+  getCategoriesView,
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+  getOperationView,
+} from "@lib/api/viewsBuilder";
+import { renderMarkdown } from "@lib/api/markdownRenderer";
+import { highlightEndpoint } from "@lib/api/syntaxHighlighter";
+import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
+import { mdToMetaDescription } from "@lib/seo";
+import { i18n } from "@lib/i18n/i18n";
+import type { GetStaticPaths, GetStaticPathsResult } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: GetStaticPathsResult = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoriesView(lang)) {
+      for (const op of cat.operations) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            category: cat.slug,
+            operation: op.slug,
+          },
+        });
+        // Multi-version operations used to live at -v1 / -v2 slugs during
+        // the early Astro prototype. Emit those paths as redirect stubs so
+        // pre-existing links land on the unified page with the correct
+        // version tab active.
+        if (op.versions.length > 1) {
+          for (const v of op.versions) {
+            paths.push({
+              params: {
+                lang: lang === "en" ? undefined : lang,
+                category: cat.slug,
+                operation: `${op.slug}-${v}`,
+              },
+              props: {
+                redirectTo: `${localizedHref(lang, `/api/latest/${cat.slug}/${op.slug}/`)}#${op.slug}-${v}`,
+              },
+            });
+          }
+        }
+      }
+    }
+  }
+  return paths;
+};
+
+interface PageProps {
+  redirectTo?: string;
+}
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const catSlug = Astro.params.category;
+const opSlug = Astro.params.operation;
+if (
+  !catSlug ||
+  typeof catSlug !== "string" ||
+  !opSlug ||
+  typeof opSlug !== "string"
+) {
+  return new Response(null, { status: 404 });
+}
+
+const { redirectTo } = Astro.props as PageProps;
+
+const categories = await getCategoryStubsView(lang);
+const category = await getCategoryViewBySlug(catSlug, lang);
+if (!category) {
+  return new Response(null, { status: 404 });
+}
+
+const operation = redirectTo
+  ? undefined
+  : await getOperationView(catSlug, opSlug, lang);
+if (!redirectTo && !operation) {
+  return new Response(null, { status: 404 });
+}
+
+if (operation) {
+  for (const variant of operation.variants) {
+    await highlightEndpoint(variant);
+  }
+}
+
+const tabsId = operation ? `api-endpoint-${operation.slug}` : "";
+const panelIds = operation
+  ? operation.variants.map((v) => `${operation.slug}-${v.version}`)
+  : [];
+const tabLabels = operation
+  ? operation.variants.map((v, i) =>
+      i === 0 ? `${v.version} (latest)` : v.version,
+    )
+  : [];
+const tabDisabled = operation
+  ? operation.variants.map((_, _i) => operation.variants.length === 1)
+  : [];
+---
+
+{
+  redirectTo ? (
+    <html lang={lang}>
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />
+        <link rel="canonical" href={redirectTo} />
+        <title>Redirecting…</title>
+      </head>
+      <body>
+        <script is:inline define:vars={{ redirectTo }}>
+          window.location.replace(redirectTo);
+        </script>
+        <p>
+          Redirecting to <a href={redirectTo}>{redirectTo}</a>.
+        </p>
+      </body>
+    </html>
+  ) : (
+    operation && (
+      <ApiLayout
+        title={`${operation.summary} - ${category.name} - Datadog API`}
+        description={
+          mdToMetaDescription(operation.variants[0].description) ||
+          `${operation.summary} endpoint in the Datadog API.`
+        }
+        categories={categories}
+        activeCategory={category}
+        currentOperationSlug={opSlug}
+        breadcrumbs={[
+          { label: i18n("docs", lang), href: localizedHref(lang, "/") },
+          {
+            label: i18n("api", lang),
+            href: localizedHref(lang, "/api/latest/"),
+          },
+          { label: operation.summary },
+        ]}
+      >
+        <ApiPageHeader title={operation.summary} lang={lang} />
+        <Tabs
+          id={tabsId}
+          labels={tabLabels}
+          panelIds={panelIds}
+          variant="pills"
+          disabled={tabDisabled}
+        >
+          {operation.variants.map((variant, i) => (
+            <div
+              id={`${operation.slug}-${variant.version}`}
+              class:list={["tabs__panel", i === 0 && "tabs__panel--active"]}
+              role="tabpanel"
+              hidden={i !== 0}
+            >
+              <ApiEndpoint data={JSON.stringify(variant)}>
+                <Fragment set:html={renderMarkdown(variant.description)} />
+              </ApiEndpoint>
+            </div>
+          ))}
+        </Tabs>
+      </ApiLayout>
+    )
+  )
+}

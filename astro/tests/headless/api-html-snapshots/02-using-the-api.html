@@ -1,0 +1,238 @@
+<main class="api-main" data-astro-cid-hnecgxtf>
+  <div class="api-toolbar" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_325516">
+        <ol class="breadcrumbs__list _breadcrumbs__list_325516">
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/"> Docs </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <a class="breadcrumbs__link _breadcrumbs__link_325516" href="/api/latest/"> API </a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_325516">
+            <span
+              class="breadcrumbs__label _breadcrumbs__MOD breadcrumbs__label--current _breadcrumbs__label--current_325516"
+              aria-current="page"
+            >
+              Using the API
+            </span>
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X1"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+        ssr
+        client="idle"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_ddc1bf copy-page-button--icon _copy-page-button--icon_ddc1bf"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/LanguageSelector/LanguageSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"LanguageSelector","value":true}'
+        await-children
+        ><div class="language-selector _language-selector_edb83c">
+          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
+          ><span class="select _select_d4facd"
+            ><select id="language-select" class="select__control _select__control_d4facd">
+              <option selected value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="es">Español</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+      <astro-island
+        uid="X3"
+        component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/RegionSelector/RegionSelector"
+        ssr
+        client="load"
+        before-hydration-url="astro:scripts/before-hydration.js"
+        opts='{"name":"RegionSelector","value":true}'
+        await-children
+        ><div class="region-selector _region-selector_4de5ea">
+          <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><span class="select _select_d4facd"
+            ><select id="region-select" class="select__control _select__control_d4facd">
+              <option selected value="us">US1</option>
+              <option value="us3">US3</option>
+              <option value="us5">US5</option>
+              <option value="eu">EU</option>
+              <option value="ap1">AP1</option>
+              <option value="ap2">AP2</option>
+              <option value="gov">US1-FED</option>
+              <option value="gov2">US2-FED</option>
+            </select></span
+          >
+        </div>
+        <!--astro:end--></astro-island
+      >
+    </div>
+  </div>
+  <div class="prose" data-astro-cid-hnecgxtf>
+    <div class="api-page-header _api-page-header_f3b303">
+      <h1 class="api-page-header__title _api-page-header__title_f3b303">Using the API</h1>
+      <div class="api-page-header__copy _api-page-header__copy_f3b303">
+        <astro-island
+          uid="X4"
+          component-url="/Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/components/CopyPageButton/CopyPageButton"
+          ssr
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"CopyPageButton","value":true}'
+          await-children
+          ><button aria-label="Copy page" class="copy-page-button _copy-page-button_ddc1bf">
+            <span class="copy-page-button__icon _copy-page-button__icon_ddc1bf"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+                />
+              </svg> </span
+            ><span class="copy-page-button__label _copy-page-button__label_ddc1bf"
+              ><span
+                class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf copy-page-button__label-text--visible _copy-page-button__label-text--visible_ddc1bf"
+                >Copy page</span
+              ><span aria-hidden="true" class="copy-page-button__label-text _copy-page-button__label-text_ddc1bf"
+                >Copied</span
+              ></span
+            ></button
+          ><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <h2>Using the API</h2>
+    <p>
+      Use the Datadog HTTP API to access the Datadog platform programmatically. You can use the API to send data to
+      Datadog, build data visualizations, and manage your account.
+    </p>
+    <h2>Send data to Datadog</h2>
+    <p>
+      Use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also
+      use the API to send Synthetic test data, Logs, and Traces to Datadog.
+    </p>
+    <p><strong>Integrations endpoints</strong></p>
+    <p>Available integrations endpoints:</p>
+    <ul>
+      <li><a href="/api/v1/aws-integration/">AWS Integration</a></li>
+      <li><a href="/api/v1/aws-logs-integration/">AWS Logs Integration</a></li>
+      <li><a href="/api/v1/azure-integration/">Azure Integration</a></li>
+      <li><a href="/api/latest/cloudflare-integration/">Cloudflare Integration</a></li>
+      <li><a href="/api/latest/fastly-integration/">Fastly Integration</a></li>
+      <li><a href="/api/v1/gcp-integration/">Google Cloud Integration</a></li>
+      <li><a href="/api/latest/jira-integration/">Jira Integration</a></li>
+      <li><a href="/api/latest/microsoft-teams-integration/">Microsoft Teams Integration</a></li>
+      <li><a href="/api/latest/okta-integration/">Okta Integration</a></li>
+      <li><a href="/api/latest/opsgenie-integration/">Opsgenie Integration</a></li>
+      <li><a href="/api/v1/pagerduty-integration/">PagerDuty Integration</a></li>
+      <li><a href="/api/v1/slack-integration/">Slack Integration</a></li>
+      <li><a href="/api/v1/webhooks-integration/">Webhooks Integration</a></li>
+    </ul>
+    <p><strong>Platform endpoints</strong></p>
+    <p>Use these endpoints to post and fetch data to and from other parts of the Datadog platform:</p>
+    <ul>
+      <li>
+        The <a href="/api/v1/metrics/">metrics</a> endpoints allow you to post
+        <a href="/metrics/introduction/">metrics</a> data so it can be graphed on Datadog's dashboards and query metrics
+        from any time period.
+      </li>
+      <li>
+        The <a href="/api/v1/events/">events</a> endpoints allow you to post and fetch events to and from the
+        <a href="/events/">Datadog event explorer</a>.
+      </li>
+      <li>
+        Use the <a href="/api/v1/synthetics/">Synthetic Monitoring</a> endpoints to create, start, stop, and see
+        <a href="/synthetics/">Synthetic tests</a> results.
+      </li>
+      <li>
+        Use the <a href="/tracing/guide/send_traces_to_agent_by_api/">Tracing Agent API</a> to send traces to your
+        Datadog Agent, which then forwards them to Datadog.
+      </li>
+      <li>
+        Use the <a href="/llm_observability/evaluations/export_api">LLM Observability Export API</a> to access your LLM
+        Observability data for running external evaluations and exporting spans for offline storage.
+      </li>
+    </ul>
+    <h2>Visualize your data</h2>
+    <p>After you are sending data to Datadog, you can use the API to build data visualizations programmatically:</p>
+    <ul>
+      <li>
+        Build <a href="/api/v1/dashboards/">Dashboards</a> and view
+        <a href="/api/v1/dashboard-lists/">Dashboard Lists</a>
+      </li>
+      <li>Manage <a href="/api/v1/hosts/">host tags</a></li>
+      <li>Create <a href="/api/v1/embeddable-graphs/">Embeddable Graphs</a></li>
+      <li>Take a <a href="/api/v1/snapshots/">graph snapshot</a></li>
+      <li>
+        <a href="/api/v1/service-dependencies/">Service Dependencies</a> - see a list of your APM services and their
+        dependencies
+      </li>
+      <li>Create <a href="/api/v1/monitors/">Monitors</a></li>
+      <li><a href="/api/v1/service-checks/">Service Checks</a> - post check statuses for use with monitors</li>
+      <li>
+        Create and manage <a href="/api/v1/logs/">Logs</a>, <a href="/api/v1/logs-indexes/">Logs Indexes</a>, and
+        <a href="/api/v1/logs-pipelines/">Logs Pipelines</a>
+      </li>
+      <li>Get <a href="/api/v1/hosts/">Host</a> information for your organization</li>
+      <li>Create and manage <a href="/api/v1/service-level-objectives/">Service Level Objectives</a></li>
+      <li>Generate <a href="/api/v2/security-monitoring/">Security Monitoring</a> signals</li>
+    </ul>
+    <h2>Manage your account</h2>
+    <p>You can also use the Datadog API to manage your account programmatically:</p>
+    <ul>
+      <li>Manage <a href="/api/v1/users/">Users</a></li>
+      <li>Manage <a href="/api/v1/roles/">Roles</a></li>
+      <li>Manage your <a href="/api/v1/organizations/">Organization</a></li>
+      <li>Verify API and app keys with the <a href="/api/v1/authentication/">Authentication</a> endpoint</li>
+      <li>
+        Grant specific logs access with the <a href="/api/v2/logs-restriction-queries/">Logs Restriction Queries</a>
+      </li>
+      <li>Manage existing keys with <a href="/api/v1/key-management/">Key Management</a></li>
+      <li>
+        Get hourly, daily, and monthly usage across multiple facets of Datadog with the
+        <a href="/api/v1/usage-metering/">Usage Metering</a> endpoints
+      </li>
+      <li>See the list of IP prefixes belonging to Datadog with <a href="/api/v1/ip-ranges/">IP Ranges</a></li>
+    </ul>
+  </div>
+</main>

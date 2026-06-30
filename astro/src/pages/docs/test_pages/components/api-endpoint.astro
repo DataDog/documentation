@@ -1,0 +1,151 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiEndpoint from '@components/ApiEndpoint/ApiEndpoint.astro';
+import RegionSelectorIsland from '@components/RegionSelector/RegionSelectorIsland.astro';
+
+const title = 'ApiEndpoint';
+
+const completeEndpointJson = JSON.stringify({
+  operationId: 'GetDashboard',
+  summary: 'Get a dashboard',
+  slug: 'get-a-dashboard',
+  method: 'get',
+  path: '/api/v1/dashboard/{dashboard_id}',
+  description: 'Get a dashboard using the specified ID.',
+  version: 'v1',
+  deprecated: false,
+  unstable: false,
+  regionUrls: {
+    us: 'https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}',
+    eu: 'https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}',
+  },
+  pathParams: [
+    {
+      name: 'dashboard_id',
+      type: 'string',
+      required: true,
+      deprecated: false,
+      readOnly: false,
+      description: 'The ID of the dashboard.',
+    },
+  ],
+  queryParams: [],
+  headerParams: [],
+  responses: [
+    {
+      statusCode: '200',
+      description: 'OK',
+      schema: [
+        {
+          name: 'id',
+          type: 'string',
+          required: false,
+          deprecated: false,
+          readOnly: true,
+          description: 'Dashboard ID.',
+        },
+        {
+          name: 'title',
+          type: 'string',
+          required: true,
+          deprecated: false,
+          readOnly: false,
+          description: 'Title of the dashboard.',
+        },
+      ],
+      examples: [{ name: 'Example', value: '{ }' }],
+    },
+    {
+      statusCode: '403',
+      description: 'Forbidden',
+      examples: [{ name: 'Error', value: '{ }' }],
+    },
+  ],
+  codeExamples: [
+    {
+      language: 'curl',
+      label: 'Curl',
+      entries: [
+        {
+          description: 'Get a dashboard',
+          code: 'curl -X GET https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}',
+          syntax: 'bash',
+          regionVariants: {
+            us: { code: 'curl -X GET https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}' },
+            eu: { code: 'curl -X GET https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}' },
+          },
+        },
+      ],
+    },
+  ],
+});
+
+const deprecatedEndpointJson = JSON.stringify({
+  operationId: 'OldEndpoint',
+  summary: 'Old endpoint (deprecated)',
+  slug: 'old-endpoint',
+  method: 'delete',
+  path: '/api/v1/old',
+  description: '',
+  version: 'v1',
+  deprecated: true,
+  unstable: false,
+  newerVersionUrl: '/api/latest/dashboards/',
+  responses: [],
+  codeExamples: [],
+});
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiEndpoint</h1>
+
+      <p>The main composition component for rendering a complete API endpoint section. Takes a JSON blob of all endpoint data and renders all sub-components (status alerts, method badge, URL, description, arguments, request body, response, code examples).</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>data</code></td><td><code>string</code> (JSON)</td><td>&mdash;</td><td>JSON string of the full <code>EndpointData</code> object</td></tr>
+        </tbody>
+      </table>
+
+      <p>The component uses <code>regionUrls</code> on the endpoint data to render one URL variant per Datadog site. Any site missing from that map shows "Not supported in the X region". Use the selector below to switch sites and watch the URL + curl example update.</p>
+
+      <RegionSelectorIsland />
+
+      <h2>Examples</h2>
+
+      <h3>Complete endpoint</h3>
+      <ApiEndpoint data={completeEndpointJson}>
+        <p>Get a dashboard using the specified ID.</p>
+      </ApiEndpoint>
+
+      <h3>Deprecated endpoint</h3>
+      <ApiEndpoint data={deprecatedEndpointJson}>
+        <p>This endpoint has been deprecated in favor of a newer version.</p>
+      </ApiEndpoint>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

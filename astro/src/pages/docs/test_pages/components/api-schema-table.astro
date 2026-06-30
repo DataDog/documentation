@@ -1,0 +1,113 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
+
+const title = 'ApiSchemaTable';
+
+const flatFields: SchemaField[] = [
+  { name: 'dashboard_id', type: 'string', required: true, deprecated: false, readOnly: false, description: 'The ID of the dashboard.' },
+  { name: 'title', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Title of the dashboard.' },
+  { name: 'is_read_only', type: 'boolean', required: false, deprecated: false, readOnly: true, description: 'Whether the dashboard is read-only.' },
+];
+
+const nestedFields: SchemaField[] = [
+  {
+    name: 'data',
+    type: 'object',
+    required: true,
+    deprecated: false,
+    readOnly: false,
+    description: 'The main data wrapper.',
+    children: [
+      { name: 'type', type: 'string', required: true, deprecated: false, readOnly: false, description: 'The resource type.', enumValues: ['dashboards'] },
+      {
+        name: 'attributes',
+        type: 'object',
+        required: true,
+        deprecated: false,
+        readOnly: false,
+        description: 'Dashboard attributes.',
+        children: [
+          { name: 'title', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Title of the dashboard.' },
+          { name: 'description', type: 'string', required: false, deprecated: false, readOnly: false, description: 'Description of the dashboard.' },
+        ],
+      },
+    ],
+  },
+];
+
+const deprecatedFields: SchemaField[] = [
+  { name: 'old_field', type: 'string', required: false, deprecated: true, readOnly: false, description: 'This field is no longer used.' },
+  { name: 'api_key', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Your API key.' },
+];
+
+const enumFields: SchemaField[] = [
+  {
+    name: 'sort',
+    type: 'string',
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: 'Sort order for results.',
+    enumValues: ['asc', 'desc', 'name', '-name', 'created', '-created', 'modified', '-modified'],
+    defaultValue: 'asc',
+  },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiSchemaTable</h1>
+
+      <p>An interactive hierarchical table for displaying API parameters, request body fields, or response fields. Supports nested objects, union types, and expand/collapse.</p>
+
+      <p>The schema tree is fully rendered server-side, so the entire field hierarchy is in the static HTML even before hydration. The companion <code>ApiSchemaTableNav</code> island only flips BEM modifier classes and the <code>hidden</code> attribute on rows that are already in the DOM — it never receives the schema as a prop.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fields</code></td><td><code>SchemaField[]</code></td><td>&mdash;</td><td>Array of schema fields</td></tr>
+          <tr><td><code>title</code></td><td><code>string</code></td><td>&mdash;</td><td>Optional heading above the table</td></tr>
+          <tr><td><code>showExpandAll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the Expand All / Collapse All button</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Flat fields</h3>
+      <ApiSchemaTable fields={flatFields} title="Path Parameters" />
+
+      <h3>Nested fields</h3>
+      <ApiSchemaTable fields={nestedFields} />
+
+      <h3>Deprecated and required fields</h3>
+      <ApiSchemaTable fields={deprecatedFields} />
+
+      <h3>Enum values</h3>
+      <ApiSchemaTable fields={enumFields} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

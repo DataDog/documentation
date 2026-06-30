@@ -1,0 +1,95 @@
+---
+/**
+ * The API documentation menu for the mobile nav, shown on `/api/` pages in
+ * place of the main docs accordion.
+ *
+ * Reuses the docs accordion's BEM classes (`mobile-nav__section`,
+ * `mobile-nav__section-toggle`, `mobile-nav__sublist`, `mobile-nav__link`) so
+ * the two trees stay visually identical and share one set of styles — the only
+ * API-specific tweak is the `--compact` operation density. Each category is a
+ * collapsible <details> section; the active category starts expanded so users
+ * can browse and navigate operations without leaving the current page.
+ */
+import type { ApiCategory } from "@lib/api/schemas/views";
+import styles from "./MobileNav.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { localizedHref, type Locale } from "@lib/i18n/locale";
+import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
+
+interface Props {
+  categories: ApiCategory[];
+  activeCategorySlug?: string;
+  currentOperationSlug?: string;
+  lang: Locale;
+}
+
+const { categories, activeCategorySlug, currentOperationSlug, lang } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<ul class:list={[cl("mobile-nav__list"), cl("mobile-nav__list--api")]}>
+  {
+    categories.map((category) => {
+      const isActiveCategory = category.slug === activeCategorySlug;
+      const categoryHref = localizedHref(lang, `/api/latest/${category.slug}/`);
+      const isCategoryLandingPage = isActiveCategory && !currentOperationSlug;
+      return (
+        <li>
+          <details
+            class={cl("mobile-nav__section")}
+            data-level="0"
+            style="--depth:0"
+            open={isActiveCategory || undefined}
+          >
+            <summary
+              class={cl("mobile-nav__section-toggle")}
+              aria-current={isCategoryLandingPage ? "page" : undefined}
+            >
+              <span>{category.name}</span>
+              <span class={cl("mobile-nav__caret")} aria-hidden="true">
+                <svg viewBox="0 0 17.78 10.51" width="18">
+                  <polyline
+                    class={cl("mobile-nav__caret-arrow")}
+                    points="16.92 1.14 8.92 9.14 0.92 1.14"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <ul class={cl("mobile-nav__sublist")}>
+              {category.operations.map((operation) => {
+                const isActiveOperation =
+                  isActiveCategory && operation.slug === currentOperationSlug;
+                return (
+                  <li>
+                    <a
+                      href={`${categoryHref}${operation.slug}/`}
+                      class:list={[
+                        cl("mobile-nav__link"),
+                        cl("mobile-nav__link--compact"),
+                        isActiveOperation && cl("mobile-nav__link--active"),
+                      ]}
+                      data-level="1"
+                      style="--depth:1"
+                      aria-current={isActiveOperation ? "page" : undefined}
+                    >
+                      {operation.summary}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
+        </li>
+      );
+    })
+  }
+</ul>
+
+{/* Scroll the current page (operation link or active category summary, both
+    marked aria-current) near the top of the panel, just below the sticky
+    header, so it's visible the moment the overlay opens. */}
+<ScrollActiveIntoView
+  containerSelector="#mobile-nav"
+  headerSelector=".mobile-nav__header"
+  gap={12}
+/>

@@ -1,0 +1,40 @@
+---
+// Inline scroll listener that sets `data-scrolled` on <html> once the user
+// has scrolled past the threshold. The attribute drives the discrete shrink:
+// nav 130→65px, bits logo 75→50px, wordmark hidden, and the LogoDownloadPanel
+// offset. Matches Hugo's Tailwind nav partial (`tailwind-main-nav.html`
+// toggles `navScrolled` at `scrollY > 30`).
+---
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    var DESKTOP_MIN_WIDTH = parseInt(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--hugo-breakpoint-desktop')
+    );
+    var SCROLLED_THRESHOLD = 30;
+    var ticking = false;
+
+    function update() {
+      var scrolled = window.innerWidth >= DESKTOP_MIN_WIDTH
+        && window.scrollY > SCROLLED_THRESHOLD;
+      if (scrolled) {
+        root.dataset.scrolled = '';
+      } else {
+        delete root.dataset.scrolled;
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  })();
+</script>

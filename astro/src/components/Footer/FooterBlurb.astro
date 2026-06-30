@@ -1,0 +1,31 @@
+---
+/**
+ * Docs-only intro row that sits above the main footer columns. Hugo gates
+ * this on `repo_name == "documentation"`; since the Astro site IS the docs
+ * replacement, we always render it.
+ */
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import { resolveFooterUrl } from "@lib/componentUtils/footerMenus";
+
+const cl = classListFactory(styles);
+
+// TODO: Use translations
+const heading = "Can't find something?";
+const desc =
+  "Our friendly, knowledgeable solutions engineers are here to help!";
+const ctaLabel = "Contact Us";
+const ctaHref = resolveFooterUrl("help/");
+---
+
+<div class={cl("footer__blurb-row")}>
+  <div class={cl("footer__blurb-copy")}>
+    <h2 class={cl("footer__blurb-heading")}>{heading}</h2>
+    <p class={cl("footer__blurb-desc")}>{desc}</p>
+  </div>
+  <div class={cl("footer__blurb-cta")}>
+    <a class={cl("footer__cta-primary")} href={ctaHref}>
+      <span>{ctaLabel}</span>
+    </a>
+  </div>
+</div>

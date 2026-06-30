@@ -1,0 +1,22 @@
+---
+import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { Locale } from "@lib/i18n/locale";
+import styles from "./ApiPageHeader.module.css";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  title: string;
+  lang: Locale;
+}
+
+const { title, lang } = Astro.props;
+---
+
+<div class={cl("api-page-header")}>
+  <h1 class={cl("api-page-header__title")}>{title}</h1>
+  <div class={cl("api-page-header__copy")}>
+    <CopyPageButtonIsland lang={lang} />
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "name": "Authentication",
+  "slug": "authentication",
+  "description": "All requests to Datadog’s API must be authenticated.\nRequests that write data require reporting access and require an `API key`.\nRequests that read data require full access and also require an `application key`.\n\n**Note:** All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly when creating your client.\n\n[Manage your account’s API and application keys](https://app.datadoghq.com/organization-settings/) in Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys/) in the documentation.",
+  "operations": [
+    {
+      "operationId": "Validate",
+      "summary": "Validate API key",
+      "slug": "validate-api-key",
+      "menuOrder": 1,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/validate",
+        "us3": "https://api.us3.datadoghq.com/api/v1/validate",
+        "us5": "https://api.us5.datadoghq.com/api/v1/validate",
+        "eu": "https://api.datadoghq.eu/api/v1/validate",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/validate",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/validate",
+        "gov": "https://api.ddog-gov.com/api/v1/validate"
+      }
+    }
+  ],
+  "deprecated": false
+}

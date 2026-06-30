@@ -1,0 +1,66 @@
+.copy-page-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-brand);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+}
+
+.copy-page-button:hover {
+    color: var(--color-brand-hover);
+}
+
+.copy-page-button__icon {
+    display: flex;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.copy-page-button__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Stack the two label states in one grid cell so the slot sizes to the
+   wider of the two strings ("Copy page"). The grid column is auto-sized to
+   max-content, which locks the slot width to "Copy page" — flipping to
+   "Copied" leaves the column untouched, so the icon never shifts.
+   `justify-self: start` keeps each label flush against the column's start
+   edge: "Copied" sits at the same distance from the icon as "Copy page",
+   with the leftover space falling to the right of the label. */
+.copy-page-button__label {
+    display: inline-grid;
+}
+
+.copy-page-button__label-text {
+    grid-area: 1 / 1;
+    justify-self: start;
+    white-space: nowrap;
+    visibility: hidden;
+}
+
+.copy-page-button__label-text--visible {
+    visibility: visible;
+}
+
+/* Icon-only variant used in the sticky API toolbar. The full-label button
+   sits in the page header and scrolls away; this slim version takes its
+   place once the main button leaves the viewport. Hidden with `display:
+   none` (rather than `opacity: 0`) so the element doesn't reserve a flex
+   slot to the left of the language/region selectors while inactive. */
+.copy-page-button--icon {
+    display: none;
+    margin-bottom: 0;
+}
+
+.copy-page-button--icon-visible {
+    display: inline-flex;
+}

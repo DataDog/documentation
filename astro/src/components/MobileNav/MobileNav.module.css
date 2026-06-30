@@ -1,0 +1,326 @@
+/* Ported from ~/dd/websites-modules/assets/styles/components/_mobile-nav.scss.
+   Hugo-identical dimensions and timings.
+
+   The overlay is rendered at build time; the MobileNavToggle island flips the
+   plain `mobile-nav__panel--open` / `mobile-nav__backdrop--open` modifier
+   classes (it can't know the hashed names), so the open-state rules below reach
+   those plain classes via :global(). */
+
+.mobile-nav__panel {
+  transition: right 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  width: 100%;
+  background-color: var(--color-bg);
+  position: fixed;
+  top: var(--hugo-header-height);
+  right: var(--hugo-mobile-nav-offscreen-x);
+  overflow-y: auto;
+  height: calc(100% - var(--hugo-header-height));
+  z-index: var(--hugo-mobile-nav-z);
+  padding-bottom: var(--space-md);
+  box-sizing: border-box;
+}
+
+.mobile-nav__panel:global(.mobile-nav__panel--open) {
+  right: 0 !important;
+}
+
+@media (min-width: 480px) {
+  .mobile-nav__panel {
+    width: var(--hugo-mobile-nav-width-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .mobile-nav__panel {
+    display: none;
+  }
+}
+
+.mobile-nav__backdrop {
+  display: none;
+  pointer-events: none;
+  transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: fixed;
+  top: var(--hugo-header-height);
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--hugo-header-height));
+  background-color: var(--hugo-mobile-nav-bg-color);
+  opacity: 0;
+  z-index: var(--hugo-mobile-nav-bg-z);
+}
+
+.mobile-nav__backdrop:global(.mobile-nav__backdrop--open) {
+  display: block;
+  opacity: var(--hugo-mobile-nav-bg-opacity);
+  pointer-events: auto;
+}
+
+@media (min-width: 992px) {
+  .mobile-nav__backdrop {
+    display: none;
+  }
+}
+
+/* --- Sticky header (quick-links + search) ---
+   Pinned to the top of the scrolling panel so the Home/Docs/API row and the
+   search field stay visible while the menu list scrolls beneath. The opaque
+   background keeps scrolled-up menu items from showing through, and being a
+   positioned element it paints above the static list without an explicit
+   z-index. */
+
+.mobile-nav__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-bg);
+}
+
+/* --- Quick-links row (Home / Docs / API with icons) --- */
+
+.mobile-nav__quicknav {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
+}
+
+.mobile-nav__quicknav-link {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--hugo-nav-text);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  padding: var(--space-sm) 0;
+}
+
+.mobile-nav__quicknav-link:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__quicknav-icon {
+  width: var(--hugo-mobile-nav-quicknav-icon-size);
+  height: auto;
+}
+
+/* --- Search ---
+   The shared SearchBar island spans the full width of the mobile nav. It needs
+   only a bottom border: the quick-links row above it already draws a matching
+   bottom border that serves as the search field's top edge. */
+
+.mobile-nav__search {
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
+  background: var(--color-bg);
+}
+
+/* Keep a comfortable touch target while staying compact now that the header is
+   sticky. Targets the plain BEM class `cl()` also emits, so it stays scoped to
+   the mobile nav. */
+.mobile-nav__search :global(.search-bar__input) {
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* --- Accordion menu --- */
+
+.mobile-nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav__list > li {
+  list-style: none;
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
+}
+
+/* A section's left indent grows with its depth in the tree (--depth set inline). */
+.mobile-nav__section,
+.mobile-nav__link {
+  --indent: calc(
+    var(--hugo-mobile-nav-indent-base) + var(--depth, 0) *
+      var(--hugo-mobile-nav-indent-step)
+  );
+}
+
+.mobile-nav__section {
+  position: relative;
+}
+
+.mobile-nav__section-toggle {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--indent);
+  color: var(--hugo-nav-text);
+  font-size: var(--font-size-base);
+}
+
+/* Hide the native disclosure triangle. */
+.mobile-nav__section-toggle::-webkit-details-marker {
+  display: none;
+}
+.mobile-nav__section-toggle::marker {
+  content: "";
+}
+
+/* Top-level sections read as headings, matching Hugo's uppercase, semibold. */
+.mobile-nav__section[data-level="0"] > .mobile-nav__section-toggle {
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.mobile-nav__section-toggle:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__caret {
+  position: absolute;
+  right: var(--hugo-mobile-nav-caret-offset);
+  display: inline-flex;
+  align-items: center;
+  transition: transform 250ms ease;
+}
+
+.mobile-nav__caret-arrow {
+  fill: none;
+  stroke: var(--hugo-nav-text);
+  stroke-miterlimit: 10;
+  stroke-width: var(--border-width-thick);
+}
+
+/* Rotate the caret and brand-color the header when its section is open. */
+.mobile-nav__section[open] > .mobile-nav__section-toggle {
+  color: var(--hugo-nav-brand-primary);
+}
+.mobile-nav__section[open] > .mobile-nav__section-toggle .mobile-nav__caret {
+  transform: rotate(180deg);
+}
+.mobile-nav__section[open]
+  > .mobile-nav__section-toggle
+  .mobile-nav__caret-arrow {
+  stroke: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__sublist {
+  list-style: none;
+  padding: 0 0 var(--space-sm);
+  margin: 0;
+}
+
+.mobile-nav__sublist li {
+  list-style: none;
+  border: none;
+}
+
+.mobile-nav__link {
+  display: block;
+  padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end) var(--space-sm)
+    var(--indent);
+  color: var(--hugo-nav-text);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+}
+
+/* Sub-level links use black, matching Hugo's $black color for sub-menus. */
+.mobile-nav__link:not([data-level="0"]) {
+  color: var(--color-text);
+}
+
+/* Top-level leaf links match the heading styling of top-level sections. */
+.mobile-nav__link[data-level="0"] {
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+}
+
+.mobile-nav__link:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+/* Current page: brand-colored (purple) + semibold so it stands out at a glance,
+   matching the API nav's active treatment. Both classes are chained to match
+   the specificity of `.mobile-nav__link:not([data-level="0"])` above (which
+   sets sub-level links black); declared later, this then wins. */
+.mobile-nav__link.mobile-nav__link--active {
+  color: var(--hugo-nav-brand-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Tighter vertical rhythm for the API operation list, which can be long: keeping
+   rows close together fits more operations in the viewport and helps the active
+   page stay visible when its section is anchored. Single-class specificity
+   matches `.mobile-nav__link`'s padding shorthand and wins by source order. */
+.mobile-nav__link--compact {
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
+}
+
+/* --- Hamburger toggle (shown in mobile header row) --- */
+
+.mobile-nav__hamburger {
+  position: relative;
+  margin-left: auto;
+  padding: var(--space-sm) var(--hugo-mobile-nav-hamburger-padding-x);
+  background: transparent;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.mobile-nav__hamburger:focus {
+  outline: 0;
+}
+
+.mobile-nav__hamburger-bar {
+  display: block;
+  width: var(--hugo-mobile-nav-hamburger-bar-width);
+  height: var(--border-width-thick);
+  border-radius: var(--hugo-mobile-nav-hamburger-bar-radius);
+  background-color: var(--hugo-nav-text);
+}
+
+.mobile-nav__hamburger-bar + .mobile-nav__hamburger-bar {
+  margin-top: var(--hugo-mobile-nav-hamburger-bar-gap);
+}
+
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar {
+  opacity: 0;
+}
+
+.mobile-nav__hamburger--open::before,
+.mobile-nav__hamburger--open::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--hugo-mobile-nav-hamburger-bar-width);
+  height: var(--border-width-thick);
+  margin-top: calc(var(--border-width-thick) / -2);
+  margin-left: var(--hugo-mobile-nav-hamburger-bar-offset-x);
+  border-radius: var(--hugo-mobile-nav-hamburger-bar-radius);
+  background-color: var(--hugo-nav-text);
+}
+
+.mobile-nav__hamburger--open::before {
+  transform: rotate(45deg);
+}
+
+.mobile-nav__hamburger--open::after {
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 992px) {
+  .mobile-nav__hamburger {
+    display: none;
+  }
+}

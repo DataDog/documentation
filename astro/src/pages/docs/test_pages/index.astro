@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Alert from '@components/Alert/Alert.astro';
+
+const docs = await getCollection('docs');
+const markdocComponents = docs
+  .filter((entry) => entry.id.startsWith('test_pages/components/'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+interface AstroTestPage {
+  slug: string;
+  title: string;
+  type: 'static' | 'interactive';
+  description: string;
+}
+
+const astroComponents: AstroTestPage[] = [
+  {
+    slug: 'announcement-banner',
+    title: 'Announcement Banner',
+    type: 'interactive',
+    description: 'Static Astro banner ported from the Hugo announcement_banner partial. No client-side scripts.',
+  },
+  {
+    slug: 'api-code-example',
+    title: 'ApiCodeExample',
+    type: 'interactive',
+    description: 'Astro wrapper composing Tabs (Preact island for tab switching) and CodeBlock (Preact island for copy/collapse).',
+  },
+  {
+    slug: 'api-endpoint',
+    title: 'ApiEndpoint',
+    type: 'interactive',
+    description: 'Astro wrapper that assembles all endpoint sub-components. Renders params, request body, responses, and code examples; delegates interactive schema expansion to ApiSchemaTable (Preact island, client:load).',
+  },
+  {
+    slug: 'api-method-badge',
+    title: 'ApiMethodBadge',
+    type: 'static',
+    description: 'Pure Astro. Renders a color-coded badge for an HTTP method (GET, POST, etc.).',
+  },
+  {
+    slug: 'api-response',
+    title: 'ApiResponse',
+    type: 'interactive',
+    description: 'Astro wrapper composing nested Tabs (Preact island for status code switching), ApiSchemaTable (Preact island for expand/collapse), and CodeBlock (Preact island for copy).',
+  },
+  {
+    slug: 'api-schema-table',
+    title: 'ApiSchemaTable',
+    type: 'interactive',
+    description: 'Astro shell renders the full schema tree at build time; a tiny Preact island (client:idle) toggles expand/collapse on the existing DOM with event delegation.',
+  },
+  {
+    slug: 'copy-page-button',
+    title: 'CopyPageButton',
+    type: 'interactive',
+    description: 'Preact island (client:idle). Fetches the .md version of the current page on hover/click and copies it to clipboard. Falls back to DOM text extraction if the .md fetch fails.',
+  },
+  {
+    slug: 'footer',
+    title: 'Footer',
+    type: 'interactive',
+    description: 'Astro wrapper with three Preact islands (all client:visible): FooterAccordion (collapsible nav sections on mobile), LanguageSelector (language picker popup), and FreeTrialModal (sign-up modal).',
+  },
+  {
+    slug: 'header',
+    title: 'Header',
+    type: 'interactive',
+    description: 'Astro wrapper with Preact islands (all client:load): ProductMegaMenu (mega-menu dropdown), NavDropdown (dropdowns for Solutions/About/Blog), and MobileNav (full mobile navigation drawer).',
+  },
+  {
+    slug: 'placeholder',
+    title: 'Placeholder',
+    type: 'static',
+    description: 'Pure Astro. Visual marker for unimplemented component slots during development.',
+  },
+  {
+    slug: 'search-bar',
+    title: 'SearchBar',
+    type: 'interactive',
+    description: 'Preact island. Reads from Hugo\'s Typesense cluster, popup-only.',
+  },
+  {
+    slug: 'select',
+    title: 'Select',
+    type: 'interactive',
+    description: 'Preact wrapper around a native <select> that applies the shared Hugo-style chevron and form styling. Used by LanguageSelector and RegionSelector.',
+  },
+];
+---
+
+<BaseLayout title="Test Pages">
+  <div class="docs-page">
+    <div class="prose">
+      <h1>Test Pages</h1>
+
+      <Alert level="warning">
+        To verify component hydration, <strong>you must build these pages with <code>npm run build</code>, not <code>npm run dev</code>!</strong>
+      </Alert>
+
+      <h2>Integration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/docs/test_pages/integration/typography/">Typography</a></td>
+            <td>Verify vanilla Markdown elements such as headings and links.</td>
+          </tr>
+          <tr>
+            <td><a href="/docs/test_pages/integration/nested-content/">Nested content</a></td>
+            <td>Verify the rendering and hydration of components nested inside other components, such as a code block inside a tab.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Markdoc components</h2>
+      <p>Authored as <code>.mdoc</code> files and rendered through the Markdoc pipeline.</p>
+      <p><a href="/api/latest/">&larr; API docs</a></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Type</th>
+            <th>Architecture</th>
+          </tr>
+        </thead>
+        <tbody>
+          {markdocComponents.map((entry) => (
+            <tr>
+              <td><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></td>
+              <td>{entry.data.type ?? ''}</td>
+              <td>{entry.data.description ?? ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>Astro components</h2>
+      <p>Authored as standalone <code>.astro</code> pages — used directly in Astro layouts, not through Markdoc.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Type</th>
+            <th>Architecture</th>
+          </tr>
+        </thead>
+        <tbody>
+          {astroComponents.map((entry) => (
+            <tr>
+              <td><a href={`/docs/test_pages/components/${entry.slug}/`}>{entry.title}</a></td>
+              <td>{entry.type}</td>
+              <td>{entry.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    text-align: left;
+    padding: var(--space-xs) var(--space-sm);
+    border-bottom: 1px solid var(--color-surface-border);
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    border-bottom-width: 2px;
+  }
+
+  td:first-child {
+    white-space: nowrap;
+  }
+
+  table a {
+    text-decoration: none;
+  }
+</style>
