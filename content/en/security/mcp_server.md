@@ -46,7 +46,7 @@ You can use the `security` toolset to:
 - **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
-- **Investigate indicators of compromise**: Search and retrieve IP addresses, domains, URLs, and file hashes matched against threat intelligence feeds. Review individual indicators and update their triage state.
+- **Investigate indicators of compromise (IoCs)**: Search and retrieve IP addresses, domains, URLs, and file hashes matched against threat intelligence feeds. Review individual indicators and update their triage state.
 
 ## Quickstart
 
