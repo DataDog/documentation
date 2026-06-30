@@ -1,6 +1,6 @@
 ---
 title: Adaptive Polling of CloudWatch Metrics
-private: true
+private: false
 description: "Adaptive Polling of CloudWatch Metrics"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -8,13 +8,9 @@ further_reading:
   text: "AWS Integration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/adaptive-metric-polling/" header="Join the Preview!" btn_hidden="false" >}}
-  Adaptive Polling of CloudWatch Metrics is in Preview.
-{{< /callout >}} 
-
 ## Overview
 
-When Datadog queries metrics in CloudWatch on your behalf, it can lead to increased CloudWatch cost due to `GetMetricData` (GMD) API calls.
+When Datadog queries metrics in CloudWatch on your behalf, it incurs AWS CloudWatch costs due to `GetMetricData` (GMD) API calls.
 
 Adaptive Polling helps you save costs by reducing the polling frequency of metrics that haven't been queried (used in monitors, dashboards, notebooks, or metric queries) for at least 30 days. Polling of unqueried metrics is automatically throttled to one-hour intervals.
 
