@@ -78,7 +78,7 @@ $$A = \text"total number of metrics"\ \×\ \text"average number of tag keys per 
 
 $$B = \text"average length of each tag key"\ + (\text"value_limit"\ \×\ \text"average length of tag values")$$
 
-$$\text"Memory usage" = A \×\ B$$
+$$\text"Memory usage" = A\ \×\ B$$
 
 Since every tag value is stored as an 8-byte hash fingerprint, the `average length of tag values` is `8`.
 
@@ -95,9 +95,9 @@ $$A = \text"total number of metrics"\ \×\ \text"average number of tag keys per 
 
 $$B = \text"average length of field names for the tags"\ \+\ \text"cache_size_per_key"$$
 
-$$\text"Memory usage" = A \×\ B$$
+$$\text"Memory usage" = A\ \×\ B$$
 
-You can calculate `cache_size_per_key` with a [Bloom Filter Calculator](https://hur.st/bloomfilter/) using a standard formula, where `n` is the cardinality limit and the false positive rate (`p`) is fixed at `0.1%` in the Worker.
+You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a standard formula, where `n` is the cardinality limit and the false positive rate (`p`) is fixed at `0.1%` in the Worker.
 
 ### Benchmarks for exact mode vs probabilistic mode
 
