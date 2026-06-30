@@ -91,5 +91,5 @@ AI Credits are available to all Datadog customers except:
 [3]: /bits_ai/bits_investigation/
 [4]: /actions/agents/
 [5]: https://www.datadoghq.com/pricing/?site=us&product=ai-credits#products
-[6]: https://app.datadoghq.com/account/login?next=%2Fbilling%2Fbill-overview%3Fdetail_bd%3Dai_credits
+[6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles
