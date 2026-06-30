@@ -186,7 +186,7 @@ If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure t
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
+Access RUM by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][1].
 
 Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
 
@@ -260,22 +260,22 @@ Access triggered logs, errors, and performance information when troubleshooting 
 By default, all users can change an application's RUM configuration.
 
 Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
-1. Select **Manage App Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
+1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restrict Access{{< /ui >}}.
+1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted application. Complete the following steps:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
-1. Select **Manage App Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
+1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 
 ## Further reading

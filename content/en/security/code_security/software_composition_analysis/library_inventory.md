@@ -13,7 +13,7 @@ This combined visibility helps you distinguish between theoretical dependencies 
 
 ## Static view
 
-The **Static** view lists all libraries referenced in your repositories as detected by **Static SCA**.
+The {{< ui >}}Static{{< /ui >}} view lists all libraries referenced in your repositories as detected by **Static SCA**.
 
 Static SCA analyzes dependency files and source code to identify all declared third-party libraries, regardless of whether they are used at runtime. Use this view to:
 
@@ -26,7 +26,7 @@ Static data updates on every repository scan.
 
 ## Runtime view
 
-The **Runtime** view lists only the libraries actively used by your services in production or other monitored environments, as detected by **Runtime SCA**.
+The {{< ui >}}Runtime{{< /ui >}} view lists only the libraries actively used by your services in production or other monitored environments, as detected by **Runtime SCA**.
 
 Runtime SCA observes loaded dependencies through the Datadog SDK, enabling you to:
 
@@ -163,9 +163,9 @@ Datadog supports the following SBOM formats:
 
 To export an SBOM:
 
-1. Navigate to [**Code Security > Inventory > Libraries**][1].
+1. Navigate to [{{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Inventory{{< /ui >}} > {{< ui >}}Libraries{{< /ui >}}][1].
 1. (Optional) Apply filters to scope the export to a subset of libraries (for example, by repository, service, or environment).
-1. Click **Export SBOM** and choose **CycloneDX 1.6** or **SPDX 2.3**.
+1. Click {{< ui >}}Export SBOM{{< /ui >}} and choose {{< ui >}}CycloneDX 1.6{{< /ui >}} or {{< ui >}}SPDX 2.3{{< /ui >}}.
 1. Download the generated file.
 
 <div class="alert alert-info">The exported SBOM reflects the libraries currently visible in the inventory, including any active filters. Adjust your filters before exporting to scope the SBOM to the libraries you want to include.</div>

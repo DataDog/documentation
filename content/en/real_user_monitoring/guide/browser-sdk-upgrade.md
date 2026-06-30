@@ -20,7 +20,7 @@ The v7 SDK improves privacy defaults, removes deprecated options, and modernizes
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
-<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
+<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/datadog-labs/agent-skills/blob/main/dd-browser-sdk/upgrade-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
 
 ### Core
 
@@ -31,6 +31,8 @@ The system that tracks sessions has been rewritten to improve data reliability a
 #### Deterministic sampling decisions
 
 Previously, the sampling decision was made once at session creation and persisted. In v7, it is computed on demand from the session ID and sample rate, making it consistent regardless of which page initializes the SDK. If you use different sampling rates across pages, those rates are applied consistently.
+
+<div class="alert alert-warning">Upgrading to v7 introduces deterministic sampling for distributed traces based on the RUM session ID. As a result, under RUM without Limits&trade;, the likelihood of indexing sessions that had sampled associated traces is significantly increased. More traces are retained by your existing Cross-Product Retention Filters, even without any configuration change.<br><br>If you have cross-product Retention Filters (for example, RUM-linked APM traces), you may see an <strong>increase in the volume of indexed spans</strong>, which could lead to <strong>higher costs</strong>. Review your Retention Filter configuration and estimated span volume after upgrading.</div>
 
 #### Session store key renamed
 

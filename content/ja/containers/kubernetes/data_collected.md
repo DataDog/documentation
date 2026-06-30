@@ -2,6 +2,7 @@
 aliases:
 - /ja/agent/kubernetes/metrics
 - /ja/agent/kubernetes/data_collected
+description: Kubernetes クラスターから Datadog Agent によって収集されたメトリクスとイベントのリファレンスガイド
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント
@@ -20,78 +21,79 @@ further_reading:
   text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
+  text: コンテナから送信された全データにタグを割り当てる
 title: 収集された Kubernetes データ
 ---
+このページでは、Kubernetes クラスターにデプロイした際に Datadog Agent が収集したデータを一覧表示します。収集されるメトリクスのセットは、使用している Kubernetes のバージョンによって異なる場合があります。
 
-このページでは、Kubernetes クラスターにデプロイした際に Datadog Agent が収集したデータを一覧表示します。
+**注**: Windows コンテナについては、[Windows デプロイの制限されたメトリクス][7]を参照してください。
 
-収集されるメトリクスのセットは、使用している Kubernetes のバージョンによって異なる場合があります。
+## メトリクス {#metrics}
 
-## メトリクス
-
-### Kubernetes
+### Kubernetes {#kubernetes}
 
 {{< get-metrics-from-git "kubernetes" >}}
 
-### Kubelet
+**注**: `kubernetes.cpu.*` メトリクスに関する詳細については、[`kubernetes.cpu.*` および `container.cpu.*` メトリクスの不一致][8]を参照してください。
+
+### Kubelet {#kubelet}
 
 詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kubelet" >}}
 
-### Kubernetes state metrics core
+### Kubernetes ステートメトリクスコア {#kubernetes-state-metrics-core}
 
-詳細については、[Kubernetes state metrics core][6] インテグレーションのドキュメントを参照してください。このチェックには、Datadog Cluster Agent v1.12 またはそれ以降が必要です。
+詳しくは、[Kubernetes ステートメトリクスコア][6]インテグレーションのドキュメントをご覧ください。このチェックには、Datadog Cluster Agent v1.12 またはそれ以降が必要です。
 
 {{< get-metrics-from-git "kubernetes_state_core" >}}
 
-### Kubernetes State
+### Kubernetes ステート {#kubernetes-state}
 
-**注**: `kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。`kubernetes_state` チェックはレガシーチェックです。代替案としては、[Kubernetes state metrics core][6] を参照してください。Datadog では、両方のチェックを同時に有効にしないことを推奨しています。
+**注**: `kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。`kubernetes_state` チェックは従来のチェックです。代替については、[Kubernetes ステートメトリクスコア][6]を参照してください。Datadog は両方のチェックを同時に有効にしないことを推奨します。
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-### Kubernetes DNS
+### Kubernetes DNS {#kubernetes-dns}
 
 {{< get-metrics-from-git "kube-dns" >}}
 
-### Kubernetes プロキシ
+### Kubernetes プロキシ {#kubernetes-proxy}
 
 {{< get-metrics-from-git "kube-proxy" >}}
 
-### Kubernetes API server
+### Kubernetes API サーバー {#kubernetes-api-server}
 
-詳しくは、[Kubernetes API server][3] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes API サーバー][3]インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
-### Kubernetes controller manager
+### Kubernetes コントローラーマネージャー {#kubernetes-controller-manager}
 
-詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes コントローラーマネージャー][2]インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube-controller-manager" >}}
 
-### Kubernetes metrics server
+### Kubernetes メトリクスサーバー {#kubernetes-metrics-server}
 
-詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes メトリクスサーバー][4]インテグレーションのドキュメントをご覧ください。
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
-### Kubernetes scheduler
+### Kubernetes スケジューラー {#kubernetes-scheduler}
 
-詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes スケジューラー][5]インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube-scheduler" >}}
 
 
-## イベント
+## イベント {#events}
 
 - Backoff
 - Conflict
-- 削除
+- Delete
 - DeletingAllPods
-- Didn't have enough resource
+- リソースが不足しています
 - Error
 - Failed
 - FailedCreate
@@ -114,61 +116,61 @@ title: 収集された Kubernetes データ
 - Unable
 - Unhealthy
 
-## サービスチェック
+## サービスチェック {#service-checks}
 
-### Kubelet
+### Kubelet {#kubelet-1}
 
 詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kubelet" >}}
 
-### Kubernetes controller manager
+### Kubernetes コントローラーマネージャー {#kubernetes-controller-manager-1}
 
-詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes コントローラーマネージャー][2]インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kube-controller-manager" >}}
 
-### Kubernetes metrics server
+### Kubernetes メトリクスサーバー {#kubernetes-metrics-server-1}
 
-詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes メトリクスサーバー][4]インテグレーションのドキュメントをご覧ください。
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
-### Kubernetes scheduler
+### Kubernetes スケジューラー {#kubernetes-scheduler-1}
 
-詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes スケジューラー][5]インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kube-scheduler" >}}
 
-### Kubernetes state metrics core
+### Kubernetes ステートメトリクスコア {#kubernetes-state-metrics-core-1}
 
-詳しくは、[Kubernetes state metrics core][6] インテグレーションのドキュメントをご覧ください。
+詳しくは、[Kubernetes ステートメトリクスコア][6]インテグレーションのドキュメントをご覧ください。
 
 `kubernetes_state.cronjob.complete`
-: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: cronjob の最後のジョブが失敗したかどうか。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.cronjob.on_schedule_check`
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.complete`
-: ジョブが失敗したかどうか。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: ジョブが失敗したかどうか。タグ:`kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.node.ready`
-: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
+: ノードの準備ができているかどうか。タグ:`node` `condition` `status`。
 
 `kubernetes_state.node.out_of_disk`
-: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
+: ノードにディスク容量があるかどうか。タグ:`node` `condition` `status`。
 
 `kubernetes_state.node.disk_pressure`
-: ノードにディスクプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
+: ノードにディスクプレッシャーがかかっているかどうか。タグ:`node` `condition` `status`。
 
 `kubernetes_state.node.network_unavailable`
-: ノードネットワークが利用できないかどうか。タグ: `node` `condition` `status`。
+: ノードネットワークが利用できないかどうか。タグ:`node` `condition` `status`。
 
 `kubernetes_state.node.memory_pressure`
-: ノードネットワークにメモリプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
+: ノードネットワークにメモリプレッシャーがかかっているかどうか。タグ:`node` `condition` `status`。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -178,3 +180,5 @@ title: 収集された Kubernetes データ
 [4]: /ja/integrations/kube_metrics_server
 [5]: /ja/integrations/kube_scheduler
 [6]: /ja/integrations/kubernetes_state_core/
+[7]: /ja/agent/troubleshooting/windows_containers/#limited-metrics-for-windows-deployments
+[8]: /ja/containers/faq/cpu-usage-metrics

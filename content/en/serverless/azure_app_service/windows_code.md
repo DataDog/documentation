@@ -235,7 +235,7 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 
 {{% /tab %}}
@@ -299,7 +299,7 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -312,7 +312,7 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 
    `DD_API_KEY`
    : **Value**: Your Datadog API key.<br>
-   See [Organization Settings > API Keys][2] in Datadog.<br>
+   See [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}][2] in Datadog.<br>
 
    `DD_SITE`
    : **Value**: Your Datadog site<br>
@@ -340,23 +340,23 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
    Enables trace-log correlation by injecting trace IDs into your application logs.<br>
    This allows you to correlate logs with traces in the Datadog UI.<br>
 
-3. Click **Save**. This restarts your application.
+3. Click {{< ui >}}Save{{< /ui >}}. This restarts your application.
 
-4. Stop your application by clicking **Stop**.
+4. Stop your application by clicking {{< ui >}}Stop{{< /ui >}}.
    <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
-5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
+5. In your Azure Portal, navigate to the {{< ui >}}Extensions{{< /ui >}} page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
-6. Accept the legal terms, click **OK**, and wait for the installation to complete.
+6. Accept the legal terms, click {{< ui >}}OK{{< /ui >}}, and wait for the installation to complete.
    <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
-7.  Start the main application, click **Start**:
+7.  Start the main application, click {{< ui >}}Start{{< /ui >}}:
 
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Azure start button" style="width:100%;" >}}
 
-8.  Verify that the extension is installed and running by checking the **Extensions** page in your Azure Portal.
+8.  Verify that the extension is installed and running by checking the {{< ui >}}Extensions{{< /ui >}} page in your Azure Portal.
 
 <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
 
@@ -770,7 +770,7 @@ Datadog provides scripts to update or install the Azure App Service Extension us
 ### Prerequisites
 
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
-- Azure App Service [user-scope credentials](https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials). If you do not already have credentials, go to your [Azure portal](https://portal.azure.com/) and access your Web App or Function App. Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
+- Azure App Service [user-scope credentials](https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials). If you do not already have credentials, go to your [Azure portal](https://portal.azure.com/) and access your Web App or Function App. Navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}} to create or retrieve your user-scope credentials.
 
 ### Installing the extension for the first time {#powershell-first-time}
 

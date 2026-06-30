@@ -102,7 +102,7 @@ This permission is global and enables creating new archives, and editing and del
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_views), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_view), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -132,7 +132,7 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 {{% /tab %}}
 {{< /tabs >}}
 
-### `logs_write_historical_views`
+### `logs_write_historical_view`
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][13].
 

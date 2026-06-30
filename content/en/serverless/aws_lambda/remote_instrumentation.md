@@ -32,13 +32,13 @@ The instrumenter must be deployed to every region and account where you want to 
 
 ## Setup
 
-1. On the [Serverless > AWS Lambda][3] page, select **Instrument Functions**.
+1. On the [Serverless > AWS Lambda][3] page, select {{< ui >}}Instrument Functions{{< /ui >}}.
 
-1. On the **Select AWS Region and Launch CloudFormation** modal:
-   - Click **Select API Key** to select the Datadog API key to use to send data to your AWS account.
-   - Use the **Select a region** drop-down to choose the region where you want to enable instrumentation.
+1. On the {{< ui >}}Select AWS Region and Launch CloudFormation{{< /ui >}} modal:
+   - Click {{< ui >}}Select API Key{{< /ui >}} to select the Datadog API key to use to send data to your AWS account.
+   - Use the {{< ui >}}Select a region{{< /ui >}} drop-down to choose the region where you want to enable instrumentation.
 
-1. Click **Launch CloudFormation Template**. You are prompted to deploy the template into your environment. Launching the template can take a few minutes.
+1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}. You are prompted to deploy the template into your environment. Launching the template can take a few minutes.
 
    <div class="alert alert-info">Datadog recommends that you always test remote instrumentation on development functions before moving to staging and production.</div>
 
@@ -46,7 +46,7 @@ The instrumenter must be deployed to every region and account where you want to 
 
 1. After the instrumenter function is deployed, select functions to instrument. You can select functions by function name, tags, or combinations of tags. See the [Selecting functions](#selecting-functions) section for more details.
 
-   After you finish your selections, click **Next**.
+   After you finish your selections, click {{< ui >}}Next{{< /ui >}}.
 
 1. Confirm your function selections.
 
@@ -81,12 +81,12 @@ Datadog recommends that you only instrument Lambda functions with a memory size 
 
 ## Verification
 
-After the remote instrumenter Lambda has applied instrumentation to your functions, the status column displays an **Instrumented** status. You can also confirm your functions are instrumented by opening your AWS Console and ensuring that two layers (Datadog Lambda extension and a Datadog tracing layer) have been added to each selected function.
+After the remote instrumenter Lambda has applied instrumentation to your functions, the status column displays an {{< ui >}}Instrumented{{< /ui >}} status. You can also confirm your functions are instrumented by opening your AWS Console and ensuring that two layers (Datadog Lambda extension and a Datadog tracing layer) have been added to each selected function.
 
 ## Upgrading to a new version
 
 1. Find [datadog-remote-instrument][5] (if you didn't rename it) CloudFormation stack.
-2. Find the current version of the stack template in the **Template** tab.
+2. Find the current version of the stack template in the {{< ui >}}Template{{< /ui >}} tab.
    ```yaml
    Mappings:
      Constants:

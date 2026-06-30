@@ -16,10 +16,6 @@ further_reading:
   text: "Getting Started with Test Optimization"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
@@ -34,10 +30,10 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 | State     | Description |
 | ----------- | ----------- |
-| **Active** | The test is known to be flaky and is running in CI. |
-| **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
-| **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
-| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
+| {{< ui >}}Active{{< /ui >}} | The test is known to be flaky and is running in CI. |
+| {{< ui >}}Quarantined{{< /ui >}} | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
+| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
+| {{< ui >}}Fixed{{< /ui >}} | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
@@ -45,8 +41,8 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policy Settings** button at the upper right of the Flaky Management page. You can also open [**CI/CD Optimization** > **Settings** > **Repositories**][13] and click the **Flaky Test Policies** row to configure the default policies for your organization or override them per repository.
-2. Search for and select the repository you want to configure. This opens the **Flaky Test Policies** side panel.
+1. Click the {{< ui >}}Policy Settings{{< /ui >}} button at the upper right of the Flaky Management page. You can also open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][13] and click the {{< ui >}}Flaky Test Policies{{< /ui >}} row to configure the default policies for your organization or override them per repository.
+2. Search for and select the repository you want to configure. This opens the {{< ui >}}Flaky Test Policies{{< /ui >}} side panel.
     {{< img src="tests/flaky-policies-4.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy." style="width:100%;" >}}
 
 3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
@@ -59,35 +55,35 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
      </thead>
      <tbody>
        <tr>
-         <td><strong>Quarantine</strong></td>
+         <td>{{< ui >}}Quarantine{{< /ui >}}</td>
          <td>
            <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>Time</strong>: Quarantine a test if its state is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
-             <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
-             <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+             <li>{{< ui >}}Time{{< /ui >}}: Quarantine a test if its state is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
+             <li>{{< ui >}}Branch{{< /ui >}}: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
+             <li>{{< ui >}}Failure rate{{< /ui >}}: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
          </td>
        </tr>
        <tr>
-         <td><strong>Disable</strong></td>
+         <td>{{< ui >}}Disable{{< /ui >}}</td>
          <td>
            <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>State and time</strong>: Disable a test if it has a specified state for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
-             <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
-             <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+             <li>{{< ui >}}State and time{{< /ui >}}: Disable a test if it has a specified state for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
+             <li>{{< ui >}}Branch{{< /ui >}}: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
+             <li>{{< ui >}}Failure rate{{< /ui >}}: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
          </td>
        </tr>
        <tr>
-         <td><strong>Attempt&nbsp;to&nbsp;Fix</strong></td>
+         <td>{{< ui >}}Attempt&nbsp;to&nbsp;Fix{{< /ui >}}</td>
          <td>When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix.</td>
        </tr>
        <tr>
-         <td><strong>Fixed</strong></td>
+         <td>{{< ui >}}Fixed{{< /ui >}}</td>
          <td>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</td>
        </tr>
      </tbody>
@@ -110,25 +106,25 @@ The `branch` tag only exists when the test has flaked in the default branch of t
 
 For more information about a specific flaky test, use these options in the actions menu at the end of each row:
 
-- **View Last Failed Test Run**: Open the side panel with the details of the test's most recent failed run.
-- **View related test executions**: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
+- {{< ui >}}View Last Failed Test Run{{< /ui >}}: Open the side panel with the details of the test's most recent failed run.
+- {{< ui >}}View related test executions{{< /ui >}}: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
 
 ## Create cases for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the **Create Case** button or use the actions menu at the end of the row.
+For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the {{< ui >}}Create Case{{< /ui >}} button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. To enable the remediation flow:
 
-1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
+1. For the test you are fixing, click {{< ui >}}Link commit to Flaky Test fix{{< /ui >}} in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
     - Runs tests even if they are marked as `Disabled`.
-    - If all retries pass, marks the fix as **in progress** in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
+    - If all retries pass, marks the fix as {{< ui >}}in progress{{< /ui >}} in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
       - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
     - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
@@ -136,7 +132,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 ### Track fixes that are in progress
 
-After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a **Fix in progress** indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
+After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a {{< ui >}}Fix in progress{{< /ui >}} indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
 
 Requirements and limitations:
 - Source Code Integration must be configured for a supported SCM provider (GitHub, GitLab, or Azure DevOps) so Datadog can receive pull request merge webhooks. See [Source Code Integration setup][17].
@@ -149,8 +145,8 @@ Requirements and limitations:
 After you fix a flaky test, it can take time for the fix to propagate to all branches, which can cause the test to keep flaking in stale branches. A grace period mechanism prevents flaky tests from appearing on stale branches after the fix is applied.
 
 A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog treats the test based on its status before the grace period started:
-- If the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
-- If the test was **Disabled**, Datadog treats the test as **Disabled**.
+- If the test was {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}}, Datadog treats the test as {{< ui >}}Quarantined{{< /ui >}}.
+- If the test was {{< ui >}}Disabled{{< /ui >}}, Datadog treats the test as {{< ui >}}Disabled{{< /ui >}}.
 
 This method avoids unnecessary CI failures and saves developer time.
 
@@ -171,7 +167,7 @@ For Bits Code to create a fix, the flaky test must meet the following criteria:
 
 To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
 
-After you have enabled Bits Code, when viewing a flaky test, click **Generate fix**.
+After you have enabled Bits Code, when viewing a flaky test, click {{< ui >}}Generate fix{{< /ui >}}.
 
 ## AI-powered flaky test categorization
 
@@ -183,20 +179,20 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 
 | Category                | Description |
 |-------------------------|-------------|
-| **Concurrency**         | Test that invokes multiple threads interacting in an unsafe or unanticipated manner. Flakiness is caused by, for example, race conditions resulting from implicit assumptions about the ordering of execution, leading to deadlocks in certain test runs. |
-| **Randomness**          | Test uses the result of a random data generator. If the test does not account for all possible cases, then the test may fail intermittently, e.g., only when the result of a random number generator is zero. |
-| **Floating Point**      | Test uses the result of a floating-point operation. Floating-point operations can suffer from precision over- and under-flows, non-associative addition, etc., which—if not properly accounted for—can result in inconsistent outcomes (e.g., comparing a floating-point result to an exact real value in an assertion). |
-| **Unordered Collection**| Test assumes a particular iteration order for an unordered-collection object. Since no order is specified, tests that assume a fixed order will likely be flaky for various reasons (e.g., collection-class implementation). |
-| **Too Restrictive Range**| Test whose assertions accept only part of the valid output range. It intermittently fails on unhandled corner cases. |
-| **Timeout**             | Test fails due to time limitations, either at the individual test level or as part of a suite. This includes tests that exceed their execution time limit (e.g., single test or the whole suite) and fail intermittently due to varying execution times. |
-| **Order Dependency**    | Test depends on a shared value or resource modified by another test. Changing the test-run order can break those dependencies and produce inconsistent outcomes. |
-| **Resource Leak**       | Test improperly handles an external resource (e.g., failing to release memory). Subsequent tests that reuse the resource may become flaky. |
-| **Asynchronous Wait**   | Test makes an asynchronous call or waits for elements to load/render and does not explicitly wait for completion (often using a fixed delay). If the call or rendering takes longer than the delay, the test fails. |
-| **IO**                  | Test is flaky due to its handling of input/output—for example, failing when disk space runs out during a write. |
-| **Network**             | Test depends on network availability (e.g., querying a server). If the network is unavailable or congested, the test may fail. |
-| **Time**                | Test relies on system time and may be flaky due to precision or timezone discrepancies (e.g., failing when midnight passes in UTC). |
-| **Environment Dependency** | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
-| **Unknown**             | Test is flaky for an unknown reason. |
+| {{< ui >}}Concurrency{{< /ui >}}         | Test that invokes multiple threads interacting in an unsafe or unanticipated manner. Flakiness is caused by, for example, race conditions resulting from implicit assumptions about the ordering of execution, leading to deadlocks in certain test runs. |
+| {{< ui >}}Randomness{{< /ui >}}          | Test uses the result of a random data generator. If the test does not account for all possible cases, then the test may fail intermittently, e.g., only when the result of a random number generator is zero. |
+| {{< ui >}}Floating Point{{< /ui >}}      | Test uses the result of a floating-point operation. Floating-point operations can suffer from precision over- and under-flows, non-associative addition, etc., which—if not properly accounted for—can result in inconsistent outcomes (e.g., comparing a floating-point result to an exact real value in an assertion). |
+| {{< ui >}}Unordered Collection{{< /ui >}}| Test assumes a particular iteration order for an unordered-collection object. Since no order is specified, tests that assume a fixed order will likely be flaky for various reasons (e.g., collection-class implementation). |
+| {{< ui >}}Too Restrictive Range{{< /ui >}}| Test whose assertions accept only part of the valid output range. It intermittently fails on unhandled corner cases. |
+| {{< ui >}}Timeout{{< /ui >}}             | Test fails due to time limitations, either at the individual test level or as part of a suite. This includes tests that exceed their execution time limit (e.g., single test or the whole suite) and fail intermittently due to varying execution times. |
+| {{< ui >}}Order Dependency{{< /ui >}}    | Test depends on a shared value or resource modified by another test. Changing the test-run order can break those dependencies and produce inconsistent outcomes. |
+| {{< ui >}}Resource Leak{{< /ui >}}       | Test improperly handles an external resource (e.g., failing to release memory). Subsequent tests that reuse the resource may become flaky. |
+| {{< ui >}}Asynchronous Wait{{< /ui >}}   | Test makes an asynchronous call or waits for elements to load/render and does not explicitly wait for completion (often using a fixed delay). If the call or rendering takes longer than the delay, the test fails. |
+| {{< ui >}}IO{{< /ui >}}                  | Test is flaky due to its handling of input/output—for example, failing when disk space runs out during a write. |
+| {{< ui >}}Network{{< /ui >}}             | Test depends on network availability (e.g., querying a server). If the network is unavailable or congested, the test may fail. |
+| {{< ui >}}Time{{< /ui >}}                | Test relies on system time and may be flaky due to precision or timezone discrepancies (e.g., failing when midnight passes in UTC). |
+| {{< ui >}}Environment Dependency{{< /ui >}} | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
+| {{< ui >}}Unknown{{< /ui >}}             | Test is flaky for an unknown reason. |
 
 ## Receive notifications
 
@@ -205,20 +201,21 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 - A user or policy changes the state of a flaky test.
 - The remediation flow for a flaky test succeeds or fails.
 
-You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] side panel in CI/CD Optimization settings.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings.
 
-Notifications are bundled over a short period to reduce noise.
+Notifications are bundled over a short period to reduce noise. The weekly digest summary is only sent to notification rules that have code owners configured.
 
 ### Notification types
 
 | Notification type | Description |
 |---|---|
-| **New flaky test detected** | A new flaky test is detected on the default branch of the repository. |
-| **Test quarantined** | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
-| **Test disabled** | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
-| **Fix successful** | A test passes all retries in the remediation flow and is marked as "fix in progress". |
-| **Fix failed** | A test fails during the remediation flow. |
-| **Manual state change** | A user manually changes the state of a flaky test. |
+| {{< ui >}}New flaky test detected{{< /ui >}} | A new flaky test is detected on the default branch of the repository. |
+| {{< ui >}}Test quarantined{{< /ui >}} | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
+| {{< ui >}}Test disabled{{< /ui >}} | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
+| {{< ui >}}Fix successful{{< /ui >}} | A test passes all retries in the remediation flow and is marked as "fix in progress". |
+| {{< ui >}}Fix failed{{< /ui >}} | A test fails during the remediation flow. |
+| {{< ui >}}Manual state change{{< /ui >}} | A user manually changes the state of a flaky test. |
+| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. This notification is currently available to a subset of customers. |
 
 {{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI." style="width:100%;" >}}
 
@@ -245,7 +242,11 @@ If Slack notifications are not being delivered, check that your notification rul
 If you are using `@slack-CHANNEL` (without the account name), the notification is routed to the first configured Slack account. For organizations with multiple Slack workspaces, this may not be the intended workspace.
 
 To find your account name, go to the [Slack integration tile][5] and check the
-**Account Name** field for the workspace you want to use.
+{{< ui >}}Account Name{{< /ui >}} field for the workspace you want to use.
+
+### Weekly digest summary notifications cannot be disabled
+
+The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
 
 ## Further reading
 
@@ -264,5 +265,6 @@ To find your account name, go to the [Slack integration tile][5] and check the
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[16]: /bits_ai/bits_ai_dev_agent/
+[14]: /help/
+[16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/
