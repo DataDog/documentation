@@ -22,7 +22,7 @@ Las alertas de presupuesto de errores están disponibles para los siguientes tip
 
 Para una descripción de la terminología clave en torno a los SLOs, incluidos los *error budgets* (presupuestos de error), puedes ver [Service Level Objectives (Objetivos de nivel de servicio [SLOs])][3].
 
-{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Configuración de alerta de presupuesto de error">}}
+{{< img src="service_level_objectives/error_budget/slo-error-budget-alert-v2.png" alt="Configuración de alerta de presupuesto de error">}}
 
 ## Creación de un monitor
 
@@ -34,7 +34,7 @@ en los últimos `objetivo` días.
 4. Añade [información de notificación][5] en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones).
 5. Haz clic en el botón **Create & Set Alert** (Crear y establecer alerta) de la página de configuración de SLO.
 
-{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Crear SLO y configurar una alerta de presupuesto de errores" style="width:80%;">}}
+{{< img src="service_level_objectives/error_budget/slo_create_set_alert.png" alt="Crear SLO y configurar una alerta de presupuesto de errores" style="width:80%;">}}
 
 ### Alertas para SLOs con grupos
 

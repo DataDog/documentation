@@ -121,7 +121,7 @@ Pour créer, modifier et supprimer des corrections de statut, les utilisateurs n
 
 Pour limiter l'accès à certains SLO, définissez la liste des [rôles][10] autorisés à les modifier.
 
-{{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Option de permissions SLO dans le menu des paramètres">}}
+{{< img src="service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Option de permissions SLO dans le menu des paramètres">}}
 
 1. Cliquez sur le SLO pour ouvrir le panneau latéral des détails.
 1. Cliquez sur l'icône des paramètres en haut à droite du panneau.
@@ -155,13 +155,13 @@ Pour effectuer une recherche, utilisez les cases à cocher des facettes à gauch
 
 Regroupez vos SLOs par *n'importe* quel tag pour obtenir une vue d'ensemble de vos données. Vous pouvez rapidement analyser combien de SLOs se trouvent dans chaque état (en infraction, avertissement, OK et pas de données), regroupés par service, équipe, parcours utilisateur, niveau ou tout autre tag défini sur vos SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Vue d'ensemble des SLOs regroupés par équipe" style="width:100%;" >}}
+{{< img src="service_level_objectives/slo_group_by_new.png" alt="Vue d'ensemble des SLOs regroupés par équipe" style="width:100%;" >}}
 
 Triez les SLOs par les colonnes *statut* et *budget d'erreur* pour prioriser les SLOs nécessitant votre attention. La liste des SLOs affiche les détails des SLOs sur la fenêtre temporelle principale sélectionnée dans votre [configuration](#configuration). Toutes les autres fenêtres temporelles de configuration sont consultables dans le panneau latéral individuel. Ouvrez le panneau latéral des détails des SLOs en cliquant sur la ligne de tableau respective.
 
 **Remarque** : Vous pouvez visualiser vos SLOs depuis l'écran d'accueil de votre appareil mobile en téléchargeant l'[application mobile Datadog][14], disponible sur l'[App Store Apple][15] et le [Google Play Store][16].
 
-{{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs sur iOS et Android">}}
+{{< img src="service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs sur iOS et Android">}}
 
 ### Tags SLO {#slo-tags}
 
@@ -170,13 +170,13 @@ Les tags SLO peuvent être utilisés pour filtrer sur la [page de gestion des SL
 - Lorsque vous créez ou modifiez un SLO, vous pouvez ajouter des tags
 - Depuis la vue liste des SLOs, vous pouvez ajouter et mettre à jour des tags en masse en utilisant les options déroulantes *Modifier les tags* et *[Modifier les équipes][18]* en haut de la liste des SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="La page de liste des SLOs affiche le menu déroulant Modifier les tags pour l'édition en masse des tags" >}}
+{{< img src="service_level_objectives/slo_bulk_tag.png" alt="La page de liste des SLOs affiche le menu déroulant Modifier les tags pour l'édition en masse des tags" >}}
 
 ### Indicateur de taux de consommation des SLO {#slo-burn-rate-indicator}
 
 Les indicateurs de taux de consommation utilisent une fenêtre de 2 heures glissantes pour évaluer quels SLOs consomment leur budget d'erreur trop rapidement. Les indicateurs de taux de consommation apparaissent à côté des noms des SLOs applicables sur la [page de gestion des SLO][2].
 
-{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="La page de gestion des SLO dans Datadog. Une icône rouge apparaît à côté du nom d'un SLO dans la liste. Passer la souris sur l'icône rouge affiche une fenêtre modale avec des informations supplémentaires, une visualisation du taux de consommation et un lien vers la page de service correspondante du SLO." style="width:80%;" >}}
+{{< img src="service_level_objectives/slo_burn_rate_indicator.png" alt="La page de gestion des SLO dans Datadog. Une icône rouge apparaît à côté du nom d'un SLO dans la liste. Passer la souris sur l'icône rouge affiche une fenêtre modale avec des informations supplémentaires, une visualisation du taux de consommation et un lien vers la page de service correspondante du SLO." style="width:80%;" >}}
 
 Il existe deux types d'indicateurs possibles :
 - Une icône rouge indiquant un taux de consommation critique supérieur à 6 au cours des 2 dernières heures.
@@ -262,11 +262,11 @@ Pour obtenir une liste complète de tous les événements d'audit SLO, entrez la
 
 **Remarque :** Si vous ne voyez pas d'événements apparaître dans l'interface utilisateur, assurez-vous de définir la période de l'Explorateur d'événements sur une période plus longue, par exemple, les 7 derniers jours.
 
-{{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="Événements d'audit de SLO" >}}
+{{< img src="service_level_objectives/slo-audit-events.png" alt="Événements d'audit de SLO" >}}
 
 Vous pouvez également utiliser l'onglet « Audit History » dans les détails du SLO pour visualiser tous les événements d'audit pour un SLO particulier :
 
-{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="Onglet historique d'audit des détails SLO" >}}
+{{< img src="service_level_objectives/slo_audit_history_tab.png" alt="Onglet historique d'audit des détails SLO" >}}
 
 Avec les [Moniteurs d'événements][28], vous pouvez configurer des notifications pour suivre les événements d'audit SLO. Par exemple, si vous souhaitez être informé lorsque la configuration d'un SLO spécifique est modifiée, configurez un Moniteur d'événements pour suivre le texte `[SLO Modified]` sur les balises `audit,slo_id:<SLO ID>`.
 
@@ -326,7 +326,7 @@ Pour effectuer des corrections de statut SLO dans l'interface, procédez comme s
 6. Ajoutez éventuellement des **Notes**.
 7. Cliquez sur **Appliquer la correction**.
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="Interface utilisateur de correction SLO" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui.png" alt="Interface utilisateur de correction SLO" style="width:80%;">}}
 
 Pour visualiser, modifier et supprimer les corrections de statut existantes, cliquez sur l'onglet **Corrections** en haut de la vue détaillée du panneau latéral d'un SLO.
 
@@ -334,13 +334,13 @@ Pour visualiser, modifier et supprimer les corrections de statut existantes, cli
 
 Pour les SLO basés sur des métriques et les SLO par tranche horaire avec corrections de statut, il existe un interrupteur dans la vue détaillée des SLO qui vous permet d'activer ou de désactiver les corrections dans l'interface utilisateur. L'interrupteur contrôle les graphiques et les données dans la section "Historique" de la vue détaillée des SLO. **Remarque :** Votre statut global des SLO et votre budget d'erreurs prendront toujours en compte les corrections de statut.
 
-{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="Interface utilisateur de correction SLO" style="width:100%;">}}
+{{< img src="service_level_objectives/correction-toggle.png" alt="Interface utilisateur de correction SLO" style="width:100%;">}}
 
 ## Vue du calendrier des SLO {#slo-calendar-view}
 
 La vue du calendrier des SLO est disponible sur la [page de gestion des SLO][2]. Dans le coin supérieur droit, passez de la vue "Principale" à la vue "Quotidienne", "Hebdomadaire" ou "Mensuelle" pour voir 12 mois de données historiques sur le statut des SLO. La vue du calendrier est prise en charge pour les SLO basés sur des métriques et les SLO par tranche horaire.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="Vue Calendrier du SLO" >}}
+{{< img src="service_level_objectives/slo-calendar-view-2.png" alt="Vue Calendrier du SLO" >}}
 
 ## Lectures complémentaires {#further-reading}
 
