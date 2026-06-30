@@ -256,10 +256,54 @@
 }
 
 /* --- API nav (shown on /api/ pages in place of the docs accordion) ---
-   Categories read as headings (uppercase, semibold) like the top-level docs
-   sections; the active category expands its operations as indented links. The
-   current page is brand-colored (purple) so it stands out at a glance. */
+   Each API category is a collapsible <details> section, matching the docs
+   accordion pattern. The caret rotates when open; the active section is
+   brand-colored. Operations inside are indented links. */
 
+.mobile-nav__api-section {
+  position: relative;
+  border-bottom: var(--border-width) solid var(--hugo-nav-gray-light);
+}
+
+.mobile-nav__api-section-toggle {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--hugo-mobile-nav-indent-base);
+  color: var(--hugo-nav-text);
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.mobile-nav__api-section-toggle::-webkit-details-marker {
+  display: none;
+}
+.mobile-nav__api-section-toggle::marker {
+  content: "";
+}
+
+.mobile-nav__api-section-toggle:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__api-section[open] > .mobile-nav__api-section-toggle {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.mobile-nav__api-section[open] > .mobile-nav__api-section-toggle .mobile-nav__caret {
+  transform: rotate(180deg);
+}
+
+.mobile-nav__api-section[open]
+  > .mobile-nav__api-section-toggle
+  .mobile-nav__caret-arrow {
+  stroke: var(--hugo-nav-brand-primary);
+}
+
+/* Category landing-page link inside the expanded operations list. Indented
+   one step further than the toggle to visually sit within the expanded section. */
 .mobile-nav__api-category {
   display: block;
   padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end) var(--space-sm)

@@ -28,6 +28,19 @@ function deriveSiteUrl() {
   return proxied ? `http://localhost:${proxyPort}` : "http://localhost:4321";
 }
 
+// The Hugo docs site may be on a different origin than the Astro site in local
+// dev (Hugo: 1313, Astro: 4321). In CI and proxied dev they share an origin.
+function deriveHugoDocsUrl() {
+  const env = process.env.CI_ENVIRONMENT_NAME;
+  if (env === "preview") {
+    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
+  }
+  if (env === "live") {
+    return "https://docs.datadoghq.com";
+  }
+  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:1313";
+}
+
 export default defineConfig({
   site: deriveSiteUrl(),
   integrations: [markdoc(), preact()],
@@ -52,6 +65,9 @@ export default defineConfig({
         origin: `http://localhost:${proxyPort}`,
         hmr: { clientPort: proxyPort },
       }),
+    },
+    define: {
+      __HUGO_DOCS_ORIGIN__: JSON.stringify(deriveHugoDocsUrl()),
     },
     resolve: {
       alias: {

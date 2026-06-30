@@ -53,6 +53,16 @@ describe("MobileNav.astro", () => {
     ]);
   });
 
+  it("renders the quick-links row with correct hrefs", async () => {
+    const doc = await renderMobileNav();
+    const links = doc.querySelectorAll(".mobile-nav__quicknav-link");
+    expect(links.length).toBe(3);
+    const [homeLink, docsLink, apiLink] = [...links];
+    expect(homeLink?.getAttribute("href")).toBe("https://www.datadoghq.com");
+    expect(docsLink?.getAttribute("href")).toBe(`${HUGO_ORIGIN}/`);
+    expect(apiLink?.getAttribute("href")).toBe("/api/latest/");
+  });
+
   it("renders the overlay shell (panel, backdrop, search)", async () => {
     // The hamburger toggle lives in the header's mobile row (see
     // MobileNavToggle.unit.test.ts), not here; this component renders only the
@@ -111,8 +121,8 @@ describe("MobileNav.astro", () => {
     // No main-menu accordion sections (e.g. Essentials/Infrastructure).
     expect(sectionByLabel(doc, "Essentials")).toBeUndefined();
     expect(doc.querySelector(".mobile-nav__section")).toBeNull();
-    // The API category list is present instead.
-    expect(doc.querySelectorAll(".mobile-nav__api-category").length).toBeGreaterThan(0);
+    // The API category list is present instead (expandable sections).
+    expect(doc.querySelectorAll(".mobile-nav__api-section").length).toBeGreaterThan(0);
   });
 
   it("expands the active category and highlights the active operation in the API nav", async () => {
@@ -122,9 +132,10 @@ describe("MobileNav.astro", () => {
       `/api/latest/${category.slug}/${operation.slug}/`,
     );
 
-    // The active category is the only one rendering its operation sublist.
-    const operationLists = doc.querySelectorAll(".mobile-nav__api-operations");
-    expect(operationLists.length).toBe(1);
+    // All categories render their operations in the DOM (inside <details>);
+    // only the active one has the open attribute.
+    const openSections = doc.querySelectorAll(".mobile-nav__api-section[open]");
+    expect(openSections.length).toBe(1);
 
     // The active operation carries the active modifier and points at its page.
     const activeOp = doc.querySelector(".mobile-nav__api-operation--active");
@@ -138,9 +149,11 @@ describe("MobileNav.astro", () => {
   it("marks the active category active on a category landing page", async () => {
     const [category] = await getCategoriesWithOperations();
     const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
-    const activeCat = doc.querySelector(".mobile-nav__api-category--active");
-    expect(activeCat).not.toBeNull();
-    expect(activeCat?.getAttribute("href")).toBe(`/api/latest/${category.slug}/`);
+    // The summary of the active section carries the active modifier and
+    // aria-current when there is no active operation (category landing page).
+    const activeSummary = doc.querySelector(".mobile-nav__api-category--active");
+    expect(activeSummary?.tagName.toLowerCase()).toBe("summary");
+    expect(activeSummary?.getAttribute("aria-current")).toBe("page");
   });
 
   it("highlights the active page link (purple + aria-current) in the docs accordion", async () => {
@@ -191,5 +204,56 @@ describe("MobileNav.astro", () => {
     for (const node of topWithChildren) {
       expect(sectionByLabel(doc, node.label)).toBeDefined();
     }
+  });
+
+  it("renders API categories as expandable <details> sections with chevrons", async () => {
+    const [category] = await getCategoriesWithOperations();
+    const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+    const sections = doc.querySelectorAll(".mobile-nav__api-section");
+    expect(sections.length).toBeGreaterThan(0);
+    for (const section of sections) {
+      expect(section.tagName.toLowerCase()).toBe("details");
+      expect(section.querySelector(".mobile-nav__caret")).not.toBeNull();
+    }
+  });
+
+  it("starts the active API category expanded and collapses all others", async () => {
+    const [category] = await getCategoriesWithOperations();
+    const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+    const sections = [...doc.querySelectorAll(".mobile-nav__api-section")];
+    const openSections = sections.filter((s) => s.hasAttribute("open"));
+    expect(openSections.length).toBe(1);
+    expect(
+      openSections[0].querySelector(".mobile-nav__api-category--active"),
+    ).not.toBeNull();
+  });
+
+  it("shows all categories' operations inside their <details>, not just the active one", async () => {
+    const [category] = await getCategoriesWithOperations();
+    const operation = category.operations[0];
+    const doc = await renderMobileNav(
+      `/api/latest/${category.slug}/${operation.slug}/`,
+    );
+    const operationLists = doc.querySelectorAll(".mobile-nav__api-operations");
+    // Every category should have its operations in the DOM.
+    expect(operationLists.length).toBeGreaterThan(1);
+  });
+
+  it("renders nested subsections with children as expandable <details> elements", async () => {
+    const tree = getDocsNavTree();
+    const sectionWithGrandchildren = tree.find((node) =>
+      node.children.some((child) => child.children.length > 0),
+    );
+    expect(sectionWithGrandchildren).toBeDefined();
+
+    const subsectionWithChildren = sectionWithGrandchildren!.children.find(
+      (child) => child.children.length > 0,
+    )!;
+
+    const doc = await renderMobileNav();
+    const subsectionDetails = [...doc.querySelectorAll("details")].find((el) =>
+      el.querySelector("summary")?.textContent?.includes(subsectionWithChildren.label),
+    );
+    expect(subsectionDetails).toBeDefined();
   });
 });

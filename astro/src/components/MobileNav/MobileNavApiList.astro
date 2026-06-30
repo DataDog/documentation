@@ -1,56 +1,62 @@
 ---
 /**
  * The API documentation menu for the mobile nav, shown on `/api/` pages in
- * place of the main docs accordion (mirroring Hugo's `mobile-documentation.html`,
- * which swaps to the API menu when the path is under `/api/`).
+ * place of the main docs accordion.
  *
- * Each category is a link; the active category additionally expands its
- * operations as a sublist, with the current page highlighted. This matches the
- * desktop `ApiSideNav` so the mobile and desktop API navs behave the same.
- *
- * The inline script scrolls the panel so the current page lands near the top of
- * the visible area, just below the sticky header.
+ * Each category is a collapsible <details> section with a rotating chevron.
+ * The active category starts expanded; all others start collapsed. This lets
+ * users browse and navigate to operations in any category without leaving
+ * the current page.
  */
-import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+import type { ApiCategory } from "@lib/api/schemas/views";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
 
 interface Props {
-  categories: ApiCategoryStub[];
-  activeCategory?: ApiCategory;
+  categories: ApiCategory[];
+  activeCategorySlug?: string;
   currentOperationSlug?: string;
   lang: Locale;
 }
 
-const { categories, activeCategory, currentOperationSlug, lang } = Astro.props;
+const { categories, activeCategorySlug, currentOperationSlug, lang } = Astro.props;
 const cl = classListFactory(styles);
 ---
 
 <ul class={cl("mobile-nav__list")}>
   {
     categories.map((category) => {
-      const isActiveCategory = category.slug === activeCategory?.slug;
+      const isActiveCategory = category.slug === activeCategorySlug;
       const categoryHref = localizedHref(lang, `/api/latest/${category.slug}/`);
+      const isCategoryLandingPage = isActiveCategory && !currentOperationSlug;
       return (
         <li>
-          <a
-            href={categoryHref}
-            class:list={[
-              cl("mobile-nav__api-category"),
-              isActiveCategory && cl("mobile-nav__api-category--active"),
-            ]}
-            aria-current={
-              isActiveCategory && !currentOperationSlug ? "page" : undefined
-            }
+          <details
+            class={cl("mobile-nav__api-section")}
+            open={isActiveCategory || undefined}
           >
-            {category.name}
-          </a>
-          {isActiveCategory && activeCategory && (
+            <summary
+              class:list={[
+                cl("mobile-nav__api-section-toggle"),
+                isCategoryLandingPage && cl("mobile-nav__api-category--active"),
+              ]}
+              aria-current={isCategoryLandingPage ? "page" : undefined}
+            >
+              <span>{category.name}</span>
+              <span class={cl("mobile-nav__caret")} aria-hidden="true">
+                <svg viewBox="0 0 17.78 10.51" width="18">
+                  <polyline
+                    class={cl("mobile-nav__caret-arrow")}
+                    points="16.92 1.14 8.92 9.14 0.92 1.14"
+                  />
+                </svg>
+              </span>
+            </summary>
             <ul class={cl("mobile-nav__api-operations")}>
-              {activeCategory.operations.map((operation) => {
+              {category.operations.map((operation) => {
                 const isActiveOperation =
-                  operation.slug === currentOperationSlug;
+                  isActiveCategory && operation.slug === currentOperationSlug;
                 return (
                   <li>
                     <a
@@ -68,7 +74,7 @@ const cl = classListFactory(styles);
                 );
               })}
             </ul>
-          )}
+          </details>
         </li>
       );
     })
@@ -90,8 +96,6 @@ const cl = classListFactory(styles);
       const headerHeight = header
         ? header.getBoundingClientRect().height
         : 0;
-      // Leave a small gap below the sticky header so the active item isn't
-      // flush against it.
       const gap = 12;
       panel.scrollTop +=
         active.getBoundingClientRect().top -

@@ -22,8 +22,7 @@ interface Props {
 
 const { node, level, open = false, activePageId } = Astro.props;
 const cl = classListFactory(styles);
-// Hugo's mobile nav only expands top-level sections; subsections are plain links.
-const hasChildren = level === 0 && node.children.length > 0;
+const hasChildren = node.children.length > 0;
 const isActivePage = activePageId !== undefined && node.identifier === activePageId;
 
 // Second-stage href resolution: `docsNavMenu.getDocsNavTree` already localizes

@@ -5,8 +5,10 @@
  * but on a separate port in local dev.
  */
 
+declare const __HUGO_DOCS_ORIGIN__: string;
+
 /** The Hugo docs site origin. Non-API nav links and search results point here. */
-export const HUGO_ORIGIN = import.meta.env.SITE as string;
+export const HUGO_ORIGIN = __HUGO_DOCS_ORIGIN__;
 
 /** The corporate marketing site origin. */
 export const CORP_ORIGIN = "https://www.datadoghq.com";

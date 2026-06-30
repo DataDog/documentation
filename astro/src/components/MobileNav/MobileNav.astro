@@ -23,11 +23,8 @@ import {
   findActiveSectionIdentifier,
   findActivePageIdentifier,
 } from "@lib/componentUtils/docsNavMenu";
-import {
-  getCategoryStubsView,
-  getCategoryViewBySlug,
-} from "@lib/api/viewsBuilder";
-import { CORP_ORIGIN } from "@config/origins";
+import { getCategoriesView } from "@lib/api/viewsBuilder";
+import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import {
   DEFAULT_LOCALE,
   localizedHref,
@@ -58,11 +55,7 @@ const apiPathSegments = unprefixedPath.split("/").filter(Boolean); // ['api','la
 const activeCategorySlug = apiPathSegments[2];
 const currentOperationSlug = apiPathSegments[3];
 
-const apiCategories = isApiContext ? await getCategoryStubsView(pageLang) : [];
-const activeApiCategory =
-  isApiContext && activeCategorySlug
-    ? await getCategoryViewBySlug(activeCategorySlug, pageLang)
-    : undefined;
+const apiCategories = isApiContext ? await getCategoriesView(pageLang) : [];
 
 const tree = getDocsNavTree(lang);
 
@@ -79,8 +72,8 @@ const activePageId = findActivePageIdentifier(tree, Astro.url.pathname);
 // translations exist in the Hugo i18n bundle.
 const quicknav = [
   { label: i18n("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
-  { label: i18n("docs") || "Docs", href: localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
-  { label: i18n("api"), href: localizedHref(lang, "/api/"), icon: "nav_mobile_api", alt: "api" },
+  { label: i18n("docs") || "Docs", href: HUGO_ORIGIN + localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
+  { label: i18n("api"), href: localizedHref(lang, "/api/latest/"), icon: "nav_mobile_api", alt: "api" },
 ];
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
@@ -124,7 +117,7 @@ const searchLabels: SearchBarLabels = {
       isApiContext ? (
         <MobileNavApiList
           categories={apiCategories}
-          activeCategory={activeApiCategory}
+          activeCategorySlug={activeCategorySlug}
           currentOperationSlug={currentOperationSlug}
           lang={pageLang}
         />
