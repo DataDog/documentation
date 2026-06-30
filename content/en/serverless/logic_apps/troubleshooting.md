@@ -57,6 +57,10 @@ If traces appear inconsistently:
 2. **Set retention rate**: For debugging, set the retention rate to 100%
 3. **Check sampling**: Verify that traces aren't being dropped due to sampling configurations
 
+### Reduce log indexing costs without affecting traces
+
+{{< partial name="log-to-trace-indexing-note.html" >}}
+
 ### Tags are not appearing on traces
 
 If `env` and `service` tags are not appearing on your traces:

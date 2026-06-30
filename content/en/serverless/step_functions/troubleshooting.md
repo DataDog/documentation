@@ -56,6 +56,8 @@ If your organization has an existing all-encompassing index with a low limit, pl
 ## Missing logs within an execution
 You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`. Using exclusion filters does not impact tracing.
 
+{{< partial name="log-to-trace-indexing-note.html" >}}
+
 In the following example, the filter excludes logs for 90% of the `@execution_arn`.
 
 {{< img src="serverless/step_functions/exclusion_filter.png" alt="An exclusion filter named Step Functions. The 'Define exclusion query' box contains 'source:stepfunction'. Under 'Set exclusion percentage', the filter is set to exclude 90% of @execution_arn." style="width:80%;" >}}
