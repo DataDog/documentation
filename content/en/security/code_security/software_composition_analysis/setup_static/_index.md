@@ -43,6 +43,23 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
+## Lockfile-less scanning
+
+Datadog SCA scans manifest files **only when no supported lockfile is detected**. When a lockfile is present, it takes precedence and the manifest is not scanned.
+
+| Language | Package Manager        | File             |
+|----------|------------------------|------------------|
+| Node.js  | npm, yarn, pnpm, Bun   | `package.json`   |
+| Python   | Poetry, PDM, UV, pip   | `pyproject.toml` |
+
+**Supported sections:**
+- `package.json`: `dependencies`, `devDependencies`, and `optionalDependencies`
+- `pyproject.toml`: PEP 621 `dependencies` and `optional-dependencies`, PEP 735 `dependency-groups`, and Poetry dependency sections
+
+<div class="alert alert-info">
+Because manifests can declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
+</div>
+
 ## Select where to run static SCA scans
 By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI pipelines; CI jobs are supported for `push` events.
 
