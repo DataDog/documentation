@@ -35,3 +35,11 @@
 .breadcrumbs__label--current {
   color: var(--color-brand);
 }
+
+.breadcrumbs__trailing {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  top: 3px;
+  margin-left: var(--space-xs);
+}
