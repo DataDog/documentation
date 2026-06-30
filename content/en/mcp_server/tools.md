@@ -1219,7 +1219,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, and managing custom RUM metrics.
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1260,6 +1260,38 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+
+### `append_new_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+
+- Create a retention filter on "checkout-web" that retains 100% of error events.
+- Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+
+### `update_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Affects data retention and billing. Confirm the change before applying.
+
+- Increase the sample rate on the "checkout errors" retention filter to 100%.
+- Disable the "long tasks" retention filter on my main RUM app.
+
+### `reorder_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Affects data retention and billing. Confirm the new order before applying.
+
+- Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
+- Reorder my retention filters so the specific filters are evaluated before the broad ones.
+
+### `delete_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Permanently deletes a RUM retention filter by ID. This action cannot be undone and affects data retention and billing. Confirm the deletion before applying. This operation is idempotent.
+
+- Delete the "legacy sessions" retention filter from "checkout-web".
+- Remove the retention filter with ID `abc-123-def` from my main RUM app.
 
 ### `upsert_rum_metric`
 *Toolset: **rum***\
