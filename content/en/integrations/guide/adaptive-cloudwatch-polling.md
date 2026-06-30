@@ -1,6 +1,5 @@
 ---
 title: Adaptive Polling of CloudWatch Metrics
-private: false
 description: "Adaptive Polling of CloudWatch Metrics"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
