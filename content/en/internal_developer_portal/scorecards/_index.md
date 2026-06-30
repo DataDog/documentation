@@ -1,6 +1,8 @@
 ---
 title: Scorecards
 description: Automatically evaluate entities in your Catalog against defined criteria to measure software health and promote engineering best practices across teams.
+cascade:
+  site_support_id: idp
 aliases:
   - /tracing/software_catalog/scorecards
   - /tracing/service_catalog/scorecards
