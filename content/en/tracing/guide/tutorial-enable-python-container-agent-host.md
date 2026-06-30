@@ -38,7 +38,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 ## Install the Agent
 
-If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+If you haven't installed a Datadog Agent on your machine, go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -210,11 +210,11 @@ MacOS
 Linux
 : `sudo service datadog-agent start`
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host map{{< /ui >}}), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys">{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}</a>.</div>
 
 
 ## Launch the containers to see automatic tracing
@@ -240,7 +240,7 @@ With the application running, send some curl requests to it:
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 

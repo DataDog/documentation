@@ -183,7 +183,7 @@ The [APM Traces Usage dashboard][28] contains several widget groups displaying h
 
 {{% collapse-content title="Missing error message and stack trace" level="h4" %}}
 
-In some traces with an error status, the **Errors** tab shows `Missing error message and stack trace` rather than exception details. 
+In some traces with an error status, the {{< ui >}}Errors{{< /ui >}} tab shows `Missing error message and stack trace` rather than exception details. 
 
 A span can show this message for two possible reasons:
 - The span contains an unhandled exception.
@@ -240,7 +240,7 @@ By default, the environment (`env`) is the primary tag for [Datadog APM][17].
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 
-A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Catalog allows you to scope the data in the **Performance** tab to a specific environment.
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Catalog allows you to scope the data in the {{< ui >}}Performance{{< /ui >}} tab to a specific environment.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Catalog" style="width:100%;" >}}
 

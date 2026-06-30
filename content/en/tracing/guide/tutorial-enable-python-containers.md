@@ -204,7 +204,7 @@ With the application running, send some curl requests to it:
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 

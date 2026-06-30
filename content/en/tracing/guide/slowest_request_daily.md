@@ -35,13 +35,13 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
     In addition to throughput, latency, and error rate information, the service details page contains a list of Resources (major operations like API endpoints, SQL queries, and web requests) identified for the service.
 
 3. **Sort the Resource table by p99 latency** and click into the slowest resource.
-    **Note**: If you cannot see a p99 latency column, you can click on the cog icon `Change Columns` and flip the switch for `p99`.
+    **Note**: If you cannot see a p99 latency column, you can click on the cog icon {{< ui >}}Change Columns{{< /ui >}} and flip the switch for `p99`.
 
     The [Resource][4] page contains high-level metrics about this resource like throughput, latency, error rate, and a breakdown of the time spent on each downstream service from the resource. In addition, it contains the specific [traces][1] that pass through the resource and an aggregate view of the [spans][5] that make up these traces.
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and **click View Trace**
+4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and click {{< ui >}}View Trace{{< /ui >}}
 
     This is the flame graph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The flame graph can be zoomed, scrolled, and explored naturally. Under the flame graph you can see associated metadata, Logs, and Host information.
 
@@ -51,8 +51,8 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-5. **Click into the Host tab**, observe the CPU and memory performance of the underlying host while the request was hitting it.
-6. **Click Open Host Dashboard** to view all relevant data about the host
+5. Click into the {{< ui >}}Host{{< /ui >}} tab, observe the CPU and memory performance of the underlying host while the request was hitting it.
+6. Click {{< ui >}}Open Host Dashboard{{< /ui >}} to view all relevant data about the host
 
 Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the flame graph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
 

@@ -365,13 +365,13 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
 Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
 
-1. Go to the **[Catalog][1]**, and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
+1. Go to the [{{< ui >}}Catalog{{< /ui >}}][1], and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" style="width:90%;">}}
 
 The span summary table provides aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
 
-2. Scroll down to the **Traces list** and click into one of your traces.
+2. Scroll down to the {{< ui >}}Traces list{{< /ui >}} and click into one of your traces.
 
     {{< img src="tracing/guide/custom_span/custom_span_4_cropped.png" alt="Analytics View" style="width:90%;">}}
 

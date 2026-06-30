@@ -26,7 +26,7 @@ You must have the Datadog Admin Role to create tag enrichment rules. See [Role-b
 
 ### Default tag enrichment rules
 
-To enable a default rule, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and toggle on the default rule for `team` or `system` at the bottom of the page.
+To enable a default rule, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and toggle on the default rule for `team` or `system` at the bottom of the page.
 
 {{< img src="tracing/services/tag_enrichment/tag-enrichment-landing.png" alt="The Tag Enrichment page showing the Suggested rules panel, with options to create enrichment rules for system and team tags for all services." >}}
 
@@ -36,11 +36,11 @@ Enabling a default rule applies `team` or `system` to all telemetry of services 
 
 Custom rules let you target a specific set of services and configure exactly how each tag value is sourced and applied.
 
-1. In Datadog, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and click **+ Add Rule**.
-1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select **Build Advanced Query**.
+1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}+ Add Rule{{< /ui >}}.
+1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select {{< ui >}}Build Advanced Query{{< /ui >}}.
    {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
-   - Select **Add Condition** to add an `AND` condition to your query.
-   - Add multiple values in the **Value** field to create an `OR` condition.
+   - Select {{< ui >}}Add Condition{{< /ui >}} to add an `AND` condition to your query.
+   - Add multiple values in the {{< ui >}}Value{{< /ui >}} field to create an `OR` condition.
 1. Choose tags and enrichment methods:
    - Select the `team` tag, `system` tag, or both.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
@@ -51,11 +51,11 @@ Custom rules let you target a specific set of services and configure exactly how
 
 ### Add a tag enrichment rule from a service page
 
-On any service page that is missing a `team` or `system` tag, click **Service Config** to open the configuration side panel. A banner at the top of the panel indicates which tags are missing.
+On any service page that is missing a `team` or `system` tag, click {{< ui >}}Service Config{{< /ui >}} to open the configuration side panel. A banner at the top of the panel indicates which tags are missing.
 
 {{< img src="tracing/services/tag_enrichment/service-config-side-panel.png" alt="The Service Config side panel for a service, showing a banner that indicates the team and system tags are missing from telemetry, with an Add Tags button." >}}
 
-Click **Add Tags** to open the tag enrichment rule modal pre-populated with that service.
+Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-populated with that service.
 
 {{< img src="tracing/services/tag_enrichment/add-idp-tag-enrichment-rule.png" alt="The Add IDP tag enrichment rule modal, showing fields for selecting entities to enrich, tags to add, and the tag source method." >}}
 

@@ -39,7 +39,7 @@ Reducing ingestion sampling rates will impact any **count** type metric. **Distr
 
 Any **metric** monitor using [metrics from spans](#metrics-from-spans) is impacted by ingestion volume reduction. Metric monitors based on **trace.__** metrics will remain accurate, because these metrics are calculated based on 100% of the traffic.
 
-Count-based [**Trace analytics**][6] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
+Count-based [{{< ui >}}Trace analytics{{< /ui >}}][6] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
 
 ## Assess your services' ingestion configuration
 
@@ -54,8 +54,8 @@ Use the ingestion monthly usage KPI to get an estimation of your usage compared 
 ### Advanced APM usage investigation
 
 The ingestion configuration can be investigated for each service. Click on a service row to see the Service Ingestion Summary, which surfaces:
-- **Ingestion reason breakdown**: which [ingestion mechanism][2] is responsible for the ingestion volume
-- **Top sampling decision makers**: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][7]
+- {{< ui >}}Ingestion reason breakdown{{< /ui >}}: which [ingestion mechanism][2] is responsible for the ingestion volume
+- {{< ui >}}Top sampling decision makers{{< /ui >}}: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][7]
 
 An [out-of-the-box dashboard][8] is also available to get more insights on historical trends related to your ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
 
@@ -63,11 +63,11 @@ An [out-of-the-box dashboard][8] is also available to get more insights on histo
 
 ### Identify services responsible for most of the ingestion volume
 
-To identify which services are responsible for most of the ingestion volume, sort the table by **Downstream Bytes/s**. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
+To identify which services are responsible for most of the ingestion volume, sort the table by {{< ui >}}Downstream Bytes/s{{< /ui >}}. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
 
 If the service is starting the trace, **Downstream Bytes/s** also encompasses the volume of spans coming from downstream services for which the service took the sampling decision.
 
-The **Traffic Breakdown** column gives a good indication of the service's sampling configuration.
+The {{< ui >}}Traffic Breakdown{{< /ui >}} column gives a good indication of the service's sampling configuration.
 
 If the service has a high Downstream Bytes/s rate and a high sampling rate (displayed as the blue filled section of the traffic breakdown column), reducing the sampling rate for this service is expected to have a high impact on the ingestion volume.
 
@@ -75,7 +75,7 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 ### Globally configure the ingestion sampling rate at the Agent level
 
-The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
+The {{< ui >}}Configuration{{< /ui >}} column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_TARGET_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 
@@ -89,11 +89,11 @@ Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 
 By configuring sampling rates for a few high-throughput services, most of the "exceeding" ingestion volume can be lowered.
 
-Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
+Click on a service to view the {{< ui >}}Service Ingestion Summary{{< /ui >}}. Look at the {{< ui >}}Ingestion reasons breakdown{{< /ui >}} in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 
 If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the SDK level.
 
-Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
+Click the {{< ui >}}Manage Ingestion Rate{{< /ui >}} button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 
 **Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][11].
 

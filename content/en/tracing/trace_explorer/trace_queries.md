@@ -36,11 +36,11 @@ A trace query is composed of two or more [span queries](#span-queries), joined b
 
 Query for spans from a specific environment, service, or endpoint using the [Span query syntax][1]. Use autocomplete suggestions to view facets and recent queries.
 
-Click **Add another span query** to add a span query and use it in the trace query statement.
+Click {{< ui >}}Add another span query{{< /ui >}} to add a span query and use it in the trace query statement.
 
 ### Trace query operators
 
-Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces matching** field, using operators between the letters that represent each span query:
+Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the {{< ui >}}Traces matching{{< /ui >}} field, using operators between the letters that represent each span query:
 
 {{< img src="/tracing/trace_queries/traces_matching.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
 
@@ -54,16 +54,16 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 
 ### Trace-level filters
 
-Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  **Where** statement:
+Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  {{< ui >}}Where{{< /ui >}} statement:
 
 {{< img src="/tracing/trace_queries/where_statement.png" alt="Trace-level filters example" style="width:100%;" >}}
 
 
 | Filter | Description | Example |
 |-----|-----|-----|
-| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
-| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>**Where**`total_span_count:>1000` |
-| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>5s` |
+| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- {{< ui >}}queryA{{< /ui >}}:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- {{< ui >}}Traces matching{{< /ui >}}:`a`<br/>- {{< ui >}}Where{{< /ui >}}:`span_count(a):>10`|
+| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>{{< ui >}}Where{{< /ui >}}`total_span_count:>1000` |
+| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>{{< ui >}}Where{{< /ui >}}:`trace_duration:>5s` |
 
 ## Flow Map
 

@@ -176,7 +176,7 @@ After enabling the .NET Tracer for your service:
 
 2. Create application load.
 
-3. In Datadog, navigate to [**APM** > **APM Traces**][3].
+3. In Datadog, navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}APM Traces{{< /ui >}}][3].
 
 ## Configuration
 

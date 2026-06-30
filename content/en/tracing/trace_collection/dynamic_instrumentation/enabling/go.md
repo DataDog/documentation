@@ -72,7 +72,7 @@ datadog:
    - `DD_ENV`
    - `DD_VERSION`
 3. Restart your service.
-4. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
+4. After the service starts, you can add and manage instrumentations from the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Live Debugger{{< /ui >}}][3] page.
 
 [201]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 

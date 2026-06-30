@@ -39,7 +39,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 If you haven't installed a Datadog Agent on your machine, install one now.
 
-1. Go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+1. Go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
    {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
@@ -54,11 +54,11 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
    **MacOS**: `launchctl start com.datadoghq.agent`<br/>
    **Linux**: `sudo service datadog-agent start`
 
-4. Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+4. Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure</strong> > <strong>Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings</strong> > <strong>API Keys</strong></a>.</div>
 
 
 ## Install the sample Dockerized Java application
@@ -221,7 +221,7 @@ With the application running, send some curl requests to it:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 

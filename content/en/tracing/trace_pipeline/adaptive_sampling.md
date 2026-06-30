@@ -73,8 +73,8 @@ Limits apply to service and environment combinations depending on the sampling c
 
 To get started with adaptive sampling, you first need to pick a target strategy setting:
 
-- **Set Budget by Number of APM Hosts**: Configure a budget that is proportional to your allotment and the number of services onboarded (for example, based on the number of APM hosts)
-- **Set Budget by Data Volume**: Configure a fixed target in gigabytes per month
+- {{< ui >}}Set Budget by Number of APM Hosts{{< /ui >}}: Configure a budget that is proportional to your allotment and the number of services onboarded (for example, based on the number of APM hosts)
+- {{< ui >}}Set Budget by Data Volume{{< /ui >}}: Configure a fixed target in gigabytes per month
 
 
 |          | Budget by Number of APM Hosts                                                                                                              | Budget by Data Volume                                                                 |
@@ -84,12 +84,12 @@ To get started with adaptive sampling, you first need to pick a target strategy 
 
 To set the adaptive sampling monthly target:
 1. Navigate to the [Ingestion Control][18] page.
-2. Click **Manage Adaptive Sampling Target**.
+2. Click {{< ui >}}Manage Adaptive Sampling Target{{< /ui >}}.
   {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_target_cta.png" alt="Call to action to set adaptive sampling target" style="width:100%;">}}
 3. Choose a target strategy for sampling:
    - [Set budget by number of APM hosts](#set-budget-by-number-of-apm-hosts-recommended)
    - [Set budget by data volume](#set-budget-by-data-volume)
-4. Click **Apply**.
+4. Click {{< ui >}}Apply{{< /ui >}}.
 
 ### Set budget by number of APM hosts (Recommended)
 
@@ -97,9 +97,9 @@ To set the adaptive sampling monthly target:
 
 Set your monthly target to a percentage of your allotment. At the bottom of the page, you are provided with a more complete explanation of how that percentage is converted in a monthly target volume. It is the product of: 
 
-- The **global allotment**: `150GB * number_of_APM_hosts + 50GB * number_of_traced_serverless_invocations (if applicable) + 10GB * number_of_fargate_tasks (if applicable)`
-- The **percentage of allotment** configured above
-- The **contribution of onboarded services** to the allotment. For example, if the services onboarded to adaptive sampling contribute to 10% of the total ingested volume, Datadog targets 10% of the global allotment. This number increases with the number of services onboarded.
+- The {{< ui >}}global allotment{{< /ui >}}: `150GB * number_of_APM_hosts + 50GB * number_of_traced_serverless_invocations (if applicable) + 10GB * number_of_fargate_tasks (if applicable)`
+- The {{< ui >}}percentage of allotment{{< /ui >}} configured above
+- The {{< ui >}}contribution of onboarded services{{< /ui >}} to the allotment. For example, if the services onboarded to adaptive sampling contribute to 10% of the total ingested volume, Datadog targets 10% of the global allotment. This number increases with the number of services onboarded.
 
 {{< img src="/tracing/guide/adaptive_sampling/percentage_based_target_computation.png" alt="Percentage based target computation" style="width:100%;">}}
 
@@ -121,15 +121,15 @@ Before you configure adaptive sampling for a service, you can view the current i
 To see configured sampling rates:
 
 1. Navigate to the [Ingestion Control][18] page.
-2. Click a service to view the **Service Ingestion Summary**.
+2. Click a service to view the {{< ui >}}Service Ingestion Summary{{< /ui >}}.
 3. View the table listing the applied sampling rates by resource of the service.
 
 {{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 The table includes:
-- **Ingested bytes**: Ingested bytes from spans of the service and resource.
-- **Downstream bytes**: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
-- **Configuration**: Source of the resource sampling rate:
+- {{< ui >}}Ingested bytes{{< /ui >}}: Ingested bytes from spans of the service and resource.
+- {{< ui >}}Downstream bytes{{< /ui >}}: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
+- {{< ui >}}Configuration{{< /ui >}}: Source of the resource sampling rate:
   - `AUTOMATIC`: [Default head-based sampling mechanism][8] from the Agent.
   - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the SDK.
   - `CONFIGURED REMOTE`: Remote sampling rule set from the Datadog UI.
@@ -142,17 +142,17 @@ Once a service is onboarded to adaptive sampling, the sampling rates are adjuste
 To onboard a service to adaptive sampling:
 
 1. Navigate to the [Ingestion Control][18] page.
-2. Click a service to view the **Service Ingestion Summary**.
-3. Click **Manage Ingestion Rate**.
-4. Choose **Datadog adaptive sampling rates** as your service's sampling strategy.
+2. Click a service to view the {{< ui >}}Service Ingestion Summary{{< /ui >}}.
+3. Click {{< ui >}}Manage Ingestion Rate{{< /ui >}}.
+4. Choose {{< ui >}}Datadog adaptive sampling rates{{< /ui >}} as your service's sampling strategy.
 5. (Optional) Configure explicit [sampling rates][15] for specific resources, for which you would like to capture more (for example, 100% of `GET /checkout` endpoints) or less (for example, 0.1% of `/health` requests) data.
-6. Click **Apply**.
+6. Click {{< ui >}}Apply{{< /ui >}}.
 
 <div class="alert alert-info">If applying this configuration <strong>Remotely</strong> is disabled, ensure the <a href="#requirements">Remote Configuration requirements</a> are met.</div>
 
 {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
 
-The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.
+The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources that have been configured remotely display as `Configured Remote` in the {{< ui >}}Configuration{{< /ui >}} column.
 
 ## Permissions
 
@@ -171,13 +171,13 @@ To restrict access:
 
 **Note**: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
 
-1. Open the **Permissions** section in the Ingestion Control side panel of the service.
+1. Open the {{< ui >}}Permissions{{< /ui >}} section in the Ingestion Control side panel of the service.
 
-2. Click **Restrict access**.
+2. Click {{< ui >}}Restrict access{{< /ui >}}.
 
 3. Select the teams, roles, or users to grant access to.
 
-4. Click **Add**.
+4. Click {{< ui >}}Add{{< /ui >}}.
 
 ## Further reading
 
