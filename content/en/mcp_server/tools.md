@@ -195,15 +195,6 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Find logs containing 'connection timeout' from our API service.
 - Get all 500 status code logs from production.
 
-### `search_datadog_rum_events`
-*Toolset: **core***\
-*Permissions Required: `RUM Apps Read`*\
-Search Datadog RUM events using advanced query syntax.
-
-- Show JavaScript errors and console warnings in RUM.
-- Find pages that are loading slowly (more than 3 seconds).
-- Show recent user interactions on product detail pages.
-
 ### `create_datadog_notebook`
 *Toolset: **core***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
@@ -1212,7 +1203,23 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
 
-<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+### `search_datadog_rum_events`
+*Toolset: **core**, **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Search and retrieve raw Datadog RUM events using advanced query syntax. Use for inspecting individual events or debugging specific user experience issues. For counts, aggregations, or grouped analysis, use `aggregate_rum_events`.
+
+- Show JavaScript errors and console warnings in RUM.
+- Find pages that are loading slowly (more than 3 seconds).
+- Show recent user interactions on product detail pages.
+
+### `aggregate_rum_events`
+*Toolset: **core**, **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates Datadog RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles (P50–P99), with optional grouping by fields or time intervals. Use for aggregated analysis such as session counts over time, error counts by page, or p95 loading times by browser. For raw event inspection, use `search_datadog_rum_events`.
+
+- Count JavaScript errors per page over the last 7 days, grouped by view URL.
+- Show p95 page load time by browser for the last 24 hours.
+- How many sessions had a loading time above 5 seconds this week?
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1253,6 +1260,22 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Generate Metrics` and `RUM Apps Read`*\
+Creates or updates a RUM custom metric. Immutable fields (event type, aggregation, path) cannot be changed after creation — delete and recreate to change them. Requires `confirm: true`.
+
+- Create a count metric for checkout errors grouped by service: metric ID `rum.error.checkout_errors`, event type `error`, filter `@error.resource.url:*checkout*`, group by `@service`.
+- Update the filter on an existing RUM metric to narrow it to production traffic only.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Generate Metrics` and `RUM Apps Read`*\
+Permanently deletes a RUM custom metric by ID. Only custom metrics can be deleted (not out-of-the-box metrics). Use `search_rum_metrics` with `type=custom` to confirm the metric ID first. Requires `confirm: true`.
+
+- Delete the RUM custom metric `rum.error.checkout_errors`.
+- Remove the metric `rum.view.lcp_by_country` after confirming with the user.
 
 ## Security
 
