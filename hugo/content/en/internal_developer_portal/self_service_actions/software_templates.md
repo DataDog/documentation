@@ -35,7 +35,7 @@ Use [App Builder Blueprints][9] to quickly configure an app or workflow. These b
 
 Example blueprints:
 
-- **[Scaffold New Project in GitHub blueprint][11]**: Scaffolder app can be used for creating new software components from template repositories. It takes inputs from developers and generates a new repository or a PR based on the provided data and the template.
+- **[Scaffold New Project in GitHub blueprint][11]**: Create new repositories or pull requests from a template repository using developer-provided inputs.
 - **[Create S3 Bucket blueprint][10]**: Generate Terraform code for an S3 bucket using a form in GitHub.
 - **[Provision EKS Cluster blueprint][13]**: Generate Terraform code for a Kubernetes cluster in GitHub.
 - **[Provision RDS Instance blueprint][14]**: Provision an RDS instance in AWS through an API call.
