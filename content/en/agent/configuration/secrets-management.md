@@ -387,14 +387,15 @@ The backend configuration for Azure Key Vault secrets is structured as YAML foll
 secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: {keyVaultURL}
-  clientid: {clientID}
+  azure_session:
+    azure_client_id: {clientID}  # User-assigned managed identity client ID; omit for system-assigned
 ```
 
 When using environment variables, convert the configuration to JSON:
 
 ```sh
 DD_SECRET_BACKEND_TYPE="azure.keyvault"
-DD_SECRET_BACKEND_CONFIG='{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+DD_SECRET_BACKEND_CONFIG='{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
 ```
 
 The backend secret is referenced in your Datadog Agent configuration file with `ENC[ ]`. The following is an example where a plain text secret needs to be retrieved:
@@ -404,6 +405,25 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
+
+##### All `azure_session` options
+
+The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional — the Agent falls back to [Default Azure Credential][2001] (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
+
+| Field | Description |
+|---|---|
+| `azure_client_id` | Client ID of a user-assigned Managed Identity, or of a service principal. |
+| `azure_tenant_id` | Tenant ID for service principal authentication. Required together with `azure_client_id` and a client secret or certificate. |
+| `azure_client_secret` | Client secret for service principal authentication. |
+| `azure_client_certificate_path` | Path to a PEM or PKCS12 certificate file for service principal certificate authentication. |
+| `azure_client_certificate_password` | Password for the certificate file (if password-protected). |
+| `azure_client_send_certificate_chain` | Set to `true` to send the full certificate chain when using certificate authentication. |
+
+Authentication is selected based on which fields are provided:
+- **Service principal with secret**: `azure_tenant_id` + `azure_client_id` + `azure_client_secret`
+- **Service principal with certificate**: `azure_tenant_id` + `azure_client_id` + `azure_client_certificate_path`
+- **User-assigned Managed Identity**: `azure_client_id` only
+- **Default Azure Credential** (recommended): omit all `azure_session` fields
 
 {{% /tab %}}
 
@@ -419,7 +439,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -437,7 +458,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
 clusterAgent:
   confd:
     # This is an example
@@ -455,7 +477,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
 clusterAgent:
   confd:
   # This is an example
@@ -488,7 +511,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   override:
     nodeAgent:
       extraConfd:
@@ -516,7 +539,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   override:
     clusterAgent:
       extraConfd:
@@ -543,7 +566,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -559,7 +582,7 @@ spec:
                 password: "ENC[secretKeyNameInKeyVault]"
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "azure.keyvault"` and `spec.global.secretBackend.config` with `keyvaulturl` and `clientid` keys.
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "azure.keyvault"` and `spec.global.secretBackend.config` with `keyvaulturl` and `azure_session.azure_client_id` keys.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1961,6 +1984,7 @@ instances:
 
 <!-- Azure KeyVault Links -->
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+[2001]: https://learn.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication
 
 <!-- HashiCorp Vault Links -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
