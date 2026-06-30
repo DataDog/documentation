@@ -20,12 +20,12 @@ To enable using redrive within Datadog, configure an [AWS Connection][3] with [D
 To take action on a Step Function in Datadog: 
 1. Go to the [Step Functions][2] page. 
 2. Find the Step Function you wish to redrive.
-3. Open this Step Function's side panel. On the **Executions** tab, locate the failed execution you wish to redrive.
-4. Click on the **Failed** pill to open a redrive modal.
-5. Click the **Redrive** button.
+3. Open this Step Function's side panel. On the {{< ui >}}Executions{{< /ui >}} tab, locate the failed execution you wish to redrive.
+4. Click on the {{< ui >}}Failed{{< /ui >}} pill to open a redrive modal.
+5. Click the {{< ui >}}Redrive{{< /ui >}} button.
 
 ## Tracing redrives
-When monitoring redriven executions, use the Waterfall view, as the large gap between the original execution and redrive can make the Flame Graph view imperceptible.
+When monitoring redriven executions, use the {{< ui >}}Waterfall{{< /ui >}} view, as the large gap between the original execution and redrive can make the {{< ui >}}Flame Graph{{< /ui >}} view imperceptible.
 
 ### Troubleshooting missing redrive traces
 A redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
