@@ -61,32 +61,181 @@ Manage Live Debugger for each service and environment from the Live Debugger **S
 
 Live Debugger requires the following minimum tracer versions:
 
-- [Python][5] ≥ 4.11.0
 - [Java][6] ≥ 1.64.0
+- [Python][5] ≥ 4.11.0
 - [.NET][7] ≥ 3.46.0
-- [Ruby][9] ≥ 2.35.0
 - [Node.js][8] ≥ 5.109.0
 - [PHP][10] ≥ 1.21.0
+- [Ruby][9] ≥ 2.35.0
 - [Go][22] ≥ 2.9.0
 
-Older tracer versions might require enabling Live Debugger through an environment variable. Follow the setup instructions for your language:
+Older tracer versions might require enabling Live Debugger through an environment variable. Follow the manual enablement instructions for your language below.
 
-{{< card-grid >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/go" src="integrations_logos/go-metro.png" alt="Go" >}}
-{{< /card-grid >}}
+### Manual enablement
 
-<div class="alert alert-info">
-<b>Why DI instructions?</b>
-Live Debugger is built on <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a>, so its
-setup instructions and limitations also apply here.
-</div>
+Manual enablement is required for Ruby and PHP, and for older tracer versions of Java, Python, .NET, Node.js, and Go. You can also choose manual enablement on supported tracer versions if you prefer to manage enablement through environment variables, for example, to enable Live Debugger in bulk across many services.
+
+<div class="alert alert-info">Live Debugger and <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a> share the same enablement state per service and environment. The <code>DD_DYNAMIC_INSTRUMENTATION_ENABLED</code> environment variable controls enablement for both products, and enabling or disabling one also enables or disables the other for that service and environment. The two products have separate permissions and Settings pages.</div>
+
+Select your runtime for manual enablement instructions:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+**Prerequisites:**
+
+- JDK version 8 or higher.
+- [Java tracer][6] version 1.64.0 or higher.
+
+**Setup:**
+
+Set `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` on your service and start it with the Java agent attached:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+java \
+    -javaagent:dd-java-agent.jar \
+    -jar <YOUR_SERVICE>.jar
+```
+
+The `-javaagent` argument must come before `-jar`.
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab "Python" %}}
+**Prerequisites:**
+
+- [Python tracer (`ddtrace`)][5] version 4.11.0 or higher.
+
+**Setup:**
+
+Install `ddtrace`, then set `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and run your service with `ddtrace-run`:
+
+```shell
+pip install ddtrace
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+ddtrace-run python -m myapp.py
+```
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+**Prerequisites:**
+
+- [.NET tracer][7] version 3.46.0 or higher.
+
+**Setup:**
+
+Set the following environment variables on your service and restart it:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+**Prerequisites:**
+
+- [Node.js tracer (`dd-trace-js`)][8] version 5.109.0 or higher.
+- If your source code is transpiled or bundled (for example, TypeScript), publish source maps along with the deployed application.
+
+**Setup:**
+
+Set the following environment variables on your service and restart it:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+**Prerequisites:**
+
+- [PHP tracer (`dd-trace-php`)][10] version 1.21.0 or higher.
+
+**Setup:**
+
+Set the following environment variables on your service and restart it:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+**Prerequisites:**
+
+- [Ruby tracer (`ddtrace`)][9] version 2.35.0 or higher.
+- Ruby 2.6 or higher (MRI only; JRuby is not supported).
+- A Rack-based web framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
+- `RAILS_ENV` or `RACK_ENV` set to `production`.
+
+**Setup:**
+
+Set the following environment variables on your service and restart it:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+Live Debugger initializes when your application processes its first HTTP request. After your service receives at least one request, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+
+{{% tab "Go" %}}
+**Prerequisites:**
+
+- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application.
+- [Go tracer][22] version 2.9.0 or higher (or 1.74.6 or higher on the v1 line).
+- Linux kernel 5.17 or higher.
+
+**Setup:**
+
+Enable Live Debugger in both the Datadog Agent and your application.
+
+In the Agent, add the following to `system-probe.yaml`:
+
+```yaml
+dynamic_instrumentation:
+  enabled: true
+```
+
+Then start your service with the following environment variables:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+After your service restarts, return to the [Live Debugger page][13] to start a Debug Session.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Permissions
 
