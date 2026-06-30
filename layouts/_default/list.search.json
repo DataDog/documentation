@@ -37,13 +37,16 @@
             {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
             {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
 
-            {{- /* record for each individual section (split by h2 header) */ -}}
+            {{- /* record for each individual section (split by h2/h3 header) */ -}}
+            {{- $before := len ($.Scratch.Get "algoliaindex") -}}
             {{- partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
+            {{- $sectionsAdded := sub (len ($.Scratch.Get "algoliaindex")) $before -}}
 
-            {{/* This page has no h2 headings lets do a full page record, so we don't miss the page */}}
-            {{- $headingCount := (len .Fragments.HeadingsMap) | default 0 -}}
-            {{- if eq $headingCount 0 -}}
-                {{- /* Full page record */ -}}
+            {{- if eq $sectionsAdded 0 -}}
+                {{- /* page-sections produced no records. This happens when the page has no
+                       H2/H3 headings, OR when its only heading(s) are "Further Reading"
+                       (which page-sections skips). Without this, the entire page would be
+                       missing from search. Emit a full-page record so it isn't lost. */ -}}
                 {{- $record := (
                     dict "objectID" $object_id
                     "id" $object_id
