@@ -28,8 +28,8 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 After you select the Socket source in the pipeline UI:
 
 1.  Enter the identifier for your socket address. If you leave it blank, the [default](#secret-defaults) is used.
-1. In the **Mode** dropdown menu, select the socket type to use.
-1. In the **Framing** dropdown menu, select how to delimit the stream of events.
+1. In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select the socket type to use.
+1. In the {{< ui >}}Framing{{< /ui >}} dropdown menu, select how to delimit the stream of events.
     <table>
         <colgroup>
             <col style="width:40%">

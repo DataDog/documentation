@@ -19,20 +19,20 @@ Many types of logs are meant to be used for telemetry to track trends, such as K
 
 To set up the processor:
 
-Click **Manage Metrics** to create new metrics or edit existing metrics. This opens a side panel.
+Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing metrics. This opens a side panel.
 
 - If you have not created any metrics yet, enter the metric parameters as described in the [Add a metric](#add-a-metric) section to create a metric.
-- If you have already created metrics, click on the metric's row in the overview table to edit or delete it. Use the search bar to find a specific metric by its name, and then select the metric to edit or delete it. Click **Add Metric** to add another metric.
+- If you have already created metrics, click on the metric's row in the overview table to edit or delete it. Use the search bar to find a specific metric by its name, and then select the metric to edit or delete it. Click {{< ui >}}Add Metric{{< /ui >}} to add another metric.
 
 ### Add a metric
 
  1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
-1. In the **Define parameters** section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
+1. In the {{< ui >}}Define parameters{{< /ui >}} section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
     - For gauge and distribution metric types, select a log field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
-    - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
-1. Click **Add Metric**.
+    - The {{< ui >}}Group by{{< /ui >}} field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the {{< ui >}}Group by{{< /ui >}} setting are set as tags on the configured metric.
+1. Click {{< ui >}}Add Metric{{< /ui >}}.
 
 ### Configure a metrics destination
 

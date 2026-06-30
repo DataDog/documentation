@@ -20,10 +20,6 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
-{{< learning-center-callout header="" btn_title="Learn more" btn_url="/security/guide/security-findings-migration/" hide_image="true" >}}
-  Learn about migrating to this new schema so you can avoid any interruptions to your workflows.
-{{< /learning-center-callout >}}
-
 ## Examples
 
 There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
@@ -5471,12 +5467,17 @@ Evidence used to identify the resource as being critical.
     <tr>
       <td><code>explanation</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.explanation</code><br>Markdown-formatted explanation detailing why the resource or related resource is identified as critical.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.explanation</code><br>Explanation detailing why the resource or related resource is identified as critical.</td>
     </tr>
     <tr>
       <td><code>related_resource_name</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_name</code><br>Name of a long-lived critical asset, such as a critical service, that justifies why the affected resource is considered critical.</td>
+    </tr>
+    <tr>
+      <td><code>sensitive_data</code></td>
+      <td>array (string)</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.sensitive_data</code><br>Sensitive data types detected on the resource that contribute to its classification as a critical asset (for example, <code>visa_credit_card</code>).</td>
     </tr>
   </tbody>
 </table>
@@ -5631,7 +5632,7 @@ Evidence used to determine whether the function is reachable.
     <tr>
       <td><code>unreachable_at</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.unreachable_at</code><br>Timestamp in milliseconds (UTC) at which the finding will transition to unreachable if the vulnerable function has not been called.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.unreachable_at</code><br>Timestamp in milliseconds (UTC) at which the finding transitions to an unreachable state if the vulnerable function is not called.</td>
     </tr>
   </tbody>
 </table>
@@ -6938,6 +6939,16 @@ Metadata about user-defined severity modifications applied to the finding.
       <td><code>description</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@workflow.severity_override.description</code><br>Description of the user-defined severity modification applied to the finding.</td>
+    </tr>
+    <tr>
+      <td><code>rule_id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.rule_id</code><br>Identifier of the severity modifier automation rule that applied this severity override. Only set when the override was applied by an automation rule.</td>
+    </tr>
+    <tr>
+      <td><code>rule_name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.rule_name</code><br>Name of the severity modifier automation rule that applied this severity override. Only set when the override was applied by an automation rule.</td>
     </tr>
     <tr>
       <td><code>updated_at</code></td>

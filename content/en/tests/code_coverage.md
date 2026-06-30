@@ -357,14 +357,14 @@ Reported code coverage is reported as `@test.code_coverage.lines_pct`, which rep
 
 ## Test Session coverage tab
 
-Reported code coverage also appears on the **Coverage** tab in a test session's details page:
+Reported code coverage also appears on the {{< ui >}}Coverage{{< /ui >}} tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
 
 ## Export your graph
 
-You can export your graph to a [dashboard][2] or a [notebook][3], and create a [monitor][4] based on it by clicking the **Export** button:
+You can export your graph to a [dashboard][2] or a [notebook][3], and create a [monitor][4] based on it by clicking the {{< ui >}}Export{{< /ui >}} button:
 
 {{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:60%" >}}
 

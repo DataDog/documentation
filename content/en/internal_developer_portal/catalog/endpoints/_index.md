@@ -1,5 +1,6 @@
 ---
 title: Endpoint Observability
+description: Monitor and manage HTTP API endpoints with performance metrics, ownership tracking, alerting, and test coverage from a single view.
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"

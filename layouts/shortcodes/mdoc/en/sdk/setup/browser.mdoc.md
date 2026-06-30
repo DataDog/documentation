@@ -362,7 +362,7 @@ To request support for a web server that is not listed here, [fill out this form
 
 Visualize the [data collected][11] in [dashboards][12] or create a search query in the [RUM Explorer][5].
 
-Your application appears as pending on the Applications page until Datadog starts receiving data.
+Your application appears as pending on the Applications page until Datadog starts receiving data. If data takes time to appear, see [Troubleshooting Browser SDK Issues][15].
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
@@ -378,4 +378,5 @@ Your application appears as pending on the Applications page until Datadog start
 [12]: /real_user_monitoring/platform/dashboards/
 [13]: /private-beta/rum-sdk-auto-injection/
 [14]: /real_user_monitoring/application_monitoring/browser/setup/client
+[15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
 

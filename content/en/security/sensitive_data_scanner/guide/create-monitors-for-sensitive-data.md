@@ -45,8 +45,8 @@ Sensitive Data Scanner works across multiple Datadog products: Logs, APM, and RU
 
 To create a log monitor for sensitive data matches:
 
-1. Navigate to **Monitors > New Monitor > [Logs][2]**.
-2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
+1. Navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > [Logs][2].
+2. In the {{< ui >}}Define the search query{{< /ui >}} section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
     - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:payment_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
 3. Configure the alert conditions based on your needs:
     - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur within five minutes).
@@ -71,9 +71,9 @@ To reduce false positives, scope your query to multiple specific rule types with
 
 To create an APM monitor for sensitive data in traces:
 
-1. Navigate to **Monitors > New Monitor > [APM][3]**.
-2. Select **Trace Analytics** as the monitor type.
-3. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to traces containing sensitive data.
+1. Navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > [APM][3].
+2. Select {{< ui >}}Trace Analytics{{< /ui >}} as the monitor type.
+3. In the {{< ui >}}Define the search query{{< /ui >}} section, add the `sensitive_data:*` tag to scope your monitor to traces containing sensitive data.
     - Use `sensitive_data_category:*` tags to scope to specific categories of sensitive data.
 4. Configure the alert conditions:
     - **Threshold**: Set appropriate thresholds based on your expected trace volume.
@@ -90,8 +90,8 @@ If you want to scope to specific credential types, such as AP keys or AWS access
 
 To create a RUM monitor for sensitive data in events:
 
-1. Navigate to **Monitors > New Monitor > [RUM][4]**.
-2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to RUM events containing sensitive data.
+1. Navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > [RUM][4].
+2. In the {{< ui >}}Define the search query{{< /ui >}} section, add the `sensitive_data:*` tag to scope your monitor to RUM events containing sensitive data.
 3. Configure the alert conditions:
     - **Threshold**: Set appropriate thresholds for sensitive data matches in user sessions.
     - **Group by**: Group by `application.name`, `view.name`, or `geo.country` to identify where sensitive data is being captured.

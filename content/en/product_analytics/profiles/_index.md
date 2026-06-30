@@ -145,27 +145,27 @@ Use integrations or reference tables to automatically import custom attribute da
 
 On the [Integrations page][4], you can explore the integrations that are compatible with custom attributes.
 
-On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
+On this same page, you can select the [{{< ui >}}Custom Attributes{{< /ui >}}][5] tab to view imported attributes for user and account profiles.
 
 {{< img src="product_analytics/integration_page5.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
-To import attributes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to:
+To import attributes from a reference table or from an integration such as Salesforce or Snowflake, select the {{< ui >}}Add Attributes{{< /ui >}} button and choose whether the attributes are for user or account profiles. Then, follow the prompts to:
 
 
 {{< img src="product_analytics/add_attribute2_button.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
-1. Choose a **source of the data** to be imported.
+1. Choose a {{< ui >}}source of the data{{< /ui >}} to be imported.
 
 {{< img src="product_analytics/choose_integration1.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
 
 
-2. Select the **table** containing the desired user data.
+2. Select the {{< ui >}}table{{< /ui >}} containing the desired user data.
 
 {{< img src="product_analytics/add_table_and_key3.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Select the **join key** and the **Product Analytics key** to merge the table with your profiles. Then, select which **attributes** from the list to add to your profiles.
+3. Select the {{< ui >}}join key{{< /ui >}} and the {{< ui >}}Product Analytics key{{< /ui >}} to merge the table with your profiles. Then, select which {{< ui >}}attributes{{< /ui >}} from the list to add to your profiles.
 
 {{< img src="product_analytics/select_integration_attributes5.png" alt="The Configure import modal for Snowflake, showing the join key configuration and a list of selectable attributes with column names, types, and sample values." style="width:80%;" >}}
 
