@@ -219,7 +219,7 @@ Notifications are bundled over a short period to reduce noise. The weekly digest
 | **Fix successful** | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | **Fix failed** | A test fails during the remediation flow. |
 | **Manual state change** | A user manually changes the state of a flaky test. |
-| **Weekly digest summary** | A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. |
+| **Weekly digest summary** | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. This notification is currently available to a subset of customers. |
 
 {{< img src="tests/flaky_management_notifications_settings-2.png" alt="Notifications settings UI" style="width:100%;" >}}
 
@@ -248,6 +248,10 @@ If you are using `@slack-CHANNEL` (without the account name), the notification i
 To find your account name, go to the [Slack integration tile][5] and check the
 **Account Name** field for the workspace you want to use.
 
+### Weekly digest summary notifications cannot be disabled
+
+The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -265,5 +269,6 @@ To find your account name, go to the [Slack integration tile][5] and check the
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[14]: /help/
 [16]: /bits_ai/bits_ai_dev_agent/
 [17]: /integrations/guide/source-code-integration/
