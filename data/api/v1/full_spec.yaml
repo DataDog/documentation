@@ -5914,10 +5914,21 @@ components:
             description: Team handle.
             type: string
           type: array
+        version:
+          $ref: "#/components/schemas/ListStreamQueryVersion"
       required:
         - query_string
         - data_source
       type: object
+    ListStreamQueryVersion:
+      description: |-
+        Version of the query for the logs transaction stream widget. When omitted, v1 query behavior is
+        preserved. Set to `sequential_query` to use v2 behavior. **This feature is in Preview.**
+      enum:
+        - sequential_query
+      type: string
+      x-enum-varnames:
+        - SEQUENTIAL_QUERY
     ListStreamResponseFormat:
       description: Widget response format.
       enum:
