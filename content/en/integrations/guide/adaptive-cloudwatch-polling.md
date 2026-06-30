@@ -20,7 +20,7 @@ To see which metrics are unqueried, go to the [Metric Summary][2] page and filte
 
 ## Considerations
 
-* Metrics used in Datadog monitors will always be considered active 
+* Metrics used in Datadog monitors are always considered active.
 * Custom metrics are not included in apative polling  
 
 ### Multiple AWS accounts
