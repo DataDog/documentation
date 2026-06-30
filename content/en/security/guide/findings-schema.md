@@ -20,6 +20,10 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
+{{< learning-center-callout header="" btn_title="Learn more" btn_url="/security/guide/security-findings-migration/" hide_image="true" >}}
+  Learn about migrating to this new schema so you can avoid any interruptions to your workflows.
+{{< /learning-center-callout >}}
+
 ## Examples
 
 There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
@@ -1873,6 +1877,11 @@ These attributes are present on all security findings and describe the fundament
       <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>, <code>resolved</code>, <code>in-progress</code>.</td>
     </tr>
     <tr>
+      <td><code>time_to_acknowledge</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@time_to_acknowledge</code><br>Time in seconds between when the finding was first detected and when it was acknowledged through assignment or ticket creation.</td>
+    </tr>
+    <tr>
       <td><code>time_to_resolution</code></td>
       <td>integer</td>
       <td><strong>Path:</strong> <code>@time_to_resolution</code><br>Time in seconds between when the finding was first detected and when it was resolved.</td>
@@ -3552,6 +3561,11 @@ Remediation package information.
       <td><strong>Path:</strong> <code>@remediation.package.base</code><br>Current package version that the finding was detected on, before any remediation is applied.</td>
     </tr>
     <tr>
+      <td><code>closest_minimum_risk_only_no_fix_vulnerabilities</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities</code><br>Closest package version that only contains vulnerabilities for which no fix is available, minimizing risk exposure.</td>
+    </tr>
+    <tr>
       <td><code>closest_no_critical</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical</code><br>Closest package version with no critical vulnerabilities (based on base score).</td>
@@ -3704,6 +3718,140 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Closest Minimum Risk Only No Fix Vulnerabilities
+
+Closest package version that only contains vulnerabilities for which no fix is available, minimizing risk exposure.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fixed_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories</code><br>Advisories that the remediation will fix.</td>
+    </tr>
+    <tr>
+      <td><code>has_incomplete_data</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
+    </tr>
+    <tr>
+      <td><code>is_auto_solvable</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.name</code><br>Recommended package name that fixes the finding.</td>
+    </tr>
+    <tr>
+      <td><code>new_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories</code><br>Advisories that will appear if the remediation is applied.</td>
+    </tr>
+    <tr>
+      <td><code>original_name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
+    </tr>
+    <tr>
+      <td><code>remaining_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.version</code><br>Recommended package version that fixes the finding.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Fixed Advisories
+
+Advisories that the remediation will fix.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### New Advisories
+
+Advisories that will appear if the remediation is applied.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Remaining Advisories
+
+Advisories that will remain unfixed if the remediation is applied.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4263,6 +4411,11 @@ Remediation root package information.
       <td><strong>Path:</strong> <code>@remediation.root_package.base</code><br>Current package version that the finding was detected on, before any remediation is applied.</td>
     </tr>
     <tr>
+      <td><code>closest_minimum_risk_only_no_fix_vulnerabilities</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities</code><br>Closest package version that only contains vulnerabilities for which no fix is available, minimizing risk exposure.</td>
+    </tr>
+    <tr>
       <td><code>closest_no_critical</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical</code><br>Closest package version with no critical vulnerabilities (based on base score).</td>
@@ -4415,6 +4568,140 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Closest Minimum Risk Only No Fix Vulnerabilities
+
+Closest package version that only contains vulnerabilities for which no fix is available, minimizing risk exposure.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fixed_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories</code><br>Advisories that the remediation will fix.</td>
+    </tr>
+    <tr>
+      <td><code>has_incomplete_data</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
+    </tr>
+    <tr>
+      <td><code>is_auto_solvable</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.name</code><br>Recommended package name that fixes the finding.</td>
+    </tr>
+    <tr>
+      <td><code>new_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories</code><br>Advisories that will appear if the remediation is applied.</td>
+    </tr>
+    <tr>
+      <td><code>original_name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
+    </tr>
+    <tr>
+      <td><code>remaining_advisories</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.version</code><br>Recommended package version that fixes the finding.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Fixed Advisories
+
+Advisories that the remediation will fix.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### New Advisories
+
+Advisories that will appear if the remediation is applied.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Remaining Advisories
+
+Advisories that will remain unfixed if the remediation is applied.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>base_severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
