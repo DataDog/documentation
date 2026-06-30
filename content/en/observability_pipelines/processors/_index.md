@@ -66,17 +66,17 @@ These are the available processors:
 [15]: /observability_pipelines/processors/sample/
 [16]: /observability_pipelines/processors/sensitive_data_scanner/
 [17]: /observability_pipelines/processors/split_array/
-[18]: /observability_pipelines/processors/tag_control/logs/
+[18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
 - [Filter][1]
-- [Tag Control][2]
+- [Tag Allow/Block List][2]
 
 [1]: /observability_pipelines/processors/filter/
-[2]: /observability_pipelines/processors/tag_control/
+[2]: /observability_pipelines/processors/tag_allow_block_list/
 
 {{% /tab %}}
 {{< /tabs >}}

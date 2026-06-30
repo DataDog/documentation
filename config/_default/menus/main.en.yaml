@@ -6750,11 +6750,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 317
-    - name: Tag Control
-      url: observability_pipelines/processors/tag_control/logs/
+    - name: Tag Allow/Block List
+      url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tag_control
+      identifier: observability_pipelines_processors_tag_allow_block_list
       weight: 318
+    - name: Tags
+      url: observability_pipelines/processors/tags/
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tags
+      weight: 319
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
