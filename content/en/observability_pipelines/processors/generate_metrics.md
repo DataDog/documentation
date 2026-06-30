@@ -11,9 +11,9 @@ products:
 
 ## Overview
 
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query, and send the metrics to your destination.
 
-**Note**: The metrics generated are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
+**Note**: The metrics generated from logs and routed to Datadog are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
 ## Setup
 
@@ -35,6 +35,20 @@ Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
     - The {{< ui >}}Group by{{< /ui >}} field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the {{< ui >}}Group by{{< /ui >}} setting are set as tags on the configured metric.
 1. Click {{< ui >}}Add Metric{{< /ui >}}.
+
+### Configure a metrics destination
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Sending metrics generated from logs to the Splunk HEC, Elasticsearch, or HTTP/S Client destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
+<div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker versions 2.18 and later.<br><br>If you upgrade to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor and you want to select a destination other than Datadog Metrics, you must:<br>&nbsp;&nbsp;&nbsp;&nbsp;1. Delete the previous Generate Metrics processor.<br>&nbsp;&nbsp;&nbsp;&nbsp;2. Add and configure a new Generate Metrics processor.</div>
+
+{{< img src="observability_pipelines/processors/generate_metrics_destination.png" alt="The Generate Metrics processor with the select a destination highlighted." style="width:50%;" >}}
+
+1. On the Generate Metrics processor, click **Add Metrics Destination**.<br>**Note**: If you are using Pipeline Simulation, return to the pipeline page to configure your metrics destination. Click **Back to pipeline** on the top-right corner of the Pipeline Simulation page.
+1. [Datadog Metrics][6] is the default destination. To select a different destination, click the pencil icon on the Datadog Metrics destination and select **Change metrics destination**.
+1. Select your destination and follow the setup instructions for the specific [destination][7].
 
 ## Metrics types
 
@@ -93,17 +107,19 @@ The Generate Metrics processor can only use the log `timestamp` field to set the
 
 To convert a string timestamp to timestamp format:
 
-1. Add a [Custom Processor][6] to your pipeline before the Generate Metrics processor.
+1. Add a [Custom Processor][8] to your pipeline before the Generate Metrics processor.
 1. Add a function with the following custom script:
     ```
     .timestamp = parse_timestamp!(.timestamp, format: "%+")
     ```
-    See [parse_timestamp][7] for more information.
+    See [parse_timestamp][9] for more information.
 
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
 [3]: /metrics/types/
 [4]: /metrics/distributions/
 [5]: /observability_pipelines/search_syntax/logs/
-[6]: /observability_pipelines/processors/custom_processor/#setup
-[7]: /observability_pipelines/processors/custom_processor/#parse_timestamp
+[6]: /observability_pipelines/destinations/datadog_metrics/
+[7]: /observability_pipelines/destinations/?tab=metrics#destinations
+[8]: /observability_pipelines/processors/custom_processor/#setup
+[9]: /observability_pipelines/processors/custom_processor/#parse_timestamp
