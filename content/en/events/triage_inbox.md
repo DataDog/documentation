@@ -66,4 +66,4 @@ On the right hand split-view side panel, you can perform the following:
 [2]: /incident_response/on-call/
 [3]: /actions/workflows/
 [4]: https://app.datadoghq.com/event/correlation
-[5]: /incident_response/case_management/automation_rules/
+[5]: /incident_response/work_management/automation_rules/

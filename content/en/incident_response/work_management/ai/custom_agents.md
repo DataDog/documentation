@@ -1,5 +1,7 @@
 ---
 title: Custom Agents
+aliases:
+- /incident_response/case_management/ai/custom_agents/
 description: Learn how to use custom agents built with Bits Agent Builder to automate Work Management workflows in Datadog.
 further_reading:
 - link: "/actions/agents/"
@@ -38,7 +40,7 @@ Assign work items to agents from Bits Agent Builder manually or automatically us
 
 In a work item, select an agent from the **Agent Assignee** field dropdown.
 
-<!-- {{< img src="/incident_response/case_management/ai_tools/case_agent_assignee.png" alt="Work item detail view showing the Agent Assignee dropdown with a custom agent selected." style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/ai_tools/case_agent_assignee.png" alt="Work item detail view showing the Agent Assignee dropdown with a custom agent selected." style="width:100%;" >}} -->
 
 ### Automated assignment
 
@@ -52,7 +54,7 @@ Use [work item automation rules][3] to assign work items to agents automatically
 1. Select **Assign Agent** and choose the custom agent to assign matching work items to.
 1. Enable and name your rule.
 
-<!-- {{< img src="/incident_response/case_management/ai_tools/agent_automation_rule.png" alt="Create Automation Rule modal showing the Assign Agent action selected and a custom agent specified." style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/ai_tools/agent_automation_rule.png" alt="Create Automation Rule modal showing the Assign Agent action selected and a custom agent specified." style="width:100%;" >}} -->
 
 
 ## Further reading
@@ -61,5 +63,5 @@ Use [work item automation rules][3] to assign work items to agents automatically
 
 [1]: /actions/agents/
 [2]: /actions/actions_catalog/
-[3]: /incident_response/case_management/automation_rules/
+[3]: /incident_response/work_management/automation_rules/
 [4]: https://app.datadoghq.com/cases/settings

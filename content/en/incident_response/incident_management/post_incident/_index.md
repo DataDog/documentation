@@ -11,7 +11,7 @@ further_reading:
 - link: "/incident_response/incident_management/post_incident/follow-ups"
   tag: "Documentation"
   text: "Manage incident follow-up tasks"
-- link: "/incident_response/case_management/"
+- link: "/incident_response/work_management/"
   tag: "Documentation"
   text: "Track follow-ups with Work Management"
 ---
@@ -65,6 +65,6 @@ For more information on integrating status pages with your incident workflow, se
 [1]: https://app.datadoghq.com/incidents/settings
 [2]: /incident_response/incident_management/post_incident/postmortems
 [3]: /integrations/jira/
-[4]: /incident_response/case_management/
+[4]: /incident_response/work_management/
 [5]: /incident_response/incident_management/post_incident/follow-ups
 [6]: /incident_response/status_pages/

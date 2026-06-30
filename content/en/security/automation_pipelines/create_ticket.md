@@ -21,7 +21,7 @@ further_reading:
   - link: "/security/ticketing_integrations"
     tag: "Documentation"
     text: "Ticketing Integrations"
-  - link: "/incident_response/case_management"
+  - link: "/incident_response/work_management"
     tag: "Documentation"
     text: "Case Management"
 ---

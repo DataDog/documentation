@@ -261,7 +261,7 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [1]: https://app.datadoghq.com/ci/test/flaky
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
-[4]: /incident_response/case_management
+[4]: /incident_response/work_management
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /tests/setup/dotnet/
 [7]: /tests/setup/go/

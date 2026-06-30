@@ -219,8 +219,8 @@ nav_sections:
         link: service_level_objectives/
         icon: slos
         desc: Define and track performance targets to deliver a consistent customer experience
-      - title: Case Management
-        link: incident_response/case_management/
+      - title: Work Management
+        link: incident_response/work_management/
         icon: case-management
         desc: Triage, track, and remediate issues with centralized ownership and team collaboration
       - title: Workflow Automation

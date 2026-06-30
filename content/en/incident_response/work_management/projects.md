@@ -2,9 +2,10 @@
 title: Projects
 aliases:
 - /service_management/case_management/projects/
+- /incident_response/case_management/projects/
 disable_toc: false
 further_reading:
-- link: "incident_response/case_management/create_case"
+- link: "incident_response/work_management/create_work_item"
   tag: "Documentation"
   text: "Create a work item"
 ---
@@ -15,7 +16,7 @@ A project is a container object that holds a set of work items. Organize your wo
 
 ## Create a project
 
-<!-- {{< img src="incident_response/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Work Management Settings" style="width:100%;" >}} -->
+<!-- {{< img src="incident_response/work_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Work Management Settings" style="width:100%;" >}} -->
 
 To create a project:
 1. Select **New Project** on the Projects view or click on the **+** icon next to *Your Projects* in the left navigation bar.

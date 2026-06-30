@@ -2,11 +2,12 @@
 title: Create a Work Item
 aliases:
 - /service_management/case_management/create_case/
+- /incident_response/case_management/create_case/
 further_reading:
-- link: "/incident_response/case_management/view_and_manage"
+- link: "/incident_response/work_management/view_and_manage"
   tag: "Documentation"
   text: "View and Manage Work Items"
-- link: "/incident_response/case_management/customization"
+- link: "/incident_response/work_management/customization"
   tag: "Documentation"
   text: "Work Management Customization"
 
@@ -81,4 +82,4 @@ Create a case through the [API endpoint][5].
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case
 [6]: /actions/workflows/trigger/
-[7]: /incident_response/case_management/customization
+[7]: /incident_response/work_management/customization

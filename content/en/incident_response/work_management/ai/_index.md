@@ -4,6 +4,7 @@ description: Datadog Work Management integrates with AI tools to help automate w
 aliases:
 - /service_management/case_management/mcp_server/
 - /incident_response/case_management/mcp_server/
+- /incident_response/case_management/ai/
 ---
 
 {{< site-region region="gov" >}}
@@ -32,4 +33,4 @@ Assign work items to specialized agents built with [Bits Agent Builder][3] to au
 [1]: /mcp_server
 [2]: https://modelcontextprotocol.io/
 [3]: /actions/agents/
-[4]: /incident_response/case_management/ai/custom_agents/
+[4]: /incident_response/work_management/ai/custom_agents/

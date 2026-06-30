@@ -3,11 +3,12 @@ title: Notifications and Integrations
 aliases:
 - /service_management/case_management/create_notifications_and_third_party_tickets
 - /service_management/case_management/notifications_integrations/
+- /incident_response/case_management/notifications_integrations/
 further_reading:
 - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
   tag: "Blog"
   text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
-- link: "/incident_response/case_management/troubleshooting"
+- link: "/incident_response/work_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
 ---
@@ -92,7 +93,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 In Project Settings, you can manage membership, configure the auto-closing of work items, and set up third-party integrations like Jira and ServiceNow.
 
 {{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
-<!-- {{< img src="/incident_response/case_management/settings/settings_jira.png" alt="Jira configuration options for Work Management settings" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/settings/settings_jira.png" alt="Jira configuration options for Work Management settings" style="width:100%;" >}} -->
 
 1. Ensure the Jira integration is configured.
 1. In Work Management project settings, enable **Jira** for manual Jira issue creation from the project.
@@ -157,7 +158,7 @@ Manual incident declaration during high event volumes can cause delays and incre
 
 Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate work items to Incidents**. <!-- [TO VERIFY] -->
 
-<!-- {{< img src="/incident_response/case_management/notifications_integrations/case_auto_escalation.png" alt="Work Management settings page showing incident auto-escalation configuration" style="width:70%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/notifications_integrations/case_auto_escalation.png" alt="Work Management settings page showing incident auto-escalation configuration" style="width:70%;" >}} -->
 
 When enabled, any work item that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
 
@@ -193,6 +194,6 @@ Slack thread mirroring is enabled by default for all Work Management projects. T
 [4]: /incident_response/on-call/
 [5]: /integrations/linear/
 [6]: /integrations/linear/#configure-a-linear-webhook
-[7]: /incident_response/case_management/create_case#automatic-work-item-creation
-[8]: /incident_response/case_management/notifications_integrations#notifications
+[7]: /incident_response/work_management/create_work_item#automatic-work-item-creation
+[8]: /incident_response/work_management/notifications_integrations#notifications
 [9]: /integrations/slack/?tab=datadogforslack

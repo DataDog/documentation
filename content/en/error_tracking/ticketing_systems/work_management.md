@@ -1,5 +1,7 @@
 ---
 title: Integrate Work Management with Error Tracking
+aliases:
+- /error_tracking/ticketing_systems/case_management/
 is_beta: false
 private: false
 further_reading:

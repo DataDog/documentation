@@ -31,7 +31,7 @@ These features help your teams respond to errors faster by bridging the gap betw
 {{< whatsnext desc="Select your ticketing system to get started:" >}}
     {{< nextlink href="error_tracking/ticketing_systems/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="error_tracking/ticketing_systems/linear" >}}Linear{{< /nextlink >}}
-    {{< nextlink href="error_tracking/ticketing_systems/case_management" >}}Work Management{{< /nextlink >}}
+    {{< nextlink href="error_tracking/ticketing_systems/work_management" >}}Work Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

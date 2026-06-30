@@ -212,7 +212,7 @@ nav_sections:
         icon: slos
         desc: Define y rastrea objetivos de rendimiento para ofrecer una experiencia al cliente consistente
       - title: Case Management
-        link: incident_response/case_management/
+        link: incident_response/work_management/
         icon: case-management
         desc: "Clasificar, rastrear y remediar problemas con propiedad centralizada y colaboración del equipo"
       - title: Workflow Automation

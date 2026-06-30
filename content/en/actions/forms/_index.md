@@ -121,7 +121,7 @@ By default, only the creator of a form can access it. To change the permissions 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 [2]: https://app.datadoghq.com/forms
 [3]: /actions/forms/components/
 [4]: /actions/forms/responses/

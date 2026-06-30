@@ -140,7 +140,7 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [2]: /monitors/notify
 [3]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
 [4]: https://app.datadoghq.com/bits-ai/settings/integrations
-[5]: /incident_response/case_management/projects
+[5]: /incident_response/work_management/projects
 [6]: https://app.datadoghq.com/cases/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac

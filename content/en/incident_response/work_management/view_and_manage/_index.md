@@ -2,18 +2,19 @@
 title: View and Manage Work Items
 aliases:
 - /service_management/case_management/view_and_manage/
+- /incident_response/case_management/view_and_manage/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-risk-management"
   tag: "Blog"
   text: "How we centralize and remediate risks with Datadog Case Management"
-- link: "incident_response/case_management/settings"
+- link: "incident_response/work_management/settings"
   tag: "Documentation"
   text: "Work Management settings"
 ---
 
 ## Overview
 
-<!-- {{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Work Management page showing view of all work items, option to select status, and view assigned members" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Work Management page showing view of all work items, option to select status, and view assigned members" style="width:100%;" >}} -->
 
 On the [Work Management page][1], work items can be sorted by creation date, status, or priority. By default, work items are sorted by creation date. Toggle between **List** view and **Board** view: The List view provides a detailed table, and the Board view offers a Kanban board with drag-and-drop functionality.
 
@@ -58,7 +59,7 @@ To create a custom view:
 
 ## Work item details
 
-<!-- {{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="Work item detail view of an example work item that was escalated" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/view_and_manage/case_details_overview.png" alt="Work item detail view of an example work item that was escalated" style="width:100%;" >}} -->
 
 The Work Item Details page acts as the single source of truth on what is going on with the investigation. Each work item has the following properties:
 
@@ -95,7 +96,7 @@ From an individual work item:
 
 ## Work Management Analytics
 
-<!-- {{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the work items options selected as a data source" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the work items options selected as a data source" style="width:100%;" >}} -->
 
 Work Management Analytics is a queryable data source for aggregated work item statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][8] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
 
@@ -114,10 +115,10 @@ You can export work items directly from a work item details page:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /incident_response/case_management/notifications_integrations
+[2]: /incident_response/work_management/notifications_integrations
 [3]: /notebooks/
 [4]: /incident_response/incident_management/#describing-the-incident
-[5]: /incident_response/case_management/settings/#jira
+[5]: /incident_response/work_management/settings/#jira
 [6]: /coscreen/
-[7]: /incident_response/case_management/approvals
+[7]: /incident_response/work_management/approvals
 [8]: https://docs.datadoghq.com/dashboards/

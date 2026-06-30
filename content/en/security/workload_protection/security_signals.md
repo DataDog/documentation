@@ -78,7 +78,7 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [3]: /account_management/rbac/permissions/#cloud-security-platform
 [4]: https://app.datadoghq.com/security/workload-protection/signals
 [5]: /incident_response/incident_management/
-[6]: /incident_response/case_management/
+[6]: /incident_response/work_management/
 [7]: /security/cloud_security_management/workflows
 [8]: /actions/workflows
 [9]: /security/workload_protection/

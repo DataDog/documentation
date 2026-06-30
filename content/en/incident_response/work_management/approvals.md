@@ -1,10 +1,12 @@
 ---
 title: Work item approvals
+aliases:
+- /incident_response/case_management/approvals/
 further_reading:
-- link: "/incident_response/case_management/automation_rules"
+- link: "/incident_response/work_management/automation_rules"
   tag: "Documentation"
   text: "Work item automation rules"
-- link: "/incident_response/case_management"
+- link: "/incident_response/work_management"
   tag: "Documentation"
   text: "Work Management"
 ---
@@ -26,7 +28,7 @@ To request approval on a work item:
 
 After requesting approval, a **Reviewers** section appears in the work item details panel. Each reviewer's name and current status (Requested, Approved, or Declined) is displayed. To modify the reviewers list, click the edit icon next to **Reviewers**. All approval events are recorded in the work item's activity timeline.
 
-<!-- {{< img src="incident_response/case_management/approvals/case_approvals_overview.png" alt="Work item details page showing the Reviewers panel" style="width:100%;" >}} -->
+<!-- {{< img src="incident_response/work_management/approvals/case_approvals_overview.png" alt="Work item details page showing the Reviewers panel" style="width:100%;" >}} -->
 
 ### Notifications
 
@@ -57,5 +59,5 @@ See [Work item automation rules][1] for setup instructions.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/case_management/automation_rules
+[1]: /incident_response/work_management/automation_rules
 [2]: /account_management/rbac/permissions/#case-and-incident-management

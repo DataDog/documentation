@@ -3,6 +3,7 @@ title: Work Management
 aliases:
 - /monitors/case_management/
 - /service_management/case_management/
+- /incident_response/case_management/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-risk-management"
   tag: "Blog"
@@ -28,7 +29,7 @@ algolia:
 
 ## Overview
 
-<!-- {{< img src="/incident_response/case_management/case_management_overview_cropped.png" alt="Overview of the Work Management page" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/case_management_overview_cropped.png" alt="Overview of the Work Management page" style="width:100%;" >}} -->
 
 Datadog Work Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a work item, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the work item.
 
@@ -36,11 +37,11 @@ While investigating, populate the work item with graphs, logs, and other telemet
 
 ## Getting started
 {{< whatsnext desc="Learn more about Work Management:">}}
-    {{< nextlink href="/incident_response/case_management/create_case" >}}Create a work item{{< /nextlink >}}
-    {{< nextlink href="/incident_response/case_management/projects" >}}Projects{{< /nextlink >}}
-    {{< nextlink href="/incident_response/case_management/view_and_manage" >}}View and manage work items{{< /nextlink >}}
-    {{< nextlink href="/incident_response/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
-    {{< nextlink href="/incident_response/case_management/approvals" >}}Work item approvals{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/create_work_item" >}}Create a work item{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/projects" >}}Projects{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/view_and_manage" >}}View and manage work items{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
+    {{< nextlink href="/incident_response/work_management/approvals" >}}Work item approvals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

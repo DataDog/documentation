@@ -2,11 +2,12 @@
 title: Settings
 aliases:
 - /service_management/case_management/settings/
+- /incident_response/case_management/settings/
 further_reading:
-- link: "/incident_response/case_management/troubleshooting"
+- link: "/incident_response/work_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
-- link: "/incident_response/case_management/customization"
+- link: "/incident_response/work_management/customization"
   tag: "Documentation"
   text: "Work Management Customization"
 ---
@@ -53,5 +54,5 @@ Add custom work item types and attributes to projects so that you can tailor you
 
 [1]: /account_management/rbac/granular_access
 [2]: https://app.datadoghq.com/cases/settings
-[3]: /incident_response/case_management/notifications_integrations
-[4]: /incident_response/case_management/customization
+[3]: /incident_response/work_management/notifications_integrations
+[4]: /incident_response/work_management/customization

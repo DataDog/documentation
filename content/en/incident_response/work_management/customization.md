@@ -3,17 +3,18 @@ title: Customization
 description: "Customize Datadog Work Management with custom work item types, attributes, and statuses"
 aliases:
 - /service_management/case_management/customization/
+- /incident_response/case_management/customization/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-risk-management"
   tag: "Blog"
   text: "How we centralize and remediate risks with Datadog Case Management"
-- link: "/incident_response/case_management/"
+- link: "/incident_response/work_management/"
   tag: "Documentation"
   text: "Work Management Overview"
-- link: "/incident_response/case_management/create_case"
+- link: "/incident_response/work_management/create_work_item"
   tag: "Documentation"
   text: "Create a work item"
-- link: "/incident_response/case_management/settings"
+- link: "/incident_response/work_management/settings"
   tag: "Documentation"
   text: "Settings"
 ---
@@ -53,7 +54,7 @@ After you create a custom work item type, you must explicitly assign it to each 
 4. Scroll down to the **Work Item Types** <!-- [TO VERIFY] --> section in the settings panel.
 5. Under **From your organization**, open the dropdown and select the custom work item type you created.
 
-<!-- {{< img src="/incident_response/case_management/customization/enable_custom_attribute.png" alt="Enable a custom work item type in project settings" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/customization/enable_custom_attribute.png" alt="Enable a custom work item type in project settings" style="width:100%;" >}} -->
 
 After you add the work item type, it is available as an option when you create a new work item within that project.
 
@@ -73,7 +74,7 @@ Custom attributes allow you to capture the structured data your team needs to wo
 * Datacenters
 * Versions
 
-<!-- {{< img src="/incident_response/case_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a work item type" style="width:100%;" >}} -->
+<!-- {{< img src="/incident_response/work_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a work item type" style="width:100%;" >}} -->
 
 You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a custom attribute:
 
@@ -112,5 +113,5 @@ Work Management supports customizable work item statuses. By default, work items
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/case_management/create_case#work-item-types
+[1]: /incident_response/work_management/create_work_item#work-item-types
 [2]: https://app.datadoghq.com/cases/settings?type=shared

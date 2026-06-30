@@ -212,7 +212,7 @@ nav_sections:
         icon: slos
         desc: 성능 목표를 정의하고 추적하여 일관성 있는 고객 경험을 제공합니다.
       - title: Case Management
-        link: incident_response/case_management/
+        link: incident_response/work_management/
         icon: case-management
         desc: "중앙 집중형 소유권 및 팁 협업으로 문제를 분류, 추적 및 해결합니다."
       - title: Workflow Automation

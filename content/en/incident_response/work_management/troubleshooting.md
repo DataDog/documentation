@@ -2,6 +2,7 @@
 title: Troubleshooting
 aliases:
 - /service_management/case_management/troubleshooting/
+- /incident_response/case_management/troubleshooting/
 ---
 
 ## Overview
