@@ -26,6 +26,8 @@ Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing
 
 ### Add a metric
 
+<div class="alert alert-warning">The Generate Metrics processor uses the <code>timestamp</code> field on a log to set the metric's timestamp. If the log <code>timestamp</code> field is a string value, the log's processing time is used instead. See <a href="#convert-string-timestamp-to-timestamp-format">Convert string timestamp to timestamp format</a> for more information.</div>
+
  1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
 1. In the {{< ui >}}Define parameters{{< /ui >}} section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
@@ -85,8 +87,23 @@ To create a distribution metric that measures the average time it takes for an A
 | Select a log attribute | `response_time_seconds` |
 | Group by               | `method`                |
 
+## Convert string timestamp to timestamp format
+
+The Generate Metrics processor can only use the log `timestamp` field to set the metric timestamp if the log field is a timestamp type. If the `timestamp` field is a string, the time when the log is processed is used instead. To use the log `timestamp`, you must convert the string to a timestamp type before sending logs to the Generate Metrics processor.
+
+To convert a string timestamp to timestamp format:
+
+1. Add a [Custom Processor][6] to your pipeline before the Generate Metrics processor.
+1. Add a function with the following custom script:
+    ```
+    .timestamp = parse_timestamp!(.timestamp, format: "%+")
+    ```
+    See [parse_timestamp][7] for more information.
+
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
 [3]: /metrics/types/
 [4]: /metrics/distributions/
 [5]: /observability_pipelines/search_syntax/logs/
+[6]: /observability_pipelines/processors/custom_processor/#setup
+[7]: /observability_pipelines/processors/custom_processor/#parse_timestamp
