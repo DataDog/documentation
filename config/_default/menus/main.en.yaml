@@ -6695,7 +6695,7 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
       weight: 306
-    - name: Edit Tags
+    - name: Edit tags
       url: observability_pipelines/processors/edit_tags
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_tags
