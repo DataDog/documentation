@@ -23,7 +23,7 @@ Sending metrics to Observability Pipelines is in Preview. Fill out the form to r
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from your OTel Collector through HTTP or gRPC.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).

@@ -6760,21 +6760,26 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 319
+    - name: Tag Allow/Block List
+      url: observability_pipelines/processors/tag_allow_block_list
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tag_allow_block_list
+      weight: 320
+    - name: Tags
+      url: observability_pipelines/processors/tags/
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tags
+      weight: 321
     - name: Tag Cardinality Control
       url: observability_pipelines/processors/tag_cardinality_control
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
-      weight: 320
-    - name: Tag Control
-      url: observability_pipelines/processors/tag_control/logs/
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tag_control
-      weight: 321
+      weight: 322
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 322
+      weight: 323
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
