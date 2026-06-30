@@ -20,7 +20,6 @@ The following tags and tag prefixes can't be renamed because they provide specif
 - `ddsource`
 - `function_arn`
 - `datadog_*`
-
 - `_dd.*`
 
 ## Setup
