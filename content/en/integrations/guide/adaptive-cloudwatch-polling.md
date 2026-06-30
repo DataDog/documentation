@@ -30,7 +30,7 @@ Adaptive Polling applies across all AWS accounts monitored by Datadog.
 ### What happens when a slowed metric is queried?
 
 As soon as the metric is queried by any surface (dashboard, monitor, notebook, Metrics Explorer, API query, etc.), Datadog will return that metric to the active 10-minute polling frequency. Note there is a short operational lag: it takes a few minutes between when the query happens and when re-polling of data occurs.
-For example, a customer's metrics may have been crawled at 1:00pm, and then at 1:02pm a dashboard is viewed that contains a slowed metric. This slowed metric will return to “active” but will not refresh until the next metric crawl, 8 mins later at 1:10pm.  
+For example, a customer's metrics may have been crawled at 1:00pm, and then at 1:02pm a dashboard is viewed that contains a slowed metric. This slowed metric will return to active but will not refresh until the next metric crawl, 8 mins later at 1:10pm.  
 
 ### How do I enable or opt out of Adaptive Polling?
 
