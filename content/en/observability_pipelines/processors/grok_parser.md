@@ -49,7 +49,7 @@ To set up the Grok Parser processor:
    - You must create a custom parsing rule before you can disable library rules.
    - Library rules are applied by default. Disable library rules only if you are relying on custom parsing rules.
 
-### Create an AI-assisted or custom parsing rule
+### Create an AI-generated or custom parsing rule
 
 To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing Rules{{< /ui >}} on the Grok Parser processor:
 
