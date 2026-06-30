@@ -17,7 +17,6 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}数値に変化がない場合のアラート{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートの作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}モニターの依存関係の作成{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}モニターアラートを CSV にエクスポートする{{< /nextlink >}}
     {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}特定のタグがレポーティングを停止した場合のアラート設定{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}回復のしきい値{{< /nextlink >}}
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}メトリクスモニターにおける "No Data" アラートの調整{{< /nextlink >}}

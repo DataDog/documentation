@@ -30,7 +30,7 @@ After you select the Google SecOps destination in the pipeline UI:
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][7].
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
+1. Select {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}} encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
 
 ### Optional buffering

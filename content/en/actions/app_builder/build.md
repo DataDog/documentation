@@ -22,7 +22,7 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the {{< ui >}}My apps{{< /ui >}} toggle to see only apps that you created:
 
-{{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
 ## Create an app
 
@@ -127,7 +127,7 @@ To change basic elements of your app:
 
 ### App canvas and components
 
-The app canvas represents the graphical interface that your users interact with. You can drag and drop components to move them around on the canvas. To see all available components, click the plus {{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}} icon to open the {{< ui >}}Components{{< /ui >}} tab.
+The app canvas represents the graphical interface that your users interact with. You can drag and drop components to move them around on the canvas. To see all available components, click the plus {{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}} icon to open the {{< ui >}}Components{{< /ui >}} tab.
 
 Each component features a list of corresponding configuration options that control how users interact with your app. For example, the {{< ui >}}Text Input{{< /ui >}} component allows you to set a default value, placeholder text, and a label. The {{< ui >}}Button{{< /ui >}} component includes a label and an event that triggers when the button is pressed. Components also feature an {{< ui >}}Appearance{{< /ui >}} section that changes the way the components look and act. For example, you can disable a button or control its visibility.
 
@@ -167,7 +167,7 @@ To view the version history for your app, in the left-hand menu of your app, cli
 
 The UI displays previously saved or published versions of your app, along with the icon of the user who saved or published the version:
 
-{{< img src="service_management/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
+{{< img src="actions/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
 
 You can perform the following operations:
 
@@ -203,7 +203,7 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 - {{< ui >}}Logs{{< /ui >}}: View configuration errors for your actions, transformers, variables, and components.
 - {{< ui >}}App State{{< /ui >}}: Access real-time application state changes.
 
-{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
 
 ## Further reading
 
@@ -213,17 +213,17 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 
 [1]: https://app.datadoghq.com/app-builder/
 [2]: https://app.datadoghq.com/app-builder/blueprints
-[3]: /service_management/app_builder/embedded_apps
+[3]: /actions/app_builder/embedded_apps
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [5]: /actions/connections
 [6]: /actions/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://chat.datadoghq.com/
-[9]: /service_management/app_builder/components
+[9]: /actions/app_builder/components
 [10]: https://app.datadoghq.com/app-builder/action-catalog
-[11]: /service_management/app_builder/events
-[12]: /service_management/app_builder/queries
-[13]: /service_management/app_builder/expressions
+[11]: /actions/app_builder/events
+[12]: /actions/app_builder/queries
+[13]: /actions/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
 [15]: /actions/app_builder/build/#customize-your-app
 [16]: /getting_started/integrations/

@@ -109,6 +109,61 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{% /tab %}}
 
+{{% tab "DaemonSet" %}}
+
+1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Vulnerability Management, mount-based container image scanning, and runtime package tracking.
+
+    ```yaml
+    - name: DD_COMPLIANCE_CONFIG_ENABLED
+      value: "true"
+    - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+      value: "true"
+    - name: DD_SBOM_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+      value: "true"
+    - name: DD_SBOM_HOST_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+      value: "true"
+    - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+      value: "true"
+    - name: HOST_ROOT
+      value: /host/root
+    ```
+
+   If your DaemonSet mounts the host root at a different path, set `HOST_ROOT` to that mount path in each Agent container.
+
+2. Set `hostPID: true` in the pod spec and add the following `securityContext` to the `agent` container. These settings are required for mount-based container image scanning with `DD_SBOM_CONTAINER_IMAGE_USE_MOUNT=true`.
+
+    ```yaml
+      # Source: datadog/templates/daemonset.yaml
+      apiVersion: apps/v1
+      kind: DaemonSet
+      [...]
+      spec:
+        [...]
+        template:
+          [...]
+          spec:
+            hostPID: true
+            containers:
+            [...]
+              - name: agent
+                [...]
+                securityContext:
+                  capabilities:
+                    add:
+                      - SYS_ADMIN
+                  readOnlyRootFilesystem: true
+                  appArmorProfile:
+                    type: Unconfined
+    ```
+
+3. Restart the Agent.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 **Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
@@ -191,6 +246,27 @@ datadog:
     enrichment:
       usage:
         enabled: true
+```
+
+Restart the Agent.
+
+{{% /tab %}}
+
+{{% tab "DaemonSet" %}}
+
+Set `hostPID: true` in the pod spec, and add the following environment variables to every Agent container in your `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`:
+
+```yaml
+# Pod spec
+hostPID: true
+
+# Add to each Agent container's env section.
+- name: DD_SBOM_ENABLED
+  value: "true"
+- name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+  value: "true"
+- name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+  value: "true"
 ```
 
 Restart the Agent.

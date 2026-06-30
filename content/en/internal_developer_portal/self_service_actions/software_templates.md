@@ -1,5 +1,6 @@
 ---
 title: Software Templates
+description: Create reusable Software Templates in Catalog to help developers provision infrastructure and scaffold microservices that align with your organization's best practices.
 aliases:
   - /service_catalog/software_templates
   - /software_catalog/software_templates
@@ -10,7 +11,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate incidents faster with App Builder"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "Learn about App Builder"
 - link: "/actions/workflows/"
@@ -124,7 +125,7 @@ The following actions are available for Catalog in Datadog App Builder and Workf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /actions/workflows/
-[2]: /service_management/app_builder/
+[2]: /actions/app_builder/
 [3]: https://app.datadoghq.com/workflow
 [4]: https://www.cookiecutter.io/
 [5]: https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md

@@ -59,8 +59,8 @@ Use filters to narrow results by:
 
 Click any finding to open a side panel that shows:
 
-- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
-- **Remediation**: If available, suggested code fixes are provided for findings that support remediation.
+- {{< ui >}}Details{{< /ui >}}: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
+- {{< ui >}}Remediation{{< /ui >}}: If available, suggested code fixes are provided for findings that support remediation.
 
 ### Create Jira tickets from findings
 
@@ -68,9 +68,9 @@ You can create a bidirectional Jira ticket directly from any finding to track an
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [Code Security Vulnerabilities][3] page to review muted findings.
 
 ### Exclude specific rules, files, or resources
 

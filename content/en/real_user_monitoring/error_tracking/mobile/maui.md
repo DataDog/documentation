@@ -21,7 +21,7 @@ further_reading:
 
 Error Tracking processes errors collected from the .NET MAUI SDK.
 
-Enable .NET MAUI Crash Reporting and Error Tracking to get comprehensive crash reports, deobfuscated stack traces, and error trends across iOS and Android. Your crash reports appear in [**Error Tracking**][1].
+Enable .NET MAUI Crash Reporting and Error Tracking to get comprehensive crash reports, deobfuscated stack traces, and error trends across iOS and Android. Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ### C# error tracking
 
@@ -150,7 +150,7 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
   -p:DatadogUploadSymbols=true -v n -tl:off
 ```
 
-After upload, symbols take up to 5 minutes to process. You can confirm they were received under [**Error Tracking** > **Settings** > **Symbol Files**][4].
+After upload, symbols take up to 5 minutes to process. You can confirm they were received under [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4].
 
 ### Bundle Portable PDB files for C# stack traces
 
@@ -206,7 +206,7 @@ To verify your Crash Reporting and Error Tracking configuration, trigger a crash
    ```
 
 3. After the crash, restart your application and wait for the SDK to upload the crash report.
-4. Confirm the event in [**Error Tracking**][1] with deobfuscated frames.
+4. Confirm the event in [{{< ui >}}Error Tracking{{< /ui >}}][1] with deobfuscated frames.
 
 ## Troubleshooting
 
@@ -226,7 +226,7 @@ Make sure R8 is enabled with `<AndroidLinkTool>r8</AndroidLinkTool>` and `<Andro
 The terminal logger hides informational messages. Add `-v n -tl:off` to your `dotnet publish` command.
 
 **Upload completes but symbols don't appear in Datadog**
-Symbols take up to 5 minutes to process. Check [**Error Tracking** > **Settings** > **Symbol Files**][4].
+Symbols take up to 5 minutes to process. Check [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4].
 
 ## Further Reading
 

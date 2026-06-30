@@ -142,7 +142,8 @@ tracer.init({
   }
 });
 
-OpenFeature.setProvider(tracer.openfeature);
+// Wait for the provider to initialize before evaluating flags.
+await OpenFeature.setProviderAndWait(tracer.openfeature);
 {{< /code-block >}}
 
 {{% /tab %}}

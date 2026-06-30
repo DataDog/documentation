@@ -1,5 +1,6 @@
 ---
 title: Using Scorecards
+description: View entity-level Scorecard scores, track progress over time, and generate scheduled reports to keep teams informed about engineering standards compliance.
 aliases:
   - /tracing/software_catalog/scorecards/using_scorecards
   - /tracing/service_catalog/scorecards/using_scorecards

@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
 - /actions/datastore/create
 further_reading:
-- link: "service_management/app_builder/build"
+- link: "actions/app_builder/build"
   tag: "Documentation"
   text: "Build Apps"
 - link: "actions/workflows/build"

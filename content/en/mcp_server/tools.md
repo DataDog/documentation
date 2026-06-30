@@ -728,6 +728,126 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
 
+### `manage_datadog_error_tracking_issue_comments`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
+
+- Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
+- Update the comment we just added to say "Fixed in version 2.3.1".
+- Delete the comment we just added from that issue.
+
+## Experiments
+
+Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
+
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `list-experiments`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Lists experiments for the organization, with optional name search, limit, and offset for pagination.
+
+- Show me all running experiments.
+- Find experiments with "checkout" in the name.
+
+### `get-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
+
+- Get the details for experiment `abc123`.
+- What is the current status and linked flag for experiment `abc123`?
+
+### `create-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Creates a new experiment with a name, hypothesis, subject type, and primary metric.
+
+- Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
+
+### `link-feature-flag-to-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Links a feature flag to an experiment.
+
+- Link feature flag `new-checkout-flow` to experiment `abc123`.
+
+### `start-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
+
+- Start experiment `abc123`.
+
+### `conclude-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Concludes a running experiment with a permanent winning variant decision.
+
+- Conclude experiment `abc123` with the treatment variant as the winner.
+
+### `cancel-experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Cancels a running experiment with a required reason.
+
+- Cancel experiment `abc123` because an SRM issue was detected.
+
+### `get-experiment-diagnostics`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get-experiment-results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
+
+- Run diagnostics on experiment `abc123` before I look at the results.
+- Is there a sample ratio mismatch in experiment `abc123`?
+
+### `get-experiment-results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
+
+- Show me the results for experiment `abc123`.
+- What is the verdict on the primary metric for experiment `abc123`?
+
+### `explore-experiment-results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get-experiment-results` for deeper analysis.
+
+- Break down the results for experiment `abc123` by device type.
+- How did the lift for experiment `abc123` trend over the last two weeks?
+
+### `list-experiment-segmentation-properties`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Lists the assignment properties an experiment can be split by. Call this before `explore-experiment-results` to get valid property IDs — do not guess them.
+
+- What segmentation properties can I use to break down experiment `abc123`?
+
+### `get-experiment-segmentation-property-values`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore-experiment-results` to avoid invalid filter strings.
+
+- What values are available for the device type property in experiment `abc123`?
+
+### `get-metric-definition`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Metrics Read`*\
+Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field with the structured parameters needed to query the raw event data. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
+
+- What is the event query behind the primary metric for experiment `abc123`?
+- Which MCP tool should I use to investigate why this metric moved?
+
+### `diagnose-experiment-run-failure`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get-experiment-diagnostics` for result quality and SRM issues instead.
+
+- Why did the latest analysis run for experiment `abc123` fail?
+- Diagnose the pipeline failure for experiment `abc123`.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1027,7 +1147,7 @@ Returns values for a specific frame or context field discovered with `get_profil
 
 ## Reference Tables
 
-Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+Tools for managing [Reference Tables][45], including listing tables, reading rows, upserting rows, and creating tables synced from cloud storage files or as empty tables you populate directly.
 
 ### `list_reference_tables`
 *Toolset: **reference-tables***\
@@ -1036,6 +1156,13 @@ Lists and searches [Reference Tables][45] in the organization, with optional fil
 - List all reference tables in my organization.
 - Find reference tables with `customer` in the name.
 - Show me the reference tables sorted by last update time.
+
+### `list_reference_table_rows`
+*Toolset: **reference-tables***\
+Lists all rows in a reference table with optional filtering and pagination. Use `list_reference_tables` first to find the table ID and schema.
+
+- List all rows in the `ip_allowlist` reference table.
+- Show me the first 50 rows of the `customer_tiers` table.
 
 ### `get_reference_table_rows`
 *Toolset: **reference-tables***\
@@ -1046,15 +1173,23 @@ Retrieves specific rows from a reference table by their primary key values. Use 
 
 ### `append_reference_table_rows`
 *Toolset: **reference-tables***\
-Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
+Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field. If rows may already exist, use `upsert_reference_table_rows` instead.
 
 - Add a new row for user `user003` with name `Carol` and age `28` to the users table.
 - Append these five new account entries to the accounts reference table.
 
+### `upsert_reference_table_rows`
+*Toolset: **reference-tables***\
+Inserts new rows or updates existing rows in a reference table. If a row with the same primary key already exists, its values are overwritten. Use this instead of `append_reference_table_rows` when rows may already exist.
+
+- Update the tier for account `acct-123` in the `customer_tiers` table.
+- Add or update these ten service entries in the `service_catalog` reference table.
+
 ### `create_reference_table`
 *Toolset: **reference-tables***\
-Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
+Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty table you can populate with `append_reference_table_rows` or `upsert_reference_table_rows`. Cloud-backed modes (`S3`, `GCS`, `AZURE`) sync from a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
 
+- Create an empty reference table called `service_catalog` with fields for service name, owner team, and tier.
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
@@ -1329,7 +1464,7 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
+Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -1630,5 +1765,8 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
+[65]: /code_coverage/
+[66]: /delivery_performance/dora_metrics/
