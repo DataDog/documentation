@@ -93,7 +93,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Signals Read`*
 
 `get_datadog_security_ioc_indicator`
-: Retrieves full details for a single [IoC Explorer][5] indicator by value, including score, category, AS information, GeoIP data, log sources, and signal counts.
+: Retrieves full details for a single [IoC Explorer][5] indicator by value, including score, category, Autonomous System (AS) information, GeoIP data, log sources, and signal counts.
 : *Permissions required: `Security Signals Read`*
 
 `get_datadog_security_ioc_schema`
