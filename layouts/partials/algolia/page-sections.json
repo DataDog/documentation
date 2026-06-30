@@ -45,6 +45,18 @@
       {{- end -}}
   {{- end -}}
 
+  {{- /* Only split genuine {{ tab }} shortcode panes, which always carry a title= attribute.
+         Other components reuse the tab-pane class without a title (e.g. the widget API
+         model/example toggle); splitting those would create multiple same-header segments
+         that collide on objectID. If any matched pane lacks a title, skip tab-splitting. */ -}}
+  {{- if $tabSplit -}}
+      {{- range $open := $tabOpens -}}
+          {{- if not (findRE `<div[^>]*\stitle="` $open) -}}
+              {{- $tabSplit = false -}}
+          {{- end -}}
+      {{- end -}}
+  {{- end -}}
+
   {{- /* Build the list of segments to index. Each segment is a dict with:
            header: display section header
            html:   the HTML block
