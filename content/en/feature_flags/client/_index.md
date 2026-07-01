@@ -46,7 +46,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableExposureLogging`
 - **Android** (`dd-sdk-android-flags`): `trackExposures`
-- **Dart and Flutter** (`datadog_flags`): `trackExposures`
+- **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackExposures`
 - **iOS** (`DatadogFlags`): `trackExposures`
 - **React Native**: `trackExposures`
 - **Unity**: `trackExposures`
@@ -57,7 +57,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableFlagEvaluationTracking`
 - **Android** (`dd-sdk-android-flags`): `trackEvaluations`
-- **Dart and Flutter** (`datadog_flags`): `trackEvaluations`
+- **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackEvaluations`
 - **iOS** (`DatadogFlags`): `trackEvaluations`
 - **React Native**: Not exposed
 - **Unity**: `trackEvaluations`
@@ -68,7 +68,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableRumFeatureFlagTracking`
 - **Android** (`dd-sdk-android-flags`): `rumIntegrationEnabled`
-- **Flutter** (`datadog_flutter_plugin`): `rumIntegrationEnabled`
+- **Flutter** (`datadog_flags_flutter`): `rumIntegrationEnabled`
 - **iOS** (`DatadogFlags`): `rumIntegrationEnabled`
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed

@@ -11,23 +11,28 @@ further_reading:
 - link: "https://github.com/DataDog/dd-sdk-flutter/tree/develop/packages/datadog_flags"
   tag: "Source Code"
   text: "datadog_flags source code"
+- link: "https://github.com/DataDog/dd-sdk-flutter/tree/develop/packages/datadog_flags_flutter"
+  tag: "Source Code"
+  text: "datadog_flags_flutter source code"
 ---
 
 ## Overview
 
 This page describes how to instrument Dart and Flutter applications with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can use the standalone Dart package directly or register the Flutter plugin integration to derive configuration from `datadog_flutter_plugin`.
+The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can use the standalone Dart package directly or install `datadog_flags_flutter` to derive configuration from `datadog_flutter_plugin` and add successful evaluations to RUM.
 
-<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart and Flutter, but it is not built on the OpenFeature Dart SDK. Datadog is working on an OpenFeature-provider-based integration for Dart and Flutter. Until that is available, use the APIs on this page directly.</div>
+<div class="alert alert-info">This package provides an OpenFeature-compatible API for Dart and Flutter, but it is not built on the OpenFeature Dart SDK. Use the APIs on this page directly. Datadog is developing an OpenFeature-provider-based integration for Dart and Flutter.</div>
 
 ## Installation
 
-For a Flutter app that already uses the Datadog Flutter SDK, install or update `datadog_flutter_plugin`:
+For a Flutter app that already uses the Datadog Flutter SDK, install `datadog_flags_flutter`:
 
 {{< code-block lang="bash" >}}
-flutter pub add datadog_flutter_plugin
+flutter pub add datadog_flags_flutter
 {{< /code-block >}}
+
+`datadog_flags_flutter` depends on `datadog_flutter_plugin` 3.4.0 or later.
 
 For standalone Dart usage, install `datadog_flags`:
 
@@ -47,9 +52,20 @@ flutter pub add datadog_flags
 
 Then import the public API:
 
+{{< tabs >}}
+{{% tab "Dart" %}}
 {{< code-block lang="dart" >}}
 import 'package:datadog_flags/datadog_flags.dart';
 {{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Flutter integrated" %}}
+{{< code-block lang="dart" >}}
+import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Flutter-integrated setup
 
@@ -58,6 +74,7 @@ Use this setup when your Flutter app already initializes `datadog_flutter_plugin
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="dart" >}}
+import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
 final configuration = DatadogConfiguration(
