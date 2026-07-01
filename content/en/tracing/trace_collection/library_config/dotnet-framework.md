@@ -119,7 +119,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 {{< /tabs >}}
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

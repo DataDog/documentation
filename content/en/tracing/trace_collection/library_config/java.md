@@ -36,7 +36,7 @@ Unless otherwise stated, you can convert between system properties and environme
 
 **Note**: When using the Java tracer's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

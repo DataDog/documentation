@@ -21,7 +21,7 @@ After you [set up the Rust SDK][1] with your application, you can optionally con
 
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 
