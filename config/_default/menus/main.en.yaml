@@ -10313,9 +10313,9 @@ menu:
       url: account_management/multi_organization/
       parent: account_management
       weight: 16
-    - name: Organizational Groups
+    - name: Organization Groups
       identifier: account_management_organization_groups
-      url: account_management/organizational_groups/
+      url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
     - name: Guides
