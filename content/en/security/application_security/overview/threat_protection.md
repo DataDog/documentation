@@ -25,7 +25,7 @@ The **App Instrumentation** section reports how broadly App and API Protection (
 
 ## Attack Coverage
 
-The **Attack Coverage** section shows how well your services are protected against attack vectors. **Attack Tools** reports how many exposed services are protected from scanners, bots, and similar tooling through AAP monitoring and blocking, and **Exploit Prevention** reports how many services are protected from exploits through Runtime Application Self-Protection (RASP). The section also highlights services that need Threat Management enabled or a tracing library upgrade.
+The **Attack Coverage** section shows how well your services are protected against attack vectors. **Attack Tools** reports how many exposed services are protected from scanners, bots, and similar tooling through AAP monitoring and blocking, and **Exploit Prevention** reports how many services are protected from exploits through Runtime Application Self-Protection (RASP). The section also highlights services that need [Threat Management][1] enabled or a tracing library upgrade.
 
 ## Open Signals
 
@@ -46,3 +46,5 @@ Use the **Customize Page** button in the page header to tailor the page to your 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/application_security/how-it-works/#identify-services-exposed-to-application-attacks
