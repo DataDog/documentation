@@ -1,13 +1,13 @@
 ---
 title: Splunk HTTP Event Collector (HEC) Destination
+description: Learn how to set up the Splunk HEC destination for logs in Observability Pipelines.
 disable_toc: false
-products:
-- name: Logs
-  icon: logs
-  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+aliases:
+- /observability_pipelines/destinations/splunk_hec/
+code_lang: logs
+type: multi-code-lang
+weight: 1
 ---
-
-{{< product-availability >}}
 
 ## Overview
 
@@ -62,13 +62,7 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- Splunk HEC token identifier:
-	- References the Splunk HEC token for the Splunk indexer.
-	- The default identifier is `DESTINATION_SPLUNK_HEC_TOKEN`.
-- Splunk HEC endpoint URL identifier:
-	- References the Splunk HTTP Event Collector endpoint your Observability Pipelines Worker sends processed logs to. For example, `https://hec.splunkcloud.com:8088`.
-	- **Note**: `/services/collector/event` path is automatically appended to the endpoint.
-	- The default identifier is `DESTINATION_SPLUNK_HEC_ENDPOINT_URL`.
+{{% observability_pipelines/splunk_hec_secrets %}}
 
 {{% /tab %}}
 

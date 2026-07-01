@@ -62,7 +62,7 @@ These are the available destinations:
 [16]: /observability_pipelines/destinations/opensearch/
 [17]: /observability_pipelines/destinations/sentinelone/
 [18]: /observability_pipelines/destinations/socket/
-[19]: /observability_pipelines/destinations/splunk_hec/
+[19]: /observability_pipelines/destinations/splunk_hec/logs/
 [20]: /observability_pipelines/destinations/sumo_logic_hosted_collector/
 [21]: /observability_pipelines/destinations/syslog/
 [22]: /observability_pipelines/destinations/amazon_s3/
