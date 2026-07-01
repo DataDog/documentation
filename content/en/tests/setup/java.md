@@ -61,7 +61,7 @@ Other build systems, such as Ant, Bazel, or SBT are supported with the following
 
 Android tests that run on the JVM are supported. Tests that depend on the Android API, such as Espresso tests, Compose UI tests, and some unit tests, are supported only with the [Robolectric][11] framework.
 
-Tests that have to be executed on an emulator or a physical device **are not supported**.
+Tests that require an emulator or a physical device **are not supported**.
 
 ## Setup
 
