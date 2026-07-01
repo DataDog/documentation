@@ -45,7 +45,7 @@ Learn more about the [compatibility requirements][6].
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The Agent Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the {{< ui >}}Account{{< /ui >}} drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-    - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for.
+    - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
     - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
 1. Use the {{< ui >}}Model{{< /ui >}} drop-down menu to select a model to use for your LLM judge.
 1. Under {{< ui >}}Evaluation Scope{{< /ui >}}, select the application you want to evaluate.

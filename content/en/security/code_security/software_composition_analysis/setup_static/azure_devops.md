@@ -21,7 +21,7 @@ Configure the following environment variables in your Azure DevOps pipeline sett
 
 ## Set up the pipeline
 
-To add a new pipeline in Azure DevOps, go to **Pipelines > New Pipeline**, select your repository, and then create or select a pipeline.
+To add a new pipeline in Azure DevOps, go to {{< ui >}}Pipelines{{< /ui >}} > {{< ui >}}New Pipeline{{< /ui >}}, select your repository, and then create or select a pipeline.
 
 Add the following content to your Azure DevOps pipeline YAML file:
 

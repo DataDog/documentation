@@ -95,9 +95,9 @@ class HomeViewController: UIViewController {
   If the time to full display is not defined, the iOS SDK only collects the time to initial display. 
 </div>
 
-### RUM summary
+### RUM Summary
 
-The time to initial display and time to full display are presented in the RUM Summary under Mobile Performance. The standalone Mobile Performance Dashboard also contains distribution visuals for time to initial display and time to full display. 
+The time to initial display and time to full display are presented in the {{< ui >}}RUM Summary{{< /ui >}} under {{< ui >}}Mobile Performance{{< /ui >}}. The standalone {{< ui >}}Mobile Performance Dashboard{{< /ui >}} also contains distribution visuals for time to initial display and time to full display. 
 
   {{< img src="real_user_monitoring/ios/ios-rum-summary-app-launch.png" alt="iOS RUM Summary" style="width:90%;">}}
 
@@ -108,7 +108,7 @@ The time to initial display and time to full display are presented as vital even
   {{< img src="real_user_monitoring/ios/ios-app-launch-session.png" alt="iOS session side panel" style="width:90%;">}}
 
 
-The TTID and TTFD can be queried in the RUM Sessions Explorer using the following attributes on the vital event type:
+The TTID and TTFD can be queried in the {{< ui >}}RUM Sessions Explorer{{< /ui >}} using the following attributes on the vital event type:
 - `@vital.type:app_launch`
 - `@vital.name:time_to_initial_display` or `@vital.name:time_to_full_display`
 

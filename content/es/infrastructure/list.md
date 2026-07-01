@@ -5,122 +5,104 @@ aliases:
 further_reading:
 - link: /infrastructure/hostmap/
   tag: Documentación
-  text: Mapa de hosts
+  text: Mapa de servidores
 - link: /infrastructure/livecontainers/
   tag: Documentación
   text: Mapa de contenedores
 - link: /infrastructure/process/
   tag: Documentación
-  text: Monitorización Live Process
-title: Lista de infraestructuras
+  text: Monitoreo de Procesos en Vivo
+title: Lista de servidores
 ---
+## Resumen {#overview}
 
-## Información general
+La lista de servidores te proporciona un inventario en vivo de todos los servidores que reportan a Datadog a través del agente o integraciones en la nube. Por defecto, muestra los servidores con actividad en los últimos 15 minutos. Para abrir la lista de servidores, navega a [**Infraestructura > Servidores**][10] en Datadog.
 
-La lista de infraestructuras te ofrece un inventario en tiempo real de todos los hosts que se comunican con Datadog a través de las integraciones en el Agent o en la nube. En forma predeterminada, muestra los hosts con actividad en las últimas dos horas, pero puedes ampliar la vista para cubrir hasta una semana. Busca tus hosts o agrúpalos por etiquetas. En Datadog, ve a [**Infraestructure > Hosts**][10]  (Infraestructura > Hosts) para ver la lista de infraestructuras. Esta lista no debe utilizarse para estimar la facturación de tu host de infraestructura. Consulta la page (página) de [facturación][11] para obtener más información sobre la facturación.
+Esta página describe la vista **Nueva** de la lista de servidores. Para cambiar a la vista **Clásica**, utiliza el interruptor en la esquina superior derecha.
 
-## Hosts
+{{< img src="infrastructure/index/infra-list-overview-2.png" alt="La lista de servidores con un panel de filtros a la izquierda y una lista de servidores con columnas personalizables." style="width:100%;">}}
 
-La siguiente información se muestra en la lista de infraestructuras de tus hosts:
+**Nota**: Esta lista no debe ser utilizada para estimar la facturación de tus servidores de infraestructura. Consulta la página de [facturación][11] para más detalles.
 
-Nombre de host
-: El [alias](#aliases) del nombre de host preferido (utiliza el menú de opciones para ver el nombre de la nube o el ID de instancia).
+## Filtrar y buscar {#filter-and-search}
 
-Nombre de la nube
-: Un [alias](#aliases) del nombre de host.
+Utiliza el panel de filtros a la izquierda para reducir la lista de servidores:
 
-ID de instancia
-: Un [alias](#aliases) del nombre de host.
+- **Mis Equipos**: Activa para mostrar solo los servidores asociados con tus equipos.
+- **Filtros rápidos**: Utiliza las casillas de verificación en la parte superior del panel para filtrar por proveedor de nube (AWS, Azure, Google Cloud, Oracle o Alibaba Cloud), fuente de telemetría (agente de Datadog u OpenTelemetry), sistema operativo (Windows, Linux o Darwin), o hardware (GPU).
+- **Filtrar Métricas**: Selecciona una métrica y define un rango de valores para filtrar servidores por el valor de la métrica.
+- **Facetas de búsqueda**: Filtra por cualquier propiedad o etiqueta de servidor, como Proveedor de Nube, Env, Región, Tipo de Recurso, Tipo de Instancia, SO, Versión de SO, Agente o Versión de Docker.
 
-Estado
-: Muestra `ACTIVE` cuando se reciben las métricas esperadas e `INACTIVE` si no se reciben métricas.
+También puedes usar el cuadro de búsqueda en la parte superior de la lista para filtrar servidores utilizando la [sintaxis de búsqueda de Datadog][16].
 
-CPU
-: El porcentaje de CPU utilizado (todo menos el inactivo).
+## Personalizar columnas {#customize-columns}
 
-IOWait
-: Porcentaje de CPU dedicado a la espera de E/S (no se informa en todas las plataformas).
+Para agregar, eliminar o reordenar columnas, haz clic en **Columnas** sobre la lista de servidores. Puedes agregar cualquiera de los siguientes como columna:
 
-Carga 15
-: La carga del sistema en los últimos 15 minutos.
+- **Atributos del servidor**: Propiedades del servidor, como el nombre del servidor o el estado.
+- **Etiquetas**: Cualquier etiqueta aplicada al servidor.
+- **Métricas**: Cualquier métrica reportada por el servidor.
 
-Aplicaciones
-: Las integraciones de Datadog que informan métricas del host.
+Para reordenar una columna, arrástrala a una nueva posición. Para cambiar el tamaño, arrastra su borde derecho. Para ocultar, desactívala.
 
-Sistema operativo
-: El sistema operativo rastreado.
+{{< img src="infrastructure/index/infra-list-columns.png" alt="El panel de personalización de columnas con secciones para Atributos del servidor, Etiquetas y Métricas, y con interruptores para mostrar u ocultar cada columna." style="width:100%;">}}
 
-Plataforma en la nube
-: Plataforma en la nube en la que se ejecuta el host (por ejemplo, AWS, Google Cloud o Azure).
+### Columnas combinadas {#combined-columns}
 
-Datadog Agent
-: Versión del Agent que recopila datos del host.
+La lista de servidores incluye tres columnas que combinan múltiples puntos de datos:
 
-OpenTelemetry
-: Versión del recopilador de OpenTelemetry que está recopilando datos del host.
+- **Configuraciones**: El proveedor de la nube, el sistema operativo y el estado de instalación del Datadog Agent para cada servidor.
+- **Software**: El servidor web del servidor, la base de datos, la caché y el orquestador de contenedores (como Docker o Kubernetes), si se detecta.
+- **Integraciones**: Las integraciones del Datadog Agent habilitadas en el servidor.
 
-### Nombre de host
+## Vistas guardadas {#saved-views}
 
-El Datadog Agent recopila posibles nombres de host de varias fuentes diferentes. Para obtener más detalles, consulta [¿Cómo determina Datadog el nombre de host del Agent?][1].
+Para guardar tu filtro y configuración de columnas, abre el panel de **Vistas** en la esquina superior izquierda y haz clic en **Guardar como nueva vista**. Desde este panel, puedes filtrar, ordenar, editar y marcar vistas guardadas.
 
-**Nota**: Los nombres de host deben ser únicos en una cuenta de Datadog. Si no es así, podrías encontrar algunas incoherencias en las gráficas de tu host.
+{{< img src="infrastructure/index/infra-list-views.png" alt="El panel de Vistas con opciones para guardar, filtrar, ordenar y editar vistas guardadas." style="width:40%;">}}
 
-### Inspeccionar
+Inspeccionar un servidor {#inspect-a-host}
 
-Haz clic en un host para ver más detalles, incluido:
-- [alias](#aliases)
-- [etiquetas][2]
-- [métricas][3]
-- [contenedores][4]
-- [logs][5] (si se encuentra habilitado)
-- [Configuración del Agent](#agent-configuration) (si se encuentra habilitado)
-- [Configuración del recopilador de OpenTelemetry](#OpenTelemetry-collector-configuration) (si está activada)
+Haz clic en cualquier servidor para abrir su panel de detalles, que es el mismo panel lateral utilizado por el [Resource Catalog][15]. El panel incluye:
 
-{{< img src="infrastructure/index/infra-list2.png" alt="Detalles del host de la lista de infraestructuras" style="width:100%;">}}
+- [Nombres de servidor y alias](/agent/faq/how-datadog-agent-determines-the-hostname/#host-aliases)
+- [Etiquetas][2]
+- [Métricas][3]
+- [Contenedores][4]
+- [Registros][5] (si está habilitado)
+- [Configuración del agente](#agent-configuration) (si está habilitado)
+- [Configuración del OpenTelemetry Collector](#opentelemetry-collector-configuration) (si está habilitado)
 
-#### Alias
+{{< img src="infrastructure/index/infra-list-side-panel.png" alt="El panel lateral de detalles del servidor con secciones para Resumen del Servidor, Métricas, Contenedores, Procesos y otros datos del servidor." style="width:100%;">}}
 
-Datadog crea alias para nombres de host cuando hay varios nombres unívocos para un único host. Los nombres que recopila el Agent se añaden como alias para el nombre canónico elegido. Por ejemplo, un único host que se ejecuta en EC2 podría tener un ID de instancia (`i-abcd1234`), un nombre de host genérico proporcionado por EC2 basado en la dirección IP del host (`ip-192-0-0-1`) y un nombre de host significativo proporcionado por un servidor DNS interno o un archivo de host gestionado mediante configuración (`myhost.mydomain`).
+### Configuración del agente {#agent-configuration}
 
-{{< img src="infrastructure/index/infra-list-alias2.png" alt="Alias de host" style="width:100%;">}}
+Para ver la configuración del Datadog Agent de un servidor, haz clic en el servidor para abrir el panel lateral y luego desplázate a la sección **Agent**. Para ver y gestionar las configuraciones del Datadog Agent en toda tu infraestructura, utiliza [Fleet Automation][12].
 
-#### Configuración del Agent
+{{< img src="infrastructure/index/infra-list-agent-config.png" alt="La sección del Datadog Agent del panel lateral del servidor que muestra la configuración del Datadog Agent en formato JSON." style="width:100%;">}}
 
-Puedes ver y gestionar las configuraciones del Agent en toda tu infraestructura utilizando [Fleet Automation][12].
+### Configuración del OpenTelemetry Collector {#opentelemetry-collector-configuration}
 
-Para ver las configuraciones del Agent:
-1. Haz clic en **Open Host** (Abrir host) en la esquina superior derecha del panel de detalles del host.
-2. Selecciona **View Agent Configurations** (Ver configuraciones del Agent) en el menú desplegable para ir directamente a Fleet Automation.
+Cuando configuras la [Extensión de Datadog][14] con tu OpenTelemetry Collector, puedes ver la configuración del Collector y la información de compilación directamente en el panel de detalles del servidor. La extensión también te permite gestionar y depurar tus implementaciones del Collector desde Datadog.
 
-{{< img src="infrastructure/index/infra-list-config-4.png" alt="Ver configuraciones del Agent en Fleet Automation" style="width:100%;">}}
+Para ver la configuración del OpenTelemetry Collector de un servidor, haz clic en el servidor para abrir el panel lateral. Desplázate a la sección **OTel Collector** para ver la información de compilación y la configuración completa del Collector. Para obtener instrucciones detalladas de configuración y requisitos, como la coincidencia de nombres de host y la configuración de la canalización, consulte la [documentación de la extensión de Datadog][14].
 
-#### Configuración de OpenTelemetry Collector
+{{< img src="infrastructure/index/infra-list-otel-config.png" alt="La sección del recolector OTel en el panel lateral del host que muestra información de compilación y configuración del recolector." style="width:100%;">}}
 
-Cuando la [extensión de Datadog][14] está configurada con tu recopilador de OpenTelemetry, puedes ver la configuración del recopilador y la información de creación directamente en el panel de detalles del host de la lista de infraestructuras. La extensión de Datadog proporciona visibilidad de tu flota de recopiladores desde la interfaz de usuario de Datadog, lo que te ayuda a gestionar y depurar tus despliegues de recopiladores de OpenTelemetry.
+## Exportar {#export}
 
-Para ver las configuraciones del recopilador de OpenTelemetry:
-1. Haz clic en un host que ejecute el recopilador de OpenTelemetry en la lista Infraestructuras.
-2. En el panel de detalles del host, selecciona la pestaña **OpenTelemetry Collector** (Recopilador de OpenTelemetry) para ver la información de creación y la configuración completa del recopilador.
+Haga clic en **Exportar** > **Abrir en el Editor DDSQL**, luego descargue los resultados del [Editor DDSQL][18]. También puede exportar a un tablero, notebook o hoja de cálculo. Para obtener una lista en formato JSON de sus hosts que reportan a Datadog, también puede usar uno de los siguientes:
 
-Para obtener instrucciones y requisitos de configuración detallados, como la coincidencia de nombres de host y la configuración de pipeline, consulta la [documentación principal de la extensión de Datadog][14].
+- El [informe de resumen de hosts][17].
+- El [punto de conexión de la API de búsqueda de hosts][7]. Consulte la [guía del desarrollador][8] para un ejemplo.
 
-{{< img src="infrastructure/index/infra-list-config-OpenTelemetry.png" alt="Ver configuraciones del recopilador de OpenTelemetry en la lista de infraestructuras" style="width:100%;">}}
+### Versiones del Agente de Auditoría {#audit-agent-versions}
 
+Para auditar qué versiones de Agente se están ejecutando en sus hosts, use el [script get_host_agent_list][9]. El script utiliza el [informe de resumen de hosts][17] para mostrar los Agentes en ejecución con sus números de versión. Un `json_to_csv` script también convierte la salida JSON a CSV.
 
-### Exportar
+### Lista de hosts sin un Agente {#list-hosts-without-an-agent}
 
-Para obtener una lista con formato JSON de tus hosts que informan a Datadog, utiliza una de las siguientes opciones:
-
-* El **enlace permanente de la API de JSON** en la parte superior de la lista de infraestructuras.
-* El [endpoint de búsqueda de la API de los hosts][7]. Para ver un ejemplo, consulta la [guía para desarrolladores][8].
-
-#### Agent version
-
-Puede ser útil auditar tus versiones del Agent para asegurarte de que estés ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el vínculo permanente a JSON para mostrar los Agents que se están ejecutando con los números de versión. También hay un script `json_to_csv` para convertir la salida JSON en un archivo CSV.
-
-#### Sin Agent
-
-Otro caso de uso de la exportación de JSON es obtener una lista de instancias de Amazon EC2 (excepto RDS) sin ningún Agent instalado. Estas instancias aparecen en la lista de infraestructuras al configurar tu cuenta de AWS en el cuadro de integración de Datadog AWS. Consulta el siguiente script Python3:
+También puede usar la exportación JSON para listar instancias de Amazon EC2 (excluyendo RDS) que no tienen un Agente instalado. Estas instancias aparecen en la Lista de Hosts cuando configura su cuenta de AWS en la integración de Datadog AWS. El siguiente script de Python 3 las lista:
 
 ```python
 # 3p
@@ -148,21 +130,22 @@ for host in infra['rows']:
             pass
 ```
 
-## Referencias adicionales
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /es/getting_started/tagging/
 [3]: /es/metrics/
 [4]: /es/infrastructure/livecontainers/?tab=helm#overview
 [5]: /es/logs/
-[6]: /es/agent/configuration/agent-configuration-files/
 [7]: /es/api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /es/developers/guide/query-the-infrastructure-list-via-the-api/
+[8]: /es/extend/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/es/account_management/billing/
 [12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
-[13]: /es/agent/fleet_automation
 [14]: /es/opentelemetry/integrations/datadog_extension/
+[15]: /es/infrastructure/resource_catalog/#investigate-a-host-or-resource
+[16]: /es/getting_started/search/
+[17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
+[18]: /es/ddsql_editor/#save-and-share-queries

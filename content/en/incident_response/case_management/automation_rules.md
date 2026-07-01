@@ -49,4 +49,4 @@ Add the following to your configuration:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases/settings
-[2]: /service_management/workflows/
+[2]: /actions/workflows/
