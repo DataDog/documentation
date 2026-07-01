@@ -1,6 +1,6 @@
 ---
 title: Test Parallelization Best Practices
-description: Optimize Test Parallelization planning and test discovery for Ruby and Rails test suites.
+description: Optimize Test Parallelization planning and test discovery for Ruby, Rails, and Python test suites.
 further_reading:
   - link: "/tests/test_parallelization/setup/"
     tag: "Documentation"
@@ -19,7 +19,7 @@ Test Parallelization is in Preview. Complete the form to request access.
 
 ## Optimize the planning step
 
-Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
+Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery and pytest projects use collection. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
 
 ### Preinstall system dependencies with Docker
 
@@ -42,6 +42,15 @@ Use your CI provider dependency cache. For example, GitHub Actions can cache Bun
   with:
     ruby-version: 3.3
     bundler-cache: true
+{{< /code-block >}}
+
+For Python projects, use `actions/setup-python` with pip caching:
+
+{{< code-block lang="yaml" >}}
+- uses: actions/setup-python@v5
+  with:
+    python-version: "3.12"
+    cache: pip
 {{< /code-block >}}
 
 ### Skip database setup during discovery
@@ -71,6 +80,14 @@ end
 {{< /code-block >}}
 
 After these changes, test discovery can run faster and avoid failures when the database is unavailable during planning.
+
+## Configure pytest
+
+`ddtest` runs pytest as `python -m pytest` and appends the selected test files. It appends `--ddtrace` to `PYTEST_ADDOPTS`, preserving any existing value, so the `ddtrace` pytest plugin loads without changing your pytest config.
+
+For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.ini`, `pyproject.toml`, `tox.ini`, or `setup.cfg`. If no pytest config defines those settings, `ddtest` uses `**/{test_*,*_test}.py`.
+
+During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery).
 
 ## Configure Minitest in non-Rails projects
 
