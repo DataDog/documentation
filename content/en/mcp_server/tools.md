@@ -196,13 +196,22 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Get all 500 status code logs from production.
 
 ### `search_datadog_rum_events`
-*Toolset: **core***\
+*Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
 Search Datadog RUM events using advanced query syntax.
 
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
+
+### `aggregate_rum_events`
+*Toolset: **core**, **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
+
+- Count JavaScript errors by page in the last 24 hours.
+- Show me the p95 loading time grouped by country for my main RUM application.
+- How many sessions had a Core Web Vitals failure this week?
 
 ### `create_datadog_notebook`
 *Toolset: **core***\
@@ -1210,9 +1219,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
-
-<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1246,6 +1253,22 @@ Explores RUM metrics for an application, including out-of-the-box metrics and cu
 - List the custom RUM metrics defined on the "checkout-web" application.
 - Show me available RUM metrics related to page load time on my main app.
 
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
+
+- Create a distribution metric `rum.view.lcp_by_country` that tracks p95 LCP for view events, grouped by country.
+- Update the filter on `rum.error.checkout_errors` to exclude synthetic test traffic.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Permanently deletes a custom RUM metric by ID. This operation is idempotent.
+
+- Delete the custom RUM metric `rum.view.my_custom_metric`.
+- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
+
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
@@ -1253,6 +1276,38 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+
+### `append_new_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+
+- Create a retention filter on "checkout-web" that retains 100% of error events.
+- Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+
+### `update_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+
+- Increase the sample rate on the "checkout errors" retention filter to 100%.
+- Disable the "long tasks" retention filter on my main RUM app.
+
+### `reorder_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+
+- Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
+- Reorder my retention filters so the specific filters are evaluated before the broad ones.
+
+### `delete_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+
+- Delete the "legacy sessions" retention filter from "checkout-web".
+- Remove the retention filter with ID `abc-123-def` from my main RUM app.
 
 ## Security
 
