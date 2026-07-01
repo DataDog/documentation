@@ -46,7 +46,7 @@ The {{< ui >}}Test{{< /ui >}} panel on the left lists default facets you can use
 | Standard Deviation Change | Indicates if the test has been newly added. |
 | Test Code Owners | The name of the test's codeowners as inferred from the repository configuration. |
 | Test Fingerprint | The unique identifier for an individual test run. |
-| Test Fingerprint (FQN) | A stable, unique identifier for a test (`@test.fingerprint_fqn`), derived from a hash of the repository ID and the test's fully qualified name. Because it stays the same across runs, use it to consistently identify the same test — for example, the test ID used by the [Flaky Tests Management API][19]. |
+| Test Fingerprint (FQN) | A stable, unique identifier for a test (`@test.fingerprint_fqn`) across all of its runs, derived from a hash of the repository ID and the test's fully qualified name (FQN). Use it to consistently identify the same test over time. This is also the identifier used by the [Flaky Tests Management API][19]. |
 | Test Framework | The underlying framework or set of tools used for creating and executing tests. |
 | Test Command | The command that was used to execute tests. |
 | Test Bundle | Equivalent to a test module. This is used by earlier Datadog testing library versions. |
