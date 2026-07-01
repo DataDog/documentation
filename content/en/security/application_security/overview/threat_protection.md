@@ -13,7 +13,7 @@ further_reading:
   text: "Attack Summary"
 ---
 
-The **Threat Protection** page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. Each section is described below.
+The **Threat Protection** page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. The following sections describe each area of the page.
 
 ## Ask Bits panel
 
