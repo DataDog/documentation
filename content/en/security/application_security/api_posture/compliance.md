@@ -40,11 +40,11 @@ The OWASP API Security Top 10 identifies the most critical security risks for AP
 
 ## How it works
 
-1. **Detection rules**: Each Datadog API security detection rule is tagged with the OWASP controls it covers. When a rule fires and generates a finding, the associated control is marked as **failing** for the affected service.
+- **Detection rules**: Each Datadog API security detection rule is tagged with the OWASP controls it covers. When a rule fires and generates a finding, the associated control is marked as **failing** for the affected service.
 
-2. **Posture score**: The posture score reflects the ratio of controls that are fully passing versus those with at least one failing finding. The score is calculated using the same methodology as [Cloud Security posture scores][3].
+- **Posture score**: The posture score reflects the ratio of controls that are fully passing versus those with at least one failing finding. The score is calculated using the same methodology as [Cloud Security posture scores][3].
 
-3. **Compliance Frameworks page**: The [Compliance Frameworks page][4] lists all available frameworks for your API security context. For each framework you can examine control-level details, filter by severity, and open a finding side panel to investigate individual API security events.
+- **Compliance Frameworks page**: The [Compliance Frameworks page][4] lists all available frameworks for your API security context. For each framework you can examine control-level details, filter by severity, and open a finding side panel to investigate individual API security events.
 
 ## View your compliance posture
 
