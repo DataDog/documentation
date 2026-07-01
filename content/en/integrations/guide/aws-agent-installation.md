@@ -30,7 +30,7 @@ You can deploy the Datadog Agent to your Amazon EC2 and Amazon EKS resources dir
 
 Before you begin, make sure of the following:
 
-- You can approve a CloudFormation stack in the target AWS account. Installation deploys a CloudFormation stack in your account, so you (or a teammate) need permission to review and create it. For details on what's granted and why, see Required AWS permissions."
+- You can approve a CloudFormation stack in the target AWS account. Installation deploys a CloudFormation stack in your account, so you (or a teammate) need permission to review and create it. For the required permissions and why they're needed, see the [Required AWS permissions](#required-aws-permissions) section.
 
 The following resource-specific requirements also apply:
 
@@ -59,8 +59,8 @@ You approve one CloudFormation stack, one time, during initial setup. After that
 
 You can start Agent installation from two entry points, depending on how much control you want over which resources are instrumented:
 
-- **AWS integration setup (install on everything)**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection, then choose to install on EC2 instances, EKS clusters, or both. The Agent installs on all eligible resources of the types you select.
-- **Fleet Automation**: If you'd rather not install on everything, skip the toggle during setup and use the AWS Install Agents page at any time. There, you can select the specific subset of EC2 instances and EKS clusters you want, for fine-grained control over which resources get the Agent.
+- **AWS integration setup (install on all eligible resources)**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection. Choose to install on EC2 instances, EKS clusters, or both. The Agent installs on all eligible resources of the types you select.
+- **Fleet Automation (install on specific resources)**: Open the AWS Install Agents page at any time to select the specific EC2 instances and EKS clusters you want.
 
 <!-- TODO(DOCS-14545): per AWS team, surfacing the Agent install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
 
