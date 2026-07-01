@@ -47,23 +47,6 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][8] instead.
-{% /alert %}
-
-For data security, you must use a client token. If you used only [Datadog API keys][9] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
-
-For more information about setting up a client token, see the [Client Token documentation][10].
-
-{% /step %}
-
 {% step title="Initialize the library with application context" %}
 
 {% site-region region="us" %}

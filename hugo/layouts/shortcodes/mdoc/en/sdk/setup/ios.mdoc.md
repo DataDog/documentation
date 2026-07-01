@@ -89,12 +89,6 @@ DatadogRUM.xcframework
 {% /tabs %}
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-1. Navigate to [**Digital Experience** > **Add an Application**][10].
-2. Select `iOS` as the application type and enter an application name to generate a unique application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
-{% /step %}
-
 {% step title="Initialize the library" %}
 
 In the initialization snippet, set an environment name, service name, and client token.

@@ -19,11 +19,6 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 {% stepper level="h4" %}
 
-{% step title="Create the application in the UI" %}
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][5] and select the JavaScript (JS) application type.
-2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
-{% /step %}
-
 {% step title="Install the Browser SDK" %}
 Choose the installation method for the Browser SDK.
 
