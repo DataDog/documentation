@@ -230,7 +230,7 @@ Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and pl
 
 ## Known limitations
 
-- Test Impact Analysis is not supported for Bazel.
+- [Test Impact Analysis][1] is not supported for Bazel.
 - The faster `test_optimization` mode supports tests that use the standard library `testing` package. Use `general` mode for tests that need the broader Orchestrion path.
 - Go module pins and Bazel tracer pins must resolve to the same `dd-trace-go` versions.
 
@@ -266,3 +266,5 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tests/test_impact_analysis/

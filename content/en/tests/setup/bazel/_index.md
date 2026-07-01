@@ -13,19 +13,21 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-Datadog provides official Bazel rules for Test Optimization. Use these rules to configure Bazel test targets. The rules read Test Optimization metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete.
+Datadog provides official Bazel rules for Test Optimization, which you can use to configure Bazel test targets. The rules read Test Optimization metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete. See all rules in the [`DataDog/rules_test_optimization` repository](https://github.com/DataDog/rules_test_optimization).
 
 The Bazel integration keeps Datadog metadata fetches outside test execution. During module or repository resolution, Bazel fetches Test Optimization metadata from Datadog and exposes it through a generated repository. During test execution, language-specific macros pass the metadata location to the test process and configure payloads to be written under `TEST_UNDECLARED_OUTPUTS_DIR`. After tests finish, run the doctor and uploader targets with `bazel run`.
 
-Test Impact Analysis is not supported for Bazel.
+[Test Impact Analysis][1] is not supported for Bazel.
 
 ## Language setup pages
 
 Use the language-specific setup page for your Bazel test targets:
 
-- [Java tests][1]
-- [Python tests][2]
-- [Go tests][3]
+{{< card-grid card_width="75px" >}}
+  {{< image-card href="/tests/setup/bazel/java/" src="integrations_logos/java_avatar.svg" alt="Java" >}}
+  {{< image-card href="/tests/setup/bazel/python/" src="integrations_logos/python_avatar.svg" alt="Python" >}}
+  {{< image-card href="/tests/setup/bazel/go/" src="integrations_logos/golang-avatar.png" alt="Go" >}}
+{{< /card-grid >}}
 
 ## Compatibility
 
@@ -39,11 +41,11 @@ This section includes setup pages for the following language test targets:
 
 Use `datadog-rules-test-optimization` version `1.2.0` and the commit pin shown on each language setup page.
 
-## How the Bazel flow works
+## How the Bazel setup flow works
 
-The Bazel setup has four parts:
+For detailed setup guides, see the [language-specific setup pages](#language-setup-pages). On a high level, the Bazel setup has four parts:
 
-1. Add the `datadog-rules-test-optimization` module and the companion module for your language.
+1. Add the `datadog-rules-test-optimization` module and the companion module for your language to `MODULE.bazel`.
 1. Configure a sync repository with your Datadog service name, runtime name, and runtime version.
 1. Replace the language test rule with the Datadog Bazel macro for each instrumented test target.
 1. Run tests, validate local payloads with the doctor target, validate enrichment with the uploader dry run, and then upload payloads.
@@ -73,6 +75,4 @@ Do not pass `DD_API_KEY`, `DD_SITE`, `DD_GIT_*`, or upload endpoint variables th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/setup/bazel/java/
-[2]: /tests/setup/bazel/python/
-[3]: /tests/setup/bazel/go/
+[1]: /tests/test_impact_analysis/

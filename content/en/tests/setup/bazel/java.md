@@ -271,9 +271,9 @@ dd_topt_java_test(
 
 ## Known limitations
 
-- Test Impact Analysis is not supported for Bazel.
+- [Test Impact Analysis][1] is not supported for Bazel.
 - `dd_topt_java_test` requires an `agent_jar` label.
-- Automatic coverage configuration for Bazel is not supported.
+- Automatic [coverage configuration][2] for Bazel is not supported.
 
 ## Troubleshooting
 
@@ -303,3 +303,6 @@ To fix this issue, pass Git metadata through `--repo_env`, not `--test_env`.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tests/test_impact_analysis/
+[2]: /code_coverage/configuration/
