@@ -22,7 +22,7 @@ You can copy, export, or download your aggregated search query and visualization
 
 {{< img src="/tests/explorer/export_updated.png" text="Download the list of queried tests results in the Test Optimization as a CSV file" style="width:100%" >}}
 
-Click the **Export** button on the right hand corner and select an option from the dropdown menu:
+Click the {{< ui >}}Export{{< /ui >}} button on the right hand corner and select an option from the dropdown menu:
 
 - Share your [saved view][6] of the [Test Optimization Explorer][3].
 - Export your search results to a [CI Test monitor][4] that triggers alerts on predefined thresholds.

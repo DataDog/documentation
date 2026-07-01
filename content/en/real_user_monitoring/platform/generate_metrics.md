@@ -33,38 +33,38 @@ RUM-based custom metrics are a cost-efficient option to summarize the data from 
 
 ## Create a RUM-based custom metric
 
-To create a custom metric from RUM event data, navigate to [**Digital Experience** > **Application Management** > **Generate Metrics**][4] and click **+ New Metric**.
+To create a custom metric from RUM event data, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Generate Metrics{{< /ui >}}][4] and click {{< ui >}}+ New Metric{{< /ui >}}.
 
 {{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
-To create a custom metric from a search query in the [RUM Explorer][5], click the **Export** button and select **Generate new metric** from the dropdown menu.
+To create a custom metric from a search query in the [RUM Explorer][5], click the {{< ui >}}Export{{< /ui >}} button and select {{< ui >}}Generate new metric{{< /ui >}} from the dropdown menu.
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based custom metric" width="80%" >}}
 
 1. Give your [custom metric][3] a name that does not start with `datadog.estimated_usage`, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
-2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include **Sessions**, **Views**, **Actions**, **Errors**, **Resources**, and **Long Tasks**. For more information, see [Search RUM Events][7].
+2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include {{< ui >}}Sessions{{< /ui >}}, {{< ui >}}Views{{< /ui >}}, {{< ui >}}Actions{{< /ui >}}, {{< ui >}}Errors{{< /ui >}}, {{< ui >}}Resources{{< /ui >}}, and {{< ui >}}Long Tasks{{< /ui >}}. For more information, see [Search RUM Events][7].
 3. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][8] such as `@session.type:user`. 
-4. Choose a field to track from the dropdown menu next to **Count**. 
+4. Choose a field to track from the dropdown menu next to {{< ui >}}Count{{< /ui >}}. 
 
    - Select `*` to generate a count of all RUM events that match your search query. 
    - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or `distribution` metric. 
 
    If the RUM attribute facet is a measure, the metric value is the RUM attribute value.
 
-5. Select a path to group by from the dropdown menu next to **group by**. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
+5. Select a path to group by from the dropdown menu next to {{< ui >}}group by{{< /ui >}}. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
    
    <div class="alert alert-danger">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
-6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
+6. For custom metrics created on sessions and views, select {{< ui >}}The active session/view starts matching the query{{< /ui >}} or {{< ui >}}The session/view becomes inactive or is completed{{< /ui >}} to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
 
 7. Add percentile aggregations for distribution metrics. You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99). 
 
    <div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.
 
-8. Click **Create Metric**.
+8. Click {{< ui >}}Create Metric{{< /ui >}}.
 
-Your RUM-based custom metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
+Your RUM-based custom metric appears in the list below {{< ui >}}Custom RUM Metrics{{< /ui >}}, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
 
 Datapoints are not created for metrics with historical data. Datapoints for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
 
@@ -83,17 +83,17 @@ You can generate a count metric of RUM events that match a query or a [distribut
 
 ### Update a RUM-based custom metric
 
-To update a metric, hover over a metric and click the **Edit** icon to the right hand corner.
+To update a metric, hover over a metric and click the {{< ui >}}Edit{{< /ui >}} icon to the right hand corner.
 
 - Filter query: Change the set of matching RUM events that are aggregated into metrics.
 - Aggregation groups: Update tags to manage the cardinality of generated metrics.
-- Percentile selection: Click the **Calculate percentiles** toggle to remove or generate percentile metrics.
+- Percentile selection: Click the {{< ui >}}Calculate percentiles{{< /ui >}} toggle to remove or generate percentile metrics.
 
 Because you cannot rename an existing metric, Datadog recommends creating another metric.
 
 ### Delete a RUM-based custom metric
 
-In order to stop the computing of datapoints from your custom metric and billing, hover over a metric and click the **Delete** icon to the right hand corner. 
+In order to stop the computing of datapoints from your custom metric and billing, hover over a metric and click the {{< ui >}}Delete{{< /ui >}} icon to the right hand corner. 
 
 ## Usage
 

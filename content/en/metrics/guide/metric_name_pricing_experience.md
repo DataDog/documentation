@@ -36,7 +36,7 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 
 ## Manage Tags modal
 
-When configuring tags on custom metrics, the **Manage Tags** modal estimates the impact of tag changes on **point volume** instead of cardinality volume.
+When configuring tags on custom metrics, the {{< ui >}}Manage Tags{{< /ui >}} modal estimates the impact of tag changes on **point volume** instead of cardinality volume.
 
 {{< img src="metrics/guide/metric_name_pricing_experience/manage-tags-modal.png" alt="The Manage Tags modal showing a usage projection chart with three lines: month-to-date usage, usage with current configuration, and usage with proposed configuration. Tags datacenter and service are configured in the Include tags tab." style="width:100%;" >}}
 

@@ -62,7 +62,7 @@ Activa tus flujos de trabajo desde monitores, señales de seguridad o dashboards
 
 El dashboard de información general de Workflows proporciona una visión general de alto nivel de tus flujos de trabajo y ejecuciones Datadog. Para encontrar el dashboard, ve a tu [Dashboard list (lista de dashboard)][3] y busca `Workflows Overview` (información general de Workflows).
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="El dashboard de información general de Workflows" style="width:100%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="El dashboard de información general de Workflows" style="width:100%;" >}}
 
 ## Ejemplos
 

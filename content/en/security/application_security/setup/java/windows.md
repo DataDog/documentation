@@ -110,6 +110,6 @@ If you encounter issues while setting up App and API Protection for your Java ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/java/compatibility
+[1]: /security/application_security/setup/compatibility/java
 [2]: /security/application_security/setup/java/troubleshooting
 [3]: /agent/?tab=Windows

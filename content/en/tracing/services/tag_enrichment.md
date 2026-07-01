@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Catalog.
+Use tag enrichment rules to add `team` and `system` tags to your Logs and APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Catalog.
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ Click **Add Tags** to open the tag enrichment rule modal pre-populated with that
 
 ## Tag enrichment behavior
 
-- **Impacted telemetry**: Tag enrichment applies to APM spans only.
+- **Impacted telemetry**: Tag enrichment applies to Logs and APM spans only.
 - **Historical data**: Tag enrichment rules apply only to telemetry ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new telemetry, but does not update previously ingested data.
 - **Metadata updates**: Updating or adding Entity Metadata to services for `team` or `system` while an enrichment rule is enabled, including the default rule, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.

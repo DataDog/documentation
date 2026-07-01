@@ -272,11 +272,11 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
-1. Click **Select API key** to choose the Datadog API key you want to use.
+1. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+1. Click {% ui %}Launch CloudFormation Template{% /ui %} to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 1. Select the VPC and subnet you want to use to install the Worker.
-1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+1. Review and check the necessary permissions checkboxes for IAM. Click {% ui %}Submit{% /ui %} to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -294,13 +294,13 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Docker** as your installation platform.
+1. Select {% ui %}Docker{% /ui %} as your installation platform.
 
 <!-- UI - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
-3. Click **Select API key** to choose the Datadog API key you want to use.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
+3. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 4. Run the command provided in the UI to install the Worker. The command points to the Worker bootstrap file that you configure to resolve secrets using your secrets manager.
 
@@ -311,19 +311,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     sudo systemctl restart observability-pipelines-worker
     ```
 
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
 <!-- UI - Docker - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
-3. Click **Select API key** to choose the Datadog API key you want to use.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
+3. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in **Review your secrets management**.
+4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in {% ui %}Review your secrets management{% /ui %}.
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -344,25 +344,25 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Kubernetes** as your installation platform.
+1. Select {% ui %}Kubernetes{% /ui %} as your installation platform.
 
 <!-- UI - Kubernetes - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
 7. Run the command provided in the UI to install the Worker.
-8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
 <!-- UI - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 {% /if %}
@@ -372,19 +372,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Linux** as your installation platform.
+1. Select {% ui %}Linux{% /ui %} as your installation platform.
 
 <!-- UI - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
 5. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
 6. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -393,9 +393,9 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- UI - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -410,19 +410,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **CloudFormation** as your installation platform.
+1. Select {% ui %}CloudFormation{% /ui %} as your installation platform.
 
 <!-- UI - Cloudformation - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 
 {% /if %}
 
 <!-- UI - CloudFormation - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 
 {% /if %}
 
@@ -438,12 +438,12 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 
 4. Select the AWS region you want to use to install the Worker.
-5. Click **Select API key** to choose the Datadog API key you want to use.
+5. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-6. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+6. Click {% ui %}Launch CloudFormation Template{% /ui %} to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 7. Select the VPC and subnet you want to use to install the Worker.
-8. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
-9. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+8. Review and check the necessary permissions checkboxes for IAM. Click {% ui %}Submit{% /ui %} to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -847,7 +847,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux APT -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -918,7 +918,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux RPM -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 

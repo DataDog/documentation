@@ -21,11 +21,11 @@ If no results appear after two hours:
 
 - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
 - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
-- Check that the cloud integration is properly configured. On the [Cloud Security Setup][4] page, verify that your cloud account appears with Agentless Scanning enabled.
+- Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
 
 ## GCP: Failed to create state bucket (storage.buckets.create 403)
 
-If the GCP Cloud Shell setup fails at **"Setting up Terraform state storage"** with an error like:
+If the GCP Cloud Shell setup fails at **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** with an error like:
 
 ```
 Failed to create state bucket: datadog-agentless-tfstate-<project>
@@ -51,7 +51,7 @@ Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed
 
 These findings reflect vulnerabilities identified in the underlying OS image and do not indicate a misconfiguration of your environment.
 
-If desired, you can use tag-based filtering in the [Cloud Security Vulnerabilities Explorer][2] to exclude Datadog-managed scanner instances from your vulnerability views.
+If desired, you can use tag-based filtering in the [{{< ui >}}Cloud Security Vulnerabilities Explorer{{< /ui >}}][2] to exclude Datadog-managed scanner instances from your vulnerability views.
 
 ## Hosts with the Datadog Agent are not scanned
 

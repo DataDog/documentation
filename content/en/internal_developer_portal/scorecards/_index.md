@@ -1,5 +1,8 @@
 ---
 title: Scorecards
+description: Automatically evaluate entities in your Catalog against defined criteria to measure software health and promote engineering best practices across teams.
+cascade:
+  site_support_id: idp
 aliases:
   - /tracing/software_catalog/scorecards
   - /tracing/service_catalog/scorecards
@@ -57,4 +60,4 @@ Datadog can summarize Scorecard results into automated reports and deliver them 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/service-scorecards/
-[2]: /service_management/workflows/
+[2]: /actions/workflows/

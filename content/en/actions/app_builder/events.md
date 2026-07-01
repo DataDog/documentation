@@ -6,10 +6,10 @@ aliases:
 - /service_management/app_builder/events
 disable_toc: false
 further_reading:
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"
@@ -97,6 +97,6 @@ To see what state functions are available for a given component, see [Components
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
 
-[1]: /service_management/app_builder/components
+[1]: /actions/app_builder/components
 [2]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [8]: https://chat.datadoghq.com/
