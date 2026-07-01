@@ -187,6 +187,9 @@ Send the prompt that matches the product you want to set up:
 
 {{% /tab %}}
 
+{{% tab "App and API Protection" %}}
+{{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
+{{% /tab %}}
 
 {{% tab "Serverless Monitoring" %}}
 
@@ -219,6 +222,7 @@ After the agent completes, commit the changes to your repository and set any new
 Confirm data is flowing in the Datadog UI for the product you set up:
 
 - [Error Tracking][6]
+- [App and API Protection][11]
 - [RUM > Applications][7]
 - [Infrastructure > Hosts][8]
 - [Serverless > Functions][9]
@@ -229,6 +233,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [8]: https://app.datadoghq.com/infrastructure
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
+[11]: https://app.datadoghq.com/security/appsec
 [16]: /getting_started/site/
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
