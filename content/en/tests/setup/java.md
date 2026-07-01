@@ -57,6 +57,14 @@ Other build systems, such as Ant, Bazel, or SBT are supported with the following
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 
+### Android
+
+Android unit tests are fully supported. UI and integration tests are supported only through [Robolectric][11], which lets these tests run on the JVM. If you haven't used Robolectric before, see the [Robolectric documentation][11] to learn how to set it up.
+
+Tests that run on an Android emulator or a physical device **are not supported**.
+
+Configure Android tests the same way as other Gradle-based Java tests, applying `GRADLE_OPTS` to the Gradle task that runs your Robolectric-based tests (for example, `testDebugUnitTest`). See the [Gradle tab](#running-your-tests) for configuration details.
+
 ## Setup
 
 You may follow interactive setup steps on the [Datadog site][2] or the instructions below.
@@ -571,3 +579,4 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [8]: /tests/#parameterized-test-configurations
 [9]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-display-names
 [10]: /tracing/trace_collection/compatibility/java#integrations
+[11]: https://robolectric.org/getting-started/
