@@ -28,21 +28,6 @@ and unzipping it in your project's root folder.
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][5].
-2. Select {% ui %}Roku{% /ui %} as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][6].
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [{% ui %}Error Tracking{% /ui %} > {% ui %}Settings{% /ui %} > {% ui %}Browser and Mobile{% /ui %} > {% ui %}Add an Application{% /ui %}][7] instead.
-{% /alert %}
-
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][8] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
-
-For more information about setting up a client token, see the [Client Token documentation][9].
-{% /step %}
-
 {% step title="Initialize the library" %}
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][10].

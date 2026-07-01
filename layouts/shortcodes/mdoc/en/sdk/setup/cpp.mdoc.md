@@ -94,14 +94,6 @@ For more detailed information on build configuration, see [Advanced Build Config
 
 {% /step %}
 
-{% step title="Create a RUM Application in the Datadog UI" %}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][2].
-2. Select `C++` as the application type and enter an application name to generate a unique RUM application ID and client token.
-3. Copy the application ID and client token. You need them to initialize the SDK.
-
-{% /step %}
-
 {% step title="Initialize the SDK" %}
 
 In your application code, include the appropriate SDK headers:

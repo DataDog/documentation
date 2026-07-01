@@ -23,21 +23,6 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][8] instead.
-{% /alert %}
-
-For data security, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][10].
-
-{% /step %}
-
 {% step title="Initialize the library with application context" %}
 
 Add the following code snippet to your initialization file:
