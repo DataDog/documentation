@@ -402,6 +402,9 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID is attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
+`collectAccessibility`
+: Determines whether accessibility settings are collected and included in RUM view events. By default, this is disabled.
+
 ### Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
