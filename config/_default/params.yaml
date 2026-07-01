@@ -346,6 +346,7 @@ unsupported_sites:
   gitlab-source-code: [gov,gov2]
   google-hangouts-chat: [gov,gov2]
   google_chat: [gov,gov2]
+  governance_console: [gov, gov2]
   gpu_monitoring: [gov, gov2]
   heatmaps: [gov,gov2]
   high_availability_datadog_agent: [gov,gov2]
