@@ -81,14 +81,14 @@ For direct call routing, escalation proceeds as follows:
 
 ### Voicemail routing 
 
-In voicemail routing, callers are prompted to leave a message. The message is transcribed and sent as a Page to the On-Call Team.
+In voicemail routing, callers are prompted to leave a voicemail message.
 
 #### Best practices
 
 - Confirm team members have notification preferences configured to receive Pages.
 - Test your routing setup regularly:
   - Test each keypad option to verify it routes to the correct team.
-  - Confirm that voicemail recordings are properly captured and transcribed.
+  - Confirm that voicemail recordings are properly captured.
   - Verify that Pages are created and sent to the correct team members.
 
 ## Troubleshooting

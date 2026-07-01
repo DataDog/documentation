@@ -31,7 +31,7 @@ further_reading:
 
 {{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure App Service selected." style="width:100%;" >}}
 
-In Datadog, use the [Serverless > Azure][4] page to troubleshoot all your Azure resources.
+In Datadog, use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][4] page to troubleshoot all your Azure resources.
 
 ### Azure metrics and logs
 

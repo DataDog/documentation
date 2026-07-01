@@ -196,13 +196,22 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Get all 500 status code logs from production.
 
 ### `search_datadog_rum_events`
-*Toolset: **core***\
+*Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
 Search Datadog RUM events using advanced query syntax.
 
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
+
+### `aggregate_rum_events`
+*Toolset: **core**, **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
+
+- Count JavaScript errors by page in the last 24 hours.
+- Show me the p95 loading time grouped by country for my main RUM application.
+- How many sessions had a Core Web Vitals failure this week?
 
 ### `create_datadog_notebook`
 *Toolset: **core***\
@@ -737,6 +746,117 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
 
+## Experiments
+
+Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
+
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `list_experiments`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Lists experiments for the organization, with optional name search, limit, and offset for pagination.
+
+- Show me all running experiments.
+- Find experiments with "checkout" in the name.
+
+### `get_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
+
+- Get the details for experiment `abc123`.
+- What is the current status and linked flag for experiment `abc123`?
+
+### `create_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Creates a new experiment with a name, hypothesis, subject type, and primary metric.
+
+- Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
+
+### `link_feature_flag_to_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Links a feature flag to an experiment.
+
+- Link feature flag `new-checkout-flow` to experiment `abc123`.
+
+### `start_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
+
+- Start experiment `abc123`.
+
+### `conclude_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Concludes a running experiment with a permanent winning variant decision.
+
+- Conclude experiment `abc123` with the treatment variant as the winner.
+
+### `cancel_experiment`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Write`*\
+Cancels a running experiment with a required reason.
+
+- Cancel experiment `abc123` because an SRM issue was detected.
+
+### `get_experiment_diagnostics`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get_experiment_results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
+
+- Run diagnostics on experiment `abc123` before I look at the results.
+- Is there a sample ratio mismatch in experiment `abc123`?
+
+### `get_experiment_results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
+
+- Show me the results for experiment `abc123`.
+- What is the verdict on the primary metric for experiment `abc123`?
+
+### `explore_experiment_results`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get_experiment_results` for deeper analysis.
+
+- Break down the results for experiment `abc123` by device type.
+- How did the lift for experiment `abc123` trend over the last two weeks?
+
+### `list_experiment_segmentation_properties`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Lists the assignment properties an experiment can be split by. Call this before `explore_experiment_results` to get valid property IDs — do not guess them.
+
+- What segmentation properties can I use to break down experiment `abc123`?
+
+### `get_experiment_segmentation_property_values`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore_experiment_results` to avoid invalid filter strings.
+
+- What values are available for the device type property in experiment `abc123`?
+
+### `get_metric_definition`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Metrics Read`*\
+Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field with the structured parameters needed to query the raw event data. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
+
+- What is the event query behind the primary metric for experiment `abc123`?
+- Which MCP tool should I use to investigate why this metric moved?
+
+### `diagnose_experiment_run_failure`
+*Toolset: **experiments***\
+*Permissions Required: `Product Analytics Experiments Read`*\
+Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get_experiment_diagnostics` for result quality and SRM issues instead.
+
+- Why did the latest analysis run for experiment `abc123` fail?
+- Diagnose the pipeline failure for experiment `abc123`.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -1036,7 +1156,7 @@ Returns values for a specific frame or context field discovered with `get_profil
 
 ## Reference Tables
 
-Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+Tools for managing [Reference Tables][45], including listing tables, reading rows, upserting rows, and creating tables synced from cloud storage files or as empty tables you populate directly.
 
 ### `list_reference_tables`
 *Toolset: **reference-tables***\
@@ -1045,6 +1165,13 @@ Lists and searches [Reference Tables][45] in the organization, with optional fil
 - List all reference tables in my organization.
 - Find reference tables with `customer` in the name.
 - Show me the reference tables sorted by last update time.
+
+### `list_reference_table_rows`
+*Toolset: **reference-tables***\
+Lists all rows in a reference table with optional filtering and pagination. Use `list_reference_tables` first to find the table ID and schema.
+
+- List all rows in the `ip_allowlist` reference table.
+- Show me the first 50 rows of the `customer_tiers` table.
 
 ### `get_reference_table_rows`
 *Toolset: **reference-tables***\
@@ -1055,15 +1182,23 @@ Retrieves specific rows from a reference table by their primary key values. Use 
 
 ### `append_reference_table_rows`
 *Toolset: **reference-tables***\
-Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
+Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field. If rows may already exist, use `upsert_reference_table_rows` instead.
 
 - Add a new row for user `user003` with name `Carol` and age `28` to the users table.
 - Append these five new account entries to the accounts reference table.
 
+### `upsert_reference_table_rows`
+*Toolset: **reference-tables***\
+Inserts new rows or updates existing rows in a reference table. If a row with the same primary key already exists, its values are overwritten. Use this instead of `append_reference_table_rows` when rows may already exist.
+
+- Update the tier for account `acct-123` in the `customer_tiers` table.
+- Add or update these ten service entries in the `service_catalog` reference table.
+
 ### `create_reference_table`
 *Toolset: **reference-tables***\
-Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
+Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty table you can populate with `append_reference_table_rows` or `upsert_reference_table_rows`. Cloud-backed modes (`S3`, `GCS`, `AZURE`) sync from a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
 
+- Create an empty reference table called `service_catalog` with fields for service name, owner team, and tier.
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
@@ -1084,9 +1219,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
-
-<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1120,6 +1253,22 @@ Explores RUM metrics for an application, including out-of-the-box metrics and cu
 - List the custom RUM metrics defined on the "checkout-web" application.
 - Show me available RUM metrics related to page load time on my main app.
 
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
+
+- Create a distribution metric `rum.view.lcp_by_country` that tracks p95 LCP for view events, grouped by country.
+- Update the filter on `rum.error.checkout_errors` to exclude synthetic test traffic.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Permanently deletes a custom RUM metric by ID. This operation is idempotent.
+
+- Delete the custom RUM metric `rum.view.my_custom_metric`.
+- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
+
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
@@ -1127,6 +1276,38 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+
+### `append_new_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+
+- Create a retention filter on "checkout-web" that retains 100% of error events.
+- Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+
+### `update_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+
+- Increase the sample rate on the "checkout errors" retention filter to 100%.
+- Disable the "long tasks" retention filter on my main RUM app.
+
+### `reorder_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+
+- Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
+- Reorder my retention filters so the specific filters are evaluated before the broad ones.
+
+### `delete_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+
+- Delete the "legacy sessions" retention filter from "checkout-web".
+- Remove the retention filter with ID `abc-123-def` from my main RUM app.
 
 ## Security
 
@@ -1639,6 +1820,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
 [65]: /code_coverage/

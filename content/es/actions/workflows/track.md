@@ -28,7 +28,7 @@ En esta página se explica cómo hacer un seguimiento de los distintos tipos de 
 
 El dashboard de Información general de procesos proporciona una descripción superficial de tus procesos y ejecuciones en Datadog. Para encontrar el dashboard, ve a tu [Lista de dashboards][2] y busca **Workflows Overview** (Información general de procesos).
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="El dashboard de Información general de procesos" style="width:80%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="El dashboard de Información general de procesos" style="width:80%;" >}}
 
 
 ## Ver ediciones y ejecuciones de procesos en Audit Trail

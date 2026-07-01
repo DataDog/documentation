@@ -10,5 +10,31 @@
   "enabledPlugins": {
     "marketplace-auto-update@datadog-claude-plugins": true,
     "documentation@datadog-claude-plugins": true
+  },
+  "permissions": {
+    "allow": [
+      "Grep",
+      "Ls",
+      "Bash(gh pr view *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh repo view *)",
+      "Bash(gh repo list *)",
+      "Bash(gh auth status)",
+      "Bash(gh issue view *)",
+      "Bash(gh issue list *)",
+      "Bash(gh search prs *)",
+      "Bash(gh search commits *)",
+      "Bash(gh search repos *)",
+      "Bash(vale *)",
+      "mcp__atlassian__fetch",
+      "mcp__atlassian__getConfluencePage",
+      "mcp__atlassian__search",
+      "mcp__atlassian__searchConfluenceUsingCql",
+      "mcp__atlassian__atlassianUserInfo",
+      "mcp__atlassian__getAccessibleAtlassianResources",
+      "mcp__atlassian__searchJiraIssuesUsingJql"
+    ]
   }
 }

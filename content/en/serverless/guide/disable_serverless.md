@@ -15,10 +15,10 @@ To disable Serverless Monitoring for AWS Lambda or AWS Step Functions:
 
 1. In Datadog, navigate to the [AWS integration tile][1].
 2. Select your AWS account on the left.
-3. Navigate to the **Metric Collection** tab and toggle off metric collection from the AWS services you want to stop monitoring.
+3. Navigate to the {{< ui >}}Metric Collection{{< /ui >}} tab and toggle off metric collection from the AWS services you want to stop monitoring.
 
    {{< img src="serverless/guide/disable/aws-lambda-off.png" alt="Datadog-AWS integration tile, Metric Collection tab. With 'lambda' in the search bar, the AWS Lambda service appears. The toggle is in a disabled position." style="width:100%;" >}}
-4. **Save** your changes.
+4. {{< ui >}}Save{{< /ui >}} your changes.
 
 ### Disable tracing
 
@@ -34,10 +34,10 @@ To disable Serverless Monitoring for Azure App Service, Azure Container Apps, or
 
 1. In Datadog, navigate to the [Azure integration tile][2].
 2. Select your app registration on the left.
-3. Navigate to the **Metric Collection** tab and toggle off metric collection for the Azure services you wish to stop monitoring.
+3. Navigate to the {{< ui >}}Metric Collection{{< /ui >}} tab and toggle off metric collection for the Azure services you wish to stop monitoring.
 
    {{< img src="serverless/guide/disable/azure-container-off.png" alt="Datadog-Azure integration tile, Metric Collection tab. With 'container apps' in the search bar, the Azure Container Apps service appears. The toggle is in a disabled position." style="width:100%;" >}}
-4. **Save** your changes.
+4. {{< ui >}}Save{{< /ui >}} your changes.
 
 ### Disable tracing
 If you deployed the Datadog Agent in a sidecar container, remove it. If you are using `datadog/serverless-init`, remove it from your Dockerfile.
@@ -51,10 +51,10 @@ To disable Serverless Monitoring for Google Cloud Run containers or functions:
 ### Disable metrics
 1. In Datadog, navigate to the [Google Cloud integration tile][3].
 2. Select your GCP account on the left.
-3. Navigate to the **Metric Collection** tab and toggle off metric collection for the Google Cloud services you wish to stop monitoring.
+3. Navigate to the {{< ui >}}Metric Collection{{< /ui >}} tab and toggle off metric collection for the Google Cloud services you wish to stop monitoring.
 
    {{< img src="serverless/guide/disable/gcr-off.png" alt="Datadog-Google Cloud integration tile, Metric Collection tab. With 'cloud run' in the search bar, the Cloud Run and Cloud Run functions services appear. Both toggles are in a disabled position." style="width:100%;" >}}
-4. **Save** your changes.
+4. {{< ui >}}Save{{< /ui >}} your changes.
 
 ### Disable tracing
 If you deployed the Datadog Agent in a sidecar container, remove it with the [Datadog CLI][4]'s [`uninstrument` command][5]. If you are using `datadog/serverless-init`, remove it from your Dockerfile.

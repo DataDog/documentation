@@ -5,7 +5,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder documentation"
 - link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
@@ -213,7 +213,7 @@ To delete a connection group:
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
 [6]: /integrations/
-[8]: /service_management/workflows/actions/
+[8]: /actions/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
 [11]: https://chat.datadoghq.com/

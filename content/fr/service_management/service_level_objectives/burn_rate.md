@@ -17,7 +17,7 @@ Les alertes de taux d'utilisation de SLO vous préviennent lorsque l'utilisation
 - [SLO basés sur des monitors][2] qui sont uniquement composés de types de monitors de métrique (les monitors Metric, Integration, APM Metric, Anomaly, Forecast ou Outliner) et les
 - [SLO Time Slice][7].
 
-{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Configuration d'une alerte de taux d'utilisation">}}
+{{< img src="service_level_objectives/burn_rate/slo-burn-rate-alert-v2.png" alt="Configuration d'une alerte de taux d'utilisation">}}
 
 ## Fonctionnement des alertes de taux d'utilisation
 

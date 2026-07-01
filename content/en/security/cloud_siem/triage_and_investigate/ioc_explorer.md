@@ -28,7 +28,7 @@ To view data in the IOC Explorer, all of the following must be true:
 
 ## Use the IOC Explorer
 
-To access the IOC Explorer in Datadog, go to **Security** > **Cloud SIEM** > **Investigate** > [**IOC Explorer**][1].
+To access the IOC Explorer in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][1].
 
 ### Query and filter indicators of compromise
 
@@ -47,7 +47,7 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 
 ### Understand OCSF matching
 
-You can turn the **OCSF Matching** toggle on or off to have more control over how Datadog identifies IOC matches.
+You can turn the {{< ui >}}OCSF Matching{{< /ui >}} toggle on or off to have more control over how Datadog identifies IOC matches.
 - Turn the toggle **on** if you want **higher-confidence matches** tied to normalized security attributes.
   
   When the toggle is on, IOC matches only appear in the Explorer if values appear in mapped OCSF fields, such as the source IP, destination IP, or client IP. This helps ensure the match reflects the structured meaning of the data, rather than just the presence of the IOC somewhere in the raw log.
