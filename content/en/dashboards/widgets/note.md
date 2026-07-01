@@ -12,7 +12,7 @@ further_reading:
 
 The Notes & Links widget is similar to the [free text widget][1] but contains more formatting and display options.
 
-**Note**: The Notes & Links widget does not support inline HTML.
+**Note**: The Notes & Links widget does not support inline HTML. Markdown links open in the same tab.
 
 ## Setup
 
