@@ -15,6 +15,8 @@ further_reading:
 
 The **API Posture** overview page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. The following sections describe each area of the page.
 
+{{< img src="security/application_security/overview/api_posture.png" alt="API Posture overview page" >}}
+
 ## Ask Bits panel
 
 The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your API posture. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.

@@ -15,6 +15,8 @@ further_reading:
 
 The **Threat Protection** overview page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. The following sections describe each area of the page.
 
+{{< img src="security/application_security/overview/threat_protection.png" alt="Threat Protection overview page" >}}
+
 ## Ask Bits panel
 
 The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your threat protection. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.
