@@ -101,10 +101,41 @@ Following rules apply when defining sub-processors:
 
 #### Attribute Remapper
 
+Remap a field from each element to a field in the output element.
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array-map-attribute-remapper.png" alt="Screenshot of the Attribute Remapper sub-processor configuration" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "items": [
+    {"src_ip": "10.0.0.1"},
+    {"src_ip": "10.0.0.2"}
+  ]
+}
+```
+
+**Configuration steps:**
+
+- {{< ui >}}Source attributes{{< /ui >}}: `$sourceElem.src_ip`
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.source`
+- {{< ui >}}Preserve source{{< /ui >}}: enabled
+
+**Result:**
+
+```json
+{
+  "items": [...],
+  "out": [
+    {"source": "10.0.0.1"},
+    {"source": "10.0.0.2"}
+  ]
+}
+```
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -112,11 +143,11 @@ Following rules apply when defining sub-processors:
 ```json
 {
   "type": "attribute-remapper",
-  "name": "<NAME>",
-  "sources": ["$sourceElem[.<FIELD>]"],
-  "target": "$targetElem[.<FIELD>]",
+  "name": "Remap src_ip to source",
+  "sources": ["$sourceElem.src_ip"],
+  "target": "$targetElem.source",
   "target_format": "auto",
-  "preserve_source": false,
+  "preserve_source": true,
   "override_on_conflict": false
 }
 ```
@@ -136,10 +167,41 @@ Following rules apply when defining sub-processors:
 
 #### String Builder Processor
 
+Build a new field in the output element from a template of element or log attributes.
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array-map-string-builder.png" alt="Screenshot of the String Builder sub-processor configuration" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "items": [
+    {"proto": "tcp", "port": 443},
+    {"proto": "udp", "port": 53}
+  ]
+}
+```
+
+**Configuration steps:**
+
+- {{< ui >}}Template{{< /ui >}}: `%{$sourceElem.proto}/%{$sourceElem.port}`
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.service`
+- {{< ui >}}Replace missing{{< /ui >}}: disabled
+
+**Result:**
+
+```json
+{
+  "items": [...],
+  "out": [
+    {"service": "tcp/443"},
+    {"service": "udp/53"}
+  ]
+}
+```
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -147,9 +209,9 @@ Following rules apply when defining sub-processors:
 ```json
 {
   "type": "string-builder-processor",
-  "name": "<NAME>",
-  "template": "%{$sourceElem[.<FIELD>]} <RAW_TEXT>",
-  "target": "$targetElem[.<FIELD>]",
+  "name": "Build service label",
+  "template": "%{$sourceElem.proto}/%{$sourceElem.port}",
+  "target": "$targetElem.service",
   "is_replace_missing": false
 }
 ```
@@ -167,10 +229,41 @@ Following rules apply when defining sub-processors:
 
 #### Arithmetic Processor
 
+Compute a numeric expression using element or log attributes and write the result to the output element.
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array-map-arithmetic.png" alt="Screenshot of the Arithmetic Processor sub-processor configuration" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "items": [
+    {"bytes": 1024},
+    {"bytes": 2048}
+  ]
+}
+```
+
+**Configuration steps:**
+
+- {{< ui >}}Formula{{< /ui >}}: `$sourceElem.bytes / 1024`
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.kb`
+- {{< ui >}}Replace missing value{{< /ui >}}: disabled
+
+**Result:**
+
+```json
+{
+  "items": [...],
+  "out": [
+    {"kb": 1.0},
+    {"kb": 2.0}
+  ]
+}
+```
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -178,9 +271,9 @@ Following rules apply when defining sub-processors:
 ```json
 {
   "type": "arithmetic-processor",
-  "name": "<NAME>",
-  "expression": "$sourceElem[.<FIELD>] <OPERATOR> <VALUE>",
-  "target": "$targetElem[.<FIELD>]",
+  "name": "Convert bytes to KB",
+  "expression": "$sourceElem.bytes / 1024",
+  "target": "$targetElem.kb",
   "is_replace_missing": false
 }
 ```
@@ -198,10 +291,41 @@ Following rules apply when defining sub-processors:
 
 #### Category Processor
 
+Assign a category to each output element based on a filter query matching element attributes.
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array-map-category.png" alt="Screenshot of the Category Processor sub-processor configuration" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "items": [
+    {"status": "critical"},
+    {"status": "warning"}
+  ]
+}
+```
+
+**Configuration steps:**
+
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.severity`
+- Category 1: {{< ui >}}All events that match{{< /ui >}}: `@$sourceElem.status:critical`, {{< ui >}}Appear under the value name{{< /ui >}}: `high`
+- Category 2: {{< ui >}}All events that match{{< /ui >}}: `@$sourceElem.status:warning`, {{< ui >}}Appear under the value name{{< /ui >}}: `medium`
+
+**Result:**
+
+```json
+{
+  "items": [...],
+  "out": [
+    {"severity": "high"},
+    {"severity": "medium"}
+  ]
+}
+```
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -209,13 +333,11 @@ Following rules apply when defining sub-processors:
 ```json
 {
   "type": "category-processor",
-  "name": "<NAME>",
-  "target": "$targetElem[.<FIELD>]",
+  "name": "Map status to severity",
+  "target": "$targetElem.severity",
   "categories": [
-    {
-      "filter": {"query": "@$sourceElem[.<FIELD>]:<VALUE>"},
-      "name": "<CATEGORY_NAME>"
-    }
+    {"filter": {"query": "@$sourceElem.status:critical"}, "name": "high"},
+    {"filter": {"query": "@$sourceElem.status:warning"},  "name": "medium"}
   ]
 }
 ```
