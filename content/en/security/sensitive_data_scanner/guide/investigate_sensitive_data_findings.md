@@ -28,7 +28,7 @@ Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit
 
 The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data findings so that you can investigate, collaborate, and document your findings, and answer those questions.
 
-{{< img src="sensitive_data_scanner/sds_logs_findings_explorer.png" alt="Sensitive Data Scanner Logs Findings explorer grouped by service, with the auth-dotnet service expanded to show critical credit card scanner findings, match counts, trend charts, and last detected times." style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_logs_findings_explorer.png" alt="Sensitive Data Scanner Logs Findings explorer grouped by service, with a service expanded to show scanner findings, match counts, and trend charts." style="width:100%;" >}}
 
 ## Triage sensitive data findings
 
@@ -49,7 +49,7 @@ To investigate a log finding:
 6. In the {{< ui >}}Example Logs{{< /ui >}} section, review representative examples of affected logs. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline.
 7. Review {{< ui >}}Matches Trend{{< /ui >}} to see how match volume has changed over the past week. Use {{< ui >}}Related Access and Configuration Events{{< /ui >}} to check whether recent access events or changes to the scanning group or scanning rule line up with changes in match volume.
 
-Additionally, you can also:
+Additionally, you can:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
 
