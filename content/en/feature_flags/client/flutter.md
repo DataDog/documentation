@@ -311,7 +311,7 @@ DatadogFlagsConfiguration(
 `httpClient`, `customFlagsEndpoint`, `customExposureEndpoint`, and `customEvaluationEndpoint`
 : Advanced overrides for tests, proxies, or custom routing.
 
-If `enable()` is called without a `datadogConfig`, the SDK creates no live provider. Evaluations return the caller-provided default with `FlagEvaluationError.providerNotReady`.
+If `enable()` is called without a `datadogConfig`, the SDK does not create a live provider. Evaluations return the caller-provided default with `FlagEvaluationError.providerNotReady`.
 
 For Flutter-integrated setup, pass these options through `DatadogFlagsPluginConfiguration`:
 
