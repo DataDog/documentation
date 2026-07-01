@@ -61,5 +61,5 @@ From there you can:
 
 [1]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/
 [2]: https://owasp.org/API-Security/editions/2023/en/0x00-header/
-[3]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/#posture-score
+[3]: /glossary/#security-posture-score
 [4]: https://app.datadoghq.com/security/compliance/home?context=aap
