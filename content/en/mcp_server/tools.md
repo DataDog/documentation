@@ -1253,6 +1253,22 @@ Explores RUM metrics for an application, including out-of-the-box metrics and cu
 - List the custom RUM metrics defined on the "checkout-web" application.
 - Show me available RUM metrics related to page load time on my main app.
 
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
+
+- Create a distribution metric `rum.view.lcp_by_country` that tracks p95 LCP for view events, grouped by country.
+- Update the filter on `rum.error.checkout_errors` to exclude synthetic test traffic.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Permanently deletes a custom RUM metric by ID. This operation is idempotent.
+
+- Delete the custom RUM metric `rum.view.my_custom_metric`.
+- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
+
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
@@ -1292,22 +1308,6 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
 - Remove the retention filter with ID `abc-123-def` from my main RUM app.
-
-### `upsert_rum_metric`
-*Toolset: **rum***\
-*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
-Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
-
-- Create a distribution metric `rum.view.lcp_by_country` that tracks p95 LCP for view events, grouped by country.
-- Update the filter on `rum.error.checkout_errors` to exclude synthetic test traffic.
-
-### `delete_rum_metric`
-*Toolset: **rum***\
-*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
-Permanently deletes a custom RUM metric by ID. This operation is idempotent.
-
-- Delete the custom RUM metric `rum.view.my_custom_metric`.
-- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
 
 ## Security
 
