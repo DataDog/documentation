@@ -20,7 +20,15 @@ Use the array map processor to apply a sequence of sub-processors to each elemen
 - Sub-processors do not support `is_enabled` parameter.
 - Attribute Remapper sub-processor doesn't support `source_type` and `target_type` parameters and only remaps attributes.
 
-## Example: Normalizing an array of network connections
+## Setup
+
+Define the array map processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]:
+
+{{< img src="logs/log_configuration/processor/array-map-processor.png" alt="Screenshot of the Array Map Processor configuration panel" style="width:80%;" >}}
+
+## Before and after state of logs
+
+{{% collapse-content title="Example: Normalizing an array of network connections" level="h4" %}}
 
 **Before:**
 
@@ -50,6 +58,8 @@ Create an Array Map Processor with source `connections` and target `network.conn
   }
 }
 ```
+
+{{% /collapse-content %}}
 
 ## API
 
@@ -181,3 +191,4 @@ Following rules apply when defining sub-processors:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/logs-pipelines/
+[2]: https://app.datadoghq.com/logs/pipelines
