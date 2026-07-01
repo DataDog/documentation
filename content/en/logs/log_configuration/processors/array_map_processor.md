@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Use the array map processor to transform each element of a source array to a different target array. This processor allows running a sequence of sub-processors on every element. Currently only 4 sub-processors are supported: Attribute Remapper, String Builder, Arithmetic Processor and Category Processor.
+Use the array map processor to apply a sequence of sub-processors to each element of a source array, producing a target array. Currently only 4 sub-processors are supported: Attribute Remapper, String Builder, Arithmetic Processor and Category Processor.
 
 **Notes**:
 
@@ -53,7 +53,7 @@ Create an Array Map Processor with source `connections` and target `network.conn
 
 ## API
 
-Use the [Datadog Log Pipeline API endpoint][2] with the following array map processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following array map processor JSON payload:
 
 ```json
 {
@@ -177,4 +177,4 @@ Following rules apply when defining sub-processors:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
