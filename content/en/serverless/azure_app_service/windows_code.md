@@ -110,6 +110,8 @@ The Datadog CLI will automatically infer the runtime of your app and install the
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+`datadog-ci aas instrument` only needs to be run once to set up instrumentation. You do not need to re-run it on every code deployment, only re-run it to change your Datadog configuration.
+
 #### Azure Cloud Shell
 
 To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
@@ -383,17 +385,27 @@ To instrument a [deployment slot][101] instead of the main web app, use one of t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--env` to set a distinct environment tag for the slot:
+Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--service`, `--env`, and `--version` to set distinct unified service tagging values for the slot.
+
+To find the names of your deployment slots, run:
+```shell
+az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <web-app>
+```
 
 ```shell
-datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
+  --slot <slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
 
 Alternatively, provide the full slot resource ID with the `--resource-id` flag:
 
 ```shell
-datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
+
+**Note**: When you pass `--env`, the CLI automatically marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
 
 [1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 
@@ -429,6 +441,8 @@ module "my_web_app_slot" {
 
 Run `terraform apply`, and follow any prompts.
 
+**Note**: When `datadog_env` is set on your main web app module, the module marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
+
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows-slot
 
 {{% /tab %}}
@@ -443,6 +457,9 @@ param datadogApiKey string
 
 param webAppName string
 param slotName string
+
+@description('Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it.')
+param existingStickyAppSettingNames array = []
 
 resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: webAppName
@@ -469,6 +486,18 @@ resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
   }
 }
 
+// Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+// full slotConfigNames list — existingStickyAppSettingNames must include any settings already
+// marked sticky or they will be de-stickied.
+resource stickySettings 'Microsoft.Web/sites/config@2025-03-01' = {
+  parent: webApp
+  name: 'slotConfigNames'
+  properties: {
+    appSettingNames: union(existingStickyAppSettingNames, ['DD_ENV'])
+  }
+  dependsOn: [slot]
+}
+
 resource datadogExtension 'Microsoft.Web/sites/slots/siteextensions@2025-03-01' = {
   parent: slot
   // Uncomment the extension for your runtime:
@@ -485,6 +514,10 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 ```
 
 **Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
+
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
 
 {{% /tab %}}
 {{% tab "ARM Template" %}}
@@ -506,6 +539,11 @@ Update your template to target a deployment slot instead of the main web app:
     // ...
     "datadogApiKey": {
       "type": "securestring"
+    },
+    "existingStickyAppSettingNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": { "description": "Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
     }
   },
   "resources": {
@@ -537,6 +575,20 @@ Update your template to target a deployment slot instead of the main web app:
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Node.Apm')]"
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.DotNet')]"
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Java.Apm')]"
+    },
+    // Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+    // full slotConfigNames list — existingStickyAppSettingNames must include any settings
+    // already marked sticky or they will be de-stickied.
+    "stickySettings": {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/slotConfigNames')]",
+      "properties": {
+        "appSettingNames": "[union(parameters('existingStickyAppSettingNames'), createArray('DD_ENV'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('webAppName'), parameters('slotName'))]"
+      ]
     }
   }
 }
@@ -549,6 +601,10 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 ```
 
 **Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
+
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
 
 {{% /tab %}}
 {{< /tabs >}}
