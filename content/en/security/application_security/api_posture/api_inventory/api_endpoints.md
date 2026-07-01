@@ -145,7 +145,7 @@ To reduce noise, the inferred schema only includes fields that are observed enou
 
 ### Compare *declared* and *inferred* schemas
 
-To compare schemas, set up the following:
+To compare schemas, both of the following must be in place:
 
 - To view an inferred schema, [enable App and API Protection][9] on the service so endpoints are discovered from live traffic.
 - To compare against a declared schema, register the API's OpenAPI definition in the Datadog Catalog. See [Create Entities][8].
