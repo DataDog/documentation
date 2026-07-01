@@ -1453,6 +1453,107 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
+### Using multiple native backends simultaneously
+
+**Available in Agent version 7.80+**
+
+Instead of a single `secret_backend_type`, you can declare multiple named backends under `multi_secret_backends`. Each backend has its own `type` and `config`, and secrets are routed to a specific backend using a `backendName;` prefix in the `ENC[]` handle.
+
+**Precedence**: If `secret_backend_command` or `secret_backend_type` is also set, `multi_secret_backends` is ignored and a warning is logged. Remove those settings before using `multi_secret_backends`.
+
+#### Configuration
+
+```yaml
+# datadog.yaml
+
+secret_backend_timeout: 30  # applies globally to all backends
+
+multi_secret_backends:
+  <backend_name>:
+    type: <backend_type>
+    config:
+      <KEY_1>: <VALUE_1>
+```
+
+Each `<backend_name>` is an arbitrary identifier you choose. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
+
+#### ENC handle format
+
+When `multi_secret_backends` is active, prefix `ENC[]` handles with the backend name followed by a semicolon:
+
+```
+ENC[<backend_name>;<secret_key>]
+```
+
+Only the **first** semicolon is treated as the delimiter. Secret keys that themselves contain semicolons (for example, Kubernetes-style `namespace/secret-name;key`) continue to work.
+
+#### Example
+
+The following configuration reads secrets from two file backends simultaneously:
+
+```yaml
+# datadog.yaml
+secret_backend_timeout: 30
+
+multi_secret_backends:
+  yaml_secrets:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+  aws_secrets:
+    type: aws.secrets
+    config:
+      aws_session:
+        aws_region: us-east-1
+```
+
+Reference secrets by prefixing with the backend name:
+
+```yaml
+# datadog.yaml
+api_key: ENC[yaml_secrets;api_key]
+app_key: ENC[aws_secrets;My-Secrets;appKey]
+```
+
+#### Partial resolution
+
+If one backend or handle fails, the Agent still substitutes all successfully resolved handles. Failed handles are reported in `datadog-agent secret` output under **Secrets not resolved**:
+
+```
+=== Secrets stats ===
+Number of secrets resolved: 2
+Secrets handle resolved:
+- 'yaml_secrets;api_key': from datadog.yaml
+
+Secrets not resolved:
+  - handle "aws_secrets;nokey": an error occurred while resolving 'nokey': backend does not provide secret key
+```
+
+#### Migrating from `secret_backend_type`
+
+To switch from a single `secret_backend_type` to `multi_secret_backends`:
+
+1. Move `secret_backend_type` and `secret_backend_config` into a named entry under `multi_secret_backends`.
+2. Remove `secret_backend_type` and `secret_backend_config` from the top level.
+3. Update all `ENC[secretKey]` handles to `ENC[backendName;secretKey]`.
+
+```yaml
+# Before
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[api_key]
+
+# After
+multi_secret_backends:
+  my_yaml:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[my_yaml;api_key]
+```
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
 
