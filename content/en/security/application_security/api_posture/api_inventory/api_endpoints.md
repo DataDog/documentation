@@ -143,14 +143,36 @@ When the endpoint is associated with an API in Datadog Software Catalog, the dis
 
 To reduce noise, the inferred schema includes fields that are observed reliably over time and leaves out one-off or rarely seen fields, so the differences reported reflect meaningful drift rather than transient traffic.
 
-## Compare *declared* and *inferred* schemas
+### Compare *declared* and *inferred* schemas
 
 To compare schemas, set up the following:
 
 - To view an inferred schema, [enable App and API Protection][9] on the service so endpoints are discovered from live traffic.
 - To compare against a declared schema, register the API's OpenAPI definition in the Datadog Catalog. See [Create Entities][8].
 
-The differences are highlighted by severity.
+The differences are highlighted by severity:
+
+| Severity | Meaning |
+|----------|---------|
+| Breaking | The change likely breaks clients that rely on the declared contract, such as a field that became required or a parameter type change. |
+| Warning | The change is drift worth reviewing, such as an undeclared field observed in traffic or a parameter that became optional. |
+| Info | The difference is low-risk, such as an endpoint that is declared but has no observed traffic. |
+
+Differences can appear in the following areas of the schema:
+
+- **Parameters**: A parameter added, removed, or changed from optional to required (or the reverse).
+- **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
+- **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
+- **Value constraints**: Changes to numeric or length limits (`minimum`, `maximum`, `minLength`, `maxLength`), patterns, or uniqueness constraints.
+- **Schema composition**: A mismatch in `oneOf` or `allOf` composition, or in a discriminator.
+- **Responses**: A status code, response header, or content type added or removed.
+
+To reduce noise, some differences are excluded because they don't represent meaningful contract drift:
+
+- Request header and cookie parameters, since they often carry values such as authentication tokens or session identifiers that aren't part of the API contract.
+- Type changes on query parameters, since query parameters are always observed as strings in traffic, even when declared as another type, such as an integer or boolean.
+- Removed status codes, since the inferred schema only includes status codes observed in traffic, so a declared status code that hasn't occurred yet during observation always appears as removed.
+- `anyOf` composition mismatches, since the declared and inferred schemas can use `anyOf` at different levels of the schema while remaining equivalent.
 
 ## Processing sensitive data
 
