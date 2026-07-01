@@ -52,6 +52,7 @@ Supported build systems:
 |---|---|
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
+| Bazel | >= 1.2.0 |
 
 Use Datadog's official [Bazel rules for Java tests][bazel-java] to configure Test Optimization for Java test targets in Bazel.
 
