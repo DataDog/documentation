@@ -141,7 +141,7 @@ When the endpoint is associated with an API in Datadog Software Catalog, the dis
 - **View Raw Schema**: view the raw OpenAPI schema as YAML
 - **View inferred schema**: view the inferred schema as a preview or YAML. This inferred schema can be exported as an OpenAPI file in YAML or JSON.
 
-To reduce noise, the inferred schema includes fields that are observed reliably over time and leaves out one-off or rarely seen fields, so the differences reported reflect meaningful drift rather than transient traffic.
+To reduce noise, the inferred schema only includes fields that are observed enough times, and automatically drops fields that haven't been seen recently. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
 
 ### Compare *declared* and *inferred* schemas
 
