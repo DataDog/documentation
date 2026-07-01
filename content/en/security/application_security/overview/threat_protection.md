@@ -17,7 +17,7 @@ The **Threat Protection** page shows how well your services are instrumented and
 
 ## Ask Bits panel
 
-The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your threat protection. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you begin an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.
+The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your threat protection. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.
 
 ## App Instrumentation
 
