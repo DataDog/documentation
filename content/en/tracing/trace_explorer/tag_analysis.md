@@ -43,7 +43,7 @@ You can initiate Tag Analysis from several locations:
 
 {{< img src="/tracing/trace_explorer/tag_analysis/red_metrics_entrypoint.png" alt="Analyze RED metrics" style="width:90%;" >}}
 
--{{< ui >}}Trace Explorer Timeseries View{{< /ui >}}: Brush over a time window to define a subset of spans. Tag Analysis compares this selection to the rest of the time range.
+- {{< ui >}}Trace Explorer Timeseries View{{< /ui >}}: Brush over a time window to define a subset of spans. Tag Analysis compares this selection to the rest of the time range.
 
 {{< img src="/tracing/trace_explorer/tag_analysis/timeseries_entrypoint.png" alt="Analyze time range" style="width:80%;" >}}
 
