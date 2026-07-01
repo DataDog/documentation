@@ -23,10 +23,6 @@ further_reading:
   text: "Gain insights into your Oracle bill"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-Custom Costs are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
