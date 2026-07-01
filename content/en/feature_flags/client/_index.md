@@ -94,7 +94,7 @@ See your platform's SDK page (select from the top of this page) for a concrete t
 ## Context attribute requirements
 
 <div class="alert alert-warning">
-Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will cause exposure events to be silently dropped.
+Evaluation context attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are <strong>not supported</strong> and can cause exposure events to be silently dropped.
 </div>
 
 Use flat attributes in your evaluation context:
