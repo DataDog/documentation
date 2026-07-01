@@ -794,15 +794,15 @@ Cancels a running experiment with a required reason.
 
 - Cancel experiment `abc123` because an SRM issue was detected.
 
-### `get_experiment-diagnostics`
+### `get_experiment_diagnostics`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
-Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get_experiment-results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
+Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get_experiment_results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
 
 - Run diagnostics on experiment `abc123` before I look at the results.
 - Is there a sample ratio mismatch in experiment `abc123`?
 
-### `get_experiment-results`
+### `get_experiment_results`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
 Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
@@ -813,7 +813,7 @@ Returns computed per-variant, per-metric results. The `verdict` field (`better`,
 ### `explore_experiment_results`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
-Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get_experiment-results` for deeper analysis.
+Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get_experiment_results` for deeper analysis.
 
 - Break down the results for experiment `abc123` by device type.
 - How did the lift for experiment `abc123` trend over the last two weeks?
@@ -825,7 +825,7 @@ Lists the assignment properties an experiment can be split by. Call this before 
 
 - What segmentation properties can I use to break down experiment `abc123`?
 
-### `get_experiment-segmentation-property-values`
+### `get_experiment_segmentation_property_values`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
 Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore_experiment_results` to avoid invalid filter strings.
@@ -843,7 +843,7 @@ Returns the definition of an experiment metric — the underlying event query, d
 ### `diagnose_experiment_run_failure`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
-Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get_experiment-diagnostics` for result quality and SRM issues instead.
+Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get_experiment_diagnostics` for result quality and SRM issues instead.
 
 - Why did the latest analysis run for experiment `abc123` fail?
 - Diagnose the pipeline failure for experiment `abc123`.
