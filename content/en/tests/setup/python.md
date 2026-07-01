@@ -36,7 +36,7 @@ Supported test frameworks:
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
-If you run Python tests with Bazel, use Datadog's official [Bazel rules for Python tests][bazel-python].
+<div class="alert alert-info">If you use Bazel to run Python tests, use the Datadog <a href="/tests/setup/bazel/python/">Bazel rules for Python tests</a>.</div>
 
 ## Configuring reporting method
 
@@ -491,4 +491,3 @@ Datadog recommends you use up to one process at a time to prevent affecting test
 [1]: /tracing/trace_collection/dd_libraries/python/
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
-[bazel-python]: /tests/setup/bazel/python/

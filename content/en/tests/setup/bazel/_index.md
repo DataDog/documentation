@@ -13,7 +13,7 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-Datadog provides official Bazel rules for Test Optimization, which you can use to configure Bazel test targets. The rules read Test Optimization metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete. See all rules in the [`DataDog/rules_test_optimization` repository](https://github.com/DataDog/rules_test_optimization).
+Datadog provides official Bazel rules for Test Optimization. Use these rules to configure Bazel test targets. The rules read Test Optimization metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete. See all rules in the [`DataDog/rules_test_optimization` repository](https://github.com/DataDog/rules_test_optimization).
 
 The Bazel integration keeps Datadog metadata fetches outside test execution. During module or repository resolution, Bazel fetches Test Optimization metadata from Datadog and exposes it through a generated repository. During test execution, language-specific macros pass the metadata location to the test process and configure payloads to be written under `TEST_UNDECLARED_OUTPUTS_DIR`. After tests finish, run the doctor and uploader targets with `bazel run`.
 
@@ -35,9 +35,9 @@ This section includes setup pages for the following language test targets:
 
 | Language | Bazel macro | Notes |
 |---|---|---|
-| Java | `dd_topt_java_test` | Requires a `dd-java-agent` JAR label. |
-| Python | `dd_topt_py_test` | Supports the managed `pytest` runner and repository-owned pytest wrappers. |
-| Go | `dd_topt_go_test` | Use `test_optimization` mode for the faster standard-library `testing` path, or `general` mode for broader Orchestrion support. |
+| Java | `dd_topt_java_test` | Requires a `dd-java-agent` JAR label. See [Java compatibility][2]. |
+| Python | `dd_topt_py_test` | Supports the managed `pytest` runner and repository-owned pytest wrappers. See [Python compatibility][3]. |
+| Go | `dd_topt_go_test` | Use `test_optimization` mode for the faster standard-library `testing` path, or `general` mode for broader Orchestrion support. See [Go compatibility][4]. |
 
 Use `datadog-rules-test-optimization` version `1.2.0` and the commit pin shown on each language setup page.
 
@@ -76,3 +76,6 @@ Do not pass `DD_API_KEY`, `DD_SITE`, `DD_GIT_*`, or upload endpoint variables th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/test_impact_analysis/
+[2]: /tests/setup/bazel/java/#compatibility
+[3]: /tests/setup/bazel/python/#compatibility
+[4]: /tests/setup/bazel/go/#compatibility

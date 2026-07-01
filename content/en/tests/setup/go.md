@@ -28,7 +28,7 @@ Supported test frameworks:
 
 - `testing` package
 
-If you run Go tests with Bazel, use Datadog's official [Bazel rules for Go tests][bazel-go].
+<div class="alert alert-info">If you use Bazel to run Go tests, use the Datadog <a href="/tests/setup/bazel/go/">Bazel rules for Go tests</a>.</div>
 
 ## Configuring reporting method
 
@@ -148,7 +148,6 @@ $ go test -toolexec 'orchestrion toolexec' -race .
 ```
 
 [1]: https://github.com/datadog/orchestrion
-[bazel-go]: /tests/setup/bazel/go/
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

@@ -262,6 +262,7 @@ dd_topt_py_test(
 ## Known limitations
 
 - [Test Impact Analysis][1] is not supported for Bazel.
+- Automatic [coverage configuration][2] for Bazel is not supported.
 - `dd_topt_py_test` supports `pytest`.
 - In `consumer_runner` mode, the repository-owned wrapper must run pytest with the ddtrace plugin enabled.
 
@@ -299,3 +300,4 @@ To fix this issue, pass your repository's Python test wrapper with `py_test_rule
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/test_impact_analysis/
+[2]: /code_coverage/configuration/

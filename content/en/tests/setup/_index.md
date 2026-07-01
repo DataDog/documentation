@@ -20,7 +20,7 @@ For information about configuration options for [Test Optimization][1], choose y
 
 <br>
 
-If you run Go, Java, or Python tests with Bazel, use Datadog's official [Bazel rules for Test Optimization][5].
+If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][5].
 
 If you run your tests in an environment with network restrictions,
 see the [Agent Network Traffic][2] or [Agentless Network Settings][3] guide for information on how to configure whitelisting.
