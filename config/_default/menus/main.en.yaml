@@ -6267,7 +6267,7 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_angular
       weight: 102
-    - name: Dart
+    - name: Dart and Flutter
       url: feature_flags/client/flutter
       parent: feature_flags_client
       identifier: feature_flags_client_flutter
