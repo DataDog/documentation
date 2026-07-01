@@ -58,7 +58,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure</strong> > <strong>Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings</strong> > <strong>API Keys</strong></a>.</div>
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host map{{< /ui >}}), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys">{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}</a>.</div>
 
 
 ## Install the sample Dockerized Java application
