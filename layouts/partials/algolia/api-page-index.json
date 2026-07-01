@@ -20,12 +20,8 @@
 {{ $operationId := $endpoint_data.operationId }}
 {{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
 {{ $action_data := index $translate_actions_datafile $operationId }}
-{{/* Coalesce to "" so we never emit null. The sync's cleanDocument strips null keys from
-     the freshly-built doc but NOT from the remote export, so a null content/section_header
-     makes _.isEqual always fail -> the record churns ("updated") on every sync. Empty strings
-     round-trip symmetrically and converge. Mostly affects untranslated (e.g. ko/ja) API pages. */}}
-{{ $section_header := $action_data.summary | default "" }}
-{{ $section_content := $action_data.description | default "" }}
+{{ $section_header := $action_data.summary }}
+{{ $section_content := $action_data.description }}
 
 {{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
 {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
