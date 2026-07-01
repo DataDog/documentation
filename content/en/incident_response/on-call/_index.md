@@ -93,6 +93,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/integrations">}}<u>Integrations</u>: Trigger On-Call Pages from third-party tools including Slack, Prometheus Alertmanager, Pingdom, and Sentry.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Billing
