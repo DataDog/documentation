@@ -328,6 +328,21 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
+### Query Metrics or Explain Plans are missing for infrequently run queries
+
+If Query Metrics or Explain Plans are missing for queries that run infrequently or take a long time to complete, increase the `query_metrics.lookback_window`. A larger lookback window improves the chances of capturing these queries.
+
+The Agent needs two consecutive runs of a query to calculate Query Metrics, and the `query_metrics.lookback_window` parameter controls how far back the Agent looks for recently completed queries.
+
+**Note**: A larger lookback window can add load on your database and raise the number of normalized queries per collection cycle. Increase the value gradually and monitor the impact.
+
+For example, to extend the lookback window to 600 seconds, add the following to your instance configuration:
+
+  ```yaml
+  query_metrics:
+    lookback_window: 600
+  ```
+
 ## Known limitations
 
 ### SQL Server 2012
