@@ -25,7 +25,7 @@ algolia:
 
 The [Datadog MCP Server][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, OpenAI Codex, and [Bits AI][6] structured access to your experiments, metrics, and diagnostic data.
 
-The toolset becomes most powerful when your AI client can also read your codebase — combining live experiment state with how the associated feature flag is installed in your code.
+The toolset becomes most powerful when your AI client can also read your codebase—combining live experiment state with how the associated feature flag is installed in your code.
 
 <div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="#setup">Setup</a> for instructions on enabling it.</div>
 
@@ -37,7 +37,7 @@ The toolset becomes most powerful when your AI client can also read your codebas
 - Whether the code emits metric events correctly in all variants, or whether there is a path where a metric fires in one variant but not another, or fires twice
 - Whether nearby events or behaviors in the code aren't captured by any metric, and whether segments are worth adding because the code path diverges by platform or context
 
-**While an experiment is running**, the toolset covers several diagnostic dimensions - sample ratio mismatch (SRM), unreliable metrics, zero-data metrics, per-variant exposure imbalances, and more. When `get_experiment_diagnostics` identifies an issue, an agent with source access can trace the root cause: an SDK call inside a conditional that excludes some assigned subjects, or an exposure event that only fires after a late-loading component.
+**While an experiment is running**, the toolset covers several diagnostic dimensions—sample ratio mismatch (SRM), unreliable metrics, zero-data metrics, per-variant exposure imbalances, and more. When `get_experiment_diagnostics` identifies an issue, an agent with source access can trace the root cause: an SDK call inside a conditional that excludes some assigned subjects, or an exposure event that only fires after a late-loading component.
 
 For metric movements, `get_metric_definition` returns the underlying event query and the recommended Datadog MCP tool to call next. An agent can then query the raw event data and reason through what change in your code is most likely driving the movement.
 
@@ -51,7 +51,7 @@ For metric movements, `get_metric_definition` returns the underlying event query
 
 The `experiments` toolset is not enabled by default. To enable it, add `experiments` to the `toolsets` parameter when connecting to the Datadog MCP Server. See [Set Up the Datadog MCP Server][3] for connection instructions and toolset configuration.
 
-For feature flag management tools used alongside experiments — creating flags, syncing allocations, checking canary results — see [Feature Flags MCP Tools][4].
+For feature flag management tools used alongside experiments—creating flags, syncing allocations, checking canary results—see [Feature Flags MCP Tools][4].
 
 For the full reference of tools in the `experiments` toolset, including required permissions and example prompts, see [Datadog MCP Server Tools][7].
 
