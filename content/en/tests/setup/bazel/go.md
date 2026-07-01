@@ -16,7 +16,7 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-<div class="alert alert-info">Bazel support for Test Optimization is in Preview. Test Impact Analysis is not supported for Bazel.</div>
+<div class="alert alert-info">Test Impact Analysis is not supported for Bazel.</div>
 
 Datadog provides official Bazel rules for Go Test Optimization. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended Test Optimization defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper or need to set Datadog attributes such as `orchestrion_mode`.
 

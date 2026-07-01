@@ -71,7 +71,7 @@ Select an option to configure Test Optimization in Datadog:
 
 </br>
 
-If you run Go, Java, or Python tests with Bazel, use Datadog's official [Bazel rules for Test Optimization][bazel-setup]. Bazel support is in Preview.
+If you run Go, Java, or Python tests with Bazel, use Datadog's official [Bazel rules for Test Optimization][bazel-setup].
 
 In addition to tests, Test Optimization provides visibility over the whole testing phase of your project.
 
