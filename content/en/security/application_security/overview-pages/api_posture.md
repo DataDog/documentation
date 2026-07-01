@@ -1,19 +1,19 @@
 ---
-title: API Posture
+title: API Posture Overview
 disable_toc: false
 further_reading:
-- link: "/security/application_security/overview/"
+- link: "/security/application_security/overview-pages/"
   tag: "Documentation"
-  text: "App and API Protection Overview"
+  text: "App and API Protection Overview Pages"
 - link: "/security/application_security/overview/threat_protection/"
   tag: "Documentation"
-  text: "Threat Protection"
+  text: "Threat Protection Overview"
 - link: "/security/application_security/overview/attack_summary/"
   tag: "Documentation"
   text: "Attack Summary"
 ---
 
-The **API Posture** page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. The following sections describe each area of the page.
+The **API Posture** overview page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. The following sections describe each area of the page.
 
 ## Ask Bits panel
 

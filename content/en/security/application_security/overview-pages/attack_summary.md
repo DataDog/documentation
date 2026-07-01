@@ -7,13 +7,13 @@ aliases:
 further_reading:
 - link: "/security/application_security/overview/"
   tag: "Documentation"
-  text: "App and API Protection Overview"
+  text: "App and API Protection Overview Pages"
 - link: "/security/application_security/overview/api_posture/"
   tag: "Documentation"
-  text: "API Posture"
+  text: "API Posture Overview"
 - link: "/security/application_security/overview/threat_protection/"
   tag: "Documentation"
-  text: "Threat Protection"
+  text: "Threat Protection Overview"
 ---
 
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->

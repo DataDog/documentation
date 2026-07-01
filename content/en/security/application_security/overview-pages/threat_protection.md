@@ -1,19 +1,19 @@
 ---
-title: Threat Protection
+title: Threat Protection Overview
 disable_toc: false
 further_reading:
 - link: "/security/application_security/overview/"
   tag: "Documentation"
-  text: "App and API Protection Overview"
+  text: "App and API Protection Overview Pages"
 - link: "/security/application_security/overview/api_posture/"
   tag: "Documentation"
-  text: "API Posture"
+  text: "API Posture Overview"
 - link: "/security/application_security/overview/attack_summary/"
   tag: "Documentation"
   text: "Attack Summary"
 ---
 
-The **Threat Protection** page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. The following sections describe each area of the page.
+The **Threat Protection** overview page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. The following sections describe each area of the page.
 
 ## Ask Bits panel
 
