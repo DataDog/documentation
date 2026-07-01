@@ -10,10 +10,8 @@ const legacyEl = document.querySelector('[data-home-variant-content="legacy"]');
 if (newEl && legacyEl) {
     initializeFeatureFlags().then((client) => {
         const variant = getStringFlag(client, FLAG_KEY, DEFAULT_VARIANT);
-        if (variant === 'legacy') {
-            newEl.setAttribute('hidden', '');
-            legacyEl.removeAttribute('hidden');
-        }
+        const activeEl = variant === 'legacy' ? legacyEl : newEl;
+        activeEl.removeAttribute('hidden');
         document.body.setAttribute('data-home-variant', variant);
         window.DD_RUM?.addFeatureFlagEvaluation?.(FLAG_KEY, variant);
         bindHomeTracking();

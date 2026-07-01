@@ -98,7 +98,7 @@
         </main>
 
         {{- if eq .Site.Language.Lang "en" }}
-            <div data-home-variant-content="new">
+            <div data-home-variant-content="new" hidden>
                 {{ partial "home/products-browse.html" . }}
             </div>
             <div data-home-variant-content="legacy" hidden>
