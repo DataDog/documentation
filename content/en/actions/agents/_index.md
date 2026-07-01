@@ -22,6 +22,8 @@ Bits Agent Builder lets you create custom AI agents that use Datadog's tools and
 
 Use agents to handle work that's too complex for static automation but too repetitive for humans. For example, triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
+<div class="alert alert-info">Bits Agent Builder consumes <a href="/account_management/billing/ai_credits/">AI Credits</a>.</div>
+
 {{< img src="/actions/agents/agent-builder-interface.png" alt="The Bits Agent Builder editor showing instructions, model, tools, and automation configuration" style="width:100%;" >}}
 
 ## Create an agent
