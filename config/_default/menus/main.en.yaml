@@ -276,6 +276,11 @@ menu:
       url: getting_started/synthetics/private_location
       parent: getting_started_synthetics
       weight: 2405
+    - name: RUM Browser
+      identifier: getting_started_rum_browser
+      url: getting_started/rum_browser/
+      parent: getting_started
+      weight: 25
     - name: Tags
       identifier: tagging_
       url: getting_started/tagging/
