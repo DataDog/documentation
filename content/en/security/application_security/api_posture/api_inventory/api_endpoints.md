@@ -81,7 +81,7 @@ This source ensures that your API inventory is complete by including all planned
 
 The {{< ui >}}Spans{{< /ui >}} data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
-The actions you take depend on each of the attack surfaces:
+The actions you take depend on the attack surface:
 
 - **Vulnerabilities:** Patch any vulnerable libraries surfaced by SCA or Runtime Code Analysis, then redeploy the service.
 - **API findings discovered:** Review each issue in context of the traced service, fix any code or configurations, and then validate using new traces.
