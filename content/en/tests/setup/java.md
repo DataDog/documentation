@@ -59,11 +59,9 @@ Other build systems, such as Ant, Bazel, or SBT are supported with the following
 
 ### Android
 
-Android unit tests are fully supported. UI and integration tests are supported only through [Robolectric][11], which lets these tests run on the JVM. If you haven't used Robolectric before, see the [Robolectric documentation][11] to learn how to set it up.
+Android tests that run on the JVM are supported. Tests that depend on the Android API are supported only with the [Robolectric][11] framework.
 
-Tests that run on an Android emulator or a physical device **are not supported**.
-
-Configure Android tests the same way as other Gradle-based Java tests, applying `GRADLE_OPTS` to the Gradle task that runs your Robolectric-based tests (for example, `testDebugUnitTest`). See the [Gradle tab](#running-your-tests) for configuration details.
+Tests that have to be executed on an emulator or a physical device **are not supported**.
 
 ## Setup
 
