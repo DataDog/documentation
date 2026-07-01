@@ -62,6 +62,29 @@ cascade:
 
 [OpenTelemetry][1] (OTel) provides standardized protocols for collecting and routing telemetry data. Datadog supports multiple ways to collect and analyze telemetry data from OpenTelemetry-instrumented applications, whether you're using existing Datadog infrastructure or prefer a vendor-neutral setup.
 
+### Where to start
+
+Choose the entry point that matches your situation:
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/getting_started/" >}}
+    <h3>I'm new to OpenTelemetry</h3>
+    Follow a hands-on tutorial to send your first traces, metrics, and logs to Datadog.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/" >}}
+    <h3>My application already uses OpenTelemetry</h3>
+    Choose how to send your existing OpenTelemetry data to Datadog.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/" >}}
+    <h3>I use Datadog SDKs today</h3>
+    Use the OpenTelemetry API with Datadog's SDKs to keep vendor-neutral instrumentation while accessing Datadog's full feature set.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
+    <h3>I already run an OpenTelemetry Collector</h3>
+    Send data through the OpenTelemetry Collector with the Datadog Exporter, or move to the DDOT Collector.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
 ### Why OpenTelemetry with Datadog?
 
 Datadog provides advanced observability for all your application telemetry, regardless of its source. By supporting OpenTelemetry, Datadog offers:
