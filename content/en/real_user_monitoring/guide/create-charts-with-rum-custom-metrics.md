@@ -49,7 +49,6 @@ You can combine multiple RUM custom metrics in a single widget using formulas. T
 For example, to calculate a crash-free rate, create two custom metrics:
 - **`rum.sessions.crash_free`**: A count of sessions that complete without a crash.
 - **`rum.sessions.total`**: A count of all sessions.
-- `rum.sessions.total`—a count of all sessions
 
 In the widget editor, add both metrics as separate queries, then enter the formula `a / b * 100` to calculate the percentage.
 
@@ -75,7 +74,7 @@ Use a **Geomap** widget with a custom metric that counts completed checkout sess
 
 ### Monitor crash-free rate by release version
 
-Use a **Timeseries** widget with the formula pattern described above to track crash-free rate over time. Group by `version` to compare stability across releases and detect regressions introduced by specific builds.
+Use a **Timeseries** widget with the formula pattern from the [Combine metrics with formulas](#combine-metrics-with-formulas) section to track crash-free rate over time. Group by `version` to compare stability across releases and detect regressions introduced by specific builds.
 
 ### Visualize page load performance trends
 

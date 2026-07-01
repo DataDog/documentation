@@ -68,7 +68,7 @@ Datapoints are not created for metrics with historical data. Datapoints for your
 
 ### Percentile aggregation
 
-You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99) for distribution metrics.
+You can opt in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99) for distribution metrics.
 
 <div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.</div>
 
