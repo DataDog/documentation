@@ -21,9 +21,20 @@ further_reading:
 
 OpenTelemetry is an open source framework that provides standardized tools for collecting observability data from your applications. Datadog fully supports OpenTelemetry, allowing you to send your metrics, traces, and logs for powerful analysis and monitoring.
 
-These guides provide two hands-on ways to learn how to send OpenTelemetry data to Datadog. Choose the tutorial that best fits your learning goal.
+Choose the path that fits your goal: connect an application you've already instrumented, or learn OpenTelemetry hands-on with a sample application.
 
-## Getting started tutorials
+## Already instrumented with OpenTelemetry?
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/getting_started/quickstart" >}}
+    <h3>Quickstart: Send Your Data to Datadog</h3>
+    Get data from an application that already uses OpenTelemetry into Datadog, using either the recommended DDOT Collector or a lightweight OTLP-in-the-Agent setup.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Learn with a sample application
+
+These guides provide two hands-on ways to learn how to send OpenTelemetry data to Datadog. Choose the tutorial that best fits your learning goal.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}
