@@ -24,12 +24,12 @@ This guide discusses the various authentication protocols available for Syntheti
 
 If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates. 
 
-In the **Define the request** section, click **Advanced Options** > **Authentication** and select an authentication method: 
+In the {{< ui >}}Define the request{{< /ui >}} section, click {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Authentication{{< /ui >}} and select an authentication method: 
 
 {{< tabs >}}
 {{% tab "Basic Access" %}}
 
-Click **HTTP Basic Auth** and enter a username and password. Basic access authentication is supported in [HTTP tests][1], [multistep API tests][2], and [WebSocket tests][3].
+Click {{< ui >}}HTTP Basic Auth{{< /ui >}} and enter a username and password. Basic access authentication is supported in [HTTP tests][1], [multistep API tests][2], and [WebSocket tests][3].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
@@ -37,21 +37,21 @@ Click **HTTP Basic Auth** and enter a username and password. Basic access authen
 {{% /tab %}}
 {{% tab "Digest Access" %}}
 
-Click **Digest Auth** and enter a username and password. Digital access authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click {{< ui >}}Digest Auth{{< /ui >}} and enter a username and password. Digital access authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "AWS Signature" %}}
 
-Click **AWS Signature** and enter an Access Key ID and Secret Access Key. Optionally, enter a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click {{< ui >}}AWS Signature{{< /ui >}} and enter an Access Key ID and Secret Access Key. Optionally, enter a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "NTLM" %}}
 
-Click **NTLM**, enter a username and password, and optionally, a domain and work station. NTLM authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click {{< ui >}}NTLM{{< /ui >}}, enter a username and password, and optionally, a domain and work station. NTLM authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
@@ -59,13 +59,13 @@ Click **NTLM**, enter a username and password, and optionally, a domain and work
 
 {{% tab "Kerberos" %}}
 
-Click **Kerberos** and fill in the **Domain** field. See [Kerberos Authentication for Synthetic Monitoring][1] for more information.
+Click {{< ui >}}Kerberos{{< /ui >}} and fill in the {{< ui >}}Domain{{< /ui >}} field. See [Kerberos Authentication for Synthetic Monitoring][1] for more information.
 
 [1]: /synthetics/guide/kerberos-authentication
 {{% /tab %}}
 {{% tab "OAuth 2.0" %}}
 
-Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and enter an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**). Optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click {{< ui >}}OAuth 2.0{{< /ui >}}, select a grant type ({{< ui >}}Client Credentials{{< /ui >}} or {{< ui >}}Resource Password{{< /ui >}}), and enter an Access Token URL, Client ID, and Client Secret. Select a token API authentication method ({{< ui >}}Send as Basic Auth header{{< /ui >}} or {{< ui >}}Send client credentials in body{{< /ui >}}). Optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
@@ -73,7 +73,7 @@ Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource P
 {{% /tab %}}
 {{% tab "Client Certificate" %}}
 
-Click **Upload File** to upload a private key file and a certificate file. Client 
+Click {{< ui >}}Upload File{{< /ui >}} to upload a private key file and a certificate file. Client 
 Certificate authentication is supported in [HTTP tests][1], [multistep API tests][2], [SSL tests][3], and [gRPC tests][4].
 
 [1]: /synthetics/api_tests/http_tests/
@@ -93,7 +93,7 @@ If you want to hide user credentials from your test results and configuration, y
 By storing your credentials as global variables, you can:
 
 - Easily reuse them across multiple tests.
-- Hide their values from test results and configurations by selecting **Hide and obfuscate variable value**.
+- Hide their values from test results and configurations by selecting {{< ui >}}Hide and obfuscate variable value{{< /ui >}}.
 - Restrict their access to a subset of your organization's users by using [custom roles][6].
 
 ### Local variables

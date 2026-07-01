@@ -48,13 +48,13 @@ If your website doesn't appear in the Browser Test recorder's iframe after insta
 
 Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests due to CSP rules or other security configurations. In some cases, login failures can also be caused by a CSRF token issue when the login flow originates from a web application loaded within an iframe, which can result in the CSRF token being dropped.
 
-**Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.  
+**Solution**: Click {{< ui >}}Open in Popup{{< /ui >}} to record your user journey in a separate window instead of the iframe.  
 
 #### Only certain applications load in the iframe
 
 Different applications and environments have CSP configurations and other varying security restrictions. Some allow iframe loading while others block it for security reasons.
 
-**Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.
+**Solution**: Click {{< ui >}}Open in Popup{{< /ui >}} to record your user journey in a separate window instead of the iframe.
 
 #### HTTP requests warning banner appears in iframe
 
@@ -82,25 +82,25 @@ Chrome browser policies may prevent the extension from recording properly.
 
 The recorder iframe/pop-up uses your current browser session by default. If you're already logged into your application, it may skip the login page and go directly to the post-login view, preventing you from recording authentication steps.
 
-**Solution**: Use the recorder's **incognito mode** to record login steps without logging out of your current session:
+**Solution**: Use the recorder's {{< ui >}}incognito mode{{< /ui >}} to record login steps without logging out of your current session:
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**Incognito mode** creates an isolated session that ignores your browser history, cookies, and login data. This allows you to record login steps from scratch, as if visiting your website for the first time.
+{{< ui >}}Incognito mode{{< /ui >}} creates an isolated session that ignores your browser history, cookies, and login data. This allows you to record login steps from scratch, as if visiting your website for the first time.
 
 ### Test results
 
 #### Mobile and tablet browser tests consistently fail
 
-**Responsive** websites may have significantly different DOM structures across devices. A website's DOM on `Laptop Large` can differ greatly from `Tablet` or `Mobile Small` viewports.
+**Responsive** websites may have significantly different DOM structures across devices. A website's DOM on {{< ui >}}Laptop Large{{< /ui >}} can differ greatly from {{< ui >}}Tablet{{< /ui >}} or {{< ui >}}Mobile Small{{< /ui >}} viewports.
 
-Steps recorded on `Laptop Large` may not work on smaller viewports, causing mobile and tablet tests to fail:
+Steps recorded on {{< ui >}}Laptop Large{{< /ui >}} may not work on smaller viewports, causing mobile and tablet tests to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
 **Solution**: Create device-specific tests where recorded steps match the target viewport.
 
-To record for mobile or tablet viewports, select `Mobile Small` or `Tablet` in the recorder dropdown before clicking **Start Recording**.
+To record for mobile or tablet viewports, select {{< ui >}}Mobile Small{{< /ui >}} or {{< ui >}}Tablet{{< /ui >}} in the recorder dropdown before clicking {{< ui >}}Start Recording{{< /ui >}}.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
@@ -114,7 +114,7 @@ Browser Test steps may display a `None or multiple elements detected` warning:
 
 This indicates the user locator targets multiple elements or none at all, preventing the test from knowing which element to interact with.
 
-**Solution**: Edit your recording, open the problematic step's advanced options, navigate to the test page, and click `Test`. This highlights the located element or shows an error. Adjust your user locator to target a single, unique element:
+**Solution**: Edit your recording, open the problematic step's advanced options, navigate to the test page, and click {{< ui >}}Test{{< /ui >}}. This highlights the located element or shows an error. Adjust your user locator to target a single, unique element:
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
@@ -137,9 +137,9 @@ The synthetics worker uses hierarchical timeouts to balance speed and reliabilit
 A 401 error in Synthetic Monitoring tests typically indicates authentication failure. Use the same authentication method (outside of Datadog) you normally use for the endpoint and replicate it in your Synthetic test configuration.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: Specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
+  * **Basic Authentication**: Specify the associated credentials in the {{< ui >}}Advanced options{{< /ui >}} of your [HTTP][7] or [Browser Test][8].
   * **Token based authentication**: Extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser Test][10] requiring the authentication token.
-  * **Session based authentication**: Add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
+  * **Session based authentication**: Add the required headers or cookies in the {{< ui >}}Advanced options{{< /ui >}} of your [HTTP][7] or [Browser Test][8].
   
 * Does your endpoint use **query parameter authentication** (such as adding an API key to URL parameters)?
 
@@ -303,16 +303,16 @@ Ensure the private location was installed with a configuration specified at inst
 
 #### GUI method
 
-1. Search for **Services** in the **Start** menu.
-1. Open **Services** (works on any user account).
-1. Find `Datadog Synthetics Private Location` in **Services (Local)**.
-1. Right-click the service and select **Restart**.
+1. Search for {{< ui >}}Services{{< /ui >}} in the {{< ui >}}Start{{< /ui >}} menu.
+1. Open {{< ui >}}Services{{< /ui >}} (works on any user account).
+1. Find `Datadog Synthetics Private Location` in {{< ui >}}Services (Local){{< /ui >}}.
+1. Right-click the service and select {{< ui >}}Restart{{< /ui >}}.
 
-The worker runs under the **Local Service** account. Verify this by checking for the `synthetics-pl-worker` process in Task Manager's **Details** tab.
+The worker runs under the {{< ui >}}Local Service{{< /ui >}} account. Verify this by checking for the `synthetics-pl-worker` process in Task Manager's {{< ui >}}Details{{< /ui >}} tab.
 
 #### PowerShell method
 
-1. Open **Windows PowerShell** with script execution rights.
+1. Open {{< ui >}}Windows PowerShell{{< /ui >}} with script execution rights.
 1. Run: `Restart-Service -Name "Datadog Synthetics Private Location"`
 
 ### Maintaining Synthetics Private Location Worker uptime
@@ -321,7 +321,7 @@ The worker runs under the **Local Service** account. Verify this by checking for
 
 **Crash recovery**: Create a Windows scheduled task that runs a PowerShell script to restart the worker if it stops running. This ensures automatic recovery after crashes.
 
-**Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the **Services** tool—this service handles automatic restarts.
+**Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the {{< ui >}}Services{{< /ui >}} tool—this service handles automatic restarts.
 
 ### Self-signed certificate errors 
 

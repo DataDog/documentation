@@ -42,8 +42,8 @@ Export to Terraform is supported for the following test types:
 To export an API or Browser Test from the test details page:
 
 1. Open any API test in Synthetic Monitoring.
-2. Click **More** in the upper right corner of the page.
-3. Select **Copy Terraform Snippet**.
+2. Click {{< ui >}}More{{< /ui >}} in the upper right corner of the page.
+3. Select {{< ui >}}Copy Terraform Snippet{{< /ui >}}.
 
 {{< img src="synthetics/guide/export-tests-to-terraform/copy_terraform.png" alt="The More dropdown menu on the test details page with Copy Terraform Snippet highlighted" style="width:60%;" >}}
 
@@ -54,7 +54,7 @@ The generated HCL configuration is copied to your clipboard. Paste it into your 
 To export a multistep API test while building or editing it:
 
 1. Open or create a Multistep API test.
-2. In the recorder view, click **Export to Terraform**.
+2. In the recorder view, click {{< ui >}}Export to Terraform{{< /ui >}}.
 
 {{< img src="synthetics/guide/export-tests-to-terraform/multistep_export_to_terraform.png" alt="The Export to Terraform button in the multistep API test recorder" style="width:80%;" >}}
 
@@ -68,7 +68,7 @@ To export a step:
 
 1. Open or create a browser test and start recording.
 2. Hover over a step in the recorder.
-3. Click the **Copy Terraform step to clipboard** icon.
+3. Click the {{< ui >}}Copy Terraform step to clipboard{{< /ui >}} icon.
 
 {{< img src="synthetics/guide/export-tests-to-terraform/browser_test_recording_terraform_2.png" alt="The Copy Terraform step to clipboard icon in the browser test recorder" style="width:80%;" >}}
 

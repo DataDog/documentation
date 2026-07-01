@@ -30,7 +30,7 @@ With [Audit Trail][1] enabled, the version history is extended from 30 days to 9
 
 ## View versions
 
-From an individual Synthetic Monitoring test, click the settings menu on the top right of the page and select Version History. If there are no edits within the retention period, Version History is disabled.
+From an individual Synthetic Monitoring test, click the settings menu on the top right of the page and select {{< ui >}}Version History{{< /ui >}}. If there are no edits within the retention period, Version History is disabled.
 
 {{< img src="/synthetics/guide/version_history/synthetics_version_history_2.png" alt="Synthetic Monitoring Version history menu" style="width:60%;" >}}
 
@@ -38,7 +38,7 @@ The Version History side panel shows changes in chronological order. Each entry 
 
 ## Restore a version
 
-From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this test version**.
+From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select {{< ui >}}Restore this test version{{< /ui >}}.
 
 Restoring a version updates the test and creates a new version history entry documenting the restore action, displaying any steps that were added or removed to the test. Your existing change history remains intact, allowing you to restore any version within the retention period.
 
@@ -46,15 +46,15 @@ Restoring a version updates the test and creates a new version history entry doc
 
 ## Clone a version
 
-To create a new test based on a previous version without modifying your current test, you can clone any version from your history. In the Version History side panel, select the desired version, click the kebab menu next to the user profile, and choose **Clone to a new test**.
+To create a new test based on a previous version without modifying your current test, you can clone any version from your history. In the Version History side panel, select the desired version, click the kebab menu next to the user profile, and choose {{< ui >}}Clone to a new test{{< /ui >}}.
 
 ## Run any version
 
-From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Run this test version**.
+From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select {{< ui >}}Run this test version{{< /ui >}}.
 
 {{< img src="/synthetics/guide/version_history/synthetics_run_version.png" alt="Synthetic Monitoring Version history menu, highlighting run this test version" style="width:60%;" >}}
 
-Optionally, click **Copy version ID** to run the test version with the [Datadog CLI][2] or [Datadog API][3]:
+Optionally, click {{< ui >}}Copy version ID{{< /ui >}} to run the test version with the [Datadog CLI][2] or [Datadog API][3]:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}

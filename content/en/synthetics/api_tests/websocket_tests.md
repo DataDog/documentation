@@ -33,30 +33,30 @@ You may create a test using one of the following options:
 
 - **Create a test from a template**:
    
-     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-     3. Click **Save Details** to submit your API test.<br /><br>
+     1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click {{< ui >}}+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test.<br /><br>
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
 - **Build a test from scratch**:
 
-    1. To build a test from scratch, click the **+ Start from scratch** template, then select the `WebSocket` request type.
-    1. Specify the **URL** to run your test on.
+    1. To build a test from scratch, click the {{< ui >}}+ Start from scratch{{< /ui >}} template, then select the `WebSocket` request type.
+    1. Specify the {{< ui >}}URL{{< /ui >}} to run your test on.
     1. Enter the string you want to send in your test. 
-    1. Add **Advanced Options** (optional) to your test:<br /><br>
+    1. Add {{< ui >}}Advanced Options{{< /ui >}} (optional) to your test:<br /><br>
 
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-   * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+   * {{< ui >}}Timeout{{< /ui >}}: Specify the amount of time in seconds before the test times out.
+   * {{< ui >}}Request headers{{< /ui >}}: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
+   * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
    {{% tab "Authentication" %}}
 
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * {{< ui >}}HTTP Basic Auth{{< /ui >}}: Add HTTP basic authentication credentials.
 
    {{% /tab %}}
 
@@ -64,13 +64,13 @@ You may create a test using one of the following options:
 
 </br>
 
-  5. **Name** your WebSocket test.
-  6. Add Environment **Tags** as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
-  7. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
+  5. {{< ui >}}Name{{< /ui >}} your WebSocket test.
+  6. Add Environment {{< ui >}}Tags{{< /ui >}} as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+  7. Click {{< ui >}}Send{{< /ui >}} to try out the request configuration. A response preview is displayed on the right side of your screen.
 
      {{< img src="synthetics/api_tests/websocket_test_config_2.png" alt="Define WebSocket request" style="width:90%;" >}}
 
-  8. Click **Create Test** to submit your API test.
+  8. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
 ### Snippets
 
@@ -78,7 +78,7 @@ You may create a test using one of the following options:
 
 ### Define assertions
 
-Assertions define what an expected test result is. When you click **Test URL**, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When you click {{< ui >}}Test URL{{< /ui >}}, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.
 
 | Type            | Operator                                                                         | Value Type                        |
 |-----------------|----------------------------------------------------------------------------------|-----------------------------------|
@@ -86,7 +86,7 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 | string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
 | header          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
 
-Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
+Select the response preview directly or click {{< ui >}}New Assertion{{< /ui >}} to create an assertion. You can create up to 20 assertions per WebSocket test.
 
 {{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test to succeed or fail on" style="width:90%;" >}}
 
@@ -98,7 +98,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your WebSocket test from. WebSocket tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
+Select the {{< ui >}}Locations{{< /ui >}} to run your WebSocket test from. WebSocket tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
 
 {{% managed-locations %}}
 
@@ -118,7 +118,7 @@ WebSocket tests can run:
 
 ### Use variables
 
-You can use the [global variables defined on the **Settings** page][4] in the URL, advanced options, and assertions of your WebSocket tests.
+You can use the [global variables defined on the {{< ui >}}Settings{{< /ui >}} page][4] in the URL, advanced options, and assertions of your WebSocket tests.
 
 To display your list of variables, type `{{` in your desired field.
 

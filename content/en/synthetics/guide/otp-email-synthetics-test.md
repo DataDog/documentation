@@ -37,13 +37,13 @@ This guide walks you through how to configure the OTP extraction for a Synthetic
 
 Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetic Monitoring email address][7] for the Synthetic test run.
 
-1. On a new or existing Browser Test, under **Variables** click **Add Variable**.
-2. Next, select **Email Address** from the dropdown menu.
-3. Name the variable and click **Create**.
+1. On a new or existing Browser Test, under {{< ui >}}Variables{{< /ui >}} click {{< ui >}}Add Variable{{< /ui >}}.
+2. Next, select {{< ui >}}Email Address{{< /ui >}} from the dropdown menu.
+3. Name the variable and click {{< ui >}}Create{{< /ui >}}.
 
    {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a unqiue email variable" style="width:80%;" >}}
 
-   This adds the email variable to the **Variables** section in the UI:
+   This adds the email variable to the {{< ui >}}Variables{{< /ui >}} section in the UI:
 
    {{< img src="synthetics/guide/otp-from-email-body/email_var_example.png" alt="Example email variable in the UI" style="width:50%;" >}}
 
@@ -53,9 +53,9 @@ Next, [record steps][11] to insert the email address variable into an input fiel
 
 {{< img src="synthetics/guide/otp-from-email-body/email_injection.mp4" alt="Example of recording the email address injection steps" video="true" width="100%">}}
 
-1. Click **Record** at the top of the test. This automatically adds steps to the test based on the detected interactions and inputs.
-2. Click the email input field, which creates a **Click** step.
-3. Find the email variable created earlier, called `DD_EMAIL_ADDRESS` in this example. On the right, click **Inject variable in a text input** and click the desired text box, which is highlighted in the UI. The email gets inserted.
+1. Click {{< ui >}}Record{{< /ui >}} at the top of the test. This automatically adds steps to the test based on the detected interactions and inputs.
+2. Click the email input field, which creates a {{< ui >}}Click{{< /ui >}} step.
+3. Find the email variable created earlier, called `DD_EMAIL_ADDRESS` in this example. On the right, click {{< ui >}}Inject variable in a text input{{< /ui >}} and click the desired text box, which is highlighted in the UI. The email gets inserted.
 
    {{< img src="synthetics/guide/otp-from-email-body/synthetics-otp-inject-variable.png" alt="Inject the email variable" style="width:60%;" >}}
 
@@ -65,11 +65,11 @@ After the email containing the OTP is sent, the Browser Test can access the emai
 
 Next, create a test step that extracts the OTP from the email body after it's sent and stores it in a variable. This example uses the variable name OTP_FROM_EMAIL throughout the rest of this guide.
 
-1. Under **Add a variable** select **from Email body**.
+1. Under {{< ui >}}Add a variable{{< /ui >}} select {{< ui >}}from Email body{{< /ui >}}.
 
 {{< img src="synthetics/guide/otp-from-email-body/otp_from_email.png" alt="OTP variable as used in the email body step" style="width:50%;" >}}
 
-2. Under **Parsing Regex** add in the regex pattern that corresponds to the OTP.
+2. Under {{< ui >}}Parsing Regex{{< /ui >}} add in the regex pattern that corresponds to the OTP.
 
 The following are example regex patterns to parse the OTP token from the email body:
 
@@ -90,7 +90,7 @@ JavaScript lets you trigger an event on a DOM element programmatically, making i
 
    {{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
 
-2. Under **Custom JavaScript** add the extraction code. The code format varies depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
+2. Under {{< ui >}}Custom JavaScript{{< /ui >}} add the extraction code. The code format varies depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
 
 #### Simple text field
 To insert the OTP into a simple text field, use the following:
