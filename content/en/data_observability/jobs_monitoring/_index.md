@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/data-observability/"
     tag: "Blog"
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
+  - link: '/data_observability/cicd/'
+    tag: 'Documentation'
+    text: 'CI/CD'
 ---
 
 {{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}

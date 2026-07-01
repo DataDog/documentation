@@ -1,5 +1,6 @@
 ---
 title: Overview Pages
+site_support_id: idp
 description: Internal Developer Portal overview pages give developers a view of their action items and service health, and give engineering managers a high-level view of reliability and scorecard performance.
 aliases:
 - /software_catalog/overview_pages
@@ -22,7 +23,6 @@ further_reading:
 - link: "watchdog"
   tag: "Documentation"
   text: "Watchdog"
-site_support_id: overview_pages
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for the Developer Overview Page!" >}}
@@ -32,7 +32,7 @@ site_support_id: overview_pages
 
 Datadog's Internal Developer Platform (IDP) ships with **overview pages** that surface the information most relevant to each stakeholder:
 - Developers get a centralized view of their action items, issues, and team's service information.
-- SREs and engineering managers get a big-picture view of product reliability, service health, scorecard performance, and other key metrics across their teams. 
+- SREs and engineering managers get a big-picture view of product reliability, service health, scorecard performance, and other key metrics across their teams.
 
 ## Developer overview page
 
@@ -51,21 +51,21 @@ The developer overview page centralizes the following information about your tea
 The "My Pull Requests" widget displayed on the developer overview page are powered by [Datadog App Builder][9] and initially show demo data.
 
 To use the developer overview page with your data, [connect your data sources][10]:
-1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu. 
+1. Find the developer overview page by selecting the **Overview** tab in IDP and selecting **My Workspace** in the left-hand menu.
 1. For this widget:
 
    1. Click **+ Connect Data**.
-   1. Create a new connection or select an existing one. 
-   
+   1. Create a new connection or select an existing one.
+
    <br>
    After you save your selection, the widget displays data from your connection. You can change the selected connection by clicking Change Connection in the widget.
 
 <div class="alert alert-info">Connecting data is a one-time setup task; the selected connections apply for your entire team.</div>
-   
+
 #### Personalize your view
 
 Provide values for the filters at the top of the page to personalize your view:
-- **Team**: Name of your [Datadog Team][8] 
+- **Team**: Name of your [Datadog Team][8]
 - **Github_Org**: Name of your GitHub Organization
 - **Github_Username**: Your GitHub username
 
@@ -85,7 +85,7 @@ Lists open pull requests that you have created and those you are assigned to rev
 
 #### Team services and scorecard performance
 
-- **My team's services**: Lists services owned by the selected **Team** filter.  
+- **My team's services**: Lists services owned by the selected **Team** filter.
 - **Scorecard performance by service**: Displays the average score across all scorecards for each service owned by the selected **Team** filter.
 
 #### Issues and errors
@@ -98,7 +98,7 @@ Captures alerts from [Datadog Watchdog][5].
 
 ### Clone for further customization
 
-If you need to customize your view, click **Clone as dashboard** at the top right hand side. This creates a dashboard prefilled with content from the **My Workspace** page. 
+If you need to customize your view, click **Clone as dashboard** at the top right hand side. This creates a dashboard prefilled with content from the **My Workspace** page.
 
 Here are some example customizations you can make with the cloned dashboard:
 - Create [Embedded Apps][2] using Datadog's [Action Catalog][11] to display additional third-party data (for example, display PagerDuty on call information).

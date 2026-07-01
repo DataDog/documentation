@@ -20,7 +20,7 @@ The v7 SDK improves privacy defaults, removes deprecated options, and modernizes
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
-<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
+<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/datadog-labs/agent-skills/blob/main/dd-browser-sdk/upgrade-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
 
 ### Core
 

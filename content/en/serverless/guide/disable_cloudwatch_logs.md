@@ -179,10 +179,10 @@ Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with r
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
-1. Open the [IAM console][2] and navigate to **Roles**.
+1. Open the [IAM console][2] and navigate to {{< ui >}}Roles{{< /ui >}}.
 2. Find and select the execution role for your Lambda function.
-3. Under **Permissions**, choose **Add permissions** > **Create inline policy**.
-4. Switch to the **JSON** editor and paste the following policy:
+3. Under {{< ui >}}Permissions{{< /ui >}}, choose {{< ui >}}Add permissions{{< /ui >}} > {{< ui >}}Create inline policy{{< /ui >}}.
+4. Switch to the {{< ui >}}JSON{{< /ui >}} editor and paste the following policy:
    ```json
    {
      "Version": "2012-10-17",
@@ -200,7 +200,7 @@ Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with r
    }
    ```
    Replace `<FUNCTION_NAME>` with the name of your Lambda function.
-5. Click **Next**, name the policy `DenyCloudWatchLogs`, and click **Create policy**.
+5. Click {{< ui >}}Next{{< /ui >}}, name the policy `DenyCloudWatchLogs`, and click {{< ui >}}Create policy{{< /ui >}}.
 
 [2]: https://console.aws.amazon.com/iam/home
 

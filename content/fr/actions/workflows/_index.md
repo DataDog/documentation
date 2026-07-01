@@ -64,7 +64,7 @@ Déclenchez vos workflows depuis des monitors, des signaux de sécurité ou des 
 
 Le dashboard Workflows Overview fournit une vue d'ensemble de haut niveau de vos workflows et exécutions Datadog. Pour trouver le dashboard, accédez à votre [liste de dashboards][3] et recherchez `Workflows Overview`.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="Le dashboard Workflows Overview" style="width:100%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="Le dashboard Workflows Overview" style="width:100%;" >}}
 
 ## Exemples
 
