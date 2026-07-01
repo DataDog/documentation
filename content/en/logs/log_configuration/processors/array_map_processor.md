@@ -101,6 +101,14 @@ Following rules apply when defining sub-processors:
 
 #### Attribute Remapper
 
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array-map-attribute-remapper.png" alt="Screenshot of the Attribute Remapper sub-processor configuration" style="width:80%;" >}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
 ```json
 {
   "type": "attribute-remapper",
@@ -123,7 +131,18 @@ Following rules apply when defining sub-processors:
 | `preserve_source`      | Boolean          | No       | Remove or preserve the remapped source element. Default: `false`.                                                                                                               |
 | `override_on_conflict` | Boolean          | No       | Override or not the target element if already set. Default: `false`.                                                                                                            |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 #### String Builder Processor
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array-map-string-builder.png" alt="Screenshot of the String Builder sub-processor configuration" style="width:80%;" >}}
+
+{{% /tab %}}
+{{% tab "API" %}}
 
 ```json
 {
@@ -143,7 +162,18 @@ Following rules apply when defining sub-processors:
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                                    |
 | `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Arithmetic Processor
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array-map-arithmetic.png" alt="Screenshot of the Arithmetic Processor sub-processor configuration" style="width:80%;" >}}
+
+{{% /tab %}}
+{{% tab "API" %}}
 
 ```json
 {
@@ -163,7 +193,18 @@ Following rules apply when defining sub-processors:
 | `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                    |
 | `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `expression` by 0, if `false`, skips the operation if an attribute is missing. Default: `false`. |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Category Processor
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array-map-category.png" alt="Screenshot of the Category Processor sub-processor configuration" style="width:80%;" >}}
+
+{{% /tab %}}
+{{% tab "API" %}}
 
 ```json
 {
@@ -185,6 +226,9 @@ Following rules apply when defining sub-processors:
 | `name`       | String          | No       | Name of the sub-processor.                                                                                 |
 | `categories` | Array of Object | Yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
 | `target`     | String          | Yes      | Name of the target attribute which value is defined by the matching category.                              |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
