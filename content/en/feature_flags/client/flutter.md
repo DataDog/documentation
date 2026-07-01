@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument Dart and Flutter applications with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
+This page describes how to instrument Dart and Flutter applications with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app and experiment safely.
 
 The Datadog Feature Flags SDK for Dart is a native Dart package. It fetches precomputed assignments from Datadog, evaluates typed flag values locally, and reports exposure and flag evaluation telemetry back to Datadog. Flutter applications can use the standalone Dart package directly or install `datadog_flags_flutter` to derive configuration from `datadog_flutter_plugin` and add successful evaluations to RUM.
 
