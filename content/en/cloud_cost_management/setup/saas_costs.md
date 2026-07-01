@@ -628,13 +628,18 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 | Tag Name | Tag Description |
 |---|---|
-| `namespace` | The Temporal Cloud Namespace to which the usage is attributed. |
+| `namespace` | The Temporal Cloud Namespace to which the usage is attributed (for example, `replay-2025`). |
 | `billing_account` | The Temporal Cloud billing account associated with the charge. |
+| `billing_account_id` | The unique identifier of the Temporal Cloud billing account. |
+| `resource_type` | The type of resource generating the usage (for example, `Namespace`). |
 | `service_subcategory` | The category of usage driving the charge (for example, `Actions`, `Active Storage`, `Retained Storage`). |
-| `sku_meter` | The Temporal Cloud SKU meter used to calculate the charge. |
-| `charge_description` | The description of the charge, as it appears on the Temporal Cloud invoice. |
-| `charge_category` | The category of the Temporal Cloud charge. |
-| `resource_type` | The type of resource generating the usage. |
+| `sku_id` | The unique identifier of the Temporal Cloud SKU associated with the charge (for example, `business-actions`, `business-active-storage`). |
+| `sku_meter` | The Temporal Cloud SKU meter used to calculate the charge (for example, `Actions`, `Active Storage`, `Retained Storage`). |
+| `charge_category` | The category of the Temporal Cloud charge (for example, `usage`). |
+| `pricing_unit` | The unit used to price the charge (for example, `GB/h`, `1 Million Actions`). |
+| `usage_unit` | The unit of usage measured for the charge (for example, `GB/h`, `1 Million Actions`). |
+| `unit_price` | The price per unit of usage. |
+| `invoice_id` | The unique identifier of the Temporal Cloud invoice associated with the charge. |
 
 {{% /tab %}}
 
