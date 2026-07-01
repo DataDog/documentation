@@ -426,7 +426,7 @@ secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: {keyVaultURL}
   azure_session:
-    azure_client_id: {clientID}  # User-assigned managed identity client ID; omit for system-assigned
+    azure_client_id: {clientID}  # User-assigned managed identity client ID; omit this field for system-assigned
 ```
 
 When using environment variables, convert the configuration to JSON:
@@ -975,7 +975,7 @@ The following `vault_session` fields control how the Agent authenticates to Vaul
 | `vault_kubernetes_mount_path` | Vault mount path for the Kubernetes auth method. |
 | `implicit_auth` | Set to `true` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
 
-##### Other `vault_session` options
+##### Other `secret_backend_config` options for Vault
 
 The following top-level `secret_backend_config` fields also apply:
 
@@ -1007,7 +1007,7 @@ secret_backend_config:
 | `client_cert` | Path to a PEM-encoded client certificate file for mTLS. |
 | `client_key` | Path to the private key file for the client certificate. |
 | `tls_server` | Expected server name for TLS SNI verification. |
-| `insecure` | Set to `true` to disable TLS certificate verification. Not recommended for production. |
+| `insecure` | Set to `true` to disable TLS certificate verification. Do not use in production. |
 
 {{% /collapse-content %}}
 
