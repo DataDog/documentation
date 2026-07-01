@@ -119,7 +119,7 @@ Use this setup when you are not using `datadog_flutter_plugin`, or when you want
 
 Enable Datadog Feature Flags early in your app startup. For live Feature Flags configuration, `clientToken`, `env`, and `site` are required. To create a client token, see [Client tokens][1].
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart and Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="dart" >}}
 final datadogFlags = DatadogFlags.instance;
