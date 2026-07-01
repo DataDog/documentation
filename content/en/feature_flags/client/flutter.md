@@ -163,7 +163,7 @@ Clients are local to the Dart isolate where they are created. Background isolate
 
 Define who or what the flag evaluation applies to using `FlagsEvaluationContext`. The evaluation context includes user, organization, session, or device information used to determine which flag variations should be returned. Call `initialize()` before evaluating flags so the client can fetch assignments for the context.
 
-<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="dart" >}}
 await flagsClient.initialize(
