@@ -1,12 +1,15 @@
 ---
 title: Tags Processor
 disable_toc: false
-code_lang: logs
-type: multi-code-lang
-weight: 1
 aliases:
-  - /observability_pipelines/processors/tags/
+  - /observability_pipelines/processors/tag_control/logs/
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
