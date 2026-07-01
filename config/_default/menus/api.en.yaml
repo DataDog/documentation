@@ -4214,8 +4214,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
+        unstable: []
         order: 22
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
@@ -4227,8 +4226,7 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 23
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
