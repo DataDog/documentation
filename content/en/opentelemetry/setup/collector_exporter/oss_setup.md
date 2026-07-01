@@ -26,9 +26,9 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 <div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized and the Kubernetes Explorer related views may be empty.</div>
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
-
 ## Prerequisites
+
+This setup supports bare metal, VMs, and Kubernetes, including managed distributions such as Amazon EKS and Google GKE. Standard EKS is tested; EKS auto mode is not. This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.152.0 or later
 - A [Datadog API key][2]
@@ -811,4 +811,5 @@ The configuration sends the Collector's own metrics back to its local OTLP recei
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
+[7]: /opentelemetry/compatibility/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

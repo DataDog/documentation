@@ -4,7 +4,6 @@ aliases:
   - /opentelemetry/otlp_endpoint
   - /opentelemetry/setup/intake_endpoint/otlp_traces
   - /opentelemetry/setup/agentless/traces
-private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"
     tag: "External Site"
@@ -16,9 +15,6 @@ further_reading:
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
 ---
-{{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your Customer Success Manager.
-{{< /callout >}}
 
 ## Overview
 
@@ -26,8 +22,9 @@ Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send t
 
 You might prefer this option if you're looking for a straightforward setup and want to send traces directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
+For serverless workloads, see [OTLP Intake for Serverless][8]. For managed platforms such as Cloudflare, Vercel, and Heroku, see [OTLP Intake for Managed Platforms][9].
 
-<div class="alert alert-info">The OTLP trace intake endpoint only supports <code>http/protobuf</code> encoding. <code>http/json</code> and <code>grpc</code> are not supported at this time.</div>
+<div class="alert alert-info">The OTLP trace intake endpoint supports <code>http/protobuf</code> and <code>http/json</code> encoding. <code>grpc</code> is not supported.</div>
 
 ## Configuration
 
@@ -173,30 +170,7 @@ For example:
 ```
 ## OpenTelemetry Collector
 
-If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [`otlphttpexporter`][4] to export traces to the Datadog OTLP traces intake endpoint.
-
-For example, configure your `config.yaml` like this:
-
-```yaml
-...
-
-exporters:
-  otlphttp:
-    traces_endpoint: {{< region-param key="otlp_trace_endpoint" >}}
-    headers:
-      dd-api-key: ${env:DD_API_KEY}
-      dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
-      compute_stats: "true"
-...
-
-service:
-  pipelines:
-    traces:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlphttp]
-```
+If you are using an OpenTelemetry Collector and don't want to use the Datadog Exporter, you need a specific configuration to get the best product experience. To get set up, see [OpenTelemetry Native Instrumentation][10].
 
 ## Troubleshooting
 
@@ -270,7 +244,9 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 [5]: https://github.com/open-telemetry/opentelemetry-go/issues/3706
 [6]: https://github.com/open-telemetry/opentelemetry-specification/issues/3203
 [7]: /tracing/metrics/
+[8]: /opentelemetry/setup/otlp_ingest/serverless/
+[9]: /opentelemetry/setup/otlp_ingest/managed_platforms/
+[10]: https://www.datadoghq.com/product-preview/otel-native-instrumentation/
