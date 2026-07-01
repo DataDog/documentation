@@ -179,7 +179,7 @@ Analytics, including filtering on the `version` tag, can be exported to dashboar
 
 ### Profiles by version
 
-You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Deployment Comparison](#deployment-comparison) page to open the Continuous Profiler scoped to either version being compared.
+You can search for profiles that correspond to a particular version. You can also click {{< ui >}}View Profiles{{< /ui >}} on the top right of the [Deployment Comparison](#deployment-comparison) page to open the Continuous Profiler scoped to either version being compared.
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version" style="width:100%;">}}
 

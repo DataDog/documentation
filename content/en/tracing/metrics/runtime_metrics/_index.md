@@ -95,7 +95,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 #### Permissions for Internet Information Services (IIS) (.NET Framework only)
 
-On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
+On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the {{< ui >}}Performance Monitoring Users{{< /ui >}} group to access counter data.
 
 IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for `IIS APPPOOL\<name of the pool>`. For instance, the user for the DefaultAppPool would be `IIS APPPOOL\DefaultAppPool`.
 
@@ -264,7 +264,7 @@ You can only enable runtime metrics with [environment variables](#environment-va
 After setup is complete, you can view runtime metrics in:
 
 - The instrumented service's details page
-- The flame graph **Metrics** tab
+- The flame graph {{< ui >}}Metrics{{< /ui >}} tab
 - Default runtime dashboards
 
 {{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}

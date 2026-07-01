@@ -23,19 +23,19 @@ To make changes to a service's configuration at runtime:
 
 1. Go to the [Catalog][3] in APM.
 1. Hover over the service for which you want to update configuration.
-1. Click **Full Page** next to the service name.
-1. Click **Service Info**.
-1. From the **Setup Guidance** tab, click **Edit**.
+1. Click {{< ui >}}Full Page{{< /ui >}} next to the service name.
+1. Click {{< ui >}}Service Info{{< /ui >}}.
+1. From the {{< ui >}}Setup Guidance{{< /ui >}} tab, click {{< ui >}}Edit{{< /ui >}}.
 1. Change the configuration options as needed. See [supported configuration options](#supported-configuration-options) for more details.
-1. Click **Apply Configuration**.
+1. Click {{< ui >}}Apply Configuration{{< /ui >}}.
 
-In **Active Library Configuration**, you can see which options are configured for this service and the selected environment:
+In {{< ui >}}Active Library Configuration{{< /ui >}}, you can see which options are configured for this service and the selected environment:
 
 {{< img src="/tracing/runtime_config/active-library-config.png" alt="From the Setup Guidance tab, you can see your active library configuration." style="width:100%;">}}
 
 In this example, you can see that Log Injection is enabled for the Staging environment across two instances. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
 
-You can tell when the configuration changes have been successfully applied by referencing the **X Applied** text. In this example, the configuration applied successfully to all two instances.
+You can tell when the configuration changes have been successfully applied by referencing the {{< ui >}}X Applied{{< /ui >}} text. In this example, the configuration applied successfully to all two instances.
 
 ## Supported configuration options
 

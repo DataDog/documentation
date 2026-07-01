@@ -54,10 +54,10 @@ Lastly, [install and import the X-Ray client library in your Lambda function](#i
 
 If you do not use the Serverless Framework to deploy your serverless application, follow these instructions for manual setup:
 
-1. Navigate to the Lambda function in the AWS console you want to instrument. In the "Debugging and error handling" section, check the box to **Enable active tracing**. This turns on X-Ray for that function.
+1. Navigate to the Lambda function in the AWS console you want to instrument. In the "Debugging and error handling" section, check the box to {{< ui >}}Enable active tracing{{< /ui >}}. This turns on X-Ray for that function.
 2. Navigate to the [API Gateway console][6]. Select your API and then the stage.
-3. On the **Logs/Tracing** tab, select **Enable X-Ray Tracing**.
-4. To make these changes take effect, go to **Resources** in the left navigation panel and select **Actions** and click **Deploy API**.
+3. On the {{< ui >}}Logs/Tracing{{< /ui >}} tab, select {{< ui >}}Enable X-Ray Tracing{{< /ui >}}.
+4. To make these changes take effect, go to {{< ui >}}Resources{{< /ui >}} in the left navigation panel and select {{< ui >}}Actions{{< /ui >}} and click {{< ui >}}Deploy API{{< /ui >}}.
 
 **Note:** The Datadog Lambda Layer and client libraries include the X-Ray SDK as a dependency, so you don't need to explicitly install it in your projects.
 

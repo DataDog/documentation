@@ -32,7 +32,7 @@ algolia:
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start time. To get a permalink to the trace, click **Open Full Page** and save the URL.
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start time. To get a permalink to the trace, click {{< ui >}}Open Full Page{{< /ui >}} and save the URL.
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
@@ -48,7 +48,7 @@ The Flame Graph is the default visualization that displays all the color-coded s
 
 To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
-The legend details the color coding of the flame graph. Group spans by either **Service** (default), **[Base service][1]** (service from which the span is emitted), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
+The legend details the color coding of the flame graph. Group spans by either {{< ui >}}Service{{< /ui >}} (default), {{< ui >}}[Base service][1]{{< /ui >}} (service from which the span is emitted), {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Container{{< /ui >}}. Choose to display either the percentage of trace execution time ({{< ui >}}% Exec Time{{< /ui >}}) or span count ({{< ui >}}Spans{{< /ui >}}) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the {{< ui >}}Errors{{< /ui >}} checkbox under {{< ui >}}Filter Spans{{< /ui >}}.
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
@@ -70,7 +70,7 @@ Filter resources by type or naming information using the corresponding buttons a
 
 {{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
 
-Groups can be sorted by clicking on the corresponding column header: **RESOURCE**, **SPANS**, average duration (**AVG DURATION**), execution time (**EXEC TIME**), or percentage of trace execution time (**% EXEC TIME**).
+Groups can be sorted by clicking on the corresponding column header: {{< ui >}}RESOURCE{{< /ui >}}, {{< ui >}}SPANS{{< /ui >}}, average duration ({{< ui >}}AVG DURATION{{< /ui >}}), execution time ({{< ui >}}EXEC TIME{{< /ui >}}), or percentage of trace execution time ({{< ui >}}% EXEC TIME{{< /ui >}}).
 
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
@@ -87,7 +87,7 @@ Each row (span) indicates the following:
 - **Absolute span duration**: The absolute time in milliseconds (ms).
 - **Span details**: The corresponding service name and resource name are displayed.
 - **Statuses**: When applicable, an HTTP status code is displayed.
-- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the {{< ui >}}Color by{{< /ui >}} dropdown.
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 Spans from [inferred services][1] are represented with a dashed underline.
@@ -95,7 +95,7 @@ Spans from [inferred services][1] are represented with a dashed underline.
 [1]: /tracing/services/inferred_services
 {{< /site-region >}}
 
-To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the {{< ui >}}Expand all{{< /ui >}} (+) or {{< ui >}}Collapse all{{< /ui >}} (-) buttons.
 
 {{% /tab %}}
 {{% tab "Map" %}}
@@ -106,11 +106,11 @@ Trace map displays a representation of all services involved in a single trace. 
 
 Each node on the map represents a service in the transaction lifecycle. To prevent cyclic dependencies on the map, services that call another service that had already been invoked by the original service, are represented by duplicated nodes. [Inferred services][2] are represented with a dashed outline and a purple background.
 
-Service nodes explicitly show the percentage of the **total execution time**, which shows the trace duration breakdown at the service level.
+Service nodes explicitly show the percentage of the {{< ui >}}total execution time{{< /ui >}}, which shows the trace duration breakdown at the service level.
 
 If a [service entry span][1] is in an error state, the corresponding service node is marked with a red border to highlight a faulty services. If an error occurs in a service exit span, the edge indicating the call to the next service is also highlighted in red.
 
-To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name, along with any error messages. To further investigation, click **View Entry Span** to switch to the Waterfall view.
+To view additional information about the service entry spans for each node, hover over the error state. The tooltip displays details about the service entry span's operation and resource name, along with any error messages. To further investigation, click {{< ui >}}View Entry Span{{< /ui >}} to switch to the Waterfall view.
 
 [1]: /glossary/#service-entry-span
 [2]: /tracing/services/inferred_services
@@ -198,9 +198,9 @@ Other information may be displayed under various conditions:
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 When the service name is an override from the base service name, the top of the info section shows the:
-- **[Base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
-- **[Service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
-- **[Inferred service][4]** (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5].
+- {{< ui >}}[Base service][2]{{< /ui >}}: service from which the span is emitted, identified by the `@base_service` attribute.
+- {{< ui >}}[Service override][3]{{< /ui >}}: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+- {{< ui >}}[Inferred service][4]{{< /ui >}} (_when applicable_): name of the inferred entity being called by the base service, identified by one of the [peer attributes][5].
 
 {{< img src="tracing/trace_view/base_override_inferred_service.png" alt="Base, Override, and inferred service" style="width:80%;">}}
 
@@ -256,7 +256,7 @@ Click on a service's span to see network dependencies of the service making the 
 
 See attack attempts that target the services of the distributed trace. You can see the pattern used by the attacker, the rule that detects the attack, and whether the attacker found a vulnerability in your service.
 
-Click **View in AAP** to investigate further using [Datadog App and API Protection][1].
+Click {{< ui >}}View in AAP{{< /ui >}} to investigate further using [Datadog App and API Protection][1].
 
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 

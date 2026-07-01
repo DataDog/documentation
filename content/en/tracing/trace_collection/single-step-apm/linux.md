@@ -24,14 +24,14 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-2. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
+2. In the {{< ui >}}Customize your Agent coverage{{< /ui >}} section, go to {{< ui >}}Core Observability{{< /ui >}} and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}}.
    
    {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead:
 
-   Click **Customize Library Versions**, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
+   Click {{< ui >}}Customize Library Versions{{< /ui >}}, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
 
    {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
@@ -102,21 +102,21 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
 If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
 
 1. In Datadog, go to [**Fleet Automation > Configuration**][21].
-1. Click **Configure Agents**.
+1. Click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Apply filters to select the agents you want to configure, then click **Next**.
 
    {{< img src="tracing/trace_collection/filter-agents.png" alt="The agent filtering screen in Fleet Automation, with options to scope by environment, operating system, and hostname" style="width:100%;" >}}
 
-1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+1. Click the {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} tile, then click {{< ui >}}Next{{< /ui >}}.
 
    {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:80%;" >}}
 
-1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual SDK versions.
+1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
 1. Click **Next**.
-1. Review your configuration and click **Deploy Configuration**.
+1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
 
 ## Configure Unified Service Tags
 
@@ -159,10 +159,10 @@ Instrumentation rules (available for Agent v7.73+) let you control which process
 
 To configure instrumentation rules:
 
-1. In Datadog, go to **APM** > **Service Setup** > [**Manage Instrumentation Rules**][20].
-1. Click **Add or Edit Rules**.
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20].
+1. Click {{< ui >}}Add or Edit Rules{{< /ui >}}.
 1. Define instrumentation rules:
-   1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
+   1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
    1. Name your rule.
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
 
@@ -173,17 +173,17 @@ To configure instrumentation rules:
    **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
 
 1. Set the default behavior (allow or block) for processes that do not match any rule.
-1. Click **Next** to preview your rules.
-1. Click **Deploy Rules**.
+1. Click {{< ui >}}Next{{< /ui >}} to preview your rules.
+1. Click {{< ui >}}Deploy Rules{{< /ui >}}.
 
-If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
+If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click {{< ui >}}Export{{< /ui >}} to export the configuration file and apply it manually to your hosts.
 
 #### Define rule conditions
 
 Each rule consists of one or more conditions. A condition includes the following elements:
-- **Attribute**: The process property that the rule evaluates.
-- **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
-- **Value**: The text or pattern to match, such as a process name or command-line flag.
+- {{< ui >}}Attribute{{< /ui >}}: The process property that the rule evaluates.
+- {{< ui >}}Operator{{< /ui >}}: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
+- {{< ui >}}Value{{< /ui >}}: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
 | Attribute | Description | Example |
@@ -212,7 +212,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
 
-For example, to instrument only a checkout service and a customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
+For example, to instrument only a checkout service and a customer portal, create allow rules using {{< ui >}}Working Directory{{< /ui >}}, then set the default behavior to {{< ui >}}Block Instrumentation{{< /ui >}}.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
 
