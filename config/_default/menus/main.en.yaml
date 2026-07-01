@@ -6272,31 +6272,36 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_angular
       weight: 102
+    - name: Dart and Flutter
+      url: feature_flags/client/flutter
+      parent: feature_flags_client
+      identifier: feature_flags_client_flutter
+      weight: 103
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 103
+      weight: 104
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 104
+      weight: 105
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 105
+      weight: 106
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 106
+      weight: 107
     - name: Unity
       url: feature_flags/client/unity
       parent: feature_flags_client
       identifier: feature_flags_client_unity
-      weight: 107
+      weight: 108
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
