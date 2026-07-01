@@ -662,7 +662,60 @@ After updating the task definition, restart the ECS tasks to use the updated ima
 
 ## Upgrade the Worker
 
-To upgrade the Worker, update the image version in your `docker run` command or `docker-compose.yml` file to `datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`. Then restart the container.
+To upgrade the Worker:
+
+1. Run `docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`.
+2. Run these commands to stop and remove the container:
+    ```
+    docker stop <CONTAINER_NAME>
+    ```
+    ```
+    docker rm <CONTAINER_NAME>
+    ```
+
+{% if equals($secrets_source, "environment_variables") %}
+3. Run the following command to install the Worker:
+    ```shell
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
+        -p 8088:8088 \
+        datadog/observability-pipelines-worker run
+    ```
+
+    You must replace the placeholders with these values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+        - See [Environment Variables][7] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+        - See [Environment Variables][7] for a list of destination environment variables.
+{% /if %}
+
+{% if equals($secrets_source, "secrets_management") %}
+
+3. Run the following command to install the Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+        datadog/observability-pipelines-worker run
+    ```
+
+    You must replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+
+{% /if %}
 
 {% /if %}
 
