@@ -37,9 +37,9 @@ Cost Optimization Automation supports the following AWS recommendation types:
 
 | Recommendation type | Built-in safeguards |
 |---------------------|---------------------|
-| Terminate unattached EBS volume | An EBS snapshot is taken before each volume is deleted. |
+| Delete unattached EBS volume | An EBS snapshot is taken before each volume is deleted. |
 | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering | Reversible. The lifecycle configuration can be removed at any time. |
-| Terminate unused RDS instance | A final RDS snapshot is taken before each instance is terminated. |
+| Delete unused RDS instance | A final RDS snapshot is taken before each instance is deleted. |
 | Delete extra on-demand backups (DynamoDB) | The two most recent backups are preserved on every run. |
 | Set CloudWatch logs retention policy | Reversible. The retention period can be adjusted or removed at any time. |
 | Delete old EBS snapshots | Snapshots referenced by an AMI are skipped. |
@@ -69,7 +69,7 @@ To set up an automation on a recurring schedule for a recommendation type:
 
 ### Safeguards
 
-Each recommendation type has built-in safeguards. For example, the **Terminate Unattached EBS Volume** automation takes an EBS snapshot before deleting each volume. Review the safeguards listed in the automation form and toggle the ones that are optional for your environment.
+Each recommendation type has built-in safeguards. For example, the **Delete Unattached EBS Volume** automation takes an EBS snapshot before deleting each volume. Review the safeguards listed in the automation form and toggle the ones that are optional for your environment.
 
 If {{< ui >}}Require approval before execution{{< /ui >}} is enabled in the [automation setup](#set-up-an-automation), Datadog posts in the designated channel a summary of the resources targeted on each run. The automation only runs after a user approves the request in the channel.
 
