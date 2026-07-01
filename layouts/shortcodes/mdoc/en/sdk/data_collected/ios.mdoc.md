@@ -161,7 +161,15 @@ RUM action, error, resource, and long task events contain information about the 
 
 ### View accessibility attributes
 
-The following accessibility-related attributes are automatically collected for each view. Attributes not supported on the platform are omitted from the event.
+Accessibility attribute collection is disabled by default. To enable it, set `collectAccessibility` to `true` in your `RUMConfiguration`:
+
+```swift
+var config = RUM.Configuration(applicationID: "<APPLICATION_ID>")
+config.collectAccessibility = true
+RUM.enable(with: config)
+```
+
+The following attributes are collected for each view after collection is enabled. Attributes not supported on the platform are omitted from the event.
 
 | Attribute | Type | Description |
 |---|---|---|
