@@ -104,7 +104,9 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 <div class="alert alert-danger">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+{{< /site-region >}}
 
 **Notes:**
 
