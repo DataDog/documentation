@@ -105,6 +105,8 @@ With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC
  btn_hidden="false" header="Join the Preview!">}}
 Use this form to submit your request to join the Supply Chain Security Preview.
 {{< /callout >}}
+
+
 Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
 
 Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
