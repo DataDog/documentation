@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add `team` and `system` tags to your Logs and APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Catalog.
+Use tag enrichment rules to add tags to your Logs and APM spans without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
 
 ## Prerequisites
 
@@ -42,10 +42,10 @@ Custom rules let you target a specific set of services and configure exactly how
    - Select **Add Condition** to add an `AND` condition to your query.
    - Add multiple values in the **Value** field to create an `OR` condition.
 1. Choose tags and enrichment methods:
-   - Select the `team` tag, `system` tag, or both.
+   - Select the `team` tag, `system` tag, `custom` tag, or multiple.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
    - Choose whether the value is applied only when it doesn't already exist, or is appended to the current list of values for that tag.
-1. By default, tags are added to all telemetry. Select which telemetry types to enrich.
+1. By default, tags are added to all telemetry.
 1. Optionally, enter a descriptive name for the rule.
 1. Review and save your rule. After you save the rule, it can take up to an hour for enrichment to be fully applied to incoming telemetry.
 
@@ -63,7 +63,7 @@ Click **Add Tags** to open the tag enrichment rule modal pre-populated with that
 
 - **Impacted telemetry**: Tag enrichment applies to Logs and APM spans only.
 - **Historical data**: Tag enrichment rules apply only to telemetry ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new telemetry, but does not update previously ingested data.
-- **Metadata updates**: Updating or adding Entity Metadata to services for `team` or `system` while an enrichment rule is enabled, including the default rule, automatically updates those tags.
+- **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.
 - **Interaction with remapping rules**: Tag enrichment rules are applied after service remapping rules. If a service remapping rule modifies the `service` tag, enrichment uses the updated service name when looking up IDP metadata.
 
