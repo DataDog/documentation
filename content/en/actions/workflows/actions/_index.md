@@ -22,10 +22,10 @@ Datadog provides a suite of workflow actions that are not associated with a spec
 - Make custom HTTP requests.
 
 {{< whatsnext desc="Find out more about generic actions:" >}}
-    {{< nextlink href="/service_management/workflows/actions/flow_control" >}}Use logic actions to add a sleep interval, branch on a condition, use iteration, and more.{{< /nextlink >}}
-    {{< nextlink href="/service_management/workflows/expressions" >}}Perform custom data transformations within your workflows using JavaScript.{{< /nextlink >}}
+    {{< nextlink href="/actions/workflows/actions/flow_control" >}}Use logic actions to add a sleep interval, branch on a condition, use iteration, and more.{{< /nextlink >}}
+    {{< nextlink href="/actions/workflows/expressions" >}}Perform custom data transformations within your workflows using JavaScript.{{< /nextlink >}}
     {{< nextlink href="/actions/connections/http" >}}Use the HTTP action to make a request to a custom endpoint.{{< /nextlink >}}
-    {{< nextlink href="/service_management/workflows/actions/saved_actions" >}}Use the <i>Saved Actions</i> feature to store and reuse an action and its parameters.{{< /nextlink >}}
+    {{< nextlink href="/actions/workflows/saved_actions" >}}Use the <i>Saved Actions</i> feature to store and reuse an action and its parameters.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 If your use case is not covered by an integration or generic Datadog action, you can [request a new action or an entire integration][1].

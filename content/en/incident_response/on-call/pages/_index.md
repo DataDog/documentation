@@ -45,6 +45,14 @@ If you send a Page through a monitor alert and the Team's routing rule uses dyna
 - If the WARN threshold is crossed, the Page urgency is set to `low`.
 - If the ALERT threshold is crossed, the Page urgency is set to `high`.
 
+#### Monitor renotification
+
+When a monitor is configured to [send renotifications][8] to an On-Call Team, the behavior depends on the current state of the Page:
+
+- **Page is resolved**: The monitor renotifies and creates a new Page, which is routed through the Team's escalation policy.
+- **Page is acknowledged**: The monitor renotifies, and the Page is re-triggered, resuming the escalation policy at the step that was in progress when the Page was acknowledged. 
+- **Page is triggered**: If all steps in the escalation policy have already run but no one has acknowledged the Page, the monitor renotifies and the Page is re-triggered, restarting the escalation policy from the beginning.
+
 ### Trigger Pages through email
 
 Generate a unique email address to trigger a Page directly to a Team's on-call responders. Emails sent to this address follow the Team's configured routing and escalation policies.
@@ -176,3 +184,4 @@ To add a comment, open the Page and enter your text in the **Timeline** section.
 [5]: /incident_response/incident_management/notification/#trigger-a-page-from-an-incident
 [6]: /incident_response/incident_management/
 [7]: https://app.datadoghq.com/on-call/pages
+[8]: /monitors/notify/#renotify

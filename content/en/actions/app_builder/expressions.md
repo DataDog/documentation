@@ -4,21 +4,21 @@ description: Use JavaScript expressions in App Builder to create custom interact
 aliases:
     - /service_management/app_builder/expressions
 further_reading:
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
 ---
 
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
-{{< img src="service_management/app_builder/app-builder-variable.png" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" style="width:70%;" >}}
+{{< img src="actions/app_builder/app-builder-variable.png" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" style="width:70%;" >}}
 
 Some fields, like [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the {{< ui >}}Content{{< /ui >}} property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
 
-{{< img src="service_management/app_builder/interpolation-2.png" alt="The text component fills with the words 'Hello' and 'World', each interpolated from a text input component value" style="width:70%;" >}}
+{{< img src="actions/app_builder/interpolation-2.png" alt="The text component fills with the words 'Hello' and 'World', each interpolated from a text input component value" style="width:70%;" >}}
 
 App Builder accepts standard vanilla JavaScript syntax, with the following caveats:
 - The result of the expression must match the result expected by the component or query property. For example, the text component's {{< ui >}}Is Visible{{< /ui >}} property expects a Boolean. To find out what type of data a component property expects, see [View component properties](#view-component-properties).
@@ -42,7 +42,7 @@ To access {{< ui >}}App State{{< /ui >}}:
 1. Click {{< ui >}}App Properties{{< /ui >}} in the left side-panel.
 1. Scroll down to the {{< ui >}}App State{{< /ui >}} section.
 
-{{< img src="service_management/app_builder/app-state-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
+{{< img src="actions/app_builder/app-state-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Inspect Data" level="h4" %}}
@@ -50,7 +50,7 @@ To access {{< ui >}}Inspect Data{{< /ui >}}:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the {{< ui >}}Inspect Data{{< /ui >}} section.
 
-{{< img src="service_management/app_builder/inspect-data-2.png" alt="The App State section in App Properties" style="width:80%;" >}}
+{{< img src="actions/app_builder/inspect-data-2.png" alt="The App State section in App Properties" style="width:80%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Admin Console" level="h4" %}}
@@ -58,7 +58,7 @@ To access the {{< ui >}}Admin Console{{< /ui >}}:
 1. Click on the cog ({{< ui >}}Settings{{< /ui >}}) icon and select {{< ui >}}Admin Console{{< /ui >}}.
 1. Click {{< ui >}}Data{{< /ui >}}.
 
-{{< img src="service_management/app_builder/admin-console-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
+{{< img src="actions/app_builder/admin-console-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
 ## Custom component interactions
@@ -84,7 +84,7 @@ If your app has a button that uses the content from a text component to send a m
 
 The text component is invisible and the button is disabled unless both text input fields have content.
 
-{{< img src="service_management/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
+{{< img src="actions/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
 
 #### Disable a component based on the app context
 
@@ -99,7 +99,7 @@ For example, you can enable a component only for users who are in the Product Ma
 
 Another common use case is disabling a component while a query is in a loading state. In the [EC2 Management blueprint][3], the `instanceType` select component is disabled while the `listInstances` query is loading. To accomplish this, the {{< ui >}}Is Disabled{{< /ui >}} property uses the expression `${listInstances.isLoading}`.
 
-{{< img src="service_management/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
+{{< img src="actions/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
 
 ## Custom query interactions
 
