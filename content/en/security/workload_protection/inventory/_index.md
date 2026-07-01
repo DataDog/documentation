@@ -14,17 +14,33 @@ further_reading:
     text: "Review your Workload Protection coverage with the Coverage map"
 ---
 
-Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, containers, and serverless workloads. Use Coverage to assess protection posture, identify gaps, and take immediate action.
+Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and take action on unprotected or misconfigured workloads.
 
-{{< img src="security/cws/workload_protection_coverage_map.png" alt="Leverage the Coverage map to get real time visibility into the workload protection status across all your hosts and see which policies are effectively applied" width="100%">}}
+{{< img src="security/cws/workload_protection_coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
+
+## Views
+
+Coverage has two views. Use the toggle at the top of the page to switch between them:
+
+- **Explorer**: A faceted table of your resources. Filter with the facet groups in the sidebar (**Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container**), then open a resource to inspect its agent rules and policies deployment status.
+- **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
+
+{{< img src="security/cws/workload_protection_coverage_map_views.png" alt="Toggle between the Explorer and Map views on the Coverage page" width="100%">}}
+
+In both views, you can:
+
+- **Group by** Cloud Provider, OS, Agent Version, Severity, or Kubernetes Cluster.
+- Refresh the view on demand.
+
+A resource appears in Coverage as soon as its agent loads its ruleset. When a resource goes offline, it is removed from Coverage within 15 minutes.
 
 ## Key functionality
 
-* **Real-time visibility**: Coverage updates every five minutes for accurate, current status.
-* **Granular filtering**: Search by policy, rule, version, status, tactic, or technique.
-* **Direct drill-down**: Drill down from a high-level map to a detailed asset or policy view.
-* **Actionable alerts**: Highlight workloads in a warning or failed state so you can respond promptly.
-* **Coverage analytics**: Track rule deployment health, stale agents, and configuration issues.
+* **Real-time visibility**: Resources appear as soon as their agent loads a ruleset, and are removed within 15 minutes of going offline.
+* **Granular filtering**: Search and filter by agent, rule, policy, infrastructure, and container facets.
+* **Detailed inspection**: Navigate from a high-level map or table to a detailed resource, policy, or rule view.
+* **Actionable findings**: Highlight resources in a warning or error state so you can respond promptly.
+* **Coverage analytics**: Track rule deployment health, outdated agents, and incomplete data.
 
 ## Key benefits
 
@@ -33,20 +49,47 @@ Workload Protection [Coverage][1] provides a real-time view of security coverage
 * Maintain continuous compliance and policy alignment.
 * Integrate posture checks into CI/CD and infrastructure reviews.
 
-## Policy statuses
+## Coverage statuses
 
-Hosts are identified with the following colors:
+### Resource coverage status
 
-- Green: all rules in the policies applied to the host have passed.
-- Orange: one or more rules in the policies applied to the host are in error.
+Each resource's coverage status falls into one of two severity categories, based on the rules loaded on it:
 
-Click an orange hexagon to view a host with policy rules in error.
+| Severity | Meaning |
+|----------|---------|
+| Pass  | All rules loaded successfully or were filtered as expected. |
+| Error | One or more rules have errors that need to be fixed, or the resource reported incomplete data. |
 
-Policies are displayed with the following statuses:
+In the Map view, resources are displayed as hexagons colored by severity. Click a hexagon to inspect a resource and view its policies and rules.
 
-- **Fully Loaded:** all of the policy's rules pass.
-- **Partially Loaded:** some of the policy's rules fail.
-- **Fully Rejected:** the entire policy is failing.
+### Policy statuses
+
+Each policy loaded on a resource has one of the following statuses:
+
+- **Loaded**: All of the policy's rules pass.
+- **Error**: One or more of the policy's rules are in error.
+
+### Rule statuses
+
+Each rule reports one of the following statuses:
+
+- **Loaded**: The rule loaded successfully.
+- **Filtered**: The rule was intentionally not applied (for example, the agent version is too low or the event type is disabled).
+- **Error**: The rule failed to load.
+
+When a rule is filtered or in error, a **verdict** explains why:
+
+| Verdict | Meaning |
+|---------|---------|
+| `syntax_error` | The rule expression is invalid. |
+| `unknown` | The agent could not load the rule. |
+| `filtered_agent_version` | The agent version is too low for this rule. |
+| `filtered_event_type_disabled` | The event type is disabled in the configuration. |
+| `filtered_rule_filter` | The rule was excluded by a rule filter. |
+
+To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules, and for each rule shows its expression, status and verdict, and the error message reported by the agent.
+
+{{< img src="security/cws/workload_protection_coverage_map_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
 
 ## Use cases
 
@@ -54,41 +97,30 @@ Here are some ways to use Coverage to improve your workload security.
 
 ### Detect and remediate policy deployment issues
 
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can address policy deployment issues:
+To find and fix resources with rule errors:
 
-1. In **Incomplete infrastructure coverage**, click **Warning**, and then select the policies in **Security coverage needs attention**. In the Coverage map, assets with policy deployment problems are displayed as orange hexagons.
-2. Review the list of deployed policies. Policies are highlighted with statuses such as **Partially Loaded**, **Fully Rejected**, and so on.
-3. In the policy details, do one of the following:
-   - [Edit a policy][4].
-   - View a policy's rule errors, and then [edit them][4] as needed.
-4. Redeploy and confirm the fix in the Coverage map.
+1. In the Explorer, filter by severity **Error**, or in the Map, select an **Error** hexagon.
+2. Select a failing resource to open its side panel and review its policies. Policies with failing rules show a status of **Error**.
+3. Review a failing rule's verdict (for example, `syntax_error` or `unknown`) and error message to understand why it failed.
+4. [Edit the rule][4] as needed.
+5. Redeploy and confirm the fix in Coverage.
 
-### Identify assets missing Workload Protection
+### Review agent deployment coverage
 
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can review assets without full Workload Protection (WP):
+The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
 
-1. In **Improve infrastructure coverage**, click **NO WP**. **NO WP** shows how many hosts are running the Datadog Agent without Workload Protection enabled.
-2. Click **Inspect Hosts Without WP**. Fleet Automation appears, allowing you to [set up Workload Protection][3].
+{{< img src="security/cws/workload_protection_coverage_map_top_widget.png" alt="Coverage page top widget showing the percentage of resources secured with Workload Protection" width="100%">}}
 
-### Identify assets missing key features
+- **View outdated**: Resources running an agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
+- **View incomplete**: Resources reporting incomplete or invalid data.
+- **View without WP**: Hosts running the Datadog Agent without Workload Protection enabled. This opens Fleet Automation, where you can [set up Workload Protection][3].
+- **View without Agents**: Hosts not running the Datadog Agent, which can't be evaluated by Workload Protection. This opens the Infrastructure Catalog.
 
-From the **Incomplete infrastructure coverage** status card on the Coverage page, you can find assets with gaps in protection.
-
-1. In **Improve infrastructure coverage**, click **INFO** to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
-2. In **Improve infrastructure coverage**, click **NO AGENT**. **NO AGENT** shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
-   1. Click **Inspect Hosts Without Agent**. The Resource Catalog appears, allowing you to address hosts missing agents.
-3. Filter by **Agent Version** to detect outdated agents lacking recent security updates.
-4. Update the Agent to help ensure complete coverage.
+Update or deploy the Datadog Agent to help ensure complete coverage.
 
 ### Search assets by MITRE ATT&CK techniques and tactics
 
-From the **Filter by tactics, techniques, and policy types** status card on the Coverage page, built-in filters for **Tactics**, **Techniques**, and **Policies** show exactly which parts of the MITRE ATT&CK framework are covered.
-
-To use these filters to strengthen detection and response alignment with proven MITRE ATT&CK framework threat models, do the following:
-
-1. Click **Tactics** to filter for high-priority tactics (for example, `TA004-privilege-escalation`, `TA004-persistence`), to help ensure those are protected across all hosts.
-2. After the map updates for the tactic you selected, click **Techniques** and select a technique to identify gaps in technique coverage for critical systems.
-3. Click **Policies** and select a policy type to see the distribution of policies across the filtered infrastructure.
+Use the Explorer facets (under the **Rule** and **Policy** groups) to filter resources by the detection content applied to them, including MITRE ATT&CK tactics and techniques. This shows which parts of the MITRE ATT&CK framework are covered across your infrastructure.
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
@@ -97,9 +129,9 @@ For information about the MITRE ATT&CK map available in SIEM or Workload Protect
 You can use Coverage to test and iterate on custom security rules:
 
 1. Write and deploy a [new custom rule][4].
-2. In **Coverage**, search for the rule by rule ID, policy ID, or hostname.
+2. In Coverage, search for the rule by rule ID, policy ID, or hostname.
 3. Confirm that the agent has loaded the rule successfully.
-4. If errors appear, review the details, fix the rule, and redeploy.
+4. If errors appear, review the verdict, fix the rule, and redeploy.
 
 ## Workload coverage triage and remediation cycle
 
