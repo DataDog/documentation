@@ -4,7 +4,7 @@ title: Data Streams Monitoring for Amazon SNS
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][1] or [Datadog Lambda Extension][6]
 
 <table>
   <thead>
@@ -88,3 +88,4 @@ Enable [Amazon SNS raw message delivery][1].
 [3]: /data_streams/setup/language/nodejs
 [4]: /data_streams/setup/language/python
 [5]: /data_streams/setup/language/dotnet
+[6]: /serverless/aws_lambda/instrumentation/
