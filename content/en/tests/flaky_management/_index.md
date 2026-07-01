@@ -203,7 +203,7 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 
 You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [{{< ui >}}Flaky Test Policies{{< /ui >}}][13] side panel in CI/CD Optimization settings.
 
-Notifications are bundled over a short period to reduce noise.
+Notifications are bundled over a short period to reduce noise. The weekly digest summary is only sent to notification rules that have code owners configured.
 
 ### Notification types
 
@@ -215,6 +215,7 @@ Notifications are bundled over a short period to reduce noise.
 | {{< ui >}}Fix successful{{< /ui >}} | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | {{< ui >}}Fix failed{{< /ui >}} | A test fails during the remediation flow. |
 | {{< ui >}}Manual state change{{< /ui >}} | A user manually changes the state of a flaky test. |
+| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. This notification is currently available to a subset of customers. |
 
 {{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI." style="width:100%;" >}}
 
@@ -243,6 +244,10 @@ If you are using `@slack-CHANNEL` (without the account name), the notification i
 To find your account name, go to the [Slack integration tile][5] and check the
 {{< ui >}}Account Name{{< /ui >}} field for the workspace you want to use.
 
+### Weekly digest summary notifications cannot be disabled
+
+The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -260,5 +265,6 @@ To find your account name, go to the [Slack integration tile][5] and check the
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[14]: /help/
 [16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/

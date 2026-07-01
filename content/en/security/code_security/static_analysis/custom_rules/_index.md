@@ -37,13 +37,13 @@ Install the [Datadog VS Code Extension][6] from the VS Code marketplace and keep
 
 ### Open the editor
 
-**To create a new rule**, open the command palette (**Cmd+Shift+P** / **Ctrl+Shift+P**) and run:
+**To create a new rule**, open the command palette ({{< ui >}}Cmd+Shift+P{{< /ui >}} / {{< ui >}}Ctrl+Shift+P{{< /ui >}}) and run:
 
 ```
 Datadog: New DDSA Rule
 ```
 
-**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
+**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select {{< ui >}}Datadog Code Security{{< /ui >}} > {{< ui >}}Open in DDSA Rule Editor{{< /ui >}}.
 
 The [template repository](#manage-rules-with-the-template-repository) includes a `.ddsainclude` file that automatically opens matching rule YAML files in the editor.
 
@@ -60,7 +60,7 @@ The editor has four panels:
 
 ### Test your rule
 
-As you write, violations appear as squiggly underlines in the code sample panel in real-time. To run your rule against an entire directory, switch to the **Scan results** tab in the top-right panel.
+As you write, violations appear as squiggly underlines in the code sample panel in real-time. To run your rule against an entire directory, switch to the {{< ui >}}Scan results{{< /ui >}} tab in the top-right panel.
 
 ### Rule metadata
 
@@ -85,7 +85,7 @@ As an alternative to managing custom rules in Datadog, the [datadog-custom-rules
 
 ### Authentication
 
-1. In your GitHub repository, go to **Settings → Secrets and variables → Actions**.
+1. In your GitHub repository, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Secrets and variables{{< /ui >}} > {{< ui >}}Actions{{< /ui >}}.
 2. Add three secrets:
    - `DD_API_KEY` — your Datadog API key
    - `DD_APP_KEY` — your Datadog Application key
@@ -100,7 +100,7 @@ On every push to `main`, the GitHub Action runs `upload.py`, which:
 
 Only changed rules trigger API calls—unchanged rules are skipped.
 
-To run a sync manually, in to your GitHub repository, go to the **Actions** tab, select **Upload Custom Rules**, and click **Run workflow**.
+To run a sync manually, in to your GitHub repository, go to the {{< ui >}}Actions{{< /ui >}} tab, select {{< ui >}}Upload Custom Rules{{< /ui >}}, and click {{< ui >}}Run workflow{{< /ui >}}.
 
 ### Rule file format
 

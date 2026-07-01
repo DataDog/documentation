@@ -1144,7 +1144,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get all usage across your account.\n\nFor SDK users only: all fields on `UsageSummaryResponse`, `UsageSummaryDate`, and\n`UsageSummaryDateOrg` are accessible through each object's `additionalProperties` map.\nExisting typed-field getters are unchanged. New billing dimensions will not have\ntyped-field getters. Use\n[Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)\nto enumerate every available key at each response level.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "Get all usage across your account.\n\nFor SDK users only: all fields on `UsageSummaryResponse`, `UsageSummaryDate`, and\n`UsageSummaryDateOrg` are accessible through each object's `additionalProperties` map.\nExisting typed-field getters are unchanged. New billing dimensions will not have\ntyped-field getters. Use\n[Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/get-available-fields-for-usage-summary/)\nto enumerate every available key at each response level.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get usage across your account"
   },
   "GetUsageSynthetics": {

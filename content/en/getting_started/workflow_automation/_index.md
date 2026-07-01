@@ -154,13 +154,13 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: /integrations/slack/
 [3]: /integrations/jira/
-[4]: /service_management/workflows/connections/
+[4]: /actions/connections/
 [5]: https://app.datadoghq.com/workflow
 [6]: /workflows/build/#context-variables
 [7]: https://app.datadoghq.com/monitors/manage
 [8]: /actions/actions_catalog/
 [9]: /workflows/build
-[10]: /service_management/workflows/actions/#http
-[11]: /service_management/workflows/actions/#data-transformation
+[10]: /actions/workflows/actions/#http
+[11]: /actions/workflows/actions/#data-transformation
 
 

@@ -41,7 +41,7 @@ To create a notification rule, specify the conditions under which the rule shoul
 
 <div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This preview helps you determine if your notification rule is too specific or too broad, allowing you to adjust the criteria accordingly for optimal coverage.</div>
 
-1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
+1. On the [**Notification Rules**][1] page, click {{< ui >}}New Notification Rule{{< /ui >}}.
 1. Enter a **Name** for the notification rule.
 1. Select the source type for the notification rule:
     - **Finding**: A potential security flaw in your infrastructure.
@@ -52,12 +52,12 @@ To create a notification rule, specify the conditions under which the rule shoul
    - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
 1. Under **Destination**, select a routing mode:
-    - **Manual routing**: Click **Add Recipient** and specify the recipients you want to notify. You can notify individuals or teams, create Jira issues, and more. See [Notification channels][2] for more information.
+    - **Manual routing**: Click {{< ui >}}Add Recipient{{< /ui >}} and specify the recipients you want to notify. You can notify individuals or teams, create Jira issues, and more. See [Notification channels][2] for more information.
     - **Dynamic routing** (Preview): Automatically route notifications to the responsible team based on the `team` tag on findings. Specify a **Fallback Channel** for findings that cannot be dynamically routed. See [Dynamic routing](#dynamic-routing) for requirements.<br />**Note**: Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected in step 6.
-1. To send test notifications for this rule, click **Test Notifications**.
+1. To send test notifications for this rule, click {{< ui >}}Test Notifications{{< /ui >}}.
   1. In the modal, select the security products you want to test.
-  1. Click **Run Test**.
-1. Click **Save**.
+  1. Click {{< ui >}}Run Test{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Manage notification rules
 
@@ -67,15 +67,15 @@ To enable or disable a notification rule, toggle the switch on the notification 
 
 ### Edit a notification rule
 
-To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save**.
+To edit a notification rule, click the notification rule card. After you finish making your changes, click {{< ui >}}Save{{< /ui >}}.
 
 ### Clone a notification rule
 
-To clone a notification rule, click the vertical three-dot menu on the notification rule card and select **Clone**.
+To clone a notification rule, click the vertical three-dot menu on the notification rule card and select {{< ui >}}Clone{{< /ui >}}.
 
 ### Delete a notification rule
 
-To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
+To delete a notification rule, click the vertical three-dot menu on the notification rule card and select {{< ui >}}Delete{{< /ui >}}.
 
 ## Dynamic routing
 

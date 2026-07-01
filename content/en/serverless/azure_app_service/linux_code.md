@@ -358,7 +358,7 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
-   In Azure, add the following key-value pairs in **Settings** > **Environment Variables** > **App Settings**:
+   In Azure, add the following key-value pairs in {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Environment Variables{{< /ui >}} > {{< ui >}}App Settings{{< /ui >}}:
 
 `DD_API_KEY`
 : **Value**: Your Datadog API key.<br>
@@ -432,16 +432,16 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 2. **Configure a sidecar container for Datadog**.
 
-   1. In Azure, navigate to **Deployment** > **Deployment Center**. Select the **Containers** tab.
-   1. Click **Add** and select **Custom container**.
-   1. In the **Edit container** form, provide the following:
-      - **Image source**: Other container registries
-      - **Image type**: Public
-      - **Registry server URL**: `index.docker.io`
-      - **Image and tag**: `datadog/serverless-init:latest`
-      - **Port**: 8126
-      - **Environment Variables**: Include all previously configured Datadog environment variables.
-   1. Select **Apply**.
+   1. In Azure, navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}}. Select the {{< ui >}}Containers{{< /ui >}} tab.
+   1. Click {{< ui >}}Add{{< /ui >}} and select {{< ui >}}Custom container{{< /ui >}}.
+   1. In the {{< ui >}}Edit container{{< /ui >}} form, provide the following:
+      - {{< ui >}}Image source{{< /ui >}}: Other container registries
+      - {{< ui >}}Image type{{< /ui >}}: Public
+      - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+      - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+      - {{< ui >}}Port{{< /ui >}}: 8126
+      - {{< ui >}}Environment Variables{{< /ui >}}: Include all previously configured Datadog environment variables.
+   1. Select {{< ui >}}Apply{{< /ui >}}.
 
 3. **Restart your application**.
 
@@ -701,11 +701,11 @@ To enable the Continuous Profiler, set the environment variable `DD_PROFILING_EN
 
 If you are not receiving traces or custom metric data as expected, enable agent debug logging by setting `DD_LOG_LEVEL` in the sidecar configuration options. For tracer debugging set `DD_TRACE_DEBUG` to true. This generates logs additional debug logs for the sidecar and SDK.
 
-Be sure to enable **App Service logs** to receive debugging logs.
+Be sure to enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][9].
+Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][9].
 
 ## Further reading
 
