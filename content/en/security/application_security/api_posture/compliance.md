@@ -47,7 +47,7 @@ The OWASP API Security Top 10 identifies the most critical security risks for AP
 
 2. **Posture score**: The posture score reflects the ratio of controls that are fully passing versus those with at least one failing finding. The score is calculated using the same methodology as [Cloud Security posture scores][3].
 
-3. **Compliance Frameworks page**: The [Compliance Frameworks page][4] lists all available frameworks for your API security context. For each framework you can drill into control-level details, filter by severity, and open a finding side panel to investigate individual API security events.
+3. **Compliance Frameworks page**: The [Compliance Frameworks page][4] lists all available frameworks for your API security context. For each framework you can examine control-level details, filter by severity, and open a finding side panel to investigate individual API security events.
 
 ## View your compliance posture
 
