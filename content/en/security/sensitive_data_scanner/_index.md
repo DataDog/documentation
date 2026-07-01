@@ -179,6 +179,15 @@ Use the [Findings page][13] to see details of sensitive data findings identified
 
 See [Investigate Sensitive Data Findings][14] for more information on triaging sensitive data using the Findings page.
 
+### Create alerts for sensitive data
+
+Use alerts to notify teams when Sensitive Data Scanner detects sensitive data. The available alerting workflow depends on the data type:
+
+- **Logs**: Create a [security notification rule][22] from the Findings page or finding side panel. Notification rules can match Sensitive Data Scanner findings by severity, service, environment, team, scanning rule, and other finding attributes. Notifications include finding context and a link to the finding, but do not include log samples.
+- **APM and RUM**: Create monitors based on tags that Sensitive Data Scanner adds when it detects matches, such as `sensitive_data:*` or `sensitive_data_category:*`.
+
+See [Create Alerts for Sensitive Data][23] for setup instructions.
+
 ### Review sensitive data trends
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
@@ -210,3 +219,5 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [19]: /security/sensitive_data_scanner/scanning_rules/library_rules/?category=Secrets+and+credentials#overview
 [20]: /llm_observability/
 [21]: /security/code_security/secret_scanning/
+[22]: /security/notifications/rules/
+[23]: /security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data/

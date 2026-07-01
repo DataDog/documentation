@@ -53,6 +53,10 @@ Additionally, you can also:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
 
+### Create alerts from log findings
+
+To create an alert from a log finding, click {{< ui >}}Create Notification Rule{{< /ui >}} from the Logs Findings explorer or from a finding side panel. Datadog opens a new notification rule with the current explorer filters or finding attributes prefilled. For complete instructions, see [Create Alerts for Sensitive Data](/security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data/).
+
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
 
