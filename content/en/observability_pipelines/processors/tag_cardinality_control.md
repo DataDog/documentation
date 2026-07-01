@@ -7,6 +7,8 @@ products:
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
+{{< jqmath-vanilla >}}
+
 {{< product-availability >}}
 
 {{< callout url="#"
@@ -27,6 +29,7 @@ To set up the Tag Cardinality Control processor:
 1. Define a filter query. See [Metrics Search Syntax][1] for more information.
     - Only metrics matching the filter are processed.
     - All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Select a **Tracking mode** in the dropdown menu. See [Exact and probabilistic modes](#exact-and-probabilistic-modes) for more information.
 1. Enter a cardinality limit for the maximum number of distinct values per tag. This limit is applied to all metrics that match the filter query.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 
@@ -57,5 +60,78 @@ To add specific tag overrides for this metric:
 1. Click **Add Override**.
 
 {{< img src="observability_pipelines/processors/tag_cardinality_control_overrides.png" alt="The per-metric override panel with a custom limit set to 100 with per-tag overrides for the host tag excluded from the limit and the region tag limited to five." style="width:80%;" >}}
+
+## How the processor works
+
+### Exact and probabilistic modes
+
+The Tag Cardinality Control processor supports two modes for tracking tag cardinality:
+
+- **exact**: Stores tag values as an 8-byte hash to optimize memory usage, at the cost of an extremely small chance of two distinct values being hashed to the same fingerprint.
+- **probabilistic**: Uses bloom filters to track seen values, which can heavily optimize memory usage at the cost of occasional false positives. A false positive occurs when a value that has not been seen yet is incorrectly determined to have been seen, causing the processor to slightly exceed the specified cardinality limit.
+
+#### Memory usage for `exact` mode
+
+The following formula calculates how much memory `exact` mode uses:
+
+$$A = \text"total number of metrics"\ \×\ \text"average number of tag keys per metric"$$
+
+$$B = \text"average length of each tag key"\ + (\text"value_limit"\ \×\ \text"average length of tag values")$$
+
+$$\text"Memory usage" = A\ \×\ B$$
+
+Since every tag value is stored as an 8-byte hash fingerprint, the `average length of tag values` is `8`.
+
+#### Memory usage for probabilistic mode
+
+Probabilistic mode uses bloom filters to track seen values for every (metric, tag) pair. For example, if the metric name is `request.latency` with tag keys `host` and `region`, the pairs tracked are:
+
+- (`request.latency`, `host`)
+- (`request.latency`, `region`)
+
+The following formula estimates memory usage for probabilistic mode:
+
+$$A = \text"total number of metrics"\ \×\ \text"average number of tag keys per metric"$$
+
+$$B = \text"average length of field names for the tags"\ \+\ \text"cache_size_per_key"$$
+
+$$\text"Memory usage" = A\ \×\ B$$
+
+You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a standard formula, where `n` is the cardinality limit and the false positive rate (`p`) is fixed at `0.1%` in the Worker.
+
+### Benchmarks for exact mode vs probabilistic mode
+
+The following tables show benchmarks for `exact` mode and `probabilistic` mode. As the number of unique values for each tag increases, `probabilistic` mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
+
+**50,000 metrics with 10 tags per metric**
+
+| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
+| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
+| 1                               | 0.26                                          | 0.26                                                  |
+| 10                              | 0.45                                          | 0.33                                                  |
+| 100                             | 0.99                                          | 0.44                                                  |
+
+**50,000 metrics with 50 tags per metric**
+
+| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
+| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
+| 1                               | 0.91                                          | 0.83                                                  |
+| 10                              | 1.40                                          | 1.05                                                  |
+| 100                             | 4.12                                          | 1.39                                                  |
+
+**100,000 metrics with 10 tags per metric**
+
+| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
+| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
+| 1                               | 0.49                                          | 0.45                                                  |
+| 10                              | 0.75                                          | 0.54                                                  |
+| 100                             | 1.78                                          | 0.75                                                  |
+
+**100,000 metrics with 50 tags per metric**
+
+| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
+| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
+| 1                               | 1.74                                          | 1.59                                                  |
+| 10                              | 2.65                                          | 1.81                                                  |
 
 [1]: /observability_pipelines/search_syntax/metrics/
