@@ -19,6 +19,7 @@ cascade:
     {{< nextlink href="synthetics/guide/version_history" >}}Version History for Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/kerberos-authentication/" >}}Kerberos authentication for Synthetic Monitoring{{< /nextlink >}}
      {{< nextlink href="synthetics/guide/step-duration/" >}}How step duration is determined in Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/export-tests-to-terraform" >}}Export Synthetic tests to Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}

@@ -16,9 +16,9 @@ further_reading:
 
 Create a RUM application in Datadog to get your credentials:
 
-1. Go to [**Digital Experience > Performance Summary**][2].
-2. Click **New Application**.
-3. Select **JS**, enter an application name, and click **Create Application**.
+1. Go to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][2].
+2. Click {{< ui >}}New Application{{< /ui >}}.
+3. Select {{< ui >}}JS{{< /ui >}}, enter an application name, and click {{< ui >}}Create Application{{< /ui >}}.
 4. Copy the `applicationId` and `clientToken` values.
 
 <div class="alert alert-info">If you store these in <code>.env.local</code>, prefix them with <code>NEXT_PUBLIC_</code> to expose them to the browser. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Next.js environment variables</a>.</div>
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
             d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
             window.DD_RUM.init({
               clientToken: '<CLIENT_TOKEN>',
@@ -137,7 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Script
           id="dd-rum-sync"
-          src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
           crossOrigin=""
           type="text/javascript"
           strategy="beforeInteractive"
@@ -220,7 +220,7 @@ export default function App({ Component, pageProps }: AppProps) {
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
             d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
             window.DD_RUM.init({
               clientToken: '<CLIENT_TOKEN>',
@@ -254,7 +254,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Script
         id="dd-rum-sync"
-        src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+        src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
         crossOrigin=""
         type="text/javascript"
         strategy="beforeInteractive"

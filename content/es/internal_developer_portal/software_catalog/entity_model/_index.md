@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - codeLocations
 aliases:
 - /es/software_catalog/service_definitions/
 - /es/software_catalog/adding_metadata
@@ -29,286 +32,287 @@ aliases:
 - /es/service_catalog/apis
 further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-  tag: Sitio externo
-  text: Crear y gestionar definiciones con Terraform
+  tag: Sitio Externo
+  text: Crea y gestiona definiciones con Terraform
 - link: /api/latest/service-definition/
   tag: API
-  text: Más información sobre la API de definición
+  text: Aprende sobre la API de Definición
 - link: /integrations/github
   tag: Documentación
-  text: Más información sobre la integración GitHub
+  text: Aprende sobre la Integración de GitHub
 - link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
   tag: Blog
-  text: Importar archivos YAML de Backstage a Datadog
+  text: Importa archivos YAML de Backstage en Datadog
 - link: https://www.datadoghq.com/blog/service-catalog-schema-v3/
   tag: Blog
-  text: Mejorar la experiencia y la colaboración de los desarrolladores con el esquema
-    del Catálogo de servicios versión 3.0
-title: Entity Model
+  text: Mejora la experiencia del desarrollador y la colaboración con el esquema del
+    Service Catalog versión 3.0.
+- link: https://www.datadoghq.com/blog/software-catalog-custom-entities/
+  tag: Blog
+  text: Modela tu arquitectura con entidades personalizadas en el Datadog Software
+    Catalog.
+title: Modelo de Entidad
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">El esquema Entity Model v3.0 no está disponible en el sitio seleccionado en este momento.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">El esquema del Modelo de Entidad v3.0 no está disponible en el sitio seleccionado en este momento.</div>
 
 {{< /site-region >}}
 
-## Información general
+## Resumen {#overview}
 
-Software Catalog utiliza esquemas de definición para almacenar y mostrar metadatos relevantes sobre tus servicios. Los esquemas incorporan reglas de validación para garantizar que sólo se aceptan valores válidos. Puedes ver las advertencias en la pestaña **Definición** del panel lateral de Software Catalog para cualquier servicio seleccionado. 
+El Software Catalog utiliza esquemas de definición para almacenar y mostrar metadatos relevantes sobre tus entidades. Los esquemas tienen reglas de validación integradas para asegurar que solo se acepten valores válidos. Puedes ver advertencias en la pestaña **Definición** en el panel lateral del Software Catalog para cualquier servicio seleccionado.
 
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" btn_hidden="true" header="false" >}}
-<a href="https://forms.gle/fwzarcSww6By7tn39">Comparte tus comentarios</a> sobre las nuevas y futuras funciones de Software Catalog.
-{{< /callout >}}
+{{< img src="/tracing/internal_developer_portal/entity-model-flow-chart.png" alt="Un diagrama de flujo que muestra cómo los componentes del Software Catalog se conectan entre sí y con tu entorno en la nube. " style="width:100%;" >}}
 
-## Versiones compatibles
+## Versiones soportadas {#supported-versions}
 
-Datadog admite cuatro versiones del esquema de definición:
+Datadog soporta cuatro versiones del esquema de definición:
 
-- **v3.0**: Última versión con modelo de datos ampliado, compatibilidad con múltiples propietarios, declaración manual de dependencias y funciones mejoradas para infraestructuras complejas.
-- **v2.2**: Admite anotaciones de usuario para metadatos personalizados y asociaciones CI pipeline para vincular servicios con sus procesos de compilación.
-- **v2.1**: Admite agrupaciones de servicios para una mejor organización e introduce campos adicionales para descripciones de servicios más completas.
-- **v2**: La primera versión compatible, que proporciona campos esenciales para los metadatos básicos del servicio y la documentación.
+- **v3.0**: Última versión con un modelo de datos ampliado, soporte para múltiples propietarios, declaración manual de dependencias y características mejoradas para infraestructuras complejas.
+- **v2.2**: Soporta anotaciones de usuario para metadatos personalizados y asociaciones de canalización CI para vincular servicios con sus procesos de construcción.
+- **v2.1**: Soporta agrupaciones de servicios para una mejor organización e introduce campos adicionales para descripciones de servicio más completas.
+- **v2**: Versión más temprana soportada, proporcionando campos esenciales para metadatos y documentación básica de servicios.
 
-Cada versión se basa en la anterior, añadiendo nuevas funciones y manteniendo la compatibilidad con versiones anteriores. Elige la versión que mejor se adapte a tus necesidades y a la complejidad de infraestructura.
+Cada versión se basa en la anterior, añadiendo nueva funcionalidad mientras mantiene la compatibilidad hacia atrás. Elige la versión que mejor se adapte a tus necesidades y a la complejidad de tu infraestructura.
 
-## Comparación de versiones
+## Comparación de versiones {#version-comparison}
 
-Cada versión admite las siguientes funciones:
+Las siguientes características son soportadas en cada versión:
 
-| Función                       | v3.0  | v2.2      | v2.1      | v2.0        |
+| Característica                     | v3.0  | v2.2      | v2.1      | v2.0        |
 |-------------------------------|-------------|-----------|-----------|-----------|
-| Metadatos básicos                | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} |
-| Agrupaciones de servicio             | {{< X >}}   | {{< X >}} | {{< X >}} |           |
-| Anotaciones del usuario              | {{< X >}}   | {{< X >}} |           |           |
-| Asociaciones de CI Pipeline      | {{< X >}}   | {{< X >}} |           |           |
-| Modelo de datos ampliado           | {{< X >}}   |           |           |           |
-| Multipropiedad               | {{< X >}}   |           |           |           |
-| Declaración manual de dependencia | {{< X >}}   |           |           |           |
+| Metadatos Básicos                | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} |
+| Agrupaciones de Servicios         | {{< X >}}   | {{< X >}} | {{< X >}} |           |
+| Anotaciones de Usuario            | {{< X >}}   | {{< X >}} |           |           |
+| Asociaciones de canalización CI       | {{< X >}}   | {{< X >}} |           |           |
+| Modelo de Datos Ampliado         | {{< X >}}   |           |           |           |
+| Multi-propiedad                  | {{< X >}}   |           |           |           |
+| Declaración Manual de Dependencias | {{< X >}}   |           |           |           |
 
-Para obtener información detallada sobre cada versión, incluidos esquemas completos y archivos YAML de ejemplo, consulta las páginas de cada versión en [Versiones compatibles](#supported-versions).
+Para obtener información detallada sobre cada versión, incluidos los esquemas completos y ejemplos de archivos YAML, consulte las páginas de versión individuales en [Versiones soportadas](#supported-versions).
 
-## Detalles de la versión
+## Detalles de la versión {#version-details}
 
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the latest version of Software Catalog." >}}
+{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opta por la Vista Previa para la última versión del Software Catalog." >}}
 {{< /callout >}}
 
 {{< tabs >}}
 {{% tab "v3.0" %}}
 
-### Características principales
-- **Modelo de datos ampliado**: la versión 3.0 admite varios tipos de entidades. Puedes organizar tus sistemas utilizando distintos componentes, como sistemas, servicios, colas y almacenes de datos.
-- **Multipropietario**: Puedes asignar múltiples propietarios a cualquier objeto definido a través del esquema v3.0 para especificar múltiples puntos de contacto.
-- **Asignación de relaciones mejorada**: Con los datos de APM y USM, puedes detectar automáticamente las dependencias entre componentes. v3.0 admite la declaración manual para aumentar la topology (topología) del sistema autodetectado con el fin de garantizar una visión completa de cómo interactúan los componentes dentro de tus sistemas.
-- **Herencia de los metadatos del sistema**: Los componentes de un sistema heredan automáticamente los metadatos del sistema. Ya no es necesario declarar uno a uno los metadatos de todos los componentes relacionados, como en las versiones 2.1 y 2.2. 
-- **Localización precisa del código**: Añade la asignación de la ubicación del código para tu servicio. La sección `codeLocations` en v3.0 especifica las ubicaciones del código con el repositorio que contiene el código y su `paths` asociado. El atributo `paths` es una lista de [globs][4] que deben coincidir con las rutas del repositorio.
-- **Logs y eventos filtrados**: Declara logs guardados y consultas de eventos para un `system` a través de las secciones `logs` y `events` y mira los resultados en la page (página) Sistema.  
-- **Entidades personalizadas**: Define tipos de entidad personalizados más allá de Servicio, Sistema, Datastore, Cola y API. Alcanza los scorcards y las acciones a tipos de entidad específicos.
-- **(Próximas) integraciones**: Integra con herramientas de terceros para source (fuente) dinámicamente información relacionada con tus componentes (por ejemplo, pull requests de GitHub, incidents (incidentes) de PagerDuty y pipelines de GitLab). Informa y escribe reglas de scorecard contra cualquier source (fuente) de terceros.
-- **Agrupación por producto o dominio**: Organiza los componentes por producto, permitiendo múltiples capas de agrupación jerárquica.
+### Características clave {#key-features}
+- **Modelo de datos expandido**: v3.0 soporta múltiples tipos de entidades. Puedes organizar tus sistemas utilizando varios componentes como sistemas, servicios, colas y Datastore.
+- **Multi-propiedad**: Puedes asignar múltiples propietarios a cualquier objeto definido a través del esquema v3.0 para especificar múltiples puntos de contacto.
+- **Mapeo de relaciones mejorado**: Con los datos de APM y USM, puedes detectar automáticamente las dependencias entre componentes. v3.0 soporta la declaración manual para aumentar la topología del sistema detectada automáticamente y asegurar una visión completa de cómo interactúan los componentes dentro de tus sistemas.
+- **Herencia de metadatos del sistema**: Los componentes dentro de un sistema heredan automáticamente los metadatos del sistema. Ya no es necesario declarar metadatos para todos los componentes relacionados uno por uno como en v2.1 y v2.2.
+- **Ubicación de código precisa**: Agrega el mapeo de la ubicación de tu código para tu servicio. La sección `codeLocations` en v3.0 especifica las ubicaciones del código con el repositorio que contiene el código y su `paths` asociado. El atributo `paths` es una lista de [globs][4] que deben coincidir con las rutas en el repositorio.
+- **Registros y eventos filtrados**: Declara registros guardados y consultas de eventos para un `system` a través de las secciones `logs` y `events` y visualiza los resultados en la página del Sistema.
+- **Entidades personalizadas**: Define tipos de entidades personalizadas más allá de Servicio, Sistema, Datastore, Cola y API. Define los Scorecards y acciones para tipos de entidades específicos.
+- **(Próximamente) Integrations**: Integra con herramientas de terceros para obtener dinámicamente información relacionada con tus componentes (por ejemplo, solicitudes de extracción de GitHub, incidentes de PagerDuty y canalizaciones de GitLab). Reporta y escribe reglas de Scorecard contra cualquier fuente de terceros.
+- **(Próximo) Agrupar por producto o dominio**: Organizar componentes por producto, permitiendo múltiples capas de agrupamiento jerárquico.
 
-### Estructura del esquema
+### Estructura del esquema {#schema-structure}
 
-Puede consultar las [definiciones completas del esquema en Github][1]. 
+Puedes ver las [definiciones completas del esquema en Github][1].
 
-La versión 3.0 contiene los siguientes cambios con respecto a la versión 2.2:
-- `schema_version` es ahora `apiVersion`
-- el campo `kind` es nuevo y define el tipo de componente: servicio, cola, almacén de datos, sistema o API.
-- `dd-service` es ahora `metadata.name`
-- `team` es ahora `owner` y `additionalOwners` si hay varios Teams
-- `lifecycle`, `tier`, `languages` y `type` están ahora en`spec`
-- `links`, `contacts`, y `description`, y `tags` están ahora en metadatos
-- `application` se ha mejorado para convertirse en un tipo propio: `system`. Ya no existe como campo discreto en un servicio.
+V3.0 contiene los siguientes cambios respecto a v2.2:
+- `schema_version` ahora es `apiVersion`
+El campo - `kind` es nuevo y define el tipo de componente: servicio, cola, Datastore, sistema o API.
+- `dd-service` ahora es `metadata.name`
+- `team` ahora es `owner` y `additionalOwners` si hay múltiples equipos.
+- `lifecycle`, `tier`, `languages` y `type` ahora están bajo `spec`.
+- `links`, `contacts`, `description` y `tags` ahora están bajo metadatos.
+- `application` ha sido mejorado para convertirse en su propio tipo: `system`. Ya no existe como un campo discreto en un servicio.
 
-### Ejemplos de archivos YAML
+### Ejemplos de archivos YAML {#example-yaml-files}
 
-{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  kind: system
-  metadata:
-    name: myapp
-    displayName: My App
-    tags:
-      - tag:value
-    links:
-      - name: shopping-cart runbook
-        type: runbook
-        url: https://runbook/shopping-cart
-      - name: shopping-cart architecture
-        provider: gdoc
-        url: https://google.drive/shopping-cart-architecture
-        type: doc
-      - name: shopping-cart Wiki
-        provider: wiki
-        url: https://wiki/shopping-cart
-        type: doc
-      - name: shopping-cart source code
-        provider: github
-        url: http://github/shopping-cart
-        type: repo
-    contacts:
-      - name: Support Email
-        type: email
-        contact: team@shopping.com
-      - name: Support Slack
-        type: slack
-        contact: https://www.slack.com/archives/shopping-cart
-    owner: myteam
-    additionalOwners:
-      - name: opsTeam
-        type: operator
-  integrations:
-    pagerduty:
-      serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
-    opsgenie:
-      serviceURL: https://www.opsgenie.com/service/shopping-cart
-      region: US
-  spec:
-    components:
-      - service:myservice
-      - service:otherservice
-  extensions:
-    datadoghq.com/shopping-cart:
-      customField: customValue
-  datadog:
-    codeLocations:
-      - repositoryURL: https://github.com/myorganization/myrepo.git
-        paths:
-          - path/to/service/code/**
-    events:
-      - name: "deployment events"
-        query: "app:myapp AND type:github"
-      - name: "event type B"
-        query: "app:myapp AND type:github"
-    logs:
-      - name: "critical logs"
-        query: "app:myapp AND type:github"
-      - name: "ops logs"
-        query: "app:myapp AND type:github"
-    pipelines:
-      fingerprints:
-        - fp1
-        - fp2
-  {{< /code-block >}}
+{{% collapse-content title="Componente de <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: system
+metadata:
+  name: myapp
+  displayName: My App
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+spec:
+  components:
+    - service:myservice
+    - service:otherservice
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+{{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  kind: library
-  metadata:
-    name: my-library
-    displayName: My Library
-    tags:
-      - tag:value
-    links:
-      - name: shopping-cart runbook
-        type: runbook
-        url: https://runbook/shopping-cart
-      - name: shopping-cart architecture
-        provider: gdoc
-        url: https://google.drive/shopping-cart-architecture
-        type: doc
-      - name: shopping-cart Wiki
-        provider: wiki
-        url: https://wiki/shopping-cart
-        type: doc
-      - name: shopping-cart source code
-        provider: github
-        url: http://github/shopping-cart
-        type: repo
-    contacts:
-      - name: Support Email
-        type: email
-        contact: team@shopping.com
-      - name: Support Slack
-        type: slack
-        contact: https://www.slack.com/archives/shopping-cart
-    owner: myteam
-    additionalOwners:
-      - name: opsTeam
-        type: operator
-  {{< /code-block >}}
+{{% collapse-content title="Componente de <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: library
+metadata:
+  name: my-library
+  displayName: My Library
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+{{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="id-for-anchoring" %}}
-  Si un único componente forma parte de varios sistemas, debes especificar dicho componente en el YAML de cada sistema. Por ejemplo, si el almacén de datos `orders-postgres` es un componente de una flota y de una aplicación web, especifica dos YAML:
+{{% collapse-content title="Componentes que son parte de múltiples sistemas." level="h4" expanded=false id="id-for-anchoring" %}}
+Si un solo componente es parte de múltiples sistemas, debes especificar ese componente en el YAML para cada sistema. Por ejemplo, si el Datastore `orders-postgres` es un componente tanto de una flota de postgres como de una aplicación web, especifica dos YAMLs:
 
-  Para la flota postgres (`managed-postgres`), especifica una definición para `kind:system`:
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  type: system
-  spec:
-    components:
-      - datastore:orders-postgres
-      - datastore:foo-postgres
-      - datastore:bar-postgres
-  metadata:
-    name: managed-postgres
-    owner: db-team
-  {{< /code-block >}}
+Para la flota de postgres (`managed-postgres`), especifica una definición para `kind:system`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: system
+spec:
+  components:
+    - datastore:orders-postgres
+    - datastore:foo-postgres
+    - datastore:bar-postgres
+metadata:
+  name: managed-postgres
+  owner: db-team
+{{< /code-block >}}
 
-  Para la aplicación web (`shopping-cart`), declara una definición separada para `kind:system`:
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+Para la aplicación web (`shopping-cart`), declara una definición separada para `kind:system`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
-  apiVersion: v3
-  kind: system
-  spec:
-    lifecycle: production
-    tier: critical
-    components:
-      - service:shopping-cart-api
-      - service:shopping-cart-processor
-      - queue:orders-queue
-      - datastore:orders-postgres
-  metadata:
-    name: shopping-cart
-    owner: shopping-team
-    additionalOwners:
-      - name: sre-team
-        type: operator
-  ---
-  apiVersion: v3
-  kind: datastore
-  metadata:
-    name: orders-postgres
-    additionalOwners:
-      - name: db-team
-        type: operator
-  ---
-  apiVersion: v3
-  kind: service
-  metadata:
-    name: shopping-cart-api
-  ---
-  apiVersion: v3
-  kind: service
-  metadata:
-    name: shopping-cart-processor
-  ---
-  {{< /code-block >}}
+apiVersion: v3
+kind: system
+spec:
+  lifecycle: production
+  tier: critical
+  components:
+    - service:shopping-cart-api
+    - service:shopping-cart-processor
+    - queue:orders-queue
+    - datastore:orders-postgres
+metadata:
+  name: shopping-cart
+  owner: shopping-team
+  additionalOwners:
+    - name: sre-team
+      type: operator
+---
+apiVersion: v3
+kind: datastore
+metadata:
+  name: orders-postgres
+  additionalOwners:
+    - name: db-team
+      type: operator
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-api
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processor
+---
+{{< /code-block >}}
 {{% /collapse-content %}}
 
-### Herencia explícita e implícita de metadatos 
+### Herencia de metadatos explícita e implícita {#explicit-and-implicit-metadata-inheritance}
 
-#### Herencia explícita 
+#### Herencia explícita {#explicit-inheritance}
 
-El campo `inheritFrom` indica al pipeline de ingesta que herede los metadatos de los metadatos de la entidad de la referencia por `<entity_kind>:<name>`.
+El campo `inheritFrom` instruye a la canalización de ingestión para heredar metadatos de los metadatos de la entidad referenciada por `<entity_kind>:<name>`.
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
-#### Herencia implícita 
-Los componentes (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) heredan todos los metadatos del sistema al que pertenecen en las siguientes condiciones:
-- Sólo hay un sistema definido en el archivo YAML.
+#### Herencia implícita {#implicit-inheritance}
+Los componentes (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) heredan todos los metadatos del sistema al que pertenecen bajo las siguientes condiciones:
+- Solo hay un sistema definido en el archivo YAML.
 - La cláusula `inheritFrom:<entity_kind>:<name>` está ausente en el archivo YAML.
 
-### Migración a la versión 3.0
-v3.0 admite los mismos métodos de creación de metadatos que las versiones anteriores, incluidos Github, API, Terraform, Backstage, ServiceNow y la interfaz de usuario. Sin embargo, hay nuevos [endpoints de la API][5] y un nuevo [módulo de Terraform][6] para la v3.0.
+### Migrando a v3.0 {#migrating-to-v30}
+v3.0 soporta los mismos métodos de creación de metadatos que las versiones anteriores, incluyendo Github, API, Terraform, Backstage, ServiceNow y la UI. Sin embargo, hay nuevos [puntos de conexión de API][5] y un nuevo [recurso de Terraform][6] para v3.0.
 
-### Documentación de referencia de la API
-Para crear, obtener y eliminar definiciones para todos los tipos de entidades como endpoints, sistemas, almacenes de datos y colas, consulta la [Referencia de API Software Catalog][8].
+### Documentación de referencia de API {#api-reference-documentation}
+Para crear, obtener y eliminar definiciones para todos los tipos de entidades como puntos de conexión, sistemas, Datastore y colas, consulte la [documentación de referencia de la API de Software Catalog][8].
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [2]: https://github.com/DataDog/schema/tree/main/service-catalog
@@ -323,17 +327,18 @@ Para crear, obtener y eliminar definiciones para todos los tipos de entidades co
 
 {{% tab "v2.2" %}}
 
-### Características principales
+### Características clave {#key-features-1}
 - Anotaciones de usuario
-- Sobreescritura del tipo y los lenguajes detectados automáticamente en el servicio mediante `type` y `languages`.
-- Asociación del pipeline de CI a un servicio mediante el uso de `ci-pipeline-fingerprints`.
-- Lógica de validación menos restrictiva para `contact.type` y `link.type`.
+- Sobrescribiendo el tipo de servicio y los idiomas detectados automáticamente usando `type` y `languages`
+- Asociar la canalización CI con un servicio usando `ci-pipeline-fingerprints`
+- Lógica de validación menos restrictiva para `contact.type` y `link.type`
 
-### Estructura del esquema
+### Estructura del esquema {#schema-structure-1}
 
 El [esquema completo está disponible en GitHub][1].
 
 Ejemplo de YAML:
+
 ```yaml
 schema-version: v2.2
 dd-service: shopping-cart
@@ -397,11 +402,11 @@ extensions:
     customField2: customValue2
 ```
 
-### Documentación de referencia de la API
+### Documentación de referencia de la API {#api-reference-documentation-1}
 
-- Para crear, obtener y eliminar definiciones de servicio, consulta la [Referencia de la API de definiciones de servicio][4].
-- Para crear, obtener y eliminar definiciones de nuevos tipos de componentes como sistemas, almacenes de datos y colas, consulta la [Referencia de la API de Software Catalog][3].
-- Para crear y actualizar las reglas y resultados del servicio scorecard, consulta la [Referencia de la API de Service Scorecards][2].
+- Para crear, obtener y eliminar definiciones de servicio, consulte la [referencia de la API de Service Definitions][4].
+- Para crear, obtener y eliminar definiciones para nuevos tipos de componentes como sistemas, Datastore y colas, consulte la [referencia de la API de Software Catalog][3].
+- Para crear y actualizar reglas y resultados de los Scorecards de servicio, consulte la [referencia de la API de Scorecards del Servicio][2].
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [2]: /es/api/latest/service-scorecards/
@@ -412,17 +417,18 @@ extensions:
 
 {{% tab "v2.1" %}}
 
-### Características principales
-- Nuevos elementos de interfaz de usuario, como las agrupaciones de servicios y los campos `application`, `tier` y `lifecycle`.
-- `Application` y `Teams` pueden utilizarse como variables de agrupación en Software Catalog.
-- El campo `Lifecycle` indica la fase de desarrollo para diferenciar entre los servicios `production`, `experimental` o `deprecated`.
-- El campo `Tier` indica la prioridad del servicio durante el triaje de incidentes.
+### Características clave {#key-features-2}
+- Nuevos elementos de la UI, como agrupaciones de servicios y campos para `application`, `tier` y `lifecycle`
+- `Application` y `Teams` pueden usarse como variables de agrupamiento en el Software Catalog
+- `Lifecycle` el campo indica la etapa de desarrollo para diferenciar entre `production`, `experimental` o `deprecated` servicios
+- `Tier` el campo indica la criticidad del servicio para priorizar durante la clasificación de incidentes
 
-### Estructura del esquema
+### Estructura del esquema {#schema-structure-2}
 
 El [esquema completo está disponible en GitHub][1].
 
-Ejemplo YAML:
+Ejemplo de YAML:
+
 ```yaml
 schema-version: v2.1
 dd-service: delivery-state-machine
@@ -455,11 +461,11 @@ tags:
   - "business-unit:operations"
 ```
 
-### Documentación de referencia de la API
+### Documentación de referencia de la API {#api-reference-documentation-2}
 
-- Para crear, obtener y eliminar definiciones de servicio, consulta la [Referencia de la API de definiciones de servicio][4].
-- Para crear, obtener y eliminar definiciones de nuevos tipos de componentes como sistemas, almacenes de datos y colas, consulta la [Referencia de la API de Software Catalog][3].
-- Para crear y actualizar las reglas y resultados del servicio scorecard, consulta la [Referencia de la API de Service Scorecards][2].
+- Para crear, obtener y eliminar definiciones de servicio, consulte la [referencia de la API de Definiciones de Servicio][4].
+- Para crear, obtener y eliminar definiciones para nuevos tipos de componentes como sistemas, almacenes de datos y colas, consulte la [referencia de la API del Software Catalog][3].
+- Para crear y actualizar reglas y resultados del Scorecard del servicio, consulte la [referencia de la API de Service Scorecards][2].
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.1
 [2]: /es/api/latest/service-scorecards/
@@ -470,17 +476,18 @@ tags:
 
 {{% tab "v2.0" %}}
 
-### Características principales
+### Características clave {#key-features-3}
 - Metadatos básicos del servicio
-- Asociaciones de equipos
+- Asociaciones de equipo
 - Información de contacto
 - Enlaces externos
 
-### Estructura del esquema
+### Estructura del esquema {#schema-structure-3}
 
 El [esquema completo está disponible en GitHub][1].
 
-Ejemplo YAML:
+Ejemplo de YAML:
+
 ```yaml
 schema-version: v2
 dd-service: delivery-api
@@ -505,11 +512,11 @@ integrations:
   pagerduty: https://datadog.pagerduty.com/service-directory/PXZNFXP
 ```
 
-### Documentación de referencia de la API
+### Documentación de referencia de la API {#api-reference-documentation-3}
 
-- Para crear, obtener y eliminar definiciones de servicio, consulta la [Referencia de la API de definiciones de servicio][4].
-- Para crear, obtener y eliminar definiciones de nuevos tipos de componentes como sistemas, almacenes de datos y colas, consulta la [Referencia de la API Software Catalog][3].
-- Para crear y actualizar las reglas y resultados del servicio scorecard, consulta la [Referencia de la API de Service Scorecards][2].
+- Para crear, obtener y eliminar definiciones de servicio, consulte la [referencia de la API de Definiciones de Servicio][4].
+- Para crear, obtener y eliminar definiciones para nuevos tipos de componentes como sistemas, almacenes de datos y colas, consulte la [referencia de la API del Software Catalog][3].
+- Para crear y actualizar reglas y resultados del Scorecard del servicio, consulte la [referencia de la API de Service Scorecards][2].
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v2
 [2]: /es/api/latest/service-scorecards/
@@ -521,17 +528,40 @@ integrations:
 {{< /tabs >}}
 
 
-## Crear extensiones personalizadas
+## Crear extensiones personalizadas {#build-custom-extensions}
 
-<div class="alert alert-info">La disponibilidad de las extensiones personalizadas es limitada.</div>
+<div class="alert alert-info">Las extensiones personalizadas están en disponibilidad limitada para todas las versiones del esquema.</div>
 
-El campo `extensions` es compatible con todas las versiones. Puedes incorporar este campo personalizado a los procesos de despliegue para estandarizar y codificar las prácticas recomendadas.
+Las extensiones personalizadas permiten adjuntar metadatos específicos de la organización a las entidades, habilitando el soporte para herramientas y flujos de trabajo personalizados. Por ejemplo, utiliza el `extensions` campo para incluir notas de lanzamiento, etiquetas de cumplimiento o modelos de propiedad en tus definiciones de entidad.
 
+Datadog también admite claves de extensión específicas para ciertas características. Estas incluyen:
+- `datadoghq.com/dora-metrics`: Define patrones de ruta de código fuente para filtrar commits de Git al calcular [métricas DORA][21].
+- `datadoghq.com/cd-visibility`: Controla qué commits se consideran parte de un despliegue en [CD Visibility][22].
+
+El siguiente ejemplo define una extensión personalizada utilizada para gestionar la programación de lanzamientos a través de entornos:
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.2
-dd-service: web-store
-team: shopist
-...
+apiVersion: v3
+kind: system
+metadata:
+  name: payment-platform
+  displayName: "Payment Platform"
+  links:
+    - name: Runbook
+      type: runbook
+      url: https://runbook/payment-platform
+  contacts:
+    - name: Payment Team
+      type: team
+      contact: https://www.slack.com/archives/payments
+  owner: payments-team
+  additionalOwners:
+    - name: finance-team
+      type: stakeholder
+spec:
+  components:
+    - service:payment-api
+    - queue:payment-requests
+    - datastore:payment-db
 extensions:
   shopist.com/release-scheduler:
     release-manager:
@@ -545,16 +575,16 @@ extensions:
 {{< /code-block >}}
 
 
-## Validación de esquemas a través del complemento IDE 
+## Validación de esquema a través del complemento de IDE {#schema-validation-through-ide-plugin}
 
-Datadog proporciona un [Esquema JSON][18] para las definiciones, de modo que al editar una definición en un [IDE compatible][19], se proporcionen funciones como autocompletar y validación.
+Datadog proporciona un [Esquema JSON][18] para definiciones, de modo que cuando editas una definición en un [IDE compatible][19], se ofrecen características como autocompletar y validación.
 
-{{< img src="tracing/software_catalog/ide_plugin.png" alt="Corregir problema de reconocimiento de VSCode" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/ide_plugin.png" alt="VSCode detecta un problema para corregir" style="width:100%;" >}}
 
-El [Esquema JSON para definiciones de Datadog ][20] está registrado en el [Almacén de esquemas][19] de código abierto.
+El [esquema JSON para definiciones de Datadog][20] está registrado en el [Schema Store][19] de código abierto.
 
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -574,3 +604,5 @@ El [Esquema JSON para definiciones de Datadog ][20] está registrado en el [Alma
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
+[21]: /es/dora_metrics/setup/#handling-multiple-services-in-the-same-repository
+[22]: /es/continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

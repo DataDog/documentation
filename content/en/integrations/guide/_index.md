@@ -32,6 +32,7 @@ cascade:
     {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Cluster Monitoring for VMware Tanzu{{< /nextlink >}}
     {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/microsoft_teams_troubleshooting" tag=" Microsoft Teams" >}}Troubleshooting Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/microsoft_teams_migrate_legacy_connectors" tag=" Microsoft Teams" >}}Migrate from Office 365 Connectors in Microsoft Teams{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="AWS guides" >}}

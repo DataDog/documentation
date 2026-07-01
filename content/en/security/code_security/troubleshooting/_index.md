@@ -49,7 +49,7 @@ When uploading results from third-party static analysis tools to Datadog, ensure
 To upload a SARIF report, follow the steps below:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
+2. Optionally, set a [`DD_SITE` variable][24] (this defaults to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
 
    ```bash
@@ -78,6 +78,15 @@ is too large, consider the following options:
 
 Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
+### No PR comments or PR gates for third-party SARIF uploads
+
+[PR comments][25] and [PR gates][26] are only supported for results produced by Datadog's official static analysis tools:
+
+- [`datadog-static-analyzer`](https://github.com/DataDog/datadog-static-analyzer)
+- [`datadog-saist`](https://github.com/DataDog/datadog-saist)
+
+If you upload SARIF results from a third-party tool, findings appear in the Datadog UI but do not trigger PR comments or PR gate evaluations.
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
@@ -101,9 +110,9 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
-If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
+If you are using Datadog’s analyzer, [diff-aware scanning][21] is enabled by default. If you are running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
 ### Diff-aware is not working
 
@@ -116,7 +125,7 @@ You can also run datadog-static-analyzer with the `--debug` option to get more i
 
 **Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
 
-## Software Composition Analysis
+## Software Composition Analysis (SCA)
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
 
@@ -125,6 +134,86 @@ For issues with Datadog Software Composition Analysis (SCA), include the followi
 - The URL of your repository (public or private)
 - The name of the branch you ran the analysis on
 - The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
+
+### Scan Java JAR directories
+
+Some Java projects rely on third-party JAR files checked into the repository — for example, in a `lib/` directory — rather than a complete Maven or Gradle manifest. When your build pulls dependencies straight from those JARs, or when your dependency manifests are incomplete or out of sync with what your build actually uses, you can scan the JAR files directly and treat them as the source of truth.
+
+Datadog SBOM generator includes an opt-in parser that extracts Maven metadata embedded in each JAR and reports every detected artifact as a Maven component in the resulting SBOM. Use this approach when the JARs on disk are the most reliable record of what your build depends on. For projects with standard Maven or Gradle manifests, scan the supported manifests instead — they give you transitive dependencies and source-file matching that the JAR parser cannot.
+
+#### Requirements
+
+- `datadog-sbom-generator` version `1.10.2` or later. See the [releases page on GitHub][27].
+- Each JAR must include Maven metadata at `META-INF/maven/<groupId>/<artifactId>/pom.properties`. JARs without this metadata are skipped with a warning, and scanning continues.
+
+To confirm the JAR parser is available in your installed version, run:
+
+```shell
+datadog-sbom-generator parsers list
+```
+
+Look for `jar` in the output.
+
+#### Enable the JAR parser
+
+The JAR parser is not part of the default parser set. Enable it explicitly with `--enable-parsers jar`:
+
+```shell
+datadog-sbom-generator scan --enable-parsers jar /path/to/lib
+```
+
+Replace `/path/to/lib` with the directory that contains your JAR files. The scanner walks the directory and reads metadata from every file with a `.jar` extension.
+
+<div class="alert alert-warning"><code>--enable-parsers</code> replaces the default parser set. To scan JARs and standard manifests in the same run, list every parser you need. Otherwise, run separate scans.</div>
+
+To scan JAR files and Maven manifests together:
+
+```shell
+datadog-sbom-generator scan --enable-parsers jar,maven /path/to/repository
+```
+
+#### Upload the SBOM to Datadog
+
+Save the SBOM to a file, then upload it with `datadog-ci`:
+
+```shell
+datadog-sbom-generator scan \
+    --enable-parsers jar \
+    --output sbom.json \
+    /path/to/lib
+
+datadog-ci sbom upload sbom.json
+```
+
+Set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` in your CI environment before you run the upload.
+
+#### How the JAR parser identifies components
+
+When Maven packages a JAR, it embeds a `pom.properties` file at:
+
+```text
+META-INF/maven/<groupId>/<artifactId>/pom.properties
+```
+
+The parser reads the `groupId`, `artifactId`, and `version` from that file and emits one Maven component per detected entry. A single JAR can contain more than one `pom.properties` entry — the parser emits one component for each.
+
+Components detected this way carry two SBOM properties:
+
+| Property | Value | Meaning |
+|---|---|---|
+| `datadog:opaque` | `true` | The component was detected from a binary, not a source manifest. |
+| `datadog:is-direct` | `true` | Every JAR present on disk is treated as a direct dependency. |
+
+#### Limitations
+
+The JAR parser is intentionally narrow. Use it with these constraints in mind:
+
+- Only files with a `.jar` extension are scanned. Other ZIP-based archives, including `.war` and `.ear`, are not scanned.
+- JARs without `META-INF/maven/.../pom.properties` are skipped. Components without embedded Maven metadata are not reported.
+- Transitive dependencies are not resolved. Each detected JAR is reported as a direct dependency.
+- Source-file matching is not available for components detected through the JAR parser.
+
+If you need transitive resolution, source matching, or richer dependency context, scan the standard Maven or Gradle manifests instead. The JAR parser is the right tool when your build does not have a trustworthy manifest to scan.
 
 ### Issues with SBOM uploads
 While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
@@ -155,7 +244,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
@@ -185,27 +274,27 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 - **Invalid purl**: The package URL is present but not in a valid purl format.
 - **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
-## No vulnerabilities detected by Software Composition Analysis
+### No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] {{< ui >}}Security{{< /ui >}} view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
-### Confirming runtime detection is enabled
+#### Confirming runtime detection is enabled
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.sca.host_instance`. If the metric doesn't exist, then there are no services running Runtime Software Composition Analysis (SCA). If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
-### Confirm tracer versions are updated
+#### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the Application Security product set up documentation to validate you you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
-### Ensure the communication of telemetry data
+#### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
@@ -216,13 +305,13 @@ Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corres
 
 If you have enabled Runtime Code Analysis (IAST) on your services, you can use the metric `datadog.appsec.risk_management.iast.host_instance` to check if it is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.iast.host_instance`. If the metric doesn't exist, then there are no services running Runtime Code Analysis (IAST). If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
@@ -232,7 +321,7 @@ A **committer** is an active Git contributor identified by the `author_email` fi
 
 A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
-Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
+Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
 ### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
@@ -243,10 +332,19 @@ Commits using `@users.noreply.github.com` are not automatically excluded. These 
 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
+### Deduplicating committers across email addresses
+In some cases, a single developer's commits can be split across multiple Git author emails. For example, a developer might set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold, each counts as a separate committer.
+
+For repositories hosted on GitHub, Datadog can map each Git author email to the underlying GitHub user so that the developer is counted once, even when they push under different emails. This requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
+
+This mapping is available for GitHub repositories only. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not deduplicated.
+
+If your committer count looks higher than expected for GitHub repositories, check that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
+
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning your repositories through Datadog-hosted scanning, navigate to Code Security [**Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to Code Security [{{< ui >}}Setup{{< /ui >}}][17], click {{< ui >}}Enable scanning for your repositories{{< /ui >}}, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services
@@ -265,12 +363,12 @@ If you enabled SCA through the <code>DD_APPSEC_SCA_ENABLED</code> environment va
 
 To disable SCA through the UI, you can:
 
-* Go to the [Code Security Setup page][1] and select **Activate runtime detection of library vulnerabilities"**. In this table, you can disable services that were previously activated.
+* Go to the [Code Security Setup page][1] and select {{< ui >}}Activate runtime detection of library vulnerabilities{{< /ui >}}. In this table, you can disable services that were previously activated.
 
 or
 
-* Go to [Services][2], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
-* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
+* Go to [Services][2], select {{< ui >}}Software Composition Analysis (SCA){{< /ui >}}. Under {{< ui >}}Coverage{{< /ui >}}, hover over a service's SCA icon and then click {{< ui >}}Deactivate{{< /ui >}}.
+* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under {{< ui >}}Bulk Actions{{< /ui >}} select {{< ui >}}Deactivate Software Composition Analysis (SCA) on x services{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://app.datadoghq.com/security/code-security/inventory/services
@@ -295,7 +393,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [3]: /security/code_security/static_analysis/github_actions#inputs
 [4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
+[6]: /tracing/troubleshooting/connection_errors/
 [7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
@@ -304,6 +402,14 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [16]: https://app.datadoghq.com/services?&lens=Security
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://www.datadoghq.com/blog/monitoring-flask-apps-with-datadog/
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options
+[19]: /tracing/trace_collection/dd_libraries/python/
 [20]: /security/configuration/code-security/setup?steps=iast
+[21]: /security/code_security/static_analysis/setup/#diff-aware-scanning
+[22]: /tracing/troubleshooting/
+[23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[24]: /getting_started/site/
+[25]: /security/code_security/dev_tool_int/pull_request_comments/
+[26]: /pr_gates/
+[27]: https://github.com/DataDog/datadog-sbom-generator/releases
+[28]: /integrations/github/
+[29]: https://app.datadoghq.com/integrations/github/

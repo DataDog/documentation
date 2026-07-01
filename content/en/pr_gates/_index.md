@@ -34,6 +34,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
   tag: "Blog"
   text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
+- link: "/tests/guides/setup_new_flaky_pr_gate/"
+  tag: "Documentation"
+  text: "Set up a New Flaky Test PR Gate"
 ---
 
 ## Overview
@@ -58,7 +61,7 @@ You can configure PR Gates rules for the following categories. Please note that 
 After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
 <div class="alert alert-warning">
-  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository). PR Gates can not be set as required on GitHub repositories using a merge queue.
 </div>
 
 ## Rule types
@@ -106,9 +109,12 @@ You can create rules to block code changes from being merged when a pull request
 
 {{< img src="pr_gates/setup/flaky_tests.png" alt="A PR Gate rule that fails when a pull request introduces at least one new flaky test" style="width:80%" >}}
 
-Use this PR Gate together with [Early Flake Detection][1] to detect newly added flaky tests.
+Use this PR Gate together with [Early Flake Detection][1] to detect new flaky tests.
+
+Read [how to set up a New Flaky Test PR Gate][2].
 
 [1]: /tests/flaky_tests/early_flake_detection
+[2]: /tests/guides/setup_new_flaky_pr_gate/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -116,7 +122,7 @@ To create a PR Gate rule, see the [Setup documentation][7].
 
 ## Manage rules
 
-You can manage and update PR Gates rules on the [**PR Gates Rules**][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
+You can manage and update PR Gates rules on the [{{< ui >}}PR Gates Rules{{< /ui >}}][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
 
 You can see all of the rules defined by the organization.
 

@@ -11,13 +11,16 @@ Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 
 Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
 
-### Step 1 - Install the SDK
 
+## Setup
+{% stepper level="h4" %}
+
+{% step title="Install the SDK" %}
 1. Install the [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. (Android only) Configure your project to use [Gradle templates][8], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+3. (Android only) Configure your project to use [Gradle templates][8], and enable both {% ui %}Custom Main Template{% /ui %} and {% ui %}Custom Gradle Properties Template{% /ui %}.
 
 4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
@@ -39,50 +42,54 @@ constraints {
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js"></script>
 ```
+{% /step %}
 
-### Step 2 - Specify application details in the UI
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][11].
-2. Choose **Unity** as the application type.
+{% step title="Specify application details in the UI" %}
+1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][11].
+2. Choose {% ui %}Unity{% /ui %} as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][12].
+{% /step %}
 
-### Step 3 - Configure Datadog settings in Unity
+{% step title="Configure Datadog settings in Unity" %}
 
-After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the left hand side.
+After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your {% ui %}Project Settings{% /ui %} and click on the {% ui %}Datadog{% /ui %} section on the left hand side.
 
 The following parameters are available:
 
 | Parameter | Required? | Description |
 | --------- | --------- | ----------- |
-| Enable Datadog | No | Whether Datadog should be enabled. Disabling Datadog does not cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls. It only stops the SDK from sending any information. |
-| Output Symbol Files | No | This option enables the output of symbol files for Datadog symbolication and file/line mapping features in Datadog Error Tracking. |
-| Perform Native Stack Mapping | No | Converts C# stacks traces to native stack traces in non-development builds. This allows for file and line mapping to C# code if symbol files are uploaded to Datadog. This is not supported if Output Symbols is disabled.
-| Client Token | Yes | Your client token created for your application on Datadog's website. |
-| Env | No | The name of the environment for your application. Defaults to `"prod"`. |
-| Service Name | No | The service name for your application. If this is not set, it is automatically set to your application's package name or bundle name (e.g.: com.example.android). |
-| Datadog Site | Yes | The site you send your data to. |
-| Batch Size | Yes | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
-| Upload Frequency | Yes | Sets the preferred frequency of uploading data to Datadog. |
-| Batch Processing Level | Yes | Defines the maximum amount of batches processed sequentially without a delay within one reading/uploading cycle. |
-| Enable Crash Reporting | No | Enables crash reporting in the RUM SDK. |
-| Forward Unity Logs | No | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
-| Remote Log Threshold | Yes | The level at which the default logger forwards logs to Datadog. Logs below this level are not sent. |
-| Enable RUM | No | Whether to enable sending data from Datadog's Real User Monitoring APIs |
-| Enable Automatic Scene Tracking | No | Whether Datadog should automatically track new Views by intercepting Unity's `SceneManager` loading. |
-| RUM Application ID | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
-| Session Sample Rate | Yes | The percentage of sessions to send to Datadog. Between 0 and 100. |
-| Trace Sample Rate | Yes | The percentage of distributed traces to send to Datadog. Between 0 and 100. |
-| Trace Context Injection | Yes | Whether to inject trace context into `All` or `Only Sampled` resource requests. |
-| Track Non-Fatal ANRs | No | (Android Only) Whether to track non-fatal ANRs (Application Not Responding) errors. The "SDK Default" option disables ANR detection on Android 30+ because it would create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions. |
-| Track Non-Fatal App Hangs | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
-| First Party Hosts | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
+| {% ui %}Enable Datadog{% /ui %} | No | Whether Datadog should be enabled. Disabling Datadog does not cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls. It only stops the SDK from sending any information. |
+| {% ui %}Output Symbol Files{% /ui %} | No | This option enables the output of symbol files for Datadog symbolication and file/line mapping features in Datadog Error Tracking. |
+| {% ui %}Perform Native Stack Mapping{% /ui %} | No | Converts C# stacks traces to native stack traces in non-development builds. This allows for file and line mapping to C# code if symbol files are uploaded to Datadog. This is not supported if Output Symbols is disabled.
+| {% ui %}Client Token{% /ui %} | Yes | Your client token created for your application on Datadog's website. |
+| {% ui %}Env{% /ui %} | No | The name of the environment for your application. Defaults to `"prod"`. |
+| {% ui %}Service Name{% /ui %} | No | The service name for your application. If this is not set, it is automatically set to your application's package name or bundle name (e.g.: com.example.android). |
+| {% ui %}Datadog Site{% /ui %} | Yes | The site you send your data to. |
+| {% ui %}Batch Size{% /ui %} | Yes | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
+| {% ui %}Upload Frequency{% /ui %} | Yes | Sets the preferred frequency of uploading data to Datadog. |
+| {% ui %}Batch Processing Level{% /ui %} | Yes | Defines the maximum amount of batches processed sequentially without a delay within one reading/uploading cycle. |
+| {% ui %}Enable Crash Reporting{% /ui %} | No | Enables crash reporting in the RUM SDK. |
+| {% ui %}Forward Unity Logs{% /ui %} | No | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
+| {% ui %}Remote Log Threshold{% /ui %} | Yes | The level at which the default logger forwards logs to Datadog. Logs below this level are not sent. |
+| {% ui %}Enable RUM{% /ui %} | No | Whether to enable sending data from Datadog's Real User Monitoring APIs |
+| {% ui %}Enable Automatic Scene Tracking{% /ui %} | No | Whether Datadog should automatically track new Views by intercepting Unity's `SceneManager` loading. |
+| {% ui %}RUM Application ID{% /ui %} | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
+| {% ui %}Session Sample Rate{% /ui %} | Yes | The percentage of sessions to send to Datadog. Between 0 and 100. |
+| {% ui %}Trace Sample Rate{% /ui %} | Yes | The percentage of distributed traces to send to Datadog. Between 0 and 100. |
+| {% ui %}Trace Context Injection{% /ui %} | Yes | Whether to inject trace context into {% ui %}All{% /ui %} or {% ui %}Only Sampled{% /ui %} resource requests. |
+| {% ui %}Track Non-Fatal ANRs{% /ui %} | No | (Android Only) Whether to track non-fatal ANRs (Application Not Responding) errors. The {% ui %}SDK Default{% /ui %} option disables ANR detection on Android 30+ because it would create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions. |
+| {% ui %}Track Non-Fatal App Hangs{% /ui %} | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
+| {% ui %}First Party Hosts{% /ui %} | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
-### Sample RUM sessions
+#### Sample RUM sessions
 
-You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
+You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the {% ui %}Session Sample Rate{% /ui %} as a percentage between 0 and 100 in the {% ui %}Project Settings{% /ui %} window in Unity.
+{% /step %}
+
+{% /stepper %}
 
 ## Using Datadog
 
@@ -163,15 +170,15 @@ Starting a new view automatically ends the previous view.
 
 #### Automatic Scene Tracking
 
-You can also set `Enable Automatic Scene Tracking` in your Project Settings to enable automatically tracking active scenes. This uses Unity's `SceneManager.activeSceneChanged` event to automatically start new scenes.
+You can also set {% ui %}Enable Automatic Scene Tracking{% /ui %} in your {% ui %}Project Settings{% /ui %} to enable automatically tracking active scenes. This uses Unity's `SceneManager.activeSceneChanged` event to automatically start new scenes.
 
 #### Web Requests / Resource Tracking
 
 Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][3].
 
-To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `Tracing Sampling Rate`.
+To enable Datadog Distributed Tracing, you must set the {% ui %}First Party Hosts{% /ui %} in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the {% ui %}Tracing Sampling Rate{% /ui %}.
 
-`First Party Hosts` does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
+{% ui %}First Party Hosts{% /ui %} does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
 
 ## Sending data when device is offline
 

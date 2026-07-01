@@ -44,10 +44,10 @@ Use the bar chart when visual comparison across categories matters more than rea
 
 The bar chart widget supports multiple levels of grouping with stacked visualization, enabling you to break down data by multiple dimensions.
 
-- **Stacked mode**: Shows grouped data as layered bars within each category.
-- **Flat mode**: Displays individual bars for each group.
-- **Relative mode**: Shows values as percentages of the total (only for scalar data).
-- **Absolute mode**: Shows raw count values.
+- {{< ui >}}Stacked{{< /ui >}} mode: Shows grouped data as layered bars within each category.
+- {{< ui >}}Flat{{< /ui >}} mode: Displays individual bars for each group.
+- {{< ui >}}Relative{{< /ui >}} mode: Shows values as percentages of the total (only for scalar data).
+- {{< ui >}}Absolute{{< /ui >}} mode: Shows raw count values.
 
 ## Further reading
 

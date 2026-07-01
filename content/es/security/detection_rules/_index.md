@@ -88,7 +88,7 @@ Para ver las reglas de detección predefinidas y personalizadas en Datadog, ve a
 
 Para buscar y filtrar las reglas, utiliza el cuadro de búsqueda y las facetas para consultar por valor. Por ejemplo, para mostrar solo las reglas de un tipo de regla determinado, pasa el ratón por encima del tipo de regla y selecciona `only`. También puedes filtrar por facetas como `source` y `severity` al investigar y clasificar las incidencias entrantes.
 
-{{< img src="security/default_detection_rules.png" alt="La página de configuracion muestra reglas de detección de Cloud SIEM predeterminadas y personalizadas" width="100%">}}
+{{< img src="security/default_detection_rules.png" alt="La página de configuración muestra reglas de detección de Cloud SIEM predeterminadas y personalizadas" width="100%">}}
 
 ## Crear reglas de detección
 

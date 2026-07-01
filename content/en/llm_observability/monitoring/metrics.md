@@ -1,21 +1,34 @@
 ---
-title: LLM Observability Metrics
-description: 'Learn about useful metrics you can generate from LLM Observability data.'
+title: Agent Observability Metrics
+description: 'Learn about useful metrics you can generate from Agent Observability data.'
 further_reading:
     - link: 'llm_observability/'
       tag: "Documentation"
-      text: 'Learn more about LLM Observability'
+      text: 'Learn more about Agent Observability'
     - link: 'monitors/'
       tag: "Documentation"
       text: 'Create and manage monitors to notify your teams when it matters.'
     - link: https://www.datadoghq.com/blog/llm-prompt-tracking
       tag: Blog
       text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+    - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+      tag: "Learning Center"
+      text: "Investigate with LLM Observability"
 ---
 
-After you instrument your application with LLM Observability, you can access LLM Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
+After you instrument your application with Agent Observability, you can access Agent Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
 
-<div class="alert alert-info">Other tags set on spans are not available as tags on LLM Observability metrics.</div>
+<div class="alert alert-info">
+The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog Metrics</a>: numerical values that describe an aspect of your LLM application over time, derived from your LLM spans (counts, distributions of cost, tokens, latency, errors). They are 100%-sampled, follow standard <a href="/developers/guide/data-collection-resolution-retention/">Datadog metric retention</a> (15 months at full granularity), and are queryable from dashboards, monitors, and notebooks like any other Datadog metric.
+<br><br>
+They are distinct from two other things in Agent Observability:
+<ul>
+<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/setup/#data-retention">Agent Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
+<li><strong><a href="/llm_observability/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow Agent Observability trace and experiment retention rather than Datadog metric retention.</li>
+</ul>
+</div>
+
+<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics.</div>
 
 ### Span metrics
 
@@ -35,6 +48,9 @@ After you instrument your application with LLM Observability, you can access LLM
 | `ml_obs.span.llm.prompt.tokens` | Number of tokens used in the prompt | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.completion.tokens` | Tokens generated as a completion during the span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.total.tokens` | Total tokens consumed during the span (input + output + prompt) | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.cache_write.tokens` | Number of input tokens written to the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.cache_read.tokens` | Number of input tokens served from the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.non_cached.tokens` | Number of input tokens that did not interact with the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.characters` | Number of characters in the input sent to the LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.characters` | Number of characters in the output | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 
@@ -47,7 +63,7 @@ After you instrument your application with LLM Observability, you can access LLM
 ### LLM cost metrics
 
 <div class="alert alert-info">
-The unit for estimated cost metrics for LLM Observability is <strong>nanodollars</strong>.
+The unit for estimated cost metrics for Agent Observability is <strong>nanodollars</strong>.
 </div>
 
 | Metric Name | Description | Metric Type | Tags |
@@ -56,7 +72,7 @@ The unit for estimated cost metrics for LLM Observability is <strong>nanodollars
 | `ml_obs.span.embedding.input.cost` | Estimated input cost in an embedding span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.reasoning.cost` | Estimated reasoning output cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.cost` | Estimated output cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
-| `ml_obs.span.llm.total.cost` | Estimated total cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.total.cost` | Estimated total cost in an LLM or embedding span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.cache_write.cost` | Estimated cache write input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.cache_read.cost` | Estimated cache read input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.non_cached.cost` | Estimated non cached input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
@@ -88,8 +104,8 @@ The following metrics are deprecated, and are maintained only for backward compa
 
 ## Next steps
 
-{{< whatsnext desc="Make use of your LLM Observability metrics:" >}}
-    {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate LLM Observability metrics{{< /nextlink >}}
+{{< whatsnext desc="Make use of your Agent Observability metrics:" >}}
+    {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate Agent Observability metrics{{< /nextlink >}}
     {{< nextlink href="monitors/create/" >}}Create a monitor for alerts and notifications{{< /nextlink >}}
 {{< /whatsnext >}}
 

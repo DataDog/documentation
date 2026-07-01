@@ -84,6 +84,17 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/nodejs-vulnerability-apm"
     tag: "Blog"
     text: "Mitigation for Node.js denial-of-service vulnerability affecting Datadog APM"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/datadog-observability-data-and-security"
+    tag: "Blog"
+    text: "How Datadog uses observability data to secure its platform"
+  - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+    tag: "Blog"
+    text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+algolia:
+  tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:
     algolia:
         rank: 70
@@ -133,7 +144,7 @@ Cloud Security includes [Workload Protection][12], [Misconfigurations][11], [Ide
 
 {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 
-To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ##  App and API Protection
 
@@ -154,7 +165,7 @@ Datadog [App and API Protection (AAP)][1] provides observability into applicatio
 
 [Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
 
-After you [set up Sensitive Data Scanner][25], use the Findings page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
+After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui >}} page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
 
 {{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 

@@ -3,7 +3,10 @@ title: Export Monitor Alerts to CSV
 description: "Download monitor alert history as CSV files through hourly monitor data for the past 6 months (Datadog US site only)."
 aliases:
 - /monitors/faq/how-can-i-export-alert-history
+private: true
 ---
+
+<div class="alert alert-warning">The hourly monitor data endpoint is deprecated as of April 2026. The <a href="https://app.datadoghq.com/report/hourly_data/monitor">hourly monitor data</a> link and API only return data up to April 2026.</div>
 
 Download a history of Monitor Alerts through the [hourly monitor data][1], which generates a CSV for the past 6 months (182 days). This CSV is **not** live; it is updated once a week on Monday at 11:59AM UTC.
 
@@ -35,7 +38,7 @@ hour,host_name,alert_name,user,cnt
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5,ap1,ap2" >}}
+{{< site-region region="eu,gov,gov2,us3,us5,ap1,ap2" >}}
 
 This feature is not supported.
 

@@ -11,7 +11,7 @@ further_reading:
 
 {{< callout url=false
  btn_hidden="true" header="Join the Preview!">}}
-Datadog Serverless Monitoring for AWS Lambda Managed Instances is in Preview. To send feedback during the Preview, use the <strong>Share Feedback</strong> option on the <a href="https://app.datadoghq.com/serverless/aws/lambda">Serverless page</a> in Datadog.
+Datadog Serverless Monitoring for AWS Lambda Managed Instances is in Preview. To send feedback during the Preview, use the {{< ui >}}Share Feedback{{< /ui >}} option on the <a href="https://app.datadoghq.com/serverless/aws/lambda">{{< ui >}}Serverless{{< /ui >}} page</a> in Datadog.
 {{< /callout >}}
 
 Datadog provides full visibility into the metrics, logs, and traces emitted by your AWS Lambda Managed Instances. You can monitor your AWS Lambda Managed Instances alongside your other serverless compute services in a single, unified view. This enables you to spot bottlenecks, fix errors, and determine which workloads to refactor to optimize concurrency, whether that means increasing throughput or reducing unnecessary parallel executions.
@@ -35,7 +35,12 @@ To collect [enhanced Lambda metrics][2], set up the [Datadog Lambda Extension][3
 
 To collect traces, use Datadog's standard setup for instrumenting AWS Lambda functions. Choose your runtime:
 
-{{< partial name="serverless/lambda-managed-instances-runtimes.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 ## Data collected
 

@@ -1,4 +1,5 @@
 ---
+id: indexed
 core_product:
 - log management
 - apm

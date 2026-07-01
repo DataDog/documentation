@@ -60,38 +60,45 @@ These packs are available:
 - [AWS CloudTrail][8]
 - [AWS Elastic Load Balancer Logs][9]
 - [AWS Network Load Balancer Logs][10]
+- [AWS WAF][28]
+- [Check Point][29]
 - [Cisco ASA][11]
+- [Cisco Meraki][30]
 - [Cloudflare][12]
+- [CrowdStrike FDR][31]
 - [F5][13]
 - [Fastly][14]
 - [Fortinet Firewall][15]
 - [HAProxy Ingress][16]
+- [Infoblox][32]
 - [Istio Proxy][17]
 - [Juniper SRX Firewall Traffic Logs][18]
 - [Netskope][19]
 - [NGINX][20]
 - [Okta][21]
 - [Palo Alto Firewall][22]
+- [SentinelOne Cloud Funnel EDR][33]
 - [Windows XML][23]
 - [ZScaler ZIA DNS][24]
 - [Zscaler ZIA Firewall][25]
 - [Zscaler ZIA Tunnel][26]
 - [Zscaler ZIA Web Logs][27]
+- [Zscaler ZPA][34]
 
 ## Setup
 
 To set up packs:
 
 1. Navigate to the [Pipelines][1] page.
-1. Click **Packs**.
+1. Click {{< ui >}}Packs{{< /ui >}}.
 1. Click the pack you want to set up.
 1. You can either create a new pipeline from the pack or add the pack to an existing pipelines.
-    - If you clicked **Add to New Pipeline**, in the new pipeline that was created:
+    - If you clicked {{< ui >}}Add to New Pipeline{{< /ui >}}, in the new pipeline that was created:
         - Click the processor group that was added to see the individual processors that the pack added and edit them as needed. See [Processors][2] for more information.
         - See [Set Up Pipelines][3] for information on setting up the rest of the pipeline.
-    - If you clicked **Add to Existing Pipeline**:
+    - If you clicked {{< ui >}}Add to Existing Pipeline{{< /ui >}}:
         1. Select the pipeline you want to add the pack to.
-        1. Click **Add to Existing Pipeline**.
+        1. Click {{< ui >}}Add to Existing Pipeline{{< /ui >}}.
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 
@@ -126,3 +133,10 @@ To set up packs:
 [25]: /observability_pipelines/packs/zscaler_zia_firewall/
 [26]: /observability_pipelines/packs/zscaler_zia_tunnel/
 [27]: /observability_pipelines/packs/zscaler_zia_web_logs/
+[28]: /observability_pipelines/packs/aws_waf/
+[29]: /observability_pipelines/packs/checkpoint/
+[30]: /observability_pipelines/packs/cisco_meraki/
+[31]: /observability_pipelines/packs/crowdstrike/
+[32]: /observability_pipelines/packs/infoblox/
+[33]: /observability_pipelines/packs/sentinel_one/
+[34]: /observability_pipelines/packs/zscaler_zpa/

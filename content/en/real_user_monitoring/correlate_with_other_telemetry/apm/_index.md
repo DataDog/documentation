@@ -26,6 +26,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
     text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
+  - link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+    tag: "Blog"
+    text: "Enable end-to-end visibility into your Java apps with a single command"
 algolia:
   tags: ['rum traces']
 ---
@@ -143,7 +146,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
-    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the SDK head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
@@ -177,7 +180,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+3.  _(Optional)_ Configure the `traceSampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
     ```kotlin
     val tracedHosts = listOf("example.com")
@@ -185,15 +188,15 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
           DatadogInterceptor.Builder(tracedHosts)
-              .setTraceSampler(RateBasedSampler(100f))
+              .setTraceSampleRate(20f)
               .build()
         )
         .build()
     ```
 
 **Note**:
-* `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 [1]: /real_user_monitoring/android/
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
@@ -240,9 +243,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
    **Note**: Distributed tracing works automatically, but trace timings are more accurate after enabling `URLSessionInstrumentation`.
 
-4. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -253,7 +256,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                         "example.com",
                         "api.yourdomain.com"
                     ],
-                    sampleRate: 100
+                    sampleRate: 20
                 )
             )
         )
@@ -277,14 +280,14 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.resourceTracingSamplingRate = 100;
+    config.resourceTracingSamplingRate = 20;
     ```
 
     **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
@@ -311,8 +314,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 {{% tab "Roku RUM" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">RUM for Roku is not available on the US1-FED Datadog site.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">RUM for Roku is not available on the {{< region-param key="dd_datacenter" >}} Datadog site.</div>
 {{< /site-region >}}
 
 1. Set up [RUM Roku Monitoring][1].
@@ -385,7 +388,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% tab "Browser" %}}
 
 1. Visit a page in your application.
-2. In your browser's developer tools, go to the **Network** tab.
+2. In your browser's developer tools, go to the {{< ui >}}Network{{< /ui >}} tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
 [1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
@@ -459,7 +462,7 @@ To view traces from the RUM Explorer:
 
 1. Navigate to your [list of sessions][22] and click on a session that has traces available. You can also query for resources with traces by using`@_dd.trace_id:*`.
 
-When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
+When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a {{< ui >}}View Trace in APM{{< /ui >}} link.
 
 ## Traces to RUM Explorer
 
@@ -467,8 +470,8 @@ When you select a session, the session panel appears with a request duration bre
 
 To view the RUM event from Traces:
 
-1. Within a trace view, click **VIEW** to see all traces created during the view's lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
-1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
+1. Within a trace view, click {{< ui >}}VIEW{{< /ui >}} to see all traces created during the view's lifespan, or {{< ui >}}RESOURCE{{< /ui >}} to see traces associated with the specific resource from the {{< ui >}}Overview{{< /ui >}} tab.
+1. Click {{< ui >}}See View in RUM{{< /ui >}} or {{< ui >}}See Resource in RUM{{< /ui >}} to open the corresponding event in the RUM Explorer.
 
 ## Supported libraries
 

@@ -19,7 +19,7 @@ version of Continuous Profiler with SSI works for host, container, and Kubernete
 
 Continuous Profiler with SSI can be enabled for the following languages:
 
-| Language           | Tracer library version |
+| Language           | SDK version |
 |--------------------|------------------------|
 | Java               | 1.37.0+                |
 | .NET (x86_64 only) | 3.3.1+                 |
@@ -37,7 +37,7 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 {{% tab "Host and container" %}}
 
 1. Go to the [Agent Installation Page][2] and select one of Linux platforms or Docker.
-1. Toggle the "Enable APM Instrumentation" switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the tracer library into processes.
+1. Toggle the {{< ui >}}Enable APM Instrumentation{{< /ui >}} switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the SDK into processes.
 1. Copy the installation command into a text editor.
 1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for any new process worth profiling.
 1. Proceed with the rest of the installation instructions, using the modified installation command.
@@ -47,7 +47,7 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 {{% tab "Kubernetes with Helm Chart" %}}
 
 1. Go to the [Agent Installation Page][2] and select Kubernetes, then select Helm Chart.
-1. Open the APM dropdown and toggle the Enable APM Instrumentation switch.
+1. Open the APM dropdown and toggle the {{< ui >}}Enable APM Instrumentation{{< /ui >}} switch.
 1. Add the values below to `datadog-values.yaml` in addition to those indicated by the installation page. The `datadog.profiling.enabled: auto` setting turns on automatic profiler enablement for any new
 process worth profiling.
 1. Proceed with rest of the installation instructions.
@@ -73,7 +73,7 @@ the Datadog Helm chart defaults to an older Agent version.
 {{% tab "Kubernetes with Datadog Operator" %}}
 
 1. Go to the [Agent Installation Page][2] and select Kubernetes, then select Operator.
-1. Open the APM dropdown and toggle the Enable APM Instrumentation switch.
+1. Open the APM dropdown and toggle the {{< ui >}}Enable APM Instrumentation{{< /ui >}} switch.
 1. Add the values below to `datadog-values.yaml` in addition to those indicated by the installation page. The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_PROFILING_ENABLED=auto` environment variable on
 the Cluster Agent turns on automatic profiler enablement for any new process worth profiling.
 1. Proceed with rest of the installation instructions.

@@ -1,4 +1,5 @@
 ---
+id: log_indexing
 title: log indexing
 core_product:
   - log management

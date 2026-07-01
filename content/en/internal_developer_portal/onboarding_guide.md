@@ -1,5 +1,7 @@
 ---
 title: Onboard with Internal Developer Portal
+site_support_id: idp
+description: A phased implementation guide for platform and engineering leaders setting up Datadog's Internal Developer Portal, from planning and data sources to golden paths.
 further_reading:
   - link: 'https://app.datadoghq.com/idp/get-started'
     tag: 'App'
@@ -9,7 +11,7 @@ further_reading:
     text: 'Getting started with Internal Developer Portal'
   - link: '/internal_developer_portal/software_catalog/'
     tag: 'Documentation'
-    text: 'Software Catalog'
+    text: 'Catalog'
   - link: '/internal_developer_portal/scorecards/'
     tag: 'Documentation'
     text: 'Scorecards'
@@ -41,7 +43,7 @@ Recommendations:
 
 ## Phase 2: Familiarize yourself with tooling
 
-1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what to use as sources of truth for your [Software Catalog][7]:
+1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what to use as sources of truth for your [Catalog][7]:
 
    - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Log Management.
    - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
@@ -85,25 +87,25 @@ Recommendations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /internal_developer_portal/software_catalog/entity_model/entity_types/
+[2]: /internal_developer_portal/catalog/entity_model/native_entities/
 [3]: /internal_developer_portal/scorecards/
 [4]: /internal_developer_portal/self_service_actions/
-[5]: /internal_developer_portal/software_catalog/set_up/ownership
-[6]: /internal_developer_portal/software_catalog/entity_model/
-[7]: /internal_developer_portal/software_catalog/
+[5]: /internal_developer_portal/catalog/set_up/ownership
+[6]: /internal_developer_portal/catalog/entity_model/
+[7]: /internal_developer_portal/catalog/
 [8]: /api/latest/software-catalog/
 [9]: /integrations/jira/
 [10]: /integrations/pagerduty/
 [11]: https://app.datadoghq.com/software/self-service-actions
 [12]: /internal_developer_portal/eng_reports/
-[13]: /internal_developer_portal/software_catalog/set_up/create_entities/#github-integration
-[14]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage
-[15]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow
+[13]: /internal_developer_portal/catalog/set_up/create_entities/#github-integration
+[14]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
+[15]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
 [16]: /internal_developer_portal/integrations
-[18]: /internal_developer_portal/software_catalog/entity_model?tab=v30#build-custom-extensions
+[18]: /internal_developer_portal/catalog/entity_model?tab=v30#build-custom-extensions
 [19]: /internal_developer_portal/scorecards/custom_rules
 [20]: /internal_developer_portal/scorecards/scorecard_configuration#group-rules-into-levels
-[23]: /internal_developer_portal/software_catalog/set_up/discover_entities
-[24]: /internal_developer_portal/software_catalog/set_up/create_entities
+[23]: /internal_developer_portal/catalog/set_up/discover_entities
+[24]: /internal_developer_portal/catalog/set_up/create_entities
 [25]: /getting_started/tagging/unified_service_tagging
 [26]: /tracing/services/inferred_services

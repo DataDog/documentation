@@ -32,17 +32,17 @@ This step describes how to set up your service to use AAP.
 
 <div class="alert alert-info">If your service is already using AAP, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
 
-1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
+1. Go to [{{< ui >}}Catalog{{< /ui >}}][2], click the {{< ui >}}Security{{< /ui >}} lens, and search for your login service name. 
 
-   {{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog.png" alt="Catalog with a service managing authentication" style="width:100%;" >}}
 
-2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+2. Click on the service to open its details. If the {{< ui >}}Threat management{{< /ui >}} pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
-   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
 
-   If AAP isn't enabled, the panel displays the **Discover AAP** button.
+   If AAP isn't enabled, the panel displays the {{< ui >}}Discover AAP{{< /ui >}} button.
 
-   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
 
    To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-aap-on-your-login-service).
 
@@ -52,20 +52,20 @@ To enable AAP on your login service, ensure you meet the following requirements:
 
 * Similarly to Datadog APM, AAP requires a library integration in your services and a running Datadog Agent.  
 * AAP generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
-* At a minimum, **Threat Detection** must be enabled. Ideally, **Automatic user activity event tracking** should be enabled as well.
+* At a minimum, {{< ui >}}Threat Detection{{< /ui >}} must be enabled. Ideally, {{< ui >}}Automatic user activity event tracking{{< /ui >}} should be enabled as well.
 
 To enable AAP using a new deployment, use the `APPSEC_ENABLED` environment variable/library configuration or [Remote Configuration][11]. You can use either method, but Remote Configuration can be set up using the Datadog UI.
 
 **To enable AAP using Remote Configuration**, and without having to restart your services, do the following:
 
 1. Go to [AAP onboarding][5].  
-2. Click **Enable App & API Protection**.   
-3. In **Activate on your APM services**, click **Select Services.**
-4. Select your service(s), and then click **Next** and proceed with the setup instructions.
+2. Click {{< ui >}}Enable App & API Protection{{< /ui >}}.   
+3. In {{< ui >}}Activate on your APM services{{< /ui >}}, click {{< ui >}}Select Services{{< /ui >}}.
+4. Select your service(s), and then click {{< ui >}}Next{{< /ui >}} and proceed with the setup instructions.
 
 When you see traces from your service in [AAP Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
-For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog Tracing Libraries][7].
+For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog SDKs][7].
 
 ### Step 1.3: Validating login information is automatically collected
 
@@ -76,8 +76,8 @@ After you have enabled AAP, you can validate that login information is collected
 To validate login information is collected, do the following:
 
 1. Go to [Traces][8] in AAP.   
-2. Look for traces tagged with login activity from your login service. For example, in **Search for**, you might have `@appsec.security_activity:business_logic.users.login.*`.  
-3. Check if all your login services are reporting login activity. You can see this in the **Service** facet.
+2. Look for traces tagged with login activity from your login service. For example, in {{< ui >}}Search for{{< /ui >}}, you might have `@appsec.security_activity:business_logic.users.login.*`.  
+3. Check if all your login services are reporting login activity. You can see this in the {{< ui >}}Service{{< /ui >}} facet.
 
 {{<img src="security/ato/guide_trace_explorer.png" alt="AAP Trace explorer showing a steady state of login failures and successes, with a few spikes" style="width:100%;" >}}
 
@@ -88,9 +88,9 @@ To validate login information is collected, do the following:
 To validate that login metadata is collected, do the following:
 
 1. Go to [Traces][8] in AAP.   
-2. Look for traces tagged with successful and failed login activity from your login service. You can update the search query in **Search for** to filter `business_logic.users.login.success` or `business_logic.users.login.failure`. 
+2. Look for traces tagged with successful and failed login activity from your login service. You can update the search query in {{< ui >}}Search for{{< /ui >}} to filter `business_logic.users.login.success` or `business_logic.users.login.failure`. 
 3. Open a trace.  
-4. On the **Security** tab, review the **Business Logic Event**.
+4. On the {{< ui >}}Security{{< /ui >}} tab, review the {{< ui >}}Business Logic Event{{< /ui >}}.
 5. Check if the event is for a false user.
 
 {{<img src="security/ato/guide_trace_login_fail.png" alt="AAP login trace showing a login failure event and complete metadata" style="width:100%;" >}}
@@ -118,7 +118,6 @@ To manually instrument your services, do the following:
 2. For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. Make sure to add the following metadata:
    * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts. Also, this field provides information on the location of the database used by the attacker. This value shouldn't be confused with `usr.id`.
    * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
-   * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
 
 **After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
 
@@ -131,7 +130,7 @@ This approach requires that [Remote Configuration][11] is enabled and working. V
 To use custom In-App WAF rules, do the following:
 
 1. Open the [In-App WAF custom rule creation form][24].   
-2. Name your rule and select the **Business Logic** category.   
+2. Name your rule and select the {{< ui >}}Business Logic{{< /ui >}} category.   
 3. Set the rule type as `users.login.failure` for login failures and `users.login.success` for login successes.
    {{<img src="security/ato/guide_waf_instrumentation.png" alt="Custom WAF rule creation form populated with a new login instrumentation rule" style="width:100%;" >}}
 4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`), and the status code (403 for failures, 302 or 200 for success).  
@@ -142,7 +141,7 @@ To use custom In-App WAF rules, do the following:
 7. Set the `Tag` field to the name of the tag where you want to save the value captured using `usr.login`.
    {{<img src="security/ato/guide_waf_instrumentation_tagged.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
 
-8. Click **Save**. The rule is automatically sent to every instance of the service and then begins capturing login failures. 
+8. Click {{< ui >}}Save{{< /ui >}}. The rule is automatically sent to every instance of the service and then begins capturing login failures. 
 
 **To validate that the instrumentation is correct**, see [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
 
@@ -150,13 +149,13 @@ For more details, see [Tracking business logic information without modifying the
 
 ## Phase 2: Preparing for ATO campaigns
 
-After setting up instrumentation for your services, AAP monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] **Business logic** section. 
+After setting up instrumentation for your services, AAP monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] {{< ui >}}Business logic{{< /ui >}} section. 
 
 {{<img src="security/ato/guide_overview_card.png" alt="Overview of the login activity and of ATO-related signals" style="width:100%;" >}}
 
 AAP detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
 
-The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
+The severity of the signal is set based on the urgency of the threat: from {{< ui >}}Low{{< /ui >}} in case of unsuccessful attacks to {{< ui >}}Critical{{< /ui >}} in case of successful account compromises.
 
 The actions covered in the next sections help you to identify and leverage detections faster.
 
@@ -166,7 +165,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select **Signal** and remove all entries except **App and API Protection**.
+3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App and API Protection{{< /ui >}}.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
@@ -182,11 +181,11 @@ In microservice environments, services are generally reached by internal hosts r
  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
-  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
+  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the SDK to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.
-* Multiple headers are populated. You can see this in a trace's **See more details** in the **Request** block.
+* Multiple headers are populated. You can see this in a trace's {{< ui >}}See more details{{< /ui >}} in the {{< ui >}}Request{{< /ui >}} block.
   * **Problem:** Normal request headers (for example, `accept-encoding`) aren't forwarded to the instrumented service. This impairs the generation of fingerprints (`@appsec.fingerprint.*`) and degrades the signal's ability to isolate an attacker's activity.
   * **Solution:** Forward those headers when calling a subsequent microservice.
 
@@ -200,10 +199,10 @@ You can configure automatic blocking to block IPs identified as part of an attac
 
 To configure automatic blocking, do the following:
 
-1. Go to **AAP** > **Policies** > [Detection Rules][23].  
-2. In **Search**, enter `tag:"category:account_takeover"`.   
-3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for **High** or **Critical** severity.  
-4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**. You may also enable **User automated blocking**.  
+1. Go to {{< ui >}}AAP{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > [Detection Rules][23].  
+2. In {{< ui >}}Search{{< /ui >}}, enter `tag:"category:account_takeover"`.   
+3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for {{< ui >}}High{{< /ui >}} or {{< ui >}}Critical{{< /ui >}} severity.  
+4. In the rule, in {{< ui >}}Define Conditions{{< /ui >}}, in {{< ui >}}Security Responses{{< /ui >}}, enable {{< ui >}}IP automated blocking{{< /ui >}}. You may also enable {{< ui >}}User automated blocking{{< /ui >}}.  
    You can control the blocking behavior per condition. Each rule can have multiple conditions based on your confidence and the attack success. 
 
 **Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, AAP has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
@@ -227,7 +226,7 @@ Many strategies are available, but it's important to understand that the value c
 3. The actor buys access to a botnet, letting them leverage many different IPs to run their attack. There are extreme cases where large campaigns with 500k+ attempts were so distributed that Datadog saw an average of 1.01 requests per IP and a single attempt per account.
 4. When valid credentials are discovered, they might be sold downstream to another actor to leverage them to some end such as financial theft, spam, abuse, etc.
 
-When an attack begins against your systems, the system generates signals labeled **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**, depending on the attacker's strategy.
+When an attack begins against your systems, the system generates signals labeled {{< ui >}}Credential Stuffing{{< /ui >}}, {{< ui >}}Distributed Credential Stuffing{{< /ui >}}, or {{< ui >}}Bruteforce{{< /ui >}}, depending on the attacker's strategy.
 
 ### Step 3.1: Triage
 
@@ -288,14 +287,14 @@ This signal is looking for a large increase in the overall number of login failu
 
 {{<img src="security/ato/guide_signal_distributed_credential_stuffing.png" alt="Signal side-panel showing a distributed stuffing signal" style="width:100%;" >}}
 
-Datadog tries to identify common attributes between the login failures in your service. This can surface defects in the attacker script that can be used to isolate the malicious activity. When found, a section called **Attacker Attributes** is shown. If present, review whether this is legitimate activity by selecting the cluster and clicking on **Explore clusters**.
+Datadog tries to identify common attributes between the login failures in your service. This can surface defects in the attacker script that can be used to isolate the malicious activity. When found, a section called {{< ui >}}Attacker Attributes{{< /ui >}} is shown. If present, review whether this is legitimate activity by selecting the cluster and clicking on {{< ui >}}Explore clusters{{< /ui >}}.
 
 {{<img src="security/ato/guide_cluster_table.png" alt="Table showing the clusters of user attributes detected during the attack. Rows can be selected to narrow the investigation on the activity matching those attributes" style="width:100%;" >}}
 
 If accurate, the activity of the cluster should closely match the increase in login failures while also being low/nonexistent before.  
-If no cluster is available, click **Investigate in full screen** and review the targeted users/IPs for outliers. 
+If no cluster is available, click {{< ui >}}Investigate in full screen{{< /ui >}} and review the targeted users/IPs for outliers. 
 
-If the list is truncated, click **View in AAP Traces Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
+If the list is truncated, click {{< ui >}}View in AAP Traces Explorer{{< /ui >}} and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -343,7 +342,7 @@ Instead, block traits of the request that are unique to the malicious attempt (a
 
 {{<img src="security/ato/guide_cluster_table.png" alt="Table showing the clusters of user attributes detected during the attack. Rows can be selected to narrow the investigation on the activity matching those attributes" style="width:100%;" >}}
 
-In a **Distributed Credential Stuffing campaign** signal, Datadog automatically identifies clear traits and presents them as **Attacker Attributes**. 
+In a {{< ui >}}Distributed Credential Stuffing campaign{{< /ui >}} signal, Datadog automatically identifies clear traits and presents them as {{< ui >}}Attacker Attributes{{< /ui >}}. 
 
 Before blocking, Datadog recommends that you review the activity from the cluster to confirm that the activity is indeed malicious.
 
@@ -353,11 +352,11 @@ The questions you're trying to answer are:
 - Can a meaningful volume of legitimate traffic be caught?  
 - Can blocking based on this cluster be effective?
 
-To do so, select your cluster and click on **Explore clusters**.
+To do so, select your cluster and click on {{< ui >}}Explore clusters{{< /ui >}}.
 
 {{<img src="security/ato/guide_cluster_table_select.png" alt="Table showing the clusters of user attributes detected during the attack. A row a selected and the button Explore clusters is in focus" style="width:100%;" >}}
 
-The **Investigate** explorer appears and provides cluster traffic indicators: a large share of the traffic from the attack and a high proportion of IPs flagged by Threat Intelligence. 
+The {{< ui >}}Investigate{{< /ui >}} explorer appears and provides cluster traffic indicators: a large share of the traffic from the attack and a high proportion of IPs flagged by Threat Intelligence. 
 
 Those are two important indicators: 
 
@@ -368,9 +367,9 @@ Those are two important indicators:
 
 Click an indicator to see further information about the cluster traffic. 
 
-In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster. While comparing it to the AAP data, beware the scale, since APM data may be sampled while AAP's isn't.
+In {{< ui >}}Cluster Activity{{< /ui >}}, there is a visualization of the volume of the overall APM traffic matching this cluster. While comparing it to the AAP data, beware the scale, since APM data may be sampled while AAP's isn't.
 
-In the following example, a lot of traffic comes from before the attack. This means a legitimate activity matches this cluster in normal traffic and it would get blocked if you were to take action. You don't need to escalate or click **Block All Attacking IPs** in the signal.
+In the following example, a lot of traffic comes from before the attack. This means a legitimate activity matches this cluster in normal traffic and it would get blocked if you were to take action. You don't need to escalate or click {{< ui >}}Block All Attacking IPs{{< /ui >}} in the signal.
 
 {{<img src="security/ato/guide_cluster_explorer_fp.png" alt="Cluster activity showing a steady rate of traffic matching those attributes, a strong hint that most of this traffic is legitimate and that the cluster can't be used for blocking" style="width:100%;" >}}
 
@@ -382,15 +381,15 @@ After confirming that the traits match the attackers, you can push an In-App WAF
 
 To create the rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
-2. Click **Create New Rule** and complete the configuration. 
-3. Follow the steps in **Define your custom rule**.   
-4. In **Select the services you want this rule to apply to**, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
+1. Go to {{< ui >}}AAP{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}} > [Custom Rules][33].
+2. Click {{< ui >}}Create New Rule{{< /ui >}} and complete the configuration. 
+3. Follow the steps in {{< ui >}}Define your custom rule{{< /ui >}}.   
+4. In {{< ui >}}Select the services you want this rule to apply to{{< /ui >}}, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
    {{<img src="security/ato/guide_waf_blocking.png" alt="Screenshot of the WAF rule creation modal selecting a specific route on a specific service" style="width:100%;" >}}
-5. In **If incoming requests match these conditions**, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
-   1. If you want to block a specific user agent, paste it in **Values**. In **Operator**, you can use **matches value in list**, or, if you want more flexibility, you can also use **Matches RegEx**.
+5. In {{< ui >}}If incoming requests match these conditions{{< /ui >}}, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
+   1. If you want to block a specific user agent, paste it in {{< ui >}}Values{{< /ui >}}. In {{< ui >}}Operator{{< /ui >}}, you can use {{< ui >}}matches value in list{{< /ui >}}, or, if you want more flexibility, you can also use {{< ui >}}Matches RegEx{{< /ui >}}.
    {{<img src="security/ato/guide_waf_blocking_ua.png" alt="A screenshot of a user agent getting blocked" style="width:100%;" >}}
-6. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
+6. Use the {{< ui >}}Preview matching traces{{< /ui >}} section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
    {{<img src="security/ato/guide_waf_blocking_traces.png" alt="Table showing traces matching your rules" style="width:100%;" >}}
 
 Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a more stealthy answer so that they don't immediately realize they were blocked.
@@ -424,7 +423,7 @@ Next, start by isolating the attack's activity.
 
 Extract the list of targeted users by going to [Signals][1].
 
-You can query the traces for the targeted users by clicking on the **login attempts** link in **Security Traces**.
+You can query the traces for the targeted users by clicking on the {{< ui >}}login attempts{{< /ui >}} link in {{< ui >}}Security Traces{{< /ui >}}.
 
 If you want direct access to the targeted users, you can extract the list from the signal side panel.
 
@@ -444,7 +443,7 @@ Successful logins should be considered suspicious.
 
 This signal flagged a lot of activity coming from a few IPs and is closely related to its distributed variant. You might need to use the distributed credential stuffing method if parts of the attack were missed by the signal.
 
-You can query the traces matched by the attacking IPs by clicking on the **login attempts** link in **Security Traces**.
+You can query the traces matched by the attacking IPs by clicking on the {{< ui >}}login attempts{{< /ui >}} link in {{< ui >}}Security Traces{{< /ui >}}.
 
 If you want direct access to the attacking IPs, you may extract the list from the signal side panel.
 
@@ -468,14 +467,14 @@ In the diffuse attacks case, attacker attributes are available in the signal.
 
 {{<img src="security/ato/guide_signal_distributed_credential_stuffing.png" alt="Screenshot of a distributed credential stuffing signal" style="width:100%;" >}}
 
-1. After opening the signal in the side panel, click **Investigate in full screen**.   
-2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**. Next, in **Traces**, click **View in AAP Traces Explorer**.
+1. After opening the signal in the side panel, click {{< ui >}}Investigate in full screen{{< /ui >}}.   
+2. In {{< ui >}}Attacker Attributes{{< /ui >}}, select the cluster and click on {{< ui >}}Filter this signal by selection{{< /ui >}}. Next, in {{< ui >}}Traces{{< /ui >}}, click {{< ui >}}View in AAP Traces Explorer{{< /ui >}}.
 
 This gets you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query, but you should expand it to also match login successes on top of the failures. You can do that by replacing `@appsec.security_activity:business_logic.users.login.failure` with `@appsec.security_activity:business_logic.users.login.*`. Review the exhaustiveness and accuracy of the filter using [the technique described above](#isolate-attacker-activity).
 
 {{<img src="security/ato/guide_distributed_credential_stuffing_traces.png" alt="Traces explorer filtered by the cluster attributes" style="width:100%;" >}}
 
-In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. Going back to the full page signal and scrolling down to the **Traces** section, you'll find an **Analysis** button. This opens a view where the traffic from the attack is sliced by a large variety of attributes.
+In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. Going back to the full page signal and scrolling down to the {{< ui >}}Traces{{< /ui >}} section, you'll find an {{< ui >}}Analysis{{< /ui >}} button. This opens a view where the traffic from the attack is sliced by a large variety of attributes.
 
 {{<img src="security/ato/guide_investigate_overview.png" alt="Analysis side panel opened with an attack and some suggested attributes in a table" style="width:100%;" >}}
 
@@ -483,7 +482,7 @@ The most common attributes are presented at the top of a table, but you can visu
 
 {{<img src="security/ato/guide_investigate_correlation.png" alt="Some timeseries from the Analysis tab demonstrating sometimes low correlation, and sometimes high correlation" style="width:100%;" >}}
 
-Upon identifying the attributes, select them from the list and double check their exhaustiveness by toggling on and off the **Filtering enabled** button. Once you're satisfied, click on **View Traces** to dive further into the impacted users.
+Upon identifying the attributes, select them from the list and double check their exhaustiveness by toggling on and off the {{< ui >}}Filtering enabled{{< /ui >}} button. Once you're satisfied, click on {{< ui >}}View Traces{{< /ui >}} to dive further into the impacted users.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -525,7 +524,7 @@ You can either use Datadog's built-in blocking capabilities to deny any request 
 
 ### Datadog blocking
 
-Users that are part of the traffic blocked by Datadog see a **You're blocked** page, or receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
+Users that are part of the traffic blocked by Datadog see a {{< ui >}}You're blocked{{< /ui >}} page, or receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
 
 {{<img src="security/ato/guide_blocked.png" alt="Page shown when user is blocked. Page say 'Sorry, you cannot access this page. Please contact the customer service team'" style="width:100%;" >}}
 
@@ -533,9 +532,9 @@ Users that are part of the traffic blocked by Datadog see a **You're blocked** p
 
 The [Denylist][27] is an efficient way to block a large number of entries, but is limited to IPs and users. If your investigation uncovered a small set of IPs responsible for the attack (`<1000`), blocking these IPs is the best course of action. 
 
-The Denylist can be managed and automated using the Datadog platform by clicking **Automate Attacker Blocking** in the signal. 
+The Denylist can be managed and automated using the Datadog platform by clicking {{< ui >}}Automate Attacker Blocking{{< /ui >}} in the signal. 
 
-Use the **Automate Attacker Blocking** or **Block All Attacking IPs** signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users. As a reminder, Datadog doesn't recommend blocking IPs permanently due to risks of blocking legitimate traffic after IPs get recycled into public pools.  
+Use the {{< ui >}}Automate Attacker Blocking{{< /ui >}} or {{< ui >}}Block All Attacking IPs{{< /ui >}} signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users. As a reminder, Datadog doesn't recommend blocking IPs permanently due to risks of blocking legitimate traffic after IPs get recycled into public pools.  
 
 {{<img src="security/ato/guide_next_steps.png" alt="Menu shown quick responses to the signal, from triaging the signal, to responding to the signal by blocking IPs or compromised users, to enabling automatic blocking" style="width:50%;" >}}
 
@@ -553,15 +552,15 @@ If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluate
 
 To create a new rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
-2. Click **Create New Rule** and complete the configuration. 
-3. Follow the steps in **Define your custom rule**.   
-4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
+1. Go to {{< ui >}}AAP{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}} > [Custom Rules][33].
+2. Click {{< ui >}}Create New Rule{{< /ui >}} and complete the configuration. 
+3. Follow the steps in {{< ui >}}Define your custom rule{{< /ui >}}.   
+4. In {{< ui >}}Select the services you want this rule to apply to{{< /ui >}}, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
 {{<img src="security/ato/guide_waf_blocking.png" alt="Screenshot of the WAF rule creation modal selecting a specific route on a specific service" style="width:100%;" >}}
-5. In **If incoming requests match these conditions**, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
-   1. If you want to block a specific user agent, you can paste it in **Values**. In **Operator**, you can use **matches value in list**, or if you want more flexibility, you can also use a **Matches RegEx**.
+5. In {{< ui >}}If incoming requests match these conditions{{< /ui >}}, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
+   1. If you want to block a specific user agent, you can paste it in {{< ui >}}Values{{< /ui >}}. In {{< ui >}}Operator{{< /ui >}}, you can use {{< ui >}}matches value in list{{< /ui >}}, or if you want more flexibility, you can also use a {{< ui >}}Matches RegEx{{< /ui >}}.
 {{<img src="security/ato/guide_waf_blocking_ua.png" alt="A screenshot of a user agent getting blocked" style="width:100%;" >}}
-6. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
+6. Use the {{< ui >}}Preview matching traces{{< /ui >}} section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
 
 The response is pushed to tracers automatically and blocked traces appear in the [Traces explorer][25].
 
@@ -569,7 +568,7 @@ The response is pushed to tracers automatically and blocked traces appear in the
 
 Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a stealthier response so that attackers don't immediately realize they were blocked.
 
-For more information, see [In-App WAF Rules][30].
+For more information, see [In-App WAF Rules][34].
 
 #### Automated data export
 
@@ -588,7 +587,7 @@ To configure a signal to push a user ID using a webhook, do the following:
 2. In [Detection Rules][30], open the rules you want to configure. 
 {{<img src="security/ato/guide_detection_rules.png" alt="Tables of ATO-related detection rules" style="width:100%;" >}}
 3. Go to the notification settings in a detection rule condition. 
-4. Add a recipient and turn on **Notify** for every new `@usr.id` detected. This allows you to export the list when updates occur.
+4. Add a recipient and turn on {{< ui >}}Notify{{< /ui >}} for every new `@usr.id` detected. This allows you to export the list when updates occur.
 
 {{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
 
@@ -628,21 +627,21 @@ The goals of the cleanup phase are the following:
 
 #### Disabling mitigations
 
-User blocking should be based on the timer you set when you selected **Block All Attacking IPs** in the signal. This user blocking configuration doesn't require any further action.
+User blocking should be based on the timer you set when you selected {{< ui >}}Block All Attacking IPs{{< /ui >}} in the signal. This user blocking configuration doesn't require any further action.
 
 If you configured permanent blocking, unblock users and IPs from the Denylist by doing the following: 
 
 1. Open the [Denylist][27].  
-2. Click **Blocked IPs** or **Blocked users**.  
-3. In the entity list, locate the IP or user, and then click **Unblock**.
+2. Click {{< ui >}}Blocked IPs{{< /ui >}} or {{< ui >}}Blocked users{{< /ui >}}.  
+3. In the entity list, locate the IP or user, and then click {{< ui >}}Unblock{{< /ui >}}.
 
 <!-- <insert up to date screenshot\> -->
 
 #### Disable or delete any custom In-App WAF rule(s)
 
-To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][28] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
+To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][33] and disable the rules by clicking on {{< ui >}}Monitoring{{< /ui >}} or {{< ui >}}Blocking{{< /ui >}}, and selecting {{< ui >}}Disable Rule{{< /ui >}}. 
 
-If the rule is no longer relevant, you can delete it by clicking more options (**...**) and selecting **Delete**.
+If the rule is no longer relevant, you can delete it by clicking more options ({{< ui >}}...{{< /ui >}}) and selecting {{< ui >}}Delete{{< /ui >}}.
 
 #### Validate no legitimate traffic is blocked
 
@@ -673,7 +672,7 @@ Attackers acquire lists of compromised accounts in bulk. By identifying the sour
 
 To identify the source of their database, export users impacted by the attack using one of these options:
 
-* In the signal details, in **Targeted users**, click **Export to CSV**. This option exports up to 10k users.   
+* In the signal details, in {{< ui >}}Targeted users{{< /ui >}}, click {{< ui >}}Export to CSV{{< /ui >}}. This option exports up to 10k users.   
 * If you need to export more than 10k users, manually paginate your query by performing manual [API calls][31]. The Traces explorer performs similar calls, so you can base your requests on the call it's performing by grouping by `@appsec.events_data.usr.login`. Set the limit to 10000 and use smaller time ranges to avoid the backend cap.
 
 {{<img src="security/ato/guide_user_table.png" alt="Table showing the users targeted by the attack. One user is shown in a pill because we have a side-panel with more activity on them" style="width:100%;" >}}
@@ -703,7 +702,7 @@ In this guide, you did the following:
 
 This is general guidance. Depending on your applications and environments, there might be a need for additional response strategies.
 
-[1]: /security/account_takeover_protection/
+[1]: /security/application_security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
 [3]: /security/application_security/setup/compatibility/
 [4]: /remote_configuration
@@ -717,7 +716,7 @@ This is general guidance. Depending on your applications and environments, there
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
-[15]: /security/account_takeover_protection/#attacker-strategies
+[15]: /security/application_security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
 [17]: /security/notifications/
 [18]: https://app.datadoghq.com/security/configuration/notification-rules/new?notificationData=
@@ -733,7 +732,7 @@ This is general guidance. Depending on your applications and environments, there
 [28]: /api/latest/webhooks-integration/
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
-[28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
+[33]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[34]: /security/application_security/policies/inapp_waf_rules/

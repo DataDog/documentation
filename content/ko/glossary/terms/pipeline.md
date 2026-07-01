@@ -1,4 +1,5 @@
 ---
+id: pipeline
 core_product:
 - 로그 관리
 - 관측 가능성 파이프라인

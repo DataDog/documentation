@@ -10,10 +10,17 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
+
 ---
 
 
-In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
+In the {{< ui >}}Profiles{{< /ui >}} tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof,full_host" >}}
 {{< programming-lang lang="java" >}}
@@ -32,13 +39,9 @@ Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
 _Requires: Java 11_
 
-Heap Live Objects (in Preview, 1.17.0+)
-: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_ <br />
-
-Heap Live Size (in Preview, 1.39.0+)
-: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
+Live Heap (v1.61.0+)
+: The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate engine available for your JVM version.<br />
+_Requires: Java 11+_
 
 Wall Time in Native Code
 : The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
@@ -183,9 +186,20 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
+Heap Live Objects
+: The number of objects allocated by each function in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 : Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
+
+Allocated Memory (Preview)
+: The amount of heap memory allocated by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
+
+Allocations (Preview)
+: The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
 
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
@@ -215,7 +229,7 @@ Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
 
-Outgoing HTTP requests (in Timeline) (in beta v3.19+)
+Outgoing HTTP requests (in Timeline) (Preview, v3.19+)
 : Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
 _Requires: .NET 7+_
 
@@ -227,7 +241,7 @@ Garbage Collector CPU consumption (v3.19+)
 : The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
-**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
+**Note**: Before .NET 10, {{< ui >}}Allocations{{< /ui >}} and {{< ui >}}Live Heap{{< /ui >}} profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
 
 
 [1]: /profiler/enabling/dotnet/#requirements
@@ -253,10 +267,10 @@ _Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2
 Thrown Exceptions (v0.92+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type.
 
-File I/O (in beta, v1.7.2+)
+File I/O (Preview, v1.7.2+)
 : The time each method spent reading from and writing to files, as well as the amount of bytes read from and written to files.
 
-Socket I/O (in beta, v1.7.2+)
+Socket I/O (Preview, v1.7.2+)
 : The time each method spent reading from and writing to a socket, as well as the amount of bytes read from and written to sockets.
 
 [1]: /profiler/enabling/php/#requirements

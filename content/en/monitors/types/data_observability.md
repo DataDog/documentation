@@ -49,15 +49,17 @@ Data Observability monitors require [Quality Monitoring][2] to be set up with at
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Data Observability** > **Monitors** > **New Monitor**][6] or [**Monitors** > **New Monitor** > **Data Observability**][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
+To create a Data Observability monitor in Datadog, navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] or [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
 
 ## Choose data to monitor
 
-First, select whether to monitor the **Table** or **Column** level:
+First, select whether to monitor the {{< ui >}}Table{{< /ui >}} or {{< ui >}}Column{{< /ui >}} level:
 
-{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Choose data to monitor: entity type selector, query input, and lineage relationship filter" style="width:60%;" >}}
 
-Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
+Then, use the {{< ui >}}Edit{{< /ui >}} tab to search for tables, views, or columns by typing `key:value` filters into the search field.
+
+**Filter by name or location:**
 
 | Filter | Example | Description |
 |---|---|---|
@@ -66,7 +68,29 @@ Then, use the **Edit** tab to search for tables, views, or columns by typing `ke
 | Database | `database:ANALYTICS_DB` | Match by database. |
 | Account | `account:my_account` | Match by account. |
 
-Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
+**Filter by tag:**
+
+Filter on any tag applied to your data assets by using the tag key as the filter key. For example, if your assets are tagged with `owner`, `platform`, or `environment`, search on those tags directly:
+
+| Example | Description |
+|---|---|
+| `owner:data-platform-team` | Match assets tagged with `owner:data-platform-team`. |
+| `platform:snowflake` | Match assets tagged with `platform:snowflake`. |
+| `environment:production` | Match assets tagged with `environment:production`. |
+
+Tag filters support the same `*` wildcards and quoting as name filters, for example, `owner:data-*` or `platform:"Snowflake Prod"`.
+
+**Filter by computed attribute:**
+
+In addition to your own tags, Datadog computes attributes for your data assets that you can filter on. The available computed attribute is:
+
+| Attribute | Values | Description |
+|---|---|---|
+| `lineage_score` | `0.00`, `0.10`, `0.30`, `0.50`, `0.70`, `0.90`, or `1.00` | A relative measure of how connected an asset is in your lineage graph, based on how many downstream assets depend on it compared to other assets of the same type. Higher values identify the tables, views, and columns that the downstream consumers depend on. |
+
+`lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
+
+Combine any of these filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
 **Examples:**
 
@@ -75,14 +99,14 @@ Combine filters with `AND` or `OR`, use parentheses to group conditions, and pre
 | All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
 | All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
 | Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
+| Tables owned by a specific team | `owner:data-platform-team` |
+| The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
+
+**Filter by lineage relationship:**
+
+To scope your selection to assets that are connected to another asset in your lineage graph, click {{< ui >}}Add Lineage Filter{{< /ui >}}. Choose {{< ui >}}Upstream of{{< /ui >}} or {{< ui >}}Downstream of{{< /ui >}}, then select a specific asset or use the same `key:value` filters to match a set of assets. For example, monitor every table that is upstream of a critical dashboard, or every column downstream of a specific source table.
 
 A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
-
-Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
-
-{{< code-block lang="text" >}}
-search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
-{{< /code-block >}}
 
 ## Select your metric type
 
@@ -91,7 +115,7 @@ Choose a metric type based on the data quality signal you want to track. Each mo
 {{< tabs >}}
 {{% tab "Freshness" %}}
 
-The **Freshness** metric type detects when data has not been updated within an expected time window. Use it to catch stale data before it affects downstream reports or models.
+The {{< ui >}}Freshness{{< /ui >}} metric type detects when data has not been updated within an expected time window. Use it to catch stale data before it affects downstream reports or models.
 
 - **Table freshness** tracks the time elapsed since the table was last updated. Table freshness is not available for views or for data warehouses that do not provide updated timestamps for tables in system metadata. Use column-level freshness instead.
 - **Column freshness** tracks the most recent date seen in a datetime column.
@@ -99,41 +123,41 @@ The **Freshness** metric type detects when data has not been updated within an e
 {{% /tab %}}
 {{% tab "Row Count" %}}
 
-The **Row Count** metric type tracks row count changes in your tables. Use it to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
+The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your tables. Use it to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
 
 {{% /tab %}}
 {{% tab "Column Metric" %}}
 
-**Column** metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
+{{< ui >}}Column{{< /ui >}} metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
 
 | Metric | Description |
 |---|---|
-| **Uniqueness** | The percentage of values in a column that are unique. |
-| **Nullness** | The percentage of values in a column that are null. |
-| **Cardinality** | The number of distinct values in a column. |
-| **Percent Zero** | The percentage of values in a column that are equal to zero. |
-| **Percent Negative** | The percentage of values in a column that are negative. |
-| **Min** | The minimum of all values in a column. |
-| **Max** | The maximum of all values in a column. |
-| **Mean** | The average of all values in a column. |
-| **Standard Deviation** | The measure of variation within values in a column. |
-| **Sum** | The sum of all values in a column. |
+| {{< ui >}}Uniqueness{{< /ui >}} | The percentage of values in a column that are unique. |
+| {{< ui >}}Nullness{{< /ui >}} | The percentage of values in a column that are null. |
+| {{< ui >}}Cardinality{{< /ui >}} | The number of distinct values in a column. |
+| {{< ui >}}Percent Zero{{< /ui >}} | The percentage of values in a column that are equal to zero. |
+| {{< ui >}}Percent Negative{{< /ui >}} | The percentage of values in a column that are negative. |
+| {{< ui >}}Min{{< /ui >}} | The minimum of all values in a column. |
+| {{< ui >}}Max{{< /ui >}} | The maximum of all values in a column. |
+| {{< ui >}}Mean{{< /ui >}} | The average of all values in a column. |
+| {{< ui >}}Standard Deviation{{< /ui >}} | The measure of variation within values in a column. |
+| {{< ui >}}Sum{{< /ui >}} | The sum of all values in a column. |
 
 <div class="alert alert-info">Some column metrics are only available for specific column types. Numeric metrics (Percent Zero, Percent Negative, Min, Max, Mean, Standard Deviation, Sum) require numeric columns.</div>
 
 {{% /tab %}}
 {{% tab "Custom SQL" %}}
 
-The **Custom SQL** metric type tracks a custom metric value returned by a SQL query that you define. Use it when built-in metric types do not cover your use case, such as monitoring business-specific data quality rules.
+The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value returned by a SQL query that you define. Use it when built-in metric types do not cover your use case, such as monitoring business-specific data quality rules.
 
-1. Select a **model type** that describes the value returned by your query:
-    - **Default**: The query returns a scalar value. Use this in most cases.
-    - **Freshness**: The query returns the difference (in seconds) between the current time and the last time an event occurred.
-    - **Percentage**: The query returns a percentage value between 0 and 100.
+1. Select a model type that describes the value returned by your query:
+    - {{< ui >}}Default{{< /ui >}}: The query returns a scalar value. Use this in most cases.
+    - {{< ui >}}Freshness{{< /ui >}}: The query returns the difference (in seconds) between the current time and the last time an event occurred.
+    - {{< ui >}}Percentage{{< /ui >}}: The query returns a percentage value between 0 and 100.
 2. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
-3. Click **Validate** to verify your query syntax.
+3. Click {{< ui >}}Validate{{< /ui >}} to verify your query syntax.
 
-If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the **Group by** field (for example, `column_a, column_b`). Each group is evaluated independently.
+If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the {{< ui >}}Group by{{< /ui >}} field (for example, `column_a, column_b`). Each group is evaluated independently.
 
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
@@ -148,37 +172,38 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 Select a detection method:
 
-- **Anomaly**: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and will be visualized in blue. After training completes, the monitor will be shown in green when in a normal state and red when in an outlier state.
-- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors][8].
+- {{< ui >}}Anomaly{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and will be visualized in blue. After training completes, the monitor will be shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Threshold{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
 
-Add a **WHERE** clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
+Add a {{< ui >}}WHERE{{< /ui >}} clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
 
 - `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())` — only monitor rows from the past week.
 - `region = 'US'` — only monitor data for a specific region.
 
 ### Group by
 
-You can add a **Group by** clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
+You can add a {{< ui >}}Group by{{< /ui >}} clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
 
 {{< img src="monitors/monitor_types/data_observability/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
 
-The default limit is 100 groups per monitor. To increase this limit, [contact Support][9].
+The default limit is 500 groups per monitor. To increase this limit, [contact Support][9].
 
 ### Monitor schedule
 
 Set how often the monitor evaluates your data:
 
-- **Hourly**: The monitor runs every hour.
-- **Daily**: The monitor runs once per day.
+- {{< ui >}}Hourly{{< /ui >}}: The monitor runs every hour.
+- {{< ui >}}Daily{{< /ui >}}: The monitor runs once per day.
+- {{< ui >}}Manual{{< /ui >}}: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule so enough historical data can accumulate for modeling to be useful. Currently, the UI does not support default metrics like row counts and freshness, so this workflow only applies to custom or column-level metrics.
 
 ### Set alert conditions
 
 Choose an aggregation type:
 
-- **Simple Alert**: Send a single notification when any monitored table or column meets the condition.
-- **Multi Alert**: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
+- {{< ui >}}Simple Alert{{< /ui >}}: Send a single notification when any monitored table or column meets the condition.
+- {{< ui >}}Multi Alert{{< /ui >}}: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
 
 ### Example notification
 
@@ -223,25 +248,25 @@ Observed value {{observed}} is within the expected range.
 
 Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
-1. Select **Table** > **Row Count** and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
-1. Select **Anomaly** as the detection method. The monitor triggers when the row count deviates from its historical baseline.
+1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Row Count{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
+1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
 {{% /tab %}}
 {{% tab "Stale table" %}}
 
 Alert when a critical table has not been updated within the expected time window.
 
-1. Select **Table** > **Freshness** and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select **Threshold** as the detection method.
-1. Set the **Alert threshold** to **6 hours** and optionally a **Warning threshold** at **4 hours**.
+1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Freshness{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+1. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
+1. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
 
 {{% /tab %}}
 {{% tab "Null percentage spike" %}}
 
 Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
-1. Select **Column** > **Nullness** and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
-1. Select **Anomaly** as the detection method.
+1. Select {{< ui >}}Column{{< /ui >}} > {{< ui >}}Nullness{{< /ui >}} and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
+1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -252,14 +277,14 @@ For monitors using the **Anomaly** detection method, you can annotate bound rang
 
 {{< img src="/monitors/monitor_types/data_observability/annotate_bounds.png" alt="Hover menu for annotating a monitor bound." style="width:90%;" >}}
 
-On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
+On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a time range on the chart, and choose one of the following annotations:
 
 | Annotation | Description |
 |---|---|
-| **Expected** | Expand bounds to include the marked behavior permanently. |
-| **Reset for now** | Mark behavior as OK, but alert if it happens again. |
-| **Missed alert** | Contract bounds to alert on this behavior. |
-| **Ignore** | Exclude annotated data when modeling bounds. |
+| {{< ui >}}Expected{{< /ui >}} | Expand bounds to include the marked behavior permanently. |
+| {{< ui >}}Reset for now{{< /ui >}} | Mark behavior as OK, but alert if it happens again. |
+| {{< ui >}}Missed alert{{< /ui >}} | Contract bounds to alert on this behavior. |
+| {{< ui >}}Ignore{{< /ui >}} | Exclude annotated data when modeling bounds. |
 
 ## Further Reading
 
@@ -274,3 +299,4 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 [7]: https://app.datadoghq.com/data-obs/monitors
 [8]: /monitors/configuration/?tab=thresholdalert#thresholds
 [9]: /help/
+[10]: /api/latest/data-observability/

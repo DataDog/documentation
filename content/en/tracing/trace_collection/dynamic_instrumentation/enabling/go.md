@@ -13,16 +13,14 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
-
-Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
+Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
 
 ## Prerequisites
 
 Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Go applications also require:
 
 - [Datadog Agent][6] version 7.73.0 or higher, running on the same host as your application.
-- Go tracing library version 1.74.6 or higher (major version 1), or version 2.2.3 or higher (major version 2). See the [installation instructions][2] for setup details.
+- Go SDK version 1.74.6 or higher (major version 1), or version 2.2.3 or higher (major version 2). See the [installation instructions][2] for setup details.
 - Linux kernel version 5.17 or higher.
 
 ## Installation
@@ -61,7 +59,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Application (tracing library)
+### Application (SDK)
 
 1. Run your service with Dynamic Instrumentation enabled by setting the following environment variable:
 
@@ -87,15 +85,14 @@ See the [Live Debugger documentation][4] for information about adding instrument
 - Adding probes for method calls, returns, and specific code lines
 - Symbol search for probe location selection
 - Capturing variables and return values available at the selected probe location
+- Log templates and condition expressions
 - [Sensitive data redaction][7]
 - [Source code integration][8]
 
 ## Unsupported features
 
 - Dynamic Instrumentation for logs, metrics, spans, and span tag probes
-- Log templates and condition expressions
 - PII redaction based on specific classes or types
-- Propagation of additional `DD_TAGS` set on the service to probe result tags
 - Environments where eBPF is unavailable, including many serverless platforms such as AWS Lambda and AWS Fargate
 
 ## Further reading

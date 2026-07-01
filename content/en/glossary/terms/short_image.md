@@ -1,4 +1,5 @@
 ---
+id: short_image
 title: short image
 core_product:
   - infrastructure monitoring

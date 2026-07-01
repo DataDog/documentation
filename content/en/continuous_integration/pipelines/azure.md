@@ -57,13 +57,13 @@ After the Azure App is created and installed, enable CI Visibility for the organ
 
 2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][2].
 
-3. Click **Configure** next to the Azure DevOps organization you want to enable.
+3. Click {{< ui >}}Configure{{< /ui >}} next to the Azure DevOps organization you want to enable.
 
-4. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**. Future projects detected by the Azure app will automatically be enabled.
+4. To enable CI Visibility for the entire organization, toggle {{< ui >}}Enable CI Visibility{{< /ui >}}. Future projects detected by the Azure app will automatically be enabled.
 
 5. To enable CI Visibility for individual projects:
    - Scroll through the projects list.
-   - Toggle **Enable CI Visibility** for each project you want to monitor.
+   - Toggle {{< ui >}}Enable CI Visibility{{< /ui >}} for each project you want to monitor.
 
 Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
 
@@ -79,23 +79,23 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
 
 1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace. There are several extensions starting with **Datadog**, make sure that you are installing the [Datadog CI Visibility][8] extension.
 
-2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
+2. For each project, go to {{< ui >}}Project settings{{< /ui >}} > {{< ui >}}Service hooks{{< /ui >}} in Azure DevOps and select the green plus (+) icon to create a subscription.
 
 3. Create a subscription to the `Datadog CI Visibility` service for each of the following webhook types. These event types are required and must be enabled individually.
 
-    - **Run state changed**
-    - **Run stage state changed**
-    - **Run job state changed**
-    - **Run stage approval completed**
-    - **Run stage waiting for approval**
-    - **Build completed**
+    - {{< ui >}}Run state changed{{< /ui >}}
+    - {{< ui >}}Run stage state changed{{< /ui >}}
+    - {{< ui >}}Run job state changed{{< /ui >}}
+    - {{< ui >}}Run stage approval completed{{< /ui >}}
+    - {{< ui >}}Run stage waiting for approval{{< /ui >}}
+    - {{< ui >}}Build completed{{< /ui >}}
 
-4. Click **Next** to continue to the next step and set the following:
+4. Click {{< ui >}}Next{{< /ui >}} to continue to the next step and set the following:
 
-    - **Datadog Site**: `{{< region-param key="dd_site" >}}`
-    - **Datadog API Key**: Your [Datadog API key][3].
+    - {{< ui >}}Datadog Site{{< /ui >}}: `{{< region-param key="dd_site" >}}`
+    - {{< ui >}}Datadog API Key{{< /ui >}}: Your [Datadog API key][3].
 
-5. Click **Finish**.
+5. Click {{< ui >}}Finish{{< /ui >}}.
 
 ### Configuring multiple projects in bulk
 
@@ -165,7 +165,7 @@ To enable log collection for Azure DevOps pipelines:
 
 1. Set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14].
 
-2. In Datadog, go to [CI Visibility Settings][23].
+2. In Datadog, open [**CI/CD Optimization** > **Settings** > **Azure DevOps**][23].
 3. Enable log pulling for Azure DevOps.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
@@ -182,7 +182,7 @@ For a full explanation, see the guide on [using CI jobs failure analysis][21].
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][17].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][17].
 
 ## Further reading
 
@@ -203,4 +203,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [20]: /glossary/#pipeline-execution-time
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
-[23]: https://app.datadoghq.com/ci/settings/visibility/azure-devops
+[23]: https://app.datadoghq.com/ci/settings/ci-cd/azure-devops

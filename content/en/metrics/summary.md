@@ -17,11 +17,11 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
 
-Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
+Search your metrics by metric name or tag using the {{< ui >}}Metric{{< /ui >}} or {{< ui >}}Tag{{< /ui >}} search fields:
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
-**Note**: Tag values are retained in the **Tag** search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
+**Note**: Tag values are retained in the {{< ui >}}Tag{{< /ui >}} search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
 
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
@@ -35,13 +35,13 @@ Tag filtering supports Boolean and wildcard syntax so that you can identify:
 
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also filter your metrics by:
 
-- **Configuration**: Metrics with tag configurations
-- **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
-- **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
-- **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Related Assets**: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
-- **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
+- {{< ui >}}Configuration{{< /ui >}}: Metrics with tag configurations
+- {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics enabled by percentiles/advanced query capabilities
+- {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled 
+- {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
+- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
+- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
+- {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
 
 ### Definitions
 
@@ -53,19 +53,19 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 ## Configuration of multiple metrics 
 
-Clicking **Configure Metrics** gives you multiple options to configure more than one metric at a time: 
+Clicking {{< ui >}}Configure Metrics{{< /ui >}} gives you multiple options to configure more than one metric at a time: 
 
 {{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
-* **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
+* {{< ui >}}Manage tags{{< /ui >}}: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
 {{< img src="metrics/summary/tags-bulk-config.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
-* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
+* {{< ui >}}Enable or disable percentiles{{< /ui >}}: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
-* **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
+* {{< ui >}}Enable or disable historical metrics ingestion{{< /ui >}}: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
@@ -127,22 +127,61 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Use this field to view and update descriptions for your [custom metrics][4]. Descriptions are pre-populated for metrics coming from supported [integrations][9].
 
-For custom metrics with connected source code, Datadog can automatically generate descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence. To enable auto-generated descriptions from source code, [sign up for Metric Source Code][40].
+#### AI-generated description
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
+
+To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 {{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics sidepanel" style="width:80%;">}}
 
 
 ## Source Code
 
-The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
 Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
-{{< img src="metrics/summary/metric_source_code_03042026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
-To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+### Troubleshooting missing metrics
+
+If a metric doesn't appear in Source Code, it may be due to how it's defined.
+
+Datadog detects metrics best when names are written as explicit strings. Metrics built using variables, constants, or custom helpers may not be detected.
+
+Common reasons for missing metrics:
+- Metric name is generated dynamically  
+- Metric is emitted through custom wrappers  
+- Repository is not fully indexed  
+
+Best practice:
+- Define metric names as explicit strings when possible  
+
+Example:
+
+Sending metric using a variable (not recommended)
+
+```java
+public static final String METRIC_NAME = "my.metric.name";
+statsEmitter.distribution(METRIC_NAME, value, tags);
+```
+
+Sending metric as explicit string (recommended):
+
+```java
+timer = meterRegistry.timer("my.metric.name");
+```
+
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
@@ -150,7 +189,7 @@ The tags table offers multiple ways to explore all of the tag keys and tag value
 
 Use the tags table to:
 
-- Sort tag keys by the **Count column** (count of unique tag values).
+- Sort tag keys by the {{< ui >}}Count{{< /ui >}} column (count of unique tag values).
 - Search through the paginated table of tags for a particular tag key.
 - Export the tags table as a downloadable CSV.
 - Toggle between tags you've configured on your metric vs the metric's originally submitted tags
@@ -172,9 +211,9 @@ For any particular tag key, you can:
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
-1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
+1. Scroll to the bottom of the metric's details side panel to the {{< ui >}}Related Assets{{< /ui >}} section.
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
-3. The **Tags** column shows exactly which tags are used in each asset.
+3. The {{< ui >}}Tags{{< /ui >}} column shows exactly which tags are used in each asset.
    
 ## Custom Metrics Tags Cardinality Explorer 
 
@@ -186,14 +225,14 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note**: Metrics without Limits™ is only available for custom metrics.
 
-You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
+You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to {{< ui >}}Configure Metrics{{< /ui >}} > {{< ui >}}Manage tags{{< /ui >}} in the [Metrics page][34], or by clicking the {{< ui >}}Manage Tags{{< /ui >}} button in a metric's details side panel. 
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
-1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
-4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
+1. Click on your custom distribution metric name in the {{< ui >}}Metrics Summary{{< /ui >}} table to open the metrics details side panel.
+2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
+3. Select {{< ui >}}Include tags...{{< /ui >}} or {{< ui >}}Exclude tags...{{< /ui >}} to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting {{< ui >}}Save{{< /ui >}}.
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
@@ -207,7 +246,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
+| API Catalog             | Timeseries sent by the Datadog [Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
@@ -217,7 +256,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Timeseries generated from the Datadog Events platform.
-| LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
+| Agent Observability       | Timeseries emitted by the Agent Observability product using the `lmobs_to_metrics` service.
 | Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
@@ -227,7 +266,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Software Catalog         | Timeseries sent by the Datadog [Software Catalog][25] product including [Scorecard][29] metrics.
+| Catalog         | Timeseries sent by the Datadog [Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
 
@@ -248,7 +287,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /software_catalog/endpoints/
+[13]: /internal_developer_portal/catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
@@ -260,11 +299,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/
-[25]: /software_catalog/
+[25]: /internal_developer_portal/catalog/
 [26]: /synthetics/
 [27]: /universal_service_monitoring/
 [28]: /logs/
-[29]: /software_catalog/scorecards/
+[29]: /internal_developer_portal/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/

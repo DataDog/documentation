@@ -11,9 +11,9 @@ As an Account Owner, you can make changes to your subscription and payment metho
 
 ## View, print, and configure receipts
 
-1. Navigate to **User** > **Subscription settings**.
-2. To view, download, or print receipts for past payments, click **Billing history**.
-3. To configure receipts to be emailed to you each month, or include additional billing information, such as your company address or VAT ID, click **Receipt settings**. 
+1. Navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}Subscription settings{{< /ui >}}.
+2. To view, download, or print receipts for past payments, click {{< ui >}}Billing history{{< /ui >}}.
+3. To configure receipts to be emailed to you each month, or include additional billing information, such as your company address or VAT ID, click {{< ui >}}Receipt settings{{< /ui >}}. 
 
 <div class="alert alert-info">
   <p>You can use this template to improve your receipts.</p>
@@ -29,17 +29,17 @@ As an Account Owner, you can make changes to your subscription and payment metho
 
 ## Update payment details
 
-1. Navigate to **User** > **Subscription settings**.
-2. Click **Edit card**.
-3. Enter your new card details, then click **Update payment info**.
+1. Navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}Subscription settings{{< /ui >}}.
+2. Click {{< ui >}}Edit card{{< /ui >}}.
+3. Enter your new card details, then click {{< ui >}}Update payment info{{< /ui >}}.
 
 ## Switch to annual payment
 
 You can switch to paying your subscription annually at any time.
 
-1. Navigate to **User** > **Subscription settings**.
-2. Click **Change plan**, then toggle the switch from **Monthly** to **Annual**.
-3. Click **Continue**, then click **Confirm**.
+1. Navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}Subscription settings{{< /ui >}}.
+2. Click {{< ui >}}Change plan{{< /ui >}}, then toggle the switch from {{< ui >}}Monthly{{< /ui >}} to {{< ui >}}Annual{{< /ui >}}.
+3. Click {{< ui >}}Continue{{< /ui >}}, then click {{< ui >}}Confirm{{< /ui >}}.
 
 {{< img src="cloudcraft/account-management/billing-and-invoices/toggle-annual-payments.png" alt="Screenshot of Cloudcraft's Pro Team subscription plan details highlighting annual cost, key features like AWS sync, priority support, and collaboration options for two users." responsive="true" style="width:100%;">}}
 

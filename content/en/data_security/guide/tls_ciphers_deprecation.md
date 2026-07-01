@@ -38,7 +38,7 @@ Effective September 1, 2026, Datadog will accept only the following cipher suite
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 Datadog accepts the following cipher suites for {{< region-param key="dd_site_name" >}}:
 

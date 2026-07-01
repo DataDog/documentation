@@ -4,7 +4,7 @@ further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"
     text: Cloud Security
-  - link: "/service_management/workflows/"
+  - link: "/actions/workflows/"
     tag: "Documentation"
     text: Workflow Automation
 aliases:
@@ -159,9 +159,9 @@ After running the workflow, additional information is shown on the side panel. Y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows
+[1]: /actions/workflows
 [2]: /security/cloud_security_management/
-[3]: /service_management/workflows/build/
+[3]: /actions/workflows/build/
 [4]: https://app.datadoghq.com/workflow
 [5]: /integrations/slack/
 [6]: /integrations/jira/

@@ -1,0 +1,19 @@
+.metrics-table-wrapper {
+  overflow: hidden;
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+
+    td:nth-child(2),
+    th:nth-child(2) {
+      width: 25%;
+    }
+
+    td,
+    th {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+  }
+}

@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and networks logs. Use the generate metrics processor to generate either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query.
 
 **Note**: The metrics generated are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
@@ -19,32 +19,34 @@ Many types of logs are meant to be used for telemetry to track trends, such as K
 
 To set up the processor:
 
-Click **Manage Metrics** to create new metrics or edit existing metrics. This opens a side panel.
+Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing metrics. This opens a side panel.
 
 - If you have not created any metrics yet, enter the metric parameters as described in the [Add a metric](#add-a-metric) section to create a metric.
-- If you have already created metrics, click on the metric's row in the overview table to edit or delete it. Use the search bar to find a specific metric by its name, and then select the metric to edit or delete it. Click **Add Metric** to add another metric.
+- If you have already created metrics, click on the metric's row in the overview table to edit or delete it. Use the search bar to find a specific metric by its name, and then select the metric to edit or delete it. Click {{< ui >}}Add Metric{{< /ui >}} to add another metric.
 
-##### Add a metric
+### Add a metric
+
+<div class="alert alert-warning">The Generate Metrics processor uses the <code>timestamp</code> field on a log to set the metric's timestamp. If the log <code>timestamp</code> field is a string value, the log's processing time is used instead. See <a href="#convert-string-timestamp-to-timestamp-format">Convert string timestamp to timestamp format</a> for more information.</div>
 
  1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
-1. In the **Define parameters** section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
+1. In the {{< ui >}}Define parameters{{< /ui >}} section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
     - For gauge and distribution metric types, select a log field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
-    - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
-1. Click **Add Metric**.
+    - The {{< ui >}}Group by{{< /ui >}} field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the {{< ui >}}Group by{{< /ui >}} setting are set as tags on the configured metric.
+1. Click {{< ui >}}Add Metric{{< /ui >}}.
 
-##### Metrics types
+## Metrics types
 
 You can generate these types of metrics for your logs. See the [Metrics types][3] and [Distributions][4] documentation for more details.
 
-| Metric type  | Description                                                                                                                                     | Example                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| COUNT        | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased.                | You want to count the number of logs with `status:error`.                                         |
-| GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
-| DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
+| Metric type  | Description                                                                                                                                         | Example                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| COUNT        | The total number of event occurrences in one time interval. Can be reset to zero, but cannot be decreased.                                          | You want to count the number of logs with `status:error`.                                     |
+| GAUGE        | A snapshot of a value at the time it is reported.                                                                                                   | You want to track the latest CPU utilization per host.                                        |
+| DISTRIBUTION | Raw values sent to Datadog so percentile aggregations (such as p95, p99) are computed server-side, globally across every host reporting the metric. | You want the global p95 of `response_time_seconds` across every host serving an API endpoint. |
 
-##### Count metric example
+### Count metric example
 
 For this `status:error` log example:
 
@@ -61,7 +63,7 @@ To create a count metric that counts the number of logs that contain `"status":"
 | Metric type      | Count               |
 | Group by         | `env`, `prod`       |
 
-##### Distribution metric example
+### Distribution metric example
 
 For this example of an API response log:
 
@@ -85,8 +87,23 @@ To create a distribution metric that measures the average time it takes for an A
 | Select a log attribute | `response_time_seconds` |
 | Group by               | `method`                |
 
+## Convert string timestamp to timestamp format
+
+The Generate Metrics processor can only use the log `timestamp` field to set the metric timestamp if the log field is a timestamp type. If the `timestamp` field is a string, the time when the log is processed is used instead. To use the log `timestamp`, you must convert the string to a timestamp type before sending logs to the Generate Metrics processor.
+
+To convert a string timestamp to timestamp format:
+
+1. Add a [Custom Processor][6] to your pipeline before the Generate Metrics processor.
+1. Add a function with the following custom script:
+    ```
+    .timestamp = parse_timestamp!(.timestamp, format: "%+")
+    ```
+    See [parse_timestamp][7] for more information.
+
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
 [3]: /metrics/types/
 [4]: /metrics/distributions/
 [5]: /observability_pipelines/search_syntax/logs/
+[6]: /observability_pipelines/processors/custom_processor/#setup
+[7]: /observability_pipelines/processors/custom_processor/#parse_timestamp

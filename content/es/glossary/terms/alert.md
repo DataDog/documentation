@@ -1,4 +1,5 @@
 ---
+id: alert
 core_product:
 - alertas
 title: alerta

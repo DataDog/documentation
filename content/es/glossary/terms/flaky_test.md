@@ -1,4 +1,5 @@
 ---
+id: flaky_test
 core_product:
 - ci-cd
 short_definition: Una test defectuosa es una test que muestra tanto un estado de aprobación

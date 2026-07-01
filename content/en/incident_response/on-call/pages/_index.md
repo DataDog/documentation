@@ -29,7 +29,7 @@ A Page is sent to a Team and routed through its escalation policies and schedule
 
 Send a Page by mentioning a Team's handle with `oncall-` prepended. For example, to send a Page to the Checkout Operations Team (`@checkout-operations`), mention `@oncall-checkout-operations`.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
 
 You can send Pages to On-Call Teams anywhere @-handles are supported, including monitors, Incident Management, security detection rules, and Event Management.
 
@@ -44,6 +44,14 @@ If the mention appears only in the alert template (for example, within `{{#is_al
 If you send a Page through a monitor alert and the Team's routing rule uses dynamic urgencies:
 - If the WARN threshold is crossed, the Page urgency is set to `low`.
 - If the ALERT threshold is crossed, the Page urgency is set to `high`.
+
+#### Monitor renotification
+
+When a monitor is configured to [send renotifications][8] to an On-Call Team, the behavior depends on the current state of the Page:
+
+- **Page is resolved**: The monitor renotifies and creates a new Page, which is routed through the Team's escalation policy.
+- **Page is acknowledged**: The monitor renotifies, and the Page is re-triggered, resuming the escalation policy at the step that was in progress when the Page was acknowledged. 
+- **Page is triggered**: If all steps in the escalation policy have already run but no one has acknowledged the Page, the monitor renotifies and the Page is re-triggered, restarting the escalation policy from the beginning.
 
 ### Trigger Pages through email
 
@@ -72,7 +80,7 @@ Send a Page from the Datadog platform, or through a tool like Slack or Microsoft
 
 1. Go to [**On-Call** > **Teams**][2].
 1. Find the Team you want to page. Select **Page**.
-   {{< img src="service_management/oncall/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/pages/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
 1. Enter a **Page title** and add more context in the **Description** field. Select **Page**.
 
 Pages sent manually through Datadog are always `high` urgency.
@@ -91,7 +99,7 @@ To receive Page notifications in Slack, see [Routing Rules][4].
 
 Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Click a Page to open its side panel and take action, or select the checkbox next to one or more Pages to bulk-edit them.
 
-{{< img src="service_management/oncall/on-call-pages-list.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each Page's name, status, Team, responders, and creation date" style="width:100%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-pages-list.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each Page's name, status, Team, responders, and creation date" style="width:100%;" >}}
 
 ### Acknowledge a Page
 
@@ -104,7 +112,7 @@ To acknowledge a Page:
 
 The Page status changes to `Acknowledged`.
 
-{{< img src="service_management/oncall/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
 
 ### Reassign a Page
 
@@ -115,7 +123,7 @@ To reassign a Page:
 1. Click the Page to open its side panel.
 1. Under **Next Steps**, select **Reassign**. This opens a **Reassign Page** modal.
 
-   {{< img src="service_management/oncall/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:60%;" >}}
+   {{< img src="incident_response/on-call/pages/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:60%;" >}}
 
 1. Select the user or Team to reassign to.
 1. Optionally, add a comment explaining the handoff.
@@ -146,7 +154,7 @@ To declare an incident:
 1. Under **Next Steps**, select **Declare Incident**.
 1. Review and adjust the pre-filled details as needed.
 
-   {{< img src="service_management/oncall/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
+   {{< img src="incident_response/on-call/pages/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
 
 1. Select **Declare Incident** to confirm.
 
@@ -156,7 +164,7 @@ For guidance on incident severity levels and responder roles, see [Incident Mana
 
 The Page timeline is an activity log that records when the Page was triggered, who was notified, and how escalation progressed. You can add your own comments to provide context for other responders.
 
-{{< img src="service_management/oncall/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:60%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:60%;" >}}
 
 Use comments to:
 - Document what you've already investigated or ruled out
@@ -176,3 +184,4 @@ To add a comment, open the Page and enter your text in the **Timeline** section.
 [5]: /incident_response/incident_management/notification/#trigger-a-page-from-an-incident
 [6]: /incident_response/incident_management/
 [7]: https://app.datadoghq.com/on-call/pages
+[8]: /monitors/notify/#renotify

@@ -20,10 +20,11 @@ This instrumentation method uses `serverless-init` and provides the following ad
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
 - Support for submitting custom metrics using DogStatsD.
+- [Enhanced metrics][18] distinguished with the `azure.app_services.enhanced.*` namespace.
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog SDK][2].
 
 ## Instrument your application
 
@@ -90,7 +91,7 @@ For more environment variables and their function, see [Additional Configuration
 
 ### 3. Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Serverless{{< /ui >}} to see your serverless metrics and traces.
 
 ## Deployment
 
@@ -102,7 +103,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsD client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsD client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the {{< ui >}}Metric Summary{{< /ui >}} page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 - **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
 
@@ -125,11 +126,11 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 
 ## Troubleshooting
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+If you are not receiving traces or custom metric data as expected, enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][17].
+Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][17].
 
 ## Further reading
 
@@ -153,3 +154,4 @@ Share the content of the **Log stream** with [Datadog Support][17].
 [15]: /tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [17]: /help
+[18]: /integrations/azure-app-services/#metrics

@@ -1,4 +1,5 @@
 ---
+id: heatmap
 core_product:
 - dashboards
 - real user monitoring

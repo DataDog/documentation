@@ -58,7 +58,16 @@ cascade:
 
 Select an option to configure Test Optimization in Datadog:
 
-{{< partial name="continuous_integration/ci-tests-setup.html" >}}
+{{< card-grid card_width="75px" >}}
+  {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
+  {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
+  {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}
+  {{< image-card href="/tests/setup/python/" src="integrations_logos/python_avatar.svg" alt="python" >}}
+  {{< image-card href="/tests/setup/ruby/" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
+  {{< image-card href="/tests/setup/swift/" src="integrations_logos/swift_avatar.svg" alt="swift" >}}
+  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -87,7 +96,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled on the [**Test Optimization Settings** page][2].
+\* The feature is opt-in, and needs to be enabled in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][2].
 
 ## Default configurations
 
@@ -169,14 +178,14 @@ When creating a [dashboard][4] or a [notebook][5], you can use CI test data in y
 
 ## Alert on test data
 
-When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the **Export** button.
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test/health
-[2]: https://app.datadoghq.com/ci/settings/test-optimization
+[2]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: https://app.datadoghq.com/notebook/list

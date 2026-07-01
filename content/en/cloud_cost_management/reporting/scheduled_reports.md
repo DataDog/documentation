@@ -12,7 +12,7 @@ further_reading:
 ---
 
 ## Overview
-Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email or Slack. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen Slack channels or email addresses.
+Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email, Slack, or Microsoft Teams. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen email addresses, Slack channels, or Microsoft Teams channels.
 
 {{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report-1.png" alt="Schedule Cost Report." style="width:80%;" >}}
 
@@ -27,21 +27,23 @@ For emails, the report PDF is included as an email attachment and/or as a link, 
 ## Schedule a CCM report
 1. Go to [**Cloud Cost > Analyze > Reports**][1] in Datadog.
 2. [Create a report][2] or select an existing report.
-3. Click **Share**, then **Schedule Report**.
+3. Click {{< ui >}}Share{{< /ui >}}, then {{< ui >}}Schedule Report{{< /ui >}}.
     {{< img src="cloud_cost/cost_reports/share_scheduled_report-1.png" alt="Click the Share button and Schedule Report on an individual report page." style="width:90%;" >}}
     
 4. In the configuration modal that opens:
    - Set your schedule (when and how often the report should be sent)
    - Enter a title for your schedule
 5. Add recipients:
-   - **Email recipients**: Enter email addresses. Your Datadog account is automatically added, but you can remove it by hovering over it and clicking the trash icon.
+   - {{< ui >}}Email recipients{{< /ui >}}: Enter email addresses. Your Datadog account is automatically added, but you can remove it by hovering over it and clicking the trash icon.
 
      **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. You can control which email domains are able to receive reports by configuring your [domain allowlist][4].
 
-    - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking the **Send Test Message** button.
+    - {{< ui >}}Slack recipients{{< /ui >}}: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking the {{< ui >}}Send Test Message{{< /ui >}} button.
+
+    - {{< ui >}}Microsoft Teams recipients{{< /ui >}}: Select the {{< ui >}}Microsoft Teams{{< /ui >}} tab, then choose a {{< ui >}}Tenant{{< /ui >}}, {{< ui >}}Team{{< /ui >}}, and {{< ui >}}Channel{{< /ui >}} from the available dropdowns. Ensure the [Microsoft Teams integration][5] is installed in your Datadog organization and the Datadog app is added to the target Team in Microsoft Teams. To send a test message, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
 
 ## Managing schedules
-A single Cloud Cost (CCM) Report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.
+A single Cloud Cost (CCM) Report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click {{< ui >}}Share{{< /ui >}} and select {{< ui >}}Manage Schedules{{< /ui >}}.
 
 From the configuration modal that opens, you can:
 - Pause existing schedules
@@ -54,8 +56,8 @@ From the configuration modal that opens, you can:
 ## Viewing schedules
 
 To see all Cloud Cost (CCM) Report schedules across your organization:
-1. Navigate to [**Cloud Cost > Analyze > Reports**][1] and click the **Report Schedules** tab.
-2. Use the "My schedules" toggle to switch between your personal schedules and all organization schedules.
+1. Navigate to [**Cloud Cost > Analyze > Reports**][1] and click the {{< ui >}}Report Schedules{{< /ui >}} tab.
+2. Use the {{< ui >}}My schedules{{< /ui >}} toggle to switch between your personal schedules and all organization schedules.
 
 {{< img src="cloud_cost/cost_reports/cost-report-schedules-view-4.png" alt="View all Cost Report Schedules." style="width:100%;" >}}
 
@@ -76,3 +78,4 @@ After a report is created, you can subscribe, unsubscribe, edit schedules, and d
 [2]: /cloud_cost_management/reporting
 [3]: /integrations/slack/?tab=datadogforslack
 [4]: /account_management/org_settings/domain_allowlist/
+[5]: /integrations/microsoft_teams/

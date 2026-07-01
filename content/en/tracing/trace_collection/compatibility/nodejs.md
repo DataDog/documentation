@@ -16,7 +16,7 @@ further_reading:
 
 ### Versioning
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js SDK follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
@@ -31,9 +31,9 @@ When a release has changes that could go in multiple semver categories, the high
 
 _Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
 
-For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
+For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, Datadog applies security and bug patches whenever possible.
 
-If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
+If you have any questions or concerns about Datadog's support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
 
 ### Node.js Version Support
 
@@ -108,7 +108,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=10.2` | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
+| [next][18]              | `>=10.2` | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The SDK supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20].    |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -116,9 +116,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
 
-Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+Loading the Datadog SDK early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
 
-To load the tracer before the framework, use one of the following methods:
+To load the SDK before the framework, use one of the following methods:
 
 Prefix all commands you run with an environment variable:
 
@@ -212,14 +212,13 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
 | [bunyan][55]     | `>=1`     | Fully supported |
-| [paperplane][56] | `>=2.3.2` | Fully supported |
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
 
 
 ### AI/LLM compatibility
 
-The [Automatic Instrumentation for LLM Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
+The [Automatic Instrumentation for Agent Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
 
 
 ### Testing framework compatibility
@@ -229,7 +228,7 @@ The [JavaScript and TypeScript Tests][66] page contains a list of instrumented t
 
 ### Known transitive package compatibility
 
-While the Datadog tracer doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the tracer does instrument.
+While the Datadog SDK doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the SDK does instrument.
 
 | Module           | Notes                                        |
 | ---------------- | -------------------------------------------- |
@@ -301,7 +300,6 @@ For additional information or to discuss [leave a comment on this GitHub issue][
 [53]: https://github.com/kriskowal/q
 [54]: https://github.com/cujojs/when
 [55]: https://github.com/trentm/node-bunyan
-[56]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [57]: http://getpino.io
 [58]: https://github.com/winstonjs/winston
 [59]: https://github.com/laverdet/node-fibers

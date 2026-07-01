@@ -1,9 +1,10 @@
 ---
+id: variance
 title: variance
 core_product:
   - dashboards
 related_terms:
-  - standard deviation
+  - standard_deviation
 ---
 Variance is a measurement of the spread between numbers in a dataset.
 

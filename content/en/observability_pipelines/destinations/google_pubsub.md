@@ -77,42 +77,43 @@ Use this authentication method if you're deploying the Worker as a Cloud Run ser
 1. Choose the JSON format.
 1. Save the downloaded JSON file in a secure location.
 1. After you install the Worker, copy or mount JSON the file into `DD_OP_DATA_DIR/config/`.
-You reference this file in the Google Pub/Sub destination's **Credentials path** field when you [set up the destination](#set-up-the-destination) in the Pipelines UI.
+You reference this file in the Google Pub/Sub destination's {{< ui >}}Credentials path{{< /ui >}} field when you [set up the destination](#set-up-the-destination) in the Pipelines UI.
 
 ## Setup
 
-Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Google Pub/Sub destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Google Pub/Sub destination in the pipeline UI:
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.
 1. Enter the topic.
 	- This is the Pub/Sub topic to publish logs to.
-1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in **JSON** or **Raw message**.
-	- **JSON**: Logs are structured as JSON (recommended if downstream tools need structured data).
-	- **Raw**: Logs are sent as raw strings (preserves the original format).
+1. In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select whether you want to encode your pipeline's output in {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw message{{< /ui >}}.
+	- {{< ui >}}JSON{{< /ui >}}: Logs are structured as JSON (recommended if downstream tools need structured data).
+	- {{< ui >}}Raw{{< /ui >}}: Logs are sent as raw strings (preserves the original format).
 1. If you have a credentials JSON file, enter the path to your credentials JSON file.
 	- If you using a service account JSON: enter the path `DD_OP_DATA_DIR/config/<your-service-account>.json`.
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 	- Credentials are automatically managed if you're using [workload identity][7] on GKE.
 
-#### Optional settings
+### Optional settings
 
-##### Enable TLS
+#### Enable TLS
 
-Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
 
-##### Buffering options
+{{% observability_pipelines/secrets_env_var_note %}}
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -191,3 +192,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[9]: /observability_pipelines/configuration/set_up_pipelines/
+[10]: /api/latest/observability-pipelines/
+[11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

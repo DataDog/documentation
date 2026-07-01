@@ -41,7 +41,7 @@ To get started with Cloud Security, review the following:
 
 ## Enable Agentless Scanning
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

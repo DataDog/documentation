@@ -1,4 +1,5 @@
 ---
+id: service_entry_span
 title: service entry span
 core_product:
   - apm

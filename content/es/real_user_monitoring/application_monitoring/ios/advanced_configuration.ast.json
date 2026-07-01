@@ -1,0 +1,94 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "e0bec0e316e242a08aea18ec41af965b": {
+            "string": "Configuración avanzada de iOS"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "527d60032c33342ec34075221117de22": {
+            "string": "Configura los ajustes avanzados del kit de desarrollo de software (SDK) de iOS RUM para enriquecer las sesiones de usuario, realizar un seguimiento de los eventos personalizados y controlar la recopilación de datos para obtener mejor información."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-ios",
+            "text": {
+              "itemTranslationData": {
+                "ed160268e83fd51b3f0e18fd26a45156": {
+                  "string": "Código fuente de dd-sdk-ios"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "Código source (fuente)"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring",
+            "text": {
+              "itemTranslationData": {
+                "4f183b05811e5817fb67a28b0205c878": {
+                  "string": "RUM y Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/application_monitoring/ios/supported_versions/",
+            "text": {
+              "itemTranslationData": {
+                "e09c439d93ede4686ad81d4abeddbfa3": {
+                  "string": "Versiones compatibles de la monitorización de RUM iOS y tvOS"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor",
+            "text": {
+              "itemTranslationData": {
+                "212a1efe24f6601b51912571fee5f604": {
+                  "string": "Integración de Datadog para Apollo iOS"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "Código source (fuente)"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

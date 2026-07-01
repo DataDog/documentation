@@ -1,4 +1,5 @@
 ---
+id: waf
 core_product:
 - security
 - appsec

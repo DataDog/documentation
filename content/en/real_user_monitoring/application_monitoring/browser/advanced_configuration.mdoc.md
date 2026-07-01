@@ -1,6 +1,6 @@
 ---
 title: Advanced Configuration
-description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, and control sampling for your application's needs."
+description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, track unauthenticated users, and control sampling for your application's needs."
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -30,6 +30,10 @@ further_reading:
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog standard attributes"
+- link: "https://learn.datadoghq.com/courses/configure-rum-javascript"
+  tag: "Learning Center"
+  text: "Configure Real User Monitoring (RUM) for JavaScript web applications"
+
 ---
 
 ## Overview
@@ -488,7 +492,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events when requests are aborted:
 <!-- NPM -->
    {% if equals($lib_src, "npm") %}
    ```javascript
@@ -497,9 +501,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
    datadogRum.init({
       ...,
       beforeSend: (event, context) => {
-         // collect a RUM resource's response headers
-         if (event.type === 'resource' && event.resource.type === 'fetch') {
-               event.context.responseHeaders = Object.fromEntries(context.response.headers)
+         if (event.type === 'resource' && context.isAborted) {
+               event.context.aborted = true
          }
          return true
       },
@@ -515,9 +518,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
@@ -534,9 +536,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
@@ -883,6 +884,21 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
 {% /if %}
+
+### Track unauthenticated users
+
+For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
+
+`usr.anonymous_id` is a randomly generated UUID (v4). It is not derived from any user PII, IP address, device fingerprint, or hardware identifier.
+
+The ID has the following properties:
+
+- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s_v2`).
+- **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
+
+The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
+
+**Note**: `usr.anonymous_id` is enabled by default. To disable it, set [`trackAnonymousUser: false`](https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackanonymoususer) in your `init` config.
 
 ## Account
 
@@ -1769,6 +1785,8 @@ The regular expression must match your application's file path structure. Adjust
 
 ### Limitations
 
+#### Events without an attributed origin
+
 Some events cannot be attributed to an origin because they do not have an associated handling stack:
 
 -   Action events collected automatically
@@ -1776,13 +1794,25 @@ Some events cannot be attributed to an origin because they do not have an associ
 -   View events collected automatically
 -   CORS and CSP violations
 
+#### Source map resolution across micro frontends
+
+When a stack trace contains frames from multiple micro frontends, the event receives a single `service` and `version` from the topmost frame (where the error was thrown). Source maps are resolved for the event under that single service, so frames from other micro frontends remain minified, even when their source maps were correctly uploaded under their own `service`.
+
+To control which micro frontend's source maps are used, use the [manual attribution](#manual-service-and-version-attribution) approach with `beforeSend` to set `event.service` and `event.version`. Only frames belonging to the chosen micro frontend are unminified.
+
 ### Explore micro frontend data in Datadog
 
 After setup, the `service` and `version` on RUM events identify which micro frontend generated each event. Use these attributes in several places in Datadog:
 
--   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
--   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
--   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
+-   {% ui %}Side panels{% /ui %}: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
+-   {% ui %}RUM Summary dashboard{% /ui %}: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
+-   {% ui %}Custom dashboards{% /ui %}: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
+
+The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
+
+- `rum.measure.error`
+- `rum.measure.operation`
+- `rum.measure.operation.duration`
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
@@ -1807,3 +1837,4 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
+[24]: /real_user_monitoring/rum_without_limits/

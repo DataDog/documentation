@@ -10,6 +10,9 @@ further_reading:
   - link: '/integrations/github'
     tag: 'Documentation'
     text: 'Datadog GitHub integration'
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -23,7 +26,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
-- [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Configure the Datadog SDK](#configure-the-datadog-sdk)
 - [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Enable/disable trace collection](#enabledisable-trace-collection)
@@ -45,6 +48,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
 - [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
+- [Authenticate with Workload Identity Federation](#authenticate-with-workload-identity-federation)
 - [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
@@ -69,7 +73,7 @@ To see App and API Protection threat detection in action, send known attack patt
    ```sh
    curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
-A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [{{< ui >}}Application Signals Explorer{{< /ui >}}][41]**.
 
 ## Connect telemetry using tags
 
@@ -350,7 +354,7 @@ For a more granular approach, use these service-specific identifiers:
 
 For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
 
-## Configure the Datadog tracer
+## Configure the Datadog SDK
 
 To see what libraries and frameworks are automatically instrumented by the Datadog APM client, see [Compatibility Requirements for APM][15]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][16].
 
@@ -505,7 +509,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
     1. Obtain the Datadog trace ID using `dd-trace` and add it to your log.
     2. Clone the default Lambda log pipeline, which is read-only.
     3. Enable the cloned pipeline and disable the default one.
-    4. Update the [Grok parser][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
+    4. Update the [{{< ui >}}Grok parser{{< /ui >}}][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
 
 ## Link errors to your source code
 
@@ -614,9 +618,9 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
 
-4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
-   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
-   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use a Datadog for Government site:
+   - Set `DD_SITE` to `ddog-gov.com` (US1-FED) or `us2.ddog-gov.com` (US2-FED)
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the Datadog for Government sites have FIPS-compliant intake endpoints.
 
 ## Propagate trace context over AWS resources
 
@@ -624,7 +628,7 @@ Datadog automatically injects the trace context into outgoing AWS SDK requests a
 
 ## Merge X-Ray and Datadog traces
 
-AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which is not supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
+For AWS managed services that Datadog APM doesn't yet instrument (such as AppSync), you can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
 
 ## Enable AWS Lambda code signing
 
@@ -715,9 +719,9 @@ Not all Lambda emulators support the AWS Lambda Telemetry API. To test your Lamb
 
 ## Instrument AWS Lambda with the OpenTelemetry API
 
-The Datadog tracing library, which is included in the Datadog Lambda Extension upon installation, accepts the spans and traces generated by OpenTelemetry-instrumented code, processes the telemetry, and sends it to Datadog.
+The Datadog SDK, which is included in the Datadog Lambda Extension upon installation, accepts the spans and traces generated by OpenTelemetry-instrumented code, processes the telemetry, and sends it to Datadog.
 
-You can use this approach if, for example, your code has already been instrumented with the OpenTelemetry API. You may also use this approach if you want to instrument using vendor-agnostic code with the OpenTelemetry API while still gaining the benefits of using the Datadog tracing libraries.
+You can use this approach if, for example, your code has already been instrumented with the OpenTelemetry API. You may also use this approach if you want to instrument using vendor-agnostic code with the OpenTelemetry API while still gaining the benefits of using the Datadog SDKs.
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
 
@@ -728,7 +732,7 @@ When the `DD_SERVERLESS_APPSEC_ENABLED` environment variable is set to `true`, t
 
 ## Configure Auto-linking for DynamoDB PutItem
 _Available for Python and Node.js runtimes_.
-When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][55] feature automatically detects linked spans. 
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][55] feature automatically detects linked spans.
 To enable Span Auto-linking for [DynamoDB Change Streams][56]' `PutItem` operation, configure primary key names for your tables.
 
 {{< tabs >}}
@@ -763,11 +767,11 @@ export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
 {{% /tab %}}
 {{< /tabs >}}
 
-This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. The configuration above is structured as a dictionary (`dict`) or object keyed by the table names as strings (`str`). Each value is the set of primary key field names (as strings) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the SDK separately. The configuration above is structured as a dictionary (`dict`) or object keyed by the table names as strings (`str`). Each value is the set of primary key field names (as strings) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
 
 ## Visualize and model AWS services by resource name
 
-These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services. 
+These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services.
 
 Service names reflect the actual AWS resource name rather than only the AWS service:
 * `aws.lambda` → `[function_name]`
@@ -787,6 +791,17 @@ The updated service modeling configuration is recommended.
 {{% observability_pipelines/lambda_extension_source %}}
 
 See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
+
+## Authenticate with Workload Identity Federation
+
+Instead of providing a static Datadog API key, you can authenticate the Datadog Lambda extension with [Workload Identity Federation][59]. The extension uses your function's AWS execution role credentials to request a managed Datadog API key that Datadog automatically rotates, so you don't store or rotate a key yourself.
+
+To use Workload Identity Federation:
+
+1. In Datadog, configure an AWS intake mapping that authorizes your function's execution role ARN. For setup steps, see [Set up Workload Identity Federation for the Datadog Agent][59].
+2. Set the `DD_ORG_UUID` environment variable on your function to your Datadog organization UUID. To find it, call the [{{< region-param key="dd_api" >}}/api/v2/current_user][60] endpoint. When `DD_ORG_UUID` is set, the extension authenticates with Workload Identity Federation, which takes precedence over other API key environment variables.
+
+This is available for version 96+ of the Datadog Lambda Extension. Workload Identity Federation for the Agent is available for Enterprise plans only.
 
 ## Reload API key secret periodically
 
@@ -863,3 +878,5 @@ If you have trouble configuring your installations, set the environment variable
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
 [58]: /observability_pipelines/sources/lambda_extension/
+[59]: /account_management/workload_identity_federation/#set-up-workload-identity-federation-for-the-datadog-agent
+[60]: https://app.datadoghq.com/api/v2/current_user

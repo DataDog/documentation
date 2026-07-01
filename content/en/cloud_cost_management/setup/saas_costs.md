@@ -1,7 +1,5 @@
 ---
-title: SaaS Cost Integrations
-is_beta: true
-private: true
+title: SaaS and AI Costs
 disable_toc: false
 aliases:
 - /cloud_cost_management/saas_costs
@@ -29,15 +27,23 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-SaaS Cost Integrations are in Preview.
-{{< /callout >}}
-
 ## Overview
 
-SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
+SaaS and AI Costs allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
 
-{{< partial name="cloud_cost/cost-integrations.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts" src="integrations_logos/snowflake_small.svg" alt="snowflake" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" src="integrations_logos/confluent-cloud_small.svg" alt="confluent cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts" src="integrations_logos/mongodb_small.svg" alt="mongodb" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts" src="integrations_logos/elastic-cloud_small.svg" alt="elastic cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts" src="integrations_logos/fastly_small.svg" alt="fastly" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts" src="integrations_logos/twilio_small.svg" alt="twilio" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -45,19 +51,9 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, Google Cloud, or Oracle Cloud.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click {{< ui >}}Configure{{< /ui >}} on a provider to collect cost data.
 
-See the respective documentation for your cloud provider:
-
-{{< partial name="cloud_cost/getting-started.html" >}}
-
-</br>
-
-### Configure your SaaS accounts
-
-Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click **Configure** on a provider to collect cost data.
-
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, GitHub, and Cursor" style="width:100%" >}}
 
 {{< tabs >}}
 
@@ -65,13 +61,13 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 
 1. Find your [Snowflake account URL][102].
    {{< img src="integrations/snowflake/snowflake_account_url.png" alt="The account menu with the copy account URL option selected in the Snowflake UI" style="width:100%;" >}}
-2. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
-3. Enter your Snowflake account URL in the `Account URL` field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
-4. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
-5. Enter your Snowflake user name in the `User Name` field.
+2. Navigate to the [Snowflake integration tile][101] in Datadog and click {{< ui >}}Add Snowflake Account{{< /ui >}}.
+3. Enter your Snowflake account URL in the {{< ui >}}Account URL{{< /ui >}} field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
+4. Under the {{< ui >}}Connect your Snowflake account{{< /ui >}} section, click the toggle to enable Snowflake in Cloud Cost Management.
+5. Enter your Snowflake user name in the {{< ui >}}User Name{{< /ui >}} field.
 6. Follow step 4 of the [Snowflake integration][103] page to create a Datadog-specific role and user to monitor Snowflake.
 7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
-8. Click **Save**.
+8. Click {{< ui >}}Save{{< /ui >}}.
 
 Snowflake cost data from the past 6 months is available in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -91,7 +87,7 @@ To use query tags within cost management, ensure the following:
 
 - The `query_tag` string must be JSON parsable. Specifically, this means that the string is processable by the native `PARSE_JSON` function.
 
-- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under **Resources Collected -> Cloud Cost Management -> Collected Query Tags**.
+- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under {{< ui >}}Resources Collected{{< /ui >}} > {{< ui >}}Cloud Cost Management{{< /ui >}} > {{< ui >}}Collected Query Tags{{< /ui >}}.
 
 **Note**: Select your query tags with data magnitude in mind. Appropriate query tags are ones that have low to medium group cardinality (for example: team, user, service). Selecting a query tag with high group cardinality (such as unique UUID associated with job executions) can result in bottlenecking issues for both data ingestion and frontend rendering.
 
@@ -117,11 +113,11 @@ Notes:
 
 {{% tab "Databricks" %}}
 
-1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
+1. Navigate to the [Databricks integration tile][101] in Datadog and click {{< ui >}}Configure{{< /ui >}}.
 2. Enter the workspace name, url, client ID, and client secret corresponding to your Databricks service principal.
-3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
+3. Under the {{< ui >}}Select products to set up integration{{< /ui >}} section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-5. Click **Save Databricks Workspace**.
+5. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
 Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
 ```sql
@@ -145,12 +141,12 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 1. Create an [admin API key][103] in your OpenAI account settings:
    - Log in to your [OpenAI Account][104].
-   - Navigate to the [Admin Keys page][105] or go to **API keys** under **Organization settings** and select the **Admin keys** tab.
-   - Click **Create a new secret key** and copy the created admin API key.
-2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
+   - Navigate to the [Admin Keys page][105] or go to {{< ui >}}API keys{{< /ui >}} under {{< ui >}}Organization settings{{< /ui >}} and select the {{< ui >}}Admin keys{{< /ui >}} tab.
+   - Click {{< ui >}}Create a new secret key{{< /ui >}} and copy the created admin API key.
+2. Navigate to the [OpenAI integration tile][102] in Datadog and click {{< ui >}}Add Account{{< /ui >}}.
 3. Enter your OpenAI account name, input your admin API key, and optionally, specify tags.
-4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
-5. Click **Save**.
+4. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -175,10 +171,36 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 ### 2. Configure the Datadog integration
 
 1. In Datadog, go to [**Integrations > Anthropic Usage and Costs**](https://app.datadoghq.com/integrations?integrationId=anthropic-usage-and-costs).
-2. On the **Configure** tab, under **Account details**, paste in the **Admin API Key** from Anthropic.
-3. Click **Save**.
+2. On the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Account details{{< /ui >}}, paste in the {{< ui >}}Admin API Key{{< /ui >}} from Anthropic.
+3. Click {{< ui >}}Save{{< /ui >}}.
 
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
+
+**Note**: To track costs for both Anthropic Enterprise and platform accounts, repeat the setup steps to add a separate account entry for each API key type. Use the [Admin API key](https://docs.anthropic.com/en/api/administration-api) for standard platform usage, and the Enterprise Analytics API key for Anthropic Enterprise usage.
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+<div class="alert alert-warning">An Enterprise plan and team admin role are required to generate a Cursor Admin API key. Standard team plan accounts return access denied errors.</div>
+
+### 1. Generate an Admin API key
+
+Begin by getting an Admin API key from Cursor. This key allows access to usage and cost reports across your team.
+
+1. In the Cursor dashboard, navigate to **Settings > Advanced > Admin API Keys**.
+2. Create a new Admin API key and copy it to a secure location.
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, go to [**Integrations > Cursor**][101].
+2. On the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Account details{{< /ui >}}, paste in the {{< ui >}}Admin API Key{{< /ui >}} from Cursor.
+3. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `Cursor in Cloud Cost Management`.
+4. Click {{< ui >}}Save{{< /ui >}}.
+
+After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+[101]: https://app.datadoghq.com/integrations/cursor
 
 {{% /tab %}}
 
@@ -186,7 +208,7 @@ After you save your configuration, Datadog begins polling Anthropic usage and co
 
 1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `read:org` scopes on the [Personal Access Tokens][109] page in GitHub.
 2. Navigate to the Datadog [GitHub Costs tile][108].
-3. Click **Add New**.
+3. Click {{< ui >}}Add New{{< /ui >}}.
 4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
 5. Click the checkmark button to save this account.
 
@@ -202,10 +224,10 @@ Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% tab "Confluent Cloud" %}}
 
 1. Create or acquire an API key with the [billing admin][102] role in Confluent Cloud.
-2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
+2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click {{< ui >}}Add Account{{< /ui >}}.
 3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
-5. Click **Save**.
+4. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for {{< ui >}}Collect cost data to view in Cloud Cost Management{{< /ui >}}.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -221,9 +243,9 @@ If you wish to collect cluster-level tags or business metadata tags for your cos
 {{% tab "MongoDB" %}}
 
 1. [Create an API token][101] in MongoDB with `Organizational Billing Viewer` permissions, and add `Organizational Read Only` permissions for cluster resource tags.
-2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
+2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click {{< ui >}}Add New{{< /ui >}}.
 3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
-4. Click **Save**.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -237,13 +259,13 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 {{% tab "Elastic Cloud" %}}
 
 1. Go to the [API Key][102] section in your Elastic Cloud organization's settings.
-2. Click **Create New Key**.
-3. Choose a **Name** and **Expiration Date** for your API key.
-4. Select the **Billing Admin** role.
-5. Click **Create Key** to generate the key.
+2. Click {{< ui >}}Create New Key{{< /ui >}}.
+3. Choose a {{< ui >}}Name{{< /ui >}} and {{< ui >}}Expiration Date{{< /ui >}} for your API key.
+4. Select the {{< ui >}}Billing Admin{{< /ui >}} role.
+5. Click {{< ui >}}Create Key{{< /ui >}} to generate the key.
 6. Go to the [Elastic Cloud integration tile][101] in Datadog
-7. Click **Add Account**.
-8. Enter your **Elastic Cloud Organization ID** and **Billing API Key** in the account table.
+7. Click {{< ui >}}Add Account{{< /ui >}}.
+8. Enter your {{< ui >}}Elastic Cloud Organization ID{{< /ui >}} and {{< ui >}}Billing API Key{{< /ui >}} in the account table.
 
 Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -257,9 +279,9 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 {{% tab "Fastly" %}}
 
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
-2. Navigate to the [Fastly cost management integration tile][102] in Datadog and click **Add New**.
+2. Navigate to the [Fastly cost management integration tile][102] in Datadog and click {{< ui >}}Add New{{< /ui >}}.
 3. Enter your Fastly account name and API token.
-4. Click **Save**.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -271,10 +293,10 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
-2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
-3. Enter an `Account SID` for your Twilio account.
-4. Click **Save**.
+1. Navigate to the [Twilio integration tile][101] in Datadog and click {{< ui >}}Add Account{{< /ui >}}.
+2. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
+3. Enter an {{< ui >}}Account SID{{< /ui >}} for your Twilio account.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -553,12 +575,26 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `org_id` | The unique identifier of the Anthropic organization. |
 | `org_name` | A tag-normalized version of the Anthropic organization's name. |
 | `display_org_name` | The unaltered name of the organization. |
+| `org_type` | The type of Anthropic account (for example, `enterprise`). Displays `N/A` for non-enterprise accounts. |
 | `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
 | `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
 | `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
 | `token_type` | The category of tokens consumed.|
 | `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `billing_group` | The billing group within the Cursor organization to which the usage is attributed. |
+| `charge_type` | The category of the Cursor charge (for example, `fast_premium`, `slow_premium`). |
+| `hour` | The hour during which the usage was recorded, in UTC. |
+| `is_headless` | Indicates whether the usage was generated by a headless session, such as a background agent running outside the Cursor editor (`true` or `false`). |
+| `max_mode` | Indicates whether the request used Cursor Max, which routes queries to frontier models at higher cost (`true` or `false`). |
+| `user` | The email address of the Cursor user who incurred the cost. |
 
 {{% /tab %}}
 

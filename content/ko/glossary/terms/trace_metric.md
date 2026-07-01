@@ -1,4 +1,5 @@
 ---
+id: trace_metric
 core_product:
 - APM
 title: 트레이스 메트릭

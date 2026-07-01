@@ -11,12 +11,12 @@ Use the EFS block component to represent elastic file systems from your Amazon W
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Storage**: The storage class used for the file system workload.
-- **Storage (GiB)**: Amount of data stored per month.
-- **Access Requests (GiB)**: Amount of data requested per month. Only available for Infrequent Access storage classes.
-- **Throughput mode**: Select a throughput mode for the file system.
-- **Throughput (MiB/s)**: Amount of additional throughput provided. Only available for the provisioned throughput mode.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Storage{{< /ui >}}: The storage class used for the file system workload.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Amount of data stored per month.
+- {{< ui >}}Access Requests (GiB){{< /ui >}}: Amount of data requested per month. Only available for Infrequent Access storage classes.
+- {{< ui >}}Throughput mode{{< /ui >}}: Select a throughput mode for the file system.
+- {{< ui >}}Throughput (MiB/s){{< /ui >}}: Amount of additional throughput provided. Only available for the provisioned throughput mode.
 
 ## API
 

@@ -1,8 +1,9 @@
 ---
+id: test_regression
 core_product:
 - ci-cd
 related_terms:
-- regresión del rendimiento
+- performance_regression_test_visibility
 short_definition: Una ejecución de test se marca como regresión cuando su duración
   es cinco veces la media y mayor que la duración máxima para el mismo test en la
   rama por defecto. Además, la ejecución del test debe tener una duración mínima de

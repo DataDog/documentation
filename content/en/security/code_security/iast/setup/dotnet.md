@@ -29,7 +29,7 @@ You can detect code-level vulnerabilities and monitor application security in .N
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][4] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][4] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
@@ -135,7 +135,7 @@ ENV DD_IAST_ENABLED=true
 {{% /tab %}}
    {{< /tabs >}}
 
-To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+To see Code Security in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 

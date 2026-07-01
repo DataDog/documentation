@@ -24,7 +24,7 @@ A new value detection rule:
 
 {{< img src="security/security_monitoring/detection_rules/new_value/detect_new_value.png" alt="A new value rule's query with the detect new value setting highlighted" style="width:100%;" >}}
 
-The **Detect new value** field defines the attributes containing the values to learn. You can add up to five attributes.
+The {{< ui >}}Detect new value{{< /ui >}} field defines the attributes containing the values to learn. You can add up to five attributes.
 
 #### Group-by fields
 
@@ -37,15 +37,15 @@ The `group by` field defines the scope within which new values are evaluated, su
 {{< img src="security/security_monitoring/detection_rules/new_value/learning_duration.png" alt="A new value rule's query with the learning duration setting highlighted" style="width:100%;" >}}
 
 The learning duration has the following options:
-- **for all new values**: The rule triggers on any new values.
-- **after the first seen value**: The rule triggers on any new values after the value has been observed once.
-- **after**: Define the length of time the rule learns values for the selected fields. For example, if you select **after 7 days**, the rule learns the values for the first seven days and then triggers on any new values after the seven days. The maximum learning duration is 30 days.
+- {{< ui >}}for all new values{{< /ui >}}: The rule triggers on any new values.
+- {{< ui >}}after the first seen value{{< /ui >}}: The rule triggers on any new values after the value has been observed once.
+- {{< ui >}}after{{< /ui >}}: Define the length of time the rule learns values for the selected fields. For example, if you select {{< ui >}}after 7 days{{< /ui >}}, the rule learns the values for the first seven days and then triggers on any new values after the seven days. The maximum learning duration is 30 days.
 
 #### Forget value
 
 {{< img src="security/security_monitoring/detection_rules/new_value/forget_after.png" alt="A new value rule's other parameters section showing the forget after option" style="width:40%;" >}}
 
-The [Forget value][2] option determines how long the rule keeps a value known. After this period has passed, the value is forgotten and the rule alerts on the value again. The maximum number of days for **Forget value** is 30 days.
+The [Forget value][2] option determines how long the rule keeps a value known. After this period has passed, the value is forgotten and the rule alerts on the value again. The maximum number of days for {{< ui >}}Forget value{{< /ui >}} is 30 days.
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=newvalue
 [2]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=newvalue#forget-value-rt-new-value

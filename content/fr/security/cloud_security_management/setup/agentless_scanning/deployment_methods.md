@@ -4,53 +4,116 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management/agentless_scanning
   tag: Documentation
-  text: Scanning sans Agent Cloud Security
-title: Déploiement du scanning sans Agent
+  text: Agentless Scanning Cloud Security
+- link: /security/cloud_security_management/setup/agentless_scanning/enable
+  tag: Documentation
+  text: Activer Agentless Scanning
+- link: /security/cloud_security_management/setup/agentless_scanning/update
+  tag: Documentation
+  text: Mise à jour d'Agentless Scanning
+title: Déploiement d'Agentless Scanning
 ---
 
-Il existe deux méthodes recommandées pour déployer les scanners sans Agent dans votre environnement : soit en utilisant le scanning inter-comptes, soit le scanning dans le même compte.
+Ce guide vous aide à choisir la bonne topologie de déploiement pour Agentless Scanning en fonction de votre environnement cloud. Pour les instructions de configuration, consultez la section [Activer Agentless Scanning][3].
+
+## Présentation
+
+Datadog recommande de suivre les directives suivantes :
+- Utilisez un compte de scanner dédié pour les environnements multi-comptes.
+- Déployez un scanner dans chaque région contenant plus de 150 hosts.
+- Si vous utilisez [Cloud Storage Scanning][1], déployez un scanner dans chaque région contenant un datastore (par exemple, des compartiments S3 ou des instances RDS).
+
+<div class="alert alert-info">Les scanners envoient uniquement à Datadog la liste collectée de packages et les métadonnées du host (hostnames, identifiants d'instances EC2/VM/Compute Engine). Toutes les données scannées restent dans votre infrastructure.</div>
+
+## Configuration du compte cloud et de la région
+
+La topologie de déploiement que vous utilisez dépend du nombre de comptes cloud (comptes AWS, abonnements Azure ou projets GCP) à scanner et des régions qu'ils couvrent.
+
+- **Comptes cloud** : si vous n'avez besoin de scanner qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte. Dans le cas contraire, utilisez un compte de scanner dédié et des rôles délégués pour lui accorder l'accès nécessaire au scan des autres comptes. C'est ce qu'on appelle le **scan inter-comptes**.
+- **Régions** : un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Cependant, le scan inter-régions entraîne des coûts de transfert de données. Le déploiement de scanners supplémentaires dépend du nombre de hosts présents dans chaque région.
+
+Ces onglets contiennent des informations sur la configuration de votre topologie de déploiement. Sélectionnez l'onglet correspondant au nombre de comptes à scanner, puis apprenez-en plus en fonction du nombre de régions à couvrir.
 
 {{< tabs >}}
-{{% tab "Cross-account scanning" %}}
+{{% tab "Single account" %}}
 
-Avec le scanning inter-comptes, les scanners sans Agent sont déployés dans plusieurs régions au sein d'un seul compte cloud. Les scanners sans Agent déployés bénéficient d'une visibilité sur plusieurs comptes sans avoir besoin d'effectuer des scans inter-régions, qui sont coûteux en pratique.
+Si vous n'avez besoin de scanner qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte.
 
-Pour les comptes plus importants avec 250 hosts ou plus, il s'agit de l'option la plus rentable car elle évite les scans inter-régions et réduit les frictions liées à la gestion de vos scanners sans Agent. Vous pouvez soit créer un compte dédié pour vos scanners sans Agent, soit en choisir un existant. Le compte où se trouvent les scanners sans Agent peut également être scanné.
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless appliqué dans un compte couvrant plusieurs régions" width="40%" >}}
 
-Le diagramme suivant illustre le fonctionnement du scanning sans Agent lorsqu'il est déployé dans un compte cloud central :
+### Déterminer le nombre de scanners à déployer
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagramme du scanning sans Agent montrant que le scanner sans Agent est déployé dans un compte cloud central" width="90%" >}}
+Un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Le scan inter-régions entraîne des coûts de transfert de données. La décision de déployer des scanners supplémentaires dépend donc du nombre de hosts présents dans chaque région.
+
+- **Moins de ~150 hosts au total dans toutes les régions** : un scanner unique dans une seule région est la configuration la plus économique. Les coûts de transfert de données inter-régions pour le scan des hosts distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
+- **Plus de ~150 hosts dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies réalisées sur les coûts d'egress grâce au scan local compensent le coût d'exécution du scanner.
+- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hosts. Les régions en dessous du seuil peuvent être scannées en inter-régions depuis le scanner le plus proche.
+
+Datadog achemine automatiquement les scans vers le scanner régional approprié afin de minimiser les coûts inter-régions.
+
+#### Limites de capacité du scanner
+
+Chaque scanner est soumis à des limites de débit régies par les quotas d'API du fournisseur cloud :
+
+| Limite | Valeur |
+|-------|-------|
+| Nombre maximum de scanners par compte et par région | 4 (limite stricte ; les fournisseurs cloud tels qu'AWS limitent les snapshots simultanés à 100 par compte et par région) |
+| Intervalle de scan | Toutes les 12 heures |
+
+<div class="alert alert-danger">N'augmentez pas le nombre souhaité dans le groupe Auto Scaling (ASG) au-delà de quatre scanners par région. Les scanners supplémentaires ne peuvent pas créer de snapshots en raison de la limite de snapshots simultanés imposée par les fournisseurs cloud.</div>
 
 {{% /tab %}}
-{{% tab "Same account scanning" %}}
+{{% tab "Multiple accounts" %}}
 
-Avec le scanning dans le même compte, un seul scanner sans Agent est déployé par compte. Bien que cela puisse entraîner des coûts plus élevés, car chaque scanner sans Agent doit effectuer des scans inter-régions par compte, Datadog recommande cette option si vous ne souhaitez pas accorder d'autorisations inter-comptes.
+### Déterminer les comptes dans lesquels déployer des scanners
 
-Le diagramme suivant illustre le fonctionnement du scanning sans Agent lorsqu'il est déployé dans chaque compte cloud :
+Datadog recommande d'utiliser un **compte de scanner dédié** pour y déployer des scanners, et des **rôles délégués inter-comptes** pour accorder aux scanners l'accès aux comptes cibles (y compris le compte de scanner).
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagramme du scanning sans Agent montrant que le scanner sans Agent est déployé dans chaque compte cloud" width="90%" >}}
+Pour AWS Organizations, utilisez un [CloudFormation StackSet][1] pour déployer un rôle délégué dans tous les comptes membres, ce qui automatise l'intégration pour le scan inter-comptes.
 
-[3]: https://app.datadoghq.com/security/csm/vm
-[4]: /fr/remote_configuration
+Le diagramme suivant illustre le scan inter-comptes depuis un compte central (Compte 4) :
+
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless déployé dans un compte cloud central" width="90%" >}}
+
+**Si vous ne souhaitez pas accorder d'autorisations inter-comptes**, déployez plutôt un scanner dans chaque compte. Cela entraîne des coûts plus élevés, car chaque scanner effectue des scans inter-régions au sein de son propre compte.
+
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless déployé dans chaque compte cloud" width="90%" >}}
+
+### Déterminer le nombre de scanners à déployer
+
+Un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Le scan inter-régions entraîne des coûts de transfert de données. La décision de déployer des scanners supplémentaires dépend donc du nombre de hosts présents dans chaque région.
+
+- **Moins de ~150 hosts au total dans toutes les régions** : un scanner unique dans une seule région est la configuration la plus économique. Les coûts de transfert de données inter-régions pour le scan des hosts distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
+- **Plus de ~150 hosts dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies réalisées sur les coûts d'egress grâce au scan local compensent le coût d'exécution du scanner.
+- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hosts. Les régions en dessous du seuil peuvent être scannées en inter-régions depuis le scanner le plus proche.
+
+Datadog achemine automatiquement les scans vers le scanner régional approprié afin de minimiser les coûts inter-régions.
+
+#### Limites de capacité du scanner
+
+Chaque scanner est soumis à des limites de débit régies par les quotas d'API du fournisseur cloud :
+
+| Limite | Valeur |
+|-------|-------|
+| Nombre maximum de scanners par compte et par région | 4 (limite stricte ; les fournisseurs cloud tels qu'AWS limitent les snapshots simultanés à 100 par compte et par région) |
+| Intervalle de scan | Toutes les 12 heures |
+
+<div class="alert alert-danger">N'augmentez pas le nombre souhaité dans le groupe Auto Scaling (ASG) au-delà de quatre scanners par région. Les scanners supplémentaires ne peuvent pas créer de snapshots en raison de la limite de snapshots simultanés imposée par les fournisseurs cloud.</div>
+
+[1]: /fr/security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration recommandée
-Le scanning sans Agent entraîne des [coûts supplémentaires du fournisseur de services cloud][2] pour l'exécution des scanners dans vos environnements cloud. Pour gérer les coûts tout en garantissant des scans fiables toutes les 12 heures, Datadog recommande de configurer le scanning sans Agent avec Terraform comme modèle par défaut. Terraform permet de déployer un scanner par région, ce qui évite la mise en réseau inter-régions.
-Pour améliorer l'efficacité du scanner, assurez-vous que votre configuration respecte ces directives :
+## Considérations relatives aux réseaux d'entreprise
 
-- Déployer les scanners dans un seul compte AWS
-- Déployer un scanner dans chaque région comptant plus de 250 hosts
-- Déployer un scanner dans toute région contenant un magasin de données si vous utilisez le [scanning du stockage cloud][1]
-
-Datadog planifie automatiquement les scans vers la bonne région pour minimiser les coûts inter-régions.
-
-**Remarque** : les données scannées réelles restent dans votre infrastructure, et seules la liste collectée de paquets ainsi que les informations relatives aux hosts collectés (noms de host/instances EC2) sont renvoyées à Datadog.
+Par défaut, le scanner crée un nouveau VPC lors du déploiement. Si votre organisation utilise Terraform et dispose de politiques de contrôle des services (SCP) qui restreignent la création de VPC, utilisez l'option [**VPC personnalisé**][2] lors de la configuration pour utiliser un VPC existant plutôt que d'en créer un nouveau.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/security/cloud_security_management/agentless_scanning#cloud-storage-scanning
-[2]: /fr/security/cloud_security_management/agentless_scanning#cloud-service-provider-cost
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
+[3]: /fr/security/cloud_security_management/setup/agentless_scanning/enable
+[4]: /fr/security/cloud_security_management/setup/agentless_scanning/enable#setup

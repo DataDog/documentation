@@ -21,11 +21,11 @@ Network Device Monitoring helps you gain insights into the health and performanc
 
 This guide covers configuring Network Device Monitoring on your hosts, enriching device tags, setting up and viewing device profiles, viewing data in NetFlow Monitoring, and validating data in the provided dashboards and Device Topology Map.
 
-{{< img src="network_device_monitoring/getting_started/ndm_landing_page.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_landing_page_2.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
 
 ## How it works
 
-The following diagram illustrates the data flow between Syslog, SNMP traps, and NetFlow information. The devices send the relevant information to the Datadog Agent over the ports as shown in the diagram (ports can be changed if needed by configuration in the Agent). For API based integrations, the Datadog Agent connects with the network device vendor software controllers or managers on-premise or in the cloud based on specific `https` API integrations instructions per vendor. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over HTTPS on port `443`. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
+The following diagram illustrates the data flow between Syslog, SNMP traps, and NetFlow information. The devices send the relevant information to the Datadog Agent over the ports as shown in the diagram (ports can be changed if needed by configuration in the Agent). For API based integrations, the Datadog Agent connects with the network device vendor software controllers or managers on-premises or in the cloud based on specific `https` API integrations instructions per vendor. The Datadog Agent, configured with NDM and deployed on-premises or in the cloud, consolidates all collected device and network data from your network and sends it to Datadog over HTTPS on port `443`. This provides unified, full-stack observability of metrics, logs, traces, monitors, and dashboards.
 
   {{< img src="network_device_monitoring/getting_started/syslog_trap_netflow.png" alt="NDM Diagram showing the flow for Syslog, trap and Netflow collection." style="width:90%;" >}}
 
@@ -45,7 +45,7 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 ### High Availability
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

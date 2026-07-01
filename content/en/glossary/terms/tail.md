@@ -1,4 +1,5 @@
 ---
+id: tail
 title: tail
 core_product:
   - log management

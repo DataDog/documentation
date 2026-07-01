@@ -1,4 +1,5 @@
 ---
+id: rate
 title: rate
 core_product:
   - metrics

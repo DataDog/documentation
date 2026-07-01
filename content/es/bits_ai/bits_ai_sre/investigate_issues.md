@@ -49,7 +49,7 @@ Las investigaciones de SRE de Bits AI iniciadas a partir de los gráficos de lat
 
 1. En Datadog, ve a [APM][1] y abre la page (página) del servicio o recurso que desees investigar. Junto al gráfico de latencia, haz clic en **Investigate** (Investigar).
 1. Haz clic y arrastra el cursor sobre la visualización del gráfico de puntos para hacer una selección rectangular sobre una región que muestre una latencia inusual para inicializar el análisis. Aparecen los diagnósticos iniciales del problema de latencia, incluido el efecto observado en el usuario, las tags (etiquetas) anómalas que contribuyen al problema y los cambios recientes. Para obtener más información, consulta [APM Investigator][2].
-1. Haz clic en **Investigate wth Bits AI SRE** (Investigar con SRE de Bits AI) para realizar una investigación más profunda.
+1. Haz clic en **Investigate with Bits AI SRE** (Investigar con SRE de Bits AI) para realizar una investigación más profunda.
 
 ##### Historias de Watchdog de latencias de APM
 

@@ -83,6 +83,7 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
    **고급 옵션**:
    - **Compartment**: Datadog에서 생성한 리소스의 기존 컴파트먼트를 지정합니다(기본적으로 새 "Datadog" 컴파트먼트를 생성함).
    - **Domain**: User 및 Group이 생성된 위치에서 재정의할 Identity Domain OCID를 제공합니다. 해당 도메인에 **Identity Domain Administrator** 역할이 필요합니다.
+   - **Resources tags**: Datadog QuickStart 스택이 배포한 모든 OC 리소스에 추가할 지정 태그를 모두 제공합니다. 줄별로 태그 1개를 입력하세요. 쉼표를 입력하지 마세요. 지정된 태그는 `namespace.key:value`와 같은 형식이어야 합니다(예: `CostCenter.Environment:prod`). 빈 칸으로 남겨두면 Datadog QuickStart 스택이 배포한 OCI 리소스에 지정 태그가 추가되지 않습니다.
 
 8. **Next**를 클릭합니다.
 9. **Create**를 클릭하고 배포가 완료될 때까지 최대 30분 정도 기다립니다.
@@ -105,9 +106,9 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 
 ### 리전 추가
 
-**General** 탭에서, **Regions** 확인란 목록에서 데이터 수집을 위한 지역을 선택합니다. 지역 선택은 메트릭 및 로그 모두에 대해 전체 테넌시에 적용됩니다.
+**General** 탭에서, **Regions** 확인란 목록에서 데이터 수집을 위한 리전을 선택합니다. 리전 선택은 메트릭 및 로그 모두 전체 테넌시에 적용됩니다.
 
-**참고**: QuickStart 설정 방법을 사용한 후 새로운 OCI 지역을 구독한 경우, ORM에서 최초 설정 스택을 다시 적용합니다. 그러면 새 지역이 Datadog OCI 타일에서 사용 가능한 상태로 전환됩니다.
+**참고**: QuickStart 설정 방법을 사용한 후 새로운 OCI 리전을 구독한 경우, ORM에서 최초 설정 스택을 다시 적용합니다. 그러면 새 리전이 Datadog OCI 타일에서 사용 가능한 상태로 전환됩니다.
 
 ### 메트릭 및 로그 수집
 

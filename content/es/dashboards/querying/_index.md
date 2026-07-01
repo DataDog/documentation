@@ -1,88 +1,87 @@
 ---
 aliases:
 - /es/graphing/using_graphs/
-description: Consulta tus datos para obtener más información
+description: Consulta tus datos para obtener información
 further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
-  tag: Centro de aprendizaje
-  text: Crear dashboards mejores
-title: Consulta
+  tag: Centro de Aprendizaje
+  text: Construyendo Mejores Tableros
+title: Consultando
 ---
+## Descripción General {#overview}
 
-## Información general
+Ya sea que estés utilizando métricas, registros, trazas, monitores, tableros, cuadernos, etc., todos los gráficos en Datadog tienen la misma funcionalidad básica. Esta página describe cómo consultar con el editor gráfico. Los usuarios avanzados pueden crear y editar gráficos con JSON. Para aprender más, consulta [Graficando con JSON][1].
 
-Ya sea que utilices métricas, logs, trazas (traces), monitores, dashboards, notebooks, etc., todas las gráficas en Datadog tienen la misma funcionalidad básica. En esta página se describen las consultas con el editor de gráficas. Los usuarios avanzados pueden crear y editar gráficas con JSON. Para obtener más información, consulta la sección de [Crear gráficas con JSON][1].
+Puedes consultar utilizando el editor de gráficos en las páginas de Tableros o Cuadernos, o puedes usar {{< ui >}}Quick Graphs{{< /ui >}} disponible en cualquier página. Abre Gráficos Rápidos presionando `G` en cualquier página. Para aprender más, consulta la [Guía de Gráficos Rápidos][2].
 
-Puedes realizar consultas con el editor de gráficas de las páginas de dashboards o notebooks, o puedes utilizar **Quick Graphs** que se encuentra disponible en todas las páginas. Abre Quick Graphs al pulsar `G` en cualquier página. Para obtener más información, consulta la [guía de Quick Graphs][2].
+## Editor de gráficos {#graphing-editor}
 
-## Editor de gráficas
+En los widgets, abre el editor de gráficos haciendo clic en el ícono de lápiz en la esquina superior derecha. El editor de gráficos tiene las siguientes pestañas:
 
-En widgets, abre el editor de gráficas al hacer clic en el icono de lápiz de la esquina superior derecha. El editor de gráficas cuenta con las siguientes pestañas:
+* {{< ui >}}Share{{< /ui >}}: Inserta el gráfico en cualquier página web externa.
+* {{< ui >}}JSON{{< /ui >}}: Un editor más flexible, que requiere conocimiento del lenguaje de definición de gráficos.
+* {{< ui >}}Edit{{< /ui >}}: La pestaña de interfaz de usuario predeterminada para opciones de graficado.
 
-* **Share** (Compartir): integra la gráfica en cualquier página web externa.
-* **JSON**: un editor más flexible, que requiere conocimientos del lenguaje de definición de gráficas.
-* **Edit** (Editar): la pestaña de interfaz de usuario predeterminada de las opciones para crear gráficas.
+Cuando abres por primera vez el editor de gráficos, estás en la pestaña {{< ui >}}Edit{{< /ui >}}. Aquí, puedes usar la interfaz de usuario para elegir la mayoría de las configuraciones. Aquí hay un ejemplo:
 
-Cuando abras por primera vez el editor de gráficas, te encontrarás en la pestaña de **Edit** (Editar). Aquí, puedes utilizar la interfaz de usuario para elegir la mayoría de los ajustes. Este es un ejemplo:
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Pestaña de edición de gráficos" style="width:100%;" >}}
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Pestaña de edición de gráficas" style="width:100%;" >}}
+## Configurando un gráfico {#configuring-a-graph}
 
-## Configuración de una gráfica
+Para configurar su gráfico en los tableros, siga este proceso:
 
-Para configurar tu gráfica en los dashboards, sigue este proceso:
+1. [Seleccione la visualización](#select-your-visualization)
+2. [Defina la métrica](#define-the-metric)
+3. [Filtre su métrica](#filter)
+4. [Configure la agregación temporal](#configure-the-time-aggregation)
+5. [Configure la agregación espacial](#configure-the-space-aggregation)
+6. [Aplique la función](#advanced-graphing)
+7. [Titule el gráfico](#create-a-title)
 
-1. [Seleccionar la visualización](#select-your-visualization)
-2. [Definir la métrica](#define-the-metric)
-3. [Filtrar tu métrica](#filter)
-4. [Configurar la agregación temporal](#configure-the-time-aggregation)
-5. [Configurar la agregación espacial](#configure-the-space-aggregation)
-6. [Aplicar la función](#advanced-graphing)
-7. [Asignar un título a la gráfica](#create-a-title)
+### Seleccione su visualización {#select-your-visualization}
 
-### Seleccionar la visualización
+Seleccione su visualización de los [widgets][3] disponibles.
 
-Selecciona tu visualización entre los [widgets][3] disponibles.
+### Defina la métrica {#define-the-metric}
 
-### Definir la métrica
+Elija la métrica a graficar buscando o seleccionándola del menú desplegable junto a {{< ui >}}Metric{{< /ui >}}. Si no sabe qué métrica usar, el menú desplegable de métricas proporciona información adicional, incluyendo el `unit`, `type`, `interval`, `description`, `tags` y el número de `tag values`.
 
-Elige la métrica a graficar al buscarla o seleccionarla en el menú desplegable junto a **Metric** (Métrica). Si no sabes qué métrica utilizar, el menú desplegable de métricas proporciona información adicional, como por ejemplo `unit`, `type`, `interval`, `description`, `tags` y el número de `tag values`. 
+También puede ver indicadores de origen de Datadog u OpenTelemetry. Si su entorno utiliza ambos, puede usar el modificador de consulta de [fuente de Telemetría de Datadog][19] para [Consultar métricas de Datadog y OpenTelemetry][18] en un solo gráfico.
 
-También puedes ver indicadores de origen Datadog u OpenTelemetry. Si tu entorno utiliza ambos, puedes utilizar el selector **Modo semántico** de Datadog para [consultar todas las métricas de Datadog y OpenTelemetry][18] en un único gráfico.
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Menú desplegable de selección de métricas" responsive="true" style="width:100%;">}}
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Menú desplegable del selector de métricas" responsive="true" style="width:100%;">}}
+Explore sus métricas más a fondo con el [Metrics Explorer][4], un [notebook][5] o vea una lista de métricas en la página de [Metrics Summary][6].
 
-Explora más a fondo tus métricas con el [Explorador de métricas][4], un [notebook][5], o consulta una lista de métricas en la página de [Resumen de métricas][6].
+### Filtrar {#filter}
 
-### Filtro
+La métrica elegida puede ser filtrada por host o etiqueta usando el menú desplegable {{< ui >}}from{{< /ui >}} a la derecha de la métrica. El filtro predeterminado es *(en todas partes)*.
 
-La métrica que elijas se puede filtrar por host o etiqueta (tag) mediante el menú desplegable **from** (desde) situado a la derecha de la métrica. El filtro predeterminado es *(everywhere)* (en todas partes).
+{{< img src="dashboards/querying/filter-3.png" alt="Filtra el gráfico con el campo 'desde', utilizando variables de plantilla y lógica booleana." style="width:100%;" >}}
 
-{{< img src="dashboards/querying/filter-3.png" alt="Filtra la gráfica con el campo «desde», mediante variables de plantilla y lógica booleana" style="width:100%;" >}}
+- Usa [filtrado avanzado][7] dentro del menú desplegable `from` para evaluar consultas filtradas booleanas o filtradas por comodín.
+- Filtra consultas dinámicamente, utilizando Variables de Plantilla. Agrega el `$` con la clave de etiqueta y el gráfico aplica automáticamente la etiqueta que elijas en el menú desplegable de variables de plantilla. Para más información, consulta la [documentación de Variables de Plantilla][8].
 
-- Utiliza el [filtrado avanzado][7] en el menú desplegable `from` para evaluar las consultas filtradas con booleanos o comodines.
-- Filtra las consultas dinámicamente, utilizando Variables de plantilla. Añade `$` con la clave de etiqueta. El gráfico aplica automáticamente la etiqueta que elijas en el desplegable de variables de plantilla. Para obtener más información, consulta la [documentación sobre variables de plantilla][8].
+Para aprender más sobre etiquetas, consulta la [documentación de Etiquetado][9].
 
-Para obtener más información sobre etiquetas, consulta la [documentación sobre etiquetado][9].
+### Agregación y resumen {#aggregate-and-rollup}
 
-### Agregado y rollup
+#### Método de agregación {#aggregation-method}
 
-#### Método de agregación
+El método de agregación está al lado del menú desplegable de filtros. Esto predetermina a `avg by` pero puedes cambiar el método a `max by`, `min by` o `sum by`. En la mayoría de los casos, la métrica tiene muchos valores para cada intervalo de tiempo, provenientes de muchos hosts o instancias. El método de agregación elegido determina cómo se agregan las métricas en una sola línea.
 
-El método de agregación se encuentra junto al menú desplegable del filtro. Por defecto es `avg by`, pero puedes cambiar el método a `max by`, `min by` o `sum by`. En la mayoría de los casos, la métrica tiene muchos valores para cada intervalo de tiempo, procedentes de muchos hosts o instancias. El método de agregación elegido determina cómo se agregan las métricas en una sola línea.
+#### Configura la agregación de tiempo {#configure-the-time-aggregation}
 
-#### Configurar la agregación temporal
+Independientemente de las opciones elegidas arriba, siempre hay alguna agregación de datos debido a las limitaciones de tamaño físico de la ventana que sostiene el gráfico. Si un métrico se actualiza cada segundo, y estás viendo 4 horas de datos, necesitas 14,400 puntos para mostrar todo. Cada gráfico mostrado tiene alrededor de 300 puntos visibles en cualquier momento. Por lo tanto, cada punto mostrado en la pantalla representa 48 puntos de datos.
 
-Independientemente de las opciones elegidas anteriormente, siempre habrá agregación de datos debido a las limitaciones físicas de tamaño del período que contiene la gráfica. Si una métrica se actualiza cada segundo y se dispone de 4 horas de datos, se necesitan 14 400 puntos para mostrar todo. En cada gráfica se muestran unos 300 puntos en un momento dado. Por lo tanto, cada punto mostrado en la pantalla representa 48 puntos de datos.
+En la práctica, las métricas son recopiladas por el Agente cada 15-20 segundos. Por lo tanto, un día de datos equivale a 4,320 puntos de datos. Si se muestra un día de datos en un solo gráfico, Datadog agrupa automáticamente los datos. Para más detalles sobre la agregación de tiempo, consulte la [Introducción a las Métricas][10]. Consulte la documentación de [Rollup][11] para aprender más sobre los intervalos de agrupamiento y cómo Datadog agrupa automáticamente los puntos de datos.
 
-En la práctica, el Agent recopila métricas cada 15-20 segundos. Por tanto, un día de datos equivale a 4.320 puntos de datos. Si muestras los datos de un día en un solo gráfico, Datadog agrupa automáticamente los datos. Para obtener más detalles sobre la agregación temporal, consulta [Introducción a las métricas][10]. Para obtener más información sobre los intervalos de rollup y sobre cómo Datadog amplía automáticamente los puntos de datos, consulta la documentación [Rollup][11].
+Para agrupar manualmente los datos, use la [función de agrupamiento][12]. Haga clic en el ícono de sigma para agregar una función y seleccione `rollup` del menú desplegable. Luego elija cómo desea agregar los datos y el intervalo en segundos.
 
-Para agrupar manualmente los datos, utiliza la [función rollup][12]. Haz clic en el icono sigma para añadir una función y selecciona `rollup` en el menú desplegable. A continuación, elige cómo quieres agregar los datos y el intervalo en segundos.
+Esta consulta crea una sola línea que representa el total de espacio en disco disponible, en promedio, en todas las máquinas agrupadas en intervalos de un minuto:
 
-Esta consulta crea una sola línea que representa el espacio total disponible en disco, en promedio, en todas las máquinas acumuladas en ciclos de un minuto:
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="ejemplo de agrupamiento de la métrica system.disk.free en todas las máquinas" style="width:100%;">}}
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="Ejemplo de rollup de la métrica system.disk.free en todas las máquinas" style="width:100%;">}}
-
-Al cambiar a la vista de JSON, la consulta se ve de la siguiente manera:
+Al cambiar a la vista JSON, la consulta se ve así:
 
 ```text
 "query": "avg:system.disk.free{*}.rollup(avg, 60)"
@@ -127,138 +126,129 @@ El JSON completo se ve así:
 }
 ```
 
-Para obtener más información sobre el uso de la vista de JSON, consulta la sección de [Crear gráficas con JSON][1].
+Para más información sobre el uso de la vista JSON, consulte [Graficando con JSON][1].
 
-#### Configurar la agregación espacial
+#### Configure la agregación de espacio {#configure-the-space-aggregation}
 
-Junto al menú desplegable de método de agregación, elige lo que constituye una línea o agrupación en una gráfica. Por ejemplo, si eliges `host`, hay una línea por cada `host`. Cada línea se compone de la métrica seleccionada en un `host` concreto agregado mediante el método elegido.
+Junto al menú desplegable del método de agregación, elija qué constituye una línea o agrupación en un gráfico. Por ejemplo, si elige `host`, hay una línea para cada `host`. Cada línea está compuesta por la métrica seleccionada en un `host` particular agregada utilizando el método elegido.
 
-Además, puedes hacer clic en las etiquetas en el menú desplegable de métrica utilizado para [definir la métrica](#define-the-metric) a fin de agrupar y agregar tus datos. 
+Además, puede hacer clic en las etiquetas en el menú desplegable de métricas utilizadas para [definir la métrica](#define-the-metric) para agrupar y agregar sus datos.
 
-### Consultas anidadas
+### Consultas anidadas {#nested-queries}
 
-La función de consultas anidadas de Datadog te permite añadir capas adicionales de agregación temporal o espacial a los resultados de las consultas existentes. Esta función de consulta avanzada también te permite calcular percentiles y desviaciones estándar en los resultados de consultas agregadas de métricas de tipo count/rate/gauge y acceder a consultas de mayor resolución en periodos históricos.
+La función de consultas anidadas de Datadog le permite agregar capas adicionales de agregación de tiempo y/o espacio sobre los resultados de consultas de métricas existentes. Esta capacidad avanzada de consulta también le permite calcular percentiles y desviaciones estándar en los resultados de consultas agregadas de métricas de tipo conteo/tasa/gauge y acceder a consultas de mayor resolución a lo largo de marcos de tiempo históricos.
 
-Para obtener más información, consulta la documentación [Consultas anidadas][13].
+Para más información, consulta la documentación de [Consultas Anidadas][13].
 
 
-### Gráficas avanzadas
+### Gráficos avanzados {#advanced-graphing}
 
-En función de tus necesidades de análisis, puedes optar por aplicar otras funciones matemáticas a la consulta. Algunos ejemplos son frecuencias y derivados, suavizado y otros. Consulta la [lista de funciones disponibles][14].
+Dependiendo de tus necesidades de análisis, puedes optar por aplicar otras funciones matemáticas a la consulta. Los ejemplos incluyen tasas y derivadas, suavizado y otros. Consulta la [lista de funciones disponibles][14].
 
-Datadog también admite la capacidad de graficar tus métricas, logs, trazas y otras fuentes de datos con varias operaciones aritméticas. Utiliza: `+`, `-`, `/`, `*`, `min` y `max` para modificar los valores que se muestran en tus gráficas. Esta sintaxis permite tanto valores enteros como aritméticos mediante varias métricas.
+Datadog también admite la capacidad de graficar tus métricas, registros, trazas y otras fuentes de datos con varias operaciones aritméticas y funciones de comparación. Utiliza `+`, `-`, `/`, `*`, `minimum()` y `maximum()` para modificar los valores mostrados en tus gráficos. Esta sintaxis permite tanto valores enteros como aritmética utilizando múltiples métricas.
 
 Para graficar métricas por separado, utiliza la coma (`,`). Por ejemplo, `a, b, c`.
 
-**Nota**: Las consultas que utilizan comas sólo se admiten en visualizaciones, pero no funcionan en monitores. Utiliza [operadores booleanos][15] u operaciones aritméticas para combinar varias métricas en un monitor.
+**Nota**: Las consultas que utilizan comas solo son compatibles en visualizaciones, no funcionan en monitores. Utiliza [operadores booleanos][15] u operaciones aritméticas para combinar múltiples métricas en un monitor.
 
-#### Operación aritmética de una métrica con un número entero
+#### Aritmética de métricas utilizando un entero {#metric-arithmetic-using-an-integer}
 
-Modifica el valor que se muestra de una métrica en una gráfica mediante una operación aritmética. Por ejemplo, para visualizar el doble de una métrica concreta, haz clic en el enlace **Advanced...** (Avanzado...) del editor de gráficas. Luego, ingresa tu operación aritmética en la casilla `Formula`, en este caso: `a * 2`:
+Modifica el valor mostrado de una métrica en un gráfico realizando una operación aritmética. Por ejemplo, para visualizar el doble de una métrica específica, haz clic en el enlace {{< ui >}}Advanced...{{< /ui >}} en el editor de gráficos. Luego ingresa tu operación aritmética en el cuadro `Formula`, en este caso: `a * 2`:
 
-{{< img src="dashboards/querying/arithmetic_4.png" alt="Ejemplo de fórmula: multiplicar" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_4.png" alt="Ejemplo de fórmula - multiplicar" style="width:75%;" >}}
 
-#### Operación aritmética entre dos métricas
+#### Aritmética entre dos métricas {#arithmetic-between-two-metrics}
 
-Visualiza el porcentaje de un métrica al dividir una métrica por otra, por ejemplo:
+Visualiza el porcentaje de una métrica dividiendo una métrica sobre otra, por ejemplo:
 
 ```text
 jvm.heap_memory / jvm.heap_memory_max
 ```
 
-Utiliza la opción **Advanced...** (Avanzado...) del editor de gráficas y selecciona **Add Query** (Añadir consulta). A cada consulta se le asigna una letra en orden alfabético: la primera métrica está representada por la `a`, la segunda por la `b`, y así sucesivamente.
+Utiliza la opción {{< ui >}}Advanced...{{< /ui >}} en el editor de gráficos y selecciona {{< ui >}}Add Query{{< /ui >}}. Cada consulta se asigna una letra en orden alfabético: la primera métrica está representada por `a`, la segunda métrica está representada por `b`, etc.
 
-Luego, en la casilla `Formula`, ingresa la operación aritmética (`a / b` para este ejemplo). Para visualizar solo la fórmula en tu gráfica, haz clic en las marcas de verificación junto a las métricas `a` y `b`.
+Luego, en el cuadro `Formula`, ingresa la aritmética (`a / b` para este ejemplo). Para mostrar solo el resultado de la fórmula, consulta [Ocultar una consulta de la visualización](#hide-a-query-from-the-visualization).
 
-{{< img src="dashboards/querying/arithmetic_5.png" alt="Ejemplo de fórmula: relación" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="Ejemplo de fórmula - proporción" style="width:75%;" >}}
 
-Este es otro ejemplo en el que se muestra cómo se puede graficar la relación entre los logs de `error` e `info`.
+Aquí hay otro ejemplo que muestra cómo puedes graficar la proporción entre `error` registros y `info` registros.
 
 ```text
 status:error / status:info
 ```
 
-{{< img src="dashboards/querying/arithmetic_6.png" alt="Ejemplo de fórmula: relación de logs" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_6.png" alt="Ejemplo de fórmula - proporción de registros" style="width:75%;" >}}
 
-**Nota**: Las fórmulas no tienen letras. No se puede hacer operaciones aritméticas entre fórmulas.
+**Nota**: Las fórmulas no tienen letras asignadas. No se puede realizar aritmética entre fórmulas.
 
-#### Mínimo o máximo entre dos consultas
-Este es un ejemplo en el que se utiliza el operador `max` para hallar el uso máximo de CPU entre dos zonas de disponibilidad.  
+#### Ocultar una consulta de la visualización {#hide-a-query-from-the-visualization}
 
-```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
-```
+Cuando un widget tiene múltiples consultas y una fórmula, puede ocultar consultas individuales para que solo aparezca el resultado de la fórmula en el gráfico. Haz clic en la etiqueta de letra de la consulta para alternar su visibilidad en el gráfico. Una etiqueta azul indica que la consulta se muestra; una etiqueta gris indica que está oculta. La consulta oculta aún se utiliza en el cálculo de la fórmula.
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Ejemplo de fórmula para «max» que muestra el valor de recuento máximo entre dos consultas de métrica" style="width:75%;" >}}
+#### Mínimo o Máximo entre dos consultas {#minimum-or-maximum-between-two-queries}
 
-Además, también puedes calcular el máximo (o mínimo) entre dos consultas sobre productos diferentes. Este es otro ejemplo en el que se utiliza el operador `min` para hallar el mínimo entre logs con estados de error y advertencia.
+Utiliza `minimum()` y `maximum()` para comparar dos consultas punto por punto y devolver el valor más bajo o más alto en cada marca de tiempo.
 
-```text
-min(status:error, status:warn)
-```
+**Nota**: Usar `min()` y `max()` para comparación aritmética está en desuso. Utilice `minimum()` y `maximum()` en su lugar. Esta deprecación se aplica únicamente a la sintaxis de comparación aritmética. Los métodos de agregación como `min by`, `max by` y la agregación de consultas anidadas con `min` y `max` permanecen sin cambios.
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Ejemplo de fórmula para «min» que muestra el valor de recuento mínimo entre dos consultas de log" style="width:75%;" >}}
-
-#### Exponenciación
-
-Ahora puedes utilizar la función `pow()` para elevar una constante o una métrica a la potencia de otra constante o métrica. Esto te permite modelar el crecimiento o la desintegración exponencial.
-
-El siguiente es un ejemplo de cómo prever el crecimiento de usuarios aplicando un factor de crecimiento exponencial a un periodo de tiempo anterior:
+Aquí hay un ejemplo usando `maximum()` para encontrar el uso máximo de CPU entre dos Availability Zones.
 
 ```text
-users.sessions{*} * pow(1.1, timeshift(-1))
+maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-El siguiente es un ejemplo de cómo evidenciar las anomalías amplificando el valor mediante la exponenciación: 
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Ejemplo de fórmula para 'máximo' mostrando el valor más alto entre dos consultas métricas." style="width:75%;" >}}
+
+Además, también puede calcular el mínimo entre dos consultas en diferentes productos. Aquí hay otro ejemplo usando `minimum()` para encontrar el mínimo entre registros con estados de error y estados de advertencia.
 
 ```text
-pow(ping{region:*}, 2)
+minimum(status:error, status:warn)
 ```
 
-Para utilizar `pow(a, b)`, `a` y `b` pueden ser constantes o métricas. Esta función sólo está disponible para métricas.
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Ejemplo de fórmula para 'mínimo' mostrando el valor más bajo entre dos consultas de registros." style="width:75%;" >}}
 
-### Crear un alias
+### Cree un alias {#create-an-alias}
 
-Puedes crear un alias personalizado para tus fuentes de datos a fin de facilitar a tus usuarios la interpretación de los resultados de la gráfica.
+Puede crear un alias personalizado para sus fuentes de datos para facilitar la interpretación de los resultados del gráfico por parte de sus usuarios.
 
 {{< img src="dashboards/querying/custom_alias.png" alt="Alias personalizado" style="width:75%;" >}}
 
-### Crear un título
+### Cree un título {#create-a-title}
 
-Si no ingresas un título, se generará uno de manera automática en función de tus selecciones. Sin embargo, se recomienda que crees un título que describa el propósito de la gráfica.
+Si no ingresa un título, se genera uno automáticamente en función de sus selecciones. Sin embargo, se recomienda que cree un título que describa el propósito del gráfico.
 
-### Guardar
+### Guardar {#save}
 
-Haz clic en **Done** (Listo) para guardar tu trabajo y salir del editor. Siempre puedes volver al editor para cambiar la gráfica. Si haces cambios que no quieres guardar, haz clic en **Cancel** (Cancelar).
+Haga clic en {{< ui >}}Done{{< /ui >}} para guardar su trabajo y salir del editor. Siempre puede volver al editor para cambiar el gráfico. Si realiza cambios que no desea guardar, haga clic en {{< ui >}}Cancel{{< /ui >}}.
 
-## Opciones adicionales
+## Opciones adicionales {#additional-options}
 
-### Superposiciones de eventos
+### Superposiciones de eventos {#event-overlays}
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widgets de serie temporal que muestra tasas de error de RUM con eventos de despliegue superpuestos" style="width:100%;" >}}
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widgets de series temporales mostrando tasas de error RUM con eventos de implementación superpuestos." style="width:100%;" >}}
 
-Visualiza las correlaciones entre eventos utilizando la sección **Superposición de eventos** del editor de gráficos para la visualización de [series temporales][16]. En el campo de búsqueda, introduce cualquier texto o consulta de búsqueda estructurada. La búsqueda de eventos utiliza la [sintaxis para la búsqueda de logs][17].
+Visualiza las correlaciones de eventos utilizando la sección {{< ui >}}Event Overlays{{< /ui >}} en el editor de gráficos para la visualización [Series temporales][16]. En el campo de búsqueda, ingresa cualquier texto o consulta de búsqueda estructurada. La búsqueda de eventos utiliza la [sintaxis de búsqueda de registros][17].
 
-La superposición de eventos admite todas las fuentes de datos. Esto permite una correlación más sencilla entre los eventos empresariales y los datos de cualquier servicio de Datadog. 
+La superposición de eventos admite todas las fuentes de datos. Esto permite una correlación más fácil entre los eventos comerciales y los datos de cualquier servicio de Datadog.
 
-Con la superposición de eventos, puedes ver con rapidez cómo las acciones dentro de la organización afectan el rendimiento de la infraestructura y las aplicaciones. Estos son algunos casos de uso de ejemplo:
-- Tasas de error de RUM con eventos de despliegue superpuestos
-- Correlación del uso de la CPU con eventos relacionados con el suministro de servidores adicionales
-- Correlación del tráfico de salida con actividades sospechosas de inicio de sesión
-- Correlación de los datos de las series temporales con las alertas de monitor para garantizar que Datadog se ha configurado con las alertas adecuadas
+Con la superposición de eventos, puede ver rápidamente cómo las acciones dentro de la organización impactan el rendimiento de la aplicación y la infraestructura. Aquí hay algunos casos de uso de ejemplo:
+- Tasas de error de RUM con eventos de implementación superpuestos
+- Correlacionando el uso de CPU con eventos relacionados con la provisión de servidores adicionales
+- Correlacionando el tráfico de salida con actividad de inicio de sesión sospechosa
+- Correlacionando cualquier dato de series temporales con alertas de Monitors para asegurar que Datadog ha sido configurado con las alertas apropiadas
 
 
-### Gráfica dividida
+### Gráfico dividido {#split-graph}
 
-Con las gráficas divididas, puedes consultar las visualizaciones de métricas divididas por etiquetas. 
+Con gráficos divididos, puede ver sus visualizaciones de métricas desglosadas por etiquetas.
 
-{{< img src="dashboards/querying/split_graph_beta.png" alt="Ver gráficas divididas de la métrica container.cpu.usage en el widget de pantalla completa" style="width:100%;" >}}
+{{< img src="dashboards/querying/split_graph_beta.png" alt="Ver gráficos divididos de la métrica contenedor.cpu.usage en el widget de pantalla completa" style="width:100%;" >}}
 
-1. Accede a esta característica a través de la pestaña de **Split Graph** (Gráfica dividida) cuando visualices gráficas.
-1. Puedes cambiar la métrica *sort by* (ordenar por) para ver la relación entre los datos que estás graficando y otras métricas. 
-1. Limita la cantidad de gráficas que se muestran al cambiar el valor *limit to* (limitar a).
+1. Acceda a esta función a través de la pestaña {{< ui >}}Split Graph{{< /ui >}} al ver gráficos.
+1. Puede cambiar la métrica {{< ui >}}sort by{{< /ui >}} para ver la relación entre los datos que está graficando y otras métricas.
+1. Limite el número de gráficos que se muestran cambiando el valor de {{< ui >}}limit to{{< /ui >}}.
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -280,3 +270,4 @@ Con las gráficas divididas, puedes consultar las visualizaciones de métricas d
 [16]: /es/dashboards/widgets/timeseries/#event-overlay
 [17]: /es/logs/explorer/search_syntax/
 [18]: /es/metrics/open_telemetry/query_metrics
+[19]: /es/dashboards/functions/telemetry_source/

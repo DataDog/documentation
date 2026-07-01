@@ -50,8 +50,8 @@ Monitor tag policies allow you to enforce data validation on tags and tag values
 
 ### Configure monitor tag policies
 
-1. Navigate to the [**Monitors Settings**][1] page.
-2. Open the "Tag policies" tab. There are three data validation rules that are enforced through tag policies:
+1. Navigate to the [{{< ui >}}Monitors Settings{{< /ui >}}][1] page.
+2. Open the {{< ui >}}Tag policies{{< /ui >}} tab. There are three data validation rules that are enforced through tag policies:
     - Require tags with mandatory values
     - Require tags only
     - Optional tags with mandatory values
@@ -61,7 +61,7 @@ Monitor tag policies allow you to enforce data validation on tags and tag values
 
 ### Require tags with mandatory values
 
-To enforce mandatory tags, select the **Required** check box and specify both the tag key and values. In this example, monitors are required to have the `cost_center` tag. The value must be set to `cc1`, `cc2`, or `cc3`.
+To enforce mandatory tags, select the {{< ui >}}Required{{< /ui >}} check box and specify both the tag key and values. In this example, monitors are required to have the `cost_center` tag. The value must be set to `cc1`, `cc2`, or `cc3`.
 
 {{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="The Monitors Settings page displaying a tag policy for a required tag with mandatory values" >}}
 
@@ -73,7 +73,7 @@ You can require a tag but allow users to specify their own values. In this examp
 
 ### Optional tag with mandatory values
 
-To make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the **Values** field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
+To make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the {{< ui >}}Values{{< /ui >}} field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
 
 {{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="The Monitors Settings page displaying a tag policy for an optional tag with mandatory values" >}}
 
@@ -95,10 +95,10 @@ To create and manage monitor notification rules, see [Monitor notification rules
 <div class="alert alert-warning">Deleted Synthetic monitors are not recoverable and cannot be restored.</div>
 
 Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
-1. Navigate to the [**Monitors** > **Settings**][1] page.
-1. Open the **Deleted Monitors** tab.
+1. Navigate to the [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] page.
+1. Open the {{< ui >}}Deleted Monitors{{< /ui >}} tab.
 1. Select the monitor(s) you want to restore.
-1. Click the **Restore** button at the top of the table.
+1. Click the {{< ui >}}Restore{{< /ui >}} button at the top of the table.
 
 {{< img src="monitors/settings/recently_deleted.png" alt="Restore deleted monitor" style="width:100%;">}}
 

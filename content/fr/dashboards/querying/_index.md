@@ -6,81 +6,80 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
-title: Requêtes
+title: Création de requêtes
 ---
+## Aperçu {#overview}
 
-## Présentation
+Que vous utilisiez des métriques, logs, traces, monitors, dashboards, notebooks, etc., tous les graphiques dans Datadog possèdent la même fonctionnalité de base. Cette page explique comment interroger à l'aide de l'éditeur graphique. Les utilisateurs avancés peuvent créer et modifier des graphiques avec JSON. Pour en savoir plus, consultez [Graphing with JSON][1].
 
-Que vous utilisiez les métriques, les logs, les traces, les monitors, les dashboards ou encore les notebooks, tous les graphiques Datadog offrent les mêmes fonctionnalités de base. Cette page décrit comment créer des requêtes avec l'éditeur de graphiques. Les utilisateurs avancés peuvent également créer et modifier des graphiques avec JSON. Pour en savoir plus, consultez la section [Graphiques JSON][1].
+Vous pouvez interroger à l'aide de l'éditeur graphique sur les pages Dashboards ou Notebooks, ou utiliser {{< ui >}}Quick Graphs{{< /ui >}} disponible sur n'importe quelle page. Ouvrez Quick Graphs en appuyant sur `G` sur n'importe quelle page. Pour en savoir plus, consultez [Quick Graphs Guide][2].
 
-Vous pouvez créer des requêtes à l'aide de l'éditeur de graphiques sur les pages Dashboards ou Notebooks, ou utiliser les **graphiques rapides** disponibles sur n'importe quelle page. Ouvrez des graphiques rapides en appuyant sur `G` sur n'importe quelle page. Pour en savoir plus, consultez le [guide sur les graphiques rapides][2].
+## Éditeur graphique {#graphing-editor}
 
-## Éditeur de graphiques
+Sur les widgets, ouvrez l'éditeur graphique en cliquant sur l'icône de crayon dans le coin supérieur droit. L'éditeur de graphiques dispose des onglets suivants :
 
-Depuis les widgets, ouvrez l'éditeur de graphiques en cliquant sur l'icône en forme de crayon en haut à droite. L'éditeur de graphiques présente les onglets suivants :
+* {{< ui >}}Share{{< /ui >}}: Intégrez le graphique sur n'importe quelle page web externe.
+* {{< ui >}}JSON{{< /ui >}}: Un éditeur plus flexible, qui nécessite des connaissances en langage de définition de graphique.
+* {{< ui >}}Edit{{< /ui >}}: L'onglet UI par défaut pour les options de graphique.
 
-* **Share** : permet d'intégrer le graphique à n'importe quelle page Web externe.
-* **JSON** : un éditeur plus flexible. Il est cependant nécessaire de connaître le langage de définition de graphiques pour l'utiliser.
-* **Edit** : l'onglet par défaut avec les options de création de graphique.
+Lorsque vous ouvrez pour la première fois l'éditeur graphique, vous êtes sur l'onglet {{< ui >}}Edit{{< /ui >}}. Ici, vous pouvez utiliser l'interface utilisateur pour choisir la plupart des paramètres. Voici un exemple :
 
-Lorsque vous ouvrez l'éditeur de graphiques pour la première fois, vous accédez à l'onglet **Edit**. De là, vous pouvez utiliser l'interface pour définir la plupart des paramètres. Voici un exemple :
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet d'édition" style="width:100%;" >}}
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit d'un graphique" style="width:100%;" >}}
-
-## Configuration d'un graphique
+## Configuration d'un graphique {#configuring-a-graph}
 
 Pour configurer votre graphique sur un dashboard, suivez ce processus :
 
-1. [Sélectionner la visualisation](#selectionner-votre-visualisation)
-2. [Définir la métrique](#definir-la-metrique)
-3. [Filtrer votre métrique](#filtrer)
-4. [Configurer l'agrégation temporelle](#configurer-l-agregation-temporelle)
-5. [Configurer l'agrégation spatiale](#configurer-l-agregation-spatiale)
-6. [Appliquer une fonction](#creer-des-graphiques-avances)
-7. [Donner un titre au graphique](#creer-un-titre)
+1. [Sélectionnez la visualisation](#select-your-visualization)
+2. [Définissez la métrique](#define-the-metric)
+3. [Filtrer votre métrique](#filter)
+4. [Configurer l'agrégation temporelle](#configure-the-time-aggregation)
+5. [Configurer l'agrégation spatiale](#configure-the-space-aggregation)
+6. [Appliquer la fonction](#advanced-graphing)
+7. [Intitulez le graphique](#create-a-title)
 
-### Sélectionner votre visualisation
+### Sélectionnez votre visualisation {#select-your-visualization}
 
 Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
-### Définir la métrique
+### Définissez la métrique {#define-the-metric}
 
-Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
+Choisissez la métrique à représenter graphiquement en la recherchant ou en la sélectionnant dans le menu déroulant à côté de {{< ui >}}Metric{{< /ui >}}. Si vous ne savez pas quelle métrique utiliser, le menu déroulant des métriques fournit des informations supplémentaires, y compris le `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`.
 
-Il est également possible de voir des indicateurs de source Datadog ou OpenTelemetry. Si votre environnement utilise les deux, vous pouvez activer le **mode sémantique** de Datadog pour [interroger simultanément des métriques issues de Datadog et d'OpenTelemetry][18] dans un même graphique.
+Vous pouvez également voir des indicateurs de source Datadog ou OpenTelemetry. Si votre environnement utilise les deux, vous pouvez utiliser le modificateur de requête de [Telemetry source][19] pour [Query Across Datadog and OpenTelemetry Metrics][18] dans un seul graphique.
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Menu déroulant de sélection de métriques" responsive="true" style="width:100%;">}}
 
 Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou un [Notebook][5], ou consultez la liste des métriques sur la page [Metrics Summary][6].
 
-### Filtrer
+### Filtrer {#filter}
 
-La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*.
+Votre métrique choisie peut être filtrée par hôte ou par tag en utilisant le menu déroulant {{< ui >}}from{{< /ui >}} à droite de la métrique. Le filtre par défaut est *(partout)*.
 
-{{< img src="dashboards/querying/filter-3.png" alt="Filtrer le graphique avec le champ 'from', à l'aide de template variables et d'une logique booléenne" style="width:100%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filtrez le graphique avec le champ 'from', en utilisant des variables de modèle et une logique booléenne" style="width:100%;" >}}
 
-- Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards.
-- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][8].
+- Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer des requêtes filtrées par booléen ou par caractères génériques.
+- Filtrer les requêtes dynamiquement, en utilisant des variables de modèle. Ajoutez le `$` avec la clé de tag et le graphique applique automatiquement le tag que vous choisissez dans le menu déroulant des variables de modèle. Pour plus d'informations, consultez la [documentation sur les variables de modèle][8].
 
 Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][9].
 
-### Agréger et cumuler des données
+### Agrégation et regroupement {#aggregate-and-rollup}
 
-#### Méthode d'agrégation
+#### Méthode d'agrégation {#aggregation-method}
 
-La méthode d'agrégation est indiquée à côté de la liste déroulante du filtre. La méthode par défaut est `avg by`, mais vous pouvez la définir sur `max by`, `min by` ou `sum by`. Dans la plupart des cas, la métrique possède de nombreuses valeurs issues d'un grand nombre de hosts ou d'instances pour chaque intervalle de temps. La méthode d'agrégation choisie détermine comment les valeurs de la métrique sont agrégées en une seule ligne.
+La méthode d'agrégation est à côté du menu déroulant du filtre. La valeur par défaut est `avg by`, mais vous pouvez changer la méthode en `max by`, `min by` ou `sum by`. Dans la plupart des cas, la métrique a de nombreuses valeurs pour chaque intervalle de temps, provenant de nombreux hôtes ou instances. La méthode d'agrégation choisie détermine comment les métriques sont agrégées en une seule ligne.
 
-#### Configurer l'agrégation temporelle
+#### Configurer l'agrégation temporelle {#configure-the-time-aggregation}
 
-Indépendamment des options précédemment choisies, en raison des contraintes de taille physique de la fenêtre du graphique, les données font toujours l'objet d'une certaine agrégation. Si une métrique est mise à jour toutes les secondes et que vous consultez 4 heures de données, vous avez besoin d'afficher 14 400 points pour tout représenter. Chaque graphique illustre environ 300 points à la fois. Ainsi, chaque point de données affiché à l'écran représente 48 points de données.
+Quelles que soient les options choisies ci-dessus, il y a toujours une certaine agrégation des données en raison des contraintes de taille physique de la fenêtre contenant le graphique. Si une métrique est mise à jour chaque seconde, et que vous regardez 4 heures de données, vous avez besoin de 14 400 points pour tout afficher. Chaque graphique affiché a environ 300 points montrés à tout moment. Par conséquent, chaque point affiché à l'écran représente 48 points de données.
 
-Dans la pratique, les métriques sont recueillies par l'Agent toutes les 15 à 20 secondes. Ainsi, un jour de données représente 4 320 points. Si vous représentez les données d'un jour entier sur un seul graphique, les données sont automatiquement cumulées par Datadog. Pour en savoir plus sur l'agrégation temporelle, consultez la page [Présentation des métriques][10]. Consultez la documentation sur la fonction [Rollup][11] pour en savoir plus sur les intervalles de cumul et découvrir comment Datadog effectue automatiquement un cumul des points de données.
+En pratique, les métriques sont collectées par l'Agent toutes les 15 à 20 secondes. Ainsi, les données d'une journée correspondent à 4 320 points de données. Si vous affichez les données d'une journée sur un seul graphique, Datadog regroupe automatiquement les données. Pour plus de détails sur l'agrégation temporelle, voir l'[Introduction aux métriques][10]. Consultez la documentation sur le [Regroupement][11] pour en savoir plus sur les intervalles de regroupement et comment Datadog regroupe automatiquement les points de données.
 
-Pour cumuler manuellement les données, utilisez la [fonction rollup][12]. Cliquez sur l'icône Sigma pour ajouter une fonction et sélectionnez `rollup` dans le menu déroulant. Choisissez ensuite la méthode d'agrégation de vos données ainsi que l'intervalle en secondes.
+Pour regrouper manuellement les données, utilisez la [fonction de regroupement][12]. Cliquez sur l'icône sigma pour ajouter une fonction et sélectionnez `rollup` dans le menu déroulant. Ensuite, choisissez comment vous souhaitez agréger les données et l'intervalle en secondes.
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 1 minute :
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free sur toutes les machines" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="exemple de regroupement de la métrique system.disk.free sur toutes les machines" style="width:100%;">}}
 
 Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 
@@ -127,38 +126,38 @@ Le JSON complet ressemble à ce qui suit :
 }
 ```
 
-Pour obtenir davantage d'informations sur l'utilisation de la vue JSON, consultez la section [Graphiques JSON][1].
+Pour obtenir davantage d'information sur l'utilisation de la vue JSON, consultez la section [Graphiques JSON][1].
 
-#### Configurer l'agrégation spatiale
+#### Configurer l'agrégation de l'espace {#configure-the-space-aggregation}
 
-Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une ligne ou un groupe dans un graphique. Par exemple, si vous choisissez `host`, une ligne apparaîtra pour chaque `host`. Chaque ligne représente la métrique sélectionnée pour un `host` spécifique, ses valeurs étant agrégées selon la méthode choisie.
+À côté du menu déroulant de la méthode d'agrégation, choisissez ce qui constitue une ligne ou un regroupement sur un graphique. Par exemple, si vous choisissez `host`, il y a une ligne pour chaque `host`. Chaque ligne est composée de la métrique sélectionnée sur un `host` particulier agrégée selon la méthode choisie.
 
-En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée pour [définir la métrique](#definir-la-metrique) afin de regrouper et d'agréer vos données.
+De plus, vous pouvez cliquer sur les étiquettes dans le menu déroulant de la métrique utilisé pour [définir la métrique](#define-the-metric) afin de regrouper et d'agréger vos données.
 
-### Requêtes imbriquées
+### Requêtes imbriquées {#nested-queries}
 
-La fonctionnalité de requêtes imbriquées de Datadog vous permet d'ajouter des niveaux supplémentaires d'agrégation temporelle et/ou spatiale sur les résultats de requêtes de métriques existantes. Cette capacité avancée permet également de calculer des percentiles ou écarts types sur les résultats agrégés de métriques de type count/rate/gauge, et d'accéder à des requêtes haute résolution sur des périodes historiques.
+La fonctionnalité de requêtes imbriquées de Datadog vous permet d'ajouter des couches supplémentaires d'agrégation temporelle et/ou spatiale sur les résultats des requêtes de métriques existantes. Cette capacité de requête avancée vous permet également de calculer des percentiles et des écarts types sur les résultats de requêtes agrégées de métriques de type count/rate/gauge et d'accéder à des requêtes de plus haute résolution sur des périodes historiques.
 
 Pour plus d'informations, consultez la documentation sur les [requêtes imbriquées][13].
 
 
-### Créer des graphiques avancés
+### Graphiques avancés {#advanced-graphing}
 
-En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][14].
+En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à la requête. Les exemples incluent les taux et les dérivées, le lissage, et d'autres. Voir la [liste des fonctions disponibles][14].
 
-Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, `*`, `min`, and `max` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
+Datadog prend également en charge la possibilité de représenter graphiquement vos métriques, journaux, traces et autres sources de données avec diverses opérations arithmétiques et fonctions de comparaison. Utilisez `+`, `-`, `/`, `*`, `minimum()` et `maximum()` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe permet à la fois des valeurs entières et des opérations arithmétiques utilisant plusieurs métriques.
 
-Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
+Pour représenter les métriques séparément, utilisez la virgule (`,`). Par exemple, `a, b, c`.
 
-**Remarque** : les requêtes utilisant des virgules sont uniquement prises en charge dans les visualisations et ne fonctionnent pas sur les monitors. Utilisez des [opérateurs booléens][15] ou des opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
+**Remarque** : Les requêtes utilisant des virgules ne sont prises en charge que dans les visualisations, elles ne fonctionnent pas sur les monitors. Utilisez [opérateurs booléens][15] ou opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
 
-#### Opérations arithmétiques avec un entier
+#### Arithmétique des métriques utilisant un entier {#metric-arithmetic-using-an-integer}
 
-Modifiez la valeur affichée pour une métrique sur un graphique en effectuant une opération arithmétique. Par exemple, vous pouvez visualiser le double d'une métrique spécifique en cliquant sur le lien **Advanced...** de l'éditeur de graphiques. Saisissez ensuite votre opération arithmétique dans la case `Formula`, à savoir ici : `a * 2`.
+Modifiez la valeur affichée d'une métrique sur un graphique en effectuant une opération arithmétique. Par exemple, pour visualiser le double d'une métrique spécifique, cliquez sur le lien {{< ui >}}Advanced...{{< /ui >}} dans l'éditeur graphique. Ensuite, entrez votre opération arithmétique dans la boîte `Formula`, dans ce cas : `a * 2` :
 
 {{< img src="dashboards/querying/arithmetic_4.png" alt="Exemple de formule - multiplication" style="width:75%;" >}}
 
-#### Opération arithmétique entre deux métriques
+#### Arithmétique entre deux métriques {#arithmetic-between-two-metrics}
 
 Visualisez le pourcentage d'une métrique en divisant une métrique par une autre. Par exemple :
 
@@ -166,81 +165,90 @@ Visualisez le pourcentage d'une métrique en divisant une métrique par une autr
 jvm.heap_memory / jvm.heap_memory_max
 ```
 
-Utilisez l'option **Advanced...** sur l'éditeur de graphiques et sélectionnez **Add Query**. Chaque requête se voit attribuer une lettre dans l'ordre alphabétique : la première métrique est représentée par `a`, la seconde par `b`, etc.
+Utilisez l'option {{< ui >}}Advanced...{{< /ui >}} dans l'éditeur graphique et sélectionnez {{< ui >}}Add Query{{< /ui >}}. Chaque requête se voit attribuer une lettre par ordre alphabétique : la première métrique est représentée par `a`, la deuxième métrique est représentée par `b`, etc.
 
-Ensuite, saisissez l'opération arithmétique dans la zone `Formula` (`a / b` pour cet exemple). Pour afficher uniquement la formule sur votre graphique, cliquez sur les coches à côté des métriques `a` et `b`.
+Ensuite, dans la boîte `Formula`, entrez l'arithmétique (`a / b` pour cet exemple). Pour afficher uniquement le résultat de la formule, consultez [Masquer une requête de la visualisation](#hide-a-query-from-the-visualization).
 
-{{< img src="dashboards/querying/arithmetic_5.png" alt="Exemple de formule - rapport" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="Exemple de formule - ratio" style="width:75%;" >}}
 
-Voici un autre exemple illustrant comment vous pouvez représenter graphiquement le rapport entre les logs `error` et les logs `info`.
+Voici un autre exemple montrant comment vous pouvez représenter graphiquement le ratio entre `error` logs et `info` logs.
 
 ```text
 status:error / status:info
 ```
 
-{{< img src="dashboards/querying/arithmetic_6.png" alt="Exemple de formule - rapport de logs" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_6.png" alt="Exemple de formule - ratio de logs" style="width:75%;" >}}
 
-**Remarque** : les formules ne sont pas représentées par des lettres. Vous ne pouvez donc pas effectuer d'opérations arithmétiques entre plusieurs formules.
+**Remarque** : Les formules ne sont pas lettrées. L'arithmétique ne peut pas être effectuée entre des formules.
 
-#### Minimum ou maximum entre deux requêtes
-Voici un exemple utilisant l'opérateur `max` pour trouver l'utilisation maximale du processeur entre deux zones de disponibilité.  
+#### Masquer une requête de la visualisation {#hide-a-query-from-the-visualization}
+
+Lorsqu'un widget a plusieurs requêtes et une formule, vous pouvez masquer des requêtes individuelles afin que seul le résultat de la formule apparaisse sur le graphique. Cliquez sur l'étiquette de la lettre de la requête pour basculer sa visibilité sur le graphique. Une étiquette bleue indique que la requête est affichée ; une étiquette grise indique qu'elle est masquée. La requête masquée est toujours utilisée dans le calcul de la formule.
+
+#### Minimum ou Maximum entre deux requêtes {#minimum-or-maximum-between-two-queries}
+
+Utilisez `minimum()` et `maximum()` pour comparer deux requêtes point par point et renvoyer la valeur inférieure ou supérieure à chaque horodatage.
+
+**Remarque** : L'utilisation de `min()` et `max()` pour la comparaison arithmétique est obsolète. Utilisez `minimum()` et `maximum()` à la place. Cette obsolescence s'applique uniquement à la syntaxe de comparaison arithmétique. Les méthodes d'agrégation telles que `min by`, `max by` et l'agrégation de requêtes imbriquées avec `min` et `max` restent inchangées.
+
+Voici un exemple utilisant `maximum()` pour trouver l'utilisation maximale du CPU entre deux zones de disponibilité.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Exemple de formule pour 'max' affichant la valeur maximale entre deux requêtes de métriques" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Exemple de formule pour 'maximum' montrant la valeur supérieure entre deux requêtes métriques." style="width:75%;" >}}
 
-En outre, vous pouvez également calculer le maximum (ou le minimum) entre deux requêtes portant sur des produits différents. Voici un autre exemple utilisant l'opérateur `min` pour trouver le minimum entre des logs avec des statuts d'erreur et des statuts d'avertissement.
+De plus, vous pouvez également calculer le minimum entre deux requêtes sur différents produits. Voici un autre exemple utilisant `minimum()` pour trouver le minimum entre les journaux avec des statuts d'erreur et des statuts d'avertissement.
 
 ```text
-min(status:error, status:warn)
+minimum(status:error, status:warn)
 ```
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Exemple de formule pour 'min' affichant la valeur minimale entre deux requêtes de logs" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Exemple de formule pour 'minimum' montrant la valeur inférieure entre deux requêtes de journaux." style="width:75%;" >}}
 
-### Créer un alias
+### Créez un alias {#create-an-alias}
 
 Vous pouvez créer un alias personnalisé pour vos sources de données pour permettre à vos utilisateurs d'interpréter plus facilement les résultats du graphique.
 
 {{< img src="dashboards/querying/custom_alias.png" alt="Alias personnalisé" style="width:75%;" >}}
 
-### Créer un titre
+### Créez un titre {#create-a-title}
 
-Si vous ne saisissez pas de titre, Datadog en génère un automatiquement en fonction de vos sélections. Nous vous conseillons toutefois de définir un titre qui décrit précisément l'objectif du graphique.
+Si vous n'entrez pas de titre, un titre est généré automatiquement en fonction de vos sélections. Cependant, il est recommandé de créer un titre qui décrit l'objectif du graphique.
 
-### Enregistrer
+### Enregistrer {#save}
 
-Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous pourrez toujours revenir à l'éditeur pour modifier le graphique. Si vous ne souhaitez pas enregistrer les modifications effectuées, cliquez sur **Cancel**.
+Cliquez sur {{< ui >}}Done{{< /ui >}} pour enregistrer votre travail et quitter l'éditeur. Vous pouvez toujours revenir à l'éditeur pour modifier le graphique. Si vous apportez des modifications que vous ne souhaitez pas enregistrer, cliquez sur {{< ui >}}Cancel{{< /ui >}}.
 
-## Options supplémentaires
+## Options supplémentaires {#additional-options}
 
-### Superposition d'événements
+### Superpositions d'événements {#event-overlays}
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widget Série temporelle affichant les taux d'erreurs RUM avec les événements de déploiement en superposition" style="width:100%;" >}}
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widgets de séries temporelles montrant les taux d'erreur RUM avec des événements de déploiement superposés" style="width:100%;" >}}
 
-Identifiez les corrélations avec vos événements à l'aide de la section **Event Overlays** dans l'éditeur de graphiques pour la visualisation de [Séries temporelles][16]. Dans la barre de recherche, saisissez du texte ou une requête de recherche structurée. La recherche d'événements utilise la [syntaxe de recherche de logs][17].
+Visualisez les corrélations d'événements en utilisant la section {{< ui >}}Event Overlays{{< /ui >}} dans l'éditeur de graphiques pour la visualisation [Séries temporelles][16]. Dans le champ de recherche, entrez tout texte ou requête de recherche structurée. La recherche d'événements utilise la [syntaxe de recherche des journaux][17].
 
-La superposition d'événements prend en charge toutes les sources de données. Vous pouvez ainsi facilement mettre en corrélation les événements au sein de votre entreprise avec les données de n'importe quel service Datadog.
+La superposition d'événements prend en charge toutes les sources de données. Cela permet une corrélation plus facile entre les événements commerciaux et les données de tout service Datadog.
 
-La superposition d'événements vous permet de déterminer rapidement comment les actions effectuées au sein de votre organisation affectent les performances de vos applications et de votre infrastructure. Voici quelques exemples de cas d'utilisation :
-- Affichage des taux d'erreurs RUM avec les événements de déploiement superposés
-- Mise en corrélation de la charge CPU avec les événements associés au provisionnement de serveurs supplémentaires
-- Mise en corrélation du trafic de sortie avec les activités de connexion suspectes
-- Mise en corrélation des données de séries temporelles avec les alertes de monitor pour vérifier que les alertes appropriées ont bien été configurées dans Datadog
+Avec la superposition d'événements, vous pouvez rapidement voir comment les actions au sein de l'organisation impactent la performance des applications et de l'infrastructure. Voici quelques exemples de cas d'utilisation :
+- Taux d'erreur RUM avec des événements de déploiement superposés
+- Corrélation de l'utilisation du CPU avec des événements liés au provisionnement de serveurs supplémentaires
+- Corrélation du trafic sortant avec une activité de connexion suspecte
+- Corrélation de toutes les données de séries temporelles avec des alertes de surveillance pour s'assurer que Datadog a été configuré avec les alertes appropriées
 
 
-### Graphique partagé
+### Graphique divisé {#split-graph}
 
 Les graphiques partagés vous permettent de visualiser des représentations d'une métrique en fonction de différents tags.
 
-{{< img src="dashboards/querying/split_graph_beta.png" alt="Graphiques partagés de la métrique dans le widget plein écran" style="width:100%;" >}}
+{{< img src="dashboards/querying/split_graph_beta.png" alt="Visualisez des graphiques divisés de metric container.cpu.usage dans le widget en plein écran" style="width:100%;" >}}
 
-1. Pour accéder à cette fonctionnalité, cliquez sur l'onglet **Split Graph** lorsque vous visualisez un graphique.
-1. Utilisez le champ *sort by* pour modifier la métrique de tri et visualiser la relation entre les données représentées sur le graphique et d'autres métriques.
-1. Pour limiter le nombre de graphique affichés, modifiez la valeur du champ *limit to*.
+1. Accédez à cette fonctionnalité via l'onglet {{< ui >}}Split Graph{{< /ui >}} lors de la visualisation des graphiques.
+1. Vous pouvez modifier la métrique {{< ui >}}sort by{{< /ui >}} pour voir la relation entre les données que vous affichez et d'autres métriques.
+1. Limitez le nombre de graphiques affichés en changeant la valeur {{< ui >}}limit to{{< /ui >}}.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -262,3 +270,4 @@ Les graphiques partagés vous permettent de visualiser des représentations d'un
 [16]: /fr/dashboards/widgets/timeseries/#event-overlay
 [17]: /fr/logs/explorer/search_syntax/
 [18]: /fr/metrics/open_telemetry/query_metrics
+[19]: /fr/dashboards/functions/telemetry_source/

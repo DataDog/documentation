@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Real User Monitoring (RUM) Explorer displays individual events in a side panel. To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type.
+The Real User Monitoring (RUM) Explorer displays individual events in a side panel. To open the event side panel in the [RUM Explorer][1], click on a table row in the {{< ui >}}List{{< /ui >}} visualization type.
 
 Use the side panel header to view contextual information about your users (environment, country) and event-specific details like view path and loading type. For Synthetic test runs, click the test ID to view the result.
 
@@ -19,9 +19,19 @@ The distribution visualization at the top helps you understand whether the curre
 
 Click any tab to view its corresponding details and investigate specific aspects of the event. See [Additional tabs](#additional-tabs) for a full list.
 
+## Navigate between user sessions
+
+When `@usr.id` is set in the RUM SDK and you filter the Explorer by a specific `@usr.id` value, {{< ui >}}Previous{{< /ui >}} and {{< ui >}}Next{{< /ui >}} buttons appear in the session side panel. Use these buttons to navigate between that user's sessions without returning to the Explorer list.
+
+Only sessions retained by [retention filters][5] appear in the navigation. Non-retained sessions are skipped. For example, if a user had three sessions and only the first and third were retained, the buttons move directly between those two with no indication that a session occurred in between.
+
+To set `@usr.id`, see [Advanced Configuration][6].
+
+{{< img src="real_user_monitoring/explorer/events/rum-explorer-session-continuity.png" alt="RUM Explorer session side panel with Previous and Next navigation buttons highlighted, showing a tooltip with the session start screen and end reason" style="width:100%;" >}}
+
 ## Waterfall tab
 
-The **Waterfall** tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
+The {{< ui >}}Waterfall{{< /ui >}} tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
 
 {{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
 
@@ -29,7 +39,7 @@ The **Waterfall** tab displays an interactive timeline of the events associated 
 
 Control which events appear in the waterfall:
 
-- **By critical path**: Click the **Critical Events** toggle to see only events directly impacting your key performance timings.
+- **By critical path**: Click the {{< ui >}}Critical Events{{< /ui >}} toggle to see only events directly impacting your key performance timings.
 - **By attribute**: Use the filter buttons above the waterfall. Click a filter to access additional options like resource URL, action name, error message, and more.
 - **By time range**: Drag the time selectors in the minimap, or expand the left sidebar and click a timing to filter to events before that point.
 
@@ -45,35 +55,35 @@ Hover over any event in the waterfall to see its timestamp, duration, and contri
 
 Click on events in the waterfall to access related data:
 
-- **Resources**: View connected backend traces.
-- **Long Animation Frames**: Access associated profiles for performance analysis.
+- {{< ui >}}Resources{{< /ui >}}: View connected backend traces.
+- {{< ui >}}Long Animation Frames{{< /ui >}}: Access associated profiles for performance analysis.
 
 ## Additional tabs
 
 Use the other tabs to explore related data:
 
-Replay
+{{< ui >}}Replay{{< /ui >}}
 : Watch a visual replay of the user's session.
 
-Errors
+{{< ui >}}Errors{{< /ui >}}
 : View errors associated with the event.
 
-Resources
+{{< ui >}}Resources{{< /ui >}}
 : Inspect all resources loaded during the event.
 
-Traces
+{{< ui >}}Traces{{< /ui >}}
 : See backend traces connected to the event.
 
-Feature Flags
+{{< ui >}}Feature Flags{{< /ui >}}
 : View feature flags evaluated during the event.
 
-Actions
+{{< ui >}}Actions{{< /ui >}}
 : Review user actions captured during the session.
 
-Logs
+{{< ui >}}Logs{{< /ui >}}
 : Access logs associated with the event.
 
-Attributes
+{{< ui >}}Attributes{{< /ui >}}
 : View collected context attributes. Add custom attributes with the [Global Context API][2].
 
 ## Further reading
@@ -84,3 +94,5 @@ Attributes
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings
+[5]: /real_user_monitoring/rum_without_limits/retention_filters
+[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

@@ -1,4 +1,5 @@
 ---
+id: notification_rules
 title: notification rule
 core_product:
   - security

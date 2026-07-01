@@ -140,9 +140,9 @@ When network devices send Syslog messages directly to the Datadog Agent, the Age
 
 To create the `syslog_ip` tag, remap the `source_host` tag using a Log Processing Pipeline:
 
-1. In Datadog, navigate to **[Logs > Log Configuration > Pipelines][3]**.
+1. In Datadog, navigate to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Log Configuration{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][3].
 2. Create a pipeline or select an existing one.
-3. Add a **Log Remapper** processor with the following configuration:
+3. Add a {{< ui >}}Log Remapper{{< /ui >}} processor with the following configuration:
    * Source of the tag: `source_host`
    * Target tag: `syslog_ip`
 
@@ -158,13 +158,13 @@ To create the `syslog_ip` tag:
 1. **Configure the proxy** to include the original source IP in the Syslog message payload.
    * **rsyslog example:** Use a template like `$template CustomFormat,"%fromhost-ip% %msg%\n"` to prepend the source IP to each message.
 2. **Create a Log Processing Pipeline** to extract and map the IP address:
-   1. In Datadog, navigate to [**Logs > Log Configuration > Pipelines**][3].
+   1. In Datadog, navigate to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Log Configuration{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][3].
    2. Create a pipeline or select an existing one.
-   3. Add a **Grok Parser** processor to extract the IP address from the message into a temporary attribute (for example, `@temp_ip`).
-   4. Add a **Log Remapper** processor with the following configuration:
+   3. Add a {{< ui >}}Grok Parser{{< /ui >}} processor to extract the IP address from the message into a temporary attribute (for example, `@temp_ip`).
+   4. Add a {{< ui >}}Log Remapper{{< /ui >}} processor with the following configuration:
       * Source of the attribute: `@temp_ip` (or your chosen attribute name)
       * Target tag: `syslog_ip`
-      * Preserve source attribute: Uncheck this option to remove the temporary attribute
+      * {{< ui >}}Preserve source attribute{{< /ui >}}: Uncheck this option to remove the temporary attribute
 
 [3]: https://app.datadoghq.com/logs/pipelines
 
@@ -177,18 +177,18 @@ For more information, see the [Datadog Log Pipelines documentation][2].
 
 After your network devices are configured and the Datadog Agent is running, you can verify that Syslog data is being collected and sent to Datadog:
 
-1. Navigate to the **[Log Explorer][4]** in your Datadog account.
+1. Navigate to the [{{< ui >}}Log Explorer{{< /ui >}}][4] in your Datadog account.
 2. In the search bar, filter by `source:syslog` (or whatever source you specified in your `conf.yaml` file).
    You should see your network device Syslog messages appearing in the Log Explorer.
 3. Verify `syslog_ip`: Ensure that the `syslog_ip` tag is present and correctly populated with the network device's IP address for each relevant log entry.
 
    {{< img src="network_device_monitoring/syslog/log_explorer_syslog.png" alt="Log explorer, filtering by `source:syslog`, highlighting the `syslog_ip` tag on the side panel." style="width:100%;" >}}
 
-4. Optionally, to observe Syslog messages in NDM, navigate to [**Infrastructure > Network Devices**][5].
+4. Optionally, to observe Syslog messages in NDM, navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Network Devices{{< /ui >}}][5].
     - Select a device that is configured to send Syslog messages.
-    - In the device side panel, click the **Syslog** tab to view your Syslog messages:
+    - In the NDM device view, click the {{< ui >}}Events{{< /ui >}} tab. Syslog messages and SNMP traps are combined in a single view. Use the filters to narrow results by event type.
 
-    {{< img src="network_device_monitoring/syslog/syslog_tab.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
+    {{< img src="network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
 ## Further Reading
 

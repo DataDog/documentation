@@ -14,6 +14,9 @@ further_reading:
     - link: '/continuous_integration/tests'
       tag: 'Documentation'
       text: 'Explore Test Results and Performance'
+    - link: '/tests/test_parallelization/'
+      tag: 'Documentation'
+      text: 'Set up Test Parallelization'
     - link: '/tests/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting Test Optimization'
@@ -26,7 +29,6 @@ Supported languages:
 | Language | Version |
 | -------- | ------- |
 | Ruby     | >= 2.7  |
-| JRuby    | >= 9.4  |
 
 Supported test frameworks:
 
@@ -71,7 +73,7 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 This section is <strong>only required</strong> if your CI provider does not support auto-instrumentation. If you selected <strong>CI Provider with Auto-Instrumentation Support</strong> in the <a href="#configuring-reporting-method">Configuring reporting method</a> section above, skip this section and proceed to <a href="#configuration-settings">Configuration settings</a>.
 </div>
 
-If your CI provider does not support auto-instrumentation (for example, if you selected **Cloud CI provider (Agentless)** or **On-Premises CI Provider (Datadog Agent)**), follow these steps to install the library and instrument your tests manually.
+If your CI provider does not support auto-instrumentation (for example, if you selected {{< ui >}}Cloud CI provider (Agentless){{< /ui >}} or {{< ui >}}On-Premises CI Provider (Datadog Agent){{< /ui >}}), follow these steps to install the library and instrument your tests manually.
 
 1. Add the [Ruby test optimization gem][10] to your Gemfile:
 
