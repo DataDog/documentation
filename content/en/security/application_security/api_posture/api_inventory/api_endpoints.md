@@ -150,7 +150,7 @@ To compare schemas, both of the following must be in place:
 - To view an inferred schema, [enable App and API Protection][9] on the service so endpoints are discovered from live traffic.
 - To compare against a declared schema, register the API's OpenAPI definition in the Datadog Catalog. See [Create Entities][8].
 
-The differences are highlighted by severity:
+After both are in place, the differences appear directly on the endpoint's schema view, highlighted by severity:
 
 | Severity | Meaning |
 |----------|---------|
