@@ -9,14 +9,6 @@ This page describes how to instrument your applications for [Real User Monitorin
 
 {% stepper level="h4" %}
 
-{% step title="Specify application details in the UI" %}
-1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][3].
-2. Choose `Flutter` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-
-To secure your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][6].
-{% /step %}
-
 {% step title="Instrument your application" %}
 
 First, make sure you have your environment set up properly for each platform.

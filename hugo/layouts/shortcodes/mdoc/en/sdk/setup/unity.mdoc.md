@@ -44,15 +44,6 @@ constraints {
 ```
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][11].
-2. Choose {% ui %}Unity{% /ui %} as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
-
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][12].
-{% /step %}
-
 {% step title="Configure Datadog settings in Unity" %}
 
 After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your {% ui %}Project Settings{% /ui %} and click on the {% ui %}Datadog{% /ui %} section on the left hand side.

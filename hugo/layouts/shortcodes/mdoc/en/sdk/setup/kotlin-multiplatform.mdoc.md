@@ -82,21 +82,6 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 5. Scroll down to the {% ui %}Frameworks, Libraries, and Embedded Content{% /ui %} section and add the dependencies mentioned above.
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][4].
-2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][5].
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [{% ui %}Error Tracking{% /ui %} > {% ui %}Settings{% /ui %} > {% ui %}Browser and Mobile{% /ui %} > {% ui %}Add an Application{% /ui %}][6] instead.
-{% /alert %}
-
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][7] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
-
-For more information about setting up a client token, see the [Client Token documentation][8].
-{% /step %}
-
 {% step title="Initialize Datadog SDK" %}
 
 In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][9].

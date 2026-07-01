@@ -19,21 +19,6 @@ Add a `PackageReference` to [`Datadog.Maui`][3] in your MAUI project's `.csproj`
 ```
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][4].
-2. Select `.NET MAUI` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM .NET MAUI Data Collected][5].
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][6] instead.
-{% /alert %}
-
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][7] to configure the Datadog SDK, they are exposed client-side in the .NET MAUI application's compiled assemblies.
-
-For more information about setting up a client token, see the [Client Token documentation][8].
-{% /step %}
-
 {% step title="Initialize the Datadog SDK" %}
 
 The SDK exposes two initialization patterns. Choose the pattern that matches your app's hosting style. See [`TrackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][9] to initialize the library.
