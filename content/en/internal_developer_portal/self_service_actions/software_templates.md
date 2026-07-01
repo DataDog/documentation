@@ -35,7 +35,7 @@ Use [App Builder Blueprints][9] to quickly configure an app or workflow. These b
 
 Example blueprints:
 
-- **[Scaffold New Service blueprint][11]**: Create a form that collects developer inputs, integrates with GitHub, and generates a new repository or pull request.
+- **[Scaffold New Project in GitHub blueprint][11]**: Create new repositories or pull requests from a template repository using developer-provided inputs.
 - **[Create S3 Bucket blueprint][10]**: Generate Terraform code for an S3 bucket using a form in GitHub.
 - **[Provision EKS Cluster blueprint][13]**: Generate Terraform code for a Kubernetes cluster in GitHub.
 - **[Provision RDS Instance blueprint][14]**: Provision an RDS instance in AWS through an API call.
@@ -133,7 +133,7 @@ The following actions are available for Catalog in Datadog App Builder and Workf
 [7]: /actions/actions_catalog/
 [9]: https://app.datadoghq.com/app-builder/blueprints
 [10]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=create-new-s3-bucket&viewMode=edit
-[11]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=scaffolding&viewMode=edit
+[11]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=templatePreview&template=scaffold-new-project-in-github
 [12]: /actions/private_actions/
 [13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
 [14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
