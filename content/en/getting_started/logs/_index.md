@@ -2,7 +2,7 @@
 title: Getting Started with Logs
 description: Collect logs from multiple sources, process and analyze them, and correlate these logs with traces and metrics.
 further_reading:
-    - link: 'https://learn.datadoghq.com/courses/log-explorer
+    - link: 'https://learn.datadoghq.com/courses/log-explorer'
       tag: 'Learning Center'
       text: 'Getting Started with Log Explorer'
     - link: 'https://learn.datadoghq.com/courses/integration-pipelines'
@@ -11,8 +11,7 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/log-indexes'
       tag: 'Learning Center'
       text: 'Manage and Monitor Indexed Log Volumes'
-    - link: 'https://learn.datadoghq.com/courses/log-pipelines'
-      tag: 'Learning Center'
+    - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'
     - link: /getting_started/tagging/unified_service_tagging
