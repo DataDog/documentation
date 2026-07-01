@@ -643,6 +643,89 @@ An example task definition:
 
 Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
 
+## Upgrade the Worker
+
+To upgrade the Worker, update the `image` field in your container definition to the new version, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+
+```json
+"image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
+```
+
+After updating the task definition, restart the ECS tasks to use the updated image.
+
+**Note**: If your container definition doesn't specify a version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
+
+{% /if %}
+
+<!-- Docker -->
+{% if equals($platform, "docker") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker:
+
+1. Run `docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`.
+2. Run these commands to stop and remove the container:
+    ```
+    docker stop <CONTAINER_NAME>
+    ```
+    ```
+    docker rm <CONTAINER_NAME>
+    ```
+
+{% if equals($secrets_source, "environment_variables") %}
+3. Run the following command to install the Worker:
+    ```shell
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
+        -p 8088:8088 \
+        datadog/observability-pipelines-worker run
+    ```
+
+    You must replace the placeholders with these values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+        - See [Environment Variables][7] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+        - See [Environment Variables][7] for a list of destination environment variables.
+{% /if %}
+
+{% if equals($secrets_source, "secrets_management") %}
+
+3. Run the following command to install the Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+        datadog/observability-pipelines-worker run
+    ```
+
+    You must replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+
+{% /if %}
+
+{% /if %}
+
+<!-- CloudFormation -->
+{% if equals($platform, "cloudformation") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker, update the Worker image version in your CloudFormation stack and redeploy it.
+
 {% /if %}
 
 <!-- UI, API, Terraform - Kubernetes -->
