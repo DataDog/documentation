@@ -10,14 +10,14 @@ End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
 
 End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce to help answer questions such as:
-* Why does this employee's laptop slow down every time they open a specific application?
-* Which employees are affected by an overloaded Wi-Fi access point in the office?
-* Is a laggy Zoom, Microsoft Teams, or Google Meet call caused by the device, the network, or the application itself?
-* Where along the path to a SaaS application is latency being introduced?
-* Which devices are crashing with a Blue Screen of Death, and how often?
-* What software (and which versions) are installed across the fleet, for hardware and license inventory planning?
-* Which devices are underperforming on CPU, memory, or disk, and need attention or replacement?
-* What was happening on a device (which processes, logs, or events) right before a reported issue occurred?
+- Why does this employee's laptop slow down every time they open a specific application?
+- Which employees are affected by an overloaded Wi-Fi access point in the office?
+- Is a laggy Zoom, Microsoft Teams, or Google Meet call caused by the device, the network, or the application itself?
+- Where along the path to a SaaS application is latency being introduced?
+- Which devices are crashing with a Blue Screen of Death, and how often?
+- What software (and which versions) are installed across the fleet, for hardware and license inventory planning?
+- Which devices are underperforming on CPU, memory, or disk, and need attention or replacement?
+- What was happening on a device (which processes, logs, or events) right before a reported issue occurred?
 
 ## How it works
 
