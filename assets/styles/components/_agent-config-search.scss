@@ -1,0 +1,57 @@
+.agent-config-search {
+    .agent-config-list {
+        dl {
+            margin: 0;
+        }
+
+        .agent-config-entry {
+            border-top: 1px solid $gray-light;
+            padding: 16px 0;
+
+            &:first-child {
+                border-top: none;
+            }
+        }
+
+        dt {
+            font-size: 16px;
+            margin-bottom: 8px;
+
+            code {
+                font-size: 15px;
+                padding: 2px 6px;
+                background-color: $gray-lightest;
+                border-radius: 3px;
+            }
+        }
+
+        dd {
+            margin: 0;
+
+            p {
+                margin-bottom: 4px;
+                font-size: 14px;
+
+                &:first-child {
+                    font-size: 15px;
+                    margin-bottom: 8px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .agent-config-meta {
+                color: $gray-700;
+
+                code {
+                    font-size: 13px;
+                    padding: 1px 4px;
+                    background-color: $gray-lightest;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+}
