@@ -20,9 +20,6 @@ Unlike [Cloud Security compliance][1], which evaluates cloud infrastructure misc
 
 ## Supported frameworks
 
-| Framework | Version |
-|-----------|---------|
-| [OWASP API Security Top 10][2] | 2023 |
 
 ### OWASP API Security Top 10 (2023)
 
