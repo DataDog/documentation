@@ -11,6 +11,9 @@ aliases:
 - /fr/getting_started/custom_metrics
 - /fr/developers/metrics/
 - /fr/metrics/guide/tag-configuration-cardinality-estimation-tool/
+description: Découvrez ce que sont les métriques personnalisées, comment elles sont
+  identifiées par leur nom et leurs étiquettes, et comment elles sont facturées dans
+  Datadog.
 further_reading:
 - link: /extend/dogstatsd/
   tag: Documentation
@@ -21,6 +24,9 @@ further_reading:
 - link: /account_management/billing/custom_metrics/?tab=countrate
   tag: Documentation
   text: Facturation des métriques custom
+- link: /account_management/billing/metric_name_pricing/
+  tag: Documentation
+  text: Tarification basée sur le nom des métriques personnalisées
 - link: /metrics/guide/custom_metrics_governance/
   tag: Guide
   text: Bonne pratique pour la gouvernance des métriques custom
@@ -36,13 +42,13 @@ further_reading:
   text: Gouvernance des métriques
 title: Collecte de traces
 ---
-{{< learning-center-callout header="Participez à une session de webinaire de formation" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
-  Explorez et inscrivez-vous aux Foundation Enablement sessions pour les métriques personnalisées. Découvrez comment les métriques personnalisées vous aident à suivre les KPI de votre application, tels que le nombre de visiteurs, la taille moyenne du panier client, la latence des requêtes ou la distribution des performances pour un algorithme personnalisé.
+{{< learning-center-callout header="Participez à une session de webinaire de formation" hide_image="true" btn_title="Inscrivez-vous" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  Explorez et inscrivez-vous aux sessions de formation Foundation pour les métriques personnalisées. Découvrez comment les métriques personnalisées vous aident à suivre vos KPI d'application, tels que le nombre de visiteurs, la taille moyenne du panier client, la latence des requêtes ou la distribution des performances pour un algorithme personnalisé.
 {{< /learning-center-callout >}}
 
 ## Aperçu {#overview}
 
-Les métriques personnalisées vous aident à suivre les KPI de votre application : nombre de visiteurs, taille moyenne du panier client, latence des requêtes ou distribution des performances pour un algorithme personnalisé. Une métrique personnalisée est identifiée par **une combinaison unique du nom d'une métrique et des valeurs de balise (y compris la balise hôte)**. Dans l'exemple ci-dessous, la métrique `request.Latency` a quatre combinaisons uniques de valeurs de balise à partir de ses deux clés de balise :
+Les métriques personnalisées vous aident à suivre vos KPI d'application : nombre de visiteurs, taille moyenne du panier client, latence des requêtes ou distribution des performances pour un algorithme personnalisé. Une métrique personnalisée est identifiée par **une combinaison unique du nom d'une métrique et des valeurs de tags (y compris le tag d'hôte)**. Dans l'exemple ci-dessous, la métrique `request.Latency` a quatre combinaisons uniques de valeurs de tags à partir de ses deux clés de tags :
 
 - `endpoint`, qui a la valeur `endpoint:X` ou `endpoint:Y`.
 - `status`, qui a la valeur `status:200` ou `status:400`.
@@ -51,11 +57,11 @@ Les métriques personnalisées vous aident à suivre les KPI de votre applicatio
 
 Les éléments suivants sont également considérés comme des métriques custom :
 - En général, toute métrique soumise via [DogStatsD][3] ou via un [Agent Check personnalisé][4]
-- Métriques soumises par [intégrations Marketplace][29]
+- Métriques soumises par des [intégrations Marketplace][29]
 - Certaines [intégrations standard](#standard-integrations) peuvent potentiellement émettre des métriques personnalisées
-- Métriques soumises depuis une intégration qui n'est pas l'une des [plus de {{< translate key="integration_count" >}} intégrations Datadog][1].
+- Métriques soumises à partir d'une intégration qui n'est pas l'une des [plus de {{< translate key="integration_count" >}} intégrations Datadog][1].
 
-**Remarque** : Les utilisateurs ayant le rôle d'administrateur Datadog ou `usage_read` la permission peuvent voir le nombre moyen mensuel de métriques personnalisées par heure et les 5000 principales métriques personnalisées pour leur compte dans la [page des détails d'utilisation][5]. En savoir plus sur [comment les métriques personnalisées sont comptées][6].
+**Remarque** : Les utilisateurs ayant le rôle d'administrateur Datadog ou `usage_read` la permission peuvent voir le nombre moyen mensuel de métriques personnalisées par heure et les 5000 principales métriques personnalisées pour leur compte sur la [page des détails d'utilisation][5]. En savoir plus sur [comment les métriques personnalisées sont comptées][6].
 
 ## Propriétés des métriques personnalisées {#custom-metrics-properties}
 
@@ -66,25 +72,25 @@ Une métrique personnalisée Datadog possède les propriétés ci-dessous. Lisez
 | `<METRIC_NAME>`  | Le [nom de votre métrique](#naming-custom-metrics).                                                                                                                  |
 | `<METRIC_VALUE>` | La valeur de votre métrique. **Remarque** : Les valeurs des métriques doivent être de 32 bits. Les valeurs ne doivent pas refléter des dates ou des horodatages.                                                                                                                                |
 | `<TIMESTAMP>`    | L'horodatage associé à la valeur de la métrique. **Remarque** : Les horodatages des métriques ne peuvent pas être plus de dix minutes dans le futur ou plus d'une heure dans le passé. |
-| `<TAGS>`         | L'ensemble des balises associées à votre métrique.                                                                                                                 |
+| `<TAGS>`         | L'ensemble des tags associés à votre métrique.                                                                                                                 |
 | `<METRIC_TYPE>`  | Le type de votre métrique. Lisez à propos des [types de métriques][8].                                                                                             |
-| `<INTERVAL>`     | Si le `<TYPE>` de la métrique est [RATE][9] ou [COUNT][10], il définit l'[interval][11] correspondant.                                                       |
+| `<INTERVAL>`     | Si le `<TYPE>` de la métrique est [RATE][9] ou [COUNT][10], il définit l'[intervalle][11] correspondant.                                                       |
 
 ### Nommer des métriques personnalisées {#naming-custom-metrics}
 
 La convention de nommage suivante s'applique aux métriques custom :
 
-* Les noms des métriques doivent commencer par une lettre.
-* Les noms des métriques ne doivent contenir que des alphanumériques ASCII, des traits de soulignement et des points.
+* Les noms de métriques doivent commencer par une lettre.
+* Les noms de métriques ne doivent contenir que des alphanumériques ASCII, des traits de soulignement et des points.
   * D'autres caractères, y compris les espaces, sont convertis en traits de soulignement.
-  * Unicode _n'est_ pas pris en charge.
-* Les noms des métriques ne doivent pas dépasser 200 caractères. Moins de 100 est préférable d'un point de vue UI.
+  * Unicode n'est _pas_ pris en charge.
+* Les noms de métriques ne doivent pas dépasser 200 caractères. Moins de 100 est préférable d'un point de vue UI.
 
 **Remarque** : Les noms de métriques sont sensibles à la casse dans Datadog.
 
 ### Unités de métriques {#metric-units}
 
-Définissez les unités de métriques via [Résumé des métriques][12] ou définissez des unités de métriques personnalisées avec la fonctionnalité [Remplacement d'unité][13] dans l'éditeur de graphiques de vos visualisations. Pour plus d'informations, consultez la documentation [Unités de métriques][14].
+Définissez les unités de métriques via [Metrics Summary][12] ou définissez des unités de métriques personnalisées avec la fonctionnalité [Unit override][13] dans l'éditeur de graphique de vos visualisations. Pour plus d'informations, consultez la documentation [Metrics Units][14].
 
 ## Soumission de métriques personnalisées {#submitting-custom-metrics}
 
@@ -102,7 +108,7 @@ Définissez les unités de métriques via [Résumé des métriques][12] ou défi
 
 Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et sa communauté pour DogStatsD et les API][15] afin d'envoyer vos métriques custom.
 
-**Remarque** : Il n'y a pas de limites de taux fixes imposées sur la soumission de métriques personnalisées. Si votre allocation par défaut est dépassée, vous êtes facturé selon [la politique de facturation de Datadog pour les métriques personnalisées][6].
+**Remarque** : Il n'y a pas de limites de taux fixes imposées sur la soumission de métriques personnalisées. Si votre allocation par défaut est dépassée, vous êtes facturé selon [Datadog's billing policy for custom metrics][6].
 
 ## Intégrations standard {#standard-integrations}
 
@@ -111,9 +117,9 @@ Les intégrations standard suivantes peuvent potentiellement générer des métr
 | Type d'intégrations                           | Intégrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | Limité à 350 métriques personnalisées par défaut.      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
-| Pas de limite par défaut sur la collecte de métriques personnalisées. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[compteurs de performance Windows][22] /[WMI][23] /[Prometheus][21] |
-| Peut être configuré pour collecter des métriques personnalisées.   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27]                        |
-| Métriques personnalisées envoyées depuis des intégrations cloud    | [AWS][28]                                                                          |
+| Pas de limite par défaut sur la collecte de métriques personnalisées. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[Windows performance counters][22] /[WMI][23] /[Prometheus][21] |
+| Peut être configuré pour collecter des métriques personnalisées.   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27] |
+| Métriques personnalisées envoyées depuis des intégrations cloud | [AWS][28] |
 
 ## Lectures complémentaires {#further-reading}
 

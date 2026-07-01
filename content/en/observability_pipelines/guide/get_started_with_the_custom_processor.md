@@ -539,7 +539,7 @@ This results in the log with flattened attributes that you can filter directly:
 }
 ```
 
-**Note**: If you flatten the message field, the resulting log no longer has a message object. This means if the log is sent to Datadog, when you view the log in Log Explorer, you will not see a **Log Message** section in the log side panel.
+**Note**: If you flatten the message field, the resulting log no longer has a message object. This means if the log is sent to Datadog, when you view the log in Log Explorer, you will not see a {{< ui >}}Log Message{{< /ui >}} section in the log side panel.
 
 ## Serialize outbound logs in _raw format
 
@@ -547,7 +547,7 @@ Splunk and CrowdStrike prefer a format called `_raw` for log ingestion. Sending 
 
 **Notes**:
 - You should add other processing, remapping, and parsing steps before serializing your logs in `_raw` format.
-- To ensure your logs are correctly routed after serialization, configure your preferred destination with **Raw** as the encoding type. 
+- To ensure your logs are correctly routed after serialization, configure your preferred destination with {{< ui >}}Raw{{< /ui >}} as the encoding type. 
 
 An example input log:
 

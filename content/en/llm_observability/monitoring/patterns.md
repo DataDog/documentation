@@ -8,7 +8,19 @@ further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
   text: "Learn about Agent Observability"
----
+- link: "/llm_observability/terms/"
+  tag: "Documentation"
+  text: "Learn about Agent Observability Key Terms and Concepts"
+- link: "/llm_observability/experiments/datasets"
+  tag: "Documentation"
+  text: "Learn about Datasets"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
+- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
+  tag: "Learning Center"
+  text: "Tracing LLM Applications"
+
 
 ## Overview
 
@@ -114,6 +126,10 @@ Scope your Pattern's filter to spans with poor quality scores or failed evaluati
 ### Track how traffic evolves
 
 Re-run your Pattern periodically and use the *Compare to* dropdown to compare topic distributions across runs. When a topic marked *NEW* appears near the top, that signals your users have found a new use case or a new failure mode.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
 [2]: /llm_observability/experiments/datasets/

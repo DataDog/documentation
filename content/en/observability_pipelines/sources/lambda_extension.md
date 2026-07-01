@@ -17,7 +17,7 @@ See [Datadog Lambda Extension][1] to learn more about it.
 
 {{% observability_pipelines/lambda_forwarder/pipeline_setup %}}
 
-**Note**: Your Observability Pipeline must use `HTTP Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
+**Note**: Your Observability Pipeline must use {{< ui >}}HTTP Server{{< /ui >}} as the source to process logs from the Lambda extension. Do not use {{< ui >}}Datadog Agent{{< /ui >}} as the source.
 
 ## Deploy the Datadog Lambda Extension
 

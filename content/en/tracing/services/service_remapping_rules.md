@@ -1,5 +1,8 @@
 ---
 title: Service remapping rules
+aliases:
+- /tracing/services/inferred_entity_remapping_rules/
+- /tracing/services/renaming_rules/
 site_support_id: service_remapping_rules
 ---
 

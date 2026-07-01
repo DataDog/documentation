@@ -112,7 +112,7 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 Copy and paste functionality is a key sharing and collaboration feature that allows you to reuse widgets across different Datadog contexts and external tools.
 
-<div class="alert alert-danger">Enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
+<div class="alert alert-info">To share widgets outside of Datadog with link previews, an admin must set <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Widget Share URLs</strong></a> to Public or Private in your Organization Settings. Admins can disable this setting to stop users from generating widget share links and previews.</div>
 
 Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, or by selecting the share icon and choosing "Copy".
 
@@ -121,9 +121,7 @@ The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cm
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
-You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget. For more information, see [Widget Public URLs][11].
-
-For information on copying widgets for use within Datadog (in dashboards, notebooks, and incidents), see [Datadog Clipboard][9].
+You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). Depending on your organization's Widget Share URLs mode, this displays a public preview image of your graph, or a private preview image in Slack, along with a direct link to your widget. For more information, see [Widget Share URLs][11].
 
 ## Groups of widgets
 
@@ -200,6 +198,5 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
 [8]: /dashboards/guide/custom_time_frames/
-[9]: /dashboards/guide/datadog_clipboard/
 [10]: /dashboards/widgets/split_graph/
 [11]: /dashboards/sharing/widget_public_urls/

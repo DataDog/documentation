@@ -34,8 +34,6 @@ Instead of adding temporary debug logs or reproducing issues locally, you can dy
 
 Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
-{{< img src="tracing/live_debugger/live-debugger-demo-2025050702.mp4" alt="Live Debugger Product Demo" video="true" >}}
-
 ## Key capabilities
 
 Live Debugger provides:
@@ -49,24 +47,29 @@ Live Debugger provides:
 
 ## Requirements and setup
 
-Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires the [Datadog Agent][2], an
-[APM-instrumented application][3], and [Remote Configuration][4]. You can enable it for an individual service either in-app, or by
-setting an environment variable.
+Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires the [Datadog Agent][2] (version 7.49.0 or later), an [APM-instrumented application][3], and [Remote Configuration][4].
 
-The enablement method depends on your tracer version, see the table below for details.
+### Enablement modes
 
-| | By Service<br>(In-App) | By Service<br>(Env Var) |
-|---|---|---|
-| **How to Enable** | Settings page | Environment variables |
-| **Agent Version** | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.29.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
+Manage Live Debugger for each service and environment from the Live Debugger **Settings** page. Each service can be in one of three modes:
 
-To enable Live Debugger in-app, navigate to the Live Debugger **Settings** page, select the desired service, and toggle
-it to **Enabled**.
+- **Automatic**: Eligible services are enabled automatically. Switch a service to **Enabled** for a faster debugging experience with debug symbols.
+- **Enabled**: Live Debugger is ready to use on this service in this environment, with faster setup and a better debugging experience.
+- **Disabled**: This service is explicitly disabled and is not enabled automatically.
 
-{{< img src="tracing/live_debugger/live_debugger_enablement.mp4" video="true" alt="Enabling Live Debugger through the setting page" style="width:90%" >}}
+### Minimum tracer versions
 
-If in-app enablement isn't available, follow the instructions below for your target language:
+Live Debugger requires the following minimum tracer versions:
+
+- [Python][5] ≥ 4.11.0
+- [Java][6] ≥ 1.64.0
+- [.NET][7] ≥ 3.46.0
+- [Ruby][9] ≥ 2.35.0
+- [Node.js][8] ≥ 5.109.0
+- [PHP][10] ≥ 1.21.0
+- [Go][22] ≥ 2.9.0
+
+Older tracer versions might require enabling Live Debugger through an environment variable. Follow the setup instructions for your language:
 
 {{< card-grid >}}
   {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
@@ -89,11 +92,9 @@ setup instructions and limitations also apply here.
 
 The following permissions are required to use Live Debugger:
 
-- **Dynamic Instrumentation Read Configuration** (`debugger_read`) - Required to access the Live Debugger page.
-- One of the following write permissions:
-  - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify debug logs in any environment.
-  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify debug logs in known pre-production environments only (such as staging or QA).
-- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+- **Live Debugger Read** (`live_debugger_read`): Required to access the Live Debugger page.
+- **Live Debugger Write** (`live_debugger_write`): Required to create or modify Debug Sessions and logpoints.
+- **Live Debugger Redaction Write** (`live_debugger_redaction_write`): Required to change the [redaction mode][24] for captured data.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
 
@@ -111,8 +112,6 @@ If you use [Exclusion filters][11], make sure Live Debugger logs are not filtere
 
 If you enable the Datadog Source Code Integration, you can debug code directly through
 Live Debugger.
-
-{{< img src="tracing/live_debugger/live_debugger_code_viewer.png" alt="Live Debugger with Source Code Integration enabled showing code viewer" style="width:90%" >}}
 
 ## Using Live Debugger
 
@@ -143,14 +142,32 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. To protect this data:
+Live Debugger data might contain sensitive information, especially when using the **Capture Variables** option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
 
-1. Use the built-in [sensitive data scrubbing][1] mechanisms.
-2. Use [Sensitive Data Scanner][17] to identify and redact sensitive information based on regular expressions.
+#### Mode-based redaction
 
-### Debug with Bits
+Live Debugger has two redaction modes:
 
-[Debug with Bits][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
+- **Strict Mode**: Redacts all values except numbers and Booleans.
+- **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+
+These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
+
+#### Identifier-based redaction
+
+Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Each tracer includes additional language-specific redaction rules.
+
+You can extend redaction behavior through:
+
+- Custom identifier-based redaction
+- Class/type-based redaction rules
+- Sensitive Data Scanner rules
+
+See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][17] documentation for configuration details.
+
+### Bits Live Debugger
+
+[Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
 
@@ -195,4 +212,5 @@ The following constraints apply to Live Debugger usage and configuration:
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
-[23]: /tracing/live_debugger/debug-with-bits/
+[23]: /tracing/live_debugger/bits-live-debugger/
+[24]: #mode-based-redaction

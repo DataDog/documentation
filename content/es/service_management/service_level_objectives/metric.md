@@ -20,7 +20,7 @@ title: SLOs basados en la métrica
 
 Los SLOs basados en la métrica son útiles para un flujo (stream) basado en el recuento de datos en el que se diferencian los buenos y los malos eventos. Una consulta métrica utiliza la suma de los eventos buenos dividida por la suma del total de eventos a lo largo del tiempo para calcular un Indicador de nivel de servicio (o SLI). Puedes utilizar cualquier métrica para crear SLOs, incluyendo métricas personalizadas generadas a partir de [APM spans (tramos de APM)][1], [RUM events (eventos de RUM)][2] y [logs][3]. Para obtener una visión general sobre cómo se configuran y calculan los SLOs, consulta la página [Service Level Objective (Objetivo de nivel de servicio][4].
 
-{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="Ejemplo de SLO basado en métricas" >}}
+{{< img src="service_level_objectives/metric/metric_slo_side_panel.png" alt="Ejemplo de SLO basado en métricas" >}}
 
 ## Configuración
 
@@ -42,11 +42,11 @@ En la [página de estado de SLOs][5], haz clic en **+ New SLO** (+ Nuevo SLO). A
 
 Los SLI basados en métricas te permiten centrarte en los atributos más importantes de tus SLI. Puedes añadir grupos a tus SLI basados en métricas en el editor, utilizando etiquetas como `datacenter`, `env`, `availability-zone`, `resource` o cualquier otro grupo relevante:
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="Editor de SLOs basados en métricas agrupados" >}}
+{{< img src="service_level_objectives/metric/metric_slo_creation.png" alt="Editor de SLOs basados en métricas agrupados" >}}
 
 Al agrupar estos SLI, puedes visualizar el estado de cada grupo individual, la solicitud buena Counts, y el presupuesto de errores restante en el panel de detalles:
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="Resultados de grupos de SLOs basados en métricas" >}}
+{{< img src="service_level_objectives/metric/metric_slo_history_groups.png" alt="Resultados de grupos de SLOs basados en métricas" >}}
 
 Por defecto, el gráfico de barras muestra el total de Counts de solicitudes buenas y malas para todo el SLO. Puedes consultar el gráfico de barras en contexto para ver las solicitudes Counts buenas y malas de cada grupo individual haciendo clic en la fila correspondiente de la tabla. Además, también puedes optar por mostrar u ocultar las solicitudes Counts buenas o malas seleccionando la opción correspondiente en la leyenda situada justo debajo del gráfico de barras. 
 

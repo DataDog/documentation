@@ -146,9 +146,9 @@ You can restrict access on a specific workflow either from the workflow list pag
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
-[4]: /service_management/workflows/trigger/
+[4]: /actions/workflows/trigger/
 [5]: /actions/actions_catalog/
-[6]: /service_management/workflows/connections/
+[6]: /actions/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
 [9]: https://chat.datadoghq.com/
