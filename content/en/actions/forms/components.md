@@ -28,6 +28,7 @@ When building a form, click **Add Component** to get started. The following comp
 | Ranking | A ranked ordering of a list of options. |
 | Date picker | A calendar date selector. |
 | Image | An image embedded in the form for context or instructions. |
+| Section | A container that groups other components together, with optional conditions applied to the whole group. |
 
 ## Component elements
 
@@ -61,6 +62,18 @@ To configure a conditional field:
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 You can also view conditions in the {{< ui >}}Fields{{< /ui >}} panel by clicking the <i class="icon-source-control-branch-wui" style="display:inline-block;transform:rotate(180deg)"></i> branch icon.
+
+## Sections
+
+Sections let you group components together within a form. For example, you might create one section for personal information and another for preferences. You can drag and drop components between sections to reorganize a form.
+
+You can also configure conditional logic at the section level, showing or hiding an entire section based on a respondent's answer to a previous question, in addition to setting conditions on individual components. See [Conditional fields](#conditional-fields).
+
+To add a section:
+1. In the form, click {{< ui >}}+ Add{{< /ui >}}.
+1. Click {{< ui >}}Section{{< /ui >}}.
+1. Drag existing components into the section, or add new components directly within it.
+1. To set conditions on the section, click the section, then click {{< ui >}}Conditions{{< /ui >}} and define the rule.
 
 ## Dynamic dropdown options
 
