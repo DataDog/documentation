@@ -167,7 +167,7 @@ See the [Secret Scanning documentation][21] for setup details.
 
 ### Investigate sensitive data findings
 
-{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="The Findings page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="Sensitive Data Scanner Findings explorer showing 23 telemetry rule findings, category filters, priority and case status facets, and critical scanning rules with event counts, trend charts, and case actions." style="width:100%;" >}}
 
 Use the [Findings page][13] to see details of sensitive data findings identified by your scanning rules. These details include:
 
