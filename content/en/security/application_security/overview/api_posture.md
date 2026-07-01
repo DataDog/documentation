@@ -13,7 +13,7 @@ further_reading:
   text: "Attack Summary"
 ---
 
-The **API Posture** page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. Each section is described below.
+The **API Posture** page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. The following sections describe each area of the page.
 
 ## Ask Bits panel
 
