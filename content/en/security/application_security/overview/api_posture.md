@@ -25,7 +25,7 @@ The **Coverage** section provides an inventory overview of your API endpoints. I
 
 ## Open Findings
 
-The **Open Findings** section summarizes the API security findings that are open. Findings are broken down by severity (critical, high, medium, and low) and by the rules that generate them, so you can see which issues are most pressing and which rules account for the most findings. The counts reflect the selected time range, letting you compare the start and end of the period.
+The **Open Findings** section summarizes the API security findings that are open. Findings are broken down by severity (critical, high, medium, and low) and by the rules that generate them, so you can see which issues are most pressing and which rules account for the most findings. The counts reflect the selected time range, so you can compare findings at the start and end of the period.
 
 ## Threats Exposure
 
