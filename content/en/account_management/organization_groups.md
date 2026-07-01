@@ -26,7 +26,7 @@ For organizations that remain multi-organization, Organization Groups introduces
 Organization Groups lets administrators manage multiple Datadog organizations as a single unit. Instead of configuring roles, policies, and settings individually per organization, administrators define them once at the group level and push them to member organizations.
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
-- **Push policies from group to member organizations.** Define session settings in the owner organization and apply them to member organizations.
+- **Push policies from group to member organizations.** Define policies in the owner organization and apply them to member organizations.
 
 {{< img src="account_management/org-groups-policies.png" alt="Organization Settings in Datadog showing the Organization Groups policies section" style="width:100%;" >}}
 
