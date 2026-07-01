@@ -63,7 +63,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array map proc
   "source": "<SOURCE_ARRAY_ATTRIBUTE>",
   "target": "<TARGET_ARRAY_ATTRIBUTE>",
   "preserve_source": true,
-  "processors": ["<SUB_PROCESSOR_1>", "<SUB_PROCESSOR_2>"]
+  "processors": [
+    {"type": "<SUB_PROCESSOR_TYPE>", ...},
+    {"type": "<SUB_PROCESSOR_TYPE>", ...}
+  ]
 }
 ```
 
