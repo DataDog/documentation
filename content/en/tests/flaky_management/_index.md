@@ -22,7 +22,7 @@ The [Flaky Tests Management][1] page provides a centralized view to track, triag
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
-Each flaky test has a stable, unique identifier derived from a hash of the repository ID and the test's fully qualified name. In the Test Optimization Explorer, this is the `@test.fingerprint_fqn` facet. In the [Flaky Tests Management API][18] it is the test's `id`, and you can filter the Search flaky tests endpoint by it with the `fingerprint_fqn` key. Use this identifier to look up or update a specific test through the API.
+Each flaky test has a stable, unique identifier derived from a hash of the repository ID and the test's fully qualified name. In the Test Optimization Explorer, this is the `@test.fingerprint_fqn` facet. In the [Flaky Tests Management API][18], it is the test's `id`, and you can filter the Search flaky tests endpoint using the `fingerprint_fqn` key. Use this identifier to look up or update a specific test through the API.
 
 {{< img src="tests/flaky_management-2.png" alt="Overview of the Flaky Tests Management UI" style="width:100%;" >}}
 
