@@ -170,7 +170,7 @@ The following attributes are collected for each view after collection is enabled
 
 | Attribute | Type | Description |
 |---|---|---|
-| `view.accessibility.text_size` | number | The user's preferred text size as a scale factor relative to the default size (`1.0` is default, greater than `1.0` is larger). |
+| `view.accessibility.text_size` | number | The user's preferred text size as a scale factor relative to the default (`1.0`). Values above `1.0` increase text size; values below `1.0` decrease it. |
 | `view.accessibility.screen_reader_enabled` | Boolean | Whether TalkBack is active. |
 | `view.accessibility.invert_colors_enabled` | Boolean | Whether color inversion is enabled. |
 | `view.accessibility.assistive_switch_enabled` | Boolean | Whether Switch Access is active. |
