@@ -131,7 +131,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
+	make hugpython update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs all-examples
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -196,7 +196,7 @@ config:
 # branches = attempt to use an associated branch name on failure fallback to sdk version
 define EXAMPLES_template
 examples/$(1):
-	$(eval TAG := $(or $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
+	$(eval TAG := $(or $(shell grep -A1 $(1) _vendor/data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
 	@if [[ "$(BRANCH)" = "master" ]]; then \
 		echo "Cloning $(1) at $(TAG)"; \
 		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
@@ -239,7 +239,7 @@ $(foreach repo,$(EXAMPLES_REPOS),$(eval $(call EXAMPLES_template,$(repo))))
 
 # build all examples
 # dynamic prerequisites equivalent to examples/go examples/java examples/python etc.
-all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,%,$(repo))))
+all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,%,$(repo)))) | websites_sources_data
 
 # clean all examples
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
