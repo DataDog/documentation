@@ -187,7 +187,9 @@ Send the prompt that matches the product you want to set up:
 
 {{% /tab %}}
 
-{{% tab "App and API Protection" %}}
+{{% tab "App and API Protection (Preview)" %}}
+<div class="alert alert-info">Agentic onboarding for App and API Protection is in Public Preview.</div>
+
 {{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
 {{% /tab %}}
 
