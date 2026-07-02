@@ -13,6 +13,18 @@ These metrics are specific to destination buffers, located upstream of a destina
 : **Description**: Number of bytes in a destination's buffer.
 : **Metric type**: gauge
 
+`pipelines.buffer_max_size_events`
+: **Description**: A destination buffer's maximum event capacity.
+: **Metric type**: gauge
+
+`pipelines.buffer_max_size_bytes`
+: **Description**: A destination buffer's maximum byte capacity.
+: **Metric type**: gauge
+
+`pipelines.buffer_send_duration_seconds`
+: **Description**: The time spent sending a payload to a destination's buffer.
+: **Metric type**: distribution
+
 `pipelines.buffer_received_events_total`
 : **Description**: Events received by a destination's buffer.
 : **Metric type**: counter

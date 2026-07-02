@@ -19,3 +19,7 @@ These metrics are specific to processor buffers, located upstream of a processor
 `pipelines.transform_buffer_max_size_events`
 : **Description**: A processor buffer's maximum event capacity.
 : **Metric type**: gauge
+
+`pipelines.transform_buffer_max_size_bytes`
+: **Description**: A processor buffer's maximum byte capacity.
+: **Metric type**: gauge

@@ -18,3 +18,7 @@ These metrics are specific to source buffers, located downstream of a source. Ea
 `pipelines.source_buffer_max_size_events`
 : **Description**: A source buffer's maximum event capacity.
 : **Metric type**: gauge
+
+`pipelines.source_buffer_max_size_bytes`
+: **Description**: A source buffer's maximum byte capacity.
+: **Metric type**: gauge

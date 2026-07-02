@@ -170,6 +170,16 @@ Event bytes out
 : **Description**: The byte size of events the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
+Bytes in
+: **Metric**: `pipelines.component_received_bytes_total`
+: **Description**: The number of raw bytes read from the source's input, before any decoding or transformation.
+: **Available for**: Sources.
+
+Bytes out
+: **Metric**: `pipelines.component_sent_bytes_total`
+: **Description**: The number of raw bytes written to the destination's output, after any encoding or transformation.
+: **Available for**: Destinations.
+
 Events included
 : **Metric**: `pipelines.included_events_total`
 : **Description**: The number of events that matched the processor's include clause and were processed. Events that do not match the filter clause skip the processor and continue to the next component.
@@ -200,6 +210,11 @@ Timed out requests
 : **Description**: The number of requests that timed out for sources that send events to the Worker in batches using HTTP requests.
 : **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
+Source lag time
+: **Metric**: `pipelines.source_lag_time_seconds`
+: **Description**: The difference, in seconds, between an event's own timestamp and when the Worker received it. High values indicate stale or delayed data arriving at the pipeline.
+: **Available for**: Sources.
+
 Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
@@ -219,6 +234,10 @@ Send batch latency
 : **Metric**: `pipelines.source_send_batch_latency_seconds`
 : **Description**: The time it takes for the source to send a batch, which can contain multiple event chunks, to the next component. Available in Worker version 2.16 and later.
 : **Available for**: Sources.
+
+## HTTP server metrics
+
+{{% observability_pipelines/metrics/http_server %}}
 
 ## HTTP client metrics
 
