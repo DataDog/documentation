@@ -362,6 +362,15 @@ After you enable logging collection:
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
+**Note:** The Postgres check includes an automatic diagnostics feature that can periodically run setup diagnostics and report results as Agent Health events. This feature is disabled by default. If enabled by support or for troubleshooting, configure it in your `postgres.d/conf.yaml`:
+
+```yaml
+instances:
+  - automatic_diagnostics:
+      enabled: true
+      interval: 600  # seconds between diagnostic runs
+```
+
 ## Example Agent Configurations
 {{% dbm-postgres-agent-config-examples %}}
 
