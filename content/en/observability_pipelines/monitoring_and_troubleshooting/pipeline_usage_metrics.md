@@ -35,9 +35,35 @@ Observability Pipelines ingested bytes
 
 ## Host metrics
 
+These metrics describe the host running the Observability Pipelines Worker.
+
 Uptime
 : **Metric**: `pipelines.host.uptime`
 : **Description:** The amount of time since the host was started, in seconds.
+
+CPU time
+: **Metric**: `pipelines.host.cpu_seconds_total`
+: **Description:** The total CPU time consumed by the host, broken down by mode (user, system, idle, and so on) and CPU core.
+
+Logical CPUs
+: **Metric**: `pipelines.host.logical_cpus`
+: **Description:** The number of logical CPU threads (hardware threads) available on the host.
+
+Load average
+: **Metric**: `pipelines.host.load1`, `pipelines.host.load5`, `pipelines.host.load15`
+: **Description:** The host's load average over the last 1, 5, and 15 minutes.
+
+Total memory
+: **Metric**: `pipelines.host.memory_total_bytes`
+: **Description:** The total physical memory (RAM) installed on the host.
+
+Available memory
+: **Metric**: `pipelines.host.memory_available_bytes`
+: **Description:** The number of bytes of memory available for new allocations on the host.
+
+Disk read/write bytes
+: **Metric**: `pipelines.host.disk_read_bytes_total`, `pipelines.host.disk_written_bytes_total`
+: **Description:** The number of bytes read from and written to all disks on the host.
 
 Bytes in
 : **Metric**: `pipelines.host.network_receive_bytes_total`
@@ -49,6 +75,8 @@ Bytes out
 
 ## Process metrics
 
+These metrics describe the Observability Pipelines Worker process.
+
 Uptime
 : **Metric**: `pipelines.uptime_seconds`
 : **Description:** The amount of time since the Worker process was started, in seconds.
@@ -57,9 +85,41 @@ CPU usage
 : **Metric**: `pipelines.cpu_usage_seconds_total`
 : **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
+CPU cores allocated
+: **Metric**: `pipelines.cpu_max_cores`
+: **Description:** The number of CPU cores allocated to the Worker, as reported by container or cgroup limits.
+
 Memory usage
 : **Metric**: `pipelines.resident_memory_used_bytes`
 : **Description:** The amount of RSS memory used by the Worker process in bytes.
+
+Memory limit
+: **Metric**: `pipelines.memory_max_bytes`
+: **Description:** The maximum memory the Worker is allowed to use, as set by container or cgroup limits.
+
+Data directory available bytes
+: **Metric**: `pipelines.data_dir_available_bytes`
+: **Description:** The free storage space remaining on the filesystem where the Worker stores its buffer and state data. Useful for monitoring disk buffers.
+
+Data directory capacity bytes
+: **Metric**: `pipelines.data_dir_capacity_bytes`
+: **Description:** The total storage capacity of the filesystem where the Worker stores its buffer and state data.
+
+## Worker lifecycle metrics
+
+These metrics track Observability Pipelines Worker lifecycle events.
+
+Started
+: **Metric**: `pipelines.started_total`
+: **Description:** The number of times the Worker instance has been started.
+
+Stopped
+: **Metric**: `pipelines.stopped_total`
+: **Description:** The number of times the Worker instance has been stopped.
+
+Reloaded
+: **Metric**: `pipelines.reloaded_total`
+: **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
 
 ## Component metrics
 
@@ -112,6 +172,14 @@ Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
+
+## HTTP client metrics
+
+{{% observability_pipelines/metrics/http_client %}}
+
+## Adaptive concurrency metrics
+
+{{% observability_pipelines/metrics/adaptive_concurrency %}}
 
 ## Buffer metrics (when enabled)
 
