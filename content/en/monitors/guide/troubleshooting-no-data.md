@@ -61,10 +61,7 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 `(no groups found)` typically occurs in the following cases:
 
 - New Setup: The monitor has received no data for any groups since creation.
-- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. Different types of groups have different retention periods:
-  - **Standard Monitors**: Groups age out after 24 hours.
-  - **Host/Service Checks**: Groups age out after 48 hours.
-  - **Custom**: This can be extended through the {{< ui >}}Missing data options{{< /ui >}} setting ({{< ui >}}If a group stops reporting data, resolve after X hours{{< /ui >}}).
+- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. The retention period depends on the monitor type and can be customized through the {{< ui >}}Missing data options{{< /ui >}} setting ({{< ui >}}If a group stops reporting data, resolve after X hours{{< /ui >}}). For details, see [Group retention time][3].
 
 {{% /collapse-content %}}
 
@@ -188,5 +185,6 @@ If your monitor still isn't alerting as expected, verify the following:
 
 [1]: /monitors/configuration/#new-group-delay
 [2]: /monitors/guide/adjusting-no-data-alerts-for-metric-monitors/
+[3]: /monitors/configuration/?tab=thresholdalert#group-retention-time
 [6]: /monitors/types/metric/?tab=threshold#advanced-alert-conditions
 [7]: /dashboards/functions/rollup/
