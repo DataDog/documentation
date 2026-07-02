@@ -164,7 +164,7 @@ Differences can appear in the following areas of the schema:
 - **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
 - **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
 - **Value constraints**: Changes to numeric or length limits (`minimum`, `maximum`, `minLength`, `maxLength`), patterns, or uniqueness constraints.
-- **Schema composition**: A mismatch in `oneOf` or `allOf` composition, or in a discriminator.
+- **Schema composition**:  A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
 - **Responses**: A status code, response header, or content type added or removed.
 
 To reduce noise, some differences are excluded because they don't represent meaningful contract drift:
