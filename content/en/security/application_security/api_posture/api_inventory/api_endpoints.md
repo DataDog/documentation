@@ -169,10 +169,10 @@ Differences can appear in the following areas of the schema:
 
 To reduce noise, some differences are excluded because they don't represent meaningful contract drift:
 
-- Request header and cookie parameters, since they often carry values such as authentication tokens or session identifiers that aren't part of the API contract.
-- Type changes on query parameters, since query parameters are always observed as strings in traffic, even when declared as another type, such as an integer or boolean.
-- Removed status codes, since the inferred schema only includes status codes observed in traffic, so a declared status code that hasn't occurred yet during observation always appears as removed.
-- `anyOf` composition mismatches, since the declared and inferred schemas can use `anyOf` at different levels of the schema while remaining equivalent.
+- **Request header and cookie parameters:** They often carry values such as authentication tokens or session identifiers that aren't part of the API contract.
+- **Type changes on query parameters:** Query parameters are always observed as strings in traffic, even when declared as another type, such as an integer or Boolean.
+- **Removed status codes:** The inferred schema only includes status codes observed in traffic, so a declared status code that hasn't occurred yet during observation always appears as removed.
+- **`anyOf` composition mismatches:** The declared and inferred schemas can use `anyOf` at different levels of the schema while remaining equivalent.
 
 ## Processing sensitive data
 
