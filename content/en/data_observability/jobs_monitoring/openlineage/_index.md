@@ -566,19 +566,19 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 #### `integration` values
 
-For custom jobs, use any value that isn't reserved for a native integration, such as `custom`. The reserved values below are used by Datadog's native integrations. Using a reserved value for a custom job may produce unexpected behavior. In particular, `SPARK` prevents span generation.
+For custom jobs, use any value that isn't reserved for a native integration, such as `<YOUR_VALUE>`. The reserved values below are used by Datadog's native integrations. Using a reserved value for a custom job may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
-| Value       | Platform                                                           |
-| ----------- | ------------------------------------------------------------------ |
-| `custom`    | Example value for custom or unsupported platforms                  |
-| `SPARK`     | Apache Spark (native integration only; do not use for custom jobs) |
-| `AIRFLOW`   | Apache Airflow                                                     |
-| `DBT`       | dbt                                                                |
-| `BIGQUERY`  | Google BigQuery                                                    |
-| `SNOWFLAKE` | Snowflake                                                          |
-| `TRINO`     | Trino                                                              |
-| `ICEBERG`   | Apache Iceberg                                                     |
-| `TABLEAU`   | Tableau                                                            |
+| Value          | Platform                                                            |
+| -------------- | -------------------------------------------------------------------- |
+| `<YOUR_VALUE>` | Custom or unsupported platforms                                     |
+| `SPARK`        | Apache Spark (native integration only; do not use for custom jobs) |
+| `AIRFLOW`      | Apache Airflow                                                      |
+| `DBT`          | dbt                                                                 |
+| `BIGQUERY`     | Google BigQuery                                                     |
+| `SNOWFLAKE`    | Snowflake                                                           |
+| `TRINO`        | Trino                                                                |
+| `ICEBERG`      | Apache Iceberg                                                      |
+| `TABLEAU`      | Tableau                                                             |
 
 #### `processingType` values
 
