@@ -22,7 +22,7 @@ Use Observability Pipelines' ClickHouse destination to send logs to a [ClickHous
 
 Before you configure the ClickHouse destination, you must have:
 
-- A running ClickHouse server reachable from the Observability Pipelines Worker over the [HTTP interface][2].
+- A running ClickHouse server that the Observability Pipelines Worker can access using the [HTTP interface][2].
 - A database and target table where events are inserted. The destination does not create the database or table for you.
 - (Optional) Credentials for a ClickHouse user that has `INSERT` permission on the target table. The destination authenticates with HTTP Basic auth.
 - (Optional) TLS material if your ClickHouse server requires HTTPS with client certificates.
