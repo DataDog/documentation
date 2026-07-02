@@ -74,22 +74,15 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 ## Metrics
 
-See the [Observability Pipelines Metrics][6] for a full list of available health metrics.
-
-### Component metrics
-
-{{% observability_pipelines/metrics/component %}}
+For the [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the Observability Pipelines Metrics documentation.
 
 ### Amazon S3 metrics
 
 {{% observability_pipelines/metrics/amazon_s3 %}}
 
-### Buffer metrics
-
-{{% observability_pipelines/metrics/buffer/sources %}}
-
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: https://app.datadoghq.com/observability-pipelines
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[6]: /observability_pipelines/monitoring/metrics/
+[6]: /observability_pipelines/monitoring/metrics/#component-metrics
+[7]: /observability_pipelines/monitoring/metrics/#source-buffer-metrics

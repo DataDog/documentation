@@ -105,19 +105,11 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 
 ## Metrics
 
-See the [Observability Pipelines Metrics][10] for a full list of available health metrics.
-
-### Component metrics
-
-{{% observability_pipelines/metrics/component %}}
+For the [component metrics][10] and [source buffer metrics][13] emitted by all sources, see the Observability Pipelines Metrics documentation.
 
 ### Kafka metrics
 
 {{% observability_pipelines/metrics/kafka/source %}}
-
-### Buffer metrics
-
-{{% observability_pipelines/metrics/buffer/sources %}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
@@ -127,4 +119,5 @@ See the [Observability Pipelines Metrics][10] for a full list of available healt
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[10]: /observability_pipelines/monitoring/metrics/
+[10]: /observability_pipelines/monitoring/metrics/#component-metrics
+[13]: /observability_pipelines/monitoring/metrics/#source-buffer-metrics

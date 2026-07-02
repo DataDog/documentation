@@ -84,19 +84,11 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 
 ## Metrics
 
-See the [Observability Pipelines Metrics][7] for a full list of available health metrics.
-
-### Component metrics
-
-{{% observability_pipelines/metrics/component %}}
+For the [component metrics][7] and [processor buffer metrics][8] emitted by all processors, see the Observability Pipelines Metrics documentation.
 
 ### Quota metrics
 
 {{% observability_pipelines/metrics/quota %}}
-
-### Buffer metrics
-
-{{% observability_pipelines/metrics/buffer/processors %}}
 
 [1]: /monitors/types/metric/?tab=threshold
 [2]: /observability_pipelines/destinations/datadog_archives/
@@ -104,4 +96,5 @@ See the [Observability Pipelines Metrics][7] for a full list of available health
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
 [6]: /observability_pipelines/search_syntax/logs/
-[7]: /observability_pipelines/monitoring/metrics/
+[7]: /observability_pipelines/monitoring/metrics/#component-metrics
+[8]: /observability_pipelines/monitoring/metrics/#processor-buffer-metrics

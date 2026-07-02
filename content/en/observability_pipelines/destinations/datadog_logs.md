@@ -103,23 +103,11 @@ Alternatively, you can click on {{< ui >}}Review Configured Organizations{{< /ui
 
 ## Metrics
 
-See the [Observability Pipelines Metrics][7] for a full list of available health metrics.
-
-### Component metrics
-
-{{% observability_pipelines/metrics/component %}}
+For the [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the Observability Pipelines Metrics documentation.
 
 ### Datadog Logs metrics
 
 {{% observability_pipelines/metrics/datadog_logs %}}
-
-### Buffer metrics (when enabled)
-
-{{% observability_pipelines/metrics/buffer/destinations %}}
-
-#### Deprecated buffer metrics
-
-{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ## How the destination works
 
@@ -166,4 +154,5 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[7]: /observability_pipelines/monitoring/metrics/
+[7]: /observability_pipelines/monitoring/metrics/#component-metrics
+[8]: /observability_pipelines/monitoring/metrics/#destination-buffer-metrics
