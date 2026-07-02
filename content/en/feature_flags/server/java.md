@@ -33,6 +33,7 @@ The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java SDK**: Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
 - **OpenFeature SDK**: Version **1.20.1** or later
 - **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
 - **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
