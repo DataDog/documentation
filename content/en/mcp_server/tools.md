@@ -1397,32 +1397,6 @@ Reads App & API Protection (AAP) WAF custom rules, either retrieving a single ru
 - Get the definition of AAP custom rule "rule-xyz-123".
 - Show me custom security response rules.
 
-### `upsert_datadog_security_aap_custom_rule`
-*Toolset: **security***\
-*Permissions Required: `Application Security Management Protect Write`*\
-Creates or updates an AAP WAF custom rule across the attack attempt, business logic, or security response categories. This is a write operation that can block live traffic and requires explicit user approval.
-
-- Create a custom WAF rule to block requests containing path "/admin" under the business logic category.
-- Update AAP custom rule "rule-xyz-123" to monitor traffic instead of block.
-- Upsert a custom rule for attack attempts matching pattern "union select" in the query string.
-
-### `delete_datadog_security_aap_custom_rule`
-*Toolset: **security***\
-*Permissions Required: `Application Security Management Protect Write`*\
-Deletes an AAP custom WAF rule.
-
-- Delete custom WAF rule "rule-xyz-123".
-- Remove the AAP custom rule that blocks "/admin" traffic.
-
-### `get_datadog_security_aap_blocking_config`
-*Toolset: **security***\
-*Permissions Required: `Application Security Management Protect Read`*\
-Retrieves the organization's App & API Protection (AAP) blocking status and default blocking behavior.
-
-- Get the default WAF blocking behavior for our organization.
-- Is AppSec blocking active in our environment?
-- Show me the AAP blocking configuration.
-
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).

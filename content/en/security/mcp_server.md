@@ -42,7 +42,7 @@ You can use the `security` toolset to:
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
 - **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
-- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and create, update, or delete custom WAF rules to protect a specific service or endpoint.
+- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and review existing custom WAF rules.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Quickstart
@@ -185,18 +185,6 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 `get_datadog_security_aap_custom_rules`
 : Reads App & API Protection (AAP) WAF custom rules, either retrieving a single rule by ID or enumerating all rules.
-: *Permissions required: `Application Security Management Protect Read`*
-
-`upsert_datadog_security_aap_custom_rule`
-: Creates or updates an AAP WAF custom rule across the attack attempt, business logic, or security response categories. This is a write operation that can block live traffic and requires explicit user approval.
-: *Permissions required: `Application Security Management Protect Write`*
-
-`delete_datadog_security_aap_custom_rule`
-: Deletes an AAP custom WAF rule.
-: *Permissions required: `Application Security Management Protect Write`*
-
-`get_datadog_security_aap_blocking_config`
-: Retrieves the organization's App & API Protection (AAP) blocking status and default blocking behavior.
 : *Permissions required: `Application Security Management Protect Read`*
 
 ## Further reading
