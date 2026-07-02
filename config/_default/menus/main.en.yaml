@@ -9831,6 +9831,11 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_analysis_methods
       weight: 3
+    - name: "CUPED: Variance Reduction Technique"
+      url: experiments/cuped
+      parent: pa_experiments
+      identifier: pa_experiments_cuped
+      weight: 3.5
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
