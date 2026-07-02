@@ -337,3 +337,4 @@ playwright-report/
 # AI
 .claude/*local*
 .superpowers/
+data/site_region_usage.json

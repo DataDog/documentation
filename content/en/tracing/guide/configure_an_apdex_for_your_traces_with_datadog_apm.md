@@ -35,9 +35,9 @@ Apdex thresholds must be set by administrators, per service, before Apdex scores
 
 To visualize your web application or service Apdex: 
 
-1. In [Catalog][3], hover over your web service and select **Service Page**.
+1. In [Catalog][3], hover over your web service and select {{< ui >}}Service Page{{< /ui >}}.
 
-1. Click the **Latency** graph title to open a drop-down menu, and select **Apdex**. 
+1. Click the {{< ui >}}Latency{{< /ui >}} graph title to open a drop-down menu, and select {{< ui >}}Apdex{{< /ui >}}. 
 
    **Note**: The Apdex option is only available for web services. 
 

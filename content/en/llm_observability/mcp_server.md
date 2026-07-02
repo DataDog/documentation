@@ -35,7 +35,7 @@ Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` too
 
 The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
 {{< /site-region >}}
@@ -51,7 +51,7 @@ Choose remote authentication when possible. Use local binary authentication if y
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Remote authentication uses the MCP specification's [Streamable HTTP][1] transport.
 
 **Claude Code** (command line):
@@ -134,7 +134,7 @@ Local binary authentication uses the MCP specification's [stdio][2] transport. U
 
 The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datadog [API key and application key][6] as the `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <pre><code>{
   "mcpServers": {
     "datadog": {

@@ -30,5 +30,31 @@ Click a finding to view its details and perform a workflow such as Validate > In
    - Use {{< ui >}}Create Ticket{{< /ui >}} to link the issue to your tracking system.
    - Use {{< ui >}}Reference Links{{< /ui >}} for developer education or code review.
 
+## Remediation
+
+Datadog API Posture uses [Bits Code][3] to generate code fixes for vulnerabilities.
+
+1. In Datadog, navigate to [**Security** > **App & API Protection** > **Findings**][1].
+2. Select a finding to open a side panel with details about the finding and the affected endpoint.
+3. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
+
+This opens a Bits Code session to fix this single API finding. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+View all Bits Code sessions on **Bits AI** > **Bits Code** > [**Sessions**][4].
+
+### Remediation session details
+
+Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
+
+- The original security finding and proposed code change
+- An explanation of how and why Bits Code generated the fix
+- CI results (if enabled) to validate the patch is safe to deploy
+- Options to refine the fix or **Create PR** to apply the changes to your source code repository
+
+To open the remediation session, select the API finding from the [**Findings**][1] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
+
+You can also view all remediation sessions on [**Sessions**][4].
+
 [1]: https://app.datadoghq.com/security/appsec/inventory/finding
 [2]: /security/application_security/policies/custom_rules/
+[3]: /bits_ai/bits_code
+[4]: https://app.datadoghq.com/code

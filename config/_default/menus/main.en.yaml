@@ -4098,36 +4098,41 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_cursor
       weight: 105
+    - name: Temporal Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_temporalcloud
+      weight: 106
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 106
+      weight: 107
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 107
+      weight: 108
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 108
+      weight: 109
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 109
+      weight: 110
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 110
+      weight: 111
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 111
+      weight: 112
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -5978,6 +5983,26 @@ menu:
       parent: tests_setup
       identifier: tests_setup_junit_xml
       weight: 108
+    - name: Bazel
+      url: tests/setup/bazel/
+      parent: tests_setup
+      identifier: tests_setup_bazel
+      weight: 109
+    - name: Java
+      url: tests/setup/bazel/java/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_java
+      weight: 10901
+    - name: Python
+      url: tests/setup/bazel/python/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_python
+      weight: 10902
+    - name: Go
+      url: tests/setup/bazel/go/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_go
+      weight: 10903
     - name: Network Settings
       url: tests/network/
       parent: tests
@@ -6267,31 +6292,36 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_angular
       weight: 102
+    - name: Dart and Flutter
+      url: feature_flags/client/flutter
+      parent: feature_flags_client
+      identifier: feature_flags_client_flutter
+      weight: 103
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 103
+      weight: 104
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 104
+      weight: 105
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 105
+      weight: 106
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 106
+      weight: 107
     - name: Unity
       url: feature_flags/client/unity
       parent: feature_flags_client
       identifier: feature_flags_client_unity
-      weight: 107
+      weight: 108
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags

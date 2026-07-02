@@ -123,6 +123,19 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 
 {% /site-region %}
+{% site-region region="uk1" %}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-rum.js','DD_RUM')
+</script>
+```
+
+{% /site-region %}
 {% site-region region="gov,gov2" %}
 
 ```javascript
@@ -204,6 +217,17 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-rum.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{% /site-region %}
+{% site-region region="uk1" %}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-rum.js"
     type="text/javascript"
     crossorigin>
 </script>
