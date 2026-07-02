@@ -1517,6 +1517,58 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
 
+### `get_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
+
+- List all App & API Protection passlist entries.
+- Show me active WAF exclusion filters.
+- Check existing passlist suppressions before I add a new one.
+
+### `upsert_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
+
+- Add a WAF passlist entry for service "checkout-service" on endpoint "/api/pay" to ignore rule "sqli-detection".
+- Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
+- Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
+
+### `delete_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Deletes an existing WAF exclusion filter (passlist) entry.
+
+- Delete WAF exclusion filter "passlist-abc-123".
+- Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
+
+### `get_datadog_security_denylist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
+
+- List all blocked entities on the AppSec denylist.
+- Show me blocked IP addresses from yesterday.
+- Check if IP "198.51.100.42" is on the security denylist.
+
+### `upsert_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Adds or updates a denylist block for an IP, user, or user agent with an expiration.
+
+- Block IP "198.51.100.42" on the denylist for 24 hours.
+- Add user "attacker_user_99" to the blocked entities denylist.
+- Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
+
+### `delete_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Unblocks a previously denylisted entity by setting its expiration in the past.
+
+- Unblock IP "198.51.100.42" on the denylist.
+- Remove user "attacker_user_99" from the blocked entities list.
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
