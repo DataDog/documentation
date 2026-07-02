@@ -566,7 +566,7 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 #### `integration` values
 
-For jobs run on a technology not yet support by one of the existing native integration, use any value that isn't reserved for a native integration (for example, `custom`). This will be the value used throughout Datadog that tells what type of job this is. The reserved values below are used by Datadog's native integrations. Using a reserved value for a custom job may produce unexpected behavior and is not supported.
+For jobs run on a technology not yet supported by a native integration, use any value that isn't reserved for a native integration (for example, `custom`). This value is used throughout Datadog to indicate the job type. The reserved values below are used by Datadog's native integrations. Using a reserved value for a custom job may produce unexpected behavior and is not supported.
 
 | Value       | Platform                                                           |
 | ----------- | ------------------------------------------------------------------ |
