@@ -154908,10 +154908,21 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
+                    data:
+                      - id: system.cpu.user
+                        type: metrics
+                      - attributes:
+                          created_at: "2020-03-25T09:48:37.463835Z"
+                          metric_type: gauge
+                          modified_at: "2020-04-25T09:48:37.463835Z"
+                          tags:
+                            - app
+                            - datacenter
+                        id: http.endpoint.request
+                        type: manage_tags
                     meta:
                       pagination:
-                        next_cursor:
+                        next_cursor: eyJhZnRlciI6Imh0dHAuZW5kcG9pbnQucmVxdWVzdCJ9
                 with_metric_volumes:
                   value:
                     data:
@@ -155783,12 +155794,30 @@ paths:
                       id: http.endpoint.request
                       relationships:
                         dashboards:
-                          data: []
+                          data:
+                            - id: abc-def-xyz
+                              type: dashboards
                         monitors:
-                          data: []
+                          data:
+                            - id: "1775073"
+                              type: monitors
                         notebooks:
                           data: []
+                        slos:
+                          data: []
                       type: metrics
+                    included:
+                      - attributes:
+                          popularity: 3.0
+                          title: My Dashboard
+                          url: /dashboard/abc-def-xyz
+                        id: abc-def-xyz
+                        type: dashboards
+                      - attributes:
+                          title: CPU utilization is high
+                          url: /monitors/1775073
+                        id: "1775073"
+                        type: monitors
               schema:
                 $ref: "#/components/schemas/MetricAssetsResponse"
           description: Success
@@ -155934,8 +155963,17 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
-                    meta: {}
+                    data:
+                      - attributes:
+                          cardinality_delta: 25
+                        id: host
+                        type: tag_cardinality
+                      - attributes:
+                          cardinality_delta: 5
+                        id: env
+                        type: tag_cardinality
+                    meta:
+                      metric_name: system.cpu.user
               schema:
                 $ref: "#/components/schemas/MetricTagCardinalitiesResponse"
           description: Success
