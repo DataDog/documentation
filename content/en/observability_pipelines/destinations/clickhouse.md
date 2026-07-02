@@ -44,7 +44,7 @@ After you select the ClickHouse destination in the pipeline UI:
     - `json_each_row` (default): Inserts each event as a JSON object on its own line. Event fields are mapped to columns of the same name. This maps to ClickHouse's [`JSONEachRow`][7] format.
     - `json_as_object`: Inserts each event into a single `JSON`-typed column. This maps to ClickHouse's [`JSONAsObject`][8] format.
     - `json_as_string`: Inserts each event into a single `String`-typed column, storing the raw JSON. This maps to ClickHouse's [`JSONAsString`][9] format.
-    - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Batch encoding](#batch-encoding).
+    - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Enable batching](#enable-batching).
 
 ### Optional settings
 
@@ -68,7 +68,7 @@ When you select `gzip`, you can optionally set the **Compression level** to an i
 
 {{% observability_pipelines/tls_settings %}}
 
-#### Batch encoding
+#### Enable batching
 
 Batch encoding is required when **Format** is set to `arrow_stream`. It is not used with the JSON formats.
 
