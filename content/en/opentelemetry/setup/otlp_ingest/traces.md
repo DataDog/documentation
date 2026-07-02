@@ -213,7 +213,7 @@ If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP t
 
 ### Error: 413 Request Entity Too Large
 
-If you receive a `413 Request Entity Too Large` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog traces intake endpoint's limit of 3.2MB.
+If you receive a `413 Request Entity Too Large` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog traces intake endpoint's limit of 15 MiB (uncompressed).
 
 This error usually occurs when the OpenTelemetry SDK batches too much telemetry data in a single request payload.
 
@@ -226,7 +226,7 @@ CopyBatchSpanProcessor batchSpanProcessor =
         .setMaxExportBatchSize(10)  // Default is 512
         .build();
 ```
-Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 3.2MB limit.
+Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 15 MiB limit.
 
 ### Warning: "traces export: failed … 202 Accepted" in Go
 
