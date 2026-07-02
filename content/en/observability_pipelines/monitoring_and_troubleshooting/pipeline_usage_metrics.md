@@ -150,6 +150,16 @@ Event bytes out
 : **Description**: The byte size of events the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
+Events included
+: **Metric**: `pipelines.included_events_total`
+: **Description**: The number of events that matched the processor's include clause and were processed. Events that do not match the filter clause skip the processor and continue to the next component.
+: **Available for**: Processors.
+
+Event bytes included
+: **Metric**: `pipelines.included_event_bytes_total`
+: **Description**: The byte size of events that matched the processor's filter clause and were processed.
+: **Available for**: Processors.
+
 Errors
 : **Metric**: `pipelines.component_errors_total`
 : **Description**: The number of errors encountered by the component.
