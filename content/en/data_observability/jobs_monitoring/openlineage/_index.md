@@ -566,11 +566,11 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 #### `integration` values
 
-Use `custom` for custom jobs. The values below are used by Datadog's native integrations. Using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
+For custom jobs, use any value that isn't reserved for a native integration, such as `custom`. The reserved values below are used by Datadog's native integrations. Using a reserved value for a custom job may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
 | Value       | Platform                                                           |
 | ----------- | ------------------------------------------------------------------ |
-| `custom`    | Custom or unsupported platforms                                    |
+| `custom`    | Example value for custom or unsupported platforms                 |
 | `SPARK`     | Apache Spark (native integration only; do not use for custom jobs) |
 | `AIRFLOW`   | Apache Airflow                                                     |
 | `DBT`       | dbt                                                                |
