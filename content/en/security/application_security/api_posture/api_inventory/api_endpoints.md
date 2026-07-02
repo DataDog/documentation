@@ -131,7 +131,7 @@ Without explicit `codeLocations`, endpoints may not merge correctly with data fr
 
 ## View and compare endpoint schemas
 
-API Posture builds an OpenAPI schema for each endpoint from the traffic it observes. This *inferred* schema describes what your API exposes in production: its paths, parameters, request and response bodies, and authentication. When your team also publishes a *declared* schema, an OpenAPI definition registered in the Datadog Software Catalog, you can compare the two to find where the running API has diverged from its documentation.
+API Posture builds an OpenAPI schema for each endpoint from the traffic it observes. This **inferred** schema describes what your API exposes in production: its paths, parameters, request and response bodies, and authentication. When your team also publishes a **declared** schema, an OpenAPI definition registered in the Datadog Software Catalog, you can compare the two to find where the running API has diverged from its documentation.
 
 ### View an endpoint's schema
 
