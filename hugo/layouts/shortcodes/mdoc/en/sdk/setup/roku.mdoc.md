@@ -106,11 +106,6 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/frontend/mobile/roku/
 [3]: https://github.com/rokucommunity/ropm
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/application_monitoring/roku/data_collected
-[7]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[8]: /account_management/api-app-keys/#api-keys
-[9]: /account_management/api-app-keys/#client-tokens
 [10]: /getting_started/tagging/using_tags/#rum--session-replay
 [11]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [12]: /real_user_monitoring/application_monitoring/roku/data_collected

@@ -429,7 +429,6 @@ After the SDK is correctly configured and tracking consent is granted, you shoul
 After running your app, navigate to the [RUM Explorer][7] to see sessions from your application. You should see session data within a few minutes.
 
 [1]: /real_user_monitoring/
-[2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/rum_without_limits/
 [4]: https://github.com/DataDog/dd-sdk-cpp/releases
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration

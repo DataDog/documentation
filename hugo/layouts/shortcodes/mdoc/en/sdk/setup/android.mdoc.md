@@ -766,9 +766,7 @@ See [Advanced Configuration][11].
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [6]: https://app.datadoghq.com/rum/list
-[7]: /real_user_monitoring/android/web_view_tracking/
 [8]: /real_user_monitoring/android/data_collected/
-[9]: /account_management/api-app-keys/#client-tokens
 [10]: /getting_started/tagging/using_tags/#rum--session-replay
 [11]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [12]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file

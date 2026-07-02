@@ -189,6 +189,4 @@ This means that even if users open your application while offline, no data is lo
 [8]: https://docs.unity3d.com/Manual/gradle-templates.html
 [9]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
 [10]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
-[11]: https://app.datadoghq.com/rum/application/create
-[12]: /account_management/api-app-keys/#client-tokens
 
