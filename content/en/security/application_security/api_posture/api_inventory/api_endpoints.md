@@ -137,12 +137,14 @@ API Posture builds an OpenAPI schema for each endpoint from the traffic it obser
 
 In [API Endpoints][1], click an endpoint to open its detail panel. The **Definition** section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
 
+{{< img src="/security/application_security/api/api_endpoint_definition_schema.png" alt="The Definition section of an endpoint's detail panel, showing its request parameters and the View Raw Schema and View Inferred Schemas buttons" style="width:100%;" >}}
+
 When the endpoint is associated with an API in Datadog Software Catalog, the **Definition** section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
 
 In the **Definition** section, you can:
 
-- **View declared schema**: View the OpenAPI schema as raw YAML.
-- **View inferred schema**: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
+- {{< ui >}}View Raw Schema{{< /ui >}}: View the displayed schema as raw YAML.
+- {{< ui >}}View Inferred Schemas{{< /ui >}}: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
 
 To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
 
