@@ -50,9 +50,9 @@ When the Agent runs as a container, [Autodiscovery][49] tries to discover other 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
 
 ## Override auto-configuration
-Each `auto_conf.yaml` file provides a default configuration. To override this, you can add a custom configuration in [Kubernetes annotations][50] or [Docker Labels][51].
+Each `auto_conf.yaml` file provides a default configuration. To override this on Kubernetes, you can add a custom configuration in [Kubernetes annotations][50] or use the [`DatadogInstrumentation` custom resource][52]. For Docker, use [Docker Labels][51].
 
-Kubernetes annotations and Docker Labels take precedence over `auto_conf.yaml` files, but `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
+Kubernetes annotations take precedence over `DatadogInstrumentation` resources and `auto_conf.yaml` files. `DatadogInstrumentation` resources take precedence over `auto_conf.yaml` files, and `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
 
 ## Disable auto-configuration
 
@@ -161,3 +161,4 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [49]: /getting_started/containers/autodiscovery
 [50]: /containers/kubernetes/integrations/?tab=annotations#configuration
 [51]: /containers/docker/integrations/
+[52]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/

@@ -17,6 +17,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/"
+  tag: "Documentation"
+  text: "Configure Autodiscovery with the DatadogInstrumentation CRD"
 ---
 
 This page contains detailed example templates for configuring integrations in containerized environments in the following scenarios:
@@ -27,6 +30,8 @@ This page contains detailed example templates for configuring integrations in co
 For more information about containers and integrations, see [Docker and Integrations][2] and [Kubernetes and Integrations][3].
 
 All examples make use of Datadog's Autodiscovery feature, which allows you to define configuration templates for Agent Checks on designated sets of containers. For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
+
+To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with the DatadogInstrumentation CRD][13].
 
 ## Redis integration for all Redis containers
 
@@ -636,3 +641,4 @@ All of these examples use [Autodiscovery template variables][7]:
 [10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [11]: /extend/write_agent_check/#updating-the-collection-interval
 [12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
+[13]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/

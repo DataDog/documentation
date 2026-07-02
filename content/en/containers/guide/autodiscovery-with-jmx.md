@@ -63,11 +63,14 @@ agents:
 Use one of the following methods:
 
 - [Autodiscovery annotations](#autodiscovery-annotations) (recommended)
+- [`DatadogInstrumentation` custom resource][8]: for supported workloads where you want to configure integrations without modifying your workload.
 - [Autodiscovery configuration files](#autodiscovery-configuration-files): for heavy customization of configuration parameters
 
 ### Autodiscovery annotations
 
 In this method, a JMX check configuration is applied using annotations on your Java-based Pods. This allows the Agent to automatically configure the JMX check when a new container starts. Ensure these annotations are on the created Pod, and not on the object (Deployment, DaemonSet, etc.) creating the Pod. 
+
+Alternatively, use the [`DatadogInstrumentation` custom resource][8] to define the same check as a separate Kubernetes resource, instead of an Autodiscovery annotation.
 
 Use the following template for Autodiscovery annotations:
 
@@ -514,6 +517,7 @@ Alternatively use `jmx` as your `<INTEGRATION_NAME>` to set up a basic JMX integ
 [5]: https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
 [6]: /integrations/java/
 [7]: https://kubernetes.io/docs/concepts/services-networking/network-policies/
+[8]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 [41]: /integrations/activemq/
 [42]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [43]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example

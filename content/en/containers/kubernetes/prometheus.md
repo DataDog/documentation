@@ -49,10 +49,12 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 ### Configuration
 
-Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying the following `annotations` to your **pod** exposing the OpenMetrics/Prometheus metrics:
+Configure your OpenMetrics or Prometheus check using Autodiscovery. Use pod annotations or `DatadogInstrumentation` custom resources.
+
+If you use the Prometheus Operator, `DatadogInstrumentation` provides a similar CRD-based workflow for Datadog Autodiscovery. See [Configure Autodiscovery with the DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
 
 {{< tabs >}}
-{{% tab "Kubernetes (AD v2)" %}}
+{{% tab "Annotations (AD v2)" %}}
 
 **Note:** AD Annotations v2 was introduced in Datadog Agent version 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
@@ -81,7 +83,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Kubernetes (AD v1)" %}}
+{{% tab "Annotations (AD v1)" %}}
 
 ```yaml
 # (...)
@@ -106,13 +108,43 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Use a `DatadogInstrumentation` custom resource to configure an OpenMetrics check for a supported Kubernetes workload without changing pod annotations. For more information, see [Configure Autodiscovery with the DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: example-cr
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: openmetrics
+        containerName: <CONTAINER_NAME>
+        initConfig: {}
+        instances:
+          - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>"
+            namespace: "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>"
+            metrics:
+              - "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 With the following configuration placeholder values:
 
 | Placeholder                              | Description                                                                                        |
 |------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `<CONTAINER_NAME>`                 | Matches the name of the container that exposes the metrics. |
+| `<WORKLOAD_NAMESPACE>`                   | Namespace that contains the target workload and the `DatadogInstrumentation` resource.             |
+| `<WORKLOAD_NAME>`                        | Name of the workload targeted by the `DatadogInstrumentation` resource.                            |
+| `<CONTAINER_NAME>`                       | Matches the name of the container that exposes the metrics.                                        |
 | `<PROMETHEUS_ENDPOINT>`                  | URL path for the metrics served by the container, in Prometheus format.                            |
 | `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                               |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                 |
@@ -195,6 +227,38 @@ For a full list of available parameters for instances, including `namespace` and
           containers:
           - name: prometheus-example
           # (...)
+   ```
+
+   {{% /tab %}}
+   {{% tab "DatadogInstrumentation CRD" %}}
+
+   **Note:** Configuring checks with the `DatadogInstrumentation` custom resource requires Datadog Agent and Cluster Agent version 7.82 or higher.
+
+   The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation before applying this resource, because annotations take precedence over `DatadogInstrumentation` resources.
+
+   ```yaml
+   apiVersion: datadoghq.com/v1alpha1
+   kind: DatadogInstrumentation
+   metadata:
+     name: prometheus-example
+     namespace: <WORKLOAD_NAMESPACE>
+   spec:
+     targetRef:
+       apiVersion: apps/v1
+       kind: Deployment
+       name: prometheus-example
+     config:
+       checks:
+         - integration: openmetrics
+           containerName: prometheus-example
+           initConfig: {}
+           instances:
+             - openmetrics_endpoint: "http://%%host%%:%%port%%/metrics"
+               namespace: "documentation_example_kubernetes"
+               metrics:
+                 - promhttp_metric_handler_requests: "handler.requests"
+                 - promhttp_metric_handler_requests_in_flight: "handler.requests.in_flight"
+                 - "go_memory.*"
    ```
 
    {{% /tab %}}
