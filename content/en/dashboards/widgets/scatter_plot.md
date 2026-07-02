@@ -1,6 +1,6 @@
 ---
 title: Scatter Plot Widget
-description: "Graph a chosen scope over two different metrics with their respective aggregation"
+description: "Graph a chosen scope over two different metrics with their respective aggregations, or plot raw events to inspect individual datapoints"
 widget_type: "scatterplot"
 aliases:
 - /graphing/widgets/scatter_plot/
@@ -10,7 +10,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations.
+A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations. You can also plot raw events to inspect individual datapoints.
 
 {{< img src="dashboards/widgets/scatterplot/scatterplot2.png" alt="Scatter Plot" >}}
 
@@ -28,6 +28,39 @@ A scatter plot identifies a possible relationship between changes observed in tw
     1. Add additional [context links][1], which are enabled by default. Context links bridge dashboard widgets with other pages in Datadog or third party applications.
 1. Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 1. Give your graph a title or leave the box blank for the suggested title.
+
+## Aggregated and unaggregated data
+
+The scatter plot supports two data modes, which you can switch between using the **Mode** toggle in the graph editor:
+
+- **Aggregated**: Group data by a field and apply an aggregation, such as `avg` or `sum`. Each point represents an aggregated group.
+- **Unaggregated**: Plot raw events, where each point represents a single event, such as a log, span, or RUM event. Use this mode to spot outliers and rare clusters that aggregation would otherwise hide, correlate two fields from the same event (for example, whether payload size predicts latency), or plot individual LLM traces.
+
+### Supported data sources for unaggregated mode
+
+You can plot unaggregated data from the following sources:
+
+- Logs
+- RUM
+- LLM Observability
+- Product Analytics
+- Spans
+- Audit Trail
+- Events
+- Security Signals
+- CI Pipelines
+- Network
+- Network Device Flows
+- Synthetics Test Runs
+
+### Plot unaggregated data
+
+1. Open or create a scatter plot widget on a dashboard.
+1. In the graph editor, select a data source that supports raw events.
+1. Set **Mode** to **Unaggregated**.
+1. Configure the X and Y axes by clicking **Add Measure**.
+
+Individual events appear as points on the graph.
 
 ## Navigation
 
