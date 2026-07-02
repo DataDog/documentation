@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/application_security/api_posture/overview/"
   tag: "Documentation"
   text: "API Posture Overview"
-- link: "/security/application_security/overview/"
+- link: "/security/application_security/attack_summary/"
   tag: "Documentation"
   text: "Attack Summary"
 ---

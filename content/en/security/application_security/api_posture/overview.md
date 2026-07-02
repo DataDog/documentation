@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/application_security/threat_protection/overview/"
   tag: "Documentation"
   text: "Threat Protection Overview"
-- link: "/security/application_security/overview/"
+- link: "/security/application_security/attack_summary/"
   tag: "Documentation"
   text: "Attack Summary"
 ---

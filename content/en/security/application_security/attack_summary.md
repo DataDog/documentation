@@ -1,7 +1,7 @@
 ---
 title: Attack Summary
-disable_toc: false
 aliases:
+  - /security/application_security/overview/
   - /security/application_security/threats/threat-overview
   - /security/application_security/threats/attack-summary
 further_reading:

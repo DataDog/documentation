@@ -8248,9 +8248,9 @@ menu:
       identifier: appsec_threats_management_setup
       weight: 3
     - name: Attack Summary
-      url: security/application_security/overview/
+      url: security/application_security/attack_summary/
       parent: application_security
-      identifier: application_security_overview
+      identifier: application_security_attack_summary
       weight: 6
     - name: Threat Protection
       url: security/application_security/threat_protection/
