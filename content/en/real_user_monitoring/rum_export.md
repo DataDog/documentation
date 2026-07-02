@@ -236,8 +236,6 @@ Files are organized in a directory structure that makes it easy to query archive
 | JSON    | `.json.gz`    | Gzip-compressed newline-delimited JSON.                        |
 | Parquet | `.parquet`    | Native Parquet encoding (no gzip wrapper). One row per event with typed columns. Directly loadable by Snowflake, BigQuery, and Databricks without preprocessing. |
 
-<!-- TODO: confirm the directory structure above still applies for both formats in the new Export Pipelines backend -->
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
