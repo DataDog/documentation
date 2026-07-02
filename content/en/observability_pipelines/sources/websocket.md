@@ -45,7 +45,7 @@ After you select the WebSocket source in the pipeline UI:
 
    | Decoding | Description |
    | -------- | ----------- |
-   | `bytes` | Pass each message through as raw bytes. The raw message is stored in the `message` field. |
+   | `bytes` | Send each message as raw bytes. The raw message is stored in the `message` field. |
    | `gelf`  | Decode each message as a Graylog Extended Log Format (GELF) event. |
    | `json`  | Decode each message as a JSON object. |
    | `syslog`| Decode each message as a Syslog-formatted event. |
