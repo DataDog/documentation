@@ -11,6 +11,9 @@ products:
   - name: App and API Protection
     url: /security/application_security/
     icon: app-sec
+  - name: Workload Protection
+    url: /security/workload_protection/
+    icon: security-workload-security
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
@@ -44,6 +47,7 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
       - Attack Path
       - Identity Risk
       - API Security
+      - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Select the ticketing system and configure the ticket destination:

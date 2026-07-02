@@ -25,6 +25,9 @@ products:
 - name: Code Security
   url: /security/code_security/
   icon: security-code-security
+- name: Workload Protection
+  url: /security/workload_protection/
+  icon: security-workload-security
 ---
 
 {{< product-availability >}}
