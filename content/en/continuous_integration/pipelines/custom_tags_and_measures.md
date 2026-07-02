@@ -25,8 +25,7 @@ Custom tags and measures work with the following CI providers:
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS)
-- GitHub Enterprise Server (GHES) 3.5.0 or later
+- GitHub (SaaS or GitHub Enterprise Server (GHES) >= 3.5.0)
 - Jenkins: For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
