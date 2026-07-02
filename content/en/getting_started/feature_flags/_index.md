@@ -155,7 +155,7 @@ Add the OpenFeature SDK and Datadog OpenFeature provider dependencies:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
     implementation 'com.datadoghq:dd-openfeature:1.63.0'

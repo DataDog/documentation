@@ -33,7 +33,7 @@ The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java SDK**: Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
-- **OpenFeature SDK**: Version **1.18.2** or later
+- **OpenFeature SDK**: Version **1.20.1** or later
 - **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
 - **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
 
@@ -54,7 +54,7 @@ Add the following dependencies to your `build.gradle`:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
     implementation 'com.datadoghq:dd-openfeature:1.63.0'
@@ -68,7 +68,7 @@ Add the following dependencies to your `build.gradle.kts`:
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation("dev.openfeature:sdk:1.18.2")
+    implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
     implementation("com.datadoghq:dd-openfeature:1.63.0")
@@ -85,7 +85,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>dev.openfeature</groupId>
         <artifactId>sdk</artifactId>
-        <version>1.18.2</version>
+        <version>1.20.1</version>
     </dependency>
 
     <!-- Datadog OpenFeature Provider -->
