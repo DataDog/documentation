@@ -163,7 +163,7 @@ Differences can appear in the following areas of the schema:
 - **Parameters**: A parameter added, removed, or changed from optional to required (or the reverse).
 - **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
 - **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
-- **Value constraints**: Changes to numeric or length limits (`minimum`, `maximum`, `minLength`, `maxLength`), patterns, or uniqueness constraints.
+- **Value constraints**: A numeric or length limit (`minimum`, `maximum`, `minLength`, `maxLength`), pattern, or uniqueness constraint changed. 
 - **Schema composition**:  A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
 - **Responses**: A status code, response header, or content type added or removed.
 
