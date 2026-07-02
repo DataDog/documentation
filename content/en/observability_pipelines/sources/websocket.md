@@ -50,7 +50,7 @@ After you select the WebSocket source in the pipeline UI:
    | `json`  | Decode each message as a JSON object. |
    | `syslog`| Decode each message as a Syslog-formatted event. |
 
-   If your messages do not match one of the formats above, select `bytes` to ingest the raw message in the `message` field, then transform it with the [Custom Processor][6] using Vector Remap Language (VRL).
+   If your messages do not match one of the formats above, select `bytes` to ingest the raw message in the `message` field, then transform it with a [Custom Processor][6].
 
 ### Optional TLS settings
 
