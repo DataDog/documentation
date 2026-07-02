@@ -1,10 +1,8 @@
 {{- $pattern := `^security_monitoring/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$|^security/default_rules/([a-zA-Z0-9]{3}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{3})$` -}}
 {{- range $p := .Site.Pages -}}
     {{- range .Aliases -}}
-        {{- /* Strip leading ./ from relative aliases */ -}}
-        {{- $temp := strings.TrimPrefix "./" . -}}
         {{- /* Normalize by replacing multi slashes with one */ -}}
-        {{- $temp = (replaceRE `(?m)(\/\/+)` "/" $temp) -}}
+        {{- $temp := (replaceRE `(?m)(\/\/+)` "/" .) -}}
         {{- $temp = strings.TrimPrefix "/" $temp -}}
         {{- $alias := strings.TrimSuffix "/" $temp -}}
         {{- if not (findRE $pattern $alias) -}}
