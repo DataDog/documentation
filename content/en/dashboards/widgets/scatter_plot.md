@@ -18,15 +18,15 @@ A scatter plot identifies a possible relationship between changes observed in tw
 
 ### Configuration
 
-1. Select a metric or other data set, and an aggregation for the X and Y axis.
+1. Select a metric or other dataset, and an aggregation for the X and Y axis.
 1. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, or `region`.
 1. Optionally: 
     1. Enable a color-by tag.
     1. Set X and Y axis controls.
-    1. Add a legend to view the data points in a list.
+    1. Add a legend to view the datapoints in a list.
     1. Configure units as they display on the graph.
     1. Add additional [context links][1], which are enabled by default. Context links bridge dashboard widgets with other pages in Datadog or third party applications.
-1. Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
+1. Choose whether your widget has a custom time frame or the dashboard's global time frame.
 1. Give your graph a title or leave the box blank for the suggested title.
 
 ## Aggregated and unaggregated data
