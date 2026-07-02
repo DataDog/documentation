@@ -46,7 +46,7 @@ After you select the ClickHouse destination in the pipeline UI:
     - `json_as_string`: Inserts each event into a single `String`-typed column, storing the raw JSON. This maps to ClickHouse's [`JSONAsString`][9] format.
     - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Enable batching](#enable-batching).
 
-    **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable when a pipeline configuration loads in the Worker and on restart because the target table's schema is fetched at that time to build the Arrow encoder.
+    **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable when your worker loads the pipeline configuration from the remote configuration backend, or upon worker restart. The Clickhouse table schema is not persisted between restarts.
 
 ### Optional settings
 
