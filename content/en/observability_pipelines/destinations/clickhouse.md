@@ -108,9 +108,9 @@ See [Event batching](#event-batching) for more information.
 
 A batch of events is flushed when one of these parameters is met. Batching is also configurable for this destination. See [event batching][12] for more information.
 
-| Maximum Events | Timeout (seconds) |
-|----------------|-------------------|
-| No limit       | 1                 |
+| Maximum Events | Maximum Bytes | Timeout (seconds) |
+|----------------|---------------|-------------------|
+| No limit       | 10 MB         | 1                 |
 
 ## Further reading
 
