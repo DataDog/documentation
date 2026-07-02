@@ -63,7 +63,7 @@ To set up an AI-assisted or custom parsing rule, click {{< ui >}}Create Parsing 
         - If you re-run the AI rule generator, a new rule is created. You must manually delete previously AI-created rules if you don't want them.
         - You can run the AI rule generator a maximum of three times per sample.
     1. Repeat step 4 to create rules based on additional sample logs. See [Order of custom rules](#order-of-custom-rules) for information on how rule order determines which rule parses a log.
-1. If you want to add library rules, select a library rule from the {{< ui >}}reference a library rule{{< /ui >}} dropdown menu. You can add multiple library rules. See [Library rules](#library-rules) for more information.
+1. After you add a rule, you can add library rules by selecting a library rule from the {{< ui >}}reference a library rule{{< /ui >}} dropdown menu. You can add multiple library rules. See [Library rules](#library-rules) for more information.
 1. Click {{< ui >}}Advanced Settings{{< /ui >}} if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
