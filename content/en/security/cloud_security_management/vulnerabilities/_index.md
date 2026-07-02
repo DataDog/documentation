@@ -99,6 +99,8 @@ Focus on exploitable vulnerabilities first, using the Datadog Severity Score, co
 
 For vulnerabilities with available fixes, the {{< ui >}}Findings{{< /ui >}} page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
+<div class="alert alert-info">To reuse your explorer settings on the Vulnerabilities Findings page, bookmark the full page URL. Your search query and facet selections are preserved in the URL.</div>
+
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 In [{{< ui >}}Container Images{{< /ui >}}][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
