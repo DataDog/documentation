@@ -59,9 +59,9 @@ To create a notification rule for log findings:
 
 Sensitive Data Scanner finding notifications include finding context, such as the rule, severity, service, environment, team, and a link to the finding. Notifications do not include log samples.
 
-#### Notify on credential findings in production logs
+#### Notify on high-severity findings in production
 
-To notify on high-severity credential findings in production: in the Log Findings explorer, filter by severity **High** or **Critical** and `env:prod`. Then click **Create Notification Rule**.
+To alert on high-severity findings in production, filter the Log Findings explorer by severity **High**, **Critical**, or both, and `env:prod`. Then click **Create Notification Rule**.
 
 ### APM
 
