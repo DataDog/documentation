@@ -184,11 +184,6 @@ This means that even if users open your application while offline, no data is lo
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/maui/
 [3]: https://www.nuget.org/packages/Datadog.Maui
-[4]: https://app.datadoghq.com/rum/application/create
-[5]: /real_user_monitoring/application_monitoring/maui/data_collected
-[6]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[7]: /account_management/api-app-keys/#api-keys
-[8]: /account_management/api-app-keys/#client-tokens
 [9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/
 [10]: /real_user_monitoring/error_tracking/mobile/maui/
 [11]: /real_user_monitoring/explorer/

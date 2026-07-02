@@ -674,8 +674,6 @@ See [Supported versions][9] for a list of operating system versions and platform
 [7]: /error_tracking/frontend/mobile/ios
 [8]: /real_user_monitoring/explorer/
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
-[10]: https://app.datadoghq.com/rum/application/create
-[11]: /real_user_monitoring/ios/web_view_tracking/
 [12]: /real_user_monitoring/ios/data_collected/
 [13]: https://app.datadoghq.com/rum/application/
 [14]: /error_tracking/

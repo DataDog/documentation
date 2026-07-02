@@ -161,9 +161,6 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 If you're deploying updates with [CodePush][13], see the [CodePush setup documentation][14] for additional configuration steps.
 
-[7]: https://app.datadoghq.com/rum/application/create
-[8]: https://app.datadoghq.com/error-tracking/settings/setup/client/
-[10]: /account_management/api-app-keys/#client-tokens
 [13]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
 [14]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
 
