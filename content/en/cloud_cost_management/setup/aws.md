@@ -34,7 +34,7 @@ You can setup using the [API][21], [Terraform][22], or directly in Datadog by fo
 
 Navigate to [Setup & Configuration][7], add an AWS account and follow the steps to configure the AWS integration.
 
-**Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**.
+**Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2], not a delegated administrator account, for cost visibility into related **member accounts**. A delegated administrator account cannot discover other member accounts.
 
 If you send a Cost and Usage Report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 - {{< ui >}}Linked Account Access{{< /ui >}}
