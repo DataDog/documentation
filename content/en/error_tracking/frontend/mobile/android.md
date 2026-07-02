@@ -566,6 +566,13 @@ The Android Gradle plugin automates the mapping file upload process. After confi
 
 **Note**: Re-uploading a mapping file does not override the existing one if the version has not changed. For information about file size limitations and other constraints, see the [Limitations](#limitations) section.
 
+#### Upload manually
+
+You can also upload ProGuard/R8 mapping files and NDK symbol files manually, without the Gradle plugin. This is useful for one-off uploads or pipelines that do not run the plugin:
+
+- From the Datadog UI, on the [RUM Debug Symbols][24] page.
+- Through the [public API][26].
+
 #### Run the upload tasks
 
 After configuring the plugin, run the Gradle tasks to upload your Proguard/R8 mapping file and NDK symbol files to Datadog:
@@ -948,3 +955,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 [24]: https://app.datadoghq.com/source-code/setup/rum
 [25]: /real_user_monitoring/application_monitoring/android/setup/#track-background-events
+[26]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/
