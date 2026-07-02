@@ -246,7 +246,7 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table_id:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
-: This counter is incremented for each processed log that does not have a corresponding row in the table.
+: This counter is incremented for each processed log that does not have a corresponding row in the table. Available in Worker version 2.14 and later.
 
 `pipelines.enrichment_cache_hits_total`
 : Number of cache hits, that is logs that could be enriched without being buffered.

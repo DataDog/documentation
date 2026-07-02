@@ -175,7 +175,7 @@ Utilization
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
-: **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors.
+: **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later.
 : **Available for**: The Remap (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
 
 ## HTTP client metrics
