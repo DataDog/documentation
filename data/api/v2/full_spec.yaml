@@ -46662,6 +46662,9 @@ components:
     IncidentTypeAttributes:
       description: Incident type's attributes.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
+          readOnly: true
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
@@ -46702,6 +46705,53 @@ components:
           type: string
       required:
         - name
+      type: object
+    IncidentTypeConfiguration:
+      description: >-
+        The incident-type-scoped behavior settings. All fields are optional on update. Any field omitted from a PATCH request keeps its current value. This object is read-only on the incident type resource itself and is only mutated through the update (PATCH) endpoint.
+      properties:
+        allow_incident_deletion:
+          default: false
+          description: Whether incidents of this type can be deleted.
+          example: false
+          type: boolean
+        allow_workflows:
+          default: true
+          description: Whether automation workflows can be triggered for incidents of this type.
+          example: true
+          type: boolean
+        create_message:
+          description: An optional message shown to users when they declare an incident of this type.
+          example: "Create an incident here"
+          type: string
+        disable_out_of_the_box_postmortem_template:
+          default: false
+          description: Whether the out-of-the-box postmortem template is disabled for incidents of this type.
+          example: false
+          type: boolean
+        editable_timestamps:
+          default: false
+          description: Whether responders can edit incident timestamps for incidents of this type.
+          example: false
+          type: boolean
+        private_incidents:
+          default: false
+          description: >-
+            Whether responders can create private incidents of this type. This is an opt-in setting, distinct from `private_incidents_by_default`, which controls whether incidents are created private automatically.
+          example: false
+          type: boolean
+        private_incidents_by_default:
+          default: false
+          description: Whether incidents of this type are created as private by default.
+          example: false
+          type: boolean
+        slug_source:
+          $ref: "#/components/schemas/IncidentTypeSlugSource"
+        test_incidents:
+          default: true
+          description: Whether incidents of this type are treated as test incidents.
+          example: true
+          type: boolean
       type: object
     IncidentTypeCreateData:
       description: Incident type data for a create request.
@@ -46797,6 +46847,18 @@ components:
       required:
         - data
       type: object
+    IncidentTypeSlugSource:
+      default: default
+      description: >-
+        When set to `servicenow`, incidents will display the ServiceNow record ID instead of the public ID. If no ServiceNow integration exists, the public ID will be displayed.
+      enum:
+        - default
+        - servicenow
+      example: default
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - SERVICENOW
     IncidentTypeType:
       default: incident_types
       description: Incident type resource type.
@@ -46809,6 +46871,8 @@ components:
     IncidentTypeUpdateAttributes:
       description: Incident type's attributes for updates.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
