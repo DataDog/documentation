@@ -22,13 +22,13 @@ further_reading:
 ---
 ## Overview
 
-After setting up Sensitive Data Scanner to detect sensitive information in your telemetry data, you can create alerts when sensitive data is detected. This helps you:
+After you configure Sensitive Data Scanner to detect sensitive information in your telemetry data, you can create alerts when matches are detected. Use these alerts to:
 
-- Alert security and compliance teams to potential data exposure
-- Track sensitive data volume trends over time
+- Notify security and compliance teams about potential data exposure
+- Track trends in sensitive data volume over time
 - Identify services or teams that need additional security guidance
 
-For log findings, Datadog recommends [Security Notification Rules][8]. For APM and RUM, create monitors using the tags that Sensitive Data Scanner adds when it detects matches.
+For log findings, Datadog recommends [security notification rules][8]. For APM and RUM, create monitors using the tags that Sensitive Data Scanner adds when it detects matches.
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ Sensitive Data Scanner finding notifications include finding context, such as th
 
 #### Notify on credential findings in production logs
 
-To notify on high-severity credential findings in production: in the Log Findings explorer, filter by severity **High** or **Critical**, `env:prod`, and scanning rule **Credentials**. Then click **Create Notification Rule**.
+To notify on high-severity credential findings in production: in the Log Findings explorer, filter by severity **High** or **Critical** and `env:prod`. Then click **Create Notification Rule**.
 
 ### APM
 
