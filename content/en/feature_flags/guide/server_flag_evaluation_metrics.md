@@ -58,7 +58,7 @@ For all tracers except Java, set the following environment variable in addition 
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
-### Java: add the OpenTelemetry SDK dependencies
+### Java: Add the OpenTelemetry SDK dependencies
 
 The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the OpenTelemetry SDK metrics and OTLP exporter dependencies must be on your application's classpath. Add them alongside your [Java feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
 
