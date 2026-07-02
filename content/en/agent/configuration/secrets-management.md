@@ -1453,7 +1453,7 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
-### Using multiple native backends simultaneously
+### Option 1b: Using multiple native backends simultaneously
 
 **Available in Agent version 7.80+**
 
@@ -1475,7 +1475,7 @@ multi_secret_backends:
       <KEY_1>: <VALUE_1>
 ```
 
-Each `<backend_name>` is an arbitrary identifier you choose. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
+Each `<backend_name>` is an arbitrary identifier you choose. It cannot contain a semicolon, because `;` is the delimiter used in `ENC[]` handles. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
 
 #### ENC handle format
 
@@ -1521,7 +1521,7 @@ If one backend or handle fails, the Agent still substitutes all successfully res
 
 ```
 === Secrets stats ===
-Number of secrets resolved: 2
+Number of secrets resolved: 1
 Secrets handle resolved:
 - 'yaml_secrets;api_key': from datadog.yaml
 
