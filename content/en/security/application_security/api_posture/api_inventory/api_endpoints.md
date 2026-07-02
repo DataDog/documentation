@@ -157,7 +157,7 @@ The schema differences appear directly in the endpoint's schema view, highlighte
 |----------|---------|
 | Breaking | The change likely breaks clients that rely on the declared contract, such as a field that became required or a parameter type change. |
 | Warning | The change is drift worth reviewing, such as an undeclared field observed in traffic or a parameter that became optional. |
-| Info | The difference is low-risk, such as an endpoint that is declared but has no observed traffic. |
+| Info | The difference is low risk, such as an endpoint that is declared but has no observed traffic. |
 
 Differences can appear in the following areas of the schema:
 
