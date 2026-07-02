@@ -135,14 +135,16 @@ API Posture builds an OpenAPI schema for each endpoint from the traffic it obser
 
 ### View an endpoint's schema
 
-When viewing an endpoint, the **Definition** section displays the endpoint request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
+In [API Endpoints][1], click an endpoint to open its detail panel. The **Definition** section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
 
-When the endpoint is associated with an API in Datadog Software Catalog, the displayed information is based on the OpenAPI specification. Otherwise, the information is inferred from live traffic.
+When the endpoint is associated with an API in Datadog Software Catalog, the **Definition** section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
 
-- **View raw schema**: View the raw OpenAPI schema as YAML.
-- **View inferred schema**: View the inferred schema as a preview or YAML. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
+In the **Definition** section, you can:
 
-To reduce noise, the inferred schema only includes fields that are observed enough times, and automatically drops fields that haven't been seen recently. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
+- **View as YAML**: Switch from the default preview to view the displayed schema as YAML.
+- **View inferred schema**: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
+
+To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
 
 ### Compare declared and inferred schemas
 
