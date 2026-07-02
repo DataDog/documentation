@@ -36,8 +36,10 @@ Configure the ClickHouse destination when you [set up a pipeline][3]. You can se
 After you select the ClickHouse destination in the pipeline UI:
 
 1. Enter the identifier for your ClickHouse HTTP endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-1. In the **Table** field, enter the name of the ClickHouse table to insert events into. This field is required.
+1. (Optional) Enter the identifier for your ClickHouse username. If you leave it blank, the [default](#secret-defaults) is used.
+1. (Optional) Enter the identifier for your ClickHouse password. If you leave it blank, the [default](#secret-defaults) is used.
 1. (Optional) In the **Database** field, enter the name of the ClickHouse database that contains the table. If you leave it blank, the ClickHouse user's default database is used.
+1. In the **Table** field, enter the name of the ClickHouse table to insert events into.
 1. In the **Format** dropdown menu, select the insert format for events:
     - `json_each_row` (default): Inserts each event as a JSON object on its own line. Event fields are mapped to columns of the same name. This maps to ClickHouse's [`JSONEachRow`][7] format.
     - `json_as_object`: Inserts each event into a single `JSON`-typed column. This maps to ClickHouse's [`JSONAsObject`][8] format.
