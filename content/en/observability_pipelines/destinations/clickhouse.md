@@ -52,7 +52,7 @@ After you select the ClickHouse destination in the pipeline UI:
 
 #### Skip unknown fields
 
-Toggle the **Skip unknown fields** switch to either **Drop Unknown Fields** or **Fail On Unknown Fields** for fields that are not present in the target table schema instead of returning an insert error. The default is **Use ClickHouse Server**, which uses the [`input_format_skip_unknown_fields`][10] setting.
+Toggle the **Skip unknown fields** switch to either **Drop Unknown Fields** or **Fail On Unknown Fields**  that are not present in the target table schema instead of returning an insert error. The default is **Use ClickHouse Server**, which uses the [`input_format_skip_unknown_fields`][10] setting.
 
 #### Date time best effort
 
