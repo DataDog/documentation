@@ -64,13 +64,6 @@ In the **Compression** dropdown menu, select the algorithm used to compress outb
 
 When you select `gzip`, you can optionally set the **Compression level** to an integer from `1` (fastest) to `9` (best compression). If left unset, the default is `6`.
 
-#### Enable basic authentication
-
-Toggle the **Enable Basic Auth** switch to authenticate to ClickHouse with HTTP Basic auth.
-
-1. Enter the identifier for your ClickHouse username. If you leave it blank, the [default](#secret-defaults) is used.
-1. Enter the identifier for your ClickHouse password. If you leave it blank, the [default](#secret-defaults) is used.
-
 #### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
