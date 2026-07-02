@@ -24,7 +24,7 @@ Before you configure the ClickHouse destination, you must have:
 
 - A running ClickHouse server that the Observability Pipelines Worker can access using the [HTTP interface][2].
 - A ClickHouse database and target table to which the Worker sends events.
-- (Optional) Credentials for a ClickHouse user that has `INSERT` permission on the target table. The destination authenticates with HTTP Basic auth.
+- (Optional) Credentials for a ClickHouse user that has `INSERT` permission on the target table. The Worker authenticates with HTTP basic authentication.
 - (Optional) TLS material if your ClickHouse server requires HTTPS with client certificates.
 
 ## Setup
