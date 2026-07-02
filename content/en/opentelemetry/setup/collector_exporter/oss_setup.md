@@ -161,7 +161,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -347,7 +346,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -575,7 +573,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -758,7 +755,7 @@ For a complete list of dimensions included in the recommended configuration, inc
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
-- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces and logs, `https://otlp.<YOUR_DD_SITE>/api/v2/otlpmetrics` for metrics.
+- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
 
 #### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
@@ -800,6 +797,16 @@ The `cumulativetodelta` processor converts cumulative metrics to delta temporali
 ### Self-monitoring telemetry
 
 The configuration sends the Collector's own metrics back to its local OTLP receiver (`http://localhost:4318`). This routes the Collector's internal metrics through its own pipelines so they are enriched with resource attributes before being exported to Datadog.
+
+## OTLP intake limits
+
+Datadog enforces the following limits when ingesting OTLP metrics. Data that exceeds a limit is rejected or dropped as noted.
+
+**Payload size**
+: Requests above the maximum payload size (5.1 MiB uncompressed) are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit.
+
+**Histogram bucket count**
+: Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
 
 ## Further reading
 

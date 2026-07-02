@@ -31,6 +31,16 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 
 See also: [Instrumenting for Agent Observability][5].
 
+## Intake limits
+
+Datadog enforces a maximum payload size per request on each OTLP intake endpoint. Requests that exceed the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the export batch size or flush more frequently so each request stays under the limit.
+
+| Signal  | Endpoint path   | Maximum payload size    |
+|---------|-----------------|-------------------------|
+| Metrics | `/v1/metrics`   | 512 KiB (compressed)    |
+| Logs    | `/v1/logs`      | 5.1 MiB (uncompressed)  |
+| Traces  | `/v1/traces`    | 15 MiB (uncompressed)   |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
