@@ -178,6 +178,16 @@ CPU usage
 : **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later.
 : **Available for**: The Remap (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
 
+Send latency
+: **Metric**: `pipelines.source_send_latency_seconds`
+: **Description**: The time it takes for the source to send a chunk of events to the next component. Available in Worker version 2.16 and later.
+: **Available for**: Sources.
+
+Send batch latency
+: **Metric**: `pipelines.source_send_batch_latency_seconds`
+: **Description**: The time it takes for the source to send a batch, which can contain multiple event chunks, to the next component. Available in Worker version 2.16 and later.
+: **Available for**: Sources.
+
 ## HTTP client metrics
 
 {{% observability_pipelines/metrics/http_client %}}
