@@ -96,7 +96,7 @@ Select the {{< ui >}}Locations{{< /ui >}} to run your DNS test from. DNS tests c
 
 DNS tests can run:
 
-* {{< ui >}}On a schedule{{< /ui >}} to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your DNS test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your DNS test.
 * [**Within your CI/CD pipelines**][2].
 * **On-demand** to run your tests whenever makes the most sense for your team.
 

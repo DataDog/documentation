@@ -42,7 +42,7 @@ Synthetic Monitoring does not trigger alerts based on a single failed run. Inste
 2. [Fast retries](#fast-retries) are applied, if configured.
 3. Test results are aggregated across locations.
 4. Failures are evaluated over time using the alerting rules.
-5. The monitor transitions between {{< ui >}}OK{{< /ui >}}, {{< ui >}}Alert{{< /ui >}}, or {{< ui >}}No Data{{< /ui >}} [status](#monitor-status-reference) as the alerting conditions are met or no longer met.
+5. The monitor transitions between `OK`, `Alert`, or `No Data` [status](#monitor-status-reference) as the alerting conditions are met or no longer met.
 
 ### Test runs that generate alerts
 | Test run type                           | Evaluated for alerting |
