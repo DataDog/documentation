@@ -570,7 +570,7 @@ For custom jobs, use any value that isn't reserved for a native integration, suc
 
 | Value       | Platform                                                           |
 | ----------- | ------------------------------------------------------------------ |
-| `custom`    | Example value for custom or unsupported platforms                 |
+| `custom`    | Example value for custom or unsupported platforms                  |
 | `SPARK`     | Apache Spark (native integration only; do not use for custom jobs) |
 | `AIRFLOW`   | Apache Airflow                                                     |
 | `DBT`       | dbt                                                                |
