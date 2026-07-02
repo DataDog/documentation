@@ -108,7 +108,7 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | Serverless Monitoring (GCP Cloud Run and Cloud Run Functions) | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
 | Agent Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
 | OpenTelemetry | Node.js / server-side TS, Browser JS / React / Vite, Python (Django, Flask, FastAPI), Java, Go |
-| App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
+| App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP, and proxies (Envoy, HAProxy) for Linux, Windows, Kubernetes, Docker, GCP Cloud Run, and AWS Lambda, AWS Fargate/ECS |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
 ### Step 1: Install the MCP server
@@ -187,6 +187,11 @@ Send the prompt that matches the product you want to set up:
 
 {{% /tab %}}
 
+{{% tab "App and API Protection (Preview)" %}}
+<div class="alert alert-info">Agentic onboarding for App and API Protection is in Public Preview.</div>
+
+{{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
+{{% /tab %}}
 
 {{% tab "Serverless Monitoring" %}}
 
@@ -219,6 +224,7 @@ After the agent completes, commit the changes to your repository and set any new
 Confirm data is flowing in the Datadog UI for the product you set up:
 
 - [Error Tracking][6]
+- [App and API Protection][11]
 - [RUM > Applications][7]
 - [Infrastructure > Hosts][8]
 - [Serverless > Functions][9]
@@ -229,6 +235,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [8]: https://app.datadoghq.com/infrastructure
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
+[11]: https://app.datadoghq.com/security/appsec
 [16]: /getting_started/site/
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
