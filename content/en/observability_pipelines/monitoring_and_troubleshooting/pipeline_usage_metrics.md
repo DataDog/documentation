@@ -70,7 +70,7 @@ Logical CPUs
 
 Load average
 : **Metric**: `pipelines.host.load1`, `pipelines.host.load5`, `pipelines.host.load15`
-: **Description:** The host's load average over the last 1, 5, and 15 minutes.
+: **Description:** The host's system load average over the last 1, 5, and 15 minutes. Load average is the number of processes that are running or waiting to run, and on Linux also includes processes blocked on uninterruptible I/O. Compare it against `pipelines.host.logical_cpus`: a value near the CPU count indicates full utilization, and a value above it indicates the host is oversubscribed. Not emitted on Windows.
 
 Total memory
 : **Metric**: `pipelines.host.memory_total_bytes`
