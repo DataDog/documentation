@@ -40,7 +40,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogRUM`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][14]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogRUM`.
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][4]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogRUM`.
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -84,9 +84,9 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 {% step title="Initialize Datadog SDK" %}
 
-In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][9].
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][5].
 
-See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][10] to initialize the library.
+See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][6] to initialize the library.
 
 ```kotlin
 // in common source set
@@ -110,7 +110,7 @@ fun initializeDatadog(context: Any? = null) {
 
 {% step title="Sample RUM sessions" %}
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -158,7 +158,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views][12] to enable automatic tracking of all your views.
+See [Automatically track views][8] to enable automatic tracking of all your views.
 
 ### Set tracking consent (GDPR compliance)
 
@@ -196,7 +196,7 @@ kotlin {
 }
 ```
 
-2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][13]:
+2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][9]:
 
 ```kotlin
 val ktorClient = HttpClient {
@@ -212,14 +212,14 @@ val ktorClient = HttpClient {
 }
 ```
 
-This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15] or enable [background view tracking](#track-background-events).
+This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10] or enable [background view tracking](#track-background-events).
 {% /step %}
 
 {% /stepper %}
 
 ## Track errors
 
-[Kotlin Multiplatform Crash Reporting and Error Tracking][16] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][17].
+[Kotlin Multiplatform Crash Reporting and Error Tracking][11] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][12].
 
 ## Sending data when device is offline
 
@@ -232,12 +232,12 @@ This means that even if users open your application while offline, no data is lo
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/kotlin-multiplatform/
 [3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[9]: /getting_started/tagging/using_tags/
-[10]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
-[11]: https://app.datadoghq.com/rum/application/create
-[12]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
-[13]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[15]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
-[16]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
-[17]: /real_user_monitoring/explorer/
+[4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+[5]: /getting_started/tagging/using_tags/
+[6]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
+[7]: https://app.datadoghq.com/rum/application/create
+[8]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
+[9]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
+[10]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
+[11]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
+[12]: /real_user_monitoring/explorer/

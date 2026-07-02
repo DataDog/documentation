@@ -544,8 +544,7 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 ### CodePush integration (optional)
 
-If you're deploying updates with [CodePush][11], see the [CodePush setup documentation][12] for additional configuration steps.
+If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
 
-[11]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[12]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
-
+[1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
+[2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush

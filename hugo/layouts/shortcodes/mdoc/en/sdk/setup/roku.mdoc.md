@@ -30,7 +30,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 {% step title="Initialize the library" %}
 
-In the initialization snippet, set an environment name. For more information, see [Using Tags][10].
+In the initialization snippet, set an environment name. For more information, see [Using Tags][5].
 
 ```vb.net
 sub RunUserInterface(args as dynamic)
@@ -53,7 +53,7 @@ end sub
 
 #### Sample session rates
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][6]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 {% /step %}
 
 {% /stepper %}
@@ -64,7 +64,7 @@ See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking
 
 ### Track Views
 
-To split [user sessions][12] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
+To split [user sessions][7] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```vb.net
     viewName = "VideoDetails"
@@ -106,7 +106,6 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/frontend/mobile/roku/
 [3]: https://github.com/rokucommunity/ropm
 [4]: https://github.com/DataDog/dd-sdk-roku
-[10]: /getting_started/tagging/using_tags/#rum--session-replay
-[11]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[12]: /real_user_monitoring/application_monitoring/roku/data_collected
-
+[5]: /getting_started/tagging/using_tags/#rum--session-replay
+[6]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[7]: /real_user_monitoring/application_monitoring/roku/data_collected
