@@ -15,19 +15,19 @@ further_reading:
 
 ## Overview
 
-The precision of experiment results (the width of confidence intervals) depends on the variance of the metrics we are measuring. One way to improve the precision of experiments is to gather more data, as the variance goes down as we gather more data; this obviously means that it takes longer to run an experiment.
+The precision of experiment results (the width of confidence intervals) depends on the variance of the metrics we are measuring. One way to improve the precision of experiments is to gather more data, as the standard error typically goes down as we gather more data; this obviously means that it takes longer to run an experiment.
 
 However, there are options beyond waiting to gather more data, and all these options address reducing the variance in the metrics we are measuring directly. One particularly flexible and powerful method is known as Controlled-experiment Using Pre-Experiment Data (CUPED), originally presented by [Deng et al. (2013)][1].
 
 Standard experiment analysis involves comparing metric data from subjects exposed to a treatment to that of a control group—all the data is gathered during the experiment. But most companies know something about their users beyond what they did during the experiment, most prominently metric data from before the experiment started. CUPED leverages this data from outside the experiment in order to control for some of the variance in metrics that comes from randomly picking variants for each subject; in a standard experiment, you might end up with one variant having more active users just by random chance, while CUPED reduces the effect of this random variation by controlling for the different activity levels across different variants.
 
-CUPED is enabled by default. With CUPED enabled, the displayed lift and metric values may differ from the naive estimates calculated from the raw data. This difference is expected and is the mechanism that drives the reduced variance. You can toggle CUPED in the experiment's [statistical analysis plan][2].
+CUPED is enabled by default. With CUPED enabled, the displayed lift and metric values may differ from the naive estimates calculated from the raw data. The raw data is unchanged; CUPED changes only the estimator used for analysis. This difference is expected and is the mechanism that drives the reduced variance. You can toggle CUPED in the experiment's [statistical analysis plan][2].
 
 ## How CUPED works
 
 Datadog's implementation is based on [Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data][1] by Deng et al., as well as the idea of metric augmentation described in [From Augmentation to Decomposition: A New Look at CUPED][3] in 2023 by Deng et al.
 
-CUPED takes the raw (non-CUPED) lift estimate for a metric and *augments* it with a series of adjustments. Given a raw lift estimate `Δ`, the CUPED-adjusted lift is:
+CUPED takes the raw (non-CUPED) lift estimate for a metric and *augments* it with a series of adjustments. Given a raw absolute lift estimate `Δ` (the non-CUPED treatment−control difference for the metric), the CUPED-adjusted lift is:
 
 ```
 CUPED lift = Δ + adjustment_1 + adjustment_2 + ... + adjustment_n
@@ -88,11 +88,11 @@ Because the ratio metric splits into a numerator and a denominator, these two me
 
 In total, this experiment includes 9 covariates: 6 from the three pre-exposure aggregations and 3 from the device type property.
 
-To keep the adjustment stable, a property contributes covariates for at most its 10 most common values per variant; less common values are not included. A covariate that has no variation, such as a missing indicator when no subjects are missing that value, is also excluded.
+To keep the adjustment stable, only a property's most common values are included: the 10 most common values in each variant are combined into a single shared set of covariates that applies to all variants, and rarer values are not included. A covariate that has no variation, such as a missing indicator when no subjects are missing that value, is also excluded.
 
 ## Selecting the coefficients
 
-After the covariates are set, Datadog chooses the coefficients (the `theta_i` values) that *approximately minimize the variance* of the CUPED-adjusted lift. This is the adjustment that removes the most noise while remaining zero-in-expectation. A single set of coefficients is estimated by pooling data from all variants, so the same adjustment applies to every variant and to any segment you slice later. A small L2 penalty keeps the coefficients well-behaved when covariates are correlated with one another. This penalty does not introduce any bias in the lift estimator, because CUPED is unbiased for any set of adjustment coefficients. This is unlike a ridge regression, which applies its L2 penalty to a coefficient on the treatment effect itself and can therefore bias the estimator.
+After the covariates are set, Datadog chooses the coefficients (the `theta_i` values) that *approximately minimize the variance* of the CUPED-adjusted lift. This is the adjustment that removes the most noise while remaining zero-in-expectation. A single set of coefficients is estimated by pooling data from all variants, so the same adjustment applies to every variant, and to segments analyzed later, which are defined by subject properties recorded at assignment. A small L2 penalty keeps the coefficients well-behaved when covariates are correlated with one another. This penalty does not introduce any bias in the lift estimator, because CUPED is unbiased for any fixed set of adjustment coefficients. This is unlike a ridge regression, which applies its L2 penalty to a coefficient on the treatment effect itself and can therefore bias the estimator. Although the coefficients are in practice estimated from the experiment data, CUPED treats them as fixed when computing results. This follows the approach of the original CUPED paper, and there is theory to suggest that the variance contribution of estimating the coefficients is generally negligible at the sample sizes required in digital experimentation.
 
 CUPED is often interpreted as a form of regression adjustment, and the two are closely related: for a mean metric, the variance-minimizing coefficients are exactly those obtained by regressing the metric on the covariates with ordinary least squares. However, CUPED is fundamentally model-free. It relies only on the fact that pre-experiment differences between randomized groups are zero in expectation, and it makes no assumption about the form of the relationship between the covariates and the metric. Framing CUPED as augmentation rather than regression provides a straightforward general framework that naturally extends to advanced metric types such as ratio and percentile metrics. In all cases, the general form is the same—start from a non-CUPED lift estimate and add zero-expectation adjustment terms.
 
