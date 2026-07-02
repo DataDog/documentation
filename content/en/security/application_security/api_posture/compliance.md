@@ -20,7 +20,6 @@ Unlike [Cloud Security compliance][1], which evaluates cloud infrastructure misc
 
 ## Supported frameworks
 
-
 ### OWASP API Security Top 10 (2023)
 
 The OWASP API Security Top 10 identifies the most critical security risks for APIs. Datadog maps its API security detection rules to the ten categories:
@@ -41,16 +40,12 @@ The OWASP API Security Top 10 identifies the most critical security risks for AP
 ## How it works
 
 - **Detection rules**: Each Datadog API security detection rule is tagged with the OWASP controls it covers. When a rule fires and generates a finding, the associated control is marked as **failing** for the affected service.
-
 - **Posture score**: The posture score reflects the ratio of controls that are fully passing versus those with at least one failing finding. The score is calculated using the same methodology as [Cloud Security posture scores][3].
-
 - **Compliance Frameworks page**: The [Compliance Frameworks page][4] lists all available frameworks for your API security context. For each framework you can examine control-level details, filter by severity, and open a finding side panel to investigate individual API security events.
 
 ## View your compliance posture
 
-Navigate to [**Security > App & API Protection > Compliance**][4] to open the Compliance Frameworks page.
-
-From there you can:
+Navigate to [**Security > App & API Protection > Compliance**][4] to open the Compliance Frameworks page. You can:
 - Select a framework (for example, OWASP API Security Top 10) to see per-control pass/fail status.
 - Click a failing control to view the list of API security findings that caused it to fail.
 - Open a finding's side panel to see the affected endpoint, severity, and recommended remediation steps.
