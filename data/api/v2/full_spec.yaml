@@ -65254,6 +65254,16 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
+      description: Server-side encryption type for Amazon S3.
+      enum:
+        - "aws:kms"
+        - AES256
+      example: "aws:kms"
+      type: string
+      x-enum-varnames:
+        - AWS_KMS
+        - AES256
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -65407,6 +65417,14 @@ components:
         region:
           description: AWS region of the S3 bucket.
           example: "us-east-1"
+          type: string
+        server_side_encryption:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationServerSideEncryption"
+        ssekms_key_id:
+          description: |-
+            The AWS KMS key ID used for SSE-KMS encryption.
+            Only applies when `server_side_encryption` is set to `aws:kms`.
+          example: "arn:aws:kms:us-east-1:123456789012:key/mrk-abc123"
           type: string
         storage_class:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass"
