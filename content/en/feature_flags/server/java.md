@@ -32,8 +32,8 @@ The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
-- **Datadog Java SDK**: Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
-- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Datadog Java SDK** (`dd-java-agent`, added with `-javaagent`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
 - **OpenFeature SDK**: Version **1.20.1** or later
 - **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
 - **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
@@ -100,7 +100,7 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-The examples above pin `1.63.0`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+The examples above pin `dd-openfeature` `1.63.0` and the OpenFeature SDK `1.20.1`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
 
 To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
