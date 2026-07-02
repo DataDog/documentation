@@ -41,7 +41,7 @@ The following table lists minimum SDK versions required for adaptive sampling:
 |-------------|--------------------------|
 | Java        | [v1.34.0][5]             |
 | Go          | [v1.68.0][6]             |
-| Python      | [v2.9.6][10]             |
+| Python      | [v3.14.2][10]             |
 | Ruby        | [v2.0.0][11]             |
 | Node.js     | [v5.16.0][12]            |
 | .NET        | [v2.54.0][13]            |
