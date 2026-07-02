@@ -322,6 +322,22 @@ To view the `pipelines.component_latency_seconds` metric:
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
+## Metrics
+
+See the [Observability Pipelines Metrics][13] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Sensitive Data Scanner metrics
+
+{{% observability_pipelines/metrics/sensitive_data_scanner %}}
+
+### Buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -338,3 +354,4 @@ To view the `pipelines.component_latency_seconds` metric:
 [10]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [11]: https://app.datadoghq.com/metric/explorer
 [12]: /metrics/distributions/#enabling-advanced-query-functionality
+[13]: /observability_pipelines/monitoring/metrics/
