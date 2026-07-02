@@ -46,7 +46,7 @@ After you select the ClickHouse destination in the pipeline UI:
     - `json_as_string`: Inserts each event into a single `String`-typed column, storing the raw JSON. This maps to ClickHouse's [`JSONAsString`][9] format.
     - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Enable batching](#enable-batching).
 
-    **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable at the time the pipeline is created because the target table's schema is read from the server to build the Arrow encoder.
+    **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable when the Worker starts because the target table's schema is fetched at startup to build the Arrow encoder.
 
 ### Optional settings
 
@@ -60,11 +60,7 @@ Toggle the **Date time best effort** switch to enable flexible `DateTime` parsin
 
 #### Compression
 
-In the **Compression** dropdown menu, select the algorithm used to compress outbound HTTP requests:
-- `gzip` (default): Compresses requests with gzip.
-- `none`: Sends requests uncompressed.
-
-When you select `gzip`, you can optionally set the **Compression level** to an integer from `1` (fastest) to `9` (best compression). If left unset, the default is `6`.
+Toggle **Enable Compression** to compress outbound HTTP requests with gzip. You can optionally set the **Compression level** to an integer from `1` (fastest) to `9` (best compression). If left unset, the default is `6`.
 
 #### Enable TLS
 
