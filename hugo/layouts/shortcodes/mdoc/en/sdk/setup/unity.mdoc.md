@@ -9,7 +9,7 @@ This page describes how to instrument your applications for [Real User Monitorin
 Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 {% /alert %}
 
-Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
+Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][3].
 
 
 ## Setup
@@ -20,7 +20,7 @@ Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. (Android only) Configure your project to use [Gradle templates][8], and enable both {% ui %}Custom Main Template{% /ui %} and {% ui %}Custom Gradle Properties Template{% /ui %}.
+3. (Android only) Configure your project to use [Gradle templates][7], and enable both {% ui %}Custom Main Template{% /ui %} and {% ui %}Custom Gradle Properties Template{% /ui %}.
 
 4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
@@ -34,7 +34,7 @@ constraints {
 
 #### WebGL
 
-1. Create a custom WebGL template, following the instructions provided by [Unity][9], or by using the minimally modified version in Datadog's [GitHub repo][10].
+1. Create a custom WebGL template, following the instructions provided by [Unity][8], or by using the minimally modified version in Datadog's [GitHub repo][9].
 
 2. If you are using your own WebGL template, or have added a new WebGL template, modify it to include the Datadog Browser SDK delivered by CDN.
 
@@ -165,7 +165,7 @@ You can also set {% ui %}Enable Automatic Scene Tracking{% /ui %} in your {% ui 
 
 #### Web Requests / Resource Tracking
 
-Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][3].
+Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][10].
 
 To enable Datadog Distributed Tracing, you must set the {% ui %}First Party Hosts{% /ui %} in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the {% ui %}Tracing Sampling Rate{% /ui %}.
 
@@ -181,12 +181,11 @@ This means that even if users open your application while offline, no data is lo
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/unity/
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
+[3]: /help/
 [4]: https://github.com/googlesamples/unity-jar-resolver
 [5]: https://openupm.com/packages/com.google.external-dependency-manager/
 [6]: https://github.com/DataDog/unity-package
-[7]: /help/
-[8]: https://docs.unity3d.com/Manual/gradle-templates.html
-[9]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
-[10]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
-
+[7]: https://docs.unity3d.com/Manual/gradle-templates.html
+[8]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
+[9]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
+[10]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum

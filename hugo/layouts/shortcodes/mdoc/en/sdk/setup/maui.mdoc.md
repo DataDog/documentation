@@ -21,7 +21,7 @@ Add a `PackageReference` to [`Datadog.Maui`][3] in your MAUI project's `.csproj`
 
 {% step title="Initialize the Datadog SDK" %}
 
-The SDK exposes two initialization patterns. Choose the pattern that matches your app's hosting style. See [`TrackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][9] to initialize the library.
+The SDK exposes two initialization patterns. Choose the pattern that matches your app's hosting style. See [`TrackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][4] to initialize the library.
 
 #### Pattern 1: Builder extensions (recommended)
 
@@ -144,7 +144,7 @@ By default, the SDK automatically tracks views, actions, and resources:
 - **Actions**: User interactions with buttons, switches, checkboxes, pickers, and gesture recognizers.
 - **Resources**: HTTP requests via `DiagnosticListener` (all `HttpClient` requests, including third-party libraries).
 
-To customize or disable automatic tracking, see [Advanced Configuration][9].
+To customize or disable automatic tracking, see [Advanced Configuration][4].
 
 When RUM is enabled, C# error tracking is automatically started. Unhandled exceptions (`AppDomain.UnhandledException`) and unobserved task exceptions (`TaskScheduler.UnobservedTaskException`) are captured and reported as RUM errors. You can also manually report errors with `DdRum.AddError`.
 
@@ -171,7 +171,7 @@ DdSdk.SetTrackingConsent(TrackingConsent.Granted);
 
 ## Track errors
 
-[.NET MAUI Crash Reporting and Error Tracking][10] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][11].
+[.NET MAUI Crash Reporting and Error Tracking][5] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][6].
 
 ## Sending data when device is offline
 
@@ -184,6 +184,6 @@ This means that even if users open your application while offline, no data is lo
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/maui/
 [3]: https://www.nuget.org/packages/Datadog.Maui
-[9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/
-[10]: /real_user_monitoring/error_tracking/mobile/maui/
-[11]: /real_user_monitoring/explorer/
+[4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/
+[5]: /real_user_monitoring/error_tracking/mobile/maui/
+[6]: /real_user_monitoring/explorer/
