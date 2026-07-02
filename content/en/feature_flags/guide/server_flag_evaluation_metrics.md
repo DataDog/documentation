@@ -58,6 +58,64 @@ Set the following environment variable on your application, in addition to the s
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
+### Java: add the OpenTelemetry SDK dependencies
+
+The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the OpenTelemetry SDK metrics and OTLP exporter must be on your application's classpath. Add them alongside your [feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
+
+{{< tabs >}}
+{{% tab "Gradle (Groovy)" %}}
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    implementation platform('io.opentelemetry:opentelemetry-bom:1.47.0')
+    implementation 'io.opentelemetry:opentelemetry-sdk-metrics'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Gradle (Kotlin)" %}}
+{{< code-block lang="kotlin" filename="build.gradle.kts" >}}
+dependencies {
+    implementation(platform("io.opentelemetry:opentelemetry-bom:1.47.0"))
+    implementation("io.opentelemetry:opentelemetry-sdk-metrics")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Maven" %}}
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-bom</artifactId>
+            <version>1.47.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+<dependencies>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-sdk-metrics</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-exporter-otlp</artifactId>
+    </dependency>
+</dependencies>
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Java tracer, the provider starts its OTLP metrics exporter automatically when the OpenTelemetry SDK is on the classpath, so adding these dependencies is what enables the metric; setting `DD_METRICS_OTEL_ENABLED` alone does not. This requires the Datadog Java tracer 1.62.0 or later. If the dependencies are missing, no metrics are emitted and the tracer logs `OpenTelemetry SDK is not on the classpath`.
+
+<div class="alert alert-info">In Spring Boot applications, Spring Boot's OpenTelemetry autoconfiguration also creates an <code>OpenTelemetrySdk</code> bean. If the OpenTelemetry SDK version it resolves does not match the OpenTelemetry API version on the classpath, startup fails with a <code>BeanCreationException</code> for the <code>openTelemetry</code> bean and <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>. Importing the <code>opentelemetry-bom</code> as shown above keeps the API and SDK on the same version and resolves the error.</div>
+
+### Set the OTLP endpoint
+
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
 Set an OTLP endpoint explicitly in any of these cases:
@@ -151,3 +209,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /dashboards/
+[6]: /feature_flags/server/java/#installation
