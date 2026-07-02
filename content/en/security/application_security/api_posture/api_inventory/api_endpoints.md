@@ -146,7 +146,7 @@ In the **Definition** section, you can:
 - {{< ui >}}View Raw Schema{{< /ui >}}: View the displayed schema as raw YAML.
 - {{< ui >}}View Inferred Schemas{{< /ui >}}: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
 
-To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
+To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema. Otherwise, it could appear as drift when compared against the declared schema.
 
 ### Compare declared and inferred schemas
 
@@ -169,7 +169,7 @@ Differences can appear in the following areas of the schema:
 - **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
 - **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
 - **Value constraints**: A numeric or length limit (`minimum`, `maximum`, `minLength`, `maxLength`), pattern, or uniqueness constraint changed.
-- **Schema composition**:  A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
+- **Schema composition**: A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
 - **Responses**: A status code, response header, or content type added or removed.
 
 To reduce noise, some differences are excluded because they don't represent meaningful contract drift:
