@@ -25,7 +25,7 @@ Before you configure the ClickHouse destination, you must have:
 - A running ClickHouse server that the Observability Pipelines Worker can access using the [HTTP interface][2].
 - A ClickHouse database and target table to which the Worker sends events.
 - (Optional) Credentials for a ClickHouse user that has `INSERT` permission on the target table. The Worker authenticates with HTTP basic authentication.
-- (Optional) TLS material if your ClickHouse server requires HTTPS with client certificates.
+- (Optional) TLS certificates if your ClickHouse server requires HTTPS with client certificates.
 
 ## Setup
 
@@ -52,11 +52,11 @@ After you select the ClickHouse destination in the pipeline UI:
 
 #### Skip unknown fields
 
-Toggle the **Skip unknown fields** switch to either **Drop Unknown Fields** or **Fail On Unknown Fields**  that are not present in the target table schema instead of returning an insert error. The default is **Use ClickHouse Server**, which uses the [`input_format_skip_unknown_fields`][10] setting.
+In the **Skip unknown fields** dropdown menu, select either **Drop Unknown Fields** or **Fail On Unknown Fields** for fields that are not present in the target table schema instead of returning an insert error. The default is **Use ClickHouse Server**, which uses the [`input_format_skip_unknown_fields`][10] setting.
 
 #### Date time best effort
 
-Toggle the **Date time best effort** switch to enable flexible `DateTime` parsing on the ClickHouse server. When enabled, the server accepts a wider range of date and time string formats. See ClickHouse's [`date_time_input_format`][11] setting for more information.
+Toggle **Date time best effort** to enable flexible `DateTime` parsing on the ClickHouse server. When enabled, the server accepts a wider range of date and time string formats. See ClickHouse's [`date_time_input_format`][11] setting for more information.
 
 #### Compression
 
@@ -68,11 +68,13 @@ Toggle **Enable Compression** to compress outbound HTTP requests with gzip. You 
 
 #### Enable batching
 
-Batch encoding is required when **Format** is set to `arrow_stream` and optional for JSON formats.
+Batch encoding is required when **Format** is set to `arrow_stream` and is optional for JSON formats.
+
+Toggle **Enable batching** for batch encoding.
 
 1. (Optional) Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns results in encoding errors.
-1. (Optional) In the **Max events** field, enter the maximum number of events per batch. Must be `1` or greater.
-1. (Optional) In the **Timeout (secs)** field, enter the maximum time, in seconds, before a partial batch is flushed. Must be between `1` and `65535`. If left unset, the default is 1 second.
+1. In the **Max events** field, enter the maximum number of events per batch. Must be `1` or greater.
+1. In the **Timeout (secs)** field, enter the maximum time, in seconds, before a partial batch is flushed. Must be between `1` and `65535`. If left unset, the default is 1 second.
 
 See [Event batching](#event-batching) for more information.
 
@@ -110,7 +112,7 @@ A batch of events is flushed when one of these parameters is met. Batching is al
 
 | Maximum Events | Maximum Bytes | Timeout (seconds) |
 |----------------|---------------|-------------------|
-| No limit       | 10 MB         | 1                 |
+| None           | 10 MB         | 1                 |
 
 ## Further reading
 
