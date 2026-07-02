@@ -240,7 +240,7 @@ $(foreach repo,$(EXAMPLES_REPOS),$(eval $(call EXAMPLES_template,$(repo))))
 
 # build all examples
 # dynamic prerequisites equivalent to examples/go examples/java examples/python etc.
-all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,%,$(repo)))) | websites_sources_data
+all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,%,$(repo))))
 
 # clean all examples
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
