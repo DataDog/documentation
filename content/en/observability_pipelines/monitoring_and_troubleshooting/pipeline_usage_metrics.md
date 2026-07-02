@@ -27,7 +27,22 @@ This document lists some of the metrics available from Observability Pipelines. 
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
-Starting in Worker version 2.18, all metrics are tagged with `pipeline_name`, set to the name of the pipeline when it was last deployed or updated.
+All metrics are tagged with the following:
+
+`pipeline_id`
+: The UUID of the pipeline.
+
+`worker_uuid`
+: The UUID of the Worker emitting the metric.
+
+`op_worker_version`
+: The version of the Worker emitting the metric.
+
+`rc_version`
+: The configuration version number, incremented each time the pipeline is updated.
+
+`pipeline_name`
+: The name of the pipeline when it was last deployed or updated. Available in Worker version 2.18 and later.
 
 **Note**: Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
@@ -164,7 +179,7 @@ Event bytes included
 
 Errors
 : **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component.
+: **Description**: The number of errors encountered by the component. Depending on the component, this metric can carry an `error_code`, `error_type`, or `reason` tag that describes the error.
 : **Available for**: Sources, processors, and destinations.
 
 Data dropped intentionally or unintentionally
