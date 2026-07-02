@@ -67,5 +67,5 @@ To elevate your access:
 [2]: https://app.datadoghq.com/actions/datastores
 [3]: /actions/workflows
 [4]: /actions/app_builder
-[5]: /service_management/app_builder/connections/
+[5]: /actions/connections/
 [6]: https://app.datadoghq.com/actions/datastores

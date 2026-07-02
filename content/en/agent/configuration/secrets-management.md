@@ -116,6 +116,31 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
+##### All `aws_session` options
+
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+
+| Field | Description |
+|---|---|
+| `aws_region` | AWS region (for example, `us-east-1`). |
+| `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
+| `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
+| `aws_profile` | Named profile from the shared AWS Config file (`~/.aws/config`). |
+| `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
+| `aws_external_id` | External ID to pass when assuming a cross-account role. |
+
+##### `force_string` option
+
+Set `force_string: true` at the top level of `secret_backend_config` to return the raw secret string instead of parsing it as JSON. This is useful when a secret is stored as plain text rather than as a JSON object.
+
+```yaml
+secret_backend_type: aws.secrets
+secret_backend_config:
+  force_string: true
+  aws_session:
+    aws_region: us-east-1
+```
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -355,6 +380,19 @@ property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
 
+##### All `aws_session` options
+
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
+
+| Field | Description |
+|---|---|
+| `aws_region` | AWS region (for example, `us-east-1`). |
+| `aws_access_key_id` | Static AWS access key ID. Use with `aws_secret_access_key`. |
+| `aws_secret_access_key` | Static AWS secret access key. Use with `aws_access_key_id`. |
+| `aws_profile` | Named profile from the shared AWS Config file (`~/.aws/config`). |
+| `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
+| `aws_external_id` | External ID to pass when assuming a cross-account role. |
+
 {{% /collapse-content %}}
 
 
@@ -387,14 +425,15 @@ The backend configuration for Azure Key Vault secrets is structured as YAML foll
 secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: {keyVaultURL}
-  clientid: {clientID}
+  azure_session:
+    azure_client_id: {clientID}  # User-assigned managed identity client ID; omit this field for system-assigned
 ```
 
 When using environment variables, convert the configuration to JSON:
 
 ```sh
 DD_SECRET_BACKEND_TYPE="azure.keyvault"
-DD_SECRET_BACKEND_CONFIG='{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+DD_SECRET_BACKEND_CONFIG='{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
 ```
 
 The backend secret is referenced in your Datadog Agent configuration file with `ENC[ ]`. The following is an example where a plain text secret needs to be retrieved:
@@ -404,6 +443,25 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
+
+##### All `azure_session` options
+
+The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional—the Agent falls back to [Default Azure Credential][2001] (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
+
+| Field | Description |
+|---|---|
+| `azure_client_id` | Client ID of a user-assigned Managed Identity, or of a service principal. |
+| `azure_tenant_id` | Tenant ID for service principal authentication. Required together with `azure_client_id` and a client secret or certificate. |
+| `azure_client_secret` | Client secret for service principal authentication. |
+| `azure_client_certificate_path` | Path to a PEM or PKCS12 certificate file for service principal certificate authentication. |
+| `azure_client_certificate_password` | Password for the certificate file (if password-protected). |
+| `azure_client_send_certificate_chain` | Set to `true` to send the full certificate chain when using certificate authentication. |
+
+Authentication is selected based on which fields are provided:
+- **Service principal with secret**: `azure_tenant_id` + `azure_client_id` + `azure_client_secret`
+- **Service principal with certificate**: `azure_tenant_id` + `azure_client_id` + `azure_client_certificate_path`
+- **User-assigned Managed Identity**: `azure_client_id` only
+- **Default Azure Credential** (recommended): omit all `azure_session` fields
 
 {{% /tab %}}
 
@@ -419,7 +477,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -437,7 +496,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
 clusterAgent:
   confd:
     # This is an example
@@ -455,7 +515,8 @@ datadog:
     type: "azure.keyvault"
     config:
       keyvaulturl: "<keyVaultURL>"
-      clientid: "<CLIENT_ID>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
 clusterAgent:
   confd:
   # This is an example
@@ -488,7 +549,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   override:
     nodeAgent:
       extraConfd:
@@ -516,7 +577,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   override:
     clusterAgent:
       extraConfd:
@@ -543,7 +604,7 @@ spec:
       - name: DD_SECRET_BACKEND_TYPE
         value: "azure.keyvault"
       - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "clientid":"<CLIENT_ID>"}'
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -559,7 +620,7 @@ spec:
                 password: "ENC[secretKeyNameInKeyVault]"
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "azure.keyvault"` and `spec.global.secretBackend.config` with `keyvaulturl` and `clientid` keys.
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "azure.keyvault"` and `spec.global.secretBackend.config` with `keyvaulturl` and `azure_session.azure_client_id` keys.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -889,8 +950,64 @@ secret_backend_config:
   vault_session:
     vault_auth_type: aws
     vault_aws_role: Name-of-IAM-role-attached-to-machine
-    aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
+    aws_region: us-east-1  # optional, defaults to us-east-1 if not set
 ```
+
+##### All `vault_session` options
+
+The following `vault_session` fields control how the Agent authenticates to Vault.
+
+| Field | Description |
+|---|---|
+| `vault_auth_type` | Authentication method. Supported values: `aws`, `kubernetes`. When unset, AppRole, userpass, or LDAP is used based on which credentials are provided. |
+| `vault_role_id` | AppRole role ID. Use with `vault_secret_id`. |
+| `vault_secret_id` | AppRole secret ID. Use with `vault_role_id`. |
+| `vault_username` | Username for userpass authentication. Use with `vault_password`. |
+| `vault_password` | Password for userpass authentication. Use with `vault_username`. |
+| `vault_ldap_username` | Username for LDAP authentication. Use with `vault_ldap_password`. |
+| `vault_ldap_password` | Password for LDAP authentication. Use with `vault_ldap_username`. |
+| `vault_aws_role` | Vault role name for AWS IAM authentication. Required when `vault_auth_type: aws`. |
+| `vault_aws_iam_server_id` | Value for the `X-Vault-AWS-IAM-Server-ID` header, used to prevent replay attacks. |
+| `aws_region` | AWS region for IAM authentication requests. Defaults to `us-east-1`. |
+| `vault_kubernetes_role` | Vault role name for Kubernetes authentication. Required when `vault_auth_type: kubernetes`. |
+| `vault_kubernetes_jwt` | Kubernetes service account JWT token as a string. |
+| `vault_kubernetes_jwt_path` | Path to the Kubernetes JWT token file. Defaults to `/var/run/secrets/kubernetes.io/serviceaccount/token`. |
+| `vault_kubernetes_mount_path` | Vault mount path for the Kubernetes auth method. |
+| `implicit_auth` | Set to `true` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
+
+##### Other `secret_backend_config` options for Vault
+
+The following top-level `secret_backend_config` fields also apply:
+
+| Field | Description |
+|---|---|
+| `vault_address` | Vault server address (for example, `http://myvaultaddress.net`). Can also be set with the `VAULT_ADDR` environment variable. |
+| `vault_token` | Static Vault token. Use when not relying on an auth method. |
+| `vault_namespace` | Vault namespace for Vault Enterprise environments. |
+
+##### TLS configuration (`vault_tls_config`)
+
+To enable mutual TLS or a custom CA, add a `vault_tls_config` block:
+
+```yaml
+secret_backend_type: hashicorp.vault
+secret_backend_config:
+  vault_address: https://myvaultaddress.net
+  vault_tls_config:
+    ca_cert: /path/to/ca.pem
+    client_cert: /path/to/client.pem
+    client_key: /path/to/client-key.pem
+    insecure: false
+```
+
+| Field | Description |
+|---|---|
+| `ca_cert` | Path to a PEM-encoded CA certificate file. |
+| `ca_path` | Path to a directory of PEM-encoded CA certificate files. |
+| `client_cert` | Path to a PEM-encoded client certificate file for mTLS. |
+| `client_key` | Path to the private key file for the client certificate. |
+| `tls_server` | Expected server name for TLS SNI verification. |
+| `insecure` | Set to `true` to disable TLS certificate verification. Do not use in production. |
 
 {{% /collapse-content %}}
 
@@ -1958,9 +2075,11 @@ instances:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
 
 <!-- Azure KeyVault Links -->
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+[2001]: https://learn.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication
 
 <!-- HashiCorp Vault Links -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets

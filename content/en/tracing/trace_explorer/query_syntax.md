@@ -80,7 +80,7 @@ For instance, if you want to access a span with the following attribute below, y
   }
 ```
 
-Span attributes are visible in the **Overview** tab of the trace side panel.
+Span attributes are visible in the {{< ui >}}Overview{{< /ui >}} tab of the trace side panel.
 
 **Note:** You do not need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
@@ -96,7 +96,7 @@ For example:
 | `(availability-zone:us-east OR container_name:api-frontend)` | All traces with either of these infrastructure tags                                               |
 | `(service:api AND -kube_deployment:canary)`                  | All traces from the `api` service that are not deployed to the `canary` deployment                |
 
-Span tags are visible in the **Infrastructure** tab of the trace side panel.
+Span tags are visible in the {{< ui >}}Infrastructure{{< /ui >}} tab of the trace side panel.
 
 #### Non-standard tag formats
 
@@ -208,33 +208,33 @@ Click on any span to see details about the associated trace:
 
 ### Columns
 
-To add other [span tags or attributes][23] as columns to the list, click the **Options** button and select any dimension you want to add:
+To add other [span tags or attributes][23] as columns to the list, click the {{< ui >}}Options{{< /ui >}} button and select any dimension you want to add:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
 
 ### Trace Groups
 
-Group the query by any span tag or attribute to observe request counts, error rates and latency distributions in the list view. You can select up to four dimensions in the **Group by** clause.
+Group the query by any span tag or attribute to observe request counts, error rates and latency distributions in the list view. You can select up to four dimensions in the {{< ui >}}Group by{{< /ui >}} clause.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Group by clause" style="width:90%;" >}}
 
 #### Advanced 'Group By' queries
 
-After selecting a dimension to group by, you can specify where to get the dimension's values from using the **from** dropdown: 
-- **Span**: Group by the dimension of the queried span (default). For example, `a`.
-- **Parent of span**: Group by the specified dimension from the parent span of spans matching the query. For example, to visualize how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
-- **Root span**: Group by the specified dimension from the root span of the trace. For example, to analyze backend request patterns based on the frontend pages requests originate from, group by `@view.name` from `root`.
+After selecting a dimension to group by, you can specify where to get the dimension's values from using the {{< ui >}}from{{< /ui >}} dropdown: 
+- {{< ui >}}Span{{< /ui >}}: Group by the dimension of the queried span (default). For example, `a`.
+- {{< ui >}}Parent of span{{< /ui >}}: Group by the specified dimension from the parent span of spans matching the query. For example, to visualize how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
+- {{< ui >}}Root span{{< /ui >}}: Group by the specified dimension from the root span of the trace. For example, to analyze backend request patterns based on the frontend pages requests originate from, group by `@view.name` from `root`.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Group by from root" style="width:90%;" >}}
 
 #### View trace groups in the group list
 
 Trace groups are displayed as unique values of the selected dimension. Each group is shown with three key metrics:
-- **REQUESTS**: Count of spans within the group.
-- **ERRORS**: Error rate and count of errors.
-- **P95 Latency**: p95 latency of spans.
+- {{< ui >}}REQUESTS{{< /ui >}}: Count of spans within the group.
+- {{< ui >}}ERRORS{{< /ui >}}: Error rate and count of errors.
+- {{< ui >}}P95 Latency{{< /ui >}}: p95 latency of spans.
 
-To view these metrics aggregated over the parent or root span instead of the queried span, select `parent(a)` or `root` in the **Show metrics from** statement.
+To view these metrics aggregated over the parent or root span instead of the queried span, select `parent(a)` or `root` in the {{< ui >}}Show metrics from{{< /ui >}} statement.
 
 Additionally, the `Latency Breakdown` surfaces how time is spent between different services within requests from each group, allowing you to visually spot latency bottlenecks for given groups.
 
