@@ -1,4 +1,4 @@
-This metric is specific to the Datadog Logs destination. It is emitted in addition to the [common component metrics][101].
+This metric is specific to the Datadog Logs destination. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the destination type.

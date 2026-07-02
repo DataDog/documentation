@@ -1,4 +1,4 @@
-These metrics are specific to the Amazon S3 source, which processes S3 objects using Amazon SQS notifications. They are emitted in addition to the [common component metrics][101].
+These metrics are specific to the Amazon S3 source, which processes S3 objects using Amazon SQS notifications. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the source type.

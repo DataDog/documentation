@@ -1,4 +1,4 @@
-These metrics are specific to the Kafka source. They are emitted in addition to the [common component metrics][101].
+These metrics are specific to the Kafka source. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the component type, such as `kafka` for the Kafka source.
