@@ -143,7 +143,7 @@ When the endpoint is associated with an API in Datadog Software Catalog, the dis
 
 To reduce noise, the inferred schema only includes fields that are observed enough times, and automatically drops fields that haven't been seen recently. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
 
-### Compare *declared* and *inferred* schemas
+### Compare declared and inferred schemas
 
 To compare schemas, both of the following must be in place:
 
