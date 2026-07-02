@@ -122,7 +122,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. For the test you are fixing, click {{< ui >}}Link commit to Flaky Test fix{{< /ui >}} in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
-1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
+1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit. Datadog also checks recent preceding commits, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
     - Runs tests even if they are marked as `Disabled`.
@@ -249,6 +249,14 @@ To find your account name, go to the [Slack integration tile][5] and check the
 ### Weekly digest summary notifications cannot be disabled
 
 The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
+
+### Attempt-to-fix remediation does not trigger after linking a fix
+
+After you include the test key (for example, `DD_ABC123`) in a commit, Datadog scans the commit that triggered the test run and up to the 10 most recent commits before it. If the remediation flow does not start, check the following:
+
+- **The key is in an older commit.** Datadog scans only the triggering commit and the 10 most recent commits in its history. If you push more than 10 commits at once, include the key in the triggering commit or one of the 10 most recent commits.
+- **The fix was squash-merged.** A squash merge combines the original commits into a single commit, so Datadog reads only the squash commit's message; the individual pre-squash commits are no longer scanned. Most providers include the original commit messages in the squash commit, so a key in any of them is preserved. If your provider omits them, add the key to the squash commit message.
+- **The key does not match the expected format.** Use the exact key shown in the Flaky Tests Management UI (for example, `DD_ABC123`) in the commit title or message.
 
 ## Further reading
 
