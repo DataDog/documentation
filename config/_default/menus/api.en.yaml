@@ -16861,6 +16861,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Reporting And Sharing
+      url: /api/latest/reporting-and-sharing/
+      identifier: reporting-and-sharing
+      generated: true
+    - name: Create a graph snapshot
+      url: /api/latest/reporting-and-sharing/create-a-graph-snapshot/
+      identifier: reporting-and-sharing-create-a-graph-snapshot
+      parent: reporting-and-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnapshot
+        unstable:
+          - v2
+        order: 1
     - name: Restriction Policies
       url: /api/latest/restriction-policies/
       identifier: restriction-policies

@@ -33,19 +33,19 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 ## Create a test suite
 
 To create a Synthetic Monitoring Test Suite:
-1. In Datadog, navigate to **Digital Experience**.
-2. Click **New Test Suite**.
-3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
+1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}}.
+2. Click {{< ui >}}New Test Suite{{< /ui >}}.
+3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click {{< ui >}}+ New Suite{{< /ui >}}.
 
 ## Test suite configuration
 
 1. Enter a name for your suite (for example, `Checkout flow` or `API health checks`).
-2. Click **Add Tests** to include existing Synthetic Monitoring tests.  
+2. Click {{< ui >}}Add Tests{{< /ui >}} to include existing Synthetic Monitoring tests.  
    You can:
    - **Search** by name or tag.  
    - **Filter** by test type (such as Browser, API, Private Location, or Mobile).
    - **Select** one or more tests to include.
-3. Click **Add Tests** to confirm.
+3. Click {{< ui >}}Add Tests{{< /ui >}} to confirm.
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
 
 5. Configure alerting for the suite:
@@ -53,10 +53,10 @@ To create a Synthetic Monitoring Test Suite:
 <div class="alert alert-warning">Alerting for Test Suites is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
-   - By default, all tests are marked as **Critical**, and the alert triggers when any critical test fails. 
+   - By default, all tests are marked as {{< ui >}}Critical{{< /ui >}}, and the alert triggers when any critical test fails. 
 
      **Note**: Suite alerts are separate from individual test alerts. To avoid duplicate notifications, mute alerts on individual tests included in the suite.
-   - To exclude specific tests from triggering the suite-level alert, select them and mark them as **Ignored**.
+   - To exclude specific tests from triggering the suite-level alert, select them and mark them as {{< ui >}}Ignored{{< /ui >}}.
    - Adjust the alert threshold to trigger only when a specified percentage of critical tests fail.
 
    {{< img src="synthetics/test_suites/suite_alerting.png" alt="Suite alerting creation page, with the suite alerting drop-down expanded. " style="width:80%;">}}
@@ -64,7 +64,7 @@ To create a Synthetic Monitoring Test Suite:
    **Note**: For existing test suites, alerting is enabled with default settings. You can modify the configuration as needed.
 
 6. Configure [monitor settings][2] (notification message, recipients, renotification) the same way you would for a single test.
-7. Click **Save Suite** when finished.
+7. Click {{< ui >}}Save Suite{{< /ui >}} when finished.
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
 
@@ -85,7 +85,7 @@ The SLO panel on the Test Suite details page shows the current SLO status and er
 
 ### Create an alert
 
-Click **Create alert** on the SLO details panel to open the SLO Monitor configuration form, where you can set alert conditions and notification settings.
+Click {{< ui >}}Create alert{{< /ui >}} on the SLO details panel to open the SLO Monitor configuration form, where you can set alert conditions and notification settings.
 
 {{< img src="synthetics/test_suites/test_suite_slo_create_alert.png" alt="SLO Monitor creation form with alert condition and notification settings." style="width:80%;">}}
 
@@ -113,15 +113,15 @@ To update the SLO time window (for example, to 30 days) or target, click the {{<
 
 ## View and manage test suites
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. You can also access test suites from **Digital Experience > Test Suites**.
+After creating your suite, it appears in the {{< ui >}}Suites{{< /ui >}} tab on the [Synthetic Monitoring tests][1] page. You can also access test suites from {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Test Suites{{< /ui >}}.
 
-To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime**.
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click {{< ui >}}Add to Downtime{{< /ui >}}.
 
 When viewing a test suite, three tabs are available:
 
-- **Tests in the Suite**: Lists all tests included in the suite.
-- **Test Runs**: Displays global uptime metrics and related test runs.
-- **Attributes**: Shows suite attributes such as `team`, monitors, and who created the test suite.
+- {{< ui >}}Tests in the Suite{{< /ui >}}: Lists all tests included in the suite.
+- {{< ui >}}Test Runs{{< /ui >}}: Displays global uptime metrics and related test runs.
+- {{< ui >}}Attributes{{< /ui >}}: Shows suite attributes such as `team`, monitors, and who created the test suite.
 
 **Note**: Test runs appear in the suite only from the date the test was added. To view earlier results, check the individual test page. If you rename a test, previous runs remain listed under the original name. A maximum of 300 tests can be added per suite.
 
@@ -136,7 +136,7 @@ You can trigger test runs in two ways:
 
 ### Run all tests in the suite
 
-From the suite detail page, click **Run Suite Now** in the top right to trigger every test in the suite.
+From the suite detail page, click {{< ui >}}Run Suite Now{{< /ui >}} in the top right to trigger every test in the suite.
 
 {{< img src="synthetics/test_suites/run_suite_now.png" alt="The test suite detail page with the Run Suite Now button in the top right." style="width:100%;" >}}
 
@@ -144,13 +144,13 @@ From the suite detail page, click **Run Suite Now** in the top right to trigger 
 
 To run a subset of tests:
 
-1. Navigate to the suite and click the **Tests in the Suite** tab.
+1. Navigate to the suite and click the {{< ui >}}Tests in the Suite{{< /ui >}} tab.
 2. Select the tests you want to run using the checkboxes.
-3. Click **Run Tests Now**.
+3. Click {{< ui >}}Run Tests Now{{< /ui >}}.
 
 {{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible." style="width:100%;" >}}
 
-**Note**: You can run a maximum of 50 tests at a time with **Run Tests Now**.
+**Note**: You can run a maximum of 50 tests at a time with {{< ui >}}Run Tests Now{{< /ui >}}.
 
 ## Troubleshooting
 
