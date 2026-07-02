@@ -156,6 +156,31 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.time_spent`                             | number (ns) | Time spent on this view.                                    |
 | `view.url`                     | string | Canonical name of the class corresponding to the event.                                                           |
 
+### View accessibility attributes
+
+Accessibility attribute collection is disabled by default. To enable it, call `collectAccessibility(true)` on your `RumConfiguration.Builder`:
+
+```kotlin
+val rumConfig = RumConfiguration.Builder("<APPLICATION_ID>")
+    .collectAccessibility(true)
+    .build()
+```
+
+The following attributes are collected for each view after collection is enabled. Attributes not supported on the platform are omitted from the event.
+
+| Attribute | Type | Description |
+|---|---|---|
+| `view.accessibility.text_size` | number | The user's preferred text size as a scale factor relative to the default (`1.0`). Values above `1.0` increase text size; values below `1.0` decrease it. |
+| `view.accessibility.screen_reader_enabled` | Boolean | Whether TalkBack is active. |
+| `view.accessibility.invert_colors_enabled` | Boolean | Whether color inversion is enabled. |
+| `view.accessibility.assistive_switch_enabled` | Boolean | Whether Switch Access is active. |
+| `view.accessibility.closed_captioning_enabled` | Boolean | Whether closed captioning is enabled for media playback. |
+| `view.accessibility.mono_audio_enabled` | Boolean | Whether mono audio is enabled. |
+| `view.accessibility.reduced_animations_enabled` | Boolean | Whether the user prefers reduced animations (system animator duration scale is `0`). |
+| `view.accessibility.single_app_mode_enabled` | Boolean | Whether the device is locked to a single app through Screen Pinning. |
+| `view.accessibility.speak_selection_enabled` | Boolean | Whether Select to Speak is enabled. |
+| `view.accessibility.rtl_enabled` | Boolean | Whether right-to-left layout direction is active. |
+
 ### Resource attributes
 
 | Attribute                              | Type           | Description                                                                                                                               |
