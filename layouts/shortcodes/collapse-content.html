@@ -10,7 +10,8 @@
         </svg>
       </div>
       <div class="header-text">
-        {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel (.Get "title") $headingLevel | safeHTML }}
+        {{- $title := .Get "title" | replaceRE "`([^`]+)`" "<code>$1</code>" -}}
+      {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel $title $headingLevel | safeHTML }}
       </div>
     </div>
   </summary>
