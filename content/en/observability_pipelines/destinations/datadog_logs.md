@@ -101,6 +101,26 @@ To view metrics for a specific Datadog organization:
 
 Alternatively, you can click on {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination, and click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization you are interested in.
 
+## Metrics
+
+See the [Observability Pipelines Metrics][7] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Datadog Logs metrics
+
+{{% observability_pipelines/metrics/datadog_logs %}}
+
+### Buffer metrics (when enabled)
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
+
 ## How the destination works
 
 ### Event batching
@@ -146,3 +166,4 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring/metrics/
