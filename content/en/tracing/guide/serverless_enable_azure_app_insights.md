@@ -30,6 +30,8 @@ When Application Insights is enabled on your workloads and your Azure logs are f
 
 After conversion, the spans behave like any other Datadog APM spans. They appear in the same waterfall view, support trace search, and correlate with your logs and metrics.
 
+{{< partial name="log-to-trace-indexing-note.html" >}}
+
 ## Prerequisites
 
 Before you can use the Azure App Insights Integration, set up the following:
