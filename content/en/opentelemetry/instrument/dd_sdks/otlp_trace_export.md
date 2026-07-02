@@ -21,9 +21,10 @@ Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receive
 
 ## Prerequisites
 
-OTLP export sends data to a receiver rather than directly to Datadog. Before you enable it, you need an OTLP-compatible receiver that is configured to forward data to Datadog, such as the [DDOT Collector][2] or an [OpenTelemetry Collector][3].
+OTLP export requires:
 
-For production workloads, Datadog recommends DDOT for batching, performance, and processing benefits. You aren't required to use DDOT, but the receiver must be reachable from your instrumented service.
+- **The Datadog SDK installed and attached to your service.** OTLP export uses your existing Datadog SDK setup. You don't need to configure the Datadog Agent for native trace export, because OTLP export sends traces to a receiver instead.
+- **An OTLP-compatible receiver that forwards data to Datadog**, such as the [DDOT Collector][2] or an [OpenTelemetry Collector][3]. OTLP export sends data to a receiver rather than directly to Datadog, so the receiver must be reachable from your instrumented service. For production workloads, Datadog recommends DDOT for batching, performance, and processing benefits. You aren't required to use DDOT.
 
 ## Language support
 
@@ -57,6 +58,8 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+**Note**: The OpenTelemetry default for `OTEL_EXPORTER_OTLP_PROTOCOL` is `http/protobuf`, but Datadog SDK defaults vary by language. Python, Node.js, and .NET default to `http/json`, while Java and Go default to `http/protobuf`. To override the default, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL`. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
 
 ## Enable OTLP trace export
 
