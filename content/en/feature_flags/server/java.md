@@ -100,7 +100,9 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-To emit flag evaluation metrics (the `feature_flag.evaluations` metric), use `dd-openfeature` 1.62.0 or later and add the OpenTelemetry SDK dependencies to your application. For the required dependencies and endpoint configuration, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+The examples use the current release, `1.63.0`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+
+To emit flag evaluation metrics (the `feature_flag.evaluations` metric), use `dd-openfeature` and the Datadog Java tracer 1.62.0 or later, and add the OpenTelemetry SDK dependencies to your application. For the required dependencies and endpoint configuration, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
 
 ## Configuration
 
