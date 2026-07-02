@@ -174,7 +174,7 @@ Events included
 
 Event bytes included
 : **Metric**: `pipelines.included_event_bytes_total`
-: **Description**: The byte size of events that matched the processor's filter clause and were processed.
+: **Description**: The byte size of events that matched the processor's include clause and were processed.
 : **Available for**: Processors.
 
 Errors
