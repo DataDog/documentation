@@ -1,7 +1,7 @@
 These metrics are specific to the Quota processor. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by the processor type, such as `quota`.
+- The `component_type` tag is `quota` for these metrics.
 
 `pipelines.quota_reached_events_total`
 : **Description**: The number of events dropped because they exceeded a configured quota limit.

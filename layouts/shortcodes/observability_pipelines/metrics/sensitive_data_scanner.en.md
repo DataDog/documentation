@@ -1,7 +1,7 @@
 These metrics are specific to the Sensitive Data Scanner processor. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by the processor type, such as `sensitive_data_scanner`.
+- The `component_type` tag is `sensitive_data_scanner` for these metrics.
 
 `pipelines.sds_rule_matched_total`
 : **Description**: The number of events that matched a Sensitive Data Scanner rule. Tagged with the matching rule name.

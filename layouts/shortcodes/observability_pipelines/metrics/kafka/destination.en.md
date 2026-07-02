@@ -1,7 +1,7 @@
 These metrics are specific to the Kafka destination. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by the component type, such as `kafka` for the Kafka destination.
+- The `component_type` tag is `kafka` for these metrics.
 
 `pipelines.kafka_produced_messages_total`
 : **Description**: The number of messages produced to Kafka brokers.

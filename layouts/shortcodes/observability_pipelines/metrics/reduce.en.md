@@ -1,7 +1,7 @@
 This metric is specific to the Reduce processor. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by the processor type.
+- The `component_type` tag is `reduce` for these metrics.
 
 `pipelines.stale_events_flushed_total`
 : **Description**: The number of stale events that the processor has flushed.

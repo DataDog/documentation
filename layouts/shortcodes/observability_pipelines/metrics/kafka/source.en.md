@@ -1,7 +1,7 @@
 These metrics are specific to the Kafka source. For metrics common to all components, see the [common component metrics][101].
 
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by the component type, such as `kafka` for the Kafka source.
+- The `component_type` tag is `kafka` for these metrics.
 
 `pipelines.kafka_consumer_lag`
 : **Description**: Kafka consumer lag per topic and partition. High values indicate the source is falling behind the incoming message rate.
