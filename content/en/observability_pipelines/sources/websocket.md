@@ -38,9 +38,7 @@ After you select the WebSocket source in the pipeline UI:
 1. Enter the identifier for your WebSocket URI, which references the `ws://` or `wss://` endpoint that the Worker connects to. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected:
    - **None**: No authentication is sent with the connection request. Use this when the endpoint does not require credentials.
-   - **Basic**:
-      - Enter the identifier for your WebSocket username. If you leave it blank, the [default](#secret-defaults) is used.
-      - Enter the identifier for your WebSocket password. If you leave it blank, the [default](#secret-defaults) is used.
+   - **Basic**: Enter the identifiers for your WebSocket username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
    - **Bearer**: Enter the identifier for your bearer token. The token is sent in the `Authorization` header as `Bearer <token>`. If you leave it blank, the [default](#secret-defaults) is used.
    - **Custom**: Enter the identifier for your custom `Authorization` header value. The Worker sends this value as the `Authorization` header exactly as provided. Use this when the endpoint expects an authentication scheme other than basic or bearer. If you leave it blank, the [default](#secret-defaults) is used.
 1. In the **Decoding** dropdown menu, select the decoder to apply to incoming messages. Messages received from the endpoint must be in the selected format.
