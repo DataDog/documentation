@@ -182,7 +182,7 @@ Bytes out
 
 Events included
 : **Metric**: `pipelines.included_events_total`
-: **Description**: The number of events that matched the processor's include clause and were processed. Events that do not match the filter clause skip the processor and continue to the next component.
+: **Description**: The number of events that matched the processor's include clause and were processed. Events that do not match the include clause skip the processor and continue to the next component.
 : **Available for**: Processors.
 
 Event bytes included
@@ -217,7 +217,7 @@ Source lag time
 
 Utilization
 : **Metric**: `pipelines.utilization`
-: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
+: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value close to `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
 CPU usage
@@ -247,7 +247,7 @@ Send batch latency
 
 {{% observability_pipelines/metrics/adaptive_concurrency %}}
 
-## Buffer metrics (when enabled)
+## Buffer metrics
 
 Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
 

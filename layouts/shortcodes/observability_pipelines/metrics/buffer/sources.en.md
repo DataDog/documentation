@@ -5,10 +5,10 @@ These metrics are specific to source buffers, located downstream of a source. Ea
 
 `pipelines.source_buffer_utilization`
 : **Description**: Event count in a source's buffer.
-: **Metric type**: histogram
+: **Metric type**: distribution
 
 `pipelines.source_buffer_utilization_level`
-: **Description**: Number of events in a source's buffer.
+: **Description**: Event count in a source's buffer.
 : **Metric type**: gauge
 
 `pipelines.source_buffer_utilization_mean`

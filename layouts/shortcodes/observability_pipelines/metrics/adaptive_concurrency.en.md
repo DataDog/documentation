@@ -1,4 +1,4 @@
-These metrics describe the adaptive concurrency controller, which automatically tunes how many in-flight HTTP requests a destination allows based on observed response times. They are emitted by destinations that send data over HTTP (see the [HTTP client metrics](#http-client-metrics) for the list of applicable destinations). **Note**: AWS-based destinations do not emit these metrics.
+These metrics describe the adaptive concurrency controller, which automatically tunes how many in-flight HTTP requests a destination allows based on observed response times. They are emitted by destinations that send data over HTTP, including AWS-based destinations.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the destination type.
