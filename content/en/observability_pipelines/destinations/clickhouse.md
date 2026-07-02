@@ -70,7 +70,7 @@ When you select `gzip`, you can optionally set the **Compression level** to an i
 
 #### Enable batching
 
-Batch encoding is required when **Format** is set to `arrow_stream`. It is not used with the JSON formats.
+Batch encoding is required when **Format** is set to `arrow_stream` and optional for JSON formats.
 
 1. In the **Codec** dropdown menu, select `arrow_stream`.
 1. (Optional) Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns cause encoding errors.
