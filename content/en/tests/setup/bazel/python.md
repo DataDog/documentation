@@ -16,7 +16,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-<div class="alert alert-info">Test Impact Analysis is not supported for Bazel.</div>
 
 Datadog provides official Bazel rules for Python Test Optimization. Use `dd_topt_py_test` to configure `pytest` targets to read synced Test Optimization metadata and write payloads during Bazel test execution.
 
@@ -261,7 +260,7 @@ dd_topt_py_test(
 
 ## Known limitations
 
-- [Test Impact Analysis][1] is not supported for Bazel.
+- [Test Impact Analysis][1] for Bazel is not supported.
 - Automatic [coverage configuration][2] for Bazel is not supported.
 - `dd_topt_py_test` supports `pytest`.
 - In `consumer_runner` mode, the repository-owned wrapper must run pytest with the ddtrace plugin enabled.

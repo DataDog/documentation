@@ -17,7 +17,7 @@ Datadog provides official Bazel rules for Test Optimization. Use these rules to 
 
 The Bazel integration keeps Datadog metadata fetches outside test execution. During module or repository resolution, Bazel fetches Test Optimization metadata from Datadog and exposes it through a generated repository. During test execution, language-specific macros pass the metadata location to the test process and configure payloads to be written under `TEST_UNDECLARED_OUTPUTS_DIR`. After tests finish, run the doctor and uploader targets with `bazel run`.
 
-[Test Impact Analysis][1] is not supported for Bazel.
+[Test Impact Analysis][1] and automatic [coverage configuration][5] are not supported for Bazel.
 
 ## Language setup pages
 
@@ -79,3 +79,4 @@ Do not pass `DD_API_KEY`, `DD_SITE`, `DD_GIT_*`, or upload endpoint variables th
 [2]: /tests/setup/bazel/java/#compatibility
 [3]: /tests/setup/bazel/python/#compatibility
 [4]: /tests/setup/bazel/go/#compatibility
+[5]: /code_coverage/configuration/

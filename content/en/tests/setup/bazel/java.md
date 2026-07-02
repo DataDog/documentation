@@ -16,7 +16,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-<div class="alert alert-info">Test Impact Analysis is not supported for Bazel.</div>
 
 Datadog provides official Bazel rules for Java Test Optimization. Use `dd_topt_java_test` to configure Java test targets to run with the Datadog Java tracer and write Test Optimization payloads during Bazel test execution.
 
@@ -271,7 +270,7 @@ dd_topt_java_test(
 
 ## Known limitations
 
-- [Test Impact Analysis][1] is not supported for Bazel.
+- [Test Impact Analysis][1] for Bazel is not supported.
 - `dd_topt_java_test` requires an `agent_jar` label.
 - Automatic [coverage configuration][2] for Bazel is not supported.
 

@@ -16,7 +16,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-<div class="alert alert-info">Test Impact Analysis is not supported for Bazel.</div>
 
 Datadog provides official Bazel rules for Go Test Optimization. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended Test Optimization defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper or need to set Datadog attributes such as `orchestrion_mode`.
 
@@ -230,7 +229,7 @@ Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and pl
 
 ## Known limitations
 
-- [Test Impact Analysis][1] is not supported for Bazel.
+- [Test Impact Analysis][1] for Bazel is not supported.
 - Automatic [coverage configuration][2] for Bazel is not supported.
 - The faster `test_optimization` mode supports tests that use the standard library `testing` package. Use `general` mode for tests that need the broader Orchestrion path.
 - Go module pins and Bazel tracer pins must resolve to the same `dd-trace-go` versions.
