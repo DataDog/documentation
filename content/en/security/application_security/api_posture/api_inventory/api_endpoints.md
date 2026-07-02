@@ -141,7 +141,7 @@ When the endpoint is associated with an API in Datadog Software Catalog, the **D
 
 In the **Definition** section, you can:
 
-- **View as YAML**: Switch from the default preview to view the displayed schema as YAML.
+- **View declared schema**: View the OpenAPI schema as raw YAML.
 - **View inferred schema**: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
 
 To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema and appearing as drift when compared against the declared schema.
@@ -166,7 +166,7 @@ Differences can appear in the following areas of the schema:
 - **Parameters**: A parameter added, removed, or changed from optional to required (or the reverse).
 - **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
 - **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
-- **Value constraints**: A numeric or length limit (`minimum`, `maximum`, `minLength`, `maxLength`), pattern, or uniqueness constraint changed. 
+- **Value constraints**: A numeric or length limit (`minimum`, `maximum`, `minLength`, `maxLength`), pattern, or uniqueness constraint changed.
 - **Schema composition**:  A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
 - **Responses**: A status code, response header, or content type added or removed.
 
