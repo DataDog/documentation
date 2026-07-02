@@ -5447,6 +5447,12 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Integration Overhead
+      url: data_observability/integration_overhead
+      pre: data-observability-wui
+      identifier: data_observability_integration_overhead
+      parent: data_observability_heading
+      weight: 90000
     - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
