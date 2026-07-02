@@ -27,6 +27,8 @@ This document lists some of the metrics available from Observability Pipelines. 
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
+Starting in Worker version 2.18, all metrics are tagged with `pipeline_name`, set to the name of the pipeline when it was last deployed or updated.
+
 **Note**: Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
 ## Estimated usage metric
