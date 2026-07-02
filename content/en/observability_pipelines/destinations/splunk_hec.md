@@ -89,6 +89,26 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 1                 | 1                   |
 
+## Metrics
+
+See the [Observability Pipelines Metrics][9] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Splunk HEC metrics
+
+{{% observability_pipelines/metrics/splunk_hec %}}
+
+### Buffer metrics (when enabled)
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
@@ -97,3 +117,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [8]: /observability_pipelines/sources/splunk_hec/
+[9]: /observability_pipelines/monitoring/metrics/
