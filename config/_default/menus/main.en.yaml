@@ -8247,36 +8247,26 @@ menu:
       parent: application_security
       identifier: appsec_threats_management_setup
       weight: 3
-    - name: Overview Pages
-      url: security/application_security/overview
+    - name: Attack Summary
+      url: security/application_security/overview/
       parent: application_security
       identifier: application_security_overview
-      weight: 4
-    - name: API Posture Overview
-      url: security/application_security/overview/api_posture/
-      parent: application_security_overview
-      identifier: application_security_overview_api_posture
-      weight: 1
-    - name: Threat Protection Overview
-      url: security/application_security/overview/threat_protection/
-      parent: application_security_overview
-      identifier: application_security_overview_threat_protection
-      weight: 2
-    - name: Attack Summary
-      url: security/application_security/overview/attack_summary/
-      parent: application_security_overview
-      identifier: application_security_overview_attack_summary
-      weight: 3
+      weight: 6
     - name: Threat Protection
       url: security/application_security/threat_protection/
       parent: application_security
       identifier: application_security_threat_protection
       weight: 5
+    - name: Overview
+      url: security/application_security/threat_protection/overview/
+      parent: application_security_threat_protection
+      identifier: application_security_threat_protection_overview
+      weight: 1
     - name: Security Signals
       url: security/application_security/threat_protection/security_signals
       parent: application_security_threat_protection
       identifier: application_security_security_signals
-      weight: 1
+      weight: 2
     - name: Attackers Explorer
       url: security/application_security/threat_protection/security_signals/attacker-explorer/
       parent: application_security_security_signals
@@ -8301,7 +8291,7 @@ menu:
       url: security/application_security/threat_protection/policies/
       parent: application_security_threat_protection
       identifier: application_security_policies
-      weight: 2
+      weight: 3
     - name: Custom Rules
       url: security/application_security/threat_protection/policies/custom_rules/
       parent: application_security_policies
@@ -8326,27 +8316,32 @@ menu:
       url: security/application_security/threat_protection/exploit-prevention/
       parent: application_security_threat_protection
       identifier: exploit_prevention
-      weight: 3
+      weight: 4
     - name: WAF Integrations
       url: security/application_security/threat_protection/waf-integration/
       parent: application_security_threat_protection
       identifier: aws_waf_int
-      weight: 4
+      weight: 5
     - name: Account Takeover Protection
       url: security/application_security/threat_protection/account_takeover_protection/
       parent: application_security_threat_protection
       identifier: security_ato_protection
-      weight: 5
+      weight: 6
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 6
+      weight: 4
+    - name: Overview
+      url: security/application_security/api_posture/overview/
+      parent: application_security_api_security
+      identifier: application_security_api_security_overview
+      weight: 1
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
       identifier: asm_api_security
-      weight: 1
+      weight: 2
     - name: API Endpoints
       url: security/application_security/api_posture/api_inventory/api_endpoints/
       parent: asm_api_security
@@ -8361,17 +8356,17 @@ menu:
       url: security/application_security/api_posture/api_findings/
       parent: application_security_api_security
       identifier: application_security_api_findings
-      weight: 2
+      weight: 3
     - name: Endpoint Scanning
       url: security/application_security/api_posture/endpoint_scanning/
       parent: application_security_api_security
       identifier: application_security_endpoint_scanning
-      weight: 3
+      weight: 4
     - name: Sensitive Data
       url: security/application_security/api_posture/sensitive_data/
       parent: application_security_api_security
       identifier: application_security_sensitive_data
-      weight: 4
+      weight: 5
     - name: Guides
       url: security/application_security/guide/
       parent: application_security

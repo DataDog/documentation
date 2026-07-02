@@ -2,13 +2,10 @@
 title: Threat Protection Overview
 disable_toc: false
 further_reading:
-- link: "/security/application_security/overview/"
-  tag: "Documentation"
-  text: "App and API Protection Overview Pages"
-- link: "/security/application_security/overview/api_posture/"
+- link: "/security/application_security/api_posture/overview/"
   tag: "Documentation"
   text: "API Posture Overview"
-- link: "/security/application_security/overview/attack_summary/"
+- link: "/security/application_security/overview/"
   tag: "Documentation"
   text: "Attack Summary"
 ---
@@ -19,7 +16,7 @@ The **Threat Protection** overview page shows how well your services are instrum
 
 ## Ask Bits panel
 
-The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your threat protection. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.
+The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your threat protection. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access. You can dismiss it.
 
 ## App Instrumentation
 
@@ -27,11 +24,11 @@ The **App Instrumentation** section reports how broadly App and API Protection (
 
 ## Attack Coverage
 
-The **Attack Coverage** section shows how well your services are protected against attack vectors. **Attack Tools** reports how many exposed services are protected from scanners, bots, and similar tooling through AAP monitoring and blocking, and **Exploit Prevention** reports how many services are protected from exploits through Runtime Application Self-Protection (RASP). The section also highlights services that need [Threat Management][1] enabled or a tracing library upgrade.
+The **Attack Coverage** section shows how well your services are protected against attack vectors. **Attack Tools** reports how many exposed services are protected from scanners, bots, and similar tooling through AAP monitoring and blocking, and **Exploit Prevention** reports how many services are protected from exploits through Runtime Application Self-Protection (RASP). The section also highlights services that need [Threat Protection][1] enabled or a tracing library upgrade.
 
 ## Open Signals
 
-The **Open Signals** section summarizes the security signals that are open. Signals are broken down by severity (critical, high, medium, and low) with a trend comparison to the previous equal time window, and they are shown across **Open** and **Under Review** states. The section also lists the top rules triggering signals so you can see what is driving activity.
+The **Open Signals** section summarizes the security signals that are open. Signals are broken down by severity (critical, high, medium, and low) with a trend comparison to the previous time window of equal length, and they are shown across **Open** and **Under Review** states. The section also lists the top rules triggering signals so you can see what is driving activity.
 
 ## Threats Exposure
 

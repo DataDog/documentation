@@ -2,13 +2,10 @@
 title: API Posture Overview
 disable_toc: false
 further_reading:
-- link: "/security/application_security/overview-pages/"
-  tag: "Documentation"
-  text: "App and API Protection Overview Pages"
-- link: "/security/application_security/overview/threat_protection/"
+- link: "/security/application_security/threat_protection/overview/"
   tag: "Documentation"
   text: "Threat Protection Overview"
-- link: "/security/application_security/overview/attack_summary/"
+- link: "/security/application_security/overview/"
   tag: "Documentation"
   text: "Attack Summary"
 ---
@@ -19,7 +16,7 @@ The **API Posture** overview page gives you a security-focused view of your API 
 
 ## Ask Bits panel
 
-The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your API posture. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access, and you can dismiss it.
+The **Ask Bits** panel is a contextual entry point to Bits AI for questions about your API posture. It offers ready-made prompts such as **Top priorities**, **Summarize Last Week insights**, and **What I'm exposed to?** to help you start an investigation without writing a query. The panel appears when Bits AI is enabled and you have the required access. You can dismiss it.
 
 ## Coverage
 
