@@ -144,6 +144,10 @@ products:
                 link: llm_observability/
                 description: Trace, monitor, and secure your LLM applications
                 short_description: LLM monitoring and security
+              - title: MCP Server
+                link: mcp_server/
+                description: Connect AI agents to your observability data to query metrics, logs, traces, and more
+                short_description: AI agent data access
 
   - title: Security
     icon: security-platform
@@ -311,6 +315,10 @@ products:
                 link: opentelemetry/
                 description: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
                 short_description: OTel data ingestion
+              - title: Client SDKs
+                link: client_sdks/
+                description: Install and configure the Datadog SDK for your platform
+                short_description: Platform SDK setup
               - title: Extend Datadog
                 link: extend/
                 description: Extend the Datadog platform

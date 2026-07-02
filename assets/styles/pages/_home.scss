@@ -144,12 +144,8 @@
 }
 
 .home-content__variant-slot[data-variant-resolving] {
-    min-height: 600px;
+    min-height: 100vh;
     background-color: #ffffff;
-
-    @media (max-width: 767px) {
-        min-height: 400px;
-    }
 }
 
 .home-content {
@@ -299,6 +295,10 @@ $product-collapse-duration: 300ms;
             outline: 2px solid $brand-primary;
             outline-offset: 2px;
         }
+
+        @media (min-width: 768px) {
+            display: none;
+        }
     }
 
     &__caret {
@@ -308,29 +308,39 @@ $product-collapse-duration: 300ms;
         transition: transform $product-collapse-duration $product-collapse-ease;
     }
 
-    &.is-open &__caret {
-        transform: rotate(90deg);
-    }
-
     &__collapsible {
         flex: 1;
         min-height: 0;
         display: grid;
-        grid-template-rows: 0fr;
-        transition: grid-template-rows $product-collapse-duration $product-collapse-ease;
-    }
-
-    &.is-open &__collapsible {
         grid-template-rows: 1fr;
+
+        @media (max-width: 767px) {
+            grid-template-rows: 0fr;
+            transition: grid-template-rows $product-collapse-duration $product-collapse-ease;
+        }
     }
 
     &__collapsible-inner {
-        overflow: hidden;
         min-height: 0;
+        overflow: visible;
+
+        @media (max-width: 767px) {
+            overflow: hidden;
+        }
     }
 
-    &.is-open &__collapsible-inner {
-        animation: product-section-reveal-overflow 0s $product-collapse-duration forwards;
+    @media (max-width: 767px) {
+        &.is-open &__caret {
+            transform: rotate(90deg);
+        }
+
+        &.is-open &__collapsible {
+            grid-template-rows: 1fr;
+        }
+
+        &.is-open &__collapsible-inner {
+            animation: product-section-reveal-overflow 0s $product-collapse-duration forwards;
+        }
     }
 
     &__icon {
