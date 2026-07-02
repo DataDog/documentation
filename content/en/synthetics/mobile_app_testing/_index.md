@@ -164,6 +164,19 @@ To configure a mobile test to use either EU or US hosted devices:
 
 {{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selecting one or more mobile devices in US and EU regions" video=true >}}
 
+### Mobile device families
+
+A mobile device family represents a set of devices that share common characteristics, such as a model line or OS version. Instead of choosing a single, specific device, you can choose a family. When a test runs, Datadog runs it on one of the available devices in the family at that time. Choosing a family increases the availability of your test results, because the test can run on any available device in the family rather than depending on a single, specific one.
+
+Datadog provides built-in families that appear alongside individual devices in the **Select Device(s)** dropdown. For example:
+
+- **Latest iPhone family on latest iOS version** (iOS)
+- **Any iPhone Pro** (iOS)
+- **Latest Pixel family on latest Android version** (Android)
+- **Any Samsung device** (Android)
+
+Select a family the same way you select an individual device. A single test can target individual devices, families, or both.
+
 ## Test retries
 
 You can specify how much time a test needs to fail before triggering a notification alert.
