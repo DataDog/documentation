@@ -1,4 +1,5 @@
-{{- /* Creates an algolia json record for each individual section (split by h2 header) of the given page. */ -}}
+{{- /* Emits a search record per section: lead content before the first H2/H3 (order -1),
+       then each H2/H3 section. Sections with tab-panes are split into one chunk per tab. */ -}}
 
 {{ $hugo_context := .context }}
 {{ $page := .page }}
@@ -6,57 +7,117 @@
 {{ $category := .category }}
 {{ $subcategory := .subcategory }}
 {{ $rank := .rank }}
-{{ $section_header := "" }}
-{{ $section_content := "" }}
 
-{{- define "partials/heading-sections" -}}
-  {{- $ctx := .ctx -}}
+{{- /* Emits records for one HTML block under $baseHeader; splits into per-tab chunks if it contains tab-panes. */ -}}
+{{- define "partials/algolia-section-chunks" -}}
   {{- $hugo_context := .ctx.context -}}
   {{- $page := .ctx.page -}}
   {{- $title := .ctx.title -}}
   {{- $category := .ctx.category -}}
   {{- $subcategory := .ctx.subcategory -}}
   {{- $rank := .ctx.rank -}}
-  {{- $section_header := "" -}}
-  {{- $section_content := "" -}}
-  {{- $section_content_words := "" -}}
   {{- $order := .order -}}
-  {{- range $v := .data -}}
-      {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" $v.ID -}}
-      {{- $heading_html := index (findRE $restr $page.Content 1) 0 | default "" -}}
-      {{- $content_starting_after_header := index (split $page.Content $heading_html) 1 -}}
-      {{- $next_heading_html := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $content_starting_after_header 1) 0 | default "" -}}
-      {{- $content_block := index (split $content_starting_after_header $next_heading_html) 0 -}}
-      {{- $section_header := $heading_html | plainify | htmlUnescape | safeHTML -}}
-      {{- $section_content = $content_block | plainify | htmlUnescape | safeHTML -}}
-      {{- $section_content_words = (split $section_content " ") -}}
+  {{- $html := .html -}}
+  {{- $baseHeader := .header -}}
 
-      {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
-          {{- $chunked := slice -}}
+  {{- $tabRe := `<div[^>]*class="[^"]*tab-pane[^"]*"[^>]*>` -}}
+  {{- $tabOpens := findRE $tabRe $html -}}
+
+  {{- /* Skip tab-splitting if a second code-tabs wrapper follows the first pane (multiple/nested groups would mislabel headers). */ -}}
+  {{- $tabSplit := gt (len $tabOpens) 0 -}}
+  {{- if $tabSplit -}}
+      {{- $afterFirstPane := index (split $html (index $tabOpens 0)) 1 -}}
+      {{- if findRE `<div[^>]*class=['"][^'"]*code-tabs[^'"]*['"]` $afterFirstPane 1 -}}
+          {{- $tabSplit = false -}}
+      {{- end -}}
+  {{- end -}}
+
+  {{- /* Only split real {{ tab }} panes (they carry title=); panes without a title would collide on objectID. */ -}}
+  {{- if $tabSplit -}}
+      {{- range $open := $tabOpens -}}
+          {{- if not (findRE `<div[^>]*\stitle="` $open) -}}
+              {{- $tabSplit = false -}}
+          {{- end -}}
+      {{- end -}}
+  {{- end -}}
+
+  {{- /* Segments to index; each: header, html, tab (data-lang for ?tab= link), anchor. */ -}}
+  {{- $baseAnchor := $baseHeader | anchorize -}}
+  {{- $segments := slice -}}
+  {{- if $tabSplit -}}
+      {{- /* Capture any intro content before the first tab, so it isn't dropped. */ -}}
+      {{- $preTab := index (split $html (index $tabOpens 0)) 0 -}}
+      {{- if gt (len (trim ($preTab | plainify) " \r\n\t")) 2 -}}
+          {{- $segments = $segments | append (dict "header" $baseHeader "html" $preTab "tab" "" "anchor" $baseAnchor) -}}
+      {{- end -}}
+      {{- range $open := $tabOpens -}}
+          {{- $after := index (split $html $open) 1 -}}
+          {{- $nextOpen := index (findRE $tabRe $after 1) 0 | default "" -}}
+          {{- $block := $after -}}
+          {{- if $nextOpen -}}
+              {{- $block = index (split $after $nextOpen) 0 -}}
+          {{- end -}}
+          {{- $tabTitle := "" -}}
+          {{- if (findRE `title="` $open) -}}
+              {{- $tabTitle = (replaceRE `(?s).*?title="([^"]*)".*` "$1" $open) | htmlUnescape | safeHTML -}}
+          {{- end -}}
+          {{- $tabLang := "" -}}
+          {{- if (findRE `data-lang="` $open) -}}
+              {{- $tabLang = replaceRE `(?s).*?data-lang="([^"]*)".*` "$1" $open -}}
+          {{- end -}}
+          {{- $h := $tabTitle -}}
+          {{- if and $baseHeader $tabTitle -}}
+              {{- $h = print $baseHeader " - " $tabTitle -}}
+          {{- else if not $tabTitle -}}
+              {{- $h = $baseHeader -}}
+          {{- end -}}
+          {{- $segments = $segments | append (dict "header" $h "html" $block "tab" $tabLang "anchor" $baseAnchor) -}}
+      {{- end -}}
+  {{- else -}}
+      {{- $segments = $segments | append (dict "header" $baseHeader "html" $html "tab" "" "anchor" $baseAnchor) -}}
+  {{- end -}}
+
+  {{- range $segments -}}
+      {{- $section_header := .header -}}
+      {{- $section_tab := .tab -}}
+      {{- $section_anchor := .anchor -}}
+      {{- $section_content := .html | plainify | htmlUnescape | safeHTML -}}
+      {{- if and (ne $section_header "Further Reading") (ne (trim $section_content " \r\n\t") "") -}}
+          {{- $words := split $section_content " " -}}
           {{- $post_len := len $section_content -}}
           {{- if gt $post_len 100000 -}}
               {{- $post_len = 100000 -}}
           {{- end -}}
-
+          {{- $chunked := slice -}}
           {{- range $i := (seq 0 500 $post_len) -}}
-              {{- $chunked = $chunked | append (delimit (first 500 (after $i $section_content_words) ) " " ) -}}
+              {{- $chunked = $chunked | append (delimit (first 500 (after $i $words)) " ") -}}
           {{- end -}}
-
           {{- range $i, $c := $chunked -}}
               {{- if gt (len $c) 2 -}}
-                  {{- $full_url := print $page.Permalink "#" ($section_header | anchorize) -}}
-                  {{- $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) -}}
-                  {{- $object_id := (print $page.File.UniqueID "_" $page.Language.Lang "_" ($section_header | anchorize) "_" $i "_" $order) -}}
-
+                  {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
+                  {{- $id_anchor := $section_header | anchorize -}}
+                  {{- $hdr := $section_header -}}
                   {{- if $page.Params.exclude_headers_from_search -}}
-                    {{- $section_header = "" -}}
+                      {{- $hdr = "" -}}
                   {{- end -}}
-
+                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i "_" $order -}}
+                  {{- /* Tab segments link via ?tab=<data-lang>(#anchor); others via #anchor. */ -}}
+                  {{- $url_suffix := "" -}}
+                  {{- if $section_tab -}}
+                      {{- $url_suffix = print "?tab=" $section_tab -}}
+                      {{- if $section_anchor -}}
+                          {{- $url_suffix = print $url_suffix "#" $section_anchor -}}
+                      {{- end -}}
+                  {{- else if $section_anchor -}}
+                      {{- $url_suffix = print "#" $section_anchor -}}
+                  {{- end -}}
+                  {{- $full_url := print $page.Permalink $url_suffix -}}
+                  {{- $relpermalink := print $page.RelPermalink $url_suffix -}}
                   {{- $hugo_context.Scratch.Add "algoliaindex" (
                       dict "objectID" $object_id
                       "id" $object_id
                       "title" $title
-                      "section_header" $section_header
+                      "section_header" $hdr
                       "content" $c
                       "type" $page.Type
                       "relpermalink" $relpermalink
@@ -71,6 +132,24 @@
                   ) -}}
               {{- end -}}
           {{- end -}}
+      {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "partials/heading-sections" -}}
+  {{- $ctx := .ctx -}}
+  {{- $page := .ctx.page -}}
+  {{- $order := .order -}}
+  {{- range $v := .data -}}
+      {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" $v.ID -}}
+      {{- $heading_html := index (findRE $restr $page.Content 1) 0 | default "" -}}
+      {{- $content_starting_after_header := index (split $page.Content $heading_html) 1 -}}
+      {{- $next_heading_html := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $content_starting_after_header 1) 0 | default "" -}}
+      {{- $content_block := index (split $content_starting_after_header $next_heading_html) 0 -}}
+      {{- $section_header := $heading_html | plainify | htmlUnescape | safeHTML -}}
+
+      {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
+          {{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $content_block "header" $section_header "order" $order) -}}
           {{- $order = add $order 1 -}}
       {{- end -}}
       {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
@@ -78,4 +157,14 @@
   {{- return $order -}}
 {{- end -}}
 
-{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
+{{- /* Index the lead content (before the first H2/H3 heading), tab-split if applicable. */ -}}
+{{- $ctx := (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
+{{- $first_heading := index (findRE `<h[23][^>]*>.*?</h[23]>` $page.Content 1) 0 | default "" -}}
+{{- $lead_html := $page.Content -}}
+{{- if $first_heading -}}
+    {{- $lead_html = index (split $page.Content $first_heading) 0 -}}
+{{- end -}}
+{{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "order" -1) -}}
+
+{{- /* Index each H2/H3 heading section. */ -}}
+{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" $ctx "order" 0) -}}
