@@ -46,6 +46,8 @@ After you select the ClickHouse destination in the pipeline UI:
     - `json_as_string`: Inserts each event into a single `String`-typed column, storing the raw JSON. This maps to ClickHouse's [`JSONAsString`][9] format.
     - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Enable batching](#enable-batching).
 
+    **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable at the time the pipeline is created because the target table's schema is read from the server to build the Arrow encoder.
+
 ### Optional settings
 
 #### Skip unknown fields
@@ -73,8 +75,6 @@ When you select `gzip`, you can optionally set the **Compression level** to an i
 Batch encoding is required when **Format** is set to `arrow_stream` and optional for JSON formats.
 
 1. (Optional) Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns results in encoding errors.
-
-**Note**: When you use `arrow_stream`, your ClickHouse server must be reachable at the time the pipeline starts because the target table's schema is read from the server to build the Arrow encoder.
 
 #### Batching
 
