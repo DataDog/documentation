@@ -58,6 +58,8 @@ Set the following environment variable on your application, in addition to the s
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
+If you use the **Java** tracer, `DD_METRICS_OTEL_ENABLED` is not required for flag evaluation metrics; the OpenTelemetry SDK dependencies described in the next section enable them instead.
+
 ### Java: add the OpenTelemetry SDK dependencies
 
 The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the OpenTelemetry SDK metrics and OTLP exporter must be on your application's classpath. Add them alongside your [feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
@@ -121,7 +123,7 @@ By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on po
 Set an OTLP endpoint explicitly in any of these cases:
 
 - The Agent is not reachable at `DD_AGENT_HOST` on the default OTLP port (for example, a remote Agent or a non-default port).
-- You use the **Java** tracer. The Java tracer does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `localhost:4318`. Set the endpoint whenever the Agent is not on `localhost`.
+- You use the **Java** tracer. The Java flag evaluation metrics exporter sends OTLP over HTTP on port `4318` and ignores `OTEL_EXPORTER_OTLP_PROTOCOL`, so do not configure it for gRPC. It does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `http://localhost:4318`. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Agent's HTTP endpoint whenever the Agent is not on `localhost`.
 - You use the **Python** tracer. The Python tracer defaults to gRPC on port `4317`, not HTTP. Enable the gRPC OTLP receiver on the Agent, or override the protocol to use HTTP instead:
 
 {{< code-block lang="bash" >}}

@@ -115,7 +115,6 @@ For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrumen
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
@@ -347,7 +346,6 @@ func main() {
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
