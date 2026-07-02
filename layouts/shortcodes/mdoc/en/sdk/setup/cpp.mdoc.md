@@ -40,7 +40,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Datadog)
 ```
 
-Replace `<version>` with a release tag from the SDK's [GitHub Releases][4] (for example, `0.3.0`), or use the full commit SHA for your chosen release.
+Replace `<version>` with a release tag from the SDK's [GitHub Releases][2] (for example, `0.3.0`), or use the full commit SHA for your chosen release.
 
 To add the SDK as a dependency for your application, pass its CMake target to `datadog_enable()`:
 
@@ -48,14 +48,14 @@ To add the SDK as a dependency for your application, pass its CMake target to `d
 datadog_enable(my-app)
 ```
 
-For more detailed information on CMake setup, see [Advanced Build Configuration][5].
+For more detailed information on CMake setup, see [Advanced Build Configuration][3].
 
 {% /tab %}
 {% tab label="CMake (find_package)" %}
 
 If you use CMake to build your application, but you want to use precompiled SDK binaries, use CMake's `find_package()` command.
 
-1. Download the release archive for your platform from the SDK's [GitHub Releases][4], then extract it to a directory in your project (for example, `external/datadog-sdk/`).
+1. Download the release archive for your platform from the SDK's [GitHub Releases][2], then extract it to a directory in your project (for example, `external/datadog-sdk/`).
 
 2. In your `CMakeLists.txt`, add that directory to `CMAKE_PREFIX_PATH` and call `find_package`:
 
@@ -70,7 +70,7 @@ To add the SDK as a dependency for your application, pass its CMake target to `d
 datadog_enable(my-app)
 ```
 
-For more detailed information on CMake setup, see [Advanced Build Configuration][5].
+For more detailed information on CMake setup, see [Advanced Build Configuration][3].
 
 {% /tab %}
 {% tab label="Other build systems" %}
@@ -87,7 +87,7 @@ LDLIBS   = -lddsdkcpp -lcurl -luuid
 If your SDK build uses Crashpad, you'll also need to ensure that the `crashpad_handler` executable is deployed alongside your application.
 --CRASHPAD-->
 
-For more detailed information on build configuration, see [Advanced Build Configuration][5].
+For more detailed information on build configuration, see [Advanced Build Configuration][3].
 
 {% /tab %}
 {% /tabs %}
@@ -304,7 +304,7 @@ dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_PENDING);
 
 #### Other options
 
-For information on other SDK configuration options, see [Advanced Configuration][6].
+For information on other SDK configuration options, see [Advanced Configuration][4].
 
 {% /step %}
 
@@ -363,7 +363,7 @@ dd_rum_config_set_session_sample_rate(&rum_config, 75.0f);
 {% /tab %}
 {% /tabs %}
 
-Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessions are ingested for full visibility and accurate metrics. To control which sessions are indexed and retained, configure retention filters. For more information, see [RUM Without Limits][3].
+Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessions are ingested for full visibility and accurate metrics. To control which sessions are indexed and retained, configure retention filters. For more information, see [RUM Without Limits][5].
 
 {% /step %}
 
@@ -386,7 +386,7 @@ dd_rum_start_view(rum, "startup_screen", "Startup Screen", NULL);
 {% /tab %}
 {% /tabs %}
 
-For more information on RUM instrumentation, see [Instrument your application][6].
+For more information on RUM instrumentation, see [Instrument your application][4].
 
 {% /step %}
 
@@ -422,16 +422,16 @@ After the SDK is correctly configured and tracking consent is granted, you shoul
 [DATADOG DEBUG] Scheduled next upload cycle for feature
 ```
 
-**Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][8].
+**Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][6].
 
 ### View your data in Datadog
 
 After running your app, navigate to the [RUM Explorer][7] to see sessions from your application. You should see session data within a few minutes.
 
 [1]: /real_user_monitoring/
-[3]: /real_user_monitoring/rum_without_limits/
-[4]: https://github.com/DataDog/dd-sdk-cpp/releases
-[5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
-[6]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#instrument-your-application
+[2]: https://github.com/DataDog/dd-sdk-cpp/releases
+[3]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+[4]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#instrument-your-application
+[5]: /real_user_monitoring/rum_without_limits/
+[6]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#diagnostic-logging
 [7]: /real_user_monitoring/explorer/
-[8]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#diagnostic-logging
