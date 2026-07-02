@@ -138,16 +138,20 @@ Complete the following steps to configure these components.
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [resourcedetection, memory_limiter, resource, transform/sanitize_spans]
-          exporters: [otlp_grpc/jaeger, debug, spanmetrics, datadog, datadog/connector]
+          processors: [resourcedetection, memory_limiter, transform/sanitize_spans, resource]
+          exporters: [debug, span_metrics, datadog, datadog/connector]
         metrics:
-          receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
+          receivers: [datadog/connector, docker_stats, http_check/frontend-proxy, host_metrics, nginx, otlp, redis, postgresql, prometheus/ad, span_metrics]
           processors: [resourcedetection, memory_limiter, resource]
-          exporters: [otlp_http/prometheus, debug, datadog]
+          exporters: [debug, datadog]
         logs:
           receivers: [otlp]
-          processors: [resourcedetection, memory_limiter, resource]
-          exporters: [opensearch, debug, datadog]
+          processors: [resourcedetection, memory_limiter, transform/sanitize_logs, resource]
+          exporters: [debug, datadog]
+        profiles:
+          receivers: [otlp]
+          processors: [filter/sanitize_profiles, memory_limiter]
+          exporters: [debug]
     ```
 
     By default, the collector in the demo application merges the configuration from two files:
