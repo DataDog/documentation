@@ -44,4 +44,21 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
+## Metrics
+
+See the [Observability Pipelines Metrics][2] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Reduce metrics
+
+{{% observability_pipelines/metrics/reduce %}}
+
+### Buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
 [1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring/metrics/
