@@ -27,6 +27,8 @@ This document lists some of the metrics available from Observability Pipelines. 
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
+**Note**: Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
+
 ## Estimated usage metric
 
 Observability Pipelines ingested bytes
