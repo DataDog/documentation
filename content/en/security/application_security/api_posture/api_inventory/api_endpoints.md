@@ -201,7 +201,7 @@ Authentication is determined by:
 
 - The presence of `Authorization`, `Token`, or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
-- The endpoint returned a 401 or 403 status code.
+- A 401 or 403 status code returned by the endpoint.
 - Custom [Endpoint Tagging][15] rules that you configured
 
 
