@@ -82,9 +82,26 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `a`    | Bytes  | 5,000 |
 |  `b`    | Events | 50    |
 
+## Metrics
+
+See the [Observability Pipelines Metrics][7] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Quota metrics
+
+{{% observability_pipelines/metrics/quota %}}
+
+### Buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
 [1]: /monitors/types/metric/?tab=threshold
 [2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /observability_pipelines/destinations/azure_storage/
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
 [6]: /observability_pipelines/search_syntax/logs/
+[7]: /observability_pipelines/monitoring/metrics/
