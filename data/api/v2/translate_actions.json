@@ -5755,6 +5755,12 @@
     "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
     "summary": "Get SLO status"
   },
+  "CreateSnapshot": {
+    "description": "Create a snapshot of a graph widget. The snapshot is rendered asynchronously; the returned URL can be polled until the image is ready.",
+    "summary": "Create a graph snapshot",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a graph snapshot."
+  },
   "DeleteSourcemaps": {
     "description": "Deletes source maps matching the specified filter criteria. Supports\ndry-run mode to preview which source maps would be deleted without\nperforming the actual deletion.",
     "summary": "Delete source maps"
