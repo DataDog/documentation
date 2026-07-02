@@ -146,6 +146,7 @@ These metrics are available for sources, processors, and destinations.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
+- Use the `component_kind` tag to filter or group by `source`, `transform` (processor) or `sink` (destination).
 
 Events in
 : **Metric**: `pipelines.component_received_events_total`
