@@ -35,7 +35,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 After you select the WebSocket source in the pipeline UI:
 
-1. Enter the identifier for your WebSocket URI. This is the name of the environment variable that holds the `ws://` or `wss://` endpoint that the Worker connects to. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your WebSocket URI, which references the `ws://` or `wss://` endpoint that the Worker connects to. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected:
    - **None**: No authentication is sent with the connection request. Use this when the endpoint does not require credentials.
    - **Basic**:
