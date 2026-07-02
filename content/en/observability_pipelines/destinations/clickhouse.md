@@ -62,7 +62,7 @@ In the **Compression** dropdown menu, select the algorithm used to compress outb
 - `gzip` (default): Compresses requests with gzip.
 - `none`: Sends requests uncompressed.
 
-When you select `gzip`, you can optionally set the **Compression level** to an integer from `1` (fastest) to `9` (best compression). If left unset, the algorithm's default level is used.
+When you select `gzip`, you can optionally set the **Compression level** to an integer from `1` (fastest) to `9` (best compression). If left unset, the default is `6`.
 
 #### Enable basic authentication
 
