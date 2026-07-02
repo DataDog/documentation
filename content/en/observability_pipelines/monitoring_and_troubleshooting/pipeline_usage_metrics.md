@@ -173,6 +173,11 @@ Utilization
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
+CPU usage
+: **Metric**: `pipelines.component_cpu_usage_ns_total`
+: **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors.
+: **Available for**: The Remap (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
+
 ## HTTP client metrics
 
 {{% observability_pipelines/metrics/http_client %}}
