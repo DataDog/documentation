@@ -13,7 +13,6 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">The Quality Monitoring integration with Databricks only supports Unity Catalog. Reach out to your account representative if you use Hive Metastore.</div>
 
 ## Overview
 
