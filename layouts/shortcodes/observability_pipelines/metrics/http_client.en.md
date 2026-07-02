@@ -17,14 +17,14 @@ These metrics are emitted by destinations that send data over HTTP, such as Data
 
 `pipelines.http_client_rtt_seconds`
 : **Description**: The round-trip time, in seconds, for HTTP requests, from when the request is sent to when the final response or error is received.
-: **Metric type**: gauge
+: **Metric type**: distribution
 
 `pipelines.http_client_response_rtt_seconds`
 : **Description**: The round-trip time, in seconds, of HTTP requests, tagged by response status.
-: **Metric type**: gauge
+: **Metric type**: distribution
 
 `pipelines.http_client_error_rtt_seconds`
 : **Description**: The round-trip time, in seconds, of HTTP requests that resulted in an error, tagged by error kind.
-: **Metric type**: gauge
+: **Metric type**: distribution
 
 [101]: /observability_pipelines/monitoring/metrics/#component-metrics

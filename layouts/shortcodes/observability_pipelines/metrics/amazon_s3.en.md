@@ -25,10 +25,10 @@ These metrics are specific to the Amazon S3 source, which processes S3 objects u
 
 `pipelines.s3_object_processing_succeeded_duration_seconds`
 : **Description**: Time, in seconds, taken to successfully process an S3 object.
-: **Metric type**: gauge
+: **Metric type**: distribution
 
 `pipelines.s3_object_processing_failed_duration_seconds`
 : **Description**: Time, in seconds, taken to process an S3 object that failed.
-: **Metric type**: gauge
+: **Metric type**: distribution
 
 [101]: /observability_pipelines/monitoring/metrics/#component-metrics
