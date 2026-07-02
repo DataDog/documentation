@@ -98,11 +98,13 @@
         </main>
 
         {{- if eq .Site.Language.Lang "en" }}
-            <div data-home-variant-content="new" hidden>
-                {{ partial "home/products-browse.html" . }}
-            </div>
-            <div data-home-variant-content="legacy" hidden>
-                {{ partial "home/legacy.html" . }}
+            <div class="home-content__variant-slot" data-variant-resolving>
+                <div data-home-variant-content="new" hidden>
+                    {{ partial "home/products-browse.html" . }}
+                </div>
+                <div data-home-variant-content="legacy" hidden>
+                    {{ partial "home/legacy.html" . }}
+                </div>
             </div>
         {{- else }}
             {{ partial "home/products-browse.html" . }}

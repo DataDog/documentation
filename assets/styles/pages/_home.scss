@@ -143,6 +143,15 @@
     display: none;
 }
 
+.home-content__variant-slot[data-variant-resolving] {
+    min-height: 600px;
+    background-color: #ffffff;
+
+    @media (max-width: 767px) {
+        min-height: 400px;
+    }
+}
+
 .home-content {
     position: relative;
 

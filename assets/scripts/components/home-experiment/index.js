@@ -12,6 +12,7 @@ if (newEl && legacyEl) {
         const variant = getStringFlag(client, FLAG_KEY, DEFAULT_VARIANT);
         const activeEl = variant === 'legacy' ? legacyEl : newEl;
         activeEl.removeAttribute('hidden');
+        newEl.parentElement.removeAttribute('data-variant-resolving');
         document.body.setAttribute('data-home-variant', variant);
         window.DD_RUM?.addFeatureFlagEvaluation?.(FLAG_KEY, variant);
         bindHomeTracking();
