@@ -24,6 +24,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [File Text](#id-for-json-yaml-text)
 - [File JSON](#id-for-json-yaml-text)
 - [File YAML](#id-for-json-yaml-text)
+- [Windows Registry Key](#id-for-windows-regkey)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -1450,6 +1451,64 @@ secret_backend_config:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Windows Registry Key" level="h4" expanded=false id="id-for-windows-regkey" %}}
+
+**Available in Agent version 7.82+**
+
+The following Windows services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `windows.regkey` | Windows Registry |
+
+##### Prerequisites
+
+This backend is supported on Windows only. The registry key must be readable by the account the Datadog Agent runs under (by default `ddagentuser`). Keys under `HKLM` are readable by all local users by default. Datadog recommends restricting the ACL so only `ddagentuser` and `SYSTEM` can read the key.
+
+##### Configuration example
+
+Configure the Datadog Agent to use the Windows Registry Key backend with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: windows.regkey
+
+api_key: 'ENC[SOFTWARE\Datadog\secrets:api_key]'
+```
+
+Reference secrets using the format `ENC[<registry-path>:<value-name>]`, where `registry-path` is the subpath beneath the root key and `value-name` is the registry value to read.
+
+By default the root key is `HKLM`. To use a different hive, set `root_key`. Accepted values are `HKLM`, `HKCU`, `HKCR`, `HKU`, and `HKCC` (long forms such as `HKEY_LOCAL_MACHINE` are also accepted):
+
+```yaml
+secret_backend_type: windows.regkey
+secret_backend_config:
+  root_key: HKCU
+```
+
+##### Set up the registry key
+
+Here is an example PowerShell shell script that demostrate how to setup a registry (to be run as Administrator after installing).
+
+```powershell
+# Create the key and set the secret value
+New-Item -Path "HKLM:\SOFTWARE\Datadog\secrets" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Datadog\secrets" -Name "api_key" -Value "<YOUR_API_KEY>"
+
+# Restrict read access to ddagentuser and SYSTEM (recommended)
+$acl = Get-Acl "HKLM:\SOFTWARE\Datadog\secrets"
+$acl.SetAccessRuleProtection($true, $false)
+$rules = @(
+    New-Object System.Security.AccessControl.RegistryAccessRule("SYSTEM", "ReadKey", "Allow"),
+    New-Object System.Security.AccessControl.RegistryAccessRule("ddagentuser", "ReadKey", "Allow"),
+    New-Object System.Security.AccessControl.RegistryAccessRule("Administrators", "FullControl", "Allow")
+)
+$rules | ForEach-Object { $acl.SetAccessRule($_) }
+Set-Acl "HKLM:\SOFTWARE\Datadog\secrets" $acl
+```
 
 {{% /collapse-content %}}
 
