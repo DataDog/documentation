@@ -800,10 +800,10 @@ The configuration sends the Collector's own metrics back to its local OTLP recei
 
 ## OTLP intake limits
 
-Datadog enforces the following limits when ingesting OTLP metrics. Data that exceeds a limit is rejected or dropped as noted.
+Datadog enforces the following limits when ingesting OTLP data. Data that exceeds a limit is rejected or dropped as noted.
 
 **Payload size**
-: Requests above the maximum payload size (5.1 MiB uncompressed) are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit.
+: Each intake endpoint enforces a maximum payload size per request. Requests above the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit. For the payload size limit of each endpoint, see [Intake limits][7].
 
 **Histogram bucket count**
 : Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
@@ -818,4 +818,5 @@ Datadog enforces the following limits when ingesting OTLP metrics. Data that exc
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
+[7]: /opentelemetry/setup/otlp_ingest/#intake-limits
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

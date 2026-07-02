@@ -27,7 +27,7 @@ Datadog uses [OpenTelemetry semantic conventions][2] to recognize system informa
 
 ## Opting in to the feature
 
-To use this feature, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
+For gateway deployments, or to manually control which resources are used for host metadata, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
 
 Resources populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
 
