@@ -33,7 +33,7 @@ CUPED takes the raw (non-CUPED) lift estimate for a metric and *augments* it wit
 CUPED lift = Δ + adjustment_1 + adjustment_2 + ... + adjustment_n
 ```
 
-To avoid introducing bias, the adjustment terms must be chosen carefully. Specifically, they must be *zero-in-expectation*. This means that if the experiment were run many times, each with a different sample of users in the control and treatment variants, the average of the adjustments across those samples would equal zero.
+To avoid introducing bias, the adjustment terms must be chosen carefully. Specifically, they must be *zero-in-expectation*. This means that if the experiment were run many times, each with a different sample of users in the control and treatment variants, the average of the adjustments across those samples would equal zero. The requirement that the adjustments are zero-in-expectation ensures that the CUPED lift aims at the same target as the non-CUPED lift, and with carefully chosen coefficients, it does so with less sampling variance.
 
 Each adjustment has the form:
 
