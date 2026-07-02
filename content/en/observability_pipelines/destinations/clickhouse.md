@@ -114,7 +114,7 @@ A batch of events is flushed when one of these parameters is met. Batching is al
 
 | Maximum Events | Timeout (seconds) |
 |----------------|-------------------|
-| None           | 1                 |
+| No limit       | 1                 |
 
 ## Further reading
 
