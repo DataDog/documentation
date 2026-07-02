@@ -1128,7 +1128,7 @@
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
   "GetRuleBasedView": {
-    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "description": "**This endpoint is deprecated.** Use the [Security Monitoring - Search Security Findings](https://docs.datadoghq.com/api/latest/security-monitoring/search-security-findings/) endpoint instead.\n\nGet an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
     "summary": "Get the rule-based view of compliance findings"
   },
   "ListContainerImages": {

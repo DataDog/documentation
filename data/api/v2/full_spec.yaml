@@ -12749,9 +12749,25 @@ components:
                 - id: row_id_2
                   type: row
           type: reference-tables-batch-rows-query
+        included:
+          - attributes:
+              values:
+                ip_address: 102.130.113.9
+            id: row_id_1
+            type: row
+          - attributes:
+              values:
+                ip_address: 102.130.113.10
+            id: row_id_2
+            type: row
       properties:
         data:
           $ref: "#/components/schemas/BatchRowsQueryResponseData"
+        included:
+          description: Full row resources matching the query, included alongside the relationship references in `data`.
+          items:
+            $ref: "#/components/schemas/TableRowResourceData"
+          type: array
       type: object
     BatchRowsQueryResponseData:
       description: Data object for a batch rows query response.
@@ -13940,6 +13956,91 @@ components:
         tags:
           $ref: "#/components/schemas/TagsEventAttribute"
       type: object
+    CIAppPipelineEventFinishedJob:
+      description: Details of a finished CI job.
+      properties:
+        dependencies:
+          description: A list of job IDs that this job depends on.
+          example: ["f7e6a006-a029-46c3-b0cc-742c9d7d363b", "c8a69849-3c3b-4721-8b33-3e8ec2df1ebe"]
+          items:
+            description: A list of job IDs.
+            type: string
+          nullable: true
+          type: array
+        end:
+          description: Time when the job run finished. The time format must be RFC3339.
+          example: "2023-05-31T15:30:00Z"
+          format: date-time
+          type: string
+        error:
+          $ref: "#/components/schemas/CIAppCIError"
+        git:
+          $ref: "#/components/schemas/CIAppGitInfo"
+        id:
+          description: The UUID for the job. It has to be unique within each pipeline execution.
+          example: c865bad4-de82-44b8-ade7-2c987528eb54
+          type: string
+        level:
+          $ref: "#/components/schemas/CIAppPipelineEventJobLevel"
+        metrics:
+          $ref: "#/components/schemas/CIAppPipelineEventMetrics"
+        name:
+          description: The name for the job.
+          example: test
+          type: string
+        node:
+          $ref: "#/components/schemas/CIAppHostInfo"
+        parameters:
+          $ref: "#/components/schemas/CIAppPipelineEventParameters"
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: "76b572af-a078-42b2-a08a-cc28f98b944f"
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: |-
+            Time when the job run instance started (it should not include any queue time).
+            The time format must be RFC3339.
+          example: "2023-05-31T15:30:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/CIAppPipelineEventJobStatus"
+        tags:
+          $ref: "#/components/schemas/CIAppPipelineEventTags"
+        url:
+          description: The URL to look at the job in the CI provider UI.
+          example: https://ci-platform.com/job/your-job-name/build/123
+          type: string
+      required:
+        - level
+        - id
+        - name
+        - pipeline_unique_id
+        - pipeline_name
+        - start
+        - end
+        - status
+        - url
+      type: object
     CIAppPipelineEventFinishedPipeline:
       description: Details of a finished pipeline.
       properties:
@@ -14026,6 +14127,85 @@ components:
         - status
         - partial_retry
       type: object
+    CIAppPipelineEventInProgressJob:
+      description: Details of a running CI job.
+      properties:
+        dependencies:
+          description: A list of job IDs that this job depends on.
+          example: ["f7e6a006-a029-46c3-b0cc-742c9d7d363b", "c8a69849-3c3b-4721-8b33-3e8ec2df1ebe"]
+          items:
+            description: A list of job IDs.
+            type: string
+          nullable: true
+          type: array
+        error:
+          $ref: "#/components/schemas/CIAppCIError"
+        git:
+          $ref: "#/components/schemas/CIAppGitInfo"
+        id:
+          description: The UUID for the job. It must match the ID of the corresponding finished job.
+          example: c865bad4-de82-44b8-ade7-2c987528eb54
+          type: string
+        level:
+          $ref: "#/components/schemas/CIAppPipelineEventJobLevel"
+        metrics:
+          $ref: "#/components/schemas/CIAppPipelineEventMetrics"
+        name:
+          description: The name for the job.
+          example: test
+          type: string
+        node:
+          $ref: "#/components/schemas/CIAppHostInfo"
+        parameters:
+          $ref: "#/components/schemas/CIAppPipelineEventParameters"
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: "76b572af-a078-42b2-a08a-cc28f98b944f"
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: |-
+            Time when the job run instance started (it should not include any queue time).
+            The time format must be RFC3339.
+          example: "2023-05-31T15:30:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/CIAppPipelineEventJobInProgressStatus"
+        tags:
+          $ref: "#/components/schemas/CIAppPipelineEventTags"
+        url:
+          description: The URL to look at the job in the CI provider UI.
+          example: https://ci-platform.com/job/your-job-name/build/123
+          type: string
+      required:
+        - level
+        - id
+        - name
+        - pipeline_unique_id
+        - pipeline_name
+        - start
+        - status
+        - url
+      type: object
     CIAppPipelineEventInProgressPipeline:
       description: Details of a running pipeline.
       properties:
@@ -14107,87 +14287,15 @@ components:
       type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
-      properties:
-        dependencies:
-          description: A list of job IDs that this job depends on.
-          example: ["f7e6a006-a029-46c3-b0cc-742c9d7d363b", "c8a69849-3c3b-4721-8b33-3e8ec2df1ebe"]
-          items:
-            description: A list of job IDs.
-            type: string
-          nullable: true
-          type: array
-        end:
-          description: Time when the job run finished. The time format must be RFC3339.
-          example: "2023-05-31T15:30:00Z"
-          format: date-time
-          type: string
-        error:
-          $ref: "#/components/schemas/CIAppCIError"
-        git:
-          $ref: "#/components/schemas/CIAppGitInfo"
-        id:
-          description: The UUID for the job. It has to be unique within each pipeline execution.
-          example: c865bad4-de82-44b8-ade7-2c987528eb54
-          type: string
-        level:
-          $ref: "#/components/schemas/CIAppPipelineEventJobLevel"
-        metrics:
-          $ref: "#/components/schemas/CIAppPipelineEventMetrics"
-        name:
-          description: The name for the job.
-          example: test
-          type: string
-        node:
-          $ref: "#/components/schemas/CIAppHostInfo"
-        parameters:
-          $ref: "#/components/schemas/CIAppPipelineEventParameters"
-        pipeline_name:
-          description: The parent pipeline name.
-          example: Build
-          type: string
-        pipeline_unique_id:
-          description: The parent pipeline UUID.
-          example: "76b572af-a078-42b2-a08a-cc28f98b944f"
-          type: string
-        queue_time:
-          description: The queue time in milliseconds, if applicable.
-          example: 1004
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        stage_id:
-          description: The parent stage UUID (if applicable).
-          nullable: true
-          type: string
-        stage_name:
-          description: The parent stage name (if applicable).
-          nullable: true
-          type: string
-        start:
-          description: Time when the job run instance started (it should not include any queue time). The time format must be RFC3339.
-          example: "2023-05-31T15:30:00Z"
-          format: date-time
-          type: string
-        status:
-          $ref: "#/components/schemas/CIAppPipelineEventJobStatus"
-        tags:
-          $ref: "#/components/schemas/CIAppPipelineEventTags"
-        url:
-          description: The URL to look at the job in the CI provider UI.
-          example: https://ci-platform.com/job/your-job-name/build/123
-          type: string
-      required:
-        - level
-        - id
-        - name
-        - pipeline_unique_id
-        - pipeline_name
-        - start
-        - end
-        - status
-        - url
-      type: object
+      oneOf:
+        - $ref: "#/components/schemas/CIAppPipelineEventFinishedJob"
+        - $ref: "#/components/schemas/CIAppPipelineEventInProgressJob"
+    CIAppPipelineEventJobInProgressStatus:
+      description: The in-progress status of the job.
+      enum: ["running"]
+      example: running
+      type: string
+      x-enum-varnames: ["RUNNING"]
     CIAppPipelineEventJobLevel:
       default: job
       description: Used to distinguish between pipelines, stages, jobs, and steps.
@@ -20011,10 +20119,14 @@ components:
         - CONTAINER
         - CALLOUTVALUE
     Condition:
-      description: Targeting condition details.
+      description: |-
+        Targeting condition details. A condition is either an inline
+        predicate with `operator`, `attribute`, and `value`, or a reference to a
+        saved filter with `saved_filter_id`. The inline fields are omitted for saved-filter
+        references.
       properties:
         attribute:
-          description: The user or request attribute to evaluate.
+          description: The user or request attribute to evaluate. Omitted for saved-filter references.
           example: "country"
           type: string
         created_at:
@@ -20029,13 +20141,19 @@ components:
           type: string
         operator:
           $ref: "#/components/schemas/ConditionOperator"
+        saved_filter_id:
+          description: The ID of the saved filter referenced by this condition, or null for inline conditions.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          nullable: true
+          type: string
         updated_at:
           description: The timestamp when the condition was last updated.
           example: "2024-01-01T12:00:00Z"
           format: date-time
           type: string
         value:
-          description: Values used by the selected operator.
+          description: Values used by the selected operator. Omitted for saved-filter references.
           example: ["US", "CA"]
           items:
             description: Target value for the selected operator.
@@ -20043,9 +20161,6 @@ components:
           type: array
       required:
         - id
-        - operator
-        - attribute
-        - value
         - created_at
         - updated_at
       type: object
@@ -20076,25 +20191,32 @@ components:
         - IS_NULL
         - EQUALS
     ConditionRequest:
-      description: Condition request payload for targeting rules.
+      description: |-
+        Condition request payload for targeting rules. A condition is either an inline
+        predicate with `operator`, `attribute`, and `value`, or a reference to a
+        saved filter with `saved_filter_id`. The two shapes are mutually exclusive.
       properties:
         attribute:
-          description: The user or request attribute to evaluate.
+          description: The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
           example: "user_tier"
           type: string
         operator:
           $ref: "#/components/schemas/ConditionOperator"
+        saved_filter_id:
+          description: |-
+            The ID of a saved filter to reference as this condition. Mutually exclusive
+            with `operator`, `attribute`, and `value`. When set, the saved filter's
+            targeting rules are evaluated in place of an inline predicate.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          type: string
         value:
-          description: Values used by the selected operator.
+          description: Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
           example: ["premium", "enterprise"]
           items:
             description: Target value for the selected operator.
             type: string
           type: array
-      required:
-        - operator
-        - attribute
-        - value
       type: object
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
@@ -36991,7 +37113,11 @@ components:
         attributes:
           $ref: "#/components/schemas/FlakyTestAttributes"
         id:
-          description: Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. On the Test Runs UI it is the same as the `test_fingerprint_fqn` tag.
+          description: |-
+            Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. It is the
+            value of the `@test.fingerprint_fqn` facet on test events, which you can search on in the Test
+            Optimization Explorer to locate a specific test. To filter search results by this ID, use the
+            `fingerprint_fqn` search key.
           type: string
         type:
           $ref: "#/components/schemas/FlakyTestType"
@@ -37373,6 +37499,9 @@ components:
             - `@git.branch`
             - `@test.codeowners`
             - `env`
+            - `fingerprint_fqn`
+
+            Use `fingerprint_fqn` to filter by a test's stable Fingerprint FQN (the same value as the test's `id`).
           example: 'flaky_test_state:active @git.repository.id_v2:"github.com/datadog/shopist"'
           type: string
       type: object
@@ -57503,6 +57632,9 @@ components:
         links:
           first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
           self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+        meta:
+          page:
+            next_continuation_token: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
       properties:
         data:
           description: The rows.
@@ -57511,6 +57643,8 @@ components:
           type: array
         links:
           $ref: "#/components/schemas/ListRowsResponseLinks"
+        meta:
+          $ref: "#/components/schemas/ListRowsResponseMeta"
       required:
         - data
         - links
@@ -57533,6 +57667,20 @@ components:
       required:
         - self
         - first
+      type: object
+    ListRowsResponseMeta:
+      description: Contains pagination details, including the continuation token for fetching additional rows.
+      properties:
+        page:
+          $ref: "#/components/schemas/ListRowsResponseMetaPage"
+      type: object
+    ListRowsResponseMetaPage:
+      description: Contains the continuation token for navigating to the next page of rows.
+      properties:
+        next_continuation_token:
+          description: Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
+          example: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
+          type: string
       type: object
     ListRulesResponse:
       description: Scorecard rules response.
@@ -58413,19 +58561,35 @@ components:
         - client_email
       type: object
     LogsArchiveIntegrationS3:
-      description: The S3 Archive's integration destination.
+      description: >-
+        The S3 Archive's integration destination. You must provide one of the following: `access_key_id` alone, or both `account_id` and `role_name` together.
+      oneOf:
+        - $ref: "#/components/schemas/LogsArchiveIntegrationS3AccessKey"
+        - $ref: "#/components/schemas/LogsArchiveIntegrationS3Role"
+    LogsArchiveIntegrationS3AccessKey:
+      description: The S3 Archive's integration destination using an access key.
+      properties:
+        access_key_id:
+          description: The access key ID for the integration.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+      required:
+        - access_key_id
+      type: object
+    LogsArchiveIntegrationS3Role:
+      description: The S3 Archive's integration destination using an IAM role.
       properties:
         account_id:
           description: The account ID for the integration.
           example: "123456789012"
           type: string
         role_name:
-          description: The path of the integration.
+          description: The name of the role to assume for the integration.
           example: role-name
           type: string
       required:
-        - role_name
         - account_id
+        - role_name
       type: object
     LogsArchiveOrder:
       description: A ordered list of archive IDs.
@@ -65090,6 +65254,16 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
+      description: Server-side encryption type for Amazon S3.
+      enum:
+        - "aws:kms"
+        - AES256
+      example: "aws:kms"
+      type: string
+      x-enum-varnames:
+        - AWS_KMS
+        - AES256
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -65243,6 +65417,14 @@ components:
         region:
           description: AWS region of the S3 bucket.
           example: "us-east-1"
+          type: string
+        server_side_encryption:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationServerSideEncryption"
+        ssekms_key_id:
+          description: |-
+            The AWS KMS key ID used for SSE-KMS encryption.
+            Only applies when `server_side_encryption` is set to `aws:kms`.
+          example: "arn:aws:kms:us-east-1:123456789012:key/mrk-abc123"
           type: string
         storage_class:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass"
@@ -65683,6 +65865,9 @@ components:
             description: The ID of a component whose output is used as input for this destination.
             type: string
           type: array
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          description: Configuration for TLS encryption.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestinationType"
       required:
@@ -68405,6 +68590,10 @@ components:
         The `parse_grok` processor extracts structured fields from unstructured log messages using Grok patterns.
 
         **Supported pipeline types:** logs
+      example:
+        id: "parse-grok-processor"
+        include: "service:my-service"
+        type: "parse_grok"
       properties:
         disable_library_rules:
           default: false
@@ -68417,6 +68606,11 @@ components:
           description: Indicates whether the processor is enabled.
           example: true
           type: boolean
+        field:
+          default: "message"
+          description: The log field to parse with the Grok rules.
+          example: "message"
+          type: string
         id:
           description: A unique identifier for this processor.
           example: "parse-grok-processor"
@@ -68426,9 +68620,9 @@ components:
           example: "service:my-service"
           type: string
         rules:
-          description: The list of Grok parsing rules. If multiple matching rules are provided, they are evaluated in order. The first successful match is applied.
+          description: The list of Grok parsing rules selected by either source field or include query.
           items:
-            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRule"
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleItem"
           type: array
         type:
           $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorType"
@@ -68440,6 +68634,37 @@ components:
         - enabled
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineParseGrokProcessorIncludeRule:
+      description: |-
+        A Grok parsing rule selected using the `include` query. Each rule defines how to extract structured fields
+        from logs matching a Datadog search query.
+      properties:
+        include:
+          description: A Datadog search query used to determine which logs this Grok rule targets.
+          example: "service:my-service"
+          type: string
+        match_rules:
+          description: |-
+            A list of Grok parsing rules that define how to extract fields from matching logs.
+            Each rule must contain a name and a valid Grok pattern.
+          example:
+            - name: "MyParsingRule"
+              rule: '%{word:user} connected on %{date("MM/dd/yyyy"):date}'
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
+          type: array
+        support_rules:
+          description: A list of Grok helper rules that can be referenced by the parsing rules.
+          example:
+            - name: "user"
+              rule: "%{word:user.name}"
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleSupportRule"
+          type: array
+      required:
+        - include
+        - match_rules
+      type: object
     ObservabilityPipelineParseGrokProcessorRule:
       description: |-
         A Grok parsing rule used in the `parse_grok` processor. Each rule defines how to extract structured fields
@@ -68472,6 +68697,11 @@ components:
         - source
         - match_rules
       type: object
+    ObservabilityPipelineParseGrokProcessorRuleItem:
+      description: A single Grok parsing rule, selected by either source field or include query.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRule"
+        - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorIncludeRule"
     ObservabilityPipelineParseGrokProcessorRuleMatchRule:
       description: |-
         Defines a Grok parsing rule, which extracts structured fields from log content using named Grok patterns.
@@ -87672,6 +87902,10 @@ components:
           type: integer
         creator:
           $ref: "#/components/schemas/SecurityMonitoringUser"
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           description: Whether the critical asset is enabled.
           example: true
@@ -87716,6 +87950,10 @@ components:
     SecurityMonitoringCriticalAssetCreateAttributes:
       description: Object containing the attributes of the critical asset to be created.
       properties:
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           default: true
           description: Whether the critical asset is enabled. Defaults to `true` if not specified.
@@ -87808,6 +88046,10 @@ components:
     SecurityMonitoringCriticalAssetUpdateAttributes:
       description: The critical asset properties to be updated.
       properties:
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           description: Whether the critical asset is enabled.
           example: true
@@ -107736,7 +107978,11 @@ components:
       description: Details of what tests to update and their new attributes.
       properties:
         id:
-          description: The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and is the
+            value of the `@test.fingerprint_fqn` facet on test events. You can find it by searching on
+            `@test.fingerprint_fqn` in the Test Optimization Explorer, or by filtering the Search flaky tests
+            endpoint with the `fingerprint_fqn` key.
           example: 4eb1887a8adb1847
           type: string
         new_state:
@@ -107806,7 +108052,10 @@ components:
           description: Error message if the update failed.
           type: string
         id:
-          description: The ID of the flaky test from the request. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test from the request. This is the value of the `@test.fingerprint_fqn` facet
+            on test events, the same ID accepted by the update request and returned by the Search flaky tests
+            endpoint.
           example: 4eb1887a8adb1847
           type: string
         success:
@@ -125189,7 +125438,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/compliance_findings/rule_based_view:
     get:
+      deprecated: true
       description: |-
+        **This endpoint is deprecated.** Use the [Security Monitoring - Search Security Findings](https://docs.datadoghq.com/api/latest/security-monitoring/search-security-findings/) endpoint instead.
+
         Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.
         Supports filtering by compliance framework, framework version, and additional query filters.
       operationId: GetRuleBasedView
@@ -125268,6 +125520,7 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_findings_read
+      x-sunset: "2027-06-26"
       x-unstable: |-
         **Note**: This endpoint is in Preview and subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -134456,6 +134709,7 @@ paths:
                 - us5.datadoghq.com
                 - ap1.datadoghq.com
                 - ap2.datadoghq.com
+                - uk1.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
@@ -134465,6 +134719,7 @@ paths:
                 - US5
                 - AP1
                 - AP2
+                - UK1
                 - EU1
                 - GOV
                 - US2_GOV
@@ -152117,6 +152372,7 @@ paths:
                 - us5.datadoghq.com
                 - ap1.datadoghq.com
                 - ap2.datadoghq.com
+                - uk1.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
@@ -152126,6 +152382,7 @@ paths:
                 - US5
                 - AP1
                 - AP2
+                - UK1
                 - EU1
                 - GOV
                 - US2_GOV
@@ -152405,6 +152662,18 @@ paths:
                         - team:intake
                         - team:app
                     type: archives
+              s3_access_key_id:
+                value:
+                  data:
+                    attributes:
+                      destination:
+                        bucket: my-bucket
+                        integration:
+                          access_key_id: AKIAIOSFODNN7EXAMPLE
+                        type: s3
+                      name: Nginx Archive
+                      query: source:nginx
+                    type: archives
             schema:
               $ref: "#/components/schemas/LogsArchiveCreateRequest"
         description: The definition of the new archive.
@@ -152423,6 +152692,21 @@ paths:
                           integration:
                             account_id: "123456789012"
                             role_name: my-role
+                          type: s3
+                        include_tags: false
+                        name: Nginx Archive
+                        query: source:nginx
+                        state: WORKING
+                      id: 00000000-0000-0000-0000-000000000002
+                      type: archives
+                s3_access_key_id:
+                  value:
+                    data:
+                      attributes:
+                        destination:
+                          bucket: my-bucket
+                          integration:
+                            access_key_id: AKIAIOSFODNN7EXAMPLE
                           type: s3
                         include_tags: false
                         name: Nginx Archive
@@ -152582,6 +152866,18 @@ paths:
                         - team:intake
                         - team:app
                     type: archives
+              s3_access_key_id:
+                value:
+                  data:
+                    attributes:
+                      destination:
+                        bucket: my-bucket
+                        integration:
+                          access_key_id: AKIAIOSFODNN7EXAMPLE
+                        type: s3
+                      name: Nginx Archive
+                      query: source:nginx
+                    type: archives
             schema:
               $ref: "#/components/schemas/LogsArchiveCreateRequest"
         description: New definition of the archive.
@@ -152600,6 +152896,21 @@ paths:
                           integration:
                             account_id: "123456789012"
                             role_name: my-role
+                          type: s3
+                        include_tags: false
+                        name: Nginx Archive
+                        query: source:nginx
+                        state: WORKING
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: archives
+                s3_access_key_id:
+                  value:
+                    data:
+                      attributes:
+                        destination:
+                          bucket: my-bucket
+                          integration:
+                            access_key_id: AKIAIOSFODNN7EXAMPLE
                           type: s3
                         include_tags: false
                         name: Nginx Archive
@@ -154730,6 +155041,9 @@ paths:
         operator: OR
         permissions:
           - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
@@ -154809,6 +155123,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/order:
     post:
       description: |-
@@ -154872,6 +155189,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/{id}:
     delete:
       description: |-
@@ -154915,6 +155235,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a single tag indexing rule by its UUID.
       operationId: GetTagIndexingRule
@@ -154980,6 +155303,9 @@ paths:
         operator: OR
         permissions:
           - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
@@ -155072,6 +155398,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: |-
@@ -155507,6 +155836,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         Returns why a metric is excluded from tag indexing rules.
@@ -155571,6 +155903,9 @@ paths:
         operator: OR
         permissions:
           - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Exempt a metric from all tag indexing rules. The response includes the created
@@ -155641,6 +155976,9 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tag-indexing-rules:
     get:
       description: |-
@@ -155693,6 +156031,9 @@ paths:
         operator: OR
         permissions:
           - metrics_read
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: |-
@@ -176251,9 +176592,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
         Create ServiceNow tickets for security findings.
@@ -176325,9 +176663,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-
@@ -176732,7 +177067,7 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Filter indicators whose triage state was updated by a specific user UUID.
+        - description: Filter indicators whose triage state was updated by a specific user identified by their handle.
           in: query
           name: worked_by
           required: false
@@ -199511,9 +199846,11 @@ servers:
           - us5.datadoghq.com
           - ap1.datadoghq.com
           - ap2.datadoghq.com
+          - uk1.datadoghq.com
           - datadoghq.eu
           - ddog-gov.com
           - us2.ddog-gov.com
+          - uk1.datadoghq.com
       subdomain:
         default: api
         description: The subdomain where the API is deployed.

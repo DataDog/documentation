@@ -72,7 +72,7 @@ Get started with Cloud Security Vulnerabilities and cover your infrastructure in
 
 You can also use multiple deployment methods together: use the unified Datadog Agent where you already have it deployed, Agentless elsewhere, and CI/CD scanning to catch vulnerabilities before production.
 
-After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour.
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} page][1] within an hour.
 
 Use these tables to decide which solution to start with:
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
@@ -93,15 +93,15 @@ Use these tables to decide which solution to start with:
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
 ## Continuously detect, prioritize, and remediate exploitable vulnerabilities
-The [Cloud Security Vulnerabilities Findings page][1] helps you investigate vulnerabilities detected across your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
+The [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} page][1] helps you investigate vulnerabilities detected across your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
 
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
-For vulnerabilities with available fixes, the Findings page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
+For vulnerabilities with available fixes, the {{< ui >}}Findings{{< /ui >}} page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
-In [Container Images][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
+In [{{< ui >}}Container Images{{< /ui >}}][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
@@ -114,7 +114,7 @@ To enable this code-to-cloud mapping, add OCI image annotations to your containe
 To set up source linking, see [Link Dockerfile to vulnerabilities][22] in the CI/CD container image scanning guide.
 
 ## Automation and Jira integration
-Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
+Make Cloud Security Vulnerabilities part of your daily workflow by setting up [{{< ui >}}security notification rules{{< /ui >}}][17] and [automation pipelines (in Preview)][20]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
 - Automatically create Jira tickets
 - Configure SLAs to remediate vulnerabilities
@@ -122,13 +122,13 @@ Make Cloud Security Vulnerabilities part of your daily workflow by setting up [s
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="The notification rule setup screen" width="100%">}}
 
 ## Tracking and reporting
-Use the out-of-the-box [Cloud Security Vulnerabilities dashboard][18] to track and report progress to stakeholders. Clone and modify it as needed to fit your unique needs.
+Use the out-of-the-box [{{< ui >}}Cloud Security Vulnerabilities{{< /ui >}} dashboard][18] to track and report progress to stakeholders. Clone and modify it as needed to fit your unique needs.
 
 {{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="The Cloud Security Vulnerabilities dashboard" width="100%">}}
 
 ## Explore infrastructure packages
 
-The [Infrastructure Packages Catalog][19] provides a real-time inventory of all packages across hosts, host images, and container images deployed in your infrastructure. It offers an interface you can use to investigate your SBOMs, enriched with vulnerability and runtime context.
+The [{{< ui >}}Infrastructure Packages Catalog{{< /ui >}}][19] provides a real-time inventory of all packages across hosts, host images, and container images deployed in your infrastructure. It offers an interface you can use to investigate your SBOMs, enriched with vulnerability and runtime context.
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 

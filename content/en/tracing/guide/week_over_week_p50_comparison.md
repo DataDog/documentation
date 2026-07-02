@@ -41,7 +41,7 @@ Datadog can show you the latency of your application over time and how it compar
 
     Datadog APM allows you to compare the different percentiles of latency for the service over time but also to view the full distribution of latencies in the Latency Distribution graph below.
 
-4. **Add the previous week's p50 performance** by checking the `Week` option in the *Compare to Last* section on the right.
+4. **Add the previous week's p50 performance** by checking the `Week` option in the {{< ui >}}Compare to Last{{< /ui >}} section on the right.
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="Full view of latency chart with week-over-week display enabled" style="width:90%;">}}
 

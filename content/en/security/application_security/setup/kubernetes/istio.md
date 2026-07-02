@@ -67,7 +67,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Add the annotation to your `DatadogAgent` resource to enable the feature, and set the mode using `spec.override.clusterAgent.env`:
+Add annotations to your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -76,12 +76,6 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
-spec:
-  override:
-    clusterAgent:
-      env:
-        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
-          value: "sidecar"
 ```
 
 Apply with:

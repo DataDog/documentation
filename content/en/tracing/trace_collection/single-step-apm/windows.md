@@ -33,12 +33,12 @@ You can enable APM on Windows in the following ways:
 To instrument only .NET applications running on IIS:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
-1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
+1. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}.
 1. (Optional) Set your SDK version:
    
    By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET SDK. If you need to pin a specific version:
 
-   1. Under **Instrumentation Configuration**, select **Customize Library Versions**.
+   1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
    
 1. Copy and run the provided MSI install command on your Windows host.
@@ -60,12 +60,12 @@ Host-wide instrumentation for Windows is in Preview and limited to Preview parti
 To instrument Java and .NET applications across your entire Windows host:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
-1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
+1. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}.
 1. (Optional) Set your SDK version:
    
    By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET and Java SDK. If you need to pin a specific version:
 
-   1. Under **Instrumentation Configuration**, select **Customize Library Versions**.
+   1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
 
 1. Copy and run the provided MSI install command on your Windows host.
@@ -86,22 +86,22 @@ To instrument Java and .NET applications across your entire Windows host:
 
 If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
 
-1. In Datadog, go to [**Fleet Automation > Configuration**][6].
-1. Click **Configure Agents**.
+1. In Datadog, go to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][6].
+1. Click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Apply filters to select the agents you want to configure, then click **Next**.
 
    {{< img src="tracing/trace_collection/filter-agents.png" alt="The agent filtering screen in Fleet Automation, with options to scope by environment, operating system, and hostname" style="width:100%;" >}}
 
-1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+1. Click the {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} tile, then click {{< ui >}}Next{{< /ui >}}.
 
    {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:80%;" >}}
 
-1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual SDK versions.
+1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
-1. Click **Next**.
-1. Review your configuration and click **Deploy Configuration**.
+1. Click {{< ui >}}Next{{< /ui >}}.
+1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
 1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
@@ -134,10 +134,10 @@ Instrumentation rules let you control which processes are automatically instrume
 
 To configure instrumentation rules:
 
-1. In Datadog, go to **APM** > **Service Setup** > [**Manage Instrumentation Rules**][5].
-1. Click **Add or Edit Rules**.
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][5].
+1. Click {{< ui >}}Add or Edit Rules{{< /ui >}}.
 1. Define instrumentation rules:
-   1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
+   1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
    1. Name your rule.
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
 
@@ -148,17 +148,17 @@ To configure instrumentation rules:
    **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
 
 1. Set the default behavior (allow or block) for processes that do not match any rule.
-1. Click **Next** to preview your rules.
-1. Click **Deploy Rules**.
+1. Click {{< ui >}}Next{{< /ui >}} to preview your rules.
+1. Click {{< ui >}}Deploy Rules{{< /ui >}}.
 
-If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
+If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click {{< ui >}}Export{{< /ui >}} to export the configuration file and apply it manually to your hosts.
 
 #### Define rule conditions
 
 Each rule consists of one or more conditions. A condition includes the following elements:
-- **Attribute**: The process property that the rule evaluates.
-- **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
-- **Value**: The text or pattern to match, such as a process name or command-line flag.
+- {{< ui >}}Attribute{{< /ui >}}: The process property that the rule evaluates.
+- {{< ui >}}Operator{{< /ui >}}: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
+- {{< ui >}}Value{{< /ui >}}: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
 | Attribute | Description | Example |
@@ -186,7 +186,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 {{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
 
-Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use <strong>IIS Application Pool</strong> to identify target applications. This approach is useful for gradual rollouts.
+Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use {{< ui >}}IIS Application Pool{{< /ui >}} to identify target applications. This approach is useful for gradual rollouts.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation" style="width:100%;" >}}
 

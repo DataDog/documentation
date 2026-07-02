@@ -180,7 +180,7 @@ Change Tracking follows these types of changes across your infrastructure:
 [8]: /database_monitoring/
 [9]: /data_streams/
 [10]: /database_monitoring/connect_dbm_and_apm/
-[11]: /service_management/workflows/connections/#work-with-connections
+[11]: /actions/connections/#work-with-connections
 [12]: /database_monitoring/schema_explorer
 [13]: /infrastructure/resource_catalog/resource_changes/
 [14]: /change_tracking/feature_flags

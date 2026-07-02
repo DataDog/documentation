@@ -22,7 +22,7 @@ algolia:
 
 If you don't use GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][5]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][5]. Afterwards, uploads from your non-default branches will succeed.
 
 Prerequisites:
 

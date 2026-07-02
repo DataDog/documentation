@@ -106,7 +106,7 @@ To verify that the operation completed successfully, navigate to the [Teams list
 
 You can map an existing Datadog Team to an Okta group. Establishing a link from the Okta group to the Datadog Team causes the Datadog Team to be managed by Okta going forward.
 
-**Note:** In order to synchronize an existing Datadog Team with an Okta group, the two names must match exactly.
+**Note:** To synchronize an existing Datadog Team with an Okta group, the handle derived from the Okta group name must match the existing Datadog Team's handle exactly.
 
 1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
 1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.

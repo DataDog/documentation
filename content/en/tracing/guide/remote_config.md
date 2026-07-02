@@ -95,8 +95,8 @@ datadog:
 To disable Remote Configuration at the organization level:
 1. Ensure you have the required `org_management` permission.
 1. Go to the [Remote Configuration][5] settings page.
-1. Click **Disable**.
-1. When the warning message appears, click **Disable** again.
+1. Click {{< ui >}}Disable{{< /ui >}}.
+1. When the warning message appears, click {{< ui >}}Disable{{< /ui >}} again.
 
 ## Further reading
 
