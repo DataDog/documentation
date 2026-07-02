@@ -44,7 +44,7 @@ datadog-ci trace [--name <name>] -- <command>
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
-{{< site-region region="us,us3,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,eu,ap1,ap2,uk1" >}}
 <pre>
 <code>
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
@@ -97,7 +97,7 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE`
@@ -116,7 +116,7 @@ datadog-ci trace span [--name <name>] [--start-time <timestamp-ms>] [--end-time 
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
-{{< site-region region="us,us3,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,eu,ap1,ap2,uk1" >}}
 <pre>
 <code>
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace span \
@@ -172,7 +172,7 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE`

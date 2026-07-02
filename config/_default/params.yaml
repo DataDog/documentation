@@ -204,6 +204,13 @@ allowedRegions:
     exact_domains:
       - "lava.oncall.datadoghq.com"
       - "browser-intake-ap2-datadoghq.com"
+  - name: UK1
+    value: uk1
+    weight: 33
+    domain: uk1.datadoghq.com
+    exact_domains:
+      - "scarlet.oncall.datadoghq.com"
+      - "browser-intake-uk1-datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 35
@@ -300,7 +307,7 @@ unsupported_sites:
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
   azure-automated-log-forwarding: [gov,gov2]
-  azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
+  azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2,uk1]
   backstage: [gov,gov2]
   bits_ai: [gov,gov2]
   bits_ai_sre: [gov,gov2]
@@ -322,8 +329,8 @@ unsupported_sites:
   continuous_integration: [gov,gov2]
   correlation: [gov,gov2] #Event management correlation
   coterm: [gov,gov2]
+  csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
   cpp_log_collection: [gov,gov2]
-  csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov,gov2]
   data_observability: [gov,gov2]
   data_streams: [gov,gov2]
@@ -336,12 +343,12 @@ unsupported_sites:
   exception_replay: [gov,gov2]
   experiments: [gov,gov2]
   feature_flags: [gov,gov2]
-  fips-compliance: [us,us3,us5,eu,ap1,ap2]
-  fips-integrations: [us,us3,us5,eu,ap1,ap2]
-  fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2]
+  fips-compliance: [us,us3,us5,eu,ap1,ap2,uk1]
+  fips-integrations: [us,us3,us5,eu,ap1,ap2,uk1]
+  fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2,uk1]
   fleet-automation-standard-features: [gov,gov2]
   forwarding_audit_events: [gov,gov2]
-  gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2]
+  gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2,uk1]
   getting_started_feature_flags: [gov,gov2]
   gitlab-source-code: [gov,gov2]
   google-hangouts-chat: [gov,gov2]
@@ -403,7 +410,7 @@ unsupported_sites:
   test_optimization: [gov,gov2]
   universal_service_monitoring: [gov,gov2]
   ide_plugins_vscode: [gov,gov2]
-  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2]
+  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2,uk1]
   wiz: [gov,gov2]
   workflow-automation: [gov,gov2]
   workflows: [gov,gov2]

@@ -604,7 +604,7 @@ To enable Cloud Network Monitoring on ECS Fargate, use the following instruction
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{< site-region region="us,us3,us5,eu,uk1" >}}
 ### Enhanced resolution
 
 Optionally, enable resource collection for cloud integrations to allow Cloud Network Monitoring to discover cloud-managed entities.

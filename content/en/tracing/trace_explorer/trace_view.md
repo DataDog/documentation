@@ -50,7 +50,7 @@ To navigate the graph, scroll to zoom, click and drag to move around, and use th
 
 The legend details the color coding of the flame graph. Group spans by either {{< ui >}}Service{{< /ui >}} (default), {{< ui >}}[Base service][1]{{< /ui >}} (service from which the span is emitted), {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Container{{< /ui >}}. Choose to display either the percentage of trace execution time ({{< ui >}}% Exec Time{{< /ui >}}) or span count ({{< ui >}}Spans{{< /ui >}}) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the {{< ui >}}Errors{{< /ui >}} checkbox under {{< ui >}}Filter Spans{{< /ui >}}.
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
 
 [2]: /tracing/services/inferred_services
@@ -89,7 +89,7 @@ Each row (span) indicates the following:
 - **Statuses**: When applicable, an HTTP status code is displayed.
 - **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the {{< ui >}}Color by{{< /ui >}} dropdown.
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 Spans from [inferred services][1] are represented with a dashed underline.
 
 [1]: /tracing/services/inferred_services
@@ -176,7 +176,7 @@ The span header contains service, operation, and resource names of the selected 
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 When the span represents a client call from an instrumented service to a database, a queue, or a third-party service, the span header shows the service and the inferred entity.
 
 {{< img src="tracing/trace_view/span_header_inferred.png" alt="Span header inferred" style="width:90%;">}}
@@ -196,7 +196,7 @@ Other information may be displayed under various conditions:
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 When the service name is an override from the base service name, the top of the info section shows the:
 - {{< ui >}}[Base service][2]{{< /ui >}}: service from which the span is emitted, identified by the `@base_service` attribute.
 - {{< ui >}}[Service override][3]{{< /ui >}}: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.

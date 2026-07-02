@@ -221,6 +221,28 @@ const config = new DatadogProviderConfiguration(
 );
 ```
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'UK1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
 
    
 3. Import the React Native logger:

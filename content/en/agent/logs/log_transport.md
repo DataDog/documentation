@@ -109,7 +109,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 {{% /tab %}}
 
 {{% tab "TCP" %}}
-{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2,uk1" >}}
 
 {{% logs-tcp-disclaimer %}}
 
