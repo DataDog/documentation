@@ -16,7 +16,7 @@ The WebSocket source is in Preview. Contact your account manager to request acce
 
 ## Overview
 
-Use Observability Pipelines' WebSocket source to connect the Observability Pipelines Worker as a client to an upstream `ws://` or `wss://` endpoint and ingest the messages it receives as logs. Use this source when your upstream system streams data over a persistent WebSocket connection rather than exposing it through a request-based API.
+Use Observability Pipelines' WebSocket source to connect the Observability Pipelines Worker as a client to an upstream `ws://` or `wss://` endpoint. The Worker ingests the messages as logs. Use this source when your upstream system sends data over a persistent WebSocket connection rather than exposing the data through a request-based API.
 
 ## Prerequisites
 
