@@ -42,7 +42,7 @@ You can use the `security` toolset to:
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
 - **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
-- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and review existing custom WAF rules.
+- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist, and suppress false positives with passlist exclusion filters.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Quickstart
@@ -182,10 +182,6 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 `delete_datadog_security_denylist_entry`
 : Unblocks a previously denylisted entity by setting its expiration in the past.
 : *Permissions required: `Application Security Management Protect Write`*
-
-`get_datadog_security_aap_custom_rules`
-: Reads App & API Protection (AAP) WAF custom rules, either retrieving a single rule by ID or enumerating all rules.
-: *Permissions required: `Application Security Management Protect Read`*
 
 ## Further reading
 

@@ -1388,15 +1388,6 @@ Unblocks a previously denylisted entity by setting its expiration in the past.
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
 
-### `get_datadog_security_aap_custom_rules`
-*Toolset: **security***\
-*Permissions Required: `Application Security Management Protect Read`*\
-Reads App & API Protection (AAP) WAF custom rules, either retrieving a single rule by ID or enumerating all rules.
-
-- List all custom WAF rules for my organization.
-- Get the definition of AAP custom rule "rule-xyz-123".
-- Show me custom security response rules.
-
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
