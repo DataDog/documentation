@@ -126,6 +126,8 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}ServiceNow{{< /ui >}}. The button opens a {{< ui >}}ServiceNow Ticket{{< /ui >}} modal.
    3. Verify that the bidirectional sync is enabled for the configured {{< ui >}}Instance{{< /ui >}} and {{< ui >}}Assignment Group{{< /ui >}}.
 
+{{< img src="security/servicenow_modal.png" alt="Modal used to create a ServiceNow ticket for a Security finding, with two-way sync and statuses mapping enabled." responsive="true" style="width:50%;">}}
+
 You are ready to start creating bidirectional Case Management tickets.
 
 If you do not see the {{< ui >}}Case Management ↔ ServiceNow Integration{{< /ui >}} section, verify that you have completed the prerequisites.
@@ -256,7 +258,11 @@ In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is pro
 
 Existing bidirectional ServiceNow tickets are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.
 
-Hover over the ServiceNow ticket to see its details, including status, priority, and a timeline of changes synced between ServiceNow and Datadog.
+{{< img src="security/bidir-servicenow-existing.png" alt="Finding with an existing ServiceNow ticket: in the Next Steps section, under Tracking, a ServiceNow View incident pill." responsive="true" style="width:100%;">}}
+
+Hover over the ServiceNow ticket to see its details, including status and a timeline of changes synced between ServiceNow and Datadog.
+
+{{< img src="security/bidir-servicenow-existing-hover.png" alt="Tooltip over a ServiceNow ticket pill showing the incident number, status, and a timeline of changes synced between ServiceNow and Datadog." responsive="true" style="width:100%;">}}
 
 In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
