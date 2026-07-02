@@ -100,9 +100,9 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-The examples use the current release, `1.63.0`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+The examples above pin `1.63.0`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
 
-To emit flag evaluation metrics (the `feature_flag.evaluations` metric), use `dd-openfeature` and the Datadog Java tracer 1.62.0 or later, and add the OpenTelemetry SDK dependencies to your application. For the required dependencies and endpoint configuration, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
 ## Configuration
 
@@ -691,3 +691,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
 [6]: /agent/configuration/agent-commands/
 [7]: /account_management/api-app-keys/#api-keys
+[8]: /feature_flags/guide/server_flag_evaluation_metrics/

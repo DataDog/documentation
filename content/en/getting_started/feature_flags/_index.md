@@ -172,7 +172,7 @@ export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< /code-block >}}
 
-To emit flag evaluation metrics, add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+To emit flag evaluation metrics, add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][9].
 
 Register the Datadog OpenFeature provider:
 

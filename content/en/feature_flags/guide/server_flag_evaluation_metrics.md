@@ -51,7 +51,7 @@ You only need to enable the protocol your application uses (gRPC on port 4317, o
 
 ## Step 2: Configure your application
 
-For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. The Java tracer enables flag evaluation metrics through the OpenTelemetry SDK dependencies described in the [next section](#java-add-the-opentelemetry-sdk-dependencies).
+For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. The Java tracer enables flag evaluation metrics through the OpenTelemetry SDK dependencies described in [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies).
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
@@ -60,7 +60,7 @@ DD_METRICS_OTEL_ENABLED=true
 
 ### Java: Add the OpenTelemetry SDK dependencies
 
-The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the OpenTelemetry SDK metrics and OTLP exporter dependencies must be on your application's classpath. Add them alongside your [Java feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
+The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the `opentelemetry-sdk-metrics` and `opentelemetry-exporter-otlp` dependencies must be on your application's classpath. Add them alongside your [Java feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
@@ -110,7 +110,7 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Java tracer, the provider starts its OTLP metrics exporter automatically when the OpenTelemetry SDK is on the classpath. Adding these dependencies enables the metric; setting `DD_METRICS_OTEL_ENABLED` alone does not. This requires the Datadog Java tracer 1.62.0 or later. If the dependencies are missing, no metrics are emitted and the tracer logs `OpenTelemetry SDK is not on the classpath`.
+On the Java tracer, the provider starts its OTLP metrics exporter automatically when the OpenTelemetry SDK is on the classpath. Adding these dependencies enables the metric; setting `DD_METRICS_OTEL_ENABLED` alone does not. If the dependencies are missing, no metrics are emitted and the tracer logs `OpenTelemetry SDK is not on the classpath`.
 
 <div class="alert alert-info">In Spring Boot applications, Spring Boot's OpenTelemetry autoconfiguration also creates an <code>OpenTelemetrySdk</code> bean. If the OpenTelemetry SDK version it resolves does not match the OpenTelemetry API version on the classpath, startup fails with a <code>BeanCreationException</code> for the <code>openTelemetry</code> bean and <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>. Importing the <code>opentelemetry-bom</code> as shown above keeps the API and SDK on the same version and resolves the error.</div>
 
