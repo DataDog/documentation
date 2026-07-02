@@ -1,4 +1,4 @@
-To use Observability Pipelines' WebSocket source, you need the following information available:
+To use Observability Pipelines' WebSocket source, you must have the following information:
 
 1. The full WebSocket URI that the Observability Pipelines Worker connects to. For example, `wss://example.com/stream`.
 2. If the endpoint requires authentication, the credentials for your chosen authorization strategy (a username and password, a bearer token, or a custom `Authorization` header value).
