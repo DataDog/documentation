@@ -1,5 +1,6 @@
 ---
 title: ClickHouse Destination
+description: Learn how to configure the ClickHouse destination.
 disable_toc: false
 products:
 - name: Logs
