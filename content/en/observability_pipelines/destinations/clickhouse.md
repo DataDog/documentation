@@ -75,11 +75,6 @@ When you select `gzip`, you can optionally set the **Compression level** to an i
 Batch encoding is required when **Format** is set to `arrow_stream` and optional for JSON formats.
 
 1. (Optional) Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns results in encoding errors.
-
-#### Batching
-
-Use the **Batching** settings to control how events are grouped into HTTP inserts:
-
 1. (Optional) In the **Max events** field, enter the maximum number of events per batch. Must be `1` or greater.
 1. (Optional) In the **Timeout (secs)** field, enter the maximum time, in seconds, before a partial batch is flushed. Must be between `1` and `65535`. If left unset, the default is 1 second.
 
