@@ -35,6 +35,8 @@ Choose the query language you want to use.
 {{% cloud_siem/add_calculated_fields %}}
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
+
+[1]: /logs/search_syntax/
 {{% /collapse-content %}}
 {{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
 You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
@@ -66,9 +68,6 @@ Conditions are applied to the results returned by your SQL queries. Each query r
 [1]: /ddsql_reference/
 [2]: https://app.datadoghq.com/security/configuration/datasets
 {{% /collapse-content %}}
-
-[1]: /logs/search_syntax/
-[2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
 {{% tab "New Value" %}}
