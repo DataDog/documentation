@@ -1,13 +1,5 @@
-{{- /* Creates an algolia json record for each individual section of the given page.
-
-       Sections are derived from:
-         1. The "lead" content before the first H2/H3 heading (order -1).
-         2. Each H2/H3 heading section (order 0, 1, 2, ...).
-
-       When a section's HTML contains tab-pane blocks (rendered by the tab shortcode
-       as div.tab-pane with a title attribute), the section is further split into
-       one chunk per tab, using the tab title as a synthetic sub-heading. This avoids
-       collapsing tab-structured pages (e.g. profiler/profile_types) into a single blob. */ -}}
+{{- /* Emits a search record per section: lead content before the first H2/H3 (order -1),
+       then each H2/H3 section. Sections with tab-panes are split into one chunk per tab. */ -}}
 
 {{ $hugo_context := .context }}
 {{ $page := .page }}
@@ -16,9 +8,7 @@
 {{ $subcategory := .subcategory }}
 {{ $rank := .rank }}
 
-{{- /* Emits search records for one HTML block under a given base header at a given order.
-       If the block contains tab-panes, emits one record per tab (header = "base - tabTitle"),
-       otherwise emits the block as a single (word-chunked) section. */ -}}
+{{- /* Emits records for one HTML block under $baseHeader; splits into per-tab chunks if it contains tab-panes. */ -}}
 {{- define "partials/algolia-section-chunks" -}}
   {{- $hugo_context := .ctx.context -}}
   {{- $page := .ctx.page -}}
@@ -33,10 +23,7 @@
   {{- $tabRe := `<div[^>]*class="[^"]*tab-pane[^"]*"[^>]*>` -}}
   {{- $tabOpens := findRE $tabRe $html -}}
 
-  {{- /* Guard against nested or multiple tab groups: the tab shortcode emits exactly one
-         code-tabs wrapper per group, so a second wrapper after the first tab-pane means the
-         flat split would mislabel headers. In that case, skip tab-splitting and index the
-         block as a single section (all content is still captured, just not tab-split). */ -}}
+  {{- /* Skip tab-splitting if a second code-tabs wrapper follows the first pane (multiple/nested groups would mislabel headers). */ -}}
   {{- $tabSplit := gt (len $tabOpens) 0 -}}
   {{- if $tabSplit -}}
       {{- $afterFirstPane := index (split $html (index $tabOpens 0)) 1 -}}
@@ -45,10 +32,7 @@
       {{- end -}}
   {{- end -}}
 
-  {{- /* Only split genuine {{ tab }} shortcode panes, which always carry a title= attribute.
-         Other components reuse the tab-pane class without a title (e.g. the widget API
-         model/example toggle); splitting those would create multiple same-header segments
-         that collide on objectID. If any matched pane lacks a title, skip tab-splitting. */ -}}
+  {{- /* Only split real {{ tab }} panes (they carry title=); panes without a title would collide on objectID. */ -}}
   {{- if $tabSplit -}}
       {{- range $open := $tabOpens -}}
           {{- if not (findRE `<div[^>]*\stitle="` $open) -}}
@@ -57,11 +41,7 @@
       {{- end -}}
   {{- end -}}
 
-  {{- /* Build the list of segments to index. Each segment is a dict with:
-           header: display section header
-           html:   the HTML block
-           tab:    the tab's data-lang ("" for non-tab segments), used for the ?tab= link
-           anchor: the heading anchor ("" when there is no enclosing heading) */ -}}
+  {{- /* Segments to index; each: header, html, tab (data-lang for ?tab= link), anchor. */ -}}
   {{- $baseAnchor := $baseHeader | anchorize -}}
   {{- $segments := slice -}}
   {{- if $tabSplit -}}
@@ -114,17 +94,14 @@
           {{- end -}}
           {{- range $i, $c := $chunked -}}
               {{- if gt (len $c) 2 -}}
-                  {{- /* objectID keeps using the (possibly combined) section header anchor so
-                         IDs stay unique and stable across builds. */ -}}
+                  {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
                   {{- $id_anchor := $section_header | anchorize -}}
                   {{- $hdr := $section_header -}}
                   {{- if $page.Params.exclude_headers_from_search -}}
                       {{- $hdr = "" -}}
                   {{- end -}}
                   {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i "_" $order -}}
-                  {{- /* Link target: tab segments open the tab via ?tab=<data-lang> (and scroll
-                         to the enclosing heading anchor if present); non-tab segments link to
-                         the heading anchor. */ -}}
+                  {{- /* Tab segments link via ?tab=<data-lang>(#anchor); others via #anchor. */ -}}
                   {{- $url_suffix := "" -}}
                   {{- if $section_tab -}}
                       {{- $url_suffix = print "?tab=" $section_tab -}}
