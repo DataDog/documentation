@@ -9718,27 +9718,27 @@ menu:
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
-      weight: 11
+      weight: 12
     - name: Export Pipelines
       url: real_user_monitoring/rum_export/
       parent: rum
       identifier: rum_export
-      weight: 12
+      weight: 13
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 13
+      weight: 14
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 14
+      weight: 15
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 15
+      weight: 16
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics

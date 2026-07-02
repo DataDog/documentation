@@ -17,14 +17,12 @@ further_reading:
 {{< callout url="https://www.datadoghq.com/product-preview/export-pipelines/" btn_hidden="false" header="Join the Preview!">}}
 Export Pipelines is in Preview.
 {{< /callout >}}
-<div class="alert alert-info">Once reaching General Availability, Export Pipelines will be a paying add-on SKU.</div>
 
 ## Overview
 
 Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
 
 {{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
-<!-- TODO: refresh screenshot to match the current Export Pipelines UI -->
 
 Use Export Pipelines to:
 - Load your event data into your own data warehouse (such as Snowflake, BigQuery, or Databricks) for custom analytics and reporting.
