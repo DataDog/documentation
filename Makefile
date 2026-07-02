@@ -131,7 +131,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs all-examples
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
