@@ -58,7 +58,7 @@ In Datadog, SQL queries are compatible with data stored in [datasets][2]. You ca
 
 1. Under {{< ui >}}Define Datasets{{< /ui >}}, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the {{< ui >}}New{{< /ui >}} icon to create a dataset from scratch.
    - If you chose an existing dataset and made changes, click {{< ui >}}Update{{< /ui >}} to apply those changes to that dataset, or {{< ui >}}Clone With Changes{{< /ui >}} to create a dataset with your changes applied.
-   - If you created a dataset, click {{< ui >}}Create{{< /ui >}} so you can use it in your job.
+   - If you created a dataset, click {{< ui >}}Create{{< /ui >}} to use it in your job.
 2. Under {{< ui >}}Write Queries{{< /ui >}}, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click {{< ui >}}Preview{{< /ui >}} to see a list of matching results.
 
 Conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the {{< ui >}}Set Conditions{{< /ui >}} section, such as a count threshold or group-by attribute. A job result is generated when the query results meet those conditions.
