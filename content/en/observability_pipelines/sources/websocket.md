@@ -58,7 +58,7 @@ For `wss://` endpoints, configure TLS so that data is encrypted in transit. The 
 
 #### Enable TLS
 
-Toggle the switch to **Enable TLS**. Because the Worker connects to the endpoint as a client, no certificate fields are required: enabling TLS encrypts the connection, and the endpoint must present a certificate signed by a trusted Certificate Authority (CA). Observability Pipelines does not accept self-signed certificates by default.
+Toggle the switch to **Enable TLS**. Because the Worker connects to the endpoint as a client, no certificate fields are required. Enabling TLS encrypts the connection and the endpoint must present a certificate signed by a trusted Certificate Authority (CA).
 
 #### Enable TLS with a client certificate
 
