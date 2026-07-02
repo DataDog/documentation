@@ -2,7 +2,6 @@
 title: WebSocket Source
 disable_toc: false
 description: Learn how to connect the Observability Pipelines Worker to a WebSocket and ingest the messages as logs.
-
 products:
 - name: Logs
   icon: logs
