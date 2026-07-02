@@ -103,6 +103,22 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][3] for more information and to ensure your values have the correct type and are within range.
 
+## Metrics
+
+See the [Observability Pipelines Metrics][10] for a full list of available health metrics.
+
+### Component metrics
+
+{{% observability_pipelines/metrics/component %}}
+
+### Kafka metrics
+
+{{% observability_pipelines/metrics/kafka/source %}}
+
+### Buffer metrics
+
+{{% observability_pipelines/metrics/buffer/sources %}}
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
 [3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
@@ -111,3 +127,4 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/monitoring/metrics/

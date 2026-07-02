@@ -132,6 +132,10 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 {{% observability_pipelines/metrics/component %}}
 
+#### Kafka metrics
+
+{{% observability_pipelines/metrics/kafka/destination %}}
+
 ### Buffer metrics (when enabled)
 
 {{% observability_pipelines/metrics/buffer/destinations %}}
