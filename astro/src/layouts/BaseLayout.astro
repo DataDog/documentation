@@ -12,6 +12,7 @@ import {
   DEFAULT_OG_IMAGE,
   getLocaleDefaults,
 } from '@lib/seo';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -28,6 +29,12 @@ interface Props {
   hreflang?: Array<{ hreflang: string; href: string }>;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
   announcementBanner?: BannerParams;
+  /**
+   * Opt into Astro view transitions (adds <ClientRouter />). Used by cdocs so
+   * changing a filter swaps the freshly SSR-rendered content in smoothly
+   * instead of a full-page blink. Off by default so other routes are unaffected.
+   */
+  enableViewTransitions?: boolean;
 }
 
 const {
@@ -39,6 +46,7 @@ const {
   lang: langProp,
   hreflang,
   announcementBanner,
+  enableViewTransitions = false,
 } = Astro.props;
 
 // Resolve the banner the same way the component does, so the body's
@@ -72,6 +80,7 @@ const hreflangResolved = hreflang?.map((h) => ({
     <meta name="description" content={description} />
     <meta name="theme-color" content={THEME_COLOR} />
     <link rel="canonical" href={canonical} />
+    {enableViewTransitions && <ClientRouter />}
 
     {/* Schema.org */}
     <meta itemprop="name" content={title} />

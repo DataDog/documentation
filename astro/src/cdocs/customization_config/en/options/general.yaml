@@ -1,0 +1,32 @@
+# Option glossary (trimmed PoC subset): option id -> human-readable label.
+options:
+  - id: java
+    label: Java
+  - id: python
+    label: Python
+  - id: cpp
+    label: C++
+  - id: elixir
+    label: Elixir
+  - id: otel_api
+    label: OpenTelemetry
+  - id: dd_api
+    label: Datadog
+  - id: node_js
+    label: Node.js
+  - id: go
+    label: Go
+  - id: ruby
+    label: Ruby
+  - id: dot_net
+    label: .NET
+  - id: php
+    label: PHP
+  - id: rust
+    label: Rust
+  - id: traces
+    label: Traces
+  - id: metrics
+    label: Metrics
+  - id: logs
+    label: Logs

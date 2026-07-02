@@ -44,6 +44,15 @@ function deriveHugoDocsUrl() {
 
 export default defineConfig({
   site: deriveSiteUrl(),
+  // On-demand rendering: cdocs resolve their filters at request time (reading
+  // URL params + cookie), so the site renders on the server. Existing static
+  // routes (API docs, etc.) opt back into build-time rendering with
+  // `export const prerender = true`. NOTE: the production `astro build` needs a
+  // server adapter (@astrojs/node); it is intentionally not installed yet — the
+  // Astro-5-compatible 9.x line carries two medium CVEs (fixed only in 10.x /
+  // Astro 7). The dev server does on-demand SSR without an adapter, which is
+  // enough to build and test the cdocs PoC.
+  output: "server",
   integrations: [markdoc(), preact()],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled
@@ -87,6 +96,14 @@ export default defineConfig({
         "@config": fileURLToPath(new URL("./src/config", import.meta.url)),
         "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
         "@utils": fileURLToPath(new URL("./src/lib/utils", import.meta.url)),
+        // Shared cdocs partials, mirroring Hugo's layouts/shortcodes/mdoc/en.
+        // Referenced from .mdoc files as `{% partial file="@partials/..." /%}`;
+        // @astrojs/markdoc resolves the `file` attribute through Vite, so the
+        // alias applies. Partials live outside src/content so the docs glob
+        // loader does not pick them up as collection entries.
+        "@partials": fileURLToPath(
+          new URL("./src/cdocs/partials/en", import.meta.url),
+        ),
       },
     },
     plugins: [

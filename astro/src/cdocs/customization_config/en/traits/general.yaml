@@ -1,0 +1,12 @@
+# Trait glossary (trimmed PoC subset). Mirrors the shape of Hugo's
+# customization_config/en/traits/*.yaml so the real files can be dropped in later.
+traits:
+  - id: prog_lang
+    label: Language
+    type: text
+  - id: api_type
+    label: API
+    type: text
+  - id: platform
+    label: Platform
+    type: text

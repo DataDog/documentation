@@ -90,6 +90,31 @@ Screenshot baselines are captured at 2x retina (1440×900 viewport, `deviceScale
 
 The API reference pages are generated at build time from the v1 and v2 OpenAPI specs — parsed, ref-resolved, built into view shapes, overlaid with translations, and rendered to static pages (plus a plaintext `.md` / `llms.txt` variant). For the full stage-by-stage walkthrough, see [docs/api/reference/pipeline.md](docs/api/reference/pipeline.md).
 
+## How filterable docs (Cdocs) work
+
+"Cdocs" are docs whose content is filtered by reader-selected traits (for example: programming language, API type). In Hugo these are `.mdoc.md` files compiled ahead of time by `cdocs-hugo-integration`. In Astro they are rendered **on demand (SSR)**: the reader's filter selections resolve per request, and non-matching content is dropped server-side by vanilla Markdoc `if` tags before the HTML is sent — so the response contains only the content that applies.
+
+### Request lifecycle
+
+1. **Route (SSR).** A cdoc is served by an on-demand page. The proof-of-concept test fixture lives at [src/pages/dd_e2e/cdocs/custom_instrumentation/index.astro](src/pages/dd_e2e/cdocs/custom_instrumentation/index.astro) (`export const prerender = false`), served at `/dd_e2e/cdocs/custom_instrumentation/` — under `/dd_e2e/` (mirroring Hugo's e2e fixtures) so the test page can't collide with a real docs URL. It reads filter values from the URL query string and from the persisted cookie.
+2. **Resolve filters.** [src/lib/cdocs/filters.ts](src/lib/cdocs/filters.ts) wraps the real [`cdocs-data`](package.json) package (the same package Hugo uses via `cdocs-hugo-integration`). It calls `loadCustomizationConfig` → `buildFiltersManifest` → `resolveFilters`, and owns the precedence **URL param > cookie > option-group default** (skipping invalid candidates). It returns UI-ready filters plus the active value per trait.
+3. **Persist.** The resolved values are written back to the `cdocs_prefs` cookie by [src/lib/cdocs/cookiePrefs.ts](src/lib/cdocs/cookiePrefs.ts) (trait-keyed JSON, oldest entry evicted past a cap — the SSR analog of Hugo's client-side storage), so a selection survives navigation to other cdocs.
+4. **Render + drop.** The resolved values are passed to `<Content {...valsByTraitId} />` as Markdoc variables (`$prog_lang`, `$api_type`, …). Because `@astrojs/markdoc` re-transforms per request, the built-in `if` tags evaluate against these variables and drop the branches that don't match.
+5. **Filter UI.** [src/components/CdocsFilterBar/CdocsFilterBar.tsx](src/components/CdocsFilterBar/CdocsFilterBar.tsx) is a Preact island rendering a labeled radiogroup of "pills" per filter (selected pill in Datadog purple, mirroring the Hugo customization menu). Selecting one updates the URL param and does a client-side view-transition navigation (`<ClientRouter />`), swapping in freshly server-rendered content without a full reload.
+
+### Supporting pieces
+
+- **Customization config** ([src/cdocs/customization_config/en/](src/cdocs/customization_config/en/)) — the traits, options, and option groups (with defaults), in per-language subdirectories, mirroring Hugo's top-level `customization_config/`.
+- **Frontmatter schema** ([src/content.config.ts](src/content.config.ts)) — the `content_filters` array on the `docs` collection declares which traits a cdoc filters on.
+- **Partials** ([src/cdocs/partials/en/](src/cdocs/partials/en/)) — reusable `.mdoc` fragments referenced via the `@partials` alias (see [astro.config.mjs](astro.config.mjs)). They live outside `src/content/` because Astro's glob loader would otherwise pick them up as pages.
+- **Custom Markdoc function** ([markdoc.config.mjs](markdoc.config.mjs)) — adds `includes($trait, [...])` on top of Markdoc's built-ins, for list-membership conditionals.
+- **Component-facing types** ([src/lib/cdocs/types.ts](src/lib/cdocs/types.ts)) — the trimmed `ResolvedFilter` shape the filter UI consumes.
+
+### Notes / current limitations
+
+- **Adapter.** On-demand rendering runs under `npm run dev` without an adapter. A production `astro build` needs a server adapter (deferred pending an Astro upgrade), so `npm run build` / `npm run preview` do not yet serve cdocs.
+- **`cdocs-data` install.** The package is installed from an S3 tarball declared in [package.json](package.json) (same mechanism as `cdocs-hugo-integration`). Its bare name collides with a security-holding public-npm squat, so the supply-chain firewall flags it; scoping the internal package (e.g. `@datadog/cdocs-data`) is the durable fix.
+
 ## Auditing guidelines
 
 To manually audit the Astro API docs against the Hugo API docs, you don't need to review every category page — a representative set covers every rendering path. For the page inventory, the minimum audit set, and the per-endpoint checklist, see [docs/api/reference/audit_cases.md](docs/api/reference/audit_cases.md).

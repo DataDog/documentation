@@ -8,6 +8,22 @@ import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
 
 export default defineMarkdocConfig({
+  // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in
+  // functions (equals, and, or, not) and the built-in `if`/`else`/`partial`
+  // tags are already available, so only the cdocs-specific extras are declared
+  // here. Unlike Hugo's cdocs-markdoc fork (which retained hidden content for
+  // client-side toggling on a static site), vanilla Markdoc DROPS content whose
+  // condition is false at transform time — exactly the SSR behavior we want.
+  functions: {
+    // includes($trait, ["a", "b"]) -> true when the trait value is in the list.
+    includes: {
+      transform(parameters) {
+        const value = parameters[0];
+        const list = parameters[1];
+        return Array.isArray(list) ? list.includes(value) : false;
+      },
+    },
+  },
   nodes: {
     fence: {
       render: component("./src/components/CodeBlock/CodeBlock.astro"),
