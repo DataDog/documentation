@@ -24,18 +24,18 @@ The list view displays a list of spans that match the selected context, defined 
 In the table, choose which information of interest to display as columns. Manage the columns by either:
 
 - interacting with the table header row to **sort**, **rearrange**, or **remove** columns.
-- selecting a facet from the facet panel on the left, or from the trace side panel after clicking on a specific span, to **add** a column for a field. You can also add columns from with the **Options** button.
+- selecting a facet from the facet panel on the left, or from the trace side panel after clicking on a specific span, to **add** a column for a field. You can also add columns from with the {{< ui >}}Options{{< /ui >}} button.
 
 {{< img src="tracing/trace_explorer/visualize/list_view_table_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
 
-The default sort for spans in the list visualization is by timestamp, with the most recent spans on top. To surface spans with lowest or highest value for a measure first, or to sort your spans lexicographically for the value of a tag, specify that column as the **by** column.
+The default sort for spans in the list visualization is by timestamp, with the most recent spans on top. To surface spans with lowest or highest value for a measure first, or to sort your spans lexicographically for the value of a tag, specify that column as the {{< ui >}}by{{< /ui >}} column.
 
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
 The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent or misleading latency information that would only make sense when the trace is complete.
 
-When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
+When the query is filtered on error spans, select the {{< ui >}}Group into Issues{{< /ui >}} option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking Issue Grouping" style="width:100%;">}}
 
@@ -75,7 +75,7 @@ The following Trace Explorer timeseries view shows the evolution of the top ten 
 
 {{< img src="tracing/trace_explorer/visualize/timeseries_view.png" alt="Timeseries view" style="width:100%;">}}
 
-Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
+Choose additional display options for timeseries: the {{< ui >}}roll-up interval{{< /ui >}}, whether you display results as {{< ui >}}bars{{< /ui >}} (recommended for counts and unique counts), {{< ui >}}lines{{< /ui >}} (recommended for statistical aggregations) or {{< ui >}}areas{{< /ui >}}, and the {{< ui >}}colorset{{< /ui >}}.
 
 ## Top list
 
@@ -107,13 +107,13 @@ For example, you can use request flow maps to identify high-traffic services or 
 
 - Hover over the edge that connects two services to see metrics for requests, errors, and latencies between those services. **Note**: Highlighted edges represent the highest throughput connections, or the most common paths.
 
-- Click **Export** to save a PNG image of the current request flow map. Use this feature to generate a live architecture diagram or one scoped to a specific user flow.
+- Click {{< ui >}}Export{{< /ui >}} to save a PNG image of the current request flow map. Use this feature to generate a live architecture diagram or one scoped to a specific user flow.
 
 - Click any service on the map to view health, performance, infrastructure, and runtime metrics for that service.
 
 {{< img src="tracing/live_search_and_analytics/request_flow_map/ServicePanel.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Request flow map side panel with metrics and metadata for the selected service" >}}
 
-- The map automatically selects an appropriate layout based on the number of services present. Click **Cluster** or **Flow** to switch between the layouts.
+- The map automatically selects an appropriate layout based on the number of services present. Click {{< ui >}}Cluster{{< /ui >}} or {{< ui >}}Flow{{< /ui >}} to switch between the layouts.
 
 - RUM Applications are represented on the request flow map if you have [connected RUM and Traces][10].
 

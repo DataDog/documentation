@@ -6,10 +6,10 @@ aliases:
 - /service_management/app_builder/variables
 disable_toc: false
 further_reading:
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/expressions/"
+- link: "/actions/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
 ---
@@ -31,7 +31,7 @@ To add a state variable manually:
 
 ## Example app
 
-{{< img src="service_management/app_builder/state-variables-example-app.mp4" alt="Clicking the button flips the callout value between a green Pass to a red Fail" video="true" width="360px">}}
+{{< img src="actions/app_builder/state-variables-example-app.mp4" alt="Clicking the button flips the callout value between a green Pass to a red Fail" video="true" width="360px">}}
 
 To create an app that uses a button to change a callout value component's style and value, follow these instructions.
 

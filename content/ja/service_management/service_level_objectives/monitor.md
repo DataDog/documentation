@@ -20,7 +20,7 @@ title: モニターベース SLO
 
 <div class="alert alert-info">Time Slice SLO は、時間ベースで SLI を計算して SLO を作成する別の方法です。Time Slice SLO を使えば、モニターを介さずに uptime SLO を作成できるため、モニターと SLO を両方作成して維持管理する必要がありません。</div>
 
-{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="モニター ベース SLO の例" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_side_panel.png" alt="モニター ベース SLO の例" >}}
 
 ## 前提条件
 
@@ -72,7 +72,7 @@ SLO の名前と詳細な説明を入力します。SLO に関連付けたいタ
 
 ## ステータス計算
 
-{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="グループを含むモニター ベース SLO" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_overall_status.png" alt="グループを含むモニター ベース SLO" >}}
 
 Datadog は、特定のグループが選択されていない限り、すべてのモニターまたはモニター グループの uptime パーセンテージを用いて、SLO の全体ステータスを計算します:
 - 特定のグループが選択されている場合 (最大 20 グループ)、SLO ステータスはそれらのグループだけを対象に計算されます。UI には選択されたグループがすべて表示されます。

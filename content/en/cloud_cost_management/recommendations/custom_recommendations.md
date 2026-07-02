@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="cloud_cost/recommendations/custom-recommendations-without-history.png" alt="Configure custom recommendations from the Cloud Cost Settings page." style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/customize-recommendations.png" alt="Customize recommendations from the Cloud Cost Optimize page." style="width:100%;" >}}
 
 [CCM Recommendations][1] are designed to be informative and actionable from the start. You can customize these recommendations to fit your specific business use cases and needs. Set your own metric thresholds and evaluation time frames to reduce unnecessary alerts and focus on the recommendations that matter most.
 
@@ -28,7 +28,7 @@ With custom recommendations, you can:
 
 <div class="alert alert-info">Customizations reflect within 24 hours, when recommendations are generated next.</div>
 
-To access custom recommendations, go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Configure Recommendations{{< /ui >}}][2].
+To access custom recommendations, go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Customize{{< /ui >}}][2].
 
 On this page, you can see a list of out-of-the-box recommendations that can be customized.
 
@@ -67,7 +67,7 @@ You can update a custom recommendation at any time to reflect changes in your bu
 
 To update a custom recommendation:
 
-1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Configure Recommendations{{< /ui >}}][2].
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Customize{{< /ui >}}][2].
 2. Go to the customized recommendation.
 3. Modify the parameters as needed.
 4. Click {{< ui >}}Save{{< /ui >}}.
@@ -77,4 +77,4 @@ To update a custom recommendation:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/recommendations/
-[2]: https://app.datadoghq.com/cost/settings/configure-recommendations
+[2]: https://app.datadoghq.com/cost/optimize/configure-recommendations
