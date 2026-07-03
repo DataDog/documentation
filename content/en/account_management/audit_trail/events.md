@@ -33,7 +33,7 @@ Use the following queries to find agent-driven events:
 | All actions taken by a Datadog AI agent              | `@evt.actor.mode:*`        |
 | All actions taken through the Datadog MCP server     | `is_mcp_call:true`         |
 
-**Note**: It's progressively being rolled out to all Datadog AI Agents. Actions from agents that have not yet onboarded do not appear in `@evt.actor.mode:*` results. Datadog-managed AI agent features are not available in GovCloud environments.
+**Note**: Rollout to all Bits agents is in progress, and coverage is not yet complete. Actions from agents that have not yet onboarded do not appear in `@evt.actor.mode:*` results. Datadog-managed AI agent features are not available in GovCloud environments.
 
 For a complete walkthrough on filtering by agent type, agent name, and delegated user activity, see [Track Agentic Usage in Your Organization][2].
 

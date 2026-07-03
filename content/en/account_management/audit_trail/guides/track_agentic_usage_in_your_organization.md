@@ -23,7 +23,7 @@ Datadog AI agents, including the Bits fleet (Bits SRE, Bits Dev, Bits Assistant,
    This query returns every event where a Datadog AI agent is the actor, whether the agent acted `interactive` (a user was present and approved the action) or `autonomous` (the agent acted on a system trigger, with no user present).
 3. Click an event to open details and see the full actor breakdown: the delegator (the user, if any), the agent, and the mode.
 
-**Note**: It's progressively being rolled out to all Datadog AI Agents. Actions from agents that have not yet onboarded do not appear in `@evt.actor.mode:*` results.
+**Note**: Rollout to all Bits agents is in progress, and coverage is not yet complete. Actions from agents that have not yet onboarded do not appear in `@evt.actor.mode:*` results.
 
 ## View actions taken through the Datadog MCP server
 
