@@ -39,7 +39,10 @@
 {{ end }}
 
 {{/* Add the resulting object to the index */}}
-{{ $object_id := print $full_url "_" $operationId }}
+{{/* Include api_version, method and endpoint path so endpoints that share an operationId and
+     collapse to the same slug (e.g. untranslated summaries produce an empty slug and the v1/v2
+     disambiguation above is skipped) don't collide on objectID. method+path is unique per spec. */}}
+{{ $object_id := print $full_url "_" $api_version "_" $method "_" $endpoint_path "_" $operationId }}
 {{
     $hugo_context.Scratch.Add "algoliaindex" (
         dict "objectID" (md5 $object_id)

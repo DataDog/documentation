@@ -96,11 +96,18 @@
               {{- if gt (len $c) 2 -}}
                   {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
                   {{- $id_anchor := $section_header | anchorize -}}
+                  {{- /* Include the tab slug so sibling tabs whose headers anchorize identically
+                         (e.g. "GitLab >= 14.1" vs "GitLab < 14.1" both -> "...gitlab--141")
+                         don't collide on objectID. Empty for non-tab segments, so existing IDs are unchanged. */ -}}
+                  {{- $id_suffix := "" -}}
+                  {{- if $section_tab -}}
+                      {{- $id_suffix = print "_" $section_tab -}}
+                  {{- end -}}
                   {{- $hdr := $section_header -}}
                   {{- if $page.Params.exclude_headers_from_search -}}
                       {{- $hdr = "" -}}
                   {{- end -}}
-                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i "_" $order -}}
+                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor $id_suffix "_" $i "_" $order -}}
                   {{- /* Tab segments link via ?tab=<data-lang>(#anchor); others via #anchor. */ -}}
                   {{- $url_suffix := "" -}}
                   {{- if $section_tab -}}
