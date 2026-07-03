@@ -36,7 +36,7 @@ further_reading:
 | Playwright | >= 1.38.0 |
 | Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. |
 
-`dd-trace` v6 requires Node.js >= 22.
+`dd-trace` v6 requires Node.js 22 or later.
 
 {{% /tab %}}
 {{% tab "dd-trace v5" %}}
@@ -530,7 +530,7 @@ The following is a list of the most important configuration settings that can be
 `test_session.name`
 : Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: Framework invocation for `dd-trace` v6, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`; CI job name and test command for `dd-trace` v5<br/>
+**Default**: For `dd-trace` v6, the framework invocation (`jest`, `mocha`, `playwright test`, or `cucumber-js`). For `dd-trace` v5, a combination of CI job name and test command.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `service`
@@ -698,7 +698,14 @@ By default, Vitest's [`isolate`][21] option is `true`, so each test file runs in
 
 To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
 
-To keep Vitest isolation enabled, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true` to lower worker startup overhead. This option is available in `dd-trace` versions `5.111.0` and later, and `6.0.0` and later. It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations. Because this mode does not initialize `dd-trace` in Vitest workers, features that require an active test span inside test code, such as custom test tags, custom spans, log correlation from test code, and Failed Test Replay, are not supported.
+To keep Vitest isolation enabled with lower worker startup overhead, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`. This option is available in `dd-trace` `5.111.0` and later, and `6.0.0` and later. It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations.
+
+Because this mode does not initialize `dd-trace` in Vitest workers, the following features are not supported:
+
+- Custom test tags
+- Custom spans
+- Log correlation from test code
+- Failed Test Replay
 
 ## Best practices
 
