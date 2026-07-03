@@ -1481,7 +1481,7 @@ multi_secret_backends:
 
 Each `<backend_name>` is an arbitrary identifier you choose. It cannot contain a semicolon, because `;` is the delimiter used in `ENC[]` handles. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
 
-##### ENC notation
+##### `ENC[]` notation
 
 When `multi_secret_backends` is active, prefix `ENC[]` handles with the backend name followed by a semicolon:
 
