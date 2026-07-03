@@ -16,34 +16,27 @@ further_reading:
 
 Datadog On-Call supports multiple triggering sources beyond native Datadog monitors. Use third-party tools to send Pages directly to your On-Call teams, so alerts from any part of your stack reach the right responders through your configured escalation policies.
 
-{{< card-grid card_width="200px" >}}
-  {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack.png" alt="Slack" title="Slack" >}}
-  {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft_teams.png" alt="Microsoft Teams" title="Microsoft Teams" >}}
-  {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
-  {{< image-card href="/integrations/pingdom/#page-a-datadog-on-call-team" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
-  {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
-  {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
-  {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
-  {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
-  {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios.png" alt="Nagios" title="Nagios" >}}
-  {{< image-card href="/integrations/catchpoint/#events" src="integrations_logos/catchpoint.png" alt="Catchpoint" title="Catchpoint" >}}
-{{< /card-grid >}}
-
-### In Preview
-
-The following integrations are in Preview. Sign up to get early access.
-
-{{< card-grid card_width="200px" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag.png" alt="BugSnag" title="BugSnag" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime.png" alt="uptime.com" title="uptime.com" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" >}}
-{{< /card-grid >}}
-
 {{< beta-callout url="https://www.datadoghq.com/product-preview/on-call-integrations/" >}}
-These On-Call integrations are in Preview. Request access to join the waiting list.
+To use an integration marked "Preview", or to request a new integration, request access.
 {{< /beta-callout >}}
+
+{{< integration-tile-grid >}}
+  {{< integration-tile href="/incident_response/on-call/pages/#through-slack" logo_id="slack" src="integrations_logos/slack.png" alt="Slack" title="Slack" >}}
+  {{< integration-tile href="/incident_response/on-call/pages/#through-microsoft-teams" logo_id="microsoft-teams" src="integrations_logos/microsoft_teams.png" alt="Microsoft Teams" title="Microsoft Teams" >}}
+  {{< integration-tile href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" logo_id="prometheus" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
+  {{< integration-tile href="/integrations/pingdom/#page-a-datadog-on-call-team" logo_id="pingdom" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
+  {{< integration-tile href="/integrations/sentry/#page-a-datadog-on-call-team" logo_id="sentry" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
+  {{< integration-tile href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" logo_id="amazon-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
+  {{< integration-tile href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" logo_id="azure" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
+  {{< integration-tile href="/integrations/zabbix/#trigger-on-call-pages" logo_id="zabbix" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
+  {{< integration-tile href="/integrations/nagios/?tab=host#trigger-on-call-pages" logo_id="nagios" src="integrations_logos/nagios.png" alt="Nagios" title="Nagios" >}}
+  {{< integration-tile href="/integrations/catchpoint/#events" logo_id="catchpoint" src="integrations_logos/catchpoint.png" alt="Catchpoint" title="Catchpoint" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="bugsnag" src="integrations_logos/bugsnag.png" alt="BugSnag" title="BugSnag" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="uptime" src="integrations_logos/uptime.png" alt="uptime.com" title="uptime.com" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" preview="true" >}}
+{{< /integration-tile-grid >}}
 
 ## Other tools
 
