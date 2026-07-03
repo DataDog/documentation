@@ -17,12 +17,15 @@ Use the array map processor to apply a sequence of sub-processors to each elemen
 - If `source` and `target` are the same attribute, elements are transformed in place.
 - If `target` array exists, attributes are written to existing elements.
 - Processing is limited to the first 50 elements of the source array.
-- Sub-processors do not support `is_enabled` parameter.
-- Attribute Remapper sub-processor doesn't support `source_type` and `target_type` parameters and only remaps attributes.
 
 ## Setup
 
 Define the array map processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]:
+
+1. Set the {{< ui >}}Source{{< /ui >}}: path to the array attribute to iterate over.
+1. Set the {{< ui >}}Target{{< /ui >}}: path where the output array is written.
+1. Toggle {{< ui >}}Preserve source{{< /ui >}} to keep or remove the original source array after processing.
+1. Add one or more [sub-processors](#sub-processors) to apply to each element.
 
 {{< img src="logs/log_configuration/processor/array-map-processor.png" alt="Screenshot of the Array Map Processor configuration panel" style="width:80%;" >}}
 
@@ -63,7 +66,7 @@ Create an Array Map Processor with source `connections` and target `network.conn
 
 ## API
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following array map processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following Array Map processor JSON payload:
 
 ```json
 {
@@ -101,7 +104,7 @@ Following rules apply when defining sub-processors:
 
 #### Attribute Remapper
 
-Remap a field from each element to a field in the output element.
+Remaps a field from each element to a field in the output element.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -112,18 +115,15 @@ Remap a field from each element to a field in the output element.
 
 ```json
 {
-  "items": [
-    {"src_ip": "10.0.0.1"},
-    {"src_ip": "10.0.0.2"}
-  ]
+  "items": ["10.0.0.1", "10.0.0.2"]
 }
 ```
 
 **Configuration steps:**
 
-- {{< ui >}}Source attributes{{< /ui >}}: `$sourceElem.src_ip`
-- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.source`
-- {{< ui >}}Preserve source{{< /ui >}}: enabled
+- {{< ui >}}Source attributes{{< /ui >}}: `$sourceElem`
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.ip`
+- {{< ui >}}Preserve source{{< /ui >}}: `enabled`
 
 **Result:**
 
@@ -131,8 +131,8 @@ Remap a field from each element to a field in the output element.
 {
   "items": [...],
   "out": [
-    {"source": "10.0.0.1"},
-    {"source": "10.0.0.2"}
+    {"ip": "10.0.0.1"},
+    {"ip": "10.0.0.2"}
   ]
 }
 ```
@@ -143,9 +143,9 @@ Remap a field from each element to a field in the output element.
 ```json
 {
   "type": "attribute-remapper",
-  "name": "Remap src_ip to source",
-  "sources": ["$sourceElem.src_ip"],
-  "target": "$targetElem.source",
+  "name": "Map primitive IP to object field",
+  "sources": ["$sourceElem"],
+  "target": "$targetElem.ip",
   "target_format": "auto",
   "preserve_source": true,
   "override_on_conflict": false
@@ -167,7 +167,7 @@ Remap a field from each element to a field in the output element.
 
 #### String Builder Processor
 
-Build a new field in the output element from a template of element or log attributes.
+Builds a new field in the output element from a template of element or log attributes.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -178,27 +178,29 @@ Build a new field in the output element from a template of element or log attrib
 
 ```json
 {
+  "region": "us-east-1",
   "items": [
-    {"proto": "tcp", "port": 443},
-    {"proto": "udp", "port": 53}
+    {"name": "db-1"},
+    {"name": "db-2"}
   ]
 }
 ```
 
 **Configuration steps:**
 
-- {{< ui >}}Template{{< /ui >}}: `%{$sourceElem.proto}/%{$sourceElem.port}`
-- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.service`
+- {{< ui >}}Template{{< /ui >}}: `%{$sourceElem.name}.%{region}`
+- {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.fqdn`
 - {{< ui >}}Replace missing{{< /ui >}}: disabled
 
 **Result:**
 
 ```json
 {
+  "region": "us-east-1",
   "items": [...],
   "out": [
-    {"service": "tcp/443"},
-    {"service": "udp/53"}
+    {"fqdn": "db-1.us-east-1"},
+    {"fqdn": "db-2.us-east-1"}
   ]
 }
 ```
@@ -209,9 +211,9 @@ Build a new field in the output element from a template of element or log attrib
 ```json
 {
   "type": "string-builder-processor",
-  "name": "Build service label",
-  "template": "%{$sourceElem.proto}/%{$sourceElem.port}",
-  "target": "$targetElem.service",
+  "name": "Build FQDN from element and parent attribute",
+  "template": "%{$sourceElem.name}.%{region}",
+  "target": "$targetElem.fqdn",
   "is_replace_missing": false
 }
 ```
@@ -229,7 +231,7 @@ Build a new field in the output element from a template of element or log attrib
 
 #### Arithmetic Processor
 
-Compute a numeric expression using element or log attributes and write the result to the output element.
+Computes a numeric expression using element or log attributes and write the result to the output element.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -291,7 +293,7 @@ Compute a numeric expression using element or log attributes and write the resul
 
 #### Category Processor
 
-Assign a category to each output element based on a filter query matching element attributes.
+Assigns a category to each output element based on a filter query matching element attributes.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -312,8 +314,8 @@ Assign a category to each output element based on a filter query matching elemen
 **Configuration steps:**
 
 - {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.severity`
-- Category 1: {{< ui >}}All events that match{{< /ui >}}: `@$sourceElem.status:critical`, {{< ui >}}Appear under the value name{{< /ui >}}: `high`
-- Category 2: {{< ui >}}All events that match{{< /ui >}}: `@$sourceElem.status:warning`, {{< ui >}}Appear under the value name{{< /ui >}}: `medium`
+- Category 1: All events that match `@$sourceElem.status:critical` are mapped to value  `high`
+- Category 2: All events that match `@$sourceElem.status:warning` are mapped to value `medium`
 
 **Result:**
 
