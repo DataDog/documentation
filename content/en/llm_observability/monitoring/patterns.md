@@ -55,7 +55,13 @@ Each topic shows its interaction volume and share of total traffic. Interactions
    - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.
    - **Sampling Rate:** The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
 5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.input.value}} to analyze patterns by user input, or {{meta.span.kind}} to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
-6. Click **Save**
+6. Under **How often should we run Patterns?**, choose how the Pattern runs:
+   - **On demand** (default): Run the Pattern manually.
+   - **Daily**, **Weekdays**, or **Weekly**: Run automatically at a time (and, for weekly, a day) you choose.
+   - **Custom**: Run automatically every 1 to 7 days.
+
+   Scheduled times use your Datadog timezone preference. Scheduled runs use the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
+7. Click **Save**
 
 ## Explore your Patterns
 
@@ -108,20 +114,6 @@ From the interactions table inside a topic's detail view, you can act on the int
 To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. The pipeline runs in the background and takes 5 to 10 minutes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
 
 If a run fails, a modal explains the cause and what action to take. The page continues to display results from the most recent successful run while the failed run is shown in the header.
-
-## Schedule runs
-
-Instead of triggering every run manually, configure a Pattern to run automatically on a recurring schedule.
-
-When you create or edit a Pattern, under **How often should we run Patterns?**, choose a cadence:
-
-- **On demand**: No schedule. Run the Pattern manually (default).
-- **Daily**: Every day at a time you choose.
-- **Weekdays**: Monday through Friday at a time you choose.
-- **Weekly**: A chosen day of the week at a time you choose.
-- **Custom**: Every 1 to 7 days.
-
-Scheduled times use your Datadog timezone preference. Each scheduled run uses the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
 
 ## Use topics to improve your application
 
