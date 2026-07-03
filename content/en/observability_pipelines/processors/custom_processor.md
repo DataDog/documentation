@@ -78,6 +78,10 @@ To set up this processor:
 
 {{< vrl-functions >}}
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `remap_vrl`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

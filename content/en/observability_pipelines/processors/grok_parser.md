@@ -53,6 +53,10 @@ To add a custom parsing rule:
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
 [3]: /observability_pipelines/search_syntax/logs/
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `parse`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

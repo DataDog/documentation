@@ -68,6 +68,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 1                 | 15                  |
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring/metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `gcp_chronicle_unstructured`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://cloud.google.com/docs/authentication#auth-flowchart

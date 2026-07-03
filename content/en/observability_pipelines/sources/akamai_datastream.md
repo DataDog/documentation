@@ -53,6 +53,10 @@ The following are required to send Akamai DataStream logs to Observability Pipel
 1. After the stream is activated (it takes about 20 minutes), the **Stream list** page shows the status of your stream as **Active**.
 1. View your Akamai DataStream logs in Datadog [Log Explorer][3] or the Observability Pipelines destination.
 
+## Metrics
+
+The Akamai DataStream source uses the HTTP Server source. For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `http_server`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://control.akamai.com/apps/data-stream-ui/#/streams/group/all%20
 [3]: https://app.datadoghq.com/logs

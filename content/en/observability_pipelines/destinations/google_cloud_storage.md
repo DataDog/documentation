@@ -87,6 +87,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 100               | 900                 |
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring/metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `datadog_archives_gcs`.
+
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/google_cloud_platform/#setup

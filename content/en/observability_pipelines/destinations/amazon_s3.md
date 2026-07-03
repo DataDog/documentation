@@ -164,6 +164,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------| ----------------| --------------------|
 | None           | 100,000,000     | 900                 |
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring/metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `amazon_s3_generic`.
+
 [1]: /logs/log_configuration/rehydrating/
 [2]: /observability_pipelines/destinations/datadog_archives/
 [3]: https://console.aws.amazon.com/iam/

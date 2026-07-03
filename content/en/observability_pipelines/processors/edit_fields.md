@@ -57,6 +57,10 @@ To set up the rename field processor:
 [1]: /observability_pipelines/guide/remap_reserved_attributes
 [2]: /observability_pipelines/search_syntax/logs/
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. Depending on the configured action, this processor emits metrics with the `component_type` tag set to `add_fields`, `remove_fields`, or `rename_fields`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

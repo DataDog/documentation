@@ -178,3 +178,7 @@ If you see the error `Missing environment variable DD_OP_SOURCE_KAFKA_SASL_PASSW
 ```
 DD_OP_SOURCE_KAFKA_SASL_PASSWORD=`"Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>"`
 ```
+
+## Metrics
+
+The Azure Event Hubs source uses the Kafka source. For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `kafka`.

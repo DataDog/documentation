@@ -74,7 +74,7 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 ## Metrics
 
-For the [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the Observability Pipelines Metrics documentation.
+For the [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `aws_s3`.
 
 ### Amazon S3 metrics
 

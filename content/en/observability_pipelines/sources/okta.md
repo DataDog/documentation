@@ -92,6 +92,10 @@ Follow the [Add an AWS EventBridge log stream][4] instructions to:
 
 After configuring the Amazon EventBridge, you can view your Okta logs in [Log Explorer][6].
 
+## Metrics
+
+The Okta source uses the HTTP server source. For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `http_server`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#secret-defaults
 [3]: /observability_pipelines/configuration/install_the_worker/

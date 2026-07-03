@@ -96,7 +96,7 @@ For the [component metrics][9] and [destination buffer metrics][10] emitted by a
 ### Splunk HEC metrics
 
 - Use the `component_id` tag to filter or group by individual components.
-- The `component_type` tag is `splunk_hec` for these metrics.
+- The `component_type` tag is `splunk_hec_logs` for these metrics.
 
 `pipelines.splunk_pending_acks`
 : **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting response.

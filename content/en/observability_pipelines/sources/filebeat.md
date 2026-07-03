@@ -26,5 +26,9 @@ Use the Logstash source to send logs to Observability Pipelines with Filebeat.
     For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `opw-observability-pipelines-worker.default.svc.cluster.local`.
 1. [Set up a pipeline][2] with the Logstash source.
 
+## Metrics
+
+The Filebeat source uses the Logstash source. For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `logstash`.
+
 [1]: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
 [2]: /observability_pipelines/configuration/set_up_pipelines/

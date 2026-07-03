@@ -161,7 +161,7 @@ Common issues and fixes:
 
 ## Metrics
 
-For the [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the Observability Pipelines Metrics documentation.
+For the [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `gcp_pubsub`.
 
 ### Event batching
 

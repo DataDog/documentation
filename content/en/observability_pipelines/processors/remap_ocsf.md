@@ -92,4 +92,8 @@ To set up a custom mapping:
 
 {{% /collapse-content %}}
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `ocsf_mapper`.
+
 [1]: /observability_pipelines/search_syntax/logs/

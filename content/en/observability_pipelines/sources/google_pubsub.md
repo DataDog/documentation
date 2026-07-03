@@ -56,6 +56,10 @@ There are no default secret identifiers for this source.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `gcp_pubsub`.
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [4]: https://cloud.google.com/docs/authentication#auth-flowchart

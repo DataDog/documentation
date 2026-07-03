@@ -166,6 +166,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
 
+## Metrics
+
+For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring/metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `databricks_zerobus`.
+
 [1]: https://docs.databricks.com/aws/en/ingestion/zerobus-overview
 [2]: https://docs.databricks.com/aws/en/schemas/create-schema
 [3]: https://docs.databricks.com/aws/en/tables/managed#create-a-managed-table
