@@ -78,12 +78,12 @@ For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
-1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
-1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
+1. Click {{< ui >}}Add scanning group{{< /ui >}}. Alternatively, click the {{< ui >}}Add{{< /ui >}} dropdown menu on the top right corner of the page and select {{< ui >}}Add Scanning Group{{< /ui >}}.
+1. Enter a query filter for the data you want to scan. At the top, click {{< ui >}}APM Spans{{< /ui >}} to preview the filtered spans. Click {{< ui >}}Logs{{< /ui >}} to see the filtered logs.
 1. Enter a name and description for the group.
 1. Click the option buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Optionally set a sampling rate of 10-99% for the products you want. When you add scanning rules to a group that has sampling enabled, you will not be able to select actions that obfuscate the data it scans. To obfuscate matches, you must choose to scan all data matching your group query filter.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
 
@@ -102,7 +102,7 @@ To add scanning rules, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group where you want to add the scanning rules.
-1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
+1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}. Alternatively, click the {{< ui >}}Add{{< /ui >}} dropdown menu on the top right corner of the page and select {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
 {{% collapse-content title="Add library rules" level="p" id="add-library-rules" %}}
@@ -110,10 +110,10 @@ To add scanning rules, perform the following steps:
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
-1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
-1. In the **Add Library Rules** section, select the library rules you want to use.
+1. In the {{< ui >}}Priority{{< /ui >}} dropdown menu, select the priority level for the rule based on your business needs.
+1. In the {{< ui >}}Add Library Rules{{< /ui >}} section, select the library rules you want to use.
 {{% sds-scanning-rule %}}
-1. Click **Add Rules**.
+1. Click {{< ui >}}Add Rules{{< /ui >}}.
 
 #### Add custom keywords
 
@@ -122,14 +122,14 @@ The [recommended keywords][15] are used by default when library rules are added.
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
-1. In the **Match Conditions** section, click **Custom Keywords**.
+1. In the {{< ui >}}Match Conditions{{< /ui >}} section, click {{< ui >}}Custom Keywords{{< /ui >}}.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
     - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
     - **Note**: You cannot have more than 20 keywords for a rule.
-1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
-1. Click **Update**.
+1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
+1. Click {{< ui >}}Update{{< /ui >}}.
 
 #### Add suppressions
 
@@ -141,9 +141,9 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 
 1. Select a scanning group if you did not create this rule within a scanning group.
 1. Enter a name for the rule.
-1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
+1. In the {{< ui >}}Priority{{< /ui >}} dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
-1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
+1. In the {{< ui >}}Match conditions{{< /ui >}} section, specify the regex pattern to use for matching against events in the {{< ui >}}Regex pattern{{< /ui >}} field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -155,16 +155,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Check surrounding match context for keywords to reduce noise**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. For {{< ui >}}Check surrounding match context for keywords to reduce noise{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
     - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
-1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
+1. In the {{< ui >}}Type or paste event data to test the rule{{< /ui >}} section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
-1. Click **Add Rule**.
+1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 {{% /collapse-content %}}
 
@@ -303,9 +303,9 @@ To make matches more precise, you can also do one of the following:
 To edit scanning rules:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
-1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
+1. Hover over the scanning rule you want to edit and click the {{< ui >}}Edit{{< /ui >}} (pencil) icon.
 1. Make the changes you want for the rule. Depending on the type of rule you are editing, see [Add library rules](#add-library-rules) or [Add custom rule](#add-custom-rule) for more information on each setup section.
-1. Click **Update**.
+1. Click {{< ui >}}Update{{< /ui >}}.
 
 ## Control access to logs with sensitive data
 
@@ -322,25 +322,25 @@ To redact sensitive data contained in tags, you must [remap][10] the tag to an a
 To remap the tag to an attribute:
 
 1. Navigate to your [log pipeline][11].
-2. Click **Add Processor**.
-3. Select **Remapper** in the processor type dropdown menu.
+2. Click {{< ui >}}Add Processor{{< /ui >}}.
+3. Select {{< ui >}}Remapper{{< /ui >}} in the processor type dropdown menu.
 4. Name the processor.
-5. Select **Tag key(s)**.
+5. Select {{< ui >}}Tag key(s){{< /ui >}}.
 6. Enter the tag key.
 7. Enter a name for the attribute the tag key is remapped to.
-8. Disable **Preserve source attribute**.
-9. Click **Create**.
+8. Disable {{< ui >}}Preserve source attribute{{< /ui >}}.
+9. Click {{< ui >}}Create{{< /ui >}}.
 
 To redact the attribute:
 
 1. Navigate to your [scanning group][5].
-2. Click **Add Scanning Rule**.
+2. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 3. Check the library rules you want to use.
-4. Select **Specific Attributes** for **Scan entire event or portion of it**.
+4. Select {{< ui >}}Specific Attributes{{< /ui >}} for {{< ui >}}Scan entire event or portion of it{{< /ui >}}.
 5. Enter the name of the attribute you created earlier to specify that you want it scanned. **Note**: Do not use the `@` prefix in the attribute path. For example, use `function.request.body.password` instead of `@function.request.body.password`. 
 6. Select the action you want when there's a match.
 7. Optionally, add tags.
-8. Click **Add Rules**.
+8. Click {{< ui >}}Add Rules{{< /ui >}}.
 
 ## Log rehydration
 

@@ -72,9 +72,9 @@ The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directl
 ## 4. Create a custom retention filter {#retention-filter}
 
 To view AI Guard evaluations in Datadog, create a custom [retention filter][5] for AI Guard-generated spans. Follow the linked instructions to create a retention filter with the following settings:
-- **Retention query**: `resource_name:ai_guard`
-- **Span rate**: 100%
-- **Trace rate**: 100%
+- {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard`
+- {{< ui >}}Span rate{{< /ui >}}: 100%
+- {{< ui >}}Trace rate{{< /ui >}}: 100%
 
 ## 5. Configure AI Guard policies {#configure-policies}
 
@@ -82,11 +82,11 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 
 ### Configure service policies {#service-policies}
 
-On the **Security** > **AI Guard** > **Settings** > [**Services**][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
-- [**Enforcement mode**](#blocking-policy): Monitor only, or block unsafe requests
-- [**Sensitive data detection**](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
+- [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
+- [{{< ui >}}Sensitive data detection{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
 
-Beside **Default policy**, click **Edit** to set AI Guard's default behavior. To override the default behavior, click **Add Service Policy**, select the service and environment you want your override to apply to, then configure the more specialized policy.
+Beside {{< ui >}}Default policy{{< /ui >}}, click {{< ui >}}Edit{{< /ui >}} to set AI Guard's default behavior. To override the default behavior, click {{< ui >}}Add Service Policy{{< /ui >}}, select the service and environment you want your override to apply to, then configure the more specialized policy.
 
 #### Blocking policy {#blocking-policy}
 
@@ -106,11 +106,11 @@ When enabled, AI Guard scans the last message in each evaluation call, including
 
 ### Block specific tools
 
-You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to **Security** > **AI Guard** > **Settings** > [**Tool Blocklist**][8]. Click **Add Tool Blocking Configuration**, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
+You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Tool Blocklist{{< /ui >}}][8]. Click {{< ui >}}Add Tool Blocking Configuration{{< /ui >}}, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
 
 ### Evaluation sensitivity {#evaluation-sensitivity}
 
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **Security** > **AI Guard** > **Settings** > [**Evaluation Sensitivity**][7].
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Evaluation Sensitivity{{< /ui >}}][7].
 
 Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.

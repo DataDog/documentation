@@ -38,13 +38,13 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**AWS Investigator**][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}AWS Investigator{{< /ui >}}][1] tab.
 
-2. Select an entity type in the **In** field dropdown menu.
+2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
-3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+3. Select an entity or enter a specific entity name in the {{< ui >}}Investigate{{< /ui >}} field to see a diagram of the activities associated with the entity.
 
-4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
+4. Click on a node and select {{< ui >}}View related logs{{< /ui >}} or {{< ui >}}View related signals{{< /ui >}} to investigate further. Use the {{< ui >}}Search for{{< /ui >}} dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/siem/investigator?provider=aws
 
@@ -52,45 +52,45 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "GCP" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**GCP Investigator**][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}GCP Investigator{{< /ui >}}][1] tab.
 
-2. Select an entity type in the **In** field dropdown menu.
+2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
-3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+3. Select an entity or enter a specific entity name in the {{< ui >}}Investigate{{< /ui >}} field to see a diagram of the activities associated with the entity.
 
-4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
+4. Click on a node and select {{< ui >}}View related logs{{< /ui >}} or {{< ui >}}View related signals{{< /ui >}} to investigate further. Use the {{< ui >}}Search for{{< /ui >}} dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/siem/investigator?provider=gcp
 {{% /tab %}}
 
 {{% tab "Azure" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**Azure Investigator**][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Azure Investigator{{< /ui >}}][1] tab.
 
-2. Select an entity type in the **In** field dropdown menu.
+2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
-3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+3. Select an entity or enter a specific entity name in the {{< ui >}}Investigate{{< /ui >}} field to see a diagram of the activities associated with the entity.
 
-4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
+4. Click on a node and select {{< ui >}}View related logs{{< /ui >}} or {{< ui >}}View related signals{{< /ui >}} to investigate further. Use the {{< ui >}}Search for{{< /ui >}} dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/siem/investigator?provider=azure
 {{% /tab %}}
 
 {{% tab "Datadog" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**Datadog Investigator**][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Datadog Investigator{{< /ui >}}][1] tab.
 
-2. Select an entity type in the **In** field dropdown menu.
+2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
-3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+3. Select an entity or enter a specific entity name in the {{< ui >}}Investigate{{< /ui >}} field to see a diagram of the activities associated with the entity.
 
-4. Click on a node and select **View related Audit Trail** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
+4. Click on a node and select {{< ui >}}View related Audit Trail{{< /ui >}} or {{< ui >}}View related signals{{< /ui >}} to investigate further. Use the {{< ui >}}Search for{{< /ui >}} dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/siem/investigator?provider=datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-You can also navigate to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity** (where `user` is the user identity in question) to see the Investigator view filtered to the specific user identity.
+You can also navigate to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click {{< ui >}}Investigate user activity{{< /ui >}} (where `user` is the user identity in question) to see the Investigator view filtered to the specific user identity.
 
 ## Further reading
 

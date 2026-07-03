@@ -45,21 +45,21 @@ Use process-level insights to verify whether SSI has been correctly applied to y
    - `single_step_instrumentation` shows which hosts have SSI enabled or disabled.
    - `single_step_instrumentation_status` shows which hosts have encountered issues with service instrumentation.
 1. Select a host to open the Agent details panel.
-1. In the Agent panel, go to the **Services** tab.
+1. In the Agent panel, go to the {{< ui >}}Services{{< /ui >}} tab.
 1. If SSI is enabled on the host, the tab shows:
    - A banner with the message: "Single Step Instrumentation is enabled on this host."
-   - An **SDK Installations** section if there are issues to troubleshoot.
+   - An {{< ui >}}SDK Installations{{< /ui >}} section if there are issues to troubleshoot.
 
 #### View Kubernetes cluster insights
 
 Use cluster-level insights to understand how SSI is configured and functioning across your Kubernetes clusters. These insights extend troubleshooting beyond individual processes to show how instrumentation is applied to workloads at the cluster level.
 
-1. Navigate to [**Fleet Automation**][9] > **View Agents**, and select **Kubernetes Clusters** in the upper-right corner.
+1. Navigate to [{{< ui >}}Fleet Automation{{< /ui >}}][9] > {{< ui >}}View Agents{{< /ui >}}, and select {{< ui >}}Kubernetes Clusters{{< /ui >}} in the upper-right corner.
 1. Select a cluster to view its details, including:
    - Whether the cluster is managed by Helm or the Datadog Operator
    - The Cluster Agent and Node Agent versions
    - The integrations and services running on each host
-1. Open the **Single Step Instrumentation** tab to review:
+1. Open the {{< ui >}}Single Step Instrumentation{{< /ui >}} tab to review:
    - The cluster's SSI configuration (YAML view)
    - The pods identified as instrumentation targets based on cluster configuration or pod-level annotations
    - The status of each targeted pod, including whether instrumentation succeeded

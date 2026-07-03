@@ -104,7 +104,7 @@ Each client configuration requires the following environment variables:
 {{< tabs >}}
 {{% tab "Claude Code" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Use the Claude CLI to add the MCP server:
 
 <pre><code>claude mcp add datadog-code-security \
@@ -127,7 +127,7 @@ claude mcp list | grep datadog-code-security
 {{% /tab %}}
 {{% tab "Claude Desktop" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your Claude Desktop configuration file:
 
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -156,7 +156,7 @@ Add the following to your Claude Desktop configuration file:
 {{% /tab %}}
 {{% tab "Cursor" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 
 <pre><code>{
@@ -182,7 +182,7 @@ Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 {{% /tab %}}
 {{% tab "VS Code" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your VS Code settings (`.vscode/settings.json` or user settings):
 
 <pre><code>{
