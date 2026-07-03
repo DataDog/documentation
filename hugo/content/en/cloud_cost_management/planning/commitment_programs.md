@@ -113,18 +113,18 @@ The simulation is retrospective. It re-prices your on-demand usage from the sele
 
 ### Run a simulation
 
-1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
+1. Go to the [**Simulator**][2] tab in **Cloud Cost > Planning > Commitment Programs**.
 2. Choose the Savings Plan type, then set your commitment preferences: the owner account, term, and payment model.
-3. Enter an additional hourly commitment and choose the usage period to simulate against. The period defaults to the past 30 days.
+3. Enter an additional hourly commitment and choose the usage period to simulate against, up to the last 3 months. The period defaults to the past 30 days.
 4. Review the projected results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
 
-If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout. The callout shows the suggested hourly commitment, term, and payment option. Click it to apply those settings to the simulation. Cost Optimization Hub generates these recommendations for Compute Savings Plans only.
+If [AWS Cost Optimization Hub][3] has a Savings Plan recommendation for your organization, it appears in a callout. The callout shows the suggested hourly commitment, term, and payment option. Click it to apply those settings to the simulation. Cost Optimization Hub generates these recommendations for Compute Savings Plans only.
 
-To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][5].
+To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][4].
 
 ### Interpret the results
 
-All outputs are estimates based on your usage during the selected period, and actual savings depend on your future usage. Because Savings Plans are shared across a [Consolidated Billing Family][2], a commitment can apply to usage in multiple accounts. If Datadog is missing cost data for the period, the simulator flags the results as incomplete.
+All outputs are estimates based on your usage during the selected period, and actual savings depend on your future usage. Because Savings Plans are shared across a [Consolidated Billing Family][5], a commitment can apply to usage in multiple accounts. If Datadog is missing cost data for the period, the simulator flags the results as incomplete.
 
 Results appear in two sections:
 
@@ -173,7 +173,7 @@ Results appear in two sections:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
-[2]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
-[3]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
-[4]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
-[5]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
+[2]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
+[3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
+[4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
+[5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
