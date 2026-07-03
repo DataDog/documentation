@@ -7793,7 +7793,7 @@ __metadata:
     traverse: "npm:0.6.8"
     typesense: "npm:^3.0.1"
     typesense-instantsearch-adapter: "npm:^2.9.0"
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.0.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.1.tgz"
     yaml-lint: "npm:^1.7.0"
   languageName: unknown
   linkType: soft
@@ -17180,9 +17180,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.0.tgz":
-  version: 2.1.0-beta.0
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.0.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.1.tgz":
+  version: 2.1.0-beta.1
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-use-hash/typesense-sync-v2.1.0-beta.1.tgz"
   dependencies:
     "@babel/runtime": "npm:^7.25.0"
     dotenv: "npm:^16.4.5"
@@ -17191,7 +17191,7 @@ __metadata:
     typesense: "npm:^3.0.1"
     winston: "npm:^3.14.2"
     yargs: "npm:^17.7.2"
-  checksum: 10/9d78f1a1d6f1dfb283af64e1e2982ae38fdc5f02e3eb24a30a233f456f6f3260e97f3c302126a04bd0b877375eff099932451330a0c983851ac1d4758783d496
+  checksum: 10/582826cc98fa52171ae6315d4d1fd91df4e765f097992c7a7cd74153d0dacec0dfde30ecf7d0ab82473eba38a838f096f383159ab66fbedcf4f1f8a7054db82b
   languageName: node
   linkType: hard
 
