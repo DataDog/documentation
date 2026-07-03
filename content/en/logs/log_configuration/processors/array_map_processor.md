@@ -261,8 +261,8 @@ Computes a numeric expression using element or log attributes and write the resu
 {
   "items": [...],
   "out": [
-    {"kb": 1.0},
-    {"kb": 2.0}
+    {"kb": 1},
+    {"kb": 2}
   ]
 }
 ```
