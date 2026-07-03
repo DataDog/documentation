@@ -527,7 +527,7 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-For Copilot, you should install the [Datadog Copilot plugin][65] from the marketplace (follow the same instructions as for the [Copilot CLI][66]).
+For Copilot, you should install the [Datadog Copilot plugin][16] from the marketplace (follow the same instructions as for the [Copilot CLI][65]).
 
 For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
 
@@ -708,7 +708,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
-| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][65] recommended. |
+| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
@@ -895,5 +895,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
-[65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
-[66]: /mcp_server/setup?tab=copilotcli
+[65]: /mcp_server/setup?tab=copilotcli
