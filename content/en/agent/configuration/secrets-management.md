@@ -35,9 +35,13 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 **Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
 
-Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
+Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions.
 
-`secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution.
+**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
+
+#### Single backend
+
+Use `secret_backend_type` and `secret_backend_config` in `datadog.yaml` to configure a single secret backend:
 
 ```yaml
 # datadog.yaml
@@ -46,8 +50,6 @@ secret_backend_type: <backend_type>
 secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
-
-**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
@@ -1453,20 +1455,22 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
-### Option 1b: Using multiple native backends simultaneously
+#### Multiple backends
 
 **Available in Agent version 7.80+**
 
 Instead of a single `secret_backend_type`, you can declare multiple named backends under `multi_secret_backends`. Each backend has its own `type` and `config`, and secrets are routed to a specific backend using a `backendName;` prefix in the `ENC[]` handle.
 
-**Precedence**: If `secret_backend_command` or `secret_backend_type` is also set, `multi_secret_backends` is ignored and a warning is logged. Remove those settings before using `multi_secret_backends`.
+If more than one of the following is set, the highest-priority setting takes effect and the others are ignored with a warning:
 
-#### Configuration
+1. `secret_backend_command`
+2. `secret_backend_type`
+3. `multi_secret_backends`
+
+##### Configuration
 
 ```yaml
 # datadog.yaml
-
-secret_backend_timeout: 30  # applies globally to all backends
 
 multi_secret_backends:
   <backend_name>:
@@ -1477,7 +1481,7 @@ multi_secret_backends:
 
 Each `<backend_name>` is an arbitrary identifier you choose. It cannot contain a semicolon, because `;` is the delimiter used in `ENC[]` handles. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
 
-#### ENC handle format
+##### ENC notation
 
 When `multi_secret_backends` is active, prefix `ENC[]` handles with the backend name followed by a semicolon:
 
@@ -1485,16 +1489,14 @@ When `multi_secret_backends` is active, prefix `ENC[]` handles with the backend 
 ENC[<backend_name>;<secret_key>]
 ```
 
-Only the **first** semicolon is treated as the delimiter. Secret keys that themselves contain semicolons (for example, Kubernetes-style `namespace/secret-name;key`) continue to work.
+Only the **first** semicolon is treated as the backend delimiter. Secret keys that themselves contain semicolons (for example, Kubernetes-style `namespace/secret-name;key`) continue to work.
 
-#### Example
+##### Example
 
 The following configuration reads secrets from two file backends simultaneously:
 
 ```yaml
 # datadog.yaml
-secret_backend_timeout: 30
-
 multi_secret_backends:
   yaml_secrets:
     type: file.yaml
@@ -1515,21 +1517,7 @@ api_key: ENC[yaml_secrets;api_key]
 app_key: ENC[aws_secrets;My-Secrets;appKey]
 ```
 
-#### Partial resolution
-
-If one backend or handle fails, the Agent still substitutes all successfully resolved handles. Failed handles are reported in `datadog-agent secret` output under **Secrets not resolved**:
-
-```
-=== Secrets stats ===
-Number of secrets resolved: 1
-Secrets handle resolved:
-- 'yaml_secrets;api_key': from datadog.yaml
-
-Secrets not resolved:
-  - handle "aws_secrets;nokey": an error occurred while resolving 'nokey': backend does not provide secret key
-```
-
-#### Migrating from `secret_backend_type`
+##### Migrating from `secret_backend_type`
 
 To switch from a single `secret_backend_type` to `multi_secret_backends`:
 
