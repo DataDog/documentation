@@ -237,15 +237,92 @@ Send batch latency
 
 ## HTTP server metrics
 
-{{% observability_pipelines/metrics/http_server %}}
+These metrics are emitted by sources that receive data over HTTP, such as the Datadog Agent, HTTP/S Server, Splunk HEC, and OpenTelemetry sources.
+
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the source type.
+
+`pipelines.http_server_requests_received_total`
+: **Description**: The number of HTTP requests received.
+: **Metric type**: count
+
+`pipelines.http_server_responses_sent_total`
+: **Description**: The number of HTTP responses sent.
+: **Metric type**: count
+
+`pipelines.http_server_handler_duration_seconds`
+: **Description**: The time spent handling an HTTP request.
+: **Metric type**: distribution
 
 ## HTTP client metrics
 
-{{% observability_pipelines/metrics/http_client %}}
+These metrics are emitted by destinations that send data over HTTP, such as Datadog Logs, Datadog Metrics, Elasticsearch, OpenSearch, New Relic, Splunk HEC, Microsoft Sentinel, SentinelOne, CrowdStrike NG-SIEM, Google SecOps, and the HTTP Client destination. **Note**: AWS-based destinations (such as Amazon S3, Amazon OpenSearch, and Amazon Security Lake) do not emit these metrics.
+
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the destination type.
+
+`pipelines.http_client_requests_sent_total`
+: **Description**: The number of HTTP requests sent, tagged by request method.
+: **Metric type**: count
+
+`pipelines.http_client_responses_total`
+: **Description**: The number of HTTP responses received, tagged by response status.
+: **Metric type**: count
+
+`pipelines.http_client_errors_total`
+: **Description**: The number of HTTP client errors, tagged by error kind.
+: **Metric type**: count
+
+`pipelines.http_client_rtt_seconds`
+: **Description**: The round-trip time, in seconds, for HTTP requests, from when the request is sent to when the final response or error is received.
+: **Metric type**: distribution
+
+`pipelines.http_client_response_rtt_seconds`
+: **Description**: The round-trip time, in seconds, of HTTP requests, tagged by response status.
+: **Metric type**: distribution
+
+`pipelines.http_client_error_rtt_seconds`
+: **Description**: The round-trip time, in seconds, of HTTP requests that resulted in an error, tagged by error kind.
+: **Metric type**: distribution
 
 ## Adaptive concurrency metrics
 
-{{% observability_pipelines/metrics/adaptive_concurrency %}}
+These metrics describe the adaptive concurrency controller, which automatically tunes how many in-flight HTTP requests a destination allows based on observed response times. They are emitted by destinations that send data over HTTP, including AWS-based destinations.
+
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the destination type.
+
+`pipelines.active_endpoints`
+: **Description**: The number of sink endpoints that are marked healthy.
+: **Metric type**: gauge
+
+`pipelines.adaptive_concurrency_limit`
+: **Description**: The concurrency limit for HTTP requests to this destination, automatically adjusted by the adaptive concurrency controller based on observed response times.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_in_flight`
+: **Description**: The number of HTTP requests in flight to a destination, compared against the adaptive concurrency limit to determine when to throttle.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_reached_limit`
+: **Description**: Whether the adaptive concurrency controller reached its computed limit (1) or not (0) during the last measurement interval.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_back_pressure`
+: **Description**: Whether the adaptive concurrency controller detected back pressure (1) or not (0) during the last measurement interval.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_averaged_rtt`
+: **Description**: The smoothed average round-trip time (RTT), in seconds, for HTTP requests to this destination, used as the baseline for adaptive concurrency calculations.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_observed_rtt`
+: **Description**: The round-trip time (RTT), in seconds, observed for the most recent HTTP request to this destination.
+: **Metric type**: distribution
+
+`pipelines.adaptive_concurrency_past_rtt_mean`
+: **Description**: The historical mean RTT, in seconds, for HTTP requests to this destination, used as the long-term baseline for adaptive concurrency adjustments.
+: **Metric type**: distribution
 
 ## Buffer metrics
 

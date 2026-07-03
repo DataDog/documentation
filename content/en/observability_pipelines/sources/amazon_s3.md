@@ -78,7 +78,36 @@ For the [component metrics][6] and [source buffer metrics][7] emitted by all sou
 
 ### Amazon S3 metrics
 
-{{% observability_pipelines/metrics/amazon_s3 %}}
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the source type.
+
+`pipelines.sqs_message_received_messages_total`
+: **Description**: The number of SQS messages received.
+: **Metric type**: count
+
+`pipelines.sqs_message_processing_succeeded_total`
+: **Description**: The number of SQS messages successfully processed.
+: **Metric type**: count
+
+`pipelines.sqs_message_delete_succeeded_total`
+: **Description**: The number of successful deletions of SQS messages.
+: **Metric type**: count
+
+`pipelines.sqs_message_defer_succeeded_total`
+: **Description**: The number of SQS messages for which visibility-timeout deferral succeeded.
+: **Metric type**: count
+
+`pipelines.sqs_s3_event_record_ignored_total`
+: **Description**: The number of S3 event records in an SQS message that were ignored because they were not `ObjectCreated` event kinds.
+: **Metric type**: count
+
+`pipelines.s3_object_processing_succeeded_duration_seconds`
+: **Description**: Time, in seconds, taken to successfully process an S3 object.
+: **Metric type**: distribution
+
+`pipelines.s3_object_processing_failed_duration_seconds`
+: **Description**: Time, in seconds, taken to process an S3 object that failed.
+: **Metric type**: distribution
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: https://app.datadoghq.com/observability-pipelines

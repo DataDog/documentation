@@ -50,7 +50,12 @@ For the [component metrics][2] and [processor buffer metrics][3] emitted by all 
 
 ### Reduce metrics
 
-{{% observability_pipelines/metrics/reduce %}}
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `reduce` for these metrics.
+
+`pipelines.stale_events_flushed_total`
+: **Description**: The number of stale events that the processor has flushed.
+: **Metric type**: count
 
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: /observability_pipelines/monitoring/metrics/#component-metrics

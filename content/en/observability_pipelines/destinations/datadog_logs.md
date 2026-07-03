@@ -107,7 +107,12 @@ For the [component metrics][7] and [destination buffer metrics][8] emitted by al
 
 ### Datadog Logs metrics
 
-{{% observability_pipelines/metrics/datadog_logs %}}
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `datadog_logs` for these metrics.
+
+`pipelines.datadog_logs_reserved_attribute_conflicts_total`
+: **Description**: The number of conflicts encountered when relocating fields with semantic meaning to a Datadog reserved attribute. Available in Worker version 2.18 and later.
+: **Metric type**: count
 
 ## How the destination works
 

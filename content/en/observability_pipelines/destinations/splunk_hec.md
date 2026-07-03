@@ -95,7 +95,12 @@ For the [component metrics][9] and [destination buffer metrics][10] emitted by a
 
 ### Splunk HEC metrics
 
-{{% observability_pipelines/metrics/splunk_hec %}}
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `splunk_hec` for these metrics.
+
+`pipelines.splunk_pending_acks`
+: **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting response.
+: **Metric type**: gauge
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

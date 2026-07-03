@@ -106,7 +106,12 @@ For the [component metrics][8] and [processor buffer metrics][9] emitted by all 
 
 ### Generate Metrics metrics
 
-{{% observability_pipelines/metrics/generate_metrics %}}
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `generate_metrics` for these metrics.
+
+`pipelines.generated_metrics_from_logs_total`
+: **Description**: The number of metrics generated from log events by the processor.
+: **Metric type**: count
 
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
