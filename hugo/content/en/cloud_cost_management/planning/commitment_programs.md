@@ -109,7 +109,7 @@ Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="
 
 The simulation is retrospective: it re-prices your on-demand usage from the selected period as if the Savings Plan had been active, and shows what your cost and savings _would have been_. It does not forecast future usage.
 
-{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing input parameters, summary metrics, and a time series chart of projected commitment coverage." style="width:100%;" >}}
+{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing the input parameters, an Estimated Impact summary with a before-and-after metrics table, and a Simulated Cost time series chart." style="width:100%;" >}}
 
 ### Run a simulation
 
