@@ -96,7 +96,7 @@ Your calendar is automatically updated if your on-call shifts change. To revoke 
 
 ##### 🔔 Get Notified
 
-Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call profile settings][6].
+Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call notification preferences][6].
 
 
 #### Troubleshooting schedule exports
@@ -121,4 +121,4 @@ When team members leave your organisation, they are not automatically removed fr
 [3]: https://support.google.com/calendar/answer/37100?hl=en&co=GENIE.Platform%3DDesktop
 [4]: https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c
 [5]: https://support.apple.com/en-us/102301
-[6]: /incident_response/on-call/profile_settings/
+[6]: /incident_response/on-call/notification_preferences/

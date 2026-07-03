@@ -2806,15 +2806,15 @@ menu:
       parent: oncall
       identifier: oncall_automations
       weight: 6
-    - name: Profile Settings
-      url: incident_response/on-call/profile_settings/
+    - name: Notification Preferences
+      url: incident_response/on-call/notification_preferences/
       parent: oncall
-      identifier: oncall_profile_settings
+      identifier: oncall_notification_preferences
       weight: 7
     - name: Supported Countries
-      url: incident_response/on-call/profile_settings/supported_countries/
-      identifier: oncall_profile_settings_countries
-      parent: oncall_profile_settings
+      url: incident_response/on-call/notification_preferences/supported_countries/
+      identifier: oncall_notification_preferences_countries
+      parent: oncall_notification_preferences
       weight: 1
     - name: Guides
       url: incident_response/on-call/guides/

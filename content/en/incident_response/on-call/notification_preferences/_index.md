@@ -1,7 +1,8 @@
 ---
-title: Profile Settings
+title: Notification Preferences
 aliases:
 - /service_management/on-call/profile_settings/
+- /incident_response/on-call/profile_settings/
 further_reading:
 - link: '/incident_response/on-call/'
   tag: 'Documentation'
@@ -12,14 +13,14 @@ further_reading:
 To use Datadog On-Call on your mobile device, install the <a href="/mobile#installing">Datadog mobile app</a>.
 </div>
 
-You must [configure your profile settings][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
+You must [configure your notification preferences][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
 
 ## Configure your On-Call profile
 
 Go to [My On-Call Profile][1] to configure your settings.
 
 ### Contact methods
-{{< img src="incident_response/on-call/profile_settings/contact_methods.png" alt="Adding contact methods in On-Call profile settings. A phone number, an email, and a mobile device are configured. The phone number is in a hover state, displaying 'Test Call' and 'Test SMS' options." style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/contact_methods.png" alt="Adding contact methods in On-Call notification preferences. A phone number, an email, and a mobile device are configured. The phone number is in a hover state, displaying 'Test Call' and 'Test SMS' options." style="width:100%;" >}}
    - You must manually add your email or phone number. Afterwards, the screen asks you for consent to reach you through SMS. If you consent, a green badge appears next to your phone number, indicating that it can be used for SMS notification preferences below.
    - If the Datadog [mobile app][2] is installed on your device, your device appears automatically in this list. Check your settings in the mobile app to ensure that your device can receive notifications.
    - Datadog recommends that you test each of your contact methods. Hover over your contact method for test options.
@@ -31,7 +32,7 @@ Go to [My On-Call Profile][1] to configure your settings.
 - Phone calls
 
 <div class="alert alert-info">
-Phone number support varies by country. See <a href="/incident_response/on-call/profile_settings/supported_countries/">Supported Countries</a> for the full list of supported countries, or open the phone number <strong>Prefix</strong> menu when adding a phone contact method in your On-Call profile. If your country does not appear, phone calls and SMS are not available for that location.
+Phone number support varies by country. See <a href="/incident_response/on-call/notification_preferences/supported_countries/">Supported Countries</a> for the full list of supported countries, or open the phone number <strong>Prefix</strong> menu when adding a phone contact method in your On-Call profile. If your country does not appear, phone calls and SMS are not available for that location.
 </div>
 
 To set up your mobile device, including how to **circumvent Do Not Disturb mode**, see [Set Up Your Mobile Device for Datadog On-Call][4].
@@ -42,7 +43,7 @@ Notification preferences allow you to tailor how and when **you** are alerted fo
 The system cycles through your configured notification preferences until you either acknowledge the Page, or the Page is escalated to the next on-call person as defined in the [Escalation Policy][6].
 
 #### High urgency notifications
-{{< img src="incident_response/on-call/profile_settings/high_urgency_notification_preferences.png" alt="Configuring high urgency notification preferences in On-Call profile settings: 'When a high urgency Page is triggered' set to notify a phone number immediately in order to quickly respond to critical Pages." style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/high_urgency_notification_preferences.png" alt="Configuring high urgency notification preferences in On-Call: 'When a high urgency Page is triggered' set to notify a phone number immediately in order to quickly respond to critical Pages." style="width:100%;" >}}
 
 Configure your high-urgency Pages (P1 monitor alerts, SEV-1 security threats, SEV-1 incidents, etc.), to demand immediate attention and escalation.
 
@@ -58,12 +59,12 @@ For example, you can configure On-Call to start with a push notification, call a
 - Plan escalation policies carefully to avoid missed responses during emergencies.
 
 #### Low urgency notifications
-{{< img src="incident_response/on-call/profile_settings/low_urgency_notification_preferences.png" alt="Configuring low urgency notification preferences in On-Call profile settings: 'When a low urgency Page is triggered' set to notify an email immediately but don't escalate it further." style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/low_urgency_notification_preferences.png" alt="Configuring low urgency notification preferences in On-Call: 'When a low urgency Page is triggered' set to notify an email immediately but don't escalate it further." style="width:100%;" >}}
 
 Configure your low-urgency Pages (non-blocking issues, informational signals, etc.), to minimize disruptions while ensuring you stay informed. For example, you can opt to only yourself through email.
 
 ### Other notifications
-{{< img src="incident_response/on-call/profile_settings/settings_shift_reminder.png" alt="Configuring a shift reminder in On-Call profile settings. A shift reminder is configured to notify a phone number 10 minutes before the shift begins." style="width:100%;" >}}
+{{< img src="incident_response/on-call/profile_settings/settings_shift_reminder.png" alt="Configuring a shift reminder in On-Call notification preferences. A shift reminder is configured to notify a phone number 10 minutes before the shift begins." style="width:100%;" >}}
 
 Under **Other Notifications**, you can opt to receive a **Shift reminder** before your On-Call shift begins.
 

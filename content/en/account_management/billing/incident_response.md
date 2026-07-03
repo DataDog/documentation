@@ -149,6 +149,6 @@ Your monthly bill contains the following:
 [4]: https://app.datadoghq.com/billing/seats
 [5]: /incident_response/on-call/schedules/
 [6]: /incident_response/on-call/escalation_policies/
-[7]: /incident_response/on-call/profile_settings/#notification-preferences
+[7]: /incident_response/on-call/notification_preferences/#notification-preferences
 [8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin

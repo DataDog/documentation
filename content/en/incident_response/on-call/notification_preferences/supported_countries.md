@@ -1,9 +1,9 @@
 ---
 title: Supported Countries
 further_reading:
-- link: '/incident_response/on-call/profile_settings/'
+- link: '/incident_response/on-call/notification_preferences/'
   tag: 'Documentation'
-  text: 'Profile Settings'
+  text: 'Notification Preferences'
 - link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
@@ -127,4 +127,4 @@ During a free trial of On-Call, SMS and phone call notifications are not availab
 If you need to test On-Call in a country that isn't available during your trial, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 
-[1]: /incident_response/on-call/profile_settings/#supported-contact-methods
+[1]: /incident_response/on-call/notification_preferences/#supported-contact-methods

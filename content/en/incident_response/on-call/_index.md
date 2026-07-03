@@ -85,14 +85,14 @@ To restrict access to an On-Call resource:
 
 <div class="alert alert-danger">To preserve incident history, Datadog On-Call does not support deletion of resources like Pages, escalation policies, or schedules. To test On-Call without affecting your production environment, create a trial organization as a sandbox.</div>
 
-To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
+To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call notification preferences][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/incident_response/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/pages">}}<u>Pages</u>: Trigger Pages from monitors, incidents, security signals, and other sources. Acknowledge, reassign, or resolve Pages, or promote them to incidents.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
-  {{< nextlink href="/incident_response/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/notification_preferences">}}<u>Notification Preferences</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Billing
@@ -104,7 +104,7 @@ On-Call is a seat-based SKU. To learn more about how On-Call is billed and how t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /incident_response/on-call/teams
-[2]: /incident_response/on-call/profile_settings
+[2]: /incident_response/on-call/notification_preferences
 [3]: /account_management/rbac/granular_access/
 [4]: /account_management/rbac/#role-based-access-control
 [5]: https://www.datadoghq.com/pricing/?product=incident-response#products
