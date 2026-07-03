@@ -114,14 +114,9 @@ The simulation is retrospective. It re-prices your on-demand usage from the sele
 ### Run a simulation
 
 1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
-2. Choose the {{< ui >}}Savings Plan Type{{< /ui >}}: {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
-3. Set your commitment preferences (use {{< ui >}}Edit{{< /ui >}} to change them):
-   - {{< ui >}}Owner Account{{< /ui >}}: The AWS account that would own the Savings Plan.
-   - {{< ui >}}Term{{< /ui >}}: {{< ui >}}1 Year{{< /ui >}} or {{< ui >}}3 Years{{< /ui >}}.
-   - {{< ui >}}Payment Model{{< /ui >}}: {{< ui >}}No Upfront{{< /ui >}}, {{< ui >}}Partial Upfront{{< /ui >}}, or {{< ui >}}All Upfront{{< /ui >}}.
-4. Enter an {{< ui >}}Additional Hourly Commitment{{< /ui >}}: the amount per hour ($/hour) you want to model.
-5. Set {{< ui >}}Simulate against usage during{{< /ui >}} to the historical period to evaluate the commitment against. This defaults to the past 30 days.
-6. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
+2. Choose the Savings Plan type, then set your commitment preferences: the owner account, term, and payment model.
+3. Enter an additional hourly commitment and choose the usage period to simulate against. The period defaults to the past 30 days.
+4. Review the projected results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
 
 If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout. The callout shows the suggested hourly commitment, term, and payment option. Click it to apply those settings to the simulation. Cost Optimization Hub generates these recommendations for Compute Savings Plans only.
 
