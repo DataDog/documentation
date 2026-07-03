@@ -168,72 +168,44 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the [custom annotations API from Playwright][1]:
+You can add custom tags to your tests by using the current active span:
 
 ```javascript
 test('user profile', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.memory.usage]', // DD_TAGS is mandatory and case sensitive
-    description: 'low',
-  });
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.task.id]',
-    description: '41123',
-  });
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('team_owner', 'my_team')
   // ...
-});
+})
 
 test('landing page', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.cpu.usage]',
-    description: 'high',
-  });
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('test.cpu.usage', 'high')
   // ...
-});
+})
 ```
 
-The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALUE` are *strings* representing tag name and value respectively:
-
-```json
-{
-  "type": "DD_TAGS[$TAG_NAME]",
-  "description": "$TAG_VALUE"
-}
-```
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 ### Adding custom measures to tests
 
-Custom measures also use custom annotations:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```javascript
 test('user profile', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.memory.allocations]', // DD_TAGS is mandatory and case sensitive
-    description: 16, // this is a number
-  });
-});
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('memory_allocations', 16)
+  // ...
+})
 ```
 
-The format of the annotations is the following, where `$TAG_NAME` is a *string* representing the tag name and `$TAG_VALUE` is a *number* representing the tag value:
-
-```json
-{
-  "type": "DD_TAGS[$TAG_NAME]",
-  "description": $TAG_VALUE
-}
-```
-**Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
-
-<div class="alert alert-danger">
-  <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
-</div>
+For more information about custom measures, see the [Add Custom Measures Guide][2].
 
 ### Playwright - RUM integration
 
 If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
 
-[1]: https://playwright.dev/docs/test-annotations#custom-annotations
-[2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
