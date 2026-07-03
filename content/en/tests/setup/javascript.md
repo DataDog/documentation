@@ -24,6 +24,23 @@ further_reading:
 
 ## Compatibility
 
+### `dd-trace` v6
+
+Supported test frameworks:
+
+| Test Framework | Version | Notes |
+|---|---|---|
+| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
+| Mocha | >= 8.0.0 |
+| Cucumber | >= 7.0.0 |
+| Cypress | >= 12.0.0 |
+| Playwright | >= 1.38.0 |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. |
+
+`dd-trace` v6 requires Node.js >= 22.
+
+### `dd-trace` v5
+
 Supported test frameworks:
 
 | Test Framework | Version | Notes |
@@ -33,7 +50,7 @@ Supported test frameworks:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.16.0 | Supported from `dd-trace>=4.42.0` and `dd-trace>=5.18.0`. Only supported from Node.js>=18.19 or Node.js>=20.6 |
+| Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. |
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
 
@@ -361,66 +378,6 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-### Cypress before version 10
-
-These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][4] for more information about migrating to a newer version.
-
-1. Set [`pluginsFile`][5] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][6]:
-{{< code-block lang="json" filename="cypress.json" >}}
-{
-  "pluginsFile": "dd-trace/ci/cypress/plugin"
-}
-{{< /code-block >}}
-
-If you already defined a `pluginsFile`, initialize the instrumentation with:
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // your previous code is before this line
-  return require('dd-trace/ci/cypress/plugin')(on, config)
-}
-{{< /code-block >}}
-
-2. Add the following line to the **top level** of your [`supportFile`][7]:
-{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// Your code can be before this line
-// require('./commands')
-require('dd-trace/ci/cypress/support')
-// Your code can also be after this line
-// Cypress.Commands.add('login', (email, pw) => {})
-{{< /code-block >}}
-
-#### Cypress `after:run` event
-Datadog requires the [`after:run`][2] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
-
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // your previous code is before this line
-  require('dd-trace/ci/cypress/plugin')(on, config)
-  on('after:run', (details) => {
-    // other 'after:run' handlers
-    // important that this function call is returned
-    return require('dd-trace/ci/cypress/after-run')(details)
-  })
-}
-{{< /code-block >}}
-
-#### Cypress `after:spec` event
-Datadog requires the [`after:spec`][3] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
-
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // your previous code is before this line
-  require('dd-trace/ci/cypress/plugin')(on, config)
-  on('after:spec', (...args) => {
-    // other 'after:spec' handlers
-    // Important that this function call is returned
-    // Important that all the arguments are passed
-    return require('dd-trace/ci/cypress/after-run')(...args)
-  })
-}
-{{< /code-block >}}
-
-
 Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
 {{< code-block lang="shell" >}}
@@ -449,7 +406,7 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][4] section of the Node.js custom instrumentation documentation.
 
 ### Adding custom measures to tests
 
@@ -467,24 +424,20 @@ it('renders a hello world', () => {
 })
 ```
 
-For more information about custom measures, see the [Add Custom Measures Guide][9].
+For more information about custom measures, see the [Add Custom Measures Guide][5].
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][10], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
+If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
 [3]: https://docs.cypress.io/api/plugins/after-spec-api
-[4]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
-[5]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[6]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/application_monitoring/browser/setup/
-[11]: /continuous_integration/guides/rum_integration/
+[4]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[6]: /real_user_monitoring/application_monitoring/browser/setup/
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
@@ -492,7 +445,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-`vitest` and `dd-trace` require Node.js>=18.19 or Node.js>=20.6 to work.
+Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js >= 18.19 or >= 20.6 for Vitest instrumentation, and `dd-trace` v6 requires Node.js >= 22.
 
 Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
@@ -604,7 +557,7 @@ The following is a list of the most important configuration settings that can be
 `test_session.name`
 : Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: (CI job name + test command)<br/>
+**Default**: Framework invocation for `dd-trace` v6, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`; CI job name and test command for `dd-trace` v5<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `service`
@@ -754,9 +707,6 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
-### Jest's `--workerThreads`
-Jest's [workerThreads][13] option is not supported.
-
 ### Jest's `test.concurrent`
 Jest's [test.concurrent][14] is not supported.
 
@@ -774,6 +724,8 @@ Vitest's [browser mode][17] is not supported.
 By default, Vitest's [`isolate`][21] option is `true`, so each test file runs in its own fork or thread. Vitest is ESM-first and relies on [import-in-the-middle][20] for instrumentation, which incurs a setup cost every time a suite starts. With isolation, that setup cost is repeated for every file. The effect is largest when you have many small, fast suites, because setup time can dominate wall-clock time.
 
 To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
+
+To keep Vitest isolation enabled, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true` to lower worker startup overhead. This option is available in `dd-trace` versions `5.111.0` and later, and `6.0.0` and later. It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations. Because this mode does not initialize `dd-trace` in Vitest workers, features that require an active test span inside test code, such as custom test tags, custom spans, log correlation from test code, and Failed Test Replay, are not supported.
 
 ## Best practices
 
@@ -826,21 +778,12 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value is:
 
-- CI job name
-- Command used to run the tests (such as `yarn test`)
+- For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`
+- For `dd-trace` v5, a combination of CI job name and the command used to run the tests, such as `yarn test`
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
-
-#### When to use `DD_TEST_SESSION_NAME`
-
-There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
-
-- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-
-Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 
@@ -858,7 +801,6 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[13]: https://jestjs.io/docs/configuration#workerthreads
 [14]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit

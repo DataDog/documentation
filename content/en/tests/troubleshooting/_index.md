@@ -181,6 +181,8 @@ By default, Vitest's [`isolate`][17] option is `true`, so each test file runs in
 
 To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
 
+To keep Vitest isolation enabled, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true` to lower worker startup overhead. This option is available in `dd-trace` versions `5.111.0` and later, and `6.0.0` and later. It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations. Because this mode does not initialize `dd-trace` in Vitest workers, features that require an active test span inside test code, such as custom test tags, custom spans, log correlation from test code, and Failed Test Replay, are not supported.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
