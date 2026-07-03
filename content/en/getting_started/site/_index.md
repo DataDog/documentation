@@ -40,6 +40,7 @@ Developers are responsible for:
 | US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
+| UK1     | `https://uk1.datadoghq.com` | `uk1.datadoghq.com` | UK        |
 
 If you have a custom domain, such as `demo.datadoghq.com`, you can find your site listed at the top of the {{< ui >}}My Preferences{{< /ui >}} page.
 

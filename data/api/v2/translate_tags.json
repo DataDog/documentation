@@ -375,6 +375,10 @@
     "name": "Report Schedules",
     "description": "Create and manage scheduled reports. A scheduled report renders a dashboard or integration\ndashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,\nor Microsoft Teams."
   },
+  "reporting-and-sharing": {
+    "name": "Reporting And Sharing",
+    "description": "The Reporting and Sharing endpoints allow you to create snapshots of graph widgets and other shareable resources."
+  },
   "restriction-policies": {
     "name": "Restriction Policies",
     "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."

@@ -116,6 +116,7 @@ The default allowlist includes the following domains. This list will evolve over
 | .NET/C# | `api.nuget.org` |
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
+| Ruby | `api.rubygems.org`, `index.rubygems.org`, `rubygems.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
 | Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 

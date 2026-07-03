@@ -172,7 +172,7 @@ For monolog v3, add the following configuration:
 ?>
 ```
 
-If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the **Trace Id Attributes** field.
+If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the {{< ui >}}Trace Id Attributes{{< /ui >}} field.
 
 ## Further Reading
 

@@ -19,6 +19,9 @@ products:
   url: /security/cloud_security_management/
   icon: cloud-security-management
 further_reading:
+  - link: "/security/assignee_management/"
+    tag: "Documentation"
+    text: "Assignee Management"
   - link: "/incident_response/case_management/"
     tag: "Documentation"
     text: "Case Management"
@@ -32,6 +35,8 @@ further_reading:
 You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2], [ServiceNow][21], and [Linear][23]. For details, see [Case Management integration with third-party ticketing tools][3].
 
 This page discusses using Datadog Security with Datadog Case Management for ticketing management.
+
+To assign a Datadog user to a finding without creating a ticket, see [Assignee Management][30].
 
 
 ## Case management and security products
@@ -335,3 +340,4 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
 [23]: /integrations/linear/
+[30]: /security/assignee_management/

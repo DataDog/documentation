@@ -4214,8 +4214,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
+        unstable: []
         order: 22
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
@@ -4227,8 +4226,7 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 23
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
@@ -16860,6 +16858,23 @@ menu:
           - v2
         operationids:
           - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: Reporting And Sharing
+      url: /api/latest/reporting-and-sharing/
+      identifier: reporting-and-sharing
+      generated: true
+    - name: Create a graph snapshot
+      url: /api/latest/reporting-and-sharing/create-a-graph-snapshot/
+      identifier: reporting-and-sharing-create-a-graph-snapshot
+      parent: reporting-and-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnapshot
         unstable:
           - v2
         order: 1

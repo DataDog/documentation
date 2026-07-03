@@ -17,7 +17,7 @@ title: 메트릭 기반 SLO
 
 메트릭 기반 SLO는 좋은 이벤트와 나쁜 이벤트를 구분해야 하는 개수 기반 데이터 스트림에 유용합니다. 메트릭 쿼리는 좋은 이벤트의 총계를 시간에 따른 총 이벤트 합계로 나누는 데 사용해 서비스 수준 지표(SLI)를 계산합니다. 모든 메트릭을 사용해 SLO를 생성할 수 있습니다. 여기에는 [APM 스팬][1], [RUM 이벤트][2] 및 [로그][3]에서 생성된 커스텀 로그가 포함됩니다. SLO가 설정되고 계산된 방법에 대한 개요를 보려면 [서비스 수준 목표][4] 페이지를 참조하세요.
 
-{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="메트릭 기반 SLP 예시" >}}
+{{< img src="service_level_objectives/metric/metric_slo_side_panel.png" alt="메트릭 기반 SLP 예시" >}}
 
 ## 설정
 
@@ -39,11 +39,11 @@ title: 메트릭 기반 SLO
 
 메트릭 기반 SLI를 사용하면 SLI의 가장 중요한 속성에 집중할 수 있습니다. 편집기에서 `datacenter`, `env`, `availability-zone`, `resource`와 같은 태그 또는 기타 관련 그룹을 사용하여 메트릭 기반 SLI에 그룹을 추가할 수 있습니다:
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="그룹화된 메트릭 기반 SLO 편집기" >}}
+{{< img src="service_level_objectives/metric/metric_slo_creation.png" alt="그룹화된 메트릭 기반 SLO 편집기" >}}
 
 이러한 SLI를 그룹화하여 각 개별 그룹의 상태, 정상 요청 개수, 남은 오류 예산을 세부 정보 패널에서 시각화할 수 있습니다.
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="메트릭 기반 SLO 그룹 결과" >}}
+{{< img src="service_level_objectives/metric/metric_slo_history_groups.png" alt="메트릭 기반 SLO 그룹 결과" >}}
 
 기본적으로 막대 그래프에는 전체 SLO에 대한 좋은 요청과 나쁜 요청의 전체 개수가 표시됩니다. 표에서 해당 행을 클릭하면 개별 그룹별로 좋은 요청과 나쁜 요청 개수로 범위가 지정된 막대 그래프를 확인할 수 있습니다. 또한 막대 그래프 바로 아래에 있는 범례에서 적절한 옵션을 선택하여 좋은 요청 개수 또는 나쁜 요청 개수를 표시하거나 숨길 수도 있습니다. 
 
