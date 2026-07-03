@@ -111,10 +111,10 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 : Forces full test discovery when the framework supports it, including in suite-level skipping mode.<br/>
 **CLI flag:** `--force-full-test-discovery`<br/>
 **Default:** `false`<br/>
-**Example:** `true`
+**Supported values:** `true`, `false`
 
 `DD_TEST_OPTIMIZATION_RUNNER_STRICT_DISCOVERY`
-: Fails planning when full test discovery fails. Canceled full discovery still uses fast test file discovery fallback.<br/>
+: Fails planning when full test discovery errors out. If full discovery is canceled (for example, by a timeout), `ddtest` still falls back to fast test file discovery instead of failing.<br/>
 **CLI flag:** `--strict-discovery`<br/>
 **Default:** `false`<br/>
 **Example:** `true`
