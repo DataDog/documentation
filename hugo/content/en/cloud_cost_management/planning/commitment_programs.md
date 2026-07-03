@@ -101,13 +101,13 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 {{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
 
-## Savings Plan simulation
+## Savings plan simulation
 
 <div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level.</div>
 
-Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
+Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment against your historical usage. The results show the projected coverage, utilization, and savings.
 
-The simulation is retrospective: it re-prices your on-demand usage from the selected period as if the Savings Plan had been active, and shows what your cost and savings _would have been_. It does not forecast future usage.
+The simulation is retrospective. It re-prices your on-demand usage from the selected period as if the Savings Plan had been active. The results show what your cost and savings _would have been_, not a forecast of future usage.
 
 {{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing the input parameters, an Estimated Impact summary with a before-and-after metrics table, and a Simulated Cost time series chart." style="width:100%;" >}}
 
@@ -123,7 +123,7 @@ The simulation is retrospective: it re-prices your on-demand usage from the sele
 5. Set {{< ui >}}Simulate against usage during{{< /ui >}} to the historical period to evaluate the commitment against. This defaults to the past 30 days.
 6. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
 
-If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout with the suggested hourly commitment, term, and payment option. Click the callout to apply those settings to the simulation. Cost Optimization Hub currently generates these recommendations for Compute Savings Plans only.
+If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout. The callout shows the suggested hourly commitment, term, and payment option. Click it to apply those settings to the simulation. Cost Optimization Hub generates these recommendations for Compute Savings Plans only.
 
 To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][5].
 
