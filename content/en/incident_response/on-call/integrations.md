@@ -31,6 +31,8 @@ To use an integration marked "Preview", or to request a new integration, request
   {{< integration-tile href="/integrations/zabbix/#trigger-on-call-pages" logo_id="zabbix" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
   {{< integration-tile href="/integrations/nagios/?tab=host#trigger-on-call-pages" logo_id="nagios" src="integrations_logos/nagios.png" alt="Nagios" title="Nagios" >}}
   {{< integration-tile href="/integrations/catchpoint/#events" logo_id="catchpoint" src="integrations_logos/catchpoint.png" alt="Catchpoint" title="Catchpoint" >}}
+  {{< integration-tile href="/integrations/sumo-logic/#trigger-on-call-pages" logo_id="sumo-logic" src="integrations_logos/sumo_logic.png" alt="Sumo Logic" title="Sumo Logic" >}}
+  {{< integration-tile href="/integrations/new-relic/#trigger-on-call-pages" logo_id="new-relic" src="integrations_logos/new_relic.png" alt="New Relic" title="New Relic" >}}
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="bugsnag" src="integrations_logos/bugsnag.png" alt="BugSnag" title="BugSnag" preview="true" >}}
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" preview="true" >}}
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" preview="true" >}}
