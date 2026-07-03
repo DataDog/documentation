@@ -24,9 +24,8 @@ further_reading:
 
 ## Compatibility
 
-### `dd-trace` v6
-
-Supported test frameworks:
+{{< tabs >}}
+{{% tab "dd-trace v6" %}}
 
 | Test Framework | Version | Notes |
 |---|---|---|
@@ -39,9 +38,8 @@ Supported test frameworks:
 
 `dd-trace` v6 requires Node.js >= 22.
 
-### `dd-trace` v5
-
-Supported test frameworks:
+{{% /tab %}}
+{{% tab "dd-trace v5" %}}
 
 | Test Framework | Version | Notes |
 |---|---|---|
@@ -51,6 +49,9 @@ Supported test frameworks:
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
 | Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
 
