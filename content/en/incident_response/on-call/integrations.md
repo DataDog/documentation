@@ -29,6 +29,22 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
   {{< image-card href="/integrations/catchpoint/#events" src="integrations_logos/catchpoint.png" alt="Catchpoint" title="Catchpoint" >}}
 {{< /card-grid >}}
 
+### In Preview
+
+The following integrations are in Preview. Sign up to get early access.
+
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag.png" alt="BugSnag" title="BugSnag" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime.png" alt="uptime.com" title="uptime.com" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" >}}
+{{< /card-grid >}}
+
+{{< beta-callout url="https://www.datadoghq.com/product-preview/on-call-integrations/" >}}
+These On-Call integrations are in Preview. Request access to join the waiting list.
+{{< /beta-callout >}}
+
 ## Other tools
 
 If your tool is not listed above, use the [Datadog Events API][1] to trigger On-Call pages from any source that can make an HTTP request.
