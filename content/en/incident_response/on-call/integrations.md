@@ -24,7 +24,7 @@ To use an integration marked "Preview", or to request a new integration, request
   {{< integration-tile href="/incident_response/on-call/pages/#through-slack" logo_id="slack" src="integrations_logos/slack.png" alt="Slack" title="Slack" >}}
   {{< integration-tile href="/incident_response/on-call/pages/#through-microsoft-teams" logo_id="microsoft-teams" src="integrations_logos/microsoft_teams.png" alt="Microsoft Teams" title="Microsoft Teams" >}}
   {{< integration-tile href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" logo_id="prometheus" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
-  {{< integration-tile href="/integrations/pingdom/#page-a-datadog-on-call-team" logo_id="pingdom" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
+  {{< integration-tile href="/integrations/pingdom/#page-a-datadog-on-call-team" logo_id="pingdom-v3" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
   {{< integration-tile href="/integrations/sentry/#page-a-datadog-on-call-team" logo_id="sentry" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
   {{< integration-tile href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" logo_id="amazon-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
   {{< integration-tile href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" logo_id="azure" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
