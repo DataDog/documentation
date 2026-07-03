@@ -109,6 +109,20 @@ To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in t
 
 If a run fails, a modal explains the cause and what action to take. The page continues to display results from the most recent successful run while the failed run is shown in the header.
 
+## Schedule runs
+
+Instead of triggering every run manually, configure a Pattern to run automatically on a recurring schedule.
+
+When you create or edit a Pattern, under **How often should we run Patterns?**, choose a cadence:
+
+- **On demand**: No schedule. Run the Pattern manually (default).
+- **Daily**: Every day at a time you choose.
+- **Weekdays**: Monday through Friday at a time you choose.
+- **Weekly**: A chosen day of the week at a time you choose.
+- **Custom**: Every 1 to 7 days.
+
+Scheduled times use your Datadog timezone preference. Each scheduled run uses the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
+
 ## Use topics to improve your application
 
 ### Understand your production traffic
