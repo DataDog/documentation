@@ -550,7 +550,7 @@ The Datadog MCP server connection is managed by Copilot (or whichever agent you 
 
 [1]: /ide_plugins/vscode/
 [2]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
-[3]: /mcp_server/setup?tab=copilotcli
+[3]: /mcp_server/setup/?tab=copilot-cli
 {{% /tab %}}
 
 {{% tab "Warp" %}}
