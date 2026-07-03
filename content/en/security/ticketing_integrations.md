@@ -97,7 +97,7 @@ The following steps set up bidirectional syncing with Jira and verify that setup
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Jira{{< /ui >}}. The button opens a {{< ui >}}Jira Ticket{{< /ui >}} modal.
    3. Verify that the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
-{{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
+{{< img src="security/jira_modal-1.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
@@ -239,11 +239,11 @@ Existing bidirectional Jira tickets are listed in the finding's {{< ui >}}Ticket
 
 Here's an example from a Static Code (SAST) finding:
 
-{{< img src="security/bidir-jira-existing.png" alt="finding with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing-1.png" alt="finding with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
 
 Hover over the Jira ticket to see its details.
 
-{{< img src="security/bidir-jira-existing-hover.png" alt="Mouseover state for pill in previous image. Modal with Jira ticket details." responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing-hover-1.png" alt="Mouseover state for pill in previous image. Modal with Jira ticket details." responsive="true" style="width:100%;">}}
 
 Details such as assignee and status are provided along with a timeline of the Jira issue and Datadog case changes.
 
