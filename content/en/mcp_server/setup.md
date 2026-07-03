@@ -527,7 +527,9 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
+For Copilot, you should install the [Datadog Copilot plugin][65] from the marketplace (follow the same instructions as for the [Copilot CLI][66]).
+
+For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
@@ -535,6 +537,7 @@ Datadog's [Cursor and VS Code extension][1] provides a configuration assistant f
 1. **Restart the IDE.**
 1. Run the {{< ui >}}Datadog: Open MCP Configuration Assistant{{< /ui >}} and follow the guidance to configure the Datadog MCP Server.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+The Datadog MCP server connection is managed by Copilot (or whichever agent you are using) not the Datadog extension. You will be required to authorize the Datadog MCP server independently of the extension.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /mcp_server/tools
@@ -893,3 +896,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[66]: /mcp_server/setup?tab=copilotcli
