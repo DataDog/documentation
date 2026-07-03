@@ -254,9 +254,7 @@ Some use cases to define a custom group retention time include:
 
 **Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
-{{< callout url="#" header="Preview" btn_hidden="true" >}}
-For monitors with a large number of groups, Datadog automatically shortens how long a group is kept after it stops reporting data: the more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent; groups actively reporting data are never removed.
-{{< /callout >}}
+<div class="alert alert-info"><strong>Preview: Dynamic group retention</strong><p>For monitors with a large number of groups, Datadog automatically shortens how long a group is kept after it stops reporting data: the more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent; groups actively reporting data are never removed.</p></div>
 
 #### New group delay
 
