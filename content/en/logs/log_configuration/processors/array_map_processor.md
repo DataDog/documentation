@@ -104,7 +104,7 @@ Following rules apply when defining sub-processors:
 
 #### Attribute Remapper
 
-Remaps a field from each element to a field in the output element.
+Remaps an existing field to a field in the output element.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -167,7 +167,7 @@ Remaps a field from each element to a field in the output element.
 
 #### String Builder Processor
 
-Builds a new field in the output element from a template of element or log attributes.
+Builds a new field in the output element from a template.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -231,7 +231,7 @@ Builds a new field in the output element from a template of element or log attri
 
 #### Arithmetic Processor
 
-Computes a numeric expression using element or log attributes and write the result to the output element.
+Computes a numeric expression using element or log attributes and writes the result to the output element.
 
 {{< tabs >}}
 {{% tab "UI" %}}
