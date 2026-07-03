@@ -129,22 +129,12 @@ To receive these recommendations, make sure your AWS integration IAM role includ
 
 ### Interpret the results
 
-All simulation outputs are estimates based on your historical usage over the selected lookback window. Actual savings depend on your future usage and how AWS applies Savings Plan discounts across your accounts.
-
-Savings Plans are shared across a [Consolidated Billing Family][2], so a commitment can apply to usage in multiple accounts. The simulation estimates how the modeled commitment would be distributed across your accounts; actual distribution depends on AWS's application logic.
-
-If Datadog doesn't have complete cost data for the selected period, the simulator warns you that the results are based on incomplete data.
+All outputs are estimates based on your usage during the selected period, and actual savings depend on your future usage. Because Savings Plans are shared across a [Consolidated Billing Family][2], a commitment can apply to usage in multiple accounts. If Datadog is missing cost data for the period, the simulator flags the results as incomplete.
 
 Results appear in two sections:
 
 - {{< ui >}}Estimated Impact{{< /ui >}}: Compares your key metrics before and after the simulated commitment, alongside a {{< ui >}}Simulated Cost{{< /ui >}} chart over the selected period.
 - {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Breaks down the estimated cost and coverage by AWS service.
-
-### Best practices
-
-- When an AWS recommendation is shown, apply it as a starting point, then adjust the hourly commitment to compare scenarios.
-- Choose a usage period that reflects your typical usage. Avoid periods with unusual spikes or gaps if you want a representative estimate.
-- Treat the results as directional guidance for sizing a commitment, not as a guarantee of future savings.
 
 ## Example use cases
 
