@@ -231,6 +231,8 @@ The following steps create a bidirectional ticket for a Security finding.
 
 ### Manage bidirectional Case Management tickets
 
+**Note**: For help resolving bidirectional sync issues, see [Case Management troubleshooting][24].
+
 {{< tabs >}}
 
 {{% tab "Jira" %}}
@@ -341,3 +343,4 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
 [23]: /integrations/linear/
+[24]: /incident_response/case_management/troubleshooting/
