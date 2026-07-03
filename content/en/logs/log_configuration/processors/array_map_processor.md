@@ -23,8 +23,8 @@ Use the array map processor to apply a sequence of sub-processors to each elemen
 Define the array map processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]:
 
 1. Set the {{< ui >}}Source{{< /ui >}}: path to the array attribute to iterate over.
-1. Set the {{< ui >}}Target{{< /ui >}}: path where the output array is written.
 1. Toggle {{< ui >}}Preserve source{{< /ui >}} to keep or remove the original source array after processing.
+1. Set the {{< ui >}}Target{{< /ui >}}: path where the output array is written.
 1. Add one or more [sub-processors](#sub-processors) to apply to each element.
 
 {{< img src="logs/log_configuration/processor/array-map-processor.png" alt="Screenshot of the Array Map Processor configuration panel" style="width:80%;" >}}
