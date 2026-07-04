@@ -100,7 +100,7 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-The examples above pin `dd-openfeature` `1.63.0` and the OpenFeature SDK `1.20.1`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+The examples above pin `dd-openfeature:1.63.0` and the OpenFeature SDK `1.20.1`. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
 
 To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
