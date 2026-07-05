@@ -5442,6 +5442,11 @@ menu:
       identifier: jobs_monitoring_glue
       parent: data_jobs
       weight: 650000
+    - name: Azure Data Factory
+      url: data_observability/jobs_monitoring/azure_data_factory
+      identifier: jobs_monitoring_azure_data_factory
+      parent: data_jobs
+      weight: 660000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
