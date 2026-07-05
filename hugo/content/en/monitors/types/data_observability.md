@@ -1,6 +1,6 @@
 ---
 title: Data Observability Monitor
-description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses."
+description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses, and monitor data job run failures."
 further_reading:
   - link: "/data_observability/"
     tag: "Documentation"
@@ -8,6 +8,9 @@ further_reading:
   - link: "/data_observability/quality_monitoring/"
     tag: "Documentation"
     text: "Quality Monitoring"
+  - link: "/data_observability/jobs_monitoring/"
+    tag: "Documentation"
+    text: "Jobs Monitoring"
   - link: "/monitors/notify/"
     tag: "Documentation"
     text: "Configure your monitor notifications"
@@ -275,6 +278,50 @@ Detect when a column's null percentage exceeds normal levels, which may indicate
 {{% /tab %}}
 {{< /tabs >}}
 
+## Job monitors
+
+<div class="alert alert-info">Job monitors are in preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
+Job monitors alert you when a data job reaches a threshold of consecutive failed runs. Job monitors require [Jobs Monitoring][11] to be set up with at least one supported job source.
+
+### Monitor creation
+
+To create a job monitor, navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Job{{< /ui >}}.
+
+### Choose jobs to monitor
+
+1. Select a technology from the {{< ui >}}Select a technology{{< /ui >}} menu: {{< ui >}}Airflow{{< /ui >}}, {{< ui >}}AWS Glue{{< /ui >}}, {{< ui >}}Azure Data Factory{{< /ui >}}, {{< ui >}}Databricks{{< /ui >}}, {{< ui >}}dbt{{< /ui >}} (Job, Model, or Test), {{< ui >}}Spark{{< /ui >}}, or {{< ui >}}Custom Job{{< /ui >}} for jobs that emit [custom OpenLineage events][12].
+    - If you select {{< ui >}}Custom Job{{< /ui >}}, also select the specific operation to monitor from the {{< ui >}}Select an operation{{< /ui >}} menu.
+1. Optionally, narrow the jobs matched by this monitor using the {{< ui >}}Filter by tags{{< /ui >}} field (for example, `env:prod`).
+
+The preview panel shows the job names and recent run statistics that currently match your selection.
+
+<!-- TODO(docs review): add a screenshot of the job-selection step (technology dropdown + tag filter + preview panel), light and dark mode. -->
+
+### Configure alert conditions
+
+1. Under {{< ui >}}Define alerting context{{< /ui >}}, optionally add {{< ui >}}Group by{{< /ui >}} tags. Datadog automatically groups by `job_name`, plus additional tags specific to the selected technology (for example, `workspace_name` for Databricks, `project` for dbt).
+1. Under {{< ui >}}Detection Method - Threshold{{< /ui >}}, set {{< ui >}}Trigger when{{< /ui >}} to the number of consecutive failed runs that should trigger an alert.
+
+The monitor automatically recovers after the next run succeeds.
+
+**Note**: Job monitors alert on consecutive run failures. They do not currently support alerting on job run duration.
+
+### Example notification
+
+{{< code-block lang="text" >}}
+{{#is_alert}}
+Databricks job **{{job_name.name}} ({{workspace_name.name}})** has reached {{value}} consecutive failures.
+
+Error: {{job.run_error}}
+
+[View in Databricks]({{job.run_url}})
+{{/is_alert}}
+{{#is_recovery}}
+Databricks job **{{job_name.name}}** recovered.
+{{/is_recovery}}
+{{< /code-block >}}
+
 ## Annotate bounds
 
 For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data.
@@ -304,3 +351,5 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [8]: /monitors/configuration/?tab=thresholdalert#thresholds
 [9]: /help/
 [10]: /api/latest/data-observability/
+[11]: /data_observability/jobs_monitoring/
+[12]: /data_observability/jobs_monitoring/openlineage/
