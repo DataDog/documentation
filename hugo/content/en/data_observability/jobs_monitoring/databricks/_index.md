@@ -14,6 +14,10 @@ further_reading:
 
 [Data Observability: Jobs Monitoring][7] gives visibility into the performance and reliability of your Databricks jobs and workflows running on clusters or serverless compute.
 
+## Prerequisites
+
+**Note**: Jobs Monitoring requires the connecting service principal (or token principal) to be a Databricks **Workspace Admin** for the recommended Datadog-managed global init script install path. This is different from [Quality Monitoring][30], which does not require Workspace Admin. If you can't grant Workspace Admin, see [Permissions](#permissions) below for a more limited set of permissions that work with a self-managed init script.
+
 ## Setup
 
 <div class="alert alert-info">If your Databricks workspace has <a href="https://docs.databricks.com/en/security/network/front-end/index.html">Networking Restrictions</a> enabled, add Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP ranges" >}} to your allow-list. If your workspace uses Private Link, see the <strong>Private Link Connectivity</strong> tab below.</div>
@@ -565,3 +569,4 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+[30]: /data_observability/quality_monitoring/data_warehouses/databricks/
