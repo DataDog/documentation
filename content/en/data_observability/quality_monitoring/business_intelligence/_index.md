@@ -24,6 +24,7 @@ Use these integrations to:
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/hex" >}}Hex{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
