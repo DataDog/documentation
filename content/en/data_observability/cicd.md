@@ -19,6 +19,8 @@ further_reading:
       text: 'Jobs Monitoring'
 ---
 
+<div class="alert alert-info">Data Observability CI/CD checks are in preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
 ## Overview
 
 {{< img src="data_observability/cicd/cicd-overview.png" alt="The CI/CD feature report page" style="width:100%;" >}}
