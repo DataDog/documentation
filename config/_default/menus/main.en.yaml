@@ -5346,6 +5346,11 @@ menu:
       identifier: elt_integrations
       parent: quality_monitoring
       weight: 275000
+    - name: Airbyte
+      url: data_observability/quality_monitoring/elt/airbyte
+      identifier: elt_integrations_airbyte
+      parent: elt_integrations
+      weight: 500000
     - name: Fivetran
       url: data_observability/quality_monitoring/elt/fivetran
       identifier: elt_integrations_fivetran
