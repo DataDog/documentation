@@ -671,6 +671,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
+- `data-observability`: Tools for [Data Observability][66], including data catalog search, lineage traversal and ranking, monitor coverage and status, entity tags and descriptions, Spark/Databricks job health, and warehouse query history
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
@@ -893,3 +894,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[66]: /data_observability/

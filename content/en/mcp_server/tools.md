@@ -544,6 +544,158 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 - Help me debug why this widget is showing fractional values when it should be a count.
 - How do I configure a timeseries to show both bars and lines?
 
+## Data Observability
+
+Tools for [Data Observability][68], including data catalog search, lineage traversal and ranking, monitor coverage and status, entity tags and descriptions, Spark/Databricks job health, and warehouse query history.
+
+### `search_data_entities`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Searches for data entities in the data catalog by name, full-text search, or filters (platform, schema, database, account).
+
+- Find tables named "orders" in Snowflake.
+- List all dbt models starting with `stg_`.
+- What schemas exist in my BigQuery project?
+
+### `get_data_catalog_schema`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Returns the entity type schema for every platform with data in the catalog: entity types, containment hierarchy, filterable attributes, and default metrics.
+
+- What platforms are connected to Data Observability?
+- What entity types exist for Databricks?
+- What metrics are available for a table entity?
+
+### `get_data_entity_details`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Fetches full details and attributes (owner, tags, custom attributes, platform, schema, database, account) for one or more data entities by ID.
+
+- Get the full attributes for this table entity.
+- Who owns this dataset?
+
+### `get_data_entity_hierarchy`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database/schema a table belongs to, or which tables are in a schema.
+
+- What database does this table belong to?
+- What columns are in this table?
+- Show the full hierarchy around this entity.
+
+### `get_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Fetches the live reachable lineage subgraph (nodes and edges) from one or more anchor entities, upstream, downstream, or both.
+
+- What's downstream of this table?
+- Show me the upstream lineage for this column.
+- What would break if I dropped this table?
+
+### `summarize_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth distribution) for a large or unknown lineage graph, without the full payload. Use before `get_data_entity_lineage` on graphs of unknown size.
+
+- How many things depend on this table, broken down by type?
+- How deep does the lineage go from this table?
+
+### `rank_data_entities_by_lineage_degree`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Ranks entities by transitive lineage connectivity (upstream, downstream, or both), using a pre-built snapshot.
+
+- What are the most widely-depended-on tables in my warehouse?
+- Which raw ingestion tables have the deepest downstream chains?
+
+### `get_warehouse_query_history`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Fetches recent queries that touched specific entities, in reverse chronological order, including the SQL text, execution state, and query type.
+
+- Who has been querying this table recently?
+- What writes have happened to this table in the last week?
+
+**Note**: The `sql` field in results is raw, user-authored SQL from the warehouse and should be treated as untrusted data.
+
+### `get_popular_warehouse_tables_by_query_frequency`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Ranks tables by query activity, broken out by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
+
+- What tables are most queried by BI tools?
+- Which tables get the most human analyst traffic?
+
+### `suggest_data_observability_monitor_filters`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Analyzes a set of entities to find common attributes and naming patterns, and suggests monitor filter expressions that group subsets of those entities.
+
+- What do my highest-priority tables have in common?
+- Suggest a filter that covers all my staging tables.
+
+### `rank_data_observability_monitor_candidates`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. The primary entry point for "what should I monitor?" questions.
+
+- What tables should I set up data quality monitors for first?
+
+### `get_data_observability_monitor`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Retrieves data quality metric timeseries for a given monitor ID, including anomaly-detection bounds when enabled.
+
+- Show me the metric history for monitor 12345.
+- What are the anomaly bounds for this freshness monitor?
+
+### `get_data_observability_monitor_coverage`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Fetches all data quality monitors for the org and resolves each monitor's filter to the entities it covers. Use this to see which tables have no monitoring at all.
+
+- Which of my tables aren't covered by any data quality monitor?
+
+### `get_data_observability_monitor_group_statuses`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Queries the current alert and warn state of data quality monitor groups.
+
+- Which tables are currently failing their data quality checks?
+
+### `get_entity_tags` / `update_entity_tags`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read` (get) or `Data Observability Write` (update)*\
+Gets or sets custom user-defined tags on data entities.
+
+- What tags are on this table?
+- Tag this table with `owner:data-platform-team`.
+
+### `get_entity_descriptions` / `update_entity_description`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read` (get) or `Data Observability Write` (update)*\
+Gets or sets custom user-defined descriptions on data entities.
+
+- What's the description on this table?
+- Set a description explaining what this table is used for.
+
+### `get_spark_job_health`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, worst stages) for a single Spark or Databricks job run.
+
+- Why did this Spark job run slowly?
+- Show me the worst stages for the most recent run of this job.
+
+### `get_spark_sql_plan`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Read`*\
+Retrieves the Spark SQL physical execution plan for a stage, including join strategies, shuffle information, and per-node metrics.
+
+- Show me the execution plan for this Spark stage.
+
+<div class="alert alert-info">This section documents the tools confirmed in the <code>data-observability</code> toolset's shared library. The dedicated Data Observability MCP service exposes some additional tools (for example, Databricks cost and cluster job listings) — these need separate confirmation of GA/customer-facing status before being added here.</div>
+
 ## Database Monitoring
 
 Tools for interacting with [Database Monitoring][26].
@@ -1912,3 +2064,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [65]: /code_coverage/
 [66]: /delivery_performance/dora_metrics/
 [67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[68]: /data_observability/
