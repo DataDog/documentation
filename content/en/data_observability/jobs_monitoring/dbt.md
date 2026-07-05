@@ -73,6 +73,15 @@ Use this option if you want Datadog to create and maintain the webhook in dbt Cl
 
 This mode requires a dbt Cloud token with {{< ui >}}Developer{{< /ui >}} permissions for the dbt Cloud Enterprise plan or {{< ui >}}Account Admin{{< /ui >}} permissions for the dbt Cloud Team plan.
 
+## Troubleshooting
+
+### Job run or lineage data stops appearing
+
+If your dbt Cloud token's permission set is lowered after setup (for example, someone rotates it with a more restrictive scope), the webhook or connection can fail silently rather than showing an obvious error. If data that was previously showing up stops appearing:
+
+1. Confirm the token still has the required scope: {{< ui >}}Stakeholder/Read-Only{{< /ui >}} (self-managed webhook) or {{< ui >}}Developer{{< /ui >}}/{{< ui >}}Account Admin{{< /ui >}} (Datadog-managed webhook), matching the requirements above.
+1. If the token's scope is insufficient, generate a new token with the correct permission set and update the connection in Datadog.
+
 ## What's next
 
 After your next dbt job run, you should start seeing job run and lineage data in [Datadog Data Observability][2], as shown below.
