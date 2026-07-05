@@ -5387,6 +5387,11 @@ menu:
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: Optimizer
+      url: data_observability/optimizer/
+      identifier: data_observability_optimizer
+      parent: data_observability_heading
+      weight: 100000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
