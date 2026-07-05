@@ -38,6 +38,7 @@ Data Observability: Jobs Monitoring supports multiple job technologies. To get s
   {{< image-card href="/data_jobs/airflow/" src="integrations_logos/airflow.png" alt="Airflow" >}}
   {{< image-card href="/data_observability/jobs_monitoring/dbt" src="integrations_logos/dbt-cloud_large.svg" alt="dbt cloud" >}}
   {{< image-card href="/data_observability/jobs_monitoring/glue/" src="integrations_logos/amazon_glue.png" alt="AWS Glue" >}}
+  {{< image-card href="/data_observability/jobs_monitoring/azure_data_factory/" src="integrations_logos/azure_data_factory.png" alt="Azure Data Factory" >}}
 {{< /card-grid >}}
 
 <br/>
