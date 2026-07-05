@@ -322,6 +322,44 @@ Databricks job **{{job_name.name}}** recovered.
 {{/is_recovery}}
 {{< /code-block >}}
 
+## Schema change monitors
+
+<div class="alert alert-info">Schema change monitors are in preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
+Schema change monitors alert you when a database, schema, table, or column is added, removed, renamed, or has its type changed.
+
+### Monitor creation
+
+To create a schema change monitor, navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Schema Change{{< /ui >}}.
+
+### Choose data to monitor
+
+1. Select a warehouse from the {{< ui >}}Select warehouse{{< /ui >}} menu.
+1. Use {{< ui >}}Choose entities within the warehouse to monitor{{< /ui >}} to filter by `account`, `database`, `schema`, `table`, or `column`.
+
+### Alert conditions
+
+Schema change monitors alert on any matching change (there is currently no configurable threshold). Each alert reports the affected entity's fully-qualified name, the change type (`added`, `removed`, `renamed`, or `type_changed`), and — for renames and type changes — the old and new values.
+
+**Note**: You cannot yet configure a custom alert message template for schema change monitors; alerts use a standard format grouped by change type and entity.
+
+## Source-to-target monitors
+
+<div class="alert alert-info">Source-to-target monitors are in preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
+Source-to-target monitors compare a metric computed on a source table or column against the same metric computed on a target table or column — for example, to confirm that a row count in a source system matches the row count after it lands in a warehouse. Use them to catch data loss or drift introduced during a transformation or copy step.
+
+### Monitor creation
+
+1. Navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Quality{{< /ui >}}, then select {{< ui >}}Source to Target{{< /ui >}}.
+1. Choose a warehouse and a source table or column.
+1. Choose a second warehouse and a target table or column. The target must be the same entity type as the source (table-to-table or column-to-column).
+1. Select a metric type, following the same options as [Quality monitors](#select-your-metric-type).
+1. Choose a comparison format: {{< ui >}}Difference{{< /ui >}} (`target - source`) or {{< ui >}}Percent Difference{{< /ui >}} (`(target - source) / source`).
+1. Set an alert threshold using {{< ui >}}more than{{< /ui >}} or {{< ui >}}less than{{< /ui >}}.
+
+**Note**: Source and target metrics must be computed within 30 minutes of each other, or the comparison for that evaluation is skipped.
+
 ## Annotate bounds
 
 For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data.
