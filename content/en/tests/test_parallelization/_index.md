@@ -27,6 +27,7 @@ Test Parallelization is supported for the following language and frameworks:
 | -------- | ---------- | ----------------------- |
 | Ruby     | RSpec, Minitest | `datadog-ci` gem `1.31.0` or later |
 | Python   | pytest | `ddtrace` package `4.11.0` or later |
+| JavaScript | Jest | `dd-trace` package `6.0.0` or later |
 
 ## How it works
 
