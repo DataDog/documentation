@@ -25,7 +25,7 @@ Custom tags and measures work with the following CI providers:
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS)
+- GitHub (SaaS or GitHub Enterprise Server (GHES) >= 3.5.0)
 - Jenkins: For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
@@ -150,3 +150,4 @@ If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does 
 [10]: /continuous_integration/explorer
 [11]: /continuous_integration/pipelines/
 [12]: /getting_started/site/
+

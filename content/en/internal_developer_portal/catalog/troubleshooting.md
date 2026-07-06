@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Catalog
+description: Diagnose and resolve common issues with Catalog, including missing services, SLOs, telemetry data, endpoints, and monitors.
 aliases:
   - /tracing/software_catalog/troubleshooting
   - /software_catalog/guides/troubleshooting

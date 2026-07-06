@@ -42,7 +42,7 @@ Synthetic Monitoring does not trigger alerts based on a single failed run. Inste
 2. [Fast retries](#fast-retries) are applied, if configured.
 3. Test results are aggregated across locations.
 4. Failures are evaluated over time using the alerting rules.
-5. The monitor transitions between **OK**, **Alert**, or **No Data** [status](#monitor-status-reference) as the alerting conditions are met or no longer met.
+5. The monitor transitions between `OK`, `Alert`, or `No Data` [status](#monitor-status-reference) as the alerting conditions are met or no longer met.
 
 ### Test runs that generate alerts
 | Test run type                           | Evaluated for alerting |
@@ -58,7 +58,7 @@ Fast retries automatically re-run failed test executions. A test configured with
 
 {{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_2.png" alt="Retry conditions step of a synthetics test" style="width:80%;" >}}
 
-If you have a [minimum duration](#alerting-rules) configured as an alerting rule, the timer starts when the final fast retry execution fails. Fast retry runs appear in test results with a `(fast retry)` label in the **Run Type** column.
+If you have a [minimum duration](#alerting-rules) configured as an alerting rule, the timer starts when the final fast retry execution fails. Fast retry runs appear in test results with a `(fast retry)` label in the {{< ui >}}Run Type{{< /ui >}} column.
 
 {{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs_3.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
 
@@ -99,9 +99,9 @@ With the above settings, the alert triggers 13 minutes after the scheduled test 
 
 | Time | Event | Result | Monitor status |
 |------|-------|--------|----------------|
-| t0 | Scheduled test runs | Pass | OK |
-| t15 | Scheduled test runs | Fail | OK (Minimum duration timer starts)|
-| t28 | N/A |Fail | ALERT (13 minutes elapsed)|
+| t0 | Scheduled test runs | Pass | {{< ui >}}OK{{< /ui >}} |
+| t15 | Scheduled test runs | Fail | {{< ui >}}OK{{< /ui >}} (Minimum duration timer starts)|
+| t28 | N/A |Fail | {{< ui >}}ALERT{{< /ui >}} (13 minutes elapsed)|
 
 **Note**: This configuration is not recommended because it lacks fast retries and alerts on a single failure, which can lead to false positives from transient issues. Instead, consider shortening the test frequency to 5 minutes and/or enabling fast retries. This approach allows additional test executions to run during transient issues, reducing false positives while still ensuring timely alerts for real, persistent problems. 
 
@@ -115,12 +115,12 @@ With the above settings, the alert triggers 13 minutes after the scheduled test 
 With the above settings, the minimum duration timer starts when the second fast retry fails:
 | Time | Event | Result | Monitor status |
 |------|-------|--------|----------------|
-| t0 | Scheduled test runs | Pass | OK |
-| t30 | Scheduled test runs | Fail | OK |
-| t31 | First fast retry for scheduled test run at t30  | Fail | OK |
-| t32 | Second fast retry for scheduled test run at t30 | Fail | OK (Minimum duration timer starts)|
-| t37 | N/A | Fail | ALERT (5 minutes elapsed) |
-| t60 | Scheduled test runs| Pass | OK |
+| t0 | Scheduled test runs | Pass | {{< ui >}}OK{{< /ui >}} |
+| t30 | Scheduled test runs | Fail | {{< ui >}}OK{{< /ui >}} |
+| t31 | First fast retry for scheduled test run at t30  | Fail | {{< ui >}}OK{{< /ui >}} |
+| t32 | Second fast retry for scheduled test run at t30 | Fail | {{< ui >}}OK{{< /ui >}} (Minimum duration timer starts)|
+| t37 | N/A | Fail | {{< ui >}}ALERT{{< /ui >}} (5 minutes elapsed) |
+| t60 | Scheduled test runs| Pass | {{< ui >}}OK{{< /ui >}} |
 
 **Note**: Because fast retries were configured, the alert triggered at t37 instead of t35, adding a 2-minute delay.
 
@@ -145,14 +145,14 @@ A monitor can recover even if **some locations are still failing**, as long as t
 
 A recovery does not require all test runs to pass, only that the alerting conditions are no longer true.
 
-- **Alert** notifications are sent when alerting rules are met.
-- **Recovery** notifications are sent when alerting rules are no longer met.
+- {{< ui >}}Alert{{< /ui >}} notifications are sent when alerting rules are met.
+- {{< ui >}}Recovery{{< /ui >}} notifications are sent when alerting rules are no longer met.
 
 ## Global uptime and alert state
 
-**Global uptime** represents the percentage of time your monitor was healthy (`OK` status) during the selected time period. 
+**Global uptime** represents the percentage of time your monitor was healthy ({{< ui >}}OK{{< /ui >}} status) during the selected time period. 
 
-It is based on how long the monitor stayed in an `OK` state compared to the total monitoring period. Any time the monitor spends in an `ALERT` state lowers the global uptime.
+It is based on how long the monitor stayed in an {{< ui >}}OK{{< /ui >}} state compared to the total monitoring period. Any time the monitor spends in an {{< ui >}}ALERT{{< /ui >}} state lowers the global uptime.
 
 Because this metric is based on the duration of the monitor's status and not on the status of a test execution, it cannot be reliably calculated based on the ratio of successful test results to the total number of test executions over the same period. 
 
@@ -193,13 +193,13 @@ The following example demonstrates how a 95.83% global uptime is calculated.
 
 ## Monitor status reference
 
-OK
+{{< ui >}}OK{{< /ui >}}
 : The monitor is healthy. Either all test runs are passing, or failures have not met the alerting conditions (minimum duration and location requirements).
 
-ALERT
+{{< ui >}}ALERT{{< /ui >}}
 : The alerting conditions have been met. The test has been failing continuously for the configured minimum duration across the required number of locations.
 
-NO DATA
+{{< ui >}}NO DATA{{< /ui >}}
 : The monitor has not received any test results from any location (managed, private, or Datadog Agent) during the queried time period. Common causes include: <br></br>
 
   - **The test is paused**: Paused tests do not execute and produce no data.

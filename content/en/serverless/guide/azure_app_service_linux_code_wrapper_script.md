@@ -25,7 +25,7 @@ This solution uses the startup command setting and Application Settings for Linu
 
 ### Setup
 #### Set application settings
-To instrument your application, begin by adding the following key-value pairs under **App settings** in your Azure "Environment variables" settings.
+To instrument your application, begin by adding the following key-value pairs under {{< ui >}}App settings{{< /ui >}} in your Azure "Environment variables" settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
@@ -62,7 +62,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 {{< tabs >}}
 {{% tab "Node, .NET, PHP, Python" %}}
-Go to **General settings** and add the following to the **Startup Command** field:
+Go to {{< ui >}}General settings{{< /ui >}} and add the following to the {{< ui >}}Startup Command{{< /ui >}} field:
 
 ```
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.14.0/datadog_wrapper | bash
@@ -105,11 +105,11 @@ To configure your application to submit metrics, follow the appropriate steps fo
 
 ## Troubleshooting
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+If you are not receiving traces or custom metric data as expected, enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][14].
+Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][14].
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

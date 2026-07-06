@@ -8,451 +8,129 @@ algolia:
 aliases:
 - /ja/continuous_integration/static_analysis
 - /ja/static_analysis
+- /ja/security/code_security/static_analysis/circleci_orbs/
+- /ja/code_analysis/static_analysis/setup/
 description: Datadog Static Code Analysis について学ぶことで、コードが本番環境に到達する前に、コードの品質問題やセキュリティ脆弱性をスキャンすることができます。
 is_beta: false
 title: Static Code Analysis (SAST) のセットアップ
 ---
-
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security は {{< region-param key="dd_site_name" >}} サイトでは利用できません。
+    Code Security は、このサイトでは利用できません. {{< region-param key="dd_site_name" >}} Code Security は、このサイトでは利用できません.
 </div>
 {{% /site-region %}}
 
-## 概要
-Datadog SAST をアプリ内でセットアップするには、[**Security** > **Code Security**][1] に移動してください。
+## 概要 {#overview}
+Datadog SAST をアプリ内で設定するには、[**Security** > **Code Security**][1] に移動します。
 
-## 静的コード解析スキャンを実行する場所を選択する
+## Static Code Analysis スキャンの実行場所を選択 {#select-where-to-run-static-code-analysis-scans}
+### Datadog ホスト型スキャンでスキャンする {#scan-with-datadog-hosted-scanning}
 
-### Datadogホスティングによるスキャン
+Datadog のインフラストラクチャー上で直接 Datadog Static Code Analysis (SAST) スキャンを実行できます。サポートされているリポジトリタイプには以下が含まれます。
+- [GitHub][18] ([Git Large File Storage][17] を使用しているリポジトリを除く)
+- [GitLab.com および GitLab Self-Managed][20]
+- [Azure DevOps][19]
 
-GitHub リポジトリの場合、Datadog のインフラ上で直接 Datadog Static Code Analysis スキャンを実行できます。開始するには、[**Code Security** ページ][1]に移動してください。
+始めるには、[**Code Security** ページ][1]に移動します。
 
-### CI パイプラインでスキャンする
-Datadog Static Code Analysis は、[`datadog-ci` CLI][8] を使用して CI パイプライン上で実行されます。
+### CI パイプラインでスキャンする {#scan-in-ci-pipelines}
+Datadog Static Code Analysis は、[`datadog-ci` CLI][8] を使用して CI パイプラインで実行されます。
 
-まず、Datadog API とアプリケーションキーを設定します。`DD_APP_KEY` と `DD_API_KEY` をシークレットとして追加し、Datadog アプリケーションキーに `code_analysis_read` スコープがあることを確認してください。
+まず、Datadog の API キーとアプリケーションキーを構成します。`DD_APP_KEY` と`DD_API_KEY` をシークレットとして追加します。Datadog のアプリケーションキーに `code_analysis_read` スコープがあることを確認してください。
 
-次に、下記の使用する CI プロバイダごとの手順に従って、Static Code Analysis を実行してください。
+次に、選択した CI プロバイダーの以下の手順に従って Static Code Analysis を実行します。
 
-{{< whatsnext desc="使用している CI プロバイダに応じた手順を参照:">}}
-    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+{{< whatsnext desc="CI プロバイダー別の手順を参照してください。">}}
+    {{< nextlink href="security/code_security/static_analysis/setup/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/setup/generic_ci_providers" >}}汎用 CI プロバイダー{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## ソースコード管理プロバイダを選択する
-Datadog Static Code Analysis はすべてのソースコード管理プロバイダをサポートしており、GitHub をネイティブにサポートしています。
-### GitHub インテグレーションのセットアップ
-ソースコード管理プロバイダが GitHub の場合、[GitHub インテグレーションタイル][9]を使用して GitHub App を設定し、[ソースコードインテグレーション][10]を構成してインラインのコードスニペットを表示し、[プルリクエストコメント][11]を有効にする必要があります。
+## ソースコード管理プロバイダーを選択する {#select-your-source-code-management-provider}
+Datadog Static Code Analysis は、すべてのソースコード管理プロバイダーをサポートしており、GitHub、GitLab、および Azure DevOps に対してネイティブサポートを提供しています。
 
-GitHub App をインストールする際、以下のパーミッションが特定の機能を有効にするために必要です:
+{{< tabs >}}
+{{% tab "GitHub" %}}
 
-- `Content: Read`: Datadog でコードスニペットを表示するために必要
-- `Pull Request: Read & Write`: Datadog が [プルリクエストコメント][11]を使用してプルリクエスト内で直接違反に対するフィードバックを追加し、[脆弱性の修正][12]用のプルリクエストを作成できるようにするために必要
+[GitHub インテグレーションタイル][1]を使用して GitHub App を構成し、インラインコードスニペットと[プルリクエストコメント][3]を有効にするために[ソースコードインテグレーション][2]を設定します。
 
-### その他のソースコード管理プロバイダ
-他のソースコード管理プロバイダを使用している場合は、`datadog-ci` CLI ツールを使用して CI パイプライン内で Static Code Analysis を実行し、Datadog に[その結果をアップロード](#upload-third-party-static-analysis-results-to-datadog)してください。
-**Code Security** ページに結果が表示されるようになる前に、デフォルトブランチ上で一度リポジトリの解析を実行する**必要があります**。
+GitHub App をインストールする際には、特定の機能を有効にするために以下の権限が必要です。
 
-## 設定のカスタマイズ
+- `Content: Read` は、Datadog に表示されるコードスニペットを確認できるようにします。
+- `Pull Request: Read & Write` は、Datadog が[プルリクエストコメント][3]を使用してプルリクエスト内で違反に対するフィードバックを直接追加できるようにし、[脆弱性を修正][4]のためのプルリクエストを開くことも可能にします。
+- `Checks: Read & Write` は、SAST 違反に対するチェックを作成してプルリクエストをブロックできるようにします。
 
-デフォルトでは、Datadog Static Code Analysis はプログラミング言語ごとの [Datadog のデフォルトルールセット][6]を使用してリポジトリをスキャンします。実行するルールセットやルールの選択・無視、その他のパラメータを自由にカスタマイズできます。これらの設定はリポジトリ内または Datadog アプリ上で行えます。
+[1]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[2]: /ja/integrations/guide/source-code-integration
+[3]: /ja/security/code_security/dev_tool_int/github_pull_requests
+[4]: /ja/security/code_security/dev_tool_int/
 
-### 設定の場所
+{{% /tab %}}
+{{% tab "GitLab" %}}
 
-Datadog Static Code Analysis は、Datadog 内、またはリポジトリの**ルートディレクトリ**に配置されたファイルのいずれかで設定できます。
-
-設定には以下の3つのレベルがあります:
-
-* 組織 (Org) レベルの設定 (Datadog)
-* リポジトリ レベルの設定 (Datadog)
-* リポジトリ レベルの設定 (リポジトリファイル)
-
-すべて同じ YAML 形式を使用し、**順番**に基づいてオーバーレイ/パッチマージが行われます。たとえば、以下の2つのサンプル YAML ファイルを見てみましょう:
-
-```yaml
-rulesets:
- - A
-   rules:
-      foo:
-        ignore: ["**"]
-        args: ["my_arg1", "my_arg2"]
-```
-
-```yaml
-rulesets:
- - A
-    rules:
-        foo:
-            ignore: ["my_ignored_file.file"]
-        bar:
-            only: ["the_only_file.file"]
- - B
+GitLab リポジトリを Datadog に接続するための [GitLab ソースコードセットアップ手順][1]を参照してください。GitLab.com と Self-Managed インスタンスの両方がサポートされています。
 
-```
+[1]: /ja/integrations/gitlab-source-code/#setup 
 
-最初のファイルに対して2番目のファイルを順にマージ (オーバーレイ/パッチ方式) すると、最終的に以下のようになります:
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
 
-```yaml
-rulesets:
- - A
-    rules:
-        foo:
-            ignore: ["my_ignored_file.file"]
-            args: ["my_arg1", "my_arg2"]
-        bar:
-            only: ["the_only_file.file"]
- - B
+**注:** Azure DevOps integrations は Microsoft Entra テナントに接続されている必要があります。Azure DevOps Serverは**サポートされていません**。
 
+Azure DevOps リポジトリを Datadog に接続するための [Azure ソースコードセットアップ手順][4]を参照してください。
 
-```
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
+[2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /ja/integrations/azure-devops-source-code/#setup
+[5]: /ja/getting_started/site/
 
-ご覧のとおり、最初のファイルの `ignore: ["**"]` は競合が発生したため、後に読み込まれたファイルの `ignore: ["my_ignored_file.file"]` に上書きされています。一方で、最初のファイルにある `args` フィールドは競合する値がないためそのまま保持されています。
+{{% /tab %}}
+{{% tab "その他" %}}
 
-#### 組織 (Org) レベルの設定
+別のソースコード管理プロバイダーを使用している場合は、`datadog-ci` CLI ツールを使用して CI パイプラインで Static Code Analysis を実行し、Datadog に [upload the results](#upload-third-party-static-analysis-results-to-datadog) してください。
+結果が **Code Security** ページに表示され始める前に、リポジトリのデフォルトブランチで分析を実行する**必要があります**。
 
-{{< img src="/security/code_security/org-wide-configuration2.png" alt="作成されたルール" style="width:100%;" >}}
+{{% /tab %}}
+{{< /tabs >}}
 
-組織レベルでの設定は、解析対象となるすべてのリポジトリに適用されます。必ず実行したいルールや、グローバルで除外すべきパス/ファイルを定義するのに適した場所です。
+## 構成をカスタマイズする {#customize-your-configuration}
 
-#### リポジトリ レベルの設定
+デフォルトでは、Datadog Static Code Analysis (SAST) は、各プログラミング言語の [Datadog のデフォルトルールセット][6]を使用してリポジトリをスキャンします。Datadog または `code-security.datadog.yaml` ファイル内で、実行するルールセットやルール、その他のパラメーターをカスタマイズできます。完全な構成リファレンスについては、[Static Code Analysis (SAST) 構成][27]を参照してください。
 
-{{< img src="/security/code_security/org-wide-configuration2.png" alt="作成されたルール" style="width:100%;" >}}
+## Datadog のサービスとチームに発見をリンクする {#link-findings-to-datadog-services-and-teams}
 
-リポジトリ レベルの設定は、選択した特定のリポジトリのみに適用されます。これらの設定は組織レベルの設定とマージされ、リポジトリ レベルの設定が優先されます。リポジトリ特有の詳細を上書きしたり、そのリポジトリだけに固有のルールを追加したい場合に有用です。
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
-#### リポジトリ レベルの設定 (ファイル)
 
-組織とリポジトリ レベルで提供される設定に加え、リポジトリのルートにある ``static-analysis.datadog.yml`` ファイルで設定を定義することもできます。このファイルは Datadog 上で定義したリポジトリ レベルの設定より優先されます。リポジトリのファイルベース設定は、ルールの設定を変更しながらセットアップやテストを繰り返す場合に便利です。
+## Diff-aware scanning {#diff-aware-scanning}
 
-### 設定フォーマット
+Diff-aware scanning により、Datadog の静的アナライザーは、機能ブランチのコミットで変更されたファイルのみをスキャンします。リポジトリ内のすべてのファイルに対して毎回分析を実行しないことで、スキャン時間を大幅に短縮します。CI パイプラインで Diff-aware scanning を有効にするには、次の手順に従ってください。
 
-以下の設定フォーマットは、組織レベル、リポジトリ レベル、リポジトリ レベル(ファイル) のすべてに共通して適用されます。
+1. CI パイプラインで`DD_APP_KEY`、`DD_SITE`、および`DD_API_KEY` の変数が設定されていることを確認してください。
+2. 静的アナライザーを呼び出す前に `datadog-ci git-metadata upload` を呼び出してください。このコマンドは、Git メタデータが Datadog バックエンドで利用可能になることを保証します。Git メタデータは、分析対象のファイル数を算出するために必要です。
+3. datadog-static-analyzerが `--diff-aware` フラグ付きで呼び出されることを確認してください。
 
-設定ファイルの全体的な構造は以下のとおりです:
+コマンドの実行順の例 (これらのコマンドは Git リポジトリ内で実行する必要があります)
 
-```yaml
-rulesets:
-  - ruleset-name # デフォルト設定で実行したいルールセット
-  - ruleset-name:
-    # このルールセットを特定のパス/ファイルのみに適用する
-    only:
-      - "path/example"
-      - "**/*.file"
-    # このルールセットを特定のパス/ファイルでは適用しない
-    ignore:
-      - "path/example"
-      - "**/*.file"
-  - ruleset-name:
-    rules:
-      rule-name:
-        # このルールを特定のパス/ファイルのみに適用する
-        only:
-          - "path/example"
-          - "**/*.file"
-        # このルールを特定のパス/ファイルでは適用しない
-        ignore:
-          - "path/example"
-          - "**/*.file"
-        arguments:
-          # ルールの引数を値に設定
-          argument-name: value
-      rule-name:
-        arguments:
-          # 異なるサブツリーに対して異なる引数値を設定する
-          argument-name:
-            # デフォルト(リポジトリのルート)は value_1
-            /: value_1
-            # 特定のパスには value_2 を設定
-            path/example: value_2
-# すべてのルールセットを以下のパス/ファイルのみに対して解析する
-only:
-  - "path/example"
-  - "**/*.file"
-# すべてのルールセットで以下のパス/ファイルを解析対象外にする
-ignore:
-  - "path/example"
-  - "**/*.file"
-```
-
-
-
-
-この YAML 設定ファイルでは、以下のトップレベルキーがサポートされます:
-
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| ------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `rulesets` | Array | 解析対象のルールセット一覧。文字列 (ルールセット名) または詳細設定を含むオブジェクトのいずれかを要素として指定できます。 | *必須* |
-| `only` | Array | ファイルパスまたはグロブパターンのリスト。指定した場合、すべてのルールセットにおいてこれらにマッチするファイルだけが解析されます。 | なし |
-| `ignore` | Array | ファイルパスまたはグロブパターンのリスト。すべてのルールセットにおいて、これらにマッチするファイルは解析対象から除外されます。 | なし |
-
-*注:* ここで示した `only` と `ignore` は、設定ファイル全体に適用されるファイルフィルタとして機能します。
-
----
-
-## ルールセットの設定
-
-`rulesets` 配列の各要素は、次のいずれかの方法で定義できます:
-
-1. **シンプルなルールセット宣言**: たとえば `ruleset-name` のように単なる文字列を指定すると、そのルールセットはデフォルト設定で実行されます。
-2. **詳細なルールセット オブジェクト:** キーをルールセット名、値を追加の設定を含むオブジェクトとして指定します。詳細設定可能なプロパティは以下のとおりです:
-
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| ------------------ | -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
-| `only` | Array | ファイルパスまたはグロブパターンのリスト。このルールセットでは、これらのパターンに一致するファイルのみ解析対象にします。 | なし |
-| `ignore` | Array | ファイルパスまたはグロブパターンのリスト。このルールセットの解析対象から除外するファイルを指定します。 | なし |
-| `rules` | Object | 個々のルール名とその設定オブジェクトのマッピングです。 | なし |
-
----
-
-## ルールの設定
-
-ルールセットの `rules` プロパティの中で、それぞれのルールは名前と設定によって定義されます。各ルールで利用できるプロパティは以下のとおりです:
-
-| **プロパティ** | **タイプ** | **説明** | **デフォルト** |
-| ------------------ | -------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
-| `only` | Array | ファイルパスまたはグロブパターンのリスト。このルールは、これらのパターンに一致するファイルにのみ適用されます。 | なし |
-| `ignore` | Array | ファイルパスまたはグロブパターンのリスト。このルールの適用対象から除外するファイルを指定します。 | なし |
-| `arguments` | Object | ルールのパラメータと値を指定します。スカラー値またはパス単位で指定することができます。 | なし |
-
----
-
-## 引数 (arguments) の設定
-
-ルールの引数は次の2通りの形式で定義できます:
-
-1. **固定値 (Static Value):** 引数に直接値を割り当てます。
-
-   ```yaml
-   arguments:
-     argument-name: value
-   ```
-2. **パスごとの値割り当て (Path-Specific Mapping):**
-   ファイルパスに応じて異なる値を設定します。特別なキー `/` はデフォルト値 (リポジトリルートに適用) を示します。
-
-   ```yaml
-   arguments:
-     argument-name:
-       /: value_default
-       path/example: value_specific
-   ```
-
-| **キー** | **タイプ** | **説明** | **デフォルト** |
-| ----------------- | -------------- | ------------------------------------------------------------------------- | ----------------- |
-| `/` | Any | 特定のパスに一致しない場合に使用されるデフォルトの引数値です。 | なし |
-| `specific path` | Any | 指定したパスまたはグロブパターンに一致するファイルに対して設定される引数値です。 | なし |
-
----
-
-
-
-設定例
-
-```yaml
-rulesets:
-  - python-best-practices
-  - python-security
-  - python-code-style:
-    rules:
-      max-function-lines:
-        # max-function-lines ルールを以下のファイルでは適用しない
-        ignore:
-          - "src/main/util/process.py"
-          - "src/main/util/datetime.py"
-        arguments:
-          # max-function-lines のしきい値を 150 行に設定
-          max-lines: 150
-      max-class-lines:
-        arguments:
-          # max-class-lines ルールのしきい値をサブツリーごとに変更
-          max-lines:
-            # デフォルト (リポジトリのルート) は 200 行
-            /: 200
-            # src/main/backend 配下は 100 行
-            src/main/backend: 100
-  - python-inclusive
-  - python-django:
-    # python-django ルールセットを以下のパスのみに適用
-    only:
-      - "src/main/backend"
-      - "src/main/django"
-    # 以下のパターンにマッチするファイルには python-django ルールセットを適用しない
-    ignore:
-      - "src/main/backend/util/*.py"
-# ソースコードのみ解析対象にする
-only:
-  - "src/main"
-  - "src/tests"
-  - "**/*.py"
-# サードパーティや生成ファイルは解析対象外
-ignore:
-  - "lib/third_party"
-  - "**/*.generated.py"
-  - "**/*.pb.py"
-```
-
-
-| 名前 | 説明 | 必須 | デフォルト |
-| -------------------- | ------------------------------------------------------------------------------------------- | --------- | --------- |
-| `rulesets` | ルールセット名および設定のリスト。[利用可能なすべてのルールセットはこちら][6]。 | `true` | |
-| `ignore` | 無視するパスやグロブパターンのリスト。これらに一致するファイルは解析されません。 | `false` | |
-| `only` | 解析対象とするパスやグロブパターンのリスト。これらに一致するファイルのみ解析されます。 | `false` | |
-| `ignore-gitignore` | `.gitignore` に記載されたパスを解析対象外として扱わないようにするかどうかを指定します。 | `false` | `false` |
-| `max-file-size-kb` | 指定したサイズ(kB)より大きいファイルを無視します。 | `false` | `200` |
-
-`static-analysis.datadog.yml` ファイル内で使用できる**ルールセット (ruleset)** オプションは以下のとおりです:
-
-| 名前 | 説明 | 必須 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- | --------- |
-| `rules` | ルールセットに属する各ルールの設定リストです。 | `false` |
-| `ignore` | このルールセットだけで無視するパスやグロブパターンのリスト。該当するファイルは解析されません。 | `false` |
-| `only` | このルールセットだけで解析対象にするパスやグロブパターンのリスト。該当するファイルのみ解析します。 | `false` |
-
-同様に、**ルール (rule)** 単位で設定できるオプションは以下のとおりです:
-
-| 名前 | 説明 | 必須 |
-| ------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
-| `ignore` | このルールだけで無視するパスやグロブパターンのリスト。該当するファイルは解析されません。 | `false` |
-| `only` | このルールだけで解析対象にするパスやグロブパターンのリスト。該当するファイルのみ解析します。 | `false` |
-| `arguments` | カスタマイズ可能な引数をサポートするルールに対して値を指定するマップです。 | `false` |
-
-`arguments` フィールドのマップは、引数の名前をキーとし、値として文字列またはマップを指定します:
-
-* リポジトリ全体で同じ値を設定する場合は、単純に文字列として指定します。
-* リポジトリ内の異なるサブツリーごとに値を変えたい場合は、サブツリーのプレフィックスをキーとして、そこに適用する値をマップ形式で指定します。
-
-### 違反の無視
-
-#### リポジトリ単位で無視する
-`static-analysis.datadog.yml` ファイルに無視ルールを追加します。以下の例では、`javascript-express/reduce-server-fingerprinting` というルールをすべてのディレクトリに対して無視しています。
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "**"
-```
-
-#### ファイルやディレクトリ単位で無視する
-`static-analysis.datadog.yml` ファイルに無視ルールを追加します。下記の例では、`javascript-express/reduce-server-fingerprinting` というルールを特定のファイルに対して無視しています。パスによる無視の詳しい方法については、[設定のカスタマイズセクション](#customize-your-configuration)を参照してください。
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
-```
-
-#### 特定の違反インスタンスを無視する
-
-特定の違反インスタンスを無視するには、対象行の上に `no-dd-sa` コメントを入れます。こうすると、その行からは違反が検出されなくなります。以下の Python コード例では、`foo = 1` の行が Static Code Analysis スキャンで無視されます。
-
-```python
-#no-dd-sa
-foo = 1
-bar = 2
-```
-
-また、`no-dd-sa` を使って特定のルールだけを無視することもできます。その場合は、無視したいルール名を `<rule-name>` の代わりに指定します。
-
-`no-dd-sa:<rule-name>`
-
-たとえば、以下の JavaScript コード例では、`my_foo = 1` は `javascript-code-style/assignment-name` ルール以外のすべてのルールで解析されます。このルールは開発者に [snake_case][7] ではなく [camelCase][6] を使うよう指示するものです。
-
-```javascript
-// no-dd-sa:javascript-code-style/assignment-name
-my_foo = 1
-myBar = 2
-```
-
-## Datadog のサービスやチームに結果を関連付ける
-### サービスへの関連付け
-Datadog は、以下の仕組みを用いて静的コードおよびライブラリスキャンの結果を該当するサービスに関連付けます。
-
-1. [Software Catalog を用いたコード配置場所の特定](#identifying-the-code-location-in-the-software-catalog)
-2. [他の Datadog 製品内でのファイル使用パターンの検出](#detecting-file-usage-patterns)
-3. [ファイルパスやリポジトリ名からサービス名を検索](#detecting-service-name-in-paths-and-repository-names)
-
-いずれか1つの方法で関連付けに成功すると、それ以降のマッピングは行われません。それぞれのマッピング方法は以下で詳しく説明します。
-
-#### Software Catalog でコード配置場所を特定する
-
-Software Catalog の [スキーマバージョン `v3`][14] 以降では、サービスがどのリポジトリに存在し、どのパスを含むかを `codeLocations` セクションで定義できます。
-
-`paths` 属性には、リポジトリ内のパスとマッチするグロブパターンのリストを指定します。
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-#### ファイル使用パターンの検出
-
-Datadog は Error Tracking などの追加機能でファイルの使用状況を検出し、実行時のサービスとファイルを関連付けます。たとえば、`foo` というサービスがあり、ログやスタックトレースの中に `/modules/foo/bar.py` というファイルパスが含まれている場合、Datadog は `/modules/foo/bar.py` をサービス `foo` に関連付けます。
-
-
-
-
-#### パスやリポジトリ名からサービス名を検出する
-
-Datadog はパスやリポジトリ名に含まれるサービス名を検出し、一致があればファイルをそのサービスに関連付けます。
-
-たとえば、`myservice` というサービスがあって、リポジトリ URL が `https://github.com/myorganization/myservice.git` の場合は、リポジトリ内のすべてのファイルが `myservice` に関連付けられます。
-
-
-
-もしリポジトリとの一致が見つからなかった場合、Datadog はファイルの `path` を調べて一致するサービスを検索します。たとえば、`myservice` というサービス名が存在し、ファイルパスが `/path/to/myservice/foo.py` であれば、パスの一部に `myservice` が含まれるためファイルは `myservice` に関連付けられます。パスに 2 つのサービス名が含まれている場合は、ファイル名に近いほうのサービス名が選択されます。
-
-
-
-### チームへの関連付け
-
-Datadog は、違反や脆弱性が検出された際に、そのファイルが関連付けられているサービスにひも付いたチームを自動的に関連付けます。たとえば、`domains/ecommerce/apps/myservice/foo.py` が `myservice` に関連付けられていれば、このファイルで見つかった違反はチーム `myservice` に関連付けられます。
-
-
-
-サービスやチームが見つからない場合は、リポジトリ内の `CODEOWNERS` ファイルが使用されます。このファイルにより、Git プロバイダ上でどのチームがどのファイルを所有するかが決定されます。
-
-**注**: この機能を正しく動作させるには、Git プロバイダのチームと [Datadog のチーム][10]を正しくマッピングしておく必要があります。
-
-## 差分(diff)-Aware スキャン
-
-差分スキャンを使用すると、Datadog の静的アナライザは機能ブランチ内でコミットによって変更されたファイルだけをスキャンします。これにより、リポジトリ全体を毎回スキャンしなくてよいので、スキャン時間が大幅に短縮されます。CI パイプラインで差分スキャンを有効にするには、以下の手順に従ってください:
-
-1. `DD_APP_KEY`、`DD_SITE`、`DD_API_KEY` の各変数を CI パイプラインで設定してください。
-2. 静的アナライザを呼び出す前に `datadog-ci git-metadata upload` を実行します。これにより、Datadog バックエンドが必要とする Git メタデータが準備されます。ファイル数を算出するのに Git メタデータが必須です。
-3. datadog-static-analyzer を呼び出す際に `--diff-aware` フラグを付けて実行してください。
-
-以下はコマンド実行例です (これらはすべて Git リポジトリ内で実行してください):
 ```bash
 datadog-ci git-metadata upload
 
 datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
 ```
 
-**注:** 差分スキャンが実行できない場合は、ディレクトリ全体がスキャン対象となります。
+**注:** Diff-aware scanning が完了できない場合、ディレクトリ全体がスキャンされます。
 
-## サードパーティ製静的解析の結果を Datadog にアップロードする
+## サードパーティの静的分析結果を Datadog へアップロードする{#upload-third-party-static-analysis-results-to-datadog}
 
 <div class="alert alert-info">
-  SARIF インポートは Snyk、CodeQL、Semgrep、Checkov、Gitleaks、Sysdig でテスト済みです。他の SARIF に準拠したツールで問題がある場合は <a href="/help">Datadog サポート</a>にお問い合わせください。
+  SARIF のインポートは、Snyk、CodeQL、Semgrep、Gitleaks、および Sysdig でテストされています。他の SARIF 準拠ツールに問題が発生した場合は、<a href="/help">Datadog サポート</a>にお問い合わせください。
 </div>
 
-相互運用可能な[静的分析結果交換形式 (SARIF)][2] であることを条件に、サードパーティーの静的分析ツールから Datadog へ結果を送信することができます。Node.js バージョン 14 以降が必要です。
+サードパーティの静的分析ツールから Datadog に分析結果を送信することができます (相互運用可能な[静的分析結果交換フォーマット (SARIF)][2] であることが条件)。Node.js バージョン 14 以降が必要です。
 
 SARIF レポートをアップロードするには
 
-1. [`DD_API_KEY` 変数と `DD_APP_KEY` 変数が定義されている][4]ことを確認します。
+1. [`DD_API_KEY` および `DD_APP_KEY` 変数が定義されている][4]を確認してください。
 2. 必要に応じて [`DD_SITE` 変数][7]を設定します (デフォルトは `datadoghq.com`)。
 3. `datadog-ci` ユーティリティをインストールします。
 
@@ -467,13 +145,120 @@ SARIF レポートをアップロードするには
    datadog-ci sarif upload $OUTPUT_LOCATION
    ```
 
-<!-- ## その他の参考資料
+## SARIF サポートガイドライン{#sarif-support-guidelines}
+
+Datadog は、[2.1.0 SARIF スキーマ][15]に準拠したサードパーティの SARIF ファイルの取り込みをサポートしています。SARIF
+schema は静的アナライザーツールによって異なる方法で使用されます。サードパーティの SARIF ファイルを Datadog に送信する場合は、
+以下の詳細に準拠していることを確認してください。
+
+ - 違反の場所は、結果の `physicalLocation` オブジェクトを通じて指定されます。
+    - `artifactLocation` とその `uri` は、リポジトリのルートに対して**相対的でなければなりません**。
+    - `region` オブジェクトは、Datadog UI で強調表示されたコードの部分です。
+ - `partialFingerprints` は、リポジトリ全体で発見を一意に識別するために使用されます。
+ - `properties`および`tags`は、さらに情報を追加します。
+    - タグ `DATADOG_CATEGORY` は、発見のカテゴリを指定します。許容される値は `SECURITY`、`PERFORMANCE`、`CODE_STYLE`、`BEST_PRACTICES`、`ERROR_PRONE` です。
+    - カテゴリ `SECURITY` で注釈された違反は、Vulnerabilities explorer およびリポジトリビューの Security タブに表示されます。
+ - `tool` セクションには、有効な `driver` セクションと `name` および`version` 属性が必要です。
+
+例えば、Datadog によって処理された SARIF ファイルの例は次のとおりです。
+
+
+```json
+
+{
+    "runs": [
+        {
+            "results": [
+                {
+                    "level": "error",
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "missing_timeout.py"
+                                },
+                                "region": {
+                                    "endColumn": 76,
+                                    "endLine": 6,
+                                    "startColumn": 25,
+                                    "startLine": 6
+                                }
+                            }
+                        }
+                    ],
+                    "message": {
+                        "text": "timeout not defined"
+                    },
+                    "partialFingerprints": {
+                        "DATADOG_FINGERPRINT": "b45eb11285f5e2ae08598cb8e5903c0ad2b3d68eaa864f3a6f17eb4a3b4a25da"
+                    },
+                    "properties": {
+                        "tags": [
+                            "DATADOG_CATEGORY:SECURITY",
+                            "CWE:1088"
+                        ]
+                    },
+                    "ruleId": "python-security/requests-timeout",
+                    "ruleIndex": 0
+                }
+            ],
+            "tool": {
+                "driver": {
+                    "informationUri": "https://www.datadoghq.com",
+                    "name": "<tool-name>",
+                    "rules": [
+                        {
+                            "fullDescription": {
+                                "text": "Access to remote resources should always use a timeout and appropriately handle the timeout and recovery. When using `requests.get`, `requests.put`, `requests.patch`, etc. - we should always use a `timeout` as an argument.\n\n#### Learn More\n\n - [CWE-1088 - Synchronous Access of Remote Resource without Timeout](https://cwe.mitre.org/data/definitions/1088.html)\n - [Python Best Practices: always use a timeout with the requests library](https://www.codiga.io/blog/python-requests-timeout/)"
+                            },
+                            "helpUri": "https://link/to/documentation",
+                            "id": "python-security/requests-timeout",
+                            "properties": {
+                                "tags": [
+                                    "CWE:1088"
+                                ]
+                            },
+                            "shortDescription": {
+                                "text": "no timeout was given on call to external resource"
+                            }
+                        }
+                    ],
+                    "version": "<tool-version>"
+                }
+            }
+        }
+    ],
+    "version": "2.1.0"
+}
+```
+
+## SARIF から CVSS 重大度へのマッピング {#sarif-to-cvss-severity-mapping}
+
+[SARIF フォーマット][15]は、none、note、warning、および error の4つの重大度を定義しています。
+ただし、Datadog は[共通脆弱性評価システム][16] (CVSS) を使用して違反および脆弱性の重大度を報告しており、
+そこでは critical、high、medium、low、none の5つの重大度が定義されています。
+
+SARIF ファイルを取り込む際、Datadog は以下のマッピングルールを使用して SARIF の重大度を CVSS の重大度にマッピングします。
+
+
+| SARIF の重大度| CVSS の重大度|
+|----------------|---------------|
+| Error          | Critical      |
+| Warning        | High          |
+| Note           | Medium        |
+| None           | Low           |
+
+## データ保持 {#data-retention}
+
+Datadog は、当社の [Data Retention Periods](https://docs.datadoghq.com/ja/data_security/data_retention_periods/) に従って発見を保存します。Datadog は顧客のソースコードを保存または保持しません。
+
+## <!-- 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}} -->
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[3]: /ja/developers/ide_plugins/idea/#static-analysis
+[3]: /ja/ide_plugins/idea/#static-analysis
 [4]: /ja/account_management/api-app-keys/
 [6]: /ja/security/code_security/static_analysis/static_analysis_rules
 [7]: /ja/getting_started/site/
@@ -483,4 +268,16 @@ SARIF レポートをアップロードするには
 [11]: /ja/security/code_security/dev_tool_int/github_pull_requests
 [12]: /ja/security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
-[14]: https://docs.datadoghq.com/ja/software_catalog/service_definitions/v3-0/
+[15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
+[16]: https://www.first.org/cvss/
+[17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[18]: /ja/security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
+[19]: /ja/security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /ja/security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/ja/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[24]: https://docs.datadoghq.com/ja/account_management/teams/
+[25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[27]: /ja/security/code_security/static_analysis/configuration/
+[101]: https://docs.datadoghq.com/ja/software_catalog/service_definitions/v3-0/
+[102]: https://docs.datadoghq.com/ja/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/ja/data_security/data_retention_periods/

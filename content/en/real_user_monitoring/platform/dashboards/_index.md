@@ -15,7 +15,7 @@ When you create a RUM application, Datadog [collects data][1] and generates dash
 
 {{< img src="real_user_monitoring/dashboards/rum-dashboards-performance-summary.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
-Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Digital Experience > Performance Summary** and **Digital Experience > Product Analytics > Analytics Summary**).
+Access your RUM dashboards by filtering for `RUM` in the search query of the [{{< ui >}}Dashboard List{{< /ui >}}][2] or from your application summary pages ({{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}} and {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Analytics Summary{{< /ui >}}).
 
 {{< img src="real_user_monitoring/dashboards/available-rum-dashboards.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
@@ -36,13 +36,13 @@ The generated RUM dashboards automatically contain a set of default template var
 
 ### View RUM events
 
-To explore individual events, click on a graph and click **View RUM events**. This redirects you to the RUM Explorer with pre-selected search filters.
+To explore individual events, click on a graph and click {{< ui >}}View RUM events{{< /ui >}}. This redirects you to the RUM Explorer with pre-selected search filters.
 
 {{< img src="real_user_monitoring/dashboards/rum-view-events-2.mp4" alt="View RUM events" video=true style="width:80%;" >}}
 
 ### Customize dashboards
 
-To clone your RUM dashboards, click the **Settings** icon and select **Clone dashboard**. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the **+** icon. 
+To clone your RUM dashboards, click the {{< ui >}}Settings{{< /ui >}} icon and select {{< ui >}}Clone dashboard{{< /ui >}}. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the {{< ui >}}+{{< /ui >}} icon. 
 
 You can also modify the template variables and create a [saved view][6].
 

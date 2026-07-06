@@ -13,10 +13,6 @@ further_reading:
       text: 'dd-trace-rs repository'
 ---
 
-{{< callout header="false" btn_hidden="true"  >}}
-  The Datadog Rust SDK is in Preview.
-{{< /callout >}} 
-
 The Datadog Rust SDK is open source. For more information, see the [`dd-trace-rs` repository][1] or the [`datadog-opentelemetry` crate][4].
 
 ## Language and library support

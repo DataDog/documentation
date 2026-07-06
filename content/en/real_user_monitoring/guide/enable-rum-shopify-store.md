@@ -24,19 +24,19 @@ This guide walks through how you can set up Real User Monitoring on your Shopify
 ## Setup
 
 1. Log into your Shopify administration panel.
-2. Under **Sales channels**, click **Online Store**.
+2. Under {{< ui >}}Sales channels{{< /ui >}}, click {{< ui >}}Online Store{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-3. This opens up a new menu, click on **Themes**.
+3. This opens up a new menu, click on {{< ui >}}Themes{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-4. Click the **Edit code** button for your current theme.
+4. Click the {{< ui >}}Edit code{{< /ui >}} button for your current theme.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-3.png" alt="Enable RUM on your Shopify store" >}}
 
-5. Under the **Layout** directory, find the main file of your theme **theme.liquid**. Click the file to edit it.
+5. Under the {{< ui >}}Layout{{< /ui >}} directory, find the main file of your theme `theme.liquid`. Click the file to edit it.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
@@ -44,7 +44,7 @@ This guide walks through how you can set up Real User Monitoring on your Shopify
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-5.png" alt="Enable RUM on your Shopify store" >}}
 
-7. Click the **Save** button to save your changes.
+7. Click the {{< ui >}}Save{{< /ui >}} button to save your changes.
 
 The updated looks like the following in the Shopify UI:
 

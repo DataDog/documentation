@@ -114,7 +114,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 [1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
 
 You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
@@ -158,13 +158,21 @@ agent diagnose show-metadata agent-telemetry
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
 | dogstatsd.uds_packets_bytes                 | DogStatsD UDS packets bytes                                                                                            |
 | logs.auto_multi_line_aggregator_flush       | Number of multi-line logs aggregated by the Agent                                                                       |
+| logs.auto_multi_line_default_total_lines    | Total log lines processed by the detecting aggregator for sources relying on the auto multi-line detection default           |
+| logs.auto_multi_line_default_would_combine  | Number of lines that would be combined if auto multi-line detection were enabled by default                              |
+| logs.auto_multi_line_default_would_truncate | Number of lines in groups that would be truncated if auto multi-line detection were enabled by default                   |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, for example, after log rotation                 |
 | logs.bytes_sent                             | Total number of bytes sent before encoding, if applicable                                                              |
 | logs.decoded                                | Total number of decoded logs                                                                                           |
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
+| logs.http_connectivity_check                | Count of HTTP connectivity checks, tagged by status (success or failure)                                               |
+| logs.http_connectivity_failure              | Count of HTTP connectivity check failures, tagged by root cause (dns, tls, timeout, connection, http_status, other)    |
+| logs.http_connectivity_retry_attempt        | Count of HTTP connectivity retry attempts, tagged by status (success or failure)                                       |
+| logs.restart_attempt                        | Count of logs agent restart attempts, tagged by status and target transport                                             |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
 | logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
+| logs_destination.destination_workers        | Maximum number of active HTTP connections per log destination                                                          |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
@@ -222,6 +230,18 @@ agent diagnose show-metadata agent-telemetry
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
+| appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
+| appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| **CSI Driver**                              |                                                                                                                        |
+| datadog_csi_driver.node_publish_volume_attempts   | Number of volume publish (mount) requests received by the CSI node server, tagged by status and volume type      |
+| datadog_csi_driver.node_unpublish_volume_attempts | Number of volume unpublish (unmount) requests received by the CSI node server, tagged by status                  |
+| datadog_csi_driver.library_resolutions            | Number of attempts to resolve an APM library for a volume, tagged by library and result                          |
+| datadog_csi_driver.library_download_duration_seconds_count | Number of library downloads from a registry (count of the download duration histogram), tagged by library and registry |
+| datadog_csi_driver.library_download_duration_seconds_sum   | Total time spent downloading libraries from a registry, in seconds (sum of the download duration histogram), tagged by library and registry |
+| datadog_csi_driver.library_cleanup                | Number of cleanup attempts for unused cached libraries, tagged by library, status, and strategy                  |
+| datadog_csi_driver.libraries_cached               | Number of library versions currently stored on disk, per library                                                |
+| datadog_csi_driver.libraries_cached_bytes         | Cumulative on-disk size of cached libraries, in bytes, per library                                              |
+| datadog_csi_driver.library_volume_links           | Number of volumes currently linked to a library, per library                                                    |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

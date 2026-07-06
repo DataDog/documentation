@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Ownership of views lets you see only the RUM metrics and events for the parts of your application that your team is responsible for. After you've set up ownership of views, every RUM event and metric attached to those views is **tagged** with your team's name. You can turn this filter on or off using the **My Teams** toggle on the Summary, Optimization, and Session Explorer pages.
+Ownership of views lets you see only the RUM metrics and events for the parts of your application that your team is responsible for. After you've set up ownership of views, every RUM event and metric attached to those views is **tagged** with your team's name. You can turn this filter on or off using the {{< ui >}}My Teams{{< /ui >}} toggle on the {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Optimization{{< /ui >}}, and {{< ui >}}Session Explorer{{< /ui >}} pages.
 
 {{< img src="/real_user_monitoring/ownership_of_views/ownership-sessions-explorer-1.png" alt="View of Sessions Explorer, where you can filter user sessions based on the teams assigned in Team Ownership, making it easy to find replays relevant to your team." >}}
 
@@ -21,9 +21,9 @@ By default, the toggle is enabled, which filters metrics and event data to show 
 
 To configure team ownership for your application's views:
 
-1. In Datadog, navigate to the [**Digital Experience > Manage Applications**][1] page and select your application.
-2. In the left navigation menu, select "Team Ownership".
-3. For each selected view, click "Edit Teams" and select one or more teams. This attributes each view in your application to those teams.
+1. In Datadog, navigate to the [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][1] page and select your application.
+2. In the left navigation menu, select {{< ui >}}Team Ownership{{< /ui >}}.
+3. For each selected view, click {{< ui >}}Edit Teams{{< /ui >}} and select one or more teams. This attributes each view in your application to those teams.
 
 After you associate a view with a team, Datadog automatically attributes new event data to that team.
 

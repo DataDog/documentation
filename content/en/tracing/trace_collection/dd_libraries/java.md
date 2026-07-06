@@ -123,7 +123,7 @@ To enable tracing when running Tomcat on Linux:
 To enable tracing when running Tomcat as a Windows service:
 
 1. Open the "tomcat@VERSION_MAJOR@w.exe" maintenance utility located in the `./bin` directory of the Tomcat project folder.
-2. Navigate to the **Java** tab, and add the following to `Java Options`:
+2. Navigate to the {{< ui >}}Java{{< /ui >}} tab, and add the following to `Java Options`:
 ```text
 -javaagent:C:\path\to\dd-java-agent.jar
 ```
@@ -178,10 +178,10 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 
 In the administrative console:
 
-1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
-2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**.
-4. In the **Generic JVM arguments** text field, enter:
+1. Select {{< ui >}}Servers{{< /ui >}}. Under {{< ui >}}Server Type{{< /ui >}}, select {{< ui >}}WebSphere application servers{{< /ui >}} and select your server.
+2. Select {{< ui >}}Java and Process Management{{< /ui >}} > {{< ui >}}Process Definition{{< /ui >}}.
+3. In the {{< ui >}}Additional Properties{{< /ui >}} section, click {{< ui >}}Java Virtual Machine{{< /ui >}}.
+4. In the {{< ui >}}Generic JVM arguments{{< /ui >}} text field, enter:
 
 ```text
 -javaagent:/path/to/dd-java-agent.jar

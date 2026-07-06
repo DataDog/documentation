@@ -12,6 +12,9 @@ products:
   - name: App and API Protection
     url: /security/application_security/
     icon: app-sec
+  - name: Workload Protection
+    url: /security/workload_protection/
+    icon: security-workload-security
 further_reading:
   - link: "/security/security_inbox"
     tag: "Documentation"
@@ -42,6 +45,7 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
       - Library Vulnerability
       - Container Image Vulnerability
       - Host Vulnerability
+      - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.

@@ -47,7 +47,7 @@ Datadog App Builder is a low-code application building platform. It streamlines 
 
 For more complex applications that require a local development workflow, source control, or collaboration across multiple engineers, see [Datadog Apps][10] to build apps as code.
 
-{{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
+{{< img src="/actions/app_builder/app-builder-app.png" alt="An app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
 
 ### Example use cases
 Below are a few examples of what App Builder apps can do:
@@ -66,7 +66,7 @@ Datadog App Builder provides an [Action Catalog][1] of hundreds of actions acros
 
 You can use your apps from the Apps page or [access them directly from within your dashboards][6]. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-2.png" alt="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking the Scale Service button" caption="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking a button on it" style="width:100%;" >}}
+{{< img src="/actions/app_builder/app-builder-embedded-dashboard-2.png" alt="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking the Scale Service button" caption="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking a button on it" style="width:100%;" >}}
 
 ### Apps created by Datadog
 
@@ -74,7 +74,7 @@ Apps created by Datadog are apps that are embedded in Integration dashboards. Th
 
 For example, the [EC2 integration dashboard][7] offers an EC2 instance management app. When you load the dashboard, the app is populated with demo data:
 
-{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="An EC2 app created by Datadog" caption="An EC2 app created by Datadog" style="width:100%;" >}}
+{{< img src="/actions/app_builder/ootb-app-ec2-demo-data.png" alt="An EC2 app created by Datadog" caption="An EC2 app created by Datadog" style="width:100%;" >}}
 
 To use the app with your data, click {{< ui >}}+ Connect Data{{< /ui >}}, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
@@ -84,7 +84,7 @@ You can change the selected connection by clicking {{< ui >}}Change Connection{{
 
 The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][8] and search for `App Builder Overview`.
 
-{{< img src="service_management/app_builder/app-builder-overview-dashboard-2.png" alt="The App Builder Overview dashboard" caption="The App Builder Overview dashboard"style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-overview-dashboard-2.png" alt="The App Builder Overview dashboard" caption="The App Builder Overview dashboard"style="width:100%;" >}}
 
 ## Further reading
 
@@ -93,11 +93,11 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][4].
 
 [1]: https://app.datadoghq.com/actions/action-catalog/
-[2]: /service_management/workflows/
+[2]: /actions/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
 [4]: https://chat.datadoghq.com/
-[5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
-[6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
+[5]: /actions/app_builder/build/#build-an-app-from-a-blueprint
+[6]: /actions/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list

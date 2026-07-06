@@ -24,9 +24,9 @@ This guide walks through creating a table of error logs, adding calculated colum
    status:error service:shopist-returns-prod returns
    ```
    {{< img src="/sheets/guide/logs_analysis/log_explorer_open_in_sheets.png" alt="Log Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:100%;" >}}
-3. Click **Open in Sheets**. 
-4. Choose to create a **New Spreadsheet** or add the table to an **Existing Spreadsheet**.
-5. Click **Save and Open**.
+3. Click {{< ui >}}Open in Sheets{{< /ui >}}. 
+4. Choose to create a {{< ui >}}New Spreadsheet{{< /ui >}} or add the table to an {{< ui >}}Existing Spreadsheet{{< /ui >}}.
+5. Click {{< ui >}}Save and Open{{< /ui >}}.
 
 ## Adding calculated columns
 
@@ -43,9 +43,9 @@ To gain more insight into your return errors, you might want to extract specific
 
 Pivot tables help you summarize and organize large datasets to find patterns and trends.
 
-1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
-2. In the **Rows** section, select the dimensions you want to analyze, such as the status of logs.
-3. In the **Calculations** section, choose the dimensions for calculations, like sum, average, count, min, and max.
+1. From an existing spreadsheet that already has a table of data, click {{< ui >}}Add Pivot Table{{< /ui >}}.
+2. In the {{< ui >}}Rows{{< /ui >}} section, select the dimensions you want to analyze, such as the status of logs.
+3. In the {{< ui >}}Calculations{{< /ui >}} section, choose the dimensions for calculations, like sum, average, count, min, and max.
 
 ## Example use case: Analyzing retail application error logs
 
@@ -64,7 +64,7 @@ You have a retail web application that generates a series of error logs related 
       status:error service:shopist-returns-prod returns
       ```
       {{< img src="/sheets/guide/logs_analysis/error_logs_returns.png" alt="Logs Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:100%;" >}}
-1. Click **Open in Sheets** to create a new table to analyze these logs.
+1. Click {{< ui >}}Open in Sheets{{< /ui >}} to create a new table to analyze these logs.
       {{< img src="/sheets/guide/logs_analysis/open_in_sheets.png" alt="Modal to add a title to your new spreadsheet from Logs, such as 'Returns error analysis'" style="width:100%;" >}}
 
 ### Extract specific error data
