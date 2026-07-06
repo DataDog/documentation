@@ -67,6 +67,28 @@ The scaffolded project includes:
 | `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][9] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`, `upload`) |
 
+## Use the `datadog-app` skill
+
+The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
+
+### Install
+
+```shell
+npx skills add datadog-labs/agent-skills \
+  --skill datadog-app \
+  --full-depth -y
+```
+
+The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
+
+### Example prompts
+
+- `Scaffold a Datadog App called my-app.`
+- `Run this Datadog App locally.`
+- `Upload and publish this Datadog App.`
+- `Set up CI/CD for this Datadog App.`
+- `Troubleshoot this Datadog App authentication error.`
+
 ## Develop your app locally
 
 1. Start the development server:
@@ -187,7 +209,7 @@ CI/CD uploads require API and application key authentication. Create a Datadog A
 
 If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
 ```ts
 datadogVitePlugin({
@@ -278,3 +300,6 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [17]: https://volta.sh
 [18]: https://github.com/Schniz/fnm
 [19]: https://nodejs.org
+[20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
+[21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
+[22]: https://github.com/antfu/skills-cli

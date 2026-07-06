@@ -4,6 +4,12 @@ description: Overview of Agent Observability, a platform for monitoring, trouble
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
+  tag: "Learning Center"
+  text: "Tracing LLM Applications"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
   tag: "Blog"
   text: "Building reliable dashboard agents with Datadog LLM Observability"
@@ -40,9 +46,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
-- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
-  tag: "Learning Center"
-  text: "Tracing LLM Applications"
 
 ---
 

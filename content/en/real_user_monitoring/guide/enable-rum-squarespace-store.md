@@ -18,23 +18,23 @@ This guide walks through how you can set up Real User Monitoring on your Squares
 
 ## Setup
 
-1. Log into your Squarespace administration panel and click **Settings**.
+1. Log into your Squarespace administration panel and click {{< ui >}}Settings{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-2. Under **Settings**, click **Advanced**.
+2. Under {{< ui >}}Settings{{< /ui >}}, click {{< ui >}}Advanced{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-3. In the open menu, click **Code Injection**.
+3. In the open menu, click {{< ui >}}Code Injection{{< /ui >}}.
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-4. Initialize the Browser RUM SDK by adding the SDK code snippet inside the **Header** section. See more information about which installation method to choose in the [RUM Browser Monitoring documentation][1].
+4. Initialize the Browser RUM SDK by adding the SDK code snippet inside the {{< ui >}}Header{{< /ui >}} section. See more information about which installation method to choose in the [RUM Browser Monitoring documentation][1].
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-4.png" alt="Enable RUM on your Squarespace store" >}}
 
-5. Click the **Save** button to save your changes.
+5. Click the {{< ui >}}Save{{< /ui >}} button to save your changes.
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squarespace store" style="width:50%;">}}
 

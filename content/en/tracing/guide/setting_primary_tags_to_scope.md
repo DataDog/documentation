@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add additional primary tags in Datadog
 
-If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Catalog Performance** tab. 
+If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the {{< ui >}}Catalog Performance{{< /ui >}} tab. 
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
@@ -85,7 +85,7 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag is no longer accessible.
-* Any APM monitors scoped to the previous tag display a status of _No Data_.
+* Any APM monitors scoped to the previous tag display a status of {{< ui >}}No Data{{< /ui >}}.
 
 ## Container-based additional primary tags
 

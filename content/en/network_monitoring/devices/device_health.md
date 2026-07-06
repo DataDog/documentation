@@ -5,7 +5,7 @@ further_reading:
   - link: "/network_monitoring/devices/config_management"
     tag: "Documentation"
     text: "Network Configuration Management"
-  - link: "/bits_ai/bits_ai_sre/"
+  - link: "/bits_ai/bits_investigation/"
     tag: "Documentation"
     text: "Bits Investigation"
   - link: "/network_monitoring/devices/troubleshooting"
@@ -63,5 +63,5 @@ The issue panel also shows other devices and dependencies potentially affected b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/devices/health
-[2]: /bits_ai/bits_ai_sre/
+[2]: /bits_ai/bits_investigation/
 [3]: https://app.datadoghq.com/devices

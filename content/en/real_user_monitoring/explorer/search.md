@@ -59,15 +59,15 @@ To create a facet, find and click on an attribute in the [event side panel][7]. 
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" alt="Create a facet" style="width:40%;">}}
 
-You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking **+ Add** from the left side panel, then entering or selecting a path to the facet.
+You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking {{< ui >}}+ Add{{< /ui >}} from the left side panel, then entering or selecting a path to the facet.
 
 {{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
 
-You can click **Advanced options** to customize the facet further, such as providing a different display name, type, group, or description.
+You can click {{< ui >}}Advanced options{{< /ui >}} to customize the facet further, such as providing a different display name, type, group, or description.
 
 {{< img src="real_user_monitoring/explorer/create-facet-2.png" alt="Advanced options for the new facet" style="width:40%;">}}
 
-The value for the attribute is stored across all new views. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
+The value for the attribute is stored across all new views. You can access these attributes in the search bar, the {{< ui >}}Facets{{< /ui >}} panel, and your [visualizations][8].
 
 ### Measures
 
@@ -77,7 +77,7 @@ To create a measure, find and click on a numerical attribute in the [event side 
 
 {{< img src="real_user_monitoring/explorer/create_measure.png" alt="Create a measure" style="width:40%;">}}
 
-The value of this attribute is stored across all new RUM events. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
+The value of this attribute is stored across all new RUM events. You can access these attributes in the search bar, the {{< ui >}}Facets{{< /ui >}} panel, and your [visualizations][8].
 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure" style="width:40%;">}}
 

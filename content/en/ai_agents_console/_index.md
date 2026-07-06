@@ -105,7 +105,7 @@ To start sending data to Agent Console, see [Set Up Agent Console][8].
 [2]: https://docs.claude.com/en/docs/claude-code/overview
 [3]: https://www.cursor.com/
 [4]: /integrations/github-copilot/
-[5]: /bits_ai/bits_ai_sre/
-[6]: /bits_ai/bits_ai_dev_agent/
+[5]: /bits_ai/bits_investigation/
+[6]: /bits_ai/bits_code/
 [7]: /actions/agents/
 [8]: /ai_agents_console/setup/

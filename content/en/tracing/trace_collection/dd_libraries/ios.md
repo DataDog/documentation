@@ -307,6 +307,36 @@ configuration.site = [DDSite ap2];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .uk1,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                        trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
     - `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.

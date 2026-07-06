@@ -52,8 +52,11 @@ Supported build systems:
 |---|---|
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
+| Bazel | >= 1.2.0 |
 
-Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
+<div class="alert alert-info">If you use Bazel to run Java tests, use the Datadog <a href="/tests/setup/bazel/java/">Bazel rules for Java tests</a>.</div>
+
+Other build systems, such as Ant or SBT, are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 

@@ -26,7 +26,7 @@ The [Trace Explorer][1] gives you the ability to search all ingested or indexed 
 
 Instrumented applications send traces to Datadog based on your configured [ingestion controls][2]. Ingested traces are available as Live traces for a rolling window of 15 minutes.
 
-The Trace Explorer shows a **Live Search - All ingested data** indicator whenever you are in Live mode:
+The Trace Explorer shows a {{< ui >}}Live Search - All ingested data{{< /ui >}} indicator whenever you are in Live mode:
 
 {{< img src="tracing/trace_explorer/live_search.png" alt="Live Search Indicator" style="width:75%;" >}}
 
@@ -34,7 +34,7 @@ All ingested traces are then passed through:
 - [Custom retention filters][3] that you can create to determine which spans to index. Once indexed through a custom retention filter, traces are retained for **15 days**.
 - The default [intelligent retention filter][4] that retains a diverse set of traces. When indexed through the intelligent retention filter, traces are retained for **30 days**.
 
-The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever you search [indexed spans][5]:
+The Trace Explorer shows an {{< ui >}}Search - Only Indexed Data{{< /ui >}} indicator whenever you search [indexed spans][5]:
 
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
 
@@ -74,7 +74,7 @@ When you use Live Search, Datadog displays spans as soon as they are sent by the
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
 
-With the **List view**, you can:
+With the {{< ui >}}List view{{< /ui >}}, you can:
 
 - Monitor whether a new deployment went smoothly by filtering on `version_id` of all tags.
 - View outage-related information in real time by searching 100% of ingested traces for a particular `org_id` or `customer_id` that is associated with a problematic child span.
@@ -83,7 +83,7 @@ With the **List view**, you can:
 - Run one-click search queries on any span or tag directly from the trace panel view.
 - Add, remove, and sort columns from span tags for a customized view.
 
-The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show some spans for visual clarity. You can search for all available spans in the search query. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
+The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show some spans for visual clarity. You can search for all available spans in the search query. Use the Live Search query bar filtering features to filter the spans stream and the {{< ui >}}Pause/Play{{< /ui >}} button at the top right of the screen to pause or resume the stream.
 
 {{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:75%;" >}}
 
@@ -94,7 +94,7 @@ The number of received spans per second is displayed at the top of the traces ta
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search Timeseries view" video="true" >}}
 
-Visualize your spans as timeseries instead of a list using the **Timeseries view**. The Live Search Timeseries view is useful for graphing requests or errors that correspond to specified criteria, such as:
+Visualize your spans as timeseries instead of a list using the {{< ui >}}Timeseries view{{< /ui >}}. The Live Search Timeseries view is useful for graphing requests or errors that correspond to specified criteria, such as:
 
 - Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to view traces matching these criteria individually.
 

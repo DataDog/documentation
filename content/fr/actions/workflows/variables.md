@@ -38,7 +38,7 @@ Pour créer des workflows utiles, il est parfois nécessaire de transmettre des 
 
 Pour chaque étape, l'onglet **Context Variables** affiche une carte des différentes variables de contexte qui peuvent être utilisées.
 
-{{< img src="service_management/workflows/context-variables5.png" alt="L'onglet Context Variables" >}}
+{{< img src="actions/workflows/variables/context-variables5.png" alt="L'onglet Context Variables" >}}
 
 Accédez à une variable de contexte dans une étape en l'encadrant dans des accolades doubles (`{{`). Pour accéder aux champs dans les variables de contexte, utilisez la [syntaxe d'expression Handlebars][4].
 
@@ -52,7 +52,7 @@ Certaines étapes génèrent des sorties que les étapes ultérieures peuvent en
 
 Si vous ne savez pas quelle variable vous recherchez, Datadog suggère les sorties d'étapes existantes au fur et à mesure que vous tapez. Vous pouvez également consulter l'onglet [Context Variables](#context-variables) pour obtenir une liste des variables disponibles.
 
-{{< img src="service_management/workflows/step-outputs2.png" alt="Datadog suggère les sorties d'étapes existantes au fur et à mesure que vous saisissez du texte." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/step-outputs2.png" alt="Datadog suggère les sorties d'étapes existantes au fur et à mesure que vous saisissez du texte." style="width:100%;" >}}
 
 ### Variables d'objet source
 
@@ -60,7 +60,7 @@ Les variables d'objet source sont des propriétés de l'événement déclencheur
 
 Toutes les variables de l'objet source sont visibles depuis l'onglet Context Variables.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="Les variables de l'objet Source dans l'onglet Context Variables" style="width:60%;" >}}
+{{< img src="actions/workflows/variables/context-variables-tab-source-object-variables2.png" alt="Les variables de l'objet Source dans l'onglet Context Variables" style="width:60%;" >}}
 
 ## Paramètres d'entrée
 
@@ -78,7 +78,7 @@ Pour faire référence au paramètre d'entrée dans une étape, utilisez la synt
 
 La section **Input Parameters** affiche les noms de tous les paramètres d'entrée existants avec leur nombre d'utilisations. Passez votre souris sur un nombre pour voir les étapes qui utilisent le paramètre.
 
-{{< img src="service_management/workflows/input-parameter3.png" alt="Passez la souris sur un compteur pour voir quelles étapes utilisent le paramètre." style="width:60%;" >}}
+{{< img src="actions/workflows/variables/input-parameter3.png" alt="Passez la souris sur un compteur pour voir quelles étapes utilisent le paramètre." style="width:60%;" >}}
 
 Vous pouvez ajouter un paramètre d'entrée implicite (c'est-à-dire qui n'existe pas déjà dans le workflow) en le saisissant dans une étape de workflow à l'aide la syntaxe `{{ Trigger.<parameter name> }}`. Lorsque vous enregistrerez le workflow, une fenêtre apparaîtra pour vous inviter à convertir le paramètre en paramètre explicite. Pour en savoir plus sur le déclenchement de workflows, consultez la section [Déclencher un workflow][5].
 
@@ -127,7 +127,7 @@ Voici un exemple d'un workflow qui démontre l'étape **Set variable** :
 1. Ajoutez une deuxième étape **Set variable** et déclarez une variable nommée `evenList` avec la valeur `${Variables.intList.filter(number => number % 2 === 0)}`. Il s'agit d'une [expression JavaScript en ligne][8] qui filtre les nombres impairs.
 1. Ajoutez une étape **Echo** pour répercuter la valeur d'`evenList` (`2,4`).
 
-{{< img src="service_management/workflows/set-variable-updated.png" alt="Ce workflow définit une variable pour contenir une liste de nombres, déclare une deuxième variable qui filtre les nombres impairs dans la liste à l'aide d'une expression en ligne, puis affiche la deuxième variable." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/set-variable-updated.png" alt="Ce workflow définit une variable pour contenir une liste de nombres, déclare une deuxième variable qui filtre les nombres impairs dans la liste à l'aide d'une expression en ligne, puis affiche la deuxième variable." style="width:100%;" >}}
 
 ### Accéder à une variable personnalisée
 
@@ -139,7 +139,7 @@ Définir une variable personnalisée à l'intérieur d'une **For loop** ou d'une
 
 Pour éviter une erreur de type résultant d'une variable non définie, attribuez une variable personnalisée avant de l'utiliser dans une boucle. Dans l'exemple ci-dessous, la variable personnalisée `evenList` est définie sur un tableau vide avant d'être utilisée dans la boucle.
 
-{{< img src="service_management/workflows/loop.png" alt="Ce workflow définit une variable avant qu'elle ne soit utilisée dans une boucle." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/loop.png" alt="Ce workflow définit une variable avant qu'elle ne soit utilisée dans une boucle." style="width:100%;" >}}
 
 ## Pour aller plus loin
 
