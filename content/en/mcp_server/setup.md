@@ -747,7 +747,7 @@ Most clients complete the OAuth 2.0 flow automatically during setup. Select your
 
 ### Personal or Service Access Token
 
-For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required:
+For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
