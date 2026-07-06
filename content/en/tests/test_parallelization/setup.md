@@ -26,7 +26,7 @@ Before setting up Test Parallelization:
 
 - Set up [Test Optimization][1].
 - For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
-- For Python: use the `ddtrace` package version `4.10.3` or later and `pytest`.
+- For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
 - Enable [Test Impact Analysis][2] for the test service when you want Test Parallelization to split only the tests affected by a code change.
 
 ## Concepts
@@ -374,7 +374,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install Python dependencies
-        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+        run: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
       - name: Configure Datadog Test Optimization
         uses: datadog/test-visibility-github-action@v2
         with:
@@ -416,7 +416,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install Python dependencies
-        run: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+        run: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
       - name: Configure Datadog Test Optimization
         uses: datadog/test-visibility-github-action@v2
         with:
@@ -450,7 +450,7 @@ jobs:
       - checkout
       - run:
           name: Install Python dependencies
-          command: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+          command: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
       - test-optimization-circleci-orb/autoinstrument:
           languages: python
           site: datadoghq.com
@@ -511,7 +511,7 @@ jobs:
             - ddtest-plan-{{ .Revision }}
       - run:
           name: Install Python dependencies
-          command: python -m pip install -r requirements.txt "ddtrace>=4.10.3" pytest
+          command: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
       - test-optimization-circleci-orb/autoinstrument:
           languages: python
           site: datadoghq.com
