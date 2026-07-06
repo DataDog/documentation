@@ -24534,6 +24534,184 @@ components:
         - findings
         - project
       type: object
+    CreateSnapshotAdditionalConfig:
+      description: Additional configuration options for snapshot creation.
+      properties:
+        template_variables:
+          $ref: "#/components/schemas/CreateSnapshotTemplateVariables"
+        timeseries_legend_type:
+          $ref: "#/components/schemas/CreateSnapshotTimeseriesLegendType"
+        timezone_offset_minutes:
+          description: Timezone offset in minutes from UTC. Positive values are west of UTC (for example, `300` for UTC-5). Use `0` for UTC.
+          example: 300
+          format: int64
+          type: integer
+      type: object
+    CreateSnapshotDataAttributesRequest:
+      description: Attributes for snapshot creation.
+      properties:
+        additional_config:
+          $ref: "#/components/schemas/CreateSnapshotAdditionalConfig"
+        end:
+          description: End of the time window for the snapshot, in milliseconds since Unix epoch.
+          example: 1692464800000
+          format: int64
+          type: integer
+        height:
+          description: The height of the rendered snapshot in pixels.
+          example: 185
+          format: int64
+          type: integer
+        is_authenticated:
+          description: Whether the snapshot requires authentication to view. Authenticated snapshots are scoped to the creating organization.
+          example: false
+          type: boolean
+        start:
+          description: Start of the time window for the snapshot, in milliseconds since Unix epoch.
+          example: 1692464000000
+          format: int64
+          type: integer
+        ttl:
+          $ref: "#/components/schemas/CreateSnapshotTTL"
+        widget_definition:
+          additionalProperties: {}
+          description: The widget definition to render as a snapshot. Must include a valid `type` field and non-empty `requests` array.
+          example:
+            requests:
+              - q: "avg:system.cpu.user{*}"
+            type: timeseries
+          type: object
+        width:
+          description: The width of the rendered snapshot in pixels.
+          example: 300
+          format: int64
+          type: integer
+      required:
+        - widget_definition
+        - start
+        - end
+      type: object
+    CreateSnapshotDataAttributesResponse:
+      description: Attributes of the created snapshot.
+      properties:
+        url:
+          description: The URL to access the rendered snapshot image.
+          example: https://app.datadoghq.com/api/v2/snapshot/view/public/60d/00000000-0000-0000-0000-000000000000/1692464400000-12345678-1234-5678-9abc-def123456789.png
+          type: string
+      required:
+        - url
+      type: object
+    CreateSnapshotDataRequest:
+      description: Data envelope for snapshot creation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateSnapshotDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/CreateSnapshotType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateSnapshotDataResponse:
+      description: Data envelope for the snapshot creation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateSnapshotDataAttributesResponse"
+        id:
+          description: The unique identifier of the created snapshot.
+          example: 12345678-1234-5678-9abc-def123456789
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateSnapshotType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CreateSnapshotRequest:
+      description: Request body for creating a graph snapshot.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateSnapshotDataRequest"
+      required:
+        - data
+      type: object
+    CreateSnapshotResponse:
+      description: Response body for a snapshot creation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateSnapshotDataResponse"
+      required:
+        - data
+      type: object
+    CreateSnapshotTTL:
+      description: The time-to-live for the snapshot. This value corresponds to storage lifecycle policies that automatically delete the snapshot after the specified period.
+      enum:
+        - 30d
+        - 60d
+        - 90d
+        - 1y
+        - 2y
+        - inf
+      example: 60d
+      type: string
+      x-enum-varnames:
+        - THIRTY_DAYS
+        - SIXTY_DAYS
+        - NINETY_DAYS
+        - ONE_YEAR
+        - TWO_YEARS
+        - INFINITE
+    CreateSnapshotTemplateVariable:
+      description: A template variable definition for snapshot rendering.
+      properties:
+        name:
+          description: The template variable name.
+          example: host
+          type: string
+        prefix:
+          description: The tag prefix associated with the template variable. For example, a prefix of `host` with a value of `web-server-1` scopes the snapshot to `host:web-server-1`.
+          example: host
+          type: string
+        values:
+          description: The list of scoped values for this template variable.
+          example:
+            - web-server-1
+            - web-server-2
+          items:
+            description: A single scoped value for the template variable.
+            type: string
+          type: array
+      required:
+        - name
+        - prefix
+        - values
+      type: object
+    CreateSnapshotTemplateVariables:
+      description: List of template variable definitions for snapshot rendering.
+      items:
+        $ref: "#/components/schemas/CreateSnapshotTemplateVariable"
+      type: array
+    CreateSnapshotTimeseriesLegendType:
+      description: The legend display type for timeseries widgets. A value of `none` hides the legend entirely; omitting the field lets the frontend choose automatically.
+      enum:
+        - compact
+        - expanded
+        - none
+      example: expanded
+      type: string
+      x-enum-varnames:
+        - COMPACT
+        - EXPANDED
+        - NONE
+    CreateSnapshotType:
+      description: The type identifier for snapshot creation resources.
+      enum:
+        - create_snapshot
+      example: create_snapshot
+      type: string
+      x-enum-varnames:
+        - CREATE_SNAPSHOT
     CreateStatusPageRequest:
       description: Request object for creating a status page.
       example:
@@ -37113,7 +37291,11 @@ components:
         attributes:
           $ref: "#/components/schemas/FlakyTestAttributes"
         id:
-          description: Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. On the Test Runs UI it is the same as the `test_fingerprint_fqn` tag.
+          description: |-
+            Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. It is the
+            value of the `@test.fingerprint_fqn` facet on test events, which you can search on in the Test
+            Optimization Explorer to locate a specific test. To filter search results by this ID, use the
+            `fingerprint_fqn` search key.
           type: string
         type:
           $ref: "#/components/schemas/FlakyTestType"
@@ -37495,6 +37677,9 @@ components:
             - `@git.branch`
             - `@test.codeowners`
             - `env`
+            - `fingerprint_fqn`
+
+            Use `fingerprint_fqn` to filter by a test's stable Fingerprint FQN (the same value as the test's `id`).
           example: 'flaky_test_state:active @git.repository.id_v2:"github.com/datadog/shopist"'
           type: string
       type: object
@@ -46477,6 +46662,9 @@ components:
     IncidentTypeAttributes:
       description: Incident type's attributes.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
+          readOnly: true
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
@@ -46517,6 +46705,53 @@ components:
           type: string
       required:
         - name
+      type: object
+    IncidentTypeConfiguration:
+      description: >-
+        The incident-type-scoped behavior settings. All fields are optional on update. Any field omitted from a PATCH request keeps its current value. This object is read-only on the incident type resource itself and is only mutated through the update (PATCH) endpoint.
+      properties:
+        allow_incident_deletion:
+          default: false
+          description: Whether incidents of this type can be deleted.
+          example: false
+          type: boolean
+        allow_workflows:
+          default: true
+          description: Whether automation workflows can be triggered for incidents of this type.
+          example: true
+          type: boolean
+        create_message:
+          description: An optional message shown to users when they declare an incident of this type.
+          example: "Create an incident here"
+          type: string
+        disable_out_of_the_box_postmortem_template:
+          default: false
+          description: Whether the out-of-the-box postmortem template is disabled for incidents of this type.
+          example: false
+          type: boolean
+        editable_timestamps:
+          default: false
+          description: Whether responders can edit incident timestamps for incidents of this type.
+          example: false
+          type: boolean
+        private_incidents:
+          default: false
+          description: >-
+            Whether responders can create private incidents of this type. This is an opt-in setting, distinct from `private_incidents_by_default`, which controls whether incidents are created private automatically.
+          example: false
+          type: boolean
+        private_incidents_by_default:
+          default: false
+          description: Whether incidents of this type are created as private by default.
+          example: false
+          type: boolean
+        slug_source:
+          $ref: "#/components/schemas/IncidentTypeSlugSource"
+        test_incidents:
+          default: true
+          description: Whether incidents of this type are treated as test incidents.
+          example: true
+          type: boolean
       type: object
     IncidentTypeCreateData:
       description: Incident type data for a create request.
@@ -46612,6 +46847,18 @@ components:
       required:
         - data
       type: object
+    IncidentTypeSlugSource:
+      default: default
+      description: >-
+        When set to `servicenow`, incidents will display the ServiceNow record ID instead of the public ID. If no ServiceNow integration exists, the public ID will be displayed.
+      enum:
+        - default
+        - servicenow
+      example: default
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - SERVICENOW
     IncidentTypeType:
       default: incident_types
       description: Incident type resource type.
@@ -46624,6 +46871,8 @@ components:
     IncidentTypeUpdateAttributes:
       description: Incident type's attributes for updates.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
@@ -65247,6 +65496,16 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
+      description: Server-side encryption type for Amazon S3.
+      enum:
+        - "aws:kms"
+        - AES256
+      example: "aws:kms"
+      type: string
+      x-enum-varnames:
+        - AWS_KMS
+        - AES256
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -65400,6 +65659,14 @@ components:
         region:
           description: AWS region of the S3 bucket.
           example: "us-east-1"
+          type: string
+        server_side_encryption:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationServerSideEncryption"
+        ssekms_key_id:
+          description: |-
+            The AWS KMS key ID used for SSE-KMS encryption.
+            Only applies when `server_side_encryption` is set to `aws:kms`.
+          example: "arn:aws:kms:us-east-1:123456789012:key/mrk-abc123"
           type: string
         storage_class:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass"
@@ -107953,7 +108220,11 @@ components:
       description: Details of what tests to update and their new attributes.
       properties:
         id:
-          description: The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and is the
+            value of the `@test.fingerprint_fqn` facet on test events. You can find it by searching on
+            `@test.fingerprint_fqn` in the Test Optimization Explorer, or by filtering the Search flaky tests
+            endpoint with the `fingerprint_fqn` key.
           example: 4eb1887a8adb1847
           type: string
         new_state:
@@ -108023,7 +108294,10 @@ components:
           description: Error message if the update failed.
           type: string
         id:
-          description: The ID of the flaky test from the request. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test from the request. This is the value of the `@test.fingerprint_fqn` facet
+            on test events, the same ID accepted by the update request and returned by the Search flaky tests
+            endpoint.
           example: 4eb1887a8adb1847
           type: string
         success:
@@ -154698,10 +154972,21 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
+                    data:
+                      - id: system.cpu.user
+                        type: metrics
+                      - attributes:
+                          created_at: "2020-03-25T09:48:37.463835Z"
+                          metric_type: gauge
+                          modified_at: "2020-04-25T09:48:37.463835Z"
+                          tags:
+                            - app
+                            - datacenter
+                        id: http.endpoint.request
+                        type: manage_tags
                     meta:
                       pagination:
-                        next_cursor:
+                        next_cursor: eyJhZnRlciI6Imh0dHAuZW5kcG9pbnQucmVxdWVzdCJ9
                 with_metric_volumes:
                   value:
                     data:
@@ -155573,12 +155858,30 @@ paths:
                       id: http.endpoint.request
                       relationships:
                         dashboards:
-                          data: []
+                          data:
+                            - id: abc-def-xyz
+                              type: dashboards
                         monitors:
-                          data: []
+                          data:
+                            - id: "1775073"
+                              type: monitors
                         notebooks:
                           data: []
+                        slos:
+                          data: []
                       type: metrics
+                    included:
+                      - attributes:
+                          popularity: 3.0
+                          title: My Dashboard
+                          url: /dashboard/abc-def-xyz
+                        id: abc-def-xyz
+                        type: dashboards
+                      - attributes:
+                          title: CPU utilization is high
+                          url: /monitors/1775073
+                        id: "1775073"
+                        type: monitors
               schema:
                 $ref: "#/components/schemas/MetricAssetsResponse"
           description: Success
@@ -155724,8 +156027,17 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
-                    meta: {}
+                    data:
+                      - attributes:
+                          cardinality_delta: 25
+                        id: host
+                        type: tag_cardinality
+                      - attributes:
+                          cardinality_delta: 5
+                        id: env
+                        type: tag_cardinality
+                    meta:
+                      metric_name: system.cpu.user
               schema:
                 $ref: "#/components/schemas/MetricTagCardinalitiesResponse"
           description: Success
@@ -185835,6 +186147,64 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/snapshot:
+    post:
+      description: Create a snapshot of a graph widget. The snapshot is rendered asynchronously; the returned URL can be polled until the image is ready.
+      operationId: CreateSnapshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSnapshotRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        url: https://app.datadoghq.com/api/v2/snapshot/view/public/60d/00000000-0000-0000-0000-000000000000/1692464400000-12345678-1234-5678-9abc-def123456789.png
+                      id: 12345678-1234-5678-9abc-def123456789
+                      type: create_snapshot
+              schema:
+                $ref: "#/components/schemas/CreateSnapshotResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a graph snapshot
+      tags:
+        - Reporting And Sharing
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps:
     delete:
       description: |-
@@ -200318,6 +200688,9 @@ tags:
       dashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,
       or Microsoft Teams.
     name: Report Schedules
+  - description: |-
+      The Reporting and Sharing endpoints allow you to create snapshots of graph widgets and other shareable resources.
+    name: Reporting And Sharing
   - description: |-
       A restriction policy defines the access control rules for a resource, mapping a set of relations
       (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).

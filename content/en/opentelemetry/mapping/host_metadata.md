@@ -15,15 +15,19 @@ This feature is in Preview. If you have any feedback, contact <a href="/help/">D
 
 ## Overview
 
-The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys.
+The Datadog Exporter collects host metadata and sends it to Datadog by default, where you can see it in the [Infrastructure List][6]. For most deployments, such as running the Collector as an agent on each host, host information is populated automatically and you do not need to follow the configuration on this page.
 
-<div class="alert alert-danger">Only metadata sent through the Datadog Exporter will populate the Infrastructure Host List. Metadata sent using the direct OTLP ingest endpoint does not support this feature.</div>
+<div class="alert alert-info">The manual configuration described on this page is primarily for <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway deployments</a>, where the Collector that exports to Datadog runs separately from the hosts it reports on. In these setups, explicitly tag your resources so that the correct host metadata reaches Datadog. If you run the Collector as an agent on each host, host metadata is collected by default and you can skip this configuration.</div>
+
+The Datadog Exporter supports sending system information about your hosts to Datadog. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys.
+
+<div class="alert alert-danger">Only metadata sent through the Datadog Exporter populates the Infrastructure Host List. Metadata sent using the direct OTLP ingest endpoint does not support this feature.</div>
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
 ## Opting in to the feature
 
-To use this feature, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
+For gateway deployments, or to manually control which resources are used for host metadata, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
 
 Resources populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
 
