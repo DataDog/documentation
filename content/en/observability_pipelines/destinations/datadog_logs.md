@@ -38,7 +38,7 @@ Click {{< ui >}}Route to Multiple Organizations{{< /ui >}} to set up routing to 
   - [View metrics](#view-metrics-for-the-component-or-specific-organizations) for an organization.
   - Click {{< ui >}}Add organization{{< /ui >}} to route to another Datadog organization.
 
-**Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
+**Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization. This is the organization tied to the API key when you install the Worker.
 
 #### Add an organization
 
@@ -69,7 +69,9 @@ There are no secret identifiers for this destination.
 
 {{% tab "Environment Variables" %}}
 
+<!-- vale Datadog.words_case_sensitive = NO -->
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+<!-- vale Datadog.words_case_sensitive = YES -->
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -99,9 +101,11 @@ To view metrics for a specific Datadog organization:
 1. Click the organization you want to see metrics for.
 1. Click {{< ui >}}View Health Metrics{{< /ui >}}.
 
-Alternatively, you can click on {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination, and click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization you are interested in.
+Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination. Then, click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization.
 
 ## How the destination works
+
+<div class="alert alert-warning">Before routing logs through Observability Pipelines, review any indexes, pipelines, or exclusion filters that use the <code>datadog.pipelines:false</code> tag. For logs from a Datadog Agent source, the Datadog Logs destination sets <code>source_type</code> to <code>datadog_agent</code> (<code>@source_type:datadog_agent</code> in log search). This can change whether Datadog applies the <code>datadog.pipelines:false</code> tag. To change or remove the source type before logs are delivered, use the <a href="/observability_pipelines/processors/custom_processor/">Custom Processor</a>.</div>
 
 ### Event batching
 
@@ -127,7 +131,7 @@ To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 
-## Azure Private Link
+## Azure private link
 
 To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
 
