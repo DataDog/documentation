@@ -70,7 +70,7 @@ After you search for a CVE, the table filter clears so all returned rows are vis
 
 ## Available artifacts (images)
 
-The **Image** dropdown is populated from the list of tracked public artifacts. We currently support the **latest 10 versions** of tracked public images. If an expected artifact is missing, contact [Datadog Support][1] to request that it be added.
+The **Image** dropdown is populated from the list of tracked public artifacts. Public Artifact Vulnerabilities supports the **latest 10 versions** of tracked public images. If an expected artifact is missing, contact [Datadog Support][1] to request that it be added.
 
 ## Options and actions on the page
 
