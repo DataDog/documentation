@@ -39,7 +39,7 @@ This section includes setup pages for the following language test targets:
 | Python | `dd_topt_py_test` | Supports the managed `pytest` runner and repository-owned pytest wrappers. See [Python compatibility][3]. |
 | Go | `dd_topt_go_test` | Use `test_optimization` mode for the faster standard-library `testing` path, or `general` mode for broader Orchestrion support. See [Go compatibility][4]. |
 
-Use `datadog-rules-test-optimization` version `1.2.0` and the commit pin shown on each language setup page.
+Use `datadog-rules-test-optimization` version `1.3.0` or later. When a setup snippet uses `git_override`, use the full commit SHA for the release you select.
 
 ## How the Bazel setup flow works
 
@@ -50,17 +50,21 @@ For detailed setup guides, see the [language-specific setup pages](#language-set
 1. Replace the language test rule with the Datadog Bazel macro for each instrumented test target.
 1. Run tests, validate local payloads with the doctor target, validate enrichment with the uploader dry run, and then upload payloads.
 
-For remote execution, configure Bazel to download test outputs locally:
+For CI with remote cache or remote execution, configure Bazel to materialize Test Optimization outputs and zip undeclared test outputs:
 
 ```text
-test:test-optimization --remote_download_outputs=all
+test:test-optimization --remote_download_minimal
+test:test-optimization --remote_download_regex=.*test[.]outputs.*
+test:test-optimization --zip_undeclared_test_outputs
 ```
 
-Without local `test.outputs` directories, the doctor and uploader cannot inspect payload files after `bazel test`.
+Bazel does not support a fixed `--build_event_json_file` path in a shared `.bazelrc` block. In CI, create a unique Bazel Build Event Protocol (BEP) JSON file for each `bazel test` invocation, pass it to the test command with `--build_event_json_file=<path>`, and pass the same path to the doctor and uploader with `--bep-json=<path>`.
 
 ## Upload payloads
 
-Run the upload flow after your Bazel tests complete. Replace `//tools/test_optimization` with the package where you declared the doctor and uploader targets:
+Run the upload flow after your Bazel tests complete. Replace `//tools/test_optimization` with the package where you declared the doctor and uploader targets.
+
+For local development where `bazel-testlogs` contains fresh `test.outputs` directories, run:
 
 ```bash
 bazel test --config=test-optimization //...
@@ -69,7 +73,49 @@ bazel run --config=test-optimization //tools/test_optimization:dd_upload_payload
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads
 ```
 
+For CI with remote cache or remote execution, pass the matching BEP file to the doctor and uploader:
+
+```bash
+BEP_JSON="$(mktemp -t bazel-bep.XXXXXX.json)"
+ARTIFACT_STAGING_DIR="$(mktemp -d -t dd-test-optimization-artifacts.XXXXXX)"
+
+bazel test --config=test-optimization --build_event_json_file="$BEP_JSON" //...
+bazel run --config=test-optimization //tools/test_optimization:dd_test_optimization_doctor -- \
+  --bep-json="$BEP_JSON" \
+  --freshness-source=bep \
+  --freshness-mode=required \
+  --artifact-source=bep \
+  --artifact-staging-dir="$ARTIFACT_STAGING_DIR"
+bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads -- \
+  --dry-run \
+  --validate-enrichment \
+  --bep-json="$BEP_JSON" \
+  --freshness-source=bep \
+  --freshness-mode=required \
+  --artifact-source=bep \
+  --artifact-staging-dir="$ARTIFACT_STAGING_DIR"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads -- \
+  --bep-json="$BEP_JSON" \
+  --freshness-source=bep \
+  --freshness-mode=required \
+  --artifact-source=bep \
+  --artifact-staging-dir="$ARTIFACT_STAGING_DIR"
+```
+
+Keep remote artifact downloads disabled unless the BEP file points to remote-only artifacts that Bazel did not materialize locally. For HTTP or HTTPS `outputs.zip` artifacts, add `--remote-artifacts=download` or `--remote-artifacts=required`. For custom remote artifact providers, configure `--bep-artifact-downloader=<path>`.
+
 Do not pass `DD_API_KEY`, `DD_SITE`, `DD_GIT_*`, or upload endpoint variables through `--test_env`. Forward sync metadata with `--repo_env`, and pass upload credentials only to the uploader runtime.
+
+## Collect diagnostic reports
+
+When you need to share diagnostics with Datadog Support, run the doctor with `--support-bundle` after tests complete:
+
+```bash
+bazel run --config=test-optimization //tools/test_optimization:dd_test_optimization_doctor -- \
+  --support-bundle .topt/reports/dd-test-optimization-support.zip
+```
+
+For CI runs that use BEP-based freshness or artifact staging, pass the same `--bep-json`, `--freshness-*`, and `--artifact-*` flags to the support-bundle command.
 
 ## Further reading
 
