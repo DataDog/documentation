@@ -185,7 +185,7 @@ runPredefinedScript:
 ```
 
 [2]: /actions/private_actions/use_private_actions/
-[5]: /service_management/app_builder/connections/
+[5]: /actions/connections/
 
 {{% /tab %}}
 

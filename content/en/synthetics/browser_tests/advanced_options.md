@@ -40,19 +40,19 @@ Custom selectors are created by performing a step of interest in the recorder (s
 To use a specific identifier (for example, to click on the `nth` element in a dropdown menu regardless of what the content of the element is):
 
 1. Record or manually add a [step][1] to your recording.
-2. Click on the recorded step and click **Advanced options**.
-3. Enter an XPath 1.0 selector or CSS class/ID under **User Specified Locator**, for example: `div`, `h1`, or `.hero-body`, for the HTML element.
+2. Click on the recorded step and click {{< ui >}}Advanced options{{< /ui >}}.
+3. Enter an XPath 1.0 selector or CSS class/ID under {{< ui >}}User Specified Locator{{< /ui >}}, for example: `div`, `h1`, or `.hero-body`, for the HTML element.
 4. Optionally, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
 
 {{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
-5. Once you have defined an element, click **Highlight** to highlight the element in the recording to the right.
+5. Once you have defined an element, click {{< ui >}}Highlight{{< /ui >}} to highlight the element in the recording to the right.
 
-By default, the **If user specified locator fails, fail test** checkbox is selected. This means that if the defined locator fails, the test is considered a failure.
+By default, the {{< ui >}}If user specified locator fails, fail test{{< /ui >}} checkbox is selected. This means that if the defined locator fails, the test is considered a failure.
 
 {{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="Test Highlighted Element" video=true >}}
 
-You can decide to fall back on the regular browser test algorithm by clearing the **If user specified locator fails, fail test** box.
+You can decide to fall back on the regular browser test algorithm by clearing the {{< ui >}}If user specified locator fails, fail test{{< /ui >}} box.
 
 {{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Fail test option" style="width:70%">}}
 
@@ -67,7 +67,7 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 ## Optional step
 
-In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **If this step fails, continue to next step**. For example, if the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
+In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. For example, if the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
 
 {{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Optional step" style="width:50%">}}
 
@@ -100,23 +100,23 @@ The advanced options for [subtests][4] allow you to choose where you want your s
 
 ### Set the subtest window
 
-* **Main (default)**: Subtest is played in your main window, in sequence with other steps.
-* **New**: Subtest is played in a new window, which is closed at the end of the subtest. This means the window cannot be reused.
-* **Specific window**: Subtest is played in a numbered window, which can be reused by other subtests.
+* {{< ui >}}Main (default){{< /ui >}}: Subtest is played in your main window, in sequence with other steps.
+* {{< ui >}}New{{< /ui >}}: Subtest is played in a new window, which is closed at the end of the subtest. This means the window cannot be reused.
+* {{< ui >}}Specific window{{< /ui >}}: Subtest is played in a numbered window, which can be reused by other subtests.
 
 Opening your subtest in the main window means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new window, or in a specific window, means that the test starts running from the subtest start URL.
 
 ### Set failure behavior
 
-Click **If this step fails, continue to next step** and **If this step fails, mark test as failed** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+Click {{< ui >}}If this step fails, continue to next step{{< /ui >}} and {{< ui >}}If this step fails, mark test as failed{{< /ui >}} to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
 
 ### Set success behavior
 
-Click **If this step succeeds, stop this test and mark it as passed** to ensure your browser test stops immediately and is marked as passed.
+Click {{< ui >}}If this step succeeds, stop this test and mark it as passed{{< /ui >}} to ensure your browser test stops immediately and is marked as passed.
 
 ### Set execution behavior
 
-Click **Always run this step** to ensure this step runs even if the previous steps in the browser test have failed.
+Click {{< ui >}}Always run this step{{< /ui >}} to ensure this step runs even if the previous steps in the browser test have failed.
 
 ### Override variables in subtests
 

@@ -37,7 +37,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the Agent
 
-If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+If you haven't installed a Datadog Agent on your machine, go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)" 
@@ -45,7 +45,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
@@ -215,7 +215,7 @@ Use `curl` to again send requests to the application:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11]. The Traces list shows something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 

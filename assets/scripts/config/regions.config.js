@@ -1,5 +1,5 @@
 export default {
-  allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov2', 'gov'],
+  allowedRegions: ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov2', 'uk1', 'gov'],
   dd_datacenter: {
     us: 'US1',
     us3: 'US3',
@@ -7,6 +7,7 @@ export default {
     eu: 'EU',
     ap1: 'AP1',
     gov2: 'US2-FED',
+    uk1: 'UK1',
     gov: 'US1-FED',
     ap2: 'AP2'
   },
@@ -18,6 +19,7 @@ export default {
     ap1: 'ap1',
     ap2: 'ap2',
     gov2: 'us2_fed',
+    uk1: 'uk1',
     gov: 'us1_fed'
   },
   dd_site: {
@@ -28,6 +30,7 @@ export default {
     ap1: 'ap1.datadoghq.com',
     ap2: 'ap2.datadoghq.com',
     gov2: 'us2.ddog-gov.com',
+    uk1: 'uk1.datadoghq.com',
     gov: 'ddog-gov.com'
   },
   dd_full_site: {
@@ -38,6 +41,7 @@ export default {
     ap1: 'ap1.datadoghq.com',
     ap2: 'ap2.datadoghq.com',
     gov2: 'us2.ddog-gov.com',
+    uk1: 'uk1.datadoghq.com',
     gov: 'app.ddog-gov.com'
   },
   dd_api: {
@@ -48,6 +52,7 @@ export default {
     ap1: 'https://api.ap1.datadoghq.com',
     ap2: 'https://api.ap2.datadoghq.com',
     gov2: 'https://api.us2.ddog-gov.com',
+    uk1: 'https://api.uk1.datadoghq.com',
     gov: 'https://api.ddog-gov.com'
   },
   dd_site_name: {
@@ -58,6 +63,7 @@ export default {
     ap1: 'AP1',
     ap2: 'AP2',
     gov2: 'US2-FED',
+    uk1: 'UK1',
     gov: 'US1-FED'
   },
   tcp_endpoint: {
@@ -68,6 +74,7 @@ export default {
     ap1: 'The AP1 endpoint is not supported.',
     ap2: 'The AP2 endpoint is not supported.',
     gov2: 'The US2-FED TCP endpoint is not supported.',
+    uk1: 'The TCP endpoint for UK1 is not supported.',
     gov: 'The GOV TCP endpoint is not supported.'
   },
   tcp_endpoint_port: {
@@ -77,6 +84,7 @@ export default {
     ap1: 'The AP1 endpoint is not supported.',
     ap2: 'The AP2 endpoint is not supported.',
     gov2: 'The US2-FED TCP endpoint port is not supported.',
+    uk1: 'The TCP endpoint port for UK1 is not supported.',
     gov: 'The GOV TCP endpoint port is not supported.'
   },
   tcp_endpoint_port_ssl: {
@@ -86,6 +94,7 @@ export default {
     ap1: 'The AP1 endpoint is not supported.',
     ap2: 'The AP2 endpoint is not supported.',
     gov2: 'The US2-FED TCP endpoint port is not supported.',
+    uk1: 'The TCP endpoint port for UK1 is not supported.',
     gov: 'The GOV TCP endpoint port is not supported.'
   },
   hipaa_logs_legacy: {
@@ -96,6 +105,7 @@ export default {
     ap1: 'N/A',
     ap2: 'N/A',
     gov2: 'N/A',
+    uk1: 'N/A',
     gov: 'lambda-tcp-encrypted-intake.logs.ddog-gov.com<br>gcp-encrypted-intake.logs.ddog-gov.com<br>http-encrypted-intake.logs.ddog-gov.com'
   },
   web_integrations_endpoint: {
@@ -106,6 +116,7 @@ export default {
     ap1: 'intake.logs.ap1.datadoghq.com',
     ap2: 'intake.logs.ap2.datadoghq.com',
     gov2: 'The US2-FED web integrations endpoint port is not supported.',
+    uk1: 'intake.logs.uk1.datadoghq.com',
     gov: 'The GOV web integrations endpoint port is not supported.'
   },
   web_integrations_port: {
@@ -116,6 +127,7 @@ export default {
     ap1: '443',
     ap2: '443',
     gov2: 'The US2-FED web integrations endpoint port is not supported.',
+    uk1: '443',
     gov: 'The GOV web integrations endpoint port is not supported.'
   },
   web_integrations_unencrypted_port: {
@@ -126,6 +138,7 @@ export default {
     ap1: '10514',
     ap2: '10514',
     gov2: 'The US2-FED web integrations endpoint port is not supported.',
+    uk1: '10514',
     gov: 'The GOV web integrations endpoint port is not supported.'
   },
   agent_http_endpoint: {
@@ -136,6 +149,7 @@ export default {
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
     ap2: 'agent-http-intake.logs.ap2.datadoghq.com',
     gov2: 'agent-http-intake.logs.us2.ddog-gov.com',
+    uk1: 'agent-http-intake.logs.uk1.datadoghq.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
   agent_http_endpoint_private_link: {
@@ -146,6 +160,7 @@ export default {
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
     ap2: 'gold.intake.ap2.datadoghq.com',
     gov2: 'agent-http-intake.logs.us2.ddog-gov.com',
+    uk1: 'gold.intake.uk1.datadoghq.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
   agent_http_port: {
@@ -156,6 +171,7 @@ export default {
     ap1: '443',
     ap2: '443',
     gov2: '443',
+    uk1: '443',
     gov: '443'
   },
   http_endpoint: {
@@ -166,6 +182,7 @@ export default {
     ap1: 'http-intake.logs.ap1.datadoghq.com',
     ap2: 'http-intake.logs.ap2.datadoghq.com',
     gov2: 'http-intake.logs.us2.ddog-gov.com',
+    uk1: 'http-intake.logs.uk1.datadoghq.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
   http_endpoint_private_link: {
@@ -176,6 +193,7 @@ export default {
     ap1: 'http-intake.logs.ap1.datadoghq.com',
     ap2: 'gold.intake.ap2.datadoghq.com',
     gov2: 'http-intake.logs.us2.ddog-gov.com',
+    uk1: 'gold.intake.uk1.datadoghq.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
   http_endpoint_full: {
@@ -186,6 +204,7 @@ export default {
     ap1: 'https://http-intake.logs.ap1.datadoghq.com',
     ap2: 'https://http-intake.logs.ap2.datadoghq.com',
     gov2: 'https://http-intake.logs.us2.ddog-gov.com',
+    uk1: 'https://http-intake.logs.uk1.datadoghq.com',
     gov: 'https://http-intake.logs.ddog-gov.com'
   },
   http_port: {
@@ -196,6 +215,7 @@ export default {
     ap1: '443',
     ap2: '443',
     gov2: '443',
+    uk1: '443',
     gov: '443'
   },
   lambda_endpoint: {
@@ -206,6 +226,7 @@ export default {
     ap1: 'The AP1 lambda endpoint is not supported.',
     ap2: 'The AP2 lambda endpoint is not supported.',
     gov2: 'The US2-FED lambda endpoint is not supported.',
+    uk1: 'The lambda endpoint for UK1 is not supported.',
     gov: 'The GOV lambda endpoint is not supported.'
   },
   lambda_port: {
@@ -216,6 +237,7 @@ export default {
     ap1: 'The AP1 lambda endpoint port is not supported.',
     ap2: 'The AP2 lambda endpoint port is not supported.',
     gov2: 'The US2-FED lambda endpoint port is not supported.',
+    uk1: 'The lambda endpoint port for UK1 is not supported.',
     gov: 'The GOV lambda endpoint port is not supported.'
   },
   lambda_http_endpoint: {
@@ -226,6 +248,7 @@ export default {
     ap1: 'lambda-http-intake.logs.ap1.datadoghq.com',
     ap2: 'lambda-http-intake.logs.ap2.datadoghq.com',
     gov2: 'lambda-http-intake.logs.us2.ddog-gov.com',
+    uk1: 'lambda-http-intake.logs.uk1.datadoghq.com',
     gov: 'lambda-http-intake.logs.ddog-gov.com'
   },
   lambda_http_port: {
@@ -236,6 +259,7 @@ export default {
     ap1: '443',
     ap2: '443',
     gov2: '443',
+    uk1: '443',
     gov: '443'
   },
   functions_endpoint: {
@@ -246,6 +270,7 @@ export default {
     ap1: 'The AP1 functions endpoint is not supported.',
     ap2: 'The AP2 functions endpoint is not supported.',
     gov2: 'The US2-FED functions endpoint is not supported.',
+    uk1: 'The functions endpoint for UK1 is not supported.',
     gov: 'The GOV functions endpoint is not supported.'
   },
   functions_port: {
@@ -256,6 +281,7 @@ export default {
     ap1: 'The AP1 functions endpoint port is not supported.',
     ap2: 'The AP2 functions endpoint port is not supported.',
     gov2: 'The US2-FED functions endpoint port is not supported.',
+    uk1: 'The functions endpoint port for UK1 is not supported.',
     gov: 'The GOV functions endpoint port is not supported.'
   },
   browser_sdk_endpoint_domain: {
@@ -266,6 +292,7 @@ export default {
     ap1: 'browser-intake-ap1-datadoghq.com',
     ap2: 'browser-intake-ap2-datadoghq.com',
     gov2: 'browser-intake-us2-ddog-gov.com',
+    uk1: 'browser-intake-uk1-datadoghq.com',
     gov: 'browser-intake-ddog-gov.com'
   },
   aws_region: {
@@ -276,6 +303,7 @@ export default {
     ap1: 'ap-northeast-1',
     ap2: 'ap-southeast-2',
     gov2: 'us-gov-west-1',
+    uk1: 'eu-west-2',
     gov: 'N/A'
   },
   aws_private_link_cross_region: {
@@ -286,6 +314,7 @@ export default {
     ap1: 'Asia Pacific (Tokyo) (ap-northeast-1)',
     ap2: 'Asia Pacific (Sydney) (ap-southeast-2)',
     gov2: 'N/A',
+    uk1: 'Europe (London) (eu-west-2)',
     gov: 'N/A'
   },
   aws_private_link_api_service_name: {
@@ -296,6 +325,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_containers_service_name: {
@@ -306,6 +336,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-07f22a32140efaae5',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_logs_agent_service_name: {
@@ -316,6 +347,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_logs_user_service_name: {
@@ -326,6 +358,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_metrics_service_name: {
@@ -336,6 +369,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_process_service_name: {
@@ -346,6 +380,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-0fe52c96bfb6c5d0e',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_profiling_service_name: {
@@ -356,6 +391,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_traces_service_name: {
@@ -366,6 +402,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-08989912d1ef253f4',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_dbm_service_name: {
@@ -376,6 +413,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_private_link_remote_config_service_name: {
@@ -386,6 +424,7 @@ export default {
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10',
     gov2: 'The private link service for US2-FED is not supported.',
+    uk1: 'com.amazonaws.vpce.eu-west-2.vpce-svc-0755097b02a34f9e7',
     gov: 'The private link service for GOV is not supported.'
   },
   aws_customer_access_id: {
@@ -396,6 +435,7 @@ export default {
     ap1: '417141415827',
     ap2: '412381753143',
     gov2: '382742775718',
+    uk1: '117348461845',
     gov: '392588925713'
   },
   aws_customer_access_govcloud_id: {
@@ -406,6 +446,7 @@ export default {
     ap1: 'N/A',
     ap2: 'N/A',
     gov2: '486737091498',
+    uk1: 'N/A',
     gov: '065115117704'
   },
   ip_ranges_url: {
@@ -416,6 +457,7 @@ export default {
     ap1: 'https://ip-ranges.ap1.datadoghq.com',
     ap2: 'https://ip-ranges.ap2.datadoghq.com',
     gov2: 'https://ip-ranges.us2.ddog-gov.com',
+    uk1: 'https://ip-ranges.uk1.datadoghq.com',
     gov: 'https://ip-ranges.ddog-gov.com'
   },
   otlp_trace_endpoint: {
@@ -426,6 +468,7 @@ export default {
     ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
     ap2: 'https://otlp.ap2.datadoghq.com/v1/traces',
     gov2: 'https://otlp.us2.ddog-gov.com/v1/traces',
+    uk1: 'https://otlp.uk1.datadoghq.com/v1/traces',
     gov: 'https://otlp.ddog-gov.com/v1/traces'
   },
   otlp_metrics_endpoint: {
@@ -436,6 +479,7 @@ export default {
     ap1: 'https://otlp.ap1.datadoghq.com/v1/metrics',
     ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics',
     gov2: 'https://otlp.us2.ddog-gov.com/v1/metrics',
+    uk1: 'https://otlp.uk1.datadoghq.com/v1/metrics',
     gov: 'https://otlp.ddog-gov.com/v1/metrics'
   },
   otlp_logs_endpoint: {
@@ -446,6 +490,7 @@ export default {
     ap1: 'https://otlp.ap1.datadoghq.com/v1/logs',
     ap2: 'https://otlp.ap2.datadoghq.com/v1/logs',
     gov2: 'https://otlp.us2.ddog-gov.com/v1/logs',
+    uk1: 'https://otlp.uk1.datadoghq.com/v1/logs',
     gov: 'https://otlp.ddog-gov.com/v1/logs'
   },
   custom_costs_endpoint: {
@@ -456,6 +501,7 @@ export default {
     ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
     ap2: 'api.ap2.datadoghq.com/api/v2/cost/custom_costs',
     gov2: 'The US2-FED custom costs endpoint is not supported.',
+    uk1: 'api.uk1.datadoghq.com/api/v2/cost/custom_costs',
     gov: 'The custom costs endpoint for GOV is not supported.'
   },
   ip_ranges_url_webhooks: {
@@ -466,6 +512,7 @@ export default {
     ap1: 'https://ip-ranges.ap1.datadoghq.com/webhooks.json',
     ap2: 'https://ip-ranges.ap2.datadoghq.com/webhooks.json',
     gov2: 'https://ip-ranges.us2.ddog-gov.com/webhooks.json',
+    uk1: 'https://ip-ranges.uk1.datadoghq.com/webhooks.json',
     gov: 'https://ip-ranges.ddog-gov.com/webhooks.json'
   },
   ip_ranges_url_api: {
@@ -476,6 +523,7 @@ export default {
     ap1: 'https://ip-ranges.ap1.datadoghq.com/api.json',
     ap2: 'https://ip-ranges.ap2.datadoghq.com/api.json',
     gov2: 'https://ip-ranges.us2.ddog-gov.com/api.json',
+    uk1: 'https://ip-ranges.uk1.datadoghq.com/api.json',
     gov: 'https://ip-ranges.ddog-gov.com/api.json'
   },
   vercel_setup: {
@@ -486,6 +534,7 @@ export default {
     ap1: 'https://ap1.datadoghq.com/setup/vercel',
     ap2: 'https://ap2.datadoghq.com/setup/vercel',
     gov2: 'https://us2.ddog-gov.com/setup/vercel',
+    uk1: 'https://uk1.datadoghq.com/setup/vercel',
     gov: 'https://app.ddog-gov.com/setup/vercel'
   },
   api_endpoint: {
@@ -496,6 +545,7 @@ export default {
     ap1: 'api.ap1.datadoghq.com',
     ap2: 'api.ap2.datadoghq.com',
     gov2: 'api.us2.ddog-gov.com',
+    uk1: 'api.uk1.datadoghq.com',
     gov: 'api.ddog-gov.com'
   },
   api_endpoint_private_link: {
@@ -506,6 +556,7 @@ export default {
     ap1: 'api.ap1.datadoghq.com',
     ap2: 'orchid.intake.ap2.datadoghq.com',
     gov2: 'api.us2.ddog-gov.com',
+    uk1: 'orchid.intake.uk1.datadoghq.com',
     gov: 'api.ddog-gov.com'
   },
   metrics_endpoint: {
@@ -516,6 +567,7 @@ export default {
     ap1: 'metrics.agent.ap1.datadoghq.com',
     ap2: 'metrics.agent.ap2.datadoghq.com',
     gov2: 'metrics.agent.us2.ddog-gov.com',
+    uk1: 'metrics.agent.uk1.datadoghq.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
   metrics_endpoint_private_link: {
@@ -526,6 +578,7 @@ export default {
     ap1: 'metrics.agent.ap1.datadoghq.com',
     ap2: 'beige.intake.ap2.datadoghq.com',
     gov2: 'metrics.agent.us2.ddog-gov.com',
+    uk1: 'beige.intake.uk1.datadoghq.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
   containers_endpoint: {
@@ -536,6 +589,7 @@ export default {
     ap1: 'orchestrator.ap1.datadoghq.com',
     ap2: 'orchestrator.ap2.datadoghq.com',
     gov2: 'orchestrator.us2.ddog-gov.com',
+    uk1: 'orchestrator.uk1.datadoghq.com',
     gov: 'orchestrator.ddog-gov.com'
   },
   containers_endpoint_private_link: {
@@ -546,6 +600,7 @@ export default {
     ap1: 'orchestrator.ap1.datadoghq.com',
     ap2: 'linen.intake.ap2.datadoghq.com',
     gov2: 'orchestrator.us2.ddog-gov.com',
+    uk1: 'linen.intake.uk1.datadoghq.com',
     gov: 'orchestrator.ddog-gov.com'
   },
   process_endpoint: {
@@ -556,6 +611,7 @@ export default {
     ap1: 'process.ap1.datadoghq.com',
     ap2: 'process.ap2.datadoghq.com',
     gov2: 'process.us2.ddog-gov.com',
+    uk1: 'process.uk1.datadoghq.com',
     gov: 'process.ddog-gov.com'
   },
   process_endpoint_private_link: {
@@ -566,6 +622,7 @@ export default {
     ap1: 'process.ap1.datadoghq.com',
     ap2: 'bisque.intake.ap2.datadoghq.com',
     gov2: 'process.us2.ddog-gov.com',
+    uk1: 'bisque.intake.uk1.datadoghq.com',
     gov: 'process.ddog-gov.com'
   },
   profiling_endpoint: {
@@ -576,6 +633,7 @@ export default {
     ap1: 'intake.profile.ap1.datadoghq.com',
     ap2: 'intake.profile.ap2.datadoghq.com',
     gov2: 'intake.profile.us2.ddog-gov.com',
+    uk1: 'intake.profile.uk1.datadoghq.com',
     gov: 'intake.profile.ddog-gov.com'
   },
   profiling_endpoint_private_link: {
@@ -586,6 +644,7 @@ export default {
     ap1: 'intake.profile.ap1.datadoghq.com',
     ap2: 'cyan.intake.ap2.datadoghq.com',
     gov2: 'intake.profile.us2.ddog-gov.com',
+    uk1: 'cyan.intake.uk1.datadoghq.com',
     gov: 'intake.profile.ddog-gov.com'
   },
   traces_endpoint: {
@@ -596,6 +655,7 @@ export default {
     ap1: 'trace.agent.ap1.datadoghq.com',
     ap2: 'trace.agent.ap2.datadoghq.com',
     gov2: 'trace.agent.us2.ddog-gov.com',
+    uk1: 'trace.agent.uk1.datadoghq.com',
     gov: 'trace.agent.ddog-gov.com'
   },
   traces_endpoint_private_link: {
@@ -606,6 +666,7 @@ export default {
     ap1: 'trace.agent.ap1.datadoghq.com',
     ap2: 'lime.intake.ap2.datadoghq.com',
     gov2: 'trace.agent.us2.ddog-gov.com',
+    uk1: 'lime.intake.uk1.datadoghq.com',
     gov: 'trace.agent.ddog-gov.com'
   },
   dbm_endpoint: {
@@ -616,6 +677,7 @@ export default {
     ap1: 'dbm-metrics-intake.ap1.datadoghq.com',
     ap2: 'dbm-metrics-intake.ap2.datadoghq.com',
     gov2: 'dbm-metrics-intake.us2.ddog-gov.com',
+    uk1: 'dbm-metrics-intake.uk1.datadoghq.com',
     gov: 'dbm-metrics-intake.ddog-gov.com'
   },
   dbm_endpoint_private_link: {
@@ -626,6 +688,7 @@ export default {
     ap1: 'dbm-metrics-intake.ap1.datadoghq.com',
     ap2: 'white.intake.ap2.datadoghq.com',
     gov2: 'dbm-metrics-intake.us2.ddog-gov.com',
+    uk1: 'white.intake.uk1.datadoghq.com',
     gov: 'dbm-metrics-intake.ddog-gov.com'
   },
   remote_config_endpoint: {
@@ -636,6 +699,7 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'config.ap2.datadoghq.com',
     gov2: 'config.us2.ddog-gov.com',
+    uk1: 'config.uk1.datadoghq.com',
     gov: 'config.ddog-gov.com'
   },
   remote_config_endpoint_private_link: {
@@ -646,6 +710,7 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov2: 'config.us2.ddog-gov.com',
+    uk1: 'violet.intake.uk1.datadoghq.com',
     gov: 'config.ddog-gov.com'
   },
   org_management_max_session_duration: {
@@ -656,6 +721,7 @@ export default {
     ap1: '720 hours (30 days)',
     ap2: '720 hours (30 days)',
     gov2: '12 hours',
+    uk1: '720 hours (30 days)',
     gov: '12 hours'
   },
   jenkins_site_name: {
@@ -666,6 +732,7 @@ export default {
     ap1: 'AP1',
     ap2: 'AP2',
     gov2: 'US2_FED',
+    uk1: 'UK1',
     gov: 'US1_FED'
   },
   synthetics_tunnel_endpoint: {
@@ -676,6 +743,7 @@ export default {
     ap1: 'tunnel-ap1.synthetics.datadoghq.com',
     ap2: 'tunnel-ap2.synthetics.datadoghq.com',
     gov2: 'N/A',
+    uk1: 'tunnel-uk1.synthetics.datadoghq.com',
     gov: 'N/A'
   },
   dogwrap_site_flag: {
@@ -686,6 +754,7 @@ export default {
     ap1: '',
     ap2: '',
     gov2: '',
+    uk1: '',
     gov: ''
   },
   kotlin_multiplatform_site_config: {
@@ -696,6 +765,7 @@ export default {
     ap1: '\n        .useSite(DatadogSite.AP1)\n        .trackCrashes(true)',
     ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
     gov2: '\n        .useSite(DatadogSite.US2_FED)\n        .trackCrashes(true)',
+    uk1: '\n        .useSite(DatadogSite.UK1)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
   maui_site_config: {
@@ -706,6 +776,7 @@ export default {
     ap1: '\n    Site = DatadogSite.Ap1,',
     ap2: '\n    Site = DatadogSite.Ap2,',
     gov2: '\n    Site = DatadogSite.Us1Fed,',
+    uk1: '\n    Site = DatadogSite.Uk1,',
     gov: '\n    Site = DatadogSite.Us1Fed,'
   },
   flutter_web_logs_cdn_path: {
@@ -716,6 +787,7 @@ export default {
     ap1: 'ap1/v6/datadog-logs.js',
     ap2: 'ap2/v6/datadog-logs.js',
     gov2: 'datadog-logs-v6.js',
+    uk1: 'uk1/v5/datadog-logs.js',
     gov: 'datadog-logs-v6.js'
   },
   flutter_web_rum_cdn_path: {
@@ -726,6 +798,7 @@ export default {
     ap1: 'ap1/v6/datadog-rum-slim.js',
     ap2: 'ap2/v6/datadog-rum-slim.js',
     gov2: 'datadog-rum-slim-v6.js',
+    uk1: 'uk1/v6/datadog-rum-slim.js',
     gov: 'datadog-rum-slim-v6.js'
   },
   reactnative_sdk_init: {
@@ -736,6 +809,7 @@ export default {
     ap1: '',
     ap2: '',
     gov2: '',
+    uk1: '',
     gov: ''
   },
   roku_site: {
@@ -746,6 +820,7 @@ export default {
     ap1: 'ap1',
     ap2: 'ap2',
     gov2: 'us2_fed',
+    uk1: 'uk1',
     gov: 'us1_fed'
   },
   synthetics_intake_endpoint: {
@@ -756,6 +831,7 @@ export default {
     ap1: 'intake.synthetics.ap1.datadoghq.com',
     ap2: 'intake.synthetics.ap2.datadoghq.com',
     gov2: 'intake.synthetics.us2.ddog-gov.com',
+    uk1: 'intake.synthetics.uk1.datadoghq.com',
     gov: 'intake.synthetics.ddog-gov.com'
   },
   mcp_server_endpoint: {
@@ -766,6 +842,7 @@ export default {
     ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
     ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
     gov2: 'The MCP Server endpoint for US2-FED is not supported.',
+    uk1: 'https://mcp.uk1.datadoghq.com/api/unstable/mcp-server/mcp',
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
   cursor_mcp_install_deeplink: {
@@ -776,6 +853,7 @@ export default {
     ap1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     gov2: 'N/A',
+    uk1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-uk1&config=eyJ1cmwiOiJodHRwczovL21jcC51azEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     gov: 'N/A'
   },
   goose_mcp_install_deeplink: {
@@ -785,6 +863,7 @@ export default {
     eu: 'goose://extension?url=https://mcp.datadoghq.eu/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    uk1: 'goose://extension?url=https://mcp.uk1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     gov: 'N/A'
   },
   microsoft_teams_app_name: {
@@ -795,6 +874,7 @@ export default {
     ap1: 'Datadog',
     ap2: 'Datadog',
     gov2: 'Datadog for Government',
+    uk1: 'Datadog',
     gov: 'Datadog for Government'
   }
 };

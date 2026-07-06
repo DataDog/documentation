@@ -35,13 +35,13 @@ title: App Builder
 
 Datadog App Builder est une plateforme de création d'applications low-code. Elle simplifie le développement de vos outils internes grâce à une interface de glisser-déposer conviviale et à une prise en charge intégrée de JavaScript. App Builder s'intègre à des services populaires comme AWS et GitHub, ce qui vous permet d'exploiter des données et de vous connecter de manière transparente à des API externes et à des banques de données. En s'intégrant aux capacités existantes de Datadog, App Builder fournit un contexte centralisé qui vous permet de prendre des mesures préventives ou de répondre à des incidents en cours, le tout depuis la même vue que celle que vous utilisez pour le dépannage.
 
-{{< img src="/service_management/app_builder/app-builder-app.png" alt="Une application dans App Builder" style="width:100%;" >}} 
+{{< img src="/actions/app_builder/app-builder-app.png" alt="Une application dans App Builder" style="width:100%;" >}} 
 
 ## Configurer les actions d'App Builder
 
 Datadog App Builder fournit un [Action Catalog][1] de centaines d'actions pour de multiples intégrations. L'Action Catalog et les identifiants de connexion pour chaque intégration sont partagés avec [Datadog Workflow Automation][2]. S'il n'existe pas d'intégration qui accomplit votre tâche, vous pouvez utiliser des actions génériques telles que les requêtes HTTP et les fonctions JavaScript pour effectuer toute tâche dont votre application a besoin.
 
-{{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder fournit un Action Catalog de centaines d'actions pour de multiples intégrations." style="width:100%;" >}} 
+{{< img src="/actions/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder fournit un Action Catalog de centaines d'actions pour de multiples intégrations." style="width:100%;" >}} 
 
 ## Commencer avec les blueprints
 
@@ -55,13 +55,13 @@ Vous trouverez ci-dessous quelques exemples des possibilités offertes par les a
 - Utiliser une intégration PagerDuty pour identifier les membres en service de chaque équipe d'une organisation
 - Consulter un résumé de la progression de chaque PR au sein d'un référentiel donné
 
-{{< img src="/service_management/app_builder/app-builder-blueprints-2.png" alt="Blueprints d'apps" style="width:100%;" >}}
+{{< img src="/actions/app_builder/app-builder-blueprints-2.png" alt="Blueprints d'apps" style="width:100%;" >}}
 
 ## Effectuer une action directement depuis les dashboards 
 
 Vous pouvez utiliser vos applications depuis la page Apps ou [y accéder directement depuis vos dashboards][6]. Les applications Datadog fonctionnent comme des intégrations de dashboard natives, ce qui vous permet de personnaliser et d'effectuer des actions sur vos données directement dans le contexte de votre dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="Une application intégrée dans un dashboard" style="width:100%;" >}} 
+{{< img src="/actions/app_builder/app-builder-embedded-dashboard.png" alt="Une application intégrée dans un dashboard" style="width:100%;" >}} 
 
 ### Applications créées par Datadog
 
@@ -69,7 +69,7 @@ Les applications créées par Datadog sont des applications intégrées dans les
 
 Par exemple, le [dashboard d'intégration EC2][7] propose une application de gestion d'instances EC2. Lorsque vous chargez le dashboard, l'application est remplie avec des données de démonstration :
 
-{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="Application EC2 créée par Datadog, remplie avec des données de démonstration" style="width:100%;" >}}
+{{< img src="/actions/app_builder/ootb-app-ec2-demo-data.png" alt="Application EC2 créée par Datadog, remplie avec des données de démonstration" style="width:100%;" >}}
 
 Pour utiliser l'application avec vos données, cliquez sur **+ Connect Data**, puis créez une nouvelle connexion ou sélectionnez une connexion existante. Une fois votre sélection enregistrée, l'application affiche les données de votre connexion. 
 
@@ -79,7 +79,7 @@ Vous pouvez modifier la connexion sélectionnée en cliquant sur **Change Connec
 
 Le dashboard App Builder Overview fournit une vue d'ensemble de haut niveau de vos applications Datadog. Pour trouver le dashboard, accédez à votre [liste de dashboards][8] et recherchez `App Builder Overview`.
 
-{{< img src="service_management/app_builder/app-builder-overview-dashboard.png" alt="Le dashboard App Builder Overview" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-overview-dashboard.png" alt="Le dashboard App Builder Overview" style="width:100%;" >}}
 
 ## Pour aller plus loin
 

@@ -42,7 +42,7 @@ You can accomplish the following actions:
 
 ## Create a search query
 
-Navigate to [**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and create visualizations.
+Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}Continuous Testing{{< /ui >}}][1] and click on an out-of-the-box search query to start viewing your test batches or runs and create visualizations.
 
 {{< img src="continuous_testing/explorer_search_query_1.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
 
@@ -73,7 +73,7 @@ The Results Explorer displays batches of tests run by [Continuous Testing and yo
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
-3. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
+3. Click on a failing test result to see the detailed {{< ui >}}Test Result{{< /ui >}} page and investigate the root cause of the issue.
 
 For more information about test batches, see [Search Test Batches][4].
 

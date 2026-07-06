@@ -135,7 +135,7 @@ ENV DD_IAST_ENABLED=true
 {{% /tab %}}
    {{< /tabs >}}
 
-To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+To see Code Security in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
