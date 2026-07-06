@@ -131,7 +131,7 @@ To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 
-## Azure private link
+## Azure Private Link
 
 To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
 
