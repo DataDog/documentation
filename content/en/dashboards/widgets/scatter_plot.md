@@ -92,4 +92,4 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 [1]: /dashboards/guide/context-links/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
-[4]: /dashboards/
+[4]: https://app.datadoghq.com/dashboard/
