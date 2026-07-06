@@ -58,7 +58,7 @@ test:test-optimization --remote_download_regex=.*test[.]outputs.*
 test:test-optimization --zip_undeclared_test_outputs
 ```
 
-Bazel does not support a fixed `--build_event_json_file` path in a shared `.bazelrc` block. In CI, create a unique Bazel Build Event Protocol (BEP) JSON file for each `bazel test` invocation, pass it to the test command with `--build_event_json_file=<path>`, and pass the same path to the doctor and uploader with `--bep-json=<path>`.
+Do not add a fixed `--build_event_json_file` path to a shared `.bazelrc` block. In CI, create a unique Bazel Build Event Protocol (BEP) JSON file for each `bazel test` invocation. Pass the file to the test command with `--build_event_json_file=<path>`, and pass the same file to the doctor and uploader with `--bep-json=<path>`.
 
 ## Upload payloads
 
