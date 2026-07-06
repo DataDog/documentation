@@ -81,6 +81,25 @@ end
 
 After these changes, test discovery can run faster and avoid failures when the database is unavailable during planning.
 
+### Cache test discovery
+
+If full test discovery takes too long, cache the `ddtest` discovery file between CI runs. Restore your CI cache before planning, and pass the restored file to `ddtest`:
+
+{{< code-block lang="bash" >}}
+DD_TEST_OPTIMIZATION_RUNNER_TEST_DISCOVERY_CACHE=.ddtest-cache/tests-discovery.json ddtest plan
+{{< /code-block >}}
+
+After planning, save the refreshed internal discovery file back to your CI cache:
+
+{{< code-block lang="bash" >}}
+if [ -f .testoptimization/tests-discovery/tests.json ]; then
+  mkdir -p .ddtest-cache
+  cp .testoptimization/tests-discovery/tests.json .ddtest-cache/tests-discovery.json
+fi
+{{< /code-block >}}
+
+`ddtest` invalidates the cache when any test file changes. The set of test files is determined by `--tests-location` and `--tests-exclude-pattern`.
+
 ## Configure pytest
 
 `ddtest` runs pytest as `python -m pytest` and appends the selected test files. It appends `--ddtrace` to `PYTEST_ADDOPTS`, preserving any existing value, so the `ddtrace` pytest plugin loads without changing your pytest config.
