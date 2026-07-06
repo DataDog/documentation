@@ -28,7 +28,7 @@ The configuration file must begin with a `schema-version` key, followed by top-l
 | `v1.3` | SAST, SCA, IaC Security |
 | `v1.4` | SAST, SCA, IaC Security |
 
-Use `schema-version: v1.4` for all new configurations. It supports the same products as `v1.3` and adds IaC rule arguments. Version `v1.3` added IaC configuration options such as per-rule path scoping, per-rule severity overrides, and platform filters. See [Infrastructure as Code (IaC) Security Configuration][3] for IaC-specific fields.
+Use `schema-version: v1.4` for all new configurations. It supports the same products as `v1.3` and adds per-rule `arguments` for IaC rules. Version `v1.3` added IaC configuration options such as per-rule path scoping, per-rule severity overrides, and platform filters. See [Infrastructure as Code (IaC) Security Configuration][3] for IaC-specific fields.
 
 The following example shows the top-level structure:
 
