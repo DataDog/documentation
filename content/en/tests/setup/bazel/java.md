@@ -25,8 +25,8 @@ Use the following minimum versions:
 
 | Component | Version |
 |---|---|
-| `datadog-rules-test-optimization` | `>=1.2.0` |
-| `datadog-rules-test-optimization-java` | `>=1.2.0` |
+| `datadog-rules-test-optimization` | `>=1.3.0` |
+| `datadog-rules-test-optimization-java` | `>=1.3.0` |
 | Java runtime example | `>=17` |
 | `dd-java-agent` example | `>=1.60.0` |
 
@@ -46,23 +46,23 @@ Before setting up Test Optimization for Java tests in Bazel:
 Add the core module and the Java companion module to `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "datadog-rules-test-optimization", version = "1.2.0")
+bazel_dep(name = "datadog-rules-test-optimization", version = "1.3.0")
 git_override(
     module_name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
 )
 
-bazel_dep(name = "datadog-rules-test-optimization-java", version = "1.2.0")
+bazel_dep(name = "datadog-rules-test-optimization-java", version = "1.3.0")
 git_override(
     module_name = "datadog-rules-test-optimization-java",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
     strip_prefix = "modules/java",
 )
 ```
 
-Use the same commit SHA for the core module and the Java companion module.
+Use the same release commit SHA for the core module and the Java companion module.
 
 ## Use `WORKSPACE` mode
 
@@ -74,7 +74,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
 )
 
 load(
@@ -83,7 +83,7 @@ load(
 )
 
 datadog_java_test_optimization_workspace_repositories(
-    rto_commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    rto_commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
     rules_java_repo_name = "rules_java",
 )
 ```
@@ -213,7 +213,9 @@ common:test-optimization --repo_env=DD_GIT_BRANCH
 common:test-optimization --repo_env=DD_GIT_TAG
 common:test-optimization --repo_env=DD_GIT_COMMIT_SHA
 common:test-optimization --repo_env=DD_PR_NUMBER
-test:test-optimization --remote_download_outputs=all
+test:test-optimization --remote_download_minimal
+test:test-optimization --remote_download_regex=.*test[.]outputs.*
+test:test-optimization --zip_undeclared_test_outputs
 ```
 
 Run tests, validate local payloads, validate enrichment, and upload:
@@ -224,6 +226,8 @@ bazel run --config=test-optimization //tools/test_optimization:dd_test_optimizat
 bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads -- --dry-run --validate-enrichment
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads
 ```
+
+For CI with remote cache or remote execution, pass a unique BEP file from each `bazel test` invocation to the doctor and uploader. See the [Bazel upload flow][3].
 
 Do not pass upload credentials, upload endpoints, or `DD_GIT_*` values through `--test_env`.
 
@@ -289,7 +293,7 @@ This can happen when the test target uses the raw `java_test` rule. It can also 
 To fix this issue:
 
 1. Confirm the target uses `dd_topt_java_test`.
-1. For remote execution, add `test:test-optimization --remote_download_outputs=all` to `.bazelrc`.
+1. For remote execution, use the BEP-based upload flow on the [Bazel setup page][3].
 1. Run the doctor target before upload.
 1. Run uploader dry-run enrichment validation before the real upload.
 
@@ -305,3 +309,4 @@ To fix this issue, pass Git metadata through `--repo_env`, not `--test_env`.
 
 [1]: /tests/test_impact_analysis/
 [2]: /code_coverage/configuration/
+[3]: /tests/setup/bazel/#upload-payloads
