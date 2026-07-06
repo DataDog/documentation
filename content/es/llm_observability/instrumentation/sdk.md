@@ -14,7 +14,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Rastrea, compara y optimiza tus prompts LLM con Datadog Agent Observability
+  text: Rastrea, compara y optimiza tus prompts LLM con Datadog LLM Observability
 title: Referencia del SDK de Agent Observability
 ---
 ## Descripción general {#overview}

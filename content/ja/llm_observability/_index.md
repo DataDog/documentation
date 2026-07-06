@@ -4,19 +4,19 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards
   tag: ブログ
-  text: Datadog Agent Observability を使用した信頼性の高いダッシュボードエージェントの構築
+  text: Datadog LLM Observability を使用した信頼性の高いダッシュボードエージェントの構築
 - link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
   tag: ブログ
   text: 'AI ROI の推進: 責任を持ってスケールできるように、Datadog がコスト、パフォーマンス、インフラストラクチャーを結び付ける方法'
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: ブログ
-  text: Datadog Agent Observability は、OpenTelemetry GenAI セマンティック規約をネイティブにサポートしています
+  text: Datadog LLM Observability は、OpenTelemetry GenAI セマンティック規約をネイティブにサポートしています
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: ブログ
-  text: Datadog Agent Observability を使用して Strands Agents のワークフローを可視化する
+  text: Datadog LLM Observability を使用して Strands Agents のワークフローを可視化する
 - link: https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/
   tag: ブログ
-  text: Datadog Agent Observability で Anthropic アプリケーションを監視する
+  text: Datadog LLM Observability で Anthropic アプリケーションを監視する
 - link: https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/
   tag: ブログ
   text: LLM プロンプトインジェクション攻撃監視で機密データを保護するベストプラクティス
@@ -28,7 +28,7 @@ further_reading:
   text: Datadog GPU モニタリングを使った AI インフラストラクチャーの最適化とトラブルシューティング
 - link: https://www.datadoghq.com/blog/llm-observability-bedrock-agents/
   tag: ブログ
-  text: Datadog Agent Observability を使った Amazon Bedrock 上に構築されたエージェントの監視
+  text: Datadog LLM Observability を使った Amazon Bedrock 上に構築されたエージェントの監視
 - link: https://www.datadoghq.com/blog/monitor-mcp-servers/
   tag: ブログ
   text: MCP サーバーにおける一般的なセキュリティリスクの特定
@@ -37,7 +37,7 @@ further_reading:
   text: 'AI インフラストラクチャーの悪用: 管理が不十分な認証情報とリソースが LLM アプリケーションをどのように危険にさらすか'
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq
   tag: ブログ
-  text: Agent Observability を使用して NLQ エージェントのデバッグ時間を数時間から数分に短縮した方法
+  text: LLM Observability を使用して NLQ エージェントのデバッグ時間を数時間から数分に短縮した方法
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: ラーニングセンター
   text: LLM アプリケーションのトレース

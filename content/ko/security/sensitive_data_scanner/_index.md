@@ -39,7 +39,7 @@ further_reading:
   text: 보험 회사가 Datadog을 사용하여 민감한 데이터 리스크를 발견, 분류 및 조치하는 방법
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: 블로그
-  text: Datadog Agent Observability를 통해 Strands Agents 워크플로에 대한 가시성을 확보합니다.
+  text: Datadog LLM Observability를 통해 Strands Agents 워크플로에 대한 가시성을 확보합니다.
 - link: https://www.datadoghq.com/blog/observability-pipelines-mssp
   tag: 블로그
   text: Datadog Observability Pipelines를 사용하여 MSSP의 로그 수집 및 집계를 간소화합니다.

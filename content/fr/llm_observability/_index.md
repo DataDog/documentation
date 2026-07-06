@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards
   tag: Blog
-  text: Créer des agents de tableau de bord fiables avec Datadog Agent Observability
+  text: Créer des agents de tableau de bord fiables avec Datadog LLM Observability
 - link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
   tag: Blog
   text: 'Maximiser le retour sur investissement de l''IA : Comment Datadog relie coût,
@@ -12,15 +12,15 @@ further_reading:
     responsable'
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog Agent Observability prend en charge nativement les conventions sémantiques
+  text: Datadog LLM Observability prend en charge nativement les conventions sémantiques
     OpenTelemetry GenAI
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
   text: Obtenez de la visibilité sur les flux de travail des agents Strands avec Datadog
-    Agent Observability
+    LLM Observability
 - link: https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/
   tag: Blog
-  text: Surveillez vos applications Anthropic avec Datadog Agent Observability
+  text: Surveillez vos applications Anthropic avec Datadog LLM Observability
 - link: https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/
   tag: Blog
   text: Meilleures pratiques pour surveiller les attaques par injection de prompt
@@ -33,7 +33,7 @@ further_reading:
   text: Optimisez et dépannez l'infrastructure IA avec la surveillance GPU de Datadog
 - link: https://www.datadoghq.com/blog/llm-observability-bedrock-agents/
   tag: Blog
-  text: Surveillez les agents construits sur Amazon Bedrock avec Datadog Agent Observability
+  text: Surveillez les agents construits sur Amazon Bedrock avec Datadog LLM Observability
 - link: https://www.datadoghq.com/blog/monitor-mcp-servers/
   tag: Blog
   text: Identifiez les risques de sécurité courants dans les serveurs MCP
@@ -44,7 +44,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq
   tag: Blog
   text: Comment nous avons réduit notre temps de débogage de l'agent NLQ de plusieurs
-    heures à quelques minutes avec Agent Observability
+    heures à quelques minutes avec LLM Observability
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: Centre d'apprentissage
   text: Traçage des applications LLM

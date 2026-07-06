@@ -14,7 +14,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: ブログ
-  text: Datadog Agent Observability を使用して、LLM プロンプトを追跡、比較、最適化します。
+  text: Datadog LLM Observability を使用して、LLM プロンプトを追跡、比較、最適化します。
 title: Agent Observability SDK リファレンス
 ---
 ## 概要 {#overview}

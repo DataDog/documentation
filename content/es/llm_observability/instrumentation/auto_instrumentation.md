@@ -10,12 +10,12 @@ further_reading:
   text: Referencia del SDK de Observabilidad de LLM
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Realice un seguimiento, compare y optimice sus prompts de LLM con Agent Observability
+  text: Realice un seguimiento, compare y optimice sus prompts de LLM con LLM Observability
     de Datadog.
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
   text: Obtenga visibilidad de extremo a extremo en los clientes de MCP con Datadog
-    Agent Observability
+    LLM Observability
 title: Instrumentación automática para Agent Observability
 ---
 ## Resumen

@@ -4,19 +4,19 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards
   tag: 블로그
-  text: Datadog Agent Observability로 안정적인 대시보드 에이전트 구축
+  text: Datadog LLM Observability로 안정적인 대시보드 에이전트 구축
 - link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
   tag: 블로그
   text: 'AI ROI 향상: Datadog이 비용, 성능 및 인프라를 연결하여 책임감 있게 확장할 수 있도록 지원하는 방법'
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: 블로그
-  text: Datadog Agent Observability는 OpenTelemetry GenAI 시맨틱 규칙을 기본적으로 지원합니다.
+  text: Datadog LLM Observability는 OpenTelemetry GenAI 시맨틱 규칙을 기본적으로 지원합니다.
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: 블로그
-  text: Datadog Agent Observability로 Strands Agents 워크플로 가시성 확보
+  text: Datadog LLM Observability로 Strands Agents 워크플로 가시성 확보
 - link: https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/
   tag: 블로그
-  text: Datadog Agent Observability로 Anthropic 애플리케이션 모니터링
+  text: Datadog LLM Observability로 Anthropic 애플리케이션 모니터링
 - link: https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/
   tag: 블로그
   text: 민감한 데이터를 보호하기 위한 LLM 프롬프트 인젝션 공격 모니터링 모범 사례
@@ -28,7 +28,7 @@ further_reading:
   text: Datadog GPU Monitoring으로 AI 인프라 최적화 및 문제 해결
 - link: https://www.datadoghq.com/blog/llm-observability-bedrock-agents/
   tag: 블로그
-  text: Datadog Agent Observability로 Amazon Bedrock 기반 에이전트 모니터링
+  text: Datadog LLM Observability로 Amazon Bedrock 기반 에이전트 모니터링
 - link: https://www.datadoghq.com/blog/monitor-mcp-servers/
   tag: 블로그
   text: MCP 서버의 일반적인 보안 위험 식별
@@ -37,7 +37,7 @@ further_reading:
   text: 'AI 인프라 남용: 잘못 관리된 자격 증명과 리소스가 LLM 애플리케이션을 노출시키는 방식'
 - link: https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq
   tag: 블로그
-  text: Agent Observability를 통해 NLQ 에이전트 디버깅 시간을 몇 시간에서 몇 분으로 단축한 방법
+  text: LLM Observability를 통해 NLQ 에이전트 디버깅 시간을 몇 시간에서 몇 분으로 단축한 방법
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: 학습 센터
   text: LLM 애플리케이션 추적

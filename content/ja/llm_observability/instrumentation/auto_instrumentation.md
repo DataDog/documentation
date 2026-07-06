@@ -10,10 +10,10 @@ further_reading:
   text: Agent Observability SDK リファレンス
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Datadog Agent Observability を使用して、LLM プロンプトを追跡、比較、最適化します
+  text: Datadog LLM Observability を使用して、LLM プロンプトを追跡、比較、最適化します
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
-  text: Datadog Agent Observability を使用して、MCP クライアントのエンドツーエンドの可視性を取得します。
+  text: Datadog LLM Observability を使用して、MCP クライアントのエンドツーエンドの可視性を取得します。
 title: Agent Observability のための自動インスツルメンテーション
 ---
 ## 概要

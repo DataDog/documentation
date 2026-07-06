@@ -14,7 +14,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: 블로그
-  text: Datadog Agent Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
+  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
 title: Agent Observability SDK 참조
 ---
 ## 개요 {#overview}

@@ -4,13 +4,13 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/openai-agents-llm-observability/
   tag: Blog
-  text: Monitorizar tus agents de OpenAI con Datadog Agent Observability
+  text: Monitorizar tus agents de OpenAI con Datadog LLM Observability
 - link: https://www.datadoghq.com/blog/monitor-ai-agents/
   tag: Blog
   text: Monitorizar, resolver problemas y mejorar los agents de IA con Datadog
 - link: https://www.datadoghq.com/blog/llm-observability-bedrock-agents/
   tag: Blog
-  text: Monitorizar agents construidos en Amazon Bedrock con Datadog Agent Observability
+  text: Monitorizar agents construidos en Amazon Bedrock con Datadog LLM Observability
 title: Monitorización del Agent
 ---
 

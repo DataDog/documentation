@@ -11,7 +11,7 @@ further_reading:
   text: Aprende a configurar la observabilidad de LLM
 - link: https://www.datadoghq.com/blog/llm-observability-hallucination-detection/
   tag: Blog
-  text: Detecta alucinaciones en tus aplicaciones RAG LLM con Datadog Agent Observability
+  text: Detecta alucinaciones en tus aplicaciones RAG LLM con Datadog LLM Observability
 title: Evaluaciones gestionadas
 ---
 

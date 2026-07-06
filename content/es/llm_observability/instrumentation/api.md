@@ -6,12 +6,12 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
-  text: Datadog Agent Observability admite de forma nativa las convenciones semánticas
+  text: Datadog LLM Observability admite de forma nativa las convenciones semánticas
     GenAI de OpenTelemetry
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
   text: Realizar un seguimiento, comparar y optimizar tus mensajes de LLM con Datadog
-    Agent Observability
+    LLM Observability
 title: Referencia de la API HTTP
 ---
 
