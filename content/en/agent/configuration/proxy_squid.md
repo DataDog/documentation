@@ -38,9 +38,9 @@ http_access allow local manager
 
 Alternatively, if you require more granular control, you can explicitly list each Datadog endpoint instead of using a wildcard. For the full list of domains and IP ranges the Agent needs to reach, see [Network Traffic][7]. For example:
 
-{{< warning >}}
+<div class="alert alert-danger">
 The example below only includes a subset of Datadog endpoints. Make sure to include all domains required by the Datadog features you use. See [Network Traffic][7] for the complete list.
-{{< /warning >}}
+</div>
 
 ```conf
 http_port 0.0.0.0:3128
