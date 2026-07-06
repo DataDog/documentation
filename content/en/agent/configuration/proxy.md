@@ -124,7 +124,7 @@ spec:
 
 ## `NO_PROXY` accepted values
 
-By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules used for Agent integrations.
+By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). Datadog recommends enabling `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules used for Agent integrations.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
