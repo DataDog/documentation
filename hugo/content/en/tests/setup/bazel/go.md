@@ -90,7 +90,7 @@ orchestrion.from_source(
 use_repo(orchestrion, "rules_go_orchestrion_tool")
 ```
 
-If your repository uses `rules_go` `0.61.1`, use `strip_prefix = "third_party/rgo/v0_61_1/base"` for the managed `rules_go` override.
+If your repository uses `rules_go` `0.61.1`, set `bazel_dep(name = "rules_go", version = "0.61.1")` and use `strip_prefix = "third_party/rgo/v0_61_1/base"` for the managed `rules_go` override.
 
 ## Use `WORKSPACE` mode
 
@@ -102,7 +102,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
 )
 
 load(
