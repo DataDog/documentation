@@ -81,8 +81,7 @@ Each data source has its own configuration. For most data sources, you can:
 
 The following data sources have additional or different options.
 
-#### Cases
-
+{{% collapse-content title="Cases" level="h4" id="cases" expanded=false %}}
 Sort by (ascending or descending):
 
 - Alert count
@@ -92,37 +91,37 @@ Sort by (ascending or descending):
 - Priority
 - Status
 - Unassigned
+{{% /collapse-content %}}
 
-#### CI pipeline
-
+{{% collapse-content title="CI pipeline" level="h4" id="ci-pipeline" expanded=false %}}
 Select a **Level** to display: Pipeline, Stage, Job, Step, or Custom.
+{{% /collapse-content %}}
 
-#### Data Observability _(Preview)_
-
+{{% collapse-content title="Data Observability (Preview)" level="h4" id="data-observability-preview" expanded=false %}}
 Select an entity type (database table or database column). The available columns and sort options depend on the entity type.
+{{% /collapse-content %}}
 
-#### Database recommendations _(Preview)_
-
+{{% collapse-content title="Database recommendations (Preview)" level="h4" id="database-recommendations-preview" expanded=false %}}
 Sort by (ascending or descending):
 
 - Severity
 - Type
 - First seen
 - Last seen
+{{% /collapse-content %}}
 
-#### Detection rules _(Preview)_
-
+{{% collapse-content title="Detection rules (Preview)" level="h4" id="detection-rules-preview" expanded=false %}}
 Sortable columns include Name, Creation Date, Last Update Date, Enabled, Severity, and Source. You can also select a rule product to filter the rules shown.
+{{% /collapse-content %}}
 
-#### Events
-
+{{% collapse-content title="Events" level="h4" id="events" expanded=false %}}
 Reporting format size:
 
 - Small (title only) (default)
 - Large (full event)
+{{% /collapse-content %}}
 
-#### Incidents
-
+{{% collapse-content title="Incidents" level="h4" id="incidents" expanded=false %}}
 Sort by (ascending or descending):
 
 - Created
@@ -132,13 +131,13 @@ Sort by (ascending or descending):
 - Severity
 - Status
 - Title
+{{% /collapse-content %}}
 
-#### Infrastructure resources _(Preview)_
-
+{{% collapse-content title="Infrastructure resources (Preview)" level="h4" id="infrastructure-resources-preview" expanded=false %}}
 Select a **Resource type** to display, such as Pods, Containers, Deployments, Services, or Nodes. The available columns and sort options depend on the resource type.
+{{% /collapse-content %}}
 
-#### Issues
-
+{{% collapse-content title="Issues" level="h4" id="issues" expanded=false %}}
 Sort by:
 
 - Relevance (default)
@@ -149,9 +148,9 @@ Sort by:
 The available columns depend on the issue source (Logs, APM, or RUM).
 
 **Note:** Changing the sort selection does not change the columns displayed. To sort by impacted sessions and see it in the widget, you must also add the "Impacted Sessions" column in the graph editor.
+{{% /collapse-content %}}
 
-#### Logs
-
+{{% collapse-content title="Logs" level="h4" id="logs" expanded=false %}}
 Group by:
 
 - Patterns
@@ -160,9 +159,9 @@ Group by:
 Depending on your logs configuration, you can also select a storage location: Standard Indexes, Standard Indexes + Flex Logs, or Online Archives.
 
 For the message column, you can choose how many lines to display (1, 3, or 10).
+{{% /collapse-content %}}
 
-#### Notebook, DDSQL Editor, Reference Tables, and Developer Portal
-
+{{% collapse-content title="Notebook, DDSQL Editor, Reference Tables, and Developer Portal" level="h4" id="notebook-ddsql-editor-reference-tables-and-developer-portal" expanded=false %}}
 These data sources display rows from a saved dataset or table:
 
 - **Notebook** and **DDSQL Editor**: select a published dataset.
@@ -175,22 +174,23 @@ For these data sources, you can:
 - Toggle **Show All Columns**, or select up to 12 columns to display.
 - Sort by clicking a column's sort icon.
 - Filter the rows with a search query.
+{{% /collapse-content %}}
 
-#### On-Call
-
+{{% collapse-content title="On-Call" level="h4" id="on-call" expanded=false %}}
 Select a **Team**, and optionally add **Tags** to filter the events shown.
+{{% /collapse-content %}}
 
-#### Recommendations
-
+{{% collapse-content title="Recommendations" level="h4" id="recommendations" expanded=false %}}
 The columns for the Recommendations data source are fixed and cannot be customized.
+{{% /collapse-content %}}
 
-#### Spans and Watchdog Alerts
-
+{{% collapse-content title="Spans and Watchdog Alerts" level="h4" id="spans-and-watchdog-alerts" expanded=false %}}
 These data sources support a search query but do not provide a sort option. Watchdog Alerts displays a fixed set of fields.
+{{% /collapse-content %}}
 
-#### Workload Protection Agent _(Preview)_
-
+{{% collapse-content title="Workload Protection Agent (Preview)" level="h4" id="workload-protection-agent-preview" expanded=false %}}
 For the Content column, you can choose how many lines to display (1, 3, or 10).
+{{% /collapse-content %}}
 
 ## API
 
