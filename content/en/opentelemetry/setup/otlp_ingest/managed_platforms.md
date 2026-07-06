@@ -66,7 +66,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Heroku | `heroku` | [Heroku telemetry][13] |
 | IBM | `ibm` | — |
 | LangSmith | `langsmith` | — |
-| LiveCloudKit | `livecloudkit` | — |
+| LiveCloudKit | `livekit` | — |
 | Modal | `modal` | [Modal OpenTelemetry][14] |
 | MuleSoft | `mulesoft` | [MuleSoft Telemetry Exporter][15] |
 | Netlify | `netlify` | — |

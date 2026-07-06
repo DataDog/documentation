@@ -1,8 +1,16 @@
 ---
 title: Attack Summary
 aliases:
+  - /security/application_security/overview/
   - /security/application_security/threats/threat-overview
   - /security/application_security/threats/attack-summary
+further_reading:
+- link: "/security/application_security/api_posture/overview/"
+  tag: "Documentation"
+  text: "API Posture Overview"
+- link: "/security/application_security/threat_protection/overview/"
+  tag: "Documentation"
+  text: "Threat Protection Overview"
 ---
 
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->
@@ -17,7 +25,7 @@ Attack Surface Area
 : This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that identify potential vulnerabilities.
 
 Attack Traffic
-: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection. They allow users to identify spikes in malicious traffic and patterns.
+: These graphs identify the classification of attacks, such as SSRF, LFI, SQL, and command injection. They allow users to identify spikes in malicious traffic and patterns.
 
 Business Logic
 : This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
@@ -34,11 +42,15 @@ Attack Traffic Sources
 5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
 6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
 
-### Using powerpacks
+### Using Powerpacks
 
 When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
  
 Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/security/appsec/threat
