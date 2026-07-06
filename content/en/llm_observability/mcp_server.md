@@ -325,6 +325,9 @@ The `llmobs` toolset includes the following tools:
 
 ### Project and dataset tools
 
+`list_llmobs_projects`
+: List all LLM Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+
 `get_llmobs_project`
 : Look up an LLM Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
 
@@ -385,11 +388,12 @@ The `llmobs` toolset includes the following tools:
 
 ### Dataset management
 
-1. **Resolve project**: Use `get_llmobs_project` with a project name or ID to get the `project_id` UUID.
-2. **Find dataset**: Use `list_llmobs_datasets` to find the target dataset and get its UUID.
-3. **Inspect records**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse existing records and understand the dataset schema.
-4. **Read full records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 specific records by ID.
-5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
+1. **Discover projects**: Use `list_llmobs_projects` to browse available projects and find the one you want.
+2. **Resolve project**: Use `get_llmobs_project` with a project name or ID to get the `project_id` UUID.
+3. **Find dataset**: Use `list_llmobs_datasets` to find the target dataset and get its UUID.
+4. **Inspect records**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse existing records and understand the dataset schema.
+5. **Read full records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 specific records by ID.
+6. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
 
 ### Patterns analysis
 
