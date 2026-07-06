@@ -34,6 +34,24 @@ To distinguish between true anomalies and expected fluctuations, Datadog's algor
 - Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
 - Filters out low-impact anomalies to reduce noise
 
+## Customize anomaly detection
+
+<div class="alert alert-danger">Custom anomaly detection is in Preview.</div>
+
+By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
+
+To customize anomaly detection:
+
+1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}}.
+1. In the {{< ui >}}Configure Cost Anomalies{{< /ui >}} panel, select a provider. A checkmark indicates that the provider uses custom settings, and an empty circle indicates that it uses Datadog's default settings.
+1. Adjust the following settings for the selected provider:
+   - **Detection dimension**: The dimension that Datadog detects cost anomalies on (for example, service or charge description). This setting is required.
+   - **Minimum daily cost**: The minimum daily cost a change must reach before it is flagged as an anomaly (at least 5, in your organization's currency). Increase this value to reduce noise from low-cost changes.
+   - **Breakdown tags**: Up to five additional tags used to break down detected anomalies, helping the [Cloud Cost skill in Bits Chat][5] identify what's driving each anomaly. A set of default tags is always included and cannot be removed.
+1. Click {{< ui >}}Save{{< /ui >}}. Changes apply to anomalies detected going forward.
+
+To return a provider to Datadog's default settings, select the provider, click {{< ui >}}Revert{{< /ui >}}, and then click {{< ui >}}Save{{< /ui >}}.
+
 ## View cost anomalies
 
 On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view and filter anomalies:
@@ -115,3 +133,4 @@ For more help, contact [Datadog Support][4].
 [2]: /dashboards/graph_insights/watchdog_explains
 [3]: /cloud_cost_management/setup/
 [4]: /help/
+[5]: /cloud_cost_management/cloud_cost_skill/

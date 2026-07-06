@@ -34,7 +34,7 @@ For most applications, use the process diagnostics to find the problem.
 
 1. Ensure the application is running, and get the process ID (pid). 
 
-   To get the pid of a Windows process, open Task Manager, open the **Details** tab, and look for the PID column. You can also run the command `tasklist /FI "IMAGENAME eq target.exe"`where `target.exe` is the name of the process.
+   To get the pid of a Windows process, open Task Manager, open the {{< ui >}}Details{{< /ui >}} tab, and look for the PID column. You can also run the command `tasklist /FI "IMAGENAME eq target.exe"`where `target.exe` is the name of the process.
 
    To get the pid of a process on Linux, run the command `ps aux | grep target` where `target` is the name of the process (the pid is typically `1` when running in a Docker container).
 

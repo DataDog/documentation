@@ -17,7 +17,7 @@ title: SLO basés sur des métriques
 
 Les SLO basés sur des métriques sont particulièrement utiles pour identifier les événements positifs et négatifs à partir d'un flux de données numériques. Une requête de métrique utilise la somme des événements positifs divisée par le nombre total d'événements pour calculer un Service Level Indicator (SLI). Vous pouvez créer des SLO à partir de n'importe quelle métrique, y compris des métriques custom générées par des [spans APM][1], des [événements RUM][2] et des [logs][3]. Pour savoir comment les SLO sont configurés et calculés, consultez la page [Service Level Objective][4].
 
-{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="exemple de SLO basé sur des métriques" >}}
+{{< img src="service_level_objectives/metric/metric_slo_side_panel.png" alt="exemple de SLO basé sur des métriques" >}}
 
 ## Implémentation
 
@@ -39,11 +39,11 @@ Pourquoi exclure `HTTP 3xx` ? Ces codes correspondent généralement à des red
 
 Les SLI basés sur des métriques vous permettent de vous concentrer sur les attributs les plus importants de vos SLI. Vous avez la possibilité de regrouper vos SLI basés sur des métriques en appliquant des tags depuis l'éditeur, tels que `datacenter`, `env`, `availability-zone`, `resource` ou tout autre tag correspondant au groupe qui vous intéresse :
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="édition d'un SLO groupé basé sur des métriques" >}}
+{{< img src="service_level_objectives/metric/metric_slo_creation.png" alt="édition d'un SLO groupé basé sur des métriques" >}}
 
 Après avoir regroupé vos SLI, vous pouvez visualiser le statut, le nombre de requêtes positives et la marge d'erreur restante pour chaque groupe depuis le volet des détails :
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="résultats pour un SLO groupé basé sur des métriques" >}}
+{{< img src="service_level_objectives/metric/metric_slo_history_groups.png" alt="résultats pour un SLO groupé basé sur des métriques" >}}
 
 Par défaut, le graphique à barres affiche le nombre total de requêtes ayant réussi ou échoué pour l'ensemble du SLO. Vous pouvez filtrer le graphique à barres de façon à afficher les requêtes d'un groupe individuel en cliquant sur la ligne correspondante dans le tableau. Vous pouvez également afficher ou masquer le nombre de requêtes ayant réussi ou échoué en sélectionnant l'option appropriée dans la légende située directement sous le graphique à barres. 
 

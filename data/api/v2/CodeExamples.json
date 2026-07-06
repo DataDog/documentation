@@ -296,6 +296,11 @@
     },
     {
       "group": "ci_visibility_pipelines",
+      "suffix": "_4007074677",
+      "description": "Send running job event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     },
@@ -1721,6 +1726,16 @@
       "group": "observability_pipelines",
       "suffix": "_815080644",
       "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3928499240",
+      "description": "Validate an observability pipeline with parse grok processor include rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3345949653",
+      "description": "Validate an observability pipeline with parse grok processor source rules returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",

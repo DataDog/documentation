@@ -33,30 +33,30 @@ This guide demonstrates how to set up a metric monitor using a general metric su
 
 {{< img src="synthetics/guide/using-synthetic-metrics/metric-monitor-setup.png" alt="Example metric monitor that alerts when too many tests are failing in CI" style="width:95%;" >}}
 
-1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click **Metric**. 
+1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click {{< ui >}}Metric{{< /ui >}}. 
 
 2. Select a detection method to customize your monitor's alerting conditions. For this example, you can create a threshold alert metric monitor.
 
-   Threshold Alert
+   {{< ui >}}Threshold Alert{{< /ui >}}
    : An alert is triggered whenever a metric crosses a threshold.
 
-   Change Alert
+   {{< ui >}}Change Alert{{< /ui >}}
    : An alert is triggered when the delta between values is higher than the threshold.
 
-   Anomaly Detection
+   {{< ui >}}Anomaly Detection{{< /ui >}}
    : An alert is triggered whenever a metric deviates from an expected pattern.
 
-   Outliers Alert
+   {{< ui >}}Outliers Alert{{< /ui >}}
    : An alert is triggered whenever one member in a group behaves differently from its peers.
 
-   Forecast Alert
+   {{< ui >}}Forecast Alert{{< /ui >}}
    : An alert is triggered whenever a metric is forecast to cross a threshold in the future.
 
-3. In the **Define the metric** section, enter a Synthetic Monitoring metric such as `synthetics.test_runs`, where you can filter on status, response codes, and retry behavior.
+3. In the {{< ui >}}Define the metric{{< /ui >}} section, enter a Synthetic Monitoring metric such as `synthetics.test_runs`, where you can filter on status, response codes, and retry behavior.
 
 4. Set the alerting conditions and add a notification message.
 
-5. Set editing permissions and click **Create**.
+5. Set editing permissions and click {{< ui >}}Create{{< /ui >}}.
 
 ## Further Reading
 

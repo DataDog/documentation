@@ -10,6 +10,9 @@ products:
   - name: App and API Protection
     url: /security/application_security/
     icon: app-sec
+  - name: Workload Protection
+    url: /security/workload_protection/
+    icon: security-workload-security
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
@@ -37,6 +40,7 @@ Configure due date rules to ensure findings are addressed within your specified 
       - Attack Path
       - Identity Risk
       - API Security
+      - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. Set a due date for each severity level that needs one.
 1. If the rule includes a CVE-based finding type (Library, Container Image, or Host vulnerability), under **Calculate due dates from**, select the base date for the SLA clock:
