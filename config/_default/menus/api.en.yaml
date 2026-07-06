@@ -4252,6 +4252,32 @@ menu:
           - MuteSecurityFindings
         unstable: []
         order: 20
+    - name: Create Linear issues for security findings
+      url: /api/latest/security-monitoring/create-linear-issues-for-security-findings/
+      identifier: security-monitoring-create-linear-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLinearIssues
+        unstable:
+          - v2
+        order: 153
+    - name: Attach security findings to a Linear issue
+      url: /api/latest/security-monitoring/attach-security-findings-to-a-linear-issue/
+      identifier: security-monitoring-attach-security-findings-to-a-linear-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachLinearIssue
+        unstable:
+          - v2
+        order: 154
     - name: Create Jira issues for security findings
       url: /api/latest/security-monitoring/create-jira-issues-for-security-findings/
       identifier: security-monitoring-create-jira-issues-for-security-findings
