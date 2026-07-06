@@ -739,7 +739,40 @@ Organization administrators can manage global MCP access and write capabilities 
 
 ## Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers.
+For most users, OAuth 2.0 is the recommended authentication method, and your MCP client handles it during setup. Use one of the header-based methods below only when you cannot complete the OAuth flow, for example on a server or in a CI environment.
+
+### OAuth 2.0 (recommended)
+
+Most clients complete the OAuth 2.0 flow automatically during setup. Select your client at the top of this page for instructions. With OAuth, you don't manage long-lived credentials directly. For details, see the [MCP authorization specification][14].
+
+### Personal or Service Access Token
+
+For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}",
+      "headers": {
+          "Authorization": "Bearer &lt;YOUR_ACCESS_TOKEN&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
+
+Use a PAT for an individual user or a SAT for a [service account][13]. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
+
+### API and application keys
+
+Alternatively, provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -893,3 +926,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[66]: /account_management/personal-access-tokens/
+[67]: /account_management/service-access-tokens/
