@@ -1493,7 +1493,7 @@ secret_backend_config:
 
 ##### Set up the registry key
 
-Here is an example PowerShell shell script that demostrate how to setup a registry (to be run as Administrator after installing).
+This example PowerShell shell script demonstrates how to set up a registry (to be run as Administrator after installing):
 
 ```powershell
 # Create the key and set the secret value
