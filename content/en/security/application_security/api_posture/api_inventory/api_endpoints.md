@@ -23,7 +23,7 @@ Using API Endpoints you can:
 
 ## Configuration
 
-To view API Endpoints on your services, **you must have App and API Protection Threats Protection enabled**. 
+To view API Endpoints on your services, **you must have App and API Protection Threat Detection enabled**.
 
 For Amazon Web Services (AWS) API Gateway integration, you must set up the following:
 
@@ -49,7 +49,7 @@ For information on what library versions are compatible with API Inventory, see 
 
 ## How it works
 
-API Endpoints gathers security metadata about API traffic by leveraging the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by using the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, helping ensure a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][10] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -81,7 +81,7 @@ This source ensures that your API inventory is complete by including all planned
 
 The {{< ui >}}Spans{{< /ui >}} data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
-What actions you take depend on each of the attack surfaces:
+The actions you take depend on the attack surface:
 
 - **Vulnerabilities:** Patch any vulnerable libraries surfaced by SCA or Runtime Code Analysis, then redeploy the service.
 - **API findings discovered:** Review each issue in context of the traced service, fix any code or configurations, and then validate using new traces.
@@ -129,6 +129,56 @@ datadog:
 
 Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
 
+## View and compare endpoint schemas
+
+API Posture builds an OpenAPI schema for each endpoint from the traffic it observes. This **inferred** schema describes what your API exposes in production: its paths, parameters, request and response bodies, and authentication. When your team also publishes a **declared** schema, an OpenAPI definition registered in the Datadog Software Catalog, you can compare the two to find where the running API has diverged from its documentation.
+
+### View an endpoint's schema
+
+In [API Endpoints][1], click an endpoint to open its detail panel. The **Definition** section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
+
+{{< img src="/security/application_security/api/api_endpoint_definition_schema.png" alt="The Definition section of an endpoint's detail panel, showing its request parameters and the View Raw Schema and View Inferred Schemas buttons" style="width:100%;" >}}
+
+When the endpoint is associated with an API in Datadog Software Catalog, the **Definition** section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
+
+In the **Definition** section, you can:
+
+- {{< ui >}}View Raw Schema{{< /ui >}}: View the displayed schema as raw YAML.
+- {{< ui >}}View Inferred Schemas{{< /ui >}}: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.
+
+To reduce noise, the inferred schema only includes fields observed at least three times, and drops fields that haven't been observed again within 7 days. This keeps one-off traffic, such as a single malformed request or an attacker probing an endpoint with an unexpected field, from polluting the inferred schema. Otherwise, it could appear as drift when compared against the declared schema.
+
+### Compare declared and inferred schemas
+
+To compare inferred and declared schemas, you must:
+
+- [Enable App and API Protection][9] on the service so endpoints are discovered from live traffic.
+- Register the declared schema's OpenAPI definition in the Datadog Software Catalog. See [Create Entities][8].
+
+The schema differences appear directly in the endpoint's schema view, highlighted by severity:
+
+| Severity | Meaning |
+|----------|---------|
+| Breaking | The change likely breaks clients that rely on the declared contract, such as a field that became required or a parameter type change. |
+| Warning | The change is drift worth reviewing, such as an undeclared field observed in traffic or a parameter that became optional. |
+| Info | The difference is low risk, such as an endpoint that is declared but has no observed traffic. |
+
+Differences can appear in the following areas of the schema:
+
+- **Parameters**: A parameter added, removed, or changed from optional to required (or the reverse).
+- **Request body**: A request body added, removed, or changed from optional to required (or the reverse).
+- **Schema properties**: A property added, removed, changed from optional to required (or the reverse), or changed type, format, nullability, or enum values.
+- **Value constraints**: A numeric or length limit (`minimum`, `maximum`, `minLength`, `maxLength`), pattern, or uniqueness constraint changed.
+- **Schema composition**: A mismatch introduced in `oneOf` or `allOf` composition, or in a discriminator.
+- **Responses**: A status code, response header, or content type added or removed.
+
+To reduce noise, some differences are excluded because they don't represent meaningful contract drift:
+
+- **Request header and cookie parameters:** They often carry values such as authentication tokens or session identifiers that aren't part of the API contract.
+- **Type changes on query parameters:** Query parameters are always observed as strings in traffic, even when declared as another type, such as an integer or Boolean.
+- **Removed status codes:** The inferred schema only includes status codes observed in traffic, so a declared status code that hasn't occurred yet during observation always appears as removed.
+- **`anyOf` composition mismatches:** The declared and inferred schemas can use `anyOf` at different levels of the schema while remaining equivalent.
+
 ## Processing sensitive data
 
 App and API Protection detects and classifies sensitive data processed by your endpoints, tagging each endpoint with the category and type of data found. To see which endpoints process sensitive data and to create custom API data scanners, see [Sensitive Data][16].
@@ -154,9 +204,9 @@ See [Configuring a client IP header][14] for more information on the required li
 
 Authentication is determined by:
 
-- The presence of `Authorization`, `Token` or `X-Api-Key` headers.
+- The presence of `Authorization`, `Token`, or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
-- The request has responded with a 401 or 403 status code.
+- A 401 or 403 status code returned by the endpoint.
 - Custom [Endpoint Tagging][15] rules that you configured
 
 

@@ -55,7 +55,7 @@ The most common HTTP errors include the following:
 </tr>
 <tr>
 <td><code>TIMEOUT</code></td>
-<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only <code>Total response time</code> appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
+<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only {{< ui >}}Total response time{{< /ui >}} appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
 </tr>
 <tr>
 <td><code>MALFORMED_RESPONSE</code></td>
@@ -221,7 +221,7 @@ The most common DNS errors include the following:
 </tr>
 <tr>
 <td><code>TIMEOUT</code></td>
-<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only <code>Total response time</code> appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
+<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only {{< ui >}}Total response time{{< /ui >}} appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
 </tr>
 </tbody>
 </table>
@@ -254,7 +254,7 @@ The most common TCP errors include the following:
 </tr>
 <tr>
 <td><code>TIMEOUT</code></td>
-<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only <code>Total response time</code> appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
+<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only {{< ui >}}Total response time{{< /ui >}} appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
 </tr>
 </tbody>
 </table>
@@ -287,7 +287,7 @@ The most common UDP errors include the following:
 </tr>
 <tr>
 <td><code>TIMEOUT</code></td>
-<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only <code>Total response time</code> appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
+<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only {{< ui >}}Total response time{{< /ui >}} appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
 </tr>
 </tbody>
 </table>
@@ -349,7 +349,7 @@ The most common gRPC errors include the following:
 </tr>
 <tr>
 <td><code>TIMEOUT</code></td>
-<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only <code>Total response time</code> appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
+<td>The request couldn't be completed in a reasonable time. There are two types of timeout errors:<br><br><strong>Request timeout</strong>: The request duration exceeded the test's configured timeout (default: 60s). The network waterfall displays only the completed stages. For example, if only {{< ui >}}Total response time{{< /ui >}} appears, the timeout occurred during DNS resolution.<br><br><strong>Overall timeout</strong>: The combined test duration (request + assertions) exceeded the maximum allowed time (60s).</td>
 </tr>
 </tbody>
 </table>

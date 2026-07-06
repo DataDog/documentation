@@ -43,7 +43,7 @@ Mobile app tests can run on a schedule, on demand, or directly within your [CI/C
 
 Optionally, link Synthetic mobile test data with RUM mobile data if the [RUM SDK][15] is used within the tested application. 
 
-You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
+You can create mobile app tests in Datadog by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][12] and selecting {{< ui >}}Mobile Application Test{{< /ui >}}.
 
 {{< img src="mobile_app_testing/new_test_2.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 
@@ -53,57 +53,57 @@ You may create a test using one of the following options:
 
 ### Create a test from a template
 
-  1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
-  2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-  3. Click **Save & Quit** in the upper right hand corner to submit your Mobile Application Test.<br /><br>
+  1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
+  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Mobile Application Test.<br /><br>
        {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
-  1. Click the **+** template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
-  1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
-  1. Add a **name** for your test.
-  1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-  1. Select the [**devices**](#devices) to run your test on.
+  1. Click the {{< ui >}}+{{< /ui >}} template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [{{< ui >}}Applications List{{< /ui >}} section][2] on the [{{< ui >}}Synthetic Monitoring & Continuous Testing Settings{{< /ui >}} page][3]. 
+  1. Select a {{< ui >}}version{{< /ui >}} or click {{< ui >}}Always run the latest version{{< /ui >}} to use the latest version of your mobile application whenever your test is run.
+  1. Add a {{< ui >}}name{{< /ui >}} for your test.
+  1. Select {{< ui >}}environment and additional tags{{< /ui >}} that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+  1. Select the [{{< ui >}}devices{{< /ui >}}](#devices) to run your test on.
   1. Set [retry conditions](#test-retries) for your test.
-  1. Set the [**test frequency**](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
+  1. Set the [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and {{< ui >}}alert conditions{{< /ui >}} for your test monitor. 
   1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
-  1. Click **Save & Edit Recording** to submit your Mobile Application Test.
+  1. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Mobile Application Test.
 
 ### Snippets
 
 When configuring a new Mobile Application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
 
-* **Device Size**: Automatically perform your Mobile Application tests on a specifically sized screen across devices:
+* {{< ui >}}Device Size{{< /ui >}}: Automatically perform your Mobile Application tests on a specifically sized screen across devices:
 
-  - **Multi-screen size**
-  - **Tablet**
-  - **Large Screen (iOS only)**
-  - **Standard Screen (iOS only)**
-  - **Small Screen (iOS only)**
+  - {{< ui >}}Multi-screen size{{< /ui >}}
+  - {{< ui >}}Tablet{{< /ui >}}
+  - {{< ui >}}Large Screen (iOS only){{< /ui >}}
+  - {{< ui >}}Standard Screen (iOS only){{< /ui >}}
+  - {{< ui >}}Small Screen (iOS only){{< /ui >}}
 
-* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+* {{< ui >}}OS Version{{< /ui >}}: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
 
-* **Device Manufacturer (Android only)**: Automatically test your Android apps across multiple device manufacturers.
+* {{< ui >}}Device Manufacturer (Android only){{< /ui >}}: Automatically test your Android apps across multiple device manufacturers.
 
-* **Uptime**: Automatically configure a test with the shortest frequency available (every 15 minutes).
+* {{< ui >}}Uptime{{< /ui >}}: Automatically configure a test with the shortest frequency available (every 15 minutes).
 
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
 ### Advanced options
 
-You can configure advanced options when creating a mobile test to dynamically adjust app behavior without modifying your code. For example, you can auto-accept alerts, allow application crashes, and capture network resources. These configurations can be accessed in the **Advanced Options** section of your mobile test.
+You can configure advanced options when creating a mobile test to dynamically adjust app behavior without modifying your code. For example, you can auto-accept alerts, allow application crashes, and capture network resources. These configurations can be accessed in the {{< ui >}}Advanced Options{{< /ui >}} section of your mobile test.
 
 #### Test behavior options:
 
-Auto-accept alerts
+{{< ui >}}Auto-accept alerts{{< /ui >}}
 : When enabled, automatically accepts all OS system alerts during test execution.
 
-Allow application crash
+{{< ui >}}Allow application crash{{< /ui >}}
 : When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
 
-Capture network resources
+{{< ui >}}Capture network resources{{< /ui >}}
 : When enabled, collects network requests and responses for each test step and displays them in the results. </br>
 **Note**: This setting can impact application performance and could prevent the app from starting.
 
@@ -151,12 +151,12 @@ On the device selection screen, you can choose to test mobile devices that are l
 To configure a mobile test to use either EU or US hosted devices:
 
 1. Open the edit test page for an existing mobile test or create a new one.
-2. Expand the Devices section and choose the device location(s) for your test:
-   - **All locations**: Runs tests in both the EU and US.
-   - **EU**: Runs tests only in the EU.
-   - **US**: Runs tests only in the US.
-3. Use the Select Device(s) dropdown to select the devices you want to test on.
-4. Click **Save & Edit Recording** to save your test configuration.
+2. Expand the {{< ui >}}Devices{{< /ui >}} section and choose the device location(s) for your test:
+   - {{< ui >}}All locations{{< /ui >}}: Runs tests in both the EU and US.
+   - {{< ui >}}EU{{< /ui >}}: Runs tests only in the EU.
+   - {{< ui >}}US{{< /ui >}}: Runs tests only in the US.
+3. Use the {{< ui >}}Select Device(s){{< /ui >}} dropdown to select the devices you want to test on.
+4. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to save your test configuration.
 
 **Notes**: 
 - Tests executed on US-hosted devices are run from AWS US West (Oregon). Similarly, tests on EU-hosted devices are run from AWS Germany (Frankfurt).
@@ -205,7 +205,7 @@ For more information on how Synthetic Monitoring notifications evaluate test res
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** or use pre-filled monitor messages for the mobile app test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a {{< ui >}}message{{< /ui >}} or use pre-filled monitor messages for the mobile app test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -218,7 +218,7 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
 
     {{< img src="/mobile_app_testing/mobile_app_synthetic_monitor.png" alt="Mobile app testing monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
@@ -236,8 +236,8 @@ A notification is sent according to the set of alerting conditions. Use this sec
       ```
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
-4. Click **Save & Edit Recording** to save your test configuration and record your mobile app test steps.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option {{< ui >}}Stop re-notifying on X occurrences{{< /ui >}}.
+4. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to save your test configuration and record your mobile app test steps.
 
 For more information, see [Synthetic Monitoring notifications][7].
 
