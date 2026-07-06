@@ -11394,6 +11394,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11613,6 +11619,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11655,6 +11667,128 @@ components:
       type: string
       x-enum-varnames:
         - PUBLISHED
+    NotebookTemplateVariable:
+      additionalProperties: false
+      description: Notebook template variable.
+      properties:
+        available_values:
+          description: The list of values that the template variable drop-down is limited to.
+          example: ["my-host", "host1", "host2"]
+          items:
+            description: Template variable value.
+            minLength: 1
+            type: string
+          nullable: true
+          type: array
+          uniqueItems: true
+        available_values_query:
+          $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQuery"
+        data_source_mappings:
+          additionalProperties:
+            description: The value for the given data source.
+            type: string
+          description: Mapping of data source names to template variable values.
+          type: object
+        default:
+          deprecated: true
+          description: |-
+            (deprecated) The default value for the template variable on notebook load.
+            Cannot be used in conjunction with `defaults`.
+          example: my-host
+          nullable: true
+          type: string
+        defaults:
+          description: One or many default values for the template variable. Cannot be used in conjunction with `default`.
+          example: ["my-host-1", "my-host-2"]
+          items:
+            description: A default value for the template variable.
+            minLength: 1
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        placement:
+          description: The placement of the template variable in the notebook.
+          example: global
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
+          type: string
+        type:
+          description: The type of the template variable.
+          example: tag
+          type: string
+      required:
+        - name
+      type: object
+    NotebookTemplateVariableAvailableValuesQuery:
+      description: Query used to dynamically populate the list of available values for the template variable.
+      oneOf:
+        - $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryLogRumSpans"
+        - $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryMetrics"
+    NotebookTemplateVariableAvailableValuesQueryGroupBy:
+      additionalProperties: false
+      description: A group-by facet for an available values query.
+      properties:
+        facet:
+          description: The facet name to group by.
+          example: host
+          type: string
+      required:
+        - facet
+      type: object
+    NotebookTemplateVariableAvailableValuesQueryLogRumSpans:
+      additionalProperties: false
+      description: Available values query for logs, RUM, or spans data sources.
+      properties:
+        data_source:
+          description: The data source for the query. Must be one of `logs`, `rum`, or `spans`.
+          example: logs
+          type: string
+        group_by:
+          description: Group-by fields for the query.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryGroupBy"
+          type: array
+        search:
+          $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQuerySearch"
+      required:
+        - data_source
+        - search
+        - group_by
+      type: object
+    NotebookTemplateVariableAvailableValuesQueryMetrics:
+      additionalProperties: false
+      description: Available values query for the metrics data source.
+      properties:
+        data_source:
+          description: The data source for the query. Must be `metrics`.
+          example: metrics
+          type: string
+        query:
+          description: The metrics query string.
+          example: "avg:system.cpu.user{*} by {host}"
+          type: string
+      required:
+        - data_source
+        - query
+      type: object
+    NotebookTemplateVariableAvailableValuesQuerySearch:
+      additionalProperties: false
+      description: Search parameters for an available values query.
+      properties:
+        query:
+          description: The search query string.
+          example: "service:web"
+          type: string
+      required:
+        - query
+      type: object
     NotebookTimeseriesCellAttributes:
       description: The attributes of a notebook `timeseries` cell.
       properties:
@@ -11720,6 +11854,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11796,6 +11936,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
