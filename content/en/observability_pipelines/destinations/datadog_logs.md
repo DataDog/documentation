@@ -17,6 +17,8 @@ Use Observability Pipelines' Datadog Logs destination to send logs to Datadog Lo
 
 Configure the Datadog Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
+<div class="alert alert-warning">Before routing logs through Observability Pipelines, review any indexes, pipelines, or exclusion filters that use the <code>datadog.pipelines:false</code> tag. For logs from a Datadog Agent source, the Datadog Logs destination sets <code>source_type</code> to <code>datadog_agent</code> (<code>@source_type:datadog_agent</code> in log search). Datadog then evaluates those logs as <code>datadog_agent</code> logs when deciding whether to apply the <code>datadog.pipelines:false</code> tag. To change or remove the source type before logs are delivered, use the <a href="/observability_pipelines/processors/custom_processor/">Custom Processor</a>.</div>
+
 ### Optional settings
 
 After you select the Datadog Logs destination in the pipeline UI, you can configure these optional settings.
@@ -105,8 +107,6 @@ Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the
 
 ## How the destination works
 
-<div class="alert alert-warning">Before routing logs through Observability Pipelines, review any indexes, pipelines, or exclusion filters that use the <code>datadog.pipelines:false</code> tag. For logs from a Datadog Agent source, the Datadog Logs destination sets <code>source_type</code> to <code>datadog_agent</code> (<code>@source_type:datadog_agent</code> in log search). This can change whether Datadog applies the <code>datadog.pipelines:false</code> tag. To change or remove the source type before logs are delivered, use the <a href="/observability_pipelines/processors/custom_processor/">Custom Processor</a>.</div>
-
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
@@ -131,7 +131,9 @@ To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 
+<!-- vale Datadog.headings = NO -->
 ## Azure Private Link
+<!-- vale Datadog.headings = YES -->
 
 To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
 
