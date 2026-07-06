@@ -41,7 +41,7 @@ The following table lists minimum SDK versions required for adaptive sampling:
 |-------------|--------------------------|
 | Java        | [v1.34.0][5]             |
 | Go          | [v1.68.0][6]             |
-| Python      | [v2.9.6][10]             |
+| Python      | [v3.14.2][10]             |
 | Ruby        | [v2.0.0][11]             |
 | Node.js     | [v5.16.0][12]            |
 | .NET        | [v2.54.0][13]            |
@@ -192,7 +192,7 @@ To restrict access:
 [7]: /tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
 [8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
-[10]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.6
+[10]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.14.2
 [11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.54.0

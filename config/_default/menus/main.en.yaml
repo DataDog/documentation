@@ -9774,21 +9774,26 @@ menu:
       parent: rum
       identifier: rum_managed_archive
       weight: 12
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
+      weight: 13
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 13
+      weight: 14
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 14
+      weight: 15
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 15
+      weight: 16
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
@@ -9860,6 +9865,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui

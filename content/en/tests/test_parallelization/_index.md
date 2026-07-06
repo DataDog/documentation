@@ -23,11 +23,10 @@ Before setting up Test Parallelization, set up [Test Optimization][2]. Optionall
 
 Test Parallelization is supported for the following language and frameworks:
 
-| Language | Frameworks |
-| -------- | ---------- |
-| Ruby     | RSpec, Minitest |
-
-Ruby projects require the `datadog-ci` gem version `1.31.0` or later.
+| Language | Frameworks | Minimum library version |
+| -------- | ---------- | ----------------------- |
+| Ruby     | RSpec, Minitest | `datadog-ci` gem `1.31.0` or later |
+| Python   | pytest | `ddtrace` package `4.11.0` or later |
 
 ## How it works
 
