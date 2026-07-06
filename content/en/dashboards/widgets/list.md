@@ -36,7 +36,7 @@ _List widget displaying error tracking issues_
 
 ### Supported data sources
 
-The data sources available in the source dropdown depend on which products are enabled for your organization. The following table lists each data source, the data it displays, and any product requirements. Click a data source in the table to navigate to its configuration options.
+The data sources available in the source dropdown depend on which products are enabled for your organization. The following table lists each data source, the data it displays, and any product requirements. Where available, click a data source in the table to navigate to its configuration options.
 
 Data sources marked _(Preview)_ are in Preview and might not be available in your organization.
 
@@ -51,7 +51,7 @@ Data sources marked _(Preview)_ are in Preview and might not be available in you
 | [Database Recommendations](#database-recommendations-preview) _(Preview)_ | Optimization recommendations from Database Monitoring. | Database Monitoring |
 | [DDSQL Editor](#notebook-ddsql-editor-reference-tables-and-developer-portal) | Results of a DDSQL query. | - |
 | [Detection Rules](#detection-rules-preview) _(Preview)_ | Security detection rules. | Cloud SIEM or Cloud Security |
-| [Developer Portal](#notebook-ddsql-editor-reference-tables-and-developer-portal) _(Preview)_ | Views of software entities, including services, APIs, and datastores. | Internal Developer Portal |
+| [Developer Portal](#notebook-ddsql-editor-reference-tables-and-developer-portal) _(Preview)_ | Views of software entities, including services, APIs, and data stores. | Internal Developer Portal |
 | [Events](#events) | Events from the Events Explorer. | - |
 | [Incidents](#incidents) | Incidents from Incident Management. | Incident Management |
 | [Infrastructure Resources](#infrastructure-resources-preview) _(Preview)_ | Infrastructure resources, such as hosts and containers. | Infrastructure Monitoring |
@@ -184,7 +184,7 @@ Select a **Team**, and optionally add **Tags** to filter the events shown.
 
 The columns for the Recommendations data source are fixed and cannot be customized.
 
-#### Spans and Watchdog alerts
+#### Spans and Watchdog Alerts
 
 These data sources support a search query but do not provide a sort option. Watchdog Alerts displays a fixed set of fields.
 
