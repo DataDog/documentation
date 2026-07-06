@@ -25,16 +25,16 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 : Programming language.<br/>
 **CLI flag:** `--platform`<br/>
 **Default:** `ruby`<br/>
-**Example:** `ruby`
+**Supported values:** `ruby`, `python`
 
 `DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK`
 : Test framework.<br/>
 **CLI flag:** `--framework`<br/>
 **Default:** `rspec`<br/>
-**Example:** `rspec`, `minitest`
+**Supported values:** `rspec`, `minitest`, `pytest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command for Ruby frameworks. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
 **Example:** `bundle exec rspec --profile`
@@ -76,10 +76,10 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION`
-: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec and `test/**/*_test.rb` for Minitest.<br/>
+: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, and pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest.<br/>
 **CLI flag:** `--tests-location`<br/>
 **Default:** Framework default<br/>
-**Example:** `custom/spec/**/*_spec.rb`
+**Example:** `custom/spec/**/*_spec.rb`, `tests/**/*_test.py`
 
 `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS`
 : JSON string that overrides runtime tags used to fetch skippable tests. Use this when `ddtest` runs outside the CI environment used to calculate skippable tests.<br/>
@@ -111,7 +111,7 @@ Increase `--ci-job-overhead` to use fewer CI nodes. Decrease it to prefer faster
 
 ## Custom test commands
 
-Use `--command` to override the default test command:
+For Ruby frameworks, use `--command` to override the default test command:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bin/integration-tests"
@@ -120,6 +120,18 @@ bin/ddtest run --platform ruby --framework rspec --command "bin/integration-test
 When using `--command`, do not include test files in the command. `ddtest` appends test files and framework-specific flags to the command.
 
 Do not include the `--` separator in `--command`. If the command contains `--`, `ddtest` emits a warning and removes the separator and everything after it.
+
+For pytest, `ddtest` runs `python -m pytest` and appends selected test files. Use `PYTEST_ADDOPTS` to pass additional pytest flags. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
+
+## Pytest test discovery
+
+For pytest, `ddtest` discovers test files using this priority:
+
+1. `--tests-location` when set.
+2. Pytest configuration from `pytest.ini`, `pyproject.toml`, `tox.ini`, or `setup.cfg`, using `testpaths` and `python_files`.
+3. The built-in pattern `**/{test_*,*_test}.py`.
+
+Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves the pattern to explicit file paths before invoking `python -m pytest`.
 
 ## Worker environment variables
 
