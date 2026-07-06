@@ -119,9 +119,7 @@ During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use th
 
 ## Configure Jest
 
-`ddtest` runs Jest through the local `node_modules/.bin/jest` executable when it exists, or through `npx jest` otherwise.
-
-Use `--command` when your project runs Jest through a package manager or wrapper:
+`ddtest` runs Jest through the local `node_modules/.bin/jest` executable when it exists, or through `npx jest` otherwise. Use `--command` when your project runs Jest through a package manager or wrapper:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework jest --command "pnpm jest --runInBand"

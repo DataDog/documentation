@@ -82,7 +82,7 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION`
-: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and Jest configuration or default test matching for Jest.<br/>
+: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and Jest configuration or Jests's default test matching.<br/>
 **CLI flag:** `--tests-location`<br/>
 **Alias:** `KNAPSACK_PRO_TEST_FILE_PATTERN`<br/>
 **Default:** Framework default<br/>
@@ -178,7 +178,7 @@ Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves
 
 ## Jest test discovery and instrumentation
 
-For JavaScript/Jest, `ddtest` discovers test files with Jest's own `--listTests` command. It uses this priority:
+For Jest, `ddtest` discovers test files with Jest's own `--listTests` command. It uses this priority:
 
 1. `--command` when set, with `--listTests` appended.
 2. The local executable `node_modules/.bin/jest` when present.

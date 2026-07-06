@@ -596,7 +596,7 @@ Configure Datadog Test Optimization for JavaScript:
     site: datadoghq.com
 {{< /code-block >}}
 
-The `ddtest plan` and `ddtest run --ci-node ${{ matrix.ci_node_index }}` commands can stay the same when the platform and framework are provided through the environment.
+The `ddtest plan` and `ddtest run --ci-node ${{ matrix.ci_node_index }}` commands remain unchanged when the platform and framework are provided through the environment.
 
 {{% /tab %}}
 {{% tab "CircleCI" %}}
@@ -623,7 +623,7 @@ jobs:
           site: datadoghq.com
 {{< /code-block >}}
 
-Keep the `ddtest` download, plan, cache, and continuation steps from the full CircleCI workflow. In the test job, install dependencies, autoinstrument JavaScript, and pass the CircleCI node index to `ddtest`:
+Keep the `ddtest` download, plan, cache, and continuation steps from the CircleCI workflow. In the test job, install dependencies, autoinstrument JavaScript, and pass the CircleCI node index to `ddtest`:
 
 {{< code-block lang="yaml" >}}
 - run:
@@ -642,7 +642,7 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the full Ci
 {{% /tab %}}
 {{< /tabs >}}
 
-`ddtest` sets `NODE_OPTIONS=-r dd-trace/ci/init` for Jest worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`.
+`ddtest` prepends `NODE_OPTIONS=-r dd-trace/ci/init` for Jest worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`.
 
 {{< /collapse-content >}}
 
