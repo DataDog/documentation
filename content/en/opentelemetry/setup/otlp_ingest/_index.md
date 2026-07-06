@@ -27,7 +27,7 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
 | A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] |
-| Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
+| Your own app, host, or container | [Logs][3], [Metrics][4], or [Traces][8] |
 
 See also: [Instrumenting for Agent Observability][5].
 
@@ -42,3 +42,4 @@ See also: [Instrumenting for Agent Observability][5].
 [5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
 [6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
 [7]: /opentelemetry/setup/otlp_ingest/serverless/
+[8]: /opentelemetry/setup/otlp_ingest/traces/

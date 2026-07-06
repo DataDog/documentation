@@ -7683,21 +7683,26 @@ menu:
       parent: security_platform
       identifier: security_ticketing_integrations
       weight: 10
+    - name: Assignee Management
+      url: security/assignee_management
+      parent: security_platform
+      identifier: security_assignee_management
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 12
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
