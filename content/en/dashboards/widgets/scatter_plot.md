@@ -12,7 +12,7 @@ further_reading:
 
 A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations. You can also plot raw events to inspect individual datapoints.
 
-{{< img src="dashboards/widgets/scatterplot/scatterplot2.png" alt="Scatter Plot" >}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot2.png" alt="A scatter plot widget. The graph shows Visits by Screen Resolution. The X axis displays Screen Width, the Y axis displays Screen Height." >}}
 
 ## Setup
 
@@ -55,6 +55,10 @@ You can plot unaggregated data from the following sources:
 
 ### Plot unaggregated data
 
+{{< img src="dashboards/widgets/scatterplot/scatterplot-mode-configuration.png" alt="A scatter plot widget's configuration screen that shows the Graph your data section. In the Configure Points subsection, the Mode is set to Unaggregated." >}}
+
+In [Dashboards][4]:
+
 1. Open or create a scatter plot widget on a dashboard.
 1. In the graph editor, select a data source that supports raw events.
 1. Set **Mode** to **Unaggregated**.
@@ -88,3 +92,4 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 [1]: /dashboards/guide/context-links/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/
