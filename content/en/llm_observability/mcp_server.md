@@ -388,12 +388,11 @@ The `llmobs` toolset includes the following tools:
 
 ### Dataset management
 
-1. **Discover projects**: Use `list_llmobs_projects` to browse available projects and find the one you want.
-2. **Resolve project**: Use `get_llmobs_project` with a project name or ID to get the `project_id` UUID.
-3. **Find dataset**: Use `list_llmobs_datasets` to find the target dataset and get its UUID.
-4. **Inspect records**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse existing records and understand the dataset schema.
-5. **Read full records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 specific records by ID.
-6. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
+1. **Find your project**: Use `list_llmobs_projects` to browse projects — each result includes the `id` UUID you need for subsequent calls. If you already know the project name but not its UUID, use `get_llmobs_project` to resolve it directly.
+2. **Find your dataset**: Use `list_llmobs_datasets` with the `project_id` to list datasets and get their UUIDs.
+3. **Understand the data**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse records and get a type sketch of the fields before reading or writing.
+4. **Read specific records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 records by ID.
+5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
 
 ### Patterns analysis
 
