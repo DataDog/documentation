@@ -172,7 +172,7 @@ products:
                 description: Monitor file, network, and process activity to detect real-time threats to your infrastructure
                 short_description: Runtime threat detection
       - subheaders:
-          - title: Cloud SIEM
+          - title: Threat Management
             links:
               - title: Cloud SIEM
                 link: security/cloud_siem/
