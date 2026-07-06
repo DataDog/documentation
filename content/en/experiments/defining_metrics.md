@@ -90,6 +90,33 @@ Start by writing a query to retrieve your data:
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
+#### Filter with template variables
+
+By default, Datadog wraps your Metric SQL Model in a date filter so each pipeline run only scans data from the window it is analyzing. If your table is large, add template variables to your query to push these filters into your SQL and reduce the amount of data your warehouse scans on each run.
+
+Reference template variables using the `{{variable}}` syntax. Datadog replaces them at query time:
+
+| Variable | Description |
+|----------|-------------|
+| `{{analysis_start_timestamp}}`, `{{analysis_end_timestamp}}` | The window the current update is materializing. On a full refresh, this spans the experiment; on an incremental refresh, it is only the new tranche of data being added. Use these to scan the minimum amount of data on each run. |
+| `{{experiment_events_start_timestamp}}`, `{{experiment_events_end_timestamp}}` | The full experiment event window, even during an incremental refresh. Use these when your query must always see the entire window, regardless of the current update. |
+| `{{assignments_start_timestamp}}`, `{{assignments_end_timestamp}}` | The experiment's assignment window. |
+| `{{experiment_key}}` | The experiment's flag-allocation key, rendered as a quoted string literal. |
+| `{{experiment_keys}}` | A comma-separated list of quoted flag-allocation keys, for use in an `IN (...)` clause. |
+| `{{allocation_key}}` | The allocation portion of the flag-allocation key, rendered as a quoted string literal. |
+
+Timestamp variables render as ISO 8601 strings, so wrap them in quotes and cast them as needed. Key variables are already quoted, so use them without adding quotes.
+
+For example, to scan only the rows Datadog needs on each run:
+
+```sql
+SELECT user_id, event_timestamp, amount
+FROM analytics.orders
+WHERE event_timestamp BETWEEN '{{analysis_start_timestamp}}' AND '{{analysis_end_timestamp}}'
+```
+
+<div class="alert alert-info">Template variables are optional. If you omit them, Datadog still applies its own date filter to your query. Use <code>{{analysis_start_timestamp}}</code> and <code>{{analysis_end_timestamp}}</code> for incremental scanning, or <code>{{experiment_events_start_timestamp}}</code> and <code>{{experiment_events_end_timestamp}}</code> when your query must always see the full experiment window.</div>
+
 #### Map your warehouse data to Datadog
 
 After previewing your data, map it to Datadog. In the {{< ui >}}Structure your model{{< /ui >}} section:
