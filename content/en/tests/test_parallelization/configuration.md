@@ -34,7 +34,7 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Supported values:** `rspec`, `minitest`, `pytest`, `jest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command for Ruby and Jest framework modes. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command for Ruby and JavaScript. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
 **Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`

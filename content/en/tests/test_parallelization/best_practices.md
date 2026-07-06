@@ -131,7 +131,7 @@ Do not include test files or a `--` separator in the command. `ddtest` appends t
 
 `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs.
 
-Jest support uses suite-level Test Impact Analysis. `ddtest` discovers and splits test files and suites, not individual Jest tests.
+`ddtest` discovers and splits test files and suites, not individual Jest tests.
 
 ## Configure Minitest in non-Rails projects
 
