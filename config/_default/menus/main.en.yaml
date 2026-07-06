@@ -7512,11 +7512,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
-    - name: Custom Kubernetes
-      url: /byoc-logs/install/custom_k8s
-      parent: cloudprem_install
-      identifier: cloudprem_custom_k8s
-      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem

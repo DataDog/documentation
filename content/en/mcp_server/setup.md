@@ -212,7 +212,7 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 {{% tab "Cursor" %}}
 
-Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
@@ -527,7 +527,9 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
+For Copilot, install the [Datadog Copilot plugin][2] from the marketplace. For more information, see the instructions for the [Copilot CLI][3].
+
+For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
@@ -535,6 +537,8 @@ Datadog's [Cursor and VS Code extension][1] provides a configuration assistant f
 1. **Restart the IDE.**
 1. Run the {{< ui >}}Datadog: Open MCP Configuration Assistant{{< /ui >}} and follow the guidance to configure the Datadog MCP Server.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+The Datadog MCP server connection is managed by Copilot (or whichever agent you are using), not the Datadog extension. You must authorize the Datadog MCP server independently of the extension.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /mcp_server/tools
@@ -545,6 +549,8 @@ Datadog's [Cursor and VS Code extension][1] provides a configuration assistant f
 {{< /site-region >}}
 
 [1]: /ide_plugins/vscode/
+[2]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[3]: /mcp_server/setup/?tab=copilot-cli
 {{% /tab %}}
 
 {{% tab "Warp" %}}
@@ -701,14 +707,14 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | Client | Developer | Notes |
 |--------|------|------|
 | [ChatGPT][59] | OpenAI | In Preview, and available for US1 customers only. |
-| [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
+| [Cursor][3] | Cursor | Datadog [Cursor plugin][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
-| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][65] recommended. |
+| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
-| [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
+| [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
@@ -836,7 +842,7 @@ Local authentication is recommended for Cline and when remote authentication is 
    - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
    - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
 
-   <div class="alert alert-tip">For Claude Code, you can instead run: 
+   <div class="alert alert-tip">For Claude Code, you can instead run:
    <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
 
 4. Fully restart your AI client to apply the configuration and load the MCP Server.
@@ -850,7 +856,7 @@ Local authentication is recommended for Cline and when remote authentication is 
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for {{< ui >}}Transport Type{{< /ui >}}, select {{< ui >}}Streamable HTTP{{< /ui >}}.
-3. For {{< ui >}}URL{{< /ui >}}, enter the MCP Server endpoint for your regional Datadog site. 
+3. For {{< ui >}}URL{{< /ui >}}, enter the MCP Server endpoint for your regional Datadog site.
    {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
    For example, for {{< region-param key="dd_site_name" >}}: <code>{{< region-param key="mcp_server_endpoint" >}}</code>
    {{< /site-region >}}
@@ -875,8 +881,8 @@ Local authentication is recommended for Cline and when remote authentication is 
 [12]: /mcp_server/tools
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
-[15]: /ide_plugins/vscode/?tab=cursor
-[16]: /ide_plugins/vscode/
+[15]: https://cursor.com/marketplace/datadog
+[16]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /ide_plugins/idea/
 [19]: https://claude.ai
