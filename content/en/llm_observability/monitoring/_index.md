@@ -73,6 +73,9 @@ For applications instrumented with Datadog APM, you can [correlate APM and Agent
 
 Learn how to monitor agentic LLM applications, which use multiple tools or chains of reasoning, with Datadog's [Agent Monitoring][4]. This feature helps you track agent actions, tool usage, and reasoning steps, providing visibility into complex LLM workflows and enabling you to troubleshoot and optimize agentic systems effectively. See the [Agent Monitoring documentation][4] for details.
 
+### Prompt Management
+
+[Prompt Management][7] provides a centralized registry for the prompts used by your LLM applications. Create, version, and retrieve prompts through the Agent Observability SDK, decoupling prompt iteration from your application's deployment cycle. See the [Prompt Management documentation][7] for details.
 
 ## Further reading
 
@@ -84,3 +87,4 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [4]: /llm_observability/monitoring/agent_monitoring
 [5]: /llm_observability/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
+[7]: /llm_observability/monitoring/prompt_management
