@@ -3,6 +3,8 @@ title: Global Lift
 description: Understand how an experiment affects your metric totals across your entire user population.
 aliases:
   - /product_analytics/experimentation/global_lift/
+  - /experiments/global_lift
+  - /experiments/global_lift/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

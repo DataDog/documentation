@@ -230,6 +230,8 @@ agent diagnose show-metadata agent-telemetry
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
+| appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
+| appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

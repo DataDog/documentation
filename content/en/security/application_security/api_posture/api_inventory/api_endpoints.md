@@ -137,7 +137,7 @@ API Posture builds an OpenAPI schema for each endpoint from the traffic it obser
 
 In [API Endpoints][1], click an endpoint to open its detail panel. The **Definition** section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
 
-{{< img src="/security/application_security/api/api_endpoint_definition_schema.png" alt="The Definition section of an endpoint's detail panel, showing its request parameters and the View Raw Schema and View Inferred Schemas buttons" style="width:100%;" >}}
+{{< img src="/security/application_security/api/api_endpoint_definition_schema_cropped.png" alt="The Definition section of an endpoint's detail panel, showing its request parameters and the View Raw Schema and View Inferred Schemas buttons" style="width:100%;" >}}
 
 When the endpoint is associated with an API in Datadog Software Catalog, the **Definition** section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
 
