@@ -280,12 +280,12 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 ### Frontend activity
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Join Operations/Journey monitoring preview to start using Frontend activity section!
+Join the Operations/Journey monitoring Preview to start using Frontend activity section!
 {{< /callout >}}
 
 The Frontend activity tab connects your backend service to the Real User Monitoring (RUM) journeys, operations, and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
 
-{{< img src="static/images/tracing/services/service_page/front-end-activity.png" alt="FE-activity" style="width:90%;">}}
+{{< img src="tracing/services/service_page/front-end-activity.png" alt="The front end activity side panel showing service, journey, operation, usage details, and related session replays" style="width:90%;">}}
 
 The metrics in this tab are computed from indexed spans that are correlated with RUM data. The header shows how many indexed spans the view is based on, along with the share of total spans that are indexed.
 
