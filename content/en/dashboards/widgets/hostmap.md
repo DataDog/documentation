@@ -26,7 +26,7 @@ The host map widget displays your infrastructure as a color-coded grid of hosts,
 
 ### Configuration
 
-Use {{< ui >}}Query Type{{< /ui >}} to choose how the widget sources its data: **Infrastructure** (the default) queries infrastructure entities directly, while **DDSQL** queries a published dataset. See [DDSQL mode](#ddsql-mode) for the DDSQL configuration steps.
+Use {{< ui >}}Query Type{{< /ui >}} to choose how the widget sources its data. **Infrastructure** (the default) queries infrastructure entities directly. **DDSQL** queries a published dataset instead; see [DDSQL mode](#ddsql-mode) for those configuration steps.
 
 <!-- "Node type" is a UI label referring to an infrastructure node, not Node.js -->
 <!-- vale Datadog.words_case_sensitive = NO -->
@@ -49,9 +49,11 @@ Use {{< ui >}}Query Type{{< /ui >}} to choose how the widget sources its data: *
 
 [Context links][2] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
 
+<!-- vale Datadog.headings = NO -->
 ## DDSQL mode
+<!-- vale Datadog.headings = YES -->
 
-DDSQL mode maps the columns of a published dataset to the host map's visualization instead of querying infrastructure entities. Use DDSQL mode to visualize data that isn't natively modeled as an infrastructure entity, such as a cost allocation breakdown or a custom topology defined by a join across multiple sources.
+DDSQL mode maps the columns of a published dataset to the host map's visualization, instead of querying infrastructure entities directly. Use it to visualize data that isn't natively modeled as an infrastructure entity. Examples include a cost allocation breakdown or a custom topology defined by joining multiple sources.
 
 ### Configuration
 
@@ -68,12 +70,14 @@ DDSQL mode maps the columns of a published dataset to the host map's visualizati
 
 The dataset that backs a DDSQL host map query must return columns that can be mapped to the following dimensions:
 
+<!-- vale Datadog.words_case_sensitive = NO -->
 | Dimension | Column type | Description |
 |-----------|-------------|--------------|
 | Node | String | Uniquely identifies and labels each point. Rows with the same value are merged into a single point. |
 | Fill | Numeric | Sets the color of each point using the selected color palette. |
 | Size | Numeric | Sets the relative size of each point. |
 | Group | String | Clusters points into a nested group. Map up to three columns to `Group`; their selection order defines the nesting hierarchy. |
+<!-- vale Datadog.words_case_sensitive = YES -->
 
 ### Example queries
 
@@ -90,7 +94,7 @@ WHERE date_range = 'last_30_days'
 GROUP BY account_id, service_name
 {{< /code-block >}}
 
-Map `service_name` to {{< ui >}}Label node by{{< /ui >}}, `total_cost` to {{< ui >}}Fill by{{< /ui >}}, `instance_count` to {{< ui >}}Size by{{< /ui >}}, and `account_id` to {{< ui >}}Group by{{< /ui >}} to cluster services by account.
+Map `service_name` to {{< ui >}}Label node by{{< /ui >}}, `total_cost` to {{< ui >}}Fill by{{< /ui >}}, and `instance_count` to {{< ui >}}Size by{{< /ui >}}. Map `account_id` to {{< ui >}}Group by{{< /ui >}} to cluster services by account.
 
 The following query defines a custom topology of services grouped by team and domain, independent of any infrastructure entity:
 
@@ -106,7 +110,7 @@ WHERE lib.env = 'production'
 GROUP BY c.service_name, c.team, c.domain, lib.newer_versions_number
 {{< /code-block >}}
 
-Map `service_name` to {{< ui >}}Label node by{{< /ui >}}, `outdated_dependencies` to {{< ui >}}Fill by{{< /ui >}}, and `domain` and `team` (in that order) to {{< ui >}}Group by{{< /ui >}} to nest services under their domain and team.
+Map `service_name` to {{< ui >}}Label node by{{< /ui >}} and `outdated_dependencies` to {{< ui >}}Fill by{{< /ui >}}. Map `domain` and `team` (in that order) to {{< ui >}}Group by{{< /ui >}} to nest services under their domain and team.
 
 ### Limits
 
