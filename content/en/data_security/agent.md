@@ -232,16 +232,6 @@ agent diagnose show-metadata agent-telemetry
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 | appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
-| **CSI Driver**                              |                                                                                                                        |
-| datadog_csi_driver.node_publish_volume_attempts   | Number of volume publish (mount) requests received by the CSI node server, tagged by status and volume type      |
-| datadog_csi_driver.node_unpublish_volume_attempts | Number of volume unpublish (unmount) requests received by the CSI node server, tagged by status                  |
-| datadog_csi_driver.library_resolutions            | Number of attempts to resolve an APM library for a volume, tagged by library and result                          |
-| datadog_csi_driver.library_download_duration_seconds_count | Number of library downloads from a registry (count of the download duration histogram), tagged by library and registry |
-| datadog_csi_driver.library_download_duration_seconds_sum   | Total time spent downloading libraries from a registry, in seconds (sum of the download duration histogram), tagged by library and registry |
-| datadog_csi_driver.library_cleanup                | Number of cleanup attempts for unused cached libraries, tagged by library, status, and strategy                  |
-| datadog_csi_driver.libraries_cached               | Number of library versions currently stored on disk, per library                                                |
-| datadog_csi_driver.libraries_cached_bytes         | Cumulative on-disk size of cached libraries, in bytes, per library                                              |
-| datadog_csi_driver.library_volume_links           | Number of volumes currently linked to a library, per library                                                    |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

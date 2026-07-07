@@ -9881,41 +9881,51 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
-    - name: Analysis Methods
-      url: experiments/analysis_methods
-      parent: pa_experiments
-      identifier: pa_experiments_analysis_methods
-      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Concepts
+      url: experiments/concepts/
+      parent: pa_experiments
+      identifier: pa_experiments_concepts
       weight: 4
-    - name: Cumulative Impact
-      url: experiments/cumulative_impact
-      parent: pa_experiments
-      identifier: pa_experiments_cumulative_impact
-      weight: 5
-    - name: Create Exposure SQL Models
-      url: experiments/exposure_sql
-      parent: pa_experiments
-      identifier: pa_experiments_exposure_sql
-      weight: 6
-    - name: Manage Subject Types
-      url: experiments/subject_types
-      parent: pa_experiments
+    - name: Subject Types
+      url: experiments/concepts/subject_types
+      parent: pa_experiments_concepts
       identifier: pa_experiments_subject_types
-      weight: 7
+      weight: 1
+    - name: Exposure SQL Models
+      url: experiments/concepts/exposure_sql
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_exposure_sql
+      weight: 2
+    - name: Cumulative Impact
+      url: experiments/concepts/cumulative_impact
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_cumulative_impact
+      weight: 3
+    - name: Statistics
+      url: experiments/statistics/
+      parent: pa_experiments
+      identifier: pa_experiments_statistics
+      weight: 5
+    - name: Analysis Methods
+      url: experiments/statistics/analysis_methods
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_analysis_methods
+      weight: 1
     - name: Minimum Detectable Effects
-      url: experiments/minimum_detectable_effect
-      parent: pa_experiments
+      url: experiments/statistics/minimum_detectable_effect
+      parent: pa_experiments_statistics
       identifier: pa_experiments_mde
-      weight: 8
+      weight: 2
     - name: Global Lift
-      url: experiments/global_lift
-      parent: pa_experiments
+      url: experiments/statistics/global_lift
+      parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 9
+      weight: 3
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
