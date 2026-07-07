@@ -18,21 +18,21 @@ Dev Tools is a built-in debugging panel in Session Replay that can help you trou
 
 ## Dev Tools
 
-To access Dev Tools, click the **Dev Tools** button in the Session Replay view. The **</> Dev Tools** button appears to the right of the **Share** button. You can view performance data, console logs, errors, and attributes about your replays.
+To access Dev Tools, click the {{< ui >}}Dev Tools{{< /ui >}} button in the Session Replay view. The {{< ui >}}</> Dev Tools{{< /ui >}} button appears to the right of the {{< ui >}}Share{{< /ui >}} button. You can view performance data, console logs, errors, and attributes about your replays.
 
 ### Performance
 
-The **Performance** tab displays a waterfall of events (such as actions, errors, resources, and long tasks) and timesteamps in a session.
+The {{< ui >}}Performance{{< /ui >}} tab displays a waterfall of events (such as actions, errors, resources, and long tasks) and timesteamps in a session.
 
-Select and apply filters such as Action Name and Resource Type to change the scope of resources and event types displayed. You can also drag and drop the sliders in the waterfall to expand the time range.
+Select and apply filters such as {{< ui >}}Action Name{{< /ui >}} and {{< ui >}}Resource Type{{< /ui >}} to change the scope of resources and event types displayed. You can also drag and drop the sliders in the waterfall to expand the time range.
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-2.mp4" alt="Performance filters" video="true" style="width:60%;">}}
 
 ### Console
 
-The **Console** tab displays all [logs collected from the web browser][2] and errors for each view. 
+The {{< ui >}}Console{{< /ui >}} tab displays all [logs collected from the web browser][2] and errors for each view. 
 
-Click **Error**, **Warn**, **Info**, and **Debug** to filter your logs based on severity. To search for these logs in the [Log Explorer][3], click **View in Log Explorer**.
+Click {{< ui >}}Error{{< /ui >}}, {{< ui >}}Warn{{< /ui >}}, {{< ui >}}Info{{< /ui >}}, and {{< ui >}}Debug{{< /ui >}} to filter your logs based on severity. To search for these logs in the [Log Explorer][3], click {{< ui >}}View in Log Explorer{{< /ui >}}.
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-console-1.png" alt="Console View in Log Explorer button" style="width:50%;">}}
 
@@ -40,13 +40,13 @@ The Log Explorer opens in a separate tab with a pre-filled search query.
 
 ### Errors
 
-The **Errors** tab displays [RUM errors][4] and [Error Tracking][5] issues that correlate to the session.
+The {{< ui >}}Errors{{< /ui >}} tab displays [RUM errors][4] and [Error Tracking][5] issues that correlate to the session.
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-errors.png" alt="Errors tab" style="width:100%;">}}
 
 ### Attributes
 
-The **Attributes** tab displays all attributes related to the session. For more information, see [Default attributes][6].
+The {{< ui >}}Attributes{{< /ui >}} tab displays all attributes related to the session. For more information, see [Default attributes][6].
 
 ## Further reading
 

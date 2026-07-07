@@ -21,21 +21,21 @@ further_reading:
 
 ## Overview
 
-The test details page opens after a Synthetic browser test executes and is organized into four tabs: [Activity](#test-activity), [Test Runs](#test-runs), [Performance](#test-performance), and [Properties](#test-properties). Use these tabs to monitor uptime, inspect individual runs, review aggregate performance metrics, and manage test configuration. When a run fails, see [Failed results](#failed-results) for troubleshooting tools such as AI failure summaries and screenshot comparison.
+The test details page opens after a Synthetic browser test executes and is organized into four tabs: [{{< ui >}}Activity{{< /ui >}}](#test-activity), [{{< ui >}}Test Runs{{< /ui >}}](#test-runs), [{{< ui >}}Performance{{< /ui >}}](#test-performance), and [{{< ui >}}Properties{{< /ui >}}](#test-properties). Use these tabs to monitor uptime, inspect individual runs, review aggregate performance metrics, and manage test configuration. When a run fails, see [Failed results](#failed-results) for troubleshooting tools such as AI failure summaries and screenshot comparison.
 
 ## Test activity
 
-On the **Activity** tab, you can see:
+On the {{< ui >}}Activity{{< /ui >}} tab, you can see:
 
-- The **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
-- A **Timeline** of alert triggers, recoveries, and test modifications.
-- A **Summary** panel for the selected timeline event, showing what happened, the failing result, and suggested next steps for investigation.
+- The {{< ui >}}Global Uptime{{< /ui >}} graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
+- A {{< ui >}}Timeline{{< /ui >}} of alert triggers, recoveries, and test modifications.
+- A {{< ui >}}Summary{{< /ui >}} panel for the selected timeline event, showing what happened, the failing result, and suggested next steps for investigation.
 
 {{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits Investigation." style="width:100%;" >}}
 
 ## Test runs
 
-On the **Test Runs** tab, you can see all individual runs of your test. Filter by status (passed or failed), run type, location, or device, and click any row to inspect that run in detail.
+On the {{< ui >}}Test Runs{{< /ui >}} tab, you can see all individual runs of your test. Filter by status (passed or failed), run type, location, or device, and click any row to inspect that run in detail.
 
 {{< img src="synthetics/browser_tests/synthetics_test_runs.png" alt="The Test Runs tab on a browser Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, browser, and test version columns" style="width:100%" >}}
 
@@ -43,7 +43,7 @@ Browser test runs include components such as [screenshots](#screenshots-and-acti
 
 {{% collapse-content title="Test run columns" level="h4" %}}
 
-The following describes each column in the **Test Runs** table:
+The following describes each column in the {{< ui >}}Test Runs{{< /ui >}} table:
 
 Status
 : The status of the test run (`PASSED` or `FAILED`).
@@ -76,7 +76,7 @@ Test Version
 
 ### RUM sessions
 
-To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetic Monitoring][16].
+To view related sessions and available replays in the [RUM Explorer][22], click {{< ui >}}View Session in RUM{{< /ui >}}. To access a user session for a particular action or step in [Session Replay][23], click {{< ui >}}Replay Session{{< /ui >}}. For more information, see [Explore RUM & Session Replay in Synthetic Monitoring][16].
 
 ### Screenshots and actions
 
@@ -84,17 +84,17 @@ Every executed test step contains a screenshot of the step action, a link to the
 
 ### Errors and warnings
 
-Click the **Errors** pill to access the **Errors & Warnings** tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
+Click the {{< ui >}}Errors{{< /ui >}} pill to access the {{< ui >}}Errors & Warnings{{< /ui >}} tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
 
 {{< img src="synthetics/browser_tests/test_results/synthetics_errors.png" alt="Browser test run details with the Errors pill highlighted on each step, indicating where to click to open the Errors & Warnings tab" style="width:100%" >}}
 
-The **Errors & Warnings** tab displays a list of errors separated by error type (`js` or `network`) and status (the network status code).
+The {{< ui >}}Errors & Warnings{{< /ui >}} tab displays a list of errors separated by error type (`js` or `network`) and status (the network status code).
 
 The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
 ### Resources
 
-Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources. 
+Click the {{< ui >}}Resources{{< /ui >}} pill to access the {{< ui >}}Resources{{< /ui >}} tab and examine the combination of requests and assets, including the total step duration time under {{< ui >}}Fully Loaded{{< /ui >}} and the CDN provider serving the resources. 
 
 {{< img src="synthetics/browser_tests/test_results/synthetics_resources.png" alt="Browser test run details with the Resources pill highlighted on each step, indicating where to click to open the Resources tab" style="width:100%" >}}
 
@@ -102,7 +102,7 @@ You can filter resources by type and search by name in the search bar. The maxim
 
 {{% collapse-content title="Resources tab columns" level="h4" %}}
 
-The following describes the column headers on the **Resources** tab:
+The following describes the column headers on the {{< ui >}}Resources{{< /ui >}} tab:
 
 Relative Time 
 : The point in time when the resource began to load during the test step.
@@ -134,11 +134,11 @@ Size
 
 {{% /collapse-content %}}
 
-For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture HTTP payloads** is enabled in the test's [advanced options][28].
+For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when {{< ui >}}Capture HTTP payloads{{< /ui >}} is enabled in the test's [advanced options][28].
 
 ### Backend traces
 
-Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
+Click the {{< ui >}}Traces{{< /ui >}} pill to access the {{< ui >}}Traces{{< /ui >}} tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
 
 For more information about cross-product correlation, see the [Ease Troubleshooting With Cross-Product Correlation][21] guide.
 
@@ -152,7 +152,7 @@ If your test reaches the maximum execution time, the timeout message indicates t
 
 ## Test performance
 
-On the **Performance** tab, you can see aggregate performance metrics across all runs of your test:
+On the {{< ui >}}Performance{{< /ui >}} tab, you can see aggregate performance metrics across all runs of your test:
 
 - **Browser success rate** cards for each browser type (Chrome, Firefox, Edge), displaying the percentage of passing runs in the selected time interval.
 - **Average Test duration by browser type** and **Average Test duration by location & device** graphs, which display the time each browser, location, and device takes to complete the test in a given time interval.
@@ -166,36 +166,36 @@ Within an individual test run, [Largest Contentful Paint][2] and [Cumulative Lay
 
 ## Test properties
 
-The **Properties** tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
+The {{< ui >}}Properties{{< /ui >}} tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
 
 {{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
 
 {{% collapse-content title="Properties tab sections" level="h4" %}}
 
-The following describes each section available on the **Properties** tab:
+The following describes each section available on the {{< ui >}}Properties{{< /ui >}} tab:
 
-**Ownership**
+{{< ui >}}Ownership{{< /ui >}}
 : Displays the test owner, editor, creation date, last modified date, environments, teams, and tags. Tests also link to an out-of-the-box Synthetic [browser test dashboard][11].
 
-**Execution**
+{{< ui >}}Execution{{< /ui >}}
 : Shows the test frequency, alert conditions, and retry behavior.
 
-**Monitor**
+{{< ui >}}Monitor{{< /ui >}}
 : Contains the [Synthetic test monitor][13] name, priority, configured recipients, and notification message.
 
-**Continuous Testing**
+{{< ui >}}Continuous Testing{{< /ui >}}
 : Sets the [execution rule][12] used when this test runs as part of a [Continuous Testing CI pipeline][19].
 
-**Parent Tests**
+{{< ui >}}Parent Tests{{< /ui >}}
 : Lists tests that reference this test, such as multistep tests that include it as a subtest.
 
-**Parent Suites**
+{{< ui >}}Parent Suites{{< /ui >}}
 : Lists the [test suites][26] this test belongs to.
 
-**Downtimes**
+{{< ui >}}Downtimes{{< /ui >}}
 : Lists [scheduled downtimes][27] that pause execution of this test, for example during planned maintenance windows.
 
-**Configuration as Code**
+{{< ui >}}Configuration as Code{{< /ui >}}
 : Exports the test configuration in formats such as Terraform for managing tests as code.
 
 {{% /collapse-content %}}
@@ -218,7 +218,7 @@ AI failure summaries appear on the test run details page for any failing browser
 
 ### Compare screenshots
 
-To help during the investigation, click **Compare Screenshots** to receive side-by-side screenshots of the failed result and the last successful execution. The comparison helps you to spot any differences that could have caused the test to fail.
+To help during the investigation, click {{< ui >}}Compare Screenshots{{< /ui >}} to receive side-by-side screenshots of the failed result and the last successful execution. The comparison helps you to spot any differences that could have caused the test to fail.
 
 {{< img src="synthetics/browser_tests/test_results/compare_screenshots.png" alt="Compare screenshots between your failed and successful runs" style="width:90%;" >}}
 
@@ -242,7 +242,7 @@ To help during the investigation, click **Compare Screenshots** to receive side-
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and test modifications alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
+Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >}}Activity{{< /ui >}} tab](#test-activity), where you can review alert triggers, recoveries, and test modifications alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][18] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
 
 ## Further Reading
 

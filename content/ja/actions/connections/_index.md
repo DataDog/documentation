@@ -104,7 +104,7 @@ title: 接続
 
 下記は OpenAI 用の **New Connection** ダイアログボックスの例です。コネクションごとに必要な認証情報は異なります。OpenAI では、有効なコネクション名と API トークンが必要です。
 
-{{< img src="service_management/new-connection-2.png" alt="OpenAI コネクション用の New Connection ダイアログボックス" >}}
+{{< img src="actions/connections/new-connection-2.png" alt="OpenAI コネクション用の New Connection ダイアログボックス" >}}
 
 ### コネクションを編集する
 

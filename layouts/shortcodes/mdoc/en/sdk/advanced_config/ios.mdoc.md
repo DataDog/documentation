@@ -324,6 +324,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `applicationID`
 : The RUM application identifier.
 
+`collectAccessibility`
+: Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`.
+
 `customEndpoint`
 : A custom server URL for sending RUM data.
 

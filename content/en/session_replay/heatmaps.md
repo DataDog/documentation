@@ -22,9 +22,9 @@ further_reading:
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. There are three different types of heatmaps:
 
-- **Click maps:** View user interactions (clicks) to understand how users engage with your page.
-- **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
-- **Scroll maps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
+- {{< ui >}}Click maps{{< /ui >}}: View user interactions (clicks) to understand how users engage with your page.
+- {{< ui >}}Top Elements{{< /ui >}}: View a ranking of up to the top 10 most interacted-with elements on a given page.
+- {{< ui >}}Scroll maps{{< /ui >}}: View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
 Use heatmaps to review complex data at a glance and gain insights around optimizing your user experience.
 
@@ -43,7 +43,7 @@ To get started with heatmaps:
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Navigate to [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**][1]. Select your application and view.
+Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Session Replay{{< /ui >}} > {{< ui >}}Heatmaps{{< /ui >}}][1]. Select your application and view.
 
 On the [Real User Monitoring landing page][2], select your application from the application selector and view. To the left of the timeframe selector, you can select the type of heatmap you would like to view: Top elements, Click map, or Scroll map.
 
@@ -55,7 +55,7 @@ On the [Real User Monitoring landing page][2], select your application from the 
 {{% /tab %}}
 {{% tab "Product Analytics" %}}
 
-Navigate to [**Digital Experience > Product Analytics > Heatmaps**][1]. Select your application and view.
+Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Heatmaps{{< /ui >}}][1]. Select your application and view.
 
 From this page, you can select the type of heatmap (Top elements, Click map, Scroll map) you would like to see for a particular view.
 
@@ -72,10 +72,10 @@ Click on a view name for a more detailed look at the related heatmap.
 
 You have the following additional view options:
 
-- To switch the view being shown, use the **View Name** and **Application** selectors at the top.
-- To change the device view, use the **Device type** selector.
-- To filter by action name, use the **Filter actions by** dropdown.
-- To add more granular filters, like a specific geography for example, click the **Add Filter** button.
+- To switch the view being shown, use the {{< ui >}}View Name{{< /ui >}} and {{< ui >}}Application{{< /ui >}} selectors at the top.
+- To change the device view, use the {{< ui >}}Device type{{< /ui >}} selector.
+- To filter by action name, use the {{< ui >}}Filter actions by{{< /ui >}} dropdown.
+- To add more granular filters, like a specific geography for example, click the {{< ui >}}Add Filter{{< /ui >}} button.
 
 ## Top Elements
 
@@ -96,7 +96,7 @@ On the left is a list of all actions that occurred on the page, listed by freque
 - The number of times the user performed the action and where it falls in overall analytics of top actions on a given page.
 - If that action had a frustration signal occurring on it (for example, if a user rage clicked on that button), you can view the associated frustration signals as well.
 
-From this view, you can also click the **Start a Funnel** button to identify user drop off.
+From this view, you can also click the {{< ui >}}Start a Funnel{{< /ui >}} button to identify user drop off.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmap-actions.png" alt="Shows an example action and the information you can get about that action." style="width:50%;">}}
 
@@ -116,21 +116,21 @@ A screenshot is the state of a view at a particular point in time. Changing the 
 
 ### Changing screenshots
 
-From the heatmap view, click the **Change Screenshot** button. A dropdown appears with three options.
+From the heatmap view, click the {{< ui >}}Change Screenshot{{< /ui >}} button. A dropdown appears with three options.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button.png" alt="The Change Screenshot dropdown showing three options: Existing screenshots, Take new screenshot, and Grab from replay." style="width:100%;">}}
 
-**Existing screenshots**
+{{< ui >}}Existing screenshots{{< /ui >}}
 
 Choose from screenshots previously saved by you or your teammates. This helps ensure everyone in your organization analyzes the same view state.
 
-**Take new screenshot**
+{{< ui >}}Take new screenshot{{< /ui >}}
 
 Capture a screenshot directly from your live application. Use this option when the state you need—such as an open modal, a hover menu, or a specific scroll position—does not exist in your recorded replays.
 
 **Prerequisite**: Install the [Datadog Test Recorder][6] Chrome extension before using this option. The extension loads your live application in an embedded browser within Datadog, letting you navigate to the exact page and UI state you want to capture.
 
-1. Click **Take new screenshot**.
+1. Click {{< ui >}}Take new screenshot{{< /ui >}}.
 
 
 1. Navigate to the page you want to capture in the embedded browser.
@@ -139,14 +139,14 @@ Capture a screenshot directly from your live application. Use this option when t
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot.png" alt="The Take new screenshot panel showing navigation instructions and a masking level selector." style="width:100%;">}}
 
-1. Click **Take Screenshot**. A preview of the screenshot opens.
-1. Review the preview and click **Confirm** to apply the screenshot to your heatmap.
+1. Click {{< ui >}}Take Screenshot{{< /ui >}}. A preview of the screenshot opens.
+1. Review the preview and click {{< ui >}}Confirm{{< /ui >}} to apply the screenshot to your heatmap.
 
-**Grab from replay**
+{{< ui >}}Grab from replay{{< /ui >}}
 
 Select a screenshot from a recorded Session Replay.
 
-1. Click **Grab from replay**.
+1. Click {{< ui >}}Grab from replay{{< /ui >}}.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-grab-from-replay-selected.png" alt="The Change Screenshot dropdown with Grab from replay selected." style="width:100%;">}}
 
@@ -154,18 +154,18 @@ Select a screenshot from a recorded Session Replay.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events-1.png" alt="List of action events for the session replay." style="width:100%;">}}
 
-1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, return to the list of replays by clicking **Choose Another Replay**.
-1. Click **Take Screenshot** to apply the screenshot at the paused point to the heatmap.
+1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, return to the list of replays by clicking {{< ui >}}Choose Another Replay{{< /ui >}}.
+1. Click {{< ui >}}Take Screenshot{{< /ui >}} to apply the screenshot at the paused point to the heatmap.
 
 ### Saving screenshots
 
-Screenshots taken using **Grab from replay** or **Take new screenshot** are automatically saved and become the default view for anyone in your organization who opens the heatmap. To also save the screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
+Screenshots taken using {{< ui >}}Grab from replay{{< /ui >}} or {{< ui >}}Take new screenshot{{< /ui >}} are automatically saved and become the default view for anyone in your organization who opens the heatmap. To also save the screenshot auto-picked from a recent replay, click {{< ui >}}Save{{< /ui >}} on the current screenshot.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot-1.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
 
 You can save multiple screenshots for the same view (for example: default view, open navigation menu, open modal) and switch between screenshots saved by teammates.
 
-To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click **Unpin** on the current screenshot.
+To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click {{< ui >}}Unpin{{< /ui >}} on the current screenshot.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
@@ -188,13 +188,13 @@ Heatmaps are based on view names. Depending on how your application is configure
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, this replay might not be the one you want to use. To switch the snapshot of your heatmap, use the **Change Snapshot** button to navigate through the different states of a replay and find the one you want. If the replay you're viewing does not have the snapshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, this replay might not be the one you want to use. To switch the snapshot of your heatmap, use the {{< ui >}}Change Snapshot{{< /ui >}} button to navigate through the different states of a replay and find the one you want. If the replay you're viewing does not have the snapshot you're looking for, you can use the {{< ui >}}Choose Another Replay{{< /ui >}} button to select another replay of the same view.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-the-snapshot.mp4" alt="Select a different background by clicking the Change Snapshot button" video=true >}}
 
 ### On the action list on the side of my heatmap, I see an icon showing an element that is not visible in the heatmap.
 
-The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the snapshot in the heatmap. To see that element, you can click **Change Snapshot** in the top right corner to switch the snapshot of your heatmap to one where that element is present.
+The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the snapshot in the heatmap. To see that element, you can click {{< ui >}}Change Snapshot{{< /ui >}} in the top right corner to switch the snapshot of your heatmap to one where that element is present.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:100%;">}}
 

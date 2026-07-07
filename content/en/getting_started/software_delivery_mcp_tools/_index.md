@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3] and [Test Optimization][4] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], and [DORA metrics][9] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Use cases
 
@@ -170,3 +170,5 @@ For flaky failures, the skill chains into `triage-flaky-test` for a deeper inves
 [5]: /getting_started/site/
 [6]: https://github.com/datadog-labs/agent-skills
 [7]: https://github.com/DataDog/pup
+[8]: /code_coverage/
+[9]: /delivery_performance/dora_metrics/

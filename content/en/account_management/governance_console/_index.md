@@ -16,9 +16,6 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< callout url="/help/" header="Get Started with Governance Console" >}}
 Governance Console is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}

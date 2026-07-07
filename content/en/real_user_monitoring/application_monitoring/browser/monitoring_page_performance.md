@@ -38,7 +38,7 @@ RUM view events collect extensive performance telemetry for every pageview. Moni
 
 You can access performance telemetry for your views in:
 
-- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [Performance Overview dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance telemetry](#all-performance-telemetry) in the dashboard's query.
+- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [{{< ui >}}Performance Overview{{< /ui >}} dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance telemetry](#all-performance-telemetry) in the dashboard's query.
 - A performance waterfall, accessible for every RUM view event in the [RUM Explorer][4], which enables you to troubleshoot the performance of a specific page view. It displays how your website assets and resources, long tasks, and frontend errors affect the page-level performance for your end users.
 
 ## Event timings and core web vitals

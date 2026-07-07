@@ -1,5 +1,6 @@
 ---
 title: Manage and Map Dependencies
+description: Use Catalog to automatically discover and manually define upstream and downstream service dependencies for a complete view of your system architecture.
 aliases:
   - /tracing/software_catalog/guides/dependency_management
   - /software_catalog/guides/dependency_management

@@ -23,7 +23,7 @@ A new flaky test is a test that:
 - was added in the pull request branch and has not run in any other branch.
 - has exhibited [flaky behavior][2] for the first time.
 
-<div class="alert alert-info"><a href="/tests/flaky_tests/early_flake_detection">Early Flake Detection</a> and automatic fix verification with <a href="/tests/flaky_management/#confirm-fixes-for-flaky-tests">Attempt To Fix</a> are supported only with native libraries, not <a href="/tests/setup/junit_xml/">JUnit XML uploads</a>. If you use JUnit XML uploads, verify fixes manually and mark the test as <strong>Fixed</strong> in <a href="/tests/flaky_management">Flaky Tests Management</a>.</div>
+<div class="alert alert-info"><a href="/tests/flaky_tests/early_flake_detection">Early Flake Detection</a> and automatic fix verification with <a href="/tests/flaky_management/#confirm-fixes-for-flaky-tests">Attempt To Fix</a> are supported only with native libraries, not <a href="/tests/setup/junit_xml/">JUnit XML uploads</a>. If you use JUnit XML uploads, verify fixes manually and mark the test as {{< ui >}}Fixed{{< /ui >}} in <a href="/tests/flaky_management">Flaky Tests Management</a>.</div>
 
 Before you begin:
 
@@ -36,7 +36,7 @@ If Datadog detects at least one new flaky test in the feature branch, the PR gat
 
 ## Set up the PR gate
 
-1. Go to [Create Rule][3] and select **New Flaky Tests**.
+1. Go to [Create Rule][3] and select {{< ui >}}New Flaky Tests{{< /ui >}}.
 
 {{< img src="pr_gates/setup/flaky_tests.png" alt="A PR Gate rule that fails when a pull request introduces at least one new flaky test" style="width:100%" >}}
 
@@ -66,7 +66,7 @@ When you open the failed check, Datadog shows the PR gate details in the Datadog
 
 ## Make the PR gate pass
 
-The PR gate stays red until the flaky test is marked as **Fixed** in [Flaky Tests Management][9].
+The PR gate stays red until the flaky test is marked as {{< ui >}}Fixed{{< /ui >}} in [Flaky Tests Management][9].
 
 There are two ways to mark the new flaky test as Fixed: 
 
@@ -110,7 +110,7 @@ This link opens [Flaky Tests Management][9] in the Datadog UI with the test sele
 
 {{< img src="pr_gates/setup/flaky_test_detail.png" alt="Datadog Flaky Tests Management view with the selected test" style="width:70%" >}}
 
-Change the status from **Active** to **Fixed**:
+Change the status from {{< ui >}}Active{{< /ui >}} to {{< ui >}}Fixed{{< /ui >}}:
 
 {{< img src="pr_gates/setup/fix_flaky_test.png" alt="Datadog Flaky Tests Management status menu showing Fixed" style="width:70%" >}}
 
