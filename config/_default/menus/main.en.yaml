@@ -5880,7 +5880,7 @@ menu:
       parent: cco_test_setup
       identifier: cco_test_setup_containers
       weight: 211
-    - name: Health
+    - name: CI/CD Health
       url: tests/test_health/
       parent: cco
       identifier: cco_health
