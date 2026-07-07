@@ -282,15 +282,15 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 {% img src="real_user_monitoring/android/android-profiling-thread-timeline.png" alt="Android profiling data for the time to initial display in a thread timeline." style="width:90%;" /%}
 
-### During long tasks
-
-Android profiling data is attached to long task events in a RUM session. You can access long tasks from the view side panel or from the long task event side panel.
-
-{% img src="real_user_monitoring/android/android-profiling-long-task.png" alt="Android profiling data in long task RUM event." style="width:90%;" /%}
-
 ### During application not responding errors
 
 Android profiling data is attached to [application not responding (ANR)][17] errors in a RUM session. You can access ANR errors from the view side panel or from the error event side panel.
+
+{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
+
+### During long tasks
+
+Android profiling data is attached to long task events in a RUM session. You can access long tasks from the view side panel or from the long task event side panel.
 
 {% img src="real_user_monitoring/android/android-profiling-long-task.png" alt="Android profiling data in long task RUM event." style="width:90%;" /%}
 
@@ -377,15 +377,15 @@ Use the **flame graph** to identify which functions consume the most Wall time d
 
 {% img src="real_user_monitoring/ios/ios-profiling-thread-timeline.png" alt="iOS profiling data for the time to initial display in a thread timeline." style="width:90%;" /%}
 
+### During application hangs
+
+iOS profiling data is attached to [application hangs][20] in a RUM session. You can access application hangs from the view side panel or from the error event side panel.
+
 ### During long tasks
 
 iOS profiling data is attached to long task events in a RUM session. You can access long tasks from the view side panel or from the long task event side panel.
 
-{% img src="real_user_monitoring/ios/ios-profiling-long-task.png" alt="iOS profiling data in a long task event." style="width:90%;" /%}
-
-### During application hangs
-
-iOS profiling data is attached to [application hangs][20] in a RUM session. You can access application hangs from the view side panel or from the error event side panel.
+{% img src="real_user_monitoring/ios/ios-profiling-app-hang.png" alt="iOS profiling data in a long task event." style="width:90%;" /%}
 
 
 {% img src="real_user_monitoring/ios/ios-profiling-long-task.png" alt="iOS profiling data in a long task event." style="width:90%;" /%}
