@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog AI agents, including the Bits fleet (Bits SRE, Bits Dev, Bits Assistant, Bits Security Analyst) and Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. This guide walks you through finding agent-driven events, filtering them by agent type, and tracing an agent's actions back to the user who delegated them.
+Datadog AI agents, including the Bits fleet (Bits SRE, Bits Dev, Bits Assistant, Bits Security Analyst) and Bits Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. This guide walks you through finding agent-driven events, filtering them by agent type, and tracing an agent's actions back to the user who delegated them.
 
 ## View all Datadog AI agent activity
 
