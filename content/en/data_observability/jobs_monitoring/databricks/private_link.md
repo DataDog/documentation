@@ -97,7 +97,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. Set `image.tag` to `1.21.0-3`.
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5], [IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Azure Workload Identity][5], [AWS IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the deployment for these changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -122,7 +122,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Managed Identity][5], [IAM Role][6], or [GCE service account][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Azure Managed Identity][5], [AWS IAM Role][6], or [GCE service account][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
