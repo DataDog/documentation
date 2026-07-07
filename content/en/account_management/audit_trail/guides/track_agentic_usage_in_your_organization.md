@@ -20,7 +20,7 @@ Datadog AI agents, including the Bits fleet (Bits SRE, Bits Dev, Bits Assistant,
 1. Navigate to [Audit Trail][1].
 2. In the search bar, enter the query: `@evt.actor.mode:*`.
 
-   This query returns every event where a Datadog AI agent is the actor, whether the agent acted `interactive` (a user was present and approved the action) or `autonomous` (the agent acted on a system trigger, with no user present).
+   This query returns every event where a Datadog AI agent is the actor, whether the agent acted `interactive` (a user was present and approved the action) or `autonomous` (the agent acted on a system trigger, with no user involved).
 3. Click an event to open details and see the full actor breakdown: the delegator (the user, if any), the agent, and the mode.
 
 **Note**: Rollout to all Bits agents is in progress, and coverage is not yet complete. Actions from agents that have not yet onboarded do not appear in `@evt.actor.mode:*` results.
@@ -35,17 +35,19 @@ Actions taken through the Datadog MCP server, carry the `is_mcp_call` field.
 
 ## View a user's full activity, including agent-delegated actions
 
-When a Datadog AI agent acts on a user's behalf, the agent becomes `@evt.actor` for that event, and the user moves to `@delegator.actor`. Searching only `@usr.name:<USER_EMAIL>` returns the actions the user performed directly, and does not include actions a Datadog AI agent performed on their behalf.
+When a Datadog AI agent acts on a user's behalf, the agent's information fills `@usr.*` for that event, while the original user's information fills `@delegator.*` instead. Searching only `@usr.id:<USER_ID>` returns the actions the user performed directly, and does not include actions a Datadog AI agent performed on their behalf.
 
 To retrieve a user's complete activity, including delegated agent actions:
 
 1. Navigate to [Audit Trail][1].
-2. In the search bar, enter the query: `(@usr.name:<USER_EMAIL> OR @delegator.name:<USER_EMAIL>)`. Replace `<USER_EMAIL>` with the user's email address.
+2. In the search bar, enter the query: `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`. Replace `<USER_ID>` with the user's ID.
+
+   **Note**: `@delegator.name` and `@usr.name` hold the user's full name, not their email address. To filter by a specific user, use `@delegator.id` and `@usr.id` instead.
 
    | Description of audit event                                                                          | Query in audit explorer                                     |
    | ------------------------------------------------------------------------------------------------------| ------------------------------------------------------------ |
-   | Actions a user performed directly                                                                     | `@usr.name:<USER_EMAIL>`                                      |
-   | All actions attributed to a user, including actions a Datadog AI agent performed on their behalf      | `(@usr.name:<USER_EMAIL> OR @delegator.name:<USER_EMAIL>)`    |
+   | Actions a user performed directly                                                                     | `@usr.id:<USER_ID>`                                           |
+   | All actions attributed to a user, including actions a Datadog AI agent performed on their behalf      | `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`               |
 3. See [Create a dashboard or a graph][2] if you want to put this information into a dashboard or graph.
 
 ## Distinguish agent events from human events

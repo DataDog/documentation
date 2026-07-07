@@ -166,12 +166,12 @@ Events that match the following queries are marked as notable. You can also retr
 
 ### View a user's full activity, including agent-delegated actions
 
-When a Datadog AI agent acts on a user's behalf, the agent becomes `@evt.actor` for that event, and the user moves to `@delegator.actor`. Searching only `@usr.name:<USER_EMAIL>` returns the actions a user performed directly, and does not include actions a Datadog AI agent performed on their behalf.
+When a Datadog AI agent acts on a user's behalf, the agent's information fills `@usr.*` for that event, while the original user's information fills `@delegator.*` instead. Searching only `@usr.id:<USER_ID>` returns the actions a user performed directly, and does not include actions a Datadog AI agent performed on their behalf.
 
 | Description of audit event                                                                        | Query in audit explorer                                     |
 | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Actions a user performed directly                                                                    | `@usr.name:<USER_EMAIL>`                                      |
-| All actions attributed to a user, including actions a Datadog AI agent performed on their behalf     | `(@usr.name:<USER_EMAIL> OR @delegator.name:<USER_EMAIL>)`    |
+| Actions a user performed directly                                                                    | `@usr.id:<USER_ID>`                                           |
+| All actions attributed to a user, including actions a Datadog AI agent performed on their behalf     | `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`               |
 
 See [Track Agentic Usage in Your Organization][18] for more information on filtering and viewing agent-driven audit events.
 
