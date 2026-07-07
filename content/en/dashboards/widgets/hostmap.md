@@ -79,39 +79,6 @@ The dataset that backs a DDSQL host map query must return columns that can be ma
 | Group | String | Clusters points into a nested group. Map up to three columns to `Group`; their selection order defines the nesting hierarchy. |
 <!-- vale Datadog.words_case_sensitive = YES -->
 
-### Example queries
-
-The following query projects AWS cost by service and account, using cost as the fill value and instance count as the size value:
-
-{{< code-block lang="sql" disable_copy="false" >}}
-SELECT
-    account_id,
-    service_name,
-    SUM(cost) AS total_cost,
-    COUNT(*) AS instance_count
-FROM aws_cost_and_usage
-WHERE date_range = 'last_30_days'
-GROUP BY account_id, service_name
-{{< /code-block >}}
-
-Map `service_name` to {{< ui >}}Label node by{{< /ui >}}, `total_cost` to {{< ui >}}Fill by{{< /ui >}}, and `instance_count` to {{< ui >}}Size by{{< /ui >}}. Map `account_id` to {{< ui >}}Group by{{< /ui >}} to cluster services by account.
-
-The following query defines a custom topology of services grouped by team and domain, independent of any infrastructure entity:
-
-{{< code-block lang="sql" disable_copy="false" >}}
-SELECT
-    c.service_name,
-    c.team,
-    c.domain,
-    lib.newer_versions_number AS outdated_dependencies
-FROM service_definition c
-JOIN library lib ON lib.asset_name = c.service_name
-WHERE lib.env = 'production'
-GROUP BY c.service_name, c.team, c.domain, lib.newer_versions_number
-{{< /code-block >}}
-
-Map `service_name` to {{< ui >}}Label node by{{< /ui >}} and `outdated_dependencies` to {{< ui >}}Fill by{{< /ui >}}. Map `domain` and `team` (in that order) to {{< ui >}}Group by{{< /ui >}} to nest services under their domain and team.
-
 ### Limits
 
 The widget fetches at most the number of rows configured in {{< ui >}}Display first{{< /ui >}}. If the query's result set exceeds this limit, rows are sorted by the `Fill` column in descending order and only the top rows are visualized. Refine the query's `WHERE` and `GROUP BY` clauses, or lower {{< ui >}}Display first{{< /ui >}}, to keep the widget responsive on large result sets.
