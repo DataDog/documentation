@@ -5735,7 +5735,7 @@ menu:
       identifier: cco
       parent: software_delivery_heading
       weight: 5000
-    - name: Pipeline Setup
+    - name: CI Pipeline Setup
       url: continuous_integration/pipelines/
       parent: cco
       identifier: cco_pipeline_setup
@@ -5883,7 +5883,7 @@ menu:
     - name: CI/CD Health
       url: tests/test_health/
       parent: cco
-      identifier: cco_health
+      identifier: cco_ci_cd_health
       weight: 3
     - name: Explorer
       url: continuous_integration/explorer/
