@@ -132,6 +132,41 @@ For each trace:
 
 The Annotations list page displays a progress bar for each queue showing the ratio of reviewed interactions to total interactions. Use this to monitor annotation completion across queues at a glance.
 
+### Assigning interactions to annotators
+
+Queue owners can direct specific interactions to individual annotators, making it easier to coordinate coverage across a team. Annotators self-select work by default; use assignment to override that and route particular interactions to the right reviewer.
+
+To assign interactions using the API, use the [Assign annotation queue interactions][15] endpoint:
+
+- Set `assignee_email` to the annotator's email address to assign, or `null` to unassign.
+- Set `notify: true` to send the assignee a Slack notification.
+- The batch is processed best-effort: a failure on one item (for example, an interaction not found) does not abort the rest. Check `errors` in the response and retry only the failed items to avoid re-notifying already-assigned annotators.
+- If you include duplicate interaction IDs in a single request, the last entry for each ID is applied (last-wins).
+
+**Example request**:
+
+```bash
+curl -X POST "https://api.datadoghq.com/api/v2/llm-obs/v1/annotation-queues/<QUEUE_ID>/interactions/assign" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "assignments": [
+      {
+        "interaction_id": "00000000-0000-0000-0000-000000000001",
+        "assignee_email": "annotator@example.com",
+        "notify": true
+      },
+      {
+        "interaction_id": "00000000-0000-0000-0000-000000000002",
+        "assignee_email": null
+      }
+    ]
+  }'
+```
+
+The response lists IDs that were successfully assigned in `assigned` and any per-item failures in `errors`.
+
 ### Filtering traces by annotation labels
 
 use the {{< ui >}}Annotation Labels{{< /ui >}} facet to filter traces by labels applied in annotation queues. This allows you to:
@@ -301,6 +336,7 @@ You can manage annotation queues programmatically. The following endpoints are a
 | [Delete an annotation queue][9] | Delete an annotation queue by ID. |
 | [Add interactions to a queue][10] | Add one or more traces to an annotation queue for review. |
 | [Delete interactions from a queue][11] | Remove specific interactions from a queue by interaction ID. |
+| [Assign interactions in a queue][15] | Assign one or more interactions to specific annotators, or unassign them by setting `assignee_email` to `null`. Supports optional Slack notification. |
 | [Get annotated interactions][12] | Retrieve all interactions and their applied annotation labels for a queue. |
 | [Get label schema][13] | Retrieve the label schema configured for a queue. |
 | [Update label schema][14] | Create or replace the label schema for a queue. |
@@ -386,3 +422,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [12]: /api/latest/llm-observability/#get-annotated-queue-interactions
 [13]: /api/latest/llm-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/llm-observability/#update-annotation-queue-label-schema
+[15]: /api/latest/llm-observability/#assign-annotation-queue-interactions
