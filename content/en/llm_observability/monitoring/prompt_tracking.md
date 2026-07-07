@@ -12,9 +12,9 @@ further_reading:
 
 ---
 
-{{< img src="llm_observability/monitoring/llm-prompt-tracking-hero.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+## Overview
 
-In Agent Observability, the _Prompt Tracking_ feature links prompt templates and versions to LLM calls. Prompt Tracking works alongside Agent Observability's traces, spans, and Playground.
+Prompt Tracking links prompt templates and versions to LLM calls. Prompt Tracking works alongside Agent Observability's traces, spans, and Playground, as well as [Prompt Management][8], which provides a centralized registry for creating and versioning prompts.
 
 Prompt Tracking enables you to:
 - See all prompts used by your LLM application or agent, with call volume and latency over time
@@ -23,7 +23,11 @@ Prompt Tracking enables you to:
 - Filter [Trace Explorer][1] by prompt name, ID, or version to isolate impacted requests
 - Reproduce a run by populating [Agent Observability Playground][2] with the exact template and variables from any span
 
+{{< img src="llm_observability/monitoring/llm-prompt-tracking-hero.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+
 ## Set up Prompt Tracking
+
+Prompts fetched from the [Prompt Management][8] registry with `get_prompt` are tracked automatically, with no manual instrumentation needed. The following setup options apply to prompts defined outside the registry.
 
 ### With structured prompt metadata
 To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).
@@ -120,3 +124,4 @@ You can use the Agent Observability Trace Explorer to locate requests by prompt 
 [5]: /llm_observability/instrumentation/auto_instrumentation?tab=python#langchain
 [6]: /llm_observability/instrumentation/sdk/?tab=nodejs#prompt-tracking
 [7]: /llm_observability/instrumentation/otel_instrumentation
+[8]: /llm_observability/monitoring/prompt_management

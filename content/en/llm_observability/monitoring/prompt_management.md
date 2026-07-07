@@ -2,6 +2,17 @@
 title: Prompt Management
 description: Create, version, and retrieve prompts from a centralized registry with Prompt Management, decoupling prompt iteration from your application's deployment cycle.
 
+further_reading:
+  - link: "/llm_observability/monitoring/prompt_tracking"
+    tag: "Documentation"
+    text: "Prompt Tracking"
+  - link: "/llm_observability/playground"
+    tag: "Documentation"
+    text: "Playground"
+  - link: "/llm_observability/instrumentation/sdk"
+    tag: "Documentation"
+    text: "Agent Observability SDK"
+
 ---
 
 {{< callout url="https://www.datadoghq.com/" btn_hidden="true">}}
@@ -79,8 +90,6 @@ Headers (required)
 - `DD-APPLICATION-KEY=<YOUR_DATADOG_APPLICATION_KEY>`
 - `Content-Type="application/json"`
 
-{{< tabs >}}
-{{% tab "Curl" %}}
 {{< code-block lang="bash" >}}
 curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts" \
 -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
@@ -96,8 +105,6 @@ curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts" \
   ]
 }'
 {{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
 
 Creating a prompt with a `prompt_id` that already exists in the registry returns a `409` response.
 
@@ -126,8 +133,6 @@ All endpoints below are relative to `https://api.{{< region-param key="dd_site" 
 
 For example, publish a new version of a prompt:
 
-{{< tabs >}}
-{{% tab "Curl" %}}
 {{< code-block lang="bash" >}}
 curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions" \
 -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
@@ -135,15 +140,12 @@ curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer
 -H "Content-Type: application/json" \
 -d '{
   "description": "Add politeness instruction",
-  "user_version": "v2",
   "template": [
     {"role": "system", "content": "You are a helpful support agent for {{company}}."},
     {"role": "user", "content": "Please answer: {{question}}"}
   ]
 }'
 {{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Retrieve a prompt
 
@@ -183,14 +185,10 @@ Method
 Headers (required)
 - `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
 
-{{< tabs >}}
-{{% tab "Curl" %}}
 {{< code-block lang="bash" >}}
 curl -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting" \
 -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>"
 {{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
 
 The raw HTTP endpoint always returns the latest version of a prompt. `DD_ENV`-based resolution is only available through the SDK's `get_prompt` method.
 
@@ -205,14 +203,10 @@ Method
 Headers (required)
 - `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
 
-{{< tabs >}}
-{{% tab "Curl" %}}
 {{< code-block lang="bash" >}}
 curl -s -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions/2" \
 -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>"
 {{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Monitor prompt usage
 
