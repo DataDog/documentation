@@ -62,23 +62,6 @@ DDSQL mode maps the columns of a published dataset to the host map's visualizati
    - {{< ui >}}Group by{{< /ui >}} (optional): Up to three columns whose values cluster points into nested groups. The order of the selected columns sets the nesting hierarchy: the first column forms the outermost group.
 4. {{< ui >}}Style{{< /ui >}} and {{< ui >}}Visual Formatting Rules{{< /ui >}} work the same way as in Infrastructure mode.
 
-#### Result schema
-
-The dataset that backs a DDSQL host map query must return columns that can be mapped to the following dimensions:
-
-<!-- vale Datadog.words_case_sensitive = NO -->
-| Dimension | Column type | Description |
-|-----------|-------------|--------------|
-| Node | String | Uniquely identifies and labels each point. Rows with the same value are merged into a single point. |
-| Fill | Numeric | Sets the color of each point using the selected color palette. |
-| Size | Numeric | Sets the relative size of each point. |
-| Group | String | Clusters points into a nested group. Map up to three columns to `Group`; their selection order defines the nesting hierarchy. |
-<!-- vale Datadog.words_case_sensitive = YES -->
-
-#### Limits
-
-The widget fetches at most the number of rows configured in {{< ui >}}Display first{{< /ui >}}. If the query's result set exceeds this limit, rows are sorted by the `Fill` column in descending order and only the top rows are visualized. Refine the query's `WHERE` and `GROUP BY` clauses, or lower {{< ui >}}Display first{{< /ui >}}, to keep the widget responsive on large result sets.
-
 ### Options
 
 #### Context links
