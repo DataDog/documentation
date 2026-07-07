@@ -59,7 +59,7 @@ If traces appear inconsistently:
 
 ### Reduce log indexing costs without affecting traces
 
-{{< partial name="log-to-trace-indexing-note.html" >}}
+{{% serverless/log_to_trace_indexing_note %}}
 
 ### Tags are not appearing on traces
 

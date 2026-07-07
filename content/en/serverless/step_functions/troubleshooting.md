@@ -56,7 +56,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 ## Missing logs within an execution
 You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`.
 
-{{< partial name="log-to-trace-indexing-note.html" >}}
+{{% serverless/log_to_trace_indexing_note %}}
 
 In the following example, the filter excludes logs for 90% of the `@execution_arn`.
 
