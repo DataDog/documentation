@@ -49,7 +49,7 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for the .NET driver.
 
-**Note**: [PDO::prepare][39] statements will only use service mode for propagation.
+**Note**: [PDO::prepare][39] statements only use service mode for propagation.
 
 {{% /tab %}}
 
