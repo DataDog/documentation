@@ -22,7 +22,7 @@ The host map widget displays your infrastructure as a color-coded grid of hosts,
 
 ## Setup
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup-2.png" alt="Host map widget configuration panel with node type set to Host, filter set to env:prod, grouped by availability-zone, and fill by a CPU utilization metric query." >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup-3.png" alt="Host map widget configuration panel with the Query Type toggle set to Infrastructure, node type set to Host, filter set to agent_version:<7.69.0, grouped by agent_version, and fill by a CPU usage metric query." >}}
 
 ### Configuration
 
@@ -40,7 +40,7 @@ Use {{< ui >}}Query Type{{< /ui >}} to choose how the widget sources its data. *
    - {{< ui >}}Palette{{< /ui >}}: Choose a color palette.
    - {{< ui >}}Reverse palette{{< /ui >}}: Flip the direction of the palette.
    - {{< ui >}}Min{{< /ui >}} / {{< ui >}}Max{{< /ui >}}: Pin the color scale to specific metric values. Nodes below the minimum display in the first palette color; nodes above the maximum display in the last.
-7. {{< ui >}}Conditional formats{{< /ui >}} (optional): Apply color overrides to nodes whose fill value crosses a defined threshold.
+7. {{< ui >}}Visual Formatting Rules{{< /ui >}} (optional): Apply color overrides to nodes whose fill value crosses a defined threshold.
 8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group, such as **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
 
 ### Options
@@ -55,7 +55,11 @@ Use {{< ui >}}Query Type{{< /ui >}} to choose how the widget sources its data. *
 
 DDSQL mode maps the columns of a published dataset to the host map's visualization, instead of querying infrastructure entities directly. Use it to visualize data that isn't natively modeled as an infrastructure entity. Examples include a cost allocation breakdown or a custom topology defined by joining multiple sources.
 
+{{< img src="dashboards/widgets/hostmap/hostmap_ddsql.png" alt="Host map widget titled Deploy Error Spikes, showing 50 records as color-coded tiles ranging from light green (147 errors) to red (947 errors), based on a DDSQL query's error_count column." >}}
+
 ### Configuration
+
+{{< img src="dashboards/widgets/hostmap/hostmap_ddsql_setup.png" alt="Host map widget configuration panel with the Query Type toggle set to DDSQL, a published dataset selected, Display first set to 500, and Configure Points showing Label node by set to error_service and Fill by set to error_count." >}}
 
 1. {{< ui >}}Query Type{{< /ui >}}: Select **DDSQL**.
 2. Select a dataset published from the [DDSQL Editor][5]. Add a search query to filter its rows, and use {{< ui >}}Display first{{< /ui >}} to set the maximum number of rows to fetch (10, 25, 50, 100, 500, 1000, 5000, or a custom value). Click {{< ui >}}Preview Data{{< /ui >}} to inspect the dataset's columns and rows before mapping them.
@@ -64,7 +68,7 @@ DDSQL mode maps the columns of a published dataset to the host map's visualizati
    - {{< ui >}}Fill by{{< /ui >}}: A numeric column whose value determines the color of each point.
    - {{< ui >}}Size by{{< /ui >}} (optional): A numeric column whose value scales the relative size of each point.
    - {{< ui >}}Group by{{< /ui >}} (optional): Up to three columns whose values cluster points into nested groups. The order of the selected columns sets the nesting hierarchy: the first column forms the outermost group.
-4. {{< ui >}}Style{{< /ui >}} and {{< ui >}}Conditional formats{{< /ui >}} work the same way as in Infrastructure mode.
+4. {{< ui >}}Style{{< /ui >}} and {{< ui >}}Visual Formatting Rules{{< /ui >}} work the same way as in Infrastructure mode.
 
 ### Result schema
 
