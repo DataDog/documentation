@@ -1,30 +1,36 @@
 ---
 title: Array Map Processor
-description: "Transform each element of a source array and collect results into a target array"
+description: Learn how to transform each element of a source array, and collect results into a target array, in your log processors.
 processor_type: array-map-processor
 further_reading:
-- link: "/logs/log_configuration/pipelines"
-  tag: "Documentation"
-  text: "Discover Datadog Pipelines"
+- link: /logs/log_configuration/pipelines
+  tag: Documentation
+  text: Pipelines Overview
 ---
 
 ## Overview
 
-Use the array map processor to apply a sequence of sub-processors to each element of a source array, producing a target array. Currently only 4 sub-processors are supported: Attribute Remapper, String Builder, Arithmetic Processor and Category Processor.
+Use the array map processor to apply a sequence of sub-processors to each element of a source array, producing a target array. Datadog supports the following sub-processors: 
+- [Attribute Remapper][3]
+- [String Builder][4]
+- [Arithmetic Processor][5]
+- [Category Processor][6]
 
-**Notes**:
-
-- If `source` and `target` are the same attribute, elements are transformed in place.
-- If `target` array exists, attributes are written to existing elements.
-- Processing is limited to the first 50 elements of the source array.
+<div class="alert alert-info">
+  <ul>
+    <li>If <code>source</code> and <code>target</code> are the same attribute, the processor transforms elements in place.</li>
+    <li>If the <code>target</code> array already exists, the process overwrites attributes on existing elements.</li>
+    <li>Processing is limited to the first 50 elements of the source array.</li>
+  </ul>
+</div>
 
 ## Setup
 
 Define the array map processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]:
 
-1. Set the {{< ui >}}Source{{< /ui >}}: path to the array attribute to iterate over.
-1. Toggle {{< ui >}}Preserve source{{< /ui >}} to keep or remove the original source array after processing.
-1. Set the {{< ui >}}Target{{< /ui >}}: path where the output array is written.
+1. Under {{< ui >}}Source array attribute{{< /ui >}}, enter the path to the array attribute to iterate over.
+1. Select or clear the {{< ui >}}Preserve source array{{< /ui >}} checkbox to keep or remove the original source array after processing.
+1. Under {{< ui >}}Target array attribute{{< /ui >}}, enter the path to where to write the output array.
 1. Add one or more [sub-processors](#sub-processors) to apply to each element.
 
 {{< img src="logs/log_configuration/processor/array-map-processor.png" alt="Screenshot of the Array Map Processor configuration panel" style="width:80%;" >}}
@@ -90,19 +96,21 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Array Map proc
 | `is_enabled`      | Boolean          | No       | If the processor is enabled or not. Default: `false`.                                        |
 | `source`          | String           | Yes      | Name of the source array attribute.                                                          |
 | `target`          | String           | Yes      | Name of the target array attribute. If equal to `source`, elements are transformed in place. |
-| `preserve_source` | Boolean          | No       | Remove or preserve source array after processing. Default: `true`.                           |
+| `preserve_source` | Boolean          | No       | If the source array should be preserved after processing. Default: `true`.                   |
 | `processors`      | Array of Objects | Yes      | Sub-processors applied to each element, in order. At least one is required.                  |
 
-### Sub-processors
+## Sub-processors
 
-Following rules apply when defining sub-processors:
+The following rules apply when defining sub-processors:
 
-- Inside each sub-processor, use `$sourceElem` to reference the current input element and `$targetElem` to write to the current output element.
-- Attributes that do not start with `$sourceElem` are read from the parent log instead of the element itself.
-- `$sourceElem.<field>`/`$targetElem.<field>` refer to a nested attribute in the element object, while `$sourceElem`/`$targetElem` refer to a primitive element (String, Integer, Double, Boolean).
+- Inside each sub-processor, use:
+  - `$sourceElem` to reference the current input element.
+  - `$targetElem` to write to the current output element.
+- If an attribute does not start with `$sourceElem`, the processor reads from the parent log instead of the element itself.
+- `$sourceElem.<field>`/`$targetElem.<field>` refer to a nested attribute in the element object, while `$sourceElem`/`$targetElem` refer to a primitive element (for example, string, integer, double, Boolean).
 - All targets must start with `$targetElem`.
 
-#### Attribute Remapper
+### Attribute Remapper
 
 Remaps an existing field to a field in the output element.
 
@@ -152,20 +160,20 @@ Remaps an existing field to a field in the output element.
 }
 ```
 
-| Parameter              | Type             | Required | Description                                                                                                                                                                     |
-|------------------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`                 | String           | Yes      | Type of the sub-processor.                                                                                                                                                      |
-| `name`                 | String           | No       | Name of the sub-processor.                                                                                                                                                      |
-| `sources`              | Array of strings | Yes      | Array of source attributes.                                                                                                                                                     |
-| `target`               | String           | Yes      | Target attribute.                                                                                                                                                               |
+| Parameter              | Type             | Required | Description                                                                                                                                                                       |
+|------------------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`                 | String           | Yes      | Type of the sub-processor.                                                                                                                                                        |
+| `name`                 | String           | No       | Name of the sub-processor.                                                                                                                                                        |
+| `sources`              | Array of strings | Yes      | Array of source attributes.                                                                                                                                                       |
+| `target`               | String           | Yes      | Target attribute.                                                                                                                                                                 |
 | `target_format`        | String           | No       | Defines if the attribute value should be cast to another type. Possible values: `auto`, `string`, `double` or `integer`. Default: `auto`. When set to `auto`, no cast is applied. |
-| `preserve_source`      | Boolean          | No       | Remove or preserve the remapped source element. Default: `false`.                                                                                                               |
-| `override_on_conflict` | Boolean          | No       | Override or not the target element if already set. Default: `false`.                                                                                                            |
+| `preserve_source`      | Boolean          | No       | If the remapped source element should be preserved after processing. Default: `false`.                                                                                            |
+| `override_on_conflict` | Boolean          | No       | If the target element is already set, whether it should be overridden. Default: `false`.                                                                                          |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### String Builder Processor
+### String Builder Processor
 
 Builds a new field in the output element from a template.
 
@@ -188,8 +196,8 @@ Builds a new field in the output element from a template.
 
 **Configuration steps:**
 
-- {{< ui >}}Template{{< /ui >}}: `%{$sourceElem.name}.%{region}`
 - {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.fqdn`
+- {{< ui >}}Template{{< /ui >}}: `%{$sourceElem.name}.%{region}`
 - {{< ui >}}Replace missing{{< /ui >}}: disabled
 
 **Result:**
@@ -218,18 +226,18 @@ Builds a new field in the output element from a template.
 }
 ```
 
-| Parameter            | Type    | Required | Description                                                                                                                                            |
-|----------------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | String  | Yes      | Type of the sub-processor.                                                                                                                             |
-| `name`               | String  | No       | Name of the sub-processor.                                                                                                                             |
-| `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                                    |
-| `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                                    |
-| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
+| Parameter            | Type    | Required | Description                                                                                                                                              |
+|----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`               | String  | Yes      | Type of the sub-processor.                                                                                                                               |
+| `name`               | String  | No       | Name of the sub-processor.                                                                                                                               |
+| `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                                      |
+| `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                                      |
+| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `template` with an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Arithmetic Processor
+### Arithmetic Processor
 
 Computes a numeric expression using element or log attributes and writes the result to the output element.
 
@@ -251,8 +259,8 @@ Computes a numeric expression using element or log attributes and writes the res
 
 **Configuration steps:**
 
-- {{< ui >}}Formula{{< /ui >}}: `$sourceElem.bytes / 1024`
 - {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.kb`
+- {{< ui >}}Formula{{< /ui >}}: `$sourceElem.bytes / 1024`
 - {{< ui >}}Replace missing value{{< /ui >}}: disabled
 
 **Result:**
@@ -280,18 +288,18 @@ Computes a numeric expression using element or log attributes and writes the res
 }
 ```
 
-| Parameter            | Type    | Required | Description                                                                                                                                    |
-|----------------------|---------|----------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | String  | Yes      | Type of the sub-processor.                                                                                                                     |
-| `name`               | String  | No       | Name of the sub-processor.                                                                                                                     |
-| `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                       |
-| `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                    |
-| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `expression` by 0, if `false`, skips the operation if an attribute is missing. Default: `false`. |
+| Parameter            | Type    | Required | Description                                                                                                                                      |
+|----------------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`               | String  | Yes      | Type of the sub-processor.                                                                                                                       |
+| `name`               | String  | No       | Name of the sub-processor.                                                                                                                       |
+| `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                         |
+| `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                      |
+| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `expression` with 0. If `false`, skips the operation if an attribute is missing. Default: `false`. |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Category Processor
+### Category Processor
 
 Assigns a category to each output element based on a filter query matching element attributes.
 
@@ -314,8 +322,9 @@ Assigns a category to each output element based on a filter query matching eleme
 **Configuration steps:**
 
 - {{< ui >}}Target attribute{{< /ui >}}: `$targetElem.severity`
-- Category 1: All events that match `@$sourceElem.status:critical` are mapped to value  `high`
-- Category 2: All events that match `@$sourceElem.status:warning` are mapped to value `medium`
+- {{< ui >}}Categories{{< /ui >}}:
+  - All events that match `@$sourceElem.status:critical` are mapped to value  `high`
+  - All events that match `@$sourceElem.status:warning` are mapped to value `medium`
 
 **Result:**
 
@@ -344,12 +353,12 @@ Assigns a category to each output element based on a filter query matching eleme
 }
 ```
 
-| Parameter    | Type            | Required | Description                                                                                                |
-|--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
-| `type`       | String          | Yes      | Must be `category-processor`.                                                                              |
-| `name`       | String          | No       | Name of the sub-processor.                                                                                 |
-| `categories` | Array of Object | Yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
-| `target`     | String          | Yes      | Name of the target attribute which value is defined by the matching category.                              |
+| Parameter    | Type            | Required | Description                                                                                            |
+|--------------|-----------------|----------|--------------------------------------------------------------------------------------------------------|
+| `type`       | String          | Yes      | Must be `category-processor`.                                                                          |
+| `name`       | String          | No       | Name of the sub-processor.                                                                             |
+| `categories` | Array of Object | Yes      | Array of filters to match to a log, and their corresponding custom `name` values to assign to the log. |
+| `target`     | String          | Yes      | Name of the target attribute whose value is defined by the matching category.                          |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -360,3 +369,7 @@ Assigns a category to each output element based on a filter query matching eleme
 
 [1]: /api/v1/logs-pipelines/
 [2]: https://app.datadoghq.com/logs/pipelines
+[3]: /logs/log_configuration/processors/remapper/
+[4]: /logs/log_configuration/processors/string_builder_processor/
+[5]: /logs/log_configuration/processors/arithmetic_processor/
+[6]: /logs/log_configuration/processors/category_processor/
