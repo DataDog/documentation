@@ -54,8 +54,6 @@ export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endp
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE},compute_stats=true"
 ```
 
-<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
-
 #### Manual instrumentation
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
@@ -207,7 +205,7 @@ If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP t
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP traces intake endpoint.
    **Solution**: To request access, contact your Customer Success Manager.
 - The `dd-otlp-source` header is missing or has an incorrect value.
-   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
+   **Solution**: Make sure the `dd-otlp-source` header is set with the proper value for your site.
 - The endpoint URL is incorrect for your organization.
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
 
