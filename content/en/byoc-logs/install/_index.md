@@ -41,7 +41,6 @@ BYOC Logs supports the following object storage types:
   {{< nextlink href="/byoc-logs/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/gcp_gke" >}}Install on GCP GKE{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/install/custom_k8s" >}}Install on Kubernetes with PostgreSQL and MinIO{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [2]: /byoc-logs/install/docker/
