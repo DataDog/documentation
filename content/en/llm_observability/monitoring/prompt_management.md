@@ -2,18 +2,12 @@
 title: Prompt Management
 description: Create, version, and retrieve prompts from a centralized registry with Prompt Management, decoupling prompt iteration from your application's deployment cycle.
 
-further_reading:
-  - link: "/llm_observability/monitoring/prompt_tracking"
-    tag: "Documentation"
-    text: "Prompt Tracking"
-  - link: "/llm_observability/playground"
-    tag: "Documentation"
-    text: "Playground"
-  - link: "/llm_observability/instrumentation/sdk"
-    tag: "Documentation"
-    text: "Agent Observability SDK"
-
 ---
+
+{{< callout url="https://www.datadoghq.com/" btn_hidden="true">}}
+Prompt Management is in Preview.
+{{< /callout >}}
+
 
 ## Overview
 
@@ -64,7 +58,7 @@ In the save dialog:
 
 | Field | Description |
 |-------|-------------|
-| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt (for example, `support-reply`). Use this ID to fetch the prompt at runtime with `LLMObs.get_prompt()`. |
+| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt (for example, `customer-support-greeting`). Use this ID to fetch the prompt at runtime with `LLMObs.get_prompt()`. |
 | {{< ui >}}Description{{< /ui >}} | Optional notes about this version. |
 | {{< ui >}}Deployment{{< /ui >}} | The environment to deploy this version to. |
 
@@ -162,9 +156,19 @@ prompt = LLMObs.get_prompt("customer-support-greeting")
 messages = prompt.format(company="Acme Inc.", question="How do I reset my password?")
 ```
 
-By default, `get_prompt` returns the latest version of a prompt. If `DD_ENV` is set, `get_prompt` instead returns the version deployed to that environment. See [Environments and targeting](#environments-and-targeting).
+By default, `get_prompt` returns the latest version of a prompt. Retrieved prompts are cached locally for 60 seconds by default (configurable with `DD_LLMOBS_PROMPTS_CACHE_TTL`), so repeated calls to `get_prompt` don't add a network call on every LLM request.
 
-Retrieved prompts are cached locally for 60 seconds by default (configurable with `DD_LLMOBS_PROMPTS_CACHE_TTL`), so repeated calls to `get_prompt` don't add a network call on every LLM request.
+#### Environments
+
+Set `DD_ENV` to scope which prompt version an application receives at runtime, based on where a version is deployed in the registry (see [Create a prompt](#create-a-prompt)):
+
+```python
+prompt = LLMObs.get_prompt("customer-support-greeting")
+```
+
+<div class="alert alert-warning">The <code>label</code> argument on <code>get_prompt</code> is deprecated in favor of <code>DD_ENV</code>-based scoping.</div>
+
+For advanced serving rules, such as rolling out a new prompt version to a subset of traffic, set up [Feature Flags][8].
 
 ### Via API
 
@@ -190,7 +194,27 @@ curl -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-
 
 The raw HTTP endpoint always returns the latest version of a prompt. `DD_ENV`-based resolution is only available through the SDK's `get_prompt` method.
 
-### Monitor prompt usage
+#### Fetch a specific version
+
+Endpoint
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/prompts/{prompt_id}/versions/{version}`
+
+Method
+: `GET`
+
+Headers (required)
+- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
+
+{{< tabs >}}
+{{% tab "Curl" %}}
+{{< code-block lang="bash" >}}
+curl -s -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions/2" \
+-H "DD-API-KEY: <YOUR_DATADOG_API_KEY>"
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## Monitor prompt usage
 
 To see prompt metadata on the LLM spans it generates, Agent Observability must be enabled (with `LLMObs.enable()` or the equivalent environment variables).   
 
@@ -210,8 +234,8 @@ response = openai_client.chat.completions.create(
 For LLM calls that aren't auto-instrumented, or when the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), tag the span manually with `LLMObs.annotation_context` and `prompt.to_annotation_dict()`:
 
 ```python
-prompt = LLMObs.get_prompt("support-reply", label="production")
-variables = {"question": "How do I reset my password?"}
+prompt = LLMObs.get_prompt("customer-support-greeting")
+variables = {"company": "Acme Inc.", "question": "How do I reset my password?"}
 
 with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
     response = your_llm_client.chat(messages=prompt.format(**variables))
@@ -221,19 +245,6 @@ See [Prompt Tracking][1] for details.
 
 <div class="alert alert-info">An explicit <code>annotate(prompt=...)</code> or <code>annotation_context(prompt=...)</code> call always takes priority over automatic tagging.</div>
 
-## Environments and targeting
-
-Set `DD_ENV` to scope which prompt version an application receives at runtime, based on where a version is deployed in the registry (see [Create a prompt](#create-a-prompt)). Combine `DD_ENV` with a `targeting_key` to roll out a new prompt version to a subset of traffic before making it the default for an environment:
-
-```python
-prompt = LLMObs.get_prompt(
-    "customer-support-greeting",
-    targeting_key=user_id,
-)
-```
-
-<div class="alert alert-warning">The <code>label</code> argument on <code>get_prompt</code> is deprecated in favor of <code>DD_ENV</code>-based scoping. Use <code>DD_ENV</code> and <code>targeting_key</code> for environment-scoped rollouts and targeting.</div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -241,3 +252,4 @@ prompt = LLMObs.get_prompt(
 [1]: /llm_observability/monitoring/prompt_tracking
 [2]: /account_management/api-app-keys/#api-keys
 [3]: /account_management/api-app-keys/#application-keys
+[8]: /feature_flags/
