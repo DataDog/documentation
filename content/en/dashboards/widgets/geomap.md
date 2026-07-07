@@ -13,7 +13,7 @@ further_reading:
   text: "Notebooks"
 ---
 
-The geomap widget visualizes geographic data with shaded regions or points. It can be used to:
+The Geomap widget visualizes geographic data with shaded regions or points. It can be used to:
 - View user sessions by country.
 - Filter to see a list of all sessions in a new tab.
 - View user sessions filtered by employee.
