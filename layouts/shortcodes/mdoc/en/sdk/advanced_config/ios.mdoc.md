@@ -686,7 +686,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints — see below.
+- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints—see below.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 {% alert level="info" %}
@@ -772,8 +772,8 @@ RUM.enable(
 ```
 
 **Note**: `data` can be `nil` for reasons unrelated to response size, such as tasks without a completion handler (for example, async/await) or download tasks. In registered-delegate mode (when using `URLSessionInstrumentation.enableDurationBreakdown`), `data` is additionally `nil` in these cases:
-- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`) — the body is never buffered.
-- Responses of other types whose body exceeds 512 KB — the buffered data is discarded entirely, not truncated.
+- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`)—the body is never buffered.
+- Responses of other types whose body exceeds 512 KB—the buffered data is discarded entirely, not truncated.
 
 #### Capture resource headers
 
