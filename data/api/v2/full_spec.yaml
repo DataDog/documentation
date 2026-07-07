@@ -28727,12 +28727,12 @@ components:
             - "department:engineering"
             - "region:us-east-1"
           env: "production"
-          finished_at: 1693491984000000000
+          finished_at: "2023-08-31T14:26:24Z"
           git:
             commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
             repository_id: "github.com/organization/example-repository"
           service: "shopist"
-          started_at: 1693491974000000000
+          started_at: "2023-08-31T14:26:14Z"
           team: "backend"
           version: "v1.12.07"
         id: "4242fcdd31586083"
@@ -28756,10 +28756,10 @@ components:
           example: production
           type: string
         finished_at:
-          description: Unix timestamp when the deployment finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
+          description: The time when the deployment finished.
+          example: "2023-08-31T14:26:24Z"
+          format: date-time
+          type: string
         git:
           $ref: "#/components/schemas/DORAGitInfoResponse"
         service:
@@ -28767,10 +28767,10 @@ components:
           example: shopist
           type: string
         started_at:
-          description: Unix timestamp when the deployment started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
+          description: The time when the deployment started.
+          example: "2023-08-31T14:26:14Z"
+          format: date-time
+          type: string
         team:
           description: Name of the team owning the deployed service.
           example: backend
@@ -28782,7 +28782,6 @@ components:
       required:
         - service
         - started_at
-        - finished_at
       type: object
     DORADeploymentPatchRemediation:
       description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time.
@@ -28960,12 +28959,12 @@ components:
                 - "department:engineering"
                 - "region:us-east-1"
               env: "production"
-              finished_at: 1693491984000000000
+              finished_at: "2023-08-31T14:26:24Z"
               git:
                 commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
                 repository_id: "github.com/organization/example-repository"
               service: "shopist"
-              started_at: 1693491974000000000
+              started_at: "2023-08-31T14:26:14Z"
               team: "backend"
               version: "v1.12.07"
             id: "4242fcdd31586083"
@@ -28975,12 +28974,12 @@ components:
                 - "language:go"
                 - "department:platform"
               env: "production"
-              finished_at: 1693492084000000000
+              finished_at: "2023-08-31T14:28:04Z"
               git:
                 commit_sha: "77bdc9350f2cc9b250b69abddab733dd55e1a599"
                 repository_id: "github.com/organization/api-service"
               service: "api-service"
-              started_at: 1693492074000000000
+              started_at: "2023-08-31T14:27:54Z"
               team: "backend"
               version: "v2.1.0"
             id: "4242fcdd31586084"
@@ -29102,12 +29101,12 @@ components:
                 - "incident_type:database"
                 - "department:engineering"
               env: "production"
-              finished_at: 1693492274000000000
+              finished_at: "2023-08-31T14:31:14Z"
               name: "Database outage"
               services:
                 - "shopist"
               severity: "SEV-1"
-              started_at: 1693492174000000000
+              started_at: "2023-08-31T14:29:34Z"
               team: "backend"
             id: "4242fcdd31586085"
             type: "dora_incident"
@@ -29116,13 +29115,13 @@ components:
                 - "incident_type:service_down"
                 - "department:platform"
               env: "production"
-              finished_at: 1693492474000000000
+              finished_at: "2023-08-31T14:34:34Z"
               name: "API service outage"
               services:
                 - "api-service"
                 - "payment-service"
               severity: "SEV-2"
-              started_at: 1693492374000000000
+              started_at: "2023-08-31T14:32:54Z"
               team: "backend"
             id: "4242fcdd31586086"
             type: "dora_incident"
@@ -29163,7 +29162,7 @@ components:
             - "incident_type:database"
             - "department:engineering"
           env: "production"
-          finished_at: 1693492274000000000
+          finished_at: "2023-08-31T14:31:14Z"
           git:
             commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
             repository_url: "https://github.com/organization/example-repository"
@@ -29171,7 +29170,7 @@ components:
           services:
             - "shopist"
           severity: "SEV-1"
-          started_at: 1693492174000000000
+          started_at: "2023-08-31T14:29:34Z"
           team: "backend"
         id: "4242fcdd31586085"
         type: "dora_incident"
@@ -29194,10 +29193,10 @@ components:
           example: production
           type: string
         finished_at:
-          description: Unix timestamp when the incident finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
+          description: The time when the incident finished.
+          example: "2023-08-31T14:26:24Z"
+          format: date-time
+          type: string
         git:
           $ref: "#/components/schemas/DORAGitInfo"
         name:
@@ -29216,10 +29215,10 @@ components:
           example: SEV-1
           type: string
         started_at:
-          description: Unix timestamp when the incident started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
+          description: The time when the incident started.
+          example: "2023-08-31T14:26:14Z"
+          format: date-time
+          type: string
         team:
           description: Name of the team owning the services impacted.
           example: backend
@@ -29228,8 +29227,6 @@ components:
           description: Version to correlate with APM Deployment Tracking.
           example: v1.12.07
           type: string
-      required:
-        - started_at
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
@@ -133814,9 +133811,9 @@ paths:
                     data:
                       - attributes:
                           env: production
-                          finished_at: 1693491984000000000
+                          finished_at: "2023-08-31T14:26:24Z"
                           service: test-service
-                          started_at: 1693491974000000000
+                          started_at: "2023-08-31T14:26:14Z"
                           team: backend
                         id: abc-123
                         type: dora_deployment
@@ -133866,9 +133863,9 @@ paths:
                     data:
                       attributes:
                         env: production
-                        finished_at: 1693491984000000000
+                        finished_at: "2023-08-31T14:26:24Z"
                         service: test-service
-                        started_at: 1693491974000000000
+                        started_at: "2023-08-31T14:26:14Z"
                         team: backend
                       id: abc-123
                       type: dora_deployment
@@ -134093,7 +134090,7 @@ paths:
                           services:
                             - test-service
                           severity: SEV-1
-                          started_at: 1693492174000000000
+                          started_at: "2023-08-31T14:29:34Z"
                           team: backend
                         id: abc-123
                         type: dora_failure
@@ -134147,7 +134144,7 @@ paths:
                         services:
                           - test-service
                         severity: SEV-1
-                        started_at: 1693492174000000000
+                        started_at: "2023-08-31T14:29:34Z"
                         team: backend
                       id: abc-123
                       type: dora_failure
