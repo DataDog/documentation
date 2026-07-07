@@ -27,7 +27,7 @@ Before setting up Test Parallelization:
 - Set up [Test Optimization][1].
 - For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
 - For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
-- For JavaScript: use the `dd-trace` package version `6.0.0` or later, Node.js, and Jest.
+- For JavaScript: use the `dd-trace` package version `5.111.0` or later, Node.js, and Jest.
 - Enable [Test Impact Analysis][2] for the test service when you want Test Parallelization to split only the tests affected by a code change.
 
 ## Concepts
