@@ -115,7 +115,7 @@ Creating a prompt with a `prompt_id` that already exists in the registry returns
 Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
 - **Create a new version**: {{< ui >}}Edit{{< /ui >}} the messages in the Prompt Editor to create a new version of an existing prompt.
-- **Deploy a version to a different environment**: select a version and update its {{< ui >}}Deployment{{< /ui >}} target.
+- **Deploy a version to a different environment**: select a version and update its {{< ui >}}Deployment{{< /ui >}} target to new environments.
 - **Delete a prompt**: select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
 
 #### Via API
@@ -147,6 +147,18 @@ curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer
 }'
 {{< /code-block >}}
 
+For example, deploy a version to a new environment:
+
+{{< code-block lang="bash" >}}
+curl -X PATCH "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions/2" \
+-H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+-H "Content-Type: application/json" \
+-d '{
+  "environments": ["staging"]
+}'
+{{< /code-block >}}
+
 ## Retrieve a prompt
 
 ### Via SDK
@@ -160,7 +172,7 @@ messages = prompt.format(company="Acme Inc.", question="How do I reset my passwo
 
 By default, `get_prompt` returns the latest version of a prompt. Retrieved prompts are cached locally for 60 seconds by default (configurable with `DD_LLMOBS_PROMPTS_CACHE_TTL`), so repeated calls to `get_prompt` don't add a network call on every LLM request.
 
-#### Environments
+#### Retrieve a specific version
 
 Set `DD_ENV` to scope which prompt version an application receives at runtime, based on where a version is deployed in the registry (see [Create a prompt](#create-a-prompt)):
 
@@ -170,7 +182,7 @@ prompt = LLMObs.get_prompt("customer-support-greeting")
 
 <div class="alert alert-warning">The <code>label</code> argument on <code>get_prompt</code> is deprecated in favor of <code>DD_ENV</code>-based scoping.</div>
 
-For advanced serving rules, such as rolling out a new prompt version to a subset of traffic, set up [Feature Flags][8].
+For advanced serving rules, such as rolling out a new prompt version to a subset of traffic, see [Feature Flags][8].
 
 ### Via API
 
