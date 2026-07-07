@@ -421,7 +421,7 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 <div class="alert alert-info">Failure screenshots are in Preview.</div>
 
-When a Cypress test fails, the tracer can upload the failure screenshot that Cypress captures so it appears alongside the test result in Datadog. Set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to `true` when you run your tests:
+When a Cypress test fails, the tracer can upload the failure screenshot that Cypress captures so it appears alongside the test result in Datadog. Set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to `true` (default `false`) when you run your tests:
 
 {{< code-block lang="shell" >}}
 DD_TEST_FAILURE_SCREENSHOTS_ENABLED=true DD_TEST_SESSION_NAME=ui-tests yarn test:ui
@@ -631,12 +631,6 @@ The following is a list of the most important configuration settings that can be
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
-
-`test_failure_screenshots_enabled`
-: Uploads the failure screenshot of a failed Cypress test so it appears in the **Media** tab of the test result. Best-effort: a failed upload never fails your test run. Cypress only.<br/>
-**Environment variable**: `DD_TEST_FAILURE_SCREENSHOTS_ENABLED`<br/>
-**Default**: `false`<br/>
-**Example**: `true`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
 
