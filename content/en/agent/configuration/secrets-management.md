@@ -33,11 +33,15 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
+Notes:
+- **Agent 7.70+**: Native secrets management support introduced.
+- **Agent 7.76+**: Native secrets management available for FIPS-enabled Agents.
+- **Agent 7.77+**: The [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later in containerized environments. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
+- **Agent 7.80+**: Support for [multiple backends](#multiple-backends).
 
-Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
+#### Single backend
 
-`secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution.
+Use `secret_backend_type` and `secret_backend_config` in `datadog.yaml` to configure a single secret backend:
 
 ```yaml
 # datadog.yaml
@@ -46,8 +50,6 @@ secret_backend_type: <backend_type>
 secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
-
-**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
@@ -629,7 +631,7 @@ spec:
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
 
-**Available in Agent version 7.74+**
+*Available in Agent version 7.74+*
 
 The following GCP services are supported:
 
@@ -1013,7 +1015,7 @@ secret_backend_config:
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 The following Kubernetes services are supported:
 
@@ -1252,7 +1254,7 @@ override:
 
 {{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 The following Docker services are supported:
 
@@ -1408,7 +1410,7 @@ secret_backend_config:
 
 {{% tab "TEXT File Backend" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 **Note**: Each secret must be stored in its own individual text file.
 
@@ -1453,10 +1455,99 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
+#### Multiple backends
+
+*Available in Agent version 7.80+*
+
+Instead of a single `secret_backend_type`, you can declare multiple named backends under `multi_secret_backends`. Each backend has its own `type` and `config`, and secrets are routed to a specific backend using a `backendName;` prefix in the `ENC[]` handle.
+
+If more than one of the following is set, the highest-priority setting takes effect and the others are ignored with a warning:
+
+1. `secret_backend_command`
+2. `secret_backend_type`
+3. `multi_secret_backends`
+
+##### Configuration
+
+```yaml
+# datadog.yaml
+
+multi_secret_backends:
+  <backend_name>:
+    type: <backend_type>
+    config:
+      <KEY_1>: <VALUE_1>
+```
+
+Each `<backend_name>` is an arbitrary identifier you choose. It cannot contain a semicolon, because `;` is the delimiter used in `ENC[]` handles. The `type` and `config` fields follow the same schema as `secret_backend_type` and `secret_backend_config` for the corresponding backend.
+
+##### `ENC[]` notation
+
+When `multi_secret_backends` is active, prefix `ENC[]` handles with the backend name followed by a semicolon:
+
+```
+ENC[<backend_name>;<secret_key>]
+```
+
+Only the **first** semicolon is treated as the backend delimiter. Secret keys that themselves contain semicolons (for example, Kubernetes-style `namespace/secret-name;key`) continue to work.
+
+##### Example
+
+The following configuration reads secrets from two file backends simultaneously:
+
+```yaml
+# datadog.yaml
+multi_secret_backends:
+  yaml_secrets:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+  aws_secrets:
+    type: aws.secrets
+    config:
+      aws_session:
+        aws_region: us-east-1
+```
+
+Reference secrets by prefixing with the backend name:
+
+```yaml
+# datadog.yaml
+api_key: ENC[yaml_secrets;api_key]
+app_key: ENC[aws_secrets;My-Secrets;appKey]
+```
+
+##### Migrating from `secret_backend_type`
+
+To switch from a single `secret_backend_type` to `multi_secret_backends`:
+
+1. Move `secret_backend_type` and `secret_backend_config` into a named entry under `multi_secret_backends`.
+2. Remove `secret_backend_type` and `secret_backend_config` from the top level.
+3. Update all `ENC[secretKey]` handles to `ENC[backendName;secretKey]`.
+
+```yaml
+# Before
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[api_key]
+
+# After
+multi_secret_backends:
+  my_yaml:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[my_yaml;api_key]
+```
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
 
-For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh` starting with version v7.32.0. This script supports reading secrets from:
+*Available in Agent version 7.32+*
+
+For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh`. This script supports reading secrets from:
 
 * Files: using `ENC[file@/path/to/file]`
 * Kubernetes Secrets: using `ENC[k8s_secret@namespace/secret-name/key]`
@@ -1730,7 +1821,9 @@ On Windows, your executable must:
 
 ## Refreshing secrets at runtime
 
-Starting in Agent v7.67, you can configure the Agent to refresh resolved secrets without requiring a restart.
+*Available in Agent version 7.67+*
+
+You can configure the Agent to refresh resolved secrets without requiring a restart.
 
 Set a refresh interval:
 ```yaml
@@ -1765,7 +1858,9 @@ secret_refresh_scatter: false
 ```
 
 ### Autodiscovery check secrets refresh
-Starting in Agent v7.76, scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
+*Available in Agent version 7.76+*
+
+Scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
 
 ```yaml
 labels:
@@ -1792,7 +1887,9 @@ The Agent can then trigger secrets refresh at either the interval set in `secret
 
 ### Automatic secrets refresh on API key failure / invalidation
 
-Starting in Agent version v7.74, the Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid or expired API key.
+*Available in Agent version 7.74+*
+
+The Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid or expired API key.
 
 To enable this feature, set `secret_refresh_on_api_key_failure_interval` to an interval in minutes in your `datadog.yaml` file. Set to `0` to disable (default).
 

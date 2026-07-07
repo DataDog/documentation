@@ -25,7 +25,8 @@ Test Parallelization is in Preview. Complete the form to request access.
 Before setting up Test Parallelization:
 
 - Set up [Test Optimization][1].
-- Use the `datadog-ci` gem version `1.31.0` or later.
+- For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
+- For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
 - Enable [Test Impact Analysis][2] for the test service when you want Test Parallelization to split only the tests affected by a code change.
 
 ## Concepts
@@ -79,15 +80,31 @@ chmod +x bin/ddtest
 
 If you run your tests on a single CI node, run `ddtest run`:
 
+{{< tabs >}}
+{{% tab "Ruby" %}}
+
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec
 {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform python --framework pytest
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 By default, `ddtest` can start one worker for each physical CPU core available on the node.
 
 ## Run across multiple CI nodes
 
 For multiple CI nodes, run `ddtest plan` once, share the `.testoptimization/` directory with every CI node, and pass each node its zero-indexed CI node number:
+
+{{< tabs >}}
+{{% tab "Ruby" %}}
 
 {{< code-block lang="bash" >}}
 bin/ddtest plan \
@@ -102,6 +119,25 @@ bin/ddtest run \
   --ci-node <CI_NODE_INDEX>
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Python" %}}
+
+{{< code-block lang="bash" >}}
+bin/ddtest plan \
+  --platform python \
+  --framework pytest \
+  --min-parallelism 1 \
+  --max-parallelism 8
+
+bin/ddtest run \
+  --platform python \
+  --framework pytest \
+  --ci-node <CI_NODE_INDEX>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 In CI-node mode, `ddtest` uses one local worker by default. To start multiple workers in each CI node, set `--ci-node-workers` to a positive integer or `ncpu`.
 
 For a list of available environment variables, defaults, and examples, see [Configuration][4].
@@ -109,6 +145,8 @@ For a list of available environment variables, defaults, and examples, see [Conf
 ## CI examples
 
 Use the following examples as starting points for GitHub Actions and CircleCI.
+
+{{< collapse-content title="Ruby" level="h3" >}}
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -295,6 +333,205 @@ workflows:
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< /collapse-content >}}
+
+{{< collapse-content title="Python" level="h3" >}}
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
+
+The plan job chooses the CI node count and emits a matrix. The test job downloads the `.testoptimization/` artifact and runs only the files assigned to its matrix node.
+
+{{< code-block lang="yaml" >}}
+name: CI with Test Parallelization
+
+on: [push]
+
+env:
+  DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: python
+  DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: pytest
+  DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+  DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
+
+jobs:
+  dd_plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.dd_plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download ddtest binary
+        run: |
+          mkdir -p bin
+          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
+          mv bin/ddtest-linux-amd64 bin/ddtest
+          chmod +x bin/ddtest
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
+      - name: Configure Datadog Test Optimization
+        uses: datadog/test-visibility-github-action@v2
+        with:
+          languages: python
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: datadoghq.com
+      - id: dd_plan
+        name: Plan test execution
+        run: bin/ddtest plan
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dd-artifacts
+          path: .testoptimization
+          include-hidden-files: true
+
+  dd_test:
+    runs-on: ubuntu-latest
+    needs: [dd_plan]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.dd_plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download ddtest binary
+        run: |
+          mkdir -p bin
+          gh release download --repo DataDog/ddtest --pattern "ddtest-linux-amd64" --dir bin
+          mv bin/ddtest-linux-amd64 bin/ddtest
+          chmod +x bin/ddtest
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dd-artifacts
+          path: .testoptimization
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
+      - name: Configure Datadog Test Optimization
+        uses: datadog/test-visibility-github-action@v2
+        with:
+          languages: python
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: datadoghq.com
+      - name: Run tests
+        run: bin/ddtest run --ci-node ${{ matrix.ci_node_index }}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
+The setup workflow runs `ddtest plan`, stores `.testoptimization/`, and continues into a test workflow with the selected CI node count.
+
+In `.circleci/config.yml`:
+
+{{< code-block lang="yaml" >}}
+version: "2.1"
+setup: true
+
+orbs:
+  test-optimization-circleci-orb: datadog/test-optimization-circleci-orb@1
+  continuation: circleci/continuation@0.2.0
+
+jobs:
+  plan:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Install Python dependencies
+          command: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
+      - test-optimization-circleci-orb/autoinstrument:
+          languages: python
+          site: datadoghq.com
+      - run:
+          name: Download ddtest
+          command: |
+            mkdir -p bin
+            curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/ddtest-linux-amd64 -o bin/ddtest
+            chmod +x bin/ddtest
+      - run:
+          name: Plan tests
+          command: bin/ddtest plan --platform python --framework pytest
+          environment:
+            DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+            DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
+      - save_cache:
+          key: ddtest-plan-{{ .Revision }}
+          paths:
+            - .testoptimization
+            - bin/ddtest
+      - run:
+          name: Continue with selected parallelism
+          command: |
+            desired=$(cat .testoptimization/runner/parallel-runners.txt 2>/dev/null || echo 1)
+            printf '{"parallelism": %s}\n' "${desired}" > pipeline-parameters.json
+      - continuation/continue:
+          configuration_path: .circleci/test.yml
+          parameters: pipeline-parameters.json
+
+workflows:
+  plan:
+    jobs:
+      - plan
+{{< /code-block >}}
+
+In `.circleci/test.yml`:
+
+{{< code-block lang="yaml" >}}
+version: "2.1"
+
+parameters:
+  parallelism:
+    type: integer
+    default: 1
+
+orbs:
+  test-optimization-circleci-orb: datadog/test-optimization-circleci-orb@1
+
+jobs:
+  test:
+    parallelism: << pipeline.parameters.parallelism >>
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - ddtest-plan-{{ .Revision }}
+      - run:
+          name: Install Python dependencies
+          command: python -m pip install -r requirements.txt "ddtrace>=4.11.0" pytest
+      - test-optimization-circleci-orb/autoinstrument:
+          languages: python
+          site: datadoghq.com
+      - run:
+          name: Run tests
+          command: |
+            export DD_TEST_SESSION_NAME="python-tests-${CIRCLE_NODE_INDEX:-0}"
+            bin/ddtest run --platform python --framework pytest --ci-node "${CIRCLE_NODE_INDEX:-0}"
+
+workflows:
+  test:
+    jobs:
+      - test
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /collapse-content >}}
+
 ## Use third-party test runners
 
 Use `ddtest` plan files when you want `ddtest` to choose which files should run, but another runner should execute them.
@@ -310,6 +547,15 @@ For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
 
 {{< code-block lang="bash" >}}
 KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt bundle exec rake knapsack_pro:queue:rspec
+{{< /code-block >}}
+
+For pytest, enable the `ddtrace` plugin with `PYTEST_ADDOPTS` and pass the file list to `python -m pytest`:
+
+{{< code-block lang="bash" >}}
+export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:+$PYTEST_ADDOPTS }--ddtrace"
+if [ -s .testoptimization/runner/test-files.txt ]; then
+  xargs python -m pytest < .testoptimization/runner/test-files.txt
+fi
 {{< /code-block >}}
 
 ## Further reading
