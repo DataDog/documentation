@@ -190,19 +190,11 @@ curl -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-
 
 The raw HTTP endpoint always returns the latest version of a prompt. `DD_ENV`-based resolution is only available through the SDK's `get_prompt` method.
 
-### Link a prompt to a trace
+### Monitor prompt usage
 
-To see prompt metadata on the LLM spans it generates, LLM Observability must be enabled (with `LLMObs.enable()` or the equivalent environment variables). Use `LLMObs.annotation_context` with `prompt.to_annotation_dict()` to attach a retrieved prompt to the span it generates:
+To see prompt metadata on the LLM spans it generates, Agent Observability must be enabled (with `LLMObs.enable()` or the equivalent environment variables).   
 
-```python
-prompt = LLMObs.get_prompt("support-reply", label="production")
-variables = {"question": "How do I reset my password?"}
-
-with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
-    response = your_llm_client.chat(messages=prompt.format(**variables))
-```
-
-For LLM calls made through an auto-instrumented provider integration (OpenAI, Anthropic, and others), passing the output of `prompt.format()` directly into the call also tags the resulting span automatically, without an `annotation_context` block:
+For LLM calls made through an auto-instrumented provider integration (OpenAI, Anthropic, and others), passing the output of `prompt.format()` directly into the call tags the resulting span automatically, without extra instrumentation:
 
 ```python
 prompt = LLMObs.get_prompt("customer-support-greeting")
@@ -215,7 +207,17 @@ response = openai_client.chat.completions.create(
 # The resulting LLM span is automatically tagged with the customer-support-greeting prompt.
 ```
 
-If the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), the span isn't tagged automatically; use `annotation_context(prompt=...)` instead. See [Prompt Tracking][1] for details.
+For LLM calls that aren't auto-instrumented, or when the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), tag the span manually with `LLMObs.annotation_context` and `prompt.to_annotation_dict()`:
+
+```python
+prompt = LLMObs.get_prompt("support-reply", label="production")
+variables = {"question": "How do I reset my password?"}
+
+with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
+    response = your_llm_client.chat(messages=prompt.format(**variables))
+```
+
+See [Prompt Tracking][1] for details.
 
 <div class="alert alert-info">An explicit <code>annotate(prompt=...)</code> or <code>annotation_context(prompt=...)</code> call always takes priority over automatic tagging.</div>
 
