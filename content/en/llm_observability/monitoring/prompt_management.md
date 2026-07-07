@@ -34,16 +34,31 @@ Create prompts and publish new versions from the {{< ui >}}Prompts{{< /ui >}} UI
 
 ### Create a prompt
 
-#### Via UI
+#### Via UI: from an existing tracked prompt
 
-Navigate to {{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Prompts{{< /ui >}} and click {{< ui >}}+ New Prompt{{< /ui >}} to build a prompt from scratch. To add a prompt that Agent Observability already detected from your application's spans (see [Prompt Tracking][1]) to the registry, open that prompt in the Prompts view and click {{< ui >}}Save As{{< /ui >}} to promote it using the same editor.
+To add a prompt that you already track in Agent Observability (see [Prompt Tracking][1]), navigate to the Prompt registry, open that prompt and click {{< ui >}}Register{{< /ui >}} to promote it.
+You can then import start iterating on it from the UI, and fetch it at runtime from Datadog.
+
+#### Via UI: from scratch
+
+Navigate to the Prompts registry page and click {{< ui >}}+ New Prompt{{< /ui >}} to build a prompt from scratch. 
 
 In the Prompt Editor:
 
 1. Add one or more messages and assign each a role: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}}, or {{< ui >}}Assistant{{< /ui >}}.
-1. Use `{{variable_name}}` syntax in any message to add dynamic content.
-1. (Optional) Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
-1. Click {{< ui >}}Save As{{< /ui >}} to open the save dialog.
+2. Use `{{variable_name}}` syntax in any message to add dynamic content.
+3. (Optional) Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
+4. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
+
+We recommend structuring your prompt so that the user query and context get injected as variable like so:
+
+{{< code-block lang="bash" >}}
+  "template": [
+    {"role": "system", "content": "You are a support agent for {{company}}."},
+    {"role": "user", "content": "{{question}}"}
+  ]
+{{< /code-block >}}
+
 
 In the save dialog:
 
@@ -96,9 +111,9 @@ Creating a prompt with a `prompt_id` that already exists in the registry returns
 
 #### Via UI
 
-Open a prompt in the {{< ui >}}Prompts{{< /ui >}} view to:
+Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
-- **Publish a new version**: edit the messages in the Prompt Editor and click {{< ui >}}Save As{{< /ui >}} to add a version to the existing prompt.
+- **Create a new version**: {{< ui >}}Edit{{< /ui >}} the messages in the Prompt Editor to create a new version of an existing prompt.
 - **Deploy a version to a different environment**: select a version and update its {{< ui >}}Deployment{{< /ui >}} target.
 - **Delete a prompt**: select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
 
@@ -175,9 +190,19 @@ curl -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-
 
 The raw HTTP endpoint always returns the latest version of a prompt. `DD_ENV`-based resolution is only available through the SDK's `get_prompt` method.
 
-### Use a retrieved prompt in an LLM call
+### Link a prompt to a trace
 
-Pass the output of `prompt.format()` directly to an auto-instrumented LLM call. Agent Observability automatically tags the resulting LLM span with the prompt's ID, version, and variables, without an explicit annotation:
+To see prompt metadata on the LLM spans it generates, LLM Observability must be enabled (with `LLMObs.enable()` or the equivalent environment variables). Use `LLMObs.annotation_context` with `prompt.to_annotation_dict()` to attach a retrieved prompt to the span it generates:
+
+```python
+prompt = LLMObs.get_prompt("support-reply", label="production")
+variables = {"question": "How do I reset my password?"}
+
+with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
+    response = your_llm_client.chat(messages=prompt.format(**variables))
+```
+
+For LLM calls made through an auto-instrumented provider integration (OpenAI, Anthropic, and others), passing the output of `prompt.format()` directly into the call also tags the resulting span automatically, without an `annotation_context` block:
 
 ```python
 prompt = LLMObs.get_prompt("customer-support-greeting")
@@ -190,7 +215,7 @@ response = openai_client.chat.completions.create(
 # The resulting LLM span is automatically tagged with the customer-support-greeting prompt.
 ```
 
-Automatic tagging applies to LLM spans created by auto-instrumented provider integrations, such as OpenAI and Anthropic. If the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), the span isn't tagged automatically; annotate the span with `annotation_context(prompt=...)` instead. See [Prompt Tracking][1] for details.
+If the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), the span isn't tagged automatically; use `annotation_context(prompt=...)` instead. See [Prompt Tracking][1] for details.
 
 <div class="alert alert-info">An explicit <code>annotate(prompt=...)</code> or <code>annotation_context(prompt=...)</code> call always takes priority over automatic tagging.</div>
 
