@@ -68,7 +68,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
         ```json
         {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>"}
         ```
-        Make note of the secret path (AWS ARN, AKV URL, or GCP resource name `projects/{project}/secrets/{secret}/versions/{version}`, or `projects/{project}/locations/{location}/secrets/{secret}/versions/{version}` for GCP regional secrets). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
+        Make note of the secret path (AWS ARN, AKV URL, or GCP resource name). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
       - **Environment variables**: Set `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` directly on the runner container or pod. When using this method, leave the **Secret Path** field blank in the integration tile.
 1. Provision workspace access and entitlements for the service principal. See [Permissions][11] for full details.
    1. Grant the service principal **Workspace Admin** privileges. This allows Datadog to manage init script installations and updates automatically. Alternatively, assign more [granular permissions][11] for monitoring jobs, clusters, and queries.
@@ -97,7 +97,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. Set `image.tag` to `1.21.0-3`.
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5], [IAM Role][6], or [Workload Identity Federation for GKE][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5], [IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the deployment for these changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -122,7 +122,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Managed Identity][5], [IAM Role][6], or an attached [service account][7] on the GCE instance) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Managed Identity][5], [IAM Role][6], or [GCE service account][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
