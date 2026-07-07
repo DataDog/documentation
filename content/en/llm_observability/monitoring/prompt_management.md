@@ -30,8 +30,8 @@ Prompt Management works alongside [Prompt Tracking][1]: prompts fetched from the
 
 ## Prerequisites
 
-- Agent Observability Python SDK (`ddtrace`)
-- A [Datadog API key][2]. Write operations (creating or updating prompts) also require an [application key][3]
+- A [Datadog API key][2] to fetch the prompts. 
+- An [application key][3] for write operations (creating or updating prompts). 
 
 ## Create and manage prompts
 
@@ -57,13 +57,7 @@ In the Prompt Editor:
 
 We recommend structuring your prompt so that the user query and context get injected as variable like so:
 
-{{< code-block lang="bash" >}}
-  "template": [
-    {"role": "system", "content": "You are a support agent for {{company}}."},
-    {"role": "user", "content": "{{question}}"}
-  ]
-{{< /code-block >}}
-
+{{< img src="llm_observability/monitoring/prompt-creation.png" alt="Creating a Prompt in Agent Observability." style="width:100%;" >}}
 
 In the save dialog:
 
