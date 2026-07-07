@@ -58,7 +58,7 @@ DDSQL mode maps the columns of a published dataset to the host map's visualizati
 ### Configuration
 
 1. {{< ui >}}Query Type{{< /ui >}}: Select **DDSQL**.
-2. Select a dataset published from the [DDSQL Editor][5] or a [notebook][6]. Add a search query to filter its rows, and use {{< ui >}}Display first{{< /ui >}} to set the maximum number of rows to fetch (10, 25, 50, 100, 500, 1000, 5000, or a custom value). Click {{< ui >}}Preview Data{{< /ui >}} to inspect the dataset's columns and rows before mapping them.
+2. Select a dataset published from the [DDSQL Editor][5]. Add a search query to filter its rows, and use {{< ui >}}Display first{{< /ui >}} to set the maximum number of rows to fetch (10, 25, 50, 100, 500, 1000, 5000, or a custom value). Click {{< ui >}}Preview Data{{< /ui >}} to inspect the dataset's columns and rows before mapping them.
 3. Under {{< ui >}}Configure Points{{< /ui >}}, map dataset columns to visualization dimensions:
    - {{< ui >}}Label node by{{< /ui >}}: A column whose values uniquely identify and label each point.
    - {{< ui >}}Fill by{{< /ui >}}: A numeric column whose value determines the color of each point.
@@ -114,7 +114,7 @@ Map `service_name` to {{< ui >}}Label node by{{< /ui >}} and `outdated_dependenc
 
 ### Limits
 
-The widget fetches at most the number of rows configured in {{< ui >}}Display first{{< /ui >}}. If the query's result set exceeds this limit, rows are sorted by the `Fill` column in descending order and only the top rows are visualized. Refine the query's `WHERE` and `GROUP BY` clauses, or lower {{< ui >}}Display first{{< /ui >}}, to keep large result sets responsive.
+The widget fetches at most the number of rows configured in {{< ui >}}Display first{{< /ui >}}. If the query's result set exceeds this limit, rows are sorted by the `Fill` column in descending order and only the top rows are visualized. Refine the query's `WHERE` and `GROUP BY` clauses, or lower {{< ui >}}Display first{{< /ui >}}, to keep the widget responsive on large result sets.
 
 ## API
 
@@ -131,4 +131,3 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/
 [5]: /ddsql_editor/
-[6]: /notebooks/
