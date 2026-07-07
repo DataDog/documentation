@@ -69,7 +69,7 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 **Note**: Full propagation mode on Aurora MySQL requires version 3.
 
-**Note**: [mysqli::prepare][38] statements will only use service mode for propagation.
+**Note**: [mysqli::prepare][38] statements only use service mode for propagation.
 
 {{% /tab %}}
 
