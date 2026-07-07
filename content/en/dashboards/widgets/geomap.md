@@ -79,7 +79,6 @@ Metric queries don't include geographic coordinates. To plot metrics on a {{< ui
 1. Join your query with a reference table using a shared key, such as `store_id`. The reference table supplies the latitude and longitude for each point, along with any metadata you want to display. For more information, see [Reference Table Joins with Metrics][11].
 
 You can also:
-
 - Color points based on their metric values, and define color thresholds to highlight status, such as green, yellow, and red.
 - Customize the tooltip to display additional fields from the reference table.
 
