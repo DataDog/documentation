@@ -42,7 +42,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Cyprus | +357 |
 | Czech Republic | +420 |
 | Denmark | +45 |
-| Egypt | +20 |
+| Egypt** | +20 |
 | Estonia | +372 |
 | Faroe Islands | +298 |
 | Finland | +358 |
@@ -72,7 +72,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Liechtenstein | +423 |
 | Lithuania | +370 |
 | Luxembourg | +352 |
-| Malaysia | +60 |
+| Malaysia** | +60 |
 | Malta | +356 |
 | Mexico | +52 |
 | Moldova | +373 |
@@ -81,7 +81,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Morocco | +212 |
 | Netherlands | +31 |
 | New Zealand | +64 |
-| Nigeria* | +234 |
+| Nigeria*, ** | +234 |
 | North Macedonia | +389 |
 | Norway | +47 |
 | Pakistan | +92 |
@@ -107,7 +107,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Sweden | +46 |
 | Switzerland | +41 |
 | Thailand | +66 |
-| Tunisia | +216 |
+| Tunisia** | +216 |
 | Turkey | +90 |
 | U.S. Virgin Islands | +1 |
 | Ukraine | +380 |
@@ -119,12 +119,6 @@ If your country isn't listed in the following table, contact <a href="https://do
 
 \* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local SMS carrier restrictions or government regulations can limit delivery. For these regions, set up push notifications as your primary notification method.
 
-## Availability during trial
-
-During a free trial of On-Call, SMS and phone call notifications are not available for every country listed above.
-
-<div class="alert alert-danger">
-If you need to test On-Call in a country that isn't available during your trial, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
-</div>
+\*\* Available by request: SMS and phone call notifications for these countries are not enabled by default. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request access.
 
 [1]: /incident_response/on-call/notification_preferences/#supported-contact-methods
