@@ -9,6 +9,7 @@ aliases:
   - /security/application_security/setup/threat_detection/php
   - /security/application_security/setup/standalone/php
   - /security/application_security/enabling/compatibility/php
+  - /security/application_security/setup/php/compatibility
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
@@ -45,4 +46,4 @@ aliases:
 ## Additional Resources
 
 - [Troubleshooting Guide](/security/application_security/setup/php/troubleshooting)
-- [Compatibility Information](/security/application_security/setup/php/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/php)

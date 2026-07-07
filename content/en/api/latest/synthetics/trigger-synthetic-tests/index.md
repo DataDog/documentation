@@ -1,0 +1,3 @@
+---
+title: Trigger Synthetic tests
+---

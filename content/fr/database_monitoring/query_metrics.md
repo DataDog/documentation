@@ -68,7 +68,13 @@ La liste Query Metrics affiche les métriques liées aux requêtes, à la latenc
 
 Pour voir la liste complète des métriques recueillies, consultez la documentation relative aux données recueillies par l'intégration pour votre système de gestion de base de données :
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 Les vues Database Monitoring affichent principalement les métriques suivantes :

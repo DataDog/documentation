@@ -4,7 +4,7 @@ disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
   tag: "Blog"
-  text: "Introducing Bits AI Dev Agent for Code Security"
+  text: "Introducing Bits Code for Code Security"
 - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
   tag: "Blog"
   text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
@@ -38,9 +38,9 @@ Code Security scans your first-party code and open source libraries used in your
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
-- [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
-- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in Terraform files stored in your repositories
-- [Supply Chain Security](#supply-chain-security) for preventing malicious packages from entering your development environment and code repositories 
+- [Secret Scanning][8] for identifying and validating leaked secrets
+- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in IaC stored in your repositories
+- [Supply Chain Security](#supply-chain-security-preview) for preventing malicious packages from entering your development environment and code repositories 
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
@@ -84,13 +84,39 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can prevent leaked secrets throughout your software development life cycle with:
+- Pre-commit hooks to block secrets from being committed locally before they ever reach your repository
+- Pull-request gates to block leaked secrets from reaching your default branch
+- Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
 
-## Supply Chain Security
-Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
+Scans can run through your CI/CD pipelines or directly in Datadog with hosted scanning. See [Secret Scanning setup][9] to get started.
+
+## Infrastructure as Code Security (IaC Security)
+IaC Security analyzes infrastructure-as-code to detect misconfigurations before they are provisioned to your cloud environment. You can secure your infrastructure and CI/CD with:
+- In-line pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
+- Pull-request gates to block high-severity misconfigurations from reaching your production environment
+- Hundreds of detections across Terraform, CloudFormation, Kubernetes, GitHub Actions, and more
+
+With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
+
+## Supply Chain Security (Preview)
+
+{{< callout url=https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc/viewform?edit_requested=true
+ btn_hidden="false" header="Join the Preview!">}}
+Use this form to submit your request to join the Supply Chain Security Preview.
+{{< /callout >}}
+
+
+Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
+
+Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
+
+Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by GuardDog), known vulnerability advisories, and configurable recency thresholds. When it flags a package, it blocks installation immediately with a clear, actionable message (on both developer laptops and CI runners).
+
+In addition to protecting individual developer machines or CI pipelines, SCFW provides event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed.
 
 ## Code Security MCP Server (Preview)
-The [Code Security MCP Server][17] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
+The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
 
 ## Further Reading
 
@@ -104,12 +130,13 @@ The [Code Security MCP Server][17] is a local Model Context Protocol (MCP) serve
 [6]: /security/code_security/static_analysis/setup/
 [7]: /security/code_security/iast/setup/
 [8]: /security/code_security/secret_scanning/
-[9]: https://www.datadoghq.com/product-preview/secret-scanning/
+[9]: /security/code_security/secret_scanning/#set-up-secret-scanning
 [10]: /security/code_security/iac_security
-[11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc
 [12]: https://www.datadoghq.com/product-preview/malicious-pr-protection/
 [13]: /security/ticketing_integrations
 [14]: /security/notifications/
 [15]: /security/automation_pipelines/
 [16]: /security/code_security/dev_tool_int/
-[17]: /security/code_security/dev_tool_int/mcp_server/
+[17]: /security/code_security/iac_security/setup/?tab=github
+[18]: /security/cloud_security_management/
+[19]: /security/code_security/dev_tool_int/mcp_server/

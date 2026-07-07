@@ -30,7 +30,7 @@ With these three tags, you can:
 **Notes**:
 
 - The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
-- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- The official `service` of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official `service` of a log, use the Unified Service Tagging options below or add a full custom [Docker][21] or [Kubernetes][22] Autodiscovery log configuration.
 - Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
@@ -79,11 +79,17 @@ To setup unified service tagging in a containerized environment:
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
-
 ##### Full configuration
 
-To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
+To get the full range of unified service tagging in Kubernetes, add the following labels to both the parent workload and the pod template.
+
+- `tags.datadoghq.com/env: "<ENV>"`
+- `tags.datadoghq.com/service: "<SERVICE>"`
+- `tags.datadoghq.com/version: "<VERSION>" `
+
+For APM-enabled applications additionally set the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` for the Datadog tracers.
+
+You can set these environment variables manually or with the [Kubernetes's downward API][2]. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
 
 ```yaml
 apiVersion: apps/v1
@@ -93,28 +99,29 @@ metadata:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
     tags.datadoghq.com/version: "<VERSION>" 
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" 
-  containers:
-  -  ...
-     env:
-          - name: DD_ENV
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/env']
-          - name: DD_SERVICE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION 
-            valueFrom: 
-              fieldRef: 
-                fieldPath: metadata.labels['tags.datadoghq.com/version']
+# (...)
+spec: 
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "<ENV>"
+        tags.datadoghq.com/service: "<SERVICE>"
+        tags.datadoghq.com/version: "<VERSION>" 
+    containers:
+    - # (...)
+      env:
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
 You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags:
@@ -130,11 +137,35 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
 ```
 <div class="alert alert-danger">The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
 
+These labels cover Kubernetes CPU, memory, network, and disk metrics, as well as general container tagging and log collection. These labels are also used by the Cluster Agent and its reported [Kubernetes State Metrics][3].
+
 ##### Partial configuration
+
+###### Global env handling
+If your Kubernetes cluster is entirely a single environment, for example, only `env:production` nodes and workloads, you can provide this to your Agent configuration rather than tagging each workload individually.
+
+With the Datadog Operator:
+```yaml
+#(...)
+spec:
+  global:
+    tags:
+      - "env:<ENV>"
+```
+
+With the Datadog Helm Chart:
+```yaml
+datadog:
+  #(...)
+  tags:
+    - "env:<ENV>"
+```
+
+This establishes this as a host-level tag inherited on all your data associated with each host. This is also applied to all [Kubernetes State Metrics][3] and is the default `env` on your APM spans. Take care with these tags, as if you have a global `env` tag set and a *different* `env` tag set on your pod, that pod's data contains **both** `env` tags.
 
 ###### Pod-level metrics
 
-To configure pod-level metrics, add the following standard labels (`tags.datadoghq.com`) to the pod spec of a Deployment, StatefulSet, or Job:
+The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are only required if you are using APM in your applications; otherwise, you can omit them. Add the following standard labels (`tags.datadoghq.com`) to the pod spec, as well as optionally to the parent workload, like the Deployment, StatefulSet, or Job:
 
 ```yaml
 template:
@@ -144,40 +175,14 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>" 
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
 ```yaml
-tags.datadoghq.com/<container-name>.env
-tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version 
+tags.datadoghq.com/<CONTAINER_NAME>.env
+tags.datadoghq.com/<CONTAINER_NAME>.service
+tags.datadoghq.com/<CONTAINER_NAME>.version 
 ```
-
-###### State metrics
-
-To configure [Kubernetes State Metrics][3]:
-
-1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
-
-2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
-
-  ```yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" 
-  spec:
-    template:
-      metadata:
-        labels:
-          tags.datadoghq.com/env: "<ENV>"
-          tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>" 
-  ```
 
 ###### Datadog SDK and StatsD client
 
@@ -195,41 +200,18 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION 
-          valueFrom: 
-            fieldRef: 
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/version'] 
 ```
 
-##### Automatic version tagging for APM data in containerized environments
-
-<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
-
-You can use the `version` tag in APM to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
-
-For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
-
-| Priority         | Version Value |
-|--------------|------------|
-| 1    |  {your version value}       |
-| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
-| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
-
-Requirements: 
-- Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][9].
-
-
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[3]: /integrations/kubernetes_state_core/?tab=helm#data-collected
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
-[7]: /tracing/services/deployment_tracking/
-[8]: /watchdog/faulty_deployment_detection/
-[9]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
@@ -277,30 +259,6 @@ com.datadoghq.tags.version
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
-
-##### Automatic version tagging for APM data in containerized environments
-
-<div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
-
-You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
-
-For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
-
-| Priority         | Version Value |
-|--------------|------------|
-| 1    |  {your version value}       |
-| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
-| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
-
-Requirements: 
-- Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
- 
-
-[1]: /tracing/services/deployment_tracking/
-[2]: /watchdog/faulty_deployment_detection/
-[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
@@ -352,11 +310,14 @@ If your service has no need for the Datadog environment variables (for example, 
 }
 ```
 
+{{% /tab %}}
+{{% /tabs %}}
+
 ##### Automatic version tagging for APM data in containerized environments
 
 <div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
-You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+You can use the `version` tag in APM to [monitor deployments][18] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][19].
 
 For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
 
@@ -369,14 +330,7 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
 - If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
-
-[1]: /tracing/services/deployment_tracking/
-[2]: /watchdog/faulty_deployment_detection/
-[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
-
-{{% /tab %}}
-{{% /tabs %}}
+- If your services are not running in a containerized environment, or to include the Git SHA, [embed Git information in your build artifacts][20].
 
 ### Non-containerized environment
 
@@ -429,7 +383,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    {{% tab "Synthetics" %}}
 
-   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the {{< ui >}}APM Integration for Browser Tests{{< /ui >}} section of the [Integration Settings page][2].
 
    You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
@@ -589,3 +543,8 @@ processors:
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
 [17]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0
+[18]: /tracing/services/deployment_tracking/
+[19]: /watchdog/faulty_deployment_detection/
+[20]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+[21]: /containers/docker/log
+[22]: /containers/kubernetes/log

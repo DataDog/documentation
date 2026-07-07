@@ -19,7 +19,11 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 
 {{% apm-config-visibility %}}
 
-For information about configuring the Ruby SDK, see [Additional Ruby configuration][2].
+For additional configuration options beyond the environment variables listed below, see [Additional Ruby configuration][2].
+
+## Configurations keys
+
+{{< partial name="apm/registry-config-list.html" >}}
 
 ## Further Reading
 

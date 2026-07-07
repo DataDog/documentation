@@ -105,7 +105,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+         | Fully Supported                                        | `ratpack`                                                  |
 | Restlet HTTP Server     | 2.2 - 2.4    | Fully Supported                                        | `restlet-http`.                                            |
 | Spark Java              | 2.3+         | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                             |
-| Spring Boot             | 1.5+         | Fully Supported                                        | `spring-web` or `spring-webflux`                           |
+| Spring Boot             | 1.5 - 3.X    | Fully Supported                                        | `spring-web` or `spring-webflux`                           |
 | Spring Web (MVC)        | 4.0+         | Fully Supported                                        | `spring-web`                                               |
 | Spring WebFlux          | 5.0+         | Fully Supported                                        | `spring-webflux`                                           |
 | Tomcat                  | 5.5+         | Fully Supported                                        | `tomcat`                                                   |
@@ -176,6 +176,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | OkHTTP                             | 2.2+        | Fully Supported                                        | `okhttp`, `okhttp-2`,`okhttp-3`                         |
 | Play WSClient                      | 1.0+        | Fully Supported                                        | `play-ws`                                               |
 | Rabbit AMQP                        | 2.7+        | Fully Supported                                        | `amqp`, `rabbitmq`                                      |
+| SOFA RPC                           | 5.0+        | Fully Supported                                        | `sofarpc`                                               |
 | Spring SessionAwareMessageListener | 3.1+        | Fully Supported                                        | `spring-jms-3.1`                                        |
 | Spring WebClient                   | 5.0+        | Fully Supported                                        | `spring-webflux`, `spring-webflux-client`               |
 
@@ -184,6 +185,8 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 **JMS Note**: Datadog's JMS integration automatically adds and reads message object properties `x__dash__datadog__dash__trace__dash__id` and `x__dash__datadog__dash__parent__dash__id` to maintain context propagation between consumer and producer services.
 
 **Camel Note**: Distributed trace propagation over Camel routes is not supported.
+
+**SOFA RPC Note**: Datadog's SOFA RPC integration supports the Bolt, Triple, and REST transport protocols. Triple uses gRPC transport; distributed tracing for Triple calls requires the `grpc` integration to remain enabled.
 
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 

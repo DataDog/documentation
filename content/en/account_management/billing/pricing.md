@@ -15,7 +15,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
   * On a high watermark plan (HWMP), the billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1 percent to reduce the impact of spikes in usage on your bill.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
-* A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
+* A [**custom metric**][2] is a single, unique combination of a metric name, host ID, and any tags. Under cardinality pricing, Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour. Datadog also offers [Metric Name pricing][12], which bills based on metric names and datapoint volume instead.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
 * An AWS **Fargate task** is a collection of containers setup through AWS's ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
@@ -114,3 +114,4 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [9]: mailto:success@datadoghq.com
 [10]: /real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
+[12]: /account_management/billing/metric_name_pricing/

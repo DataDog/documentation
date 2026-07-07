@@ -22,7 +22,7 @@ Audit Trail monitors alert you when a specified type of audit event exceeds a us
 
 ## Monitor creation
 
-To create an [Audit Trail monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Audit Trail*.
+To create an [Audit Trail monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Audit Trail{{< /ui >}}.
 
 <div class="alert alert-info">There is a default limit of 1000 monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -36,7 +36,7 @@ For example, if you want to be alerted when a specific API key is making a certa
 
 Set an alert threshold for the value you want to be alerted on. For example, if you want to be alerted when the number of API requests reaches 15 or above, set the alert threshold for number of API requests to `Alert threshold > 15`. Set the warning threshold to any number before 15 to receive a warning prior to a threshold being met.
 
-You can also choose to never resolve, or to automatically resolve, an event from a triggered state. Set a value between `[Never]` (default) and `After 24 Hours`.
+You can also choose to never resolve, or to automatically resolve, an event from a triggered state. Set a value between {{< ui >}}Never{{< /ui >}} (default) and {{< ui >}}After 24 Hours{{< /ui >}}.
 
 ### Say what's happening
 
@@ -44,13 +44,13 @@ Create a notification name. For example, `API requests threshold met for {{[@usr
 
 Create a monitor message. This can include the steps required for team members to resolve an incident if one is occurring.
 
-You can then select a value from `[Never]` to `Every 24 Hours` to renotify you if the monitor has not been resolved. You can also set tags and priority to better correlate data in the event of an incident.
+You can then select a value from {{< ui >}}Never{{< /ui >}} to {{< ui >}}Every 24 Hours{{< /ui >}} to renotify you if the monitor has not been resolved. You can also set tags and priority to better correlate data in the event of an incident.
 
 ### Configure notifications and automations
 
 Select services and team members to notify. For example, you can alert your on-call compliance team with PagerDuty, or alert your team by Slack or email to begin assessment of the alert.
 
-You can also select if you want to notify a service or team when an alert is modified with the `Do Not Notify` dropdown option.
+You can also select if you want to notify a service or team when an alert is modified with the {{< ui >}}Do Not Notify{{< /ui >}} dropdown option.
 
 ## Further Reading
 

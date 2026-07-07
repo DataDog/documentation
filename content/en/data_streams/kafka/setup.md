@@ -57,8 +57,7 @@ To view Kafka messages, a user must have the `Data Streams Monitoring Capture Me
 
 You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a role on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
-<details>
-<summary><strong>Create a role and assign it to users</strong></summary>
+{{% collapse-content title="Create a role and assign it to users" level="h4" expanded=false %}}
 
 #### 1. Create a role
 
@@ -86,7 +85,7 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 6. Click {{< ui >}}Save{{< /ui >}}.
 7. Look for a {{< ui >}}User updated{{< /ui >}} confirmation message to verify the change was successful.
 
-</details>
+{{% /collapse-content %}}
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [3]: /remote_configuration/

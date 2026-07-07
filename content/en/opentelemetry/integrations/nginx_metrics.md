@@ -27,7 +27,7 @@ See the [NGINX receiver documentation][1] for detailed configuration options and
 
 {{< mapping-table resource="nginx.csv">}}
 
-See [OpenTelemetry Metrics Mapping][2] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
 ## Further reading
 

@@ -345,7 +345,7 @@ Pendant la phase de [déploiement][41], élaborez une méthodologie détaillée 
 [28]: /fr/integrations/network/
 [29]: /fr/network_monitoring/cloud_network_monitoring/
 [30]: /fr/software_catalog/
-[31]: /fr/service_management/events/
+[31]: /fr/events/
 [32]: /fr/error_tracking/
 [33]: /fr/software_catalog/endpoints/
 [34]: /fr/agent/fleet_automation/

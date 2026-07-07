@@ -4,7 +4,7 @@ title: Workflow Automation
 
 ## Overview
 
-Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically).
+Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically), except for the cases listed under [Included automations](#included-automations).
 
 ## Summary
 - **Billing metric**: You incur a cost per committed execution or on-demand execution, depending on your billing plan. Specific pricing can be found on the [Workflow Automation pricing page][13].
@@ -17,12 +17,12 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
 ## Pricing model
 
 ### Definition of workflow execution
-A workflow execution refers to one full run of a published workflow, regardless of how many steps or actions it includes. Executions can be triggered through:
+A workflow execution refers to one full run of a published workflow, regardless of how many steps, actions, iterations, or retries it includes. Billing is recorded one time when an execution starts. Runs that are rejected before starting—for example, due to spec validation errors, admission limits, or a workflow being marked inactive—are not billed. Executions can be triggered through:
 - Manual starts in the Datadog UI
 - API or programmatic triggers
 - Event-based triggers (monitors, incidents, etc.)
 - Workflows triggered from other workflows
-    - **Note**: If one workflow triggers another workflow, they are both counted for billing.
+    - **Note**: When a workflow triggers another workflow, billing is determined by the original (root) trigger of the chain. If the root trigger is a billed source (such as a monitor or API call), every workflow in the chain is billed. If the root trigger is a free source (for example, Incident Management, On-Call, or App Builder), the entire chain is free, regardless of depth.
 
 Unpublished (test or draft) runs are **not billed**.
 
@@ -36,7 +36,7 @@ Failed executions are not exempt from billing. All published executions are bill
 </div>
 
 ### Billing metrics
-Workflow Automation is billed **per execution**. This means that each complete workflow run counts toward your bill.
+Workflow Automation is billed **per execution**. This means that each workflow run counts toward your bill.
 
 The two billing options are committed executions and on-demand executions. Committed executions are purchased in advance, while on-demand executions are billed as they occur. Prepaid executions cost less than on-demand executions.
 

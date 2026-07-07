@@ -7,7 +7,7 @@ disable_toc: false
 aliases:
     - /service_management/app_builder/queries
 further_reading:
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---
@@ -138,7 +138,7 @@ App Builder queries can trigger Workflow Automation workflows. Apps can then use
 
 This app provides a button to trigger a workflow. The workflow sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 
-{{< img src="service_management/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="70%">}}
+{{< img src="actions/app_builder/workflow-trigger-from-app.mp4" alt="Clicking Trigger Workflow polls Slack then returns a random cat or dog fact" video="true" width="70%">}}
 
 {{% collapse-content title="Build the app" level="h4" %}}
 
@@ -206,7 +206,7 @@ After you get data from a query in App Builder, you can use data transformers to
 
 This app provides buttons to fetch facts about two numbers from an API. It then uses a data transformer to calculate and display the sum of the two numbers.
 
-{{< img src="service_management/app_builder/data-transformer.mp4" alt="Clicking each button fetches a new number fact, and the sum of the two numbers updates along with the facts" video="true" width="70%">}}
+{{< img src="actions/app_builder/data-transformer.mp4" alt="Clicking each button fetches a new number fact, and the sum of the two numbers updates along with the facts" video="true" width="70%">}}
 
 {{% collapse-content title="Build the app" level="h4" %}}
 
@@ -274,10 +274,10 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 
 <br>Do you have questions or feedback? Join the {{< ui >}}#app-builder{{< /ui >}} channel on the [Datadog Community Slack][8].
 
-[5]: /service_management/workflows/connections
-[6]: /service_management/workflows
+[5]: /actions/connections
+[6]: /actions/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://chat.datadoghq.com/
 [10]: https://app.datadoghq.com/actions/action-catalog/
-[11]: /service_management/app_builder/events
-[12]: /service_management/app_builder/events/#state-functions
+[11]: /actions/app_builder/events
+[12]: /actions/app_builder/events/#state-functions

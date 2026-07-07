@@ -101,7 +101,7 @@
         "service_hooks": [
           {
             "account": "joe.doe",
-            "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+            "url": "https://hooks.slack.com/services/example-workspace/example-channel/example-token"
           }
         ]
       },
@@ -109,7 +109,7 @@
         "service_hooks": [
           {
             "account": "joe.doe",
-            "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+            "url": "https://hooks.slack.com/services/example-workspace/example-channel/example-token"
           }
         ]
       },

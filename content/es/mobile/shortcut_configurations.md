@@ -50,15 +50,15 @@ Para configurar un modo Focus para incluir o excluir la aplicación móvil Datad
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS que muestra opciones de Focus">}}
+{{< img src="mobile/shortcut_configurations/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS que muestra opciones de Focus">}}
 
 1. Abre **Settings** > **Focus** (Configuración > Focus).
 
-   {{< img src="service_management/mobile/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS Focus">}}
+   {{< img src="mobile/shortcut_configurations/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS Focus">}}
 
 2. Pulsa un **Focus** o crea el tuyo propio.
 
-   {{< img src="service_management/mobile/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS Focus que muestra opciones de configuración de las preferencias de notificación">}}
+   {{< img src="mobile/shortcut_configurations/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de iOS Focus que muestra opciones de configuración de las preferencias de notificación">}}
 
 3. Pulsa **Allow Notifications From** (Permitir notificaciones de) y añade la aplicación móvil Datadog. También puedes pulsar **Silence Notifications From** (Silenciar notificaciones de) y añade la aplicación móvil Datadog.
 
@@ -69,15 +69,15 @@ Para obtener más información, consulta [Configurar un Focus en iPhone][5].
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de Android que muestra la opción Modos y rutinas">}}
+{{< img src="mobile/shortcut_configurations/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de Android que muestra la opción Modos y rutinas">}}
 
 1. Abre **Settings** > **Modes and Routines** (Configuración > Modos y rutinas).
 
-   {{< img src="service_management/mobile/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de Modos y rutinas en Android">}}
+   {{< img src="mobile/shortcut_configurations/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de Modos y rutinas en Android">}}
 
 2. Pulsa un **Modo** o crea el tuyo propio.
 
-   {{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de un modo en Android que muestra opciones de Focus">}}
+   {{< img src="mobile/shortcut_configurations/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pantalla de configuración de un modo en Android que muestra opciones de Focus">}}
 
 3. Pulsa **Stay focused** > **Restrict app usage** (Mantenerse enfocado > Restringir el uso de la aplicación) y añade la aplicación móvil Datadog > **Done** (Listo). También puedes pulsar **Do not disturb** (No molestar) y añadir la aplicación móvil Datadog > **Done** (Listo).
 
@@ -90,13 +90,13 @@ Para obtener más información, consulte [Limitar las interrupciones con Modos][
 
 ## Acciones rápidas
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Icono de aplicación móvil con un menú de acciones rápidas que muestra los cinco dashboards consultados con mayor frecuencia">}}
+{{< img src="mobile/shortcut_configurations/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Icono de aplicación móvil con un menú de acciones rápidas que muestra los cinco dashboards consultados con mayor frecuencia">}}
 
 Mantén presionado el icono de la aplicación para ver una hoja de acciones rápidas de los cinco dashboards [más consultados por mí][1] para iOS (según el número de vistas y la frecuencia), o los cinco dashboards en móviles para Android. Pulsa un resultado para abrir el dashboard en la aplicación.
 
 ## Buscar desde la pantalla de inicio
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="Búsqueda de la página de inicio de iPhone que muestra resultados de dashboard de Datadog" style="width:40%;">}}
+{{< img src="mobile/shortcut_configurations/iphone_search_doc.png" alt="Búsqueda de la página de inicio de iPhone que muestra resultados de dashboard de Datadog" style="width:40%;">}}
 
 **Solo iOS**: Dentro de la búsqueda de iPhone, filtra y busca el nombre del dashboard deseado. Pulsa un resultado para abrir la vista del dashboard directamente en la aplicación móvil o pulsa el botón **Search in App** (Buscar en la aplicación) para abrir la consulta de búsqueda en la página de la lista de dashboards en la aplicación.
 
@@ -113,7 +113,7 @@ Con el acceso directo puedes acceder a tus dashboards y monitores realizando tre
 - Voz de Siri: di el nombre del acceso directo, por ejemplo, "Open AWS Overview" (Abrir la información general de AWS) y Siri abrirá el dashboard en la aplicación.
 - Sugerencias de Siri: Siri asimila tu rutina y te sugiere la creación de accesos directos a tus dashboards cuando más los necesitas. Puedes hacerlo mediante un banner visible en tu pantalla de inicio o de bloqueo, a través del apartado de búsqueda del iPhone o con los widgets de sugerencias de Siri de iOS 14.
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Aplicación Accesos directos de iOS que muestra accesos directos a dashboards de Datadog con sugerencias de Siri">}}
+{{< img src="mobile/shortcut_configurations/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Aplicación Accesos directos de iOS que muestra accesos directos a dashboards de Datadog con sugerencias de Siri">}}
 
 Para obtener más información sobre accesos directos y sugerencias de Siri, consulta la [documentación de Siri de Apple][2].
 

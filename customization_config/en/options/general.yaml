@@ -16,6 +16,9 @@ options:
 - label: .NET
   id: dot_net
 
+- label: .NET MAUI
+  id: maui
+
 - label: Agent
   id: agent
 
@@ -424,6 +427,8 @@ options:
 - label: Traces
   id: traces
 
+- label: UI
+  id: ui
 - label: Unity
   id: unity 
 
@@ -507,3 +512,34 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: BigQuery
+  id: bigquery
+
+- label: Databricks
+  id: databricks
+
+- label: Redshift
+  id: redshift
+
+- label: Snowflake
+  id: snowflake
+
+- label: JVM
+  id: jvm
+
+- label: C
+  id: c
+
+- label: GraalVM Native Image
+  id: graalvm_native_image
+
+- label: Secrets Management
+  id: secrets_management
+
+- label: Environment Variables
+  id: environment_variables
+
+- label: ECS Fargate
+  id: ecs_fargate
+  

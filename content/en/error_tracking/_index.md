@@ -1,5 +1,7 @@
 ---
 title: Error Tracking
+aliases:
+- /error_tracking/issue_correlation/
 disable_toc: false
 further_reading:
 - link: "/ide_plugins/idea/error_tracking/"

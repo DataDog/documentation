@@ -22,6 +22,7 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 To learn how to set up Database Monitoring on a ClickHouse database, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-clickhouse" >}}
-
-<br>
+{{< card-grid card_width="300px" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
+{{< /card-grid >}}

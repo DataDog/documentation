@@ -28,7 +28,7 @@ After enabling NetFlow Monitoring, you can create a NetFlow monitor to alert you
 
 ## Monitor creation
 
-To create a NetFlow monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **NetFlow**][3]. 
+To create a NetFlow monitor in Datadog, use the main navigation: [{{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}NetFlow{{< /ui >}}][3]. 
 
 ### Define the search query
 
@@ -54,7 +54,7 @@ Configure monitors to trigger if the query value crosses a threshold, and custom
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the {{< ui >}}Say what's happening{{< /ui >}} and {{< ui >}}Notify your team{{< /ui >}} sections, see the [Notifications][7] page.
 
 ## Monitor NetFlow events
 

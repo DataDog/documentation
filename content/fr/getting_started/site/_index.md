@@ -3,6 +3,8 @@ algolia:
   tags:
   - site
   - datadog site
+description: Découvrez les différents sites Datadog pour votre région et vos exigences
+  en matière de sécurité, y compris les options conformes aux réglementations gouvernementales.
 further_reading:
 - link: https://learn.datadoghq.com/courses/dashboards-slos
   tag: Centre d'apprentissage
@@ -13,64 +15,72 @@ further_reading:
   text: Transmission multiple
 title: Débuter avec les sites Datadog
 ---
+## Aperçu {#overview}
 
-## Présentation
+Datadog propose différents sites à travers le monde. Chaque site est complètement indépendant, et vous ne pouvez pas partager de données entre les sites. Chaque site vous offre des avantages (par exemple, les réglementations de sécurité gouvernementales) ou vous permet de stocker vos données dans des emplacements spécifiques à travers le monde.
 
-Datadog propose différents sites disponibles dans le monde entier. Les sites sont tous indépendants. Il n'est pas possible de partager des données entre un site et un autre. Chaque site vous offre des avantages (par exemple, des réglementations gouvernementales en matière de sécurité) ou vous permet de stocker vos données dans des régions spécifiques.
-
-## Responsabilité partagée
+## Responsabilité partagée {#shared-responsibility}
 
 La responsabilité de la sécurisation des données des utilisateurs est partagée entre Datadog et les développeurs qui utilisent les produits Datadog.
 
-Datadog est tenu :
-- de fournir un produit fiable qui traite les données en toute sécurité lorsqu'elles sont transmises et stockées sur la plate-forme Datadog.
-- de veiller à ce que les problèmes de sécurité soient identifiés conformément aux politiques internes.
+Datadog est responsable de :
+- Fournir un produit fiable qui gère les données de manière sécurisée lorsqu'elles sont transmises et stockées sur la plateforme Datadog.
+- S'assurer que les problèmes de sécurité sont identifiés conformément aux politiques internes.
 
-Les développeurs sont tenus :
-- dʼexploiter les valeurs de configuration et les options pour la confidentialité des données fournies par Datadog.
-- dʼassurer l'intégrité du code au sein de leur environnements.
+Les développeurs sont responsables de :
+- Exploiter les valeurs de configuration et les options de confidentialité des données fournies par Datadog.
+- Assurer l'intégrité du code au sein de leurs environnements.
 
-## Accéder au site Datadog
-
-Vous pouvez identifier le site que vous utilisez en comparant l'URL du site Web Datadog à l'URL du site dans le tableau ci-dessous.
-
-{{< img src="getting_started/site/site.png" alt="L'URL du site dans l'onglet d'un navigateur" style="width:40%" >}}
+## Accédez au site Datadog {#access-the-datadog-site}
 
 | Site    | URL du site                    | Paramètre du site      | Emplacement |
 |---------|-----------------------------|---------------------|----------|
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
 | US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | UE (Allemagne) |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Allemagne) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
+| US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japon |
+| AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australie |
 
-**Remarque** : pour envoyer des données à plusieurs destinations via plusieurs endpoints, consultez le guide dédié à la [transmission multiple][2].
+Si vous avez un domaine personnalisé, tel que `demo.datadoghq.com`, vous pouvez trouver votre site répertorié en haut de la page **Mes Préférences**.
 
-## Domaines du SDK
+{{< img src="getting_started/site/site-in-preferences.png" alt="Le haut de la page Mes Préférences dans Datadog, affichant le nom de l'organisation et l'URL du site." style="width:80%" >}}
+
+Pour naviguer vers **Mes Préférences**, cliquez sur votre avatar de profil dans le coin inférieur gauche, puis sélectionnez **Mes Préférences** dans le menu.
+
+{{< img src="getting_started/site/my-preferences-menu.png" alt="Le menu de compte Datadog, accessible en cliquant sur votre avatar de profil dans la navigation en bas à gauche, affichant l'option Mes Préférences sous Paramètres Personnels." style="width:80%" >}}
+
+Pour envoyer des données vers plus d'une destination via plusieurs points de terminaison, consultez le guide [Dual Shipping][2].
+
+## Domaines SDK {#sdk-domains}
 
 Consultez les [endpoints pris en charge pour les domaines du SDK][3].
 
-## Accéder à la documentation Datadog pour un site précis
+## Naviguer dans la documentation Datadog par site {#navigate-the-datadog-documentation-by-site}
 
-Les sites Datadog ne prennent pas tous en charge les mêmes fonctionnalités, en raison des différentes exigences en matière de sécurité. Ainsi, la documentation n'est pas la même pour chaque site. Vous pouvez utiliser le menu déroulant de sélection de site situé sur la droite de chaque page de documentation pour afficher les informations pertinentes selon votre site Datadog.
+Différents sites Datadog peuvent prendre en charge différentes fonctionnalités en fonction des exigences de sécurité de l'instance. Par conséquent, la documentation peut varier d'un site à l'autre. Vous pouvez utiliser le menu déroulant de sélection de site sur le côté droit de n'importe quelle page de la documentation Datadog pour sélectionner le site Datadog dont vous souhaitez voir les informations.
 
-{{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="Le menu déroulant de sélection de site situé à droite du site de documentation" style="width:100%" >}}
+{{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="Le menu déroulant de sélection de site sur le côté droit du site de documentation." style="width:100%" >}}
 
-Par exemple, pour afficher la documentation Datadog pour le site gouvernemental, sélectionnez **US1-FED**.
+Par exemple, pour voir la documentation pour les sites Datadog pour le gouvernement, sélectionnez **US1-FED** ou **US2-FED**.
 
-{{% site-region region="gov" %}}
+## Accéder aux sites Datadog pour le gouvernement {#access-the-datadog-for-government-sites}
 
-## Accéder au site gouvernemental de Datadog
+### US1-FED {#us1-fed}
 
-Le site gouvernemental de Datadog (US1-FED) est destiné aux agences et partenaires gouvernementaux américains qui surveillent leurs applications et leur infrastructure. Pour en savoir plus sur les frameworks ainsi que sur les contrôles de sécurité et de conformité de ce site, et pour découvrir comment le site soutient le programme FedRAMP, consultez la [page relative à la sécurité][1].
+Le site Datadog pour le gouvernement (US1-FED) est le site autorisé FedRAMP Moderate de Datadog. US1-FED est destiné à permettre aux agences gouvernementales et aux partenaires américains de surveiller leurs applications et leur infrastructure. Pour des informations sur les contrôles de sécurité et de conformité d'US1-FED et sur la manière dont il prend en charge FedRAMP, consultez la [Security page][1].
 
-[1]: https://www.datadoghq.com/security/
-{{< /site-region >}}
+### US2-FED {#us2-fed}
 
-## Pour aller plus loin
+Le site Datadog pour le gouvernement (US2-FED) est en cours d'autorisation IL5. US2-FED est destiné à permettre aux agences gouvernementales et aux partenaires américains de surveiller leurs applications et leur infrastructure. Pour plus d'informations, envoyez un courriel à [fedramp@datadoghq.com][4].
+
+## Lectures complémentaires : {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://www.datadoghq.com/security/
 [2]: /fr/agent/configuration/dual-shipping/
 [3]: /fr/real_user_monitoring/#supported-endpoints-for-sdk-domains
+[4]: mailto:fedramp@datadoghq.com

@@ -37,9 +37,9 @@ Your most logged service contains several logs, some of which may be irrelevant 
 
 **To identify your most logged service status**:
 
-1. In Log Explorer, select **graph view** located next to the search bar.
+1. In Log Explorer, select {{< ui >}}graph view{{< /ui >}} located next to the search bar.
 2. Below the search bar, set count `*` group by `service` and limit to `top 10`.
-3. Select **Top List** from the dropdown menu next to hide controls.
+3. Select {{< ui >}}Top List{{< /ui >}} from the dropdown menu next to hide controls.
 4. Click on the first listed service and select **search for** in the populated menu. This generates a search, which is visible in the search bar above, based on your service facet.
 5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
 6. Click on the first listed status and select **search for** in the populated menu. This adds your status facet to the search.
@@ -65,7 +65,7 @@ The pattern context panel lists every instance (event) of a log pattern and crea
 **To create an exclusion filter**:
 
 1. Click on a pattern from the pattern view list.
-2. Click the **Add Exclusion Filter** button in the top right corner. This button is disabled if less than half of the logs in this pattern fall into a single index.
+2. Click the {{< ui >}}Add Exclusion Filter{{< /ui >}} button in the top right corner. This button is disabled if less than half of the logs in this pattern fall into a single index.
 3. The Log Index Configuration page opens in a new tab with a pre-filled exclusion filter for the index where the majority of the logs for that pattern show up.
 4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
@@ -88,7 +88,7 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 **To generate a new log-based metric based on your log pattern**:
 
 1. Navigate to the [Generate Metrics][9] page.
-1. Click **New Metric** in the top right corner.
+1. Click {{< ui >}}New Metric{{< /ui >}} in the top right corner.
 1. Enter a name for your metric. Log-based metric names must follow the naming metric convention.
 1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. For example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`.
 1. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
@@ -101,10 +101,10 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 **To set an anomaly detection monitor**:
 
 1. Navigate to the [New Monitor][11] page.
-1. Select **Anomaly**.
+1. Select {{< ui >}}Anomaly{{< /ui >}}.
 1. Enter the log-based metric you defined in the previous section.
 1. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 When an anomaly is detected, an alert is sent to all who are tagged. This alert can also be found in the [Triggered Monitors][12] page.
 

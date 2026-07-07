@@ -12,8 +12,8 @@ This page provides information to help you troubleshot issues with Test Optimiza
 
 ## Your tests are instrumented, but Datadog isn't showing any data
 
-1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
-2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in [**Test Health**][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
+1. Go to the [{{< ui >}}Tests{{< /ui >}}][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
+2. Check if you see any test results in the [{{< ui >}}Test Runs{{< /ui >}}][4] section. If you do see results there, but not in [{{< ui >}}Test Health{{< /ui >}}][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
 3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the SDK to verify connectivity to the Agent.
 4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the SDK to verify connectivity to Datadog.
 5. If you still don't see any results, [contact Support][2] for troubleshooting help.
@@ -27,7 +27,7 @@ The following aspects make a JUnit test report incorrect:
 
 ## Data appears in Test Runs but not Test Health
 
-If you can see test results data in the **Test Runs** tab, but not in **Test Health** when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [**Test Health**][5] page.
+If you can see test results data in the {{< ui >}}Test Runs{{< /ui >}} tab, but not in {{< ui >}}Test Health{{< /ui >}} when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [{{< ui >}}Test Runs{{< /ui >}}][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [{{< ui >}}Test Health{{< /ui >}}][5] page.
 
 1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the SDK attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
@@ -137,7 +137,7 @@ The default branch is used to power some features of the products, namely:
 
 ### How to fix the default branch
 
-If you have admin access, you can update it from the [Repository Settings Page][11].
+If you have admin access, you can update it from the [{{< ui >}}Repository Settings Page{{< /ui >}}][11].
 
 ## Execution history is not available for a specific test case
 

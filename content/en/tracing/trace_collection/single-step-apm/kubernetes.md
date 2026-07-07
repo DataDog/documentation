@@ -43,7 +43,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 1. In Datadog, go to the [Install the Datadog Agent on Kubernetes][11] page.
 1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
-1. In the **Configure `datadog-agent.yaml`** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
+1. In the {{< ui >}}Configure `datadog-agent.yaml`{{< /ui >}} section, go to {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}, and turn on {{< ui >}}APM Instrumentation{{< /ui >}}.
 
    {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernetes through the Datadog app" style="width:100%;" >}}
 
@@ -759,7 +759,7 @@ After you enable SSI, all supported processes in the cluster are automatically i
 
 To control where APM is activated and reduce overhead, consider the following best practices.
 
-{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
 #### Default vs. opt-in instrumentation
 | Mode    | Behavior    | When to use |
@@ -819,7 +819,7 @@ See [instrumentation rules][4] for additional examples.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="control-loaded-datadog-sdks" %}}
 
 Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the Datadog SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
 

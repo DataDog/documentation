@@ -88,7 +88,7 @@ From the RUM Explorer, you can then analyze:
 
 ## Track team ownership
 
-You can use [view-based ownership][11] to automatically assign teams to RUM views based on service names, enabling teams to filter and monitor their specific areas of responsibility directly in the RUM Applications Overview page.
+You can use [view-based ownership][11] to automatically assign teams to RUM views based on service names, enabling teams to filter and monitor their specific areas of responsibility directly in the {{< ui >}}RUM Applications Overview{{< /ui >}} page.
 
 ### Teams own a set of pages
 
@@ -106,7 +106,7 @@ Inside your RUM application, create services for each set of pages owned by a te
 
 Get insights into the performance or the adoption of a given team's scope by using the `service` attribute in RUM:
 
-1. From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
+1. From the {{< ui >}}RUM Application Overview{{< /ui >}} page, narrow down all graphs by `service` to get a holistic view for a team's scope
 2. Any query done in the RUM Explorer can use the `service` attribute to filter:
    - Errors by service
    - Pageviews by service

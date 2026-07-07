@@ -3,295 +3,305 @@ aliases:
 - /es/graphing/notebooks/
 - /es/notebooks_new/
 - /es/notebooks_legacy/
-description: Crea documentos de texto enriquecido en colaboración con gráficos en
-  directo en Datadog para investigaciones, análisis retrospectivos, runbooks y narraciones
-  basadas en datos.
+description: Crea documentos colaborativos de texto enriquecido con gráficos en vivo
+  de Datadog para investigaciones, postmortems, runbooks y narrativas basadas en datos.
 further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
-  text: Gestiona y optimiza tus costes de OCI con Datadog Cloud Cost Management
+  text: Administra y optimiza tus costos de OCI con Datadog Cloud Cost Management
 - link: https://www.datadoghq.com/blog/collaborative-notebooks-datadog/
   tag: Blog
-  text: Crear artículos basados en datos con notebooks colaborativos
+  text: Cuenta historias basadas en datos con Notebooks Colaborativos
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
-  text: Prácticas recomendadas para redactar informes retrospectivos de incidencias
+  text: Mejores prácticas para redactar postmortems de incidentes
 - link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
   tag: blog
-  text: Transformar y enriquecer tus logs con Datadog Observability Pipelines
+  text: Transforma y enriquece tus registros con los Datadog Observability Pipelines.
 - link: https://www.datadoghq.com/blog/advanced-analysis-tools/
   tag: Blog
-  text: Explorar tus datos con Shettes, DDSQL Editor y Notebooks para análisis avanzados
-    en Datadog
+  text: Explora tus datos con Sheets, DDSQL Editor y Notebooks para análisis avanzado
+    en Datadog.
 - link: https://www.datadoghq.com/blog/finops-at-datadog/
   tag: Blog
-  text: Cómo hemos creado una práctica de FinOps de éxito en Datadog
+  text: Cómo hemos creado una práctica exitosa de FinOps en Datadog
+- link: https://learn.datadoghq.com/courses/getting-started-with-notebooks
+  tag: Centro de Aprendizaje
+  text: Comenzando con Notebooks
+- link: https://learn.datadoghq.com/courses/using-datadog-notebooks-lab
+  tag: Centro de Aprendizaje
+  text: Usando Notebooks de Datadog para Reportes Centralizados
 title: Notebooks
 ---
+## Resumen {#overview}
 
-## Información general
+Los Notebooks son documentos colaborativos de texto enriquecido que te brindan todo el poder de los gráficos de Datadog. Múltiples usuarios pueden trabajar juntos para realizar una investigación o [postmortem][8] con datos en vivo de tu incidente. Los Notebooks también son excelentes para runbooks y documentación que presentan información real sobre tus sistemas junto a tu contenido.
 
-Los notebooks son documentos colaborativos de texto enriquecido que ofrecen todo el poder de los gráficos de Datadog. Varios usuarios pueden trabajar juntos en la elaboración de una investigación o un análisis retrospectivo con datos de incidentes en tiempo real. Los notebooks también son perfectos para los libros de ejecución y la documentación, ya que ofrecen información real de tus sistemas junto con su contenido.
-
-## Creación de un notebook
+## Creando un notebook {#creating-a-notebook}
 
 Puedes crear un notebook en dos lugares:
 
-- En la barra de navegación de la izquierda, haz clic en **Dashboards > New Notebook** (Dashboard > Nuevo notebook).
-- En la esquina superior derecha de la [página de la lista de notebooks][1], haz clic en **New Notebook** (Nuevo notebook).
+- Desde la barra de navegación izquierda, haz clic en **Dashboards > New Notebook**.
+- En la esquina superior derecha de la página de [Notebooks List page][1], haz clic en **New Notebook**.
 
-### Plantillas de notebook
+### Plantillas de Notebook {#notebook-templates}
 
-En la [galería de plantillas][2], puedes obtener plantillas listas para utilizar a partir de las que puedes crear notebooks. Estas plantillas incluyen un informe retrospectivo de la respuesta ante incidentes, un informe de incidentes y una especificación de SLO. También puedes crear una nueva plantilla personalizada para generar estructuras de notebook reutilizables.
+En la [Galería de Plantillas][2], consulta plantillas listas para usar de las cuales puedes crear nuevos Notebooks. Las plantillas incluyen un [postmortem][8] de Respuesta a Incidentes, un Informe de Incidentes y Especificación de Service Level Objectives. También puedes crear una nueva plantilla personalizada para construir estructuras reutilizables de Notebooks.
 
-## Edición de un notebook
+## Editando un Notebook {#editing-a-notebook}
 
-Los notebooks ofrecen una rica experiencia de edición de texto para crear contenidos y colaborar en ellos. Puedes escribir y dar formato al texto con total libertad utilizando las opciones de la barra de herramientas y los métodos abreviados de teclado (negrita, cursiva, encabezados, listas, etc.) directamente en el editor.
+Los Notebooks ofrecen una experiencia de edición de texto enriquecido para crear y colaborar en contenido. Puedes escribir y dar formato al texto libremente utilizando opciones de barra de herramientas familiares y atajos de teclado, como negrita, cursiva, encabezados, listas y más, directamente en el editor.
 
-Para los usuarios que prefieren los atajos, los notebooks también admiten la sintaxis Markdown. Por ejemplo, si se escribe `#` seguido de un espacio, se crea una cabecera, y si se utilizan tres puntos suspensivos<code>(```</code>), se inicia un bloque de código.
+Para los usuarios que prefieren atajos, los Notebooks también soportan la sintaxis Markdown. Por ejemplo, escribir `#` seguido de un espacio crea un encabezado, y usar tres comillas invertidas ("<code>```</code>) inicia un bloque de código.
 
-El contenido del texto se guarda automáticamente a medida que se escribe. En el caso de los gráficos incrustados, asegúrate de guardar los cambios en el editor de gráficos para aplicarlos en el notebook.
+El contenido de texto se guarda automáticamente a medida que escribes. Para gráficos incrustados, asegúrate de guardar tus cambios en el editor de gráficos para aplicarlos dentro del notebook.
 
-### Tipos de contenido
+### Tipos de contenido {#content-types}
 
-Los notebooks admiten varios tipos de contenido de texto enriquecido e incrustado, entre otros:
+Los notebooks soportan varios tipos de contenido enriquecido e incrustado, incluyendo, pero no limitado a:
 
 - [Gráficos](#graphs-in-notebooks)
 - Imágenes
-- Cabeceras (H1 - H3)
+- Encabezados (H1 - H3)
 - Listas (listas con viñetas, listas numeradas y listas de verificación)
 - Bloques de código
 - Citas en bloque
-- Celdas Markdown
+- Celdas de Markdown
 
-Para ver la lista completa, escribe <kbd>/</kbd> en un notebook.
+Para la lista completa, escribe <kbd>/</kbd> en un Notebook.
 
-### Gráficos en notebooks
+### Gráficas en Notebooks {#graphs-in-notebooks}
 
-Los notebooks admiten todos los tipos de widgets. Para ver la lista completa, consulta [Widgets][3].
+Notebooks soportan todos los tipos de widgets. Para la lista completa, consulta [Widgets][3].
 
-Pasa el ratón por encima del widget para ver las opciones de edición y configuración de los gráficos.
+Pasa el cursor sobre el widget para mostrar opciones de edición y configuración de gráficos.
 
-Para editar la consulta o configurar la visualización del gráfico, utiliza la función **Edición rápida** para realizar la mayoría de los cambios en línea. Para una configuración más avanzada, haz clic en el icono del lápiz o mantén pulsada la tecla <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> y haz clic en el gráfico para abrir el editor de gráficos completo. Puedes ajustar el marco temporal local o vincular el gráfico a la hora global del notebook haciendo clic en el icono del reloj.
+Para editar la consulta o configurar la visualización de la gráfica, utiliza la función **Quick Edit** para realizar la mayoría de los cambios en línea. Para una configuración más avanzada, haz clic en el ícono de lápiz o mantén presionada la tecla <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> y haz clic en el gráfico para abrir el editor de gráficos completo. Puedes ajustar el marco de tiempo local o vincular el gráfico al tiempo global del Notebook haciendo clic en el ícono de reloj.
 
-En el menú de tres puntos se puede acceder a otras opciones de configuración de gráficos, dependiendo del tipo de gráfico:
-- **Tamaño del gráfico**: Ajusta la altura del gráfico seleccionando XS, S, M (por defecto), L o XL.
-- **Leyenda del gráfico**: Desmarca la casilla para ocultar la leyenda. Las leyendas se desactivan automáticamente en los gráficos XS y S.
+Opciones adicionales de configuración de gráficos son accesibles bajo el menú de elipsis de tres puntos, dependiendo del tipo de gráfico:
+- **Tamaño del gráfico**: Ajusta la altura del gráfico seleccionando XS, S, M (predeterminado), L o XL.
+- **Leyenda del gráfico**: Desmarca la casilla para ocultar la leyenda. Las leyendas están automáticamente deshabilitadas para gráficos XS y S.
 
-### Funciones de texto enriquecido
+### Características de texto enriquecido {#rich-text-features}
 
-Los notebooks admiten funciones de texto enriquecido de uso común como negrita, cursiva, código en línea y cabeceras. Los notebooks también admite diversos tipos de listas como viñetas, numeradas o de verificación. 
+Notebooks soportan características de texto enriquecido comúnmente utilizadas como negritas, cursivas, código en línea y encabezados. Notebooks también soportan una variedad de tipos de listas como listas con viñetas, numeradas o de verificación.
 
-| Función       | Descripción                                                                                                                |
+| Característica       | Descripción                                                                                                                |
 |---------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Negrita**      | Para poner un texto en negrita, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
-| *Cursiva*     | Para poner un texto en cursiva, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
-| `Inline code` | Para el código en línea, escribe <code>`</code> al principio y al final del texto.                                          |
-| Bloques de código    | Inserta un bloque de código escribiendo <code>```</code> y pulsando <kbd>Intro</kbd> o utilizando el menú de comandos de barra.           |
-| Comillas        | Inserta un bloque de comillas escribiendo `>` o utilizando el menú de comandos de barra.                                                    |
-| Tablas de texto   | Inserta una tabla escribiendo `/table` o utilizando el menú **Añadir celda**.                                                          |
-| Llamadas      | Inserta una llamada escribiendo `/table` o escribiendo `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT` o `!CAUTION` y pulsando <kbd>la barra espaciadora</kbd>.   |
+| **Negrita**      | Para poner texto en negrita, selecciónalo y presiona <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
+| *Cursivas*     | Para poner texto en cursiva, selecciónalo y presiona <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
+| `Inline code` | Para código en línea, escribe <code>`</code> al principio y al final del texto.                                          |
+| Bloques de código    | Inserta un bloque de código escribiendo <code>```</code> y presionando <kbd>Enter</kbd>, o utilizando el menú de comandos con barra.           |
+| Citas        | Inserta un bloque de cita escribiendo `>`, o utilizando el menú de comandos con barra.                                                    |
+| Tablas de texto   | Inserta una tabla escribiendo `/table` o usando el menú **Add Cell**.                                                          |
+| Llamadas      | Inserta una llamada escribiendo `/table` o escribiendo `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, o `!CAUTION` y luego presionando <kbd>Espacio</kbd>.   |
 
-### Fichas inteligentes
+### Smart chips {#smart-chips}
 
-| Función    | Descripción                                                                |
+| Característica    | Descripción                                                                |
 |------------|----------------------------------------------------------------------------|
 | `@Mention` | Para mencionar a otro usuario, escribe `@` seguido de su nombre o dirección de correo electrónico. |
 | `$TemplateVariable` | Escribe `$` seguido del nombre de tu variable de plantilla existente. |
-| `/date` | Añade una ficha de fecha escribiendo `/date`. Puedes editar la fecha o la hora en la ventana emergente cada vez que hagas clic en la ficha. Haz la prueba `/today` y `/now`. |
+| `/date` | Agrega un chip de fecha escribiendo `/date`. Puedes editar la fecha o la hora en el popover cada vez que haces clic en el chip. ¡También prueba `/today` y `/now`! |
 
-### Comandos de barra
+### Slash commands {#slash-commands}
 
-Los comandos de barra son una interfaz para crear gráficos o insertar otros contenidos. En una nueva línea, escribe `/` para abrir el menú de comandos de barra. Sigue escribiendo el nombre del tipo de contenido deseado y selecciona la opción adecuada.
+Los Slash commands son una interfaz para crear gráficos o insertar otro contenido. En una nueva línea, escribe `/` para abrir el slash command menu. Continúa escribiendo el nombre del tipo de contenido deseado y selecciona la opción apropiada.
 
-{{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Menú de comandos de barra que aparece cuando escribes / en un notebook" style="width:70%;" >}}
+{{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Slash command menu que aparece cuando escribes / en un Notebook." style="width:70%;" >}}
 
-Al seleccionar un tipo de gráfico, se abre el [editor de gráficos][3]. Al hacer clic en **Save** (Guardar), el gráfico aparece en tu notebook.
+Cuando seleccionas un tipo de gráfico, se abre el [editor de gráficos][3]. Después de hacer clic en **Save**, el gráfico aparece en tu Notebook.
 
-### Atajos de teclado
+### Atajos de teclado {#keyboard-shortcuts}
 
-{{< img src="/notebooks/notebook_keyboard_shortcuts.png" alt="Menú de atajos de teclado para notebooks de Datadog" style="width:70%;" >}}
+{{< img src="/notebooks/notebook_keyboard_shortcuts.png" alt="Menú de atajos de teclado para Notebooks de Datadog." style="width:70%;" >}}
 
-En la esquina inferior izquierda de un notebook, haz clic en el icono del teclado para ver una lista de atajos de teclado para la edición.
+En la esquina inferior izquierda de un Notebook, haz clic en el ícono de teclado para ver una lista de atajos de teclado para editar.
 
-Además, puedes utilizar los siguientes atajos para cortar y pegar widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
+Además, puedes usar los siguientes atajos para cortar y pegar widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
-### Índice 
+### Tabla de contenidos {#table-of-contents}
 
-Los notebooks generan automáticamente una tabla de contenidos a partir de cualquier encabezado o gráfico que insertes en tu documento. Puedes crear un encabezado utilizando el atajo Markdown `#` o seleccionando texto y haciendo clic en **Header** (Encabezado) en la barra de herramientas.
+Los Notebooks generan automáticamente una tabla de contenidos a partir de cualquier encabezado o gráfico que insertes en tu documento. Puedes crear un encabezado usando el atajo de markdown `#` o seleccionando texto y haciendo clic en **Header** en la barra de herramientas.
 
-### Etiquetas (tags) de notebooks
+### Notebook tags {#notebook-tags}
 
-{{< img src="/notebooks/notebooks_new/notebook_tags.png" alt="Opciones de etiquetado para notebooks, para marcar un notebook como favorita, añadir un equipo o añadir un tipo" style="width:80%;" >}}
+{{< img src="/notebooks/notebooks_new/notebook_tags.png" alt="Opciones de Notebook tags para marcar un Notebook como favorito, agregar un equipo o agregar un tipo." style="width:80%;" >}}
 
-| Acción de etiquetado                | Descripción                                                                                                          |
+| Tag action                | Description                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|
-| **Marcar un notebook como favorito**   | Marca un notebook como favorito para fijarlo en la parte superior de tus resultados en la página de la lista de notebooks. Para marcar un notebook como favorito, haz clic en el icono de la estrella que aparece en la cabecera del notebook.                                                                     |
-| **Etiquetar por equipo**           | Etiquetar un notebook con un equipo te permite utilizarlo como filtro cuando buscas un notebook. Puedes etiquetar un notebook con hasta 5 equipos. Para etiquetar un notebook, haz clic en la opción **Team** (Equipo) en la cabecera del notebook y selecciona los equipos deseados. |
-| **Etiquetar por tipo**           | Para facilitar la búsqueda, puedes etiquetar tus notebooks con etiquetas de tipo, como: Postmortem, Runbook, Investigation, Documentation, Report. Para etiquetar un notebook, haz clic en **Type** (Tipo) y selecciona un tipo.                                                     |
+| **Marcar un Notebook como favorito**   | Marcar un Notebook como favorito para fijarlo en la parte superior de tus resultados en la página de la lista de Notebooks. Para alternar un Notebook como favorito, haz clic en el ícono de estrella en el encabezado del Notebook.                                                                     |
+| **Etiquetar por equipo**           | Etiquetar un Notebook con un equipo te permite usarlo como un filtro al buscar un Notebook. Puedes etiquetar un Notebook con hasta 5 equipos. Para etiquetar un Notebook, haz clic en la opción **Team** en el encabezado del Notebook y selecciona los equipos deseados. |
+| **Tag by Type**           | Puedes etiquetar tus Notebooks con etiquetas de tipo para facilitar la búsqueda, tales como: Postmortem, Runbook, Investigation, Documentation, Report. Para etiquetar un Notebook, haz clic en **Type** y selecciona un tipo.                                                     |
 
-### Añadir imágenes a notebooks
+### Agregar imágenes a los notebooks {#add-images-to-notebooks}
 
-<div class="alert alert-info">Solo se admiten los tipos de archivo PNG, JPG, JPEG y GIF. El tamaño máximo de los archivos es de 4 MB.</a></div>
+<div class="alert alert-info">Solo se admiten tipos de archivo PNG, JPG, JPEG y GIF. Las cargas tienen un tamaño máximo de archivo de 4MB.</a></div>
 
-Puedes añadir imágenes a tu notebook utilizando `/image` o el menú **Añadir celda**. Esta acción proporciona opciones para redimensionar, alinear y subtitular la imagen. Las imágenes cargadas se alojan en Datadog.
+Puedes agregar imágenes a tu notebook usando `/image` o el menú **Agregar celda**. Esto proporciona opciones para cambiar el tamaño, alinear y subtitular la imagen. Las imágenes cargadas se alojan en Datadog.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-Puedes utilizar cualquiera de las siguientes opciones para subir una imagen que se alojará en Datadog:
-- Coloca un archivo de imagen en el área de carga
-- Haz clic en **Choose File** (Seleccionar archivo) y localiza la imagen en tu directorio de archivos
-- Pega una URL de acceso público para la imagen
+Puedes usar cualquiera de las siguientes opciones para cargar una imagen que será alojada por Datadog:
+- Suelta un archivo de imagen en el área de carga
+- Haz clic en **Elegir archivo** y localiza la imagen en tu directorio de archivos
+- Pega una URL accesible públicamente para la imagen
 
-Haz clic en los iconos de la bandeja de imágenes acción para ajustar el tamaño, la alineación, añadir un subtítulo a la imagen o verla en pantalla completa.
+Haz clic en los íconos en la bandeja de acciones de la imagen para ajustar el tamaño, la alineación, agregar un pie de foto o ver la imagen en pantalla completa.
 
 
-## Añadir comentarios a un notebook
+## Agregar comentarios a un notebook {#adding-comments-to-a-notebook}
 
-Puedes añadir comentarios sobre el contenido en el cuerpo del notebook. Para comentar un texto, resáltalo y haz clic en el icono de comentario de la barra de herramientas. 
+Puedes agregar comentarios sobre el contenido en el cuerpo del notebook. Para comentar sobre un texto, resalta el texto y haz clic en el ícono de comentario en la barra de herramientas.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-Para comentar un gráfico o una imagen, haz clic en el icono de comentario situado a la derecha del gráfico.
+Para comentar sobre un gráfico o una imagen, haga clic en el ícono de comentario a la derecha del gráfico.
 
-| Función                  | Descripción                                                                                                          |
+| Característica                  | Descripción                                                                                                          |
 |--------------------------|----------------------------------------------------------------------------------------------------------------------|
-| **Ir a los comentarios** | Los comentarios guardados aparecen en el margen derecho del notebook. Haz clic en un comentario resaltado en el texto para abrirlo en el margen o haz clic en un comentario en el margen para desplazarte hasta su ubicación. |
-| **Responder a los comentarios** | Responde a los comentarios haciendo clic en ellos en el margen derecho, lo que abre un cuadro de comentarios. Puedes escribir texto, `@mention` un usuario de Datadog o resolver un comentario haciendo clic en **Resolve** (Resolver). |
-| **Crear enlaces a comentarios**    | Crea un enlace a un comentario específico haciendo clic en el icono del enlace situado en la esquina superior derecha del comentario para copiar su enlace.      |
-| **Editar o eliminar comentarios** | Edita o elimina tus comentarios haciendo clic en el menú de tres puntos situado en la esquina superior derecha del comentario.                 |
-| **Comentar notificaciones** | Por defecto, las notificaciones por correo electrónico se envían al autor del notebook para obtener nuevos comentarios de los demás. Los usuarios de un hilo de comentarios reciben las notificaciones de cada respuesta. Para ajustar las notificaciones, en el menú del engranaje selecciona **Notifications** (Notificaciones). |
+| **Navegando a Comentarios** | Los comentarios guardados aparecen en el margen derecho del notebook. Haz clic en un comentario resaltado en el texto para abrirlo en el margen, o haz clic en un comentario en el margen para desplazarte a su ubicación. |
+| **Responde a los comentarios haciendo clic en ellos en el margen derecho, lo que abre un cuadro de comentario.** |  Puedes escribir texto, `@mention` un usuario de Datadog, o resolver un comentario haciendo clic en **Resolver**. |
+| **Enlazando a Comentarios**    | Enlace a un comentario específico haciendo clic en el ícono de enlace en la esquina superior derecha del comentario para copiar su enlace.      |
+| **Editando o Eliminando Comentarios** | Edita o elimina tus comentarios haciendo clic en el menú de elipsis de tres puntos en la esquina superior derecha del comentario.                 |
+| **Por defecto, se envían notificaciones por correo electrónico al autor del notebook por nuevos comentarios de otros.** |  Los usuarios en un hilo de comentarios reciben notificaciones por cada respuesta. Para ajustar las notificaciones, en el menú de engranaje, selecciona **Notificaciones**. |
 
-## Experiencia multi-usuario en notebooks
+## Experiencia multijugador en Notebooks {#multiplayer-experience-in-notebooks}
 
-Los notebooks son totalmente colaborativos, lo que permite que varios usuarios editen simultáneamente. Cuando un colaborador abre tu notebook, su cursor aparece en tiempo real. Pasa el cursor por encima para ver el nombre del colaborador.
+Notebooks soportan colaboración completa, permitiendo que múltiples usuarios editen simultáneamente. Cuando un colaborador abre tu notebook, su cursor aparece en tiempo real. Pasa el cursor sobre el indicador para ver el nombre del colaborador.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-### Widgets
+### Widgets {#widgets}
 
-Cuando otro usuario está editando un widget, aparece un contorno alrededor del widget. Como los widgets se guardan como escrituras recientes, evita editar un widget en el que esté trabajando otra persona.
+Cuando otro usuario está editando un widget, aparece un contorno alrededor del widget. Dado que los widgets se guardan como el último en escribir, evita editar un widget en el que alguien más esté trabajando.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-#### Presencia
+#### Presencia {#presence}
 
-En la parte superior del notebook, puedes ver las imágenes de los avatares de todos los usuarios que están visualizando el notebook. Pasa el ratón por encima de un avatar para ver el nombre del colaborador asociado.
+En la parte superior del notebook, puedes ver los avatares de todos los usuarios que están viendo el notebook. Pasa el cursor sobre un avatar para ver el nombre del colaborador asociado.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-## Configuración de un notebook
+## Configurando un notebook {#configuring-a-notebook}
 
-### Variables de plantilla
+### Variables de plantilla {#template-variables}
 
-Los notebooks aceptan variables de plantilla. Recorre las visualizaciones de forma dinámica añadiendo y seleccionando valores de variables de plantilla. Para obtener más información, consulta [Variables de plantilla][5].
+Los Notebooks soportan variables de plantilla. Establece de manera dinámica el alcance de las visualizaciones al agregar y seleccionar valores para las variables de plantilla. Para más información, consulta [Variables de Plantilla][5].
 
-<div class="alert alert-danger">Algunas funciones de Análisis tienen un soporte limitado o nulo para las variables de plantilla. Para obtener más información, consulta <a href="/notebooks/guide/template_variables_analysis_notebooks">Compatibilidad con variables de plantilla en Analysis Notebooks</a>.</div>
+<div class="alert alert-danger">Algunas características de Análisis tienen soporte limitado o nulo para variables de plantilla. Para más información, consulta <a href="/notebooks/guide/template_variables_analysis_notebooks">Soporte de Variables de Plantilla en Cuadernos de Análisis</a>.</div>
 
-### Controles de tiempo
+### Controles de tiempo {#time-controls}
 
-Por defecto, todos los gráficos están vinculados al marco temporal global definido en la cabecera del notebook.
+Por defecto, todos los gráficos están vinculados al marco de tiempo global establecido en el encabezado del notebook.
 
-Para ver un marco temporal diferente, selecciona una opción en el selector de tiempo global o desplázate directamente sobre un gráfico. La URL del notebook se actualiza para reflejar este nuevo marco temporal sin guardarlo en el notebook.
+Para ver un marco de tiempo diferente, selecciona una opción en el selector de tiempo global, o desliza sobre un gráfico directamente. La URL del notebook se actualiza para reflejar este nuevo marco de tiempo sin guardarlo en el notebook.
 
-**Nota**: Al hacer clic y arrastrar para ampliar un gráfico no se desbloquea el gráfico de la hora global, sino que se cambia la hora global del notebook.
+**Nota**: Hacer clic y arrastrar para acercar un gráfico no desvincula el gráfico del tiempo global. En su lugar, cambia el tiempo global del cuaderno.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-Para guardar el periodo elegido como el predeterminado del notebook, haz clic en  **Set Default Time** (Definir periodo por omisión). Para restablecer el periodo al global que tuvieras guardado de forma predeterminada, haz clic en el botón de restablecimiento.
+Para guardar este tiempo como el predeterminado del notebook, haz clic en **Establecer Tiempo Predeterminado**. Para restablecer tu tiempo global a la configuración predeterminada guardada anteriormente, haz clic en el botón de restablecer.
 
-Los gráficos individuales pueden desvincularse de la hora global y ajustarse a un marco temporal independiente.
+Los gráficos individuales pueden desvincularse del tiempo global y establecerse en un marco de tiempo independiente.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-Para ver un marco temporal diferente en un solo gráfico, edita el gráfico y utiliza el conmutador para desvincularlo de la hora global. Cambia el marco temporal utilizando el selector de tiempo o desplazándote por el gráfico. Los cambios realizados en el modo de edición se guardan automáticamente al hacer clic en **Done** (Listo). Para descartar los cambios, haz clic en **Cancel** (Cancelar) en lugar de en **Done** (Listo).
+Para ver un marco de tiempo diferente en un solo gráfico, edita el gráfico y usa el interruptor para desvincularlo del tiempo global. Cambia el marco de tiempo usando el selector de tiempo o desliza sobre el gráfico. Los cambios realizados en modo de edición se guardan automáticamente cuando haces clic en **Listo**. Para descartar sus cambios, haga clic en **Cancelar** en lugar de **Listo**.
 
-### Modos
+### Modos {#modes}
 
-Puedes cambiar de un modo a otro en el propio notebook. seleccionando el menú desplegable situado en la parte superior derecha del notebook.
+Puede cambiar entre modos desde dentro del notebook seleccionando el menú desplegable en la parte superior derecha de tu notebook.
 
-- **Edición**: Realizar cambios en el notebook.
-- **Visualización**: Los contenidos son de solo lectura, lo que evita que los usuarios realicen ediciones no deseadas en las configuraciones e información existentes.
+- **Editando**: Haga cambios en el cuaderno.
+- **Viendo**: Los contenidos son Solo Lectura, lo que impide que los usuarios realicen ediciones no deseadas en configuraciones e información existentes.
 
-### Historial de versiones
+### Historial de versiones {#version-history}
 
-Desde el notebook, haz clic en el icono de engranaje y en **Version history** (Historial de versiones) para abrir el panel lateral del historial de versiones. Puedes previsualizar, restaurar o clonar una versión anterior de tu notebook. Para obtener más información, consulta la [guía del historial de versiones][6].
+Desde un notebook, haz clic en el ícono de engranaje y haz clic en **Historial de versiones** para abrir el panel lateral del Historial de Versiones. Puedes previsualizar, restaurar o clonar una versión anterior de tu notebook. Para más información, consulte la [guía del Historial de Versiones][6].
 
-### Snapshots gráficas
+### Instantáneas de gráficos {#graph-snapshots}
 
-Puedes configurar tus notebooks para que capturen snapshots de gráficos que podrían dejar de estar disponibles pronto de forma automática. Activa esta función haciendo clic en **Turn on snapshots** (Activar snapshots) en el menú del engranaje de cualquier notebook. También puedes utilizar este menú para ver tus snapshots y desactivar las automáticas. Recuerda que tendrás que desactivar la función para retirar el acceso a las snapshots que ya tengas.
+Los Notebooks toman instantáneas automáticamente de los gráficos con rangos de tiempo fijos para preservar la visualización antes de que se apliquen los límites de retención de datos. No se requiere configuración. Utiliza el menú kebab junto a un gráfico para ver o descargar una instantánea.
 
-{{< img src="notebooks/cog_snapshots.png" alt="Opción del menú del engranaje para activar las snapshots" style="width:100%;">}}
+{{< img src="notebooks/kebab_snapshots.png" alt="Opción del menú kebab para ver o descargar una instantánea." style="width:100%;">}}
 
- Los notebooks que tengan la función de toma de snapshots automática activa capturan una imagen estática de los gráficos para un periodo de tiempo determinado (por ejemplo, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). Estas snapshots se actualizan cuando el gráfico se modifica, siempre y cuando el nuevo gráfico también tenga vinculado un periodo de tiempo determinado. Si cambias el periodo de tiempo del gráfico a global (por ejemplo `Past 1 Hour`), la snapshot se eliminará. 
+Las instantáneas son imágenes estáticas de gráficos con un rango de tiempo fijo (por ejemplo, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). Una instantánea se actualiza cuando el gráfico se actualiza, siempre que el gráfico continúe utilizando un rango de tiempo fijo. Cambiar el gráfico a un rango de tiempo global (por ejemplo, `Past 1 hour`) elimina la instantánea.
 
-Puedes previsualizar el snapshot existente en cualquier gráfico de tiempo fijo pasando el ratón por encima del icono de la cámara mientras estás en modo edición.
+Puedes previsualizar el estado de la instantánea de un Notebook al pasar el cursor sobre el indicador de instantánea del gráfico debajo del título del Notebook. La previsualización muestra la hora de la instantánea más reciente y el número de instantáneas creadas.
 
-Si quieres compartir una versión de tu notebook con snapshots, desde el menú del engranaje, haz clic en **View snapshots** (Ver snapshots). Copia la URL o anexa `&view=snapshots` a la URL de cualquier notebook que tenga la función de snapshot activada.
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Indicador de instantánea que muestra cuántas instantáneas se han generado." style="width:100%;">}}
 
-### Permisos
+Cuando un Notebook contiene un gráfico con datos que han superado sus límites de retención de datos, el Notebook muestra una instantánea en línea del gráfico. La instantánea es una imagen estática, pero se reemplaza si editas el gráfico subyacente.
 
-Por omisión, todos los usuarios tienen acceso completo a notebooks.
+### Permisos {#permissions}
 
-Utiliza los controles de acceso granular para limitar los [roles][7] que pueden editar un notebook concreto:
-1. Cuando consultes un notebook, haz clic en el engranaje que aparece en la parte superior derecha. Se abrirá el menú de configuración.
-1. Selecciona **Permissions** (Permisos).
-1. Haz clic en **Restrict Access** (Restringir el acceso).
-1. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
-1. Utiliza el menú desplegable para seleccionar uno o varios roles, equipos o usuarios que pueden modificar el notebook.
-1. Haz clic en **Add** (Añadir).
-1. El cuadro de diálogo se actualiza para indicar que el rol que has seleccionado tiene el permiso **Editor** (Edición).
-1. Haz clic en **Save** (Guardar).
+Por defecto, todos los usuarios tienen acceso completo a los Notebooks.
 
-**Nota:** Para mantener tu acceso de edición al notebook, el sistema necesita que incluyas al menos un rol al que pertenezcas antes de guardar.
+Utiliza nuestros controles de acceso para restringir la visualización y edición solo a ti mismo:
+1. Mientras visualizas un Notebook, haz clic en el botón **Compartir** en la parte superior derecha.
+1. Selecciona **Privado para mí**.
+1. Haz clic en **Guardar**.
 
-Debes tener acceso de edición para restaurar el acceso general a un notebook restringido. Realiza los siguientes pasos:
-1. Cuando consultes un notebook, haz clic en el engranaje que aparece en la parte superior derecha. Se abrirá el menú de configuración.
-1. Selecciona **Permissions** (Permisos).
-1. Haz clic en **Restore Full Access** (Restablecer acceso completo).
-1. Haz clic en **Save** (Guardar).
+Utiliza controles de acceso granulares para limitar los [roles][7] que pueden editar un Notebook en particular:
+1. Mientras visualizas un Notebook, haz clic en el botón **Compartir** en la parte superior derecha.
+1. Selecciona **Personalizado**.
+1. Actualiza el acceso de la Organización a **Visualizador** para revocar el acceso de edición al resto de la organización.
+1. Utiliza el menú desplegable para seleccionar uno o más roles, equipos o usuarios que puedan editar el Notebook.
+1. Haz clic en **Agregar**.
+1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionaste tiene el permiso de **Editor**.
+1. Haz clic en **Guardar**.
 
-## Buscar notebooks
+**Nota:** Para mantener tu acceso de edición al notebook, el sistema requiere que incluyas al menos un rol del cual seas miembro antes de guardar.
 
-La [página de la lista de notebooks][1] es el lugar donde encontrarás todos tus notebooks.
+Debes tener acceso de edición para restaurar el acceso general a un notebook restringido. Completa los siguientes pasos:
+1. Mientras visualizas un Notebook, haz clic en el botón **Compartir** en la parte superior derecha.
+1. Selecciona **Mi Organización**.
+1. Haz clic en **Guardar**.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+## Encontrando notebooks {#finding-notebooks}
 
-### Búsqueda
+La página [Notebooks List][1] es el lugar para encontrar todos tus notebooks.
 
-El campo de búsqueda admite la búsqueda de texto completo. Escribe tu consulta para ver los notebook relevantes como resultados.
+<!-- TODO Add updated image from new notebooks -->
 
-### Filtrado
+### Buscar {#search}
+
+El campo de búsqueda admite búsqueda de texto completo. Escribe tu consulta para mostrar los notebooks relevantes como resultados.
+
+### Filtrando {#filtering}
 
 Puedes filtrar notebooks con los siguientes métodos:
-| Tipo de filtro | Descripción |
-|------------------|------------------------------------------------------------------------------------------------------------------|
-| **Autor** | Para filtrar por autor, selecciona el menú desplegable de autores e introduce los nombres por los que quieres filtrar. |
-| **Equipo** |  Para filtrar por equipo, selecciona el menú desplegable de equipos e introduce los nombres por los que quieres filtrar. |
-| **Tipo de notebook**| Filtra por investigación, análisis retrospectivo, guía, informe o documentación. |
-| **Fecha de modificación**| Filtra en función de la fecha de edición reciente de un notebook, utilizando el desplegable de fechas de modificación. |
+| Tipo de Filtro      | Descripción                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| **Autor**       | Para filtrar por autor, selecciona el menú desplegable de autores e ingresa nombres para filtrar. |
+| **Equipo**         | Para filtrar por equipo, selecciona el menú desplegable de equipos e ingresa los nombres de los equipos para filtrar. |
+| **Tipo de notebook**| Filtra por investigación, postmortem, runbook, informe o documentación.     |
+| **Fecha de modificación**| Filtra según cuán recientemente se editó un notebook utilizando el menú desplegable de fecha de modificación. |
 
-También existen filtros rápidos para acceder a tus notebooks y a los notebooks etiquetados con tus equipos.
+También hay filtros rápidos para acceder a tus notebooks y notebooks etiquetados con tus equipos.
 
-### Acceso rápido
+### Regresar a {#jump-back-in}
 
-Si no hay filtros activados, aparece la sección Acceso rápido, que muestra los notebooks más recientes que visualizaste o editaste.
+Si no hay filtros habilitados, la sección Regresar a aparece, mostrando los notebooks más recientes que has visto o editado.
 
-<!-- TODO Añadir imagen actualizada de notebooks nuevos -->
+<!-- TODO Add updated image from new notebooks -->
 
-### Clasificación de notebooks
+### Ordenando notebooks {#sorting-notebooks}
 
-Puedes clasificar notebooks seleccionando la ⭐, los detalles o las cabeceras modificadas para clasificar por estos valores.
+Puedes ordenar los notebooks seleccionando los encabezados ⭐, detalles o modificados para ordenarlos por esos valores.
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /es/dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /es/dashboards/template_variables/
 [6]: /es/notebooks/guide/version_history
 [7]: /es/account_management/rbac/
+[8]: /es/incident_response/incident_management/post_incident/postmortems

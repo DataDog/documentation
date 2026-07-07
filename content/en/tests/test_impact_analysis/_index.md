@@ -65,9 +65,17 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
+After you have set up your Datadog library for Test Impact Analysis, configure it from [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Optimization Settings page" style="width:80%" >}}
+Test Impact Analysis can be configured at three levels, and lower levels can override values from the level above:
+
+- **Organization defaults**: Apply to every repository unless overridden. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, then select the {{< ui >}}Organization{{< /ui >}} tab.
+- **Repository**: Overrides organization defaults for a specific repository. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, select the {{< ui >}}Repository-specific{{< /ui >}} tab, and choose a repository.
+- **Test service**: Overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
+
+At the repository and test service levels, each setting can either {{< ui >}}Inherit{{< /ui >}} the value from the level above or be set to a {{< ui >}}Custom{{< /ui >}} value at the current level.
+
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." style="width:80%" >}}
 
 ### Git executable
 
@@ -77,7 +85,7 @@ For Test Impact Analysis to work, [Git][6] needs to be available in the host run
 
 Due to the [limitations](#out-of-the-box-configuration-limitations) described above, the default branch of your repository is automatically excluded from having Test Impact Analysis enabled. Datadog recommends this configuration to ensure that all of your tests run prior to reaching production.
 
-If there are other branches you want to exclude, add them on the Test Optimization Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
+If there are other branches you want to exclude, add them on the CI/CD Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
 
 Excluded branches collect per-test code coverage, which has a performance impact on the total testing time. However, this performance impact is mitigated by only collecting code coverage when Datadog detects that running with code coverage generates enough new coverage information that it offsets the cost of collecting the coverage. You can check whether a test session has code coverage enabled or not by looking at the `@test.code_coverage.enabled` field.
 
@@ -93,7 +101,7 @@ When you specify a set of tracked files, Test Impact Analysis runs all tests if 
 
 All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Select branches to exclude and tracked files" style="width:80%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Select branches to exclude and tracked files." style="width:80%" >}}
 
 ## Explore test sessions
 
@@ -123,7 +131,7 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [2]: /glossary/#flaky-test
 [3]: /tests/test_impact_analysis/setup
 [4]: /continuous_integration/tests/
-[5]: https://app.datadoghq.com/ci/settings/test-optimization
+[5]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [6]: https://git-scm.com/
 [7]: https://app.datadoghq.com/ci/test-runs
 [8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner

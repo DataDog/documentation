@@ -118,5 +118,5 @@ If you encounter issues while setting up App and API Protection for your Node.js
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/nodejs/compatibility
+[1]: /security/application_security/setup/compatibility/nodejs
 [2]: /security/application_security/setup/nodejs/troubleshooting

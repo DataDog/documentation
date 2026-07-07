@@ -35,13 +35,13 @@ Schedule downtimes for system shutdowns, offline maintenance, or upgrades withou
 
 ### Create a downtime schedule
 
-To schedule a monitor downtime in Datadog, navigate to the [**Manage Downtime**][1] page. Then, click the **Schedule Downtime** button in the upper right.
+To schedule a monitor downtime in Datadog, navigate to the [{{< ui >}}Manage Downtime{{< /ui >}}][1] page. Then, click the {{< ui >}}Schedule Downtime{{< /ui >}} button in the upper right.
 
-To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
+To mute an individual monitor, click the {{< ui >}}Mute{{< /ui >}} button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
 ### Choose what to silence
 
-Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
+Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [{{< ui >}}Group scope{{< /ui >}}](#downtime-scope). Click {{< ui >}}Preview affected monitors{{< /ui >}} to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
 **Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
@@ -133,8 +133,8 @@ The option to disable the first recovery notification is additive between multip
 
 ## Manage
 
-The [Manage Downtime page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
-Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
+The [{{< ui >}}Manage Downtime{{< /ui >}} page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
+Use the facets panel and the search bar to filter the list on the {{< ui >}}Creator{{< /ui >}}, the {{< ui >}}Scope{{< /ui >}}, {{< ui >}}Monitor Tags{{< /ui >}}, or {{< ui >}}Active{{< /ui >}}, {{< ui >}}Automuted{{< /ui >}}, {{< ui >}}Recurring{{< /ui >}} parameters.
 
 {{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}
 
@@ -148,13 +148,13 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="Monitor status graph showing state transition to alert during downtime, will not create an alert event" style="width:80%;">}}
 
-**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtime][1] page or the [API][11].
+**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [{{< ui >}}Manage Downtime{{< /ui >}}][1] page or the [API][11].
 
 ### Expiration
 
 By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
 
-To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the **Configure notifications and automations** section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the {{< ui >}}Configure notifications and automations{{< /ui >}} section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
 
 {{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="The Configure notifications and automations section of a monitor with specific downtime conditions" style="width:100%;">}}
 

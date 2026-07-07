@@ -7,7 +7,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
@@ -36,7 +36,7 @@ algolia:
 
 ## Overview
 
-Selecting a service on the Software Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
@@ -44,7 +44,7 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -62,7 +62,7 @@ Service health integrates multiple signals (monitors, incidents, and Watchdog In
 
 Service health is available in several places in Datadog:
 
-1. [Software Catalog][23]
+1. [Catalog][23]
 2. Service pages
 3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies.
 4. Service pills
@@ -112,6 +112,8 @@ Datadog provides out-of-the-box graphs for any given service. Use the dropdown a
 
 {{% apm-ootb-graphs %}}
 
+<div class="alert alert-tip">When you hover over a latency spike in the latency graph, click <strong>Investigate With Bits AI</strong> to launch an automated investigation. Bits AI analyzes tag divergence and bottlenecks across the affected traces. For more information, see <a href="/bits_ai/bits_chat/#latency-investigations">Latency investigations</a>.</div>
+
 ### Export
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][10]:
@@ -128,7 +130,7 @@ Sort the service's resources by requests, latency, errors, or time to identify h
 
 {{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
-Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
+Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the {{< ui >}}Resources{{< /ui >}} list and compare resources in a service. To view the full resource page, click {{< ui >}}Open Full Page{{< /ui >}}.
 
 [Refer to the dedicated resource documentation to learn more][2].
 
@@ -136,16 +138,16 @@ Click on a resource to open a side panel that displays the resource's out-of-the
 
 Choose what to display in your resources list:
 
-* **Requests**: Absolute amount of requests traced (per seconds)
-* **Requests per second**: Absolute amount of requests traced per second
-* **Total time**: Sum of all time spend in this resource
-* **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
-* **Errors**: Absolute amount of error for a given resource
-* **Error Rate**: Percent of error for a given resource
+* {{< ui >}}Requests{{< /ui >}}: Absolute amount of requests traced (per seconds)
+* {{< ui >}}Requests per second{{< /ui >}}: Absolute amount of requests traced per second
+* {{< ui >}}Total time{{< /ui >}}: Sum of all time spend in this resource
+* {{< ui >}}Avg/p75/p90/p95/p99/Max Latency{{< /ui >}}: The Avg/p75/p90/p95/p99/Max latency of your traced requests
+* {{< ui >}}Errors{{< /ui >}}: Absolute amount of error for a given resource
+* {{< ui >}}Error Rate{{< /ui >}}: Percent of error for a given resource
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
@@ -242,7 +244,7 @@ If runtime metrics are enabled in the tracing client, you'll see a Runtime metri
 ### Profiling
 You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
 
-Use the information in the **Profiling** tab to correlate a latency and throughput change to a code performance change.
+Use the information in the {{< ui >}}Profiling{{< /ui >}} tab to correlate a latency and throughput change to a code performance change.
 
 In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 

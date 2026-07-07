@@ -39,7 +39,10 @@ Capturing handled errors is only available in APM Error Tracking or Standalone B
 
 Set up your application to capture handled errors using one of the following official Datadog SDKs:
 
-{{< partial name="error_tracking/error-tracking-handled-errors.html" >}}
+{{< card-grid card_width="350px" image_width="200" >}}
+  {{< image-card href="/error_tracking/backend/capturing_handled_errors/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/error_tracking/backend/capturing_handled_errors/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 <br />
 
 ## Further reading

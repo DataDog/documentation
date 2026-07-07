@@ -37,7 +37,16 @@ Sustituye el SDK de OpenTelemetry por la librería de rastreo de Datadog en la a
 
 Para más información, sigue el enlace correspondiente a tu lenguaje:
 
-{{< partial name="apm/otel-instrumentation.html" >}}
+{{< card-grid card_width="170px">}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 
 <br>
 

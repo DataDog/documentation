@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner Guides
+description: Step-by-step guides for Sensitive Data Scanner, including how to investigate sensitive data findings and create monitors to alert on sensitive data.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/guide

@@ -30,11 +30,11 @@ Follow [the instructions][3] for creating a GitHub app for your organization.
 
 After you set up the GitHub integration, enable IaC remediation for the repositories in your GitHub account.
 
-1. On the [Cloud Security Setup page][4], expand the **Source Code Integrations** section.
-2. Click **Configure** for the GitHub account you want to configure.
+1. On the [Cloud Security Setup page][4], expand the {{< ui >}}Source Code Integrations{{< /ui >}} section.
+2. Click {{< ui >}}Configure{{< /ui >}} for the GitHub account you want to configure.
 3. To enable IaC:
-    - All repositories: Toggle **Enable Infrastructure as Code (IaC) Remediation** to the on position.
-    - Single repository: Toggle the **IAC Remediation** option for the specific repository to the on position.
+    - All repositories: Toggle {{< ui >}}Enable Infrastructure as Code (IaC) Remediation{{< /ui >}} to the on position.
+    - Single repository: Toggle the {{< ui >}}IAC Remediation{{< /ui >}} option for the specific repository to the on position.
 
 ## Further reading
 

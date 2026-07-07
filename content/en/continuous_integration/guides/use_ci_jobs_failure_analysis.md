@@ -14,6 +14,8 @@ further_reading:
 
 This guide explains how to use CI jobs failure analysis to determine the most common root cause of failed CI jobs. This can help improve the user experience with CI pipelines.
 
+Datadog also uses this classifier to power [automatic job retries][10], which reruns jobs whose failures are likely transient.
+
 ### Understanding CI jobs failure analysis
 
 CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
@@ -145,9 +147,17 @@ You can import the {{< ui >}}CI Visibility - CI Jobs Failure Analysis{{< /ui >}}
 
 You can add jobs failure analysis in your PR comments.
 
-For PR Comments to be posted, your repositories need to be integrated with Datadog. To learn more about integrating repositories with Datadog, review how to [Connect your Git repositories to Datadog][7] documentation.
-
 {{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
+
+For PR Comments to be posted, your repositories must be integrated with Datadog. To learn more, see [Connect your Git repositories to Datadog][7].
+
+Enable PR Comments from [**CI/CD Optimization** > **Settings** > **Repositories**][11]:
+
+1. Choose where to apply the setting:
+   - Select the **Organization** tab to enable PR Comments for every repository by default.
+   - Select the **Repository-specific** tab to enable PR Comments for a single repository.
+1. Under **General**, toggle **PR Comments** on.
+
 
 ## Further reading
 
@@ -162,3 +172,5 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
 [8]:/continuous_integration/pipelines/azure/
 [9]:/logs/log_configuration/indexes#exclusion-filters
+[10]:/continuous_integration/pipelines/automatic_retries/
+[11]:https://app.datadoghq.com/ci/settings/ci-cd/repositories

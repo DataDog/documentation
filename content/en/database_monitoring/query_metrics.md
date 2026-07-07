@@ -16,7 +16,10 @@ further_reading:
   text: "SQL Server integration"
 - link: "/integrations/oracle/"
   tag: "Documentation"
-  text: "Oracle integration"  
+  text: "Oracle integration"
+- link: "/integrations/mongo/"
+  tag: "Documentation"
+  text: "MongoDB integration"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -72,7 +75,13 @@ The Query Metrics list shows Requests, Average latency, Total time, and Percent 
 
 To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="200px">}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 The metrics used for Database Monitoring views are, primarily:
@@ -80,6 +89,7 @@ The metrics used for Database Monitoring views are, primarily:
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
 - **Oracle**: `oracle.queries.*`
+- **MongoDB**: `mongodb.queries.*`
 
 ## Query details page
 

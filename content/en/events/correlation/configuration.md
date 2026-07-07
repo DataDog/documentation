@@ -3,10 +3,10 @@ title: Configuration
 aliases:
 - /service_management/events/correlation/configuration/
 further_reading:
-- link: "service_management/events/correlation/triage_and_notify"
+- link: "events/correlation/triage_and_notify"
   tag: "Documentation"
   text: "Learn about triaging and notifiying on cases"
-- link: "service_management/events/correlation/analytics"
+- link: "events/correlation/analytics"
   tag: "Documentation"
   text: "Analytics on cases"
 ---
@@ -15,15 +15,15 @@ further_reading:
 
 There are two types of correlations: 
 
-- **Pattern-based**: you control how the events are correlated. Datadog also automatically enriches your pattern-based correlation with intelligent alerts powered by ML model.
-- **Intelligent**: uses a ML modeling approach, where Datadog automatically correlates on your behalf, without the need for any configuration. You can optionally filter the scope of events considered for intelligent correlation.
+- {{< ui >}}Pattern-based{{< /ui >}}: you control how the events are correlated. Datadog also automatically enriches your pattern-based correlation with intelligent alerts powered by ML model.
+- {{< ui >}}Intelligent{{< /ui >}}: uses a ML modeling approach, where Datadog automatically correlates on your behalf, without the need for any configuration. You can optionally filter the scope of events considered for intelligent correlation.
 
 
 ### Configure Correlation
 
 {{< whatsnext desc=" " >}}
-   {{< nextlink href="service_management/events/correlation/patterns" >}}Pattern-based correlation{{< /nextlink >}}
-   {{< nextlink href="service_management/events/correlation/intelligent" >}}Intelligent correlation{{< /nextlink >}}
+   {{< nextlink href="events/correlation/patterns" >}}Pattern-based correlation{{< /nextlink >}}
+   {{< nextlink href="events/correlation/intelligent" >}}Intelligent correlation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

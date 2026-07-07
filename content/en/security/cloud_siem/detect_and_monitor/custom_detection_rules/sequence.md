@@ -50,11 +50,11 @@ When you [create a sequence detection rule][1], you can configure these options:
 
 | Setting | Description | Impact |
 |---------|-------------|--------|
-| Data type | Specify whether each query evaluates logs, signals, or rules. | Defines data sources for detection. |
-| Steps | Define each detection condition, including query and threshold. | Determines which behaviors are monitored. |
-| Step transitions | Define the order and time relationship between steps. | Controls when a sequence qualifies for a signal. |
-| Evaluation window | After a step has occurred, the time (in seconds) to wait for the next step. | Larger windows increase detection coverage, but may result in more noise. |
-| Group by fields | Fields used to link activity across steps (for example, `@usr.email`, `@ip`). | Determines how entities are correlated across queries. |
+| {{< ui >}}Data type{{< /ui >}} | Specify whether each query evaluates logs, signals, or rules. | Defines data sources for detection. |
+| {{< ui >}}Steps{{< /ui >}} | Define each detection condition, including query and threshold. | Determines which behaviors are monitored. |
+| {{< ui >}}Step transitions{{< /ui >}} | Define the order and time relationship between steps. | Controls when a sequence qualifies for a signal. |
+| {{< ui >}}Evaluation window{{< /ui >}} | After a step has occurred, the time (in seconds) to wait for the next step. | Larger windows increase detection coverage, but may result in more noise. |
+| {{< ui >}}Group by fields{{< /ui >}} | Fields used to link activity across steps (for example, `@usr.email`, `@ip`). | Determines how entities are correlated across queries. |
 
 ## Limits
 

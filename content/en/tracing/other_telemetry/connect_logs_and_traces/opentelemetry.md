@@ -332,22 +332,22 @@ After your application is sending traces, you can navigate between them in Datad
 
 ### From a trace to logs
 
-1. Navigate to [**APM** > **Traces**][3].
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][3].
 2. Find and click on a trace from your instrumented service.
 3. Select any span in the flame graph to view its details.
-4. Click the **Logs** tab.
+4. Click the {{< ui >}}Logs{{< /ui >}} tab.
 
 Here, you can see all the logs generated during the execution of that specific span.
 
 ### From a log to a trace
 
-1. Navigate to [**Logs** > **Explorer**][4].
+1. Navigate to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][4].
 2. Find and click a log entry from your instrumented service.
-3. Click the **Trace** tab.
+3. Click the {{< ui >}}Trace{{< /ui >}} tab.
 
 Here, you can see a flame graph of the associated trace, with the span that generated the log. 
 
-Click **View Trace in APM** to pivot directly to the full APM trace associated with that log event, allowing you to see the context of the entire request.
+Click {{< ui >}}View Trace in APM{{< /ui >}} to pivot directly to the full APM trace associated with that log event, allowing you to see the context of the entire request.
 
 ## Further reading
 

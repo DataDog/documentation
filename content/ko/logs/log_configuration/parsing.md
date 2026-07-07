@@ -13,13 +13,13 @@ aliases:
 description: Grok 프로세서를 사용하여 로그 구문 분석
 further_reading:
 - link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Learning Center
+  tag: 학습 센터
   text: 로그 파이프라인 빌드 및 수정 방법 알아보기
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: 설명서
   text: 로그 처리 방법 알아보기
 - link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
-  tag: Video
+  tag: 비디오
   text: 'Datadog 모범 사례와 사용 팁: Grok 구문 분석을 사용해 로그에서 필드 추출'
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
@@ -28,28 +28,31 @@ further_reading:
   tag: FAQ
   text: 로그 구문 분석 - 모범 사례
 - link: /logs/logging_without_limits/
-  tag: Documentation
+  tag: 설명서
   text: Datadog로 인덱싱된 로그 볼륨 제어
+- link: https://learn.datadoghq.com/courses/debugging-log-pipelines
+  tag: 학습 센터
+  text: 로그 파이프라인 디버깅
 title: 구문 분석
 ---
-{{< learning-center-callout header="학습 센터에서 Grok 구문 분석 시도" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
-  Pipeline Scanner를 통해 로그 파이프라인을 빌드 및 수정하고, 관리하는 방법을 알아보세요. 일관성을 위해 처리된 로그 간 특성 이름을 표준화하는 방법도 알아보세요.
+{{< learning-center-callout header="학습 센터에서 Grok 구문 분석해보기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  로그 파이프라인을 빌드해 수정하고, Pipeline Scanner로 관리하고 처리된 로그 전체의 속성 이름을 표준화하여 일관성을 실현하는 방법을 알아보세요.
 {{< /learning-center-callout >}}
 
 ## 개요 {#overview}
 
-Datadog은 JSON 형식의 로그를 자동으로 구문 분석합니다. 다른 형식의 경우, Datadog에서는 Grok 구문 분석기를 통해 로그를 보강할 수 있도록 지원합니다.
-Grok 구문은 순수 정규식보다 로그를 더 쉽게 구문 분석할 수 있는 방법을 제공합니다. Grok 구문 분석기를 사용하면 반구조화된 텍스트 메시지에서 특성을 추출할 수 있습니다.
+Datadog은 JSON 형식의 로그를 자동으로 구문 분석합니다. 다른 형식의 경우, Datadog에서 Grok 파서의 도움을 받아 로그를 강화할 수 있습니다.
+Grok 구문은 순수 정규식보다 로그를 더 쉽게 구문 분석할 수 있는 방법을 제공합니다 Grok 파서를 사용하면 반구조화된 텍스트 메시지에서 속성을 추출할 수 있습니다.
 
-Grok에는 정수, IP 주소, 호스트 이름 등을 구문 분석하는 재사용 가능한 패턴이 포함되어 있습니다. 이러한 값은 문자열로 Grok 구문 분석기에 보내야 합니다.
+Grok에는 정수, IP 주소, 호스트 이름 등을 구문 분석할 수 있는 재사용 가능한 패턴이 포함되어 있습니다. 이러한 값을 Grok 파서에 문자열 형태로 보내야 합니다.
 
 `%{MATCHER:EXTRACT:FILTER}` 구문을 사용하여 구문 분석 규칙을 작성할 수 있습니다.
 
-* **Matcher**: 예상되는 내용(숫자, 단어, notSpace 등)을 설명하는 규칙(다른 토큰 규칙에 대한 참조일 수 있음)입니다.
+* **Matcher**: 예상되는 내용(숫자, 단어, notSpace 등)을 설명하는 규칙입니다(다른 토큰 규칙에 대한 참조일 수 있음).
 
-* **Extract**(선택 사항): *Matcher*와 일치하는 텍스트 조각의 캡처 대상을 나타내는 식별자입니다.
+* **Extract**(선택 사항): *Matcher*가 매칭한 텍스트 조각의 캡처 대상을 나타내는 식별자입니다.
 
-* **Filter**(선택 사항): 매치를 변환하는 포스트 프로세서입니다.
+* **Filter**(선택 사항): 일치 항목을 변환할 사후 프로세서입니다.
 
 구조화되지 않은 전형적인 로그 예시:
 
@@ -74,72 +77,83 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 **참고**:
 
-* 단일 Grok 구문 분석기에 여러 개의 구문 분석 규칙이 있는 경우
-  * 하나의 항목만 주어진 로그와 일치할 수 있습니다. 위에서부터 첫 번째 항목이 일치하면 해당 항목이 구문 분석됩니다.
-  * 각 규칙은 목록에서 위에 정의된 구문 분석 규칙을 참조할 수 있습니다.
-* 동일한 Grok 구문 분석기 내에 고유한 규칙 이름이 있어야 합니다.
-* 규칙 이름은 영숫자, `_` 및 `.`만 포함해야 하며, 반드시 영숫자로 시작해야 합니다.
-* 값이 null이거나 비어 있는 속성은 표시되지 않습니다.
-* 각 규칙은 로그의 시작부터 끝까지 적용되므로 전체 로그 항목과 일치하도록 구문 분석 규칙을 정의해야 합니다.
-* 특정 로그에는 공백이 다수 생성될 수 있습니다. `\n` 및 `\s+`를 사용하여 줄 바꿈과 공백을 고려하세요.
+* Grok 파서 하나에 구문 분석 규칙이 여러 개인 경우:
+  * 하나의 항목만 주어진 로그와 일치할 수 있습니다. 위에서 첫 번째로 일치하는 항목을 구문 분석합니다.
+  * 각 규칙이 위의 목록에 정의된 구문 분석 규칙을 참조할 수 있습니다.
+* 같은 Grok 파서 내에 고유한 규칙 이름이 있어야 합니다.
+* 규칙 이름에는 영숫자, `_`, `.`만 포함해야 합니다. 규칙은 반드시 영숫자로 시작해야 합니다.
+* null이나 빈 값이 포함된 속성은 표시되지 않습니다.
+* 구문 분석 규칙은 로그의 시작부터 끝까지 적용되므로, 각 규칙이 로그 항목 전체와 일치하도록 정의해야 합니다.
+* 특정 로그는 큰 공백을 생성할 수 있습니다. `\n` 및 `\s+`를 사용하여 줄 바꿈 및 공백을 고려하세요.
 
-### 일치기 및 필터 {#matcher-and-filter}
+### 매처 및 필터 {#matcher-and-filter}
 
-<div class="alert alert-danger"><em>query-time</em>에 사용 가능한 Grok 구문 분석 기능(<a href="/logs/explorer/calculated_fields/">Log Explorer</a>에서)은 일치기(<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong> 및 <strong>word</strong>)와 필터(<strong>number</strong> 및 <strong>integer</strong>)의 제한된 하위 세트를 지원합니다.<br><br>
-다음 일치기 및 필터의 전체 세트는 <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok 구문 분석기</a> 기능에만 적용됩니다.</div>
+<div class="alert alert-danger"><em>query-time</em>(<a href="/logs/explorer/calculated_fields/">Log Explorer</a>에서)에 사용 가능한 Grok 구문 분석 기능은 매처의 몇몇 하위 집합(<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, <strong>word</strong>) 및 필터(<strong>number</strong> 및 <strong>integer</strong>)를 지원합니다.<br><br>
+다음 매처 및 필터 세트 전체는 <em>ingest-time</em> <a href="/logs/log_configuration/processors/grok_parser/">Grok 파서</a> 기능에만 적용됩니다.</div>
 
-다음은 Datadog에서 기본적으로 구현된 모든 일치기와 필터 목록을 보여줍니다.
+다음은 Datadog에서 기본적으로 구현되는 모든 매처 및 필터의 목록입니다.
 
 {{< tabs >}}
-{{% tab "일치기" %}}
+{{% tab "매처" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])`
-: 날짜를 지정된 패턴과 매칭하고 구문 분석하여 Unix 타임스탬프를 생성합니다. [날짜 일치기 예시를 참조하세요](#parsing-dates).
+**Query-time 및 ingest-time 매처:**
 
-`regex("pattern")`
-: 정규식을 매칭합니다. [정규식 일치기 예시를 확인하세요](#regex).
+다음 매처는 query-time 구문 분석(Log Explorer)과 ingest-time 구문 분석(Grok 파서) 양쪽 모두에 사용할 수 있습니다.
+
+`word`
+: 단어 경계로 시작하고, a~z, A~Z, 0~9 문자를 포함하며(`_`(밑줄) 문자 포함), 단어 경계로 끝나는 _word_를 매칭합니다. 정규식의 `\b\w+\b`에 해당합니다.
 
 `notSpace`
 : 다음 공백까지 모든 문자열을 매칭합니다.
 
-`boolean("truePattern", "falsePattern")`
-: 부울 연산자를 매칭하고 구문 분석합니다. 선택적으로 참/거짓 패턴을 정의합니다(기본값은 `true` 및 `false`로 대소문자 무시).
-
-`numberStr`
-: 십진수 부동 소수점 숫자를 매칭하고 문자열로 구문 분석합니다.
-
 `number`
-: 십진수 부동 소수점 숫자를 매칭하고 배정밀도 숫자로 구문 분석합니다.
-
-`numberExtStr`
-: 부동 소수점 숫자(과학 표기법 지원)를 매칭하고 문자열로 구문 분석합니다.
-
-`numberExt`
-: 부동 소수점 숫자(과학 표기법 지원)를 매칭하고 배정밀도 숫자로 구문 분석합니다.
-
-`integerStr`
-: 정수를 매칭하고 문자열로 구문 분석합니다.
+: 십진수로 표현되는 부동 소수점 숫자를 매칭하고 이를 배정밀도의 수로 구문 분석합니다.
 
 `integer`
-: 정수를 매칭하고 정수로 구문 분석합니다.
+: 정수를 매칭하고 이를 정수로 구문 분석합니다.
+
+`data`
+: 공백과 줄 바꿈을 포함한 모든 문자열을 매칭합니다. 정규식의 `.*`에 해당합니다. 위의 패턴 중에 적절한 것이 없을 때 사용하세요.
+
+**Ingest-time 전용 매처:**
+
+다음 매처는 Grok 파서로 ingest-time 구문 분석에만 사용할 수 있고, Log Explorer에서는 사용할 수 없습니다.
+
+`date("pattern"[, "timezoneId"[, "localeId"]])`
+: 날짜를 지정된 패턴과 매칭하고 구문 분석하여 Unix 타임스탬프를 생성합니다. [날짜 매처 예시 참조](#parsing-dates).
+
+`regex("pattern")`
+: 정규식을 매칭합니다. [정규식 매처 예시 참조](#regex).
+
+`boolean("truePattern", "falsePattern")`
+: 부울 값을 매칭하고 구문 분석하며, 선택 사항으로 참 및 거짓 패턴을 정의합니다(기본값은 `true` 및 `false`, 대소문자 구분 안 함).
+
+`numberStr`
+: 십진수 부동 소수점 숫자를 매칭하고 이를 문자열로 구문 분석합니다.
+
+`numberExtStr`
+: 부동 소수점 숫자를 매칭하고(과학적 표기법 지원) 이를 문자열로 구문 분석합니다.
+
+`numberExt`
+: 부동 소수점 숫자를 매칭하고(과학적 표기법 지원) 이를 배정밀도 숫자로 구문 분석합니다.
+
+`integerStr`
+: 정수를 매칭하고 이를 문자열로 구문 분석합니다.
 
 `integerExtStr`
-: 정수(과학 표기법 지원 포함)를 매칭하고 문자열로 구문 분석합니다.
+: 정수를 매칭하고(과학적 표기법 지원) 이를 문자열로 구문 분석합니다.
 
 `integerExt`
-: 정수(과학 표기법 지원 포함)를 매칭하고 정수로 구문 분석합니다.
-
-`word`
-: 단어 경계로 시작하고 끝나며, `_`(밑줄) 문자와 a-z, A-Z, 0-9의 문자를 포함하는 _word_를 매칭합니다. 정규식의 `\b\w+\b`에 해당합니다.
+: 정수를 매칭하고(과학적 표기법 지원) 이를 정수로 구문 분석합니다.
 
 `doubleQuotedString`
-: 큰따옴표로 묶인 문자열을 매칭합니다.
+: 큰따옴표로 묶은 문자열을 매칭합니다.
 
 `singleQuotedString`
-: 작은따옴표로 묶인 문자열을 매칭합니다.
+: 작은따옴표로 묶은 문자열을 매칭합니다.
 
 `quotedString`
-: 큰따옴표 또는 작은따옴표로 묶인 문자열을 매칭합니다.
+: 큰따옴표 또는 작은따옴표로 묶은 문자열을 매칭합니다.
 
 `uuid`
 : UUID를 매칭합니다.
@@ -165,35 +179,40 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 `port`
 : 포트 번호를 매칭합니다.
 
-`data`
-: 공백과 줄 바꿈을 포함한 모든 문자열을 매칭합니다. 정규식의 `.*`에 해당합니다. 위의 패턴 중 어느 것도 적절하지 않을 때 사용합니다.
-
 {{% /tab %}}
 {{% tab "필터" %}}
 
+**Query-time 및 ingest-time 필터:**
+
+다음 필터는 query-time 구문 분석(Log Explorer)과 ingest-time 구문 분석(Grok 파서) 양쪽 모두에 사용할 수 있습니다.
+
 `number`
-: 매칭 항목을 배정밀도 숫자로 구문 분석합니다.
+: 일치 항목을 배정밀도 숫자로 구문 분석합니다.
 
 `integer`
-: 매칭 항목을 정수로 구문 분석합니다.
+: 일치 항목을 정수로 구문 분석합니다.
+
+**Ingest-time 전용 필터:**
+
+다음 필터는 Grok 파서로 ingest-time 구문 분석에만 사용할 수 있고, Log Explorer에서는 사용할 수 없습니다.
 
 `boolean`
-: 대소문자를 무시하고 'true' 및 'false' 문자열을 부울로 구문 분석합니다.
+: 대소문자를 구분하지 않고 'true' 및 'false' 문자열을 구문 분석합니다.
 
 `nullIf("value")`
-: 매칭 항목이 제공된 값과 같으면 null을 반환합니다.
+: 일치 항목이 제공된 값과 같으면 null을 반환합니다.
 
 `json`
 : 올바른 형식의 JSON을 구문 분석합니다.
 
 `rubyhash`
-: `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}` 등 올바른 형식의 Ruby 해시를 구문 분석합니다.
+: 올바른 형식의 Ruby 해시(예: `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`)를 구문 분석합니다.
 
 `useragent([decodeuricomponent:true/false])`
-: user-agent를 구문 분석하고 Agent로 표시되는 장치, OS 및 브라우저를 포함하는 JSON 객체를 반환합니다. [사용자 Agent 프로세서를 확인하세요][1].
+: user-agent를 구문 분석하고 장치, OS 및 Agent가 나타내는 브라우저를 포함한 JSON 개체를 반환합니다. [사용자 Agent 프로세서를 참조하세요][1].
 
 `querystring`
-: 매칭되는 URL 쿼리 문자열(예: `?productId=superproduct&promotionCode=superpromo`)에 있는 모든 키-값 쌍을 추출합니다.
+: 일치하는 URL 쿼리 문자열에서 키-값 쌍을 모두 추출합니다(예를 들어 `?productId=superproduct&promotionCode=superpromo`).
 
 `decodeuricomponent`
 : URI 구성 요소를 디코딩합니다. 예를 들어, `%2Fservice%2Ftest`를 `/service/test`로 변환합니다.
@@ -205,43 +224,43 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 : 대문자 문자열을 반환합니다.
 
 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
-: 키 값 패턴을 추출하고 JSON 객체를 반환합니다. [키-값 필터 예시](#key-value-or-logfmt)를 참조하세요.
+: 키 값 패턴을 추출하고 JSON 개체를 반환합니다. [키-값 필터 예시](#key-value-or-logfmt)를 참조하세요.
 
 `xml`
 : 올바른 형식의 XML을 구문 분석합니다. [XML 필터 예시](#parsing-xml)를 참조하세요.
 
 `csv(headers[, separator[, quotingcharacter]])`
-: 올바른 형식의 CSV 또는 TSV 줄을 구문 분석합니다. [CSV 필터 예시](#parsing-csv)를 참조하세요.
+: 올바른 형식의 CSV 또는 TSV 라인을 구문 분석합니다. [CSV 필터 예시](#parsing-csv)를 참조하세요.
 
 `scale(factor)`
-: 예상 수치에 제공된 계수를 곱합니다.
+: 예상되는 숫자 값에 제공된 인수를 곱합니다.
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: 토큰의 문자열 시퀀스를 구문 분석하고 배열로 반환합니다. [배열할 목록](#list-to-array) 예시를 참조하세요.
+: 토큰의 문자열 시퀀스를 구문 분석하여 배열로 반환합니다. [목록을 배열로](#list-to-array) 예시를 참조하세요.
 
 `url`
-: URL을 구문 분석하여 토큰화된 모든 구성원(도메인, 쿼리 파라미터, 포트 등)을 JSON 객체로 반환합니다. [URL 구문 분석 방법에 대한 자세한 정보][2]를 참조하세요.
+: URL을 구문 분석하고 토큰화된 모든 구성원(도메인, 쿼리 파라미터, 포트 등)을 JSON 개체로 반환합니다. [URL 구문 분석 방법에 대한 자세한 정보][2]를 참조하세요.
 
-[1]: /ko/logs/log_configuration/processors/#user-agent-parser
-[2]: /ko/logs/log_configuration/processors/#url-parser
+[1]: /ko/logs/log_configuration/processors/user_agent_parser/
+[2]: /ko/logs/log_configuration/processors/url_parser/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## 고급 설정 {#advanced-settings}
 
-Grok 프로세서 하단의 **Advanced Settings** 섹션을 사용하여 기본 `message` 특성 대신 특정 특성을 구문 분석하거나 여러 구문 분석 규칙에서 공통 패턴을 재사용하는 지원 규칙을 정의합니다.
+Grok 프로세서 맨 밑에 있는 **고급 설정** 섹션을 사용하여 기본 `message` 속성 대신 특정 속성을 구문 분석하거나, 여러 구문 분석 규칙에서 공통 패턴을 재사용하는 도우미 규칙을 정의합니다.
 
-### 특정 텍스트 특성 구문 분석 {#parsing-a-specific-text-attribute}
+### 특정 텍스트 속성 구문 분석 {#parsing-a-specific-text-attribute}
 
-**Extract from** 필드를 사용하여 기본 `message` 특성 대신 지정된 텍스트 특성에 Grok 프로세서를 적용합니다.
+**추출 대상** 필드를 사용하여 주어진 텍스트 속성에 기본`message` 속성 대신 Grok 프로세서에 적용합니다.
 
-예를 들어, `command.line` 특성이 키-값으로 구문 분석되어야 하는 로그를 생각해 봅니다. `command.line`에서 추출하여 그 내용을 구문 분석하고 명령 데이터에서 구조화된 특성을 생성합니다.
+예를 들어 키-값으로 구문 분석해야 하는 `command.line` 속성을 포함하는 로그를 생각해 보세요. `command.line`에서 추출하여 내용을 구문 분석하고 명령 데이터로부터 구조화된 속성을 생성합니다.
 
-{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="command.line 특성 예시에서 추출한 고급 설정" style="width:80%;">}}
+{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="command.line 속성에서 추출을 사용한 고급 설정 예시" style="width:80%;">}}
 
-### 공통 패턴을 재사용하기 위한 지원 규칙 사용 {#using-helper-rules-to-reuse-common-patterns}
+### 공통 패턴을 재사용하기 위해 도우미 규칙 사용 {#using-helper-rules-to-reuse-common-patterns}
 
-**Helper Rules** 필드를 사용하여 구문 분석 규칙에 대한 토큰을 정의하세요. 지원 규칙을 사용하면 구문 분석 규칙 전반에 걸쳐 공통 Grok 패턴을 재사용할 수 있습니다. 이 기능은 동일한 Grok 구문 분석기에 여러 개의 규칙이 있을 때 유용합니다.
+**도우미 규칙** 필드를 사용하여 구문 분석 규칙의 토큰을 정의하세요. 도우미 규칙을 사용하면 구문 분석 규칙 전체에서 공통 Grok 패턴을 재사용할 수 있습니다. 이것은 같은 토큰을 사용하는 같은 Grok 파서에 규칙이 여러 개 있을 때 유용합니다.
 
 구조화되지 않은 전형적인 로그 예시:
 
@@ -249,13 +268,13 @@ Grok 프로세서 하단의 **Advanced Settings** 섹션을 사용하여 기본 
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-다음 구문 분석 규칙을 사용합니다.
+다음 구문 분석 규칙 사용:
 
 ```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-다음과 같은 도우미를 사용합니다.
+다음 도우미 사용:
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -265,12 +284,12 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 ## 예시 {#examples}
 
-구문 분석기 사용 방법을 보여주는 몇 가지 예시입니다.
+파서 사용법을 보여주는 몇 가지 예시:
 
-* [키 값 또는 로그 형식](#key-value-or-logfmt)
+* [키 값 또는 logfmt](#key-value-or-logfmt)
 * [날짜 구문 분석](#parsing-dates)
-* [교차 패턴](#alternating-pattern)
-* [선택적 특성](#optional-attribute)
+* [대체 패턴](#alternating-pattern)
+* [선택 속성](#optional-attribute)
 * [중첩된 JSON](#nested-json)
 * [정규식](#regex)
 * [목록 및 배열](#list-to-array)
@@ -278,16 +297,16 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### 키 값 또는 로그 형식 {#key-value-or-logfmt}
+### 키 값 또는 logfmt {#key-value-or-logfmt}
 
-키-값 핵심 필터는 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`와 같습니다. 각 항목은 다음과 같습니다.
+이것은 키-값 코어 필터입니다. `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` 자세한 내용 설명:
 
-* `separatorStr`: 키와 값 사이의 구분 기호를 정의합니다. 기본값은 `=`입니다.
-* `characterAllowList`: 기본값 `\\w.\\-_@` 외에 이스케이프 처리되지 않은 값 문자를 추가로 정의합니다. 따옴표로 묶지 않은 값(예: `key=@valueStr`)에만 사용됩니다.
-* `quotingStr`: 따옴표를 `<>`, `""`, `''`로 정의하여 기본 따옴표 감지를 대체합니다.
-* `delimiter`: 서로 다른 키 값 쌍 사이의 구분 기호를 정의합니다(예: `|`는 `key1=value1|key2=value2`의 구분 기호임). 기본값은 ` `(일반 공백), `,` 및 `;`입니다.
+* `separatorStr`: 키와 값 사이 구분 기호를 정의합니다. 기본값은 `=`입니다.
+* `characterAllowList`:기본 `\\w.\\-_@` 외에 이스케이프 처리되지 않은 값 문자를 추가로 정의합니다. 따옴표가 없는 값에만 사용됩니다(예를 들어 `key=@valueStr`).
+* `quotingStr`: 따옴표를 정의하여 기본 따옴표 감지 `<>`, `""`, `''`를 대체합니다.
+* `delimiter`: 서로 다른 키 값 쌍 사이의 구분 기호를 정의합니다(예를 들어 `|`가 `key1=value1|key2=value2`의 구분 기호임). 기본값은 ` `(일반 공백), `,` 및 `;`입니다.
 
-**keyvalue**와 같은 필터를 사용하면 문자열을 keyvalue 또는 logfmt 형식의 특성에 더 쉽게 매핑할 수 있습니다.
+**keyvalue**와 같은 필터를 사용하여 문자열을 keyvalue 또는 logfmt 형식의 속성으로 더 간편하게 매핑합니다.
 
 **로그:**
 
@@ -301,8 +320,8 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-로그에 이미 포함되어 있으므로 파라미터의 이름을 지정할 필요가 없습니다.
-규칙 패턴에 **extract** 특성인 `my_attribute`를 추가하면 다음과 같이 표시됩니다.
+파라미터 이름은 이미 로그에 포함되어 있으므로 지정할 필요가 없습니다.
+규칙 패턴에 **추출** 속성 `my_attribute`를 추가하면 다음과 같은 내용이 표시됩니다.
 
 ```json
 {
@@ -314,7 +333,7 @@ rule %{data::keyvalue}
 }
 ```
 
-키와 값 사이의 기본 구분 기호가 `=`가 아닌 경우 구문 분석 규칙에 파라미터를 구분 기호와 함께 추가하세요.
+`=`가 키와 값의 기본 구분 기호가 아닌 경우, 구문 분석 규칙에 구분 기호를 포함한 파라미터를 추가하세요.
 
 **로그:**
 
@@ -328,7 +347,7 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-로그의 특성 값에 특수 문자가 포함된 경우(예: URL의 `/`) 구문 분석 규칙의 허용 목록에 추가합니다.
+로그의 속성 값에 특수 문자가 포함된 경우(예를 들어 인스턴스 url에 `/`가 있는 경우) 이를 구문 분석 규칙의 허용 목록에 추가하세요.
 
 **로그:**
 
@@ -356,8 +375,8 @@ rule %{data::keyvalue("=","/:")}
 | key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
-**다중 인용 문자열 예시**: 다중 인용 문자열이 정의된 경우 기본 동작은 정의된 인용 문자로 대체됩니다.
-키-값은 `quotingStr`에 지정된 내용과 관계없이 항상 따옴표 문자가 없는 입력과 매칭됩니다. 따옴표 문자를 사용하면 따옴표 문자 사이의 모든 내용이 추출되므로 `characterAllowList`는 무시됩니다.
+**Multiple QuotingString 예시**: 여러 quotingstring을 정의하면 기본 동작이 정의된 따옴표로 대체됩니다.
+키-값은 `quotingStr`에 정의된 내용과는 관계없이 항상 따옴표 없이 입력과 일치합니다. 따옴표를 사용하는 경우, 따옴표 사이의 모든 내용을 추출하기 때문에 `characterAllowList`는 무시됩니다.
 
 **로그:**
 
@@ -380,12 +399,12 @@ rule %{data::keyvalue("=","/:")}
 **참고**:
 
 * 빈 값(`key=`) 또는 `null` 값(`key=null`)은 출력 JSON에 표시되지 않습니다.
-* `data` 객체에 *keyvalue* 필터를 정의하고 이 필터가 매칭되지 않으면 빈 JSON `{}`이 반환됩니다(예: 입력: `key:=valueStr`, 구문 분석 규칙: `rule_test %{data::keyvalue("=")}`, 출력: `{}`).
-* `""`를 `quotingStr`로 정의하면 인용 시 기본 구성이 유지됩니다.
+* `data` 개체에서 *key-value* 필터를 정의하고 이 필터가 매칭되지 않으면 빈 JSON `{}`가 반환됩니다(예를 들어 입력: `key:=valueStr`, 구문 분석 규칙: `rule_test %{data::keyvalue("=")}`, 출력: `{}`).
+* `""`를 `quotingStr`로 정의하면 인용에 대한 기본 구성이 유지됩니다.
 
 ### 날짜 구문 분석 {#parsing-dates}
 
-날짜 일치기는 타임스탬프를 EPOCH 형식(**밀리초** 측정 단위)으로 변환합니다.
+날짜 매처는 타임스탬프를 EPOCH 형식으로 변환합니다(측정 단위 **밀리초**).
 
 | **원시 문자열**                       | **구문 분석 규칙**                                          | **결과**              |
 |:-------------------------------------|:----------------------------------------------------------|:------------------------|
@@ -403,19 +422,19 @@ rule %{data::keyvalue("=","/:")}
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> 자체 현지화를 수행하고 타임스탬프가 UTC가 _아닌_ 경우 `timezone` 파라미터를 사용하세요.
-지원되는 시간대 형식은 다음과 같습니다.
+<sup>1</sup> 자체적으로 현지화를 수행하고 타임스탬프가 UTC 기준이 _아닌_ 경우, `timezone` 파라미터를 사용하세요.
+지원되는 표준 시간대 형식은 다음과 같습니다.
 
 * `GMT`, `UTC`, `UT` 또는 `Z`
-* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. 지원되는 최대 범위는 +18:00부터 -18:00까지입니다.
-* `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` 또는 `UT-`로 시작하는 표준 시간대. 지원되는 최대 범위는 +18:00부터 -18:00까지입니다.
-* TZ 데이터베이스에서 가져온 표준 시간대 ID. 자세한 내용은 [TZ 데이터베이스 이름][2]을 참조하세요.
+* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. 지원되는 최대 범위는 +18:00~-18:00(양쪽 끝값 포함)입니다.
+* `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` 또는 `UT-`로 시작하는 표준 시간대입니다. 지원되는 최대 범위는 +18:00~-18:00(양쪽 끝값 포함)입니다.
+* TZ 데이터베이스에서 가져온 표준 시간대 ID입니다. 자세한 내용은 [TZ 데이터베이스 이름][2]을 참조하세요.
 
-**참고**: 날짜를 구문 분석하더라도 그 값을 로그 공식 날짜로 설정하지 **않습니다**. 공식 날짜로 설정하려면 후속 프로세서에서 [로그 날짜 재매핑기][3]를 사용하세요.
+**참고**: 날짜를 구문 분석해도 그 값을 로그의 공식 날짜로 설정하지 **않습니다**. 이 경우 이후 프로세서에서 [로그 날짜 리매퍼][3]를 사용하세요.
 
-### 교차 패턴 {#alternating-pattern}
+### 대체 패턴 {#alternating-pattern}
 
-특성이 하나만 다른 두 가지 가능한 형식의 로그가 있는 경우 `(<REGEX_1>|<REGEX_2>)`를 번갈아 사용하여 단일 규칙을 설정합니다. 이 규칙은 부울 연산자인 OR과 동일합니다.
+속성이 하나만 다른 두 가지 가능한 형식의 로그가 있는 경우 `(<REGEX_1>|<REGEX_2>)`를 번갈아 사용하여 단일 규칙을 설정합니다. 이 규칙은 부울 연산자 OR에 해당합니다.
 
 **로그**:
 
@@ -425,7 +444,7 @@ john connected on 11/08/2017
 ```
 
 **규칙**:
-'id'는 문자열이 아닌 정수라는 점에 유의하세요.
+"id"는 문자열이 아니고 정수입니다.
 
 ```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -453,9 +472,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 }
 ```
 
-### 선택적 특성 {#optional-attribute}
+### 선택 속성 {#optional-attribute}
 
-일부 로그에는 시간의 일부분만 표시되는 값이 포함되어 있습니다. 이 경우, `()?`를 사용하여 특성 추출을 선택 작업으로 설정하세요.
+일부 로그에는 시간의 일부분만 표시되는 값을 포함합니다. 이런 경우, `()?`를 사용해 속성 추출을 선택 사항으로 설정하세요.
 
 **로그**:
 
@@ -470,7 +489,7 @@ john connected on 11/08/2017
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**참고**: 선택적 섹션의 첫 단어 뒤에 공백을 포함하면 규칙이 매칭되지 않습니다.
+**참고**:선택 사항 섹션의 첫 단어 뒤에 공백을 포함하면 규칙이 매칭되지 않습니다.
 
 **결과**:<br>
 `(%{integer:user.id} )?`
@@ -498,7 +517,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 ### 중첩된 JSON {#nested-json}
 
-`json` 필터를 사용하여 원시 텍스트 접두사 뒤에 중첩된 JSON 객체를 구문 분석합니다.
+원시 텍스트 접두사 뒤에 중첩된 JSON 개체를 구문 분석하려면 `json` 필터를 사용하세요.
 
 **로그**:
 
@@ -550,9 +569,9 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 }
 ```
 
-### 배열할 목록 {#list-to-array}
+### 목록에서 배열로 {#list-to-array}
 
-`array([[openCloseStr, ] separator][, subRuleOrFilter)` 필터를 사용하여 목록을 단일 특성의 배열로 추출합니다. `subRuleOrFilter`는 선택 사항이며 이러한 [필터][4]를 적용합니다.
+목록을 속성 한 개의 배열로 추출하려면 `array([[openCloseStr, ] separator][, subRuleOrFilter)` 필터를 사용하세요. `subRuleOrFilter`는 선택 사항이며 이러한 [필터][4]를 허용합니다.
 
 **로그**:
 
@@ -591,7 +610,7 @@ Users {John-Oliver-Marc-Tom} have been added to the database
 myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
-`subRuleOrFilter`**규칙(사용:**):
+**`subRuleOrFilter`**를 사용하는 규칙:
 
 ```text
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
@@ -599,7 +618,7 @@ myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to 
 
 ### Glog 형식 {#glog-format}
 
-Kubernetes 구성 요소는 때때로 `glog` 형식으로 로그를 남깁니다. 이 예시는 파이프라인 라이브러리의 Kube 스케줄러 항목에서 가져온 것입니다.
+Kubernetes 구성 요소는 `glog` 형식으로 로깅될 때가 있습니다. 이 예시는 Pipeline Library의 Kube Scheduler 항목에서 가져온 것입니다.
 
 예시 로그 라인:
 
@@ -613,7 +632,7 @@ W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
 kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
 ```
 
-추출한 JSON:
+추출된 JSON:
 
 ```json
 {
@@ -630,7 +649,7 @@ kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+
 
 ### XML 구문 분석 {#parsing-xml}
 
-XML 구문 분석기는 XML 형식의 메시지를 JSON으로 변환합니다.
+XML 파서는 XML 형식 메시지를 JSON으로 변환합니다.
 
 **로그:**
 
@@ -666,25 +685,25 @@ rule %{data::xml}
 
 **참고**:
 
-* 태그 사이에 특성과 문자열 값이 모두 있는 태그가 XML에 포함된 경우 `value` 특성이 생성됩니다. 예: `<title lang="en">Harry Potter</title>`는 `{"title": {"lang": "en", "value": "Harry Potter" } }`로 변환됩니다.
-* 반복되는 태그는 자동으로 배열로 변환됩니다. 예: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>`는 `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`로 변환됩니다.
+* XML에 두 개의 태그 사이에 속성과 문자열 값이 모두 있는 태그가 포함된 경우, `value` 속성이 생성됩니다. 예를 들어 `<title lang="en">Harry Potter</title>`는 `{"title": {"lang": "en", "value": "Harry Potter" } }`로 변환됩니다.
+* 반복되는 태그는 자동으로 배열로 변환됩니다. 예를 들어 `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>`은 `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`으로 변환됩니다.
 
 ### CSV 구문 분석 {#parsing-csv}
 
-**CSV** 필터를 사용하면 문자열을 지정된 문자로 구분할 때 특성에 더 쉽게 매핑할 수 있습니다(기본값은 `,`).
+**CSV** 필터를 사용하면 주어진 문자(기본적으로 `,`)로 구분된 문자열을 속성으로 더 쉽게 매핑할 수 있습니다.
 
-CSV 필터는 `csv(headers[, separator[, quotingcharacter]])`로 정의됩니다. 각 항목은 다음과 같습니다.
+CSV 필터는 `csv(headers[, separator[, quotingcharacter]])`로 정의되며, 자세한 설명은 다음과 같습니다.
 
-* `headers`: `,`로 구분된 키 이름을 정의합니다. 키 이름은 알파벳 문자로 시작해야 하며 `_` 외에 영숫자 문자를 포함할 수 있습니다.
-* `separator`: 서로 다른 값을 구분하는 데 사용되는 구분 기호를 정의합니다. 하나의 문자만 허용되며, 기본값은 `,`입니다. **참고**: `separator`에 `tab`을 사용하여 TSV의 표 문자를 나타냅니다.
-* `quotingcharacter`: 인용 문자를 정의합니다. 하나의 문자만 허용되며, 기본값은 `"`입니다.
+* `headers`: `,`로 구분된 키 이름을 정의합니다. 키 이름은 알파벳 문자로 시작해야 하며 `_`와 영숫자만 포함할 수 있습니다.
+* `separator`: 서로 다른 값을 구분하는 데 사용되는 구분 기호를 정의합니다. 문자 한 개만 허용됩니다. 기본값: `,`. **참고**: TSV의 표 형식 문자를 나타내려면 `separator`로 `tab`을 사용하세요.
+* `quotingcharacter`: 따옴표를 정의합니다. 문자 한 개만 허용됩니다. 기본값: `"`
 
 **참고**:
 
-* 구분 문자가 포함된 값은 따옴표로 묶어야 합니다.
-* 따옴표 문자가 포함된 따옴표 값은 따옴표 문자를 사용하여 이스케이프 처리해야 합니다. 예를 들어, 따옴표로 묶인 값 내의 `""`은 `"`을 나타냅니다.
-* 로그에 헤더의 키 수와 동일한 수의 값이 포함되어 있지 않으면 CSV 구문 분석기는 첫 번째 항목을 매칭합니다.
-* 정수와 복수는 가능한 경우 자동으로 캐스팅됩니다.
+* 구분 기호 문자를 포함하는 값은 반드시 따옴표로 묶어야 합니다.
+* 따옴표를 포함한 따옴표 값은 따옴표로 이스케이프해야 합니다. 예를 들어 따옴표로 묶인 값 안의 `""`는 `"`를 나타냅니다.
+* 로그에 헤더의 키 개수와 같은 숫자 값이 포함되지 않은 경우, CSV 파서는 첫 번째 항목을 매칭합니다.
+* 가능한 경우, 정수와 double은 자동으로 캐스팅됩니다.
 
 **로그**:
 
@@ -725,9 +744,9 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
-### 데이터 일치기를 사용하여 불필요한 텍스트 삭제 {#use-data-matcher-to-discard-unneeded-text}
+### 데이터 매처를 사용해 불필요한 텍스트 삭제 {#use-data-matcher-to-discard-unneeded-text}
 
-필요한 내용을 구문 분석한 후 텍스트는 삭제해도 안전하다는 것을 알고 있는 로그가 있는 경우, 데이터 일치기를 사용하여 삭제할 수 있습니다. 다음 로그 예시의 경우 `data` 일치기를 사용하여 끝에 있는 `%`를 삭제할 수 있습니다.
+무엇이 필요한지 구문 분석을 마쳤고, 그 시점 이후 텍스트를 삭제해도 안전하다는 사실을 알고 있는 로그라면 데이터 매처를 사용해 삭제하면 됩니다. 다음 로그 예시의 경우, `data` 매처를 사용해 맨 끝의 `%`를 삭제할 수 있습니다.
 
 **로그**:
 
@@ -752,13 +771,13 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 ### ASCII 제어 문자 {#ascii-control-characters}
 
-로그에 ASCII 제어 문자가 포함된 경우, 수집 시 직렬화됩니다. 이러한 문자는 Grok 구문 분석기 내에서 직렬화된 값을 명시적으로 이스케이프하여 처리할 수 있습니다.
+로그에 ASCII 제어 문자가 포함된 경우, 수집 시 직렬화됩니다. 이러한 문자는 Grok 파서 내에서 직렬화된 값으로 명시적으로 이스케이프하여 처리할 수 있습니다.
 
-## 참고 자료 {#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /ko/logs/log_configuration/processors/#log-date-remapper
+[3]: /ko/logs/log_configuration/processors/log_date_remapper/
 [4]: /ko/logs/log_configuration/parsing/?tab=filters&tabs=filters#matcher-and-filter

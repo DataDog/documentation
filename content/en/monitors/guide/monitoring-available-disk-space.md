@@ -9,23 +9,23 @@ A common system metric to monitor is the available disk space on a given system 
 
 To create the monitor for available disk space:
 
-1. In the navigation menu, click **Monitors**.
-2. Click **New Monitor**.
-3. Select **Metric** as the monitor type.
-     1. In the **Define the metric** section, use `system.disk.free` for the metric and select `host` for **avg by**. This is Query a.
-     2. Click **Add Query**. For this metric, use `system.disk.total` for the metric and use `host` for **avg by**. This is Query b.
+1. In the navigation menu, click {{< ui >}}Monitors{{< /ui >}}.
+2. Click {{< ui >}}New Monitor{{< /ui >}}.
+3. Select {{< ui >}}Metric{{< /ui >}} as the monitor type.
+     1. In the {{< ui >}}Define the metric{{< /ui >}} section, use `system.disk.free` for the metric and select `host` for {{< ui >}}avg by{{< /ui >}}. This is Query a.
+     2. Click {{< ui >}}Add Query{{< /ui >}}. For this metric, use `system.disk.total` for the metric and use `host` for {{< ui >}}avg by{{< /ui >}}. This is Query b.
      3. In the formula that appears, replace `a + b` with `a/b*100`.
      
          {{< img src="monitors/guide/monitoring_free_disk_space.png" alt="Query definition of system.disk.free and system.disk.total with formula a/b*100" style="width:80%;">}}
     
 
-     4. Under **Evaluation Details**, choose your desired evaluation interval.
+     4. Under {{< ui >}}Evaluation Details{{< /ui >}}, choose your desired evaluation interval.
 
          {{< img src="monitors/guide/monitoring_free_disk_space_alert_criteria.png" alt="Alert criteria configuration set to below threshold, with a value of 10." style="width:80%;">}}
 
 
-5. Under **Set alert conditions**, select **below** from the threshold options and enter `10` in **Alert threshold** field.
-6. In **Configure notifications & automations**, give your monitor a name, then specify the notification message. Include relevant details and a meaningful message template. For example:
+5. Under {{< ui >}}Set alert conditions{{< /ui >}}, select {{< ui >}}below{{< /ui >}} from the threshold options and enter `10` in {{< ui >}}Alert threshold{{< /ui >}} field.
+6. In {{< ui >}}Configure notifications & automations{{< /ui >}}, give your monitor a name, then specify the notification message. Include relevant details and a meaningful message template. For example:
 
      ```
        {{#is_alert}} Alert: Free disk space is below {{threshold}}% on {{host.name}}. {{/is_alert}}
@@ -33,6 +33,6 @@ To create the monitor for available disk space:
        Disk space available: {{value}}%
      ```
 
-7. Click **Create** to save the monitor.
+7. Click {{< ui >}}Create{{< /ui >}} to save the monitor.
 
 [1]: https://app.datadoghq.com/monitors/

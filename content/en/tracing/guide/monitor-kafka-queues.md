@@ -14,6 +14,13 @@ further_reading:
   text: "Data Streams Monitoring"
 ---
 
+<div style="background:#f3edfa;border-left:4px solid #632ca6;padding:14px 18px;margin:24px 0;border-radius:4px;">
+  <p style="margin:0;line-height:1.5;">
+    <span style="display:inline-block;background:#632ca6;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:0.06em;text-transform:uppercase;margin-right:8px;vertical-align:middle;">New</span>
+    <strong>Kafka Monitoring</strong> tracks consumer lag, throughput, schemas, and adds message reading capabilities. <a href="/data_streams/kafka/?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide">Try Kafka Monitoring &rarr;</a>
+  </p>
+</div>
+
 ## Overview
 
 In event-driven pipelines, queuing and streaming technologies such as Kafka are essential to the successful operation of your systems. Ensuring that messages are being reliably and quickly conveyed between services can be difficult due to the many technologies and teams involved in such an environment. The Datadog Kafka integration and APM enable your team to monitor the health and efficiency of your infrastructure and pipelines.

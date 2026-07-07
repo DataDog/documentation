@@ -135,6 +135,15 @@
       2.8.0 or later
     {{- end -}}
   {{- end -}}
+<!-- Google Pub/Sub (google-cloud-pubsub) -->
+  {{- if eq (.Get "lib") "google-cloud-pubsub" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      4.11.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      4.11.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- .NET -->

@@ -2,188 +2,187 @@
 algolia:
   rank: 70
   tags:
-  - Anomalía
-  - Monitor de anomalías
+  - anomaly
+  - anomaly monitor
 aliases:
 - /es/guides/anomalies
 - /es/monitors/monitor_types/anomaly
 - /es/monitors/create/types/anomaly/
-description: Detectar comportamientos anómalos en una métrica a partir de datos históricos
+description: Detecta comportamientos anómalos para una métrica basada en datos históricos
 further_reading:
 - link: /monitors/notify/
   tag: Documentación
-  text: Configurar las notificaciones de tu monitor
+  text: Configura las notificaciones de tu seguimiento
 - link: /monitors/downtimes/
   tag: Documentación
-  text: Programar un tiempo de inactividad para silenciar un monitor
+  text: Programa un tiempo de inactividad para silenciar un seguimiento
 - link: /monitors/status/
   tag: Documentación
-  text: Consultar el estado de tu monitor
+  text: Consulta el estado de tu seguimiento
 - link: dashboards/functions/algorithms/#anomalies
   tag: Documentación
-  text: Función para anomalías
+  text: Función de anomalías
 - link: https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/
   tag: Blog
-  text: 'Detección de anomalías, correlaciones predictivas: uso de la monitorización
-    de métricas asistida por IA'
-title: Monitor de anomalías
+  text: Detección de anomalías, correlaciones predictivas - Usando seguimiento de
+    métricas asistido por IA
+title: Seguimiento de anomalías
 ---
+## Resumen {#overview}
 
-## Información general
+La detección de anomalías es una característica algorítmica que identifica cuándo una métrica se comporta de manera diferente a como lo ha hecho en el pasado, teniendo en cuenta tendencias, patrones estacionales del día de la semana y patrones de hora del día. Es adecuada para métricas con tendencias fuertes y patrones recurrentes que son difíciles de monitorear con alertas basadas en umbrales.
 
-La detección de anomalías es una función algorítmica que identifica cuándo una métrica se comporta de forma diferente a como lo ha hecho en el pasado y tiene en cuenta las tendencias, el día de la semana específico y los patrones de horas del día. Esta función es adecuada para métricas con tendencias marcadas y patrones recurrentes, difíciles de monitorizar mediante alertas basadas en umbrales.
+Por ejemplo, la detección de anomalías puede ayudarte a descubrir cuándo tu tráfico web es inusualmente bajo en una tarde de día laborable, incluso si ese mismo nivel de tráfico es normal más tarde en la noche. O considera una métrica que mide el número de inicios de sesión en tu sitio en crecimiento constante. Debido a que el número aumenta diariamente, cualquier umbral estaría desactualizado, mientras que la detección de anomalías puede alertarte si hay una caída inesperada, lo que podría indicar un problema con el sistema de inicio de sesión.
 
-Por ejemplo, la detección de anomalías te puede ayudar a detectar cuándo el tráfico de tu Internet es inusualmente bajo en un día laborable, por ejemplo por la tarde, pero luego se normaliza por la noche. O piensa por ejemplo en una métrica que pueda medir el número de accesos a tu sitio web en constante crecimiento. Debido a que ese número aumenta a diario, cualquier umbral quedaría obsoleto, mientras que la detección de anomalías puede avisarte si se produce un descenso inesperado, lo que podría indicar un problema con el sistema de inicio de sesión.
+## Creación de seguimiento {#monitor-creation}
 
-## Creación de un monitor
+Para crear un [seguimiento de anomalías][1] en Datadog, utiliza la navegación principal: *Seguimientos --> Nuevo Seguimiento --> Anomalía*.
 
-Para crear un [monitor de anomalías][1] en Datadog utiliza la navegación principal: *Monitors --> New Monitor --> Anomaly* (Monitores > Nuevo monitor > Anomalía).
+### Define la métrica {#define-the-metric}
 
-### Definir la métrica
+Cualquier métrica que informe a Datadog está disponible para seguimientos. Para más información, consulta la página de [Seguimiento de Métricas][2].
+**Nota**: La `anomalies` función utiliza el pasado para predecir lo que se espera en el futuro, por lo que usarla en una nueva métrica puede dar resultados pobres.
 
-Cualquier métrica que informe a Datadog está disponible para monitores. Para obtener más información, consulta la página [Monitor de métricas][2].
-**Nota**: La función para `anomalies` utiliza el pasado para predecir lo que se espera en el futuro, por lo que su uso en una métrica nueva podría no arrojar buenos resultados.
+Después de definir la métrica, el seguimiento de detección de anomalías proporciona dos gráficos de vista previa en el editor:
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="contexto histórico" style="width:80%;">}}
 
-Después de definir la métrica, el monitor de detección de anomalías proporciona dos gráficos de vista previa en el editor:
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="Contexto histórico" style="width:80%;">}}
+* La **Vista Histórica** te permite explorar la consulta monitoreada en diferentes escalas de tiempo para entender mejor por qué los datos pueden considerarse anómalos o no anómalos.
+* La **Vista Previa de Evaluación** es más larga que la ventana de alerta y proporciona información sobre lo que el algoritmo de anomalías toma en cuenta al calcular los límites.
 
-* La **Vista histórica** te permite explorar la consulta monitorizada en diferentes escalas temporales, para comprender mejor por qué los datos pueden considerarse anómalos o no anómalos.
-* La **Vista previa de evaluación** es más extensa que la ventana de alertas y ofrece una visión de lo que el algoritmo de anomalías tiene en cuenta cuando calcula los límites.
+### Establecer condiciones de alerta {#set-alert-conditions}
 
-### Definir condiciones de alerta
-
-Activa una alerta si los valores han estado `above or below`, `above` o `below` de los límites durante los últimos `15 minutes`, `1 hour`, etc. o `custom`, para establecer un valor entre 15 minutos y 2 semanas. Ejecuta una recuperación si los valores están dentro de los límites durante al menos `15 minutes`, `1 hour`, etc. o `custom`, para establecer un valor entre 15 minutos y 2 semanas.
+Disparar una alerta si los valores han estado `above or below`, `above` o `below` fuera de los límites durante los últimos `15 minutes`, `1 hour`, etc. o `custom` para establecer un valor entre 15 minutos y 2 semanas. Recuperar si los valores están dentro de los límites durante al menos `15 minutes`, `1 hour`, etc. o `custom` para establecer un valor entre 15 minutos y 2 semanas.
 
 Detección de anomalías
-: Con la opción por defecto (`above or below`), una métrica se considera anómala si está fuera del rango gris de anomalías. También puedes especificar si los rangos se consideran anómalos cuando los valores sólo están `above` o `below`.
+: Con la opción predeterminada (`above or below`) se considera que una métrica es anómala si está fuera de la banda de anomalía gris. Opcionalmente, puedes especificar si estar solo `above` o `below` en las bandas se considera anómalo.
 
 Ventana de activación
-: La cantidad de tiempo necesario para que la métrica sea anómala antes de que se active la alerta. **Nota**: Si la ventana de alertas es demasiado corta, podrías recibir falsas alarmas generadas por falsos ruidos.
+: Cuánto tiempo se requiere para que la métrica sea anómala antes de que se dispare la alerta. **Nota**: Si la ventana de alerta es demasiado corta, podrías recibir falsas alarmas debido a ruido espurio.
 
 Ventana de recuperación
-: La cantidad de tiempo necesario para que la métrica deje de considerarse anómala, permitiendo la recuperación de la alerta. Se recomienda configurar la **Ventana de recuperación** con el mismo valor que la **Ventana de activación**. 
+: La cantidad de tiempo requerida para que la métrica ya no se considere anómala, permitiendo que la alerta se recupere. Se recomienda establecer la **Ventana de Recuperación** al mismo valor que la **Ventana de Activación**. 
 
-**Nota**: El rango de valores aceptados para la **Ventana de Recuperación** depende de la **Ventana de activación** y del **Umbral de Alerta**, para asegurar que el monitor no cumple la condición de recuperación y la de alerta al mismo tiempo.
+**Nota**: El rango de valores aceptados para la **Ventana de Recuperación** depende de la **Ventana de Activación** y del **Umbral de Alerta** para asegurar que el monitor no pueda satisfacer simultáneamente la condición de recuperación y la de alerta.
 Ejemplo:
 * `Threshold`: 50%
 * `Trigger window`: 4h
-El rango de valores aceptados para la ventana de recuperación oscila entre 121 minutos (`4h*(1-0.5) +1 min = 121 minutes`) y 4 horas. Configurar una ventana de recuperación de menos de 121 minutos podría dar lugar a un intervalo de 4 horas con un 50% de puntos anómalos y los últimos 120 minutos sin puntos anómalos.
+El rango de valores aceptados para la ventana de recuperación está entre 121 minutos (`4h*(1-0.5) +1 min = 121 minutes`) y 4 horas. Establecer una ventana de recuperación por debajo de 121 minutos podría llevar a un marco de 4 horas con el 50% de puntos anómalos y los últimos 120 minutos sin puntos anómalos.
 
 Otro ejemplo:
 * `Threshold`: 80%
 * `Trigger window`: 4h
-El rango de valores aceptados para la ventana de recuperación oscila entre 49 minutos (`4h*(1-0.8) +1 min = 49 minutes`) y 4 horas.
+El rango de valores aceptados para la ventana de recuperación está entre 49 minutos (`4h*(1-0.8) +1 min = 49 minutes`) y 4 horas.
 
-### Opciones avanzadas
+### Opciones avanzadas {#advanced-options}
 
-Datadog analiza automáticamente la métrica elegida y establece varios parámetros. Sin embargo, puedes editar las opciones en **Advanced Options** (Opciones avanzadas).
+Datadog analiza automáticamente la métrica elegida y establece varios parámetros para ti. Sin embargo, las opciones están disponibles para que las edites en **Opciones Avanzadas**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="Menú Opciones avanzadas en la página de parámetros del monitor de anomalías configurado para detectar anomalías y desviaciones con respecto a los datos previstos, utilizando un algoritmo ágil con temporalidad semanal para aplicar el cambio de horario estacional y utilizar un intervalo de rollup de 60 segundos" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="El menú de Opciones Avanzadas en la página de configuración del monitor de Anomalías con la configuración establecida para detectar anomalías 2 desviaciones de los datos predichos utilizando el algoritmo ágil con estacionalidad semanal, para tener en cuenta el horario de verano, y para usar un intervalo de consolidación de 60 segundos." style="width:80%;">}}
 
 
 Desviaciones
-: El ancho del rango gris. Equivale al parámetro de límites utilizado en la [función para anomalías][3].
+: El ancho de la banda gris. Esto es equivalente al parámetro de límites utilizado en la [función de anomalías][3].
 
 Algoritmo
 : El [algoritmo de detección de anomalías](#anomaly-detection-algorithms) (`basic`, `agile` o `robust`).
 
-Temporalidad
-: La [temporalidad](#seasonality) (`hourly`, `daily` o `weekly`) del ciclo para que el algoritmo `agile` o `robust` analice la métrica.
+Estacionalidad
+: La [estacionalidad](#seasonality) (`hourly`, `daily` o `weekly`) del ciclo para el `agile` o `robust` algoritmo para analizar la métrica.
 
-Cambio de horario estacional
-: Disponible para la detección de anomalías `agile` o `robust` con temporalidad `weekly` o `daily`. Para obtener más información, consulta [Detección de anomalías y zonas horarias][4].
+Horario de verano
+: Disponible para `agile` o `robust` detección de anomalías con `weekly` o `daily` estacionalidad. Para más información, consulta [Detección de Anomalías y Zonas Horarias][4].
 
-Rollup 
-: El [intervalo de rollup][5].
+Consolidación
+: El [intervalo de consolidación][5].
 
 Umbrales
-: El porcentaje de puntos que deben ser anómalos para alertar, advertir y recuperar.
+: El porcentaje de puntos que deben ser anómalos para la alerta, la advertencia y la recuperación.
 
-### Estacionalidad
+### Estacionalidad {#seasonality}
 
-Horario
-: El algoritmo espera que el mismo minuto después de la hora en punto se comporte como los minutos anteriores después de sus respectivas horas en punto. Por ejemplo, 5:15 se comporta como 4:15, 3:15, etc.
+Por hora
+: El algoritmo espera que el mismo minuto después de la hora se comporte como los minutos pasados después de la hora, por ejemplo, 5:15 se comporta como 4:15, 3:15, etc.
 
 Diario
-: El algoritmo espera que la misma hora de hoy se comporte como la hora de los días anteriores. Por ejemplo la hora 17:00 de hoy se comporta como la hora 17:00 de ayer.
+: El algoritmo espera que la misma hora de hoy se comporte como la de días anteriores, por ejemplo, las 5 p.m. de hoy se comportan como las 5 p.m. de ayer.
 
 Semanal
-: El algoritmo espera que un determinado día de la semana se comporte como los días de las semanas anteriores. Por ejemplo, este martes se comporta como los martes anteriores.
+: El algoritmo espera que un día determinado de la semana se comporte como los días pasados de la semana, por ejemplo, este martes se comporta como los martes pasados.
 
-**Historial de datos requerido para el algoritmo de detección de anomalías**: los algoritmos de machine learning requieren al menos el triple de tiempo de datos históricos que la unidad de temporalidad elegida para calcular la línea de base.
+**Historial de datos requerido para el algoritmo de Detección de Anomalías**: Los algoritmos de aprendizaje automático requieren al menos tres veces más datos históricos que el tiempo de estacionalidad elegido para calcular la línea base.
 Por ejemplo:
 
-* La temporalidad semanal requiere al menos tres semanas de datos
-* La temporalidad diaria requiere al menos tres días de datos
-* La temporalidad horaria requiere al menos tres horas de datos
+* _la estacionalidad semanal_ requiere al menos tres semanas de datos
+* _la estacionalidad diaria_ requiere al menos tres días de datos
+* _la estacionalidad horaria_ requiere al menos tres horas de datos
 
-Todos los algoritmos de temporalidad pueden utilizar hasta seis semanas de datos históricos a la hora de calcular el rango de comportamiento normal esperado para la métrica. Al utilizar una cantidad significativa de datos pasados, los algoritmos evitan dar demasiada importancia a los comportamientos anómalos que puedan haberse producido en un pasado reciente.
+Todos los algoritmos estacionales pueden utilizar hasta seis semanas de datos históricos al calcular el rango normal esperado de comportamiento de una métrica. Al utilizar una cantidad significativa de datos pasados, los algoritmos evitan dar demasiado peso a comportamientos anómalos que podrían haber ocurrido en el pasado reciente.
 
-### Algoritmos de detección de anomalías
-Básicos
-: Se utilizan cuando las métricas no tienen un patrón de temporalidad repetitivo. Los algoritmos básicos utilizan un simple cálculo de cuantiles móviles retardados para determinar el intervalo de valores esperados. Utilizan pocos datos y se ajustan rápidamente a las condiciones cambiantes, pero no conocen el comportamiento temporal ni las tendencias a más largo plazo.
+### Los algoritmos de detección de anomalías {#anomaly-detection-algorithms}
+Básico
+: Utilizar cuando las métricas no tienen un patrón estacional repetitivo. Básico utiliza un cálculo simple de cuantil móvil rezagado para determinar el rango de valores esperados. Utiliza pocos datos y se ajusta rápidamente a las condiciones cambiantes, pero no tiene conocimiento del comportamiento estacional o de tendencias más largas.
 
-Ágiles
-: Se utilizan cuando cuando las métricas son temporales y se espera que cambien. Los algoritmos se ajustan rápidamente a los cambios de nivel de las métricas. Se trata de una versión robusta del algoritmo [SARIMA][6], que incorpora el pasado inmediato en sus predicciones, lo que permite actualizaciones rápidas para los cambios de nivel, a expensas de ser menos robusto frente a las anomalías recientes de larga duración.
+Ágil
+: Utilizar cuando las métricas son estacionales y se espera que cambien. El algoritmo se ajusta rápidamente a los cambios en el nivel de la métrica. Una versión robusta del algoritmo [SARIMA][6], incorpora el pasado inmediato en sus predicciones, permitiendo actualizaciones rápidas para cambios de nivel a costa de ser menos robusto ante anomalías recientes y duraderas.
 
-Robustos
-: Se utilizan cuando se espera que las métricas de temporalidad sean estables, y los cambios de nivel lentos se consideran anomalías. Un algoritmo de [descomposición de tendencias temporales][7] es estable y las predicciones permanecen constantes, incluso en caso de anomalías de larga duración, a expensas de tardar más en responder a los cambios de nivel previstos (por ejemplo, si el nivel de una métrica cambia debido a un cambio de código).
+Robusto
+: Utilizar cuando se espera que las métricas estacionales sean estables y los cambios de nivel lentos se consideren anomalías. Un algoritmo de [descomposición de tendencia estacional][7], es estable y las predicciones permanecen constantes incluso a través de anomalías duraderas a costa de tardar más en responder a cambios de nivel intencionados (por ejemplo, si el nivel de una métrica cambia debido a un cambio de código).
 
-## Ejemplos
-Los siguientes gráficos muestran cómo y cuándo estos tres algoritmos se comportan de forma diferente entre sí.
+## Ejemplos {#examples}
+Los gráficos a continuación ilustran cómo y cuándo estos tres algoritmos se comportan de manera diferente entre sí.
 
-#### Comparación de la detección de anomalías para la temporalidad horaria
-En este ejemplo, `basic` identifica con éxito los picos de anomalías fuera del rango normal de valores, pero no incorpora el patrón temporal repetitivo a su rango de valores previstos. Por el contrario, `robust` y `agile` reconocen el patrón temporal y pueden detectar anomalías más matizadas; por ejemplo, si la métrica se estabiliza cerca de su valor mínimo. La tendencia también muestra un patrón horario, por lo que la temporalidad horaria funciona mejor en este caso.
+#### Comparación de detección de anomalías para estacionalidad horaria {#anomaly-detection-comparison-for-hourly-seasonality}
+En este ejemplo, `basic` identifica con éxito anomalías que se desvían del rango normal de valores, pero no incorpora el patrón estacional repetitivo en su rango de valores predichos. Por el contrario, `robust` y `agile` reconocen ambos el patrón estacional y pueden detectar anomalías más matizadas, por ejemplo, si la métrica se mantuviera plana cerca de su valor mínimo. La tendencia también muestra un patrón horario, por lo que la estacionalidad horaria funciona mejor en este caso.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="Comparación del algoritmo de detección de anomalías con la temporalidad diaria" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="comparación de algoritmos de detección de anomalías con estacionalidad diaria" style="width:90%;">}}
 
-#### Comparación de la detección de anomalías para la temporalidad semanal
-En este ejemplo, la métrica muestra un cambio de nivel repentino. `Agile` se ajusta más rápidamente al cambio de nivel que `robust`. Además, la amplitud de los límites de `robust` aumenta para reflejar una mayor incertidumbre tras el cambio de nivel; la amplitud de los límites de `agile` permanece invariable. `Basic` no se ajusta bien a este escenario, en el que la métrica muestra un fuerte patrón temporal semanal.
+#### Comparación de detección de anomalías para estacionalidad semanal {#anomaly-detection-comparison-for-weekly-seasonality}
+En este ejemplo, la métrica exhibe un cambio de nivel repentino. `Agile` se ajusta más rápidamente al cambio de nivel que `robust`. Además, el ancho de los límites de `robust` aumenta para reflejar una mayor incertidumbre después del cambio de nivel; el ancho de los límites de `agile` permanece sin cambios. `Basic` es claramente una mala opción para este escenario, donde la métrica exhibe un fuerte patrón estacional semanal.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="Comparación del algoritmo de detección de anomalías con la temporalidad semanal" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="comparación de algoritmos de detección de anomalías con estacionalidad semanal" style="width:90%;">}}
 
-#### Comparación de las reacciones de los algoritmos al cambio
-Este ejemplo muestra cómo reaccionan los algoritmos ante una anomalía de una hora de duración. `Robust` no ajusta los límites de la anomalía en este escenario, ya que reacciona más lentamente ante los cambios bruscos. Los demás algoritmos empiezan a comportarse como si la anomalía fuera la nueva normalidad. `Agile` identifica incluso el regreso de la métrica a su nivel original como una anomalía.
+#### Comparación de las reacciones de los algoritmos al cambio {#comparison-of-algorithm-reactions-to-change}
+Este ejemplo muestra cómo los algoritmos reaccionan a una anomalía de una hora de duración. `Robust` no ajusta los límites para la anomalía en este escenario ya que reacciona más lentamente a los cambios abruptos. Los otros algoritmos comienzan a comportarse como si la anomalía fuera la nueva normalidad. `Agile` incluso identifica el regreso de la métrica a su nivel original como una anomalía.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="Comparación del algoritmo de detección de anomalías con la temporalidad horaria" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="comparación de algoritmos de detección de anomalías con estacionalidad horaria" style="width:90%;">}}
 
-#### Comparación de las reacciones de los algoritmos a las escalas
-Los algoritmos tratan a las escalas de forma diferente. `Basic` y `robust` son insensibles a las escalas, mientras que `agile` no lo es. Los gráficos abajo a la izquierda muestran que `agile` y `robust` señalan el cambio de nivel como anómalo. A la derecha, se añade 1000 a la misma métrica y `agile` deja de señalar el cambio de nivel como anómalo, mientras que `robust` sigue haciéndolo.
+#### Comparación de las reacciones de los algoritmos a la escala {#comparison-of-algorithm-reactions-to-scale}
+Los algoritmos manejan la escala de manera diferente. `Basic` y `robust` son insensibles a la escala, mientras que `agile` no lo es. Los gráficos a la izquierda a continuación muestran que `agile` y `robust` marcan el cambio de nivel como anómalo. A la derecha, se añade 1000 a la misma métrica, y `agile` ya no señala el cambio de nivel como anómalo, mientras que `robust` continúa haciéndolo.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="Comparación del algoritmo con las escalas" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="comparación de algoritmos de escala" style="width:90%;">}}
 
-#### Comparación de la detección de anomalías para nuevas métricas
-Este ejemplo muestra cómo cada algoritmo trata una métrica nueva. `Robust` y `agile` no muestran ningún límite durante las primeras temporalidades (semanales). `Basic` empieza a mostrar límites poco después de que aparece la métrica por primera vez.
+#### Comparación de detección de anomalías para nuevas métricas {#anomaly-detection-comparison-for-new-metrics}
+Este ejemplo muestra cómo cada algoritmo maneja una nueva métrica. `Robust` y `agile` no muestran ningún límite durante las primeras temporadas (semanales). `Basic` comienza a mostrar límites poco después de que la métrica aparece por primera vez.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="Comparación del algoritmo con las nuevas métricas" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="comparación de algoritmos nueva métrica" style="width:90%;">}}
 
-## Condiciones de alerta avanzadas
+## Condiciones de alerta avanzadas {#advanced-alert-conditions}
 
-Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (resolución automática, periodo de espera para la evaluación, etc.), consulta la página [de configuración de monitores][8]. Para la opción de ventana de datos de métricas completa, consulta la página [Monitor de métricas][9].
+Para instrucciones detalladas sobre las opciones de alerta avanzadas (resolución automática, retraso de evaluación, etc.), consulte la página de [configuración del monitor][8]. Para la opción específica de métrica ventana de datos completa, consulte la página de [monitor de métricas][9].
 
-## Notificaciones
+## Notifications {#notifications}
 
-Para obtener instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulta la página [Notificaciones][10].
+Para instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulte la página de [Notifications][10].
 
-## API
+## API {#api}
 
-Los clientes con un plan de empresa pueden crear monitores de detección de anomalías utilizando el [endpoint de la API create-monitor][11]. Datadog **recomienda encarecidamente** [exportar el JSON del monitor][12] para crear la consulta para la API. Al utilizar la [página de creación de monitores][1] en Datadog, los clientes se benefician del gráfico de vista previa y del ajuste automático de parámetros que ayudan a evitar una incorrecta configuración de los monitores.
+Los clientes en un plan empresarial pueden crear monitores de detección de anomalías utilizando el [create-monitor API endpoint][11]. Datadog **recomienda encarecidamente** [exporting a monitor's JSON][12] para construir la consulta para la API. Al utilizar la [página de creación de monitores][1] en Datadog, los clientes se benefician del gráfico de vista previa y la sintonización automática de parámetros para ayudar a evitar un monitor mal configurado.
 
-Los monitores de anomalías se gestionan utilizando la [misma API][14] que otros monitores. Estos campos son exclusivos para monitores de anomalías:
+Los monitores de anomalía se gestionan utilizando la [misma API][14] que otros monitores. Estos campos son únicos para los monitores de anomalía:
 
-### `query`
+### `query` {#query}
 
-La propiedad `query` del cuerpo de la solicitud debe contener una cadena de consulta con el siguiente formato:
+La propiedad `query` en el cuerpo de la solicitud debe contener una cadena de consulta en el siguiente formato:
 
 ```text
 avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<count_default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 `query_window`
-: Un intervalo como `last_4h` o `last_7d`. La ventana temporal que se muestra en los gráficos de las notificaciones debe ser al menos tan grande como la `alert_window` y se la recomienda por ser unas 5 veces la `alert_window`.
+: Un marco de tiempo como `last_4h` o `last_7d`. Este parámetro controla el rango de tiempo de los datos mostrados en los gráficos de Notifications. El `query_window` determina cuántos datos históricos aparecen en la visualización, pero no afecta la evaluación de alertas. Datadog recomienda que el `query_window` sea alrededor de cinco veces el `alert_window` para proporcionar contexto adicional. **Nota**: El `query_window` debe ser al menos tan grande como el `alert_window`. 
 
 `metric_query`
-: Una consulta de métricas estándar de Datadog (por ejemplo, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
+: Una consulta de métrica estándar de Datadog (por ejemplo, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
 
 `algorithm`
 : `basic`, `agile` o `robust`.
@@ -192,41 +191,45 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : Un número positivo; controla la sensibilidad de la detección de anomalías.
 
 `direction`
-: La direccionalidad de las anomalías que debe activar una alerta: `above`, `below` o `both`.
+: La direccionalidad de las anomalías que deberían activar una alerta: `above`, `below` o `both`.
 
 `alert_window`
-: El intervalo que debe verificarse para buscar anomalías (por ejemplo, `last_5m`, `last_1h`).
+: El marco de tiempo a verificar para anomalías (por ejemplo, `last_5m`, `last_1h`).
 
- `interval`
-: Un número entero positivo que representa el número de segundos del intervalo de rollup. Debe ser menor o igual a un quinto de la duración de la `alert_window`.
+`interval`
+: Un número entero positivo que representa la cantidad de segundos en el intervalo de resumen. Debería ser menor o igual a una quinta parte de la duración de `alert_window`.
 
 `count_default_zero`
-: Utiliza `true` para la mayoría de los monitores. Utiliza `false` sólo para enviar una métrica de recuento en la que la falta de un valor no deba interpretarse como un cero.
+: Usa `true` para la mayoría de los monitores. Establecer en `false` solo si se envía una métrica de conteo en la que la falta de un valor no debería _interpretarse_ como un cero.
 
 `seasonality`
-: `hourly`, `daily` o `weekly`. Excluye este parámetro cuando utilices el algoritmo `basic`.
+: `hourly`, `daily` o `weekly`. Excluye este parámetro al usar el algoritmo `basic`.
 
 `threshold`
-: Un número positivo no superior a 1. Fracción de puntos en la `alert_window` que deben ser anómalos para que se active una alerta crítica.
+: Un número positivo no mayor que 1. La fracción de puntos en el `alert_window` que debe ser anómala para que se active una alerta crítica.
 
-A continuación se muestra un ejemplo de consulta de monitor de detección de anomalías, que envía alertas cuando el promedio de CPU del nodo Cassandra se encuentra tres desviaciones estándar por encima del valor ordinario, durante los últimos 5 minutos:
+A continuación se muestra un ejemplo de consulta para un monitor de detección de anomalías, que alerta cuando el CPU promedio de un nodo de Cassandra está tres desviaciones estándar por encima del valor ordinario en los últimos 5 minutos:
 
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
-### `options`
+Esta consulta utiliza `avg` en dos lugares:
+- `avg(last_1h)` - Agrega puntos de datos anómalos a lo largo de la ventana de consulta para gráficos de Notifications
+- `avg:system.cpu.system{name:cassandra}` - Agrega la métrica de CPU a través de los nodos de Cassandra antes de la detección de anomalías
 
-La mayoría de las propiedades de `options` en el cuerpo de la solicitud son las mismas que para otras alertas de consulta, excepto `thresholds` y `threshold_windows`.
+### `options` {#options}
+
+La mayoría de las propiedades bajo `options` en el cuerpo de la solicitud son las mismas que para otras alertas de consulta, excepto por `thresholds` y `threshold_windows`.
 
 `thresholds`
-: Los monitores de anomalías admiten umbrales `critical`, `critical_recovery`, `warning` y `warning_recovery`. Los umbrales se expresan como números de 0 a 1 y se interpretan como la fracción de la ventana asociada que es anómala. Por ejemplo, un valor de umbral `critical` de `0.9` significa que se activa una alerta crítica cuando al menos el 90% de los puntos en la `trigger_window` (descrita a continuación) son anómalos. O, un valor de `warning_recovery` de 0 significa que el monitor se recupera del estado de alerta sólo cuando el 0% de los puntos en la `recovery_window` son anómalos.
-El `threshold``critical` debe coincidir con el `threshold` utilizado en la `query`.
+: Los monitores de anomalías soportan umbrales de `critical`, `critical_recovery`, `warning` y `warning_recovery`. Los umbrales se expresan como números del 0 al 1, y se interpretan como la fracción de la ventana asociada que es anómala. Por ejemplo, un valor de umbral `critical` de `0.9` significa que se activa una alerta crítica cuando al menos el 90% de los puntos en el `trigger_window` (descrito a continuación) son anómalos. O, un valor de `warning_recovery` de 0 significa que el monitor se recupera del estado de advertencia solo cuando el 0% de los puntos en el `recovery_window` son anómalos.
+: El `critical` `threshold` debe coincidir con el `threshold` utilizado en el `query`.
 
 `threshold_windows`
-: Los monitores de anomalías tienen una propiedad `threshold_windows` en `options`. `threshold_windows` debe incluir las dos propiedades, `trigger_window` y `recovery_window`. Estas ventanas se expresan en forma de cadenas de intervalo, como `last_10m` o `last_1h`. La `trigger_window` debe coincidir con la `alert_window` de la `query`. La `trigger_window` es el rango de tiempo que se analiza en busca de anomalías, cuando se evalúa si un monitor debe activarse. La `recovery_window` es el rango de tiempo que se analiza en busca de anomalías cuando se evalúa si un monitor activado debe recuperarse.
+: Los monitores de anomalías tienen una propiedad `threshold_windows` en `options`. `threshold_windows` debe incluir ambas propiedades—`trigger_window` y `recovery_window`. Estas ventanas se expresan como cadenas de tiempo, tales como `last_10m` o `last_1h`. El `trigger_window` debe coincidir con el `alert_window` del `query`. El `trigger_window` es el rango de tiempo que se analiza en busca de anomalías al evaluar si un monitor debe activarse. El `recovery_window` es el rango de tiempo que se analiza en busca de anomalías al evaluar si un monitor activado debe recuperarse.
 
-La configuración estándar de umbrales y de ventanas de umbrales tiene el siguiente aspecto:
+Una configuración estándar de umbrales y ventana de umbral se ve así:
 
 ```json
 "options": {
@@ -242,13 +245,13 @@ La configuración estándar de umbrales y de ventanas de umbrales tiene el sigui
 }
 ```
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-* [FAQ sobre el monitor de anomalías][15]
+* [Preguntas frecuentes sobre el monitor de anomalías][15]
 * [Actualizar la zona horaria del monitor de anomalías][16]
-* [Ponerse en contacto con el servicio de asistencia de Datadog][17]
+* [Contactar al soporte de Datadog][17]
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
