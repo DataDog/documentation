@@ -27,7 +27,7 @@ Datadog AI agents, including the Bits fleet (Bits SRE, Bits Dev, Bits Assistant,
 
 ## View actions taken through the Datadog MCP server
 
-Actions taken through the Datadog MCP server, carry the `is_mcp_call` field.
+Actions taken through the Datadog MCP server carry the `is_mcp_call` field.
 
 1. Navigate to [Audit Trail][1].
 2. In the search bar, enter the query: `is_mcp_call:true`.
