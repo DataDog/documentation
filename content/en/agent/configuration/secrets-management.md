@@ -33,11 +33,11 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
-
-Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions.
-
-**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
+Notes:
+- **Agent 7.70+**: Native secrets management support introduced.
+- **Agent 7.76+**: Native secrets management available for FIPS-enabled Agents.
+- **Agent 7.77+**: The [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later in containerized environments. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
+- **Agent 7.80+**: Support for [multiple backends](#multiple-backends).
 
 #### Single backend
 
@@ -631,7 +631,7 @@ spec:
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
 
-**Available in Agent version 7.74+**
+*Available in Agent version 7.74+*
 
 The following GCP services are supported:
 
@@ -1015,7 +1015,7 @@ secret_backend_config:
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 The following Kubernetes services are supported:
 
@@ -1254,7 +1254,7 @@ override:
 
 {{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 The following Docker services are supported:
 
@@ -1410,7 +1410,7 @@ secret_backend_config:
 
 {{% tab "TEXT File Backend" %}}
 
-**Available in Agent version 7.75+**
+*Available in Agent version 7.75+*
 
 **Note**: Each secret must be stored in its own individual text file.
 
@@ -1457,7 +1457,7 @@ secret_backend_config:
 
 #### Multiple backends
 
-**Available in Agent version 7.80+**
+*Available in Agent version 7.80+*
 
 Instead of a single `secret_backend_type`, you can declare multiple named backends under `multi_secret_backends`. Each backend has its own `type` and `config`, and secrets are routed to a specific backend using a `backendName;` prefix in the `ENC[]` handle.
 
@@ -1545,7 +1545,9 @@ api_key: ENC[my_yaml;api_key]
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
 
-For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh` starting with version v7.32.0. This script supports reading secrets from:
+*Available in Agent version 7.32+*
+
+For containerized environments, the Datadog Agent's container images include a built-in script `/readsecret_multiple_providers.sh`. This script supports reading secrets from:
 
 * Files: using `ENC[file@/path/to/file]`
 * Kubernetes Secrets: using `ENC[k8s_secret@namespace/secret-name/key]`
@@ -1819,7 +1821,9 @@ On Windows, your executable must:
 
 ## Refreshing secrets at runtime
 
-Starting in Agent v7.67, you can configure the Agent to refresh resolved secrets without requiring a restart.
+*Available in Agent version 7.67+*
+
+You can configure the Agent to refresh resolved secrets without requiring a restart.
 
 Set a refresh interval:
 ```yaml
@@ -1854,7 +1858,9 @@ secret_refresh_scatter: false
 ```
 
 ### Autodiscovery check secrets refresh
-Starting in Agent v7.76, scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
+*Available in Agent version 7.76+*
+
+Scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
 
 ```yaml
 labels:
@@ -1881,7 +1887,9 @@ The Agent can then trigger secrets refresh at either the interval set in `secret
 
 ### Automatic secrets refresh on API key failure / invalidation
 
-Starting in Agent version v7.74, the Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid or expired API key.
+*Available in Agent version 7.74+*
+
+The Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid or expired API key.
 
 To enable this feature, set `secret_refresh_on_api_key_failure_interval` to an interval in minutes in your `datadog.yaml` file. Set to `0` to disable (default).
 
