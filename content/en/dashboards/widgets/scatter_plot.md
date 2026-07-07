@@ -25,7 +25,7 @@ A scatter plot identifies a possible relationship between changes observed in tw
     1. Set X and Y axis controls.
     1. Add a legend to view the datapoints in a list.
     1. Configure units as they display on the graph.
-    1. Add additional [context links][1], which are enabled by default. Context links bridge dashboard widgets with other pages in Datadog or third party applications.
+    1. Add additional [context links][1], which are enabled by default. Context links bridge dashboard widgets with other pages in Datadog or third-party applications.
 1. Choose whether your widget has a custom time frame or the dashboard's global time frame.
 1. Give your graph a title or leave the box blank for the suggested title.
 
@@ -77,7 +77,6 @@ Hover over the scatter plot to display its controls in the top-right corner:
 Click and drag directly on the scatter plot to pan across your data.
 
 The scatter plot automatically labels notable points, such as outliers and maximum values.
-<!-- TODO: confirm with PM whether the auto-generated point labels are always on or have a toggle (no control found in the UI). -->
 
 ## API
 
