@@ -8081,7 +8081,7 @@ menu:
       url: /security/code_security/dev_tool_int/mcp_server/
       parent: dev_tool_int
       weight: 5
-    - name: Supply Chain Firewall GitHub Action
+    - name: SCFW GitHub Action
       identifier: dev_tool_int_scfw_github_action
       url: /security/code_security/dev_tool_int/scfw_github_action/
       parent: dev_tool_int
