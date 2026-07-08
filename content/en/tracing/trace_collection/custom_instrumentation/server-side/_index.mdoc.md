@@ -121,7 +121,7 @@ further_reading:
 {% if equals($prog_lang, "cpp") %}
 {% if equals($api_type, "otel_api") %}
 {% alert level="danger" %}
-C++ does not support the OpenTelemetry API. Select **Datadog** from the API dropdown to see C++ custom instrumentation documentation.
+C++ does not support the OpenTelemetry API. Select {% ui %}Datadog{% /ui %} from the API dropdown to see C++ custom instrumentation documentation.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -130,7 +130,7 @@ C++ does not support the OpenTelemetry API. Select **Datadog** from the API drop
 {% if equals($prog_lang, "rust") %}
 {% if equals($api_type, "dd_api") %}
 {% alert level="danger" %}
-Rust does not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see Rust custom instrumentation documentation.
+Rust does not support the Datadog API. Select {% ui %}OpenTelemetry{% /ui %} from the API dropdown to see Rust custom instrumentation documentation.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -139,7 +139,7 @@ Rust does not support the Datadog API. Select **OpenTelemetry** from the API dro
 {% if equals($prog_lang, "elixir") %}
 {% if equals($api_type, "dd_api") %}
 {% alert level="danger" %}
-Elixir does not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see Elixir custom instrumentation documentation.
+Elixir does not support the Datadog API. Select {% ui %}OpenTelemetry{% /ui %} from the API dropdown to see Elixir custom instrumentation documentation.
 {% /alert %}
 {% /if %}
 {% /if %}

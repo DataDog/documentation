@@ -34,7 +34,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,ap1,ap2,gov,gov2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1,gov,gov2" >}}
 <div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -45,7 +45,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 
 Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
 1. Complete the OAuth login flow when prompted.
@@ -77,7 +77,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the Datadog plugin:
     <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
@@ -127,7 +127,7 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. For example:
@@ -212,9 +212,9 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 {{% tab "Cursor" %}}
 
-Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
    - From the Cursor Marketplace, open the [Datadog Plugin][1] and click {{< ui >}}Add to Cursor{{< /ui >}}.
    - In Cursor, navigate to {{< ui >}}Cursor Settings{{< /ui >}} > {{< ui >}}Plugins{{< /ui >}}, then search for the Datadog plugin and click {{< ui >}}Add to Cursor{{< /ui >}}.
@@ -238,7 +238,7 @@ Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin include
 
 Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketplace. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Devin, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Marketplace{{< /ui >}} and search for `Datadog`.
 1. Select your Datadog site for the {{< ui >}}Server URL{{< /ui >}}; for example, your selected site is {{< region-param key="dd_site_name" code="true" >}}.
 1. Enter your Datadog API and application keys.
@@ -260,7 +260,7 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Run in terminal:
@@ -297,7 +297,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Add the Datadog MCP Server to Goose using one of the following methods:
@@ -331,7 +331,7 @@ JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 {{% collapse-content title="Junie" level="h4" expanded=false id="jetbrains-junie" %}}
@@ -435,7 +435,7 @@ The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Add the following to your [Kiro MCP configuration file][2] (`~/.kiro/settings/mcp.json` for user-scoped configuration):
@@ -468,7 +468,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 Connect [OpenCode][3] to the Datadog MCP Server with the official [Datadog OpenCode Plugin][2] (in Preview). The plugin writes and maintains the MCP Server entry in your `opencode.json` and exposes the `ddsetup`, `ddconfig`, and `ddtoolsets` tools that the agent uses to handle setup, site changes, and [toolset](#toolsets) selection.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 
 1. Add the plugin to your `opencode.json` configuration file. Create the file if it doesn't exist:
 
@@ -527,14 +527,18 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
+For Copilot, install the [Datadog Copilot plugin][2] from the marketplace. For more information, see the instructions for the [Copilot CLI][3].
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For other extensions & CLIs, Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
 1. Sign in to your Datadog account.
 1. **Restart the IDE.**
 1. Run the {{< ui >}}Datadog: Open MCP Configuration Assistant{{< /ui >}} and follow the guidance to configure the Datadog MCP Server.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+The Datadog MCP server connection is managed by Copilot (or whichever agent you are using), not the Datadog extension. You must authorize the Datadog MCP server independently of the extension.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /mcp_server/tools
@@ -545,13 +549,15 @@ Datadog's [Cursor and VS Code extension][1] provides a configuration assistant f
 {{< /site-region >}}
 
 [1]: /ide_plugins/vscode/
+[2]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[3]: /mcp_server/setup/?tab=copilot-cli
 {{% /tab %}}
 
 {{% tab "Warp" %}}
 
 [Warp][1] is an agentic terminal with built-in MCP support. Point the Warp agent to the MCP Server endpoint for your regional [Datadog site][2]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. In the Warp app, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Servers{{< /ui >}} and click {{< ui >}}+ Add{{< /ui >}}.
@@ -588,7 +594,7 @@ For most other [supported clients](#supported-clients), use these instructions f
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Add the Datadog MCP Server to your client's configuration file using the HTTP transport and your site's endpoint URL. For example:
@@ -623,7 +629,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
 - Retrieve only the core tools (this is the default if `toolsets` is not specified):
@@ -647,7 +653,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 Use the `omit_tools` query parameter to remove specific tools from the final tool list.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Examples for your selected site ({{< region-param key="dd_site_name" >}}):
 
 - Omit tools from the default set:
@@ -682,6 +688,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
+- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, exploring metrics, managing retention filters, and managing custom RUM metrics
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
@@ -694,21 +701,20 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
-- `rum`: Tools for [Real User Monitoring][57], including summarizing application performance, inspecting application configuration, and running performance investigations
 
 ## Supported clients
 
 | Client | Developer | Notes |
 |--------|------|------|
 | [ChatGPT][59] | OpenAI | In Preview, and available for US1 customers only. |
-| [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
+| [Cursor][3] | Cursor | Datadog [Cursor plugin][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
-| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][65] recommended. |
+| [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
-| [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
+| [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
@@ -737,11 +743,48 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 
 Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
 
+### Restrict network access
+
+To control which networks can connect to the Datadog MCP Server, enable the [IP allowlist][68]. This prevents users from connecting to the MCP Server from unapproved origins, even if they have the required permissions.
+
 ## Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers.
+For most users, OAuth 2.0 is the recommended authentication method, and your MCP client handles it during setup. Use one of the header-based methods below only when you cannot complete the OAuth flow, for example on a server or in a CI environment.
+
+### OAuth 2.0 (recommended)
+
+Most clients complete the OAuth 2.0 flow automatically during setup. Select your client at the top of this page for instructions. With OAuth, you don't manage long-lived credentials directly. For details, see the [MCP authorization specification][14].
+
+### Personal or Service Access Token
+
+For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}",
+      "headers": {
+          "Authorization": "Bearer &lt;YOUR_ACCESS_TOKEN&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
+
+Use a PAT for an individual user or a SAT for a [service account][13]. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
+
+### API and application keys
+
+Alternatively, provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
 <pre><code>{
@@ -803,7 +846,7 @@ Local authentication is recommended for Cline and when remote authentication is 
    - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
    - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
 
-   <div class="alert alert-tip">For Claude Code, you can instead run: 
+   <div class="alert alert-tip">For Claude Code, you can instead run:
    <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
 
 4. Fully restart your AI client to apply the configuration and load the MCP Server.
@@ -817,8 +860,8 @@ Local authentication is recommended for Cline and when remote authentication is 
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for {{< ui >}}Transport Type{{< /ui >}}, select {{< ui >}}Streamable HTTP{{< /ui >}}.
-3. For {{< ui >}}URL{{< /ui >}}, enter the MCP Server endpoint for your regional Datadog site. 
-   {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+3. For {{< ui >}}URL{{< /ui >}}, enter the MCP Server endpoint for your regional Datadog site.
+   {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
    For example, for {{< region-param key="dd_site_name" >}}: <code>{{< region-param key="mcp_server_endpoint" >}}</code>
    {{< /site-region >}}
 4. Click {{< ui >}}Connect{{< /ui >}}, then go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}List Tools{{< /ui >}}.
@@ -842,8 +885,8 @@ Local authentication is recommended for Cline and when remote authentication is 
 [12]: /mcp_server/tools
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
-[15]: /ide_plugins/vscode/?tab=cursor
-[16]: /ide_plugins/vscode/
+[15]: https://cursor.com/marketplace/datadog
+[16]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /ide_plugins/idea/
 [19]: https://claude.ai
@@ -893,3 +936,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
+[66]: /account_management/personal-access-tokens/
+[67]: /account_management/service-access-tokens/
+[68]: /account_management/org_settings/ip_allowlist/

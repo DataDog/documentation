@@ -702,19 +702,24 @@ menu:
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
-    - name: Configuration
-      url: opentelemetry/config/environment_variable_support/
-      identifier: otel_env_var
+    - name: OTLP Export
+      url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+      identifier: otel-otlp-export-dd-sdk
       parent: otel-dd-sdk-parent
-      weight: 3021
+      weight: 3020
     - name: APIs
       url: /opentelemetry/instrument/dd_sdks/api_support
       identifier: otel-api-dd-sdk
       parent: otel-dd-sdk-parent
-      weight: 3022
+      weight: 3021
     - name: Instrumentation Libraries
       url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
+      parent: otel-dd-sdk-parent
+      weight: 3022
+    - name: Configuration
+      url: opentelemetry/config/environment_variable_support/
+      identifier: otel_env_var
       parent: otel-dd-sdk-parent
       weight: 3023
     - name: Send Data to Datadog
@@ -4098,36 +4103,41 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_cursor
       weight: 105
+    - name: Temporal Cloud
+      url: cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_temporalcloud
+      weight: 106
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 106
+      weight: 107
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 107
+      weight: 108
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 108
+      weight: 109
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 109
+      weight: 110
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 110
+      weight: 111
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 111
+      weight: 112
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -4659,11 +4669,6 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Remapping Rules for Inferred Entities
-      url: tracing/services/inferred_entity_remapping_rules/
-      parent: tracing_services
-      identifier: tracing_inferred_entity_remapping_rules
-      weight: 907
     - name: Service Remapping Rules
       url: tracing/services/service_remapping_rules
       parent: tracing_services
@@ -5382,6 +5387,12 @@ menu:
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: CI/CD
+      url: data_observability/cicd
+      pre: data-observability-wui
+      identifier: data_observability_cicd
+      parent: data_observability_heading
+      weight: 90000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
@@ -5407,6 +5418,11 @@ menu:
       identifier: jobs_monitoring_airflow_troubleshooting_dag
       parent: jobs_monitoring_airflow
       weight: 100000
+    - name: Upgrade OpenLineage Provider on Amazon MWAA
+      url: data_observability/jobs_monitoring/airflow_mwaa_upgrade
+      identifier: jobs_monitoring_airflow_mwaa_upgrade
+      parent: jobs_monitoring_airflow
+      weight: 200000
     - name: dbt
       url: data_observability/jobs_monitoring/dbt
       identifier: jobs_monitoring_dbt
@@ -5978,6 +5994,26 @@ menu:
       parent: tests_setup
       identifier: tests_setup_junit_xml
       weight: 108
+    - name: Bazel
+      url: tests/setup/bazel/
+      parent: tests_setup
+      identifier: tests_setup_bazel
+      weight: 109
+    - name: Java
+      url: tests/setup/bazel/java/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_java
+      weight: 10901
+    - name: Python
+      url: tests/setup/bazel/python/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_python
+      weight: 10902
+    - name: Go
+      url: tests/setup/bazel/go/
+      parent: tests_setup_bazel
+      identifier: tests_setup_bazel_go
+      weight: 10903
     - name: Network Settings
       url: tests/network/
       parent: tests
@@ -6267,31 +6303,36 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_angular
       weight: 102
+    - name: Dart and Flutter
+      url: feature_flags/client/flutter
+      parent: feature_flags_client
+      identifier: feature_flags_client_flutter
+      weight: 103
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 103
+      weight: 104
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 104
+      weight: 105
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 105
+      weight: 106
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 106
+      weight: 107
     - name: Unity
       url: feature_flags/client/unity
       parent: feature_flags_client
       identifier: feature_flags_client_unity
-      weight: 107
+      weight: 108
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -6342,6 +6383,16 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 320
+    - name: Approvals
+      url: feature_flags/concepts/approvals
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_approvals
+      weight: 321
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
@@ -7467,11 +7518,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
-    - name: Custom Kubernetes
-      url: /byoc-logs/install/custom_k8s
-      parent: cloudprem_install
-      identifier: cloudprem_custom_k8s
-      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem
@@ -7643,21 +7689,26 @@ menu:
       parent: security_platform
       identifier: security_ticketing_integrations
       weight: 10
+    - name: Assignee Management
+      url: security/assignee_management
+      parent: security_platform
+      identifier: security_assignee_management
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 12
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -8237,43 +8288,53 @@ menu:
       parent: application_security
       identifier: appsec_threats_management_setup
       weight: 3
-    - name: Overview
-      url: security/application_security/overview
+    - name: Attack Summary
+      url: security/application_security/attack_summary/
       parent: application_security
-      identifier: application_security_overview
-      weight: 4
-    - name: Security Signals
-      url: security/application_security/security_signals
+      identifier: application_security_attack_summary
+      weight: 6
+    - name: Threat Protection
+      url: security/application_security/threat_protection/
       parent: application_security
-      identifier: application_security_security_signals
+      identifier: application_security_threat_protection
       weight: 5
+    - name: Overview
+      url: security/application_security/threat_protection/overview/
+      parent: application_security_threat_protection
+      identifier: application_security_threat_protection_overview
+      weight: 1
+    - name: Security Signals
+      url: security/application_security/threat_protection/security_signals
+      parent: application_security_threat_protection
+      identifier: application_security_security_signals
+      weight: 2
     - name: Attackers Explorer
-      url: security/application_security/security_signals/attacker-explorer/
+      url: security/application_security/threat_protection/security_signals/attacker-explorer/
       parent: application_security_security_signals
       identifier: threats_attackers
       weight: 1
     - name: Attacker Fingerprint
-      url: security/application_security/security_signals/attacker_fingerprint/
+      url: security/application_security/threat_protection/security_signals/attacker_fingerprint/
       parent: application_security_security_signals
       identifier: threats_attacker_fingerprint
       weight: 2
     - name: Attacker Clustering
-      url: security/application_security/security_signals/attacker_clustering/
+      url: security/application_security/threat_protection/security_signals/attacker_clustering/
       parent: application_security_security_signals
       identifier: threats_attacker_clustering
       weight: 3
     - name: Users Explorer
-      url: security/application_security/security_signals/users_explorer/
+      url: security/application_security/threat_protection/security_signals/users_explorer/
       parent: application_security_security_signals
       identifier: threats_users
       weight: 4
     - name: Policies
-      url: security/application_security/policies/
-      parent: application_security
+      url: security/application_security/threat_protection/policies/
+      parent: application_security_threat_protection
       identifier: application_security_policies
-      weight: 6
+      weight: 3
     - name: Custom Rules
-      url: security/application_security/policies/custom_rules/
+      url: security/application_security/threat_protection/policies/custom_rules/
       parent: application_security_policies
       identifier: application_security_policies_custom_rules
       weight: 1
@@ -8283,40 +8344,45 @@ menu:
       identifier: application_security_policies_ootb_rules
       weight: 2
     - name: In-App WAF Rules
-      url: security/application_security/policies/inapp_waf_rules/
+      url: security/application_security/threat_protection/policies/inapp_waf_rules/
       parent: application_security_policies
       identifier: application_security_policies_inappwaf_rules
       weight: 3
     - name: Tracing Library Configuration
-      url: security/application_security/policies/library_configuration/
+      url: security/application_security/threat_protection/policies/library_configuration/
       parent: application_security_policies
       identifier: application_security_policies_tracing_lib
       weight: 4
     - name: Exploit Prevention
-      url: security/application_security/exploit-prevention/
-      parent: application_security
+      url: security/application_security/threat_protection/exploit-prevention/
+      parent: application_security_threat_protection
       identifier: exploit_prevention
-      weight: 7
+      weight: 4
     - name: WAF Integrations
-      url: security/application_security/waf-integration/
-      parent: application_security
+      url: security/application_security/threat_protection/waf-integration/
+      parent: application_security_threat_protection
       identifier: aws_waf_int
-      weight: 8
+      weight: 5
     - name: Account Takeover Protection
-      url: security/application_security/account_takeover_protection/
-      parent: application_security
+      url: security/application_security/threat_protection/account_takeover_protection/
+      parent: application_security_threat_protection
       identifier: security_ato_protection
-      weight: 9
+      weight: 6
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 10
+      weight: 4
+    - name: Overview
+      url: security/application_security/api_posture/overview/
+      parent: application_security_api_security
+      identifier: application_security_api_security_overview
+      weight: 1
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
       identifier: asm_api_security
-      weight: 1
+      weight: 4
     - name: API Endpoints
       url: security/application_security/api_posture/api_inventory/api_endpoints/
       parent: asm_api_security
@@ -8332,26 +8398,31 @@ menu:
       parent: application_security_api_security
       identifier: application_security_api_findings
       weight: 2
+    - name: Compliance
+      url: security/application_security/api_posture/compliance/
+      parent: application_security_api_security
+      identifier: application_security_api_posture_compliance
+      weight: 3
     - name: Endpoint Scanning
       url: security/application_security/api_posture/endpoint_scanning/
       parent: application_security_api_security
       identifier: application_security_endpoint_scanning
-      weight: 3
+      weight: 5
     - name: Sensitive Data
       url: security/application_security/api_posture/sensitive_data/
       parent: application_security_api_security
       identifier: application_security_sensitive_data
-      weight: 4
+      weight: 6
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 11
+      weight: 7
     - name: Troubleshooting
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 12
+      weight: 8
     - name: AI Guard
       url: /security/ai_guard/
       pre: siem
@@ -9709,21 +9780,26 @@ menu:
       parent: rum
       identifier: rum_managed_archive
       weight: 12
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
+      weight: 13
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 13
+      weight: 14
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 14
+      weight: 15
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 15
+      weight: 16
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
@@ -9795,6 +9871,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9811,51 +9892,66 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
-    - name: Analysis Methods
-      url: experiments/analysis_methods
-      parent: pa_experiments
-      identifier: pa_experiments_analysis_methods
-      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Concepts
+      url: experiments/concepts/
+      parent: pa_experiments
+      identifier: pa_experiments_concepts
       weight: 4
-    - name: Cumulative Impact
-      url: experiments/cumulative_impact
-      parent: pa_experiments
-      identifier: pa_experiments_cumulative_impact
-      weight: 5
-    - name: Create Exposure SQL Models
-      url: experiments/exposure_sql
-      parent: pa_experiments
-      identifier: pa_experiments_exposure_sql
-      weight: 6
-    - name: Manage Subject Types
-      url: experiments/subject_types
-      parent: pa_experiments
+    - name: Subject Types
+      url: experiments/concepts/subject_types
+      parent: pa_experiments_concepts
       identifier: pa_experiments_subject_types
-      weight: 7
+      weight: 1
+    - name: Exposure SQL Models
+      url: experiments/concepts/exposure_sql
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_exposure_sql
+      weight: 2
+    - name: Cumulative Impact
+      url: experiments/concepts/cumulative_impact
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_cumulative_impact
+      weight: 3
+    - name: Statistics
+      url: experiments/statistics/
+      parent: pa_experiments
+      identifier: pa_experiments_statistics
+      weight: 5
+    - name: Analysis Methods
+      url: experiments/statistics/analysis_methods
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_analysis_methods
+      weight: 1
     - name: Minimum Detectable Effects
-      url: experiments/minimum_detectable_effect
-      parent: pa_experiments
+      url: experiments/statistics/minimum_detectable_effect
+      parent: pa_experiments_statistics
       identifier: pa_experiments_mde
-      weight: 8
+      weight: 2
     - name: Global Lift
-      url: experiments/global_lift
-      parent: pa_experiments
+      url: experiments/statistics/global_lift
+      parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 9
+      weight: 3
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
       weight: 10
+    - name: Experiments MCP Tools
+      url: experiments/mcp_tools
+      parent: pa_experiments
+      identifier: pa_experiments_mcp_tools
+      weight: 11
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 11
+      weight: 12
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics

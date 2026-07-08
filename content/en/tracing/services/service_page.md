@@ -44,7 +44,7 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -130,7 +130,7 @@ Sort the service's resources by requests, latency, errors, or time to identify h
 
 {{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
-Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
+Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the {{< ui >}}Resources{{< /ui >}} list and compare resources in a service. To view the full resource page, click {{< ui >}}Open Full Page{{< /ui >}}.
 
 [Refer to the dedicated resource documentation to learn more][2].
 
@@ -138,16 +138,16 @@ Click on a resource to open a side panel that displays the resource's out-of-the
 
 Choose what to display in your resources list:
 
-* **Requests**: Absolute amount of requests traced (per seconds)
-* **Requests per second**: Absolute amount of requests traced per second
-* **Total time**: Sum of all time spend in this resource
-* **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
-* **Errors**: Absolute amount of error for a given resource
-* **Error Rate**: Percent of error for a given resource
+* {{< ui >}}Requests{{< /ui >}}: Absolute amount of requests traced (per seconds)
+* {{< ui >}}Requests per second{{< /ui >}}: Absolute amount of requests traced per second
+* {{< ui >}}Total time{{< /ui >}}: Sum of all time spend in this resource
+* {{< ui >}}Avg/p75/p90/p95/p99/Max Latency{{< /ui >}}: The Avg/p75/p90/p95/p99/Max latency of your traced requests
+* {{< ui >}}Errors{{< /ui >}}: Absolute amount of error for a given resource
+* {{< ui >}}Error Rate{{< /ui >}}: Percent of error for a given resource
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us,uk1" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
@@ -244,7 +244,7 @@ If runtime metrics are enabled in the tracing client, you'll see a Runtime metri
 ### Profiling
 You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
 
-Use the information in the **Profiling** tab to correlate a latency and throughput change to a code performance change.
+Use the information in the {{< ui >}}Profiling{{< /ui >}} tab to correlate a latency and throughput change to a code performance change.
 
 In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 

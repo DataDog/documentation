@@ -92,8 +92,13 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
+`DD_MCP_CAPTURE_INTENT`
+: optional - _integer or string_ - **default**: `false`
+<br />When set to `1` or `true`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
+
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
+
 
 {{% tab "Node.js" %}}
 Enable Agent Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
@@ -223,6 +228,10 @@ LLMObs.enable(
 `service`
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
+
+`capture_intent`
+: optional - _boolean_ - **default**: `false`
+<br />When set to `True`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span. If not provided, this defaults to the value of `DD_MCP_CAPTURE_INTENT`.
 
 [1]: /llm_observability/instrumentation/auto_instrumentation/
 {{% /tab %}}
@@ -1956,6 +1965,33 @@ The versioning system works as follows:
 - **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
+
+## MCP intent capture
+
+To gain insight into why your MCP tools were called, enable intent capture on your MCP server. When enabled, the SDK adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span, helping you improve your tool definitions and descriptions.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Enable MCP intent capture with the `DD_MCP_CAPTURE_INTENT` environment variable:
+
+{{< code-block lang="shell" >}}
+DD_MCP_CAPTURE_INTENT=1 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Or, enable it programmatically with the `capture_intent` parameter on `LLMObs.enable()`:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  capture_intent=True,
+)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Cost monitoring
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
