@@ -12,6 +12,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const { entry } = Astro.props as { entry: CollectionEntry<'docs'> };
+
+if (__CI_ENV__ === 'live' && entry.id.startsWith('test_pages/')) {
+  return new Response(null, { status: 404 });
+}
+
 const { Content } = await render(entry);
 ---
 

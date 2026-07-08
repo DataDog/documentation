@@ -19,15 +19,6 @@ test.describe('AnnouncementBanner component — visual', () => {
       await expect(banner).toHaveScreenshot('announcement-banner-mobile.png');
     });
 
-    test('keeps Hugo banner colors in dark mode', async ({ page }) => {
-      // Banner tokens are Hugo-identical and do not swap between themes; the
-      // baseline confirms dark mode keeps the Hugo-colored banner intact.
-      await page.setViewportSize({ width: 1440, height: 900 });
-      await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
-      const banner = page.locator('.announcement-banner');
-      await expect(banner).toHaveScreenshot('announcement-banner-dark.png');
-    });
-
     test('is 30px tall, fixed at the top, and offsets the header below it', async ({ page }) => {
       // Hugo-identical: the banner is a 30px fixed bar at y:0 spanning the
       // viewport, and the header is pushed down by that height (the

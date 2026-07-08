@@ -7288,28 +7288,23 @@
                         >
                         <div class="code-block__highlighted _code-block__highlighted_961fb8">
                           <pre
-                            class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                            style="
-                              background-color: #ffffff;
-                              --shiki-dark-bg: #0d1117;
-                              color: #000000;
-                              --shiki-dark: #e0e0e0;
-                            "
+                            class="shiki datadog-chroma"
+                            style="background-color: #ffffff; color: #000000"
                             tabindex="0"
-                          ><code><span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">message</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"You may need to add web hosts if this is consistently high."</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Bytes received on host0"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">options</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">no_data_timeframe</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">20</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">notify_no_data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">true</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">query</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">tags</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"query alert"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span></code></pre>
+                          ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">message</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"You may need to add web hosts if this is consistently high."</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"Bytes received on host0"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">options</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">no_data_timeframe</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">20</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">notify_no_data</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#A90D91">true</span></span>
+<span class="line"><span style="color:#000000">  },</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">query</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">tags</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#000000">  ],</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">type</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"query alert"</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
                         </div>
                       </div>
                     </div>
@@ -14586,107 +14581,102 @@
                             >
                             <div class="code-block__highlighted _code-block__highlighted_961fb8">
                               <pre
-                                class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                                style="
-                                  background-color: #ffffff;
-                                  --shiki-dark-bg: #0d1117;
-                                  color: #000000;
-                                  --shiki-dark: #e0e0e0;
-                                "
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
                                 tabindex="0"
-                              ><code><span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">assets</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">category</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"runbook"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Monitor Runbook"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">resource_key</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"12345"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">resource_type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"notebook"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">url</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"/notebooks/12345"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">draft_status</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"draft"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">matching_downtimes</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">end</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1412792983</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1625</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">scope</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "env:staging"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">start</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1412792983</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"My monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">options</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">aggregation</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">group_by</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"host"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">metric</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"metrics.name"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"count"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">device_ids</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "laptop_large"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">include_tags</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">true</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">min_failure_duration</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">min_location_failed</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">new_host_delay</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">300</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">notification_preset_name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"show_all"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">notify_audit</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">false</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">on_missing_data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"default"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">renotify_interval</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">null</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">renotify_statuses</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "alert"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">scheduling_options</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">custom_schedule</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">recurrences</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">rrule</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">start</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"2023-08-31T16:30:00"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">timezone</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Europe/Paris"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">evaluation_window</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">day_starts</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"04:00"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">hour_starts</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">0</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">month_starts</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">1</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">timezone</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Europe/Paris"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">timeout_h</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">null</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">variables</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">compute</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">aggregation</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"avg"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">interval</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">60000</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">metric</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"@duration"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"compute_result"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data_source</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"rum"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">group_by</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">facet</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"status"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">limit</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">10</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">sort</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">              "</span><span style="color:#836C28;--shiki-dark:#D67AD6">order</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"asc"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">indexes</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "days-3"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "days-7"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">name</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"query_errors"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">search</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">query</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"service:query"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ]</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">overall_state</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Alert"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">query</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"query alert"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span></code></pre>
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">assets</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">    {</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">category</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"runbook"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"Monitor Runbook"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">resource_key</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"12345"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">resource_type</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"notebook"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">url</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"/notebooks/12345"</span></span>
+<span class="line"><span style="color:#000000">    }</span></span>
+<span class="line"><span style="color:#000000">  ],</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">draft_status</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"draft"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">matching_downtimes</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">    {</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">end</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">1412792983</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">id</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">1625</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">scope</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">        "env:staging"</span></span>
+<span class="line"><span style="color:#000000">      ],</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">start</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">1412792983</span></span>
+<span class="line"><span style="color:#000000">    }</span></span>
+<span class="line"><span style="color:#000000">  ],</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"My monitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">options</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">aggregation</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">group_by</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"host"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">metric</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"metrics.name"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">type</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"count"</span></span>
+<span class="line"><span style="color:#000000">    },</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">device_ids</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">      "laptop_large"</span></span>
+<span class="line"><span style="color:#000000">    ],</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">include_tags</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#A90D91">true</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">min_failure_duration</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">0</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">min_location_failed</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">1</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">new_host_delay</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">300</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">notification_preset_name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"show_all"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">notify_audit</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#A90D91">false</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">on_missing_data</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"default"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">renotify_interval</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#A90D91">null</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">renotify_statuses</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">      "alert"</span></span>
+<span class="line"><span style="color:#000000">    ],</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">scheduling_options</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">custom_schedule</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">recurrences</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">          {</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">rrule</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">start</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"2023-08-31T16:30:00"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">timezone</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"Europe/Paris"</span></span>
+<span class="line"><span style="color:#000000">          }</span></span>
+<span class="line"><span style="color:#000000">        ]</span></span>
+<span class="line"><span style="color:#000000">      },</span></span>
+<span class="line"><span style="color:#000000">      "</span><span style="color:#836C28">evaluation_window</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">day_starts</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"04:00"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">hour_starts</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">0</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">month_starts</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">1</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">timezone</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"Europe/Paris"</span></span>
+<span class="line"><span style="color:#000000">      }</span></span>
+<span class="line"><span style="color:#000000">    },</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">timeout_h</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#A90D91">null</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    "</span><span style="color:#836C28">variables</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">      {</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">compute</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">          "</span><span style="color:#836C28">aggregation</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"avg"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">          "</span><span style="color:#836C28">interval</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">60000</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">          "</span><span style="color:#836C28">metric</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"@duration"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">          "</span><span style="color:#836C28">name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"compute_result"</span></span>
+<span class="line"><span style="color:#000000">        },</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">data_source</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"rum"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">group_by</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">          {</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">facet</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"status"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">limit</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#1C01CE">10</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            "</span><span style="color:#836C28">sort</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">              "</span><span style="color:#836C28">order</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"asc"</span></span>
+<span class="line"><span style="color:#000000">            }</span></span>
+<span class="line"><span style="color:#000000">          }</span></span>
+<span class="line"><span style="color:#000000">        ],</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">indexes</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">          "days-3"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#C41A16">          "days-7"</span></span>
+<span class="line"><span style="color:#000000">        ],</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">name</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"query_errors"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">        "</span><span style="color:#836C28">search</span><span style="color:#000000">"</span><span style="color:#000000">: {</span></span>
+<span class="line"><span style="color:#000000">          "</span><span style="color:#836C28">query</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"service:query"</span></span>
+<span class="line"><span style="color:#000000">        }</span></span>
+<span class="line"><span style="color:#000000">      }</span></span>
+<span class="line"><span style="color:#000000">    ]</span></span>
+<span class="line"><span style="color:#000000">  },</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">overall_state</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"Alert"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">query</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">type</span><span style="color:#000000">"</span><span style="color:#000000">: </span><span style="color:#C41A16">"query alert"</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
                             </div>
                           </div>
                         </div>
@@ -14792,19 +14782,14 @@
                             >
                             <div class="code-block__highlighted _code-block__highlighted_961fb8">
                               <pre
-                                class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                                style="
-                                  background-color: #ffffff;
-                                  --shiki-dark-bg: #0d1117;
-                                  color: #000000;
-                                  --shiki-dark: #e0e0e0;
-                                "
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
                                 tabindex="0"
-                              ><code><span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">errors</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "Bad Request"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ]</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span></code></pre>
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
                             </div>
                           </div>
                         </div>
@@ -14910,19 +14895,14 @@
                             >
                             <div class="code-block__highlighted _code-block__highlighted_961fb8">
                               <pre
-                                class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                                style="
-                                  background-color: #ffffff;
-                                  --shiki-dark-bg: #0d1117;
-                                  color: #000000;
-                                  --shiki-dark: #e0e0e0;
-                                "
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
                                 tabindex="0"
-                              ><code><span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">errors</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "Bad Request"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ]</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span></code></pre>
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
                             </div>
                           </div>
                         </div>
@@ -15028,19 +15008,14 @@
                             >
                             <div class="code-block__highlighted _code-block__highlighted_961fb8">
                               <pre
-                                class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                                style="
-                                  background-color: #ffffff;
-                                  --shiki-dark-bg: #0d1117;
-                                  color: #000000;
-                                  --shiki-dark: #e0e0e0;
-                                "
+                                class="shiki datadog-chroma"
+                                style="background-color: #ffffff; color: #000000"
                                 tabindex="0"
-                              ><code><span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  "</span><span style="color:#836C28;--shiki-dark:#D67AD6">errors</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "Bad Request"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ]</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span></code></pre>
+                              ><code><span class="line"><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">  "</span><span style="color:#836C28">errors</span><span style="color:#000000">"</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "Bad Request"</span></span>
+<span class="line"><span style="color:#000000">  ]</span></span>
+<span class="line"><span style="color:#000000">}</span></span></code></pre>
                             </div>
                           </div>
                         </div>
@@ -15145,40 +15120,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15200,40 +15170,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"us3.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"us3.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.us3.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.us3.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15255,40 +15220,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"us5.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"us5.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.us5.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.us5.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15310,40 +15270,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"datadoghq.eu"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"datadoghq.eu"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.datadoghq.eu/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.datadoghq.eu/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15365,40 +15320,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ap1.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ap1.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ap1.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.ap1.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15420,40 +15370,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ap2.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ap2.datadoghq.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ap2.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.ap2.datadoghq.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15475,40 +15420,35 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Set your Datadog site and credentials</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_SITE=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ddog-gov.com"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_API_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">export</span><span style="color:#000000;--shiki-dark:#E0E0E0"> DD_APP_KEY=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"&#x3C;DD_APP_KEY>"</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ddog-gov.com"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">curl </span><span style="color:#C41A16;--shiki-dark:#E5736E">-X</span><span style="color:#C41A16;--shiki-dark:#E5736E"> POST</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "https://api.ddog-gov.com/api/v1/monitor"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-API-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_API_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"DD-APPLICATION-KEY: </span><span style="color:#000000;--shiki-dark:#E0E0E0">${DD_APP_KEY}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Content-Type: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-H </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Accept: application/json"</span><span style="color:#C41A16;--shiki-dark:#8888FF"> \</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">-d </span><span style="color:#C41A16;--shiki-dark:#E5736E">@-</span><span style="color:#000000;--shiki-dark:#E0E0E0"> &#x3C;&#x3C; </span><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "name": "Bytes received on host0",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "options": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "no_data_timeframe": 20,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "notify_no_data": true</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "tags": [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "app:webserver",</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "frontend"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  ],</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">  "type": "query alert"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">}</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">EOF</span></span></code></pre>
+<span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> POST</span><span style="color:#C41A16"> "https://api.ddog-gov.com/api/v1/monitor"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Content-Type: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-d </span><span style="color:#C41A16">@-</span><span style="color:#000000"> &#x3C;&#x3C; </span><span style="color:#C41A16">EOF</span></span>
+<span class="line"><span style="color:#C41A16">{</span></span>
+<span class="line"><span style="color:#C41A16">  "message": "You may need to add web hosts if this is consistently high.",</span></span>
+<span class="line"><span style="color:#C41A16">  "name": "Bytes received on host0",</span></span>
+<span class="line"><span style="color:#C41A16">  "options": {</span></span>
+<span class="line"><span style="color:#C41A16">    "no_data_timeframe": 20,</span></span>
+<span class="line"><span style="color:#C41A16">    "notify_no_data": true</span></span>
+<span class="line"><span style="color:#C41A16">  },</span></span>
+<span class="line"><span style="color:#C41A16">  "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",</span></span>
+<span class="line"><span style="color:#C41A16">  "tags": [</span></span>
+<span class="line"><span style="color:#C41A16">    "app:webserver",</span></span>
+<span class="line"><span style="color:#C41A16">    "frontend"</span></span>
+<span class="line"><span style="color:#C41A16">  ],</span></span>
+<span class="line"><span style="color:#C41A16">  "type": "query alert"</span></span>
+<span class="line"><span style="color:#C41A16">}</span></span>
+<span class="line"><span style="color:#C41A16">EOF</span></span></code></pre>
                       </div>
                     </div>
                   </div>
@@ -15532,48 +15472,43 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">"""</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">Create a monitor returns "OK" response</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">"""</span></span>
+                        ><code><span class="line"><span style="color:#C41A16">"""</span></span>
+<span class="line"><span style="color:#C41A16">Create a monitor returns "OK" response</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> os </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> environ</span></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ApiClient, Configuration</span></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client.v1.api.monitors_api </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> MonitorsApi</span></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client.v1.model.monitor </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> Monitor</span></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">from</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client.v1.model.monitor_type </span><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> MonitorType</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> os </span><span style="color:#633820">import</span><span style="color:#000000"> environ</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v1.api.monitors_api </span><span style="color:#633820">import</span><span style="color:#000000"> MonitorsApi</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v1.model.monitor </span><span style="color:#633820">import</span><span style="color:#000000"> Monitor</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v1.model.monitor_type </span><span style="color:#633820">import</span><span style="color:#000000"> MonitorType</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">ROLE_DATA_ID = environ[</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ROLE_DATA_ID"</span><span style="color:#000000;--shiki-dark:#E0E0E0">]</span></span>
+<span class="line"><span style="color:#177500"># there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#000000">ROLE_DATA_ID = environ[</span><span style="color:#C41A16">"ROLE_DATA_ID"</span><span style="color:#000000">]</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">body = Monitor(</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    name=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    type=MonitorType.LOG_ALERT,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    query=</span><span style="color:#C41A16;--shiki-dark:#E5736E">'logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2'</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    message=</span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    tags=[</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    priority=</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    restricted_roles=[</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ROLE_DATA_ID,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#000000">body = Monitor(</span></span>
+<span class="line"><span style="color:#000000">    name=</span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    type=MonitorType.LOG_ALERT,</span></span>
+<span class="line"><span style="color:#000000">    query=</span><span style="color:#C41A16">'logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2'</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    message=</span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    tags=[</span></span>
+<span class="line"><span style="color:#C41A16">        "test:examplemonitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#C41A16">        "env:ci"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    ],</span></span>
+<span class="line"><span style="color:#000000">    priority=</span><span style="color:#1C01CE">3</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    restricted_roles=[</span></span>
+<span class="line"><span style="color:#000000">        ROLE_DATA_ID,</span></span>
+<span class="line"><span style="color:#000000">    ],</span></span>
+<span class="line"><span style="color:#000000">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">configuration = Configuration()</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">with</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ApiClient(configuration) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">as</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api_client:</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    api_instance = MonitorsApi(api_client)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    response = api_instance.create_monitor(body=body)</span></span>
+<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
+<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
+<span class="line"><span style="color:#000000">    api_instance = MonitorsApi(api_client)</span></span>
+<span class="line"><span style="color:#000000">    response = api_instance.create_monitor(body=body)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    print</span><span style="color:#000000;--shiki-dark:#E0E0E0">(response)</span></span>
+<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -15598,37 +15533,32 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># Create a monitor returns "OK" response</span></span>
+                        ><code><span class="line"><span style="color:#177500"># Create a monitor returns "OK" response</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">require</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "datadog_api_client"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">api_instance = </span><span style="color:#A90D91;--shiki-dark:#D67AD6">DatadogAPIClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">V1</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">MonitorsAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">new</span></span>
+<span class="line"><span style="color:#A90D91">require</span><span style="color:#C41A16"> "datadog_api_client"</span></span>
+<span class="line"><span style="color:#000000">api_instance = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V1</span><span style="color:#000000">::</span><span style="color:#A90D91">MonitorsAPI</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"># there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">ROLE_DATA_ID = ENV[</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ROLE_DATA_ID"</span><span style="color:#000000;--shiki-dark:#E0E0E0">]</span></span>
+<span class="line"><span style="color:#177500"># there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#000000">ROLE_DATA_ID = ENV[</span><span style="color:#C41A16">"ROLE_DATA_ID"</span><span style="color:#000000">]</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">body = </span><span style="color:#A90D91;--shiki-dark:#D67AD6">DatadogAPIClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">V1</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">new</span><span style="color:#000000;--shiki-dark:#E0E0E0">({</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  name</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  type</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#D67AD6">DatadogAPIClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">V1</span><span style="color:#000000;--shiki-dark:#E0E0E0">::</span><span style="color:#A90D91;--shiki-dark:#D67AD6">MonitorType</span><span style="color:#000000;--shiki-dark:#E0E0E0">::LOG_ALERT,</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  query</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">'logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2'</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  message</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  tags</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ],</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  priority</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#7B7FFF">  restricted_roles</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    ROLE_DATA_ID,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  ],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">})</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">p</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api_instance.create_monitor(body)</span></span>
+<span class="line"><span style="color:#000000">body = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V1</span><span style="color:#000000">::</span><span style="color:#A90D91">Monitor</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span><span style="color:#000000">({</span></span>
+<span class="line"><span style="color:#A90D91">  name</span><span style="color:#000000">: </span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#A90D91">  type</span><span style="color:#000000">: </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V1</span><span style="color:#000000">::</span><span style="color:#A90D91">MonitorType</span><span style="color:#000000">::LOG_ALERT,</span></span>
+<span class="line"><span style="color:#A90D91">  query</span><span style="color:#000000">: </span><span style="color:#C41A16">'logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2'</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#A90D91">  message</span><span style="color:#000000">: </span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#A90D91">  tags</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#C41A16">    "test:examplemonitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#C41A16">    "env:ci"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">  ],</span></span>
+<span class="line"><span style="color:#A90D91">  priority</span><span style="color:#000000">: </span><span style="color:#1C01CE">3</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#A90D91">  restricted_roles</span><span style="color:#000000">: [</span></span>
+<span class="line"><span style="color:#000000">    ROLE_DATA_ID,</span></span>
+<span class="line"><span style="color:#000000">  ],</span></span>
+<span class="line"><span style="color:#000000">})</span></span>
+<span class="line"><span style="color:#A90D91">p</span><span style="color:#000000"> api_instance.create_monitor(body)</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -15653,60 +15583,55 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Create a monitor returns "OK" response</span></span>
+                        ><code><span class="line"><span style="color:#177500">// Create a monitor returns "OK" response</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">package</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> main</span></span>
+<span class="line"><span style="color:#A90D91">package</span><span style="color:#3F6E75"> main</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> (</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"context"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"encoding/json"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"fmt"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"os"</span></span>
+<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> (</span></span>
+<span class="line"><span style="color:#C41A16">	"context"</span></span>
+<span class="line"><span style="color:#C41A16">	"encoding/json"</span></span>
+<span class="line"><span style="color:#C41A16">	"fmt"</span></span>
+<span class="line"><span style="color:#C41A16">	"os"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1"</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#C41A16">	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"</span></span>
+<span class="line"><span style="color:#C41A16">	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1"</span></span>
+<span class="line"><span style="color:#000000">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">func</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main() {</span></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955">	// there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	RoleDataID := os.Getenv(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ROLE_DATA_ID"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
+<span class="line"><span style="color:#A90D91">func</span><span style="color:#000000"> main() {</span></span>
+<span class="line"><span style="color:#177500">	// there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#000000">	RoleDataID := os.Getenv(</span><span style="color:#C41A16">"ROLE_DATA_ID"</span><span style="color:#000000">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	body := </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">datadogV1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Name:    datadog.PtrString(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Type:    datadogV1.MONITORTYPE_LOG_ALERT,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Query:   </span><span style="color:#C41A16;--shiki-dark:#E5736E">`logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2`</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Message: datadog.PtrString(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">),</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Tags: []</span><span style="color:#A90D91;--shiki-dark:#D67AD6">string</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">			"test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">			"env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		},</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		Priority: *datadog.NewNullableInt64(datadog.PtrInt64(</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">)),</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		RestrictedRoles: *datadog.NewNullableList(&#x26;[]</span><span style="color:#A90D91;--shiki-dark:#D67AD6">string</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">			RoleDataID,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		}),</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	}</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	ctx := datadog.NewDefaultContext(context.Background())</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	configuration := datadog.NewConfiguration()</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	apiClient := datadog.NewAPIClient(configuration)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	api := datadogV1.NewMonitorsApi(apiClient)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	resp, r, err := api.CreateMonitor(ctx, body)</span></span>
+<span class="line"><span style="color:#000000">	body := </span><span style="color:#3F6E75">datadogV1</span><span style="color:#000000">.</span><span style="color:#3F6E75">Monitor</span><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">		Name:    datadog.PtrString(</span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">),</span></span>
+<span class="line"><span style="color:#000000">		Type:    datadogV1.MONITORTYPE_LOG_ALERT,</span></span>
+<span class="line"><span style="color:#000000">		Query:   </span><span style="color:#C41A16">`logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2`</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">		Message: datadog.PtrString(</span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">),</span></span>
+<span class="line"><span style="color:#000000">		Tags: []</span><span style="color:#A90D91">string</span><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#C41A16">			"test:examplemonitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#C41A16">			"env:ci"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">		},</span></span>
+<span class="line"><span style="color:#000000">		Priority: *datadog.NewNullableInt64(datadog.PtrInt64(</span><span style="color:#1C01CE">3</span><span style="color:#000000">)),</span></span>
+<span class="line"><span style="color:#000000">		RestrictedRoles: *datadog.NewNullableList(&#x26;[]</span><span style="color:#A90D91">string</span><span style="color:#000000">{</span></span>
+<span class="line"><span style="color:#000000">			RoleDataID,</span></span>
+<span class="line"><span style="color:#000000">		}),</span></span>
+<span class="line"><span style="color:#000000">	}</span></span>
+<span class="line"><span style="color:#000000">	ctx := datadog.NewDefaultContext(context.Background())</span></span>
+<span class="line"><span style="color:#000000">	configuration := datadog.NewConfiguration()</span></span>
+<span class="line"><span style="color:#000000">	apiClient := datadog.NewAPIClient(configuration)</span></span>
+<span class="line"><span style="color:#000000">	api := datadogV1.NewMonitorsApi(apiClient)</span></span>
+<span class="line"><span style="color:#000000">	resp, r, err := api.CreateMonitor(ctx, body)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">	if</span><span style="color:#000000;--shiki-dark:#E0E0E0"> err != </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">nil</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Error when calling `MonitorsApi.CreateMonitor`: %v</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, err)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Full HTTP response: %v</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, r)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	}</span></span>
+<span class="line"><span style="color:#A90D91">	if</span><span style="color:#000000"> err != </span><span style="color:#A90D91">nil</span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#000000">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16">"Error when calling `MonitorsApi.CreateMonitor`: %v\n"</span><span style="color:#000000">, err)</span></span>
+<span class="line"><span style="color:#000000">		fmt.Fprintf(os.Stderr, </span><span style="color:#C41A16">"Full HTTP response: %v\n"</span><span style="color:#000000">, r)</span></span>
+<span class="line"><span style="color:#000000">	}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	responseContent, _ := json.MarshalIndent(resp, </span><span style="color:#C41A16;--shiki-dark:#E5736E">""</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"  "</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">	fmt.Fprintf(os.Stdout, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Response from `MonitorsApi.CreateMonitor`:</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">%s</span><span style="color:#C41A16;--shiki-dark:#8888FF">\n</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, responseContent)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"><span style="color:#000000">	responseContent, _ := json.MarshalIndent(resp, </span><span style="color:#C41A16">""</span><span style="color:#000000">, </span><span style="color:#C41A16">"  "</span><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#000000">	fmt.Fprintf(os.Stdout, </span><span style="color:#C41A16">"Response from `MonitorsApi.CreateMonitor`:\n%s\n"</span><span style="color:#000000">, responseContent)</span></span>
+<span class="line"><span style="color:#000000">}</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -15731,57 +15656,52 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Create a monitor returns "OK" response</span></span>
+                        ><code><span class="line"><span style="color:#177500">// Create a monitor returns "OK" response</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiClient</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiException</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">MonitorsApi</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">model</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> com</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">datadog</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">api</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">client</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">model</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">MonitorType</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> java</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">util</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Arrays</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">import</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> java</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">util</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#A90D91;--shiki-dark:#D67AD6">Collections</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> com</span><span style="color:#000000">.</span><span style="color:#A90D91">datadog</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">client</span><span style="color:#000000">.</span><span style="color:#A90D91">ApiClient</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> com</span><span style="color:#000000">.</span><span style="color:#A90D91">datadog</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">client</span><span style="color:#000000">.</span><span style="color:#A90D91">ApiException</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> com</span><span style="color:#000000">.</span><span style="color:#A90D91">datadog</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">client</span><span style="color:#000000">.</span><span style="color:#A90D91">v1</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">MonitorsApi</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> com</span><span style="color:#000000">.</span><span style="color:#A90D91">datadog</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">client</span><span style="color:#000000">.</span><span style="color:#A90D91">v1</span><span style="color:#000000">.</span><span style="color:#A90D91">model</span><span style="color:#000000">.</span><span style="color:#A90D91">Monitor</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> com</span><span style="color:#000000">.</span><span style="color:#A90D91">datadog</span><span style="color:#000000">.</span><span style="color:#A90D91">api</span><span style="color:#000000">.</span><span style="color:#A90D91">client</span><span style="color:#000000">.</span><span style="color:#A90D91">v1</span><span style="color:#000000">.</span><span style="color:#A90D91">model</span><span style="color:#000000">.</span><span style="color:#A90D91">MonitorType</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> java</span><span style="color:#000000">.</span><span style="color:#A90D91">util</span><span style="color:#000000">.</span><span style="color:#A90D91">Arrays</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">import</span><span style="color:#A90D91"> java</span><span style="color:#000000">.</span><span style="color:#A90D91">util</span><span style="color:#000000">.</span><span style="color:#A90D91">Collections</span><span style="color:#000000">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">public</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> class</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> Example</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">  public</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> static</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> void</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main(</span><span style="color:#A90D91;--shiki-dark:#D67AD6">String</span><span style="color:#000000;--shiki-dark:#E0E0E0">[] args) {</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    ApiClient</span><span style="color:#000000;--shiki-dark:#E0E0E0"> defaultClient = ApiClient.getDefaultApiClient();</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    MonitorsApi</span><span style="color:#000000;--shiki-dark:#E0E0E0"> apiInstance = </span><span style="color:#A90D91;--shiki-dark:#D67AD6">new</span><span style="color:#000000;--shiki-dark:#E0E0E0"> MonitorsApi(defaultClient);</span></span>
+<span class="line"><span style="color:#A90D91">public</span><span style="color:#A90D91"> class</span><span style="color:#3F6E75"> Example</span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#A90D91">  public</span><span style="color:#A90D91"> static</span><span style="color:#A90D91"> void</span><span style="color:#000000"> main(</span><span style="color:#A90D91">String</span><span style="color:#000000">[] args) {</span></span>
+<span class="line"><span style="color:#A90D91">    ApiClient</span><span style="color:#000000"> defaultClient = ApiClient.getDefaultApiClient();</span></span>
+<span class="line"><span style="color:#A90D91">    MonitorsApi</span><span style="color:#000000"> apiInstance = </span><span style="color:#A90D91">new</span><span style="color:#000000"> MonitorsApi(defaultClient);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955">    // there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    String</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ROLE_DATA_ID = System.getenv(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ROLE_DATA_ID"</span><span style="color:#000000;--shiki-dark:#E0E0E0">);</span></span>
+<span class="line"><span style="color:#177500">    // there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#A90D91">    String</span><span style="color:#000000"> ROLE_DATA_ID = System.getenv(</span><span style="color:#C41A16">"ROLE_DATA_ID"</span><span style="color:#000000">);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0"> body =</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">        new</span><span style="color:#000000;--shiki-dark:#E0E0E0"> Monitor()</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .name(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .type(MonitorType.LOG_ALERT)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .query(</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">                """</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">"""</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .message(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .tags(Arrays.asList(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">))</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .priority(</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3L</span><span style="color:#000000;--shiki-dark:#E0E0E0">)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .restrictedRoles(Collections.singletonList(ROLE_DATA_ID));</span></span>
+<span class="line"><span style="color:#A90D91">    Monitor</span><span style="color:#000000"> body =</span></span>
+<span class="line"><span style="color:#A90D91">        new</span><span style="color:#000000"> Monitor()</span></span>
+<span class="line"><span style="color:#000000">            .name(</span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#000000">            .type(MonitorType.LOG_ALERT)</span></span>
+<span class="line"><span style="color:#000000">            .query(</span></span>
+<span class="line"><span style="color:#C41A16">                """</span></span>
+<span class="line"><span style="color:#C41A16">logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2</span></span>
+<span class="line"><span style="color:#C41A16">"""</span><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#000000">            .message(</span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#000000">            .tags(Arrays.asList(</span><span style="color:#C41A16">"test:examplemonitor"</span><span style="color:#000000">, </span><span style="color:#C41A16">"env:ci"</span><span style="color:#000000">))</span></span>
+<span class="line"><span style="color:#000000">            .priority(</span><span style="color:#1C01CE">3L</span><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#000000">            .restrictedRoles(Collections.singletonList(ROLE_DATA_ID));</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    try</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">      Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0"> result = apiInstance.createMonitor(body);</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.out.println(result);</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">catch</span><span style="color:#000000;--shiki-dark:#E0E0E0"> (</span><span style="color:#A90D91;--shiki-dark:#D67AD6">ApiException</span><span style="color:#000000;--shiki-dark:#E0E0E0"> e) {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Exception when calling MonitorsApi#createMonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">);</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Status code: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getCode());</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Reason: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getResponseBody());</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      System.err.println(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Response headers: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + e.getResponseHeaders());</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      e.printStackTrace();</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"><span style="color:#A90D91">    try</span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#A90D91">      Monitor</span><span style="color:#000000"> result = apiInstance.createMonitor(body);</span></span>
+<span class="line"><span style="color:#000000">      System.out.println(result);</span></span>
+<span class="line"><span style="color:#000000">    } </span><span style="color:#A90D91">catch</span><span style="color:#000000"> (</span><span style="color:#A90D91">ApiException</span><span style="color:#000000"> e) {</span></span>
+<span class="line"><span style="color:#000000">      System.err.println(</span><span style="color:#C41A16">"Exception when calling MonitorsApi#createMonitor"</span><span style="color:#000000">);</span></span>
+<span class="line"><span style="color:#000000">      System.err.println(</span><span style="color:#C41A16">"Status code: "</span><span style="color:#000000"> + e.getCode());</span></span>
+<span class="line"><span style="color:#000000">      System.err.println(</span><span style="color:#C41A16">"Reason: "</span><span style="color:#000000"> + e.getResponseBody());</span></span>
+<span class="line"><span style="color:#000000">      System.err.println(</span><span style="color:#C41A16">"Response headers: "</span><span style="color:#000000"> + e.getResponseHeaders());</span></span>
+<span class="line"><span style="color:#000000">      e.printStackTrace();</span></span>
+<span class="line"><span style="color:#000000">    }</span></span>
+<span class="line"><span style="color:#000000">  }</span></span>
+<span class="line"><span style="color:#000000">}</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -15806,46 +15726,41 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">/**</span></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"> * Create a monitor returns "OK" response</span></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955"> */</span></span>
+                        ><code><span class="line"><span style="color:#177500">/**</span></span>
+<span class="line"><span style="color:#177500"> * Create a monitor returns "OK" response</span></span>
+<span class="line"><span style="color:#177500"> */</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#633820;--shiki-dark:#C99076">import</span><span style="color:#000000;--shiki-dark:#E0E0E0"> { client, v1 } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">from</span><span style="color:#C41A16;--shiki-dark:#E5736E"> "@datadog/datadog-api-client"</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> { client, v1 } </span><span style="color:#A90D91">from</span><span style="color:#C41A16"> "@datadog/datadog-api-client"</span><span style="color:#000000">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> configuration = client.createConfiguration();</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> apiInstance = new v1.MonitorsApi(configuration);</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> configuration = client.createConfiguration();</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> apiInstance = new v1.MonitorsApi(configuration);</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> ROLE_DATA_ID = process.env.ROLE_DATA_ID </span><span style="color:#A90D91;--shiki-dark:#D67AD6">as</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> string</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+<span class="line"><span style="color:#177500">// there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> ROLE_DATA_ID = process.env.ROLE_DATA_ID </span><span style="color:#A90D91">as</span><span style="color:#A90D91"> string</span><span style="color:#000000">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">const</span><span style="color:#000000;--shiki-dark:#E0E0E0"> params: </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">MonitorsApiCreateMonitorRequest</span><span style="color:#000000;--shiki-dark:#E0E0E0"> = {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  body: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    name: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    type: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"log alert"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    query: </span><span style="color:#C41A16;--shiki-dark:#E5736E">`logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2`</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    message: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    tags: [</span><span style="color:#C41A16;--shiki-dark:#E5736E">"test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, </span><span style="color:#C41A16;--shiki-dark:#E5736E">"env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    priority: </span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    restrictedRoles: [ROLE_DATA_ID],</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">};</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> params: </span><span style="color:#3F6E75">v1</span><span style="color:#000000">.</span><span style="color:#3F6E75">MonitorsApiCreateMonitorRequest</span><span style="color:#000000"> = {</span></span>
+<span class="line"><span style="color:#000000">  body: {</span></span>
+<span class="line"><span style="color:#000000">    name: </span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    type: </span><span style="color:#C41A16">"log alert"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    query: </span><span style="color:#C41A16">`logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2`</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    message: </span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    tags: [</span><span style="color:#C41A16">"test:examplemonitor"</span><span style="color:#000000">, </span><span style="color:#C41A16">"env:ci"</span><span style="color:#000000">],</span></span>
+<span class="line"><span style="color:#000000">    priority: </span><span style="color:#1C01CE">3</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">    restrictedRoles: [ROLE_DATA_ID],</span></span>
+<span class="line"><span style="color:#000000">  },</span></span>
+<span class="line"><span style="color:#000000">};</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">apiInstance</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .createMonitor(params)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .then((data: </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">v1</span><span style="color:#000000;--shiki-dark:#E0E0E0">.</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">=></span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    console.log(</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "API called successfully. Returned data: "</span><span style="color:#000000;--shiki-dark:#E0E0E0"> + JSON.stringify(data)</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    );</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  })</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">  .catch((error: </span><span style="color:#A90D91;--shiki-dark:#D67AD6">any</span><span style="color:#000000;--shiki-dark:#E0E0E0">) </span><span style="color:#A90D91;--shiki-dark:#D67AD6">=></span><span style="color:#000000;--shiki-dark:#E0E0E0"> console.error(error));</span></span>
+<span class="line"><span style="color:#000000">apiInstance</span></span>
+<span class="line"><span style="color:#000000">  .createMonitor(params)</span></span>
+<span class="line"><span style="color:#000000">  .then((data: </span><span style="color:#3F6E75">v1</span><span style="color:#000000">.</span><span style="color:#3F6E75">Monitor</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#000000">    console.log(</span></span>
+<span class="line"><span style="color:#C41A16">      "API called successfully. Returned data: "</span><span style="color:#000000"> + JSON.stringify(data)</span></span>
+<span class="line"><span style="color:#000000">    );</span></span>
+<span class="line"><span style="color:#000000">  })</span></span>
+<span class="line"><span style="color:#000000">  .catch((error: </span><span style="color:#A90D91">any</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> console.error(error));</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -15870,43 +15785,38 @@
                       >
                       <div class="code-block__highlighted _code-block__highlighted_961fb8">
                         <pre
-                          class="shiki shiki-themes datadog-chroma datadog-chroma-dark"
-                          style="
-                            background-color: #ffffff;
-                            --shiki-dark-bg: #0d1117;
-                            color: #000000;
-                            --shiki-dark: #e0e0e0;
-                          "
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500;--shiki-dark:#6A9955">// Create a monitor returns "OK" response</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadog;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadogV1::api_monitors::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">MonitorsAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadogV1::model::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">use</span><span style="color:#000000;--shiki-dark:#E0E0E0"> datadog_api_client::datadogV1::model::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">MonitorType</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
+                        ><code><span class="line"><span style="color:#177500">// Create a monitor returns "OK" response</span></span>
+<span class="line"><span style="color:#A90D91">use</span><span style="color:#000000"> datadog_api_client::datadog;</span></span>
+<span class="line"><span style="color:#A90D91">use</span><span style="color:#000000"> datadog_api_client::datadogV1::api_monitors::</span><span style="color:#3F6E75">MonitorsAPI</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">use</span><span style="color:#000000"> datadog_api_client::datadogV1::model::</span><span style="color:#3F6E75">Monitor</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">use</span><span style="color:#000000"> datadog_api_client::datadogV1::model::</span><span style="color:#3F6E75">MonitorType</span><span style="color:#000000">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">#[tokio::main]</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">async</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> fn</span><span style="color:#000000;--shiki-dark:#E0E0E0"> main() {</span></span>
-<span class="line"><span style="color:#177500;--shiki-dark:#6A9955">    // there is a valid "role" in the system</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> role_data_id = std::env::var(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"ROLE_DATA_ID"</span><span style="color:#000000;--shiki-dark:#E0E0E0">).unwrap();</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> body =</span></span>
-<span class="line"><span style="color:#3F6E75;--shiki-dark:#7EC8D3">        Monitor</span><span style="color:#000000;--shiki-dark:#E0E0E0">::new(</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">            r#"logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2"#</span><span style="color:#000000;--shiki-dark:#E0E0E0">.to_string(),</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            MonitorType::LOG_ALERT,</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        )</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .message(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"some message Notify: @hipchat-channel"</span><span style="color:#000000;--shiki-dark:#E0E0E0">.to_string())</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .name(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"Example-Monitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">.to_string())</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .priority(</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Some</span><span style="color:#000000;--shiki-dark:#E0E0E0">(</span><span style="color:#1C01CE;--shiki-dark:#7B7FFF">3</span><span style="color:#000000;--shiki-dark:#E0E0E0">))</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .restricted_roles(</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Some</span><span style="color:#000000;--shiki-dark:#E0E0E0">(vec![role_data_id.clone()]))</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            .tags(vec![</span><span style="color:#C41A16;--shiki-dark:#E5736E">"test:examplemonitor"</span><span style="color:#000000;--shiki-dark:#E0E0E0">.to_string(), </span><span style="color:#C41A16;--shiki-dark:#E5736E">"env:ci"</span><span style="color:#000000;--shiki-dark:#E0E0E0">.to_string()]);</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> configuration = datadog::</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">Configuration</span><span style="color:#000000;--shiki-dark:#E0E0E0">::new();</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> api = </span><span style="color:#3F6E75;--shiki-dark:#7EC8D3">MonitorsAPI</span><span style="color:#000000;--shiki-dark:#E0E0E0">::with_config(configuration);</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    let</span><span style="color:#000000;--shiki-dark:#E0E0E0"> resp = api.create_monitor(body).</span><span style="color:#A90D91;--shiki-dark:#D67AD6">await</span><span style="color:#000000;--shiki-dark:#E0E0E0">;</span></span>
-<span class="line"><span style="color:#A90D91;--shiki-dark:#D67AD6">    if</span><span style="color:#A90D91;--shiki-dark:#D67AD6"> let</span><span style="color:#3F6E75;--shiki-dark:#7EC8D3"> Ok</span><span style="color:#000000;--shiki-dark:#E0E0E0">(value) = resp {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        println!(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span><span style="color:#C41A16;--shiki-dark:#E5736E">:#?</span><span style="color:#000000;--shiki-dark:#E0E0E0">}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, value);</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    } </span><span style="color:#A90D91;--shiki-dark:#D67AD6">else</span><span style="color:#000000;--shiki-dark:#E0E0E0"> {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        println!(</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">{</span><span style="color:#C41A16;--shiki-dark:#E5736E">:#?</span><span style="color:#000000;--shiki-dark:#E0E0E0">}</span><span style="color:#C41A16;--shiki-dark:#E5736E">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">, resp.unwrap_err());</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    }</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">}</span></span>
+<span class="line"><span style="color:#000000">#[tokio::main]</span></span>
+<span class="line"><span style="color:#A90D91">async</span><span style="color:#A90D91"> fn</span><span style="color:#000000"> main() {</span></span>
+<span class="line"><span style="color:#177500">    // there is a valid "role" in the system</span></span>
+<span class="line"><span style="color:#A90D91">    let</span><span style="color:#000000"> role_data_id = std::env::var(</span><span style="color:#C41A16">"ROLE_DATA_ID"</span><span style="color:#000000">).unwrap();</span></span>
+<span class="line"><span style="color:#A90D91">    let</span><span style="color:#000000"> body =</span></span>
+<span class="line"><span style="color:#3F6E75">        Monitor</span><span style="color:#000000">::new(</span></span>
+<span class="line"><span style="color:#C41A16">            r#"logs("service:foo AND type:error").index("main").rollup("count").by("source").last("5m") > 2"#</span><span style="color:#000000">.to_string(),</span></span>
+<span class="line"><span style="color:#000000">            MonitorType::LOG_ALERT,</span></span>
+<span class="line"><span style="color:#000000">        )</span></span>
+<span class="line"><span style="color:#000000">            .message(</span><span style="color:#C41A16">"some message Notify: @hipchat-channel"</span><span style="color:#000000">.to_string())</span></span>
+<span class="line"><span style="color:#000000">            .name(</span><span style="color:#C41A16">"Example-Monitor"</span><span style="color:#000000">.to_string())</span></span>
+<span class="line"><span style="color:#000000">            .priority(</span><span style="color:#3F6E75">Some</span><span style="color:#000000">(</span><span style="color:#1C01CE">3</span><span style="color:#000000">))</span></span>
+<span class="line"><span style="color:#000000">            .restricted_roles(</span><span style="color:#3F6E75">Some</span><span style="color:#000000">(vec![role_data_id.clone()]))</span></span>
+<span class="line"><span style="color:#000000">            .tags(vec![</span><span style="color:#C41A16">"test:examplemonitor"</span><span style="color:#000000">.to_string(), </span><span style="color:#C41A16">"env:ci"</span><span style="color:#000000">.to_string()]);</span></span>
+<span class="line"><span style="color:#A90D91">    let</span><span style="color:#000000"> configuration = datadog::</span><span style="color:#3F6E75">Configuration</span><span style="color:#000000">::new();</span></span>
+<span class="line"><span style="color:#A90D91">    let</span><span style="color:#000000"> api = </span><span style="color:#3F6E75">MonitorsAPI</span><span style="color:#000000">::with_config(configuration);</span></span>
+<span class="line"><span style="color:#A90D91">    let</span><span style="color:#000000"> resp = api.create_monitor(body).</span><span style="color:#A90D91">await</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#A90D91">    if</span><span style="color:#A90D91"> let</span><span style="color:#3F6E75"> Ok</span><span style="color:#000000">(value) = resp {</span></span>
+<span class="line"><span style="color:#000000">        println!(</span><span style="color:#C41A16">"</span><span style="color:#000000">{</span><span style="color:#C41A16">:#?</span><span style="color:#000000">}</span><span style="color:#C41A16">"</span><span style="color:#000000">, value);</span></span>
+<span class="line"><span style="color:#000000">    } </span><span style="color:#A90D91">else</span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#000000">        println!(</span><span style="color:#C41A16">"</span><span style="color:#000000">{</span><span style="color:#C41A16">:#?</span><span style="color:#000000">}</span><span style="color:#C41A16">"</span><span style="color:#000000">, resp.unwrap_err());</span></span>
+<span class="line"><span style="color:#000000">    }</span></span>
+<span class="line"><span style="color:#000000">}</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>

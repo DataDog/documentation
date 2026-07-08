@@ -140,35 +140,4 @@ body.announcement {
   --hugo-active-banner-height: var(--hugo-banner-height);
 }
 
-[data-theme='dark'] {
-  --hugo-nav-text: #b0b0c0;
-  --hugo-nav-text-hover: #b388e0;
-  --hugo-nav-brand-primary: #9b6dd7;
-  --hugo-nav-border: #2a2a3e;
-  --hugo-nav-btn-hover-bg: rgba(255, 255, 255, 0.05);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  --hugo-nav-gray-light: #333;
-  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
-}
 
-[data-scroll='on'] {
-  --hugo-nav-text: #3c2415;
-  --hugo-nav-text-hover: #a0522d;
-  --hugo-nav-brand-primary: #8b4513;
-  --hugo-nav-border: #c4a97d;
-  --hugo-nav-btn-hover-bg: rgba(60, 36, 21, 0.06);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(60, 36, 21, 0.2);
-  --hugo-nav-gray-light: #c4a97d;
-  --hugo-header-shadow: 0 0 8px 8px rgba(60, 36, 21, 0.1);
-}
-
-[data-theme='dark'][data-scroll='on'] {
-  --hugo-nav-text: #d4c4a0;
-  --hugo-nav-text-hover: #d4a84f;
-  --hugo-nav-brand-primary: #c4943a;
-  --hugo-nav-border: #5a4530;
-  --hugo-nav-btn-hover-bg: rgba(212, 196, 160, 0.08);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  --hugo-nav-gray-light: #5a4530;
-  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.4);
-}

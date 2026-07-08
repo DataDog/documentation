@@ -1,4 +1,6 @@
 ---
+if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+
 import BaseLayout from '@layouts/BaseLayout.astro';
 
 const title = 'Select';

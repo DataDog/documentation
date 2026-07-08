@@ -130,17 +130,4 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     const year = new Date().getFullYear().toString();
     await expect(page.locator('footer')).toContainText(`© Datadog ${year}`);
   });
-
-  test('dark mode keeps the footer on its Hugo palette', async ({ page }) => {
-    await page.setViewportSize({ width: 1400, height: 900 });
-    await page.goto(PAGE_WITH_CONTENT);
-    await page.evaluate(() => {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    });
-
-    const footer = page.locator('footer');
-    const bg = await footer.evaluate((el) => getComputedStyle(el).backgroundColor);
-    // Token is Hugo-identical with no dark-mode override — stays #110617.
-    expect(bg).toBe('rgb(17, 6, 23)');
-  });
 });

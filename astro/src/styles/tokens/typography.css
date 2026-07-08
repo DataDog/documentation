@@ -18,8 +18,3 @@
   --line-height: 1.6;
   --line-height-code: 27px;
 }
-
-[data-scroll='on'] {
-  --font-family: 'EB Garamond', 'Georgia', serif;
-  --line-height: 1.7;
-}

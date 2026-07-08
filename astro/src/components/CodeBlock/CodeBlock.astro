@@ -1,7 +1,6 @@
 ---
 import { codeToHtml } from "shiki";
 import datadogLight from "../../styles/shiki-light";
-import datadogDark from "../../styles/shiki-dark";
 import { CopyButton, type CopyButtonLabels } from "./CopyButton";
 import { CollapseToggle, type CollapseToggleLabels } from "./CollapseToggle";
 import styles from "./CodeBlock.module.css";
@@ -34,11 +33,7 @@ if (content) {
   try {
     highlightedCode = await codeToHtml(content, {
       lang: language || "text",
-      themes: {
-        light: datadogLight,
-        dark: datadogDark,
-      },
-      defaultColor: "light",
+      theme: datadogLight,
     });
   } catch {
     // Unknown language — fall back to plain text display

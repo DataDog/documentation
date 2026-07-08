@@ -7,7 +7,6 @@
 
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
-import datadogDark from '../../styles/shiki-dark';
 import type { EndpointData } from './schemas/views';
 
 /**
@@ -28,11 +27,7 @@ async function highlight(code: string, lang: string): Promise<string | undefined
   try {
     return await codeToHtml(code, {
       lang,
-      themes: {
-        light: datadogLight,
-        dark: datadogDark,
-      },
-      defaultColor: 'light',
+      theme: datadogLight,
     });
   } catch {
     return undefined;

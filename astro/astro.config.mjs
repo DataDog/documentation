@@ -68,6 +68,7 @@ export default defineConfig({
     },
     define: {
       __HUGO_DOCS_ORIGIN__: JSON.stringify(deriveHugoDocsUrl()),
+      __CI_ENV__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? ''),
     },
     resolve: {
       alias: {

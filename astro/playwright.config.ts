@@ -31,6 +31,7 @@ export default defineConfig({
       animations: 'disabled',
       caret: 'hide',
       scale: 'device',
+      stylePath: './tests/screenshot.css',
     },
   },
   projects: [

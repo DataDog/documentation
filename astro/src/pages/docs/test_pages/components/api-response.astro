@@ -1,4 +1,6 @@
 ---
+if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ApiResponse from '@components/ApiResponse/ApiResponse.astro';
 import type { ResponseData } from '@components/ApiResponse/ApiResponse.astro';

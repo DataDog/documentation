@@ -1,4 +1,6 @@
 ---
+if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
 import type { SchemaField } from '@lib/api/schemas/schemaField';

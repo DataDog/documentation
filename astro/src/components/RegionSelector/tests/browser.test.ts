@@ -22,7 +22,7 @@ test.describe('RegionSelector component', () => {
     const values = await select.locator('option').evaluateAll((opts) =>
       opts.map((o) => (o as HTMLOptionElement).value)
     );
-    expect(values).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov', 'gov2']);
+    expect(values).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'uk1', 'gov', 'gov2']);
   });
 
   test('changes region, writes cookie, updates query param, and sets data-active-region', async ({ page }) => {
