@@ -417,7 +417,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js >= 18.19 or >= 20.6 for Vitest instrumentation, and `dd-trace` v6 requires Node.js >= 22.
+Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js >= 18.19 or Node.js >= 20.6 for Vitest instrumentation, and `dd-trace` v6 requires Node.js >= 22.
 
 Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
@@ -787,7 +787,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 If `DD_TEST_SESSION_NAME` is not specified, the default value is:
 
 - For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`
-- For `dd-trace` v5, a combination of CI job name and the command used to run the tests, such as `yarn test`
+- For `dd-trace` v5, a combination of the CI job name and the command used to run the tests (for example, `my-ci-job yarn test`)
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
