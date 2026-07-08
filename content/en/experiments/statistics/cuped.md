@@ -20,7 +20,7 @@ further_reading:
 
 The precision of experiment results, including confidence interval width, depends on metric variance. One way to improve precision is to gather more data, but that increases the time required to reach a decision.
 
-Controlled-experiment Using Pre-Experiment Data (CUPED), originally presented by [Deng et al. (2013)][1], reduces metric variance directly by using data captured before experiment exposure.
+Controlled-experiment Using Pre-Experiment Data (CUPED), originally presented in Deng et al.'s [Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data][1], reduces metric variance directly by using data captured before experiment exposure.
 
 Standard experiment analysis compares metric data from subjects exposed to a treatment with metric data from subjects in a control group. All data used in that comparison is collected during the experiment. Teams often have information about subjects from before the experiment started, especially historical metric data. CUPED uses this pre-experiment data to control for some of the metric variance that comes from randomly assigning variants to subjects. For example, one variant might have more active subjects than another variant by random chance. CUPED reduces the effect of this random variation by controlling for different activity levels across variants.
 
@@ -28,7 +28,7 @@ CUPED is enabled by default. With CUPED enabled, the displayed lift and metric v
 
 ## How CUPED works
 
-Datadog's implementation is based on [Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data][1] by Deng et al. and the idea of metric augmentation described in [From Augmentation to Decomposition: A New Look at CUPED][3].
+Datadog's implementation is based on the original CUPED paper and the metric augmentation framework described in Deng et al.'s [From Augmentation to Decomposition: A New Look at CUPED in 2023][3].
 
 CUPED takes the raw (non-CUPED) lift estimate for a metric and *augments* it with a series of adjustments. Given a raw absolute lift estimate `Δ` (the non-CUPED treatment−control difference for the metric), the CUPED-adjusted lift is:
 
@@ -67,7 +67,7 @@ Datadog also runs diagnostic checks on a regular basis to detect violations of t
 
 ### Handling missing values
 
-Missing data is expected in practice: new users often have no pre-experiment observations, and some subjects have no recorded value for a property. CUPED handles both cases without dropping the subject, following the approach in Section 4.2 of [Deng et al. (2013)][1].
+Missing data is expected in practice: new users often have no pre-experiment observations, and some subjects have no recorded value for a property. CUPED handles both cases without dropping the subject, following the approach in Section 4.2 of the [original CUPED paper][1].
 
 - **Missing pre-exposure aggregations:** When a subject has no pre-experiment data for a metric, the value is set to zero. When the data is only partially missing, a separate *missingness indicator* covariate is also added. This helps CUPED control for the fact that a value was missing rather than letting the imputed zero distort the adjustment.
 - **Missing property values:** A missing value for a property is treated as its own category value rather than being dropped, so subjects without a recorded property value are still included.
