@@ -12,6 +12,23 @@
   text-transform: uppercase;
 }
 
+.region-selector__help {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-subtle);
+  flex-shrink: 0;
+}
+
+.region-selector__help:hover {
+  color: var(--color-text-subtle);
+}
+
+.region-selector__help svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
 /* Below Hugo's `sm` breakpoint (576px), stack the label above the dropdown —
    matching Hugo's `.language-region-select-container` (`display: block` at
    `media-breakpoint-down(sm)`). This keeps the language + site selectors

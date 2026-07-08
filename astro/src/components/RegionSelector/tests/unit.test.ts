@@ -6,11 +6,13 @@ import { h } from 'preact';
 import type { ComponentType } from 'preact';
 import { RegionSelector } from '../RegionSelector';
 import { buildClientRegions } from '@config/regions';
+import { HUGO_ORIGIN } from '@config/origins';
 
 const RegionSelectorComponent = RegionSelector as ComponentType<any>;
 const regions = buildClientRegions();
 const labels = { "Datadog site": "Datadog site" };
-const regionProps = { regions, labels };
+const hrefs = { "Site help": `${HUGO_ORIGIN}/getting_started/site/` };
+const regionProps = { regions, labels, hrefs };
 
 function getContainer() {
   return document.querySelector<HTMLElement>('.region-selector')!;
@@ -126,6 +128,37 @@ describe('RegionSelector — interactivity', () => {
     // Re-query (value is a prop bound to the signal / state)
     await Promise.resolve();
     expect(select.value).toBe(targetRegion.key);
+  });
+});
+
+describe('RegionSelector — help link', () => {
+  it('renders a help link between the label and the select', () => {
+    render(h(RegionSelectorComponent, regionProps));
+
+    const helpLink = document.querySelector<HTMLAnchorElement>('.region-selector__help');
+    expect(helpLink).toBeTruthy();
+    expect(helpLink!.getAttribute('href')).toBe(`${HUGO_ORIGIN}/getting_started/site/`);
+  });
+
+  it('help link contains an svg icon', () => {
+    render(h(RegionSelectorComponent, regionProps));
+
+    const helpLink = document.querySelector('.region-selector__help');
+    expect(helpLink!.querySelector('svg')).toBeTruthy();
+  });
+
+  it('help link appears after the label and before the select in DOM order', () => {
+    render(h(RegionSelectorComponent, regionProps));
+
+    const container = document.querySelector('.region-selector')!;
+    const children = Array.from(container.children);
+    const labelIndex = children.findIndex((el) => el.classList.contains('region-selector__label'));
+    const helpIndex = children.findIndex((el) => el.classList.contains('region-selector__help'));
+    const selectIndex = children.findIndex((el) => el.classList.contains('select'));
+
+    expect(labelIndex).toBeGreaterThanOrEqual(0);
+    expect(helpIndex).toBeGreaterThan(labelIndex);
+    expect(selectIndex).toBeGreaterThan(helpIndex);
   });
 });
 

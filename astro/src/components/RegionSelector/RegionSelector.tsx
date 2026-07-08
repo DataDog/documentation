@@ -12,6 +12,7 @@ import {
   DEFAULT_REGION_KEY,
 } from "./regionState";
 import type { ClientRegion } from "@config/regions";
+import helpIcon from "../../assets/images/svg-icons/help-druids.svg?raw";
 
 const cl = classListFactory(styles);
 
@@ -19,10 +20,15 @@ export interface RegionSelectorLabels {
   "Datadog site": string;
 }
 
+export interface RegionSelectorHrefs {
+  "Site help": string;
+}
+
 export interface RegionSelectorProps {
   /** Allowed Datadog sites. Supplied by `RegionSelectorIsland.astro` at build time. */
   regions: ClientRegion[];
   labels: RegionSelectorLabels;
+  hrefs: RegionSelectorHrefs;
 }
 
 /**
@@ -34,6 +40,7 @@ export interface RegionSelectorProps {
 export function RegionSelector({
   regions,
   labels,
+  hrefs,
 }: RegionSelectorProps): JSX.Element {
   useMemo(() => initRegionState(regions), [regions]);
 
@@ -60,6 +67,12 @@ export function RegionSelector({
       <label class={cl("region-selector__label")} for="region-select">
         {labels["Datadog site"]}
       </label>
+      <a
+        class={cl("region-selector__help")}
+        href={hrefs["Site help"]}
+        aria-label="Site help"
+        dangerouslySetInnerHTML={{ __html: helpIcon }}
+      />
       <Select id="region-select" value={selected} onChange={handleChange}>
         {regions.map((r) => (
           <option key={r.key} value={r.key}>
