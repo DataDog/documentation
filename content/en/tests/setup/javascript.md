@@ -188,7 +188,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom measures to tests
 
-Just like tags, you can add custom measures to your tests by using the current active span:
+You can also add custom measures to your tests by using the current active span:
 
 ```javascript
 test('user profile', async ({ page }) => {
@@ -417,7 +417,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js >= 18.19 or Node.js >= 20.6 for Vitest instrumentation, and `dd-trace` v6 requires Node.js >= 22.
+Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js 18.19 or later, or Node.js 20.6 or later, for Vitest instrumentation. `dd-trace` v6 requires Node.js 22 or later.
 
 Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
@@ -724,7 +724,7 @@ By default, Vitest's [`isolate`][21] option is `true`, so each test file runs in
 
 To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
 
-To keep Vitest isolation enabled with lower worker startup overhead, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`. This option is available in `dd-trace` `5.111.0` and later, and `6.0.0` and later. It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations.
+To keep Vitest isolation enabled with lower worker startup overhead, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`. This option is available in `dd-trace` v5 (from `5.111.0`) and v6 (from `6.0.0`). It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations.
 
 Because this mode does not initialize `dd-trace` in Vitest workers, the following features are not supported:
 
