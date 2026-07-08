@@ -59,6 +59,8 @@ If traces appear inconsistently:
 
 ### Reduce log indexing costs without affecting traces
 
+Azure Logic Apps can generate a high volume of logs, which can increase your log indexing costs.
+
 {{% serverless/log_to_trace_indexing_note %}}
 
 ### Tags are not appearing on traces
@@ -77,3 +79,4 @@ For further questions or issues not covered here, contact [Datadog support][5].
 [2]: https://app.datadoghq.com/logs/livetail
 [3]: https://app.datadoghq.com/apm/traces?query=operation_name%3Aazure.logicapps
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[5]: /help/
