@@ -48,6 +48,14 @@ Application {{< tooltip glossary="instrumentation" >}} with Datadog APM involves
 <strong>Prefer vendor-neutral instrumentation?</strong> See the <a href="/opentelemetry/">OpenTelemetry documentation</a> for using OpenTelemetry with Datadog.
 </div>
 
+### Service Discovery
+
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Join the Preview!" >}}
+Service Discovery is in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
+Service Discovery automatically detects services already running across your infrastructure that aren't yet instrumented with Datadog APM, highlighting gaps in your observability coverage. View all the unmonitored services in your fleet in one place, understand the importance of each service through contextual information such as infrastructure footprint, process command, resource consumption, and dependencies, and then close the gaps by instrumenting your services with [Single Step Instrumentation](#single-step-instrumentation-recommended).
+
 ### Single step instrumentation (recommended)
 
 [Single Step Instrumentation][1] (SSI) automatically installs and configures Datadog SDKs with a single command. Auto-instrumentation then immediately begins capturing traces from your supported frameworks and libraries, with no code changes required.
