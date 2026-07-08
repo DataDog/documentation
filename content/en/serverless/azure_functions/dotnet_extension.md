@@ -211,13 +211,13 @@ az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NA
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. In the [Azure Portal][5], navigate to your Function App and open **Deployment slots**. Select your deployment slot.
+1. In the [Azure Portal][5], navigate to your Function App and open {{< ui >}}Deployment slots{{< /ui >}}. Select your deployment slot.
 
-2. In the slot, open **Configuration** and add the following Application Settings:
+2. In the slot, open {{< ui >}}Configuration{{< /ui >}} and add the following Application Settings:
 
    `WEBSITE_PRIVATE_EXTENSIONS`
    : **Value**: `0`<br>
-   Prevents the Functions runtime from holding file locks on `C:\home\SiteExtensions\` during extension install. Must be marked as a **Deployment slot setting** (sticky) in step 3.<br>
+   Prevents the Functions runtime from holding file locks on `C:\home\SiteExtensions\` during extension install. Must be marked as a {{< ui >}}Deployment slot setting{{< /ui >}} (sticky) in step 3.<br>
 
    `DD_API_KEY`
    : **Value**: Your [Datadog API key][6].<br>
@@ -234,16 +234,16 @@ az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NA
    `DD_VERSION`
    : **Value**: Your application's version.<br>
 
-3. Click **Save**. Then open **Configuration** → **General settings** → **Deployment slot settings** and mark `WEBSITE_PRIVATE_EXTENSIONS` as a slot setting. This ensures it stays on this slot after swaps and never propagates to production.
+3. Click {{< ui >}}Save{{< /ui >}}. Then open {{< ui >}}Configuration{{< /ui >}} → {{< ui >}}General settings{{< /ui >}} → {{< ui >}}Deployment slot settings{{< /ui >}} and mark `WEBSITE_PRIVATE_EXTENSIONS` as a slot setting. This ensures it stays on this slot after swaps and never propagates to production.
 
-4. **Stop the slot** by navigating to the slot's **Overview** page and clicking **Stop**.
+4. **Stop the slot** by navigating to the slot's {{< ui >}}Overview{{< /ui >}} page and clicking {{< ui >}}Stop{{< /ui >}}.
    <div class="alert alert-danger">You must stop the slot before installing the extension.</div>
 
-5. Navigate to **Extensions** and add the Datadog APM extension for your runtime.
+5. Navigate to {{< ui >}}Extensions{{< /ui >}} and add the Datadog APM extension for your runtime.
 
-6. **Start the slot** by clicking **Start** on the slot's **Overview** page.
+6. **Start the slot** by clicking {{< ui >}}Start{{< /ui >}} on the slot's {{< ui >}}Overview{{< /ui >}} page.
 
-7. **Swap the slot to production.** On the slot's **Overview** page, click **Swap** and select `production` as the target, or run:
+7. **Swap the slot to production.** On the slot's {{< ui >}}Overview{{< /ui >}} page, click {{< ui >}}Swap{{< /ui >}} and select `production` as the target, or run:
 
    ```shell
    az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NAME> --slot <SLOT_NAME> --target-slot production

@@ -33,10 +33,10 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source.
 1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Secret defaults][3] for the defaults used.
-1. Select your authorization strategy. If you selected **Plain**:
+1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for the HTTP/S Server username and password. See [Secret defaults][3] for the defaults used.
-1. In the **Decoding** dropdown menu, select **Bytes**.
-1. Toggle the switch to **Enable TLS**.
+1. In the {{< ui >}}Decoding{{< /ui >}} dropdown menu, select {{< ui >}}Bytes{{< /ui >}}.
+1. Toggle the switch to {{< ui >}}Enable TLS{{< /ui >}}.
     - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Secret defaults][3] for the defaults used.
     - The following certificate and key files are required.
       - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
@@ -54,11 +54,11 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
     sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
     sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
     ```
-1. After you set up your destinations and processors, click **Next: Install**.
+1. After you set up your destinations and processors, click {{< ui >}}Next: Install{{< /ui >}}.
 
 ### Install the Worker
 
-1. On the **Install** page, select your platform in the dropdown menu.
+1. On the {{< ui >}}Install{{< /ui >}} page, select your platform in the dropdown menu.
 1. Follow the instructions on the page to install the Worker based on your platform. See [Install the Worker][4] for details.
 1. After installing the Worker, change ownership of the certificates so the Observability Pipelines Worker can read them:
     ```shell

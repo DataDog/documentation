@@ -1,6 +1,10 @@
 ---
 title: Logs Troubleshooting
 description: "Troubleshooting common log ingestion and processing issues in Datadog Logs, including missing logs, data access problems, and timestamp misalignment."
+further_reading:
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
 ---
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
@@ -146,3 +150,7 @@ If the above troubleshooting steps do not resolve your issues with missing logs 
 [21]: /tracing/trace_pipeline/ingestion_controls/
 [22]: /logs/log_configuration/indexes/#exclusion-filters
 [23]: /tracing/other_telemetry/connect_logs_and_traces/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

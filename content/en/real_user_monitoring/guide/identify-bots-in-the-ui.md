@@ -16,11 +16,11 @@ To distinguish between real user activity and synthetic activity, you can find r
 
 ## Filter on device type
 
-In the [RUM Explorer][2], select **Views** from the dropdown menu and enter `@device.type:Bot` in the search query.
+In the [RUM Explorer][2], select {{< ui >}}Views{{< /ui >}} from the dropdown menu and enter `@device.type:Bot` in the search query.
 
 {{< img src="real_user_monitoring/guide/identify-bots/rum-explorer-bot-views-1.png" alt="Updated View filter and specified search query in the RUM Explorer" style="width:100%" >}}
 
-Search through the list of views and click on a view event to open the **View** side panel. Click on the **Attributes** tab to validate the bot in the **Browser Name** field under **Session**.
+Search through the list of views and click on a view event to open the {{< ui >}}View{{< /ui >}} side panel. Click on the {{< ui >}}Attributes{{< /ui >}} tab to validate the bot in the {{< ui >}}Browser Name{{< /ui >}} field under {{< ui >}}Session{{< /ui >}}.
 
 ## Filter out bot sessions on intake
 

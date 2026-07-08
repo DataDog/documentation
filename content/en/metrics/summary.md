@@ -17,11 +17,11 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
 
-Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
+Search your metrics by metric name or tag using the {{< ui >}}Metric{{< /ui >}} or {{< ui >}}Tag{{< /ui >}} search fields:
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
-**Note**: Tag values are retained in the **Tag** search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
+**Note**: Tag values are retained in the {{< ui >}}Tag{{< /ui >}} search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
 
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
@@ -35,13 +35,13 @@ Tag filtering supports Boolean and wildcard syntax so that you can identify:
 
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also filter your metrics by:
 
-- **Configuration**: Metrics with tag configurations
-- **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
-- **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
-- **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Related Assets**: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
-- **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
+- {{< ui >}}Configuration{{< /ui >}}: Metrics with tag configurations
+- {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics enabled by percentiles/advanced query capabilities
+- {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled 
+- {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
+- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
+- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
+- {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
 
 ### Definitions
 
@@ -53,19 +53,19 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 ## Configuration of multiple metrics 
 
-Clicking **Configure Metrics** gives you multiple options to configure more than one metric at a time: 
+Clicking {{< ui >}}Configure Metrics{{< /ui >}} gives you multiple options to configure more than one metric at a time: 
 
 {{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
-* **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
+* {{< ui >}}Manage tags{{< /ui >}}: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
 {{< img src="metrics/summary/tags-bulk-config.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
-* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
+* {{< ui >}}Enable or disable percentiles{{< /ui >}}: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
-* **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
+* {{< ui >}}Enable or disable historical metrics ingestion{{< /ui >}}: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
@@ -189,7 +189,7 @@ The tags table offers multiple ways to explore all of the tag keys and tag value
 
 Use the tags table to:
 
-- Sort tag keys by the **Count column** (count of unique tag values).
+- Sort tag keys by the {{< ui >}}Count{{< /ui >}} column (count of unique tag values).
 - Search through the paginated table of tags for a particular tag key.
 - Export the tags table as a downloadable CSV.
 - Toggle between tags you've configured on your metric vs the metric's originally submitted tags
@@ -211,9 +211,9 @@ For any particular tag key, you can:
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
-1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
+1. Scroll to the bottom of the metric's details side panel to the {{< ui >}}Related Assets{{< /ui >}} section.
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
-3. The **Tags** column shows exactly which tags are used in each asset.
+3. The {{< ui >}}Tags{{< /ui >}} column shows exactly which tags are used in each asset.
    
 ## Custom Metrics Tags Cardinality Explorer 
 
@@ -225,14 +225,14 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note**: Metrics without Limits™ is only available for custom metrics.
 
-You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
+You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to {{< ui >}}Configure Metrics{{< /ui >}} > {{< ui >}}Manage tags{{< /ui >}} in the [Metrics page][34], or by clicking the {{< ui >}}Manage Tags{{< /ui >}} button in a metric's details side panel. 
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
-1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
-4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
+1. Click on your custom distribution metric name in the {{< ui >}}Metrics Summary{{< /ui >}} table to open the metrics details side panel.
+2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
+3. Select {{< ui >}}Include tags...{{< /ui >}} or {{< ui >}}Exclude tags...{{< /ui >}} to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting {{< ui >}}Save{{< /ui >}}.
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
 

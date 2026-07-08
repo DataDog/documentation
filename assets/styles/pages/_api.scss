@@ -12,6 +12,11 @@ $ddpurple: #632ca6;
         font-size: 16px;
         text-decoration: none;
         border-bottom: none;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom: none;
+        }
     }
 
     .copy-btn-icon-wrapper {
@@ -51,6 +56,10 @@ $ddpurple: #632ca6;
     }
     .api-toolbar {
         margin-top: 0;
+
+        @include media-breakpoint-up(lg) {
+            top: 95px;
+        }
     }
 
     .main-api,
@@ -182,7 +191,7 @@ $ddpurple: #632ca6;
             background: white;
             position: sticky;
             z-index: 5;
-            top: 94px;
+            top: 65px;
             height: 65px;
         }
     }

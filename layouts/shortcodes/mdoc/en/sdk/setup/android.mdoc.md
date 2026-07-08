@@ -43,9 +43,9 @@ dependencies {
 {% /step %}
 
 {% step title="Specify application details in the UI" %}
-1. Navigate to [**Digital Experience** > **Add an Application**][6].
+1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][6].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][7].
+3. To instrument your web views, click the {% ui %}Instrument your webviews{% /ui %} toggle. For more information, see [Web View Tracking][7].
 4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][8].
 
 {% img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;" /%}
@@ -391,6 +391,49 @@ public class SampleApplication extends Application {
         Configuration configuration =
                 new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                         .useSite(DatadogSite.AP2)
+                        .build();
+
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="uk1" %}
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
+            )
+            .useSite(DatadogSite.UK1)
+            .build()
+
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+                        .useSite(DatadogSite.UK1)
                         .build();
 
         Datadog.initialize(this, configuration, trackingConsent);

@@ -27,7 +27,7 @@ This processor sends all logs or metrics ({{< tooltip glossary="preview" case="t
 
 To set up the filter processor:
 
-- Define a **filter query**.<br>**Notes**:
+- Define a {{< ui >}}filter query{{< /ui >}}.<br>**Notes**:
   - Logs or metrics that match the query are sent to the next component.
   - Logs or metrics that don't match the query are dropped.
   - For more information, see [Search Syntax for Logs][1] or [Search Syntax for Metrics][2].

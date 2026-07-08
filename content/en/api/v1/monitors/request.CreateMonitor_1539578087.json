@@ -9,6 +9,7 @@
     },
     "notify_audit": false,
     "include_tags": false,
+    "on_missing_data": "default",
     "scheduling_options": {
       "evaluation_window": {
         "day_starts": "04:00",

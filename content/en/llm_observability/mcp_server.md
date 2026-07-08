@@ -35,7 +35,7 @@ Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` too
 
 The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
 {{< /site-region >}}
@@ -51,7 +51,7 @@ Choose remote authentication when possible. Use local binary authentication if y
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Remote authentication uses the MCP specification's [Streamable HTTP][1] transport.
 
 **Claude Code** (command line):
@@ -134,7 +134,7 @@ Local binary authentication uses the MCP specification's [stdio][2] transport. U
 
 The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datadog [API key and application key][6] as the `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <pre><code>{
   "mcpServers": {
     "datadog": {
@@ -158,14 +158,14 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
-Install the `dd-llmo` skills with the following command:
+Install the `agent-observability` skills with the following command:
 
 ```shell
-npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
+npx skills add datadog-labs/agent-skills --skill agent-observability --full-depth -y
 ```
 
 The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
@@ -181,70 +181,96 @@ Restart Claude Code after running both commands for the skills to appear.
 
 | Skill | Invoke with | What it does |
 |-------|-------------|-------------|
-| Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
-| Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
-| Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
-| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
-| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
-| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+| Session classify | `/agent-observability-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
+| Trace RCA | `/agent-observability-trace-rca` | Root cause analysis on failing production traces |
+| Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment Python codegen | `/agent-observability-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
+| Eval bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
+| Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
 
-`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: Agent Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+`/agent-observability-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: Agent Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
 
 ```
-/llm-obs-session-classify session_id=<SESSION_ID>
-/llm-obs-session-classify trace_id=<TRACE_ID>
-/llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
+/agent-observability-session-classify session_id=<SESSION_ID>
+/agent-observability-session-classify trace_id=<TRACE_ID>
+/agent-observability-session-classify ml_app=my-chatbot --timeframe now-7d
 ```
 
 #### Trace root cause analysis
 
-`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+`/agent-observability-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
 
 When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
 
 ```
-/llm-obs-trace-rca ml_app=my-chatbot
-/llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
+/agent-observability-trace-rca ml_app=my-chatbot
+/agent-observability-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
 ```
 
 #### Evaluator bootstrap
 
-`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
+`/agent-observability-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of four artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, online LLM-judge evaluators published directly to Datadog, or — via `--emit-dataset <path>` — a `DatasetRecordRaw[]` JSON sampled from production traces and shaped for `LLMObs.create_dataset(records=...)`. The dataset-emit mode skips the evaluator workflow entirely; it produces a dataset suitable for use as the input to an experiment.
 
 ```
-/llm-obs-eval-bootstrap ml_app=my-chatbot
-/llm-obs-eval-bootstrap ml_app=my-chatbot --publish
-/llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+/agent-observability-eval-bootstrap ml_app=my-chatbot
+/agent-observability-eval-bootstrap ml_app=my-chatbot --publish
+/agent-observability-eval-bootstrap ml_app=my-chatbot --data-only
+/agent-observability-eval-bootstrap ml_app=my-chatbot --emit-dataset ./datasets/my_chatbot_seed.json
 ```
 
 #### Experiment analyzer
 
-`/llm-obs-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
+`/agent-observability-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
 
 ```
-/llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
-/llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+/agent-observability-experiment-analyzer experiment_id=<EXPERIMENT_ID>
+/agent-observability-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
 ```
 
 #### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+`/agent-observability-experiment-py-bootstrap` emits a self-contained `.py` script or Jupyter `.ipynb` notebook that uses the `ddtrace.llmobs` SDK and matches the canonical reference notebook style.
+
+The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a CSV (loaded at runtime via `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (`LLMObs.pull_dataset`), or — by default — a small inline 3-record sample. Every generated experiment is tagged with `generated_by=claude-code` and the resolved `--purpose` in both `config` and `tags`.
 
 ```
-/llm-obs-experiment-py-bootstrap
-/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
-/llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+/agent-observability-experiment-py-bootstrap --purpose "validate output accuracy"
+/agent-observability-experiment-py-bootstrap --purpose "test tool selection" --dataset ./data/qa.json
+/agent-observability-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+/agent-observability-experiment-py-bootstrap --task-source mymodule.handlers:respond
 ```
 
 #### End-to-end eval pipeline
 
-`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+`/agent-observability-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in six narrated phases, with a user checkpoint between each:
+
+1. **Classify ml_app traces** — sample and classify recent traces from your `ml_app`
+2. **Root cause analysis** — diagnose why failing traces are failing
+3. **Bootstrap evaluators** — propose an evaluator suite targeting the observed failure modes
+4. **Create + publish dataset** — extract input / expected_output pairs into a `DatasetRecordRaw[]` JSON and publish to Datadog under your project (created lazily)
+5. **Generate + run experiment** — emit a runnable `.py` or `.ipynb` that pulls the dataset and wires your app's task function, then execute it end-to-end and capture `experiment.url`. An in-phase review beat (`run` / `edit` / `stop`) sits between codegen and execution so you can inspect the generated file before it runs
+6. **Analyze experiment** — produce an analysis report with metric breakdowns and recommendations
+
+Each phase has a canonical short name — the same value accepted by `--start-at` and `--stop-after`. The table below lists, per phase, which MCP tools the pipeline may invoke and a one-line description of the logic:
+
+| # | Phase title | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">Stage name</span> | MCP tools called | Summary |
+|---|-------------|----------------------------------------------------------------------------------------|------------------|---------|
+| 1 | Classify ml_app traces | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`classify`</span> | `search_llmobs_spans` | Samples recent root spans for the `ml_app`, classifies each as success / partial / failure, surfaces common patterns. |
+| 2 | Root cause analysis | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`rca`</span> | `search_llmobs_spans` | Pulls full traces for failing spans from Phase 1 and walks the trace tree to attribute each failure to a root span and a failure mode. |
+| 3 | Bootstrap evaluators | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`eval-bootstrap`</span> | None (local reasoning over the Phase 2 report); optional Datadog API call to publish online LLM-judge evaluators when `--publish` is set | Emits a Python evaluator suite (`sdk_code`), a framework-agnostic JSON spec (`data_only`), or publishes online evaluators (`publish`). |
+| 4 | Create and publish dataset | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`dataset`</span> | `search_llmobs_spans` for sampling; `LLMObs.create_dataset()` via the ddtrace SDK (not MCP) for publish | Samples root spans, extracts input / expected_output pairs, scrubs PII, writes a local JSON, then publishes to Datadog. |
+| 5 | Generate and run experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`experiment`</span> | `list_llmobs_evals` (one-shot startup beacon — connectivity + telemetry); runtime uses the ddtrace SDK | Introspects your app for LLM call sites, emits a self-contained `.py` or `.ipynb` wiring `task_fn` to a real entry point, then runs it. |
+| 6 | Analyze experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`analyze`</span> | `get_llmobs_experiment_summary`, `get_llmobs_experiment_metric_values`, `list_llmobs_experiment_events`, `get_llmobs_experiment_event`, `get_llmobs_experiment_dimension_values` | Pulls top-line metrics, per-record scores, segment dimensions, and drill-down events; synthesizes a structured analysis report. |
+
+You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
 
 ```
-/llm-obs-eval-pipeline my-chatbot
-/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+/agent-observability-eval-pipeline my-chatbot --project-name my-chatbot
+/agent-observability-eval-pipeline my-chatbot --stop-after eval-bootstrap          # classic 3-phase
+/agent-observability-eval-pipeline my-chatbot --start-at experiment                # resume mid-flow
+/agent-observability-eval-pipeline my-chatbot --start-at analyze --experiment-id <UUID>
 ```
 
 For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
@@ -260,6 +286,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 - **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
+- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in experiments.
 
 ## Available tools
 
@@ -322,6 +349,26 @@ The `llmobs` toolset includes the following tools:
 `delete_llmobs_evaluator`
 : Delete an LLM-judge evaluator configuration by name.
 
+### Project and dataset tools
+
+`list_llmobs_projects`
+: List all LLM Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+
+`get_llmobs_project`
+: Look up an LLM Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
+
+`list_llmobs_datasets`
+: List datasets within a project, with optional ID or name filter. Returns dataset metadata and pagination fields. Use this before `get_llmobs_dataset_records` or `add_llmobs_dataset_records` — those tools require a dataset UUID.
+
+`get_llmobs_dataset_records`
+: Read dataset records with structured previews and a schema summary. Shapes arbitrary JSON fields (`input`, `expected_output`, `metadata`) into readable previews. Use `compute_schema=true` to get a type-aware sketch of record structure before constructing new records.
+
+`get_llmobs_full_dataset_records`
+: Fetch up to 3 specific records with full, untrimmed content. Use this to inspect individual records in detail after finding record IDs with `get_llmobs_dataset_records`.
+
+`add_llmobs_dataset_records`
+: Create records in a dataset using a two-step preview-then-confirm flow. Call with `confirmed=false` to preview the planned write, then `confirmed=true` to commit after user approval.
+
 ### Patterns tools
 
 `list_llmobs_pattern_configs`
@@ -365,6 +412,14 @@ The `llmobs` toolset includes the following tools:
 4. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
 5. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
 
+### Dataset management
+
+1. **Find your project**: Use `list_llmobs_projects` to browse projects — each result includes the `id` UUID you need for subsequent calls. If you already know the project name but not its UUID, use `get_llmobs_project` to resolve it directly.
+2. **Find your dataset**: Use `list_llmobs_datasets` with the `project_id` to list datasets and get their UUIDs.
+3. **Understand the data**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse records and get a type sketch of the fields before reading or writing.
+4. **Read specific records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 records by ID.
+5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
+
 ### Patterns analysis
 
 1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
@@ -385,6 +440,8 @@ After connecting, try prompts like:
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
+- List the datasets in my `my-project` project and show me a sample of records from the dataset named `qa-golden-set`, including its schema.
+- I have a CSV of new test cases. Add them to the `qa-golden-set` dataset in `my-project` as a new version. Show me a preview first.
 
 ## Combine with other Datadog tools
 

@@ -180,7 +180,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 | Variable                 | Description                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. For example: `env:staging,team:data_engineering` |
-| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster. |
+| DD_ENV                   | Override the `env` environment tag on metrics, traces, and logs from this cluster. By default, the Databricks workspace name is used as env.|
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][3] for more details. |
 
 
@@ -246,7 +246,7 @@ This approach is recommended for clusters in **Standard** access mode.
       | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
       | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                            | false   |
       | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
-      | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
+      | DD_ENV                   | Override the `env` environment tag on metrics, traces, and logs from this cluster. By default, the Databricks workspace name is used as env.                                                                                         |         |
       | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
 1. Click {{< ui >}}Create{{< /ui >}} if creating a new policy or {{< ui >}}Save{{< /ui >}} if updating an existing policy. If you update an existing policy, all clusters using that policy automatically apply the changes on their next restart. If you create a new policy, follow the steps below to apply it to your clusters.
@@ -317,7 +317,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
-| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
+| DD_ENV                   | Override the `env` environment tag on metrics, traces, and logs from this cluster. By default, the Databricks workspace name is used as env.                                                                                         |         |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -383,7 +383,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
-| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
+| DD_ENV                   | Override the `env` environment tag on metrics, traces, and logs from this cluster. By default, the Databricks workspace name is used as env.                                                                                          |         |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
 

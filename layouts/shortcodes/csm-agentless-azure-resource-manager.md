@@ -10,7 +10,7 @@ Complete the following steps to enable Agentless Scanning for your Azure subscri
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. Under **How would you like to set up Agentless Scanning?**, select **Azure Resource Manager**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled.
-1. Select An application key.
+1. Select an application key.
 1. Click **Launch Azure Resource Manager** to be redirected to the Azure portal.
 
 ##### Azure portal

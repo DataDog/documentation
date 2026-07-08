@@ -106,4 +106,4 @@ Bits Detection uses criticality to determine which resources should have managed
 [1]: /help
 [2]: https://www.app.datadoghq.com/apm/services
 [3]: https://app.datadoghq.com/monitors/manage?bits_monitors=true
-[4]: /bits_ai/bits_ai_sre/
+[4]: /bits_ai/bits_investigation/

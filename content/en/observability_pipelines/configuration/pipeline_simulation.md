@@ -61,8 +61,8 @@ If you are using a firewall, add these domains to the allowlist:
 Before running a simulation, you need to capture sample log data to test against. Pipeline Simulation lets you capture live data from an active pipeline, reuse previously captured samples, or import your own data.
 
 1. Navigate to [Observability Pipelines][3].
-1. [Set up a pipeline][4] or select a pipeline and click **Edit Pipeline** on the top right side of the page.
-1. On the pipeline's edit page, you can expand a processor in a processor group to view its read-only configuration. To edit any processors, capture data, and run a simulation, click **Edit** on a processor group.
+1. [Set up a pipeline][4] or select a pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
+1. On the pipeline's edit page, you can expand a processor in a processor group to view its read-only configuration. To edit any processors, capture data, and run a simulation, click {{< ui >}}Edit{{< /ui >}} on a processor group.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_edit_processor_group.png" alt="A pipeline's edit page with the Edit button on a processor group highlighted." style="width:100%;" >}}
 
 The status of a pipeline determines whether a simulation can be run with live data, imported data, or both.
@@ -81,22 +81,22 @@ For active pipelines, Observability Pipelines automatically runs a Live Capture 
 
 To run a capture for a specific set of data:
 
-1. Click **Live Capture**.
+1. Click {{< ui >}}Live Capture{{< /ui >}}.
 1. (Optional) Enter a query to specify which events you want to capture. The default query is `*`.
     - Use a capture query, such as `service:cloudtrail env:prod`, to target a specific set of logs. This helps to distinguish between different sets of logs you use for your simulations. For example, you can capture a set of logs for custom app log processors and another for the [Cloudflare Pack][5].
     - For more information on creating queries, see [Search Syntax for Logs][6] or [Search Syntax for Metrics][7].
 1. (Optional) Enter a capture duration (in seconds or minutes) for how long you want events to be captured.
     - Minimum duration (default, if no duration is specified): 30 seconds
     - Maximum duration: 300 seconds (5 minutes)
-1. Click **Capture**.
+1. Click {{< ui >}}Capture{{< /ui >}}.
 
 ### Import your own sample data for a simulation
 
 To import sample data for your pipeline simulation:
 
-1. For an inactive or draft pipeline, if the pipeline does not have saved data, click **Import Data**. Otherwise, click the down arrow next to **Live Capture** and select **Import Sample Data**.
-1. In the modal, drag and drop your sample data files or browse for them, or click the **Paste** tab to paste your sample data. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
-1. Click **Confirm**.
+1. For an inactive or draft pipeline, if the pipeline does not have saved data, click {{< ui >}}Import Data{{< /ui >}}. Otherwise, click the down arrow next to {{< ui >}}Live Capture{{< /ui >}} and select {{< ui >}}Import Sample Data{{< /ui >}}.
+1. In the modal, drag and drop your sample data files or browse for them, or click the {{< ui >}}Paste{{< /ui >}} tab to paste your sample data. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 #### Sample file import specifications
 
@@ -166,8 +166,8 @@ The following is an example JSONL file you can import for a simulation:
 
 After you use Live Capture to pull data from your pipeline, the results are stored for 72 hours in the Datadog platform and can be used for simulations. To use previously captured data for your pipeline simulation:
 
-1. Click the down arrow next to **Live Capture** and select **See Saved Samples**.
-1. Click **Use as Sample Data** for the live capture or previously imported data you want to use.
+1. Click the down arrow next to {{< ui >}}Live Capture{{< /ui >}} and select {{< ui >}}See Saved Samples{{< /ui >}}.
+1. Click {{< ui >}}Use as Sample Data{{< /ui >}} for the live capture or previously imported data you want to use.
 
 {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_saved_samples.png" alt="The Saved Samples view with the Use as Sample Data button for a previous capture." style="width:100%;" >}}
 
@@ -176,21 +176,21 @@ After you use Live Capture to pull data from your pipeline, the results are stor
 After you have captured data for your pipeline simulation, edit your pipeline processors and run a simulation.
 
 1. Navigate to [Observability Pipelines][3].
-1. Select your pipeline and click **Edit Pipeline** on the top right side of the page.
-1. On the pipeline edit page, click **Edit** on a processor group to add or edit processors in your pipeline.
-1. In the **Processor Group** dropdown menu on the left side of the Pipeline Simulation page, select the processor group with the processors you want to update and test. You can hover over **Processor Group** to see a snapshot of where the processors are in the pipeline.
+1. Select your pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
+1. On the pipeline edit page, click {{< ui >}}Edit{{< /ui >}} on a processor group to add or edit processors in your pipeline.
+1. In the {{< ui >}}Processor Group{{< /ui >}} dropdown menu on the left side of the Pipeline Simulation page, select the processor group with the processors you want to update and test. You can hover over {{< ui >}}Processor Group{{< /ui >}} to see a snapshot of where the processors are in the pipeline.
   {{< img src="observability_pipelines/pipeline_simulation/processor_group_map.mp4" alt="Hovering over a processor group shows a snapshot of where the processors are in the pipeline." video="true" width="60%" >}}
 1. Add and update your processors. You can update multiple processors for one simulation. **Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 1. Choose a simulation scenario:
-    - **Run a simulation up to a specific processor group**: Keep the **End-to-End Preview** toggle disabled to see the result of logs transformed by all processors in the current processor group and the prior processor groups. See [Run a simulation up to a specific processor group](#run-a-simulation-up-to-a-specific-processor-group) for more information.
-    - **Run an end-to-end preview simulation**: Enable the **End-to-End Preview** toggle to run a simulation through all processor groups and see the data that is sent to the destination. See [End-to-end preview](#end-to-end-preview) for more information.
+    - **Run a simulation up to a specific processor group**: Keep the {{< ui >}}End-to-End Preview{{< /ui >}} toggle disabled to see the result of logs transformed by all processors in the current processor group and the prior processor groups. See [Run a simulation up to a specific processor group](#run-a-simulation-up-to-a-specific-processor-group) for more information.
+    - **Run an end-to-end preview simulation**: Enable the {{< ui >}}End-to-End Preview{{< /ui >}} toggle to run a simulation through all processor groups and see the data that is sent to the destination. See [End-to-end preview](#end-to-end-preview) for more information.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_end_to_end_toggle.png" alt="The End-to-End Preview toggle on the Pipeline Simulation page." style="width:100%;" >}}
-1. Click **Preview** at the bottom of the processors panel to run the simulation.
+1. Click {{< ui >}}Preview{{< /ui >}} at the bottom of the processors panel to run the simulation.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel." style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the log data that the processor received and sent out.
     - Enter a free-text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
-    - Use the **All events** dropdown menu to view events by status:
+    - Use the {{< ui >}}All events{{< /ui >}} dropdown menu to view events by status:
         - `Modified only` shows only modified events.
         - `Unmodified only` shows only unmodified events.
         - `Rerouted only` shows only logs rerouted to an overflow destination by the [Quota processor][8].
@@ -198,12 +198,12 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
             - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
             - Logs created by the [Split Array][10] processor.
         - `Dropped only` shows only dropped events.
-    - Use the **All telemetry** dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
+    - Use the {{< ui >}}All telemetry{{< /ui >}} dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
      {{< img src="observability_pipelines/pipeline_simulation/view_simulation.mp4" alt="The log data the processor received and sent out, with the search bar and the status and telemetry filter dropdowns." video="true" width="70%" >}}
-1. Click **Save** at the bottom right side of the page to save your changes.
-1. Click **Back to Pipeline** on the top right side of the page.
+1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes.
+1. Click {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
 1. To deploy your updates to production, do one of the following:
-    - **Deploy updates using the UI**: Click **Next: Deploy Changes** on the pipeline page.
+    - **Deploy updates using the UI**: Click {{< ui >}}Next: Deploy Changes{{< /ui >}} on the pipeline page.
     - **Use the API to deploy changes**: See [Export and Import Configuration][11] for information on exporting pipeline configurations to JSON.
     - **Use Terraform to deploy changes**: See [Export and Import Configuration][11] for information on exporting pipeline configurations to Terraform.
 
@@ -221,7 +221,7 @@ On the Pipeline Simulation page, you can choose which set of processors you want
 
 #### End-to-end preview
 
-When you toggle **End-to-End Preview** and run a simulation, the entry event shown is the log sent from the source before any processing is done. The exit log is the result after all processors have been applied and sent to the destination. This lets you visualize how a log is transformed after it goes through the entire pipeline.
+When you toggle {{< ui >}}End-to-End Preview{{< /ui >}} and run a simulation, the entry event shown is the log sent from the source before any processing is done. The exit log is the result after all processors have been applied and sent to the destination. This lets you visualize how a log is transformed after it goes through the entire pipeline.
 
 ## Further reading
 

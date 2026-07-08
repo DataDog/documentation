@@ -175,8 +175,9 @@ See the documentation wiki to learn more about [image partials][6].
 
 ### Links
 
-Format links using numbered [reference-style links][8], and use relative paths for other pages published on the documentation site.
+Format links using numbered [reference-style links][8], and use relative paths for other pages published on the documentation site. Don't use word-based ID labels in reference-style links; numbered links are easier to maintain for localization.
 - **Not recommended**: `read the [Getting Started with Azure](/getting_started/azure/)`
+- **Not recommended**: `read the [Getting Started with Azure][azure-guide]`
 - **Recommended**: `read the [Getting Started with Azure][1]` with a link reference at the bottom of the file: `[1]: /getting_started/azure/`.
 
 Avoid vague link text; let readers know where you're sending them. This is particularly important for anyone using assistive technology to scroll through links; descriptive link text helps them find what they're looking for. Any sentence containing a link should read just as well if it didn't have the link.

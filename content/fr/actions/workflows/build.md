@@ -89,15 +89,15 @@ Chaque étape du workflow peut être modifiée à tout moment en cliquant dessus
 
 #### Raccourcis et outils de canevas
 
-Pour voir les raccourcis clavier et souris pour le canevas du générateur de workflow, tapez `?` (shift+`/`) ou cliquez sur le bouton **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}}. Une liste de raccourcis apparaît.
+Pour voir les raccourcis clavier et souris pour le canevas du générateur de workflow, tapez `?` (shift+`/`) ou cliquez sur le bouton **Keyboard** {{< img src="actions/workflows/build/keyboard-icon.png" inline="true" style="width:40px;">}}. Une liste de raccourcis apparaît.
 
-Les boutons **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}} et **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} contrôlent la façon dont la fenêtre d'affichage est affichée.
+Les boutons **Zoom out** {{< img src="actions/workflows/build/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="actions/workflows/build/zoom-in-mag-icon.png" inline="true" style="width:30px;">}} et **Reset viewport** {{< img src="actions/workflows/build/reset-viewport-icon.png" inline="true" style="width:34px;">}} contrôlent la façon dont la fenêtre d'affichage est affichée.
 
-Le bouton **Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} aligne et distribue les étapes de votre workflow.
+Le bouton **Auto layout** {{< img src="actions/workflows/build/auto-layout-icon.png" inline="true" style="width:80px;">}} aligne et distribue les étapes de votre workflow.
 
-Le bouton **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} vous permet d'ajouter des notes d'annotation à votre workflow. Ces notes offrent une barre de formatage pour ajouter divers formats de texte tels que le gras et l'italique, les liens et les listes. Vous pouvez également saisir vos annotations en Markdown.
+Le bouton **Add annotation** {{< img src="actions/workflows/build/add-annotation-icon.png" inline="true" style="width:30px;">}} vous permet d'ajouter des notes d'annotation à votre workflow. Ces notes offrent une barre de formatage pour ajouter divers formats de texte tels que le gras et l'italique, les liens et les listes. Vous pouvez également saisir vos annotations en Markdown.
 
-{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="Une annotation vide, avec la barre de formatage affichée au-dessus" style="width:70%;" >}}
+{{< img src="actions/workflows/build/workflow-annotation-with-bar.png" alt="Une annotation vide, avec la barre de formatage affichée au-dessus" style="width:70%;" >}}
 
 ## Tester une étape
 
@@ -165,7 +165,7 @@ Vous pouvez ajouter un chemin d'erreur que le workflow doit suivre s'il rencontr
 
 Pour ajouter un chemin d'erreur :
 1. Passez la souris sur l'étape où vous souhaitez ajouter un chemin d'erreur.
-1. Cliquez et faites glisser l'icône **Error path** {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} pour placer un nouveau chemin d'erreur sur le canevas.
+1. Cliquez et faites glisser l'icône **Error path** {{< img src="actions/workflows/build/error-path-icon.png" inline="true" style="width:24px;">}} pour placer un nouveau chemin d'erreur sur le canevas.
 1. Sélectionnez une étape de workflow à ajouter au chemin d'erreur.
 1. Après avoir configuré votre étape, vous pouvez ajouter d'autres étapes à un chemin d'erreur et même fusionner votre chemin d'erreur avec le chemin de workflow principal.
 1. Lorsque vous avez terminé de configurer les étapes de votre chemin d'erreur, cliquez sur **Save** pour appliquer vos modifications.
@@ -182,7 +182,7 @@ Pour ajouter une condition :
    - Seules les variables de sortie de l'étape actuelle peuvent être utilisées dans une instruction conditionnelle personnalisée.
 1. Saisissez un temps d'attente maximum pour le workflow. Si la condition n'est pas remplie à temps, l'étape échoue.
 
-{{< img src="service_management/workflows/wait-until-condition2.png" alt="Un exemple de wait until condition" style="width:100%;" >}}
+{{< img src="actions/workflows/build/wait-until-condition2.png" alt="Un exemple de wait until condition" style="width:100%;" >}}
 
 ## Modifier un workflow avec JSON
 

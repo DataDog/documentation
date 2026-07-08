@@ -110,7 +110,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. To reset the checkpoint value in the MySQL source:
     1. Navigate to [Observability Pipelines][1].
     1. Click on your pipeline and click.
-    1. In the MySQL source, enter the destination's last checkpoint value in the **Checkpoint value** field.
+    1. In the MySQL source, enter the destination's last checkpoint value in the {{< ui >}}Checkpoint value{{< /ui >}} field.
 
 #### External tools for validating queries
 
@@ -148,8 +148,8 @@ After you select the MySQL source in the pipeline UI:
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
       - **Note**: All file paths are made relative to the configuration data directory. For example, if the SQL file path is `/var/lib/observability-pipelines-worker/config/config/db_queries/query.sql`, enter the path `/db_queries/query.sql`.
-5. Select your query type (**Batch** or **Incremental**). See [Query types](#query-types) for more information.
-    - For **Incremental**:
+5. Select your query type ({{< ui >}}Batch{{< /ui >}} or {{< ui >}}Incremental{{< /ui >}}). See [Query types](#query-types) for more information.
+    - For {{< ui >}}Incremental{{< /ui >}}:
       1. Define the [incremental column](#incremental-columns).
       1. Set the starting [checkpoint value](#checkpoint-values).
 6. Define your query scheduling using cron syntax. These are cron syntax examples for different query schedules:

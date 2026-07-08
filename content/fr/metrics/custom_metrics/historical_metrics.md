@@ -1,83 +1,85 @@
 ---
+description: Ingestion de valeurs de métriques personnalisées avec des horodatages
+  plus anciens qu'une heure, jusqu'à votre période de conservation des métriques.
 further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
   text: Surveillez les performances système sur de plus longues périodes grâce aux
     métriques historiques
-- link: /developers/dogstatsd/
+- link: /extend/dogstatsd/
   tag: Documentation
   text: En savoir plus sur DogStatsD
-- link: /developers/community/libraries/
+- link: /extend/community/libraries/
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
   text: Surveillez les performances système sur de plus longues périodes grâce aux
     métriques historiques
-title: Ingestion historique de métriques
+title: 'Ingestion historique de métriques '
 ---
-
 {{< jqmath-vanilla >}}
 
-{{% site-region region="gov" %}}
-"<div class="alert alert-danger">L'ingestion des métriques historiques n'est pas prise en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">L'ingestion de métriques historiques n'est pas prise en charge pour votre site <a href="/getting_started/site">Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
-## Section Overview
+## Aperçu {#overview}
 
-Activer l'ingestion des métriques historiques vous permet de collecter des **métriques personnalisées** dont les horodatages sont antérieurs d'une heure à la date de soumission, mais pas au-delà de votre période totale de rétention des métriques (15 mois par défaut). 
+L'activation de l'ingestion de métriques historiques vous permet de collecter des valeurs de **métriques personnalisées** avec des horodatages plus anciens qu'une heure à partir du moment de la soumission, mais pas plus anciens que votre période de conservation totale des métriques (par défaut de 15 mois).
 
 Activer cette fonctionnalité sur vos métriques peut s'avérer utile dans plusieurs cas : reprise après incident, correction de valeurs erronées, gestion des retards liés à l'IoT, etc.
 
-## Qu'est-ce que l'ingestion des métriques historiques ?
+## Qu'est-ce que l'ingestion de métriques historiques ? {#what-is-historical-metrics-ingestion}
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagramme illustrant le flux d'ingestion lorsque les métriques historiques sont activées" >}}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagramme montrant le flux d'ingestion lorsque l'ingestion des métriques historiques est activée." >}}
 
-Datadog classe comme *métriques historiques* les points de métrique dont les horodatages sont antérieurs d'une heure à leur date de soumission. Si l'ingestion des métriques historiques n'est pas activée, les valeurs de métriques plus anciennes d'une heure ne sont pas ingérées.
+Datadog classe les *métriques historiques* comme des points de métriques avec des horodatages qui sont plus anciens qu'une heure par rapport au moment de la soumission. Si l'ingestion de métriques historiques n'est pas activée, les valeurs d'une métrique plus anciennes qu'une heure à partir de la soumission ne sont pas ingérées.
 
-Par exemple, votre métrique (`exampleMetricA`) envoie une valeur à Datadog à 13 h 00 (heure de l'Est), avec un horodatage de 10 h 00. Cette valeur est considérée comme _historique_ car son horodatage est antérieur de 3 heures à la date de soumission.
+Par exemple, votre métrique (`exampleMetricA`) émet une valeur à Datadog à 13h00 EST, et l'horodatage de cette valeur est 10h00 EST. Cette valeur de métrique est classée comme _historique_ car elle a un horodatage 3 heures plus ancien par rapport au moment de la soumission.
 
-Avec l'ingestion des métriques historiques activée, si vous soumettez plusieurs valeurs avec le même horodatage et les mêmes étiquettes, Datadog conserve la valeur soumise la plus récemment. Autrement dit, si vous soumettez une métrique avec la valeur X, puis avec la valeur Y pour le même horodatage, c'est la valeur soumise en dernier qui est conservée.
+Avec l'ingestion de métriques historiques activée, si vous soumettez plusieurs valeurs avec le même horodatage et la même combinaison de tag et de valeur à Datadog, Datadog préserve la valeur soumise le plus récemment. C'est-à-dire que si, dans le même horodatage, vous soumettez une métrique avec une valeur de X, et que vous envoyez également cette métrique avec une valeur de Y, la valeur qui a été soumise le plus récemment sera préservée.
 
-Vous pouvez commencer à ingérer des valeurs historiques en activant l'ingestion sur la [page de synthèse des métriques][1], pour les types de métriques *count*, *rate* et *gauge*. 
+Vous pouvez commencer à ingérer des valeurs de métriques historiques en activant l'ingestion de métriques historiques sur la [Page de résumé des métriques][1] pour les types de métriques *comptes, taux et jauges*.  
 
-**Remarque** : L'ingestion de mesures historiques n'est pas disponible pour les mesures de distribution ou les mesures personnalisées générées à partir d'autres types de données Datadog (telles que les journaux).
+**Remarque** : L'ingestion de métriques historiques n'est pas disponible pour les métriques de distribution, ou les métriques personnalisées générées à partir d'autres types de données Datadog (comme les journaux).
 
-## Configuration
+## Configuration {#configuration}
 
 Pour activer l'ingestion des métriques historiques pour une métrique spécifique :
-1. Accédez à la [page de synthèse des métriques][1]. 
-1. Cliquez sur le nom de la métrique concernée pour ouvrir le panneau latéral de détails. 
-1. Dans la section *Advanced* de ce panneau, cliquez sur **Configure**. 
-1. Activez l'option **Enable historical metrics** et cliquez sur **Save**. 
+1. Accédez à la [Page de résumé des métriques][1].
+1. Cliquez sur le nom de la métrique pour laquelle vous souhaitez activer l'ingestion de métriques historiques afin d'ouvrir le panneau latéral des détails de la métrique.
+1. Dans la section *Avancé* du panneau latéral, cliquez sur **Configurer**.
+1. Sélectionnez le **Activer les métriques historiques** et appuyez sur **Enregistrer**.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Page de synthèse des métriques montrant le panneau des facettes et la section Advanced d'un panneau latéral avec l'option activée" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Page de résumé des métriques affichant le panneau des facettes des métriques historiques et la section avancée d'un panneau de détail de métrique ouvert avec l'option Activer les métriques historiques sélectionnée" style="width:100%;" >}}
 
-### Configuration groupée pour plusieurs métriques
+### Configuration en masse pour plusieurs métriques {#bulk-configuration-for-multiple-metrics}
 
 Vous pouvez activer ou désactiver l'ingestion des métriques historiques pour plusieurs métriques en une seule opération, sans avoir à les configurer une par une.
 
-1. Accédez à la [page de synthèse des métriques][1] et cliquez sur le menu déroulant **Configure Metrics**.
-1. Sélectionnez **Enable historical metrics**.
-1. Spécifiez un préfixe d'espace de noms de métriques pour sélectionner toutes les métriques correspondant à cet espace de noms.
-1. (Facultatif) Pour désactiver l'ingestion de métriques historiques pour toutes les métriques de l'espace de noms, cliquez sur le bouton **Historical metrics**.
+1. Accédez à la [Page de résumé des métriques][1] et cliquez sur le menu déroulant **Configurer les métriques**.
+1. Sélectionnez **Activer les métriques historiques**.
+1. Spécifiez un préfixe de namespace de métrique pour sélectionner toutes les métriques qui correspondent à ce namespace.
+1. (Optionnel) Pour désactiver l'ingestion des métriques historiques pour toutes les métriques dans le namespace, cliquez sur le bouton **Métriques historiques**.
 
 {{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Bouton d'ingestion des métriques historiques" >}}
 
-## Soumission de données historiques
+## Soumission des métriques historiques {#historical-metrics-submission}
 
-Après avoir activé l'ingestion de métriques historiques, vous pouvez soumettre des valeurs de métriques avec des horodatages historiques via l'[API](#api) ou via l'[Agent](#agent).
+Après avoir activé l'ingestion des métriques historiques, vous pouvez soumettre des valeurs de métriques avec des horodatages historiques via l'[API](#api) ou via l'[Agent](#agent).
 
-### API 
+### API {#api}
 
 Avec l'API, vous pouvez soumettre des valeurs de métriques avec des horodatages historiques dans la charge utile (à condition que le nom de la métrique ait déjà été activé pour accepter les métriques historiques via l'interface utilisateur décrite ci-dessus).
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
 {{< programming-lang lang="python">}}
+
 ```python
 """
-L'envoi de métriques renvoie la réponse « Payload accepted »
+Submit metrics returns "Payload accepted" response
 """
 
 from datetime import datetime
@@ -97,7 +99,7 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Ajouter l'hotodatage historique ici """
+                    """ Add historical timestamp here """
                     timestamp=int(datetime.now().timestamp()),
                     """ *********************** """
 
@@ -124,8 +126,9 @@ with ApiClient(configuration) as api_client:
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
-// L'envoi de métriques renvoie la réponse « Payload accepted »
+// Submit metrics returns "Payload accepted" response
 import com.datadog.api.client.ApiClient;
 import com.datadog.api.client.ApiException;
 import com.datadog.api.client.v2.api.MetricsApi;
@@ -153,7 +156,7 @@ public class Example {
                         .points(
                             Collections.singletonList(
                                 new MetricPoint()
-
+                            
                                     //Add historical timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
@@ -179,66 +182,68 @@ public class Example {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
-// L'envoi de métriques renvoie la réponse « Payload accepted »
+// Submit metrics returns "Payload accepted" response
 
 package main
 
 import (
-    "context"
-    "encoding/json"
-    "fmt"
-    "os"
-    "time"
+	"context"
+	"encoding/json"
+	"fmt"
+	"os"
+	"time"
 
-    "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
-    "github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2"
 )
 
 func main() {
-    body := datadogV2.MetricPayload{
-        Series: []datadogV2.MetricSeries{
-            {
-                Metric: "system.load.1",
-                Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
-                Points: []datadogV2.MetricPoint{
-                    {   
+	body := datadogV2.MetricPayload{
+		Series: []datadogV2.MetricSeries{
+			{
+				Metric: "system.load.1",
+				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
+				Points: []datadogV2.MetricPoint{
+					{   
                         //Add historical timestamp here
-                        Timestamp: datadog.PtrInt64(time.Now().Unix()),
+						Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
 
-                        Value:     datadog.PtrFloat64(0.7),
-                    },
-                },
-                Resources: []datadogV2.MetricResource{
-                    {
-                        Name: datadog.PtrString("dummyhost"),
-                        Type: datadog.PtrString("host"),
-                    },
-                },
-            },
-        },
-    }
-    ctx := datadog.NewDefaultContext(context.Background())
-    configuration := datadog.NewConfiguration()
-    apiClient := datadog.NewAPIClient(configuration)
-    api := datadogV2.NewMetricsApi(apiClient)
-    resp, r, err := api.SubmitMetrics(ctx, body, *datadogV2.NewSubmitMetricsOptionalParameters())
+						Value:     datadog.PtrFloat64(0.7),
+					},
+				},
+				Resources: []datadogV2.MetricResource{
+					{
+						Name: datadog.PtrString("dummyhost"),
+						Type: datadog.PtrString("host"),
+					},
+				},
+			},
+		},
+	}
+	ctx := datadog.NewDefaultContext(context.Background())
+	configuration := datadog.NewConfiguration()
+	apiClient := datadog.NewAPIClient(configuration)
+	api := datadogV2.NewMetricsApi(apiClient)
+	resp, r, err := api.SubmitMetrics(ctx, body, *datadogV2.NewSubmitMetricsOptionalParameters())
 
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.SubmitMetrics`: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.SubmitMetrics`: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 
-    responseContent, _ := json.MarshalIndent(resp, "", "  ")
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.SubmitMetrics`:\n%s\n", responseContent)
+	responseContent, _ := json.MarshalIndent(resp, "", "  ")
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.SubmitMetrics`:\n%s\n", responseContent)
 }
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
-# L'envoi de métriques renvoie la réponse « Payload accepted »
+# Submit metrics returns "Payload accepted" response
 
 require "datadog_api_client"
 api_instance = DatadogAPIClient::V2::MetricsAPI.new
@@ -272,9 +277,10 @@ p api_instance.submit_metrics(body)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
+
 ```typescript
 /**
- * L'envoi de métriques renvoie la réponse « Payload accepted »
+ * Submit metrics returns "Payload accepted" response
  */
 
 import { client, v2 } from "@datadog/datadog-api-client";
@@ -320,12 +326,13 @@ apiInstance
 {{< /programming-lang >}}
 
 {{< programming-lang lang="curl" >}}
+
 ```shell
-## Points dynamiques
-# Envoyez des données de séries temporelles pouvant être représentées dans les dashboards de Datadog.
-# Variables de modèle
+## Dynamic Points
+# Post time-series data that can be graphed on Datadog’s dashboards.
+# Template variables
 export NOW="$(date +%s)"
-# Commande Curl
+# Curl command
 curl -X POST "https://api.datadoghq.com/api/v2/series" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -338,7 +345,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "type": 0,
       "points": [
         {
-            # Ajouter ici un horodatage historique
+            # Add historical timestamp here
           "timestamp": 1636629071,
             # ***********************
 
@@ -360,13 +367,14 @@ EOF
 
 {{< /programming-lang-wrapper >}}
 
-### Agent
+### Agent {#agent}
 
-Pour envoyer des métriques historiques avec l'Agent, assurez-vous d'avoir installé la version 7.40.0 ou ultérieure de l'Agent. Cette version inclut une interface DogStatsD mise à jour, compatible avec **Java**, **GoLang** et **.NET**. Cela vous permet d'envoyer des points de métrique différés via l'Agent.
+Pour soumettre des métriques historiques avec l'Agent, assurez-vous d'avoir installé la version 7.40.0 ou ultérieure de l'Agent. Cette version inclut une interface DogStatsD mise à jour, qui prend en charge **Java**, **GoLang** et **.NET**. Cela vous permet d'envoyer des points de métriques retardés via l'Agent.
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -389,30 +397,32 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
 import (
-    "log"
+	"log"
   "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-    statsd, err := statsd.New("127.0.0.1:8125")
-    if err != nil {
-        log.Fatal(err)
-    }
+	statsd, err := statsd.New("127.0.0.1:8125")
+	if err != nil {
+		log.Fatal(err)
+	}
 
   ts := time.Date(2008, time.March, 17, 23, 0, 0, 0, time.UTC)
-    statsd.GaugeWithTimestamp("example_metric.gauge_with_timestamp", 12, []string{"environment:dev"}, 1, ts)
+	statsd.GaugeWithTimestamp("example_metric.gauge_with_timestamp", 12, []string{"environment:dev"}, 1, ts)
   statsd.CountWithTimestamp("example_metric.count_with_timestamp", 12, []string{"environment:dev"}, 1, ts)
 }
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 
@@ -441,36 +451,42 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## Latence de l'ingestion des métriques historiques
+## Latence de l'ingestion des métriques historiques {#historical-metrics-ingestions-latency}
 
 La latence de l'ingestion des métriques historiques varie selon l'ancienneté des horodatages de vos métriques.
 
-| Délai de la métrique :   | Latence d'ingestion                         |
+| Métrique retardée de :   | Latence d'ingestion                         |
 |----------------------|-------------------------------------------|
-| 1 à 12 heures           | Ingestion en temps quasi réel (1 heure maximum) |
-| 12 heures à 30 jours   | Jusqu'à 14 heures de latence                    |
+| 1-12 heures           | Ingestion en temps quasi réel (maximum 1 heure) |
+| 12 heures - 30 jours   | Jusqu'à 14 heures de latence                    |
 | Plus de 30 jours         | Plus de 14 heures de latence                     |
 
-## Facturation de l'ingestion des métriques historiques
+## Facturation de l'ingestion des métriques historiques {#historical-metrics-ingestion-billing}
 
-Les mesures historiques sont comptabilisées et facturées comme des mesures personnalisées indexées. Les mesures personnalisées facturables sont déterminées par l'**horodatage des mesures soumises**, qu'elles soient datées d'aujourd'hui ou de 15 mois. Tant que cette combinaison de nom de métrique et de valeur de tag rapporte activement **une valeur** (indépendamment de l'horodatage), elle est considérée comme active dans l'heure où elle a été soumise. 
+Les métriques historiques sont comptées et facturées comme des métriques personnalisées indexées. Les métriques personnalisées facturables sont déterminées par le **timestamp des métriques soumises**, peu importe qu'elles aient un timestamp d'aujourd'hui ou de 15 mois dans le passé. Tant que cette combinaison de nom de métrique et de valeur de tag rapporte activement **une** valeur (indépendamment du timestamp), elle serait considérée comme active à l'heure où elle a été soumise. 
 
-L'exemple suivant part du principe que
-- 3000 combinaisons uniques de tags et de valeurs
-- 1500 mesures en temps réel
-- 1500 mesures historiques 
+L'exemple suivant suppose :
+- 3000 combinaisons uniques de tag et de valeur
+- 1500 métriques en temps réel
+- 1500 métriques historiques 
 - 720 heures dans le mois (30 jours)
-- Coût des métriques personnalisées : 5 $ pour 100 métriques
+- Coût de la métrique personnalisée de 5 $ par 100 métriques
 
-$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Suivez vos métriques historiques indexées dans la section Usage Summary (Récapitulatif d'utilisation) de la [page Plan and Usage (Abonnement et utilisation)][4].
 
-{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Section Récapitulatif d'utilisation de la page Plan and Usage, affichant les métriques personnalisées indexées et les métriques historiques indexées" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Section Résumé d'utilisation de la page Plan et Utilisation, qui montre à la fois les métriques personnalisées indexées et les métriques historiques indexées" style="width:100%;" >}}
 
-Pour plus d'informations, voir la documentation [Facturation de métriques personnalisées][3].
+Pour plus d'informations, consultez la documentation sur la [facturation des métriques personnalisées][3].
 
-## Pour aller plus loin
+### Facturation selon le Metric Name pricing {#billing-under-metric-name-pricing}
+
+Si votre organisation utilise [Metric Name pricing][5] au lieu du [cardinality pricing], la facturation HMI diffère. L'utilisation de HMI est calculée en fonction du temps d'ingestion plutôt que du timestamp original de la métrique. Chaque point de données HMI contribue à la fois au volume ingéré et indexé.
+
+Pour plus de détails sur le modèle de tarification Metric Name Pricing, consultez [Metric Name Pricing for Custom Metrics][5].
+
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -478,3 +494,4 @@ Pour plus d'informations, voir la documentation [Facturation de métriques perso
 [2]: /fr/metrics/#submit-metrics
 [3]: /fr/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
+[5]: /fr/account_management/billing/metric_name_pricing/

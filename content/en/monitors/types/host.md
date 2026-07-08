@@ -29,11 +29,11 @@ Every Datadog Agent reports a service check called `datadog.agent.up` with the s
 
 ## Monitor creation
 
-To create a [host monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Host*.
+To create a [host monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Host{{< /ui >}}.
 
 ### Pick hosts by name or tag
 
-Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+Select the hosts to monitor by choosing host names, tags, or choose {{< ui >}}All Monitored Hosts{{< /ui >}}. If you need to exclude certain hosts, use the second field to list names or tags.
 
 - The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
 - The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
@@ -47,7 +47,7 @@ Select the hosts to monitor by choosing host names, tags, or choose `All Monitor
 
 ### Set alert conditions
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+In this section, choose between a {{< ui >}}Check Alert{{< /ui >}} or {{< ui >}}Cluster Alert{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
@@ -65,7 +65,7 @@ A cluster alert tracks if some percentage of hosts have stopped reporting for a 
 
 To set up a cluster alert:
 
-1. Decide whether or not to group your hosts according to a tag. `Ungrouped` calculates the status percentage across all included hosts. `Grouped` calculates the status percentage on a per group basis.
+1. Decide whether or not to group your hosts according to a tag. {{< ui >}}Ungrouped{{< /ui >}} calculates the status percentage across all included hosts. {{< ui >}}Grouped{{< /ui >}} calculates the status percentage on a per group basis.
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 3. Enter the number of minutes to check for missing data. The default value is 2 minutes.
 
@@ -80,7 +80,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][3] page.
 
 ## Further Reading
 

@@ -49,7 +49,7 @@ To create monitors for alerting at certain thresholds, you can use [Datadog Moni
 
 ### APM monitor
 
-Follow the instructions to create a new [APM monitor][10], with its scope set to **Trace Analytics**.
+Follow the instructions to create a new [APM monitor][10], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
 
 - To monitor evaluation traffic, use the query `@ai_guard.action: (DENY OR ABORT)`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
@@ -63,7 +63,7 @@ Follow the instructions to create a new [metric monitor][11].
 
 ## Evaluate conversations in AI Guard Playground {#playground}
 
-The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
+The [{{< ui >}}AI Guard Playground{{< /ui >}}][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
 Use the Playground to:
 - Experiment with different prompt patterns and see how AI Guard responds.

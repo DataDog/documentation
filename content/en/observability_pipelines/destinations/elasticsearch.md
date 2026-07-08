@@ -34,21 +34,21 @@ After you select the Elasticsearch destination in the pipeline UI:
 1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. (Optional) Enter the Elasticsearch version.
-1. In the **Mode** dropdown menu, select **Bulk** or **Data stream**.
-	- **Bulk** mode
+1. In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select {{< ui >}}Bulk{{< /ui >}} or {{< ui >}}Data stream{{< /ui >}}.
+	- {{< ui >}}Bulk{{< /ui >}} mode
 		- Uses Elasticsearch's [Bulk API][5] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
-		- To configure **Bulk** mode:
-			- (Optional) In the **Index** field, enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
-	- **Data streams** mode
+		- To configure {{< ui >}}Bulk{{< /ui >}} mode:
+			- (Optional) In the {{< ui >}}Index{{< /ui >}} field, enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
+	- {{< ui >}}Data streams{{< /ui >}} mode
 		- Uses [Elasticsearch Data Streams][4] for data storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
 		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensure smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure **Data streams** mode, optionally specify the data stream name and configure routing and syncing settings.
-			1. In the **Type** field, enter the category of data being ingested, for example `logs` or `metrics`.
-			1. In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
-			1. In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
-			1. Enable the **Auto routing** toggle to automatically route events to a data stream based on the event content.
-			1. Enable the **Sync fields** toggle to synchronize data stream fields with the Elasticsearch index mapping.
+		- To configure {{< ui >}}Data streams{{< /ui >}} mode, optionally specify the data stream name and configure routing and syncing settings.
+			1. In the {{< ui >}}Type{{< /ui >}} field, enter the category of data being ingested, for example `logs` or `metrics`.
+			1. In the {{< ui >}}Dataset{{< /ui >}} field, specify the format or data source that describes the structure, for example `apache`.
+			1. In the {{< ui >}}Namespace{{< /ui >}} field, enter the grouping for organizing your data streams, for example `production`.
+			1. Enable the {{< ui >}}Auto routing{{< /ui >}} toggle to automatically route events to a data stream based on the event content.
+			1. Enable the {{< ui >}}Sync fields{{< /ui >}} toggle to synchronize data stream fields with the Elasticsearch index mapping.
 			- In the UI, there is a preview of the data stream name you configured. If the fields are left blank, the default data stream name used is `logs-generic-default` for logs and `metrics-generic-default` for metrics. With the above example inputs, the data stream name that the Worker writes to is:
 				- `logs-apache-production` for logs
 				- `metrics-apache-production` for metrics
@@ -57,7 +57,7 @@ After you select the Elasticsearch destination in the pipeline UI:
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**.
+Toggle the switch to {{< ui >}}Enable TLS{{< /ui >}}.
 - If you are using Secrets Management, enter the identifier for the key pass. See [Secret defaults](#secret-defaults) for the default used if the field is left blank.
 - The following certificate and key files are required for TLS:
   - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
@@ -71,7 +71,7 @@ Toggle the switch to **Enable TLS**.
 
 You might want to use compression if you are sending a high volume of events to your Elasticsearch clusters.
 
-Toggle the switch to enable **Compression**. Select a compression algorithm (**gzip**, **snappy**, **zlib**, **zstd**) in the dropdown menu. The default is no compression.
+Toggle the switch to enable {{< ui >}}Compression{{< /ui >}}. Select a compression algorithm (`gzip`, `snappy`, `zlib`, `zstd`) in the dropdown menu. The default is no compression.
 
 ##### Buffering
 
@@ -79,9 +79,9 @@ Toggle the switch to enable **Compression**. Select a compression algorithm (**g
 
 ##### Advanced options
 
-1. In the **ID Key** field, enter the name of the field used as the document ID in Elasticsearch.
-1. In the **Pipeline** field, enter the name of an Elasticsearch ingest pipeline to apply to events before indexing.
-1. Enable the **Retry partial failures** toggle to retry a failed bulk request when some events in a batch fail while others succeed.
+1. In the {{< ui >}}ID Key{{< /ui >}} field, enter the name of the field used as the document ID in Elasticsearch.
+1. In the {{< ui >}}Pipeline{{< /ui >}} field, enter the name of an Elasticsearch ingest pipeline to apply to events before indexing.
+1. Enable the {{< ui >}}Retry partial failures{{< /ui >}} toggle to retry a failed bulk request when some events in a batch fail while others succeed.
 
 ## Secret defaults
 

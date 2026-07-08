@@ -53,9 +53,9 @@ You can view and manage all automatically created monitors on the [Monitors page
 
 ## Monitor creation
 
-To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
+To create an [APM monitor][2] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}APM{{< /ui >}}.
 
-Choose between an **APM Metrics** or a **Trace Analytics** monitor:
+Choose between an {{< ui >}}APM Metrics{{< /ui >}} or a {{< ui >}}Trace Analytics{{< /ui >}} monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -66,26 +66,26 @@ Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown
 
 ### Set alert conditions
 
-Choose a **Threshold** or **Anomaly** alert:
+Choose a {{< ui >}}Threshold{{< /ui >}} or {{< ui >}}Anomaly{{< /ui >}} alert:
 
 #### Threshold alert
 
 An alert is triggered whenever a metric crosses a threshold.
 
-* Alert when `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
-* is `above`, `above or equal to`, `below`, or `below or equal to`
+* Alert when {{< ui >}}Requests per second{{< /ui >}}, {{< ui >}}Errors per second{{< /ui >}}, {{< ui >}}Apdex{{< /ui >}}, {{< ui >}}Error rate{{< /ui >}}, {{< ui >}}Avg latency{{< /ui >}}, {{< ui >}}p50 latency{{< /ui >}},  {{< ui >}}p75 latency{{< /ui >}},  {{< ui >}}p90 latency{{< /ui >}}, or  {{< ui >}}p99 latency{{< /ui >}}
+* is {{< ui >}}above{{< /ui >}}, {{< ui >}}above or equal to{{< /ui >}}, {{< ui >}}below{{< /ui >}}, or {{< ui >}}below or equal to{{< /ui >}}
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
-* over the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
+* over the last {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, etc. or {{< ui >}}custom{{< /ui >}} to set a value between 1 minute and 48 hours.
 
 #### Anomaly alert
 
 An alert is triggered whenever a metric deviates from an expected pattern.
 
-* For `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
+* For {{< ui >}}Requests per second{{< /ui >}}, {{< ui >}}Errors per second{{< /ui >}}, {{< ui >}}Apdex{{< /ui >}}, {{< ui >}}Error rate{{< /ui >}}, {{< ui >}}Avg latency{{< /ui >}}, {{< ui >}}p50 latency{{< /ui >}},  {{< ui >}}p75 latency{{< /ui >}},  {{< ui >}}p90 latency{{< /ui >}}, or  {{< ui >}}p99 latency{{< /ui >}}
 * Alert when `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`%
-* of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
-* the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
+* of values are `<NUMBER>` deviations {{< ui >}}above or below{{< /ui >}}, {{< ui >}}above{{< /ui >}}, or {{< ui >}}below{{< /ui >}}
+* the prediction during the past {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, etc. or {{< ui >}}custom{{< /ui >}} to set a value between 1 minute and 48 hours.
 
 #### Advanced alert conditions
 
@@ -105,14 +105,14 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 1. Construct a search query using the same logic as a [trace search][1].
 2. Choose to monitor over a trace count, [facet][2], or [measure][3]:
-    * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
-    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}Monitor over a trace count{{< /ui >}}: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
+    * {{< ui >}}Monitor over a facet or measure{{< /ui >}}: If a facet is selected, the monitor alerts over the {{< ui >}}Unique value count{{< /ui >}} of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected ({{< ui >}}min{{< /ui >}}, {{< ui >}}avg{{< /ui >}}, {{< ui >}}sum{{< /ui >}}, {{< ui >}}median{{< /ui >}}, {{< ui >}}pc75{{< /ui >}}, {{< ui >}}pc90{{< /ui >}}, {{< ui >}}pc95{{< /ui >}}, {{< ui >}}pc98{{< /ui >}}, {{< ui >}}pc99{{< /ui >}}, or {{< ui >}}max{{< /ui >}}).
 3. Group traces by multiple dimensions (optional):
     All traces matching the query are aggregated into groups based on the value of up to four facets.
 4. Configure the alerting grouping strategy (optional):
-    * **Simple alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions.</br>
+    * {{< ui >}}Simple alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions.</br>
     If the query has a `group by` and you select simple alert mode, you get **one** alert when one or multiple groups' values breach the threshold. This strategy may be selected to reduce notification noise.
-    * **Multi alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@resource.name` to receive a separate alert for each resource when a span's error rate is high.
+    * {{< ui >}}Multi alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@resource.name` to receive a separate alert for each resource when a span's error rate is high.
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
@@ -120,8 +120,8 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Select alert conditions
 
-* Trigger when the query result is `above`, `above or equal to`, `below`, or `below or equal to`.
-* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 5 minutes and 48 hours.
+* Trigger when the query result is {{< ui >}}above{{< /ui >}}, {{< ui >}}above or equal to{{< /ui >}}, {{< ui >}}below{{< /ui >}}, or {{< ui >}}below or equal to{{< /ui >}}.
+* The threshold during the last {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, or {{< ui >}}custom{{< /ui >}} to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
@@ -145,7 +145,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][3] page.
 
 **Note**: Find service level monitors on the [Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 

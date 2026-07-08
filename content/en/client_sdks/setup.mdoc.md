@@ -56,6 +56,11 @@ The minimum supported version for the React Native SDK is React Native v0.65+. C
 {% partial file="sdk/setup/kotlin-multiplatform.mdoc.md" /%}
 {% /if %}
 
+<!-- C / C++ -->
+{% if equals($platform, "cpp") %}
+{% partial file="sdk/setup/cpp.mdoc.md" /%}
+{% /if %}
+
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
 {% partial file="sdk/setup/maui.mdoc.md" /%}

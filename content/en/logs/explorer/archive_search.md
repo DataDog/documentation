@@ -59,7 +59,7 @@ Before using Archive Search:
 
 ### Permissions
 
-Running an **Archive Search** requires the **`logs_write_historical_views`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
+Running an **Archive Search** requires the **`logs_write_historical_view`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
 
 Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
 
@@ -125,8 +125,8 @@ Archive Search scans archived log files within your selected time range. **Scan 
 To optimize performance and reduce costs:
 * **Narrow the time range:** Limit your search to the smallest window possible.
 * **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the {{< ui >}}Settings{{< /ui >}}.
-* **Use Partition Attributes (Preview):** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query.
-* **Use Lookup Attributes (Preview):** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`.
+* **Use Partition Attributes:** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query. Up to 2 per archive.
+* **Use Lookup Attributes:** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`. Up to 2 per archive.
 * **Use zstd compression:** Archives use zstd compression by default, which reduces scan volume and cloud egress costs compared to gzip. If your archive uses gzip, see [Log Archives][9] to switch to zstd.
 
 **Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
@@ -234,6 +234,6 @@ In order to search log events from your archives, Datadog uses a service account
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
-[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
-[8]: /logs/log_configuration/archives/?tab=awss3#archive-search-partition-attribute
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-lookup-attribute
+[8]: /logs/log_configuration/archives/?tab=awss3#archive-partition-attribute
 [9]: /logs/log_configuration/archives/?tab=awss3#compression

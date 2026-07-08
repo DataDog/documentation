@@ -15,7 +15,7 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-Once you have set up your feature flag data collection, navigate to the [**Feature Flag Tracking**][1] tab within RUM.
+Once you have set up your feature flag data collection, navigate to the [{{< ui >}}Feature Flag Tracking{{< /ui >}}][1] tab within RUM.
 
 From this view, you can investigate any questions you have about your feature flag's health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag.
@@ -51,11 +51,11 @@ These out-of-the-box graphs are aggregated across your flag variants, making it 
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-details-page.mp4" alt="Feature Flag details page - Users overview" video=true width=90% >}}
 
-- The **Users** tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][2] for each case.
+- The {{< ui >}}Users{{< /ui >}} tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][2] for each case.
 
-- The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. Check if any issues detected by [Error Tracking][3] occurred for a specific variant of your feature flag and might be related to your changes.
+- The {{< ui >}}Issues{{< /ui >}} tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. Check if any issues detected by [Error Tracking][3] occurred for a specific variant of your feature flag and might be related to your changes.
 
-- The **Performance** tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
+- The {{< ui >}}Performance{{< /ui >}} tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
 
 ## Build custom views from Feature Flag data using the RUM Explorer
 Search through all the data collected by RUM in the [RUM Explorer][4] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][5] and [monitors][6]. 

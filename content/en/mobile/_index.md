@@ -54,17 +54,17 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### QR code
 
-1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click **Log in to Mobile App** for the organization you are currently logged into. This pops up a QR code.
+1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click {{< ui >}}Log in to Mobile App{{< /ui >}} for the organization you are currently logged into. This pops up a QR code.
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
 
-**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
+**Note**: If you click the {{< ui >}}Log in to Mobile App{{< /ui >}} button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
 
 ##### Manual entry
 
-1. To manually enter the SAML ID, open the Datadog Mobile app and press the "Using Single Sign-On (SAML)?" button.
-2. Press the "Use another method to login" button, and enter the SAML ID manually.
+1. To manually enter the SAML ID, open the Datadog Mobile app and press the {{< ui >}}Using Single Sign-On (SAML)?{{< /ui >}} button.
+2. Press the {{< ui >}}Use another method to login{{< /ui >}} button, and enter the SAML ID manually.
 
-By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
+By clicking {{< ui >}}Authorize{{< /ui >}} when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
 ##### SAML IdP initiated login
 
@@ -77,12 +77,12 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ### Switch organizations
 
-To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**.
+To switch organizations, navigate to the {{< ui >}}Settings{{< /ui >}} page on the mobile app and click on {{< ui >}}Organization{{< /ui >}}.
 
 **Note**: You may need to reauthenticate when you switch organizations.
 
 ### Log out
-To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure.
+To log out, navigate to the {{< ui >}}Settings{{< /ui >}} page on the mobile app and click on {{< ui >}}Log Out{{< /ui >}}. Confirm {{< ui >}}Yes{{< /ui >}} that you are sure.
 
 ## On-Call
 {{< tabs >}}
@@ -98,7 +98,7 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 {{% /tab %}}
 {{< /tabs >}}
 
-The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
+The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping {{< ui >}}Escalate{{< /ui >}} prompts you to confirm the escalation to the next policy level. Tapping {{< ui >}}Declare Incident{{< /ui >}} prompts you to enter a title and provide relevant incident attributes.
 
 You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits Investigation monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
@@ -127,8 +127,8 @@ On the Incidents page, you can view, search, and filter all incidents that you h
 
 ### Create an incident
 
-1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
-2. Tap the **+** button in the top right corner.
+1. Navigate to the incident list by tapping on the {{< ui >}}Incidents{{< /ui >}} tab in the bottom bar.
+2. Tap the {{< ui >}}+{{< /ui >}} button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
 ## Notification Center
@@ -361,5 +361,5 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
 [27]: /bits_ai/bits_chat/
-[28]: /bits_ai/bits_ai_sre/
+[28]: /bits_ai/bits_investigation/
 [29]: /account_management/multi_organization/#custom-sub-domains

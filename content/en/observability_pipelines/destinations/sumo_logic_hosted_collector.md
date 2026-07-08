@@ -25,11 +25,11 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 
 ### Optional settings
 
-1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
-1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
-1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
-1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
-1. Click **Add Header** to add any custom header fields and values.
+1. In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
+1. Enter a {{< ui >}}source name{{< /ui >}} to override the default `name` value configured for your Sumo Logic collector's source.
+1. Enter a {{< ui >}}host name{{< /ui >}} to override the default `host` value configured for your Sumo Logic collector's source.
+1. Enter a {{< ui >}}category name{{< /ui >}} to override the default `category` value configured for your Sumo Logic collector's source.
+1. Click {{< ui >}}Add Header{{< /ui >}} to add any custom header fields and values.
 
 #### Buffering options
 

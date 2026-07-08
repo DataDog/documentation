@@ -45,6 +45,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
   {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/flutter/" src="integrations_logos/flutter_large.svg" alt="Dart and Flutter" >}}
   {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
   {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
   {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
@@ -142,7 +143,8 @@ tracer.init({
   }
 });
 
-OpenFeature.setProvider(tracer.openfeature);
+// Wait for the provider to initialize before evaluating flags.
+await OpenFeature.setProviderAndWait(tracer.openfeature);
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -369,6 +371,8 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
+For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -381,3 +385,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [6]: /feature_flags/concepts/distribution_channels/
 [7]: /feature_flags/concepts/targeting_rules/
 [8]: /feature_flags/concepts/traffic_splitting/
+[9]: /feature_flags/guide/server_flag_evaluation_metrics/
