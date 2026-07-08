@@ -140,6 +140,12 @@
   box-sizing: border-box;
 }
 
+.footer__cta-primary:hover {
+  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-cta-primary-bg-hover);
+  border-color: var(--hugo-footer-cta-primary-border-hover);
+}
+
 .footer__cta-primary:lang(ja),
 .footer__cta-primary:lang(ko) {
   font-size: 16px;
@@ -407,8 +413,9 @@
 }
 
 .footer__cta-outline:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--hugo-footer-text-strong);
+  background: var(--hugo-footer-text-strong);
+  border-color: var(--hugo-footer-text-strong);
+  color: var(--color-brand);
 }
 
 @media (min-width: 768px) {

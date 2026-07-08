@@ -95,6 +95,8 @@
   --hugo-footer-popup-secondary: #c7c7c7;
   --hugo-footer-cta-primary-bg: #632ca6;
   --hugo-footer-cta-primary-border: #632ca6;
+  --hugo-footer-cta-primary-bg-hover: #4b217e;
+  --hugo-footer-cta-primary-border-hover: #461f76;
 
   /* Hugo breadcrumbs */
   --hugo-breadcrumb-font-size: 16px;
