@@ -22,7 +22,7 @@ This guide discusses the various authentication protocols available for Syntheti
 
 ## Authentication methods
 
-If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates. 
+If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, JWT, and client certificates. 
 
 In the {{< ui >}}Define the request{{< /ui >}} section, click {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Authentication{{< /ui >}} and select an authentication method: 
 
@@ -70,6 +70,13 @@ Click {{< ui >}}OAuth 2.0{{< /ui >}}, select a grant type ({{< ui >}}Client Cred
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
 
+{{% /tab %}}
+{{% tab "JWT" %}}
+
+Click {{< ui >}}JWT{{< /ui >}} to generate a signed JWT Bearer Token for authentication. Select a signing algorithm ({{< ui >}}HS256{{< /ui >}}, {{< ui >}}RS256{{< /ui >}}, or {{< ui >}}ES256{{< /ui >}}), provide a signing key, and enter payload claims as JSON. JWT authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "Client Certificate" %}}
 
