@@ -73,7 +73,13 @@ Click {{< ui >}}OAuth 2.0{{< /ui >}}, select a grant type ({{< ui >}}Client Cred
 {{% /tab %}}
 {{% tab "JWT" %}}
 
-Click {{< ui >}}JWT{{< /ui >}} to generate a signed JWT Bearer Token for authentication. Select a signing algorithm ({{< ui >}}HS256{{< /ui >}}, {{< ui >}}RS256{{< /ui >}}, or {{< ui >}}ES256{{< /ui >}}), provide a signing key, and enter payload claims as JSON. JWT authentication is supported in [HTTP tests][1] and [multistep API tests][2].
+Click {{< ui >}}JWT{{< /ui >}} to generate a signed JWT Bearer Token for authentication:
+
+1. Select a signing algorithm ({{< ui >}}HS256{{< /ui >}}, {{< ui >}}RS256{{< /ui >}}, or {{< ui >}}ES256{{< /ui >}}).
+2. Provide a signing key.
+3. Enter payload claims as JSON.
+
+JWT authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
 [1]: /synthetics/api_tests/http_tests/
 [2]: /synthetics/multistep/
