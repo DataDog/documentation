@@ -417,7 +417,9 @@ If the browser application being tested is instrumented using [Browser Monitorin
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-Use a Node.js version supported by your `dd-trace` major version. `dd-trace` v5 requires Node.js 18.19 or later, or Node.js 20.6 or later, for Vitest instrumentation. `dd-trace` v6 requires Node.js 22 or later.
+Use a Node.js version supported by your `dd-trace` major version for Vitest instrumentation:
+- `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
+- `dd-trace` v6 requires Node.js 22 or later.
 
 Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
