@@ -133,6 +133,8 @@ In the dialog:
 
 The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}}][2].
 
+<div class="alert alert-info">Playground experiments process up to 10,000 dataset records per run. If your dataset exceeds this limit, only the first 10,000 records are processed.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
