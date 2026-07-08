@@ -111,17 +111,23 @@ Code coverage backfilling keeps coverage totals accurate by adjusting total repo
 
 ### Java
 
-With `dd-trace-java`, no extra configuration is required. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-java`, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
 
 ### .NET
 
-With the .NET tracer, no extra configuration is required. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+With the .NET tracer, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+
+### Go
+
+With the Go library, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
 
 ### JavaScript
 
 JavaScript requires code coverage report upload for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
 
-This is different from Java and .NET, where the Datadog library automatically detects an existing code coverage engine.
+This is different from Java, .NET, and Go, where the Datadog library automatically detects an existing code coverage engine.
+
+Code coverage backfilling is not supported for Ruby, Python, or Swift.
 
 ## Explore test sessions
 
