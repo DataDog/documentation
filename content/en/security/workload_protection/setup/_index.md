@@ -53,8 +53,8 @@ Workload Protection supports the following Linux distributions:
 **Notes:**
 
 - Custom kernel builds are not supported.
-- The [Workload Protection eBPF-less solution for eBPF disabled environments][8] uses a ptrace-based Datadog Agent. The ptrace-based Datadog Agent supports Linux kernel versions from 3.4.43 to 4.9.85.
-- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][9].
+- The [Workload Protection eBPF-less solution for eBPF disabled environments][13] uses a ptrace-based Datadog Agent. The ptrace-based Datadog Agent supports Linux kernel versions from 3.4.43 to 4.9.85.
+- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][14].
 - Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 
 
@@ -82,5 +82,5 @@ The Datadog Agent has several [environment variables][7] that can be enabled for
 [10]: /security/workload_protection/setup/agent/ecs_ec2
 [11]: /security/workload_protection/setup/agent/windows
 [12]: /security/workload_protection/setup/agent/linux
-[8]: /security/workload_protection/guide/ebpf-free-agent
-[9]: /security/workload_protection/troubleshooting/threats
+[13]: /security/workload_protection/getting_started/linux_ebpfless
+[14]: /security/workload_protection/troubleshooting/threats
