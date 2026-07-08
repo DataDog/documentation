@@ -13,7 +13,8 @@
     "test:browser": "USE_DEV_SERVER=true playwright test",
     "test-ai": "npm run test:headless-ai && npm run test:browser-ai",
     "test:headless-ai": "vitest run --reporter=dot --silent=true",
-    "test:browser-ai": "USE_DEV_SERVER=true playwright test --reporter=dot"
+    "test:browser-ai": "USE_DEV_SERVER=true playwright test --reporter=dot",
+    "kill-dev": "lsof -ti :4321 | xargs kill -9 2>/dev/null || true"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

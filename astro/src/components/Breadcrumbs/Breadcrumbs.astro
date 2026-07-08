@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { crumbs } = Astro.props;
+const hasTrailing = Astro.slots.has("trailing");
 ---
 
 <nav aria-label="Breadcrumb" class={cl("breadcrumbs")}>
@@ -36,6 +37,11 @@ const { crumbs } = Astro.props;
                 aria-current={isLast ? "page" : undefined}
               >
                 {crumb.label}
+              </span>
+            )}
+            {isLast && hasTrailing && (
+              <span class={cl("breadcrumbs__trailing")}>
+                <slot name="trailing" />
               </span>
             )}
           </li>

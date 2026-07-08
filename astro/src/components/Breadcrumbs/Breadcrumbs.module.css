@@ -35,3 +35,15 @@
 .breadcrumbs__label--current {
   color: var(--color-brand);
 }
+
+/* Wrapper for the optional trailing control (e.g. the icon copy button). It
+   carries no horizontal spacing of its own: the slotted control may be
+   `display: none` until activated, and a margin here would reserve a gap after
+   the last crumb even while nothing is shown. The control supplies its own
+   left margin when visible. */
+.breadcrumbs__trailing {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  top: 3px;
+}

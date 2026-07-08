@@ -48,8 +48,11 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     <main class="api-main">
       <div class="api-toolbar">
         <div class="api-toolbar__left">
-          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
-          <CopyPageButtonIsland lang={currentLang} variant="icon" />
+          {breadcrumbs && (
+            <Breadcrumbs crumbs={breadcrumbs}>
+              <CopyPageButtonIsland slot="trailing" lang={currentLang} variant="icon" />
+            </Breadcrumbs>
+          )}
         </div>
         <div class="api-toolbar__selectors">
           <LanguageSelectorIsland

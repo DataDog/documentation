@@ -61,6 +61,28 @@ test.describe('CopyPageButton component', () => {
     });
 });
 
+test.describe('CopyPageButton responsive collapse', () => {
+    // Mirrors Hugo's API copy button: below the xl breakpoint (1200px) the
+    // text label collapses, leaving an icon-only button.
+    test('shows the text label on wide viewports', async ({ page }) => {
+        await page.setViewportSize({ width: 1440, height: 900 });
+        await page.goto('/api/latest/');
+        const btn = page.locator(MAIN);
+        await expect(btn).toBeVisible();
+        await expect(btn.locator('.copy-page-button__label')).toBeVisible();
+        await expect(btn.locator('.copy-page-button__icon')).toBeVisible();
+    });
+
+    test('hides the text label but keeps the icon below the xl breakpoint', async ({ page }) => {
+        await page.setViewportSize({ width: 1000, height: 900 });
+        await page.goto('/api/latest/');
+        const btn = page.locator(MAIN);
+        await expect(btn).toBeVisible();
+        await expect(btn.locator('.copy-page-button__icon')).toBeVisible();
+        await expect(btn.locator('.copy-page-button__label')).toBeHidden();
+    });
+});
+
 test.describe('CopyPageButton (icon variant in toolbar)', () => {
     test('is hidden while the page is scrolled to the top', async ({ page }) => {
         await page.goto('/api/latest/metrics/edit-metric-metadata/');
