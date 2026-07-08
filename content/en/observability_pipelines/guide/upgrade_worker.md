@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.17.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.18.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,40 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.18.0
+
+To upgrade to Worker version 2.18.0:
+
+- Docker: Run the `docker pull` command for the [2.18.0 image][48].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.18.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.18.0`.
+
+Worker version 2.18.0 gives you access to the following:
+
+#### New features
+
+- A `--log-format` flag has been added to the `run` command, also configurable using the `DD_OP_LOG_FORMAT` environment variable, for selecting the format of the Worker's own stdout/stderr logs. The default `text` preserves the existing human-readable output, and `json` emits structured JSON logs that can be tailed and parsed directly without additional parsing rules.
+- A `tracking_mode` option has been added to the Tag Cardinality Limit processor. `exact_fingerprint` tracks tag values exactly using 64-bit fingerprints, which uses less memory than the previous method of storing raw values, and `probabilistic` uses a bloom filter for even lower memory usage in exchange for an occasional false positive. Probabilistic mode accepts a `false_positive_rate` field, which defaults to `0.001` (0.1%).
+- The WebSocket source is available for ingesting logs from a WebSocket endpoint, with support for `none`, `basic`, `bearer`, and `custom` authentication strategies, as well as TLS.
+- Added support for the sample processor in traces pipelines.
+- A new `generate_metrics` processor has been added that can route metrics to any supported metrics destination. Datadog recommends using it over the existing `generate_datadog_metrics` processor, although use of the latter is not affected.
+
+#### Enhancements
+
+- mTLS support has been added to the BYOC Logs destination.
+- The `measure_cpu_usage` option is now enabled, so that `pipelines.component_cpu_usage_ns_total` is always emitted for the following log processors: Custom Processor, Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle; and the following metrics processors: Aggregate and Tag Cardinality Limit.
+- Pipeline configuration errors now include the ID of the component that caused the failure, making it easier to identify which source, processor, or destination needs to be corrected. For processors made up of multiple blocks, such as the Custom Processor, Generate Metrics, and OCSF Mapper, the error also identifies which individual block failed, including its position and, where the block has one, its name.
+- Pipeline metrics are now tagged with the pipeline name using `pipeline_name:<normalized pipeline name>`.
+
+#### Fixes
+
+- Fixed an issue that occurred when a log-only pipeline (using legacy search syntax) ran a search query that the new parser could not handle. The parser now emits a warning and does not run the invalid query.
+- Fixed an issue affecting queries that start with an escaped character (for pipelines running new search syntax only). 
+- Internal telemetry (metrics and logs) emitted from background tasks now correctly inherits the owning component's tags (`component_id`, `component_kind`, `component_type`). Previously, several components spawned background tasks without propagating their tags, so some internal events from those tasks were missing their component tags. Affected emissions include the `datadog_archives` source's listing-error, download-error, send-error, event-acknowledged/errored/rejected, and status metrics from its listing coordinator, per-file downloader, and acknowledgement-handler tasks; the `microsoft_sentinel` destination's Azure OAuth token-regeneration task; and the `splunk_tcp` source's server task.
+
+---
 
 ## Worker version 2.17.0
 
@@ -591,3 +625,4 @@ Worker version 2.7.0 gives you access to the following:
 [45]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.16.1
 [46]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.17.0
 [47]: /observability_pipelines/destinations/databricks/
+[48]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.18.0
