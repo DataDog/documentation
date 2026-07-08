@@ -170,6 +170,8 @@ If you need configuration options not exposed through the `DatadogAgent` spec (f
 
 {{% /collapse-content %}}
 
+#### Upgrade and migration notes
+
 <div class="alert alert-warning">
 <strong>Upgrading the Datadog Operator to v1.28.0+ from v1.26.0 or v1.27.0</strong>
 <p>If you previously ran <code>v1.26.0</code> or <code>v1.27.0</code>, upgrading to Datadog Operator <code>v1.28.0</code> or later can leave the built-in Kubernetes <code>CSIDriver</code> object (not the <code>DatadogCSIDriver</code> custom resource) in a state that the Operator cannot reconcile. Remediate this issue by deleting the object:</p>
