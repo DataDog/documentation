@@ -408,7 +408,7 @@ When enabled, Test Optimization uploads screenshots that Cypress captures when a
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` environment variable. In your Cypress configuration, set [`screenshotOnRunFailure`][8] to `true`.
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][8] is set to `true` (the default).
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
