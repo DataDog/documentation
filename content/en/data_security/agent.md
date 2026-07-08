@@ -201,6 +201,8 @@ agent diagnose show-metadata agent-telemetry
 | agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
+| autodiscovery.discovery_queue_depth         | Number of services actively in the Agent's integration discovery workqueue                                             |
+| autodiscovery.discovery_results             | Result of Agent's integration discovery mechanism for candidate services                                               |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | **APM**                                     |                                                                                                                        |
