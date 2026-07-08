@@ -109,6 +109,8 @@ If you use [Code Coverage][10] and Test Impact Analysis together, reported overa
 
 Code coverage backfilling adjusts the total reported coverage to include tests or suites that were skipped, so Test Impact Analysis savings do not distort coverage totals.
 
+Code coverage backfilling is supported for Java, .NET, Go, and JavaScript. It is not supported for Ruby, Python, or Swift.
+
 ### Java, .NET, and Go
 
 With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
@@ -116,10 +118,6 @@ With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configurati
 ### JavaScript
 
 With `dd-trace-js`, backfilling requires uploading the code coverage report. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts the total reported coverage to include skipped tests or suites.
-
-### Unsupported languages
-
-Code coverage backfilling is not supported for Ruby, Python, or Swift.
 
 ## Explore test sessions
 
