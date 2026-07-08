@@ -57,7 +57,6 @@ Configuring custom logs on Agents in containerized workloads is not supported.
 Each operation applies changes to custom log collection on an Agent differently:
 
 - {{< ui >}}Add New{{< /ui >}}: Deploys a new configuration file.
-<!-- what happens if there's an existing config file? is it additive? -->
 
 - {{< ui >}}Edit & Replace{{< /ui >}}: Replaces the entire configuration file. Include all desired values in your update. Any values you omit are removed.
 
