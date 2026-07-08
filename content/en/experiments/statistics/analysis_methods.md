@@ -1,6 +1,9 @@
 ---
 title: Analysis Methods
 description: Choose how Datadog calculates lift estimates and confidence intervals for experiment results.
+aliases:
+  - /experiments/analysis_methods
+  - /experiments/analysis_methods/
 further_reading:
 - link: "/experiments/plan_and_launch_experiments"
   tag: "Documentation"
@@ -8,7 +11,7 @@ further_reading:
 - link: "/experiments/reading_results"
   tag: "Documentation"
   text: "Reading Experiment Results"
-- link: "/experiments/minimum_detectable_effect"
+- link: "/experiments/statistics/minimum_detectable_effect"
   tag: "Documentation"
   text: "Minimum Detectable Effects"
 ---
@@ -84,4 +87,4 @@ Confidence level
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/plan_and_launch_experiments/#choose-a-statistical-analysis-plan
-[2]: /experiments/minimum_detectable_effect
+[2]: /experiments/statistics/minimum_detectable_effect

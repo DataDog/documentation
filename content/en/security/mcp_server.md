@@ -8,6 +8,9 @@ further_reading:
 - link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server Overview"
+- link: "security/cloud_siem/triage_and_investigate/ioc_explorer/"
+  tag: "Documentation"
+  text: "IoC Explorer"
 - link: "security/threats/security_signals/"
   tag: "Documentation"
   text: "Security Signals"
@@ -21,7 +24,7 @@ further_reading:
   tag: "Documentation"
   text: "Suppressions"
 algolia:
-  tags: ["mcp", "mcp server", "security", "security signals", "security findings", "detection rules", "suppressions"]
+  tags: ["mcp", "mcp server", "security", "security signals", "security findings", "detection rules", "suppressions", "ioc", "ioc explorer", "indicators of compromise"]
 ---
 
 ## Overview
@@ -44,6 +47,7 @@ You can use the `security` toolset to:
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
 - **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist, and suppress false positives with passlist exclusion filters.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
+- **Investigate indicators of compromise (IoCs)**: Search and retrieve IP addresses, domains, URLs, and file hashes matched against threat intelligence feeds. Review individual indicators and update their triage state.
 
 ## Quickstart
 
@@ -81,6 +85,24 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 `update_datadog_security_signals_triage`
 : Updates the triage state or assignee of one or more security signals in bulk (up to 500 signals). Accepts either a list of signal IDs or a filter query matching all signals to update.
+: *Permissions required: `Security Signals Write`*
+
+### IoC Explorer
+
+`search_datadog_security_ioc_indicators`
+: Lists [IoC Explorer][5] indicators (IP addresses, domains, URLs, and file hashes) matched against threat intelligence feeds. Use this to surface and investigate indicators of compromise in your environment.
+: *Permissions required: `Security Signals Read`*
+
+`get_datadog_security_ioc_indicator`
+: Retrieves full details for a single [IoC Explorer][5] indicator by value, including score, category, Autonomous System (AS) information, GeoIP data, log sources, and signal counts.
+: *Permissions required: `Security Signals Read`*
+
+`get_datadog_security_ioc_schema`
+: Returns available filterable fields and their values for [IoC Explorer][5]. Omit `filter` to list available fields; supply `filter` to get values with counts. Use `query` to scope results to a subset of indicators.
+: *Permissions required: `Security Signals Read`*
+
+`update_datadog_security_ioc_indicator_triage`
+: Sets the triage state of an [IoC Explorer][5] indicator to mark it as reviewed or not reviewed.
 : *Permissions required: `Security Signals Write`*
 
 ### Security Findings
@@ -191,3 +213,4 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 [2]: https://modelcontextprotocol.io/
 [3]: /getting_started/site/
 [4]: /mcp_server/setup/
+[5]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
