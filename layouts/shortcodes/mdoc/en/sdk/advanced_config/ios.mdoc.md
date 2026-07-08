@@ -689,7 +689,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints—see below.
+- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 {% alert level="info" %}
