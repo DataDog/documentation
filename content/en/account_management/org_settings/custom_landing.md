@@ -24,7 +24,7 @@ To set a custom landing page, follow the steps below:
 
 ## Use the default landing page
 
-To restore the default landing page, follow the steps below:
+To restore the default landing page:
 
 1. Navigate to [Organization settings][1].
 2. From the tabs on the left, select [**Preferences**][2].
