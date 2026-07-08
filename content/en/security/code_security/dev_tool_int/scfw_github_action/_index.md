@@ -7,14 +7,14 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/articles/introducing-supply-chain-firewall/"
   tag: "Blog"
   text: "Introducing Supply-Chain Firewall: Protecting Developers from Malicious Open Source Packages"
-- link: "/scfw_github_action"
+- link: "/security/code_security/#supply-chain-security-preview"
   tag: "Documentation"
-  text: "Datadog's GitHub Action for Supply Chain Firewall"
+  text: "Supply Chain Security"
 ---
 
-The Supply Chain Firewall GitHub Action installs Datadog's [Supply Chain Firewall](https://github.com/DataDog/supply-chain-firewall) (SCFW) and configures it to transparently intercept supported package manager commands for all subsequent steps in a workflow.  When active, any command for a supported package manager is inspected with SCFW before being allowed to run.
+The Supply Chain Firewall GitHub Action installs Datadog's [Supply Chain Firewall](https://github.com/DataDog/supply-chain-firewall) (SCFW) and configures it to transparently intercept supported package manager commands for all subsequent steps in a workflow. When active, any command for a supported package manager is inspected with SCFW before being allowed to run.
 
-This action currently supports Linux and macOS runners. Windows runners are not supported, as SCFW itself is not currently supported on Windows.
+This action supports Linux and macOS runners. Windows runners are not supported, as SCFW itself does not support Windows.
 
 ## Usage
 
@@ -68,23 +68,23 @@ steps:
 
 ## How it works
 
-1. **Install**: The Supply Chain Firewall CLI is installed via `pipx` into an isolated Python environment so it does not interfere with the project's own dependencies.
+1. **Install**: The Supply Chain Firewall CLI is installed with `pipx` into an isolated Python environment so it does not interfere with the project's own dependencies.
 
 2. **Wrap**: For each requested package manager, the action writes a thin wrapper script into a temporary directory and prepends that directory to `PATH`. All subsequent steps that invoke those package managers automatically go through Supply Chain Firewall.
 
-   Each wrapper resolves the real binary at call time by removing its own directory from `PATH` before searching, then passes the resolved path to `scfw run --executable`. This ensures Supply Chain Firewall always calls the real binary and never re-invokes the wrapper.
+   Each wrapper resolves the real binary at call time by removing its own directory from `PATH` before searching, then passes the resolved path to `scfw run --executable`. This helps ensure Supply Chain Firewall always calls the real binary and never re-invokes the wrapper.
 
    > :warning: Activating a Python virtual environment (e.g., `source .venv/bin/activate`) shadows the Supply Chain Firewall wrappers for the remainder of that step. Use `scfw run pip install ...` explicitly for any commands run inside virtual environments.
 
 3. **Configure**: Relevant environment variables (`DD_API_KEY`, `SCFW_HOME`, etc.) are written to `GITHUB_ENV` so they are available to all subsequent steps.
 
-   > :warning: Environment variables written to `GITHUB_ENV` are accessible to all subsequent steps in the job, including any third-party actions that run after this one. If you supply `dd-api-key` or `dd-app-key`, audit the actions that follow in your workflow to ensure none are untrusted or compromised.
+   > :warning: Environment variables written to `GITHUB_ENV` are accessible to all subsequent steps in the job, including any third-party actions that run after this one. If you supply `dd-api-key` or `dd-app-key`, audit the actions that follow in your workflow for suspicious behavior or signs of compromise.
 
 ## Inputs
 
 | Input | Description | Default |
 |-------|-------------|---------|
-| `version` | The version of SCFW to install. Use `"latest"` or pin to a specific release (e.g., `"0.7.0"`). | `latest` |
+| `version` | The version of SCFW to install. Use `"latest"` or pin to a specific release (e.g., `"3.1.0"`). | `latest` |
 | `package-managers` | Comma-separated list of package managers to intercept. Supported: `npm`, `pip`, `poetry`. | `npm,pip,poetry` |
 | `error-on-block` | Exit with a non-zero code when an installation is blocked, failing the workflow step. | `true` |
 | `dd-api-key` | Datadog API key for forwarding firewall events to the Datadog HTTP or Code Security API. Use `${{ secrets.DD_API_KEY }}`. | — |
