@@ -142,7 +142,7 @@ DD_NO_PROXY_NONEXACT_MATCH=true
 The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
 * A domain name matches that name and all subdomains, for example:
   - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
-  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
+  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` or `www.datadoghq.eu`
 * A domain name with a leading "." matches subdomains only, for example:
   - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
 * A CIDR range matches an IP address within the subnet, for example:
