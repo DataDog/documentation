@@ -9897,11 +9897,16 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 3
+    - name: Experiment Diagnostics
+      url: experiments/diagnostics
+      parent: pa_experiments
+      identifier: pa_experiments_diagnostics
+      weight: 4
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 4
+      weight: 5
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -9921,7 +9926,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 5
+      weight: 6
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics

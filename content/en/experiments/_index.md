@@ -29,6 +29,7 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
 | [Analyze an experiment that's already been randomized][17] | Define exposure data in your warehouse when randomization runs outside Datadog Feature Flags |
+| [Understand experiment diagnostics][20] | Interpret automated checks for exposures, metrics, randomization, and analysis health |
 
 ## Randomization
 
@@ -90,3 +91,4 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [17]: /experiments/concepts/exposure_sql/
 [18]: /experiments/concepts/subject_types/
 [19]: /experiments/statistics/global_lift
+[20]: /experiments/diagnostics/
