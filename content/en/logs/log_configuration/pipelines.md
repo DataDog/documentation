@@ -54,18 +54,6 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 **Note**: For optimal use of the Log Management solution, Datadog recommends using at most **20 processors per pipeline** and **10 parsing rules** within a [Grok processor][6]. Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-## Attribute precedence when multiple processors match {#attribute-precedence}
-
-As described above, each log is tested against every pipeline filter. When a log matches a filter, all the processors are applied sequentially before moving to the next pipeline. As a result, when the same attribute is set by more than one processor, the outcome depends on the processor type. There are three behaviors:
-
-| Behavior | Description | Processors |
-| --- | --- | --- |
-| Last write wins | The value set by the later processor (further down the order) overrides the earlier value. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
-| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array processor |
-| First write wins | Only the first one (according to the pipeline's order) is taken into account; and for all pipelines that match the log, only the first one encountered is applied. The log date remapper is the exception: the last one (according to the pipeline's order) is taken into account. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
-
-For details on each processor, see [Processors](/logs/log_configuration/processors/).
-
 ## Pipeline permissions
 
 Pipelines use [Granular Access Control][7] to manage who can edit pipeline and processor configurations. This means permissions can be assigned to **roles**, **individual users**, and **teams**, ensuring precise control over pipeline resources. Pipelines without any restrictions are considered unrestricted, meaning any user with the `logs_write_pipelines` permission can modify the pipeline and its processors.
@@ -297,6 +285,18 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 1. Hover over the pipeline you want to move, and click on the {{< ui >}}Move to{{< /ui >}} icon.
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
 1. Click {{< ui >}}Move{{< /ui >}}.
+
+## Attribute precedence when multiple processors match {#attribute-precedence}
+
+When multiple processors within matching pipelines set the same attribute, the outcome depends on the processor type. There are three behaviors:
+
+| Behavior | Description | Processors |
+| --- | --- | --- |
+| Last write wins | The value set by the later processor (further down the order) overrides the earlier value. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
+| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array processor |
+| First write wins | Only the first processor is applied (except Log date remapper, which uses the last one). Within a single pipeline, the first processor's value is used; across multiple matching pipelines, the first one encountered applies. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
+
+For details on each processor, see [Processors][3].
 
 ## Manage your pipelines
 
