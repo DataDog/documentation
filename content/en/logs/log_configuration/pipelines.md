@@ -56,7 +56,7 @@ Pipelines and processors can be applied to any type of log. You don't need to ch
 
 ## Attribute precedence when multiple processors match {#attribute-precedence}
 
-As described above, each log is tested against every pipeline filter, and when it matches, all the processors are applied sequentially before moving to the next pipeline. As a result, when the same attribute is set by more than one processor, the outcome depends on the processor type. There are three behaviors:
+As described above, each log is tested against every pipeline filter. When a log matches a filter, all the processors are applied sequentially before moving to the next pipeline. As a result, when the same attribute is set by more than one processor, the outcome depends on the processor type. There are three behaviors:
 
 | Behavior | Description | Processors |
 | --- | --- | --- |
