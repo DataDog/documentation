@@ -57,36 +57,130 @@ Manage Live Debugger for each service and environment from the Live Debugger {{<
 - {{< ui >}}Enabled{{< /ui >}}: Live Debugger is ready to use on this service in this environment, with faster setup and a better debugging experience.
 - {{< ui >}}Disabled{{< /ui >}}: This service is explicitly disabled and is not enabled automatically.
 
-### Minimum tracer versions
+### Configure Live Debugger
 
-Live Debugger requires the following minimum tracer versions:
+Select your language to set up Live Debugger:
 
-- [Python][5] ≥ 4.11.0
-- [Java][6] ≥ 1.64.0
-- [.NET][7] ≥ 3.46.0
-- [Ruby][9] ≥ 2.35.0
-- [Node.js][8] ≥ 5.109.0
-- [PHP][10] ≥ 1.21.0
-- [Go][22] ≥ 2.9.0
+{{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
-Older tracer versions might require enabling Live Debugger through an environment variable. Follow the setup instructions for your language:
+{{< programming-lang lang="java" >}}
 
-{{< card-grid >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
-  {{< image-card href="/dynamic_instrumentation/enabling/go" src="integrations_logos/go-metro.png" alt="Go" >}}
-{{< /card-grid >}}
+1. Install the [Java tracer](/tracing/trace_collection/dd_libraries/java/), version 1.64.0 or higher.
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set. The `-javaagent` flag must come before `-jar`:
+   ```shell
+   java \
+       -javaagent:dd-java-agent.jar \
+       -Ddd.service=<YOUR_SERVICE> \
+       -Ddd.env=<YOUR_ENV> \
+       -Ddd.version=<YOUR_VERSION> \
+       -Ddd.dynamic.instrumentation.enabled=true \
+       -jar <YOUR_SERVICE>.jar
+   ```
 
-<div class="alert alert-info">
-<b>Why DI instructions?</b>
-Live Debugger is built on <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a>, so its
-setup instructions and limitations also apply here.
-</div>
+**Note**: On JDK 18 and below, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument.
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+1. Install the [Python tracer](/tracing/trace_collection/dd_libraries/python/), version 4.11.0 or higher:
+   ```shell
+   pip install ddtrace
+   ```
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ddtrace-run python -m myapp.py
+   ```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+1. Install the .NET tracer, version 3.46.0 or higher (see the installation instructions for [.NET Framework](/tracing/trace_collection/dd_libraries/dotnet-framework/) or [.NET Core](/tracing/trace_collection/dd_libraries/dotnet-core/)).
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+
+1. Install the [Node.js tracer](/tracing/trace_collection/dd_libraries/nodejs/), version 5.109.0 or higher.
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+**Note**: If your code is transpiled or bundled (for example, with TypeScript, Babel, or Webpack), publish source maps with your application. This helps logpoints map to the correct lines.
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+
+**Requirements**: MRI (CRuby) 2.6+, a Rack-based application (such as Rails or Sinatra), and `RAILS_ENV` or `RACK_ENV` set to `production`.
+
+1. Install the [Ruby tracer](/tracing/trace_collection/dd_libraries/ruby/), version 2.35.0 or higher.
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+**Note**: Live Debugger initializes on the first HTTP request. Send at least one request after startup before creating logpoints.
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
+
+1. Install the [PHP tracer](/tracing/trace_collection/dd_libraries/php/), version 1.21.0 or higher.
+2. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+
+Go requires enabling Live Debugger in **both** the [Datadog Agent](/agent/) and your application. It also requires Agent version 7.73.0 or higher on the same host and Linux kernel version 5.17 or higher.
+
+1. Enable Live Debugger in the Agent's `system-probe.yaml`:
+   ```yaml
+   dynamic_instrumentation:
+     enabled: true
+   ```
+2. Install the [Go tracer](/tracing/trace_collection/dd_libraries/go/), version 2.9.0 or higher.
+3. Start your service with Live Debugger enabled and [Unified Service Tags](/getting_started/tagging/unified_service_tagging) set:
+   ```shell
+   export DD_SERVICE=<YOUR_SERVICE>
+   export DD_ENV=<YOUR_ENV>
+   export DD_VERSION=<YOUR_VERSION>
+   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+**Note**: Go Live Debugger requires eBPF and isn't supported on many serverless platforms, including AWS Lambda and AWS Fargate.
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+**Note**: With a supported tracer version, you can enable Live Debugger per service from the Settings page (see [Enablement modes](#enablement-modes)) without setting `DD_DYNAMIC_INSTRUMENTATION_ENABLED`. Older tracer versions require this environment variable.
 
 ### Permissions
 
@@ -194,12 +288,6 @@ The following constraints apply to Live Debugger usage and configuration:
 [2]: /agent/
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [4]: /tracing/guide/remote_config
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
-[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[9]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
-[10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 [11]: /logs/log_configuration/indexes/#exclusion-filters
 [12]: /logs/log_configuration/indexes/#add-indexes
 [13]: https://app.datadoghq.com/debugging/sessions
@@ -208,9 +296,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [16]: /dynamic_instrumentation/enabling
 [17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [18]: https://app.datadoghq.com/account/billing
-[19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
-[22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [23]: /tracing/live_debugger/bits-live-debugger/
 [24]: #mode-based-redaction
