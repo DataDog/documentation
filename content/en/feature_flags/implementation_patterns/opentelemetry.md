@@ -133,7 +133,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -351,7 +351,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 {{< /code-block >}}
 
-**Note**: To emit flag evaluation metrics, add the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/).
+**Note**: To emit flag evaluation metrics, add the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -609,3 +609,4 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
+[3]: /feature_flags/guide/server_flag_evaluation_metrics/

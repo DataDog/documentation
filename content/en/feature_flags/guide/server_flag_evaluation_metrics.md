@@ -51,7 +51,7 @@ You only need to enable the protocol your application uses (gRPC on port 4317, o
 
 ## Step 2: Configure your application
 
-For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) instead.
+For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see the [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) section instead.
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
