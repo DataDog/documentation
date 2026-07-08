@@ -53,15 +53,9 @@ In {{< ui >}}Path{{< /ui >}}, the latest process tree is displayed. This gives y
 
 To triage an event: 
 
-<<<<<<< HEAD
 1. Select the event in the {{< ui >}}AGENT RULE{{< /ui >}} column in the [Agent Events explorer][13].
 2. Select {{< ui >}}Click to copy{{< /ui >}}.
-3. Open the [OOTB rules documention][12].
-=======
-1. Select the event in the **AGENT RULE** column in the [Agent Events explorer][13].
-2. Select **Click to copy**.
 3. Open the [OOTB detection rules documentation][12].
->>>>>>> 0168df217e (first change in Agent events)
 4. In the search field, paste the copied rule name.
 5. Select the rule from the results.
 6. Review the rule {{< ui >}}Goal{{< /ui >}}, {{< ui >}}Strategy{{< /ui >}}, and follow the steps in {{< ui >}}Triage and response{{< /ui >}}.
@@ -74,8 +68,4 @@ To triage an event:
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
-<<<<<<< HEAD
-[18]: /security/workload_protection/guide/active-protection
-=======
 [18]: /security/workload_protection/respond_and_report/active_protection
->>>>>>> e03bd12584 (WIP repond and report)
