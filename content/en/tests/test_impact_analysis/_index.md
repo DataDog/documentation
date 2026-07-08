@@ -107,9 +107,21 @@ All file paths are considered to be relative to the root of the repository. You 
 
 If you use [Code Coverage][10] and Test Impact Analysis together, reported overall coverage can be skewed because Test Impact Analysis skips tests that do not need to run for the code change.
 
-To keep coverage totals accurate, enable code coverage upload in the [organization-level CI/CD Optimization settings][11]. When this setting is enabled, the Datadog library adjusts total reported coverage to include skipped tests or suites, so Test Impact Analysis savings do not distort coverage totals.
+Code coverage backfilling keeps coverage totals accurate by adjusting total reported coverage to include skipped tests or suites, so Test Impact Analysis savings do not distort coverage totals.
 
-Code coverage backfilling is supported for Java, .NET, and JavaScript.
+### Java
+
+With `dd-trace-java`, no extra configuration is required. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+
+### .NET
+
+With the .NET tracer, no extra configuration is required. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+
+### JavaScript
+
+JavaScript requires code coverage report upload for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
+
+This is different from Java and .NET, where the Datadog library automatically detects an existing code coverage engine.
 
 ## Explore test sessions
 
