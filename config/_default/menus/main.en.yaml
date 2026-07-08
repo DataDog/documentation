@@ -9932,11 +9932,16 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_mde
       weight: 2
+    - name: Multiple Testing Correction
+      url: experiments/statistics/multiple_testing_correction
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_multiple_testing
+      weight: 3
     - name: Global Lift
       url: experiments/statistics/global_lift
       parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
