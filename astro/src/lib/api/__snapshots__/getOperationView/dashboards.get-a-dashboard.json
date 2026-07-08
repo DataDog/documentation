@@ -324,7 +324,8 @@
                   "description": "[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).",
                   "unionOptions": [
                     {
-                      "label": "AlertValueWidgetDefinition",
+                      "label": "Option 1",
+                      "description": "Alert values are query values showing the current value of the metric in any monitor defined on your system.",
                       "fields": [
                         {
                           "name": "alert_id",
@@ -415,7 +416,8 @@
                       ]
                     },
                     {
-                      "label": "TimeseriesWidgetDefinition",
+                      "label": "Option 2",
+                      "description": "The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time.",
                       "fields": [
                         {
                           "name": "custom_links",
@@ -1320,7 +1322,8 @@
                                       "description": "Number format unit.",
                                       "unionOptions": [
                                         {
-                                          "label": "NumberFormatUnitCanonical",
+                                          "label": "Option 1",
+                                          "description": "Canonical unit.",
                                           "fields": [
                                             {
                                               "name": "per_unit_name",
@@ -1352,7 +1355,8 @@
                                           ]
                                         },
                                         {
-                                          "label": "NumberFormatUnitCustom",
+                                          "label": "Option 2",
+                                          "description": "Custom unit.",
                                           "fields": [
                                             {
                                               "name": "label",
@@ -2041,7 +2045,8 @@
                                   "description": "A formula and function query.",
                                   "unionOptions": [
                                     {
-                                      "label": "FormulaAndFunctionMetricQueryDefinition",
+                                      "label": "Option 1",
+                                      "description": "A formula and functions metrics query.",
                                       "fields": [
                                         {
                                           "name": "aggregator",
@@ -2111,7 +2116,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionEventQueryDefinition",
+                                      "label": "Option 2",
+                                      "description": "A formula and functions events query.",
                                       "fields": [
                                         {
                                           "name": "compute",
@@ -2201,7 +2207,8 @@
                                           "description": "Group by configuration for a formula and functions events query. Accepts either a list of facet objects or a flat object that specifies a list of facet fields.",
                                           "unionOptions": [
                                             {
-                                              "label": "FormulaAndFunctionEventQueryGroupByList",
+                                              "label": "Option 1",
+                                              "description": "List of objects used to group by.",
                                               "fields": [
                                                 {
                                                   "name": "",
@@ -2240,7 +2247,8 @@
                                               ]
                                             },
                                             {
-                                              "label": "FormulaAndFunctionEventQueryGroupByFields",
+                                              "label": "Option 2",
+                                              "description": "Flat group by configuration using multiple event facet fields.",
                                               "fields": [
                                                 {
                                                   "name": "fields",
@@ -2360,7 +2368,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionProcessQueryDefinition",
+                                      "label": "Option 3",
+                                      "description": "Process query using formulas and functions.",
                                       "fields": [
                                         {
                                           "name": "aggregator",
@@ -2464,7 +2473,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionApmDependencyStatsQueryDefinition",
+                                      "label": "Option 4",
+                                      "description": "A formula and functions APM dependency stats query.",
                                       "fields": [
                                         {
                                           "name": "cross_org_uuids",
@@ -2569,7 +2579,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionApmResourceStatsQueryDefinition",
+                                      "label": "Option 5",
+                                      "description": "APM resource stats query using formulas and functions.",
                                       "fields": [
                                         {
                                           "name": "cross_org_uuids",
@@ -2678,7 +2689,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionApmMetricsQueryDefinition",
+                                      "label": "Option 6",
+                                      "description": "A formula and functions APM metrics query.",
                                       "fields": [
                                         {
                                           "name": "data_source",
@@ -2807,7 +2819,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionSLOQueryDefinition",
+                                      "label": "Option 7",
+                                      "description": "A formula and functions metrics query.",
                                       "fields": [
                                         {
                                           "name": "additional_query_filters",
@@ -2898,7 +2911,8 @@
                                       ]
                                     },
                                     {
-                                      "label": "FormulaAndFunctionCloudCostQueryDefinition",
+                                      "label": "Option 8",
+                                      "description": "A formula and functions Cloud Cost query.",
                                       "fields": [
                                         {
                                           "name": "aggregator",
@@ -3442,7 +3456,8 @@
                           "description": "Time setting for the widget.",
                           "unionOptions": [
                             {
-                              "label": "WidgetLegacyLiveSpan",
+                              "label": "Option 1",
+                              "description": "Wrapper for live span",
                               "fields": [
                                 {
                                   "name": "hide_incomplete_cost_data",
@@ -3482,7 +3497,8 @@
                               ]
                             },
                             {
-                              "label": "WidgetNewLiveSpan",
+                              "label": "Option 2",
+                              "description": "Used for arbitrary live span times, such as 17 minutes or 6 hours.",
                               "fields": [
                                 {
                                   "name": "hide_incomplete_cost_data",
@@ -3530,7 +3546,8 @@
                               ]
                             },
                             {
-                              "label": "WidgetNewFixedSpan",
+                              "label": "Option 3",
+                              "description": "Used for fixed span times, such as 'March 1 to March 7'.",
                               "fields": [
                                 {
                                   "name": "from",
@@ -3668,7 +3685,8 @@
                       ]
                     },
                     {
-                      "label": "GroupWidgetDefinition",
+                      "label": "Option 3",
+                      "description": "The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.",
                       "fields": [
                         {
                           "name": "background_color",

@@ -191,7 +191,7 @@ describe('ApiSchemaTable — modifiers and content', () => {
     expect(html).toContain('Show 1 more');
   });
 
-  it('renders union options with labels and nested fields', async () => {
+  it('renders each union option as its own collapsible row, not a flat banner', async () => {
     const fields: SchemaField[] = [
       {
         name: 'variant',
@@ -218,8 +218,17 @@ describe('ApiSchemaTable — modifiers and content', () => {
       },
     ];
     const html = await renderTable({ fields });
-    expect(html).toContain('schema-table__union-label');
+
+    // The old flat banner construction is gone.
+    expect(html).not.toContain('schema-table__union-label');
+
+    // Each option is a real row with its label as the name and a toggle,
+    // so it can be expanded/collapsed independently (matching Hugo).
     expect(html).toContain('Option A');
+    expect(html).toContain('aria-label="Toggle Option A"');
+
+    // The option's fields live in a hidden nested children container.
+    expect(html).toMatch(/class="[^"]*schema-table__children[^"]*" hidden/);
     expect(html).toContain('A value');
   });
 

@@ -73,7 +73,8 @@
                       "description": "AWS Authentication config.",
                       "unionOptions": [
                         {
-                          "label": "AWSAuthConfigKeys",
+                          "label": "Option 1",
+                          "description": "AWS Authentication config to integrate your account using an access key pair.",
                           "fields": [
                             {
                               "name": "access_key_id",
@@ -94,7 +95,8 @@
                           ]
                         },
                         {
-                          "label": "AWSAuthConfigRole",
+                          "label": "Option 2",
+                          "description": "AWS Authentication config to integrate your account using an IAM role.",
                           "fields": [
                             {
                               "name": "external_id",
@@ -146,7 +148,8 @@
                       "description": "AWS Regions to collect data from. Defaults to `include_all`.",
                       "unionOptions": [
                         {
-                          "label": "AWSRegionsIncludeAll",
+                          "label": "Option 1",
+                          "description": "Include all regions. Defaults to `true`.",
                           "fields": [
                             {
                               "name": "include_all",
@@ -159,7 +162,8 @@
                           ]
                         },
                         {
-                          "label": "AWSRegionsIncludeOnly",
+                          "label": "Option 2",
+                          "description": "Include only these regions.",
                           "fields": [
                             {
                               "name": "include_only",
@@ -302,7 +306,8 @@
                           "description": "AWS Metrics namespace filters. Defaults to `exclude_only`.",
                           "unionOptions": [
                             {
-                              "label": "AWSNamespaceFiltersExcludeOnly",
+                              "label": "Option 1",
+                              "description": "Exclude only these namespaces from metrics collection.\nDefaults to `[\"AWS/SQS\", \"AWS/ElasticMapReduce\", \"AWS/Usage\"]`.\n`AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default\nto reduce your AWS CloudWatch costs from `GetMetricData` API calls.",
                               "fields": [
                                 {
                                   "name": "exclude_only",
@@ -315,7 +320,8 @@
                               ]
                             },
                             {
-                              "label": "AWSNamespaceFiltersIncludeOnly",
+                              "label": "Option 2",
+                              "description": "Include only these namespaces.",
                               "fields": [
                                 {
                                   "name": "include_only",
@@ -408,7 +414,8 @@
                           "description": "AWS X-Ray services to collect traces from. Defaults to `include_only`.",
                           "unionOptions": [
                             {
-                              "label": "XRayServicesIncludeAll",
+                              "label": "Option 1",
+                              "description": "Include all services.",
                               "fields": [
                                 {
                                   "name": "include_all",
@@ -421,7 +428,8 @@
                               ]
                             },
                             {
-                              "label": "XRayServicesIncludeOnly",
+                              "label": "Option 2",
+                              "description": "Include only these services. Defaults to `[]`.",
                               "fields": [
                                 {
                                   "name": "include_only",

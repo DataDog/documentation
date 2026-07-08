@@ -31,6 +31,10 @@ export const SchemaFieldSchema = z.strictObject({
       .array(
         z.strictObject({
           label: z.string(),
+          description: z
+            .string()
+            .optional()
+            .describe("The variant schema's own description, if any"),
           fields: z.array(SchemaFieldSchema),
         }),
       )

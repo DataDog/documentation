@@ -63,7 +63,7 @@ function schemaFieldsToTableRows(
           parent: field.name || UNNAMED_FIELD_LABEL,
           field: opt.label,
           type: "object",
-          description: "",
+          description: opt.description ?? "",
         });
         rows.push(...schemaFieldsToTableRows(opt.fields, opt.label));
       }

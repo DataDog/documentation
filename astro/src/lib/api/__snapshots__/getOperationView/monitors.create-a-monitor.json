@@ -703,7 +703,8 @@
                     "description": "A formula and function query.",
                     "unionOptions": [
                       {
-                        "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                        "label": "Option 1",
+                        "description": "A formula and functions events query.",
                         "fields": [
                           {
                             "name": "compute",
@@ -897,7 +898,8 @@
                         ]
                       },
                       {
-                        "label": "MonitorFormulaAndFunctionCostQueryDefinition",
+                        "label": "Option 2",
+                        "description": "A formula and functions cost query.",
                         "fields": [
                           {
                             "name": "aggregator",
@@ -950,7 +952,8 @@
                         ]
                       },
                       {
-                        "label": "MonitorFormulaAndFunctionDataQualityQueryDefinition",
+                        "label": "Option 3",
+                        "description": "A formula and functions data quality query.",
                         "fields": [
                           {
                             "name": "data_source",
@@ -1069,7 +1072,8 @@
                         ]
                       },
                       {
-                        "label": "MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition",
+                        "label": "Option 4",
+                        "description": "A formula and functions aggregate augmented query. Used to enrich base query results with data from a reference table.",
                         "fields": [
                           {
                             "name": "augment_query",
@@ -1080,7 +1084,8 @@
                             "description": "Augment query for aggregate augmented queries. Can be an events query or a reference table query.",
                             "unionOptions": [
                               {
-                                "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                "label": "Option 1",
+                                "description": "A formula and functions events query.",
                                 "fields": [
                                   {
                                     "name": "compute",
@@ -1274,7 +1279,8 @@
                                 ]
                               },
                               {
-                                "label": "MonitorFormulaAndFunctionReferenceTableQueryDefinition",
+                                "label": "Option 2",
+                                "description": "A reference table query for use in aggregate queries.",
                                 "fields": [
                                   {
                                     "name": "columns",
@@ -1350,7 +1356,8 @@
                             "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                             "unionOptions": [
                               {
-                                "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                "label": "Option 1",
+                                "description": "A formula and functions events query.",
                                 "fields": [
                                   {
                                     "name": "compute",
@@ -1544,7 +1551,8 @@
                                 ]
                               },
                               {
-                                "label": "MonitorFormulaAndFunctionMetricsQueryDefinition",
+                                "label": "Option 2",
+                                "description": "A formula and functions metrics query for use in aggregate queries.",
                                 "fields": [
                                   {
                                     "name": "aggregator",
@@ -1795,7 +1803,8 @@
                         ]
                       },
                       {
-                        "label": "MonitorFormulaAndFunctionAggregateFilteredQueryDefinition",
+                        "label": "Option 5",
+                        "description": "A formula and functions aggregate filtered query. Used to filter base query results using data from another source.",
                         "fields": [
                           {
                             "name": "base_query",
@@ -1806,7 +1815,8 @@
                             "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                             "unionOptions": [
                               {
-                                "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                "label": "Option 1",
+                                "description": "A formula and functions events query.",
                                 "fields": [
                                   {
                                     "name": "compute",
@@ -2000,7 +2010,8 @@
                                 ]
                               },
                               {
-                                "label": "MonitorFormulaAndFunctionMetricsQueryDefinition",
+                                "label": "Option 2",
+                                "description": "A formula and functions metrics query for use in aggregate queries.",
                                 "fields": [
                                   {
                                     "name": "aggregator",
@@ -2132,7 +2143,8 @@
                             "description": "Filter query for aggregate filtered queries. Can be an events query or a reference table query.",
                             "unionOptions": [
                               {
-                                "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                "label": "Option 1",
+                                "description": "A formula and functions events query.",
                                 "fields": [
                                   {
                                     "name": "compute",
@@ -2326,7 +2338,8 @@
                                 ]
                               },
                               {
-                                "label": "MonitorFormulaAndFunctionReferenceTableQueryDefinition",
+                                "label": "Option 2",
+                                "description": "A reference table query for use in aggregate queries.",
                                 "fields": [
                                   {
                                     "name": "columns",
@@ -3305,7 +3318,8 @@
                       "description": "A formula and function query.",
                       "unionOptions": [
                         {
-                          "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                          "label": "Option 1",
+                          "description": "A formula and functions events query.",
                           "fields": [
                             {
                               "name": "compute",
@@ -3499,7 +3513,8 @@
                           ]
                         },
                         {
-                          "label": "MonitorFormulaAndFunctionCostQueryDefinition",
+                          "label": "Option 2",
+                          "description": "A formula and functions cost query.",
                           "fields": [
                             {
                               "name": "aggregator",
@@ -3552,7 +3567,8 @@
                           ]
                         },
                         {
-                          "label": "MonitorFormulaAndFunctionDataQualityQueryDefinition",
+                          "label": "Option 3",
+                          "description": "A formula and functions data quality query.",
                           "fields": [
                             {
                               "name": "data_source",
@@ -3671,7 +3687,8 @@
                           ]
                         },
                         {
-                          "label": "MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition",
+                          "label": "Option 4",
+                          "description": "A formula and functions aggregate augmented query. Used to enrich base query results with data from a reference table.",
                           "fields": [
                             {
                               "name": "augment_query",
@@ -3682,7 +3699,8 @@
                               "description": "Augment query for aggregate augmented queries. Can be an events query or a reference table query.",
                               "unionOptions": [
                                 {
-                                  "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                  "label": "Option 1",
+                                  "description": "A formula and functions events query.",
                                   "fields": [
                                     {
                                       "name": "compute",
@@ -3876,7 +3894,8 @@
                                   ]
                                 },
                                 {
-                                  "label": "MonitorFormulaAndFunctionReferenceTableQueryDefinition",
+                                  "label": "Option 2",
+                                  "description": "A reference table query for use in aggregate queries.",
                                   "fields": [
                                     {
                                       "name": "columns",
@@ -3952,7 +3971,8 @@
                               "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                               "unionOptions": [
                                 {
-                                  "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                  "label": "Option 1",
+                                  "description": "A formula and functions events query.",
                                   "fields": [
                                     {
                                       "name": "compute",
@@ -4146,7 +4166,8 @@
                                   ]
                                 },
                                 {
-                                  "label": "MonitorFormulaAndFunctionMetricsQueryDefinition",
+                                  "label": "Option 2",
+                                  "description": "A formula and functions metrics query for use in aggregate queries.",
                                   "fields": [
                                     {
                                       "name": "aggregator",
@@ -4397,7 +4418,8 @@
                           ]
                         },
                         {
-                          "label": "MonitorFormulaAndFunctionAggregateFilteredQueryDefinition",
+                          "label": "Option 5",
+                          "description": "A formula and functions aggregate filtered query. Used to filter base query results using data from another source.",
                           "fields": [
                             {
                               "name": "base_query",
@@ -4408,7 +4430,8 @@
                               "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                               "unionOptions": [
                                 {
-                                  "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                  "label": "Option 1",
+                                  "description": "A formula and functions events query.",
                                   "fields": [
                                     {
                                       "name": "compute",
@@ -4602,7 +4625,8 @@
                                   ]
                                 },
                                 {
-                                  "label": "MonitorFormulaAndFunctionMetricsQueryDefinition",
+                                  "label": "Option 2",
+                                  "description": "A formula and functions metrics query for use in aggregate queries.",
                                   "fields": [
                                     {
                                       "name": "aggregator",
@@ -4734,7 +4758,8 @@
                               "description": "Filter query for aggregate filtered queries. Can be an events query or a reference table query.",
                               "unionOptions": [
                                 {
-                                  "label": "MonitorFormulaAndFunctionEventQueryDefinition",
+                                  "label": "Option 1",
+                                  "description": "A formula and functions events query.",
                                   "fields": [
                                     {
                                       "name": "compute",
@@ -4928,7 +4953,8 @@
                                   ]
                                 },
                                 {
-                                  "label": "MonitorFormulaAndFunctionReferenceTableQueryDefinition",
+                                  "label": "Option 2",
+                                  "description": "A reference table query for use in aggregate queries.",
                                   "fields": [
                                     {
                                       "name": "columns",

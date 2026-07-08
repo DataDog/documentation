@@ -202,12 +202,3 @@
 .schema-table__children {
   /* Container for nested rows — display toggled by component */
 }
-
-.schema-table__union-label {
-  padding: 4px var(--space-md);
-  font-weight: 600;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  border-bottom: var(--border-width) solid var(--color-surface-border);
-  background: var(--color-surface-header);
-}

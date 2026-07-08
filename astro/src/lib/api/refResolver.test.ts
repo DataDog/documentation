@@ -151,6 +151,33 @@ describe('schemaToFields', () => {
     expect(fields).toHaveLength(1);
     expect(fields[0].type).toBe('oneOf');
     expect(fields[0].unionOptions).toHaveLength(2);
+    // Options are labeled positionally ("Option N"), matching Hugo.
+    expect(fields[0].unionOptions?.[0].label).toBe('Option 1');
+    expect(fields[0].unionOptions?.[1].label).toBe('Option 2');
+    // The variant's own description is carried through.
+    expect(fields[0].unionOptions?.[0].description).toBe('A string value');
+  });
+
+  it('labels $ref union options positionally, not by ref name', () => {
+    const spec = {
+      components: {
+        schemas: {
+          AWSIntegration: {
+            type: 'object',
+            description: 'The definition of `AWSIntegration` object.',
+            properties: { account_id: { type: 'string' } },
+          },
+        },
+      },
+    };
+    const schema = { oneOf: [{ $ref: '#/components/schemas/AWSIntegration' }] };
+
+    const fields = schemaToFields(spec, schema);
+    const option = fields[0].unionOptions?.[0];
+    expect(option?.label).toBe('Option 1');
+    expect(option?.label).not.toBe('AWSIntegration');
+    // Ref name is preserved via the variant's description, as in Hugo.
+    expect(option?.description).toBe('The definition of `AWSIntegration` object.');
   });
 
   it('handles allOf by merging schemas', () => {

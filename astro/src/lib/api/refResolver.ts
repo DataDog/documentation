@@ -210,9 +210,9 @@ export function schemaToFields(
   if (unionKey) {
     const variants: any[] = schema[unionKey];
     const unionOptions = variants.map((variant: any, idx: number) => {
-      const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
-        label,
+        label: `Option ${idx + 1}`,
+        description: variantDescription(spec, variant),
         fields: schemaToFields(spec, variant, new Set(visited), level + 2),
       };
     });
@@ -410,6 +410,20 @@ function refName(refString: string): string {
 }
 
 /**
+ * The description shown for a `oneOf`/`anyOf` option row. Options are labeled
+ * positionally ("Option N", matching Hugo), so the variant's own description
+ * (e.g. "The definition of `AWSIntegration` object.") is the only place the
+ * underlying schema name survives. Resolves a single `$ref` hop to reach it.
+ */
+function variantDescription(spec: any, variant: any): string {
+  let resolved = variant;
+  if (variant?.$ref) {
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  return resolved?.description ?? "";
+}
+
+/**
  * Convert a single named property into a `SchemaField`, recursing into
  * nested objects, arrays, and unions as needed.
  */
@@ -461,9 +475,9 @@ function propertyToField(
   if (unionKey) {
     const variants: any[] = resolved[unionKey];
     const unionOptions = variants.map((variant: any, idx: number) => {
-      const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
-        label,
+        label: `Option ${idx + 1}`,
+        description: variantDescription(spec, variant),
         fields: schemaToFields(spec, variant, new Set(nextVisited), level + 2),
       };
     });

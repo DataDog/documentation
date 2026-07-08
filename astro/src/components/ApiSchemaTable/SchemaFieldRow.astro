@@ -29,6 +29,21 @@ const cellNameStyle =
 const enumValues = field.enumValues ?? [];
 const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
 const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
+
+// Render each oneOf/anyOf option as its own collapsible row (matching Hugo),
+// rather than a flat always-visible banner. Each option becomes a synthetic
+// object field whose children are the option's fields, so it reuses the same
+// toggle + hidden-children construction the nav island already drives.
+const optionFields: SchemaField[] =
+  field.unionOptions?.map((option) => ({
+    name: option.label,
+    type: "object",
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: option.description ?? "",
+    children: option.fields,
+  })) ?? [];
 ---
 
 <div
@@ -106,18 +121,8 @@ const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
       {field.children?.map((child) => (
         <Self field={child} depth={depth + 1} />
       ))}
-      {field.unionOptions?.map((option) => (
-        <Fragment>
-          <div
-            class={cl("schema-table__union-label")}
-            style={`padding-left: ${(depth + 1) * INDENT_PX + 8}px`}
-          >
-            {option.label}
-          </div>
-          {option.fields.map((child) => (
-            <Self field={child} depth={depth + 2} />
-          ))}
-        </Fragment>
+      {optionFields.map((optionField) => (
+        <Self field={optionField} depth={depth + 1} />
       ))}
     </div>
   )
