@@ -644,7 +644,7 @@
 
 @media (min-width: 992px) {
   .footer__social-item--spaced {
-    margin-right: 0.5rem;
+    margin-right: var(--space-md);
   }
 }
 
@@ -663,6 +663,13 @@
 
 .footer__social-link :global(.social-icon) {
   font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.footer__social-link :global(.social-icon svg) {
+  width: 1em;
+  height: 1em;
 }
 
 /* --- Language toggle ---------------------------------------------------- */
