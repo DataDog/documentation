@@ -103,6 +103,14 @@ All file paths are considered to be relative to the root of the repository. You 
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Select branches to exclude and tracked files." style="width:80%" >}}
 
+## Code coverage backfilling
+
+If you use [Code Coverage][10] and Test Impact Analysis together, reported overall coverage can be skewed because Test Impact Analysis skips tests that do not need to run for the code change.
+
+To keep coverage totals accurate, enable code coverage upload in the [organization-level CI/CD Optimization settings][11]. When this setting is enabled, the Datadog library adjusts total reported coverage to include skipped tests or suites, so Test Impact Analysis savings do not distort coverage totals.
+
+Code coverage backfilling is supported for Java, .NET, and JavaScript.
+
 ## Explore test sessions
 
 You can explore the time savings you get from Test Impact Analysis by looking at the test commit page and test sessions panel.
@@ -136,3 +144,5 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [7]: https://app.datadoghq.com/ci/test-runs
 [8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
 [9]: /integrations/github/
+[10]: /code_coverage/
+[11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
