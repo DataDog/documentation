@@ -14,6 +14,9 @@ further_reading:
 - link: "/actions/app_builder/access_and_auth/"
   tag: "Documentation"
   text: "Access and Authentication"
+- link: "https://www.youtube.com/watch?v=HEDjpMyqkSE"
+  tag: "Video"
+  text: "Datadog Apps Demo"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
