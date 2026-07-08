@@ -54,7 +54,20 @@ Application {{< tooltip glossary="instrumentation" >}} with Datadog APM involves
 Service Discovery is in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
-Service Discovery automatically detects services already running across your infrastructure that aren't yet instrumented with Datadog APM, highlighting gaps in your observability coverage. View all the unmonitored services in your fleet in one place, understand the importance of each service through contextual information such as infrastructure footprint, process command, resource consumption, and dependencies, and then close the gaps by instrumenting your services with [Single Step Instrumentation](#single-step-instrumentation-recommended).
+Service Discovery automatically detects services already running across your infrastructure that aren't yet instrumented with Datadog APM. It highlights gaps in your observability coverage so you know what to instrument next.
+
+With Service Discovery, you can:
+
+- View all the unmonitored services in your fleet in one place.
+- Understand the importance of each service through contextual information, such as infrastructure footprint, process command, resource consumption, and dependencies.
+- Close the gaps by instrumenting your services with [Single Step Instrumentation](#single-step-instrumentation-recommended).
+
+To qualify for this preview, you must meet the following requirements:
+
+- Run the Datadog Agent version 7.80 or later.
+- Run your services on Linux hosts.
+- Enable [Remote Configuration][11] and Remote Agent Management.
+- Not yet be using Datadog APM.
 
 ### Single step instrumentation (recommended)
 
@@ -191,4 +204,5 @@ The following tutorials guide you through setting up distributed tracing for a s
 [3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /tracing/trace_collection/dynamic_instrumentation/
 [5]: /agent/
+[11]: /agent/remote_config/
 
