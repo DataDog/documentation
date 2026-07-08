@@ -65,15 +65,17 @@ export function RegionSelector({
       class={cl("region-selector")}
       data-hydrated={hydrated ? "true" : undefined}
     >
-      <label class={cl("region-selector__label")} for="region-select">
-        {labels["Datadog site"]}
-      </label>
-      <a
-        class={cl("region-selector__help")}
-        href={hrefs["Site help"]}
-        aria-label={labels["Site help"]}
-        dangerouslySetInnerHTML={{ __html: helpIcon }}
-      />
+      <span class={cl("region-selector__heading")}>
+        <label class={cl("region-selector__label")} for="region-select">
+          {labels["Datadog site"]}
+        </label>
+        <a
+          class={cl("region-selector__help")}
+          href={hrefs["Site help"]}
+          aria-label={labels["Site help"]}
+          dangerouslySetInnerHTML={{ __html: helpIcon }}
+        />
+      </span>
       <Select id="region-select" value={selected} onChange={handleChange}>
         {regions.map((r) => (
           <option key={r.key} value={r.key}>

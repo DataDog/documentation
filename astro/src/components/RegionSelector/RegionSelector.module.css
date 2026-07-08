@@ -5,6 +5,14 @@
   font-size: var(--font-size-xs);
 }
 
+/* Keep the label and its help icon together on one line, even when the
+   container stacks into a column at narrow widths. */
+.region-selector__heading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .region-selector__label {
   color: var(--color-text);
   font-weight: 600;

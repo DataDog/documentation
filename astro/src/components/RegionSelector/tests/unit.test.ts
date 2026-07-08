@@ -152,14 +152,17 @@ describe('RegionSelector — help link', () => {
     render(h(RegionSelectorComponent, regionProps));
 
     const container = document.querySelector('.region-selector')!;
-    const children = Array.from(container.children);
-    const labelIndex = children.findIndex((el) => el.classList.contains('region-selector__label'));
-    const helpIndex = children.findIndex((el) => el.classList.contains('region-selector__help'));
-    const selectIndex = children.findIndex((el) => el.classList.contains('select'));
+    const label = container.querySelector('.region-selector__label')!;
+    const help = container.querySelector('.region-selector__help')!;
+    const select = container.querySelector('.select')!;
 
-    expect(labelIndex).toBeGreaterThanOrEqual(0);
-    expect(helpIndex).toBeGreaterThan(labelIndex);
-    expect(selectIndex).toBeGreaterThan(helpIndex);
+    expect(label).toBeTruthy();
+    expect(help).toBeTruthy();
+    expect(select).toBeTruthy();
+
+    // DOCUMENT_POSITION_FOLLOWING (4) means the argument comes later in the document.
+    expect(label.compareDocumentPosition(help) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(help.compareDocumentPosition(select) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });
 
