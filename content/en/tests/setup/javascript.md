@@ -437,7 +437,37 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION
 
 ### Adding custom tags or measures to tests
 
-Not supported.
+You can add custom tags to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+import { expect, test } from 'vitest'
+
+test('sum function can sum', () => {
+  const testSpan = tracer.scope().active()
+  testSpan.setTag('team_owner', 'my_team')
+
+  expect(1 + 2).toBe(3)
+})
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags](/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags) section of the Node.js custom instrumentation documentation.
+
+You can also add custom measures to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+import { expect, test } from 'vitest'
+
+test('sum function can sum', () => {
+  const testSpan = tracer.scope().active()
+  testSpan.setTag('memory_allocations', 16)
+
+  expect(1 + 2).toBe(3)
+})
+```
+
+For more information about custom measures, see the [Add Custom Measures Guide](/tests/guides/add_custom_measures/?tab=javascripttypescript).
 
 {{% /tab %}}
 
