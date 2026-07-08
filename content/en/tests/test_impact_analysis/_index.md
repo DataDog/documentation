@@ -125,7 +125,7 @@ With `dd-trace-go`, no extra configuration is required for backfilling. The libr
 
 With `dd-trace-js`, code coverage report upload is required for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
 
-This is different from `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, where the Datadog library automatically detects an existing code coverage engine.
+With `dd-trace-js`, code coverage report upload is required for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
 
 ### Unsupported languages
 
