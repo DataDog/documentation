@@ -1,4 +1,5 @@
 ---
+id: role
 title: 역할
 ---
 역할은 사용자의 계정 권한을 정의합니다. Datadog에는 Admin, Standard 및 Read-only의 세 가지 기본 역할이 있습니다.

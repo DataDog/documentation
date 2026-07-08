@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on *No Data* are available for 48 hours. If you do not have *No Data* alert settings enabled and your group for a metric monitor stops reporting data, the group persists on the monitor status page until it ages out, though that group stops being evaluated after a short absence. The specific timing for how long the group persists depends on your settings.
+Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on {{< ui >}}No Data{{< /ui >}} are available for 48 hours. If you do not have {{< ui >}}No Data{{< /ui >}} alert settings enabled and your group for a metric monitor stops reporting data, the group persists on the monitor status page until it ages out, though that group stops being evaluated after a short absence. The specific timing for how long the group persists depends on your settings.
 
 For event monitors, however, Datadog also keeps groups for evaluations for at least 24 hours. This means that if a monitor is updated and the groups are changed in the query, some old groups may persist. If you must change the group settings on your event monitor, you may want to clone or create a monitor to reflect your new groups. Alternatively, you can mute them if you would like to maintain the monitor but silence any alerts that would result from the changes.
 
@@ -23,7 +23,7 @@ When a host is renamed at the operating system (OS) level or decommissioned, the
 - **Host Monitors**: 48 hours
 - **Service Check Monitors**: 48 hours
 
-The old hostname remains in an alert state until the retention period expires, after which it automatically ages out and disappears from the monitor. **Note**: The old hostname will no longer appear in **Infrastructure > Hosts**, but will continue to be evaluated by monitors until the retention window passes.
+The old hostname remains in an alert state until the retention period expires, after which it automatically ages out and disappears from the monitor. **Note**: The old hostname will no longer appear in {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Hosts{{< /ui >}}, but will continue to be evaluated by monitors until the retention window passes.
 
 <div class="alert alert-danger">If a Custom Schedule is applied to a monitor, decommissioned hosts continue to be evaluated past the standard retention window. For more information, see <a href="/monitors/guide/custom_schedules">Custom Schedules</a>.</div>
 

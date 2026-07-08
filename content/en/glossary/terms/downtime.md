@@ -1,4 +1,5 @@
 ---
+id: downtime
 title: downtime
 core_product:
   - alerts

@@ -11,11 +11,11 @@ Use the ECS Task component to visualize Amazon ECS tasks from your Amazon Web Se
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Launch type**: Select the launch type for your standalone task. Supported options are Fargate and EC2.
-- **CPU**: Select the CPU at the task level. This option is not available for EC2.
-- **Memory (GB)**: Select the amount of memory available at the task level. This option is not available for EC2.
-- **Storage (GiB)**: Enter the amount of storage provisioned for the task, in gibibytes. This option is not available for EC2.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Launch type{{< /ui >}}: Select the launch type for your standalone task. Supported options are Fargate and EC2.
+- {{< ui >}}CPU{{< /ui >}}: Select the CPU at the task level. This option is not available for EC2.
+- {{< ui >}}Memory (GB){{< /ui >}}: Select the amount of memory available at the task level. This option is not available for EC2.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the amount of storage provisioned for the task, in gibibytes. This option is not available for EC2.
 
 ## API
 

@@ -25,7 +25,7 @@ function ensureMarkedConfigured() {
     marked.use({
         renderer: {
             link({ href, title, text }) {
-                return `<a href="${href}"${title ? ` title="${title}"` : ''} target="_blank" rel="noopener noreferrer">${text}</a>`;
+                return `<a class="conv-search-md-link" href="${href}"${title ? ` title="${title}"` : ''} target="_blank" rel="noopener noreferrer">${text}</a>`;
             }
         }
     });

@@ -163,7 +163,7 @@ Once [log collection is enabled][3], do the following to set up [custom log coll
           #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 4. [Restart the Agent][6].
-5. Run the [Agent's status subcommand][8] and look for `ruby` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
+5. Run the [Agent's status subcommand][8] and look for `ruby` under the {{< ui >}}Checks{{< /ui >}} section to confirm that logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 

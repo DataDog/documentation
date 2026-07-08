@@ -105,23 +105,24 @@ Exécutez ensuite cette commande pour vérifier les schémas auxquels l'utilisat
 psql -h localhost -U datadog -d <votre_base_de_données> -c "show search_path;"
 ```
 
-Si le schéma `pg_stat_statements` ne se trouve pas dans le `search_path` de l'utilisateur `datadog`, vous devez l'ajouter à l'utilisateur `datadog`. Par exemple :
+Si le schéma `pg_stat_statements` n'apparaît pas dans le `search_path` de l'utilisateur `datadog`, vous devez l'y ajouter. Par exemple (remplacez `<schema_with_pg_stat_statements>` par le schéma dans lequel se trouve `pg_stat_statements`) :
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### Certaines requêtes sont manquantes
 
-Si vous recevez des données pour certaines requêtes, mais que celles d'une ou de plusieurs requêtes spécifiques sont manquantes dans la section Database Monitoring, suivez ce guide.
+Si vous disposez de données provenant de certaines requêtes, mais que vous ne voyez pas une requête ou un ensemble de requêtes particulier dans Database Monitoring alors que vous vous y attendiez, suivez ce guide.
 | Cause possible                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| Avec Postgres 9.6, si vous voyez uniquement les requêtes exécutées par l'utilisateur datadog, il est alors probable que certains paramètres soient manquants dans la configuration de l'instance. | Pour la surveillance d'instances sur Postgres 9.6, la configuration de l'instance de l'Agent Datadog doit utiliser les paramètres `pg_stat_statements_view: datadog.pg_stat_statements()` et `pg_stat_activity_view: datadog.pg_stat_activity()` selon les fonctions créées dans le guide de configuration initiale. Ces fonctions doivent être créées dans toutes les bases de données. |
-| La requête n'est pas une « requête courante », ce qui signifie que son temps total d'exécution cumulé ne figure dans les 200 premières requêtes normalisées à aucun moment dans l'intervalle de temps sélectionné. | La requête a peut-être été comptabilisée dans la ligne « Other Queries ». Pour en savoir plus sur les requêtes qui font l'objet d'un suivi, consultez la documentation relative aux [données collectées][5]. Pour augmenter le nombre de requêtes courantes qui font l'objet d'un suivi, contactez l'assistance Datadog. |
-| La requête n'est pas une requête SELECT, INSERT, UPDATE ou DELETE. | Par défaut, les fonctions non utilitaires ne font pas l'objet d'un suivi. Pour les recueillir, définissez le paramètre Postgres `pg_stat_statements.track_utility` sur `true`. Consultez la [documentation Postgres][6] (en anglais) pour en savoir plus. |
-| La requête est exécutée dans une fonction ou une procédure stockée. | Pour effectuer le suivi des requêtes exécutées dans des fonctions ou procédures, définissez le paramètre de configuration `pg_stat_statements.track` sur `true`. Consultez la [documentation Postgres][6] (en anglais) pour en savoir plus. |
-| Le paramètre de configuration Postgres `pg_stat_statements.max` est peut-être trop bas pour votre workload. | Si un grand nombre de requêtes normalisées sont exécutées pendant une courte période (plusieurs milliers de requêtes normalisées uniques en 10 secondes), il est possible que le buffer dans `pg_stat_statements` ne parvienne pas à contenir toutes les requêtes normalisées. En augmentant cette valeur, vous pouvez améliorer la couverture des requêtes normalisées qui font l'objet d'un suivi et réduire l'impact des mises à jour intensives liées au SQL généré. **Remarque** : les requêtes avec des noms de colonne désordonnés ou qui utilisent des ARRAY de longueurs variables peuvent considérablement ralentir le traitement des requêtes normalisées. Par exemple, `SELECT ARRAY[1,2]` et `SELECT ARRAY[1,2,3]` sont suivies en tant que deux requêtes séparées dans `pg_stat_statements`. Pour en savoir plus sur le réglage de ce paramètre, consultez la documentation sur la [configuration avancée][7]. |
-| Les métriques de requêtes ne sont émises qu'après avoir été exécutées au moins une fois au cours de deux intervalles distincts de dix secondes depuis le dernier redémarrage de l'Agent. |
+| Pour Postgres 9.6, si vous ne voyez que les requêtes exécutées par l'utilisateur datadog, il manque probablement certains paramètres dans la configuration de l'instance. | Pour surveiller des instances sous Postgres 9.6, la configuration de l'instance de l'Agent Datadog doit utiliser les paramètres `pg_stat_statements_view: datadog.pg_stat_statements()` et `pg_stat_activity_view: datadog.pg_stat_activity()`, basés sur les fonctions créées dans le guide de configuration initiale. Ces fonctions doivent être créées dans toutes les bases de données. |
+| L'utilisateur Datadog ne dispose pas des autorisations suffisantes pour afficher les requêtes des autres utilisateurs. | L'utilisateur Datadog doit disposer du [rôle `pg_monitor`][25] pour accéder aux tables telles que `pg_stat_activity`. Vérifiez que l'utilisateur Datadog possède bien ce rôle : `GRANT pg_monitor TO datadog`. |
+| La requête n'est pas une "top query", ce qui signifie que la somme de son temps d'exécution total ne figure pas dans les 200 premières requêtes normalisées à aucun moment de la période sélectionnée. | La requête peut être regroupée dans la ligne "Other Queries". Pour en savoir plus sur les requêtes suivies, consultez la section [Données collectées][5]. Le nombre de top queries suivies peut être augmenté en contactant l'[assistance Datadog][assistance]. |
+| La requête n'est pas de type SELECT, INSERT, UPDATE ou DELETE. | Les fonctions non utilitaires ne sont pas suivies par défaut. Pour les collecter, définissez le paramètre Postgres `pg_stat_statements.track_utility` sur `all`. Consultez la [documentation Postgres][6] pour en savoir plus. |
+| La requête est exécutée dans une fonction ou une procédure stockée. | Pour suivre les requêtes exécutées dans des fonctions ou des procédures, définissez le paramètre de configuration `pg_stat_statements.track` sur `on`. Consultez la [documentation Postgres][6] pour en savoir plus. |
+| Le paramètre de configuration Postgres `pg_stat_statements.max` est peut-être trop faible pour votre charge de travail. | Si un grand nombre de requêtes normalisées sont exécutées en un court laps de temps (des milliers de requêtes normalisées uniques en 10 secondes), le tampon de `pg_stat_statements` risque de ne pas pouvoir contenir toutes les requêtes normalisées. Augmenter cette valeur peut améliorer la couverture des requêtes normalisées suivies et réduire l'impact d'un renouvellement élevé des requêtes SQL générées. **Remarque** : les requêtes dont les noms de colonnes ne sont pas ordonnés ou qui utilisent des ARRAY de longueurs variables peuvent augmenter considérablement le taux de renouvellement des requêtes normalisées. Par exemple, `SELECT ARRAY[1,2]` et `SELECT ARRAY[1,2,3]` sont suivies comme des requêtes distinctes dans `pg_stat_statements`. Pour en savoir plus sur le réglage de ce paramètre, consultez la section [Configuration avancée][7]. |
+| La requête n'a été exécutée qu'une seule fois depuis le dernier redémarrage de l'Agent. | Les métriques de requêtes ne sont émises qu'après avoir été exécutées au moins une fois sur deux intervalles distincts de dix secondes depuis le redémarrage de l'Agent. |
 
 ### Les échantillons de requête sont tronqués
 
@@ -167,6 +168,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -185,7 +188,16 @@ Consultez la section sur les [échantillons de requête tronqués](#les-echantil
 
 #### Protocole de requête étendu Postgres
 
-Si un client utilise le [protocole de requête étendu][9] Postgres ou des instructions préparées, l'Agent Datadog ne peut pas recueillir les plans d'exécution, car la requête parsée et les paramètres de liaison bruts sont séparés. Si le client offre la possibilité d'utiliser exclusivement le protocole de requête simplifié, l'activation de cette option permet à l'Agent Datadog de recueillir les plans d'exécution.
+Si un client utilise le [protocole de requête étendu][9] de Postgres ou des requêtes préparées, l'Agent Datadog ne peut pas collecter les plans d'explication en raison de la séparation entre la requête analysée et les paramètres de liaison bruts. Voici quelques options pour résoudre ce problème.
+
+Pour Postgres version 12 ou ultérieure, le paramètre suivant est activé par défaut dans la [configuration de l'intégration Postgres][19], ce qui permet à l'Agent de collecter les plans d'explication :
+```
+query_samples:
+  explain_parameterized_queries: true
+  ...
+```
+
+Pour les versions antérieures à Postgres 12, ce paramètre n'est **pas** pris en charge. Toutefois, si votre client propose une option pour forcer l'utilisation du protocole de requête simple, l'Agent Datadog peut alors collecter les plans d'exécution.
 
 | Langage | Client | Configuration pour le protocole de requête simplifié|
 |----------|--------|----------------------------------------|
@@ -196,7 +208,7 @@ Si un client utilise le [protocole de requête étendu][9] Postgres ou des instr
 | Node     | [node-postgres][17]       | Utilise le protocole de requête étendu, qui ne peut pas être désactivé. Pour que l'Agent Datadog recueille les plans d'exécution, utilisez [pg-format][18] de manière à formater les requêtes SQL avant de les passer à [node-postgres][17].|
 
 #### La requête est associée à une base de données ignorée par la configuration de l'instance de l'Agent
-La requête est associée à une base de données ignorée par le paramètre de configuration `ignore_databases` de l'instance de l'Agent. Les bases de données par défaut, telles que les bases de données `rdsadmin` et `azure_maintenance`, sont ignorées dans le paramètre `ignore_databases`. Les requêtes associées à ces bases de données ne comportent aucun échantillon ni aucun plan d'exécution. Vérifiez la valeur de ce paramètre dans la configuration de votre instance et les valeurs par défaut dans l'[exemple de fichier de configuration][19].
+La requête se trouve dans une base de données ignorée par le paramètre `ignore_databases` de la configuration de l'instance de l'Agent. Les bases de données par défaut telles que `rdsadmin` et `azure_maintenance` sont ignorées dans le paramètre `ignore_databases`. Les requêtes dans ces bases de données ne disposent pas d'échantillons ni de plans d'explication. Vérifiez la valeur de ce paramètre dans votre configuration d'instance et les valeurs par défaut dans le [fichier de configuration d'exemple][19].
 
 **Remarque :** la base de données `postgres` est également ignorée par défaut dans les versions <7.41.0 de l'Agent.
 
@@ -235,13 +247,14 @@ Pour en savoir plus, consultez la version appropriée de la [documentation Postg
 La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. Vous trouverez ci-dessous les raisons pour lesquelles les requêtes de l'Agent peuvent solliciter plus de ressources.
 
 #### Valeur élevée pour `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
-Il est conseillé de définir la valeur de `pg_stat_statements.max` sur `10000`. Si vous utilisez une valeur plus élevée, l'exécution de la requête de collecte prendra plus de temps, ce qui peut entraîner l'expiration de la requête et empêcher la collecte d'une partie des métriques. Si l'Agent envoie cet avertissement, vérifiez que `pg_stat_statements.max` est défini sur `10000` pour la base de données.
+La valeur recommandée pour `pg_stat_statements.max` est `10000`
+Définir cette configuration sur une valeur plus élevée peut allonger le temps d'exécution de la requête de collecte, ce qui peut entraîner des délais d'expiration et des lacunes dans la collecte des métriques de requêtes. Si l'Agent signale cet avertissement, vérifiez que `pg_stat_statements.max` est bien défini sur `10000` dans la base de données.
 
 
 [1]: /fr/database_monitoring/setup_postgres/
 [2]: /fr/agent/troubleshooting/
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /fr/agent/guide/agent-log-files
+[3]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /fr/agent/configuration/agent-log-files
 [5]: /fr/database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /fr/database_monitoring/setup_postgres/advanced_configuration
@@ -262,3 +275,4 @@ Il est conseillé de définir la valeur de `pg_stat_statements.max` sur `10000`.
 [22]: https://www.postgresql.org/docs/12/contrib.html
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
+[25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various

@@ -10,15 +10,15 @@ Use the RDS component to represent relational databases from your Amazon Web Ser
 ## Toolbar
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Role**: The role of the RDS instance.
-- **Engine**: Select the database engine used for the RDS instance.
-- **Min capacity unit**: The minimum amount of Aurora capacity units. Only available for the serverless role.
-- **Max capacity unit**: The maximum amount of Aurora capacity units. Only available for the serverless role.
-- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Deployment option**: The type of deployment for the instance, Single-AZ or Multi-AZ Standby.
-- **Billing option**: The pricing model used for the instance.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Role{{< /ui >}}: The role of the RDS instance.
+- {{< ui >}}Engine{{< /ui >}}: Select the database engine used for the RDS instance.
+- {{< ui >}}Min capacity unit{{< /ui >}}: The minimum amount of Aurora capacity units. Only available for the serverless role.
+- {{< ui >}}Max capacity unit{{< /ui >}}: The maximum amount of Aurora capacity units. Only available for the serverless role.
+- {{< ui >}}Instance type{{< /ui >}}: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Deployment option{{< /ui >}}: The type of deployment for the instance, Single-AZ or Multi-AZ Standby.
+- {{< ui >}}Billing option{{< /ui >}}: The pricing model used for the instance.
 
 ## API
 

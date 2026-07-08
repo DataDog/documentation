@@ -1,4 +1,5 @@
 ---
+id: serverless_insights
 title: Serverless Insights
 core_product:
   - serverless monitoring

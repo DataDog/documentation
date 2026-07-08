@@ -23,6 +23,10 @@ further_reading:
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Learn more about Calculated Fields Formulas"
+- link: "https://learn.datadoghq.com/courses/log-explorer"
+  tag: "Learning Center"
+  text: "Getting Started with Log Explorer"
+
 ---
 
 ## Overview

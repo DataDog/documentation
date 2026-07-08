@@ -1,9 +1,10 @@
 ---
+id: distribution
 core_product:
 - モニター
 related_terms:
-- フラッシュ感覚
-- ヒートマップ
+- flush_interval
+- heatmap
 title: ディストリビューション
 ---
 ディストリビューションは、フラッシュ間隔中に複数のホストから送信された値 (`count`、`min`、`max`、`sum`、`avg`、`p50`、`p75`、`p90`、`p95`、`p99` など) を集約するメトリクスタイプです。

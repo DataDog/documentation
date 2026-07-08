@@ -12,10 +12,10 @@ You can use the Service Bus Namespace component to represent and visualize cloud
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Name**: Enter the name of your namespace.
-- **Tier**: Select the service tier for your service bus namespace.
-- **Messaging units**: Select the number of messaging units available for your namespace. Only available for the **Premium** tier.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Name{{< /ui >}}: Enter the name of your namespace.
+- {{< ui >}}Tier{{< /ui >}}: Select the service tier for your service bus namespace.
+- {{< ui >}}Messaging units{{< /ui >}}: Select the number of messaging units available for your namespace. Only available for the {{< ui >}}Premium{{< /ui >}} tier.
 
 ## API
 

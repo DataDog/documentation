@@ -1,4 +1,5 @@
 ---
+id: kubernetes
 core_product:
 - monitorización de la infraestructura
 title: Kubernetes

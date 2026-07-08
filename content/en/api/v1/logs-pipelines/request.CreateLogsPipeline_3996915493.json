@@ -1,0 +1,32 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayMap",
+  "processors": [
+    {
+      "type": "array-map-processor",
+      "is_enabled": true,
+      "name": "map items",
+      "source": "items",
+      "target": "out",
+      "preserve_source": true,
+      "processors": [
+        {
+          "type": "attribute-remapper",
+          "sources": [
+            "$sourceElem.id"
+          ],
+          "target": "$targetElem.uid",
+          "preserve_source": true
+        },
+        {
+          "type": "string-builder-processor",
+          "template": "item-%{$sourceElem.id}",
+          "target": "$targetElem.label"
+        }
+      ]
+    }
+  ],
+  "tags": []
+}

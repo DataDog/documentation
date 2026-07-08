@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Go tracer**.
+1. **Install the Datadog Go SDK**.
 
-   1. In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the SDK from `dd-trace-go`.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer

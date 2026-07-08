@@ -181,6 +181,27 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .us2_fed,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -223,6 +244,27 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .uk1,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 To be GDPR compliant, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
 
@@ -249,7 +291,7 @@ Datadog.verbosityLevel = .debug
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog tracer implements the [Open Telemetry standard][13]. Enable the Datadog tracer, register the tracer provider, and get the tracer instance:
+3. Datadog SDK implements the [Open Telemetry standard][13]. Enable the Datadog SDK, register the tracer provider, and get the tracer instance:
 
 {{< tabs >}}
 {{% tab "Swift" %}}

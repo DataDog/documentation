@@ -10,7 +10,7 @@ In Datadog APM, the `host` tag correlates spans and traces to infrastructure mon
 
 ## Datadog Agent vs. Tracer hostname
 
-The **Agent host** is the host on which the Datadog Agent is running. The **Tracer host** is the host on which the application instrumented with the tracing library is running.
+The **Agent host** is the host on which the Datadog Agent is running. The **Tracer host** is the host on which the application instrumented with the SDK is running.
 
 The Agent host and the Tracer host may differ based on how you deploy the Datadog Agent on your infrastructure:
 

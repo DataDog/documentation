@@ -1,4 +1,5 @@
 ---
+id: framework
 core_product:
 - security
 - csm

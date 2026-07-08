@@ -32,6 +32,13 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
+  - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+    tag: "Blog"
+    text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
@@ -84,7 +91,7 @@ Incident search uses the same event-based [search syntax][33] as Logs and Event 
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
-{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
+{{< img src="incident_response/incident_management/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
 
 ## Describing the incident
 

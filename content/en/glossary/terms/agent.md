@@ -1,4 +1,5 @@
 ---
+id: agent
 title: Agent
 synonyms:
   - Datadog Agent

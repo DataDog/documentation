@@ -1,4 +1,5 @@
 ---
+id: span
 core_product:
 - apm
 short_definition: スパンは、特定の期間における分散システムの論理的な作業単位です。

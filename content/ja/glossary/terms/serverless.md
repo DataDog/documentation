@@ -1,4 +1,5 @@
 ---
+id: serverless
 core_product:
 - serverless monitoring
 title: サーバーレス

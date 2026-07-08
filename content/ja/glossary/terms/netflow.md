@@ -1,4 +1,5 @@
 ---
+id: netflow
 core_product:
 - クラウドネットワークモニタリング
 title: NetFlow

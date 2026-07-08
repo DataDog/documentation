@@ -4,6 +4,9 @@ aliases:
 - /service_management/case_management/create_notifications_and_third_party_tickets
 - /service_management/case_management/notifications_integrations/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/incident_response/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
@@ -89,7 +92,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow.
 
 {{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
-{{< img src="/service_management/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
 
 1. Ensure the Jira integration is configured.
 1. In Case Management project settings, enable **Jira** for manual Jira issue creation from the project.
@@ -129,15 +132,56 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 **Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Linear Configuration" level="h4" expanded=false id="linear" %}}
+1. Ensure the [Linear integration][5] is configured.
+1. In Case Management project settings, enable **Linear** for manual Linear issue creation from the project.
+1. Select a Linear workspace and team to create issues in.
+1. You can opt into the automatic creation of a Linear issue for each case created in the project.
+1. For the following attributes—case title, description, assignee, comments, status, and priority—select one of the options below:
+  | Option                        | Description                                                                                                                             |
+  |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+  | Once to Linear at case creation | The field syncs from Case Management to Linear only at the time the case is created. Subsequent changes are not reflected on either side. |
+  | Two-way sync (bi-directional) | Changes in Case Management are reflected in Linear, and vice versa.                                                                      |
+  | Don't sync                    | The field does not sync to Linear.                                                                                                       |
+1. For case status, select which states they map to on the Linear side.
+1. Save changes.
+
+**Notes**:
+- Only cases using the core statuses of "Open", "In Progress", and "Closed" can sync with Linear.
+- Two-way syncing requires [webhook support][6].
+{{% /collapse-content %}}
+
 ## Incident auto-escalation
 
 Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Cases allows you to automatically declare incidents when cases match your defined criteria, removing the need for manual intervention.
 
 Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**.
 
-{{< img src="/service_management/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
+{{< img src="/incident_response/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
 
 When enabled, any case that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
+
+## Slack mirroring
+With the Slack integration, replies in Slack notification threads linked to a case are automatically mirrored to the case activity timeline. This keeps the case context up to date without requiring manual updates in Datadog. Slack thread mirroring to cases is supported for:
+- [Slack notifications][8] generated from Case Management
+- Slack notifications generated from Monitors using [case handles][7]
+- Slack threads for cases created directly from Slack using the [Slack integration][9]
+
+**To configure Slack thread mirroring**:
+
+Make sure the [Slack integration][9] is configured for your Datadog organization.
+
+Slack thread mirroring is enabled by default for all Case Management projects. To disable it for a specific project:
+1. Navigate to [**Project Settings**][1] and click on a project to expand its settings.
+1. In the expanded menu, click **Integrations** > **Slack**.
+1. Toggle off **Slack thread mirroring**.
+
+### How it works
+
+- For any case notifications sent to Slack, activity in the notification thread is mirrored back to the case.
+- Mirrored activity includes any text replies (attachments are not supported). Each mirrored message shows the Slack user's name and Slack as the source.
+- Multiple Slack threads can mirror comments into a single case. 
+- Mirroring is one-directional: messages flow from Slack to the case, not from the case to Slack.
 
 ## Further Reading
 
@@ -147,3 +191,8 @@ When enabled, any case that meets your specified query criteria (at any point in
 [2]: /integrations/jira/#configure-a-jira-webhook
 [3]: /integrations/servicenow/#itom-and-itsm-setup
 [4]: /incident_response/on-call/
+[5]: /integrations/linear/
+[6]: /integrations/linear/#configure-a-linear-webhook
+[7]: /incident_response/case_management/create_case#automatic-case-creation
+[8]: /incident_response/case_management/notifications_integrations#notifications
+[9]: /integrations/slack/?tab=datadogforslack

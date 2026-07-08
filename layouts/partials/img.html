@@ -4,7 +4,7 @@ there MUST NOT be an empty line at the end of this file */}}
 {{ if .img_param }}
     {{ .root.Scratch.Set "img_param" .img_param }}
 {{ else }}
-    {{ .root.Scratch.Set "img_param" "?ch=Width,DPR&fit=max" }}
+    {{ .root.Scratch.Set "img_param" "?fit=max" }}
 {{ end }}
 {{ $img_param := .root.Scratch.Get "img_param" }}
 

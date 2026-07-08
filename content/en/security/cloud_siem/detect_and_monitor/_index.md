@@ -14,6 +14,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/"
   tag: "Blog"
   text: "Best practices for creating custom detection rules with Datadog Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-detect-investigate-threats"
+  tag: "Learning Center"
+  text: "Detect and Investigate Threats with Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-custom-rules"
+  tag: "Learning Center"
+  text: "Write Custom Cloud SIEM Detection Rules"
+
 ---
 
 ## Overview
@@ -32,7 +39,7 @@ You can edit OOTB detection rules and do the following:
 
 - Change the name of the rule.
 - Extend the query. The original query cannot be edited, but you can add a custom query to it.
-- Change the severity setting in the Set conditions section.
+- Change the severity setting in the {{< ui >}}Set conditions{{< /ui >}} section.
 - Modify the playbook.
 
 ### Custom detection rules
@@ -50,7 +57,7 @@ Regular audits of all out-of-the-box detection rules are performed to maintain h
 The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
-    - Signal side panel's **Rule Details > Playbook** section
+    - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][3] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
@@ -60,6 +67,12 @@ The rule deprecation process is as follows:
 Security signals warn you about possible threats to your infrastructure, but false positives can also be generated. For example, a large number of security signals might be triggered if a sudden influx of requests are generated from load testing an application. To reduce false positives in such scenarios, you can define a suppression query in a detection rule that prevents a signal from getting generated. You can also create suppression rules to set general suppression conditions across multiple detection rules.
 
 See [Suppressions][4] for more information.
+
+## Critical assets
+
+You can identify critical assets to customize the security signals associated with them. You can customize severity levels, apply custom tags, and isolate changes to specific rules.
+
+See [Critical Assets][6] for more information.
 
 ## MITRE ATT&CK Map
 
@@ -74,3 +87,4 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [3]: /security/detection_rules/#clone-a-rule
 [4]: /security/cloud_siem/detect_and_monitor/suppressions
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
+[6]: /security/cloud_siem/detect_and_monitor/critical_assets

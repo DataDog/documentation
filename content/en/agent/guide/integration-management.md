@@ -54,7 +54,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-Run `powershell.exe` as **elevated** (run as admin).
+Run `powershell.exe` as {{< ui >}}elevated{{< /ui >}} (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration install datadog-vsphere==3.6.0
 ```
@@ -86,7 +86,7 @@ sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-Run `powershell.exe` as **elevated** (run as admin).
+Run `powershell.exe` as {{< ui >}}elevated{{< /ui >}} (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration remove datadog-vsphere
 ```
@@ -108,7 +108,7 @@ sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-Run `powershell.exe` as **elevated** (run as admin).
+Run `powershell.exe` as {{< ui >}}elevated{{< /ui >}} (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration show datadog-vsphere
 ```
@@ -126,7 +126,7 @@ sudo -u dd-agent -- datadog-agent integration freeze
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-Run `powershell.exe` as **elevated** (run as admin).
+Run `powershell.exe` as {{< ui >}}elevated{{< /ui >}} (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration freeze
 ```

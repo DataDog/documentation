@@ -1,4 +1,5 @@
 ---
+id: reference_table
 title: reference table
 core_product:
   - log management

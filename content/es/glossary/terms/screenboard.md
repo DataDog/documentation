@@ -1,4 +1,5 @@
 ---
+id: screenboard
 core_product:
 - dashboards
 related_terms:

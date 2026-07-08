@@ -38,9 +38,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Node.js Applications][1].
 
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js SDK**.
 
-   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step.
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js SDK in one step.
 
    ```
    NODE_OPTIONS='--require @datadog/serverless-compat/init --require dd-trace/init'
@@ -66,7 +66,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Python Applications][1].
 
 
-2. **Initialize the Datadog Python tracer and Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
+2. **Initialize the Datadog Python SDK and Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
 
    ```python
    from datadog_serverless_compat import start
@@ -85,10 +85,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-1. **Install dependencies**. Download the Datadog Java tracer and Serverless Compatibility Layer:
+1. **Install dependencies**. Download the Datadog Java SDK and Serverless Compatibility Layer:
 
 
-   Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+   Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest SDK class files, to a folder that is accessible by your Datadog user:
    ```shell
    wget -O /path/to/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O /path/to/dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
@@ -98,9 +98,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
-2. **Initialize the Datadog Java tracer and Serverless Compatibility Layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
+2. **Initialize the Datadog Java SDK and Serverless Compatibility Layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
 
-   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java tracer and the Serverless Compatibility Layer.
+   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java SDK and the Serverless Compatibility Layer.
 
    | Name      | Value |
    |-----------| ----- |
@@ -128,7 +128,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Go Applications][1] and [Datadog Serverless Compatibility Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
 
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Go SDK**. Add the following lines to your main application entry point file (for example, `main.go`):
 
    ```go
       import (
@@ -181,9 +181,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    | `DD_TAGS`    | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.                            |
    | `DD_SITE`    | [Datadog site][13] - Set this tag if you are in a different site. **Default** is US1 `datadoghq.com` |
 
-8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+8. {{< ui >}}Add Service Label in the info panel{{< /ui >}}. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function.
+   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the {{< ui >}}info panel{{< /ui >}} of your function.
    | Name      | Value                                                       |
    |-----------|-------------------------------------------------------------|
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
@@ -259,7 +259,7 @@ public class Example implements HttpFunction {
 }
 ```
 
-You can also install the tracer using the following Maven dependency:
+You can also install the SDK using the following Maven dependency:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -369,8 +369,8 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 
 ## What's next?
 
-- You can view your Cloud Run Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
-- You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
+- You can view your Cloud Run Functions traces in [{{< ui >}}Trace Explorer{{< /ui >}}][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
+- You can use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Cloud Run Functions{{< /ui >}}][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
 
 ## Troubleshooting
 
@@ -379,7 +379,7 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 You can collect [debug logs][7] for troubleshooting. To configure debug logs, use the following environment variables:
 
 `DD_TRACE_DEBUG`
-: Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
+: Enables (`true`) or disables (`false`) debug logging for the Datadog SDK. Defaults to `false`.
 
   **Values**: `true`, `false`
 

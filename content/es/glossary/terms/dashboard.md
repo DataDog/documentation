@@ -1,4 +1,5 @@
 ---
+id: dashboard
 core_product:
 - dashboards
 related_terms:

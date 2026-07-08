@@ -27,17 +27,17 @@ After [creating your monitor][1], use the monitor status page to view the status
 
 ## Header
 
-The header contains the monitor's status, time of status, and monitor title. On the right are the **Mute**, **Resolve**, and settings cog buttons.
+The header contains the monitor's status, time of status, and monitor title. On the right are the {{< ui >}}Mute{{< /ui >}}, {{< ui >}}Resolve{{< /ui >}}, and settings cog buttons.
 
 ### Mute
 
-Use the mute button to mute the entire monitor or partially mute it by setting a **Scope**. The available scopes are based on the monitor's group tags. See [Downtimes][2] for details on muting multiple scopes or monitors at the same time.
+Use the mute button to mute the entire monitor or partially mute it by setting a {{< ui >}}Scope{{< /ui >}}. The available scopes are based on the monitor's group tags. See [Downtimes][2] for details on muting multiple scopes or monitors at the same time.
 
 **Note**: Muting or unmuting a monitor with the UI deletes all scheduled downtimes associated with that monitor.
 
 ### Resolve
 
-If your monitor is in an alert state, the **Resolve** button is visible. Use this button to resolve your monitor manually.
+If your monitor is in an alert state, the {{< ui >}}Resolve{{< /ui >}} button is visible. Use this button to resolve your monitor manually.
 
 The monitor `resolve` function is artificially switching the monitor status to `OK` for its next evaluation. The next monitor evaluation is performed normally on the data the monitor is based on.
 
@@ -48,7 +48,7 @@ Manually resolving a monitor is appropriate for cases where data is reported int
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Create an incident
-Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* pop-up modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
+Create an incident from a monitor by selecting {{< ui >}}Declare incident{{< /ui >}}. Configure the {{< ui >}}Declare Incident{{< /ui >}} pop-up modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
 
 ### Settings
 
@@ -56,10 +56,10 @@ Click the settings cog to display the options available:
 
 | Option | Description                                                                                                                                                                                                    |
 |--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Edit   | Edit the current monitor. See details in the [Configure Monitors][1] section.                                                                                                                                            |
-| Clone  | Make a copy of the current monitor.                                                                                                                                                                            |
-| Export | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage monitors programmatically, define a monitor in the UI and export the JSON. |
-| Delete | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                      |
+| {{< ui >}}Edit{{< /ui >}}   | Edit the current monitor. See details in the [Configure Monitors][1] section.                                                                                                                                            |
+| {{< ui >}}Clone{{< /ui >}}  | Make a copy of the current monitor.                                                                                                                                                                            |
+| {{< ui >}}Export{{< /ui >}} | Export the JSON configuration for the current monitor. This option is also available when [creating your monitor][1]. If you manage monitors programmatically, define a monitor in the UI and export the JSON. |
+| {{< ui >}}Delete{{< /ui >}} | Delete the current monitor. You will be prompted to confirm the deletion.                                                                                                                                      |
 
 ## Properties
 
@@ -91,13 +91,13 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 * The query you are filtering by is not working as expected.
 
-The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `service` and `host`, but you only want to receive alerts for the `service`. The status graph shows the monitor's status grouped by `service`. You can see the `host` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][14].
+The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `service` and `host`, but you only want to receive alerts for the `service`. The status graph shows the monitor's status grouped by `service`. You can see the `host` subgroups by clicking {{< ui >}}View all{{< /ui >}} which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][14].
 
 {{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="Monitor status grouped by service, highlighting option to view subgroups " style="width:100%;" >}}
 
 #### Filter the monitor status by groups or events
 
-To scope down the **Status & History** view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
+To scope down the {{< ui >}}Status & History{{< /ui >}} view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
 
 - Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31]. 
 - Queries automatically append a wildcard. To apply specific filters, surround your query with double quotes (`"`).
@@ -116,7 +116,7 @@ To scope down the **Status & History** view to specific groups, use the filter f
 
 #### Investigate a Monitor in a Notebook
 
-For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
+For further investigation into your metrics evolution, click {{< ui >}}Open in a notebook{{< /ui >}} by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
 
 {{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook button" style="width:90%;">}}
 
@@ -147,7 +147,7 @@ This graph shows the results from the raw data points of a metric applied agains
 
 ## Events
 
-Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [Events Explorer][10].
+Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the {{< ui >}}Status & History{{< /ui >}} section. The events are also displayed in your [Events Explorer][10].
 
 ### Audit trail
 Audit Trail automatically captures monitor changes for all monitor types and creates an event. This event documents the changes to the monitor.
@@ -159,15 +159,15 @@ Audit Trail automatically captures monitor changes for all monitor types and cre
  
  For more information, see the [Audit Trail][11] documentation and read the [Audit Trail best practices][12] blog.
 
-Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
+Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under {{< ui >}}Define permissions and audit notifications{{< /ui >}}, select {{< ui >}}Notify{{< /ui >}} in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [Events Explorer][10].
 
 ## Export and import
 
-You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
+You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose {{< ui >}}Export{{< /ui >}} from the menu.
 
-[Import a monitor][13] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+[Import a monitor][13] to Datadog with JSON using the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Import{{< /ui >}}.
 
 ## Further Reading
 

@@ -11,12 +11,12 @@ Use the API Gateway component to represent RESTful, HTTP, and WebSocket APIs fro
 
 Use the toolbar to configure and customize your component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate item**: Rotate the component and change its direction.
-- **API Type**: Select the API type for the gateway.
-- **M req./month**: Enter the number of requests sent per month, in the millions.
-- **M min./month**: Enter the number of messages sent per minute, in the millions. Only available for APIs of type `websocket`.
-- **Cache Memory (GB)**. Select the amount of memory used for caching API responses, in gigabytes. Only available for APIs of type `rest`.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the component and change its direction.
+- {{< ui >}}API Type{{< /ui >}}: Select the API type for the gateway.
+- {{< ui >}}M req./month{{< /ui >}}: Enter the number of requests sent per month, in the millions.
+- {{< ui >}}M min./month{{< /ui >}}: Enter the number of messages sent per minute, in the millions. Only available for APIs of type `websocket`.
+- {{< ui >}}Cache Memory (GB){{< /ui >}}. Select the amount of memory used for caching API responses, in gigabytes. Only available for APIs of type `rest`.
 
 ## API
 

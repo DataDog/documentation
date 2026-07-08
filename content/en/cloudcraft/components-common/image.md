@@ -12,13 +12,13 @@ The Image component is a basic but powerful component available for designing di
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Image name**: Name of the uploaded image, with file extension. Clicking the image name allow you to upload a new image to replace the current one.
-- **Toggle 3D/2D projection**: Display the image in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
-- **Toggle flat/standing projection**: Display the image flat or standing on the diagram. Not available when 2D projection is toggled or on 2D diagrams.
-- **Scale**: Increase or decrease the size of an image.
-- **Rotate item**: Rotate an image and change its direction.
-- **Raise**: Raise the image component above other images.
-- **Lower**: Lower the image component below other images.
+- {{< ui >}}Image name{{< /ui >}}: Name of the uploaded image, with file extension. Clicking the image name allow you to upload a new image to replace the current one.
+- {{< ui >}}Toggle 3D/2D projection{{< /ui >}}: Display the image in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
+- {{< ui >}}Toggle flat/standing projection{{< /ui >}}: Display the image flat or standing on the diagram. Not available when 2D projection is toggled or on 2D diagrams.
+- {{< ui >}}Scale{{< /ui >}}: Increase or decrease the size of an image.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate an image and change its direction.
+- {{< ui >}}Raise{{< /ui >}}: Raise the image component above other images.
+- {{< ui >}}Lower{{< /ui >}}: Lower the image component below other images.
 
 ## API
 

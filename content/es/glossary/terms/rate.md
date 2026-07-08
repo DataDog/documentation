@@ -1,4 +1,5 @@
 ---
+id: rate
 core_product:
 - métricas
 title: tasa

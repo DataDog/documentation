@@ -25,7 +25,7 @@ L'authentification SQL Server n'est pas basée sur les comptes utilisateur Wind
 
 En cas d'erreur de connexion, commencez par vérifier si vous pouvez vous connecter à l'instance en tant qu'utilisateur datadog. Pour ce faire, utilisez simplement un outil de ligne de commande tel que `sqlcmd`.
 
-Par exemple :
+Exemple :
 
 ```bash
 # Dans cet exemple, l'authentification SQL est utilisée
@@ -46,7 +46,7 @@ Les problèmes de connexion TCP sont récurrents lorsque l'Agent est mal configu
 
 Par exemple, l'erreur suivante est due à un échec de la connexion TCP :
 
-```shell
+```bash
 TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
 ```
 
@@ -66,9 +66,9 @@ Pour résoudre ce problème :
 
 1. Vérifiez la connexion TCP entre l'Agent et le host en exécutant `telnet {host} {port}` afin de vous assurer qu'il existe une connectivité réseau entre l'Agent et la base de données.
 
-2. Connectez-vous manuellement via l'utilitaire sqlcmd et vérifiez s'il y a un problème avec la base de données configurée. Par exemple : `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
+2. Connectez-vous manuellement avec sqlcmd et vérifiez si la base de données configurée présente un problème. Par exemple : `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-#### Invalid connection string attribute
+####  En raison de « Invalid connection string attribute »
 
 Les fournisseurs ADO suivants sont pris en charge par Windows : `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
@@ -109,25 +109,26 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 ### Fournisseur SSL : The certificate chain was issued by an authority that is not trusted {#echec-verification-certificat}
 
-Cette erreur se produit souvent après la mise à niveau vers le dernier pilote [MSOLEDBSQL][6] en raison des [changements majeurs][7] qui y ont été apportés. Dans la dernière version du pilote, toutes les connexions à l'instance SQL sont chiffrées par défaut.
+#### Microsoft OLE DB Driver 2019
 
-Si vous utilisez la dernière version de Microsoft OLE DB Driver pour SQL Server et que vous essayez de vous connecter à une instance SQL Server exigeant des connexions chiffrées, vous pouvez appliquer les solutions suivantes :
+Cette erreur est fréquente après une mise à niveau vers le pilote [`MSOLEDBSQL` 2019][6] en raison des [modifications incompatibles][7] introduites. Dans la dernière version du pilote, toutes les connexions à l'instance SQL sont chiffrées par défaut.
+
+Si vous utilisez la dernière version du pilote Microsoft OLE DB Driver for SQL Server et que vous tentez de vous connecter à une instance SQL Server qui requiert des connexions chiffrées, vous pouvez utiliser l'une des solutions de contournement suivantes :
 
 1. Si vous utilisez un certificat auto-signé et le paramètre Force Encryption sur le serveur (`rds.force_ssl=1` sur AWS) afin de vous assurer que les clients utilisent une connexion chiffrée :
 
-   - Passez à un certificat vérifié comme étant de confiance au moyen de la chaîne de confiance du client
-   - Ajoutez le certificat auto-signé en tant que certificat de confiance côté client
-   - Ajoutez `TrustServerCertificate=yes;` à la chaîne de connexion
+   - Remplacez le certificat par un certificat approuvé dans la chaîne de confiance du client.
+   - Ajoutez le certificat auto-signé en tant que certificat de confiance sur le client.
+   - Ajoutez `Trust Server Certificate=True;` à la chaîne de connexion.
 
 Pour en savoir plus, consultez [la documentation Microsoft][7].
 
 2. Si votre instance SQL Server ne nécessite aucun chiffrement pour se connecter (`rds.force_ssl=0` sur AWS), ajoutez `Use Encryption for Data=False;` dans la chaîne de connexion. Par exemple :
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
-      connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
+      connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
       connector: adodbapi
       adoprovider: MSOLEDBSQL19
   ```
@@ -135,7 +136,6 @@ Pour en savoir plus, consultez [la documentation Microsoft][7].
 3. Installez la [version 2018 du pilote MSOLEDBSQL][8]. Ce pilote n'applique pas de chiffrement par défaut. Une fois le pilote installé, définissez `adoprovider` sur `MSOLEDBSQL`. Par exemple :
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"
@@ -143,17 +143,19 @@ Pour en savoir plus, consultez [la documentation Microsoft][7].
       adoprovider: MSOLEDBSQL
   ```
 
-Si vous utilisez un pilote **autre que `MSOLEDBSQL` 2019**, cette erreur peut être résolue en définissant `TrustServerCertificate=yes` dans la chaîne de connexion. Par exemple, pour la version 2018 du pilote `ODBC` :
+#### Autres versions des pilotes Microsoft OLE DB et ODBC
+
+Si vous utilisez un pilote OLE DB autre que `MSOLEDBSQL` 2019 ou des pilotes ODBC, cette erreur peut être résolue en définissant `TrustServerCertificate=yes` dans la chaîne de connexion. Par exemple, pour le pilote `ODBC` :
 
   ```yaml
-  #  dans cet exemple, l'authentification SQL Server est utilisée
+  # this example uses SQL Server authentication
   instances:
-    - host: <ENDPOINT_INSTANCE>,<PORT>
+    - host: <INSTANCE_ENDPOINT>,<PORT>
       username: datadog
-      password: <MOTDEPASSE_AGENT_DD>
+      password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server ne parvient pas à se connecter : SSL Security error (18) {#ssl-security-error}
@@ -266,7 +268,7 @@ Pour connecter SQL Server (hébergé sur Linux ou Windows) à un host Linux, pr
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```
@@ -312,9 +314,51 @@ Les métriques de requête et les plans d'exécution ne prennent plus en charge 
 
 Le tag `user` est disponible pour les événements liés aux activités de requête et les métriques relatives à la charge des bases de données.
 
-### Pourquoi les requêtes « CREATE PROCEDURE » sont-elles aussi nombreuses ?
+### Pourquoi y a-t-il autant de requêtes « CREATE PROCEDURE » ?
 
 Avant la version 7.40.0 de l'Agent, les statistiques `PROCEDURE` étaient surestimées en raison d'un bug. Par conséquent, l'interface Query Metrics de Database Monitoring affichait un vaste nombre de requêtes `CREATE PROCEDURE...`. Pour résoudre ce problème, installez la dernière version de l'Agent Datadog.
+
+### Les SQL Server Agent Jobs ne sont pas collectés avec l'erreur « The SELECT permission was denied on the object 'sysjobs' » 
+
+Le check SQL Server Agent Jobs nécessite l'autorisation `SELECT` sur la base de données `msdb`. Si vous voyez l'erreur `The SELECT permission was denied on the object 'sysjobs'`, accordez l'autorisation `SELECT` à l'utilisateur que l'Agent utilise pour se connecter à l'instance SQL Server.
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
+
+## Limites connues
+
+### SQL Server 2012
+
+Les métriques suivantes ne sont pas disponibles pour SQL Server 2012 :
+
+- `sqlserver.files.read_io_stall_queued`
+- `sqlserver.files.write_io_stall_queued`
+- `sqlserver.ao.quorum_type`
+- `sqlserver.ao.quorum_state`
+- `sqlserver.ao.member.type`
+- `sqlserver.ao.member.state`
+- `sqlserver.ao.member.number_of_quorum_votes`
+- `sqlserver.ao.log_send_queue_size`
+- `sqlserver.ao.log_send_rate`
+- `sqlserver.ao.redo_queue_size`
+- `sqlserver.ao.redo_rate`
+- `sqlserver.ao.low_water_mark_for_ghosts`
+- `sqlserver.ao.filestream_send_rate`
+- `sqlserver.ao.replica_status`
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.fci.status`
+- `sqlserver.fci.is_current_owner`
+- `sqlserver.latches.latch_wait_time`
+
+### SQL Server 2014
+
+Les métriques suivantes ne sont pas disponibles pour SQL Server 2014 :
+
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.latches.latch_wait_time`
 
 [1]: /fr/database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication

@@ -1,4 +1,5 @@
 ---
+id: layer_3
 core_product:
 - network device monitoring
 - クラウドネットワークモニタリング

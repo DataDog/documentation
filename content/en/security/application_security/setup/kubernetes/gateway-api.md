@@ -152,7 +152,7 @@ spec:
   The AAP Gateway API integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].
+The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go SDK][7] and [AAP Library Configuration][8].
 
 ## Enabling APM tracing
 

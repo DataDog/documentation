@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "personal_access_tokens",
+    "id": "string",
+    "attributes": {
+      "name": "Example-Key-Management-updated"
+    }
+  }
+}

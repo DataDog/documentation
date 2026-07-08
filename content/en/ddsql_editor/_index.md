@@ -5,12 +5,18 @@ aliases:
 - /dashboards/ddsql_editor/
 - /ddsql_editor/getting_started/
 further_reading:
+- link: "mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 - link: "ddsql_reference/ddsql_default"
   tag: "Documentation"
   text: "DDSQL Reference"
 - link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
+  tag: "Learning Center"
+  text: "Getting Started with DDSQL Editor"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
@@ -22,6 +28,8 @@ If you want to query data sources not yet available, use the following form to s
 With [DDSQL Editor][1], you can get deeper visibility into your telemetry by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
 
 You can also export the results of a DDSQL query to visualize in a Dashboard or Notebook or to automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
+
+You can run DDSQL queries from AI agents using the [Datadog MCP Server][9] `ddsql` toolset (Preview).
 
 {{< img src="/ddsql_editor/query-results-avg-cpu-usage-by-host.png" alt="The result of a SQL query showing average CPU usage by host on the DDSQL page in Datadog" style="width:100%;" >}}
 
@@ -84,3 +92,4 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 [6]: /ddsql_reference/ddsql_default/
 [7]: https://docs.datadoghq.com/ddsql_editor/#save-and-share-queries
 [8]: /help/
+[9]: /mcp_server/

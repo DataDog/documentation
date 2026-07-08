@@ -4,7 +4,7 @@ aliases:
 - /fr/logs/indexes/
 description: Contrôler le volume de logs indexés par Datadog
 further_reading:
-- link: /logs/explorer/#visualiser-les-donnees
+- link: /logs/explorer/#visualize
   tag: Documentation
   text: Effectuer des analyses de logs
 - link: /logs/log_configuration/processors
@@ -16,154 +16,161 @@ further_reading:
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: Blog
   text: Logging without Limits*
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#optimizing-log-usage-to-manage-volume-and-cost
+  tag: Blog
+  text: 'Optimiser Datadog à grande échelle : observabilité rentable chez Zendesk'
+- link: https://learn.datadoghq.com/courses/log-indexes
+  tag: Centre d'apprentissage
+  text: Gérer et surveiller les volumes de logs indexés
 title: Index
 ---
-
-Les index de logs offrent un contrôle précis sur le coût de votre gestion de logs. Ils vous permettent de répartir vos données en plusieurs groupes de valeurs, afin d'appliquer différents critères de rétention, de quotas, de surveillance de l'utilisation ou de facturation. Les index se trouvent sur la [page Configuration][1], dans la section Indexes. Cliquez deux fois sur les index ou sur le bouton *edit* pour découvrir le nombre de logs indexés au cours des trois derniers jours, ainsi que la période de rétention de ces logs :
+Les index de logs offrent un contrôle granulaire sur votre budget de gestion des logs en vous permettant de segmenter les données en groupes de valeur pour différentes périodes de conservation, quotas, surveillance de l'utilisation et facturation. Les index se trouvent sur la [page de configuration][1] dans la section Indexes. Double-cliquez dessus ou cliquez sur le bouton *Modifier* pour voir davantage d'informations sur le nombre de logs indexés au cours des 3 derniers jours, ainsi que la période de conservation de ces logs :
 
 {{< img src="logs/indexes/index_details.jpg" alt="détails de l'index" style="width:70%;">}}
 
 Vous pouvez utiliser des logs indexés pour la [recherche à facettes][2], les [patterns][3], les [analyses][4] et la [surveillance][6].
 
-## Utilisation de plusieurs index
+## Plusieurs index {#multiple-indexes}
 
-Par défaut, chaque nouveau compte dispose d'un seul index représentant un ensemble monolithique composé de tous vos logs. Datadog recommande d'utiliser plusieurs index selon vos besoins, afin de bénéficier des fonctionnalités suivantes :
+Par défaut, chaque nouveau compte obtient un seul index représentant un ensemble monolithique de tous vos logs. Datadog recommande d'utiliser plusieurs index si vous avez besoin de :
 
-* Plusieurs [périodes de rétention](#mettre-a-jour-la-retention-des-logs)
-* Plusieurs [quotas journaliers](#definir-un-quota-journalier), pour un meilleur contrôle de votre budget
+* Plusieurs [périodes de conservation](#update-log-retention)
+* Plusieurs [quotas journaliers](#set-daily-quota), pour un meilleur contrôle du budget.
 
 Le Log Explorer prend en charge l'envoi de [requêtes sur plusieurs index][7].
 
-### Ajouter des index
+### Ajouter des index {#add-indexes}
 
-Cliquez sur le bouton New Index pour créer un index. Une limite de création d'index s'applique à chaque compte (par défaut, 100).
+Utilisez le bouton "Nouveau index" pour créer un nouvel index. Il y a un nombre maximum d'index que vous pouvez créer pour chaque compte, fixé à 100 par défaut.
 
 {{< img src="logs/indexes/add-index.png" alt="Ajouter un index" style="width:70%;">}}
 
-**Remarque** : les noms d'index doivent commencer par une lettre et ne peuvent contenir que des lettres minuscules, des nombres ou le caractère '-'.
+**Remarque** : Les noms d'index doivent commencer par une lettre et ne peuvent contenir que des lettres minuscules, des chiffres ou le caractère '-'.
 
 <div class="alert alert-info">
-<a href="/help">Contactez l'assistance Datadog</a> si vous souhaitez augmenter le nombre maximal d'index de votre compte.
+<a href="/help">Contactez le support Datadog</a> si vous avez besoin d'augmenter le nombre maximum d'index pour votre compte.
 </div>
 
-### Supprimer des index
+### Supprimer des index {#delete-indexes}
 
-Pour supprimer un index de votre organisation, cliquez sur l'icône de suppression dans le menu d'actions de l'index. Cette option est uniquement disponible pour les utilisateurs disposant de l'autorisation `Logs delete data`.
+Pour supprimer un index de votre organisation, utilisez l'"icône de suppression" dans la barre d'actions de l'index. Seuls les utilisateurs ayant la `Logs delete data` permission peuvent utiliser cette option.
 
-{{< img src="logs/indexes/delete-index.png" alt="Supprimer un index" style="width:70%;">}}
+{{< img src="logs/indexes/delete-index.png" alt="Supprimer l'index" style="width:70%;">}}
 
 <div class="alert alert-danger">
-Il n'est pas possible de créer un index si son nom est identique à celui d'un index supprimé. 
+Vous ne pouvez pas recréer un index avec le même nom que celui qui a été supprimé. 
 </div>
 
-**Remarque** : les index supprimés n'acceptent plus les nouveaux logs entrants. Ces logs ne peuvent donc plus être interrogés. Dès que les logs auront dépassé leur période de rétention, l'index ne s'affichera plus sur la page Index.
+**Remarque :** L'index supprimé n'acceptera plus de nouveaux journaux entrants. Les journaux de l'index supprimé ne sont plus disponibles pour les requêtes. Après que tous les journaux aient expiré selon la période de conservation applicable, l'index n'apparaîtra plus sur la page des Index.
 
 
 
-## Filtres d'index
+## Filtres d'index {#indexes-filters}
 
-Grâce aux filtres d'index, vous pouvez choisir de façon dynamique à quels index sont transmis les logs de votre choix. Par exemple, si vous créez un premier index filtré sur l'attribut `status:notice`, un deuxième index filtré sur l'attribut `status:error` et un dernier index sans filtre (équivalent à `*`), tous vos logs `status:notice` sont envoyés au premier index, tous vos logs `status:error` vont dans le deuxième index et tous les autres logs sont rassemblés dans le dernier index.
+Les filtres d'index permettent un contrôle dynamique sur les journaux qui entrent dans quels index. Par exemple, si vous créez un premier index filtré sur l'attribut `status:notice`, un deuxième index filtré sur l'attribut `status:error`, et un dernier sans aucun filtre (l'équivalent de `*`), tous vos journaux `status:notice` iraient au premier index, tous vos journaux `status:error` iraient au deuxième index, et le reste irait au dernier.
 
-{{< img src="logs/indexes/multi_index.png" alt="Index multiples" style="width:70%;">}}
+{{< img src="logs/indexes/multi_index.png" alt="Indexes multiples" style="width:70%;">}}
 
-**Remarque** : **les logs sont envoyés dans le premier index filtré auquel ils correspondent**. Faites glisser et déposez les index dans la liste pour modifier leur ordre, selon vos besoins.
+**Remarque** : **Les logs entrent dans le premier index auquel leur filtre s'applique**, utilisez le glisser-déposer sur la liste des index pour les réorganiser selon votre cas d'utilisation.
 
-## Filtres d'exclusion
+## Filtres d'exclusion {#exclusion-filters}
 
 Par défaut, les index de logs ne possèdent pas de filtre d'exclusion. Ainsi, tous les logs correspondant à leur filtre sont indexés.
 
-Toutefois, puisque vos logs ne sont pas tous utiles, les filtres d'exclusion contrôlent leur transmission dans l'index afin d'identifier les logs à supprimer. Les logs exclus sont supprimés des index, mais continuent à être analysés par la fonctionnalité de [live tailing][8] et peuvent être utilisés pour [générer des métriques][9] et être [archivés][10].
+Mais comme vos journaux ne sont pas tous et également précieux, les filtres d'exclusion contrôlent quels journaux entrant dans votre index doivent être supprimés. Les logs exclus sont écartés des index, mais continuent de passer par le [Livetail][8] et peuvent être utilisés pour [générer des métriques][9] et être archivés[10].
 
 Pour ajouter un filtre d'exclusion, procédez comme suit :
 
-1. Accédez à [Log Indexes][11].
-2. Développez le pipeline auquel vous souhaitez ajouter un filtre d'exclusion.
-3. Cliquez sur **Add an Exclusion Filter**.
+1. Naviguez vers [Index de journaux][11].
+2. Développez l'index pour lequel vous souhaitez ajouter un filtre d'exclusion. 
+3. Cliquez sur **Ajouter un filtre d'exclusion**.
 
 Les filtres d'exclusion sont définis par une requête, une règle d'échantillonnage et un bouton d'activation :
 
-* La **query** (requête) par défaut est `*`. Celle-ci entraîne l'exclusion de tous les logs transmis dans l'index. Réduisez le filtre d'exclusion en définissant uniquement un sous-ensemble de logs [avec une requête de log][12].
-* La **sampling rule** (règle d'échantillonnage) par défaut `Exclude 100% of logs` exclut tous les logs correspondant à la requête. Définissez un taux d'échantillonnage entre 0 et 100 %, et choisissez de l'appliquer à chaque log ou à des groupes de logs caractérisés par les valeurs uniques d'un attribut.
-* Par défaut, le filtre est activé. Les logs sont donc supprimés de l'index selon les paramètres du filtre. Cliquez sur le bouton pour désactiver le filtre afin de l'ignorer pour les nouveaux logs transmis.
+* La **requête** par défaut est `*`, ce qui signifie que tous les journaux entrant dans l'index seraient exclus. Limitez le filtre d'exclusion à un sous-ensemble de journaux [avec une requête de journal][12].
+* La **règle d'échantillonnage** par défaut est `Exclude 100% of logs` correspondant à la requête. Adaptez le taux d'échantillonnage de 0 % à 100 %, et décidez si le taux d'échantillonnage s'applique aux journaux individuels ou à un groupe de journaux définis par les valeurs uniques de tout attribut.
+  * Si le taux d'échantillonnage s'applique aux journaux individuels, l'échantillonnage est effectué sur l'existence des identifiants de trace dans les journaux, s'ils sont présents. Dans ce scénario, les journaux échantillonnés ont une chance accrue d'être corrélés avec les traces échantillonnées, afin de promouvoir des données de télémétrie unifiées.
+  * Si la valeur unique d'un ID de trace est choisie pour l'échantillonnage, le comportement est le même que pour les journaux individuels.
+* Le **commutateur** par défaut est actif, ce qui signifie que les journaux circulant dans l'index sont en réalité rejetés selon la configuration du filtre d'exclusion. Désactivez ceci pour ignorer ce filtre d'exclusion pour les nouveaux journaux circulant dans l'index.
 
-**Remarque** : les filtres d'index pour les logs sont uniquement traités avec le premier filtre d'exclusion **actif** correspondant. Si un log correspond à un filtre d'exclusion (même si le log n'est pas transmis en raison d'un échantillonnage), il ignore tous les filtres d'exclusion suivants.
+**Remarque** : Les filtres d'index pour les journaux ne sont traités qu'avec le premier **filtre d'exclusion** actif correspondant. Si un journal correspond à un filtre d'exclusion (même si le journal n'est pas échantillonné), il ignore tous les filtres d'exclusion suivants dans la séquence.
 
-Faites glisser et déposez les filtres d'exclusion dans la liste pour modifier leur ordre, selon vos besoins.
+Glissez et déposez les filtres d'exclusion de la liste pour les réorganiser selon vos cas d'utilisation.
 
-{{< img src="logs/indexes/reorder_index_filters.png" alt="modifier l'ordre des filtres d'index" style="width:80%;">}}
+{{< img src="logs/indexes/reorder_index_filters.png" alt="réorganiser les filtres d'index" style="width:80%;">}}
 
-### Exemples
+### Exemples {#examples}
 
-#### Désactivation et activation d'un filtre
+#### Désactiver, activer {#switch-off-switch-on}
 
-Imaginons que vous souhaitez uniquement utiliser vos logs DEBUG lorsque votre plate-forme souffre d'une défaillance, ou que vous cherchez à surveiller le déploiement d'une version critique de votre application. Configurez un filtre d'exclusion à 100 % sur `status:DEBUG`, et activez-le ou désactivez-le à partir de l'interface Datadog ou via l'[API][13] dès que vous en avez besoin.
+Vous n'aurez peut-être pas besoin de vos journaux DEBUG jusqu'à ce que vous en ayez réellement besoin lorsque votre plateforme subit un incident, ou que vous souhaitiez observer attentivement le déploiement d'une version critique de votre application. Configurez un filtre d'exclusion de 100 % sur le `status:DEBUG`, et activez-le et désactivez-le depuis l'interface utilisateur de Datadog ou via l'[API][13] lorsque nécessaire.
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="activer les filtres d'index" style="width:80%;">}}
 
-#### Suivi des tendances
+#### Surveillez les tendances {#keep-an-eye-on-trends}
 
-Imaginons que vous n'avez pas besoin de conserver tous les logs liés aux requêtes serveur d'accès Web. Vous pouvez choisir d'indexer tous les logs 3xx, 4xx et 5xx, mais d'exclure 95 % des logs 2xx avec `source:nginx AND http.status_code:[200 TO 299]` pour surveiller les tendances.
-**Astuce** : transformez vos logs d'accès Web en KPI utiles en [générant une métrique à partir de vos logs][9]. Celle-ci vous permettra par exemple de compter le nombre de requêtes et de les taguer par code de statut, [navigateur][14] et [pays][15].
+Que faire si vous ne souhaitez pas conserver tous les journaux de vos requêtes de serveur d'accès web ? Vous pourriez choisir d'indexer tous les journaux 3xx, 4xx et 5xx, mais d'exclure 95 % des journaux 2xx : `source:nginx AND http.status_code:[200 TO 299]` pour suivre les tendances.
+**Astuce** : Transformez les journaux d'accès web en KPI significatifs avec une [métrique générée à partir de vos journaux][9], comptant le nombre de requêtes et étiquetée par code d'état, [navigateur][14] et [pays][15].
 
 {{< img src="logs/indexes/sample_200.png" alt="activer les filtres d'index" style="width:80%;">}}
 
-#### Échantillonnage cohérent avec des entités de plus haut niveau
+#### Échantillonnez de manière cohérente avec des entités de niveau supérieur {#sampling-consistently-with-higher-level-entities}
 
-Des millions d'utilisateurs se connectent à votre site Web chaque jour. Bien que vous n'ayez pas besoin de connaître parfaitement tous vos utilisateurs, il peut être utile de comprendre les caractéristiques de certains d'entre eux. Définissez un filtre d'exclusion qui s'applique à tous les logs de production (`env:production`) et excluez les logs pour 90 % de `@user.email` :
+Vous avez des millions d'utilisateurs se connectant à votre site web chaque jour. Et bien que vous n'ayez pas besoin d'observabilité sur chaque utilisateur, vous souhaitez tout de même garder une vue d'ensemble pour certains. Configurez un filtre d'exclusion s'appliquant à tous les journaux de production (`env:production`) et excluez les journaux pour 90 % des `@user.email` :
 
 {{< img src="logs/indexes/sample_user_id.png" alt="activer les filtres d'index" style="width:80%;">}}
 
-Vous pouvez utiliser l'APM avec les logs grâce à l'[injection d'ID de trace dans les logs][16]. Vous n'avez pas besoin de garder tous vos logs sur les utilisateurs. Cependant, veillez à ce que les logs que vous conservez représentent tous les aspects d'une trace. Une telle pratique simplifiera grandement votre correction des problèmes.
-Configurez un filtre d'exclusion appliqué aux logs à partir de votre service instrumenté (`service:mon_app_python`) et excluez les logs pour 50 % des `Trace ID`. Assurez-vous d'utiliser le [remappeur d'ID de trace][17] en amont dans vos pipelines.
+Vous pouvez utiliser APM en conjonction avec les journaux, grâce à l'[injection de l'ID de trace dans les journaux][16]. En ce qui concerne les utilisateurs, vous n'avez pas besoin de conserver tous vos journaux, mais il est essentiel de s'assurer que les journaux donnent toujours une vue d'ensemble complète d'une trace pour le dépannage.
+Mettez en place un filtre d'exclusion appliqué aux journaux de votre service instrumenté (`service:my_python_app`) et excluez les journaux pour 50 % des `Trace ID` - assurez-vous d'utiliser le [remappeur d'ID de trace][17] en amont dans vos pipelines.
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="activer les filtres d'index" style="width:80%;">}}
 
-Pour garantir un échantillonnage homogène parmi plusieurs index :
+Pour garantir un échantillonnage cohérent parmi plusieurs index :
 
 1. Créez une règle d'exclusion dans chaque index.
-2. Utilisez le **même taux d'échantillonnage** et le **même attribut** pour définir l'entité de niveau supérieur de toutes les règles d'exclusion.
-3. Vérifiez bien les règles d'exclusion, les **filtres** et l'**ordre respectif** (seule la première règle d'exclusion correspondante est appliquée aux logs).
+2. Utilisez le **même taux d'échantillonnage** et le **même attribut** définissant l'entité de niveau supérieur pour toutes les règles d'exclusion.
+3. Vérifiez à nouveau les règles d'exclusion, **les filtres** et **l'ordre respectif** (les journaux ne passent que par la première règle d'exclusion correspondante).
 
-Dans les exemples suivants :
+Dans els exemples suivants :
 
 {{< img src="logs/indexes/cross-index_sampling.png" alt="activer les filtres d'index" style="width:80%;">}}
 
-* En général, tous les logs avec un `request_id` spécifique sont soit conservés soit exclus (probabilité de 50 %).
-* Les logs dotés d'un tag `threat:true` ou `compliance:true` sont tous conservés, quel que soit leur `request_id`.
-* Les logs `DEBUG` sont indexés selon la règle d'échantillonnage `request_id`, sauf si le filtre d'exclusion des logs de debugging est activé. Dans ce cas, les logs sont échantillonnés.
-* 50 % des logs d'accès Web `2XX` dotés d'un `request_id` sont conservés. Tous les autres logs d'accès Web `2XX` sont échantillonnés selon la règle du filtre d'exclusion à 90 %.
+* En général, tous les journaux avec un `request_id` spécifique sont soit conservés, soit exclus (avec une probabilité de 50 %).
+* Les journaux avec un `threat:true` ou `compliance:true` tag sont conservés indépendamment du `request_id`.
+* `DEBUG` Les journaux sont indexés de manière cohérente avec la règle d'échantillonnage `request_id`, sauf si le filtre d'exclusion des journaux de débogage est activé, auquel cas ils sont échantillonnés.
+* 50 % des `2XX` journaux d'accès web avec un `request_id` réel sont conservés. Tous les autres `2XX` journaux d'accès web sont échantillonnés en fonction de la règle de filtre d'exclusion de 90 %.
 
-## Mettre à jour la rétention des logs
+## Mettez à jour la conservation des journaux {#update-log-retention}
 
-Le paramètre de rétention des index spécifie la durée pendant laquelle les logs sont stockés et interrogeables dans Datadog. Vous pouvez choisir la durée de rétention de votre choix dans la configuration de votre compte.
+Le paramètre de conservation de l'index détermine combien de temps les journaux sont stockés et consultables dans Datadog. Vous pouvez définir la conservation à n'importe quelle valeur autorisée dans la configuration de votre compte.
 
-Pour permettre l'ajout de rétentions supplémentaires qui ne figurent pas dans votre contrat actuel, contactez le service client à l'adresse suivante : `success@datadoghq.com`. Une fois les rétentions supplémentaires activées, vous devez mettre à jour les périodes de rétention de vos index.
+Pour activer l'ajout de conservations supplémentaires qui ne figurent pas dans votre contrat actuel, contactez Customer Success à : `success@datadoghq.com`. Après que des conservations supplémentaires ont été activées, vous devez mettre à jour les périodes de conservation pour vos index.
 
 {{< img src="logs/indexes/log_retention.png" alt="détails de l'index" style="width:70%;">}}
 
-**Remarque** : pour utiliser des rétentions qui ne font actuellement pas partie de votre contrat, [l'option correspondante][21] doit être activée dans les paramètres de votre organisation par un administrateur.
+**Remarque** : Pour utiliser des conservations qui ne figurent pas dans votre contrat actuel, [l'option][21] doit être activée par un administrateur dans les paramètres de votre organisation.
 
-## Définir un quota journalier
+## Définissez un quota quotidien {#set-daily-quota}
 
-Il est possible de définir un quota journalier pour limiter le nombre de logs stockés dans un index au cours d'une journée. Ce quota est appliqué à l'ensemble des logs qui auraient dû être stockés (c'est-à-dire une fois les filtres d'exclusion appliqués).
-Une fois ce quota atteint, les logs ne sont plus indexés. Ils restent toutefois disponibles pour le [live tailing][18] et continuent à être [envoyés vers vos archives][10] et utilisés pour [générer des métriques][9].
+Vous pouvez définir un quota quotidien pour limiter strictement le nombre de journaux qui sont stockés dans un index par jour. Ce quota s'applique à tous les journaux qui auraient dû être stockés (comme après l'application des filtres d'exclusion).
+Une fois le quota quotidien atteint, les journaux ne sont plus indexés mais restent disponibles dans le [livetail][18], [envoyés à vos archives][10], et utilisés pour [générer des métriques à partir des journaux][9].
 
 Ce quota peut être configuré ou supprimé à tout moment en modifiant l'index :
-- Définissez un quota journalier en millions de logs.
-- (Facultatif) Définissez une heure de réinitialisation personnalisée. Par défaut, les quotas d'index journaliers sont automatiquement réinitialisés à [14 heures (UTC)][19].
-- (Facultatif) Définissez un seuil d'avertissement correspondant à un pourcentage du quota journalier (minimum : 50 %).
+- Définissez un quota quotidien en millions de journaux
+- (Optionnel) Définissez une heure de réinitialisation personnalisée ; par défaut, les quotas quotidiens d'indexation se réinitialisent automatiquement à [14h00 UTC][19]
+- (Optionnel) Définissez un seuil d'avertissement en pourcentage du quota quotidien (minimum 50%)
 
-**Remarque** : les modifications apportées aux quotas journaliers et aux seuils d'alerte prennent effet immédiatement.
+**Remarque** : Les modifications des quotas quotidiens et des seuils d'avertissement prennent effet immédiatement.
 
-{{< img src="logs/indexes/daily_quota_config.png" alt="détails d'un index" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_config.png" alt="détails de l'index" style="width:70%;">}}
 
 Un événement est généré lorsque le quota journalier ou le seuil d'avertissement est atteint :
 
-{{< img src="logs/indexes/index_quota_event.png" alt="notification de quota pour un index" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_warning_events.png" alt="Quota quotidien et événements d'avertissement" style="width:90%;">}}
 
 Consultez la rubrique [Surveiller l'utilisation des logs][20] pour découvrir comment surveiller votre utilisation et envoyer des alertes à ce sujet.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
@@ -181,10 +188,10 @@ Consultez la rubrique [Surveiller l'utilisation des logs][20] pour découvrir co
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /fr/logs/search_syntax/
 [13]: /fr/api/v1/logs-indexes/#update-an-index
-[14]: /fr/logs/log_configuration/processors/#user-agent-parser
-[15]: /fr/logs/log_configuration/processors/#geoip-parser
+[14]: /fr/logs/log_configuration/processors/user_agent_parser/
+[15]: /fr/logs/log_configuration/processors/geoip_parser/
 [16]: /fr/tracing/other_telemetry/connect_logs_and_traces/
-[17]: /fr/logs/log_configuration/processors/#trace-remapper
+[17]: /fr/logs/log_configuration/processors/trace_remapper/
 [18]: /fr/logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /fr/logs/guide/best-practices-for-log-management/#monitor-log-usage

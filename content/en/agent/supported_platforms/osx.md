@@ -35,7 +35,7 @@ To install the Agent on macOS, follow the [in-app instructions in Fleet Automati
 {{< img src="/agent/basic_agent_usage/macos_img_installation.png" alt="In-app installation steps for the Datadog Agent on a MacOS host." style="width:90%;">}}
 
 <div class="alert alert-info">
-By default, the Agent is installed in a sandbox located at <code>/opt/datadog-agent</code>. You can move this folder anywhere; however, this documentation assumes a default installation location.
+The Agent is installed in a sandbox located at <code>/opt/datadog-agent</code>. For any additional monitoring, make sure to give the Agent user <code>_dd-agent</code> access to the files or directories.
 </div>
 
 
@@ -46,14 +46,14 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 
 | Description          | Command          |
 |----------------------|------------------|
-| Start Agent as a service           | `launchctl start com.datadoghq.agent` or systray app |
-| Stop Agent running as a service    | `launchctl stop com.datadoghq.agent` or systray app  |
-| Restart Agent running as a service | Stop and then start the Agent with:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>Or use the systray app |
-| Status of Agent service            | `launchctl list com.datadoghq.agent` or systray app  |
-| Status page of running Agent       | `datadog-agent status` or web GUI                    |
-| Send flare                         | `datadog-agent flare` or web GUI                     |
+| Start Agent as a service           | `sudo launchctl kickstart system/com.datadoghq.agent` |
+| Stop Agent running as a service    | `sudo launchctl kill SIGTERM system/com.datadoghq.agent`  |
+| Restart Agent running as a service | `sudo launchctl kickstart -k system/com.datadoghq.agent` |
+| Status of Agent service            | `sudo launchctl print system/com.datadoghq.agent` |
+| Status page of running Agent       | `sudo datadog-agent status` or web GUI                    |
+| Send flare                         | `sudo datadog-agent flare` or web GUI                     |
 | Display command usage              | `datadog-agent --help`                               |
-| Run a check                        | `datadog-agent check <CHECK_NAME>`                   |
+| Run a check                        | `sudo datadog-agent check <CHECK_NAME>`                   |
 
 
 ## Configuration
@@ -61,14 +61,14 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
 - `api_key`: your organization's [Datadog API key][8]
-- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
+- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])
 - Default tags, log levels, and Datadog configurations.
 
-A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
+A fully commented reference file, located in `/opt/datadog-agent/etc/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [sample config_template.yaml file][10] for all available configuration options.
 
 ### Integration files
-Configuration files for integrations are found in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, which contains:
+Configuration files for integrations are found in `/opt/datadog-agent/etc/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, which contains:
 - `conf.yaml`: the active configuration controlling how the integration gathers metrics and logs
 -  `conf.yaml.example`: a sample illustrating supported keys and defaults
 
@@ -76,38 +76,11 @@ Configuration files for integrations are found in `/etc/datadog-agent/conf.d/`. 
 
 ## Uninstall the Agent
 
-To uninstall the Agent, run the following command:
+To uninstall the Agent, run the following script:
 
-### Single user installation
-
-To remove the Agent and all Agent configuration files:
-1. Stop and close the Datadog Agent with the bone icon in the tray.
-2. Drag the Datadog application from the application folder to the trash bin.
-3. Run the following commands:
-    ```shell
-    sudo rm -rf /opt/datadog-agent
-    sudo rm -rf /usr/local/bin/datadog-agent
-    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
-    launchctl remove com.datadoghq.agent
-    sudo rm -rf /var/log/datadog
-    ```
-4. Reboot your machine for the changes to take effect.
-
-### System-wide LaunchDaemon installation
-
-To remove the Agent and all Agent configuration files:
-1. Drag the Datadog application from the application folder to the trash bin.
-2. To remove remaining files, run the following:
-    ```shell
-    sudo rm -rf /opt/datadog-agent
-    sudo rm -rf /usr/local/bin/datadog-agent
-    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
-    sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
-    sudo launchctl unload /Library/LaunchDaemons/com.datadoghq.agent.plist
-    sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
-    sudo rm -rf /var/log/datadog
-    ```
-3. Reboot your machine for the changes to take effect.
+```shell
+curl -L https://install.datadoghq.com/scripts/uninstall_mac_os.sh | bash
+```
 
 ## Troubleshooting
 
@@ -133,3 +106,4 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[11]: https://install.datadoghq.com/scripts/uninstall_mac_os.sh

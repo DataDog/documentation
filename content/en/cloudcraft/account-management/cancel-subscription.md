@@ -16,12 +16,12 @@ Upon cancellation, you can still access to the diagrams you created, but will lo
 <div class="alert alert-info">If you're canceling within the 30-day money-back guarantee period, and prefer a refund, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">reach out to Cloudcraft's support team</a> instead.
 </div>
 
-1. Navigate to **User** > **Subscription Settings**.
-2. Select **Cancel subscription**.
+1. Navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}Subscription Settings{{< /ui >}}.
+2. Select {{< ui >}}Cancel subscription{{< /ui >}}.
 3. Optionally, provide feedback on what Cloudcraft can do to be a better fit for you in the future.
-4. Select **Cancel my account**.
+4. Select {{< ui >}}Cancel my account{{< /ui >}}.
 
-If you do not see the **Cancel subscription** option, you may have bought your subscription through the Datadog sales team or through the AWS Marketplace.
+If you do not see the {{< ui >}}Cancel subscription{{< /ui >}} option, you may have bought your subscription through the Datadog sales team or through the AWS Marketplace.
 
 - If you bought your subscription through the Datadog sales team, it does not auto-renew and expires at the end of your billing cycle.
 - If you bought your subscription through the AWS Marketplace, the cancellation process must be done through your AWS account. For more information, see [Cancel your product subscription][2] in the AWS Marketplace documentation page.

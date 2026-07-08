@@ -21,21 +21,21 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 #### App registration
 
 1. Sign into Microsoft Azure.
-2. Search for **App registrations**.
-3. Click **New registration**.
+2. Search for {{< ui >}}App registrations{{< /ui >}}.
+3. Click {{< ui >}}New registration{{< /ui >}}.
 4. Fill in the required fields and register an application for Datadog.
 5. Copy the Application (client) ID somewhere safe.
-6. Go to **Certificates & secrets** in sidebar and click **New client secret**.
+6. Go to {{< ui >}}Certificates & secrets{{< /ui >}} in sidebar and click {{< ui >}}New client secret{{< /ui >}}.
 7. Add a secret for Datadog.
 8. Copy the secret value somewhere safe.
 
 #### Security group
 
-1. Search for **Azure Active Directory**.
-2. Go to **Groups** in the sidebar and click **New group**.
+1. Search for {{< ui >}}Azure Active Directory{{< /ui >}}.
+2. Go to {{< ui >}}Groups{{< /ui >}} in the sidebar and click {{< ui >}}New group{{< /ui >}}.
 3. Create a group for the app registration.
 4. Click into the newly created group. You may need to refresh the page for it to show up.
-5. Go to **Members** in the sidebar and click **Add members**.
+5. Go to {{< ui >}}Members{{< /ui >}} in the sidebar and click {{< ui >}}Add members{{< /ui >}}.
 6. Find the app registration created earlier and add it as a member.
 
 ### Grant access in Power BI
@@ -43,24 +43,24 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 #### Enable API and admin API access for security group in Power BI Admin
 
 1. Go to the Power BI Admin portal.
-2. In Tenant settings, enable **Service principals can call Fabric APIs** for your security group.
-3. In Tenant settings, find **Admin API settings**.
+2. In Tenant settings, enable {{< ui >}}Service principals can call Fabric APIs{{< /ui >}} for your security group.
+3. In Tenant settings, find {{< ui >}}Admin API settings{{< /ui >}}.
 4. Enable the following for your security group:
-   - **Allow service principals to use read-only admin APIs**
-   - **Enhance admin APIs responses with detailed metadata**
-   - **Enhance admin APIs responses with DAX and mashup expressions**
+   - {{< ui >}}Allow service principals to use read-only admin APIs{{< /ui >}}
+   - {{< ui >}}Enhance admin APIs responses with detailed metadata{{< /ui >}}
+   - {{< ui >}}Enhance admin APIs responses with DAX and mashup expressions{{< /ui >}}
 
 #### Grant access to workspaces
 
 From the Power BI Admin portal:
 
-1. From the sidebar, click **Workspaces** to open the Workspaces pane.
-2. For each workspace you want Datadog to have access to, open the **Access** panel by clicking the three vertical dots and selecting **Workspace access**.
+1. From the sidebar, click {{< ui >}}Workspaces{{< /ui >}} to open the Workspaces pane.
+2. Grant Viewer permissions to the service principal in each workspace you want Datadog to have access to.
 
 ### Add the Power BI integration
 
 1. Navigate to the [Power BI integration tile][1] and enter your tenant ID, and the client ID and secret from earlier.
-2. After you've entered these credentials, click **Save**.
+2. After you've entered these credentials, click {{< ui >}}Save{{< /ui >}}.
 
 ## What's next
 

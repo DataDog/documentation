@@ -1,4 +1,5 @@
 ---
+id: span_id
 core_product:
 - apm
 short_definition: Un ID de span est un identifiant numérique généré par la bibliothèque

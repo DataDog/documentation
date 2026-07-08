@@ -1,4 +1,5 @@
 ---
+id: slo
 core_product:
 - slos
 title: 서비스 수준 목표(SLO)

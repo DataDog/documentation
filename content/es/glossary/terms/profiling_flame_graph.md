@@ -1,9 +1,10 @@
 ---
+id: profiling_flame_graph
 core_product:
 - dashboards
 related_terms:
-- traza (trace)
-- recurso
+- trace
+- resource
 - dashboard
 title: gráfica de llamas de perfiles
 ---

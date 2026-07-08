@@ -136,7 +136,7 @@ The easiest way to create a facet is to add it from the Pipeline Executions side
 
 ### Creating facets from the facet list
 
-If finding a pipeline execution that has the desired field is not an option, create a facet directly from the facet panel by clicking **+ Add**.
+If finding a pipeline execution that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}+ Add{{< /ui >}}.
 
 {{< img src="continuous_integration/add_facet.png" alt="Add a facet from the facet side panel" style="width:30%;">}}
 

@@ -11,9 +11,15 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+    tag: Documentation
+    text: Control Costs with Retention Quotas
   - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
     tag: Blog
     text: 'Introducing RUM without Limits™: Capture everything, keep what matters'
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
 
 <div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
@@ -43,7 +49,7 @@ To get started with RUM without Limits for new applications, at the [instrumenta
 
 3. For applications with the [APM integration enabled][3], configure the percentage of sessions for which you want to make sure APM backend traces are ingested with `traceSampleRate` (browser), `traceSampler` (Android), or `sampleRate` (iOS).
 
-4. Enable `traceContextInjection: sampled` to allow backend tracing libraries to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
+4. Enable `traceContextInjection: sampled` to allow backend SDKs to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
    <div class="alert alert-danger">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For instance, if you used to have <code>sessionSampleRate</code> set to 10% and you bump it to 100% for RUM without Limits, decrease the <code>traceSampleRate</code> from 100% to 10% accordingly to ingest the same amount of traces.</div>
 
@@ -69,9 +75,9 @@ After:
    sessionReplaySampleRate: 2,
 ```
 
-1. Navigate to [**Digital Experiences > Real User Monitoring > Manage Applications**][4].
+1. Navigate to [{{< ui >}}Digital Experiences{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][4].
 1. Click the application you want to migrate.
-1. Click the **SDK Configuration** tab.
+1. Click the {{< ui >}}SDK Configuration{{< /ui >}} tab.
 1. Ensure `sessionSampleRate` is set to 100%.
 1. Set `sessionReplaySampleRate` to a rate that results in the same number of replays prior to increasing the Session Sample Rate.
 1. Use the generated code snippet to update your source code and redeploy your applications to make sure the new configuration is applied.
@@ -80,7 +86,7 @@ After:
 
 If you've increased `sessionSampleRate`, you might increase the number of ingested APM spans since the RUM SDK has the ability to override the sampling decisions of backend traces to make the correlation.
 
-To alleviate this, set `traceSampleRate` to a percentage below 100% (to the previously set `sessionSampleRate`) and set `traceContextInjection: sampled` to allow backend tracing libraries to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
+To alleviate this, set `traceSampleRate` to a percentage below 100% (to the previously set `sessionSampleRate`) and set `traceContextInjection: sampled` to allow backend SDKs to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
 #### Step 3: Create retention filters
 

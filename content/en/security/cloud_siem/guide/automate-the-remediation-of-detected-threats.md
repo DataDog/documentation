@@ -4,6 +4,9 @@ further_reading:
 - link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
+  tag: "Learning Center"
+  text: "Automate Threat Investigation and Remediation with Security Workflows"
 aliases:
   - /security_platform/guide/automate-the-remediation-of-detected-threats/
   - /security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/

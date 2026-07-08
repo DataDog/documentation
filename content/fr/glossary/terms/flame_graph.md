@@ -1,4 +1,5 @@
 ---
+id: flame_graph
 core_product:
 - apm
 title: flamegraph

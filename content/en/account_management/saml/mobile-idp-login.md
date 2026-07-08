@@ -31,17 +31,17 @@ In order to use the Datadog mobile app with Identity Provider (IdP) Initiated SA
 
 ### OneLogin
 
-When configuring your OneLogin app, set the Relay State value on the **Application Details** page to `dd_m_idp`.
+When configuring your OneLogin app, set the Relay State value on the {{< ui >}}Application Details{{< /ui >}} page to `dd_m_idp`.
 {{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="One Login's Application Details Page" >}}
 
 ### Okta
 
-When configuring your Okta app, set the Default RelayState value on the **Configure SAML** page to `dd_m_idp`.
+When configuring your Okta app, set the Default RelayState value on the {{< ui >}}Configure SAML{{< /ui >}} page to `dd_m_idp`.
 {{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Configure SAML page" >}}
 
 ### Google
 
-When configuring your Google app for SAML, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
+When configuring your Google app for SAML, set the {{< ui >}}Start URL{{< /ui >}} under the Service Provider Details to `dd_m_idp`.
 {{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
 ## Troubleshooting

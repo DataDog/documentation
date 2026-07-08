@@ -1,4 +1,5 @@
 ---
+id: network_profile
 core_product:
 - クラウドネットワークモニタリング
 - network device monitoring

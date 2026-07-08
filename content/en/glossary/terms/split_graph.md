@@ -1,4 +1,5 @@
 ---
+id: split_graph
 title: split graph
 core_product:
   - dashboards

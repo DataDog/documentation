@@ -11,7 +11,7 @@ This table lists prefixes and example links:
 | [Microsoft Teams][109]  | `@teams`   | [Examples][110] |
 | [ServiceNow][111]  | `@servicenow`   | [Examples][112] |
 
-Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
+Handles that include parentheses `()` are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 [101]: /integrations/jira/
 [102]: /integrations/jira/#usage

@@ -1,4 +1,5 @@
 ---
+id: ssrf
 core_product:
 - security
 - appsec

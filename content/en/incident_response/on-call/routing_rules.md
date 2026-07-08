@@ -22,7 +22,7 @@ To create a routing rule:
 1. Go to [**On-Call** > **Teams**][1] and select a team.
 1. Find the **Page Routing** section and click **Edit**. The **Configure Page Routing** window opens.
  
-   {{< img src="service_management/oncall/configure-page-routing2.png" alt="The Configure Page Routing window in Datadog On-Call, showing routing condition fields and target configuration options" style="width:100%;" >}}
+   {{< img src="incident_response/on-call/routing_rules/configure-page-routing2.png" alt="The Configure Page Routing window in Datadog On-Call, showing routing condition fields and target configuration options" style="width:100%;" >}}
 
 1. Click **Add Conditions** to add a routing rule. 
 1. Define a match query using the [routing rule syntax](#routing-rule-syntax).
@@ -32,13 +32,17 @@ To create a routing rule:
    1. Click **Add** to add a time interval. For each interval, select a time zone and the days of the week, then set the start and end time.
    1. Optionally, enable the **Outside support hours, hold escalation policy notifications until the next window** toggle.
 
-   {{< img src="service_management/oncall/page-routing-support-hours.png" alt="The support hours configuration panel on a routing condition, showing time interval fields and the option to hold escalation policy notifications outside support hours" style="width:60%;" >}}
+   {{< img src="incident_response/on-call/routing_rules/page-routing-support-hours.png" alt="The support hours configuration panel on a routing condition, showing time interval fields and the option to hold escalation policy notifications outside support hours" style="width:60%;" >}}
 
 1. Under **Set targets**, click **Add** and select a target type. The target type determines what happens when the rule matches:
    - **Page escalation policy**: Select an [escalation policy][3] and set the urgency to `DYNAMIC` (based on alert status), `HIGH`, or `LOW`.
    - **Send Slack message** (Preview): Select a Slack workspace and channel.
    - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
    - **Run Workflow** (Preview): Select an existing [Workflow][4].
+
+1. If you selected **Page escalation policy**, optionally configure [acknowledgment timeout](#acknowledgment-timeout):
+   1. Toggle on **Acknowledgment timeout**.
+   1. Set the timeout duration.
 
 1. Add more rules as needed, and click **Save**.
 
@@ -75,7 +79,7 @@ When a routing rule includes support hours, Datadog compares the current time to
 
 Add one interval: select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
 
-{{< img src="service_management/oncall/support-hours-biz.png" alt="The support hours pop-up modal with a time interval defined for 9 a.m. to 5 p.m. Monday through Friday" style="width:60%;" >}}
+{{< img src="incident_response/on-call/routing_rules/support-hours-biz.png" alt="The support hours pop-up modal with a time interval defined for 9 a.m. to 5 p.m. Monday through Friday" style="width:60%;" >}}
 
 {{% /collapse-content %}}
 
@@ -85,13 +89,23 @@ Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both 
 
 {{% /collapse-content %}}
 
+### Acknowledgment timeout
+
+When you add an escalation policy as a target, you can enable **Acknowledgment timeout**. When enabled, if a Page is acknowledged but not resolved within the configured duration, Datadog moves it back to triggered and re-notifies the active on-call responder.
+
+To configure acknowledgment timeout:
+
+1. Under **Set targets**, select **Page escalation policy** as the target type.
+1. Toggle on **Acknowledgment timeout**.
+1. Set the timeout duration.
+
 ### Pages in Slack and Microsoft Teams
 
-{{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams" style="width:100%;" >}}
+{{< img src="incident_response/on-call/routing_rules/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams" style="width:100%;" >}}
 
 When you route Pages to Slack or Microsoft Teams, Datadog sends a notification to the configured channel and creates a Page. Team members can use buttons to acknowledge, escalate, or resolve the Page.
 
-{{< img src="service_management/oncall/page_representation_in_slack.png" alt="A Page notification in Slack with buttons to acknowledge, escalate, or resolve" style="width:70%;" >}}
+{{< img src="incident_response/on-call/routing_rules/page_representation_in_slack.png" alt="A Page notification in Slack with buttons to acknowledge, escalate, or resolve" style="width:70%;" >}}
 
 When a Page is acknowledged or resolved in Slack or Teams, Datadog updates the original notification in place, without sending additional messages. This minimizes notification volume and keeps the current Page status visible in the original thread.
 

@@ -22,17 +22,17 @@ Code Changes Detection allows Datadog to identify the commits introduced as part
 
 To detect the code changes deployed, Datadog runs the [`git log`][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
 
-The deployed code changes are visible inside any deployment execution of the [Deployment Executions page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the code changes detected between the two.
+The deployed code changes are visible inside any deployment execution of the [Deployment Executions page][2]. The {{< ui >}}Code Changes{{< /ui >}} tab shows the previous deployment taken into consideration, and the code changes detected between the two.
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
-Additionally, the **Deployments** column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
+Additionally, the {{< ui >}}Deployments{{< /ui >}} column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
 Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
 
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
 
 Code changes are only detected for deployments that:
-- Have a service (`@deployment.service`) with file path specs defined in Software Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
+- Have a service (`@deployment.service`) with file path specs defined in Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
 - Have an environment (`@deployment.env`).
 - Have a repository URL (`@deployment.git.repository_url`) and a commit SHA (`@deployment.git.commit.sha`).
 
@@ -60,10 +60,10 @@ If you are using the <code>pull_request</code> trigger, use the alternative meth
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
 When configuring the GitHub App:
-1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
-2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
+1. Select at least {{< ui >}}Read{{< /ui >}} repository permissions for {{< ui >}}Contents{{< /ui >}} and {{< ui >}}Pull Requests{{< /ui >}}.
+2. Subscribe at least to {{< ui >}}Push{{< /ui >}}, {{< ui >}}PullRequest{{< /ui >}} and {{< ui >}}PullRequestReview{{< /ui >}} events.
 
-To confirm that the setup is valid, select your GitHub App in the [GitHub integration tile][2] and verify that, in the **Datadog Features** table, the **Pull Request Information** feature is marked as valid.
+To confirm that the setup is valid, select your GitHub App in the [GitHub integration tile][2] and verify that, in the {{< ui >}}Datadog Features{{< /ui >}} table, the {{< ui >}}Pull Request Information{{< /ui >}} feature is marked as valid.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
@@ -105,7 +105,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 To correctly understand the code changes that a deployment has introduced, only the commits affecting the specific service being deployed should be considered.
 
-This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
+This can be done in [Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
 If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
@@ -179,6 +179,6 @@ In this case, Code Changes Detection for deployments of the `shopist` service wi
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
 [3]: https://app.datadoghq.com/ci/commits
-[4]: /tracing/software_catalog/adding_metadata
-[5]: /tracing/software_catalog
+[4]: /internal_developer_portal/catalog/entity_model/
+[5]: /internal_developer_portal/catalog/
 

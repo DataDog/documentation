@@ -185,7 +185,7 @@ La [aplicación móvil de Datadog][12], disponible en el [App Store de Apple][13
 
 Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tus equipos gracias a las integraciones con Slack, Zoom y muchas otras herramientas.
 
-{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dos vistas en la aplicación móvil de Datadog: una que muestra una lista de incidentes con detalles muy claros sobre cada incidente y una que muestra un panel detallado para un incidente único">}}
+{{< img src="incident_response/incident_management/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dos vistas en la aplicación móvil de Datadog: una que muestra una lista de incidentes con detalles muy claros sobre cada incidente y una que muestra un panel detallado para un incidente único">}}
 
 ## Referencias adicionales
 

@@ -22,19 +22,19 @@ To track if your queue is rerouting messages to its DLQ, you can create a [metri
 To create a monitor for a queue's DLQ:
 
 1. In Datadog, navigate to [Data Streams Monitoring][4].
-2. Select the **Explore** tab (default).
+2. Select the {{< ui >}}Explore{{< /ui >}} tab (default).
 3. Click on a supported queue to open its side panel.
-4. Select the **Dead Letter Queue** tab.
-5. Click **Create Monitor** to open a monitor setup page. The default inputs are sufficient to create a monitor that alerts when your DLQ is non-empty, but you can also make additional configurations on this page if you wish.
-6. Click **Create** at the bottom of the page.
+4. Select the {{< ui >}}Dead Letter Queue{{< /ui >}} tab.
+5. Click {{< ui >}}Create Monitor{{< /ui >}} to open a monitor setup page. The default inputs are sufficient to create a monitor that alerts when your DLQ is non-empty, but you can also make additional configurations on this page if you wish.
+6. Click {{< ui >}}Create{{< /ui >}} at the bottom of the page.
 
 #### Detect message processing issues
 
 Data Streams Monitoring helps you detect where messages couldn't be processed and what downstream services could be affected:
 
-* The DSM [**Service Map**][6] highlights queues with messages in their DLQs, helping you to visually identify where failures occur
+* The DSM [{{< ui >}}Service Map{{< /ui >}}][6] highlights queues with messages in their DLQs, helping you to visually identify where failures occur
 
-* The DSM [**Issues**][7] page lists all queues that are experiencing message processing issues
+* The DSM [{{< ui >}}Issues{{< /ui >}}][7] page lists all queues that are experiencing message processing issues
 
 ## Remediate DLQ issues
 You can inspect and resolve non-empty DLQs directly in Datadog by using [Datadog Actions][5].
@@ -51,9 +51,9 @@ These permissions can be applied globally to all SQS queues, or restricted to sp
 
 After you set up the connection, you can click on a supported queue to open its side panel, where you can use the following actions:
 
-* **Peek** to inspect failed message content and identify the root cause
-* **Redrive** to requeue messages for another processing attempt
-* **Purge** to clear messages that no longer need processing
+* {{< ui >}}Peek{{< /ui >}} to inspect failed message content and identify the root cause
+* {{< ui >}}Redrive{{< /ui >}} to requeue messages for another processing attempt
+* {{< ui >}}Purge{{< /ui >}} to clear messages that no longer need processing
 
 ## Troubleshooting
 If you are unable to see dead letter queue information:

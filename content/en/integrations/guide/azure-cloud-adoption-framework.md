@@ -1,5 +1,6 @@
 ---
 title: Azure Cloud Adoption Framework with Datadog
+description: "Use Datadog to plan, migrate, and monitor workloads through Azure's Cloud Adoption Framework."
 
 further_reading:
   - link: "/integrations/azure/"

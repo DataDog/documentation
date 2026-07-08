@@ -1,4 +1,5 @@
 ---
+id: query
 core_product:
 - モニター
 title: query

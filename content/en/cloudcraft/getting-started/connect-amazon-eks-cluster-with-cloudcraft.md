@@ -20,13 +20,13 @@ To connect your AWS account and familiarize yourself with Cloudcraft, see the fo
 
 In addition, you'll want to [install and configure the AWS CLI][8] to manage your AWS services from the command line. As with `kubectl`, Cloudcraft recommends using the latest version.
 
-Finally, in order to scan your cluster successfully, Cloudcraft requires clusters to have public access enabled and no IP filtering applied. The **Public Access Source Allow List** option in the networking configuration must remain set to its default value of 0.0.0.0/0.
+Finally, in order to scan your cluster successfully, Cloudcraft requires clusters to have public access enabled and no IP filtering applied. The {{< ui >}}Public Access Source Allow List{{< /ui >}} option in the networking configuration must remain set to its default value of 0.0.0.0/0.
 
 ## Create access entries
 
 Start by opening a blueprint with an existing Amazon EKS cluster or creating a new blueprint to scan an account with Amazon EKS clusters.
 
-With your AWS environment mapped into a blueprint, select the Amazon EKS cluster that you wish to scan, and click the **Enable cluster scanning** button that appears in the component toolbar.
+With your AWS environment mapped into a blueprint, select the Amazon EKS cluster that you wish to scan, and click the {{< ui >}}Enable cluster scanning{{< /ui >}} button that appears in the component toolbar.
 
 {{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an AWS EKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
 
@@ -68,7 +68,7 @@ EOF
 
 ## Testing access to the cluster
 
-To test that Cloudcraft can access to the cluster, click **Test cluster access** at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
+To test that Cloudcraft can access to the cluster, click {{< ui >}}Test cluster access{{< /ui >}} at the bottom of the {{< ui >}}Enable Kubernetes Cluster Scanning{{< /ui >}} screen.
 
 {{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/test-cluster-access.png" alt="Cloudcraft interface showing Kubernetes cluster role configuration with a 'Test Cluster Access' button highlighted by an arrow." responsive="true" style="width:100%;">}}
 

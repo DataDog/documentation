@@ -1,4 +1,5 @@
 ---
+id: waf
 title: web application firewall (WAF)
 core_product:
   - security

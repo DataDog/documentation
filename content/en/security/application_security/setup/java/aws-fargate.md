@@ -23,7 +23,7 @@ further_reading:
 - Java application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Java tracing library (see [version requirements][1])
+- Datadog Java SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -214,7 +214,7 @@ aws ecs register-task-definition --cli-input-json file://task-definition.json
 aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -224,7 +224,6 @@ If you encounter issues while setting up App and API Protection for your Java ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/java/compatibility
+[1]: /security/application_security/setup/compatibility/java
 [2]: /security/application_security/setup/java/troubleshooting
-
 

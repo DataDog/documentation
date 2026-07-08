@@ -1,4 +1,5 @@
 ---
+id: attribute
 title: attribute
 core_product:
   - log management

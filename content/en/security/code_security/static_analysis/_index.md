@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits Code for Code Security"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning
@@ -15,7 +18,7 @@ further_reading:
   text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -36,11 +39,26 @@ Static Code Analysis helps you identify security vulnerabilities and maintainabi
 
 Static Code Analysis supports scanning for security vulnerabilities and poor coding practices in the following languages and technologies:
 
-{{< partial name="code_security/languages-getting-started.html" >}}
+{{< card-grid card_width="130px" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript" src="integrations_logos/javascript_large.png" alt="javascript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Java" src="integrations_logos/java_avatar.svg" alt="java" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby" src="integrations_logos/ruby_avatar.svg" alt="ruby" image_width="60" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP" src="integrations_logos/php_opcache.png" alt="php" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker" src="integrations_logos/docker_avatar.svg" alt="docker" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=YAML" src="integrations_logos/yaml.png" alt="yaml" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Kotlin" src="integrations_logos/kotlin.png" alt="kotlin" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" >}}
+  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
+{{< /card-grid >}}
 
-<!-- </br>  -->
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
-To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
+To get started, go to the [{{< ui >}}Code Security{{< /ui >}} setup page][12] or see the [Setup documentation][9].
 
 ## Integrate into the development lifecycle
 
@@ -56,10 +74,10 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< /whatsnext >}}
 
 ## Search and filter results
-After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis.
+After setting up Static Code Analysis, a scan is run on each commit to a scanned repository. Violations are summarized per repository on the [{{< ui >}}Code Security Repositories{{< /ui >}} page][1]. Click on a repository to analyze {{< ui >}}Code Vulnerabilities{{< /ui >}} and {{< ui >}}Code Quality{{< /ui >}} results from Static Code Analysis.
 
-* The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
-* The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
+* The {{< ui >}}Code Vulnerabilities{{< /ui >}} tab contains the violations found by Datadog's rules in the [Security category][2].
+* The {{< ui >}}Code Quality{{< /ui >}} tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
 To filter your results, use the facets to the left of the list, or search. Results can be [filtered by service or team facets][13].
 
@@ -71,9 +89,9 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
-- **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
-- **Event**: JSON metadata regarding the violation.
+- {{< ui >}}Details{{< /ui >}}: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
+- {{< ui >}}Remediation{{< /ui >}}: One or more code fixes that can resolve the violation, with options for remediation.
+- {{< ui >}}Event{{< /ui >}}: JSON metadata regarding the violation.
 
 ### Filter out false positives
 For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
@@ -92,7 +110,7 @@ To link findings to Datadog services and teams, see the [Setup documentation][13
 In Datadog Static Code Analysis, there are two types of suggested fixes:
 
 1. **Deterministic Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
-2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between {{< ui >}}Text{{< /ui >}} and {{< ui >}}Unified Diff{{< /ui >}} fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
@@ -105,14 +123,14 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 If GitHub is your source code manager, you can push a code change to fix a SAST issue directly from Datadog in two ways.
 
 #### Open a pull request
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
+If your GitHub app's {{< ui >}}Pull Requests{{< /ui >}} permission is set to {{< ui >}}Read & Write{{< /ui >}}, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. View a specific SAST result in Code Security.
-2. Click **Fix Violation** in the side panel of the result.
-3. Select **Open a Pull Request**.
+2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
+3. Select {{< ui >}}Open a Pull Request{{< /ui >}}.
 4. Enter a pull request title and commit message.
-5. Click **Create PR**.
+5. Click {{< ui >}}Create PR{{< /ui >}}.
 
 #### Commit directly to the current branch
 You can also fix a vulnerability by committing directly to the branch the result was found on.
@@ -120,8 +138,8 @@ You can also fix a vulnerability by committing directly to the branch the result
 To commit a suggested fix:
 
 1. View a specific SAST result in Code Security.
-2. Click **Fix Violation** in the side panel of the result.
-3. Click **Commit to current branch**.
+2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
+3. Click {{< ui >}}Commit to current branch{{< /ui >}}.
 
 ## Report false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.

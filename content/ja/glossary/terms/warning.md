@@ -1,4 +1,5 @@
 ---
+id: warning
 core_product:
 - alerts
 title: 警告

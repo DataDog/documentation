@@ -1,4 +1,5 @@
 ---
+id: ndm
 core_product:
 - network device monitoring
 title: Network Device Monitoring (NDM)

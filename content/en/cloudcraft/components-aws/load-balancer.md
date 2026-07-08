@@ -11,10 +11,10 @@ Use the Load Balancer component to represent application and network load balanc
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Type**: Select the elastic load balancer type, classic, application, or network.
-- **Data processed**: The total volume of data processed per hour, in gigabytes. Only available for type `classic`.
-- **LCUs**: The number of load balancer capacity units. Only available for application and network types of load balancers.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Type{{< /ui >}}: Select the elastic load balancer type, classic, application, or network.
+- {{< ui >}}Data processed{{< /ui >}}: The total volume of data processed per hour, in gigabytes. Only available for type `classic`.
+- {{< ui >}}LCUs{{< /ui >}}: The number of load balancer capacity units. Only available for application and network types of load balancers.
 
 ## API
 

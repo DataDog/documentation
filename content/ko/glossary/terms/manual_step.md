@@ -1,4 +1,5 @@
 ---
+id: manual_step
 core_product:
 - ci-cd
 title: 수동 단계

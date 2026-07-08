@@ -13,13 +13,13 @@ You can use the Azure Queue component to represent and visualize queue storage f
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Kind**: Select the storage account kind.
-- **Redundancy**: Select how your data is replicated in the primary and secondary regions.
-- **Storage (GiB)**: Enter the total volume of data available for the queue in gibibytes.
-- **Class 1 Requests (10k)**: Enter the number of Class 1 requests in 10k request units.
-- **Class 2 Requests (10k)**: Enter the number of Class 2 requests in 10k request units.
-- **Replication (GiB)**: Enter the total volume of geo-replication data transfer for the queue.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Kind{{< /ui >}}: Select the storage account kind.
+- {{< ui >}}Redundancy{{< /ui >}}: Select how your data is replicated in the primary and secondary regions.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the total volume of data available for the queue in gibibytes.
+- {{< ui >}}Class 1 Requests (10k){{< /ui >}}: Enter the number of Class 1 requests in 10k request units.
+- {{< ui >}}Class 2 Requests (10k){{< /ui >}}: Enter the number of Class 2 requests in 10k request units.
+- {{< ui >}}Replication (GiB){{< /ui >}}: Enter the total volume of geo-replication data transfer for the queue.
 
 ## API
 

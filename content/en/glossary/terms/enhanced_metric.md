@@ -1,4 +1,5 @@
 ---
+id: enhanced_metric
 title: enhanced metric
 synonyms:
   - enhanced Lambda metric

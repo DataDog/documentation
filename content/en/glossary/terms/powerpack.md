@@ -1,4 +1,5 @@
 ---
+id: powerpack
 title: powerpack
 core_product:
   - dashboards

@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-The [Ingestion control page][1] provides granular visibility into the ingestion configuration for all services, in the agent and in the tracing libraries. All [Ingestion Mechanisms][2] are publicly documented and configurable.
+The [Ingestion control page][1] provides granular visibility into the ingestion configuration for all services, in the agent and in the SDKs. All [Ingestion Mechanisms][2] are publicly documented and configurable.
 
 With the ingestion control page, you have full visibility and complete control of your span volume. Consequently, you are be able to:
 - Ingest the data that is most relevant to your business and your observability goals.
@@ -39,11 +39,11 @@ Reducing ingestion sampling rates will impact any **count** type metric. **Distr
 
 Any **metric** monitor using [metrics from spans](#metrics-from-spans) is impacted by ingestion volume reduction. Metric monitors based on **trace.__** metrics will remain accurate, because these metrics are calculated based on 100% of the traffic.
 
-Count-based [**Trace analytics**][6] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
+Count-based [{{< ui >}}Trace analytics{{< /ui >}}][6] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
 
 ## Assess your services' ingestion configuration
 
-To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
+To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and SDK configuration.
 
 ### Understanding if you are within your monthly ingestion allocation
 
@@ -54,8 +54,8 @@ Use the ingestion monthly usage KPI to get an estimation of your usage compared 
 ### Advanced APM usage investigation
 
 The ingestion configuration can be investigated for each service. Click on a service row to see the Service Ingestion Summary, which surfaces:
-- **Ingestion reason breakdown**: which [ingestion mechanism][2] is responsible for the ingestion volume
-- **Top sampling decision makers**: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][7]
+- {{< ui >}}Ingestion reason breakdown{{< /ui >}}: which [ingestion mechanism][2] is responsible for the ingestion volume
+- {{< ui >}}Top sampling decision makers{{< /ui >}}: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][7]
 
 An [out-of-the-box dashboard][8] is also available to get more insights on historical trends related to your ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
 
@@ -63,11 +63,11 @@ An [out-of-the-box dashboard][8] is also available to get more insights on histo
 
 ### Identify services responsible for most of the ingestion volume
 
-To identify which services are responsible for most of the ingestion volume, sort the table by **Downstream Bytes/s**. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
+To identify which services are responsible for most of the ingestion volume, sort the table by {{< ui >}}Downstream Bytes/s{{< /ui >}}. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
 
 If the service is starting the trace, **Downstream Bytes/s** also encompasses the volume of spans coming from downstream services for which the service took the sampling decision.
 
-The **Traffic Breakdown** column gives a good indication of the service's sampling configuration.
+The {{< ui >}}Traffic Breakdown{{< /ui >}} column gives a good indication of the service's sampling configuration.
 
 If the service has a high Downstream Bytes/s rate and a high sampling rate (displayed as the blue filled section of the traffic breakdown column), reducing the sampling rate for this service is expected to have a high impact on the ingestion volume.
 
@@ -75,11 +75,11 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 ### Globally configure the ingestion sampling rate at the Agent level
 
-The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
+The {{< ui >}}Configuration{{< /ui >}} column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_TARGET_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 
-**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_TARGET_TPS` does not change sampling rates that are applied in tracing libraries.
+**Note**: This configuration option only goes into effect when using **Datadog SDKs**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_TARGET_TPS` does not change sampling rates that are applied in SDKs.
 
 Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
@@ -89,11 +89,11 @@ Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 
 By configuring sampling rates for a few high-throughput services, most of the "exceeding" ingestion volume can be lowered.
 
-Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
+Click on a service to view the {{< ui >}}Service Ingestion Summary{{< /ui >}}. Look at the {{< ui >}}Ingestion reasons breakdown{{< /ui >}} in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 
-If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the tracing library level.
+If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the SDK level.
 
-Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
+Click the {{< ui >}}Manage Ingestion Rate{{< /ui >}} button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 
 **Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][11].
 
@@ -112,11 +112,11 @@ _Know which ingestion mechanisms are responsible for most of the ingestion volum
 
 The default mechanism to sample traces is head-based sampling. The decision whether to sample a trace or not is taken at the beginning of its lifecycle, and propagated downstream in the context of the requests in order to ensure that you can always view and analyze complete traces.
 
-Head-based sampling is configurable in the tracing libraries or from the Datadog Agent:
+Head-based sampling is configurable in the SDKs or from the Datadog Agent:
 
 | ingestion reason   | Where             | Ingestion Mechanism Description | Default |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to tracing libraries.    | 10 traces per second per Agent |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to SDKs.    | 10 traces per second per Agent |
 | `rule`             | [Tracing Libraries](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | The libraries' defined sampling percentage for specific services.   | null                 |
 
 

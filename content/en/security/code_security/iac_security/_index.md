@@ -9,9 +9,9 @@ further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
-  - link: "/security/code_security/iac_security/exclusions"
+  - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
-    text: "Configure IaC Security Exclusions"
+    text: "Configure IaC Security"
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
@@ -23,13 +23,13 @@ further_reading:
     text: Detect and block exposed credentials with Datadog Secret Scanning
 ---
 
-Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform and Kubernetes configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. Supported file types include standalone Terraform files, local modules, and Kubernetes manifests.
+Datadog Infrastructure as Code (IaC) Security detects misconfigurations in IaC configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. For more information, see [IaC Security Rules][13].
 
 {{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 ## How it works
 
-IaC Security integrates with your repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a full daily scan of each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
+IaC Security integrates with your repositories to continuously scan for misconfigurations, and scans every commit across all branches for each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
 
 ## Key capabilities
 
@@ -59,8 +59,8 @@ Use filters to narrow results by:
 
 Click any finding to open a side panel that shows:
 
-- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
-- **Remediation**: If available, suggested code fixes are provided for findings that support remediation.
+- {{< ui >}}Details{{< /ui >}}: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
+- {{< ui >}}Remediation{{< /ui >}}: If available, suggested code fixes are provided for findings that support remediation.
 
 ### Create Jira tickets from findings
 
@@ -68,20 +68,20 @@ You can create a bidirectional Jira ticket directly from any finding to track an
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [Code Security Vulnerabilities][3] page to review muted findings.
 
 ### Exclude specific rules, files, or resources
 
 You can configure exclusions to prevent certain findings from appearing in scan results. Exclusions can be based on rule ID, file path, resource type, severity, or tag.
 
-Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security Exclusions][7].
+Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security][7].
 
 ## Next steps
 
 1. [Set up IaC Security][1] in your environment.
-2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
+2. Configure [IaC Security][2] to reduce false positives or ignore expected results.
 3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
 
 ## Further reading
@@ -89,14 +89,15 @@ Exclusions are managed through a configuration file or inline comments in your I
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/iac_security/setup
-[2]: /security/code_security/iac_security/exclusions
+[2]: /security/code_security/iac_security/configuration
 [3]: https://app.datadoghq.com/security/code-security/iac
 [4]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [5]: /security/code_security/dev_tool_int/github_pull_requests/
 [6]: https://app.datadoghq.com/ci/code-analysis?
-[7]: /security/code_security/iac_security/exclusions/?tab=yaml
+[7]: /security/code_security/iac_security/configuration/
 [8]: /security/automation_pipelines/mute
 [9]: https://app.datadoghq.com/integrations/github/
 [10]: /security/automation_pipelines/
 [11]: /pr_gates/
 [12]: /pr_gates/setup
+[13]: /security/code_security/iac_security/iac_rules

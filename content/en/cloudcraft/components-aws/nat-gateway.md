@@ -11,9 +11,9 @@ Use the NAT Gateway component to represent network address translation (NAT) gat
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Data processed**: The total volume of data processed per month in gigabytes.
-- **Rotate**: Rotate the component and change its direction.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Data processed{{< /ui >}}: The total volume of data processed per month in gigabytes.
+- {{< ui >}}Rotate{{< /ui >}}: Rotate the component and change its direction.
 
 ## API
 

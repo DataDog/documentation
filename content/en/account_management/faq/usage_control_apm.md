@@ -33,7 +33,7 @@ To estimate the total number of Indexed Spans expected to be sent per service pe
 
 1. Enable APM on all the hosts for which you want to estimate the volume of Indexed Spans.
 2. In the [**Indexed Span Estimator** view][7], sort the column "App Analytics Status" column by "Not Enabled"
-3. **Total Estimated APM Volume** denotes the estimated total volume of Indexed Spans for all services, per day and per month. Each row corresponding to the service represents the estimated volume of Indexed Spans for that service, per day.
+3. {{< ui >}}Total Estimated APM Volume{{< /ui >}} denotes the estimated total volume of Indexed Spans for all services, per day and per month. Each row corresponding to the service represents the estimated volume of Indexed Spans for that service, per day.
 
     {{< img src="account_management/billing/usage_control_apm/apm_span_estimator.png" alt="Indexed Span Estimator" >}}
 

@@ -11,11 +11,11 @@ Use the VPC component to represent isolated virtual network from your Amazon Web
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Name**: Give the VPC a name.
-- **Shape**: Select a shape for the VPC.
-- **Padding**: Increase or decrease the amount of space inside the VPC.
-- **Peering**: View, remove, or add peering connections to other VPCs.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Give the VPC a name.
+- {{< ui >}}Shape{{< /ui >}}: Select a shape for the VPC.
+- {{< ui >}}Padding{{< /ui >}}: Increase or decrease the amount of space inside the VPC.
+- {{< ui >}}Peering{{< /ui >}}: View, remove, or add peering connections to other VPCs.
 
 ## API
 

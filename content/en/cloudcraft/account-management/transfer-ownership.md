@@ -8,18 +8,18 @@ In certain cases, a user account, team, or blueprint assets may need to be trans
 
 ## If you have account access
 
-If you have access to your Cloudcraft account and team, and wish to initiate a transfer to another user, contact Support using the **Contact support** page in the application. This method automatically meets Cloudcraft's requirements for account identification and proof of ownership, and ensures that Cloudcraft complies with all applicable laws.
+If you have access to your Cloudcraft account and team, and wish to initiate a transfer to another user, contact Support using the {{< ui >}}Contact support{{< /ui >}} page in the application. This method automatically meets Cloudcraft's requirements for account identification and proof of ownership, and ensures that Cloudcraft complies with all applicable laws.
 
 **Note**: The new owner must have a Cloudcraft account before the transfer can be completed.
 
 1. Log in to Cloudcraft as the account owner.
-2. Click the **User** avatar in the upper-right corner of the application and select **Contact support**. 
-3. Click **Ask**.
-4. Select **Email**, and then click **Next**.
-5. Fill in the **Subject** and **Message** fields.
-6. Click **Submit your support request**.
+2. Click the {{< ui >}}User{{< /ui >}} avatar in the upper-right corner of the application and select {{< ui >}}Contact support{{< /ui >}}. 
+3. Click {{< ui >}}Ask{{< /ui >}}.
+4. Select {{< ui >}}Email{{< /ui >}}, and then click {{< ui >}}Next{{< /ui >}}.
+5. Fill in the {{< ui >}}Subject{{< /ui >}} and {{< ui >}}Message{{< /ui >}} fields.
+6. Click {{< ui >}}Submit your support request{{< /ui >}}.
 
-For a faster turnaround, provide as much information as possible in the **Message** field.
+For a faster turnaround, provide as much information as possible in the {{< ui >}}Message{{< /ui >}} field.
 
 - What is the email address of the new owner?
 - Does the new owner already have a Cloudcraft account?

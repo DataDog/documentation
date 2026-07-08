@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
-   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the tracer is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the SDK is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
@@ -54,7 +54,7 @@ ddtrace==<VERSION>
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
    {{< code-block lang="python" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/shared-volume/logs/app.log"
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '

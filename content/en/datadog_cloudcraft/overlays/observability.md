@@ -18,6 +18,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">The Observability overlay is not available for vSphere accounts.</div>
+
 The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
 
 ## Take action on resources
@@ -32,7 +34,7 @@ On the Observability overlay, you can take action on individual resources or gro
 
 ## View Datadog coverage
 
-In the bottom left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific features. Each row shows:
+In the bottom left legend, the {{< ui >}}View Datadog coverage by{{< /ui >}} dropdown allows you to inspect the installation status for specific features. Each row shows:
 
 - Feature name (for example, APM, Logs, CNM)
 - Numerical coverage: X / Y (for example, 16/35), where:

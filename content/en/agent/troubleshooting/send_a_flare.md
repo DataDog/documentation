@@ -28,8 +28,8 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 
 ## Send a flare from the Datadog site
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for your selected Datadog site (US1-FED). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for your selected Datadog site ({{< region-param key="dd_datacenter" >}}). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
 {{< /site-region >}}
 
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
@@ -40,8 +40,8 @@ To send a flare from the Datadog site, make sure you've enabled [Fleet Automatio
 
 ## Send a flare using the `flare` command
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare using the <code>flare</code> subcommand is not supported for your selected Datadog site (US1-FED). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Sending an Agent Flare using the <code>flare</code> subcommand is not supported for your selected Datadog site ({{< region-param key="dd_datacenter" >}}). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
 {{< /site-region >}}
 
 Use the `flare` subcommand to send a flare. In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.

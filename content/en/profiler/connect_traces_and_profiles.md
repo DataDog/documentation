@@ -10,13 +10,16 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
 aliases:
   - /tracing/profiler/connect_traces_and_profiles/
 ---
 
 If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked.
 
-You can move directly from span information to profiling data on the **Profiles** tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
+You can move directly from span information to profiling data on the {{< ui >}}Profiles{{< /ui >}} tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
 
 ## Identify code performance issues in slow traces
 
@@ -82,7 +85,7 @@ Setting these variables will record up to 1 minute (or 5 MiB) of execution traci
 You can find this data:
 
 - In the [Profile List][3] by adding `go_execution_traced:yes` to your search query. Click on a profile to view the [Profile Timeline][4]. To go even deeper, download the profile and use `go tool trace` or [gotraceui][5] to view the contained `go.trace` files.
-- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the **Profiles** tab to view the [Span Timeline](#span-execution-timeline-view).
+- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the {{< ui >}}Profiles{{< /ui >}} tab to view the [Span Timeline](#span-execution-timeline-view).
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
@@ -185,13 +188,13 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 {{< img src="profiler/view_profile_from_trace-2.png" alt="Opening a view of the profile in a flame graph" >}}
 
-From the timeline, click **Open in Profiling** to see the same data on a new page. From there, you can change the visualization to a flame graph.
-Click the **Focus On** selector to define the scope of the data:
+From the timeline, click {{< ui >}}Open in Profiling{{< /ui >}} to see the same data on a new page. From there, you can change the visualization to a flame graph.
+Click the {{< ui >}}Focus On{{< /ui >}} selector to define the scope of the data:
 
-- **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
-- **Span only** scopes the profiling data to the previously selected span.
-- **Span time period** scopes the profiling data to all threads during the time period the span was active.
-- **Full profile** scopes the data to 60 seconds of the whole service process that executed the previously selected span.
+- {{< ui >}}Span & Children{{< /ui >}} scopes the profiling data to the selected span and all descendant spans in the same service.
+- {{< ui >}}Span only{{< /ui >}} scopes the profiling data to the previously selected span.
+- {{< ui >}}Span time period{{< /ui >}} scopes the profiling data to all threads during the time period the span was active.
+- {{< ui >}}Full profile{{< /ui >}} scopes the data to 60 seconds of the whole service process that executed the previously selected span.
 
 ## Break down code performance by API endpoints
 
@@ -267,7 +270,7 @@ With endpoint profiling you can:
 
 ### Surface code that impacted your production latency
 
-In the APM Service page, use the information in the **Profiling** tab to correlate a latency or throughput change to a code performance change.
+In the APM Service page, use the information in the {{< ui >}}Profiling{{< /ui >}} tab to correlate a latency or throughput change to a code performance change.
 
 In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 

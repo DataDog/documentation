@@ -6,7 +6,7 @@ title: Version History
 
 Version history allows users to track changes in their architecture diagrams over time, allowing them to review and restore previous iterations of diagrams. Whether you're managing complex cloud architectures or collaborating with a team, version history provides invaluable insight into your diagram's evolution.
 
-You can access the version history feature by clicking the **Version history** button in the top right corner of the Cloudcraft application.
+You can access the version history feature by clicking the {{< ui >}}Version history{{< /ui >}} button in the top right corner of the Cloudcraft application.
 
 {{< img src="cloudcraft/getting-started/version-history/cloudcraft-diagram-aws-infrastructure-version-history.png" alt="Cloudcraft diagram showcasing AWS infrastructure with an arrow highlighting the version history button." responsive="true" style="width:100%;">}}
 
@@ -14,8 +14,8 @@ You can access the version history feature by clicking the **Version history** b
 
 Version history isn't just for reviewing past work—it's also a powerful tool for managing your current and future diagrams. Here are some key actions you can take:
 
-1. **Restoring previous versions**: If you need to revert to a previous state of your diagram, you can easily do so. Simply click the **Restore this version** button on the top right side of your screen when viewing a past version.
-2. **Creating new blueprints**: Version history allows you to save any specific version of your diagram as a new blueprint. This feature is particularly useful for creating templates or preserving specific architectural states for future reference. To create a new blueprint from a version, click the three dots on the right side of the version name and choose **Save as a new blueprint**.
+1. **Restoring previous versions**: If you need to revert to a previous state of your diagram, you can easily do so. Simply click the {{< ui >}}Restore this version{{< /ui >}} button on the top right side of your screen when viewing a past version.
+2. **Creating new blueprints**: Version history allows you to save any specific version of your diagram as a new blueprint. This feature is particularly useful for creating templates or preserving specific architectural states for future reference. To create a new blueprint from a version, click the three dots on the right side of the version name and choose {{< ui >}}Save as a new blueprint{{< /ui >}}.
 3. **Comparing versions**: While not explicit, the ability to view different versions allows for manual comparison of how your architecture has changed over time.
 
 **Note**: Manually creating or deleting versions from your history is not available.
@@ -28,7 +28,7 @@ To name a version:
 
 1. Select the version you want to name.
 2. Click the three dots on the right side of the version name.
-3. Choose **Name this version** from the dropdown menu.
+3. Choose {{< ui >}}Name this version{{< /ui >}} from the dropdown menu.
 
 {{< img src="cloudcraft/getting-started/version-history/version-history-interface-cloudcraft.png" alt="Version history interface with options to name or save versions in Cloudcraft." responsive="true" style="width:100%;">}}
 
@@ -52,7 +52,7 @@ To help you navigate through your version history, Cloudcraft provides a search 
 
 To search for a version, enter your search query in the search bar at the top of the version history panel.
 
-For users who prefer to focus on significant changes, there's an option to filter the view by checking the **Only show named versions** checkbox under the search bar, which allows you to hide unnamed versions, streamlining your version history view.
+For users who prefer to focus on significant changes, there's an option to filter the view by checking the {{< ui >}}Only show named versions{{< /ui >}} checkbox under the search bar, which allows you to hide unnamed versions, streamlining your version history view.
 
 ### Retention
 
@@ -70,7 +70,7 @@ To make the most of the version history feature, consider the following best pra
 
 1. **Name important versions**: Assign meaningful names to significant versions of your diagrams. This practice ensures that crucial stages in your architecture's evolution are easily identifiable and permanently retained.
 2. **Regularly review**: Periodically review your version history to track the progression of your architecture. This can provide valuable insights into your design decisions over time.
-3. **Leverage search**: Utilize the search functionality and the **Only show named versions** filter to efficiently navigate through your version history, especially for projects with numerous iterations.
+3. **Leverage search**: Utilize the search functionality and the {{< ui >}}Only show named versions{{< /ui >}} filter to efficiently navigate through your version history, especially for projects with numerous iterations.
 4. **Plan for version retention**: If you're on a Free or Pro plan, be mindful of the 30-day retention period for unnamed versions. Name versions you want to keep beyond this period.
 5. **Collaborative documentation**: When working in teams, use the version naming feature to document who made specific changes and why. This can serve as a valuable communication tool within the team.
 6. **Use versions for proposals**: Before making significant changes to your architecture, create a named version. This allows you to easily revert if the proposed changes aren't approved or implemented.

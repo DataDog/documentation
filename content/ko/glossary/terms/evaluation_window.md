@@ -1,8 +1,9 @@
 ---
+id: evaluation_window
 core_product:
 - 알림
 related_terms:
-- 평가 윈도우
+- evaluation_window
 title: 평가 윈도우
 ---
 평가 윈도우는 모니터링이 집계하여 정의된 임계값과 비교하는 데 사용하는 데이터의 역방향 타임프레임입니다.

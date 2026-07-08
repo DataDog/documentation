@@ -14,13 +14,13 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for .NET.
+Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for .NET.
 
 ## Prerequisites
 
 Before you begin, review the [Dynamic Instrumentation prerequisites][9]. .NET applications also require:
 
-- .NET tracing library version 2.54.0 or higher. See the installation instructions for [.NET Framework][2] or [.NET Core][3].
+- .NET SDK version 2.54.0 or higher. See the installation instructions for [.NET Framework][2] or [.NET Core][3].
 
 ## Installation
 

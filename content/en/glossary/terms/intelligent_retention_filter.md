@@ -1,4 +1,5 @@
 ---
+id: intelligent_retention_filter
 title: Intelligent Retention Filter
 core_product:
   - apm

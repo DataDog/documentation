@@ -1,4 +1,5 @@
 ---
+id: cardinality
 core_product:
 - métricas
 title: cardinalidad

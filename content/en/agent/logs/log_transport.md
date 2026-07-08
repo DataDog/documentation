@@ -109,7 +109,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 {{% /tab %}}
 
 {{% tab "TCP" %}}
-{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2,uk1" >}}
 
 {{% logs-tcp-disclaimer %}}
 
@@ -130,7 +130,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 The TCP endpoint is not supported for this site.
 
 {{< /site-region >}}

@@ -11,8 +11,8 @@ Use the Auto Scaling Group component to represent Auto Scaling groups from your 
 
 Use the toolbar to configure and customize your component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Layout**. Select the layout for the auto scaling group, "even," where members are evenly laid out in the available space, or "manual," where members are manually positioned.
+- {{< ui >}}Color{{< /ui >}}. Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both 2D and 3D view, or different colors for each.
+- {{< ui >}}Layout{{< /ui >}}. Select the layout for the auto scaling group, "even," where members are evenly laid out in the available space, or "manual," where members are manually positioned.
 
 ## API
 

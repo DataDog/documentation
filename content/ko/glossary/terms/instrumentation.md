@@ -1,4 +1,5 @@
 ---
+id: instrumentation
 core_product:
 - apm
 title: 계측

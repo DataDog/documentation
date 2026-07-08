@@ -1,4 +1,5 @@
 ---
+id: annotation
 core_product:
 - infrastructure monitoring
 title: Annotation

@@ -1,23 +1,55 @@
 ---
 title: Quickstart
+description: Get started with Agent Observability by instrumenting a Python, Node.js, or Java LLM application using the Agent Observability SDK.
 aliases:
     - /tracing/llm_observability/quickstart
 further_reading:
+    - link: '/llm_observability/instrumentation/auto_instrumentation'
+      tag: 'Documentation'
+      text: 'Supported auto-instrumentation frameworks and libraries'
+    - link: '/llm_observability/instrumentation/sdk'
+      tag: 'Documentation'
+      text: 'Agent Observability SDK Reference for manual instrumentation'
+    - link: '/llm_observability/instrumentation/api'
+      tag: 'Documentation'
+      text: 'Agent Observability HTTP API for language-agnostic instrumentation'
+    - link: '/llm_observability/instrumentation/otel_instrumentation'
+      tag: 'Documentation'
+      text: 'Instrument with OpenTelemetry'
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
-    - link: '/llm_observability/instrumentation/custom_instrumentation'
-      tag: 'Custom Instrumentation'
-      text: 'Instrument your application with custom spans'
+    - link: '/llm_observability/lapdog'
+      tag: 'Documentation'
+      text: 'Local development tool for Agent Observability'
 ---
 
-This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
+This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.
+
+### Try Agent Observability locally with lapdog
+
+To try Agent Observability locally, for free, [follow the steps][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
 
 ### Prerequisites
 
-LLM Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+Agent Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
-### Setup
+### Instrument Agent Observability with a coding agent
+
+Instrument Agent Observability with a coding agent of your choice by pasting in the following prompt:
+
+```bash
+Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic.md to instrument my application with Datadog LLM Observability. When configuring the environment, use the following values for variable entries:
+
+DD_SITE={{< region-param key="dd_site" code="true" >}}
+DD_API_KEY=<your-dd-api-key>
+```
+
+**Note:** Giving the API key as part of the prompt is optional and not required for the coding agent to instrument your application.
+
+### Manual Setup
+
+Follow the setup instructions in Datadog's [in-app onboarding flow](https://app.datadoghq.com/llm/applications?setupMethod=manual&showOnboarding=true) for an interactive quickstart experience.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -33,15 +65,16 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run <your application command>
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+After enabling, the SDK automatically traces calls to [supported Python frameworks][auto-instr-py] such as OpenAI, LangChain, LangGraph, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][sdk] to trace your LLM calls directly.
 
+[auto-instr-py]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
+[sdk]: /llm_observability/instrumentation/sdk?tab=python
 
-[1]: /llm_observability/setup/sdk/python/#command-line-setup
-[2]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -51,18 +84,22 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    npm install dd-trace
    ```
 
-2. Add `NODE_OPTIONS` to your Node.js start command:
+2. Import and initialize `dd-trace` with Agent Observability as the first dependency in your application entrypoint:
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+After enabling, the SDK automatically traces calls to [supported Node.js frameworks][1] such as OpenAI, LangChain, Vercel AI SDK, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][2] to trace your LLM calls directly.
 
-[1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
-[2]: /getting_started/site/
+**Next.js**: See [Instrument a Next.js Application for Agent Observability][3] for properly configuring your Next.js applications with the Agent Observability SDK.
+
+[1]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
+[2]: /llm_observability/instrumentation/sdk?tab=nodejs
+[3]: /llm_observability/guide/nextjs_guide
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -77,21 +114,41 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    java -javaagent:/path/to/dd-java-agent.jar \
    -Ddd.llmobs.enabled=true \
    -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.site=<YOUR_DD_SITE> \
    -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
    -jar path/to/your/app.jar
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+After enabling, the SDK automatically traces calls to [supported Java frameworks][1]. Java auto-instrumentation supports OpenAI and Azure OpenAI. For other libraries such as Bedrock or LangChain4j, use [manual instrumentation][2] instead.
 
-[1]: /llm_observability/setup/sdk/java/#command-line-setup
-[2]: /getting_started/site/
+[1]: /llm_observability/instrumentation/auto_instrumentation/?tab=java
+[2]: /llm_observability/instrumentation/sdk?tab=java
+
+{{% /tab %}}
+{{% tab "Other languages / HTTP API" %}}
+
+For languages other than Python, Node.js, or Java, use the [Agent Observability HTTP API][1] to send spans directly to Datadog without an SDK.
+
+If your application emits [OpenTelemetry GenAI semantic convention][2]-compliant spans, see [OpenTelemetry Instrumentation][2] instead.
+
+[1]: /llm_observability/instrumentation/api
+[2]: /llm_observability/instrumentation/otel_instrumentation
 
 {{% /tab %}}
 {{< /tabs >}}
 
+Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+
 ### View traces
 
-Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library. Otherwise, you may need to instrument your application's LLM calls manually.
+Make requests to your application triggering LLM calls and then view traces in the {{< ui >}}Traces{{< /ui >}} tab [of the {{< ui >}}Agent Observability{{< /ui >}} page][3] in Datadog.
+
+If you don't see any traces:
+
+- **Check that your library is auto-instrumented**: Auto-instrumentation only captures calls to [supported frameworks and libraries][6]. Check the supported list for [Python][7], [Node.js][8], or [Java][9]. If your library is not listed, you need to add instrumentation manually.
+- **Add manual instrumentation**: Use the [Agent Observability SDK][5] to wrap your LLM calls with spans directly in code. This works for any library or model provider.
+- **Use the HTTP API**: The [Agent Observability HTTP API][10] accepts spans from any language or framework and does not require an SDK.
+- **Use OpenTelemetry**: If your framework emits [OpenTelemetry GenAI semantic convention][11]-compliant spans, see [OpenTelemetry Instrumentation][11] for setup details.
 
 
 ### Next steps
@@ -99,12 +156,12 @@ Make requests to your application triggering LLM calls and then view traces in t
 After traces are being submitted from your application, you can:
 
 - [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
-- Add [custom instrumentation][5] to your application and extract data that automatic instrumentation cannot.
+- Add [manual instrumentation][5] to your application and extract data that automatic instrumentation cannot.
 
 
 ## Example "Hello World" application
 
-See below for a simple application that can be used to begin exploring the LLM Observability product.
+See below for a simple application that can be used to begin exploring the Agent Observability product.
 
 
 {{< tabs >}}
@@ -159,9 +216,10 @@ See below for a simple application that can be used to begin exploring the LLM O
    }
 
    main().then(console.log)
+   ```
 
 3. Run the application:
-   ```
+   ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
@@ -176,8 +234,13 @@ See below for a simple application that can be used to begin exploring the LLM O
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk/python
-[2]: /llm_observability/setup/sdk/nodejs
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/evaluations
-[5]: /llm_observability/instrumentation/custom_instrumentation
+[5]: /llm_observability/instrumentation/sdk#manual-instrumentation
+[6]: /llm_observability/instrumentation/auto_instrumentation
+[7]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
+[8]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
+[9]: /llm_observability/instrumentation/auto_instrumentation/?tab=java
+[10]: /llm_observability/instrumentation/api
+[11]: /llm_observability/instrumentation/otel_instrumentation
+[12]: /llm_observability/lapdog

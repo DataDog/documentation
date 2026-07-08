@@ -12,6 +12,9 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -27,6 +30,7 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Convert syslog values](#convert) to read-able values.
 - Enrich values by using [enrichment tables](#enrichment).
 - [Manipulate IP values](#ip).
+- Calculate [geographic distances](#map) and bearing with haversine.
 - [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
 - Manipulate event [paths](#path).
 
@@ -38,17 +42,17 @@ See [Remap Reserved Attributes][1] on how to use the Custom Processor to manuall
 
 To set up this processor:
 
-- If you have not created any functions yet, click **Add custom processor** and follow the instructions in [Add a function](#add-a-function) to create a function.
-- If you have already added custom functions, click **Manage custom processors**. Click on a function in the list to edit or delete it. You can use the search bar to find a function by its name. Click **Add Custom Processor** to [add a function](#add-a-function).
+- If you have not created any functions yet, click {{< ui >}}Add custom processor{{< /ui >}} and follow the instructions in [Add a function](#add-a-function) to create a function.
+- If you have already added custom functions, click {{< ui >}}Manage custom processors{{< /ui >}}. Click on a function in the list to edit or delete it. You can use the search bar to find a function by its name. Click {{< ui >}}Add Custom Processor{{< /ui >}} to [add a function](#add-a-function).
 
 ### Add a function
 
 1. Enter a name for your custom processor.
-1. Add your script to modify your logs using [custom functions][1]. You can also click **Autofill with Example** and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][2] for more information.
-1. Optionally, check **Drop events on error** if you want to drop events that encounter an error during processing.
+1. Add your script to modify your logs using [custom functions][1]. You can also click {{< ui >}}Autofill with Example{{< /ui >}} and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][2] for more information.
+1. Optionally, check {{< ui >}}Drop events on error{{< /ui >}} if you want to drop events that encounter an error during processing.
 1. Enter a sample log event.
-1. Click **Run** to preview how the functions process the log. After the script has run, you can see the output for the log.
-1. Click **Save**.
+1. Click {{< ui >}}Run{{< /ui >}} to preview how the functions process the log. After the script has run, you can see the output for the log.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Custom functions
 
@@ -60,6 +64,7 @@ To set up this processor:
     {{< nextlink href="observability_pipelines/processors/custom_processor/#debug" >}}Debug{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#enrichment" >}}Enrichment{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#ip" >}}IP{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/custom_processor/#map" >}}Map{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#number" >}}Number{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#object" >}}Object{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/custom_processor/#parse" >}}Parse{{< /nextlink >}}

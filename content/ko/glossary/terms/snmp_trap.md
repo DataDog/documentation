@@ -1,4 +1,5 @@
 ---
+id: snmp_trap
 core_product:
 - network device monitoring
 title: SNMP 트랩

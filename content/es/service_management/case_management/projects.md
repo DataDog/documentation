@@ -19,7 +19,7 @@ Un proyecto es un objeto Contenedor que contiene un conjunto de casos. Organice 
 
 ## Crear un proyecto
 
-{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
+{{< img src="incident_response/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
 
 Para crear un proyecto
 1. Seleccione **Nuevo proyecto** en la vista de proyectos o haga clic en el icono **+** situado junto a *Sus proyectos* en la barra de navegación izquierda.

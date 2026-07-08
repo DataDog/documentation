@@ -44,11 +44,11 @@ After you have connected your Git repositories and tagged your services, you can
 {{% tab "Error Tracking" %}}
 You can see links from stack frames to their source repository in [Error Tracking][1].
 
-1. Navigate to [**APM** > **Error Tracking**][2].
-2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Event**, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][2].
+2. Click on an issue. The {{< ui >}}Issue Details{{< /ui >}} panel appears on the right.
+3. Under {{< ui >}}Latest Event{{< /ui >}}, if you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
+{{< img src="source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
@@ -66,11 +66,11 @@ Source code integration is supported for the following RUM platforms when source
 
 **Note**: Source code integration is not supported for iOS RUM errors.
 
-1. Navigate to [**Digital Experience** > **Error Tracking**][2].
-2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][2].
+2. Click on an issue. The {{< ui >}}Issue Details{{< /ui >}} panel appears on the right.
+3. Under {{< ui >}}Latest Available Errors{{< /ui >}} or error samples, if you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+{{< img src="source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
 
 [1]: /real_user_monitoring/error_tracking/
 [2]: https://app.datadoghq.com/rum/error-tracking
@@ -84,15 +84,15 @@ Source code integration is supported for the following RUM platforms when source
 
 You can see source code previews directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][2].
 2. Select the service you want to investigate.
 3. Hover your cursor over a method in the flame graph.
 4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
-5. If prompted, click **Connect to preview**. The first time you do this for a repository, you will be redirected to GitHub to **Authorize** the Datadog application.
+5. If prompted, click {{< ui >}}Connect to preview{{< /ui >}}. The first time you do this for a repository, you will be redirected to GitHub to {{< ui >}}Authorize{{< /ui >}} the Datadog application.
 6. After authorizing, the source code preview appears in the tooltip.
 7. Click the file link in the tooltip to open the full source code file in your repository.
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
+{{< img src="source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/explorer
@@ -101,11 +101,11 @@ You can see source code previews directly in [Continuous Profiler][1] flame grap
 
 You can see links from errors in your Lambda functions' associated stack traces to their source repository in **Serverless Monitoring**.
 
-1. Navigate to [**Infrastructure** > **Serverless**][101] and click on the **AWS** tab.
-2. Click on a Lambda function and click the **Open Trace** button for an invocation with an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Serverless{{< /ui >}}][101] and click on the {{< ui >}}AWS{{< /ui >}} tab.
+2. Click on a Lambda function and click the {{< ui >}}Open Trace{{< /ui >}} button for an invocation with an associated stack trace.
+3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
+{{< img src="source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
@@ -114,10 +114,10 @@ You can see links from errors in your Lambda functions' associated stack traces 
 
 You can see links from failed test runs to their source repository in **Test Optimization**.
 
-1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
-2. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select a failed test run.
+2. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
+{{< img src="source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
 
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
@@ -129,10 +129,10 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
-1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
-2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click **Connect to preview**. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
+2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click on a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
+{{< img src="source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
 For more information, see the [Code Security documentation][102].
 
@@ -144,32 +144,32 @@ For more information, see the [Code Security documentation][102].
 
 You can see links from errors in your security signals' associated stack traces to their source repository in **App and API Protection Monitoring**.
 
-1. Navigate to [**Security** > **App and API Protection**][101] and select a security signal.
-2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}}][101] and select a security signal.
+2. Scroll down to the {{< ui >}}Traces{{< /ui >}} section on the {{< ui >}}Related Signals{{< /ui >}} tab and click on an associated stack trace.
+3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
+{{< img src="source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/security/appsec
 
 {{% /tab %}}
 {{% tab "Dynamic Instrumentation" %}}
 
-You can see full source code files in [**Dynamic Instrumentation**][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+You can see full source code files in [{{< ui >}}Dynamic Instrumentation{{< /ui >}}][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
 
 ### Create new instrumentation
 
-1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
-2. Select **Create New Instrumentation** and choose a service to instrument.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
+2. Select {{< ui >}}Create New Instrumentation{{< /ui >}} and choose a service to instrument.
 3. Search for and select a source code filename or method.
 
 ### View or edit instrumentation
 
-1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
-2. Select an existing instrumentation from the list, then click **View Events**.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
+2. Select an existing instrumentation from the list, then click {{< ui >}}View Events{{< /ui >}}.
 3. Select the instrumentation card to view its location in the source code.
 
-{{< img src="integrations/guide/source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
+{{< img src="source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
 
 For more information, see the [Dynamic Instrumentation documentation][102].
 
@@ -195,7 +195,7 @@ There is a maximum of 31 unique comments per PR at any time to reduce noise and 
 {{% tab "CI Visibility" %}}
 PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
 
-{{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
+{{< img src="source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
 To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][101].
 
@@ -208,11 +208,11 @@ PR comments are enabled by default when first onboarding to Code Security if the
 
 1. A single comment summarizing the new violations detected in your pull request.
 
-{{< img src="integrations/guide/source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
+{{< img src="source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
 
 2. Inline comments for each violation detected in your pull request placed directly on the lines of code that triggered the violation in the diff of the pull request.
 
-{{< img src="integrations/guide/source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
+{{< img src="source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
 
 To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
 
@@ -223,7 +223,7 @@ To disable PR comments for Code Security, go to the [Code Security Repository Se
 
 PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
 
-{{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
+{{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
 To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
 

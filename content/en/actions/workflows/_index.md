@@ -8,12 +8,18 @@ aliases:
 - /workflows
 - /service_management/workflows
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-forms
-  tag: Blog
-  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
+- link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
+  tag: "Learning Center"
+  text: "Automating Meaningful Actions with Datadog Workflow Automation"
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
@@ -32,12 +38,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pm-app-automation/"
   tag: "Blog"
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
-- link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
-  tag: "Learning Center"
-  text: "Automating Meaningful Actions with Datadog Workflow Automation"
 - link: "https://www.datadoghq.com/blog/datadog-agent-builder/"
   tag: "Blog"
-  text: "Introducing Datadog Agent Builder: Build agentic workflows for alert response and remediation"
+  text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
@@ -60,7 +63,7 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 
 The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 
 ## Examples
 

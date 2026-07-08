@@ -392,6 +392,8 @@ writer.file     = log.txt
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][4].
 
+If you are manually injecting trace IDs using the Datadog `CorrelationIdentifier` API, you must add the `dd-trace-api` dependency to your build. See [Connecting Java Logs and Traces][4] for the dependency snippets and code examples.
+
 If you are _not_ correlating logs and traces, remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the previous configuration examples.
 
 For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
@@ -432,7 +434,7 @@ Once [log collection is enabled][5], set up [custom log collection][6] to tail y
     ```
 
 3. [Restart the Agent][8].
-4. Run the [Agent's status subcommand][9] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][9] and look for `java` under the {{< ui >}}Checks{{< /ui >}} section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][10] to extract log attributes. Use the [Log Explorer][11] to view and troubleshoot your logs.
 

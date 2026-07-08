@@ -1,4 +1,5 @@
 ---
+id: query
 title: query
 core_product:
   - metrics

@@ -1,4 +1,5 @@
 ---
+id: snmp_mib
 core_product:
 - Surveillance d'appareils réseau
 title: Base d'informations de gestion (MIB) SNMP

@@ -23,11 +23,11 @@ Follow the [Microsoft Entra single sign-on (SSO) integration with Datadog][1] tu
 
 2. Choose and upload the **SAML XML Metadata** file downloaded from Microsoft.
 
-3. You should see the messages **SAML is ready** and **Valid IdP metadata installed**:
+3. You should see the messages {{< ui >}}SAML is ready{{< /ui >}} and {{< ui >}}Valid IdP metadata installed{{< /ui >}}:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11" style="width:70%;">}}
 
-4. Click **Enable** to start using Entra ID single sign-on with SAML:
+4. Click {{< ui >}}Enable{{< /ui >}} to start using Entra ID single sign-on with SAML:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12" style="width:70%;">}}
 
@@ -39,7 +39,7 @@ If you are using SSO with a Datadog button or link, a sign-on URL is required:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13" style="width:70%;">}}
 
-2. In Microsoft Entra ID, navigate to the SSO Configuration section of your application, check **Show advanced URL settings**, and add your single sign-on URL.
+2. In Microsoft Entra ID, navigate to the SSO Configuration section of your application, check {{< ui >}}Show advanced URL settings{{< /ui >}}, and add your single sign-on URL.
 
 ## Further Reading
 

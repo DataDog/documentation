@@ -29,7 +29,7 @@ Follow [Sigma's API client instructions][1] to retrieve a Client ID and Client S
    - Client secret
    - Cloud provider. If you don't know your cloud provider, you can find it using Sigma's [Supported cloud platforms and regions documentation][3].
 
-2. After you've entered these credentials, click **Save**.
+2. After you've entered these credentials, click {{< ui >}}Save{{< /ui >}}.
 
 ## What's next
 

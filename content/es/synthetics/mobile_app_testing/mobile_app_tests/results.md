@@ -8,7 +8,7 @@ further_reading:
 - link: /synthetics/mobile_app_testing/
   tag: Documentación
   text: Más información sobre los tests móviles Synthetic
-- link: /service_management/events/explorer
+- link: /events/explorer
   tag: Documentación
   text: Información sobre el explorador de eventos
 title: Resultados de tests de aplicaciones móviles

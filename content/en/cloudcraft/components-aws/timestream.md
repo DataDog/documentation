@@ -11,11 +11,11 @@ Use the Timestream component to represent visualize serverless time-series datab
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Written Data (GB)**: Enter the total volume of written data, in gigabytes.
-- **Queried Data (GB)**: Enter the total volume of queried data, in gigabytes.
-- **Memory Storage/hr (GB)**: Enter the total amount of memory storage per hour for your Timestream database, in gigabytes.
-- **Magnetic Storage/mo (GB)**: Enter the total amount of monthly magnetic storage provisioned for your Timestream database, in gigabytes.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Written Data (GB){{< /ui >}}: Enter the total volume of written data, in gigabytes.
+- {{< ui >}}Queried Data (GB){{< /ui >}}: Enter the total volume of queried data, in gigabytes.
+- {{< ui >}}Memory Storage/hr (GB){{< /ui >}}: Enter the total amount of memory storage per hour for your Timestream database, in gigabytes.
+- {{< ui >}}Magnetic Storage/mo (GB){{< /ui >}}: Enter the total amount of monthly magnetic storage provisioned for your Timestream database, in gigabytes.
 
 ## API
 

@@ -13,7 +13,6 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">The Quality Monitoring integration with Databricks only supports Unity Catalog. Reach out to your account representative if you use Hive Metastore.</div>
 
 ## Overview
 
@@ -33,8 +32,8 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
    **Note**: Workspace Admin permissions are not required for Quality Monitoring.
 
-2. When configuring the integration, turn on the **Data Observability** toggle.
-3. Click **Save Databricks Workspace**.
+2. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
+3. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
 ### Step 2 - Grant access
 

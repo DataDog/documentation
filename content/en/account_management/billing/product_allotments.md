@@ -17,7 +17,7 @@ In order to invoice billable usage, included usage is first subtracted. Allotmen
 
 For example, an account can have a total Ingested Spans usage of 150 GB. From this, 140 GB is billable usage. If there is a prior commitment of 50 GB and an allotment of 30 GB, this 80 GB of usage is classified as included usage and subtracted from the 140 GB of billable usage. The remaining 60 GB of usage is classified as on-demand usage.
 
-- To view total usage and billable usage, see the **All** and **Billable** tabs within the [**Plan and Usage** page][2] in Datadog. 
+- To view total usage and billable usage, see the {{< ui >}}All{{< /ui >}} and {{< ui >}}Billable{{< /ui >}} tabs within the [**Plan and Usage** page][2] in Datadog. 
 - To view commitments, refer to your contract.
 
 ## Calculating included usage

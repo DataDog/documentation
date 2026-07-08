@@ -161,7 +161,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.94619755-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.109858308-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -316,6 +316,13 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
 		exit 1; \
+	fi;
+	@if [ "$(BUILD_SCRIPT_BRANCH)" != "main" ]; then \
+		echo -e "\n\033[0;31m##########################################################################"; \
+		echo -e "# WARNING: BUILD_SCRIPT_BRANCH is set to '$(BUILD_SCRIPT_BRANCH)'"; \
+		echo -e "# You are NOT using the main branch for build scripts."; \
+		echo -e "# If this is unintentional, update BUILD_SCRIPT_BRANCH in Makefile.config"; \
+		echo -e "##########################################################################\033[0m\n"; \
 	fi;
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \

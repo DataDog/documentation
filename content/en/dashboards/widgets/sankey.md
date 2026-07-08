@@ -8,7 +8,7 @@ further_reading:
   text: "Build Sankey Diagrams in Product Analytics"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
 The Sankey widget is not available in the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>

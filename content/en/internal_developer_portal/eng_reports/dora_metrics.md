@@ -1,5 +1,6 @@
 ---
 title: DORA Metrics
+description: View organization-wide software delivery velocity and stability metrics, broken down by service, team, and environment, with historical trends and scheduled reports.
 aliases:
 - /software_catalog/eng_reports/dora_metrics
 further_reading:
@@ -36,7 +37,7 @@ You can update your DORA Metrics report view in the following ways:
 
 ### Schedule reports
 
-Set up scheduled reports for your stakeholders that are delivered as PDFs through email or Slack on a recurring basis.
+Set up scheduled reports for your stakeholders that are delivered as PDFs through email, Slack, or Microsoft Teams on a recurring basis.
 
 To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
 

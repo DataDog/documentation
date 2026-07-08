@@ -12,12 +12,12 @@ You can use the API Management component to represent and visualize management p
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the service tier for your API management platform.
-- **Calls**: Enter the total number of calls to the API. Only available for the **Consumption** tier.
-- **Units**: Enter the number of units for the API management platform. Only available for the **Premium** tier.
-- **Self-hosted gateways**: Enter the number of self-hosted API gateways. Only available for the **Premium** tier.
-- **Rotate item**: Rotate the component relative to the blueprint. Only available in 3D view.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the service tier for your API management platform.
+- {{< ui >}}Calls{{< /ui >}}: Enter the total number of calls to the API. Only available for the {{< ui >}}Consumption{{< /ui >}} tier.
+- {{< ui >}}Units{{< /ui >}}: Enter the number of units for the API management platform. Only available for the {{< ui >}}Premium{{< /ui >}} tier.
+- {{< ui >}}Self-hosted gateways{{< /ui >}}: Enter the number of self-hosted API gateways. Only available for the {{< ui >}}Premium{{< /ui >}} tier.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the component relative to the blueprint. Only available in 3D view.
 
 ## API
 

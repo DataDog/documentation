@@ -17,7 +17,7 @@ This guide assumes you have:
 
 ## Create an API key
 
-To create an API key for automation, go to **User** > **API keys** and click **Create API key**.
+To create an API key for automation, go to {{< ui >}}User{{< /ui >}} > {{< ui >}}API keys{{< /ui >}} and click {{< ui >}}Create API key{{< /ui >}}.
 
 {{< img src="cloudcraft/getting-started/generate-api-key/create-api-key-button.png" alt="Screenshot of Cloudcraft's user interface for managing API keys with a focus on the 'Create API key' button." responsive="true" style="width:75%;">}}
 
@@ -25,7 +25,7 @@ Name the key to describe its purpose, for example, 'Automation Key,' and assign 
 
 {{< img src="cloudcraft/getting-started/generate-api-key/create-api-key-window.png" alt="Screenshot of Cloudcraft's API key creation interface with fields for naming and setting permissions." responsive="true" style="width:100%;">}}
 
-When you're done, click **Save key** to create a new API key. Make sure to write down the key in a secure location so you can use it later.
+When you're done, click {{< ui >}}Save key{{< /ui >}} to create a new API key. Make sure to write down the key in a secure location so you can use it later.
 
 If you have any questions or issues with creating an API key, [contact Cloudcraft's support team through the in-app beacon][5].
 

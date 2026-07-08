@@ -25,7 +25,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -51,7 +51,7 @@ COPY package*.json ./
 COPY . .
 RUN npm install
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 
@@ -128,5 +128,5 @@ If you encounter issues while setting up App and API Protection for your Node.js
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/nodejs/compatibility
+[1]: /security/application_security/setup/compatibility/nodejs
 [2]: /security/application_security/setup/nodejs/troubleshooting

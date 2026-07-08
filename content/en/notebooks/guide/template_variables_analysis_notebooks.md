@@ -36,7 +36,7 @@ For all supported widgets, results update dynamically when template variables ch
 * Template variables cannot be used in the name of the data source.
 
 ### Transformation
-* Supported only in **Filter** operations.
+* Supported only in {{< ui >}}Filter{{< /ui >}} operations.
 * Multiple filter operations can reference different template variables.
 * Template variables cannot be used in the name of a transformation.
 * Filter operations are used to calculate the usages of template variables in the template variable edit modal. Each filter operation counts towards the total number of potential usages.
@@ -53,7 +53,7 @@ For all supported widgets, results update dynamically when template variables ch
 ### SQL analysis
 * **Not supported**.
 * Template variables cannot be used in SQL queries.
-* Not included in template variable usage counts and unaffected by **Add all / Remove all** operations.
+* Not included in template variable usage counts and unaffected by {{< ui >}}Add all / Remove all{{< /ui >}} operations.
 
 ### Published datasets
 

@@ -1,4 +1,5 @@
 ---
+id: flow
 core_product:
 - クラウド ネットワーク モニタリング
 title: フロー

@@ -24,7 +24,7 @@ further_reading:
 - Homebrew (recommended for Agent installation)
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog Ruby tracing library (see [version requirements][1])
+- Datadog Ruby SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -187,5 +187,5 @@ If you encounter issues while setting up App and API Protection for your Ruby ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/ruby/compatibility
+[1]: /security/application_security/setup/compatibility/ruby
 [2]: /security/application_security/setup/ruby/troubleshooting

@@ -1,4 +1,5 @@
 ---
+id: timeline_view
 core_product:
 - continuous profiler
 title: vista de línea de tiempo

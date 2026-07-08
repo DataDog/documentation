@@ -1,4 +1,5 @@
 ---
+id: role
 title: role
 ---
 A role defines the account permissions for users. In Datadog, there are three default roles: Admin, Standard, and Read-only.

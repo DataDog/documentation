@@ -16,9 +16,9 @@ Team features are available with Cloudcraft Pro and Enterprise plans.
 
 ### Invite new users
 
-To add members to your team, head to **User → Team settings** inside Cloudcraft.
+To add members to your team, head to {{< ui >}}User{{< /ui >}} > {{< ui >}}Team settings{{< /ui >}} inside Cloudcraft.
 
-Next, click the blue **Add member** button at the bottom of the **Manage Team** window that appeared.
+Next, click the blue {{< ui >}}Add member{{< /ui >}} button at the bottom of the {{< ui >}}Manage Team{{< /ui >}} window that appeared.
 
 {{< img src="cloudcraft/account-management/manage-teams/add-member.png" alt="Screenshot of a 'Manage Team' interface in Cloudcraft with an 'Add Member' button highlighted." responsive="true" style="width:100%;">}}
 
@@ -28,7 +28,7 @@ After clicking the button, you need to enter the user's email address and select
 
 Selecting the correct role is a critical step in this process, as different roles have different levels of access. Select the role that best fits this user, but try to follow the [principle of least privilege][1].
 
-Lastly, click the **Send invite** button to invite the user to your team. The user you invited will receive an email that includes a link to join your team and set up their account if they have not already.
+Lastly, click the {{< ui >}}Send invite{{< /ui >}} button to invite the user to your team. The user you invited will receive an email that includes a link to join your team and set up their account if they have not already.
 
 <div class="alert alert-info">
 The user will inherit their cross-organizational role if they are a member of a cross-organizational team.
@@ -36,13 +36,13 @@ The user will inherit their cross-organizational role if they are a member of a 
 
 ### Remove existing users
 
-When someone leaves the team — or if someone is added by mistake — you will want to remove them from your team. For that, head to **User → Team settings** inside Cloudcraft.
+When someone leaves the team — or if someone is added by mistake — you will want to remove them from your team. For that, head to {{< ui >}}User{{< /ui >}} > {{< ui >}}Team settings{{< /ui >}} inside Cloudcraft.
 
 Next, select the user you want to have removed and click the gray trash can icon to the right of their name.
 
 {{< img src="cloudcraft/account-management/manage-teams/trash-can-icon.png" alt="Screenshot of a Cloudcraft Manage Team interface highlighting user collaboration features with delete action icon." responsive="true" style="width:100%;">}}
 
-A confirmation dialog will appear on your screen. Click the red **Remove** button and the user will be removed from your team.
+A confirmation dialog will appear on your screen. Click the red {{< ui >}}Remove{{< /ui >}} button and the user will be removed from your team.
 
 <div class="alert alert-info">
   <p>Diagrams that were created by the removed user and that were shared with the team, will continue to be available to the team. If you need help migrating all of the user's data prior to removing them, please <a href="https://app.cloudcraft.co/app/support" title="Contact our support team">contact our support team from inside the application</a>.</p>
@@ -51,13 +51,13 @@ A confirmation dialog will appear on your screen. Click the red **Remove** butto
 
 ### Change an existing user's role
 
-If you need to change what a user has access to, head to **User → Team settings** inside Cloudcraft.
+If you need to change what a user has access to, head to {{< ui >}}User{{< /ui >}} > {{< ui >}}Team settings{{< /ui >}} inside Cloudcraft.
 
 Next, click the gray pencil icon to the left of the user.
 
 {{< img src="cloudcraft/account-management/manage-teams/edit-user.png" alt="User interface for managing team members in Cloudcraft, highlighting edit options." responsive="true" style="width:100%;">}}
 
-On the next prompt, select a new role for the user and click the blue **Save** button. That is all there is to it.
+On the next prompt, select a new role for the user and click the blue {{< ui >}}Save{{< /ui >}} button. That is all there is to it.
 
 ## Team management
 
@@ -67,25 +67,25 @@ The multi-team management feature is only available for the Enterprise plan.
 
 ### Create a new team
 
-To create a new team for your account, head to **User → Team settings** inside Cloudcraft.
+To create a new team for your account, head to {{< ui >}}User{{< /ui >}} > {{< ui >}}Team settings{{< /ui >}} inside Cloudcraft.
 
-Click the blue **Create Team** button at the bottom of the team list, on the left.
+Click the blue {{< ui >}}Create Team{{< /ui >}} button at the bottom of the team list, on the left.
 
 {{< img src="cloudcraft/account-management/manage-teams/create-new-team.png" alt="User interface for team management in Cloudcraft highlighting the 'Create Team' button with a list of team members." responsive="true" style="width:100%;">}}
 
-Next, you need to give your team a name and set its visibility. A **Visible** team can be seen by anyone in your organization, while a **Secret** team can only be seen by the account owner and members of the team.
+Next, you need to give your team a name and set its visibility. A {{< ui >}}Visible{{< /ui >}} team can be seen by anyone in your organization, while a {{< ui >}}Secret{{< /ui >}} team can only be seen by the account owner and members of the team.
 
 {{< img src="cloudcraft/account-management/manage-teams/create-new-team-settings.png" alt="Screenshot of a team creation interface in Cloudcraft with options for team visibility and roles." responsive="true" style="width:100%;">}}
 
-Before creating the team, you can also check the **Cross-organizational** box to make this a cross-organizational team, which are teams with members that are automatically added to all other teams in your organization. An example of cross-organizational team would be a central security management team, which need visibility into all of the individual teams.
+Before creating the team, you can also check the {{< ui >}}Cross-organizational{{< /ui >}} box to make this a cross-organizational team, which are teams with members that are automatically added to all other teams in your organization. An example of cross-organizational team would be a central security management team, which need visibility into all of the individual teams.
 
 Unless they are already a member of another team, cross-organizational members inherit their cross-organizational roles.
 
-Click the **Create** button at the bottom and that is it, you are ready to start inviting team members.
+Click the {{< ui >}}Create{{< /ui >}} button at the bottom and that is it, you are ready to start inviting team members.
 
 ### Removing or updating existing teams
 
-If you need to update or remove a team that you own, head to **User → Team settings** inside Cloudcraft.
+If you need to update or remove a team that you own, head to {{< ui >}}User{{< /ui >}} > {{< ui >}}Team settings{{< /ui >}} inside Cloudcraft.
 
 Select the team you want to update and click on the gray pencil icon that sits next to its name.
 
@@ -93,11 +93,11 @@ Select the team you want to update and click on the gray pencil icon that sits n
 
 Here you can update the name of the team, make a visible team secret — and vice-versa —, change a team to cross-organizational, or remove a team entirely.
 
-To update other team settings, make the change you want to make and click the blue **Save** button at the bottom.
+To update other team settings, make the change you want to make and click the blue {{< ui >}}Save{{< /ui >}} button at the bottom.
 
 {{< img src="cloudcraft/account-management/manage-teams/update-team-settings.png" alt="Screenshot of a Cloudcraft's team management interface with options to edit team visibility and roles." responsive="true" style="width:100%;">}}
 
-To remove a team, simply click on the red **Delete** button and confirm that you want to delete your team.
+To remove a team, simply click on the red {{< ui >}}Delete{{< /ui >}} button and confirm that you want to delete your team.
 
 {{< img src="cloudcraft/account-management/manage-teams/delete-team.png" alt="Cloudcraft interface showing a confirmation dialog for deleting a team." responsive="true" style="width:100%;">}}
 

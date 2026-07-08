@@ -1,4 +1,5 @@
 ---
+id: mute
 core_product:
 - alertas
 title: silenciar

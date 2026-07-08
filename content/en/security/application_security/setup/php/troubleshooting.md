@@ -69,8 +69,8 @@ There are no required integrations for PHP.
  To troubleshoot this step of the process, do the following:
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`.
-- Ensure there are no Agent transmission errors related to spans in your [tracer logs][7].
-- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
+- Ensure there are no Agent transmission errors related to spans in your [tracer logs][10].
+- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application SDK.
 
 ### Check if spans are successfully transmitted to Datadog
 
@@ -140,18 +140,6 @@ If the user doesn't have write access to the tmp directory, you can change the l
 ```
 datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 ```
-
-### Confirm AAP is enabled
-
-You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
-
-1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
-
-If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
-
-AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Confirm tracer versions are updated
 

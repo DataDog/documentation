@@ -1,4 +1,5 @@
 ---
+id: flow
 core_product:
 - monitorización de redes en la nube
 title: flujo

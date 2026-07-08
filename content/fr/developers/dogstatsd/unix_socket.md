@@ -39,21 +39,31 @@ Pour activer l'UDS DogStatsD de l'Agent :
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Modifiez le [fichier de configuration principal de l'Agent][1] afin de définir l'option `dogstatsd_socket` sur le chemin où DogStatsD doit créer son socket d'écoute :
+<div class="alert alert-warning">Le script d'installation de l'Agent crée automatiquement le fichier socket avec les autorisations correctes, et <code>use_dogstatsd: true</code> & <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> sont définis par défaut. </div>
 
-    ```yaml
-    ## @param dogstatsd_socket - string - optional - default: ""
-    ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid and existing filesystem path to enable.
-    #
-    dogstatsd_socket: '/var/run/datadog/dsd.socket'
-    ```
+1. Créez un fichier socket que DogStatsD utilisera comme socket d'écoute. Par exemple :
+   ```shell
+   sudo mkdir -p /var/run/datadog/
+   ```
+1. Vérifier que l'utilisateur `dd-agent` dispose des autorisations de lecture et d'écriture sur le fichier socket :
+   ```shell
+   sudo chown dd-agent:dd-agent /var/run/datadog/
+   ```
+1. Modifier le [fichier de configuration principal de l'Agent][1] :
+   1. Définissez `use_dogstatsd` sur `true`.
+   1. Définir `dogstatsd_socket` sur le chemin où DogStatsD doit créer son socket d'écoute :
 
-2. [Redémarrez votre Agent][2].
+      ```yaml
+      ## @param dogstatsd_socket - string - optional - default: ""
+      ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
+      ## Set to a valid and existing filesystem path to enable.
+      #
+      dogstatsd_socket: "/var/run/datadog/dsd.socket"
+      ```
+1. [Redémarrez votre Agent][2].
 
-
-[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /fr/agent/guide/agent-commands/
+[1]: /fr/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /fr/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -65,13 +75,56 @@ Pour activer l'UDS DogStatsD de l'Agent :
     - Démarrez vos conteneurs d'application avec `-v /var/run/datadog:/var/run/datadog:ro`.
 
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. Dans la définition de votre tâche, définissez le chemin du socket à l'aide de la variable d'environnement `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` dans la définition du conteneur de l'Agent (exemple : `/var/run/datadog/dsd.socket`).
+
+2. Rendez le fichier socket accessible aux conteneurs d'application en montant un volume partagé des deux côtés. Les conteneurs d'application peuvent ainsi accéder au socket depuis le conteneur de l'Agent Datadog.
+
+    1. Monter le dossier vide dans la section `volumes` de la définition de tâche :
+
+        ```json
+        "volumes": [
+            {
+                "name": "dsdsocket",
+                "host": {}
+            }
+        ],
+        ```
+
+    1. Dans la section `mountPoints` de votre conteneur de l'Agent, monter le dossier du socket :
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket"
+            }
+        ],
+        ```
+
+    1. Dans la section `mountPoints` de vos conteneurs d'application, exposer le même dossier dans vos conteneurs d'application :
+
+        <div class="alert alert-info">Supprimez <code>"readOnly": true</code> si vos conteneurs d'application ont besoin d'un accès en écriture au socket.</div>
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket",
+            "readOnly": true
+            }
+        ],
+        ```
+
+{{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent (exemple : `/var/run/datadog/dsd.socket`).
 
 2. Assurez-vous que les conteneurs de votre application peuvent accéder au fichier du socket. Pour ce faire, montez un répertoire host des deux côtés (avec un accès en lecture seule dans les conteneurs de votre application, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD.
 
-    - Montez le dossier de socket dans votre conteneur `datadog-agent` :
+    1. Montez le dossier de socket dans votre conteneur `datadog-agent` :
 
         ```yaml
         volumeMounts:
@@ -84,7 +137,9 @@ Pour activer l'UDS DogStatsD de l'Agent :
               name: dsdsocket
         ```
 
-    - Exposez le même dossier dans les conteneurs de votre application :
+    1. Exposez le même dossier dans les conteneurs de votre application :
+
+       <div class="alert alert-info">Supprimez <code>"readOnly": true</code> si vos conteneurs d'application ont besoin d'un accès en écriture au socket.</div>
 
         ```yaml
         volumeMounts:
@@ -98,8 +153,6 @@ Pour activer l'UDS DogStatsD de l'Agent :
               name: dsdsocket
         ```
 
-        **Remarque** : supprimez `readOnly: true` si les conteneurs de votre application doivent disposer d'un accès en écriture au socket.
-
 {{% /tab %}}
 {{% tab "EKS Fargate" %}}
 
@@ -107,7 +160,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
 
 2. Assurez-vous que les conteneurs de votre application peuvent accéder au fichier du socket. Pour ce faire, montez un répertoire vide des deux côtés (avec un accès en lecture seule dans les conteneurs de votre application, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD.
 
-    - Montez le dossier vide dans les spécifications de votre pod :
+    1. Montez le dossier vide dans les spécifications de votre pod :
 
         ```yaml
         volumes:
@@ -115,7 +168,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
               name: dsdsocket
         ```
 
-    - Montez le dossier de socket dans votre conteneur `datadog-agent` :
+    1. Montez le dossier de socket dans votre conteneur `datadog-agent` :
 
         ```yaml
         volumeMounts:
@@ -123,7 +176,9 @@ Pour activer l'UDS DogStatsD de l'Agent :
               mountPath: /var/run/datadog
         ```
 
-    - Exposez le même dossier dans les conteneurs de votre application :
+    1. Exposez le même dossier dans les conteneurs de votre application :
+
+       <div class="alert alert-info">Supprimez <code>"readOnly": true</code> si vos conteneurs d'application ont besoin d'un accès en écriture au socket.</div>
 
         ```yaml
         volumeMounts:
@@ -131,8 +186,6 @@ Pour activer l'UDS DogStatsD de l'Agent :
               mountPath: /var/run/datadog
               readOnly: true
         ```
-
-        **Remarque** : supprimez `readOnly: true` si les conteneurs de votre application doivent disposer d'un accès en écriture au socket.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -186,9 +239,9 @@ La détection de l'origine permet à DogStatsD d'identifier la provenance des m�
 3. [Redémarrez votre Agent][3].
 
 
-[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /fr/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/getting_started/tagging/assigning_tags/#environment-variables
-[3]: /fr/agent/guide/agent-commands/
+[3]: /fr/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -201,6 +254,35 @@ Lorsqu'il fonctionne dans un conteneur, DogStatsD doit être exécuté dans l'es
 
 [1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. Dans la définition de votre tâche, définir la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION` sur true dans la définition du conteneur de l'Agent :
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_ORIGIN_DETECTION",
+        "value": "true"
+    },
+    ```
+
+2. Ajouter le [paramètre PidMode][2] dans la définition de tâche et le définir sur `task` comme suit :
+
+    ```json
+    "pidMode": "task"
+    ```
+
+3. Pour configurer la [cardinalité des tags][1] (facultatif) pour les métriques recueillies avec la détection de l'origine, définissez la variable d'environnement `DD_DOGSTATSD_TAG_CARDINALITY` sur `low` (par défaut), `orchestrator` ou `high` :
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_TAG_CARDINALITY",
+        "value": "low"
+    },
+    ```
+
+[1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

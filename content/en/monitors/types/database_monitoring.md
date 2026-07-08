@@ -17,7 +17,7 @@ For step-by-step instructions, see [Example monitors](#example-monitors).
 
 ## Monitor creation
 
-To create a new DBM monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Database Monitoring**][2] in the UI.
+To create a new DBM monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}}][2] in the UI.
 
 <div class="alert alert-info">There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
@@ -37,7 +37,7 @@ Any feedback on these existing monitor types and other ones you would like to se
 
 ### Creating monitors from scratch
 
-1. Determine whether you want to monitor **Query Samples** or **Explain Plans** and select the corresponding option from the dropdown menu.
+1. Determine whether you want to monitor {{< ui >}}Query Samples{{< /ui >}} or {{< ui >}}Explain Plans{{< /ui >}} and select the corresponding option from the dropdown menu.
 
 {{< img src="database_monitoring/dbm_event_monitor/dbm_event_monitor_data_types.png" alt="A dropdown menu showing the different data sources available for the Database Monitoring monitor type" style="width:80%;" >}}
 
@@ -48,8 +48,8 @@ Any feedback on these existing monitor types and other ones you would like to se
 Note: The monitor you configure alerts over the **unique value count** of the facets.
 
 3. You also have the option to group DBM events by multiple dimensions. All DBM events matching the query are grouped together based on the values of up to **four facets**. With the group by functionality, you also have the ability to configure the **alerting grouping strategy**:
-    * **Simple Alert**: Simple Alerts aggregate over all reporting sources, so one alert triggers when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
-    * **Multi Alert**: Multi Alerts apply the alert to each source according to your group parameters, meaning that an alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@db.user` and select the Multi Alert Aggregation type to receive a separate alert for each database user that triggers the alert as you've defined it.
+    * {{< ui >}}Simple Alert{{< /ui >}}: Simple Alerts aggregate over all reporting sources, so one alert triggers when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
+    * {{< ui >}}Multi Alert{{< /ui >}}: Multi Alerts apply the alert to each source according to your group parameters, meaning that an alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@db.user` and select the Multi Alert Aggregation type to receive a separate alert for each database user that triggers the alert as you've defined it.
 
 ### Set alert conditions
 
@@ -69,7 +69,7 @@ When you split the monitor by any dimension (tag or facet) and use a `below` con
 For more information about advanced alert options such as evaluation delay, see [Configure Monitors][3].
 
 ### Notifications
-For more information about the **Configure notifications and automations** section, see [Notifications][4].
+For more information about the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see [Notifications][4].
 
 ## Example monitors
 
@@ -81,18 +81,18 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 
 #### Build the monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. In the **Common monitor types** box, click **Waiting Queries**. 
+1. In Datadog, go to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}}][2].
+1. In the {{< ui >}}Common monitor types{{< /ui >}} box, click {{< ui >}}Waiting Queries{{< /ui >}}. 
 
 #### Set the alert threshold
 
-1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
-1. Enter your chosen alerting threshold value in the **Alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **Alert threshold** to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. To gain context on the range of typical values, set the time frame to {{< ui >}}Past 1 Month{{< /ui >}} using the dropdown menu at the top of the chart.
+1. Enter your chosen alerting threshold value in the {{< ui >}}Alert threshold{{< /ui >}} box. For example, if the number of waiting queries stays below `3000` on the chart, you might set {{< ui >}}Alert threshold{{< /ui >}} to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under {{< ui >}}Configure notifications and automations{{< /ui >}}, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Waiting queries on {{host.name}} have exceeded {{threshold}} 
@@ -104,12 +104,12 @@ The number of waiting queries on {{host.name}}, which exceeded {{threshold}},
 has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+1. Add yourself to the notification recipients by typing and then selecting your name in the {{< ui >}}Notify your services and your team members{{< /ui >}} box.
 
 #### Verify and save the monitor
 
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
+1. To verify the monitor setup, click {{< ui >}}Test Notifications{{< /ui >}}. Trigger a test alert by choosing {{< ui >}}Alert{{< /ui >}}, then click {{< ui >}}Run Test{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}} to save the monitor.
 
 ### Queries exceeding 30 seconds
 
@@ -119,19 +119,19 @@ This monitor detects whether the number of long-running queries has exceeded a g
 
 #### Build the monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. In **Common monitor types**, click **Long Running Queries**.
-1. Update the query filter to **Duration:>30s**.
+1. In Datadog, go to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}}][2].
+1. In {{< ui >}}Common monitor types{{< /ui >}}, click {{< ui >}}Long Running Queries{{< /ui >}}.
+1. Update the query filter to {{< ui >}}Duration:>30s{{< /ui >}}.
 
 #### Set the alert threshold
 
-1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
-1. Enter your chosen alerting threshold value in the **Alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **Alert threshold** to `2500` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. To gain context on the range of typical values, set the time frame to {{< ui >}}Past 1 Month{{< /ui >}} using the dropdown menu at the top of the chart.
+1. Enter your chosen alerting threshold value in the {{< ui >}}Alert threshold{{< /ui >}} box. For example, if the values on the chart stay below `2000`, you might set {{< ui >}}Alert threshold{{< /ui >}} to `2500` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under {{< ui >}}Configure notifications and automations{{< /ui >}}, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The number of queries with a duration of >30s has exceeded 
@@ -143,12 +143,12 @@ The number of queries with a duration of >30s on {{host.name}},
 which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+1. Add yourself to the notification recipients by typing and then selecting your name in the {{< ui >}}Notify your services and your team members{{< /ui >}} box.
 
 #### Verify and save the monitor
 
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
+1. To verify the monitor setup, click {{< ui >}}Test Notifications{{< /ui >}}. Trigger a test alert by choosing {{< ui >}}Alert{{< /ui >}}, then click {{< ui >}}Run Test{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}} to save the monitor.
 
 ### Change in explain-plan cost
 
@@ -165,28 +165,28 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 
 #### Build the first monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. Under **Define the search query**, make the following updates:
-    - Change **Query Samples** to **Explain Plans**.
-    - Change __*__ to **Explain Plan Cost (@db.plan.cost)**. Typing "cost" into the field populates the autocomplete options.
-    - Change **(everything)** to **Host (host)**.
-1. Click the **∑** button and type **rollup** to populate the autocomplete suggestions. Choose **moving_rollup**. 
+1. In Datadog, go to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}}][2].
+1. Under {{< ui >}}Define the search query{{< /ui >}}, make the following updates:
+    - Change {{< ui >}}Query Samples{{< /ui >}} to {{< ui >}}Explain Plans{{< /ui >}}.
+    - Change `*` to {{< ui >}}Explain Plan Cost (@db.plan.cost){{< /ui >}}. Typing "cost" into the field populates the autocomplete options.
+    - Change {{< ui >}}(everything){{< /ui >}} to {{< ui >}}Host (host){{< /ui >}}.
+1. Click the {{< ui >}}∑{{< /ui >}} button and type **rollup** to populate the autocomplete suggestions. Choose {{< ui >}}moving_rollup{{< /ui >}}. 
 
 #### Build the second monitoring query
 
-1. Click **Add Query** to create query **b**, a copy of query **a**.
-1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
-1. In the **b** query, click the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. Click {{< ui >}}Add Query{{< /ui >}} to create query **b**, a copy of query **a**.
+1. Change {{< ui >}}a + b{{< /ui >}} to {{< ui >}}a - b{{< /ui >}}. Because the two queries are temporarily identical, this value displays on the chart as 0.
+1. In the **b** query, click the {{< ui >}}∑{{< /ui >}} button and choose {{< ui >}}Timeshift{{< /ui >}} > {{< ui >}}Week before{{< /ui >}}. This configures the monitor to detect significant changes between last week and the present.
 
 #### Set the alert threshold
 
-1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the typical cost variation from week to week.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
+1. In the dropdown menu at the top of the chart, expand the time frame to {{< ui >}}Past 1 Month{{< /ui >}} to gain context on the typical cost variation from week to week.
+1. Enter your chosen alerting threshold value in the {{< ui >}}alert threshold{{< /ui >}} box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set {{< ui >}}alert threshold{{< /ui >}} to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under {{< ui >}}Configure notifications and automations{{< /ui >}}, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The daily average explain-plan cost on {{host.name}} has increased by at least {{threshold}} 
@@ -198,12 +198,12 @@ The daily average explain-plan cost on {{host.name}} has recovered to within {{t
 of the cost on this day last week.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+1. Add yourself to the notification recipients by typing and then selecting your name in the {{< ui >}}Notify your services and your team members{{< /ui >}} box.
 
 #### Verify and save the monitor
 
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
+1. To verify the monitor setup, click {{< ui >}}Test Notifications{{< /ui >}}. Trigger a test alert by choosing {{< ui >}}Alert{{< /ui >}}, then click {{< ui >}}Run Test{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}} to save the monitor.
 
 
 [1]: /database_monitoring/

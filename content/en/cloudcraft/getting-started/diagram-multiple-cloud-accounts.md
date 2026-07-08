@@ -10,8 +10,8 @@ Cloudcraft is a tool designed to help visualize and plan cloud architecture in a
 
 To work with multiple cloud accounts, you must enable the legacy diagramming experience:
 
-1. Open Cloudcraft and navigate to the **Live** tab.
-2. Locate the **New Live Experience** toggle and ensure it is switched **off**.
+1. Open Cloudcraft and navigate to the {{< ui >}}Live{{< /ui >}} tab.
+2. Locate the {{< ui >}}New Live Experience{{< /ui >}} toggle and ensure it is switched **off**.
 
 {{< img src="cloudcraft/getting-started/diagram-multiple-cloud-accounts/new-live-experience-toggle.png" alt="Cloudcraft interface showing new live experience toggle for multiple cloud accounts." responsive="true" style="width:100%;">}}
 
@@ -21,7 +21,7 @@ After the legacy experience is enabled, lay out the first account:
 
 1. Choose the initial cloud account you want to visualize.
 2. Start a scan of this account to gather its current architecture details.
-3. Select the **Auto Layout** button to automatically arrange the components of this account within the diagram.
+3. Select the {{< ui >}}Auto Layout{{< /ui >}} button to automatically arrange the components of this account within the diagram.
 
 ## 3. Layout the second account
 
@@ -29,8 +29,8 @@ After successfully laying out the first account, you can add more accounts into 
 
 1. Choose the second cloud account you wish to add.
 2. Perform a scan of the second account to capture its architecture.
-3. Select **Auto Layout**. 
-4. Access the **Options** dropdown and select **Include existing components.** This action ensures the components from the first account remain visible, integrating both accounts into a single diagram.
+3. Select {{< ui >}}Auto Layout{{< /ui >}}. 
+4. Access the {{< ui >}}Options{{< /ui >}} dropdown and select {{< ui >}}Include existing components{{< /ui >}}. This action ensures the components from the first account remain visible, integrating both accounts into a single diagram.
 
 {{< img src="cloudcraft/getting-started/diagram-multiple-cloud-accounts/auto-layout-options.png" alt="Cloudcraft interface showing AWS inventory and live component options." responsive="true" style="width:100%;">}}
 

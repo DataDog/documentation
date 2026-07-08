@@ -1,4 +1,5 @@
 ---
+id: time_aggregation
 title: time aggregation
 core_product:
   - metrics

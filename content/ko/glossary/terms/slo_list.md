@@ -1,8 +1,9 @@
 ---
+id: slo_list
 core_product:
 - dashboards
 related_terms:
-- 서비스 수준 목표(SLO)
+- slo
 - dashboard
 title: slo list widget
 ---

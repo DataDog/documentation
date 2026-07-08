@@ -35,7 +35,7 @@ This guide covers:
 
 ## Prerequisites
 
-Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to **[Integrations > Agent][3]** to view installation instructions.
+Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][3] to view installation instructions.
 
 To verify that the Datadog Agent is running, check that your [Infrastructure List][4] in Datadog is populated.
 
@@ -50,12 +50,12 @@ Automatic Monitors can include:
 - Kubernetes monitors (pod restarts, node health)
 - APM monitors (error rates or latency per service)
 
-You can view these monitors immediately on the Datadog [**Monitors**][17] page.
+You can view these monitors immediately on the Datadog [{{< ui >}}Monitors{{< /ui >}}][17] page.
 From there, you can edit, clone, or disable them like any other monitor.
 
 ## Create a monitor
 
-To create a monitor, navigate to **[Monitors > New Monitor][5]** and select **Metric**.
+To create a monitor, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][5] and select {{< ui >}}Metric{{< /ui >}}.
 
 ## Configure
 
@@ -69,7 +69,7 @@ The main components of monitor configuration are:
 
 ### Choose the detection method
 
-When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
+When you create a metric monitor, {{< ui >}}Threshold Alert{{< /ui >}} is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
 
 ### Define the metric
 
@@ -95,16 +95,16 @@ For this example, leave the other settings in this section on the defaults. For 
 
 ### Notifications and automations
 
-When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
+When this monitor is triggered to alert, a notification is sent. In this notification, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
 
-#### Title
+#### Notification title
 
 The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group element (`host` and `device`) with message template variables:
 ```text
 Disk space is low on {{device.name}} / {{host.name}}
 ```
 
-#### Message
+#### Notification message
 
 Use the message to tell your team how to resolve the issue, for example:
 ```text
@@ -115,7 +115,7 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-To add conditional messages based on alert vs. warning thresholds, see the available [Notification Variables][8] you can include in your message.
+To add conditional messages based on alert vs. warning thresholds, see the available [notification variables][8] you can include in your message.
 
 #### Notify your services and your team members
 
@@ -123,19 +123,19 @@ Send notifications to your team through email, Slack, PagerDuty, and more. You c
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members using the `@team` handle.
+To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
 ### Permissions
 
-Click **Edit Access** to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select `Notify` to be alerted when the monitor is modified.
+Click {{< ui >}}Edit Access{{< /ui >}} to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select {{< ui >}}Notify{{< /ui >}} to be alerted when the monitor is modified.
 
 {{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
 
 For more information, see [Granular Access Control][10].
 
-## View Monitors and Triage Alerts on Mobile
+## View monitors and triage alerts on mobile
 
 You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13]. This helps with triaging when you are away from your laptop or desktop.
 
@@ -158,7 +158,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [11]: /mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
-[14]: /service_management/workflows/
+[14]: /actions/workflows/
 [15]: /incident_response/case_management/
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

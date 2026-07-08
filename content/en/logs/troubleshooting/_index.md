@@ -1,5 +1,10 @@
 ---
 title: Logs Troubleshooting
+description: "Troubleshooting common log ingestion and processing issues in Datadog Logs, including missing logs, data access problems, and timestamp misalignment."
+further_reading:
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
 ---
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
@@ -41,7 +46,7 @@ Epoch timestamps can be adjusted using the timezone parameter in a Grok Parser p
 Epoch timestamps can be adjusted using the `timezone` parameter in a Grok Parser processor. Follow these steps to convert a localized timestamp to UTC using the example in Datadog's [Grok Parser][19] guide.
 
 1. Navigate to the [Pipelines][9] page.
-2. In **Pipelines**, select the correct pipeline matching to your logs.
+2. In {{< ui >}}Pipelines{{< /ui >}}, select the correct pipeline matching to your logs.
 3. Open the Grok Parser processor that is parsing your logs.
 4. Given that a local host is logging in UTC+1, adjust the date matcher to account for this difference. The resulting rule will have a comma and a new string defining the timezone to UTC+1.
 5. Verify that the [Log Date Remapper][8] is using the parsed attribute as the official timestamp for the matching logs.
@@ -62,7 +67,7 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 1. Navigate to the [Pipelines][9] page.
 
-2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
+2. In {{< ui >}}Pipelines{{< /ui >}}, hover over {{< ui >}}Preprocessing for JSON logs{{< /ui >}}, and click the pencil icon.
 
 3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing.
 
@@ -98,6 +103,19 @@ If the `datadog_index` tag is set to `N/A` for a metric datapoint, the correspon
 
 **Note**: Estimated Usage Metrics do not respect [Daily Quotas][13].
 
+## Log has a trace ID but the associated trace is missing
+
+A log in the [Log Explorer][2] shows a trace ID, but when you click through to view the trace, you see a message that the associated trace is missing. The linked trace was either not ingested or not retained.
+
+This happens because logs and traces are sampled independently:
+
+- **Traces** can be sampled at the tracer level, the Agent level, and at ingestion through [ingestion controls][21].
+- **Logs** can be sampled through [index exclusion filters][22] and quotas.
+
+Because these sampling decisions are not coordinated, a log can retain a trace ID that refers to a trace that was sampled out at any of these stages, or vice versa.
+
+This does not indicate a configuration error. The trace ID was correctly injected by the tracer, but the trace itself was dropped during sampling. To reduce the likelihood of this mismatch, align your trace and log retention strategies. For more information, see [Correlate Logs and Traces][23] and [Trace Ingestion Controls][21].
+
 ## Create a support ticket
 If the above troubleshooting steps do not resolve your issues with missing logs in Datadog, create a [support ticket][15]. If possible, include the following information:
 
@@ -115,8 +133,8 @@ If the above troubleshooting steps do not resolve your issues with missing logs 
 [4]: /logs/guide/logs-rbac-permissions/?tab=ui#check-restriction-queries
 [5]: /logs/log_configuration/indexes/#set-daily-quota
 [6]: /logs/log_configuration/pipelines/?tab=date#date-attribute
-[7]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
-[8]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
+[7]: /logs/log_configuration/processors/arithmetic_processor/
+[8]: /logs/log_configuration/processors/log_date_remapper/
 [9]: https://app.datadoghq.com/logs/pipelines
 [10]: /logs/guide/logs-rbac-permissions/?tab=ui#legacy-permissions
 [11]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
@@ -127,5 +145,12 @@ If the above troubleshooting steps do not resolve your issues with missing logs 
 [16]: /api/latest/logs-indexes/#get-an-index
 [17]: /api/latest/logs-indexes/#get-an-index
 [18]: /agent/troubleshooting/send_a_flare/?tab=agent
-[19]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[19]: /logs/log_configuration/processors/grok_parser/
 [20]: https://app.datadoghq.com/dashboard/lists/preset/3?q=Log%20Management%20estimated%20usage&p=1
+[21]: /tracing/trace_pipeline/ingestion_controls/
+[22]: /logs/log_configuration/indexes/#exclusion-filters
+[23]: /tracing/other_telemetry/connect_logs_and_traces/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

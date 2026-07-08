@@ -33,11 +33,11 @@ Select the [**Autoscaling**][11] tab in the Kubernetes section to view scaling r
 
 ### Kubernetes Remediation
 
-Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits AI Dev Agent][14]. For more information, read the [Bits AI Kubernetes Remediation documentation][15].
+Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits Code][14]. For more information, read the [Bits Remediation documentation][15].
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
  btn_hidden="false" header="Join the Preview!">}}
-Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Automated fixes from Bits Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 ## Explore Amazon Elastic Container Service (ECS) resources
@@ -54,13 +54,13 @@ Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, c
 [5]: /security/cloud_security_management
 [6]: /infrastructure/containers/container_images/
 [7]: https://app.datadoghq.com/orchestration/explorer
-[8]: /infrastructure/containers/kubernetes_explorer
+[8]: /containers/monitoring/kubernetes_explorer
 [9]: https://app.datadoghq.com/orchestration/resource/pod
 [10]: /infrastructure/containers/kubernetes_resource_utilization
-[11]: https://demo.datadoghq.com/orchestration/scaling/summary
+[11]: https://app.datadoghq.com/orchestration/scaling/summary
 [12]: /containers/monitoring/autoscaling
 [13]: https://app.datadoghq.com/orchestration/remediation
-[14]: /bits_ai/bits_ai_dev_agent
+[14]: /bits_ai/bits_code
 [15]: /containers/bits_ai_kubernetes_remediation/
 [16]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [17]: /infrastructure/containers/amazon_elastic_container_explorer

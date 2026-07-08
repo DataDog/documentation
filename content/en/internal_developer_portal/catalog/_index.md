@@ -1,0 +1,98 @@
+---
+title: Catalog
+description: Catalog provides a centralized, dynamic view of your software ecosystem and infrastructure resources, integrating observability, security, and cost management tools.
+aliases:
+  - /tracing/faq/software_catalog/
+  - /tracing/services/services_list/
+  - /tracing/visualization/services_list/
+  - /tracing/software_catalog/
+  - /tracing/faq/service_catalog/
+  - /tracing/service_catalog/
+  - /service_catalog/
+  - /software_catalog/
+  - /internal_developer_portal/software_catalog/
+further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
+- link: "/internal_developer_portal/use_cases"
+  tag: "Documentation"
+  text: "Learn about Catalog Use Cases"
+- link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+  tag: "Learning Center"
+  text: "Managing Services with Catalog"
+algolia:
+  tags: ['software catalog', 'catalog']
+---
+
+
+## Overview
+
+[Catalog][1] provides a centralized, dynamic view of your software ecosystem and infrastructure resources, giving you a single point of entry to understand every layer of your stack. Built on real-time telemetry and automated metadata collection, the Catalog integrates with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, optimize operations, and promote service reliability at scale.
+
+{{< img src="tracing/internal_developer_portal/catalog/tour.mp4" video=true alt="Navigating the IDP Catalog" style="width:100%;" >}}
+
+## What you can do in Catalog
+
+Catalog offers multiple views to help you explore and manage your entities. To quickly find what you need most, pin frequently accessed views using Saved Views.
+
+- [**Ownership**][8]: Access your team's Slack, repo, or on-call information.
+- **Reliability**: Address risks by surfacing entities with recent deploys, rising error rates, open incidents, or failing monitors.
+- **Performance**: Compare latency, traffic, error rate, and Apdex by environment.
+- **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
+- **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.
+- **Software Delivery**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
+- **Relationships**: See the dependency graph for services and hover over any service card to see the infrastructure resources it runs on.
+- **Infrastructure**: Browse your cloud infrastructure resources in a dedicated section of the Catalog. Infrastructure resources link to the software entities that run on them. You can click any service in the dependency graph to navigate directly to the infrastructure it runs on.
+
+See the [Use Cases documentation][4] to learn how teams use Datadog Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
+
+## What appears in Catalog
+
+Catalog includes an entity when:
+- Datadog [detects it from telemetry][5],
+- You [declare it in an Entity Definition][6], or
+- You [import it from a third-party source][7] such as Backstage or ServiceNow.
+
+You can view infrastructure resources when you [enable Resource collection][9]. Resource collection is free for any Infrastructure Monitoring customer.
+
+[Learn more][3] about entity types and how to configure them for your needs.
+
+**Notes**: 
+- Use the entity type for more precise filtering than the legacy `type` filter (from the `span.type` attribute). For example, use the `datastore type` facet to filter by specific datastore technology.
+- Span summaries and service and resource statistics are retained for up to 30 days. For deeper analysis on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
+
+{{< site-region region="gov,gov2" >}}
+### Service types
+
+Every monitored service is associated with a type. Datadog automatically determines type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+
+For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
+
+The service type can be one of:
+
+*  Cache
+*  Custom
+*  DB
+*  Serverless function
+*  Web
+
+Some integrations alias to certain types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+
+{{< /site-region >}}
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/services
+[2]: /data_security/data_retention_periods/
+[3]: /internal_developer_portal/catalog/entity_model/native_entities/
+[4]: /internal_developer_portal/use_cases
+[5]: /internal_developer_portal/catalog/set_up/discover_entities
+[6]: /internal_developer_portal/catalog/set_up/create_entities
+[7]: /internal_developer_portal/catalog/set_up/import_entities
+[8]: /internal_developer_portal/catalog/set_up/ownership
+[9]: /infrastructure/
+

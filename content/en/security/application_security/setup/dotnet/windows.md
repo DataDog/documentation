@@ -23,7 +23,7 @@ further_reading:
 - .NET application
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog .NET tracing library (see version requirements [here][1])
+- Datadog .NET SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -112,7 +112,7 @@ If you encounter issues while setting up App and API Protection for your .NET ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/dotnet/compatibility
+[1]: /security/application_security/setup/compatibility/dotnet
 [2]: /agent/?tab=Windows
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /security/application_security/setup/dotnet/troubleshooting

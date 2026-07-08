@@ -23,10 +23,6 @@ further_reading:
   text: "Gain insights into your Oracle bill"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-Custom Costs are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
@@ -237,7 +233,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 In Datadog:
 
 1. Navigate to [**Cloud Cost > Settings > Custom Costs**][3].
-1. Click the **+ Upload Costs** button.
+1. Click the {{< ui >}}+ Upload Costs{{< /ui >}} button.
 
    {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
 

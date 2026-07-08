@@ -8,7 +8,9 @@ aliases:
 
 Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances picked up by the Datadog-AWS integration. **You are not billed twice** if you are running the Agent on an EC2 instance picked up by the AWS integration.
 
-**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1], then you must set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2] to avoid double-billing.
+**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1] over IMSDv1, you must do one of the following to avoid double-billing:
+- Use Agent version `7.64.0` or above
+- Set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2]
 
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
@@ -16,7 +18,7 @@ Other AWS resources such as ELB, RDS, and DynamoDB are not part of monthly infra
 
 ## AWS resource exclusion
 
-You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then limit metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Functions, and CloudWatch custom metrics.
+You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the {{< ui >}}Metric Collection{{< /ui >}} tab. Under {{< ui >}}Limit Metric Collection to Specific Resources{{< /ui >}} you can then limit metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Functions, and CloudWatch custom metrics.
 Ensure that the tags added to this section are assigned to the corresponding resources on AWS.
 
 **Note**: If using exclusion notation (`!`), ensure the resource lacks the specified tag.

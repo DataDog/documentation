@@ -6,7 +6,7 @@ title: Datadog Integration
 
 The integration between Datadog and Cloudcraft provides users with a streamlined workflow for monitoring and visualizing their cloud infrastructure.
 
-By leveraging Datadog’s powerful monitoring platform, users can log in to Cloudcraft with their Datadog account, move seamlessly from any resource in Cloudcraft to the relevant views in Datadog, and automatically pull cloud accounts that have already been configured in Datadog for use in Cloudcraft.
+By leveraging Datadog's powerful monitoring platform, users can log in to Cloudcraft with their Datadog account, move seamlessly from any resource in Cloudcraft to the relevant views in Datadog, and automatically pull cloud accounts that have already been configured in Datadog for use in Cloudcraft.
 
 ## Datadog Single Sign-On (SSO)
 
@@ -14,7 +14,7 @@ Cloudcraft allows users to sign up and log in using their Datadog account. This 
 
 ### Sign up with Datadog SSO
 
-To get started, choose the **Sign up with Datadog** option during the Cloudcraft sign-up process. After signing up, you can log in to Cloudcraft using your Datadog credentials. This simplifies the login process and enables integration between the two platforms.
+To get started, choose the {{< ui >}}Sign up with Datadog{{< /ui >}} option during the Cloudcraft sign-up process. After signing up, you can log in to Cloudcraft using your Datadog credentials. This simplifies the login process and enables integration between the two platforms.
 
 By using Datadog SSO, you automatically gain access to:
 
@@ -23,7 +23,7 @@ By using Datadog SSO, you automatically gain access to:
 
 ### Enable Datadog SSO for existing accounts
 
-If you originally signed up with a different login method, for example, Google SSO or a standard username and password, you won’t have access to the full set of Datadog integration features. To switch to Datadog SSO, [contact the Cloudcraft support team][1] and they will assist you in converting your account.
+If you originally signed up with a different login method, for example, Google SSO or a standard username and password, you won't have access to the full set of Datadog integration features. To switch to Datadog SSO, [contact the Cloudcraft support team][1] and they will assist you in converting your account.
 
 ## Cloud account integration
 
@@ -41,23 +41,23 @@ If you don't have any AWS accounts added in Datadog, you'll need to add them fir
 
 ### Manage pulled AWS accounts in Cloudcraft
 
-AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the **Live** tab in Cloudcraft.
+AWS accounts pulled from Datadog are marked with the Bits icon in the account selector under the {{< ui >}}Live{{< /ui >}} tab in Cloudcraft.
 
 {{< img src="cloudcraft/getting-started/datadog-integration/bits-icon.png" alt="Cloud account selector displaying AWS accounts managed in Cloudcraft and Datadog integration." responsive="true" style="width:100%;">}}
 
-If you have many accounts but only need to focus on a few, you can use the visibility settings to hide specific accounts from the account selector in the **Live** tab.
+If you have many accounts but only need to focus on a few, you can use the visibility settings to hide specific accounts from the account selector in the {{< ui >}}Live{{< /ui >}} tab.
 
 To manage the visibility settings of these accounts:
 
-1. Go to **User > AWS Accounts**.
-2. Select the **Edit** icon (the pencil icon next to the account name).
-3. Toggle the **Visibility on Live** tab option to control whether the account is visible to the team.
+1. Go to {{< ui >}}User{{< /ui >}} > {{< ui >}}AWS Accounts{{< /ui >}}.
+2. Select the {{< ui >}}Edit{{< /ui >}} icon (the pencil icon next to the account name).
+3. Toggle the {{< ui >}}Visibility on Live{{< /ui >}} tab option to control whether the account is visible to the team.
 
 To manage the name of the account:
 
-1. Go to **User > AWS Accounts**.
-2. Select the **Edit** icon (the pencil icon next to the account name).
-3. Update the account name in the **Name** field.
+1. Go to {{< ui >}}User{{< /ui >}} > {{< ui >}}AWS Accounts{{< /ui >}}.
+2. Select the {{< ui >}}Edit{{< /ui >}} icon (the pencil icon next to the account name).
+3. Update the account name in the {{< ui >}}Name{{< /ui >}} field.
 
 <div class="alert alert-info">Changes to name or visibility settings will not impact the account in Datadog.</div>
 

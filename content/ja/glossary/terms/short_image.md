@@ -1,4 +1,5 @@
 ---
+id: short_image
 core_product:
 - インフラストラクチャーモニタリング
 title: ショートイメージ

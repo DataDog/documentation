@@ -9,34 +9,37 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Google SecOps destination to send logs to Google SecOps.
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][3] for more information about choosing the authentication method for your use case.
 
 ## Setup
 
-Set up the Google SecOps destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Google SecOps destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][1], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
 
-### Set up the destination
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Google SecOps endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-To set up the Worker's Google SecOps destination:
+{{% observability_pipelines/secrets_env_var_note %}}
 
-1. Enter the identifier for your Google SecOps endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-	- **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual URL.
+After you select the Google SecOps destination in the pipeline UI:
+
+1. Enter the identifier for your Google SecOps endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the customer ID for your Google SecOps instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][7].
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
+1. Select {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}} encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
 
-#### Optional buffering
+### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
 **Note**: Logs sent to the Google SecOps destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -55,9 +58,9 @@ To set up the Worker's Google SecOps destination:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
@@ -72,3 +75,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [5]: https://cloud.google.com/chronicle/docs/ingestion/parser-list/supported-default-parsers#with-default-parser
 [6]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [7]: https://cloud.google.com/docs/authentication#auth-flowchart
+[8]: /observability_pipelines/configuration/set_up_pipelines/
+[9]: /api/latest/observability-pipelines/
+[10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

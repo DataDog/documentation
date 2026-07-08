@@ -1,0 +1,22 @@
+{
+  "/Users/tester/repo/content/en/example/page_one.mdoc.md": [
+    {
+      "message": "Filter references unknown option group `fake_options`.",
+      "data": {
+        "lines": [12],
+        "searchTerm": "fake_options"
+      }
+    },
+    {
+      "message": "Trait `nonexistent_trait` is not defined in the customization config.",
+      "data": {
+        "lines": [15, 18]
+      }
+    }
+  ],
+  "/Users/tester/repo/content/en/example/page_two.mdoc.md": [
+    {
+      "message": "Duplicate `content_filters` entry for trait `prog_lang`."
+    }
+  ]
+}

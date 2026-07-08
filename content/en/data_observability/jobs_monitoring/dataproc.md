@@ -27,18 +27,18 @@ Follow these steps to enable Data Observability: Jobs Monitoring for GCP Datapro
 
 ### Store your Datadog API key in Google Cloud Secret Manager (recommended)
 1. Take note of your [Datadog API key][1].
-1. In [GCP Secret Manager][2], choose **Create secret**.
-   - Under **Name**, enter a **Secret name**. You can use `dd_api_key`.
-   - Under **Secret value**, paste your Datadog API key in the **Secret value** text box.
+1. In [GCP Secret Manager][2], choose {{< ui >}}Create secret{{< /ui >}}.
+   - Under {{< ui >}}Name{{< /ui >}}, enter a {{< ui >}}Secret name{{< /ui >}}. You can use `dd_api_key`.
+   - Under {{< ui >}}Secret value{{< /ui >}}, paste your Datadog API key in the {{< ui >}}Secret value{{< /ui >}} text box.
       {{< img src="data_jobs/dataproc/key_value.png" alt="A section of the secret creation page titled 'Secret details'. On the top, a name field containing 'dd_api_key'. On the bottom, a text box to paste your own API key." style="width:80%;" >}}
-   - Click **Create Secret**.
-1. Optionally, under **Rotation**, you can turn on [automatic rotation][3].
+   - Click {{< ui >}}Create Secret{{< /ui >}}.
+1. Optionally, under {{< ui >}}Rotation{{< /ui >}}, you can turn on [automatic rotation][3].
 1. In [GCP Secret Manager][2], open the secret you created. Take note of the Resource ID, which is in the format "projects/<PROJECT_NAME>/secrets/<SECRET_NAME>".
-1. Make sure the service account used by your Dataproc cluster has permission to read the secret. By default, this is the `Compute Engine default service account`. To grant access, copy the associated service account Principal, and click **Grant Access** on the **Permissions** tab of the secret's page. Assign the `secretmanager.secretAccessor` role, or any other one that has `secretmanager.versions.access` permission. See the [IAM roles][12] documentation for a full description of available roles.
+1. Make sure the service account used by your Dataproc cluster has permission to read the secret. By default, this is the `Compute Engine default service account`. To grant access, copy the associated service account Principal, and click {{< ui >}}Grant Access{{< /ui >}} on the {{< ui >}}Permissions{{< /ui >}} tab of the secret's page. Assign the `secretmanager.secretAccessor` role, or any other one that has `secretmanager.versions.access` permission. See the [IAM roles][12] documentation for a full description of available roles.
 
 ### Create and configure your Dataproc cluster
 
-When you create a new **Dataproc Cluster on Compute Engine** in the [Google Cloud Console][4], add an initialization action on the **Customize cluster** page:
+When you create a new {{< ui >}}Dataproc Cluster on Compute Engine{{< /ui >}} in the [Google Cloud Console][4], add an initialization action on the {{< ui >}}Customize cluster{{< /ui >}} page:
 
 1. Save the following script to a GCS bucket that your Dataproc cluster can read. Take note of the path to this script.
 
@@ -72,7 +72,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
 [15]: /getting_started/tagging/
 
-1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
+1. On the {{< ui >}}Customize cluster{{< /ui >}} page, locate the {{< ui >}}Initialization Actions{{< /ui >}} section. Enter the path where you saved the script from the previous step.
 
     When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 

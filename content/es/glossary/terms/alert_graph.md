@@ -1,8 +1,9 @@
 ---
+id: alert_graph
 core_product:
 - dashboards
 related_terms:
-- series temporales
+- timeseries
 - dashboard
 title: gráfica de alertas
 ---

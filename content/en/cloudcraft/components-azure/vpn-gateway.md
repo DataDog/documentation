@@ -13,12 +13,12 @@ You can use the **VPN Gateway** component to represent and visualize private con
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Gateway type**: Select the type of virtual network gateway you want to represent.
-- **SKU**: Select the SKU of the virtual network gateway you want to represent.
-- **S2S tunnels**: Enter the number of S2S tunnels for the virtual network gateway. Only available for VPN gateways.
-- **P2S tunnels**: Enter the number of P2S tunnels for the virtual network gateway. Only available for VPN gateways.
-- **Rotate item**: Rotate the component by 90 degrees and change its direction.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Gateway type{{< /ui >}}: Select the type of virtual network gateway you want to represent.
+- {{< ui >}}SKU{{< /ui >}}: Select the SKU of the virtual network gateway you want to represent.
+- {{< ui >}}S2S tunnels{{< /ui >}}: Enter the number of S2S tunnels for the virtual network gateway. Only available for VPN gateways.
+- {{< ui >}}P2S tunnels{{< /ui >}}: Enter the number of P2S tunnels for the virtual network gateway. Only available for VPN gateways.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the component by 90 degrees and change its direction.
 
 ## API
 

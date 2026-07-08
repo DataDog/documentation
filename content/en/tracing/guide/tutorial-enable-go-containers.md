@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Go applic
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
@@ -185,7 +185,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
 
 ## Launch the containers to explore automatic instrumentation
 
-Now that the Tracing Library is installed, spin up your application containers and start receiving traces. Run the following commands:
+Now that the SDK is installed, spin up your application containers and start receiving traces. Run the following commands:
 
 {{< code-block lang="shell" >}}
 docker-compose -f all-docker-compose.yaml build
@@ -211,13 +211,13 @@ Use `curl` to again send requests to the application:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11]. The Traces list shows something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+If you don't see traces, clear any filter in the {{< ui >}}Traces{{< /ui >}} Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 
@@ -235,7 +235,7 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the SDK to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="docker/all-docker-compose.yaml" disable_copy="true" >}}
 environment:
@@ -244,9 +244,9 @@ environment:
   - DD_APM_NON_LOCAL_TRAFFIC=true
 {{< /code-block >}}
 
-For more information on available configuration options, see [Configuring the Go Tracing Library][14].
+For more information on available configuration options, see [Configuring the Go SDK][14].
 
-### Use automatic tracing libraries
+### Use automatic instrumentation
 
 Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
 

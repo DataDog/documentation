@@ -59,7 +59,7 @@ Your team owns an issue if it is the code owner of the top-level stack frame of 
 2. Install [the GitHub integration][2].
 3. Make sure the GitHub integration has all requested permissions (Contents and Members).
 4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
-5. In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
+5. In Datadog, go to [{{< ui >}}Teams{{< /ui >}}](https://app.datadoghq.com/teams) > Select your team > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}GitHub Connection{{< /ui >}} to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
@@ -88,7 +88,7 @@ In addition to automatic team ownership, you can manually add or remove teams fr
 To add a team to an issue:
 
 1. Open the issue details panel.
-2. Click **Add team**.
+2. Click {{< ui >}}Add team{{< /ui >}}.
 3. Select the team to add.
 
 #### Remove a team
@@ -97,7 +97,7 @@ To remove a team from an issue:
 
 1. Open the issue details panel.
 2. Click the team to remove.
-3. Click **Unlink team from issue**.
+3. Click {{< ui >}}Unlink team from issue{{< /ui >}}.
 
 ## Configuration
 

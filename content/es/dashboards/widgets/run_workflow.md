@@ -18,7 +18,7 @@ El widget Run Workflow te permite automatizar tareas críticas desde dashboards.
 1. Asigna variables de plantilla de dashboard  a los parámetros de entrada del flujo de trabajo. Esto permite que los valores de tus variables de plantilla de dashboard se asignen directamente a los parámetros de entrada al ejecutar el flujo de trabajo.
 1. Introduce un título para el widget y haz clic en **Save** (Guardar).
 
-{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Haz clic en Run Workflow para activar un flujo de trabajo desde el widget Dashboard." >}}
+{{< img src="dashboards/widgets/trigger-from-dashboard2.png" alt="Haz clic en Run Workflow para activar un flujo de trabajo desde el widget Dashboard." >}}
 
 Para ejecutar el flujo de trabajo:
 1. Haz clic en **Run Workflow** en tu widget de dashboard.

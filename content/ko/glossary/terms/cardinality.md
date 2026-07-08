@@ -1,4 +1,5 @@
 ---
+id: cardinality
 core_product:
 - 메트릭
 title: 카디널리티

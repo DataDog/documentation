@@ -1,4 +1,5 @@
 ---
+id: warning
 title: warning
 core_product:
   - alerts

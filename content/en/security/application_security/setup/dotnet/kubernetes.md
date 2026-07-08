@@ -24,7 +24,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog .NET tracing library (see [version requirements][1])
+- Datadog .NET SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -125,5 +125,5 @@ If you encounter issues while setting up App and API Protection for your .NET ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/dotnet/compatibility
+[1]: /security/application_security/setup/compatibility/dotnet
 [2]: /security/application_security/setup/dotnet/troubleshooting

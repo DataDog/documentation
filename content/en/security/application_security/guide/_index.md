@@ -5,7 +5,7 @@ disable_toc: true
 ---
 
 {{< whatsnext desc="Getting Started" >}}
-    {{< nextlink href="/getting_started/application_security/" >}}First steps with App and API Protection{{< /nextlink >}}
+    {{< nextlink href="/getting_started/security/application_security/" >}}First steps with App and API Protection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Advanced Topics" >}}

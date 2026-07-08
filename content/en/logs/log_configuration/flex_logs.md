@@ -34,6 +34,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logs/"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://learn.datadoghq.com/courses/log-indexes"
+  tag: "Learning Center"
+  text: "Manage and Monitor Indexed Log Volumes"
+
 ---
 
 ## Overview
@@ -70,7 +74,7 @@ Use the spectrum of log types shown in the image below to determine when to use 
 
 Compute is the querying capacity to run queries for Flex Logs. It is used when querying logs in the Flex Logs tier. It is not used for ingestion or when only searching Standard Indexing logs. The available compute tiers are:
 
-<div class="alert alert-danger">The compute sizes available for US3, US5, AP1, AP2, and US1-FED are Starter, XS and S.</div>
+<div class="alert alert-danger">The compute sizes available for US3, US5, AP1, AP2, US1-FED, and US2-FED are Starter, XS and S.</div>
 
 - Starter
 - Extra small (XS)
@@ -117,11 +121,11 @@ If Flex Logs is not in your contract, you can enable Flex Logs Starter through t
 
 To enable Flex Logs:
 1. Navigate to the [Flex Logs Control][5] page.
-1. Select **Compute Type**.
-    - Datadog recommends the **Starter** compute size for organizations with less than 10B logs stored.
+1. Select {{< ui >}}Compute Type{{< /ui >}}.
+    - Datadog recommends the {{< ui >}}Starter{{< /ui >}} compute size for organizations with less than 10B logs stored.
     - Datadog recommends the scalable compute options (For example, XS, S, M, and L) for organizations with greater than 10B (or 2-3B per month) of logs stored.
 1. Select the compute size you want. See [Determine the compute size that you need](#determine-the-compute-size-that-you-need) for more information.
-1. Click **Enable Flex Logs**.
+1. Click {{< ui >}}Enable Flex Logs{{< /ui >}}.
 
 ### Offboard from self-serve Flex Logs
 
@@ -129,14 +133,14 @@ To disable Flex Logs:
 
 1. Remove Flex Storage from each index where Flex Logs is enabled.
 1. Navigate back to the [Flex Logs Control][5] page.
-1. Click the gear icon and select **Disable Flex Logs**.
+1. Click the gear icon and select {{< ui >}}Disable Flex Logs{{< /ui >}}.
 
 ## Upgrade and downgrade Flex Logs compute
 
 If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
-- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click **Save**.
+- Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click {{< ui >}}Save{{< /ui >}}.
 - A compute instance can be upgraded at any time.
 - A compute instance can be downgraded once per 15 days.
 
@@ -148,7 +152,7 @@ Configure Flex Tier in the [Flex Logs Controls][5] page:
 
 1. Click [Indexes Configuration][2].
 2. Edit the index you wish to enable with Flex Logs or create a new index.
-3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
+3. Select {{< ui >}}Flex Tier{{< /ui >}} and set the retention under {{< ui >}}Configure Storage Tier and Retention{{< /ui >}}.
 
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
 
@@ -190,7 +194,7 @@ The following table explains the impact of adding or removing different storage 
 
 {{< img src="logs/log_configuration/flex_logging/flex_toggle_explorer.png" alt="Enable Flex Logging on the Log Explorer page by toggling the option" style="width:100%;" >}}
 
-In the Log Explorer, toggle the **Include Flex Logs** option to include Flex Tier logs in your search query results. Find this option next to the time picker.
+In the Log Explorer, toggle the {{< ui >}}Include Flex Logs{{< /ui >}} option to include Flex Tier logs in your search query results. Find this option next to the time picker.
 
 [Search][3] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
 

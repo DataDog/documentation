@@ -1,4 +1,5 @@
 ---
+id: daemonset
 core_product:
 - monitorización de la infraestructura
 title: DaemonSet

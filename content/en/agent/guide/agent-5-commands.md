@@ -93,10 +93,10 @@ Checks
 
 ### Status information on Windows
 
-To verify the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager.
+To verify the Agent is running, check if the service status in the {{< ui >}}Services{{< /ui >}} panel is listed as "Started". A process called `ddagent.exe` should also exist in the {{< ui >}}Task Manager{{< /ui >}}.
 
 Information about the Agent's state for Agent v5.2+ is available in the
-*Datadog Agent Manager -> Settings -> Agent Status*:
+*{{< ui >}}Datadog Agent Manager{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Agent Status{{< /ui >}}*:
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" style="width:50%;" >}}
 
@@ -116,7 +116,7 @@ or cmd.exe:
 
 ## Windows commands
 
-Use the Datadog Agent Manager (available from the start menu).
+Use the Datadog Agent Manager (available from the {{< ui >}}Start{{< /ui >}} menu).
 
 {{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" style="width:75%;">}}
 

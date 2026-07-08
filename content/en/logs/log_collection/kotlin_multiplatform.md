@@ -80,11 +80,11 @@ kotlin {
 
     If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
 
-    1. Click on your project in Xcode and go to the **Package Dependencies** tab.
+    1. Click on your project in Xcode and go to the {{< ui >}}Package Dependencies{{< /ui >}} tab.
     2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
     3. Select the version from the table above.
-    4. Click on the necessary application target and open the **General** tab.
-    5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
+    4. Click on the necessary application target and open the {{< ui >}}General{{< /ui >}} tab.
+    5. Scroll down to the {{< ui >}}Frameworks, Libraries, and Embedded Content{{< /ui >}} section and add the dependencies mentioned above.
 
 3. Initialize the Datadog SDK with your application context (only for Android; can be `null` for iOS), tracking consent, and the [Datadog client token][2]. For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
 

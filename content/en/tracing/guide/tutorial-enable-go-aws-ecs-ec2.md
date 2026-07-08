@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Go applic
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: Documentation
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: Documentation
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: Documentation
   text: Supported Go frameworks for automatic instrumentation
@@ -106,7 +106,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 ### Deploy the application
 
-Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the SDK and Datadog Agent.
 
 To start, use a Terraform script to deploy to Amazon ECS:
 
@@ -408,12 +408,12 @@ Redeploy the application and exercise the API:
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
    : This command calls both the `notes` and `calendar` services.
 
-4. Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][9]. The Traces list shows something like this:
+4. Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][9]. The Traces list shows something like this:
    {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
    There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+If you don't see traces, clear any filter in the {{< ui >}}Traces{{< /ui >}} Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 

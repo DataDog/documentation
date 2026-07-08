@@ -61,7 +61,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
 
 1. Edit your Terraform configuration with the following content:
    ```tf
-   resource "aws_wafv2_ip_set" "Datadog-blocked-ipv4s" {
+   resource "aws_wafv2_ip_set" "datadog_blocked_ipv4s" {
      name               = "Datadog-blocked-ipv4s"
      ip_address_version = "IPV4"
      scope              = "CLOUDFRONT"
@@ -93,7 +93,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
 
        statement {
          ip_set_reference_statement {
-           arn = aws_wafv2_ip_set."Datadog-blocked-ipv4s".arn
+           arn = aws_wafv2_ip_set.datadog_blocked_ipv4s.arn
          }
        }
 

@@ -87,10 +87,10 @@ Select your platform.
 {{% tab "Kubernetes" %}}
 1. Navigate to [Observability Pipelines](https://app.datadoghq.com/observability-pipelines).
 1. Select the Kafka source.
-    1.  In the **Group ID** field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
-    1.  In the **Topics** field, enter `datadog-topic` or the topic you configured for your Event Hub earlier.
+    1.  In the {{< ui >}}Group ID{{< /ui >}} field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
+    1.  In the {{< ui >}}Topics{{< /ui >}} field, enter `datadog-topic` or the topic you configured for your Event Hub earlier.
     1.  Toggle the switch to enable SASL authentication.
-    1.  In the **Mechanism** dropdown menu, select **PLAIN**.
+    1.  In the {{< ui >}}Mechanism{{< /ui >}} dropdown menu, select {{< ui >}}PLAIN{{< /ui >}}.
     1.  Enable TLS.
         1. Configure your `values.yaml` file to use the certificate that works as part of the container image:
             ```
@@ -113,15 +113,15 @@ Select your platform.
             ```
             --set env[0].name=DD_OP_DATA_DIR,env[0].value='/config-volume/observability-pipelines-worker/'
             ```
-        1. In the **Certificate path** field, enter `/ca-certificates.crt` if you used the example above. Otherwise, enter the name of your certificate.
+        1. In the {{< ui >}}Certificate path{{< /ui >}} field, enter `/ca-certificates.crt` if you used the example above. Otherwise, enter the name of your certificate.
     {{< img src="observability_pipelines/sources/kafka_settings.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
-1. Click **Next: Select Destination**.
-1. After you set up your destinations and processors, click **Next: Install**.
-1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Click {{< ui >}}Next: Select Destination{{< /ui >}}.
+1. After you set up your destinations and processors, click {{< ui >}}Next: Install{{< /ui >}}.
+1. Select your platform in the {{< ui >}}Choose your installation platform{{< /ui >}} dropdown menu.
 1. Enter the environment variables for your Kafka source:
-    1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
-    1.  For **Kafka SASL Username**, enter `$$$$ConnectionString`. **Note**: You must have `$$$$` in front of `ConnectionString` because `$$$$` ends up being `$$` when transposed into the environment.
-    1.  For **Kafka SASL Password**, enter the full connection string. For example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`.
+    1.  For {{< ui >}}Kafka Bootstrap Servers{{< /ui >}}, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
+    1.  For {{< ui >}}Kafka SASL Username{{< /ui >}}, enter `$$$$ConnectionString`. **Note**: You must have `$$$$` in front of `ConnectionString` because `$$$$` ends up being `$$` when transposed into the environment.
+    1.  For {{< ui >}}Kafka SASL Password{{< /ui >}}, enter the full connection string. For example, `Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>`.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).
@@ -133,10 +133,10 @@ Select your platform.
 
 1. Navigate to [Observability Pipelines](https://app.datadoghq.com/observability-pipelines).
 1. Select the Kafka source.
-    1.  In the **Group ID** field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
-    1.  Enter `datadog-topic` in the **Topics** field.
+    1.  In the {{< ui >}}Group ID{{< /ui >}} field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
+    1.  Enter `datadog-topic` in the {{< ui >}}Topics{{< /ui >}} field.
     1.  Toggle the switch to enable SASL authentication.
-    1.  In the **Mechanism** dropdown menu, select **PLAIN**.
+    1.  In the {{< ui >}}Mechanism{{< /ui >}} dropdown menu, select {{< ui >}}PLAIN{{< /ui >}}.
     1.  Enable TLS. For the certificate, copy the certificate from its original location to the default Observability Pipelines data configuration directory:
         1. Since the Observability Pipelines Worker hasn't been installed yet, run this command to create the directory for the certificate:
             ```
@@ -146,15 +146,15 @@ Select your platform.
             ```
             sudo cp /etc/ssl/certs/ca-certificates.crt /var/lib/observability-pipelines-worker/config/
             ```
-        1. In the **Certificate path** field, enter `/ca-certificates.crt`.
+        1. In the {{< ui >}}Certificate path{{< /ui >}} field, enter `/ca-certificates.crt`.
     {{< img src="observability_pipelines/sources/kafka_settings_vm.png" alt="The Kafka source settings with example values" style="width:45%;" >}}
-1. Click **Next: Select Destination**.
-1. After you set up your destinations and processors, click **Next: Install**.
-1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Click {{< ui >}}Next: Select Destination{{< /ui >}}.
+1. After you set up your destinations and processors, click {{< ui >}}Next: Install{{< /ui >}}.
+1. Select your platform in the {{< ui >}}Choose your installation platform{{< /ui >}} dropdown menu.
 1. Enter the environment variables for your Kafka source:
-    1.  For **Kafka Bootstrap Servers**, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
-    1.  For **Kafka SASL Username**, enter `\$\$ConnectionString`. **Note**: You must escape the `$` in front of `ConnectionString`, otherwise the environment variable won't be loaded.
-    1.  For **Kafka SASL Password**, enter the full connection string wrapped in quotes (`"`). For example, `"Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>"`.
+    1.  For {{< ui >}}Kafka Bootstrap Servers{{< /ui >}}, enter `<NAMESPACE>.servicebus.windows.net:9093` (for example, `myeventhubns.servicebus.windows.net:9093`).
+    1.  For {{< ui >}}Kafka SASL Username{{< /ui >}}, enter `\$\$ConnectionString`. **Note**: You must escape the `$` in front of `ConnectionString`, otherwise the environment variable won't be loaded.
+    1.  For {{< ui >}}Kafka SASL Password{{< /ui >}}, enter the full connection string wrapped in quotes (`"`). For example, `"Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>"`.
         - This is the **Primary Connection String** in your Event Hub instance [shared access policies](#configure-shared-access-policy).
     1. Enter your Kafka TLS passphrase.
         - This is the **Primary Key** in your Event Hub instance's [shared access policies](#configure-shared-access-policy).

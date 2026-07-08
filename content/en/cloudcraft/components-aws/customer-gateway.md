@@ -11,9 +11,9 @@ Use the Customer Gateway component to represent the customer gateway device from
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate**: Rotate the component and change its direction.
-- **Connections**: View, remove, or add VPN connections to this gateway.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate{{< /ui >}}: Rotate the component and change its direction.
+- {{< ui >}}Connections{{< /ui >}}: View, remove, or add VPN connections to this gateway.
 
 ## API
 

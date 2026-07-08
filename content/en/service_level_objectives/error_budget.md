@@ -8,6 +8,10 @@ further_reading:
 - link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Overview of Service Level Objectives"
+- link: "https://learn.datadoghq.com/courses/getting-started-slos"
+  tag: "Learning Center"
+  text: "Getting Started with Service Level Objectives (SLOs)"
+
 ---
 
 ## Overview
@@ -22,19 +26,19 @@ Error budget alerts are available for the following SLO types:
 
 For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives][3].
 
-{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
+{{< img src="service_level_objectives/error_budget/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
 
 ## Monitor creation
 
 1. Navigate to the [SLO status page][4].
-2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
-3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
+2. Create a new SLO or edit an existing one, then click the {{< ui >}}Save and Set Alert{{< /ui >}} button. For existing SLOs, you can also click the {{< ui >}}Set up Alerts{{< /ui >}} button in the SLO detail side panel to take you directly to the alert configuration.
+3. Select the {{< ui >}}Error Budget{{< /ui >}} tab in {{< ui >}}Step 1: Setting alerting conditions{{< /ui >}}.
 4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
 over the past `target` number of days.
-4. Add [Notification information][5] in the **Configure notifications and automations** section.
-5. Click the **Create & Set Alert** button on the SLO configuration page.
+4. Add [Notification information][5] in the {{< ui >}}Configure notifications and automations{{< /ui >}} section.
+5. Click the {{< ui >}}Create & Set Alert{{< /ui >}} button on the SLO configuration page.
 
-{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
+{{< img src="service_level_objectives/error_budget/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
 
 ### Alerting for SLOs with groups
 

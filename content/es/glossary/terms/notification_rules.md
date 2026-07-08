@@ -1,4 +1,5 @@
 ---
+id: notification_rules
 core_product:
 - seguridad
 - cloud siem

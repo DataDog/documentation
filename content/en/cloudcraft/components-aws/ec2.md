@@ -11,12 +11,12 @@ Use the EC2 component to represent elastic compute instances from your Amazon We
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent color. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Transparency**: Choose if the EC2 block is solid or semi-transparent.
-- **Platform**: Select the platform used in the elastic compute instance. When choosing a platform with a license fee, the cost estimate is included in the fee.
-- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Billing option**: The pricing model used for the instance. Supported options are On-Demand, Reserved Instance, and Spot Instance at the moment.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent color. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Transparency{{< /ui >}}: Choose if the EC2 block is solid or semi-transparent.
+- {{< ui >}}Platform{{< /ui >}}: Select the platform used in the elastic compute instance. When choosing a platform with a license fee, the cost estimate is included in the fee.
+- {{< ui >}}Instance type{{< /ui >}}: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Billing option{{< /ui >}}: The pricing model used for the instance. Supported options are On-Demand, Reserved Instance, and Spot Instance at the moment.
 
 ## API
 

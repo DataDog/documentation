@@ -10,7 +10,7 @@ further_reading:
     text: Replace tags in spans
   - link: /tracing/trace_collection/library_config/
     tag: Documentation
-    text: Tracing Library Configuration
+    text: SDK Configuration
 ---
 
 ## Overview
@@ -48,7 +48,7 @@ To search for these spans in trace search, the query is `resource_name:"SELECT ?
 
 ### In-code instrumentation
 
-If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
+If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the SDK documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
 
 ### Agent configuration
 
@@ -82,7 +82,7 @@ Some tracers provide options to customize resource name generation directly:
 
 The Java tracer allows customization of HTTP resource names with the `dd.trace.http.server.path-resource-name-mapping` option, which maps HTTP request paths to custom resource names using Ant-style patterns.
 
-For more information, read [Configuring the Java Tracing Library][4]
+For more information, read [Configuring the Java SDK][4]
 
 [4]: /tracing/trace_collection/library_config/java/#traces
 
@@ -96,7 +96,7 @@ The PHP tracer provides several options for URI normalization:
 - `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` normalizes resource naming for incoming requests
 - `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` normalizes resource naming for outgoing requests
 
-For more information, read [Configuring the PHP Tracing Library][5]
+For more information, read [Configuring the PHP SDK][5]
 
 [5]: /tracing/trace_collection/library_config/php/#traces
 

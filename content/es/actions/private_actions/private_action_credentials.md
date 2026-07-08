@@ -49,7 +49,7 @@ Sustituye `USERNAME` y `PASSWORD` por tu nombre de usuario y tu contraseña.
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/http_basic.json`.
 
-{{< img src="service_management/par-http-basic-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/http_basic.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-basic-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/http_basic.json'" style="width:80%;" >}}
 
 ### Autenticación mediante token
 
@@ -75,7 +75,7 @@ Sustituye `TOKEN1`, `TOKEN2`, `VALUE1` y `VALUE2` por los nombres y valores de t
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/http_token.json`.
 
-{{< img src="service_management/par-http-token-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/http_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-token-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/http_token.json'" style="width:80%;" >}}
 
 ### Sin autenticación
 
@@ -83,7 +83,7 @@ Este tipo de conexión es adecuado para los endpoints HTTP que no requieren aute
 
 Para configurar este conexión, especifica la URL del endpoint:
 
-{{< img src="service_management/par-http-no-auth-credentials.png" alt="Una conexión HTTP sin autenticación" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-http-no-auth-credentials.png" alt="Una conexión HTTP sin autenticación" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
@@ -121,7 +121,7 @@ Sustituye `GITLAB_API_TOKEN` y `GITLAB_URL` por tus credenciales.
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/gitlab_token.json`.
 
-{{< img src="service_management/par-gitlab-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/gitlab_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-gitlab-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/gitlab_token.json'" style="width:80%;" >}}
 
 [201]: https://docs.gitlab.com/ee/api/
 {{% /tab %}}
@@ -164,7 +164,7 @@ Sustituye `USERNAME`, `API_TOKEN` y `DOMAIN` por tus credenciales.
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/jenkins_token.json`.
 
-{{< img src="service_management/par-jenkins-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/jenkins_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-jenkins-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/jenkins_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -216,7 +216,7 @@ Sustituye `USERNAME`, `PASSWORD`, `SRV_HOST` y `DATABASE` por tus credenciales.
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/mongodb_srv_token.json`.
 
-{{< img src="service_management/par-mongodb-srv-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-mongodb-srv-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
 
 ### Autenticación estándar
 
@@ -274,7 +274,7 @@ Sustituye `USERNAME`, `PASSWORD`, `HOST`, `PORT`, `DATABASE`, `AUTH_SOURCE` y `A
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/mongodb_standard_token.json`.
 
-{{< img src="service_management/par-mongodb-standard-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-mongodb-standard-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -342,7 +342,7 @@ Sustituye los valores del ejemplo por tus credenciales.
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/postgresql_token.json`.
 
-{{< img src="service_management/par-postgresql-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-postgresql-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
@@ -408,7 +408,7 @@ Sustituye `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE`, `SERVER_ROOT_CA_CERTIFICATE`
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json`.
 
-{{< img src="service_management/par-temporal-mtls-credentials.png" alt="La ruta del archivo de credenciales es '/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-mtls-credentials.png" alt="La ruta del archivo de credenciales es '/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
 
 ### Autenticación TLS
 
@@ -446,7 +446,7 @@ Sustituye `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE` y `SERVER_ROOT_CA_CERTIFICATE
 
 En la conexión del ejecutor, especifica la ubicación del archivo de credenciales en el contenedor del ejecutor de acción privado. En este ejemplo, el archivo de credenciales se almacena en `/etc/dd-action-runner/config/credentials/temporal_TLS_token.json`.
 
-{{< img src="service_management/par-temporal-tls-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-tls-credentials.png" alt="La ruta al archivo de credenciales es '/etc/dd-action-runner/config/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
 
 ### Sin autenticación
 
@@ -461,7 +461,7 @@ El tipo de conexión requiere las siguientes credenciales:
 
 Para este tipo de conexión, no es necesario crear un archivo de credenciales, ya que la dirección no es un secreto y se almacena directamente en Datadog. Para configurarlo, indica la dirección del servidor:
 
-{{< img src="service_management/par-temporal-no-tls-credentials.png" alt="Una conexión temporal no segura" style="width:80%;" >}}
+{{< img src="actions/private_actions/par-temporal-no-tls-credentials.png" alt="Una conexión temporal no segura" style="width:80%;" >}}
 
 {{% /tab %}}
 

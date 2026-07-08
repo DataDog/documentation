@@ -32,6 +32,8 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][20]. |
+
 
 ### Terminology
 
@@ -46,14 +48,20 @@ This table shows the mapping of concepts between Datadog CI Visibility and Build
 
 To set up the Datadog integration for [Buildkite][1]:
 
-1. Go to **Settings > Notification Services** in Buildkite and click the **Add** button next to **Datadog Pipeline Visibility**.
+1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification Services{{< /ui >}} in Buildkite and click the {{< ui >}}Add{{< /ui >}} button next to {{< ui >}}Datadog Pipeline Visibility{{< /ui >}}.
 2. Fill in the form with the following information:
-   * **Description**: A description to help identify the integration in the future, such as `Datadog CI Visibility integration`.
-   * **API key**: Your [Datadog API Key][2].
-   * **Datadog site**: `{{< region-param key="dd_site" code="true" >}}`
-   * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
-   * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
-3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
+   * {{< ui >}}Description{{< /ui >}}: A description to help identify the integration in the future, such as `Datadog CI Visibility integration`.
+   * {{< ui >}}API key{{< /ui >}}: Your [Datadog API Key][2].
+   * {{< ui >}}Datadog site{{< /ui >}}: `{{< region-param key="dd_site" code="true" >}}`
+   * {{< ui >}}Pipelines{{< /ui >}}: Select all pipelines or the subset of pipelines you want to trace.
+   * {{< ui >}}Branch filtering{{< /ui >}}: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click {{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} to save the integration.
+
+### Collect job logs
+
+The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][19].
+
+Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
 
 ## Advanced configuration
 
@@ -130,7 +138,7 @@ You can also apply these filters using the facet panel on the left hand side of 
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][16].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][16].
 
 ## Further reading
 
@@ -154,3 +162,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /continuous_integration/search/#search-for-pipelines
 [17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /glossary/#pipeline-execution-time
+[19]: /integrations/buildkite/
+[20]: /continuous_integration/pipelines/buildkite/#collect-job-logs
+[21]: /logs/

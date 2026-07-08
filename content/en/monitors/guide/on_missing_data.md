@@ -31,11 +31,11 @@ The previous No Data parameter, `notify_no_data`, remains available on existing 
 
 | Parameter                               | UI Description                                                                                     |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------|
-| `"on_missing_data": "show_and_notify_no_data"` | If data is missing Show NO DATA and notify<br>(Formerly, "Notify if data is missing")                       |
-| `"on_missing_data": "show_no_data"`     | If data is missing Show NO DATA<br>(Formerly, "Do not notify if data is missing")                           |
-| `"on_missing_data": "resolve"`          | If data is missing Show OK                                                                       |
-| `"on_missing_data": "default"` if using sum or count aggregation | If data is missing Evaluate as 0 (or other default value)                                  |
-| `"on_missing_data": "default"` if using all other aggregation types | If data is missing Show last known status |
+| `"on_missing_data": "show_and_notify_no_data"` | If data is missing {{< ui >}}Show NO DATA and notify{{< /ui >}}<br>(Formerly, "{{< ui >}}Notify if data is missing{{< /ui >}}")                       |
+| `"on_missing_data": "show_no_data"`     | If data is missing {{< ui >}}Show NO DATA{{< /ui >}}<br>(Formerly, "{{< ui >}}Do not notify if data is missing{{< /ui >}}")                           |
+| `"on_missing_data": "resolve"`          | If data is missing {{< ui >}}Show OK{{< /ui >}}                                                                       |
+| `"on_missing_data": "default"` if using sum or count aggregation | If data is missing {{< ui >}}Evaluate as 0{{< /ui >}} (or other default value)                                  |
+| `"on_missing_data": "default"` if using all other aggregation types | If data is missing {{< ui >}}Show last known status{{< /ui >}} |
 
 For all the available fields, see the [API Documentation][1].
 
@@ -81,11 +81,11 @@ SLOs treat uptime and downtime according to this mapping:
 
 | On Missing Data Configuration | Monitor Status                 | SLO Treatment               |
 |-------------------------------|--------------------------------|-----------------------------|
-| Show OK                       | OK                             | Uptime                      |
-| Show No Data                  | No Data                        | Uptime                      |
-| Show No Data and Notify       | No Data                        | Downtime                    |
-| Show last known status        | Whatever the last status was   | If OK, Uptime<br>If Alert, Downtime |
-| Evaluate as zero              | Depends on the threshold configuration | If OK, Uptime<br>If Alert, Downtime |
+| {{< ui >}}Show OK{{< /ui >}}                       | OK                             | Uptime                      |
+| {{< ui >}}Show No Data{{< /ui >}}                  | No Data                        | Uptime                      |
+| {{< ui >}}Show No Data and Notify{{< /ui >}}       | No Data                        | Downtime                    |
+| {{< ui >}}Show last known status{{< /ui >}}        | Whatever the last status was   | If OK, Uptime<br>If Alert, Downtime |
+| {{< ui >}}Evaluate as zero{{< /ui >}}              | Depends on the threshold configuration | If OK, Uptime<br>If Alert, Downtime |
 
 ## Further reading
 

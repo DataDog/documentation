@@ -3,6 +3,11 @@ title: Getting Started with Code Security
 description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
+further_reading:
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
+
 ---
 
 ## Overview
@@ -62,13 +67,13 @@ Code Security offers **vulnerability-centric views** of all library and code vul
 
 ### Explore vulnerabilities
 
-For library vulnerabilities, each row in the table represents a specific vulnerability affecting a library version. Based on if you have static or runtime detection enabled, the **Detected In** column displays the specific repositories and/or services affected by this vulnerability.
+For library vulnerabilities, each row in the table represents a specific vulnerability affecting a library version. Based on if you have static or runtime detection enabled, the {{< ui >}}Detected In{{< /ui >}} column displays the specific repositories and/or services affected by this vulnerability.
 
 In the side panel for a single library vulnerability in SCA, in addition to details about the vulnerability, Datadog shows:
 
-- A **Severity breakdown** of the highest severity instance of this vulnerability seen across your repositories and your services. For each detected location of the vulnerability in your repositories and/or services, Datadog adjusts the base severity score of the vulnerability based on environmental factors. To learn more, see [Datadog severity score][8].
-- A **Repositories** table of all instances where the vulnerability was detected in your repositories. For each instance, Datadog shows whether the dependency is classified as direct or transitive, the remediation status of the vulnerability, as well as specific remediation steps.
-- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application tracing libraries.
+- A {{< ui >}}Severity breakdown{{< /ui >}} of the highest severity instance of this vulnerability seen across your repositories and your services. For each detected location of the vulnerability in your repositories and/or services, Datadog adjusts the base severity score of the vulnerability based on environmental factors. To learn more, see [Datadog severity score][8].
+- A {{< ui >}}Repositories{{< /ui >}} table of all instances where the vulnerability was detected in your repositories. For each instance, Datadog shows whether the dependency is classified as direct or transitive, the remediation status of the vulnerability, as well as specific remediation steps.
+- An {{< ui >}}Impacted Services{{< /ui >}} table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application SDKs.
 
  Severities are scored by the following:
 | CVSS Score    | Qualitative Rating
@@ -83,12 +88,12 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
 Code Security also offers **repository-centric views** of static scan results, supporting granular filtering across all branches and commits for scanned repositories.
 
-Click on a repository on the **Repositories** page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest).
+Click on a repository on the {{< ui >}}Repositories{{< /ui >}} page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest).
 
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
 
-You can use the following out-of-the-box facets to create a search query for identifying and resolving poor coding practices in the **Code Quality** tab or security risks in the **Code Vulnerabilities** tab.
+You can use the following out-of-the-box facets to create a search query for identifying and resolving poor coding practices in the {{< ui >}}Code Quality{{< /ui >}} tab or security risks in the {{< ui >}}Code Vulnerabilities{{< /ui >}} tab.
 
 | Facet Name                        | Description                                                             |
 |-----------------------------------|-------------------------------------------------------------------------|
@@ -109,7 +114,7 @@ You can access suggested fixes directly from the results to address security vul
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
-You can use the following out-of-the-box facets to create a search query for identifying and addressing security risks in third-party libraries in the **Library Vulnerabilities** tab or reviewing your library inventory in the **Library Catalog** tab.
+You can use the following out-of-the-box facets to create a search query for identifying and addressing security risks in third-party libraries in the {{< ui >}}Library Vulnerabilities{{< /ui >}} tab or reviewing your library inventory in the {{< ui >}}Library Catalog{{< /ui >}} tab.
 
 | Facet Name         | Description                                                    |
 |--------------------|----------------------------------------------------------------|
@@ -132,11 +137,15 @@ You can access vulnerability reports and locate the source files where the vulne
 Code Security helps you set up workflows to track and manage remediation of findings:
 
 - Set up [notification rules][9] to notify your team(s) of new findings via Slack, Jira, email, and more
-- Track vulnerabilities by service and team in the **Code Security Summary** page.
+- Track vulnerabilities by service and team in the {{< ui >}}Code Security Summary{{< /ui >}} page.
 
 ## Link findings to Datadog services and teams
 
 {{% security-products/link-findings-to-datadog-services-and-teams %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: /security/code_security/dev_tool_int/github_pull_requests/

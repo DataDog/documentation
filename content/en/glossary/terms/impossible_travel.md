@@ -1,4 +1,5 @@
 ---
+id: impossible_travel
 title: impossible travel
 core_product:
   - cloud siem

@@ -1,0 +1,30 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "interval": 5000,
+      "queries": [
+        {
+          "data_source": "slo",
+          "name": "a",
+          "slo_id": "12345678910",
+          "measure": "slo_status",
+          "slo_query_type": "metric",
+          "group_mode": "overall",
+          "additional_query_filters": "*"
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "timeseries_request"
+  }
+}

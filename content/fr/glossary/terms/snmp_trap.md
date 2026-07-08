@@ -1,4 +1,5 @@
 ---
+id: snmp_trap
 core_product:
 - Surveillance d'appareils réseau
 title: Trap SNMP

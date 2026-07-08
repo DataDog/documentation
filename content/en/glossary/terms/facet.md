@@ -1,4 +1,5 @@
 ---
+id: facet
 title: facet
 core_product:
   - log management

@@ -1,4 +1,5 @@
 ---
+id: granularity
 core_product:
 - dashboards
 - モニター

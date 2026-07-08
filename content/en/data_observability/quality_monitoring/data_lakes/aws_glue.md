@@ -22,14 +22,15 @@ If you're [using the Iceberg framework in AWS Glue][5], you can see metadata fro
 Before you begin, make sure you have:
 
 - An AWS account with Glue Iceberg tables you want to monitor.
-- The [Datadog AWS integration][1] configured for the account.
+- An [AWS account connected in Datadog][1].
+  - Log forwarding is not required for Data Observability.
 - IAM permissions to modify the Datadog role's policies.
 - (Optional) AWS Lake Formation access if you use it to manage table permissions.
 
 ## Configure the AWS account
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][2].
-2. Click **Configure** next to AWS Glue.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][2].
+2. Click {{< ui >}}Configure{{< /ui >}} next to AWS Glue.
 
    {{< img src="data_observability/aws_glue/settings-configure-button.png" alt="AWS Glue configuration option in the Data Observability Settings page" style="width:100%;" >}}
 
@@ -57,6 +58,7 @@ The Data Observability crawler requires additional permissions to monitor Glue I
         "glue:GetJobs",
         "glue:GetTable",
         "glue:GetTables",
+        "glue:GetTags",
         "glue:ListJobs",
         "s3:ListBucket",
         "kms:Decrypt",
@@ -181,12 +183,12 @@ aws lakeformation grant-permissions \
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
-1. In the AWS Console, navigate to **Lake Formation** > **Data lake permissions**.
-2. Click **Grant**.
-3. Under **Principals**, select **IAM users and roles** and choose your Datadog role.
-4. Under **LF-Tags or catalog resources**, select the database and tables you want to monitor.
-5. Under **Permissions**, select **DESCRIBE** and **SELECT**.
-6. Click **Grant**.
+1. In the AWS Console, navigate to {{< ui >}}Lake Formation{{< /ui >}} > {{< ui >}}Data lake permissions{{< /ui >}}.
+2. Click {{< ui >}}Grant{{< /ui >}}.
+3. Under {{< ui >}}Principals{{< /ui >}}, select {{< ui >}}IAM users and roles{{< /ui >}} and choose your Datadog role.
+4. Under {{< ui >}}LF-Tags or catalog resources{{< /ui >}}, select the database and tables you want to monitor.
+5. Under {{< ui >}}Permissions{{< /ui >}}, select {{< ui >}}DESCRIBE{{< /ui >}} and {{< ui >}}SELECT{{< /ui >}}.
+6. Click {{< ui >}}Grant{{< /ui >}}.
 
 {{< img src="data_observability/aws_glue/lakeformation-permissions.png" alt="Lake Formation permissions grant dialog in AWS Console" style="width:90%;" >}}
 
@@ -196,14 +198,14 @@ aws lakeformation grant-permissions \
 ## Configure the crawler
 
 1. Select the AWS regions where your Glue Iceberg tables are located.
-2. Enable the **Quality Monitoring for Apache Iceberg** toggle.
-3. (Optional) Enable the **Job Monitoring** toggle if you also want to monitor Glue job health and performance.
+2. Enable the {{< ui >}}Quality Monitoring for Apache Iceberg{{< /ui >}} toggle.
+3. (Optional) Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle if you also want to monitor Glue job health and performance.
 4. Choose a sync frequency.
 5. (Optional) Enter a catalog name if you use nested Glue catalog features. Leave this field empty for the default catalog.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Next steps
 

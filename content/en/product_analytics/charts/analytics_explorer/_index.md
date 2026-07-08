@@ -11,6 +11,9 @@ further_reading:
 - link: "/dashboards/functions/"
   tag: "Documentation"
   text: "Add a function to your query"
+- link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+  tag: "Blog"
+  text: "Make faster, better product decisions with Datadog Product Analytics"
 - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
   tag: "Blog"
   text: "Use geomaps to visualize your app data by location"
@@ -34,7 +37,7 @@ With Analytics visualizations, you can:
 * Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
 
 ## Using the analytics chart
-{{< whatsnext desc="Follow these links here to learn how to use the analytics search syntax, view events, and vizualise, group, and export views. " >}}
+{{< whatsnext desc="Follow these links here to learn how to use the analytics search syntax, view events, and visualize, group, and export views. " >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Search syntax{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}

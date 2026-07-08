@@ -1,4 +1,5 @@
 ---
+id: resource
 core_product:
 - apm
 - real user monitoring

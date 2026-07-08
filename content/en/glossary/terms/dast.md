@@ -1,4 +1,5 @@
 ---
+id: dast
 title: dynamic application security testing (DAST)
 core_product:
   - security

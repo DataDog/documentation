@@ -22,6 +22,8 @@ Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to s
 
 Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
+<div class="alert alert-info">If you are sending logs from a managed platform (Cloudflare, Vercel, Heroku, and others), see <a href="/opentelemetry/setup/otlp_ingest/managed_platforms/">Managed platforms</a> for the correct endpoint configuration.</div>
+
 ## Configuration
 
 To send OTLP data to the Datadog OTLP logs intake endpoint, you must configure the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.

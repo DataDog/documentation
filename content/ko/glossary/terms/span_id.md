@@ -1,4 +1,5 @@
 ---
+id: span_id
 core_product:
 - apm
 title: 스팬 ID

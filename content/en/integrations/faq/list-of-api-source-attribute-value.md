@@ -257,7 +257,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Java                            | java                              | java                               |
 | Jenkins                         | jenkins                           | jenkins                            |
 | Jira                            | jira                              | jira                               |
-| Jumpcloud                       | jumpcloud                         | jumpcloud                          |
+| JumpCloud                       | jumpcloud                         | jumpcloud                          |
 | Kafka                           | kafka                             | kafka                              |
 | Knative For Anthos              | knative for anthos                | knative_for_anthos                 |
 | Kong                            | kong                              | kong                               |
@@ -310,7 +310,6 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Salesforce                      | salesforce                        | salesforce                         |
 | Salesforce Commerce Cloud       | salesforce commerce cloud         | salesforce_commerce_cloud          |
 | Salesforce Marketing Cloud      | salesforce marketing cloud        | salesforce_marketing_cloud         |
-| Salesforce Incidents            | salesforce incidents              | salesforce_incidents               |
 | Segment                         | segment                           | segment                            |
 | Sendgrid                        | sendgrid                          | sendgrid                           |
 | SentinelOne                     | sentinelone                       | sentinelone                        |

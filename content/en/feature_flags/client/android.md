@@ -30,7 +30,7 @@ Here's a minimal example to get feature flags working in your Android app:
 ```kotlin
 // 1. Add dependencies (see Installation section)
 
-// 2. Initialize Datadog SDK (in Application.onCreate)
+// 2. Initialize the Datadog Android SDK (in Application.onCreate)
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
@@ -78,7 +78,7 @@ dependencies {
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly.
+Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly. To create a client token, see [Client tokens][2].
 
 ```kotlin
 val configuration = Configuration.Builder(
@@ -94,7 +94,7 @@ Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for provider creation and flag evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog Android SDK instance and prepare for provider creation and flag evaluation:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
@@ -128,6 +128,8 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 Define who or what the flag evaluation applies to using an `ImmutableContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Set this before evaluating flags to help ensure proper targeting.
 
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.ImmutableContext
 import dev.openfeature.kotlin.sdk.Value
@@ -143,7 +145,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">All attribute values must use a <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
+<div class="alert alert-info">OpenFeature attributes must use flat <code>Value</code> primitives such as <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, or <code>Value.Boolean()</code>. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
 
 ## Evaluate flags
 
@@ -288,6 +290,7 @@ You can configure individual providers with custom endpoints before creating the
 val provider = FlagsClient.Builder()
     .useCustomFlagEndpoint("https://your-proxy.example.com/flags")
     .useCustomExposureEndpoint("https://your-proxy.example.com/exposure")
+    .useCustomEvaluationEndpoint("https://your-proxy.example.com/evaluations")
     .build()
     .asOpenFeatureProvider()
 
@@ -431,8 +434,77 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 | **Vendor Lock-in** | Low (vendor-neutral) | Higher (Datadog-specific) |
 | **State Management** | Flow-based observation | Manual listener registration |
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not ship an [`InMemoryProvider`][3], so tests use a small custom `FeatureProvider`. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
+
+Add `kotlinx-coroutines-test` to your test configuration (the SDK's `initialize` is a `suspend` function):
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
+}
+{{< /code-block >}}
+
+{{< code-block lang="kotlin" >}}
+import dev.openfeature.kotlin.sdk.*
+import dev.openfeature.kotlin.sdk.events.OpenFeatureProviderEvents
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Test
+import kotlin.test.assertTrue
+
+class FakeProvider(private val flags: Map<String, Any>) : FeatureProvider {
+    override val hooks = emptyList<Hook<*>>()
+    override val metadata = object : ProviderMetadata { override val name = "fake" }
+    private val events = MutableSharedFlow<OpenFeatureProviderEvents>(replay = 1)
+
+    override suspend fun initialize(initialContext: EvaluationContext?) {
+        // No-op. The SDK emits ProviderReady after initialize returns.
+    }
+    override fun shutdown() {}
+    override suspend fun onContextSet(old: EvaluationContext?, new: EvaluationContext) {}
+
+    override fun getBooleanEvaluation(key: String, defaultValue: Boolean, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Boolean) ?: defaultValue)
+    override fun getStringEvaluation(key: String, defaultValue: String, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? String) ?: defaultValue)
+    override fun getIntegerEvaluation(key: String, defaultValue: Int, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Int) ?: defaultValue)
+    override fun getDoubleEvaluation(key: String, defaultValue: Double, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Double) ?: defaultValue)
+    override fun getObjectEvaluation(key: String, defaultValue: Value, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Value) ?: defaultValue)
+
+    override fun observe(): Flow<OpenFeatureProviderEvents> = events
+}
+
+class CheckoutFlagsTest {
+    private lateinit var client: Client
+
+    @Before
+    fun setUp() = runTest {
+        OpenFeatureAPI.setProviderAndWait(
+            FakeProvider(mapOf("new-checkout-flow" to true))
+        )
+        client = OpenFeatureAPI.getClient()
+    }
+
+    @Test
+    fun newCheckoutEnabled() {
+        assertTrue(client.getBooleanValue("new-checkout-flow", false))
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI` is a process-wide singleton, so reset it between test classes if tests share a JVM. Wrap `setProviderAndWait` in `runTest { ... }` — it cannot be called from a plain `@Before` method because it is `suspend`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens
+[3]: https://github.com/open-feature/kotlin-sdk/pull/226

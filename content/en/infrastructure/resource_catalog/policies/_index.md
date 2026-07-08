@@ -16,10 +16,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/automate-infrastructure-operations-with-datadog-infrastructure-management
     tag: Blog
     text: Automate infrastructure operations with Datadog Infrastructure Management
+cascade:
+    site_support_id: resource_catalog_policies
 ---
-
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Resource Catalog Policies is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
   Resource Policies are in Preview.
@@ -42,18 +41,16 @@ Specifically, you can:
 
 ## Example Resource Policies
 
-<details open>
-<summary><strong>Operational excellence and versioning</strong></summary>
+{{% collapse-content title="Operational excellence and versioning" level="h4" expanded=true %}}
 
 - Amazon EC2 instances should only use approved Golden AMIs.
 - Amazon RDS instances running Postgres should use the latest compatible engine versions.
 - AWS Lambda functions should not run deprecated runtimes.
 - Amazon ElastiCache should use the latest engine version.
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-<summary><strong>Reliability</strong></summary>
+{{% collapse-content title="Reliability" level="h4" expanded=false %}}
 
 - Amazon RDS instances should have at least 1 day of backup retention configured.
 - Amazon ECS services should have desired task count > 1.
@@ -61,25 +58,23 @@ Specifically, you can:
 - Google Compute Engine instances should have automatic restart enabled.
 - Azure Virtual Machines should be deployed across multiple Availability Zones.
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-<summary><strong>Security</strong></summary>
+{{% collapse-content title="Security" level="h4" expanded=false %}}
 
 - Amazon RDS instances should be encrypted.
 - Amazon CloudFront distributions should use TLS protocol version 1.2.
 - Amazon EBS volumes should be encrypted.
 
-</details>
+{{% /collapse-content %}}
 
-<details>
-<summary><strong>Cost optimization</strong></summary>
+{{% collapse-content title="Cost optimization" level="h4" expanded=false %}}
 
 - Amazon EBS volumes should use GP3 instead of GP2.
 - Google Compute Engine instances should use ARM architecture where possible.
 - Azure Managed Disks should be in the attached state.
 
-</details>
+{{% /collapse-content %}}
 
 ## Create a custom policy
 

@@ -1,180 +1,180 @@
 ---
 algolia:
   tags:
-  - clave de API
+  - api key
 aliases:
 - /es/account_management/faq/how-do-i-reset-my-application-keys/
 - /es/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /es/account_management/faq/api-app-key-management/
-description: Gestiona claves de API, claves de aplicación y tokens de cliente para
-  aplicaciones de navegador con funciones de seguridad.
-title: Claves de API y aplicación
+description: Administra las claves de API, las claves de aplicación y los tokens de
+  cliente para aplicaciones de navegador con características de seguridad.
+title: Claves de API y de aplicación
 ---
+## Claves de API {#api-keys}
 
-## Claves de API
+Las claves de API son únicas para tu organización. Se requiere una [clave de API][1] por parte del Agente de Datadog para enviar métricas y eventos a Datadog.
 
-Las claves de API son exclusivas de tu organización. El Datadog Agent requiere una [clave de API][1] para enviar métricas y eventos a Datadog.
+## Claves de aplicación {#application-keys}
 
-## Claves de aplicación
+Las [claves de aplicación][2], junto con la clave de API de tu organización, otorgan a los usuarios acceso a la API programática de Datadog. Las claves de aplicación están asociadas con la cuenta de usuario que las creó y, por defecto, tienen los permisos del usuario que las creó.
 
-Las [claves de aplicación][2], junto con la clave de API de tu organización, permiten a los usuarios acceder a la API programática de Datadog. Las claves de aplicación están asociadas a la cuenta de usuario que las creó y, por defecto, tienen los permisos del usuario que las creó.
+### Modo de Lectura Única {#one-time-read-mode}
 
-### Modo de lectura única
+El modo de Lectura Única (OTR) es una característica de seguridad que limita la visibilidad de los secretos de la clave de aplicación solo al momento de creación. Cuando el modo OTR está habilitado, los secretos de la clave de aplicación solo se muestran una vez durante la creación y no se pueden recuperar más tarde por razones de seguridad.
 
-El modo de lectura única (OTR) es una función de seguridad que limita la visibilidad de los secretos de las claves de aplicación únicamente al momento de la creación. Cuando el modo OTR está activado, los secretos de las claves de aplicación solo se muestran una vez durante la creación y no se pueden recuperar posteriormente por motivos de seguridad.
+#### Para nuevas organizaciones {#for-new-organizations}
 
-#### Para las nuevas organizaciones
+Todas las claves de aplicación para nuevas organizaciones principales (y sus organizaciones secundarias) creadas después del 20 de agosto de 2025 tienen el modo OTR habilitado por defecto. Esta configuración es permanente y no se puede cambiar.
 
-Todas las claves de aplicación para nuevas organizaciones matrices (y sus organizaciones secundarias) creadas después del 20 de agosto de 2025 tienen el modo de OTR activado en forma predeterminada. Esta configuración es permanente y no puede modificarse.
+#### Para organizaciones existentes {#for-existing-organizations}
 
-#### Para las organizaciones existentes
+Los administradores de la organización pueden habilitar o deshabilitar el modo OTR desde [**Configuración de la Organización** > **Claves de Aplicación**][2]. Después de habilitar el modo OTR:
 
-Los administradores de la organización pueden activar o desactivar el modo de OTR desde [**Organization Settings** > **Application Keys** (Configuración de la organización > Claves de aplicación)][2]. Después de activar el modo de OTR:
+- Los secretos de la clave de aplicación son visibles solo una vez, en el momento de la creación
+- Ya no se pueden recuperar a través de la interfaz de usuario o la API
+- La configuración puede ser activada o desactivada por los administradores de la organización durante 3 meses después de habilitar
+- Después de 3 meses de estar habilitado continuamente, el modo OTR se vuelve permanente y se elimina el interruptor
 
-- Los secretos de las claves de aplicación solo son visibles una vez, en el momento de su creación
-- Ya no se pueden recuperar a través de la interfaz de usuario ni la API.
-- Los administradores de la organización pueden activar o desactivar la configuración durante 3 meses después de activarla.
-- Transcurridos 3 meses de activación continua, el modo de OTR se convierte en permanente y se suprime la alternancia.
+**Permisos**: Los usuarios deben tener tanto el `org_app_keys_write` como el `org_management` permisos para habilitar o deshabilitar el modo OTR para su organización.
 
-**Permisos**: Los usuarios deben tener los permisos `org_app_keys_write` y `org_management` para activar o desactivar el modo de OTR para su organización.
+### Contextos {#scopes}
 
-### Contextos
+Para proteger y asegurar mejor sus aplicaciones, puede especificar contextos de autorización para las claves de su aplicación para definir permisos más granulares y minimizar el acceso que las aplicaciones tienen a sus datos de Datadog. Esto le brinda un control de acceso detallado sobre sus aplicaciones y minimiza las vulnerabilidades de seguridad al limitar el acceso innecesario. Por ejemplo, una aplicación que solo lee tableros no necesita derechos de administrador para gestionar usuarios o eliminar cualquiera de los datos de su organización.
 
-
-Para proteger mejor tus aplicaciones, puedes indicar contextos de autorización para tus claves de aplicación. De este modo, podrás definir permisos más específicos y minimizar el acceso que las aplicaciones tienen a tus datos de Datadog. Esto te da un control pormenorizado sobre tus aplicaciones y minimiza las vulnerabilidades de seguridad al limitar el acceso externo. Por ejemplo, una aplicación que solo lee dashboards no necesita derechos de administrador para gestionar usuarios ni eliminar los datos de tu organización.
-
-La forma recomendada de determinar el contexto de las claves de aplicación es otorgar los mínimos privilegios y permisos necesarios para que una aplicación funcione según lo previsto. A las claves de aplicación con contexto solo se les conceden los contextos indicados por el usuario y ningún otro permiso. Aunque puedes modificar los contextos de autorización de tus claves de aplicación en cualquier momento, deberás valorar cómo esos cambios podrían afectar a la funcionalidad o al acceso de tu aplicación.
+La práctica recomendada para configurar los contextos de las claves de aplicación es otorgar a sus claves solo los privilegios y permisos mínimos necesarios para que una aplicación funcione como se espera. Las claves de aplicación con contexto solo reciben los contextos especificados por el usuario, y ningún permiso adicional. Si bien puede modificar los contextos de autorización de sus claves de aplicación en cualquier momento, considere cómo esos cambios pueden afectar la funcionalidad o el acceso existente de su aplicación.
 
 **Notas:**
 
-- Los usuarios o cuentas de servicio con [permisos][3] para crear o editar claves de aplicación pueden abarcar claves de aplicación. Un usuario debe tener el permiso `user_app_keys` para abarcar sus propias claves de aplicación o el permiso `org_app_keys_write` para abarcar claves de aplicación propiedad de cualquier usuario de su organización. Un usuario debe tener el permiso `service_account_write` para abarcar claves de aplicación para cuentas de servicio.
-- Los propietarios de aplicaciones no pueden autorizar una aplicación si les faltan los permisos necesarios, ni siquiera si definen el contexto de una clave de aplicación con contextos de autorización de otra persona.
-- Los errores debidos a la falta de permisos al escribir claves de aplicación o autorizar aplicaciones muestran un error `403 Forbidden`. Encontrará más información sobre las distintas respuestas de error en la documentación de [API de Datadog][4].
-- Si el rol o los permisos de algún usuario cambian, los contextos de autorización indicados para sus claves de aplicación seguirán iguales.
+- Los usuarios o cuentas de servicio con [permisos][3] para crear o editar claves de aplicación pueden establecer el contexto de las claves de aplicación. Un usuario debe tener el `user_app_keys` permiso para establecer el contexto de sus propias claves de aplicación, o el `org_app_keys_write` permiso para establecer el contexto de las claves de aplicación propiedad de cualquier usuario en su organización. Un usuario debe tener el `service_account_write` permiso para establecer el contexto de las claves de aplicación para cuentas de servicio.
+- Los propietarios de aplicaciones no pueden autorizar una aplicación si les faltan permisos requeridos, incluso si establecen el contexto de una clave de aplicación con contextos de autorización que no tienen.
+- Los errores debido a permisos faltantes al escribir claves de aplicación o autorizar aplicaciones muestran un `403 Forbidden` error. Más información sobre varias respuestas de error se puede encontrar en la documentación de la [API de Datadog][4].
+- Si el rol o los permisos de un usuario cambian, los contextos de autorización especificados para sus claves de aplicación permanecen sin cambios.
 
-### Acceso a API de acciones
+### Acceso a la API de acciones {#actions-api-access}
 
 Las API de acciones incluyen:
 - [App Builder][5]
-- [Conexiones de acciones][6]
-- [Workflow Automation (automatización de procesos)][7]
+- [Actions Connections][6]
+- [Workflow Automation][7]
 
-Para utilizar claves de aplicación con estas API, debes activar el acceso a API de acciones en la clave de aplicación. Esto puede hacerse [a través de la interfaz de usuario][2] o [API][21]. En forma predeterminada, las claves de aplicación no se pueden utilizar con estas API.
+Para utilizar claves de aplicación con estas API, debe habilitar el acceso a la API de Acciones en la clave de aplicación. Esto se puede hacer [a través de la interfaz de usuario][2] o [API][21]. Por defecto, las claves de aplicación no se pueden usar con estas API.
 
-{{< img src="account_management/click-enable-actions-api-access.png" alt="Activar con un clic el acceso a la API de acciones" style="width:80%;" >}}
+{{< img src="account_management/click-enable-actions-api-access.png" alt="Haga clic en Habilitar para el Acceso a la API de Acciones" style="width:80%;" >}}
 
-## Tokens de cliente
+**Nota**: La sección {{< ui >}}Last used{{< /ui >}} solo se muestra si [Audit Trail está habilitado][22] en la cuenta y usted tiene [`Audit Trail Read`][23] permiso.
 
-Por razones de seguridad, las claves de API no pueden utilizarse para enviar datos desde un navegador, un móvil o una aplicación de TV, ya que quedarían expuestas al cliente. En su lugar, las aplicaciones destinadas al usuario final utilizan tokens de cliente para enviar datos a Datadog.
+## Tokens de cliente {#client-tokens}
 
- Varios tipos de clientes envían datos que requieren un token de cliente, como los siguientes ejemplos:
-- Los recopiladores de logs para [navegador web][8], [Android][9], [iOS][10], [React Native][11], [Flutter][12] y [Roku][13] envían logs.
-- Las aplicaciones [Real User Monitoring][14] envían eventos y logs.
+Por razones de seguridad, las claves de API no se pueden usar para enviar datos desde un navegador, aplicación móvil o de TV, ya que estarían expuestas del lado del cliente. En su lugar, las aplicaciones orientadas al usuario final utilizan tokens de cliente para enviar datos a Datadog.
 
-Los tokens de cliente son exclusivos de tu organización. Para gestionarlos, accede a **Organization Settings** (Parámetros de organización) y haz clic en la pestaña **Client Tokens** (Tokens de cliente).
+ Varios tipos de clientes envían datos que requieren un token de cliente, incluidos los siguientes ejemplos:
+- Los recolectores de registros para [navegador web][8], [Android][9], [iOS][10], [React Native][11], [Flutter][12] y [Roku][13] envían registros.
+- Las aplicaciones de [Real User Monitoring][14] envían eventos y registros.
 
-**Nota**: Cuando se desactiva un usuario que ha creado un token de cliente, ese token de cliente permanece activo.
+Los tokens de cliente son únicos para su organización. Para gestionar sus tokens de cliente, vaya a {{< ui >}}Organization Settings{{< /ui >}}, luego haga clic en la pestaña {{< ui >}}Client Tokens{{< /ui >}}.
 
-## Añadir una clave de API o token de cliente
+**Nota**: Cuando un usuario que creó un token de cliente es desactivado, el token de cliente permanece activo.
 
-Para añadir una clave de API o token de cliente de Datadog:
+## Agregue una clave de API o token de cliente {#add-an-api-key-or-client-token}
 
-1. Va a Configuración de la organización y, a continuación, haz clic en la pestaña [**API keys** (Claves de API)][1] o [**Client Tokens** (Tokens de cliente)][15].
-2. Haz clic en el botón **New Key** (Nueva clave) o **New Client Token** (Nuevo token de cliente), según lo que vayas a crear.
-3. Indica un nombre para tu clave o token.
-4. Haz clic en **Create API key** (Crear clave de API) o **Create Client Token** (Crear token de cliente).
+Para agregar una clave de API de Datadog o un token de cliente:
 
-{{< img src="account_management/api-key.png" alt="Navega a la página de claves de API para tu organización en Datadog" style="width:80%;" >}}
+1. Navegue a la configuración de la organización, luego haga clic en la pestaña [**Claves de API**][1] o [**Tokens de Cliente**][15].
+2. Haga clic en el botón {{< ui >}}New Key{{< /ui >}} o {{< ui >}}New Client Token{{< /ui >}}, dependiendo de cuál esté creando.
+3. Ingrese un nombre para su clave o token.
+4. Haga clic en {{< ui >}}Create API key{{< /ui >}} o {{< ui >}}Create Client Token{{< /ui >}}.
+
+{{< img src="account_management/api-key.png" alt="Navegue a la página de Claves de API para su organización en Datadog" style="width:80%;" >}}
 
 **Notas:**
 
-- Tu organización debe tener al menos una clave de API y un máximo de 50.
-- Los nombres de las claves deben ser únicos en toda tu organización.
+- Su organización debe tener al menos una clave de API y como máximo 50 claves de API.
+- Los nombres de las claves deben ser únicos en su organización.
 
-## Eliminar claves de API o tokens de cliente
+## Elimine claves de API o tokens de cliente {#remove-api-keys-or-client-tokens}
 
-Para eliminar una clave de API o un token de cliente de Datadog, ve a la lista de claves o tokens y haz clic en el icono **Delete** (Eliminar)  {{< img src="icons/delete.png" inline="true" style="width:14px;">}} situado junto a la clave o token que desees eliminar.
+Para eliminar una clave de API o token de cliente de Datadog, navegue a la lista de claves o tokens y haga clic en el {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icono junto a la clave o token que desea eliminar.
 
-## Añadir claves de aplicación
+## Agregue claves de aplicación {#add-application-keys}
 
-Para añadir una clave de aplicación de Datadog, ve a [**Organization Settings** > **Application Keys** (Configuración de la organización > Claves de aplicación)][2]. Si tienes el [permiso][3] para crear claves de aplicación, haz clic en **New Key** (Nueva clave).
+Para agregar una clave de aplicación de Datadog, navegue a [**Configuración de la Organización** > **Claves de Aplicación**][2]. Si tiene el [permiso][3] para crear claves de aplicación, haga clic en {{< ui >}}New Key{{< /ui >}}.
 
-{{< img src="account_management/app-key.png" alt="Navega a la página de Claves de aplicación para tu organización en Datadog" style="width:80%;" >}}
+{{< img src="account_management/app-key.png" alt="Navegue a la página de Claves de Aplicación para su organización en Datadog" style="width:80%;" >}}
 
-{{< site-region region="ap2,gov" >}}
-<div class="alert alert-danger">Asegúrate de almacenar de forma segura tu clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
+{{< site-region region="ap2,gov,gov2" >}}
+<div class="alert alert-danger">Asegúrese de almacenar de forma segura su clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Si tu organización tiene activado el modo de lectura única (OTR), asegúrate de almacenar de forma segura tu clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
+<div class="alert alert-info">Si su organización tiene habilitado el modo de Lectura Única (OTR), asegúrese de almacenar de forma segura su clave de aplicación inmediatamente después de la creación, ya que el secreto de la clave no se puede recuperar más tarde.</div>
 
 **Notas:**
 
-- Los nombres de las claves de aplicación no pueden quedar en blanco.
+- Los nombres de las claves de aplicación no pueden estar en blanco.
 
-## Eliminar claves de aplicación
+## Elimine claves de aplicación {#remove-application-keys}
 
-Para eliminar una clave de aplicación de Datadog, ve a [**Organization Settings** > **Application Keys** (Configuración de la organización > Claves de aplicación)][2]. Si tienes el [permiso][3] para crear y gestionar claves de aplicación, puedes ver tus propias claves y hacer clic en **Revoke** (Revocar) junto a la clave que deseas revocar. Si tienes el permiso para gestionar todas las claves de aplicación de la organización, puedes buscar la clave que deseas revocar y hacer clic en **Revoke** (Revocar) junto a ella.
+Para eliminar una clave de aplicación de Datadog, navegue a [**Configuración de la Organización** > **Claves de Aplicación**][2]. Si tiene el [permiso][3] para crear y gestionar claves de aplicación, puede ver sus propias claves y hacer clic en {{< ui >}}Revoke{{< /ui >}} junto a la clave que desea revocar. Si tiene el permiso para gestionar todas las claves de aplicación de la organización, puede buscar la clave que desea revocar y hacer clic en {{< ui >}}Revoke{{< /ui >}} junto a ella.
 
-## Retraso en la propagación de claves y coherencia final
+## Retraso en la propagación de claves y consistencia eventual {#key-propagation-delay-and-eventual-consistency}
 
-Las claves de API y de aplicación de Datadog siguen un modelo de coherencia eventual. Debido a la naturaleza distribuida de los sistemas de Datadog, las actualizaciones de las claves, como la creación y la revocación, pueden tardar unos segundos en propagarse por completo.
+Las claves de API y de aplicación de Datadog siguen un modelo de consistencia eventual. Debido a la naturaleza distribuida de los sistemas de Datadog, las actualizaciones a las claves, como la creación y revocación, pueden tardar unos segundos en propagarse completamente.
 
 Como resultado:
 
-- No utilices nuevas claves de API o de aplicación inmediatamente en flujos de trabajo críticos. Deja un breve tiempo (unos segundos) para la propagación. Puedes implementar una estrategia de reintento con un backoff exponencial corto para manejar errores transitorios durante el intervalo de propagación.
-- Para validar si una clave de API está activa y utilizable, llama al endpoint [/api/v1/validate][16].
-- Para verificar que una clave de aplicación está activa, utiliza el endpoint `/api/v2/validate_keys` con el par de claves adecuado.
+- No utilice nuevas claves de API o de aplicación de inmediato en flujos de trabajo críticos. Permita un breve período (unos segundos) para la propagación. Puede implementar una estrategia de reintento con un retroceso exponencial corto para manejar errores transitorios durante la ventana de propagación.
+- Para validar si una clave de API está activa y utilizable, llame al punto de conexión [/api/v1/validate][16].
+- Para verificar que una clave de aplicación está activa, utilice el punto de conexión `/api/v2/validate_keys` con el par de claves apropiado.
 
-Intentar utilizar una clave recién creada antes de que se haya propagado completamente puede provocar errores de autenticación temporales como 403 Forbidden o 401 Unauthorized.
+Intentar usar una clave recién creada antes de que se propague completamente puede resultar en errores de autenticación temporales como 403 Prohibido o 401 No autorizado.
 
-## Definir el contexto de claves de aplicación
+## Contextos de autorización para claves de aplicación {#scope-application-keys}
 
-Para especificar ámbitos de autorización para claves de aplicación, [realiza una solicitud a la API de Datadog ][4] o a la interfaz de usuario para crear o editar una clave de aplicación. Se pueden especificar ámbitos para claves de aplicación propiedad del [usuario actual][17] o una [cuenta de servicio][18]. Si no se especifica este campo, las claves de aplicación tendrán en forma predeterminada los mismos ámbitos y permisos que el usuario que las creó.
+Para especificar los contextos de autorización para las claves de aplicación, [haga una solicitud a la API de Datadog][4] o a la interfaz de usuario para crear o editar una clave de aplicación. Los contextos pueden especificarse para las claves de aplicación propiedad de [el usuario actual][17] o de una [cuenta de servicio][18]. Si este campo no se especifica, las claves de aplicación por defecto tienen los mismos contextos y permisos que el usuario que las creó.
 
 **Notas:**
 
-- Los nombres de los contextos distinguen entre mayúsculas y minúsculas.
+- Los nombres de los contextos son sensibles a mayúsculas y minúsculas.
 
-## Usar varias claves de API
+## Uso de múltiples claves de API {#using-multiple-api-keys}
 
-Valora la posibilidad de configurar varias claves de API para tu organización. Por ejemplo, usa distintas claves de API para cada uno de tus métodos de implementación: una para implementar un Agent en Kubernetes, en AWS; otra para hacerlo localmente con Chef; otra para scripts de Terraform que automaticen tus dashboards o monitores, y otra para desarrolladores que hagan implementaciones en local.
+Considere configurar múltiples claves de API para su organización. Por ejemplo, use diferentes claves de API para cada uno de sus diversos métodos de implementación: una para implementar un Agent en Kubernetes en AWS, una para implementarlo en las instalaciones con Chef, una para scripts de Terraform que automatizan sus tableros o seguimientos, y una para desarrolladores que implementan localmente.
 
-El uso de varias claves de API te permite rotar las claves como parte de tus protocolos de seguridad, o revocar una clave en concreto si se expone inadvertidamente o si quieres dejar de usar el servicio al que está asociada.
+El uso de múltiples claves de API le permite rotar claves como parte de su práctica de seguridad, o revocar una clave específica si se expone inadvertidamente o si desea dejar de usar el servicio asociado.
 
-Si tu organización necesita más del límite incorporado de 50 claves de API, ponte en contacto con [Asistencia técnica][19] para solicitar información sobre cómo aumentar tu límite.
+Si su organización necesita más de las 50 claves de API incorporadas, comuníquese con [Soporte][19] para preguntar sobre el aumento de su límite.
 
-## Desactivar una cuenta de usuario
+## Deshabilitando una cuenta de usuario {#disabling-a-user-account}
 
-Cuando la cuenta de un usuario está desactivada, se revocan todas las claves de aplicación que haya creado ese usuario. No obstante, las claves de API creadas por la cuenta desactivada no se eliminarán y seguirán siendo válidas.
+Si la cuenta de un usuario está deshabilitada, se revocan todas las claves de aplicación que el usuario creó. Cualquier clave de API que fue creada por la cuenta deshabilitada no se elimina y sigue siendo válida.
 
-## Transferir claves
+## Transfiriendo claves {#transferring-keys}
 
-Por motivos de seguridad, Datadog no transfiere claves de aplicaciones de un usuario a otro. Si necesitas compartir una clave de aplicación, utiliza una [cuenta de servicio][20].
+Por razones de seguridad, Datadog no transfiere claves de aplicación de un usuario a otro. Si necesita compartir una clave de aplicación, utilice una [cuenta de servicio][20].
 
-## Qué hacer si una clave de API o aplicación se ve expuesta
+## Qué hacer si una clave de API o de aplicación fue expuesta {#what-to-do-if-an-api-or-application-key-was-exposed}
 
-Si alguna clave privada está en riesgo o se ha filtrado públicamente, se deben tomar medidas lo antes posible para garantizar la seguridad de la cuenta. Eliminar el archivo que contiene la clave de un sitio público como GitHub **no** garantiza que otras personas no hayan accedido ya a él.
+Si una clave privada ha sido comprometida o expuesta públicamente, se deben tomar medidas lo más rápido posible para garantizar la seguridad de su cuenta. Eliminar el archivo que contiene la clave de un sitio público como GitHub **no** garantiza que no haya sido accedido por otra parte.
 
-Sigue estos pasos para proteger tu cuenta:
+Siga estos pasos para ayudar a proteger su cuenta:
 
-**Nota:** Revocar una clave activa puede afectar a tus servicios. Si el contexto de uso es amplio o indeterminado, plantéate seguir los pasos del 2 al 5 **antes** de revocar la clave afectada.
+**Nota:** Revocar una clave activa puede causar un impacto en sus servicios. Si el alcance de uso es grande o indeterminado, considere los pasos 2-5 **antes** de revocar la clave afectada.
 
-1. Revoca la clave afectada.
-2. Elimina el código que contiene la clave privada de cualquier archivo con acceso público:
-    - Publica el archivo saneado en tu repositorio público.
-    - Elimina los datos confidenciales de tu historial de confirmaciones.
-3. Crea una clave nueva.
-4. Actualiza los servicios afectados con la nueva clave.
-5. Revisa la cuenta para comprobar si ha habido algún acceso no autorizado:
-    - Usuarios añadidos recientemente
+1. Revocar la clave afectada.
+2. Eliminar el código que contiene la clave privada de cualquier archivo accesible públicamente:
+    - Publique el archivo sanitizado en su repositorio público.
+    - Elimine los datos sensibles de su historial de commits.
+3. Cree una nueva clave.
+4. Actualice los servicios afectados con la nueva clave.
+5. Revise su cuenta en busca de accesos no aprobados:
+    - Usuarios que han sido añadidos recientemente
     - Nuevos recursos
-    - Cambios en permisos o roles
+    - Cambios en roles o permisos
 
-Si detectas alguna actividad inusual o necesitas más ayuda para proteger tu cuenta, ponte en contacto con [Asistencia técnica de Datadog][19].
+Si se identifica alguna actividad inusual, o si necesita ayuda adicional para proteger su cuenta, contacte a [Datadog support][19].
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][19].
+¿Necesita ayuda? Contacte a [Datadog support][19].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/application-keys
@@ -197,3 +197,5 @@ Si detectas alguna actividad inusual o necesitas más ayuda para proteger tu cue
 [19]: /es/help/
 [20]: /es/account_management/org_settings/service_accounts/
 [21]: /es/api/latest/action-connection/#register-a-new-app-key
+[22]: /es/account_management/audit_trail/#setup
+[23]: /es/account_management/rbac/permissions/#compliance

@@ -1,4 +1,5 @@
 ---
+id: security_agent
 core_product:
 - workload protection
 - seguridad

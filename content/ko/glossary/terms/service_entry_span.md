@@ -1,4 +1,5 @@
 ---
+id: service_entry_span
 core_product:
 - apm
 title: 서비스 엔트리 스팬

@@ -19,7 +19,7 @@ This page provides information to help you troubleshot issues with CI Visibility
 ## Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
-2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
+2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the {{< ui >}}Check connectivity with the Datadog Agent{{< /ui >}} button on the Jenkins plugin configuration UI.
 3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
 ## Pipeline not found
@@ -32,7 +32,7 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 
 ## Missing stages or jobs in summary tables
 
-Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
+Missing stages or jobs in the {{< ui >}}Pipeline Details{{< /ui >}} page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
 ## Missing variables in Gitlab pipelines
 

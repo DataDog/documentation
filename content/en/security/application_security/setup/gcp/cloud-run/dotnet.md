@@ -58,7 +58,7 @@ CMD ["dotnet", "helloworld.dll"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy the Datadog .NET tracer into your Docker image.
+2. Copy the Datadog .NET SDK into your Docker image.
    ```dockerfile
    # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
    # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
@@ -67,7 +67,7 @@ CMD ["dotnet", "helloworld.dll"]
 
    RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
    ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
+   If you install the Datadog SDK directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
 3. (Optional) Add Datadog tags.
    ```dockerfile

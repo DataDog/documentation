@@ -29,7 +29,7 @@ algolia:
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
-All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
+All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
 
 ## Installation
 
@@ -67,7 +67,8 @@ This behavior can be disabled in version 7.72.0 and later by setting <code>conve
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Path][14]
-: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][33] for details.
 
 [Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -88,7 +89,7 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -183,6 +184,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | [Custom Agent Autoscaling][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
 | Log collection                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice. For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
 | NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19].                                                                |
+| Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][101] is enabled.
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /integrations/ntp/#overview
@@ -191,7 +193,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" %}}
 
 | Product/Functionality                                                                                               | Port | Protocol | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -212,8 +214,8 @@ Used for Agent services communicating with each other locally within the host on
 | [Agent browser GUI][16]      | 5002 | TCP      |                                                                                                                                |
 | APM receiver                 | 8126 | TCP      | Includes Tracing and the Profiler.                                                                                             |
 | [DogStatsD][18]              | 8125 | UDP      | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
-| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expar integration documentation][15].                                                        |
-| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expar integration documentation][15].                                                        |
+| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
+| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
 | IPC API                      | 5001 | TCP      | Port used for Inter Process Communication (IPC).                                                                               |
 | Process Agent debug          | 6062 | TCP      | Debug endpoints for the Process Agent.                                                                                         |
 | Process Agent runtime        | 6162 | TCP      | Runtime configuration settings for the Process Agent.                                                                          |
@@ -268,7 +270,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the Datadog SDK configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 
@@ -335,3 +337,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [30]: /logs/
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
+[33]: /network_monitoring/network_path/setup/#source-public-ip-resolution

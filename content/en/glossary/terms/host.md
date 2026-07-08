@@ -1,4 +1,5 @@
 ---
+id: host
 title: host
 core_product:
   - infrastructure monitoring

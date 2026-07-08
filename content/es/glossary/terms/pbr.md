@@ -1,4 +1,5 @@
 ---
+id: pbr
 core_product:
 - network performance monitoring
 title: enrutamiento basado en políticas (PBR)

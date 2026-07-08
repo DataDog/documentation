@@ -66,7 +66,7 @@ Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
    }
    ```
 
-Catchpoint는 알림을 직접 Datadog의 [Events Explorer](https://docs.datadoghq.com/service_management/events/)로 전송합니다.
+Catchpoint는 알림을 직접 Datadog의 [Events Explorer](https://docs.datadoghq.com/events/)로 전송합니다.
 
 ![Catchpoint 이벤트](images/screenshot.png)
 

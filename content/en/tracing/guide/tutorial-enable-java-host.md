@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application on the Same Host as th
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -37,7 +37,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the Agent
 
-If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+If you haven't installed a Datadog Agent on your machine, go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)" 
@@ -45,7 +45,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
@@ -149,7 +149,7 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 ## Install Datadog tracing
 
-Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
+Next, download the Java SDK (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -215,7 +215,7 @@ Use `curl` to again send requests to the application:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11]. The Traces list shows something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
@@ -240,7 +240,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 

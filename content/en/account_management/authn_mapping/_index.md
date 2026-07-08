@@ -14,7 +14,7 @@ If you are using Federated Authentication mechanisms, this API allows you to aut
 
 **Note**: If you are a SAML user, Datadog strongly recommends that you transition to using this API.
 
-You can also create and manage mappings in the Datadog UI, on the **Mappings** tab in User Management. See [SAML group mapping][1] for more information.
+You can also create and manage mappings in the Datadog UI, on the {{< ui >}}Mappings{{< /ui >}} tab in User Management. See [SAML group mapping][1] for more information.
 
 ## Requests
 

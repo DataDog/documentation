@@ -4,29 +4,29 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---
-## Overview
+## Prerequisites
 SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry.
 
 Before setting up runtime detection, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
+3. **Supported SDK:** The Datadog SDK used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page.
 
 ## Software Composition Analysis enablement types
 
 ### In-app service enablement
 
-You can enable runtime Software Composition Analysis (SCA) in-app through [**Security** > **Code Security**][3].
+You can enable runtime Software Composition Analysis (SCA) in-app through [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][3].
 
 1. Navigate to the [Security Settings][3] page.
-2. In **Activate runtime detection of library vulnerabilities**, click **Manage Services**.
-3. Check the services where you want to identify library vulnerabilities, and select **Bulk Actions**.
-4. Click **Activate Runtime Software Composition Analysis (SCA)**.
+2. In {{< ui >}}Activate runtime detection of library vulnerabilities{{< /ui >}}, click {{< ui >}}Manage Services{{< /ui >}}.
+3. Check the services where you want to identify library vulnerabilities, and select {{< ui >}}Bulk Actions{{< /ui >}}.
+4. Click {{< ui >}}Activate Runtime Software Composition Analysis (SCA){{< /ui >}}.
 
-### Datadog tracing library configuration
+### Datadog SDK configuration
 
-Add an environment variable or a new argument to your Datadog Tracing Library configuration.
+Add an environment variable or a new argument to your Datadog SDK configuration.
 
 By following these steps, you will successfully set up Software Composition Analysis for your application, ensuring comprehensive monitoring and identification of vulnerabilities in open source libraries used by your applications or services.
 
@@ -145,7 +145,7 @@ java -javaagent:dd-java-agent.jar \
 
 ## Data Retention
 
-Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
+Datadog stores findings in accordance with our [Data Retention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 [1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
 [2]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/

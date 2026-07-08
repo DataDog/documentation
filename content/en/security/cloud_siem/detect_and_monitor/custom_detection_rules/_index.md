@@ -40,6 +40,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/content-anomaly-detection-cloud-siem/"
   tag: "Blog"
   text: "Detect anomalies beyond spikes and new values with Content Anomaly Detection in Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-custom-rules"
+  tag: "Learning Center"
+  text: "Write Custom Cloud SIEM Detection Rules"
+
 ---
 
 ## Overview

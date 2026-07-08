@@ -1,4 +1,20 @@
-{{- $file := "layouts/shortcodes/semantic-color.md" -}}
-{{- if (fileExists $file) -}}
-  {{- $file | readFile | markdownify -}}
-{{- end -}}
+{{/*  
+  Renders an HTML table from the semantic_color.json data file sourced from websites-sources.
+*/}}
+{{- $semantic_color_data := $.Site.Data.semantic_color -}}
+<table>
+  <thead>
+    <tr>
+      <th>Tag key</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $semantic_color_data -}}
+    <tr>
+      <td>{{ .tag_key | markdownify}}</td>
+      <td>{{ .description | markdownify }}</td>
+    </tr>
+    {{- end -}}
+  </tbody>
+</table>

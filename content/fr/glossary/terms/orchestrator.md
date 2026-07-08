@@ -1,4 +1,5 @@
 ---
+id: orchestrator
 core_product:
 - infrastructure monitoring
 title: orchestrateur

@@ -96,7 +96,7 @@ For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] 
 
 ### Views
 
-Use the **Select Resources** dropdown menu in the top left corner of the page to switch between **Tasks**, **Services**, **Clusters**, and other ECS resources.
+Use the {{< ui >}}Select Resources{{< /ui >}} dropdown menu in the top left corner of the page to switch between {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Services{{< /ui >}}, {{< ui >}}Clusters{{< /ui >}}, and other ECS resources.
 
 Each view includes a data table for organizing information by fields such as status, name, and AWS tags, along with a detailed Cluster Map to provide an overview of your tasks and ECS clusters.
 
@@ -104,7 +104,7 @@ Refer to [Query filter details](#query-filter-details) for information on filter
 
 #### Group by functionality and facets
 
-Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the **Group by** bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
+Group tasks by tags for an aggregated view that helps you find information more efficiently. You can group tasks using the {{< ui >}}Group by{{< /ui >}} bar located at the top right of the page or by clicking on a specific tag and finding the group by function in the context menu, as illustrated below.
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex_groupby.png" alt="Example of grouping by launch type" style="width:80%;">}}
 
@@ -126,7 +126,7 @@ Click on any row in the table or any object in the Cluster Map to display detail
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex_panel.png" alt="View of resources in the side panel, showing related resources." style="width:80%;">}}
 
-The **Task Definition** tab in the side panel shows the complete task definition.
+The {{< ui >}}Task Definition{{< /ui >}} tab in the side panel shows the complete task definition.
 
 For task definitions, it also provides a history of seven days, allowing you to view all task definition revisions used by running tasks over the past week and compare changes between them.
 
@@ -134,16 +134,16 @@ For task definitions, it also provides a history of seven days, allowing you to 
 
 Other tabs provide additional information for troubleshooting the selected resource:
 
-* **Related Resources**: View all related resources in a tree structure.
+* {{< ui >}}Related Resources{{< /ui >}}: View all related resources in a tree structure.
 * [**Logs**][5]: Access logs from your container or resource. Click on any log entry to view the full log details in the Log Explorer.
 * [**Metrics**][6]: View live metrics for your container or resource. You can maximize any graph for full-screen viewing, share a snapshot, or export it from this tab.
 * [**APM**][7]: Access traces from your container or resource, including details such as date, service, duration, method, and status code.
-* **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
-* **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
+* {{< ui >}}Network{{< /ui >}}: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the {{< ui >}}Destination{{< /ui >}} field to filter by tags like `DNS` or `ip_type`, or use the {{< ui >}}Group by{{< /ui >}} filter to group network data by tags, such as `task_name` or `service`.
+* {{< ui >}}Monitors{{< /ui >}}: View monitors that are tagged, scoped, or grouped for this resource.
 
 ## Query filter details
 
-You can refine displayed resources by entering a query in the **Filter by** search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
+You can refine displayed resources by entering a query in the {{< ui >}}Filter by{{< /ui >}} search bar at the top left of the page. The query filtering operates similarly to the filtering in the [Kubernetes Explorer][8].
 
 ### AWS tags
 

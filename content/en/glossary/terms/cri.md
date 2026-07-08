@@ -1,4 +1,5 @@
 ---
+id: cri
 title: Container Runtime Interface (CRI)
 core_product:
   - infrastructure monitoring

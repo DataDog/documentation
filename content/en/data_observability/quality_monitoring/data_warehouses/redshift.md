@@ -20,6 +20,8 @@ Datadog supports both provisioned Redshift clusters and Redshift Serverless work
 
 Before you begin, make sure you have:
 
+- An [AWS account connected in Datadog][3].
+  - Log forwarding is not required for Data Observability.
 - A Redshift superuser or database user with the ability to create roles and grant privileges.
 - If your Redshift cluster or workgroup restricts network access by IP, add Datadog webhook IPs to your VPC security group inbound rules. For the list of IPs, see the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
@@ -139,8 +141,8 @@ Attach the `AmazonRedshiftDataFullAccess` AWS managed policy and an inline polic
 
 To configure the Redshift integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][1].
-2. Click the **Configure** button for the Redshift option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the Redshift option.
 
    {{< img src="data_observability/redshift/data_obs_redshift_on_integrations_page.png" alt="Redshift on the Settings page of Data Observability integrations" style="width:100%;" >}}
 
@@ -153,24 +155,24 @@ To configure the Redshift integration in Datadog:
 {{< tabs >}}
 {{% tab "Provisioned Cluster" %}}
 
-- **Cluster identifier**: Your Redshift cluster identifier.
-- **Region**: The AWS region where your cluster is hosted (for example, `us-east-1`).
-- **Database user**: The Datadog user created during setup (for example, `datadog_user`).
-- **Initial database**: The name of the database to connect to (defaults to `dev`).
+- {{< ui >}}Cluster identifier{{< /ui >}}: Your Redshift cluster identifier.
+- {{< ui >}}Region{{< /ui >}}: The AWS region where your cluster is hosted (for example, `us-east-1`).
+- {{< ui >}}Database user{{< /ui >}}: The Datadog user created during setup (for example, `datadog_user`).
+- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
-- **Workgroup name**: Your Redshift Serverless workgroup name.
-- **Region**: The AWS region where your workgroup is hosted (for example, `us-east-1`).
-- **Initial database**: The name of the database to connect to (defaults to `dev`).
+- {{< ui >}}Workgroup name{{< /ui >}}: Your Redshift Serverless workgroup name.
+- {{< ui >}}Region{{< /ui >}}: The AWS region where your workgroup is hosted (for example, `us-east-1`).
+- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{< /tabs >}}
 
    {{< img src="data_observability/redshift/data_obs_redshift_add_credentials.png" alt="Input fields for Redshift credentials for Data Observability integrations" style="width:100%;" >}}
 
-5. Click **Add account**.
+5. Click {{< ui >}}Add account{{< /ui >}}.
 
 ## Next steps
 
@@ -184,3 +186,4 @@ After the initial sync completes, create a [Data Observability monitor][2] to st
 
 [1]: https://app.datadoghq.com/datasets/settings/integrations
 [2]: /monitors/types/data_observability/
+[3]: /integrations/amazon-web-services/

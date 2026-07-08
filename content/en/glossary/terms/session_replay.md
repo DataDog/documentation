@@ -1,4 +1,5 @@
 ---
+id: session_replay
 title: Session Replay
 core_product:
   - real user monitoring

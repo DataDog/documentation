@@ -11,9 +11,9 @@ Use the ECR Repository component to visualize container repositories from your A
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Data stored (GB)**: Enter the amount of data you store in your repositories.
-- **Private**: Select if your repository is public or private.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Data stored (GB){{< /ui >}}: Enter the amount of data you store in your repositories.
+- {{< ui >}}Private{{< /ui >}}: Select if your repository is public or private.
 
 ## API
 

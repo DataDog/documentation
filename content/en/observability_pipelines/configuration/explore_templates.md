@@ -5,6 +5,10 @@ further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"
   text: "Set up pipelines"
+- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
+  tag: "Learning Center"
+  text: "Getting Started with Observability Pipelines"
+
 ---
 
 ## Overview
@@ -34,14 +38,14 @@ As your organization grows, your observability needs for different use cases, su
 
 ### Generate Log-based Metrics
 
-Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you only need a summary of the logs and a comparison to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate count, gauge, or distribution metrics from logs that match a query.
 
 These are the available metric types:
-  | Metric type  | Description                                                                                                                                     | Example                                                                                             |
-  | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-  | COUNT        | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased.                | You want to count the number of logs with `status:error`.                                         |
-  | GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
-  | DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
+  | Metric type  | Description                                                                                                                                         | Example                                                                                       |
+  | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+  | COUNT        | The total number of event occurrences in one time interval. Can be reset to zero, but cannot be decreased.                                          | You want to count the number of logs with `status:error`.                                     |
+  | GAUGE        | A snapshot of a value at the time it is reported.                                                                                                   | You want to track the latest CPU utilization per host.                                        |
+  | DISTRIBUTION | Raw values sent to Datadog so percentile aggregations (such as p95, p99) are computed server-side, globally across every host reporting the metric. | You want the global p95 of `response_time_seconds` across every host serving an API endpoint. |
 
 
 ### Log Enrichment

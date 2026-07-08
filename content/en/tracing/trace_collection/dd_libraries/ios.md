@@ -16,7 +16,7 @@ further_reading:
   tag: Documentation
   text: Explore your services, resources, and traces
 ---
-Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side tracing library][2] and leverage the following features:
+Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side SDK][2] and leverage the following features:
 
 * Create custom [spans][3] for various operations in your app.
 * Send logs for each span individually.
@@ -217,6 +217,36 @@ configuration.site = [DDSite us1_fed];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .us2_fed,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us2_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                        trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -277,6 +307,36 @@ configuration.site = [DDSite ap2];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .uk1,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                        trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
     - `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
@@ -304,7 +364,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
-3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
+3. Datadog SDK implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -508,7 +568,7 @@ DDTraceConfiguration *configuration = [[DDTraceConfiguration] alloc] init];
 {{< /tabs >}}
 This automatically traces all requests to `example.com` and `api.yourdomain.com` hosts (for example, `https://api.yourdomain.com/v2/users` or `https://subdomain.example.com/image.png`).
 
-    _(Optional)_ For **more accurate trace timings** with detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, download duration), enable `URLSessionInstrumentation` for your delegate type:
+    _(Optional)_ For **more accurate trace timings**, enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -538,9 +598,9 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Notes**:
-    - Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `urlSessionTracking` and `firstPartyHosts` configurations, swizzling is not applied.
-    - Tracing works automatically without `URLSessionInstrumentation`, but trace timings are more accurate after enabling it.
+**Notes**:
+- Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `urlSessionTracking` and `firstPartyHosts` configurations, swizzling is not applied.
+- Tracing works automatically without `URLSessionInstrumentation`, but trace timings are more accurate after enabling it.
 
 ## Batch collection
 

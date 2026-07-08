@@ -2,25 +2,28 @@
 aliases:
 - /fr/agent/autodiscovery/tag/
 - /fr/agent/kubernetes/tag
-description: Configurer l'extraction automatique des balises à partir des étiquettes
-  et annotations des pods Kubernetes pour une surveillance améliorée
+description: Configurer l'extraction automatique des étiquettes à partir des étiquettes
+  et des annotations des pods Kubernetes pour une surveillance améliorée
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
-  text: Premiers pas avec les balises
+  text: Débuter avec les tags
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
-  text: Utiliser des balises avec Datadog
+  text: Utiliser des tags avec Datadog
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
-  text: Limiter la collecte de données à un sous-ensemble de conteneurs uniquement
-title: Extraction de balises Kubernetes
+  text: Limitez la collecte de données à un sous-ensemble de conteneurs
+- link: https://learn.datadoghq.com/courses/getting-started-k8s
+  tag: Centre d'apprentissage
+  text: Introduction à la surveillance de Kubernetes
+title: Extraction de tags dans Kubernetes
 ---
-L'Agent Datadog peut automatiquement attribuer des balises aux métriques, traces et journaux émis par un pod (ou un conteneur individuel au sein d'un pod) en fonction des étiquettes ou des annotations.
+L'Agent Datadog peut automatiquement attribuer des balises aux métriques, aux traces et aux journaux émis par un pod (ou un conteneur individuel au sein d'un pod) en fonction des étiquettes ou des annotations.
 
-## Balises prêtes à l'emploi
+## Balises prêtes à l'emploi {#out-of-the-box-tags}
 
-La liste des balises attribuées automatiquement dépend de la [configuration de cardinalité][1] de l'Agent. [Cardinalité des balises][4] est ajoutée avant l'ingestion et peut avoir un impact sur la facturation, car différentes configurations de cardinalité influencent le nombre de métriques émises.
+La liste des balises attribuées automatiquement dépend de la [configuration de cardinalité de l'Agent][1]. [Cardinalité des balises][4] est ajoutée avant l'ingestion et peut avoir un impact sur la facturation, car différentes configurations de cardinalité influencent le nombre de métriques émises.
 
 <div style="overflow-x: auto;">
 
@@ -30,23 +33,23 @@ La liste des balises attribuées automatiquement dépend de la [configuration de
   | `display_container_name`      | Élevé         | État du pod                                                                                                                    | N/A                                                 |
   | `pod_name`                    | Orchestrateur | Métadonnées du pod                                                                                                                  | N/A                                                 |
   | `oshift_deployment`           | Orchestrateur | Annotation du pod `openshift.io/deployment.name`                                                                                 | L'environnement OpenShift et l'annotation du pod doivent exister |
-  | `kube_ownerref_name`          | Orchestrateur | Référence du propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
-  | `kube_job`                    | Orchestrateur | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un cronjob                   |
-  | `kube_job`                    | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un job                       |
-  | `kube_replica_set`            | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un ensemble de réplicas               |
+  | `kube_ownerref_name`          | Orchestrateur | Propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
+  | `kube_job`                    | Orchestrateur | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un cronjob                   |
+  | `kube_job`                    | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un job                       |
+  | `kube_replica_set`            | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un ensemble de réplicas               |
   | `kube_service`                | Faible          | Découverte de service Kubernetes                                                                                                  | Le pod est derrière un service Kubernetes                  |
-  | `kube_daemon_set`             | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un DaemonSet                 |
+  | `kube_daemon_set`             | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un DaemonSet                 |
   | `kube_container_name`         | Faible          | État du pod                                                                                                                    | N/A                                                 |
   | `kube_namespace`              | Faible          | Métadonnées du pod                                                                                                                  | N/A                                                 |
   | `kube_app_name`               | Faible          | Étiquette du pod `app.kubernetes.io/name`                                                                                            | L'étiquette du pod doit exister                                |
-  | `kube_app_instance`           | Faible          | Étiquette du pod `app.kubernetes.io/instance`                                                                                        | L'étiquette du pod doit exister                                |
-  | `kube_app_version`            | Faible          | Étiquette du pod `app.kubernetes.io/version`                                                                                         | L'étiquette du pod doit exister                                |
-  | `kube_app_component`          | Faible          | Étiquette du pod `app.kubernetes.io/component`                                                                                       | L'étiquette du pod doit exister                                |
-  | `kube_app_part_of`            | Faible          | Étiquette du pod `app.kubernetes.io/part-of`                                                                                         | L'étiquette du pod doit exister                                |
-  | `kube_app_managed_by`         | Faible          | Étiquette du pod `app.kubernetes.io/managed-by`                                                                                      | L'étiquette du pod doit exister                                |
-  | `env`                         | Faible          | Étiquette du pod `tags.datadoghq.com/env` ou variable d'environnement du conteneur (`DD_ENV` ou `OTEL_RESOURCE_ATTRIBUTES`)                               | [Étiquetage de service unifié][2] activé                |
-  | `version`                     | Faible          | Étiquette du pod `tags.datadoghq.com/version` ou variable d'environnement du conteneur (`DD_VERSION` ou `OTEL_RESOURCE_ATTRIBUTES`)                       | [Étiquetage de service unifié][2] activé                |
-  | `service`                     | Faible          | Étiquette du pod `tags.datadoghq.com/service` ou variable d'environnement du conteneur (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, ou `OTEL_SERVICE_NAME`) | [Étiquetage de service unifié][2] activé                |
+  | `kube_app_instance`           | Faible          | Étiquette de pod `app.kubernetes.io/instance`                                                                                        | L'étiquette de pod doit exister                                |
+  | `kube_app_version`            | Faible          | Étiquette de pod `app.kubernetes.io/version`                                                                                         | L'étiquette de pod doit exister                                |
+  | `kube_app_component`          | Faible          | Étiquette de pod `app.kubernetes.io/component`                                                                                       | L'étiquette de pod doit exister                                |
+  | `kube_app_part_of`            | Faible          | Étiquette de pod `app.kubernetes.io/part-of`                                                                                         | L'étiquette de pod doit exister                                |
+  | `kube_app_managed_by`         | Faible          | Étiquette de pod `app.kubernetes.io/managed-by`                                                                                      | L'étiquette de pod doit exister                                |
+  | `env`                         | Faible          | Étiquette de pod `tags.datadoghq.com/env` ou variable d'environnement de conteneur (`DD_ENV` ou `OTEL_RESOURCE_ATTRIBUTES`)                               | [Tagging de service unifié][2] activé                |
+  | `version`                     | Faible          | Étiquette de pod `tags.datadoghq.com/version` ou variable d'environnement de conteneur (`DD_VERSION` ou `OTEL_RESOURCE_ATTRIBUTES`)                       | [Tagging de service unifié][2] activé                |
+  | `service`                     | Faible          | Étiquette de pod `tags.datadoghq.com/service` ou variable d'environnement de conteneur (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, ou `OTEL_SERVICE_NAME`) | [Tagging de service unifié][2] activé                |
   | `pod_phase`                   | Faible          | État du pod                                                                                                                    | N/A                                                 |
   | `oshift_deployment_config`    | Faible          | Annotation du pod `openshift.io/deployment-config.name`                                                                          | L'environnement OpenShift et l'annotation du pod doivent exister |
   | `kube_ownerref_kind`          | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
@@ -63,33 +66,33 @@ La liste des balises attribuées automatiquement dépend de la [configuration de
   | `kube_runtime_class`          | Faible          | Spécification du pod                                                                                                                      | Le pod doit être attaché à une classe d'exécution             |
   | `gpu_vendor`                  | Faible          | Spécification du pod                                                                                                                      | Le conteneur doit être attaché à une ressource GPU        |
   | `image_id`                    | Faible          | ID de l'image du conteneur                                                                                                            | N/A                                                 |
-  | `kube_autoscaler_kind`        | Faible          | Type d'autoscaler Kubernetes                                                                                                    | Un autoscaler Kubernetes doit être utilisé                  |
+  | `kube_autoscaler_kind`        | Faible          | Type d'autoscaler Kubernetes                                                                                                    | L'autoscaler Kubernetes doit être utilisé                  |
   | `kube_priority_class`         | Faible          | Classe de priorité du pod                                                                                                            | Le pod doit avoir une classe de priorité définie                    |
   | `kube_qos`                    | Faible          | Classe de qualité de service du pod                                                                                                  | N/A                                                 |
 
 </div>
 
 
-### Étiquette d'hôte
+### Étiquette hôte {#host-tag}
 
-L'Agent peut attacher des informations sur l'environnement Kubernetes en tant qu'"étiquettes d'hôte".
+L'Agent peut ajouter des informations sur l'environnement Kubernetes sous la forme de tags de host.
 
 <div style="overflow-x: auto;">
 
   | Étiquette                 | Cardinalité | Source                                                 | Exigence                                                    |
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
-  | `kube_cluster_name` | Faible         | `DD_CLUSTER_NAME` intégration envvar ou fournisseur de cloud | `DD_CLUSTER_NAME` intégration envvar ou fournisseur de cloud activée |
+  | `kube_cluster_name` | Faible         | `DD_CLUSTER_NAME` variable d'environnement ou intégration du fournisseur de cloud | `DD_CLUSTER_NAME` variable d'environnement ou intégration du fournisseur de cloud activée |
   | `kube_node_role`    | Faible         | Étiquette de nœud `node-role.kubernetes.io/<role>`            | L'étiquette de nœud doit exister                                          |
   | `kube_node`         | Faible         | `NodeName` champ dans les spécifications d'un pod             |                                                              |
   | `orch_cluster_id`   | Faible         | Métadonnées du cluster orchestrateur                          |  Environnement orchestrateur                                    |
   | `kube_distribution` | Faible         | Étiquettes de nœud et NodeSystemInfo                         |  |
 </div>
 
-## Découverte automatique des étiquettes
+## Autodécouverte des tags {#tag-autodiscovery}
 
-À partir de l'Agent v6.10+, l'Agent peut découvrir automatiquement des balises à partir des annotations de Pod. Cela permet à l'Agent d'associer des balises à toutes les données émises par l'ensemble des pods ou un conteneur individuel au sein de ce pod.
+À partir de l'Agent v6.10+, l'Agent peut autodécouvrir des étiquettes à partir des annotations de pod. Cela permet à l'Agent d'associer des étiquettes à toutes les données émises par l'ensemble des pods ou un conteneur individuel au sein de ce pod.
 
-En tant que meilleure pratique dans les environnements conteneurisés, Datadog recommande d'utiliser un étiquetage de service unifié pour aider à unifier les étiquettes. L'étiquetage de service unifié relie la télémétrie de Datadog grâce à l'utilisation de trois étiquettes standard : `env`, `service` et `version`. Pour apprendre à configurer votre environnement avec un étiquetage unifié, référez-vous à la documentation dédiée à l'[étiquetage de service unifié][2].
+En tant que meilleure pratique dans les environnements conteneurisés, Datadog recommande d'utiliser un étiquetage de service unifié pour aider à unifier les étiquettes. L'étiquetage de service unifié relie la télémétrie Datadog grâce à l'utilisation de trois étiquettes standard : `env`, `service` et `version`. Pour apprendre à configurer votre environnement avec un étiquetage unifié, référez-vous à la documentation dédiée à l'[étiquetage de service unifié][2].
 
 Pour appliquer une étiquette `<TAG_KEY>:<TAG_VALUE>` à toutes les données émises par un pod donné et collectées par l'Agent, utilisez l'annotation suivante sur votre pod :
 
@@ -105,13 +108,13 @@ annotations:
   ad.datadoghq.com/<CONTAINER_NAME>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-À partir de l'Agent v7.17+, l'Agent peut découvrir automatiquement des étiquettes à partir des étiquettes Docker. Ce processus permet à l'Agent d'associer des étiquettes personnalisées à toutes les données émises par un conteneur, sans modifier la configuration de l'Agent.
+À partir de la version 7.17+ de l'Agent, celui-ci peut découvrir automatiquement des balises à partir des étiquettes Docker. Ce processus permet à l'Agent d'associer des balises personnalisées à toutes les données émises par un conteneur, sans modifier la configuration de l'Agent.
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-À partir de l'Agent v7.77+, les annotations d'étiquettes prennent en charge les [variables de modèle de découverte automatique][5] pour un étiquetage dynamique basé sur les métadonnées d'exécution. À l'exception de `%%env_<VAR>%%`, toutes les variables de modèle sont prises en charge.
+À partir de la version 7.77+ de l'Agent, les annotations de balises prennent en charge les [variables de modèle d'autodécouverte][5] pour un balisage dynamique basé sur les métadonnées d'exécution. À l'exception de `%%env_<VAR>%%`, toutes les variables de modèle sont prises en charge.
 
 ```yaml
 annotations:
@@ -119,19 +122,19 @@ annotations:
   ad.datadoghq.com/nginx.tags: '{"container_port":"%%port_80%%"}'
 ```
 
-## Extraction d'étiquettes
+## Extraction d'étiquettes {#tag-extraction}
 
-À partir de la version 7.64+, l'Agent et l'Agent de Cluster peuvent être configurés pour collecter des étiquettes et des annotations à partir des ressources Kubernetes et les utiliser comme étiquettes à partir d'une configuration commune. Datadog recommande d'utiliser les options suivantes pour garantir un reporting cohérent entre l'étiquetage principal de l'Agent, le reporting KSM de l'Agent de Cluster et le reporting de l'Orchestrateur Explorer des deux Agents :
+À partir de la version 7.64+, l'Agent et l'Agent de Cluster peuvent être configurés pour collecter des étiquettes et des annotations à partir des ressources Kubernetes et les utiliser comme balises à partir d'une configuration commune. Datadog recommande d'utiliser les options suivantes pour garantir un reporting cohérent entre l'étiquetage de base de l'Agent, le reporting KSM de l'Agent de Cluster et le reporting Orchestrator Explorer des deux Agents :
 - `kubernetesResourcesLabelsAsTags`
 - `kubernetesResourcesAnnotationsAsTags`
 
-Ces options doivent être utilisées au lieu des anciennes options de l'Agent `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags`, et de tout remplacement de configuration KSM.
+Ces options doivent être utilisées à la place des anciennes options de l'Agent `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags`, et de tout remplacement de configuration KSM.
 
-Ces configurations font référence au type de ressource de l'objet à partir duquel extraire les métadonnées. Chaque type de ressource doit être spécifié au format `resourceType.apiGroup`, où `resourceType` est le nom au pluriel de la ressource. Les ressources dans le groupe API vide (par exemple, les pods et les nœuds) peuvent être spécifiées en utilisant uniquement le nom `resourceType`.
+Ces configurations font référence au type de ressource de l'objet à partir duquel extraire des métadonnées. Chaque type de ressource doit être spécifié au format `resourceType.apiGroup`, où `resourceType` est le nom au pluriel de la ressource. Les ressources dans le groupe API vide (par exemple, les pods et les nœuds) peuvent être spécifiées en utilisant uniquement le nom `resourceType`.
 
 Par exemple, exécutez `kubectl api-resources` pour récupérer cette information :
 
-| Nom        | Version de l'API                  | Configuration des ressources Datadog  |
+| Nom        | Version API                  | Configuration de ressource Datadog  |
 |-------------|------------------------------|---------------------------------|
 | pods        | v1                           | pods                            |
 | nœuds       | v1                           | nœuds                           |
@@ -141,19 +144,19 @@ Par exemple, exécutez `kubectl api-resources` pour récupérer cette informatio
 
 **Notes :**
 
-- Les tags *ne se propagent pas* entre la charge de travail et les ressources enfants. Par exemple, les étiquettes sur un déploiement ne sont pas automatiquement appliquées aux journaux de ses pods enfants. Pour taguer les données des pods, configurez l'extraction des étiquettes directement sur les pods.
-- Les tags * se propagent de l'espace de noms vers les pods et les conteneurs qui s'y trouvent *.
-- Utilisez Datadog Agent 7.73+ pour employer des caractères génériques dans les règles d'extraction des tags de vos métriques KSM.
+- Les tags *ne* se propagent pas entre la charge de travail et les ressources enfants. Par exemple, les étiquettes sur un déploiement ne sont pas automatiquement appliquées aux journaux de ses Pods enfants. Pour taguer les données des Pods, configurez l'extraction des étiquettes directement sur les Pods.
+- Les tags *se* propagent de l'espace de noms vers les pods et les conteneurs à l'intérieur de ceux-ci.
+- Utilisez Datadog Agent 7.73+ pour utiliser des jokers dans les règles d'extraction des tags pour vos métriques KSM.
 
-### Étiquettes des ressources Kubernetes en tant que tags
+### Les étiquettes des ressources Kubernetes en tant que tags {#kubernetes-resources-labels-as-tags}
 
 Cette option est utilisée pour extraire une étiquette donnée sur vos ressources Kubernetes et l'envoyer en tant que tag Datadog.
 
 {{< tabs >}}
 
-{{% tab "Opérateur Datadog" %}}
+{{% tab "Operator Datadog" %}}
 
-Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
+Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -167,7 +170,7 @@ spec:
         <LABEL>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire des étiquettes de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire les étiquettes de ressource des nœuds, des pods et des déploiements :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -189,7 +192,7 @@ spec:
 
 {{% tab "Helm" %}}
 
-Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -198,7 +201,7 @@ datadog:
       <LABEL>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire des étiquettes de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire les étiquettes de ressource des nœuds, des pods et des déploiements :
 
 ```yaml
 datadog:
@@ -215,14 +218,14 @@ datadog:
 
 {{% tab "Manuel (DaemonSet)" %}}
 
-Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à **à la fois** vos conteneurs Agent et Cluster Agent.
+Pour extraire une étiquette de ressource donnée `<LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à **à la fois** vos conteneurs Agent et Cluster Agent.
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
   value: '{"<RESOURCE>":{"<LABEL>":"<TAG_KEY>"}}'
 ```
 
-Par exemple, pour extraire des étiquettes de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire les étiquettes de ressource des nœuds, des pods et des déploiements :
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
@@ -232,7 +235,7 @@ Par exemple, pour extraire des étiquettes de ressource des nœuds, des pods et 
 {{% /tab %}}
 {{< /tabs >}}
 
-Pour l'Agent 7.73.0 et plus, utilisez la configuration suivante pour ajouter toutes les étiquettes de ressource en tant que balises à vos métriques. Dans cet exemple, les noms de balises sont préfixés par `<PREFIX>_` :
+Pour Agent 7.73.0+, utilisez la configuration suivante pour ajouter toutes les étiquettes de ressource en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```yaml
     #(...)
@@ -243,7 +246,7 @@ Pour l'Agent 7.73.0 et plus, utilisez la configuration suivante pour ajouter tou
 
 **Notes** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 
-#### Fusion avec des configurations héritées
+#### Fusion avec les configurations héritées {#merging-with-legacy-configurations}
 
 <div class="alert alert-info">
 
@@ -273,15 +276,15 @@ label-3: legacy-tag-d
 
 </div>
 
-### Annotations des ressources Kubernetes en tant que balises
+### Annotations des ressources Kubernetes en tant que tags {#kubernetes-resources-annotations-as-tags}
 
-Cette option extrait une annotation spécifiée de vos ressources Kubernetes et l'envoie en tant que balise Datadog.
+Cette option extrait une annotation spécifiée de vos ressources Kubernetes et l'envoie en tant que tag Datadog.
 
 {{< tabs >}}
 
-{{% tab "Opérateur Datadog" %}}
+{{% tab "Operator Datadog" %}}
 
-Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
+Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -295,7 +298,7 @@ spec:
         <ANNOTATION>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire des annotations de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire des annotations de ressources des nœuds, des pods et des déploiements :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -317,7 +320,7 @@ spec:
 
 {{% tab "Helm" %}}
 
-Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -326,7 +329,7 @@ datadog:
       <ANNOTATION>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire des annotations de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire des annotations de ressources des nœuds, des pods et des déploiements :
 
 ```yaml
 datadog:
@@ -343,14 +346,14 @@ datadog:
 
 {{% tab "Manuel (DaemonSet)" %}}
 
-Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à **à la fois** vos conteneurs Agent et Cluster Agent :
+Pour extraire une annotation de ressource donnée `<ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à **à la fois** vos conteneurs Agent et Cluster Agent.
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS
   value: '{"<RESOURCE>":{"<ANNOTATION>":"<TAG_KEY>"}}'
 ```
 
-Par exemple, pour extraire des annotations de ressource des nœuds, des pods et des déploiements :
+Par exemple, pour extraire des annotations de ressources des nœuds, des pods et des déploiements :
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS
@@ -360,7 +363,7 @@ Par exemple, pour extraire des annotations de ressource des nœuds, des pods et 
 {{% /tab %}}
 {{< /tabs >}}
 
-Pour l'Agent 7.73.0 et plus, utilisez la configuration suivante pour ajouter toutes les annotations de ressource en tant que balises à vos métriques. Dans cet exemple, les noms de balises sont préfixés par `<PREFIX>_` :
+Pour Agent 7.73.0+, utilisez la configuration suivante pour ajouter toutes les annotations de ressources en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```yaml
     #(...)
@@ -389,7 +392,7 @@ datadog:
     annotation-3: legacy-tag-d
 ```
 
-Le mappage suivant est utilisé pour extraire des balises des annotations de pod :
+Le mappage suivant est utilisé pour extraire des tags des annotations de pod :
 
 ```yaml
 annotation-1: tag-a
@@ -400,20 +403,20 @@ annotation-3: legacy-tag-d
 </div>
 
 
-{{% collapse-content title="Configuration héritée" level="h4" expanded=false id="legacy-configuration" %}}
-#### Étiquettes de nœud en tant que balises
+{{% collapse-content title="Configuration pour les anciennes versions" level="h4" expanded=false id="legacy-configuration" %}}
+#### Étiquettes de nœud en tant que tags {#node-labels-as-tags}
 
 <div class="alert alert-info">
 
-Si vous utilisez la version de l'agent 7.58.0 ou plus, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que balises</a> pour configurer les étiquettes en tant que balises.
+Si vous êtes sur la version de l'agent 7.58.0+, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que tags</a> pour configurer les étiquettes en tant que tags.
 
 </div>
 
-À partir de l'Agent v6.0+, l'Agent peut collecter des étiquettes pour un nœud donné et les utiliser comme balises à attacher à toutes les métriques, traces et journaux émis associés à ce `host` dans Datadog :
+À partir de l'Agent v6.0+, l'Agent peut collecter des étiquettes pour un nœud donné et les utiliser comme tags à attacher à toutes les métriques, traces et journaux émis associés à ce `host` dans Datadog :
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
+{{% tab "Operator Datadog" %}}
+Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -426,7 +429,7 @@ spec:
       <NODE_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -439,7 +442,7 @@ spec:
       kubernetes.io/arch: arch
 ```
 
-Pour l'Agent v7.24.0 et plus, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que balises à vos métriques. Dans cet exemple, les noms de balises sont préfixés par `<PREFIX>_` :
+Pour Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -454,7 +457,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -462,7 +465,7 @@ datadog:
     <NODE_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -470,7 +473,7 @@ datadog:
     kubernetes.io/arch: arch
 ```
 
-Pour l'Agent v7.24.0 et plus, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que balises à vos métriques. Dans cet exemple, les noms de balises sont préfixés par `<PREFIX>_` :
+Pour Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 
 ```yaml
@@ -481,19 +484,19 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une étiquette de nœud donnée `<NODE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-Pour l'Agent v7.24.0 et plus, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que balises à vos métriques. Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
+Pour Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de nœud en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics before version 7.73
@@ -503,19 +506,19 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards
 
 **Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 
-#### Étiquettes de pod en tant que balises
+#### Étiquettes de pod en tant que tags {#pod-labels-as-tags}
 
 <div class="alert alert-info">
 
-Si vous utilisez la version de l'agent 7.58.0 ou plus, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que balises</a> pour configurer les étiquettes de pod en tant que balises.
+Si vous utilisez la version de l'agent 7.58.0 ou supérieure, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que tags</a> pour configurer les étiquettes de pod en tant que tags.
 
 </div>
 
-À partir de l'Agent v6.0+, l'Agent peut collecter des étiquettes pour un pod donné et les utiliser comme balises à attacher à toutes les métriques, traces et journaux émis par ce pod :
+À partir de la version 6.0 de l'Agent, l'Agent peut collecter des étiquettes pour un pod donné et les utiliser comme tags à attacher à toutes les métriques, traces et journaux émis par ce pod :
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
+{{% tab "Operator Datadog" %}}
+Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -528,7 +531,7 @@ spec:
       <POD_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -541,7 +544,7 @@ spec:
       app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -556,7 +559,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -564,7 +567,7 @@ datadog:
     <POD_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -572,7 +575,7 @@ datadog:
     app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```yaml
 datadog:
@@ -582,19 +585,19 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une étiquette de pod donnée `<POD_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -604,7 +607,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 
 **Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 
-#### Annotations de pod en tant que tags
+#### Annotations de pod en tant que tags {#pod-annotations-as-tags}
 
 <div class="alert alert-info">
 
@@ -612,11 +615,11 @@ Si vous utilisez la version de l'agent 7.58.0 ou supérieure, il est conseillé 
 
 </div>
 
-À partir de l'Agent v6.0 et supérieur, l'Agent peut collecter des annotations pour un pod donné et les utiliser comme tags à attacher à toutes les métriques, traces et journaux émis par ce pod :
+À partir de la version 6.0 de l'Agent, l'Agent peut collecter des annotations pour un pod donné et les utiliser comme balises à attacher à toutes les métriques, traces et journaux émis par ce pod :
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml`
+{{% tab "Operator Datadog" %}}
+Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la `DatadogAgent` configuration de votre opérateur dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -629,7 +632,7 @@ spec:
       <POD_ANNOTATION>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -642,7 +645,7 @@ spec:
       app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -657,7 +660,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -665,7 +668,7 @@ datadog:
     <POD_ANNOTATION>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -673,7 +676,7 @@ datadog:
     app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```yaml
 datadog:
@@ -683,19 +686,19 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une annotation de pod donnée `<POD_ANNOTATION>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0 ou supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les annotations de pod en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
@@ -705,19 +708,19 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 
 **Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 
-#### Étiquettes de namespace en tant que tags
+#### Étiquettes de namespace en tant que balises {#namespace-labels-as-tags}
 
 <div class="alert alert-info">
 
-Si vous utilisez la version de l'agent 7.58.0 ou supérieure, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que tags</a> pour configurer les étiquettes de namespace en tant que tags.
+Si vous utilisez la version de l'Agent 7.58.0 ou supérieure, il est conseillé d'utiliser <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">les étiquettes des ressources Kubernetes en tant que balises</a> pour configurer les étiquettes de namespace en tant que balises.
 
 </div>
 
-À partir de l'Agent 7.55.0 et supérieur, l'Agent peut collecter des étiquettes pour un namespace donné et les utiliser comme tags à attacher à toutes les métriques, traces et journaux émis par tous les pods dans ce namespace :
+À partir de l'Agent 7.55.0+, l'Agent peut collecter des étiquettes pour un espace de noms donné et les utiliser comme balises à attacher à toutes les métriques, traces et journaux émis par tous les pods dans cet espace de noms :
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une étiquette de namespace donnée `<NAMESPACE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
+{{% tab "Operator Datadog" %}}
+Pour extraire une étiquette d'espace de noms donnée `<NAMESPACE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -730,7 +733,7 @@ spec:
       <NAMESPACE_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -743,7 +746,7 @@ spec:
       app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de namespace en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes d'espace de noms en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -758,7 +761,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une étiquette de namespace donnée `<NAMESPACE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une étiquette d'espace de noms donnée `<NAMESPACE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -766,7 +769,7 @@ datadog:
     <NAMESPACE_LABEL>: <TAG_KEY>
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -774,7 +777,7 @@ datadog:
     app: kube_app
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de namespace en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes d'espace de noms en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```yaml
 datadog:
@@ -784,19 +787,19 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une étiquette de namespace donnée `<NAMESPACE_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une étiquette d'espace de noms donnée `<NAMESPACE_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-Pour l'Agent v7.24.0 et supérieur, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes de namespace en tant que tags à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des tags sont préfixés par `<PREFIX>_` :
+Pour l'Agent v7.24.0+, utilisez la configuration de variable d'environnement suivante pour ajouter toutes les étiquettes d'espace de noms en tant que balises à vos métriques, sauf celles de KSM (`kubernetes_state.*`). Dans cet exemple, les noms des balises sont préfixés par `<PREFIX>_` :
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -804,16 +807,16 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
+**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 {{% /collapse-content %}}
 
-### Variables d'environnement de conteneur en tant que tags
+### Variables d'environnement de conteneur en tant que balises {#container-environment-variables-as-tags}
 
-À partir de la version 7.32+ de l'Agent, l'Agent peut collecter les variables d'environnement des conteneurs et les utiliser comme tags à attacher à toutes les métriques, traces et journaux correspondant au conteneur. Les conteneurs `docker` et `containerd` sont tous deux pris en charge :
+À partir de l'Agent v7.32+, l'Agent peut collecter des variables d'environnement de conteneur et les utiliser comme balises à attacher à toutes les métriques, traces et journaux correspondant au conteneur. Les conteneurs `docker` et `containerd` sont tous deux pris en charge :
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration `DatadogAgent` de votre Opérateur dans `datadog-agent.yaml` :
+{{% tab "Operator Datadog" %}}
+Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -829,7 +832,7 @@ spec:
           value: '{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -848,7 +851,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -857,7 +860,7 @@ datadog:
       value: '{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -868,13 +871,13 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une variable d'environnement donnée `<ENV_VAR>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-Par exemple :
+Exemple :
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
@@ -883,17 +886,17 @@ DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Voir [Facturation des métriques personnalisées][3] pour plus de détails.
+**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Voir [Facturation des métriques personnalisées][3] pour plus de détails.
 
-### Étiquettes de conteneur en tant que tags
+### Étiquettes de conteneur en tant que balises {#container-labels-as-tags}
 
-À partir de la version 7.33+ de l'Agent, l'Agent peut collecter les étiquettes de conteneur et les utiliser comme tags. L'agent attache les tags à toutes les métriques, traces et journaux associés au conteneur.
+À partir de l'Agent v7.33+, l'Agent peut collecter des étiquettes de conteneur et les utiliser comme balises. L'agent attache les balises à toutes les métriques, traces et journaux associés au conteneur.
 
-L'Agent peut générer des tags à partir des étiquettes de conteneur pour les conteneurs `docker` et `containerd`. Dans le cas de `containerd`, la version minimale prise en charge est v1.5.6, car les versions précédentes ne propagent pas correctement les étiquettes.
+L'Agent peut générer des balises à partir des étiquettes de conteneur pour les conteneurs `docker` et `containerd`. Dans le cas de `containerd`, la version minimale prise en charge est v1.5.6, car les versions précédentes ne propagent pas correctement les étiquettes.
 
 {{< tabs >}}
-{{% tab "Opérateur Datadog" %}}
-Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration `DatadogAgent` de votre Opérateur dans `datadog-agent.yaml` :
+{{% tab "Operator Datadog" %}}
+Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à la configuration de votre opérateur `DatadogAgent` dans `datadog-agent.yaml` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -909,7 +912,7 @@ spec:
           value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -928,7 +931,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de tag `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
+Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de balise `<TAG_KEY>` dans Datadog, ajoutez la configuration suivante à votre fichier Helm `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -937,7 +940,7 @@ datadog:
       value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
 ```
 
-Par exemple, vous pourriez configurer :
+Par exemple, vous pourriez configurer :
 
 ```yaml
 datadog:
@@ -948,13 +951,13 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Manuel (DaemonSet)" %}}
-Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de tag `<TAG_KEY>`, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Pour extraire une étiquette de conteneur donnée `<CONTAINER_LABEL>` et la transformer en clé de balise `<TAG_KEY>`, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
 ```
 
-Par exemple :
+Exemple :
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
@@ -962,9 +965,9 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Voir [Facturation des métriques personnalisées][3] pour plus de détails.
+**Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Voir [Facturation des métriques personnalisées][3] pour plus de détails.
 
-## Lectures complémentaires
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

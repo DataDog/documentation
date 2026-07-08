@@ -31,9 +31,9 @@ Create a Powerpack from an existing group on a dashboard:
 
 {{< img src="dashboards/widgets/powerpack/group_header_icons.png" alt="Dashboard group header icons highting the Save as Powerpack icon option" style="width:80%;" >}}
 
-1. From a dashboard group's header, click the "Save as Powerpack" icon. 
-1. Fill out details to make the Powerpack discoverable to your organization. 
-1. Add tags under "Add Search Categories" to organize your Powerpacks. This allows team members to find the correct Powerpack to add to their dashboard.
+1. From a dashboard group's header, click the {{< ui >}}Save as Powerpack{{< /ui >}} icon.
+1. Fill out details to make the Powerpack discoverable to your organization.
+1. Add tags under {{< ui >}}Add Search Categories{{< /ui >}} to organize your Powerpacks. This allows team members to find the correct Powerpack to add to their dashboard.
 1. Choose which filters should be configurable for the users of the Powerpack. 
 
 **Note**: After creating a Powerpack, the original group is replaced with an instance of the Powerpack.
@@ -44,16 +44,16 @@ Changes to a Powerpack sync across all dashboards where your Powerpack is used.
 
 To make changes to the look or layout of a Powerpack:
 1. Hover over the header and click the kebab menu.
-1. Select **Edit Powerpack Layout** from the Powerpack Actions menu. **Note**: Powerpack layouts cannot be edited on timeboards.
-1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes**.
+1. Select {{< ui >}}Edit Powerpack Layout{{< /ui >}} from the Powerpack Actions menu. **Note**: Powerpack layouts cannot be edited on timeboards.
+1. Make any desired changes to the Powerpack layout or any individual widget and select {{< ui >}}Confirm Changes{{< /ui >}}.
 1. If this Powerpack is used in multiple dashboards, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
 
 {{< img src="dashboards/widgets/powerpack/powerpack_actions_menu.png" alt="Action menu options to update a Powerpack and the Powerpack instance accessed through kebab on Powerpack header" style="width:60%;" >}}
 
 To make changes to the Powerpack Details:
 1. Hover over the header and click the kebab menu.
-1. Select **Edit Powerpack Details** from the Powerpack Actions menu.
-1. Make changes to the Powerpack info, the search categories, or filter configuration and select **Update Powerpack**.
+1. Select {{< ui >}}Edit Powerpack Details{{< /ui >}} from the Powerpack Actions menu.
+1. Make changes to the Powerpack info, the search categories, or filter configuration and select {{< ui >}}Update Powerpack{{< /ui >}}.
 1. If this Powerpack is used in multiple dashboards, a prompt opens to verify the instances of the Powerpack that are affected by this update.
 
 **Note**: You must have [edit permissions](#powerpack-permissions) to make any updates to the Powerpack or to modify the permissions.
@@ -64,17 +64,17 @@ To make changes to the Powerpack Details:
 After you create a Powerpack, you can add an instance of that Powerpack to multiple dashboards.
 
 To add a Powerpack instance to the dashboard:
-1. Click **Add Widgets** to open the widget tray.
-1. Click the **Powerpacks** tab to view available Powerpacks. You can search with text or predefined tags. 
+1. Click {{< ui >}}Add Widgets{{< /ui >}} to open the widget tray.
+1. Click the {{< ui >}}Powerpacks{{< /ui >}} tab to view available Powerpacks. You can search with text or predefined tags.
 1. Click the desired Powerpack to open the configuration for the Powerpack instance.
 1. Select filter values and how the filters are controlled.
     * Powerpack filters - the selected value applies to widgets inside the Powerpack instance.
     * Dashboard filters - controlled by dashboard template variables.
-1. Click **Confirm**. 
+1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 To remove a powerpack instance from the dashboard:
 1. Click the kebab menu on the instance header.
-1. Select **Remove from Dashboard**.
+1. Select {{< ui >}}Remove from Dashboard{{< /ui >}}.
 
 ### Customizing a Powerpack instance
 
@@ -82,12 +82,12 @@ Changes to a Powerpack instance **do not** apply to other Powerpack instances in
 
 To customize Powerpack instances displayed on your dashboard:
 1. Click the kebab menu on the instance header.
-1. Select an option from the **Powerpack Actions** menu:
-    1. Edit Display Options: Customize the group header style, display colors, and name.
-    1. Detach Instance: Unlink the instance from the original Powerpack.
-    1. Remove from Dashboard: Remove the instance from the dashboard.
-    1. Edit Powerpack Layout: Customize the layout of the widgets in the instance.
-    1. Edit Powerpack Details: Customize the title, description, and associated tags.
+1. Select an option from the {{< ui >}}Powerpack Actions{{< /ui >}} menu:
+    1. {{< ui >}}Edit Display Options{{< /ui >}}: Customize the group header style, display colors, and name.
+    1. {{< ui >}}Detach Instance{{< /ui >}}: Unlink the instance from the original Powerpack.
+    1. {{< ui >}}Remove from Dashboard{{< /ui >}}: Remove the instance from the dashboard.
+    1. {{< ui >}}Edit Powerpack Layout{{< /ui >}}: Customize the layout of the widgets in the instance.
+    1. {{< ui >}}Edit Powerpack Details{{< /ui >}}: Customize the title, description, and associated tags.
 1. Choose new styling options for the header, update the group title, or configure the filters used by your Powerpack.
 1. Configure the tag values of your Powerpack instance. 
 
@@ -98,14 +98,14 @@ To customize Powerpack instances displayed on your dashboard:
 Only the author of a Powerpack can delete it. After you delete a Powerpack, existing instances of the Powerpack remain intact, but they display an alert indicating the Powerpack has been deleted. To remove this alert, detach the instance and convert it into a widget group.
 
 To delete a Powerpack:
-1. Click **Add Widgets** to open the widget tray.
-1. Select **Delete Powerpack**. 
+1. Click {{< ui >}}Add Widgets{{< /ui >}} to open the widget tray.
+1. Select {{< ui >}}Delete Powerpack{{< /ui >}}. 
 
 ## Powerpack permissions
 
 To make changes to the edit permissions for a Powerpack:
 1. Hover over the header and click the kebab menu.
-1. Select **Modify Permissions** from the Powerpack Actions menu.
+1. Select {{< ui >}}Modify Permissions{{< /ui >}} from the Powerpack Actions menu.
 1. Update which users have edit permissions for the Powerpack.
 
 ## API

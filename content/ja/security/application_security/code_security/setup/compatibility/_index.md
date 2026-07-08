@@ -18,7 +18,12 @@ type: multi-code-lang
 
 フレームワークの互換性と機能サポートの詳細については、アプリケーションの言語を選択してください。
 
-{{< partial name="security-platform/appsec-languages-code-security.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+{{< /card-grid >}}
 
 <br>
 

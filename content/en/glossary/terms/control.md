@@ -1,4 +1,5 @@
 ---
+id: control
 title: control
 core_product:
   - security

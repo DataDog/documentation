@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on EKS Fargate
 code_lang: eks_fargate
 type: multi-code-lang
-code_lang_weight: 5
+code_lang_weight: 6
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -92,6 +92,8 @@ spec:
               value: "<DATADOG_SITE>"
             - name: DD_OTELCOLLECTOR_ENABLED
               value: "true"
+            - name: DD_OTELCOLLECTOR_INSTALLATION_METHOD
+              value: "eks-fargate"
             - name: DD_EKS_FARGATE
               value: "true"
             - name: DD_LOGS_ENABLED
@@ -105,7 +107,7 @@ Replace the following placeholders:
 - `<APP_IMAGE>`: Your application container image.
 - `<VERSION>`: The version of your service.
 - `<ENV>`: Your deployment environment (for example, `production`).
-- `<DATADOG_SITE>`: Your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+- `<DATADOG_SITE>`: Your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
 
 ### Configure EKS resource detection
 

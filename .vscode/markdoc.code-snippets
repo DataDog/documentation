@@ -189,6 +189,13 @@
         "description": "Markdoc underline tag"
     },
 
+    "UI element": {
+        "scope": "markdoc",
+        "prefix": ";;ui",
+        "body": "{% ui %}${1:UI element name}{% /ui %}",
+        "description": "Markdoc ui tag for rendering references to UI elements"
+    },
+
     "Superscript": {
         "scope": "markdoc",
         "prefix": ";;sup",
@@ -217,5 +224,16 @@
             "{% /stepper %}"
         ],
         "description": "Markdoc stepper component with steps and optional finished section"
+    },
+
+    "Agent only": {
+        "scope": "markdoc",
+        "prefix": ";;agent-only",
+        "body": [
+            "{% agent-only %}",
+            "${1:Content visible only to AI agents.}",
+            "{% /agent-only %}"
+        ],
+        "description": "Markdoc agent-only block for content intended for AI agents"
     }
 }
