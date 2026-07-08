@@ -29,7 +29,7 @@ further_reading:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=6.1.0`. |
+| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=6.1.0`. |
 | Mocha | >= 8.0.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
@@ -43,7 +43,7 @@ further_reading:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=5.112.0`. |
+| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=5.112.0`. |
 | Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
@@ -769,8 +769,6 @@ The test session name should be unique within a repository to help you distingui
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
-[2]: https://jestjs.io/docs/configuration#testrunner-string
 [3]: /tracing/trace_collection/dd_libraries/nodejs
 [4]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [5]: https://istanbul.js.org/
