@@ -100,7 +100,7 @@ Click any topic name to open the detail view. The detail view shows a summary of
 From the interactions table inside a topic's detail view, you can act on the interactions in that cluster:
 
 - **Download as CSV:** Export the interactions as a CSV file.
-- **Add to Dataset:** Send the interactions to a [Dataset][2] to build evaluation test cases from real production traffic.
+- **Add to Dataset:** Send the interactions to a [Dataset][2] to build evaluation test cases from real production traffic. When Patterns has automatically identified suggested datapoints for a topic (based on coverage gap analysis), those interactions are surfaced in the table so you can add them to a Dataset with a single action.
 - **Add to Queue:** Send the interactions to an [Annotation Queue][3] for human review and labeling.
 
 ## Trigger a new run
@@ -120,6 +120,8 @@ Use traffic percentage to identify your most common use cases. The parent-child 
 ### Find evaluation coverage gaps
 
 Compare your topic distribution against what your golden datasets actually cover. Look at topics that represent high production volume but have no corresponding evaluation cases: this is where your test coverage has gaps, and where model regressions are least likely to be caught before they reach users.
+
+After running a Pattern, Datadog automatically suggests specific interactions to add to your dataset for topics that are uncovered or only partially covered. These suggested datapoints are selected from your production traffic to help you close coverage gaps efficiently. When suggested datapoints are available for a topic, they are highlighted in the interactions table within the topic detail view, so you can review and add them to a Dataset without manually scanning all interactions.
 
 ### Diagnose failure patterns
 
