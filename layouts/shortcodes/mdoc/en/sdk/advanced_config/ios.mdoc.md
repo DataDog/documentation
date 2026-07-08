@@ -775,7 +775,7 @@ RUM.enable(
 ```
 
 **Note**: `data` can be `nil` for reasons unrelated to response size, such as tasks without a completion handler (for example, async/await) or download tasks. In registered-delegate mode (when using `URLSessionInstrumentation.enableDurationBreakdown`), `data` is additionally `nil` in these cases:
-- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`)—the body is never buffered.
+- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`): the body is never buffered.
 - Responses of other types whose body exceeds 512 KB—the buffered data is discarded entirely, not truncated.
 
 #### Capture resource headers
