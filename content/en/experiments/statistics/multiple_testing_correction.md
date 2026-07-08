@@ -48,7 +48,7 @@ Only add treatment variants and decision metrics that you intend to evaluate. Ad
 
 ## How Datadog adjusts confidence intervals
 
-Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's false positive budget across comparisons. Unlike standard Bonferroni correction, it reserves a larger share of that budget for the primary metric so the experiment retains more power for the main decision metric. Compared with standard Bonferroni correction, this prevents each additional secondary metric from further shrinking the alpha budget for the primary metric.
+Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's false positive budget across comparisons. Unlike standard Bonferroni correction, it reserves a fixed share of that budget for the primary metric when there are multiple decision metrics. This helps the experiment retain more power for the main decision metric, because each additional secondary metric does not further shrink the alpha budget for the primary metric.
 
 Start with the experiment's configured confidence level:
 
@@ -58,7 +58,7 @@ alpha = 1 - confidence level
 
 For a 95% confidence level, `alpha` is `0.05`.
 
-Datadog then allocates that `alpha` across the metric-and-variant comparisons. By default, Datadog reserves half of the `alpha` budget for the primary metric and splits the other half across secondary metrics.
+Datadog then allocates that `alpha` across the metric-and-variant comparisons. When there are multiple decision metrics, Datadog reserves half of the `alpha` budget for the primary metric by default and splits the other half across secondary metrics.
 
 If an experiment has `k` treatment variants, `m` decision metrics, and primary metric weight `gamma`, Datadog calculates each comparison's alpha as follows:
 
