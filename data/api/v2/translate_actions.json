@@ -5277,6 +5277,10 @@
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
   },
+  "GetEntraIdAzureAppRegistrations": {
+    "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
+    "summary": "Get Entra ID Azure App Registration prerequisites"
+  },
   "ValidateSecurityMonitoringIntegrationCredentials": {
     "description": "Validate a set of credentials against the external entity source before creating a sync configuration.\nReturns a 200 status code if the credentials are valid.",
     "summary": "Validate entity context sync credentials",
@@ -5300,6 +5304,16 @@
   "ValidateSecurityMonitoringIntegrationConfig": {
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
+  },
+  "ActivateIntegration": {
+    "description": "Activate an entity context sync integration for a source type that does not require manually\nsupplied credentials (for example, Entra ID). If an integration of this type already exists,\nit is returned (re-enabling it first if it was disabled) instead of creating a duplicate.",
+    "summary": "Activate an entity context sync integration",
+    "request_description": "Optional configuration overrides for the integration to activate.",
+    "request_schema_description": "Request body to activate an entity context sync integration for a source type that does not require secrets."
+  },
+  "DeactivateIntegration": {
+    "description": "Deactivate all active entity context sync integrations of the given source type (for example, Entra ID).",
+    "summary": "Deactivate an entity context sync integration"
   },
   "SendSecurityMonitoringNotificationPreview": {
     "description": "Send a notification preview to test that a notification rule's targets are properly configured.",
