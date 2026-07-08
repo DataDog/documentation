@@ -172,7 +172,7 @@ If you need configuration options not exposed through the `DatadogAgent` spec (f
 
 <div class="alert alert-warning">
 <strong>Upgrading the Datadog Operator to v1.28.0+ from v1.26.0 or v1.27.0</strong>
-<p>If previously running <code>v1.26.0</code> or <code>v1.27.0</code>, upgrading to Datadog Operator <code>v1.28.0</code> or later can leave the existing <code>k8s.csi.datadoghq.com</code> CSIDriver object in a state that the Operator cannot reconcile. Remediate by deleting the object once:</p>
+<p>If you previously ran <code>v1.26.0</code> or <code>v1.27.0</code>, upgrading to Datadog Operator <code>v1.28.0</code> or later can leave the existing <code>k8s.csi.datadoghq.com</code> CSIDriver object in a state that the Operator cannot reconcile. Remediate by deleting the object once:</p>
 <pre><code>kubectl delete csidriver k8s.csi.datadoghq.com</code></pre>
 <p>The Operator recreates it automatically. Already-mounted volumes and running driver pods are unaffected.</p>
 </div>
