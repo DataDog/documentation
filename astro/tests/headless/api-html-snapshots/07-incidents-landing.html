@@ -102,6 +102,15 @@
         await-children
         ><div class="region-selector _region-selector_4de5ea">
           <label for="region-select" class="region-selector__label _region-selector__label_4de5ea">Datadog site</label
+          ><a
+            href="http://localhost:1313/getting_started/site/"
+            aria-label="Site help"
+            class="region-selector__help _region-selector__help_4de5ea"
+            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="448" height="512">
+              <path
+                d="M224 32C100.258 32 0 132.258 0 256s100.258 224 224 224 224-100.258 224-224S347.742 32 224 32zm33.347 363.99a8.956 8.956 0 0 1-9.4 9.4h-55.893a8.958 8.958 0 0 1-9.4-9.4V340.1a8.958 8.958 0 0 1 9.4-9.4h55.891a8.956 8.956 0 0 1 9.4 9.4zm71.04-172.376a59.981 59.981 0 0 1-8.358 17.76 81.518 81.518 0 0 1-13.058 14.1 99.527 99.527 0 0 1-13.059 9.924q-5.224 3.135-14.626 8.358a52.4 52.4 0 0 0-15.67 14.626q-6.268 8.88-6.269 14.1a8.955 8.955 0 0 1-9.4 9.4h-55.893a8.956 8.956 0 0 1-9.4-9.4v-10.44q-.522-19.326 15.148-36.564t33.953-25.073q14.1-6.268 19.849-13.059t5.746-17.76q0-9.4-10.969-17.237a42.052 42.052 0 0 0-25.073-7.836q-15.149 0-25.073 7.313-9.4 6.791-25.072 26.64a8.474 8.474 0 0 1-7.313 3.657 7.088 7.088 0 0 1-5.224-2.09L119.969 181.3q-6.791-5.746-2.089-12.536 37.086-62.16 108.126-62.16a109.7 109.7 0 0 1 49.624 12.014 111.185 111.185 0 0 1 40.22 33.953q16.194 21.939 16.193 47.534a95.058 95.058 0 0 1-3.656 23.509z"
+              />
+            </svg> </a
           ><span class="select _select_d4facd"
             ><select id="region-select" class="select__control _select__control_d4facd">
               <option selected value="us">US1</option>
@@ -110,6 +119,7 @@
               <option value="eu">EU</option>
               <option value="ap1">AP1</option>
               <option value="ap2">AP2</option>
+              <option value="uk1">UK1</option>
               <option value="gov">US1-FED</option>
               <option value="gov2">US2-FED</option>
             </select></span
@@ -189,6 +199,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents </code
         ><code
@@ -233,6 +248,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
         ><code
@@ -274,6 +294,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
         ><code
@@ -317,6 +342,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id} </code
         ><code
@@ -358,6 +388,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/postmortems </code
         ><code
@@ -399,6 +434,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/search </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/search </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/search </code
         ><code
@@ -435,6 +475,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts </code
         ><code
@@ -471,6 +516,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts </code
         ><code
@@ -509,6 +559,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/impacts/{impact_id} </code
         ><code
@@ -553,6 +608,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations </code
         ><code
@@ -597,6 +657,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code
@@ -641,6 +706,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code
@@ -687,6 +757,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations/{integration_metadata_id} </code
         ><code
@@ -731,6 +806,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos </code
         ><code
@@ -772,6 +852,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos </code
         ><code
@@ -813,6 +898,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code
@@ -854,6 +944,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code
@@ -897,6 +992,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/todos/{todo_id} </code
         ><code
@@ -938,6 +1038,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/types </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/types </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/types </code
         ><code
@@ -979,6 +1084,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/types </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/types </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/types </code
         ><code
@@ -1020,6 +1130,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code
@@ -1061,6 +1176,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code
@@ -1104,6 +1224,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/types/{incident_type_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/types/{incident_type_id} </code
         ><code
@@ -1148,6 +1273,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-templates </code
         ><code
@@ -1192,6 +1322,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-templates </code
         ><code
@@ -1236,6 +1371,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code
@@ -1280,6 +1420,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code
@@ -1326,6 +1471,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-templates/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-templates/{id} </code
         ><code
@@ -1370,6 +1520,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-rules </code
         ><code
@@ -1414,6 +1569,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-rules </code
         ><code
@@ -1458,6 +1618,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code
@@ -1502,6 +1667,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code
@@ -1548,6 +1718,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/notification-rules/{id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/notification-rules/{id} </code
         ><code
@@ -1589,6 +1764,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments </code
         ><code
@@ -1630,6 +1810,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments </code
         ><code
@@ -1673,6 +1858,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
         ><code
@@ -1714,6 +1904,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/attachments/{attachment_id} </code
         ><code
@@ -1755,6 +1950,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/settings </code
         ><code
@@ -1799,6 +1999,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/settings </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/settings </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/settings </code
         ><code
@@ -1840,6 +2045,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
         ><code
@@ -1884,6 +2094,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
         ><code
@@ -1928,6 +2143,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
         ><code
@@ -1974,6 +2194,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/global/incident-handles </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/global/incident-handles </code
         ><code
@@ -2015,6 +2240,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates </code
         ><code
@@ -2056,6 +2286,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates </code
         ><code
@@ -2097,6 +2332,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code
@@ -2138,6 +2378,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code
@@ -2181,6 +2426,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/postmortem-templates/{template_id} </code
         ><code
@@ -2222,6 +2472,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/import </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/import </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/import </code
         ><code
@@ -2263,6 +2518,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents </code
         ><code
@@ -2307,6 +2567,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/{incident_id}/relationships/integrations </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/{incident_id}/relationships/integrations </code
         ><code
@@ -2351,6 +2616,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields </code
         ><code
@@ -2395,6 +2665,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields </code
         ><code
@@ -2439,6 +2714,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code
@@ -2483,6 +2763,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code
@@ -2529,6 +2814,11 @@
           https://api.ap1.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="ap2">
           https://api.ap2.datadoghq.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
+        ><code
+          class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2 api-endpoint-summary__path--unsupported _api-endpoint-summary__path--unsupported_c91fc2"
+          data-region="uk1"
+        >
+          Not supported in the UK1 region </code
         ><code class="api-endpoint-summary__path _api-endpoint-summary__path_c91fc2" data-region="gov">
           https://api.ddog-gov.com/api/v2/incidents/config/user-defined-fields/{field_id} </code
         ><code

@@ -26,9 +26,9 @@ describe('getDefaultRegions', () => {
     expect(eu.site).toBe('datadoghq.eu');
   });
 
-  it('orders regions by Hugo weight (US1, US3, US5, EU, AP1, AP2, US1-FED, US2-FED)', () => {
+  it('orders regions by Hugo weight (US1, US3, US5, EU, AP1, AP2, UK1, US1-FED, US2-FED)', () => {
     const regions = getDefaultRegions();
-    expect(regions.map((r) => r.key)).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov', 'gov2']);
+    expect(regions.map((r) => r.key)).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'uk1', 'gov', 'gov2']);
   });
 });
 

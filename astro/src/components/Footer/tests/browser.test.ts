@@ -103,6 +103,26 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await expect(footer.locator('i[class*="icon-"]')).toHaveCount(0);
   });
 
+  test('Instagram icon inherits the footer text color (not the default black fill)', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+
+    // Instagram's SVG has no explicit fill, so it must inherit currentColor
+    // (white) from the footer — otherwise it renders black and is invisible.
+    const instagramSvg = page.locator('a[aria-label="Instagram link"] .social-icon svg');
+    const fill = await instagramSvg.evaluate((el) => getComputedStyle(el).fill);
+    expect(fill).toBe('rgb(255, 255, 255)');
+  });
+
+  test('Youtube icon is sized up to match Hugo (compensating for its padded viewBox)', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+
+    const youtubeIcon = page.locator('a[aria-label="Youtube link"] .social-icon--youtube-tetra');
+    const fontSize = await youtubeIcon.evaluate((el) => getComputedStyle(el).fontSize);
+    expect(fontSize).toBe('30px');
+  });
+
   test('copyright contains the current year', async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);

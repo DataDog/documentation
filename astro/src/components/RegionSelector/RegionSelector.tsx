@@ -18,6 +18,7 @@ const cl = classListFactory(styles);
 
 export interface RegionSelectorLabels {
   "Datadog site": string;
+  "Site help": string;
 }
 
 export interface RegionSelectorHrefs {
@@ -70,7 +71,7 @@ export function RegionSelector({
       <a
         class={cl("region-selector__help")}
         href={hrefs["Site help"]}
-        aria-label="Site help"
+        aria-label={labels["Site help"]}
         dangerouslySetInnerHTML={{ __html: helpIcon }}
       />
       <Select id="region-select" value={selected} onChange={handleChange}>

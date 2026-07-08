@@ -10,7 +10,7 @@ import { HUGO_ORIGIN } from '@config/origins';
 
 const RegionSelectorComponent = RegionSelector as ComponentType<any>;
 const regions = buildClientRegions();
-const labels = { "Datadog site": "Datadog site" };
+const labels = { "Datadog site": "Datadog site", "Site help": "Site help" };
 const hrefs = { "Site help": `${HUGO_ORIGIN}/getting_started/site/` };
 const regionProps = { regions, labels, hrefs };
 
@@ -138,6 +138,7 @@ describe('RegionSelector — help link', () => {
     const helpLink = document.querySelector<HTMLAnchorElement>('.region-selector__help');
     expect(helpLink).toBeTruthy();
     expect(helpLink!.getAttribute('href')).toBe(`${HUGO_ORIGIN}/getting_started/site/`);
+    expect(helpLink!.getAttribute('aria-label')).toBe('Site help');
   });
 
   it('help link contains an svg icon', () => {

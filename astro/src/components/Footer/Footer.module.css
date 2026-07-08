@@ -663,13 +663,12 @@
 
 .footer__social-link :global(.social-icon) {
   font-size: 18px;
-  display: flex;
-  align-items: center;
 }
 
-.footer__social-link :global(.social-icon svg) {
-  width: 1em;
-  height: 1em;
+/* Match Hugo: the youtube-tetra glyph sits in a padded 42x42 viewBox, so Hugo
+   renders it larger (30px vs 18px) to optically match the other social icons. */
+.footer__social-link :global(.social-icon--youtube-tetra) {
+  font-size: 30px;
 }
 
 /* --- Language toggle ---------------------------------------------------- */

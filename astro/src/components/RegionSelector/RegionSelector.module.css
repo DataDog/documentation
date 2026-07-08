@@ -19,6 +19,7 @@
   flex-shrink: 0;
 }
 
+/* Hold the subtle color on hover so the icon doesn't pick up the global link hover color. */
 .region-selector__help:hover {
   color: var(--color-text-subtle);
 }

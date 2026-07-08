@@ -22,7 +22,7 @@ const style = size ? `width:${size};height:${size}` : undefined;
 ---
 
 {raw ? (
-  <span class={`social-icon ${className ?? ''}`} style={style} set:html={raw} />
+  <span class={`social-icon social-icon--${name} ${className ?? ''}`} style={style} set:html={raw} />
 ) : (
   <span class={`social-icon social-icon--missing ${className ?? ''}`} style={style} aria-hidden="true" />
 )}
@@ -37,6 +37,9 @@ const style = size ? `width:${size};height:${size}` : undefined;
   .social-icon svg {
     width: 1em;
     height: 1em;
+    /* Inherit the link color so icons without an explicit fill (e.g. Instagram)
+       stay visible instead of defaulting to black. */
+    fill: currentColor;
   }
   .social-icon--missing::before {
     content: '';
