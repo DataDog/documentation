@@ -83,7 +83,21 @@ To confirm injection at the container level, check that:
 3. The directory `/opt/datadog-packages/datadog-apm-inject` exists, with `stable` and `$version` subdirectories.
 4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java).
 
-To enable debug logging during manual verification, set both `DD_TRACE_DEBUG` (for the SDK) and `DD_APM_INSTRUMENTATION_DEBUG` (for the injector) in your pod spec, then delete the pod so the new values take effect during injection. For how to enable injector debug output and read it, see [Injector debug logs](#injector-debug-logs).
+To enable debug logs during manual verification:
+
+1. Set the following in your pod spec:
+ 
+   {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+   env:
+     - name: DD_TRACE_DEBUG    # debug logging for the SDK
+       value: "true"
+     - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
+       value: "true"
+   {{< /code-block >}}
+   
+2. Delete the pod to enable debug logs during injection.
+
+For how to enable injector debug output and read it, see [Injector debug logs](#injector-debug-logs).
 
 ## Injector debug logs
 
