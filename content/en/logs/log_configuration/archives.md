@@ -240,21 +240,25 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
 
-**Note**: To reduce the volume of data scanned during [Archive Search][16], consider configuring [Partition Attributes](#archive-search-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute-preview) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
+**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
-#### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
+#### Archive Partition Attribute {#archive-partition-attribute}
 
-To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
+Partition attributes organize archived logs into groups based on common field values. Use them for broad filters to skip irrelevant archive segments and reduce scan volume during [Archive Search][16].
 
-* **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
-* **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
+You can configure up to **2 partition attributes** per archive.
 
-#### Archive Lookup Attribute (Preview)
+* **Use for**: Low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
+* **How it works**: Logs sharing the same partition attribute values are co-located in storage. Datadog skips entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
-To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
+#### Archive Lookup Attribute {#archive-lookup-attribute}
 
-* **Lookup Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
-* **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
+Lookup attributes create a fast path to logs with specific values. Use them for high-cardinality identifiers to speed up targeted investigations with [Archive Search][16].
+
+You can configure up to **2 lookup attributes** per archive.
+
+* **Use for**: High-cardinality attributes such as `trace_id`, `container_id`, `user_id`, or `request_id`.
+* **How it works**: Datadog builds an index for these attributes at write time, allowing Archive Search to pinpoint specific logs without scanning the full archive.
 
 **Partition vs. Lookup attributes**
 
@@ -262,8 +266,9 @@ To accelerate searches and investigations in your archives (with [Archive Search
 |---|---|---|
 | **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
 | **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
-| **How it helps** | Prunes entire partitions from scan | Pinpoints individual log entries within your archive |
+| **How it helps** | Skips entire partitions that don't match your query | Pinpoints specific log entries without scanning the full archive |
 | **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
+| **Limit** | Up to 2 per archive | Up to 2 per archive |
 
 For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
