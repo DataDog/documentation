@@ -28,7 +28,7 @@ To restore the default landing page, follow the steps below:
 
 1. Navigate to [Organization settings][1].
 2. From the tabs on the left, select [**Preferences**][2].
-3. In the Datadog Homepage section, click the {{< ui >}}Datadog Default{{< /ui >}} option.
+3. In the Datadog Homepage section, click {{< ui >}}Datadog Default{{< /ui >}}.
 4. Click the {{< ui >}}Save{{< /ui >}} button.
 
 [1]: https://app.datadoghq.com/organization-settings/
