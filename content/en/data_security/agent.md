@@ -202,7 +202,7 @@ agent diagnose show-metadata agent-telemetry
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
 | autodiscovery.discovery_queue_depth         | Number of services actively in the Agent's integration discovery workqueue                                             |
-| autodiscovery.discovery_results             | Result of Agent's integration discovery mechanism for candidate services                                               |
+| autodiscovery.discovery_results             | Result of the Agent's integration discovery mechanism for candidate services                                           |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | **APM**                                     |                                                                                                                        |
