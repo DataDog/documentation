@@ -115,17 +115,19 @@ With `dd-trace-java`, no extra configuration is required for backfilling. The li
 
 ### .NET
 
-With the .NET tracer, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-dotnet`, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
 
 ### Go
 
-With the Go library, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-go`, no extra configuration is required for backfilling. The library automatically detects when tests run with a code coverage engine and backfills code coverage data from tests skipped by Test Impact Analysis.
 
 ### JavaScript
 
-JavaScript requires code coverage report upload for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
+With `dd-trace-js`, code coverage report upload is required for backfilling. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts total reported coverage to include skipped tests or suites.
 
-This is different from Java, .NET, and Go, where the Datadog library automatically detects an existing code coverage engine.
+This is different from `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, where the Datadog library automatically detects an existing code coverage engine.
+
+### Unsupported languages
 
 Code coverage backfilling is not supported for Ruby, Python, or Swift.
 
