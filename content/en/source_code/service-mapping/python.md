@@ -8,7 +8,7 @@ To embed Git information in your Python build artifacts, follow the instructions
 
 ## Prerequisites
 
-- Datadog Agent v7.35.0 or later is required.
+- [Datadog Agent][1] v7.35.0 or later is required.
 - The Python client library version 1.12.0 or later is required.
 - If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
@@ -56,5 +56,4 @@ If you are using a host, you have two options.
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
-[101]: https://github.com/DataDog/dd-trace-go
-[102]: https://github.com/DataDog/hatch-datadog-build-metadata#readme
+[1]: /agent/

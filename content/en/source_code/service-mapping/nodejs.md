@@ -10,7 +10,7 @@ To embed Git information in your Node.js build artifacts, follow the instruction
 
 ## Prerequisites
 
-- Datadog Agent v7.35.0 or later is required.
+- [Datadog Agent][1] v7.35.0 or later is required.
 - The Node.js client library version 3.21.0 or later is required.
 - If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
@@ -32,7 +32,7 @@ If you are using Docker containers, you have three options: using a bundler plug
 
 ## Serverless
 
-If you are using Serverless, you have several options depending on your serverless application's setup.
+If you are using Serverless, you have three options depending on your serverless application's setup.
 
 {{% collapse-content title="Option 1: Bundler plugin" level="h3" %}}
 {{% sci-dd-tags-bundled-node-js %}}
@@ -57,3 +57,5 @@ For host-based environments, you have two options based on your build and deploy
 {{% collapse-content title="Option 2: `DD_GIT_*` environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
+
+[1]: /agent/

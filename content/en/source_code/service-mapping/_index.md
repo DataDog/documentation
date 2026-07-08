@@ -16,13 +16,13 @@ Your telemetry must be tagged with Git information that ties the running applica
 
 For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog SDKs][1] automatically. For other languages and configurations, see [Other Languages](/source_code/service-mapping/other/).
 
-<div class="alert alert-info">If you have <a href="/tracing/">APM</a> set up already, navigate to <a href="https://app.datadoghq.com/source-code/setup/apm">{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Link Source Code{{< /ui >}}</a> and configure the source code integration for your backend services.</div>
+<div class="alert alert-info">If you already have <a href="/tracing/">APM</a> set up, navigate to <a href="https://app.datadoghq.com/source-code/setup/apm">{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Link Source Code{{< /ui >}}</a> to configure the source code integration for your backend services.</div>
 
 ## Embed Git information in your build artifacts
 
-You can embed the repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add the right tags to your APM service telemetry.
+You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add the right tags to your APM service telemetry.
 
-Select one of the following languages that supports embedding git information:
+Select one of the following languages that support embedding git information:
 
 {{< card-grid >}}
   {{< image-card href="/source_code/service-mapping/go/" src="integrations_logos/go-metro.png" alt="Go" title="Go" >}}

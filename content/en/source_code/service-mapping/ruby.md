@@ -8,7 +8,7 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 
 ## Prerequisites
 
-- Datadog Agent v7.35.0 or later is required.
+- [Datadog Agent][1] v7.35.0 or later is required.
 - The Ruby client library version 1.6.0 or later is required.
 - If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
@@ -43,3 +43,5 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 {{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
 {{% sci-dd-tags-env-variable %}}
 {{% /collapse-content %}}
+
+[1]: /agent/
