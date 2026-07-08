@@ -91,9 +91,9 @@ To enable searching and analyzing historic Logic Apps logs, create a dedicated l
 
 {{< img src="serverless/logic_apps/log_index_configuration.png" alt="Configure log index with workflowId filter" style="width:100%;" >}}
 
-See [Log Indexes][6] for more information.
+{{% serverless/log_to_trace_indexing_note %}}
 
-**Note**: Indexing logs may incur additional costs. Consider your retention requirements and budget when configuring indexes.
+See [Log Indexes][6] for more information.
 
 ## See your Logic App traces in Datadog
 

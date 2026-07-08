@@ -14,7 +14,7 @@ title: Troubleshooting Serverless Monitoring for AWS Step Functions
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
 #### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
-In Datadog, go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Log Stream{{< /ui >}}][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly. 
+In Datadog, go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Log Stream{{< /ui >}}][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly.
 
 If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_ENABLED:true`.
 
@@ -40,7 +40,7 @@ When searching traces, select the {{< ui >}}Live Search{{< /ui >}} option in the
 
 ## Some step spans are missing in the traces
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
-- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while [`Distributed MapState`][8] has limited support. 
+- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while [`Distributed MapState`][8] has limited support.
 
 ## Search historic logs
 To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [{{< ui >}}Indexes{{< /ui >}}][3] tab. Click the {{< ui >}}New Index{{< /ui >}} button in the upper right.
@@ -51,12 +51,10 @@ Choose a name, set the index filter to `Source:stepfunction`, leave everything e
 
 If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
 
-**Note**: If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterward. See [Indexes][5] for more information.
+**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterward. See [Indexes][5] for more information.
 
 ## Missing logs within an execution
-You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`.
-
-{{% serverless/log_to_trace_indexing_note %}}
+You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`. Using exclusion filters does not impact tracing.
 
 In the following example, the filter excludes logs for 90% of the `@execution_arn`.
 
@@ -64,7 +62,7 @@ In the following example, the filter excludes logs for 90% of the `@execution_ar
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
-- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
+- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`.
 - To enable Step Functions trace generation on the Datadog backend, the Datadog-Forwarder layer version must be greater than 31. This version is able to fetch state machine tags, including the required `DD_TRACE_ENABLED` tag.
 - You can also set the `DD_STEP_FUNCTIONS_TRACE_ENABLED` tag at the Forwarder-level to enable tracing for all Step Functions using that Forwarder on v3.121.0+.
 - The IAM role for the forwarder should have `tags:getResources` permission.
