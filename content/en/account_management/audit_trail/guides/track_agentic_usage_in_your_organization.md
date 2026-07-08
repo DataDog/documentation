@@ -52,7 +52,7 @@ To retrieve a user's complete activity, including delegated agent actions:
 
 ## Distinguish agent events from human events
 
-Agent-driven events display a visual badge in the event list, so you can distinguish them from human-driven events without opening each one.
+Agent-driven events are marked with the agent's name and avatar (for example, Bits Assistant) paired with the delegating user, labeled Co-authored by user + agent. This lets you distinguish agent activity from human activity without opening each event.
 
 ## Further reading
 
