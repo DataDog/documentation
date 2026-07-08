@@ -171,6 +171,13 @@ If you need configuration options not exposed through the `DatadogAgent` spec (f
 {{% /collapse-content %}}
 
 <div class="alert alert-warning">
+<strong>Upgrading the Datadog Operator to v1.28.0 or later</strong>
+<p>In some cases, upgrading to Datadog Operator v1.28.0 or later can leave the existing <code>k8s.csi.datadoghq.com</code> CSIDriver object in a state that the Operator cannot reconcile. If the CSI Driver does not become ready after upgrading, recreate the object once:</p>
+<pre><code>kubectl delete csidriver k8s.csi.datadoghq.com</code></pre>
+<p>The Operator recreates it automatically. Already-mounted volumes and running driver Pods are unaffected.</p>
+</div>
+
+<div class="alert alert-warning">
 <strong>Migrating from Helm-based CSI Driver installation</strong>
 <p>If you previously installed the CSI Driver with the standalone Helm chart, Datadog recommends migrating to Operator-managed installation. Choose one of the following approaches:</p>
 <ul>
