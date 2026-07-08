@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
   tag: "Blog"
   text: "Ship internal applications from your AI Agent with Datadog Apps"
+- link: "https://www.youtube.com/watch?v=HEDjpMyqkSE"
+  tag: "Video"
+  text: "Datadog Apps Demo"
 - link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder"
@@ -14,9 +17,6 @@ further_reading:
 - link: "/actions/app_builder/access_and_auth/"
   tag: "Documentation"
   text: "Access and Authentication"
-- link: "https://www.youtube.com/watch?v=HEDjpMyqkSE"
-  tag: "Video"
-  text: "Datadog Apps Demo"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
