@@ -29,7 +29,7 @@ further_reading:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. |
+| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](https://jestjs.io/docs/api#testconcurrentname-fn-timeout) is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. |
 | Mocha | >= 8.0.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
@@ -43,7 +43,7 @@ further_reading:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=5.112.0`. |
+| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](https://jestjs.io/docs/api#testconcurrentname-fn-timeout) is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. |
 | Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
@@ -680,9 +680,6 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
-### Jest's `test.concurrent`
-Jest's [test.concurrent][14] is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. Earlier `dd-trace` versions do not support it.
-
 ### Jest's `--forceExit`
 Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
@@ -779,7 +776,6 @@ The test session name should be unique within a repository to help you distingui
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[14]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
 [17]: https://vitest.dev/guide/browser/
