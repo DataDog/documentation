@@ -38,12 +38,12 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
 1. Create your [Windows private location][2] on the Windows server joined to the Active Directory domain.
 2. Set up the [Synthetic Monitoring private location worker][3] to run as a Windows service.
 3. Configure the private location service to use your Active Directory domain account credentials:
-   - Open `services.msc`, navigate to **Datadog Synthetics Worker** > **Properties** > **log on** > **this account**, and enter your domain account credentials.
+   - Open `services.msc`, navigate to {{< ui >}}Datadog Synthetics Worker{{< /ui >}} > {{< ui >}}Properties{{< /ui >}} > {{< ui >}}log on{{< /ui >}} > {{< ui >}}this account{{< /ui >}}, and enter your domain account credentials.
 4. Configure your tests to run from the Windows private location (managed locations do not support Kerberos authentication).
 
 <p style="text-align: center;"><em>No further configuration is necessary for Browser Tests.</em></p>
 
-5. Optionally, for API tests, you must also set the Domain field to your Active Directory domain name under the **Kerberos** tab. Navigate to **Create/Edit API Test** > **Define Request** > **Advanced Options** > **Authentication**.
+5. Optionally, for API tests, you must also set the {{< ui >}}Domain{{< /ui >}} field to your Active Directory domain name under the {{< ui >}}Kerberos{{< /ui >}} tab. Navigate to {{< ui >}}Create/Edit API Test{{< /ui >}} > {{< ui >}}Define Request{{< /ui >}} > {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Authentication{{< /ui >}}.
 
    {{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
 

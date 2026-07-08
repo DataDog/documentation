@@ -397,6 +397,42 @@ configuration.site = [DDSite ap2];
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="uk1" %}
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .uk1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 #### Sample session rates

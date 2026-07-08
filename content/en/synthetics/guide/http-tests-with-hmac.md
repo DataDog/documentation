@@ -24,26 +24,26 @@ This guide walks you through how to create an HTTP test with an HMAC signature, 
 
 ### Create the building blocks of HMAC authentication using local variables
 
-Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add the following variables:
+Create a [Synthetic HTTP test][3] and click {{< ui >}}Create a Local Variable{{< /ui >}} to add the following variables:
 
 `MY_SECRET_KEY`
 : The UTF-8 encoded key that is used to sign the message (which can also be imported from a [global variable][4]).
 
 `BODY`
-: The request body (which is set in the **Request Body**) and is used to compute the HMAC authentication.
+: The request body (which is set in the {{< ui >}}Request Body{{< /ui >}}) and is used to compute the HMAC authentication.
 
 `DATETIME`
 : A parameter to compute the HMAC signature. You can create this as a [local variable][1] or create and export this inside the [variable from script script](#compute-the-hmac-signature-with-javascript) with `dd.variable.set('DATETIME', new Date().toISOString())`.
 
 ### Define a test URL and request body
 
-Define the URL and the request type for the HTTP test. Then, click **Advanced Options** > **Request Body** to add the `{{ BODY }}` variable as the request body.
+Define the URL and the request type for the HTTP test. Then, click {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Request Body{{< /ui >}} to add the `{{ BODY }}` variable as the request body.
 
 {{< img src="synthetics/guide/http-tests-with-hmac/request_body.png" alt="A local variable set as the request body for an HTTP test" style="width:80%;" >}}
 
 ### Compute the HMAC Signature with JavaScript
 
-Click **Variable From Script** to generate the HMAC signature for your HTTP request.
+Click {{< ui >}}Variable From Script{{< /ui >}} to generate the HMAC signature for your HTTP request.
 
 {{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="A local variable generated with JavaScript" style="width:80%;" >}}
 
@@ -93,9 +93,9 @@ dd.variable.set("SIGNATURE_BASE64", std.encoding.base64.encode(rawSignature));
 
 Use the exported `SIGNATURE` variable to build the HTTP request header.
 
-Under the **Request Options** tab, add a header with `Name` set to `Authentication` and `Value` set to `{{ SIGNATURE }}`, and another one with `Name` set to `Date` and `Value` set to `{{ DATETIME }}`. You can define a different header such as `Authorization`.
+Under the {{< ui >}}Request Options{{< /ui >}} tab, add a header with {{< ui >}}Name{{< /ui >}} set to `Authentication` and {{< ui >}}Value{{< /ui >}} set to `{{ SIGNATURE }}`, and another one with {{< ui >}}Name{{< /ui >}} set to `Date` and {{< ui >}}Value{{< /ui >}} set to `{{ DATETIME }}`. You can define a different header such as `Authorization`.
 
-Configure the rest of your HTTP test, and click **Create** to save.
+Configure the rest of your HTTP test, and click {{< ui >}}Create{{< /ui >}} to save.
 
 ## Further Reading
 
