@@ -29,12 +29,12 @@ further_reading:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=6.1.0`. |
+| Jest | >= 28.0.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) is supported as [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](#jests-testconcurrent) is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. |
 | Mocha | >= 8.0.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0` and `dd-trace>=6.1.0`. |
 
 `dd-trace` v6 requires Node.js 22 or later.
 
