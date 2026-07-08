@@ -113,13 +113,7 @@ Unlike SCA, which scans dependencies already in your codebase, the Datadog Suppl
 
 Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by GuardDog), known vulnerability advisories, and configurable recency thresholds. When it flags a package, it blocks installation immediately with a clear, actionable message (on both developer laptops and CI runners).
 
-In addition to protecting individual developer machines or CI pipelines, SCFW provides:
-
-- Event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed
-- *(coming soon)* Centralized policy management to define org-wide block lists, allow lists, and behavioral rules directly from the Datadog AppSec UI
-- *(coming soon)* Coverage reporting to track which developers and repositories are protected, identify gaps, and measure your organization's supply chain security posture over time
-
-[Request access to the Preview][11].
+In addition to protecting individual developer machines or CI pipelines, SCFW provides event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed.
 
 ## Code Security MCP Server (Preview)
 The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
@@ -138,7 +132,6 @@ The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) serve
 [8]: /security/code_security/secret_scanning/
 [9]: /security/code_security/secret_scanning/#set-up-secret-scanning
 [10]: /security/code_security/iac_security
-[11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc
 [12]: https://www.datadoghq.com/product-preview/malicious-pr-protection/
 [13]: /security/ticketing_integrations
 [14]: /security/notifications/
