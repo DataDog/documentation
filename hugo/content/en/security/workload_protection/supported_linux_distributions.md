@@ -26,4 +26,4 @@ Workload Protection supports the following Linux distributions:
 - Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 
 [1]: /security/workload_protection/troubleshooting/threats
-[2]: /security/workload_protection/guide/ebpf-free-agent
+[2]: /security/workload_protection/getting_started/linux_ebpfless
