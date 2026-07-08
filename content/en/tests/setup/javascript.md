@@ -451,7 +451,7 @@ test('sum function can sum', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags](/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags) section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 You can also add custom measures to your tests by using the current active span:
 
@@ -467,8 +467,10 @@ test('sum function can sum', () => {
 })
 ```
 
-For more information about custom measures, see the [Add Custom Measures Guide](/tests/guides/add_custom_measures/?tab=javascripttypescript).
+For more information about custom measures, see the [Add Custom Measures Guide][2].
 
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -559,7 +561,7 @@ The following is a list of the most important configuration settings that can be
 `test_session.name`
 : Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: For `dd-trace` v6, the framework invocation (`jest`, `mocha`, `playwright test`, or `cucumber-js`). For `dd-trace` v5, a combination of CI job name and test command.<br/>
+**Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `service`
