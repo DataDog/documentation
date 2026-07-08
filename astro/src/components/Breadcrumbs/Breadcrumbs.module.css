@@ -44,6 +44,4 @@
 .breadcrumbs__trailing {
   display: inline-flex;
   align-items: center;
-  position: relative;
-  top: 3px;
 }
