@@ -235,6 +235,11 @@ agent diagnose show-metadata agent-telemetry
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 | appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| **Agent Performance**                       |                                                                                                                        |
+| kubernetes_agent.containers_restarts        | Sum of container restart counts for Datadog Cluster Agent and Cluster Checks Runner pods                              |
+| kubernetes_agent.containers_terminated      | Sum of kubelet container terminated-state metrics for Datadog Cluster Agent and Cluster Checks Runner pods, preserving the `reason` tag |
+| kubernetes_agent.memory_usage               | Sum of container runtime memory usage for Datadog Cluster Agent and Cluster Checks Runner pods                        |
+| kubernetes_agent.memory_limit               | Sum of container runtime memory limits for Datadog Cluster Agent and Cluster Checks Runner pods                       |
 | **eBPF**                                    |                                                                                                                        |
 | ebpf.core_load_success                      | Number of successful loads of an eBPF CO-RE program                                                                    |
 | ebpf.core_load_error                        | Number of errors loading an eBPF CO-RE program                                                                         |
