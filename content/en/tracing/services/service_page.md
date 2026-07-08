@@ -280,10 +280,14 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 ### Frontend activity
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Join the Operations/Journey monitoring Preview to start using Frontend activity section!
+Join the Journey monitoring Preview to start using Frontend activity section!
 {{< /callout >}}
 
-The Frontend activity tab connects your backend service to the Real User Monitoring (RUM) journeys, operations, and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
+{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+Join the Operations monitoring Preview to start using Frontend activity section!
+{{< /callout >}}
+
+The Frontend activity tab connects your backend service to the [Real User Monitoring (RUM)][24] journeys, operations, and views that depend on it. Use it to understand how your service's performance affects the end-user experience and business outcomes, such as which user journeys slow down or fail to convert when the service degrades.
 
 {{< img src="/tracing/services/service_page/front-end-activity.png" alt="The frontend activity side panel showing service, journey, operation, usage details, and related session replays" style="width:90%;">}}
 
@@ -317,7 +321,7 @@ The summary cards highlight the aggregate frontend impact for the current select
 
 #### Product Analytics enrichment
 
-If you use Product Analytics, the Frontend activity tab shows enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
+If you use [Product Analytics][25], the Frontend activity tab shows enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
 
 ## Further Reading
 
@@ -345,3 +349,5 @@ If you use Product Analytics, the Frontend activity tab shows enriched details a
 [22]: /cloud_cost_management/
 [23]: https://app.datadoghq.com/services
 [24]: /profiler/guide/solve-memory-leaks/
+[25]: /real_user_monitoring/
+[26]: /product_analytics/
