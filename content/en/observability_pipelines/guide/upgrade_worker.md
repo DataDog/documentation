@@ -44,7 +44,10 @@ Worker version 2.18.0 gives you access to the following:
 
 - Fixed an issue that occurred when a log-only pipeline (using legacy search syntax) ran a search query that the new parser could not handle. The parser now emits a warning and does not run the invalid query.
 - Fixed an issue affecting queries that start with an escaped character (for pipelines running new search syntax only).
-- Internal telemetry (metrics and logs) emitted from background tasks now correctly inherits the owning component's tags (`component_id`, `component_kind`, `component_type`). Previously, several components spawned background tasks without propagating their tags, so some internal events from those tasks were missing their component tags. Affected emissions include the `datadog_archives` source's listing-error, download-error, send-error, event-acknowledged, event-errored, and event-rejected, and status metrics from its listing coordinator, per-file downloader, and acknowledgment-handler tasks; the `microsoft_sentinel` destination's Azure OAuth token-regeneration task; and the `splunk_tcp` source's server task.
+- Internal telemetry (metrics and logs) emitted from background tasks now correctly inherits the owning component's tags (`component_id`, `component_kind`, `component_type`). Previously, several components spawned background tasks without propagating their tags, so some internal events from those tasks were missing their component tags. Affected emissions include:
+  - Datadog archive source: listing-error, download-error, send-error, event-acknowledged, event-errored, and event-rejected, and status metrics from its listing coordinator, per-file downloader, and acknowledgment-handler tasks
+  - Microsoft Sentinel destination: Azure OAuth token-regeneration task
+  - Splunk TCP source: server task.
 
 ---
 
