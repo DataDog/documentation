@@ -29,7 +29,7 @@ Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
+- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later (version 5.99.0 or later required for flag evaluation metrics)
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
@@ -46,8 +46,15 @@ Enable the provider with environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Required: Enable Remote Configuration in the tracer
+DD_REMOTE_CONFIGURATION_ENABLED=true
+
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+DD_METRICS_OTEL_ENABLED=true
+
+# Required: Service identification
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
