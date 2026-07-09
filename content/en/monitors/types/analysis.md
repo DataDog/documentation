@@ -33,33 +33,33 @@ Analysis monitors support a subset of the data sources available in Notebook Ana
 
 The following data sources are supported:
 
-- Metrics
-- Reference Tables
-- Logs
-- Spans
-- RUM
 - Audit
-- Events
-- Service Checks
-- Network
-- NetFlow
-- CI Tests
 - CI Pipelines
+- CI Tests
+- Events
 - LLM Observability
+- Logs
+- Metrics
+- NetFlow
+- Network
+- Reference Tables
+- RUM
+- Service Checks
+- Spans
 
 Published datasets are supported only when every data source they depend on is also supported.
 
 The following data sources are not supported:
 
+- Dora Metrics
 - Flex Logs
 - Infrastructure Resources
-- Dora Metrics
 
 Additional data sources are being onboarded to Analysis monitors over time as support expands, so this list may change.
 
 Any data source not listed as supported is unavailable for monitoring. If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
 
-`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
+`Dataset is based on an unsupported data source for monitoring: Infrastructure Resources`
 
 ## Monitor creation
 
