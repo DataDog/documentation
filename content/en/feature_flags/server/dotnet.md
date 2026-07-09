@@ -31,7 +31,7 @@ Before setting up the .NET Feature Flags SDK, ensure you have:
 - **Datadog .NET SDK** (`dd-trace-dotnet`):
   - Version 3.36.0 or later for .NET 6+
   - Version 3.38.0 or later for .NET Framework 4.6.2+
-  - Version 3.44.0 or later for flag evaluation metrics
+  - Version 3.44.0 or later (only required for flag evaluation metrics)
 
 Set the following environment variables:
 
