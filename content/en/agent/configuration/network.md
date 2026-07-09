@@ -98,8 +98,13 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Data Observability][103]
+: OpenLineage lineage and Jobs Monitoring events (Airflow, dbt, custom): `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+Quality Monitoring, warehouse-based lineage, and Databricks API access are agentless and use IP ranges instead of an intake endpoint. See [Network Requirements for Data Observability][103].
+
 [101]: /remote_configuration
 [102]: /database_monitoring/
+[103]: /data_observability/network/
 
 {{% /site-region %}}
 
