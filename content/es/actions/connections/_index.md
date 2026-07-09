@@ -104,7 +104,7 @@ Otra posibilidad es añadir una conexión desde la página de un flujo de trabaj
 
 El siguiente ejemplo muestra el cuadro de diálogo **New Connection** (Nueva conexión) para la conexión OpenAI. Cada conexión requiere una información de autenticación diferente. La conexión OpenAI requiere un Nombre de conexión y un token de API válidos.
 
-{{< img src="service_management/new-connection-2.png" alt="Cuadro de diálogo Nueva conexión de la conexión Open AI" >}}
+{{< img src="actions/connections/new-connection-2.png" alt="Cuadro de diálogo Nueva conexión de la conexión Open AI" >}}
 
 ### Editar una conexión
 

@@ -71,7 +71,7 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{ if or (in .RawContent "{{< site-region") (in .RawContent "{{< include-markdown") }}
+                {{ if or (in .RawContent "{{< site-region") (in .RawContent "{{< include-markdown") (in .RawContent "registry-config-list") }}
                   {{ partial "table-of-contents/scraped-toc.html" . }}
                 {{ else }}
                   {{ .TableOfContents }}

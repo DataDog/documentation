@@ -11,7 +11,7 @@ further_reading:
 site_support_id: roku_log_collection
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <div class="alert alert-info">Roku Log collection is in Preview.</div>
 {{< /site-region >}}
 

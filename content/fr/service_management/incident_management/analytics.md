@@ -8,7 +8,7 @@ title: Incident Management Analytics
 
 ## Présentation
 
-{{< img src="service_management/incidents/incident_analytics.mp4" alt="Analyse de la gestion des incidents" video=true style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/incident_analytics.mp4" alt="Analyse de la gestion des incidents" video=true style="width:80%;">}}
 
 Incident Management Analytics est une source de données interrogeable vous permettant d'obtenir des statistiques agrégées sur les incidents. Vous pouvez interroger ces données d'analyse dans divers widgets de graphique, que ce soit dans des [dashboards][1] et des [notebooks][2], afin d'analyser l'historique de résolution des incidents au fil du temps. En guise de point de départ, Datadog fournit un [modèle de dashboard][3] et un [modèle de notebook][4] offrant une vue d'ensemble de la gestion des incidents. Vous pouvez cloner et dupliquer ces modèles comme bon vous semble.
 
@@ -56,7 +56,7 @@ Pour configurer votre graphique à l'aide de la solution Incident Management Ana
 6. Filtre : `severity:("SEV-1" OR "SEV-2")`
 7. Groupe : `Services`, limités aux 5 premiers
 
-{{< img src="service_management/incidents/incident_analytics_query_example.jpeg" alt="Exemple de requête dʼanalyse dʼincident" style="width:80%;">}}
+{{< img src="incident_response/incident_management/incident_analytics_query_example.jpeg" alt="Exemple de requête dʼanalyse dʼincident" style="width:80%;">}}
 
 [1]: /fr/dashboards/
 [2]: /fr/notebooks/

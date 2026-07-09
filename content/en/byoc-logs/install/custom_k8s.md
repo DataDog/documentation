@@ -13,7 +13,10 @@ further_reading:
   text: "Troubleshooting BYOC Logs"
 aliases:
   - /cloudprem/install/custom_k8s/
+private: true
 ---
+
+<div class="alert alert-warning">This page is archived and no longer maintained. It uses MinIO, whose community edition is no longer maintained. For supported installation methods, see <a href="/byoc-logs/install/">Install BYOC Logs</a>.</div>
 
 ## Overview
 

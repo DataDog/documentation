@@ -2,8 +2,9 @@
 Expo setup instructions.
 -->
 
-### Step 1 - Install the SDK
+{% stepper %}
 
+{% step title="Install the SDK" %}
 The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
 `expo-datadog` supports Expo starting from SDK 45 and the plugin's versions follow Expo versions. For example, if you use Expo SDK 45, use `expo-datadog` version `45.x.x`. Datadog recommends using **Expo SDK 45** as a minimum version; previous versions may require manual steps.
@@ -20,7 +21,9 @@ To install with Yarn, run:
 yarn add expo-datadog @datadog/mobile-react-native
 ```
 
-### Step 2 - Specify application details in the UI
+{% /step %}
+
+{% step title="Specify application details in the UI" %}
 
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
 2. Choose `react-native` as the application type.
@@ -33,7 +36,9 @@ If you've purchased Error Tracking as a standalone product (without RUM), naviga
 
 For data security, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][10].
 
-### Step 3 - Initialize the library with application context
+{% /step %}
+
+{% step title="Initialize the library with application context" %}
 
 Add the following code snippet to your initialization file:
 
@@ -136,6 +141,9 @@ yarn add -D @datadog/datadog-ci
 ```
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
+
+{% /step %}
+{% /stepper %}
 
 ### User interactions tracking
 

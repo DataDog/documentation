@@ -19,7 +19,7 @@ Real User Monitoring (RUM) lets you create alerts about atypical behavior in you
 
 ## Create a RUM monitor
 
-To create a RUM monitor in Datadog, first, navigate to [Monitors > New Monitor > Real User Monitoring][2].
+To create a RUM monitor in Datadog, first, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}}][2].
 
 Next, choose one of the following methods to create your monitor:
 
@@ -44,7 +44,7 @@ You can export existing queries from the [RUM homepage][12] to create a monitor 
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
 
-Click the **Export > Create Monitor** button to export a widget to a pre-configured RUM monitor. For more information, see [Export RUM Events][7]. Remember that event-based monitors should be used alongside properly configured retention filters.
+Click the {{< ui >}}Export{{< /ui >}} > {{< ui >}}Create Monitor{{< /ui >}} button to export a widget to a pre-configured RUM monitor. For more information, see [Export RUM Events][7]. Remember that event-based monitors should be used alongside properly configured retention filters.
 
 ## Route your alert
 

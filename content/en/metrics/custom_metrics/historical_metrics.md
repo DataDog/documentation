@@ -47,8 +47,8 @@ You can start ingesting historical metric values by enabling Historical Metrics 
 To enable the ingestion of historical metrics for a specific metric:
 1. Navigate to the [Metrics Summary Page][1].
 1. Click on the metric name you want to enable Historical Metrics Ingestion for to open the metric's details side panel.
-1. Within the *Advanced* section of the side panel, click **Configure**.
-1. Select the **Enable historical metrics** toggle and press **Save**.
+1. Within the *Advanced* section of the side panel, click {{< ui >}}Configure{{< /ui >}}.
+1. Select the {{< ui >}}Enable historical metrics{{< /ui >}} toggle and press {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
 
@@ -56,10 +56,10 @@ To enable the ingestion of historical metrics for a specific metric:
 
 You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
-1. Select **Enable historical metrics**.
+1. Navigate to the [Metrics Summary Page][1] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
+1. Select {{< ui >}}Enable historical metrics{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
-1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the **Historical metrics** toggle.
+1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the {{< ui >}}Historical metrics{{< /ui >}} toggle.
 
 {{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
 
@@ -468,7 +468,13 @@ Track your indexed historical metrics through the Usage Summary section of the [
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
 
 For more information, see the [Custom Metrics billing][3] documentation.
- 
+
+### Billing under Metric Name pricing
+
+If your organization uses [Metric Name pricing][5] instead of cardinality pricing, HMI billing differs. HMI usage is calculated based on ingestion time rather than the metric's original timestamp. Each HMI datapoint contributes to both ingested and indexed volume.
+
+For details on the Metric Name pricing model, see [Metric Name Pricing for Custom Metrics][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -477,3 +483,4 @@ For more information, see the [Custom Metrics billing][3] documentation.
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
+[5]: /account_management/billing/metric_name_pricing/

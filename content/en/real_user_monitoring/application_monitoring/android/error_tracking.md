@@ -27,7 +27,7 @@ Enable Android Crash Reporting and Error Tracking to get comprehensive crash rep
 - ANR (Application Not Responding) reporting
 - Trend analysis with Android error tracking
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 

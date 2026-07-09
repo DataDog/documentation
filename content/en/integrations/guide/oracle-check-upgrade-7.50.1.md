@@ -21,7 +21,7 @@ The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent queries `GV$` views only when necessary, to minimize interconnect traffic.
 
 The new Oracle check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for your hosting type prior to upgrading the Agent:
 
@@ -63,6 +63,8 @@ grant select on v_$dataguard_config to c##datadog ;
 grant select on v_$dataguard_stats to c##datadog ;
 grant select on v_$transaction to c##datadog;
 grant select on v_$locked_object to c##datadog;
+grant select on v_$lock to c##datadog;
+grant select on gv_$lock to c##datadog;
 grant select on dba_objects to c##datadog;
 grant select on cdb_data_files to c##datadog;
 grant select on dba_data_files to c##datadog;
@@ -105,6 +107,8 @@ grant select on v_$dataguard_config to datadog ;
 grant select on v_$dataguard_stats to datadog ;
 grant select on v_$transaction to datadog;
 grant select on v_$locked_object to datadog;
+grant select on v_$lock to datadog;
+grant select on gv_$lock to datadog;
 grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
@@ -146,6 +150,8 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_CONFIG','DATADOG','SE
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_STATS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$TRANSACTION','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$LOCKED_OBJECT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$LOCK','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('GV_$LOCK','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
@@ -186,6 +192,8 @@ grant select on v$dataguard_config to datadog ;
 grant select on v$dataguard_stats to datadog ;
 grant select on v$transaction to datadog;
 grant select on v$locked_object to datadog;
+grant select on v$lock to datadog ;
+grant select on gv$lock to datadog ;
 grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
@@ -201,7 +209,7 @@ The new Oracle check can be activated as of the Agent release `7.50.1`.
 
 The configuration subdirectory for the Agent releases between `7.50.1` and `7.52.1` is `oracle-dbm.d`.
 
-**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent queries `GV$` views only when necessary, to minimize interconnect traffic.
 
 1. Copy the configuration file from the subdirectory `oracle.d` to `oracle-dbm.d`, for example:
 

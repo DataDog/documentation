@@ -12,8 +12,8 @@ This page provides information to help you troubleshot issues with Test Optimiza
 
 ## Your tests are instrumented, but Datadog isn't showing any data
 
-1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
-2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in [**Test Health**][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
+1. Go to the [{{< ui >}}Tests{{< /ui >}}][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
+2. Check if you see any test results in the [{{< ui >}}Test Runs{{< /ui >}}][4] section. If you do see results there, but not in [{{< ui >}}Test Health{{< /ui >}}][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
 3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the SDK to verify connectivity to the Agent.
 4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the SDK to verify connectivity to Datadog.
 5. If you still don't see any results, [contact Support][2] for troubleshooting help.
@@ -27,7 +27,7 @@ The following aspects make a JUnit test report incorrect:
 
 ## Data appears in Test Runs but not Test Health
 
-If you can see test results data in the **Test Runs** tab, but not in **Test Health** when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [**Test Health**][5] page.
+If you can see test results data in the {{< ui >}}Test Runs{{< /ui >}} tab, but not in {{< ui >}}Test Health{{< /ui >}} when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [{{< ui >}}Test Runs{{< /ui >}}][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [{{< ui >}}Test Health{{< /ui >}}][5] page.
 
 1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the SDK attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
@@ -96,20 +96,23 @@ The total time is defined as the sum of the maximum test session durations.
 
 ## Invalid Git information
 
-Datadog native testing libraries read CI metadata environment variables to determine Git tags, such as `git.commit.sha`, which identifies the commit checked out when the job starts. CI providers define these environment variables when the job starts, so any Git change after that point can cause incorrectly reported Git metadata.
+Datadog native testing libraries read CI metadata environment variables to determine Git tags, such as `git.commit.sha`, which identifies the commit that the job is expected to test. CI providers define these environment variables when the job starts, so any Git change after that point can cause incorrectly reported Git metadata.
 
-This can happen when a GitHub Actions workflow uses `actions/checkout` with a non-default [`ref` input][19], or when a job runs manual Git operations after checkout:
+This can happen when a GitHub Actions workflow uses `actions/checkout` with a non-default [`ref` input][19], such as a branch, tag, or SHA that is different from the workflow ref:
 
 ```yaml
-run: |
-  git checkout -b another-branch
-  git commit -m "new commit"
+steps:
+  - uses: actions/checkout@v4
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
 ```
 
-If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly. For GitHub Actions, you can set `DD_GIT_COMMIT_SHA` from `GITHUB_SHA`:
+In GitLab CI/CD, this can happen if a job modifies the checkout after the runner prepares the build directory. For example, a job might set [`GIT_CHECKOUT: "false"`][21] and check out a ref manually, or run commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` before running tests.
 
-```yaml
-DD_GIT_COMMIT_SHA=$GITHUB_SHA
+If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly. For example, set `DD_GIT_COMMIT_SHA` to the commit under test:
+
+```shell
+export DD_GIT_COMMIT_SHA="$(git rev-parse HEAD)"
 ```
 
 ## The test status numbers are not what is expected
@@ -155,7 +158,7 @@ The default branch is used to power some features of the products, namely:
 
 ### How to fix the default branch
 
-If you have admin access, you can update it from the [Repository Settings Page][11].
+If you have admin access, you can update it from the [{{< ui >}}Repository Settings Page{{< /ui >}}][11].
 
 ## Execution history is not available for a specific test case
 
@@ -199,6 +202,15 @@ By default, Vitest's [`isolate`][17] option is `true`, so each test file runs in
 
 To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
 
+To keep Vitest isolation enabled with lower worker startup overhead, set `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`. This option is available in `dd-trace` v5 (from `5.111.0`) and v6 (from `6.0.0`). It applies to isolated Vitest worker-pool runs with Vitest `3.2.6` and later, and falls back to normal worker instrumentation for unsupported configurations.
+
+Because this mode does not initialize `dd-trace` in Vitest workers, the following features are not supported:
+
+- Custom test tags
+- Custom spans
+- Log correlation from test code
+- Failed Test Replay
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -223,3 +235,4 @@ To lower overhead, set `isolate: false` in your Vitest config file, or pass `--n
 [18]: https://github.com/nodejs/import-in-the-middle
 [19]: https://github.com/actions/checkout#usage
 [20]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#collecting-git-metadata
+[21]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout

@@ -21,8 +21,27 @@ Run an agentic investigation on a single RUM view to investigate performance iss
 
 For more information, see [Single-View AI Investigation][1].
 
+## Multi-view AI investigation
+
+Run an agentic investigation across a sample of views that share a slow performance vital. Multi-View AI Investigation extends the same agentic analysis to a population of views, helping you identify what to fix when an entire (view × vital) pair is consistently slow across users. Available from the {{< ui >}}Optimization{{< /ui >}} page for {{< ui >}}Loading Time{{< /ui >}}, {{< ui >}}Largest Contentful Paint{{< /ui >}}, {{< ui >}}First Contentful Paint{{< /ui >}}, and {{< ui >}}Interaction to Next Paint{{< /ui >}}.
+
+{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="The Optimization page for a performance vital, showing ranked recommendation cards with an Investigate button on each." style="width:100%;" >}}
+
+For more information, see [Multi-View AI Investigation][2].
+
+## Operation AI investigation
+
+Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions.
+
+{{< img src="real_user_monitoring/ai_investigations/operation-ai-investigation-recommendations.png" alt="The Operations page for an operation, showing a plain-language health summary and ranked recommendation cards tagged with priority badges." style="width:100%;" >}}
+
+For more information, see [Operation AI Investigation][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/ai_investigations/single_view_ai_investigation/
+[2]: /real_user_monitoring/ai_investigations/multi_view_ai_investigation/
+[3]: /real_user_monitoring/operations_monitoring/
+[4]: /real_user_monitoring/ai_investigations/operation_ai_investigation/

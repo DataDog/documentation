@@ -109,7 +109,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 {{< /code-block >}}
 
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
-  - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+  - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-info">For FED, also set <code>useFIPSAgent: true</code> under <code>spec.global</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>

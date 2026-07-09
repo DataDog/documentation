@@ -28,7 +28,7 @@ La gestión de casos no está disponible en el sitio {{< region-param key=dd_dat
 
 ## Información general
 
-{{< img src="/service_management/case_management/case_management_overview_cropped.png" alt="Información general de la página de gestión de casos" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/case_management_overview_cropped.png" alt="Información general de la página de gestión de casos" style="width:100%;" >}}
 
 La gestión de casos de Datadog ofrece un lugar centralizado para clasificar, realizar un seguimiento y solucionar los problemas detectados por Datadog y las integraciones de terceros. Después de crear un caso, puedes asignarlo a un usuario, estableciendo líneas claras de propiedad que persisten a lo largo de la vida del caso. 
 

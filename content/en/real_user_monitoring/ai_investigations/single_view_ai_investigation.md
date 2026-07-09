@@ -15,13 +15,22 @@ further_reading:
 
 ## Overview
 
-Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click **Investigate with AI**. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
+Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click {{< ui >}}Investigate with AI{{< /ui >}}. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
 
 Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a heavy client-side computation, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-overview.png" alt="The Single-View AI Investigation panel showing categorized findings for a RUM view." style="width:100%;" >}}
 
-## Data analyzed
+## Launch an investigation
+
+1. Open a RUM view side panel.
+2. Click the {{< ui >}}Investigate with AI{{< /ui >}} button.
+
+   **Note**: The button can take up to 15 minutes to become available after a view ends.
+
+The investigation runs and streams results into the side panel as they become available, so you can start reading the first findings before the analysis is complete.
+
+## What the agent investigates
 
 To investigate a view, Datadog's RUM agent inspects the data Datadog has collected for that view and accesses correlated telemetry when it's available:
 
@@ -32,15 +41,6 @@ To investigate a view, Datadog's RUM agent inspects the data Datadog has collect
 - **Profiling data**, when [RUM profiling correlation][8] is enabled for the application. The agent uses CPU profiles to attribute App Performance findings to specific functions in your code.
 
 The richer the data available for the view, the more precise the analysis. Correlating RUM with APM and enabling profiling helps the agent investigate beyond the client-side timeline.
-
-## Launch an investigation
-
-1. Open a RUM view side panel.
-2. Click the **Investigate with AI** button.
-
-   **Note**: The button can take up to 15 minutes to become available after a view ends.
-
-The investigation runs and streams results into the side panel as they become available, so you can start reading the first findings before the analysis is complete.
 
 ## Sources of root causes
 
@@ -63,7 +63,11 @@ A lightweight chat interface lets you follow up on the analysis: ask for more de
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-chat.png" alt="A chat interface inviting the user to ask follow-up questions about the issues found in the view." style="width:70%;" >}}
 
-Save investigations to a [Notebook][1] to share with your team for future reference.
+## Take action
+
+After an investigation completes, you can act on findings without leaving the panel:
+
+- {{< ui >}}Save to a Notebook{{< /ui >}}: Exports the full timeline and findings to a [Notebook][1] to share with your team.
 
 ## Further reading
 

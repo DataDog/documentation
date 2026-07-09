@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/service_management/events/guides/recommended_event_tags/
+- /ja/events/guides/recommended_event_tags/
 description: おすすめのイベントタグとその付け方についてご紹介します。
 further_reading:
 - link: /getting_started/tagging/assigning_tags

@@ -11,6 +11,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Learn about Application Performance Monitoring (APM)"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -41,10 +47,12 @@ Enable the provider with environment variables:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 Or enable the provider in code:
 
@@ -60,12 +68,39 @@ tracer.init({
   }
 });
 
-OpenFeature.setProvider(tracer.openfeature);
+// setProviderAndWait resolves after Remote Configuration loads, so flags
+// evaluate against real configuration data instead of default values.
+try {
+  await OpenFeature.setProviderAndWait(tracer.openfeature);
+} catch (err) {
+  // If initialization fails, evaluations return default values until the
+  // provider receives its first configuration. Log the error so it's visible.
+  console.error('Datadog feature flag provider failed to initialize', err);
+}
 ```
+
+These examples use ESM modules, where `await` is available at the top level. In CommonJS, wrap top-level `await` in an async function.
+
+Most applications also run other asynchronous startup tasks, such as opening database connections or loading configuration. Start their promises together with the provider promise and await them as a group, so total startup time stays close to the slowest task instead of the sum of all of them:
+
+```javascript
+// Start feature flag setup alongside your other startup tasks, then await them together.
+const [_, db] = await Promise.all([
+  // Catch here so a failed provider init does not reject the whole batch.
+  // Evaluations return default values until the provider receives its config.
+  OpenFeature.setProviderAndWait(tracer.openfeature).catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  }),
+  connectToDatabase(), // your application's other async startup work
+]);
+// db is connected and the server can start; flags evaluate against real configuration, or fall back to defaults if initialization failed.
+```
+
+Blocking startup until the provider is ready, as shown above, works well for most applications. If your application must start serving requests before initialization completes, choose one of the following strategies.
 
 ### Accepting default values before initialization
 
-When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
@@ -95,10 +130,17 @@ app.get('/my-endpoint', async (req, res) => {
 
 ### Waiting for provider initialization
 
-Use `setProviderAndWait` to ensure the provider fully initializes before evaluating flags. This guarantees that flag evaluations use actual configuration data rather than defaults, at the cost of delaying requests during initialization.
+When you want the server to start listening immediately while still evaluating against real configuration data, you can defer the wait to request time. Store the initialization promise, then await it in each request handler before evaluating flags. Requests that arrive before initialization completes wait for it to finish.
 
 ```javascript
-const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature);
+// Attach the catch once, at creation. This logs a failed initialization a
+// single time and keeps the shared promise from rejecting on every request;
+// evaluations return default values until the provider receives its first
+// configuration.
+const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature)
+  .catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  });
 const client = OpenFeature.getClient();
 
 app.get('/my-endpoint', async (req, res) => {
@@ -110,7 +152,8 @@ app.get('/my-endpoint', async (req, res) => {
     companyID: req.session?.companyID
   };
 
-  // Wait for initialization if necessary
+  // Wait for initialization if necessary. The promise is already handled
+  // above, so awaiting it here never throws, even if initialization failed.
   await initializationPromise;
 
   // Note: evaluations are synchronous, but return a Promise type

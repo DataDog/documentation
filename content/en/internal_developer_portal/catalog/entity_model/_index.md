@@ -1,5 +1,6 @@
 ---
 title: Entity Model
+description: Learn how Catalog uses YAML-based definition schemas to store and display metadata about services, systems, datastores, queues, and other entity types.
 aliases:
   - /software_catalog/service_definitions/
   - /software_catalog/adding_metadata
@@ -52,11 +53,6 @@ algolia:
   tags: [ "codeLocations" ]
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
-
-{{< /site-region >}}
-
 ## Overview
 
 Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Catalog side panel for any selected services.
@@ -64,6 +60,10 @@ Catalog uses definition schemas to store and display relevant metadata about you
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="A flow chart showing how components of Catalog connect with each other and with your cloud environment " style="width:100%;" >}}
 
 ## Supported versions
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Datadog supports four versions of the definition schema:
 
@@ -97,6 +97,10 @@ For detailed information about each version, including full schemas and example 
 
 {{< tabs >}}
 {{% tab "v3.0" %}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ### Key features
 - **Expanded data model**: v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
@@ -310,6 +314,8 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit a
 ### Migrating to v3.0
 v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
 
+To migrate existing service YAML files from v1, v2, v2.1, or v2.2 to v3, see [Migrate Your Service Definitions to v3][7].
+
 ### API reference documentation
 To create, get, and delete definitions for all entity types like endpoints, systems, datastores, and queues, see the [Catalog API reference][8].
 
@@ -319,6 +325,7 @@ To create, get, and delete definitions for all entity types like endpoints, syst
 [4]: https://en.wikipedia.org/wiki/Glob_(programming)
 [5]: /api/latest/software-catalog/
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
+[7]: /internal_developer_portal/catalog/entity_model/v3_migration
 [8]: /api/latest/software-catalog/
 
 {{% /tab %}}

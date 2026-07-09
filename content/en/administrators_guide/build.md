@@ -79,7 +79,7 @@ The basic operations you must complete in order to install Datadog are the follo
 
 **Service**: Use of IaC, or shell scripting.
 
-**IaC:** Infrastructure-As-Code has advanced in both sophistication and robustness. While it is almost universally used in cloud infrastructures, it is often retrofitted to long-established on-premise infrastructures. Its simple file/package/service structure has been leveraged to deploy significant Datadog footprints with IaC "tools" as rudimentary as a bash script. While this is not recommended, it stands as encouragement to begin the IaC adoption of Datadog as soon as possible, and when you do, you will find Datadog at the ready with sample code and integrations for Ansible, Puppet, Chef, Powershell, Bash, CloudFormations, Terraform, and more.  
+**IaC:** Infrastructure-As-Code has advanced in both sophistication and robustness. While it is almost universally used in cloud infrastructures, it is often retrofitted to long-established on-premises infrastructures. Its simple file/package/service structure has been leveraged to deploy significant Datadog footprints with IaC "tools" as rudimentary as a bash script. While this is not recommended, it stands as encouragement to begin the IaC adoption of Datadog as soon as possible, and when you do, you will find Datadog at the ready with sample code and integrations for Ansible, Puppet, Chef, Powershell, Bash, CloudFormations, Terraform, and more.  
 
 **Recommendations:**   
 When it comes to deploying Datadog Agent software, it is advisable to reuse as much of your existing provisioning systems as possible. Datadog software design is flat and compliant to industry standard methods.  

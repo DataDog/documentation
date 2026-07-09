@@ -230,6 +230,17 @@ Attach the new S3 policy to the Datadog integration role.
 
 {{< /tabs >}}
 
+#### Permissions for AWS Cost Optimization Hub recommendations
+
+Cloud Cost Management generates some [recommendations][30] from data sourced from [AWS Cost Optimization Hub][31]. For Datadog to receive these recommendations, the Datadog AWS integration IAM role must include the following permissions:
+
+- `cost-optimization-hub:GetRecommendation`
+- `cost-optimization-hub:ListRecommendations`
+
+These permissions are part of the default AWS integration IAM policy. If you configured the AWS integration recently with the [CloudFormation or Terraform templates][32], you have these permissions already.
+
+If you set up the AWS integration before these permissions were added to the default policy, update your IAM policy to include them. For the current policy, see the [Amazon Web Services integration][32] documentation.
+
 ### Account filtering
 
 Use Account Filtering to control which AWS member accounts to pull into Cloud Cost Management. Filtering out accounts does not incur additional Datadog costs.
@@ -511,3 +522,6 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
 [21]: /api/latest/cloud-cost-management/#create-cloud-cost-management-aws-cur-config
 [22]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/aws_cur_config
+[30]: /cloud_cost_management/recommendations/
+[31]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
+[32]: /integrations/amazon_web_services/

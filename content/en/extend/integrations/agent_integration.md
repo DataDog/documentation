@@ -485,7 +485,7 @@ Make sure to update all references to the version number across the integration'
 
 [1]: https://docs.datadoghq.com/agent/
 [2]: https://docs.datadoghq.com/metrics/
-[3]: https://docs.datadoghq.com/service_management/events/
+[3]: https://docs.datadoghq.com/events/
 [4]: /extend/service_checks/
 [5]: https://docs.datadoghq.com/logs/log_collection/agent_checks/
 [6]: https://docs.datadoghq.com/agent/guide/integration-management/?tab=linux#install

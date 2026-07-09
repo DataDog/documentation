@@ -22,8 +22,8 @@ When Watchdog identifies that an external provider you are using is faulty, it f
 Whenever Watchdog detects a provider degradation, it creates an event in the [Event Explorer][1]. You can set up a monitor to get automatically notified on such events:
 
 1. Go to the [New Monitor][2] page.
-2. Choose **Watchdog**.
-3. Select `Third Party` in the alert category.
+2. Choose {{< ui >}}Watchdog{{< /ui >}}.
+3. Select {{< ui >}}Third Party{{< /ui >}} in the alert category.
 
 ## Supported providers
 Watchdog monitors the status of the external providers' APIs listed in the [External Provider Status documentation][3].

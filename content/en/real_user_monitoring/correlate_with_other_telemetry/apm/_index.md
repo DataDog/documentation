@@ -388,7 +388,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% tab "Browser" %}}
 
 1. Visit a page in your application.
-2. In your browser's developer tools, go to the **Network** tab.
+2. In your browser's developer tools, go to the {{< ui >}}Network{{< /ui >}} tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
 [1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
@@ -462,7 +462,7 @@ To view traces from the RUM Explorer:
 
 1. Navigate to your [list of sessions][22] and click on a session that has traces available. You can also query for resources with traces by using`@_dd.trace_id:*`.
 
-When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
+When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a {{< ui >}}View Trace in APM{{< /ui >}} link.
 
 ## Traces to RUM Explorer
 
@@ -470,8 +470,8 @@ When you select a session, the session panel appears with a request duration bre
 
 To view the RUM event from Traces:
 
-1. Within a trace view, click **VIEW** to see all traces created during the view's lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
-1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
+1. Within a trace view, click {{< ui >}}VIEW{{< /ui >}} to see all traces created during the view's lifespan, or {{< ui >}}RESOURCE{{< /ui >}} to see traces associated with the specific resource from the {{< ui >}}Overview{{< /ui >}} tab.
+1. Click {{< ui >}}See View in RUM{{< /ui >}} or {{< ui >}}See Resource in RUM{{< /ui >}} to open the corresponding event in the RUM Explorer.
 
 ## Supported libraries
 

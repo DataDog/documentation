@@ -52,6 +52,7 @@ attributes:
        - **Pipelines, stages, jobs, setups, commands**: 15 months
   - product: Cloud Cost Management
     data_type: |
+       - **Cost metrics**: 15 months
        - **Recommendations**: 90 days
   - product: Cloud Security
     data_type: |
@@ -110,7 +111,7 @@ attributes:
   - product: Incident Management
     data_type: |
        - **Incidents**: Retained for the duration of the account
-  - product: LLM Observability
+  - product: Agent Observability
     data_type: |
        - **Production Traces and spans**: 15 (default), 30, 60, or 90 days, determined by customer plan
        - **Experiments Traces and spans**: 15 (default), 90, 180, 270, 365 days, determined by customer plan

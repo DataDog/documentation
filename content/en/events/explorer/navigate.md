@@ -4,7 +4,7 @@ aliases:
 - /service_management/events/explorer/navigate/
 ---
 
-{{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
+{{< img src="events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
 
 ## Overview
 
@@ -16,7 +16,7 @@ Click any event in the Events Explorer to open the event side panel, which shows
 
 ### Attributes tab
 
-{{< img src="service_management/events/explorer/event-attribute.png" alt="An example Event Attributes tab" style="width:100%;" >}}
+{{< img src="events/explorer/event-attribute.png" alt="An example Event Attributes tab" style="width:100%;" >}}
 
 The {{< ui >}}Attributes{{< /ui >}} tab of the side panel lists event attributes as JSON. Click an attribute to add it to or exclude it from the existing query, or to add a column for this attribute.
 

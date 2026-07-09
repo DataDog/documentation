@@ -25,7 +25,7 @@ Burn rate alerts are available for the following SLO types:
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
 - [Time Slice SLOs][7]
 
-{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
+{{< img src="service_level_objectives/burn_rate/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
 ## How Burn Rate Alerts work
 
@@ -96,16 +96,16 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
 ## Monitor creation
 
 1. Navigate to the [SLO status page][4].
-2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
-3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
+2. Create a new SLO or edit an existing one, then click the {{< ui >}}Save and Set Alert{{< /ui >}} button. For existing SLOs, you can also click the {{< ui >}}Set up Alerts{{< /ui >}} button in the SLO detail side panel to take you directly to the alert configuration.
+3. Select the {{< ui >}}Burn Rate{{< /ui >}} tab in {{< ui >}}Step 1: Setting alerting conditions{{< /ui >}}
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
    * The burn rate value must be in the range of
      $$0 < \text"burn rate" ≤ 1 / {1 - \text"SLO target"}$$
    * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
-5. Add [Notification information][4] into the **Configure notifications and automations** section.
-6. Click the **Save and Exit** button on the SLO configuration page.
+5. Add [Notification information][4] into the {{< ui >}}Configure notifications and automations{{< /ui >}} section.
+6. Click the {{< ui >}}Save and Exit{{< /ui >}} button on the SLO configuration page.
 
 ### Alerting for SLOs with groups
 

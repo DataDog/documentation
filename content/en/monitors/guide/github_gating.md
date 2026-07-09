@@ -30,7 +30,7 @@ In order to rely on Datadog for quality checks on application deployments, you m
 
 ### Set up a new GitHub application in Datadog
 
-See [these instructions][1] to create a GitHub application that is automatically connected to Datadog. Remember to check the box for **Deployment Protection Rules**.
+See [these instructions][1] to create a GitHub application that is automatically connected to Datadog. Remember to check the box for {{< ui >}}Deployment Protection Rules{{< /ui >}}.
 
 {{< img src="ci/github_gates_new_app.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
@@ -41,8 +41,8 @@ If you already have a GitHub application set up and connected to Datadog, you ca
 ### Configure Deployment Protection Rules in GitHub
 1. Enable read and write permissions for Deployments.
 2. Enable read permissions for Actions.
-3. Under **Subscribe to events** in an application, click the checkbox for **Deployment protection rule**.
-4. In a repository, click **Settings**. Under the **Code and Automation** section, click **Environments**. Under **Deployment Protection Rules**, enable the GitHub application that is linked with the Datadog integration. 
+3. Under {{< ui >}}Subscribe to events{{< /ui >}} in an application, click the checkbox for {{< ui >}}Deployment protection rule{{< /ui >}}.
+4. In a repository, click {{< ui >}}Settings{{< /ui >}}. Under the {{< ui >}}Code and Automation{{< /ui >}} section, click {{< ui >}}Environments{{< /ui >}}. Under {{< ui >}}Deployment Protection Rules{{< /ui >}}, enable the GitHub application that is linked with the Datadog integration. 
 
 ## Create monitors to gate your deployments
 
@@ -56,7 +56,7 @@ Any monitors you plan to use for quality gating must be tagged properly with the
 
 The `git_repo` tag must contain the repository owner name in the format `<OWNER>/<REPO>`, such as `Datadog/my-repo`.
 
-When you run a workflow, GitHub Actions send a request to your Datadog monitor. Based on one of the evaluation results of the monitor listed below, Datadog sends a comment back to GitHub, which can be seen in GitHub under the **Comment** section for the associated event and environment within your workflow run.
+When you run a workflow, GitHub Actions send a request to your Datadog monitor. Based on one of the evaluation results of the monitor listed below, Datadog sends a comment back to GitHub, which can be seen in GitHub under the {{< ui >}}Comment{{< /ui >}} section for the associated event and environment within your workflow run.
 - If all monitors associated with your deployment (through environment and repo tags) are in the `OK` state, Datadog approves the deployment.
 - If any monitor associated with your deployment is not in `OK` state (in `ALERT`, `WARN`, or `NODATA`), Datadog rejects the deployment.
 

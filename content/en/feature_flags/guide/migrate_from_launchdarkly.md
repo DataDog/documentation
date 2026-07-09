@@ -39,6 +39,7 @@ Follow the installation instructions for your platform:
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
   {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/flutter/" src="integrations_logos/flutter_large.svg" alt="Dart and Flutter" >}}
   {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
   {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
   {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
@@ -54,6 +55,7 @@ Follow the installation instructions for your platform:
   {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/php/" src="integrations_logos/php.png" alt="PHP" >}}
   {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
@@ -778,6 +780,14 @@ end
 
 <div class="alert alert-info">Datadog can help with migrating flags. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
 
+You can recreate critical flags either manually or with the Datadog Flag Migration CLI.
+
+#### Option 1: Use the Flag Migration CLI
+
+The [Datadog Flag Migration CLI][13] automates the migration of flag definitions, targeting rules, and variations from LaunchDarkly to Datadog. See [Migrate Flags with the Flag Migration CLI][14] to get started.
+
+#### Option 2: Recreate flags manually
+
 1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}.
 2. Ensure that the flag configurations - such as rollout percentages, targeting rules, and variations - are accurately replicated in the new service.
 3. For complex targeting rules, use the evaluation context attributes to implement equivalent logic.
@@ -803,3 +813,5 @@ end
 [10]: /feature_flags/client/react/
 [11]: /feature_flags/client/android/
 [12]: /feature_flags/client/ios/
+[13]: https://github.com/DataDog/dd-flag-migration
+[14]: /feature_flags/guide/migrate_flags_with_cli/

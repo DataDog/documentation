@@ -5,7 +5,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder documentation"
 - link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
@@ -114,7 +114,7 @@ Alternatively, add a connection from a workflow or app page:
 
 The example below shows the {{< ui >}}New Connection{{< /ui >}} dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/new-connection-2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="actions/connections/new-connection-2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
@@ -213,7 +213,7 @@ To delete a connection group:
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
 [6]: /integrations/
-[8]: /service_management/workflows/actions/
+[8]: /actions/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
 [11]: https://chat.datadoghq.com/

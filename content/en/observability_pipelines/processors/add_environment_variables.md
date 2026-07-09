@@ -20,7 +20,7 @@ To set up this processor:
 1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Enter the field name for the environment variable.
 1. Enter the environment variable name.
-1. Click **Add Environment Variable** if you want to add another environment variable.
+1. Click {{< ui >}}Add Environment Variable{{< /ui >}} if you want to add another environment variable.
 
 ### Blocked environment variables
 
@@ -46,7 +46,7 @@ The environment variable is matched to the pattern and not the literal word. For
 
 ### Allowlist
 
-After you have added processors to your pipeline and clicked **Next: Install**, in the **Add environment variable processor(s) allowlist** field, enter a comma-separated list of environment variables you want to pull values from and use with this processor.
+After you have added processors to your pipeline and clicked {{< ui >}}Next: Install{{< /ui >}}, in the {{< ui >}}Add environment variable processor(s) allowlist{{< /ui >}} field, enter a comma-separated list of environment variables you want to pull values from and use with this processor.
 
 The allowlist is stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
 

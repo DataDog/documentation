@@ -1,6 +1,6 @@
 ---
 title: Data Security and RBAC
-description: Restrict access to sensitive LLM Observability data using data access controls, redact data with span processors, and integrate with Sensitive Data Scanner.
+description: Restrict access to sensitive Agent Observability data using data access controls, redact data with span processors, and integrate with Sensitive Data Scanner.
 further_reading:
   - link: "/account_management/rbac/data_access"
     tag: "Documentation"
@@ -12,13 +12,13 @@ further_reading:
 
 ## Data Access Control
 
-LLM Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
+Agent Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 
-Access controls in LLM Observability are built on Datadog's [Data Access Control][1] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
+Access controls in Agent Observability are built on Datadog's [Data Access Control][1] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
 
 ## Redacting data with span processors
 
-You can redact or modify sensitive data at the application level before it is sent to Datadog. Use span processors in the LLM Observability SDK to conditionally modify input and output data on spans, or prevent spans from being emitted entirely.
+You can redact or modify sensitive data at the application level before it is sent to Datadog. Use span processors in the Agent Observability SDK to conditionally modify input and output data on spans, or prevent spans from being emitted entirely.
 
 This is useful for:
 - Removing sensitive information from prompts or responses
@@ -29,9 +29,9 @@ For detailed implementation examples and usage patterns, see the [Span Processin
 
 ## Sensitive Data Scanner integration
 
-LLM Observability integrates with [Sensitive Data Scanner][3], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+Agent Observability integrates with [Sensitive Data Scanner][3], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
 
-By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
 ## Further reading
 

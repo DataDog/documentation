@@ -39,7 +39,7 @@ Reachable
 
 ## Multi-path map
 
-Use the **Multi-path map** button to build a path map based on one or more selected paths:
+Use the {{< ui >}}Multi-path map{{< /ui >}} button to build a path map based on one or more selected paths:
 
 {{< img src="network_performance_monitoring/network_path/multi_path_2.png" alt="Multi-path view showing 2 selected paths." >}}
 

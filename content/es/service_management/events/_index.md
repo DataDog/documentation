@@ -7,7 +7,7 @@ further_reading:
 - link: /api/latest/events/
   tag: Documentación
   text: API de eventos de Datadog
-- link: /service_management/events/guides/recommended_event_tags/
+- link: /events/guides/recommended_event_tags/
   tag: Documentación
   text: Prácticas recomendadas para etiquetar eventos
 - link: https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/
@@ -20,7 +20,7 @@ is_beta: true
 title: Event Management
 ---
 
-{{< img src="service_management/events/correlation/event_management.png" alt="¿Qué es Event Management?" style="width:100%;" >}}
+{{< img src="events/correlation/event_management.png" alt="¿Qué es Event Management?" style="width:100%;" >}}
 
 ## Información general
 
@@ -31,11 +31,11 @@ La recopilación de eventos es compatible con más de 100 integraciones de Data
 ## Componentes
 
 {{< whatsnext desc="Características de Event Management:">}}
-    {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingesta de eventos</u>: aprende a enviar eventos a Datadog{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines y procesadores</u>: enriquece y normaliza tus eventos{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u>: visualiza, busca y envía notificaciones de eventos que llegan a Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Uso de eventos</u>: analiza, investiga y monitoriza eventos {{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlación</u>: reduce la fatiga de alertas y la cantidad de tickets/notificaciones que recibes {{< /nextlink >}}
+    {{< nextlink href="/events/ingest/" >}}<u>Ingesta de eventos</u>: aprende a enviar eventos a Datadog{{< /nextlink >}}
+     {{< nextlink href="/events/pipelines_and_processors/">}}<u>Pipelines y procesadores</u>: enriquece y normaliza tus eventos{{< /nextlink >}}
+    {{< nextlink href="/events/explorer/" >}}<u>Events Explorer</u>: visualiza, busca y envía notificaciones de eventos que llegan a Datadog{{< /nextlink >}}
+    {{< nextlink href="/events/guides/usage/" >}}<u>Uso de eventos</u>: analiza, investiga y monitoriza eventos {{< /nextlink >}}
+    {{< nextlink href="/events/correlation/" >}}<u>Correlación</u>: reduce la fatiga de alertas y la cantidad de tickets/notificaciones que recibes {{< /nextlink >}}
 
 {{< /whatsnext >}}
 

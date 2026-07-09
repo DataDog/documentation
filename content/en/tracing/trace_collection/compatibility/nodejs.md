@@ -31,9 +31,9 @@ When a release has changes that could go in multiple semver categories, the high
 
 _Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
 
-For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
+For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, Datadog applies security and bug patches whenever possible.
 
-If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
+If you have any questions or concerns about Datadog's support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
 
 ### Node.js Version Support
 
@@ -53,6 +53,14 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
+| 6.x                 | Linux (glibc)         | arm, arm64, x64       | Debian 10, RHEL 8, Ubuntu 20.04          |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.19                              |
+|                     | macOS                 | arm64, x64            | Big Sur (11.0)                           |
+|                     | Windows               | ia32, x64             | Windows 10, Windows Server 2016          |
+| 5.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 10, RHEL 8, Ubuntu 20.04 |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.15                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | ia32, x64             | Windows 10, Windows Server 2016          |
 | 3.x, 4.x            | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
@@ -212,14 +220,13 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
 | [bunyan][55]     | `>=1`     | Fully supported |
-| [paperplane][56] | `>=2.3.2` | Fully supported |
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
 
 
 ### AI/LLM compatibility
 
-The [Automatic Instrumentation for LLM Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
+The [Automatic Instrumentation for Agent Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
 
 
 ### Testing framework compatibility
@@ -301,7 +308,6 @@ For additional information or to discuss [leave a comment on this GitHub issue][
 [53]: https://github.com/kriskowal/q
 [54]: https://github.com/cujojs/when
 [55]: https://github.com/trentm/node-bunyan
-[56]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [57]: http://getpino.io
 [58]: https://github.com/winstonjs/winston
 [59]: https://github.com/laverdet/node-fibers

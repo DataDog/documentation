@@ -1,0 +1,8 @@
+<div id="page-copy-btn" class="api-copy-btn">
+    <a href="#" class="text-primary font-semibold" role="button">
+        <span class="copy-btn-icon-wrapper">
+            {{ partial "img.html" (dict "root" . "src" "icons/clipboard-mdi.svg" "class" "static copy-btn-icon copy-btn-icon__before" "alt" "copy" "width" "22") }}
+            {{ partial "img.html" (dict "root" . "src" "icons/clipboard-mdi-success.svg" "class" "static copy-btn-icon copy-btn-icon__after" "alt" "" "width" "22") }}
+        </span><span id="page-copy-text">{{ i18n "copy_page" }}</span><span id="page-copied-text">{{ i18n "copied" }}</span>
+    </a>
+</div>

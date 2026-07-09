@@ -146,8 +146,8 @@ Datadog [Cloud SIEM][21] (Security Information and Event Management) は、ア�
 [7]: /ja/infrastructure/
 [8]: /ja/getting_started/tagging/
 [9]: /ja/infrastructure/hostmap/
-[10]: /ja/service_management/events/
-[11]: /ja/service_management/events/explorer/analytics
+[10]: /ja/events/
+[11]: /ja/events/explorer/analytics
 [12]: /ja/dashboards/
 [13]: /ja/dashboards/#screenboards
 [14]: /ja/dashboards/functions/arithmetic/

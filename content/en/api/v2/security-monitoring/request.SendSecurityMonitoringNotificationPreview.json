@@ -1,0 +1,22 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "name": "Rule 1",
+      "selectors": {
+        "query": "env:prod",
+        "rule_types": [
+          "log_detection"
+        ],
+        "severities": [
+          "critical"
+        ],
+        "trigger_source": "security_signals"
+      },
+      "targets": [
+        "@john.doe@email.com"
+      ]
+    },
+    "type": "notification_rules"
+  }
+}

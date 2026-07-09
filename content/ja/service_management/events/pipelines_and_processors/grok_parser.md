@@ -6,7 +6,7 @@ title: Grok パーサー
 メッセージ全体や未加工のイベントの特定の属性をパースするためのカスタム Grok ルールを作成できます。ベストプラクティスとして、Grok プロセッサー毎のパース規則は最大 10 で使用することが推奨されます。
 
 
-{{< img src="service_management/events/grok-parser.png" alt="パース例 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="パース例 1" style="width:80%;">}}
 
 
 **Parse My Events** をクリックして、基底のパイプラインを流れるイベントの 3 つのパースルールのセットを始動させます。そこから属性の名前を絞り込み、必要に応じて他のタイプのイベントに新しいルールを追加します。この機能を使用するには、対応するイベントがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
@@ -657,5 +657,5 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /ja/service_management/events/pipelines_and_processors/date_remapper
-[4]: /ja/service_management/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter
+[3]: /ja/events/pipelines_and_processors/date_remapper
+[4]: /ja/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter

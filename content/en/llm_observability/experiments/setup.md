@@ -1,21 +1,21 @@
 ---
 title: Setup and Usage
-description: How to set up LLM Observability Experiments and start running experiments.
+description: How to set up Agent Observability Experiments and start running experiments.
 ---
 
-This page describes how to set up and use LLM Observability Experiments with the Python SDK.
+This page describes how to set up and use Agent Observability Experiments with the Python SDK.
 
-## Set up LLM Observability
+## Set up Agent Observability
 
-If you have not already set up LLM Observability:
+If you have not already set up Agent Observability:
 
-1. Install Datadog's LLM Observability Python SDK:
+1. Install Agent Observability Python SDK:
 
    ```shell
    pip install ddtrace>=4.3.0
    ```
 
-2. Enable LLM Observability:
+2. Enable Agent Observability:
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -32,7 +32,7 @@ If you have not already set up LLM Observability:
 
 ### APM Trace correlation
 
-To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+To correlate your Experiment spans with [APM Traces][5], run Agent Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
 
    ```python
    LLMObs.enable(
@@ -129,7 +129,7 @@ To create an experiment:
    ```
 
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
-   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
    #### Using OpenTelemetry spans inside experiments
 

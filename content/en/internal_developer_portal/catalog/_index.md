@@ -1,5 +1,6 @@
 ---
 title: Catalog
+description: Catalog provides a centralized, dynamic view of your software ecosystem and infrastructure resources, integrating observability, security, and cost management tools.
 aliases:
   - /tracing/faq/software_catalog/
   - /tracing/services/services_list/

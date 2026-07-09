@@ -8,7 +8,7 @@ title: ケースの表示と管理
 
 ## 概要
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="すべてのケースを表示し、ステータスを選択でき、アサインされたメンバーが表示されているケース管理ページ" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="すべてのケースを表示し、ステータスを選択でき、アサインされたメンバーが表示されているケース管理ページ" style="width:100%;" >}}
 
 [Case Management ページ][1]では、ケースを作成日、ステータス、優先度で並べ替えることができます。デフォルトでは、ケースは作成日順に並べ替えられます。
 
@@ -53,7 +53,7 @@ title: ケースの表示と管理
 
 ## ケースの詳細
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="エスカレーションされたケース例のケース詳細ビュー" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="エスカレーションされたケース例のケース詳細ビュー" style="width:100%;" >}}
 
 Case Details ページは、調査の進行に関する信頼できる唯一の情報源として機能します。各ケースには以下のプロパティがあります。
 
@@ -89,7 +89,7 @@ Activity timeline
 
 ## Case Analytics
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="データソースとしてケースのオプションが選択されているグラフエディター" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="データソースとしてケースのオプションが選択されているグラフエディター" style="width:100%;" >}}
 
 Case Analytics は、集計されたケース統計のクエリ可能なデータソースです。[ダッシュボード][7]と[ノートブック][3]の両方で、さまざまなグラフウィジェットを使用してこれらの分析をクエリし、チームの生産性を分析したり、問題のパターンを特定したりできます。
 

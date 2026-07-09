@@ -5,7 +5,7 @@ aliases:
   - /account_management/billing/usage_details/
 ---
 
-{{< callout url="" btn_hidden="true" header="New: Bill Overview" >}}
+{{< callout url="" btn_hidden="true" header="New: Bill Overview" respect-site-support="false" >}}
 A new Bill Overview experience is now in Limited Availability and will start rolling out automatically to all organizations starting March 2026. [Learn more](/account_management/plan_and_usage/bill_overview/).
 {{< /callout >}}
 

@@ -37,13 +37,23 @@ Work through this guide to set up Datadog Database Monitoring on an example Post
 
 Before getting started, you need a [Datadog account][1].
 
-To run the example application, you need a machine with [GNU Make][2] and [Docker][3]. Have your Datadog [API key][4] available.
+To run the example application, you need a machine with [GNU Make][2] and [Docker Desktop][3]. Have your Datadog [API key][4] available.
 
 ### Install the example application
 
-The example application starts up the Datadog Agent and a PostgreSQL database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
+The example application runs three containers: a PostgreSQL or MySQL database, the Datadog Agent, and a Go orders app that continuously generates realistic database traffic. While the app runs, the Agent sends the following signals to Datadog:
 
-Follow these instructions to install the example application on MacOS or Linux.
+| Signal | Description |
+|---|---|
+| Query metrics | Per-query latency, execution count, and rows examined. |
+| Explain plans | Execution plans sampled at runtime, surfacing costly operations. |
+| Full table scan | The `SELECT * FROM orders WHERE status = ?` query has no index on `status`, causing a sequential scan.
+| Lock contention | The app uses `SELECT ... FOR UPDATE` to simulate concurrent row locks. |
+| APM ↔ DBM correlation | Traces from the orders service are linked to their database queries, enabling end-to-end visibility. |
+
+You can view this data in Datadog Database Monitoring.
+
+Follow these instructions to install the example application on macOS or Linux.
 
 1. Clone the [repository][5] containing the example application:
     ```
@@ -60,12 +70,22 @@ Follow these instructions to install the example application on MacOS or Linux.
     export DD_API_KEY=<API_KEY>
     ```
 
-4. Start the application:
-    ```
-    make postgres
-    ```
+4. Start the application. Choose the database you want to monitor:
+   - **PostgreSQL:**
+     ```
+     make postgres
+     ```
+   - **MySQL:**
+     ```
+     make mysql
+     ```
 
-The command continues to run until you stop it by pressing Ctrl + C.
+   If your Datadog account is not on the US1 site, also export `DD_SITE` before running `make`:
+   ```
+   export DD_SITE=datadoghq.eu   # example: EU site
+   ```
+
+   The command continues to run until you stop it by pressing Ctrl + C.
 
 ## Identify an expensive query
 
@@ -75,7 +95,7 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 2. Sort the Normalized Query table by {{< ui >}}Percent time{{< /ui >}} to see the query that the database spends the most time executing.
 
-   The query that consumes the most database time appears on the first line:
+   The query that consumes the most database time appears on the first line. Look for the query scanning the `orders` table by `status`—for example, `SELECT * FROM orders WHERE status = ?`. This query is expensive because there is no index on the `status` column, so the database performs a full sequential scan of the table on every execution.
 
    {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
@@ -93,9 +113,23 @@ In addition to identifying slow queries, Datadog Database Monitoring can help yo
 
 4. Find a query in the table with data in the {{< ui >}}Explain Plan{{< /ui >}} column and click on it to open the Sample Details page. 
 
-5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an {{< ui >}}Index Scan{{< /ui >}}.
+5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. The list view breaks down each step the database takes to execute the query—the operation type, the table it runs against, and cost estimates—giving you a starting point to understand why a query is slow.
 
-   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Index Scan">}}
+   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Seq Scan on orders table">}}
+
+## Correlate traces and database queries
+
+The orders app emits APM traces that are automatically linked to the database queries they generate. Use this correlation to move seamlessly between a slow trace and the exact query responsible.
+
+1. Navigate to [APM > Traces][7] and find a trace from the orders service.
+
+2. On the trace flame graph, click a database span to open its details panel.
+
+3. In the details panel, click {{< ui >}}View in DBM{{< /ui >}} to jump directly to that query in Database Monitoring.
+
+Conversely, in a Query Sample in Database Monitoring, click {{< ui >}}View Trace{{< /ui >}} to open the originating APM trace.
+
+{{< img src="database_monitoring/dbm_apm_correlation.png" alt="APM trace linked to a DBM query sample" style="width:100%;">}}
 
 ## Visualize database health and performance
 
@@ -113,7 +147,7 @@ For example, you can see the absolute change in query volume in the past hour by
 
 3. In the widget carousel, select the {{< ui >}}Change{{< /ui >}} widget.
 
-4. Select `postgresql.queries.count` in the {{< ui >}}Metric{{< /ui >}} dropdown. This metric counts the number of queries sent to a PostgreSQL database.
+4. Select `postgresql.queries.count` in the {{< ui >}}Metric{{< /ui >}} dropdown. This metric counts the number of queries sent to a PostgreSQL database. If you are monitoring MySQL, use `mysql.queries` instead.
 
 5. Select `host` in the {{< ui >}}Break it down by{{< /ui >}} dropdown so that the widget aggregates queries by host.
 
@@ -137,7 +171,8 @@ You can clone and modify out-of-the-box dashboards to suit your needs.
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://www.gnu.org/software/make/
-[3]: https://www.docker.com/
+[3]: https://www.docker.com/products/docker-desktop/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://github.com/DataDog/dd-database-monitoring-example
 [6]: https://app.datadoghq.com/databases
+[7]: https://app.datadoghq.com/apm/traces

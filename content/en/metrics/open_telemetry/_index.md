@@ -46,11 +46,11 @@ For more information, read [OTLP metric types][10].
 
 ## Out-of-the-box dashboards
 
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards list{{< /ui >}} and search for `opentelemetry`:
 
 {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
-The **Host Metrics** dashboard is for data collected from the [host metrics receiver][8]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][9] you choose to enable.
+The {{< ui >}}Host Metrics{{< /ui >}} dashboard is for data collected from the [host metrics receiver][8]. The {{< ui >}}Collector Metrics{{< /ui >}} dashboard is for any other types of metrics collected, depending on which [metrics receiver][9] you choose to enable.
 
 ## Further reading
 

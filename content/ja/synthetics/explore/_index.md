@@ -15,7 +15,7 @@ further_reading:
 - link: /synthetics/explore/results_explorer
   tag: ドキュメント
   text: Learn about the Synthetic Monitoring & Testing Results Explorer
-- link: /service_management/events/explorer
+- link: /events/explorer
   tag: ドキュメント
   text: イベントエクスプローラーについて
 title: Synthetic テストの検索と管理

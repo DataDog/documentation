@@ -139,9 +139,9 @@ The example website regularly throws an error causing it to intentionally fail. 
 
 The {{< ui >}}Browser Test{{< /ui >}} details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits AI SRE, view the recovery, pause scheduling, or declare an incident. You can also review potential [{{< ui >}}Errors & Warnings{{< /ui >}}][11], [{{< ui >}}Resources{{< /ui >}}][12], and [{{< ui >}}Core Web Vitals{{< /ui >}}][13] to diagnose the issue.
+To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits Investigation, view the recovery, pause scheduling, or declare an incident. You can also review potential [{{< ui >}}Errors & Warnings{{< /ui >}}][11], [{{< ui >}}Resources{{< /ui >}}][12], and [{{< ui >}}Core Web Vitals{{< /ui >}}][13] to diagnose the issue.
 
-{{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
+{{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the {{< ui >}}Traces{{< /ui >}} tab.
 

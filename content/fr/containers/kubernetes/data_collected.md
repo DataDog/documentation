@@ -2,175 +2,176 @@
 aliases:
 - /fr/agent/kubernetes/metrics
 - /fr/agent/kubernetes/data_collected
+description: Guide de référence pour les métriques et événements collectés par l'Agent
+  Datadog à partir des clusters Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
   text: Recueillir les logs de votre application
 - link: /agent/kubernetes/apm/
   tag: Documentation
-  text: Recueillir les traces de vos applications
+  text: Recueillir les traces de votre application
 - link: /agent/kubernetes/prometheus/
   tag: Documentation
-  text: Recueillir vos métriques Prometheus
+  text: Recueillez vos métriques Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentation
-  text: Recueillir automatiquement les métriques et les logs de vos applications
+  text: Recueillez automatiquement les métriques et les logs de vos applications
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
-  text: Limiter la collecte de données à un sous-ensemble de conteneurs
+  text: Limitez la collecte de données à un sous-ensemble de conteneurs
 - link: /agent/kubernetes/tag/
   tag: Documentation
-  text: Attribuer des tags à toutes les données envoyées par un conteneur
+  text: Attribuez des tags à toutes les données envoyées par un conteneur
 title: Données Kubernetes recueillies
 ---
+Cette page répertorie les données recueillies par l'Agent Datadog lorsqu'il est déployé sur un cluster Kubernetes. Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
 
-Cette page répertorie les données recueillies par l’Agent Datadog lorsqu’il est déployé sur un cluster Kubernetes. Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
+**Remarque** : Pour les conteneurs Windows, voir [Métriques limitées pour les déploiements Windows][7].
 
-**Remarque** : pour les conteneurs Windows, consultez la section [Métriques limitées pour les déploiements sous Windows][7].
+## Métriques {#metrics}
 
-## Métriques
-
-### Kubernetes
+### Kubernetes {#kubernetes}
 
 {{< get-metrics-from-git "kubernetes" >}}
 
-**Remarque** : pour en savoir plus sur les métriques `kubernetes.cpu.*`, consultez la section [Différences entre les métriques `kubernetes.cpu.*` et `container.cpu.*`][8].
+**Remarque** : Pour plus d'informations sur les métriques `kubernetes.cpu.*`, voir [les divergences entre les métriques `kubernetes.cpu.*` et `container.cpu.*`][8].
 
-### Kubelet
+### Kubelet {#kubelet}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubelet][1].
 
 {{< get-metrics-from-git "kubelet" >}}
 
-### Kubernetes State Metrics Core
+### Métriques d'état de Kubernetes core {#kubernetes-state-metrics-core}
 
-Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6]. Ce check nécessite la version 1.12 ou une version ultérieure de l'Agent de cluster Datadog.
+Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6]. Cette vérification nécessite Datadog Cluster Agent v1.12 ou une version ultérieure.
 
 {{< get-metrics-from-git "kubernetes_state_core" >}}
 
-### Kubernetes state
+### État de Kubernetes {#kubernetes-state}
 
-**Remarque** : les métriques `kubernetes_state.*` sont recueillies à partir de l'API `kube-state-metrics`. Le check `kubernetes_state` est obsolète. Consultez la section [Kubernetes State Metrics Core][6] pour utiliser le check recommandé. Datadog vous conseille de ne pas activer simultanément ces deux checks.
+**Remarque** : Les métriques `kubernetes_state.*` sont collectées à partir de l'API `kube-state-metrics`. La vérification `kubernetes_state` est une vérification héritée. Pour une alternative, voir [Métriques d'état de Kubernetes core][6]. Datadog recommande de ne pas activer les deux vérifications simultanément.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-### DNS Kubernetes
+### Kubernetes DNS {#kubernetes-dns}
 
 {{< get-metrics-from-git "kube-dns" >}}
 
-### Proxy Kubernetes
+### Kubernetes proxy {#kubernetes-proxy}
 
 {{< get-metrics-from-git "kube-proxy" >}}
 
-### Serveur d'API kubernetes
+### Kubernetes API server {#kubernetes-api-server}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration du [serveur d'API Kubernetes][3].
 
 {{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
-### Kubernetes Controller Manager
+### Kubernetes controller manager {#kubernetes-controller-manager}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Controller Manager][2].
 
 {{< get-metrics-from-git "kube-controller-manager" >}}
 
-### Kubernetes Metrics Server
+### Kubernetes metrics server {#kubernetes-metrics-server}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
-### Kubernetes Scheduler
+### Kubernetes scheduler {#kubernetes-scheduler}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Scheduler][5].
 
 {{< get-metrics-from-git "kube-scheduler" >}}
 
 
-## Événements
+## Événements {#events}
 
 - Backoff
-- Conflict
+- Conflit
 - Supprimer
 - DeletingAllPods
-- Didn't have enough resource
+- Ressources insuffisantes
 - Erreur
-- Failed
-- FailedCreate
-- FailedDelete
-- FailedMount
-- FailedSync
-- Failedvalidation
-- FreeDiskSpaceFailed
-- HostPortConflict
-- InsufficientFreeCPU
-- InsufficientFreeMemory
-- InvalidDiskCapacity
-- Killing
-- KubeletsetupFailed
-- NodeNotReady
-- NodeoutofDisk
-- OutofDisk
-- Rebooted
-- TerminatedAllPods
-- Unable
-- Unhealthy
+- Échoué
+- ÉchecDeLaCréation
+- ÉchecDeLaSuppression
+- ÉchecDuMontage
+- ÉchecDeLaSynchronisation
+- ÉchecDeLaValidation
+- ÉchecDeL'EspaceDisqueLibre
+- ConflitDePortHôte
+- CPULibreInsuffisant
+- MémoireLibreInsuffisante
+- CapacitéDeDisqueInvalide
+- Tuer
+- ÉchecDeConfigurationDuKubelet
+- NœudPasPrêt
+- Nœud hors de disque
+- Hors de disque
+- Redémarré
+- TousLesPodsTerminés
+- Impossible
+- Non sain
 
-## Checks de service
+## Vérifications de service {#service-checks}
 
-### Kubelet
+### Kubelet {#kubelet-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubelet][1].
 
 {{< get-service-checks-from-git "kubelet" >}}
 
-### Kubernetes Controller Manager
+### Gestionnaire de contrôleur Kubernetes {#kubernetes-controller-manager-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Controller Manager][2].
 
 {{< get-service-checks-from-git "kube-controller-manager" >}}
 
-### Kubernetes Metrics Server
+### Serveur de métriques Kubernetes {#kubernetes-metrics-server-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
-### Kubernetes Scheduler
+### Planificateur Kubernetes {#kubernetes-scheduler-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Scheduler][5].
 
 {{< get-service-checks-from-git "kube-scheduler" >}}
 
-### Kubernetes State Metrics Core
+### Métriques d'état de Kubernetes core {#kubernetes-state-metrics-core-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6].
 
 `kubernetes_state.cronjob.complete`
-: Indique si le dernier job du cronjob a échoué ou non. Tags :`kube_cronjob` `kube_namespace` (`env` `service` `version` à partir des étiquettes standard).
+: Indique si le dernier travail du cronjob a échoué ou non. Étiquettes : `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
 
 `kubernetes_state.cronjob.on_schedule_check`
-: Envoie une alerte si la date de la prochaine planification du cronjob est située dans le passé. Tags : `kube_cronjob` `kube_namespace` (`env` `service` `version` à partir des étiquettes standard).
+: Alerte si le prochain horaire du cronjob est dans le passé. Étiquettes : `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
 
 `kubernetes_state.job.complete`
-: Indique si le job a échoué ou non. Tags : `kube_job` ou `kube_cronjob` `kube_namespace` (`env` `service` `version` à partir des étiquettes standard).
+: Indique si le travail a échoué ou non. Étiquettes : `kube_job` ou `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
 
 `kubernetes_state.node.ready`
-: Indique si le nœud est prêt. Tags : `node` `condition` `status`.
+: Indique si le nœud est prêt. Étiquettes : `node` `condition` `status`.
 
 `kubernetes_state.node.out_of_disk`
-: Indique si le nœud n'a plus d'espace disque. Tags : `node` `condition` `status`.
+: Indique si le nœud n’a plus d’espace disque. Étiquettes : `node` `condition` `status`.
 
 `kubernetes_state.node.disk_pressure`
-: Indique s'il existe une pression sur le disque du nœud. Tags : `node` `condition` `status`.
+: Indique si le nœud subit une pression sur le disque. Étiquettes : `node` `condition` `status`.
 
 `kubernetes_state.node.network_unavailable`
-: Indique si le réseau du nœud est indisponible. Tags : `node` `condition` `status`.
+: Indique si le réseau du nœud est indisponible. Étiquettes : `node` `condition` `status`.
 
 `kubernetes_state.node.memory_pressure`
-: Indique s'il existe une pression de mémoire sur le réseau du nœud. Tags : `node` `condition` `status`.
+: Indique si le réseau du nœud subit une pression sur la mémoire. Étiquettes : `node` `condition` `status`.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
