@@ -110,5 +110,5 @@ Learn how to [troubleshoot Mobile Session Replay][6].
 [2]: /session_replay/setup_and_configuration?platform=android
 [3]: /session_replay/privacy_options?platform=android
 [4]: /session_replay/app_performance
-[5]: /session_replay/dev_tools
+[5]: /session_replay/dev_tools?platform=mobile
 [6]: /session_replay/troubleshooting?platform=mobile

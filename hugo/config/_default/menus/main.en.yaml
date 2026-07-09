@@ -10202,25 +10202,25 @@ menu:
       parent: session_replay
       identifier: session_replay_developer_tools
       weight: 3
-    - name: Playlists
-      url: /session_replay/playlists
-      parent: session_replay
-      identifier: session_replay_playlists
-      weight: 4
-    - name: Heatmaps
-      url: /session_replay/heatmaps
-      parent: session_replay
-      identifier: session_replay_heatmaps
-      weight: 5
-    - name: Impact on App Performance
-      url: /session_replay/app_performance
-      parent: session_replay
-      identifier: session_replay_app_performance
-      weight: 6
     - name: Troubleshooting
       url: /session_replay/troubleshooting
       parent: session_replay
       identifier: session_replay_troubleshooting
+      weight: 4
+    - name: Impact on App Performance
+      url: /session_replay/app_performance
+      parent: session_replay
+      identifier: session_replay_app_performance
+      weight: 5
+    - name: Playlists
+      url: /session_replay/playlists
+      parent: session_replay
+      identifier: session_replay_playlists
+      weight: 6
+    - name: Heatmaps
+      url: /session_replay/heatmaps
+      parent: session_replay
+      identifier: session_replay_heatmaps
       weight: 7
     - name: Guides
       url: /session_replay/guide
