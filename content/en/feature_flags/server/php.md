@@ -33,7 +33,7 @@ Before setting up the PHP Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later (version 1.21.1 or later required for flag evaluation metrics)
+- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later
 - **Supported PHP runtime**: PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
 - **OpenFeature PHP SDK** `open-feature/sdk` version 2.1 or later, if you use the OpenFeature adapter
 
@@ -56,6 +56,8 @@ export DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6].
 
 ## Installation
 
