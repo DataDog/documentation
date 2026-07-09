@@ -394,7 +394,7 @@ print(details.errorCode) // Error code, if evaluation failed
 
 <div class="alert alert-info">Provider event observation for the Datadog OpenFeature provider is available in <code>dd-openfeature-provider-swift</code> 0.2.0 and later. Version 0.2.0 depends on <code>dd-sdk-ios</code> 3.13.0 or later.</div>
 
-Use `OpenFeatureAPI.shared.observe()` to react to OpenFeature provider events. The Datadog OpenFeature provider emits `.ready`, `.stale`, and `.error` based on the underlying `FlagsClient` state. The OpenFeature SDK can also emit life cycle events such as `.reconciling` and `.contextChanged` when the evaluation context changes.
+Use `OpenFeatureAPI.shared.observe()` to react to OpenFeature provider events. The Datadog OpenFeature provider emits `.ready`, `.stale`, and `.error` based on the underlying `FlagsClient` state. The OpenFeature SDK can also emit lifecycle events such as `.reconciling` and `.contextChanged` when the evaluation context changes.
 
 {{< code-block lang="swift" >}}
 import Combine
