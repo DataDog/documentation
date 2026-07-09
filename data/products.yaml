@@ -124,6 +124,10 @@ products:
                 link: product_analytics/
                 description: Gain insight into user behavior and make data-driven product decisions
                 short_description: User behavior insights
+              - title: Experiments
+                link: experiments/
+                description: Plan, run, and analyze A/B tests to measure the impact of product changes
+                short_description: A/B testing and analysis
 
   - title: AI
     icon: bits-ai
