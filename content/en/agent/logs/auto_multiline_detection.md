@@ -287,7 +287,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_AGGREGATION=false
 
 In Datadog Agent version 7.81+, multi-line Go stack traces are automatically detected and aggregated into a single log.
 
-For example, the following log:
+For example, auto multi-line detection aggregates the following stack trace into a single log instead of splitting it into separate lines:
 
 ```
 panic: INVALID ADDRESS runtime error: invalid memory address or nil pointer dereference [iter=249]
