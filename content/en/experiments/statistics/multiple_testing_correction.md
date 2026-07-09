@@ -115,14 +115,6 @@ Use the corrected interval the same way you use any experiment confidence interv
 
 Because corrected intervals are wider, a result that was significant without correction may no longer be significant after correction. This is expected: the corrected result is controlling the risk of false positives across the full family of comparisons.
 
-## When to use multiple testing correction
-
-Enable multiple testing correction when you plan to make decisions from several metrics or treatment variants, especially when secondary metrics are important guardrails for shipping or rolling back a change.
-
-You may leave it disabled when the experiment has one prespecified primary metric and one treatment variant, and your decision process does not depend on secondary metric significance. In that case, correction provides little or no benefit and can reduce sensitivity.
-
-Configure multiple testing correction and the primary metric weight in the experiment's [statistical analysis plan][2].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
