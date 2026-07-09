@@ -270,12 +270,16 @@ final class FeatureFlagStateObserver: FlagsStateListener {
             break
         case .reconciling:
             // The client is fetching assignments for a context change.
+            break
         case .ready:
             // Assignments are loaded and available for evaluation.
+            break
         case .stale:
             // Cached assignments are available, but the latest fetch failed.
+            break
         case .error:
             // No assignments are available for evaluation.
+            break
         }
     }
 }
