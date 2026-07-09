@@ -4500,7 +4500,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.",
+    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
