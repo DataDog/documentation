@@ -96,7 +96,7 @@
               {{- if gt (len $c) 2 -}}
                   {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
                   {{- $id_anchor := $section_header | anchorize -}}
-                  {{- /* Fold the tab slug into the id: anchorize() strips operators like "<", ">", "=", so tabs such as "GitLab >= 14.1" and "GitLab < 14.1" would otherwise collapse to the same objectID (a duplicate that flip-flops as "updated" every sync). $section_tab is already unique per tab. */ -}}
+                  {{- /* Fold tab slug into id: anchorize() drops "<>=", so ">= 14.1" and "< 14.1" tabs would otherwise share one objectID. */ -}}
                   {{- if $section_tab -}}
                       {{- $id_anchor = print $id_anchor "-" $section_tab -}}
                   {{- end -}}

@@ -23,7 +23,7 @@
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
 
-{{/* English fallback: the API spec (summaries/operationIds) is authored in English and is not translated, but the localized translate_actions files are often incomplete. Fall back to English so the slug/anchor/objectID stay valid and stable across languages. Without this, a missing localized summary yields an empty slug (".../resource//") AND breaks v1/v2 twin detection below, producing duplicate objectIDs that flip-flop as "updated" on every sync. */}}
+{{/* Fall back to English summary: localized translate_actions are often incomplete, and an empty summary breaks the slug/objectID. */}}
 {{ $en_v1_translate_actions := index $hugo_context.Site.Data.api.v1 "translate_actions" }}
 {{ $en_v2_translate_actions := index $hugo_context.Site.Data.api.v2 "translate_actions" }}
 {{ $en_translate_actions_datafile := cond (eq $api_version "v1") $en_v1_translate_actions $en_v2_translate_actions }}
@@ -38,7 +38,7 @@
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
 
 {{/* When the same operationId+summary exists in both v1 and v2, both versions share one endpoint page with version tabs. Disambiguate the records by linking to the tab anchor. */}}
-{{/* Detect twins from the English translate_actions (complete for all langs), not the localized file, so disambiguation still fires when a localized summary is missing. */}}
+{{/* Detect v1/v2 twins from English data so disambiguation fires even when the localized summary is missing. */}}
 {{ $other_action := cond (eq $api_version "v1") (index $en_v2_translate_actions $operationId) (index $en_v1_translate_actions $operationId) }}
 {{ if and (ne $other_action nil) (eq ($other_action.summary | anchorize) ($en_action_data.summary | anchorize)) }}
     {{ $tab_anchor := (print $summary "-" $api_version) | anchorize }}

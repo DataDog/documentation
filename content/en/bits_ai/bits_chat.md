@@ -22,7 +22,7 @@ aliases:
 ---
 
 ## Overview
-Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
+Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack. TEST: indexing churn verification.
 
 Ask Bits Chat questions across these categories:
 
@@ -151,6 +151,9 @@ Ask Bits questions about your system or active incident. Bits has context on Dat
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
+
+### Test section
+TEST: this section verifies search indexing add/update behavior.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
