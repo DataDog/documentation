@@ -550,7 +550,7 @@ Tools for [Data Observability][68], including data catalog search, lineage trave
 
 ### `search_data_entities`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Searches for data entities in the data catalog by name, full-text search, or filters (platform, schema, database, account).
 
 - Find tables named "orders" in Snowflake.
@@ -559,7 +559,7 @@ Searches for data entities in the data catalog by name, full-text search, or fil
 
 ### `get_data_catalog_schema`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Returns the entity type schema for every platform with data in the catalog: entity types, containment hierarchy, filterable attributes, and default metrics.
 
 - What platforms are connected to Data Observability?
@@ -568,7 +568,7 @@ Returns the entity type schema for every platform with data in the catalog: enti
 
 ### `get_data_entity_details`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Fetches full details and attributes (owner, tags, custom attributes, platform, schema, database, account) for one or more data entities by ID.
 
 - Get the full attributes for this table entity.
@@ -576,7 +576,7 @@ Fetches full details and attributes (owner, tags, custom attributes, platform, s
 
 ### `get_data_entity_hierarchy`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database/schema a table belongs to, or which tables are in a schema.
 
 - What database does this table belong to?
@@ -585,7 +585,7 @@ Fetches the containment hierarchy (ancestors and descendants) for one or more en
 
 ### `get_data_entity_lineage`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Fetches the live reachable lineage subgraph (nodes and edges) from one or more anchor entities, upstream, downstream, or both.
 
 - What's downstream of this table?
@@ -594,7 +594,7 @@ Fetches the live reachable lineage subgraph (nodes and edges) from one or more a
 
 ### `summarize_data_entity_lineage`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth distribution) for a large or unknown lineage graph, without the full payload. Use before `get_data_entity_lineage` on graphs of unknown size.
 
 - How many things depend on this table, broken down by type?
@@ -602,7 +602,7 @@ Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth d
 
 ### `rank_data_entities_by_lineage_degree`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` or `APM Read`*\
 Ranks entities by transitive lineage connectivity (upstream, downstream, or both), using a pre-built snapshot.
 
 - What are the most widely-depended-on tables in my warehouse?
@@ -610,7 +610,7 @@ Ranks entities by transitive lineage connectivity (upstream, downstream, or both
 
 ### `get_warehouse_query_history`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
 Fetches recent queries that touched specific entities, in reverse chronological order, including the SQL text, execution state, and query type.
 
 - Who has been querying this table recently?
@@ -620,7 +620,7 @@ Fetches recent queries that touched specific entities, in reverse chronological 
 
 ### `get_popular_warehouse_tables_by_query_frequency`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `APM Read`*\
 Ranks tables by query activity, broken out by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
 
 - What tables are most queried by BI tools?
@@ -628,7 +628,7 @@ Ranks tables by query activity, broken out by who's querying them: human users, 
 
 ### `suggest_data_observability_monitor_filters`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read`*\
 Analyzes a set of entities to find common attributes and naming patterns, and suggests monitor filter expressions that group subsets of those entities.
 
 - What do my highest-priority tables have in common?
@@ -636,14 +636,14 @@ Analyzes a set of entities to find common attributes and naming patterns, and su
 
 ### `rank_data_observability_monitor_candidates`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `APM Read`*\
 Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. The primary entry point for "what should I monitor?" questions.
 
 - What tables should I set up data quality monitors for first?
 
 ### `get_data_observability_monitor`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
 Retrieves data quality metric timeseries for a given monitor ID, including anomaly-detection bounds when enabled.
 
 - Show me the metric history for monitor 12345.
@@ -651,21 +651,21 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 
 ### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `Monitors Read`*\
 Fetches all data quality monitors for the org and resolves each monitor's filter to the entities it covers. Use this to see which tables have no monitoring at all.
 
 - Which of my tables aren't covered by any data quality monitor?
 
 ### `get_data_observability_monitor_group_statuses`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `APM Read`*\
 Queries the current alert and warn state of data quality monitor groups.
 
 - Which tables are currently failing their data quality checks?
 
 ### `get_entity_tags` / `update_entity_tags`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read` (get) or `Data Observability Write` (update)*\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
 Gets or sets custom user-defined tags on data entities.
 
 - What tags are on this table?
@@ -673,7 +673,7 @@ Gets or sets custom user-defined tags on data entities.
 
 ### `get_entity_descriptions` / `update_entity_description`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read` (get) or `Data Observability Write` (update)*\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
 Gets or sets custom user-defined descriptions on data entities.
 
 - What's the description on this table?
@@ -681,7 +681,7 @@ Gets or sets custom user-defined descriptions on data entities.
 
 ### `get_spark_job_health`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `APM Read`*\
 Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, worst stages) for a single Spark or Databricks job run.
 
 - Why did this Spark job run slowly?
@@ -689,7 +689,7 @@ Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, 
 
 ### `get_spark_sql_plan`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Read`*\
+*Permissions Required: `APM Read`*\
 Retrieves the Spark SQL physical execution plan for a stage, including join strategies, shuffle information, and per-node metrics.
 
 - Show me the execution plan for this Spark stage.
@@ -709,7 +709,6 @@ Retrieves full details of a specific Data Observability recommendation by ID, in
 
 - Get the details of recommendation `abc123`.
 
-<div class="alert alert-info">This section documents the tools confirmed in the <code>data-observability</code> toolset's shared library. The dedicated Data Observability MCP service exposes some additional tools (for example, Databricks cost and cluster job listings) — these need separate confirmation of GA/customer-facing status before being added here.</div>
 
 ## Database Monitoring
 
