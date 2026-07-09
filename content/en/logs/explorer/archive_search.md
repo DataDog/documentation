@@ -59,7 +59,7 @@ Before using Archive Search:
 
 ### Permissions
 
-Running an **Archive Search** requires the **`logs_write_historical_view`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
+Running an **Archive Search** requires the **`logs_write_historical_view`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archives** permission.
 
 Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
 
@@ -68,7 +68,7 @@ For more information on access controls and log security, see [How to Set Up RBA
 ## Launching a search
 
 1. Go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Archive Search{{< /ui >}} > {{< ui >}}New Search{{< /ui >}}][4].
-2. Select an Archive and time range.
+2. Select an archive and time range.
 3. Enter a query, such as `user_id:abc123`.
 4. (Optional) Rename the search.
 5. Under {{< ui >}}Mode{{< /ui >}}, choose the kind of search you want to perform.
@@ -124,7 +124,7 @@ Archive Search scans archived log files within your selected time range. **Scan 
 
 To optimize performance and reduce costs:
 * **Narrow the time range:** Limit your search to the smallest window possible.
-* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the {{< ui >}}Settings{{< /ui >}}.
+* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per archive in the {{< ui >}}Settings{{< /ui >}}.
 * **Use Partition Attributes:** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query. Up to 2 per archive.
 * **Use Lookup Attributes:** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`. Up to 2 per archive.
 * **Use zstd compression:** Archives use zstd compression by default, which reduces scan volume and cloud egress costs compared to gzip. If your archive uses gzip, see [Log Archives][9] to switch to zstd.
