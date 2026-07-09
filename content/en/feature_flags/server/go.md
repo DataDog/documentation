@@ -28,7 +28,7 @@ Before setting up the Go Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later
+- **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later (version 2.8.0 or later required for flag evaluation metrics)
 
 Set the following environment variables:
 
@@ -37,7 +37,7 @@ Set the following environment variables:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
