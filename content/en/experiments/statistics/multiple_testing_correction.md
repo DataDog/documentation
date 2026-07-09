@@ -32,8 +32,6 @@ Multiple testing correction reduces this risk by making each individual comparis
 
 Multiple testing correction is available for frequentist analysis methods. Datadog does not offer this setting for [Bayesian analysis][1], because Bayesian intervals are not structured around Type I error control.
 
-## What counts as a comparison
-
 Datadog treats each treatment variant compared to the control for each decision metric as one comparison.
 
 The control variant is the baseline, so it does not add a comparison by itself.
