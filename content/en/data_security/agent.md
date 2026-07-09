@@ -237,9 +237,9 @@ agent diagnose show-metadata agent-telemetry
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
 | **eBPF**                                    |                                                                                                                        |
 | ebpf.core_load_success                      | Number of successful loads of an eBPF CO-RE program                                                                    |
-| ebpf.core_load_error                        | Number of errors while loading an eBPF CO-RE program                                                                   |
-| ebpf.core_remoteconfig_success              | Number of successful downloads of BTF from Remote Config                                                               |
-| ebpf.core_remoteconfig_error                | Number of errors downloading BTF from Remote Config                                                                    |
+| ebpf.core_load_error                        | Number of errors loading an eBPF CO-RE program                                                                         |
+| ebpf.core_remoteconfig_success              | Number of successful downloads of BTF (BPF Type Format) data from remote configuration                                 |
+| ebpf.core_remoteconfig_error                | Number of errors downloading BTF data from remote configuration                                                        |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
