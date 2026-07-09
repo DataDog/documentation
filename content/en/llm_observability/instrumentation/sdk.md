@@ -88,10 +88,6 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
-`DD_LLMOBS_SAMPLE_RATE`
-: optional - _float_ - **default**: `1.0`
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). This sampling is independent of in-app controls such as [automation rules][2] and [APM trace sampling][3].
-
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
@@ -101,8 +97,6 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 <br />When set to `1` or `true`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
-[2]: /llm_observability/monitoring/automation_rules/
-[3]: /tracing/trace_pipeline/ingestion_mechanisms/
 {{% /tab %}}
 
 
@@ -224,10 +218,6 @@ LLMObs.enable(
 `agentless_enabled`
 : optional - _boolean_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
-
-`sample_rate`
-: optional - _float_
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). If unset, this defaults to `DD_LLMOBS_SAMPLE_RATE`, but otherwise takes precedence over the environment variable.
 
 `site`
 : optional - _string_
