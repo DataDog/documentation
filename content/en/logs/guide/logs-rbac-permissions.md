@@ -138,7 +138,7 @@ Grants the ability to run [Archive Search][17] in **Search mode** only. Results 
 
 This permission is global. Users also need the [Logs Read Archives](#logs_read_archives) permission for each archive they want to search.
 
-To allow Search & Rehydration mode, grant [`logs_write_historical_view`](#logs_write_historical_view) instead.
+To also allow **Search & Rehydration** mode, grant [`logs_write_historical_view`](#logs_write_historical_view).
 
 ### `logs_write_historical_view`
 
