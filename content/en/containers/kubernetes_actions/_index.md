@@ -127,7 +127,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 
 ## Usage
 
-After Kubernetes Actions is enabled, actions are available from the [Kubernetes Explorer][6]. You can start an action from the action tray kebab menu, or directly from the Explorer table row.
+After Kubernetes Actions is enabled, actions are available from the [Kubernetes Explorer][6]. You can start an action from the resource's side panel, or from the action tray kebab menu in the Explorer table row.
 
 Before an action runs, Datadog checks that both your [permissions](#requirements) and the cluster prerequisites are met. If a requirement is not satisfied, the confirmation modal shows exactly what is missing.
 
