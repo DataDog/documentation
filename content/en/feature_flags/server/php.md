@@ -57,7 +57,7 @@ export DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6].
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
 
 ## Installation
 
