@@ -257,6 +257,8 @@ Flag details may help you debug evaluation behavior and understand why a user re
 
 ## Observe state changes
 
+<div class="alert alert-info">State observation with <code>FlagsClient.state</code> is available in <code>dd-sdk-ios</code> 3.11.0 and later.</div>
+
 Use `flagsClient.state` to check whether a `FlagsClient` is ready to evaluate flags and to react when its state changes. State changes occur when you call `setEvaluationContext` and the SDK fetches assignments for that context.
 
 {{< code-block lang="swift" >}}
@@ -296,7 +298,7 @@ The examples above use Datadog's `FlagsClient` API directly. If you prefer the [
 Add `dd-openfeature-provider-swift` to your `Package.swift`:
 
 {{< code-block lang="swift" filename="Package.swift" >}}
-.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.1.0"))
+.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.2.0"))
 {{< /code-block >}}
 
 Link the `DatadogOpenFeatureProvider` product to your app target. The bridge depends on OpenFeature Swift SDK 0.3.0.
@@ -388,6 +390,8 @@ print(details.errorCode) // Error code, if evaluation failed
 {{< /code-block >}}
 
 ### Observe provider events
+
+<div class="alert alert-info">Provider event observation for the Datadog OpenFeature provider is available in <code>dd-openfeature-provider-swift</code> 0.2.0 and later. Version 0.2.0 depends on <code>dd-sdk-ios</code> 3.13.0 or later.</div>
 
 Use `OpenFeatureAPI.shared.observe()` to react to OpenFeature provider events. The Datadog OpenFeature provider emits `.ready`, `.stale`, and `.error` based on the underlying `FlagsClient` state. The OpenFeature SDK can also emit life cycle events such as `.reconciling` and `.contextChanged` when the evaluation context changes.
 

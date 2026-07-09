@@ -253,6 +253,8 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 ## Observe provider events
 
+<div class="alert alert-info">Provider event observation is available in <code>dd-sdk-android-flags-openfeature</code> 3.6.0 and later. Use the same version for <code>dd-sdk-android-flags</code>.</div>
+
 Use `OpenFeatureAPI.observe()` to react to provider state changes. The Datadog OpenFeature provider emits `ProviderReady`, `ProviderStale`, and `ProviderError` based on the underlying `FlagsClient` state.
 
 {{< code-block lang="kotlin" >}}
@@ -399,6 +401,8 @@ flagsClient.setEvaluationContext(
 This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations after the background operation completes.
 
 ### Observe direct client state changes
+
+<div class="alert alert-info">Direct client state observation with <code>flagsClient.state</code> is available in <code>dd-sdk-android-flags</code> 3.4.0 and later.</div>
 
 Use `flagsClient.state` to check the current direct-client state or register a listener for state changes:
 
