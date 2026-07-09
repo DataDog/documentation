@@ -192,5 +192,21 @@ export default defineMarkdocConfig({
       ),
       ...schema.tags["collapse-content"],
     },
+    ui: {
+      render: component("./src/components/Ui/Ui.astro"),
+      ...schema.tags.ui,
+    },
+    kbd: {
+      render: component("./src/components/Kbd/Kbd.astro"),
+      ...schema.tags.kbd,
+    },
+    sup: {
+      render: component("./src/components/Sup/Sup.astro"),
+      ...schema.tags.sup,
+    },
+    nbsp: {
+      render: component("./src/components/Nbsp/Nbsp.astro"),
+      ...schema.tags.nbsp,
+    },
   },
 });

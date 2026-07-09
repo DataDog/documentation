@@ -1,0 +1,8 @@
+---
+import styles from "./Ui.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+const cl = classListFactory(styles);
+---
+
+<span class={cl("ui")}><slot /></span>

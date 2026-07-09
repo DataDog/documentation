@@ -134,13 +134,16 @@ const astroComponents: AstroTestPage[] = [
           </tr>
         </thead>
         <tbody>
-          {markdocComponents.map((entry) => (
+          {markdocComponents.map((entry) => {
+            const tagName = entry.id.replace('test_pages/components/', '');
+            return (
             <tr>
-              <td><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></td>
+              <td><a href={`/docs/${entry.id}/`}><code>{tagName}</code></a></td>
               <td>{entry.data.type ?? ''}</td>
               <td>{entry.data.description ?? ''}</td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
 

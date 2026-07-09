@@ -73,5 +73,18 @@ export default {
         id: { type: String },
       },
     },
+    ui: {
+      attributes: {},
+    },
+    kbd: {
+      attributes: {},
+    },
+    sup: {
+      attributes: {},
+    },
+    nbsp: {
+      attributes: {},
+      selfClosing: true,
+    },
   },
 };
