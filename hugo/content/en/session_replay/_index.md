@@ -139,4 +139,4 @@ Learn more about [Dev Tools][11].
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /session_replay/dev_tools?platform=browser
+[11]: /session_replay/dev_tools
