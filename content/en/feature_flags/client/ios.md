@@ -415,14 +415,19 @@ final class FeatureFlagEventObserver {
                 break
             case .stale:
                 // Cached assignments are available, but they may be out of date.
+                break
             case .error(_, _):
                 // The provider cannot evaluate flags.
+                break
             case .reconciling:
                 // The provider is reconciling after a context change.
+                break
             case .contextChanged:
                 // The context change completed.
+                break
             case .configurationChanged:
                 // The provider configuration changed.
+                break
             }
         }
     }
