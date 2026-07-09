@@ -285,7 +285,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_AGGREGATION=false
 
 ## Stack trace aggregation
 
-In Datadog Agent version 7.81+, multi-line go stack traces are automatically detected and aggregated into a single log.
+In Datadog Agent version 7.81+, multi-line Go stack traces are automatically detected and aggregated into a single log.
 
 For example, the following log:
 
