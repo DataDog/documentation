@@ -23,7 +23,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/fleet-automation/"
   tag: "Blog"
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
-site-support-id: fleet-automation-standard-features
+site_support_id: fleet-automation-standard-features
 ---
 
 ## Overview

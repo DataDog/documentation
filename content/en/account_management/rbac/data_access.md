@@ -46,7 +46,7 @@ Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
 
 Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, and Software Delivery repository info (CI Visibility pipelines).
+: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), and Workload Protection Agent Events.
 
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
@@ -63,6 +63,7 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - Logs
 - RUM sessions
 - Agent Observability
+- Workload Protection Agent Events
 
 The following are available as a Preview upon request:
 - Cloud costs

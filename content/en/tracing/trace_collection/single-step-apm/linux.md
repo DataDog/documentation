@@ -28,7 +28,7 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
    
    {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead:
 
    Click {{< ui >}}Customize Library Versions{{< /ui >}}, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
