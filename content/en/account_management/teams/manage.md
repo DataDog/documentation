@@ -17,39 +17,15 @@ The team header displays the team's avatar, banner, name, and description. Custo
 
 ### Info tab
 
-The Info tab displays and manages the team's core details, organized into the following sections:
-
-- **Notification Channels**: The notification targets configured for the team. Supported targets include Slack, Microsoft Teams, PagerDuty, email, and ServiceNow.
-- **Links**: The team's saved links to related resources, each shown with its integration logo.
-- **Connections**: The team's connections to external systems, such as a GitHub team or a ServiceNow assignment group.
-- **Hierarchy**: The team's place in your organization, including its parent team and subteams.
-- **Members**: The users on the team. Team managers are marked with a "TEAM MANAGER" badge.
+Core team details — notification channels, links, connections, hierarchy (parent team and subteams), and members.
 
 ### Resources tab
 
-The Resources tab surfaces the Datadog resources associated with the team, grouped into the following sections:
-
-- **Productivity**: Incidents, Monitors, Cases, Projects, Dashboards, Notebooks, and Sheets.
-- **Software**: Services, Systems, Frontend Apps, and API Endpoints.
-- **Performance**: Team performance metrics.
-- **Cloud Cost**: An overview of the team's cloud costs.
-- **More Team Resources**: Additional resources, including Cloud Security, Cloud SIEM, Error Tracking, Software Composition Analysis, Synthetic Monitoring, RUM, Serverless, Containers, and the Resource Catalog.
-
-If the team has subteams, use the **Include Subteams** toggle at the top of the Resources tab. When enabled, the tab shows resources from the subteams alongside the team's own resources.
+The Datadog resources the team owns, grouped by area such as productivity, software, performance, and cloud cost. If the team has subteams, use the **Include Subteams** toggle to show their resources alongside the team's own.
 
 ### On-Call tab
 
-The On-Call tab manages the team's [Datadog On-Call][6] configuration, organized into the following sections:
-
-- **Members**: The team's On-Call members.
-- **Latest Pages**: Recent pages sent to the team.
-- **Page Routing**: The rules that route pages to the team's On-Call responders.
-- **Schedules**: The team's On-Call schedules and rotations.
-- **Escalation Policies**: The policies that determine who is paged, and in what order.
-- **Handover Automation**: Automated actions that run at shift handoff.
-- **Custom Triggering Sources**: Custom sources, such as webhooks, that trigger pages.
-
-If the team is not yet set up in On-Call, the tab displays onboarding steps to create an On-Call team.
+The team's [Datadog On-Call][6] setup — members, schedules, escalation policies, routing, and handover automation.
 
 ### Customize settings
 
@@ -114,7 +90,7 @@ This feature is not supported for your selected Datadog site ({{< region-param k
 With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
     {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
 
-A team's subteams appear in the **Hierarchy** section of its Info tab. A team's subteams appear in the **Hierarchy** section of its Info tab.
+A team's subteams appear in the **Hierarchy** section of its Info tab.
 To automate subteam management based on your organization's hierarchical structure, use the [Teams APIs][5].
 
 ## Manage teams through an identity provider
