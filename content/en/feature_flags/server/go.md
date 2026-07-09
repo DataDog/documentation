@@ -36,7 +36,7 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
+# Optional: Emit feature_flag.evaluations
 DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
