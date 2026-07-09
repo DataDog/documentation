@@ -72,9 +72,9 @@ Batch encoding is required when **Format** is set to `arrow_stream` and is optio
 
 Toggle **Enable batching** for batch encoding.
 
+1. Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns results in encoding errors.
 1. In the **Max events** field, enter the maximum number of events per batch. Must be `1` or greater.
 1. In the **Timeout (secs)** field, enter the maximum time, in seconds, before a partial batch is flushed. Must be between `1` and `65535`. If left unset, the default is 1 second.
-1. Toggle **Allow nullable fields** to allow `null` values for non-nullable columns in the target table. When this setting is off (default), missing values for non-nullable columns results in encoding errors.
 
 See [Event batching](#event-batching) for more information.
 
