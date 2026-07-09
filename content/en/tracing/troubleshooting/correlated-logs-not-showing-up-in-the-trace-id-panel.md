@@ -28,11 +28,11 @@ There are four types of logs that appear in a [trace][1]:
 
 {{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:80%;">}}
 
-In some cases, the **Logs** section in the trace panel may appear empty. This guide walks you through how to fix this issue.
+In some cases, the {{< ui >}}Logs{{< /ui >}} section in the trace panel may appear empty. This guide walks you through how to fix this issue.
 
 ## Infrastructure options
 
-If the **Log** section is empty for the `host`, `container_id`, or `pod_name` options, navigate to the [Log Explorer][2] and ensure the following conditions:
+If the {{< ui >}}Log{{< /ui >}} section is empty for the `host`, `container_id`, or `pod_name` options, navigate to the [Log Explorer][2] and ensure the following conditions:
 
 1. Logs are being sent from the host/container/pod that emitted the trace.
 2. There are logs for that host within the trace's timeframe.
@@ -40,7 +40,7 @@ If the **Log** section is empty for the `host`, `container_id`, or `pod_name` op
 
 ## Trace ID option
 
-If the **Log** section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
+If the {{< ui >}}Log{{< /ui >}} section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
 
 1. Extract the trace ID in a log attribute.
 2. Remap this attribute to the reserved `trace_id` attribute.

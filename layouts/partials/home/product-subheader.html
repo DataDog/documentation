@@ -1,0 +1,26 @@
+{{- /*
+  Renders a single product subheader (title + link list).
+  Called from home/product-section.html with a dict of { subheader, section_title }.
+*/ -}}
+{{- $subheader := .subheader -}}
+{{- $sectionTitle := .section_title -}}
+<div class="product-section__subheader">
+    <h4 class="product-section__subheader-title">{{ $subheader.title }}</h4>
+    <ul class="product-section__links">
+        {{- range $subheader.links }}
+        {{- $words := split .title " " -}}
+        {{- $lastIdx := sub (len $words) 1 -}}
+        {{- $lastWord := index $words $lastIdx -}}
+        {{- $leading := delimit (first $lastIdx $words) " " -}}
+        <li class="product-section__link-item">
+            <a class="product-section__link" href="{{ .link | absLangURL }}" data-track-section="{{ $sectionTitle }}" data-track-subsection="{{ $subheader.title }}" data-track-tile-title="{{ .title }}">{{- with $leading }}{{ . }} {{ end -}}<span class="product-section__link-tail">{{ $lastWord }}<span class="product-section__link-arrow" aria-hidden="true"><svg viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 6.5h13M9 1l5 5.5L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+            {{- if or .description .short_description }}
+            <span class="product-section__link-tooltip" role="tooltip">
+                {{- with .short_description }}<span class="product-section__link-tooltip-short">{{ . }}</span>{{ end -}}
+                {{- with .description }}<span class="product-section__link-tooltip-long">{{ . }}</span>{{ end -}}
+            </span>
+            {{- end }}
+        </li>
+        {{- end }}
+    </ul>
+</div>

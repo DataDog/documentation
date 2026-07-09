@@ -15,4 +15,6 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/flag_history" >}}Flag History{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/flag_graphs" >}}Feature Flag Graphs{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/stale_flags" >}}Stale Flags{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/permissions" >}}Permissions and Access Control{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/approvals" >}}Approvals{{< /nextlink >}}
 {{< /whatsnext >}}

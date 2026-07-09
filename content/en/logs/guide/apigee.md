@@ -24,7 +24,7 @@ Collect Apigee proxy logs to track errors, response time, duration, latency, mon
 
 ### Log collection
 
-{{% site-region region="us,eu" %}}
+{{% site-region region="us,eu,uk1" %}}
 There are two methods for collecting Apigee logs:
 
 1. Use Apigee's [JavaScript policy][1] to send logs to Datadog.

@@ -17,12 +17,12 @@ Before setting up runtime detection, ensure the following prerequisites are met:
 
 ### In-app service enablement
 
-You can enable runtime Software Composition Analysis (SCA) in-app through [**Security** > **Code Security**][3].
+You can enable runtime Software Composition Analysis (SCA) in-app through [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][3].
 
 1. Navigate to the [Security Settings][3] page.
-2. In **Activate runtime detection of library vulnerabilities**, click **Manage Services**.
-3. Check the services where you want to identify library vulnerabilities, and select **Bulk Actions**.
-4. Click **Activate Runtime Software Composition Analysis (SCA)**.
+2. In {{< ui >}}Activate runtime detection of library vulnerabilities{{< /ui >}}, click {{< ui >}}Manage Services{{< /ui >}}.
+3. Check the services where you want to identify library vulnerabilities, and select {{< ui >}}Bulk Actions{{< /ui >}}.
+4. Click {{< ui >}}Activate Runtime Software Composition Analysis (SCA){{< /ui >}}.
 
 ### Datadog SDK configuration
 

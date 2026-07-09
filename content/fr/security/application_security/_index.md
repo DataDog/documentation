@@ -1,93 +1,146 @@
 ---
+algolia:
+  tags:
+  - asm
+  - App and API Protection
 aliases:
 - /fr/security_platform/application_security
+- /fr/security/application_security/enabling/single_step
+- /fr/security/application_security/enabling/compatibility
+- /fr/security/application_security/enabling
+- /fr/security/application_security/getting_started
+- /fr/security/application_security/threats
+- /fr/security/application_security/setup/standalone
 description: Surveillez les menaces visant votre système de production en utilisant
   le contexte d'exécution fourni par les traces distribuées.
 further_reading:
-- link: /security/application_security/how-appsec-works/
+- link: https://www.datadoghq.com/blog/secure-api-with-datadog
+  tag: Blog
+  text: 'De la découverte à la défense : sécuriser les API avec Datadog App and API
+    Protection'
+- link: /security/application_security/how-it-works/
   tag: Documentation
-  text: Fonctionnement d'Application Security Management
-- link: /security/application_security/threats/
-  tag: Documentation
-  text: Gestion des menaces
-- link: /security/application_security/software_composition_analysis/
-  tag: Documentation
-  text: Analyse de la composition dʼun logiciel
-- link: /security/application_security/enabling/#compatibilite
-  tag: Documentation
-  text: En savoir plus sur les langages et frameworks compatibles
+  text: Comment fonctionne App and API Protection
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: Page de la solution
-  text: Solution Application Security Management Datadog
-- link: https://www.datadoghq.com/blog/datadog-application-security/
-  tag: GitHub
-  text: Présentation de la solution Application Security Datadog
-- link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
-  tag: Blog
-  text: Applications sans serveur sécurisées grâce à la solution ASM Datadog
-- link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
-  tag: Blog
-  text: Pratiques de sécurité recommandées pour les applications dans des environnements
-    cloud natifs.
+  text: Datadog App and API Protection
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
   text: Gagner en visibilité sur les risques, vulnérabilités et attaques avec la vue
     Security d'APM
-- link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
-  tag: Blog
-  text: Bloquer les attaques ciblant vos apps et API avec la solution Application
-    Security Mangement de Datadog
-- link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
-  tag: Blog
-  text: Modélisation des menaces avec la solution Application Security Management
-    de Datadog
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: Blog
   text: Surveiller les applications WAF AWS avec Datadog
-title: Application Security Management
+- link: https://www.datadoghq.com/blog/security-inbox-prioritization/
+  tag: Blog
+  text: Comment Datadog Security Inbox hiérarchise les risques de sécurité
+- link: https://www.datadoghq.com/blog/understanding-your-waf/
+  tag: Blog
+  text: 'Comprendre votre WAF : comment combler les lacunes courantes en matière de
+    sécurité des applications web'
+- link: https://www.datadoghq.com/blog/mitigate-account-takeovers/
+  tag: Blog
+  text: Atténuez les prises de contrôle de compte avec Datadog App and API Protection
+- link: https://learn.datadoghq.com/courses/app-protection-block-attacks
+  tag: Centre d'apprentissage
+  text: Bloquez les attaques d'applications avec Application & API Protection
+title: App and API Protection
 ---
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="Un volet de signal de sécurité dans Datadog affichant des flux d'attaques et flamegraphs" width="75%">}}
+<div class="alert alert-info">
+AI Guard est en préversion. Obtenez des garde-fous de sécurité en temps réel pour vos applications et agents IA. AI Guard aide à sécuriser vos applications et agents IA en temps réel contre les attaques par injection de prompt, jailbreaking, détournement d'outils et exfiltration de données sensibles. Remplissez ce <a href="https://www.datadoghq.com/product-preview/ai-security/">formulaire</a> pour demander l'accès.
+</div>
 
-La solution Application Security Management (ASM) de Datadog vous protège contre les attaques ciblant vos applications et cherchant à exploiter des vulnérabilités au niveau du code, telles que la falsification de requête côté serveur (SSRF), l'injection SQL, ka vulnérabilité Log4Shell et les scripts intersites (XSS) réfléchis. Vous pouvez surveiller et renforcer la sécurité des applications s'exécutant directement sur un serveur, dans Docker, Kubernetes et Amazon ECS, ainsi que dans AWS Fargate pour les langages pris en charge.
+{{% /site-region %}}
 
-ASM tire profit des [bibliothèques de tracing][1] Datadog et de l'[Agent Datadog][2] afin de mettre en évidence les services susceptibles de faire l'objet d'attaques. Une fois cette solution configurée, ses règles de détection intégrées aux applications identifient et neutralisent les menaces dans l'environnement de vos applications, et déclenchent des signaux chaque fois qu'une attaque nuit à votre système de production ou qu'une vulnérabilité est exploitée à partir du code.
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="Un panneau de signaux de sécurité dans Datadog, qui affiche les flux d'attaque et les graphiques en flammes" width="75%">}}
 
-Lorsqu'une menace est détectée, un signal de sécurité est généré dans Datadog. Pour les signaux de sécurité présentant un niveau de gravité `HIGH` ou `CRITICAL`, il est possible d'envoyer des notifications sur Slack, par e-mail, ou via PagerDuty. Vous pouvez ainsi informer votre équipe et lui fournir le contexte en temps réel associé aux menaces.
+**App & API Protection (AAP)** offre une visibilité et une sécurité unifiées pour vos applications et API, vous aidant à détecter, enquêter et prévenir les menaces sur les charges de travail modernes.
 
-Lorsqu'un signal de sécurité est déclenché, vous pouvez réagir rapidement, dans le but d'analyser et de corriger le problème à l'origine du déclenchement dans Datadog. Examinez au sein d'une vue unique les données d'observabilité détaillées fournies par le tracing distribué des solutions ASM et APM afin de résoudre les problèmes ciblant votre application. Analysez les flux d'attaques, visualisez des flamegraphs et étudiez des données de tracing et de log corrélées pour identifier les vulnérabilités. Grâce à cette interface unique, vous pouvez parcourir les données de votre application pour prendre des mesures de remédiation et d'atténuation sans perdre la moindre information de contexte.
+Que vous protégiez des API publiques, des services internes ou des applications destinées aux utilisateurs, AAP équipe vos équipes d'une détection des menaces prête à l'emploi en temps réel, d'une évaluation de la posture et de protections intégrées aux applications.
 
-La solution ASM vous permet d'ignorer toutes les traces inutiles et de vous focaliser sur les données importantes pour la sécurité et la protection de votre environnement.
+<div class="alert alert-info">Auparavant connu sous le nom d'Application Security Monitoring (ASM), AAP va désormais au-delà de la détection des menaces à l'exécution pour inclure la découverte d'API, la gestion de la posture et des capacités de protection.</div>
 
-Tant que les vulnérabilités potentielles n'ont pas été entièrement corrigées dans le code de votre application, ASM vous permet de réduire l'impact des attaques en bloquant temporairement ou définitivement les adresses IP malveillantes, le tout d'un simple clic.
+## Fonctionnalités clés {#key-capabilities}
 
-## Mise en œuvre de la sécurité au niveau des applications dans Datadog
+### Découverte d'API et gestion de la posture {#api-discovery-and-posture-management}
 
-Pour mieux comprendre le fonctionnement structurel d'ASM et découvrir comment cette solution se base sur les données de tracing pour identifier les problèmes de sécurité, consultez la section [Fonctionnement d'Application Security Management dans Datadog][3].
+* Détectez automatiquement toutes les API exposées par vos services.  
+* Identifiez les points de terminaison non protégés, non documentés ou trop permissifs.  
+* Obtenez des résultats détaillés et contextuels liés à des points de terminaison spécifiques, à des erreurs de configuration et à des comportements observés  
+* Évaluez les configurations d'API par rapport aux règles de posture basées sur les meilleures pratiques de sécurité et les cadres de conformité (par exemple, OWASP API Top 10).
+* Vérifiez activement l'accessibilité et l'authentification des points de terminaison avec [Endpoint Scanning][17].
 
-## Configurer votre environnement
+### Détection et protection des menaces au moment de l'exécution {#runtime-threat-detection-and-protection}
 
-Grâce à ses [règles prêtes à l'emploi][4], ASM détecte les menaces sans la moindre configuration manuelle. Si vous avez déjà configuré la solution [APM][1] Datadog sur un host physique ou virtuel, vous avez simplement besoin de définir une variable d'environnement pour commencer à utiliser ASM.
+* Détectez les menaces en temps réel telles que les attaques par injection, les tentatives de prise de contrôle de compte et les abus d'application.  
+* Corrélez les modèles d'attaque multi-signaux en informations exploitables.  
+* Bloquez le trafic malveillant avec des règles WAF intégrées à l'application en utilisant des attributs tels que l'IP, l'agent utilisateur, les en-têtes, et plus encore.
 
-Pour configurer votre environnement afin de détecter et de neutraliser les menaces avec ASM, consultez la [documentation relative à l'activation de la solution][5]. Une fois ASM configuré, vous pouvez commencer à étudier et à résoudre les problèmes liés aux signaux de sécurité depuis la vue [Security Signals Explorer][6].
+## Cas d'utilisation {#use-cases}
 
-## Étudier les signaux de sécurité et résoudre les problèmes associés
+* Protégez les données client dans les API de production  
+* Détectez et bloquez le credential stuffing et les attaques ATO  
+* Maintenez la conformité de la posture API entre les équipes et les environnements  
+* Enquêtez sur les incidents avec des données de trace, de journal et de sécurité corrélées
 
-Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité afin de consulter l'événement associé ainsi que les étapes d'atténuation suggérées. Depuis ce volet, vous pouvez également visualiser des traces et le flux d'attaques associé, et obtenir des informations de contexte supplémentaires.
+## Implémentation de l'AAP dans Datadog {#aap-implementation-in-datadog}
 
-## Étudiez les risques découlant des dépendances et bibliothèques open source en amont
+Si vous êtes curieux de savoir comment App and API Protection est structuré et comment il utilise les données de traçage pour identifier les problèmes de sécurité, lisez [How App and API Protection Works][3].
 
-Grâce à la solution [Software Composition Analysis (SCA)][8], vous pouvez vérifier si l'intégrité de vos services est compromise par des dépendances à des bibliothèques open source ayant des vulnérabilités connues. Vous pouvez ensuite analyser les informations sur ces vulnérabilités et améliorer la sécurité de votre application en appliquant des conseils de remédiation ou en recherchant d'où proviennent ces vulnérabilités.
+## Configurez votre environnement {#configure-your-environment}
 
-## Étapes suivantes
+Propulsé par des [règles prêtes à l'emploi][4], AAP détecte les menaces sans configuration manuelle. Si vous avez déjà configuré [APM][1] de Datadog sur un hôte physique ou virtuel, la [configuration][16] nécessite uniquement de définir une variable d'environnement pour commencer.
+
+Pour commencer à configurer votre environnement afin de détecter et protéger contre les menaces avec AAP, suivez la documentation d'activation pour chaque produit. Une fois AAP configuré, vous pouvez commencer à enquêter sur les signaux de sécurité et à y remédier dans l'[Explorateur de signaux de sécurité][6].
+
+## Enquêtez sur les signaux de sécurité et remédiez-y {#investigate-and-remediate-security-signals}
+
+Dans l'[Explorateur de signaux de sécurité][6], cliquez sur n'importe quel signal de sécurité pour voir ce qui s'est passé et les étapes suggérées pour atténuer l'attaque. Dans le même panneau, affichez les traces avec leur flux d'attaque corrélé et les informations de requête pour obtenir plus de contexte.
+
+## Exploit Prevention vs. In-App WAF {#exploit-prevention-vs-in-app-waf}
+
+Cette section fournit un résumé d'Exploit Prevention et explique en quoi il diffère des règles In-App WAF.
+
+Datadog AAP inclut les fonctionnalités [Exploit Prevention][14] et [In-App WAF][15] pour protéger vos applications contre les exploits. Exploit Prevention est une extension d'In-App WAF. Exploit Prevention tire parti d'In-App WAF comme première ligne de défense, puis bloque les attaques manquées par In-App WAF.
+
+Exploit Prevention s'appuie sur la technologie RASP (Runtime Application Self-Protection) pour déterminer si une requête d'application interagit avec un chemin de code vulnérable, puis la protège contre des types de vulnérabilités spécifiques :
+
+- Injection SQL (SQLi)
+- Server-Side Request Forgery (SSRF)
+- Local File Inclusion (LFI)
+- Command Injection
+
+Pour la compatibilité des bibliothèques, consultez [Exploit Prevention][13].
+
+En plus de détecter les modèles malveillants dans la requête, Exploit Prevention se distingue d'In-App WAF en suivant les actions effectuées par l'application (requête SQL exécutée, fichiers consultés, etc.). Exploit Prevention est capable de déterminer si une entrée utilisateur a modifié la requête SQL ou restreint un fichier de manière préjudiciable, et de la bloquer. 
+
+Par exemple, dans une attaque par injection SQL, le but de l'attaquant est de prendre le contrôle de la requête SQL et d'en changer le sens. Exploit Prevention analyse la requête SQL avant son exécution et vérifie la présence de tout paramètre utilisateur dans la requête. Si un paramètre est présent, Exploit Prevention vérifie si l'analyseur SQL a interprété le paramètre comme plusieurs jetons SQL (changeant ainsi le sens de la requête SQL). Dans ce cas, Exploit Prevention marque la requête comme injectée.
+
+## Désactiver AAP {#disable-aap}
+
+Pour plus d'informations sur la désactivation d'AAP ou de ses fonctionnalités, consultez les éléments suivants :
+
+- [Désactivation d'AAP][10]
+
+## Étapes suivantes : {#next-steps}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/
 [2]: /fr/agent/
-[3]: /fr/security/application_security/how-appsec-works/
+[3]: /fr/security/application_security/how-it-works/
 [4]: /fr/security/default_rules/?category=cat-application-security
-[5]: /fr/security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /fr/security/application_security/software_composition_analysis/
+[8]: /fr/security/code_security/software_composition_analysis/
+[9]: /fr/security/code_security/
+[10]: /fr/security/application_security/troubleshooting/#disabling-aap
+[11]: /fr/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /fr/security/application_security/troubleshooting/#disabling-code-security
+[13]: /fr/security/application_security/exploit-prevention/#library-compatibility
+[14]: /fr/security/application_security/exploit-prevention/
+[15]: /fr/security/application_security/waf-integration/
+[16]: /fr/security/application_security/setup/
+[17]: /fr/security/application_security/api_posture/endpoint_scanning/

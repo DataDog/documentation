@@ -20,15 +20,15 @@ Instrumentez vos applications AWS Lambda avec une extension Datadog Lambda pour 
 
 ## Démarrage rapide {#quick-start}
 
-Pour commencer, [inscrivez-vous pour un compte Datadog][1] si vous n'en avez pas déjà un. Ensuite, suivez le [flux d'installation in-app dans Fleet Automation][8] pour AWS Lambda afin d'instrumenter vos fonctions Lambda. Cette configuration de démarrage rapide permet à vos fonctions d'envoyer des métriques, des journaux et des traces en temps réel à Datadog.
+Pour commencer, [inscrivez-vous pour un compte Datadog][1] si vous n'en avez pas déjà un. Ensuite, suivez le [flux d'installation dans l'application dans Fleet Automation][8] pour AWS Lambda afin d'instrumenter vos fonctions Lambda. Cette configuration de démarrage rapide permet à vos fonctions d'envoyer des métriques, des journaux et des traces en temps réel à Datadog.
 
-Une application d'exemple est [disponible sur GitHub][6] avec des instructions sur la façon de déployer avec plusieurs environnements d'exécution et des outils d'infrastructure en tant que code.
+Une application d'exemple est [disponible sur GitHub][6] avec des instructions sur la façon de déployer avec plusieurs environnements d'exécution et outils d'infrastructure en tant que code.
 
 Le processus de démarrage rapide configure vos fonctions Lambda à la volée. Pour instrumenter les fonctions Lambda de manière permanente, consultez les instructions détaillées dans la section suivante.
 
-## Utiliser le serveur MCP Datadog {#use-the-datadog-mcp-server}
+## Utilisez le serveur Datadog MCP {#use-the-datadog-mcp-server}
 
-Utilisez le [serveur MCP Datadog][9] pour configurer la surveillance de vos conteneurs AWS Lambda avec l'assistance de l'IA. Après vous être connecté, essayez une invite comme :
+Utilisez le [serveur Datadog MCP][9] pour configurer la surveillance de vos conteneurs AWS Lambda avec l'assistance de l'IA. Après vous être connecté, essayez une invite comme :
 
 ```shell
 Help me monitor my AWS Lambda functions with Datadog
@@ -53,7 +53,7 @@ Une fois que vous avez terminé l'instrumentation et que vous avez configuré la
 - collecter la télémétrie des ressources AWS telles que API Gateway, AppSync et Step Functions
 - capturer les charges utiles de requête et de réponse pour chaque invocation de Lambda
 - lier les erreurs de vos fonctions Lambda à votre code source
-- filtrer ou nettoyer les informations sensibles des journaux ou des traces
+- filtrer ou supprimer les informations sensibles des journaux ou des traces
 
 ## Lectures complémentaires {#further-reading}
 

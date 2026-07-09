@@ -1,90 +1,89 @@
 ---
 aliases:
 - /es/metrics/open_telemetry/otlp_metrics/
+description: Consulta métricas equivalentes de Datadog y OpenTelemetry juntas en entornos
+  híbridos utilizando el Modo Semántico.
 further_reading:
 - link: opentelemetry/
   tag: Documentación
   text: OpenTelemetry
-title: Consulta de métricas en Datadog y OpenTelemetry
+title: Consulta métricas de Datadog y OpenTelemetry
 ---
+Muchas organizaciones utilizan OTel junto con Datadog, creando entornos híbridos donde algunos servidores emiten métricas de OTel y otros emiten métricas de Datadog. Debido a que las métricas de OTel y Datadog a menudo utilizan diferentes convenciones de nomenclatura y definiciones semánticas, crear una vista unificada de su infraestructura en estos entornos puede ser un desafío.
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-and-opentelemetry-metric-compatibility/" btn_hidden="false" >}}
-La consulta de métricas en Datadog y OpenTelemetry está en la vista previa. Para activar esta función, haz clic en <strong>Request Access</strong> (Solicitar acceso) y rellena el formulario.
-{{< /callout >}} 
+Datadog le ayuda a cerrar esta brecha permitiéndole:
 
-Muchas organizaciones utilizan OpenTelemetry (OTel) junto con Datadog, creando entornos híbridos en los que algunos hosts emiten métricas de OTel y otros emiten métricas de Datadog. Debido a que las métricas de OTel y Datadog a menudo utilizan diferentes convenciones de nomenclatura y definiciones semánticas, la creación de una visión unificada de tu infraestructura en estos entornos puede ser un reto.
+- Consultar métricas de OTel y Datadog juntas.
+- Entender las fuentes de métricas y sus mapeos.
 
-Datadog te ayuda areducir esta brecha al permitirte:
+## Unificar métricas de OpenTelemetry y Datadog en consultas {#unify-opentelemetry-and-datadog-metrics-in-queries}
 
-- Consultar en conjunto las métricas de OTel y Datadog.
-- Comprender las fuentes de métricas y las asignaciones.
+{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" btn_hidden="false" header="¡Únase a la Preview!" >}}
+El modificador de consulta de fuente de telemetría requiere la Preview de instrumentación nativa de OTel. Utilice este formulario para solicitar acceso.
+{{< /callout >}}
 
-## Unificar las métricas de OpenTelemetry y Datadog en las consultas
+El [Metrics Query Editor][1] y los dashboard widgets incluyen un modificador de consulta de [fuente de telemetría][3], que le permite controlar cómo Datadog maneja las métricas potencialmente equivalentes de fuentes de OTel y Datadog. Seleccione **Modify** y luego elija **Native telemetry** o **Combined telemetry** en la sección **Telemetry sources**.
 
-El [Editor de consultas de métricas][1] incluye un selector de modo semántico, que permite controlar cómo Datadog gestiona métricas potencialmente equivalentes de fuentes de OTel y Datadog.
+{{< img src="dashboards/functions/telemetry_source_combined.png" alt="Modificador de consulta de telemetry sources que muestra Combined telemetry seleccionado." style="width:100%;" >}}
 
-{{< img src="/metrics/otel/semantic_mode.png" alt="Selector de modo semántico en la página del Metrics Explorer." style="width:100%;" >}}
+Elija entre dos modos:
 
-Elige entre dos modos:
+### Native telemetry (default) {#native-telemetry-default}
 
-### Respetar estrictamente la fuente de datos nativos (por defecto)
-
-- Este modo consulta solo el nombre específico de la métrica que introduzcas (ya sea una métrica de Datadog u OTel).
+- Este modo consulta solo el nombre de métrica específico que ingrese (ya sea una métrica de Datadog o de OTel).
 - No incluye datos de ninguna métrica equivalente.
 
-### Combinar los datos de todas las fuentes de telemetría
+### Telemetría combinada {#combined-telemetry}
 
-- Este modo combina automáticamente datos de métricas equivalentes de Datadog y OTel en una única consulta, aunque solo se introduzca uno de los nombres de las métricas.
-- Gestiona la correspondencia entre métricas equivalentes (incluidas las complejas) y agrega todas las series temporales relacionadas como una única métrica.
-- Esto funciona tanto si empiezas con una métrica de Datadog como con una métrica de OTel.
+- Este modo combina automáticamente datos de métricas equivalentes de Datadog y OTel en una sola consulta, incluso si solo ingrese uno de los nombres de las métricas.
+- Maneja el mapeo entre métricas equivalentes (incluyendo las complejas) y agrega todas las series temporales relacionadas como una sola métrica.
+- Esto funciona ya sea que comiences con una métrica de Datadog o una métrica de OTel.
 
-### Ejemplo
+### Ejemplo {#example}
 
-Imagina que estás monitorizando la carga del sistema utilizando dos métricas diferentes:
+Imagina que estás monitoreando la carga del sistema utilizando dos métricas diferentes:
 
-- **OTel nativo**: `otel.system.cpu.load_average.15m`
+- **OTel nativo**: `system.cpu.load_average.15m`
 - **Datadog Agent**: `system.load.15`
 
-Si consultas `otel.system.cpu.load_average.15m`, aplicas una agregación de espacio máximo y estableces el Modo semántico en **Combine data from all telemetry sources** (Combinar datos de todas las fuentes de telemetría), Datadog hará lo siguiente automáticamente:
+Si consulta por `system.cpu.load_average.15m`, aplica un desglose espacial máximo y establece la telemetry source a **Combined telemetry**, Datadog automáticamente:
 
-1. Identificar la métrica equivalente de Datadog: `system.load.15`.
-2. Combinar las series temporales de `otel.system.cpu.load_average.15m` y `system.load.15`.
+1. Identifica la métrica equivalente de Datadog: `system.load.15`.
+2. Combina las series temporales de `system.cpu.load_average.15m` y `system.load.15`.
 3. Aplica la agregación máxima a todos los puntos de datos de ambas fuentes.
 
-Utiliza la función [equiv_otel][2] para fusionar los datos.
+## Entender las fuentes de métricas y sus mapeos {#understand-metric-sources-and-mappings}
 
-## Comprender las fuentes de métricas y las correspondencias
+Para proporcionar claridad al consultar, la fuente de la métrica y las métricas equivalentes se muestran:
 
-Para facilitar la consulta, se muestran la fuente de la métrica y las métricas equivalentes:
+- **Source pill**: En el editor de consultas, aparece un **Datadog** o un **OTel** pill junto al nombre de la métrica, indicando su origen.
 
-- **Sección fuente**: en el editor de consultas, aparece una sección **Datadog** u **OTel** junto al nombre de la métrica, indicando su origen.
+- **Equivalent metrics list**: El editor también muestra una lista de métricas consideradas equivalentes a la que ha consultado. Esto incluye mapeos complejos de uno a muchos. Por ejemplo, `system.cpu.utilization` se mapea a múltiples métricas de estado de CPU de Datadog (`system.cpu.idle`, `system.cpu.iowait`, etc.).
 
-- **Lista de métricas equivalentes**: el editor también muestra una lista de métricas consideradas equivalentes a la que has consultado. Esto incluye asignaciones complejas de una a muchas. Por ejemplo, `otel.system.cpu.utilization` signa a múltiples métricas de estado de CPU de Datadog (`system.cpu.idle`, `system.cpu.iowait`, etc.).
+{{< img src="/metrics/otel/source.png" alt="Source pill and Equivalent metrics list" style="width:75%;" >}}
 
-{{< img src="/metrics/otel/source.png" alt="Sección fuente y lista de métricas equivalentes" style="width:75%;" >}}
+## View detailed mappings {#view-detailed-mappings}
 
-## Ver asignaciones detalladas
+Para una vista completa de cómo se relacionan métricas específicas de OTel y Datadog, consulta la página de Metrics Summary:
 
-Para obtener una visión completa de cómo se relacionan las métricas específicas de OTel y Datadog, consulta la página de Resumen de métricas:
+1. Navegue a [**Metrics > Summary**][2].
+2. Busque una métrica conocida de Datadog u OTel.
+3. Abra el panel lateral de **Metric Details**.
 
-1. Ve a [**Metrics > Summary**][3] (Métricas > Resumen).
-2. Busca una métrica conocida de Datadog u OTel.
-3. Abre el panel lateral **Metric Details** (Detalles de métrica).
+Alternativamente, haga clic en **Edit in Metrics Summary** al ingresar una métrica en el editor de consultas.
 
-Como alternativa, haz clic en **Edit in Metrics Summary** (Editar en el Resumen de métricas) al introducir una métrica en el editor de consultas.
+Este panel muestra los mapeos de métricas, incluyendo relaciones complejas. Por ejemplo, muestra cómo `system.cpu.utilization` se mapea a múltiples métricas de Datadog como `system.cpu.idle`, `system.cpu.user` y otras.
 
-Este panel muestra las correspondencias métricas, incluidas las relaciones complejas. Por ejemplo, muestra cómo `otel.system.cpu.utilization` se asigna a múltiples métricas de Datadog como `system.cpu.idle`, `system.cpu.user` y otras.
+{{< img src="/metrics/otel/mappings.png" alt="Panel de Metrics Summary Details que muestra los mapeos de OTel y Datadog." style="width:100%;" >}}
 
-{{< img src="/metrics/otel/mappings.png" alt="Panel de Detalles del resumen de métricas que muestra asignaciones de OTel y Datadog" style="width:100%;" >}}
+También puede ver la lógica basada en etiquetas utilizada para estos mapeos. Pase el cursor sobre una métrica equivalente para ver las condiciones específicas. Por ejemplo, al pasar el cursor sobre `system.cpu.idle` se muestra que se mapea a `system.cpu.utilization` cuando `state=idle`, y el valor se multiplica por 100.
 
-También puedes ver la lógica basada en etiquetas utilizada para estas correspondencias. Pasa el ratón por encima de una métrica equivalente para ver las condiciones específicas. Por ejemplo, al pasar el ratón por `system.cpu.idle` se muestra que se asigna a `otel.system.cpu.utilization` cuando `state=idle`, y el valor se multiplica por 100.
+{{< img src="/metrics/otel/tooltip.png" alt="Tooltip de hover que muestra la lógica de mapeo basada en etiquetas" style="width:100%;" >}}
 
-{{< img src="/metrics/otel/tooltip.png" alt="Pasa el ratón sobre el consejo que muestra la lógica de asignación basada en etiquetas" style="width:100%;" >}}
-
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
-[2]: /es/opentelemetry/guide/combining_otel_and_datadog_metrics/
-[3]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/metric/summary
+[3]: /es/dashboards/functions/telemetry_source/

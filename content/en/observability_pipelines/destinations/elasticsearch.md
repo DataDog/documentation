@@ -19,7 +19,7 @@ Sending metrics to Observability Pipelines is in Preview. Fill out the form to r
 
 ## Overview
 
-Use Observability Pipelines' Elasticsearch destination to send logs or metrics ({{< tooltip glossary="preview" case="title" >}}) to Elasticsearch.
+Use Observability Pipelines' Elasticsearch destination to send logs or metrics to Elasticsearch.
 
 ## Setup
 
