@@ -302,7 +302,6 @@ main.main()
 	/app/main.go:14 +0x2c
 ```
 
-is automatically aggregated into a single log instead of being split into separate lines.
 
 Like JSON aggregation, stack trace aggregation is enabled automatically when auto multi-line detection is enabled.
 
