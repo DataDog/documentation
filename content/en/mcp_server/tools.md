@@ -546,7 +546,7 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 ## Data Observability
 
-Tools for [Data Observability][68], including data catalog search, lineage traversal and ranking, monitor coverage and status, entity tags and descriptions, Spark/Databricks job health, and warehouse query history.
+Tools for [Data Observability][68], including data catalog search, lineage traversal and ranking, monitor coverage and status, entity tags and descriptions, Spark/Databricks job health, warehouse query history, and cost and performance optimization recommendations.
 
 ### `search_data_entities`
 *Toolset: **data-observability***\
@@ -693,6 +693,21 @@ Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, 
 Retrieves the Spark SQL physical execution plan for a stage, including join strategies, shuffle information, and per-node metrics.
 
 - Show me the execution plan for this Spark stage.
+
+### `list_data_observability_recommendations`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Lists cost and performance optimization recommendations for data jobs and queries (Spark, Databricks, Snowflake, BigQuery), with estimated cost and duration savings. Returns lightweight summaries with cursor pagination.
+
+- What cost-saving recommendations do I have for my Databricks jobs?
+- Are there any recommendations for reducing data skew in my Spark jobs?
+
+### `get_data_observability_recommendation`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
+
+- Get the details of recommendation `abc123`.
 
 <div class="alert alert-info">This section documents the tools confirmed in the <code>data-observability</code> toolset's shared library. The dedicated Data Observability MCP service exposes some additional tools (for example, Databricks cost and cluster job listings) — these need separate confirmation of GA/customer-facing status before being added here.</div>
 
