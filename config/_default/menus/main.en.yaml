@@ -5346,6 +5346,11 @@ menu:
       identifier: elt_integrations
       parent: quality_monitoring
       weight: 275000
+    - name: Airbyte
+      url: data_observability/quality_monitoring/elt/airbyte
+      identifier: elt_integrations_airbyte
+      parent: elt_integrations
+      weight: 500000
     - name: Fivetran
       url: data_observability/quality_monitoring/elt/fivetran
       identifier: elt_integrations_fivetran
@@ -5392,6 +5397,12 @@ menu:
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: CI/CD
+      url: data_observability/cicd
+      pre: data-observability-wui
+      identifier: data_observability_cicd
+      parent: data_observability_heading
+      weight: 90000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
@@ -6926,7 +6937,7 @@ menu:
       identifier: observability_pipelines_socket
       weight: 421
     - name: Splunk HEC
-      url: observability_pipelines/destinations/splunk_hec
+      url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
       weight: 422
@@ -7517,11 +7528,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
-    - name: Custom Kubernetes
-      url: /byoc-logs/install/custom_k8s
-      parent: cloudprem_install
-      identifier: cloudprem_custom_k8s
-      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem
@@ -8386,7 +8392,7 @@ menu:
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
       identifier: asm_api_security
-      weight: 2
+      weight: 4
     - name: API Endpoints
       url: security/application_security/api_posture/api_inventory/api_endpoints/
       parent: asm_api_security
@@ -8401,17 +8407,22 @@ menu:
       url: security/application_security/api_posture/api_findings/
       parent: application_security_api_security
       identifier: application_security_api_findings
+      weight: 2
+    - name: Compliance
+      url: security/application_security/api_posture/compliance/
+      parent: application_security_api_security
+      identifier: application_security_api_posture_compliance
       weight: 3
     - name: Endpoint Scanning
       url: security/application_security/api_posture/endpoint_scanning/
       parent: application_security_api_security
       identifier: application_security_endpoint_scanning
-      weight: 4
+      weight: 5
     - name: Sensitive Data
       url: security/application_security/api_posture/sensitive_data/
       parent: application_security_api_security
       identifier: application_security_sensitive_data
-      weight: 5
+      weight: 6
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
@@ -9779,21 +9790,26 @@ menu:
       parent: rum
       identifier: rum_managed_archive
       weight: 12
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
+      weight: 13
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 13
+      weight: 14
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 14
+      weight: 15
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 15
+      weight: 16
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
@@ -9865,6 +9881,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9881,41 +9902,51 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
-    - name: Analysis Methods
-      url: experiments/analysis_methods
-      parent: pa_experiments
-      identifier: pa_experiments_analysis_methods
-      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Concepts
+      url: experiments/concepts/
+      parent: pa_experiments
+      identifier: pa_experiments_concepts
       weight: 4
-    - name: Cumulative Impact
-      url: experiments/cumulative_impact
-      parent: pa_experiments
-      identifier: pa_experiments_cumulative_impact
-      weight: 5
-    - name: Create Exposure SQL Models
-      url: experiments/exposure_sql
-      parent: pa_experiments
-      identifier: pa_experiments_exposure_sql
-      weight: 6
-    - name: Manage Subject Types
-      url: experiments/subject_types
-      parent: pa_experiments
+    - name: Subject Types
+      url: experiments/concepts/subject_types
+      parent: pa_experiments_concepts
       identifier: pa_experiments_subject_types
-      weight: 7
+      weight: 1
+    - name: Exposure SQL Models
+      url: experiments/concepts/exposure_sql
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_exposure_sql
+      weight: 2
+    - name: Cumulative Impact
+      url: experiments/concepts/cumulative_impact
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_cumulative_impact
+      weight: 3
+    - name: Statistics
+      url: experiments/statistics/
+      parent: pa_experiments
+      identifier: pa_experiments_statistics
+      weight: 5
+    - name: Analysis Methods
+      url: experiments/statistics/analysis_methods
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_analysis_methods
+      weight: 1
     - name: Minimum Detectable Effects
-      url: experiments/minimum_detectable_effect
-      parent: pa_experiments
+      url: experiments/statistics/minimum_detectable_effect
+      parent: pa_experiments_statistics
       identifier: pa_experiments_mde
-      weight: 8
+      weight: 2
     - name: Global Lift
-      url: experiments/global_lift
-      parent: pa_experiments
+      url: experiments/statistics/global_lift
+      parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 9
+      weight: 3
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
