@@ -63,7 +63,7 @@ The confidence interval is a range of lift values that are consistent with the o
 
 Use the interval width as an indicator of precision: a narrower interval means a more precise estimate of lift; a wider interval means more uncertainty, often because the sample is smaller or the metric is noisy.
 
-If [multiple testing correction][8] is enabled, confidence intervals are wider because Datadog controls false positive risk across the experiment's metric and treatment-variant comparisons.
+If [multiple testing correction][8] is enabled, confidence intervals are wider because Datadog controls the family-wise error rate across the experiment's metric and treatment-variant comparisons.
 
 ### Global lift
 

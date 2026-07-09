@@ -1,6 +1,6 @@
 ---
 title: Multiple Testing Correction
-description: Control false positive risk when an experiment compares multiple metrics or treatment variants.
+description: Control the family-wise error rate when an experiment compares multiple metrics or treatment variants.
 aliases:
   - /experiments/multiple_testing_correction
   - /experiments/multiple_testing_correction/
@@ -26,9 +26,9 @@ further_reading:
 
 ## Overview
 
-When you evaluate several experiment comparisons at once, the chance of seeing at least one false positive increases. For example, a single 95% confidence interval fails to cover the true underlying effect 5% of the time. If an experiment generates many confidence intervals, the probability that at least one interval fails to cover the true effect is higher than the risk for any one interval.
+When you evaluate several experiment comparisons at once, the family-wise error rate increases. For example, a single 95% confidence interval fails to cover the true underlying effect 5% of the time. If an experiment generates many confidence intervals, the probability that at least one interval fails to cover the true effect is higher than the failure probability for any one interval.
 
-Multiple testing correction reduces this risk by making each individual comparison more conservative. In Datadog Experiments, this means confidence intervals become wider, and a treatment needs stronger evidence before Datadog marks a result as statistically significant.
+Multiple testing correction reduces the family-wise error rate by making each individual comparison more conservative. In Datadog Experiments, this means confidence intervals become wider, and a treatment needs stronger evidence before Datadog marks a result as statistically significant.
 
 Preferential Bonferroni correction is conservative because it does not model correlation between comparisons. In practice, lifts across related metrics can be correlated, and treatment-variant comparisons can be correlated when they share the same control group.
 
@@ -48,7 +48,7 @@ Only add treatment variants and decision metrics that you intend to evaluate. Ad
 
 ## How Datadog adjusts confidence intervals
 
-Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's false positive budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric when there are multiple decision metrics. This helps the experiment retain more power for the main decision metric, because each additional secondary metric does not further shrink the alpha budget for the primary metric.
+Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's family-wise error rate budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric when there are multiple decision metrics. This helps the experiment retain more power for the main decision metric, because each additional secondary metric does not further shrink the alpha budget for the primary metric.
 
 Start with the experiment's configured confidence level:
 
@@ -113,7 +113,7 @@ Use the corrected interval the same way you use any experiment confidence interv
 - If the entire interval is below zero, the treatment is statistically significant in the negative direction.
 - If the interval crosses zero, the result is not statistically significant.
 
-Because corrected intervals are wider, a result that was significant without correction may no longer be significant after correction. This is expected: the corrected result is controlling the risk of false positives across the full family of comparisons.
+Because corrected intervals are wider, a result that was significant without correction may no longer be significant after correction. This is expected: the corrected result is controlling the family-wise error rate across the full family of comparisons.
 
 ## Further reading
 

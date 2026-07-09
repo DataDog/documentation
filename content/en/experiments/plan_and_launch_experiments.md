@@ -157,7 +157,7 @@ To modify the statistical analysis plan:
    - If you select {{< ui >}}Bayesian{{< /ui >}}, choose a {{< ui >}}Standard Deviation of Prior{{< /ui >}} from the dropdown.
 1. Select a percentage from the {{< ui >}}Confidence level{{< /ui >}} dropdown.
 1. To disable CUPED, toggle off {{< ui >}}CUPED calculation{{< /ui >}}. CUPED is enabled by default and uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
-1. To reduce the risk of false positives, toggle on {{< ui >}}Multiple testing correction{{< /ui >}}. This setting adjusts for the increased risk across multiple metric and treatment-variant comparisons, producing more conservative results. For details, see [Multiple Testing Correction][12].
+1. To control the family-wise error rate, toggle on {{< ui >}}Multiple testing correction{{< /ui >}}. This setting adjusts for multiple metric and treatment-variant comparisons, producing more conservative results. For details, see [Multiple Testing Correction][12].
    - This setting is not available when you use the {{< ui >}}Bayesian{{< /ui >}} method.
 1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
 

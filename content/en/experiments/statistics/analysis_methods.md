@@ -80,7 +80,7 @@ CUPED
 : Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
-: Adjusts for the increased false positive risk that comes from evaluating multiple metric and treatment-variant comparisons. This produces more conservative results and is not available with Bayesian analysis. See [Multiple Testing Correction][3].
+: Adjusts for the increased family-wise error rate that comes from evaluating multiple metric and treatment-variant comparisons. This produces more conservative results and is not available with Bayesian analysis. See [Multiple Testing Correction][3].
 
 Confidence level
 : Controls the width of the interval around the lift estimate. Higher confidence levels produce wider intervals and require more data to reach statistical significance.
