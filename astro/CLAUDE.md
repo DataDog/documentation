@@ -30,8 +30,7 @@ Prompts often refer to the "Hugo docs". This refers either to the general Hugo s
 
 ## CSS
 
-- Where possible, use design tokens, not hardcoded values. This is to support dark mode, alternative views offering larger font sizes, etc.
-- Where applicable, provide a dark mode style for an element using the design tokens.
+- Where possible, use design tokens, not hardcoded values. This is to support dark mode (a planned feature), alternative views offering larger font sizes, etc.
 - In terms of their names, design tokens should be reusable, not tightly coupled to a specific component. Follow the existing naming conventions.
 
 ## Stay inside `astro/`

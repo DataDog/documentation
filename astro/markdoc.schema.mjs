@@ -29,6 +29,24 @@ export default {
         label: { type: String, required: true },
       },
     },
+    stepper: {
+      attributes: {
+        open: { type: Boolean, default: false },
+        level: {
+          type: String,
+          default: "h3",
+          matches: ["h1", "h2", "h3", "h4", "h5", "h6"],
+        },
+      },
+    },
+    step: {
+      attributes: {
+        title: { type: String, required: true },
+      },
+    },
+    stepperFinished: {
+      attributes: {},
+    },
     regionSelector: {
       attributes: {},
     },
