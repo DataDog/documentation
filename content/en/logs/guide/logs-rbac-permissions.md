@@ -102,7 +102,7 @@ This permission is global and enables creating new archives, and editing and del
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs_write_historical_view), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [`logs_archive_search`](#logs_archive_search) or [`logs_write_historical_view`](#logs_write_historical_view), this permission also grants the ability to run [Archive Search][17] or trigger a [Rehydration][13] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -132,9 +132,17 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 {{% /tab %}}
 {{< /tabs >}}
 
+### `logs_archive_search`
+
+Grants the ability to run [Archive Search][17] in **Search mode** only. Results stream in real time and are retained for 24 hours. The Rehydrate option is not available with this permission.
+
+This permission is global. Users also need the [Logs Read Archives](#logs_read_archives) permission for each archive they want to search.
+
+To allow Search & Rehydration mode, grant [`logs_write_historical_view`](#logs_write_historical_view) instead.
+
 ### `logs_write_historical_view`
 
-Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][13].
+Grants the ability to run [Archive Search][17] in both **Search** and **Search & Rehydration** modes, and to trigger a [Log Rehydration*][13] (Historical View).
 
 This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
 
@@ -163,7 +171,7 @@ Five separate permissions control the ability to view, create, or modify log con
 * [`logs_modify_indexes`](#logs_modify_indexes)
 * [`logs_write_archives`](#logs_write_archives)
 * [`logs_write_pipelines`](#logs_write_pipelines)
-* [`user_access_manage`][14]
+* [`user_access_manage`][17]
 
 ## Log data access
 
@@ -364,6 +372,7 @@ curl -X POST \
 [11]: /logs/explorer/facets/#alias-facets
 [12]: /logs/archives
 [13]: /logs/archives/rehydrating
-[14]: /account_management/rbac/permissions/#access-management
+[17]: /account_management/rbac/permissions/#access-management
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
+[17]: /logs/explorer/archive_search/
