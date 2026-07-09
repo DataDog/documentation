@@ -8,6 +8,12 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/php/"
   tag: "Documentation"
   text: "PHP Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -27,7 +33,7 @@ Before setting up the PHP Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later
+- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later (version 1.21.1 or later required for flag evaluation metrics)
 - **Supported PHP runtime**: PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
 - **OpenFeature PHP SDK** `open-feature/sdk` version 2.1 or later, if you use the OpenFeature adapter
 
@@ -411,7 +417,7 @@ If targeting rules do not match as expected:
 
 #### Flag evaluation metrics
 
-Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, confirm `DD_METRICS_OTEL_ENABLED=true` is set in your environment and that your PHP tracer version supports flag evaluation metrics.
+Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, confirm `DD_METRICS_OTEL_ENABLED=true` is set in your environment and that your PHP tracer version supports flag evaluation metrics. See [Set Up Server-Side Flag Evaluation Metrics][6] for Agent OTLP receiver setup and troubleshooting.
 
 #### Experiment exposures
 
@@ -430,3 +436,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /tracing/trace_collection/dd_libraries/php/
 [5]: /feature_flags/concepts/environments/
+[6]: /feature_flags/guide/server_flag_evaluation_metrics/
