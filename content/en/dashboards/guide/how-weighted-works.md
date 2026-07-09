@@ -11,7 +11,7 @@ further_reading:
 Every metrics query has a standard order of evaluation (see the [Anatomy of a query][1] for a quick review). For example, the following query is calculated as follows: 
 `sum:kubernetes.cpu.requests{*} by {kube_container_name}.rollup(avg, 10)`
 
-1. Time aggregation -- Sum the values for each timeseries (defined by a unique tag value combination) in time for each 10s rollup time interval. The number of unique tag value combinations is determined by the most volatile / high granularity tag, let's say `container_id`, on this metric. 
+1. Time aggregation -- Average the values for each timeseries (defined by a unique tag value combination) in time for each 10s rollup time interval. The number of unique tag value combinations is determined by the most volatile / high granularity tag, let's say `container_id`, on this metric. 
 2. Then, per `kube_container_name` (space aggregation), take the sum of all averaged values as a single representative value. The summed values for each `kube_container_name` is dependent upon the number of unique `container_id`s there are for each rollup interval.
 
 The `weighted()` function accounts for the short lifespan of the `container_id` tag values when summing by `kube_container_name` for this gauge metric.
