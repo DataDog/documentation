@@ -5386,6 +5386,11 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Hex
+      url: data_observability/quality_monitoring/business_intelligence/hex
+      identifier: business_intelligence_integrations_hex
+      parent: business_intelligence_integrations
+      weight: 5000000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
