@@ -142,7 +142,7 @@ To allow Search & Rehydration mode, grant [`logs_write_historical_view`](#logs_w
 
 ### `logs_write_historical_view`
 
-Grants the ability to run [Archive Search][17] in both **Search** and **Search & Rehydration** modes, and to trigger a [Log Rehydration*][13] (Historical View).
+Grants the ability to run [Archive Search][17] in both **Search** and **Search & Rehydration** modes.
 
 This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
 

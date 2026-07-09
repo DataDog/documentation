@@ -67,7 +67,7 @@ Two permissions control access to Archive Search. Both are global, and users als
 | **`logs_write_historical_view`** | ✅ | ✅ |
 
 - **`logs_archive_search`**: Grants the ability to run Archive Search in **Search mode** only. Results stream in real time and are retained for 24 hours. The **Rehydrate** option is not available with this permission.
-- **`logs_write_historical_view`**: Grants the ability to run Archive Search in both **Search** and **Search & Rehydration** modes, and to trigger [Rehydration from Archives][10].
+- **`logs_write_historical_view`**: Grants the ability to run Archive Search in both **Search** and **Search & Rehydration** modes.
 
 Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
 
@@ -245,4 +245,3 @@ In order to search log events from your archives, Datadog uses a service account
 [7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
 [8]: /logs/log_configuration/archives/?tab=awss3#archive-search-partition-attribute
 [9]: /logs/log_configuration/archives/?tab=awss3#compression
-[10]: /logs/log_configuration/rehydrating/
