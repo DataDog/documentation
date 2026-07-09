@@ -94,11 +94,11 @@ The total time is defined as the sum of the maximum test session durations.
 1. The maximum duration of a test session grouped by the test session fingerprint is calculated.
 2. The maximum test session durations are summed.
 
-## Invalid Git information
+## Inconsistent Git information
 
 Datadog native testing libraries populate `git.*` tags from two sources:
 
-- CI provider environment variables, such as [`GITHUB_SHA`][22] in GitHub Actions or [`CI_COMMIT_SHA`][23] in GitLab CI/CD. These values are defined when the job starts and do not change if the job changes the local checkout.
+- CI provider environment variables, such as [`GITHUB_SHA`][22] in GitHub Actions or [`CI_COMMIT_SHA`][23] in GitLab CI/CD. These values are set when the job starts and do not update even if the job modifies the local checkout later.
 - The local Git repository, through the `git` executable. This provides metadata that CI provider variables might not include, such as commit message, author, and committer details. This metadata reflects the commit checked out when tests run.
 
 Because these sources can describe different commits, reported `git.*` tags can be inconsistent. For example, GitHub Actions sets `GITHUB_SHA` to the merge commit for [`pull_request` workflows][24]. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, or in GitLab CI/CD jobs, a custom [`actions/checkout` `ref` input][19], [`GIT_CHECKOUT: "false"`][21], or commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` can create the same mismatch.
