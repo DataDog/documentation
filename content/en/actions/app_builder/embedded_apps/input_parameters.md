@@ -2,7 +2,14 @@
 title: Input Parameters
 description: Input parameters allow you to embed the same app in multiple dashboards or notebooks using different configurations for each instance.
 disable_toc: false
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 Input parameters allow you to embed the same app in multiple dashboards or notebooks using different configurations for each instance. 
 

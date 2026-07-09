@@ -49,6 +49,7 @@ In [log configuration settings][1], you can configure processors such as the [Gr
 
 {{< whatsnext desc="Select a processor type to learn more:">}}
     {{< nextlink href="logs/log_configuration/processors/arithmetic_processor">}}<strong>Arithmetic Processor</strong>: Add a new attribute to a log with the result of a formula applied to existing numeric attributes.{{< /nextlink >}}
+    {{< nextlink href="logs/log_configuration/processors/array_map_processor">}}<strong>Array Map Processor</strong>: Apply a sequence of sub-processors to each element of a source array, producing a target array.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/array_processor">}}<strong>Array Processor</strong>: Extract, aggregate, or transform values from JSON arrays in your logs.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/remapper">}}<strong>Attribute Remapper</strong>: Remap source attributes or tags to another target attribute or tag.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/category_processor">}}<strong>Category Processor</strong>: Add a new attribute to a log based on a search query match, for grouping and classification.{{< /nextlink >}}

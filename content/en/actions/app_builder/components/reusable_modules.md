@@ -12,7 +12,14 @@ further_reading:
 - link: "/actions/app_builder/queries/"
   tag: "Documentation"
   text: "Queries"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 Use the _Reusable Modules_ feature to save groups of components and queries as templates for reuse across your App Builder applications. Modules automatically include all dependencies to ensure your components function correctly.
 

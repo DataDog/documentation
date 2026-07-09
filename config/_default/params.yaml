@@ -292,6 +292,7 @@ unsupported_sites:
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
   actions: [gov,gov2]
+  app-builder: [gov2]
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
   agent_flare: [gov,gov2]
