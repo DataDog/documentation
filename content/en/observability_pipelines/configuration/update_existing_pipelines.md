@@ -122,6 +122,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
+{{% tab "ClickHouse" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/clickhouse %}}
+
+{{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
