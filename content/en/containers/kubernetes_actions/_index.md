@@ -43,8 +43,7 @@ The following user permissions are required:
 |------------|-------------|
 | Org Management | Required to enable Remote Configuration. |
 | API Keys Write | Required to enable Remote Configuration. |
-| Kubernetes Actions Write | Run actions on Kubernetes resources owned by your teams. |
-| Kubernetes Actions Admin | Run actions on all Kubernetes resources. |
+| Kubernetes Actions Admin, or Kubernetes Actions Write on a team that owns the resource | Run actions on all Kubernetes resources with Admin, or on resources owned by your teams with Write. |
 
 ## Setup
 
