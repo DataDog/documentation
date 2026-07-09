@@ -35,10 +35,16 @@ Navigate to the Hex integration tile and enter the following information:
 | Custom Domain | Optional. Set this if your workspace uses a single-tenant, EU multi-tenant, or HIPAA multi-tenant Hex domain (for example, `eu.hex.tech`). Leave blank for the standard `app.hex.tech`. |
 | Workspace ID | Optional. Used to generate direct links from Datadog to your Hex projects and cells. Find it in any Hex URL: `https://app.hex.tech/<workspace_id>/hex/...`. |
 
-Datadog syncs your Hex workspace every 60 minutes.
+## What's next
 
-## Supported warehouses
+After your Hex workspace is connected, Datadog syncs it every 60 minutes and automatically derives lineage from warehouse tables and columns to the Hex projects and cells that depend on them.
 
-Lineage resolution is fully supported for Hex data connections to **Snowflake** and **BigQuery**. Databricks and Postgres data connections are recognized, but lineage resolution for them is incomplete as of this writing — contact [support][1] if you rely on Hex-to-Databricks or Hex-to-Postgres lineage.
+Initial syncs may take up to several hours depending on the size of your Hex workspace.
 
-[1]: /help/
+After syncing, you can explore your Hex projects and their upstream dependencies in the [Data Observability Catalog][1].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/data-obs/catalog
