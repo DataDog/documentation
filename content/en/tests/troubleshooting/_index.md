@@ -103,6 +103,44 @@ Datadog native testing libraries populate `git.*` tags from two sources:
 
 Because these sources can describe different commits, reported `git.*` tags can be inconsistent. For example, GitHub Actions sets `GITHUB_SHA` to the merge commit for [`pull_request` workflows][24]. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, or in GitLab CI/CD jobs, a custom [`actions/checkout` `ref` input][19], [`GIT_CHECKOUT: "false"`][21], or commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` can create the same mismatch.
 
+The following GitHub Actions workflow can report mismatched Git metadata:
+
+```yaml
+name: test
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # GITHUB_SHA still points to the pull request merge commit.
+          # The local checkout points to the pull request head commit.
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: npm test
+        # git.commit.sha can come from GITHUB_SHA.
+        # git.commit.message can come from the local Git checkout.
+```
+
+The following GitLab CI/CD job can create a similar mismatch:
+
+```yaml
+test:
+  variables:
+    # CI_COMMIT_SHA still points to the commit that created the pipeline.
+    # The runner does not update the working tree automatically.
+    GIT_CHECKOUT: "false"
+  script:
+    - git fetch origin "$CUSTOM_REF"
+    # The local checkout points to CUSTOM_REF before tests run.
+    - git checkout "$CUSTOM_REF"
+    - npm test
+    # git.commit.sha can come from CI_COMMIT_SHA.
+    # Other git.* tags can come from the local Git checkout.
+```
+
 To report consistent metadata, set the relevant [`DD_GIT_*` environment variables][20] explicitly before running tests. These variables take precedence over CI provider variables and local Git metadata. Set them to the commit metadata that you want Datadog to report, such as the commit that triggered the job or a custom commit checked out during the job.
 
 ## The test status numbers are not what is expected
