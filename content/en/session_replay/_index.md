@@ -133,5 +133,5 @@ Learn more about Dev Tools for [browser][11] and [mobile][12].
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /session_replay/browser/dev_tools/
-[12]: /session_replay/mobile/dev_tools/
+[11]: /session_replay/dev_tools?platform=browser
+[12]: /session_replay/dev_tools?platform=mobile
