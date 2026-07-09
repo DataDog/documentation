@@ -77,7 +77,7 @@ Metric property breakouts have the following requirements and limitations:
 
 | Aspect | Support |
 |---|---|
-| **Metric types** | Count, sum, average, percentile, and ratio metrics. Cross-source ratio metrics (where the numerator and denominator come from different data sources) are not supported. |
+| **Metric types** | Metrics using any [aggregation method][6] (such as count, sum, average, or percentile), as well as [ratio metrics][7]. Cross-source ratio metrics (where the numerator and denominator come from different data sources) are not supported. |
 | **Data sources** | Product Analytics, RUM, and warehouse metrics. |
 | **Properties** | The property must belong to the metric's data source. |
 | **Values** | Select from the values Datadog discovers for the property (up to 50 of the most frequent values). |
@@ -94,3 +94,5 @@ Metric property breakouts have the following requirements and limitations:
 [3]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [4]: /experiments/reading_results/
 [5]: /experiments/statistics/analysis_methods/
+[6]: /experiments/defining_metrics/#aggregation-methods
+[7]: /experiments/defining_metrics/#ratio-metrics
