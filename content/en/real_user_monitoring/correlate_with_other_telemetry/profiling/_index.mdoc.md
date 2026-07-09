@@ -226,9 +226,9 @@ To start collecting data, set up [Mobile RUM for Android][6].
 Initialize the RUM SDK and configure the `setApplicationLaunchSampleRate` and `setContinuousSampleRate` parameters, which are independent of each other:
 
 - `setApplicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 15 means profiling runs on 15 out of 100 launches).
-- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][21] are profiled (for example, 15 means that 15 out of 100 sessions will have their time to full display, ANRs, and long tasks profiled).
+- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][19] are profiled (for example, 15 means that 15 out of 100 sessions will have their time to full display, ANRs, and long tasks profiled).
 
-Both sample rates are applied on top of the [RUM session sampling rate][18]. 
+Both sample rates are applied on top of the [RUM session sampling rate][17]. 
 
 {% alert level="danger" %}
 If no value is specified, the default for both `setApplicationLaunchSampleRate` and `setContinuousSampleRate` is 15%.
@@ -263,7 +263,7 @@ If no value is specified, the default for both `setApplicationLaunchSampleRate` 
 ```
 
 {% alert level="warning" %}
-The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate` or `continuousSampleRate`. This variation results from [rate limitations][22] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
+The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate` or `continuousSampleRate`. This variation results from [rate limitations][20] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
 {% /alert %}
 
 The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
@@ -274,7 +274,7 @@ You can use the `@profiling.has_profile` attribute in the Sessions Explorer to f
 
 ### During the time to initial display and time to full display
 
-Android application launch profiling data is attached to the [time to initial display][8] and [time to full display][16] vital events in a RUM session. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
+Android application launch profiling data is attached to the [time to initial display][8] and [time to full display][8] vital events in a RUM session. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
 
 {% img src="real_user_monitoring/android/android-profiling-ttfd.png" alt="Android profiling data for a time to full display event." style="width:90%;" /%}
 
@@ -284,7 +284,7 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 ### During application not responding errors
 
-Android profiling data is attached to [application not responding (ANR)][17] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
+Android profiling data is attached to [application not responding (ANR)][16] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
 {% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
 
@@ -332,7 +332,7 @@ Initialize the RUM SDK and configure the `applicationLaunchSampleRate` and `cont
 - `applicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 5 means profiling runs on 5 out of 100 launches).
 - `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations] [21] are profiled (for example, 5 means that 5 out of 100 sessions will have their time to full display, application hangs, and long tasks profiled).
 
-Both sample rates are applied on top of the [RUM session sampling rate][23].
+Both sample rates are applied on top of the [RUM session sampling rate][21].
 
 {% alert level="danger" %}
 If no value is specified, the default for both `applicationLaunchSampleRate` and `continuousSampleRate` is 5%.
@@ -375,7 +375,7 @@ You can use the `@profiling.has_profile`attribute in the Sessions Explorer to fi
 
 ### During the time to initial display and time to full display
 
-iOS application launch profiling data is attached to the [time to initial display][12] and [time to full display][19] vital events in a RUM session. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
+iOS application launch profiling data is attached to the [time to initial display][12] and [time to full display][12] vital events in a RUM session. You can access profiles for the time to initial display and time to full display from the session side panel, view side panel, or directly from the vital side panels.
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttfd.png" alt="iOS profiling data in a time to full display vital event." style="width:90%;" /%}
 
@@ -385,7 +385,7 @@ Use the **flame graph** to identify which functions consume the most Wall time d
 
 ### During application hangs
 
-iOS profiling data is attached to [application hangs][20] in a RUM session. You can access profiles for application hangs from the view side panel or from the error event side panel.
+iOS profiling data is attached to [application hangs][18] in a RUM session. You can access profiles for application hangs from the view side panel or from the error event side panel.
 
 {% img src="real_user_monitoring/ios/ios-profiling-app-hang.png" alt="iOS profiling data in an application hang event." style="width:90%;" /%}
 
@@ -420,11 +420,9 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [13]: /real_user_monitoring/guide/proxy-rum-data
 [14]: /integrations/content_security_policy_logs
 [15]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
-[16]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
-[17]: /real_user_monitoring/application_monitoring/android/data_collected#error-attributes
-[18]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
-[19]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
-[20]: /real_user_monitoring/application_monitoring/ios/data_collected#error-attributes
-[21]: /real_user_monitoring/operations_monitoring/?tab=browser
-[22]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works 
-[23]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
+[16]: /real_user_monitoring/application_monitoring/android/data_collected#error-attributes
+[17]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
+[18]: /real_user_monitoring/application_monitoring/ios/data_collected#error-attributes
+[19]: /real_user_monitoring/operations_monitoring/?tab=browser
+[20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works 
+[21]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
