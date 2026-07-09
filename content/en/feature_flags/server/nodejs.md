@@ -59,7 +59,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/). For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
 Or enable the provider in code:
 
@@ -369,3 +369,5 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
 [3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/

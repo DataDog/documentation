@@ -46,7 +46,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/). For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Installation
 
@@ -354,6 +354,8 @@ func TestNewCheckoutFlow(t *testing.T) {
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
 [3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 

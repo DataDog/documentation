@@ -48,7 +48,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/). For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
 
 ## Installation
 
@@ -396,6 +396,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
 [5]: /account_management/api-app-keys/#api-keys
+[6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 
