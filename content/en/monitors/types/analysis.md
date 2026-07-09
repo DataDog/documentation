@@ -59,7 +59,7 @@ Additional data sources are being onboarded to Analysis monitors over time as su
 
 Any data source not listed as supported is unavailable for monitoring. If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
 
-`Dataset is based on an unsupported data source for monitoring: Infrastructure Resources`
+`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
 
 ## Monitor creation
 
