@@ -255,6 +255,36 @@ print(details.error)    // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
+## Observe state changes
+
+Use `flagsClient.state` to check whether a `FlagsClient` is ready to evaluate flags and to react when its state changes. State changes occur when you call `setEvaluationContext` and the SDK fetches assignments for that context.
+
+{{< code-block lang="swift" >}}
+final class FeatureFlagStateObserver: FlagsStateListener {
+    func flagsStateDidChange(_ newState: FlagsClientState) {
+        switch newState {
+        case .notReady:
+            // The client has not loaded assignments yet.
+        case .reconciling:
+            // The client is fetching assignments for a context change.
+        case .ready:
+            // Assignments are loaded and available for evaluation.
+        case .stale:
+            // Cached assignments are available, but the latest fetch failed.
+        case .error:
+            // No assignments are available for evaluation.
+        }
+    }
+}
+
+let observer = FeatureFlagStateObserver()
+flagsClient.state.addListener(observer)
+
+let currentState = flagsClient.state.currentState
+{{< /code-block >}}
+
+Keep a strong reference to the listener for as long as you want to receive updates. The listener receives the current state when it is registered, then receives future state changes.
+
 ## Use with OpenFeature
 
 The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
@@ -355,6 +385,42 @@ print(details.value)    // Evaluated value
 print(details.variant)  // Variant name, if applicable
 print(details.reason)   // Reason (for example: "TARGETING_MATCH" or "DEFAULT")
 print(details.errorCode) // Error code, if evaluation failed
+{{< /code-block >}}
+
+### Observe provider events
+
+Use `OpenFeatureAPI.shared.observe()` to react to OpenFeature provider events. The Datadog OpenFeature provider emits `.ready`, `.stale`, and `.error` based on the underlying `FlagsClient` state. The OpenFeature SDK can also emit life cycle events such as `.reconciling` and `.contextChanged` when the evaluation context changes.
+
+{{< code-block lang="swift" >}}
+import Combine
+import OpenFeature
+
+final class FeatureFlagEventObserver {
+    private var cancellable: AnyCancellable?
+
+    func startObserving() {
+        cancellable = OpenFeatureAPI.shared.observe().sink { event in
+            guard let event else {
+                return
+            }
+
+            switch event {
+            case .ready:
+                // The provider is ready to evaluate flags.
+            case .stale:
+                // Cached assignments are available, but they may be out of date.
+            case .error(_, _):
+                // The provider cannot evaluate flags.
+            case .reconciling:
+                // The provider is reconciling after a context change.
+            case .contextChanged:
+                // The context change completed.
+            case .configurationChanged:
+                // The provider configuration changed.
+            }
+        }
+    }
+}
 {{< /code-block >}}
 
 ## Advanced configuration

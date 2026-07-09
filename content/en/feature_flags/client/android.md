@@ -251,6 +251,45 @@ Similar detail methods exist for other types: `getBooleanDetails()`, `getInteger
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Observe provider events
+
+Use `OpenFeatureAPI.observe()` to react to provider state changes. The Datadog OpenFeature provider emits `ProviderReady`, `ProviderStale`, and `ProviderError` based on the underlying `FlagsClient` state.
+
+{{< code-block lang="kotlin" >}}
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.events.OpenFeatureProviderEvents
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
+
+val stateJob = lifecycleScope.launch {
+    OpenFeatureAPI.observe<OpenFeatureProviderEvents>()
+        .catch {
+            // Handle Flow collection errors.
+        }
+        .collect { event ->
+            when (event) {
+                is OpenFeatureProviderEvents.ProviderReady -> {
+                    // The provider is ready to evaluate flags.
+                }
+                is OpenFeatureProviderEvents.ProviderStale -> {
+                    // Cached assignments are available, but they may be out of date.
+                }
+                is OpenFeatureProviderEvents.ProviderError -> {
+                    // The provider cannot evaluate flags.
+                }
+                is OpenFeatureProviderEvents.ProviderConfigurationChanged -> {
+                    // The provider configuration changed.
+                }
+                else -> {
+                    // Handle other OpenFeature provider events as needed.
+                }
+            }
+        }
+}
+{{< /code-block >}}
+
+Cancel the collection job when the observing component stops. For example, collect from `lifecycleScope` in an Android `Activity` or `Fragment`, or from `viewModelScope` in a `ViewModel`.
+
 ## Advanced configuration
 
 ### Global configuration
@@ -358,6 +397,43 @@ flagsClient.setEvaluationContext(
 {{< /code-block >}}
 
 This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations after the background operation completes.
+
+### Observe direct client state changes
+
+Use `flagsClient.state` to check the current direct-client state or register a listener for state changes:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsStateListener
+import com.datadog.android.flags.model.FlagsClientState
+
+val listener = object : FlagsStateListener {
+    override fun onStateChanged(newState: FlagsClientState) {
+        when (newState) {
+            FlagsClientState.NotReady -> {
+                // The client has not loaded assignments yet.
+            }
+            FlagsClientState.Reconciling -> {
+                // The client is fetching assignments for a context change.
+            }
+            FlagsClientState.Ready -> {
+                // Assignments are loaded and available for evaluation.
+            }
+            FlagsClientState.Stale -> {
+                // Cached assignments are available, but the latest fetch failed.
+            }
+            is FlagsClientState.Error -> {
+                // No assignments are available for evaluation.
+            }
+        }
+    }
+}
+
+flagsClient.state.addListener(listener)
+
+val currentState = flagsClient.state.getCurrentState()
+{{< /code-block >}}
+
+The listener receives the current state when it is registered, then receives future state changes. Keep the callback fast and dispatch long-running work to another thread. Call `flagsClient.state.removeListener(listener)` when the observing component stops.
 
 ### Evaluate flags (FlagsClient)
 
