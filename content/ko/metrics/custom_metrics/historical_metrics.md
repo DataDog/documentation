@@ -1,74 +1,74 @@
 ---
-description: タイムスタンプが 1 時間以上前のカスタムメトリクスの値をメトリクス保持期間まで取り込みます。
+description: 한 시간보다 오래된 타임스탬프를 가진 사용자 지정 메트릭 값을 메트릭 보존 기간 내에서 수집합니다.
 further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
-  tag: ブログ
-  text: 過去のメトリクスを使ってシステムパフォーマンスをより長い時間軸でモニターする
+  tag: 블로그
+  text: 과거 메트릭으로 더 긴 기간에 걸쳐 시스템 성능 모니터링하기
 - link: /extend/dogstatsd/
-  tag: ドキュメント
-  text: DogStatsD について
+  tag: 설명서
+  text: DogStatsD에 대해 자세히 알아보기
 - link: /extend/community/libraries/
-  tag: ドキュメント
-  text: 公式およびコミュニティ作成の API および DogStatsD クライアントライブラリ
+  tag: 설명서
+  text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
 - link: https://www.datadoghq.com/blog/historical-metrics/
-  tag: ブログ
-  text: 過去のメトリクスを使ってシステムパフォーマンスをより長い時間軸でモニターする
-title: 過去のメトリクスの取り込み
+  tag: 블로그
+  text: 과거 메트릭으로 더 긴 기간에 걸쳐 시스템 성능 모니터링하기
+title: 과거 메트릭 수집
 ---
 {{< jqmath-vanilla >}}
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">過去のメトリクスの取り込みは、選択した <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>
+<div class="alert alert-danger">선택한 <a href="/getting_started/site">Datadog 사이트</a>에서는 과거 메트릭 수집이 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
-## 概要 {#overview}
+## 개요 {#overview}
 
-過去のメトリクスの取り込みを有効にすると、送信時刻よりも 1 時間以上前のタイムスタンプを持つ**カスタムメトリクス**値を収集できますが、メトリクスの総保持期間 (デフォルトは 15 か月) を過ぎたものは収集できません。
+과거 메트릭 수집을 활성화하면 제출 시점 기준으로 한 시간보다 오래된 **사용자 지정 메트릭** 값을 수집할 수 있습니다. 단, 총 메트릭 보존 기간(기본 15개월)을 초과할 수는 없습니다.
 
-過去のメトリクスの取り込みをメトリクスで有効にすると、障害からの復旧、誤った値の修正、IoT の遅延管理など、さまざまなユースケースで役立ちます。
+메트릭에 과거 메트릭 수집이 활성화되어 있으면 장애 복구, 잘못된 값 수정, IoT 지연 관리 등 다양한 사용 사례에 유용할 수 있습니다.
 
-## 過去のメトリクスの取り込みとは {#what-is-historical-metrics-ingestion}
+## 과거 메트릭 수집이란 무엇입니까? {#what-is-historical-metrics-ingestion}
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="過去のメトリクスの取り込みが有効な場合のフローを示す図" >}}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="과거 메트릭이 활성화된 수집 흐름을 보여주는 다이어그램" >}}
 
-Datadog では、タイムスタンプの時刻から 1 時間経過した後に送信されたメトリクスポイントを*過去のメトリクス*として分類しています。過去のメトリクスの取り込みが有効になっていない場合、1 時間経過した後に送信されたメトリクスの値は取り込まれません。
+Datadog은 *과거 메트릭*을 제출 시점 기준으로 한 시간 이상 과거의 타임스탬프를 가진 메트릭 포인트로 분류합니다. 과거 메트릭 수집이 활성화되어 있지 않으면 제출 시점 기준으로 한 시간보다 오래된 메트릭 값은 수집되지 않습니다.
 
-例えば、メトリクス (`exampleMetricA`) が午後 1 時 00 分 (EST) に Datadog に値を送信し、その値のタイムスタンプが午前 10 時 00 分 (EST) だとします。このメトリクスの値は、タイムスタンプが送信時刻よりも 3 時間古いため、_過去_に分類されます。
+예를 들어 메트릭(`exampleMetricA`)이 오후 1시(EST)에 Datadog으로 값을 전송했지만 해당 값의 타임스탬프가 오전 10시(EST)인 경우를 가정합니다. 이 메트릭 값은 제출 시점보다 3시간 이전의 타임스탬프를 가지므로 _과거 메트릭_으로 분류됩니다.
 
-過去のメトリクスの取り込みを有効にして、同じタイムスタンプと同じタグ値の組み合わせを持つ複数の値を Datadog に送信した場合、Datadog はより直近で送信された値を保持します。つまり、同じタイムスタンプで X の値を持つメトリクスと Y の値を持つメトリクスを送信した場合、より直近で送信された値が保持されることになります。
+과거 메트릭 수집이 활성화된 상태에서 동일한 타임스탬프와 동일한 태그-값 조합으로 여러 값을 제출하면 Datadog은 가장 최근에 제출된 값을 유지합니다. 즉, 동일한 타임스탬프에 값 X를 제출한 후 동일한 메트릭에 값 Y를 다시 제출하면 가장 나중에 제출된 값이 유지됩니다.
 
-[Metrics Summary ページ][1]で、*カウント、レート、ゲージ*のメトリクスタイプについて過去のメトリクスの取り込みを有効にすることで、過去のメトリクスの取り込みを開始することができます。 
+*카운트, 레이트 및 게이지* 메트릭 유형에 대해 [Metrics Summary 페이지][1]에서 과거 메트릭 수집을 활성화하면 과거 메트릭 값 수집을 시작할 수 있습니다.  
 
-**注**: 過去のメトリクスの取り込みは、ディストリビューションメトリクスや他の Datadog のデータタイプ ログなどから生成されたカスタムメトリクスでは利用できません。
+**참고**: 과거 메트릭 수집은 분포형 메트릭 또는 로그와 같은 다른 Datadog 데이터 유형에서 생성된 사용자 지정 메트릭에는 사용할 수 없습니다.
 
-## 構成 {#configuration}
+## 구성 {#configuration}
 
-特定のメトリクスについて過去のメトリクスの取り込みを有効にするには
-1. [Metrics Summary ページ][1]に移動します。
-1. 過去のメトリクスの取り込みを有効にしたいメトリクスの名前をクリックして、メトリクスの詳細サイドパネルを開きます。
-1. サイドパネルの *Advanced* セクションで**構成**をクリックします。
-1. **過去のメトリクスを有効にする**トグルを選択し、**保存**を押します。
+특정 메트릭에 대해 과거 메트릭 수집을 활성화하려면 다음을 수행합니다.
+1. [Metrics Summary 페이지][1]로 이동합니다.
+1. 과거 메트릭 수집을 활성화할 메트릭 이름을 클릭하여 메트릭 세부 정보 사이드 패널을 엽니다.
+1. 사이드 패널의 *Advanced* 섹션에서 **Configure**를 클릭합니다.
+1. **Enable historical metrics** 토글을 선택하고 **Save**를 클릭합니다.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary ページで Historical Metrics ファセットパネルが表示され、Metric 詳細パネルの Advanced セクションで Enable historical metrics のオプションが選択されている様子" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary 페이지에 표시된 Historical Metrics 패싯 패널 및 Enable historical metrics 옵션이 선택된 메트릭 세부 정보 패널의 Advanced 섹션" style="width:100%;" >}}
 
-### 複数のメトリクスの一括構成 {#bulk-configuration-for-multiple-metrics}
+### 다중 메트릭 일괄 구성 {#bulk-configuration-for-multiple-metrics}
 
-複数のメトリクスについても、個別に構成を行うのではなく、過去のメトリクスの取り込みをまとめて有効または無効にすることができます。
+각 메트릭을 개별적으로 구성하지 않고 여러 메트릭에 대해 과거 메트릭 수집을 한 번에 활성화하거나 비활성화할 수 있습니다.
 
-1. [Metrics Summary ページ][1]に移動し、**メトリクスを構成**ドロップダウンをクリックします。
-1. **過去のメトリクスを有効にする**を選択します。
-1. メトリクスネームスペースのプレフィックスを指定して、そのネームスペースに一致するすべてのメトリクスを選択します。
-1. (オプション) ネームスペース内のすべてのメトリクスに対する過去のメトリクスの取り込みを無効にするには、**過去のメトリクス**トグルをクリックします。
+1. [Metrics Summary 페이지][1]로 이동하여 **Configure Metrics** 드롭다운을 클릭합니다.
+1. **Enable historical metrics**를 선택합니다.
+1. 메트릭 네임스페이스 접두사를 지정하여 해당 네임스페이스와 일치하는 모든 메트릭을 선택합니다.
+1. (선택 사항) 네임스페이스의 모든 메트릭에 대해 과거 메트릭 수집을 비활성화하려면 **Historical metrics** 토글을 클릭합니다.
 
-{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="過去のメトリクスの取り込みトグル" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="과거 메트릭 수집 토글" >}}
 
-## 過去のメトリクスの送信 {#historical-metrics-submission}
+## 과거 메트릭 제출 {#historical-metrics-submission}
 
-過去のメトリクスの取り込みを有効にした後は、[API](#api) または [Agent](#agent) を通じて過去のタイムスタンプを持つメトリクス値を送信できます。
+과거 메트릭 수집을 활성화한 후에는 [API](#api) 또는 [Agent](#agent)를 통해 과거 타임스탬프를 가진 메트릭 값을 제출할 수 있습니다.
 
 ### API {#api}
 
-API を使用すると、ペイロードに過去のタイムスタンプを含むメトリクス値を送信することができます (上記のユーザーインターフェイスを通じて、そのメトリクス名で過去のメトリクスの受け入れが有効になっている場合)。
+API를 사용하면 페이로드에 과거 타임스탬프를 포함하여 메트릭 값을 제출할 수 있습니다(단, 해당 메트릭 이름은 앞서 설명한 사용자 인터페이스에서 과거 메트릭 허용이 이미 활성화되어 있어야 합니다).
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -366,7 +366,7 @@ EOF
 
 ### Agent {#agent}
 
-Agent を使って過去のメトリクスを送信するには、Agent バージョン 7.40.0 以降がインストールされていることを確認します。このバージョンには、新しい DogStatsD インターフェースが含まれ、**Java**、**GoLang**、および **.NET** をサポートします。これにより、Agent を通じて過去のメトリクスポイントを送信することが可能になります。
+Agent를 통해 과거 메트릭을 제출하려면 Agent 버전 7.40.0 이상이 설치되어 있어야 합니다. 이 버전에는 **Java**, **GoLang**, **.NET**을 지원하는 업데이트된 DogStatsD 인터페이스가 포함되어 있습니다. 이를 통해 Agent를 사용하여 지연된 메트릭 포인트를 전송할 수 있습니다.
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
@@ -448,47 +448,47 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## 過去のメトリクスの取り込みのレイテンシー {#historical-metrics-ingestions-latency}
+## 과거 메트릭 수집 지연 시간 {#historical-metrics-ingestions-latency}
 
-過去のメトリクスの取り込みは、メトリクスのタイプスタンプがどれくらい過去のものかによってレイテンシーが変わります。
+과거 메트릭 수집의 지연 시간은 메트릭 타임스탬프가 얼마나 과거인지에 따라 달라집니다.
 
-| メトリクスの遅延:   | 取り込みのレイテンシー                         |
+| 메트릭 지연 기간:   | 수집 지연 시간 |
 |----------------------|-------------------------------------------|
-| 1-12時間           | ほぼリアルタイムで取り込み (最大 1 時間) |
-| 12 時間 - 30 日   | 最大 14 時間のレイテンシー                    |
-| 30 日を超える         | 14 時間を超えるレイテンシー                     |
+| 1~12시간           | 근실시간 수집(최대 1시간) |
+| 12시간~30일   | 최대 14시간 지연                    |
+| 30일 초과         | 14시간 이상 지연                     |
 
-## 過去のメトリクスの取り込みに対する課金 {#historical-metrics-ingestion-billing}
+## 과거 메트릭 수집 청구 {#historical-metrics-ingestion-billing}
 
-過去のメトリクスは、インデックス化されたカスタムメトリクスとしてカウントされ、請求されます。請求対象のカスタムメトリクスは、**送信されたメトリクスのタイムスタンプ**によって決まります。タイムスタンプが今日であろうと 15 か月前であろうと関係ありません。そのメトリクス名とタグ値の組み合わせで (タイムスタンプに関係なく) **何らかの**値がアクティブに報告されている限り、それが送信された時点でアクティブであるとみなされます。
+과거 메트릭은 인덱싱된 사용자 지정 메트릭으로 계산되며 청구됩니다. 청구 대상 사용자 지정 메트릭은 **제출된 메트릭의 타임스탬프**로 결정되며, 그 타임스탬프가 오늘 날짜든 15개월 전이든 상관없습니다. 해당 메트릭 이름과 태그-값 조합이 제출된 시간 동안 **어떤** 값이라도 보고하고 있다면(타임스탬프와 무관하게) 해당 시간에 활성 상태로 간주됩니다. 
 
-以下の例では、次のことを前提としています。
-- 3000 のユニークなタグ値の組み合わせ
-- 1500 のリアルタイムメトリクス
-- 1500 の過去のメトリクス 
-- 月に 720 時間 (30日)
-- 100 メトリクスあたり 5 ドルのカスタムメトリクスコスト
+다음 예시는 아래 조건을 가정합니다.
+- 3000개의 고유 태그-값 조합
+- 1500개의 실시간 메트릭
+- 1500개의 과거 메트릭 
+- 한 달에 720시간(30일)
+- 메트릭 100개당 $5의 사용자 지정 메트릭 비용
 
 $(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
-インデックス化された過去のメトリクスは、[Plan and Usage ページ][4]の Usage Summary セクションで追跡できます。
+[Plan and Usage 페이지][4]의 Usage Summary 섹션에서 인덱싱된 과거 메트릭 사용량을 추적할 수 있습니다.
 
-{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="インデックス化されたカスタムメトリクスと過去のメトリクスの両方が表示されたPlan and Usage ページの Usage Summary セクション" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="사용자 지정 인덱싱 메트릭과 과거 인덱싱 메트릭을 모두 표시하는 Plan and Usage 페이지의 Usage Summary 섹션" style="width:100%;" >}}
 
-詳細については、[カスタムメトリクスの課金][3]ドキュメントを参照してください。
+자세한 내용은 [Custom Metrics 청구][3]를 참조하세요.
 
-### メトリクス名の料金の課金 {#billing-under-metric-name-pricing}
+### Metric Name 요금제에서의 청구 {#billing-under-metric-name-pricing}
 
-組織がカーディナリティ料金とは異なる[メトリクス名の料金][5]を使用している場合、HMI 課金は異なります。HMI 利用率は、メトリクスの元のタイムスタンプではなく取り込み時間に基づいて計算されます。各 HMI データポイントは、取り込まれたボリュームとインデックスされたボリュームの両方に寄与します。
+조직에서 카디널리티 기반 요금제가 아닌 [Metric Name 요금제][5]를 사용하는 경우 HMI 청구 방식이 다릅니다. HMI 사용량은 메트릭의 원래 타임스탬프가 아니라 수집 시점을 기준으로 계산됩니다. 각 HMI 데이터 포인트는 수집된 볼륨과 인덱싱된 볼륨 모두에 기여합니다.
 
-メトリクス名の料金モデルの詳細については、[Custom Metrics のメトリクス名の料金][5]を参照してください。
+Metric Name 요금제 모델에 대한 자세한 내용은 [Custom Metrics의 Metric Name 요금제][5]를 참조하세요.
 
-## 参考資料 {#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /ja/metrics/#submit-metrics
-[3]: /ja/account_management/billing/custom_metrics/
+[2]: /ko/metrics/#submit-metrics
+[3]: /ko/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
-[5]: /ja/account_management/billing/metric_name_pricing/
+[5]: /ko/account_management/billing/metric_name_pricing/
