@@ -71107,6 +71107,8 @@ components:
             $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerMetricLimit"
           maxItems: 100
           type: array
+        tracking_mode:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorTrackingMode"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorType"
         value_limit:
@@ -71121,6 +71123,7 @@ components:
         - type
         - include
         - limit_exceeded_action
+        - tracking_mode
         - value_limit
         - enabled
       type: object
@@ -71135,6 +71138,16 @@ components:
       x-enum-varnames:
         - DROP_TAG
         - DROP_EVENT
+    ObservabilityPipelineTagCardinalityLimitProcessorOverrideType:
+      description: How the override is applied. `limit_override` enforces a custom limit; `excluded` omits the metric or tag from cardinality tracking.
+      enum:
+        - limit_override
+        - excluded
+      example: limit_override
+      type: string
+      x-enum-varnames:
+        - LIMIT_OVERRIDE
+        - EXCLUDED
     ObservabilityPipelineTagCardinalityLimitProcessorPerMetricLimit:
       description: A cardinality override applied to a specific metric.
       properties:
@@ -71144,16 +71157,16 @@ components:
           description: The name of the metric this override applies to.
           example: "system.cpu.user"
           type: string
-        mode:
-          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerMetricMode"
+        override_type:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorOverrideType"
         per_tag_limits:
-          description: A list of per-tag cardinality overrides that apply within this metric. Must be omitted when `mode` is `excluded`.
+          description: A list of per-tag cardinality overrides that apply within this metric. Must be omitted when `override_type` is `excluded`.
           items:
             $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerTagLimit"
           maxItems: 50
           type: array
         value_limit:
-          description: The maximum number of distinct tag value combinations allowed for this metric. Required when `mode` is `tracked`. Must be omitted when `mode` is `excluded`.
+          description: The maximum number of distinct tag value combinations allowed for this metric. Required when `override_type` is `limit_override`. Must be omitted when `override_type` is `excluded`.
           example: 10000
           format: int64
           maximum: 1000000
@@ -71161,29 +71174,19 @@ components:
           type: integer
       required:
         - metric_name
-        - mode
+        - override_type
       type: object
-    ObservabilityPipelineTagCardinalityLimitProcessorPerMetricMode:
-      description: How the per-metric override is applied. `tracked` enforces a custom limit; `excluded` skips the metric entirely.
-      enum:
-        - tracked
-        - excluded
-      example: tracked
-      type: string
-      x-enum-varnames:
-        - TRACKED
-        - EXCLUDED
     ObservabilityPipelineTagCardinalityLimitProcessorPerTagLimit:
       description: A cardinality override for a specific tag key within a per-metric limit.
       properties:
-        mode:
-          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerTagMode"
+        override_type:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorOverrideType"
         tag_key:
           description: The tag key this override applies to.
           example: "host"
           type: string
         value_limit:
-          description: The maximum number of distinct values allowed for this tag. Required when `mode` is `limit_override`. Must be omitted when `mode` is `excluded`.
+          description: The maximum number of distinct values allowed for this tag. Required when `override_type` is `limit_override`. Must be omitted when `override_type` is `excluded`.
           example: 5000
           format: int64
           maximum: 1000000
@@ -71191,18 +71194,26 @@ components:
           type: integer
       required:
         - tag_key
+        - override_type
+      type: object
+    ObservabilityPipelineTagCardinalityLimitProcessorTrackingMode:
+      description: Controls whether the processor uses exact or probabilistic tag tracking.
+      properties:
+        mode:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorTrackingModeMode"
+      required:
         - mode
       type: object
-    ObservabilityPipelineTagCardinalityLimitProcessorPerTagMode:
-      description: How the per-tag override is applied. `limit_override` enforces a custom limit on the tag; `excluded` skips the tag from cardinality tracking.
+    ObservabilityPipelineTagCardinalityLimitProcessorTrackingModeMode:
+      description: The cardinality tracking algorithm to use.
       enum:
-        - limit_override
-        - excluded
-      example: limit_override
+        - exact_fingerprint
+        - probabilistic
+      example: exact_fingerprint
       type: string
       x-enum-varnames:
-        - LIMIT_OVERRIDE
-        - EXCLUDED
+        - EXACT_FINGERPRINT
+        - PROBABILISTIC
     ObservabilityPipelineTagCardinalityLimitProcessorType:
       default: tag_cardinality_limit
       description: The processor type. The value must be `tag_cardinality_limit`.
