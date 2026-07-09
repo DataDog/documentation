@@ -103,7 +103,7 @@ Datadog native testing libraries populate `git.*` tags from two sources:
 
 Because these sources can describe different commits, reported `git.*` tags can be inconsistent.
 
-In GitHub Actions, `pull_request` workflows set `GITHUB_SHA` to the merge commit for the [`pull_request` workflow][21]. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, a custom [`actions/checkout` `ref` input][22] can create the same mismatch.
+In GitHub Actions, [`pull_request`][21] workflows set `GITHUB_SHA` to the merge commit. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, a custom [`actions/checkout` `ref` input][22] can create the same mismatch.
 
 In GitLab CI/CD jobs, [`GIT_CHECKOUT: "false"`][23] and a manual checkout can cause CI-provided metadata to describe the pipeline commit while local Git metadata describes the manually checked-out commit. Commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` before running tests can also create this mismatch.
 
@@ -270,4 +270,4 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 [21]: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
 [22]: https://github.com/actions/checkout#usage
 [23]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout
-[24]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#collecting-git-metadata
+[24]: #data-appears-in-test-runs-but-not-test-health
