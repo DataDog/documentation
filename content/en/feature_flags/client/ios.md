@@ -412,6 +412,7 @@ final class FeatureFlagEventObserver {
             switch event {
             case .ready:
                 // The provider is ready to evaluate flags.
+                break
             case .stale:
                 // Cached assignments are available, but they may be out of date.
             case .error(_, _):
