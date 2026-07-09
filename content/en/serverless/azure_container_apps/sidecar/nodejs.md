@@ -92,7 +92,7 @@ logger.info('Hello world!');
 
    <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
 
-{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="containerapp" %}}
 
 {{% svl-tracing-env %}}
 
