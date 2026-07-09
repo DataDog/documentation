@@ -179,6 +179,37 @@ The [Cases][12] page allows you to view cases specifically for your security pro
 
 In the {{< ui >}}Security Signals{{< /ui >}} section for a case, you can view signals associated with it, and click {{< ui >}}Add Signals{{< /ui >}} to search for filters to associate with the case.
 
+#### Manage default behavior for signals and security cases
+
+On the Cloud SIEM [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
+
+- **Case Project Settings**
+
+  When you select a project to connect security cases with, these options appear.
+  - **Default SIEM Security Case Project**: Select the project you want to appear by default.
+  - **Security Case project scoping**: Select up to 20 security case projects that you can choose from.
+
+- **Case Creation Defaults**
+
+  When you create a case from a signal, select the default values to assign to that case.
+  <div class="alert alert-tip">Click <strong>Show signal to case correlation scheme</strong> to see how Datadog maps signal status to case status, and signal severity to case priority.</div>
+
+  - **Default Title** and **Default Description**: Choose whether to use the name and playbook from the first signal for the case, or to leave them empty.
+  - **Default Assignee**: Choose to assign the case to the current user, the person the first signal is assigned to, or to a particular assignee.
+  - **Default Case Status** and **Default Case Priority**: Choose whether to use a specific status and priority for new cases, or to use the values from the first signal.
+  - **Default Case Type**: Choose to categorize created cases as standard, or as security cases.
+
+- **Signal Attachment Settings**
+
+  When you attach signals to a case, select the default values to assign to those signals.
+  <div class="alert alert-tip">Click <strong>Show case to signal archive reason mapping</strong> to see how Datadog maps the reason for resolving the case to the reason for archiving the signal.</div>
+
+  - **When being attached to a case**:
+    - **Signal Status** and **Signal Assignee**: When you attach signals to a case, choose to either keep the signal status and assignee, or to assign specific values to them.
+    - Turn on the **Allow Override** toggle to allow overriding existing values in those fields. If this toggle is off, then it only applies the selected status and assignee when those fields are empty.
+  - **When updating a case**:
+    - **Signal Status**: Choose to either assign a status to the signal that corresponds with the case, or to leave it as-is.
+
 ### Declare an incident
 
 Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [Incident Management][7] provides a framework and workflow to help teams effectively identify and mitigate incidents.
@@ -231,3 +262,4 @@ You can also launch this query directly from the signal panel:
 [10]: /security/threat_intelligence
 [11]: /security/suppressions/#create-a-suppression-rule
 [12]: https://app.datadoghq.com/security/siem/cases
+[13]: https://app.datadoghq.com/security/configuration/siem/case-management
