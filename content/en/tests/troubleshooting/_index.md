@@ -145,7 +145,7 @@ test:
     # Other git.* tags can come from the local Git checkout.
 ```
 
-To report consistent metadata, set the relevant [`DD_GIT_*` environment variables][24] explicitly before running tests. These variables take precedence over CI provider variables and local Git metadata. Set them to the commit metadata that you want Datadog to report, such as the commit that triggered the job or a custom commit checked out during the job.
+To report consistent metadata, set the relevant [`DD_GIT_*` environment variables](#data-appears-in-test-runs-but-not-test-health) explicitly before running tests. These variables take precedence over CI provider variables and local Git metadata. Set them to the commit metadata that you want Datadog to report, such as the commit that triggered the job or a custom commit checked out during the job.
 
 ## The test status numbers are not what is expected
 
@@ -270,4 +270,3 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 [21]: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
 [22]: https://github.com/actions/checkout#usage
 [23]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout
-[24]: #data-appears-in-test-runs-but-not-test-health
