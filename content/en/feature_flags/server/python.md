@@ -28,7 +28,7 @@ Before setting up the Python Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog Python SDK** `ddtrace` version 3.19.0 or later
+- **Datadog Python SDK** `ddtrace` version 3.19.0 or later (version 4.7.0 or later required for flag evaluation metrics)
 - **OpenFeature Python SDK** `openfeature-sdk`: version 0.5.0 or later (version 0.7.0 or later required if you use provider event handlers to wait for initialization)
 
 Set the following environment variables:
@@ -38,7 +38,7 @@ Set the following environment variables:
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+export DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -62,6 +62,19 @@ Or add them to your `requirements.txt`:
 {{< code-block lang="text" filename="requirements.txt" >}}
 ddtrace>=3.19.0
 openfeature-sdk>=0.5.0
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-grpc
+{{< /code-block >}}
+
+Or add them to your `requirements.txt`:
+
+{{< code-block lang="text" filename="requirements.txt" >}}
+opentelemetry-sdk>=1.41.0
+opentelemetry-exporter-otlp-proto-grpc>=1.41.0
 {{< /code-block >}}
 
 ## Initialize the SDK
