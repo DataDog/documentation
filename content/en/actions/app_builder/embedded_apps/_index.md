@@ -8,7 +8,6 @@ further_reading:
 - link: "https://app.datadoghq.com/actions/action-catalog/"
   tag: "App"
   text: "Action Catalog"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}

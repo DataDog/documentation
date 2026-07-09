@@ -9,7 +9,6 @@ further_reading:
 - link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}

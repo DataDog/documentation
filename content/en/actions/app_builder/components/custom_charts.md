@@ -12,7 +12,6 @@ further_reading:
 - link: "/actions/workflows/build/"
   tag: "Documentation"
   text: "Build Apps"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}

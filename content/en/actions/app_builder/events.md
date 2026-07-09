@@ -15,7 +15,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}

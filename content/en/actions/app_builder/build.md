@@ -12,7 +12,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
   tag: "Learning Center"
   text: "Getting Started with App Builder"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}
