@@ -30,14 +30,14 @@ When Application Insights is enabled on your workloads and your Azure logs are f
 
 After conversion, the spans behave like any other Datadog APM spans. They appear in the same waterfall view, support trace search, and correlate with your logs and metrics.
 
-{{% serverless/log_to_trace_indexing_note %}}
-
 ## Prerequisites
 
 Before you can use the Azure App Insights Integration, set up the following:
 
 1. **Enable Azure Application Insights** on the Azure workloads you want to trace, using the classic Application Insights SDK. If your workload uses the [Azure Monitor OpenTelemetry Distro][5], see [OpenTelemetry in Datadog][6] instead.
 2. **Configure [Azure Automated Log Forwarding][2]** to forward Azure App Insights Logs to Datadog. Confirm that metrics and resource collection are enabled in the [Microsoft Azure integration][1], so spans can be enriched with Azure resource metadata.
+
+{{% serverless/log_to_trace_indexing_note %}}
 
 ## Supported Azure services
 
