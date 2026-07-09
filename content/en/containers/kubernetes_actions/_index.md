@@ -33,7 +33,7 @@ Your target cluster must meet the following requirements:
 
 - [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][3] for setup instructions.
 - The [Admission Controller][2] must be enabled. It is enabled by default with the Datadog Operator and the Datadog Helm chart.
-- Datadog Cluster Agent v7.81.0 or later.
+- Datadog Cluster Agent v7.82.0 or later.
 - Kubernetes Actions must be enabled on the Cluster Agent so that the action controller is running. See [Setup](#setup).
 - [Helm][4], for updating your Datadog Agent. Datadog Operator users also need the [`kubectl` CLI][5].
 
@@ -87,7 +87,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Ensure you are using Cluster Agent v7.81.0 or later. Add the following to your `datadog-values.yaml` configuration file to enable Remote Configuration and Kubernetes Actions on the Cluster Agent:
+1. Ensure you are using Cluster Agent v7.82.0 or later. Add the following to your `datadog-values.yaml` configuration file to enable Remote Configuration and Kubernetes Actions on the Cluster Agent:
 
 ```yaml
 datadog:
