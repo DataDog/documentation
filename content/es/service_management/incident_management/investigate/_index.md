@@ -15,7 +15,7 @@ title: Investigar incidentes
 
 ## Información general
 
-{{< img src="/service_management/incidents/investigate/incidents_overview_tab.png" alt="Ejemplo de vista de detalles de incidentes de la pestaña Información general" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/incidents_overview_tab.png" alt="Ejemplo de vista de detalles de incidentes de la pestaña Información general" style="width:100%;" >}}
 
 Una investigación eficaz de incidentes comienza con la identificación y categorización del incidente, seguidas de una exhaustiva recopilación de datos para establecer una cronología detallada de los eventos. La página Detalles de incidentes de Datadog te ayuda a investigar incidentes a través de una plataforma centralizada para la monitorización, la investigación, la corrección, la colaboración y el análisis en tiempo real. Incluye dashboards dinámicos y periodos de tiempo interactivos que ayudan a los respondedores a visualizar los datos y patrones del incidente. Utiliza los detalles de incidentes para:
 
@@ -41,7 +41,7 @@ Añade más campos de propiedades utilizando los pares `<KEY>:<VALUE>` de las et
 
 Para los incidentes del lado del cliente, especifica los detalles del impacto añadiéndolos en la sección **Impacts** (Impactos):
 
-{{< img src="/service_management/incidents/investigate/incident_details_impacts.png" alt="Descripción de tu imagen" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/investigate/incident_details_impacts.png" alt="Descripción de tu imagen" style="width:90%;" >}}
 
 1. Haz clic en **Add** (Añadir).
 2. Especifica la fecha y la hora de inicio del impacto.  

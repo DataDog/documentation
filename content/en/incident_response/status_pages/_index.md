@@ -1,5 +1,6 @@
 ---
 title: Status Pages
+description: Communicate service availability, incidents, and planned maintenance with customers or internal stakeholders through a shareable status page.
 aliases:
 - /service_management/status_pages/
 further_reading:
@@ -19,7 +20,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page3.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
 Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
@@ -28,13 +29,11 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email notifications
+* Reduce inbound support volume with proactive email and Slack notifications
 
 ## Configure permissions
 
-There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
-
-To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
+To create, update, or publish Status Pages, you must have the appropriate RBAC permissions. For more information, see [Access Control][1].
 
 <table>
   <thead>
@@ -52,13 +51,23 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
-      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Create new Status Pages, and configure Status Pages settings.</td>
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
       <td>Publish and update Incidents.</td>
       <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
+      <td>Publish and unpublish public Status Pages.</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
+      <td>Publish and unpublish internal Status Pages.</td>
+      <td>None</td>
     </tr>
   </tbody>
 </table>
@@ -73,15 +82,15 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
-   | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). When subscriptions are enabled, visitors can sign up from the published page to get notified about new notices and updates. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
 
 ## Add components
 
-{{< img src="/service_management/status_pages/status_page_components.png" alt="Status page component configuration with live preview panel" style="width:100%;" >}}
+{{< img src="/incident_response/status_pages/status_page_components.png" alt="Status page component configuration with live preview panel" style="width:100%;" >}}
 
 Components are the building blocks of your status page. Each one represents a service or feature your users care about. Some examples of components include:
 - API Gateway
@@ -103,6 +112,20 @@ You can add components to your status page either on initial setup or through th
 If multiple notices affect the same component, the notice with the greatest impact takes precedence:
 Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
 
+### Component status and uptime
+
+Each component status affects the uptime bars and uptime percentage differently:
+
+| Status | Uptime bars | Uptime percentage |
+|--------|-------------|-------------------|
+| Major Outage | Shown | Counts as downtime |
+| Partial Outage | Shown | Counts as downtime |
+| Degraded Performance | Shown | No impact |
+| Maintenance | Shown | No impact |
+| Operational | Shown as healthy | No impact |
+
+**Note**: Partial Outage and Major Outage are weighted equally. The full duration at either status counts as downtime in the uptime percentage calculation.
+
 ## Publish your status page
 
 After you save your status page settings, click **Launch Status Page** to make the page available at its URL.
@@ -115,11 +138,11 @@ If you selected:
 
 Notices are messages published to a status page to communicate system status. Status Pages support two types of notices: **degradations** for unplanned service impact and **maintenance windows** for planned downtime.
 
-{{< img src="service_management/status_pages/select_notice_type_status_page.png" alt="Status page notice type selector with degradation and scheduled maintenance options" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/select_notice_type_status_page.png" alt="Status page notice type selector with degradation and scheduled maintenance options" style="width:60%;" >}}
 
 ### Publish a degradation
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page_degradations2.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
 
 Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
 
@@ -134,18 +157,49 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
-- Updates the uptime bars for impacted components.
+- Updates the uptime bars for impacted components. Components set to **Partial Outage** or **Major Outage** also have their uptime percentage reduced for the duration of the impact.
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
+**Note**: Each status page supports a maximum of 100 active (unresolved) degradations at a time.
+
+### Backfill a degradation
+
+Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the degradation. Each update requires a started at timestamp, status (Investigating or Resolved), description, and affected components. |
+
+{{< img src="incident_response/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
+
+### Edit a degradation update
+
+After publishing a degradation update, you can edit its status and message to correct typos, fix an inaccurate status selection, or clarify the description. To edit an update, open the degradation notice on the status page, hover over the update you want to modify, and click the edit icon that appears. Make your changes in the **Edit Update** modal.
+
+{{< img src="incident_response/status_pages/edit_degradation_update.png" alt="Edit Update modal showing Notice Status options and a Message field" style="width:60%;" >}}
+
+Only the **Notice Status** and **Message** fields can be edited. To resolve the notice or update affected components, add a new update instead. Click **Save Changes** to apply the edits.
+
+### Delete a degradation update
+
+To delete an update posted by mistake, open the degradation notice on the status page, hover over the update you want to delete, and click the delete icon that appears. Confirm in the **Delete Update** modal.
+
+{{< img src="incident_response/status_pages/delete_degradation_update.png" alt="Delete Update confirmation modal" style="width:60%;" >}}
+
+Deleting an update replaces it on the timeline with a note indicating it was deleted by the page administrator. This action cannot be undone.
+
 ### Schedule a maintenance window
 
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
@@ -159,7 +213,7 @@ From the status page, click **Schedule Maintenance**, or click **Publish Notice*
 | **Components impacted** | Components affected during the maintenance window |
 | **Notify subscribers** | Toggle to send advance notification to subscribers |
 
-{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
 
 After reviewing and scheduling, the maintenance window:
 - Appears under **Upcoming Maintenance** on the status page
@@ -168,17 +222,83 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
+**Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
+
+### Backfill a maintenance window
+
+Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Scheduled Maintenance**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
+
+{{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
+
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. A preferred timezone can be configured for timestamp formatting within notifications. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
-{{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
+{{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
+
+
+## Configure a custom email sender domain
+
+By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
+
+<div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
+
+1. On your status page, go to **Settings** > **Subscriptions**.
+2. Under **Email Sender Domain**, click **Organization Settings**.
+3. In Organization Settings, [add and validate an SMTP server][3].
+4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+
+## Slack subscriptions
+
+Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender. Slack subscriptions are configured independently of [email subscriptions](#email-subscriptions).
+
+### Enable Slack subscriptions
+
+1. From your status page, click **Settings**.
+2. Enable **Slack subscriptions**.
+3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
+
+{{< img src="incident_response/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
+
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
+
+### Subscribe in Slack
+
+From a published page with Slack subscriptions enabled:
+
+1. Click **Subscribe** and open the **Slack** tab.
+1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
+1. Click **Subscribe via Slack**.
+   {{< img src="incident_response/status_pages/status_pages_slack_subscription_modal.png" alt="Subscribe to Updates modal with the Slack tab selected and a Subscribe via Slack button" style="width:70%;" >}}
+1. Authorize the **Datadog Status Pages** app for your workspace and select the channel to receive updates.
+   {{< img src="incident_response/status_pages/status_pages_slack_oauth.png" alt="Slack authorization screen granting the Datadog Status Pages app access to a workspace and channel" style="width:70%;" >}}
+
+After subscribing, the selected channel receives a welcome message confirming the subscription.
+
+**Private channels**: After subscribing, the user receives a message in the **Messages** tab of the Slack app prompting them to invite the **Datadog Status Pages** bot to the channel. The bot must be invited before it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
+
+### Manage subscriptions
+
+Subscribers can change the components they follow or unsubscribe at any time from the **Manage Preferences** link in any Slack notification.
+
+Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
+
+<div class="alert alert-info">
+If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
+</div>
 
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
+To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**.
 1. Select **Custom Domain**.
@@ -191,7 +311,7 @@ To match your branding, you have the option to map your status page to a custom 
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
+- DNS changes must be made by someone with access to your domain registrar.
 
 ## Further reading
 
@@ -199,3 +319,4 @@ To match your branding, you have the option to map your status page to a custom 
 
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
+[3]: /account_management/org_settings/smtp_configuration

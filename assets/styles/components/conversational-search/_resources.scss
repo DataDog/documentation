@@ -149,6 +149,7 @@
 
     @media (max-width: 640px) {
         flex-direction: column;
+        flex-wrap: nowrap;
         gap: 8px;
     }
 }
@@ -198,7 +199,8 @@
 
     @media (max-width: 640px) {
         flex: none;
-        width: auto;
+        width: 100%;
+        max-width: 100%;
         height: 36px;
         gap: 2px;
     }

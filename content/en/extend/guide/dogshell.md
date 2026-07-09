@@ -7,6 +7,8 @@ aliases:
   - /developers/guide/dogshell/
 ---
 
+<div class="alert alert-danger">Dogshell is deprecated and has been replaced by <a href="/cli/">Pup CLI</a>, a comprehensive, AI-agent-ready CLI for interacting with Datadog APIs.</div>
+
 You can use the Datadog API on the command line using a wrapper called Dogshell.
 
 ## Install Dogshell

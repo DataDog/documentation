@@ -52,10 +52,19 @@ Supported build systems:
 |---|---|
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
+| Bazel | >= 1.2.0 |
 
-Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
+<div class="alert alert-info">If you use Bazel to run Java tests, use the Datadog <a href="/tests/setup/bazel/java/">Bazel rules for Java tests</a>.</div>
+
+Other build systems, such as Ant or SBT, are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
+
+### Android
+
+Android tests that run on the JVM are supported. Tests that depend on the Android API, such as Espresso tests, Compose UI tests, and some unit tests, are supported only with the [Robolectric][11] framework.
+
+Tests that require an emulator or a physical device are not supported.
 
 ## Setup
 
@@ -571,3 +580,4 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [8]: /tests/#parameterized-test-configurations
 [9]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-display-names
 [10]: /tracing/trace_collection/compatibility/java#integrations
+[11]: https://robolectric.org/getting-started/

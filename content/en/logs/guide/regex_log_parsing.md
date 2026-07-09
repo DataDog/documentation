@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Log Parsing"
-- link: "/logs/log_configuration/processors/?tab=ui#grok-parser"
+- link: "/logs/log_configuration/processors/grok_parser/"
   tag: "Documentation"
   text: "Grok Processor"
 ---
@@ -281,4 +281,4 @@ rule %{regex("(?i)test this log"):case_insensitive}.*
 [2]: https://www.regular-expressions.info/catastrophic.html
 [3]: /logs/log_configuration/parsing/?tab=matchers#matcher-and-filter
 [4]: /logs/log_configuration/parsing
-[5]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[5]: /logs/log_configuration/processors/grok_parser/

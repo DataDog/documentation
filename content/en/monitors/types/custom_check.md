@@ -22,7 +22,7 @@ Service check monitors include any service check not reported by one of the [mor
 
 ## Monitor creation
 
-To create a [service check monitor][6] in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Service Check**.
+To create a [service check monitor][6] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Service Check{{< /ui >}}.
 
 ### Pick a service check
 
@@ -37,7 +37,7 @@ Select the scope to monitor by choosing host names, tags, or choose `All Monitor
 
 ### Set alert conditions
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+In this section, choose between a {{< ui >}}Check Alert{{< /ui >}} or {{< ui >}}Cluster Alert{{< /ui >}}:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
@@ -52,8 +52,8 @@ Set up the check alert:
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
     * Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, to be notified immediately when your check fails, trigger the monitor alert on `1` critical status.
 
-3. Select `Do not notify` or `Notify` for Unknown status.
-    * If `Notify` is selected, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+3. Select {{< ui >}}Do not notify{{< /ui >}} or {{< ui >}}Notify{{< /ui >}} for Unknown status.
+    * If {{< ui >}}Notify{{< /ui >}} is selected, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
 
 4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
     * Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` `OK` statuses.
@@ -73,7 +73,7 @@ For example, a cluster check monitor grouped by environment can alert if more th
 
 To set up a cluster alert:
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+1. Decide whether or not to group your checks according to a tag. {{< ui >}}Ungrouped{{< /ui >}} calculates the status percentage across all sources. {{< ui >}}Grouped{{< /ui >}} calculates the status percentage on a per-group basis.
 
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
     
@@ -86,7 +86,7 @@ See the [Monitor configuration][7] documentation for information on [No data][8]
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][11] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][11] page.
 
 ## Further Reading
 

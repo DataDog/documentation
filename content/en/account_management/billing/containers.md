@@ -20,7 +20,7 @@ Fargate is charged based on the concurrent number of monitored tasks in ECS Farg
 
 ### GKE Autopilot
 
-Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard][6].
+Unlike [GKE Standard][6], [GKE Autopilot][5] environments are billed under the [Serverless][9] category.
 
 ## Frequently asked questions
 
@@ -65,3 +65,4 @@ For billing questions, contact your [Customer Success][3] Manager.
 [6]: /integrations/google_kubernetes_engine/
 [7]: /help/
 [8]: /containers/guide/container-discovery-management
+[9]: /account_management/billing/serverless/

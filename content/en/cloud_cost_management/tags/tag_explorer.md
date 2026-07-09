@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about Datadog Costs"
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
-  text: "Learn about SaaS Cost Integrations"
+  text: "Learn about SaaS and AI Costs"
 - link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Learn about Tag Pipelines"
@@ -35,7 +35,11 @@ To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, 
 
 See the respective documentation for your cloud provider:
 
-{{< partial name="cloud_cost/getting-started.html" >}}
+{{< card-grid image_width="50" >}}
+  {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
+  {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
+  {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}
+{{< /card-grid >}}
 
 <br>
 

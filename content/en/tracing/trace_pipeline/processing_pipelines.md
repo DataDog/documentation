@@ -35,11 +35,11 @@ Processing Pipelines run in the Datadog backend and apply only to newly ingested
 
 To create a pipeline:
 
-1. Navigate to [**APM > Settings > Pipelines**][1].
-2. Click **Add Pipeline**.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
+2. Click {{< ui >}}Add Pipeline{{< /ui >}}.
 3. Define a filter query using [query syntax][2]. The pipeline only processes spans matching this filter.
 4. Name the pipeline.
-5. Click **Enable**.
+5. Click {{< ui >}}Enable{{< /ui >}}.
 
 {{< img src="/tracing/processing_pipelines/create_pipeline.png" alt="The new pipeline dialog with a filter query field, a live preview table of matching spans, and a pipeline name field" style="width:100%;">}}
 
@@ -58,7 +58,7 @@ Disabling a pipeline stops it from processing newly ingested spans. It does not 
 
 ## Processors
 
-Processors define the transformations applied to matching spans. Within a pipeline, processors run sequentially. Attribute changes from one processor apply to all downstream processors in the same pipeline. To add a processor, expand a pipeline and click **Add Processor**.
+Processors define the transformations applied to matching spans. Within a pipeline, processors run sequentially. Attribute changes from one processor apply to all downstream processors in the same pipeline. To add a processor, expand a pipeline and click {{< ui >}}Add Processor{{< /ui >}}.
 
 <div class="alert alert-info">Processors can only be applied to <a href="/tracing/trace_explorer/span_tags_attributes/">span attributes, not span tags</a>.</div>
 

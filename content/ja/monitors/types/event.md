@@ -4,7 +4,7 @@ aliases:
 - /ja/monitors/create/types/event/
 description: Datadog によって収集されたイベントを監視する
 further_reading:
-- link: /service_management/events/
+- link: /events/
   tag: ドキュメント
   text: Event Management Overview
 - link: /monitors/notify/
@@ -94,7 +94,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /ja/service_management/events/explorer/searching
+[2]: /ja/events/explorer/searching
 [3]: /ja/help/
 [4]: /ja/monitors/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/notify/

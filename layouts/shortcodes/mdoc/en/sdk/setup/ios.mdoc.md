@@ -3,13 +3,13 @@ This partial contains setup instructions for the iOS SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] with the iOS SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][14] for specific steps.
+This page describes how to instrument your Apple platform applications for [Real User Monitoring (RUM)][1] with the iOS SDK. The iOS SDK supports iOS, iPadOS, tvOS, watchOS, and visionOS. For details on supported versions and module availability per platform, see [Supported Versions][18]. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][14] for specific steps.
 
 ## Prerequisites
 
 Before you begin, you need:
 - Xcode 12.0 or later
-- iOS 11.0+ or tvOS 11.0+ deployment target
+- A supported Apple platform deployment target (see [Supported Versions][18] for minimum OS versions per platform)
 - A Datadog account with RUM or Error Tracking enabled
 
 ## Setup
@@ -21,9 +21,9 @@ Before you begin, you need:
 
 ### Manual setup
 
-To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
+To send RUM data from your Apple platform application to Datadog, complete the following steps.
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Add the iOS SDK as a dependency" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
@@ -397,6 +397,42 @@ configuration.site = [DDSite ap2];
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="uk1" %}
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .uk1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 #### Sample session rates
@@ -652,4 +688,5 @@ See [Supported versions][9] for a list of operating system versions and platform
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
 [16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [17]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources
+[18]: /real_user_monitoring/application_monitoring/ios/supported_versions/
 

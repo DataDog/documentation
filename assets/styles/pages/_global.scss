@@ -419,7 +419,6 @@ h5 {
         h3,
         h4,
         h5 {
-            pointer-events: none;
             &:before {
                 margin-top: -110px;
                 height: 110px;
@@ -452,6 +451,7 @@ h5 {
     h3,
     h4,
     h5 {
+        pointer-events: none;
         &:before {
             display: block;
             content: '';
@@ -1011,5 +1011,46 @@ dl {
 
     .kind-page .container__content {
         padding-top: 24px !important;
+    }
+}
+
+// Inline copyable code with copy button
+.copyable-inline-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+    white-space: nowrap;
+
+    code {
+        padding: 1px 3px;
+        border-radius: 3px;
+        font-family: RobotoMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    }
+
+    .js-copy-inline-button {
+        opacity: 0;
+        padding: 2px;
+        line-height: 0;
+        border: none;
+        border-radius: 3px;
+        transition: opacity 0.2s ease;
+        background-color: transparent;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon-check-bold {
+            display: none;
+        }
+
+        &:hover {
+            background-color: rgba(99, 44, 166, 0.1);
+        }
+    }
+
+    &:hover .js-copy-inline-button {
+        opacity: 1;
     }
 }

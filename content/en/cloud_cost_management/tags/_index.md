@@ -30,7 +30,7 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 |---|---|---|
 | All Providers | Bill columns | Such as AWS Cost and Usage Report (CUR) columns, Google Billing Export columns, and so on |
 | Datadog Enrichment | Host Agent | Tags added to host metadata by the Datadog Agent running on the host |
-| Datadog Enrichment | Software Catalog | Tags associated with this service in the APM Service Catalog |
+| Datadog Enrichment | Catalog | Tags associated with this service in the APM Service Catalog |
 | Datadog Enrichment | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the provider integration for each account |
 | Datadog Enrichment | Data Observability | Tags from Datadog Data Observability, powering BigQuery cost allocation. Requires enabling BigQuery monitoring |
 | Datadog Enrichment | Cloud Network Monitoring | Source and destination dimensions from [Datadog Cloud Network Monitoring][12]. Requires enabling Cloud Network Monitoring in the Datadog Agent. See [data transfer cost allocation][13] for more details |
@@ -88,7 +88,7 @@ For example, a tag `Team:Engineering-Services` appears as `team:engineering-serv
 
 ## Override tag value normalization
 
-Turn on {{< ui >}}Tag Normalization{{< /ui >}} in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. Tag normalization applies to user-defined tags from cloud costs. Tags created by Tag Pipelines are not normalized. For Azure, the `consumedservice` out-of-the-box tag is also normalized to lowercase. For all new users, the Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically. To backfill normalized tags for a longer period up to 15 months, contact [Datadog support][13].
+Turn on {{< ui >}}Tag Normalization{{< /ui >}} in the Tag Pipelines page to apply [Datadog tag normalization rules][14] to your cost tag values. The rules are applied to the tag value only; the tag key is left unchanged, and numeric values such as `team:123` are preserved. From the example above, you would see `team:engineering-services` everywhere. Tag normalization applies to user-defined tags from cloud costs. Tags created by Tag Pipelines are not normalized. For Azure, the `consumedservice` out-of-the-box tag is also normalized to lowercase. For all new users, the Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically. To backfill normalized tags for a longer period up to 15 months, contact [Datadog support][15].
 
 Tag normalization allows you to:
 - View, filter and group Cost Recommendations and cost data with the same tag values

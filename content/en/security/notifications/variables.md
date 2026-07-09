@@ -47,7 +47,7 @@ The following variables are available:
 | `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
 | `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
 
-When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the {{< ui >}}Overview{{< /ui >}} tab of the signal's side panel.
 
 ### Dynamic links
 
@@ -99,7 +99,7 @@ HIPAA-enabled Datadog organizations have access to only <a href="#template-varia
 
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
-To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+To see a signal's list of event attributes, click {{< ui >}}JSON{{< /ui >}} at the bottom of the {{< ui >}}Overview{{< /ui >}} tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
 
 If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
 
@@ -126,7 +126,7 @@ The following is an example JSON object with event attributes that may be associ
 }
 ```
 
-If you use the following in the **Say what's happening** section:
+If you use the following in the {{< ui >}}Say what's happening{{< /ui >}} section:
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
@@ -162,7 +162,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 }
 ```
 
-If you use the following in the Say What's Happening section:
+If you use the following in the {{< ui >}}Say What's Happening{{< /ui >}} section:
 
 ```
 Real routes targeted for {{@service}}.
@@ -281,7 +281,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your signal message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your signal message includes a URL to the Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

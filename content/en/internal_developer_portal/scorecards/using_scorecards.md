@@ -1,14 +1,15 @@
 ---
 title: Using Scorecards
+description: View entity-level Scorecard scores, track progress over time, and generate scheduled reports to keep teams informed about engineering standards compliance.
 aliases:
   - /tracing/software_catalog/scorecards/using_scorecards
   - /tracing/service_catalog/scorecards/using_scorecards
   - /service_catalog/scorecards/using_scorecards
   - /software_catalog/scorecards/using_scorecards
 further_reading:
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
   text: "Scorecards API" 
@@ -18,7 +19,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
-- link: "/continuous_integration/dora_metrics/"
+- link: "/delivery_performance/dora_metrics/"
   tag: "Documentation"
   text: "Track DORA Metrics with Datadog" 
 ---
@@ -27,7 +28,7 @@ After configuring your Scorecards, you can view entity-level scores, track score
 
 ## View entity-level details and scores
 
-The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see what level your specific entity or subset of entities has reached and the number of rules passed within each level.  
+The Scorecard summary is accessible on the [**Explore** page][1] in the Catalog under the **Scorecards** column in the **Ownership** tab. You can see what level your specific entity or subset of entities has reached and the number of rules passed within each level.  
 
 Click **View Details** from the Scorecard, or open the entity details side panel and navigate to the Scorecards tab. Both views lists all levels, the rules applied within each level, and the entity’s state---`pass`, `fail`, or `no data`---for each rule.
 
@@ -65,4 +66,4 @@ To edit or delete a Workflow, click **Manage Reports** on the Scorecards page an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /service_management/workflows/
+[2]: /actions/workflows/

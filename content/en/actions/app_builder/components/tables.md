@@ -6,13 +6,20 @@ aliases:
 - /service_management/app_builder/tables/
 - /service_management/app_builder/components/tables
 further_reading:
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 
@@ -158,6 +165,6 @@ In the table, the {{< ui >}}User{{< /ui >}} column fills with an avatar and GitH
 
 [0]: https://chat.datadoghq.com/
 [1]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=pagerduty_oncall_manager&viewMode=preview
-[2]: /service_management/app_builder/components/tables/#filtering-with-a-text-input
+[2]: /actions/app_builder/components/tables/#filtering-with-a-text-input
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=github-pr-dashboard&viewMode=preview

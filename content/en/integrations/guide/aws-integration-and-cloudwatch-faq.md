@@ -1,5 +1,6 @@
 ---
 title: AWS Integration and CloudWatch FAQ
+description: "Frequently asked questions about the Datadog AWS integration and CloudWatch metric collection."
 
 aliases:
   - "/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog"
@@ -9,6 +10,12 @@ aliases:
 ### Can I collect AWS custom metrics through the integration?
 
 Yes. Enable **Collect Custom Metrics** under the **Metric Collection** tab on the [AWS integration page][1].
+
+### Can I filter AWS metrics by metric name?
+
+Yes. On the [AWS integration page][1], open the **Metric Collection** tab, expand a CloudWatch namespace, and add metric name filters. Use **Include** to collect only matching Datadog metric names for that namespace, or **Exclude** to collect everything except matching metric names.
+
+For more information on syntax and required metrics, see [Getting Started with AWS][14].
 
 ### How do I collect metrics from a service for which Datadog doesn't have an official integration?
 
@@ -51,7 +58,7 @@ Some important distinctions to be aware of:
 
 ### How do I adjust my data on Datadog to match the data displayed in CloudWatch?
 
-AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60.  Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics": Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
+AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60. Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics: Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
   ```
 aws.apigateway.integration_latency (average)
 aws.apigateway.integration_latency.maximum
@@ -118,3 +125,4 @@ Some AWS services do not emit metrics to CloudWatch by default and require extra
 [11]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
 [13]: /integrations/guide/monitor-your-aws-billing-details/
+[14]: /getting_started/integrations/aws/#filter-metrics-by-metric-name

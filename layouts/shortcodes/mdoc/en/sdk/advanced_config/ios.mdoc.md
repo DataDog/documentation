@@ -324,6 +324,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `applicationID`
 : The RUM application identifier.
 
+`collectAccessibility`
+: Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`.
+
 `customEndpoint`
 : A custom server URL for sending RUM data.
 
@@ -686,7 +689,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
+- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 {% alert level="info" %}
@@ -770,6 +773,54 @@ RUM.enable(
   )
 )
 ```
+
+**Note**: `data` can be `nil` for reasons unrelated to response size, such as tasks without a completion handler (for example, async/await) or download tasks. In registered-delegate mode (when using `URLSessionInstrumentation.enableDurationBreakdown`), `data` is additionally `nil` in these cases:
+- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`): the body is never buffered.
+- Responses of other types whose body exceeds 512 KB—the buffered data is discarded entirely, not truncated.
+
+#### Capture resource headers
+
+When [tracking network requests automatically](#automatically-track-network-requests), you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `RUM.Configuration.URLSessionTracking`. This option is disabled by default.
+
+Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers` and are queryable in the RUM Explorer.
+
+Use `.defaults` to capture a predefined set of common headers:
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        trackResourceHeaders: .defaults
+    )
+  )
+)
+```
+
+The following headers are captured with `.defaults`:
+
+| Direction | Headers |
+|-----------|---------|
+| Request | `cache-control`, `content-type` |
+| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
+
+To capture additional headers on top of the defaults, use `.custom` with `.matchHeaders`. For example, to also capture `x-request-id` and `x-datadog-trace` on both request and response:
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        trackResourceHeaders: .custom([
+            .defaults,
+            .matchHeaders(["x-request-id", "x-datadog-trace"])
+        ])
+    )
+  )
+)
+```
+
+**Note**: Sensitive headers (such as tokens, API keys, and cookies) are filtered out automatically, even if listed explicitly.
 
 If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type:
 

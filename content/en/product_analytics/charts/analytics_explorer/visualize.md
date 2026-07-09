@@ -57,14 +57,14 @@ The distribution graph displays the distribution of the Largest Contentful Paint
 ## Tree Maps
 A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
 
-The following tree map shows the percentage breakdown by **View Name**.
+The following tree map shows the percentage breakdown by {{< ui >}}View Name{{< /ui >}}.
 
 {{< img src="product_analytics/analytics/visualize/analytics-tree-maps-1.png" alt="A view of the Tree map in the Analytics Explorer" style="width:90%;">}}
 
 ## Pie charts
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, and countries. within your log data.
 
-The following pie chart shows the percentage breakdown by **View Path**.
+The following pie chart shows the percentage breakdown by {{< ui >}}View Path{{< /ui >}}.
 
 {{< img src="product_analytics/analytics/visualize/analytics-pie-chart-1.png" alt="A view of the Pie chart in the Analytics Explorer" style="width:90%;">}}
 
@@ -97,7 +97,7 @@ For all visualizations besides the [funnel][2], select a section of the graph or
 
 For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
-For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
+For the remaining visualization options, click on the graph and click {{< ui >}}View events{{< /ui >}} to see a list of events that correspond to your selection. 
 
 ## Further Reading
 

@@ -1,6 +1,6 @@
 ---
 title: Cloudcraft in Datadog
-description: "Visualize and analyze AWS, Azure, and GCP cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
+description: "Visualize and analyze AWS, Azure, GCP, OCI, and vSphere infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
@@ -19,7 +19,7 @@ Cloudcraft offers a powerful, live read-only visualization tool for cloud archit
 
 <div class="alert alert-info">This documentation applies to the Cloudcraft <em>in Datadog</em> product. For information on the standalone Cloudcraft product, please refer to the <a href="/cloudcraft">Cloudcraft (Standalone)</a> documentation.</div>
 
-Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS, Azure, and GCP cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
+Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS, Azure, GCP, OCI, and vSphere resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
 
 - Trace incidents back to their root causes through infrastructure dependencies.
 - Determine if infrastructure is the cause of an incident, such as cross-region traffic causing latency or increased costs. 
@@ -101,6 +101,31 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 [19]: /datadog_cloudcraft/overlays#observability
 
 {{% /tab %}}
+{{% tab "OCI" %}}
+
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
+- Add your OCI tenancy to the [Oracle Cloud Infrastructure integration][20] and enable [resource collection][21].
+
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+
+[3]: /security/cloud_security_management
+[10]: /datadog_cloudcraft/overlays#security
+[20]: /integrations/oracle_cloud_infrastructure/
+[21]: /integrations/oracle_cloud_infrastructure/#resource-collection
+
+{{% /tab %}}
+{{% tab "vSphere" %}}
+
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
+- The Datadog Agent must be installed in your vSphere environment. The vSphere check is included in the Datadog Agent package.
+- The [vSphere integration][22] must be enabled and configured.
+
+**Note**: Only the Infrastructure and Monitors overlays are available for vSphere accounts.
+
+[22]: /integrations/vsphere/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Getting started
@@ -113,7 +138,13 @@ To get started using Cloudcraft, use the following steps:
 
 {{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the {{< ui >}}Account{{< /ui >}} dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the {{< ui >}}Subscription{{< /ui >}} name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the {{< ui >}}Project{{< /ui >}} dropdown lists your GCP project IDs from the Google Cloud integration tile.
+<div class="alert alert-tip">Provider account names in the dropdowns come from their respective integration tiles:
+<ul>
+<li><strong>AWS</strong>: The {{< ui >}}Account{{< /ui >}} name comes from your AWS account tags in the AWS integration tile.</li>
+<li><strong>Azure</strong>: The {{< ui >}}Subscription{{< /ui >}} name comes from the subscription name in your Azure integration tile's list of managed subscriptions.</li>
+<li><strong>GCP</strong>: The {{< ui >}}Project{{< /ui >}} dropdown lists your GCP project IDs from the Google Cloud integration tile.</li>
+<li><strong>OCI</strong>: The {{< ui >}}Tenancy{{< /ui >}} name comes from your tenancy in the Oracle Cloud Infrastructure integration tile.</li>
+</ul>
 </div>
 
 ### Group By
@@ -128,7 +159,7 @@ Enable the {{< ui >}}Show All Controls{{< /ui >}} toggle to display the availabl
 
 You can group resources by AWS and Azure tags, such as app, service, team, or cost center, to organize your view by team or workload. When grouping by tags, color-coded labels are displayed on each group. When grouping by the `service` tag, a raised block is displayed to visually indicate the service grouping.
 
-**Note**: Grouping by tags is supported for AWS tags, Azure tags, and GCP labels (for example, `Project`). Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported.
+**Note**: Grouping by tags is supported for AWS tags, Azure tags, GCP labels, OCI tags, and vSphere tags. Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags_2.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
 

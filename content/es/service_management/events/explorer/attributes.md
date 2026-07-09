@@ -1,7 +1,7 @@
 ---
 disable_toc: false
 further_reading:
-- link: /service_management/events/explorer/facets
+- link: /events/explorer/facets
   tag: Documentación
   text: Más información sobre las facetas de eventos
 - link: logs/processing/pipelines
@@ -38,4 +38,4 @@ Para crear una faceta en una etiqueta que tenga la misma clave que un atributo r
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/logs/log_configuration/processors/?tab=ui#remapper
-[2]: /es/service_management/events/explorer/facets
+[2]: /es/events/explorer/facets

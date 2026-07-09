@@ -1,234 +1,237 @@
 ---
 description: Integra tu cuenta de Amazon Web Services con Datadog utilizando CloudFormation.
-  Configura roles IAM, habilita integraciones de servicios y configura el reenvío
-  de logs.
+  Configura roles de IAM, habilita integraciones de servicios y configura el reenvío
+  de registros.
 further_reading:
 - link: https://www.datadoghq.com/blog/aws-monitoring/
   tag: Blog
-  text: Métricas clave para la monitorización de AWS
+  text: Métricas clave para el seguimiento de AWS
 - link: https://www.datadoghq.com/blog/aws-1-click-integration/
   tag: Blog
-  text: Introducción a nuestra integración en 1 clic de AWS
+  text: Presentamos nuestra integración de un clic con AWS
 - link: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/
   tag: Blog
-  text: Implementar y configurar Datadog con CloudFormation
+  text: Desplegando y configurando Datadog con CloudFormation
 - link: https://www.datadoghq.com/blog/monitoring-as-code-with-datadog-and-cloudformation/
   tag: Blog
-  text: Implementar la monitorización en forma de código con Datadog y el registro
-    de CloudFormation
+  text: Implementa el seguimiento como código con Datadog y el Registro de CloudFormation
 - link: https://www.datadoghq.com/blog/datadog-serverless-view/
   tag: Blog
-  text: Monitoriza todo tu stack serverless en la vista Serverless
+  text: Monitorea toda tu pila serverless en la vista Serverless
 - link: https://www.datadoghq.com/blog/monitor-aws-fargate/
   tag: Blog
-  text: Monitoriza las aplicaciones de ECS en AWS Fargate con Datadog
+  text: Monitorea aplicaciones ECS en AWS Fargate con Datadog
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: Blog
-  text: Monitoriza Amazon ECS en cualquier lugar con Datadog
+  text: Monitorea Amazon ECS Anywhere con Datadog
 - link: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation
   tag: Documentación
-  text: AWS CloudWatch Metric Streams con Amazon Data Firehose
+  text: Flujos de métricas de AWS CloudWatch con Amazon Data Firehose
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: Blog
-  text: Monitoriza tus instancias EC2 impulsadas por Graviton3 con Datadog
-title: Empezando con AWS
+  text: Monitorea tus instancias de EC2 impulsadas por Graviton3 con Datadog.
+title: Introducción a AWS
 ---
+## Resumen {#overview}
+
+Esta guía le muestra cómo integrar una cuenta de Amazon Web Services (AWS) con Datadog utilizando la plantilla de CloudFormation de Datadog. Después de completar la configuración, puede habilitar integraciones individuales de servicios de AWS, instalar el Datadog Agent en instancias de EC2 para obtener mayor visibilidad y configurar el reenvío de registros.
+
+## Requisitos previos {#prerequisites}
+
+Antes de comenzar, asegúrese de tener una cuenta de [AWS][7]. La plantilla de CloudFormation crea un rol de IAM y una política asociada, permitiendo que la cuenta de AWS de Datadog realice llamadas a la API a su cuenta de AWS para recopilar y enviar datos. Su usuario de AWS debe tener los siguientes permisos de IAM para ejecutar la plantilla:
+
+{{% collapse-content title="Permisos de IAM requeridos" level="h4" expanded=false id="iam-permissions" %}}
+- cloudformation:CreateStack
+- cloudformation:CreateUploadBucket
+- cloudformation:DeleteStack
+- cloudformation:DescribeStacks
+- cloudformation:DescribeStackEvents
+- cloudformation:GetStackPolicy
+- cloudformation:GetTemplateSummary
+- cloudformation:ListStacks
+- cloudformation:ListStackResources
+- ec2:DescribeSecurityGroups
+- ec2:DescribeSubnets
+- ec2:DescribeVpcs
+- iam:AttachRolePolicy
+- iam:CreatePolicy
+- iam:CreateRole
+- iam:DeleteRole
+- iam:DeleteRolePolicy
+- iam:DetachRolePolicy
+- iam:GetRole
+- iam:GetRolePolicy
+- iam:PassRole
+- iam:PutRolePolicy
+- iam:TagRole
+- iam:UpdateAssumeRolePolicy
+- kms:Descifrar
+- lambda:AddPermission
+- lambda:CreateFunction
+- lambda:DeleteFunction
+- lambda:GetCodeSigningConfig
+- lambda:GetFunction
+- lambda:GetFunctionCodeSigningConfig
+- lambda:GetLayerVersion
+- lambda:InvokeFunction
+- lambda:PutFunctionConcurrency
+- lambda:RemovePermission
+- lambda:TagResource
+- logs:CrearGrupoDeRegistros
+- logs:EliminarGrupoDeRegistros
+- logs:DescribirGruposDeRegistros
+- logs:EstablecerPolíticaDeRetención
+- oam:ListarSumideros
+- oam:ListarEnlacesAdjuntos
+- s3:CrearBucket
+- s3:EliminarBucket
+- s3:EliminarPolíticaDeBucket
+- s3:ObtenerConfiguraciónDeEncriptación
+- s3:ObtenerObjeto
+- s3:ObtenerVersiónDeObjeto
+- s3:EstablecerPolíticaDeBucket
+- s3:EstablecerBloqueoDeAccesoPúblicoDeBucket
+- s3:EstablecerConfiguraciónDeEncriptación
+- s3:EstablecerConfiguraciónDeCicloDeVida
+- secretsmanager:CrearSecreto
+- secretsmanager:EliminarSecreto
+- secretsmanager:ObtenerValorDeSecreto
+- secretsmanager:EstablecerValorDeSecreto
+- serverlessrepo:CrearPlantillaDeCloudFormation
+{{% /collapse-content %}}
 
-## Información general
-
-Esta guía proporciona una descripción general del proceso para integrar una cuenta de Amazon Web Services (AWS) con Datadog mediante la plantilla CloudFormation de Datadog.
-
-Sin entrar en detalles, esto implica la creación de una política asociada y de roles de IAM para que la cuenta de AWS de Datadog pueda hacer llamadas a la API de tu cuenta de AWS con el fin de recopilar o insertar datos. La plantilla también implementa la función lambda de [Datadog Forwarder][1] para enviar logs a Datadog. Si usas la plantilla de CloudFormation, dispondrás de todas las herramientas necesarias para enviar estos datos a tu cuenta de Datadog, y Datadog conservará la plantilla de CloudFormation para proporcionar la funcionalidad más reciente.
-
-Una vez que esté establecida la conexión inicial, puedes habilitar las integraciones de servicios concretos de AWS que resulten pertinentes para tu entorno de AWS. Basta un solo clic para que Datadog envíe los recursos necesarios a tu cuenta de AWS y comience a consultar las métricas y eventos de los servicios que utilizas. En lo referente a los servicios populares que usas de AWS, Datadog provee dashboards predefinidos para que dispongas de una visibilidad inmediata y personalizable. Esta guía te muestra cómo configurar la integración e instalar el Datadog Agent en una instancia EC2 de Amazon Linux y, además, facilita información general sobre las funciones de la integración. Consulta la sección [Habilitar las integraciones de servicios concretos de AWS](#enable-integrations-for-individual-aws-services) para ver una lista con las subintegraciones disponibles.
-
-Puedes repetir este proceso en todas las cuentas de AWS en las que sea necesario, aunque también puedes usar [API][3], [AWS CLI][4] o [Terraform][5] para configurar varias cuentas a la vez. Para más información, lee la [Guía de Datadog-Amazon CloudFormation][6].
-
-**Nota**: La plantilla de CloudFormation de Datadog sólo admite la creación y eliminación de sus recursos definidos. Consulta [Actualizar tu plantilla de stack tecnológico][59] para obtener orientación sobre cómo aplicar actualizaciones a tu stack tecnológico.
-
-## Requisitos previos
-
-Antes de empezar, asegúrate de que cumples los siguientes requisitos previos:
-
-1. Tienes una cuenta de [AWS][7]. Tu usuario de AWS necesita los siguientes permisos de IAM para poder ejecutar correctamente la plantilla de CloudFormation:
-
-    * cloudformation:CreateStack
-    * cloudformation:CreateUploadBucket
-    * cloudformation:DeleteStack
-    * cloudformation:DescribeStacks
-    * cloudformation:DescribeStackEvents
-    * cloudformation:GetStackPolicy
-    * cloudformation:GetTemplateSummary
-    * cloudformation:ListStacks
-    * cloudformation:ListStackResources
-    * ec2:DescribeSecurityGroups
-    * ec2:DescribeSubnets
-    * ec2:DescribeVpcs
-    * iam:AttachRolePolicy
-    * iam:CreatePolicy
-    * iam:CreateRole
-    * iam:DeleteRole
-    * iam:DeleteRolePolicy
-    * iam:DetachRolePolicy
-    * iam:GetRole
-    * iam:GetRolePolicy
-    * iam:PassRole
-    * iam:PutRolePolicy
-    * iam:TagRole
-    * iam:UpdateAssumeRolePolicy
-    * kms:Decrypt
-    * lambda:AddPermission
-    * lambda:CreateFunction
-    * lambda:DeleteFunction
-    * lambda:GetCodeSigningConfig
-    * lambda:GetFunction
-    * lambda:GetFunctionCodeSigningConfig
-    * lambda:GetLayerVersion
-    * lambda:InvokeFunction
-    * lambda:PutFunctionConcurrency
-    * lambda:RemovePermission
-    * lambda:TagResource
-    * logs:CreateLogGroup
-    * logs:DeleteLogGroup
-    * logs:DescribeLogGroups
-    * logs:PutRetentionPolicy
-    * oam:ListSinks
-    * oam:ListAttachedLinks
-    * s3:CreateBucket
-    * s3:DeleteBucket
-    * s3:DeleteBucketPolicy
-    * s3:GetEncryptionConfiguration
-    * s3:GetObject
-    * s3:GetObjectVersion
-    * s3:PutBucketPolicy
-    * s3:PutBucketPublicAccessBlock
-    * s3:PutEncryptionConfiguration
-    * s3:PutLifecycleConfiguration
-    * secretsmanager:CreateSecret
-    * secretsmanager:DeleteSecret
-    * secretsmanager:GetSecretValue
-    * secretsmanager:PutSecretValue
-    * serverlessrepo:CreateCloudFormationTemplate
+## Configurar {#setup}
 
-## Configuración
+1. Vaya a la [página de configuración de integración de AWS][8] en Datadog y haga clic en {{< ui >}}Add AWS Account{{< /ui >}}.
+1. Configure los ajustes de la integración en la opción {{< ui >}}Automatically using CloudFormation{{< /ui >}}.
+   1. Seleccione las regiones de AWS con las que desea integrar.
+   1. Agregue su [clave de API de Datadog][9].
+   1. Opcionalmente, envíe registros y otros datos a Datadog con el [Datadog Forwarder Lambda][1].
+   1. Opcionalmente, habilite [Cloud Security Misconfigurations][54] para escanear su entorno en la nube, hosts y contenedores en busca de configuraciones incorrectas y riesgos de seguridad.
+1. Haga clic en {{< ui >}}Launch CloudFormation Template{{< /ui >}}. Esto abre la Consola de AWS y carga la pila de CloudFormation. Todos los parámetros se completan según sus selecciones en el formulario previo de Datadog, por lo que no necesita editarlos a menos que lo desee.
+**Nota:** El parámetro `DatadogAppKey` permite que la pila de CloudFormation realice llamadas API a Datadog para agregar y editar la configuración de Datadog para esta cuenta de AWS. La clave se genera automáticamente y se vincula a su cuenta de Datadog.
+1. Marque las casillas requeridas de AWS y haga clic en {{< ui >}}Create stack{{< /ui >}}. Esto inicia el proceso de creación de la pila de Datadog junto con tres pilas anidadas. Esto podría tardar varios minutos. Asegúrese de que la pila se haya creado correctamente antes de continuar.
+1. Después de que se crea la pila, regrese al mosaico de integración de AWS en Datadog y haga clic en {{< ui >}}Ready!{{< /ui >}}.
+1. Espere hasta 10 minutos para que los datos comiencen a ser recolectados, y luego visualice el [tablero de visión general de AWS][12] para ver las métricas enviadas por sus servicios e infraestructura de AWS:
+{{< img src="getting_started/integrations/aws-dashboard.png" alt="El tablero de visión general de AWS en la cuenta de Datadog. A la izquierda está el logo de AWS y un gráfico de eventos de AWS que muestra 'No se encontraron entradas coincidentes'. En el centro hay gráficos relacionados con volúmenes de EBS con datos numéricos mostrados y un mapa de calor que muestra datos consistentes. A la derecha hay gráficos relacionados con ELBs que muestran datos numéricos, además de un gráfico de series temporales que muestra datos con picos provenientes de tres fuentes.">}}
 
-2. Dirígete a la [página de configuración de la integración de AWS][8] en Datadog y haz clic en **Add AWS Account** (Añadir cuenta de AWS).
+Para configurar múltiples cuentas a la vez, utilice la [API][3], [AWS CLI][4] o [Terraform][5]. Para más información, consulte la [guía de Datadog-Amazon CloudFormation][6].
 
-3. Configura los parámetros de la integración en la opción **Automatically using CloudFormation** (Usar CloudFormation automáticamente).  
-    a. Selecciona las regiones de AWS que desees integrar.  
-    b. Añade tu [clave de API] de Datadog[9].
-    c. Opcionalmente, envía logs y otros datos a Datadog con la [función Forwarder de Lambda de Datadog][1].
-    d. Opcionalmente, activa [Errores de configuración de Cloud Security][54] para escanear tu entorno de nube, hosts y contenedores en busca de errores de configuración y riesgos de seguridad.
+**Nota**: La plantilla de CloudFormation de Datadog solo admite la creación y eliminación de sus recursos definidos. Consulte [Actualiza tu plantilla de pila][59] para obtener orientación sobre cómo aplicar actualizaciones a su pila.
 
-4. Haz clic en **Launch CloudFormation Template** (Iniciar plantilla de CloudFormation) para abrir la consola de AWS y cargar stack de CloudFormation. Todos los parámetros estarán completados en función de lo que hayas seleccionado en el anterior formulario de Datadog, por lo que no tendrás que editarlos a menos que quieras hacerlo.
-**Nota:** El parámetro `DatadogAppKey` permite que el stack de CloudFormation haga llamadas a la API de Datadog para ampliar y editar la configuración de Datadog en esta cuenta de AWS. La clave se genera automáticamente y está vinculada a tu cuenta de Datadog.
+### Qué esperar después de la configuración {#what-to-expect-after-setup}
 
-5. Marca las casillas obligatorias de AWS y haz clic en **Create stack** (Crear stack). Se iniciará el proceso de creación del stack de Datadog y de tres stacks anidados. Eso podría tardar varios minutos. Asegúrate de que el stack se haya creado correctamente antes de continuar.
+Después de que la integración se configure correctamente, los datos comienzan a aparecer en Datadog en la siguiente línea de tiempo:
 
-6. Una vez que hayas creado el stack, vuelve al cuadro de integración de AWS en Datadog y haz clic en **Ready!** (Listo).
+- **Métricas**: Aparecen dentro de aproximadamente 10 minutos con sondeo de API, o 2-3 minutos con [CloudWatch Metric Streams][60]. No todos los servicios informan con la misma cadencia, por lo que un tablero parcialmente poblado durante la primera hora es normal.
+- **Etiquetas**: Las etiquetas de recursos de AWS pueden tardar tiempo adicional en propagarse. Los cambios en las etiquetas en AWS pueden tardar entre 15 minutos y varias horas en reflejarse en Datadog.
+- **Recursos**: Descubiertos durante el próximo ciclo de rastreo de recursos después de la configuración.
+- **Registros**: Requieren configuración separada. Consulte [Enviar registros](#send-logs) para instrucciones de configuración.
 
-7. La recopilación de datos podría tardar hasta 10 minutos en iniciarse. Después, consulta el [dashboard de información general de AWS][12] predefinido para ver las métricas enviadas por tus servicios e infraestructura de AWS:
-{{< img src="getting_started/integrations/aws-dashboard.png" alt="Dashboard de información general de AWS en la cuenta de Datadog. A la izquierda, está el logotipo de AWS y un gráfico de eventos de AWS que indica que no se encontraron entradas que coincidan con la búsqueda. En el centro, hay gráficos relacionados con los volúmenes de EBS que incluyen datos numéricos y un mapa de calor con los datos. A la derecha, están los gráficos relacionados con ELB, que incluyen datos numéricos y un gráfico temporal que muestra picos de datos de las tres fuentes.">}}
+<div class="alert alert-info">
+Datadog no completa los datos históricos de métricas anteriores a que se habilitara la integración. Las métricas comienzan a fluir desde el momento en que la integración se configura correctamente.
+</div>
 
-## Configuración
+## Configuración {#configuration}
 
-### Habilitar las integraciones de servicios concretos de AWS
+### Habilitar integraciones para servicios individuales de AWS {#enable-integrations-for-individual-aws-services}
 
-Consulta la [página de integraciones][13] para ver un listado completo de las subintegraciones disponibles. Muchas de estas integraciones se instalan de forma predeterminada cuando Datadog reconoce los datos procedentes de tu cuenta de AWS.
+Consulte la [página de Integraciones][13] para obtener una lista completa de las subintegraciones disponibles. Muchas de estas integraciones se instalan por defecto cuando Datadog reconoce datos provenientes de su cuenta de AWS.
 
-Utiliza la pestaña **Metric Collection** (Recopilación de métricas) en la [página de la integración AWS][8] para configurar de qué servicios recopilará métricas la integración Datadog.
+Utilice la pestaña {{< ui >}}Metric Collection{{< /ui >}} en la [página de integración de AWS][8] para configurar de qué servicios recopila métricas la integración de Datadog.
 
-### Añadir regiones
+### Agregue regiones {#add-regions}
 
-En la pestaña **General** de la [página de la integración AWS][8], puedes controlar las regiones de AWS en las que Datadog recopila métricas, eventos de CloudWatch y recursos.
+En la pestaña {{< ui >}}General{{< /ui >}} de la [página de integración de AWS][8], puede controlar las regiones de AWS donde Datadog recopila métricas, eventos de CloudWatch y recursos.
 
-## Enviar logs
+## Enviar registros {#send-logs}
 
-Existen dos formas de enviar los logs de los servicios de AWS a Datadog:
+Hay dos formas de enviar registros de servicios de AWS a Datadog:
 
-- [Destino de Amazon Data Firehose][10]: Utiliza el destino Datadog en tu flujo (stream) de entrega de Amazon Data Firehose para reenviar logs a Datadog. Se recomienda usar este enfoque cuando envías grandes volúmenes de logs desde CloudWatch.
-- [Función de Forwarder Lambda][11]: despliega la función de Forwarder Lambda de Datadog, que se suscribe a los buckets de S3 o a tus grupos de logs de CloudWatch y reenvía logs a Datadog. **Debes** utilizar este enfoque para enviar trazas (traces), métricas mejoradas o métricas personalizadas desde funciones de Lambda de forma asíncrona a través de logs. Datadog también te recomienda usar este enfoque para enviar logs desde S3 u otros recursos que no puedan transmitir datos directamente a Kinesis.
+- [Destino de Amazon Data Firehose][10]: Recomendado para registros de CloudWatch de alto volumen.
+- [Función Lambda de reenvío][11]: Requerido para trazas, métricas mejoradas o métricas personalizadas de funciones Lambda. También se recomienda para registros de S3 u otros recursos que no pueden transmitir directamente a Amazon Data Firehose.
 
-Lee la sección [Habilitar los logs en tu servicio de AWS][14] para activar el flujo de logs en los servicios de AWS más utilizados.
+Consulte [Habilitar el registro para su servicio de AWS][14] para obtener instrucciones de configuración.
 
-### Validación
+### Validación {#validation}
 
-Una vez que hayas habilitado los logs, los encontrarás en el [Log Explorer][15] con las facetas `source` o `service` del panel de facetas, tal y como se muestra en este ejemplo de S3:
-{{< img src="getting_started/integrations/logs-explorer.png" alt="Página del Log Explorer de la cuenta de Datadog. En el lado izquierdo de la imagen, se pueden ver las facetas `source` y `service`, ambas con la casilla \"s3\" marcada. A la derecha, se muestran algunas entradas de logs en formato de lista.">}}
+Una vez que haya habilitado los registros, encuéntrelos en el [Explorador de Registros][15] utilizando las facetas `source` o `service` del panel de facetas, como este ejemplo de S3:
+{{< img src="getting_started/integrations/logs-explorer.png" alt="La página del Explorador de Registros de la cuenta de Datadog. A la izquierda, la imagen muestra las facetas de Fuente y Servicio, ambas marcadas con 's3'. A la derecha, algunas entradas de registro se muestran en un formato de lista.">}}
 
-## Saca más provecho de la plataforma Datadog
+## Obtenga más de la plataforma Datadog {#get-more-from-the-datadog-platform}
 
-### Instala el Datadog Agent en EC2 para obtener mayor visibilidad
+### Visibilidad más profunda con el Agente de Datadog en EC2 {#deeper-visibility-with-the-datadog-agent-on-ec2}
 
-La integración de AWS con Datadog ya rastrea de forma predeterminada la API de CloudWatch para recopilar las métricas proporcionadas por AWS. No obstante, puedes disfrutar de una visibilidad aún mayor en tus instancias de EC2 con el [Datadog Agent][16]. El Agent es un daemon ligero que genera informes de métricas y eventos, aunque también se puede configurar para que lo haga con logs y trazas. En la sección [Agent Installation][17] (Instalación del Agent) de la aplicación de Datadog, encontrarás las instrucciones para instalar el Agent en una amplia variedad de sistemas operativos. Muchos sistemas operativos (como Amazon Linux) cuentan con comandos de instalación en un único paso que puedes ejecutar para instalar el Agent desde el terminal de la instancia:
-{{< img src="getting_started/integrations/integrations-agent-installation.png" alt="Sección Agent de la pestaña \"Integrations\" (Integraciones) de Datadog. A la izquierda, se muestra la lista de los sistemas operativos compatibles con el Datadog Agent; Amazon Linux aparece resaltado. A la derecha, se ve el enunciado \"Use our easy one-step install\" (Usa nuestra sencilla instalación en un solo paso). El comando para instalar el Agent está justo debajo, con la sección difusa DD_API_KEY.">}}
+Por defecto, la integración de Datadog AWS rastrea la API de CloudWatch para métricas proporcionadas por AWS, pero puede obtener una visibilidad aún más profunda de sus instancias de EC2 con el [Agente de Datadog][16]. El Agente es un demonio ligero que informa métricas y eventos, y también se puede configurar para registros y trazas. La sección de [Instalación del Agente][17] de la aplicación Datadog proporciona instrucciones para instalar el Agente en una amplia variedad de sistemas operativos. Muchos sistemas operativos (por ejemplo, Amazon Linux) tienen comandos de instalación de un solo paso que puedes ejecutar desde la terminal de la instancia para instalar el Agente:
+{{< img src="getting_started/integrations/integrations-agent-installation.png" alt="La sección 'Agente' de la pestaña 'Integraciones' en Datadog. A la izquierda se muestra una lista de sistemas operativos compatibles con el Agente de Datadog. 'Amazon Linux' está resaltado en esta lista. A la derecha se muestra 'Usa nuestra fácil instalación de un solo paso'. El comando para instalar el Agente se muestra debajo de esto, con la sección DD_API_KEY ofuscada.">}}
 
-Una vez que Agent esté instalado, se representará gráficamente en la [lista de infraestructuras][18] con un icono en forma de hueso:
-{{< img src="getting_started/integrations/infrastructure-list.png" alt="Lista de infraestructuras en las que pueden verse dos hosts en formato de lista. Ambos hosts tienen el icono de AWS para representar la integración de AWS, así como el texto \"aws\" en un recuadro azul para indicar que están asociados a la integración de AWS. Uno de los hosts también tiene el icono de un perro y recuadros azules con los textos \"ntp\" y \"system\".">}}
+Una vez que el Agente está instalado, se representa gráficamente dentro de la [Lista de Infraestructura][18] con un ícono de hueso:
+{{< img src="getting_started/integrations/infrastructure-list.png" alt="La lista de infraestructura muestra dos servidores en un formato de lista. Ambos servidores muestran el ícono de AWS para la integración de AWS y 'aws' se muestra en un cuadro azul para indicar que están asociados con la integración de AWS. Un servidor también muestra un ícono de hueso de perro y cuadros azules para 'NTP' y 'system'.">}}
 
-La captura de pantalla anterior muestra el host con el Datadog Agent informando de los datos de los checks de [Sistema][19] y [NTP][20]. El check de sistema proporciona métricas en torno a CPU, memoria, sistema de archivos y E/S, y brinda información adicional sobre el host. Puedes activar [integraciones][21] adicionales para adaptarte al entorno y al caso de uso, o utilizar [DogStatsD][22] para enviar métricas personalizadas directamente a Datadog.
+La captura de pantalla anterior muestra el servidor con el Agente de Datadog reportando datos de las verificaciones de [System][19] y [NTP][20]. La verificación de System proporciona métricas sobre CPU, memoria, sistema de archivos y E/S, proporcionando información adicional sobre el servidor. Puedes habilitar integraciones adicionales [integraciones][21] para adaptarlo al entorno y a los casos de uso, o usar [DogStatsD][22] para enviar métricas personalizadas directamente a Datadog.
 
-Consulta las [FAQ sobre por qué deberías instalar el Datadog Agent en tus instancias de nube][23] para obtener más información sobre las ventajas de este enfoque.
 
-### Usar el Datadog Agent con el Servicio de contenedores de Amazon
 
-Puedes usar el Datadog Agent en entornos contenedorizados, independientemente de que estés gestionando tus instancias o utilizando [Fargate][24] en un entorno serverless.
+### Usando el Agente de Datadog con los Servicios de Contenedores de Amazon {#using-the-datadog-agent-with-amazon-container-services}
 
-#### ECS con un tipo de lanzamiento EC2
+Para entornos basados en contenedores, puedes usar el Agente de Datadog, ya sea que estés gestionando tus instancias o utilizando [Fargate][24] para un entorno sin servidor.
 
-Utiliza la [documentación sobre Amazon ECS][25] para ejecutar el [Datadog Docker Agent][26] en las instancias EC2 de tu clúster de ECS. Revisa la [documentación sobre la recopilación de datos de Amazon ECS][27] para ver las métricas y eventos enviados a tu cuenta de Datadog.
 
-#### ECS con un tipo de lanzamiento Fargate
 
-Utiliza la [documentación sobre Amazon ECS en AWS Fargate][28] para ejecutar el Agent a modo de contenedor con la misma definición de tarea que tu aplicación. **Nota**: Se necesita la versión 6.1.1 (o posterior) del Datadog Agent para aprovechar al máximo la integración de Fargate.
+Usa la [documentación de Amazon ECS][25] para ejecutar el [Agente Docker de Datadog][26] en las instancias EC2 de tu clúster ECS. 
 
-#### AWS Batch con tipo de orquestación Fargate
 
-Utiliza la [documentación sobre Amazon ECS en AWS Fargate para AWS Batch][58] para ejecutar el Agent a modo de contenedor con la misma definición de trabajo de AWS Batch que tu aplicación. **Nota**: Se necesita la versión 6.1.1 o posterior del Datadog Agent para aprovechar al máximo la integración de Fargate.
 
-#### EKS
+Utiliza la [documentación de Amazon ECS en AWS Fargate][28] para ejecutar el Agente como un contenedor en la misma definición de tarea que tu aplicación. 
 
-No necesitas llevar a cabo ninguna configuración concreta para Amazon Elastic Kubernetes Service (EKS), tal y como se menciona en la [documentación sobre las distribuciones de Kubernetes][29]. Utiliza la [documentación específica sobre Kubernetes][30] para implementar el Agent en tu clúster de EKS.
 
-#### EKS con Fargate
 
-Dado que AWS gestiona los pods de Fargate, no se realizan checks en los componentes del sistema del host, como la CPU y la memoria. Para recopilar los datos de tus pods de AWS Fargate, utiliza la [documentación sobre Amazon EKS en AWS Fargate][31] para ejecutar el Agent a modo de respaldo del pod de tu aplicación con control de acceso personalizado y basado en roles (RBAC). **Nota**: Se necesita la versión 7.17 (o posterior) del Datadog Agent.
+Utiliza la [documentación de Amazon ECS en AWS Fargate para AWS Batch][58] para ejecutar el Agente como un contenedor en la misma definición de trabajo de AWS Batch que tu aplicación. 
 
-#### EKS Anywhere
 
-Utiliza la [documentación sobre EKS Anywhere][32] para los clústeres de Kubernetes on-premises.
 
-### Crea recursos adicionales de Datadog
-Además de utilizar la interfaz de usuario o la [API][33] de Datadog, puedes crear muchos [recursos de Datadog][34] con el [Registro de CloudFormation][35]. Para obtener visibilidad y solucionar problemas, utiliza [dashboards][36] para mostrar datos clave, aplicar [funciones][37] y encontrar [Correlaciones de métricas][38].
+No necesitas ninguna configuración específica para Amazon Elastic Kubernetes Service (EKS), como se menciona en la [documentación de Distribuciones de Kubernetes][29]. Utiliza la [documentación de Kubernetes dedicada][30] para desplegar el Agente en tu clúster de EKS.
 
-Para recibir notificaciones acerca de cualquier comportamiento no deseado o inesperado que se produzca en tu cuenta, crea [monitores][39]. Los monitores evalúan de forma constante los datos que recibe tu cuenta y envían [notificaciones][40] para garantizar que la información llegue a los miembros del equipo pertinentes. Revisa la [lista de integraciones de notificación][41] para descubrir todas las formas mediante las que puedes notificar a tu equipo.
+#### EKS con Fargate {#eks-with-fargate}
 
-## Explora productos relacionados
+Debido a que los pods de Fargate son gestionados por AWS, excluyen las verificaciones del sistema basadas en el host, como CPU y memoria. Para recopilar datos de sus pods de AWS Fargate, utilice la [documentación de Amazon EKS en AWS Fargate][31] para ejecutar el Agente como un sidecar de su pod de aplicación con control de acceso basado en roles (RBAC) personalizado. **Nota**: Esto requiere la versión 7.17 o superior del Agente de Datadog.
 
-### Serverless
+#### EKS Anywhere {#eks-anywhere}
 
-Puedes unificar las métricas, trazas (traces) y logs de las funciones de AWS Lambda que ejecutan aplicaciones serverless en Datadog. Dirígete a la sección [Serverless][42] para conocer cómo instrumentar tu aplicación, instalar [bibliotecas e integraciones serverless][43], implementar [trazas (traces) distribuidas con aplicaciones serverless][44] o [solucionar problemas en entornos serverless][45].
+Utilice la [documentación de EKS Anywhere][32] para clústeres de Kubernetes en las instalaciones.
 
-### APM
-Para conocer mejor y recopilar más datos de tus aplicaciones y servicios de AWS, habilita la recopilación distribuida de trazas (traces) desde la integración con [AWS X-Ray][46] o desde un host con el Datadog Agent mediante [APM][47]. A continuación, lee la [documentación de APM][48] para comprender mejor cómo utilizar estos datos para obtener información sobre el rendimiento de tu aplicación.
+### Crear recursos adicionales de Datadog {#create-additional-datadog-resources}
+Además de utilizar la interfaz de usuario de Datadog o [API][33], puede crear muchos [recursos de Datadog][34] con el [Registro de CloudFormation][35]. Para visibilidad y solución de problemas, utilice [tableros][36] para mostrar datos clave, aplicar [Funciones][37] y encontrar [Correlaciones de Métricas][38].
 
-También puedes usar [Watchdog][49], una función algorítmica para las métricas de infraestructura y rendimiento de APM. Su objetivo consiste en detectar automáticamente los posibles problemas de la aplicación y enviarte notificaciones al respecto.
+Para recibir notificaciones de cualquier comportamiento no deseado o inesperado en su cuenta, cree [monitores][39]. Los monitores evalúan constantemente los datos reportados a su cuenta y envían [Notificaciones][40] para asegurar que la información correcta llegue a los miembros del equipo adecuados. Revisa la [Lista de Integraciones de Notificación][41] para conocer todas las formas de notificar a tu equipo.
 
-### Seguridad
+## Explora productos relacionados {#explore-related-products}
 
-#### Cloud SIEM
+### Sin servidor {#serverless}
 
-Revisa [Empezando con Cloud SIEM][50] para evaluar tus logs con respecto a las [reglas de detección de logs][51] predefinidas. Estas reglas se pueden personalizar y, cuando detectan alguna amenaza, generan avisos de seguridad a los que se puede acceder desde el [Explorador de avisos de seguridad][52]. Si quieres asegurarte de que se notifica al equipo correcto, utiliza las [reglas de notificación][53] para configurar las preferencias de notificación de varias reglas.
+Para monitorear funciones de AWS Lambda con Datadog, consulta [Serverless][42] para obtener instrucciones sobre cómo instrumentar tu aplicación, instalar [Serverless Libraries and Integrations][43], implementar [trazado distribuido con aplicaciones serverless][44] o [resolver problemas de aplicaciones serverless][45].
 
-#### Cloud Security Misconfigurations
+### APM {#apm}
 
-Utiliza la guía de [Ajuste de errores de configuración de Cloud Security][54] para aprender a detectar y evaluar los errores de configuración en tu entorno en la nube. Los datos de configuración de recursos se evalúan en función de las reglas de cumplimiento listas para usar de [la nube][55] y [la infraestructura][56], a fin de detectar técnicas de ataque y posibles errores de configuración, y así lograr una respuesta y corrección rápidas.
+Para recopilar trazas distribuidas de tus aplicaciones y servicios de AWS, utiliza el Agente de Datadog con [APM][47]. Para funciones de AWS Lambda, instrumenta con la [Extensión de Lambda de Datadog][44].  Consulta la [documentación de APM][48] para obtener detalles sobre el análisis de datos de rendimiento de la aplicación.
 
-### Solucionar problemas
+También puedes usar [Watchdog][49], una función algorítmica para métricas de rendimiento de APM e infraestructura, para detectar automáticamente y recibir notificaciones sobre posibles problemas de la aplicación.
 
-Si te encuentras con el error `Datadog is not authorized to perform sts:AssumeRole`, consulta su página específica para [Solucionar problemas][2]. Para cualquier otro problema, consulta la [Guía de solución de problemas de la integración con AWS][57].
+### Seguridad {#security}
 
-## Referencias adicionales
+#### Cloud SIEM {#cloud-siem}
+
+Consulta [Introducción a Cloud SIEM][50] para evaluar tus registros contra las [Reglas de Detección de Registros][51] predeterminadas. Estas reglas son personalizables, y cuando se detectan amenazas, generan señales de seguridad accesibles en el [Explorador de señales][52]. Utiliza [Reglas de Notificación][53] para configurar preferencias de notificación en múltiples reglas.
+
+#### Errores de configuración de Cloud Security {#cloud-security-misconfigurations}
+
+Utiliza la guía [Errores de configuración de Cloud Security][54] para detectar y evaluar errores de configuración en tu entorno en la nube. Los datos de configuración de recursos se evalúan contra las reglas de cumplimiento [Cloud][55] y [Infrastructure][56] predeterminadas para señalar técnicas de ataque y posibles errores de configuración.
+
+### Resolución de Problemas {#troubleshooting}
+
+Si encuentra el error `Datadog is not authorized to perform sts:AssumeRole`, consulte la [página de resolución de problemas][2] dedicada. Para cualquier otro problema, consulte la [guía de resolución de problemas de integración de AWS][57].
+
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -236,7 +239,7 @@ Si te encuentras con el error `Datadog is not authorized to perform sts:AssumeRo
 [2]: /es/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [3]: /es/api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws_account
 [6]: /es/integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
 [8]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -253,7 +256,7 @@ Si te encuentras con el error `Datadog is not authorized to perform sts:AssumeRo
 [19]: /es/integrations/system/
 [20]: /es/integrations/ntp/
 [21]: /es/integrations/
-[22]: /es/developers/dogstatsd/?tab=hostagent
+[22]: /es/extend/dogstatsd/?tab=hostagent
 [23]: /es/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [24]: https://aws.amazon.com/fargate/
 [25]: /es/agent/amazon_ecs/?tab=awscli
@@ -291,3 +294,4 @@ Si te encuentras con el error `Datadog is not authorized to perform sts:AssumeRo
 [57]: /es/integrations/guide/aws-integration-troubleshooting/
 [58]: /es/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
+[60]: /es/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/

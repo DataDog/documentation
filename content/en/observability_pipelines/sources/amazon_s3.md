@@ -21,16 +21,20 @@ Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3.
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Amazon S3 URL and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Amazon S3 URL and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Amazon S3 URL. If you leave it blank, the [default](#set-secrets) is used.
+{{% observability_pipelines/secrets_env_var_note %}}
+
+After you select the Amazon S3 source in the pipeline UI:
+
+1. Enter the identifier for your Amazon S3 URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the AWS region.
 
 ### Optional settings
 
 #### AWS authentication
 
-Select an **AWS authentication** option. If you select **Assume role**:
+Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >}}Assume role{{< /ui >}}:
 1. Enter the ARN of the IAM role you want to assume.
 1. Optionally, enter the assumed role session name and external ID.
 
@@ -38,7 +42,7 @@ Select an **AWS authentication** option. If you select **Assume role**:
 
 {{% observability_pipelines/tls_settings %}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
   tag: "Blog"
   text: "Deploy ASP.NET Core applications to Azure App Service"
+- link: "/serverless/azure_functions/dotnet_extension/"
+  tag: "Documentation"
+  text: "Azure Functions .NET APM Extension"
 
 ---
 
@@ -33,10 +36,10 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 The extension supports the following:
 <ul>
   <li>App Service Web Apps: Supported for .NET, Java, and Node.js runtimes on Basic, Standard, and Premium plans.</li>
-  <li>Azure Functions: Supported only for the .NET runtime on Basic, Standard, and Premium plans.</li>
+  <li>Azure Functions: Supported only for the .NET runtime on Dedicated (App Service) or Premium plans. <a href="/serverless/azure_functions/dotnet_extension/">See specific configuration and troubleshooting for the Windows Extension on Azure Functions</a></li>
 </ul>
 
-For all other Azure Functions configurations, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
+For any non-.NET Azure Functions or .NET configurations on a non-Dedicated/Premium plan, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
 
 <strong>Interested in support for other App Service resource types or runtimes?</strong> <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
@@ -46,7 +49,7 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 
 | Framework | Supported runtimes |
 | --------- | ------------------ |
-| .NET      | `ASPNET:V3.5`, `ASPNET:V4.8`, `dotnet:8`, `dotnet:9`  |
+| .NET      | `ASPNET:V3.5`, `ASPNET:V4.8`, `dotnet:8`, `dotnet:9`, `dotnet:10`  |
 | Java      | `JAVA:8`, `JAVA:11`, `JAVA:17`, `JAVA:21`, `TOMCAT:9.0-java8`, `TOMCAT:9.0-java11`, `TOMCAT:9.0-java17`, `TOMCAT:9.0-java21`, `TOMCAT:10.1-java8`, `TOMCAT:10.1-java11`, `TOMCAT:10.1-java17`, `TOMCAT:10.1-java21`, `TOMCAT:11.0-java8`, `TOMCAT:11.0-java11`, `TOMCAT:11.0-java17`, `TOMCAT:11.0-java21` |
 | Node.js   | `NODE:20LTS`, `NODE:22LTS` |
 
@@ -106,6 +109,8 @@ Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Default
 The Datadog CLI will automatically infer the runtime of your app and install the corresponding application. If this fails for whatever reason, you can override this behavior by specifying a runtime with the `--windows-runtime` flag.
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
+
+`datadog-ci aas instrument` only needs to be run once to set up instrumentation. You do not need to re-run it on every code deployment, only re-run it to change your Datadog configuration.
 
 #### Azure Cloud Shell
 
@@ -192,6 +197,7 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 Update your existing Web App to include the necessary Datadog App Settings and extension, as follows:
 
 ```bicep
+// Version: 1.0.0
 @secure()
 param datadogApiKey string
 
@@ -231,7 +237,7 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 
 {{% /tab %}}
@@ -243,6 +249,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "metadata": { "version": "1.0.0" },
   "parameters": {
     "webAppName": {
       "type": "string"
@@ -294,7 +301,7 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -307,7 +314,7 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 
    `DD_API_KEY`
    : **Value**: Your Datadog API key.<br>
-   See [Organization Settings > API Keys][2] in Datadog.<br>
+   See [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}][2] in Datadog.<br>
 
    `DD_SITE`
    : **Value**: Your Datadog site<br>
@@ -335,23 +342,23 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
    Enables trace-log correlation by injecting trace IDs into your application logs.<br>
    This allows you to correlate logs with traces in the Datadog UI.<br>
 
-3. Click **Save**. This restarts your application.
+3. Click {{< ui >}}Save{{< /ui >}}. This restarts your application.
 
-4. Stop your application by clicking **Stop**.
+4. Stop your application by clicking {{< ui >}}Stop{{< /ui >}}.
    <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
-5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
+5. In your Azure Portal, navigate to the {{< ui >}}Extensions{{< /ui >}} page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
-6. Accept the legal terms, click **OK**, and wait for the installation to complete.
+6. Accept the legal terms, click {{< ui >}}OK{{< /ui >}}, and wait for the installation to complete.
    <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
-7.  Start the main application, click **Start**:
+7.  Start the main application, click {{< ui >}}Start{{< /ui >}}:
 
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Azure start button" style="width:100%;" >}}
 
-8.  Verify that the extension is installed and running by checking the **Extensions** page in your Azure Portal.
+8.  Verify that the extension is installed and running by checking the {{< ui >}}Extensions{{< /ui >}} page in your Azure Portal.
 
 <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
 
@@ -378,17 +385,27 @@ To instrument a [deployment slot][101] instead of the main web app, use one of t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--env` to set a distinct environment tag for the slot:
+Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--service`, `--env`, and `--version` to set distinct unified service tagging values for the slot.
+
+To find the names of your deployment slots, run:
+```shell
+az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <web-app>
+```
 
 ```shell
-datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
+  --slot <slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
 
 Alternatively, provide the full slot resource ID with the `--resource-id` flag:
 
 ```shell
-datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
+
+**Note**: When you pass `--env`, the CLI automatically marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
 
 [1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 
@@ -424,6 +441,8 @@ module "my_web_app_slot" {
 
 Run `terraform apply`, and follow any prompts.
 
+**Note**: When `datadog_env` is set on your main web app module, the module marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
+
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows-slot
 
 {{% /tab %}}
@@ -432,11 +451,15 @@ Run `terraform apply`, and follow any prompts.
 Update your template to target a deployment slot instead of the main web app:
 
 ```bicep
+// Version: 1.0.0
 @secure()
 param datadogApiKey string
 
 param webAppName string
 param slotName string
+
+@description('Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it.')
+param existingStickyAppSettingNames array = []
 
 resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: webAppName
@@ -463,6 +486,18 @@ resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
   }
 }
 
+// Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+// full slotConfigNames list — existingStickyAppSettingNames must include any settings already
+// marked sticky or they will be de-stickied.
+resource stickySettings 'Microsoft.Web/sites/config@2025-03-01' = {
+  parent: webApp
+  name: 'slotConfigNames'
+  properties: {
+    appSettingNames: union(existingStickyAppSettingNames, ['DD_ENV'])
+  }
+  dependsOn: [slot]
+}
+
 resource datadogExtension 'Microsoft.Web/sites/slots/siteextensions@2025-03-01' = {
   parent: slot
   // Uncomment the extension for your runtime:
@@ -480,6 +515,10 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
 
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
+
 {{% /tab %}}
 {{% tab "ARM Template" %}}
 
@@ -489,6 +528,7 @@ Update your template to target a deployment slot instead of the main web app:
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "metadata": { "version": "1.0.0" },
   "parameters": {
     "webAppName": {
       "type": "string"
@@ -499,6 +539,11 @@ Update your template to target a deployment slot instead of the main web app:
     // ...
     "datadogApiKey": {
       "type": "securestring"
+    },
+    "existingStickyAppSettingNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": { "description": "Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
     }
   },
   "resources": {
@@ -530,6 +575,20 @@ Update your template to target a deployment slot instead of the main web app:
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Node.Apm')]"
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.DotNet')]"
       // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Java.Apm')]"
+    },
+    // Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+    // full slotConfigNames list — existingStickyAppSettingNames must include any settings
+    // already marked sticky or they will be de-stickied.
+    "stickySettings": {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/slotConfigNames')]",
+      "properties": {
+        "appSettingNames": "[union(parameters('existingStickyAppSettingNames'), createArray('DD_ENV'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('webAppName'), parameters('slotName'))]"
+      ]
     }
   }
 }
@@ -543,10 +602,16 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 **Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
 
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
+
+<div class="alert alert-info">Using Azure Functions? See <a href="/serverless/azure_functions/dotnet_extension/">Azure Functions .NET APM Extension</a> for Function App-specific installation instructions, including guidance on avoiding file-lock failures during extension install.</div>
 
 ## Custom metrics
 
@@ -559,27 +624,7 @@ To submit custom metrics to Datadog from Azure App Service using the extension:
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-1. Add the [DogStatsD NuGet package](https://www.nuget.org/packages/DogStatsD-CSharp-Client) to your Visual Studio project.
-2. Initialize DogStatsD and write custom metrics in your application.
-3. Deploy your code to Azure App Service.
-4. If you have not already, install the Datadog App Service extension.
-
-To send metrics, use this code:
-
-```csharp
-// Configure your DogStatsd client and configure any tags
-if (!DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } }))
-{
-    // `Configure` returns false if the necessary environment variables are not present.
-    // These environment variables are present in Azure App Service, but
-    // need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
-    // Ignore or log the error as it suits you
-    Console.WriteLine("Cannot initialize DogstatsD.");
-}
-
-// Send a metric
-DogStatsd.Increment("sample.startup");
-```
+{{% aas-custom-metrics-dotnet %}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -639,15 +684,7 @@ Learn more about [custom metrics][2].
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-You can send logs from your application in Azure App Service to Datadog in one of the following ways:
-
-- Use the [installation steps](#installation) on this page to enable APM with the Datadog APM extension. Then [enable Agentless logging][1].
-- Use [Agentless logging with the Serilog sink][2].
-
-Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
-
-[1]: /logs/log_collection/csharp/#agentless-logging-with-apm
-[2]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+{{% aas-logging-dotnet %}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -789,7 +826,7 @@ Datadog provides scripts to update or install the Azure App Service Extension us
 ### Prerequisites
 
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
-- Azure App Service [user-scope credentials](https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials). If you do not already have credentials, go to your [Azure portal](https://portal.azure.com/) and access your Web App or Function App. Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
+- Azure App Service [user-scope credentials](https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials). If you do not already have credentials, go to your [Azure portal](https://portal.azure.com/) and access your Web App or Function App. Navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}} to create or retrieve your user-scope credentials.
 
 ### Installing the extension for the first time {#powershell-first-time}
 
@@ -805,7 +842,7 @@ The install script adds the latest version of the extension to an Azure Web App 
 3. Run the following command, passing in required and optional arguments as needed.
 
     ```
-    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION>
+    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION> [-SlotName <SLOT_NAME>]
     ```
 
 **Note**: The following arguments are required for the above command:
@@ -818,6 +855,8 @@ The install script adds the latest version of the extension to an Azure Web App 
 - `<DATADOG_API_KEY>`: Your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys).
 
 Also, set `DATADOG_SITE` to your [Datadog site][32]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
+
+To target a deployment slot instead of the main app, add `-SlotName <SLOT_NAME>`. On Azure Function Apps, this also automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting to prevent extension install failures. See [Azure Functions .NET APM Extension](/serverless/azure_functions/dotnet_extension/) for details.
 
 [32]: /getting_started/site/
 
@@ -864,7 +903,7 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 ### ARM template
 
-Many organizations use [Azure Resource Management (ARM) templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template](https://github.com/DataDog/datadog-aas-extension/tree/master/ARM) into your deployments to add the extension and configure it alongside your App Service resources.
+Many organizations use [Azure Resource Management (ARM) templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension install templates](https://github.com/DataDog/datadog-aas-extension/tree/master/install-templates) into your deployments to add the extension and configure it alongside your App Service resources.
 
 {{% /tab %}}
 {{% tab "Java" %}}

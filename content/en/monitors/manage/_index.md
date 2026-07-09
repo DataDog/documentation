@@ -1,5 +1,5 @@
 ---
-title: Manage Monitors
+title: Monitor List
 aliases:
     - /monitors/manage_monitor/
 description: "Send notifications to your teams when monitors trigger alerts"
@@ -15,9 +15,9 @@ further_reading:
   text: "Best practices for tagging your monitors"
 ---
 
-Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
+Use the [Monitor List][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page" >}}
+{{< img src="monitors/manage_monitor/monitor_page-2.png" alt="The Monitor List page filtered to muted:true, showing 694 muted monitors with columns for status, muted elapsed, muted left, name, and tags. A column visibility dropdown is open on the right." >}}
 
 ## Search
 
@@ -25,24 +25,26 @@ To [search your monitors][2], construct a query using the facet panel on the lef
 
 ## Manage
 
-After searching, select one or more monitors to update using the checkboxes next to each result. Select all results with the top checkbox next to the *STATUS* column heading. Modify the monitors in bulk using the buttons at the right above the search results:
+After searching, select one or more monitors to update using the checkboxes next to each result. Select all results with the top checkbox next to the {{< ui >}}STATUS{{< /ui >}} column heading. Modify the monitors in bulk using the buttons at the right above the search results:
 
 | Option     | Description                                                                      |
 |------------|----------------------------------------------------------------------------------|
-| Mute       | [Mute][3] the selected monitors for a predefined duration (such as one hour, one day, or forever) or specify a custom timeframe.|
-| Unmute     | If the selected monitors are muted, unmute them.                                 |
-| Resolve    | [Resolve][4] the alert for the selected monitors.                                |
-| Delete     | Delete the selected monitors.                                                    |
-| Edit Tags  | Edit the monitor tags for the selected monitors.                                 |
-| Edit Teams | Edit the [teams][5] for the selected monitors.                                  |
+| {{< ui >}}Mute{{< /ui >}}       | [Mute][3] the selected monitors for a predefined duration (such as one hour, one day, or forever) or specify a custom timeframe.|
+| {{< ui >}}Unmute{{< /ui >}}     | If the selected monitors are muted, unmute them.                                 |
+| {{< ui >}}Resolve{{< /ui >}}    | [Resolve][4] the alert for the selected monitors.                                |
+| {{< ui >}}Delete{{< /ui >}}     | Delete the selected monitors.                                                    |
+| {{< ui >}}Edit Recipients{{< /ui >}} | Edit the notification recipients for the selected monitors.                 |
+| {{< ui >}}Edit Tags{{< /ui >}}  | Edit the monitor tags for the selected monitors.                                 |
+| {{< ui >}}Edit Teams{{< /ui >}} | Edit the [teams][5] for the selected monitors.                                  |
+| {{< ui >}}Export to Terraform{{< /ui >}} | Generate Terraform definitions of the selected monitors.               |
 
-To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to see the status page.
+To edit an individual monitor, hover over it and use the buttons to the far right: {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Clone{{< /ui >}}, {{< ui >}}Mute{{< /ui >}}, {{< ui >}}Delete{{< /ui >}}. To see more details on a monitor, click its name to see the status page.
 
 **Note**: You can view Monitor Saved Views from your mobile device home screen or view and mute monitors by downloading the [Datadog Mobile App][6], available on the [Apple App Store][7] and [Google Play Store][8].
 
 ### Triggered monitors
 
-You can [mute][3] or [resolve][4] triggered monitors in bulk using the [Triggered Monitors][9] page. This page only shows monitors with a triggered status (Alert, Warn, or No Data).
+You can [mute][3] or [resolve][4] triggered monitors in bulk using the [Triggered Monitors][9] page. This page only shows monitors with a triggered status ({{< ui >}}Alert{{< /ui >}}, {{< ui >}}Warn{{< /ui >}}, or {{< ui >}}No Data{{< /ui >}}).
 
 #### Grouped results
 
@@ -58,7 +60,7 @@ Attribute differences for the triggered monitors page:
 
 ### Monitor tags
 
-Monitor tags are independent of tags sent by the Agent or integrations. Add up to 80 tags directly to your monitors for filtering on the [manage monitors][1], [triggered monitors][9], or [manage downtime][10] pages. Learn more about monitor tags in [Assigning Tags for the UI][11].
+Monitor tags are independent of tags sent by the Agent or integrations. Add up to 80 tags directly to your monitors for filtering on the [monitor list][1], [triggered monitors][9], or [downtimes][10] pages. Learn more about monitor tags in [Assigning Tags for the UI][11].
 
 **Note**: Monitor tags are added to the alert event generated by the monitor.
 

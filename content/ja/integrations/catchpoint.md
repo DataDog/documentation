@@ -843,7 +843,7 @@ Catchpoint インテグレーションには、サービスのチェック機能
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/integrations/catchpoint
-[2]: https://docs.datadoghq.com/ja/service_management/events/
+[2]: https://docs.datadoghq.com/ja/events/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
 [4]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
 [5]: https://docs.datadoghq.com/ja/help/

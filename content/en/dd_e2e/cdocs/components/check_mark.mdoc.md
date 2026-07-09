@@ -1,6 +1,7 @@
 ---
 title: Check mark
 draft: true
+private: true
 ---
 
 ## Overview

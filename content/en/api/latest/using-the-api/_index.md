@@ -3,7 +3,7 @@ title: Using the API
 type: api
 ---
 
-{{< h2 >}}Using the API{{< /h2 >}}
+{{< h2-with-copy-btn >}}Using the API{{< /h2-with-copy-btn >}}
 
 Use the Datadog HTTP API to access the Datadog platform programmatically. You can use the API to send data to Datadog, build data visualizations, and manage your account.
 

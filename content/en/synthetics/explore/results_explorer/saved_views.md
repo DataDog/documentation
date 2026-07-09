@@ -23,9 +23,9 @@ You can also use saved views to share common queries and configurations with you
 
 ## Saved views
 
-To access your saved views, expand **> Views** to the left in the [Synthetic Monitoring & Testing Results Explorer][1].
+To access your saved views, expand > {{< ui >}}Views{{< /ui >}} to the left in the [Synthetic Monitoring & Testing Results Explorer][1].
 
-All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your Explorer.
+All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click {{< ui >}}Save{{< /ui >}} to create a custom saved view from the current content in your Explorer.
 
 You can:
 
@@ -45,7 +45,7 @@ You can set a saved view to be your default landing page in the [Synthetic Monit
 
 Temporarily override your default saved view by completing an action in the UI or opening links in the Results Explorer that embeds a different configuration.
 
-In the default view entry in the **Views** panel, you can:
+In the default view entry in the {{< ui >}}Views{{< /ui >}} panel, you can:
 
 - Click on the entry to reload your default view
 - Update your default view with the current parameters

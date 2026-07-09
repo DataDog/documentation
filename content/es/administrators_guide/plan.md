@@ -347,7 +347,7 @@ Crea una metodología de despliegue detallada en la fase de [compilación][41] c
 [28]: /es/integrations/network/
 [29]: /es/network_monitoring/cloud_network_monitoring/
 [30]: /es/service_catalog/
-[31]: /es/service_management/events/
+[31]: /es/events/
 [32]: /es/error_tracking/
 [33]: /es/api_catalog/
 [34]: /es/agent/fleet_automation/

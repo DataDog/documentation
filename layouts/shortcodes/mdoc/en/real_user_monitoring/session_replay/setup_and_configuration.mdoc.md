@@ -134,6 +134,12 @@ SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport(
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 
@@ -374,6 +380,12 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 To instrument your consolidated web and native Session Replay views for React Native:
@@ -430,6 +442,12 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -504,6 +522,12 @@ SessionReplay.stopRecording()
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 ```typescript {% filename="App.tsx" %}
@@ -519,14 +543,6 @@ SessionReplay.stopRecording();
 ```
 {% /if %}
 <!-- end React Native -->
-
-<!-- Flutter -->
-{% if equals($platform, "flutter") %}
-
-Datadog Session Replay for Flutter does not currently support manual recording.
-
-{% /if %}
-<!-- end Flutter -->
 
 ### Validate whether Session Replay data is being sent
 
@@ -562,6 +578,12 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}

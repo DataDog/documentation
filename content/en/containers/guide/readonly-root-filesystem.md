@@ -83,7 +83,7 @@ Create a custom Datadog Agent image with pre-defined volumes for writable direct
 
 1. Create a Dockerfile that extends the Datadog Agent image and declares volumes for required paths:
 ```dockerfile
-FROM gcr.io/datadoghq/agent:latest
+FROM registry.datadoghq.com/agent:latest
 
 VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/var/log/datadog"]
 
@@ -153,4 +153,3 @@ Agent flare requires write access to `/tmp/`. If generating flares is important 
 [2]: https://docs.aws.amazon.com/eks/latest/best-practices/pod-security.html
 [3]: https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF
 [4]: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html
-

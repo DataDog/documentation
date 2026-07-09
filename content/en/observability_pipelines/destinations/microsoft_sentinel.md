@@ -158,7 +158,9 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the Microsoft Sentinel destination in the pipeline UI:
 

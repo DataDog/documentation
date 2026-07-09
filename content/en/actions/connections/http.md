@@ -52,7 +52,7 @@ If you need to authenticate your request, use the action's {{< ui >}}Connection{
 1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
 1. Select {{< ui >}}Azure{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Tenant ID{{< /ui >}}, {{< ui >}}Client ID{{< /ui >}}, and {{< ui >}}Client Secret{{< /ui >}}.
-1. Optionally, enter the {{< ui >}}Custom Scope{{< /ui >}} to be requested from Microsoft when acquiring an OAuth 2 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][3].
+1. Optionally, enter the {{< ui >}}Custom Scope{{< /ui >}} to be requested from Microsoft when acquiring an OAuth 2.0 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][3].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an HTTP token authentication connection

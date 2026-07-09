@@ -10,9 +10,9 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Explorer l'APM Datadog
-- link: /tracing/trace_search_and_analytics/#live-search-pendant-15-minutes
+- link: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
   tag: Documentation
-  text: Live Search
+  text: Recherche en direct
 - link: https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/
   tag: Blog
   text: Tracing distribué en temps réel pour des fonctions Lambda Go et Java
@@ -27,177 +27,218 @@ further_reading:
   text: Tracing distribué en temps réel pour des fonctions Lambda .NET
 title: Tracing distribué avec des applications sans serveur AWS Lambda
 ---
-
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur" style="width:100%;">}}
 
 Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi résoudre plus efficacement les problèmes de performance.
 
-Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda.
+Les SDK Datadog pour Python, Node.js, Ruby, Go, Java et .NET prennent en charge le traçage distribué pour AWS Lambda.
 
-## Envoyer des traces à partir de votre application sans serveur
+## Envoyez des traces depuis votre application sans serveur {#send-traces-from-your-serverless-application}
 
-{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Diagramme de l'architecture de tracing d'AWS Lambda avec Datadog" >}}
+{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Diagramme d'architecture pour le traçage d'AWS Lambda avec Datadog" >}}
 
-Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda. Vous pouvez installer le traceur en suivant les [instructions d'installation][5]. Si vous avez déjà installé l'extension, vérifiez que la variable d'environnement `DD_ENABLE_ENABLED` est définie sur `true`.
+Les SDK Datadog pour Python, Node.js, Ruby, Go, Java et .NET prennent en charge le traçage distribué pour AWS Lambda. Vous pouvez installer le SDK en suivant les [instructions d'installation][5].
 
-### Recommandations de runtime
+### Recommandations d'exécution {#runtime-recommendations}
 
-{{< partial name="serverless/serverless-apm-recommendations.html" >}}
+{{< card-grid card_width="30%" image_width="200">}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/distributed_tracing#ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/distributed_tracing#java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/distributed_tracing#go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/distributed_tracing#net" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
-#### Python et Node.js
+#### Python et Node.js {#python-and-nodejs}
 
-La bibliothèque Lambda Datadog et les bibliothèques de tracing pour Python et Node.js prennent en charge les fonctionnalités suivantes :
-- Corrélation automatique des logs Lambda et des traces avec l'ID de trace et l'injection de traces
-- Installation sans modification du code à l'aide des intégrations Serverless Framework, AWS SAM et AWS CDK
-- Tracing des requêtes HTTP appelant des conteneurs ou des fonctions Lambda en aval
-- Tracing des appels Lambda consécutifs effectués avec AWS SDK.
-- Tracing des démarrages à froid
-- Tracing des appels Lambda asynchrones via AWS Managed Services
-  - API Gateway
+La Datadog Lambda Library et les SDK pour Python et Node.js prennent en charge :
+- Corrélation automatique des journaux et des traces Lambda avec l'ID de trace et injection de balises.
+- Installation sans aucun changement de code en utilisant les intégrations Serverless Framework, AWS SAM et AWS CDK.
+- Traçage des requêtes HTTP invoquant des fonctions ou des conteneurs Lambda en aval.
+- Traçage des invocations consécutives de Lambda effectuées via le SDK AWS.
+- Traçage des démarrages à froid
+- Traçage des invocations asynchrones de Lambda via les services gérés par AWS
+  - API Gateway
   - SQS
   - SNS
   - Intégration directe de SNS et SQS
   - Kinesis
   - EventBridge
-- Tracing de dizaines de bibliothèques supplémentaires [Python][3] et [Node.js][4] prêtes à l'emploi
+  - DynamoDB
+  - S3
+  - Step Functions
+- Traçage de dizaines de bibliothèques supplémentaires prêtes à l'emploi [Python][3] et [Node.js][4].
 
-Pour les applications Python et Node.js sans serveur, Datadog vous conseille d'[installer les bibliothèques de tracing Datadog][5].
+Pour les applications sans serveur Python et Node.js, Datadog vous recommande d'[installer les SDK Datadog][5].
 
-*Vous souhaitez tracer d'autres ressources sans serveur ? Créez une demande de fonctionnalité sur [cette page][7].*
+*Vous cherchez à tracer des ressources sans serveur non listées ci-dessus ? [Ouvrez une demande de fonctionnalité][7].*
 
-#### Ruby
+#### Ruby {#ruby}
 
-La bibliothèque Lambda Datadog et les bibliothèques de tracing pour Ruby prennent en charge les fonctionnalités suivantes :
-- Corrélation automatique des logs Lambda et des traces avec l'ID de trace et l'injection de traces
-- Tracing des requêtes HTTP appelant des conteneurs ou des fonctions Lambda en aval
-- Tracing de dizaines de bibliothèques supplémentaires [Ruby][8] prêtes à l'emploi
+La Datadog Lambda Library et les SDK pour Ruby prennent en charge :
+- Corrélation automatique des journaux et des traces Lambda avec l'injection d'ID de trace et de balises.
+- Traçage des requêtes HTTP invoquant des fonctions ou des conteneurs Lambda en aval.
+- Traçage de dizaines de bibliothèques supplémentaires prêtes à l'emploi [Ruby][8].
 
-Vous pouvez tracer vos fonctions sans serveur dans Datadog grâce aux [bibliothèques de tracing Datadog][5].
+Vous pouvez tracer vos fonctions sans serveur dans Datadog avec les [SDK Datadog][5].
 
-*Vous souhaitez tracer d'autres ressources sans serveur ? Créez une demande de fonctionnalité sur [cette page][7].*
+*Vous cherchez à tracer des ressources sans serveur non listées ci-dessus ? [Ouvrez une demande de fonctionnalité][7].*
 
-#### Go
+#### Go {#go}
 
-La bibliothèque Lambda Datadog et les bibliothèques de tracing pour Go prennent en charge les fonctionnalités suivantes :
-- Corrélation manuelle des logs Lambda et des traces avec l'ID de trace et l'injection de traces
-- Tracing des requêtes HTTP appelant des conteneurs ou des fonctions Lambda en aval
-- Tracing de dizaines de bibliothèques supplémentaires [Go][9] prêtes à l'emploi
+La Datadog Lambda Library et les SDK pour Go prennent en charge :
+- Corrélation manuelle des journaux et des traces Lambda avec l'injection d'ID de trace et de balises.
+- Traçage des requêtes HTTP invoquant des fonctions ou des conteneurs Lambda en aval.
+- Traçage de dizaines de bibliothèques supplémentaires prêtes à l'emploi [Go][9].
 
-Pour les applications Go sans serveur, Datadog vous conseille d'installer les [bibliothèques de tracing Datadog][15].
+Pour les applications sans serveur Go, Datadog recommande d'installer les [SDK Datadog][5].
 
-*Vous souhaitez tracer d'autres ressources sans serveur ? Créez une demande de fonctionnalité sur [cette page][7].*
+*Vous cherchez à tracer des ressources sans serveur non listées ci-dessus ? [Ouvrez une demande de fonctionnalité][7].*
 
-#### Java
+#### Java {#java}
 
-La bibliothèque Lambda Datadog et les bibliothèques de tracing pour Java prennent en charge les fonctionnalités suivantes :
-- Mise en corrélation des logs Lambda et des traces avec l'ID de trace et l'injection de traces (voir la section [Associer vos logs Java à vos traces][10] pour en savoir plus)
-- Tracing des requêtes HTTP appelant des conteneurs ou des fonctions Lambda en aval
-- Tracing de dizaines de bibliothèques supplémentaires [Java][11] prêtes à l'emploi
+La Datadog Lambda Library et les SDK pour Java prennent en charge :
+- Corrélation des journaux et des traces Lambda avec l'ID de trace et l'injection de balises. Voir [Connexion des journaux et des traces Java][10] pour plus de détails.
+- Traçage des requêtes HTTP invoquant des fonctions ou des conteneurs Lambda en aval.
+- Traçage de dizaines de bibliothèques supplémentaires prêtes à l'emploi [Java][11].
 
-Pour les applications Java sans serveur, Datadog vous conseille d'[installer les bibliothèques de tracing Datadog][5].
+Pour les applications sans serveur Java, Datadog recommande [d'installer les SDK Datadog][5].
 
-*Vous souhaitez partager votre avis sur les bibliothèques de tracing Datadog pour les fonctions Lambda Java ? N'hésitez pas à rejoindre le canal [#serverless][12] de la [communauté Slack Datadog][13] pour participer aux discussions.*
+*Avez-vous des commentaires sur les SDK Datadog pour les fonctions Lambda Java ? Assurez-vous de consulter les discussions en cours dans le canal [#serverless][12] de la [communauté Slack Datadog][13].*
 
-#### .NET
+#### .NET {#net}
 
-La bibliothèque de tracing pour .NET prend en charge les fonctionnalités suivantes :
-- Tracing des requêtes HTTP appelant des conteneurs ou des fonctions Lambda en aval
-- Tracing de dizaines de bibliothèques supplémentaires [.NET][14] prêtes à l'emploi
+Le SDK pour .NET prend en charge :
+- Traçage des requêtes HTTP invoquant des fonctions ou des conteneurs Lambda en aval.
+- Traçage de dizaines de bibliothèques supplémentaires prêtes à l'emploi [.NET][14].
 
-Pour les applications .NET sans serveur, Datadog vous conseille d'[installer les bibliothèques de tracing Datadog][5].
+Pour les applications sans serveur .NET, Datadog recommande [d'installer les SDK Datadog][5].
 
 En savoir plus sur le [tracing via des applications sans serveur Azure .NET][15].
 
-### Environnements hybrides
+## Auto-liaison des spans {#span-auto-linking}
+{{< img src="serverless/lambda/tracing/autolink.png" alt="Dans Datadog, une trace DynamoDB. En haut, un message indique 'Cette trace est liée à d'autres traces'. L'onglet Liens de spans est ouvert et affiche un lien cliquable vers une autre trace DynamoDB." style="width:100%;" >}}
 
-Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions AWS Lambda, de hosts sur site ou de services gérés.
+Datadog détecte automatiquement les spans liés lorsque des segments de vos requêtes asynchrones ne peuvent pas propager le contexte de trace. Par exemple, cela peut se produire lorsqu'une requête déclenche des [Événements de changement S3][28] ou des [Flux DynamoDB][29]. Vous pouvez voir les spans auto-liés apparaître dans l'[onglet Liens de spans][30]. Ceux-ci apparaissent comme **Retour** ou **Avance**.
 
-Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur passe par AWS X-Ray, il est nécessaire de fusionner les traces pour afficher une trace unique et associée dans votre infrastructure. Consultez la section [Fusion de traces sans serveur][6] pour en savoir plus sur la fusion de traces entre `dd-trace` et AWS X-Ray.
+_Retour_ : Le span lié a été causé par la trace que vous visualisez.
 
-L'[intégration Datadog/AWS X-Ray][2] fournit uniquement des traces pour les fonctions Lambda. Consultez la [documentation relative à la solution APM Datadog][16] pour en savoir plus sur le tracing dans des environnements basés sur des conteneurs ou des hosts.
+_Avance_ : Le span lié a causé la trace que vous visualisez.
 
-## Profiler vos fonctions Lambda (fonctionnalité en bêta publique)
 
-<div class="alert alert-info">Durant la version bêta, le profiling est disponible gratuitement.</div>
+<div class="alert alert-info">Les filtres d'échantillonnage et de <a href="/tracing/trace_pipeline/trace_retention/">rétention des traces</a> peuvent interférer avec l'auto-liaison. Pour améliorer vos chances de voir des spans auto-liés, augmentez votre taux d'échantillonnage ou ajustez vos filtres de rétention.</div>
 
-Le [profileur en continu][27] de Datadog est disponible en version bêta pour la version 4.62.0 de Python et les versions 62 et ultérieures de la couche. Pour activer cette fonctionnalité facultative, définissez la variable d'environnement `DD_PROFILING_ENABLED` sur `true`.
+### Technologies prises en charge {#supported-technologies}
 
-Le profileur en continu fonctionne en générant un thread qui s'active régulièrement afin de générer un snapshot du processeur et de l'ensemble du code Python exécuté. Ce snapshot peut inclure le profileur lui-même. Si vous voulez que le profileur s'ignore, définissez `DD_PROFILING_IGNORE_PROFILER` sur `true`.
+L'auto-liaison des spans est disponible pour :
+- Fonctions AWS Lambda Python instrumentées avec [`datadog-lambda-python`][33] la couche v101+
+- Applications Python instrumentées avec [`dd-trace-py`][31] v2.16+
+- Fonctions AWS Lambda Node.js instrumentées avec [`datadog-lambda-js`][34] la couche 118+
+- Applications Node.js instrumentées avec [`dd-trace-js`][32] v4.53.0+ ou v5.29.0+
 
-## Fusion de traces
+### Auto-liaison des flux de changement DynamoDB {#dynamodb-change-stream-auto-linking}
 
-### Cas d'utilisation
+Pour [Flux de changement DynamoDB][29], l'auto-liaison des spans prend en charge les opérations suivantes :
 
-Datadog vous recommande d'utiliser uniquement la bibliothèque de tracing APM Datadog (`dd-trace`). Cependant, dans certaines situations particulières, les utilisateurs peuvent combiner le tracing Datadog et AWS X-Ray à l'aide de la fusion de traces. La fusion de traces est disponible pour les fonctions et AWS Lambda Node.js et Python. Si vous ne savez pas quelle bibliothèque de tracing utiliser, découvrez comment [choisir votre bibliothèque de tracing][17].
+- `PutItem`
+- `UpdateItem`
+- `DeleteItem`
+- `BatchWriteItem`
+- `TransactWriteItems`
 
-Il existe deux scénarios justifiant l'instrumentation des bibliothèques de tracing `dd-trace` et AWS X-Ray :
-- Dans un environnement AWS sans serveur, vous effectuez déjà le tracing de vos fonctions Lambda avec `dd-trace`. De plus, un tracing actif d'AWS X-Ray est requis pour les services AWS gérés, comme AppSync et Step Functions. Or, vous devez visualiser les spans `dd-trace` et AWS X-Ray au sein d'une unique trace.
-- Dans un environnement hybride comprenant des fonctions Lambda et des hosts, `dd-trace` instrumente vos hosts, tandis qu'AWS X-Ray instrumente vos fonctions Lambda. Or, vous devez visualiser les traces connectées pour les transactions de l'ensemble de vos fonctions Lambda et de vos hosts.
+<div class="alert alert-info">L'opération <code>PutItem</code> L'opération nécessite une configuration supplémentaire. Pour plus d'informations, consultez <a href="/serverless/aws_lambda/installation/python/#span-auto-linking">Instrumentation des applications serverless Python</a> ou <a href="/serverless/aws_lambda/installation/nodejs/#span-auto-linking">Instrumentation des applications serverless Node.js</a>.</div>
 
-**Remarque** : la fusion des traces peut entraîner une augmentation de vos coûts. Les spans X-Ray restent disponibles dans vos traces fusionnées pendant une durée de deux à cinq minutes. Dans la plupart des cas, Datadog vous conseille d'utiliser une seule bibliothèque de tracing. Découvrez comment [choisir votre bibliothèque de tracing][17].
+### Auto-liaison des notifications de changement S3 {#s3-change-notification-auto-linking}
+
+Pour les [notifications de changement S3][28], la liaison automatique de Span prend en charge les opérations suivantes :
+
+- `PutObject`
+- `CompleteMultipartUpload`
+- `CopyObject`
+
+
+## Environnements hybrides {#hybrid-environments}
+
+Pour une visibilité de bout en bout à travers les fonctions Lambda, les hôtes, les conteneurs et les services gérés, installez les SDK Datadog (`dd-trace`) à la fois sur vos fonctions Lambda et vos hôtes. Vos traces montrent alors une image complète des requêtes qui traversent les frontières de l'infrastructure.
+
+Sur Lambda, installez `dd-trace` avec l'[Extension Datadog Lambda][35], qui exécute l'Agent Datadog à l'intérieur de l'environnement d'exécution Lambda et envoie les traces directement à Datadog avec un minimum de surcharge. L'Extension Lambda est la méthode d'installation recommandée pour les applications sans serveur nouvelles et existantes.
+
+Consultez la [documentation APM de Datadog][16] pour la configuration du traçage dans les environnements basés sur des conteneurs et des hôtes.
+
+## Profilage de vos Fonctions Lambda {#profiling-your-lambda-functions}
+
+Le [Continuous Profiler][27] de Datadog est disponible en Preview pour Python dans la version 4.62.0 et avec la couche v62 et supérieure. Cette fonctionnalité optionnelle est activée en définissant la variable d'environnement `DD_PROFILING_ENABLED` sur `true`.
+
+Le [Continuous Profiler][27] fonctionne en créant un thread qui se réveille périodiquement et prend un instantané du CPU et du tas de tout le code Python en cours d'exécution. Cela peut inclure le profiler lui-même. Si vous souhaitez que le profiler s'ignore lui-même, définissez `DD_PROFILING_IGNORE_PROFILER` sur `true`.
+
+## Fusion de traces {#trace-merging}
+
+### Cas d'utilisation {#use-cases}
+
+Datadog recommande d'utiliser uniquement la [Datadog APM trace library] (`dd-trace`), mais dans certaines situations avancées, les utilisateurs peuvent combiner le traçage Datadog et AWS X-Ray en utilisant la fusion de traces. La fusion de traces est disponible pour les fonctions AWS Lambda en Node.js et Python. Si vous n'êtes pas sûr du SDK à utiliser, consultez [choisir votre SDK][17].
+
+<div class="alert alert-info">Le traçage des AWS Step Functions est pris en charge nativement par Datadog et ne nécessite plus X-Ray. Voir <a href="/serverless/step_functions/">Surveillance sans serveur pour AWS Step Functions</a> et <a href="/serverless/step_functions/merge-step-functions-lambda/">Fusion des traces des Step Functions et Lambda</a>.</div>
+
+Il y a deux raisons principales d'instrumenter à la fois `dd-trace` et les bibliothèques de traçage AWS X-Ray :
+- Dans un environnement sans serveur AWS, vous tracez déjà vos fonctions Lambda avec `dd-trace`, vous avez besoin du traçage actif AWS X-Ray pour un service géré par AWS que Datadog APM n'instrumente pas encore (comme AppSync), et vous souhaitez visualiser les `dd-trace` et les spans AWS X-Ray dans une seule trace.
+- Dans un environnement hybride avec à la fois des fonctions Lambda et des hôtes, `dd-trace` instrumente vos hôtes, AWS X-Ray instrumente vos fonctions Lambda, et vous souhaitez visualiser les traces connectées pour les transactions à travers les fonctions Lambda et les hôtes.
+
+**Remarque :** Cela peut entraîner des factures d'utilisation plus élevées. Les spans X-Ray continuent d'être disponibles dans vos traces fusionnées après 2 à 5 minutes. Dans de nombreux cas, Datadog recommande d'utiliser uniquement un seul SDK. En savoir plus sur [le choix de votre SDK][17].
 
 Voici des instructions de configuration pour les deux scénarios évoqués ci-dessus :
 
-- [Fusion de traces dans un environnement principalement sans serveur](#fusion-de-traces-dans-un-environnement-aws-sans-serveur)
-- [Fusion de traces entre des fonctions AWS Lambda et des hosts](#configurer-le-tracing-de-fonctions-aws-lambda-et-de-hosts)
+- [Fusion des traces dans un environnement serverless-first](#trace-merging-in-an-AWS-serverless-environment)
+- [Fusion des traces entre AWS Lambda et les hôtes](#tracing-across-aws-lambda-and-hosts)
 
-### Fusion de traces dans un environnement AWS sans serveur
+### Fusion des traces dans un environnement sans serveur AWS {#trace-merging-in-an-aws-serverless-environment}
 
-AWS X-Ray propose à la fois un service AWS backend (le tracing actif d'AWS X-Ray) et un ensemble de bibliothèques client. [Lorsque le service AWS backend est activé indépendamment dans la console Lambda][18], vous disposez des spans `Initialization` et `Invocation` pour vos fonctions AWS Lambda. Vous pouvez également activer le tracing actif d'AWS X-Ray depuis les consoles API Gateway et Step Function.
+AWS X-Ray fournit à la fois un service backend AWS (traçage actif AWS X-Ray) et un ensemble de bibliothèques clientes. [Activer uniquement le service backend AWS dans la console Lambda][18] vous donne des spans `Initialization` et `Invocation` pour vos fonctions AWS Lambda. Vous pouvez également activer le traçage actif AWS X-Ray depuis les consoles API Gateway et Step Function.
 
-Le SDK AWS X-Ray et les bibliothèques client de l'APM Datadog (`dd-trace`) accèdent directement à la fonction pour ajouter des métadonnées et des spans aux appels en aval. Si vous utilisez `dd-trace` pour effectuer le tracing au niveau du gestionnaire, voici à quoi ressemble la configuration finale :
+Les bibliothèques clientes AWS X-Ray et Datadog APM (`dd-trace`) ajoutent des métadonnées et des spans pour les appels en aval en accédant directement à la fonction. En supposant que vous utilisez `dd-trace` pour tracer au niveau du gestionnaire, votre configuration devrait être similaire à ce qui suit :
 
-1. Vous avez activé le [tracing actif d'AWS X-Ray][18] sur vos fonctions Lambda depuis la console AWS Lambda, ainsi que l'[intégration Datadog/AWS X-Ray][19].
-2. Vous avez instrumenté vos fonctions Lambda avec la solution APM Datadog (`dd-trace`) en suivant les [instructions d'installation pour votre runtime Lambda][5].
-3. Les bibliothèques tierces sont automatiquement patchées par `dd-trace` ; les bibliothèques client AWS X-Ray n'ont donc pas besoin d'être installées.
-4. Vous avez défini la variable d'environnement `DD_MERGE_XRAY_TRACES` sur `true` (ou la variable d'environnement `DD_MERGE_DATADOG_XRAY_TRACES` pour Ruby) sur vos fonctions Lambda afin de fusionner les traces X-Ray et `dd-trace`.
+1. Vous avez activé [le traçage actif AWS X-Ray][18] sur vos fonctions Lambda depuis la console AWS Lambda et notre [intégration AWS X-Ray au sein de Datadog][19].
+2. Vous avez instrumenté vos fonctions Lambda avec Datadog APM (`dd-trace`) en suivant [les instructions d'installation pour votre runtime Lambda][5].
+3. Les bibliothèques tierces sont automatiquement patchées par `dd-trace`, donc les bibliothèques clientes AWS X-Ray n'ont pas besoin d'être installées.
+4. Définissez la variable d'environnement `DD_MERGE_XRAY_TRACES` sur `true` sur vos fonctions Lambda pour fusionner les traces X-Ray et `dd-trace` (`DD_MERGE_DATADOG_XRAY_TRACES` en Ruby).
 
-### Configurer le tracing de fonctions AWS Lambda et de hosts
+### Traçage entre AWS Lambda et les hôtes {#tracing-across-aws-lambda-and-hosts}
 
-Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions AWS Lambda, de hosts sur site ou de services gérés.
+#### Propagation du contexte avec les SDK Datadog (recommandé) {#context-propagation-with-the-datadog-sdks-recommended}
+Installez les SDK Datadog (`dd-trace`) sur vos fonctions Lambda et vos hôtes. Vos traces affichent alors automatiquement une vue complète des requêtes qui franchissent les limites de l'infrastructure, que ce soit AWS Lambda, des conteneurs, des hôtes sur site ou des services gérés.
 
-Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur Node.js ou Python passe par AWS X-Ray, voici à quoi ressemble la configuration finale :
+{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace d'une requête d'un hôte vers une fonction Lambda" >}}
 
-1. Vous avez installé l'[intégration AWS X-Ray][18] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
-2. Vous avez installé la [bibliothèque Lambda Datadog pour votre runtime Lambda][5] et défini la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
-3. La solution [APM Datadog][20] est configurée sur vos hosts et votre infrastructure à base de conteneurs.
+## Propagation des traces {#trace-propagation}
+{{< img src="serverless/lambda-non-http-trace.png" alt="Trace distribuée sans serveur non-HTTP" style="width:100%;" >}}
 
-Pour que les traces d'AWS X-Ray et de l'APM Datadog s'affichent dans le même flamegraph, tous les services doivent avoir le même tag `env`.
+### Configuration requise {#required-setup}
 
-**Remarque** : le tracing distribué est pris en charge pour tout runtime d'application basée sur des hosts ou des conteneurs. Vos hosts et vos fonctions Lambda n'ont pas besoin d'être dans le même runtime.
-
-{{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="tracing d'une requête entre un host et une fonction Lambda" >}}
-
-## Propagation des traces
-{{< img src="serverless/lambda-non-http-trace.png" alt="Trace distribuée sans serveur et non HTTP" style="width:100%;" >}}
-
-### Configuration requise
-
-Une instrumentation supplémentaire est parfois nécessaire pour obtenir une trace unique et connectée dans les applications sans serveur Node et Python qui déclenchent des fonctions Lambda de manière asynchrone. Si vous commencez tout juste à surveiller des applications sans serveur dans Datadog, [suivez les principales étapes d'installation][21] et [accédez à cette page pour choisir votre bibliothèque de tracing][22]. Une fois que vous envoyez des traces depuis vos fonctions Lambda à Datadog à l'aide de la [bibliothèque Lambda Datadog][23], vous pouvez choisir de suivre les étapes ci-dessous afin d'associer des traces entre deux fonctions Lambda pour l'un des scénarios suivants :
-- Déclenchement de fonctions Lambda via Step Functions
-- Invocation de fonctions Lambda via des protocoles non HTTP, comme MQTT
+Une instrumentation supplémentaire est parfois nécessaire pour obtenir une trace unique et connectée dans les applications sans serveur Node et Python qui déclenchent des fonctions Lambda de manière asynchrone. Si vous débutez avec la surveillance des applications sans serveur dans Datadog, [suivez nos étapes d'installation principales][21] et [lisez cette page sur le choix de votre SDK][22]. Une fois que vous envoyez des traces de vos fonctions Lambda à Datadog en utilisant la [Bibliothèque Lambda Datadog][23], vous voudrez peut-être suivre ces étapes pour relier les traces entre deux fonctions Lambda dans des cas tels que :
+- Déclenchement de fonctions Lambda via Step Functions
+- Invocation de fonctions Lambda via des protocoles non-HTTP tels que MQTT
 
 Le tracing d'un grand nombre de services AWS gérés ([liste complète][24]) est pris en charge par défaut. Il n'est pas nécessaire de suivre les étapes décrites sur cette page.
 
 Pour associer le contexte des traces entre plusieurs ressources générant des traces, vous devez procéder comme suit :
-- Incluez le contexte des traces Datadog dans les événements sortants. Ces événements peuvent provenir d'un host ou d'une fonction Lambda doté(e) de `dd-trace`.
-- Extrayez le contexte des traces dans la fonction Lambda du consommateur.
+- Inclure le contexte de trace Datadog dans les événements sortants. L'événement sortant peut provenir d'un hôte ou d'une fonction Lambda avec `dd-trace` installé.
+- Extraction du contexte de trace dans la fonction Lambda du consommateur.
 
-### Transmission du contexte des traces
+### Transmission du contexte de trace {#passing-trace-context}
 
 Les extraits de code suivants permettent de transmettre le contexte des traces, par le biais des charges utiles sortantes, aux services qui ne prennent par en charge les en-têtes HTTP ou aux services gérés qui ne sont pas pris en charge [de façon native][24] par Datadog en Node et Python :
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-En Python, vous pouvez utiliser la fonction auxiliaire `get_dd_trace_context` pour transmettre le contexte des traces aux événements sortants dans une fonction Lambda :
+En Python, vous pouvez utiliser la fonction d'aide `get_dd_trace_context` pour passer le contexte de trace aux événements sortants dans une fonction Lambda :
 
 ```py
 import json
 import boto3
 import os
 
-from datadog_lambda.tracing import get_dd_trace_context  # Fonction auxiliaire de tracing Datadog
+from datadog_lambda.tracing import get_dd_trace_context  # Datadog tracing helper function
 
 def handler(event, context):
     my_custom_client.sendRequest(
@@ -205,7 +246,7 @@ def handler(event, context):
           'myCustom': 'data',
           '_datadog': {
               'DataType': 'String',
-              'StringValue': json.dumps(get_dd_trace_context()) # Inclure le contexte des traces dans les charges utiles sortantes
+              'StringValue': json.dumps(get_dd_trace_context()) # Includes trace context in outgoing payload.
           },
         },
     )
@@ -214,13 +255,13 @@ def handler(event, context):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-En Node, vous pouvez utiliser la fonction auxiliaire `getTraceHeaders` pour transmettre le contexte des traces aux événements sortants dans une fonction Lambda :
+En Node, vous pouvez utiliser la fonction d'aide `getTraceHeaders` pour passer le contexte de trace aux événements sortants dans une fonction Lambda :
 
 ```js
-const { getTraceHeaders } = require("datadog-lambda-js"); // Fonction auxiliaire de tracing Datadog
+const { getTraceHeaders } = require("datadog-lambda-js"); // Datadog tracing helper function
 
 module.exports.handler = async event => {
-  const _datadog = getTraceHeaders(); // Capture le contexte des traces Datadog actuel
+  const _datadog = getTraceHeaders(); // Captures current Datadog trace context.
 
   var payload = JSON.stringify({ data: 'sns', _datadog });
   await myCustomClient.sendRequest(payload)
@@ -229,9 +270,9 @@ module.exports.handler = async event => {
 {{% /tab %}}
 {{< /tabs >}}
 
-#### À partir de hosts
+#### Depuis les hôtes {#from-hosts}
 
-Si vous ne transmettez pas le contexte des traces depuis vos fonctions Lambda, vous pouvez utiliser le modèle de code suivant à la place des fonctions auxiliaires `getTraceHeaders` et `get_dd_trace_context` pour obtenir le contexte de la span active. Consultez [cette page][25] pour obtenir les instructions permettant de récupérer ce contexte à chaque exécution.
+Si vous ne passez pas le contexte de trace de vos fonctions Lambda, vous pouvez utiliser le modèle de code suivant à la place des fonctions d'aide `getTraceHeaders` et `get_dd_trace_context` pour obtenir le contexte de span actuel. Les instructions sur la façon de faire cela dans chaque runtime sont décrites [ici][25].
 
 ```js
 const tracer = require("dd-trace");
@@ -244,20 +285,21 @@ exports.handler = async event => {
   // ...
 ```
 
-### Extraire le contexte des traces
+### Extraction du contexte de trace {#extracting-trace-context}
 
-Pour extraire le contexte des traces indiqué ci-dessus à partir de la fonction Lambda du consommateur, vous devez définir une fonction d'extraction qui capture le contexte avant l'exécution de votre gestionnaire de fonctions Lambda. Pour ce faire, pointez la variable d'environnement `DD_TRACE_EXTRACTOR` vers votre fonction d'extraction. Le format `<NOM_FICHIER>.<NOM_FONCTION>` doit être respecté. Par exemple, indiquez `extractors.json` si la fonction d'extraction `json` se trouve dans le fichier `extractors.js`. Datadog vous conseille de rassembler vos méthodes d'extraction au sein d'un unique fichier, afin de pouvoir les réutiliser pour plusieurs fonctions Lambda. Ces fonctions d'extraction peuvent être entièrement personnalisées selon vos besoins.
+Pour extraire le contexte de trace ci-dessus de la fonction Lambda du consommateur, vous devez définir une fonction d'extraction qui capture le contexte de trace avant l'exécution de votre gestionnaire de fonction Lambda. Pour ce faire, configurez la variable d'environnement `DD_TRACE_EXTRACTOR` pour pointer vers l'emplacement de votre fonction d'extraction. Le format pour cela est `<FILE NAME>.<FUNCTION NAME>`. Par exemple, `extractors.json` si l'extracteur `json` se trouve dans le fichier `extractors.js`. Datadog recommande de placer toutes vos méthodes d'extraction dans un seul fichier, car les extracteurs peuvent être réutilisés dans plusieurs fonctions Lambda. Ces extracteurs sont entièrement personnalisables pour s'adapter à tout cas d'utilisation.
 
 **Remarques** :
-- Si vous utilisez TypeScript ou un bundler comme webpack, vous devez `import` ou `require` votre module Node.js à l'emplacement où les fonctions d'extraction sont définies. Ainsi, le module est compilé et groupé au sein de votre package de déploiement Lambda.
-- Si vos fonctions Lambda Node.js s'exécutent sur `arm64`, vous devez [définir la fonction d'extraction dans le code de votre fonction][26] au lieu d'utiliser la variable d'environnement `DD_TRACE_EXTRACTOR`.
+- Si vous utilisez TypeScript ou un bundler comme webpack, vous devez `import` ou `require` votre module Node.js où les extracteurs sont définis. Cela garantit que le module est compilé et inclus dans votre package de déploiement Lambda.
+- Si votre fonction Lambda Node.js s'exécute sur `arm64`, vous devez [définir l'extracteur dans le code de votre fonction][26] au lieu d'utiliser la variable d'environnement `DD_TRACE_EXTRACTOR`.
 
-#### Extraits de fonction d'extraction
+#### Exemples d'extracteurs {#sample-extractors}
 
 Le code suivant comporte des extraits de fonction d'extraction que vous pouvez utiliser pour propager le contexte des traces à l'échelle d'un système tiers ou d'une API ne prenant pas en charge les en-têtes HTTP standard.
 
 {{< tabs >}}
 {{% tab "Python" %}}
+
 ```py
 def extractor(payload):
     trace_headers = json.loads(payload["_datadog"]);
@@ -287,32 +329,33 @@ exports.json = (payload) => {
 ```
 {{% /tab %}}
 {{% tab "Go" %}}
+
 ```go
 var exampleSQSExtractor = func(ctx context.Context, ev json.RawMessage) map[string]string {
-    eh := events.SQSEvent{}
+	eh := events.SQSEvent{}
 
-    headers := map[string]string{}
+	headers := map[string]string{}
 
-    if err := json.Unmarshal(ev, &eh); err != nil {
-        return headers
-    }
+	if err := json.Unmarshal(ev, &eh); err != nil {
+		return headers
+	}
 
-    // Puisque SQS est utilisé comme déclencheur avec batchSize=1, il est important d'effectuer cette vérification,
-  // car un seul message SQS initiera l'exécution du gestionnaire.
-    if len(eh.Records) != 1 {
-        return headers
-    }
+	// Using SQS as a trigger with a batchSize=1 so it's important we check
+  // for this as a single SQS message will drive the execution of the handler.
+	if len(eh.Records) != 1 {
+		return headers
+	}
 
-    record := eh.Records[0]
+	record := eh.Records[0]
 
-    lowercaseHeaders := map[string]string{}
-    for k, v := range record.MessageAttributes {
-        if v.StringValue != nil {
-            lowercaseHeaders[strings.ToLower(k)] = *v.StringValue
-        }
-    }
+	lowercaseHeaders := map[string]string{}
+	for k, v := range record.MessageAttributes {
+		if v.StringValue != nil {
+			lowercaseHeaders[strings.ToLower(k)] = *v.StringValue
+		}
+	}
 
-    return lowercaseHeaders
+	return lowercaseHeaders
 }
 
 cfg := &ddlambda.Config{
@@ -323,11 +366,11 @@ ddlambda.WrapFunction(handler, cfg)
 {{% /tab %}}
 {{< /tabs >}}
 
-## Envoyer des traces à Datadog avec l'intégration X-Ray
+## Envoi de traces à Datadog avec l'intégration X-Ray {#sending-traces-to-datadog-with-the-x-ray-integration}
 
-Si vous effectuez déjà le tracing de votre application sans serveur avec X-Ray, et que vous souhaitez continuer à utiliser ce service, vous pouvez [installer l'intégration AWS X-Ray][2] afin d'envoyer des traces depuis X-Ray vers Datadog.
+Si vous avez une instrumentation X-Ray existante et que vous souhaitez continuer à l'utiliser, [installez l'intégration AWS X-Ray][2] pour envoyer des traces de X-Ray à Datadog. Pour les nouvelles applications sans serveur, Datadog recommande d'instrumenter les fonctions Lambda avec l'[extension Datadog Lambda][35] à la place.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -358,3 +401,11 @@ Si vous effectuez déjà le tracing de votre application sans serveur avec X-Ray
 [25]: /fr/tracing/trace_collection/custom_instrumentation/
 [26]: /fr/serverless/guide/handler_wrapper/
 [27]: /fr/profiler/
+[28]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html
+[29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[30]: https://docs.datadoghq.com/fr/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
+[31]: https://github.com/DataDog/dd-trace-py/
+[32]: https://github.com/DataDog/dd-trace-js/
+[33]: https://github.com/DataDog/datadog-lambda-python
+[34]: https://github.com/DataDog/datadog-lambda-js
+[35]: /fr/serverless/libraries_integrations/extension/

@@ -28,7 +28,7 @@ Before you remove integration overrides:
 | Language   | Minimum supported version |
 |------------|---------------------------|
 | C++        | All versions supported    |
-| Dotnet     | [3.4.0][1]                |
+| .NET       | [3.4.0][1]                |
 | Go         | [1.55.0][2]               |
 | Java       | [1.20.0][3]               |
 | Node.js    | [3.37.0][13]-3.x or [4.16.0][4]               |
@@ -40,7 +40,7 @@ Before you remove integration overrides:
 
 To remove integration overrides in Datadog:
 
-1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
+1. Navigate to {{< ui >}}Catalog{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Manage Remapping Rules{{< /ui >}}][12], and click {{< ui >}}Manage Overrides{{< /ui >}}. 
 
    {{< img src="tracing/guide/base_service/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 
@@ -51,8 +51,8 @@ To remove integration overrides in Datadog:
    {{< img src="tracing/guide/base_service/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
 
 1. Remove overrides individually or in bulk:
-   - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides.
-   - **Remove all overrides**: Select **Finish Migration** to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom overrides are not affected.
+   - {{< ui >}}Select specific overrides to remove{{< /ui >}}: Choose individual integration overrides to remove. A {{< ui >}}Migration Progress{{< /ui >}} bar shows your progress as you remove overrides.
+   - {{< ui >}}Remove all overrides{{< /ui >}}: Select {{< ui >}}Finish Migration{{< /ui >}} to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom overrides are not affected.
   
    Removing overrides is reversible.
 

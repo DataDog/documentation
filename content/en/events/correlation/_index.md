@@ -4,7 +4,7 @@ aliases:
 - /service_management/events/correlation/
 disable_toc: false
 further_reading:
-- link: "service_management/events/"
+- link: "events/"
   tag: "Documentation"
   text: "Event Management"
 - link: "/incident_response/case_management/"

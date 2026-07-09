@@ -37,7 +37,7 @@ The Serverless View groups your resources by the `SERVICE_NAME`. If you have inv
 {{< img src="getting_started/serverless/functions_view_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
 ### Serverless Insights
-In Serverless View, the rightmost column is titled **Insights**. Datadog automatically highlights potential issues in your serverless applications, such as [high errors][8] and [high duration][9]; these issues appear in the Insights column.
+In Serverless View, the rightmost column is titled {{< ui >}}Insights{{< /ui >}}. Datadog automatically highlights potential issues in your serverless applications, such as [high errors][8] and [high duration][9]; these issues appear in the {{< ui >}}Insights{{< /ui >}} column.
 
 For your serverless sample application, Datadog has likely detected a [cold start][10]. Cold starts occur when your serverless application receives a sudden increase in traffic. This can happen if the function was previously receiving a relatively constant number of requests and abruptly started receiving more—or, as in this case, when the function was previously inactive and has been invoked for the first time.
 
@@ -47,7 +47,7 @@ The sample application periodically generates errors and has a slow response. Th
 
 {{< img src="getting_started/serverless/dd_serverless_view_error_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
-Notice that both of the services under the `product-pricing-service` have errors. The Issues & Insights section at the top also identifies that one of your services has issues with timeouts.
+Notice that both of the services under the `product-pricing-service` have errors. The {{< ui >}}Issues & Insights{{< /ui >}} section at the top also identifies that one of your services has issues with timeouts.
 
 {{< img src="getting_started/serverless/insights_and_issues.png" alt="Insights and issues view in serverless view" style="width:80%;">}}
 
@@ -62,19 +62,19 @@ Datadog generates enhanced Lambda metrics out-of-the-box with low latency, sever
 
 
 ### Invocations
-The **Invocations** tab displays your function's latest invocations. 
+The {{< ui >}}Invocations{{< /ui >}} tab displays your function's latest invocations. 
 
-Each invocation is associated with a trace. Click on **Open Trace** to see the trace for each invocation:
+Each invocation is associated with a trace. Click on {{< ui >}}Open Trace{{< /ui >}} to see the trace for each invocation:
 
 {{< img src="getting_started/serverless/dd_flame_graph_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
-The **Flame Graph** tab shows exactly what happened during the duration of this invocation, including which services had the highest percentage of the total execution time. The flame graph displays the request as it travels from APIGateway, through your `create-product-function`. 
+The {{< ui >}}Flame Graph{{< /ui >}} tab shows exactly what happened during the duration of this invocation, including which services had the highest percentage of the total execution time. The flame graph displays the request as it travels from APIGateway, through your `create-product-function`. 
 
 If you zoom out, you will also see the entire end to end trace through all of the downstream services.
 
 {{< img src="getting_started/serverless/trace_map_2.png" alt="Close-up of two functions" style="width:80%;">}}
 
-The **Trace Map** tab visualizes the flow of your services and how they connect to each other.
+The {{< ui >}}Trace Map{{< /ui >}} tab visualizes the flow of your services and how they connect to each other.
 
 If you are viewing a trace with an error, the lower half of the detailed trace view shows the details:
 
@@ -89,7 +89,7 @@ Underneath, you can also examine your Lambda request and response payloads. Data
 
 ### Logs
 
-The serverless sample app has logs enabled by default. You can see each function's logs under its **Logs** tab. 
+The serverless sample app has logs enabled by default. You can see each function's logs under its {{< ui >}}Logs{{< /ui >}} tab. 
 
 {{< img src="getting_started/serverless/dd_logs_view_2.png" alt="Close-up of two functions" style="width:80%;">}}
 

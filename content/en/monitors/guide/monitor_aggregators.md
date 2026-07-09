@@ -34,7 +34,7 @@ $$(\10+15+12+8+11+14+13+25+37+45+50\)/11 = 22$$
 
 ##### Answer
 
-**OK** state, this monitor is not going to alert.
+{{< ui >}}OK{{< /ui >}} state, this monitor is not going to alert.
 
 ## Maximum and above
 
@@ -50,9 +50,9 @@ For monitors configured to alert when *below* the threshold, the behavior is rev
  
 ##### Answer
 
-1. **ALERT** state, the last two values in the past 10 minutes are 45 and 50. This monitor is going to alert.
+1. {{< ui >}}ALERT{{< /ui >}} state, the last two values in the past 10 minutes are 45 and 50. This monitor is going to alert.
 
-2. **OK** state, the threshold is 50 and the last value is not above 50. This monitor is not going to alert.
+2. {{< ui >}}OK{{< /ui >}} state, the threshold is 50 and the last value is not above 50. This monitor is not going to alert.
 
 ## Minimum and above
 
@@ -66,7 +66,7 @@ You want a monitor to alert if the minimum metric value is above 10 at any point
 
 ##### Answer
 
-**OK** state, the value at 3:00 (10) and 3:03 (8) is NOT above 10.
+{{< ui >}}OK{{< /ui >}} state, the value at 3:00 (10) and 3:03 (8) is NOT above 10.
 
 ## Sum
 
@@ -80,7 +80,7 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 ##### Answer
 
-**OK** state, this monitor is not going to alert.
+{{< ui >}}OK{{< /ui >}} state, this monitor is not going to alert.
 
 ## Visualizing aggregators
 

@@ -54,12 +54,12 @@ Datadog Event Management Pipelines を活用すれば、組織はモニタリン
 
 [1]: https://app.datadoghq.com/event/pipelines
 [2]: https://app.datadoghq.com/event/explorer
-[3]: /ja/service_management/events/pipelines_and_processors/arithmetic_processor
-[4]: /ja/service_management/events/pipelines_and_processors/date_remapper
-[5]: /ja/service_management/events/pipelines_and_processors/category_processor
-[6]: /ja/service_management/events/pipelines_and_processors/grok_parser
-[7]: /ja/service_management/events/pipelines_and_processors/lookup_processor
-[8]: /ja/service_management/events/pipelines_and_processors/remapper
-[9]: /ja/service_management/events/pipelines_and_processors/service_remapper
-[10]: /ja/service_management/events/pipelines_and_processors/status_remapper
-[11]: /ja/service_management/events/pipelines_and_processors/string_builder_processor
+[3]: /ja/events/pipelines_and_processors/arithmetic_processor
+[4]: /ja/events/pipelines_and_processors/date_remapper
+[5]: /ja/events/pipelines_and_processors/category_processor
+[6]: /ja/events/pipelines_and_processors/grok_parser
+[7]: /ja/events/pipelines_and_processors/lookup_processor
+[8]: /ja/events/pipelines_and_processors/remapper
+[9]: /ja/events/pipelines_and_processors/service_remapper
+[10]: /ja/events/pipelines_and_processors/status_remapper
+[11]: /ja/events/pipelines_and_processors/string_builder_processor

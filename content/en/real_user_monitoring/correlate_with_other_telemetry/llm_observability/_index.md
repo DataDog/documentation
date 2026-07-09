@@ -1,25 +1,25 @@
 ---
-title: Correlate LLM Observability with RUM
-description: "Connect RUM sessions with LLM Observability to track user interactions with AI agents and understand the complete user journey."
+title: Correlate Agent Observability with RUM
+description: "Connect RUM sessions with Agent Observability to track user interactions with AI agents and understand the complete user journey."
 further_reading:
   - link: "/llm_observability/sdk"
     tag: "Documentation"
-    text: "LLM Observability SDK Reference"
+    text: "Agent Observability SDK Reference"
 algolia:
   tags: ['llmobs', 'ai agents', 'llm']
 ---
 
 ## Overview
-Correlate RUM and LLM Observability sessions to gain more visibility on how your web application interacts with AI Agents. This correlation helps you understand the complete user journey by connecting frontend user interactions with backend AI processing.
+Correlate RUM and Agent Observability sessions to gain more visibility on how your web application interacts with AI Agents. This correlation helps you understand the complete user journey by connecting frontend user interactions with backend AI processing.
 
-The link between RUM and LLM Observability is created by forwarding the RUM Session ID to the LLM Observability SDK.
+The link between RUM and Agent Observability is created by forwarding the RUM Session ID to the Agent Observability SDK.
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 - [RUM Browser SDK][1] installed and configured in your web application
-- [LLM Observability SDK][2] installed in your backend service
-- Datadog account with [RUM][3] and [LLM Observability][4] enabled
+- [Agent Observability SDK][2] installed in your backend service
+- Datadog account with [RUM][3] and [Agent Observability][4] enabled
 - AI Agent endpoint that your web application can call
 
 ## Setup
@@ -59,7 +59,7 @@ Update your web application to include the RUM Session ID in every call to your 
 
 ### Step 3: Update your backend handler
 
-Modify your server-side code to extract the session ID and pass it to the LLM Observability SDK. For detailed LLM Observability setup, see the [LLM Observability Setup Guide][4].
+Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed Agent Observability setup, see the [Agent Observability Setup Guide][4].
 
 ```python
 # Read the session_id from the incoming request
@@ -93,7 +93,7 @@ Use the LLMObs SDK to instrument your agent and tools and tell the LLMObs SDK wh
 
 ### Step 4: Instrument your AI agent
 
-Use the LLM Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [LLM Observability SDK documentation][4].
+Use the Agent Observability SDK to instrument your agent and associate it with the RUM session. For detailed reference, see the [Agent Observability SDK documentation][4].
 ```python
 async def agent_loop(
     session_id,
@@ -106,11 +106,11 @@ async def agent_loop(
     # Rest of your agent code
 ```
 
-## Navigating between RUM and LLM Observability
+## Navigating between RUM and Agent Observability
 After configuration is complete, you can navigate between correlated data:
 
-- **From RUM to LLM**: In a RUM session, click the "LLM Traces" button in the side panel header to view associated AI interactions.
-- **From LLM to RUM**: In an LLM trace, click the "RUM Session" link to view the corresponding user session replay.
+- **From RUM to LLM**: In a RUM session, click the {{< ui >}}LLM Traces{{< /ui >}} button in the side panel header to view associated AI interactions.
+- **From LLM to RUM**: In an LLM trace, click the {{< ui >}}RUM Session{{< /ui >}} link to view the corresponding user session replay.
 
 ## Further reading
 

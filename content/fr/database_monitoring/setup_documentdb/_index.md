@@ -15,4 +15,6 @@ title: Configurer Amazon DocumentDB
 
 Pour obtenir les instructions de configuration, sélectionnez votre type d'hébergement :
 
-{{< partial name="dbm/dbm-setup-documentdb" >}}
+{{< card-grid card_width="300px">}}
+  {{< image-card href="/database_monitoring/setup_documentdb/amazon_documentdb" src="integrations_logos/amazon_documentdb.png" alt="Amazon DocumentDB" title="Amazon DocumentDB" >}}
+{{< /card-grid >}}

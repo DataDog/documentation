@@ -29,23 +29,19 @@
 }
 
 .home-ai-divider {
-    display: none;
+    display: inline;
     color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
     font-weight: 400;
 
-    .conv-search-enabled & {
-        display: inline;
-
-        @media (max-width: 991px) {
-            display: none;
-        }
+    @media (max-width: 991px) {
+        display: none;
     }
 }
 
 .home-ai-btn {
     $home-ai-main: #b325b5;
-    display: none;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
@@ -64,10 +60,6 @@
     flex-shrink: 0;
     white-space: nowrap;
     transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-
-    .conv-search-enabled & {
-        display: inline-flex;
-    }
 
     svg, img {
         flex-shrink: 0;

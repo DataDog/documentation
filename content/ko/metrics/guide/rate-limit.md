@@ -64,7 +64,7 @@ Datadog이 카디널리티 증가를 감지하면 속도 제한이 적용되기 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/account_management/billing/custom_metrics/?tab=countrate#effect-of-adding-tags
-[2]: https://docs.datadoghq.com/ko/service_management/events/
+[2]: https://docs.datadoghq.com/ko/events/
 [3]: https://docs.datadoghq.com/ko/monitors/types/event/
 [4]: https://docs.datadoghq.com/ko/metrics/guide/custom_metrics_governance/
 [5]: https://docs.datadoghq.com/ko/help/

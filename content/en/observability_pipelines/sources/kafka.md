@@ -23,20 +23,24 @@ You can also [send Azure Event Hub logs to Observability Pipelines using the Kaf
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Kafka servers, username, password, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Kafka servers, username, password, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Kafka servers. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your Kafka username. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your Kafka password. If you leave it blank, the [default](#set-secrets) is used.
+{{% observability_pipelines/secrets_env_var_note %}}
+
+After you select the Kafka source in the pipeline UI:
+
+1. Enter the identifier for your Kafka servers. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your Kafka username. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your Kafka password. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the group ID.
-1. Enter the topic name. If there is more than one, click **Add Field** to add additional topics.
+1. Enter the topic name. If there is more than one, click {{< ui >}}Add Field{{< /ui >}} to add additional topics.
 
 ### Optional settings
 
 #### Enable SASL Authentication
 
-1. Toggle the switch to enable **SASL Authentication** 
-1. Select the mechanism (**PLAIN**, **SCHRAM-SHA-256**, or **SCHRAM-SHA-512**) in the dropdown menu.
+1. Toggle the switch to enable {{< ui >}}SASL Authentication{{< /ui >}}
+1. Select the mechanism ({{< ui >}}PLAIN{{< /ui >}}, {{< ui >}}SCHRAM-SHA-256{{< /ui >}}, or {{< ui >}}SCHRAM-SHA-512{{< /ui >}}) in the dropdown menu.
 
 #### Enable TLS
 
@@ -44,13 +48,13 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 #### Add additional librdkafka options
 
-1. Click **Advanced** and then **Add Option**.
+1. Click {{< ui >}}Advanced{{< /ui >}} and then {{< ui >}}Add Option{{< /ui >}}.
 1. Select an option in the dropdown menu.
 1. Enter a value for that option.
 1. Check your values against the [librdkafka documentation][4] to make sure they have the correct type and are within the set range.
-1. Click **Add Option** to add another librdkafka option.
+1. Click {{< ui >}}Add Option{{< /ui >}} to add another librdkafka option.
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

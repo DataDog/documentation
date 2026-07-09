@@ -8,86 +8,85 @@ aliases:
 - /es/account_management/users/default_roles
 - /es/account_management/users/custom_roles
 - /es/account_management/rbac/log_management
-description: Gestiona el acceso de usuarios con permisos basados en roles, roles personalizados
-  y control de acceso exclusivo a dashboards, monitores y otros recursos de Datadog.
+description: Administre el acceso de los usuarios con permisos basados en roles, roles
+  personalizados y control de acceso granular para tableros, monitors y otros recursos
+  de Datadog.
 further_reading:
 - link: /api/v2/roles/
   tag: Documentación
-  text: Gestiona roles y permisos con la API de roles
+  text: Administre roles y permisos con Roles API.
 - link: /api/v2/roles/#list-permissions
   tag: Documentación
-  text: Gestiona tus permisos con la API de Permisos
+  text: Administre sus permisos con Permissions API.
 - link: /account_management/rbac/permissions
   tag: Documentación
-  text: Descubre la lista de permisos disponibles
+  text: Descubra la lista de permisos disponibles.
 - link: /account_management/saml/
   tag: Documentación
-  text: Habilita el inicio único de sesión con SAML
+  text: Habilite el inicio de sesión único con SAML.
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
-  text: Mejora el control, la gestión y la transparencia en todos tus equipos con
-    Datadog Audit Trail
-title: Control de acceso
+  text: Construya cumplimiento, gobernanza y transparencia en sus equipos con Audit
+    Trail de Datadog.
+title: Access Control
 ---
+## Resumen {#overview}
 
-## Información general
+Datadog ofrece un sistema de gestión de acceso flexible que le permite personalizar el nivel en el que controla el acceso a sus recursos de Datadog.
 
-Datadog ofrece un sistema flexible de gestión de accesos que te permite personalizar el nivel en el que controlas el acceso a tus recursos de Datadog.
+Los usuarios que buscan funcionalidad básica tienen acceso a [roles predeterminados](#role-based-access-control) con [permisos][1]. Para mayor flexibilidad, cree sus propios [roles personalizados](#custom-roles) para combinar permisos en nuevos roles. Los permisos adjuntos a un rol personalizado se aplican a todos los recursos de un tipo de recurso particular.
 
-Los usuarios que buscan una funcionalidad básica tienen acceso a [roles](#role-based-access-control) OOTB con [permissions (permisos)][1]. Para una mayor flexibilidad, crea tus propios [custom roles (roles personalizados)](#custom-roles) para combinar permisos en nuevos roles. Los permisos asociados a un rol personalizado se aplican a todos los recursos de un tipo de recurso concreto.
+Las organizaciones y los usuarios que necesitan máxima flexibilidad pueden controlar el acceso a tableros individuales, notebooks y otros recursos con [control de acceso granular][2].
 
-Las organizaciones y los usuarios que necesitan la máxima flexibilidad pueden controlar el acceso a dashboards, notebooks y otros recursos individuales con [granular access control (control de acceso granular)][2].
+## Control de acceso basado en roles {#role-based-access-control}
 
-## Control de acceso basado en roles
+Los roles categorizan a los usuarios y definen qué permisos de cuenta tienen esos usuarios, como qué datos pueden leer o qué activos de la cuenta pueden modificar. Por defecto, Datadog ofrece tres roles, y cree [roles personalizados](#custom-roles) para definir una mejor asignación entre sus usuarios y sus permisos.
 
-Los roles agrupan a los usuarios por categorías y definen qué permisos de cuenta tienen esos usuarios, tales como qué datos pueden leer o qué datos de cuenta pueden modificar. De forma predeterminada, Datadog ofrece tres roles y tú puedes crear [custom roles 
-(roles personalizados)](#custom-roles) para que puedas definir un mejor ajuste entre tus usuarios y sus permisos.
+Al otorgar permisos a roles, cualquier usuario asociado con ese rol recibe ese permiso. Cuando los usuarios están asociados con múltiples roles, reciben todos los permisos otorgados a cada uno de sus roles. Cuantos más roles tenga un usuario, mayor acceso tendrá dentro de una cuenta de Datadog.
 
-Al conceder permisos a los roles, cualquier usuario que esté asociado a ese rol recibe ese permiso. Cuando los usuarios tienen asociados múltiples roles, reciben todos los permisos otorgados a cada uno de sus roles. Cuantos más roles tenga asociados un usuario, más acceso tendrá dentro de una cuenta Datadog.
+Si un usuario en una [organización hija][3] tiene `org_management` permiso, no significa que tenga el mismo permiso en la organización principal. Los roles de los usuarios no se comparten entre organizaciones principales e hijas.
 
-Si un usuario en una [child organization (organización secundaria)][3] tiene permiso `org_management`, no significa que tenga el mismo permiso en la organización principal. Los roles de los usuarios no se comparten entre las organizaciones principales y secundarias.
+**Nota**: Si utiliza un proveedor de identidad SAML, puede integrarlo con Datadog para autenticación, y puede mapear atributos de identidad a los roles predeterminados y personalizados de Datadog. Para más información, consulte [mapeo de grupos SAML][4].
 
-**Nota**: Si utilizas un proveedor de identidad SAML, puedes integrarlo con Datadog para la autenticación, y puedes asignar atributos de identidad a los roles predeterminados y personalizados de Datadog. Para obtener más información, consulta [SAML group mapping (asignación de grupos SAML)][4].
+## Roles predeterminados de Datadog {#datadog-default-roles}
 
-## Roles predeterminados de Datadog
+Rol de Administrador de Datadog
+: Los usuarios tienen acceso a la información de facturación y la capacidad de revocar claves de API. Pueden gestionar usuarios y configurar [tableros de solo lectura][5]. También pueden promover a usuarios estándar a administradores.
 
-Función de administrador Datadog
-: Los usuarios tienen acceso a la información de facturación y la capacidad de revocar claves API. Pueden gestionar usuarios y configurar [read-only dashboards (dashboards de solo lectura)][5]. También pueden promover usuarios estándar a administradores.
+Rol Estándar de Datadog
+: Se permite a los usuarios ver y modificar todas las características de seguimiento que ofrece Datadog, como [tableros][5], [seguimiento][6], [eventos][7] y [notebooks][11]. Los usuarios estándar también pueden invitar a otros usuarios a organizaciones.
 
-Rol estándar de Datadog
-: Los usuarios pueden ver y modificar todas las funciones de monitorización que ofrece Datadog, como [dashboards][5], [monitores][6], [eventos][7] y [notebooks][11]. Los usuarios estándar también pueden invitar a otros usuarios a las organizaciones.
+Rol de Solo Lectura de Datadog
+: Los usuarios no tienen acceso a editar dentro de Datadog. Esto es útil cuando desea compartir vistas específicas de solo lectura con un cliente, o cuando un miembro de una unidad de negocio necesita compartir un [tablero][5] con alguien fuera de su unidad.
 
-Función de solo lectura Datadog
-: Los usuarios no tienen acceso para editar dentro de Datadog. Esto resulta útil cuando se desea compartir vistas específicas de solo lectura con un cliente, o cuando un miembro de una unidad de negocio necesita compartir un [dashboard][5] con alguien fuera de su unidad.
+## Roles personalizados {#custom-roles}
 
-## Roles personalizados
+La función de roles personalizados le da a su organización la capacidad de crear nuevos roles con conjuntos de permisos únicos. Gestione sus roles personalizados a través del sitio de Datadog, [Datadog Role API][8] o SAML directamente. Descubra a continuación cómo crear, actualizar o eliminar un rol. Consulte [Datadog Role Permissions][1] para obtener más información sobre los permisos disponibles. Solo los usuarios con el permiso User Access Manage pueden crear o editar roles en Datadog.
 
-La función de roles personalizados ofrece a tu organización la posibilidad de crear nuevos roles con conjuntos de permisos únicos. Gestiona tus roles personalizados a través del sitio Datadog, la [Datadog Role API (API de rol Datadog)][8] o SAML directamente. Descubre a continuación cómo crear, actualizar o eliminar un rol. Consulta [Datadog Role Permissions (permisos de rol Datadog)][1] para obtener más información sobre los permisos disponibles. Solo los usuarios con el permiso Gestionar acceso de usuario pueden crear o editar roles en Datadog.
+### Habilite roles personalizados {#enable-custom-roles}
 
-### Habilitar roles personalizados
+1. Navegue a [Organization Settings][9].
+2. En el lado izquierdo de la página, seleccione {{< ui >}}Roles{{< /ui >}}.
+3. Haga clic en el engranaje en la esquina superior derecha. Aparece el cuadro emergente de Roles Personalizados.
+4. En el cuadro emergente de Roles Personalizados, haga clic en {{< ui >}}Enable{{< /ui >}}.
 
-1. Ve a [Parámetros de organización][9].
-2. En el lado izquierdo de la página, selecciona **Roles**.
-3. Haz clic en el engranaje de la esquina superior derecha. Aparecerá la ventana emergente de Roles personalizados.
-4. En la ventana emergente de Roles personalizados, haz clic en **Enable** (Activar).
+{{< img src="account_management/rbac/enable_custom_roles.png" alt="Cuadro emergente de Roles Personalizados con botón Habilitar" style="width:90%;">}}
 
-{{< img src="account_management/rbac/enable_custom_roles.png" alt="Ventana emergente de Roles personalizados con el botón Activar" style="width:90%;">}}
+Alternativamente, hacer una llamada POST al [Create Role API endpoint][10] habilita automáticamente los roles personalizados para su organización.
 
-Como alternativa, al realizar una invocación POST a [Create Role API endpoint (crear endpoint  de rol de API)][10] se habilitan automáticamente los roles personalizados para tu organización.
-
-### Crear un rol personalizado
+### Cree un rol personalizado {#create-a-custom-role}
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "Aplicación de Datadog" %}}
 
 Para crear un rol personalizado:
 
-1. Ve a tu [Datadog Roles page (página de roles de Datadog)][1].
-2. Selecciona **New Role** (Nuevo rol) en la esquina superior derecha de la página.
-3. Dale un nombre a tu rol.
-4. Asigna un conjunto de permisos a tu rol. Para obtener más información sobre los permisos disponibles, consulta [Datadog Role Permissions (permisos de rol de Datadog)][2].
+1. Vaya a su [Datadog Roles page][1].
+2. Seleccione {{< ui >}}New Role{{< /ui >}} en la esquina superior derecha de la página.
+3. Asigne un nombre a su rol.
+4. Asigne un conjunto de permisos a su rol. Consulte [Datadog Role Permissions][2] para obtener más información sobre los permisos disponibles.
 
-Una vez que has creado un rol puedes [add the role to existing users (añadir el rol a los usuarios existentes)][3].
+Una vez que se crea un rol, puede [agregar el rol a usuarios existentes][3].
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -96,27 +95,27 @@ Una vez que has creado un rol puedes [add the role to existing users (añadir el
 {{% /tab %}}
 {{% tab "API" %}}
 
-Encontrarás un ejemplo de cómo crear un rol en la [Create Role API Reference (referencia de API de creación de roles de la API)][1].
+Encuentre un ejemplo de cómo crear un rol en [Create Role API Reference][1].
 
 
 [1]: /es/api/latest/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### Actualizar un rol
+### Actualice un rol {#update-a-role}
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "Aplicación de Datadog" %}}
 
 Para editar un rol personalizado:
 
-1. Ve a tu [Datadog Roles page (página de roles de Datadog)][1].
-2. Selecciona el botón editar en el rol que te gustaría modificar.
-3. Modifica el conjunto de permisos para tu rol. Para obtener más información sobre los permisos disponibles, consulta [Role Permissions (permisos de rol)][2].
-4. Guarda los cambios.
+1. Vaya a su [Datadog Roles page][1].
+2. Seleccione el botón de editar en el rol que le gustaría modificar.
+3. Modifique el conjunto de permisos para su rol. Consulte [Role Permissions][2] para obtener más información sobre los permisos disponibles.
+4. Guarde sus cambios.
 
 
-Una vez que un rol se ha modificado, los permisos se actualizan para todos los usuarios con ese rol.
+Una vez que un rol es modificado, los permisos se actualizan para todos los usuarios con el rol.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -124,80 +123,80 @@ Una vez que un rol se ha modificado, los permisos se actualizan para todos los u
 {{% /tab %}}
 {{% tab "API" %}}
 
-Encontrarás un ejemplo de cómo actualizar un rol en [Update Role API Reference (referencia de actualización de roles de la API)][1].
+Encuentre un ejemplo de cómo actualizar un rol en [Update Role API Reference][1].
 
 
 [1]: /es/api/latest/roles/#update-a-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### Clonar un rol
+### Clone un rol {#clone-a-role}
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "Aplicación de Datadog" %}}
 
-Para clonar un rol que ya existe:
+Para clonar un rol existente:
 
-1. Ve a tu [Datadog Roles page (página de roles de Datadog)][1].
-2. Pasa el cursor sobre el rol que deseas clonar. Aparecerán una serie de botones a la derecha.
-3. Selecciona el botón clonar en el rol que quieras clonar.
-4. Si lo deseas, puedes modificar el nombre o los permisos del rol.
-5. Haz clic en el botón **Save** (Guardar) en la parte inferior.
+1. Vaya a su [Datadog Roles page][1].
+2. Pase el cursor sobre el rol que le gustaría clonar. Aparece una serie de botones a la derecha.
+3. Seleccione el botón de clonar en el rol que le gustaría clonar.
+4. Opcionalmente, modifique el nombre o los permisos del rol.
+5. Haga clic en el botón {{< ui >}}Save{{< /ui >}} en la parte inferior.
 
-{{< img src="account_management/rbac/clone_role.png" alt="Lista de dos roles con el botón Clonar resaltado" style="width:90%;">}}
+{{< img src="account_management/rbac/clone_role.png" alt="Lista de dos roles con el botón de Clonar destacado." style="width:90%;">}}
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-Encontrarás un ejemplo de cómo clonar un rol en la [Cloning A Role API reference (referencia de la clonación de un rol de API)][1].
+Encuentre un ejemplo de cómo clonar un rol en [Cloning A Role API Reference][1].
 
 [1]: /es/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eliminar un rol
+### Elimine un rol {#delete-a-role}
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "Aplicación de Datadog" %}}
 
 Para eliminar un rol personalizado:
 
-1. Ve a tu [Datadog Roles page (página de roles de Datadog)][1].
-2. Pasa el cursor sobre el rol que deseas eliminar. Aparecerán una serie de botones a la derecha.
-3. Selecciona el botón eliminar en el rol que quieras borrar.
+1. Ve a tu [página de Roles de Datadog][1].
+2. Pasa el cursor sobre el rol que deseas eliminar. Aparece una serie de botones a la derecha.
+3. Selecciona el botón de eliminar en el rol que deseas eliminar.
 4. Confirma tu decisión.
 
 
-Una vez que se elimina un rol, los permisos se actualizan para todos los usuarios con ese rol. Los usuarios sin ningún rol no pueden utilizar Datadog de forma efectiva, pero siguen manteniendo un acceso limitado.
+Una vez que se elimina un rol, los permisos se actualizan para todos los usuarios con el rol. Los usuarios sin roles no pueden usar Datadog de manera efectiva, pero aún mantienen acceso limitado.
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-Encontrarás un ejemplo de cómo eliminar un rol en la [Delete Role API reference (referencia de eliminar un rol de API)][1].
+Encuentre un ejemplo de cómo eliminar un rol en [Delete Role API Reference][1].
 
 
 [1]: /es/api/latest/roles/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### Aplicar una plantilla de roles
+### Aplique una plantilla de rol {#apply-a-role-template}
 
-Al crear o actualizar un rol en el sitio Datadog, utiliza una plantilla de roles para aplicar un conjunto predeterminado de permisos al rol.
+Al crear o actualizar un rol en el sitio de Datadog, use un Datadog role template para aplicar un conjunto prescrito de permisos al rol.
 
-1. En la página Nuevo rol o Editar rol, haz clic en el botón de la derecha **Show Role Templates** (Mostrar plantillas de roles).
-2. Aparecerá un menú desplegable con plantillas de roles.
-3. Selecciona en el menú la plantilla de rol cuyos permisos deseas aplicar a tu rol.
-4. Haz clic en el botón **Apply** (Aplicar).
-4. Si lo deseas, puedes realizar cambios adicionales en tu rol.
-5. Pulsa el botón **Save** (Guardar).
+1. En la página New Role o Edit Role, haga clic en el botón {{< ui >}}Show Role Templates{{< /ui >}} a la derecha.
+2. Aparece un menú desplegable poblado con plantillas de rol.
+3. Del menú, seleccione el Datadog role template cuyos permisos desea aplicar a su rol.
+4. Haga clic en el botón {{< ui >}}Apply{{< /ui >}}.
+4. Opcionalmente, realice cambios adicionales en su rol.
+5. Haga clic en el botón {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="account_management/rbac/role_templates.png" alt="Menú desplegable de plantillas de rol con el rol de administrador de facturación de Datadog seleccionado" style="width:90%;">}}
+{{< img src="account_management/rbac/role_templates.png" alt="Menú desplegable de Plantillas de Rol con Datadog Billing Admin Role seleccionado." style="width:90%;">}}
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

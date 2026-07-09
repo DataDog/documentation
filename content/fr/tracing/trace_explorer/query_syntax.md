@@ -1,5 +1,6 @@
 ---
 aliases:
+- /fr/tracing/search_syntax/
 - /fr/tracing/trace_search_analytics/
 - /fr/tracing/trace_search/
 - /fr/tracing/search
@@ -15,17 +16,21 @@ aliases:
 - /fr/tracing/trace_search_and_analytics/analytics/
 - /fr/tracing/app_analytics/analytics
 - /fr/tracing/trace_search_and_analytics/query_syntax
-description: Recherche globale sur toutes vos traces avec des tags
+- /fr/tracing/trace_explorer/trace_groups
+description: Recherche globale de toutes vos traces avec des tags
 further_reading:
+- link: /getting_started/search/
+  tag: Documentation
+  text: Commencer avec la recherche dans Datadog
 - link: /tracing/trace_collection/
   tag: Documentation
-  text: Configurer le tracing d'APM avec votre application
+  text: Découvrir comment configurer le tracing d'APM avec votre application
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Comprendre comment lire une trace Datadog
-- link: /tracing/services/services_list/
+- link: /tracing/software_catalog/
   tag: Documentation
-  text: Découvrir la liste des services transmettant des données à Datadog
+  text: Découvrez et recensez les services qui rapportent à Datadog
 - link: /tracing/services/service_page/
   tag: Documentation
   text: En savoir plus sur les services dans Datadog
@@ -34,265 +39,308 @@ further_reading:
   text: Plonger au cœur des traces et des performances de vos ressources
 title: Syntaxe de requête
 ---
-
-## Barre de recherche
+## Requête de recherche {#search-query}
 
 Tous les paramètres de recherche sont contenus dans l'URL de la page, ce qui permet de partager facilement votre vue.
 
-### Syntaxe de recherche
+### Syntaxe de recherche {#search-syntax}
 
-Une requête est composée de *termes* et d'*opérateurs*.
+Une requête est composée de *termes* et *opérateurs*.
 
 Il existe deux types de *termes* :
 
-* Les [**facettes**](#recherche-de-facettes)
-
-* Les [**tags**](#recherche-de-tags)
-
-Pour combiner plusieurs *termes* dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
+* **Attribut de span** : Contenu du span, collecté avec une instrumentation automatique ou manuelle dans l'application.
+* **Tag de span** : Enrichissements de contexte liés au span. Par exemple, des tags d'hôte ou de conteneur décrivant l'infrastructure sur laquelle le service fonctionne.
+  
+Pour combiner plusieurs *termes* en une requête complexe, utilisez l'un des opérateurs booléens suivants :
 
 | **Opérateur** | **Description**                                                                                        | **Exemple**                  |
 |:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
-| `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut). | authentication AND failure   |
-| `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                            | authentication OR password   |
-| `-`          | **Exclusion** : le terme suivant ne figure PAS dans les événements sélectionnés.                                                  | authentication AND -password |
+| `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si rien n'est ajouté, AND est utilisé par défaut) | authentication AND failure |
+| `OR`         | **Union** : l'un ou l'autre des termes figure dans les événements sélectionnés | authentication OR password |
+| `-`          | **Exclusion** : le terme suivant n'est PAS dans l'événement | authentication AND -password |
 
-### Recherche de facettes
+### Recherche d'attribut {#attribute-search}
 
-Pour effectuer une recherche en fonction d'une [facette](#facettes) spécifique, vous devez d'abord [l'ajouter comme facette](#creer-une-facette) puis utiliser `@` pour spécifier que vous faites une recherche à partir d'une facette.
+Pour rechercher un attribut de span, vous devez ajouter `@` au début de la clé de l'attribut.
 
-Par exemple, si le nom de votre facette est **url** et que vous souhaitez filtrer en fonction de la valeur *www.datadoghq.com*, il vous suffit de saisir :
+Par exemple, si vous voulez accéder à une span avec l'attribut ci-dessous, vous pouvez utiliser :
 
-`@url:www.datadoghq.com`
+`@git.commit.sha:12345`
 
-### Recherche de tags
+```json
+  "git": {
+    "commit": {
+      "sha": "12345"
+    },
+    "repository": {
+      "id": "github.com/datadog/datadog"
+    }
+  }
+```
 
-Vos traces héritent des tags des hosts et des [intégrations][1] qui les génèrent. Elles peuvent être utilisées dans une recherche ainsi que sous la forme de facettes :
+Les attributs de span sont visibles dans l'onglet **Aperçu** du panneau latéral de trace.
 
-| Requête                                                          | Résultat                                                                       |
-|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | Toutes les traces avec le tag `#env:prod` ou le tag `#test`                      |
-| `(service:srvA OR service:srvB)` ou `(service:(srvA OR srvB))` | Toutes les traces qui contiennent les tags `#service:srvA` ou `#service:srvB`            |
-| `("env:prod" AND -"version:beta")`                             | Toutes les traces qui contiennent `#env:prod` et qui ne contiennent pas `#version:beta` |
+**Remarque :** Vous n'avez pas besoin d'utiliser `@` sur les [attributs réservés][17] : `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
-Si vos tags ne respectent pas les [recommandations relatives aux tags][2] et n'utilisent pas la syntaxe `key:value`, utilisez cette requête de recherche :
+### Recherche de tags {#tags-search}
 
-* `tags:<MON_TAG>`
+Vos spans héritent des tags des hosts et des intégrations qui les génèrent.
 
-### Wildcards
+Exemple :
 
-Afin d'effectuer une recherche avec un wildcard pour plusieurs caractères, utilisez le symbole `*` comme illustré ci-dessous :
+| Requête                                                        | Correspondance                                                                                             |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| `(hostname:web-server OR env:prod)`                          | Toutes les traces avec la balise d'infrastructure `hostname:web-server` ou l'attribut réservé `env:prod` |
+| `(availability-zone:us-east OR container_name:api-frontend)` | Toutes les traces avec l'une de ces balises d'infrastructure |
+| `(service:api AND -kube_deployment:canary)`                  | Toutes les traces du service `api` qui ne sont pas déployées sur le déploiement `canary` |
 
-* `service:web*` renvoie toutes les traces dont le service commence par `web`.
-* `@url:data*` renvoie toutes les traces dont le tag `url` commence par `data`.
+Les balises de span sont visibles dans l'onglet **Infrastructure** du panneau latéral de trace.
 
-### Valeurs numériques
+#### Formats de balises non standards {#non-standard-tag-formats}
 
-Utilisez les caractères `<`, `>`, `<=` ou `>=` pour effectuer une recherche avec des attributs numériques. Par exemple, pour récupérer toutes les traces avec un délai de réponse supérieur à 100 ms :
+Si vos balises ne respectent pas [les meilleures pratiques des balises][2], alors n'utilisez pas la syntaxe `key:value`. Utilisez plutôt la requête de recherche suivante :
+
+`tags:<MY_TAG>`
+
+Par exemple, cette balise ne suit pas les meilleures pratiques :  
+`auto-discovery.cluster-autoscaler.k8s.io/daffy`
+
+Pour rechercher cette balise, utilisez la requête suivante :  
+`tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
+
+### Wildcards{#wildcards}
+
+Pour effectuer une recherche avec un wildcard multi-caractères, utilisez le symbole `*` comme suit :
+
+* `service:web*` correspond à chaque trace ayant un service commençant par `web`
+* `@url:data*` correspond à chaque trace ayant un `url` commençant par `data`.
+
+### Valeurs numériques {#numerical-values}
+
+Utilisez `<`, `>`, `<=` ou `>=` pour effectuer une recherche sur des attributs numériques. Par exemple, récupérez toutes les traces ayant un temps de réponse supérieur à 100 ms avec :
 
 `@http.response_time:>100`
 
-Vous pouvez également effectuer une recherche d'attribut numérique dans une plage spécifique. Par exemple, pour récupérer toutes les erreurs 4xx :
+Il est également possible de rechercher des attributs numériques dans une plage spécifique. Par exemple, récupérez toutes vos erreurs 4xx avec :
 
 `@http.status_code:[400 TO 499]`
 
-### Saisie automatique
+### Autocomplétion {#autocomplete}
 
-La saisie de requête complexe peut être fastidieuse. Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
+Taper une requête complexe peut être fastidieux. Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter votre requête en utilisant des valeurs existantes :
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="Saisie automatique dans la barre de recherche" style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="auto-complétion de la barre de recherche " style="width:60%;">}}
 
-### Échappement de caractères spéciaux
+### Échappement des caractères spéciaux {#escaping-of-special-characters}
 
-Les attributs suivants sont considérés comme spéciaux : `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, et `\`. Ils requièrent par conséquent le caractère d'échappement `\`.
-Par exemple, pour rechercher les traces qui contiennent `user=AliceMartin` dans leur `url`, saisissez la recherche suivante :
+Les attributs suivants sont considérés comme spéciaux : `?`, `>`, `<`, `:`, `=`, `"`, `~`, `/` et `\` nécessitent un échappement.
+Par exemple, pour rechercher des traces contenant `user=JaneDoe` dans leur `url`, la recherche suivante doit être saisie :
 
-`@url:*user\=AliceMartin*`
+`@url:*user\=JaneDoe*`
 
-La même logique s'applique aux espaces dans les attributs de trace. Les attributs de trace ne sont pas supposés contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées du caractère d'échappement. 
-Si un attribut est appelé `user.first name`, effectuez une recherche sur cet attribut en ajoutant un caractère d'échappement devant l'espace :
+La même logique doit être appliquée aux espaces dans les attributs de trace. Il n'est pas recommandé d'avoir des espaces dans les attributs de trace, mais dans de tels cas, les espaces nécessitent un échappement.
+Si un attribut s'appelle `user.first name`, effectuez une recherche sur cet attribut en échappant l'espace :
 
-`@user.first\ name:mavaleur`
+`@user.first\ name:myvalue`
 
-### Recherches enregistrées
+### Recherches enregistrées {#saved-searches}
 
-Ne perdez pas de temps à créer les mêmes vues tous les jours. Les recherches enregistrées contiennent votre requête de recherche, les colonnes et l'horizon temporel. Pour retrouver une recherche enregistrée, saisissez son nom ou sa requête dans la barre de recherche et utilisez la saisie automatique.
+Ne perdez pas de temps à construire les mêmes vues chaque jour. Les recherches enregistrées contiennent votre requête de recherche, les colonnes et l'horizon temporel. Elles sont ensuite disponibles dans la barre de recherche grâce à l'auto-complétion qui correspond soit au nom de la recherche, soit à la requête.
 
 {{< img src="tracing/app_analytics/search/saved_search.png" alt="Recherche enregistrée" style="width:80%;">}}
 
-Pour supprimer une recherche enregistrée, cliquez sur l'icône en forme de corbeille sous le menu déroulant de recherche de traces.
+Pour supprimer une recherche enregistrée, cliquez sur l'icône en forme de corbeille sous le menu déroulant de la recherche de traces.
 
-## Intervalle
+### Rechercher des services et des entités {#search-for-services-and-entities}
 
-L'intervalle vous permet d'afficher les traces correspondant à une période donnée. Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante. Vous pouvez également [saisir un intervalle personnalisé][3] :
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+Pour rechercher un service, utilisez l'attribut `service`. Pour rechercher un autre [type d'entité][20] (par exemple, une base de données, une file d'attente ou un fournisseur tiers), reposez-vous sur d'autres [attributs pairs][21] que Datadog utilise pour décrire les dépendances qui ne sont pas instrumentées avec APM. Par exemple, pour trouver des spans représentant des appels à une table `users` d'une base de données postgres, utilisez la requête suivante : `@peer.db.name:users @peer.db.system:postgres`
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Sélectionner un intervalle" >}}
+**Remarque** : Le tag `service` du span représente le service **émettant** le span si vous avez migré vers la [nomenclature de service globale][22] en définissant `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
 
-## Flux de traces
+[20]: /fr/tracing/services/inferred_services
+[21]: /fr/tracing/services/inferred_services#peer-tags
+[22]: /fr/tracing/services/inferred_services#migrate-to-global-default-service-naming
+{{< /site-region >}}
 
-Le flux de traces regroupe la liste des traces qui correspondent au contexte sélectionné. Un contexte est défini par un filtre dans la [barre de recherche](#barre-de-recherche) et un [intervalle](#intervalle).
+## Plage horaire {#time-range}
 
-### Afficher une trace complète
+La plage horaire vous permet d'afficher des traces dans une période donnée. Changez rapidement la plage horaire en sélectionnant une plage prédéfinie dans le menu déroulant (ou [en saisissant une plage horaire personnalisée][3]) :
 
-Cliquez sur une trace pour l'examiner plus en détail :
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Sélectionner la période" >}}
+
+## Table des spans {#span-table}
+
+Le tableau des spans est la liste des spans qui correspondent au contexte sélectionné. Un contexte est défini par un filtre de [barre de recherche](#search-bar) et une [plage horaire](#time-range).
+
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
+### La colonne de service {#the-service-column}
+
+Par défaut, la colonne de service affiche l'attribut `service` réservé du span.
+
+{{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="Colonne de service du tableau des spans" >}}
+
+Lorsque la span représente un appel client depuis un service instrumenté vers un service déduit, la colonne service affiche :
+- le **service**, identifié par l'attribut `service` réservé.
+- le **[service inféré][4]** : nom de l'entité inférée appelée par le service de base, identifiée par l'un des [attributs pairs][5]
+
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Colonne de service du tableau des spans avec service inféré" >}}
+
+Lorsque le nom de service est une substitution du nom du service de base, la colonne service affiche :
+- le **[service de base][2]** : service à partir duquel le span est émis, identifié par l'attribut `@base_service`.
+- le **[service override][3]** : nom du service, différent du nom du service de base, défini automatiquement dans les intégrations Datadog ou modifié via l'API programmatique. Le service override est identifié par l'attribut `service` réservé.
+
+{{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="Colonne de service du tableau des spans avec service override" >}}
+
+[2]: /fr/tracing/guide/service_overrides#base-service
+[3]: /fr/tracing/guide/service_overrides
+[4]: /fr/tracing/services/inferred_services
+[5]: /fr/tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
+
+### Affichage d'une trace complète {#displaying-a-full-trace}
+
+Cliquez sur une span pour afficher les détails de la trace associée :
 
 {{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace dans le flux de traces" style="width:80%;">}}
 
-### Colonnes
+### Colonnes {#columns}
 
-Pour ajouter plus d'informations de tracing à la liste, cliquez sur le bouton **Options** et sélectionnez les facettes que vous souhaitez visualiser :
+Pour ajouter d'autres [span tags ou attributs][23] en tant que colonnes à la liste, cliquez sur le bouton **Options** et sélectionnez la dimension que vous souhaitez ajouter :
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Liste de traces avec colonnes" style="width:80%;">}}
 
-### Affichage multiligne
+### Groupes de traces {#trace-groups}
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Affichage multiligne"  style="width:30%;">}}
+Regroupez la requête par toute balise ou attribut span pour observer les comptes de requêtes, les taux d'erreur et les distributions de latence dans la vue de liste. Vous pouvez sélectionner jusqu'à quatre dimensions dans la clause **Grouper par**.
 
-Choisissez d'afficher une, trois ou dix lignes à partir de vos traces. L'affichage de trois et dix lignes vous offre davantage d'informations sur l'attribut `error.stack`.
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Clause de regroupement" style="width:90%;" >}}
 
-* Avec une ligne affichée :
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="Affichage multiligne avec 1 ligne"  style="width:80%;">}}
+#### Requêtes 'Grouper par' avancées {#advanced-group-by-queries}
 
-* Avec trois lignes affichées :
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="Affichage multiligne avec 3 lignes"  style="width:80%;">}}
+Après avoir sélectionné une dimension à regrouper, vous pouvez spécifier d'où obtenir les valeurs de la dimension en utilisant le menu déroulant **de** : 
+- **Span** : Regroupez par la dimension du span interrogé (par défaut). Par exemple, `a`.
+- **Parent du span** : Regroupez par la dimension spécifiée du span parent des spans correspondant à la requête. Par exemple, pour visualiser comment un point de terminaison API fonctionne en fonction du service qui l'appelle, regroupez par `service` de `parent(a)`.
+- **Span racine** : Regroupez par la dimension spécifiée du span racine de la trace. Par exemple, pour analyser les modèles de requêtes backend en fonction des pages frontend d'où proviennent les requêtes, regroupez par `@view.name` de `root`.
 
-* Avec dix lignes affichées :
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="Affichage multiligne avec 10 lignes" style="width:80%;">}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Regroupez par depuis la racine" style="width:90%;" >}}
 
-## Facettes
+#### Voir les groupes de traces dans la liste des groupes {#view-trace-groups-in-the-group-list}
 
-Une facette présente toutes les valeurs distinctes d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme la quantité de traces représentées. Son activation permet également de filtrer vos données.
+Les groupes de traces sont affichés comme des valeurs uniques de la dimension sélectionnée. Chaque groupe est présenté avec trois indicateurs clés :
+- **REQUÊTES** : Nombre de spans au sein du groupe.
+- **ERREURS** : Taux d'erreur et nombre d'erreurs.
+- **P95 Latency** : Latence P95 des spans.
 
-Les facettes vous permettent de faire pivoter ou de filtrer vos ensembles de données en fonction d'un attribut donné. Les facettes peuvent correspondre à des utilisateurs, des services, etc.
+Pour voir ces indicateurs agrégés sur le span parent ou racine au lieu du span interrogé, sélectionnez `parent(a)` ou `root` dans l'instruction **Afficher les indicateurs de**.
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Démonstration facettes" style="width:80%;">}}
+De plus, le `Latency Breakdown` montre comment le temps est réparti entre différents services au sein des requêtes de chaque groupe, vous permettant de repérer visuellement les goulets d'étranglement de latence pour les groupes donnés.
 
-### Facettes quantitatives (mesures)
+{{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="Liste des groupes" style="width:90%;" >}}
 
-**Les mesures vous permettent d'accomplir les tâches suivantes :**
-* Agréger des valeurs à partir de plusieurs traces. Vous pouvez par exemple créer une mesure sur le nombre de lignes dans Cassandra et visualiser le 95e centile ou les principaux référents selon la somme des tailles de fichiers demandée.
-* Calculer les services avec la plus forte latence pour les paniers dépassant 1 000 €.
-* Filtrer des valeurs continues, par exemple la taille en octets de chaque bloc de charge utile d'un flux vidéo.
+Pour une analyse plus approfondie, cliquez sur n'importe quel groupe pour examiner les événements individuels qui composent les métriques agrégées.
+
+## Facettes {#facets}
+
+Une facette affiche toutes les valeurs distinctes d'un attribut ou d'une étiquette et fournit des analyses de base telles que le nombre de traces représentées. Ce commutateur permet également de filtrer vos données.
+
+Les facettes vous permettent de pivoter ou de filtrer vos ensembles de données en fonction d'un attribut donné. Des exemples de facettes incluent des utilisateurs, des services, etc...
+
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Démonstration des facettes" style="width:80%;">}}
+
+### Mesures {#measures}
+
+Les mesures sont un type spécifique de facettes destiné aux valeurs quantitatives.
+
+Les mesures vous permettent d'accomplir les tâches suivantes :
+* Valeurs agrégées provenant de plusieurs traces. Par exemple, créez une mesure sur le nombre de lignes dans Cassandra et visualisez le P95 ou les référents les plus importants par somme de taille de fichier demandée.
+* Calculez numériquement les services ayant la latence la plus élevée pour les valeurs de panier d'achat supérieures à 1000 $.
+* Filtrer les valeurs continues. Par exemple, la taille en octets de chaque segment de charge utile d'un flux vidéo.
 
 **Types**
 
-Les mesures disposent d'un nombre entier (long) ou d'une double valeur. Ces deux types de valeurs proposent des fonctionnalités équivalentes.
+Les mesures disposent d'un entier (long) ou d'une double valeur. Ces deux types proposent des fonctionnalités équivalentes.
 
 **Unités**
 
-Les mesures ont une unité (le temps est exprimé en secondes ou les tailles en octets) afin de gérer les ordres de grandeur au moment de la requête et de l'affichage. L'unité est une propriété de la mesure, et non du champ. Prenons l'exemple d'une mesure « duration » exprimée en nanosecondes. Vous disposez de tags de span du service `service:A`, pour lesquels `duration:1000` désigne la durée `1000 milliseconds`, et d'autres tags de span du service `service:B`, pour lesquels `duration:500` désigne la durée de `500 microseconds` :
-Grâce au processeur arithmétique, vous pouvez faire en sorte que les durées de tous vos tags de span transmis soient exprimées en nanosecondes. Pour ce faire, ajoutez le multiplicateur `*1000000` aux tags de span de `service:A` et le multiplicateur `*1000` aux tags de span de `service:B`.
-Appliquez le filtre `duration:>20ms` (voir la syntaxe de recherche pour en savoir plus) pour interroger systématiquement les tags de span des deux services à la fois et pour afficher un résultat agrégé ayant pour valeur maximale une minute.
+Les mesures prennent en charge les unités (temps en secondes ou taille en octets) pour le traitement des ordres de grandeur lors de la requête et de l'affichage. L'unité est une propriété de la mesure elle-même, et non du champ. Par exemple, considérez une mesure de durée en nanosecondes : vous avez une étiquette de portée de `service:A` où `duration:1000` représente `1000 milliseconds`, et d'autres étiquettes de portée de `service:B` où `duration:500` représente `500 microseconds` :
+Convertissez la durée en nanosecondes pour toutes les balises span traitées par le processeur arithmétique. Utilisez un multiplicateur de `*1000000` sur les balises span de `service:A`, et un multiplicateur de `*1000` sur les balises span de `service:B`.
+Utilisez `duration:>20ms` (voir la syntaxe de recherche pour référence) pour interroger de manière cohérente les balises span des deux services en même temps, et voir un résultat agrégé d'une minute maximum.
 
-### Créer une facette
+### Créez une facette {#create-a-facet}
 
 Pour commencer à utiliser un attribut en tant que facette ou dans une recherche, cliquez dessus et ajoutez-le en tant que facette :
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créez une facette" style="width:50%;">}}
 
-Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles traces** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le volet Facettes](#volet-facettes) et la requête de graphique de trace.
+Après avoir créé une nouvelle facette, elle est disponible dans le volet de facettes pour le filtrage et l'analyse de base.
 
-### Volet des facettes
+### Panneau de facettes {#facet-panel}
 
-Utilisez les facettes pour filtrer vos traces. La barre de recherche et l'URL s'adaptent automatiquement à vos sélections.
+Utilisez des facettes pour filtrer vos traces. La barre de recherche et l'URL reflètent automatiquement vos sélections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Volet Facettes"  style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Volet des facettes" style="width:30%;">}}
 
-## Présentation de la fonctionnalité d'analyse
+## Visualisations {#visualizations}
 
-Utilisez les [Analyses][4] pour filtrer les métriques de performance des applications et les [spans indexées][5] en fonction de tags. Cette fonctionnalité vous permet de plonger au cœur des requêtes Web transitant par votre service.
+Sélectionnez un type de visualisation d'analyse à l'aide du sélecteur d'analyse :
 
-Les analyses sont automatiquement activées pour tous les [services][6] d'APM, avec 100 % de données ingérées pendant 15 minutes (période mobile). Les spans indexées à l'aide de [filtres de rétention][7] personnalisés et à l'aide de l'ancien système App Analytics sont disponibles dans les analyses pendant 15 jours.
+* [Séries temporelles](#timeseries)
+* [Liste des meilleurs](#top-list)
+* [Tableau](#table)
 
-Les services en aval comme les bases de données et les couches du cache ne font pas partie des services disponibles (car ils ne génèrent pas leurs propres traces), mais les informations les concernant sont récupérées par les services de haut niveau qui les appellent.
+### Séries temporelles {#timeseries}
 
-## Requête d'analyse
+Visualisez l'évolution de la métrique `Duration` (ou un compte unique de valeurs d'une facette) sur une période de temps sélectionnée, et (optionnellement) divisez par une facette disponible.
 
-Créez une requête pour contrôler les données affichées dans votre analyse :
+Les analyses de séries temporelles suivantes montrent l'évolution de la **pc99** **durée** par étapes de **5min** pour chaque **Service**.
 
-1. Choisissez la métrique `Duration` ou une [facette][8] à analyser. La métrique `Duration` vous permet de choisir la fonction d'agrégation, tandis qu'une facette affiche le nombre de valeurs uniques.
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle" style="width:90%;">}}
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choisir une mesure ou facette"  style="width:50%;">}}
+### Liste des meilleurs {#top-list}
 
-2. Sélectionnez la fonction d'agrégation pour la métrique `Duration` :
+Visualisez les meilleures valeurs d'une facette selon leur `Duration` (ou un compte unique de valeurs d'une facette).
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="fonction d'agrégation"  style="width:50%;">}}
+Les analyses de liste principale suivantes montrent la **pc99** **durée** de **Service** :
 
-3. Utilisez un tag ou une facette pour fractionner votre analyse.
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="exemple de liste principale" style="width:90%;">}}
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="fractionnement"  style="width:50%;">}}
+### Table {#table}
 
-4. Choisissez d'afficher les *X* valeurs les plus élevées (**top**) ou les plus faibles (**bottom**) en fonction de la facette ou de la `Duration` sélectionnée.
+Visualisez les valeurs principales d'une facette selon une [mesure][9] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des mesures supplémentaires pour les éléments apparaissant dans cette liste principale. Mettez à jour la requête de recherche ou examinez les journaux correspondant à l'une ou l'autre dimension.
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="bouton top/bottom"  style="width:20%;">}}
+* Lorsque plusieurs dimensions sont présentes, les valeurs principales sont déterminées selon la première dimension, puis selon la deuxième dimension parmi les valeurs principales de la première dimension, puis selon la troisième dimension parmi les valeurs principales de la deuxième dimension.
+* Lorsque plusieurs mesures sont présentes, la liste supérieure ou inférieure est déterminée selon la première mesure.
+* Le sous-total peut différer de la somme réelle des valeurs dans un groupe, car seul un sous-ensemble (supérieur ou inférieur) est affiché. Les événements avec une valeur nulle ou vide pour cette dimension ne sont pas affichés comme un sous-groupe.
 
-5. Sélectionnez les laps de temps de l'analyse.
- Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
+**Remarque** : Une visualisation de tableau utilisée pour une seule mesure et une seule dimension est la même qu'une liste principale, juste avec un affichage différent.
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Laps de temps"  style="width:30%;">}}
+Les analyses de journaux de tableau suivantes montrent l'évolution des **codes d'état principaux** selon leur **débit**, ainsi que le nombre d'**adresses IP client** uniques, et ce, au cours des 15 dernières minutes :
 
-## Visualisations
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="exemple de liste principale" style="width:90%;">}}
 
-Sélectionnez un type de visualisation à l'aide du sélecteur d'analyse :
-
-* [Série temporelle](#serie-temporelle)
-* [Top List](#top-list)
-* [Tableau](#tableau)
-
-### Série temporelle
-
-Visualisez l'évolution de la métrique `Duration` (ou d'une facette correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner le graphique en utilisant une facette disponible.
-
-L'analyse sous forme de série temporelle suivante illustre l'évolution de la **durée** au **pc99** (99e centile) toutes les **5 minutes** pour chaque **service** :
-
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="exemple de série temporelle"  style="width:90%;">}}
-
-### Top list
-
-Visualisez les valeurs les plus élevées d'une facette en fonction de leur `Duration` (ou d'une facette correspondant à un nombre unique de valeurs).
-
-L'analyse sous forme de Top List suivante illustre la **durée** au **pc99** (99e centile) la plus élevée d'un **service** :
-
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="exemple de top list"  style="width:90%;">}}
-
-### Tableau
-
-Visualisez la liste des valeurs les plus élevées d'une facette en fonction de la [mesure][9] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou étudiez les logs correspondant à l'une des dimensions.
-
-* Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la seconde dans la fourchette des valeurs les plus élevées de la première dimension, puis de la troisième dans la fourchette des valeurs les plus élevées de la seconde dimension.
-* Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
-* Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
-
-**Remarque** : la visualisation d'une seule mesure et d'une seule dimension sous forme de tableau est identique à celle d'une top list. Seule la présentation diffère.
-
-L'analyse de logs sous forme de tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
-
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="exemple de top list"  style="width:90%;">}}
-
-## Traces associées
+## Traces associées {#related-traces}
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des [traces][10] correspondant à votre sélection :
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="visualiser les traces"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="Voir les traces" style="width:40%;">}}
 
-## Exporter
+## Exporter {#export}
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="bouton d'exportation de votre analyse"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Exporter vos analyses" style="width:40%;">}}
 
-Exportez votre analyse :
+Exporter vos requêtes :
 
-* Vers un nouveau [monitor d'APM][11]
-* Vers un [timeboard][12] existant. Cette fonctionnalité est en version bêta : [contactez l'assistance Datadog][13] afin de l'activer pour votre organisation.
+* Pour [surveiller][11]
+* Pour [tableau de bord][12]
+* Pour [notebook][18]
 
-**Remarque :** l'analyse peut être exportée uniquement lorsqu'elle effectuée sur des [spans indexées][14].
+Vous pouvez également générer une nouvelle mesure pour la requête.
 
-## Traces dans les dashboards
+**Remarque** : Les requêtes APM dans les tableaux de bord et [notebook] sont basées sur tous les [spans indexés][14]. Les requêtes APM dans les moniteurs sont basées uniquement sur les spans indexés par [custom retention filters][19].
 
-Exportez votre [analyse][4] depuis la recherche de traces ou créez-en une directement dans votre [dashboard][15] aux côtés des métriques et des logs.
-
-[En savoir plus sur le widget Série temporelle][16].
-
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -307,8 +355,12 @@ Exportez votre [analyse][4] depuis la recherche de traces ou créez-en une direc
 [9]: /fr/tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /fr/tracing/glossary/#trace
 [11]: /fr/monitors/types/apm/
-[12]: /fr/dashboards/#timeboards
+[12]: /fr/dashboards/#get-started
 [13]: /fr/help/
 [14]: /fr/tracing/glossary/#indexed-span
 [15]: /fr/dashboards/
 [16]: /fr/dashboards/widgets/timeseries/
+[17]: /fr/monitors/notify/variables/?tab=is_alert#reserved-attributes
+[18]: /fr/notebooks/
+[19]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
+[23]: /fr/tracing/trace_explorer/span_tags_attributes
