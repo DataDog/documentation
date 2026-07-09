@@ -32,21 +32,21 @@ Multiple testing correction reduces the family-wise error rate by making each in
 
 Multiple testing correction is available for frequentist analysis methods. Datadog does not offer this setting for [Bayesian analysis][1], because Bayesian intervals are not structured around Type I error control.
 
-Datadog treats each treatment variant compared to the control for each decision metric as one comparison.
+Datadog treats each treatment variant compared to the control for each primary or secondary metric as one comparison.
 
 The control variant is the baseline, so it does not add a comparison by itself.
 
-For example, an experiment with one control variant, two treatment variants, and five decision metrics has 10 comparisons:
+For example, an experiment with one control variant, two treatment variants, one primary metric, and four secondary metrics has 10 comparisons:
 
 ```
-2 treatment variants x 5 metrics = 10 comparisons
+2 treatment variants x (1 primary metric + 4 secondary metrics) = 10 comparisons
 ```
 
-Only add treatment variants and decision metrics that you intend to evaluate. Additional treatment variants make correction stricter for all metrics because each treatment adds another comparison against the control. Additional secondary metrics make correction stricter for secondary metric results.
+Only add treatment variants and primary or secondary metrics that you intend to evaluate. Additional treatment variants make correction stricter for all metrics because each treatment adds another comparison against the control. Additional secondary metrics make correction stricter for secondary metric results.
 
 ## How Datadog adjusts confidence intervals
 
-Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's family-wise error rate budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric when there are multiple decision metrics. This helps the experiment retain more power for the main decision metric, because each additional secondary metric does not further shrink the alpha budget for the primary metric.
+Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's family-wise error rate budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric when the experiment includes secondary metrics. This helps the experiment retain more power for the primary metric, because each additional secondary metric does not further shrink the alpha budget for the primary metric.
 
 Start with the experiment's configured confidence level:
 
@@ -56,14 +56,14 @@ alpha = 1 - confidence level
 
 For a 95% confidence level, `alpha` is `0.05`.
 
-Datadog then allocates that `alpha` across the metric-and-variant comparisons. The primary metric weight, represented as `gamma`, controls how much `alpha` is reserved for the primary metric. When there are multiple decision metrics, the default `gamma` is `0.5`, which reserves half of the `alpha` budget for the primary metric and splits the other half across secondary metrics. Increasing `gamma` gives more budget to the primary metric and less budget to secondary metrics.
+Datadog then allocates that `alpha` across the metric-and-variant comparisons. The primary metric weight, represented as `gamma`, controls how much `alpha` is reserved for the primary metric. When the experiment includes secondary metrics, the default `gamma` is `0.5`, which reserves half of the `alpha` budget for the primary metric and splits the other half across secondary metrics. Increasing `gamma` gives more budget to the primary metric and less budget to secondary metrics.
 
-If an experiment has `k` treatment variants, `m` decision metrics, and primary metric weight `gamma`, Datadog calculates each comparison's alpha as follows:
+If an experiment has `k` treatment variants, `m` total primary and secondary metrics, and primary metric weight `gamma`, Datadog calculates each comparison's alpha as follows:
 
 | Comparison type | Per-comparison alpha |
 | --- | --- |
-| Primary metric, when there is only one decision metric | `alpha / k` |
-| Primary metric, when there are multiple decision metrics | `(alpha * gamma) / k` |
+| Primary metric, when it is the only metric | `alpha / k` |
+| Primary metric, when there are secondary metrics | `(alpha * gamma) / k` |
 | Each secondary metric | `(alpha * (1 - gamma)) / ((m - 1) * k)` |
 
 Datadog then calculates each interval using:
