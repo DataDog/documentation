@@ -58,8 +58,8 @@ After you select the SentinelOne destination in the pipeline UI:
 After you've set up the pipeline to send logs to the SentinelOne destination, you can view the logs in a SentinelOne cluster:
 
 1. Log into the [S1 console][2].
-2. Navigate to the Singularity Data Lake (SDL)  "Search" page. To access it from the console, click on "Visibility" on the left menu to go to SDL, and make sure you're on the "Search" tab.
-3. Make sure the filter next to the search bar is set to **All Data**.
+2. Navigate to the Singularity Data Lake (SDL) {{< ui >}}Search{{< /ui >}} page. To access it from the console, click on {{< ui >}}Visibility{{< /ui >}} on the left menu to go to SDL, and make sure you're on the {{< ui >}}Search{{< /ui >}} tab.
+3. Make sure the filter next to the search bar is set to {{< ui >}}All Data{{< /ui >}}.
 4. This page shows the logs you sent from Observability Pipelines to SentinelOne.
 
 ## How the destination works

@@ -89,14 +89,14 @@ Network Configuration Management is accessible from the NDM device view in Netwo
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the NDM device view.
+3. Open the {{< ui >}}Configuration{{< /ui >}} tab in the NDM device view.
 
    {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
-   - **All**: Shows both running and startup configurations
-   - **Running**: The active, live configuration running on the device
-   - **Startup**: The saved configuration that loads when the device boots
+   - {{< ui >}}All{{< /ui >}}: Shows both running and startup configurations
+   - {{< ui >}}Running{{< /ui >}}: The active, live configuration running on the device
+   - {{< ui >}}Startup{{< /ui >}}: The saved configuration that loads when the device boots
 
 ### Time picker and retention
 
@@ -122,7 +122,7 @@ You can scroll through the configuration to investigate the device state during 
 To see what changed between configuration versions:
 
 1. Select two configurations from the history list or timeline using the checkboxes. 
-2. Click **Compare Two Configs** to open the comparison view.
+2. Click {{< ui >}}Compare Two Configs{{< /ui >}} to open the comparison view.
 
    {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 

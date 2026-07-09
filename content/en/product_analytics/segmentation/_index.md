@@ -17,7 +17,7 @@ After creating a segment, you can reuse it across charts and dashboards to compa
 
 ## Build a segment
 To create a segment:
-1. Navigate to **[Digital Experience Monitoring > Product Analytics > Users > Segments][1]** and click **Create Segment**.
+1. Navigate to [{{< ui >}}Digital Experience Monitoring{{</ ui >}} > {{< ui >}}Product Analytics{{</ ui >}} > {{< ui >}}Users{{</ ui >}} > {{< ui >}}Segments{{</ ui >}}][1] and click **Create Segment**.
    
 1. Under **Define your audience**, select the type of profiles to include in the segment:
    - **Users**: Create a segment of individual users.
@@ -31,7 +31,7 @@ To create a segment:
 
 To create a segment using Product Analytics data:
 
-1. Select **Product Analytics** on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
+1. Select {{< ui >}}Product Analytics{{</ ui >}} on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
 
 2. Select a **condition** for the users in the segment:
       - **performed event(s)**
@@ -39,7 +39,7 @@ To create a segment using Product Analytics data:
 
 <div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
-3. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
+3. Add {{< ui >}}filters{{< /ui >}} to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
    The following image shows a segment filtered to users from Brazil. The segment captures users who were on the `/cart` page and clicked the checkout button within the same session in the past week:
 
@@ -47,10 +47,10 @@ To create a segment using Product Analytics data:
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
-<p class="text-black">The <strong>Users & Segments</strong> page lets you determine which users almost bought an item but dropped before checking out. <br><br> To begin, filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles</a> page, then add additional event properties using the <strong>Create Segment</strong> button:
+<p class="text-black">The {{< ui >}}Users & Segments{{</ ui >}} page lets you determine which users almost bought an item but dropped before checking out. <br><br> To begin, filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">{{< ui >}}User Profiles{{</ ui >}}</a> page, then add additional event properties using the {{< ui >}}Create Segment{{< /ui >}} button:
 {{< img src="product_analytics/segmentation/segment_create_button_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 
-Or, directly click <strong>Create Segment</strong> to select your data source:
+Or, directly click {{< ui >}}Create Segment{{< /ui >}} to select your data source:
 
 {{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
@@ -72,9 +72,9 @@ If you have a list of users from a survey, experiment, or CRM, upload it as a CS
 
 To create a segment using an uploaded list of users from your own file:
 
-1. Select **CSV File** on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
+1. Select {{< ui >}}CSV File{{</ ui >}} on the [segment creation page](https://app.datadoghq.com/product-analytics/segments/create).
 
-2. Click **Browse files** to upload your CSV file.
+2. Click {{< ui >}}Browse files{{< /ui >}} to upload your CSV file.
 
 The file needs a column with user IDs or user emails to map with the `usr.id` or `usr.email` attributes in Product Analytics.
 

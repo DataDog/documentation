@@ -11,7 +11,7 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
-site-support-id: fleet-automation-standard-features  
+site_support_id: fleet-automation-standard-features
 ---
 
 Fleet Automation can deploy, update, and remove [integration][1] configuration files (`conf.d`) on your Agents remotely. Select target Agents by host or tag, choose an integration, and Fleet Automation pushes the configuration change across your fleet.

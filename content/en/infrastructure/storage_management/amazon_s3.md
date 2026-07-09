@@ -360,4 +360,4 @@ Seeing recommendations has the following prerequisites:
 [7]: /cloud_cost_management/
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
-[10]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/
+[10]: https://docs.datadoghq.com/bits_ai/bits_code/

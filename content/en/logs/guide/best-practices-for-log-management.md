@@ -19,6 +19,9 @@ further_reading:
     - link: "https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&pp=iAQB"
       tag: "Video"
       text: "Datadog Tips & Tricks: Improve log utilization with Datadog log exclusion filters"
+    - link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+      tag: "Learning Center"
+      text: "Debugging Log Pipelines"
 algolia:
   tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

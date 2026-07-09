@@ -38,7 +38,7 @@ Set the following environment variables:
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+export DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -47,7 +47,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Installation
 
@@ -62,6 +62,19 @@ Or add them to your `requirements.txt`:
 {{< code-block lang="text" filename="requirements.txt" >}}
 ddtrace>=3.19.0
 openfeature-sdk>=0.5.0
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-grpc
+{{< /code-block >}}
+
+Or add them to your `requirements.txt`:
+
+{{< code-block lang="text" filename="requirements.txt" >}}
+opentelemetry-sdk>=1.41.0
+opentelemetry-exporter-otlp-proto-grpc>=1.41.0
 {{< /code-block >}}
 
 ## Initialize the SDK
@@ -303,6 +316,8 @@ Verify the following to ensure that Remote Configuration is working:
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
 [3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 

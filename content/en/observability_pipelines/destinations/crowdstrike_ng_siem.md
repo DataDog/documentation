@@ -29,14 +29,14 @@ After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
 
 1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
+1. Select {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}} encoding in the dropdown menu.
 
 #### Optional settings
 
 ##### Enable compressions
 
-1. Toggle the switch to **Enable compressions**.
-1. Select an algorithm (**gzip** or **zlib**) in the dropdown menu.
+1. Toggle the switch to {{< ui >}}Enable compressions{{< /ui >}}.
+1. Select an algorithm ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zlib{{< /ui >}}) in the dropdown menu.
 
 ##### Enable TLS
 

@@ -18,7 +18,7 @@ Facets are user-defined tags and attributes from your tests. They are useful for
 
 ## Common facets
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][7] to access the list of facets left of the test runs list.
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][7] to access the list of facets left of the test runs list.
 
 {{< img src="/continuous_integration/facets-tests.png" text="Facets list on the Test Runs page of the Test Optimization Explorer" style="width:100%" >}}
 
@@ -134,7 +134,7 @@ The easiest way to create a facet is to add it from the Test Runs side panel so 
 
 ### Creating facets from the facet list
 
-If finding a test run that has the desired field is not an option, create a facet directly from the facet panel by clicking **+ Add**.
+If finding a test run that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}+ Add{{< /ui >}}.
 
 {{< img src="continuous_integration/add_facet.png" alt="Add a facet from the facet side panel" style="width:30%;">}}
 

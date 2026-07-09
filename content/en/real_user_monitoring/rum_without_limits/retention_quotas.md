@@ -30,16 +30,16 @@ This gives you tighter cost control and prevents unexpected billing spikes cause
 
 You define a daily quota as a maximum number of retained sessions. After the quota is reached, you can choose one of two behaviors:
 
-- **Stop retention**: Datadog retains no additional sessions for the rest of the day and drops all incoming sessions until the quota resets.
-- **Slow down retention**: Retention continues but at a slower rate. Datadog retains only 10% of sessions that would normally be retained.
+- {{< ui >}}Stop retention{{< /ui >}}: Datadog retains no additional sessions for the rest of the day and drops all incoming sessions until the quota resets.
+- {{< ui >}}Slow down retention{{< /ui >}}: Retention continues but at a slower rate. Datadog retains only 10% of sessions that would normally be retained.
 
 ## Setup
 
 To set up a retention quota for an application:
 
-1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
+1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}.
 2. Select your application.
-3. Go to **Product Settings > Retention Filters**.
+3. Go to {{< ui >}}Product Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}}.
 4. Set a daily quota threshold, a reset time, and a behavior when the quota is reached.
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:65%" >}}

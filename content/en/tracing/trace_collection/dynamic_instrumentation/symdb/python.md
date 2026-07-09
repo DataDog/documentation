@@ -36,7 +36,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
   ddtrace-run python -m myapp
   ```
 
-After starting your service with the required features enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+After starting your service with the required features enabled, you can use Dynamic Instrumentation's IDE-like features on the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][4] page.
 
 ## Additional configuration
 

@@ -371,6 +371,43 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = <CLIENT_TOKEN>,
+                env = <ENV_NAME>,
+                variant = <APP_VARIANT_NAME>
+            )
+            .useSite(DatadogSite.UK1)
+            .build()
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                        .useSite(DatadogSite.UK1)
+                        .build();
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Upload your mapping file](#upload-your-mapping-file) section.
@@ -792,7 +829,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
-| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, US2_FED, AP1, or AP2).                                                                                                                                       |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, US2_FED, AP1, AP2, or UK1).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, `none` is ignored, `warn` logs a warning, and `fail` fails the build with an error (default). |
 

@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/data-lineage/"
   tag: "Blog"
   text: "Understanding data lineage"
+- link: "/data_observability/cicd/"
+  tag: "Documentation"
+  text: "CI/CD"
 ---
 
 ## Overview

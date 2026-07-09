@@ -27,11 +27,11 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 ## Build a funnel
 
-To start building a funnel, navigate to [**Product Analytics**][1], then select [**Create New** > **Funnel**][2].
+To start building a funnel, navigate to [{{< ui >}}Product Analytics{{< /ui >}}][1], then select [{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}][2].
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_overview.png" alt="The funnel option highlighted in the Create New dialog in Product Analytics" style="width:100%;" >}}
 
-Select the user steps that start the funnel, and use **Add step** to add additional steps. Drag and drop steps to reorder them in the funnel.
+Select the user steps that start the funnel, and use {{< ui >}}Add step{{< /ui >}} to add additional steps. Drag and drop steps to reorder them in the funnel.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_add_step_video.mp4" alt="Using the Add step button to add a step to an existing funnel, and using drag and drop to move the new step to the correct place in the funnel." video=true >}}
 
@@ -40,7 +40,7 @@ Select the user steps that start the funnel, and use **Add step** to add additio
 
 You can filter users globally, or for specific steps:
 
-- To apply global filters to the entire funnel, select **Filter by** and choose your options.
+- To apply global filters to the entire funnel, select {{< ui >}}Filter by{{< /ui >}} and choose your options.
 
 - To filter users on an individual step, select the **filter icon** for that step and choose your options. Filtering on a step provides insight into how user behavior changes based on a particular constraint on that step. For example, you may want to see how a specific device, operating system, or geolocation impacts conversion at a particular step.
 
@@ -48,24 +48,24 @@ You can filter users globally, or for specific steps:
 
 You can combine multiple events within a single funnel step, to account for end users achieving the same outcome through different flows. When combining events, any included event can trigger step conversion, using "or" logic. The Funnel Chart for a combined step shows data for all events that it contains.
 
-To add multiple events to a step, click the **or** button next to an existing event.
+To add multiple events to a step, click the {{< ui >}}or{{< /ui >}} button next to an existing event.
 
 ### Compare data
 
-Select **Compare**, then choose one of the options below to compare funnel data in different ways:
+Select {{< ui >}}Compare{{< /ui >}}, then choose one of the options below to compare funnel data in different ways:
 
-**By breakdown**: Group data by a specific attribute, like device type or geolocation. You can also adjust whether to show the top (most common) or bottom (least common) values within the attribute, and how many values to include.
+{{< ui >}}By breakdown{{< /ui >}}: Group data by a specific attribute, like device type or geolocation. You can also adjust whether to show the top (most common) or bottom (least common) values within the attribute, and how many values to include.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_compare_by_country.png" alt="The Compare by breakdown view, configured to show the top five conversion sources by country." >}}
 
-**By property or segment**: Compare multiple user segments or user attributes side by side.
+{{< ui >}}By property or segment{{< /ui >}}: Compare multiple user segments or user attributes side by side.
 
 - To compare user segments, select the segments you want to compare.
 - To compare a user attribute, select a property (such as Browser Name or Country), then choose the values you want to compare (such as Firefox, Chrome, and Safari).
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_side_by_side.png" alt="The Compare by property or segment view, showing side-by-side comparison of five selected Browser Name values." >}}
 
-**By time**: Compare conversion data side by side between time periods.
+{{< ui >}}By time{{< /ui >}}: Compare conversion data side by side between time periods.
 
 ## Refine conversion insights
 
@@ -75,15 +75,15 @@ You can further analyze the information on the funnel page to understand your si
 
 Use the dropdown above the chart side panel to select different conversion analysis views. Conversion analysis is available by:
 
-- **Unique converted sessions**: Conversions where all steps were completed with the same `@session.id`.
+- {{< ui >}}Unique converted sessions{{< /ui >}}: Conversions where all steps were completed with the same `@session.id`.
 
-- **Unique converted users**: Conversions where the same individual user, tracked by `@user.id`, completed all steps.
+- {{< ui >}}Unique converted users{{< /ui >}}: Conversions where the same individual user, tracked by `@user.id`, completed all steps.
 
-- **Unique converted accounts**: Conversions where the same account, tracked by `@account.id`, completed all steps. This analysis is useful for identifying conversions completed by signed-in users across a longer period of time than the `@user.id` facet persists.
+- {{< ui >}}Unique converted accounts{{< /ui >}}: Conversions where the same account, tracked by `@account.id`, completed all steps. This analysis is useful for identifying conversions completed by signed-in users across a longer period of time than the `@user.id` facet persists.
 
-- **Total conversions**: Total conversions across sessions, users, or accounts.
+- {{< ui >}}Total conversions{{< /ui >}}: Total conversions across sessions, users, or accounts.
 
-- **Time to convert**: A timeseries view of conversions by sessions, users, or accounts.
+- {{< ui >}}Time to convert{{< /ui >}}: A timeseries view of conversions by sessions, users, or accounts.
 
 For any conversion analysis view, you can choose to view conversions by count or rate, and view data for all steps or individual steps. For conversion views by user or account, you can adjust the time frame within which a conversion must occur.
 
@@ -105,11 +105,11 @@ If you analyze your funnel by **user** or by **account**, you can define your co
 
 ### Conversion counting methods
 
-When computing your conversions, select how conversions are counted by choosing a **unique** conversion option (sessions, users, or accounts) or the **Total Conversion Count** option in your conversion visualization. 
+When computing your conversions, select how conversions are counted by choosing a **unique** conversion option (sessions, users, or accounts) or the {{< ui >}}Total Conversion Count{{< /ui >}} option in your conversion visualization. 
 
-- **Unique**: Counts a conversion only once per session, user, or account. For example, if the user completes the funnel sequence `A → B → C` multiple times within the same session (`A, B, C, A, B, C`), it counts as **one conversion**.
+- {{< ui >}}Unique{{< /ui >}}: Counts a conversion only once per session, user, or account. For example, if the user completes the funnel sequence `A → B → C` multiple times within the same session (`A, B, C, A, B, C`), it counts as **one conversion**.
 
-- **Total**: Counts a conversion each time the same session ID, user, or account completes the defined funnel. Using the same example (`A, B, C, A, B, C`), this method counts **two conversions**. The `Total` setting counts complete flows, not the number of times an intermediate step is repeated.
+- {{< ui >}}Total{{< /ui >}}: Counts a conversion each time the same session ID, user, or account completes the defined funnel. Using the same example (`A, B, C, A, B, C`), this method counts **two conversions**. The {{< ui >}}Total{{< /ui >}} setting counts complete flows, not the number of times an intermediate step is repeated.
 
 
 ## Change the visualization

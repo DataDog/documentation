@@ -1,5 +1,5 @@
 ---
-title: Metric Property Breakouts
+title: Break Out Metrics by Property
 description: Break out an experiment metric by the values of an event property to compare lift across segments without creating a separate metric for each value.
 further_reading:
 - link: "/experiments/defining_metrics/"
@@ -8,7 +8,7 @@ further_reading:
 - link: "/experiments/reading_results/"
   tag: "Documentation"
   text: "Reading Experiment Results"
-- link: "/experiments/analysis_methods/"
+- link: "/experiments/statistics/analysis_methods/"
   tag: "Documentation"
   text: "Analysis Methods"
 ---
@@ -17,7 +17,7 @@ further_reading:
 
 A single metric often hides meaningful differences between segments of your users. A change that lifts revenue overall might help users on one device type while hurting users on another, and an aggregate result averages those effects together.
 
-Metric property breakouts let you split a metric by the values of an event property—such as country, device type, or browser—so you can see the lift and confidence interval for each value alongside the overall result. You configure the properties and values you care about once on the metric, and Datadog computes a separate result for each value using the same analysis as the parent metric.
+Metric property breakouts let you split a metric by the values of an event property-such as country, device type, or browser. This shows you the lift and confidence interval for each value alongside the overall result. You configure the properties and values you care about once on the metric. Datadog computes a separate result for each value, using the same analysis as the parent metric.
 
 A breakout is purely additive: the overall metric is still calculated across all events, and each property value is reported as its own row underneath it.
 
@@ -27,7 +27,7 @@ A breakout is purely additive: the overall metric is still calculated across all
 
 You define breakouts when you [create or edit a metric][1]. Breakouts are supported for metrics built on Product Analytics, Real User Monitoring (RUM), and [warehouse][2] data.
 
-1. Navigate to the [Metrics page][3] in Datadog Product Analytics and create a new metric or open an existing one.
+1. Navigate to the [Metrics page][3] in Datadog Product Analytics and create a metric or open an existing one.
 1. Configure the [metric definition][1].
 1. In the {{< ui >}}Split by Metric Properties{{< /ui >}} section, click {{< ui >}}Add Property{{< /ui >}}.
 1. Select a {{< ui >}}Property{{< /ui >}} to break out by (for example, **Country**, **Device Type**, or **Browser**). The available properties come from the metric's data source. For warehouse metrics, the property must be a column on the metric's [SQL model][2].
@@ -73,9 +73,11 @@ Because each breakout analyzes a subset of the data, breakouts have smaller samp
 
 ## Supported metrics and constraints
 
+Metric property breakouts have the following requirements and limitations:
+
 | Aspect | Support |
 |---|---|
-| **Metric types** | Simple, ratio, and percentile metrics. Cross-source ratio metrics (where the numerator and denominator come from different data sources) are not supported. |
+| **Metric types** | Count, sum, average, percentile, and ratio metrics. Cross-source ratio metrics (where the numerator and denominator come from different data sources) are not supported. |
 | **Data sources** | Product Analytics, RUM, and warehouse metrics. |
 | **Properties** | The property must belong to the metric's data source. |
 | **Values** | Select from the values Datadog discovers for the property (up to 50 of the most frequent values). |
@@ -91,4 +93,4 @@ Because each breakout analyzes a subset of the data, breakouts have smaller samp
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
 [3]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [4]: /experiments/reading_results/
-[5]: /experiments/analysis_methods/
+[5]: /experiments/statistics/analysis_methods/

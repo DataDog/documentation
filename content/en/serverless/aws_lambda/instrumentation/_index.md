@@ -11,6 +11,9 @@ further_reading:
     - link: "/integrations/amazon_lambda/"
       tag: "Documentation"
       text: "AWS Lambda Integration"
+    - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+      tag: "Learning Center"
+      text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 ---
 
 ## Overview

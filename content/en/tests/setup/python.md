@@ -36,6 +36,8 @@ Supported test frameworks:
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
+<div class="alert alert-info">If you use Bazel to run Python tests, use the Datadog <a href="/tests/setup/bazel/python/">Bazel rules for Python tests</a>.</div>
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Python library:

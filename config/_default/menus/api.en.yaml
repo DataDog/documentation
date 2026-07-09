@@ -1800,7 +1800,8 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRulesForMetric
-        unstable: []
+        unstable:
+          - v2
         order: 23
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
@@ -1812,7 +1813,8 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Get a tag indexing rule exemption
       url: /api/latest/metrics/get-a-tag-indexing-rule-exemption/
@@ -1824,7 +1826,8 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 24
     - name: Delete a tag indexing rule exemption
       url: /api/latest/metrics/delete-a-tag-indexing-rule-exemption/
@@ -1836,7 +1839,8 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
@@ -1908,7 +1912,8 @@ menu:
           - v2
         operationids:
           - UpdateTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 21
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
@@ -1920,7 +1925,8 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 20
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
@@ -1932,7 +1938,8 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 22
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
@@ -1944,7 +1951,8 @@ menu:
           - v2
         operationids:
           - ReorderTagIndexingRules
-        unstable: []
+        unstable:
+          - v2
         order: 19
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
@@ -1956,7 +1964,8 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 18
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
@@ -1968,7 +1977,8 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRules
-        unstable: []
+        unstable:
+          - v2
         order: 17
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
@@ -3796,6 +3806,32 @@ menu:
           - SendSecurityMonitoringNotificationPreview
         unstable: []
         order: 130
+    - name: Deactivate an entity context sync integration
+      url: /api/latest/security-monitoring/deactivate-an-entity-context-sync-integration/
+      identifier: security-monitoring-deactivate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeactivateIntegration
+        unstable:
+          - v2
+        order: 156
+    - name: Activate an entity context sync integration
+      url: /api/latest/security-monitoring/activate-an-entity-context-sync-integration/
+      identifier: security-monitoring-activate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ActivateIntegration
+        unstable:
+          - v2
+        order: 155
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -3861,6 +3897,19 @@ menu:
         unstable:
           - v2
         order: 41
+    - name: Get Entra ID Azure App Registration prerequisites
+      url: /api/latest/security-monitoring/get-entra-id-azure-app-registration-prerequisites/
+      identifier: security-monitoring-get-entra-id-azure-app-registration-prerequisites
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntraIdAzureAppRegistrations
+        unstable:
+          - v2
+        order: 157
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration
@@ -4032,6 +4081,19 @@ menu:
           - GetVulnerabilityNotificationRules
         unstable: []
         order: 3
+    - name: Import security vulnerabilities
+      url: /api/latest/security-monitoring/import-security-vulnerabilities/
+      identifier: security-monitoring-import-security-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportSecurityVulnerabilities
+        unstable:
+          - v2
+        order: 152
     - name: List vulnerabilities
       url: /api/latest/security-monitoring/list-vulnerabilities/
       identifier: security-monitoring-list-vulnerabilities
@@ -4191,8 +4253,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
+        unstable: []
         order: 22
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
@@ -4204,8 +4265,7 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 23
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
@@ -4231,6 +4291,32 @@ menu:
           - MuteSecurityFindings
         unstable: []
         order: 20
+    - name: Create Linear issues for security findings
+      url: /api/latest/security-monitoring/create-linear-issues-for-security-findings/
+      identifier: security-monitoring-create-linear-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLinearIssues
+        unstable:
+          - v2
+        order: 153
+    - name: Attach security findings to a Linear issue
+      url: /api/latest/security-monitoring/attach-security-findings-to-a-linear-issue/
+      identifier: security-monitoring-attach-security-findings-to-a-linear-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachLinearIssue
+        unstable:
+          - v2
+        order: 154
     - name: Create Jira issues for security findings
       url: /api/latest/security-monitoring/create-jira-issues-for-security-findings/
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -6630,6 +6716,18 @@ menu:
       url: /api/latest/users/
       identifier: users
       generated: true
+    - name: Update identity provider overrides for a user
+      url: /api/latest/users/update-identity-provider-overrides-for-a-user/
+      identifier: users-update-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUserIdentityProviders
+        unstable: []
+        order: 15
     - name: Get a user permissions
       url: /api/latest/users/get-a-user-permissions/
       identifier: users-get-a-user-permissions
@@ -6666,6 +6764,18 @@ menu:
           - DeleteUserInvitations
         unstable: []
         order: 11
+    - name: Get identity provider overrides for a user
+      url: /api/latest/users/get-identity-provider-overrides-for-a-user/
+      identifier: users-get-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserIdentityProviders
+        unstable: []
+        order: 14
     - name: Get a user invitation
       url: /api/latest/users/get-a-user-invitation/
       identifier: users-get-a-user-invitation
@@ -10392,6 +10502,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Delete a budget's custom forecast
+      url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-delete-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomForecast
+        unstable:
+          - v2
+        order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
       identifier: cloud-cost-management-get-budget
@@ -10428,6 +10551,19 @@ menu:
           - ValidateBudget
         unstable: []
         order: 35
+    - name: Create or replace a budget's custom forecast
+      url: /api/latest/cloud-cost-management/create-or-replace-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-create-or-replace-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCustomForecast
+        unstable:
+          - v2
+        order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
       identifier: cloud-cost-management-validate-csv-budget
@@ -12549,6 +12685,49 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
+    - name: Governance Controls
+      url: /api/latest/governance-controls/
+      identifier: governance-controls
+      generated: true
+    - name: Update a governance control
+      url: /api/latest/governance-controls/update-a-governance-control/
+      identifier: governance-controls-update-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControl
+        unstable:
+          - v2
+        order: 4
+    - name: Get a governance control
+      url: /api/latest/governance-controls/get-a-governance-control/
+      identifier: governance-controls-get-a-governance-control
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControl
+        unstable:
+          - v2
+        order: 3
+    - name: List governance controls
+      url: /api/latest/governance-controls/list-governance-controls/
+      identifier: governance-controls-list-governance-controls
+      parent: governance-controls
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControls
+        unstable:
+          - v2
+        order: 2
     - name: Governance Insights
       url: /api/latest/governance-insights/
       identifier: governance-insights
@@ -12624,6 +12803,46 @@ menu:
           - GetIPAllowlist
         unstable: []
         order: 1
+    - name: Identity Providers
+      url: /api/latest/identity-providers/
+      identifier: identity-providers
+      generated: true
+    - name: List users with an identity provider override
+      url: /api/latest/identity-providers/list-users-with-an-identity-provider-override/
+      identifier: identity-providers-list-users-with-an-identity-provider-override
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviderUsers
+        unstable: []
+        order: 1
+    - name: Update an identity provider
+      url: /api/latest/identity-providers/update-an-identity-provider/
+      identifier: identity-providers-update-an-identity-provider
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIdentityProvider
+        unstable: []
+        order: 2
+    - name: List identity providers
+      url: /api/latest/identity-providers/list-identity-providers/
+      identifier: identity-providers-list-identity-providers
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviders
+        unstable: []
+        order: 3
     - name: Incidents
       url: /api/latest/incidents/
       identifier: incidents
@@ -15858,6 +16077,94 @@ menu:
           - ListOpsgenieAccounts
         unstable: []
         order: 6
+    - name: Org Authorized Clients
+      url: /api/latest/org-authorized-clients/
+      identifier: org-authorized-clients
+      generated: true
+    - name: Delete a user authorization for a client
+      url: /api/latest/org-authorized-clients/delete-a-user-authorization-for-a-client/
+      identifier: org-authorized-clients-delete-a-user-authorization-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientUserAuthorization
+        unstable: []
+        order: 2
+    - name: List user authorizations for a client
+      url: /api/latest/org-authorized-clients/list-user-authorizations-for-a-client/
+      identifier: org-authorized-clients-list-user-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClientUserAuthorizations
+        unstable: []
+        order: 3
+    - name: Delete a user's authorizations for a client
+      url: /api/latest/org-authorized-clients/delete-a-users-authorizations-for-a-client/
+      identifier: org-authorized-clients-delete-a-users-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientAllUserAuthorizations
+        unstable: []
+        order: 1
+    - name: Update an org authorized client
+      url: /api/latest/org-authorized-clients/update-an-org-authorized-client/
+      identifier: org-authorized-clients-update-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgAuthorizedClient
+        unstable: []
+        order: 5
+    - name: Get an org authorized client
+      url: /api/latest/org-authorized-clients/get-an-org-authorized-client/
+      identifier: org-authorized-clients-get-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgAuthorizedClient
+        unstable: []
+        order: 6
+    - name: Delete an org authorized client
+      url: /api/latest/org-authorized-clients/delete-an-org-authorized-client/
+      identifier: org-authorized-clients-delete-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClient
+        unstable: []
+        order: 4
+    - name: List org authorized clients
+      url: /api/latest/org-authorized-clients/list-org-authorized-clients/
+      identifier: org-authorized-clients-list-org-authorized-clients
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClients
+        unstable: []
+        order: 7
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
@@ -16685,6 +16992,18 @@ menu:
       url: /api/latest/report-schedules/
       identifier: report-schedules
       generated: true
+    - name: Toggle a report schedule
+      url: /api/latest/report-schedules/toggle-a-report-schedule/
+      identifier: report-schedules-toggle-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ToggleReportSchedule
+        unstable: []
+        order: 4
     - name: Update a report schedule
       url: /api/latest/report-schedules/update-a-report-schedule/
       identifier: report-schedules-update-a-report-schedule
@@ -16698,6 +17017,54 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get a report schedule
+      url: /api/latest/report-schedules/get-a-report-schedule/
+      identifier: report-schedules-get-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedule
+        unstable: []
+        order: 3
+    - name: Delete a report schedule
+      url: /api/latest/report-schedules/delete-a-report-schedule/
+      identifier: report-schedules-delete-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteReportSchedule
+        unstable: []
+        order: 7
+    - name: Get report schedules for a resource
+      url: /api/latest/report-schedules/get-report-schedules-for-a-resource/
+      identifier: report-schedules-get-report-schedules-for-a-resource
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReportSchedulesForResource
+        unstable: []
+        order: 5
+    - name: List report schedules
+      url: /api/latest/report-schedules/list-report-schedules/
+      identifier: report-schedules-list-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReportSchedules
+        unstable: []
+        order: 6
     - name: Create a report schedule
       url: /api/latest/report-schedules/create-a-report-schedule/
       identifier: report-schedules-create-a-report-schedule
@@ -16708,6 +17075,23 @@ menu:
           - v2
         operationids:
           - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: Reporting And Sharing
+      url: /api/latest/reporting-and-sharing/
+      identifier: reporting-and-sharing
+      generated: true
+    - name: Create a graph snapshot
+      url: /api/latest/reporting-and-sharing/create-a-graph-snapshot/
+      identifier: reporting-and-sharing-create-a-graph-snapshot
+      parent: reporting-and-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnapshot
         unstable:
           - v2
         order: 1
@@ -20093,6 +20477,58 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: User Authorized Clients
+      url: /api/latest/user-authorized-clients/
+      identifier: user-authorized-clients
+      generated: true
+    - name: Get a user authorized client
+      url: /api/latest/user-authorized-clients/get-a-user-authorized-client/
+      identifier: user-authorized-clients-get-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserAuthorizedClient
+        unstable: []
+        order: 3
+    - name: Delete a user authorized client
+      url: /api/latest/user-authorized-clients/delete-a-user-authorized-client/
+      identifier: user-authorized-clients-delete-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClient
+        unstable: []
+        order: 2
+    - name: Delete all user authorized clients for a client
+      url: /api/latest/user-authorized-clients/delete-all-user-authorized-clients-for-a-client/
+      identifier: user-authorized-clients-delete-all-user-authorized-clients-for-a-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClientsByClient
+        unstable: []
+        order: 1
+    - name: List user authorized clients
+      url: /api/latest/user-authorized-clients/list-user-authorized-clients/
+      identifier: user-authorized-clients-list-user-authorized-clients
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserAuthorizedClients
+        unstable: []
+        order: 4
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets

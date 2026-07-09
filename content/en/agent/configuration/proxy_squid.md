@@ -21,7 +21,9 @@ Install Squid on a host that has connectivity to both your internal Agents and D
 
 To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. For other operating systems, see [Agent configuration directory][6].
 
-Edit your `squid.conf` configuration file so that Squid is able to accept local traffic and forward it to the necessary Datadog intakes:
+Edit your `squid.conf` configuration file so that Squid is able to accept local traffic and forward it to the necessary Datadog intakes.
+
+The simplest approach uses a wildcard to allow all subdomains of your Datadog site:
 
 ```conf
 http_port 0.0.0.0:3128
@@ -29,6 +31,26 @@ http_port 0.0.0.0:3128
 acl local src 127.0.0.1/32
 
 acl Datadog dstdomain .{{< region-param key="dd_site" >}}
+
+http_access allow Datadog
+http_access allow local manager
+```
+
+Alternatively, if you require more granular control, you can explicitly list each Datadog endpoint instead of using a wildcard. For the full list of domains and IP ranges the Agent needs to reach, see [Network Traffic][7]. For example:
+
+<div class="alert alert-danger">
+The example below only includes a subset of Datadog endpoints. Make sure to include all domains required by the Datadog features you use. See [Network Traffic][7] for the complete list.
+</div>
+
+```conf
+http_port 0.0.0.0:3128
+
+acl local src 127.0.0.1/32
+
+acl Datadog dstdomain agent.{{< region-param key="dd_site" >}}
+acl Datadog dstdomain process.{{< region-param key="dd_site" >}}
+acl Datadog dstdomain logs.{{< region-param key="dd_site" >}}
+acl Datadog dstdomain api.{{< region-param key="dd_site" >}}
 
 http_access allow Datadog
 http_access allow local manager
@@ -72,6 +94,9 @@ net start squid
 
 ### Configure the Datadog Agent
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 Modify the Agent's configuration file (`datadog.yaml`) to include the following:
 
 ```yaml
@@ -81,6 +106,36 @@ proxy:
 ```
 
 After saving these changes, [restart the Agent][1].
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Modify the DatadogAgent CR to include the following:
+
+```yaml
+spec:
+  global:
+    proxy:
+      http: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
+      https: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Modify your `values.yaml` to include the following:
+
+```yaml
+datadog:
+  env:
+    - name: DD_PROXY_HTTP
+      value: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
+    - name: DD_PROXY_HTTPS
+      value: http://squid-proxy.proxy-namespace.svc.cluster.local:3128
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
 
@@ -94,3 +149,4 @@ Verify that Datadog is able to receive the data from your Agent(s) by checking y
 [4]: https://wiki.squid-cache.org/KnowledgeBase/Windows
 [5]: /agent/configuration/proxy/
 [6]: /agent/configuration/agent-configuration-files#agent-configuration-directory
+[7]: /agent/configuration/network/#overview

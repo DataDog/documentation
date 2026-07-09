@@ -18,7 +18,7 @@ To access the path view page, click into a path from the [List view][2] or [AS v
 
 {{< img src="network_performance_monitoring/network_path/network_path_view_5.png" alt="Network Path view showing a reachable destination with 0% packet loss, 103ms latency, and latency and reachability history" >}}
 
-Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details in [NDM][4] for the selected device.
+Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click {{< ui >}}View Device Details{{< /ui >}} to navigate to the Device details in [NDM][4] for the selected device.
 
 {{< img src="network_performance_monitoring/network_path/path_details.png" alt="Path view in Network path highlighting path details." style="width:30%;" >}}
 
@@ -66,15 +66,15 @@ The comparison view provides:
 
 ### Open the comparison view
 
-To open the comparison view, click **Compare** near the time range controls on the Network Path view. By default, the view populates with your previously selected time range and compares it to the preceding equivalent time block. For example, a 3-hour range is compared to the previous 3-hour range. Use the top controls to adjust the compared time ranges.
+To open the comparison view, click {{< ui >}}Compare{{< /ui >}} near the time range controls on the Network Path view. By default, the view populates with your previously selected time range and compares it to the preceding equivalent time block. For example, a 3-hour range is compared to the previous 3-hour range. Use the top controls to adjust the compared time ranges.
 
 ### Navigate the comparison
 
 Navigate the split paths independently using the zoom controls, the minimap, or by holding ⌘/Ctrl and scrolling with your mouse.
 
-Click **Inspect** on a shared hop to open a sidebar detailing the metadata and confirming that the hop is present in both views. Unique hops are wrapped in a distinct color to indicate that they exist in only one view.
+Click {{< ui >}}Inspect{{< /ui >}} on a shared hop to open a sidebar detailing the metadata and confirming that the hop is present in both views. Unique hops are wrapped in a distinct color to indicate that they exist in only one view.
 
-The **Analysis** tab provides a side-by-side, hop-by-hop breakdown of packets and RTT latency for each time range.
+The {{< ui >}}Analysis{{< /ui >}} tab provides a side-by-side, hop-by-hop breakdown of packets and RTT latency for each time range.
 
 {{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="Analysis tab of the Visual Comparison view showing a side-by-side Hop RTT Latency table for paths A and B" style="width:100%;" >}}
 

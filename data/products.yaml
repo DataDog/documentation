@@ -1,0 +1,344 @@
+heading: Browse by product
+
+# Each immediate child of `products` is one product grouping rendered as a card on the homepage.
+# `span` is the card's width out of a 12-column grid. `columns` lay out the card's contents,
+# and each entry under `subheaders` is an individual product grouping within the card.
+
+products:
+  - title: Observability
+    icon: eye-4
+    span: 9
+    columns:
+      - subheaders:
+          - title: Infrastructure
+            links:
+              - title: Infrastructure
+                link: infrastructure/
+                description: View the health and performance of your hosts and infrastructure components
+                short_description: Host and infra health
+              - title: Metrics
+                link: metrics/
+                description: Explore, search, and create distributions for your metrics
+                short_description: Explore and distribute metrics
+              - title: Container Monitoring
+                link: containers/
+                description: Monitor the health, performance, and security of your containerized environments
+                short_description: Container health and security
+              - title: Serverless
+                link: serverless/
+                description: Detect and resolve performance issues in your serverless applications
+                short_description: Serverless performance
+              - title: Network Monitoring
+                link: network_monitoring/
+                description: Use tagged objects to collect and graph data about your network traffic
+                short_description: Network traffic data
+              - title: Cloud Cost Management
+                link: cloud_cost_management/
+                description: Take control of your cloud spend with unified observability and cost data
+                short_description: Cloud spend control
+              - title: Cloudcraft
+                link: cloudcraft/
+                description: Visualize and diagram your cloud infrastructure in real time
+                short_description: Cloud infra diagrams
+              - title: Storage Management
+                link: infrastructure/storage_management/
+                description: Optimize and troubleshoot your cloud storage spend, usage, and data freshness
+                short_description: Cloud storage optimization
+      - subheaders:
+          - title: Applications
+            links:
+              - title: APM
+                link: tracing/
+                description: Explore out-of-the-box performance dashboards and distributed traces
+                short_description: Distributed traces and dashboards
+              - title: Universal Service Monitoring
+                link: universal_service_monitoring/
+                description: Discover, map, and monitor services without changing code
+                short_description: Codeless service monitoring
+              - title: Continuous Profiler
+                link: profiler/
+                description: Compare performance snapshots and investigate bottlenecks
+                short_description: Performance bottlenecks
+          - title: Data
+            links:
+              - title: Database Monitoring
+                link: database_monitoring/
+                description: Explore enriched dashboards, query metrics, and query samples
+                short_description: Query metrics and samples
+              - title: Data Streams Monitoring
+                link: data_streams/
+                description: Track and improve performance of your data streaming pipelines
+                short_description: Streaming pipeline performance
+              - title: Data Observability
+                link: data_observability/
+                description: Monitor data quality, performance, and cost to detect anomalies and prevent downstream issues
+                short_description: Data quality monitoring
+      - subheaders:
+          - title: Logs
+            links:
+              - title: Log Management
+                link: logs/
+                description: Process, monitor, and archive your ingested logs
+                short_description: Log processing and archival
+              - title: Sensitive Data Scanner
+                link: security/sensitive_data_scanner/
+                description: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
+                short_description: PII detection and redaction
+              - title: Observability Pipelines
+                link: observability_pipelines/
+                description: Manage and monitor your telemetry pipelines
+                short_description: Telemetry pipeline management
+              - title: Error Tracking
+                link: error_tracking/
+                description: Identify critical errors and accelerate resolution across web, mobile, and backend
+                short_description: Critical error resolution
+
+  - title: Digital Experience
+    icon: rum
+    span: 3
+    columns:
+      - subheaders:
+          - title: Synthetic Testing
+            links:
+              - title: Synthetic Monitoring
+                link: synthetics/
+                description: Ensure uptime, flag regional issues, and test application performance
+                short_description: Uptime and performance tests
+              - title: Mobile App Testing
+                link: mobile_app_testing/
+                description: Monitor user journeys and business transactions in mobile applications
+                short_description: Mobile user journey testing
+          - title: Real User Monitoring
+            links:
+              - title: Real User Monitoring
+                link: real_user_monitoring/
+                description: Capture, observe, and analyze the user experience of your applications
+                short_description: Frontend user experience
+              - title: Session Replay
+                link: session_replay/
+                description: Capture and visually replay the user experience of your users
+                short_description: Visual session playback
+          - title: Product Analytics
+            links:
+              - title: Product Analytics
+                link: product_analytics/
+                description: Gain insight into user behavior and make data-driven product decisions
+                short_description: User behavior insights
+
+  - title: AI
+    icon: bits-ai
+    span: 4
+    columns:
+      - subheaders:
+          - title: AI
+            links:
+              - title: Bits AI Agents
+                link: bits_ai/
+                description: Your agentic teammate that automates development, security, and operational workflows
+                short_description: Automated AI workflows
+              - title: Watchdog
+                link: watchdog/
+                description: Detect and surface application and infrastructure anomalies
+                short_description: Anomaly detection
+              - title: LLM Observability
+                link: llm_observability/
+                description: Trace, monitor, and secure your LLM applications
+                short_description: LLM monitoring and security
+              - title: MCP Server
+                link: mcp_server/
+                description: Connect AI agents to your observability data to query metrics, logs, traces, and more
+                short_description: AI agent data access
+
+  - title: Security
+    icon: security-platform
+    span: 8
+    columns:
+      - subheaders:
+          - title: Code Security
+            links:
+              - title: Code Security
+                link: security/code_security/
+                description: Detect and fix vulnerabilities in your code, dependencies, and infrastructure as code
+                short_description: Code vulnerability detection
+      - subheaders:
+          - title: Cloud Security
+            links:
+              - title: Cloud Security
+                link: security/cloud_security_management/
+                description: Continuously audit configurations, assess identity risks, and detect threats across your cloud infrastructure
+                short_description: Cloud posture and threats
+              - title: Workload Protection
+                link: security/workload_protection/
+                description: Monitor file, network, and process activity to detect real-time threats to your infrastructure
+                short_description: Runtime threat detection
+      - subheaders:
+          - title: Threat Management
+            links:
+              - title: Cloud SIEM
+                link: security/cloud_siem/
+                description: Detect, investigate, and respond to security threats across your cloud and on-premises systems
+                short_description: Threat detection and response
+              - title: App and API Protection
+                link: security/application_security/
+                description: Detect and block threats targeting your production applications and APIs in real time
+                short_description: App and API threat blocking
+              - title: Sensitive Data Scanner
+                link: security/sensitive_data_scanner/
+                description: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
+                short_description: PII detection and redaction
+
+  - title: Software Delivery
+    icon: ci
+    span: 6
+    columns:
+      - subheaders:
+          - title: CI/CD
+            links:
+              - title: CI Visibility
+                link: continuous_integration/
+                description: Monitor the health and performance of your CI pipelines
+                short_description: CI pipeline health
+              - title: Test Optimization
+                link: tests/
+                description: Detect flaky tests and identify commits introducing flaky tests
+                short_description: Flaky test detection
+              - title: Continuous Testing
+                link: continuous_testing/
+                description: Perform codeless integration and end-to-end testing with CI/CD providers
+                short_description: Codeless E2E testing
+              - title: Code Coverage
+                link: code_coverage/
+                description: Visualize coverage data trends and block PR merges based on coverage thresholds
+                short_description: Coverage trends and gates
+      - subheaders:
+          - title: Developer Efficiency
+            links:
+              - title: Internal Developer Portal
+                link: internal_developer_portal/
+                description: Unify telemetry, metadata, and workflows to accelerate delivery
+                short_description: Service catalog and ownership
+              - title: DORA Metrics
+                link: delivery_performance/dora_metrics/
+                description: Measure and improve your organization's software delivery processes
+                short_description: Delivery performance metrics
+              - title: IDE Plugins
+                link: ide_plugins/
+                description: Interact with Datadog services directly from your IDE as you code
+                short_description: In-editor Datadog access
+              - title: Feature Flags
+                link: feature_flags/
+                description: Toggle features, run A/B tests, and gradually roll out functionality without code deployments
+                short_description: Feature rollouts and A/B tests
+
+  - title: Service Management
+    icon: service-catalog
+    span: 6
+    columns:
+      - subheaders:
+          - title: Incident Response
+            links:
+              - title: Incident Management
+                link: service_management/incident_management/
+                description: Identify, analyze, and mitigate disruptive incidents in your organization
+                short_description: Incident triage and mitigation
+              - title: On-Call
+                link: incident_response/on-call/
+                description: Route and escalate alerts to the right team members with on-call schedules and paging
+                short_description: Scheduling and paging
+              - title: Status Pages
+                link: incident_response/status_pages/
+                description: Communicate service availability and incident updates to your users and stakeholders
+                short_description: Service status communication
+              - title: Event Management
+                link: events/
+                description: Track notable changes and alerts in your applications and infrastructure
+                short_description: Change and alert tracking
+      - subheaders:
+          - title: Actions
+            links:
+              - title: Workflow Automation
+                link: service_management/workflows/
+                description: Automate and orchestrate processes across your tech stack
+                short_description: Cross-stack orchestration
+              - title: App Builder
+                link: service_management/app_builder/
+                description: Create low-code applications to streamline your internal tools
+                short_description: Low-code internal tools
+              - title: Case Management
+                link: incident_response/case_management/
+                description: Triage, track, and remediate issues with centralized ownership and team collaboration
+                short_description: Issue tracking and triage
+              - title: Service Level Objectives
+                link: service_level_objectives/
+                description: Define and track performance targets to deliver a consistent customer experience
+                short_description: Performance target tracking
+
+  - title: Platform & Administration
+    icon: gear
+    span: 12
+    columns:
+      - subheaders:
+          - title: Core Platform
+            links:
+              - title: Dashboards
+                link: dashboards/
+                description: Visualize, analyze, and generate insights about your data
+                short_description: Data visualization
+              - title: Notebooks
+                link: notebooks/
+                description: Create rich-text documents with live graphs for investigations, postmortems, and runbooks
+                short_description: Live investigation docs
+              - title: Monitors and Alerting
+                link: monitors/
+                description: Create, edit, and manage your monitors and notifications
+                short_description: Alert configuration
+              - title: Mobile App
+                link: mobile/
+                description: View Datadog alerts, incidents, and more on your mobile device
+                short_description: Mobile alerts and incidents
+              - title: CoScreen
+                link: coscreen/
+                description: Share and interact with application windows for pair programming and incident management
+                short_description: Collaborative screen sharing
+      - subheaders:
+          - title: Extend
+            links:
+              - title: Integrations
+                link: integrations/
+                description: Gather data about your applications, services, and systems
+                short_description: Connect your stack
+              - title: API
+                link: api/latest/
+                description: Try the Datadog API
+                short_description: Programmatic access
+              - title: OpenTelemetry
+                link: opentelemetry/
+                description: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
+                short_description: OTel data ingestion
+              - title: Client SDKs
+                link: client_sdks/
+                description: Install and configure the Datadog SDK for your platform
+                short_description: Platform SDK setup
+              - title: Extend Datadog
+                link: extend/
+                description: Extend the Datadog platform
+                short_description: Custom extensions
+              - title: Partners
+                link: partners/
+                description: Learn about best practices and get started monitoring your clients' environments
+                short_description: Partner onboarding
+      - subheaders:
+          - title: Govern
+            links:
+              - title: Fleet Automation
+                link: agent/fleet_automation/
+                description: Remotely configure, upgrade, and manage your Agents at scale
+                short_description: Agent management at scale
+              - title: Account Management
+                link: account_management/
+                description: Manage org-based settings, billing, and data access controls
+                short_description: Org settings and billing
+              - title: Data Security
+                link: data_security/
+                description: Learn how Datadog protects your data
+                short_description: Data protection practices
