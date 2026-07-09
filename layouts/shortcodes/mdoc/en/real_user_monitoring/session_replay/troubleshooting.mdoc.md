@@ -13,7 +13,7 @@ content_filters:
 
 If you experience unexpected behavior with Datadog Session Replay, use this page to help resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
-## Session Replay Recorder
+## Session Replay recorder
 
 ### Some HTML elements are not visible at replay
 
@@ -66,7 +66,12 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 
 <!-- Mobile -->
 {% if equals($platform, "mobile") %}
-## Session replays
+## Overview
+
+If you experience unexpected behavior with Datadog Mobile Session Replay, use this page to help resolve issues. If you continue to have trouble, contact [Datadog Support][9] for further assistance. Regularly update to the latest version of the RUM Mobile SDK, as each release contains improvements and fixes.
+
+## Session Replay recorder
+
 ### Some parts of the application are blank or not visible in the player
 
 Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
@@ -110,5 +115,6 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 At any time during the lifetime of the host app, it's possible to change the tracking consent. When the consent changes from pending to granted, the data in the temporary folder is moved to the "upload" folder.
 
 [8]: /session_replay/privacy_options/?platform=ios#image-masking
+[9]: /help
 {% /if %}
 <!-- end Mobile -->
