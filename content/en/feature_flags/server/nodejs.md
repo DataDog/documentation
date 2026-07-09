@@ -52,7 +52,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 # Optional: Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 
-# Required for feature flags and metrics: Service identification
+# Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```

@@ -38,7 +38,7 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Emit feature_flag.evaluations
+# Optional: Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
@@ -68,7 +68,7 @@ Or add them to your `.csproj` file:
 </ItemGroup>
 {{< /code-block >}}
 
-If you enable flag evaluation metrics, also install the OpenTelemetry SDK and OTLP exporter:
+If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
 
 {{< code-block lang="bash" >}}
 dotnet add package OpenTelemetry
