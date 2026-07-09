@@ -3806,6 +3806,32 @@ menu:
           - SendSecurityMonitoringNotificationPreview
         unstable: []
         order: 130
+    - name: Deactivate an entity context sync integration
+      url: /api/latest/security-monitoring/deactivate-an-entity-context-sync-integration/
+      identifier: security-monitoring-deactivate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeactivateIntegration
+        unstable:
+          - v2
+        order: 156
+    - name: Activate an entity context sync integration
+      url: /api/latest/security-monitoring/activate-an-entity-context-sync-integration/
+      identifier: security-monitoring-activate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ActivateIntegration
+        unstable:
+          - v2
+        order: 155
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -3871,6 +3897,19 @@ menu:
         unstable:
           - v2
         order: 41
+    - name: Get Entra ID Azure App Registration prerequisites
+      url: /api/latest/security-monitoring/get-entra-id-azure-app-registration-prerequisites/
+      identifier: security-monitoring-get-entra-id-azure-app-registration-prerequisites
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntraIdAzureAppRegistrations
+        unstable:
+          - v2
+        order: 157
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration

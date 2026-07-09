@@ -6721,6 +6721,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
       weight: 223
+    - name: WebSocket
+      url: observability_pipelines/sources/websocket/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_websocket
+      weight: 224
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
