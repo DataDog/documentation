@@ -23,7 +23,7 @@ Datadog's Hex integration helps data teams understand which Hex projects and not
 1. In your Hex workspace settings, go to the {{< ui >}}API keys{{< /ui >}} page.
 1. Click {{< ui >}}New Token{{< /ui >}}.
 1. Provide a description and an expiration. Datadog recommends a token with no expiration.
-1. Under API scopes, select **Read Access** for {{< ui >}}Projects{{< /ui >}}, {{< ui >}}Cells{{< /ui >}}, and {{< ui >}}Data connections{{< /ui >}}.
+1. Under API scopes, select {{< ui >}}Read Access{{< /ui >}} for Projects, Cells, and Data connections.
 
 ### Add the Hex integration
 
