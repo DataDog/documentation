@@ -29,7 +29,7 @@ Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later (version 5.99.0 or later required for flag evaluation metrics)
+- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later. Version 5.99.0 or later is required for flag evaluation metrics.
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
@@ -52,7 +52,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 # Optional: Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 
-# Required: Service identification
+# Required for feature flags and metrics: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
