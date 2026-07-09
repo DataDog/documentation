@@ -96,28 +96,14 @@ The total time is defined as the sum of the maximum test session durations.
 
 ## Invalid Git information
 
-Datadog native testing libraries read CI metadata environment variables to determine Git tags, such as `git.commit.sha`, which identifies the commit that the job is expected to test. CI providers define these environment variables when the job starts, so any Git change after that point can cause incorrectly reported Git metadata.
+Datadog native testing libraries populate `git.*` tags from two sources:
 
-This can happen when a GitHub Actions workflow uses `actions/checkout` with a non-default [`ref` input][19], such as a branch, tag, or SHA that is different from the workflow ref:
+- CI provider environment variables, such as [`GITHUB_SHA`][22] in GitHub Actions or [`CI_COMMIT_SHA`][23] in GitLab CI/CD. These values are defined when the job starts and do not change if the job changes the local checkout.
+- The local Git repository, through the `git` executable. This provides metadata that CI provider variables might not include, such as commit message, author, and committer details. This metadata reflects the commit checked out when tests run.
 
-```yaml
-steps:
-  - uses: actions/checkout@v4
-    with:
-      ref: ${{ github.event.pull_request.head.sha }}
-```
+Because these sources can describe different commits, reported `git.*` tags can be inconsistent. For example, GitHub Actions sets `GITHUB_SHA` to the merge commit for [`pull_request` workflows][24]. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, or in GitLab CI/CD jobs, a custom [`actions/checkout` `ref` input][19], [`GIT_CHECKOUT: "false"`][21], or commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` can create the same mismatch.
 
-In GitLab CI/CD, this can happen if a job modifies the checkout after the runner prepares the build directory. For example, a job might set [`GIT_CHECKOUT: "false"`][21] and check out a ref manually, or run commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` before running tests.
-
-If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly before running tests. Set these variables to the Git metadata that you want Datadog to report. For example, to report the original commit that triggered the job, set `DD_GIT_COMMIT_SHA` from [`GITHUB_SHA`][22] in GitHub Actions or [`CI_COMMIT_SHA`][23] in GitLab CI/CD. To report a custom checkout instead, set `DD_GIT_COMMIT_SHA` to that custom commit SHA.
-
-```shell
-# GitHub Actions
-export DD_GIT_COMMIT_SHA="$GITHUB_SHA"
-
-# GitLab CI/CD
-export DD_GIT_COMMIT_SHA="$CI_COMMIT_SHA"
-```
+To report consistent metadata, set the relevant [`DD_GIT_*` environment variables][20] explicitly before running tests. These variables take precedence over CI provider variables and local Git metadata. Set them to the commit metadata that you want Datadog to report, such as the commit that triggered the job or a custom commit checked out during the job.
 
 ## The test status numbers are not what is expected
 
@@ -242,3 +228,4 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 [21]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout
 [22]: https://docs.github.com/en/actions/reference/workflows-and-actions/variables#default-environment-variables
 [23]: https://docs.gitlab.com/ci/variables/predefined_variables/
+[24]: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
