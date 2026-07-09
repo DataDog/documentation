@@ -38,11 +38,11 @@ The following data sources are supported:
 - Logs
 - Spans
 - RUM
-- Audit Trail
+- Audit
 - Events
-- Check Runs
+- Service Checks
 - Network
-- Network Device Flows
+- NetFlow
 - CI Tests
 - CI Pipelines
 - LLM Observability
@@ -53,7 +53,7 @@ The following data sources are not supported:
 
 - Flex Logs
 - Infrastructure Resources
-- DORA
+- Dora Metrics
 
 Additional data sources are being onboarded to Analysis monitors over time as support expands, so this list may change.
 
