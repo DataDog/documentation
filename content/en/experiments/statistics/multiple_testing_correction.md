@@ -30,8 +30,6 @@ When you evaluate several experiment comparisons at once, the family-wise error 
 
 Multiple testing correction reduces the family-wise error rate by making each individual comparison more conservative. In Datadog Experiments, this means confidence intervals become wider, and a treatment needs stronger evidence before Datadog marks a result as statistically significant.
 
-Preferential Bonferroni correction is conservative because it does not model correlation between comparisons. In practice, lifts across related metrics can be correlated, and treatment-variant comparisons can be correlated when they share the same control group.
-
 Multiple testing correction is available for frequentist analysis methods. Datadog does not offer this setting for [Bayesian analysis][1], because Bayesian intervals are not structured around Type I error control.
 
 Datadog treats each treatment variant compared to the control for each decision metric as one comparison.
@@ -73,6 +71,8 @@ Datadog then calculates each interval using:
 ```
 adjusted confidence level = 1 - per-comparison alpha
 ```
+
+This Bonferroni-style allocation does not estimate covariance between comparisons. As a result, it can be conservative when related metric lifts are correlated or when treatment comparisons share the same control group.
 
 ### Example
 
