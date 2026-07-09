@@ -1,6 +1,6 @@
    After the container is built and pushed to your registry, set the required environment variables for the Datadog Agent:
 
-   - `DD_API_KEY`: Your [Datadog API key][1001], used to send data to your Datadog account. For privacy and safety, configure this API key as a Google Cloud Secret.
+   - `DD_API_KEY`: Your [Datadog API key][1001], used to send data to your Datadog account. For privacy and safety, configure this API key as a {{ if or (eq (.Get "cloudrun") "true") (eq (.Get "cloudrun_jobs") "true") }}Google Cloud Secret{{ else }}Container Apps secret{{ end }}.
    - `DD_SITE`: Your [Datadog site][1002]. For example, `datadoghq.com`.
 
    For more environment variables, see the [Environment variables](#environment-variables) section on this page.{{ if eq (.Get "cloudrun") "true" }}

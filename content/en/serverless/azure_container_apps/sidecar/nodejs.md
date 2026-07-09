@@ -98,7 +98,7 @@ logger.info('Hello world!');
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
