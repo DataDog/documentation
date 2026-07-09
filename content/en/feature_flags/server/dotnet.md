@@ -31,6 +31,7 @@ Before setting up the .NET Feature Flags SDK, ensure you have:
 - **Datadog .NET SDK** (`dd-trace-dotnet`):
   - Version 3.36.0 or later for .NET 6+
   - Version 3.38.0 or later for .NET Framework 4.6.2+
+  - Version 3.44.0 or later for flag evaluation metrics
 
 Set the following environment variables:
 
@@ -39,7 +40,7 @@ Set the following environment variables:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -65,6 +66,22 @@ Or add them to your `.csproj` file:
 <ItemGroup>
   <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
   <PackageReference Include="OpenFeature" />
+</ItemGroup>
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+dotnet add package OpenTelemetry
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+{{< /code-block >}}
+
+Or add them to your `.csproj` file:
+
+{{< code-block lang="xml" filename="MyProject.csproj" >}}
+<ItemGroup>
+  <PackageReference Include="OpenTelemetry" />
+  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
 </ItemGroup>
 {{< /code-block >}}
 
