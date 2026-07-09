@@ -61,5 +61,17 @@ export default {
         tag: { type: String },
       },
     },
+    "collapse-content": {
+      attributes: {
+        title: { type: String, required: true },
+        level: {
+          type: String,
+          default: "h3",
+          matches: ["h1", "h2", "h3", "h4", "h5", "h6"],
+        },
+        expanded: { type: Boolean, default: false },
+        id: { type: String },
+      },
+    },
   },
 };

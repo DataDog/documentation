@@ -4,6 +4,8 @@
   --color-brand-hover: #7b3fc4;
   --color-brand-active: #4d2281;
   --color-brand-tint: rgba(99, 44, 166, 0.05);
+  --color-brand-border: #d4bdfb;
+  --color-brand-hover-bg: #eae2f8;
 
   /* Colors — Text */
   --color-text: #212529;

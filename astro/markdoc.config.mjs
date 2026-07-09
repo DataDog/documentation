@@ -186,5 +186,11 @@ export default defineMarkdocConfig({
       render: component("./src/components/WhatsNext/NextLink.astro"),
       ...schema.tags["next-link"],
     },
+    "collapse-content": {
+      render: component(
+        "./src/components/CollapseContent/CollapseContent.astro",
+      ),
+      ...schema.tags["collapse-content"],
+    },
   },
 });
