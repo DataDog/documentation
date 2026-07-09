@@ -17,7 +17,7 @@ The team header displays the team's avatar, banner, name, and description. Custo
 
 ### Info tab
 
-Core team details — notification channels, links, connections, hierarchy (parent team and subteams), and members.
+Core team details: notification channels, links, connections, hierarchy (parent team and subteams), and members.
 
 ### Resources tab
 
@@ -25,7 +25,7 @@ The Datadog resources the team owns, grouped by area such as productivity, softw
 
 ### On-Call tab
 
-The team's [Datadog On-Call][6] setup — members, schedules, escalation policies, routing, and handover automation.
+The team's [Datadog On-Call][6] setup: members, schedules, escalation policies, routing, and handover automation.
 
 ### Customize settings
 
