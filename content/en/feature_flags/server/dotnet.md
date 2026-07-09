@@ -38,8 +38,8 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+# Optional: Emit feature_flag.evaluations
+DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -48,7 +48,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics](/feature_flags/guide/server_flag_evaluation_metrics/). See [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/) for more information on available graphing.
 
 ## Installation
 
@@ -65,6 +65,22 @@ Or add them to your `.csproj` file:
 <ItemGroup>
   <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
   <PackageReference Include="OpenFeature" />
+</ItemGroup>
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+dotnet add package OpenTelemetry
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+{{< /code-block >}}
+
+Or add them to your `.csproj` file:
+
+{{< code-block lang="xml" filename="MyProject.csproj" >}}
+<ItemGroup>
+  <PackageReference Include="OpenTelemetry" />
+  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
 </ItemGroup>
 {{< /code-block >}}
 
