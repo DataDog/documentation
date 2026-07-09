@@ -114,7 +114,18 @@ On the Java tracer, the provider starts its OTLP metrics exporter automatically 
 
 <div class="alert alert-info">In Spring Boot applications, Spring Boot's OpenTelemetry autoconfiguration also creates an <code>OpenTelemetrySdk</code> bean. If the OpenTelemetry SDK version it resolves does not match the OpenTelemetry API version on the classpath, startup fails with a <code>BeanCreationException</code> for the <code>openTelemetry</code> bean and <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>. Importing the <code>opentelemetry-bom</code> as shown above keeps the API and SDK on the same version and resolves the error.</div>
 
-### Set the OTLP endpoint
+### Ruby: Add the OpenTelemetry metrics gems
+
+For Ruby applications, add the OpenTelemetry metrics SDK and OTLP metrics exporter gems to your application bundle:
+
+{{< code-block lang="ruby" filename="Gemfile" >}}
+gem "opentelemetry-metrics-sdk", ">= 0.8"
+gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
+{{< /code-block >}}
+
+Install the gems with `bundle install`. These gems provide the OpenTelemetry meter provider and OTLP metrics exporter. The Ruby tracer uses them when `DD_METRICS_OTEL_ENABLED=true` is set. If the gems are missing, the Ruby tracer does not emit `feature_flag.evaluations` metrics and logs `Failed to load OpenTelemetry metrics gems`.
+
+### Endpoint configuration
 
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 

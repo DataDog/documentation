@@ -100,7 +100,7 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-The Grade and Maven installation examples pin specific versions of `dd-openfeature` and the OpenFeature SDK. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+The Gradle and Maven installation examples pin specific versions of `dd-openfeature` and the OpenFeature SDK. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
 
 To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
