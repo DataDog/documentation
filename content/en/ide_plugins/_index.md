@@ -7,6 +7,8 @@ aliases:
 - '/developers/ide_plugins/'
 - '/developers/ide_integrations/visual_studio/'
 - '/developers/ide_plugins/visual_studio/'
+cascade:
+    site_support_id: ide_plugins
 ---
 
 ## Overview
