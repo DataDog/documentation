@@ -38,6 +38,9 @@ To use an integration marked "Preview", or to request a new integration, request
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" preview="true" >}}
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="uptime" src="integrations_logos/uptime.png" alt="uptime.com" title="uptime.com" preview="true" >}}
   {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="servicenow" src="integrations_logos/servicenow.png" alt="ServiceNow" title="ServiceNow" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" logo_id="jira" src="integrations_logos/jira.png" alt="Jira" title="Jira" preview="true" >}}
+  {{< integration-tile href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="LogicMonitor" preview="true" >}}
 {{< /integration-tile-grid >}}
 
 ## Other tools
