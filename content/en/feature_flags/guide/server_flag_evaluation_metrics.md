@@ -69,6 +69,8 @@ gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
 
 Install the gems with `bundle install`. These gems provide the OpenTelemetry meter provider and OTLP metrics exporter. The Ruby tracer uses them when `DD_METRICS_OTEL_ENABLED=true` is set. If the gems are missing, the Ruby tracer does not emit `feature_flag.evaluations` metrics and logs `Failed to load OpenTelemetry metrics gems`.
 
+### Endpoint configuration
+
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
 Set an OTLP endpoint explicitly in any of these cases:
