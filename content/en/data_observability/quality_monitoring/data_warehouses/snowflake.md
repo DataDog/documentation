@@ -249,7 +249,7 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
-[3]: https://app.datadoghq.com/datasets/settings/integrations
+[3]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /monitors/types/data_observability/
 [6]: https://docs.snowflake.com/en/user-guide/object-tagging

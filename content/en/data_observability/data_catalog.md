@@ -32,7 +32,7 @@ When you open the catalog at [/data-obs/catalog](https://app.datadoghq.com/data-
 - **Description**: pulled from the source system if available
 - **Links to the source system**: direct references back to the origin platform so you can navigate from the catalog to the source in one click
 - **Tags**: `key:value` metadata pairs pulled from the source system if available
-- **Monitor Status**: displays the state of any active [Data Quality Monitors](/data_observability/quality_monitoring/) on the asset
+- **Monitor Status**: displays the state of any active [Data Observability monitors](/data_observability/quality_monitoring/) on the asset
 - **Lineage**: upstream and downstream dependencies, where supported by the integration. To explore lineage across assets, see [Lineage][1].
 
 Use the left sidebar to filter assets by type: {{< ui >}}All assets{{< /ui >}}, {{< ui >}}Databases{{< /ui >}}, {{< ui >}}Schemas{{< /ui >}}, or {{< ui >}}Tables{{< /ui >}}. Connected integrations (such as Snowflake, dbt, and BigQuery) are also listed individually in the sidebar.
