@@ -109,10 +109,14 @@ steps:
 
 In GitLab CI/CD, this can happen if a job modifies the checkout after the runner prepares the build directory. For example, a job might set [`GIT_CHECKOUT: "false"`][21] and check out a ref manually, or run commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` before running tests.
 
-If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly. For example, set `DD_GIT_COMMIT_SHA` to the commit under test:
+If your job changes the checked out commit or branch after it starts, set the relevant [`DD_GIT_*` environment variables][20] explicitly before running tests. Set these variables to the Git metadata that you want Datadog to report. For example, to report the original commit that triggered the job, set `DD_GIT_COMMIT_SHA` from [`GITHUB_SHA`][22] in GitHub Actions or [`CI_COMMIT_SHA`][23] in GitLab CI/CD. To report a custom checkout instead, set `DD_GIT_COMMIT_SHA` to that custom commit SHA.
 
 ```shell
-export DD_GIT_COMMIT_SHA="$(git rev-parse HEAD)"
+# GitHub Actions
+export DD_GIT_COMMIT_SHA="$GITHUB_SHA"
+
+# GitLab CI/CD
+export DD_GIT_COMMIT_SHA="$CI_COMMIT_SHA"
 ```
 
 ## The test status numbers are not what is expected
@@ -236,3 +240,5 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 [19]: https://github.com/actions/checkout#usage
 [20]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#collecting-git-metadata
 [21]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout
+[22]: https://docs.github.com/en/actions/reference/workflows-and-actions/variables#default-environment-variables
+[23]: https://docs.gitlab.com/ci/variables/predefined_variables/
