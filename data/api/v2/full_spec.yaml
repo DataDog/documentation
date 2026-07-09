@@ -10488,6 +10488,7 @@ components:
         - Host
         - HostImage
         - Image
+        - ServerlessFunction
       example: Repository
       type: string
       x-enum-varnames:
@@ -10496,6 +10497,7 @@ components:
         - HOST
         - HOSTIMAGE
         - IMAGE
+        - SERVERLESSFUNCTION
     AssetVersion:
       description: Asset version.
       properties:
@@ -47361,11 +47363,6 @@ components:
     IncidentUserDefinedFieldAttributesResponse:
       description: Attributes of an incident user-defined field.
       properties:
-        attached_to:
-          description: The resource type this field is attached to. Always "incidents".
-          example: "incidents"
-          readOnly: true
-          type: string
         category:
           $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
         collected:
@@ -47410,12 +47407,6 @@ components:
           example: "1.5"
           nullable: true
           type: string
-        prerequisite:
-          description: Reserved for future use. Always null.
-          example:
-          nullable: true
-          readOnly: true
-          type: string
         required:
           description: When true, users must fill out this field on incidents.
           example: false
@@ -47425,12 +47416,6 @@ components:
           example: false
           readOnly: true
           type: boolean
-        table_id:
-          description: Reserved for internal use. Always 0.
-          example: 0
-          format: int64
-          readOnly: true
-          type: integer
         tag_key:
           description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
           example:
@@ -47451,7 +47436,6 @@ components:
           nullable: true
           type: array
       required:
-        - attached_to
         - category
         - collected
         - created
@@ -47462,10 +47446,8 @@ components:
         - modified
         - name
         - ordinal
-        - prerequisite
         - required
         - reserved
-        - table_id
         - tag_key
         - type
         - valid_values
@@ -140841,7 +140823,6 @@ paths:
                   value:
                     data:
                       - attributes:
-                          attached_to: "incidents"
                           category: "what_happened"
                           collected: "active"
                           created: "2026-03-18T08:40:04.437887Z"
@@ -140852,10 +140833,8 @@ paths:
                           modified: "2026-03-18T08:40:04.437887Z"
                           name: "root_cause"
                           ordinal: "1.1"
-                          prerequisite:
                           required: false
                           reserved: false
-                          table_id: 0
                           tag_key:
                           type: 1
                           valid_values:
@@ -140961,7 +140940,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category:
                         collected:
                         created: "2026-03-18T08:40:05.185406Z"
@@ -140972,10 +140950,8 @@ paths:
                         modified: "2026-03-18T08:40:05.185406Z"
                         name: "root_cause"
                         ordinal: "9"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 3
                         valid_values:
@@ -141094,7 +141070,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category: "what_happened"
                         collected: "active"
                         created: "2026-03-18T08:40:04.437887Z"
@@ -141105,10 +141080,8 @@ paths:
                         modified: "2026-03-18T08:40:04.437887Z"
                         name: "root_cause"
                         ordinal: "1.1"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 1
                         valid_values:
@@ -141205,7 +141178,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category: "what_happened"
                         collected:
                         created: "2026-03-18T08:39:49.913895Z"
@@ -141216,10 +141188,8 @@ paths:
                         modified: "2026-03-18T08:39:49.922909Z"
                         name: "root_cause"
                         ordinal: "8"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 3
                         valid_values:
@@ -178577,6 +178547,11 @@ paths:
       description: |-
         Get a list of assets SBOMs for an organization.
 
+        The `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).
+        Subsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required
+        for paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)
+        with code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.
+
         ### Pagination
 
         Please review the [Pagination section](#pagination) for the "List Vulnerabilities" endpoint.
@@ -178606,7 +178581,8 @@ paths:
             format: int64
             minimum: 1
             type: integer
-        - description: The type of the assets for the SBOM request.
+        - description: >-
+            The type of the assets for the SBOM request. Required for initial requests (when no `page[token]` is provided). Infrastructure types (`Host`, `HostImage`, `Image`, `ServerlessFunction`) and code types (`Repository`, `Service`) cannot be mixed in the same request.
           example: Repository
           in: query
           name: filter[asset_type]
