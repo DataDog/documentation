@@ -87,13 +87,13 @@ export default defineMarkdocConfig({
       ...schema.tags.stepper,
       // Like `tabs`, the transform assembles the children server-side rather
       // than letting Stepper.astro eager-render its slot. Each `step` /
-      // `stepperFinished` child is a registered component tag, so it renders
+      // `stepper-finished` child is a registered component tag, so it renders
       // with proper CSS-module classes; here we just inject the shared
       // attributes (stepper id, index, position, level) each child needs.
       transform(node, config) {
         const stepperRender = config.tags.stepper.render;
         const stepRender = config.tags.step.render;
-        const finishedRender = config.tags.stepperFinished.render;
+        const finishedRender = config.tags["stepper-finished"].render;
 
         const stepperId = generateElementId("stepper");
         const attributes = node.transformAttributes(config);
@@ -126,7 +126,7 @@ export default defineMarkdocConfig({
               ),
             );
             stepIndex++;
-          } else if (child.tag === "stepperFinished") {
+          } else if (child.tag === "stepper-finished") {
             children.push(
               new Markdoc.Tag(
                 finishedRender,
@@ -149,25 +149,25 @@ export default defineMarkdocConfig({
       render: component("./src/components/Stepper/Step.astro"),
       ...schema.tags.step,
     },
-    stepperFinished: {
+    "stepper-finished": {
       render: component("./src/components/Stepper/StepperFinished.astro"),
-      ...schema.tags.stepperFinished,
+      ...schema.tags["stepper-finished"],
     },
-    regionSelector: {
+    "region-selector": {
       render: component(
         "./src/components/RegionSelector/RegionSelectorIsland.astro",
       ),
       selfClosing: true,
     },
-    whatsNext: {
+    "whats-next": {
       render: component("./src/components/WhatsNext/WhatsNext.astro"),
-      ...schema.tags.whatsNext,
-      // Markdoc groups consecutive nextLink lines into a paragraph node,
+      ...schema.tags["whats-next"],
+      // Markdoc groups consecutive next-link lines into a paragraph node,
       // which would render <ul><p><li>...</li></p></ul> — invalid HTML that
       // breaks :first-child / :last-child styling on whatsnext__item.
-      // Unwrap any paragraph children so nextLinks become direct <ul> kids.
+      // Unwrap any paragraph children so next-links become direct <ul> kids.
       transform(node, config) {
-        const whatsNextRender = config.tags.whatsNext.render;
+        const whatsNextRender = config.tags["whats-next"].render;
         const children = node
           .transformChildren(config)
           .flatMap((child) =>
@@ -182,9 +182,9 @@ export default defineMarkdocConfig({
         );
       },
     },
-    nextLink: {
+    "next-link": {
       render: component("./src/components/WhatsNext/NextLink.astro"),
-      ...schema.tags.nextLink,
+      ...schema.tags["next-link"],
     },
   },
 });

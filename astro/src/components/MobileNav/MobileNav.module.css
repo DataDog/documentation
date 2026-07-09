@@ -190,7 +190,9 @@
   transition: transform 250ms ease;
 }
 
-.mobile-nav__caret-arrow {
+/* The arrow geometry lives in the caret-down.svg asset (inlined via SvgIcon);
+   its stroke is themed here so open-state and dark mode can recolor it. */
+.mobile-nav__caret polyline {
   fill: none;
   stroke: var(--hugo-nav-text);
   stroke-miterlimit: 10;
@@ -206,7 +208,7 @@
 }
 .mobile-nav__section[open]
   > .mobile-nav__section-toggle
-  .mobile-nav__caret-arrow {
+  .mobile-nav__caret polyline {
   stroke: var(--hugo-nav-brand-primary);
 }
 

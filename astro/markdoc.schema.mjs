@@ -44,18 +44,18 @@ export default {
         title: { type: String, required: true },
       },
     },
-    stepperFinished: {
+    "stepper-finished": {
       attributes: {},
     },
-    regionSelector: {
+    "region-selector": {
       attributes: {},
     },
-    whatsNext: {
+    "whats-next": {
       attributes: {
         desc: { type: String },
       },
     },
-    nextLink: {
+    "next-link": {
       attributes: {
         href: { type: String, required: true },
         tag: { type: String },

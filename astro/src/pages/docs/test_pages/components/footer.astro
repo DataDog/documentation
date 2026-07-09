@@ -26,7 +26,7 @@ const title = 'Footer';
           <tr><td><code>LanguageSelector.tsx</code></td><td>Preact island</td><td>Bottom-row globe/caret dropdown. Shows the current language plus alternates. English-only for now; add to <code>availableLanguages</code> in <code>Footer.astro</code> when more languages land.</td></tr>
           <tr><td><code>FreeTrialModal.tsx</code></td><td>Preact island</td><td>Opens when any element with <code>data-trigger="free-trial"</code> is clicked. Embeds the signup flow in an iframe (currently <code>app.datadoghq.com/signup</code>). Close on Escape, backdrop click, or the × button.</td></tr>
           <tr><td><code>SocialIcon.astro</code></td><td>Static</td><td>Renders a social-network icon with the websites-modules iconfont (<code>&lt;i class="icon-&#123;name&#125;"&gt;</code>) keyed by the <code>pre</code> field in <code>footer_social</code>.</td></tr>
-          <tr><td><code>SvgIcon.astro</code></td><td>Static</td><td>Inlines an SVG from <code>src/assets/images/svg-icons/</code>, performing Hugo's <code>default-*</code> placeholder substitutions for size/color/opacity.</td></tr>
+          <tr><td><code>SvgIcon.astro</code></td><td>Static (shared)</td><td>Shared icon component at <code>src/components/SvgIcon/</code> (used here and elsewhere, e.g. the Stepper). Inlines an SVG by filename from <code>src/assets/images/svg-icons/</code> or <code>src/assets/images/icons/</code>, performing Hugo's <code>default-*</code> placeholder substitutions for size/color/opacity.</td></tr>
         </tbody>
       </table>
 

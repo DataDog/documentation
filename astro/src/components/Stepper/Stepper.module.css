@@ -176,6 +176,7 @@
   border-radius: var(--border-radius);
   background-color: var(--color-bg);
   color: var(--color-brand);
+  font-family: inherit;
   font-size: var(--font-size-sm);
   font-weight: 500;
   line-height: 1;
@@ -213,7 +214,7 @@
   border-radius: 0;
   background-color: transparent;
   color: var(--color-brand);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: 500;
   text-transform: none;
   letter-spacing: 0.01em;
@@ -228,17 +229,21 @@
   text-decoration: underline;
 }
 
-/* Icons stand in for the text labels on narrow viewports */
-.stepper__btn-icon {
+/* Icons stand in for the text labels on narrow viewports. Scoped under
+   .stepper__btn to win over SvgIcon's global .svg-icon display rule. */
+.stepper__btn .stepper__btn-icon {
   display: none;
-  width: 28px;
-  height: 28px;
   position: relative;
   top: 8px;
 }
 
+.stepper__btn-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
 @media (max-width: 479px) {
-  .stepper__btn-icon {
+  .stepper__btn .stepper__btn-icon {
     display: inline-block;
     left: 9px;
   }

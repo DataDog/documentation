@@ -1,14 +1,21 @@
 ---
 /**
- * Inlines an SVG from the hugo_site/static/images/svg-icons mock, mirroring
- * Hugo's svg.html partial. Replaces `default-size` / `default-fill` /
+ * Inlines an SVG asset by filename, mirroring Hugo's svg.html partial. Sources
+ * from both `images/svg-icons/` and `images/icons/` (matching Hugo's two icon
+ * folders), keyed by bare filename. Replaces `default-size` / `default-fill` /
  * `default-opacity` placeholders with the props passed in, matching the
  * behavior Hugo uses to color world.svg etc. at render time.
  */
-const icons = import.meta.glob<string>(
-  '../../assets/images/svg-icons/*.svg',
+const iconModules = import.meta.glob<string>(
+  ['../../assets/images/svg-icons/*.svg', '../../assets/images/icons/*.svg'],
   { query: '?raw', import: 'default', eager: true }
 );
+
+const iconsByFilename: Record<string, string> = {};
+for (const [path, raw] of Object.entries(iconModules)) {
+  const filename = path.split('/').pop();
+  if (filename) iconsByFilename[filename] = raw;
+}
 
 interface Props {
   src: string;
@@ -19,8 +26,7 @@ interface Props {
 }
 
 const { src, size = '100%', color = '#000000', opacity = '1.0', class: className } = Astro.props;
-const key = `../../assets/images/svg-icons/${src}`;
-const rawOriginal: string | undefined = icons[key];
+const rawOriginal: string | undefined = iconsByFilename[src];
 
 const raw = rawOriginal
   ? rawOriginal

@@ -1,11 +1,10 @@
 ---
 import styles from "./Stepper.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { HeadingLevel } from "@lib/componentUtils/headingLevels";
+import SvgIcon from "../SvgIcon/SvgIcon.astro";
 
 const cl = classListFactory(styles);
-
-const HEADING_LEVELS = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
-type HeadingLevel = (typeof HEADING_LEVELS)[number];
 
 interface Props {
   title: string;
@@ -71,19 +70,7 @@ const Heading = level;
             title="Expand all"
             data-hidden={open ? "true" : undefined}
           >
-            <svg
-              class={cl("stepper__btn-icon")}
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                fill="currentColor"
-                d="m15.74 8.83l-.7.71L11.5 6L7.96 9.54l-.7-.71l4.24-4.24zm0 7.34l-4.24 4.24l-4.24-4.24l.7-.71L11.5 19l3.54-3.54z"
-              />
-            </svg>
+            <SvgIcon src="expand-mdi.svg" class={cl("stepper__btn-icon")} />
             <span class={cl("stepper__btn-label")}>Expand all</span>
           </button>
           <button
@@ -92,19 +79,7 @@ const Heading = level;
             title="Collapse all"
             data-hidden={open ? undefined : "true"}
           >
-            <svg
-              class={cl("stepper__btn-icon")}
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                fill="currentColor"
-                d="M15.74 5.29L11.5 9.54L7.26 5.29l.7-.7l3.54 3.53l3.54-3.53zm0 14.42l-.7.7l-3.54-3.53l-3.54 3.53l-.7-.7l4.24-4.25z"
-              />
-            </svg>
+            <SvgIcon src="collapse-mdi.svg" class={cl("stepper__btn-icon")} />
             <span class={cl("stepper__btn-label")}>Collapse all</span>
           </button>
         </div>

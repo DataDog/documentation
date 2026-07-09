@@ -15,6 +15,7 @@ import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
+import SvgIcon from "@components/SvgIcon/SvgIcon.astro";
 
 interface Props {
   categories: ApiCategory[];
@@ -47,12 +48,7 @@ const cl = classListFactory(styles);
             >
               <span>{category.name}</span>
               <span class={cl("mobile-nav__caret")} aria-hidden="true">
-                <svg viewBox="0 0 17.78 10.51" width="18">
-                  <polyline
-                    class={cl("mobile-nav__caret-arrow")}
-                    points="16.92 1.14 8.92 9.14 0.92 1.14"
-                  />
-                </svg>
+                <SvgIcon src="caret-down.svg" />
               </span>
             </summary>
             <ul class={cl("mobile-nav__sublist")}>

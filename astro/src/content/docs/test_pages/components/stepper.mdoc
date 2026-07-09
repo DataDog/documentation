@@ -25,7 +25,7 @@ By default the stepper behaves as an accordion: only the active step's body is s
 |----------|----------|---------|--------------------------------------|
 | `title`  | `string` | —       | Required. The step's heading text.   |
 
-### `stepperFinished` tag (child of `stepper`)
+### `stepper-finished` tag (child of `stepper`)
 
 Optional. Its content is shown after the reader finishes the last step. No attributes.
 
@@ -47,9 +47,9 @@ Edit the configuration file and restart the Agent.
 {% step title="Verify data is flowing" %}
 Check the integration status in the Datadog UI.
 {% /step %}
-{% stepperFinished %}
+{% stepper-finished %}
 You're all set. Your data should now be flowing into Datadog.
-{% /stepperFinished %}
+{% /stepper-finished %}
 {% /stepper %}
 
 ### Expanded (`open=true`)
@@ -69,4 +69,77 @@ All step bodies are visible at once.
 {% step title="The only step" %}
 A single-step stepper renders no connecting line.
 {% /step %}
+{% /stepper %}
+
+### Complex content (code blocks and tabs)
+
+{% stepper %}
+
+{% step title="Install the database" %}
+Run the following command to install FakeDB:
+
+```shell
+curl -fsSL https://fakedb.example.com/install.sh | bash
+```
+
+After the installation completes, verify that FakeDB is running:
+
+```shell
+fakedb --version
+```
+{% /step %}
+
+{% step title="Configure the database" %}
+
+Create a configuration file for FakeDB:
+
+{% tabs %}
+
+{% tab label="YAML" %}
+```yaml
+fakedb:
+  host: localhost
+  port: 5432
+  database: mydb
+  username: admin
+  password: secret
+  max_connections: 100
+  timeout: 30s
+```
+{% /tab %}
+
+{% tab label="JSON" %}
+```json
+{
+  "fakedb": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "mydb",
+    "username": "admin",
+    "password": "secret",
+    "max_connections": 100,
+    "timeout": "30s"
+  }
+}
+```
+{% /tab %}
+{% /tabs %}
+
+{% /step %}
+
+{% step title="Connect to the database" %}
+Start the FakeDB service and open a connection:
+
+```shell
+fakedb start
+fakedb connect --host localhost --port 5432 --database mydb --username admin
+```
+
+To verify the connection is working, run a test query:
+
+```shell
+fakedb query "SELECT 1;"
+```
+{% /step %}
+
 {% /stepper %}
