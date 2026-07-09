@@ -378,7 +378,7 @@ spec:
         <LOGS_CONFIG>
 ```
 
-For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with the DatadogInstrumentation CRD][29].
+For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
 
 [29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 {{% /tab %}}

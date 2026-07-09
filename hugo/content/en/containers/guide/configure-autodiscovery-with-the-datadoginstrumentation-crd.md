@@ -1,5 +1,5 @@
 ---
-title: Configure Autodiscovery with the DatadogInstrumentation CRD
+title: Configure Autodiscovery with DatadogInstrumentation CRD
 description: Configure Autodiscovery checks and logs for Kubernetes workloads through the DatadogInstrumentation custom resource instead of pod annotations.
 further_reading:
 - link: "/containers/kubernetes/integrations/"
@@ -101,7 +101,7 @@ helm upgrade --install datadog-crds datadog/datadog-crds
 
 ## Configure a workload
 
-A `DatadogInstrumentation` resource has three main parts:
+`DatadogInstrumentation` for Autodiscovery has three parts:
 
 - `spec.targetRef`: identifies the workload to configure, by `apiVersion`, `kind`, and `name`. The resource and the target workload must be in the same namespace.
 - `spec.config.checks`: defines integration checks to run against your workload.
@@ -114,9 +114,9 @@ You can target the following Kubernetes resources:
 - StatefulSet
 - CronJob
 - Job
-- Service. Service targets schedule endpoint checks. See [Service targets](#service-targets).
+- Service. (See [Service targets](#service-targets))
 
-This example configures a [Redis integration][4] for a `Deployment` named `redis`, including log collection. It mirrors this [annotation-based example][2], using the same [template variables][5], including `%%host%%`:
+This example configures a [Redis integration][4] targeting a `Deplymend` named `redis` mirroring this [annotation-based example][2].
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -162,7 +162,7 @@ Each entry in `checks` accepts the following fields:
 : Required. The name of the Datadog integration to run, for example `redisdb`.
 
 `containerName`
-: Optional. For workload targets, use the pod container name to apply the check to a specific container. Not used for Service targets.
+: Required for workload targets. The value must match a container name in the pod. Omit this field for Service targets.
 
 `initConfig`
 : Optional. The `init_config` section for the integration.
@@ -170,11 +170,11 @@ Each entry in `checks` accepts the following fields:
 `instances`
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
-Each entry in `logs` accepts the same log collection configuration options as Autodiscovery log annotations, such as `source`, `service`, `tags`, `type`, `path`, and `log_processing_rules`. Each log entry also requires `containerName`, which must match the pod container name.
+Each entry in `logs` accepts the same log collection configuration options as Autodiscovery log annotations, like `tags`, `type`, and `path`. Each log config requires a `containerName` matching a container in the pod.
 
 ### Service targets
 
-To configure an [endpoint check][6], set `targetRef` to a `Service`. Service targets behave the same way as endpoint checks configured with Kubernetes service annotations:
+Targeting a `Service` configures an [endpoint check][6] similar to an annotation on the Kubernetes service.
 
 - Datadog schedules one endpoint check for each endpoint of the Service.
 - `%%host%%` resolves to the endpoint IP.

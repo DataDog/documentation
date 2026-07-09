@@ -54,7 +54,7 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 Configure your OpenMetrics or Prometheus check using Autodiscovery. Use pod annotations or `DatadogInstrumentation` custom resources.
 
-If you use the Prometheus Operator, `DatadogInstrumentation` provides a similar CRD-based workflow for Datadog Autodiscovery. See [Configure Autodiscovery with the DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
+If you use the Prometheus Operator, `DatadogInstrumentation` provides a similar CRD-based workflow for Datadog Autodiscovery. See [Configure Autodiscovery with DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
 
 {{< tabs >}}
 {{% tab "Annotations (AD v2)" %}}
@@ -113,7 +113,7 @@ spec:
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Use a `DatadogInstrumentation` custom resource to configure an OpenMetrics check for a supported Kubernetes workload without changing pod annotations. For more information, see [Configure Autodiscovery with the DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
+Use a `DatadogInstrumentation` custom resource to configure an OpenMetrics check without adding pod annotations. For more information, see [Configure Autodiscovery with DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1

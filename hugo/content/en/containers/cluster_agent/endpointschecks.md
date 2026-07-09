@@ -20,9 +20,7 @@ further_reading:
 
 The cluster check feature provides the ability to [Autodiscover][1] and perform checks on load-balanced cluster services, such as Kubernetes services. _Endpoints checks_ extend this mechanism to monitor each endpoint managed by a Kubernetes service.
 
-The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
-
-You can also configure endpoint checks for a Service with the [`DatadogInstrumentation` custom resource][14], instead of Kubernetes service annotations.
+ The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services or with a [`DatadogInstrumentation` custom resource][14]. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
 
 The Agents connect to the Cluster Agent every ten seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service tags, [Kubernetes tags][3], host tags, and the `kube_endpoint_ip` tag based on the evaluated IP address.
 
@@ -397,7 +395,7 @@ spec:
 
 ### Configuration from DatadogInstrumentation CRD
 
-To manage endpoint-check configuration without annotating the Service, use a `DatadogInstrumentation` resource that targets a Service. For setup steps and an example, see [Configure Autodiscovery with the DatadogInstrumentation CRD][14].
+Use a `DatadogInstrumentation` resource targeting the Service. For more details, see [Configure Autodiscovery with DatadogInstrumentation CRD][14].
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1

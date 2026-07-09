@@ -11,7 +11,7 @@ further_reading:
   text: "Create and load an Autodiscovery Integration Template"
 - link: "/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/"
   tag: "Documentation"
-  text: "Configure Autodiscovery with the DatadogInstrumentation CRD"
+  text: "Configure Autodiscovery with DatadogInstrumentation CRD"
 - link: "/agent/guide/ad_identifiers/"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
@@ -143,7 +143,7 @@ Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodisc
 
 You can define an integration template in multiple forms: as Kubernetes pod annotations, Docker labels, a configuration file mounted within the Agent, a ConfigMap, and key-value stores. See the [Autodiscovery Integration Templates][4] documentation for further details.
 
-On Kubernetes, you can also configure checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. See [Configure Autodiscovery with the DatadogInstrumentation CRD][5].
+On Kubernetes, you can also configure checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. See [Configure Autodiscovery with DatadogInstrumentation CRD][5].
 
 ### Notes
 

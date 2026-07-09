@@ -19,7 +19,7 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 - link: "/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/"
   tag: "Documentation"
-  text: "Configure Autodiscovery with the DatadogInstrumentation CRD"
+  text: "Configure Autodiscovery with DatadogInstrumentation CRD"
 ---
 
 This page contains detailed example templates for configuring integrations in containerized environments in the following scenarios:
@@ -31,7 +31,7 @@ For more information about containers and integrations, see [Docker and Integrat
 
 All examples make use of Datadog's Autodiscovery feature, which allows you to define configuration templates for Agent Checks on designated sets of containers. For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
 
-To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with the DatadogInstrumentation CRD][13].
+To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with DatadogInstrumentation CRD][13].
 
 ## Redis integration for all Redis containers
 
@@ -133,6 +133,39 @@ spec:
       image: redis:latest
       ports:
         - containerPort: 6379
+```
+
+{{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+In a `DatadogInstrumentation` resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: redis-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: redis
+  config:
+    checks:
+      - integration: redisdb
+        containerName: redis
+        initConfig: {}
+        instances:
+          - host: "%%host%%"
+            port: "6379"
+            password: "%%env_REDIS_PASSWORD%%"
+    logs:
+      - containerName: redis
+        type: file
+        path: /var/log/redis_6379.log
+        source: redis
+        service: redis_service
 ```
 
 {{% /tab %}}
@@ -413,6 +446,42 @@ spec:
   containers:
     - name: apache
   # (...)
+```
+
+{{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+In a `DatadogInstrumentation` resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: apache-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: apache
+  config:
+    checks:
+      - integration: apache
+        containerName: apache
+        initConfig: {}
+        instances:
+          - apache_status_url: "http://%%host%%/server-status?auto"
+            min_collection_interval: 30
+      - integration: http_check
+        containerName: apache
+        initConfig: {}
+        instances:
+          - name: "my_website_1"
+            url: "http://%%host%%/website_1"
+            timeout: 1
+          - name: "my_website_2"
+            url: "http://%%host%%/website_2"
+            timeout: 1
 ```
 
 {{% /tab %}}
