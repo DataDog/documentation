@@ -22,7 +22,7 @@ aliases:
 ---
 
 ## Overview
-Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack. TEST: indexing churn verification.
+Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack. TEST: indexing churn verification (check #2).
 
 Ask Bits Chat questions across these categories:
 
