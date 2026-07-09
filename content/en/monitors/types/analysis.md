@@ -55,7 +55,7 @@ The following data sources are not supported:
 - Infrastructure Resources
 - DORA
 
-Additional data sources are being onboarded to Analysis monitors over time as support expands, so this list may change during Preview.
+Additional data sources are being onboarded to Analysis monitors over time as support expands, so this list may change.
 
 Any data source not listed as supported is unavailable for monitoring. If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
 
