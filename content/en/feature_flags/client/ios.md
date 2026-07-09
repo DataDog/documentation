@@ -267,6 +267,7 @@ final class FeatureFlagStateObserver: FlagsStateListener {
         switch newState {
         case .notReady:
             // The client has not loaded assignments yet.
+            break
         case .reconciling:
             // The client is fetching assignments for a context change.
         case .ready:
