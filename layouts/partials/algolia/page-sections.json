@@ -19,6 +19,7 @@
   {{- $order := .order -}}
   {{- $html := .html -}}
   {{- $baseHeader := .header -}}
+  {{- $headingID := .headingID -}}
 
   {{- $tabRe := `<div[^>]*class="[^"]*tab-pane[^"]*"[^>]*>` -}}
   {{- $tabOpens := findRE $tabRe $html -}}
@@ -42,7 +43,8 @@
   {{- end -}}
 
   {{- /* Segments to index; each: header, html, tab (data-lang for ?tab= link), anchor. */ -}}
-  {{- $baseAnchor := $baseHeader | anchorize -}}
+  {{- /* Anchor = Hugo's own per-page-deduplicated heading id: unique per page (setup, setup-1, ...), matches the real on-page anchor, and independent of other headings' position. */ -}}
+  {{- $baseAnchor := $headingID -}}
   {{- $segments := slice -}}
   {{- if $tabSplit -}}
       {{- /* Capture any intro content before the first tab, so it isn't dropped. */ -}}
@@ -94,9 +96,8 @@
           {{- end -}}
           {{- range $i, $c := $chunked -}}
               {{- if gt (len $c) 2 -}}
-                  {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
-                  {{- $id_anchor := $section_header | anchorize -}}
-                  {{- /* Fold tab slug into id: anchorize() drops "<>=", so ">= 14.1" and "< 14.1" tabs would otherwise share one objectID. */ -}}
+                  {{- /* objectID = stable identity only (heading id + tab slug), never global position, so a heading reorg no longer re-keys unrelated sections. Tab slug disambiguates the tabs that share one heading id. */ -}}
+                  {{- $id_anchor := $section_anchor -}}
                   {{- if $section_tab -}}
                       {{- $id_anchor = print $id_anchor "-" $section_tab -}}
                   {{- end -}}
@@ -104,7 +105,7 @@
                   {{- if $page.Params.exclude_headers_from_search -}}
                       {{- $hdr = "" -}}
                   {{- end -}}
-                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i "_" $order -}}
+                  {{- $object_id := print $page.File.UniqueID "_" $page.Language.Lang "_" $id_anchor "_" $i -}}
                   {{- /* Tab segments link via ?tab=<data-lang>(#anchor); others via #anchor. */ -}}
                   {{- $url_suffix := "" -}}
                   {{- if $section_tab -}}
@@ -153,7 +154,7 @@
       {{- $section_header := $heading_html | plainify | htmlUnescape | safeHTML -}}
 
       {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
-          {{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $content_block "header" $section_header "order" $order) -}}
+          {{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $content_block "header" $section_header "headingID" $v.ID "order" $order) -}}
           {{- $order = add $order 1 -}}
       {{- end -}}
       {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
@@ -168,7 +169,7 @@
 {{- if $first_heading -}}
     {{- $lead_html = index (split $page.Content $first_heading) 0 -}}
 {{- end -}}
-{{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "order" -1) -}}
+{{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "headingID" "" "order" -1) -}}
 
 {{- /* Index each H2/H3 heading section. */ -}}
 {{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" $ctx "order" 0) -}}
