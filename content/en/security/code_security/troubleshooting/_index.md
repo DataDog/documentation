@@ -298,6 +298,10 @@ See the Application Security product set up documentation to validate you you ar
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
+### Bits Code remediation fails or produces incomplete fixes
+
+Bits Code requires internet access to apply library upgrades when remediating SCA findings. If Bits Code fails to generate a fix or produces an incomplete patch, confirm that your internet access policy allows Bits Code to reach the package registries required for your language (for example, `registry.npmjs.org` for JavaScript or `pypi.org` for Python). See [Configure internet access][30] for more information.
+
 ## Runtime Code Analysis (IAST)
 
 ### Confirm IAST is enabled
@@ -413,3 +417,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [27]: https://github.com/DataDog/datadog-sbom-generator/releases
 [28]: /integrations/github/
 [29]: https://app.datadoghq.com/integrations/github/
+[30]: /bits_ai/bits_code/setup/#configure-internet-access
