@@ -27,7 +27,7 @@ Use this information to prioritize exposed endpoints, confirm whether important 
 Endpoint Scanning is off by default. To enable it:
 
 1. In App and API Protection settings, go to [API Security Testing][3].
-2. Toggle **Enable Endpoint Scanning** on.
+2. Toggle {{< ui >}}Enable Endpoint Scanning{{< /ui >}} on.
 
 After you enable it, Datadog scans eligible endpoints in the background in batches. Endpoints are retested approximately every seven days.
 

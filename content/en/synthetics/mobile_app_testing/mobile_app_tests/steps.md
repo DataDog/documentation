@@ -15,25 +15,25 @@ further_reading:
  
 ## Overview
 
-Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertion** or **Interaction**. 
+Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click {{< ui >}}Start Recording{{< /ui >}} and interact with the device as you would normally, or create a step manually by clicking {{< ui >}}Assertion{{< /ui >}} or {{< ui >}}Interaction{{< /ui >}}. 
 
 ## Launch a device
 
-To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click **Launch Device**. 
+To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click {{< ui >}}Launch Device{{< /ui >}}. 
 
 {{< img src="mobile_app_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
-Select **Show only available devices. Available devices load faster** to see the most available devices for shorter testing wait times. 
+Select {{< ui >}}Show only available devices. Available devices load faster{{< /ui >}} to see the most available devices for shorter testing wait times. 
 
 ### Notifications
 
-Click the green **Device Connection Notification** button in the **Launch a device to start recording** modal to enable notifications for when your device is ready and when your device is going to timeout because of inactivity.
+Click the green {{< ui >}}Device Connection Notification{{< /ui >}} button in the {{< ui >}}Launch a device to start recording{{< /ui >}} modal to enable notifications for when your device is ready and when your device is going to timeout because of inactivity.
 
 ## Automatically recorded steps
 
-After you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
+After you click {{< ui >}}Start Recording{{< /ui >}}, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
 
-To stop recording, click **Stop Recording**.
+To stop recording, click {{< ui >}}Stop Recording{{< /ui >}}.
 
 ## Manually added steps
 
@@ -43,7 +43,7 @@ In addition to automatically creating steps by interacting directly with your de
 
 The Element Inspector allows you to visualize the element hierarchy, copy attributes, and target elements to generate interaction steps using XML.
 
-You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. Use the Element Inspector to:
+You can use this feature by going to the test recorder, launching a device, and clicking the {{< ui >}}Element Inspector{{< /ui >}} button. Use the Element Inspector to:
 
 - **Visualize the element tree**: View the complete hierarchy of elements in your application for a clear, structured overview.
 - **Copy attributes**: Copy attributes like element name or XPATH values directly from the inspector.
@@ -84,7 +84,7 @@ Create this assertion step to have your mobile app test confirm that the text yo
 
 ### Interaction
 
-In addition to automatically recording steps based on your device assertions, you can also manually create steps by clicking **Interaction**. 
+In addition to automatically recording steps based on your device assertions, you can also manually create steps by clicking {{< ui >}}Interaction{{< /ui >}}. 
 
 {{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
@@ -96,7 +96,7 @@ Interacting with elements with a double tap on your mobile application records a
 
 #### Rotate device
 
-Add a name to the step and select **Portrait** or **Landscape** mode.
+Add a name to the step and select {{< ui >}}Portrait{{< /ui >}} or {{< ui >}}Landscape{{< /ui >}} mode.
 
 {{< img src="mobile_app_testing/rotate_device.png" alt="Recording a Rotate Device step in a mobile test" style="width:60%" >}}
 
@@ -108,7 +108,7 @@ Specify the number of pixels you want the mobile app test to scroll vertically a
 
 {{< img src="mobile_app_testing/scroll_step.png" alt="Scroll step in a mobile test recording" style="width:60%;" >}}
 
-By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile app test to scroll on.
+By default, the {{< ui >}}Scroll{{< /ui >}} step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click {{< ui >}}Starting Element{{< /ui >}} and select an element you want the mobile app test to scroll on.
 
 #### Scroll to element
 
@@ -136,7 +136,7 @@ To use a variable on automatically recorded steps, add a step name and specify t
 
 #### Press back
 
-Interacting with the **Back** button below the mobile application records a step. Available on Android only.
+Interacting with the {{< ui >}}Back{{< /ui >}} button below the mobile application records a step. Available on Android only.
 
 {{< img src="mobile_app_testing/test_steps/press_back_2.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
 
@@ -184,66 +184,66 @@ You can run HTTP requests, add [assertions](#add-assertions), and [extract varia
 To define your HTTP request:
 
 1. Enter the URL you wish to test.
-2. Optionally, specify **Advanced Options**:
+2. Optionally, specify {{< ui >}}Advanced Options{{< /ui >}}:
    
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Select this option to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+   * {{< ui >}}Follow redirects{{< /ui >}}: Select this option to have your HTTP test follow up to ten redirects when performing the request.
+   * {{< ui >}}Ignore server certificate error{{< /ui >}}: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * {{< ui >}}Request headers{{< /ui >}}: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
    {{% tab "Authentication" %}}
 
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
-   * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
-   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password).
+   * {{< ui >}}Client certificate{{< /ui >}}: Authenticate through mTLS by uploading your client certificate and the associated private key.
+   * {{< ui >}}HTTP Basic Auth{{< /ui >}}: Add HTTP basic authentication credentials.
+   * {{< ui >}}Digest Auth{{< /ui >}}: Add Digest authentication credentials. 
+   * {{< ui >}}AWS Signature{{< /ui >}}: Add AWS Access Key ID and Secret Access Key.
+   * {{< ui >}}NTLM{{< /ui >}}: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
+   * {{< ui >}}OAuth 2.0{{< /ui >}}: Select a Grant Type ({{< ui >}}Client credentials{{< /ui >}}, or {{< ui >}}Resource owner password{{< /ui >}}).
 
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
+   * {{< ui >}}Encode parameters{{< /ui >}}: Add the name and value of query parameters that require encoding. 
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 KB.
+   * {{< ui >}}Body type{{< /ui >}}: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * {{< ui >}}Request body{{< /ui >}}: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 KB.
 
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
 
-   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+   * {{< ui >}}Proxy URL{{< /ui >}}: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * {{< ui >}}Proxy Header{{< /ui >}}: Add headers to include in the HTTP request to the proxy.
 
    {{% /tab %}}
   
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
+   * {{< ui >}}Do not save response body{{< /ui >}}: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 [1]: /data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
    </br>
-3. Click **Send** to try out the request configuration. A response preview appears.
+3. Click {{< ui >}}Send{{< /ui >}} to try out the request configuration. A response preview appears.
 
 {{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Make HTTP Request" style="width:80%;" >}}
 
 ##### Add assertions
 
-Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in Mobile app tests.
+Assertions define what an expected test result is. After you click {{< ui >}}Send{{< /ui >}}, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in Mobile app tests.
 
 | Type            | Operator                                                                                                               | Value type                                               |
 |-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
@@ -260,13 +260,13 @@ HTTP requests can decompress bodies with the following `content-encoding` header
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+You can create up to 20 assertions per step by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview.
 
 ##### Extract a variable from the response
 
 Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
-To start parsing a variable, click **Extract a variable from response content**:
+To start parsing a variable, click {{< ui >}}Extract a variable from response content{{< /ui >}}:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or the response body.
@@ -284,7 +284,7 @@ For more information about additional configuration in test steps, see [Advanced
 
 You can run mobile app tests within other mobile app tests to reuse existing workflows up to two levels of nesting.
 
-To use an existing mobile app test as a subtest, click **Subtest**, select a mobile app test from the dropdown menu, and click **Add Subtest**.
+To use an existing mobile app test as a subtest, click {{< ui >}}Subtest{{< /ui >}}, select a mobile app test from the dropdown menu, and click {{< ui >}}Add Subtest{{< /ui >}}.
 
 {{< img src="mobile_app_testing/example_subtest.png" alt="Select a mobile test to add as a subtest" style="width:60%" >}}
 
@@ -296,7 +296,7 @@ If it does not make sense for you to run your subtest independently, you can pau
 
 #### Step preview
 
-When adding subtests to your mobile tests, click the **steps** dropdown to show a preview of each step within the subtest:
+When adding subtests to your mobile tests, click the {{< ui >}}steps{{< /ui >}} dropdown to show a preview of each step within the subtest:
 
 {{< img src="mobile_app_testing/test_steps/subtest_mobile_preview_steps.png" alt="Add a subtest and select existing subtest or extract from steps" style="width:60%" >}}
 
@@ -313,7 +313,7 @@ To override these variables, create a variable in your parent test with the name
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][4] in the **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To view a list of available variables, type `{{` in the desired field.
+You can use the [global variables defined in {{< ui >}}Settings{{< /ui >}}][4] in the {{< ui >}}Advanced Options{{< /ui >}} of your mobile app test details, as well as in your test recording to define local variables. To view a list of available variables, type `{{` in the desired field.
 
 Make sure to define the variables you want to use in the user journey before you start recording.
 
@@ -323,9 +323,9 @@ You can inject available variables directly into the test steps while recording.
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
 
-1. Hover between two recorded test steps and click **Add Steps here**. A blue line appears above your test step. 
+1. Hover between two recorded test steps and click {{< ui >}}Add Steps here{{< /ui >}}. A blue line appears above your test step. 
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
-3. When you complete adding additional steps above your tests step, click **Clear** to exit.
+3. When you complete adding additional steps above your tests step, click {{< ui >}}Clear{{< /ui >}} to exit.
 
 {{< img src="mobile_app_testing/test_steps/manage_step_order_2.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
 
@@ -336,7 +336,7 @@ To edit a mobile recording after it's saved:
 - Navigate to [Synthetic Monitoring > Tests.][7]
 - Click on a previously saved mobile test.
 - Click the video icon in the left hand panel, then click "edit recording".
-- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+- Select multiple or single steps for deletion or replay, then click {{< ui >}}Save & Quit{{< /ui >}}.
 
 {{< img src="mobile_app_testing/test_steps/edit_recording_2.png" alt="Editing a mobile recording, and using the multi-select feature" width="70%" >}}
 

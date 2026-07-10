@@ -25,10 +25,10 @@ This guide describes how you can test a user interface (UI) using custom JavaScr
 
 To create an assertion using custom JavaScript:
 
-1. Click **Assertion** and select **Test custom JavaScript assertion**.
+1. Click {{< ui >}}Assertion{{< /ui >}} and select {{< ui >}}Test custom JavaScript assertion{{< /ui >}}.
 2. Write the body of your assertion.
 3. Optionally, select a target element in the UI. 
-4. Click **Apply**.
+4. Click {{< ui >}}Apply{{< /ui >}}.
 
 For more information about assertions, see [Browser Test Steps][2].
 

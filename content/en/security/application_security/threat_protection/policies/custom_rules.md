@@ -45,7 +45,7 @@ See the section below to see how to configure your rules.
 
 ## Configuration
 
-To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
+To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the {{< ui >}}Clone Rule{{< /ui >}} button. This now enables you to edit the existing rule.
 
 ### Define an AAP query
 
@@ -53,7 +53,7 @@ Construct an AAP query using the [same query syntax as in the AAP Trace Explorer
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 
-Use the preview section to see which AAP traces match the search query. You can also add additional queries with the Add Query button.
+Use the preview section to see which AAP traces match the search query. You can also add additional queries with the {{< ui >}}Add Query{{< /ui >}} button.
 
 ##### Joining queries
 
@@ -71,9 +71,9 @@ In this instance, the joined queries technically hold the same attribute value: 
 
 ### Exclude benign activity with suppression queries
 
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+In the {{< ui >}}Only generate a signal if there is a match{{< /ui >}} field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `service`.
+In the {{< ui >}}This rule will not generate a signal if there is a match{{< /ui >}} field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `service`.
 
 ### Set a rule case
 
@@ -85,7 +85,7 @@ A rule case contains logical operations (`>, >=, &&, ||`) to determine if a sign
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-Provide a **name** for each rule case. This name is appended to the rule name when a signal is generated.
+Provide a name for each rule case. This name is appended to the rule name when a signal is generated.
 
 #### Severity and notification
 
@@ -95,7 +95,7 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 {{% security-rule-time-windows %}}
 
-Click **Add Case** to add additional cases.
+Click {{< ui >}}Add Case{{< /ui >}} to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
@@ -103,7 +103,7 @@ Click **Add Case** to add additional cases.
 
 {{% security-rule-say-whats-happening %}}
 
-Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
+Use the {{< ui >}}Tag resulting signals{{< /ui >}} dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 

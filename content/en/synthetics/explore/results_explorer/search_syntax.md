@@ -33,7 +33,7 @@ Use the search bar's autocomplete functionality to complete your queries with ex
 
 ## Numerical values
 
-You can search for a numerical attribute within a specific range. For example, retrieve all batches with an average duration between two and ten nanoseconds in the **Duration** facet. The search query updates with `Duration:[2-10]`.
+You can search for a numerical attribute within a specific range. For example, retrieve all batches with an average duration between two and ten nanoseconds in the {{< ui >}}Duration{{< /ui >}} facet. The search query updates with `Duration:[2-10]`.
 
 ## Further reading
 

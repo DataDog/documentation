@@ -30,7 +30,7 @@ Learn more about [PR comments across Datadog][11].
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and [Azure DevOps][9] repositories.  
-- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].
+- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [{{< ui >}}Code Security{{< /ui >}} Settings page][4].
 
 <div class="alert alert-info">
   PR comments are not supported for pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
@@ -55,25 +55,25 @@ If you already have a GitHub App connected to Datadog, update it. Otherwise, cre
 
 #### Create and install a GitHub App
 
-1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
+1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}GitHub Applications{{< /ui >}} > {{< ui >}}Add New GitHub Application{{< /ui >}}][3].
 2. Fill out any required details, such as the GitHub organization name.
-3. Under **Select Features**, check the **Code Security: Pull Request Review Comments** box.
-4. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
-5. Click **Create App in GitHub**.
+3. Under {{< ui >}}Select Features{{< /ui >}}, check the {{< ui >}}Code Security: Pull Request Review Comments{{< /ui >}} box.
+4. Under {{< ui >}}Edit Permissions{{< /ui >}}, verify that the {{< ui >}}Pull Requests{{< /ui >}} permission is set to {{< ui >}}Read & Write{{< /ui >}}.
+5. Click {{< ui >}}Create App in GitHub{{< /ui >}}.
 6. Enter a name for your app, and submit it.
-7. Click **Install GitHub App**.
-8. Choose which repositories the app should be installed into, then click **Install & Authorize**.
+7. Click {{< ui >}}Install GitHub App{{< /ui >}}.
+8. Choose which repositories the app should be installed into, then click {{< ui >}}Install & Authorize{{< /ui >}}.
 
     {{< img src="ci/static-analysis-install-github-app.png" alt="GitHub App installation screen" style="width:50%;" >}}
 
 #### Update an existing GitHub App
 
-1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Security.
+1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}GitHub Applications{{< /ui >}}][5], and search for the GitHub App you want to use for Code Security.
    {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Code Analysis comment on a pull request" style="width:90%;" >}}
-2. On the **Features** tab, look at the **Code Security: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
-3. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
+2. On the {{< ui >}}Features{{< /ui >}} tab, look at the {{< ui >}}Code Security: Pull Request Comments{{< /ui >}} section to determine whether your GitHub App needs additional permissions. If so, click {{< ui >}}Update permissions in GitHub{{< /ui >}} to edit the app settings.
+3. Under {{< ui >}}Repository permissions{{< /ui >}}, set the {{< ui >}}Pull Requests{{< /ui >}} access to {{< ui >}}Read and write{{< /ui >}}.
    {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
-4. Under the **Subscribe to events** heading, check the **Pull request** box.
+4. Under the {{< ui >}}Subscribe to events{{< /ui >}} heading, check the {{< ui >}}Pull request{{< /ui >}} box.
    {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
 
@@ -114,26 +114,26 @@ When configuring PR comments, you can:
 
 ## Configure PR comments at the organization level
 
-1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
-1. In **Repository Settings**, click **Global PR Comment Configuration**.
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][7].
+1. In {{< ui >}}Repository Settings{{< /ui >}}, click {{< ui >}}Global PR Comment Configuration{{< /ui >}}.
 1. Configure the settings:
-    - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
-    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files. Select **Filter out findings identified as false positives by Bits AI** to exclude findings that Bits AI has identified as false positives.
-    - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
-    - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
-1. Click **Save**.
+    - {{< ui >}}Enable PR comments for all scan types and severities{{< /ui >}}: Enable this to apply PR comments across all types and severities.
+    - {{< ui >}}Enable for Static Analysis (SAST){{< /ui >}}: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select {{< ui >}}Exclude PR comments if violations are detected in test files{{< /ui >}} to prevent comments on issues found in test files. Select {{< ui >}}Filter out findings identified as false positives by Bits AI{{< /ui >}} to exclude findings that Bits AI has identified as false positives.
+    - {{< ui >}}Enable for Software Composition Analysis (SCA){{< /ui >}}: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select {{< ui >}}Exclude PR comments if violations are detected in test or dev dependencies{{< /ui >}} to prevent comments on issues found in dependencies existing only in development or test environments.
+    - {{< ui >}}Enable for Infrastructure-as-Code (IaC){{< /ui >}}: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Configure PR comments at the repository level
 
-1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
-1. In **Repository Settings**, select a repository from the list.
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][7].
+1. In {{< ui >}}Repository Settings{{< /ui >}}, select a repository from the list.
 1. Configure the settings:
-    - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
-    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files. Select **Filter out findings identified as false positives by Bits AI** to exclude findings that Bits AI has identified as false positives.
-    - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
-    - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
-    - **Block all comments in this repository**: Enable this to disable all comments for this repository, overriding global settings.
-1. Click **Save Configuration**.
+    - {{< ui >}}Enable PR comments for all scan types and severities{{< /ui >}}: Enable this to apply PR comments across all types and severities.
+    - {{< ui >}}Enable for Static Analysis (SAST){{< /ui >}}: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select {{< ui >}}Exclude PR comments if violations are detected in test files{{< /ui >}} to prevent comments on issues found in test files. Select {{< ui >}}Filter out findings identified as false positives by Bits AI{{< /ui >}} to exclude findings that Bits AI has identified as false positives.
+    - {{< ui >}}Enable for Software Composition Analysis (SCA){{< /ui >}}: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select {{< ui >}}Exclude PR comments if violations are detected in test or dev dependencies{{< /ui >}} to prevent comments on issues found in dependencies existing only in development or test environments.
+    - {{< ui >}}Enable for Infrastructure-as-Code (IaC){{< /ui >}}: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
+    - {{< ui >}}Block all comments in this repository{{< /ui >}}: Enable this to disable all comments for this repository, overriding global settings.
+1. Click {{< ui >}}Save Configuration{{< /ui >}}.
 
 [1]: /security/code_security/
 [2]: /integrations/github/
@@ -146,4 +146,3 @@ When configuring PR comments, you can:
 [9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
 [10]: /quality_gates/?tab=staticanalysis#setup
 [11]: /integrations/guide/source-code-integration/?tab=codesecurity#pr-comments
-
