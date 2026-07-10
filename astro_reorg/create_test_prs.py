@@ -2,7 +2,7 @@
 """Create test PRs against a mock base branch for exercising the reorg tooling.
 
 For each spec in TEST_PRS this script:
-  1. branches off master,
+  1. branches off BRANCH_FROM (a frozen snapshot of master),
   2. applies the spec's content change,
   3. commits and pushes the branch,
   4. opens a PR against MOCK_BASE_BRANCH.
@@ -10,8 +10,8 @@ For each spec in TEST_PRS this script:
 On completion it opens each new PR in the browser (falling back to printing
 the URLs if a browser can't be launched).
 
-The mock base branch must already exist on the remote. Set MOCK_BASE_BRANCH
-below to point at it before running.
+Both BRANCH_FROM and MOCK_BASE_BRANCH must already exist on the remote. Set
+them below before running.
 """
 from __future__ import annotations
 
@@ -27,6 +27,13 @@ from pathlib import Path
 
 # Branch the test PRs target. Create this on the remote before running.
 MOCK_BASE_BRANCH = "jen.gilbert/astro-reorg-demo-7-10-114044"
+
+# Branch the test PRs are cut from. This is a frozen snapshot of master (created
+# manually) so PR diffs stay small: a PR shows every commit in the head branch
+# that isn't in the base, so branching off a moving master would drag in every
+# new master commit as noise. Branching off this frozen point keeps each PR to
+# just its own change. Must already exist on the remote.
+BRANCH_FROM = "mock-master"
 
 REPO = "DataDog/documentation"
 REPO_ROOT = Path(__file__).parent.parent
@@ -114,11 +121,12 @@ def preflight() -> None:
         die("you have uncommitted changes to tracked files; "
             "commit or stash them first. (Untracked files are fine.)")
 
-    # The mock base branch must exist on the remote so PRs can target it.
-    ls = git("ls-remote", "--heads", "origin", MOCK_BASE_BRANCH)
-    if not ls.stdout.strip():
-        die(f"mock base branch '{MOCK_BASE_BRANCH}' not found on origin. "
-            f"Create and push it before running.")
+    # Both the branch-off point and the PR target must exist on the remote.
+    for name in (BRANCH_FROM, MOCK_BASE_BRANCH):
+        ls = git("ls-remote", "--heads", "origin", name)
+        if not ls.stdout.strip():
+            die(f"branch '{name}' not found on origin. "
+                f"Create and push it before running.")
 
 
 def current_branch() -> str:
@@ -140,11 +148,11 @@ def create_pr(spec: dict) -> str | None:
     if not target.exists():
         die(f"target file does not exist: {spec['file']}")
 
-    # Start from an up-to-date master so the change is a clean diff.
-    if git("fetch", "origin", "master").returncode != 0:
-        die("git fetch origin master failed.")
+    # Start from the frozen snapshot so the PR diff is just this change.
+    if git("fetch", "origin", BRANCH_FROM).returncode != 0:
+        die(f"git fetch origin {BRANCH_FROM} failed.")
 
-    checkout = git("checkout", "-b", branch, "origin/master")
+    checkout = git("checkout", "-b", branch, f"origin/{BRANCH_FROM}")
     if checkout.returncode != 0:
         die(f"could not create branch {branch}: {checkout.stderr.strip()}")
 
