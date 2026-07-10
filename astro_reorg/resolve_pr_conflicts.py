@@ -110,7 +110,7 @@ TOP_LEVEL: set[str] = set(_config.get("top_level", []))
 # invoked with --test, the script treats this branch as the post-reorg base so
 # it operates on the same branch the test PRs were opened against.
 _TEST_CONFIG = _config.get("test", {})
-TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_base_branch")
+TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
 REPO = "DataDog/documentation"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
@@ -719,7 +719,7 @@ def main() -> None:
         # Default to the mock base branch so an accidental run can't touch
         # real PRs against master.
         if not TEST_BASE_BRANCH:
-            parser.error("no base branch: set `test.mock_base_branch` in "
+            parser.error("no base branch: set `test.mock_reorged_master_branch` in "
                          "config.yaml, or pass --live or --base-branch.")
         BASE_BRANCH = TEST_BASE_BRANCH
         print(f"TEST mode (default) — using mock base branch {BASE_BRANCH!r} "
