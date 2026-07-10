@@ -45,7 +45,7 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 1. Optionally, click **Add Severity** to filter findings by severity level. The rule matches against each finding's Datadog-adjusted severity, before any user-defined adjustments.
 1. Define the severity modification action:
     - **Set to a specific level**: Sets matching findings to a fixed severity. Choose from **Info / None**, **Low**, **Medium**, **High**, or **Critical**. **Info / None** is not valid for all finding types; see [Severity floors by finding type](#severity-floors-by-finding-type).
-    - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. See [Severity floors by finding type](#severity-floors-by-finding-type) for behavior at severity bounds.
+    - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. See [Severity floors by finding type](#severity-floors-by-finding-type) for the lowest severity a finding type can shift down to, and [Evaluation order](#evaluation-order) for what happens when a finding is already at that bound.
 1. Optionally, enter a **Description** explaining why the rule applies. This text appears in the severity breakdown panel when a user views a modified finding.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
@@ -53,7 +53,9 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 
 ## Evaluation order
 
-Severity modifier rules are the first step in the automation pipeline and run before mute, due date, inbox, and ticket creation rules. Within severity modifier rules, Datadog uses a first-match policy: findings are evaluated against your rules in order, and the first matching rule is applied. No further severity modifier rules are evaluated for that finding. A rule counts as a match whenever a finding meets the rule's criteria, even if the resulting severity is unchanged; for example, when a shift action reaches a severity bound, or when a set action targets the finding's current severity.
+Severity modifier rules are the first step in the automation pipeline and run before mute, due date, inbox, and ticket creation rules. Within severity modifier rules, Datadog uses a first-match policy: findings are evaluated against your rules in order, and the first matching rule is applied. No further severity modifier rules are evaluated for that finding.
+
+A rule counts as a match only if applying its action would change the finding's severity. If the action would leave the severity unchanged—for example, a shift action that has already reached a severity bound, or a set action that targets the finding's current severity—the rule does not match, and Datadog continues evaluating subsequent severity modifier rules for that finding.
 
 Because severity modifier rules run first, all downstream automation rules—including mute rules—see the modified severity when they are evaluated.
 
@@ -110,7 +112,7 @@ For vulnerability findings that have a Datadog-adjusted CVSS score, a severity m
 | High | 7.0–8.9 |
 | Critical | 9.0–10.0 |
 
-The original CVSS vector is never modified. No synthetic vector is generated to match the adjusted score. When a rule matches a finding, even if the resulting severity is unchanged, the score is still adjusted to the midpoint of the current severity band.
+The original CVSS vector is never modified. No synthetic vector is generated to match the adjusted score. Because a rule only matches when it changes the finding's severity, the score is adjusted only when the severity itself changes; see [Evaluation order](#evaluation-order).
 
 ## Auto-closed and passed findings
 
