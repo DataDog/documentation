@@ -36,8 +36,8 @@ Configuring custom logs on Agents in containerized workloads is not supported.
 
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][2] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
-1. Chose {{< ui >}}Custom Logs{{< /ui >}}.
-1. Select an operation (see [How configuration changes are applied](#how-configuration-changes-are-applied) for more information about each operation):
+1. Choose {{< ui >}}Custom Logs{{< /ui >}}.
+1. Select an operation (for more information, see [How configuration changes are applied](#how-configuration-changes-are-applied)):
 
     - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted. You can add additional log collection settings by clicking {{< ui >}}+ Add Log Collection{{< /ui >}}.
     - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a File{{< /ui >}} and choose the configuration file you want to replace, then update the log collection settings.
