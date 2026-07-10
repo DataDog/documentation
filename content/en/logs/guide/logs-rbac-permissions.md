@@ -102,7 +102,7 @@ This permission is global and enables creating new archives, and editing and del
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [`logs_archive_search`](#logs_archive_search) or [`logs_write_historical_view`](#logs_write_historical_view), this permission also grants the ability to run [Archive Search][18] or trigger a [Rehydration][13] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [`logs_archive_search`](#logs_archive_search) or [`logs_write_historical_view`](#logs_write_historical_view), this permission also grants the ability to run [Archive Search][18] or trigger a [Rehydration][13] from archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -144,7 +144,7 @@ To also allow **Search & Rehydration** mode, grant [`logs_write_historical_view`
 
 Grants the ability to run [Archive Search][18] in both **Search** and **Search & Rehydration** modes, and to trigger [Log Rehydration*][13] (Historical Views).
 
-This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
+This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archives](#logs_read_archives) permission.
 
 {{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View" style="width:70%;">}}
 
