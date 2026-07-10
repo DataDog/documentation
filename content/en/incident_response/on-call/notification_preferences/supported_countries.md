@@ -106,6 +106,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Svalbard and Jan Mayen | +47 |
 | Sweden | +46 |
 | Switzerland | +41 |
+| Taiwan | +886 |
 | Thailand | +66 |
 | Tunisia** | +216 |
 | Turkey | +90 |
