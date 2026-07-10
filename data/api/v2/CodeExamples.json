@@ -997,6 +997,13 @@
       "description": "Create incident notification template returns \"Created\" response"
     }
   ],
+  "CreateIncidentPostmortem": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create postmortem for an incident returns \"CREATED\" response"
+    }
+  ],
   "ImportIncident": [
     {
       "group": "incidents",
@@ -1044,6 +1051,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update incident notification template returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentPostmortem": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update postmortem for an incident returns \"OK\" response"
     }
   ],
   "CreatePersonalAccessToken": [

@@ -2236,6 +2236,26 @@
     "description": "Delete an incident impact.",
     "summary": "Delete an incident impact"
   },
+  "DeleteIncidentPostmortem": {
+    "description": "Delete the postmortem attached to an incident.",
+    "summary": "Delete postmortem for an incident"
+  },
+  "GetIncidentPostmortem": {
+    "description": "Get the postmortem attached to an incident.",
+    "summary": "Get postmortem for an incident"
+  },
+  "UpdateIncidentPostmortem": {
+    "description": "Update the postmortem attached to an incident, for example to change its status.",
+    "summary": "Update postmortem for an incident",
+    "request_description": "Postmortem update payload.",
+    "request_schema_description": "Request to update the postmortem attached to an incident."
+  },
+  "CreateIncidentPostmortem": {
+    "description": "Create a postmortem for an incident by linking a title and document URL\n(for example, a Datadog notebook, Confluence page, or Google Doc).\n\nOnly one postmortem is allowed per incident.",
+    "summary": "Create postmortem for an incident",
+    "request_description": "Postmortem creation payload.",
+    "request_schema_description": "Request to create a postmortem for an incident."
+  },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
     "summary": "Get a list of an incident's integration metadata"
@@ -2327,16 +2347,6 @@
     "summary": "Create AWS CCM config",
     "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
     "request_schema_description": "AWS CCM Config Create/Update Request body."
-  },
-  "GetAWSMetricNameFilterPreview": {
-    "description": "Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.",
-    "summary": "Get AWS metric name filter preview"
-  },
-  "PreviewAWSMetricNameFilter": {
-    "description": "Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.\nThe filters are not persisted.",
-    "summary": "Preview AWS metric name filter",
-    "request_description": "The metric name filters to preview.",
-    "request_schema_description": "AWS metric name filter preview request body."
   },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
