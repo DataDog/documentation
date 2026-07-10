@@ -46,13 +46,20 @@ Enable the provider with environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Required: Enable Remote Configuration in the tracer
+DD_REMOTE_CONFIGURATION_ENABLED=true
+
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+DD_METRICS_OTEL_ENABLED=true
+
+# Required: Service identification
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
 Or enable the provider in code:
 
@@ -362,3 +369,5 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
 [3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/

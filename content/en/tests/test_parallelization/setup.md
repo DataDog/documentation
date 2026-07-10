@@ -27,6 +27,7 @@ Before setting up Test Parallelization:
 - Set up [Test Optimization][1].
 - For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
 - For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
+- For JavaScript: use the `dd-trace` package version `5.111.0` or later for `v5` or `v6.0.0` or later for `v6`, Node.js, and Jest.
 - Enable [Test Impact Analysis][2] for the test service when you want Test Parallelization to split only the tests affected by a code change.
 
 ## Concepts
@@ -95,6 +96,13 @@ bin/ddtest run --platform python --framework pytest
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "JavaScript" %}}
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework jest
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 By default, `ddtest` can start one worker for each physical CPU core available on the node.
@@ -132,6 +140,22 @@ bin/ddtest plan \
 bin/ddtest run \
   --platform python \
   --framework pytest \
+  --ci-node <CI_NODE_INDEX>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+
+{{< code-block lang="bash" >}}
+bin/ddtest plan \
+  --platform javascript \
+  --framework jest \
+  --min-parallelism 1 \
+  --max-parallelism 8
+
+bin/ddtest run \
+  --platform javascript \
+  --framework jest \
   --ci-node <CI_NODE_INDEX>
 {{< /code-block >}}
 
@@ -529,6 +553,96 @@ workflows:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="JavaScript" level="h3" >}}
+
+Use the same plan and test job structure as the Ruby and Python examples. Configure the runner and setup steps for Jest.
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
+
+Set these environment variables at the workflow or job level:
+
+{{< code-block lang="yaml" >}}
+env:
+  DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: javascript
+  DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: jest
+  DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+  DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
+{{< /code-block >}}
+
+Replace each language setup step with Node.js dependency installation:
+
+{{< code-block lang="yaml" >}}
+- name: Setup Node.js
+  uses: actions/setup-node@v4
+  with:
+    node-version: "22"
+    cache: npm
+- name: Install JavaScript dependencies
+  run: npm ci
+{{< /code-block >}}
+
+Configure Datadog Test Optimization for JavaScript:
+
+{{< code-block lang="yaml" >}}
+- name: Configure Datadog Test Optimization
+  uses: datadog/test-visibility-github-action@v2
+  with:
+    languages: js
+    api_key: ${{ secrets.DD_API_KEY }}
+    site: datadoghq.com
+{{< /code-block >}}
+
+The `ddtest plan` and `ddtest run --ci-node ${{ matrix.ci_node_index }}` commands remain unchanged when the platform and framework are provided through the environment.
+
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
+Use a Node.js image and set the runner environment in the `plan` job:
+
+{{< code-block lang="yaml" >}}
+jobs:
+  plan:
+    docker:
+      - image: cimg/node:22.14
+    environment:
+      DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: javascript
+      DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: jest
+      DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+      DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
+    steps:
+      - checkout
+      - run:
+          name: Install JavaScript dependencies
+          command: npm ci
+      - test-optimization-circleci-orb/autoinstrument:
+          languages: js
+          site: datadoghq.com
+{{< /code-block >}}
+
+Keep the `ddtest` download, plan, cache, and continuation steps from the CircleCI workflow. In the test job, install dependencies, autoinstrument JavaScript, and pass the CircleCI node index to `ddtest`:
+
+{{< code-block lang="yaml" >}}
+- run:
+    name: Install JavaScript dependencies
+    command: npm ci
+- test-optimization-circleci-orb/autoinstrument:
+    languages: js
+    site: datadoghq.com
+- run:
+    name: Run tests
+    command: |
+      NODE_INDEX=${CIRCLE_NODE_INDEX:-0}
+      bin/ddtest run --platform javascript --framework jest --ci-node "${NODE_INDEX}"
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+`ddtest` prepends `NODE_OPTIONS=-r dd-trace/ci/init` for Jest worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`.
 
 {{< /collapse-content >}}
 

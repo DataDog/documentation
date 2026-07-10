@@ -4,7 +4,14 @@ description: Access and authentication for App builder
 aliases:
     - /service_management/app_builder/auth
     - /actions/app_builder/auth
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 A few tools control access and authentication for apps and their components.
 
