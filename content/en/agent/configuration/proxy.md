@@ -25,9 +25,10 @@ You can configure the Datadog Agent to send traffic through an HTTP/HTTPS proxy.
 
 ## Configure the Datadog Agent
 
-There are two options for configuring the Datadog Agent to use a proxy.
+There are several options for configuring the Datadog Agent to use a proxy depending on your deployment method.
 - You can use the Agent configuration file.
 - You can use environment variables. Environment variables override configuration file settings.
+- For Kubernetes deployments, you can configure the proxy through Helm or the Datadog Operator.
 
 ### Configuration file
 
@@ -78,6 +79,78 @@ DD_NO_PROXY_NONEXACT_MATCH=true
 
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 ```
+
+### Kubernetes
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`:
+
+```yaml
+datadog:
+  env:
+    - name: DD_PROXY_HTTP
+      value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+    - name: DD_PROXY_HTTPS
+      value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+    - name: DD_PROXY_NO_PROXY
+      value: "<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
+    - name: DD_NO_PROXY_NONEXACT_MATCH
+      value: "true"
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Add the following to your `DatadogAgent` CR:
+
+```yaml
+spec:
+  global:
+    env:
+      - name: DD_PROXY_HTTP
+        value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+      - name: DD_PROXY_HTTPS
+        value: "http://<PROXY_SERVICE>.<PROXY_NAMESPACE>.svc.cluster.local:<PROXY_PORT>"
+      - name: DD_PROXY_NO_PROXY
+        value: "<HOST_TO_BYPASS_1> <HOST_TO_BYPASS_2>"
+      - name: DD_NO_PROXY_NONEXACT_MATCH
+        value: "true"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## `NO_PROXY` accepted values
+
+By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). Datadog recommends enabling `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules used for Agent integrations.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+```yaml
+no_proxy_nonexact_match: true
+```
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+```bash
+DD_NO_PROXY_NONEXACT_MATCH=true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
+* A domain name matches that name and all subdomains, for example:
+  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
+  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` or `www.datadoghq.eu`
+* A domain name with a leading "." matches subdomains only, for example:
+  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
+* A CIDR range matches an IP address within the subnet, for example:
+  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
+* An exact IP address, for example:
+  - `169.254.169.254`
+* A hostname, for example:
+  - `webserver1`
 
 ## Proxy Server Setup Examples
 

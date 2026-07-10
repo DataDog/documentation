@@ -9,7 +9,14 @@ further_reading:
 - link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 The React renderer enables users to create fully custom UI components using the language and libraries they already know. This component gives builders access to [React APIs][1] so they can create flexible, dynamic, and visually impactful apps in App Builder.
 

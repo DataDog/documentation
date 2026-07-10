@@ -51,11 +51,11 @@ Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requir
 
 ### Enablement modes
 
-Manage Live Debugger for each service and environment from the Live Debugger **Settings** page. Each service can be in one of three modes:
+Manage Live Debugger for each service and environment from the Live Debugger {{< ui >}}Settings{{< /ui >}} page. Each service can be in one of three modes:
 
-- **Automatic**: Eligible services are enabled automatically. Switch a service to **Enabled** for a faster debugging experience with debug symbols.
-- **Enabled**: Live Debugger is ready to use on this service in this environment, with faster setup and a better debugging experience.
-- **Disabled**: This service is explicitly disabled and is not enabled automatically.
+- {{< ui >}}Automatic{{< /ui >}}: Eligible services are enabled automatically. Switch a service to {{< ui >}}Enabled{{< /ui >}} for a faster debugging experience with debug symbols.
+- {{< ui >}}Enabled{{< /ui >}}: Live Debugger is ready to use on this service in this environment, with faster setup and a better debugging experience.
+- {{< ui >}}Disabled{{< /ui >}}: This service is explicitly disabled and is not enabled automatically.
 
 ### Minimum tracer versions
 
@@ -120,8 +120,8 @@ Live Debugger.
 A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
 
 1. Start a Debug Session from one of the following locations:
-   - On the [Live Debugger page][13], click **Create Debug Session**.
-   - (Requires the [Code Origin][20] feature) In the [Trace Explorer][14], open a trace, locate the Code Origin section in the side panel, and click **Start Debug Session**.
+   - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}}.
+   - (Requires the [Code Origin][20] feature) In the [Trace Explorer][14], open a trace, locate the Code Origin section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
 2. Add a logpoint to begin collecting diagnostic data.
 3. Add, remove, or modify logpoints as needed during the session.
 
@@ -132,7 +132,7 @@ Debug Sessions expire automatically. You can also manually disable or re-enable 
 Logpoints are "non-breaking breakpoints" that specify where in the code to capture information, what data to include, and under what conditions. To add a logpoint for debugging:
 
 1. Go to the [Live Debugger page][13].
-2. Click **Create Debug Session**.
+2. Click {{< ui >}}Create Debug Session{{< /ui >}}.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [expression language][15].
 5. (Optional) Enable "Capture Variables" to collect all execution context (this feature is rate-limited to 1 execution per second).
@@ -142,14 +142,14 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the **Capture Variables** option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
+Live Debugger data might contain sensitive information, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
 
 #### Mode-based redaction
 
 Live Debugger has two redaction modes:
 
-- **Strict Mode**: Redacts all values except numbers and Booleans.
-- **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans.
+- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
 These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 

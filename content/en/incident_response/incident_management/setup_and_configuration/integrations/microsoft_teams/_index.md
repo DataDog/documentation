@@ -29,7 +29,7 @@ After installation, go to **[Incident Response > Incident Management > Settings 
 
 You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define. To set up automatic incident channel creation:
 
-1. Navigate to [Incident Settings][2] and select **Microsoft Teams**.
+1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. From the **Tenant** dropdown, select your connected Microsoft Teams tenant.
 3. Toggle on **Automatically create a Microsoft Teams channel for every incident**.
 4. Select the Team in which you want to automatically create new channels.
@@ -59,9 +59,8 @@ You can configure Incident Management to automatically archive an incident chann
 ## Global channel for incident updates
 
 Use an incident updates channel to provide your stakeholders with organization-wide visibility into the status of all incidents directly from Microsoft Teams.
-
-1. In Datadog, navigate to **[Incident Response > Incident Management > Settings > Integrations][2]**.
-1. Select the Microsoft Teams integration and enable **Send all incident updates to a global channel**.
+1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
+1. In the Microsoft Teams integration, enable **Send all incident updates to a global channel**.
 1. Select the Team and channel where you want the incident updates to be posted.
 
 Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident states, severities, and incident commanders.
@@ -74,7 +73,7 @@ To customize this behavior, deactivate this setting and [define a notification r
 
 Delegated permissions are required for one-click Microsoft Teams meetings. To enable one-click Microsoft Teams meetings for incidents:
 
-1. Navigate to [Incident Settings][2].
+1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
 4. Save your settings.
@@ -85,7 +84,7 @@ After enabling one-click Microsoft Teams meetings, start a meeting by clicking *
 
 Delegated permissions are required for automatic, criteria-based Microsoft Teams meetings. To enable automatic, criteria-based Microsoft Teams meetings for incidents:
 
-1. Navigate to [Incident Settings][2].
+1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
    1. Toggle on **Automatically create Microsoft Teams meetings**.
@@ -101,26 +100,18 @@ The author of a synced message does not need an Incident Management or Incident 
 
 Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
 
-<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.</div>
-
-#### Enabling meeting summaries
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc., a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
 
 To enable meeting summaries for incident Microsoft Teams meetings:
 
-1. Navigate to [Incident Settings][2].
+1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
 4. Toggle on **Generate AI meeting summaries**.
 5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
 6. Save your settings.
 
-{{< img src="incident_response/incident_management/setup_and_configuration/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
-
-#### How meeting summaries work
-
-Meeting summaries are generated for Microsoft Teams meetings attached to an incident.
-
-When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
+Meeting summaries are generated for Microsoft Teams meetings attached to an incident. When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
 
 - The **incident timeline**, under a **Meeting Summary** entry.
 - The **incident chat channel**, both in the meeting card thread and as a message to the channel.
@@ -155,7 +146,7 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/microsoft-teams/?tab=datadogapprecommended
-[2]: https://app.datadoghq.com/incidents/settings#Integrations
+[2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
