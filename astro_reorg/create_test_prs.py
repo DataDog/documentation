@@ -25,7 +25,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 # Branch the test PRs target. Create this on the remote before running.
-MOCK_BASE_BRANCH = "jen.gilbert/astro-reorg-mock-base"
+MOCK_BASE_BRANCH = "jen.gilbert/astro-reorg-demo-7-10-114044"
 
 REPO = "DataDog/documentation"
 REPO_ROOT = Path(__file__).parent.parent
