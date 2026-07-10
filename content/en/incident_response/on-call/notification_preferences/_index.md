@@ -73,7 +73,7 @@ Under **Other Notifications**, you can opt to receive a **Shift reminder** befor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/on-call/profile
+[1]: https://app.datadoghq.com/personal-settings/profile?tab=on-call-notifications
 [2]: /mobile/?tab=ios
 [3]: /mobile
 [4]: /incident_response/on-call/guides/configure-mobile-device-for-on-call

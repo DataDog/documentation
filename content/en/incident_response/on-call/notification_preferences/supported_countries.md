@@ -21,6 +21,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 
 | Country | Country code |
 |---|---|
+| Åland Islands | +358 |
 | Albania | +355 |
 | Andorra | +376 |
 | Argentina | +54 |
@@ -118,7 +119,6 @@ If your country isn't listed in the following table, contact <a href="https://do
 | United Kingdom | +44 |
 | United States | +1 |
 | Uruguay* | +598 |
-| Åland Islands | +358 |
 
 \* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local SMS carrier restrictions or government regulations can limit delivery. For these regions, set up push notifications as your primary notification method.
 
