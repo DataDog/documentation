@@ -14,4 +14,6 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 
 `astro_reorg/resolve_pr_conflicts.py` finds open PRs with merge conflicts caused by the reorg, and either auto-fixes them (by replaying commits at post-reorg paths) or labels them for manual review. Defaults to dry-run mode; use `--no-dry-run` to apply changes.
 
+`astro_reorg/create_test_prs.py` creates test PRs against a mock base branch (set `MOCK_BASE_BRANCH` at the top of the file) for exercising the reorg tooling. For each spec in `TEST_PRS` it branches off `master`, applies a content change, pushes, and opens a PR, then opens the PRs in the browser.
+
 You can ignore the `astro` folder, it's a remnant from another branch where an Astro site is being developed. It is completely out of scope.
