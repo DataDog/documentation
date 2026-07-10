@@ -3,7 +3,9 @@ This partial contains setup instructions for the iOS SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your Apple platform applications for [Real User Monitoring (RUM)][1] with the iOS SDK. The iOS SDK supports iOS, iPadOS, tvOS, watchOS, and visionOS. For details on supported versions and module availability per platform, see [Supported Versions][2]. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][3] for specific steps.
+This page describes how to instrument your Apple platform applications with the Datadog iOS SDK.
+
+The iOS SDK supports [Real User Monitoring (RUM)][1] and [Error Tracking][3] across iOS, iPadOS, tvOS, watchOS, and visionOS. For supported versions per platform, see [Supported Versions][2].
 
 ## Prerequisites
 

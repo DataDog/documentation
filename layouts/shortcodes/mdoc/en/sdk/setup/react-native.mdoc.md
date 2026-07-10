@@ -2,6 +2,10 @@
 React Native setup instructions.
 -->
 
+This page describes how to instrument your React Native applications with the Datadog React Native SDK.
+
+The React Native SDK supports [Real User Monitoring (RUM)](/real_user_monitoring/) and [Error Tracking](/error_tracking/frontend/mobile/reactnative/).
+
 {% stepper %}
 
 {% step title="Install the SDK" %}
