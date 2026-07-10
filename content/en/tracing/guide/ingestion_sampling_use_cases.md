@@ -35,7 +35,7 @@ Click on services to see details about what sampling decision makers (for exampl
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
-In the Service Ingestion Summary example above, the **Ingestion reasons breakdown** table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][6]).
+In the Service Ingestion Summary example above, the {{< ui >}}Ingestion reasons breakdown{{< /ui >}} table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][6]).
 
 The Top sampling decision makers for this service show that `web-store` service gets sampling decisions from `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser`, and `product-recommendation`. These five services all contribute in the overall sampling decisions that affect the `web-store` service spans. When determining how to fine tune the ingestion for web-store, all five services need to be considered.
 

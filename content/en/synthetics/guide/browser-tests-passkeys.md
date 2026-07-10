@@ -31,9 +31,9 @@ Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global var
 
 ### Add passkeys to a browser test
 
-1. Click [Digital Experience > New Test > Browser Test][3].
-2. Click **Save & Edit Recording**.
-3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
+1. Click [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}New Test{{< /ui >}} > {{< ui >}}Browser Test{{< /ui >}}][3].
+2. Click {{< ui >}}Save & Edit Recording{{< /ui >}}.
+3. On the recording page, click {{< ui >}}Add Variable{{< /ui >}} > {{< ui >}}Create variable from Global Variable{{< /ui >}}.
 4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
 
 {{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
@@ -44,7 +44,7 @@ To test a registration flow using passkeys in your [browser tests][3]:
 
 1. [Import your Virtual Authenticator global variable][5] into your test. 
 2. Navigate to the page to register your passkey. When recording your test, Datadog automatically generates and stores a new passkey by using the imported virtual authenticator global variable.
-3. After recording your test steps, click **Save & Launch Test**.
+3. After recording your test steps, click {{< ui >}}Save & Launch Test{{< /ui >}}.
 
 ### Test a login flow
 
@@ -59,7 +59,7 @@ Choose one of the following options:
 
 1. [Import your virtual authenticator global variable][5]. 
 2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
-3. After recording your test steps, click **Save & Launch Test**.
+3. After recording your test steps, click {{< ui >}}Save & Launch Test{{< /ui >}}.
 
 ## Further Reading
 

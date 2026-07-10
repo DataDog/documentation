@@ -27,9 +27,19 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
 | A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] |
-| Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
+| Your own app, host, or container | [Logs][3], [Metrics][4], or [Traces][8] |
 
 See also: [Instrumenting for Agent Observability][5].
+
+## Intake limits
+
+Datadog enforces a maximum payload size per request on each OTLP intake endpoint. Requests that exceed the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the export batch size or flush more frequently so each request stays under the limit.
+
+| Signal  | Endpoint path   | Maximum payload size    |
+|---------|-----------------|-------------------------|
+| Metrics | `/v1/metrics`   | 512 KiB (compressed)    |
+| Logs    | `/v1/logs`      | 5.1 MiB (uncompressed)  |
+| Traces  | `/v1/traces`    | 15 MiB (uncompressed)   |
 
 ## Further reading
 
@@ -42,3 +52,4 @@ See also: [Instrumenting for Agent Observability][5].
 [5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
 [6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
 [7]: /opentelemetry/setup/otlp_ingest/serverless/
+[8]: /opentelemetry/setup/otlp_ingest/traces/

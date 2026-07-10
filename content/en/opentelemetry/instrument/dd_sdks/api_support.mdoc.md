@@ -4,6 +4,7 @@ description: "Use the OpenTelemetry API with Datadog SDKs to send traces, metric
 aliases:
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
+  - /opentelemetry/instrument/api_support/
   - /opentelemetry/instrument/api_support/dotnet/
   - /opentelemetry/instrument/api_support/dotnet/logs
   - /opentelemetry/instrument/api_support/dotnet/metrics

@@ -699,6 +699,14 @@ components:
       required: true
       schema:
         type: string
+    IdentityProviderId:
+      description: The ID of the identity provider.
+      in: path
+      name: idp_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000001"
+        type: string
     IncidentIDPathParameter:
       description: The UUID of the incident.
       in: path
@@ -1140,6 +1148,14 @@ components:
       required: true
       schema:
         type: string
+    OAuth2ClientId:
+      description: The ID of the OAuth2 client.
+      in: path
+      name: client_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000010"
+        type: string
     OAuthClientUUIDPathParameter:
       description: UUID of the OAuth2 client.
       in: path
@@ -1170,6 +1186,14 @@ components:
       name: integration_service_id
       required: true
       schema:
+        type: string
+    OrgAuthorizedClientId:
+      description: The ID of the org authorized client.
+      in: path
+      name: org_authorized_client_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000001"
         type: string
     OrgConfigName:
       description: The name of an Org Config.
@@ -1879,6 +1903,22 @@ components:
       required: true
       schema:
         type: string
+    UserAuthorizedClientId:
+      description: The ID of the user authorized client.
+      in: path
+      name: user_authorized_client_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000001"
+        type: string
+    UserAuthorizedClientIdForOrg:
+      description: The ID of the user authorized client.
+      in: path
+      name: user_authorized_client_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000002"
+        type: string
     UserID:
       description: "The ID of the user."
       in: path
@@ -1886,6 +1926,14 @@ components:
       required: true
       schema:
         example: "00000000-0000-9999-0000-000000000000"
+        type: string
+    UserIdForOrgClient:
+      description: The ID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        example: "00000000-0000-9999-0000-000000000001"
         type: string
     UserUUIDPathParameter:
       description: The UUID of the user to add or remove as a watcher.
@@ -10440,6 +10488,7 @@ components:
         - Host
         - HostImage
         - Image
+        - ServerlessFunction
       example: Repository
       type: string
       x-enum-varnames:
@@ -10448,6 +10497,7 @@ components:
         - HOST
         - HOSTIMAGE
         - IMAGE
+        - SERVERLESSFUNCTION
     AssetVersion:
       description: Asset version.
       properties:
@@ -10727,6 +10777,51 @@ components:
         project:
           $ref: "#/components/schemas/CaseManagementProject"
           description: Case management project with Jira integration configured. It is used to attach security findings to the Jira issue. To configure the integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+      required:
+        - findings
+        - project
+      type: object
+    AttachLinearIssueRequest:
+      description: Request for attaching security findings to a Linear issue.
+      properties:
+        data:
+          $ref: "#/components/schemas/AttachLinearIssueRequestData"
+      required:
+        - data
+      type: object
+    AttachLinearIssueRequestData:
+      description: Data of the Linear issue to attach security findings to.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AttachLinearIssueRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/AttachLinearIssueRequestDataRelationships"
+        type:
+          $ref: "#/components/schemas/LinearIssuesDataType"
+      required:
+        - attributes
+        - relationships
+        - type
+      type: object
+    AttachLinearIssueRequestDataAttributes:
+      description: Attributes of the Linear issue to attach security findings to.
+      properties:
+        linear_issue_url:
+          description: URL of the Linear issue to attach security findings to.
+          example: "https://linear.app/your-workspace/issue/ENG-123"
+          type: string
+      required:
+        - linear_issue_url
+      type: object
+    AttachLinearIssueRequestDataRelationships:
+      description: Relationships of the Linear issue to attach security findings to.
+      properties:
+        findings:
+          $ref: "#/components/schemas/Findings"
+          description: Security findings to attach to the Linear issue.
+        project:
+          $ref: "#/components/schemas/CaseManagementProject"
+          description: Case management project with the Linear integration configured. It is used to attach security findings to the Linear issue.
       required:
         - findings
         - project
@@ -12749,9 +12844,25 @@ components:
                 - id: row_id_2
                   type: row
           type: reference-tables-batch-rows-query
+        included:
+          - attributes:
+              values:
+                ip_address: 102.130.113.9
+            id: row_id_1
+            type: row
+          - attributes:
+              values:
+                ip_address: 102.130.113.10
+            id: row_id_2
+            type: row
       properties:
         data:
           $ref: "#/components/schemas/BatchRowsQueryResponseData"
+        included:
+          description: Full row resources matching the query, included alongside the relationship references in `data`.
+          items:
+            $ref: "#/components/schemas/TableRowResourceData"
+          type: array
       type: object
     BatchRowsQueryResponseData:
       description: Data object for a batch rows query response.
@@ -20103,10 +20214,14 @@ components:
         - CONTAINER
         - CALLOUTVALUE
     Condition:
-      description: Targeting condition details.
+      description: |-
+        Targeting condition details. A condition is either an inline
+        predicate with `operator`, `attribute`, and `value`, or a reference to a
+        saved filter with `saved_filter_id`. The inline fields are omitted for saved-filter
+        references.
       properties:
         attribute:
-          description: The user or request attribute to evaluate.
+          description: The user or request attribute to evaluate. Omitted for saved-filter references.
           example: "country"
           type: string
         created_at:
@@ -20121,13 +20236,19 @@ components:
           type: string
         operator:
           $ref: "#/components/schemas/ConditionOperator"
+        saved_filter_id:
+          description: The ID of the saved filter referenced by this condition, or null for inline conditions.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          nullable: true
+          type: string
         updated_at:
           description: The timestamp when the condition was last updated.
           example: "2024-01-01T12:00:00Z"
           format: date-time
           type: string
         value:
-          description: Values used by the selected operator.
+          description: Values used by the selected operator. Omitted for saved-filter references.
           example: ["US", "CA"]
           items:
             description: Target value for the selected operator.
@@ -20135,9 +20256,6 @@ components:
           type: array
       required:
         - id
-        - operator
-        - attribute
-        - value
         - created_at
         - updated_at
       type: object
@@ -20168,25 +20286,32 @@ components:
         - IS_NULL
         - EQUALS
     ConditionRequest:
-      description: Condition request payload for targeting rules.
+      description: |-
+        Condition request payload for targeting rules. A condition is either an inline
+        predicate with `operator`, `attribute`, and `value`, or a reference to a
+        saved filter with `saved_filter_id`. The two shapes are mutually exclusive.
       properties:
         attribute:
-          description: The user or request attribute to evaluate.
+          description: The user or request attribute to evaluate. Required for inline conditions; omit when `saved_filter_id` is set.
           example: "user_tier"
           type: string
         operator:
           $ref: "#/components/schemas/ConditionOperator"
+        saved_filter_id:
+          description: |-
+            The ID of a saved filter to reference as this condition. Mutually exclusive
+            with `operator`, `attribute`, and `value`. When set, the saved filter's
+            targeting rules are evaluated in place of an inline predicate.
+          example: "550e8400-e29b-41d4-a716-446655440090"
+          format: uuid
+          type: string
         value:
-          description: Values used by the selected operator.
+          description: Values used by the selected operator. Required for inline conditions; omit when `saved_filter_id` is set.
           example: ["premium", "enterprise"]
           items:
             description: Target value for the selected operator.
             type: string
           type: array
-      required:
-        - operator
-        - attribute
-        - value
       type: object
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
@@ -23840,6 +23965,74 @@ components:
         - findings
         - project
       type: object
+    CreateLinearIssueRequestArray:
+      description: List of requests to create Linear issues for security findings.
+      properties:
+        data:
+          description: Array of Linear issue creation request data objects.
+          items:
+            $ref: "#/components/schemas/CreateLinearIssueRequestData"
+          type: array
+      required:
+        - data
+      type: object
+    CreateLinearIssueRequestData:
+      description: Data of the Linear issue to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateLinearIssueRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateLinearIssueRequestDataRelationships"
+        type:
+          $ref: "#/components/schemas/LinearIssuesDataType"
+      required:
+        - type
+      type: object
+    CreateLinearIssueRequestDataAttributes:
+      description: Attributes of the Linear issue to create.
+      properties:
+        assignee_id:
+          description: Unique identifier of the Datadog user assigned to the Linear issue.
+          example: "f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0"
+          type: string
+        description:
+          description: Description of the Linear issue. If not provided, the description will be automatically generated.
+          example: "A description of the Linear issue."
+          type: string
+        label_ids:
+          description: Linear label IDs to set on the created issue.
+          example:
+            - "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          items:
+            description: A Linear label ID.
+            type: string
+          type: array
+        linear_project_id:
+          description: Unique identifier of the Linear project to pin the issue to. If not provided, the issue is not associated with a Linear project.
+          example: "d4c3b2a1-6f5e-8b7a-0d9c-2f1e4a3b6c5d"
+          type: string
+        priority:
+          $ref: "#/components/schemas/CasePriority"
+          description: Datadog case priority mapped to the Linear issue priority. If not provided, the priority will be automatically set to "NOT_DEFINED".
+          example: "P4"
+        title:
+          description: Title of the Linear issue. If not provided, the title will be automatically generated.
+          example: "A title for the Linear issue."
+          type: string
+      type: object
+    CreateLinearIssueRequestDataRelationships:
+      description: Relationships of the Linear issue to create.
+      properties:
+        findings:
+          $ref: "#/components/schemas/Findings"
+          description: Security findings to create a Linear issue for.
+        project:
+          $ref: "#/components/schemas/CaseManagementProject"
+          description: Case management project configured with the Linear integration. It is used to create the Linear issue.
+      required:
+        - findings
+        - project
+      type: object
     CreateMaintenanceRequest:
       description: Request object for creating a maintenance.
       example:
@@ -24504,6 +24697,184 @@ components:
         - findings
         - project
       type: object
+    CreateSnapshotAdditionalConfig:
+      description: Additional configuration options for snapshot creation.
+      properties:
+        template_variables:
+          $ref: "#/components/schemas/CreateSnapshotTemplateVariables"
+        timeseries_legend_type:
+          $ref: "#/components/schemas/CreateSnapshotTimeseriesLegendType"
+        timezone_offset_minutes:
+          description: Timezone offset in minutes from UTC. Positive values are west of UTC (for example, `300` for UTC-5). Use `0` for UTC.
+          example: 300
+          format: int64
+          type: integer
+      type: object
+    CreateSnapshotDataAttributesRequest:
+      description: Attributes for snapshot creation.
+      properties:
+        additional_config:
+          $ref: "#/components/schemas/CreateSnapshotAdditionalConfig"
+        end:
+          description: End of the time window for the snapshot, in milliseconds since Unix epoch.
+          example: 1692464800000
+          format: int64
+          type: integer
+        height:
+          description: The height of the rendered snapshot in pixels.
+          example: 185
+          format: int64
+          type: integer
+        is_authenticated:
+          description: Whether the snapshot requires authentication to view. Authenticated snapshots are scoped to the creating organization.
+          example: false
+          type: boolean
+        start:
+          description: Start of the time window for the snapshot, in milliseconds since Unix epoch.
+          example: 1692464000000
+          format: int64
+          type: integer
+        ttl:
+          $ref: "#/components/schemas/CreateSnapshotTTL"
+        widget_definition:
+          additionalProperties: {}
+          description: The widget definition to render as a snapshot. Must include a valid `type` field and non-empty `requests` array.
+          example:
+            requests:
+              - q: "avg:system.cpu.user{*}"
+            type: timeseries
+          type: object
+        width:
+          description: The width of the rendered snapshot in pixels.
+          example: 300
+          format: int64
+          type: integer
+      required:
+        - widget_definition
+        - start
+        - end
+      type: object
+    CreateSnapshotDataAttributesResponse:
+      description: Attributes of the created snapshot.
+      properties:
+        url:
+          description: The URL to access the rendered snapshot image.
+          example: https://app.datadoghq.com/api/v2/snapshot/view/public/60d/00000000-0000-0000-0000-000000000000/1692464400000-12345678-1234-5678-9abc-def123456789.png
+          type: string
+      required:
+        - url
+      type: object
+    CreateSnapshotDataRequest:
+      description: Data envelope for snapshot creation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateSnapshotDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/CreateSnapshotType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateSnapshotDataResponse:
+      description: Data envelope for the snapshot creation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateSnapshotDataAttributesResponse"
+        id:
+          description: The unique identifier of the created snapshot.
+          example: 12345678-1234-5678-9abc-def123456789
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateSnapshotType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CreateSnapshotRequest:
+      description: Request body for creating a graph snapshot.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateSnapshotDataRequest"
+      required:
+        - data
+      type: object
+    CreateSnapshotResponse:
+      description: Response body for a snapshot creation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateSnapshotDataResponse"
+      required:
+        - data
+      type: object
+    CreateSnapshotTTL:
+      description: The time-to-live for the snapshot. This value corresponds to storage lifecycle policies that automatically delete the snapshot after the specified period.
+      enum:
+        - 30d
+        - 60d
+        - 90d
+        - 1y
+        - 2y
+        - inf
+      example: 60d
+      type: string
+      x-enum-varnames:
+        - THIRTY_DAYS
+        - SIXTY_DAYS
+        - NINETY_DAYS
+        - ONE_YEAR
+        - TWO_YEARS
+        - INFINITE
+    CreateSnapshotTemplateVariable:
+      description: A template variable definition for snapshot rendering.
+      properties:
+        name:
+          description: The template variable name.
+          example: host
+          type: string
+        prefix:
+          description: The tag prefix associated with the template variable. For example, a prefix of `host` with a value of `web-server-1` scopes the snapshot to `host:web-server-1`.
+          example: host
+          type: string
+        values:
+          description: The list of scoped values for this template variable.
+          example:
+            - web-server-1
+            - web-server-2
+          items:
+            description: A single scoped value for the template variable.
+            type: string
+          type: array
+      required:
+        - name
+        - prefix
+        - values
+      type: object
+    CreateSnapshotTemplateVariables:
+      description: List of template variable definitions for snapshot rendering.
+      items:
+        $ref: "#/components/schemas/CreateSnapshotTemplateVariable"
+      type: array
+    CreateSnapshotTimeseriesLegendType:
+      description: The legend display type for timeseries widgets. A value of `none` hides the legend entirely; omitting the field lets the frontend choose automatically.
+      enum:
+        - compact
+        - expanded
+        - none
+      example: expanded
+      type: string
+      x-enum-varnames:
+        - COMPACT
+        - EXPANDED
+        - NONE
+    CreateSnapshotType:
+      description: The type identifier for snapshot creation resources.
+      enum:
+        - create_snapshot
+      example: create_snapshot
+      type: string
+      x-enum-varnames:
+        - CREATE_SNAPSHOT
     CreateStatusPageRequest:
       description: Request object for creating a status page.
       example:
@@ -28406,12 +28777,12 @@ components:
             - "department:engineering"
             - "region:us-east-1"
           env: "production"
-          finished_at: 1693491984000000000
+          finished_at: "2023-08-31T14:26:24Z"
           git:
             commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
             repository_id: "github.com/organization/example-repository"
           service: "shopist"
-          started_at: 1693491974000000000
+          started_at: "2023-08-31T14:26:14Z"
           team: "backend"
           version: "v1.12.07"
         id: "4242fcdd31586083"
@@ -28435,10 +28806,10 @@ components:
           example: production
           type: string
         finished_at:
-          description: Unix timestamp when the deployment finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
+          description: The time when the deployment finished.
+          example: "2023-08-31T14:26:24Z"
+          format: date-time
+          type: string
         git:
           $ref: "#/components/schemas/DORAGitInfoResponse"
         service:
@@ -28446,10 +28817,10 @@ components:
           example: shopist
           type: string
         started_at:
-          description: Unix timestamp when the deployment started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
+          description: The time when the deployment started.
+          example: "2023-08-31T14:26:14Z"
+          format: date-time
+          type: string
         team:
           description: Name of the team owning the deployed service.
           example: backend
@@ -28461,7 +28832,6 @@ components:
       required:
         - service
         - started_at
-        - finished_at
       type: object
     DORADeploymentPatchRemediation:
       description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time.
@@ -28639,12 +29009,12 @@ components:
                 - "department:engineering"
                 - "region:us-east-1"
               env: "production"
-              finished_at: 1693491984000000000
+              finished_at: "2023-08-31T14:26:24Z"
               git:
                 commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
                 repository_id: "github.com/organization/example-repository"
               service: "shopist"
-              started_at: 1693491974000000000
+              started_at: "2023-08-31T14:26:14Z"
               team: "backend"
               version: "v1.12.07"
             id: "4242fcdd31586083"
@@ -28654,12 +29024,12 @@ components:
                 - "language:go"
                 - "department:platform"
               env: "production"
-              finished_at: 1693492084000000000
+              finished_at: "2023-08-31T14:28:04Z"
               git:
                 commit_sha: "77bdc9350f2cc9b250b69abddab733dd55e1a599"
                 repository_id: "github.com/organization/api-service"
               service: "api-service"
-              started_at: 1693492074000000000
+              started_at: "2023-08-31T14:27:54Z"
               team: "backend"
               version: "v2.1.0"
             id: "4242fcdd31586084"
@@ -28781,12 +29151,12 @@ components:
                 - "incident_type:database"
                 - "department:engineering"
               env: "production"
-              finished_at: 1693492274000000000
+              finished_at: "2023-08-31T14:31:14Z"
               name: "Database outage"
               services:
                 - "shopist"
               severity: "SEV-1"
-              started_at: 1693492174000000000
+              started_at: "2023-08-31T14:29:34Z"
               team: "backend"
             id: "4242fcdd31586085"
             type: "dora_incident"
@@ -28795,13 +29165,13 @@ components:
                 - "incident_type:service_down"
                 - "department:platform"
               env: "production"
-              finished_at: 1693492474000000000
+              finished_at: "2023-08-31T14:34:34Z"
               name: "API service outage"
               services:
                 - "api-service"
                 - "payment-service"
               severity: "SEV-2"
-              started_at: 1693492374000000000
+              started_at: "2023-08-31T14:32:54Z"
               team: "backend"
             id: "4242fcdd31586086"
             type: "dora_incident"
@@ -28842,7 +29212,7 @@ components:
             - "incident_type:database"
             - "department:engineering"
           env: "production"
-          finished_at: 1693492274000000000
+          finished_at: "2023-08-31T14:31:14Z"
           git:
             commit_sha: "66adc9350f2cc9b250b69abddab733dd55e1a588"
             repository_url: "https://github.com/organization/example-repository"
@@ -28850,7 +29220,7 @@ components:
           services:
             - "shopist"
           severity: "SEV-1"
-          started_at: 1693492174000000000
+          started_at: "2023-08-31T14:29:34Z"
           team: "backend"
         id: "4242fcdd31586085"
         type: "dora_incident"
@@ -28873,10 +29243,10 @@ components:
           example: production
           type: string
         finished_at:
-          description: Unix timestamp when the incident finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
+          description: The time when the incident finished.
+          example: "2023-08-31T14:26:24Z"
+          format: date-time
+          type: string
         git:
           $ref: "#/components/schemas/DORAGitInfo"
         name:
@@ -28895,10 +29265,10 @@ components:
           example: SEV-1
           type: string
         started_at:
-          description: Unix timestamp when the incident started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
+          description: The time when the incident started.
+          example: "2023-08-31T14:26:14Z"
+          format: date-time
+          type: string
         team:
           description: Name of the team owning the services impacted.
           example: backend
@@ -28907,8 +29277,6 @@ components:
           description: Version to correlate with APM Deployment Tracking.
           example: v1.12.07
           type: string
-      required:
-        - started_at
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
@@ -36787,6 +37155,9 @@ components:
           description: Key of the case.
           example: "PROJ-123"
           type: string
+        linear_issue:
+          $ref: "#/components/schemas/FindingLinearIssue"
+          description: Linear issue associated with the case.
         modified_at:
           description: Timestamp of when the case was last modified.
           example: "2025-01-01T00:00:00.000Z"
@@ -36917,6 +37288,44 @@ components:
         issue_url:
           description: URL of the Jira issue.
           example: "https://domain.atlassian.net/browse/PROJ-123"
+          type: string
+      type: object
+    FindingLinearIssue:
+      description: Linear issue associated with the case.
+      properties:
+        error_message:
+          description: Error message if the Linear issue creation failed.
+          example: "Linear issue creation failed."
+          type: string
+        result:
+          $ref: "#/components/schemas/FindingLinearIssueResult"
+        status:
+          description: Status of the Linear issue creation. Can be "COMPLETED" if the Linear issue was created successfully, or "FAILED" if the Linear issue creation failed.
+          example: "COMPLETED"
+          type: string
+      type: object
+    FindingLinearIssueResult:
+      description: Result of the Linear issue creation.
+      properties:
+        account_id:
+          description: Account ID of the Linear workspace.
+          example: "463a8631-680e-455c-bfd3-3ed04d326eb7"
+          type: string
+        issue_id:
+          description: Unique identifier of the Linear issue.
+          example: "9c1e5f8a-2b3d-4c7e-8f6a-1d2e3f4a5b6c"
+          type: string
+        issue_key:
+          description: Key of the Linear issue.
+          example: "ENG-123"
+          type: string
+        team_id:
+          description: Team ID of the Linear issue.
+          example: "b5d3c8a1-7e6f-4d2c-9a8b-3c4d5e6f7a8b"
+          type: string
+        url:
+          description: URL of the Linear issue.
+          example: "https://linear.app/your-workspace/issue/ENG-123"
           type: string
       type: object
     FindingMute:
@@ -37083,7 +37492,11 @@ components:
         attributes:
           $ref: "#/components/schemas/FlakyTestAttributes"
         id:
-          description: Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. On the Test Runs UI it is the same as the `test_fingerprint_fqn` tag.
+          description: |-
+            Test's ID. This ID is the hash of the test's Fully Qualified Name and Git repository ID. It is the
+            value of the `@test.fingerprint_fqn` facet on test events, which you can search on in the Test
+            Optimization Explorer to locate a specific test. To filter search results by this ID, use the
+            `fingerprint_fqn` search key.
           type: string
         type:
           $ref: "#/components/schemas/FlakyTestType"
@@ -37465,6 +37878,9 @@ components:
             - `@git.branch`
             - `@test.codeowners`
             - `env`
+            - `fingerprint_fqn`
+
+            Use `fingerprint_fqn` to filter by a test's stable Fingerprint FQN (the same value as the test's `id`).
           example: 'flaky_test_state:active @git.repository.id_v2:"github.com/datadog/shopist"'
           type: string
       type: object
@@ -44193,6 +44609,100 @@ components:
           type: string
           x-mimetype: application/xml
       type: object
+    IdentityProviderAttributes:
+      description: Attributes of an organization identity provider.
+      properties:
+        authentication_method:
+          description: The authentication method used by this identity provider.
+          example: "SAML"
+          type: string
+        enabled:
+          description: Whether this identity provider is enabled for the organization.
+          example: true
+          type: boolean
+      required:
+        - authentication_method
+        - enabled
+      type: object
+    IdentityProviderData:
+      description: Data object representing an organization identity provider.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IdentityProviderAttributes"
+        id:
+          description: The unique identifier of the identity provider.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/IdentityProviderType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IdentityProviderDataList:
+      description: List of organization identity provider data objects.
+      items:
+        $ref: "#/components/schemas/IdentityProviderData"
+      type: array
+    IdentityProviderResponse:
+      description: Response containing a single organization identity provider.
+      properties:
+        data:
+          $ref: "#/components/schemas/IdentityProviderData"
+      required:
+        - data
+      type: object
+    IdentityProviderType:
+      description: The resource type for identity providers.
+      enum:
+        - identity_providers
+      example: identity_providers
+      type: string
+      x-enum-varnames:
+        - IDENTITY_PROVIDERS
+    IdentityProviderUpdateAttributes:
+      description: Attributes for updating an organization identity provider.
+      properties:
+        enabled:
+          description: Whether to enable or disable this identity provider for the organization.
+          example: true
+          type: boolean
+      required:
+        - enabled
+      type: object
+    IdentityProviderUpdateData:
+      description: Data object for updating an organization identity provider.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IdentityProviderUpdateAttributes"
+        id:
+          description: The unique identifier of the identity provider to update.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/IdentityProviderType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IdentityProviderUpdateRequest:
+      description: Request body for updating an organization identity provider.
+      properties:
+        data:
+          $ref: "#/components/schemas/IdentityProviderUpdateData"
+      required:
+        - data
+      type: object
+    IdentityProvidersResponse:
+      description: Response containing a list of identity providers for an organization.
+      properties:
+        data:
+          $ref: "#/components/schemas/IdentityProviderDataList"
+      required:
+        - data
+      type: object
     IncidentAttachmentType:
       default: incident_attachments
       description: The incident attachment resource type.
@@ -46447,6 +46957,9 @@ components:
     IncidentTypeAttributes:
       description: Incident type's attributes.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
+          readOnly: true
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
@@ -46487,6 +47000,53 @@ components:
           type: string
       required:
         - name
+      type: object
+    IncidentTypeConfiguration:
+      description: >-
+        The incident-type-scoped behavior settings. All fields are optional on update. Any field omitted from a PATCH request keeps its current value. This object is read-only on the incident type resource itself and is only mutated through the update (PATCH) endpoint.
+      properties:
+        allow_incident_deletion:
+          default: false
+          description: Whether incidents of this type can be deleted.
+          example: false
+          type: boolean
+        allow_workflows:
+          default: true
+          description: Whether automation workflows can be triggered for incidents of this type.
+          example: true
+          type: boolean
+        create_message:
+          description: An optional message shown to users when they declare an incident of this type.
+          example: "Create an incident here"
+          type: string
+        disable_out_of_the_box_postmortem_template:
+          default: false
+          description: Whether the out-of-the-box postmortem template is disabled for incidents of this type.
+          example: false
+          type: boolean
+        editable_timestamps:
+          default: false
+          description: Whether responders can edit incident timestamps for incidents of this type.
+          example: false
+          type: boolean
+        private_incidents:
+          default: false
+          description: >-
+            Whether responders can create private incidents of this type. This is an opt-in setting, distinct from `private_incidents_by_default`, which controls whether incidents are created private automatically.
+          example: false
+          type: boolean
+        private_incidents_by_default:
+          default: false
+          description: Whether incidents of this type are created as private by default.
+          example: false
+          type: boolean
+        slug_source:
+          $ref: "#/components/schemas/IncidentTypeSlugSource"
+        test_incidents:
+          default: true
+          description: Whether incidents of this type are treated as test incidents.
+          example: true
+          type: boolean
       type: object
     IncidentTypeCreateData:
       description: Incident type data for a create request.
@@ -46582,6 +47142,18 @@ components:
       required:
         - data
       type: object
+    IncidentTypeSlugSource:
+      default: default
+      description: >-
+        When set to `servicenow`, incidents will display the ServiceNow record ID instead of the public ID. If no ServiceNow integration exists, the public ID will be displayed.
+      enum:
+        - default
+        - servicenow
+      example: default
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - SERVICENOW
     IncidentTypeType:
       default: incident_types
       description: Incident type resource type.
@@ -46594,6 +47166,8 @@ components:
     IncidentTypeUpdateAttributes:
       description: Incident type's attributes for updates.
       properties:
+        configuration:
+          $ref: "#/components/schemas/IncidentTypeConfiguration"
         createdAt:
           description: Timestamp when the incident type was created.
           format: date-time
@@ -46789,11 +47363,6 @@ components:
     IncidentUserDefinedFieldAttributesResponse:
       description: Attributes of an incident user-defined field.
       properties:
-        attached_to:
-          description: The resource type this field is attached to. Always "incidents".
-          example: "incidents"
-          readOnly: true
-          type: string
         category:
           $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
         collected:
@@ -46838,12 +47407,6 @@ components:
           example: "1.5"
           nullable: true
           type: string
-        prerequisite:
-          description: Reserved for future use. Always null.
-          example:
-          nullable: true
-          readOnly: true
-          type: string
         required:
           description: When true, users must fill out this field on incidents.
           example: false
@@ -46853,12 +47416,6 @@ components:
           example: false
           readOnly: true
           type: boolean
-        table_id:
-          description: Reserved for internal use. Always 0.
-          example: 0
-          format: int64
-          readOnly: true
-          type: integer
         tag_key:
           description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
           example:
@@ -46879,7 +47436,6 @@ components:
           nullable: true
           type: array
       required:
-        - attached_to
         - category
         - collected
         - created
@@ -46890,10 +47446,8 @@ components:
         - modified
         - name
         - ordinal
-        - prerequisite
         - required
         - reserved
-        - table_id
         - tag_key
         - type
         - valid_values
@@ -56447,6 +57001,15 @@ components:
       type: string
       x-enum-varnames:
         - LICENSEREQUEST
+    LinearIssuesDataType:
+      default: linear_issues
+      description: Linear issues resource type.
+      enum:
+        - linear_issues
+      example: linear_issues
+      type: string
+      x-enum-varnames:
+        - LINEAR_ISSUES
     Links:
       description: The JSON:API links related to pagination.
       properties:
@@ -57595,6 +58158,9 @@ components:
         links:
           first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
           self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+        meta:
+          page:
+            next_continuation_token: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
       properties:
         data:
           description: The rows.
@@ -57603,6 +58169,8 @@ components:
           type: array
         links:
           $ref: "#/components/schemas/ListRowsResponseLinks"
+        meta:
+          $ref: "#/components/schemas/ListRowsResponseMeta"
       required:
         - data
         - links
@@ -57625,6 +58193,20 @@ components:
       required:
         - self
         - first
+      type: object
+    ListRowsResponseMeta:
+      description: Contains pagination details, including the continuation token for fetching additional rows.
+      properties:
+        page:
+          $ref: "#/components/schemas/ListRowsResponseMetaPage"
+      type: object
+    ListRowsResponseMetaPage:
+      description: Contains the continuation token for navigating to the next page of rows.
+      properties:
+        next_continuation_token:
+          description: Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
+          example: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
+          type: string
       type: object
     ListRulesResponse:
       description: Scorecard rules response.
@@ -58505,19 +59087,35 @@ components:
         - client_email
       type: object
     LogsArchiveIntegrationS3:
-      description: The S3 Archive's integration destination.
+      description: >-
+        The S3 Archive's integration destination. You must provide one of the following: `access_key_id` alone, or both `account_id` and `role_name` together.
+      oneOf:
+        - $ref: "#/components/schemas/LogsArchiveIntegrationS3AccessKey"
+        - $ref: "#/components/schemas/LogsArchiveIntegrationS3Role"
+    LogsArchiveIntegrationS3AccessKey:
+      description: The S3 Archive's integration destination using an access key.
+      properties:
+        access_key_id:
+          description: The access key ID for the integration.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+      required:
+        - access_key_id
+      type: object
+    LogsArchiveIntegrationS3Role:
+      description: The S3 Archive's integration destination using an IAM role.
       properties:
         account_id:
           description: The account ID for the integration.
           example: "123456789012"
           type: string
         role_name:
-          description: The path of the integration.
+          description: The name of the role to assume for the integration.
           example: role-name
           type: string
       required:
-        - role_name
         - account_id
+        - role_name
       type: object
     LogsArchiveOrder:
       description: A ordered list of archive IDs.
@@ -65182,6 +65780,16 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
+      description: Server-side encryption type for Amazon S3.
+      enum:
+        - "aws:kms"
+        - AES256
+      example: "aws:kms"
+      type: string
+      x-enum-varnames:
+        - AWS_KMS
+        - AES256
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -65335,6 +65943,14 @@ components:
         region:
           description: AWS region of the S3 bucket.
           example: "us-east-1"
+          type: string
+        server_side_encryption:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationServerSideEncryption"
+        ssekms_key_id:
+          description: |-
+            The AWS KMS key ID used for SSE-KMS encryption.
+            Only applies when `server_side_encryption` is set to `aws:kms`.
+          example: "arn:aws:kms:us-east-1:123456789012:key/mrk-abc123"
           type: string
         storage_class:
           $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass"
@@ -68500,6 +69116,10 @@ components:
         The `parse_grok` processor extracts structured fields from unstructured log messages using Grok patterns.
 
         **Supported pipeline types:** logs
+      example:
+        id: "parse-grok-processor"
+        include: "service:my-service"
+        type: "parse_grok"
       properties:
         disable_library_rules:
           default: false
@@ -68512,6 +69132,11 @@ components:
           description: Indicates whether the processor is enabled.
           example: true
           type: boolean
+        field:
+          default: "message"
+          description: The log field to parse with the Grok rules.
+          example: "message"
+          type: string
         id:
           description: A unique identifier for this processor.
           example: "parse-grok-processor"
@@ -68521,9 +69146,9 @@ components:
           example: "service:my-service"
           type: string
         rules:
-          description: The list of Grok parsing rules. If multiple matching rules are provided, they are evaluated in order. The first successful match is applied.
+          description: The list of Grok parsing rules selected by either source field or include query.
           items:
-            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRule"
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleItem"
           type: array
         type:
           $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorType"
@@ -68535,6 +69160,37 @@ components:
         - enabled
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineParseGrokProcessorIncludeRule:
+      description: |-
+        A Grok parsing rule selected using the `include` query. Each rule defines how to extract structured fields
+        from logs matching a Datadog search query.
+      properties:
+        include:
+          description: A Datadog search query used to determine which logs this Grok rule targets.
+          example: "service:my-service"
+          type: string
+        match_rules:
+          description: |-
+            A list of Grok parsing rules that define how to extract fields from matching logs.
+            Each rule must contain a name and a valid Grok pattern.
+          example:
+            - name: "MyParsingRule"
+              rule: '%{word:user} connected on %{date("MM/dd/yyyy"):date}'
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
+          type: array
+        support_rules:
+          description: A list of Grok helper rules that can be referenced by the parsing rules.
+          example:
+            - name: "user"
+              rule: "%{word:user.name}"
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleSupportRule"
+          type: array
+      required:
+        - include
+        - match_rules
+      type: object
     ObservabilityPipelineParseGrokProcessorRule:
       description: |-
         A Grok parsing rule used in the `parse_grok` processor. Each rule defines how to extract structured fields
@@ -68567,6 +69223,11 @@ components:
         - source
         - match_rules
       type: object
+    ObservabilityPipelineParseGrokProcessorRuleItem:
+      description: A single Grok parsing rule, selected by either source field or include query.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRule"
+        - $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorIncludeRule"
     ObservabilityPipelineParseGrokProcessorRuleMatchRule:
       description: |-
         Defines a Grok parsing rule, which extracts structured fields from log content using named Grok patterns.
@@ -71589,6 +72250,210 @@ components:
         - disabled
         - created_at
         - modified_at
+      type: object
+    OrgAuthorizedClientAttributes:
+      description: Attributes of an org authorized client.
+      properties:
+        disabled:
+          description: Whether the organization has disabled this client.
+          example: false
+          type: boolean
+        last_exercised:
+          description: The date and time this client was last exercised.
+          example: "2024-01-15T10:30:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        user_count:
+          description: The number of users in the organization who have authorized this client.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - last_exercised
+        - disabled
+        - user_count
+      type: object
+    OrgAuthorizedClientData:
+      description: Data object representing an org authorized client.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgAuthorizedClientAttributes"
+        id:
+          description: The unique identifier of the org authorized client.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationships"
+        type:
+          $ref: "#/components/schemas/OrgAuthorizedClientType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    OrgAuthorizedClientDataList:
+      description: List of org authorized client data objects.
+      items:
+        $ref: "#/components/schemas/OrgAuthorizedClientData"
+      type: array
+    OrgAuthorizedClientRelationshipOAuth2Client:
+      description: Relationship to the OAuth2 client for this org authorized client.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipOAuth2ClientData"
+      required:
+        - data
+      type: object
+    OrgAuthorizedClientRelationshipOAuth2ClientData:
+      description: Data identifying the OAuth2 client associated with this org authorized client.
+      properties:
+        id:
+          description: The ID of the OAuth2 client.
+          example: "00000000-0000-0000-0000-000000000010"
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipOAuth2ClientDataType"
+      required:
+        - type
+        - id
+      type: object
+    OrgAuthorizedClientRelationshipOAuth2ClientDataType:
+      description: OAuth2 client resource type.
+      enum:
+        - oauth2_clients
+      example: oauth2_clients
+      type: string
+      x-enum-varnames:
+        - OAUTH2_CLIENTS
+    OrgAuthorizedClientRelationshipUserAuthorizedClients:
+      description: Relationship to the user authorized clients for this org authorized client.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipUserAuthorizedClientsDataList"
+        links:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipUserAuthorizedClientsLinks"
+      required:
+        - links
+        - data
+      type: object
+    OrgAuthorizedClientRelationshipUserAuthorizedClientsData:
+      description: Data identifying a user authorized client.
+      properties:
+        id:
+          description: The ID of the user authorized client.
+          example: "00000000-0000-0000-0000-000000000020"
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipUserAuthorizedClientsDataType"
+      required:
+        - type
+        - id
+      type: object
+    OrgAuthorizedClientRelationshipUserAuthorizedClientsDataList:
+      description: List of user authorized client relationship data objects.
+      items:
+        $ref: "#/components/schemas/OrgAuthorizedClientRelationshipUserAuthorizedClientsData"
+      type: array
+    OrgAuthorizedClientRelationshipUserAuthorizedClientsDataType:
+      description: User authorized client resource type.
+      enum:
+        - user_authorized_clients
+      example: user_authorized_clients
+      type: string
+      x-enum-varnames:
+        - USER_AUTHORIZED_CLIENTS
+    OrgAuthorizedClientRelationshipUserAuthorizedClientsLinks:
+      description: Links for the user authorized clients relationship.
+      properties:
+        related:
+          description: Link to the user authorized clients for this org authorized client.
+          example: "/api/v2/org_authorized_clients/00000000-0000-0000-0000-000000000001/user_authorized_clients"
+          type: string
+      required:
+        - related
+      type: object
+    OrgAuthorizedClientRelationships:
+      description: Relationships for an org authorized client.
+      properties:
+        oauth2_client:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipOAuth2Client"
+        user_authorized_clients:
+          $ref: "#/components/schemas/OrgAuthorizedClientRelationshipUserAuthorizedClients"
+      required:
+        - oauth2_client
+        - user_authorized_clients
+      type: object
+    OrgAuthorizedClientResponse:
+      description: Response containing a single org authorized client.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgAuthorizedClientData"
+      required:
+        - data
+      type: object
+    OrgAuthorizedClientType:
+      description: The resource type for org authorized clients.
+      enum:
+        - org_authorized_clients
+      example: org_authorized_clients
+      type: string
+      x-enum-varnames:
+        - ORG_AUTHORIZED_CLIENTS
+    OrgAuthorizedClientUpdateAttributes:
+      description: Attributes for updating an org authorized client.
+      properties:
+        disabled:
+          description: Whether to disable or enable this client for the organization.
+          example: true
+          type: boolean
+      type: object
+    OrgAuthorizedClientUpdateData:
+      description: Data object for updating an org authorized client.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgAuthorizedClientUpdateAttributes"
+        id:
+          description: The unique identifier of the org authorized client to update.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/OrgAuthorizedClientType"
+      required:
+        - id
+        - type
+      type: object
+    OrgAuthorizedClientUpdateRequest:
+      description: Request body for updating an org authorized client.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgAuthorizedClientUpdateData"
+      required:
+        - data
+      type: object
+    OrgAuthorizedClientUserAuthorizationsSort:
+      description: Field to sort user authorizations by.
+      enum:
+        - user.name
+        - user.email
+        - oauth2_client.name
+      example: user.name
+      type: string
+      x-enum-varnames:
+        - USER_NAME
+        - USER_EMAIL
+        - OAUTH2_CLIENT_NAME
+    OrgAuthorizedClientsResponse:
+      description: Response containing a list of org authorized clients.
+      properties:
+        data:
+          $ref: "#/components/schemas/OrgAuthorizedClientDataList"
+        meta:
+          $ref: "#/components/schemas/ResponseMetaAttributes"
+      required:
+        - data
+        - meta
       type: object
     OrgConfigGetResponse:
       description: A response with a single Org Config.
@@ -81769,7 +82634,7 @@ components:
         workload_security, signal_correlation, cloud_configuration and infrastructure_configuration.
         Vulnerability-based notification rules can filter vulnerabilities based on rule types application_code_vulnerability,
         application_library_vulnerability, attack_path, container_image_vulnerability, identity_risk, misconfiguration,
-        api_security, host_vulnerability, iac_misconfiguration, sast_vulnerability and secret_vulnerability.
+        api_security, host_vulnerability, iac_misconfiguration, sast_vulnerability, secret_vulnerability and workload_activity.
       enum:
         - application_security
         - log_detection
@@ -81788,6 +82653,7 @@ components:
         - iac_misconfiguration
         - sast_vulnerability
         - secret_vulnerability
+        - workload_activity
       example: log_detection
       type: string
       x-enum-varnames:
@@ -81808,6 +82674,7 @@ components:
         - IAC_MISCONFIGURATION
         - SAST_VULNERABILITY
         - SECRET_VULNERABILITY
+        - WORKLOAD_ACTIVITY
     RuleUser:
       description: User creating or modifying a rule.
       properties:
@@ -87574,6 +88441,38 @@ components:
       x-enum-varnames:
         - DONE
         - TIMEOUT
+    SecurityMonitoringAzureAppRegistration:
+      description: An Azure App Registration discovered for the organization.
+      properties:
+        client_id:
+          description: The client ID of the App Registration.
+          example: 66666666-7777-8888-9999-000000000000
+          type: string
+        error_count:
+          description: The number of errors encountered while crawling resources for this App Registration.
+          example: 0
+          format: int64
+          type: integer
+        resource_collection_enabled:
+          description: Whether resource collection is enabled for this App Registration.
+          example: true
+          type: boolean
+        subscription_count:
+          description: The number of Azure subscriptions associated with this App Registration.
+          example: 3
+          format: int64
+          type: integer
+        tenant_id:
+          description: The Azure tenant ID of the App Registration.
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+      required:
+        - tenant_id
+        - client_id
+        - resource_collection_enabled
+        - subscription_count
+        - error_count
+      type: object
     SecurityMonitoringContentPackActivation:
       description: The activation status of a content pack.
       enum:
@@ -87767,6 +88666,10 @@ components:
           type: integer
         creator:
           $ref: "#/components/schemas/SecurityMonitoringUser"
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           description: Whether the critical asset is enabled.
           example: true
@@ -87811,6 +88714,10 @@ components:
     SecurityMonitoringCriticalAssetCreateAttributes:
       description: Object containing the attributes of the critical asset to be created.
       properties:
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           default: true
           description: Whether the critical asset is enabled. Defaults to `true` if not specified.
@@ -87903,6 +88810,10 @@ components:
     SecurityMonitoringCriticalAssetUpdateAttributes:
       description: The critical asset properties to be updated.
       properties:
+        description:
+          description: A description of the critical asset.
+          example: Production database servers handling PII
+          type: string
         enabled:
           description: Whether the critical asset is enabled.
           example: true
@@ -88457,6 +89368,68 @@ components:
         (for example, `siem_entity_identity` for identities). Defaults to `entity` when the kind is unknown.
       example: siem_entity_identity
       type: string
+    SecurityMonitoringEntraIdAzureAppRegistrationsAttributes:
+      description: The attributes of the Entra ID Azure App Registration prerequisites.
+      properties:
+        azure_app_registrations:
+          description: The Azure App Registrations discovered for the organization.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringAzureAppRegistration"
+          type: array
+        has_valid_prerequisite:
+          description: Whether at least one Azure App Registration has resource collection enabled.
+          example: true
+          type: boolean
+        integration_id:
+          description: The ID of the Entra ID integration configuration, if one exists.
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        is_enabled:
+          description: Whether the Entra ID integration configuration is enabled, if one exists.
+          example: true
+          type: boolean
+        subscribed_at:
+          description: The time at which the Entra ID integration configuration was created, if one exists.
+          example: "2026-05-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - azure_app_registrations
+        - has_valid_prerequisite
+      type: object
+    SecurityMonitoringEntraIdAzureAppRegistrationsData:
+      description: The Azure App Registration prerequisites for the Entra ID integration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringEntraIdAzureAppRegistrationsAttributes"
+        id:
+          description: The ID of the organization the Azure App Registrations belong to.
+          example: "123456"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringEntraIdAzureAppRegistrationsResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringEntraIdAzureAppRegistrationsResourceType:
+      default: entra_id_azure_app_registrations
+      description: The type of the resource. The value should always be `entra_id_azure_app_registrations`.
+      enum:
+        - entra_id_azure_app_registrations
+      example: entra_id_azure_app_registrations
+      type: string
+      x-enum-varnames:
+        - ENTRA_ID_AZURE_APP_REGISTRATIONS
+    SecurityMonitoringEntraIdAzureAppRegistrationsResponse:
+      description: Response containing the Azure App Registration prerequisites for the Entra ID integration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringEntraIdAzureAppRegistrationsData"
+      required:
+        - data
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -88475,6 +89448,43 @@ components:
       x-enum-varnames:
         - REQUIRE
         - SUPPRESS
+    SecurityMonitoringIntegrationActivateAttributes:
+      description: Overrides applied when activating the integration. All fields are optional.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: default
+          type: string
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Entra ID Integration
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      type: object
+    SecurityMonitoringIntegrationActivateData:
+      description: The configuration overrides for the integration to activate.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationActivateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationActivateResourceType"
+      type: object
+    SecurityMonitoringIntegrationActivateRequest:
+      description: Request body to activate an entity context sync integration for a source type that does not require secrets.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationActivateData"
+      type: object
+    SecurityMonitoringIntegrationActivateResourceType:
+      default: activate_entra_id_request
+      description: The type of the resource. The value should always be `activate_entra_id_request`.
+      enum:
+        - activate_entra_id_request
+      example: activate_entra_id_request
+      type: string
+      x-enum-varnames:
+        - ACTIVATE_ENTRA_ID_REQUEST
     SecurityMonitoringIntegrationConfigAttributes:
       description: The attributes of an entity context sync configuration as returned by the API.
       properties:
@@ -88532,7 +89542,6 @@ components:
         - integration_type
         - domain
         - name
-        - secrets
       type: object
     SecurityMonitoringIntegrationConfigCreateData:
       description: The entity context sync configuration to create.
@@ -88588,7 +89597,9 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigSecrets:
       additionalProperties: {}
-      description: The secrets used to authenticate against the external entity source. The accepted keys depend on the source type (for example, `admin_email` for Google Workspace).
+      description: |-
+        The secrets used to authenticate against the external entity source. The accepted keys depend on the source type
+        (for example, `admin_email` for Google Workspace). Not required for source types that do not use secrets (for example, `ENTRA_ID`).
       example:
         admin_email: test@example.com
       type: object
@@ -88676,7 +89687,6 @@ components:
       required:
         - integration_type
         - domain
-        - secrets
       type: object
     SecurityMonitoringIntegrationCredentialsValidateData:
       description: The credentials to validate.
@@ -107831,7 +108841,11 @@ components:
       description: Details of what tests to update and their new attributes.
       properties:
         id:
-          description: The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and is the
+            value of the `@test.fingerprint_fqn` facet on test events. You can find it by searching on
+            `@test.fingerprint_fqn` in the Test Optimization Explorer, or by filtering the Search flaky tests
+            endpoint with the `fingerprint_fqn` key.
           example: 4eb1887a8adb1847
           type: string
         new_state:
@@ -107901,7 +108915,10 @@ components:
           description: Error message if the update failed.
           type: string
         id:
-          description: The ID of the flaky test from the request. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.
+          description: |-
+            The ID of the flaky test from the request. This is the value of the `@test.fingerprint_fqn` facet
+            on test events, the same ID accepted by the update request and returned by the Search flaky tests
+            endpoint.
           example: 4eb1887a8adb1847
           type: string
         success:
@@ -108535,6 +109552,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/UpdateTenancyConfigData"
+      required:
+        - data
+      type: object
+    UpdateUserIdentityProvidersRequest:
+      description: Request body for setting identity provider overrides for a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserRelationshipIdentityProviderDataList"
       required:
         - data
       type: object
@@ -109188,6 +110213,197 @@ components:
         - ACTIVE
         - DEACTIVATED
         - PENDING
+    UserAuthorizedClientAttributes:
+      description: Attributes of a user authorized client.
+      properties:
+        created_at:
+          description: The date and time this authorization was created.
+          example: "2024-01-10T08:00:00+00:00"
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user has disabled this authorization.
+          example: false
+          type: boolean
+        last_exercised:
+          description: The date and time this authorization was last exercised.
+          example: "2024-01-15T10:30:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        modified_at:
+          description: The date and time this authorization was last modified.
+          example: "2024-01-10T08:00:00+00:00"
+          format: date-time
+          type: string
+        org_disabled:
+          description: Whether the organization has disabled this authorization.
+          example: false
+          type: boolean
+      required:
+        - created_at
+        - modified_at
+        - last_exercised
+        - disabled
+        - org_disabled
+      type: object
+    UserAuthorizedClientData:
+      description: Data object representing a user authorized client.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UserAuthorizedClientAttributes"
+        id:
+          description: The unique identifier of the user authorized client.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationships"
+        type:
+          $ref: "#/components/schemas/UserAuthorizedClientType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    UserAuthorizedClientDataList:
+      description: List of user authorized client data objects.
+      items:
+        $ref: "#/components/schemas/UserAuthorizedClientData"
+      type: array
+    UserAuthorizedClientRelationshipOAuth2Client:
+      description: Relationship to the OAuth2 client that was authorized.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipOAuth2ClientData"
+      required:
+        - data
+      type: object
+    UserAuthorizedClientRelationshipOAuth2ClientData:
+      description: Data identifying the OAuth2 client that was authorized.
+      properties:
+        id:
+          description: The ID of the OAuth2 client.
+          example: "00000000-0000-0000-0000-000000000010"
+          type: string
+        type:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipOAuth2ClientDataType"
+      required:
+        - type
+        - id
+      type: object
+    UserAuthorizedClientRelationshipOAuth2ClientDataType:
+      description: OAuth2 client resource type.
+      enum:
+        - oauth2_clients
+      example: oauth2_clients
+      type: string
+      x-enum-varnames:
+        - OAUTH2_CLIENTS
+    UserAuthorizedClientRelationshipScopeData:
+      description: Data identifying a scope granted to the OAuth2 client.
+      properties:
+        id:
+          description: The identifier of the scope.
+          example: "example_scope"
+          type: string
+        type:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipScopeDataType"
+      required:
+        - type
+        - id
+      type: object
+    UserAuthorizedClientRelationshipScopeDataList:
+      description: List of scope relationship data objects.
+      items:
+        $ref: "#/components/schemas/UserAuthorizedClientRelationshipScopeData"
+      type: array
+    UserAuthorizedClientRelationshipScopeDataType:
+      description: Scope resource type.
+      enum:
+        - scopes
+      example: scopes
+      type: string
+      x-enum-varnames:
+        - SCOPES
+    UserAuthorizedClientRelationshipScopes:
+      description: Relationship to the scopes granted to the OAuth2 client.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipScopeDataList"
+      required:
+        - data
+      type: object
+    UserAuthorizedClientRelationshipUser:
+      description: Relationship to the user who granted this authorization.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipUserData"
+      required:
+        - data
+      type: object
+    UserAuthorizedClientRelationshipUserData:
+      description: Data identifying the user who granted this authorization.
+      properties:
+        id:
+          description: The ID of the user.
+          example: "00000000-0000-9999-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipUserDataType"
+      required:
+        - type
+        - id
+      type: object
+    UserAuthorizedClientRelationshipUserDataType:
+      description: User resource type.
+      enum:
+        - users
+      example: users
+      type: string
+      x-enum-varnames:
+        - USERS
+    UserAuthorizedClientRelationships:
+      description: Relationships for a user authorized client.
+      properties:
+        oauth2_client:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipOAuth2Client"
+        scopes:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipScopes"
+        user:
+          $ref: "#/components/schemas/UserAuthorizedClientRelationshipUser"
+      required:
+        - user
+        - oauth2_client
+        - scopes
+      type: object
+    UserAuthorizedClientResponse:
+      description: Response containing a single user authorized client.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserAuthorizedClientData"
+      required:
+        - data
+      type: object
+    UserAuthorizedClientType:
+      description: The resource type for user authorized clients.
+      enum:
+        - user_authorized_clients
+      example: user_authorized_clients
+      type: string
+      x-enum-varnames:
+        - USER_AUTHORIZED_CLIENTS
+    UserAuthorizedClientsResponse:
+      description: Response containing a list of user authorized clients.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserAuthorizedClientDataList"
+        meta:
+          $ref: "#/components/schemas/ResponseMetaAttributes"
+      required:
+        - data
+        - meta
+      type: object
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -109311,6 +110527,53 @@ components:
       type: string
       x-enum-varnames:
         - USER_INVITATIONS
+    UserOverrideIdentityProviderAttributes:
+      description: Attributes of an identity provider override for a user.
+      properties:
+        authentication_method:
+          description: The authentication method used by this identity provider.
+          example: "SAML"
+          type: string
+      required:
+        - authentication_method
+      type: object
+    UserOverrideIdentityProviderData:
+      description: Data object representing a user identity provider override.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UserOverrideIdentityProviderAttributes"
+        id:
+          description: The unique identifier of the identity provider.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/UserOverrideIdentityProviderDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UserOverrideIdentityProviderDataList:
+      description: List of user identity provider override data objects.
+      items:
+        $ref: "#/components/schemas/UserOverrideIdentityProviderData"
+      type: array
+    UserOverrideIdentityProviderDataType:
+      description: The resource type for identity providers.
+      enum:
+        - identity_providers
+      example: identity_providers
+      type: string
+      x-enum-varnames:
+        - IDENTITY_PROVIDERS
+    UserOverrideIdentityProvidersResponse:
+      description: Response containing a user's identity provider overrides.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserOverrideIdentityProviderDataList"
+      required:
+        - data
+      type: object
     UserRelationshipData:
       description: Relationship to user object.
       properties:
@@ -109324,6 +110587,32 @@ components:
         - id
         - type
       type: object
+    UserRelationshipIdentityProviderData:
+      description: Resource identifier for an identity provider in a relationship update.
+      properties:
+        id:
+          description: The unique identifier of the identity provider.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/UserRelationshipIdentityProviderDataType"
+      required:
+        - id
+        - type
+      type: object
+    UserRelationshipIdentityProviderDataList:
+      description: List of identity provider resource identifiers for a relationship update.
+      items:
+        $ref: "#/components/schemas/UserRelationshipIdentityProviderData"
+      type: array
+    UserRelationshipIdentityProviderDataType:
+      description: The resource type for identity providers.
+      enum:
+        - identity_providers
+      example: identity_providers
+      type: string
+      x-enum-varnames:
+        - IDENTITY_PROVIDERS
     UserRelationships:
       description: Relationships of the user object.
       properties:
@@ -133253,9 +134542,9 @@ paths:
                     data:
                       - attributes:
                           env: production
-                          finished_at: 1693491984000000000
+                          finished_at: "2023-08-31T14:26:24Z"
                           service: test-service
-                          started_at: 1693491974000000000
+                          started_at: "2023-08-31T14:26:14Z"
                           team: backend
                         id: abc-123
                         type: dora_deployment
@@ -133305,9 +134594,9 @@ paths:
                     data:
                       attributes:
                         env: production
-                        finished_at: 1693491984000000000
+                        finished_at: "2023-08-31T14:26:24Z"
                         service: test-service
-                        started_at: 1693491974000000000
+                        started_at: "2023-08-31T14:26:14Z"
                         team: backend
                       id: abc-123
                       type: dora_deployment
@@ -133532,7 +134821,7 @@ paths:
                           services:
                             - test-service
                           severity: SEV-1
-                          started_at: 1693492174000000000
+                          started_at: "2023-08-31T14:29:34Z"
                           team: backend
                         id: abc-123
                         type: dora_failure
@@ -133586,7 +134875,7 @@ paths:
                         services:
                           - test-service
                         severity: SEV-1
-                        started_at: 1693492174000000000
+                        started_at: "2023-08-31T14:29:34Z"
                         team: backend
                       id: abc-123
                       type: dora_failure
@@ -134555,6 +135844,7 @@ paths:
                 - us5.datadoghq.com
                 - ap1.datadoghq.com
                 - ap2.datadoghq.com
+                - uk1.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
@@ -134564,6 +135854,7 @@ paths:
                 - US5
                 - AP1
                 - AP2
+                - UK1
                 - EU1
                 - GOV
                 - US2_GOV
@@ -137649,6 +138940,227 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/identity_providers:
+    get:
+      description: Get all identity providers available for the current organization.
+      operationId: ListIdentityProviders
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication_method: "SAML"
+                          enabled: true
+                        id: "00000000-0000-0000-0000-000000000001"
+                        type: identity_providers
+                      - attributes:
+                          authentication_method: google_oidc
+                          enabled: false
+                        id: "00000000-0000-0000-0000-000000000002"
+                        type: identity_providers
+                      - attributes:
+                          authentication_method: standard
+                          enabled: false
+                        id: "00000000-0000-0000-0000-000000000003"
+                        type: identity_providers
+              schema:
+                $ref: "#/components/schemas/IdentityProvidersResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_management
+      summary: List identity providers
+      tags:
+        - Identity Providers
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_management
+          - user_access_manage
+  /api/v2/identity_providers/{idp_id}:
+    patch:
+      description: Enable or disable an identity provider for the current organization.
+      operationId: UpdateIdentityProvider
+      parameters:
+        - $ref: "#/components/parameters/IdentityProviderId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                    id: "00000000-0000-0000-0000-000000000001"
+                    type: identity_providers
+            schema:
+              $ref: "#/components/schemas/IdentityProviderUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication_method: "SAML"
+                        enabled: true
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: identity_providers
+              schema:
+                $ref: "#/components/schemas/IdentityProviderResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_management
+      summary: Update an identity provider
+      tags:
+        - Identity Providers
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_management
+  /api/v2/identity_providers/{idp_id}/users:
+    get:
+      description: |-
+        Get all users in the organization whose login method has been overridden
+        to use the specified identity provider.
+      operationId: ListIdentityProviderUsers
+      parameters:
+        - $ref: "#/components/parameters/IdentityProviderId"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+        - description: User attribute to order results by. Options include `email` and `name`.
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: email
+            example: email
+            type: string
+        - description: "Direction of sort. Options: `asc`, `desc`."
+          in: query
+          name: sort_dir
+          required: false
+          schema:
+            $ref: "#/components/schemas/QuerySortOrder"
+        - description: Filter users by the given string. Defaults to no filtering.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Filter on status attribute.
+            Comma-separated list, with possible values `Active`, `Pending`, and `Disabled`.
+            Defaults to no filtering.
+          in: query
+          name: filter[status]
+          required: false
+          schema:
+            example: Active
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          email: example@datadoghq.com
+                          handle: example-user
+                          name: Example User
+                          status: Active
+                        id: "00000000-0000-9999-0000-000000000001"
+                        type: users
+                    meta:
+                      page:
+                        total_count: 1
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/UsersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_management
+      summary: List users with an identity provider override
+      tags:
+        - Identity Providers
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_management
   /api/v2/idp/entity_integrations/{integration_id}:
     delete:
       description: Delete the configuration stored for a given integration in the caller's organization.
@@ -139442,7 +140954,6 @@ paths:
                   value:
                     data:
                       - attributes:
-                          attached_to: "incidents"
                           category: "what_happened"
                           collected: "active"
                           created: "2026-03-18T08:40:04.437887Z"
@@ -139453,10 +140964,8 @@ paths:
                           modified: "2026-03-18T08:40:04.437887Z"
                           name: "root_cause"
                           ordinal: "1.1"
-                          prerequisite:
                           required: false
                           reserved: false
-                          table_id: 0
                           tag_key:
                           type: 1
                           valid_values:
@@ -139562,7 +141071,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category:
                         collected:
                         created: "2026-03-18T08:40:05.185406Z"
@@ -139573,10 +141081,8 @@ paths:
                         modified: "2026-03-18T08:40:05.185406Z"
                         name: "root_cause"
                         ordinal: "9"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 3
                         valid_values:
@@ -139695,7 +141201,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category: "what_happened"
                         collected: "active"
                         created: "2026-03-18T08:40:04.437887Z"
@@ -139706,10 +141211,8 @@ paths:
                         modified: "2026-03-18T08:40:04.437887Z"
                         name: "root_cause"
                         ordinal: "1.1"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 1
                         valid_values:
@@ -139806,7 +141309,6 @@ paths:
                   value:
                     data:
                       attributes:
-                        attached_to: "incidents"
                         category: "what_happened"
                         collected:
                         created: "2026-03-18T08:39:49.913895Z"
@@ -139817,10 +141319,8 @@ paths:
                         modified: "2026-03-18T08:39:49.922909Z"
                         name: "root_cause"
                         ordinal: "8"
-                        prerequisite:
                         required: false
                         reserved: false
-                        table_id: 0
                         tag_key:
                         type: 3
                         valid_values:
@@ -152216,6 +153716,7 @@ paths:
                 - us5.datadoghq.com
                 - ap1.datadoghq.com
                 - ap2.datadoghq.com
+                - uk1.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
@@ -152225,6 +153726,7 @@ paths:
                 - US5
                 - AP1
                 - AP2
+                - UK1
                 - EU1
                 - GOV
                 - US2_GOV
@@ -152504,6 +154006,18 @@ paths:
                         - team:intake
                         - team:app
                     type: archives
+              s3_access_key_id:
+                value:
+                  data:
+                    attributes:
+                      destination:
+                        bucket: my-bucket
+                        integration:
+                          access_key_id: AKIAIOSFODNN7EXAMPLE
+                        type: s3
+                      name: Nginx Archive
+                      query: source:nginx
+                    type: archives
             schema:
               $ref: "#/components/schemas/LogsArchiveCreateRequest"
         description: The definition of the new archive.
@@ -152522,6 +154036,21 @@ paths:
                           integration:
                             account_id: "123456789012"
                             role_name: my-role
+                          type: s3
+                        include_tags: false
+                        name: Nginx Archive
+                        query: source:nginx
+                        state: WORKING
+                      id: 00000000-0000-0000-0000-000000000002
+                      type: archives
+                s3_access_key_id:
+                  value:
+                    data:
+                      attributes:
+                        destination:
+                          bucket: my-bucket
+                          integration:
+                            access_key_id: AKIAIOSFODNN7EXAMPLE
                           type: s3
                         include_tags: false
                         name: Nginx Archive
@@ -152681,6 +154210,18 @@ paths:
                         - team:intake
                         - team:app
                     type: archives
+              s3_access_key_id:
+                value:
+                  data:
+                    attributes:
+                      destination:
+                        bucket: my-bucket
+                        integration:
+                          access_key_id: AKIAIOSFODNN7EXAMPLE
+                        type: s3
+                      name: Nginx Archive
+                      query: source:nginx
+                    type: archives
             schema:
               $ref: "#/components/schemas/LogsArchiveCreateRequest"
         description: New definition of the archive.
@@ -152699,6 +154240,21 @@ paths:
                           integration:
                             account_id: "123456789012"
                             role_name: my-role
+                          type: s3
+                        include_tags: false
+                        name: Nginx Archive
+                        query: source:nginx
+                        state: WORKING
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: archives
+                s3_access_key_id:
+                  value:
+                    data:
+                      attributes:
+                        destination:
+                          bucket: my-bucket
+                          integration:
+                            access_key_id: AKIAIOSFODNN7EXAMPLE
                           type: s3
                         include_tags: false
                         name: Nginx Archive
@@ -154518,10 +156074,21 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
+                    data:
+                      - id: system.cpu.user
+                        type: metrics
+                      - attributes:
+                          created_at: "2020-03-25T09:48:37.463835Z"
+                          metric_type: gauge
+                          modified_at: "2020-04-25T09:48:37.463835Z"
+                          tags:
+                            - app
+                            - datacenter
+                        id: http.endpoint.request
+                        type: manage_tags
                     meta:
                       pagination:
-                        next_cursor:
+                        next_cursor: eyJhZnRlciI6Imh0dHAuZW5kcG9pbnQucmVxdWVzdCJ9
                 with_metric_volumes:
                   value:
                     data:
@@ -155393,12 +156960,30 @@ paths:
                       id: http.endpoint.request
                       relationships:
                         dashboards:
-                          data: []
+                          data:
+                            - id: abc-def-xyz
+                              type: dashboards
                         monitors:
-                          data: []
+                          data:
+                            - id: "1775073"
+                              type: monitors
                         notebooks:
                           data: []
+                        slos:
+                          data: []
                       type: metrics
+                    included:
+                      - attributes:
+                          popularity: 3.0
+                          title: My Dashboard
+                          url: /dashboard/abc-def-xyz
+                        id: abc-def-xyz
+                        type: dashboards
+                      - attributes:
+                          title: CPU utilization is high
+                          url: /monitors/1775073
+                        id: "1775073"
+                        type: monitors
               schema:
                 $ref: "#/components/schemas/MetricAssetsResponse"
           description: Success
@@ -155544,8 +157129,17 @@ paths:
               examples:
                 default:
                   value:
-                    data: []
-                    meta: {}
+                    data:
+                      - attributes:
+                          cardinality_delta: 25
+                        id: host
+                        type: tag_cardinality
+                      - attributes:
+                          cardinality_delta: 5
+                        id: env
+                        type: tag_cardinality
+                    meta:
+                      metric_name: system.cpu.user
               schema:
                 $ref: "#/components/schemas/MetricTagCardinalitiesResponse"
           description: Success
@@ -161356,6 +162950,485 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_authorized_clients:
+    get:
+      description: Get a list of all OAuth2 clients authorized for the current organization.
+      operationId: ListOrgAuthorizedClients
+      parameters:
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+        - description: Field to sort results by. Options include `oauth2_client.name`.
+          in: query
+          name: sort
+          required: false
+          schema:
+            default: oauth2_client.name
+            example: oauth2_client.name
+            type: string
+        - description: Filter results by client name, app title, or app description.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Filter results by the OAuth2 client name.
+          in: query
+          name: filter[oauth2_client][name]
+          required: false
+          schema:
+            type: string
+        - description: Filter results by the org-level disabled status.
+          in: query
+          name: filter[disabled]
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Comma-separated list of related resources to include.
+            Options: `oauth2_client`, `oauth2_client.app`, `user_authorized_clients.user`.
+          in: query
+          name: include
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          disabled: false
+                          last_exercised: "2024-01-15T10:30:00+00:00"
+                          user_count: 2
+                        id: "00000000-0000-0000-0000-000000000001"
+                        relationships:
+                          oauth2_client:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000010"
+                              type: oauth2_clients
+                          user_authorized_clients:
+                            data:
+                              - id: "00000000-0000-0000-0000-000000000020"
+                                type: user_authorized_clients
+                            links:
+                              related: "/api/v2/org_authorized_clients/00000000-0000-0000-0000-000000000001/user_authorized_clients"
+                        type: org_authorized_clients
+                    meta:
+                      page:
+                        total_count: 1
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/OrgAuthorizedClientsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_read
+      summary: List org authorized clients
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 7
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_read
+          - manage_integrations
+  /api/v2/org_authorized_clients/{org_authorized_client_id}:
+    delete:
+      description: Disable an OAuth2 client authorization for the current organization, revoking access for all users.
+      operationId: DeleteOrgAuthorizedClient
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_write
+      summary: Delete an org authorized client
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_write
+    get:
+      description: Get a single OAuth2 client authorized for the current organization.
+      operationId: GetOrgAuthorizedClient
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+        - description: |-
+            Comma-separated list of related resources to include.
+            Options: `oauth2_client`, `oauth2_client.app`, `oauth2_client.scopes`, `user_authorized_clients.user`.
+          in: query
+          name: include
+          required: false
+          schema:
+            type: string
+        - description: Filter included user authorized clients by disabled status.
+          in: query
+          name: filter[user_authorized_clients][disabled]
+          required: false
+          schema:
+            type: string
+        - description: Filter included user authorized clients by user disabled status.
+          in: query
+          name: filter[user_authorized_clients][user][disabled]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        disabled: false
+                        last_exercised: "2024-01-15T10:30:00+00:00"
+                        user_count: 2
+                      id: "00000000-0000-0000-0000-000000000001"
+                      relationships:
+                        oauth2_client:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000010"
+                            type: oauth2_clients
+                        user_authorized_clients:
+                          data:
+                            - id: "00000000-0000-0000-0000-000000000020"
+                              type: user_authorized_clients
+                          links:
+                            related: "/api/v2/org_authorized_clients/00000000-0000-0000-0000-000000000001/user_authorized_clients"
+                      type: org_authorized_clients
+              schema:
+                $ref: "#/components/schemas/OrgAuthorizedClientResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_read
+      summary: Get an org authorized client
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_read
+    patch:
+      description: Enable or disable an OAuth2 client authorization for the current organization.
+      operationId: UpdateOrgAuthorizedClient
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      disabled: true
+                    id: "00000000-0000-0000-0000-000000000001"
+                    type: org_authorized_clients
+            schema:
+              $ref: "#/components/schemas/OrgAuthorizedClientUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        disabled: true
+                        last_exercised: "2024-01-15T10:30:00+00:00"
+                        user_count: 2
+                      id: "00000000-0000-0000-0000-000000000001"
+                      relationships:
+                        oauth2_client:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000010"
+                            type: oauth2_clients
+                        user_authorized_clients:
+                          data: []
+                          links:
+                            related: "/api/v2/org_authorized_clients/00000000-0000-0000-0000-000000000001/user_authorized_clients"
+                      type: org_authorized_clients
+              schema:
+                $ref: "#/components/schemas/OrgAuthorizedClientResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_write
+      summary: Update an org authorized client
+      tags:
+        - Org Authorized Clients
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_write
+  /api/v2/org_authorized_clients/{org_authorized_client_id}/user/{user_id}:
+    delete:
+      description: Disable all authorizations for a specific user for the specified OAuth2 client in the current organization.
+      operationId: DeleteOrgAuthorizedClientAllUserAuthorizations
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+        - $ref: "#/components/parameters/UserIdForOrgClient"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_write
+      summary: Delete a user's authorizations for a client
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_write
+  /api/v2/org_authorized_clients/{org_authorized_client_id}/user_authorized_clients:
+    get:
+      description: Get a list of user authorizations for the specified OAuth2 client in the current organization.
+      operationId: ListOrgAuthorizedClientUserAuthorizations
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+        - description: "Field to sort results by. Options: `user.name`, `user.email`, `oauth2_client.name`."
+          in: query
+          name: sort
+          required: false
+          schema:
+            $ref: "#/components/schemas/OrgAuthorizedClientUserAuthorizationsSort"
+        - description: Filter results by the user authorization disabled status.
+          in: query
+          name: filter[disabled]
+          required: false
+          schema:
+            type: string
+        - description: Filter results by user name.
+          in: query
+          name: filter[user][name]
+          required: false
+          schema:
+            type: string
+        - description: Filter results by user email.
+          in: query
+          name: filter[user][email]
+          required: false
+          schema:
+            type: string
+        - description: Filter results by whether the user is disabled.
+          in: query
+          name: filter[user][disabled]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-10T08:00:00+00:00"
+                          disabled: false
+                          last_exercised: "2024-01-15T10:30:00+00:00"
+                          modified_at: "2024-01-10T08:00:00+00:00"
+                          org_disabled: false
+                        id: "00000000-0000-0000-0000-000000000020"
+                        relationships:
+                          oauth2_client:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000010"
+                              type: oauth2_clients
+                          scopes:
+                            data:
+                              - id: "example_scope"
+                                type: scopes
+                          user:
+                            data:
+                              id: "00000000-0000-9999-0000-000000000001"
+                              type: users
+                        type: user_authorized_clients
+                    meta:
+                      page:
+                        total_count: 1
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/UserAuthorizedClientsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_read
+      summary: List user authorizations for a client
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 3
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_read
+  /api/v2/org_authorized_clients/{org_authorized_client_id}/user_authorized_clients/{user_authorized_client_id}:
+    delete:
+      description: Disable a specific user authorization for the specified OAuth2 client in the current organization.
+      operationId: DeleteOrgAuthorizedClientUserAuthorization
+      parameters:
+        - $ref: "#/components/parameters/OrgAuthorizedClientId"
+        - $ref: "#/components/parameters/UserAuthorizedClientIdForOrg"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_authorized_apps_write
+      summary: Delete a user authorization for a client
+      tags:
+        - Org Authorized Clients
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - org_authorized_apps_write
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -168507,7 +170580,21 @@ paths:
         permissions:
           - user_access_read
     post:
-      description: Create a new role for your organization.
+      description: |-
+        Create a new role for your organization.
+
+        The following read permissions are automatically added to every new role, even if they are not included in the request:
+
+        - Dashboards Read
+        - Notebooks Read
+        - Monitors Read
+        - APM Read
+        - Vulnerability Management Read
+        - RUM Apps Read
+        - Incidents Read
+        - SLOs Read
+        - CI Visibility Read
+        - CD Visibility Read
       operationId: CreateRole
       requestBody:
         content:
@@ -176163,6 +178250,155 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
+  /api/v2/security/findings/linear_issues:
+    patch:
+      description: >-
+        Attach security findings to a Linear issue by providing the Linear issue URL.
+
+        You can attach up to 50 security findings per Linear issue. If the Linear issue is not linked to any case, this operation will create a case for the security findings and link the Linear issue to the newly created case. Security findings that are already attached to another Linear issue will be detached from their previous Linear issue and attached to the specified Linear issue.
+      operationId: AttachLinearIssue
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      linear_issue_url: https://linear.app/your-workspace/issue/ENG-123
+                    relationships:
+                      findings:
+                        data:
+                          - id: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+                            type: findings
+                      project:
+                        data:
+                          id: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+                          type: projects
+                    type: linear_issues
+            schema:
+              $ref: "#/components/schemas/AttachLinearIssueRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00+00:00"
+                        description: A description of the Linear issue.
+                        modified_at: "2024-01-01T00:00:00+00:00"
+                        priority: P4
+                        status: OPEN
+                        title: A title for the Linear issue.
+                      id: 00000000-0000-0000-0000-000000000008
+                      type: cases
+              schema:
+                $ref: "#/components/schemas/FindingCaseResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Attach security findings to a Linear issue
+      tags:
+        - "Security Monitoring"
+      x-codegen-request-body-name: body
+      x-menu-order: 154
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_write
+          - appsec_vm_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: >-
+        Create Linear issues for security findings.
+
+        This operation creates a case in Datadog and a Linear issue linked to that case for bidirectional sync between Datadog and Linear. You can create up to 50 Linear issues per request and associate up to 50 security findings per Linear issue. Security findings that are already attached to another Linear issue will be detached from their previous Linear issue and attached to the newly created Linear issue.
+      operationId: CreateLinearIssues
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        assignee_id: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
+                        description: A description of the Linear issue.
+                        label_ids:
+                          - a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+                        linear_project_id: d4c3b2a1-6f5e-8b7a-0d9c-2f1e4a3b6c5d
+                        priority: NOT_DEFINED
+                        title: A title for the Linear issue.
+                      relationships:
+                        findings:
+                          data:
+                            - id: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+                              type: findings
+                        project:
+                          data:
+                            id: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+                            type: projects
+                      type: linear_issues
+            schema:
+              $ref: "#/components/schemas/CreateLinearIssueRequestArray"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          description: A description of the Linear issue.
+                          modified_at: "2024-01-01T00:00:00+00:00"
+                          priority: P4
+                          status: OPEN
+                          title: A title for the Linear issue.
+                        id: 00000000-0000-0000-0000-000000000007
+                        type: cases
+              schema:
+                $ref: "#/components/schemas/FindingCaseResponseArray"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create Linear issues for security findings
+      tags:
+        - "Security Monitoring"
+      x-codegen-request-body-name: body
+      x-menu-order: 153
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_write
+          - appsec_vm_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/mute:
     patch:
       description: >-
@@ -176380,9 +178616,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
         Create ServiceNow tickets for security findings.
@@ -176454,13 +178687,15 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-
         Get a list of assets SBOMs for an organization.
+
+        The `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).
+        Subsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required
+        for paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)
+        with code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.
 
         ### Pagination
 
@@ -176491,7 +178726,8 @@ paths:
             format: int64
             minimum: 1
             type: integer
-        - description: The type of the assets for the SBOM request.
+        - description: >-
+            The type of the assets for the SBOM request. Required for initial requests (when no `page[token]` is provided). Infrastructure types (`Host`, `HostImage`, `Image`, `ServerlessFunction`) and code types (`Repository`, `Service`) cannot be mixed in the same request.
           example: Repository
           in: query
           name: filter[asset_type]
@@ -178970,6 +181206,55 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/configuration/integration_config/entra_id/azure_app_registrations:
+    get:
+      description: |-
+        Get the Azure App Registrations discovered for the organization and whether at least one of them has
+        resource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.
+      operationId: GetEntraIdAzureAppRegistrations
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        azure_app_registrations:
+                          - client_id: 66666666-7777-8888-9999-000000000000
+                            error_count: 0
+                            resource_collection_enabled: true
+                            subscription_count: 3
+                            tenant_id: 11111111-2222-3333-4444-555555555555
+                        has_valid_prerequisite: true
+                        integration_id: 11111111-2222-3333-4444-555555555555
+                        is_enabled: true
+                        subscribed_at: "2026-05-01T12:00:00Z"
+                      id: "123456"
+                      type: entra_id_azure_app_registrations
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringEntraIdAzureAppRegistrationsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - integrations_read
+      summary: Get Entra ID Azure App Registration prerequisites
+      tags: ["Security Monitoring"]
+      x-menu-order: 157
+      x-permission:
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/configuration/integration_config/validate:
     post:
       description: |-
@@ -179197,6 +181482,134 @@ paths:
         operator: OR
         permissions:
           - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/configuration/integration_config/{integration_type}/activate:
+    post:
+      description: |-
+        Activate an entity context sync integration for a source type that does not require manually
+        supplied credentials (for example, Entra ID). If an integration of this type already exists,
+        it is returned (re-enabling it first if it was disabled) instead of creating a duplicate.
+      operationId: ActivateIntegration
+      parameters:
+        - description: The integration type to activate (for example, `entra_id`).
+          in: path
+          name: integration_type
+          required: true
+          schema:
+            example: entra_id
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: My Entra ID Integration
+                    type: activate_entra_id_request
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringIntegrationActivateRequest"
+        description: Optional configuration overrides for the integration to activate.
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-01T12:00:00Z"
+                        domain: default
+                        enabled: true
+                        integration_type: ENTRA_ID
+                        modified_at: "2026-05-01T12:00:00Z"
+                        name: My Entra ID Integration
+                        state: valid
+                      id: 11111111-2222-3333-4444-555555555555
+                      type: integration_config
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - manage_integrations
+      summary: Activate an entity context sync integration
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 155
+      x-permission:
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/configuration/integration_config/{integration_type}/deactivate:
+    post:
+      description: Deactivate all active entity context sync integrations of the given source type (for example, Entra ID).
+      operationId: DeactivateIntegration
+      parameters:
+        - description: The integration type to deactivate (for example, `entra_id`).
+          in: path
+          name: integration_type
+          required: true
+          schema:
+            example: entra_id
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-01T12:00:00Z"
+                        domain: default
+                        enabled: false
+                        integration_type: ENTRA_ID
+                        modified_at: "2026-05-08T12:00:00Z"
+                        name: My Entra ID Integration
+                        state: valid
+                      id: 11111111-2222-3333-4444-555555555555
+                      type: integration_config
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - manage_integrations
+      summary: Deactivate an entity context sync integration
+      tags: ["Security Monitoring"]
+      x-menu-order: 156
+      x-permission:
+        operator: OR
+        permissions:
+          - manage_integrations
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -185660,6 +188073,64 @@ paths:
           - slos_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/snapshot:
+    post:
+      description: Create a snapshot of a graph widget. The snapshot is rendered asynchronously; the returned URL can be polled until the image is ready.
+      operationId: CreateSnapshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSnapshotRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        url: https://app.datadoghq.com/api/v2/snapshot/view/public/60d/00000000-0000-0000-0000-000000000000/1692464400000-12345678-1234-5678-9abc-def123456789.png
+                      id: 12345678-1234-5678-9abc-def123456789
+                      type: create_snapshot
+              schema:
+                $ref: "#/components/schemas/CreateSnapshotResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a graph snapshot
+      tags:
+        - Reporting And Sharing
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps:
     delete:
@@ -197810,6 +200281,211 @@ paths:
         operator: OR
         permissions:
           - usage_read
+  /api/v2/user_authorized_clients:
+    get:
+      description: Get a list of all OAuth2 clients authorized by the current user.
+      operationId: ListUserAuthorizedClients
+      parameters:
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+        - description: Filter results by client name, app title, or app description.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Filter results by the user-level disabled status.
+          in: query
+          name: filter[disabled]
+          required: false
+          schema:
+            type: string
+        - description: "Comma-separated list of related resources to include. Options: `oauth2_client`, `oauth2_client.app`."
+          in: query
+          name: include
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-10T08:00:00+00:00"
+                          disabled: false
+                          last_exercised: "2024-01-15T10:30:00+00:00"
+                          modified_at: "2024-01-10T08:00:00+00:00"
+                          org_disabled: false
+                        id: "00000000-0000-0000-0000-000000000001"
+                        relationships:
+                          oauth2_client:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000010"
+                              type: oauth2_clients
+                          scopes:
+                            data:
+                              - id: "example_scope"
+                                type: scopes
+                          user:
+                            data:
+                              id: "00000000-0000-9999-0000-000000000001"
+                              type: users
+                        type: user_authorized_clients
+                    meta:
+                      page:
+                        total_count: 1
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/UserAuthorizedClientsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - built_in_features
+      summary: List user authorized clients
+      tags:
+        - User Authorized Clients
+      x-menu-order: 4
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+  /api/v2/user_authorized_clients/client/{client_id}:
+    delete:
+      description: Disable all authorizations the current user has granted to the specified OAuth2 client.
+      operationId: DeleteUserAuthorizedClientsByClient
+      parameters:
+        - $ref: "#/components/parameters/OAuth2ClientId"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete all user authorized clients for a client
+      tags:
+        - User Authorized Clients
+      x-menu-order: 1
+  /api/v2/user_authorized_clients/{user_authorized_client_id}:
+    delete:
+      description: Disable the current user's authorization for the specified OAuth2 client.
+      operationId: DeleteUserAuthorizedClient
+      parameters:
+        - $ref: "#/components/parameters/UserAuthorizedClientId"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - built_in_features
+      summary: Delete a user authorized client
+      tags:
+        - User Authorized Clients
+      x-menu-order: 2
+    get:
+      description: Get a single OAuth2 client authorization for the current user.
+      operationId: GetUserAuthorizedClient
+      parameters:
+        - $ref: "#/components/parameters/UserAuthorizedClientId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-10T08:00:00+00:00"
+                        disabled: false
+                        last_exercised: "2024-01-15T10:30:00+00:00"
+                        modified_at: "2024-01-10T08:00:00+00:00"
+                        org_disabled: false
+                      id: "00000000-0000-0000-0000-000000000001"
+                      relationships:
+                        oauth2_client:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000010"
+                            type: oauth2_clients
+                        scopes:
+                          data:
+                            - id: "example_scope"
+                              type: scopes
+                        user:
+                          data:
+                            id: "00000000-0000-9999-0000-000000000001"
+                            type: users
+                      type: user_authorized_clients
+              schema:
+                $ref: "#/components/schemas/UserAuthorizedClientResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - built_in_features
+      summary: Get a user authorized client
+      tags:
+        - User Authorized Clients
+      x-menu-order: 3
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -198265,6 +200941,56 @@ paths:
         permissions:
           - user_access_manage
           - service_account_write
+  /api/v2/users/{user_id}/identity_providers:
+    get:
+      description: |-
+        Get the identity provider overrides for a specific user in the organization.
+        When a user has no overrides set, they use the organization's default identity providers.
+      operationId: GetUserIdentityProviders
+      parameters:
+        - $ref: "#/components/parameters/UserID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication_method: "SAML"
+                        id: "00000000-0000-0000-0000-000000000001"
+                        type: identity_providers
+              schema:
+                $ref: "#/components/schemas/UserOverrideIdentityProvidersResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+      summary: Get identity provider overrides for a user
+      tags:
+        - Users
+      x-menu-order: 14
+      "x-permission":
+        operator: OR
+        permissions:
+          - user_access_manage
   /api/v2/users/{user_id}/invitations:
     delete:
       description: |-
@@ -198417,6 +201143,64 @@ paths:
         operator: OR
         permissions:
           - user_access_read
+  /api/v2/users/{user_id}/relationships/identity_providers:
+    patch:
+      description: |-
+        Set the identity provider overrides for a specific user in the organization.
+        Pass an empty list to remove all overrides, reverting the user to the organization's
+        default identity providers.
+      operationId: UpdateUserIdentityProviders
+      parameters:
+        - $ref: "#/components/parameters/UserID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: "00000000-0000-0000-0000-000000000001"
+                      type: identity_providers
+            schema:
+              $ref: "#/components/schemas/UpdateUserIdentityProvidersRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Authentication error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+      summary: Update identity provider overrides for a user
+      tags:
+        - Users
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      "x-permission":
+        operator: OR
+        permissions:
+          - user_access_manage
   /api/v2/users/{user_uuid}/memberships:
     get:
       description: Get a list of memberships for a user
@@ -199640,6 +202424,7 @@ servers:
           - us5.datadoghq.com
           - ap1.datadoghq.com
           - ap2.datadoghq.com
+          - uk1.datadoghq.com
           - datadoghq.eu
           - ddog-gov.com
           - us2.ddog-gov.com
@@ -199943,6 +202728,8 @@ tags:
       This is an enterprise-only feature. Request access by
       contacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information.
     name: IP Allowlist
+  - description: Manage identity providers and user authentication method overrides.
+    name: Identity Providers
   - description: Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information.
     name: Incidents
   - description: |-
@@ -200089,6 +202876,8 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/api/latest/opsgenie-integration
     name: Opsgenie Integration
+  - description: Manage OAuth2 client authorizations at the organization level.
+    name: Org Authorized Clients
   - description: |-
       Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information.
     name: Org Connections
@@ -200143,6 +202932,9 @@ tags:
       dashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,
       or Microsoft Teams.
     name: Report Schedules
+  - description: |-
+      The Reporting and Sharing endpoints allow you to create snapshots of graph widgets and other shareable resources.
+    name: Reporting And Sharing
   - description: |-
       A restriction policy defines the access control rules for a resource, mapping a set of relations
       (such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).
@@ -200297,6 +203089,8 @@ tags:
       description: Find out more at
       url: "https://docs.datadoghq.com/account_management/billing/usage_details/"
     name: Usage Metering
+  - description: Manage OAuth2 client authorizations at the user level.
+    name: User Authorized Clients
   - description: Create, edit, and disable users.
     externalDocs:
       url: https://docs.datadoghq.com/account_management/users

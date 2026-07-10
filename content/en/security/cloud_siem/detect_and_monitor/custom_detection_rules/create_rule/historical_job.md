@@ -24,6 +24,9 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
+Choose the query language you want to use.
+
+{{% collapse-content title="Event Query" level="h4" expanded=false id="threshold-event-query" %}}
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
@@ -34,7 +37,37 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {{% cloud_siem/unit_testing %}}
 
 [1]: /logs/search_syntax/
-[2]: https://app.datadoghq.com/logs
+{{% /collapse-content %}}
+{{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
+You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
+
+In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
+- Logs
+- Audit Trail logs
+- Events
+- Security signals
+- Spans
+- RUM events
+- Product Analytics events
+- Cloud Network data
+- NetFlow data
+- Reference tables
+- Infrastructure tables
+
+<!-- Markdown workaround - need to put something here so the image doesn't appear as part of the last list item -->
+
+{{< img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%" >}}
+
+1. Under {{< ui >}}Define Datasets{{< /ui >}}, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the {{< ui >}}New{{< /ui >}} icon to create a dataset from scratch.
+   - If you chose an existing dataset and made changes, click {{< ui >}}Update{{< /ui >}} to apply those changes to that dataset, or {{< ui >}}Clone With Changes{{< /ui >}} to create a dataset with your changes applied.
+   - If you created a dataset, click {{< ui >}}Create{{< /ui >}} to use it in your job.
+2. Under {{< ui >}}Write Queries{{< /ui >}}, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click {{< ui >}}Preview{{< /ui >}} to see a list of matching results.
+
+Conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the {{< ui >}}Set Conditions{{< /ui >}} section, such as a count threshold or group-by attribute. A job result is generated when the query results meet those conditions.
+
+[1]: /ddsql_reference/
+[2]: https://app.datadoghq.com/security/configuration/datasets
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "New Value" %}}
