@@ -565,16 +565,21 @@ menu:
       url: agent/fleet_automation/configure_integrations
       parent: agent_fleet_automation
       weight: 803
+    - name: Configure Custom Logs
+      identifier: configure_logs
+      url: agent/fleet_automation/configure_logs
+      parent: agent_fleet_automation
+      weight: 804
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 805
+      weight: 806
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -702,19 +707,24 @@ menu:
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
-    - name: Configuration
-      url: opentelemetry/config/environment_variable_support/
-      identifier: otel_env_var
+    - name: OTLP Export
+      url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+      identifier: otel-otlp-export-dd-sdk
       parent: otel-dd-sdk-parent
-      weight: 3021
+      weight: 3020
     - name: APIs
       url: /opentelemetry/instrument/dd_sdks/api_support
       identifier: otel-api-dd-sdk
       parent: otel-dd-sdk-parent
-      weight: 3022
+      weight: 3021
     - name: Instrumentation Libraries
       url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
+      parent: otel-dd-sdk-parent
+      weight: 3022
+    - name: Configuration
+      url: opentelemetry/config/environment_variable_support/
+      identifier: otel_env_var
       parent: otel-dd-sdk-parent
       weight: 3023
     - name: Send Data to Datadog
@@ -5341,6 +5351,11 @@ menu:
       identifier: elt_integrations
       parent: quality_monitoring
       weight: 275000
+    - name: Airbyte
+      url: data_observability/quality_monitoring/elt/airbyte
+      identifier: elt_integrations_airbyte
+      parent: elt_integrations
+      weight: 500000
     - name: Fivetran
       url: data_observability/quality_monitoring/elt/fivetran
       identifier: elt_integrations_fivetran
@@ -5382,6 +5397,12 @@ menu:
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: CI/CD
+      url: data_observability/cicd
+      pre: data-observability-wui
+      identifier: data_observability_cicd
+      parent: data_observability_heading
+      weight: 90000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
@@ -6705,6 +6726,11 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
       weight: 223
+    - name: WebSocket
+      url: observability_pipelines/sources/websocket/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_websocket
+      weight: 224
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6720,91 +6746,111 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 302
+    - name: Aggregate
+      url: observability_pipelines/processors/aggregate
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_aggregate
+      weight: 303
     - name: Custom Processor
       url: observability_pipelines/processors/custom_processor
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_custom_processor
-      weight: 303
+      weight: 304
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 304
+      weight: 305
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 305
+      weight: 306
+    - name: Edit tags
+      url: observability_pipelines/processors/edit_tags
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_edit_tags
+      weight: 307
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 306
+      weight: 308
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 307
+      weight: 309
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 308
+      weight: 310
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 309
+      weight: 311
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 310
+      weight: 312
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 311
+      weight: 313
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 312
+      weight: 314
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 313
+      weight: 315
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 314
+      weight: 316
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 315
+      weight: 317
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 316
+      weight: 318
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 317
-    - name: Tag Control
-      url: observability_pipelines/processors/tag_control/logs/
+      weight: 319
+    - name: Tag Allow/Block List
+      url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tag_control
-      weight: 318
+      identifier: observability_pipelines_processors_tag_allow_block_list
+      weight: 320
+    - name: Tags
+      url: observability_pipelines/processors/tags/
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tags
+      weight: 321
+    - name: Tag Cardinality Control
+      url: observability_pipelines/processors/tag_cardinality_control
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tag_cardinality_control
+      weight: 322
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 320
+      weight: 323
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -6830,106 +6876,111 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 404
+    - name: ClickHouse
+      identifier: observability_pipelines_clickhouse
+      url: observability_pipelines/destinations/clickhouse/
+      parent: observability_pipelines_destinations
+      weight: 405
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
-      weight: 405
+      weight: 406
     - name: Databricks (Zerobus)
       identifier: observability_pipelines_databricks
       url: observability_pipelines/destinations/databricks/
       parent: observability_pipelines_destinations
-      weight: 406
+      weight: 407
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
-      weight: 407
+      weight: 408
     - name: Datadog BYOC Logs
       url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_byoc_logs
-      weight: 408
+      weight: 409
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 409
+      weight: 410
     - name: Datadog Metrics
       url: observability_pipelines/destinations/datadog_metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_metrics
-      weight: 410
+      weight: 411
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 411
+      weight: 412
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 412
+      weight: 413
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 413
+      weight: 414
     - name: Google SecOps
       url: observability_pipelines/destinations/google_secops/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_secops
-      weight: 414
+      weight: 415
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 415
+      weight: 416
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 416
+      weight: 417
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 417
+      weight: 418
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 418
+      weight: 419
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 419
+      weight: 420
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 420
+      weight: 421
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 421
+      weight: 422
     - name: Splunk HEC
-      url: observability_pipelines/destinations/splunk_hec
+      url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 422
+      weight: 423
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 423
+      weight: 424
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 424
+      weight: 425
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
@@ -7507,11 +7558,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
-    - name: Custom Kubernetes
-      url: /byoc-logs/install/custom_k8s
-      parent: cloudprem_install
-      identifier: cloudprem_custom_k8s
-      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem
@@ -7683,21 +7729,26 @@ menu:
       parent: security_platform
       identifier: security_ticketing_integrations
       weight: 10
+    - name: Assignee Management
+      url: security/assignee_management
+      parent: security_platform
+      identifier: security_assignee_management
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 12
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -8277,21 +8328,26 @@ menu:
       parent: application_security
       identifier: appsec_threats_management_setup
       weight: 3
-    - name: Overview
-      url: security/application_security/overview
+    - name: Attack Summary
+      url: security/application_security/attack_summary/
       parent: application_security
-      identifier: application_security_overview
-      weight: 4
+      identifier: application_security_attack_summary
+      weight: 6
     - name: Threat Protection
       url: security/application_security/threat_protection/
       parent: application_security
       identifier: application_security_threat_protection
       weight: 5
+    - name: Overview
+      url: security/application_security/threat_protection/overview/
+      parent: application_security_threat_protection
+      identifier: application_security_threat_protection_overview
+      weight: 1
     - name: Security Signals
       url: security/application_security/threat_protection/security_signals
       parent: application_security_threat_protection
       identifier: application_security_security_signals
-      weight: 1
+      weight: 2
     - name: Attackers Explorer
       url: security/application_security/threat_protection/security_signals/attacker-explorer/
       parent: application_security_security_signals
@@ -8316,7 +8372,7 @@ menu:
       url: security/application_security/threat_protection/policies/
       parent: application_security_threat_protection
       identifier: application_security_policies
-      weight: 2
+      weight: 3
     - name: Custom Rules
       url: security/application_security/threat_protection/policies/custom_rules/
       parent: application_security_policies
@@ -8341,27 +8397,32 @@ menu:
       url: security/application_security/threat_protection/exploit-prevention/
       parent: application_security_threat_protection
       identifier: exploit_prevention
-      weight: 3
+      weight: 4
     - name: WAF Integrations
       url: security/application_security/threat_protection/waf-integration/
       parent: application_security_threat_protection
       identifier: aws_waf_int
-      weight: 4
+      weight: 5
     - name: Account Takeover Protection
       url: security/application_security/threat_protection/account_takeover_protection/
       parent: application_security_threat_protection
       identifier: security_ato_protection
-      weight: 5
+      weight: 6
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 6
+      weight: 4
+    - name: Overview
+      url: security/application_security/api_posture/overview/
+      parent: application_security_api_security
+      identifier: application_security_api_security_overview
+      weight: 1
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
       identifier: asm_api_security
-      weight: 1
+      weight: 4
     - name: API Endpoints
       url: security/application_security/api_posture/api_inventory/api_endpoints/
       parent: asm_api_security
@@ -8377,16 +8438,21 @@ menu:
       parent: application_security_api_security
       identifier: application_security_api_findings
       weight: 2
+    - name: Compliance
+      url: security/application_security/api_posture/compliance/
+      parent: application_security_api_security
+      identifier: application_security_api_posture_compliance
+      weight: 3
     - name: Endpoint Scanning
       url: security/application_security/api_posture/endpoint_scanning/
       parent: application_security_api_security
       identifier: application_security_endpoint_scanning
-      weight: 3
+      weight: 5
     - name: Sensitive Data
       url: security/application_security/api_posture/sensitive_data/
       parent: application_security_api_security
       identifier: application_security_sensitive_data
-      weight: 4
+      weight: 6
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
@@ -9754,21 +9820,26 @@ menu:
       parent: rum
       identifier: rum_managed_archive
       weight: 12
+    - name: Export Pipelines
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
+      weight: 13
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 13
+      weight: 14
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 14
+      weight: 15
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 15
+      weight: 16
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
@@ -9840,6 +9911,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9856,41 +9932,56 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
-    - name: Analysis Methods
-      url: experiments/analysis_methods
-      parent: pa_experiments
-      identifier: pa_experiments_analysis_methods
-      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Concepts
+      url: experiments/concepts/
+      parent: pa_experiments
+      identifier: pa_experiments_concepts
       weight: 4
-    - name: Cumulative Impact
-      url: experiments/cumulative_impact
-      parent: pa_experiments
-      identifier: pa_experiments_cumulative_impact
-      weight: 5
-    - name: Create Exposure SQL Models
-      url: experiments/exposure_sql
-      parent: pa_experiments
-      identifier: pa_experiments_exposure_sql
-      weight: 6
-    - name: Manage Subject Types
-      url: experiments/subject_types
-      parent: pa_experiments
+    - name: Subject Types
+      url: experiments/concepts/subject_types
+      parent: pa_experiments_concepts
       identifier: pa_experiments_subject_types
-      weight: 7
+      weight: 1
+    - name: Exposure SQL Models
+      url: experiments/concepts/exposure_sql
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_exposure_sql
+      weight: 2
+    - name: Cumulative Impact
+      url: experiments/concepts/cumulative_impact
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_cumulative_impact
+      weight: 3
+    - name: Statistics
+      url: experiments/statistics/
+      parent: pa_experiments
+      identifier: pa_experiments_statistics
+      weight: 5
+    - name: Analysis Methods
+      url: experiments/statistics/analysis_methods
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_analysis_methods
+      weight: 1
     - name: Minimum Detectable Effects
-      url: experiments/minimum_detectable_effect
-      parent: pa_experiments
+      url: experiments/statistics/minimum_detectable_effect
+      parent: pa_experiments_statistics
       identifier: pa_experiments_mde
-      weight: 8
+      weight: 2
     - name: Global Lift
-      url: experiments/global_lift
-      parent: pa_experiments
+      url: experiments/statistics/global_lift
+      parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 9
+      weight: 3
+    - name: Break Out Metrics by Property
+      url: experiments/metric_property_breakouts
+      parent: pa_experiments
+      identifier: pa_experiments_metric_property_breakouts
+      weight: 6
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments

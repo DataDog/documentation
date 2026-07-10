@@ -115,7 +115,6 @@ For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrumen
 {{< code-block lang="bash" filename=".env" >}}
 DD_TRACE_OTEL_ENABLED=true
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
@@ -134,7 +133,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: Depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces).
+**Note**: For tracing, depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces). To emit flag evaluation metrics, you also need the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -347,11 +346,12 @@ func main() {
 {{< code-block lang="bash" filename=".env" >}}
 DD_APM_TRACING_ENABLED=false
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 {{< /code-block >}}
+
+**Note**: To emit flag evaluation metrics, add the OpenTelemetry SDK metrics and OTLP exporter dependencies; see [Set Up Server-Side Flag Evaluation Metrics][3].
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -609,3 +609,4 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
+[3]: /feature_flags/guide/server_flag_evaluation_metrics/

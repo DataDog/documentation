@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect and process logs and metrics ({{< tooltip glossary="preview" case="title" >}}) within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
+Observability Pipelines lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
 - [Source][1]: Receives data from a tool like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.
@@ -57,9 +57,6 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 {{% /tab %}}
 
 {{% tab "Metrics" %}}
-
-<div class="alert alert-info">
-Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 Use the [Metric Tag Governance][1] template to create a metrics pipeline.
 

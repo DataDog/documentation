@@ -19,7 +19,7 @@ Web applications can embed a lot of logic, and although end-to-end tests are oft
 
 ## Testing a file upload
 
-You can **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetic browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
+You can **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetic browser tests automatically identify the uploaded file and create the [{{< ui >}}Upload file{{< /ui >}} associated step][1]. It is then able to upload that file again at test execution.
 
 {{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true" width="100%">}}
 
@@ -27,7 +27,7 @@ You can **upload a file** to validate the final step of a functional workflow to
 
 **Downloading files** is another common action users take on web applications: downloading an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
-Datadog's browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files can be tested to ensure they have the correct file name, size, and data.
+Datadog's browser tests and the {{< ui >}}Test a downloaded file{{< /ui >}} assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files can be tested to ensure they have the correct file name, size, and data.
 
 To setup a browser test with this assertion:
 
@@ -35,7 +35,7 @@ To setup a browser test with this assertion:
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="Recording steps" video="true">}}
 
-2. **Add a `Test a downloaded file` assertion** to confirm that the file was correctly downloaded:
+2. **Add a {{< ui >}}Test a downloaded file{{< /ui >}} assertion** to confirm that the file was correctly downloaded:
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/basic_assert.mp4" alt="Adding assertions" video="true">}}
 
@@ -43,7 +43,7 @@ To setup a browser test with this assertion:
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/advanced_assert.mp4" alt="Advanced verification" video="true">}}
 
-     See the full list of [Browser test assertions][2] to learn more on the `Test a downloaded file` assertion.
+     See the full list of [Browser test assertions][2] to learn more on the {{< ui >}}Test a downloaded file{{< /ui >}} assertion.
 
 3. **Confirm that the file was downloaded** and matched the requirements you set up in your assertion by looking at the generated test result:
 

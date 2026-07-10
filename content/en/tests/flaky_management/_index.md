@@ -217,7 +217,7 @@ Notifications are bundled over a short period to reduce noise. The weekly digest
 | {{< ui >}}Fix successful{{< /ui >}} | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | {{< ui >}}Fix failed{{< /ui >}} | A test fails during the remediation flow. |
 | {{< ui >}}Manual state change{{< /ui >}} | A user manually changes the state of a flaky test. |
-| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. This notification is currently available to a subset of customers. |
+| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured, and can be turned off per rule from the rule's notification settings. |
 
 {{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI." style="width:100%;" >}}
 
@@ -246,10 +246,6 @@ If you are using `@slack-CHANNEL` (without the account name), the notification i
 To find your account name, go to the [Slack integration tile][5] and check the
 {{< ui >}}Account Name{{< /ui >}} field for the workspace you want to use.
 
-### Weekly digest summary notifications cannot be disabled
-
-The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
-
 ### Attempt-to-fix remediation does not trigger after linking a fix
 
 After you include the test key (for example, `DD_ABC123`) in a commit, Datadog scans the commit that triggered the test run and up to the 10 most recent commits before it. If the remediation flow does not start, check the following:
@@ -275,7 +271,6 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[14]: /help/
 [16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/
 [18]: /api/latest/test-optimization/

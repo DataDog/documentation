@@ -25,6 +25,14 @@ Due to these restrictions, the first time you enable Test Impact Analysis, you c
 
 Test Impact Analysis only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
+### Fewer tests skipped than expected
+
+For large applications with more than 50,000 tests, Datadog may return fewer skippable tests than expected. If you use Ruby and expect more tests to be skipped, switch to suite-level skipping by setting this environment variable before running tests:
+
+{{< code-block lang="bash" >}}
+export DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite
+{{< /code-block >}}
+
 ### Synchronizing a fork through GitHub's UI
 
 [Synchronizing a fork through GitHub's UI][4] causes all tests to be run for the generated synchronization commit.
