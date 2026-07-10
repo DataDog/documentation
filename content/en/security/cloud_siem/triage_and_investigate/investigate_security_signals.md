@@ -185,13 +185,13 @@ On the Cloud SIEM [Security cases][13] settings page, you can manage the default
 
 - **Case Project Settings**
 
-  When you select a project to connect security cases with, these options appear.
+  When you select a project to connect security cases with, these options appear:
   - **Default SIEM Security Case Project**: Select the project you want to appear by default.
   - **Security Case project scoping**: Select up to 20 security case projects that you can choose from.
 
 - **Case Creation Defaults**
 
-  When you create a case from a signal, select the default values to assign to that case.
+  When you create a case from a signal, select the default values to assign to that case:
   <div class="alert alert-tip">Click <strong>Show signal to case correlation scheme</strong> to see how Datadog maps signal status to case status, and signal severity to case priority.</div>
 
   - **Default Title** and **Default Description**: Choose whether to use the name and playbook from the first signal for the case, or to leave them empty.
@@ -206,7 +206,7 @@ On the Cloud SIEM [Security cases][13] settings page, you can manage the default
 
   - **When being attached to a case**:
     - **Signal Status** and **Signal Assignee**: When you attach signals to a case, choose to either keep the signal status and assignee, or to assign specific values to them.
-    - Turn on the **Allow Override** toggle to allow overriding existing values in those fields. If this toggle is off, then it only applies the selected status and assignee when those fields are empty.
+    - **Allow Override**: Turn on this toggle to allow to override existing values in those fields. If this toggle is off, the selected status and assignee apply only when those fields are empty.
   - **When updating a case**:
     - **Signal Status**: Choose to either assign a status to the signal that corresponds with the case, or to leave it as-is.
 
