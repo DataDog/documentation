@@ -11,6 +11,12 @@ if not hugo_dir.exists():
     print("Nothing to roll back: hugo/ does not exist.", file=sys.stderr)
     sys.exit(1)
 
+makefile_config_src = hugo_dir / "Makefile.config"
+makefile_config_dst = repo_root / "Makefile.config"
+if makefile_config_src.exists():
+    shutil.copy2(makefile_config_src, makefile_config_dst)
+    print("Restored Makefile.config to repo root.")
+
 shutil.rmtree(hugo_dir)
 print("Removed hugo/")
 
