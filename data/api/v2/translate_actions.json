@@ -2328,16 +2328,6 @@
     "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
     "request_schema_description": "AWS CCM Config Create/Update Request body."
   },
-  "GetAWSMetricNameFilterPreview": {
-    "description": "Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.",
-    "summary": "Get AWS metric name filter preview"
-  },
-  "PreviewAWSMetricNameFilter": {
-    "description": "Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.\nThe filters are not persisted.",
-    "summary": "Preview AWS metric name filter",
-    "request_description": "The metric name filters to preview.",
-    "request_schema_description": "AWS metric name filter preview request body."
-  },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
     "summary": "List available namespaces"
