@@ -169,7 +169,11 @@ In the [Signals Explorer][5], when you use the {{< ui >}}List{{< /ui >}} visuali
      - To create a case, in the {{< ui >}}Create Case{{< /ui >}} window, enter the {{< ui >}}Project{{< /ui >}}, {{< ui >}}Title{{< /ui >}}, {{< ui >}}Description{{< /ui >}}, and {{< ui >}}Assignee{{< /ui >}}, then click {{< ui >}}Create Case{{< /ui >}}.
      - To select an existing case, in the {{< ui >}}Create Case{{< /ui >}} window, click the {{< ui >}}Add to Existing Case{{< /ui >}} tab. Select a case and click {{< ui >}}Attach to an Existing Case{{< /ui >}}.
 
-When you create a case, the triage status is automatically set to `Under Review`.
+When a user creates a case, the following automatic changes happen by default:
+- The triage status is automatically set to `Under Review`.
+- The assignee is set to that user.
+
+To change these defaults, see [Manage default behavior for signals and security cases](#manage-default-behavior-for-signals-and-security-cases).
 
 **Note**: If a case is determined to be critical after further investigation, click {{< ui >}}Declare Incident{{< /ui >}} in the case to escalate it to an incident.
 
@@ -181,23 +185,18 @@ In the {{< ui >}}Security Signals{{< /ui >}} section for a case, you can view si
 
 #### Manage default behavior for signals and security cases
 
-On the Cloud SIEM [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
+On the Cloud SIEM [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other, manually or automatically. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
 
 - **Case Project Settings**
 
-  When you select a project to connect security cases with, these options appear:
-  - **Default SIEM Security Case Project**: Select the project you want to appear by default.
-  - **Security Case project scoping**: Select up to 20 security case projects that you can choose from.
+  Select your default Cloud SIEM security case project, and other security projects to select from:
+  - **Default SIEM Security Case Project**: Select the project to appear by default when you're connecting security cases to a project. This project also appears as the default project on the Cloud SIEM [Cases][12] page.
+  - **Security Case project scoping**: Select up to 20 security case projects that you can choose from to connect security cases with.
 
 - **Case Creation Defaults**
 
-  When you create a case from a signal, select the default values to assign to that case:
+  When you create a case from one or more signals, you can choose to use values from the signal for the case, leave the values empty, or assign them static values, depending on the case field.
   <div class="alert alert-tip">Click <strong>Show signal to case correlation scheme</strong> to see how Datadog maps signal status to case status, and signal severity to case priority.</div>
-
-  - **Default Title** and **Default Description**: Choose whether to use the name and playbook from the first signal for the case, or to leave them empty.
-  - **Default Assignee**: Choose to assign the case to the current user, the person the first signal is assigned to, or to a particular assignee.
-  - **Default Case Status** and **Default Case Priority**: Choose whether to use a specific status and priority for new cases, or to use the values from the first signal.
-  - **Default Case Type**: Choose to categorize created cases as standard, or as security cases.
 
 - **Signal Attachment Settings**
 
