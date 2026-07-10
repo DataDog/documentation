@@ -5,7 +5,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 ## Overview
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the C++ SDK.
+This page describes how to instrument your C++ applications with the Datadog C++ SDK for [Real User Monitoring (RUM)][1].
 
 ## Prerequisites
 
