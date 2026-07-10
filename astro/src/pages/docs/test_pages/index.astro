@@ -10,6 +10,18 @@ const markdocComponents = docs
   .filter((entry) => entry.id.startsWith('test_pages/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
+// A component has a plaintext twin if it ships a `plaintext/<Name>.ts` module.
+// The twin folder's kebab-cased name lines up with both the Markdoc tag name
+// (e.g. `Stepper` -> `stepper`) and the Astro test-page slug (e.g.
+// `ApiSchemaTable` -> `api-schema-table`), so a single set covers both tables.
+const toKebabCase = (pascalCase: string) =>
+  pascalCase.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+const componentsWithPlaintextTwin = new Set(
+  Object.keys(import.meta.glob('/src/components/*/plaintext/*.ts')).map((path) =>
+    toKebabCase(path.split('/')[3]),
+  ),
+);
+
 interface AstroTestPage {
   slug: string;
   title: string;
@@ -130,6 +142,7 @@ const astroComponents: AstroTestPage[] = [
           <tr>
             <th>Component</th>
             <th>Type</th>
+            <th>Plaintext?</th>
             <th>Architecture</th>
           </tr>
         </thead>
@@ -140,6 +153,7 @@ const astroComponents: AstroTestPage[] = [
             <tr>
               <td><a href={`/docs/${entry.id}/`}><code>{tagName}</code></a></td>
               <td>{entry.data.type ?? ''}</td>
+              <td>{componentsWithPlaintextTwin.has(tagName) ? '✅' : '❌'}</td>
               <td>{entry.data.description ?? ''}</td>
             </tr>
             );
@@ -154,6 +168,7 @@ const astroComponents: AstroTestPage[] = [
           <tr>
             <th>Component</th>
             <th>Type</th>
+            <th>Plaintext?</th>
             <th>Architecture</th>
           </tr>
         </thead>
@@ -162,6 +177,7 @@ const astroComponents: AstroTestPage[] = [
             <tr>
               <td><a href={`/docs/test_pages/components/${entry.slug}/`}>{entry.title}</a></td>
               <td>{entry.type}</td>
+              <td>{componentsWithPlaintextTwin.has(entry.slug) ? '✅' : '❌'}</td>
               <td>{entry.description}</td>
             </tr>
           ))}

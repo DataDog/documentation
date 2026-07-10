@@ -208,5 +208,9 @@ export default defineMarkdocConfig({
       render: component("./src/components/Nbsp/Nbsp.astro"),
       ...schema.tags.nbsp,
     },
+    "agent-only": {
+      render: component("./src/components/AgentOnly/AgentOnly.astro"),
+      ...schema.tags["agent-only"],
+    },
   },
 });

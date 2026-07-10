@@ -86,5 +86,8 @@ export default {
       attributes: {},
       selfClosing: true,
     },
+    "agent-only": {
+      attributes: {},
+    },
   },
 };
