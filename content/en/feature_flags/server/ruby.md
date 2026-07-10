@@ -32,6 +32,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Ruby SDK** `datadog` version 2.24.0 or later
 - **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later for provider hooks, exposure logging, and flag evaluation metrics support
+- **OpenTelemetry metrics gems** for [flag evaluation metrics][5]: `opentelemetry-metrics-sdk` version 0.8.0 or later, and `opentelemetry-exporter-otlp-metrics` version 0.4.0 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
 - **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
 
@@ -45,6 +46,13 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 gem install datadog openfeature-sdk
 ```
 
+To emit flag evaluation metrics, add the OpenTelemetry metrics gems to your application bundle:
+
+```ruby
+gem "opentelemetry-metrics-sdk", ">= 0.8"
+gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
+```
+
 You can enable Feature Flags with environment variables:
 
 ```shell
@@ -52,7 +60,7 @@ You can enable Feature Flags with environment variables:
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+DD_METRICS_OTEL_ENABLED=true
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
@@ -314,3 +322,4 @@ Look for messages about:
 [2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems
 [3]: https://openfeature.dev/
 [4]: /account_management/api-app-keys/#api-keys
+[5]: /feature_flags/guide/server_flag_evaluation_metrics/

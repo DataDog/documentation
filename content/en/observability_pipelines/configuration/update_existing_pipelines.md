@@ -104,6 +104,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
 
 {{% /tab %}}
+{{% tab "WebSocket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/websocket %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. If you want to update destination environment variables, update the information for your data destination.
 {{< tabs >}}
@@ -115,6 +120,11 @@ On the Worker installation page:
 {{% tab "Amazon Security Lake" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "ClickHouse" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/clickhouse %}}
 
 {{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}
