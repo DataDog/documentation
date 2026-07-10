@@ -42,7 +42,7 @@ with CONFIG_PATH.open() as f:
     _test_config = yaml.safe_load(f).get("test", {})
 
 # Branch the test PRs target. Create this on the remote before running.
-MOCK_BASE_BRANCH = _test_config["mock_base_branch"]
+MOCK_BASE_BRANCH = _test_config["mock_reorged_master_branch"]
 
 # Branch the test PRs are cut from. This is a frozen snapshot of master (created
 # manually) so PR diffs stay small: a PR shows every commit in the head branch
