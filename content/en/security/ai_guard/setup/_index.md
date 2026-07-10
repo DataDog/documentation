@@ -85,6 +85,7 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
 - [{{< ui >}}Sensitive data detection{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+- [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Additional information about the service that AI Guard uses during evaluation to reduce false positives
 
 Beside {{< ui >}}Default policy{{< /ui >}}, click {{< ui >}}Edit{{< /ui >}} to set AI Guard's default behavior. To override the default behavior, click {{< ui >}}Add Service Policy{{< /ui >}}, select the service and environment you want your override to apply to, then configure the more specialized policy.
 
@@ -116,9 +117,25 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
 - A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
 
+### Add evaluation context {#evaluation-context}
+
+You can give AI Guard additional context about a service, such as its purpose and the type of data it processes. AI Guard uses this context during evaluation to better distinguish legitimate agent behavior from genuine threats, which helps reduce false positives.
+
+To add evaluation context for a service, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Click {{< ui >}}Edit{{< /ui >}} beside the default policy, or add or edit a service policy, then enter your context in the {{< ui >}}Evaluation context{{< /ui >}} field (up to 1000 characters). For example:
+
+```text
+This is a fintech app. Requests to query account balances or initiate transfers are expected and authorized.
+```
+
+As with the [blocking policy](#blocking-policy), evaluation context follows a precedence, with more specific settings taking priority: organization-wide, per environment, per service, then per service and environment.
+
+Use the [AI Guard Playground][19] to test how evaluation context affects the outcome of an evaluation before applying it to a service. The Playground has its own {{< ui >}}Evaluation Context{{< /ui >}} field that applies only to the conversation you're testing, so you can experiment without changing any service policy. Import an existing payload into the Playground, then add evaluation context to see how it changes the evaluation result.
+
 ### Add context with your system prompt {#system-prompt-context}
 
 AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without reducing security coverage.
+
+<div class="alert alert-info">To add this kind of context without modifying your application code, use the <a href="#evaluation-context">Evaluation context</a> field in your service settings instead.</div>
 
 #### What to include
 
@@ -173,3 +190,4 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [11]: /security/ai_guard/setup/manual_integrations/
 [12]: /security/ai_guard/setup/sdk/
 [13]: /security/ai_guard/setup/http_api/
+[19]: https://app.datadoghq.com/security/ai-guard/playground
