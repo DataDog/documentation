@@ -32,7 +32,7 @@ title: Kubernetes Autoscaling
 </div>
 {{< /site-region >}}
 
-Datadog Kubernetes Autoscaling は、Kubernetes リソースを継続的にモニターし、即時のスケーリング推奨事項と Kubernetes ワークロードの多次元オートスケーリングを提供します。Datadog のウェブインターフェイスを通じて、または `DatadogPodAutoscaler` カスタムリソースを使用してオートスケーリングを展開できます。
+Datadog Kubernetes Autoscaling は、Kubernetes リソースを継続的にモニターし、即時のスケーリング推奨事項と Kubernetes ワークロードの多次元オートスケーリングを提供します。Datadog のウェブインターフェースを通じて、または `DatadogPodAutoscaler` カスタムリソースを使用してオートスケーリングを展開できます。
 
 ## 仕組み {#how-it-works}
 Datadog は、リアルタイムおよび過去の利用率メトリクスと既存の Datadog Agent からのイベントシグナルを使用して推奨事項を作成します。その後、これらの推奨事項を確認し、デプロイすることを選択できます。
@@ -47,7 +47,7 @@ Datadog は、リアルタイムおよび過去の利用率メトリクスと既
 
 - **ディストリビューション**: この機能は、Datadog の [サポートされている Kubernetes ディストリビューション][5]すべてと互換性があります。
 - **ワークロードオートスケーリング**: この機能は、Horizontal Pod Autoscaler (HPA) および Vertical Pod Autoscaler (VPA) の代替です。Datadog は、Datadog Kubernetes Autoscaling を有効にする際に、ワークロードから HPA または VPA を削除することを推奨します。これらのワークロードは、アプリケーション内で自動的に特定されます。
-**注:** HPA および/または VPA を保持しながら、`applyPolicy` セクションの `mode: Preview` で `DatadogPodAutoscaler` を作成することで、Datadog Kubernetes Autoscaling を試すことができます。
+**注:** HPA および/または VPA を保持しながら、`applyPolicy` セクションの `mode: Preview` で `DatadogPodAutoscaler` を作成することにより、Datadog Kubernetes Autoscaling を試すことができます。
 
 ### 要件 {#requirements}
 
@@ -67,8 +67,8 @@ Datadog は、リアルタイムおよび過去の利用率メトリクスと既
    | クラスタープロファイルのアクティベーション、ネームスペースラベル | 7.79+ |
 
 - 以下のユーザー権限:
-   - 組織管理 (リモート構成に必要)
-   - API キーの書き込み (リモート構成に必要)
+   - 組織管理 (Remote Configuration に必要)
+   - API キーの書き込み (Remote Configuration に必要)
    - ワークロードスケーリングの書き込み
    - オートスケーリング管理
 - (推奨) Linux カーネル v5.19+ および cgroup v2
@@ -138,7 +138,7 @@ datadog:
     unbundleEvents: true
 ```
 
-2. [Admission Controller][1] は、Datadog Helm チャートでデフォルトで有効になっています。無効にした場合は、次の強調表示された行を `datadog-values.yaml` に追加して再度有効にしてください。
+2. [Admission Controller][1] は、Datadog Helm チャートでデフォルトで有効になっています。無効にした場合は、次の強調表示された行を `datadog-values.yaml` に追加して再度有効にします。
 {{< highlight yaml "hl_lines=5-6" >}}
 ...
 clusterAgent:

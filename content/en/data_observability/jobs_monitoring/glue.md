@@ -148,7 +148,7 @@ In Datadog, view the [Data Observability: Jobs Monitoring][6] page to see a list
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon-web-services/
-[2]: https://app.datadoghq.com/datasets/settings/integrations
+[2]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: /integrations/amazon-glue/
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole
 [6]: https://app.datadoghq.com/data-jobs/

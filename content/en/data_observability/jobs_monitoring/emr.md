@@ -11,7 +11,7 @@ further_reading:
 
 [Data Observability: Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
-If you are using [EMR on EKS][13], follow these [instructions for setting up DJM on Kubernetes][14].
+If you are using [EMR on EKS][13], follow these [instructions for setting up Jobs Monitoring on Kubernetes][14].
 
 ## Requirements
 
@@ -179,7 +179,6 @@ In Datadog, view the [Data Observability: Jobs Monitoring][8] page to see a list
 [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
 [4]: https://console.aws.amazon.com/emr
 [5]: https://console.aws.amazon.com/iam/
-[7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html

@@ -70,6 +70,7 @@ Use the Playground to:
 - Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
 - Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity][20] settings.
 - Test sensitive data scanning on your conversations.
+- Add [evaluation context][22] to a conversation to see how it affects false positives, before applying that context to a service's policy.
 - Share evaluation results with your team during development.
 
 ## Further reading
@@ -86,3 +87,4 @@ Use the Playground to:
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /security/ai_guard/setup/#evaluation-sensitivity
 [21]: /security/ai_guard/setup/sdk/
+[22]: /security/ai_guard/setup/#evaluation-context
