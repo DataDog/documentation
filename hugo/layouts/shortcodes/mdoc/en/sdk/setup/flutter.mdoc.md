@@ -3,7 +3,9 @@ This partial contains setup instructions for the Flutter SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Flutter SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
+This page describes how to instrument your Flutter applications with the Datadog Flutter SDK.
+
+The Flutter SDK supports [Real User Monitoring (RUM)][1] and [Error Tracking][2].
 
 ## Setup
 
