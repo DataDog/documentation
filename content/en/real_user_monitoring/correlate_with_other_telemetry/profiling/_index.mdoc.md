@@ -298,7 +298,7 @@ Android profiling data is attached to long task events in a RUM session. You can
 
 Android profiling data is attached to operations events in a RUM session. You can access profiles for operations from the view side panel or from the operations event side panel.
 
-< TO BE ADDED>
+{% img src="real_user_monitoring/android/android-profiling-operation.png" alt="Android profiling data for an operation." style="width:90%;" /%}
 
 {% /if %}
 <!-- end Android -->
