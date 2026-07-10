@@ -10,6 +10,9 @@ products:
   - name: App and API Protection
     url: /security/application_security/
     icon: app-sec
+  - name: Workload Protection
+    url: /security/workload_protection/
+    icon: security-workload-security
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
@@ -37,6 +40,7 @@ Configure severity modifier rules to adjust finding severities to reflect your o
       - Attack Path
       - Identity Risk
       - API Security
+      - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. Optionally, click **Add Severity** to filter findings by severity level. The rule matches against each finding's Datadog-adjusted severity, before any user-defined adjustments.
 1. Define the severity modification action:
@@ -76,6 +80,7 @@ Not all finding types use the same severity scale. The following table shows the
 | Attack Path | Info |
 | Identity Risk | Info |
 | Misconfiguration | Info |
+| Workload Activity | Info |
 | Container Image Vulnerability | None |
 | Host Vulnerability | None |
 | Library Vulnerability | None |
