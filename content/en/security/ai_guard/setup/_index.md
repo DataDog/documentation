@@ -105,6 +105,8 @@ AI Guard can detect personally identifiable information (PII) such as email addr
 
 When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only; findings do not independently trigger blocking.
 
+By default, AI Guard scans for a standard set of secrets, such as AWS keys and Datadog API keys. To customize which [scanning rules][14] AI Guard uses, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], where you can enable or disable individual rules, and create scanning groups with custom rules, scoped specifically to AI Guard evaluations.
+
 ### Block specific tools
 
 You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Tool Blocklist{{< /ui >}}][8]. Click {{< ui >}}Add Tool Blocking Configuration{{< /ui >}}, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
@@ -190,4 +192,6 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [11]: /security/ai_guard/setup/manual_integrations/
 [12]: /security/ai_guard/setup/sdk/
 [13]: /security/ai_guard/setup/http_api/
+[14]: /security/sensitive_data_scanner/scanning_rules/
+[15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
