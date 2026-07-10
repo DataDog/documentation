@@ -28,7 +28,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Armenia | +374 |
 | Australia | +61 |
 | Austria | +43 |
-| Azerbaijan | +994 |
+| Azerbaijan** | +994 |
 | Bahrain | +973 |
 | Belgium | +32 |
 | Bosnia and Herzegovina | +387 |
@@ -87,7 +87,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Nigeria*, ** | +234 |
 | North Macedonia | +389 |
 | Norway | +47 |
-| Pakistan | +92 |
+| Pakistan** | +92 |
 | Palestine | +970 |
 | Peru | +51 |
 | Philippines | +63 |
@@ -100,7 +100,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | Saudi Arabia | +966 |
 | Serbia | +381 |
 | Singapore | +65 |
-| Slovakia | +421 |
+| Slovakia** | +421 |
 | Slovenia | +386 |
 | South Africa | +27 |
 | South Korea | +82 |
