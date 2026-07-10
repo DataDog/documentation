@@ -18,10 +18,6 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Configuring custom log collection with Fleet Automation is in Preview.
-{{< /callout >}}
-
 Use [Fleet Automation][2] to manage custom log collection settings on your Agents remotely at scale.
 
 ## Prerequisites
