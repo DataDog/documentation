@@ -5,112 +5,104 @@ aliases:
 further_reading:
 - link: /infrastructure/hostmap/
   tag: ドキュメント
-  text: Host Map
+  text: ホストマップ
 - link: /infrastructure/livecontainers/
   tag: ドキュメント
   text: コンテナマップ
 - link: /infrastructure/process/
   tag: ドキュメント
   text: ライブプロセスモニタリング
-title: インフラストラクチャーリスト
+title: ホストリスト
 ---
+## 概要 {#overview}
 
-## 概要
+ホストリストは、Agent またはクラウド統合を通じて Datadog に報告しているすべてのホストのライブインベントリを提供します。デフォルトでは、過去 15 分間にアクティビティがあったホストが表示されます。ホストリストを開くには、Datadog の[**インフラストラクチャー > ホスト**][10]に移動します。
 
-インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索したり、タグでグループ化することができます。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。このリストは、インフラストラクチャーホストの請求額の概算に使用しないでください。請求に関する詳細は、[請求][11]ページをご覧ください。
+このページでは、ホストリストの**新しい**ビューについて説明します。**従来**のビューに切り替えるには、右上隅のトグルを使用します。
 
-## ホスト
+{{< img src="infrastructure/index/infra-list-overview-2.png" alt="フィルターパネルが左側にあり、カスタマイズ可能な列を持つホストのリストが表示されるホストリスト。" style="width:100%;">}}
 
-ホストのインフラストラクチャーリストに次の情報が表示されます。
+**注**: このリストは、インフラストラクチャーホストの課金を推定するためには使用しないでください。詳細については、[課金][11]ページを参照してください。
 
-Hostname
-: 優先ホスト名[エイリアス](#aliases) (オプションメニューを使用してクラウド名またはインスタンス ID を表示します)。
+## フィルターと検索 {#filter-and-search}
 
-Cloud Name
-: ホスト名[エイリアス](#aliases)。
+左側のフィルターパネルを使用してホストのリストを絞り込みます。
 
-Instance ID
-: ホスト名[エイリアス](#aliases)。
+- **My Teams**: トグルをオンにしてチームに関連するホストのみを表示します。
+- **クイックフィルター**: パネル上部のチェックボックスを使用して、クラウドプロバイダー (AWS、Azure、Google Cloud、Oracle、または Alibaba Cloud)、テレメトリソース (Datadog Agent または OpenTelemetry)、オペレーティングシステム (Windows、Linux、または Darwin)、またはハードウェア (GPU) でフィルタリングします。
+- **メトリクスのフィルタリング**: メトリクスを選択し、メトリクス値でホストをフィルタリングする値の範囲を定義します。
+- **ファセットの検索**: クラウドプロバイダー、環境、リージョン、リソースタイプ、インスタンスタイプ、OS、OS バージョン、Agent、または Docker バージョンなど、任意のホストプロパティまたはタグでフィルタリングします。
 
-Status
-: 予想されるメトリクスが受信されると `ACTIVE` と表示され、メトリクスが受信されないと `INACTIVE` と表示されます。
+リストの上部にある検索ボックスを使用して、[Datadog 検索構文][16]でホストをフィルタリングすることもできます。
 
-CPU
-: 使用された CPU の割合（アイドル以外のすべて）。
+## 列のカスタマイズ {#customize-columns}
 
-IOWait
-: IO での待機に費やされた CPU の割合（すべてのプラットフォームでレポートされるわけではありません）。
+列を追加、削除、または並べ替えるには、ホストリストの上にある**列**をクリックします。次のいずれかを列として追加できます。
 
-Load 15
-: 過去 15 分間のシステム負荷。
+- **ホスト属性**: ホスト名やステータスなど、ホストのプロパティ。
+- **タグ**: ホストに適用された任意のタグ。
+- **メトリクス**: ホストによって報告された任意のメトリクス。
 
-Apps
-: ホストのメトリクスをレポートする Datadog インテグレーション。
+列を再配置するには、新しい位置にドラッグします。サイズを変更するには、右端をドラッグします。非表示にするには、オフに切り替えます。
 
-Operating System 
-: 追跡対象のオペレーティングシステム
+{{< img src="infrastructure/index/infra-list-columns.png" alt="ホスト属性、タグ、メトリクスのセクションがあり、各列を表示または非表示にするためのトグルがある列カスタマイズパネル。" style="width:100%;">}}
 
-Cloud Platform
-: ホストが実行されているクラウドプラットフォーム。(例: AWS、Google Cloud、Azure など)
+### 結合列 {#combined-columns}
 
-Datadog Agent
-: ホストでデータを収集する Agent のバージョン。
+ホストリストには、複数のデータポイントを結合した 3 つの列が含まれます。
 
-OpenTelemetry
-: ホスト上でデータを収集している OpenTelemetry Collector のバージョン。
+- **構成**: 各ホストのクラウドプロバイダー、オペレーティングシステム、および Datadog Agent のインストール状況。
+- **ソフトウェア**: 検出された場合、ホストのウェブサーバー、データベース、キャッシュ、およびコンテナオーケストレーター (Docker や Kubernetes など)。
+- **インテグレーション**: ホストで有効になっている Datadog Agent インテグレーション。
 
-### ホスト名
+## 保存済みビュー {#saved-views}
 
-Datadog Agent は、複数のソースから潜在的なホスト名を収集します。詳細については、[Datadog が Agent ホスト名を決定する方法][1]を参照してください。
+フィルターと列の構成を保存するには、左上隅の**ビュー**パネルを開き、**新しいビューとして保存**をクリックします。このパネルから、保存済みビューのフィルタリング、並べ替え、編集、スターを付けることを行えます。
 
-**注**: ホスト名は、Datadog アカウント内で一意である必要があります。そうでない場合、ホストのグラフに不整合が生じる可能性があります。
+{{< img src="infrastructure/index/infra-list-views.png" alt="保存、フィルタリング、並べ替え、編集を行う各オプションがビューパネルに含まれています。" style="width:40%;">}}
 
-### 検査
+## ホストを検査する {#inspect-a-host}
 
-ホストをクリックすると、以下の詳細が表示されます。
-- [エイリアス](#aliases)
+任意のホストをクリックすると、その詳細パネルが開きます。これは [Resource Catalog][15] で使用されるのと同じサイドパネルです。パネルには次のものが含まれます。
+
+- [ホスト名とエイリアス](/agent/faq/how-datadog-agent-determines-the-hostname/#host-aliases)
 - [タグ][2]
 - [メトリクス][3]
 - [コンテナ][4]
 - [ログ][5] (有効な場合)
-- [エージェント構成](#agent-configuration) (有効な場合)
+- [Agent 構成](#agent-configuration) (有効な場合)
+- [OpenTelemetry Collector 構成](#opentelemetry-collector-configuration) (有効な場合)
 
-{{< img src="infrastructure/index/infra-list2.png" alt="インフラストラクチャーリストのホストの詳細" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-side-panel.png" alt="ホストの概要、メトリクス、コンテナ、プロセス、およびその他のホストデータのセクションが含まれたホストの詳細サイドパネル。" style="width:100%;">}}
 
-#### エイリアス
+### Agent 構成 {#agent-configuration}
 
-Datadog は、1 つのホストに一意に識別可能な名前が複数ある場合、ホスト名のエイリアスを作成します。Agent によって収集されたこれらの名前は、選択された正規名のエイリアスとして追加されます。あたとえば、EC2 で実行している単一のホストは、インスタンス ID (`i-abcd1234`)、ホストの IP アドレスに基づいて EC2 が提供する汎用ホスト名 (`ip-192-0-0-1`)、および内部 DNS サーバーまたは config で管理されるホストファイルが提供するわかりやすいホスト名 (`myhost.mydomain`) を持つ可能性があります。
+ホストの Agent 構成を表示するには、ホストをクリックしてサイドパネルを開き、**Agent** セクションまでスクロールします。インフラストラクチャー全体の Agent 構成を表示および管理するには、[Fleet Automation][12] を使用します。
 
-{{< img src="infrastructure/index/infra-list-alias2.png" alt="ホストエイリアス" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-agent-config.png" alt="JSON 形式の Agent 構成が表示されたホストのサイドパネルの Agent セクション。" style="width:100%;">}}
 
-#### Agent の構成
+### OpenTelemetry Collector 構成 {#opentelemetry-collector-configuration}
 
-Agent は、ホスト詳細パネルの `Agent Configuration` セクションに表示されるように、Datadog に自身の構成を送信することができます。
+[Datadog 拡張機能][14]を OpenTelemetry Collector とともに構成すると、ホストの詳細パネルで Collector の構成やビルド情報を直接表示できます。この拡張機能を使用すると、Datadog から Collector デプロイメントを管理およびデバッグすることもできます。
 
-Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
+ホストの OpenTelemetry Collector 構成を表示するには、ホストをクリックしてサイドパネルを開きます。**OTel Collector** セクションまでスクロールして、ビルド情報と完全な Collector 構成を確認します。ホスト名の一致やパイプラインの構成などの詳細なセットアップ手順と要件については、[Datadog 拡張機能に関するドキュメント][14]を参照してください。
 
-Agent バージョン 7.47.0/6.47.0 以降では、Agent 構成ビューはデフォルトで有効になっています。Agent バージョン 7.39/6.39 以降では、手動で有効にすることができます。
+{{< img src="infrastructure/index/infra-list-otel-config.png" alt="ビルド情報と Collector 構成が表示された、ホストのサイドパネルの OTel Collector セクション。" style="width:100%;">}}
 
-構成ビューを有効または無効にするには
-- [Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成ビューが有効になり、`false` に設定すると無効になります。
-- または、`DD_INVENTORIES_CONFIGURATION_ENABLED` 環境変数を使用して構成ビューを有効または無効にします。
+## エクスポート {#export}
 
-{{< img src="infrastructure/index/infra-list-config3.png" alt="Agent 構成ビュー" style="width:100%;">}}
+**エクスポート** > **DDSQL エディターで開く**をクリックし、[DDSQL エディター][18]から結果をダウンロードします。ダッシュボード、ノートブック、またはスプレッドシートにエクスポートすることもできます。Datadog にレポートしているホストの JSON 形式のリストを取得するには、以下のいずれかを使用することもできます。
 
-### エクスポート
+- [ホストの概要レポート][17]。
+- [ホスト API エンドポイントの検索][7]。例については、[開発者ガイド][8]を参照してください。
 
-Datadog にレポートしているホストの JSON 形式のリストを取得するには、以下のいずれかを使用してください。
+### Agent バージョンを監査する {#audit-agent-versions}
 
-* インフラストラクチャーリストの上部にある **JSON API パーマリンク**。
-* [検索ホスト API エンドポイント][7] - 例については、[開発者ガイド][8]を参照してください。
+ホスト全体でどの Agent バージョンが実行されているかを監査するには、[get_host_agent_list スクリプト][9]を使用します。このスクリプトは、[ホストの概要レポート][17]を使用して実行中の Agent とそのバージョン番号を出力します。`json_to_csv` スクリプトは、JSON 出力を CSV に変換します。
 
-#### Agent バージョン
+### Agent なしでホストをリストする {#list-hosts-without-an-agent}
 
-Agent のバージョンを監査して、最新バージョンを実行していることを確認することが役立つ場合もあります。そのために、[get_host_agent_list script][9] を使用します。このスクリプトは、JSON パーマリンクを利用して、現在実行中の Agent をバージョン番号とともに出力します。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトも用意されています。
-
-#### Agent なし
-
-JSON エクスポートのもう 1 つのユースケースは、Agent がインストールされていない Amazon EC2 (RDS を除く) インスタンスのリストを取得することです。これらのインスタンスは、Datadog AWS インテグレーションタイルで AWS アカウントを設定することにより、インフラストラクチャーリストに表示されます。以下の Python3 スクリプトを参照してください。
+JSON エクスポートを使用して、Agent がインストールされていないAmazon EC2 (RDS を除く) インスタンスのリストを作成することもできます。これらのインスタンスは、Datadog AWS インテグレーションで AWS アカウントを設定すると、ホストリストに表示されます。以下の Python 3 スクリプトがそれらをリストします。
 
 ```python
 # 3p
@@ -138,18 +130,22 @@ for host in infra['rows']:
             pass
 ```
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /ja/getting_started/tagging/
 [3]: /ja/metrics/
 [4]: /ja/infrastructure/livecontainers/?tab=helm#overview
 [5]: /ja/logs/
-[6]: /ja/agent/configuration/agent-configuration-files/
 [7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
+[8]: /ja/extend/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/ja/account_management/billing/
+[12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
+[14]: /ja/opentelemetry/integrations/datadog_extension/
+[15]: /ja/infrastructure/resource_catalog/#investigate-a-host-or-resource
+[16]: /ja/getting_started/search/
+[17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
+[18]: /ja/ddsql_editor/#save-and-share-queries

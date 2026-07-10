@@ -6741,91 +6741,111 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
       weight: 302
+    - name: Aggregate
+      url: observability_pipelines/processors/aggregate
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_aggregate
+      weight: 303
     - name: Custom Processor
       url: observability_pipelines/processors/custom_processor
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_custom_processor
-      weight: 303
+      weight: 304
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 304
+      weight: 305
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 305
+      weight: 306
+    - name: Edit tags
+      url: observability_pipelines/processors/edit_tags
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_edit_tags
+      weight: 307
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 306
+      weight: 308
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 307
+      weight: 309
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 308
+      weight: 310
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 309
+      weight: 311
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 310
+      weight: 312
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 311
+      weight: 313
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 312
+      weight: 314
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 313
+      weight: 315
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 314
+      weight: 316
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 315
+      weight: 317
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 316
+      weight: 318
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 317
-    - name: Tag Control
-      url: observability_pipelines/processors/tag_control/logs/
+      weight: 319
+    - name: Tag Allow/Block List
+      url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tag_control
-      weight: 318
+      identifier: observability_pipelines_processors_tag_allow_block_list
+      weight: 320
+    - name: Tags
+      url: observability_pipelines/processors/tags/
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tags
+      weight: 321
+    - name: Tag Cardinality Control
+      url: observability_pipelines/processors/tag_cardinality_control
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tag_cardinality_control
+      weight: 322
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 320
+      weight: 323
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
