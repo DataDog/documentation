@@ -23,20 +23,20 @@ Datadog runs diagnostic checks with experiment analysis to help you identify dat
 For example, you might see:
 
 - A **Failed diagnostic check** banner when results are unreliable.
-- An **Exposure imbalance detected** warning when traffic is split differently than expected.
-- A **No metric data yet** message when Datadog has not received events for a metric.
+- A **Traffic imbalance** diagnostic when traffic is split differently than expected.
+- A **Missing metric data** diagnostic when Datadog has not received events for a metric.
 - A warning icon on a metric when the metric or subject type configuration prevents calculation.
 
 Start with any failed diagnostic check or warning banner before interpreting lift, confidence intervals, or global lift.
 
-## Exposure imbalance
+## Traffic imbalance
 
-An exposure imbalance means the observed traffic split across variants is significantly different from the split configured for the experiment. This statistical issue is sometimes called a sample ratio mismatch, but Datadog surfaces it as an exposure imbalance. When this happens, Datadog marks the results as unreliable.
+A traffic imbalance means the observed traffic split across variants is significantly different from the split configured for the experiment. This statistical issue is sometimes called a sample ratio mismatch or exposure imbalance. When this happens, Datadog marks the results as unreliable.
 
 You may see one of the following messages:
 
 - **Failed diagnostic check**
-- **Exposure imbalance detected**
+- **Traffic imbalance**
 - "This experiment has a significant exposure imbalance between variants, which makes the results unreliable."
 
 ### Common causes
@@ -53,7 +53,7 @@ You may see one of the following messages:
 3. For warehouse-native experiments, inspect the Exposure SQL Model and upstream exposure table.
 4. Fix the source of the imbalance, then restart or rerun the experiment analysis.
 
-## Missing exposure data
+## Missing assignments
 
 If Datadog has no exposure data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse exposure model returns no rows in the analysis window for the specified experiment key and variant keys.
 
@@ -63,7 +63,18 @@ If Datadog has no exposure data for an experiment, results cannot be computed. T
 - For warehouse-native experiments, verify that the Exposure SQL Model returns exposure rows for the experiment key, variant keys, subject key, and timestamp range.
 - If the experiment was just launched, wait for the next analysis run or manually run an update.
 
-## Multiple variant exposures
+## Missing flag evaluations
+
+For experiments backed by Datadog Feature Flags, Datadog can report **Missing flag evaluations** when no flag evaluations were recorded in the analysis window. This check does not apply to warehouse-native experiments.
+
+### How to resolve
+
+- Confirm that the feature flag is enabled in the correct environment.
+- Confirm that the application initializes the Feature Flags SDK and evaluates the flag for the expected subjects.
+- Check the flag's real-time metric overview for evaluation and exposure activity.
+- Verify that the flag key and experiment configuration match the flag your application evaluates.
+
+## Mixed assignments
 
 If the same subject is exposed to more than one variant in the same experiment, Datadog excludes that subject from analysis. A high number of mixed exposures can make results incomplete or unreliable.
 
@@ -74,7 +85,7 @@ If the same subject is exposed to more than one variant in the same experiment, 
 - For warehouse-native experiments, check for duplicate or conflicting variant records in the exposure data.
 - Fix the source of conflicting exposures, then rerun analysis.
 
-## Segment-level exposure imbalance
+## Dimensional assignment imbalance
 
 Datadog can flag an experiment when the probability of seeing a variant differs significantly across segment values. For example, one country, plan, device, or customer tier might receive variants at a different split than the rest of the experiment. This can make CUPED results unreliable.
 
@@ -85,9 +96,11 @@ Datadog can flag an experiment when the probability of seeing a variant differs 
 - Confirm that exposure data records the subject's segment consistently at the time of exposure.
 - Fix targeting or exposure data issues, then rerun analysis.
 
-## No metric data yet
+## Missing metric data
 
-When Datadog has not received event data for a metric, the experiment results page can show **No metric data yet**. The metric cannot contribute to results until events are collected and joined to exposed subjects.
+When Datadog has not received event data for a metric, the experiment results page can show **Missing metric data**. The metric cannot contribute to results until events are collected and joined to exposed subjects.
+
+If the primary metric has no data, the diagnostic blocks the experiment decision. If a secondary or guardrail metric has no data, Datadog warns you without blocking analysis for the primary metric.
 
 ### Common causes
 
@@ -119,9 +132,9 @@ Examples include:
 - Make sure the metric subject type matches the experiment's analysis subject.
 - Replace deleted measures or properties, then rerun analysis.
 
-## Outlier handling
+## Metric winsorized to zero
 
-Outlier handling caps extreme metric values to reduce variance. If only a small number of subjects perform the metric event, outlier handling can cap all values to zero and hide the signal.
+Outlier handling caps extreme metric values to reduce variance. If only a small number of subjects perform the metric event, outlier handling can winsorize all values to zero and prevent statistical analysis.
 
 ### How to resolve
 
@@ -130,7 +143,7 @@ Outlier handling caps extreme metric values to reduce variance. If only a small 
 3. Disable outlier handling or adjust the bounds.
 4. Rerun experiment analysis.
 
-## Baseline imbalance
+## Pre-experiment metric imbalance
 
 When CUPED is enabled, Datadog uses pre-experiment metric values to reduce variance. If pre-experiment values differ meaningfully across variants, CUPED-adjusted results may be unreliable.
 
@@ -140,7 +153,7 @@ When CUPED is enabled, Datadog uses pre-experiment metric values to reduce varia
 - Check whether the metric definition changed during the pre-experiment window.
 - If the imbalance is expected or cannot be fixed, interpret CUPED-adjusted results carefully or disable CUPED.
 
-## Unexpected lift warnings
+## Implausible prior
 
 For Bayesian analysis, Datadog can warn when the observed lift is outside the range expected from the configured prior. This can happen when the prior is not appropriate for the experiment or when instrumentation produces unusually large or small values.
 
@@ -153,7 +166,7 @@ For example, many conversion rate experiments have true lifts below 5%, so the d
 - Check for instrumentation changes, duplicate events, or unusually large values during the analysis window.
 - If the prior is not appropriate for the experiment, update the analysis plan and rerun analysis.
 
-## Segment issues
+## Segment-level degradation
 
 Datadog can flag results when a specific segment performs significantly worse than the overall experiment direction. This helps you catch cases where the average result hides a degraded experience for a subgroup.
 
@@ -163,7 +176,7 @@ Datadog can flag results when a specific segment performs significantly worse th
 - Check whether the affected segment maps to a real product or instrumentation issue.
 - Consider diverting affected segment traffic away from the experiment while you investigate high-impact segments.
 
-## Analysis failures
+## Analysis pipeline failure
 
 If Datadog cannot complete experiment analysis, current results cannot be computed.
 
