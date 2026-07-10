@@ -151,7 +151,7 @@ instances:
 
 `single_endpoint_mode: true` is required for ClickHouse Cloud. It enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint.
 
-When enabled, the Agent also collects standard system-table metrics (from `system.events`, `system.metrics`, `system.asynchronous_metrics`, and `system.errors`) from every node and tags each series with `clickhouse_node`, which produces accurate per-node values. Each node maintains its own cumulative counters, such as the counter behind `clickhouse.query.failed.count`. Without `single_endpoint_mode`, consecutive collections through the load balancer can read these independent per-node counters from different nodes, producing inaccurate metric values. This per-node collection requires Agent version 7.82.0 or later.
+When enabled, the Agent also collects standard system-table metrics (from `system.events`, `system.metrics`, `system.asynchronous_metrics`, and `system.errors`) from every node and tags each series with `clickhouse_node`, which produces accurate per-node values. Each node maintains its own cumulative counters, such as the counter behind `clickhouse.query.failed.count`. Without `single_endpoint_mode`, consecutive collections through the load balancer can read these independent per-node counters from different nodes, producing inaccurate metric values. This per-node collection requires Agent version 7.83.0 or later.
 
 ## Customizing the database identifier
 
@@ -204,7 +204,7 @@ With `env:production`, `server: xyz.us-east-2.aws.clickhouse.cloud`, and `port: 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `dbm` | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
-| `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint, and collects standard system-table metrics per node (tagged with `clickhouse_node`) so per-node cumulative counters report accurate values. Per-node collection requires Agent version 7.82.0 or later. |
+| `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint, and collects standard system-table metrics per node (tagged with `clickhouse_node`) so per-node cumulative counters report accurate values. Per-node collection requires Agent version 7.83.0 or later. |
 
 ### Database identifier
 
