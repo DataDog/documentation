@@ -118,8 +118,16 @@ LABEL_STALE = "astro-reorg-stale"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
 
+# Existing repo label applied to auto-created fix PRs in test mode so they stay
+# out of other teams' review queues. Assumed to already exist in the repo.
+DO_NOT_MERGE_LABEL = "Do Not Merge"
+
 # Set in main() from --base-branch; everything else reads this.
 BASE_BRANCH = "master"
+
+# True when running against the mock base branch rather than real master. Set
+# in main(); gates test-only behavior like labeling fix PRs "Do Not Merge".
+IS_TEST_MODE = False
 
 # ---------------------------------------------------------------------------
 # Shell helpers
@@ -357,7 +365,13 @@ def add_label(pr_number: int, label: str, dry_run: bool) -> None:
     if dry_run:
         print(f"  [dry-run] would add label {label!r} to PR #{pr_number}")
         return
-    gh_run("pr", "edit", str(pr_number), "--repo", REPO, "--add-label", label)
+    # Use the REST API rather than `gh pr edit --add-label`. `gh pr edit`
+    # fetches the PR's projectCards to preserve them, but that field is part of
+    # Projects (classic), now deprecated — so the call fails with a GraphQL
+    # error even though only a label is being added. The REST labels endpoint
+    # touches nothing else and appends the label.
+    gh_run("api", f"repos/{REPO}/issues/{pr_number}/labels",
+           "-f", f"labels[]={label}")
     print(f"  Added label {label!r} to PR #{pr_number}")
 
 
@@ -452,6 +466,8 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             print(f"    ... and {len(subjects) - 10} more")
         would_be_title = f"[reorg fix] {pr['title']}"
         print(f"  [dry-run] would open PR: {would_be_title!r}")
+        if IS_TEST_MODE:
+            print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
         return True
 
     fix_branch = f"reorg-fix/pr-{pr_number}"
@@ -518,6 +534,11 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         new_pr_url = pr_create.strip()
         new_pr_number = new_pr_url.rstrip("/").split("/")[-1]
         print(f"  Opened fix PR: {new_pr_url}")
+
+        # In test mode, keep the auto-created PR out of other teams' review
+        # queues by marking it "Do Not Merge". Never do this on real master.
+        if IS_TEST_MODE:
+            add_label(int(new_pr_number), DO_NOT_MERGE_LABEL, dry_run=False)
 
         post_comment(
             pr_number,
@@ -719,9 +740,11 @@ def main() -> None:
         parser.error("--live and --base-branch are mutually exclusive; "
                      "--live already selects master.")
 
-    global BASE_BRANCH
+    global BASE_BRANCH, IS_TEST_MODE
     if args.base_branch:
         BASE_BRANCH = args.base_branch
+        # A custom base is a test/dev scenario unless it's the real master.
+        IS_TEST_MODE = args.base_branch != "master"
     elif args.live:
         BASE_BRANCH = "master"
         print("LIVE mode — running against master.\n")
@@ -732,6 +755,7 @@ def main() -> None:
             parser.error("no base branch: set `test.mock_reorged_master_branch` in "
                          "config.yaml, or pass --live or --base-branch.")
         BASE_BRANCH = TEST_BASE_BRANCH
+        IS_TEST_MODE = True
         print(f"TEST mode (default) — using mock base branch {BASE_BRANCH!r} "
               f"from config.yaml. Pass --live to run against master.\n")
 
