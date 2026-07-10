@@ -186,10 +186,6 @@ products:
                 link: security/application_security/
                 description: Detect and block threats targeting your production applications and APIs in real time
                 short_description: App and API threat blocking
-              - title: AI Guard
-                link: security/ai_guard/
-                description: Inspect, block, and govern AI agent behavior in real time to protect against prompt injection, jailbreaking, and data exfiltration
-                short_description: Real-time AI agent protection
               - title: Sensitive Data Scanner
                 link: security/sensitive_data_scanner/
                 description: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry

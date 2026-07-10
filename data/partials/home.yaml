@@ -192,10 +192,6 @@ nav_sections:
         link: security/application_security/
         icon: app-sec
         desc: Detect and block threats targeting your production applications and APIs in real time
-      - title: AI Guard
-        link: security/ai_guard/
-        icon: siem
-        desc: Inspect, block, and govern AI agent behavior in real time to protect against prompt injection, jailbreaking, and data exfiltration
       - title: Workload Protection
         link: security/workload_protection/
         icon: security-workload-security
