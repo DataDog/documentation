@@ -94,10 +94,19 @@ def ensure_label() -> None:
 # ---------------------------------------------------------------------------
 
 def preflight() -> None:
-    """Fail fast if the working tree is dirty or the mock base is missing."""
-    status = git("status", "--porcelain")
-    if status.stdout.strip():
-        die("working tree is not clean; commit or stash your changes first.")
+    """Fail fast on uncommitted tracked changes, or if the mock base is missing.
+
+    Only TRACKED changes matter: the script switches branches and builds a
+    commit, so staged/unstaged edits could be carried across or swept in.
+    Untracked files (e.g. a folder from another branch that doesn't exist here)
+    are ignored — they don't block checkouts and never enter the commit, which
+    only `git add`s the one target file.
+    """
+    unstaged = git("diff", "--quiet").returncode != 0
+    staged = git("diff", "--cached", "--quiet").returncode != 0
+    if unstaged or staged:
+        die("you have uncommitted changes to tracked files; "
+            "commit or stash them first. (Untracked files are fine.)")
 
     # The mock base branch must exist on the remote so PRs can target it.
     ls = git("ls-remote", "--heads", "origin", MOCK_BASE_BRANCH)
