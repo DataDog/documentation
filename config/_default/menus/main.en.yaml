@@ -9876,6 +9876,11 @@ menu:
       parent: product_analytics
       identifier: pa_export_pipelines
       weight: 7
+    - name: Usability
+      url: product_analytics/usability
+      parent: product_analytics
+      identifier: pa_usability
+      weight: 8
     - name: Experiments
       url: experiments/
       pre: experiment-wui
