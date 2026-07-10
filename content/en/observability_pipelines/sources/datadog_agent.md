@@ -23,7 +23,7 @@ Sending metrics to Observability Pipelines is in Preview. Fill out the form to r
 
 ## Overview
 
-Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent.
+Use Observability Pipelines' Datadog Agent source to receive logs or metrics from the Datadog Agent.
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 

@@ -4500,7 +4500,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.",
+    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
@@ -5128,7 +5128,7 @@
     "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
   "ListAssetsSBOMs": {
-    "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
+    "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
   },
   "GetSBOM": {
@@ -5277,6 +5277,10 @@
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
   },
+  "GetEntraIdAzureAppRegistrations": {
+    "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
+    "summary": "Get Entra ID Azure App Registration prerequisites"
+  },
   "ValidateSecurityMonitoringIntegrationCredentials": {
     "description": "Validate a set of credentials against the external entity source before creating a sync configuration.\nReturns a 200 status code if the credentials are valid.",
     "summary": "Validate entity context sync credentials",
@@ -5300,6 +5304,16 @@
   "ValidateSecurityMonitoringIntegrationConfig": {
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
+  },
+  "ActivateIntegration": {
+    "description": "Activate an entity context sync integration for a source type that does not require manually\nsupplied credentials (for example, Entra ID). If an integration of this type already exists,\nit is returned (re-enabling it first if it was disabled) instead of creating a duplicate.",
+    "summary": "Activate an entity context sync integration",
+    "request_description": "Optional configuration overrides for the integration to activate.",
+    "request_schema_description": "Request body to activate an entity context sync integration for a source type that does not require secrets."
+  },
+  "DeactivateIntegration": {
+    "description": "Deactivate all active entity context sync integrations of the given source type (for example, Entra ID).",
+    "summary": "Deactivate an entity context sync integration"
   },
   "SendSecurityMonitoringNotificationPreview": {
     "description": "Send a notification preview to test that a notification rule's targets are properly configured.",

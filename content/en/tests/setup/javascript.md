@@ -402,6 +402,13 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
+### Upload test failure screenshots
+
+When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][8] is set to `true` (the default).
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
@@ -410,6 +417,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
 [7]: /continuous_integration/guides/rum_integration/
+[8]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
