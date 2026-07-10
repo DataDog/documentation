@@ -67,10 +67,10 @@ Findings affected by a severity modifier rule display a visual indicator in expl
 
 **TODO:** Add a screenshot of a severity breakdown in side-panel.
 
-The side panel severity section for a modified finding includes a breakdown showing:
-- The original severity level before modification. For vulnerability findings that have a CVSS score, this also includes the original CVSS score and vector.
+For findings that have a CVSS score (Container Image Vulnerability, Host Vulnerability, Library Vulnerability, and Runtime Code Vulnerability), the side panel severity section also includes a breakdown showing:
+- The original severity level, CVSS score, and CVSS vector before modification.
 - The name of the automation rule that triggered, with a direct link to the rule.
-- The resulting severity level. For vulnerability findings that have a CVSS score, the adjusted score is also shown.
+- The resulting severity level and adjusted CVSS score.
 
 ## Severity floors by finding type
 
