@@ -200,15 +200,15 @@ With `env:production`, `server: clickhouse-01`, and `port: 8123`, this produces:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `tls_verify` | boolean | `false` | Enable TLS. Set to `true` when using HTTPS (port 8443). |
-| `verify` | boolean | `true` | Validate the server's SSL certificate. Setting `false` in production is a security risk. |
+| `tls_verify` | Boolean | `false` | Enable TLS. Set to `true` when using HTTPS (port 8443). |
+| `verify` | Boolean | `true` | Validate the server's SSL certificate. Setting `false` in production is a security risk. |
 | `tls_ca_cert` | string | - | Path to a custom CA certificate file. Use when ClickHouse is configured with an internal or self-signed certificate. |
 
 ### DBM settings
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `dbm` | boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
+| `dbm` | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
 
 ### Database identifier
 
@@ -222,7 +222,7 @@ Collects aggregated query statistics from `system.query_log`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_metrics.enabled` | boolean | `true` | Enable query metrics collection. Requires `dbm: true`. |
+| `query_metrics.enabled` | Boolean | `true` | Enable query metrics collection. Requires `dbm: true`. |
 | `query_metrics.collection_interval` | number | `10` | Collection interval in seconds. |
 
 ### Query samples
@@ -231,7 +231,7 @@ Collects currently running queries from `system.processes`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_samples.enabled` | boolean | `true` | Enable query samples collection. Requires `dbm: true`. |
+| `query_samples.enabled` | Boolean | `true` | Enable query samples collection. Requires `dbm: true`. |
 | `query_samples.collection_interval` | number | `1` | Collection interval in seconds. |
 | `query_samples.payload_row_limit` | integer | `1000` | Maximum number of active queries per snapshot. |
 
@@ -241,7 +241,7 @@ Collects records of individual completed queries from `system.query_log`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_completions.enabled` | boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
+| `query_completions.enabled` | Boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
 | `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
 | `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
 
