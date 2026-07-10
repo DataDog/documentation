@@ -379,7 +379,7 @@ After installing the SDK and running your application you should expect to see s
 
 ## Trace sampling
 
-<div class="alert alert-info">Trace sampling is currently available in the Python and Node.js SDKs.</div>
+<div class="alert alert-info">Trace sampling is available in the Python and Node.js SDKs.</div>
 
 Trace sampling sets the fraction of traces that Agent Observability retains. Use it to reduce ingestion volume and cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
