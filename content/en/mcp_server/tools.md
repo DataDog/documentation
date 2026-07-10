@@ -1773,14 +1773,6 @@ Retrieves and visualizes Datadog metrics, traces, logs, and other data as intera
 - Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
 - Visualize the data from this Datadog share link.
 
-### `get_widget_reference_compressed`
-*Toolset: **widgets***\
-*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
-Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
-
-- Get the compressed schema for a timeseries widget.
-- Show the building instructions for top list and query table widgets.
-
 ### `search_datadog_widgets`
 *Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
