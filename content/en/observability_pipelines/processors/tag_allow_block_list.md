@@ -1,11 +1,16 @@
 ---
-title: Tag Control Processor
-description: Learn how to use the Tag Control processor for metrics.
+title: Tags Allow/Block List
+description: Learn how to use the Tag Allow/Block List processor for metrics.
 disable_toc: false
-code_lang: metrics
-type: multi-code-lang
-weight: 2
+aliases:
+  - /observability_pipelines/processors/tag_control/metrics/
+products:
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -33,7 +38,7 @@ Click {{< ui >}}Add tag rule{{< /ui >}}.
 
 ### Add a tag rule
 
-{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The tag control settings panel" style="width:55%;" >}}
+{{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The Tag Block and Allow List settings panel" style="width:55%;" >}}
 
 1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline. See [Search Syntax][2] for more information.
 1. In the {{< ui >}}Configure tags{{< /ui >}} section, choose whether to {{< ui >}}Include tags{{< /ui >}} or {{< ui >}}Exclude tags{{< /ui >}}.
@@ -44,5 +49,5 @@ Click {{< ui >}}Add tag rule{{< /ui >}}.
     - Note: You can select up to 15 tags.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-[1]: /may/op-metrics-pipelines-components/getting_started/tagging/#define-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /observability_pipelines/search_syntax/metrics/
