@@ -104,15 +104,20 @@ def die(message: str) -> None:
 
 
 def ensure_label() -> None:
-    """Create the shared label if it doesn't already exist."""
-    existing = gh("label", "list", "--repo", REPO, "--json", "name", "--jq", ".[].name")
-    if LABEL in existing.stdout.split():
-        return
+    """Create the shared label, treating "already exists" as success.
+
+    We don't pre-check with `gh label list`: it defaults to 30 labels, so in a
+    repo with many labels an existing one may not show up, and we'd then fail on
+    create. Instead we just create and accept the "already exists" error.
+    """
     create = gh("label", "create", LABEL, "--repo", REPO,
                 "--color", LABEL_COLOR, "--description", LABEL_DESCRIPTION)
-    if create.returncode != 0:
-        die(f"could not create label {LABEL!r}: {create.stderr.strip()}")
-    print(f"Created label: {LABEL!r}")
+    if create.returncode == 0:
+        print(f"Created label: {LABEL!r}")
+        return
+    if "already exists" in create.stderr.lower():
+        return
+    die(f"could not create label {LABEL!r}: {create.stderr.strip()}")
 
 
 # ---------------------------------------------------------------------------
