@@ -121,13 +121,13 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 
 You can give AI Guard additional context about a service, such as its purpose and the type of data it processes. AI Guard uses this context during evaluation to better distinguish legitimate agent behavior from genuine threats, which helps reduce false positives.
 
-To add evaluation context for a service, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Click {{< ui >}}Edit{{< /ui >}} beside the default policy, or add or edit a service policy, then enter your context in the {{< ui >}}Evaluation context{{< /ui >}} field (up to 1000 characters). For example:
+To add evaluation context for a service, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Click {{< ui >}}Edit{{< /ui >}} beside the default policy, or add or edit a service policy, then enter your context in the {{< ui >}}Evaluation context{{< /ui >}} field (up to 1,000 characters). For example:
 
 ```text
 This is a fintech app. Requests to query account balances or initiate transfers are expected and authorized.
 ```
 
-As with the [blocking policy](#blocking-policy), evaluation context follows a precedence, with more specific settings taking priority: organization-wide, per environment, per service, then per service and environment.
+As with the [blocking policy](#blocking-policy), evaluation context follows the same precedence, with more specific settings taking priority: organization-wide, per environment, per service, then per service and environment.
 
 Use the [AI Guard Playground][19] to test how evaluation context affects the outcome of an evaluation before applying it to a service. The Playground has its own {{< ui >}}Evaluation Context{{< /ui >}} field that applies only to the conversation you're testing, so you can experiment without changing any service policy. Import an existing payload into the Playground, then add evaluation context to see how it changes the evaluation result.
 
