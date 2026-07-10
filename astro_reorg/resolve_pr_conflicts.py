@@ -585,7 +585,17 @@ def analyze_pr(pr: dict, dry_run: bool) -> None:
         # Attempt the merge without committing so we can inspect the conflicts.
         # We do NOT use --no-ff here; the default is fine since we're only
         # inspecting, not keeping the result.
-        merge = run(["git", "merge", "--no-commit", pr_ref], cwd=worktree)
+        #
+        # merge.renames=false disables git's rename detection for this test. The
+        # reorg only MOVES files (content/foo -> hugo/content/foo); it never
+        # edits their content. With rename detection ON (git's default), git
+        # pairs a PR's edit at the old path with the moved file on the base and
+        # merges cleanly, hiding the conflict entirely — so the script would see
+        # nothing to fix. GitHub's mergeability check does no rename detection
+        # and reports these as CONFLICTING (modify/delete). Disabling it here
+        # makes the local test match what GitHub sees: the moved file surfaces
+        # as a conflict at its pre-reorg path, which is_reorg_path() recognizes.
+        merge = run(["git", "-c", "merge.renames=false", "merge", "--no-commit", pr_ref], cwd=worktree)
 
         # Classify any files that have conflict markers.
         reorg_conflicts, other_conflicts = get_conflict_classification(worktree)
