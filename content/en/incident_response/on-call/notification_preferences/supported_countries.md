@@ -1,5 +1,7 @@
 ---
 title: Supported Countries
+description: A list of countries supported for SMS and phone call notifications in Datadog On-Call, including their country codes.
+disable_toc: false
 further_reading:
 - link: '/incident_response/on-call/notification_preferences/'
   tag: 'Documentation'
@@ -11,7 +13,7 @@ further_reading:
 
 Datadog On-Call supports multiple notification channels for your contact methods: push notifications, email, SMS, and phone calls. See [Supported contact methods][1] to learn more.
 
-Support for SMS and phone call notifications varies by country because of local regulations and restrictions in that country. Use the following table to check whether your country is supported before adding a phone contact method to your On-Call profile.
+Support for SMS and phone call notifications varies by country because of local regulations and restrictions. Use the following table to check whether your country is supported before adding a phone contact method to your On-Call profile.
 
 <div class="alert alert-info">
 If your country isn't listed in the following table, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request phone number support for that country.

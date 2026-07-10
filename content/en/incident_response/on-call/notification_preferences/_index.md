@@ -1,5 +1,6 @@
 ---
 title: Notification Preferences
+description: Learn how to configure and customize your On-Call notification preferences to receive timely and effective alerts through email, SMS, phone, or the Datadog mobile app.
 aliases:
 - /service_management/on-call/profile_settings/
 - /incident_response/on-call/profile_settings/
