@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import uuid
 import webbrowser
 from pathlib import Path
 
@@ -33,10 +34,15 @@ REPO_ROOT = Path(__file__).parent.parent
 # Distinctive prefix so branches created here are obvious and easy to clean up.
 BRANCH_PREFIX = "jen.gilbert/astro-reorg-test"
 
-# Label applied to every PR so they can all be found together.
+# Label applied to every PR so they can all be found together. Created by the
+# script if missing (see ensure_label).
 LABEL = "astro-reorg-testing"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Test PRs for exercising the astro reorg tooling"
+
+# Existing repo label applied to every test PR to guard against accidental
+# merges. Assumed to already exist in the repo.
+DO_NOT_MERGE_LABEL = "Do Not Merge"
 
 # Each spec describes one PR: the branch to create, the file to edit, the exact
 # text to replace (old -> new, must match once), and the PR title/body.
@@ -125,7 +131,9 @@ def current_branch() -> str:
 
 def create_pr(spec: dict) -> str | None:
     """Create the branch, apply the change, push, and open a PR. Returns URL."""
-    branch = spec["branch"]
+    # Append a short unique suffix so every run creates a fresh branch rather
+    # than colliding with one from a previous run.
+    branch = f"{spec['branch']}-{uuid.uuid4().hex[:8]}"
     target = REPO_ROOT / spec["file"]
     print(f"\n=== {branch} ===")
 
@@ -136,8 +144,6 @@ def create_pr(spec: dict) -> str | None:
     if git("fetch", "origin", "master").returncode != 0:
         die("git fetch origin master failed.")
 
-    # Recreate the branch from scratch so reruns are idempotent.
-    git("branch", "-D", branch)  # ignore failure: branch may not exist yet
     checkout = git("checkout", "-b", branch, "origin/master")
     if checkout.returncode != 0:
         die(f"could not create branch {branch}: {checkout.stderr.strip()}")
@@ -155,9 +161,7 @@ def create_pr(spec: dict) -> str | None:
     if commit.returncode != 0:
         die(f"commit failed: {commit.stderr.strip()}")
 
-    # Delete any stale remote copy of this test branch first so a plain (never
-    # forced) push always fast-forwards. Only ever touches our own test branch.
-    git("push", "origin", "--delete", branch)  # ignore failure: may not exist
+    # Branch name is unique per run, so a plain push always fast-forwards.
     push = git("push", "--set-upstream", "origin", branch)
     if push.returncode != 0:
         die(f"push failed: {push.stderr.strip()}")
@@ -170,6 +174,7 @@ def create_pr(spec: dict) -> str | None:
         "--title", spec["title"],
         "--body", spec["body"],
         "--label", LABEL,
+        "--label", DO_NOT_MERGE_LABEL,
     )
     if pr.returncode != 0:
         die(f"gh pr create failed: {pr.stderr.strip()}")
