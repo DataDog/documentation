@@ -12,8 +12,10 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 
 `astro_reorg/validate_reorg.py` verifies the functionality of affected entities where possible.
 
-`astro_reorg/resolve_pr_conflicts.py` finds open PRs with merge conflicts caused by the reorg, and either auto-fixes them (by replaying commits at post-reorg paths) or labels them for manual review. Defaults to dry-run mode; use `--no-dry-run` to apply changes.
+`astro_reorg/resolve_pr_conflicts.py` finds open PRs with merge conflicts caused by the reorg, and either auto-fixes them (by replaying commits at post-reorg paths) or labels them for manual review. Defaults to dry-run mode; use `--no-dry-run` to apply changes. For safety it defaults to the mock base branch (see below); pass `--live` to run against the real `master`.
 
-`astro_reorg/create_test_prs.py` creates test PRs against a mock base branch (set `MOCK_BASE_BRANCH` at the top of the file) for exercising the reorg tooling. For each spec in `TEST_PRS` it branches off `BRANCH_FROM` (a frozen snapshot of `master`, so PR diffs stay small), applies a content change, pushes, and opens a PR, then opens the PRs in the browser.
+`astro_reorg/create_test_prs.py` creates test PRs for exercising the reorg tooling. For each spec in `TEST_PRS` it branches off `branch_from` (a frozen snapshot of `master`, so PR diffs stay small), applies a content change, pushes, and opens a PR against `mock_base_branch`, then opens the PRs in the browser.
+
+The two scripts above share the `test:` section of `config.yaml`, which names the branches a test run uses: `mock_base_branch` (the stand-in for post-reorg `master` that test PRs target) and `branch_from` (the frozen snapshot they're cut from). `create_test_prs.py` reads both; `resolve_pr_conflicts.py` defaults to `mock_base_branch` so it operates on the same branch the test PRs were opened against — no need to pass `--base-branch` by hand. Pass `--live` to that script to run against the real `master` instead.
 
 You can ignore the `astro` folder, it's a remnant from another branch where an Astro site is being developed. It is completely out of scope.

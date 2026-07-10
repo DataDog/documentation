@@ -123,3 +123,16 @@ ignore:
   - .DS_Store
   # Python bytecode cache
   - __pycache__
+
+# Branches used to exercise the reorg tooling against a fake main instead of the
+# real master. create_test_prs.py opens test PRs against mock_base_branch, and
+# resolve_pr_conflicts.py treats that same branch as the post-reorg base by
+# default (pass --live to target the real master), so the two scripts always
+# agree on which branches to use during a test run.
+test:
+  # Stand-in for post-reorg master: the branch that has the reorg applied. Test
+  # PRs target it, and resolve_pr_conflicts.py treats it as the base by default.
+  mock_base_branch: jen.gilbert/astro-reorg-demo-7-10-114044
+  # Frozen snapshot of master that test PRs branch off, so each PR's diff stays
+  # small (a PR shows every commit in its head that isn't in the base branch).
+  branch_from: mock-master

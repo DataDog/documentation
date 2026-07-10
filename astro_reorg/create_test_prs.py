@@ -10,8 +10,9 @@ For each spec in TEST_PRS this script:
 On completion it opens each new PR in the browser (falling back to printing
 the URLs if a browser can't be launched).
 
-Both BRANCH_FROM and MOCK_BASE_BRANCH must already exist on the remote. Set
-them below before running.
+BRANCH_FROM and MOCK_BASE_BRANCH are read from the `test:` section of
+config.yaml (shared with resolve_pr_conflicts.py, which defaults to this same
+mock base branch). Both must already exist on the remote before running.
 """
 from __future__ import annotations
 
@@ -21,22 +22,34 @@ import uuid
 import webbrowser
 from pathlib import Path
 
+try:
+    import yaml
+except ImportError:
+    print("Error: PyYAML is required. Install with: pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
+
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
+REPO = "DataDog/documentation"
+REPO_ROOT = Path(__file__).parent.parent
+CONFIG_PATH = Path(__file__).parent / "config.yaml"
+
+# The test branches live in config.yaml under `test:` so this script and
+# resolve_pr_conflicts.py always agree on which branches a test run uses.
+with CONFIG_PATH.open() as f:
+    _test_config = yaml.safe_load(f).get("test", {})
+
 # Branch the test PRs target. Create this on the remote before running.
-MOCK_BASE_BRANCH = "jen.gilbert/astro-reorg-demo-7-10-114044"
+MOCK_BASE_BRANCH = _test_config["mock_base_branch"]
 
 # Branch the test PRs are cut from. This is a frozen snapshot of master (created
 # manually) so PR diffs stay small: a PR shows every commit in the head branch
 # that isn't in the base, so branching off a moving master would drag in every
 # new master commit as noise. Branching off this frozen point keeps each PR to
 # just its own change. Must already exist on the remote.
-BRANCH_FROM = "mock-master"
-
-REPO = "DataDog/documentation"
-REPO_ROOT = Path(__file__).parent.parent
+BRANCH_FROM = _test_config["branch_from"]
 
 # Distinctive prefix so branches created here are obvious and easy to clean up.
 BRANCH_PREFIX = "jen.gilbert/astro-reorg-test"

@@ -5,11 +5,19 @@ Defaults to a dry run where it just reports the changes
 that would be made.
 
 Usage:
-    python3 astro_reorg/resolve_pr_conflicts.py [--dry-run] [--pr NUMBER ...]
+    python3 astro_reorg/resolve_pr_conflicts.py [--no-dry-run] [--live | --base-branch BRANCH] [--pr NUMBER ...]
 
 Flags:
     --no-dry-run          Actually apply fixes and labels instead of just reporting what would be done.
-    --base-branch BRANCH  Branch to treat as the post-reorg base (default: master).
+    --live                Run against the real master. Without it the script
+                          defaults to the mock base branch from config.yaml's
+                          `test:` section (the branch create_test_prs.py opens
+                          its test PRs against) for safety.
+    --base-branch BRANCH  Branch to treat as the post-reorg base. Overrides the
+                          default mock base branch and --live.
+    --pr NUMBER ...       Only process the given PR number(s) instead of all open
+                          PRs against the base branch. PRs targeting a different
+                          base are skipped.
 
 Background:
     The reorg moves every entry in `moves_to_hugo` (astro_reorg/config.yaml)
@@ -97,6 +105,12 @@ with CONFIG_PATH.open() as f:
 
 MOVES_TO_HUGO: set[str] = set(_config.get("moves_to_hugo", []))
 TOP_LEVEL: set[str] = set(_config.get("top_level", []))
+
+# Shared with create_test_prs.py: the mock base branch used for test runs. When
+# invoked with --test, the script treats this branch as the post-reorg base so
+# it operates on the same branch the test PRs were opened against.
+_TEST_CONFIG = _config.get("test", {})
+TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_base_branch")
 
 REPO = "DataDog/documentation"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
@@ -631,17 +645,35 @@ def analyze_pr(pr: dict, dry_run: bool) -> None:
 # ---------------------------------------------------------------------------
 
 def get_open_prs(only: list[int] | None = None) -> list[dict]:
-    """Return open PRs, optionally filtered to specific numbers."""
-    fields = ("number,title,body,labels,headRefName,headRepositoryOwner,"
-              "baseRefName,headRefOid,baseRefOid,isCrossRepository,mergeable")
+    """Return open PRs targeting BASE_BRANCH, optionally filtered to specific numbers.
+
+    The --base filter is what keeps a run scoped: in test mode only PRs opened
+    against the mock base branch are considered, so real PRs against master are
+    never fetched, merged, labeled, or commented on. In live mode it scopes to
+    PRs against master. Without it, `gh pr list` would return every open PR in
+    the repo regardless of target.
+    """
+    # Only fields actually consumed below. Note baseRefOid/headRefOid are NOT
+    # requested: `gh pr list` doesn't support them (only `gh pr view` does), and
+    # nothing here uses them.
+    fields = ("number,title,body,labels,headRefName,"
+              "baseRefName,isCrossRepository,mergeable")
     if only:
+        # Explicitly named PRs are an intentional override, but still guard
+        # against acting on a PR that targets a different base than this run.
         prs = []
         for n in only:
             pr = gh_json("pr", "view", str(n), "--repo", REPO, "--json", fields)
+            if pr.get("baseRefName") != BASE_BRANCH:  # type: ignore[union-attr]
+                print(f"  Skipping PR #{n}: targets "
+                      f"{pr.get('baseRefName')!r}, not base {BASE_BRANCH!r}.",  # type: ignore[union-attr]
+                      file=sys.stderr)
+                continue
             prs.append(pr)
         return prs
     return gh_json(  # type: ignore[return-value]
         "pr", "list", "--repo", REPO, "--state", "open",
+        "--base", BASE_BRANCH,
         "--json", fields, "--limit", "300",
     )
 
@@ -661,14 +693,37 @@ def main() -> None:
         help="Only check this PR number (may be repeated).",
     )
     parser.add_argument(
-        "--base-branch", default="master", metavar="BRANCH",
-        help="Branch to treat as the post-reorg base (default: master). "
-             "Set to a test branch to run against a fake main.",
+        "--base-branch", default=None, metavar="BRANCH",
+        help="Branch to treat as the post-reorg base. Overrides the default "
+             "(the mock base branch from config.yaml) and --live.",
+    )
+    parser.add_argument(
+        "--live", action="store_true",
+        help="Run against the real master. Without this the script defaults to "
+             "the mock base branch from config.yaml (the same branch "
+             "create_test_prs.py opens its test PRs against) for safety.",
     )
     args = parser.parse_args()
 
+    if args.live and args.base_branch:
+        parser.error("--live and --base-branch are mutually exclusive; "
+                     "--live already selects master.")
+
     global BASE_BRANCH
-    BASE_BRANCH = args.base_branch
+    if args.base_branch:
+        BASE_BRANCH = args.base_branch
+    elif args.live:
+        BASE_BRANCH = "master"
+        print("LIVE mode — running against master.\n")
+    else:
+        # Default to the mock base branch so an accidental run can't touch
+        # real PRs against master.
+        if not TEST_BASE_BRANCH:
+            parser.error("no base branch: set `test.mock_base_branch` in "
+                         "config.yaml, or pass --live or --base-branch.")
+        BASE_BRANCH = TEST_BASE_BRANCH
+        print(f"TEST mode (default) — using mock base branch {BASE_BRANCH!r} "
+              f"from config.yaml. Pass --live to run against master.\n")
 
     if args.dry_run:
         print("DRY-RUN mode — no branches or PRs will be modified.\n")
