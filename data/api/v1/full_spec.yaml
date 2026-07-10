@@ -20563,6 +20563,10 @@ components:
         ignoreServerCertificateError:
           description: Ignore server certificate error for browser tests.
           type: boolean
+        ignore_certificate_validation:
+          description: |-
+            For SSL tests, whether or not the test should ignore certificate validation.
+          type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds) for browser tests.
           format: int64
