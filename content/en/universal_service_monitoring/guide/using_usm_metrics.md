@@ -57,17 +57,17 @@ The same translations apply for the `universal.http.server` operation that captu
 
 ## Usage
 
-Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Catalog][2].
+Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Universal Service Monitoring{{< /ui >}}][8], filter by Universal Service Monitoring telemetry type, and click on a service. The {{< ui >}}Performance{{< /ui >}} tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Catalog][2].
 
 ### Create a monitor
 
 You can create an [**APM Monitor**][9] to trigger an alert when a USM metric such as `universal.http.client` either crosses a threshold or deviates from an expected pattern.
 
-1. Navigate to [**Monitors > New Monitor**][10] and click [**APM**][9].
-2. Select **APM Metrics** and define a service or resource's `env` and any other [primary tags][11]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
-3. Select **Threshold Alert** and select a USM metric such as `Requests per Second` for the monitor to trigger on. Then, define if the value should be **above** or **below** the alert and warning thresholds. Enter a value for the alert threshold, and optionally, for the warning threshold.
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][10] and click [{{< ui >}}APM{{< /ui >}}][9].
+2. Select {{< ui >}}APM Metrics{{< /ui >}} and define a service or resource's `env` and any other [primary tags][11]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
+3. Select {{< ui >}}Threshold Alert{{< /ui >}} and select a USM metric such as `Requests per Second` for the monitor to trigger on. Then, define if the value should be **above** or **below** the alert and warning thresholds. Enter a value for the alert threshold, and optionally, for the warning threshold.
 4. The notification section contains a prepopulated message for the monitor. Customize the alert name and message and define the permissions for this monitor.
-5. Click **Create**.
+5. Click {{< ui >}}Create{{< /ui >}}.
 
 {{< img src="universal_service_monitoring/guide/usm_monitor.png" alt="Universal Service Monitoring Monitor for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -79,27 +79,27 @@ You can create an [**SLO**][13] on a per-service basis to ensure you are meeting
 
 To create an SLO from the Catalog:
 
-1. Navigate to the **Reliability** tab of the [Catalog][8].
-2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
+1. Navigate to the {{< ui >}}Reliability{{< /ui >}} tab of the [Catalog][8].
+2. Under the {{< ui >}}SLOs{{< /ui >}} column, hover over a service and click {{< ui >}}+ Create Availability SLO{{< /ui >}} or {{< ui >}}+ Create Latency SLO{{< /ui >}}.
 
 {{< img src="universal_service_monitoring/guide/software_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
 Optionally, to create an SLO manually using USM metrics:
  
-1. Navigate to [**SLOs**][15] and click [**New SLO**][13].
-2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
+1. Navigate to [{{< ui >}}SLOs{{< /ui >}}][15] and click [{{< ui >}}New SLO{{< /ui >}}][13].
+2. Select {{< ui >}}Metric Based{{< /ui >}} and create two queries in the {{< ui >}}Good events (numerator){{< /ui >}} section:
    
    * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 
    * Query B: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags, in addition to an `error:true` tag in the `from` field, and select `count` in the `as` field. 
 
-3. Click **+ Add Formula** and enter `a-b`.
-4. In the **Total events (denominator)** section, enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
-5. Click **+ New Target** to create a target threshold with the following settings:
+3. Click {{< ui >}}+ Add Formula{{< /ui >}} and enter `a-b`.
+4. In the {{< ui >}}Total events (denominator){{< /ui >}} section, enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
+5. Click {{< ui >}}+ New Target{{< /ui >}} to create a target threshold with the following settings:
 
    * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `99.5%`. Datadog recommends setting the same target threshold across all time windows.
 
 6. Enter a name and description for this SLO. Set primary `env` and `service` tags, in addition to the `team` tag.
-7. Click **Save and Set Alert**.
+7. Click {{< ui >}}Save and Set Alert{{< /ui >}}.
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -107,7 +107,7 @@ For more information, see the [Service Level Objectives documentation][17].
 
 ### Access a defined dashboard
 
-The [Catalog][2] identifies dashboards defined in your service definition file and lists them on the **Dashboards** tab. Click **Manage Dashboards** to access and edit the service definition directly in GitHub. 
+The [Catalog][2] identifies dashboards defined in your service definition file and lists them on the {{< ui >}}Dashboards{{< /ui >}} tab. Click {{< ui >}}Manage Dashboards{{< /ui >}} to access and edit the service definition directly in GitHub. 
 
 {{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Manage Dashboards button in the Dashboards tab of a service in the Catalog" style="width:90%;" >}}
 

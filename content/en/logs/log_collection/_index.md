@@ -142,6 +142,19 @@ To learn how to submit logs from your custom Agent check, see [Agent Integration
 {{% /tab %}}
 {{< /tabs >}}
 
+### Limitations
+
+* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+* A log event converted to JSON format should contain less than 2048 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* Only log events with a [timestamp][14] up to 18h in the past can be submitted. 
+  * <b>Preview available</b>: To submit logs from up to 7 days in the past, <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">register for the Preview</a>.
+* Log collection does not retain attributes with null values. 
+  * <b>Preview available</b>: To retain attributes with null values, <a href="https://www.datadoghq.com/product-preview/retain-attributes-with-null-values/">register for the Preview</a>.
+
+Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
+
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
+
 ## Additional configuration options
 
 ### Logging endpoints
@@ -165,20 +178,9 @@ Any custom process or logging library able to forward logs through HTTP can be u
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][15] to get started.
 
-**Notes**:
-
-* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 900kB (900000 bytes).
-* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-* A log event converted to JSON format should contain less than 2048 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
-* Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
-
 <div class="alert alert-info">
-<b>Preview available</b>: You can submit logs from the past 7 days, instead of the current 18-hour limit. <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">Register for the Preview</a>.
+The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, Datadog recommends that an individual log be no greater than 25 KB (25,000 bytes). If you use the Datadog Agent for logging, it is configured to split a log at 900 KB (900,000 bytes).
 </div>
-
-Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
-
-There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 {{% collapse-content title="TCP" level="h3" expanded=false %}}
 

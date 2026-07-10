@@ -94,7 +94,7 @@ Datadog.initialize(
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for client creation and flags evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog iOS SDK instance and prepare for client creation and flags evaluation:
 
 {{< code-block lang="swift" >}}
 import DatadogFlags
@@ -130,6 +130,8 @@ let flagsClient = FlagsClient.shared(named: "checkout")
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="swift" >}}
 flagsClient.setEvaluationContext(
@@ -240,7 +242,7 @@ When you need more than just the flag value, use the `get<Type>Details` APIs. Th
 For example:
 
 {{< code-block lang="swift" >}}
-let details = flags.getStringDetails(
+let details = flagsClient.getStringDetails(
     key: "paywall.layout",
     defaultValue: "control"
 )
@@ -253,18 +255,55 @@ print(details.error)    // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
+## Observe state changes
+
+<div class="alert alert-info">State observation with <code>FlagsClient.state</code> is available in <code>dd-sdk-ios</code> 3.11.0 and later.</div>
+
+Use `flagsClient.state` to check whether a `FlagsClient` is ready to evaluate flags and to react when its state changes. State changes occur when you call `setEvaluationContext` and the SDK fetches assignments for that context.
+
+{{< code-block lang="swift" >}}
+final class FeatureFlagStateObserver: FlagsStateListener {
+    func flagsStateDidChange(_ newState: FlagsClientState) {
+        switch newState {
+        case .notReady:
+            // The client has not loaded assignments yet.
+            break
+        case .reconciling:
+            // The client is fetching assignments for a context change.
+            break
+        case .ready:
+            // Assignments are loaded and available for evaluation.
+            break
+        case .stale:
+            // Cached assignments are available, but the latest fetch failed.
+            break
+        case .error:
+            // No assignments are available for evaluation.
+            break
+        }
+    }
+}
+
+let observer = FeatureFlagStateObserver()
+flagsClient.state.addListener(observer)
+
+let currentState = flagsClient.state.currentState
+{{< /code-block >}}
+
+Keep a strong reference to the listener for as long as you want to receive updates. The listener receives the current state when it is registered, then receives future state changes.
+
 ## Use with OpenFeature
 
 The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
 
-<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is in development and not recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
+<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. Use this section to integrate through OpenFeature; use <code>FlagsClient</code> directly for the most stable iOS API surface.</div>
 
 ### Install the OpenFeature provider
 
 Add `dd-openfeature-provider-swift` to your `Package.swift`:
 
 {{< code-block lang="swift" filename="Package.swift" >}}
-.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.1.0"))
+.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.2.0"))
 {{< /code-block >}}
 
 Link the `DatadogOpenFeatureProvider` product to your app target. The bridge depends on OpenFeature Swift SDK 0.3.0.
@@ -355,6 +394,50 @@ print(details.reason)   // Reason (for example: "TARGETING_MATCH" or "DEFAULT")
 print(details.errorCode) // Error code, if evaluation failed
 {{< /code-block >}}
 
+### Observe provider events
+
+<div class="alert alert-info">Provider event observation for the Datadog OpenFeature provider is available in <code>dd-openfeature-provider-swift</code> 0.2.0 and later. Version 0.2.0 depends on <code>dd-sdk-ios</code> 3.13.0 or later.</div>
+
+Use `OpenFeatureAPI.shared.observe()` to react to OpenFeature provider events. The Datadog OpenFeature provider emits `.ready`, `.stale`, and `.error` based on the underlying `FlagsClient` state. The OpenFeature SDK can also emit lifecycle events such as `.reconciling` and `.contextChanged` when the evaluation context changes.
+
+{{< code-block lang="swift" >}}
+import Combine
+import OpenFeature
+
+final class FeatureFlagEventObserver {
+    private var cancellable: AnyCancellable?
+
+    func startObserving() {
+        cancellable = OpenFeatureAPI.shared.observe().sink { event in
+            guard let event else {
+                return
+            }
+
+            switch event {
+            case .ready:
+                // The provider is ready to evaluate flags.
+                break
+            case .stale:
+                // Cached assignments are available, but they may be out of date.
+                break
+            case .error(_, _):
+                // The provider cannot evaluate flags.
+                break
+            case .reconciling:
+                // The provider is reconciling after a context change.
+                break
+            case .contextChanged:
+                // The context change completed.
+                break
+            case .configurationChanged:
+                // The provider configuration changed.
+                break
+            }
+        }
+    }
+}
+{{< /code-block >}}
+
 ## Advanced configuration
 
 The `Flags.enable()` API accepts optional configuration with options listed below.
@@ -387,12 +470,15 @@ Flags.enable(with: config)
 `customExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
+`customEvaluationEndpoint`
+: Configures a custom server URL for sending flag evaluation telemetry.
+
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
 
 ## Testing
 
-The examples above use Datadog's `FlagsClient` API directly. If you prefer to drive feature flags through the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift). Use the bridge's `DatadogProvider` in production, and for code-controlled flag values in tests, substitute an in-memory provider.
+The examples above use Datadog's `FlagsClient` API directly. If you use the [OpenFeature](https://openfeature.dev/) bridge or write tests around the OpenFeature API, substitute an in-memory provider for code-controlled flag values.
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead.
 

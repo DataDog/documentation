@@ -26,7 +26,7 @@ The CLI can:
 
 ### Prerequisites
 
-- Node.js 20 or later
+- Node.js 22 or later
 
 ### Supported products
 
@@ -40,7 +40,7 @@ The CLI can set up the following products:
 | Error Tracking | `error-tracking` |
 | Infrastructure Monitoring | `infra-monitoring` |
 | Linux | `linux` |
-| LLM Observability | `llm-obs` |
+| Agent Observability | `llm-obs` |
 | OpenTelemetry | `otel` |
 | Product Analytics | `product-analytics` |
 | Real User Monitoring (RUM) | `rum` |
@@ -106,9 +106,9 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | Linux Observability | Terraform, Ansible, other IaC (Pulumi, CloudFormation, Puppet, Chef), and plain-shell install |
 | Serverless Monitoring (AWS Lambda) | AWS SAM, AWS CDK, Serverless Framework, Terraform, `datadog-ci lambda instrument` |
 | Serverless Monitoring (GCP Cloud Run and Cloud Run Functions) | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
-| LLM Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
+| Agent Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
 | OpenTelemetry | Node.js / server-side TS, Browser JS / React / Vite, Python (Django, Flask, FastAPI), Java, Go |
-| App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
+| App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP, and proxies (Envoy, HAProxy) for Linux, Windows, Kubernetes, Docker, GCP Cloud Run, and AWS Lambda, AWS Fargate/ECS |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
 ### Step 1: Install the MCP server
@@ -123,7 +123,7 @@ In an active Claude Code session, run:
 {{% tab "Cursor" %}}
 **Option 1: Install deeplink (recommended)**
 
-Click the install deeplink for your [Datadog site][16], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+Click the install deeplink for your [Datadog site][1], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -138,13 +138,18 @@ Add the server to `~/.cursor/mcp.json`:
     }
   }
 }</code></pre>
+
+[1]: /getting_started/site/
+
 {{% /tab %}}
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][16]:
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][1]:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
+
+[1]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,6 +187,11 @@ Send the prompt that matches the product you want to set up:
 
 {{% /tab %}}
 
+{{% tab "App and API Protection (Preview)" %}}
+<div class="alert alert-info">Agentic onboarding for App and API Protection is in Public Preview.</div>
+
+{{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
+{{% /tab %}}
 
 {{% tab "Serverless Monitoring" %}}
 
@@ -214,6 +224,7 @@ After the agent completes, commit the changes to your repository and set any new
 Confirm data is flowing in the Datadog UI for the product you set up:
 
 - [Error Tracking][6]
+- [App and API Protection][11]
 - [RUM > Applications][7]
 - [Infrastructure > Hosts][8]
 - [Serverless > Functions][9]
@@ -224,6 +235,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [8]: https://app.datadoghq.com/infrastructure
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
+[11]: https://app.datadoghq.com/security/appsec
 [16]: /getting_started/site/
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/

@@ -20,13 +20,13 @@ Use CNM metrics to see whether your source endpoint may be sending an enormous a
 
 ## CPU overconsumption of the underlying infrastructure
 
-On the other hand, resource overconsumption of either the client or server endpoint could be the culprit of poor communication between the two. In the side panel **Processes** tab, scope your view to processes running on either the source or destination endpoints to spot any heavy software that may be degrading the performance of their underlying hosts or containers, thus reducing their ability to respond to network calls. In this case, in addition to knowing _whether_ an underlying host is running hot and causing application latency, you will want to know _why_ it is running hot. Grouping your process metrics by command gives you this granularity, since you can identify the particular workload that is consuming your CPU and memory resources. 
+On the other hand, resource overconsumption of either the client or server endpoint could be the culprit of poor communication between the two. In the side panel {{< ui >}}Processes{{< /ui >}} tab, scope your view to processes running on either the source or destination endpoints to spot any heavy software that may be degrading the performance of their underlying hosts or containers, thus reducing their ability to respond to network calls. In this case, in addition to knowing _whether_ an underlying host is running hot and causing application latency, you will want to know _why_ it is running hot. Grouping your process metrics by command gives you this granularity, since you can identify the particular workload that is consuming your CPU and memory resources. 
 
 {{< img src="network_performance_monitoring/guide/detecting_a_network_outage/cnm_processes_tab.png" alt="CPU overconsumption of the underlying infrastructure">}}
 
 ## Application errors in code
 
-Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. To determine whether this is the case, look for application request errors in the **Traces** tab of a specific service in [CNM > DNS][1], or the **Network** tab of a specific trace in APM Traces.
+Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. To determine whether this is the case, look for application request errors in the {{< ui >}}Traces{{< /ui >}} tab of a specific service in [CNM > DNS][1], or the {{< ui >}}Network{{< /ui >}} tab of a specific trace in APM Traces.
 
 {{< img src="network_performance_monitoring/guide/detecting_a_network_outage/traces_2.png" alt="Application errors in code">}}
 

@@ -14,7 +14,7 @@ aliases:
 
 ## Overview
 
-After installing BYOC Logs, you can configure your deployment to meet your environment, security, and performance requirements. Key configuration areas include account integration, cloud resource setup, cluster sizing, ingress, and processing options. These settings allow you to tailor BYOC Logs for your specific needs.
+After installing BYOC (Bring Your Own Cloud) Logs, you can configure your deployment to meet your environment, security, and performance requirements. Key configuration areas include account integration, cloud resource setup, cluster sizing, ingress, and processing options. These settings allow you to tailor BYOC Logs for your specific needs.
 
 If you don't see the BYOC Logs entry in the Logs menu, it means BYOC Logs is not activated on your account. Contact your Datadog account team to activate BYOC Logs on your account.
 

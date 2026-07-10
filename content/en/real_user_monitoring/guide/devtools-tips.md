@@ -29,8 +29,8 @@ Most browsers allow developers to select scripts and add them to an ignore list.
 Below is an example of where to find this feature in Google Chrome.
 {{< img src="real_user_monitoring/guide/devtools-tips/script_ignore_list.png" alt="How to add script to the ignore list in Google Chrome.">}}
 
-In the console tab, expand the output from the console statement. Right-click on each script you wish to ignore, and select the option **add script to ignore list**.\
-**Note**: The ignore list can be managed in **Developer Tools > Settings > Ignore List**
+In the {{< ui >}}Console{{< /ui >}} tab, expand the output from the console statement. Right-click on each script you wish to ignore, and select the option {{< ui >}}add script to ignore list{{< /ui >}}.\
+**Note**: The ignore list can be managed in {{< ui >}}Developer Tools{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Ignore List{{< /ui >}}
 
 This method works well when using the [CDN (sync/async) installation methods][3]. If you are using the NPM package method, make sure that you have `sourcemaps` enabled. Otherwise, the SDK code may be bundled with your application code, preventing DevTools from ignoring the SDK.
 
@@ -46,7 +46,7 @@ The browser SDKs send several network requests to record an application's behavi
 Below an example of this feature in Google Chrome:
 {{< img src="real_user_monitoring/guide/devtools-tips/network_ignore_intake.png" alt="Network panel filtering browser SDKs requests.">}}
 
-In the network tab, add a filter of the form `-url:intake-datadoghq.com` (update the pattern to match the url of your [datacenter's intake][1], or the one of your [proxy][2]).
+In the {{< ui >}}Network{{< /ui >}} tab, add a filter of the form `-url:intake-datadoghq.com` (update the pattern to match the url of your [datacenter's intake][1], or the one of your [proxy][2]).
 
 ## Further Reading
 

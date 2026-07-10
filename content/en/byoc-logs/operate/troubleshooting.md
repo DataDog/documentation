@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC (Bring Your Own Cloud) Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
 
 
 ## Component health

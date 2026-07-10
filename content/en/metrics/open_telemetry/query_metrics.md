@@ -22,7 +22,7 @@ Datadog helps you bridge this gap by enabling you to:
 The Telemetry source query modifier requires the OTel Native Instrumentation preview. Use this form to request access.
 {{< /callout >}}
 
-The [Metrics Query Editor][1] and dashboard widgets include a [Telemetry source][3] query modifier, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources. Select **Modify** and then choose **Native telemetry** or **Combined telemetry** in the **Telemetry sources** section.
+The [Metrics Query Editor][1] and dashboard widgets include a [Telemetry source][3] query modifier, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources. Select {{< ui >}}Modify{{< /ui >}} and then choose {{< ui >}}Native telemetry{{< /ui >}} or {{< ui >}}Combined telemetry{{< /ui >}} in the {{< ui >}}Telemetry sources{{< /ui >}} section.
 
 {{< img src="dashboards/functions/telemetry_source_combined.png" alt="Telemetry sources query modifier showing Combined telemetry selected." style="width:100%;" >}}
 
@@ -46,7 +46,7 @@ Imagine you're monitoring system load using two different metrics:
 - **OTel native**: `system.cpu.load_average.15m`
 - **Datadog Agent**: `system.load.15`
 
-If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the telemetry source to **Combined telemetry**, Datadog automatically:
+If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the telemetry source to {{< ui >}}Combined telemetry{{< /ui >}}, Datadog automatically:
 
 1. Identifies the equivalent Datadog metric: `system.load.15`.
 2. Combines the timeseries from both `system.cpu.load_average.15m` and `system.load.15`.
@@ -56,7 +56,7 @@ If you query for `system.cpu.load_average.15m`, apply a max space aggregation, a
 
 To provide clarity when querying, the metric source and equivalent metrics are displayed:
 
-- **Source pill**: In the query editor, a **Datadog** or **OTel** pill appears next to the metric name, indicating its origin.
+- **Source pill**: In the query editor, a {{< ui >}}Datadog{{< /ui >}} or {{< ui >}}OTel{{< /ui >}} pill appears next to the metric name, indicating its origin.
 
 - **Equivalent metrics list**: The editor also shows a list of metrics considered equivalent to the one you've queried. This includes complex one-to-many mappings. For example, `system.cpu.utilization` maps to multiple Datadog CPU state metrics (`system.cpu.idle`, `system.cpu.iowait`, etc.).
 
@@ -66,11 +66,11 @@ To provide clarity when querying, the metric source and equivalent metrics are d
 
 For a comprehensive view of how specific OTel and Datadog metrics relate, check the Metrics Summary page:
 
-1. Navigate to [**Metrics > Summary**][2].
+1. Navigate to [{{< ui >}}Metrics > Summary{{< /ui >}}][2].
 2. Search for a known Datadog or OTel metric.
-3. Open the **Metric Details** side panel.
+3. Open the {{< ui >}}Metric Details{{< /ui >}} side panel.
 
-Alternatively, click **Edit in Metrics Summary** when inputting a metric in the query editor.
+Alternatively, click {{< ui >}}Edit in Metrics Summary{{< /ui >}} when inputting a metric in the query editor.
 
 This panel displays metric mappings, including complex relationships. For example, it shows how `system.cpu.utilization` maps to multiple Datadog metrics like `system.cpu.idle`, `system.cpu.user`, and others.
 

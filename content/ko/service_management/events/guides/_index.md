@@ -10,7 +10,7 @@ cascade:
     subcategory: 이벤트 가이드
 disable_toc: true
 further_reading:
-- link: /service_management/events/explorer/
+- link: /events/explorer/
   tag: 설명서
   text: Datadog Events Explorer
 - link: /monitors/types/event/

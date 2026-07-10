@@ -64,6 +64,5 @@ title: Guías de monitores
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrar monitores con page (página) de estado{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Canalizar tus despliegues de acciones de GitHub con monitores de Datadog{{< /nextlink >}}
     {{< nextlink href="monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts" >}}Añadir un umbral mínimo de solicitudes para alertas de tasas de errores{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Exportar alertas de monitores a CSV{{< /nextlink >}}
     {{< nextlink href="monitors/guide/composite_use_cases" >}}Casos de uso de monitor composite{{< /nextlink >}}
 {{< /whatsnext >}}

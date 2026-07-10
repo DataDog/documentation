@@ -77,7 +77,7 @@ For installation steps, see the [Agent installation instructions][9].
 
 Configure the Agent for each RAC node. Use the tab that matches your Oracle deployment type. The `username` value must match the user you created previously.
 
-You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
+You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent queries `GV$` views only when necessary, to minimize interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}

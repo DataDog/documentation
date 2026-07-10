@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from** field to the right of the metric. 
+When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the {{< ui >}}from{{< /ui >}} field to the right of the metric. 
 
 You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
@@ -51,7 +51,7 @@ For more information on tags, see the [Getting Started With Using Tags][2] guide
 
 ### Boolean filtered query examples
 
-To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
+To use the examples below, click the code icon {{< ui >}}</>{{< /ui >}} to see the query editor in the UI, and then copy and paste the query example into the query editor.
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}

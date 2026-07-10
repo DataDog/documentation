@@ -28,7 +28,7 @@ The right panel of the graph section of the monitor status page provides a high-
 |  | Description |
 | ---- | ---- |
 | Groups | Count of groups per status (`ALERT`, `WARN`, `NO DATA`, `OK`) |
-| Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and Transitions graphs. |
+| {{< ui >}}Visualize as{{< /ui >}} | Graph selector to toggle between the {{< ui >}}Evaluated Data{{< /ui >}}, {{< ui >}}Source Data{{< /ui >}}, and {{< ui >}}Transitions{{< /ui >}} graphs. |
 | Query | The raw monitor query. Each monitor includes a dynamic link to a specific explorer or page based on the data type, such as event explorer for event data types or a general metric explorer for other types. |
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
@@ -59,9 +59,9 @@ The visualization matches your monitor's configuration to show the monitor's his
 
 {{< img src="/monitors/status/graphs/status_page_demo.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
 
-To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the **Event Details** section for more information.
+To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the {{< ui >}}Event Details{{< /ui >}} section for more information.
 
-To filter the view for an individual group, hover over the group title and click **Filter to Group** in the tooltip.
+To filter the view for an individual group, hover over the group title and click {{< ui >}}Filter to Group{{< /ui >}} in the tooltip.
 
 {{< img src="/monitors/status/graphs/current_status_dot.png" alt="Evaluated data graph showing an OK graph with a WARN dot to show the current status is in WARN" style="width:100%;" >}}
 

@@ -13,11 +13,14 @@ further_reading:
   text: "Troubleshooting BYOC Logs"
 aliases:
   - /cloudprem/install/custom_k8s/
+private: true
 ---
+
+<div class="alert alert-warning">This page is archived and no longer maintained. It uses MinIO, whose community edition is no longer maintained. For supported installation methods, see <a href="/byoc-logs/install/">Install BYOC Logs</a>.</div>
 
 ## Overview
 
-This documentation walks you through the process of installing BYOC Logs on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
+This documentation walks you through the process of installing BYOC (Bring Your Own Cloud) Logs on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
 
 This setup is ideal for environments where you manage your own infrastructure or don't use a major cloud provider's managed services.
 

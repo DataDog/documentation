@@ -27,7 +27,7 @@ To view the session replays associated with a Zendesk ticket:
 
 {{< img src="real_user_monitoring/guide/zendesk/zendesk-sr-demo.mp4" alt="Accessing a session replay from Zendesk" video=true >}}
 
-From the replay page, you can view a list of the user's actions, along with the backend calls associated with each action. Hover over an event and click **Details** to view associated traces, errors, and more.
+From the replay page, you can view a list of the user's actions, along with the backend calls associated with each action. Hover over an event and click {{< ui >}}Details{{< /ui >}} to view associated traces, errors, and more.
 
 {{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt="Hover view of a session replay event with the Details button highlighted" style="width:60%;" >}}
 

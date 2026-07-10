@@ -39,7 +39,7 @@ Configura alertas basadas en los correos electrónicos de tu tema de SNS con un 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/service_management/events/guides/email/
+[1]: /es/events/guides/email/
 [2]: https://app.datadoghq.com/event/explorer
 [3]: /es/monitors/types/event/
 [4]: /es/events/explorer/

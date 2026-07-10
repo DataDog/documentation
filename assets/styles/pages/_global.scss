@@ -419,7 +419,6 @@ h5 {
         h3,
         h4,
         h5 {
-            pointer-events: none;
             &:before {
                 margin-top: -110px;
                 height: 110px;
@@ -452,6 +451,7 @@ h5 {
     h3,
     h4,
     h5 {
+        pointer-events: none;
         &:before {
             display: block;
             content: '';

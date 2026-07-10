@@ -1,6 +1,6 @@
 ---
 title: Automation Rules
-description: Route LLM Observability traces into annotation queues or datasets automatically using filter-based rules.
+description: Route Agent Observability traces into annotation queues or datasets automatically using filter-based rules.
 further_reading:
   - link: /llm_observability/evaluations/annotation_queues
     tag: Documentation
@@ -10,7 +10,7 @@ further_reading:
     text: Build datasets from production traces
   - link: /api/latest/llm-observability/
     tag: API
-    text: LLM Observability API reference
+    text: Agent Observability API reference
 ---
 
 ## Overview
@@ -23,7 +23,7 @@ Automation Rules continuously route production LLM traces to annotation queues o
 
 <div class="alert alert-info">Automations apply going forward: new traces matching your rule are routed to the destination as they arrive. Existing traces matching the filter are not added retroactively.</div>
 
-Each rule is evaluated **per span**, in real time, as spans stream into LLM Observability. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
+Each rule is evaluated **per span**, in real time, as spans stream into Agent Observability. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
 
 ## Configuring an automation
 

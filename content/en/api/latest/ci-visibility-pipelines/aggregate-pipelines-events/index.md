@@ -1,0 +1,3 @@
+---
+title: Aggregate pipelines events
+---

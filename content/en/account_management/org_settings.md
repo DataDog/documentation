@@ -109,6 +109,10 @@ The {{< ui >}}Audit Trail{{< /ui >}} tab in the Organization Settings page opens
 
 The {{< ui >}}Audit Trail Settings{{< /ui >}} tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
+### SMTP configuration
+
+The [**SMTP Configuration**][17] page lets you connect your own SMTP server so that status page subscription emails are sent from your own domain.
+
 ## General
 
 ### Preferences
@@ -169,3 +173,4 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [14]: /account_management/safety_center
 [15]: /account_management/org_settings/mobile_third_party_access
 [16]: /help/
+[17]: /account_management/org_settings/smtp_configuration

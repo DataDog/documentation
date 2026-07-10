@@ -185,7 +185,7 @@ runPredefinedScript:
 ```
 
 [2]: /actions/private_actions/use_private_actions/
-[5]: /service_management/app_builder/connections/
+[5]: /actions/connections/
 
 {{% /tab %}}
 
@@ -232,7 +232,7 @@ In your workflow or app, configure the action to use the script name you defined
 
 **Note**: There are two levels of variable resolution: one at the workflow level and one at the action level inside the runner.
 
-{{< img src="service_management/par-script-variables.png" alt="The two levels of variables inside the runner." style="width:80%;" >}}
+{{< img src="actions/private_actions/par-script-variables.png" alt="The two levels of variables inside the runner." style="width:80%;" >}}
 
 ## Standalone runner options
 

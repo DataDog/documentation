@@ -126,7 +126,7 @@ A metric query consists of the same two evaluation steps to start: time aggregat
 
 Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][7].
 
-The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs by using the graphing editor UI or by directly changing the raw query string. To edit the query string, use the `</>` button on the far right.
+The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs by using the graphing editor UI or by directly changing the raw query string. To edit the query string, use the {{< ui >}}</>{{< /ui >}} button on the far right.
 
 ### Anatomy of a metric query
 
@@ -138,7 +138,7 @@ You can break this query into a few steps:
 
 #### Metric name
 
-First, choose the specific metric that you'd like to graph by searching or selecting it from the dropdown next to **Metric**. If you're not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
+First, choose the specific metric that you'd like to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you're not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
 
 #### Filter your metric
 

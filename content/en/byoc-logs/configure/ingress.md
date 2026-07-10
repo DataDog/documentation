@@ -14,7 +14,7 @@ aliases:
 
 ## Overview
 
-Ingress is a critical component of your BYOC Logs deployment. The Helm chart automatically creates two ingress configurations called public ingress and internal ingress. If the AWS Load Balancer Controller is installed on the cluster, it provisions one ALB per ingress configuration. Each load balancer can be further configured using ingress annotations.
+Ingress is a critical component of your BYOC (Bring Your Own Cloud) Logs deployment. The Helm chart automatically creates two ingress configurations called public ingress and internal ingress. If the AWS Load Balancer Controller is installed on the cluster, it provisions one ALB per ingress configuration. Each load balancer can be further configured using ingress annotations.
 
 ## Public ingress
 

@@ -33,7 +33,10 @@ Estimated usage metrics are generally available for the following usage types:
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
 | (Preview) Indexed Custom Metric Points | `datadog.estimated_usage.metrics.points.indexed`, `datadog.estimated_usage.metrics.points.indexed.by_tag`, `datadog.estimated_usage.metrics.points.indexed.hourly` | Estimated indexed points for custom metrics. |
-| (Preview) Ingested Custom Metric Points | `datadog.estimated_usage.metrics.points.ingested`, `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated ingesteds usage for custom metrics. |
+| (Preview) Ingested Custom Metric Points | `datadog.estimated_usage.metrics.points.ingested`, `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated ingested points for custom metrics. |
+| (Preview) Billable Metric Names | `datadog.estimated_usage.billable.metrics` | Count of metric names with more than 100 indexed points, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Billable Indexed Points | `datadog.estimated_usage.billable.points` | Sum of indexed points above the included 10M points per metric name, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | Comparison of total ingested points to total indexed points. Applies to organizations on [Metric Name Pricing][7]. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
@@ -116,4 +119,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
 [6]: /account_management/billing/usage_attribution/
+[7]: /account_management/billing/metric_name_pricing/
 

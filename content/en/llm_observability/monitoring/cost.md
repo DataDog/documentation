@@ -2,9 +2,9 @@
 title: Cost
 description: Monitor your LLM tokens and costs.
 ---
-{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in Agent Observability." style="width:100%;" >}}
 
-Datadog LLM Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
+Agent Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
 By aggregating this information across traces and applications, you can gain insights into the user patterns of your LLM models and their impact on overall spending.
 
@@ -32,7 +32,7 @@ To manually supply cost information, follow the instrumentation steps described 
 
 #### How token counts are calculated
 The following relationships apply to token usage fields:
-{{< img src="llm_observability/llm_token_relationships.png" alt="Diagram showing how LLM Observability computes token counts: total_tokens is the sum of input_tokens and output_tokens; input_tokens is the sum of non_cached_input_tokens, cache_read_input_tokens, and cache_write_input_tokens; reasoning_output_tokens is a subset of output_tokens." style="width:100%;" >}}
+{{< img src="llm_observability/llm_token_relationships.png" alt="Diagram showing how Agent Observability computes token counts: total_tokens is the sum of input_tokens and output_tokens; input_tokens is the sum of non_cached_input_tokens, cache_read_input_tokens, and cache_write_input_tokens; reasoning_output_tokens is a subset of output_tokens." style="width:100%;" >}}
 
 When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
 
@@ -52,7 +52,7 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
-You can find cost metrics in [LLM Observability Metrics][5]. The unit for LLM Observability estimated cost metrics is **nanodollars**. 
+You can find cost metrics in [Agent Observability Metrics][5]. The unit for Agent Observability estimated cost metrics is **nanodollars**. 
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
@@ -88,8 +88,8 @@ Many LLM providers cache reused prompt prefixes to reduce repeated processing. T
 
 {{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
 
-## View costs in LLM Observability
-View your app in LLM Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
+## View costs in Agent Observability
+View your app in Agent Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
 - A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
 - {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
 - {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])

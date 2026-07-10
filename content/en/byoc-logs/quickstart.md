@@ -14,7 +14,7 @@ aliases:
 
 ## Overview
 
-Get started with BYOC Logs locally in less than 5 minutes. This quickstart covers the following:
+Get started with BYOC (Bring Your Own Cloud) Logs locally in less than 5 minutes. This quickstart covers the following:
 1. Start BYOC Logs locally using Docker.
 2. Verify the cluster status.
 3. Send a "Hello World" log.

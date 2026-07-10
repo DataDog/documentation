@@ -45,8 +45,8 @@ Documentation for the <strong>Push</strong> subscription is only maintained for 
 
 1. Navigate to the IAM & Admin Console > [Audit Log][4].
 1. Select the services for which you want to enable data access logs.
-1. In the **Log Types** panel, enable **Admin Read**, **Data Read**, and **Data Write**.
-1. Click **Save**.
+1. In the **Log Types** panel, enable {{< ui >}}Admin Read{{< /ui >}}, {{< ui >}}Data Read{{< /ui >}}, and {{< ui >}}Data Write{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Change default configuration for new services
 
@@ -55,25 +55,25 @@ If a new Google Cloud service is added, it inherits your [default audit configur
 To ensure that Data Access audit logs are captured for new Google Cloud services, modify your default audit configuration:
 
 1. Navigate to the **IAM & Admin Console > [Audit Log][4]**.
-1. Enable **Admin Read**, **Data Read**, and **Data Write**.
-1. Click **Save**.
+1. Enable {{< ui >}}Admin Read{{< /ui >}}, {{< ui >}}Data Read{{< /ui >}}, and {{< ui >}}Data Write{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Create a Google Cloud publish/subscription (Pub/Sub) system
 
 1. Navigate to Pub/Sub > [Topics][5].
-1. Click **Create Topic**.
+1. Click {{< ui >}}Create Topic{{< /ui >}}.
 1. Enter a descriptive topic name. For example, `export-audit-logs-to-datadog`.
 1. Leave **Add a default subscription** selected, which creates a subscription with default configuration values. The name of the subscription is automatically generated as your topic name with "-sub" appended to it. This subscription name is used when you create your [Dataflow job](#create-and-run-the-dataflow-job) later.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an additional topic and subscription for outputDeadletterTopic parameter
 Create an additional topic and default subscription to handle any log messages rejected by the Datadog API. This topic is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
 
 1. Navigate back to Pub/Sub > [Topics][5]
-1. Click **Create Topic**.
+1. Click {{< ui >}}Create Topic{{< /ui >}}.
 1. Enter a descriptive topic name.
 1. Leave **Add a default subscription** selected.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 **Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][6]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][7] for information on how to set up a monitor to notify when you are close to those limits.
 
@@ -82,11 +82,11 @@ Create an additional topic and default subscription to handle any log messages r
 Datadog recommends creating a secret in [Secret Manager][8] with your valid Datadog API key value. This secret is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
 
 1. Navigate to Security > [Secret Manager][8].
-1. Click **Create Secret**.
+1. Click {{< ui >}}Create Secret{{< /ui >}}.
 1. Enter a name for the secret.
 1. Copy your [Datadog API key][9] and paste it into the **Secret value** section.
 1. Optionally, set the other configurations based on your use case.
-1. Click **Create Secret**.
+1. Click {{< ui >}}Create Secret{{< /ui >}}.
 
 ## Create a custom Dataflow worker service account
 
@@ -96,9 +96,9 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 
 1. Navigate to Google Cloud's [Service Account][11] page.
 1. Select your project.
-1. Click **Create Service Account**.
+1. Click {{< ui >}}Create Service Account{{< /ui >}}.
 1. Enter a descriptive name for the service account.
-1. Click **Create and Continue**.
+1. Click {{< ui >}}Create and Continue{{< /ui >}}.
 1. Add the following roles:
     ##### Required permissions
     | Role | Path | Description |
@@ -110,34 +110,34 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files |
-7. Click **Continue**.
-8. Click **Done**.
+7. Click {{< ui >}}Continue{{< /ui >}}.
+8. Click {{< ui >}}Done{{< /ui >}}.
 
 ##  Create a log sink to publish logs to the Pub/Sub
 
 1. Navigate to Google Cloud's [Logs Explorer][19].
-1. Select **Log Router** in the left side menu.
-1. Click **Create Sink**.
+1. Select {{< ui >}}Log Router{{< /ui >}} in the left side menu.
+1. Click {{< ui >}}Create Sink{{< /ui >}}.
 1. Enter a descriptive name for the sink.
-1. Click **Next**.
-1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.
+1. Click {{< ui >}}Next{{< /ui >}}.
+1. In the **Select Sink Service** dropdown menu, select {{< ui >}}Cloud Pub/Sub topic{{< /ui >}}.
     **Note**: The Cloud Pub/Sub topic can be located in a different project.
 1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
-1. Click **Next**.
+1. Click {{< ui >}}Next{{< /ui >}}.
 1. Enter an inclusion filter for the logs you want to send to Datadog.
-1. Click **Next**.
+1. Click {{< ui >}}Next{{< /ui >}}.
 1. Optionally, enter an exclusion filter to exclude logs you do not want sent to Datadog.
-1. Click **Create Sink**.
+1. Click {{< ui >}}Create Sink{{< /ui >}}.
 
 **Note**: You can create multiple exports from Google Cloud Logging to the same Pub/Sub topic with different sinks.
 
 ## Create and run the Dataflow job
 
 1. Navigate to Google Cloud [Dataflow][20].
-1. Click **Create job from template**.
+1. Click {{< ui >}}Create job from template{{< /ui >}}.
 1. Enter a name for the job.
 1. Select a regional endpoint.
-1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
+1. In the **Dataflow template** dropdown menu, select {{< ui >}}Pub/Sub to Datadog{{< /ui >}}.
 1. In the **Required Parameters** section:
    1. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).
    1. Enter the following in the **Datadog Logs API URL** field:
@@ -148,9 +148,9 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
    1. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.
    1. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
 1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:
-   1. Click **Optional Parameters** to see the additional fields.
+   1. Click {{< ui >}}Optional Parameters{{< /ui >}} to see the additional fields.
    1. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.<br />
-      To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.
+      To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select {{< ui >}}Copy resource name{{< /ui >}}.
    1. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.
 1. If you are not using a secret for your Datadog API key value:
     - **Recommended**:
@@ -160,7 +160,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     - **Not recommended**: `Source of API key passed` set to `PLAINTEXT` with `Logs API Key` set to the plaintext API key.
 1. See [Template parameters][21] in the Dataflow template for details on other available options.
 1. If you created a custom worker service account, select it in the **Service account email** dropdown menu.
-1. Click **Run Job**.
+1. Click {{< ui >}}Run Job{{< /ui >}}.
 
 See new logging events delivered to the Cloud Pub/Sub topic in the [Datadog Log Explorer][22].
 

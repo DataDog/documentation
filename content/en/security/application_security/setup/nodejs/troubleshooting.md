@@ -73,7 +73,7 @@ If you're still experiencing problems:
 4. Contact [Datadog support][5].
 
 [1]: /security/application_security/troubleshooting
-[2]: /security/application_security/setup/nodejs/compatibility
+[2]: /security/application_security/setup/compatibility/nodejs
 [3]: /tracing/trace_collection/compatibility/nodejs/#performance
 [4]: /tracing/trace_collection/compatibility/nodejs/
 [5]: /help

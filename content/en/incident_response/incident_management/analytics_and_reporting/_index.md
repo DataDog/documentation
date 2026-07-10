@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/incidents/analytics/incident_analytics.mp4" alt="Scroll through the Incident Management Overview dashboard" video=true style="width:100%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/incident_analytics.mp4" alt="Scroll through the Incident Management Overview dashboard" video=true style="width:100%;">}}
 
 Use Incident Analytics to learn from past incidents and understand the efficiency and performance of your incident response process. Incident analytics allows you to pull aggregated statistics on your incidents over time. You can use these statistics to create reports that help you to:
 - Analyze whether your incident response process is improving over time
@@ -46,37 +46,37 @@ Incident Management reports the following analytic measures, which you can use t
 
 {{< collapse-content title="Customer Impact Duration" level="h4" >}}
 The duration during which customers were impacted, based on the impacts defined on the incident.
-{{< img src="service_management/incidents/analytics/Customer Impact Duration.png" alt="customer impact duration" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/Customer Impact Duration.png" alt="customer impact duration" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Status Active Duration" level="h4" >}}
 The duration that the incident was in an "active" state, based on the incident timeline.
-{{< img src="service_management/incidents/analytics/Status Active Duration.png" alt="status active duration" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/Status Active Duration.png" alt="status active duration" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Status Stable Duration" level="h4" >}}
 The duration that the incident was in a "stable" state, based on the incident timeline.
-{{< img src="service_management/incidents/analytics/StatusStableDuration.png" alt="status stable duration" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/StatusStableDuration.png" alt="status stable duration" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Time to Detect" level="h4" >}}
 The duration from the earliest customer impact to the incident's detection time.
-{{< img src="service_management/incidents/analytics/TimeToDetect.png" alt="time to detect graphic" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/TimeToDetect.png" alt="time to detect graphic" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Time to Repair" level="h4" >}}
 The duration from the incident's detection time to the last customer impact.
-{{< img src="service_management/incidents/analytics/TimeToRepair.png" alt="time to repair graphic" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/TimeToRepair.png" alt="time to repair graphic" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Time to Resolve" level="h4" >}}
 The duration from the incident's declaration time to the time it was resolved.
-{{< img src="service_management/incidents/analytics/TimeToResolve.png" alt="time to resolve graphic" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/TimeToResolve.png" alt="time to resolve graphic" style="width:80%;">}}
 {{< /collapse-content >}}
 
 {{< collapse-content title="Time to Internal Response" level="h4" >}}
 The duration from incident's detection time to incident's declaration time.
-{{< img src="service_management/incidents/analytics/TimeToInternalResponse.png" alt="time to internal response graphic" style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/TimeToInternalResponse.png" alt="time to internal response graphic" style="width:80%;">}}
 {{< /collapse-content >}}
 
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7].
@@ -114,7 +114,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 
 ### Example: Weekly outage customer impact duration grouped by service
 
-{{< img src="/service_management/incidents/analytics/analytics_graph_configuration.png" alt="Timeseries graph configuration showing Incidents data source filtered by severity, showing the customer impact duration grouped by service" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/analytics_and_reporting/analytics_graph_configuration.png" alt="Timeseries graph configuration showing Incidents data source filtered by severity, showing the customer impact duration grouped by service" style="width:90%;" >}}
 
 This example configuration shows you an aggregation of your incidents that are SEV-1 or SEV-2. The graph displays the Customer Impact Duration of those incidents grouped by service.
 

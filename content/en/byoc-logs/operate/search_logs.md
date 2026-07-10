@@ -22,7 +22,7 @@ aliases:
 
 You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
 
-BYOC Logs index names follow this format:
+BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```
 byoc--<CLUSTER_NAME>--<INDEX_NAME>

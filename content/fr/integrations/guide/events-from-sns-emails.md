@@ -40,7 +40,7 @@ Configurez des alertes basées sur les e-mails de votre topic SNS avec un [monit
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/service_management/events/guides/email/
+[1]: /fr/events/guides/email/
 [2]: https://app.datadoghq.com/event/explorer
 [3]: /fr/monitors/types/event/
 [4]: /fr/events/explorer/

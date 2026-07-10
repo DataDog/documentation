@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-When a [metric monitor][1] tracks a metric that doesn't always report at the same frequency, or arrives with a timestamp in the past (such as metrics from [AWS integrations][2]), you may receive `No Data` alerts even when data appears in Datadog. Adjust the following settings in your monitor's **Advanced Options** to reduce false `No Data` alerts.
+When a [metric monitor][1] tracks a metric that doesn't always report at the same frequency, or arrives with a timestamp in the past (such as metrics from [AWS integrations][2]), you may receive `No Data` alerts even when data appears in Datadog. Adjust the following settings in your monitor's {{< ui >}}Advanced Options{{< /ui >}} to reduce false `No Data` alerts.
 
 ## Add an evaluation delay
 
@@ -32,12 +32,12 @@ This setting is recommended for:
 
 ## Disable Require a Full Window of Data
 
-The **Require a Full Window of Data** setting controls whether the monitor waits for a complete evaluation window before alerting. For sparse or backfilled metrics, requiring a full window can cause the monitor to skip evaluations or report `No Data`.
+The {{< ui >}}Require a Full Window of Data{{< /ui >}} setting controls whether the monitor waits for a complete evaluation window before alerting. For sparse or backfilled metrics, requiring a full window can cause the monitor to skip evaluations or report `No Data`.
 
 {{< img src="monitors/guide/require_full_window.png" alt="Monitor Advanced Options - Require a Full Window of Data setting in the Datadog UI" style="width:80%;" >}}
 
-- **Do not require** (recommended for sparse or delayed metrics): The monitor evaluates on partial data, reducing false `No Data` alerts.
-- **Require**: The monitor waits for a full window of data before evaluating. This is appropriate for metrics reported by the Datadog Agent at a consistent frequency.
+- {{< ui >}}Do not require{{< /ui >}} (recommended for sparse or delayed metrics): The monitor evaluates on partial data, reducing false `No Data` alerts.
+- {{< ui >}}Require{{< /ui >}}: The monitor waits for a full window of data before evaluating. This is appropriate for metrics reported by the Datadog Agent at a consistent frequency.
 
 ## Install the Datadog Agent on cloud hosts
 

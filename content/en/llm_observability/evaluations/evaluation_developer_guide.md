@@ -2,14 +2,14 @@
 title: Evaluation Developer Guide
 aliases:
   - /llm_observability/guide/evaluation_developer_guide
-description: Learn how to build custom evaluators using the LLM Observability SDK.
+description: Learn how to build custom evaluators using the Agent Observability SDK.
 further_reading:
     - link: '/llm_observability/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting external evaluations'
     - link: '/llm_observability/setup/sdk/python'
       tag: 'Documentation'
-      text: 'Learn about the LLM Observability SDK for Python'
+      text: 'Learn about the Agent Observability SDK for Python'
     - link: '/llm_observability/instrumentation/api'
       tag: 'Documentation'
       text: 'Learn about the HTTP API Reference'
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production. 
+This guide covers how to build custom evaluators with the Agent Observability SDK and use them in LLM Experiments and in production. 
 
 ## Key concepts
 
@@ -52,7 +52,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in LLM Observability Experiments.
+There are two ways to define an evaluator using Agent Observability: class-based and function-based. In addition to these evaluators, Agent Observability has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in Agent Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|

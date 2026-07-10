@@ -17,7 +17,7 @@ further_reading:
 ---
 
 ## Overview
-This document provides configuration steps for using the Datadog Agent to send logs to a Datadog BYOC Logs deployment. Unlike the Datadog SaaS platform, BYOC Logs requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.
+This document provides configuration steps for using the Datadog Agent to send logs to a Datadog BYOC (Bring Your Own Cloud) Logs deployment. Unlike the Datadog SaaS platform, BYOC Logs requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.
 
 ## Key requirements
 To send logs with the Datadog Agent to BYOC Logs, you must configure two environment variables:

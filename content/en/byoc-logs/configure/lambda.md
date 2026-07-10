@@ -18,7 +18,7 @@ aliases:
 
 ## Overview
 
-BYOC Logs can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
+BYOC (Bring Your Own Cloud) Logs can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
 This allows BYOC Logs to handle traffic spikes without provisioning additional searcher nodes.
 
 ## Startup validation
