@@ -5,6 +5,9 @@ further_reading:
   - link: "/account_management/rbac/data_access"
     tag: "Documentation"
     text: "Learn more about data access controls"
+  - link: "/llm_observability/data_deletion"
+    tag: "Documentation"
+    text: "Data Deletion"
 ---
 {{< whatsnext desc=" ">}}
   {{< nextlink href="https://datadoghq.com/legal/hipaa-eligible-services">}}<u>HIPAA-Eligible Services</u>: Datadog Legal's list of HIPAA-eligible services{{< /nextlink >}}
@@ -33,6 +36,10 @@ Agent Observability integrates with [Sensitive Data Scanner][3], which helps pre
 
 By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
+## Data Deletion
+
+When a data deletion request is submitted for LLM Observability events — for example to satisfy a GDPR or CCPA erasure request — Datadog automatically extends the deletion to any dataset records that were created from those events, based on the request's tag filter. For more information, see [Data Deletion][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -40,4 +47,5 @@ By proactively scanning for sensitive data, Agent Observability ensures that con
 [1]: /account_management/rbac/data_access
 [2]: /llm_observability/instrumentation/sdk/#span-processing
 [3]: /security/sensitive_data_scanner/
+[4]: /llm_observability/data_deletion
 
