@@ -57,11 +57,8 @@ spec:
   features:
     remoteConfiguration:
       enabled: true
-  override:
-    clusterAgent:
-      env:
-        - name: DD_KUBEACTIONS_ENABLED
-          value: "true"
+    kubernetesActions:
+      enabled: true
 ```
 
 2. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
@@ -92,10 +89,8 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 datadog:
   remoteConfiguration:
     enabled: true
-clusterAgent:
-  env:
-    - name: DD_KUBEACTIONS_ENABLED
-      value: "true"
+  kubernetesActions:
+    enabled: true
 ```
 
 2. [Admission Controller][1] is enabled by default in the Datadog Helm chart. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-values.yaml`:
