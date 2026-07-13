@@ -62,11 +62,11 @@ Because severity modifier rules run first, all downstream automation rules—inc
 
 ## Identify modified findings
 
-<!-- **TODO:** Add a screenshot of a severity pill pop-over in an explorer. -->
+{{< img src="security/automation_pipelines/severity_pill_popover.png" alt="A findings explorer list with a severity pill that has a modifier indicator, showing a pop-over that names the automation rule responsible for adjusting the finding's severity" style="width:100%;" >}}
 
 Findings affected by a severity modifier rule display a visual indicator in explorer list views and in the finding's side panel header. Hovering over the indicator shows the automation rule responsible for the change.
 
-<!-- **TODO:** Add a screenshot of a severity breakdown in side-panel. -->
+{{< img src="security/automation_pipelines/severity_breakdown.png" alt="A finding side panel showing the severity breakdown, with the original severity, CVSS score, and CVSS vector, the automation rule that triggered the change, and the resulting severity level and adjusted CVSS score" style="width:100%;" >}}
 
 For findings that have a CVSS score (Container Image Vulnerability, Host Vulnerability, Library Vulnerability, and Runtime Code Vulnerability), the side panel severity section also includes a breakdown showing:
 - The original severity level, CVSS score, and CVSS vector before modification.
