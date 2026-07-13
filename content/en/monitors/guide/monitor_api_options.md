@@ -3,7 +3,10 @@ title: Monitor API Options
 description: "Comprehensive reference for monitor API configuration options including common settings, permissions, anomaly alerts, and metric alerts."
 ---
 
-This guide describes the options available when configuring monitors through the [Monitors API][7]. It covers options common to all monitor types, options for controlling edit permissions, and options that only apply to specific monitor types, such as metric, anomaly, log, service check, and Synthetic test monitors.
+This guide describes the options available when configuring monitors through the [Monitors API][7]. It covers options that: 
+- Are common to all monitor types.
+- Control edit permissions.
+- Only apply to specific monitor types, such as metric, anomaly, log, service check, and Synthetic test monitors.
 
 ## Common options
 
@@ -25,12 +28,12 @@ Time (in seconds) before alerting on new groups, so new applications or containe
 
 `notify_no_data`
 : **Default**: `false`<br>
-A boolean indicating whether the monitor notifies when data stops reporting.
+A Boolean indicating whether the monitor notifies when data stops reporting.
 
 `no_data_timeframe`
 : **Default**: `null`<br>
 Minutes before the monitor notifies after data stops reporting.<br>
-Recommended: 2x the monitor timeframe for query alerts, or 2 minutes for service checks.
+Recommended: 2x the monitor time frame for query alerts, or 2 minutes for service checks.
 
 `timeout_h`
 : **Default**: `null`<br>
@@ -57,7 +60,7 @@ Requires `renotify_interval`.
 
 `notify_audit`
 : **Default**: `false`<br>
-A boolean indicating whether tagged users are notified of changes to the monitor.
+A Boolean indicating whether tagged users are notified of changes to the monitor.
 
 `notify_by`
 : **Default**: `null`<br>
@@ -69,7 +72,7 @@ Controls how much extra content, such as the query or notified handles, appears 
 
 `include_tags`
 : **Default**: `true`<br>
-A boolean indicating whether notifications include the triggering tags in the title.<br>
+A Boolean indicating whether notifications include the triggering tags in the title.<br>
 **Example**: `true` results in `[Triggered on {host:h1}] Monitor Title`; `false` results in `[Triggered] Monitor Title`.
 
 `evaluation_delay`
@@ -104,13 +107,13 @@ _These options only apply to anomaly monitors and are ignored for other monitor 
 _These options only apply to metric alerts._
 
 `thresholds`
-: A dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][3] for your monitor, use the attributes `critical_recovery` and `warning_recovery`. To use a dynamic threshold based on a formula, use `critical_query` and `critical_recovery_query` with a formula query and the `variables` option. This is in preview.
+: A dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][3] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
   **Example**: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
 `require_full_window`
 : **Default**: `false`<br>
-A boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `false` for sparse metrics, otherwise some evaluations are skipped.
+A Boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `false` for sparse metrics; otherwise some evaluations are skipped.
 
 {{% /collapse-content %}}
 
@@ -145,7 +148,7 @@ _These options only apply to logs alerts._
 
 `enable_logs_sample`
 : **Default**: `false`<br>
-A boolean to add samples or values to the notification message.
+A Boolean to add samples or values to the notification message.
 
 {{% /collapse-content %}}
 
@@ -168,15 +171,15 @@ The minimum number of test locations that must be in failure at the same time du
 _These options only apply to the monitor types listed in this section's title._
 
 `group_retention_duration`
-: The time span after which groups with missing data are dropped from the monitor state. Minimum: one hour. Maximum: 72 hours.
+: The time span after which groups with missing data is dropped from the monitor state. Minimum: one hour. Maximum: 72 hours.
 
   **Example values**: `60m`, `1h`, `2d`.
 
 `on_missing_data`
-: Controls how groups or monitors behave when an evaluation returns no data points. The default behavior depends on the query type: monitors using a count query treat an empty evaluation as `0` and compare it to the threshold conditions, and monitors using another query type, such as gauge, measure, or rate, show the last known status. One of `default`, `show_no_data`, `show_and_notify_no_data`, or `resolve`.
+: Controls how groups or monitors behave when an evaluation returns no datapoints. The default behavior depends on the query type: monitors using a count query treat an empty evaluation as `0` and compare it to the threshold conditions, and monitors using another query type, such as gauge, measure, or rate, show the last known status. One of `default`, `show_no_data`, `show_and_notify_no_data`, or `resolve`.
 
 `enable_samples`
-: A boolean to send a list of samples when the monitor triggers. Only available for CI Test and CI Pipeline monitors.
+: A Boolean to send a list of samples when the monitor triggers. Only available for CI Test and CI Pipeline monitors.
 
 {{% /collapse-content %}}
 
