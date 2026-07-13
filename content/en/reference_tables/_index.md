@@ -60,7 +60,7 @@ Datadog supports the following data sources, including integrations and manual C
 {{< tabs >}}
 {{% tab "Manual upload" %}}
 
-Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
+Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
 {{< img src="reference_tables/schema_setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
@@ -100,7 +100,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 ```
 #### Define the table
 
-Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
+Click {{< ui >}}New Reference Table +{{< /ui >}}, then add a name, select {{< ui >}}Amazon S3{{< /ui >}}, fill out all fields, click import, and define the primary key for lookups.
 
 {{< img src="reference_tables/s3_table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
@@ -114,9 +114,9 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 
 1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
-3. Within your storage account, navigate to **Access Control (IAM)** and select **Add** > **Add Role Assignment**.
-4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
-5. In the **Members** tab, click **+ Select members**. Select the app registration you created in Step 1.
+3. Within your storage account, navigate to {{< ui >}}Access Control (IAM){{< /ui >}} and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
+4. Input and select the {{< ui >}}Storage Blob Data Reader{{< /ui >}} role. The [{{< ui >}}Storage Blob Data Reader{{< /ui >}} role][3] allows Datadog to read and list storage containers and blobs.
+5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
 
    {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
@@ -144,13 +144,13 @@ For more information, see the [Azure integration documentation][4].
 
 1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
 
-1. From the Google Cloud console, navigate to the **Cloud Storage** page.
+1. From the Google Cloud console, navigate to the {{< ui >}}Cloud Storage{{< /ui >}} page.
 
 1. Find the bucket you'd like to grant access to and click on it.
 
-1. Click on the **Permissions** tab. Under "View By Principals", click the **Grant Access** button.
+1. Click on the {{< ui >}}Permissions{{< /ui >}} tab. Under "View By Principals", click the {{< ui >}}Grant Access{{< /ui >}} button.
 
-1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the **Storage Object Viewer** role. Click **Save**.
+1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the {{< ui >}}Storage Object Viewer{{< /ui >}} role. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="reference_tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
 
@@ -213,7 +213,7 @@ Reference Table names and column headers are validated using the following namin
 
 ## Modify a Reference Table
 
-To modify an existing Reference Table with new data, select a table and click **Update Config** on the top right corner.
+To modify an existing Reference Table with new data, select a table and click {{< ui >}}Update Config{{< /ui >}} on the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
 * All existing rows with the same primary key are updated
@@ -224,20 +224,20 @@ Once the table is saved, the upserted rows are processed asynchronously and upda
 
 ## Export a Reference Table
 
-To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
+To export a Reference Table, select a table and click {{< ui >}}Query in DDSQL Editor{{< /ui >}}. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
 
 {{< img src="reference_tables/query_ddsql.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
 
 ## Delete a Reference Table
 
-To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
+To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click {{< ui >}}Delete Table{{< /ui >}}.
 The table and all associated rows is deleted.
 
 If there is a Lookup Processor using a Reference Table for Log enrichment, then the enrichment stops. It may take up to 10 minutes for the enrichment to stop.
 
 ## Monitor Reference Table Activity
 
-You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to **Update Config**. You need org management permissions to view the audit trail.
+You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to {{< ui >}}Update Config{{< /ui >}}. You need org management permissions to view the audit trail.
 
 ### Audit Trail
 
@@ -255,7 +255,7 @@ Events contain information about the success status, path, and table name of the
 
 To be alerted on errors encountered during imports, use [Event Monitors][4] for reference table change events. Reference table change events are sent from the `reference_tables` source.
 
-You can create monitors from the **Monitors** tab, or click on the Settings icon next to **New Reference Table +** to generate a pre-filled monitor.
+You can create monitors from the {{< ui >}}Monitors{{< /ui >}} tab, or click on the Settings icon next to {{< ui >}}New Reference Table +{{< /ui >}} to generate a pre-filled monitor.
 
 ## Reference Table limits
 - A reference table can have up to 50 columns
@@ -289,12 +289,12 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 
 1. Click on a table to open its detail page.
 2. Click the cog icon in the upper-right corner.
-3. Select **Permissions** from the menu.
-4. Click **Restrict Access**.
+3. Select {{< ui >}}Permissions{{< /ui >}} from the menu.
+4. Click {{< ui >}}Restrict Access{{< /ui >}}.
 5. Use the dropdown to select one or more teams, roles, or users.
-6. Click **Add**.
-7. Select either **Editor** or **Viewer**.
-8. Click **Save** to apply changes.
+6. Click {{< ui >}}Add{{< /ui >}}.
+7. Select either {{< ui >}}Editor{{< /ui >}} or {{< ui >}}Viewer{{< /ui >}}.
+8. Click {{< ui >}}Save{{< /ui >}} to apply changes.
 
 ## Further Reading
 

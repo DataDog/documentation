@@ -17,7 +17,7 @@ further_reading:
 
 Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.
 
-Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Other runtimes (for example Go, Java, or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
+Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), **Python**, and **Java** only. Other runtimes (for example Go or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
 
 ## Prerequisites
 
@@ -31,6 +31,7 @@ Inferred spans for Azure API Management are supported for **.NET**, **JavaScript
 | Node.js | `dd-trace-js` | v5.87.0+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
 | Python | `dd-trace-py` | v4.6.0+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
 | .NET | `dd-trace-dotnet` | v3.39.0+ | ASP.NET, ASP.NET Core |
+| Java | `dd-trace-java` | v1.64.0 | Servlet, Spring Web MVC, Spring WebFlux, Netty, Jetty, Tomcat, Undertow, Vert.x Web, Akka HTTP, Play, Ratpack, Grizzly, Liberty, Restlet, Synapse, Spray, Apache CXF, Axway API Gateway, Azure Functions |
 
 ## Setup
 
@@ -47,7 +48,7 @@ To create inferred spans, Azure API Management must pass the following headers t
 
 ### Inbound policy
 
-Add the following policy to the **inbound** section of your API in Azure API Management so these headers are set on requests to your backend:
+Add the following policy to the {{< ui >}}inbound{{< /ui >}} section of your API in Azure API Management so these headers are set on requests to your backend:
 
 ```xml
 <set-header name="x-dd-proxy" exists-action="override">
@@ -70,7 +71,7 @@ Add the following policy to the **inbound** section of your API in Azure API Man
 </set-header>
 ```
 
-You can add this policy at the API level in the Azure portal under **API Management** > your API > **Design** → **Inbound processing** → **Code view** (see [Set or edit Azure API Management policies][4]), using the Azure API Management REST API, or policies in your API definition.
+You can add this policy at the API level in the Azure portal under {{< ui >}}API Management{{< /ui >}} > your API > {{< ui >}}Design{{< /ui >}} → {{< ui >}}Inbound processing{{< /ui >}} → {{< ui >}}Code view{{< /ui >}} (see [Set or edit Azure API Management policies][4]), using the Azure API Management REST API, or policies in your API definition.
 
 ## Update sampling rules
 

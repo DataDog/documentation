@@ -28,21 +28,21 @@ To start your analysis, create a table of RUM sessions in Datadog Sheets:
      @session.error.count:>=2 @session.type:user
      ```
      {{< img src="/sheets/guide/rum_analysis/rum_explorer_open_in_sheets.png" alt="RUM Sessions Explorer showing a query filtering for sessions with 2 or more errors and user session type" style="width:100%;" >}}
-1. Click on **Open in Sheets** to create a new table with your filtered RUM sessions data.
+1. Click on {{< ui >}}Open in Sheets{{< /ui >}} to create a new table with your filtered RUM sessions data.
 
 ## Uploading data to Reference Tables
 
 To enrich your RUM sessions data with additional metadata, such as identifying premium users or associating users with specific teams, use Reference Tables. Upload external data with the following steps:
 
 1. Prepare a CSV file containing additional metadata. For example, your file might include columns for user IDs, premium status, and team information.
-1. Navigate to [Reference Tables][1] and click **New Reference Table +**.
+1. Navigate to [Reference Tables][1] and click {{< ui >}}New Reference Table +{{< /ui >}}.
 1. Upload the CSV file and define the primary key for the table.
 
 For more information, see the [Reference Tables][2] documentation.
 
 ## Enriching RUM data with lookups
 
-1. In your Sheets interface, click **Add Lookup** at the top of the page.
+1. In your Sheets interface, click {{< ui >}}Add Lookup{{< /ui >}} at the top of the page.
 1. Select the Reference Table you uploaded and specify the common column, such as User ID, to match records.
 1. The Lookup function adds the relevant metadata from the Reference Table to your RUM sessions table.
 
@@ -50,9 +50,9 @@ For more information, see the [Reference Tables][2] documentation.
 
 Pivot tables help you summarize and organize large datasets to find patterns and trends.
 
-1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
-2. In the **Rows** section, select the dimensions you want to analyze, such as the User name.
-3. In the **Calculations** section, choose the dimensions for calculations, like sum, average, count, min, and max.
+1. From an existing spreadsheet that already has a table of data, click {{< ui >}}Add Pivot Table{{< /ui >}}.
+2. In the {{< ui >}}Rows{{< /ui >}} section, select the dimensions you want to analyze, such as the User name.
+3. In the {{< ui >}}Calculations{{< /ui >}} section, choose the dimensions for calculations, like sum, average, count, min, and max.
 
 ## Example use case: Analyzing premium user errors
 
@@ -65,7 +65,7 @@ You have a web application and want to understand how errors are impacting your 
      ```
      @session.error.count:>=2 @session.type:user
      ```
-1. Click **Open in Sheets** to create a table with the filtered sessions.
+1. Click {{< ui >}}Open in Sheets{{< /ui >}} to create a table with the filtered sessions.
 
 ### Enrich Data
 1. [Upload a CSV file to a Reference Table](#uploading-data-to-reference-tables) with additional user metadata (such as premium status or team).

@@ -29,15 +29,15 @@ Some QR codes are limited to specific verification methods and may not work acro
 
 ## Store your secret key or QR code in a global variable
 
-Create a global variable where you enter a secret key or upload a QR code from your authentication provider. In the **Global Variables** tab of your **Settings** page, click **Create Global Variable**.
-1. In **Choose variable type**, select **MFA Token**.
-2. In **Define variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-3. Enter a **Description** for your variable (optional).
-4. Select **Tags** to associate with your variable (optional).
+Create a global variable where you enter a secret key or upload a QR code from your authentication provider. In the {{< ui >}}Global Variables{{< /ui >}} tab of your {{< ui >}}Settings{{< /ui >}} page, click {{< ui >}}Create Global Variable{{< /ui >}}.
+1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}MFA Token{{< /ui >}}.
+2. In {{< ui >}}Define variable{{< /ui >}}, enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores.
+3. Enter a {{< ui >}}Description{{< /ui >}} for your variable (optional).
+4. Select {{< ui >}}Tags{{< /ui >}} to associate with your variable (optional).
 5. Follow your authenticator app's documentation for instructions on creating a secret key or adding a new QR code.
-6. Enter the **Secret Key** to your variable or upload a QR code image.
-7. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
-8. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
+6. Enter the {{< ui >}}Secret Key{{< /ui >}} to your variable or upload a QR code image.
+7. Click {{< ui >}}+ Generate{{< /ui >}} to create a TOTP. You can copy the generated TOTP with the {{< ui >}}Copy{{< /ui >}} icon.
+8. In {{< ui >}}Permissions settings{{< /ui >}}, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
@@ -49,9 +49,9 @@ You can use the secret key or QR code stored in a global variable across all you
 To use TOTP in your [browser tests][2]:
 
 1. Import your global variable.
-2. When recording your test, click the **Hand** icon to generate a TOTP. 
+2. When recording your test, click the {{< ui >}}Hand{{< /ui >}} icon to generate a TOTP. 
 3. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
-4. After recording your test steps, click **Save & Launch Test**.
+4. After recording your test steps, click {{< ui >}}Save & Launch Test{{< /ui >}}.
 
 ## Further Reading
 

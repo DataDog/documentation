@@ -198,7 +198,7 @@ See [Reading Experiment Results][5] to review your data.
 
 [1]: https://app.datadoghq.com/product-analytics/experiments
 [2]: /experiments/defining_metrics
-[3]: /experiments/minimum_detectable_effect
+[3]: /experiments/statistics/minimum_detectable_effect
 [4]: /getting_started/feature_flags
 [5]: /experiments/reading_results
 [6]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
@@ -206,4 +206,4 @@ See [Reading Experiment Results][5] to review your data.
 [8]: /experiments/
 [9]: /getting_started/feature_flags/#create-your-first-feature-flag
 [10]: https://docs.datadoghq.com/feature_flags/client#context-attribute-requirements
-[11]: /experiments/analysis_methods
+[11]: /experiments/statistics/analysis_methods

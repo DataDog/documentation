@@ -32,8 +32,9 @@ The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
-- **Datadog Java SDK**: Version **1.57.0** or later
-- **OpenFeature SDK**: Version **1.18.2** or later
+- **Datadog Java SDK** (`dd-java-agent`, added with `-javaagent`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **OpenFeature SDK**: Version **1.20.1** or later
 - **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
 - **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
 
@@ -54,10 +55,10 @@ Add the following dependencies to your `build.gradle`:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.63.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -68,10 +69,10 @@ Add the following dependencies to your `build.gradle.kts`:
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation("dev.openfeature:sdk:1.18.2")
+    implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.57.0")
+    implementation("com.datadoghq:dd-openfeature:1.63.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -85,19 +86,23 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>dev.openfeature</groupId>
         <artifactId>sdk</artifactId>
-        <version>1.18.2</version>
+        <version>1.20.1</version>
     </dependency>
 
     <!-- Datadog OpenFeature Provider -->
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.57.0</version>
+        <version>1.63.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+The Gradle and Maven installation examples pin specific versions of `dd-openfeature` and the OpenFeature SDK. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+
+To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
 ## Configuration
 
@@ -686,3 +691,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
 [6]: /agent/configuration/agent-commands/
 [7]: /account_management/api-app-keys/#api-keys
+[8]: /feature_flags/guide/server_flag_evaluation_metrics/

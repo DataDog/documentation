@@ -80,5 +80,5 @@ Create a case through the [API endpoint][5].
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case
-[6]: /service_management/workflows/trigger/
+[6]: /actions/workflows/trigger/
 [7]: /incident_response/case_management/customization

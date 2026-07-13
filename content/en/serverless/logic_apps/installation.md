@@ -34,7 +34,7 @@ Follow the instructions in the [Azure Automated Log Forwarding guide][1] to inst
 Add `service` and `env` tags to your Logic Apps to organize and filter your workflows in Datadog.
 
 1. In the Azure Portal, open your Logic App
-2. Navigate to the **Tags** section
+2. Navigate to the {{< ui >}}Tags{{< /ui >}} section
 3. Add the following tags:
    - `env`: The environment name (for example, `dev`, `staging`, or `prod`)
    - `service`: The service name for your Logic App
@@ -63,8 +63,8 @@ Use Live Search in Datadog APM to verify that traces are being received:
 
 To control which traces are retained beyond the default live search period, add a retention filter:
 
-1. In Datadog, search for **Retention Filters** (use Cmd+K and type "retention filters")
-2. Click **Add Retention Filter**
+1. In Datadog, search for {{< ui >}}Retention Filters{{< /ui >}} (use Cmd+K and type "retention filters")
+2. Click {{< ui >}}Add Retention Filter{{< /ui >}}
 3. Set the filter query to `operation_name:azure.logicapps`
 4. Add any additional filters for your service, such as `service:<SERVICE_NAME>` and `env:<ENV_NAME>`
 5. Configure the retention rate based on your needs
@@ -81,9 +81,9 @@ See [Trace Retention][5] for more information.
 
 To enable searching and analyzing historic Logic Apps logs, create a dedicated log index:
 
-1. In Datadog, search for **Indexes** (use Cmd+K and type "index")
-2. Navigate to **Logs > Configuration > Indexes**
-3. Click **New Index**
+1. In Datadog, search for {{< ui >}}Indexes{{< /ui >}} (use Cmd+K and type "index")
+2. Navigate to {{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > {{< ui >}}Indexes{{< /ui >}}
+3. Click {{< ui >}}New Index{{< /ui >}}
 4. Set the filter to `@properties.resource.workflowId:*`
 5. Configure the index name and retention settings
 
@@ -99,8 +99,8 @@ See [Log Indexes][6] for more information.
 
 After invoking your Logic App:
 
-1. In Datadog, go to [**APM > Traces**][4].
-2. Select **Live Search** in the upper right corner.
+1. In Datadog, go to [{{< ui >}}APM > Traces{{< /ui >}}][4].
+2. Select {{< ui >}}Live Search{{< /ui >}} in the upper right corner.
 3. Search for `operation_name:azure.logicapps` to find your traces.
 
 If you cannot see your traces, see [Troubleshooting][7].

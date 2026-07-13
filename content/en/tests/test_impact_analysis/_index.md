@@ -65,15 +65,15 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-After you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Optimization settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
+After you have set up your Datadog library for Test Impact Analysis, configure it from [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
 Test Impact Analysis can be configured at three levels, and lower levels can override values from the level above:
 
-- **Organization defaults**: Apply to every repository unless overridden. Open **CI/CD Optimization** > **Settings** > **Repositories**, then select the **Organization** tab.
-- **Repository**: Overrides organization defaults for a specific repository. Open **CI/CD Optimization** > **Settings** > **Repositories**, select the **Repository-specific** tab, and choose a repository.
+- **Organization defaults**: Apply to every repository unless overridden. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, then select the {{< ui >}}Organization{{< /ui >}} tab.
+- **Repository**: Overrides organization defaults for a specific repository. Open {{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}, select the {{< ui >}}Repository-specific{{< /ui >}} tab, and choose a repository.
 - **Test service**: Overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
 
-At the repository and test service levels, each setting can either **Inherit** the value from the level above or be set to a **Custom** value at the current level.
+At the repository and test service levels, each setting can either {{< ui >}}Inherit{{< /ui >}} the value from the level above or be set to a {{< ui >}}Custom{{< /ui >}} value at the current level.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." style="width:80%" >}}
 
@@ -102,6 +102,22 @@ When you specify a set of tracked files, Test Impact Analysis runs all tests if 
 All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Select branches to exclude and tracked files." style="width:80%" >}}
+
+## Code coverage backfilling
+
+If you use [Code Coverage][10] and Test Impact Analysis together, reported overall coverage can be skewed because Test Impact Analysis skips tests that do not need to run for the code change.
+
+Code coverage backfilling adjusts the total reported coverage to include tests or suites that were skipped, so Test Impact Analysis savings do not distort coverage totals.
+
+Code coverage backfilling is supported for Java, .NET, Go, and JavaScript. It is not supported for Ruby, Python, or Swift.
+
+### Java, .NET, and Go
+
+With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
+
+### JavaScript
+
+With `dd-trace-js`, backfilling requires uploading the code coverage report. Enable code coverage upload in the [organization-level CI/CD Optimization settings][11] so the Datadog library adjusts the total reported coverage to include skipped tests or suites.
 
 ## Explore test sessions
 
@@ -136,3 +152,5 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [7]: https://app.datadoghq.com/ci/test-runs
 [8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
 [9]: /integrations/github/
+[10]: /code_coverage/
+[11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization

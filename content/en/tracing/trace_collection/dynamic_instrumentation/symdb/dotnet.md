@@ -25,7 +25,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
 
 1. Set the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true` environment variable.
 2. Specify the `DD_SERVICE` and `DD_VERSION` [Unified Service Tags][5].
-3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][4] page.
 
 ## Additional configuration
 

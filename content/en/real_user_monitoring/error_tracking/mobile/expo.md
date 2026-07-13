@@ -33,7 +33,7 @@ With this feature, you can access the following features:
 
 In order to symbolicate your stack traces and deobfuscate Android crashes, upload your .dSYM, Proguard mapping files and source maps to Datadog using the `expo-datadog` config plugin.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -148,7 +148,7 @@ If you are using EAS to build your Expo application, set `cli.requireCommit` to 
 ```
 ### List uploaded source maps
 
-See the [RUM Debug Symbols][4] page to view all uploaded symbols.
+See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page to view all uploaded symbols.
 
 ## Limitations
 
@@ -169,8 +169,8 @@ To test your implementation:
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
-4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
@@ -191,7 +191,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [{{< ui >}}Error Tracking{{< /ui >}}][1] page for the error to appear.
 ```
 
 ## Additional configuration options
