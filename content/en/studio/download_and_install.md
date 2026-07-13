@@ -1,21 +1,30 @@
 ---
-title: What is Studio?
-description: 
+title: Download and Install
+description: Download and install Datadog Studio on macOS.
 ---
 
-Most coding tools help you build locally but stop there, leaving you to guess how your code will actually perform once it's live. Datadog Studio completes the loop by connecting your local development environment directly to your production telemetry. It provides a continuous feedback loop that helps you ship with confidence, ensuring what you build locally works exactly as intended in the real world.
+Choose your preferred installation method.
 
-Studio is fully agent-agnostic, meaning it integrates seamlessly with your existing tools like Claude Code, Cursor, GitHub Copilot, or any other agent you prefer. You gain the power of Datadog observability without being locked into a single workflow.
+## Option 1: Direct download
 
-Studio organizes your entire development workflow, from tracking coding sessions to identifying production issues. It simplifies your stack by bundling the core tools you need: Error Tracking, Metrics, Logs, Product Analytics, and Session Replay. With its built-in AI agent, you can chat directly with your workspace to manage your workflow, debug issues, and iterate on your product faster.
+Download [Datadog Studio for macOS][1].
 
-{{< img src="studio/studio-overview-dark.png" alt="Your image description" style="width:100%;" >}}
+## Option 2: Homebrew
 
-Ready to see it in action? Let's get you set up at [Download & Install][1].
+If you use Homebrew, install the latest release through your terminal:
 
-## Further Reading
+```shell
+brew install --cask datadog-studio
+```
+
+## Get started
+
+1. Open Datadog Studio from your Applications folder.
+2. Sign in with your Datadog credentials.
+3. Select your project folder to begin instrumenting your workspace.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /studio/download_and_install
-
+[1]: https://app-e1df641b6b6052c31d8fc4eb69231d51.datadoghq.com/studio

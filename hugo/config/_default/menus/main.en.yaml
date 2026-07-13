@@ -10696,3 +10696,44 @@ menu:
       identifier: help_top_level
       parent: administration_heading
       weight: 40000
+    - name: Studio
+      identifier: studio
+      url: studio/
+      pre: bits-ai
+      parent: essentials_heading
+      weight: 15000
+    - name: Download and Install
+      identifier: studio_download_and_install
+      url: studio/download_and_install/
+      parent: studio
+      weight: 1
+    - name: "Quickstart"
+      identifier: studio_quickstart
+      url: studio/quickstart/
+      parent: studio
+      weight: 2
+    - name: Core Concepts
+      identifier: studio_core_concepts
+      url: studio/core_concepts/
+      parent: studio
+      weight: 3
+    - name: How Studio works
+      identifier: studio_how_studio_works
+      url: studio/core_concepts/how_studio_works/
+      parent: studio_core_concepts
+      weight: 1
+    - name: Telemetry and collection
+      identifier: studio_telemetry_and_collection
+      url: studio/core_concepts/telemetry_and_collection/
+      parent: studio_core_concepts
+      weight: 2
+    - name: Local dev mode compared to production
+      identifier: studio_local_dev_mode_vs_production
+      url: studio/core_concepts/local_dev_mode_vs_production/
+      parent: studio_core_concepts
+      weight: 3
+    - name: Coding sessions and trajectories
+      identifier: studio_coding_sessions_and_trajectories
+      url: studio/core_concepts/coding_sessions_and_trajectories/
+      parent: studio_core_concepts
+      weight: 4
