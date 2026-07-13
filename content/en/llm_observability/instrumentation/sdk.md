@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Agent Observability SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
+{{< prodname >}}Agent Observability{{< /prodname >}} SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
 
 ## Setup
 
