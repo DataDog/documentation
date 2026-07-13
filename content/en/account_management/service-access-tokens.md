@@ -8,14 +8,10 @@ further_reading:
     - link: "/account_management/personal-access-tokens/"
       tag: "Documentation"
       text: "Personal Access Tokens"
-    - link: "/account_management/cloud_provider_authentication/"
+    - link: "/account_management/workload_identity_federation/"
       tag: "Documentation"
-      text: "Cloud-Based Authentication"
+      text: "Workload Identity Federation"
 ---
-
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Service Access Tokens are in Preview.
-{{< /callout >}}
 
 ## Overview
 
@@ -37,7 +33,7 @@ With SATs, you can:
 | Time-to-live (TTL) | Optional; 1 day, 1 month, 1 year, Never, or Custom | Required; 1 day to 1 year | No expiration |
 | Scoped by default | Yes; scopes are mandatory | Yes; scopes are mandatory | Optional; unscoped by default |
 | Standalone authentication | Yes; no API key pairing needed | Yes; no API key pairing needed | No; requires an API key |
-| Identifiable prefix | `ddpat_` | `ddpat_` | `ddapp_` (new) |
+| Identifiable prefix | `ddsat_` | `ddpat_` | `ddapp_` (new) |
 | Visible in | Service account details, Organization Settings > Access Tokens | Personal Settings > Access Tokens, Organization Settings > Access Tokens | Personal Settings > Application Keys, Organization Settings > Application Keys |
 
 For Personal Access Tokens, see [Personal Access Tokens][2].

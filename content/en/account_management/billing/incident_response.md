@@ -54,6 +54,10 @@ All paid Datadog customers can use Status Pages. Access depends on whether your 
 - **With at least one committed seat**: Full access, including unlimited pages and custom domains.
 - **Without a committed seat**: Limited to one Status Page and no custom domain support.
 
+<div class="alert alert-info">
+If you are a trialing customer who would like full access during trial period, contact your Datadog sales representative or Customer Success Manager.
+</div>
+
 ## Manage seats
 
 The [Seat Management page][1] gives billing admins visibility and control over users who occupy seats for Incident Management, On-Call, or the Incident Response bundle. 

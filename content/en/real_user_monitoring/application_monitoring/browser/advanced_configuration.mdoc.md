@@ -1,6 +1,6 @@
 ---
 title: Advanced Configuration
-description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, and control sampling for your application's needs."
+description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, track unauthenticated users, and control sampling for your application's needs."
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -884,6 +884,21 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
 {% /if %}
+
+### Track unauthenticated users
+
+For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
+
+`usr.anonymous_id` is a randomly generated UUID (v4). It is not derived from any user PII, IP address, device fingerprint, or hardware identifier.
+
+The ID has the following properties:
+
+- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s_v2`).
+- **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
+
+The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
+
+**Note**: `usr.anonymous_id` is enabled by default. To disable it, set [`trackAnonymousUser: false`](https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackanonymoususer) in your `init` config.
 
 ## Account
 
@@ -1789,9 +1804,9 @@ To control which micro frontend's source maps are used, use the [manual attribut
 
 After setup, the `service` and `version` on RUM events identify which micro frontend generated each event. Use these attributes in several places in Datadog:
 
--   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
--   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
--   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
+-   {% ui %}Side panels{% /ui %}: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
+-   {% ui %}RUM Summary dashboard{% /ui %}: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
+-   {% ui %}Custom dashboards{% /ui %}: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
 The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
 

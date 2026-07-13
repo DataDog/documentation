@@ -3,7 +3,7 @@
 ## Overview
 App and API Protection works by leveraging the [Datadog Node.js library](https://github.com/DataDog/dd-trace-js/) to monitor and secure your Node.js service. The library integrates seamlessly with your existing application without requiring code changes.
 
-For detailed compatibility information, including supported Node.js versions, frameworks, and deployment environments, see [Node.js Compatibility Requirements](/security/application_security/setup/nodejs/compatibility).
+For detailed compatibility information, including supported Node.js versions, frameworks, and deployment environments, see [Node.js Compatibility Requirements](/security/application_security/setup/compatibility/nodejs).
 
 {{ if $showSetup }}
 This guide explains how to set up App and API Protection (AAP) for Node.js applications. The setup involves:

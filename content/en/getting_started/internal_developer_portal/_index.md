@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Internal Developer Portal
-description: Unify software metadata, telemetry, and workflows with Software Catalog, Scorecards, Self Service Actions, and engineering reports.
+description: Unify software metadata, telemetry, and workflows with Catalog, Scorecards, Self Service Actions, and engineering reports.
 aliases: 
   - /getting_started/service_catalog
   - /getting_started/software_catalog/
@@ -13,7 +13,7 @@ further_reading:
       text: 'IDP Documentation'
     - link: 'https://learn.datadoghq.com/courses/managing-software-catalog'
       tag: 'Learning Center'
-      text: 'Managing Services with the Software Catalog'
+      text: 'Managing Services with the Catalog'
     - link: 'https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/'
       tag: 'Blog'
       text: 'Simplify microservice governance with the Datadog Service Catalog'
@@ -25,7 +25,7 @@ further_reading:
 
 Datadog's Internal Developer Portal (IDP) helps you unify software metadata, live telemetry, and developer workflows in a single platform. This guide walks you through setting up each core IDP component:
 
-- [Software Catalog][1]: Real-time inventory of entities and environments, enriched with ownership and operational metadata.
+- [Catalog][1]: Real-time inventory of entities and environments, enriched with ownership and operational metadata.
 - [Scorecards][2]: Measure adoption of engineering best practices using rules-based evaluations.
 - [Self-Service Actions][3]: Enable developers to execute standardized tasks with a single click.
 - [Engineering Reports][4]: Visualize quality, reliability, and compliance metrics across your stack.
@@ -38,9 +38,9 @@ Whether you're starting from scratch or integrating with existing systems like B
 
 If you have not already, create a [Datadog account][6]. 
 
-## Step 1: Populate Software Catalog 
+## Step 1: Populate Catalog 
 
-IDP starts with [Software Catalog][1], a real-time inventory of your software architecture's key building blocks. In Datadog, these are called entities—they can represent individual services, APIs, or grouped Systems.
+IDP starts with [Catalog][1], a real-time inventory of your software architecture's key building blocks. In Datadog, these are called entities—they can represent individual services, APIs, or grouped Systems.
 
 You can add entities from:
 
@@ -97,7 +97,7 @@ apiVersion: v3
       - service:otherservice
 {{< /code-block >}}
 
-Read the [Software Catalog setup guide][11] to learn how to add or import entities, and review the [entity model reference][12] for schema details.
+Read the [Catalog setup guide][11] to learn how to add or import entities, and review the [entity model reference][12] for schema details.
 
 ## Step 2: Evaluate entity quality with Scorecards
 
@@ -162,18 +162,18 @@ For setup and customization tips, read the [Overview Pages documentation][22].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /internal_developer_portal/software_catalog/
+[1]: /internal_developer_portal/catalog/
 [2]: /internal_developer_portal/scorecards/
 [3]: /internal_developer_portal/self_service_actions
 [4]: /internal_developer_portal/eng_reports
 [5]: /internal_developer_portal/overview_pages
 [6]: https://www.datadoghq.com/
-[7]: /internal_developer_portal/software_catalog/set_up/discover_entities/
-[8]: /internal_developer_portal/software_catalog/set_up/create_entities/
+[7]: /internal_developer_portal/catalog/set_up/discover_entities/
+[8]: /internal_developer_portal/catalog/set_up/create_entities/
 [9]: https://app.datadoghq.com/software
-[10]: /internal_developer_portal/software_catalog/set_up/import_entities/
-[11]: /internal_developer_portal/software_catalog/set_up/
-[12]: /internal_developer_portal/software_catalog/entity_model/entity_types/
+[10]: /internal_developer_portal/catalog/set_up/import_entities/
+[11]: /internal_developer_portal/catalog/set_up/
+[12]: /internal_developer_portal/catalog/entity_model/native_entities/
 [13]: https://app.datadoghq.com/software/scorecards
 [14]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [16]: https://app.datadoghq.com/app-builder/apps/edit?startModalOpen=false&template=create-new-s3-bucket&viewMode=templatePreview

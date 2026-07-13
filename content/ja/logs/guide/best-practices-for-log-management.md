@@ -217,7 +217,7 @@ If you want to prevent data leaks and limit non-compliance risks, use Sensitive 
 [14]: https://app.datadoghq.com/logs
 [15]: /ja/logs/explorer/search/
 [16]: /ja/logs/indexes/#set-daily-quota
-[17]: /ja/service_management/events/explorer/facets
+[17]: /ja/events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /ja/logs/log_configuration/indexes/#exclusion-filters

@@ -13,11 +13,7 @@ further_reading:
   text: "Search Logs"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
-By default, a BYOC Logs cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
+By default, a BYOC (Bring Your Own Cloud) Logs cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
 
 To view and manage your BYOC Logs indexes, navigate to the [BYOC Logs page][1] in Datadog. Select a cluster and click {{< ui >}}View Indexes{{< /ui >}} to access the index configuration.
 

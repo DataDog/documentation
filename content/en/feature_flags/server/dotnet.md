@@ -8,11 +8,17 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/dotnet-core/"
   tag: "Documentation"
   text: ".NET Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog .NET tracer (`dd-trace-dotnet`).
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -32,10 +38,17 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
 
 ## Installation
 
@@ -55,9 +68,25 @@ Or add them to your `.csproj` file:
 </ItemGroup>
 {{< /code-block >}}
 
+If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+dotnet add package OpenTelemetry
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+{{< /code-block >}}
+
+Or add them to your `.csproj` file:
+
+{{< code-block lang="xml" filename="MyProject.csproj" >}}
+<ItemGroup>
+  <PackageReference Include="OpenTelemetry" />
+  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+</ItemGroup>
+{{< /code-block >}}
+
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog .NET tracer's Remote Configuration system to receive flag configurations.
 
 ### Blocking initialization
 
@@ -108,6 +137,8 @@ var client = Api.Instance.GetClient("my-service");
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="csharp" >}}
 using OpenFeature.Model;
@@ -365,6 +396,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
 [5]: /account_management/api-app-keys/#api-keys
+[6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 

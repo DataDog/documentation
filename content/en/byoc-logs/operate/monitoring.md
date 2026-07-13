@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/operate/monitoring/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Dashboards
 
-BYOC Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
+BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
 
 ### Setup
 

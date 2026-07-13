@@ -38,6 +38,9 @@ You can manage custom allocation rules using the [API][4], [Terraform][5], or di
 
    _Example: Untagged support costs, shared database costs._
 
+**Note:** When you define multiple source filters, they are combined with **AND** logic — a cost line must match **all** filter conditions to be selected for allocation. Within a single filter, the `in` and `not in` conditions use **OR** logic, matching **any** of the listed values. For example, filtering by `aws_product is ec2` and `aws_usage_type in [BoxUsage:m7g.16xlarge, BoxUsage:c6g.8xlarge]` selects costs where the product is EC2 **AND** the usage type is either of those instance types. To apply OR logic across different tags, create separate allocation rules.
+
+
 ### Step 2 - Choose an allocation method
 
 Below is a description of how each allocation method works with examples.
@@ -87,6 +90,8 @@ You can also specify how cost proportions should be partitioned to ensure segmen
 {{% /tab %}}
 
 {{% tab "Dynamic by metric" %}}
+
+<div class="alert alert-info">The Dynamic by Metric allocation method requires a <a href="https://www.datadoghq.com/pricing/?product=cloud-cost-management#products">CCM Enterprise plan</a>.</div>
 
 {{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:70%;" >}}
 

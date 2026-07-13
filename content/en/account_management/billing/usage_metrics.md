@@ -32,6 +32,11 @@ Estimated usage metrics are generally available for the following usage types:
 | Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes.<br/><br/>**Note**: This metric tracks both ECS Fargate and EKS Fargate usage. |
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
+| (Preview) Indexed Custom Metric Points | `datadog.estimated_usage.metrics.points.indexed`, `datadog.estimated_usage.metrics.points.indexed.by_tag`, `datadog.estimated_usage.metrics.points.indexed.hourly` | Estimated indexed points for custom metrics. |
+| (Preview) Ingested Custom Metric Points | `datadog.estimated_usage.metrics.points.ingested`, `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated ingested points for custom metrics. |
+| (Preview) Billable Metric Names | `datadog.estimated_usage.billable.metrics` | Count of metric names with more than 100 indexed points, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Billable Indexed Points | `datadog.estimated_usage.billable.points` | Sum of indexed points above the included 10M points per metric name, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | Comparison of total ingested points to total indexed points. Applies to organizations on [Metric Name Pricing][7]. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
@@ -78,6 +83,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
 | Code Security Secret Scanning Committers  | `datadog.estimated_usage.code_security.secrets.committers`  | Secret Scanning committers seen from (calendar) month-to-date.  |
 | Code Security IaC Committers  | `datadog.estimated_usage.code_security.iac.committers`  | Infrastructure as Code (IaC) committers seen from (calendar) month-to-date.  |
+| Incident Management Seats  | `datadog.estimated_usage.incident_management.seats`  | User seats for standalone Incident Management.  |
+| Incident Management Monthly Active Users  | `datadog.estimated_usage.incident_management.monthly_active_users`  | Incident Management unique active users seen from (calendar) month-to-date (legacy billing).  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
@@ -112,4 +119,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
 [6]: /account_management/billing/usage_attribution/
+[7]: /account_management/billing/metric_name_pricing/
 

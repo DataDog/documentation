@@ -12,17 +12,13 @@ aliases:
   - /cloudprem/configure/lambda/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 <div class="alert alert-warning">Lambda search offloading is an experimental feature.</div>
 
 <div class="alert alert-info">Lambda search offloading is only available on AWS.</div>
 
 ## Overview
 
-BYOC Logs can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
+BYOC (Bring Your Own Cloud) Logs can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
 This allows BYOC Logs to handle traffic spikes without provisioning additional searcher nodes.
 
 ## Startup validation

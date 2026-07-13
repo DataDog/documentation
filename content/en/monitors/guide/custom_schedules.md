@@ -24,9 +24,9 @@ Monitor Custom Schedules are supported on events, logs, and metrics monitors wit
 
 {{< img src="/monitors/guide/custom_schedules/add_custom_schedule.png" alt="Button to add custom schedule in the monitor configuration" style="width:100%;" >}}
 
-Click **Add Custom Schedule** to configure your evaluation frequency.
+Click {{< ui >}}Add Custom Schedule{{< /ui >}} to configure your evaluation frequency.
 
-<div class="alert alert-danger">When a custom schedule is enabled on a monitor, the custom schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation. The <strong>Remove non-reporting groups</strong> setting is unavailable. To work around this, create a new monitor without custom schedules.
+<div class="alert alert-danger">When a custom schedule is enabled on a monitor, the custom schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation. The {{< ui >}}Remove non-reporting groups{{< /ui >}} setting is unavailable. To work around this, create a new monitor without custom schedules.
 </div>
 
 {{< tabs >}}
@@ -62,7 +62,7 @@ For example, the following monitor checks on the first day of each month whether
 
 Recurrence rule (RRULE) is a property name from the [iCalendar RFC][1], which is the standard for defining recurring events. Use the [official RRULE generator][2] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
 
-To write a custom RRULE for your monitor, click **Use RRULE**.
+To write a custom RRULE for your monitor, click {{< ui >}}Use RRULE{{< /ui >}}.
 
 **Notes**:
 - Attributes specifying the duration in RRULE are not supported (for example, DTSTART, DTEND, DURATION).

@@ -47,7 +47,7 @@ To create inferred spans, Azure API Management must pass the following headers t
 
 ### Inbound policy
 
-Add the following policy to the **inbound** section of your API in Azure API Management so these headers are set on requests to your backend:
+Add the following policy to the {{< ui >}}inbound{{< /ui >}} section of your API in Azure API Management so these headers are set on requests to your backend:
 
 ```xml
 <set-header name="x-dd-proxy" exists-action="override">
@@ -70,7 +70,7 @@ Add the following policy to the **inbound** section of your API in Azure API Man
 </set-header>
 ```
 
-You can add this policy at the API level in the Azure portal under **API Management** > your API > **Design** → **Inbound processing** → **Code view** (see [Set or edit Azure API Management policies][4]), using the Azure API Management REST API, or policies in your API definition.
+You can add this policy at the API level in the Azure portal under {{< ui >}}API Management{{< /ui >}} > your API > {{< ui >}}Design{{< /ui >}} → {{< ui >}}Inbound processing{{< /ui >}} → {{< ui >}}Code view{{< /ui >}} (see [Set or edit Azure API Management policies][4]), using the Azure API Management REST API, or policies in your API definition.
 
 ## Update sampling rules
 

@@ -118,7 +118,7 @@ También puedes enviar notificaciones a Slack desde [monitores][3] y [eventos][4
 [1]: https://app.datadoghq.com/integrations/slack
 [2]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
 [3]: https://docs.datadoghq.com/monitors/notifications/
-[4]: https://docs.datadoghq.com/service_management/events/explorer/notifications/
+[4]: https://docs.datadoghq.com/events/explorer/notifications/
 {{% /tab %}}
 {{< /tabs >}}
 

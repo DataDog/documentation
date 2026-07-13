@@ -146,7 +146,7 @@ In the {{< ui >}}Notifications{{< /ui >}} section, use the {{< ui >}}Recipients{
 
 ##### Choose a statistical analysis plan
 
-Configure how Datadog calculates statistical significance for your experiment.
+Configure how Datadog calculates statistical significance for your experiment. For guidance on choosing a method, see [Analysis Methods][11].
 
 If your organization has configured default settings, a {{< ui >}}COMPANY DEFAULT{{< /ui >}} badge appears and Datadog pre-populates the settings.
 
@@ -198,7 +198,7 @@ See [Reading Experiment Results][5] to review your data.
 
 [1]: https://app.datadoghq.com/product-analytics/experiments
 [2]: /experiments/defining_metrics
-[3]: /experiments/minimum_detectable_effect
+[3]: /experiments/statistics/minimum_detectable_effect
 [4]: /getting_started/feature_flags
 [5]: /experiments/reading_results
 [6]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
@@ -206,4 +206,4 @@ See [Reading Experiment Results][5] to review your data.
 [8]: /experiments/
 [9]: /getting_started/feature_flags/#create-your-first-feature-flag
 [10]: https://docs.datadoghq.com/feature_flags/client#context-attribute-requirements
-
+[11]: /experiments/statistics/analysis_methods

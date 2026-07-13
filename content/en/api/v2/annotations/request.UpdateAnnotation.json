@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "color": "green",
+      "description": "Updated annotation.",
+      "page_id": "dashboard:abc-def-xyz",
+      "start_time": 1704067200000,
+      "type": "pointInTime"
+    },
+    "type": "annotation"
+  }
+}

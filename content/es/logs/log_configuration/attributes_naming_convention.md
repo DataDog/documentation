@@ -1,114 +1,112 @@
 ---
 aliases:
 - /es/logs/processing/attributes_naming_convention/
-description: Obtener más información sobre atributos y compatibilidad de la convención
-  de nomenclatura
+description: Aprenda sobre los atributos y cómo soportar una convención de nombres
 further_reading:
 - link: logs/log_configuration/pipelines
   tag: Documentación
-  text: Descubrir los pipelines de Datadog
+  text: Descubra Datadog Pipelines
 - link: logs/log_configuration/processors
   tag: Documentación
-  text: Consultar la lista de todos los procesadores disponibles
+  text: Consulte la lista completa de procesadores disponibles
 - link: logs/logging_without_limits
   tag: Documentación
-  text: Logging Without Limits
+  text: Registro sin límites
 - link: logs/explorer
   tag: Documentación
-  text: Aprender a explorar tus logs
+  text: Aprenda cómo explorar sus registros
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: Blog
-  text: Uso de consultas con notación de CIDR para filtrar tus logs de tráfico de
-    red
-title: Atributos y asignación de alias
+  text: Utilice consultas en notación CIDR para filtrar los registros de tráfico de
+    su red
+title: Atributos y Alias
 ---
+## Resumen {#overview}
 
-## Información general
+Centralizar registros de diversas tecnologías y aplicaciones puede generar decenas o cientos de atributos diferentes en un entorno de Log Management, especialmente cuando muchos equipos están trabajando en el mismo entorno
 
-Centralizar logs a partir de varias tecnologías y aplicaciones puede generar decenas o centenas de atributos diferentes en un entorno Log Management, especialmente cuando muchos equipos trabajan en el mismo entorno.
+Por ejemplo, la IP del cliente puede tener diversos atributos de registro, como `clientIP`, `client_ip_address`, `remote_address`, `client.ip` y así sucesivamente El tiempo de ejecución de una solicitud puede denominarse `exec_time`, `request_latency`, `request.time_elapsed` y así sucesivamente
 
-Por ejemplo, una IP de cliente puede tener varios atributos de logs, como `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. Es posible referirse a un tiempo de ejecución como `exec_time`, `request_latency`, `request.time_elapsed`, etc.
+Utilice **atributos** y **aliasing** para unificar su entorno de registros
 
-Utiliza los **atributos** y la **asignación de alias** para unificar el entorno de tus logs.
+## Tipos de atributos y aliasing {#attribute-types-and-aliasing}
 
-## Tipos de atributos y asignación de alias
+Los atributos prescriben [facetas de registros][1] y [etiquetas][2], que se utilizan para filtrar y buscar en el Explorador de Registros.
 
-Los atributos imponen [facetas de logs][1] y [etiquetas (tags)][2] que se utilizan para filtrar y buscar en el Explorador de logs.
+  * [**Atributos reservados**](#reserved-attributes) son ingeridos automáticamente.
 
-  * Los [**atributos reservados**](#reserved-attributes) se consumen automáticamente.
+  * [**Atributos estándar**](#standard-attributes) son la columna vertebral de la convención de nombres para su organización Hay un conjunto predeterminado de atributos estándar disponibles en [la aplicación][3]. Sin embargo, esta lista puede ser personalizada para crear una **convención de nombres** para su equipo
 
-  * Los [**atributos estándar**](#standard-attributes) son la columna vertebral de la convención de nomenclatura de tu organización. Existe un conjunto predeterminado de atributos estándar disponibles en [la aplicación][3]. Sin embargo, esta lista puede personalizarse para crear una **convención de nomenclatura** para tu equipo.
+  * Utilice [**aliasing**](#aliasing) una vez que haya implementado una convención de nombres con atributos estándar o si está tratando de crear una faceta estándar única a partir de múltiples fuentes de registro Por ejemplo, siga a los clientes más afectados por latencias en una infraestructura híbrida de [Apache][4] y [Amazon Cloud Front][5], utilizando la faceta estándar `Network Client IP` junto con la estándar `duration` El aliasing permite implementar una convención de nombres sin tener que cambiar la pila técnica de un equipo
 
-  * Utiliza la [**asignación de alias**](#aliasing) una vez que hayas implementado una convención de nomenclatura con atributos estándar o si estás intentando crear una faceta estándar única a partir de varias fuentes de logs. Por ejemplo, realiza un seguimiento de los clientes más afectados por las latencias en una infraestructura híbrida [Apache][4] y [Amazon Cloud Front][5], utilizando la faceta estándar `Network Client IP` junto con la `duration` estándar. La asignación de alias te permite implementar una convención de nomenclatura, sin tener que cambiar la pila técnica de un equipo.
+## Atributos reservados {#reserved-attributes}
 
-## Atributos reservados
+A continuación se presenta una lista de atributos reservados que se ingieren automáticamente con los registros.
 
-A continuación se muestra una lista de los atributos reservados que se consumen automáticamente con los logs.
-
-**Nota**: Si también estás recopilando trazas o métricas, se recomienda configurar el etiquetado unificado de servicios. Esta configuración combina la telemetría de Datadog mediante el uso de tres etiquetas estándar: `env`, `service` y `version`. Para obtener más información, consulta la documentación específica del [etiquetado unificado de servicios][6].
+**Nota**: Si también está recopilando trazas o métricas, se recomienda configurar unified service tagging Esta configuración une la telemetría de Datadog a través del uso de tres etiquetas estándar: `env`, `service` y `version`. Consulte la documentación dedicada a unified service tagging para más información
 
 | Atributo | Descripción                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | El nombre del host de origen tal y como se define en las métricas. Datadog recupera automáticamente las etiquetas de host correspondientes del host coincidente en Datadog y las aplica a tus logs. El Agent configura este valor automáticamente.                          |
-| `source`  | Corresponde al nombre de la integración, la tecnología de la que procede el log. Cuando coincide con un nombre de integración, Datadog instala automáticamente los analizadores y las facetas correspondientes. Por ejemplo, `nginx`, `postgresql`, etc. |
-| `status`  | Corresponde al nivel/a la severidad de un log. Se utiliza para definir [patrones][7] y tiene un diseño específico en la interfaz de usuario de los logs de Datadog.                                                                                                     |
-| `service` | El nombre de la aplicación o del servicio que genera eventos de logs. Se utiliza para pasar de logs a APM, así que asegúrate de definir el mismo valor cuando utilices ambos productos.                                                                |
-| `trace_id` | Corresponde al ID de rastreo utilizado para trazas. Se utiliza para [correlacionar tu log con su traza][8].                                                                                                                                 |
-| `message` | Por defecto, Datadog consume el valor del atributo `message` como cuerpo de la entrada del log. Ese valor se resalta y se muestra en Live Tail, donde se indexa para búsquedas de texto completo.                                    |
+| `host`    | El nombre del host de origen según se define en las métricas. Datadog recupera automáticamente las etiquetas de host correspondientes del host coincidente en Datadog y las aplica a sus registros El Agente establece este valor automáticamente.                          |
+| `source`  | Esto corresponde al nombre de la integración, la tecnología de la cual se originó el registro. Cuando coincide con un nombre de integración, Datadog instala automáticamente los analizadores y facetas correspondientes. Por ejemplo, `nginx`, `postgresql`, y así sucesivamente. |
+| `status`  | Esto corresponde al nivel/severidad de un registro. Se utiliza para definir [patrones][7] y tiene un diseño dedicado en la interfaz de usuario de registros de Datadog.                                                                                                     |
+| `service` | El nombre de la aplicación o servicio que genera los eventos de registro. Se utiliza para cambiar de Registros a APM, así que asegúrese de definir el mismo valor cuando utilice ambos productos                                                                |
+| `trace_id` | Esto corresponde al ID de traza utilizado para las trazas. Se utiliza para [correlacionar su registro con su traza][8]                                                                                                                                 |
+| `message` | Por defecto, Datadog ingiere el valor del atributo `message` como el cuerpo de la entrada de registro. Ese valor se resalta y se muestra en Live Tail, donde se indexa para búsqueda de texto completo.                                    |
 
-## Atributos estándar
+## Atributos estándar {#standard-attributes}
 
-Las integraciones de logs se basan de forma nativa en un [conjunto predeterminado][9] de atributos estándar.
+Las integraciones de registro dependen nativamente de un [conjunto predeterminado][9] de atributos estándar.
 
-La tabla de atributos estándar viene con un conjunto de [atributos estándar predefinidos](#default-standard-attribute-list). Puedes añadir a la lista tus propios atributos y editar o eliminar los atributos estándar existentes.
+La tabla de atributos estándar viene con un conjunto de [atributos estándar predefinidos](#default-standard-attribute-list). Puede agregar a esa lista sus propios atributos, y editar o eliminar los atributos estándar existentes
 
-### Crear un nuevo atributo estándar
-Los **usuarios administradores** pueden seleccionar la lista de atributos estándar:
-1. Ve a la [página de configuración][3] del atributo estándar.
-1. Haz clic en **New Standard Attribute** (Nuevo atributo estándar).
-1. Define el atributo estándar:
-    - `Path`: La ruta de los atributos estándar tal y como los encontrarías en tu JSON (por ejemplo, network.client.ip).
-    - `Type`(`string`, `integer`, `double`, `boolean`): tipo de atributo, que se utiliza para eliminar elementos de la lista de reasignación.
-    - `Description`: Descripción legible del atributo.
-    - (Opcional)`Remapping list`: Lista separada por comas de los atributos no conformes que deben reasignarse al atributo estándar.
+### Cree un nuevo atributo estándar {#create-a-new-standard-attribute}
+**Los usuarios administradores** pueden curar la lista de atributos estándar:
+1. Navegue a la [página de configuración de atributos estándar][3]
+1. Haga clic en {{< ui >}}New Standard Attribute{{< /ui >}}
+1. Defina el atributo estándar:
+    - {{< ui >}}Path{{< /ui >}}: La ruta de los atributos estándar como la encontraría en su JSON (por ejemplo, network.client.ip)
+    - {{< ui >}}Type{{< /ui >}}: (`string`, `integer`, `double`, `boolean`): El tipo del atributo, que se utiliza para convertir elementos de la lista de remapeo.
+    - {{< ui >}}Description{{< /ui >}}: Descripción legible por humanos del atributo.
+    - (Opcional) {{< ui >}}Remapping list{{< /ui >}}: Lista separada por comas de atributos no conformes que deben ser remapeados al atributo estándar.
 
-### Lista de atributos estándar por defecto
+### Lista de atributos estándar por defecto {#default-standard-attribute-list}
 
-Consulta la lista completa lista de [atributos estándar por defecto de Log Management][9], que se divide en los dominios funcionales:
-
-| Atributo estándar               | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+Consulte la lista completa de [Log Management Default Standard Attributes][9], que se divide en los dominios funcionales:
+  
+| Atributo Estándar               | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Red/Comunicaciones][10]     | Estos atributos están relacionados con los datos utilizados en la comunicación de red. Todos los campos y todas las métricas llevan el prefijo `network`.                                                                                                                                                                                                                                                                                                                                                                             |
-| [Geolocalización][11]                | Estos atributos están relacionados con la geolocalización de las direcciones IP utilizadas en la comunicación de red. Todos los campos llevan el prefijo `network.client.geoip` o `network.destination.geoip`.                                                                                                                                                                                                                                                                                                                     |
-| [Solicitudes HTTP][12]              | Estos atributos están relacionados con datos utilizados habitualmente en solicitudes y accesos HTTP. Todos los atributos llevan el prefijo `http`. Las integraciones típicas que se basan en estos atributos incluyen [Apache][4], Rails, [AWS CloudFront][13], servidores de aplicaciones web, etc. Los atributos de detalles de URL llevan el prefijo `http.url_details`. Estos atributos proporcionan detalles sobre las partes analizadas de la URL HTTP. Son generados por el [analizador de URL][14].                             |
-| [Código fuente][15]                | Estos atributos están relacionados con los datos utilizados cuando se genera un log o un error utilizando un generador de logs en una aplicación personalizada. Todos los atributos llevan el prefijo `logger` o `error`. Las integraciones típicas que se basan en estos atributos incluyen Java, Node.js, .NET, Golang, Python, etc.                                                                                                                                                                        |
-| [Base de datos] [16]                   | Las integraciones típicas que se basan en estos atributos son  [Cassandra][17], [MySQL][18], [RDS][19], [Elasticsearch][20], etc.                                                                                                                                                                                                                                                                                                                                                                         |
-| [Rendimiento][21]                | Estos atributos están relacionados con las métricas de rendimiento. Datadog recomienda [reasignar][22] cualquier duración de tus logs con este atributo, ya que se muestran y se utilizan como [medida][1] por defecto para la [búsqueda de trazas][23].                                                                                                                                                                                                                                                                           |
-| [Atributos relacionados con el usuario][24]    | Todos los atributos y todas las medidas llevan el prefijo `usr`.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| [Syslog y trasvasadores de logs][25]    | Estos atributos están relacionados con los datos añadidos por un syslog o un agente para el envío de logs. Todos los campos y métricas llevan el prefijo `syslog`. Las integraciones que se basan en estos incluyen [Rsyslog][26], [NxLog][27], [Syslog-ng][28], [FluentD][29] y [Logstash][30].                                                                                                                                                                                                                                              |
-| [DNS][31]                        | Todos los atributos y todas las medidas llevan el prefijo `dns`.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| [Eventos][32]                     | Todos los atributos llevan el prefijo `evt`.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [Red/comunicaciones][10]     | Estos atributos están relacionados con los datos utilizados en la comunicación de red. Todos los campos y métricas están precedidos por `network`.                                                                                                                                                                                                                                                                                                                                                                             |
+| [Geolocalización][11]                | Estos atributos están relacionados con la geolocalización de direcciones IP utilizadas en la comunicación de red. Todos los campos están precedidos por `network.client.geoip` o `network.destination.geoip`.                                                                                                                                                                                                                                                                                                                     |
+| [Solicitudes HTTP][12]              | Estos atributos están relacionados con datos comúnmente utilizados en solicitudes y accesos HTTP. Todos los atributos están precedidos por `http`. Las integraciones típicas que dependen de estos atributos incluyen [Apache][4], Rails, [AWS CloudFront][13], servidores de aplicaciones web, y así sucesivamente. Los atributos de detalles de URL están precedidos por `http.url_details`. Estos atributos proporcionan detalles sobre las partes analizadas de la URL HTTP. Son generados por el [analizador de URL][14].                             |
+| [Código fuente][15]                | Estos atributos están relacionados con los datos utilizados cuando se genera un registro o un error utilizando un registrador en una aplicación personalizada. Todos los atributos están precedidos ya sea por `logger` o `error`. Las integraciones típicas que dependen de estos atributos son Java, Node.js, .NET, Golang, Python, y así sucesivamente.                                                                                                                                                                        |
+| [Base de datos][16]                   | Las integraciones típicas que dependen de estos atributos son [Cassandra][17], [MySQL][18], [RDS][19], [Elasticsearch][20], y así sucesivamente.                                                                                                                                                                                                                                                                                                                                                                         |
+| [Rendimiento][21]                | Estos atributos están relacionados con métricas de rendimiento. Datadog recomienda [reasignar][22] cualquier duración dentro de sus registros en este atributo, ya que se muestran y utilizan como una [medida][1] predeterminada para la [búsqueda de trazas][23].                                                                                                                                                                                                                                                                           |
+| [Atributos relacionados con el usuario][24]    | Todos los atributos y medidas están precedidos por `usr`.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [Syslog y agentes de envío de registros][25]    | Estos atributos están relacionados con los datos añadidos por un syslog o un agente de envío de registros. Todos los campos y métricas están precedidos por `syslog`. Las integraciones que dependen de estos incluyen [Rsyslog][26], [NxLog][27], [Syslog-ng][28], [Fluentd][29], y [Logstash][30].                                                                                                                                                                                                                                              |
+| [DNS][31]                        | Todos los atributos y medidas están precedidos por `dns`.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [Events][32]                     | Todos los atributos están precedidos por `evt`                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-## Asignación de alias
+## aliasing {#aliasing}
 
-La creación de un alias para un atributo de origen que se asigna a un atributo de destino permite a los logs llevar tanto el atributo de origen como el de destino.
+Crear un alias para un atributo de origen que se mapea a un atributo de destino permite que los registros contengan tanto los atributos de origen como los de destino.
 
-Los usuarios pueden interactuar tanto con el atributo con el alias (origen), como con el atributo estándar (destino). Sin embargo, se [invita][33] a los usuarios a utilizar la faceta estándar, en lugar de la del alias. De este modo, se orienta la convención de nomenclatura y se disuade a los usuarios de crear recursos (como vistas guardadas o dashboards) basados en contenido no estándar.
+Los usuarios pueden interactuar tanto con el atributo alias (origen) como con el atributo estándar (destino) Sin embargo, se recomienda que los usuarios utilicen la faceta estándar en lugar del atributo alias Esto proporciona orientación sobre la convención de nombres y desalienta a los usuarios de crear activos (como vistas guardadas o dashboards) basados en contenido no estándar
 
-**Detalles adicionales sobre la asignación de alias**:
+**Detalles adicionales sobre aliasing**:
 
-- La asignación de alias se produce después de que los pipelines procesan logs. Cualquier atributo extraído o procesado puede utilizarse como fuente de asignación de alias.
-- Datadog impone un tipo de atributo con alias. Si esto no es posible, se omite la asignación de alias.
-- Cuando un log ya lleva el atributo de destino, la asignación de alias anula el valor de ese log.
-- En el caso de un atributo estándar al que se asignan varios atributos con alias, si un log lleva varios de estos atributos de origen, sólo se aplica el alias a uno de estos atributos de origen.
-- Las actualizaciones o adiciones a los atributos estándar sólo se aplican a los logs recientemente consumidos.
-- Los atributos estándar no pueden tener alias.
-- Los atributos sólo pueden llevar alias para atributos estándar.
-- Para respetar la estructura JSON de los logs, no es posible tener un atributo estándar como elemento secundario de otro (por ejemplo, `user` y `user.name` no pueden ser ambos atributos estándar).
+- El aliasing ocurre después de que los registros son procesados por los pipelines. Cualquier atributo extraído o procesado puede ser utilizado como fuente para el aliasing.
+- Datadog aplica el tipo de un atributo asignado como alias. Si esto no es posible, se omite el aliasing.
+- En el caso de un registro que ya contiene el atributo de destino, el aliasing sobrescribe el valor de ese registro.
+- Para un atributo estándar al que se le asignan múltiples atributos, si un registro contiene varios de estos atributos de fuente, solo uno de estos atributos de fuente se asigna como alias.
+- Cualquier actualización o adición a los atributos estándar solo se aplica a los registros recién ingeridos.
+- Los atributos estándar no pueden ser asignados como alias.
+- Los atributos solo pueden ser asignados como alias a atributos estándar.
+- Para respetar la estructura JSON de los registros, no es posible tener un atributo estándar como hijo de otro (por ejemplo, `user` y `user.name` no pueden ser ambos atributos estándar).
 
-Para obtener más información, consulta [Facetas de alias][34].
+Consulte [Alias Facets][34] para información adicional.
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -125,7 +123,7 @@ Para obtener más información, consulta [Facetas de alias][34].
 [11]: /es/standard-attributes/?product=log+management&search=geolocation
 [12]: /es/standard-attributes/?search=http.&product=log+management
 [13]: /es/integrations/amazon_elb/
-[14]: /es/logs/log_configuration/processors/#url-parser
+[14]: /es/logs/log_configuration/processors/url_parser/
 [15]: /es/standard-attributes/?search=logger+error&product=log+management
 [16]: /es/standard-attributes/?search=db&product=log+management
 [17]: /es/integrations/cassandra/
@@ -133,7 +131,7 @@ Para obtener más información, consulta [Facetas de alias][34].
 [19]: /es/integrations/amazon_rds/
 [20]: /es/integrations/elastic/
 [21]: /es/standard-attributes/?search=duration&product=log+management
-[22]: /es/logs/log_configuration/processors/#remapper
+[22]: /es/logs/log_configuration/processors/remapper/
 [23]: /es/tracing/app_analytics/search/
 [24]: /es/standard-attributes/?search=usr&product=log+management
 [25]: /es/standard-attributes/?search=syslog&product=log+management

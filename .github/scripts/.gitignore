@@ -1,0 +1,8 @@
+# npm ci writes the install tree here at runtime; never committed.
+node_modules/
+
+# The repo-level .gitignore excludes package-lock.json files everywhere.
+# Override that for this directory: the lockfile is what `npm ci` uses
+# to verify SHA-512 integrity of ajv and its transitive dependencies, so
+# it MUST be committed.
+!package-lock.json

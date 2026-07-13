@@ -13,7 +13,7 @@ further_reading:
 
 The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
 
-<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
 
 ## `datadog_secrets_scan`
 

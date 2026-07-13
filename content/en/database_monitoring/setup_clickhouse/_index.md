@@ -7,7 +7,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. Contact your Datadog representative or support to enable this feature.
+This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
 </div>
 
 ### ClickHouse versions supported
@@ -22,6 +22,7 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 To learn how to set up Database Monitoring on a ClickHouse database, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-clickhouse" >}}
-
-<br>
+{{< card-grid card_width="300px" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
+{{< /card-grid >}}

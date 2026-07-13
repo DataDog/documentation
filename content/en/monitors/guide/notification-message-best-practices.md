@@ -23,8 +23,8 @@ From product managers to developers, this resource ensures notifications enhance
 ## Notification Configuration
 
 The first step is to configure the notification with the required fields:
-* [**Monitor Name**](#name), which is also the Notification title.  
-* [**Monitor Message**](#message), which is the body of the notification.
+* [{{< ui >}}Monitor Name{{< /ui >}}](#name), which is also the Notification title.  
+* [{{< ui >}}Monitor Message{{< /ui >}}](#message), which is the body of the notification.
 
 {{< img src="/monitors/guide/notification_message_best_practices/monitor_notification_message.png" alt="Monitor notification message configuration" style="width:100%;" >}}
 
@@ -62,7 +62,7 @@ Monitor message variables are dynamic placeholders that allow you to customize n
 | [Conditional](#conditional-variables) | Uses "if-else" logic to adjust the message context based on conditions like monitor state. | 
 | [Template](#template-variables) | Enriches monitor notifications with contextual information. |
 
-Variables are especially important in a **Multi-Alert** monitor. When triggered, you need to know which group is responsible. For example, monitoring CPU usage by container, grouped by host. A valuable variable is {{host.name}} indicating the host that triggered the alert.
+Variables are especially important in a {{< ui >}}Multi-Alert{{< /ui >}} monitor. When triggered, you need to know which group is responsible. For example, monitoring CPU usage by container, grouped by host. A valuable variable is {{host.name}} indicating the host that triggered the alert.
 
 {{< img src="/monitors/guide/notification_message_best_practices/query_parameters.png" alt="Example monitor query of container.cpu.usage metric averaged by host" style="width:100%;" >}}
 

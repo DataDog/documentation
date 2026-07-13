@@ -1102,11 +1102,11 @@ track_custom_event(tracer, event_name, metadata)
 
 If your service has AAP enabled and [Remote Configuration][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
 
-To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+To get started, navigate to the [Custom WAF Rule page][2] and click on {{< ui >}}Create New Rule{{< /ui >}}.
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the AAP homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
 
-This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to AAP. If you don't need the condition, you may set a broad condition to match everything.
+This will open a menu in which you may define your custom WAF rule. By selecting the {{< ui >}}Business Logic{{< /ui >}} category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to AAP. If you don't need the condition, you may set a broad condition to match everything.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
 
@@ -1169,7 +1169,7 @@ The following modes are deprecated:
 
 ## Disabling user activity event tracking
 
-To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
+To disable automated user activity detection through your [AAP Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog SDK, and not on the Datadog Agent.
 

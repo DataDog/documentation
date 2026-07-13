@@ -26,7 +26,7 @@ You can copy, export, or download your aggregated search query and visualization
 
 {{< img src="real_user_monitoring/explorer/export/rum-explorer-export-5.png" alt="Export button in the right hand corner of the RUM Explorer" width="100%" >}}
 
-Click the **More** button on the right hand corner and select an option from the dropdown menu:
+Click the {{< ui >}}More{{< /ui >}} button on the right hand corner and select an option from the dropdown menu:
 
 - Copy your query as a cURL command to test it in the [RUM Explorer][3] and build custom reports using [Datadog APIs][4].
 - Export your search results to a [monitor][6] that triggers alerts on predefined thresholds.

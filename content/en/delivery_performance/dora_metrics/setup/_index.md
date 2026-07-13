@@ -25,9 +25,9 @@ further_reading:
 - link: '/delivery_performance/dora_metrics/change_failure_detection/'
   tag: 'Documentation'
   text: 'Learn about Change Failure Detection'
-- link: '/tracing/software_catalog'
+- link: '/internal_developer_portal/catalog/'
   tag: 'Documentation'
-  text: 'Learn about the Software Catalog'
+  text: 'Learn about the Catalog'
 - link: 'https://github.com/DataDog/datadog-ci'
   tag: 'Source Code'
   text: 'Learn about the datadog-ci CLI tool'
@@ -66,14 +66,14 @@ DORA Metrics supports the following data sources for deployment events:
 ### Requirements
 
 - {{< ui >}}APM Deployment Tracking{{< /ui >}} is enabled as a {{< ui >}}Deployments{{< /ui >}} event data source in [DORA settings][2].
-- Your service has [metadata][3] defined in the Software Catalog.
+- Your service has [metadata][3] defined in the Catalog.
 - Your service has [unified service tagging][4] enabled. Deployments are identified using the `version` tag.
 
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Enrich deployments with commit information](#enrich-deployments-with-commit-information).
 
 [1]: /tracing/services/deployment_tracking
 [2]: https://app.datadoghq.com/ci/settings/dora
-[3]: /software_catalog/adding_metadata
+[3]: /internal_developer_portal/catalog/entity_model/
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
@@ -87,7 +87,7 @@ To send your own deployment events, use the [DORA Metrics API][1] or the [`datad
 - The following attributes are required:
   - `started_at`: The time the deployment started.
   - `finished_at`: The time the deployment finished.
-  - `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][4] with metadata set up (see [Adding Metadata][5]), the `team` of the service is automatically retrieved and associated with all metrics.
+  - `service`: The service that was deployed. If the provided service is registered in the [Catalog][4] with metadata set up (see [Adding Metadata][5]), the `team` of the service is automatically retrieved and associated with all metrics.
 
 You can optionally add the following attributes to the deployment events:
 
@@ -159,8 +159,8 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: https://app.datadoghq.com/ci/settings/dora
-[4]: /tracing/software_catalog
-[5]: /tracing/software_catalog/adding_metadata
+[4]: /internal_developer_portal/catalog/
+[5]: /internal_developer_portal/catalog/entity_model/
 [6]: https://app.datadoghq.com/ci/dora
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 
@@ -169,7 +169,7 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 ### Custom tags
 
-If the service associated with the deployment is registered in the [Software Catalog][2] with metadata set up (see [Adding Metadata][3]), the `languages` of the service and any `tags` are automatically retrieved and associated with the event.
+If the service associated with the deployment is registered in the [Catalog][2] with metadata set up (see [Adding Metadata][3]), the `languages` of the service and any `tags` are automatically retrieved and associated with the event.
 
 ## Enrich deployments with commit information
 
@@ -464,7 +464,7 @@ The severity of the failure in the DORA Metrics product is based on the [inciden
 
 ### Mapping PagerDuty services to Datadog services
 
-When an incident event is received for a specific [PagerDuty service][4], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][5] and from the [Software Catalog][6].
+When an incident event is received for a specific [PagerDuty service][4], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][5] and from the [Catalog][6].
 
 The matching algorithm works in the following steps:
 
@@ -475,15 +475,15 @@ The matching algorithm works in the following steps:
      - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
      - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
 
-2. If the service URL of the incident matches the PagerDuty service URL for any services in the Software Catalog:
+2. If the service URL of the incident matches the PagerDuty service URL for any services in the Catalog:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
 
-   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Software Catalog][9].
+   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Catalog][9].
 
-3. If the PagerDuty service name of the incident matches a service name in the Software Catalog, the incident metrics and events are emitted with the service and team.
-4. If the PagerDuty team name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
-5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
+3. If the PagerDuty service name of the incident matches a service name in the Catalog, the incident metrics and events are emitted with the service and team.
+4. If the PagerDuty team name of the incident matches a team name in the Catalog, the incident metrics and events are emitted with the team.
+5. If the PagerDuty service name of the incident matches a team name in the Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
 <div class="alert alert-danger">
@@ -495,10 +495,10 @@ If an incident is resolved manually in PagerDuty instead of from a monitor notif
 [3]: https://support.pagerduty.com/main/docs/incident-priority
 [4]: https://support.pagerduty.com/docs/services-and-integrations
 [5]: /integrations/pagerduty/#troubleshooting
-[6]: /software_catalog/
+[6]: /internal_developer_portal/catalog/
 [7]: /monitors/configuration/#multi-alert
 [8]: /monitors/manage/#monitor-tags
-[9]: /software_catalog/integrations/#pagerduty-integration
+[9]: /internal_developer_portal/integrations/
 
 
 {{% /tab %}}
@@ -573,8 +573,8 @@ EOF
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/dora
-[2]: /tracing/software_catalog
-[3]: /tracing/software_catalog/adding_metadata
-[4]: /tracing/software_catalog/adding_metadata
+[2]: /internal_developer_portal/catalog/
+[3]: /internal_developer_portal/catalog/entity_model/
+[4]: /internal_developer_portal/catalog/entity_model/
 [5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora

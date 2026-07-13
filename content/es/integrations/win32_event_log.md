@@ -632,7 +632,7 @@ Más enlaces, artículos y documentación útiles:
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[3]: https://docs.datadoghq.com/es/service_management/events/
+[3]: https://docs.datadoghq.com/es/events/
 [4]: https://docs.datadoghq.com/es/logs/
 [5]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example

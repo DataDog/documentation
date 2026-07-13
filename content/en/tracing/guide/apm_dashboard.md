@@ -30,7 +30,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 * Creating it manually. _(Step 4. & 5. )_
 * Exporting an Analytics query. _(Step 7.)_
 
-1. **Open the [Software Catalog][1]** and choose the `web-store` service.
+1. **Open the [Catalog][1]** and choose the `web-store` service.
 
 2. **Find the Total Requests Graph** and click on the `export` button on the top right to choose `Export to Dashboard`. **Click `New Timeboard`**.
 
@@ -102,7 +102,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     Finally, make sure to use template variables. These are a set of values that dynamically control the widgets on the dashboards that every user can use without having to edit the widgets themselves. For more information, see the [Template Variable][6] documentation.
 
-10. Click on **Add Variable** in the header. Choose the tag that the variable will control, and configure its name, default value, or available values.
+10. Click on {{< ui >}}Add Variable{{< /ui >}} in the header. Choose the tag that the variable will control, and configure its name, default value, or available values.
 
     In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of operation.
 

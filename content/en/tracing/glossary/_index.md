@@ -9,7 +9,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -48,9 +48,9 @@ For additional definitions and descriptions of important APM terms such as _span
 
 ## Services
 
-After [instrumenting your application][3], the [Software Catalog][4] is your main landing page for APM data.
+After [instrumenting your application][3], the [Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/software_catalog.png" alt="Software Catalog" >}}
+{{< img src="tracing/visualization/software_catalog.png" alt="Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -62,7 +62,7 @@ The screenshot below is a microservice distributed system for an e-commerce site
 
 {{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
-All services can be found in the [Software Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
+All services can be found in the [Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
@@ -120,7 +120,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 [2]: /extend/guide/data-collection-resolution/
 [3]: /tracing/setup/
-[4]: /tracing/software_catalog/
+[4]: /internal_developer_portal/catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/

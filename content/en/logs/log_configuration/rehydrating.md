@@ -8,7 +8,15 @@ further_reading:
 - link: "logs/archives"
   tag: "Documentation"
   text: "Log Archives documentation"
+- link: "/logs/explorer/archive_search/"
+  tag: "Documentation"
+  text: "Archive Search"
 ---
+
+<div class="alert alert-info">
+<strong><a href="/logs/explorer/archive_search/">Archive Search</a> is the recommended way to access archived logs.</strong><br>
+It streams results in real time directly from your archive without re-indexing, and charges only for the data scanned. When you need full platform access or longer retention, use Archive Search's <strong>Search &amp; Rehydration</strong> mode.
+</div>
 
 ## Overview
 

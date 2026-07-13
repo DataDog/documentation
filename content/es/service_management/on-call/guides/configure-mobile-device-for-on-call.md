@@ -24,11 +24,11 @@ Sin embargo, por defecto, la aplicación móvil no puede enviarte notificaciones
 
 1. En la aplicación móvil de Datadog, ve a **Settings** > **Notifications** (Configuración > Notificaciones).
 
-   {{< img src="service_management/mobile/ios_settings_may_2025.png" alt="Encuentra la configuración de notificaciones en la versión de iOS de la aplicación móvil de Datadog." style="width:35%;" >}}
+   {{< img src="mobile/push_notification/ios_settings_may_2025.png" alt="Encuentra la configuración de notificaciones en la versión de iOS de la aplicación móvil de Datadog." style="width:35%;" >}}
 
 2. Activa la casilla **Allow Notifications** (Permitir notificaciones). Si es la primera vez que activas las notificaciones, se abrirá una solicitud de permisos. Concede el permiso y, a continuación, vuelve a tocar **Enable Notifications** (Activar notificaciones) para ir a la configuración del sistema iOS.
 
-   {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configura los ajustes de las notificaciones de sistema de tu dispositivo iOS." style="width:100%;" >}}
+   {{< img src="mobile/push_notification/ios_notification_may_2025.png" alt="Configura los ajustes de las notificaciones de sistema de tu dispositivo iOS." style="width:100%;" >}}
 
 3. En la configuración del sistema iOS, asegúrate de activar la opción **Allow Notifications** (Permitir notificaciones). Datadog recomienda encarecidamente que también actives las opciones **Sound** (Sonido) y **Badges** (Distintivos).
 
@@ -38,11 +38,11 @@ Asegúrate de conceder a la aplicación móvil los permisos necesarios.
 {{% tab "Android" %}}
 1. En la aplicación móvil de Datadog, ve a **Settings** > **Notifications** (Configuración > Notificaciones).
 
-   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Encuentra los ajustes de notificaciones en la versión de Android de la aplicación móvil de Datadog." style="width:35%;" >}}
+   {{< img src="mobile/push_notification/android_settings_may_2025.png" alt="Encuentra los ajustes de notificaciones en la versión de Android de la aplicación móvil de Datadog." style="width:35%;" >}}
 
 2. Activa el interruptor **Allow notifications** (Permitir notificaciones). Datadog te recomienda encarecidamente que actives también **Sound and vibration** (Sonido y vibración) y **Show content on Lock screen** (Mostrar contenido en pantalla de bloqueo).
 
-   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configura los ajustes de las notificaciones de sistema de tu dispositivo Android." style="width:100%;" >}}
+   {{< img src="mobile/push_notification/android_notification_may_2025.png" alt="Configura los ajustes de las notificaciones de sistema de tu dispositivo Android." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -57,7 +57,7 @@ Puedes anular el volumen de sistema de tu dispositivo y el modo No molestar tant
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_critical_may_2025.png" alt="Anula tu volumen de sistema del dispositivo de iOS y el modo No molestar." style="width:100%;" >}}
+{{< img src="mobile/push_notification/ios_critical_may_2025.png" alt="Anula tu volumen de sistema del dispositivo de iOS y el modo No molestar." style="width:100%;" >}}
 
 1. En la aplicación móvil de Datadog, ve a **Settings** > **On-Call** (Configuración > On-Call).
 
@@ -72,21 +72,21 @@ Puedes anular el volumen de sistema de tu dispositivo y el modo No molestar tant
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_critical_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
 
 1. En la aplicación móvil de Datadog, ve a **Settings** > **On-Call** (Configuración > On-Call).
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_allow_notification_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
 
 2. Si faltan permisos de notificación, pulsa **Bypass Do Not Disturb** (Anular No molestar) y activa **Allow notifications** (Permitir notificaciones) en System Settings (Ajustes del sistema).
 
-{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_override_system_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
 
 3. A continuación, pulsa **Bypass Do Not Disturb** (Ignorar No Molestar) y activa **Override Do Not Disturb** (Anular No Molestar) en Ajustes del sistema para On-Call de urgencia elevada.
 
 **Para Samsung:** ve a las opciones **Settings** > **Notifications** > **Do Not Disturb** > **App notification** (Configuración > Notificaciones > No molestar > Notificación de la aplicación) del dispositivo. Selecciona Datadog como aplicación que omite No molestar.
 
-{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_override_system_volume_may_2025.png" alt="Anula tu volumen del sistema del dispositivo de Android y el modo No molestar." style="width:100%;" >}}
 
 4. Para anular el volumen del sistema, toca **Override system volume** (Anular volumen del sistema) y permite **Mode access** (Modo de acceso) en System Settings (Configuración del sistema) para activar **Override system volume** (Anular volumen del sistema).
 
@@ -110,7 +110,7 @@ Para mayor fiabilidad, Datadog utiliza un conjunto rotatorio de números de tel�
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_sync_card_may_2025.png" alt="Anula el modo No molestar del dispositivo iOS para SMS y llamadas de voz" style="width:100%;" >}}
+{{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/ios_sync_card_may_2025.png" alt="Anula el modo No molestar del dispositivo iOS para SMS y llamadas de voz" style="width:100%;" >}}
 
 1. En la aplicación móvil Datadog, ve a **Settings** > **Preferences** > **On-Call** (Configuración > Preferencias > On-Call).
 
@@ -125,7 +125,7 @@ Para mayor fiabilidad, Datadog utiliza un conjunto rotatorio de números de tel�
 
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Anula tu modo No molestar del dispositivo de Android para SMS y llamadas de voz" style="width:100%;" >}}
+{{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/android_sync_card_may_2025.png" alt="Anula tu modo No molestar del dispositivo de Android para SMS y llamadas de voz" style="width:100%;" >}}
 
 1. En la aplicación móvil de Datadog, ve a **Settings** > **On-Call** (Configuración > On-Call).
 
@@ -167,7 +167,7 @@ Puedes personalizar tus widgets de página de On-Call filtrando en:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_shifts_widget_may_2025.png" alt="Página de inicio configurada de widgets de turno de On-Call que se muestran en pantallas de iOS" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/widgets/ios_shifts_widget_may_2025.png" alt="Página de inicio configurada de widgets de turno de On-Call que se muestran en pantallas de iOS" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Mantén pulsado el widget durante un rato para configurarlo.
 2. Pulsa **Edit Widget** (Editar widget) para acceder a la pantalla de configuración.
@@ -178,7 +178,7 @@ Puedes personalizar tus widgets de página de On-Call filtrando en:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_shifts_widget_may_2025.png" alt="Página de inicio configurada de widgets de turno de On-Call que se muestran en pantallas de Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/widgets/android_shifts_widget_may_2025.png" alt="Página de inicio configurada de widgets de turno de On-Call que se muestran en pantallas de Android" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Pulsa sobre el widget para configurarlo.
 2. Selecciona la **Organization** (Organización) y el **Time Period** (Periodo de tiempo) para el que deseas ver tus turnos de On-Call.
@@ -205,7 +205,7 @@ El widget de pantalla de bloqueo de On-Call muestra tu estado de On-Call. Los wi
 ## Solucionar problemas
 Si necesitas ayuda para solucionar problemas, [ponte en contacto con el servicio de asistencia de Datadog][2]. También puedes enviar un mensaje en el canal [público de Slack de Datadog][3] [#mobile-app][4].
 
-[1]: /es/service_management/mobile/?tab=ios
+[1]: /es/mobile/?tab=ios
 [2]: /es/help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG

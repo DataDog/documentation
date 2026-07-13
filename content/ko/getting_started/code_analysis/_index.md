@@ -227,7 +227,10 @@ datadog-ci sbom upload /tmp/sbom.json
 
 IDE에서 Static Analysis 스캔을 실행하려면 선택한 코드 편집기의 각 설명을 참조하세요.
 
-{{< partial name="code_analysis/ide-plugins.html" >}}
+{{< card-grid card_width="225px" image_width="50" >}}
+  {{< image-card href="/ide_plugins/idea/" src="integrations_logos/jetbrains-ides_avatar.svg" alt="jetbrains" >}}
+  {{< image-card href="/ide_plugins/vscode/" src="integrations_logos/vscode_avatar.svg" alt="visual studio code" >}}
+{{< /card-grid >}}
 
 </br>
 

@@ -37,27 +37,27 @@ If monitoring your application involves first logging into it, a best practice i
 
 To create a login test and use it as a subtest in the rest of your test suite:
 
-1. Create a test, that does nothing but log into your application. Set the **Starting URL** of your test to your pre-login URL.
+1. Create a test, that does nothing but log into your application. Set the {{< ui >}}Starting URL{{< /ui >}} of your test to your pre-login URL.
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording_2.mp4" alt="Recording the Login subtest" video="true" width="100%">}}
 
-2. Create a second test that monitors a post-login functionality of your application. In the following example, this second test monitors creating a dashboard. Set the **Starting URL** of your test to your pre-login URL also.
+2. Create a second test that monitors a post-login functionality of your application. In the following example, this second test monitors creating a dashboard. Set the {{< ui >}}Starting URL{{< /ui >}} of your test to your pre-login URL also.
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration_2.png" alt="Configuring the parent test" >}}
 
-3. When recording the second test, click **Subtest** and select the login test you created in step 1. 
+3. When recording the second test, click {{< ui >}}Subtest{{< /ui >}} and select the login test you created in step 1. 
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_subtest_2.mp4" alt="Including subtest in parent test" video="true" width="80%">}}
 
   When you set up this subtest step, all the steps of the login test are played at the beginning of the parent test. Also, the variables in the subtest are imported into the parent test of your second test. By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent's first non-subtest step from the page the subtest was last on. No parent step was created for now.
 
-**Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
+**Note:** You can choose the tab in which the subtest should execute using [{{< ui >}}Subtest Advanced Options{{< /ui >}}][1].
 
 4. Before you start recording the parent test steps, login to your account with the dedicated credentials in the recorder window. This ensures that the parent test starts from the same state your browser test is in after it goes through the subtest steps.
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_iframe.mp4" alt="Replaying subtest in parent test" video="true" width="100%">}}
 
-5. After you login, click **Start recording** to start recording the parent test's post-login steps you're interested in. Once you're done, click **Save**.
+5. After you login, click {{< ui >}}Start recording{{< /ui >}} to start recording the parent test's post-login steps you're interested in. Once you're done, click {{< ui >}}Save{{< /ui >}}.
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Recording parent test" video="true" width="100%">}}
 

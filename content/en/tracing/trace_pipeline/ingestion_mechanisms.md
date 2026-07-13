@@ -316,7 +316,7 @@ $env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 }
 ```
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/internal_developer_portal/catalog/">Catalog</a> UI.</div>
 
 Configure a rate limit by setting the `DD_TRACE_RATE_LIMIT` environment variable to the maximum traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 

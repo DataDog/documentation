@@ -1,9 +1,10 @@
 ---
 title: Scorecards Performance
+description: Track organization-wide Scorecard compliance by team and rule, with historical trends and filters to identify top- and bottom-performing areas.
 aliases:
 - /software_catalog/eng_reports/scorecards_performance
 further_reading:
-- link: "software_catalog/scorecards/"
+- link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"
   text: "Datadog Scorecards"
 - link: "dashboards/"

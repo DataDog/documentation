@@ -35,11 +35,11 @@ Additionally, Datadog provides a list of default [out-of-the-box](#default-tags)
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, and add the `client_service` and `server_availability-zone` tags in the **Group By** drop-down to visualize the traffic flow between these two sets of tags:
+For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, and add the `client_service` and `server_availability-zone` tags in the {{< ui >}}Group By{{< /ui >}} drop-down to visualize the traffic flow between these two sets of tags:
 
 {{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag_2.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
-The default view aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select **Auto-grouped traffic** to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+The default view aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select {{< ui >}}Auto-grouped traffic{{< /ui >}} to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 **Note**: For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
 
@@ -72,17 +72,17 @@ To run a recommended query, click on the tile. Hovering over the tile displays a
 
 ### Facet panels
 
-Use the facet panels to browse all available tags on your flows or filter traffic without needing to remember exact tag names. Facet panels mirror the tags in your search bar query. Use the **Client** and **Server** tabs to switch between facet panels.
+Use the facet panels to browse all available tags on your flows or filter traffic without needing to remember exact tag names. Facet panels mirror the tags in your search bar query. Use the {{< ui >}}Client{{< /ui >}} and {{< ui >}}Server{{< /ui >}} tabs to switch between facet panels.
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the **Client** and **Server** tabs, and in the **Group By** dropdown menu.
+Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the {{< ui >}}Client{{< /ui >}} and {{< ui >}}Server{{< /ui >}} tabs, and in the {{< ui >}}Group By{{< /ui >}} dropdown menu.
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
-1. Select the **+ Add** button on the top right of the facet panels.
+1. Select the {{< ui >}}+ Add{{< /ui >}} button on the top right of the facet panels.
 2. Enter the relevant tag you want to create a custom facet upon.
-3. Click **Add**.
+3. Click {{< ui >}}Add{{< /ui >}}.
 
 After the custom facet is created, use this tag to filter and aggregate traffic on the network analytics page and network map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
@@ -107,13 +107,13 @@ For a complete list of neutral tags and their descriptions, see [Neutral tags][1
 
 ### Group by
 
-Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use {{< ui >}}Auto-grouped traffic{{< /ui >}} to group data by whichever tags are available.
 
-If you want to investigate connections from all of your hosts in a single grouping, add the `client_host` and  `Auto-Grouped-Servers` tags in the **Group By** dropdown.
+If you want to investigate connections from all of your hosts in a single grouping, add the `client_host` and  `Auto-Grouped-Servers` tags in the {{< ui >}}Group By{{< /ui >}} dropdown.
 
 {{< img src="network_performance_monitoring/network_analytics/cnm_auto-grouped_client.png" alt="NPM analytics page sorting by host and grouped by Auto-grouped traffic" style="width:90%;">}}
 
-The **Auto-grouped traffic** option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
+The {{< ui >}}Auto-grouped traffic{{< /ui >}} option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_icon_tooltip.png" alt="Hovering over the icon tooltip to display the tag source" style="width:90%;">}}
 
@@ -127,7 +127,7 @@ To change the visualization type, click on the pencil icon in the top right corn
 
 {{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:60%;">}}
 
-To hide a specific graph, click on the **hide graph** icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
+To hide a specific graph, click on the {{< ui >}}hide graph{{< /ui >}} icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
 
 ## Table
 
@@ -135,13 +135,13 @@ The network table breaks down the Volume, Throughput, TCP Retransmits, Round-tri
 
 {{< img src="network_performance_monitoring/network_analytics/network_table_3.png" alt="Network data table showing auto-grouped traffic and throughput columns." >}}
 
-You can configure the columns in your table using the **Customize** gear icon (⚙️) at the top right of the table.
+You can configure the columns in your table using the {{< ui >}}Customize{{< /ui >}} gear icon (⚙️) at the top right of the table.
 
-Configure the traffic shown with the `Filter Traffic` button at the top right of the page.
+Configure the traffic shown with the {{< ui >}}Filter Traffic{{< /ui >}} button at the top right of the page.
 
 {{< img src="network_performance_monitoring/network_analytics/filter_traffic_toggle.png" alt="Flow Details" style="width:50%;">}}
 
-External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
+External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the {{< ui >}}Show Datadog Traffic{{< /ui >}} and {{< ui >}}Show External Traffic{{< /ui >}} toggles.
 
 ### Unresolved traffic
 
@@ -154,7 +154,7 @@ Unresolved client and server tags are marked as `N/A`. A traffic client or serve
 
 Monitoring unresolved traffic is essential for identifying blind spots in network visibility and ensuring all relevant traffic is accounted for in performance and security analysis.
 
-Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
+Use the {{< ui >}}Show N/A (Unresolved Traffic){{< /ui >}} toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
 ### Pivot to network path
 
@@ -166,16 +166,16 @@ Click the three dots menu in the analytics table to pivot to [network path][11] 
 
 Organize and share views of traffic data. Saved Views make debugging faster and empower collaboration. For instance, you can create a view, save it for the future for common queries, and copy its link to share network data with your teammates.
 
-- To save a view: click the **+ Save** button and name the view to record your current query, table configuration, and graph metric selections.
-- To load a view: click **Views** at the top left to see your Saved Views and select a view from the list.
-- To rename a view: hover over a view in the Saved Views list and click the gear icon to **Edit name**.
-- To share a view: hover over a view in the Saved Views list and click the link icon to **Copy permalink**.
+- To save a view: click the {{< ui >}}+ Save{{< /ui >}} button and name the view to record your current query, table configuration, and graph metric selections.
+- To load a view: click {{< ui >}}Views{{< /ui >}} at the top left to see your Saved Views and select a view from the list.
+- To rename a view: hover over a view in the Saved Views list and click the gear icon to {{< ui >}}Edit name{{< /ui >}}.
+- To share a view: hover over a view in the Saved Views list and click the link icon to {{< ui >}}Copy permalink{{< /ui >}}.
 
 To learn more, see the [Saved Views][5] documentation.
 
 ## Sidepanel
 
-The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
+The sidepanel provides contextual telemetry to help you debug network dependencies. Use the {{< ui >}}Flows{{< /ui >}}, {{< ui >}}Logs{{< /ui >}}, {{< ui >}}Traces{{< /ui >}}, and {{< ui >}}Processes{{< /ui >}} tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
 
 - A spike in traffic volume from a particular port or IP.
 - Heavy processes consuming the CPU or memory of the destination endpoint.
@@ -189,9 +189,15 @@ The top of the sidepanel displays common client and server tags shared by the in
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Traces
+
+The {{< ui >}}Traces{{< /ui >}} tab shows APM traces associated with the selected network flow. Use this tab to pivot from a network-level issue—such as high latency or elevated retransmit counts—to the application traces for the services involved.
+
+For more information, see [APM][17].
+
 ### Security
 
-The **Security** tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+The {{< ui >}}Security{{< /ui >}} tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
 For a complete reference of default tags available for querying and filtering network traffic, see [Tags Reference][16].
 
@@ -335,7 +341,7 @@ Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names
 
 NAT is a tool used by Kubernetes and other systems to route traffic between containers. When investigating a specific dependency (for example, service to service), you can use the presence or absence of pre-NAT IPs to distinguish between Kubernetes-native services, which do their own routing, and services that rely on external clients for routing. This feature does not include resolution of NAT gateways.
 
-To view pre-NAT and post-NAT IPs, use the **Show pre-NAT IPs** toggle in the table settings. When this setting is toggled off, IPs shown in the **Client IP** and **Server IP** columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs are displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
+To view pre-NAT and post-NAT IPs, use the {{< ui >}}Show pre-NAT IPs{{< /ui >}} toggle in the table settings. When this setting is toggled off, IPs shown in the {{< ui >}}Client IP{{< /ui >}} and {{< ui >}}Server IP{{< /ui >}} columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs are displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_analytics/prenat_ip2.png" alt="pre-NAT IPs" >}}
 
@@ -371,4 +377,5 @@ network:
 [12]: /getting_started/tagging/unified_service_tagging/
 [15]: /network_monitoring/cloud_network_monitoring/tags_reference/#neutral-tags
 [16]: /network_monitoring/cloud_network_monitoring/tags_reference/
+[17]: /tracing/
 

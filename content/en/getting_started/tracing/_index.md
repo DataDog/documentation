@@ -141,7 +141,7 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]. You should see a Python service named `hello`:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Catalog shows the new Python service." style="width:100%;" >}}
 
 1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
 1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]. You should see a trace for the `hello` service:
@@ -212,9 +212,9 @@ To add custom instrumentation:
 
 After you set up tracing and your application is sending data to Datadog, explore additional APM features:
 
-### Software Catalog
+### Catalog
 
-[Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
+[Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
 
 ### Trace ingestion and retention
 
@@ -232,7 +232,7 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /internal_developer_portal/software_catalog/
-[10]: /internal_developer_portal/software_catalog/entity_model/
+[9]: /internal_developer_portal/catalog/
+[10]: /internal_developer_portal/catalog/entity_model/
 [11]: /tracing/trace_pipeline/ingestion_controls/
 [12]: /tracing/trace_pipeline/trace_retention/

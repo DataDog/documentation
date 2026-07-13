@@ -2,6 +2,11 @@
 title: Alibaba Integration Billing
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Datadog bills for all Alibaba Virtual Machines being monitored in Datadog. These machines are billable regardless of whether the Datadog Agent is installed. **You are not billed twice** if you are running the Agent on an Alibaba VM picked up by the Alibaba integration.

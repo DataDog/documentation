@@ -1,0 +1,3 @@
+---
+title: Compute scalar analytics
+---

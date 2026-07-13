@@ -1,0 +1,3 @@
+---
+title: Disable a user
+---
