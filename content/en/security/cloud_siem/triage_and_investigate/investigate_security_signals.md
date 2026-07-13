@@ -169,7 +169,11 @@ In the [Signals Explorer][5], when you use the {{< ui >}}List{{< /ui >}} visuali
      - To create a case, in the {{< ui >}}Create Case{{< /ui >}} window, enter the {{< ui >}}Project{{< /ui >}}, {{< ui >}}Title{{< /ui >}}, {{< ui >}}Description{{< /ui >}}, and {{< ui >}}Assignee{{< /ui >}}, then click {{< ui >}}Create Case{{< /ui >}}.
      - To select an existing case, in the {{< ui >}}Create Case{{< /ui >}} window, click the {{< ui >}}Add to Existing Case{{< /ui >}} tab. Select a case and click {{< ui >}}Attach to an Existing Case{{< /ui >}}.
 
-When you create a case, the triage status is automatically set to `Under Review`.
+When a user creates a case, the following automatic changes happen by default:
+- The triage status is automatically set to `Under Review`.
+- The assignee is set to that user.
+
+To change these defaults, see [Manage default behavior for signals and security cases](#manage-default-behavior-for-signals-and-security-cases).
 
 **Note**: If a case is determined to be critical after further investigation, click {{< ui >}}Declare Incident{{< /ui >}} in the case to escalate it to an incident.
 
@@ -178,6 +182,32 @@ When you create a case, the triage status is automatically set to `Under Review`
 The [Cases][12] page allows you to view cases specifically for your security projects. You can filter cases so you only see the ones that are assigned to or created by you, or cases that have a specific status or are in a specific project. You can also star projects to make them easier to navigate to.
 
 In the {{< ui >}}Security Signals{{< /ui >}} section for a case, you can view signals associated with it, and click {{< ui >}}Add Signals{{< /ui >}} to search for filters to associate with the case.
+
+#### Manage default behavior for signals and security cases
+
+On the Cloud SIEM [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other, manually or automatically. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
+
+- **Case Project Settings**
+
+  Select your default Cloud SIEM security case project, and other security projects to select from:
+  - **Default SIEM Security Case Project**: Select the project to appear by default when you're connecting security cases to a project. This project also appears as the default project on the Cloud SIEM [Cases][12] page.
+  - **Security Case project scoping**: Select up to 20 security case projects that you can choose from to connect security cases with.
+
+- **Case Creation Defaults**
+
+  When you create a case from one or more signals, you can choose to use values from the signal for the case, leave the values empty, or assign them static values, depending on the case field.
+  <div class="alert alert-tip">Click <strong>Show signal to case correlation scheme</strong> to see how Datadog maps signal status to case status, and signal severity to case priority.</div>
+
+- **Signal Attachment Settings**
+
+  When you attach signals to a case, select the default values to assign to those signals.
+  <div class="alert alert-tip">Click <strong>Show case to signal archive reason mapping</strong> to see how Datadog maps the reason for resolving the case to the reason for archiving the signal.</div>
+
+  - **When being attached to a case**:
+    - **Signal Status** and **Signal Assignee**: When you attach signals to a case, choose to either keep the signal status and assignee, or to assign specific values to them.
+    - **Allow Override**: Turn on this toggle to allow to override existing values in those fields. If this toggle is off, the selected status and assignee apply only when those fields are empty.
+  - **When updating a case**:
+    - **Signal Status**: Choose to either assign a status to the signal that corresponds with the case, or to leave it as-is.
 
 ### Declare an incident
 
@@ -231,3 +261,4 @@ You can also launch this query directly from the signal panel:
 [10]: /security/threat_intelligence
 [11]: /security/suppressions/#create-a-suppression-rule
 [12]: https://app.datadoghq.com/security/siem/cases
+[13]: https://app.datadoghq.com/security/configuration/siem/case-management
