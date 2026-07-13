@@ -108,6 +108,8 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 <div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 
+Because API keys and application keys are long-lived and have no built-in expiration, store them in a secrets manager, such as AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault, instead of in source code or environment files. AWS Secrets Manager supports [managed rotation for Datadog API keys and application keys][24].
+
 **Notes:**
 
 - Application key names cannot be blank.
@@ -200,3 +202,4 @@ Need help? Contact [Datadog support][19].
 [21]: /api/latest/action-connection/#register-a-new-app-key
 [22]: /account_management/audit_trail/#setup
 [23]: /account_management/rbac/permissions/#compliance
+[24]: https://aws.amazon.com/about-aws/whats-new/2026/05/secrets-manager-managed-external-secrets-datadog-snowflake/

@@ -60,6 +60,11 @@ Copy and store it securely. You cannot retrieve it later.</div>
 After you save, a details panel displays the token secret, name, Token ID, owner, owner roles,
 expiration date, and scopes.
 
+If you configure a SAT with a long expiration or select **Never**, store the secret in a secrets
+manager, such as AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault, instead of in source
+code or environment files. AWS Secrets Manager supports [managed rotation for Datadog service
+account credentials][8].
+
 ## Use a Service Access Token
 
 SATs support two authentication methods.
@@ -161,3 +166,4 @@ GET /api/v2/personal_access_tokens
 [5]: /account_management/rbac/permissions/
 [6]: /account_management/audit_trail/
 [7]: https://app.datadoghq.com/audit-trail
+[8]: https://aws.amazon.com/about-aws/whats-new/2026/05/secrets-manager-managed-external-secrets-datadog-snowflake/
