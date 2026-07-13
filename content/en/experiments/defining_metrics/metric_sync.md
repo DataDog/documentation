@@ -1,0 +1,312 @@
+---
+title: Sync Experiment Metrics from YAML
+description: Define experiment metrics in YAML, preview changes, and sync them to Datadog from CI.
+further_reading:
+- link: "/experiments/defining_metrics/"
+  tag: "Documentation"
+  text: "Create Experiment Metrics"
+- link: "/experiments/guide/connecting_a_data_warehouse/"
+  tag: "Documentation"
+  text: "Connect a data warehouse"
+- link: "/account_management/api-app-keys/"
+  tag: "Documentation"
+  text: "API and application keys"
+---
+
+## Overview
+
+Experiment metrics define the outcomes you use to evaluate an experiment, such as revenue, conversion rate, or pages viewed. You can create these metrics manually in Datadog, or you can define warehouse-backed metrics in YAML and sync them to Datadog with the Datadog Experiments Metric Sync CLI.
+
+Use Metric Sync when you want to:
+
+- Review metric changes in pull requests.
+- Keep metric definitions in version control.
+- Apply metric changes from CI after they are approved.
+- Mark synced metrics as certified by default for experiment decision-making.
+
+Metric Sync supports a plan-and-apply workflow. The `plan` command validates your YAML and previews the changes Datadog would make. The `execute` command validates the same YAML, submits the write operation, waits for completion, and prints a summary of created, updated, deleted, upgraded, blocked, and failed changes.
+
+## Prerequisites
+
+Before using Metric Sync, you need:
+
+- A Datadog account with Product Analytics and Experiments enabled.
+- A connected warehouse. See [Connect a data warehouse][1].
+- The Product Analytics permissions required to create and update experiment metrics. Synced metrics are certified by default, so custom roles also need the Product Analytics Certified Metrics Write permission. See [Product Analytics permissions][2].
+- A Datadog API key and application key for CI authentication. See [API and application keys][3].
+
+## Install the CLI
+
+Install the latest Metric Sync CLI release:
+
+```shell
+curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
+```
+
+The install script detects macOS or Linux, downloads the matching GitHub release archive, verifies the SHA-256 checksum, and installs the `metric-sync` binary to `/usr/local/bin`.
+
+To install a specific version or install to a different directory:
+
+```shell
+curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | env VERSION=v0.1.0 INSTALL_DIR="$HOME/.local/bin" sh
+```
+
+Set Datadog credentials with environment variables:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_APP_KEY=<DATADOG_APPLICATION_KEY>
+```
+
+By default, the CLI sends requests to `datadoghq.com`. Set `DD_SITE` if your organization uses a different Datadog site:
+
+```shell
+export DD_SITE=datadoghq.eu
+```
+
+## Create a metric definition
+
+Create one or more YAML files in your repository. The CLI accepts a file, multiple files, a directory, or multiple directories. When you pass a directory, the CLI recursively discovers YAML files.
+
+The following example defines one warehouse metric source and one simple metric:
+
+```yaml
+schema_version: 1
+sync_tag: example-checkout
+reference_url: https://github.com/example-org/example-repo
+warehouse_connection_id: 00000000-0000-0000-0000-000000000000
+
+warehouse_metric_sources:
+  - sync_id: checkout_events
+    name: Checkout events
+    sql: |
+      SELECT user_id, event_timestamp, revenue
+      FROM analytics.checkout_events
+    timestamp_column: event_timestamp
+    subject_types:
+      - name: User
+        column_name: user_id
+    measures:
+      - sync_id: revenue
+        name: Revenue
+        column_name: revenue
+        column_type: FLOAT
+
+metrics:
+  - sync_id: checkout_revenue
+    name: Checkout revenue
+    metric_type: simple
+    desired_change: METRIC_INCREASES
+    simple_metric_aggregation:
+      operation: sum
+      measure:
+        warehouse_metric_source_sync_id: checkout_events
+        measure_sync_id: revenue
+      timeframe_start_value: 0
+```
+
+## Preview and sync changes
+
+Run `plan` before applying changes:
+
+```shell
+metric-sync plan ./metrics
+```
+
+The plan output shows the operation ID, sync tag, status, and a summary of the changes Datadog would make.
+
+After reviewing the plan, run `execute` to apply the changes:
+
+```shell
+metric-sync execute ./metrics
+```
+
+`execute` performs local validation, submits a Metric Sync write operation to Datadog, polls until the operation reaches a terminal state, and prints the result summary.
+
+You can also run:
+
+```shell
+metric-sync validate ./metrics
+metric-sync status <metric_sync_id>
+metric-sync result <metric_sync_id>
+metric-sync version
+```
+
+`validate` only checks the local YAML and does not call Datadog. `status` checks an operation by ID. `result` fetches the terminal plan or execute result. `version` prints build metadata.
+
+## YAML reference
+
+### Top-level fields
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `schema_version` | Yes | Must be `1`. |
+| `sync_tag` | Yes | Stable ownership key for this group of metric definitions. All files in one operation must use the same `sync_tag`. |
+| `reference_url` | No | URL to the source repository, runbook, or other reference for the synced metrics. |
+| `warehouse_connection_id` | Required when sources omit it | Default warehouse connection ID for all sources in the file. |
+| `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties used by metrics. |
+| `metrics` | No | Experiment metrics to create, update, or sync-own. |
+| `options` | No | Sync options such as certification and upgrade behavior. |
+
+`sync_tag` and `sync_id` values must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes.
+
+### Options
+
+| Field | Default | Description |
+| ----- | ------- | ----------- |
+| `is_certified` | `true` | Marks synced metrics as certified. Setting this to `true` requires the Product Analytics Certified Metrics Write permission. |
+| `upgrade_mode` | `none` | Controls adoption of existing objects into sync ownership. Supported values are `none`, `by_id`, and `by_name`. |
+| `force_delete` | `false` | Allows destructive deletes when supported by the API. |
+
+### Warehouse metric sources
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `sync_id` | Yes | Stable identifier for the source within this `sync_tag`. |
+| `existing_id` | No | Existing Datadog warehouse metric source ID to adopt or update. |
+| `name` | Yes | Display name in Datadog. |
+| `description` | No | Description for the source. |
+| `sql` | Yes | SQL query that returns the timestamp, subject columns, measures, and properties used by metrics. |
+| `timestamp_column` | Yes | Column containing the event or metric timestamp. |
+| `date_partition_column` | No | Optional date partition column used for query optimization. |
+| `warehouse_connection_id` | No | Warehouse connection ID for this source. Overrides the top-level value. |
+| `reference_url` | No | Source-specific reference URL. |
+| `force_rebuild_always` | No | Forces dependent warehouse computations to rebuild when the source syncs. |
+| `subject_types` | Yes | Subject mappings for the source. |
+| `measures` | No | Numeric columns that metrics aggregate. |
+| `properties` | No | Columns that can be used for metric filters and breakouts. |
+
+### Subject types
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `name` | Yes | Datadog subject type name, such as `User` or `Account`. |
+| `column_name` | Yes | SQL result column that contains the subject identifier. |
+
+### Measures and properties
+
+Measures and properties share the same field shape:
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `sync_id` | Yes | Stable identifier within the warehouse metric source. |
+| `name` | Yes | Display name in Datadog. |
+| `column_name` | Yes | SQL result column name. |
+| `column_type` | Yes | Column type. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
+| `description` | No | Description for the measure or property. |
+
+### Metrics
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `sync_id` | Yes | Stable identifier for the metric within this `sync_tag`. |
+| `existing_id` | No | Existing Datadog metric ID to adopt or update. |
+| `name` | Yes | Display name in Datadog. |
+| `description` | No | Metric description. |
+| `metric_type` | Yes | Supported values are `simple`, `ratio`, and `percentile`. |
+| `desired_change` | No | Direction used for experiment interpretation. Supported values are `METRIC_INCREASES` and `METRIC_DECREASES`. |
+| `format_as_percent` | No | Displays the metric as a percent. |
+| `reference_url` | No | Metric-specific reference URL. |
+| `guardrail_cutoff_threshold` | No | Optional guardrail cutoff threshold. |
+
+For `metric_type: simple`, add `simple_metric_aggregation`. For `metric_type: ratio`, add `ratio_metric_aggregation`. For `metric_type: percentile`, add `percentile_metric_aggregation`.
+
+### Simple metric aggregation
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `operation` | Yes | Aggregation operation, such as `sum`, `average`, `count`, or `uniqueSubjects`. |
+| `measure` | Yes | Measure reference. |
+| `timeframe_start_value` | No | Start offset for the metric timeframe. |
+| `timeframe_end_value` | No | End offset for the metric timeframe. |
+| `timeframe_unit` | No | Timeframe unit. |
+| `property_filters` | No | Filters applied to the metric aggregation. |
+| `winsor_lower_percentile` | No | Lower winsorization percentile. |
+| `winsor_upper_percentile` | No | Upper winsorization percentile. |
+| `winsor_lower_fixed_value` | No | Lower fixed winsorization value. |
+| `winsor_upper_fixed_value` | No | Upper fixed winsorization value. |
+
+### Measure references
+
+To reference a measure defined in the same sync payload, use `warehouse_metric_source_sync_id` and `measure_sync_id`:
+
+```yaml
+measure:
+  warehouse_metric_source_sync_id: checkout_events
+  measure_sync_id: revenue
+```
+
+To reference a measure from another sync tag, include `warehouse_metric_source_sync_tag`:
+
+```yaml
+measure:
+  warehouse_metric_source_sync_tag: shared-sources
+  warehouse_metric_source_sync_id: checkout_events
+  measure_sync_id: revenue
+```
+
+To reference an existing Datadog measure directly, use `warehouse_metric_measure_id`.
+
+## GitHub Actions example
+
+The following workflow runs `plan` on pull requests and `execute` after changes merge to `main`:
+
+```yaml
+name: Sync Datadog experiment metrics
+
+on:
+  pull_request:
+    paths:
+      - "metrics/**/*.yaml"
+      - "metrics/**/*.yml"
+      - ".github/workflows/datadog-metric-sync.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "metrics/**/*.yaml"
+      - "metrics/**/*.yml"
+
+jobs:
+  plan:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Metric Sync CLI
+        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
+      - name: Plan metric changes
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        run: metric-sync plan ./metrics
+
+  execute:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Metric Sync CLI
+        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
+      - name: Apply metric changes
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        run: metric-sync execute ./metrics
+```
+
+Store your Datadog API and application keys as GitHub Actions secrets. If your organization uses a Datadog site other than `datadoghq.com`, add `DD_SITE` to the workflow environment.
+
+## Troubleshooting
+
+| Error | What to check |
+| ----- | ------------- |
+| The API returns `403`. | Confirm the API/application key has the Product Analytics permissions required to write metrics. If `is_certified` is enabled, confirm the role also has Product Analytics Certified Metrics Write. |
+| A warehouse connection was not found. | Confirm `warehouse_connection_id` belongs to the target Datadog organization. |
+| A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
+| The plan or execute result shows no changes. | The YAML already matches Datadog for that `sync_tag`. |
+| A sync is blocked. | Check the result output for objects that cannot be deleted or changed because they are referenced by active or in-flight experiments. |
+
+[1]: /experiments/guide/connecting_a_data_warehouse/
+[2]: /account_management/rbac/permissions/#product-analytics
+[3]: /account_management/api-app-keys/
