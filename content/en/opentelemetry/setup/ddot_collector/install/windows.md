@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on Windows
 code_lang: windows
 type: multi-code-lang
-code_lang_weight: 4
+code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"

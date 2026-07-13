@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 3
+code_lang_weight: 4
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
