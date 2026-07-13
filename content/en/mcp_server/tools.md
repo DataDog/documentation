@@ -17,7 +17,7 @@ further_reading:
 
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
@@ -196,13 +196,22 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 - Get all 500 status code logs from production.
 
 ### `search_datadog_rum_events`
-*Toolset: **core***\
+*Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
 Search Datadog RUM events using advanced query syntax.
 
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
+
+### `aggregate_rum_events`
+*Toolset: **core**, **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
+
+- Count JavaScript errors by page in the last 24 hours.
+- Show me the p95 loading time grouped by country for my main RUM application.
+- How many sessions had a Core Web Vitals failure this week?
 
 ### `create_datadog_notebook`
 *Toolset: **core***\
@@ -743,7 +752,7 @@ Tools for managing and analyzing [Experiments][62], including creating and concl
 
 <div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
-### `list-experiments`
+### `list_experiments`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
 Lists experiments for the organization, with optional name search, limit, and offset for pagination.
@@ -751,7 +760,7 @@ Lists experiments for the organization, with optional name search, limit, and of
 - Show me all running experiments.
 - Find experiments with "checkout" in the name.
 
-### `get-experiment`
+### `get_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
 Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
@@ -759,50 +768,50 @@ Gets a single experiment by ID, including status, linked feature flag, subject t
 - Get the details for experiment `abc123`.
 - What is the current status and linked flag for experiment `abc123`?
 
-### `create-experiment`
+### `create_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
 Creates a new experiment with a name, hypothesis, subject type, and primary metric.
 
 - Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
 
-### `link-feature-flag-to-experiment`
+### `link_feature_flag_to_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
 Links a feature flag to an experiment.
 
 - Link feature flag `new-checkout-flow` to experiment `abc123`.
 
-### `start-experiment`
+### `start_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
 Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
 
 - Start experiment `abc123`.
 
-### `conclude-experiment`
+### `conclude_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
 Concludes a running experiment with a permanent winning variant decision.
 
 - Conclude experiment `abc123` with the treatment variant as the winner.
 
-### `cancel-experiment`
+### `cancel_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
 Cancels a running experiment with a required reason.
 
 - Cancel experiment `abc123` because an SRM issue was detected.
 
-### `get-experiment-diagnostics`
+### `get_experiment_diagnostics`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
-Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get-experiment-results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
+Returns a health summary for an experiment before interpreting results: sample ratio mismatch (SRM) status, total subjects, per-variant exposure counts and fractions, and per-metric health including unreliable and zero-data metrics. Call this before `get_experiment_results` — if `srm.has_warning` is true, variant-level comparisons are not safe to interpret.
 
 - Run diagnostics on experiment `abc123` before I look at the results.
 - Is there a sample ratio mismatch in experiment `abc123`?
 
-### `get-experiment-results`
+### `get_experiment_results`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
 Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
@@ -810,29 +819,29 @@ Returns computed per-variant, per-metric results. The `verdict` field (`better`,
 - Show me the results for experiment `abc123`.
 - What is the verdict on the primary metric for experiment `abc123`?
 
-### `explore-experiment-results`
+### `explore_experiment_results`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
-Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get-experiment-results` for deeper analysis.
+Segments results by an assignment property (device type, country, plan tier, and so on) or over time. Use after `get_experiment_results` for deeper analysis.
 
 - Break down the results for experiment `abc123` by device type.
 - How did the lift for experiment `abc123` trend over the last two weeks?
 
-### `list-experiment-segmentation-properties`
+### `list_experiment_segmentation_properties`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
-Lists the assignment properties an experiment can be split by. Call this before `explore-experiment-results` to get valid property IDs — do not guess them.
+Lists the assignment properties an experiment can be split by. Call this before `explore_experiment_results` to get valid property IDs — do not guess them.
 
 - What segmentation properties can I use to break down experiment `abc123`?
 
-### `get-experiment-segmentation-property-values`
+### `get_experiment_segmentation_property_values`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
-Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore-experiment-results` to avoid invalid filter strings.
+Returns the concrete values for a segmentation property (for example, `["mobile", "desktop", "tablet"]` for device type). Use this before filtering in `explore_experiment_results` to avoid invalid filter strings.
 
 - What values are available for the device type property in experiment `abc123`?
 
-### `get-metric-definition`
+### `get_metric_definition`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Metrics Read`*\
 Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field with the structured parameters needed to query the raw event data. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
@@ -840,10 +849,10 @@ Returns the definition of an experiment metric — the underlying event query, d
 - What is the event query behind the primary metric for experiment `abc123`?
 - Which MCP tool should I use to investigate why this metric moved?
 
-### `diagnose-experiment-run-failure`
+### `diagnose_experiment_run_failure`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
-Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get-experiment-diagnostics` for result quality and SRM issues instead.
+Diagnoses why the latest (or a specific) analysis pipeline run for an experiment failed. Returns the root-cause task, a categorized failure explanation, and actionable next steps. Use `get_experiment_diagnostics` for result quality and SRM issues instead.
 
 - Why did the latest analysis run for experiment `abc123` fail?
 - Diagnose the pipeline failure for experiment `abc123`.
@@ -1210,9 +1219,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
-
-<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1246,6 +1253,22 @@ Explores RUM metrics for an application, including out-of-the-box metrics and cu
 - List the custom RUM metrics defined on the "checkout-web" application.
 - Show me available RUM metrics related to page load time on my main app.
 
+### `upsert_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Creates or updates a custom RUM metric. Checks immutable fields before updating an existing metric. This operation is idempotent.
+
+- Create a distribution metric `rum.view.lcp_by_country` that tracks p95 LCP for view events, grouped by country.
+- Update the filter on `rum.error.checkout_errors` to exclude synthetic test traffic.
+
+### `delete_rum_metric`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Generate Metrics`*\
+Permanently deletes a custom RUM metric by ID. This operation is idempotent.
+
+- Delete the custom RUM metric `rum.view.my_custom_metric`.
+- Remove the `rum.view.legacy_page_views` RUM metric from my organization.
+
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
@@ -1254,9 +1277,41 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
 
+### `append_new_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+
+- Create a retention filter on "checkout-web" that retains 100% of error events.
+- Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+
+### `update_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+
+- Increase the sample rate on the "checkout errors" retention filter to 100%.
+- Disable the "long tasks" retention filter on my main RUM app.
+
+### `reorder_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+
+- Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
+- Reorder my retention filters so the specific filters are evaluated before the broad ones.
+
+### `delete_rum_retention_filter`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+
+- Delete the "legacy sessions" retention filter from "checkout-web".
+- Remove the retention filter with ID `abc-123-def` from my main RUM app.
+
 ## Security
 
-Tools for code security scanning, analyzing, searching and triaging [security signals][53], managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -1308,6 +1363,40 @@ Updates the triage state or assignee of one or more security signals in bulk (up
 - Archive all signals from rule "Brute Force Login" in the last 24 hours.
 - Set all open signals for `service:checkout` to under review and assign them to me.
 - Mark signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` as archived with reason "testing".
+
+### `search_datadog_security_ioc_indicators`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+List [IoC Explorer][67] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_security_ioc_indicator` for full detail and `update_datadog_security_ioc_indicator_triage` to mark reviewed.
+
+- Show me the highest-scoring malicious IP indicators.
+- List IoC indicators in the `residential_proxy` category with a Medium or higher score.
+- Show me threat indicators that have not been reviewed yet.
+
+### `get_datadog_security_ioc_indicator`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Retrieve full detail for one [IoC Explorer][67] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
+
+- Get details for the threat indicator `192.0.2.1`.
+- Show me everything we know about `malicious.example.com`.
+
+### `update_datadog_security_ioc_indicator_triage`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Write`*\
+Set the triage state of an [IoC Explorer][67] indicator.
+
+- Mark indicator `192.0.2.1` as reviewed.
+- Set `evil-domain.example.com` back to not reviewed.
+
+### `get_datadog_security_ioc_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Discover filterable fields and their values for [IoC Explorer][67]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
+
+- What fields are available for IoC indicator filters?
+- Show me the available indicator types and how many of each exist.
+- Get the values for the `categories` filter scoped to high-score indicators.
 
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
@@ -1461,6 +1550,58 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Assign these critical findings to the security team lead.
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
+
+### `get_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
+
+- List all App & API Protection passlist entries.
+- Show me active WAF exclusion filters.
+- Check existing passlist suppressions before I add a new one.
+
+### `upsert_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
+
+- Add a WAF passlist entry for service "checkout-service" on endpoint "/api/pay" to ignore rule "sqli-detection".
+- Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
+- Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
+
+### `delete_datadog_security_passlist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Deletes an existing WAF exclusion filter (passlist) entry.
+
+- Delete WAF exclusion filter "passlist-abc-123".
+- Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
+
+### `get_datadog_security_denylist`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
+
+- List all blocked entities on the AppSec denylist.
+- Show me blocked IP addresses from yesterday.
+- Check if IP "198.51.100.42" is on the security denylist.
+
+### `upsert_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Adds or updates a denylist block for an IP, user, or user agent with an expiration.
+
+- Block IP "198.51.100.42" on the denylist for 24 hours.
+- Add user "attacker_user_99" to the blocked entities denylist.
+- Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
+
+### `delete_datadog_security_denylist_entry`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Unblocks a previously denylisted entity by setting its expiration in the past.
+
+- Unblock IP "198.51.100.42" on the denylist.
+- Remove user "attacker_user_99" from the blocked entities list.
 
 ## Software Delivery
 
@@ -1632,14 +1773,6 @@ Retrieves and visualizes Datadog metrics, traces, logs, and other data as intera
 - Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
 - Visualize the data from this Datadog share link.
 
-### `get_widget_reference_compressed`
-*Toolset: **widgets***\
-*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
-Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
-
-- Get the compressed schema for a timeseries widget.
-- Show the building instructions for top list and query table widgets.
-
 ### `search_datadog_widgets`
 *Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
@@ -1770,3 +1903,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [64]: /cloud_cost_management/
 [65]: /code_coverage/
 [66]: /delivery_performance/dora_metrics/
+[67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/

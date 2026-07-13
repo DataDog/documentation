@@ -756,6 +756,7 @@ If your Jenkins instance is behind an HTTP proxy, go to {{< ui >}}Manage Jenkins
 | US5          | us5.datadoghq.com       |
 | EU1          | datadoghq.eu            |
 | AP1          | ap1.datadoghq.com       |
+| UK1          | uk1.datadoghq.com       |
 
 #### The Datadog Plugin cannot write payloads to the server
 

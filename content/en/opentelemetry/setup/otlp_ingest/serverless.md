@@ -10,10 +10,6 @@ further_reading:
     text: "Datadog Serverless Monitoring"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-Serverless traces use the OTLP traces intake endpoint, which is in Preview. To send serverless traces, you must have access to the OTLP traces endpoint.
-{{< /callout >}}
-
 ## Overview
 
 Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead.
@@ -78,8 +74,6 @@ The ADOT layer handles resource attribute detection automatically. If you are no
 ```shell
 export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-east-1:123456789012:function:my-function"
 ```
-
-<!-- TODO: Eng to confirm whether backend accepts cloud.resource_id (faas.id is deprecated in OTel semconv). -->
 
 | Attribute | Required | Description |
 |---|---|---|
@@ -165,8 +159,6 @@ export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.funct
 ```
 
 ### Resource attributes reference
-
-<!-- TODO: Confirm whether Azure Functions cloud.resource_id should identify the specific function, not just the function app. -->
 
 | Platform | `cloud.provider` | `cloud.platform` | `cloud.resource_id` |
 |---|---|---|---|

@@ -139,6 +139,21 @@ See the [Integrations page][13] for a full listing of the available sub-integrat
 
 Use the {{< ui >}}Metric Collection{{< /ui >}} tab on the [AWS integration page][8] to configure which services the Datadog integration collects metrics from.
 
+### Filter metrics by metric name
+
+Use the {{< ui >}}Metric Collection{{< /ui >}} tab on the [AWS integration page][8] to filter CloudWatch metrics by namespace. Expand a namespace in the CloudWatch metric collection table and choose an **Include** or **Exclude** filter:
+
+- **Include**: Collect only Datadog metric names that match the configured patterns for that namespace.
+- **Exclude**: Collect all Datadog metric names for that namespace except those that match the configured patterns.
+
+Each namespace can use one filter mode at a time. Filter patterns support lowercase letters, numbers, `.`, `_`, and `*`. For example, `aws.ec2.network_*` matches EC2 network metrics. The table previews how many metrics match each pattern before you save changes.
+
+Metric name filters apply per namespace and are evaluated after the namespace is enabled for metric collection.
+
+<div class="alert alert-info">
+Metric name filters cannot remove <code>aws.ec2.cpuutilization</code> or <code>aws.lambda.invocations</code>. Datadog always collects these required metrics.
+</div>
+
 ### Add regions
 
 Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.

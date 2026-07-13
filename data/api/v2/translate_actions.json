@@ -1986,6 +1986,20 @@
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
+  "ListIdentityProviders": {
+    "description": "Get all identity providers available for the current organization.",
+    "summary": "List identity providers"
+  },
+  "UpdateIdentityProvider": {
+    "description": "Enable or disable an identity provider for the current organization.",
+    "summary": "Update an identity provider",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an organization identity provider."
+  },
+  "ListIdentityProviderUsers": {
+    "description": "Get all users in the organization whose login method has been overridden\nto use the specified identity provider.",
+    "summary": "List users with an identity provider override"
+  },
   "DeleteEntityIntegrationConfig": {
     "description": "Delete the configuration stored for a given integration in the caller's organization.",
     "summary": "Delete an entity integration configuration"
@@ -2313,6 +2327,16 @@
     "summary": "Create AWS CCM config",
     "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
     "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
+  "GetAWSMetricNameFilterPreview": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.",
+    "summary": "Get AWS metric name filter preview"
+  },
+  "PreviewAWSMetricNameFilter": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.\nThe filters are not persisted.",
+    "summary": "Preview AWS metric name filter",
+    "request_description": "The metric name filters to preview.",
+    "request_schema_description": "AWS metric name filter preview request body."
   },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
@@ -3911,6 +3935,36 @@
     "request_description": "",
     "request_schema_description": "Request to update an organization's SAML preferences."
   },
+  "ListOrgAuthorizedClients": {
+    "description": "Get a list of all OAuth2 clients authorized for the current organization.",
+    "summary": "List org authorized clients"
+  },
+  "DeleteOrgAuthorizedClient": {
+    "description": "Disable an OAuth2 client authorization for the current organization, revoking access for all users.",
+    "summary": "Delete an org authorized client"
+  },
+  "GetOrgAuthorizedClient": {
+    "description": "Get a single OAuth2 client authorized for the current organization.",
+    "summary": "Get an org authorized client"
+  },
+  "UpdateOrgAuthorizedClient": {
+    "description": "Enable or disable an OAuth2 client authorization for the current organization.",
+    "summary": "Update an org authorized client",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an org authorized client."
+  },
+  "DeleteOrgAuthorizedClientAllUserAuthorizations": {
+    "description": "Disable all authorizations for a specific user for the specified OAuth2 client in the current organization.",
+    "summary": "Delete a user's authorizations for a client"
+  },
+  "ListOrgAuthorizedClientUserAuthorizations": {
+    "description": "Get a list of user authorizations for the specified OAuth2 client in the current organization.",
+    "summary": "List user authorizations for a client"
+  },
+  "DeleteOrgAuthorizedClientUserAuthorization": {
+    "description": "Disable a specific user authorization for the specified OAuth2 client in the current organization.",
+    "summary": "Delete a user authorization for a client"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -4456,7 +4510,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.",
+    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
@@ -5047,6 +5101,18 @@
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
   },
+  "AttachLinearIssue": {
+    "description": "Attach security findings to a Linear issue by providing the Linear issue URL.\nYou can attach up to 50 security findings per Linear issue. If the Linear issue is not linked to any case, this operation will create a case for the security findings and link the Linear issue to the newly created case. Security findings that are already attached to another Linear issue will be detached from their previous Linear issue and attached to the specified Linear issue.",
+    "summary": "Attach security findings to a Linear issue",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a Linear issue."
+  },
+  "CreateLinearIssues": {
+    "description": "Create Linear issues for security findings.\nThis operation creates a case in Datadog and a Linear issue linked to that case for bidirectional sync between Datadog and Linear. You can create up to 50 Linear issues per request and associate up to 50 security findings per Linear issue. Security findings that are already attached to another Linear issue will be detached from their previous Linear issue and attached to the newly created Linear issue.",
+    "summary": "Create Linear issues for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create Linear issues for security findings."
+  },
   "MuteSecurityFindings": {
     "description": "Mute or unmute security findings.\nYou can mute or unmute up to 100 security findings per request. The request body must include `is_muted` and `reason` attributes. The allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `OTHER`, `NO_FIX`, `DUPLICATE`, `RISK_ACCEPTED`.\n  - To unmute a finding: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.",
     "summary": "Mute or unmute security findings",
@@ -5072,7 +5138,7 @@
     "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
   "ListAssetsSBOMs": {
-    "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
+    "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
   },
   "GetSBOM": {
@@ -5221,6 +5287,10 @@
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
   },
+  "GetEntraIdAzureAppRegistrations": {
+    "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
+    "summary": "Get Entra ID Azure App Registration prerequisites"
+  },
   "ValidateSecurityMonitoringIntegrationCredentials": {
     "description": "Validate a set of credentials against the external entity source before creating a sync configuration.\nReturns a 200 status code if the credentials are valid.",
     "summary": "Validate entity context sync credentials",
@@ -5244,6 +5314,16 @@
   "ValidateSecurityMonitoringIntegrationConfig": {
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
+  },
+  "ActivateIntegration": {
+    "description": "Activate an entity context sync integration for a source type that does not require manually\nsupplied credentials (for example, Entra ID). If an integration of this type already exists,\nit is returned (re-enabling it first if it was disabled) instead of creating a duplicate.",
+    "summary": "Activate an entity context sync integration",
+    "request_description": "Optional configuration overrides for the integration to activate.",
+    "request_schema_description": "Request body to activate an entity context sync integration for a source type that does not require secrets."
+  },
+  "DeactivateIntegration": {
+    "description": "Deactivate all active entity context sync integrations of the given source type (for example, Entra ID).",
+    "summary": "Deactivate an entity context sync integration"
   },
   "SendSecurityMonitoringNotificationPreview": {
     "description": "Send a notification preview to test that a notification rule's targets are properly configured.",
@@ -5754,6 +5834,12 @@
   "GetSloStatus": {
     "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
     "summary": "Get SLO status"
+  },
+  "CreateSnapshot": {
+    "description": "Create a snapshot of a graph widget. The snapshot is rendered asynchronously; the returned URL can be polled until the image is ready.",
+    "summary": "Create a graph snapshot",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a graph snapshot."
   },
   "DeleteSourcemaps": {
     "description": "Deletes source maps matching the specified filter criteria. Supports\ndry-run mode to preview which source maps would be deleted without\nperforming the actual deletion.",
@@ -6570,6 +6656,22 @@
     "description": "Get usage attribution types.",
     "summary": "Get usage attribution types"
   },
+  "ListUserAuthorizedClients": {
+    "description": "Get a list of all OAuth2 clients authorized by the current user.",
+    "summary": "List user authorized clients"
+  },
+  "DeleteUserAuthorizedClientsByClient": {
+    "description": "Disable all authorizations the current user has granted to the specified OAuth2 client.",
+    "summary": "Delete all user authorized clients for a client"
+  },
+  "DeleteUserAuthorizedClient": {
+    "description": "Disable the current user's authorization for the specified OAuth2 client.",
+    "summary": "Delete a user authorized client"
+  },
+  "GetUserAuthorizedClient": {
+    "description": "Get a single OAuth2 client authorization for the current user.",
+    "summary": "Get a user authorized client"
+  },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
     "summary": "Send invitation emails",
@@ -6604,6 +6706,10 @@
     "request_description": "",
     "request_schema_description": "Update a user."
   },
+  "GetUserIdentityProviders": {
+    "description": "Get the identity provider overrides for a specific user in the organization.\nWhen a user has no overrides set, they use the organization's default identity providers.",
+    "summary": "Get identity provider overrides for a user"
+  },
   "DeleteUserInvitations": {
     "description": "Cancel all pending invitations for a specified user.\nRequires the `user_access_invite` permission.",
     "summary": "Delete a pending user's invitations"
@@ -6615,6 +6721,12 @@
   "ListUserPermissions": {
     "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
     "summary": "Get a user permissions"
+  },
+  "UpdateUserIdentityProviders": {
+    "description": "Set the identity provider overrides for a specific user in the organization.\nPass an empty list to remove all overrides, reverting the user to the organization's\ndefault identity providers.",
+    "summary": "Update identity provider overrides for a user",
+    "request_description": "",
+    "request_schema_description": "Request body for setting identity provider overrides for a user."
   },
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",

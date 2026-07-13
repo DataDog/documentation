@@ -141,13 +141,13 @@ When you index a span using a retention filter:
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_create.png" style="width:90%;" alt="Create Retention Filter">}}
 
 To create a retention filter:
-1. Go to [**APM** > **Retention Filters**][18].
-1. Click **Add Retention Filter**.
-1. Define the **Retention Query** to target the spans you wish to retain. Use any span or attribute to filter spans, as you would write a query in the [Trace Explorer][7].
-1. Set a **Span rate** to define the percentage of spans matching this query that should be indexed.
-1. Optionally, set a **Trace rate** to define the percentage of full traces associated with the spans that should be indexed. This ensures that other spans from traces associated with the span targeted by the retention query are also indexed, so that the indexed data is queryable in [Trace Queries][11]. 
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}}][18].
+1. Click {{< ui >}}Add Retention Filter{{< /ui >}}.
+1. Define the {{< ui >}}Retention Query{{< /ui >}} to target the spans you wish to retain. Use any span or attribute to filter spans, as you would write a query in the [Trace Explorer][7].
+1. Set a {{< ui >}}Span rate{{< /ui >}} to define the percentage of spans matching this query that should be indexed.
+1. Optionally, set a {{< ui >}}Trace rate{{< /ui >}} to define the percentage of full traces associated with the spans that should be indexed. This ensures that other spans from traces associated with the span targeted by the retention query are also indexed, so that the indexed data is queryable in [Trace Queries][11]. 
 1. Set a name for the filter.
-1. Click **Add Filter** to save the filter.
+1. Click {{< ui >}}Add Filter{{< /ui >}} to save the filter.
 
 <div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
@@ -158,7 +158,7 @@ For example, if you configure a retention filter to index spans from `service:my
 
 When you create a new filter or edit the retention rate of an existing filter, Datadog displays an estimate of the percentage change in global indexing volume.
 
-Filters are retained in a serial order. If you have an upstream filter that retains spans with the `resource:POST /hello_world` tag, those spans do not show up in the **Edit** window of a downstream filter that searches for spans with the same tag because they have been retained by the upstream filter.
+Filters are retained in a serial order. If you have an upstream filter that retains spans with the `resource:POST /hello_world` tag, those spans do not show up in the {{< ui >}}Edit{{< /ui >}} window of a downstream filter that searches for spans with the same tag because they have been retained by the upstream filter.
 
 ## Trace search and analytics on indexed spans
 
