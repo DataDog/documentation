@@ -8,4 +8,5 @@ Toggle the switch to **Enable TLS**.
     - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][101] for more information.
     - The file must be readable by the `observability-pipelines-worker` group and user.
 
-[101]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+<!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->
