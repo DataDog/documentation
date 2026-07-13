@@ -17,7 +17,7 @@ further_reading:
 Datadog On-Call supports multiple triggering sources beyond native Datadog monitors. Use third-party tools to send Pages directly to your On-Call teams. Alerts from any part of your stack then reach the right responders through your configured escalation policies.
 
 {{< callout url="https://www.datadoghq.com/product-preview/on-call-integrations/" >}}
-To use an integration marked **(Preview)**, or to request one that isn't listed, request access through product preview form.
+To use an integration marked **(Preview)**, or to request one that isn't listed, request access through the product preview form.
 {{< /callout >}}
 
 {{< card-grid card_width="150px" >}}
