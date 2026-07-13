@@ -1062,7 +1062,7 @@ Finds Product Analytics views and actions matching a natural-language descriptio
 ### `search_product_analytics_org_entities`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Looks up org-specific Product Analytics entities by name or keyword, including feature flags, context attribute keys, saved charts, and segments.
+Looks up org-specific Product Analytics entities by name or keyword (feature flags, context attribute keys, saved charts, and segments).
 
 - Find the segment for "power users".
 - What feature flags are available to filter Product Analytics data by?
