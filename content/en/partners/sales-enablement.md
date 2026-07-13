@@ -6,7 +6,7 @@ The Datadog Partner Network provides many resources for partners. This is a guid
 
 ## Datadog basics
 
-First, head over to the [Partner Portal][1]. Log in and click **Training**. Under Sales Certification, click **Get started today**.
+First, head over to the [Partner Portal][1]. Log in and click {{< ui >}}Training{{< /ui >}}. Under {{< ui >}}Sales Certification{{< /ui >}}, click {{< ui >}}Get started today{{< /ui >}}.
 
 {{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="max-width:734px">}}
 
@@ -58,7 +58,7 @@ In order to complete your quote, you need pricing basics.
 
 - [Datadog's pricing][3] describes how pricing works, including the units of measurement and the metering approach at Datadog.
 - [Customer plans][4] provides details about standard end-customer pricing options.
-- Finally, to understand discounts offered, check out the Partner Portal pricing tab:
+- Finally, to understand discounts offered, check out the Partner Portal {{< ui >}}pricing{{< /ui >}} tab:
 
 {{<img src="partners/portal_pricing_go.png" alt="Partner Portal Pricing Info" style="max-width:734px">}}
 

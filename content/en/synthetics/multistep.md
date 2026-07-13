@@ -51,13 +51,13 @@ Multistep API tests can run from Datadog [managed](#select-locations) and [priva
 
 ### Select locations
 
-Select the **Locations** for your Multistep API test. Multistep API tests can run from both managed and [private locations][4] depending on your preference for running the test from outside or inside your network.
+Select the {{< ui >}}Locations{{< /ui >}} for your Multistep API test. Multistep API tests can run from both managed and [private locations][4] depending on your preference for running the test from outside or inside your network.
 
 {{% managed-locations %}} 
 
 ### Define steps
 
-To create an API request step, click **Create Your First Step**.
+To create an API request step, click {{< ui >}}Create Your First Step{{< /ui >}}.
 
 {{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
@@ -136,21 +136,21 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
 ### Add execution settings
 
-Under **Execution Settings**, the following options are available:
+Under {{< ui >}}Execution Settings{{< /ui >}}, the following options are available:
 
 #### Step success:
 
-Click **If step succeeds, continue to next step** to let your test proceed with subsequent steps after successful steps.  
+Click {{< ui >}}If step succeeds, continue to next step{{< /ui >}} to let your test proceed with subsequent steps after successful steps.  
 
 {{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Screenshot of execution settings showing step success options continue to next step" style="width:90%;" >}}
 
-Click **If step succeeds, exit test and mark it as passed** to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as failed. 
+Click {{< ui >}}If step succeeds, exit test and mark it as passed{{< /ui >}} to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as failed. 
 
 {{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Screenshot of execution settings showing step success exit and mark as passed" style="width:90%;" >}}
 
 #### Step failure
 
-Click **If step fails, continue to next step** to proceed with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
+Click {{< ui >}}If step fails, continue to next step{{< /ui >}} to proceed with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
@@ -162,13 +162,13 @@ The test generates an alert if an endpoint does not answer as expected. Your tes
 
 Optionally, extract variables from the response of your API request by parsing its response headers or body. The value of the variable updates each time the API request step runs.
 
-To start parsing a variable, click **Extract a variable from response content**:
+To start parsing a variable, click {{< ui >}}Extract a variable from response content{{< /ui >}}:
 
-1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+1. Enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or from the response body.
 
-   * Extract the value from **response header**: use the full response header of your API request as the variable value, or parse it with a [`regex`][8].
-   * Extract the value from **response body**: use the full response body of your API request as the variable value or parse it with a [`regex`][8], a [`JSONPath`][6], or a [`XPath`][7].
+   * Extract the value from {{< ui >}}response header{{< /ui >}}: use the full response header of your API request as the variable value, or parse it with a [`regex`][8].
+   * Extract the value from {{< ui >}}response body{{< /ui >}}: use the full response body of your API request as the variable value or parse it with a [`regex`][8], a [`JSONPath`][6], or a [`XPath`][7].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from API requests in Multistep API test" style="width:90%;" >}}
 
@@ -194,7 +194,7 @@ In addition to creating local variables, you can [extract variables from any ste
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your API tests.
+You can use the [global variables defined in the {{< ui >}}Settings{{< /ui >}}][13] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your API tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -204,9 +204,9 @@ To display your list of variables, type `{{` in your desired field.
 
 Multistep API tests support subtests, allowing you to reuse existing Multistep API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
 
-To use an existing Multistep API test as a subtest, click **Subtest**, go to the **From Existing Test** tab, and select a Multistep API test from the dropdown menu.
+To use an existing Multistep API test as a subtest, click {{< ui >}}Subtest{{< /ui >}}, go to the {{< ui >}}From Existing Test{{< /ui >}} tab, and select a Multistep API test from the dropdown menu.
 
-To convert steps from your current Multistep API test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**.
+To convert steps from your current Multistep API test into a subtest, click on the {{< ui >}}Extract From Steps{{< /ui >}} tab, select the recorded steps you want to extract, and click {{< ui >}}Convert to Subtest{{< /ui >}}.
 
 {{< img src="synthetics/multistep_tests/subtest.png" alt="UI for adding a subtest to a Multistep API test" width="60%" >}}
 

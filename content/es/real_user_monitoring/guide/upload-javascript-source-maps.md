@@ -1,41 +1,43 @@
 ---
-description: Carga mapas fuente de JavaScript para mejorar el rastreo de errores con
-  stack traces legibles y una mejor depuración del código minificado.
+description: Suba mapas del código fuente de JavaScript para mejorar el seguimiento
+  de errores con trazas de pila legibles y una mejor depuración para el código minificado.
 further_reading:
 - link: /real_user_monitoring/error_tracking
   tag: Documentación
-  text: Comenzar con rastreo de errores
+  text: Comience con el seguimiento de errores.
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
-  text: Visualización de tus datos de rastreo de errores en el Explorer
-- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
+  text: Visualice sus datos de seguimiento de errores en el Explorador.
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
   tag: Código fuente
-  text: Referencia del comando Sourcemaps
-title: Carga de mapas de fuente de JavaScript
+  text: Referencia de comandos de mapas del código fuente
+- link: https://learn.datadoghq.com/courses/tracking-errors-rum-javascript
+  tag: Centro de aprendizaje
+  text: Seguimiento de errores con RUM para aplicaciones web de JavaScript
+title: Suba mapas del código fuente de JavaScript.
 ---
+## Resumen {#overview}
 
-## Información general
+Si su código fuente de JavaScript del lado del cliente está minificado, suba sus mapas del código fuente a Datadog para desofuscar las trazas de pila. Para cualquier error dado, puede acceder a la ruta del archivo, al número de línea y al fragmento de código para cada marco de la traza de pila relacionada. Datadog también puede vincular los marcos de la pila a su código fuente en su repositorio.
 
-Si el código fuente de tu frontend JavaScript está minificado, carga tus mapas de fuente a Datadog para deenmascarar tus diferentes stack traces. Para cualquier error dado, puedes acceder a la ruta del archivo, el número de línea y el fragmento de código para cada marco del stack trace relacionado. Datadog también puede vincular marcos de stack a tu código fuente en tu repositorio.
+<div class="alert alert-info"><ul><li>Solo los errores recopilados por <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, y registros de <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> pueden ser desminificados.</li><li>Para automatizar la subida de mapas del código fuente como parte de su proceso de construcción, consulte <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</li></ul></div>
 
-<div class="alert alert-info">Solo pueden desminificarse los errores recopilados por <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> y logs de <a href="/logs/log_collection/javascript/">Browser Logs Collection</a>.</div>
+## Instrumenta su código {#instrument-your-code}
 
-## Instrumentar tu código
-
-Configura tu empaquetador de JavaScript para que, al minificar el código fuente,, genere mapas fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
+Configure su empaquetador de JavaScript de tal manera que, al minificar su código fuente, se generen mapas de origen que incluyan directamente el código fuente relacionado en el `sourcesContent` atributo.
 
 <div class="alert alert-danger">
-Asegúrate de que el tamaño de cada source map (mapa de fuentes) aumentado con el tamaño del archivo minificado relacionado no supere el límite de **500 MB**.
+Asegúrese de que el tamaño de cada mapa del código fuente aumentado con el tamaño del archivo minificado relacionado no exceda el límite de <b>500 MB</b>.
 </div>
 
-Consulta las siguientes configuraciones para los empaquetadores más populares de JavaScript.
+Consulta las siguientes configuraciones para empaquetadores de JavaScript populares.
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-Puedes generar mapas de fuente utilizando el complemento webpack integrado llamado [SourceMapDevToolPlugin][1].
+Puede generar mapas del código fuente utilizando el complemento incorporado de webpack llamado [SourceMapDevToolPlugin][1].
 
-Consulta el ejemplo de configuración en tu archivo `webpack.config.js`:
+Vea la configuración de ejemplo en su archivo `webpack.config.js`:
 
 ```javascript
 // ...
@@ -59,20 +61,20 @@ module.exports = {
 };
 ```
 
-**Nota**: Si utilizas TypeScript, establece `compilerOptions.sourceMap` en `true` en tu archivo `tsconfig.json`.
+**Nota**: Si está utilizando TypeScript, establezca `compilerOptions.sourceMap` en `true` en su archivo `tsconfig.json`.
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
 {{% /tab %}}
 {{% tab "ParcelJS" %}}
 
-Parcel genera mapas de fuente por defecto cuando se ejecuta el comando build: `parcel build <entry file>`.
+Parcel genera mapas del código fuente por defecto al ejecutar el comando de construcción: `parcel build <entry file>`.
 
 {{% /tab %}}
 {{% tab "Vite" %}}
 
-Puedes generar source maps (mapas de fuentes) configurando la opción `build.sourcemap` en tu archivo `vite.config.js`.
+Puede generar mapas del código fuente configurando la opción `build.sourcemap` en su archivo `vite.config.js`.
 
-Consulta el ejemplo de configuración:
+Vea la configuración de ejemplo:
 
 ```javascript
 // vite.config.js
@@ -86,14 +88,14 @@ export default defineConfig({
 })
 ```
 
-**Nota**: Si estás utilizando TypeScript, asegúrate de que `compilerOptions.sourceMap` se configure en `true` en tu archivo `tsconfig.json`.
+**Nota**: Si está utilizando TypeScript, asegúrese de que `compilerOptions.sourceMap` esté establecido en `true` en su archivo `tsconfig.json`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Tras compilar la aplicación, los empaquetadores generan un directorio (normalmente denominado `dist`) con los archivos JavaScript minificados junto con sus correspondientes mapas de fuente.
+Después de construir su aplicación, los empaquetadores generan un directorio (típicamente llamado `dist`) con archivos JavaScript minificados ubicados junto a sus correspondientes mapas del código fuente.
 
-Consulta el siguiente ejemplo:
+Vea el siguiente ejemplo:
 
 ```bash
 ./dist
@@ -105,17 +107,17 @@ Consulta el siguiente ejemplo:
 ```
 
 <div class="alert alert-danger">
-Si la suma del tamaño de los archivos <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> supera el límite de <b>500 MB</b>, redúcelo configurando el empaquetador para dividir el código source (fuente) en varios fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">División del código con WebpackJS</a>.
+Si la suma del tamaño del archivo para <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> excede el límite de <b>500 MB</b>, redúzcalo configurando su empaquetador para dividir el código fuente en múltiples fragmentos más pequeños. Para más información, consulte <a href="https://webpack.js.org/guides/code-splitting/">División de Código con WebpackJS</a>.
 </div>
 
-## Cargar tus mapas de fuente
+## Suba sus mapas del código fuente {#upload-your-source-maps}
 
-La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pipeline de CI y ejecutar el comando dedicado desde la [CLI de Datadog][1]. Explora el directorio `dist` y tus subdirectorios para cargar automáticamente los mapas de fuente con los archivos minificados pertinentes.
+La mejor manera de subir mapas del código fuente es agregar un paso adicional en su pipeline de CI y ejecutar el comando dedicado desde el [Datadog CLI][1]. Escanea el directorio `dist` y sus subdirectorios para cargar automáticamente los mapas del código fuente con los archivos minificados relevantes.
 
 {{< site-region region="us" >}}
-1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
-2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
-3. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
+1. Agregue `@datadog/datadog-ci` a su archivo `package.json` (asegúrese de estar utilizando la última versión).
+2. [Cree una clave API dedicada de Datadog][1] y expórtela como una variable de entorno llamada `DATADOG_API_KEY`.
+3. Ejecute el siguiente comando una vez por servicio en su aplicación:
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -128,10 +130,10 @@ La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pip
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
-1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
-2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
-3. Configura la CLI para cargar archivos al sitio {{<region-param key="dd_site_name">}} exportando dos variables de entorno: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} y `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
+{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2" >}}
+1. Agregue `@datadog/datadog-ci` a su archivo `package.json` (asegúrese de estar utilizando la última versión).
+2. [Cree una clave API dedicada de Datadog][1] y expórtela como una variable de entorno llamada `DATADOG_API_KEY`.
+3. Configure la CLI para cargar archivos en el {{<region-param key="dd_site_name">}} sitio exportando dos variables de entorno: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} y `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -144,43 +146,46 @@ La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pip
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-Para minimizar la sobrecarga en el rendimiento de tu CI, la CLI está optimizada para cargar tantos mapas de fuente como necesites en un breve espacio de tiempo (normalmente unos segundos).
+Para minimizar la sobrecarga en el rendimiento de su CI, la CLI está optimizada para cargar tantos mapas del código fuente como necesite en un corto período de tiempo (típicamente unos pocos segundos).
 
-**Nota**: Volver a cargar un mapa de fuente no anula el existente si la versión no ha cambiado.
+**Nota**: Volver a cargar un mapa del código fuente no reemplaza el existente si la versión no ha cambiado.
 
-Los parámetros `--service` y `--release-version` deben coincidir con las etiquetas (tags) `service` y `version` de tus eventos de Error Tracking, eventos de RUM y logs del navegador. Para más información sobre cómo configurar estas etiquetas, consulta la [documentación inicial del SDK del navegador][2] o la [documentación de la recopilación de logs del navegador][3].
+Los parámetros `--service` y `--release-version` deben coincidir con las etiquetas `service` y `version` en sus eventos de seguimiento de errores, eventos de RUM y registros del navegador. Para más información sobre cómo configurar estas etiquetas, consulta la [documentación de inicialización del SDK del navegador][2] o la [documentación de recopilación de registros del navegador][3].
 
-<div class="alert alert-info">Si has definido varios servicios en tu aplicación, ejecuta el comando CI tantas veces como haya servicios, incluso si tienes un conjunto de mapas fuente para toda la aplicación.</div>
+<div class="alert alert-info">Si ha definido múltiples servicios en su aplicación, ejecute el comando de CI tantas veces como servicios haya, incluso si tiene un conjunto de mapas de origen para toda la aplicación.</div>
 
-Al ejecutar el comando contra el directorio de ejemplo `dist`, Datadog espera que tu servidor o CDN entregue los archivos JavaScript en `https://hostname.com/static/js/javascript.364758.min.js` y `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
+Al ejecutar el comando contra el directorio de ejemplo `dist`, Datadog espera que su servidor o CDN entregue los archivos JavaScript en `https://hostname.com/static/js/javascript.364758.min.js` y `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
-Solo los mapas de fuente con la extensión `.js.map` funcionan para desminificar correctamente los stack traces. Los mapas de fuente con otras extensiones como `.mjs.map` se aceptan, pero no desminifican los stack traces.
+Solo los mapas del código fuente con la extensión `.js.map` funcionan para desminificar correctamente las trazas de pila. Los mapas del código fuente con otras extensiones como `.mjs.map` son aceptados pero no desminifican las trazas de pila.
 
-<div class="alert alert-info">Si estás proporcionando los mismos archivos fuente JavaScript desde diferentes subdominios, carga el mapa de fuente relacionado una vez y haz que funcione para múltiples subdominios utilizando la ruta de prefijo absoluta en lugar de la URL completa. Por ejemplo, especifica <code>/static/js</code> en lugar de <code>https://hostname.com/static/js.</code></div>
+<div class="alert alert-info">Si está sirviendo los mismos archivos fuente de JavaScript desde diferentes subdominios, cargue el mapa del código fuente relacionado una vez y haga que funcione para múltiples subdominios utilizando la ruta de prefijo absoluto en lugar de la URL completa. Por ejemplo, especifique <code>/static/js</code> en lugar de <code>https://hostname.com/static/js</code>.</div>
 
-### Vincular los marcos de stack a tu código fuente
+Vea todos los símbolos subidos y administre sus mapas del código fuente en la página de [Explore RUM Debug Symbols][5].
 
-Si ejecutas `datadog-ci sourcemaps upload` dentro de un directorio de trabajo de Git, Datadog recopila los metadatos del repositorio. El comando `datadog-ci` recopila la URL del repositorio, el hash de la confirmación actual y la lista de rutas de archivos en el repositorio que se relacionan con tus mapas de fuente. Para más detalles sobre la recopilación de metadatos de Git, consulta la [documentación de datadog-ci][4].
+### Vincule los marcos de pila a su código fuente {#link-stack-frames-to-your-source-code}
 
-Datadog muestra enlaces a tu código fuente en marcos de stack sin minificar.
+Si ejecuta `datadog-ci sourcemaps upload` dentro de un directorio de trabajo de Git, Datadog recopila metadatos del repositorio. El comando `datadog-ci` recopila la URL del repositorio, el hash del commit actual y la lista de rutas de archivos en el repositorio que se relacionan con sus mapas del código fuente. Para más detalles sobre la recopilación de metadatos de Git, consulte la [documentación de datadog-ci][4].
 
-## Solucionar los errores con facilidad
+Datadog muestra enlaces a su código fuente en marcos de pila no minificados.
 
-Sin acceso a la ruta del archivo y al número de línea, un stack trace minificado no es útil para solucionar problemas de tu base de código. Además, el fragmento de código está minificado (lo que significa que hay una sola línea larga de código transformado), lo que dificulta el proceso de solución de problemas.
+## Solucione errores con facilidad {#troubleshoot-errors-with-ease}
 
-El siguiente ejemplo muestra un stack trace minificado:
+Sin acceso a la ruta del archivo y al número de línea, un rastro de pila minificado no es útil para solucionar problemas en su base de código. Además, el fragmento de código está minificado (lo que significa que hay una línea larga de código transformado), lo que dificulta más el proceso de solución de problemas.
 
-{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Rastreo de errores de stack trace minificado" >}}
+El siguiente ejemplo muestra un rastro de pila minificado:
 
-Por otro lado, un stack trace sin minificar te proporciona todo el contexto que necesitas para solucionar problemas de forma rápida y fluida. Para los marcos de stack relacionados con tu código fuente, Datadog también genera un enlace directo a tu repositorio:
+{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace" >}}
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Rastreo de errores de stack trace sin minificar" >}}
+Por otro lado, un rastro de pila no minificado le proporciona todo el contexto que necesita para una solución de problemas rápida y sin inconvenientes. Para los marcos de pila que se relacionan con su código fuente, Datadog también genera un enlace directo a su repositorio:
 
-## Referencias adicionales
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Error Tracking Unminified Stack Trace" >}}
+
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/es/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/es/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: https://app.datadoghq.com/source-code/setup/rum

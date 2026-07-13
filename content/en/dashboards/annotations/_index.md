@@ -10,8 +10,6 @@ Annotations let you manually place markers with descriptions on timeseries widge
 - **Point annotation**: Marks a single moment in time with a vertical line.
 - **Timerange annotation**: Highlights a span of time across the widget.
 
-You can also attach a link to any annotation to reference related resources, such as a runbook or incident ticket.
-
 {{< img src="dashboards/annotations-12-2025.png" alt="Timeseries showing a drop-off in availability with a vertical annotation line at the end of the drop-off and a comment that says 'Rollback completed — service availability restored.'" style="width:100%;" >}}
 
 Annotations are available in both dashboards and notebooks. If you export a widget from a dashboard to a notebook, any annotations you've added to the widget persist.

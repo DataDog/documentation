@@ -25,12 +25,12 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 
 You can create a playlist directly from the [Playlist page][1] or from an individual Session Replay.
 
-If you spot any notable behaviors after viewing a Session Replay, you can click **Save to Playlist** to build a new playlist or add that particular Session Replay to an existing playlist.
+If you spot any notable behaviors after viewing a Session Replay, you can click {{< ui >}}Save to Playlist{{< /ui >}} to build a new playlist or add that particular Session Replay to an existing playlist.
 
-To create it directly from the **Playlist page**:
+To create it directly from the {{< ui >}}Playlist page{{< /ui >}}:
 
-1. In Datadog, go to [**Digital Experience > Session Replay > Playlists**][1].
-2. Click **New Playlist**.
+1. In Datadog, go to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Session Replay{{< /ui >}} > {{< ui >}}Playlists{{< /ui >}}][1].
+2. Click {{< ui >}}New Playlist{{< /ui >}}.
 3. Give your playlist a name and description. You can then start exploring Session Replays in RUM to add to the playlist.
 
 {{< img src="real_user_monitoring/session_replay/playlists/playlists-1.png" alt="Create a new Playlist" style="width:60%;">}}
@@ -38,7 +38,7 @@ To create it directly from the **Playlist page**:
 To create it from an individual Session Replay:
 
 1. Open the replay you want to save.
-2. Click the **Share** button at the top, then select **Save to Playlist**.
+2. Click the {{< ui >}}Share{{< /ui >}} button at the top, then select {{< ui >}}Save to Playlist{{< /ui >}}.
 
       {{< img src="real_user_monitoring/session_replay/playlists/share-playlist.png" alt="Build a new playlist from the individual recording" style="width:90%;">}}
 3. Add the recording to an existing playlist, or create a new one.
@@ -47,11 +47,11 @@ To create it from an individual Session Replay:
 
 Three default playlists help you review Session Replays:
 
-- **My Watch History**: Replays you've previously watched.
-- **All mentions to me**: Replays where a teammate @mentioned you in a comment, so you can see which investigations need your input.
-- **Commented replays**: Every replay in your organization that has at least one comment, so you can review sessions you or your team has commented on.
+- {{< ui >}}My Watch History{{< /ui >}}: Replays you've previously watched.
+- {{< ui >}}All mentions to me{{< /ui >}}: Replays where a teammate @mentioned you in a comment, so you can see which investigations need your input.
+- {{< ui >}}Commented replays{{< /ui >}}: Every replay in your organization that has at least one comment, so you can review sessions you or your team has commented on.
 
-All three playlists are available under [**Digital Experience > Session Replay > Playlists**][1].
+All three playlists are available under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Session Replay{{< /ui >}} > {{< ui >}}Playlists{{< /ui >}}][1].
 
 ## Use cases
 

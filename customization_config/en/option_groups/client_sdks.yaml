@@ -6,8 +6,10 @@ client_sdk_platform_options:
   - id: flutter
   - id: react_native
   - id: kotlin_multiplatform
+  - id: cpp
   - id: roku
   - id: unity
+  - id: maui
 
 client_sdk_product_options:
   - id: rum

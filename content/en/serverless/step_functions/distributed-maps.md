@@ -8,7 +8,7 @@ In AWS Step Functions, you can set up a large-scale parallel workload by includi
 
 ## Set up trace merging
 
-1. To ensure that child workflows are correctly linked to their parents, enable the **Item Batching** option for your Distributed Map state. For more information, see [ItemBatcher][2]. If you don't want to use Item Batching, you can set `MaxItemsPerBatch` to 1 as a workaround.
+1. To ensure that child workflows are correctly linked to their parents, enable the {{< ui >}}Item Batching{{< /ui >}} option for your Distributed Map state. For more information, see [ItemBatcher][2]. If you don't want to use Item Batching, you can set `MaxItemsPerBatch` to 1 as a workaround.
 
 2. Your State Machine definition must use [JSONata][4] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 

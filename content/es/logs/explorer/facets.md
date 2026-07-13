@@ -1,236 +1,238 @@
 ---
 algolia:
   tags:
-  - Facetas de logs
+  - log facets
 aliases:
 - /es/logs/facets
-description: Facetas de logs y panel de facetas
+description: Facetas de log y Panel de Facetas
 further_reading:
 - link: logs/explorer/analytics
   tag: Documentación
-  text: Realizar análisis de los logs
+  text: Realizar Análisis de Registros
 - link: logs/explorer/patterns
   tag: Documentación
-  text: Detecta patrones en tus logs
+  text: Detectar patrones dentro de sus registros
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus logs
+  text: Aprender a procesar sus registros
 - link: logs/explorer/saved_views
   tag: Documentación
-  text: Configura tu Log Explorer automáticamente
-title: Facetas de logs
+  text: Configurar automáticamente su Explorador de Registros
+- link: https://learn.datadoghq.com/courses/log-explorer
+  tag: Centro de Aprendizaje
+  text: Comenzando con el Explorador de Registros
+title: Facetas de log
 ---
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facetas en el Explorador de Facetas de log" video=true style="width:100%;">}}
 
-{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facetas en la faceta de explorador" video=true style="width:100%;">}}
+## Descripción General {#overview}
 
-## Información general
+Las facetas son etiquetas y atributos definidos por el usuario de sus registros indexados. Están destinadas para el análisis de datos cualitativos o cuantitativos. Como tal, puede usarlas en su Explorador de Registros para:
 
-Las facetas son etiquetas (tags) y atributos definidos por el usuario a partir de tus logs indexados. Están pensadas para el análisis cualitativo o cuantitativo de datos. Como tales, pueden utilizarse en el Log Explorer para:
-
-- [Buscar en tus logs][1]
-- [Definir patrones de logs][2]
+- [Buscar en sus registros][1]
+- [Definir patrones de log][2]
 - [Realizar análisis de logs][3]
 
-Las facetas también te permiten manipular tus logs en tus [monitores de logs][4], widgets de logs en [dashboards][5] y [notebooks][6].
+Las facetas también le permiten manipular sus logs en sus [monitores de logs][4], widgets de logs en [tableros][5] y [notebooks][6].
 
-**Nota**: No necesitas facetas para admitir el [procesamiento de logs][7], [buscar en Live Tail][8], [buscar en el Explorador de logs][9], [generar métricas][10] de logs, reenviar [archivos][11] o [rehidratarlos][12]. Tampoco necesitas facetas para enrutar logs a través de [pipelines][13] e [índices][14] con filtros, o excluir o muestrear logs de índices con [filtros de exclusión][15].
+**Nota**: No necesita facetas para soportar [procesamiento de logs][7], [búsqueda en tiempo real][8], [búsqueda en el explorador de logs][9], [generación de métricas][10] a partir de logs, [archivado][11] de reenvíos, o [rehidratación][12]. Tampoco necesita facetas para enrutar logs a través de [Pipelines][13] e [Índices][14] con filtros, o excluir o muestrear logs de índices con [filtros de exclusión][15]. 
 
-En todos estos contextos, las capacidades de autocompletar se basan en facetas existentes, pero cualquier entrada que coincida con los logs entrantes funcionaría.
+En todos estos contextos, las capacidades de autocompletar dependen de las facetas existentes, pero cualquier entrada que coincida con los logs entrantes funcionaría.
 
-### Facetas cualitativas
+### Facetas cualitativas {#qualitative-facets}
 
-#### Dimensiones
+#### Dimensiones {#dimensions}
 
-Utiliza facetas cualitativas cuando necesites hacer lo siguiente:
+Utiliza facetas cualitativas cuando necesites:
 
-- Para **obtener información relativa** de los valores. Por ejemplo, crea una faceta en `http.network.client.geoip.country.iso_code` para ver los principales países más afectados por el número de errores 5XX en tus logs de acceso web [NGINX][16], mejorados con Datadog [GeoIP Processor][17].
-- Para **contar valores únicos**. Por ejemplo, crea una faceta en `user.email` a partir de tus logs de [Kong][18] para saber cuántos usuarios se conectan cada día a tu sitio web.
-- Para **filtrar** frecuentemente tus logs a través de valores particulares. Por ejemplo, crear una faceta en una [etiqueta][19] de `environment` para limitar la solución de problemas a entornos de desarrollo, preparación o producción.
+- Para **obtener información relativa** sobre los valores. Por ejemplo, crea una faceta en `http.network.client.geoip.country.iso_code` para ver los principales países más afectados por el número de errores 5XX en tus registros de acceso web de [NGINX][16], enriquecidos con el [Procesador GeoIP][17] de Datadog.
+- Para **contar valores únicos**. Por ejemplo, crea una faceta en `user.email` de tus registros de [Kong][18] para saber cuántos usuarios se conectan cada día a tu sitio web.
+- Para **filtrar** frecuentemente tus registros contra valores particulares. Por ejemplo, crea una faceta en un `environment` [etiqueta][19] para limitar la solución de problemas a entornos de desarrollo, pruebas o producción.
 
-**Nota**: Aunque no es necesario crear facetas para filtrar valores de atributos, definirlas de acuerdo a atributos que utilices a menudo durante las investigaciones puede ayudarte a reducir el tiempo de resolución.
+**Nota**: Aunque no es necesario crear facetas para filtrar por valores de atributos, definirlas en atributos que usas con frecuencia durante las investigaciones puede ayudar a reducir tu tiempo de resolución.
 
-#### Tipos
+#### Tipos {#types}
 
-Las facetas cualitativas pueden ser de tipo cadena o numérico (entero). Mientras que la asignación de un tipo de cadena a una dimensión funciona en todos los casos, el uso de tipos enteros en una dimensión permite el filtrado de rangos, además de todas las capacidades mencionadas anteriormente. Por ejemplo, `http.status_code:[200 TO 299]` es una consulta válida para una dimensión de tipo entero. Consulta [sintaxis de búsqueda][1] como referencia.
+Las facetas cualitativas pueden tener un tipo de cadena o numérico (entero). Mientras que asignar el tipo de cadena a una dimensión funciona en todos los casos, usar tipos enteros en una dimensión permite filtrar por rangos además de todas las capacidades mencionadas anteriormente. Por ejemplo, `http.status_code:[200 TO 299]` es una consulta válida para usar en una dimensión de tipo entero. Consulta la [sintaxis de búsqueda][1] como referencia.
 
-### Facetas cuantitativas
-#### Medidas
+### Facetas cuantitativas {#quantitative-facets}
+#### Medidas {#measures}
 
-Utiliza medidas cuando necesites hacer lo siguiente:
+Utiliza medidas cuando necesites:
 
-- Para **agregar valores** de varios logs. Por ejemplo, crea una medida sobre el tamaño de los cuadros que brinda la [caché de Varnish][20] de un servidor de mapas y realiza un seguimiento del **rendimiento medio** diario, o de los principales remitentes por **suma** del tamaño del cuadro solicitado.
-- Para **filtrar por rangos** tus logs. Por ejemplo, crea una medida sobre el tiempo de ejecución de las tareas de [Ansible][21] y mira la lista de los servidores que tienen el mayor número de ejecuciones que tardan más de 10 segundos.
-- Para **clasificar logs** con respecto a ese valor. Por ejemplo, crea una medida sobre la cantidad de pagos realizados con tu microservicio de [Python][22]. A continuación, puedes buscar todos los logs, empezando por el de mayor cantidad.
+- Para **agregar valores** de múltiples registros. Por ejemplo, crea una medida sobre el tamaño de los mosaicos servidos por la [caché de Varnish][20] de un servidor de mapas y lleva un registro del **promedio** de rendimiento diario, o los referidores más importantes por **suma** del tamaño de mosaico solicitado.
+- Para **filtrar por rango** tus registros. Por ejemplo, crea una medida sobre el tiempo de ejecución de las tareas de [Ansible][21], y observa la lista de servidores que tienen más ejecuciones que tardan más de 10 segundos.
+- Para **ordenar registros** en función de ese valor. Por ejemplo, crea una medida sobre la cantidad de pagos realizados con tu microservicio de [Python][22]. Luego puedes buscar todos los registros, comenzando con el que tiene la mayor cantidad.
 
-#### Tipos
+#### Tipos {#types-1}
 
-Las medidas vienen con un valor entero (largo) o doble, para capacidades equivalentes.
+Las medidas vienen con un valor de entero (largo) o doble, para capacidades equivalentes.
 
-#### Unidades
+#### Unidades {#units}
 
-Las medidas admiten unidades en **tiempo** o **tamaño** para facilitar la gestión de las órdenes de magnitud en tiempo de consulta y visualización.
+Las medidas soportan unidades en **tiempo** o **tamaño** para un manejo más fácil de órdenes de magnitud en el tiempo de consulta y el tiempo de visualización.
 
 | tipo        | unidad(es)                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | BYTES       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
-| TIEMPO        | nanosegundo / microsegundo / milisegundo / segundo / minuto / hora / día / semana                                                                                                                                                                                                                                               |
+| TIEMPO      | nanosegundo / microsegundo / milisegundo / segundo / minuto / hora / día / semana                                                                                                                                                                                                                                               |
 
-La unidad es una propiedad de la propia medida, no del campo. Por ejemplo, piensa en una medida `duration` en nanosegundos: tienes logs de `service:A` donde `duration:1000` representa 1000 milisegundos, y otros logs de `service:B` donde `duration:500` representa 500 microsegundos:
+La unidad es una propiedad de la medida misma, no del campo. Por ejemplo, considera una `duration` medida en nanosegundos: tienes registros de `service:A` donde `duration:1000` representa 1000 milisegundos, y otros registros de `service:B` donde `duration:500` representa 500 microsegundos:
 
-1. Escala la duración en nanosegundos para todos los logs que entran con el [procesador aritmético][23]. Utiliza un multiplicador `*1000000` en logs de `service:A` y un multiplicador `*1000` en logs de `service:B`.
-2. Utiliza `duration:>20ms` (consulta [sintaxis de búsqueda][1] como referencia) para consultar logs de forma coherente desde ambos servicios a la vez y consultar un resultado agregado de `1 min` como máximo.
+1. Escala la duración en nanosegundos para todos los registros que fluyen con el [procesador aritmético][23]. Usa un `*1000000` multiplicador en los registros de `service:A`, y un `*1000` multiplicador en los registros de `service:B`.
+2. Usa `duration:>20ms` (ver [sintaxis de búsqueda][1] para referencia) para consultar de manera consistente los registros de ambos servicios a la vez, y ver un resultado agregado de max `1 min`.
 
-## Panel de facetas
+## Panel de facetas {#facet-panel}
 
-La barra de búsqueda proporciona el conjunto más completo de interacciones para filtrar y agrupar tus datos. Sin embargo, en la mayoría de los casos, es probable que el panel de facetas sea una forma más directa de navegar por los datos. Abre una faceta para ver un resumen de tu contenido en el contexto de la consulta actual.
+La barra de búsqueda proporciona el conjunto más completo de interacciones para filtrar y agrupar tus datos. Sin embargo, en la mayoría de los casos, el panel de facetas es probablemente una forma más sencilla de navegar por sus datos. Abra una faceta para ver un resumen de su contenido en el contexto de la consulta actual.
 
-Las **facetas (cualitativas)** vienen con una lista de valores principales únicos y un recuento de logs que coinciden con cada uno de ellos:
+**Las facetas (cualitativas)** vienen con una lista principal de valores únicos y un conteo de registros que coinciden con cada uno de ellos:
 
-{{< img src="logs/explorer/facet/dimension_facet.png" alt="Faceta de dimensión" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet.png" alt="Faceta de Dimensión" style="width:30%;">}}
 
-Limita la consulta de búsqueda haciendo clic en cualquiera de los valores. Al hacer clic en un valor, se alterna entre buscar este valor específico y todos los valores. Al hacer clic en las casillas de verificación, se añade o elimina este valor específico de la lista de todos los valores. Además, puedes buscar en su contenido:
+Delimite la consulta de búsqueda haciendo clic en cualquiera de los valores. Hacer clic en un valor alterna la búsqueda en este valor único y en todos los valores. Hacer clic en las casillas de verificación agrega o quita este valor específico de la lista de todos los valores; también puede buscar en su contenido:
 
-{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="Autocompletar faceta" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="Autocompletar de Facetas" style="width:30%;">}}
 
-**Las medidas** vienen con un control deslizante que indica los valores mínimo y máximo. Utiliza el control deslizante o introduce valores numéricos para reducir la consulta de búsqueda a diferentes límites.
+**Las Medidas** vienen con un control deslizante que indica valores mínimos y máximos. Utilice el control deslizante o ingrese valores numéricos para delimitar la consulta de búsqueda a diferentes límites.
 
-{{< img src="logs/explorer/facet/measure_facet.png" alt="Faceta de medidas" style="width:30%;">}}
+{{< img src="logs/explorer/facet/measure_facet.png" alt="Faceta de Medidas" style="width:30%;">}}
 
-### Ocultar facetas
+### Ocultar facetas {#hide-facets}
 
-Tu organización dispone de toda una colección de facetas para abordar su amplio conjunto de casos de uso en todos los diferentes equipos que utilizan logs. Sin embargo, lo más probable es que solo un subconjunto de estas facetas sea valioso para ti en un contexto específico de solución de problemas. Oculta las facetas que no necesites de forma rutinaria y conserva solo las facetas más relevantes para tus sesiones para solucionar problemas.
-1. En el [Explorador de logs][30], busca la faceta que quieres ocultar.
-1. Haz clic en el icono de engranaje situado junto a la faceta.
-1. Selecciona **Ocultar faceta**.
+Su organización tiene una colección completa de facetas para abordar su conjunto integral de casos de uso en todos los diferentes equipos que utilizan registros. Sin embargo, es probable que solo un subconjunto de estas facetas sea valioso para usted en un contexto específico de resolución de problemas. Oculte las facetas que no necesita de manera rutinaria, para mantener solo las facetas más relevantes para sus sesiones de resolución de problemas.
+1. En el [Explorador de Registros][30], encuentre la faceta que desea ocultar.
+1. Haga clic en el ícono de engranaje junto a la faceta.
+1. Seleccione {{< ui >}}Hide Facet{{< /ui >}}.
 
-Las facetas ocultas siguen siendo visibles en la búsqueda de facetas (consulta la sección [Filtrar facetas](#filter-facets)) en caso de que lo necesites. Vuelve a mostrar las facetas ocultas desde ahí.
+Las facetas ocultas aún son visibles en la búsqueda de facetas (vea la sección [Filtrar Faceta](#filter-facets)) en caso de que las necesite. Muestra las facetas ocultas desde allí.
 
 
-Las facetas ocultas también se ocultan de la función autocompletar en la barra de búsqueda y de los desplegables (como medida, agrupar por) en los análisis para el Log Explorer. Sin embargo, las facetas ocultas siguen siendo válidas para las consultas de búsqueda (por ejemplo, si copias y pegas un enlace del Log Explorer).
+Las facetas ocultas también están ocultas en la autocompletación de la barra de búsqueda y en los menús desplegables (como medida, agrupar) en análisis para el Explorador de Registros. Sin embargo, las facetas ocultas siguen siendo válidas para las consultas de búsqueda (en caso de que copies y pegues un enlace del explorador de registros, por ejemplo).
 
-Las facetas ocultas no tienen ningún impacto aparte del Explorador de logs (por ejemplo, Live Tail, monitores o definiciones de widgets en dashboards).
+Las facetas ocultas no tienen impacto aparte del explorador de registros (por ejemplo, cola en vivo, monitores o definiciones de widgets en los tableros).
 
-#### Facetas ocultas y compañeros de equipo
+#### Facetas ocultas y compañeros de equipo {#hidden-facets-and-teammates}
 
-Ocultar facetas es específico de tu propio contexto de solución de problemas y no afecta a la vista de tus compañeros de equipo, a menos que actualices una [Vista guardada][24]. Las facetas ocultas forman parte del contexto guardado en una vista guardada.
+Ocultar facetas es específico para tu propio contexto de solución de problemas y no afecta la vista de tus compañeros de equipo, a menos que actualices una [Vista Guardada][24]. Las facetas ocultas son parte del contexto guardado en una vista guardada.
 
-### Facetas de grupo
+### Agrupar facetas {#group-facets}
 
-Las facetas se agrupan en temas significativos para facilitar la navegación en la lista de facetas. La asignación o reasignación de un grupo para una faceta solo afecta a la visualización en la lista de facetas y no tiene ningún impacto en las capacidades de búsqueda y análisis.
+Las facetas se agrupan en temas significativos para facilitar la navegación en la lista de facetas. Asignar o reasignar un grupo para una faceta solo afecta la visualización en la lista de facetas y no tiene impacto en las capacidades de búsqueda y análisis.
 
-{{< img src="logs/explorer/facet/group_facets.png" alt="Agrupar facetas" style="width:30%;">}}
+{{< img src="logs/explorer/facet/group_facets.png" alt="Faceta de Grupo" style="width:30%;">}}
 
 Para agrupar facetas:
 
 1. Haz clic en el engranaje de la faceta.
-2. Selecciona **Edit facet** (Editar faceta).
-3. Haz clic en la sección **Advanced options** (Opciones avanzadas) para ampliarla.
-4. En el campo **Group** (Grupo), introduce el nombre del grupo en el que quieres que esté la faceta.
-5. Haz clic en **Update** (Actualizar).
+2. Selecciona {{< ui >}}Edit facet{{< /ui >}}.
+3. Haz clic en la sección {{< ui >}}Advanced options{{< /ui >}} para expandirla.
+4. En el campo {{< ui >}}Group{{< /ui >}}, ingrese el nombre del grupo en el que desea que esté la faceta.
+5. Haga clic en {{< ui >}}Update{{< /ui >}}.
 
-### Filtrar facetas
+### Filtrar facetas {#filter-facets}
 
-Utiliza el cuadro de búsqueda en las facetas para reducir toda la lista de facetas y navegar más rápidamente hasta aquella con la que necesitas interactuar. La faceta de búsqueda utiliza tanto el nombre visible de la faceta como el nombre del campo de la faceta para limitar los resultados.
+Utilice el cuadro de búsqueda en las facetas para reducir toda la lista de facetas y navegar más rápidamente a la que necesite interactuar. La búsqueda de facetas utiliza tanto el nombre de visualización de la faceta como el nombre del campo de la faceta para limitar los resultados.
 
-{{< img src="logs/explorer/facet/search_facet.png" alt="Buscar facetas" style="width:30%;">}}
+{{< img src="logs/explorer/facet/search_facet.png" alt="Buscar Faceta" style="width:30%;">}}
 
-### Facetas con alias
+### Facetas aliasadas {#aliased-facets}
 
-Algunas facetas pueden tener alias (consulta la sección [faceta con alias](#alias-facets)). Las facetas con alias siguen siendo válidas para explorar y analizar, pero tu organización las considera obsoletas:
+Algunas facetas pueden haber sido aliasadas (vea la sección de [faceta aliasada](#alias-facets)). Las facetas aliasadas siguen siendo válidas para segmentar y analizar, pero son consideradas obsoletas por su organización:
 
-{{< img src="logs/explorer/facet/aliased_facet.png" alt="Facetas con alias" style="width:30%;">}}
+{{< img src="logs/explorer/facet/aliased_facet.png" alt="Faceta Aliasada" style="width:30%;">}}
 
-Al solucionar problemas, es más probable que encuentres contenidos de otros equipos (junto con contenidos de tu equipo) en la faceta _standard_ (estándar) que en la faceta _aliased_ (con alias). Esto facilita la correlación de contenidos de diversos orígenes.
+Al solucionar problemas, es más probable que encuentre contenido de otros equipos (junto con contenido de su equipo) en la faceta _estándar_ en lugar de la faceta _aliasada_. Esto hace que la correlación de contenido de diversos orígenes sea más sencilla.
 
-Si ves una faceta con alias en tu lista de facetas, considera usar la faceta _standard_ (estándar) en su lugar, haciendo clic en el elemento del menú **switch to alias** (cambiar a alias). Esta acción oculta la faceta con alias y desoculta la faceta estándar. Si esto te obliga a actualizar una vista guardada, considera guardar la vista guardada para que el alias se aplique a todos los que utilicen esta vista guardada.
+Si ve una faceta aliasada en su lista de facetas, considere usar la faceta _estándar_ en su lugar haciendo clic en el elemento de menú {{< ui >}}switch to alias{{< /ui >}}. Esta acción oculta la faceta aliasada y muestra la faceta estándar. Si hacerlo le obliga a actualizar una vista guardada, considere guardar la vista guardada para que el aliasing se aplique a todos los que usen esta vista guardada.
 
-{{< img src="logs/explorer/facet/switch_facet.png" alt="Cambiar faceta" style="width:30%;">}}
+{{< img src="logs/explorer/facet/switch_facet.png" alt="Cambiar Faceta" style="width:30%;">}}
 
-Es posible que desees conservar la versión _aliased_ (con alias) no estándar de la faceta si estás solucionando problemas en cuanto a contenido antiguo (antes de que tu organización haya configurado los alias para esta faceta).
+Puede que desee mantener la versión no estándar _aliasada_ de la faceta si está solucionando problemas con contenido antiguo (antes de que su organización haya configurado el aliasing para esta faceta).
 
-## Gestionar facetas
+## Gestionar facetas {#manage-facets}
 
-### Facetas predeterminadas
+### Facetas listas para usar {#out-of-the-box-facets}
 
-Las facetas más habituales, como `Host` y `Service`, vienen listas para usar, por lo que puedes empezar a solucionar problemas de inmediato una vez que tus logs fluyan hacia los índices de logs.
+Las facetas más comunes como `Host` y `Service` vienen listas para usar, por lo que puede comenzar a solucionar problemas de inmediato una vez que sus registros fluyan hacia los índices de registro.
 
-Las facetas de [Atributos reservados][25] y la mayoría de [Atributos estándar][26] están disponibles por defecto.
+Las facetas en [Atributos Reservados][25] y la mayoría de los [Atributos Estándar][26] están disponibles por defecto.
 
-### Faceta de índice
+### Faceta de índice {#index-facet}
 
-La faceta de índice es una faceta específica que solo aparece si tu organización tiene [múltiples índices][27] o si tienes [vistas históricas][28] activas. Utiliza esta faceta si deseas reducir tu consulta a un subconjunto de índices.
+La faceta de índice es una faceta específica que aparece solo si su organización tiene [múltiples índices][27], y/o si tiene vistas [históricas activas][28]. Use esta faceta si desea limitar su consulta a un subconjunto de sus índices.
 
-{{< img src="logs/explorer/facet/index_facet_.png" alt="Crear facetas" style="width:30%;">}}
+{{< img src="logs/explorer/facet/index_facet_.png" alt="Crear Faceta" style="width:30%;">}}
 
-### Crear facetas
+### Crear facetas {#create-facets}
 
-Como práctica recomendada, considera siempre utilizar una faceta existente en lugar de crear una nueva (consulta la sección [alias-facets](#alias-facets)). Utilizar una faceta única para obtener información de naturaleza similar fomenta la colaboración entre equipos.
+Como buena práctica, siempre considere usar una faceta existente en lugar de crear una nueva (vea la sección de [facetas aliasadas](#alias-facets)). Usar una faceta única para información de naturaleza similar fomenta la colaboración entre equipos.
 
-Para crear una faceta en una matriz de objetos JSON, primero usa un [analizador grok][29] para extraer el atributo y luego crea una faceta para ese atributo.
+Para crear una faceta en un arreglo de objetos JSON, primero utilice un [analizador grok][29] para extraer el atributo y luego cree una faceta para ese atributo.
 
-**Nota**: Una vez creada una faceta, su contenido se rellena **para todos los nuevos logs**. Para un uso óptimo de la solución Log Management, Datadog recomienda utilizar como máximo 1000 facetas.
+**Nota**: Una vez que se crea una faceta, su contenido se llena **para todos los nuevos registros**. Para un uso óptimo de la solución de Gestión de Registros, Datadog recomienda usar como máximo 1000 facetas.
 
-#### Panel lateral de logs
+#### Panel lateral de registros {#log-side-panel}
 
-La forma más sencilla de crear una faceta es añadirla desde el panel lateral de logs, donde la mayoría de los detalles de la faceta -como el nombre del campo o el tipo de datos subyacente- están precargados y solo es cuestión de volver a comprobarlos. En el [Log Explorer][1], accede a cualquier log de interés que contenga el campo para crear una faceta. Abre el panel lateral para este log, haz clic en el campo correspondiente (ya sea en etiquetas o en atributos) y crea una faceta desde ahí:
+La forma más fácil de crear una faceta es agregarla desde el panel lateral de registros, donde la mayoría de los detalles de la faceta—como el nombre del campo o el tipo de datos subyacente—ya están prellenados y solo es cuestión de verificarlos. Navegue en el [Explorador de Registros][1] hacia el registro de interés que contenga el campo para crear una faceta. Abra el panel lateral para este registro, haga clic en el campo correspondiente (ya sea en etiquetas o en atributos) y cree una faceta desde allí:
 
-- Si el campo contiene un valor de cadena, solo está disponible la creación de facetas.
-- Si el campo tiene un valor numérico, se pueden crear tanto facetas como medidas.
+- Si el campo tiene un valor de cadena, solo está disponible la creación de facetas.
+- Si el campo tiene un valor numérico, están disponibles tanto la creación de facetas como la de medidas.
 
-{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Crear una faceta desde un atributo" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Crear faceta desde atributo" style="width:30%;">}}
 
-**Nota**: No se recomienda usar más de 1000 facetas.
+**Nota**: Como mejor práctica, se recomienda no usar más de 1000 facetas.
 
-#### Lista de facetas
+#### Lista de facetas {#facet-list}
 
-En caso de que no sea posible encontrar una faceta que coincida con el log, crea una nueva faceta directamente desde el panel de facetas utilizando el botón _add facet_ (Añadir faceta).
+En caso de que no sea posible encontrar un registro coincidente, cree una nueva faceta directamente desde el panel de facetas usando el botón _agregar faceta_.
 
-Define el nombre del campo subyacente (clave) de esta faceta:
+Defina el nombre del campo subyacente (clave) para esta faceta:
 
-- Utiliza el nombre de la clave de etiqueta para etiquetas.
-- Utiliza la ruta de atributo para los atributos, con el prefijo `@`.
+- Utilice el nombre de clave de etiqueta para etiquetas.
+- Utilice la ruta del atributo para atributos, con `@` prefijo.
 
-El autocompletado basado en el contenido en logs de las vistas actuales te ayuda a definir el nombre de campo adecuado. Pero puedes utilizar prácticamente cualquier valor aquí, específicamente en el caso de que aún no tengas logs coincidentes que fluyan en tus índices.
+La autocompletación basada en el contenido de los registros de las vistas actuales le ayuda a definir el nombre de campo adecuado. Pero puede usar prácticamente cualquier valor aquí, específicamente en el caso de que aún no tenga registros coincidentes fluyendo en sus índices.
 
-{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Crear faceta desde cero" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Cree una faceta desde cero" style="width:30%;">}}
 
-### Facetas de alias
+### Facetas aliasadas {#alias-facets}
 
-La agrupación de contenidos similares en una única faceta permite el análisis entre equipos y facilita el trabajo entre equipos para solucionar problemas; consulta [Convención de nomenclatura][26] como referencia.
+Reunir contenido similar bajo una faceta única permite análisis entre equipos y facilita la solución de problemas entre equipos; consulte [Convención de Nombres][26] para referencia.
 
-Utiliza los alias como opción para coordinar sin problemas a los equipos que dependen de convenciones de nomenclatura incoherentes. Con los alias, puedes hacer que todos ellos utilicen la faceta estándar que surge de tu organización.
+Utilice el alias como una opción para realinear suavemente a los equipos que dependen de convenciones de nombres inconsistentes. Con el alias, puede hacer que todos usen la faceta estándar que surge para su organización.
 
-#### Utilizar alias de faceta a faceta
+#### Alias de faceta a faceta {#aliasing-facet-to-facet}
 
-Esta es la mejor opción si varios equipos de tu organización ya han creado múltiples facetas para contenidos similares.
+Esta es la mejor opción si múltiples equipos en su organización ya han creado múltiples facetas para contenido similar.
 
-Al colocar un alias en una faceta _aliased_ (con alias) hacia una faceta _standard_ (estándar):
+Al aliasar una faceta _aliasada_ hacia una faceta _estándar_:
 
-- Los usuarios pueden utilizar facetas aliased (con alias) y facetas standard (estándar) para solucionar problemas. Es posible que prefieran las facetas estándar, que facilitan la correlación de contenidos procedentes de fuentes diversas y posiblemente heterogéneas.
-- Se anima a los usuarios a utilizar la faceta estándar en lugar de la faceta con alias.
+- Los usuarios pueden usar tanto facetas aliasadas como estándar para la solución de problemas. Puede preferir la estándar, que facilita la correlación de contenido que fluye de fuentes diversas y posiblemente heterogéneas.
+- Se sugiere a los usuarios que usen la faceta estándar en lugar de la faceta aliasada.
 
-Para convertir una faceta en estándar, selecciona la acción `Alias to...` en el menú de facetas. Elige la faceta de destino entre todas las facetas [estándar][14] de tu organización.
+Para asignar un alias a una faceta estándar, seleccione el elemento de acción {{< ui >}}Alias to...{{< /ui >}} en el menú de facetas. Elija las facetas de destino de entre todas las [estándar][14] que existen para su organización.
 
-{{< img src="logs/explorer/facet/alias_modal.png" alt="modo de alias" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_modal.png" alt="modal de alias" style="width:30%;">}}
 
-#### Utilizar alias de atributo a faceta
+#### Asignar alias de atributo a faceta {#aliasing-attribute-to-facet}
 
-Esta es la mejor opción si incorporas logs desde nuevas fuentes. En lugar de crear una faceta para algún campo en esos logs, y justo después dejar obsoleta esta faceta al colocar un alias en una faceta estándar, utiliza un alias en el campo directamente a una faceta existente:
+Esta es la mejor opción si incorpora registros que fluyen de nuevas fuentes. En lugar de crear una faceta para algún campo en esos registros, y justo después de deprecar esta faceta asignándole un alias a una faceta estándar, asigne el alias del campo directamente a una faceta existente:
 
-{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Utiliza un alias en una faceta desde un atributo" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Asigne alias de faceta desde atributo" style="width:30%;">}}
 
-## Borrar una faceta
+## Eliminar una faceta {#delete-a-facet}
 
-<div class="alert alert-warning">La eliminación de una faceta que está siendo utilizada en índices, monitores, dashboards, consultas de restricción, o por otros equipos puede causar que las configuraciones se rompan.</div>
+<div class="alert alert-warning">Eliminar una faceta que se está utilizando en índices, monitores, tableros, consultas de restricción o por otros equipos puede causar que las configuraciones se rompan.</div>
 
-Para eliminar una faceta, sigue estos pasos:
+Para eliminar una faceta, siga estos pasos:
 
-- Haz clic en **Showing xx of xx** (Mostrar xx de xx) en la parte superior del panel de facetas.
-- Buscar tu faceta.
-- Haz clic en el icono del lápiz de tu faceta.
-- Haz clic en **Delete** (Borrar).
+- Haga clic en {{< ui >}}Showing xx of xx{{< /ui >}} en la parte superior del panel de facetas.
+- Busque su faceta.
+- Haga clic en el ícono de lápiz para su faceta.
+- Haga clic en {{< ui >}}Delete{{< /ui >}}.
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -250,13 +252,13 @@ Para eliminar una faceta, sigue estos pasos:
 [14]: /es/logs/indexes/#indexes-filters
 [15]: /es/logs/indexes/#exclusion-filters
 [16]: /es/integrations/nginx/
-[17]: /es/logs/log_configuration/processors/#geoip-parser
+[17]: /es/logs/log_configuration/processors/geoip_parser/
 [18]: /es/integrations/kong/
 [19]: /es/getting_started/tagging/assigning_tags/
 [20]: /es/integrations/varnish/
 [21]: /es/integrations/ansible/
 [22]: /es/integrations/python/
-[23]: /es/logs/log_configuration/processors/#arithmetic-processor
+[23]: /es/logs/log_configuration/processors/arithmetic_processor/
 [24]: /es/logs/explorer/saved_views/
 [25]: /es/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /es/logs/log_configuration/attributes_naming_convention

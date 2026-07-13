@@ -16,7 +16,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
     tag: 'Blog'
     text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
-  - link: "/bits_ai/mcp_server/tools/#serverless_onboarding"
+  - link: "/mcp_server/tools/#serverless_onboarding"
     tag: 'Documentation'
     text: 'Datadog MCP Server: serverless_onboarding tool'
 ---

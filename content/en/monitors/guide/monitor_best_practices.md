@@ -28,13 +28,13 @@ By following these principles, you can create a monitor that delivers meaningful
 
 ## Write a clear title
 
-The [Manage Monitor][1] page displays the monitor's title, tags, teams, and other fields. For a full list of attributes, see the [Search Monitors][2] documentation. Having a clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance.
+The [{{< ui >}}Manage Monitor{{< /ui >}}][1] page displays the monitor's title, tags, teams, and other fields. For a full list of attributes, see the [Search Monitors][2] documentation. Having a clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance.
 
 **Note**: A monitor's title and the notification subject are the same, so avoid adding too many variables to either.
 
 ## Use multi-alert
 
-To avoid redundant monitors (such as multiple similar monitors with just 1 scope changing), Datadog recommends using multi-alert monitors. When you use a "group by" in your query, multi-alerts automatically apply the alert to each source based on your group parameters. The best way to achieve this is with a monitor grouped by `host`, so that you only have one monitor that triggers a distinct alert for each host every time it crosses the threshold.
+To avoid redundant monitors (such as multiple similar monitors with just 1 scope changing), Datadog recommends using multi-alert monitors. When you use a {{< ui >}}group by{{< /ui >}} in your query, multi-alerts automatically apply the alert to each source based on your group parameters. The best way to achieve this is with a monitor grouped by `host`, so that you only have one monitor that triggers a distinct alert for each host every time it crosses the threshold.
 
 For example:
 You have an e-commerce website, and to handle large volumes of traffic or processing, you deploy multiple hosts and use a load balancer to distribute the incoming requests evenly. To ensure no single host is overwhelmed, you want an alert if a host exceeds a specific CPU and memory threshold. This ensures no single host is overwhelmed, maintaining balanced traffic and processing.

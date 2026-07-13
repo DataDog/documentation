@@ -26,7 +26,12 @@ For instrumentation, select your workload below for instructions.
 
 ## Choose your workload
 
-{{< partial name="serverless/google-cloud-run-workloads.html" >}}
+{{< card-grid card_width="350px" >}}
+  {{< image-card href="/serverless/google_cloud_run/containers" title="Containers" >}}
+  {{< image-card href="/serverless/google_cloud_run/jobs" title="Jobs" subtitle="(Preview)" >}}
+  {{< image-card href="/serverless/google_cloud_run/functions" title="Functions" >}}
+  {{< image-card href="/serverless/google_cloud_run/functions_1st_gen" title="Functions" subtitle="(1st generation)" >}}
+{{< /card-grid >}}
 
 ## Further reading
 

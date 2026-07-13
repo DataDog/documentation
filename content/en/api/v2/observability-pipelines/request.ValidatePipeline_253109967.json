@@ -1,0 +1,77 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "clickhouse-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "clickhouse",
+            "endpoint_url_key": "CLICKHOUSE_ENDPOINT_URL",
+            "database": "my_database",
+            "table": "application_logs",
+            "format": "arrow_stream",
+            "skip_unknown_fields": true,
+            "date_time_best_effort": true,
+            "compression": {
+              "algorithm": "gzip",
+              "level": 6
+            },
+            "auth": {
+              "strategy": "basic",
+              "username_key": "CLICKHOUSE_USERNAME",
+              "password_key": "CLICKHOUSE_PASSWORD"
+            },
+            "batch": {
+              "max_events": 1000,
+              "timeout_secs": 1
+            },
+            "batch_encoding": {
+              "codec": "arrow_stream",
+              "allow_nullable_fields": true
+            },
+            "tls": {
+              "crt_file": "/path/to/cert.crt",
+              "ca_file": "/path/to/ca.crt",
+              "key_file": "/path/to/key.key",
+              "key_pass_key": "TLS_KEY_PASSPHRASE"
+            },
+            "buffer": {
+              "type": "memory",
+              "max_events": 500,
+              "when_full": "block"
+            }
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "status:error",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Pipeline with ClickHouse Destination All Fields"
+    },
+    "type": "pipelines"
+  }
+}

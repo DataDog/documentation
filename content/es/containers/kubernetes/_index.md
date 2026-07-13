@@ -10,183 +10,82 @@ aliases:
 - /es/integrations/faq/container-integration-event/
 - /es/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
 - /es/agent/kubernetes/
-description: Instalar y configurar el Datadog Agent en Kubernetes
+description: Instala y configura el Agente de Datadog en Kubernetes
 further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-k8s
-  tag: Centro de aprendizaje
-  text: Empezando con Kubernetes Observability
+  tag: Centro de Aprendizaje
+  text: Introducción a la Observabilidad de Kubernetes
 - link: https://app.datadoghq.com/release-notes?category=Container%20Monitoring
-  tag: Notas de versiones
-  text: ¡Échale un vistazo a las últimas versiones de los contenedores de Datadog!
-    (Es necesario iniciar sesión en la aplicación).
+  tag: Notas de la Versión
+  text: Consulta las últimas versiones de Datadog Containers (se requiere inicio de
+    sesión en la aplicación).
 - link: /agent/guide/autodiscovery-management
   tag: Documentación
-  text: Limitar la recopilación de datos a un subconjunto de contenedores
+  text: Limita la recolección de datos a un subconjunto de contenedores solamente
 - link: /agent/guide/docker-deprecation
   tag: Documentación
-  text: Obsolescencia del tiempo de ejecución Docker en Kubernetes
+  text: Deprecación del runtime de Docker en Kubernetes
 - link: https://dtdg.co/fe
-  tag: Habilitación de los fundamentos
-  text: Participa en una sesión interactiva para conocer más sobre la monitorización
-    en Kubernetes
+  tag: Habilitación de la Fundación
+  text: Únete a una sesión interactiva para obtener información sobre la monitorización
+    de Kubernetes
 - link: https://www.datadoghq.com/blog/watermark-pod-autoscaler/
   tag: Blog
-  text: Guía para escalar tus pods de Kubernetes con el Watermark Pod Autoscaler
+  text: Una guía sobre cómo escalar sus pods de Kubernetes con el Watermark Pod Autoscaler.
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitorea tus operadores de Kubernetes para mantener las aplicaciones funcionando
+    sin problemas
 title: Kubernetes
 ---
-
-
-{{< learning-center-callout header="Únete a una sesión web de capacitación" hide_image="true" btn_title="Inscríbete" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
-  Esta sesión de capacitación básica se centrará en cómo Datadog puede monitorizar Kubernetes. Aprende cómo configurar Datadog para Kubernetes y cómo empezar. Explora las diversas vistas y herramientas que ofrece Datadog para visualizar y analizar métricas, trazas (traces) y logs de tu aplicación..
+{{< learning-center-callout header="Únete a una sesión de seminario web de habilitación" hide_image="true" btn_title="Regístrate" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+  Esta sesión de habilitación de la fundación se centrará en cómo Datadog puede monitorear Kubernetes. Aprende a configurar Datadog para Kubernetes y cómo comenzar. Explora las diversas vistas y herramientas que Datadog ofrece para visualizar y analizar las métricas, trazas y registros de tu clúster y aplicaciones.
 {{< /learning-center-callout >}}
 
-## Instalación del Agent
+## Instalación del agente {#agent-installation}
 
-Puedes instalar el Agent utilizando el [Datadog Operator][4] o Helm Chart siguiendo la [guía de instalación en la aplicación en Fleet Automation][5]. Esta interfaz guiada te permite:
-- Seleccionar tu distribución Kubernetes (por ejemplo, EKS, AKS o GKE)
-- Generar comandos helm y kubectl con tu clave de API rellenada previamente
-- Activar funciones como APM, Log Management, etiquetado y otras telemetrías mediante una configuración basada en la interfaz de usuario
-
-
-{{< img src="agent/basic_agent_usage/agent_install_k8.png" alt="Pasos de instalación en la aplicación del Datadog Agent en Kubernetes." style="width:90%;">}}
+Puede instalar el Datadog Agent utilizando ya sea el Datadog Operator o el Helm chart, siguiendo la [guía de instalación en la aplicación en Fleet Automation][5]. Esta interfaz guiada te permite:
+- Seleccione su distribución de Kubernetes (por ejemplo, EKS, AKS o GKE)
+- Genere comandos de Helm y kubectl con su clave de API prellenada
+- Habilite características como APM, Log Management, etiquetado y otra telemetría a través de una configuración basada en la interfaz de usuario
 
 
-El flujo del Datadog Operator instala el Datadog Operator y utiliza recursos personalizados para configurar la cobertura de observabilidad.
-
-El flujo del Helm Chart instala el Agent utilizando DaemonSet y ofrece conmutadores similares para las funciones de observabilidad.
-
-Consulta [Versiones admitidas][6] para ver la lista completa de versiones de Kubernetes admitidas por el Datadog Agent.
+{{< img src="agent/basic_agent_usage/agent_install_k8.png" alt="Pasos de instalación en la aplicación para el Agente de Datadog en Kubernetes." style="width:90%;">}}
 
 
-### Instalación manual
+El flujo del Datadog Operator instala el Datadog Operator y utiliza recursos personalizados para configurar su cobertura de observabilidad.
 
-Para instalar manualmente tu Agent en Kubernetes, sigue las instrucciones de [Instalar y configurar manualmente el Datadog Agent con un DaemonSet][7].
+El flujo del Helm chart instala los componentes de Datadog de manera más directa y ofrece interruptores similares para las características de observabilidad.
 
+Ambas opciones le permiten gestionar una configuración: el Datadog Operator o el Helm chart crean el DaemonSet del Datadog Agent, el Cluster Agent Deployment y todas sus dependencias para su monitoreo basado en Kubernetes.
 
-Para obtener información sobre comandos del Agent, consulta las guías de comandos del Agent. Para obtener información sobre el Datadog Cluster Agent, consulta Cluster Agent para Kubernetes.
-
-<div class="alert alert-info">
-
-<code>&lt;CLUSTER_NAME&gt;</code> te permite delimitar checks de host y clúster. Este nombre único debe ser tokens separados por puntos y respetar las siguientes restricciones:
-<ul>
-  <li/>Debe contener solo letras minúsculas, números y guiones
-  <li/>Debe empezar con una letra
-  <li/>Debe terminar con un número o una letra
-  <li/>Debe contener 80 caracteres o menos
-</ul>
-</div>
-
-<br>
-
-## Configuración adicional
-### Instalación sin privilegios
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-Para ejecutar una instalación sin privilegios, añade lo siguiente a `datadog-agent.yaml`:
-
-{{< highlight yaml "hl_lines=13-18" >}}
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    clusterName: <CLUSTER_NAME>
-    site: <DATADOG_SITE>
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
-{{< /highlight >}}
-
-- Sustituye `<USER_ID>` por el UID para ejecutar el Datadog Agent. Datadog recomienda [configurar este valor en 100 a partir del Datadog Agent v7.48 o posterior][1].
-- Sustituye `<GROUP_ID>` por el ID del grupo al que pertenece el socket Docker o contenedorizado.
-
-[1]: /es/data_security/kubernetes/#running-container-as-root-user
-
-A continuación, despliega el Agent:
-
-```shell
-kubectl apply -f datadog-agent.yaml
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-Para ejecutar una instalación sin privilegios, añade lo siguiente a tu archivo `datadog-values.yaml`:
-
-{{< highlight yaml "hl_lines=4-7" >}}
-datadog:
-  apiKeyExistingSecret: datadog-secret
-  site: <DATADOG_SITE>
-  securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <GROUP_ID>
-{{< /highlight >}}
-
-- Sustituye `<USER_ID>` por el UID para ejecutar el Datadog Agent.
-- Sustituye `<GROUP_ID>` por el ID del grupo al que pertenece el socket Docker o contenedorizado.
-
-A continuación, despliega el Agent:
-
-```shell
-helm install datadog-agent -f datadog-values.yaml datadog/datadog
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+Consulte [Supported Versions][6] para la lista completa de versiones de Kubernetes soportadas por el Datadog Agent.
 
 
-### Seleccionar registros de contenedor
+### Instalación manual {#manual-installation}
 
-La interfaz de usuario en la aplicación te permite seleccionar el registro de la imagen del contenedor, por defecto gcr.io/datadoghq. Si Artifact Registry no es accesible en la región de tu despliegue, utiliza otro registro como:
+La [herramienta de instalación en la aplicación en Fleet Automation][5] proporciona una forma guiada de construir sus configuraciones. También puede consultar la [documentación de instalación de Kubernetes][7] para los pasos sobre cómo desplegar y configurar el Datadog Operator o el Datadog Helm chart manualmente en su entorno.
 
-- `public.ecr.aws/datadog` (recomendado para desplegar el Agent en un entorno AWS)
-- `datadoghq.azurecr.io`
-- `docker.io/datadog` (puede estar sujeto a límites de tarifa a menos que sea cliente de Docker Hub)
+Datadog recomienda que utilice el Datadog Operator o el Datadog Helm chart para desplegar todos los recursos de Kubernetes. Si necesita desplegar todos los manifiestos directamente, consulte la documentación completa de instalación manual de Kubernetes [8].
 
-
-### Desinstalar
-
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```shell
-kubectl delete datadogagent datadog
-helm delete datadog-operator
-```
-
-Este comando elimina todos los recursos de Kubernetes creados al instalar Datadog Operator y desplegar el Datadog Agent.
-{{% /tab %}}
-{{% tab "Helm" %}}
-```shell
-helm uninstall datadog-agent
-```
-{{% /tab %}}
-{{< /tabs >}}
+Para comandos del Datadog Agent, consulte las [guías de comandos del Agent][9]. Para información sobre el Datadog Cluster Agent y su rol, consulte [Cluster Agent for Kubernetes][3].
 
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
-  {{< nextlink href="/agent/kubernetes/installation">}}<u>Instalación</u>: Instala el Datadog Agent en un entorno Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Otras configuraciones</u>: Recopila eventos, anula parámetros de proxy, envía métricas personalizadas con DogStatsD, configura listas de autorizaciones y bloqueos para contenedores, y haz referencia a la lista completa de variables de entorno.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distribuciones</u>: Revisa configuraciones básicas para distribuciones Kubernetes mayores, incluyendo AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher y Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Configura la recopilación de trazas: configura el Agent para aceptar trazas, configura tus pods para comunicarse con el Agent y configura los rastreadores de tu aplicación para emitir trazas.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/csi">}}<u>Controlador CSI</u>: Instala y configura el controlador Datadog CSI, y monta DogStatsD y el socket Trace Agent UDS utilizando volúmenes de Datadog CSI.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/log">}}<u>Recopilación de logs</u>: Configura la recopilación de logs en un entorno Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/tag">}}<u>Extracción de etiquetas (tags)</u>: Configura el Agent para crear y asignar etiquetas a todas las métricas, trazas y logs emitidos por un contenedor, pod o nodo en función de etiquetas (labels) o anotaciones de Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/integrations">}}<u>Integraciones y Autodiscovery</u>: Para configurar integraciones en un entorno Kubernetes, utiliza la función Autodiscovery de Datadog.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus y OpenMetrics</u>: Recopila tus métricas expuestas de Prometheus y OpenMetrics de tu aplicación que se ejecuta en Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Controla la monitorización de planos</u>: Monitoriza el servidor de API, el controlador, el gestor, el programador y el etcd de Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/data_collected">}}<u>Datos recopilados</u>: Consulta la lista de métricas recopiladas por el Agent cuando se despliega en tu clúster Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/installation">}}<u>Instalación</u>: Instale el Datadog Agent en un entorno de Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Configuración Adicional</u>: Recopile eventos, anule la configuración del proxy, envíe métricas personalizadas con DogStatsD, configure las listas de permitidos y bloqueados de contenedores y consulte la lista completa de variables de entorno disponibles.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distribuciones</u>: Revise las configuraciones base para las principales distribuciones de Kubernetes, incluyendo AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher y Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Configure la recolección de trazas: configure el Datadog Agent para aceptar trazas, configure sus pods para comunicarse con el Datadog Agent y configure sus SDKs de aplicación para emitir trazas.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/appsec">}}<u>App and API Protection</u>: Habilite automáticamente App and API Protection para sus ingress proxies y gateways de Kubernetes, a fin de detectar amenazas y proteger las APIs en el borde.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/csi">}}<u>CSI Driver</u>: Instale y configure el Datadog CSI driver, y monte el socket UDS de DogStatsD y del Trace Agent utilizando volúmenes CSI de Datadog.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/log">}}<u>Recolección de registros</u>: Configure la recolección de registros en un entorno de Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/tag">}}<u>Extracción de etiquetas</u>: Configure el Datadog Agent para crear y asignar etiquetas a todas las métricas, trazas y registros emitidos por un contenedor, pod o nodo, basándose en etiquetas o anotaciones de Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/integrations">}}<u>Integrations & Autodiscovery</u>: Configure Integrations en un entorno de Kubernetes utilizando Autodiscovery de Datadog.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Recolecte las métricas expuestas de Prometheus y OpenMetrics de su aplicación que se ejecuta dentro de Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Monitoreo del plano de control</u>: Monitoree el servidor API de Kubernetes, el administrador de controladores, el programador y etcd.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/data_collected">}}<u>Datos recolectados</u>: Consulte la lista de métricas recolectadas por el Datadog Agent cuando se despliega en su clúster de Kubernetes.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Referencias adicionales
+## Lectura adicional{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -195,5 +94,7 @@ helm uninstall datadog-agent
 [3]: /es/containers/cluster_agent/
 [4]: https://docs.datadoghq.com/es/containers/datadog_operator/
 [5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[6]: https://docs.datadoghq.com/es/agent/supported_platforms/?tab=cloudandcontainers
-[7]: https://docs.datadoghq.com/es/containers/guide/kubernetes_daemonset/
+[6]: /es/containers/kubernetes/installation?tab=datadogoperator#minimum-kubernetes-and-datadog-agent-versions
+[7]: /es/containers/kubernetes/installation
+[8]: https://docs.datadoghq.com/es/containers/guide/kubernetes_daemonset/
+[9]: /es/agent/configuration/agent-commands/

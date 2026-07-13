@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/developers/events/dogstatsd/
-- /es/service_management/events/guides/dogstatsd/
+- /es/events/guides/dogstatsd/
 description: Información general de las características de DogStatsD, incluidos los
   tipos de datos y el etiquetado.
 further_reading:

@@ -25,8 +25,8 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 To create a Monitor Notification Rule in Datadog, do the following:
 
-1. Go to [**Notification Rules**][1].
-2. Click **New Rule**.
+1. Go to [{{< ui >}}Notification Rules{{< /ui >}}][1].
+2. Click {{< ui >}}New Rule{{< /ui >}}.
 3. [Configure the scope](#configure-the-scope): Define the required tags for a monitor notification to be routed to this rule.
 4. [Configure the routing and recipients](#configure-the-routing-and-recipients): Choose how to route notifications and specify recipients.
 5. Add a clear and identifiable rule name.
@@ -88,13 +88,13 @@ Notifications can be sent to email or any integration channel. There is a limit 
 
 <div class="alert alert-danger">Dynamic routing is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.</div>
 
-Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Software Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
+Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
 
 | Configuration | Description | Requirements |
 | --- | --- | --- |
-| **Service-based** | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Software Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Software Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
-| **Team-based** | Directly checks the monitor's `team` tag or group tag, then sends the alert to that team's configured notification channels. | The monitor must have a `team` tag. |
-| **Fallback** | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured), the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
+| {{< ui >}}Service-based{{< /ui >}} | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
+| {{< ui >}}Team-based{{< /ui >}} | Directly checks the monitor's `team` tag or group tag, then sends the alert to that team's configured notification channels. | The monitor must have a `team` tag. |
+| {{< ui >}}Fallback{{< /ui >}} | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured), the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
 
 Both Service-based and Team-based routing support Slack, email, PagerDuty, and Microsoft Teams. Teams can configure their notification channels in [Teams settings][4].
 
@@ -106,16 +106,16 @@ Both Service-based and Team-based routing support Slack, email, PagerDuty, and M
 
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
-- **Name**: Notification rule name
-- **Scope**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
-- **Team**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
-- **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
-- **Notifies**: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
+- {{< ui >}}Name{{< /ui >}}: Notification rule name
+- {{< ui >}}Scope{{< /ui >}}: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
+- {{< ui >}}Team{{< /ui >}}: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
+- {{< ui >}}Coverage{{< /ui >}}: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
+- {{< ui >}}Notifies{{< /ui >}}: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
 
-Additionally, you can click the vertical three-dot menu on the notification rule to **Edit** or **Delete**.
+Additionally, you can click the vertical three-dot menu on the notification rule to {{< ui >}}Edit{{< /ui >}} or {{< ui >}}Delete{{< /ui >}}.
 
 ### From an individual monitor
-In your monitor configuration, the **Recipient Summary** shows recipients that are applied to the monitor by matching notification rules. On the **Monitor** edit page, you may also see rules that _could_ match when new groups report (multi alert monitors). The **Monitor** status page shows rules that match.
+In your monitor configuration, the {{< ui >}}Recipient Summary{{< /ui >}} shows recipients that are applied to the monitor by matching notification rules. On the **Monitor** edit page, you may also see rules that _could_ match when new groups report (multi alert monitors). The **Monitor** status page shows rules that match.
 
 {{< img src="/monitors/notifications/notification_rules/monitor_matching_notification_rule.png" alt="Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}}
 
@@ -230,4 +230,4 @@ The following table demonstrates how monitors with different tag combinations ma
 [2]: /monitors/notify/#notifications
 [3]: /getting_started/search/#event-based-queries
 [4]: /account_management/teams/
-[5]: /internal_developer_portal/software_catalog/
+[5]: /internal_developer_portal/catalog/

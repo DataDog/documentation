@@ -383,7 +383,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    {{% tab "Synthetics" %}}
 
-   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the {{< ui >}}APM Integration for Browser Tests{{< /ui >}} section of the [Integration Settings page][2].
 
    You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 

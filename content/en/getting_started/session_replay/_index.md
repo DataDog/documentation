@@ -33,21 +33,21 @@ Session Replay is available for browser applications and mobile apps. The exampl
 
 To start collecting data for Session Replay:
 
-1. Set up [Datadog RUM Browser Monitoring][7] by creating a RUM application (ensure you toggle **Session Replay Enabled** to access replay recordings).
-2. Generate a **Client Token**. 
+1. Set up [Datadog RUM Browser Monitoring][7] by creating a RUM application (ensure you toggle {{< ui >}}Session Replay Enabled{{< /ui >}} to access replay recordings).
+2. Generate a {{< ui >}}Client Token{{< /ui >}}. 
 3. Initialize the RUM Browser SDK by inserting the configuration code generated when you create the RUM application into your application source.
 
-Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
+Until Datadog starts receiving data, your application appears as `pending` on the {{< ui >}}RUM Applications{{< /ui >}} page.
 
 For more detailed instructions on collecting Session Replay data, follow the [RUM setup documentation][2] for your application. For Session Replay setup on mobile apps, see [Mobile Session Replay][3].
 
 ## Find particular Session Replays
 
-Once you're collecting Session Replay data, navigate to the [RUM Explorer][4] and select **Session Replay available** to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, or other format.
+Once you're collecting Session Replay data, navigate to the [RUM Explorer][4] and select {{< ui >}}Session Replay available{{< /ui >}} to see all sessions with a replay attached to it. You can visualize this data as a {{< ui >}}List{{< /ui >}}, {{< ui >}}Timeseries{{< /ui >}}, or other format.
 
 {{< img src="/getting_started/session_replay/session-replay-available.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
 
-Suppose you've been told that a customer experienced issues with your application on a mobile device. You can filter Sessions using **facets**. In this case, filtering by [facet][5] is helpful in searching for specific information, such as a particular user or device type.
+Suppose you've been told that a customer experienced issues with your application on a mobile device. You can filter Sessions using {{< ui >}}facets{{< /ui >}}. In this case, filtering by [facet][5] is helpful in searching for specific information, such as a particular user or device type.
 
 {{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet" style="width:100%" >}}
 
@@ -59,18 +59,18 @@ Maybe you've created a [Saved View][6] that shows you all sessions that contain 
 
 The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. 
 
-The **User Journey** is an event timeline on the right side of the page. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking **Session Breakdown**.
+The {{< ui >}}User Journey{{< /ui >}} is an event timeline on the right side of the page. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking {{< ui >}}Session Breakdown{{< /ui >}}.
 
 {{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey" style="width:100%" >}}
 
-Select **Events** to filter the user journey list by the following event types:
+Select {{< ui >}}Events{{< /ui >}} to filter the user journey list by the following event types:
 
-- **View**
-- **Action**
-- **Error**
-- **Frustration Signal**
+- {{< ui >}}View{{< /ui >}}
+- {{< ui >}}Action{{< /ui >}}
+- {{< ui >}}Error{{< /ui >}}
+- {{< ui >}}Frustration Signal{{< /ui >}}
 
-While hovering over a particular time or view in the user journey, select **Details** to examine Core Web Vitals and other pertinent information, without leaving the replay.
+While hovering over a particular time or view in the user journey, select {{< ui >}}Details{{< /ui >}} to examine Core Web Vitals and other pertinent information, without leaving the replay.
 
 {{< img src="/getting_started/session_replay/details-panel.png" alt="Panel with additional details">}}
 
@@ -96,7 +96,7 @@ Select a replay with traces to view the browser request, as well as all the back
 
 {{< img src="/getting_started/session_replay/traces-view.png" alt="Traces panel" style="width:100%" >}}
 
-Select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
+Select {{< ui >}}View Trace in APM{{< /ui >}} to see more detailed information, including errors and logs associated with the trace. 
 
 {{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information" style="width:100%" >}}
 
@@ -104,7 +104,7 @@ Select **View Trace in APM** to see more detailed information, including errors 
 
 [Error Tracking][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error occurring, see the exact line of code that caused it, and pivot to view a user session that encountered the error.
 
-In the **Errors** tab, select an error to see the time the error occurred and the message. Click **Issue in error tracking** to see more detail and attributes associated with the session.
+In the {{< ui >}}Errors{{< /ui >}} tab, select an error to see the time the error occurred and the message. Click {{< ui >}}Issue in error tracking{{< /ui >}} to see more detail and attributes associated with the session.
 
 {{< img src="/getting_started/session_replay/error-tracking.png" alt="Error tracking panel" style="width:100%" >}}
 
@@ -114,7 +114,7 @@ In the **Errors** tab, select an error to see the time the error occurred and th
 
 You can [create a synthetic browser test][11] from the exact sequence of steps your users went through in a Session Replay. Datadog runs synthetic tests on an automated schedule you define, to simulate user behavior, reporting failing tests to you without your users having to encounter the problem again.
 
-To capture a session replay in a synthetic browser test, click **Generate Synthetic Browser Test** above the event timeline.
+To capture a session replay in a synthetic browser test, click {{< ui >}}Generate Synthetic Browser Test{{< /ui >}} above the event timeline.
 
 {{< img src="/getting_started/session_replay/browser-test.png" alt="Browser test creation popup window" style="width:100%" >}}
 
@@ -122,7 +122,7 @@ For more information about managing, running, and interpreting test results, rea
 
 ### Share with your team
 
-You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
+You can share the replay with your team by selecting the {{< ui >}}Share{{< /ui >}} dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
 
 {{< img src="/getting_started/session_replay/share.png" alt="Share your replay pop-up" style="width:100%" >}}
 

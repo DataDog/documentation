@@ -18,11 +18,11 @@ Databricks workspaces deployed using [Private Link Connectivity][1] are isolated
 
 Private Link monitoring is built on the Private Action Runner's [polling architecture][4]. Datadog provides a custom version of the Private Action Runner image that includes a [script][5] for querying the Databricks API.
 
-{{< img src="data_jobs/databricks/privatelink-architecture.png" alt="Architecture diagram showing the Private Action Runner polling Datadog for requests, executing them against the Databricks API, and returning results through the VPC Endpoint." style="width:100%;" >}}
+{{< img src="data_jobs/databricks/privatelink-architecture-2.png" alt="Architecture diagram showing the Private Action Runner polling Datadog for requests, executing them against the Databricks API, and returning results through the VPC Endpoint." style="width:100%;" >}}
 
 The request flow works as follows:
 
-1. The [Private Action Runner][2] reaches out to the Datadog backend through the [VPC Endpoint][3] or over the public internet to query for pending requests. If a request is found, details are returned to the runner.
+1. The [Private Action Runner][2] reaches out to the Datadog backend (either over the public internet or using [Private Link][3]) to query for pending requests. If a request is found, details are returned to the runner.
 1. Databricks credentials (client ID and secret) are retrieved from secret storage. A token is generated for the session by calling the Databricks API from the runner using those credentials.
 1. The runner executes the fetched query against the Databricks API. The results are returned to the runner.
 1. The runner forwards the results back to the Datadog backend for processing.
@@ -121,13 +121,15 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Managed Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
 [2]: https://app.datadoghq.com/actions/private-action-runners/new
 [3]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-configure-managed-identities?pivots=qs-configure-portal-windows-vm
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attach-iam-role.html
+[5]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-configure-managed-identities?pivots=qs-configure-portal-windows-vm
+[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attach-iam-role.html
 
 {{% /tab %}}
 

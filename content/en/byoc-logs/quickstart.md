@@ -12,13 +12,9 @@ aliases:
   - /cloudprem/quickstart/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-Get started with BYOC Logs locally in less than 5 minutes. This quickstart covers the following:
+Get started with BYOC (Bring Your Own Cloud) Logs locally in less than 5 minutes. This quickstart covers the following:
 1. Start BYOC Logs locally using Docker.
 2. Verify the cluster status.
 3. Send a "Hello World" log.
@@ -26,7 +22,7 @@ Get started with BYOC Logs locally in less than 5 minutes. This quickstart cover
 
 ## Prerequisites
 
-- Ask for the [BYOC Logs Preview][1].
+- Access to BYOC Logs. Contact your Datadog account team to request access.
 - **Datadog API Key**: [Get your API key][2].
 - **Docker**: [Install Docker][3].
 

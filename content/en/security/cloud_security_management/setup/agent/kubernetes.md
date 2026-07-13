@@ -57,8 +57,8 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.78+)
-          # Note: activates Workload Protection — may incur additional costs. See Runtime Package Prioritization section below.
+          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # See Runtime Package Tracking section below.
           enrichment:
             usage:
               enabled: true
@@ -98,8 +98,8 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.78+)
-        # Note: activates Workload Protection — may incur additional costs. See Runtime Package Prioritization section below.
+        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # See Runtime Package Tracking section below.
         enrichment:
           usage:
             enabled: true
@@ -109,9 +109,64 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{% /tab %}}
 
+{{% tab "DaemonSet" %}}
+
+1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Vulnerability Management, mount-based container image scanning, and runtime package tracking.
+
+    ```yaml
+    - name: DD_COMPLIANCE_CONFIG_ENABLED
+      value: "true"
+    - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+      value: "true"
+    - name: DD_SBOM_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+      value: "true"
+    - name: DD_SBOM_HOST_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+      value: "true"
+    - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+      value: "true"
+    - name: HOST_ROOT
+      value: /host/root
+    ```
+
+   If your DaemonSet mounts the host root at a different path, set `HOST_ROOT` to that mount path in each Agent container.
+
+2. Set `hostPID: true` in the pod spec and add the following `securityContext` to the `agent` container. These settings are required for mount-based container image scanning with `DD_SBOM_CONTAINER_IMAGE_USE_MOUNT=true`.
+
+    ```yaml
+      # Source: datadog/templates/daemonset.yaml
+      apiVersion: apps/v1
+      kind: DaemonSet
+      [...]
+      spec:
+        [...]
+        template:
+          [...]
+          spec:
+            hostPID: true
+            containers:
+            [...]
+              - name: agent
+                [...]
+                securityContext:
+                  capabilities:
+                    add:
+                      - SYS_ADMIN
+                  readOnlyRootFilesystem: true
+                  appArmorProfile:
+                    type: Unconfined
+    ```
+
+3. Restart the Agent.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Agent **7.78.0 or later**. It activates [Workload Protection][8] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -150,10 +205,10 @@ Each vulnerability finding is enriched with the following signals:
 These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
 
 **Requirements**:
-- Datadog Agent **7.78.0 or later**
+- Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Important**: Enabling runtime package tracking activates [Workload Protection][8] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
 
 {{< tabs >}}
 
@@ -168,7 +223,7 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.78+)
+      # Enables runtime package prioritization (Preview, Agent 7.79+)
       enrichment:
         usage:
           enabled: true
@@ -187,10 +242,31 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.78+)
+    # Enables runtime package prioritization (Preview, Agent 7.79+)
     enrichment:
       usage:
         enabled: true
+```
+
+Restart the Agent.
+
+{{% /tab %}}
+
+{{% tab "DaemonSet" %}}
+
+Set `hostPID: true` in the pod spec, and add the following environment variables to every Agent container in your `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`:
+
+```yaml
+# Pod spec
+hostPID: true
+
+# Add to each Agent container's env section.
+- name: DD_SBOM_ENABLED
+  value: "true"
+- name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+  value: "true"
+- name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+  value: "true"
 ```
 
 Restart the Agent.

@@ -113,12 +113,18 @@ provider "datadog" {
 }
 
 module "datadog_storage_management" {
-  source = "DataDog/storage-management/aws"
+  source = "DataDog/storage-management-datadog/aws"
 
   name                              = "<MODULE_NAME>"
   datadog_aws_integration_role_name = "<DATADOG_AWS_INTEGRATION_ROLE_NAME>"
   source_bucket_names               = ["<SOURCE_BUCKET_1>", "<SOURCE_BUCKET_2>"]
   destination_bucket_name           = "<DESTINATION_BUCKET_NAME>"
+
+  # Prefix within the destination bucket where inventory files are written.
+  # Defaults to "datadog-inventories/". The module keeps the inventory
+  # configuration, bucket policy, and IAM permissions consistent with this
+  # value. Datadog recommends to use the default value.
+  # destination_prefix = "datadog-inventories/"
 
   # Bucket policy: "none", "create", or "merge" (default)
   destination_bucket_policy_management = "merge"
@@ -148,7 +154,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
    **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
-2. Create a prefix within the destination bucket (optional).
+2. Decide on the destination prefix within the bucket where inventory files are written. The standard prefix is `datadog-inventories/`, which is also the default if you leave the value empty. To read inventory reports from the entire bucket, set the value to `/`. You can use a custom prefix, but you must use the same value in subsequent steps: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 {{% /collapse-content %}}
@@ -198,7 +204,7 @@ For each bucket you want to monitor:
      {{< img src="integrations/guide/storage_monitoring/all-versions.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
    - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
 
-      **Note**: To use a prefix on the destination bucket, add this as well.
+      **Note**: Add the destination prefix you chose in step 1. Use the same value that you register with Datadog in the post-setup step.
    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
    - **Output format**: CSV
    - **Status**: Enabled
@@ -252,7 +258,7 @@ To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
 - Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
-- Replace `<DESTINATION_PREFIX>` with the prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
+- Replace `<DESTINATION_PREFIX>` with the prefix in the destination bucket where your S3 Inventory reports are written, for example `datadog-inventories/`. This must match the prefix in your S3 Inventory configuration. To read inventory reports from the entire bucket, set the value to `/`. Leaving the value empty does not read from the entire bucket; it defaults to `datadog-inventories/`.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
@@ -286,7 +292,25 @@ Follow these best practices to optimize Storage Management setup:
 If you don't see data for buckets you set up for Storage Management, use the [Storage Management Settings][9] page to view all configured buckets, their inventory status, and any configuration errors. The page surfaces issues with actionable remediation steps.
 If you have any questions, [contact Datadog][1].
 
+## Identify and act on cost savings with Bits Chat
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor" >}}
+Bits Chat for Storage Management is in Preview. To try this skill, request access.
+{{< /callout >}} 
+
+
+FinOps and engineering teams can use Bits Chat and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use Bits Chat with Storage Management, enable the `storage` skill in the Bits Chat settings.
+
+With the `storage` skill enabled for Bits Chat, you can:
+
+- **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
+- **Create reports through Notebooks**: Generate a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
+- **Implement changes**: Get step-by-step guidance with [Bits Code][10] to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
+
+
 ## Visualize granular S3 usage with inventory metrics
+
+An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize the below metrics. You can clone and customize it to fit your needs.
 
 | Metric Name                                            | Notable Tags                                                                                  | Description                                                                                                                                    |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -309,7 +333,6 @@ If you have any questions, [contact Datadog][1].
 
   **Note:** For the most accurate monitoring and visualization, include all object versions to see non-current object recommendations or metrics.
 
-An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize these metrics. You can clone and customize it to fit your needs.
 
 ## Act on optimizations with Storage Management Recommendations
 
@@ -330,9 +353,11 @@ Seeing recommendations has the following prerequisites:
 
   {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations" responsive="true">}}
 
+
 [1]: mailto:storage-monitoring@datadoghq.com
 [3]: https://app.datadoghq.com/storage-management
 [4]: /logs/log_configuration/indexes/#exclusion-filters
 [7]: /cloud_cost_management/
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
+[10]: https://docs.datadoghq.com/bits_ai/bits_code/

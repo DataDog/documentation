@@ -1,117 +1,158 @@
 ---
-title: Gestion de compte
-description: "Gérer votre organisation et votre compte Datadog"
 aliases:
-    - /guides/billing
-    - /account_management/settings
+- /fr/guides/billing
+- /fr/account_management/settings
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+description: Gérez votre compte et votre organisation Datadog
 further_reading:
-    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
-      tag: "Blog"
-      text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle (en anglais)"
+- link: https://www.datadoghq.com/blog/volkswagen-organizations/
+  tag: Blog
+  text: Meilleures pratiques pour gérer les organisations Datadog à grande échelle
+title: Gestion de compte
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">La plateforme Datadog for Government prend uniquement en charge l'authentification SAML ou l'authentification de base avec nom d'utilisateur/adresse e-mail et mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur ou adresse e-mail et mot de passe est disponible afin de maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multifacteur (MFA) pour les comptes avec mot de passe.
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">La plateforme Datadog pour le gouvernement ne prend en charge que l'authentification SAML ou l'authentification de base utilisant un nom d'utilisateur/email et un mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur/email et mot de passe est établi pour maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multi-facteurs (MFA) pour les comptes basés sur un mot de passe.
 
-Si vous avez besoin d'activer SAML pour un compte d'essai, contactez <a href="https://docs.datadoghq.com/getting_started/support/">l'assistance Datadog</a>.</div>
+Si vous avez besoin que SAML soit activé pour un compte d'essai, contactez <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
 
 {{< /site-region >}}
 
-## Paramètres personnels
+## Paramètres personnels {#personal-settings}
 
 Les pages des paramètres personnels Datadog vous permettent de contrôler les informations à votre sujet que les autres membres de votre organisation peuvent consulter, de changer d'organisation, de quitter une organisation et de gérer vos préférences de notification.
 
-### Profil
+### Profil {#profile}
 
-Votre profil permet aux autres membres de votre organisation de vous reconnaître dans Datadog. Vous pouvez définir ou modifier votre nom, votre adresse e-mail et votre poste depuis l'[onglet Profile][11] de la page **Personal Settings**.
+Votre profil est la façon dont les autres dans votre organisation vous reconnaissent dans Datadog. Définissez ou mettez à jour votre nom, votre adresse e-mail et votre titre depuis l'onglet [Profil][11] dans la page {{< ui >}}Personal Settings{{< /ui >}}.
 
 Pour modifier votre photo, créez un compte sur [Gravatar][1] et associez-le à votre adresse e-mail.
 
-Si vous vous connectez à Datadog à l'aide de l'authentification Google, votre adresse e-mail est fournie par votre compte Google et n'est **pas** modifiable dans Datadog. Pour modifier votre adresse e-mail dans Google, consultez la [documentation Google][2].
+Si vous vous connectez à Datadog en utilisant l'authentification Google, votre adresse e-mail est fournie par votre compte Google et est **non** modifiable dans Datadog. Pour changer votre adresse e-mail dans Google, consultez la [documentation Google][2].
 
-### Préférences
+### Préférences {#preferences}
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-Vous pouvez gérer votre fuseau horaire, vos préférences d'accessibilité visuelle et vos abonnements par e-mail à partir de l'onglet [Preferences][3] de la page **Paramètres personnels**.
+Vous pouvez gérer votre fuseau horaire, votre format horaire, vos préférences d'accessibilité visuelle et vos abonnements par e-mail depuis l'onglet [Préférences][3] dans la {{< ui >}}Personal Settings{{< /ui >}} page.
 
-#### Abonnements aux services de messagerie
+#### Abonnements par e-mail {#email-subscriptions}
 
-Dans la section des abonnements par e-mail, vous avez accès aux rapports suivants :{{< site-region region="us3,us5,gov,ap1,ap2" >}}
-<div class="alert alert-danger">Les résumés par e-mail ne sont pas disponibles dans le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+La section E-mail subscriptions vous donne accès aux rapports suivants :
+{{< site-region region="us3,us5,gov,gov2,ap1,ap2" >}}
+<div class="alert alert-danger">Les résumés par e-mail ne sont pas disponibles sur le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-* Daily Digest (Synthèse quotidienne)
-* Weekly Digest (Synthèse hebdomadaire)
+* Résumé quotidien
+* Résumé hebdomadaire
 
-Pour savoir si un e-mail de synthèse est susceptible de vous intéresser, consultez un exemple en cliquant sur le lien **Example** en regard de chaque abonnement. Vous pouvez également utiliser le bouton **Unsubscribe From all** pour vous désabonner de toutes les synthèses.
+Si vous n'êtes pas sûr qu'un résumé par e-mail vous concerne, vous pouvez voir un exemple en cliquant sur le {{< ui >}}Example{{< /ui >}} lien à côté de chaque abonnement par e-mail. Vous pouvez également utiliser le bouton {{< ui >}}Unsubscribe From All{{< /ui >}} pour vous désinscrire de tous les abonnements par e-mail.
 {{% /site-region %}}
 
 
-{{% site-region region="gov" %}}
-Vous pouvez gérer votre fuseau horaire, vos préférences d'accessibilité visuelle et vos abonnements aux services de messagerie depuis l'onglet [**Preferences** tab][3] de la page **Personal Settings**.
+{{% site-region region="gov,gov2" %}}
+Vous pouvez gérer votre fuseau horaire, votre format horaire et votre préférence d'accessibilité visuelle depuis l'onglet [**Préférences**][3] dans la page {{< ui >}}Personal Settings{{< /ui >}}.
 {{% /site-region %}}
 
-#### Accessibilité visuelle
+#### Format horaire {#time-format}
 
-Les préférences d'accessibilité visuelle offrent cinq paramètres différents conçus pour répondre aux besoins des personnes souffrant d'une anomalie de la vision des couleurs, de troubles de l'acuité visuelle ou d'une sensibilité aux couleurs vives. Si vous activez l'un de ces paramètres d'accessibilité, tous les graphiques qui utilisent la palette de couleurs classique seront convertis pour afficher des couleurs adaptées à vos besoins visuels.
+Choisissez si les heures sont affichées au format 12 heures ou 24 heures dans Datadog (par exemple, "2:30 pm" ou "14:30"). Les nouveaux comptes sont par défaut au format 12 heures. Les graphiques et certaines données tabulaires s'affichent en format 24 heures à tout moment.
 
-**Remarque** : vos préférences d'accessibilité visuelle sont enregistrées en local dans votre navigateur. Si vous changez de navigateur ou effacez votre cache, le paramètre par défaut sera rétabli.
+#### Accessibilité visuelle {#visual-accessibility}
 
-### Organisations
+La préférence d'accessibilité visuelle a cinq paramètres différents pour répondre aux déficiences de la vision des couleurs, à une faible acuité visuelle et à la sensibilité aux couleurs vives. Si vous optez pour un paramètre de couleur accessible, Datadog traduit tous les graphiques utilisant la palette de couleurs classique en un ensemble de couleurs accessibles adapté à vos besoins visuels.
 
-L'[onglet Organizations][12] de la page **Personal Settings** répertorie toutes les organisations auxquelles vous êtes associé. Passez d'une organisation à une autre à partir de cette page ou en survolant le menu des comptes de la barre de navigation sur la gauche.
+**Remarque** : Votre préférence d'accessibilité visuelle est enregistrée localement dans votre navigateur. Si vous utilisez un autre navigateur ou si vous videz votre cache, la préférence est réinitialisée aux paramètres par défaut.
 
-**Remarque** : si vous quittez une organisation, vous ne pourrez pas la rejoindre à nouveau à moins d'être invité par un administrateur de cette organisation.
+### Organisations {#organizations}
 
-Pour rejoindre une organisation existante, un administrateur doit vous inviter. Vous recevrez alors un e-mail avec l'objet "You've been invited to join \<Organization Name>". Cliquez sur le bouton **Join Account** de l'e-mail.
+L'onglet [Organisations][12] dans {{< ui >}}Personal Settings{{< /ui >}} répertorie toutes les organisations auxquelles vous appartenez. Alternez entre ces organisations depuis cette page ou en survolant le menu de compte dans la navigation à gauche.
+
+**Remarque** : Si vous quittez une organisation, vous ne pouvez pas la rejoindre à nouveau à moins d'être invité par un administrateur de cette organisation.
+
+Pour rejoindre une organisation existante, vous devez être invité par un administrateur. Après avoir été invité, vous recevez un e-mail avec pour objet "Vous avez été invité à rejoindre \<Nom de l'organisation>". Cliquez sur le bouton {{< ui >}}Join Account{{< /ui >}} dans l'e-mail.
 
 Si vous êtes un administrateur d'organisation, consultez les ressources suivantes pour obtenir davantage d'informations :
 
-* [Gérer les utilisateurs de votre organisation][4]
+* [Gérer les utilisateurs dans votre organisation][4]
 * [Configurer l'authentification unique avec SAML][5]
 * [Renommer votre organisation][6]
 * [Gérer des comptes multi-organisations][7]
-* [Modifier votre formule Datadog et consulter l'historique d'utilisation et de facturation][8]
+* [Changer votre plan Datadog et consulter l'historique d'utilisation et de facturation][8]
+* [Choisir la topologie de votre organisation (organisation unique vs. multi-organisations)][15]
 
-### Sécurité
+### Sécurité {#security}
 
-#### Clés d'application
+#### Clés d'application {#application-keys}
 
-Vous pouvez gérer vos clés d'application depuis l'[onglet Application Keys][13] de la page **Personal Settings**. Pour copier une clé, passez le curseur dessus jusqu'à ce que l'icône **Copy Key** s'affiche sur la droite, et cliquez sur cette icône. Vous pouvez également cliquer sur la clé de votre choix pour modifier son nom, consulter sa date de création, afficher le profil de son propriétaire ou la révoquer.
+L'onglet [Clés d'application][13] dans {{< ui >}}Personal Settings{{< /ui >}} vous permet de gérer vos clés d'application. Pour copier une clé, survolez-la jusqu'à ce que l'icône {{< ui >}}Copy Key{{< /ui >}} apparaisse à droite, puis cliquez dessus. Vous pouvez également cliquer sur une clé spécifique pour modifier son nom, voir quand elle a été créée, consulter le profil du propriétaire de la clé, la copier ou la révoquer.
 
-#### Apps
+#### Applications {#apps}
 
-L'[onglet Apps][14] de la page **Personal Settings** vous permet de gérer les apps qui ont été installées ou créées par des membres de votre organisation. Vous pouvez filtrer les apps en recherchant du texte, ou utiliser les cases à cocher pour afficher uniquement les apps activées ou désactivées.
+L'onglet [Applications][14] dans {{< ui >}}Personal Settings{{< /ui >}} vous permet de gérer les applications qui ont été installées ou créées par des membres de votre organisation. Vous pouvez filtrer les applications avec une chaîne de recherche, ou choisir de voir uniquement les applications activées ou désactivées à l'aide de cases à cocher.
 
 Lorsque vous passez votre curseur sur une app, une option vous permettant de l'activer ou la désactiver apparaît à droite de son nom.
 
-## Apparence
+#### Vérification de l'email {#email-verification}
+Vérifiez votre adresse e-mail pour renforcer la sécurité de votre compte et accéder à des fonctionnalités de gestion supplémentaires. Les utilisateurs vérifiés ont un meilleur contrôle sur la sécurité de leur compte et peuvent voir toutes les organisations auxquelles ils appartiennent.
 
-Pour activer le mode sombre dans Datadog, passez votre curseur sur votre avatar dans la barre latérale ou appuyez sur `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+- **Les utilisateurs de connexion Google** sont automatiquement vérifiés lors de leur première connexion.
+- **Les utilisateurs basés sur un mot de passe** vérifient leur adresse e-mail lors de la définition de leur mot de passe pour la première fois.
+- **Les utilisateurs SAML** doivent vérifier manuellement leur adresse e-mail via Datadog.
 
-Pour faire en sorte que l'apparence du site s'adapte automatiquement à celle de votre système, sélectionnez l'option *System*. Ainsi, le thème défini sur Datadog correspondra toujours au thème défini sur votre système.
+Après avoir été vérifié, vous accédez à :
+- La possibilité de **se déconnecter de toutes les sessions web actives** sur tous les appareils, garantissant la sécurité en cas de compromission des identifiants.
+- La possibilité de **voir et de basculer entre les organisations** en dehors de votre hiérarchie organisationnelle actuelle.
 
-## Connexion à GitHub
+Les utilisateurs non vérifiés peuvent toujours accéder à Datadog, mais sont limités à la visualisation des organisations au sein de leur hiérarchie et ne peuvent pas révoquer les sessions actives.
 
-Si vous avez installé l'[intégration GitHub][9] pour créer des événements dans Datadog, associez votre compte GitHub personnel à votre compte utilisateur Datadog. Ainsi, les commentaires que vous publierez dans les événements GitHub de Datadog seront automatiquement publiés dans l'issue ou la pull request correspondante dans GitHub.
+#### Vérifiez votre adresse e-mail {#verify-your-email}
 
-## Désactivation du compte de votre organisation
+Pour vérifier votre adresse e-mail :
+1. Accédez à votre {{< ui >}}Profile Settings{{< /ui >}}.
+2. Cliquez sur {{< ui >}}Verify Account{{< /ui >}}.
+3. Entrez le **code de vérification** envoyé à votre email enregistré.
+4. Cliquez {{< ui >}}Submit{{< /ui >}} pour compléter le processus de vérification.
+
+#### Déconnectez-vous de toutes les sessions web actives {#log-out-of-all-active-web-sessions}
+
+Pour vous déconnecter de toutes les sessions web actives :
+Se déconnecter de toutes les sessions web actives vous déconnecte de toutes les sessions en cours sur les appareils, y compris celui que vous utilisez.
+
+
+Pour vous déconnecter de toutes les sessions actives :
+1. Allez à {{< ui >}}Personal Settings{{< /ui >}}.
+2. Cliquez {{< ui >}}Log Out of All Web Sessions{{< /ui >}}.
+3. Confirmez l'action.
+
+Après confirmation, vous êtes déconnecté de tous les appareils et devez vous reconnecter.
+
+## Apparence {#appearance}
+
+Affichez Datadog en mode sombre en survolant votre avatar dans la barre latérale, ou en appuyant sur `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+
+Pour s'adapter au paramètre d'apparence de votre ordinateur, sélectionnez l'option {{< ui >}}System{{< /ui >}}. Cela fait automatiquement correspondre l'apparence de Datadog au thème que vous avez défini au niveau du système d'exploitation.
+
+## Connexion à GitHub {#connecting-to-github}
+
+Si vous avez installé l'[intégration GitHub][9] pour créer des événements dans Datadog, liez votre compte GitHub personnel à votre compte utilisateur Datadog. En liant vos comptes, tous les commentaires que vous publiez sur les événements GitHub dans Datadog sont automatiquement repostés dans le ticket ou la pull request correspondante sur GitHub.
+
+## Désactivation du compte de votre organisation {#disabling-your-organizations-account}
 
 Pour désactiver le compte Datadog de votre organisation, contactez l'[assistance Datadog][10].
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
 [3]: https://app.datadoghq.com/personal-settings/preferences
-[4]: /account_management/users/
-[5]: /account_management/saml/
-[6]: /account_management/org_settings/#change-your-organization-name
-[7]: /account_management/multi_organization/
-[8]: /account_management/org_settings/
-[9]: /integrations/github/
-[10]: /help/
+[4]: /fr/account_management/users/
+[5]: /fr/account_management/saml/
+[6]: /fr/account_management/org_settings/#change-your-organization-name
+[7]: /fr/account_management/multi_organization/
+[8]: /fr/account_management/org_settings/
+[9]: /fr/integrations/github/
+[10]: /fr/help/
 [11]: https://app.datadoghq.com/personal-settings/profile
 [12]: https://app.datadoghq.com/personal-settings/organizations
 [13]: https://app.datadoghq.com/personal-settings/application-keys
 [14]: https://app.datadoghq.com/personal-settings/apps
+[15]: /fr/getting_started/organization_topology/

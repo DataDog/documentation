@@ -378,7 +378,7 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/getting_started/tagging/assigning_tags/
-[2]: /ko/service_management/events/explorer
+[2]: /ko/events/explorer
 [3]: /ko/integrations/
 [4]: /ko/infrastructure/hostmap/
 [5]: /ko/infrastructure/

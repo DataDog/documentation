@@ -30,7 +30,7 @@ Here's a minimal example to get feature flags working in your Android app:
 ```kotlin
 // 1. Add dependencies (see Installation section)
 
-// 2. Initialize Datadog SDK (in Application.onCreate)
+// 2. Initialize the Datadog Android SDK (in Application.onCreate)
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
@@ -94,7 +94,7 @@ Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for provider creation and flag evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog Android SDK instance and prepare for provider creation and flag evaluation:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
@@ -128,6 +128,8 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 Define who or what the flag evaluation applies to using an `ImmutableContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Set this before evaluating flags to help ensure proper targeting.
 
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.ImmutableContext
 import dev.openfeature.kotlin.sdk.Value
@@ -143,7 +145,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">All attribute values must use a <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
+<div class="alert alert-info">OpenFeature attributes must use flat <code>Value</code> primitives such as <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, or <code>Value.Boolean()</code>. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
 
 ## Evaluate flags
 
@@ -249,6 +251,47 @@ Similar detail methods exist for other types: `getBooleanDetails()`, `getInteger
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Observe provider events
+
+<div class="alert alert-info">Provider event observation is available in <code>dd-sdk-android-flags-openfeature</code> 3.6.0 and later. Use the same version for <code>dd-sdk-android-flags</code>.</div>
+
+Use `OpenFeatureAPI.observe()` to react to provider state changes. The Datadog OpenFeature provider emits `ProviderReady`, `ProviderStale`, and `ProviderError` based on the underlying `FlagsClient` state.
+
+{{< code-block lang="kotlin" >}}
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.events.OpenFeatureProviderEvents
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
+
+val stateJob = lifecycleScope.launch {
+    OpenFeatureAPI.observe<OpenFeatureProviderEvents>()
+        .catch {
+            // Handle Flow collection errors.
+        }
+        .collect { event ->
+            when (event) {
+                is OpenFeatureProviderEvents.ProviderReady -> {
+                    // The provider is ready to evaluate flags.
+                }
+                is OpenFeatureProviderEvents.ProviderStale -> {
+                    // Cached assignments are available, but they may be out of date.
+                }
+                is OpenFeatureProviderEvents.ProviderError -> {
+                    // The provider cannot evaluate flags.
+                }
+                is OpenFeatureProviderEvents.ProviderConfigurationChanged -> {
+                    // The provider configuration changed.
+                }
+                else -> {
+                    // Handle other OpenFeature provider events as needed.
+                }
+            }
+        }
+}
+{{< /code-block >}}
+
+Cancel the collection job when the observing component stops. For example, collect from `lifecycleScope` in an Android `Activity` or `Fragment`, or from `viewModelScope` in a `ViewModel`.
+
 ## Advanced configuration
 
 ### Global configuration
@@ -288,6 +331,7 @@ You can configure individual providers with custom endpoints before creating the
 val provider = FlagsClient.Builder()
     .useCustomFlagEndpoint("https://your-proxy.example.com/flags")
     .useCustomExposureEndpoint("https://your-proxy.example.com/exposure")
+    .useCustomEvaluationEndpoint("https://your-proxy.example.com/evaluations")
     .build()
     .asOpenFeatureProvider()
 
@@ -355,6 +399,45 @@ flagsClient.setEvaluationContext(
 {{< /code-block >}}
 
 This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations after the background operation completes.
+
+### Observe direct client state changes
+
+<div class="alert alert-info">Direct client state observation with <code>flagsClient.state</code> is available in <code>dd-sdk-android-flags</code> 3.4.0 and later.</div>
+
+Use `flagsClient.state` to check the current direct-client state or register a listener for state changes:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsStateListener
+import com.datadog.android.flags.model.FlagsClientState
+
+val listener = object : FlagsStateListener {
+    override fun onStateChanged(newState: FlagsClientState) {
+        when (newState) {
+            FlagsClientState.NotReady -> {
+                // The client has not loaded assignments yet.
+            }
+            FlagsClientState.Reconciling -> {
+                // The client is fetching assignments for a context change.
+            }
+            FlagsClientState.Ready -> {
+                // Assignments are loaded and available for evaluation.
+            }
+            FlagsClientState.Stale -> {
+                // Cached assignments are available, but the latest fetch failed.
+            }
+            is FlagsClientState.Error -> {
+                // No assignments are available for evaluation.
+            }
+        }
+    }
+}
+
+flagsClient.state.addListener(listener)
+
+val currentState = flagsClient.state.getCurrentState()
+{{< /code-block >}}
+
+The listener receives the current state when it is registered, then receives future state changes. Keep the callback fast and dispatch long-running work to another thread. Call `flagsClient.state.removeListener(listener)` when the observing component stops.
 
 ### Evaluate flags (FlagsClient)
 

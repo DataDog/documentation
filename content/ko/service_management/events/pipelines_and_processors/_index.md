@@ -30,12 +30,12 @@ title: 파이프라인 및 프로세서
 
 
 
-[1]: /ko/service_management/events/pipelines_and_processors/arithmetic_processor
-[2]: /ko/service_management/events/pipelines_and_processors/date_remapper
-[3]: /ko/service_management/events/pipelines_and_processors/category_processor
-[4]: /ko/service_management/events/pipelines_and_processors/grok_parser
-[5]: /ko/service_management/events/pipelines_and_processors/lookup_processor
-[6]: /ko/service_management/events/pipelines_and_processors/remapper
-[7]: /ko/service_management/events/pipelines_and_processors/service_remapper
-[8]: /ko/service_management/events/pipelines_and_processors/status_remapper
-[9]: /ko/service_management/events/pipelines_and_processors/string_builder_processor
+[1]: /ko/events/pipelines_and_processors/arithmetic_processor
+[2]: /ko/events/pipelines_and_processors/date_remapper
+[3]: /ko/events/pipelines_and_processors/category_processor
+[4]: /ko/events/pipelines_and_processors/grok_parser
+[5]: /ko/events/pipelines_and_processors/lookup_processor
+[6]: /ko/events/pipelines_and_processors/remapper
+[7]: /ko/events/pipelines_and_processors/service_remapper
+[8]: /ko/events/pipelines_and_processors/status_remapper
+[9]: /ko/events/pipelines_and_processors/string_builder_processor

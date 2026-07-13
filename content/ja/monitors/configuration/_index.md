@@ -4,115 +4,154 @@ aliases:
 description: モニター作成ページについて説明します。
 further_reading:
 - link: /monitors/notify/
-  tag: Documentation
+  tag: よくあるご質問
   text: モニター通知
 - link: /monitors/manage/
-  tag: Documentation
+  tag: よくあるご質問
   text: モニターの管理
-- link: /monitors/manage/status/
-  tag: Documentation
-  text: モニターステータス
-title: モニターの構成
+- link: /monitors/status/
+  tag: よくあるご質問
+  text: モニターのステータス
+- link: https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/
+  tag: ブログ
+  text: Datadog Teams を使用して、モニターをより効率的に管理します。
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: ラーニングセンター
+  text: アラートモニター通知をカスタマイズ
+title: モニターを構成
 ---
-
-## 概要
+## 概要 {#overview}
 
 モニターの構成を開始するには、以下を完了します。
 
-* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, and more.
-* **アラート条件を設定します。**アラートと警告のしきい値、評価タイムフレームを定義し、高度なアラートオプションを構成します。
-* **Configure notifications and automations:** Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
-* **Define permissions and audit notifications:** Configure granular access controls and designate specific roles and users who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
+* **検索クエリを定義します:** イベントのカウント、メトリクスの測定、1 つまたは複数のディメンションによるグループ化などを行うクエリを作成します。
+* **アラート条件を設定します:** アラートと警告のしきい値、評価タイムフレームを定義し、高度なアラートオプションを構成します。
+* **通知と自動化を構成します:** 変数を使用してカスタム通知タイトルとメッセージを作成します。通知をチームに送信する方法を選択します (メール、Slack、PagerDuty など)。アラート通知にワークフローの自動化やケースを含めます。
+* **権限と監査通知を定義します:** きめ細かいアクセス制御を構成し、モニターを編集できる特定のロールとユーザーを指定します。モニターが変更された場合にアラートで通知するために、監査通知を有効にします。
 
-## 検索クエリを定義する
+## 検索クエリを定義します {#define-the-search-query}
 
-検索クエリの作成方法については、個々の[モニタータイプ][1]ページを参照してください。検索クエリを定義すると、検索フィールドの上のプレビューグラフが更新されます。
+検索クエリの作成方法については、各 [モニターの種類][1] のページを参照してください。
 
-{{< img src="/monitors/create/preview_graph_monitor.mp4" alt="プレビューグラフ" video=true style="width:90%;">}}
+## グラフのプレビュー {#preview-graphs}
 
-## アラートの条件を設定する
+クエリを作成または変更すると、構成の上部にあるプレビューグラフが、リアルタイムで結果を反映するために動的に更新されます。
 
-アラート条件は、[モニタータイプ][1]によって異なります。クエリ値がしきい値を超えた場合、または特定の数の連続したチェックが失敗した場合にトリガーするようにモニターを構成します。
+{{< tabs >}}
+{{% tab "Evaluated Data" %}}
+
+{{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data プレビューグラフ" style="width:100%;" >}}
+
+Evaluated Data グラフには、現在のクエリとしきい値を使用して、モニターがデータをどのように評価したかが示されます。Evaluated Data では、次のことを行えます。
+- 過去の状態遷移を確認します (例: `OK` → `ALERT`)。
+- モニターがどのように動作したかを理解します。
+- (通知ルールからのものも含め) 誰に通知されるかをプレビューします。
+- 保存する前に、設定ミスを迅速に見つけます。
+
+この機能は、Metrics、Logs、APM、RUM、Events、Audit、Database、LLM Observability、Deployment モニターで利用できます。
+
+{{% /tab %}}
+
+{{% tab "Source Data" %}}
+
+{{< img src="/monitors/configuration/source_data_graph_high_error_rate.png" alt="Source Data プレビューグラフ" style="width:100%;" >}}
+
+Source Data グラフには、しきい値評価やアラートロジックが適用されていない、モニターの生の時系列データやクエリ出力が表示されます。これにより、次のことが可能になります。
+
+- モニターの評価対象である基盤データを視覚化します。
+- アラート状態の変化を実際のデータの傾向と関連付けます。
+- アラート条件を設定する前に、データ内の異常、ギャップ、または予期しないパターンを特定します。
+
+Source Data グラフを使用して、クエリが期待どおりの結果を返していることを確認し、アラートのしきい値や評価ウィンドウの調整に役立てます。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## アラート条件の設定 {#set-alert-conditions}
+
+アラート条件は、[モニターの種類][1] に応じて異なります。クエリ値がしきい値を超えた場合、または特定の数の連続したチェックが失敗した場合にトリガーするようにモニターを構成します。
 
 {{< tabs >}}
 {{% tab "しきい値アラート" %}}
 
-* メトリクスの `average`、`max`、`min`、`sum` が
-* しきい値に対して `above`、`above or equal to`、`below`、`below or equal to` になったらトリガーします
-* 過去 `5 minutes`、`15 minutes`、`1 hour`、または `custom` に 1 分～48 時間 (メトリクスモニターに対して 1 か月) の値を設定します
+* メトリクスの `average`、`max`、`min`、または `sum` が、
+しきい値の * `above`、`above or equal to`、`below`、または `below or equal to` であった場合にトリガーします。
+* 過去 `5 minutes`、`15 minutes`、`1 hour`、または `custom` に 1 分～48 時間 (メトリクスモニターに対して 1 か月) の値を設定します。
 
-### 集計の方法
+### 集計方法 {#aggregation-method}
 
-クエリは一連のポイントを返しますが、しきい値と比較するには単一の値が必要です。モニターは、評価ウィンドウのデータを単一の値に減らす必要があります。
+クエリは一連のポイントを返しますが、しきい値と比較するためには単一の値が必要です。モニターは、評価ウィンドウ内のデータを減らして単一の値にする必要があります。
 
 | オプション                  | 説明                                            |
 |-------------------------|--------------------------------------------------------|
-| 平均         | 系列の平均値が算出され、単一の値が生成されます。この値がしきい値と比較されます。このオプションは、モニタークエリに `avg()` 関数を追加します。 |
-| 最大 | 生成された系列で、どれか一つの値がしきい値を超えたら、アラートがトリガーされます。これは、`max()` 関数をモニタークエリに追加します。* |
-| 最小  | クエリの評価ウィンドウ内のすべてのポイントがしきい値を超えたら、アラートがトリガーされます。これは、`min()` 関数をモニタークエリに追加します。* |
-| 合計 | 系列内のすべてのポイントの合計値がしきい値から外れている場合に、アラートがトリガーされます。このオプションは、モニタークエリに `sum()` 関数を追加します。 |
+| 平均         | 系列の平均値を計算して、しきい値との比較でチェックする単一の値を生成します。モニタークエリに `avg()` 関数を追加します。|
+| 最大 | 生成された系列内のいずれか 1 つの値でもしきい値を超えた場合に、アラートがトリガーされます。モニタークエリに `max()` 関数を追加します。* |
+| 最小  | クエリの評価ウィンドウ内のすべてのポイントがしきい値を超えた場合に、アラートがトリガーされます。モニタークエリに `min()` 関数を追加します。* |
+| 合計 | 系列内のすべてのポイントの合計値がしきい値を超えた場合に、アラートがトリガーされます。モニタークエリに `sum()` 関数を追加します。|
 
-\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed. For more examples, see the [Monitor aggregators][1] guide.
+\* 最大および最小の説明は、メトリクスがしきい値を_超えた_場合にモニターがアラートを出すことを前提としています。しきい値を_下回った_場合にアラートを出すモニターの場合は、最大と最小の動作が逆になります。その他の例については、[モニターの集計方法][1] ガイドを参照してください。
 
-**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][2] for details.
+**注**: `as_count()` を利用する場合は、異なる動作があります。詳細については、[モニター評価での as_count()][2] を参照してください。
 
-### 評価ウィンドウ
+### 評価ウィンドウ {#evaluation-window}
 
-モニターは、累積タイムウィンドウまたはローリングタイムウィンドウを使用して評価することができます。累積タイムウィンドウは、「この時点までのすべてのデータの合計は？」のような歴史的な文脈を必要とする質問に最も適しています。ローリングタイムウィンドウは、「直近の _N_ データポイントの平均は？」のような、このコンテキストを必要としない質問に答えるのに最適な方法です。
+モニターは、累積タイムウィンドウまたはローリングタイムウィンドウを使用して評価することができます。累積タイムウィンドウは、“この時点までに使用可能なすべてのデータの合計を教えてください”のような、過去のコンテキストが必要な質問に最適です。ローリングタイムウィンドウは、“最後の _N_ 個のデータポイントの平均を教えてください”のような、このコンテキストを必要としない質問に回答するのに最適です。
 
 下図は、累積タイムウィンドウとローリングタイムウィンドウの違いを示しています。
 
-{{< img src="/monitors/create/rolling_vs_expanding.png" alt="累積タイムウィンドウとローリングタイムウィンドウの 2 つのグラフ。累積タイムウィンドウは、時間の経過とともに拡大し続けます。ローリングタイムウィンドウは、特定の時間帯をカバーします。" style="width:100%;">}}
+{{< img src="/monitors/create/rolling_vs_expanding.png" alt="累積タイムウィンドウとローリングタイムウィンドウを示す 2 つのグラフ。累積タイムウィンドウは、時間の経過と共に拡大し続けます。ローリングタイムウィンドウは、特定の時間帯に対応します。" style="width:100%;">}}
 
-#### ローリングタイムウィンドウ
+#### ローリングタイムウィンドウ {#rolling-time-windows}
 
-ローリングタイムウィンドウは、サイズが固定で、時間の経過とともに開始点が移動します。モニターは、`5 minutes`、`15 minutes`、`1 hour` またはカスタムで指定したタイムウィンドウを振り返ることができます。
+ローリングタイムウィンドウはサイズが固定されており、時間の経過と共に開始点を移動させます。モニターは、過去 `5 minutes`、`15 minutes`、`1 hour`、または最大 1 か月のカスタムタイムウィンドウを遡って確認できます。
 
-#### 累積タイムウィンドウ
-累積タイムウィンドウは、開始点が固定され、時間の経過とともに拡大します。モニターは 3 つの異なる累積タイムウィンドウをサポートしています。
+**注**: [ログモニター][6] では、最大 `2 days` のローリングタイムウィンドウを設定できます。
 
-- `Current hour`: 構成可能な分単位で開始する最大1時間のタイムウィンドウです。例えば、HTTP エンドポイントが 0 分から 1 時間の間に受けたコールの量を監視します。
-- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the `current day` time window and letting it start at 2:00pm UTC.
-- `Current month`: Looks back at the current month starting on a configurable day of the month at a configurable hour and minute. This option represents a month-to-date time window and is only available for metric monitors.
+#### 累積タイムウィンドウ {#cumulative-time-windows}
+累積タイムウィンドウでは開始点が固定されており、時間の経過と共に拡大します。モニターは、3 つの異なる累積タイムウィンドウをサポートしています。
 
-{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
+- `Current hour`: 開始時間として 1 時間の中の分を設定できる、最大 1 時間のタイムウィンドウ。たとえば、0 分から 1 時間の間に HTTP エンドポイントが受信する呼び出しの数をモニターします。
+- `Current day`: 開始時間として 1 日の中の時間と分を設定できる、最大 24 時間のタイムウィンドウ。たとえば、`current day` タイムウィンドウを使用し、開始時間として 2:00pm UTC を指定して、[日別のログインデックスの割り当て][3] をモニターします。
+- `Current month`: 設定可能な 1 か月の中の日と設定可能な時間および分から、今月を遡って確認します。このオプションは月初から現在までのタイムウィンドウを表し、メトリックモニターでのみ利用可能です。
 
-累積タイムウィンドウは、その最大タイムスパンに達した後リセットされます。例えば、`current month` を見る累積タイムウィンドウは、毎月 1 日の午前 0 時 (UTC) にリセットされます。あるいは、`current hour` の累積タイムウィンドウは、30 分から始まり、1 時間ごとにリセットされます。例えば、午前 6 時 30 分、午前 7 時 30 分、午前 8 時 30 分です。
+{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Datadog インターフェイスで累積ウィンドウがどのように構成されるかを示すスクリーンショット。ユーザーは、aws.sqs.number_of_messages_received を検索しています。オプションは、今月のクエリの合計を評価するように設定されています。" style="width:100%;">}}
 
-### 評価頻度
+累積タイムウィンドウは、最大時間スパンに達するとリセットされます。たとえば、`current month` を確認する累積タイムウィンドウは、毎月 1 日の午前 0 時 (UTC) にリセットされます。30 分から開始する `current hour` の累積タイムウィンドウは、毎時間リセットされます。たとえば、午前 6 時 30 分、午前 7 時 30 分、午前 8 時 30 分です。
 
-評価頻度は、Datadog がモニタークエリを実行する頻度を定義します。ほとんどの構成では、評価頻度は `1 minute` で、これは 1 分ごとにモニターが[選択したデータ](#define-the-search-query)を[選択した評価ウィンドウ](#evaluation-window)にクエリして、[定義したしきい値](#thresholds)と集計値を比較することを意味します。
+### 評価頻度 {#evaluation-frequency}
 
-デフォルトで、評価頻度は使用されている[評価ウィンドウ](#evaluation-window)に依存します。ウィンドウを長くすると、評価頻度が低くなります。以下の表は、タイムウィンドウを大きくすることで評価頻度がどのように制御されるかを示しています。
+評価頻度は、Datadog がモニタークエリを実行する頻度を定義します。ほとんどの構成では、評価頻度は `1 minute` です。これは、モニターが毎分、[選択されたデータ](#define-the-search-query)を[選択された評価ウィンドウ](#evaluation-window)についてクエリし、集計された値を[定義されたしきい値](#thresholds)と比較することを意味します。
 
-| 評価ウィンドウの範囲        | 評価頻度  |
+デフォルトでは、評価頻度は使用される[評価ウィンドウ](#evaluation-window)によって決まります。ウィンドウが長くなるほど、評価頻度は低くなります。以下の表は、時間ウィンドウが大きくなると、評価頻度がどのように変わるかを示しています。
+
+| 評価ウィンドウ範囲        | 評価頻度  |
 |---------------------------------|-----------------------|
-| ウィンドウ < 24 時間               | 1 分              |
-| 24 時間 <= ウィンドウ < 48 時間   | 10 分            |
-| ウィンドウ >= 48 時間              | 30 分            |
+| ウィンドウが 24 時間未満               | 1 分              |
+| ウィンドウが 24 時間以上 48 時間未満   | 10 分            |
+| ウィンドウが 48 時間以上              | 30 分            |
 
-評価頻度は、モニターのアラート条件を毎日、毎週、毎月チェックするように構成することもできます。この構成では、評価頻度はもはや評価ウィンドウに依存せず、構成されたスケジュールに依存します。
+評価頻度は、モニターのアラート条件が日次、週次、または月次でチェックされるように構成することもできます。この構成では、評価頻度は評価ウィンドウではなく、構成されたスケジュールに従って決定されるようになります。
 
-詳しくは、[モニター評価頻度のカスタマイズ][4]方法のガイドをご覧ください。
+詳しくは、[モニター評価頻度のカスタマイズ][4] 方法のガイドをご覧ください。
 
-### しきい値
+### しきい値 {#thresholds}
 
-しきい値には、アラートをトリガーする数値を設定します。メトリクスに何を選ぶかによって、エディターに表示される単位 (`byte`、`kibibyte`、`gibibyte` など) が変わります。
+しきい値を使用して、アラートをトリガーするための数値を設定します。エディターには、選択したメトリクスに応じて使用される単位が表示されます (`byte`、`kibibyte`、`gibibyte`など)。
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
+Datadog には 2 種類の通知 (アラートと警告) があります。モニターは、アラートまたは警告のしきい値に基づいて自動的に回復しますが、追加の条件を指定することもできます。回復しきい値の詳細については、[回復しきい値とは][5] を参照してください。たとえば、メトリクスが `3` を超えたときにモニターがアラートを出し、回復しきい値が指定されていない場合は、メトリクスの値が `3` を下回ったときにモニターが回復します。
 
 | オプション                                   | 説明                    |
 |------------------------------------------|--------------------------------|
-| アラートしきい値 **(必須)** | アラートの通知のトリガーに使用される値 |
-| 警告しきい値                   | 警告の通知のトリガーに使用される値 |
-| アラート回復しきい値       | アラートのリカバリに対する追加条件を示すしきい値 (任意) |
-| 警告回復しきい値     | 警告のリカバリに対する追加条件を示すしきい値 (任意) |
+| アラートしきい値 **(必須)** |  アラート通知をトリガーするために使用される値。|
+| 警告しきい値                   | 警告通知をトリガーするために使用される値。|
+| アラート回復しきい値       | アラート回復の追加条件を指定するためのオプションのしきい値。|
+| 警告回復しきい値     | 警告回復の追加条件を指定するためのオプションのしきい値。|
 
 しきい値を変更すると、エディター内でプレビューグラフにカットオフポイントを示すマーカーが表示されます。
 
 {{< img src="/monitors/create/preview_graph_thresholds.png" alt="しきい値プレビューグラフ" style="width:100%;">}}
 
-**メモ**: しきい値を小数で入力する際、値が `<1` の場合は先頭に `0` を付けます。たとえば、`.5` ではなく `0.5` としてください。
+**注**: しきい値を小数で入力する際、値が `<1` の場合は先頭に `0` を付けます。たとえば、`.5` ではなく、`0.5` としてください。
 
 
 [1]: /ja/monitors/guide/monitor_aggregators/
@@ -120,24 +159,25 @@ Datadog has two types of notifications (alert and warning). Monitors recover aut
 [3]: https://docs.datadoghq.com/ja/logs/log_configuration/indexes/#set-daily-quota
 [4]: /ja/monitors/guide/custom_schedules
 [5]: /ja/monitors/guide/recovery-thresholds/
+[6]: /ja/monitors/types/log/
 {{% /tab %}}
 {{% tab "チェックアラート" %}}
 
-チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。チェックアラートを次のように設定します。
+チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。チェックアラートは、次のように設定します。
 
-1. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
+1. 何回連続して失敗したらアラートをトリガーするか、回数 `<NUMBER>` を選択します。
 
-    各チェックは `OK`、`WARN`、`CRITICAL` のいずれか 1 つのステータスを送信します。`WARN` と `CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、プロセスで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
+    チェックを実行するたびに、`OK`、`WARN`、または `CRITICAL` の 1 つのステータスが送信されます。`WARN` および `CRITICAL` ステータスが何回連続して送信されたら通知をトリガーするかを選択します。たとえば、プロセスで接続が失敗する原因となるブリップが 1 回発生したとします。この値を `> 1` に設定すると、ブリップは無視されますが、連続して 2 回以上失敗する問題が発生すると、通知がトリガーされます。
 
-    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="しきい値アラート/警告のチェック" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="チェックしきい値アラート/警告" style="width:90%;">}}
 
-2. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
+2. 何回連続して成功したらアラートを解決するか、回数 `<NUMBER>` を選択します。
 
     何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
 
-    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="しきい値回復のチェック" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="チェックしきい値回復" style="width:90%;">}}
 
-チェックアラートの構成の詳細については、[プロセスチェック][1]、[インテグレーションチェック][2]、[カスタムチェック][3]モニターのドキュメントを参照してください。
+チェックアラートの構成の詳細については、[プロセスチェック][1]、[インテグレーションチェック][2]、[カスタムチェック][3] モニターのドキュメントを参照してください。
 
 
 
@@ -147,87 +187,68 @@ Datadog has two types of notifications (alert and warning). Monitors recover aut
 {{% /tab %}}
 {{< /tabs >}}
 
-### 高度なアラート条件
+### 高度なアラート条件 {#advanced-alert-conditions}
 
-#### No Data
+#### No data (データなし) {#no-data}
 
-正常な状態で、メトリクスが常にデータを報告するようにするには、「データなし」通知を利用すると便利です。たとえば、Agent を使用しているホストが継続的に稼働している必要がある場合、`system.cpu.idle` メトリクスがデータを常に報告することが期待されます。
+欠落データに関する通知は、通常の状況下ではメトリクスによって常にデータが報告されると想定される場合に役立ちます。たとえば、Agent を使用するホストが常に稼働している必要がある場合、`system.cpu.idle` メトリクスは常にデータを報告すると想定することができます。
 
-この場合、データ欠落の通知を有効にする必要があります。以下のセクションでは、各オプションでこれを実現する方法を説明します。
+この場合、欠落データに関する通知を有効にする必要があります。以下のセクションでは、各オプションを使用してこれを実現する方法を説明します。
 
-**注**: 欠落したデータに対してアラートを出す前に、モニターはデータを評価できなければなりません。例えば、`service:abc` のモニターを作成し、その `service` からのデータが報告されていない場合、モニターはアラートを送信しません。
+**注**: モニターは、欠落データに対してアラートを出す前にデータを評価できる必要があります。たとえば、`service:abc` のモニターを作成し、その `service` からのデータが報告されない場合、モニターはアラートを送信しません。
 
+`N` 分のデータが欠落している場合、ドロップダウンメニューからオプションを選択します。
 
-{{< tabs >}}
-{{% tab "メトリクスベースのモニター" %}}
-
-If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for `no data` produces a lot of notifications. In this case, you should not enable notifications for missing data. This option does not work unless it is enabled at a time when data has been reporting for a long period.
-
-| オプション                                                     | 説明                                                                                                                                        | 注        |
-| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| **Do not notify** if data is missing                       | No notification is sent if data is missing                                                                                                         | <u>Simple Alert</u>: the monitor skips evaluations and stays green until data returns that would change the status from OK <br> <u>Multi Alert</u>: if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.|
-| **Notify** if data is missing for more than **N** minutes. | You are notified if data is missing. The notification occurs when no data was received during the configured time window.| Datadog recommends that you set the missing data window to at least two times the evaluation period. |
-
-
-{{% /tab %}}
-
-{{% tab "その他のモニタータイプ" %}}
-
-`N` 分のデータがない場合、ドロップダウンメニューからオプションを選択します。
-
-{{< img src="/monitors/create/on_missing_data.png" alt="データなしオプション" style="width:70%;">}}
+{{< img src="/monitors/create/on_missing_data.png" alt="[No Data] オプション" style="width:70%;">}}
 
 - `Evaluate as zero` / `Show last known status`
 - `Show NO DATA`
 - `Show NO DATA and notify`
-- `Show OK`
+- `Show OK`。
 
-選択された動作は、モニターのクエリがデータを返さなかったときに適用されます。`Do not notify`オプションとは異なり、データ欠落ウィンドウは**構成できません**。
+モニターのクエリからデータが返されない場合、選択された動作が適用されます。`Do not notify` オプションとは対照的に、欠落データウィンドウは構成可能では**ありません**。
 
 | オプション                    | モニターステータスと通知                                             |
 |---------------------------|---------------------------------------------------------------------------|
-| `Evaluate as zero`        | 空の結果はゼロに置き換えられ、アラート/警告のしきい値と比較されます。例えば、警告しきい値が `> 10` に設定されている場合、ゼロはその状態をトリガーせず、モニターのステータスは `OK` に設定されます。   |
-| `Show last known status`  | グループまたはモニターの最後の既知のステータスが設定されます。                        |
-| `Show NO DATA`            | モニターステータスが `NO DATA` に設定されます。                                       |
-| `Show NO DATA and notify` | モニターステータスが `NO DATA` に設定され、通知が送信されます。        |
-| `Show OK`                 | モニターは解決され、ステータスは `OK` に設定されます。                            |
+| `Evaluate as zero`        | 空の結果はゼロに置き換えられ、アラート/警告のしきい値と比較されます。たとえば、アラートしきい値が `> 10` に設定されている場合、ゼロはその条件をトリガーせず、モニターステータスは `OK` に設定されます。  |
+| `Show last known status`  | グループまたはモニターの最後の既知のステータスが設定されます。                       |
+| `Show NO DATA`            | モニターステータスが `NO DATA` に設定されます。                                      |
+| `Show NO DATA and notify` | モニターステータスが `NO DATA` に設定され、通知が送信されます。       |
+| `Show OK`                 | モニターが解決され、ステータスが `OK` に設定されます。                           |
 
-`Evaluate as zero` と `Show last known status` のオプションが、クエリの種類に応じて表示されます。
+`Evaluate as zero` および `Show last known status` オプションは、クエリタイプに基づいて表示されます。
 
-- **Evaluate as zero:** このオプションは、`default_zero()` 関数がない `Count` クエリを使用するモニターに使用できます。
-- **Show last known status:** このオプションは `Count` 以外のクエリタイプ、例えば `Gauge`、`Rate`、`Distribution` を使用しているモニター、および `default_zero()` を持つ `Count` クエリで利用できます。
+- **Evaluate as zero (ゼロとして評価):** このオプションは、`default_zero()` 関数がない `Count` クエリを使用するモニターで使用できます。
+- **Show last known status (最後の既知のステータスを表示):** このオプションは `Count` 以外のクエリタイプ、たとえば `Gauge`、`Rate`、および `Distribution` を使用しているモニター、および `default_zero()` を指定した `Count` クエリで使用できます。
 
-{{% /tab %}}
-{{< /tabs >}}
+#### Auto resolve (自動解決){#auto-resolve}
 
-#### Auto resolve
+`[Never]`、`After 1 hour`、`After 2 hours` など。トリガーされた状態からこのイベントを自動的に解決します。
 
-`[Never]`, `After 1 hour`, `After 2 hours` and so on. automatically resolve this event from a triggered state.
+自動解決は、データが送信されなくなったときに機能します。データが報告されている間は、ALERT または WARN ステータスからモニターが自動解決されることはありません。データがまだ送信されている場合は、[再通知][2] 機能を使用して、問題が解決されていないことをチームに通知できます。
 
-自動解決は、データが送信されなくなったときに機能します。データがまだ報告されている場合、モニターは、ALERT または WARN 状態から自動解決されません。データがまだ送信されている場合は、[再通知][2]機能を利用して、問題が解決されていないことをチームに知らせることができます。
+定期的に報告されるメトリクスについては、トリガーされたアラートが特定の期間後に自動解決されるように設定したほうが適切な場合があります。たとえば、エラーがログに記録されたときにのみ報告されるカウンターの場合、メトリクスがエラーの数として `0` を報告することがないため、アラートが解決されることはありません。その場合は、メトリクスが一定の期間非アクティブであった場合にアラートを解決するように設定します。**注**: モニターが自動解決され、次回の評価時にクエリの値が回復しきい値を満たさない場合、モニターは再度アラートをトリガーします。
 
-メトリクスが定期的に報告を行う場合に、トリガーされたアラートを一定の期間の後に自動で解決したいことがあります。たとえば、エラーのログだけを報告するカウンターがある場合、エラーの数が `0` であれば報告が行われないため、アラートがいつまでも解決しません。このような場合、メトリクスからの報告がないまま一定の期間が経過したらアラートを解決するように設定できます。**注**: モニターがアラートを自動で解決し、次回の評価でクエリーの値がリカバリのしきい値を満たしていない場合、モニターはもう一度アラートをトリガーします。
+ほとんどの場合、この設定は役に立ちません。これは、アラートが実際に修復された後でのみ、アラートを解決する必要があるためです。したがって、通常はこれを `[Never]` のままにして、メトリクスが設定されたしきい値を超えたか、下回った場合にのみ、アラートが解決されるようにするのが適切です。
 
-In most cases this setting is not useful because you only want an alert to resolve after it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+#### Group retention time (グループ保持時間) {#group-retention-time}
 
-#### グループ保持時間
+データが欠落してから `N` 時間経過すると、そのグループをモニターステータスから削除することができます。この時間は最小 1 時間、最大 72 時間です。マルチアラートモニターの場合は、[**Remove the non-reporting group after `N (length of time)`**] (N (時間の長さ) 後に報告してないグループを削除) を選択します。
 
-You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours. For multi alert monitors, select **Remove the non-reporting group after `N (length of time)`**.
+{{< img src="/monitors/create/group_retention_time.png" alt="[Group Retention Time] オプション" style="width:70%;">}}
 
-{{< img src="/monitors/create/group_retention_time.png" alt="グループ保持時間オプション" style="width:70%;">}}
-
-[自動解決オプション][3]と同様に、グループの保持は、データが送信されなくなったときに機能します。このオプションは、データが報告されなくなった後、グループがモニターのステータスに保持される時間を制御します。デフォルトでは、グループはドロップされる前に 24 時間ステータスを保持します。グループ保持の開始時間と自動解決オプションは、モニタークエリがデータを返さないとすぐに **同一** になります。
+[自動解決オプション][3] と同様に、グループ保持は、データが送信されなくなった場合に動作します。このオプションは、データの報告が停止した後、グループがモニターのステータスをどれくらいの時間保持するかを制御します。デフォルトでは、グループは 24 時間ステータスを保持してから削除されます。グループ保持と自動解決オプションの開始時間は**同じ**で、モニターのクエリがデータを返さなくなった時点です。
 
 グループ保持時間を定義するユースケースとしては、以下のようなものがあります。
 
-- データが報告されなくなった直後に、グループをドロップしたい場合
-- トラブルシューティングのために通常かかる時間と同じだけ、グループのステータスを維持したい場合
+- データの報告が停止した直後にグループを削除する場合
+- トラブルシューティングに通常かかる時間と同じだけ、グループのステータスを維持する場合
 
-**注**: グループ保持時間オプションは、[`On missing data`][4] オプションをサポートするマルチアラートモニターを必要とします。これらのモニタータイプは、APM トレース分析、監査ログ、CI パイプライン、エラー追跡、イベント、ログ、および RUM モニターです。
+**注**: [グループ保持時間] オプションには、[`On missing data`][4] オプションをサポートするマルチアラートモニターが必要です。これらのモニタータイプは、[APM Trace Analytics] (APM トレース分析)、[Audit Logs] (監査ログ)、[CI Pipelines] (CI パイプライン)、[Error Tracking] (エラートラッキング)、[Events] (イベント)、[Logs] (ログ)、および [RUM] モニターです。
 
-#### 新しいグループ遅延
+#### New group delay (新しいグループ遅延) {#new-group-delay}
 
-新しいグループの評価開始を `N` 秒遅らせます。
+新しいグループの評価の開始を `N` 秒遅らせます。
 
 アラートを開始する前に待機する時間 (秒単位)。新しく作成されたグループが起動し、アプリケーションが完全に起動できるようにします。これは負でない整数である必要があります。
 
@@ -235,102 +256,104 @@ You can drop the group from the monitor status after `N` hours of missing data. 
 
 このオプションは、マルチアラートモードで使用できます。
 
-#### Evaluation Delay
+#### Evaluation delay (評価遅延) {#evaluation-delay}
 
-<div class="alert alert-info"> Datadog では、サービスプロバイダーによってバックフィルされるクラウドメトリクスに対して 15 分の遅延を推奨しています。さらに、除算式を使用する場合、モニターが完全な値で評価されるようにするために、60 秒の遅延が有効です。遅延時間の目安については、<a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
-">クラウドメトリクスの遅延</a>ページを参照してください。</div>
+<div class="alert alert-info"> Datadog では、サービスプロバイダーによってバックフィルされるクラウドメトリクスには、遅延を 15 分に設定することをお勧めしています。また、除算の計算式を使用する場合は、モニターが完全な値を評価できるよう、60 秒の遅延を設定すると役に立ちます。遅延時間の見積もりについては、「<a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">クラウドメトリクスの遅延</a>」ページを参照してください。</div>
 
 評価を `N` 秒遅らせます。
 
-評価を遅らせる時間 (秒単位)。負以外の整数を指定してください。たとえば、遅延を 900 秒 (15 分) に、モニターが評価を行う期間を直前の `5 minutes` に、時刻を 7:00 に設定すると、モニターは 6:40 から 6:45 までのデータを評価します。構成可能な評価遅延の最大値は 86400 秒 (24 時間) です。
+評価を遅らせる時間 (秒単位)。これは負でない整数である必要があります。たとえば、遅延を 900 秒 (15 分) に、モニターが評価を行う期間を直前の `5 minutes` に、時刻を 7:00 に設定すると、モニターは 6:40 から 6:45 までのデータを評価します。構成可能な評価遅延の最大値は 86400 秒 (24 時間) です。
 
-## 通知と自動化の構成
+## 通知と自動化の構成 {#configure-notifications-and-automations}
 
 通知メッセージを構成して、最も関心のある情報を含めることができます。アラートを送信するチームと、アラートをトリガーする属性を指定します。
 
-### メッセージ
+### メッセージ {#message}
 
 このセクションを使用して、チームへの通知を構成し、これらのアラートを送信する方法を構成します。
 
   - [テンプレート変数で通知を構成する][5]
-  - [Send notifications to your team through email, Slack, or PagerDuty][6]
+  - [メール、Slack、PagerDuty でチームに通知を送る][6]
 
-通知メッセージの構成オプションの詳細については、[アラート通知][7]を参照してください。
+通知メッセージの構成オプションの詳細については、[アラート通知][7] を参照してください。
 
-### メタデータを追加する
+### メタデータを追加 {#add-metadata}
 
-<div class="alert alert-info">モニタータグは、Agent やインテグレーションから送信されるタグとは独立しています。<a href="/monitors/manage/">モニターの管理のドキュメント</a>を参照してください。</div>
+<div class="alert alert-info">モニターのタグは、Agent やインテグレーションによって送信されるタグとは独立しています。<a href="/monitors/manage/">モニターの管理のドキュメント</a>を参照してください。</div>
 
-1. Use the **Tags** dropdown to associate [tags][8] with your monitor.
-1. Use the **Teams** dropdown to associate [teams][9] with your monitor.
-1. **Priority** を選択します。
+1. [**Tags**] (タグ) ドロップダウンを使用して、モニターに [タグ][8] を関連付けることができます。
+1. [**Teams**] (チーム) ドロップダウンを使用して、モニターに [チーム][9] を関連付けることができます。
+1. [**Priority**] (優先度) を選択します。
 
-### Set alert aggregation
+### アラートの集約を設定 {#set-alert-aggregation}
 
-アラートは、クエリを定義する際に `group by` の手順で選択したグループに応じて自動的にグループ化されます。クエリにグループ化がない場合、デフォルトで `Simple Alert` (シンプルアラート) でグループ化されます。クエリがディメンションでグループ化されている場合は、`Multi Alert` (マルチアラート) でグループ化されます。
+アラートは、クエリに対して選択された集約に基づいて自動的にグループ化されます (たとえば、`avg by service`)。クエリでグループ化が指定されていない場合、デフォルトで `Simple Alert` に設定されます。クエリが任意のディメンションでグループ化されている場合、グループは `Multi Alert` に変更されます。
 
 {{< img src="/monitors/create/notification-aggregation.png" alt="モニター通知集計の構成オプション" style="width:100%;">}}
 
-#### シンプルアラート
+#### Simple Alert (シンプルアラート) {#simple-alert}
 
-`Simple Alert` モードは、すべてのレポートソースを集計して通知をトリガーします。集計された値が設定された条件を満たすと、**1 つのアラート**を受け取ります。例えば、全サーバーの平均 CPU 使用率があるしきい値を超えた場合に通知するようにモニターを設定するとします。そのしきい値を満たした場合、しきい値を満たした個々のサーバーの数に関係なく、1 つの通知を受け取ります。これは、システムの大まかな傾向や動作を監視するのに便利です。
+`Simple Alert` モードでは、すべての報告元ソースを集計して通知をトリガーします。集計値が設定条件を満たすと、**アラートを 1 件**受信します。たとえば、すべてのサーバーの平均 CPU 使用率が特定のしきい値を超えた場合に通知するようにモニターを設定することができます。そのしきい値に達した場合、しきい値に達した個々のサーバーの数に関係なく、1 件の通知を受信します。これは、広範なシステムの傾向や動作をモニターするのに役立ちます。
 
 
-{{< img src="/monitors/create/simple-alert.png" alt="シンプルアラートモードでのモニター通知の送信方法を示す図" style="width:90%;">}}
+{{< img src="/monitors/create/simple-alert.png" alt="Simple Alert モードでモニター通知が送信される方法を示す図" style="width:90%;">}}
 
-#### マルチアラート
+#### Multi Alert (マルチアラート){#multi-alert}
 
-`Multi Alert` モニターは、アラートしきい値を満たしたモニター内の各エンティティに対して個別の通知をトリガーします。
+`Multi Alert` モニターは、アラートしきい値に達したモニター内の各エンティティに対して個別の通知をトリガーします。
 
-{{< img src="/monitors/create/multi-alert.png" alt="マルチアラートモードでのモニター通知の送信方法の図" style="width:90%;">}}
+{{< img src="/monitors/create/multi-alert.png" alt="Multi Alert モードでモニター通知が送信される方法を示す図" style="width:90%;">}}
 
-例えば、サービスごとに集計された P99 レイテンシーがあるしきい値を超えた場合に通知するようにモニターを設定する場合、P99 レイテンシーがアラートしきい値を超えた個々のサービスごとに**別々の**アラートを受け取ることになります。これは、システムまたはアプリケーションの問題の特定のインスタンスを特定し、対処するのに便利です。より詳細なレベルで問題を追跡することができます。
+たとえば、サービスごとに集計される P99 レイテンシーが特定のしきい値を超えた場合に通知するようにモニターを設定した場合、P99 レイテンシーがアラートしきい値を超えた個々のサービスごとに**別の**アラートを受信します。これは、システムまたはアプリケーションの個別の問題を特定して対処する場合に役立ちます。こうすることで、よりきめ細かいレベルで問題を追跡できます。
 
-エンティティの大規模なグループを監視する場合、マルチアラートではノイズの多いモニターになる可能性があります。これを軽減するには、どのディメンションがアラートをトリガーするかをカスタマイズします。これにより、ノイズを減らし、最も重要なアラートに集中することができます。例えば、全ホストの平均 CPU 使用率を監視しているとします。クエリを `service` と `host` でグループ化したが、しきい値を満たした各 `service` 属性に対してアラートを一度送信したいだけの場合は、マルチアラートオプションから `host` 属性を削除すれば、送信される通知の数を減らすことができます。
+##### 通知のグループ化 {#notification-grouping}
 
-{{< img src="/monitors/create/multi-alert-aggregated.png" alt="マルチアラートで特定のディメンションに設定した場合の通知の送信方法の図" style="width:90%;">}}
+大規模なエンティティグループをモニターする場合、マルチアラートではモニターのノイズが増える可能性があります。これを軽減するために、アラートをトリガーするディメンションをカスタマイズします。これによりノイズが減少し、最も重要なアラートに注目することができます。たとえば、すべてのホストの平均 CPU 使用率をモニターするとします。`service` および `host` でクエリをグループ化するが、しきい値に達した `service` 属性ごとに一度だけアラートを送信する場合は、マルチアラートオプションから `host` 属性を削除し、送信される通知の数を減らします。
+
+{{< img src="/monitors/create/multi-alert-aggregated.png" alt="マルチアラートで特定のディメンションに設定された場合の通知の送信を示す図" style="width:90%;">}}
 
 `Multi Alert` モードで通知を集計する場合、集計されないディメンションは UI で `Sub Groups` になります。
 
-**注**: `service` タグがなく、`host` タグだけが報告されているメトリクスは、モニターによって検出されません。`host` と `service` の両方のタグを持つメトリクスは、モニターによって検出されます。
+**注**: メトリクスが `service` タグが指定されていない `host` でのみ報告される場合、そのメトリクスはモニターで検出されません。`host` および `service` タグが指定されたメトリクスは、モニターによって検出されます。
 
-If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][10] to learn how to reference tag values in the notification message.
+クエリでタグまたはディメンションを構成した場合、これらの値はマルチアラートで評価されるすべてのグループで利用でき、有用なコンテキストで動的に通知を埋めることができます。通知メッセージでタグの値を参照する方法については、[属性変数とタグ変数][10] を参照してください。
 
-| グループ化                       | シンプルアラートモード | マルチアラートモード |
+| グループ化                       | シンプルアラートモード | マルチアラートモード mode |
 |-------------------------------------|------------------------|-----------------------|
-| _(すべて)_                      | 1 つの通知をトリガーする 1 つの単一グループ | N/A |
+| _(すべて)_                      | 1 つの通知をトリガーする 1 つの単一グループ | 該当なし |
 | 1 つ以上のディメンション | 1 つ以上のグループがアラート条件を満たす場合の 1 つの通知 | アラート条件を満たすグループごとに 1 つの通知 |
 
-## 権限
+## 権限 {#permissions}
 
-All users can view all monitors, regardless of the team or role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
+すべてのユーザーは、関連付けられているチームやロールに関係なく、すべてのモニターを表示できます。デフォルトでは、[モニターの書き込み権限][11] を持つロールが付与されているユーザーのみがモニターを編集できます。[Datadog Admin ロールおよび Datadog 標準ロール][12] には、デフォルトでモニターの書き込み権限が付与されています。組織が [カスタムロール][13] を使用している場合は、ほかのカスタムロールがモニターの書き込み権限を持つ場合があります。モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について詳しくは、[モニターに RBAC を設定する方法][14] に関するガイドを参照してください。
 
-You can further restrict your monitor by specifying a list of [teams][17], [roles][15], or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+モニターを編集できる [チーム][17]、[ロール][15]、またはユーザーのリストを指定することで、モニターをさらに細かく制限できます。モニターの作成者はデフォルトで、モニターに対する編集権を持っています。編集には、モニターのコンフィギュレーションの更新、モニターの削除、モニターのミュート (時間の長短を問わず) などが含まれます。
 
 **注**: 制限は UI と API の両方に適用されます。
 
-### きめ細かなアクセス制御
+### きめ細かなアクセス制御 {#granular-access-controls}
 
-Use [granular access controls][16] to limit the teams, roles, or users that can edit a monitor:
-1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
-  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
-1. Click **Edit Access**.
-1. **Restrict Access** をクリックします。
-1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
-1. **Add** をクリックします。
-1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
-1. **Done** をクリックします。
+[きめ細かなアクセス制御][16] を使用して、モニターを編集できるチーム、ロール、またはユーザーを制限します。
+1. モニターの編集または構成中に、[**Define permissions and audit notifications**] (権限と監査通知の定義) セクションを見つけます。
+  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="権限を定義するためのモニター構成オプション" style="width:70%;" >}}
+1. [**Edit Access**] (アクセスの編集) をクリックします。
+1. [**Restrict Access**] (アクセスの制限) をクリックします。
+1. ダイアログボックスが更新され、組織のメンバーはデフォルトで [**Viewer**] (閲覧者) アクセス権を付与されていることが表示されます。
+1. ドロップダウンを使用して、モニターを編集できるチーム、ロール、またはユーザーを 1 つ以上選択します。
+1. **Add** (追加) をクリックします。
+1. ダイアログボックスが更新され、選択したロールに **Editor** (編集者) 権限があることが表示されます。
+1. [**Done**] (完了) をクリックします。
 
-**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of before saving.
+**注:** モニターの編集アクセスを維持するために、保存前に自分がメンバーであるロールまたはチームを少なくとも 1 つ含める必要があります。
 
-To restore general access to a monitor with restricted access, follow the steps below:
-1. While viewing a monitor, click the **More** dropdown menu.
-1. **Permissions** を選択します。
-1. **Restore Full Access** をクリックします。
-1. **Save** をクリックします。
+アクセスが制限されたモニターに一般的なアクセスを戻すには、次の手順に従います。
+1.  モニターの表示中に [**More**] (その他) ドロップダウンメニューをクリックします。
+1. [**Permissions**] (権限) を選択します。
+1. [**Restore Full Access**] (フルアクセスを回復) をクリックします。
+1. [**Save**] (保存) をクリックします。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

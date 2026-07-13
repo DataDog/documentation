@@ -97,4 +97,4 @@ Esta métrica está disponible por defecto sin coste adicional, y tus datos se c
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /es/logs/error_tracking/#setup
 [3]: /es/logs/explorer/search_syntax/
-[4]: /es/service_management/events/
+[4]: /es/events/

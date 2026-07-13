@@ -1,0 +1,462 @@
+---
+title: Workload Identity Federation
+description: Authenticate the Datadog Terraform provider and Datadog Agent with Workload Identity Federation, using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
+aliases:
+    - /account_management/cloud_authentication/
+    - /account_management/cloud_provider_authentication/
+algolia:
+  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'delegated auth']
+further_reading:
+- link: "/getting_started/integrations/terraform/"
+  tag: "Documentation"
+  text: "Managing Datadog with Terraform"
+- link: "/agent/configuration/"
+  tag: "Documentation"
+  text: "Agent Configuration"
+- link: "/account_management/api-app-keys/"
+  tag: "Documentation"
+  text: "API and Application Keys"
+- link: "/integrations/amazon_web_services/"
+  tag: "Documentation"
+  text: "AWS Integration"
+---
+
+## Overview
+
+Workload Identity Federation lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys.
+
+AWS is the only supported cloud provider.
+
+Workload Identity Federation is available for the following:
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+<li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.</li>
+</ul>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+</ul>
+{{< /site-region >}}
+
+## How it works: AWS authentication process
+
+The authentication process uses the [AWS Security Token Service (STS)][1] to verify your identity.
+
+### Terraform provider authentication flow
+
+1. **Proof generation:** The Datadog Terraform provider creates a signed AWS STS `GetCallerIdentity` request using your current AWS credentials
+2. **Proof validation:** Datadog validates the proof by calling AWS STS, which returns your AWS ARN, user ID, and account ID
+3. **Identity mapping:** Your AWS identity is mapped to a Datadog service account or user account based on your organization's configuration
+4. **Token issue:** If validation succeeds, Datadog issues a temporary JWT token for API access
+5. **API authentication:** The token is used for subsequent Datadog API calls
+
+<div class="alert alert-info">If possible, map ARNs to a Datadog service account rather than a user account. Using a service account avoids associating your authentication process with a specific person.</div>
+
+### Agent authentication flow
+
+1. **Credential detection:** The Agent retrieves AWS credentials from the environment it runs in
+2. **Proof generation:** The Agent creates a signed AWS STS request to prove access to the credentials
+3. **Proof validation:** Datadog validates the signed request against AWS and verifies it against your organization's intake mapping configuration
+4. **API key issue:** If validation succeeds, Datadog issues a managed API key that is automatically rotated
+5. **Agent configuration:** The Agent uses the issued API key for all subsequent Datadog API calls
+
+<div class="alert alert-info">If the delegated authentication flow fails, the Agent falls back to the API key configured in your <code>datadog.yaml</code> file. This fallback behavior allows you to onboard with limited risk to your existing configuration.</div>
+
+## Set up Workload Identity Federation for AWS
+
+**Requirements**:
+- Datadog Terraform provider version 3.70 or later.
+- You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
+- Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+Setting up Workload Identity Federation for AWS involves two parts:
+1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
+2. [Updating your Terraform provider configuration](#update-your-terraform-provider-configuration)
+
+### Configure AWS identity mapping in Datadog
+
+<div class="alert alert-info">For identity mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
+
+Map your AWS identities (ARNs) to Datadog service accounts or user accounts. You can configure identity mappings from the UI or using the API.
+
+If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
+
+#### Using the UI
+
+Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab. Each mapping grants a cloud role the permissions of a specific Datadog user or service account.
+
+{{< img src="account_management/workload_identity_federation/identity-mappings-list.png" alt="Identity Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
+
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
+<ul>
+<li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
+<li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
+</ul>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
+
+To create an identity mapping:
+
+1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+2. Select a **Cloud Provider**.
+3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/terraform-runner/*`).
+4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
+5. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+{{< img src="account_management/workload_identity_federation/identity-mapping-create.png" alt="Create Identity Mapping dialog with fields for Cloud Provider, Source Pattern ARN, and Target Identity, with a helper text describing wildcard pattern support" style="width:70%;" >}}
+
+<div class="alert alert-info">Prefer service accounts over user accounts to avoid tying access to individuals.</div>
+
+#### Using the API
+
+##### Map an AWS ARN to a Datadog user account
+For `account_identifier`, use the email shown in the user's Datadog profile.
+
+**Example**: An API call that maps an AWS ARN to a Datadog user account, `john.doe@myorg.com`.
+
+```bash
+# Example: map an AWS ARN to a Datadog User
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "john.doe@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+
+##### Map an AWS ARN to a Datadog service account
+For `account_identifier`, you can use either:
+- The service account's **UUID**: Go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Service accounts{{< /ui >}}, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+- The service account's **email address**: Use the email address shown in the service account's details.
+
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the UUID, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+
+```bash
+# Example: map an AWS ARN to a Datadog Service Account using UUID
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the email address, `terraform-service-account@myorg.com`.
+
+```bash
+# Example: map an AWS ARN to a Datadog Service Account using email
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+
+##### Using wildcards in ARN patterns
+
+ARN patterns support wildcard matching to handle dynamic or variable portions of resource ARNs. This is useful when working with assumed roles that include session identifiers or other variable components.
+
+**Wildcard rules**:
+- Wildcards (`*`) are only allowed in the last portion of the resource ARN
+- You must specify a specific resource before the wildcard
+- Wildcards cannot be placed in the middle of the ARN
+
+**Example**: Match any session assuming the `DatadogTerraformerRole`:
+
+```bash
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/*"
+    }
+  }
+}'
+```
+
+This pattern matches actual assumed role ARNs like:
+- `arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/run-abcdefghijk`
+- `arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/session-xyz789`
+
+<div class="alert alert-info">Wildcard matching is particularly useful for CI/CD pipelines where role sessions have dynamically generated identifiers.</div>
+
+##### List existing mappings
+
+```bash
+curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+
+### Update your Terraform provider configuration
+
+After you configure the identity mapping, update your Datadog Terraform provider configuration to use Workload Identity Federation:
+
+#### Remove your existing configuration
+
+```hcl
+# Old configuration
+provider "datadog" {
+  api_key = var.datadog_api_key
+  app_key = var.datadog_app_key
+}
+```
+
+#### Add the new Workload Identity Federation configuration
+
+To get your `org_uuid`, find it directly on the [**Organization Settings** > **Workload Identity Federation**][6] page, or call this endpoint (requires an active session in the target org): [{{< region-param key=dd_api >}}/api/v2/current_user][2]
+
+```hcl
+# New configuration using AWS authentication
+provider "datadog" {
+  org_uuid             = var.datadog_org_uuid
+  cloud_provider_type  = "aws"
+}
+```
+
+#### Optional - Specify AWS credentials explicitly
+As an alternative to using environment variables or AWS credential files, you can specify AWS credentials directly in your Terraform configuration:
+
+```hcl
+provider "datadog" {
+  org_uuid              = var.datadog_org_uuid
+  cloud_provider_type   = "aws"
+  aws_access_key_id     = var.aws_access_key_id
+  aws_secret_access_key = var.aws_secret_access_key
+  aws_session_token     = var.aws_session_token  # If using temporary credentials
+}
+```
+
+The Terraform provider automatically uses your configured AWS credentials to authenticate with Datadog.
+
+## Set up Workload Identity Federation for the Datadog Agent
+
+{{< callout url="/help/" header="Enterprise feature" >}}
+Workload Identity Federation for the Datadog Agent is available for customers on an enterprise plan only. Request access by contacting support.
+{{< /callout >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation for the Datadog Agent is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
+
+**Requirements**:
+- Version `7.78.0` or later of the Datadog Agent.
+- The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
+- You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
+- Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+Setting up Workload Identity Federation for the Agent involves two parts:
+1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
+2. [Updating your Agent configuration](#update-your-agent-configuration)
+
+### Configure AWS intake mapping in Datadog
+
+<div class="alert alert-info">For intake mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
+
+Configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike identity mappings, intake mappings only require an ARN pattern. No Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions. Datadog automatically provisions, configures, and rotates the underlying API key on your behalf.
+
+If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
+
+#### Using the UI
+
+Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Intake Mappings** tab.
+
+{{< img src="account_management/workload_identity_federation/intake-mappings-list.png" alt="Intake Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
+
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
+<ul>
+<li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
+<li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
+</ul>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
+
+To create an intake mapping:
+
+1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+2. Select a **Cloud Provider**.
+3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*`).
+4. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+{{< img src="account_management/workload_identity_federation/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN, with helper text describing wildcard pattern support" style="width:70%;" >}}
+
+#### Using the API
+
+##### Create an intake mapping
+
+**Example**: An API call that authorizes Agents running with a specific IAM role to authenticate.
+
+```bash
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_intake_mapping",
+    "attributes": {
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*"
+    }
+  }
+}'
+```
+
+##### Using wildcards in ARN patterns
+
+ARN patterns support wildcard matching to handle dynamic or variable portions of resource ARNs. This is useful when working with assumed roles that include session identifiers or when you have multiple Agent instances.
+
+**Wildcard rules**:
+- Wildcards (`*`) are only allowed in the last portion of the resource ARN
+- You must specify a specific resource before the wildcard
+- Wildcards cannot be placed in the middle of the ARN
+
+**Example**: Match any session assuming the `DatadogAgentRole`:
+
+```bash
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_intake_mapping",
+    "attributes": {
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*"
+    }
+  }
+}'
+```
+
+This pattern matches actual assumed role ARNs like:
+- `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/i-0abc123def456`
+- `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/eks-datadog-agent-xyz`
+
+##### List existing intake mappings
+
+```bash
+curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+
+##### Delete an intake mapping
+
+```bash
+curl -X DELETE "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping/<MAPPING_UUID>" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+
+### Update your Agent configuration
+
+After you configure the intake mapping, update your Agent configuration to use Workload Identity Federation.
+
+#### Global configuration
+
+Add the `delegated_auth` section to your `datadog.yaml` file to enable Workload Identity Federation for all Agent data:
+
+```yaml
+delegated_auth:
+  org_uuid: <YOUR_ORG_UUID>
+```
+
+To get your `org_uuid`, find it directly on the [**Organization Settings** > **Workload Identity Federation**][6] page, or call this endpoint (requires an active session in the target org): [{{< region-param key=dd_api >}}/api/v2/current_user][2]
+
+The Agent auto-detects if it runs in an AWS environment and uses the available AWS credentials.
+
+#### Provider-specific options
+
+To explicitly configure AWS as your authentication provider and specify provider-specific options, use the `provider` and `aws` subsections:
+
+```yaml
+delegated_auth:
+  org_uuid: <YOUR_ORG_UUID>
+  provider: aws  # Optional: auto-detects if omitted
+  aws:
+    region: <AWS_REGION>  # Optional: auto-detects from IMDS if omitted or uses global STS
+```
+
+Replace `<AWS_REGION>` with the AWS region to use for STS authentication (for example, `us-east-1`).
+
+#### Per-product configuration
+
+You can enable delegated authentication for specific Agent products independently. This is useful when you want to send different data types to different Datadog organizations, or when you only want to use Workload Identity Federation for specific products.
+
+To enable delegated authentication for logs only:
+
+```yaml
+logs_config:
+  delegated_auth:
+    org_uuid: <YOUR_ORG_UUID>
+```
+
+To use different organizations for different products:
+
+```yaml
+delegated_auth:
+  org_uuid: <YOUR_GLOBAL_ORG_UUID>
+  provider: aws
+  aws:
+    region: <AWS_REGION>
+
+logs_config:
+  delegated_auth:
+    org_uuid: <YOUR_LOGS_ORG_UUID>
+```
+
+<div class="alert alert-info">Provider-specific settings (such as <code>provider</code> and <code>aws</code>) are only configured in the global <code>delegated_auth</code> section. Per-product sections only support <code>org_uuid</code>.</div>
+
+#### Fallback behavior
+
+If the delegated authentication flow fails for any reason, the Agent automatically falls back to using the API key configured in your `datadog.yaml` file. This fallback behavior provides a safety net during onboarding and protects against authentication service disruptions.
+
+To take advantage of this fallback, keep your existing `api_key` configuration alongside the new `delegated_auth` configuration:
+
+```yaml
+api_key: <YOUR_API_KEY>
+
+delegated_auth:
+  org_uuid: <YOUR_ORG_UUID>
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
+[2]: https://app.datadoghq.com/api/v2/current_user
+[3]: /integrations/amazon-web-services/
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
+[6]: https://app.datadoghq.com/organization-settings/workload-identity-federation

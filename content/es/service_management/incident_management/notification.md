@@ -27,7 +27,7 @@ Para crear una notificación manual:
 
 ## Ver todas las notificaciones
 
-{{< img src="/service_management/incidents/notificación/incident_notifications_sent.png" alt="Pestaña de notificación de una incidencia que muestra la lista de ejemplos de mensajes enviados" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/investigate/notification/incident_notifications_sent.png" alt="Pestaña de notificación de una incidencia que muestra la lista de ejemplos de mensajes enviados" style="width:90%;" >}}
 
 La pestaña Notificaciones de una incidencia enumera notificaciones como **Drafts** (Borradores) y **Sent** (Enviados). Ambas listas muestran:
 - Los destinatarios (previstos) de una notificación.

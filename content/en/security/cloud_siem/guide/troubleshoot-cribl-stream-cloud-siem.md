@@ -58,7 +58,7 @@ To fix this, configure the **Message Field** in your Cribl Datadog destination t
 ]
 ```
 
-1. In Cribl Stream, navigate to **Routing** and open your **Datadog destination** configuration.
+1. In Cribl Stream, navigate to {{< ui >}}Routing{{< /ui >}} and open your **Datadog destination** configuration.
 2. Under the **Message Field** setting, enter `_raw`.
 3. Set the `ddsource` field to the correct value for your log source (for example, `crowdstrike` for CrowdStrike Falcon logs). This value determines which Datadog log pipeline, dashboards, and detection rules are applied.
 4. Save and deploy your changes.

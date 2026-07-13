@@ -66,7 +66,7 @@ Para recibir alertas de Catchpoint en tu flujo de eventosinicia sesión en el po
    }
    ```
 
-Catchpoint envía las alertas directamente al [Explorador de eventos](https://docs.datadoghq.com/service_management/events/) en Datadog.
+Catchpoint envía las alertas directamente al [Explorador de eventos](https://docs.datadoghq.com/events/) en Datadog.
 
 ![evento de catchpoint](images/screenshot.png)
 

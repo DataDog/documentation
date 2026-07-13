@@ -41,7 +41,7 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 <div class="alert alert-info">
 AI Guard is in Preview. Get real-time security guardrails for your AI apps and agents. AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Fill out this <a href="https://www.datadoghq.com/product-preview/ai-security/">form</a> to request access.
@@ -65,6 +65,7 @@ Whether you're defending public-facing APIs, internal services, or user-facing a
 * Identify unprotected, undocumented, or overly permissive endpoints.  
 * Get detailed, contextual findings tied to specific endpoints, misconfigurations, and observed behavior.  
 * Evaluate API configurations against posture rules based on security best practices and compliance frameworks (e.g., OWASP API Top 10).
+* Actively verify endpoint reachability and authentication with [Endpoint Scanning][17].
 
 ### Runtime threat detection and protection
 
@@ -137,4 +138,4 @@ For information on disabling AAP or its features, see the following:
 [14]: /security/application_security/exploit-prevention/
 [15]: /security/application_security/waf-integration/
 [16]: /security/application_security/setup/
-
+[17]: /security/application_security/api_posture/endpoint_scanning/

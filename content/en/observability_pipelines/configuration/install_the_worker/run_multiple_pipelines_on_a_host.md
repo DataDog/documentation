@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-If you want to run multiple pipelines on a single host to send logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from different sources, you need to manually add the Worker files for any additional Workers. This document explains which files you need to add and modify to run those Workers.
+If you want to run multiple pipelines on a single host to send logs or metrics from different sources, you need to manually add the Worker files for any additional Workers. This document explains which files you need to add and modify to run those Workers.
 
 ## Prerequisites
 
@@ -127,7 +127,7 @@ Additionally, you can use the command `sudo journalctl -u op-fluent.service` to 
 ## Deploy the pipeline
 
 1.  Navigate to the additional pipeline's Install page.
-1.  In the **Deploy your pipeline** section, you should see your additional Worker detected. Click **Deploy**.
+1.  In the {{< ui >}}Deploy your pipeline{{< /ui >}} section, you should see your additional Worker detected. Click {{< ui >}}Deploy{{< /ui >}}.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/?tab=pipelineui
 [2]: /observability_pipelines/guide/environment_variables/?tab=sources

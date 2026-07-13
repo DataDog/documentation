@@ -48,7 +48,7 @@ Dynamic Sampling が適用された場合、次の手順を推奨します:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/events/
+[1]: /ja/events/
 [2]: https://app.datadoghq.com/error-tracking/settings/rate-limits
 [3]: /ja/logs/error_tracking/manage_data_collection#add-a-rule
 [4]: https://app.datadoghq.com/error-tracking/settings

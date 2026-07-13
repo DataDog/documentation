@@ -11,12 +11,14 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 | Concept                                 | Description                                                                                                                                                                                      |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Network Path][6]**                        | Network Path provides hop-by-hop visibility into the route between a source and a destination, so you can identify where latency, packet loss, or routing changes occur. |
+| **[Dynamic Tests for NetFlow][8]**          | An experimental Network Path collection method that runs Network Path tests from the Agent host to destination IPs observed in NetFlow traffic. |
+| **Origin**                                  | The source that triggered a Network Path test, such as network traffic, NetFlow, a scheduled Agent configuration, or Synthetic Monitoring. Use the `origin` facet to filter paths by collection method. |
 | **Autonomous System (AS / ASN)**        | A collection of IP routing prefixes managed by a single network operator. Network Path groups hop by Autonomous System (AS) or Autonomous System Number (ASN) to show routing domains along the path.      
 | **[Path View][7]**                           | The Network Path visualization that displays each hop, grouped by Autonomous System Number (ASN), region, or network, along with probe status and hop metrics.                                                             |
 | **Hop**                                 | A network node along a route between source and destination, identified by IP address and associated metadata (ASN, cloud region, provider).                                                                  |                                                      |
-| **Source**                              | The starting point of a Network Path probe, typically an Agent-monitored host or container running the Datadog network monitoring tracer.                                                                     |
+| **Source**                              | The starting point of a Network Path probe, such as an Agent-monitored host, container, Synthetic location, or the Agent that collects NetFlow traffic.                                                                     |
 | **Destination**                         | The endpoint that the Network Path probe is targeting, such as a service, public endpoint, or domain.                                                                                                         |
-| **Traceroute** | The mechanism that Network Path uses to determine intermediate hops and latency. CNM sends controlled probes, similar to traceroute, to discover each hop on the route.                                                         |
+| **Traceroute** | The mechanism that Network Path uses to determine intermediate hops and latency. Network Path sends controlled probes, similar to traceroute, to discover each hop on the route.                                                         |
 | **Latency per hop**                     | The round-trip time between the probe source and each hop. This helps identify slow or congested nodes.                                                                                                            |
 | **Packet loss per hop**                 | The percentage of probe packets dropped before reaching or returning from a hop, useful for diagnosing reliability issues.                                                                                    |
 
@@ -42,3 +44,4 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 
 [6]: /network_monitoring/network_path/
 [7]: /network_monitoring/network_path/path_view
+[8]: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental

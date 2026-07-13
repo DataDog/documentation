@@ -27,10 +27,10 @@ Adding an application to Datadog is a common task in the early days of Datadog a
 
 - The Universal Service Tag `version` is important to many visualizations. Developing an automated, reliable, and compliant method to power these higher value visualizations. 
 
-- Establishing a comprehensive [Software Catalog][2] provides numerous benefits in the future. Software Catalog is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition.  
+- Establishing a comprehensive [Catalog][2] provides numerous benefits in the future. Catalog is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition.  
 
 **Recommendations:**   
-Develop automatic version tagging integrated into your application build process. Focus on Software Catalog, and track readiness with setup guidance.
+Develop automatic version tagging integrated into your application build process. Focus on Catalog, and track readiness with setup guidance.
 
 ## Fielding technical issues
 
@@ -103,7 +103,7 @@ After successfully planning, setting up, and maintaining your Datadog installati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/fleet_automation/
-[2]: /software_catalog/
+[2]: /internal_developer_portal/catalog/
 [3]: /agent/configuration/agent-commands#agent-information
 [4]: /agent/troubleshooting/send_a_flare/?tab=agent\#send-a-flare-using-the-flare-command
 [5]: https://app.datadoghq.com/dash/integration/31281/estimated-usage-overview?fromUser=false\&refresh_mode=sliding\&view=spans\&from_ts=1721313591456\&to\_ts=1721317191456\&live=true

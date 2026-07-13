@@ -11,7 +11,7 @@ Datadog On-Call에서 에스컬레이션 정책은 페이지가 즉시 처리되
 Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정책을 생성합니다.
 
 ## 새 에스컬레이션 정책 만들기
-{{< img src="service_management/oncall/escalation_policy_2.png" alt="에스컬레이션 정책 샘플." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_2.png" alt="에스컬레이션 정책 샘플." style="width:100%;" >}}
 
 1. [**On-Call** > **Escalation Policies**][2]로 이동합니다.
 1. [**+ New Escalation Policy**][3]를 선택합니다.
@@ -19,7 +19,7 @@ Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정
 1. 이 에스컬레이션 정책을 소유한 **Teams**를 선택합니다.
 1. 이제 정책을 생성합니다. 이 에스컬레이션 정책이 호출될 때 누가 또는 무엇이 페이지를 수신해야 하는지 결정합니다. 이후의 각 에스컬레이션 단계에 대해 누구에게 알릴지 선택합니다. 각 단계는 개별 사용자, 전체 팀 및/또는 스케줄에 따라 당직 중인 사람에게 알릴 수 있습니다.
    예를 들어, 이 페이지가 트리거되면 일정에 따라 현재 당직 중인 사람, 즉 John Doe에게 전송됩니다.
-   {{< img src="service_management/oncall/escalation_policy_2_steps.png" alt="'Page is triggered' 이후 두 단계를 보여주는 에스컬레이션 정책. 각 단계에는 'Notify' 입력 상자와 'If the page is not acknowledged after N minutes, escalate.'가 있습니다. 첫 번째 단계는 Primary라는 스케줄에 알리도록 구성되고, 5분 후에도 페이지가 확인되지 않으면 에스컬레이션합니다. 두 번째 단계는 Jane Doe라는 담당자에게 알리도록 구성됩니다." style="width:100%;" >}}
+   {{< img src="incident_response/on-call/escalation_policies/escalation_policy_2_steps.png" alt="'Page is triggered' 이후 두 단계를 보여주는 에스컬레이션 정책. 각 단계에는 'Notify' 입력 상자와 'If the page is not acknowledged after N minutes, escalate.'가 있습니다. 첫 번째 단계는 Primary라는 스케줄에 알리도록 구성되고, 5분 후에도 페이지가 확인되지 않으면 에스컬레이션합니다. 두 번째 단계는 Jane Doe라는 담당자에게 알리도록 구성됩니다." style="width:100%;" >}}
 1. 수신자 중 한 명이 페이지를 확인할 때까지 기다리는 시간을 분 단위로 구성합니다. 시간 내에 아무도 페이지를 확인하지 않으면 페이지가 에스컬레이션됩니다. 이 예에서 기본 온콜 담당자인 John Doe가 5분 이내에 페이지를 확인하지 않으면 페이지가 Jane Doe에게 전송됩니다.
 1. 아무도 페이지를 확인하지 않을 경우 이러한 단계를 몇 번 반복해야 하는지 구성합니다.
 1. Datadog이 모든 규칙과 반복을 실행한 후 페이지 상태를 자동으로 **Resolved**로 업데이트할지 여부를 선택합니다.
@@ -28,7 +28,7 @@ Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정
 에스컬레이션 정책의 각 단계에서 개별 사용자, 전체 팀 또는 일정에 따라 온콜 담당자에게 알림을 보낼 수 있습니다.
 
 ### 일정
-{{< img src="service_management/oncall/escalation_policy_notify_schedule.png" alt="스케줄을 알리는 샘플 에스컬레이션 정책 단계." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_schedule.png" alt="스케줄을 알리는 샘플 에스컬레이션 정책 단계." style="width:100%;" >}}
 
 에스컬레이션 정책은 미리 정의된 스케줄에 따라 온콜 담당자에게 알릴 수 있습니다. 시스템은 스케줄을 확인하고 인시던트에 대해 신속하게 대응할 수 있는 사람이나 그룹에 알립니다. 스케줄을 사용하면 다음과 같은 경우에 유용합니다.
 
@@ -38,10 +38,10 @@ Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정
 
 지정된 스케줄에 온콜 담당자가 없을 경우, 해당 에스컬레이션 단계는 자연스럽게 건너뛰며 프로세스는 지연이나 중단 없이 계속 진행됩니다. UI에서 에스컬레이션이 생략되었음을 나타냅니다.
 
-{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="온콜 담당자가 없어 에스컬레이션이 생략된 것을 나타내는 샘플 에스컬레이션 정책." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_schedule_skipped.png" alt="온콜 담당자가 없어 에스컬레이션이 생략된 것을 나타내는 샘플 에스컬레이션 정책." style="width:100%;" >}}
 
 ### 사용자
-{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="에스컬레이션 정책에서 사용자를 지정하는 샘플 에스컬레이션 정책." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_user.png" alt="에스컬레이션 정책에서 사용자를 지정하는 샘플 에스컬레이션 정책." style="width:100%;" >}}
 
 특정 사용자를 에스컬레이션 정책에 포함시켜 페이지가 발생할 경우 항상 알림을 받도록 할 수 있습니다. 사용자를 직접 페이징하는 일반적인 사용 사례는 다음과 같습니다.
 
@@ -50,7 +50,7 @@ Datadog은 [팀을 On-Call에 온보딩][1]할 때 기본 에스컬레이션 정
 - 주 담당자가 부재중인 경우 알림을 백업 담당자에게 전달합니다.
 
 ### Teams
-{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="전체 팀에 알리는 샘플 에스컬레이션 정책." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policies/escalation_policy_notify_team.png" alt="전체 팀에 알리는 샘플 에스컬레이션 정책." style="width:100%;" >}}
 
 전체 팀을 페이징하는 일반적인 사용 사례는 다음과 같습니다.
 

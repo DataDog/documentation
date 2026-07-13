@@ -33,13 +33,13 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 You can manage your time zone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,gov2,ap1,ap2" >}}
+{{< site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" >}}
 <div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -80,6 +80,7 @@ If you are an organization administrator, reference the additional documentation
 * [Manage multi-organization accounts][7]
 * [Change your Datadog plan and view usage and billing history][8]
 * [Choose your organization topology (single-org vs. multi-org)][15]
+* [Manage enterprise access controls and deployment][16]
 
 ### Security
 
@@ -155,4 +156,5 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [12]: https://app.datadoghq.com/personal-settings/organizations
 [13]: https://app.datadoghq.com/personal-settings/application-keys
 [14]: https://app.datadoghq.com/personal-settings/apps
-[15]: /getting_started/organization_topology/
+[15]: /account_management/organization_topology/
+[16]: /getting_started/access_for_enterprises/

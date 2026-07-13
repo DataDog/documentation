@@ -192,7 +192,7 @@ Host.CreateDefaultBuilder(args)
 
 If there is an active trace when the log is being written, trace and span IDs are automatically injected into the application logs with `dd_trace_id` and `dd_span_id` properties. If there is not an active trace, only `dd_env`, `dd_service`, and `dd_version` properties are injected.
 
-**Note:** If you are using a logging library that replaces the default `LoggerFactory` implementation such as the [_Serilog.Extensions.Hosting_][3] or [_Serilog.Extensions.Logging_][4] packages, follow the framework-specific instructions (in this example, see **Serilog**).
+**Note:** If you are using a logging library that replaces the default `LoggerFactory` implementation such as the [_Serilog.Extensions.Hosting_][3] or [_Serilog.Extensions.Logging_][4] packages, follow the framework-specific instructions (in this example, see {{< ui >}}Serilog{{< /ui >}}).
 
 For additional examples, see [the Microsoft.Extensions.Logging automatic trace id injection project][5] on GitHub.
 
@@ -219,7 +219,7 @@ After configuring the correlation identifier injection, see [C# Log Collection][
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/internal_developer_portal/catalog/">Catalog</a> UI.</div>
 
 ## Manual injection
 

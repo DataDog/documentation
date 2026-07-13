@@ -28,6 +28,7 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [Running jobs][28] | Running jobs | View job executions that are currently running. |
 | [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][27] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
@@ -86,7 +87,7 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 
 To disable the CI Visibility GitHub Actions integration:
 
-1. Go to the [CI GitHub Settings][14] page.
+1. Open [**CI/CD Optimization** > **Settings** > **GitHub Actions**][14].
 2. Choose the GitHub account that you want to disable CI Visibility for, and click {{< ui >}}Account Enabled{{< /ui >}}.
 3. Untoggle {{< ui >}}Enable CI Visibility{{< /ui >}}, or choose which repository you want to disable it for individually.
 
@@ -146,7 +147,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [11]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [12]: https://app.datadoghq.com/integrations/github/
 [13]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[14]: https://app.datadoghq.com/ci/settings/provider
+[14]: https://app.datadoghq.com/ci/settings/ci-cd/github
 [15]: /logs/
 [16]: /logs/guide/best-practices-for-log-management/
 [17]: https://app.datadoghq.com/ci/pipelines
@@ -160,3 +161,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [25]: /glossary/#pipeline-execution-time
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [27]: /continuous_integration/pipelines/automatic_retries/
+[28]: /glossary/#running-job

@@ -4,6 +4,7 @@ description: "Automatically inject RUM Browser SDK into Java servlet-based web a
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 7
+site_support_id: rum_server_java
 aliases:
   - /real_user_monitoring/browser/setup/server/java
 further_reading:
@@ -17,10 +18,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Single Step APM Instrumentation'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -57,9 +54,9 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 **This approach requires no code changes and no manual web server configuration.**
 
-1. Go to the [**Agent Installation**][1] page.
+1. Go to the [{{< ui >}}Agent Installation{{< /ui >}}][1] page.
 2. Select your platform (for example, Linux).
-3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
+3. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, enable {{< ui >}}Real User Monitoring{{< /ui >}} under {{< ui >}}Application Observability{{< /ui >}}.
 
    A RUM application is automatically created for you when you enable this option.
 
@@ -97,7 +94,7 @@ export DD_RUM_ENABLED=true
 export DD_RUM_APPLICATION_ID=<your-application-id>
 export DD_RUM_CLIENT_TOKEN=<your-client-token>
 export DD_RUM_REMOTE_CONFIGURATION_ID=<your-remote-config-id>
-export DD_RUM_SITE=datadoghq.com # or datadoghq.eu / us3.datadoghq.com / us5.datadoghq.com / ap1.datadoghq.com / ap2.datadoghq.eu
+export DD_RUM_SITE=datadoghq.com # or datadoghq.eu / us3.datadoghq.com / us5.datadoghq.com / ap1.datadoghq.com / ap2.datadoghq.eu / uk1.datadoghq.com
 ```
 
 Or use the following Java system properties:
@@ -107,7 +104,7 @@ java -Ddd.rum.enabled=true \
   -Ddd.rum.application.id=<your-application-id> \
   -Ddd.rum.client.token=<your-client-token> \
   -Ddd.rum.remote.configuration.id=<your-remote-configuration-id> \
-  -Ddd.rum.site=datadoghq.com # or datadoghq.eu / us3.datadoghq.com / us5.datadoghq.com / ap1.datadoghq.com / ap2.datadoghq.eu
+  -Ddd.rum.site=datadoghq.com # or datadoghq.eu / us3.datadoghq.com / us5.datadoghq.com / ap1.datadoghq.com / ap2.datadoghq.eu / uk1.datadoghq.com
 ```
 
 Restart your Java web application server to apply the changes.
@@ -131,7 +128,7 @@ Here are all the configuration options related for enabling RUM on the Java SDK:
 | `dd.rum.enabled` | `DD_RUM_ENABLED` | `true` / `false` | Required |
 | `dd.rum.application.id` | `DD_RUM_APPLICATION_ID` | `<string>` | Required |
 | `dd.rum.client.token` | `DD_RUM_CLIENT_TOKEN` | `<string>` | Required |
-| `dd.rum.site` | `DD_RUM_SITE` | `datadoghq.com` / `us3.datadoghq.com` / `us5.datadoghq.com` / `datadoghq.eu` / `ap1.datadoghq.com` / `ap2.datadoghq.eu` | Optional, `datadoghq.com` by default |
+| `dd.rum.site` | `DD_RUM_SITE` | `datadoghq.com` / `us3.datadoghq.com` / `us5.datadoghq.com` / `datadoghq.eu` / `ap1.datadoghq.com` / `ap2.datadoghq.eu` / `uk1.datadoghq.com` | Optional, `datadoghq.com` by default |
 | `dd.rum.service` | `DD_RUM_SERVICE` | `<string>` | Optional |
 | `dd.rum.environment` | `DD_RUM_ENVIRONMENT` | `<string>` | Optional |
 | `dd.rum.major.version` | `DD_RUM_MAJOR_VERSION` | `5` / `6` | Optional, `6` by default |

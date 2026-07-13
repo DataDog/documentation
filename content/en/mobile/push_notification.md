@@ -24,15 +24,15 @@ By default, the mobile app is not allowed to send you notifications. To receive 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}}.
 
-   {{< img src="service_management/mobile/ios_settings_may_2025.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="mobile/push_notification/ios_settings_may_2025.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
 
-2. Enable the **Allow Notifications** toggle. If this is your first time enabling notifications, this opens up a permissions prompt. Grant permission, then touch **Enable Notifications** again to go to the iOS system settings.
+2. Enable the {{< ui >}}Allow Notifications{{< /ui >}} toggle. If this is your first time enabling notifications, this opens up a permissions prompt. Grant permission, then touch {{< ui >}}Enable Notifications{{< /ui >}} again to go to the iOS system settings.
 
-   {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="mobile/push_notification/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog recommends you also enable the **Sound** and **Badges** toggles.
+3. Within the iOS system settings, make sure you enable the {{< ui >}}Allow Notifications{{< /ui >}} toggle. Datadog recommends you also enable the {{< ui >}}Sound{{< /ui >}} and {{< ui >}}Badges{{< /ui >}} toggles.
 
 Make sure you grant the mobile app the necessary permissions.
 
@@ -42,20 +42,20 @@ You can override the default system notification sounds with custom sounds prelo
 
 To customize notification sounds:
 
-1. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}} > {{< ui >}}Notification categories{{< /ui >}}.
 2. Select the notification category you want to customize.
 3. Select a sound from the available options.
 
 {{% /tab %}}
 
 {{% tab "Android" %}}
-1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}}.
 
-   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="mobile/push_notification/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
 
-2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
+2. Enable the {{< ui >}}Allow notifications{{< /ui >}} toggle. Datadog highly recommends you also enable {{< ui >}}Sound and vibration{{< /ui >}} and {{< ui >}}Show content on Lock screen{{< /ui >}}.
 
-   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="mobile/push_notification/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
 ### Custom sounds
 
@@ -63,9 +63,9 @@ You can override the default system notification sounds with custom sounds prelo
 
 To customize notification sounds:
 
-1. Go to **Device Settings** > **Notifications** > **Advanced Settings**.
-2. Select **Manage notification categories for each app** and make sure Datadog is selected.
-3. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+1. Go to {{< ui >}}Device Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}} > {{< ui >}}Advanced Settings{{< /ui >}}.
+2. Select {{< ui >}}Manage notification categories for each app{{< /ui >}} and make sure Datadog is selected.
+3. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}} > {{< ui >}}Notification categories{{< /ui >}}.
 4. Select the notification category you want to customize.
 5. Select a sound from the available options.
 
@@ -89,42 +89,42 @@ Critical push notifications are only available for On-Call. If you are setting u
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="mobile/push_notification/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
 
-2. Enable the **Critical Alerts** toggle. Critical alerts ignore the mute switch and Do Not Disturb. If you enable critical alerts, the system plays a critical alert’s sound regardless of the device’s mute or Do Not Disturb settings.
+2. Enable the {{< ui >}}Critical Alerts{{< /ui >}} toggle. Critical alerts ignore the mute switch and Do Not Disturb. If you enable critical alerts, the system plays a critical alert’s sound regardless of the device’s mute or Do Not Disturb settings.
 
-3. Within the iOS system settings, make sure you enable the **Critical Alerts** toggle. Make sure you grant the mobile app the necessary permissions.
+3. Within the iOS system settings, make sure you enable the {{< ui >}}Critical Alerts{{< /ui >}} toggle. Make sure you grant the mobile app the necessary permissions.
 
-4. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
+4. Select your device for {{< ui >}}High Urgency Notifications{{< /ui >}} and/or {{< ui >}}Low Urgency Notifications{{< /ui >}} under the Notification Preferences section.
 
-5. Test the setup of your critical push notification by tapping **Test push notifications**.
+5. Test the setup of your critical push notification by tapping {{< ui >}}Test push notifications{{< /ui >}}.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="mobile/push_notification/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="mobile/push_notification/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-2. If notification permissions are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
+2. If notification permissions are missing, tap {{< ui >}}Bypass Do Not Disturb{{< /ui >}} and enable {{< ui >}}Allow notifications{{< /ui >}} in System Settings.
 
-{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="mobile/push_notification/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
+3. Then tap {{< ui >}}Bypass Do Not Disturb{{< /ui >}} and enable {{< ui >}}Override Do Not Disturb{{< /ui >}} in System Settings for High Urgency On-Call.
 
-   **On Samsung devices**: Go to **Settings** > **Notifications** > **Do Not Disturb** > **App notifications**. Select Datadog and allow it to bypass Do Not Disturb.
+   **On Samsung devices**: Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}} > {{< ui >}}Do Not Disturb{{< /ui >}} > {{< ui >}}App notifications{{< /ui >}}. Select Datadog and allow it to bypass Do Not Disturb.
 
-{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="mobile/push_notification/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
+4. In order to override system volume, tap the {{< ui >}}Override system volume{{< /ui >}} and allow {{< ui >}}Mode access{{< /ui >}} in System Settings to toggle on {{< ui >}}Override system volume{{< /ui >}}.
 
-5. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
+5. Select your device for {{< ui >}}High Urgency Notifications{{< /ui >}} and/or {{< ui >}}Low Urgency Notifications{{< /ui >}} under the Notification Preferences section.
 
-6. Test the setup of your critical push notification by tapping **Test push notifications**.
+6. Test the setup of your critical push notification by tapping {{< ui >}}Test push notifications{{< /ui >}}.
 
 <div class="alert alert-warning">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
@@ -146,13 +146,13 @@ For high-urgency notifications, Datadog strongly recommends customizing your sys
 ## Incident notifications
 Receive status updates on your active incidents by setting up [Notification Rules for incidents on the Web][2]. 
 
-1. In Incidents, navigate to **Settings** > [**Notification Rules**][1].
-2. Click the **+ New Rule** button on the top right.
-3. Enter your desired condition fields for **When an incident is...** and **And meets the following conditions...**. By default, these filters are empty, and a notification rule triggers for any incident.
-4. Under **Notify...** select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
-5. **With Template:** Select the desired message template you want the notification rule to use.
-6. **Renotify on updates to:** Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change.
-7. Click **Save**.
+1. In Incidents, navigate to {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Notification Rules{{< /ui >}}][1].
+2. Click the {{< ui >}}+ New Rule{{< /ui >}} button on the top right.
+3. Enter your desired condition fields for {{< ui >}}When an incident is...{{< /ui >}} and {{< ui >}}And meets the following conditions...{{< /ui >}}. By default, these filters are empty, and a notification rule triggers for any incident.
+4. Under {{< ui >}}Notify...{{< /ui >}} select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes {{< ui >}}(Mobile Push Notification){{< /ui >}}. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
+5. {{< ui >}}With Template:{{< /ui >}} Select the desired message template you want the notification rule to use.
+6. {{< ui >}}Renotify on updates to:{{< /ui >}} Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 By default if you have push notifications enabled and are assigned as a commander to an incident, you automatically receive push notification for the incident.
 
@@ -163,10 +163,10 @@ By default if you have push notifications enabled and are assigned as a commande
 
 Create [workflow automations][3] that send mobile push notifications.
 
-1. On the workflow canvas, click the **+icon**.
-2. Search for **Send mobile push notification**.
-3. Under **To** select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
-4. Enter the message **Body**.
+1. On the workflow canvas, click the {{< ui >}}+{{< /ui >}} icon.
+2. Search for {{< ui >}}Send mobile push notification{{< /ui >}}.
+3. Under {{< ui >}}To{{< /ui >}} select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
+4. Enter the message {{< ui >}}Body{{< /ui >}}.
 
 ### Further Reading
 

@@ -13,13 +13,13 @@ The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-acceler
 
 ## Break down your fleet by any tag
 
-Use quick filter dropdowns at the top of the page to filter by a specific **Provider**, **Device Type**, **Cluster**, **Region**, **Service**, **Data Center**, **Environment**, or **Team**.
+Use quick filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
-You can also **Search** or **Group** by other tags using the search and group-by fields. For example, with **Host** selected, group by `Team` to view a table entry for each unique team. Click the **`>`** button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
+You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, with {{< ui >}}Host{{< /ui >}} selected, group by `Team` to view a table entry for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
 
-**Note**: You can only **Group by** one additional tag.
+**Note**: You can only {{< ui >}}Group by{{< /ui >}} one additional tag.
 
-If you select _Cluster_ or _Host_, you can click on the **`>`** button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
+If you select {{< ui >}}Cluster{{< /ui >}} or {{< ui >}}Host{{< /ui >}}, you can click on the {{< ui >}}>{{< /ui >}} button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
@@ -31,7 +31,7 @@ If you select _Cluster_ or _Host_, you can click on the **`>`** button next to e
 Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
 
 ### Provisioning
-The Provisioning tab shows key recommendations and metrics insights for allocating and managing your capacity. 
+The {{< ui >}}Provisioning{{< /ui >}} tab shows key recommendations and metrics insights for allocating and managing your capacity. 
 
 {{< img src="gpu_monitoring/provisioning-tab-2.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
 
@@ -50,7 +50,7 @@ Metrics relevant for your provisioning workflow:
 - Idle Cost
 
 ### Performance
-The Performance tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
+The {{< ui >}}Performance{{< /ui >}} tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
 
 {{< img src="gpu_monitoring/performance-tab-2.png" alt="The Performance use-case driven view" style="width:90%;" >}}
 
@@ -73,7 +73,7 @@ Metrics relevant for your performance workflow:
 
 ## Summary Graph
 
-After selecting Cluster, Host, or Device, the **Summary Graph** displays key resource telemetry across your entire GPU infrastructure grouped by that selection. Expand the section below to see a table of the available metrics and what they represent. 
+After selecting {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Device{{< /ui >}}, the {{< ui >}}Summary Graph{{< /ui >}} displays key resource telemetry across your entire GPU infrastructure grouped by that selection. Expand the section below to see a table of the available metrics and what they represent. 
 
 {{% collapse-content title="See the full list of GPU metrics" level="h4" expanded=false id="gpu-metrics-table" %}}
 | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        |
@@ -108,7 +108,7 @@ If you've selected an additional tag to group by—for example, _team_—every u
 
 ## Inventory of your GPU-powered infrastructure
 
-This table breaks down your GPU-powered infrastructure by any tag of your choosing. If you haven't specified an additional tag in the **Group by** field, results are grouped by your selected view: Cluster, Host, or Device.
+This table breaks down your GPU-powered infrastructure by any tag of your choosing. If you haven't specified an additional tag in the {{< ui >}}Group by{{< /ui >}} field, results are grouped by your selected view: {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Device{{< /ui >}}.
 
 By default, the table of results displays the following columns: 
 
@@ -160,9 +160,9 @@ Clicking any row in the Fleet table opens a side panel with more details for the
 
 ### Connected Entities 
 
-Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the **Connected Entities** section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}Connected Entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
 
-**Note**: The **Pods** tab is only available if you're using Kubernetes.
+**Note**: The {{< ui >}}Pods{{< /ui >}} tab is only available if you're using Kubernetes.
 
 {{< tabs >}}
 {{% tab "Cluster side panel" %}}

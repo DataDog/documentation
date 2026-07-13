@@ -6,13 +6,20 @@ aliases:
 - /service_management/app_builder/custom_charts/
 - /service_management/app_builder/components/custom_charts
 further_reading:
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/workflows/build/"
+- link: "/actions/workflows/build/"
   tag: "Documentation"
   text: "Build Apps"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 This page provides an example of how to use the custom chart component in your App Builder apps.
 

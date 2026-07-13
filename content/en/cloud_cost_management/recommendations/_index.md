@@ -66,7 +66,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: CloudTrail Trail
-      recommendation_type: Delete unnecessary CloudTrail trails
+      recommendation_type: Delete Unnecessary CloudTrail trails
       recommendation_description: CloudTrail trails with paid events can be deleted to reduce costs.
       recommendation_prerequisites: ""
     - category: Terminate
@@ -123,6 +123,18 @@ multifiltersearch:
       recommendation_type: Delete Old EBS Snapshots
       recommendation_description: EBS Snapshots that are at least 90 days old and can be deleted.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: EBS Volume
+      recommendation_type: Delete Unattached EBS Volume
+      recommendation_description: Volume that is not attached to an EC2 instance.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: EBS Volume
+      recommendation_type: Delete Unused EBS Volume
+      recommendation_description: Volume that has no read or write activity.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: EBS Volume
@@ -155,18 +167,6 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: EBS Volume
-      recommendation_type: Terminate Unattached EBS Volume
-      recommendation_description: Volume that is not attached to an EC2 instance.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: EBS Volume
-      recommendation_type: Terminate Unused EBS Volume
-      recommendation_description: Volume that has no read or write activity.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
       resource_type: Elastic IP
       recommendation_type: Delete Idle Elastic IP
       recommendation_description: Elastic IP addresses with idle charges in your AWS cost and usage report.
@@ -192,14 +192,14 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 Instance
-      recommendation_description: EC2 instances with CPU and memory utilization under a customizable threshold. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
+      recommendation_type: Terminate EC2 Instance with Stuck Node
+      recommendation_description: EC2 instances hosting Kubernetes nodes that are stuck in the pending phase, indicating the node is not functioning properly.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 Instance with Stuck Node
-      recommendation_description: EC2 instances hosting Kubernetes nodes that are stuck in the pending phase, indicating the node is not functioning properly.
+      recommendation_type: Terminate Unused EC2 Instance
+      recommendation_description: EC2 instances with CPU and memory utilization under a customizable threshold. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: AWS
@@ -216,31 +216,31 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: ElastiCache Cluster
-      recommendation_type: Terminate ElastiCache Cluster
+      recommendation_type: Delete Unused ElastiCache Cluster
       recommendation_description: An ElastiCache Redis cluster with no cache hits and no replication or a Memcached cluster with no cache hits.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: OpenSearch Domain
-      recommendation_type: Delete OpenSearch Domain
+      recommendation_type: Delete Unused OpenSearch Domain
       recommendation_description: OpenSearch domain with no request activity.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: Classic Load Balancer
-      recommendation_type: Terminate Classic Load Balancer
+      recommendation_type: Delete Unused Classic Load Balancer
       recommendation_description: Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: Load Balancer
-      recommendation_type: Terminate Application Load Balancer
+      recommendation_type: Delete Application Load Balancer
       recommendation_description: An application load balancer with no traffic being processed.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: Load Balancer
-      recommendation_type: Terminate Network Load Balancer
+      recommendation_type: Delete Network Load Balancer
       recommendation_description: A network load balancer with 0 processed bytes.
       recommendation_prerequisites: ""
     - category: Downsize
@@ -264,9 +264,21 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: MQ Broker
-      recommendation_type: Terminate MQ Broker
+      recommendation_type: Delete Unused MQ Broker
       recommendation_description: An MQ broker with 0 connections.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: RDS Instance
+      recommendation_type: Delete Unused RDS Instance
+      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: RDS Instance
+      recommendation_type: Downsize RDS Instance
+      recommendation_description: RDS instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
+      recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
     - category: Downsize
       cloud_provider: AWS
       resource_type: RDS Instance
@@ -287,14 +299,8 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: RDS Instance
-      recommendation_type: Terminate Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
       resource_type: Redshift Cluster
-      recommendation_type: Terminate Redshift Cluster
+      recommendation_type: Delete Redshift Cluster
       recommendation_description: Redshift cluster with 0 database connections.
       recommendation_prerequisites: ""
     - category: Migrate
@@ -303,6 +309,12 @@ multifiltersearch:
       recommendation_type: Clean up old versions to reduce storage costs
       recommendation_description: A bucket with versioning enabled has significant storage costs from old object versions.
       recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Delete S3 Bucket
+      recommendation_description: An S3 bucket with minimal storage costs and no meaningful object API usage (Get, Put, Copy, Head, or multipart upload activity).
+      recommendation_prerequisites: '[Cloud Cost Management](https://www.datadoghq.com/product/cloud-cost-management) or [Storage Management](https://www.datadoghq.com/product/storage-management)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
@@ -320,12 +332,6 @@ multifiltersearch:
       resource_type: S3 Bucket
       recommendation_type: Reduce small file count to reduce storage costs
       recommendation_description: A bucket has a significant percentage of small files in infrequent access storage classes, increasing storage costs due to minimum billing size.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: S3 Bucket
-      recommendation_type: Terminate S3 Bucket
-      recommendation_description: An S3 bucket with minimal storage costs and no GET or PUT requests.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
@@ -345,6 +351,18 @@ multifiltersearch:
       recommendation_type: Transition S3 objects to Infrequent Access by Prefix
       recommendation_description: A bucket prefix's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects in the prefix are accessed.
       recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Transition old Standard-class data
+      recommendation_description: A bucket prefix has old Standard-class data with no lifecycle transition rule to move it to cheaper storage.
+      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: VPC NAT Gateway
+      recommendation_type: Delete Unused NAT Gateway
+      recommendation_description: A NAT Gateway that has no bytes sent through it.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: VPC NAT Gateway
@@ -358,22 +376,34 @@ multifiltersearch:
       recommendation_description: Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges.
       recommendation_prerequisites: '[NPM](/network_monitoring/performance/setup/)'
     - category: Terminate
-      cloud_provider: AWS
-      resource_type: VPC NAT Gateway
-      recommendation_type: Terminate NAT Gateway
-      recommendation_description: A NAT Gateway that has no bytes sent through it.
+      cloud_provider: Azure
+      resource_type: AKS Cluster
+      recommendation_type: Delete AKS Cluster
+      recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
-      resource_type: AKS Cluster
-      recommendation_type: Terminate AKS Cluster
-      recommendation_description: An AKS cluster with less than 5% CPU usage.
+      resource_type: App Service Plan
+      recommendation_type: Delete Unused App Service Plan
+      recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk Snapshot
+      recommendation_type: Migrate Disk Snapshot to Standard Storage
+      recommendation_description: Snapshot is stored on Premium storage. Migrating to Standard storage reduces cost by 60% with no change in data durability.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: Container App
       recommendation_type: Downsize Container App
       recommendation_description: A Container App has higher than necessary minimum replicas.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Data Explorer Cluster
+      recommendation_type: Terminate Unused Stopped Data Explorer Cluster
+      recommendation_description: A cluster is considered unused and stopped if it has been stopped for at least 60 days. The recommendation is to delete the cluster to reduce cost.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -408,14 +438,26 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
-      recommendation_type: Terminate Database for MySQL
+      recommendation_type: Delete Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Azure Managed Redis
+      recommendation_type: Delete Azure Managed Redis
+      recommendation_description: Azure Managed Redis cache with no get or set operations.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: SQL Server
-      recommendation_type: Terminate SQL Server
+      recommendation_type: Delete SQL Server
       recommendation_description: SQL Server with no connections, which can be terminated.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Delete SQL Server Database
+      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -423,24 +465,48 @@ multifiltersearch:
       recommendation_type: Downsize SQL Server Database DTU
       recommendation_description: SQL Server database with low DTU usage that can be downsized.
       recommendation_prerequisites: ""
-    - category: Terminate
+    - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Server Database
-      recommendation_type: Terminate SQL Server Database
-      recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated.
+      recommendation_type: Downsize SQL Server Database Storage
+      recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Storage Account
+      recommendation_type: Delete Storage Account
+      recommendation_description: Storage Account with no transactions and no used capacity over the last 14 days.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Delete Azure VM Instance
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Downsize Azure VM Instance
       recommendation_description: VM instance that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Terminate
+    - category: Migrate
       cloud_provider: Azure
       resource_type: VM Instance
-      recommendation_type: Terminate Azure VM Instance
-      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+      recommendation_type: Migrate Azure VM Instance to Arm
+      recommendation_description: VM instance that can be migrated to an equivalent Arm instance type for a lower price.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: VM Scale Set
+      recommendation_type: Downsize Azure VM Scale Set
+      recommendation_description: VM instances with low usage that can be downsized
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: VM Scale Set
+      recommendation_type: Shutdown Azure VM Scale Set
+      recommendation_description: VM instances with low usage that can be shutdown.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Databricks Cluster
@@ -501,17 +567,17 @@ multifiltersearch:
       recommendation_type: Delete Unused Compute Global IP Address
       recommendation_description: Unused compute global IP addresses can be deleted.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: Compute Instance
+      recommendation_type: Delete Compute Instance
+      recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
       resource_type: Compute Instance
       recommendation_type: Downsize Compute Instance
       recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Terminate
-      cloud_provider: GCP
-      resource_type: Compute Instance
-      recommendation_type: Terminate Compute Instance
-      recommendation_description: Compute instance with low CPU usage, high available memory, and minimal network activity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
@@ -519,17 +585,17 @@ multifiltersearch:
       recommendation_type: Reduce Minimum Capacity
       recommendation_description: A Compute Instance Group Autoscaler with a minimum capacity of instances that can be reduced.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Delete Cloud SQL Instance
+      recommendation_description: CloudSQL instances with minimal usage that can be deleted.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: GCP
       resource_type: CloudSQL Instance
       recommendation_type: Downsize CloudSQL Database
       recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: GCP
-      resource_type: CloudSQL Instance
-      recommendation_type: Terminate CloudSQL Instance
-      recommendation_description: CloudSQL instances with minimal usage that can be terminated.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
@@ -598,6 +664,8 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -660,8 +728,9 @@ Each status tab displays the total estimated savings for recommendations in that
 
 ### Change a recommendation status
 
-You can change a recommendation status in two ways:
+You can change a recommendation status in three ways:
 
+- **Bulk update**: Select one or more recommendations in {{< ui >}}Active Recommendations{{< /ui >}}, then choose a status from the toolbar above the table to apply it to all selected recommendations.
 - **From the table**: Use the status dropdown in the {{< ui >}}Status{{< /ui >}} column to select a new status directly from the recommendation list.
 - **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
@@ -675,8 +744,9 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
-- **[Bits AI Dev Agent][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, the Bits AI Dev Agent creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up the Bits AI Dev Agent][13] to use this feature.
+- **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
+- **[Cost Optimization Automation][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
@@ -700,5 +770,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
-[13]: /bits_ai/bits_ai_dev_agent/setup
-[14]: /bits_ai/bits_ai_dev_agent/
+[13]: /bits_ai/bits_code/setup
+[14]: /bits_ai/bits_code/
+[15]: /cloud_cost_management/recommendations/cost_optimization_automation/
+[16]: /mcp_server/tools/#cost_recommendations

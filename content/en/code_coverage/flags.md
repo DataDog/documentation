@@ -14,6 +14,9 @@ further_reading:
   - link: "/code_coverage/carryforward"
     tag: "Documentation"
     text: "Keep total coverage accurate with carryforward"
+  - link: "/code_coverage/dashboards"
+    tag: "Documentation"
+    text: "Build dashboards on Code Coverage data"
 ---
 
 ## Overview

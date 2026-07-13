@@ -36,7 +36,7 @@ sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
-If the `datadog` user is unable to log into the SQL Server instance, please ensure the user has been created and given the proper permissions according the [setup documentation][1].
+If the `datadog` user is unable to log in to the SQL Server instance, verify the user has been created and given the proper permissions according the [setup documentation][1]. Windows Authentication is supported when the Agent connects to a SQL Server instance running on the same host as the Agent.
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 

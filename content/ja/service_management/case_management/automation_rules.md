@@ -25,7 +25,7 @@ title: ケース自動化ルール
 1. **Automation** を選択します。
 1. **New Rule** をクリックします。
 
-{{< img src="/service_management/case_management/automation_rules/create_case_automation_rule.png" alt="ケース管理システムの Create Automation Rule ダイアログのスクリーンショット。ダイアログには、ルールの評価タイミングの設定、ルールに一致した場合のワークフローの指定、ルールの命名、ステータスの設定のステップが含まれます。" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/automation_rules/create_case_automation_rule.png" alt="ケース管理システムの Create Automation Rule ダイアログのスクリーンショット。ダイアログには、ルールの評価タイミングの設定、ルールに一致した場合のワークフローの指定、ルールの命名、ステータスの設定のステップが含まれます。" style="width:100%;" >}}
 
 設定に以下を追加します。
 

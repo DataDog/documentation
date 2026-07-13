@@ -303,7 +303,10 @@ Consulta [Trabajo con datos][8] para obtener más información sobre cómo trans
 
 Con la guía de inicio rápido aprendiste a instalar el worker y desplegar una configuración de pipeline de muestra. Para obtener instrucciones sobre cómo instalar el worker a fin de recibir y enrutar datos desde tus Datadog Agents a Datadog, o desde tu Splunk HEC a Splunk y Datadog, selecciona tu caso de uso específico:
 
-{{< partial name="observability_pipelines/use_cases.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="datadog/" src="integrations_logos/datadog.png" alt="Datadog" >}}
+  {{< image-card href="splunk/" src="integrations_logos/splunk.png" alt="Splunk" >}}
+{{< /card-grid >}}
 
 Para obtener recomendaciones sobre cómo desplegar y escalar varios workers:
 

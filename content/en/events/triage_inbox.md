@@ -23,7 +23,7 @@ Datadog Event Management [Triage Inbox][4] simplifies incident response by conso
 
 Case triage and investigation begins in the Triage Inbox, where you can sort, filter, and manage incoming cases. Collaborate with teammates, both within and outside of Datadog, to coordinate responses. From there, you can prioritize, assign, investigate, and escalate cases as needed to drive faster resolution.
 
-{{< img src="/service_management/events/triage_inbox/event_mgmt_inbox.mp4" alt="Event Management Inbox, sorting by priority, highlighting changing status and priority capabilities" video=true >}}
+{{< img src="/events/triage_inbox/event_mgmt_inbox.mp4" alt="Event Management Inbox, sorting by priority, highlighting changing status and priority capabilities" video=true >}}
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ On the right hand split-view side panel, you can perform the following:
 - {{< ui >}}Escalate issues{{< /ui >}}: Trigger an incident or page an on-call responder using [Incident Management][1], [On-Call][2], [Workflow Automation][3], or third-party tools.
 - {{< ui >}}Sync with external tools{{< /ui >}}: Keep Jira and ServiceNow records in sync to ensure external stakeholders stay up to date.
 
-   {{< img src="/service_management/events/triage_inbox/event_mgmt_inbox_right_hand_panel.png" alt="Event Management Inbox right hand panel, highlighting Escalate drop down" style="width:100%;" >}}
+   {{< img src="/events/triage_inbox/event_mgmt_inbox_right_hand_panel.png" alt="Event Management Inbox right hand panel, highlighting Escalate drop down" style="width:100%;" >}}
 
 ## Take Action
 
