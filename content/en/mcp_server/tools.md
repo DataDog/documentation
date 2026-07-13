@@ -1051,14 +1051,6 @@ Tools for querying [Product Analytics][68] data, including org vocabulary lookup
 
 <div class="alert alert-info">The <code>product-analytics</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
-### `get_product_analytics_org_vocabulary`
-*Toolset: **product-analytics***\
-*Permissions Required: `RUM Apps Read`*\
-Retrieves org-specific vocabulary for Product Analytics, including application names and IDs, common view and action names, curated labeled actions, metric definitions, and user/account attributes. Call this before constructing an analytics query to avoid guessing view or action names.
-
-- What applications, views, and actions are available in Product Analytics?
-- What labeled actions has my org curated for the checkout application?
-
 ### `search_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
