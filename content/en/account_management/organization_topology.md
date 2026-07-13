@@ -89,7 +89,7 @@ Use multiple organizations: one per regulated workload, one per required region 
 
 _Is cross-region data transfer prohibited for this data?_
 
-When regulations prohibit telemetry from leaving a geographic region, you need organizations in different Datadog sites (for example, US1, EU1, AP1). [Cross-Organization Visibility][2] connects these organizations for operational dashboards without moving raw telemetry across borders.
+When regulations prohibit telemetry from leaving a geographic region, you need organizations in different Datadog sites (for example, US1, EU1, AP1).
 
 ### Scenario 3: Firewall data between teams
 
