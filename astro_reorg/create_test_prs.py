@@ -5,7 +5,7 @@ For each spec in TEST_PRS this script:
   1. branches off BRANCH_FROM (a frozen snapshot of master),
   2. applies the spec's content change,
   3. commits and pushes the branch,
-  4. opens a PR against MOCK_BASE_BRANCH.
+  4. opens a PR against the base branch (see below).
 
 On completion it opens each new PR in the browser (falling back to printing
 the URLs if a browser can't be launched).
@@ -13,6 +13,23 @@ the URLs if a browser can't be launched).
 BRANCH_FROM and MOCK_BASE_BRANCH are read from the `test:` section of
 config.yaml (shared with resolve_pr_conflicts.py, which defaults to this same
 mock base branch). Both must already exist on the remote before running.
+
+Testing the *unresolvable* conflict paths:
+    By default the mock base differs from the PRs only by pure file moves, so
+    resolve_pr_conflicts.py always replays them cleanly. To exercise the cases
+    where it CAN'T auto-fix, a spec may carry a `base_edit` describing a change
+    to make on the base itself — on the same line the PR touches, but at the
+    post-reorg (hugo/) path. When any spec has a base_edit, this script builds a
+    throwaway base branch off MOCK_BASE_BRANCH (unique per run, so no
+    force-push), applies every base_edit to it, and points ALL the PRs at that
+    branch. Then one resolve_pr_conflicts.py run against it exercises both a
+    clean auto-fix and the manual-review fallbacks. The exact command to run is
+    printed at the end.
+
+    - A base_edit on a moved (hugo/) file makes git am --3way fail: the fix is
+      classified reorg-caused but can't be replayed (manual-review fallback).
+    - A base_edit on a top-level (never-moved) file surfaces as a plain
+      non-reorg conflict, which is sent straight to manual review.
 """
 from __future__ import annotations
 
@@ -66,8 +83,18 @@ DO_NOT_MERGE_LABEL = "Do Not Merge"
 
 # Each spec describes one PR: the branch to create, the file to edit, the exact
 # text to replace (old -> new, must match once), and the PR title/body.
+#
+# An optional `base_edit` makes the conflict unresolvable by having the BASE
+# branch also change the same line (at the post-reorg hugo/ path). See the
+# module docstring. Specs without a base_edit still auto-fix cleanly, so a run
+# that mixes both kinds exercises every resolve_pr_conflicts.py outcome at once.
+#
+# An optional `add_file` ({path, content}) also creates a brand-new page at a
+# pre-reorg path, on top of the old->new edit, to model "added a page and linked
+# it in the nav menu."
 TEST_PRS = [
     {
+        # Resolvable: reorg-only conflict, auto-fix replays it cleanly.
         "branch": f"{BRANCH_PREFIX}-wording",
         "file": "content/en/getting_started/_index.md",
         "old": "supports every phase of software development",
@@ -79,6 +106,92 @@ TEST_PRS = [
             "non-material wording change in the getting started intro paragraph.\n\n"
             "Do not merge."
         ),
+    },
+    {
+        # Unresolvable (Case 2): reorg-classified, but the base changed the same
+        # line at the hugo/ path, so git am --3way can't replay it. Falls back
+        # to the astro-reorg-manual-review label.
+        "branch": f"{BRANCH_PREFIX}-unresolvable-reorg",
+        "file": "content/en/getting_started/_index.md",
+        "old": "combined into a customized solution",
+        "new": "combined into a unified solution",
+        "commit": "Test PR: edit a line the reorged base also changed",
+        "title": "[TEST] Unresolvable reorg conflict (base edited the same line)",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Edits a line that "
+            "the reorged base branch also changed, so the auto-fix can't replay "
+            "it and the PR should be labeled for manual review.\n\n"
+            "Do not merge."
+        ),
+        "base_edit": {
+            "file": "hugo/content/en/getting_started/_index.md",
+            "old": "combined into a customized solution",
+            "new": "combined into a tailored solution",
+        },
+    },
+    {
+        # Unresolvable (Case 1): the conflict is on a top-level file the reorg
+        # never moves, so it isn't reorg-caused at all — sent straight to manual
+        # review with no auto-fix attempt.
+        "branch": f"{BRANCH_PREFIX}-non-reorg-conflict",
+        "file": "CONTRIBUTING.md",
+        "old": "how to write and edit content",
+        "new": "how to write and revise content",
+        "commit": "Test PR: edit a top-level file the base also changed",
+        "title": "[TEST] Non-reorg conflict on a top-level file",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Creates a conflict "
+            "on a top-level file that the reorg doesn't move, so it isn't a "
+            "reorg conflict and should go straight to manual review.\n\n"
+            "Do not merge."
+        ),
+        "base_edit": {
+            "file": "CONTRIBUTING.md",
+            "old": "how to write and edit content",
+            "new": "how to author and edit content",
+        },
+    },
+    {
+        # Unresolvable (Case 3): a new page plus a nav-menu link to it, where
+        # the base branch edited that same menu line. The new page is a
+        # wrong-path addition (added at a pre-reorg content/ path) AND the menu
+        # edit conflicts with the base, so the fix is classified reorg-caused
+        # but git am --3way can't replay the menu change -> manual review.
+        "branch": f"{BRANCH_PREFIX}-new-page-nav-conflict",
+        "add_file": {
+            "path": "content/en/getting_started/example_feature/_index.md",
+            "content": (
+                "---\n"
+                "title: Example Feature\n"
+                "---\n\n"
+                "Placeholder page for exercising the astro reorg tooling.\n"
+            ),
+        },
+        "file": "config/_default/menus/main.en.yaml",
+        # Insert a nav entry for the new page just before the Essentials heading.
+        "old": "    - name: Essentials",
+        "new": (
+            "    - name: Example Feature\n"
+            "      identifier: example_feature_heading\n"
+            "      url: /getting_started/example_feature/\n"
+            "      weight: 500000\n"
+            "    - name: Essentials"
+        ),
+        "commit": "Test PR: add a page and a nav menu link to it",
+        "title": "[TEST] New page with nav link (base edited the same menu line)",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Adds a new page and "
+            "a nav menu entry linking to it. The base branch renames that same "
+            "menu heading, so the auto-fix can't replay the menu change and the "
+            "PR should be labeled for manual review.\n\n"
+            "Do not merge."
+        ),
+        # Someone else renamed the same heading the PR inserts in front of.
+        "base_edit": {
+            "file": "hugo/config/_default/menus/main.en.yaml",
+            "old": "    - name: Essentials",
+            "new": "    - name: Essential Features",
+        },
     },
 ]
 
@@ -155,7 +268,62 @@ def current_branch() -> str:
 # PR creation
 # ---------------------------------------------------------------------------
 
-def create_pr(spec: dict) -> str | None:
+def build_conflicting_base(specs: list[dict]) -> str | None:
+    """Build a throwaway base branch that conflicts with the base_edit specs.
+
+    Some specs carry a `base_edit` describing a change to make ON THE BASE, at a
+    post-reorg (hugo/) path, on the same line the PR touches at the pre-reorg
+    path. That divergent edit is what makes resolve_pr_conflicts.py's auto-fix
+    fail (git am --3way can't reconcile the line) or — for a top-level file —
+    surfaces as a plain non-reorg conflict. Without it the mock base differs
+    from the PRs only by pure file moves, which always replay cleanly.
+
+    Builds a fresh branch off origin/MOCK_BASE_BRANCH, unique per run so a plain
+    push always fast-forwards (no force-push, per repo policy), applies every
+    base_edit, commits, and pushes. Returns the branch name, or None if no spec
+    needs a conflicting base (in which case callers use MOCK_BASE_BRANCH).
+    """
+    edits = [s["base_edit"] for s in specs if s.get("base_edit")]
+    if not edits:
+        return None
+
+    branch = f"{MOCK_BASE_BRANCH}-conflict-{uuid.uuid4().hex[:8]}"
+    print(f"\n=== building conflicting base {branch} ===")
+
+    if git("fetch", "origin", MOCK_BASE_BRANCH).returncode != 0:
+        die(f"git fetch origin {MOCK_BASE_BRANCH} failed.")
+
+    checkout = git("checkout", "-b", branch, f"origin/{MOCK_BASE_BRANCH}")
+    if checkout.returncode != 0:
+        die(f"could not create branch {branch}: {checkout.stderr.strip()}")
+
+    # base_edit paths are post-reorg (hugo/...), so they exist on this branch.
+    for edit in edits:
+        target = REPO_ROOT / edit["file"]
+        if not target.exists():
+            die(f"base_edit target does not exist on the base branch: {edit['file']}")
+        text = target.read_text()
+        count = text.count(edit["old"])
+        if count != 1:
+            die(f"expected {edit['old']!r} exactly once in {edit['file']}, "
+                f"found {count}.")
+        target.write_text(text.replace(edit["old"], edit["new"]))
+        git("add", edit["file"])
+
+    commit = git("commit", "-m",
+                 "Test setup: edit reorged files so open test PRs conflict")
+    if commit.returncode != 0:
+        die(f"base commit failed: {commit.stderr.strip()}")
+
+    push = git("push", "--set-upstream", "origin", branch)
+    if push.returncode != 0:
+        die(f"push of conflicting base failed: {push.stderr.strip()}")
+
+    print(f"  Pushed conflicting base: {branch}")
+    return branch
+
+
+def create_pr(spec: dict, base: str) -> str | None:
     """Create the branch, apply the change, push, and open a PR. Returns URL."""
     # Append a short unique suffix so every run creates a fresh branch rather
     # than colliding with one from a previous run.
@@ -173,6 +341,17 @@ def create_pr(spec: dict) -> str | None:
     checkout = git("checkout", "-b", branch, f"origin/{BRANCH_FROM}")
     if checkout.returncode != 0:
         die(f"could not create branch {branch}: {checkout.stderr.strip()}")
+
+    # Optionally add a brand-new page at a pre-reorg path (content/...). The
+    # resolver detects this as a "wrong-path addition" that belongs under hugo/.
+    add_file = spec.get("add_file")
+    if add_file:
+        new_page = REPO_ROOT / add_file["path"]
+        if new_page.exists():
+            die(f"add_file target already exists: {add_file['path']}")
+        new_page.parent.mkdir(parents=True, exist_ok=True)
+        new_page.write_text(add_file["content"])
+        git("add", add_file["path"])
 
     # Apply the wording change.
     text = target.read_text()
@@ -196,7 +375,7 @@ def create_pr(spec: dict) -> str | None:
         "pr", "create",
         "--repo", REPO,
         "--head", branch,
-        "--base", MOCK_BASE_BRANCH,
+        "--base", base,
         "--title", spec["title"],
         "--body", spec["body"],
         "--label", LABEL,
@@ -206,7 +385,7 @@ def create_pr(spec: dict) -> str | None:
         die(f"gh pr create failed: {pr.stderr.strip()}")
 
     url = pr.stdout.strip().splitlines()[-1]
-    print(f"  Opened PR: {url}")
+    print(f"  Opened PR against {base}: {url}")
     return url
 
 
@@ -216,9 +395,19 @@ def main() -> None:
     original_branch = current_branch()
 
     urls: list[str] = []
+    conflicting_base: str | None = None
     try:
+        # If any spec needs the base to diverge, build one throwaway conflicting
+        # base and point every PR at it, so a single resolve_pr_conflicts.py run
+        # (--base-branch <that branch>) exercises the clean auto-fix and the
+        # manual-review fallbacks together. Build it before cutting PR branches;
+        # this leaves the working tree on the base branch, but each create_pr
+        # checks out fresh off BRANCH_FROM anyway.
+        conflicting_base = build_conflicting_base(TEST_PRS)
+        base = conflicting_base or MOCK_BASE_BRANCH
+
         for spec in TEST_PRS:
-            url = create_pr(spec)
+            url = create_pr(spec, base)
             if url:
                 urls.append(url)
     finally:
@@ -232,6 +421,13 @@ def main() -> None:
     print(f"\nCreated {len(urls)} PR(s):")
     for url in urls:
         print(f"  {url}")
+
+    if conflicting_base:
+        print(f"\nThese PRs target the throwaway conflicting base "
+              f"{conflicting_base!r}.\nResolve them (and see the manual-review "
+              f"fallbacks fire) with:\n"
+              f"  python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run "
+              f"--base-branch {conflicting_base}")
 
     # Open in the browser; webbrowser.open returns False if it can't.
     opened_any = False

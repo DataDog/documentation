@@ -5,7 +5,7 @@ Defaults to a dry run where it just reports the changes
 that would be made.
 
 Usage:
-    python3 astro_reorg/resolve_pr_conflicts.py [--no-dry-run] [--live | --base-branch BRANCH] [--pr NUMBER ...]
+    python3 astro_reorg/resolve_pr_conflicts.py [--no-dry-run] [--live | --base-branch BRANCH] [--pr NUMBER ...] [--limit N]
 
 Flags:
     --no-dry-run          Actually apply fixes and labels instead of just reporting what would be done.
@@ -18,6 +18,11 @@ Flags:
     --pr NUMBER ...       Only process the given PR number(s) instead of all open
                           PRs against the base branch. PRs targeting a different
                           base are skipped.
+    --limit N             Stop after acting on N PRs (auto-fixing or labeling).
+                          PRs that need no action — mergeable, already fixed, or
+                          not-yet-computed — don't count toward the limit. Use it
+                          to roll out gradually: start with --limit 1, review the
+                          results, then raise it as you gain confidence.
 
 Background:
     The reorg moves every entry in `moves_to_hugo` (astro_reorg/config.yaml)
@@ -562,7 +567,12 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 # Per-PR analysis
 # ---------------------------------------------------------------------------
 
-def analyze_pr(pr: dict, dry_run: bool) -> None:
+def analyze_pr(pr: dict, dry_run: bool) -> bool:
+    """Process one PR. Return True if we acted on it (auto-fixed or labeled),
+    False if it needed no action (mergeable, already fixed, mergeability not yet
+    computed, or no conflicts found locally). The return value drives --limit:
+    only acted-on PRs count toward it.
+    """
     pr_number = pr["number"]
     title = pr["title"]
     mergeable = pr.get("mergeable", "UNKNOWN")
@@ -575,16 +585,16 @@ def analyze_pr(pr: dict, dry_run: bool) -> None:
     # the whole script safe to re-run.
     if any(l["name"] == LABEL_STALE for l in pr.get("labels", [])):
         print(f"  Already has a fix PR ({LABEL_STALE}) — skipping.")
-        return
+        return False
 
     if mergeable == "MERGEABLE":
         print("  No conflicts — skipping.")
-        return
+        return False
 
     if mergeable == "UNKNOWN":
         # GitHub computes mergeability lazily; try again later if needed.
         print("  Mergeability not yet computed by GitHub — skipping.")
-        return
+        return False
 
     # CONFLICTING: fetch the branch and do a local merge test to classify
     # conflicts as reorg-caused vs unrelated.
@@ -593,14 +603,14 @@ def analyze_pr(pr: dict, dry_run: bool) -> None:
                 f"refs/pull/{pr_number}/head:{pr_ref.replace('refs/remotes/', '')}")
     if fetch.returncode != 0:
         print(f"  fetch failed: {fetch.stderr.strip()[:120]}", file=sys.stderr)
-        return
+        return False
 
     tmpdir = tempfile.mkdtemp(prefix=f"reorg_check_{pr_number}_")
     try:
         add_wt = git("worktree", "add", "--detach", tmpdir, f"origin/{BASE_BRANCH}")
         if add_wt.returncode != 0:
             print(f"  worktree add failed: {add_wt.stderr.strip()[:120]}", file=sys.stderr)
-            return
+            return False
         worktree = Path(tmpdir)
 
         # Attempt the merge without committing so we can inspect the conflicts.
@@ -648,23 +658,25 @@ def analyze_pr(pr: dict, dry_run: bool) -> None:
                 print("  Merge failed but no conflicts could be classified "
                       "— labeling for manual review.")
                 add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-            else:
-                print("  No conflicts found locally (GitHub mergeability may be stale).")
-            return
+                return True
+            print("  No conflicts found locally (GitHub mergeability may be stale).")
+            return False
 
         if other_conflicts:
             # The PR has conflicts that are NOT from the reorg.  We must not
             # touch it — just label it so a human can resolve it manually.
             print("  Non-reorg conflicts present — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-        else:
-            # All conflicts are reorg-caused.  Attempt the auto-fix.
-            print("  All conflicts are reorg-caused — attempting auto-fix.")
-            success = attempt_fix(pr, dry_run)
-            if not success:
-                # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
-                print("  Auto-fix failed or not applicable — labeling for manual review.")
-                add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+            return True
+
+        # All conflicts are reorg-caused.  Attempt the auto-fix.
+        print("  All conflicts are reorg-caused — attempting auto-fix.")
+        success = attempt_fix(pr, dry_run)
+        if not success:
+            # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
+            print("  Auto-fix failed or not applicable — labeling for manual review.")
+            add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+        return True
 
     finally:
         run(["git", "worktree", "remove", "--force", tmpdir])
@@ -724,6 +736,12 @@ def main() -> None:
         help="Only check this PR number (may be repeated).",
     )
     parser.add_argument(
+        "--limit", type=int, default=None, metavar="N",
+        help="Stop after acting on N PRs (auto-fixing or labeling). PRs needing "
+             "no action don't count. Use it to roll out gradually: start at 1, "
+             "review, then raise it.",
+    )
+    parser.add_argument(
         "--base-branch", default=None, metavar="BRANCH",
         help="Branch to treat as the post-reorg base. Overrides the default "
              "(the mock base branch from config.yaml) and --live.",
@@ -735,6 +753,9 @@ def main() -> None:
              "create_test_prs.py opens its test PRs against) for safety.",
     )
     args = parser.parse_args()
+
+    if args.limit is not None and args.limit < 1:
+        parser.error("--limit must be a positive integer.")
 
     if args.live and args.base_branch:
         parser.error("--live and --base-branch are mutually exclusive; "
@@ -773,20 +794,27 @@ def main() -> None:
 
     prs = get_open_prs(args.prs)
     print(f"Found {len(prs)} open PR(s) to check.")
+    if args.limit is not None:
+        print(f"Limit: will stop after acting on {args.limit} PR(s).")
 
+    acted = 0
     for pr in prs:
+        if args.limit is not None and acted >= args.limit:
+            print(f"\nReached --limit of {args.limit} acted-on PR(s) — stopping.")
+            break
         # Isolate failures: one PR raising (e.g. a transient gh/network error)
         # shouldn't abort the whole batch.  A half-finished fix is safe to
         # retry — a re-run either skips it (astro-reorg-stale) or, if the fix
         # branch already exists, falls back to manual review.
         try:
-            analyze_pr(pr, args.dry_run)
+            if analyze_pr(pr, args.dry_run):
+                acted += 1
         except Exception as exc:
             print(f"\nERROR processing PR #{pr.get('number', '?')}: {exc}",
                   file=sys.stderr)
             print("  Skipping to the next PR.", file=sys.stderr)
 
-    print("\nDone.")
+    print(f"\nActed on {acted} PR(s). Done.")
 
 
 if __name__ == "__main__":
