@@ -71,7 +71,7 @@ def main():
     print("\n== Hugo build ==")
     check_build_presence()
 
-    # On a throwaway repo, execute_reorg.py then rollback.py must restore the
+    # On a throwaway repo, execute_reorg.py then local_rollback.py must restore the
     # tree byte-for-byte (the only test of rollback).
     print("\n== Rollback round-trip ==")
     check_rollback_roundtrip()

@@ -516,9 +516,9 @@ def check_build_presence():
 
 
 def check_rollback_roundtrip():
-    """execute_reorg.py then rollback.py must restore the tree byte-for-byte.
+    """execute_reorg.py then local_rollback.py must restore the tree byte-for-byte.
 
-    This is the only check that exercises rollback.py at all. Rather than
+    This is the only check that exercises local_rollback.py at all. Rather than
     mutate the live repo (and risk leaving it half-reorganized if a step fails),
     it builds a small throwaway git repo holding one representative item for
     every code path the two scripts touch — a mixed .gitignore (rules that route
@@ -527,7 +527,7 @@ def check_rollback_roundtrip():
     few moved/stayed files — then:
 
         snapshot -> run execute_reorg.py (answering y to every prompt)
-                 -> run rollback.py -> snapshot again
+                 -> run local_rollback.py -> snapshot again
                  -> assert byte-identical.
 
     It specifically catches the easy-to-miss case where execute_reorg.py edits a file in
@@ -610,7 +610,7 @@ def check_rollback_roundtrip():
         # The scripts resolve repo_root as their parent's parent, so place them
         # under an astro_reorg/ subfolder that mirrors the real repo layout.
         (work / "astro_reorg").mkdir()
-        for tool in ("execute_reorg.py", "rollback.py", "config.yaml"):
+        for tool in ("execute_reorg.py", "local_rollback.py", "config.yaml"):
             shutil.copy2(repo_root / "astro_reorg" / tool, work / "astro_reorg" / tool)
 
         git_work("init", "-q")
@@ -638,11 +638,11 @@ def check_rollback_roundtrip():
             return
 
         rollback = subprocess.run(
-            ["python3", str(work / "astro_reorg" / "rollback.py")],
+            ["python3", str(work / "astro_reorg" / "local_rollback.py")],
             cwd=work, capture_output=True, text=True,
         )
         if rollback.returncode != 0 or (work / "hugo").exists():
-            record("FAIL", "rollback: rollback.py failed on the fixture",
+            record("FAIL", "rollback: local_rollback.py failed on the fixture",
                    (rollback.stderr or rollback.stdout).strip()[:200])
             return
 
