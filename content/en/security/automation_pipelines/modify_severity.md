@@ -66,12 +66,12 @@ Findings affected by a severity modifier rule display a visual indicator in expl
 
 {{< img src="security/automation_pipelines/severity_pill_popover.png" alt="A findings explorer item that displays a severity pill with a modifier indicator. A pop-over provides more information about the automation rule responsible for adjusting the finding's severity" style="width:65%;" >}}
 
-{{< img src="security/automation_pipelines/severity_breakdown.png" alt="A finding side panel showing the severity breakdown, with the original severity, CVSS score, and CVSS vector, the automation rule that triggered the change, and the resulting severity level and adjusted CVSS score" style="width:100%;" >}}
-
 For findings that have a CVSS score (Container Image Vulnerability, Host Vulnerability, Library Vulnerability, and Runtime Code Vulnerability), the side panel severity section also includes a breakdown showing:
 - The original severity level, CVSS score, and CVSS vector before modification.
 - The name of the automation rule that triggered, with a direct link to the rule.
 - The resulting severity level and adjusted CVSS score.
+
+{{< img src="security/automation_pipelines/severity_breakdown.png" alt="A finding side panel showing the severity breakdown, with the original severity, CVSS score, and CVSS vector; the automation rule that triggered the change; and the resulting severity level and adjusted CVSS score" style="width:100%;" >}}
 
 ## Severity floors by finding type
 
