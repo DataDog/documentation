@@ -43,7 +43,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 #### Changed
 - Fixes single-token phrase prefix queries on raw fields so `match_phrase_prefix` searches return all matching prefix terms instead of being capped by `max_expansions`.
-- up to 3x faster intersection for selective terms with time ranges
+- Up to 3x faster intersection for selective terms queries with time range.
 #### Helm chart changes
 - Adds `indexer.volumeAttributesClass` and `searcher.volumeAttributesClass` values to provision Kubernetes `VolumeAttributesClass` resources for indexer and searcher persistent volumes. Use these values to tune volume attributes such as IOPS and throughput. This feature is disabled by default, requires Kubernetes 1.31 or later, and requires `driverName` when enabled.
 - Fixes the Kubernetes advertise address by setting `KUBERNETES_POD_IP` from the pod IP instead of the pod name.
