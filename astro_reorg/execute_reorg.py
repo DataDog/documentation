@@ -140,8 +140,10 @@ WORKFLOW_SUBSTITUTIONS = [
     (" static |",                " hugo/static |"),
     ("^static/images/",          "^hugo/static/images/"),
     ("-- 'content/en/**/*.md'",  "-- 'hugo/content/en/**/*.md'"),
-    # bump_* and version_getter_shared workflows cp/commit data files by ./ path
-    ("./data/",                  "./hugo/data/"),
+    # bump_* and version_getter_shared workflows cp/commit data files by ./ path.
+    # Match without a trailing slash so a bare `mkdir -p ./data` is repathed too,
+    # not just `./data/<file>` references.
+    ("./data",                   "./hugo/data"),
 ]
 
 print("\nUpdating .github/workflows/...")

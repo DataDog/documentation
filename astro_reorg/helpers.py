@@ -207,8 +207,11 @@ def check_workflows(moves_to_hugo):
             for token in token_re.findall(line):
                 seg, normalized = first_segment(token)
                 # Only treat a token as a path reference if it's an actual path
-                # (has a '/') or is exactly the name of a moved file.
-                if "/" not in normalized and normalized not in moved_files:
+                # or is exactly the name of a moved file. Test the RAW token for
+                # the slash, not the ./-stripped form: `./data` is a genuine path
+                # reference, but normalizing it to `data` would drop the slash and
+                # make it read as a bare prose word.
+                if "/" not in token and normalized not in moved_files:
                     continue
                 if seg in moves_to_hugo:
                     suspects.append(f"{yml.name}:{lineno}: {line.strip()}")
