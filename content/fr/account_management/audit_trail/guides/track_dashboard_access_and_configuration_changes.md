@@ -1,6 +1,6 @@
 ---
 aliases:
-- /fr/./track_dashboard_usage/
+- /fr/account_management/audit_trail/guides/track_dashboard_usage/
 description: Utilisez Audit Trail pour suivre l'utilisation des dashboards, les modèles
   d'accès et les modifications de configuration avec la surveillance des requêtes
   API et l'inspection des différences.
@@ -49,7 +49,7 @@ Vous pouvez utiliser des [requêtes d'événements][7] dans Audit Trail pour aff
 
    | Événement d'audit                       | Requête dans l'audit explorer                                      |
    |-----------------------------------|--------------------------------------------------------------|
-   | [Dashboards récemment créés][4] | `@evt.name:Dashboard @asset.type:dashboard @action:created` 
+   | [Dashboards récemment créés][4] | `@evt.name:Dashboard @asset.type:dashboard @action:created`
    | [Dashboards récemment modifiés][5] | `@evt.name:Dashboard @asset.type:dashboard @action:modified` |
    | [Dashboards récemment supprimés][6]  | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`  |
 

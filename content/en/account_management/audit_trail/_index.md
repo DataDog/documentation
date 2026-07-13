@@ -164,6 +164,17 @@ Events that match the following queries are marked as notable. You can also retr
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 | Activation, deactivation, and modification of Product Analytics for applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
 
+### View a user's full activity, including agent-delegated actions
+
+When a Datadog AI agent acts on a user's behalf, the agent's information fills `@usr.*` for that event, while the original user's information fills `@delegator.*` instead. Searching only `@usr.id:<USER_ID>` returns the actions a user performed directly, and does not include actions a Datadog AI agent performed on their behalf.
+
+| Description of audit event                                                                        | Query in audit explorer                                     |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Actions a user performed directly                                                                    | `@usr.id:<USER_ID>`                                           |
+| All actions attributed to a user, including actions a Datadog AI agent performed on their behalf     | `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`               |
+
+See [Track Agentic Usage in Your Organization][18] for more information on filtering and viewing agent-driven audit events.
+
 ### Inspect Changes (Diff)
 
 The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
@@ -254,4 +265,5 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
 [17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+[18]: /account_management/audit_trail/guides/track_agentic_usage_in_your_organization/
 

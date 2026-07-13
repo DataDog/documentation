@@ -417,7 +417,7 @@ If some jobs are not visible, navigate to the [Configuration][9] page to underst
 
 ## Troubleshooting
 
-If you don't see any data in DJM after installing the product, follow these steps.
+If you don't see any data in Jobs Monitoring after installing the product, follow these steps.
 
 ### Init script not running or failing
 

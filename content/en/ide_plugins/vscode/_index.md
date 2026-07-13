@@ -24,8 +24,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
-cascade:
-  site_support_id: ide_plugins_vscode
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
