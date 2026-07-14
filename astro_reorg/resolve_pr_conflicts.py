@@ -72,10 +72,10 @@ Auto-fix strategy (reorg-only PRs):
          the PR's base and today.
       5. Push as `reorg-fix/pr-<N>`, open a new PR for it, comment on the
          original PR pointing to the fix PR, and label the original
-         astro-reorg-stale.
+         has-astro-reorg-conflicts.
 
-    A PR that already carries the astro-reorg-stale label (a fix PR was opened
-    on a prior run) is skipped, so re-running the script is safe.
+    A PR that already carries the has-astro-reorg-conflicts label (a fix PR was
+    opened on a prior run) is skipped, so re-running the script is safe.
 
     PRs from forks cannot be auto-fixed (we don't have push access to the fork).
     They receive the astro-reorg-manual-review label.
@@ -89,6 +89,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -119,9 +120,28 @@ TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
 REPO = "DataDog/documentation"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
-LABEL_STALE = "astro-reorg-stale"
+LABEL_STALE = "has-astro-reorg-conflicts"
+LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
+LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
+
+# PRs with no activity in this many days are treated as stale and receive a
+# comment + label instead of an auto-fix attempt.
+STALE_DAYS = 62  # ~2 calendar months
+
+MANUAL_REVIEW_COMMENT = (
+    "This PR has merge conflicts from a recent repo reorg that could not be resolved automatically. "
+    "It has been queued for manual review by the Webops-Platform team."
+)
+
+STALE_COMMENT = (
+    "This PR has conflicts created by the docs repo reorg project. "
+    "Because this PR is stale (more than two months old), no action was taken. "
+    "If you still intend to use this PR and would like assistance resolving the conflicts, "
+    "add the label `astro-reorg-help-requested` to your PR to add it to our help queue. "
+    "We will reach out to you as soon as we can."
+)
 
 # Existing repo label applied to auto-created fix PRs in test mode so they stay
 # out of other teams' review queues. Assumed to already exist in the repo.
@@ -163,6 +183,20 @@ def gh_run(*args: str) -> str:
 
 def git(*args: str, cwd: Path | None = None) -> subprocess.CompletedProcess:
     return run(["git", *args], cwd=cwd or REPO_ROOT)
+
+
+# ---------------------------------------------------------------------------
+# Staleness helpers
+# ---------------------------------------------------------------------------
+
+def is_pr_stale(pr: dict) -> bool:
+    """Return True if the PR has had no activity in the last STALE_DAYS days."""
+    updated_at = pr.get("updatedAt")
+    if not updated_at:
+        return False
+    last_update = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+    cutoff = datetime.now(timezone.utc) - timedelta(days=STALE_DAYS)
+    return last_update < cutoff
 
 
 # ---------------------------------------------------------------------------
@@ -471,6 +505,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             print(f"    ... and {len(subjects) - 10} more")
         would_be_title = f"[reorg fix] {pr['title']}"
         print(f"  [dry-run] would open PR: {would_be_title!r}")
+        print(f"  [dry-run] would label fix PR {LABEL_WIP!r}")
         if IS_TEST_MODE:
             print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
         return True
@@ -540,6 +575,8 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         new_pr_number = new_pr_url.rstrip("/").split("/")[-1]
         print(f"  Opened fix PR: {new_pr_url}")
 
+        add_label(int(new_pr_number), LABEL_WIP, dry_run=False)
+
         # In test mode, keep the auto-created PR out of other teams' review
         # queues by marking it "Do Not Merge". Never do this on real master.
         if IS_TEST_MODE:
@@ -547,12 +584,12 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 
         post_comment(
             pr_number,
-            f"🤖 **Reorg conflict auto-fix: #{new_pr_number}**\n\n"
-            f"This PR has merge conflicts caused by the astro reorg "
+            f"🤖 **Reorg conflict auto-fix:**\n\n"
+            f"This PR has merge conflicts caused by the recent docs repo reorg "
             f"(files moved from the repo root into `hugo/`). "
             f"A new PR with your commits translated to the correct paths "
             f"has been opened: #{new_pr_number}\n\n"
-            f"If #{new_pr_number} looks correct, merge it and close this PR.",
+            f"If the new PR looks correct, merge it and close this PR.",
             dry_run=False,
         )
         add_label(pr_number, LABEL_STALE, dry_run)
@@ -580,11 +617,11 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
     print(f"\nPR #{pr_number}: {title}")
     print(f"  mergeable: {mergeable}")
 
-    # A fix PR was already opened for this one on a prior run — skip so we
-    # don't re-push the fix branch or post a duplicate comment.  This makes
-    # the whole script safe to re-run.
+    # A fix PR was already opened for this one (or it was previously noted as
+    # stale) on a prior run — skip so we don't re-push the fix branch or post
+    # a duplicate comment.  This makes the whole script safe to re-run.
     if any(l["name"] == LABEL_STALE for l in pr.get("labels", [])):
-        print(f"  Already has a fix PR ({LABEL_STALE}) — skipping.")
+        print(f"  Already handled ({LABEL_STALE}) — skipping.")
         return False
 
     if mergeable == "MERGEABLE":
@@ -669,6 +706,21 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
             return True
 
+        # All conflicts are reorg-caused.  Check staleness before attempting
+        # an auto-fix: if the PR has had no activity in >2 months, note it and
+        # leave it for the author to decide whether they still need it.
+        # Exception: if the author already added `astro-reorg-help-requested`,
+        # they have explicitly opted back in — treat it like a fresh PR.
+        help_requested = any(
+            l["name"] == LABEL_HELP_REQUESTED for l in pr.get("labels", [])
+        )
+        if is_pr_stale(pr) and not help_requested:
+            print(f"  PR is stale (no activity in >{STALE_DAYS} days) — "
+                  "labeling and commenting without auto-fix.")
+            add_label(pr_number, LABEL_STALE, dry_run)
+            post_comment(pr_number, STALE_COMMENT, dry_run)
+            return True
+
         # All conflicts are reorg-caused.  Attempt the auto-fix.
         print("  All conflicts are reorg-caused — attempting auto-fix.")
         success = attempt_fix(pr, dry_run)
@@ -700,7 +752,7 @@ def get_open_prs(only: list[int] | None = None) -> list[dict]:
     # requested: `gh pr list` doesn't support them (only `gh pr view` does), and
     # nothing here uses them.
     fields = ("number,title,body,labels,headRefName,"
-              "baseRefName,isCrossRepository,mergeable")
+              "baseRefName,isCrossRepository,mergeable,updatedAt")
     if only:
         # Explicitly named PRs are an intentional override, but still guard
         # against acting on a PR that targets a different base than this run.
@@ -791,6 +843,12 @@ def main() -> None:
 
     ensure_label_exists(LABEL_MANUAL_REVIEW, args.dry_run)
     ensure_label_exists(LABEL_STALE, args.dry_run)
+
+    existing_labels = gh_json("label", "list", "--repo", REPO, "--json", "name")
+    if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
+        print(f"Error: label {LABEL_WIP!r} does not exist in the repo. "
+              f"Check that the label name is correct.", file=sys.stderr)
+        sys.exit(1)
 
     prs = get_open_prs(args.prs)
     print(f"Found {len(prs)} open PR(s) to check.")
