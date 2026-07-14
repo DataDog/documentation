@@ -30,7 +30,7 @@ further_reading:
 
 Logs are essential for security investigations, aiding in threat detection, compliance tracking, and security monitoring. Log Management systems correlate logs with observability data for rapid root cause detection. Log management also enables efficient troubleshooting, issue resolution, and security audits.
 
-Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
+Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
 **Note**: Log monitors have a maximum rolling time window of `2 days`.
 
@@ -73,14 +73,12 @@ As you define the search query, the graph above the search fields updates.
 
 ### Filter with subqueries and Reference Tables
 
-Log monitors support [advanced log search][11], so you can scope alerts to curated datasets:
+Log monitors support [advanced search][11], so you can scope alerts to curated datasets:
 
-- Use **subqueries** to filter monitor results against the results of a secondary query, for example to correlate across log sources or suppress noise from related events.
-- Use **Reference Table** joins to filter or enrich monitor results with external metadata, such as customer tier, region, or a curated list of IP addresses or accounts.
+- Use **subqueries** to filter monitor results against the results of a secondary query. For example, you can correlate across log sources or suppress noise from related events.
+- Use **Reference Table joins** to filter or enrich monitor results with external metadata. For example, you can use customer tier, region, or a curated list of IP addresses or accounts.
 
 To add a subquery or Reference Table join, use the {{< ui >}}Σ Modify Query{{< /ui >}} menu in the monitor configuration. You can also create a monitor directly from an advanced search in the [Log Explorer][4].
-
-For details on building these queries and their limits, see [Advanced Search][11].
 
 ### Set alert conditions
 
@@ -94,9 +92,9 @@ Trigger when the query meets one of the following conditions compared to a thres
 
 #### No data and below alerts
 
-`NO DATA` is a state given when no logs match the monitor query during the timeframe.
+`NO DATA` is a state given when no logs match the monitor query during the time frame.
 
-To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
+To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given time frame across all aggregate groups.
 
 When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
