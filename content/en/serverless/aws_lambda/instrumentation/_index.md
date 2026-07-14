@@ -58,8 +58,8 @@ After you're done with instrumentation and you've set up telemetry collection, y
 
 Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI** — a standalone terminal tool. Use it when you don't want to install an MCP server.
-- **MCP server** — set up from your IDE through a coding assistant such as Claude Code or Cursor.
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
 {{% tab "AI Setup CLI" %}}
