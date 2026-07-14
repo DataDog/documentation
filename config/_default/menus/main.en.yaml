@@ -9953,7 +9953,7 @@ menu:
       identifier: pa_experiments_metrics
       weight: 1
     - name: Sync Metrics from YAML
-      url: experiments/defining_metrics/metric_sync
+      url: experiments/defining_metrics/metric_sync/
       parent: pa_experiments_metrics
       identifier: pa_experiments_metric_sync
       weight: 1

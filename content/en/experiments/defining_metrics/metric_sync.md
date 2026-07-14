@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Experiment metrics define the outcomes you use to evaluate an experiment, such as revenue, conversion rate, or pages viewed. You can create these metrics manually in Datadog, or you can define warehouse-backed metrics in YAML and sync them to Datadog with the Datadog Experiments Metric Sync CLI.
+Experiment metrics define the outcomes you use to evaluate an experiment, such as revenue, conversion rate, or pages viewed. You can create these metrics manually in Datadog, or you can define warehouse-native metrics in YAML and sync them to Datadog with the Datadog Experiments Metric Sync CLI.
 
 Use Metric Sync when you want to:
 
@@ -43,12 +43,12 @@ Install the latest Metric Sync CLI release:
 curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
 ```
 
-The install script detects macOS or Linux, downloads the matching GitHub release archive, verifies the SHA-256 checksum, and installs the `metric-sync` binary to `/usr/local/bin`.
+The install script detects macOS or Linux, downloads the matching GitHub release archive, verifies the SHA-256 checksum, and installs the `metric-sync` binary to `/usr/local/bin`. Depending on your system permissions, installing to `/usr/local/bin` may require `sudo`. To install without elevated permissions, set `INSTALL_DIR` to a directory you own.
 
 To install a specific version or install to a different directory:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | env VERSION=v0.1.0 INSTALL_DIR="$HOME/.local/bin" sh
+curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | env VERSION=<VERSION> INSTALL_DIR="$HOME/.local/bin" sh
 ```
 
 Set Datadog credentials with environment variables:
@@ -68,7 +68,7 @@ export DD_SITE=datadoghq.eu
 
 Create one or more YAML files in your repository. The CLI accepts a file, multiple files, a directory, or multiple directories. When you pass a directory, the CLI recursively discovers YAML files.
 
-The following example defines one warehouse metric source and one simple metric:
+The following example defines one warehouse metric source and one simple metric. The `warehouse_connection_id` is the ID of the warehouse connection configured in Datadog under {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Warehouse Connections{{< /ui >}}. Open the connection details and copy the connection ID from the connection metadata. Datadog supports one warehouse connection per organization.
 
 ```yaml
 schema_version: 1
@@ -136,6 +136,12 @@ metric-sync version
 
 ## YAML reference
 
+### Sync tags and IDs
+
+The `sync_tag` is the ownership boundary for a set of metric definitions. Use a stable `sync_tag` for each repository, team, or metric domain you want to manage independently. For example, a growth team and a checkout team can sync metrics from different repositories by using different `sync_tag` values, such as `growth-metrics` and `checkout-metrics`.
+
+Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations reference warehouse metric sources by `warehouse_metric_source_sync_id` and measures by `measure_sync_id`. The source ID is required because measure IDs are scoped to their warehouse metric source.
+
 ### Top-level fields
 
 | Field | Required | Description |
@@ -143,9 +149,9 @@ metric-sync version
 | `schema_version` | Yes | Must be `1`. |
 | `sync_tag` | Yes | Stable ownership key for this group of metric definitions. All files in one operation must use the same `sync_tag`. |
 | `reference_url` | No | URL to the source repository, runbook, or other reference for the synced metrics. |
-| `warehouse_connection_id` | Required when sources omit it | Default warehouse connection ID for all sources in the file. |
+| `warehouse_connection_id` | Yes | Warehouse connection ID for the organization. |
 | `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties used by metrics. |
-| `metrics` | No | Experiment metrics to create, update, or sync-own. |
+| `metrics` | No | Experiment metrics to create, update, or take ownership of so future syncs manage them. |
 | `options` | No | Sync options such as certification and upgrade behavior. |
 
 `sync_tag` and `sync_id` values must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes.
@@ -154,7 +160,7 @@ metric-sync version
 
 | Field | Default | Description |
 | ----- | ------- | ----------- |
-| `is_certified` | `true` | Marks synced metrics as certified. Setting this to `true` requires the Product Analytics Certified Metrics Write permission. |
+| `is_certified` | `true` | Marks synced metrics as certified. Because the default is `true`, syncing metrics with this option unchanged requires the Product Analytics Certified Metrics Write permission. Set to `false` to skip certification. |
 | `upgrade_mode` | `none` | Controls adoption of existing objects into sync ownership. Supported values are `none`, `by_id`, and `by_name`. |
 | `force_delete` | `false` | Allows destructive deletes when supported by the API. |
 
@@ -168,10 +174,7 @@ metric-sync version
 | `description` | No | Description for the source. |
 | `sql` | Yes | SQL query that returns the timestamp, subject columns, measures, and properties used by metrics. |
 | `timestamp_column` | Yes | Column containing the event or metric timestamp. |
-| `date_partition_column` | No | Optional date partition column used for query optimization. |
-| `warehouse_connection_id` | No | Warehouse connection ID for this source. Overrides the top-level value. |
 | `reference_url` | No | Source-specific reference URL. |
-| `force_rebuild_always` | No | Forces dependent warehouse computations to rebuild when the source syncs. |
 | `subject_types` | Yes | Subject mappings for the source. |
 | `measures` | No | Numeric columns that metrics aggregate. |
 | `properties` | No | Columns that can be used for metric filters and breakouts. |
@@ -194,6 +197,8 @@ Measures and properties share the same field shape:
 | `column_name` | Yes | SQL result column name. |
 | `column_type` | Yes | Column type. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
 | `description` | No | Description for the measure or property. |
+
+The `column_type` is required so Datadog can validate the column and show the correct metric configuration options.
 
 ### Metrics
 
@@ -225,6 +230,67 @@ For `metric_type: simple`, add `simple_metric_aggregation`. For `metric_type: ra
 | `winsor_upper_percentile` | No | Upper winsorization percentile. |
 | `winsor_lower_fixed_value` | No | Lower fixed winsorization value. |
 | `winsor_upper_fixed_value` | No | Upper fixed winsorization value. |
+
+### Ratio metric aggregation
+
+Use `ratio_metric_aggregation` to define a metric as a numerator divided by a denominator. Both `numerator` and `denominator` use the same fields as `simple_metric_aggregation`.
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `numerator` | Yes | Simple metric aggregation used as the numerator. |
+| `denominator` | Yes | Simple metric aggregation used as the denominator. |
+
+```yaml
+ratio_metric_aggregation:
+  numerator:
+    operation: sum
+    measure:
+      warehouse_metric_source_sync_id: checkout_events
+      measure_sync_id: revenue
+  denominator:
+    operation: count
+    measure:
+      warehouse_metric_source_sync_id: checkout_events
+      kind: each_record
+```
+
+### Percentile metric aggregation
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `operation` | Yes | Percentile aggregation operation. Set to `percentile`. |
+| `measure` | Yes | Measure reference. |
+| `percentile` | Yes | Percentile to calculate, such as `95`. |
+| `timeframe_start_value` | No | Start offset for the metric timeframe. |
+| `timeframe_end_value` | No | End offset for the metric timeframe. |
+| `timeframe_unit` | No | Timeframe unit. |
+
+Example percentile metric aggregation:
+
+```yaml
+percentile_metric_aggregation:
+  operation: percentile
+  percentile: 95
+  measure:
+    warehouse_metric_source_sync_id: checkout_events
+    measure_sync_id: page_load_time
+```
+
+### Property filters
+
+Use `property_filters` to restrict a simple aggregation to rows with matching property values:
+
+```yaml
+property_filters:
+  - property:
+      warehouse_metric_source_sync_id: checkout_events
+      property_sync_id: country
+    operator: IS
+    values:
+      - US
+```
+
+Supported operators are `IS` and `IS_NOT`. To reference a property from another sync tag, include `warehouse_metric_source_sync_tag`. To reference an existing Datadog property directly, use `warehouse_metric_property_id`.
 
 ### Measure references
 
