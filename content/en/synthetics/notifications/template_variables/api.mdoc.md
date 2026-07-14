@@ -5,7 +5,7 @@ content_filters:
   option_group_id: synthetics_protocol_options
   label: "Test type"
 - trait_id: synthetics_variables
-  option_group_id: synthetics_variables_options
+  option_group_id: synthetics_variables_api_options
   label: "Variables"
 further_reading:
 - link: "/monitors/manage/"
@@ -41,80 +41,80 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Request" %}
-`synthetics.attributes.variables.extracted.request`
+`synthetics.attributes.result.request`
 : Information about the request
 
-`synthetics.attributes.variables.extracted.request.method`
+`synthetics.attributes.result.request.method`
 : The HTTP method
 
-`synthetics.attributes.variables.extracted.request.body`
+`synthetics.attributes.result.request.body`
 : The request body if set
 
-`synthetics.attributes.variables.extracted.request.headers`
+`synthetics.attributes.result.request.headers`
 : The request headers
 {% /tab %}
 
 {% tab label="Response" %}
-`synthetics.attributes.variables.extracted.response`
+`synthetics.attributes.result.response`
 : Information about the response
 
-`synthetics.attributes.variables.extracted.response.body`
+`synthetics.attributes.result.response.body`
 : The response body as string (truncated if too big)
 
-`synthetics.attributes.variables.extracted.response.bodySize`
+`synthetics.attributes.result.response.bodySize`
 : The size of the full response body
 
-`synthetics.attributes.variables.extracted.response.cacheHeaders`
+`synthetics.attributes.result.response.cacheHeaders`
 : A dictionary of caching-related headers
 
-`synthetics.attributes.variables.extracted.response.cdn`
+`synthetics.attributes.result.response.cdn`
 : The response CDN info if any
 
-`synthetics.attributes.variables.extracted.response.cdn.provider`
+`synthetics.attributes.result.response.cdn.provider`
 : The CDN provider name (for example, `akamai`, `cloudflare`)
 
-`synthetics.attributes.variables.extracted.response.cdn.cache`
+`synthetics.attributes.result.response.cdn.cache`
 : The cache info
 
-`synthetics.attributes.variables.extracted.response.cdn.cache.cached`
+`synthetics.attributes.result.response.cdn.cache.cached`
 : If the data was cached
 
-`synthetics.attributes.variables.extracted.response.cdn.cache.status`
+`synthetics.attributes.result.response.cdn.cache.status`
 : The cache status as provided in associated cache header
 
-`synthetics.attributes.variables.extracted.response.headers`
+`synthetics.attributes.result.response.headers`
 : The response headers
 
-`synthetics.attributes.variables.extracted.response.httpVersion`
+`synthetics.attributes.result.response.httpVersion`
 : The HTTP version
 
-`synthetics.attributes.variables.extracted.response.redirects`
+`synthetics.attributes.result.response.redirects`
 : A list of redirections if any
 
-`synthetics.attributes.variables.extracted.response.redirects.statusCode`
+`synthetics.attributes.result.response.redirects.statusCode`
 : The HTTP status code for the redirect
 
-`synthetics.attributes.variables.extracted.response.redirects.location`
+`synthetics.attributes.result.response.redirects.location`
 : The returned location to redirect to
 
-`synthetics.attributes.variables.extracted.response.statusCode`
+`synthetics.attributes.result.response.statusCode`
 : The response HTTP status code
 {% /tab %}
 
 {% tab label="Timings" %}
-`synthetics.attributes.variables.extracted.timings.authentication`
+`synthetics.attributes.result.timings.authentication`
 : The time spent for the authentication challenge (for example, NTLM)
 
-`synthetics.attributes.variables.extracted.timings.download`
+`synthetics.attributes.result.timings.download`
 : The time spent downloading the response
 
-`synthetics.attributes.variables.extracted.timings.firstByte`
+`synthetics.attributes.result.timings.firstByte`
 : The time spent waiting for the first byte of response to be received
 
-`synthetics.attributes.variables.extracted.timings.redirect`
+`synthetics.attributes.result.timings.redirect`
 : The time spent in HTTP redirections
 
-`synthetics.attributes.variables.extracted.timings.ssl`
+`synthetics.attributes.result.timings.ssl`
 : The duration of the TLS handshake (only when testing an HTTPS endpoint)
 {% /tab %}
 {% /tabs %}
@@ -127,10 +127,10 @@ This section covers three categories of variables:
 
 ### DNS Protocol Variables
 
-`synthetics.attributes.variables.extracted.response.records.type`
+`synthetics.attributes.result.response.records.type`
 : DNS record type
 
-`synthetics.attributes.variables.extracted.response.records.values`
+`synthetics.attributes.result.response.records.values`
 : DNS record values
 
 {% /if %}
@@ -143,75 +143,75 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Certificate" %}
-`synthetics.attributes.variables.extracted.cert`
+`synthetics.attributes.result.cert`
 : SSL certificate information
 
-`synthetics.attributes.variables.extracted.cert.cipher`
+`synthetics.attributes.result.cert.cipher`
 : Cipher suite used (for example, `TLS_AES_128_GCM_SHA256`)
 
-`synthetics.attributes.variables.extracted.cert.extKeyUsage`
+`synthetics.attributes.result.cert.extKeyUsage`
 : Extended key usage data
 
-`synthetics.attributes.variables.extracted.cert.fingerprint`
+`synthetics.attributes.result.cert.fingerprint`
 : SHA-1 digest of the DER encoded certificate
 
-`synthetics.attributes.variables.extracted.cert.fingerprint256`
+`synthetics.attributes.result.cert.fingerprint256`
 : SHA-256 digest of the DER encoded certificate
 
-`synthetics.attributes.variables.extracted.cert.issuer`
+`synthetics.attributes.result.cert.issuer`
 : Information about the certificate authority that signed the certificate
 
-`synthetics.attributes.variables.extracted.cert.issuer.C`
+`synthetics.attributes.result.cert.issuer.C`
 : Country code
 
-`synthetics.attributes.variables.extracted.cert.issuer.ST`
+`synthetics.attributes.result.cert.issuer.ST`
 : Street
 
-`synthetics.attributes.variables.extracted.cert.issuer.L`
+`synthetics.attributes.result.cert.issuer.L`
 : Locality
 
-`synthetics.attributes.variables.extracted.cert.issuer.O`
+`synthetics.attributes.result.cert.issuer.O`
 : Organization
 
-`synthetics.attributes.variables.extracted.cert.issuer.OU`
+`synthetics.attributes.result.cert.issuer.OU`
 : Organizational unit
 
-`synthetics.attributes.variables.extracted.cert.issuer.CN`
+`synthetics.attributes.result.cert.issuer.CN`
 : Common name
 
-`synthetics.attributes.variables.extracted.cert.subject`
+`synthetics.attributes.result.cert.subject`
 : Information about the certificate subject (same fields as issuer)
 
-`synthetics.attributes.variables.extracted.cert.subject.altName`
+`synthetics.attributes.result.cert.subject.altName`
 : All domains for which the certificate is valid (Subject Alternative Name)
 
-`synthetics.attributes.variables.extracted.cert.protocol`
+`synthetics.attributes.result.cert.protocol`
 : SSL/TLS protocol version
 
-`synthetics.attributes.variables.extracted.cert.serialNumber`
+`synthetics.attributes.result.cert.serialNumber`
 : Certificate serial number
 
-`synthetics.attributes.variables.extracted.cert.tlsVersion`
+`synthetics.attributes.result.cert.tlsVersion`
 : TLS version parsed from protocol, if available
 
-`synthetics.attributes.variables.extracted.cert.valid.from`
+`synthetics.attributes.result.cert.valid.from`
 : Certificate validity start date (millisecond-based epoch)
 
-`synthetics.attributes.variables.extracted.cert.valid.to`
+`synthetics.attributes.result.cert.valid.to`
 : Certificate validity end date (millisecond-based epoch)
 
-`synthetics.attributes.variables.extracted.cert.exponent`
+`synthetics.attributes.result.cert.exponent`
 : RSA key exponent (for RSA keys)
 
-`synthetics.attributes.variables.extracted.cert.modulus`
+`synthetics.attributes.result.cert.modulus`
 : RSA key modulus as a hexadecimal string (for RSA keys)
 
-`synthetics.attributes.variables.extracted.ocsp`
+`synthetics.attributes.result.ocsp`
 : OCSP (Online Certificate Status Protocol) information
 {% /tab %}
 
 {% tab label="Timings" %}
-`synthetics.attributes.variables.extracted.timings.handshake`
+`synthetics.attributes.result.timings.handshake`
 : SSL handshake timing
 {% /tab %}
 {% /tabs %}
@@ -226,43 +226,43 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Timings" %}
-`synthetics.attributes.variables.extracted.timings.open`
+`synthetics.attributes.result.timings.open`
 : Time to open connection (in milliseconds)
 
-`synthetics.attributes.variables.extracted.timings.receive`
+`synthetics.attributes.result.timings.receive`
 : Time to receive response
 {% /tab %}
 
 {% tab label="Handshake" %}
-`synthetics.attributes.variables.extracted.handshake.request`
+`synthetics.attributes.result.handshake.request`
 : Handshake request data
 
-`synthetics.attributes.variables.extracted.handshake.request.headers`
+`synthetics.attributes.result.handshake.request.headers`
 : Headers sent during the handshake
 
-`synthetics.attributes.variables.extracted.handshake.response`
+`synthetics.attributes.result.handshake.response`
 : Handshake response data
 
-`synthetics.attributes.variables.extracted.handshake.response.headers`
+`synthetics.attributes.result.handshake.response.headers`
 : Headers received during the handshake
 
-`synthetics.attributes.variables.extracted.handshake.response.statusCode`
+`synthetics.attributes.result.handshake.response.statusCode`
 : HTTP status code of the handshake response
 {% /tab %}
 
 {% tab label="Message" %}
-`synthetics.attributes.variables.extracted.request.message`
+`synthetics.attributes.result.request.message`
 : WebSocket request message
 
-`synthetics.attributes.variables.extracted.response.message`
+`synthetics.attributes.result.response.message`
 : WebSocket response message
 {% /tab %}
 
 {% tab label="Close" %}
-`synthetics.attributes.variables.extracted.close.reason`
+`synthetics.attributes.result.close.reason`
 : Connection close reason
 
-`synthetics.attributes.variables.extracted.close.statusCode`
+`synthetics.attributes.result.close.statusCode`
 : Connection close status code
 {% /tab %}
 {% /tabs %}
@@ -277,17 +277,17 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Request" %}
-`synthetics.attributes.variables.extracted.request.message`
+`synthetics.attributes.result.request.message`
 : UDP request message
 {% /tab %}
 
 {% tab label="Response" %}
-`synthetics.attributes.variables.extracted.response.message`
+`synthetics.attributes.result.response.message`
 : UDP response message
 {% /tab %}
 
 {% tab label="Timings" %}
-`synthetics.attributes.variables.extracted.timings.message`
+`synthetics.attributes.result.timings.message`
 : Message timing
 {% /tab %}
 {% /tabs %}
@@ -302,45 +302,45 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Connection" %}
-`synthetics.attributes.variables.extracted.connectionOutcome`
+`synthetics.attributes.result.connectionOutcome`
 : Connection result (`established`, `refused`, or `timeout`)
 
-`synthetics.attributes.variables.extracted.netpath.routers.ip`
+`synthetics.attributes.result.netpath.routers.ip`
 : Router IP addresses from network path data
 {% /tab %}
 
 {% tab label="Traceroute" %}
-`synthetics.attributes.variables.extracted.traceroute`
+`synthetics.attributes.result.traceroute`
 : Traceroute hop data, available when {% ui %}Track number of network hops (TTL){% /ui %} is enabled in the test
 
-`synthetics.attributes.variables.extracted.traceroute.routers.ip`
+`synthetics.attributes.result.traceroute.routers.ip`
 : Router IP address for the hop
 
-`synthetics.attributes.variables.extracted.traceroute.routers.resolvedHost`
+`synthetics.attributes.result.traceroute.routers.resolvedHost`
 : Resolved hostname for the router IP, if available
 
-`synthetics.attributes.variables.extracted.traceroute.packetsSent`
+`synthetics.attributes.result.traceroute.packetsSent`
 : Number of network packets sent
 
-`synthetics.attributes.variables.extracted.traceroute.packetsReceived`
+`synthetics.attributes.result.traceroute.packetsReceived`
 : Number of packets received
 
-`synthetics.attributes.variables.extracted.traceroute.packetLossPercentage`
+`synthetics.attributes.result.traceroute.packetLossPercentage`
 : Ratio of packet loss (float between 0 and 1)
 
-`synthetics.attributes.variables.extracted.traceroute.latency.min`
+`synthetics.attributes.result.traceroute.latency.min`
 : Minimum latency
 
-`synthetics.attributes.variables.extracted.traceroute.latency.max`
+`synthetics.attributes.result.traceroute.latency.max`
 : Maximum latency
 
-`synthetics.attributes.variables.extracted.traceroute.latency.avg`
+`synthetics.attributes.result.traceroute.latency.avg`
 : Average latency
 
-`synthetics.attributes.variables.extracted.traceroute.latency.stddev`
+`synthetics.attributes.result.traceroute.latency.stddev`
 : Standard deviation
 
-`synthetics.attributes.variables.extracted.traceroute.latency.values`
+`synthetics.attributes.result.traceroute.latency.values`
 : Latency values array
 {% /tab %}
 {% /tabs %}
@@ -355,45 +355,45 @@ This section covers three categories of variables:
 
 {% tabs %}
 {% tab label="Traceroute" %}
-`synthetics.attributes.variables.extracted.traceroute`
+`synthetics.attributes.result.traceroute`
 : Traceroute data (same structure as TCP traceroute)
 {% /tab %}
 
 {% tab label="Ping" %}
-`synthetics.attributes.variables.extracted.request.host`
+`synthetics.attributes.result.request.host`
 : Target host
 
-`synthetics.attributes.variables.extracted.ping`
+`synthetics.attributes.result.ping`
 : Ping result data
 
-`synthetics.attributes.variables.extracted.ping.packetsSent`
+`synthetics.attributes.result.ping.packetsSent`
 : Number of network packets sent
 
-`synthetics.attributes.variables.extracted.ping.packetsReceived`
+`synthetics.attributes.result.ping.packetsReceived`
 : Number of packets received
 
-`synthetics.attributes.variables.extracted.ping.packetLossPercentage`
+`synthetics.attributes.result.ping.packetLossPercentage`
 : Ratio of packet loss (float between 0 and 1)
 
-`synthetics.attributes.variables.extracted.ping.packetSize`
+`synthetics.attributes.result.ping.packetSize`
 : Packet size
 
-`synthetics.attributes.variables.extracted.ping.resolvedIP`
+`synthetics.attributes.result.ping.resolvedIP`
 : Resolved IP address of the pinged host
 
-`synthetics.attributes.variables.extracted.ping.latency.min`
+`synthetics.attributes.result.ping.latency.min`
 : Minimum latency
 
-`synthetics.attributes.variables.extracted.ping.latency.max`
+`synthetics.attributes.result.ping.latency.max`
 : Maximum latency
 
-`synthetics.attributes.variables.extracted.ping.latency.avg`
+`synthetics.attributes.result.ping.latency.avg`
 : Average latency
 
-`synthetics.attributes.variables.extracted.ping.latency.stddev`
+`synthetics.attributes.result.ping.latency.stddev`
 : Standard deviation
 
-`synthetics.attributes.variables.extracted.ping.latency.values`
+`synthetics.attributes.result.ping.latency.values`
 : Latency values array
 {% /tab %}
 {% /tabs %}
@@ -406,35 +406,35 @@ This section covers three categories of variables:
 
 ### gRPC Protocol Variables
 
-`synthetics.attributes.variables.extracted.callType`
+`synthetics.attributes.result.callType`
 : Call type (`unary` or `healthcheck`)
 
-`synthetics.attributes.variables.extracted.timings.rpc`
+`synthetics.attributes.result.timings.rpc`
 : RPC call timing
 
 {% tabs %}
 {% tab label="Health check" %}
-`synthetics.attributes.variables.extracted.response.healthcheck.status`
+`synthetics.attributes.result.response.healthcheck.status`
 : Health check status (`UNKNOWN = 0`, `SERVING = 1`, `NOT_SERVING = 2`, `SERVICE_UNKNOWN = 3`)
 
-`synthetics.attributes.variables.extracted.response.healthcheck.message.service`
+`synthetics.attributes.result.response.healthcheck.message.service`
 : Name of the called service, if provided
 
-`synthetics.attributes.variables.extracted.response.metadata`
+`synthetics.attributes.result.response.metadata`
 : Dictionary of gRPC response metadata
 {% /tab %}
 
 {% tab label="Unary" %}
-`synthetics.attributes.variables.extracted.request.message`
+`synthetics.attributes.result.request.message`
 : gRPC request message
 
-`synthetics.attributes.variables.extracted.request.service`
+`synthetics.attributes.result.request.service`
 : The called service
 
-`synthetics.attributes.variables.extracted.response.message`
+`synthetics.attributes.result.response.message`
 : gRPC response message (as JSON string)
 
-`synthetics.attributes.variables.extracted.response.metadata`
+`synthetics.attributes.result.response.metadata`
 : Dictionary of gRPC response metadata
 {% /tab %}
 {% /tabs %}
@@ -448,41 +448,41 @@ These variables are available for all API test protocols.
 
 {% tabs %}
 {% tab label="Assertions" %}
-`synthetics.attributes.variables.extracted.assertions`
+`synthetics.attributes.result.assertions`
 : List of configured assertions for the test
 
-`synthetics.attributes.variables.extracted.assertions.actual`
+`synthetics.attributes.result.assertions.actual`
 : The evaluated value of the assertion
 
-`synthetics.attributes.variables.extracted.assertions.expected`
+`synthetics.attributes.result.assertions.expected`
 : The expected value configured for the assertion (for example, `1000`)
 
-`synthetics.attributes.variables.extracted.assertions.operator`
+`synthetics.attributes.result.assertions.operator`
 : The assertion operator (for example, `lessThan`)
 
-`synthetics.attributes.variables.extracted.assertions.type`
+`synthetics.attributes.result.assertions.type`
 : The assertion type (for example, `responseTime`)
 
-`synthetics.attributes.variables.extracted.assertions.valid`
+`synthetics.attributes.result.assertions.valid`
 : Whether the assertion passed (boolean)
 {% /tab %}
 
 {% tab label="DNS resolution" %}
-`synthetics.attributes.variables.extracted.dnsResolution.resolvedIp`
+`synthetics.attributes.result.dnsResolution.resolvedIp`
 : The IP address called for the test (available when testing a domain rather than an IP)
 
-`synthetics.attributes.variables.extracted.dnsResolution.server`
+`synthetics.attributes.result.dnsResolution.server`
 : The DNS server used for resolution
 {% /tab %}
 
 {% tab label="Timings" %}
-`synthetics.attributes.variables.extracted.timings.total`
+`synthetics.attributes.result.timings.total`
 : Total time of the test in milliseconds (same as `result.duration`)
 
-`synthetics.attributes.variables.extracted.timings.dns`
+`synthetics.attributes.result.timings.dns`
 : Duration of the DNS lookup in milliseconds (available when testing a domain rather than an IP)
 
-`synthetics.attributes.variables.extracted.timings.tcp`
+`synthetics.attributes.result.timings.tcp`
 : Time to establish the TCP connection in milliseconds (HTTP, TCP, SSL, and WebSocket subtypes)
 {% /tab %}
 {% /tabs %}
@@ -499,43 +499,6 @@ These variables are available for all API test protocols.
 
 {% /if %}
 <!-- END Test info variables -->
-
-<!-- Step details variables -->
-{% if equals($synthetics_variables, "step_details") %}
-
-### Extracted variables
-
-Path: `synthetics.attributes.variables.extracted`
-
-These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available for successful test results and can only be used in Recovery notifications.
-
-**General step properties:**
-
-`synthetics.attributes.variables.extracted.steps.allowFailure`
-: Whether the step is allowed to fail without failing the entire test
-
-`synthetics.attributes.variables.extracted.steps.duration`
-: Step execution duration in milliseconds
-
-`synthetics.attributes.variables.extracted.steps.failure`
-: Failure information object containing `.code` and `.message`
-
-`synthetics.attributes.variables.extracted.steps.id`
-: Unique step identifier
-
-`synthetics.attributes.variables.extracted.steps.isCritical`
-: Whether the step is critical to the test
-
-`synthetics.attributes.variables.extracted.steps.status`
-: Step execution status
-
-`synthetics.attributes.variables.extracted.steps.type`
-: Type of step being executed
-
-{% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
-
-{% /if %}
-<!-- END Step details variables -->
 
 <!-- Variables -->
 {% if equals($synthetics_variables, "local_and_global") %}

@@ -52,69 +52,64 @@
 
     {{ partial "home-header.html" . }}
 
-    <main class="container pb-2">
+    <div class="home-content">
+        {{/* Decorative pastel gradient blobs that form the ambient background of the home page. */}}
+        <div class="home-content__blobs" aria-hidden="true">
+            <div class="home-content__blob home-content__blob--1"></div>
+            <div class="home-content__blob home-content__blob--2"></div>
+            <div class="home-content__blob home-content__blob--3"></div>
+            <div class="home-content__blob home-content__blob--4"></div>
+            <div class="home-content__blob home-content__blob--5"></div>
+        </div>
 
-        <section class="row guides justify-content-center">
-                {{ range $i, $guide := $datafile.guides }}
-                    <div class=" guide-col d-flex flex-column">
-                            <div class="inner-content">
-                            <div class="guide-no">{{ add $i 1}}.</div>
-                        <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
+        <main class="container pb-2">
 
-                            <p class="small">{{ $guide.desc }}</p>
-                            <div class="mt-auto">
-                                    <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
+            <section class="row guides justify-content-center">
+                    {{ range $i, $guide := $datafile.guides }}
+                        <div class=" guide-col d-flex flex-column">
+                                <div class="inner-content">
+                                <div class="guide-no">{{ add $i 1}}.</div>
+                            <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
+
+                                <p class="small">{{ $guide.desc }}</p>
+                                <div class="mt-auto">
+                                        <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
+                                </div>
                             </div>
+
+
                         </div>
 
+                        {{ if ne $i 2 }}
+                        <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
+                            <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M0,0 L100,50 L0,100" />
+                            </svg>
+                        </div>
 
-                    </div>
-
-                    {{ if ne $i 2 }}
-                    <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
-                        <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <path d="M0,0 L100,50 L0,100" />
+                        <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1"  viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0 0 L50 100 L100 0" />
                         </svg>
-                    </div>
-
-                    <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1"  viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M0 0 L50 100 L100 0" />
-                    </svg>
-
-                    {{ end }}
-                {{ end }}
-        </section>
-        {{ range $i, $nav_section := $datafile.nav_sections }}
-
-            <section class="row nav-tiles mb-2">
-
-                    {{ range $i, $tile := $nav_section }}
-
-                        {{ range $i, $section := $tile }}
-                            {{ if $section.name}}
-                                <div class="col-12">
-                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
-                                </div>
-                            {{ end }}
-
-                            {{ range $i, $navtile := $section.navtiles }}
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
-                                        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="{{ $navtile.link | absLangURL }}">
-                                                {{ partial "icon" (dict "name" $navtile.icon "size" "18px" "color" "transparent" )}}
-                                                {{ $navtile.title }}
-                                                <span class="font-regular text-center smaller">{{ $navtile.desc }}</span>
-                                        </a>
-
-                                </div>
-                            {{ end }}
 
                         {{ end }}
                     {{ end }}
             </section>
 
-        {{ end }}
+        </main>
 
-    </main>
+        {{- if eq .Site.Language.Lang "en" }}
+            <div class="home-content__variant-slot" data-variant-resolving>
+                <div data-home-variant-content="new" hidden>
+                    {{ partial "home/products-browse.html" . }}
+                </div>
+                <div data-home-variant-content="legacy" hidden>
+                    {{ partial "home/legacy.html" . }}
+                </div>
+            </div>
+        {{- else }}
+            {{ partial "home/products-browse.html" . }}
+        {{- end }}
+    </div>
 
     {{ partial "footer/footer.html" . }}
 

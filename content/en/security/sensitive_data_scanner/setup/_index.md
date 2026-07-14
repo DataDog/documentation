@@ -27,6 +27,7 @@ Set up Sensitive Data Scanner for each data source you want to scan. Each source
 - **Agent Observability data:** Scan LLM traces, prompts, and completions. Configure scanning from the [Agent Observability Settings page][3].
 - **Cloud storage data:** Scan your Amazon S3 buckets and RDS instances. See [Cloud Storage][2] for setup instructions.
 - **Code repositories:** Detect exposed secrets in your source code. See [Secret Scanning][4] for setup instructions.
+- **AI Guard evaluations:** Scan the conversations AI Guard evaluates for sensitive data such as credentials and PII. Configure scanning rules from the [AI Guard tab][6] of the Sensitive Data Scanner configuration page.
 
 ## Further reading
 
@@ -37,3 +38,4 @@ Set up Sensitive Data Scanner for each data source you want to scan. Each source
 [3]: https://app.datadoghq.com/sensitive-data-scanner/configuration/llm-spans
 [4]: /security/code_security/secret_scanning/
 [5]: /observability_pipelines/processors/sensitive_data_scanner
+[6]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard

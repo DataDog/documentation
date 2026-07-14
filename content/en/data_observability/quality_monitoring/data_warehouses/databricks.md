@@ -53,8 +53,8 @@ Use the full catalog access option for simpler setup. It automatically includes 
 
 
 ```sql
-GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
-GRANT USE_SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
 GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
 ```
 
@@ -64,8 +64,8 @@ GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
 Use the specific tables option for least-privilege access or if you only need to monitor a subset of your data. You must update permissions when adding new tables.
 
 ```sql
-GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
-GRANT USE_SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
+GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
 GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
 ```
 
@@ -74,8 +74,8 @@ GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application
 
 These permissions are needed for the following reasons:
 
-- `GRANT USE_CATALOG` is required to navigate into the catalog and discover schemas.
-- `GRANT USE_SCHEMA` is required to enumerate tables and monitor schema-level health.
+- `GRANT USE CATALOG` is required to navigate into the catalog and discover schemas.
+- `GRANT USE SCHEMA` is required to enumerate tables and monitor schema-level health.
 - `GRANT SELECT` is required for data quality monitoring, such as custom SQL or distribution checks.
 
 ## Next steps

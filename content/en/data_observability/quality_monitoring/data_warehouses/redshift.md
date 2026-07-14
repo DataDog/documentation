@@ -184,6 +184,6 @@ After the initial sync completes, create a [Data Observability monitor][2] to st
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/datasets/settings/integrations
+[1]: https://app.datadoghq.com/data-obs/settings/integrations
 [2]: /monitors/types/data_observability/
 [3]: /integrations/amazon-web-services/
