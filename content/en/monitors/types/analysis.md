@@ -100,7 +100,6 @@ For detailed instructions on alert messaging, see [Notifications][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/create/dataset
+[1]: https://app.datadoghq.com/monitors/create/analysis
 [2]: /monitors/configuration/
 [3]: /monitors/notify/
-
