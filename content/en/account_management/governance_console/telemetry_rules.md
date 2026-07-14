@@ -62,7 +62,7 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 
 After you create a tag visibility rule, Datadog begins tracking compliance across all matching telemetry. Open a rule to see:
 
-- **Compliance score**: The percentage of in-scope spans (or metric datapoints, or log events) that satisfy the rule, calculated over the selected time window. A compliance score of 100% means all matching telemetry is compliant with the rule. A score of 0% means none of the matching telemetry is compliant with the rule.
+- **Compliance score**: The percentage of in-scope spans, metrics, or log events that satisfy the rule, calculated over the selected time window. A compliance score of 100% means all matching telemetry is compliant with the rule. A score of 0% means none of the matching telemetry is compliant with the rule.
 - **Score over time**: A chart showing how compliance has trended. Use the time selector to view the trend over your preferred time frame. This chart isn't available for metrics, and metric history is limited to the last 8 hours.
 - **Non-compliant telemetry**: A table showing individual spans, metrics, or log events that violate the rule, with service name, resource, and additional signal-specific details. Click a row to view more details about the telemetry in question. For rules on spans, click **View in Trace** to open non-compliant spans directly in the trace explorer.
 
