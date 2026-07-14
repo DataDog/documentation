@@ -47,7 +47,7 @@ The following data sources are supported:
 - Service Checks
 - Spans
 
-Published datasets are supported only when every data source they depend on is also supported.
+Published analyses are supported only when every data source they depend on is also supported.
 
 The following data sources are not supported:
 
@@ -56,9 +56,9 @@ The following data sources are not supported:
 - Infrastructure Resources
 
 
-If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
+If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source, for example:
 
-`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
+`Analysis is based on an unsupported datasource for monitoring: Infrastructure Resources`
 
 ## Monitor creation
 
@@ -82,8 +82,8 @@ This allows you to convert your exploratory analysis into an alerting monitor.
 
 Analysis monitors use the same query interface as Notebook Analysis cells.
 
-1. **Select your dataset**: Select from available Notebook Analysis cells.
-2. **Filter your dataset**: Filter your results by column.
+1. **Select your published analysis**: Select from available Notebook Analysis cells.
+2. **Filter your published analysis**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 
 {{< img src="/monitors/monitor_types/analysis/analysis_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
