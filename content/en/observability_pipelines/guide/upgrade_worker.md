@@ -27,7 +27,7 @@ Worker version 2.19.0 gives you access to the following:
 
 #### Enhancements
 
-- A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
+- A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations, and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
 - The Splunk TCP source now supports hot-reloading TLS certificates, so certificate rotations are applied without restarting the Worker.
 - The BYOC Logs destination now supports hot-reloading mTLS files.
 - The Worker now supports a configurable graceful shutdown limit.
@@ -37,10 +37,10 @@ Worker version 2.19.0 gives you access to the following:
 
 - Fixed an issue in the Reduce processor where a timestamp field whose name requires quoting in a path (for example, `"created.at"` or `"event-time"`) had its `_end` companion field silently dropped from the reduced event. The companion field is now placed correctly next to the base field.
 - Fixed a configuration reload issue. If a reload changed a component's type while keeping the same name, such as replacing a source named `X` with a processor named `X`, any downstream processor or destination still reading from `X` now reconnects to the new component.
-- Fixed an issue in the Syslog source (TCP mode) to handle over-length, length-prefixed message split across multiple reads.
-- Fixed an issue in the Logstash source to acknowledge only completed windows instead of sometimes sending a partial acknowledgment. Partial acknowledgments could confuse proxies that expect a single acknowledgment per window and cause errors on subsequent batches.
+- The Syslog source (TCP mode) has been fixed to handle over-length, length-prefixed message split across multiple reads.
+- The Logstash source has been fixed to acknowledge only completed windows instead of sometimes sending a partial acknowledgment.
 - The Logstash source now rejects a window-size frame that arrives before the current window has received all of its advertised events, closing the connection with a fatal decode error instead of continuing.
-- Fixed the Syslog codec silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
+- Fixed the Syslog codec that was silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
 - Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` on inputs with lines of 65,535 bytes or more.
 
 ## Worker version 2.18.0
