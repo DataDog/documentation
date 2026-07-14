@@ -3,87 +3,26 @@ title: Dynamic Configuration
 description: Change application behavior with feature flag configuration instead of code deployments.
 ---
 
-Use **dynamic configuration** when settings or behavior change often and redeploying for every tweak is slow or risky. Product, marketing, and operations teams can update strings, numbers, or JSON-backed settings in Datadog while your application reads the latest values on the next SDK refresh—no new build required.
+A feature flag becomes **dynamic configuration** when you store application settings in its variants instead of code. Rather than hardcoding a value and deploying a new build to change it, you update the variant in Datadog and your application reads the new value on the next SDK refresh. Product, marketing, and operations teams can update strings, numbers, or JSON-backed settings directly, without involving engineering.
 
-## Overview
+## Set up a JSON configuration flag
 
-Dynamic configuration stores behavior in feature flag variants (String, Integer, Number, or JSON). Your code evaluates the flag and applies the variant value; you change behavior by updating variants or targeting rules in Datadog.
+1. Navigate to [**Create Feature Flag**][1].
+2. In the **Variants** section, set the variant type to **JSON**.
+3. Optionally add a [JSON Schema][2] to validate variant values. Datadog recommends adding a schema to catch invalid variant values early.
+4. Add variants with values that conform to the schema, and give each a descriptive name.
 
-## How it works
+{{< img src="feature_flags/dynamic_config_json_variants.png" alt="The Variants section of the create flag form showing a JSON schema and two variants: All items price asc and In stock top rated." style="width:100%;" >}}
 
-1. Define variables in your application that read from a feature flag variant.
-2. Create a flag with the appropriate variant type (String, Integer, Number, or JSON).
-3. Update variant values or targeting rules in Datadog.
-4. The SDK picks up changes on the next configuration refresh.
+## Next steps
 
-For JSON configuration, use JSON Schema validation to help enforce type safety on variant values.
+Once your flag is set up, you can use it as a foundation for more advanced workflows:
 
-## Example: JSON configuration flag
+- **Target by segment**: Use targeting rules to serve different configuration values to different user segments — for example, serving different sort defaults by region or subscription tier.
+- **Roll out gradually**: Use a [progressive rollout][3] to incrementally expose subjects to a new configuration variant, and roll back immediately if something goes wrong.
+- **Run an experiment**: Add an [experiment][4] targeting rule to serve different variants to different groups and measure the impact on your key metrics.
 
-### Create the flag
-
-1. Create a JSON feature flag with a control variant, for example:
-
-```json
-{
-  "headline": "Welcome",
-  "cta_color": "blue",
-  "show_banner": true
-}
-```
-
-2. Optionally add a JSON Schema to validate future variant values.
-
-### Read configuration in code
-
-{{< programming-lang-wrapper langs="javascript,python,go" >}}
-
-{{< programming-lang lang="javascript" >}}
-
-```javascript
-const client = OpenFeature.getClient();
-const config = await client.getObjectValue('homepage-config', {
-  headline: 'Welcome',
-  cta_color: 'blue',
-  show_banner: false,
-});
-
-document.title = config.headline;
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-```python
-import json
-
-default = {"headline": "Welcome", "cta_color": "blue", "show_banner": False}
-raw = client.get_string_value("homepage-config", json.dumps(default), eval_ctx)
-config = json.loads(raw)
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="go" >}}
-
-```go
-defaultVal := map[string]interface{}{
-    "headline": "Welcome", "cta_color": "blue", "show_banner": false,
-}
-config, _ := client.ObjectValue(ctx, "homepage-config", defaultVal, evalCtx)
-```
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
-### Run experiments
-
-Create additional variants with different configuration values and use an **experiment** targeting rule to compare behavior.
-
-## Common use cases
-
-- **Marketing**: Update headline copy, CTA text, or colors without deploying.
-- **AI and ML**: Compare model parameters or feature toggles across variants in experiments.
-- **Operations**: Adjust limits, timeouts, or feature thresholds per environment.
+[1]: https://app.datadoghq.com/feature-flags/create
+[2]: https://json-schema.org/overview/what-is-jsonschema
+[3]: /feature_flags/use_cases/progressive_rollouts/
+[4]: /experiments/
