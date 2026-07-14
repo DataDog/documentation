@@ -24,7 +24,7 @@ Controlled-experiment Using Pre-Experiment Data (CUPED), originally presented in
 
 Standard experiment analysis compares metric data from subjects exposed to a treatment with metric data from subjects in a control group. All data used in that comparison is collected during the experiment. Teams often have information about subjects from before the experiment started, especially historical metric data. CUPED uses this pre-experiment data to control for some of the metric variance that comes from randomly assigning variants to subjects. For example, one variant might have more active subjects than another variant by random chance. CUPED reduces the effect of this random variation by controlling for different activity levels across variants.
 
-CUPED is enabled by default. With CUPED enabled, the displayed lift and metric values may differ from the naive estimates calculated from the raw data. The raw data is unchanged; CUPED changes only the estimator used for analysis. This difference is expected and is the mechanism that drives the reduced variance. You can toggle CUPED in the experiment's [statistical analysis plan][2].
+CUPED is enabled by default. With CUPED enabled, the displayed lift and metric values may differ from the unadjusted estimates calculated from the raw data. The raw data is unchanged; CUPED changes only the estimator used for analysis. This difference is expected and is the mechanism that drives the reduced variance. You can toggle CUPED in the experiment's [statistical analysis plan][2].
 
 ## How CUPED works
 
