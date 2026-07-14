@@ -47,7 +47,13 @@ Live Debugger provides:
 
 ## Requirements and setup
 
-Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires the [Datadog Agent][2] (version 7.49.0 or later), an [APM-instrumented application][3], and [Remote Configuration][4].
+Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
+
+- [Datadog Agent][2] version 7.49.0 or later
+- [Datadog SDK][3] installed
+- [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
+- [Remote Configuration][4] enabled in the Agent
+- (Recommended) [Source Code Integration][28] set up
 
 ### Minimum tracer versions
 
@@ -61,19 +67,153 @@ Live Debugger requires the following minimum tracer versions:
 - [Ruby][9] ≥ 2.35.0
 - [Go][22] ≥ 2.9.0
 
-Older tracer versions might require enabling Live Debugger manually through an environment variable. To enable Live Debugger manually, go to the [manual enablement instructions][25] and select your runtime language.
-
 ### Enabling Live Debugger
 
 <div class="alert alert-info">To use Bits Live Debugger, see the <a href="/tracing/live_debugger/bits-live-debugger/">Bits Live Debugger</a> page for setup instructions.</div>
 
-Live Debugger enablement behavior depends on your service's runtime language and tracer version:
+For Java, Python, .NET, and Node.js services with a recent tracer version and all other requirements met, Live Debugger can be enabled from the [Live Debugger Settings page][26]. For other runtime languages or older tracer versions, see below for the configuration steps required to enable Live Debugger. Disabling Live Debugger for a service and environment can always be done from the [Live Debugger Settings page][26], regardless of runtime language or tracer version.
 
-- **Java, Python, .NET, and Node.js (recent tracer versions)**: No explicit "Enable" step is required. As long as all prerequisites are met and Live Debugger has not been explicitly disabled for the service and environment, Live Debugger is automatically enabled the first time you start a Debug Session. You can start a session through Bits Live Debugger or by manually creating a logpoint.
-- **Ruby and PHP**: Live Debugger must be enabled manually at the tracer level through environment variables before a debug session can be successfully started. See [manual enablement instructions][25].
-- **Go**: Live Debugger requires a configuration at the Datadog Agent level before it can be enabled on the services running on the same host. After the Agent configuration is added, any services on the same host can be enabled either in-app from the [Live Debugger Settings page][26] or manually through environment variables. See the [manual enablement instructions][25] for the Agent configuration steps.
+{{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
-Disabling Live Debugger on a service and environment can always be done in-app from the [Live Debugger Settings page][26], regardless of runtime language or tracer version.
+{{< programming-lang lang="java" >}}
+**Requirement**: [Java tracer][6] version 1.64.0 or higher, running on JDK 8 or higher.
+
+Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+java \
+    -javaagent:dd-java-agent.jar \
+    -jar <YOUR_SERVICE>.jar
+```
+
+**Note**: On JDK 18 and below, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument.
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+**Requirement**: [Python tracer (`ddtrace`)][5] version 4.11.0 or higher.
+
+Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
+
+```shell
+pip install ddtrace
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+ddtrace-run python -m myapp.py
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+**Requirement**: [.NET tracer][7] version 3.46.0 or higher.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+**Requirement**: [Node.js tracer (`dd-trace-js`)][8] version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+Ruby services must be enabled through environment variables. Auto-enablement from the Settings page is not available for Ruby.
+
+**Requirements:**
+
+- [Ruby tracer (`ddtrace`)][9] version 2.35.0 or higher
+- Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
+- A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
+- `RAILS_ENV` or `RACK_ENV` set to `production`
+
+Start your service with the following environment variables set:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+**Note**: Live Debugger initializes on the first HTTP request. Your service must receive at least one request before you can create a logpoint.
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
+PHP services must be enabled through environment variables. Auto-enablement from the Settings page is not available for PHP.
+
+**Requirement**: [PHP tracer (`dd-trace-php`)][10] version 1.21.0 or higher.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+Go services require enabling Live Debugger in both the Datadog Agent and the application.
+
+**Requirements:**
+
+- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
+- [Go tracer][22] version 2.9.0 or higher (or 1.74.6 or higher on the v1 line)
+- Linux kernel 5.17 or higher
+
+**Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
+
+- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][29].
+
+  ```yaml
+  dynamic_instrumentation:
+    enabled: true
+  ```
+
+- **Environment variable**: Add the following to your Datadog Agent manifest:
+
+  ```
+  DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+  ```
+
+- **Helm**: Add the following to your Helm chart:
+
+  ```yaml
+  datadog:
+    dynamicInstrumentationGo:
+      enabled: true
+  ```
+
+**Configure your service**: After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26], or by starting the service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 #### Enablement modes
 
@@ -82,10 +222,6 @@ Each service and environment is in one of three modes on the Live Debugger Setti
 - **Automatic**: Live Debugger has not been set to Enabled or Disabled yet on this service and environment. This setting changes to **Enabled** automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to **Enabled** in advance.
 - **Enabled**: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - **Disabled**: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or tracer version.
-
-#### Manual enablement
-
-Manual configuration steps are required for Ruby, PHP, and Go, as well as for older tracer versions of Java, Python, .NET, and Node.js. You can also choose manual enablement if you prefer to manage enabling and disabling Live Debugger through environment variables. To enable Live Debugger manually, go to the [manual enablement instructions][25] and select your runtime language.
 
 ### Permissions
 
@@ -217,5 +353,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [23]: /tracing/live_debugger/bits-live-debugger/
 [24]: #mode-based-redaction
-[25]: /tracing/live_debugger/enabling/
 [26]: https://app.datadoghq.com/debugging/settings
+[27]: /getting_started/tagging/unified_service_tagging/
+[28]: /integrations/guide/source-code-integration/
+[29]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
