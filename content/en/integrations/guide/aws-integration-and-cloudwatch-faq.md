@@ -15,7 +15,7 @@ Yes. Enable **Collect Custom Metrics** under the **Metric Collection** tab on th
 
 Yes. On the [AWS integration page][1], open the **Metric Collection** tab, expand a CloudWatch namespace, and add metric name filters. Use **Include** to collect only matching Datadog metric names for that namespace, or **Exclude** to collect everything except matching metric names.
 
-For more information on syntax and required metrics, see [Getting Started with AWS][14].
+For more information on syntax and required metrics, see [Getting Started with AWS][14]. To manage metric name filters programmatically, see [Configure AWS metric name filters with the API][15].
 
 ### How do I collect metrics from a service for which Datadog doesn't have an official integration?
 
@@ -126,3 +126,4 @@ Some AWS services do not emit metrics to CloudWatch by default and require extra
 [12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
 [13]: /integrations/guide/monitor-your-aws-billing-details/
 [14]: /getting_started/integrations/aws/#filter-metrics-by-metric-name
+[15]: /integrations/guide/aws-metric-name-filters/
