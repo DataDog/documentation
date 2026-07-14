@@ -880,6 +880,11 @@ def main() -> None:
             print("  Skipping to the next PR.", file=sys.stderr)
 
     print(f"\nActed on {acted} PR(s). Done.")
+    print(
+        "\nView auto-fix PRs:\n"
+        "  https://github.com/DataDog/documentation/pulls"
+        "?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-auto-pr"
+    )
 
 
 if __name__ == "__main__":
