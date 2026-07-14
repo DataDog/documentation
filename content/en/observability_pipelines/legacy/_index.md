@@ -12,11 +12,10 @@ further_reading:
   - link: /observability_pipelines/legacy/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
+private: true
 cascade:
     algolia:
         rank: 70
-private: true
-cascade:
     private: true
 ---
 
