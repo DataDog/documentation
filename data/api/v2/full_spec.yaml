@@ -861,6 +861,15 @@ components:
       schema:
         example: "00000000-0000-0000-0000-000000000000"
         type: string
+    IncidentUserDefinedRoleIDPathParameter:
+      description: The UUID of the incident user-defined role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000002"
+        format: uuid
+        type: string
     Include:
       description: Include relationship data.
       explode: true
@@ -48055,6 +48064,229 @@ components:
       required:
         - display_name
         - value
+      type: object
+    IncidentUserDefinedRoleDataAttributesRequest:
+      description: Attributes for creating an incident user-defined role.
+      properties:
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      required:
+        - name
+        - policy
+      type: object
+    IncidentUserDefinedRoleDataAttributesResponse:
+      description: Attributes of an incident user-defined role.
+      properties:
+        created:
+          description: Timestamp when the role was created.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        modified:
+          description: Timestamp when the role was last modified.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      required:
+        - name
+        - policy
+        - created
+        - modified
+      type: object
+    IncidentUserDefinedRoleDataRequest:
+      description: Data for creating an incident user-defined role.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataAttributesRequest"
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleRelationshipsRequest"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    IncidentUserDefinedRoleDataResponse:
+      description: Data for an incident user-defined role response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataAttributesResponse"
+        id:
+          description: The ID of the user-defined role.
+          example: "00000000-0000-0000-0000-000000000002"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleRelationshipsResponse"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentUserDefinedRoleIncidentTypeRelationship:
+      description: Relationship to an incident type for a user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationshipData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleIncidentTypeRelationshipData:
+      description: Data for the incident type relationship of a user-defined role.
+      properties:
+        id:
+          description: The ID of the incident type.
+          example: "00000000-0000-0000-0000-000000000001"
+          format: uuid
+          type: string
+        type:
+          description: The type of the resource.
+          example: "incident_types"
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    IncidentUserDefinedRoleIncludedItem:
+      description: A single included resource in a user-defined role response.
+      oneOf:
+        - $ref: "#/components/schemas/IncidentUserData"
+        - $ref: "#/components/schemas/IncidentTypeObject"
+    IncidentUserDefinedRoleIncludedResponse:
+      description: Included resources for an incident user-defined role response.
+      items:
+        $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedItem"
+      type: array
+    IncidentUserDefinedRolePatchDataAttributesRequest:
+      description: Attributes for updating an incident user-defined role.
+      properties:
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      type: object
+    IncidentUserDefinedRolePatchDataRequest:
+      description: Data for updating an incident user-defined role.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePatchDataAttributesRequest"
+        id:
+          description: The ID of the user-defined role to update.
+          example: "00000000-0000-0000-0000-000000000002"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - id
+        - type
+      type: object
+    IncidentUserDefinedRolePatchRequest:
+      description: Request for updating an incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePatchDataRequest"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRolePolicy:
+      description: Policy configuration for a user-defined role.
+      properties:
+        is_single:
+          description: Whether this role can only be assigned to one responder at a time.
+          example: true
+          type: boolean
+      required:
+        - is_single
+      type: object
+    IncidentUserDefinedRoleRelationshipsRequest:
+      description: Relationships for creating a user-defined role.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationship"
+      required:
+        - incident_type
+      type: object
+    IncidentUserDefinedRoleRelationshipsResponse:
+      description: Relationships of a user-defined role response.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+        incident_type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
+    IncidentUserDefinedRoleRequest:
+      description: Request for creating an incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataRequest"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleResponse:
+      description: Response with a single incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataResponse"
+        included:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedResponse"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleType:
+      description: Incident user-defined role resource type.
+      enum:
+        - incident_user_defined_roles
+      example: incident_user_defined_roles
+      type: string
+      x-enum-varnames:
+        - INCIDENT_USER_DEFINED_ROLES
+    IncidentUserDefinedRolesDataResponse:
+      description: List of incident user-defined role data objects.
+      items:
+        $ref: "#/components/schemas/IncidentUserDefinedRoleDataResponse"
+      type: array
+    IncidentUserDefinedRolesResponse:
+      description: Response with a list of incident user-defined roles.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRolesDataResponse"
+        included:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedResponse"
+      required:
+        - data
       type: object
     IncidentsResponse:
       description: Response with a list of incidents.
@@ -141915,6 +142147,308 @@ paths:
         operator: AND
         permissions:
           - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-roles:
+    get:
+      description: List all user-defined roles for incidents.
+      operationId: ListIncidentUserDefinedRoles
+      parameters:
+        - description: Filter roles by incident type UUID.
+          in: query
+          name: filter[incident-type]
+          required: false
+          schema:
+            example: "00000000-0000-0000-0000-000000000001"
+            format: uuid
+            type: string
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created: "2024-01-01T00:00:00.000Z"
+                          description: "The technical lead for the incident."
+                          modified: "2024-01-01T00:00:00.000Z"
+                          name: "Tech Lead"
+                          policy:
+                            is_single: true
+                        id: "00000000-0000-0000-0000-000000000002"
+                        type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRolesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_read
+      summary: List incident user-defined roles
+      tags:
+        - Incidents
+      x-menu-order: 57
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new user-defined role for incidents.
+      operationId: CreateIncidentUserDefinedRole
+      parameters:
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "The technical lead for the incident."
+                      name: "Tech Lead"
+                      policy:
+                        is_single: true
+                    relationships:
+                      incident_type:
+                        data:
+                          id: "00000000-0000-0000-0000-000000000001"
+                          type: incident_types
+                    type: incident_user_defined_roles
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedRoleRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        description: "The technical lead for the incident."
+                        modified: "2024-01-01T00:00:00.000Z"
+                        name: "Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Create an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 58
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-roles/{role_id}:
+    delete:
+      description: Delete an existing user-defined role for incidents.
+      operationId: DeleteIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Delete an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 61
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve a single user-defined role for incidents.
+      operationId: GetIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        description: "The technical lead for the incident."
+                        modified: "2024-01-01T00:00:00.000Z"
+                        name: "Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_read
+      summary: Get an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 59
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an existing user-defined role for incidents.
+      operationId: UpdateIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: "Updated Tech Lead"
+                    id: "00000000-0000-0000-0000-000000000002"
+                    type: incident_user_defined_roles
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedRolePatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        modified: "2024-01-02T00:00:00.000Z"
+                        name: "Updated Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Update an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 60
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

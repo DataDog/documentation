@@ -13182,6 +13182,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined role
+      url: /api/latest/incidents/update-an-incident-user-defined-role/
+      identifier: incidents-update-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 60
+    - name: Get an incident user-defined role
+      url: /api/latest/incidents/get-an-incident-user-defined-role/
+      identifier: incidents-get-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 59
+    - name: Delete an incident user-defined role
+      url: /api/latest/incidents/delete-an-incident-user-defined-role/
+      identifier: incidents-delete-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 61
+    - name: Create an incident user-defined role
+      url: /api/latest/incidents/create-an-incident-user-defined-role/
+      identifier: incidents-create-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 58
+    - name: List incident user-defined roles
+      url: /api/latest/incidents/list-incident-user-defined-roles/
+      identifier: incidents-list-incident-user-defined-roles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedRoles
+        unstable:
+          - v2
+        order: 57
     - name: Update an incident user-defined field
       url: /api/latest/incidents/update-an-incident-user-defined-field/
       identifier: incidents-update-an-incident-user-defined-field
