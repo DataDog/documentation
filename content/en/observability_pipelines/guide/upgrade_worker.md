@@ -25,13 +25,6 @@ To upgrade to Worker version 2.19.0:
 
 Worker version 2.19.0 gives you access to the following:
 
-#### New features
-
-- The OpenTelemetry source and destination now support traces pipelines.
-- The Custom Processor is now available in traces pipelines.
-- The Sensitive Data Scanner processor is now available in traces pipelines.
-- Live Capture now supports traces pipelines.
-
 #### Enhancements
 
 - A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
@@ -66,7 +59,6 @@ Worker version 2.18.0 gives you access to the following:
 - The `run` command now supports a `--log-format` flag, also configurable using the `DD_OP_LOG_FORMAT` environment variable, for selecting the format of the Worker's own `stdout` and `stderr` logs. The default `text` preserves the existing human-readable output, and `json` emits structured JSON logs that can be tailed and parsed directly without additional parsing rules.
 - The Tag Cardinality Limit processor now supports a `tracking_mode` option. `exact_fingerprint` tracks tag values exactly using 64-bit fingerprints, which uses less memory than the previous method of storing raw values, and `probabilistic` uses a bloom filter for even lower memory usage in exchange for an occasional false positive. Probabilistic mode accepts a `false_positive_rate` field, which defaults to `0.001` (0.1%).
 - The WebSocket source is available for ingesting logs from a WebSocket endpoint, with support for `none`, `basic`, `bearer`, and `custom` authentication strategies, as well as TLS.
-- Trace pipelines now support the sample processor.
 - A new `generate_metrics` processor routes metrics to any supported metrics destination. Datadog recommends using it over the existing `generate_datadog_metrics` processor, although use of the latter is not affected.
 
 #### Enhancements
