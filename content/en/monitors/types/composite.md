@@ -41,7 +41,7 @@ For configuration purposes, a composite monitor is independent of its constituen
 
 ## Monitor creation
 
-To create a [composite monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Composite*.
+To create a [composite monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Composite{{< /ui >}}.
 
 ### Select monitors and set triggering conditions
 
@@ -60,11 +60,11 @@ You should choose monitors that have the same groups. Otherwise, the UI warns yo
 
 Even if you choose multi alert monitors with the same groups, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#select-monitors-and-set-triggering-conditions).
 
-When you select a second monitor that doesn't cause a warning, the UI populates the **Trigger when** field with the default trigger condition `a && b` and shows the status of the proposed composite monitor.
+When you select a second monitor that doesn't cause a warning, the UI populates the {{< ui >}}Trigger when{{< /ui >}} field with the default trigger condition `a && b` and shows the status of the proposed composite monitor.
 
 #### Set triggering conditions
 
-In the **Trigger when** field, write your desired trigger condition using Boolean operators, referring to individual monitors by their labels in the form `a`, `b`, `c`, etc. Use parentheses to control operator precedence and create more complex conditions.
+In the {{< ui >}}Trigger when{{< /ui >}} field, write your desired trigger condition using Boolean operators, referring to individual monitors by their labels in the form `a`, `b`, `c`, etc. Use parentheses to control operator precedence and create more complex conditions.
 
 The following are all valid trigger conditions:
 
@@ -78,7 +78,7 @@ a || b && !c
 
 ##### No data
 
-`Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings, but in order for a composite to alert on No Data, both the individual monitors and the composite monitor must be set to `Notify` when data is missing.
+{{< ui >}}Do not notify{{< /ui >}} or {{< ui >}}Notify{{< /ui >}} when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' {{< ui >}}Notify no data{{< /ui >}} settings, but in order for a composite to alert on No Data, both the individual monitors and the composite monitor must be set to {{< ui >}}Notify{{< /ui >}} when data is missing.
 
 ##### Other options
 
@@ -86,7 +86,7 @@ For detailed instructions on the advanced alert options (auto resolve, etc.), se
 
 ### Notifications
 
-For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][3] page.
 
 ### API
 

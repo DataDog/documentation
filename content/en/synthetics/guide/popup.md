@@ -25,7 +25,7 @@ Synthetic browser tests automatically handle [JavaScript modals][1]:
 
 ### Basic authentication
 
-For basic authentication pop-ups, specify the associated credentials in your browser test configuration's [**Advanced Options**][2].
+For basic authentication pop-ups, specify the associated credentials in your browser test configuration's [{{< ui >}}Advanced Options{{< /ui >}}][2].
 
 {{< img src="synthetics/guide/popup/http_authentication.png" alt="Basic Auth Pop-up" style="width:90%" >}}
 
@@ -39,7 +39,7 @@ If a pop-up appears at a specific point of your journey, you can record a step t
 
 ### Moving pop-ups
 
-If the time at which these pop-ups appear in a session is not predictable, check with the third party providing the pop-up to see if they can create a rule that prevents the pop-up from appearing during your browser test execution. They can, for example, provide you with a cookie that you can input in the [**Advanced Options** section][2] of your test.
+If the time at which these pop-ups appear in a session is not predictable, check with the third party providing the pop-up to see if they can create a rule that prevents the pop-up from appearing during your browser test execution. They can, for example, provide you with a cookie that you can input in the [{{< ui >}}Advanced Options{{< /ui >}} section][2] of your test.
 
 Alternatively, use one of these methods to ensure your pop-up is closed and your test is able to continue its journey:
   * Create a [JavaScript assertion][4] at the beginning of your browser test to regularly try to close the pop-up:
@@ -60,7 +60,7 @@ Alternatively, use one of these methods to ensure your pop-up is closed and your
     }
     ```
 
-  * Record steps to close the pop-up, add them between all your other browser test steps, and select the [**Allow this step to fail** option][3] for each of them.
+  * Record steps to close the pop-up, add them between all your other browser test steps, and select the [{{< ui >}}Allow this step to fail{{< /ui >}} option][3] for each of them.
 
 ## Further Reading
 

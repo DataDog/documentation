@@ -31,23 +31,23 @@ To change or override the value of an existing reserved attribute field, Datadog
 
 ### Use an Edit Fields processor for basic field assignments
 
-1. Use a **Remove field** processor to drop the reserved attribute from the log.
-2. Use an **Add field** processor to add the reserved attribute back to the log with your correct field name and value assignment.
+1. Use a {{< ui >}}Remove field{{< /ui >}} processor to drop the reserved attribute from the log.
+2. Use an {{< ui >}}Add field{{< /ui >}} processor to add the reserved attribute back to the log with your correct field name and value assignment.
 
-**Note**: In terms of the processor order, the **Add Field** processor should go immediately after the **Remove Field** processor to ensure correct field remapping.
+**Note**: In terms of the processor order, the {{< ui >}}Add Field{{< /ui >}} processor should go immediately after the {{< ui >}}Remove Field{{< /ui >}} processor to ensure correct field remapping.
 
 #### Example
-The **Remove field** processor image below removes the improperly named `service` field from the log.
+The {{< ui >}}Remove field{{< /ui >}} processor image below removes the improperly named `service` field from the log.
 
 {{< img src="observability_pipelines/guide/remap_attributes/remove_field_remap.png" alt="A remove field processor that drops the service tag and an add field processor that adds the service field with the value payment-app" style="width:50%;" >}}
 
-The **Add field** processor image below re-adds the `service` field back with the correct value.
+The {{< ui >}}Add field{{< /ui >}} processor image below re-adds the `service` field back with the correct value.
 
 {{< img src="observability_pipelines/guide/remap_attributes/add_field_remap.png" alt="A remove field processor that drops the service tag and an add field processor that adds the service field with the value payment-app" style="width:50%;" >}}
 
 ### Use the Custom Processor for dynamic or manual assignments
 
-Use the **Custom Processor** to rewrite the reserved attribute's value.
+Use the {{< ui >}}Custom Processor{{< /ui >}} to rewrite the reserved attribute's value.
 
 #### Dynamically assign the value using template syntax to reference another field's value.
 
@@ -149,19 +149,19 @@ Assume these are the correct values you want for the log sent to Datadog:
 
 Do the following to remap the `source` and `service` attributes to the correct values:
 
-1. Use a **Remove field** processor to drop the `source` field`.
-    - Enter `source` in the **Field to drop** field.
+1. Use a {{< ui >}}Remove field{{< /ui >}} processor to drop the `source` field`.
+    - Enter `source` in the {{< ui >}}Field to drop{{< /ui >}} field.
     {{< img src="observability_pipelines/guide/remap_attributes/remove_field_source.png" alt="A remove field processor that removes the source field" style="width:50%;" >}}
-1. Use an **Add field** processor to add the `ddsource` field with the value `akamai`.
-    - Enter `ddsource` in the **Field to add** field.
-    - Enter `akamai` in the **Value to add** field.
+1. Use an {{< ui >}}Add field{{< /ui >}} processor to add the `ddsource` field with the value `akamai`.
+    - Enter `ddsource` in the {{< ui >}}Field to add{{< /ui >}} field.
+    - Enter `akamai` in the {{< ui >}}Value to add{{< /ui >}} field.
     {{< img src="observability_pipelines/guide/remap_attributes/add_field_ddsource.png" alt="An add field processor that adds the ddsource field" style="width:50%;" >}}
-1. Use a **Remove field** processor to drop the `service` field.
-    - Enter `service` in the **Field to drop** field.
+1. Use a {{< ui >}}Remove field{{< /ui >}} processor to drop the `service` field.
+    - Enter `service` in the {{< ui >}}Field to drop{{< /ui >}} field.
     {{< img src="observability_pipelines/guide/remap_attributes/remove_field_service.png" alt="A remove field processor that removes the service field" style="width:50%;" >}}
-1. Use an **Add field** processor to add the `source` field with the value `cdn-logs`.
-    - Enter `source` in the **Field to add** field.
-    - Enter `cdn-logs` in the **Value to add** field.
+1. Use an {{< ui >}}Add field{{< /ui >}} processor to add the `source` field with the value `cdn-logs`.
+    - Enter `source` in the {{< ui >}}Field to add{{< /ui >}} field.
+    - Enter `cdn-logs` in the {{< ui >}}Value to add{{< /ui >}} field.
     {{< img src="observability_pipelines/guide/remap_attributes/add_field_source.png" alt="An add field processor that adds the ddsource field" style="width:50%;" >}}
 
 

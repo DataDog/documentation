@@ -5,6 +5,7 @@ beta: true
 code_lang: windows_iis
 type: multi-code-lang
 code_lang_weight: 6
+site_support_id: rum_server_windows_iis
 aliases:
   - /real_user_monitoring/browser/setup/server/windows_iis
 further_reading:
@@ -12,10 +13,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
-{{< /site-region >}}
 
 {{< callout header="Preview" btn_hidden="true" >}}
 RUM Auto-Instrumentation for Windows IIS is in Preview.
@@ -33,8 +30,8 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
-1. In Datadog, navigate to the **Digital Experience > Manage Applications Page**, click on [**New Application**][4], and select the JavaScript (JS) application type.
-2. Select **Auto-Instrumentation** and **Windows IIS**.
+1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications Page{{< /ui >}}, click on [{{< ui >}}New Application{{< /ui >}}][4], and select the JavaScript (JS) application type.
+2. Select {{< ui >}}Auto-Instrumentation{{< /ui >}} and {{< ui >}}Windows IIS{{< /ui >}}.
 3. Configure your application parameters. See [guidance on configuring sampling][4].
 4. Set up the IIS module using either the GUI installer or command line as described below:
 
@@ -58,7 +55,7 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Updating your RUM application
 
-You can update your RUM application settings at any time. From the [Application Management][3] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
+You can update your RUM application settings at any time. From the [Application Management][3] list, select your RUM application and navigate to the {{< ui >}}SDK Configuration{{< /ui >}} page. Click {{< ui >}}Save Changes{{< /ui >}} after making updates.
 
 ### Sampling rates
 
@@ -109,7 +106,7 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the **Windows Apps & Features** tool.
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the {{< ui >}}Windows Apps & Features{{< /ui >}} tool.
 
 ## Further reading
 

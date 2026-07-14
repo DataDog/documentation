@@ -25,9 +25,9 @@ Tag Indexing Rules operate on groups of metrics identified by name or prefix. Th
 
 After you create a rule, Datadog automatically applies it to all matching metrics.
 
-1. Navigate to [**Metrics → Settings**][3].
-2. Click **+ Create Rule**.
-3. Select **Configure Tag Indexing Rule**.
+1. Navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][3].
+2. Click {{< ui >}}+ Create Rule{{< /ui >}}.
+3. Select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 
 {{< img src="metrics/guide/tag_indexing_rules/configure_tag_indexing_rule.png" alt="The Create Rule dropdown menu in Metrics Settings, showing the Configure Tag Indexing Rule option highlighted." style="width:50%;">}}
 
@@ -47,7 +47,7 @@ Prefix exceptions
 
 {{< img src="metrics/guide/tag_indexing_rules/define_rule_scope.png" alt="The Choose Metrics step showing a rule scoped to http.* with http.client.* excluded as a sub-prefix." style="width:80%;">}}
 
-If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use **Override** behavior to replace previously evaluated rules for the selected metrics.
+If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use {{< ui >}}Override{{< /ui >}} behavior to replace previously evaluated rules for the selected metrics.
 
 ### Step 3: Configure tag behavior
 
@@ -56,8 +56,8 @@ Define how the rule handles tags for metrics in scope.
 #### Merge or override existing configurations
 
 Choose whether this rule builds on or replaces existing tag configurations.
-- **Merge** (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
-- **Override**—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. Select the **Override all other rules that apply to these prefixes** option to enable this behavior.
+- {{< ui >}}Merge{{< /ui >}} (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
+- {{< ui >}}Override{{< /ui >}}—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. Select the {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}} option to enable this behavior.
 
 **Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, suppose Rule 1 uses **Merge** behavior to exclude `host` from `dd.*`, and Rule 2 excludes `app_name` from `dd.payments.*`. If Rule 2 also uses **Merge**, both `host` and `app_name` are dropped from `dd.payments.*` metrics. If Rule 2 uses **Override**, only `app_name` is dropped (Rule 1's effect is overridden for that prefix).
 
@@ -68,8 +68,8 @@ Applies this rule only to metrics submitted after the rule is created. Existing 
 #### Select tags to include or exclude
 
 Choose whether to use an allowlist or a blocklist for tag filtering.
-- **Include tags**—use an allowlist of tags that remain queryable.
-- **Exclude tags**—use a blocklist to define non-queryable tags.
+- {{< ui >}}Include tags{{< /ui >}}—use an allowlist of tags that remain queryable.
+- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags.
 
 Add the tag keys you want to include or exclude.
 
@@ -81,16 +81,16 @@ After you configure tag behavior, the preview shows a list of affected metrics (
 
 ### Limitations
 
-- **Exclude** rules take effect after Datadog observes a tag on a metric.
+- {{< ui >}}Exclude{{< /ui >}} rules take effect after Datadog observes a tag on a metric.
 - Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations.
 
 ## Modify a rule
 
-Navigate to [**Metrics → Settings → Rules**][1] to modify existing rules. After you make changes, Datadog automatically applies them to all matching metrics.
+Navigate to [{{< ui >}}Metrics → Settings → Rules{{< /ui >}}][1] to modify existing rules. After you make changes, Datadog automatically applies them to all matching metrics.
 
 ### Edit a rule
 
-Select a rule to open its details panel, then click **Edit** to change the rule's scope, tag selection, or merge and override behavior.
+Select a rule to open its details panel, then click {{< ui >}}Edit{{< /ui >}} to change the rule's scope, tag selection, or merge and override behavior.
 
 {{< img src="metrics/guide/tag_indexing_rules/edit_rule_configuration.png" alt="The rule details side panel showing the rule type, scope, action, tags, and options, with an Edit button." style="width:80%;">}}
 
@@ -104,7 +104,7 @@ Remove rules that are no longer needed. When you delete a rule, Datadog recomput
 
 ### Override rules for a specific metric
 
-To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select **Configure This Metric Individually**, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
+To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
 
 To reapply rules, restore the metric's default configuration from the same panel.
 
@@ -113,9 +113,9 @@ To reapply rules, restore the metric's default configuration from the same panel
 When multiple rules apply to the same metrics, Datadog evaluates them sequentially. Rule order matters because:
 
 - Rules lower in the evaluation order modify the results of earlier rules
-- **Override** behavior overwrites previous configurations for matching metrics
-- **Merge** behavior builds on existing configurations
-- When multiple rules use **Override** behavior, the last applied rule determines whether the final configuration is in include or exclude mode
+- {{< ui >}}Override{{< /ui >}} behavior overwrites previous configurations for matching metrics
+- {{< ui >}}Merge{{< /ui >}} behavior builds on existing configurations
+- When multiple rules use {{< ui >}}Override{{< /ui >}} behavior, the last applied rule determines whether the final configuration is in include or exclude mode
 
 Reorder rules on the [Rules page][1] to change which rule takes precedence. See the following examples to understand how different orders produce different results.
 
@@ -139,7 +139,7 @@ When multiple rules apply to the same metrics, Datadog evaluates them in order. 
 Starting tags:  
 `host`, `env`, `service`
 
-In this example, Rule 2 uses an **Include** configuration, which acts as an allowlist. Only the listed tags are retained; any tag not listed is dropped.
+In this example, Rule 2 uses an {{< ui >}}Include{{< /ui >}} configuration, which acts as an allowlist. Only the listed tags are retained; any tag not listed is dropped.
 
 #### Order 1: Specific rule first
 
@@ -155,7 +155,7 @@ In this example, Rule 2 uses an **Include** configuration, which acts as an allo
 
 ### Example 3: Exception to a broad rule
 
-Use a broad rule with **Override** behavior to exclude a tag globally, then use a targeted rule with **Merge** behavior to restore the tag for specific metrics.
+Use a broad rule with {{< ui >}}Override{{< /ui >}} behavior to exclude a tag globally, then use a targeted rule with {{< ui >}}Merge{{< /ui >}} behavior to restore the tag for specific metrics.
 
 Starting tags:
 `node`, `env`, `pod`
@@ -166,14 +166,14 @@ Starting tags:
 
 ### Example 4: Multiple exceptions to a broad rule
 
-Layer multiple rules with **Merge** behavior on top of a broad rule with **Override** behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
+Layer multiple rules with {{< ui >}}Merge{{< /ui >}} behavior on top of a broad rule with {{< ui >}}Override{{< /ui >}} behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
 
 Starting tags:
 `team`, `pod`, `env`
 
 {{< img src="metrics/guide/tag_indexing_rules/multiple_exceptions.png" alt="Diagram showing a broad Override rule excluding all tags, then two Merge rules restoring different tags for different prefixes, with metrics matching both prefixes getting both sets of tags restored." style="width:100%;">}}
 
-**Key insight**: Multiple inclusion rules with **Merge** behavior, applied after an exclusion rule with **Override** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
+**Key insight**: Multiple inclusion rules with {{< ui >}}Merge{{< /ui >}} behavior, applied after an exclusion rule with {{< ui >}}Override{{< /ui >}} behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
 
 ## Metrics without Limits™ compatibility
 

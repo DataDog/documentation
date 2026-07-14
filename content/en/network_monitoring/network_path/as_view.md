@@ -22,7 +22,7 @@ The Autonomous Systems (AS) View provides visibility into the network providers 
 
 BGP routing issues and provider-specific problems are difficult to diagnose because they sit outside your direct control. The AS View makes these invisible layers visible, giving you the data to answer questions like "Is this a peering issue?" or "Did our traffic shift to a different transit provider?" without manually tracing routes or parsing BGP tables.
 
-To get started, go to the Network Path Explorer and click [**Autonomous Systems (AS)**][1].
+To get started, go to the Network Path Explorer and click [{{< ui >}}Autonomous Systems (AS){{< /ui >}}][1].
 
 ## Dashboard
 
@@ -70,15 +70,15 @@ Use the filter controls above the list to narrow the results by **AS Number**, *
 
 ## Autonomous System details
 
-Click an Autonomous System in the list to open its details. The detail view includes a **Traffic** tab, a **Neighbors** tab, and a path list.
+Click an Autonomous System in the list to open its details. The detail view includes a {{< ui >}}Traffic{{< /ui >}} tab, a {{< ui >}}Neighbors{{< /ui >}} tab, and a path list.
 
 ### Traffic
 
-The **Traffic** tab shows a relational diagram of traffic flowing from **Upstream** sources through the selected AS to **Downstream** destinations. Hover over a traffic node to view its aggregate paths and number of occurrences, and click on any AS to filter to its paths in the [path list](#path-list).
+The {{< ui >}}Traffic{{< /ui >}} tab shows a relational diagram of traffic flowing from {{< ui >}}Upstream{{< /ui >}} sources through the selected AS to {{< ui >}}Downstream{{< /ui >}} destinations. Hover over a traffic node to view its aggregate paths and number of occurrences, and click on any AS to filter to its paths in the [path list](#path-list).
 
 ### Neighbors
 
-The **Neighbors** tab shows a full visualization of the upstream and downstream Autonomous Systems that neighbor the one you selected. Click on any AS in the graph to filter to its paths in the [path list](#path-list).
+The {{< ui >}}Neighbors{{< /ui >}} tab shows a full visualization of the upstream and downstream Autonomous Systems that neighbor the one you selected. Click on any AS in the graph to filter to its paths in the [path list](#path-list).
 
 ### Path list
 

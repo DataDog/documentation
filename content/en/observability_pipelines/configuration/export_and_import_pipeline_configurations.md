@@ -29,7 +29,7 @@ When building a pipeline that has not been deployed yet, you can set up the pipe
 
 1. Navigate to [Observability Pipelines][1].
 1. [Set up a pipeline][2] by adding your source, processors, and destinations.
-1. After your pipeline has been configured, click **Export Pipeline**.
+1. After your pipeline has been configured, click {{< ui >}}Export Pipeline{{< /ui >}}.
    {{< img src="observability_pipelines/export_pipeline/export_draft_pipeline.png" alt="The export button highlighted in the pipeline UI" style="width:100%;" >}}
 1. Click the copy or download button to export the configuration as JSON or Terraform.
    {{< img src="observability_pipelines/export_pipeline/export_json_modal.png" alt="The export modal showing the pipeline configuration in JSON" style="width:100%;" >}}
@@ -46,7 +46,7 @@ When viewing a deployed pipeline in the UI, you can export its configuration to 
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a deployed pipeline (status can be `active` or `inactive`) to view the configuration.
-1. Click **Export Pipeline**.
+1. Click {{< ui >}}Export Pipeline{{< /ui >}}.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline.png" alt="The export button on a deployed pipeline page" style="width:100%;" >}}
 1. Click the copy or download button to export the configuration as JSON or Terraform.
 1. Update the JSON or Terraform configuration for any additional changes you want to make and then deploy the configuration programmatically.
@@ -60,7 +60,7 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 1. Navigate to [Observability Pipelines][1].
 1. Select a deployed pipeline (status can be either `active` or `inactive`) to view the configuration.
 1. Make changes to your source, destinations, or processors.
-1. Before exiting the pipeline, click **Export Pipeline**.
+1. Before exiting the pipeline, click {{< ui >}}Export Pipeline{{< /ui >}}.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline_edit.png" alt="The export button highlighted on the pipeline edit page" style="width:100%;" >}}
 1. Click the copy or download button to export the configuration as JSON or Terraform.
    - **Note**: After making updates to your pipeline in the UI, the exported configuration includes the latest changes, even if you haven't saved or deployed the changes.
@@ -77,11 +77,11 @@ To help build your pipelines and transfer pipeline configurations across Datadog
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a draft pipeline to view the configuration.
-1. Click on the settings and select **Import Pipeline**
+1. Click on the settings and select {{< ui >}}Import Pipeline{{< /ui >}}
    {{< img src="observability_pipelines/export_pipeline/import_access.png" alt="The settings menu showing Import Pipeline" style="width:100%;" >}}
 1. Choose a pipeline configuration as a JSON file from your computer.
    {{< img src="observability_pipelines/export_pipeline/import_select.png" alt="The import modal giving the option to select a JSON file" style="width:100%;" >}}
-1. Click Import. This replaces your current pipeline configuration with the imported JSON's pipeline configuration.
+1. Click {{< ui >}}Import{{< /ui >}}. This replaces your current pipeline configuration with the imported JSON's pipeline configuration.
 1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8].
 
 ## Further reading

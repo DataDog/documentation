@@ -31,9 +31,9 @@ The following are required to send Akamai DataStream logs to Observability Pipel
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source:
     1. Select your authorization strategy.
-    1. In the **Decoding** dropdown menu, select **Bytes**.
-1. After you set up your destinations and processors, click **Next: Install**.
-1. On the **Install** page, enter the HTTP/S Server listener address, such as `0.0.0.0:9997`.
+    1. In the {{< ui >}}Decoding{{< /ui >}} dropdown menu, select {{< ui >}}Bytes{{< /ui >}}.
+1. After you set up your destinations and processors, click {{< ui >}}Next: Install{{< /ui >}}.
+1. On the {{< ui >}}Install{{< /ui >}} page, enter the HTTP/S Server listener address, such as `0.0.0.0:9997`.
 1. Follow the rest of the instructions on the page to install the Worker based on your platform.
 
 ## Set up Akamai DataStream

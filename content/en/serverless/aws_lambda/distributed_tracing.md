@@ -8,6 +8,9 @@ aliases:
   - /serverless/distributed_tracing/serverless_trace_propagation
   - /serverless/distributed_tracing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 - link: "/tracing/"
   tag: "Documentation"
   text: "Explore Datadog APM"
@@ -121,7 +124,7 @@ Learn more about [tracing through .NET Azure serverless applications][15].
 ## Span Auto-linking
 {{< img src="serverless/lambda/tracing/autolink.png" alt="In Datadog, a DynamoDB trace. At the top, a message reads 'This trace is linked to other traces'. The Span Links tab is open and displays a clickable link to another DynamoDB trace." style="width:100%;" >}}
 
-Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30]. These appear as **Backward** or **Forward**.
+Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [{{< ui >}}Span Links{{< /ui >}} tab][30]. These appear as {{< ui >}}Backward{{< /ui >}} or {{< ui >}}Forward{{< /ui >}}.
 
 _Backward_: The linked span was caused by the trace you are viewing.
 

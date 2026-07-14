@@ -3,7 +3,7 @@ title: Monitors
 description: "Use the Monitors overlay in Cloudcraft to view monitor states for your resources and services, and investigate alerting monitors with Bits Investigation."
 site_support_id: cloudcraft_monitors_overlay
 further_reading:
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Bits Investigation"
 ---
@@ -53,4 +53,4 @@ Click a monitor pin on the diagram to open a side panel listing all monitors ass
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_ai_sre/
+[1]: /bits_ai/bits_investigation/

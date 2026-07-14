@@ -39,6 +39,7 @@ Automation Pipelines is available for:
 - Attack Paths
 - Identity Risks
 - API Security
+- Workload Activity
 
 ## How it works
 

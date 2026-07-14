@@ -28,18 +28,18 @@ Supported languages
 
 The Error Tracking Assistant requires [Source Code Integration][3]. To enable Source Code Integration:
 
-1. Go to **Integrations** and choose **Link Source Code** in the top navbar.
+1. Go to {{< ui >}}Integrations{{< /ui >}} and choose {{< ui >}}Link Source Code{{< /ui >}} in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
 
 {{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="APM Source Code Integration Set Up" style="width:80%" >}}
 
 ### Recommended additional setup
 - To enhance suggestions for Python by providing real production variable values to the Assistant, enroll in the [Python Executional Context Beta][1].
-- To send test cases and fixes to your IDE, click on **Apply in VS Code** on any generated suggestion and follow the guided setup to install the Datadog VS Code Extension.
+- To send test cases and fixes to your IDE, click on {{< ui >}}Apply in VS Code{{< /ui >}} on any generated suggestion and follow the guided setup to install the Datadog VS Code Extension.
 
 ## Getting started
-1. Navigate to [**APM** > **Error Tracking**][4].
-2. Click into any Error Tracking issue to view the new **Generate test & fix** section.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][4].
+2. Click into any Error Tracking issue to view the new {{< ui >}}Generate test & fix{{< /ui >}} section.
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Error Tracking Assistant" style="width:80%" >}}
 

@@ -1,14 +1,23 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API Tests
+  tags:
+  - http
+  - http test
+  - http tests
 aliases:
 - /fr/synthetics/http_test
 - /fr/synthetics/http_check
-description: Simuler des requêtes HTTPS pour surveiller les endpoints d'API publics
-  et internes
+- /fr/synthetics/guide/or-logic-api-tests-assertions
+description: Simulez des requêtes HTTPS pour surveiller les endpoints d'API publics
+  et internes.
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: Blog
-  text: Présentation de la surveillance Synthetic Datadog
-- link: https://learn.datadoghq.com/course/view.php?id=39
+  text: Présentation de la surveillance Datadog Synthetics
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Centre d'apprentissage
   text: Présentation des tests Synthetic
 - link: /getting_started/synthetics/api_test
@@ -20,255 +29,353 @@ further_reading:
 - link: /synthetics/multistep
   tag: Documentation
   text: Exécuter des tests HTTP à plusieurs étapes
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: Documentation
+  text: En savoir plus sur les monitors de test Synthetic
 title: Tests HTTP
 ---
-## Présentation
+## Aperçu {#overview}
 
 Les tests HTTP vous permettent d'envoyer des requêtes HTTP aux endpoints d'API de vos applications pour vérifier les réponses et les conditions définies, y compris le temps de réponse global, le code de statut attendu, l'en-tête ou le contenu du corps.
 
-Les tests HTTP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau. Les tests HTTP peuvent être exécutés selon un programme, à la demande ou directement dans vos [pipelines de CI/CD][3].
+Les tests HTTP peuvent être exécutés à partir d'[emplacements gérés](#select-locations) ou d'[emplacements privés][1] selon votre préférence pour exécuter le test depuis l'extérieur ou à l'intérieur de votre réseau. Les tests HTTP peuvent être exécutés selon un calendrier, à la demande, ou directement dans vos [pipelines CI/CD][2].
 
-## Procédure à suivre
+## Configuration {#configuration}
 
-Après avoir choisi de créer un test `HTTP`, définissez la requête de votre test.
+Vous pouvez créer un test en utilisant l'une des options suivantes :
 
-### Définir la requête
+   - **Créer un test à partir d'un modèle** :
+   
+     1. Survolez l'un des modèles préremplis et cliquez sur **Voir le modèle**. Cela ouvre un panneau latéral affichant les informations de configuration pré-remplies, y compris : Détails du test, Détails de la requête, Assertions, Conditions d'alerte et Paramètres de surveillance. 
+     2. Cliquez sur **+Créer un test** pour ouvrir la page **Définir la requête**, où vous pouvez examiner et modifier les options de configuration pré-remplies. Les champs présentés sont identiques à ceux disponibles lors de la création d'un test à partir de zéro.
+     3. Cliquez sur **Enregistrer les détails** pour soumettre votre test API. <br /><br>
 
-1. Choisissez une valeur pour **HTTP Method** et indiquez l'**URL** à interroger. Les méthodes disponibles sont `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`. Les URL `http` et `https` sont prises en charge.
-2. Enrichissez votre requête HTTP en modifiant les réglages de la section **Advanced Options** (facultatif) :
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vidéo de la page d’atterrissage du test API Synthetics avec modèles" video="true" >}}
+
+  - **Créer un test à partir de zéro** :
+    
+     1. Pour construire un test à partir de zéro, cliquez sur le modèle **+ Commencer à partir de zéro**, puis sélectionnez le `HTTP`type de requête et spécifiez l'**URL** à interroger. 
+        Les méthodes disponibles sont : `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`. Les URL `http` et `https` sont toutes deux prises en charge.
+
+        <div class="alert alert-info">Voir <a href=#advanced-options>Options avancées</a> pour plus d'options.</div>
+
+     2. **Name** your HTTP test.
+
+     3. Add Environment **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
+     
+     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
+
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Définir la requête HTTP" style="width:90%;" >}}
+
+     5. Click **Create Test** to submit your API test.
+
+### Extraits {#snippets}
+
+{{% synthetics-api-tests-snippets %}}
+
+### Options avancées {#advanced-options}
 
    {{< tabs >}}
 
-   {{% tab "Options de requête" %}}
-
-   * **Follow redirects** : sélectionnez cette option pour que le test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
-   * **Timeout** : permet de spécifier le délai (en secondes) avant l'expiration du test.
-   * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
-   * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
+   {{% tab "Options de demande" %}}
+   * **Version HTTP** : Sélectionnez `HTTP/1.1 only`, `HTTP/2 only` ou `HTTP/2 fallback to HTTP/1.1`.
+   * **Suivre les redirections** : Sélectionnez pour que votre test HTTP suive jusqu'à dix redirections lors de l'exécution de la demande.
+   * **Ignorer l'erreur de certificat serveur** : Sélectionnez pour que votre test HTTP continue la connexion même s'il y a des erreurs lors de la validation du certificat SSL.
+   * **Délai d'attente** : Spécifiez la durée en secondes avant que le test ne dépasse le délai d'attente.
+   * **En-têtes de demande** : Définissez les en-têtes à ajouter à votre demande HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
+   * **Cookies** : Définissez les cookies à ajouter à votre demande HTTP. Définissez plusieurs cookies en utilisant le format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
    {{% tab "Authentification" %}}
 
-   * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
-   * **Digest Auth** : ajoutez des identifiants d'authentification Digest.
-   * **NTLM** : ajoutez les informations d'authentification NTLM. NTLMv2 et NTLMv1 sont pris en charge.
-   * **AWS Signature v4** : saisissez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère alors la signature pour votre requête. Cette option repose sur une implémentation de base de SigV4. Les signatures spécifiques (par exemple pour AWS S3) ne sont pas implémentées.
+   * **Certificat client** : Authentifiez-vous via mTLS en téléchargeant votre certificat client (`.crt`) et la clé privée associée (`.key`) au format `PEM`. Vous pouvez utiliser la bibliothèque `openssl` pour convertir vos certificats. Par exemple, convertissez un certificat `PKCS12` en clés privées et certificats au format `PEM`.
 
-  </br>Si vous le souhaitez, vous pouvez spécifier le domaine et la station de travail dans la section **Additional configuration**.  
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
+
+   * **Authentification HTTP Basic** : Ajoutez des identifiants d'authentification HTTP Basic.
+   * **Authentification Digest** : Ajoutez des identifiants d'authentification Digest.
+   * **NTLM** : Ajoutez des identifiants d'authentification NTLM. Prise en charge de NTLMv2 et NTLMv1.
+   * **Signature AWS v4** : Entrez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère la signature pour votre demande. Cette option utilise l'implémentation de base de SigV4. Des signatures spécifiques telles qu'Amazon S3 ne sont pas prises en charge par défaut.
+     Pour les demandes de transfert "Single Chunk" vers les buckets Amazon S3, ajoutez `x-amz-content-sha256` contenant le corps de la demande encodé en sha256 en tant qu'en-tête (pour un corps vide : `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **OAuth 2.0** : Choisissez entre l'octroi de l'identifiant client ou d'un mot de passe de propriétaire de ressource et entrez une URL de jeton d'accès. Selon votre sélection, entrez un identifiant client et un secret, ou un nom d'utilisateur et un mot de passe. Dans le menu déroulant, sélectionnez une option pour soit envoyer le jeton API en tant qu'en-tête d'authentification de base, soit envoyer les identifiants client dans le corps. En option, vous pouvez fournir des informations supplémentaires telles que l'audience, la ressource et le périmètre (ainsi que l'identifiant client et le secret, si vous avez sélectionné **Mot de passe de propriétaire de ressource**).
 
    {{% /tab %}}
 
    {{% tab "Paramètres de requête" %}}
 
-   * **Encode parameters** : ajoutez le nom et la valeur des paramètres de requête nécessitant un encodage.
+   * **Encoder les paramètres** : Ajoutez le nom et la valeur des paramètres de requête qui nécessitent un encodage.
 
    {{% /tab %}}
 
-   {{% tab "Corps de requête" %}}
+   {{% tab "Corps de la demande" %}}
 
-   * **Body type** : sélectionnez le type du corps de requête (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded` ou `None`) que vous voulez ajouter à votre requête HTTP.
-   * **Request body** : ajoutez le contenu du corps de votre requête HTTP. La taille du corps de la requête ne doit pas dépasser 50 Ko.
-
-   {{% /tab %}}
-
-   {{% tab "Certificat" %}}
-
-   * **Ignore server certificate error** : sélectionnez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
-   * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client (`.crt`) et la clé privée associée (`.key`) au format `PEM`. Vous pouvez utiliser la bibliothèque `openssl` pour convertir vos certificats. Par exemple, vous pouvez convertir un certificat `PKCS12` en certificat et clé privée au format `PEM`.
-
-     ```
-     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-     ```
-
+   * **Type de corps** : Sélectionnez le type de corps de la demande (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` ou `None`) que vous souhaitez ajouter à votre demande HTTP.
+   * **Corps de la demande** : Ajoutez le contenu de votre corps de demande HTTP.
+       * Le corps de la demande est limité à une taille maximale de 50 kilooctets pour `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
+       * Le corps de la demande est limité à un fichier de 3 mégaoctets pour `application/octet-stream`.
+       * Le corps de la demande est limité à trois fichiers de 3 mégaoctets chacun pour `multipart/form-data`.
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
 
-   * **Proxy URL** : indiquez l'URL du proxy que la requête HTTP doit utiliser (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
-   * **Proxy header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
+   * **URL du proxy** : Spécifiez l'URL du proxy par lequel la demande HTTP doit passer (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **En-tête du proxy** : Ajoutez des en-têtes à inclure dans la demande HTTP au proxy.
 
    {{% /tab %}}
 
    {{% tab "Confidentialité" %}}
 
-   * **Do not save response body** : sélectionnez cette option pour désactiver l'enregistrement du corps de la réponse au moment de l'exécution. Cela peut être utile pour s'assurer qu'aucune donnée sensible ne figure dans les résultats de test. Utilisez cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour découvrir d'autres recommandations de sécurité, consultez [Sécurité de la surveillance Synthetic][1].
+   * **Ne pas enregistrer le corps de la réponse** : Sélectionnez cette option pour empêcher le corps de la réponse d'être enregistré à l'exécution et pour tronquer le message d'erreur des assertions JavaScript échouées. Cela aide à garantir qu'aucune donnée sensible n'est affichée dans vos résultats de test, mais cela peut rendre le dépannage des échecs plus difficile. Pour des recommandations complètes en matière de sécurité, voir [Sécurité des données de surveillance synthétique][1].
 
 
-[1]: /fr/security/synthetics
+[1]: /fr/data_security/synthetics
+   {{% /tab %}}
+
+   {{% tab "Javascript" %}}
+
+Définissez des variables pour vos tests d'API HTTP avec JavaScript :
+
+{{< img src="synthetics/api_tests/http_javascript.png" alt="Définissez un test d'API HTTP avec JavaScript." style="width:90%;" >}}
+
+<div class="alert alert-info">Les capacités JavaScript ne sont pas prises en charge pour les tests API dans les emplacements privés Windows.</div>
+
    {{% /tab %}}
 
    {{< /tabs >}}
 
-<br/>
+### Définissez des assertions {#define-assertions}
 
-3. **Donnez un nom** à votre test HTTP.
+Les assertions définissent quel est le résultat de test attendu. Après avoir cliqué sur **Tester l'URL**, des assertions de base sur `response time`, `status code` et `header` `content-type` sont ajoutées en fonction de la réponse obtenue. Vous devez définir au moins une assertion pour que votre test soit surveillé.
 
-4. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test HTTP. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][4].
+<div class="alert alert-info">Les sections d'assertions d'en-tête, de corps et de JavaScript ne servent qu'à définir des assertions. Elles ne peuvent pas être utilisées pour effectuer des requêtes HTTP supplémentaires.</div>
 
-{{< img src="synthetics/api_tests/http_test_config.png" alt="Définir une requête HTTP" style="width:90%;" >}}
-
-Cliquez sur **Test URL** pour essayer la configuration de requête. Un aperçu de la réponse s'affiche sur le côté droit de votre écran.
-
-### Définir des assertions
-
-Les assertions définissent un résultat de test escompté. Après avoir cliqué sur **Test URL**, les assertions de base pour `response time`, `status code` et `header` `content-type` sont ajoutées en fonction de la réponse obtenue. Vous devez définir au moins une assertion à surveiller pour votre test.
+{{< tabs >}}
+{{% tab "Assertions de réponse" %}}
 
 | Type          | Opérateur                                                                                               | Type de valeur                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][5], [`xpath`][6] | _Chaîne_ <br> _[Regex][7]_ <br> _Chaîne_, _[Regex][7]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][7]_                                      |
-| response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
+| corps          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _Chaîne_ <br> _[Regex][6]_ |
+| en-tête        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][6]_                                      |
+| temps de réponse | `is less than`                                                                                         | _Entier (ms)_                                                  |
+| code d'état   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Entier_ <br> _[Regex][6]_                                                     |
 
-Les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
+Les tests HTTP peuvent décompresser les corps avec les en-têtes suivants `content-encoding` : `br`, `deflate`, `gzip` et `identity`.
 
-Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **Nouvelle assertion** ou en cliquant directement sur l'aperçu de la réponse :
 
-{{< img src="synthetics/api_tests/assertions_http.png" alt="Définir des assertions pour déterminer la réussite ou l'échec de votre test HTTP" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_http.png" alt="Définissez des assertions pour que le test HTTP réussisse ou échoue sur" style="width:90%;" >}}
+
+Pour appliquer une logique `OR` dans une assertion, utilisez le comparateur `matches regex` pour définir une regex comportant plusieurs valeurs attendues, par exemple `(200|302)`. Par exemple, vous pouvez vouloir que votre test HTTP réussisse lorsque le serveur doit répondre avec un code d'état `200` ou `302`. L'assertion `status code` réussit si le code d'état est 200 ou 302. Vous pouvez également ajouter une logique `OR` sur une assertion `body` ou `header` avec le comparateur `matches regex`.
 
 Si un test ne contient pas d'assertion sur le corps de la réponse, la charge utile du corps est abandonnée et le temps de réponse associé à la requête est renvoyé, dans la limite du délai d'expiration défini par le worker Synthetic.
 
-Si un test contient une assertion sur le corps de la réponse et que le délai d'expiration est atteint, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
+Le corps de la réponse n'est renvoyé que si vous avez ajouté des assertions sur son contenu et que ces assertions ont échoué. Si un test contient une assertion sur le corps de la réponse et réussit, la charge utile du corps est supprimée et seul un extrait des 50 premiers caractères du corps de la réponse est affiché.
 
-### Sélectionner des emplacements
+Si un test contient une assertion sur le corps de la réponse et que la limite de temps est atteinte, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
 
-Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test HTTP. Les tests HTTP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau.
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 
-### Indiquer la fréquence du test
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+
+Utilisez des assertions JavaScript lorsque les assertions de réponse standard ne répondent pas à vos besoins de validation. La surveillance synthétique utilise la [bibliothèque d'assertions Chai][20], qui fournit `dd.expect()`, `dd.should` et `dd.assert()` pour des styles d'assertion flexibles.
+
+Lors de la manipulation des réponses JSON, utilisez `JSON.parse(dd.response.body)` pour analyser le corps de la réponse avant d'accéder à ses propriétés. Ceci est requis pour toutes les méthodes d'assertion (`dd.assert()`, `dd.expect()` et `dd.should`) lors de la validation des données JSON.
+
+{{< img src="synthetics/api_tests/JS_assertion.png" alt="Assertion JavaScript pour le test d'API HTTP" style="width:90%;" >}}
+
+<div class="alert alert-info">
+  <ul>
+    <li>Les capacités JavaScript ne sont pas prises en charge pour les tests d'API dans des emplacements privés Windows.</li>
+    <li>Si le message d'erreur d'une assertion JavaScript échouée peut inclure des données sensibles, sous <strong>Options avancées</strong> > <strong>Confidentialité</strong>, activez <strong>Ne pas enregistrer le corps de la réponse</strong>. Cela tronque le message d'erreur d'assertion.</li>
+  </ul>
+</div>
+
+#### Utilisation de dd.assert() {#using-ddassert}
+
+Utilisez `dd.assert()` pour la syntaxe d'assertion traditionnelle :
+
+Par exemple, pour affirmer qu'un champ `status.code` est l'une des valeurs autorisées :
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+// Assert that the status code is 200, 210, 320, or 330
+dd.assert.include([200, 210, 320, 330], response.status.code);
+{{< /code-block >}}
+
+Exemple de réponse :
+
+```json
+{
+  "status": {
+    "code": 200,
+    "message": "Success"
+  }
+}
+```
+
+Cette assertion :
+- Analyse le corps de la réponse JSON
+- Vérifie que `status.code` est inclus dans le tableau des valeurs autorisées (200, 210, 320 ou 330)
+
+Le test **réussit** parce que `status.code` est `200`, ce qui est inclus dans le tableau des valeurs autorisées.
+
+Pour plus d'informations sur `assert.include()`, consultez la [documentation de Chai assert.include()][21].
+
+#### Utilisation de dd.expect() {#using-ddexpect}
+
+Utilisez `dd.expect()` pour les assertions avec validation de propriété imbriquée.
+
+Par exemple, pour affirmer qu'un champ `status.indicator` correspond à l'une des valeurs attendues :
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+const regex = /^(major|critical|minor|none)$/;
+
+dd.expect(response)
+  .to.have.nested.property('status.indicator')
+  .that.matches(regex);
+{{< /code-block >}}
+
+Exemple de réponse :
+
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+Cette assertion :
+- Analyse le corps de la réponse JSON
+- Valide que la propriété imbriquée `status.indicator` existe
+- Vérifie que la valeur correspond au motif regex (l'un des : `major`, `critical`, `minor` ou `none`)
+
+Avec le regex `/^(major|critical|minor|none)$/`, le test **réussit** parce que `status.indicator` est `"none"`, ce qui correspond au motif.
+
+Avec le regex `/^(major|critical|minor)$/`, le test **échoue** parce que `"none"` n'est pas inclus dans les valeurs autorisées.
+
+Pour plus d'informations sur `expect()`, consultez la [documentation de Chai expect()][22].
+
+#### Utilisation de dd.should {#using-ddshould}
+
+Utilisez `dd.should` pour écrire des assertions avec une syntaxe en langage naturel :
+
+Par exemple, pour affirmer qu'un champ `status.indicator` existe et est égal à une valeur spécifique :
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+response.status.should.exist();
+const indicator = response.status.indicator;
+indicator.should.equal('none');
+{{< /code-block >}}
+
+Exemple de réponse :
+
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+
+Cette assertion :
+- Analyse le corps de la réponse JSON
+- Vérifie que la propriété `status` existe
+- Extrait la valeur de l'indicateur dans une variable
+- Vérifie que `status.indicator` est égal à `"none"`
+
+Le test **réussit** parce que `status` existe et que `status.indicator` est `"none"`.
+
+Pour plus d'informations sur `should()`, consultez la [documentation de Chai should()][23].
+
+[20]: https://www.chaijs.com/api/
+[21]: https://www.chaijs.com/api/assert/#method_include
+[22]: https://www.chaijs.com/guide/styles/#expect
+[23]: https://www.chaijs.com/guide/styles/#should
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Sélectionnez les emplacements {#select-locations}
+
+Sélectionnez les **Emplacements** à partir desquels exécuter votre test HTTP. Les tests HTTP peuvent être exécutés à partir d'emplacements gérés et [privés][1] selon votre préférence pour exécuter le test de l'extérieur ou de l'intérieur de votre réseau.
+
+{{% managed-locations %}}
+
+### Spécifiez la fréquence des tests {#specify-test-frequency}
 
 Les tests HTTP peuvent être exécutés :
 
-* **Selon un programme**, pour vous assurer que vos utilisateurs peuvent toujours accéder à vos principaux endpoints. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test HTTP.
-* [**Dans vos pipelines de CI/CD**][3], pour déployer votre code sans crainte de dégrader l'expérience de vos utilisateurs.
-* **À la demande**, afin d'exécuter les tests au moment le plus opportun pour votre équipe.
+* **Selon un calendrier** pour garantir que vos points de terminaison les plus importants sont toujours accessibles à vos utilisateurs. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test HTTP.
+* [**Dans vos pipelines CI/CD**][2] pour commencer à livrer sans craindre que du code défectueux n'impacte l'expérience de vos clients.
+* **À la demande** pour exécuter vos tests quand cela a le plus de sens pour votre équipe.
 
-### Définir des conditions d'alerte
+{{% synthetics-alerting-monitoring %}}
 
-Définissez des conditions d'alerte afin de spécifier les circonstances dans lesquelles vous souhaitez qu'un test échoue et déclenche une alerte.
+{{% synthetics-downtimes %}}
 
-#### Règle d'alerte
+## Un clic {#one-click}
 
-Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if your test fails for X minutes from any n of N locations`, une alerte se déclenche uniquement si les deux conditions suivantes se vérifient :
+La création de tests API suggère des endpoints du [Catalog][17] et des tests API existants pour préremplir votre formulaire de test avec des options pertinentes.
+Utilisez des sources de données Datadog existantes telles que les traces APM, la découverte des endpoints du Catalog et les Synthetic tests similaires créés par des utilisateurs.
 
-* Au moins un emplacement a donné lieu à un échec (au moins une assertion a échoué) au cours des *X* dernières minutes
-* À un moment au cours des *X* dernières minutes, au moins *n* emplacements ont donné lieu à un échec.
+Commencez à taper dans le champ **URL** du test API pour obtenir des suggestions d'endpoints ou de Synthetic tests similaires dans Synthetic Monitoring :
 
-#### Nouvelle tentative rapide
+   {{< img src="synthetics/api_tests/api-one-click.png" alt="Test API HTTP montrant une recherche GET pour un test API existant" style="width:90%;" >}}
 
-Votre test peut déclencher `X` nouvelles tentatives après `Y` ms en cas d'échec. Cet intervalle peut être personnalisé en fonction de vos préférences en matière d'alertes.
+Ensuite, sélectionnez une suggestion pour préremplir votre configuration de test (options de requête et en-têtes, authentification et variables) :
 
-La disponibilité d'un emplacement est calculée pour chaque évaluation (quels que soient les résultats du dernier test avant l'évaluation). La disponibilité totale est calculée selon les conditions d'alerte configurées. Les notifications envoyées se basent sur la disponibilité totale.
+   {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Sélectionner" style="width:90%;" >}}
 
-### Informer votre équipe
+{{% synthetics-variables %}}
 
-Votre test envoie une notification selon les [conditions d'alerte](#definir-des-conditions-d-alerte) définies au préalable. Référez-vous à cette section pour définir les conditions et le message à envoyer à vos équipes.
+### Utilisez des variables {#use-variables}
 
-1. [Tout comme pour les monitors][8], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
+Vous pouvez utiliser les [variables globales définies sur la page **Settings**][11] dans l'URL, les options avancées et les assertions de vos tests HTTP.
 
-2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][9] standard ainsi que les [variables conditionnelles][10] suivantes :
+Pour afficher votre liste de variables, tapez `{{` dans le champ souhaité :
 
-    | Variable conditionnelle       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | S'affiche lorsque le test envoie une alerte.                                            |
-    | `{{^is_alert}}`            | S'affiche lorsque le test n'envoie pas d'alerte.                                          |
-    | `{{#is_recovery}}`         | S'affiche lorsque le test est rétabli depuis un état d'alerte.                             |
-    | `{{^is_recovery}}`         | S'affiche lorsque le test n'est pas rétabli depuis un état d'alerte.                           |
+{{< img src="synthetics/api_tests/http_use_variable.mp4" alt="Utilisation de variables dans un test HTTP" video="true" width="100%" >}}
 
-3. Indiquez une fréquence de **renvoi du message de notification** en cas d'échec d'un test. Si vous ne souhaitez pas renvoyer de notification en cas d'échec, définissez l'option sur `Never renotify if the monitor has not been resolved`.
+## Échec du test {#test-failure}
 
-Cliquez sur **Save** pour enregistrer et démarrer votre test.
+Un test est considéré comme `FAILED` s'il ne satisfait pas une ou plusieurs assertions ou si la requête a échoué prématurément. Dans certains cas, le test peut échouer sans tester les assertions contre l'endpoint.
 
-## Variables
+Pour une liste complète des codes d'erreur HTTP et SSL, consultez [API Testing Errors][12].
 
-### Créer des variables locales
+## Permissions {#permissions}
 
-Vous pouvez créer des variables locales en cliquant sur **Create Local Variable** en haut à droite du formulaire de configuration de votre test. Vous pouvez définir leurs valeurs sur l'un des builtins disponibles ci-dessous :
+Par défaut, seuls les utilisateurs ayant les [Datadog Admin et Datadog Standard roles][13] peuvent créer, modifier et supprimer des Synthetic HTTP tests. Pour obtenir un accès de création, d'édition et de suppression aux Synthetic HTTP tests, mettez à niveau votre utilisateur vers l'un de ces deux [default roles][13].
 
-`{{ numeric(n) }}`
-: Génère une chaîne numérique de `n` chiffres.
+Si vous utilisez la [fonctionnalité de rôle personnalisé][14], ajoutez votre utilisateur à tout rôle personnalisé qui inclut les permissions `synthetics_read` et `synthetics_write`.
 
-`{{ alphabetic(n) }}`
-: Génère une chaîne alphabétique de `n` lettres.
+### Restreindre l'accès {#restrict-access}
 
-`{{ alphanumeric(n) }}`
-: Génère une chaîne alphanumérique de `n` caractères.
+{{% synthetics_grace_permissions %}}
 
-`{{ date(n, format) }}`
-: Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.
-
-`{{ timestamp(n, unit) }}` 
-: Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
-
-### Utiliser des variables
-
-Les [variables globales définies sur la page `Settings`][11] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
-
-Pour afficher votre liste de variables, tapez `{{` dans le champ souhaité :
-
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests API" video="true" width="90%" >}}
-
-## Échec de test
-
-Un test est considéré comme `FAILED` s'il ne répond pas à une ou plusieurs de ses assertions ou si la requête a échoué prématurément. Dans certains cas, le test peut en effet échouer sans que les assertions n'aient pu être comparées à l'endpoint.
-
-Voici la liste des erreurs concernées :
-
-`CONNREFUSED`
-: Aucune connexion n'a pu être établie, en raison d'un refus explicite de la machine cible.
-
-`CONNRESET`
-: La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.
-
-`DNS`
-: L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, ou configuration des entrées DNS incorrecte.
-
-`INVALID_REQUEST` 
-: La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
-
-`SSL`
-: La connexion SSL n'a pas pu être établie. [Pour en savoir plus, consultez la page relative aux erreurs][12].
-
-`TIMEOUT`
-: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreurs `TIMEOUT` peuvent se produire :
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la durée de la requête a dépassé le délai d'expiration défini (par défaut, 60 secondes).
-  Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si rien d'autre que `Total response time` ne s'affiche, cela signifie que l'expiration est survenue durant la résolution DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée du test (requête + assertions) a atteint la durée maximale (60,5 secondes).
-
-`MALFORMED_RESPONSE` 
-: Le serveur à distance a répondu avec une charge utile non conforme aux spécifications HTTP.
-
-## Autorisations
-
-Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][13] peuvent créer, modifier et supprimer des tests HTTP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][13]. 
-
-Si vous utilisez des [rôles personnalisés][14], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
-
-### Restreindre l'accès
-
-Les clients qui ont configuré des [rôles personnalisés][15] sur leur compte peuvent utiliser la fonctionnalité de restriction d'accès.
-
-Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne puissent pas accéder à un test HTTP. Lors de la création du test HTTP, choisissez les rôles (en plus des utilisateurs) auxquels vous souhaitez attribuer des autorisations de lecture/écriture pour votre test.
-
-{{< img src="synthetics/settings/restrict_access.png" alt="Définir des autorisations pour votre test" style="width:70%;" >}}
-
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/api/v1/synthetics/#get-all-locations-public-and-private
-[2]: /fr/synthetics/private_locations
-[3]: /fr/synthetics/cicd_integrations
-[4]: /fr/synthetics/search/#search
-[5]: https://restfulapi.net/json-jsonpath/
-[6]: https://www.w3schools.com/xml/xpath_syntax.asp
-[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[8]: /fr/monitors/notify/#notify-your-team
-[9]: https://www.markdownguide.org/basic-syntax/
-[10]: /fr/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[1]: /fr/synthetics/private_locations
+[2]: /fr/synthetics/cicd_integrations
+[3]: /fr/synthetics/search/#search
+[7]: /fr/monitors/notify/#configure-notifications-and-automations
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /fr/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /fr/synthetics/guide/synthetic-test-monitors
 [11]: /fr/synthetics/settings/#global-variables
-[12]: /fr/synthetics/api_tests/errors/#ssl-errors
+[12]: /fr/synthetics/api_tests/errors/
 [13]: /fr/account_management/rbac/
 [14]: /fr/account_management/rbac#custom-roles
 [15]: /fr/account_management/rbac/#create-a-custom-role
+[16]: /fr/synthetics/api_tests/errors/#http-errors
+[17]: /fr/api_catalog

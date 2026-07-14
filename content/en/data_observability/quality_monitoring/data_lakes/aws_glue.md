@@ -22,7 +22,8 @@ If you're [using the Iceberg framework in AWS Glue][5], you can see metadata fro
 Before you begin, make sure you have:
 
 - An AWS account with Glue Iceberg tables you want to monitor.
-- The [Datadog AWS integration][1] configured for the account.
+- An [AWS account connected in Datadog][1].
+  - Log forwarding is not required for Data Observability.
 - IAM permissions to modify the Datadog role's policies.
 - (Optional) AWS Lake Formation access if you use it to manage table permissions.
 
@@ -217,8 +218,8 @@ After the sync completes, your tables appear in the [Data Catalog][3]. You can a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon-web-services/
-[2]: https://app.datadoghq.com/datasets/settings/integrations
-[3]: https://app.datadoghq.com/datasets/catalog?integration=awsglue%2Fdatabase_account
+[2]: https://app.datadoghq.com/data-obs/settings/integrations
+[3]: https://app.datadoghq.com/data-obs/catalog?integration=awsglue%2Fdatabase_account
 [4]: https://docs.aws.amazon.com/glue/latest/dg/security_iam_id-based-policy-examples.html
 [5]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html
 [6]: /integrations/amazon-glue/

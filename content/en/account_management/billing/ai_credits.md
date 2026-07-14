@@ -7,10 +7,10 @@ further_reading:
 - link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
-- link: "/bits_ai/bits_ai_dev_agent/"
+- link: "/bits_ai/bits_code/"
   tag: "Documentation"
   text: "Bits Code"
-- link: "/bits_ai/bits_ai_sre/"
+- link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Bits Investigation"
 - link: "/actions/agents/"
@@ -75,6 +75,15 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 
 To manage permissions, go to [**Organization Settings > Roles**][7], select a role, and toggle the relevant permission.
 
+## Monitor usage
+
+| Product | Metric | Description |
+|---|---|---|
+| [Bits Chat][1] | `datadog.estimated_usage.bits_chat.ai_credits` | AI Credits consumed by Bits Chat. |
+| [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
+| [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
+| [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
+
 ## Availability
 
 AI Credits are available to all Datadog customers except:
@@ -87,9 +96,9 @@ AI Credits are available to all Datadog customers except:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_chat/
-[2]: /bits_ai/bits_ai_dev_agent/
-[3]: /bits_ai/bits_ai_sre/
+[2]: /bits_ai/bits_code/
+[3]: /bits_ai/bits_investigation/
 [4]: /actions/agents/
 [5]: https://www.datadoghq.com/pricing/?site=us&product=ai-credits#products
-[6]: https://app.datadoghq.com/account/login?next=%2Fbilling%2Fbill-overview%3Fdetail_bd%3Dai_credits
+[6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles

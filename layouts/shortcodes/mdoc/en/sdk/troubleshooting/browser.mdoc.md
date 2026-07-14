@@ -51,6 +51,8 @@ If data is being sent, you should see network requests targeting `api/v2/rum` (t
 
 {% img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake" /%}
 
+After the data reaches the intake, availability in the Datadog UI depends on your retention filter configuration. If the session is retained, events typically appear in the RUM Explorer within a few seconds after the [retention decision][17] is made. Otherwise, it may take a few minutes.
+
 ## RUM cookies
 
 The RUM Browser SDK relies on cookies to store session information and follow a [user session][7] across different pages. The cookies are first-party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the RUM Browser SDK:
@@ -153,3 +155,4 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols
 [16]: /real_user_monitoring/#technical-limitations
+[17]: /real_user_monitoring/rum_without_limits/retention_filters

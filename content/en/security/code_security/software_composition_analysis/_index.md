@@ -26,6 +26,9 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: "https://www.datadoghq.com/blog/smart-vulnerability-remediation/"
+    tag: "Blog"
+    text: "Take a smarter approach to vulnerability remediation with Datadog"
   - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
     tag: "Blog"
     text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
@@ -54,7 +57,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 ## Vulnerability database
 
-Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research. 
+Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research.
 
 Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
 
@@ -85,9 +88,9 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 
 ### View findings by repository
 
-The [Repositories Explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
-* The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA
-* The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
+The [Repositories Explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze {{< ui >}}Library Vulnerabilities{{< /ui >}} and {{< ui >}}Library Catalog{{< /ui >}} results from SCA scoped to your chosen branch and commit.
+* The {{< ui >}}Library Vulnerabilities{{< /ui >}} tab contains the vulnerable library versions found by Datadog SCA
+* The {{< ui >}}Library Catalog{{< /ui >}} tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
 Recommended steps for remediating detected vulnerabilities can be found in the side panel for each vulnerability in SCA. Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
 
@@ -98,6 +101,47 @@ Every row represents a unique library and version combination. Each combination 
 Click on a library with a vulnerability to open a side panel that contains information about remediation steps.
 
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
+
+### Remediation
+
+Datadog SCA supports using coding agents and [Bits Code][31] to apply fixes for vulnerable libraries. You can also use [Bits Code Automation][32] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
+
+<div class="alert alert-info">SCA remediations in Bits Code require internet access to apply library upgrades. To configure internet access, see <a href="/bits_ai/bits_code/setup/#configure-internet-access">Configure internet access</a>.</div>
+
+To view and remediate vulnerabilities:
+
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}}][11], and select {{< ui >}}Libraries (SCA){{< /ui >}}.
+2. Select a vulnerability to open a side panel with details about the finding and the affected library.
+3. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}
+4. Select either Bits Code or another coding agent. With Bits Code, you can choose between:
+   - [{{< ui >}}Single fix{{< /ui >}}](#single-fix): Generates a fix for this vulnerable library
+     - If a fix has already been generated, select {{< ui >}}View fix and create PR{{< /ui >}} to view the existing [remediation session](#remediation-session-details).
+   - [{{< ui >}}Create automation{{< /ui >}}](#create-automation): Opens a pop-up modal where you can create a [Bits Code automation][32]
+
+#### Single fix
+
+Use **Single fix** to open a Bits Code session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+
+View all Bits Code sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][33].
+
+#### Create automation
+
+Use **Create automation** to create a [Bits Code automation][32] to generate fixes for SCA vulnerabilities automatically, either as they are found or on a schedule.
+
+Selecting this option opens an {{< ui >}}Automate with Bits{{< /ui >}} modal with the {{< ui >}}Remediate SCA vulnerabilities{{< /ui >}} action pre-filled. Complete the form, including specifying a trigger and output, then click {{< ui >}}Create Automation{{< /ui >}}. See [Automations][32] to learn more about actions, triggers, and outputs.
+
+View all Bits Code automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][34].
+
+#### Remediation session details
+
+Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
+
+- The original security finding and proposed code change
+- An explanation of how and why Bits Code generated the fix
+- CI results (if enabled) to validate the patch is safe to deploy
+- Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
+
+You can also view all remediation sessions on [**Sessions**][33].
 
 ### Automatically block risky changes with PR Gates
 
@@ -113,7 +157,7 @@ PR Gates marks a PR check as failed only if the developer introduces a new viola
 
 The [Library Inventory][8] provides visibility into the third-party libraries detected across your codebase. Datadog collects this information from:
 
-* **Static SCA**, which identifies all libraries referenced in your repositories, and  
+* **Static SCA**, which identifies all libraries referenced in your repositories, and
 * **Runtime SCA**, which detects libraries that are actually loaded and used by your services at runtime.
 
 Use the Library Inventory to understand which dependencies you rely on, where they are used, and whether they contain known vulnerabilities or license risks.
@@ -149,11 +193,11 @@ You can create a bidirectional ticket in Jira or ServiceNow directly from any fi
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
 
 <div class="alert alert-info">Muting is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services cannot be muted.</div>
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Vulnerabilities Explorer][11] to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [Vulnerabilities Explorer][11] to review muted findings.
 
 ### Library vulnerability context in APM
 
@@ -250,3 +294,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [28]: /security/code_security/guides/configuration/
 [29]: /security/code_security/software_composition_analysis/library_inventory/#export-a-software-bill-of-materials-sbom
 [30]: /security/code_security/software_composition_analysis/configuration/
+[31]: /bits_ai/bits_code
+[32]: /bits_ai/bits_code/automations
+[33]: https://app.datadoghq.com/code
+[34]: https://app.datadoghq.com/code/automations

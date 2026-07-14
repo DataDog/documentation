@@ -289,7 +289,7 @@ Checks
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /getting_started/agent/autodiscovery/
-[10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
+[10]: https://github.com/DataDog/integrations-core/blob/3d9e6ebfad2629c559c2174ec7a533e6d62d1ae6/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
 [11]: /agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics

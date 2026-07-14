@@ -1,10 +1,9 @@
 {{ define "main" }}
 {{- $dot := . -}}
-<!-- Grab all files from the custom_rules directory-->
-{{ $filepath := printf "content/en/infrastructure/resource_catalog/" }}
-{{ $files := readDir $filepath }}
-<!-- check to ensure file exist-->
-{{ if (fileExists $filepath)}}
+<!-- Grab all resource pages from the current section (mounted from _vendor: content/en/infrastructure/resource_catalog/) -->
+{{ $files := .CurrentSection.RegularPages }}
+<!-- check to ensure pages exist-->
+{{ if $files }}
   <div class="row">
     <div class="col-12 order-1">
         <h1 id="pagetitle">{{ .Title }}</h1>
@@ -31,12 +30,12 @@
     <div class="whatsnext mb-3">
       <!-- For each section, loop over and display the links that include the key. ex: AWS, GCP...   -->
       {{ range $files }}
-      {{ if (findRE $lowerKey .Name) }}
+      {{ if (findRE $lowerKey .File.BaseFileName) }}
       <div class="list-group">
-        <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='/infrastructure/resource_catalog/{{ strings.TrimSuffix ".md" .Name }}/'>
+        <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='{{ .RelPermalink }}'>
           <span class="w-100 d-flex justify-content-between">
               <span class="text">
-                <code>{{ strings.TrimSuffix ".md" .Name }}</code>
+                <code>{{ .File.BaseFileName }}</code>
               </span>
           </span>
           {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}

@@ -36,6 +36,7 @@ When a job in your CI pipeline fails:
 
 To use automatic job retries:
 - CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
+- For GitHub Actions, the [Datadog GitHub App][8] must have the **Actions: Write** permission.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
 - Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
 - To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
@@ -100,3 +101,4 @@ A failed job is not retried when:
 [5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[8]: /continuous_integration/pipelines/github/#configure-a-github-app

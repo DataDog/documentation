@@ -16,16 +16,16 @@ Open external links directly in the Datadog app instead of in the browser by set
 
 1. Copy the Datadog link and paste it in an application that does not shorten or rewrite links, such as Notes or Mail.
 
-2. Long press the copied link and tap **Open in Datadog**.
+2. Long press the copied link and tap {{< ui >}}Open in Datadog{{< /ui >}}.
 
 **Note**: You only need to do this **once** to set the Datadog mobile app as the default for opening Datadog links.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Open **Settings** > **Apps** > **Datadog**.
+1. Open {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}}.
 
-2. Tap **Open by default** and then tap **In the app**. Confirm verified links to set Datadog as your default.
+2. Tap {{< ui >}}Open by default{{< /ui >}} and then tap {{< ui >}}In the app{{< /ui >}}. Confirm verified links to set Datadog as your default.
 
 For more information about default apps on Android, see [Set or clear default app][7]
 
@@ -38,8 +38,8 @@ For more information about default apps on Android, see [Set or clear default ap
 
 Open Datadog links from Slack directly in the Datadog app.
 
-1. On the Slack app of your mobile device, navigate to your profile > **Preferences** > **Advanced**.
-2. Enable **In-App Browser** under **Web Browser** settings.
+1. On the Slack app of your mobile device, navigate to your profile > {{< ui >}}Preferences{{< /ui >}} > {{< ui >}}Advanced{{< /ui >}}.
+2. Enable {{< ui >}}In-App Browser{{< /ui >}} under {{< ui >}}Web Browser{{< /ui >}} settings.
 
 ## Focus mode
 
@@ -50,15 +50,15 @@ To configure a focus mode to include or exclude the Datadog Mobile App:
 
 {{< img src="mobile/shortcut_configurations/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS Settings screen showing Focus options">}}
 
-1. Open **Settings** > **Focus**.
+1. Open {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Focus{{< /ui >}}.
 
    {{< img src="mobile/shortcut_configurations/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen">}}
 
-2. Tap a **Focus** or create your own.
+2. Tap a {{< ui >}}Focus{{< /ui >}} or create your own.
 
    {{< img src="mobile/shortcut_configurations/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen showing options to configure notification preferences">}}
 
-3. Tap **Allow Notifications From** and add the Datadog Mobile App. Alertnatively, tap **Silence Notifications From** and add the Datadog Mobile App.
+3. Tap {{< ui >}}Allow Notifications From{{< /ui >}} and add the Datadog Mobile App. Alertnatively, tap {{< ui >}}Silence Notifications From{{< /ui >}} and add the Datadog Mobile App.
 
 For more information, see [Set up a Focus on iPhone][5].
 
@@ -69,15 +69,15 @@ For more information, see [Set up a Focus on iPhone][5].
 
 {{< img src="mobile/shortcut_configurations/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Android Settings screen showing Modes and Routines option">}}
 
-1. Open **Settings** > **Modes and Routines**.
+1. Open {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Modes and Routines{{< /ui >}}.
 
    {{< img src="mobile/shortcut_configurations/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Modes and Routines settings screen">}}
 
-2. Tap a **Mode** or create your own.
+2. Tap a {{< ui >}}Mode{{< /ui >}} or create your own.
 
    {{< img src="mobile/shortcut_configurations/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Mode configuration screen showing focus options">}}
 
-3. Tap **Stay focused** > **Restrict app usage** and add the Datadog Mobile App > **Done**. Alternatively, tap **Do not disturb** and add the Datadog Mobile App > **Done**.
+3. Tap {{< ui >}}Stay focused{{< /ui >}} > {{< ui >}}Restrict app usage{{< /ui >}} and add the Datadog Mobile App > {{< ui >}}Done{{< /ui >}}. Alternatively, tap {{< ui >}}Do not disturb{{< /ui >}} and add the Datadog Mobile App > {{< ui >}}Done{{< /ui >}}.
 
 For more information, see [Limit interruptions with Modes][6].
 
@@ -96,7 +96,7 @@ Long-press the app icon to display a quick-action sheet of your top five [Freque
 
 {{< img src="mobile/shortcut_configurations/iphone_search_doc.png" alt="iPhone home screen search showing Datadog dashboard results" style="width:40%;">}}
 
-**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the **Search in App** button to open the search query in the in-app Dashboard List page.
+**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the {{< ui >}}Search in App{{< /ui >}} button to open the search query in the in-app Dashboard List page.
 
 ## Shortcuts and Siri suggestions
 
@@ -142,8 +142,8 @@ For more information, read the [Apple Handoff documentation][3].
 
 To enable notifications for the Apple Watch when paired with your iPhone:
 1. Open the Watch app on your mobile device.
-2. Tap on **Notifications**.
-3. Toggle on **Notifications Indicator**. 
+2. Tap on {{< ui >}}Notifications{{< /ui >}}.
+3. Toggle on {{< ui >}}Notifications Indicator{{< /ui >}}. 
 
 Apple does not support sending notifications to both your iPhone and Apple Watch at the same time. If your iPhone is locked or asleep, notifications are delivered only to your Apple Watch. To always receive notifications on your iPhone, open the Watch App and disable notifications.
 

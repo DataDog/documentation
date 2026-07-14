@@ -45,16 +45,16 @@ See the [split array example](#split-array-example) for a more detailed example.
 
 To set up this processor:
 
-Click **Manage arrays to split** to add an array to split or edit an existing array to split. This opens a side panel.
+Click {{< ui >}}Manage arrays to split{{< /ui >}} to add an array to split or edit an existing array to split. This opens a side panel.
 
 - If you have not created any arrays yet, enter the array parameters as described in the [Add a new array](#add-a-new-array) section below.
-- If you have already created arrays, click on the array's row in the table to edit or delete it. Use the search bar to find a specific array, and then select the array to edit or delete it. Click **Add Array to Split** to add a new array.
+- If you have already created arrays, click on the array's row in the table to edit or delete it. Use the search bar to find a specific array, and then select the array to edit or delete it. Click {{< ui >}}Add Array to Split{{< /ui >}} to add a new array.
 
 ### Add a new array
 
 1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Enter the path to the array field. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-split-array) below.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Split array example
 

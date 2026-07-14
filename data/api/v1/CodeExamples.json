@@ -288,6 +288,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2780500284",
+      "description": "Create a new dashboard with hostmap DDSQL widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2882802132",
       "description": "Create a new dashboard with hostmap infra widget"
     },
@@ -350,6 +355,11 @@
       "group": "dashboards",
       "suffix": "_2843286292",
       "description": "Create a new dashboard with logs_transaction_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_153558925",
+      "description": "Create a new dashboard with logs_transaction_stream list_stream widget and version"
     },
     {
       "group": "dashboards",
@@ -728,6 +738,26 @@
     }
   ],
   "CreateLogsPipeline": [
+    {
+      "group": "logs_pipelines",
+      "suffix": "_3996915493",
+      "description": "Create a pipeline with Array Map Processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2402034476",
+      "description": "Create a pipeline with Array Map Processor using arithmetic sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1185292896",
+      "description": "Create a pipeline with Array Map Processor using category sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_104735144",
+      "description": "Create a pipeline with Array Map Processor with preserve_source false returns \"OK\" response"
+    },
     {
       "group": "logs_pipelines",
       "suffix": "_1248402480",
