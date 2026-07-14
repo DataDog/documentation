@@ -116,6 +116,23 @@ TEST_PRS = [
         ),
     },
     {
+        # Auto-fixable, but marked WIP — resolve_pr_conflicts.py should skip it
+        # and leave a comment telling the author to add astro-reorg-help-requested.
+        # Uses a different file from the other specs to avoid line-level collisions.
+        "branch": f"{BRANCH_PREFIX}-wip",
+        "file": "content/en/getting_started/learning_center.md",
+        "old": "Access hands-on courses and tutorials to learn Datadog platform features, best practices, and implementation strategies.",
+        "new": "Access hands-on courses and tutorials to learn Datadog platform features, best practices, and deployment strategies.",
+        "commit": "Test PR: minor wording tweak in learning center description (WIP)",
+        "title": "[TEST] WIP PR with reorg conflict (should be skipped by resolver)",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Auto-fixable reorg conflict, "
+            "but marked WIP so the resolver should leave a comment and skip it.\n\n"
+            "Do not merge."
+        ),
+        "extra_labels": ["WORK IN PROGRESS"],
+    },
+    {
         # Unresolvable (Case 2): reorg-classified, but the base changed the same
         # line at the hugo/ path, so git am --3way can't replay it. Falls back
         # to the astro-reorg-manual-review label.
@@ -158,6 +175,41 @@ TEST_PRS = [
             "old": "how to write and edit content",
             "new": "how to author and edit content",
         },
+    },
+    {
+        # Auto-fixable: a new page plus a nav-menu link to it, where nobody else
+        # touched that menu line. Exercises the "wrong-path addition + menu edit"
+        # case where both changes can be replayed cleanly by the auto-fix.
+        # Uses a different menu insertion point ("Agent" heading) than the
+        # unresolvable spec below ("Essentials" heading) to avoid line collisions.
+        "branch": f"{BRANCH_PREFIX}-new-page-nav-autofixable",
+        "add_file": {
+            "path": "content/en/getting_started/example_auto_fix/_index.md",
+            "content": (
+                "---\n"
+                "title: Example Auto Fix\n"
+                "---\n\n"
+                "Placeholder page for exercising the astro reorg tooling.\n"
+            ),
+        },
+        "file": "config/_default/menus/main.en.yaml",
+        "old": "    - name: Agent\n      identifier: getting_started_agent",
+        "new": (
+            "    - name: Example Auto Fix\n"
+            "      identifier: example_auto_fix_heading\n"
+            "      url: /getting_started/example_auto_fix/\n"
+            "      weight: 500000\n"
+            "    - name: Agent\n"
+            "      identifier: getting_started_agent"
+        ),
+        "commit": "Test PR: add a page and a nav menu link (no base conflict)",
+        "title": "[TEST] New page with nav link, no base conflict (auto-fixable)",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Adds a new page and "
+            "a nav menu entry linking to it. The base branch does not touch that "
+            "menu line, so the auto-fix should replay both changes cleanly.\n\n"
+            "Do not merge."
+        ),
     },
     {
         # Unresolvable (Case 3): a new page plus a nav-menu link to it, where
@@ -381,6 +433,9 @@ def create_pr(spec: dict, base: str) -> str | None:
     if push.returncode != 0:
         die(f"push failed: {push.stderr.strip()}")
 
+    label_args: list[str] = ["--label", LABEL, "--label", DO_NOT_MERGE_LABEL]
+    for extra in spec.get("extra_labels", []):
+        label_args += ["--label", extra]
     pr = gh(
         "pr", "create",
         "--repo", REPO,
@@ -388,8 +443,7 @@ def create_pr(spec: dict, base: str) -> str | None:
         "--base", base,
         "--title", spec["title"],
         "--body", spec["body"],
-        "--label", LABEL,
-        "--label", DO_NOT_MERGE_LABEL,
+        *label_args,
     )
     if pr.returncode != 0:
         die(f"gh pr create failed: {pr.stderr.strip()}")
