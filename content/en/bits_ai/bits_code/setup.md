@@ -48,7 +48,10 @@ Set up Bits Code for one of the [supported source code providers][11].
 1. Install the [GitLab Source Code integration][1]. For full installation and configuration steps, see the [GitLab Source Code integration guide][2].
 1. Verify that the GitLab [service account][3] meets the following requirements:
    - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
-   - The service account's personal access token must have the following [scopes][6]: `api`, `write_repository`, and `read_user`.
+   - The service account's [personal access token][7] must have the following [scopes][6]: `api`, `write_repository`, and `read_user`. 
+
+   <div class="alert alert-warning">It's not possible to modify the scopes of an existing GitLab personal access token. If you have already set up the GitLab Source Code integration using a personal access token that does not have the scopes above, create an additional one. When doing so, be sure to add all other scopes needed by other Datadog products using the GitLab Source Code integration.</div>
+
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code
 [2]: /integrations/gitlab-source-code/
@@ -56,6 +59,8 @@ Set up Bits Code for one of the [supported source code providers][11].
 [4]: https://docs.gitlab.com/user/permissions/#default-roles
 [5]: https://docs.gitlab.com/user/permissions/#groups
 [6]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
+[7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -88,14 +93,15 @@ To balance safety and automation, you can configure auto-push behavior in [Datad
 ### Configure custom instructions
 
 Bits Code ingests custom instruction files from your repository, including:
+
+- `AGENTS.md`
+- `CLAUDE.md`
+- `agent.md`
 - `.cursorrules`
 - `.windsurfrules`
 - `copilot-instructions.md`
-- `CLAUDE.md`
-- `AGENTS.md`
-- `agent.md`
 
-You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
+You can also define global custom instructions that apply to all Bits Code sessions in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
 ## Environment setup
 
