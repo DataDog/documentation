@@ -39,7 +39,7 @@ Worker version 2.19.0 gives you access to the following:
 - Fixed a configuration reload issue. If a reload changed a component's type while keeping the same name, such as replacing a source named `X` with a processor named `X`, any downstream processor or destination still reading from `X` now reconnects to the new component.
 - The Syslog source (TCP mode) has been fixed to handle an over-length, length-prefixed message split across multiple reads.
 - The Logstash source has been fixed to acknowledge only completed windows instead of sometimes sending a partial acknowledgment.
-- The Logstash source now rejects a window-size frame that arrives before the current window has received all of its advertised events, closing the connection with a fatal decode error instead of continuing.
+- The Logstash source now rejects a batch of events that arrives before all events in the current batch has been received, closing the connection with a fatal decode error instead of continuing.
 - Fixed the Syslog codec that was silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
 - Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` that had inputs with lines of 65,535 bytes or more.
 
