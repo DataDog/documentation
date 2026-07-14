@@ -81,9 +81,9 @@ Select an issue to open its details, which include:
   - **View name**: The page or view where the issue occurs.
 - **Impact and priority**
   - **Severity**: The impact on the user's experience: High, Medium, or Low.
-  - **Reach**: The number of affected users in the last 30 days, when Datadog can calculate it.
+  - **Reach**: The number of affected users in the last 30 days. Datadog hides this field when it cannot calculate reach for an issue.
 - **Investigation and management**
-  - **Status**: The triage state of the issue: New, Reviewed, Resolved, or Ignored.
+  - **Status**: The triage state of the issue: New, Reviewed, Resolved, or Ignored. Status appears in the top-right corner of the issue card.
   - **Session list and steps breakdown**: Example sessions tied to a [session replay][1] you can watch, with a step-by-step breakdown of what the user did.
   - **Related errors**: A linked error, when one is associated with the issue.
 
