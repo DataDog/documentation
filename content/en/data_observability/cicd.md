@@ -76,7 +76,7 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 #### Drift Detection
 
-Drift detection compares the branch state of your data to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you _must_ send Open Lineage events from your CI job; Datadog uses these events as triggers for Drift Detection checks. See the [OpenLineage setup documentation][6] for instructions on how to set up Open Lineage.
+Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you must send OpenLineage events from your CI job. Datadog uses these events as triggers for drift detection checks. See the [OpenLineage setup documentation][6] for instructions on how to set up OpenLineage.
 
 ##### General settings
 
