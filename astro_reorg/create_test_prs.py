@@ -31,8 +31,9 @@ Testing the *unresolvable* conflict paths:
     - A base_edit on a top-level (never-moved) file surfaces as a plain
       non-reorg conflict, which is sent straight to manual review.
 
-View all test PRs: 
-"""https://github.com/DataDog/documentation/pulls?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing
+View all test PRs:
+    https://github.com/DataDog/documentation/pulls?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing
+"""
 from __future__ import annotations
 
 import subprocess
