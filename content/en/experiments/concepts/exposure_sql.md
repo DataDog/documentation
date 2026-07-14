@@ -80,33 +80,7 @@ To create an Exposure SQL Model:
 
 {{< img src="/product_analytics/experiment/exposure-sql/create-exposure-sql-model.png" alt="The Create Exposure SQL Model page showing a SQL editor with an example exposure query and a mapping panel that maps query columns to Datadog fields." style="width:80%;" >}}
 
-### Filter with template variables
-
-By default, Datadog wraps your Exposure SQL Model in a date filter so each pipeline run only scans exposures from the window it is analyzing. If your exposure table is large, add template variables to your query to push these filters into your SQL and reduce the amount of data your warehouse scans on each run.
-
-Reference template variables using the `{{variable}}` syntax. Datadog replaces them at query time:
-
-| Variable | Description |
-|----------|-------------|
-| `{{analysis_start_timestamp}}`, `{{analysis_end_timestamp}}` | The window the current update is materializing. On a full refresh, this spans the experiment; on an incremental refresh, it is only the new tranche of exposures being added. Use these to scan the minimum amount of data on each run. |
-| `{{assignments_start_timestamp}}`, `{{assignments_end_timestamp}}` | The experiment's assignment window. |
-| `{{experiment_events_start_timestamp}}`, `{{experiment_events_end_timestamp}}` | The full experiment event window, even during an incremental refresh. |
-| `{{experiment_key}}` | The experiment's flag-allocation key, rendered as a quoted string literal. |
-| `{{experiment_keys}}` | A comma-separated list of quoted flag-allocation keys, for use in an `IN (...)` clause. |
-| `{{allocation_key}}` | The allocation portion of the flag-allocation key, rendered as a quoted string literal. |
-
-Timestamp variables render as ISO 8601 strings, so wrap them in quotes and cast them as needed. Key variables are already quoted, so use them without adding quotes.
-
-For example, to scan only the recent exposures for the experiment being analyzed:
-
-```sql
-SELECT user_id, exposed_at, experiment_id, variant_id
-FROM analytics.experiment_exposures
-WHERE experiment_id = {{experiment_key}}
-  AND exposed_at BETWEEN '{{analysis_start_timestamp}}' AND '{{analysis_end_timestamp}}'
-```
-
-<div class="alert alert-info">Template variables are optional. If you omit them, Datadog still applies its own date filter to your query.</div>
+For large exposure tables, use [SQL template variables][5] to push Datadog's date filters into your query and reduce the amount of data your warehouse scans on each run.
 
 ## Create experiments using Exposure SQL Models
 
@@ -149,3 +123,4 @@ To view a simplified version of the pipeline logic, click {{< ui >}}Copy SQL{{< 
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /experiments/plan_and_launch_experiments/
+[5]: /experiments/concepts/sql_template_variables/
