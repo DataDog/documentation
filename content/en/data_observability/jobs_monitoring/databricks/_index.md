@@ -118,7 +118,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
-   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. Use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes, to reduce cost.
+   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
    1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the principal's client ID (not its display name):
