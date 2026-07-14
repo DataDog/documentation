@@ -76,7 +76,7 @@ The prior matters most when sample sizes are small. With enough data, the poster
 
 Analysis methods are only one part of the statistical analysis plan. Datadog Experiments also supports modifying the following [settings][1]:
 
-[CUPED](/experiments/statistics/cuped)
+[CUPED][3]
 : Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
