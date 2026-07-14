@@ -41,7 +41,7 @@ Worker version 2.19.0 gives you access to the following:
 - The Logstash source has been fixed to acknowledge only completed windows instead of sometimes sending a partial acknowledgment.
 - The Logstash source now rejects a window-size frame that arrives before the current window has received all of its advertised events, closing the connection with a fatal decode error instead of continuing.
 - Fixed the Syslog codec that was silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
-- Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` on inputs with lines of 65,535 bytes or more.
+- Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` that had inputs with lines of 65,535 bytes or more.
 
 ## Worker version 2.18.0
 
