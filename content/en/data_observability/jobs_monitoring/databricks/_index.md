@@ -241,7 +241,7 @@ This approach is recommended for clusters in **Standard** access mode.
    |----------------------|------------------------------|
    | DD_API_KEY           | Your [Datadog API key][1].   |
    | DD_SITE              | Your [Datadog site][2].      |
-   | DATABRICKS_WORKSPACE | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespaces. |
+   | DATABRICKS_WORKSPACE | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Do not enclose the value in quotes; Databricks does not accept quotes in this field. Whitespace in the name is allowed. |
 
    1. For each of the above variables, in the {{< ui >}}Definition{{< /ui >}} section, click {{< ui >}}Add Definition{{< /ui >}}. In the modal that opens, fill in the fields:
        1. In the {{< ui >}}Field{{< /ui >}} dropdown, select {{< ui >}}spark_env_vars{{< /ui >}}.
@@ -380,7 +380,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
    ```text
    DD_API_KEY=<YOUR API KEY>
    DD_SITE=<YOUR DATADOG SITE>
-   DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
+   DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
    ```
 
    Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
@@ -389,7 +389,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | DD_API_KEY               | Your [Datadog API key][1].                                                                                                                                        |         |
 | DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
-| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
+| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Do not enclose the value in quotes; Databricks does not accept quotes in this field. Whitespace in the name is allowed. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
