@@ -78,7 +78,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Lambda functions with AI assistance. After you connect, try a prompt like:
 
 ```
-Instrument my AWS Lambda functions with Datadog.
+Help me monitor my AWS Lambda functions with Datadog.
 ```
 
 {{% /tab %}}
