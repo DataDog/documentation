@@ -211,13 +211,13 @@ Use `curl` to again send requests to the application:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11]. The Traces list shows something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+If you don't see traces, clear any filter in the {{< ui >}}Traces{{< /ui >}} Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 

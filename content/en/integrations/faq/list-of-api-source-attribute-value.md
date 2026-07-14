@@ -310,7 +310,6 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Salesforce                      | salesforce                        | salesforce                         |
 | Salesforce Commerce Cloud       | salesforce commerce cloud         | salesforce_commerce_cloud          |
 | Salesforce Marketing Cloud      | salesforce marketing cloud        | salesforce_marketing_cloud         |
-| Salesforce Incidents            | salesforce incidents              | salesforce_incidents               |
 | Segment                         | segment                           | segment                            |
 | Sendgrid                        | sendgrid                          | sendgrid                           |
 | SentinelOne                     | sentinelone                       | sentinelone                        |

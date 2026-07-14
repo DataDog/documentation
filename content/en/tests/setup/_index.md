@@ -20,6 +20,8 @@ For information about configuration options for [Test Optimization][1], choose y
 
 <br>
 
+If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][5].
+
 If you run your tests in an environment with network restrictions,
 see the [Agent Network Traffic][2] or [Agentless Network Settings][3] guide for information on how to configure whitelisting.
 
@@ -29,3 +31,4 @@ If you run your tests in a container, see the [Tests in Containers][4] guide for
 [2]: /agent/configuration/network/
 [3]: /tests/network/
 [4]: /tests/containers/
+[5]: /tests/setup/bazel/

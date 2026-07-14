@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Export a list of test runs from the Results Explorer by clicking **Download as CSV**:
+Export a list of test runs from the Results Explorer by clicking {{< ui >}}Download as CSV{{< /ui >}}:
 
 {{< img src="continuous_testing/explorer/export_csv.png" alt="Export your test runs to CSV in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;" >}}
 

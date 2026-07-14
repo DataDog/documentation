@@ -62,7 +62,7 @@ return shadowDomElement.textContent.includes("TODO")
 
 ### Enter text into input fields
 
-When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder automatically records inputted values and creates a [Type Text][3] test step. 
+When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder automatically records inputted values and creates a [{{< ui >}}Type Text{{< /ui >}}][3] test step. 
 
 When working with input fields rendered in a shadow DOM, the recorder may be unable to capture a complete set of reference points to the element, causing the step to fail on test runs. As a workaround for entering text into a text input field rendered in a shadow DOM, add a JavaScript assertion that locates the respective `<input>` element and sets the `value` field.
 
@@ -110,7 +110,7 @@ return true
 
 In `closed` mode, normal assertions are unavailable. Additionally, elements rendered in a shadow DOM are not accessible with JavaScript, so you cannot use JavaScript assertions in your browser tests.
 
-You can use the `Press Key` action to select the appropriate options. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
+You can use the {{< ui >}}Press Key{{< /ui >}} action to select the appropriate options. For example, to navigate to a different page by selecting an option from a navigation menu and the menu is rendered in a shadow DOM, use the `tab` key to navigate to the respective option and click the `enter` key to select an option.
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/using-tab-keys-for-shadow-dom.mp4" alt="Using tab keys to workaround a shadow DOM in a browser test" video=true >}}
 

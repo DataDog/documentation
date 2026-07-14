@@ -85,7 +85,7 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
-{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
+{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a summary of the topic, the total interaction count, and a table of interactions with child topic label, input text, and timestamp." style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 

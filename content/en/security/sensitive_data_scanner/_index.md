@@ -139,10 +139,6 @@ To configure scanning for Agent Observability data, navigate to the [Agent Obser
 
 ### Cloud storage
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Findings page's datastore section with three Amazon S3 findings" style="width:100%;" >}}
 
 If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.

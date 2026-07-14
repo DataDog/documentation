@@ -22,7 +22,7 @@ Para crear un SLO a partir de monitores de Datadog nuevos o existentes, crea un 
 
 <div class="alert alert-info">Los SLOs por intervalos de tiempo son otra forma de crear SLOs con un cálculo de SLI basado en el tiempo. Con los SLOs basados en el tiempo, puedes crear un SLO de tiempo de actividad sin pasar por un monitor, por lo que no tienes que crear ni mantener tanto un monitor como un SLO.</div>
 
-{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="Ejemplo de SLO basado en un monitor" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_side_panel.png" alt="Ejemplo de SLO basado en un monitor" >}}
 
 ## Requisitos previos
 
@@ -74,7 +74,7 @@ Elige un nombre y una descripción ampliada para tu SLO. Selecciona cualquier et
 
 ## Cálculo del estado
 
-{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="SLO basado en un monitor con grupos" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_overall_status.png" alt="SLO basado en un monitor con grupos" >}}
 
 Datadog calcula el estado general de SLO como el porcentaje de tiempo de actividad en todos monitores o grupos de monitor, a menos que se hayan seleccionado grupos específicos:
 - Si se han seleccionado grupos específicos (hasta 20), el estado SLO se calcula solo con esos grupos. La interfaz de usuario muestra todos los grupos seleccionados. 

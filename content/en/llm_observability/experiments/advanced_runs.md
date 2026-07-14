@@ -240,10 +240,9 @@ To retrieve and compare runs through the API, call `GET /api/v2/llm-obs/v1/exper
 - `filter[experiment]=<pipeline-name>` returns all runs sharing the same logical pipeline name.
 - `filter[metadata]={"branch":"main"}` returns runs whose metadata contains those key-value pairs.
 - Combine both filters to narrow comparisons, for example: `?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}`.
+- `filter[parent_experiment_id]=<uuid>` returns all experiments that were run against a given baseline experiment. Can be repeated for multiple baseline IDs.
 
 Each matching experiment includes `aggregate_data` with pre-computed eval score distributions, token costs, and error rates, so you can compare runs without querying individual spans.
-
-`page[cursor]` is not supported when `filter[experiment]` or `filter[metadata]` is used.
 
 `filter[experiment]` matches the shared logical pipeline name stored in the `experiment` column (for example, `my-pipeline`). This is distinct from the unique per-run `name` field (for example, `my-pipeline-<run-id>`).
 

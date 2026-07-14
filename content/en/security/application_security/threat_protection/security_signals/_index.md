@@ -153,7 +153,7 @@ To see all of the saved views, click {{< ui >}}Views{{< /ui >}} next to the {{< 
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&viz=stream&start=1694726477747&end=1695331277747&paused=false
 [4]: /incident_response/incident_management/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/
 [6]: /incident_response/case_management/
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/notifications/rules/
