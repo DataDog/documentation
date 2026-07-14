@@ -476,9 +476,9 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
    - `CAN USE` permission on the SQL Warehouse.
    - Read access to the [system tables][27] within Unity Catalog. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
    ```sql
-   GRANT USE CATALOG ON CATALOG system TO `<client-id>`;
-   GRANT USE SCHEMA ON CATALOG system TO `<client-id>`;
-   GRANT SELECT ON CATALOG system TO `<client-id>`;
+   GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+   GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+   GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
