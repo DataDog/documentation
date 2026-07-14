@@ -97,7 +97,6 @@ To enable debug logs during manual verification:
    
 2. Delete the pod to enable debug logs during injection.
 
-For how to enable injector debug output and read it, see [Injector debug logs](#injector-debug-logs).
 
 ## Injector debug logs
 
@@ -199,7 +198,7 @@ To confirm that injection occurred, look for the log block whose executable matc
 | `Workload selection allowed injection: continuing` | Policy permitted injection. |
 | `Succesfully loaded policy: 'requirements.bin...'` | The language requirements policy for the detected runtime was loaded. |
 | `detected language: '<lang>'` / `detected language version: '<version>'` | The runtime was identified (`nodejs`, `java`, `python`, `ruby`, `dotnet`, `php`) and its version was read. |
-| `injection config: <VAR>=<value>` | Each environment variable the injector set. Seeing `DD_INJECTION_ENABLED=tracer` plus the language-specific variable (for example, `NODE_OPTIONS` and `JAVA_TOOL_OPTIONS`) confirms the tracing SDK was loaded. |
+| `injection config: <VAR>=<value>` | Each environment variable the injector set. Seeing `DD_INJECTION_ENABLED=tracer` plus the language-specific variable (for example, `NODE_OPTIONS` or `JAVA_TOOL_OPTIONS`) confirms the tracing SDK was loaded. |
 | `injection duration: <N> ms` | Injection completed and the elapsed time. |
 | `injection completed successfully` (`result='0'`) | The injector reported a successful injection to telemetry. A non-zero `result` with a different `result_reason` indicates a failure. |
 | `injector finished` | The injector constructor returned. |
