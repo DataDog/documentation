@@ -121,6 +121,8 @@ TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 REPO = "DataDog/documentation"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
 LABEL_STALE = "has-astro-reorg-conflicts"
+LABEL_AUTOFIXED = "astro-reorg-autofixed"
+LABEL_AUTO_PR = "astro-reorg-auto-pr"
 LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
 LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
@@ -505,7 +507,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             print(f"    ... and {len(subjects) - 10} more")
         would_be_title = f"[reorg fix] {pr['title']}"
         print(f"  [dry-run] would open PR: {would_be_title!r}")
-        print(f"  [dry-run] would label fix PR {LABEL_WIP!r}")
+        print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
         if IS_TEST_MODE:
             print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
         return True
@@ -576,6 +578,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         print(f"  Opened fix PR: {new_pr_url}")
 
         add_label(int(new_pr_number), LABEL_WIP, dry_run=False)
+        add_label(int(new_pr_number), LABEL_AUTO_PR, dry_run=False)
 
         # In test mode, keep the auto-created PR out of other teams' review
         # queues by marking it "Do Not Merge". Never do this on real master.
@@ -593,6 +596,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             dry_run=False,
         )
         add_label(pr_number, LABEL_STALE, dry_run)
+        add_label(pr_number, LABEL_AUTOFIXED, dry_run)
         return True
 
     finally:
@@ -728,6 +732,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
             print("  Auto-fix failed or not applicable — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+            post_comment(pr_number, MANUAL_REVIEW_COMMENT, dry_run)
         return True
 
     finally:
@@ -843,6 +848,8 @@ def main() -> None:
 
     ensure_label_exists(LABEL_MANUAL_REVIEW, args.dry_run)
     ensure_label_exists(LABEL_STALE, args.dry_run)
+    ensure_label_exists(LABEL_AUTOFIXED, args.dry_run)
+    ensure_label_exists(LABEL_AUTO_PR, args.dry_run)
 
     existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]

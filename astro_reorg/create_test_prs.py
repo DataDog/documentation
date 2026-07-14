@@ -107,7 +107,7 @@ TEST_PRS = [
         "old": "with guides for installation, configuration, and getting started with key features.",
         "new": "with guides for setup, configuration, and getting started with key features.",
         "commit": "Test PR: minor wording tweak in getting started description",
-        "title": "[TEST] Minor wording tweak in getting started intro",
+        "title": "[TEST] Minor wording tweak in getting started intro (auto-fixable)",
         "body": (
             "Test PR for exercising the astro reorg tooling. Makes a minor, "
             "non-material wording change in the getting started page description.\n\n"
@@ -123,7 +123,7 @@ TEST_PRS = [
         "old": "combined into a customized solution",
         "new": "combined into a unified solution",
         "commit": "Test PR: edit a line the reorged base also changed",
-        "title": "[TEST] Unresolvable reorg conflict (base edited the same line)",
+        "title": "[TEST] Unresolvable reorg conflict (base edited the same line) (not auto-fixable)",
         "body": (
             "Test PR for exercising the astro reorg tooling. Edits a line that "
             "the reorged base branch also changed, so the auto-fix can't replay "
@@ -145,7 +145,7 @@ TEST_PRS = [
         "old": "how to write and edit content",
         "new": "how to write and revise content",
         "commit": "Test PR: edit a top-level file the base also changed",
-        "title": "[TEST] Non-reorg conflict on a top-level file",
+        "title": "[TEST] Non-reorg conflict on a top-level file (not auto-fixable)",
         "body": (
             "Test PR for exercising the astro reorg tooling. Creates a conflict "
             "on a top-level file that the reorg doesn't move, so it isn't a "
@@ -185,7 +185,7 @@ TEST_PRS = [
             "    - name: Essentials"
         ),
         "commit": "Test PR: add a page and a nav menu link to it",
-        "title": "[TEST] New page with nav link (base edited the same menu line)",
+        "title": "[TEST] New page with nav link (base edited the same menu line) (not auto-fixable)",
         "body": (
             "Test PR for exercising the astro reorg tooling. Adds a new page and "
             "a nav menu entry linking to it. The base branch renames that same "
