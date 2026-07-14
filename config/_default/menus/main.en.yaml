@@ -5751,6 +5751,11 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: ci
+      identifier: cicd_optimization
+      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5959,6 +5964,11 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: tests
+      identifier: tests_cicd_optimization
+      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
