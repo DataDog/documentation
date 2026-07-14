@@ -96,7 +96,7 @@ You can create and manage specific rules for metrics from the Governance Console
 
 ## Limitations
 
-You can create up to 10 rules per signal type (Spans, Metrics, and Logs each have a separate limit of 10). You can specify up to 30 tag values per Tag Visibility and Enforcement rule. If your tagging strategy requires more rules, contact your Datadog account team to request a higher limit. Telemetry rules aren't available for telemetry types outside Metrics, Logs, and Spans.
+You can create up to 10 rules per signal type (spans, metrics, and logs each have a separate limit of 10). You can specify up to 30 tag values per Tag Visibility and Enforcement rule. If your tagging strategy requires more rules, contact your Datadog account team to request a higher limit. Telemetry rules aren't available for telemetry types outside metrics, logs, and spans.
 
 ## Further reading
 
