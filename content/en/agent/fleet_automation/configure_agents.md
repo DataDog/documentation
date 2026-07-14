@@ -19,9 +19,9 @@ Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at 
 - Agent version 7.73+ for Agent and OTel Collector configuration (version 7.76+ for configuring integrations and secrets)
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
 
-<div class="alert alert-info">
-Remote configuration of Agents in containerized workloads is not supported.
-</div>
+{{< callout url="#" header="Join the Preview!" >}}
+Remote configuration of Agents in containerized workloads is in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
 
 ## Configure multiple Agents
 
