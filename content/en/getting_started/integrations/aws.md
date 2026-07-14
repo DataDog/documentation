@@ -154,6 +154,8 @@ Metric name filters apply per namespace and are evaluated after the namespace is
 Metric name filters cannot remove <code>aws.ec2.cpuutilization</code> or <code>aws.lambda.invocations</code>. Datadog always collects these required metrics.
 </div>
 
+To manage metric name filters programmatically, see [Configure AWS metric name filters with the API][61].
+
 ### Add regions
 
 Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
@@ -309,3 +311,4 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[61]: /integrations/guide/aws-metric-name-filters/
