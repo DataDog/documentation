@@ -2038,6 +2038,67 @@
       "html": ""
     }
   },
+  "GetCustomForecast": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "budget_uid": "00000000-0000-0000-0000-000000000001",
+              "created_at": 1738258683590,
+              "created_by": "00000000-0a0a-0a0a-aaa0-00000000000a",
+              "entries": [
+                {
+                  "amount": 400,
+                  "month": 202501,
+                  "tag_filters": [
+                    {
+                      "tag_key": "service",
+                      "tag_value": "ec2"
+                    }
+                  ]
+                }
+              ],
+              "updated_at": 1738258683590,
+              "updated_by": "00000000-0a0a-0a0a-aaa0-00000000000a"
+            },
+            "id": "11111111-1111-1111-1111-111111111111",
+            "type": "custom_forecast"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Custom forecast resource wrapper in a response.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes of a custom forecast.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">budget_uid&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The UUID of the budget that this custom forecast belongs to.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_at&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Timestamp the custom forecast was created, in Unix milliseconds.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_by&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The id of the user that created the custom forecast.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> entries&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Monthly custom forecast entries.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"entries\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">amount&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">double</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Forecast amount for the month.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"entries\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">month&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Month the custom forecast entry applies to, in <code>YYYYMM</code> format.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"entries\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> tag_filters&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Tag filters that scope this custom forecast entry to specific resources.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"tag_filters\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">tag_key&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag key to filter on.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"tag_filters\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">tag_value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag value to filter on.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">updated_at&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Timestamp the custom forecast was last updated, in Unix milliseconds.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">updated_by&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The id of the user that last updated the custom forecast.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The unique identifier of the custom forecast.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The type of the custom forecast resource. Must be <code>custom_forecast</code>. \nAllowed enum values: <code>custom_forecast</code></p><p>default: <code>custom_forecast</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
   "ListBudgets": {
     "responses": {
       "200": {

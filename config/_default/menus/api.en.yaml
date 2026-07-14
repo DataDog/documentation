@@ -83,6 +83,32 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
+    - name: Preview AWS metric name filter
+      url: /api/latest/aws-integration/preview-aws-metric-name-filter/
+      identifier: aws-integration-preview-aws-metric-name-filter
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewAWSMetricNameFilter
+        unstable:
+          - v2
+        order: 20
+    - name: Get AWS metric name filter preview
+      url: /api/latest/aws-integration/get-aws-metric-name-filter-preview/
+      identifier: aws-integration-get-aws-metric-name-filter-preview
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSMetricNameFilterPreview
+        unstable:
+          - v2
+        order: 19
     - name: Create AWS CCM config
       url: /api/latest/aws-integration/create-aws-ccm-config/
       identifier: aws-integration-create-aws-ccm-config
@@ -10502,6 +10528,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Get a budget's custom forecast
+      url: /api/latest/cloud-cost-management/get-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-get-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomForecast
+        unstable:
+          - v2
+        order: 69
     - name: Delete a budget's custom forecast
       url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
       identifier: cloud-cost-management-delete-a-budgets-custom-forecast
