@@ -39,12 +39,12 @@ jobs:
       - name: Find and write latest version
         id: write-version
         run: |
-          python local/bin/py/version_getter.py --url ${{ inputs.url }} --file-name ${{ inputs.file_name }}
+          python hugo/local/bin/py/version_getter.py --url ${{ inputs.url }} --file-name ${{ inputs.file_name }}
 
       - name: Save modified file
         run: |
           mkdir -p $RUNNER_TEMP/temp
-          cp ./data/{{ inputs.file_name }} $RUNNER_TEMP/temp/
+          cp ./hugo/data/{{ inputs.file_name }} $RUNNER_TEMP/temp/
 
       - name: echo new version
         run: echo ${{ steps.write-version.outputs.new_version }}
@@ -55,14 +55,14 @@ jobs:
 
       - name: Restore modified file
         run: |
-          cp $RUNNER_TEMP/temp/{{ inputs.file_name }} ./data/
+          cp $RUNNER_TEMP/temp/{{ inputs.file_name }} ./hugo/data/
 
       - name: Write version
         if: steps.write-version.outputs.new_version == 'true'
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ./data/{{ inputs.file_name }}
+          git add ./hugo/data/{{ inputs.file_name }}
           git commit -m "(Automated) Bump version"
           git push -f origin HEAD:refs/heads/automatic-version-update/versions
 
