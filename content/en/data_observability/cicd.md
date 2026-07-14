@@ -90,7 +90,7 @@ Drift detection compares the current state of your data on the branch to a basel
 
 | Setting      | Description                                                                                                                                                                                                                   |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CI Job URL` | The locator for your dbt Cloud CI job: this is the job that's triggered by pull requests, materializes dbt models for CI, and sends Open Lineage events to Datadog. These typically look like `https://cloud.getdbt.com/...`. |
+| `CI Job URL` | The locator for the dbt Cloud CI job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog. These typically look like `https://cloud.getdbt.com/...`. |
 
 ##### dbt Core
 
