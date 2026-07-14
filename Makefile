@@ -195,14 +195,15 @@ config:
 # master = always use tag from sdk version
 # branches = attempt to use an associated branch name on failure fallback to sdk version
 define EXAMPLES_template
-examples/$(1):
-	$(eval TAG := $(or $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
-	@if [[ "$(BRANCH)" = "master" ]]; then \
-		echo "Cloning $(1) at $(TAG)"; \
-		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+examples/$(1): | websites_sources_data
+	@TAG=$$$$(grep -A1 $(1) _vendor/data/sdk_versions.json 2>/dev/null | grep version | cut -f 2 -d ':' | tr -d '" '); \
+	TAG=$$$${TAG:-$(BRANCH)}; \
+	if [[ "$(BRANCH)" = "master" ]]; then \
+		echo "Cloning $(1) at $$$$TAG"; \
+		git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	else \
 		echo "Cloning $(1) at $(BRANCH)"; \
-		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	fi
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))

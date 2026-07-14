@@ -537,17 +537,36 @@ The Model Context Protocol (MCP) integration instruments client and server tool 
 
 ### Traced methods
 
-The MCP integration instruments the following methods:
+The MCP integration instruments both MCP clients and servers.
+
+#### MCP clients
+
+The MCP client-side instrumentation records client tool calls.
 
 - [Client Tool Calls][2]:
   - `mcp.client.session.ClientSession.call_tool`
 
-- [Server Tool Calls][3]:
-  - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
+#### MCP servers
+
+The MCP server-side integration instruments [`initialize`][3] and [`tools/call`][4] MCP methods. [`tools/list`][5] calls are optionally intercepted when intent capture is enabled.
+
+The following tags are recorded on server spans:
+- `mcp_method`: The MCP method called.
+- `mcp_session_id`: The MCP [session ID][6], recorded when available in the request.
+- `client_name`: The name of the client as provided to `initialize`.
+- `client_version`: The version of the client as provided to `initialize`.
+
+- Server methods instrumented:
+  - `mcp.server.shared.session.RequestResponder.__enter__`
+  - `mcp.server.shared.session.RequestResponder.__exit__`
+  - `mcp.server.shared.session.RequestResponder.respond`
 
 [1]: https://modelcontextprotocol.io/docs/getting-started/intro
 [2]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
-[3]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+[3]: https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle#initialization
+[4]: https://modelcontextprotocol.io/specification/2025-11-25/server/tools#calling-tools
+[5]: https://modelcontextprotocol.io/specification/2025-11-25/server/tools#listing-tools
+[6]: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#session-management
 {{% /tab %}}
 
 {{% tab "Node.js" %}}

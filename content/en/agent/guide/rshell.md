@@ -8,7 +8,7 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Datadog MCP Server setup"
-- link: "service_management/workflows/private_actions"
+- link: "actions/private_actions"
   tag: "Documentation"
   text: "Private Action Runner"
 ---

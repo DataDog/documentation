@@ -484,6 +484,8 @@ Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by defaul
 
 Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [{{< ui >}}Metrics Summary{{< /ui >}} page][15] of the Datadog app. You can view all serverless custom metrics under the {{< ui >}}Serverless{{< /ui >}} tag in the {{< ui >}}Distribution Metric Origin{{< /ui >}} [{{< ui >}}facet panel{{< /ui >}}][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17].
 
+You can also exclude specific auto-injected tags (such as `function_arn`) from your custom metrics. See [Exclude auto-injected tags from custom metrics][19].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -497,3 +499,4 @@ Datadog provides granular information about the custom metrics you're ingesting,
 [15]: https://app.datadoghq.com/metric/summary
 [16]: /metrics/summary/#facet-panel
 [17]: /metrics/summary/#metrics-without-limits
+[19]: /serverless/aws_lambda/configuration/#exclude-auto-injected-tags-from-custom-metrics
