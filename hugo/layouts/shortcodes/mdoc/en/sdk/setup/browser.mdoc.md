@@ -19,9 +19,28 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 {% stepper level="h4" %}
 
-{% step title="Create the application in the UI" %}
+{% step title="Create the application" %}
+Creating a RUM application generates the `clientToken` and `applicationId` the SDK needs. Create it in the Datadog UI, or from the terminal (useful for AI coding agents and CI).
+
+{% tabs %}
+{% tab label="Datadog UI" %}
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][5] and select the JavaScript (JS) application type.
 2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
+{% /tab %}
+{% tab label="Terminal (API)" %}
+If you have a Datadog [API key and application key][16] with the `rum_apps_write` permission, create the application without a browser. Your site's API base URL is {% region-param key="dd_api" /%}.
+
+```shell
+curl -X POST "<DATADOG_API_BASE_URL>/api/v2/rum/applications" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{"data": {"type": "rum_application_create", "attributes": {"name": "my-web-app", "type": "browser"}}}'
+```
+
+The response includes `data.attributes.application_id` and `data.attributes.client_token`. See the [Create a new RUM application][17] API reference.
+{% /tab %}
+{% /tabs %}
 {% /step %}
 
 {% step title="Install the Browser SDK" %}
@@ -403,4 +422,6 @@ Your application appears as pending on the Applications page until Datadog start
 [13]: /private-beta/rum-sdk-auto-injection/
 [14]: /real_user_monitoring/application_monitoring/browser/setup/client
 [15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
+[16]: /account_management/api-app-keys/
+[17]: /api/latest/rum/#create-a-new-rum-application
 
