@@ -9916,6 +9916,16 @@ menu:
       parent: product_analytics
       identifier: pa_usability
       weight: 8
+    - name: Guides
+      url: product_analytics/guide/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 9
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 10
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9997,16 +10007,6 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_guide
       weight: 12
-    - name: Guides
-      url: product_analytics/guide/
-      parent: product_analytics
-      identifier: pa_guides
-      weight: 6
-    - name: Troubleshooting
-      url: product_analytics/troubleshooting/
-      parent: product_analytics
-      identifier: pa_troubleshooting
-      weight: 7
     - name: Session Replay
       url: session_replay/
       pre: play-circle
