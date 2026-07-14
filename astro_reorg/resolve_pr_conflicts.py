@@ -146,6 +146,14 @@ STALE_COMMENT = (
     "We will reach out to you as soon as we can."
 )
 
+WIP_COMMENT = (
+    "This PR has merge conflicts created by the docs repo reorg project. "
+    "Because this PR is marked as a work in progress, no action was taken. "
+    "When you're ready and would like assistance resolving the conflicts, "
+    "add the label `astro-reorg-help-requested` to your PR to add it to our help queue. "
+    "We will reach out to you as soon as we can."
+)
+
 # Existing repo label applied to auto-created fix PRs in test mode so they stay
 # out of other teams' review queues. Assumed to already exist in the repo.
 DO_NOT_MERGE_LABEL = "Do Not Merge"
@@ -713,14 +721,21 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             add_label(pr_number, LABEL_PROCESSED, dry_run)
             return True
 
-        # All conflicts are reorg-caused.  Check staleness before attempting
-        # an auto-fix: if the PR has had no activity in >2 months, note it and
-        # leave it for the author to decide whether they still need it.
+        # All conflicts are reorg-caused.  Before attempting an auto-fix, skip
+        # PRs that aren't ready: WIP and stale PRs both get a comment pointing
+        # the author to astro-reorg-help-requested when they want help.
         # Exception: if the author already added `astro-reorg-help-requested`,
         # they have explicitly opted back in — treat it like a fresh PR.
         help_requested = any(
             l["name"] == LABEL_HELP_REQUESTED for l in pr.get("labels", [])
         )
+        is_wip = any(l["name"] == LABEL_WIP for l in pr.get("labels", []))
+        if is_wip and not help_requested:
+            print("  PR is marked WIP — skipping auto-fix, leaving comment.")
+            add_label(pr_number, LABEL_PROCESSED, dry_run)
+            post_comment(pr_number, WIP_COMMENT, dry_run)
+            return True
+
         if is_pr_stale(pr) and not help_requested:
             print(f"  PR is stale (no activity in >{STALE_DAYS} days) — "
                   "labeling and commenting without auto-fix.")
