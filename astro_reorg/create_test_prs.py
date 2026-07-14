@@ -97,15 +97,20 @@ DO_NOT_MERGE_LABEL = "Do Not Merge"
 TEST_PRS = [
     {
         # Resolvable: reorg-only conflict, auto-fix replays it cleanly.
+        #
+        # IMPORTANT: this edit must target a different LINE than any base_edit
+        # in the other specs. Git merges at line granularity, so even two edits
+        # to different words on the same long line will conflict. The description
+        # frontmatter field is on its own line and no base_edit touches it.
         "branch": f"{BRANCH_PREFIX}-wording",
         "file": "content/en/getting_started/_index.md",
-        "old": "supports every phase of software development",
-        "new": "supports each phase of software development",
-        "commit": "Test PR: minor wording tweak in getting started intro",
+        "old": "with guides for installation, configuration, and getting started with key features.",
+        "new": "with guides for setup, configuration, and getting started with key features.",
+        "commit": "Test PR: minor wording tweak in getting started description",
         "title": "[TEST] Minor wording tweak in getting started intro",
         "body": (
             "Test PR for exercising the astro reorg tooling. Makes a minor, "
-            "non-material wording change in the getting started intro paragraph.\n\n"
+            "non-material wording change in the getting started page description.\n\n"
             "Do not merge."
         ),
     },
@@ -426,22 +431,16 @@ def main() -> None:
     for url in urls:
         print(f"  {url}")
 
-    if conflicting_base:
-        print(f"\nThese PRs target the throwaway conflicting base "
-              f"{conflicting_base!r}.\nResolve them (and see the manual-review "
-              f"fallbacks fire) with:\n"
-              f"  python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run "
-              f"--base-branch {conflicting_base}")
-
-    # Open in the browser; webbrowser.open returns False if it can't.
-    opened_any = False
-    for url in urls:
-        try:
-            opened_any = webbrowser.open(url) or opened_any
-        except Exception:
-            pass
-    if not opened_any:
-        print("\nCould not open a browser. Use the links above.")
+    base_flag = f"--base-branch {conflicting_base}" if conflicting_base else "--live"
+    print(
+        f"\nView all test PRs:\n"
+        f"  https://github.com/DataDog/documentation/pulls"
+        f"?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing\n"
+        f"\nDry-run conflict resolution (no changes made):\n"
+        f"  python3 astro_reorg/resolve_pr_conflicts.py {base_flag}\n"
+        f"\nLive conflict resolution (applies fixes and labels):\n"
+        f"  python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run {base_flag}"
+    )
 
 
 if __name__ == "__main__":
