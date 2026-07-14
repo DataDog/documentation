@@ -1,23 +1,23 @@
 ---
 title: Lapdog
-description: "Run an LLM Observability dashboard locally to inspect coding-agent and application traces in your browser without a Datadog account."
+description: "Run an Agent Observability dashboard locally to inspect coding-agent and application traces in your browser without a Datadog account."
 further_reading:
     - link: 'https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md'
       tag: 'GitHub'
-      text: 'Lapdog install and usage guide'
+      text: 'Lapdog README on GitHub'
     - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
-      text: 'Instrument your application with the LLM Observability SDK'
+      text: 'Instrument your application with the Agent Observability SDK'
     - link: '/llm_observability/instrumentation/auto_instrumentation'
       tag: 'Documentation'
-      text: 'Auto-instrumentation for LLM Observability'
+      text: 'Auto-instrumentation for Agent Observability'
 ---
 
 ## Overview
 
-Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
+Lapdog is a local development tool for Agent Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
 
-Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in LLM Observability alongside your production traffic.
+Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in Agent Observability alongside your production traffic.
 
 ## What you get
 
@@ -54,7 +54,7 @@ Lapdog instruments coding agents end-to-end. Each prompt, tool call, and permiss
 ```shell
 lapdog claude
 ```
-Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code with hooks wired up.
+Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code.
 {{% /tab %}}
 {{% tab "Codex" %}}
 ```shell
@@ -82,11 +82,11 @@ Run any command with `ddtrace` auto-instrumentation pointed at the local agent. 
 
 While a session is running, open [lapdog.datadoghq.com](https://lapdog.datadoghq.com). The dashboard reads directly from your local agent on `localhost:8126`; no login or Datadog account is needed.
 
-If you've changed the local port, override it from the **Collecting sessions** badge in the dashboard header.
+If you've changed the local port, override it from the {{< ui >}}Collecting sessions{{< /ui >}} badge in the dashboard header.
 
 ## Forward events to Datadog
 
-To dual-ship captured events to LLM Observability in Datadog, set your API key and pass `--forward`:
+To dual-ship captured events to Agent Observability in Datadog, set your API key and pass `--forward`:
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude
@@ -107,6 +107,52 @@ Forwarded spans are tagged `source:lapdog` so you can distinguish development se
 | `lapdog status` | Show whether the agent is running |
 
 For the full list of options, run `lapdog --help`.
+
+## Uninstall
+
+Follow these steps to remove Lapdog and the state it writes to your home directory. Your package manager (Homebrew, pip, or pipx) cleans up only what it installed; it does not touch `~/.lapdog/`, the Claude Code plugin, or the pi extension.
+
+1. Stop the local agent:
+
+   ```shell
+   lapdog stop
+   ```
+
+2. Remove the Claude Code plugin (if installed):
+
+   ```shell
+   claude plugin uninstall lapdog@lapdog
+   claude plugin marketplace remove lapdog
+   ```
+
+3. Remove the pi extension (only if you ran `lapdog pi`):
+
+   ```shell
+   rm -f ~/.pi/agent/extensions/lapdog.ts
+   ```
+
+4. Remove the Lapdog working directory:
+
+   ```shell
+   rm -rf ~/.lapdog
+   ```
+
+5. Uninstall the package:
+
+   {{< tabs >}}
+   {{% tab "Homebrew (macOS)" %}}
+   ```shell
+   brew uninstall lapdog
+   brew untap datadog/lapdog
+   ```
+   {{% /tab %}}
+   {{% tab "pip / pipx" %}}
+   ```shell
+   pipx uninstall ddapm-test-agent
+   # or: pip uninstall ddapm-test-agent
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Further reading
 

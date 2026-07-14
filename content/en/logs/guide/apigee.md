@@ -24,7 +24,7 @@ Collect Apigee proxy logs to track errors, response time, duration, latency, mon
 
 ### Log collection
 
-{{% site-region region="us,eu" %}}
+{{% site-region region="us,eu,uk1" %}}
 There are two methods for collecting Apigee logs:
 
 1. Use Apigee's [JavaScript policy][1] to send logs to Datadog.
@@ -57,8 +57,8 @@ Use the MessageLogging policy type with the syslog parameter on your API to log 
 Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed instructions, see the [Apigee documentation][1].
 
 1. Select the Apigee proxy from which you want to send logs to Datadog.
-2. In the selected proxy overview page, click the **DEVELOP** tab.
-3. Select **New Script**.
+2. In the selected proxy overview page, click the {{< ui >}}DEVELOP{{< /ui >}} tab.
+3. Select {{< ui >}}New Script{{< /ui >}}.
 4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4].
 
 

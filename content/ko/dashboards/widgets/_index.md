@@ -3,215 +3,97 @@ aliases:
 - /ko/graphing/dashboards/widgets
 - /ko/graphing/faq/widgets
 - /ko/graphing/widgets
+description: 다양한 차트 유형과 디스플레이를 사용하여 인프라 전반의 데이터를 시각화하고 상관관계를 분석할 수 있는 대시보드 빌딩 블록입니다.
 further_reading:
-- link: /dashboards/guide/context-links/
+- link: /dashboards/
   tag: 설명서
-  text: 커스텀 링크
-- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
-  tag: 블로그
-  text: Datadog Observability Pipelines를 사용하여 로그를 변환하고 강화하세요.
+  text: 대시보드에 대해 자세히 알아보기
+- link: /dashboards/widgets/configuration
+  tag: 설명서
+  text: 위젯 구성 옵션 및 모범 사례 알아보기
+- link: /dashboards/widgets/types/
+  tag: 설명서
+  text: 사용 가능한 모든 위젯 유형 살펴보기
 title: 위젯
 ---
+## 개요 {#overview}
 
-## 개요
+대시보드 위젯은 데이터를 시각적으로 표현하는 요소입니다. 위젯은 [대시보드][2]의 기본 구성 요소로 사용되며, 인프라 전반의 데이터를 시각화하고 상호 연관성을 분석할 수 있도록 지원합니다. 위젯에는 그래프, 이미지, 로그, 상태 정보 등 다양한 유형의 정보가 포함될 수 있으며, 이를 통해 시스템 및 환경 전반에 대한 개요를 확인할 수 있습니다.
 
-위젯은 대시보드의 구성 요소로, 인프라스트럭처 전체에서 데이터를 시각화하고 연계할 수 있도록 해줍니다.
+## 시작하기 {#get-started}
 
-### 그래프
-{{< whatsnext desc="Datadog 제품에서 데이터를 그래프화할 수 있는 일반 위젯: ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
-        img="dashboards/widgets/icons/change_light_large.png">}} 변경 {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/distribution"
-        img="dashboards/widgets/icons/distribution_light_large.png">}} 분배{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
-        img="dashboards/widgets/icons/geomap_light_large.png">}} 지오맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map"
-        img="dashboards/widgets/icons/heatmap_light_large.png">}} 히트맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/pie_chart"
-        img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/query_value"
-        img="dashboards/widgets/icons/query-value_light_large.png">}} 쿼리 가치{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/scatter_plot"
-        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} 산점도{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/table"
-        img="dashboards/widgets/icons/table_light_large.png">}} 표{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/treemap"
-        img="dashboards/widgets/icons/treemap_light_large.png">}} 트리 맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/timeseries"
-        img="dashboards/widgets/icons/timeseries_light_large.png">}} 시계열{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list"
-        img="dashboards/widgets/icons/top-list_light_large.png">}} 상위 목록{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/wildcard"
-        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} 와일드카드{{< /nextlink >}}
+데이터와 관련된 위젯을 가장 빠르게 도입하는 방법은 [사전 설정 목록][1]에 있는 대시보드를 복제하는 것입니다. 이 목록에는 조직의 다른 사용자가 만든 대시보드와 설치된 통합에 대한 기본 제공 템플릿이 포함되어 있습니다. 대시보드를 복제한 후에는 사용 사례에 맞게 위젯을 사용자 지정할 수 있습니다.
+
+
+{{< whatsnext desc="위젯 학습에 도움이 되는 추가 가이드 및 과정:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}<u>대시보드 시작하기</u>: 위젯을 사용하여 대시보드를 구축하는 방법 안내{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}<u>대시보드 그래프 위젯</u>: 그래프 위젯 생성, 구성 및 사용 방법을 설명하는 학습 센터 과정{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}<u>대시보드 소개</u>: 샌드박스 환경에서 대시보드를 구축하는 방법을 설명하는 학습 센터 과정{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Groups
-{{< whatsnext desc="그룹 아래 위젯 표시: ">}}
-    {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/group_default_light_large.svg">}} 그룹{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/powerpack"
-        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} 파워팩{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/split_graph"
-        img="dashboards/widgets/icons/group-split_light_small.svg">}} 분할 그래프{{< /nextlink >}}
-{{< /whatsnext >}}
+### 대시보드에 위젯 추가 {#add-a-widget-to-your-dashboard}
 
-### 제품 분석
-{{< whatsnext desc="제품 분석 데이터 가시화: ">}}
-    {{< nextlink href="/dashboards/widgets/sankey" 
-        img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel" 
-        img="dashboards/widgets/icons/funnel_light_large.png">}} 퍼널{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/retention" 
-        img="/dashboards/widgets/icons/cohort_light_small.svg">}} 보존{{< /nextlink >}}
-{{< /whatsnext >}}
+대시보드에서 위젯을 사용하려면 다음 단계를 수행합니다.
 
-### 아키텍처
-{{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
-        img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
-        img="dashboards/widgets/icons/service-map_light_large.png">}} 토폴로지맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
-        img="dashboards/widgets/icons/service-summary_light_large.png">}} 서비스 요약{{< /nextlink >}}
-{{< /whatsnext >}}
+1. Datadog의 [Dashboard List][1]로 이동합니다.
+2. {{< ui >}}New Dashboard{{< /ui >}}를 클릭하거나 기존 대시보드를 선택하여 편집합니다.
+3. {{< ui >}}Add Widget{{< /ui >}}을 클릭합니다. 시계열, 막대 차트, 표 또는 이벤트 스트림 등 다양한 위젯 유형 중에서 선택합니다.
+4. 위젯 구성:
+    - 데이터 소스 선택: 메트릭, 로그, 트레이스 또는 기타 데이터 소스를 선택합니다.
+    - 시각화 사용자 지정: 필요에 따라 표시 설정, 단위 및 시간 프레임을 조정합니다.
+    - 컨텍스트 추가: 사용자 지정 링크, 조건부 서식 및 그룹화를 사용하여 추가 인사이트를 제공합니다.
+5. 대시보드를 저장한 후 팀과 공유하거나 필요에 따라 외부에 공유할 수 있습니다.
 
-### 주석 및 임베드
-{{< whatsnext desc="대시보드 시각적 구조화 및 주석 편집을 위한 꾸미기 위젯: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
-        img="dashboards/widgets/icons/free-text_light_large.png">}} 자유 텍스트{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
-        img="dashboards/widgets/icons/iframe_light_large.png">}} 아이프레임{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
-        img="dashboards/widgets/icons/image_light_large.png">}} 이미지{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
-        img="dashboards/widgets/icons/notes_light_large.png">}} 참고 및 링크{{< /nextlink >}}
-{{< /whatsnext >}}
+[위젯 구성][3]에서 자세한 내용을 확인하고 사용 가능한 [위젯 유형][4]을 둘러보세요.
 
-### 목록 및 스트림
-{{< whatsnext desc="각기 다른 소스의 이벤트 및 이슈 목록 표시: ">}}
-    {{< nextlink href="/dashboards/widgets/list"
-        img="dashboards/widgets/icons/change_light_large.png">}} 목록{{< /nextlink >}}
-{{< /whatsnext >}}
+### 탭으로 위젯 정리 {#organize-widgets-with-tabs}
 
-### 알림 및 대응
-{{< whatsnext desc="모니터링 정보 표시를 위한 요약 위젯: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
-        img="dashboards/widgets/icons/alert-graph_light_large.png">}}알림 그래프{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
-        img="dashboards/widgets/icons/alert-value_light_large.png">}}알림 값{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
-        img="dashboards/widgets/icons/check-status_light_large.png">}} 상태 확인{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
-        img="dashboards/widgets/icons/monitor-summary_light_large.png">}} 요약 모니터링{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
-        img="dashboards/widgets/icons/run-workflow_light_small.svg">}} 워크플로우 실행{{< /nextlink >}}
-{{< /whatsnext >}}
+대시보드가 커질수록 탭을 사용하여 위젯을 이름이 지정된 섹션으로 그룹화할 수 있습니다. 편집 모드에서 위젯의 공유 메뉴를 열고 **Move to tab**을 선택하여 기존 탭에 할당하거나 새 탭을 생성합니다. 탭은 대시보드 상단에 탐색 모음으로 표시되므로 사용자가 필요한 섹션으로 바로 이동할 수 있습니다. 자세한 내용은 [Tabs][5]를 참조하세요.
 
-### 성능 및 안정성
-{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
+## 데이터 소스 {#data-sources}
 
-## 전체 화면
+위젯은 다음을 포함한 여러 Datadog 데이터 소스의 데이터를 시각화할 수 있습니다.
 
-전체 화면 모드에서 대부분의 위젯을 보고 다음을 수행할 수 있습니다.
+- **APM Traces**: 애플리케이션 성능 모니터링 데이터
+- **Events**: 사용자 지정 이벤트, 배포 및 주석
+- **Logs**: 로그 이벤트, 로그 분석 및 로그 기반 메트릭
+- **Metrics**: 인프라, 애플리케이션 및 사용자 지정 메트릭
+- **RUM**: Real User Monitoring 및 Synthetic 테스트 데이터
+- **SLOs**: Service Level Objectives 및 오류 예산
+- **Security**: 보안 신호 및 규정 준수 데이터
 
-* 시간 프레임 변경
-* 선택한 시간 프레임만큼 앞뒤로 이동
-* 현재 시간에 그래프를 일시 중지하거나 실시간 그래프 보기
-* 시간 프레임 재설정
-* 그래프를 대시보드, 노트북으로 내보내거나 쿼리를 복사
-* 그래프를 생성하는 데이터를 CSV 형식으로 다운로드
+## 일반적인 사용 사례 {#common-use-cases}
 
-위젯 개요에 직접 액세스하려면 위젯의 오른쪽 상단 모서리에 있는 전체 화면 버튼을 클릭하세요.
+{{% collapse-content title="Infrastructure Monitoring" level="h4" expanded=false %}}
+- CPU, 메모리 및 네트워크 메트릭을 시간에 따라 추적하려면 **시계열** 위젯을 사용합니다.
+- 인프라 전반의 리소스 사용량을 시각화하려면 **호스트맵** 위젯을 사용합니다.
+- 리소스를 가장 많이 사용하는 호스트 또는 서비스를 식별하려면 **상위 목록** 위젯을 사용합니다.
+{{% /collapse-content %}}
 
-[시계열 위젯][1]에 대한 추가 옵션을 사용할 수 있습니다.
+{{% collapse-content title="애플리케이션 성능" level="h4" expanded=false %}}
+- 응답 시간, 오류율 및 처리량을 추적하려면 **시계열** 위젯을 사용합니다.
+- 서비스 상태를 상위 수준에서 확인하려면 **서비스 요약** 위젯을 사용합니다.
+- 서비스 종속성과 데이터 흐름을 시각화하려면 **토폴로지 맵** 위젯을 사용합니다.
+{{% /collapse-content %}}
 
-## 커스텀 링크
+{{% collapse-content title="비즈니스 인텔리전스" level="h4" expanded=false %}}
+- 핵심 성과 지표(KPI) 및 비즈니스 메트릭을 표시하려면 **쿼리 값** 위젯을 사용합니다.
+- 애플리케이션 내 사용자 전환 과정을 추적하려면 **퍼널** 위젯을 사용합니다.
+- 사용자 참여도 및 이탈을 분석하려면 **보존** 위젯을 사용합니다.
+{{% /collapse-content %}}
 
-커스텀 링크는 데이터 값을 Datadog 페이지 또는 AWS 콘솔과 같은 URL에 연결합니다.
+{{% collapse-content title="Incident Response" level="h4" expanded=false %}}
+- 경보 이력 및 추세를 표시하려면 **경보 그래프** 위젯을 사용합니다.
+- 인프라 전반의 현재 경보 상태를 확인하려면 **모니터 요약** 위젯을 사용합니다.
+- 실시간 이벤트 모니터링을 위해 **이벤트 스트림** 위젯을 사용합니다.
+{{% /collapse-content %}}
 
-일반 위젯 인라인 데이터와의 상호 작용을 맞춤 설정하려면 [Custom Links][2]를 참조하세요.
-
-## 단위 재정의
-
-위젯에 표시된 단위 값을 커스터마이즈하여 데이터에 컨텍스트를 추가하세요. 더 많은 사용 사례와 정보의 경우 [단위 재정의를 통한 시각화 커스터마이즈][3]를 참조하세요.
-- **단위 재정의**: '메모리' 계열의 단위를 표시하도록 선택하고 Datadog이 데이터에 따라 적절한 단위(예: 메가바이트 또는 기가바이트)를 표시하도록 합니다.
-- **단위 및 축척 재정의**: 단위를 단일 축척으로 고정합니다(값에 관계없이 데이터를 메가바이트로 표시).
-- **커스텀 단위 정의**: 완전한 커스텀 단위를 정의합니다(예: 일반 개수 대신 '테스트').
-
-데이터에 단위를 할당하는 대안이 아닙니다.
-{{< whatsnext desc="조직 수준 단위 설정: ">}}
-    {{< nextlink href="/metrics/units/">}} 메트릭 단위 설정{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/facets/#units">}} 이벤트 기반 쿼리 단위 설정{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## 글로벌 시간 선택기
-
-글로벌 시간 선택기를 사용하려면 하나 이상의 시간 기반 위젯이 `Global Time`을(를) 사용하도록 설정해야 합니다. **Set display preferences**에 있는 위젯 편집기에서 선택하거나, 위젯을 추가하세요(글로벌 시간이 기본 시간 설정임).
-
-글로벌 시간 선택기는 동일한 대시보드에서 `Global Time` 옵션을 사용하여 모든 위젯에 대한 동일 시간 프레임을 설정합니다. 과거 이동 기간을 선택(예: `Past 1 Hour` 또는 `Past 1 Day`)하거나 `Select from calendar...` 옵션을 사용해 고정 기간을 선택합니다. 또는 [커스텀 시간대를 입력하세요][11]. 이동 기간을 선택한 경우 위젯이 업데이트되어 해당 기간으로 이동합니다.
-
-글로벌 시간에 연결되지 않은 위젯은 글로벌 윈도우에 적용된 현지 시간 프레임의 데이터를 표시합니다. 예를 들어, 글로벌 시간 선택기가 2019년 1월 1일부터 2019년 1월 2일로 설정된 경우 `Past 1 Minute`에 대한 현지 시간 프레임으로 설정된 위젯은 오후 11시 59분부터 2019년 1월 2일 마지막 분까지를 표시합니다.
-
-## 위젯 복사 및 붙여넣기
-
-<div class="alert alert-danger">이 기능을 사용하려면 Organization Settings에서 <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a>을 활성화해야 합니다.</div>
-
-[대시보드][4], [노트북][5], [APM 서비스][6], [APM 리소스][7] 페이지에서 `Ctrl + C`(Mac의 경우 `Cmd + C`)를 사용하거나 공유 아이콘을 선택하여 위젯을 복사할 수 있습니다. 
-
-복사된 위젯은 다음에서 `Ctrl + V`(Mac의 경우 `Cmd + V`)을(를) 사용하여 Datadog 내에 붙여넣을 수 있습니다.
-
-* **Dashboards**: 마우스 커서 아래에 새 위젯을 추가합니다.
-* **Notebooks**: 노트북 끝에 새 셀을 추가합니다.
-
-링크 미리보기를 표시하는 즐겨찾는 채팅 프로그램(예: Slack 또는 Microsoft Teams)에 위젯을 붙여넣을 수도 있습니다. 이 경우 위젯에 대한 직접 링크와 함께 그래프의 스냅샷 이미지가 표시됩니다.
-
-### 위젯 그룹
-
-타임보드 그룹 위젯은 그룹 위젯 영역 위로 마우스를 이동하고 `Ctrl + C`(Mac의 경우 `Cmd + C`)을(를) 사용하거나 공유 아이콘을 선택하고 "Copy"를 선택하여 복사할 수 있습니다.
-
-**참고**: 스크린보드나 노트북에 그래프를 붙여넣으면 그룹 내 개별 위젯이 붙여넣어집니다.
-
-여러 스크린보드 위젯을 복사하려면(편집 모드만 해당) 위젯을 `shift + click`하고 `Ctrl + C`(Mac의 경우 `Cmd + C`)을(를) 사용합니다.
-
-**참고**: 이 기능은 Datadog 내에서 공유할 때만 작동합니다. 미리보기 이미지를 생성하지 않습니다.
-
-## 위젯 그래프
-
-### 내보내기
-
-| 형식 | 설명서            |
-| -----  | ----------------------- |
-| PNG    | 위젯을 PNG 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **PNG로 다운로드**를 선택하세요. |
-| CSV    | 시계열, 표, 상위 목록 위젯의 데이터를 CSV 형식으로 다운로드하려면 위젯 오른쪽 상단에 있는 내보내기 버튼을 클릭하고 **CSV로 다운로드**를 선택하세요.|
-
-### 그래프 메뉴
-
-대시보드 그래프를 클릭하여 옵션 메뉴를 엽니다.
-
-| 옵션                 | 설명                                                        |
-|------------------------|--------------------------------------------------------------------|
-| 스냅샷 전송          | 그래프의 스냅샷을 생성하고 전송합니다.                          |
-| 상관 관계에 있는 메트릭 찾기| APM 서비스, 통합 및 대시보드에서 상관관계를 찾습니다. |
-| 전체 화면으로 보기    | [전체 화면 모드][5]로 그래프 보기                           |
-| 커서 잠금            | 페이지에서 커서를 제자리에 잠금 처리합니다.                              |
-| 관련 프로세스 보기 | 그래프 범위가 지정된 [Live Processes][6] 페이지로 이동합니다.         |
-| 관련 호스트 보기     | 그래프 범위가 지정된 [Host Map][7] 페이지로 이동합니다.               |
-| 관련 로그 보기      | 그래프 범위가 지정된 [Log Explorer][8] 페이지로 이동합니다.           |
-| 관련 트레이스 보기    | 그래프 범위가 지정된 [Traces][9] 패널을 채웁니다.                 |
-| 관련 프로필 보기  | 그래프 범위의 [프로파일링][10] 페이지로 건너뜁니다.             |
-
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/dashboards/widgets/timeseries/#full-screen
-[2]: /ko/dashboards/guide/context-links/
-[3]: /ko/dashboards/guide/unit-override
-[4]: /ko/dashboards/
-[5]: /ko/notebooks/
-[6]: /ko/tracing/services/service_page/
-[7]: /ko/tracing/services/resource_page/
-[8]: /ko/logs/explorer/
-[9]: /ko/tracing/trace_explorer/
-[10]: /ko/profiler/profile_visualizations/
-[11]: /ko/dashboards/guide/custom_time_frames/
+[1]: https://app.datadoghq.com/dashboard/lists/preset/1
+[2]: /ko/dashboards/
+[3]: /ko/dashboards/widgets/configuration/
+[4]: /ko/dashboards/widgets/types/
+[5]: /ko/dashboards/configure/#tabs

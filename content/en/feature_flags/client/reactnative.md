@@ -68,7 +68,7 @@ buildscript {
 
 ## Initialize the SDK
 
-The Datadog OpenFeature provider for React Native requires the core Datadog SDK to be initialized first, followed by enabling the Feature Flags feature. To create a client token, see [Client tokens][2].
+The Datadog OpenFeature provider for React Native requires the core Datadog React Native SDK to be initialized first, followed by enabling the Feature Flags feature. To create a client token, see [Client tokens][2].
 
 ### Option 1: Using DatadogProvider component
 
@@ -269,7 +269,7 @@ function Content() {
 }
 
 function WelcomeMessage() {
-  const { value: showNewMessage } = useBooleanFlagValue('show-new-welcome-message', false, { suspend: true });
+  const showNewMessage = useBooleanFlagValue('show-new-welcome-message', false, { suspend: true });
 
   return (
     <>
@@ -439,13 +439,57 @@ OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogOpenFeatureProvider`, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` is exported from `@openfeature/web-sdk`, which is already installed for React Native Feature Flags.
+
+{{< code-block lang="tsx" >}}
+import { render, screen } from '@testing-library/react-native';
+import { Text } from 'react-native';
+import { OpenFeature, OpenFeatureProvider, useBooleanFlagValue } from '@openfeature/react-sdk';
+import { TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+    new_checkout_button: {
+        variants: { on: true, off: false },
+        defaultVariant: 'on',
+        disabled: false,
+    },
+};
+
+beforeEach(async () => {
+    await OpenFeature.setProviderAndWait(new TypedInMemoryProvider(flags));
+});
+
+afterAll(async () => {
+    await OpenFeature.close();
+});
+
+function CheckoutButton() {
+    const enabled = useBooleanFlagValue('new_checkout_button', false);
+    return <Text>{enabled ? 'New checkout' : 'Legacy checkout'}</Text>;
+}
+
+test('new checkout button is enabled', () => {
+    render(
+        <OpenFeatureProvider>
+            <CheckoutButton />
+        </OpenFeatureProvider>
+    );
+
+    expect(screen.getByText('New checkout')).toBeTruthy();
+});
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Use `setProviderAndWait` before rendering components so hooks do not evaluate against the default provider.
+
 ## Troubleshooting
 
 ### No flags returned
 
 If flag evaluations return default values:
 
-1. Verify the Datadog SDK is initialized before calling `DdFlags.enable()`.
+1. Verify the Datadog React Native SDK is initialized before calling `DdFlags.enable()`.
 2. Confirm `DdFlags.enable()` completed before setting the OpenFeature provider.
 3. Check that the evaluation context is set before evaluating flags.
 4. Confirm the flag exists and is enabled in your Datadog Feature Flags dashboard.
@@ -475,7 +519,7 @@ end
 
 If you see an error about Feature Flags not being initialized, verify the initialization order:
 
-1. Initialize the core Datadog SDK first (`DdSdkReactNative.initialize()` or `DatadogProvider`).
+1. Initialize the core Datadog React Native SDK first (`DdSdkReactNative.initialize()` or `DatadogProvider`).
 2. Call `DdFlags.enable()` after SDK initialization.
 3. Create and set the `DatadogOpenFeatureProvider` after enabling flags.
 

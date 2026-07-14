@@ -49,7 +49,7 @@ To create monitors for alerting at certain thresholds, you can use [Datadog Moni
 
 ### APM monitor
 
-Follow the instructions to create a new [APM monitor][10], with its scope set to **Trace Analytics**.
+Follow the instructions to create a new [APM monitor][10], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
 
 - To monitor evaluation traffic, use the query `@ai_guard.action: (DENY OR ABORT)`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
@@ -63,13 +63,14 @@ Follow the instructions to create a new [metric monitor][11].
 
 ## Evaluate conversations in AI Guard Playground {#playground}
 
-The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
+The [{{< ui >}}AI Guard Playground{{< /ui >}}][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
 Use the Playground to:
 - Experiment with different prompt patterns and see how AI Guard responds.
 - Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
 - Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity][20] settings.
 - Test sensitive data scanning on your conversations.
+- Add [evaluation context][22] to a conversation to see how it affects false positives, before applying that context to a service's policy.
 - Share evaluation results with your team during development.
 
 ## Further reading
@@ -86,3 +87,4 @@ Use the Playground to:
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /security/ai_guard/setup/#evaluation-sensitivity
 [21]: /security/ai_guard/setup/sdk/
+[22]: /security/ai_guard/setup/#evaluation-context

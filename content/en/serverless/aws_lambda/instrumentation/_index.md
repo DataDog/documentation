@@ -11,7 +11,10 @@ further_reading:
     - link: "/integrations/amazon_lambda/"
       tag: "Documentation"
       text: "AWS Lambda Integration"
-    - link: "/bits_ai/mcp_server/tools/#serverless_onboarding"
+    - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+      tag: "Learning Center"
+      text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
+    - link: "/mcp_server/tools/#serverless_onboarding"
       tag: 'Documentation'
       text: 'Datadog MCP Server: serverless_onboarding tool'
 ---
@@ -32,7 +35,14 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 ## Instrumentation instructions
 
-{{< partial name="serverless/getting-started-languages.html" >}}
+{{< card-grid card_width="30%" image_width="200" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 ## Advanced configurations
 
@@ -84,4 +94,4 @@ Instrument my AWS Lambda functions with Datadog.
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
-[9]: /bits_ai/mcp_server/tools/#serverless_onboarding
+[9]: /mcp_server/tools/#serverless_onboarding

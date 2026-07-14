@@ -403,7 +403,7 @@ Redeploy the application and exercise the API:
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
    : This command calls both the `notes` and `calendar` services.
 
-4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+4. Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 

@@ -16,7 +16,7 @@ further_reading:
 
 Permissions control what actions a user can take in Datadog. Users are assigned to roles, and each role has a set of permissions that determines what that user can see and do.
 
-Cloud Cost Management (CCM) uses two main permissions, `cloud_cost_management_read` and `cloud_cost_management_write`, to control access to cost data and most CCM configurations. Additional product-level permissions are available for specific features, such as editing budgets (`ccm_budget_write`) and managing report schedules (`generate_ccm_report_schedules`, `manage_ccm_report_schedules`). Assign these permissions to roles through [Role Based Access Control (RBAC)][1].
+Cloud Cost Management (CCM) uses two main permissions, `cloud_cost_management_read` and `cloud_cost_management_write`, to control access to cost data and most CCM configurations. Additional product-level permissions are available for specific features, such as editing budgets (`ccm_budget_write`), customizing forecast in the budgets (`ccm_forecast_write`), and managing report schedules (`generate_ccm_report_schedules`, `manage_ccm_report_schedules`). Assign these permissions to roles through [Role Based Access Control (RBAC)][1].
 
 CCM also supports [Data Access Control](#data-access-control) to further restrict cost data by tags.
 
@@ -27,6 +27,7 @@ CCM also supports [Data Access Control](#data-access-control) to further restric
 | `cloud_cost_management_read` | Grants read-only access to view cost data, budgets, recommendations, and settings across CCM pages and external integrations. |
 | `cloud_cost_management_write` | Grants access to modify CCM configurations, including uploading custom costs and managing cloud accounts. Does not grant access to create, edit, or delete budgets; see `ccm_budget_write`. |
 | `ccm_budget_write` | Grants access to create, update, and delete Cloud Cost Management budgets, including budget metadata and budgeted amounts per entry. Requires the read permission to access pages. |
+| `ccm_forecast_write` | Grants access to edit custom forecast values on Cloud Cost Management budgets. Requires the read permission to access pages. |
 | `generate_ccm_report_schedules` | Grants access to view all report schedules and manage only the ones the user has created. |
 | `manage_ccm_report_schedules` | Grants access to view, create, and fully manage all report schedules across the organization. |
 

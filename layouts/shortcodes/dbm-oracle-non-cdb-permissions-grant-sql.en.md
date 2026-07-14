@@ -31,6 +31,8 @@ grant select on v_$dataguard_config to datadog ;
 grant select on v_$dataguard_stats to datadog ;
 grant select on v_$transaction to datadog;
 grant select on v_$locked_object to datadog;
+grant select on v_$lock to datadog;
+grant select on gv_$lock to datadog;
 grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;

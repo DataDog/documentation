@@ -1,11 +1,11 @@
 ---
 aliases:
-- /es/service_management/events/usage
+- /es/events/usage
 further_reading:
 - link: /logs/log_configuration/processors/
   tag: Documentación
   text: Más información sobre pipelines de procesamiento
-- link: /service_management/events/explorer/
+- link: /events/explorer/
   tag: Documentación
   text: Clasificar eventos con Events Explorer
 title: Uso de eventos
@@ -15,7 +15,7 @@ title: Uso de eventos
 
 [Genera métricas][5] con una retención de 15 meses a partir de cualquier consulta de búsqueda de eventos para crear y monitorizar eventos históricos y alertas. Para la agregación, se tienen en cuenta los eventos ingeridos con una marca de tiempo dentro de los últimos 20 minutos. Para obtener más información, consulta [Event Analytics][6].
 
-{{< img src="service_management/events/guides/usage/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
+{{< img src="events/guides/usage/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
 
 ## Ejemplos de qué hacer con eventos
 
@@ -31,7 +31,7 @@ Puedes utilizar eventos como fuente de datos en los [widgets de gráficos][8] pa
 
 #### Superposiciones 
 
-{{< img src="service_management/events/guides/usage/event_overlays.png" alt="Opción para ver superposiciones de eventos en un dashboard de ejemplo" style="width:100%;" >}}
+{{< img src="events/guides/usage/event_overlays.png" alt="Opción para ver superposiciones de eventos en un dashboard de ejemplo" style="width:100%;" >}}
 
 Las superposiciones permiten visualizar eventos sobre tus gráficos. Utiliza la característica del dashboard [Event Overlays][10] (Superposiciones de eventos) para identificar cuándo un cambio reciente está generando problemas de rendimiento en tu aplicación o servicios y encontrar el origen del problema.
 
@@ -49,8 +49,8 @@ Envía alertas de monitor y notificaciones basadas en consultas de eventos signi
 [3]: https://app.datadoghq.com/event/pipelines
 [4]: /es/help/
 [5]: https://app.datadoghq.com/event/configuration/generate-metrics
-[6]: /es/service_management/events/explorer/analytics
-[7]: /es/service_management/events/explorer/
+[6]: /es/events/explorer/analytics
+[7]: /es/events/explorer/
 [8]: /es/dashboards/widgets/alert_graph/
 [9]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [10]: /es/dashboards/change_overlays/

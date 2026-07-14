@@ -6,6 +6,7 @@ import { initializeIntegrations } from './components/integrations';
 import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
+import initCardGrid from './components/card-grid';
 import { initCopyPageButton } from './components/copy-page-button';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
@@ -127,6 +128,8 @@ const doOnLoad = () => {
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
     }
+
+    initCardGrid();
 
     // Only initialize the expression language evaluator if the page contains an expression evaluator.
     if (document.querySelector('.expression-evaluator')) {

@@ -1,6 +1,6 @@
 ---
-title: Widget Public URLs
-description: Copy widgets as snapshot images and share them outside of Datadog.
+title: Widget Share URLs
+description: Copy widgets as images to share outside of Datadog.
 further_reading:
 - link: "/dashboards/sharing/"
   tag: "Documentation"
@@ -12,27 +12,35 @@ further_reading:
 
 ## Overview
 
-Widget Public URLs let you copy a dashboard widget as a static image and share it outside of Datadog. When you copy a widget with <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd>, Datadog generates a publicly accessible link to a screenshot of the widget as it appears on your screen. This link is placed on your clipboard. When you paste outside of Datadog (for example, into Slack or Microsoft Teams) the link renders as a snapshot image of your widget.
+Widget Share URLs let you copy a dashboard widget as an image for use outside of Datadog. When you copy a widget with <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd>, Datadog creates an image of the widget and generates a share URL. The URL behavior depends on your organization's Widget Share URLs setting.
 
-**Note**: Widget Public URLs is separate from the [Datadog Clipboard][1], which copies widgets for use within Datadog (in dashboards, notebooks, and incidents). It is also unrelated to the [Snapshots API][2], which programmatically captures metric graph snapshots.
+Admins can choose how widget share links and previews work in [**Organization Settings > Public Sharing > Settings**][3]:
+
+| Mode | Behavior |
+| --- | --- |
+| **Public** | Anyone with the share URL can view the widget image without a Datadog account. Third-party apps that support link previews, such as Slack or Microsoft Teams, can render a thumbnail of the widget. Viewing the source widget with live data still requires a Datadog account. |
+| **Private** | Share URLs are available only to authenticated users in the same Datadog organization. Public image URLs stop serving widget images, so third-party apps cannot render public image previews. Private preview unfurling is supported only in Slack, and only for Slack workspaces connected to the same Datadog organization. |
+| **Disabled** | Users cannot generate new Widget Share URLs. Existing share URLs and image endpoints are unavailable while the setting remains disabled, and Slack cannot generate new unfurls for those URLs. |
+
+**Note**: Widget Share URLs is separate from the [Datadog Clipboard][1], which copies widgets for use within Datadog (in dashboards, notebooks, and incidents). It is also unrelated to the [Snapshots API][2], which programmatically captures metric graph snapshots.
 
 ## Prerequisites
 
-This feature requires the **Widget Public URLs** setting to be enabled in your organization. To enable it, navigate to [**Organization Settings > Public Sharing > Settings**][3].
+This feature requires the **Widget Share URLs** setting to be set to **Public** or **Private** in your organization.
 
-When enabled, copying a widget generates a publicly accessible snapshot image link. Anyone with the link can view the snapshot, regardless of whether they have a Datadog account.
+Admin changes to the Widget Share URLs mode apply immediately to existing share URLs.
 
-## Copy a widget as an snapshot image
+## Copy a widget as a preview image
 
 1. On any dashboard, hover over the widget you want to share.
 2. Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd>, or click the share icon and select **Copy**.
 3. Paste outside of Datadog using <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>.
 
-In tools that support link previews (such as Slack or Microsoft Teams), the pasted link renders as a snapshot image of the widget.
+In tools that support link previews, the pasted link renders according to your organization's Widget Share URLs mode. In **Public** mode, the widget image is publicly accessible. In **Private** mode, public image previews are unavailable; Slack can render a private preview only when the Slack workspace is connected to the same Datadog organization.
 
-## Disable Widget Public URLs
+## Disable Widget Share URLs
 
-To stop generating publicly accessible widget image links, disable the **Widget Public URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates a public snapshot image link. Previously generated links are no longer accessible.
+To stop users from generating widget share links and previews, disable the **Widget Share URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates share links or previews, and previously shared URLs are no longer accessible. If the setting is later changed back to **Public** or **Private**, previously shared URLs resume functioning according to the selected mode.
 
 ## Further reading
 

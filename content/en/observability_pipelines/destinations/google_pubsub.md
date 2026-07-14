@@ -77,7 +77,7 @@ Use this authentication method if you're deploying the Worker as a Cloud Run ser
 1. Choose the JSON format.
 1. Save the downloaded JSON file in a secure location.
 1. After you install the Worker, copy or mount JSON the file into `DD_OP_DATA_DIR/config/`.
-You reference this file in the Google Pub/Sub destination's **Credentials path** field when you [set up the destination](#set-up-the-destination) in the Pipelines UI.
+You reference this file in the Google Pub/Sub destination's {{< ui >}}Credentials path{{< /ui >}} field when you [set up the destination](#set-up-the-destination) in the Pipelines UI.
 
 ## Setup
 
@@ -89,9 +89,9 @@ After you select the Google Pub/Sub destination in the pipeline UI:
 	- This is the GCP project where your Pub/Sub topic lives.
 1. Enter the topic.
 	- This is the Pub/Sub topic to publish logs to.
-1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in **JSON** or **Raw message**.
-	- **JSON**: Logs are structured as JSON (recommended if downstream tools need structured data).
-	- **Raw**: Logs are sent as raw strings (preserves the original format).
+1. In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select whether you want to encode your pipeline's output in {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw message{{< /ui >}}.
+	- {{< ui >}}JSON{{< /ui >}}: Logs are structured as JSON (recommended if downstream tools need structured data).
+	- {{< ui >}}Raw{{< /ui >}}: Logs are sent as raw strings (preserves the original format).
 1. If you have a credentials JSON file, enter the path to your credentials JSON file.
 	- If you using a service account JSON: enter the path `DD_OP_DATA_DIR/config/<your-service-account>.json`.
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
@@ -100,6 +100,10 @@ After you select the Google Pub/Sub destination in the pipeline UI:
 ### Optional settings
 
 #### Enable TLS
+
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 {{% observability_pipelines/tls_settings %}}
 

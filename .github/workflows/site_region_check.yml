@@ -1,0 +1,137 @@
+name: "Check site-region usage for site support"
+
+on:
+  pull_request:
+    paths:
+      - 'content/en/**/*.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-site-region:
+    if: github.head_ref != 'guacbot/translation-pipeline'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Get changed markdown files
+        id: changed_files
+        run: |
+          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'content/en/**/*.md' | xargs)
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+
+      - name: Check for site-region at top of page with support language
+        id: check
+        env:
+          CHANGED_FILES: ${{ steps.changed_files.outputs.files }}
+        run: |
+          flagged=""
+
+          for file in $CHANGED_FILES; do
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+
+            after_frontmatter=$(awk '
+              BEGIN { fm_count=0; started=0; lines=0 }
+              /^---[[:space:]]*$/ { fm_count++; if (fm_count==2) { started=1; next } }
+              started && lines < 15 { print; lines++ }
+            ' "$file")
+
+            if echo "$after_frontmatter" | grep -qiE '\{\{[<%]\s*(/\s*)?site-region'; then
+              region_content=$(echo "$after_frontmatter" | awk '
+                /\{\{[<%].*site-region/ { capture=1 }
+                capture { print }
+                /\{\{[<%]\s*\/\s*site-region/ { capture=0 }
+              ')
+
+              if echo "$region_content" | grep -qiE 'not (available|supported)|is not supported'; then
+                flagged="$flagged\n- \`$file\`"
+              fi
+            fi
+          done
+
+          if [ -n "$flagged" ]; then
+            echo -e "$flagged" > flagged_files.txt
+            echo "has_flagged=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_flagged=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post warning comment
+        if: steps.check.outputs.has_flagged == 'true'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const flaggedFiles = fs.readFileSync('flagged_files.txt', 'utf8').trim();
+
+            const body = [
+              '## :warning: Possible site support note detected',
+              '',
+              'The following files have a `site-region` shortcode at the top of the page that mentions a feature being "not available" or "not supported":',
+              '',
+              flaggedFiles,
+              '',
+              '**Are you trying to document site support for a product?** If so, the `site-region` shortcode is not the recommended approach. See the [Documenting site support](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/5201857960/Documenting+site+support) guide for the preferred method.',
+            ].join('\n');
+
+            // Check for an existing comment from this workflow to avoid duplicates
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const marker = 'Possible site support note detected';
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body,
+              });
+            }
+
+      - name: Resolve warning comment
+        if: steps.check.outputs.has_flagged == 'false'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const marker = 'Possible site support note detected';
+            const existing = comments.find(c => c.user.type === 'Bot' && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+              });
+            }

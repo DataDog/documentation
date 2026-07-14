@@ -33,9 +33,9 @@ A collection of recommended monitor templates are pre-configured by Datadog and 
 
  Monitor Templates are available out-of-the-box, so you can get started immediately after you finish installing the Datadog Agent and add integrations.
 
-Navigate to the [**Monitor List**][2] page. If you have fewer than 10 monitors, Datadog automatically recommends a list of Integration-Monitor Templates based on your installed integrations.
+Navigate to the [{{< ui >}}Monitor List{{< /ui >}}][2] page. If you have fewer than 10 monitors, Datadog automatically recommends a list of Integration-Monitor Templates based on your installed integrations.
 
-To browse the full list of monitor templates, navigate to the [**Monitors > Templates**][1] page. Filter and search all available Integration-Monitor Templates for your installed integrations as well as all available templates.
+To browse the full list of monitor templates, navigate to the [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Templates{{< /ui >}}][1] page. Filter and search all available Integration-Monitor Templates for your installed integrations as well as all available templates.
 
 ## Further reading
 

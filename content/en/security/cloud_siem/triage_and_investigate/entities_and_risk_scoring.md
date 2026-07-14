@@ -46,13 +46,13 @@ Click an entity in the [Explorer][4] to open the entity side panel.
 
 {{< img src="security/entities/entity-side-panel3.png" alt="The side panel for an entity" style="width:90%;" >}}
 
-The **What Happened** section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
+The {{< ui >}}What Happened{{< /ui >}} section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
 
-The **What contributes to the score** section displays the list of fired signals, relevant misconfigurations, and identity risks.
+The {{< ui >}}What contributes to the score{{< /ui >}} section displays the list of fired signals, relevant misconfigurations, and identity risks.
 
 ### Triage and mitigate threats in bulk
 
-The **Next steps** section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks.
+The {{< ui >}}Next steps{{< /ui >}} section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks.
 
 {{< img src="security/entities/entities-next-steps2.png" alt="The available next steps for an entity as shown in the entity side panel" style="width:80%;" >}}
 
@@ -63,16 +63,16 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
 
-1. Navigate to the **Create a new Risk Insight notification** page. There are two ways to do this:
-   - In Datadog, go to the [Risk Insights Explorer][4], then click **Create Notification Rule**.
-   - In Datadog, go to **Cloud SIEM** > **Settings**. Under **Products**, in the **Cloud SIEM** section, click [**Risk Insights**][7]; then, under **Notification rules**, click **New notification rule**.
-1. Under **Define entity attributes**, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside **Entities matching**, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
+1. Navigate to the {{< ui >}}Create a new Risk Insight notification{{< /ui >}} page. There are two ways to do this:
+   - In Datadog, go to the [Risk Insights Explorer][4], then click {{< ui >}}Create Notification Rule{{< /ui >}}.
+   - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
+1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
-1. Under **Set notification conditions**, specify the risk score threshold to trigger notifications for.
-1. Under **Configure notification**, enter a name for the notification, add a custom message body, and specify recipients to send it to.
+1. Under {{< ui >}}Set notification conditions{{< /ui >}}, specify the risk score threshold to trigger notifications for.
+1. Under {{< ui >}}Configure notification{{< /ui >}}, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
-1. To verify your setup, click **Test Notification** to send a test notification to the configured recipients.
-1. Click **Save Notification**.
+1. To verify your setup, click {{< ui >}}Test Notification{{< /ui >}} to send a test notification to the configured recipients.
+1. Click {{< ui >}}Save Notification{{< /ui >}}.
 
 ## Risk scoring
 

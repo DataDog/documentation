@@ -18,13 +18,13 @@ If your application does not have an existing [Datadog integration][1], and you 
 Before you can send events with email, you need a dedicated email address from Datadog:
 
 1. Log in to your [Datadog account][3].
-2. From the **Account** menu at the bottom left, select **Organization Settings**.
-3. Click the **Events API emails** tab.
-4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON v2`).
+2. From the {{< ui >}}Account{{< /ui >}} menu at the bottom left, select {{< ui >}}Organization Settings{{< /ui >}}.
+3. Click the {{< ui >}}Events API emails{{< /ui >}} tab.
+4. Choose the format for your messages from the {{< ui >}}Format{{< /ui >}} dropdown (`Plain text` or `JSON v2`).
 5. Optionally, define any of the other attributes listed in this page's [attribute definitions section](#attribute-definitions).
-6. Click the **Create Email** button.
+6. Click the {{< ui >}}Create Email{{< /ui >}} button.
 
-The **Events API emails** section displays all the emails available for your applications and who created them.
+The {{< ui >}}Events API emails{{< /ui >}} section displays all the emails available for your applications and who created them.
 
 ### Attribute definitions
 
@@ -33,16 +33,16 @@ The **Events API emails** section displays all the emails available for your app
 | Description | A description of the email's purpose. | "Used for MyService notifications" |
 | Tags | List of tags to be appended to each event received through the email. If other tags are present in the JSON message, they are all added.<br>There is a limit of **20** tags per email. | `tag1:val1`, `tag2:val2` |
 | Recipients | List of handles to be added to the beginning of the message for all events created through the email, without `@` prefix. For more information, see [Notification recipients][7].<br>There is a limit of **10** recipients per email. | `my@email.com`, `slack-acc-ch` |
-| Alert Type | For **Plain text** and **JSON** format addresses, sets the alert type for events. When present, the `alert_type` field in a JSON email takes precedence over this setting. **Not supported for JSON v2**—set category and related fields in the email JSON body instead. | `Info` |
+| Alert Type | For {{< ui >}}Plain text{{< /ui >}} and {{< ui >}}JSON{{< /ui >}} format addresses, sets the alert type for events. When present, the `alert_type` field in a JSON email takes precedence over this setting. **Not supported for JSON v2**—set category and related fields in the email JSON body instead. | `Info` |
 
 ## Submission
 
-There are three ways to send events with email, described in the tabs below (**JSON**, **Plain text**, and **JSON v2**). The `JSON` format is deprecated for new event email addresses—you cannot create new addresses with that format, but existing `JSON` addresses keep working. For new applications that send JSON-formatted emails, use `JSON v2`.
+There are three ways to send events with email, described in the tabs below ({{< ui >}}JSON{{< /ui >}}, {{< ui >}}Plain text{{< /ui >}}, and {{< ui >}}JSON v2{{< /ui >}}). The `JSON` format is deprecated for new event email addresses—you cannot create new addresses with that format, but existing `JSON` addresses keep working. For new applications that send JSON-formatted emails, use `JSON v2`.
 
 {{< tabs >}}
 {{% tab "JSON" %}}
 
-If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v1**][1] (`POST /api/v1/events`). Select the **v1** API version to see the request body fields. The JSON in the email body sets the event fields that show in Datadog.
+If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v1**][1] (`POST /api/v1/events`). Select the {{< ui >}}v1{{< /ui >}} API version to see the request body fields. The JSON in the email body sets the event fields that show in Datadog.
 
 ### Source email {#source-email-1}
 
@@ -175,7 +175,7 @@ http://example.com/session_id%3A123456
 The maximum allowed email size, including content and attachments, is 20MB. Emails exceeding this limit are ignored.
 
 ### Usage tracking
-To understand which emails are being used and receiving events, check the `Last Used` column in the **Events API Emails** tab in organization settings. This displays the most recent date that an email was processed for each address, or `No data` if there are no records of it being used.
+To understand which emails are being used and receiving events, check the {{< ui >}}Last Used{{< /ui >}} column in the {{< ui >}}Events API Emails{{< /ui >}} tab in organization settings. This displays the most recent date that an email was processed for each address, or {{< ui >}}No data{{< /ui >}} if there are no records of it being used.
 
 [1]: /integrations/
 [2]: /agent/agent_checks/

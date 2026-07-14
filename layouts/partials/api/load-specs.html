@@ -1,15 +1,26 @@
 {{/*
-  Shared partial for loading API specs with caching
+  Shared partial for loading API specs with caching.
   Prefer .Site.Data.api.v1.full_spec_deref, else fallback to full_spec.
-  Usage: {{ partial "api/load-specs.html" (dict "version" "v1") }}
+
+  On first load per version, also walks the spec once to build an
+  operationId -> { pathKey, actionType, action } index and caches it
+  alongside the spec in hugo.Store. Callers can then resolve an
+  endpoint in O(1) instead of ranging $spec.paths in the layout.
+
+  Usage:
+    {{ partial "api/load-specs.html" (dict "version" "v1") }}
+      → returns the spec map.
+    {{ partial "api/load-specs.html" (dict "version" "v1" "lookup" "ListWidgets") }}
+      → returns dict { pathKey, actionType, action } for the matching
+        operationId, or nil if not found in this version.
 */}}
 {{- $version  := .version | default "v1" -}}
-{{- $cacheKey := printf "api:%s:full_spec" $version -}}
-{{- $spec := "" -}}
-{{- with (hugo.Store.Get $cacheKey) -}}
-  {{- /* return cached */ -}}
-  {{- $spec = . -}}
-{{- else -}}
+{{- $lookup   := .lookup -}}
+{{- $specKey  := printf "api:%s:full_spec" $version -}}
+{{- $indexKey := printf "api:%s:op_index" $version -}}
+
+{{- $spec := hugo.Store.Get $specKey -}}
+{{- if not $spec -}}
   {{- $apiData := index site.Data "api" -}}
   {{- if not $apiData -}}
     {{- errorf "Data namespace 'api' not found under /data. Expected /data/api/%s/full_spec.(yaml|yml|json)" $version -}}
@@ -21,9 +32,9 @@
   {{- end -}}
 
   {{- $hasDeref := isset $verData "full_spec_deref" -}}
-  {{- $spec := cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
+  {{- $loaded := cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
 
-  {{- if not $spec -}}
+  {{- if not $loaded -}}
     {{- errorf "Neither full_spec_deref nor full_spec found in .Site.Data.api.%s. Place one at /data/api/%s/." $version $version -}}
   {{- end -}}
 
@@ -31,8 +42,26 @@
     {{- warnf "OpenAPI: version=%q using fallback .Site.Data.api.%s.full_spec (full_spec_deref not present)" $version $version -}}
   {{- end -}}
 
-  {{- /* Cache and return */ -}}
-  {{- hugo.Store.Set $cacheKey $spec -}}
+  {{- hugo.Store.Set $specKey $loaded -}}
+  {{- $spec = $loaded -}}
+
+  {{- $sc := newScratch -}}
+  {{- range $pathKey, $pathObject := $spec.paths -}}
+    {{- if not (hasPrefix $pathKey "x-") -}}
+      {{- range $actionType, $action := $pathObject -}}
+        {{- with $action.operationId -}}
+          {{- $sc.SetInMap "i" . (dict "pathKey" $pathKey "actionType" $actionType "action" $action) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- hugo.Store.Set $indexKey ($sc.Get "i") -}}
 {{- end -}}
 
-{{- return $spec -}}
+{{- $result := $spec -}}
+{{- if $lookup -}}
+  {{- $index := hugo.Store.Get $indexKey -}}
+  {{- $result = index $index $lookup -}}
+{{- end -}}
+
+{{- return $result -}}

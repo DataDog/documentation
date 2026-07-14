@@ -49,7 +49,7 @@ Después de crear un tipo de incidencia personalizado, debes asignarlo explícit
 4. Desplázate hasta la sección Case Types (Tipos de incidencia) en el panel de configuración.
 5. En **From your organization** (De tu organización), abre el desplegable y selecciona el tipo de incidencia personalizado que has creado.
 
-{{< img src="/service_management/case_management/customization/enable_custom_attribute.png" alt="Activar un tipo de incidencia personalizado en la configuración del proyecto" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/customization/enable_custom_attribute.png" alt="Activar un tipo de incidencia personalizado en la configuración del proyecto" style="width:100%;" >}}
 
 Una vez añadido el tipo de incidencia, estará disponible como opción al crear una nueva incidencia dentro de ese proyecto.
 
@@ -69,7 +69,7 @@ Los atributos personalizados te permiten capturar los datos estructurados que tu
 * Centros de datos
 * Versiones
 
-{{< img src="/service_management/case_management/customization/add_custom_attribute.png" alt="Añadir un atributo personalizado a un tipo de incidencia" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/customization/add_custom_attribute.png" alt="Añadir un atributo personalizado a un tipo de incidencia" style="width:100%;" >}}
 
 Puedes añadir atributos que reflejen las necesidades específicas de tu equipo, como niveles de escalado, propietarios de componentes, impacto empresarial o enlaces externos. Para añadir un atributo personalizado:
 

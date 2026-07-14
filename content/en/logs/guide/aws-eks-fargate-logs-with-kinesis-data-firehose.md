@@ -46,7 +46,7 @@ The following steps outline the process for sending logs from a sample applicati
 ### Create an Amazon Data Firehose delivery stream
 
 See the [Send AWS Services Logs with the Datadog Amazon Data Firehose Destination][4] guide to set up an Amazon Data Firehose Delivery stream.
-**Note**: Set the **Source** as `Direct PUT`.
+**Note**: Set the {{< ui >}}Source{{< /ui >}} as `Direct PUT`.
 
 ### Configure Fluent Bit for Firehose on an EKS Fargate cluster
 
@@ -85,7 +85,7 @@ See the [Send AWS Services Logs with the Datadog Amazon Data Firehose Destinatio
    kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
-4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Amazon Data Firehose. You can use the example below, replacing the ARN in the **Resource** field with the ARN of your delivery stream, as well as specifying your region and account ID.
+4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Amazon Data Firehose. You can use the example below, replacing the ARN in the `Resource` field with the ARN of your delivery stream, as well as specifying your region and account ID.
    {{< code-block lang="json" filename="allow_firehose_put_permission.json" disable_copy="false" collapsible="false" >}}
    {
        "Version": "2012-10-17",
@@ -207,7 +207,7 @@ To generate logs and test the Amazon Data Firehose delivery stream, deploy a sam
 
 Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.
 1. Go to the [Datadog Log Pipelines][3] page.
-2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` and **Filter** `service:aws source:aws`.
+2. Create a new pipeline with {{< ui >}}Name{{< /ui >}} `EKS Fargate Log Pipeline` and {{< ui >}}Filter{{< /ui >}} `service:aws source:aws`.
 3. Create four [Remapper processors][5] to remap the following attributes to tag keys:
  | Attribute to remap | Target Tag Key |
  |--------------------|----------------|

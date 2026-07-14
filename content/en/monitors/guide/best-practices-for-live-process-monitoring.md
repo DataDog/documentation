@@ -22,14 +22,14 @@ Datadog recommends scoping your monitor to no more than a few thousand processes
 
 Example workflow:
 
-1. Navigate to the [**Monitors > New Monitor > Live Process**][4] page.
+1. Navigate to the [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Live Process{{< /ui >}}][4] page.
 
-2. Add tags to the monitor in the **by tags** field. 
+2. Add tags to the monitor in the {{< ui >}}by tags{{< /ui >}} field. 
     - For example, use `command:puma` to monitor processes associated with the `puma` command.
 
 {{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="A live process monitor that has been scoped using a tag" style="width:100%;" >}}
 
-3. Optionally, refine the monitor's scope by adding search text to the **by text** field. In the example below, only processes whose command line matches `cluster worker` are included.
+3. Optionally, refine the monitor's scope by adding search text to the {{< ui >}}by text{{< /ui >}} field. In the example below, only processes whose command line matches `cluster worker` are included.
 
 {{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
 

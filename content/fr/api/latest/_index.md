@@ -236,7 +236,14 @@ async fn main() {
 
 Vous pouvez également consulter directement les bibliothèques :
 
-{{< partial name="api/sdk-languages.html" >}}
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 </br>
 Vous préférez démarrer avec l’application ? Consultez la [documentation générale de prise en main][7] de Datadog.
 

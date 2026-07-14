@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/service_management/incidents/investigate/incidents_overview_tab.png" alt="Example incident details view from the Overview tab" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/incidents_overview_tab.png" alt="Example incident details view from the Overview tab" style="width:100%;" >}}
 
 An effective incident investigation starts with identifying and categorizing the incident, followed by comprehensive data collection to construct a detailed timeline of events. The Datadog Incident Details page helps you investigate incidents by providing a centralized platform for real-time monitoring, investigation, remediation, collaboration, and analysis. It includes dynamic dashboards and interactive timelines which assist responders in visualizing incident data and patterns. Use the incident details to:
 
@@ -42,7 +42,7 @@ Add more property fields using `<KEY>:<VALUE>` pairs from Datadog metric tags, o
 
 For customer-facing incidents, specify impact details by adding them in the **Impacts** section:
 
-{{< img src="/service_management/incidents/investigate/incident_details_impacts.png" alt="Your image description" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/investigate/incident_details_impacts.png" alt="Your image description" style="width:90%;" >}}
 
 1. Click **Add**.  
 2. Specify a start date and time for the impact.  

@@ -4,7 +4,7 @@ aliases:
 - /es/monitors/create/types/event/
 description: Monitor de eventos recopilados por Datadog
 further_reading:
-- link: /service_management/events/
+- link: /events/
   tag: Documentación
   text: Descripción general de gestión de eventos
 - link: /monitors/notify/
@@ -94,7 +94,7 @@ La variable de plantilla es `{{event.tags.env}}`. El resultado de utilizar esta 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /es/service_management/events/explorer/searching
+[2]: /es/events/explorer/searching
 [3]: /es/help/
 [4]: /es/monitors/configuration/#advanced-alert-conditions
 [5]: /es/monitors/notify/

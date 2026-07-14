@@ -1,6 +1,6 @@
 ---
 aliases:
-- /es/service_management/events/guides/agent/
+- /es/events/guides/agent/
 further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentación

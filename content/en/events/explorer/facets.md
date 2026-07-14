@@ -3,7 +3,7 @@ title: Facets
 aliases:
 - /service_management/events/explorer/facets/
 further_reading:
-- link: "service_management/events/explorer/attributes"
+- link: "events/explorer/attributes"
   tag: "Documentation"
   text: "Learn about reserved attributes"
 ---
@@ -14,7 +14,7 @@ By default, Datadog indexes event attributes as facets. Facets are accessible fr
 
 A facet displays the distinct members of an attribute or a tag and provides basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
-{{< img src="service_management/events/explorer/facets-location.png" alt="Facets side-panel" style="width:100%;" >}}
+{{< img src="events/explorer/facets-location.png" alt="Facets side-panel" style="width:100%;" >}}
 
 ### Create a facet
 

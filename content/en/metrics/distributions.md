@@ -72,10 +72,10 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][4] and click the **Configure Metrics** dropdown.
-1. Select **Enable percentiles**.
+1. Navigate to the [Metrics Summary Page][4] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
+1. Select {{< ui >}}Enable percentiles{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
-1. (Optional) To disable percentiles for all metrics in the namespace, click the **Percentile aggregations** toggle.
+1. (Optional) To disable percentiles for all metrics in the namespace, click the {{< ui >}}Percentile aggregations{{< /ui >}} toggle.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;" >}}
 
@@ -88,14 +88,14 @@ With threshold queries for distributions with percentiles, you do not need to pr
 To use threshold queries: 
 
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Graph your chosen distribution metric using the "count values..." aggregator.
+2. Graph your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 
 {{< img src="metrics/distributions/threshold_queries.mp4" video=true alt="A timeseries graph being visualized using the count values aggregator, with a threshold of greater than 8 seconds" style="width:80%;" >}}
 
 You can similarly create a metric-based SLO using threshold queries: 
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the "count values..." aggregator.
+2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 {{< img src="metrics/distributions/threshold_SLO.png" alt="Threshold Queries for SLOs" style="width:80%;">}}
 
@@ -106,8 +106,8 @@ Distributions provide functionality that allows you to control the tagging for c
 To customize tagging:
 
 1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. 
+2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
+3. Click the {{< ui >}}Custom...{{< /ui >}} tab to customize the tags you'd like to keep available for query. 
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 

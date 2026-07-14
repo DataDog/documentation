@@ -14,7 +14,7 @@ Use the arithmetic processor to add a new attribute (without spaces or special c
 
 An arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
-By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
+By default, a calculation is skipped if an attribute is missing. Select {{< ui >}}Replace missing attribute by 0{{< /ui >}} to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
 **Notes**:
 
@@ -84,7 +84,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic pro
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not. Default: `false`.                                                                                        |
 | `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                     |
 | `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
-| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
+| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `expression` with 0. If `false`, skips the operation if an attribute is missing. Default: `false`. |
 
 
 ## Further reading

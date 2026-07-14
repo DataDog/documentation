@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Install or update a Datadog Agent with the **Enable APM Instrumentation** and **Error Tracking Standalone** options to enable standalone Backend Error Tracking.
+Install or update a Datadog Agent with the {{< ui >}}Enable APM Instrumentation{{< /ui >}} and {{< ui >}}Error Tracking Standalone{{< /ui >}} options to enable standalone Backend Error Tracking.
 This allows you to automatically instrument your application, without any additional installation or configuration steps.
 
 ## Install standalone Backend Error Tracking

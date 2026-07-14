@@ -26,18 +26,18 @@ After creating a grok rule, the parser can write the IP address, user, request t
 
 ## Setup
 
-Define the Grok processor on the [**Pipelines** page][2]. To configure Grok parsing rules:
+Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To configure Grok parsing rules:
 
-1. Click **Parse my logs** to automatically generate a set of three parsing rules based on the logs flowing through the pipeline.
+1. Click {{< ui >}}Parse my logs{{< /ui >}} to automatically generate a set of three parsing rules based on the logs flowing through the pipeline.
    **Note**: This feature requires that the corresponding logs are indexed and actively flowing in. You can temporarily deactivate or sample down exclusion filters to allow the feature to detect logs.
-1. **Log Samples**: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
-1. **Define parsing rules**: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
+1. {{< ui >}}Log Samples{{< /ui >}}: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
+1. {{< ui >}}Define parsing rules{{< /ui >}}: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
    - **Matcher suggestions**: Type a rule name followed by `%{`. A dropdown appears with available matchers (such as `word`, `integer`, `ip`, `date`). Select a matcher from the list to insert it into your rule.<br>
      ```
      MyParsingRule %{
      ```
    - **Filter suggestions**: When adding a filter with `:`, a dropdown shows compatible filters for the selected matcher.
-1. **Test your rules**: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. {{< ui >}}Test your rules{{< /ui >}}: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 
 ## Before and after state of logs

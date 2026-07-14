@@ -1,6 +1,6 @@
 ---
 title: Configure Monitors
-description: Describes the monitor creation page.
+description: Learn how to configure and customize monitors using the monitor creation page in Datadog.
 aliases:
   - /monitors/create/configuration
 further_reading:
@@ -26,10 +26,10 @@ further_reading:
 
 To start configuring the monitor, complete the following:
 
-* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, and more.
-* **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
-* **Configure notifications and automations:** Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
-* **Define permissions and audit notifications:** Configure granular access controls and designate specific roles and users who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
+* {{< ui >}}Define the search query{{< /ui >}}: Construct a query to count events, measure metrics, group by one or several dimensions, and more.
+* {{< ui >}}Set alert conditions{{< /ui >}}: Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
+* {{< ui >}}Configure notifications and automations{{< /ui >}}: Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
+* {{< ui >}}Define permissions and audit notifications{{< /ui >}}: Configure granular access controls and designate specific roles and users who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
 
 ## Define the search query
 
@@ -44,13 +44,13 @@ As you build or modify your query, the preview graph at the top of the configura
 
 {{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
 
-The Evaluated Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
+The {{< ui >}}Evaluated Data{{< /ui >}} graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
 - See historical state transitions (for example, `OK` → `ALERT`).
 - Understand how your monitor would have behaved.
 - Preview who would be notified (including from notification rules)
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability, and Deployment monitors.
 
 {{% /tab %}}
 
@@ -58,13 +58,13 @@ This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, 
 
 {{< img src="/monitors/configuration/source_data_graph_high_error_rate.png" alt="Source Data Preview Graph" style="width:100%;" >}}
 
-The Source Data graph displays the raw timeseries or query output for your monitor, without any threshold evaluation or alert logic applied. This allows you to:
+The {{< ui >}}Source Data{{< /ui >}} graph displays the raw timeseries or query output for your monitor, without any threshold evaluation or alert logic applied. This allows you to:
 
 - Visualize the underlying data that your monitor is evaluating.
 - Correlate alert state changes with actual data trends.
 - Identify anomalies, gaps, or unexpected patterns in your data before configuring alert conditions.
 
-Use the Source Data graph to ensure your query is returning the expected results and to help refine your alert thresholds and evaluation windows.
+Use the {{< ui >}}Source Data{{< /ui >}} graph to ensure your query is returning the expected results and to help refine your alert thresholds and evaluation windows.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -76,9 +76,9 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 {{< tabs >}}
 {{% tab "Threshold alert" %}}
 
-* Trigger when the `average`, `max`, `min`, or `sum` of the metric is
-* `above`, `above or equal to`, `below`, or `below or equal to` the threshold
-* during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
+* Trigger when the {{< ui >}}average{{< /ui >}}, {{< ui >}}max{{< /ui >}}, {{< ui >}}min{{< /ui >}}, or {{< ui >}}sum{{< /ui >}} of the metric is
+* {{< ui >}}above{{< /ui >}}, {{< ui >}}above or equal to{{< /ui >}}, {{< ui >}}below{{< /ui >}}, or {{< ui >}}below or equal to{{< /ui >}} the threshold
+* during the last {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, or {{< ui >}}custom{{< /ui >}} to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
 ### Aggregation method
 
@@ -86,12 +86,14 @@ The query returns a series of points, but a single value is needed to compare to
 
 | Option                  | Description                                            |
 |-------------------------|--------------------------------------------------------|
-| average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
-| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query.* |
-| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
-| sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
+| {{< ui >}}average{{< /ui >}}         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
+| {{< ui >}}max{{< /ui >}} | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query.* |
+| {{< ui >}}min{{< /ui >}}  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
+| {{< ui >}}sum{{< /ui >}} | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
 
-\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed. For more examples, see the [Monitor aggregators][1] guide.
+\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed.
+
+<div class="alert alert-info">For a breakdown of how each aggregation method works with examples, see the <a href="/monitors/guide/monitor_aggregators/">Monitor Aggregators guide</a>.</div>
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][2] for details.
 
@@ -105,20 +107,20 @@ The figure below illustrates the difference between cumulative and rolling time 
 
 #### Rolling time windows
 
-A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom time window of up to 1 month.
+A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, or over a custom time window of up to 1 month.
 
 **Note**: [Log monitors][6] have a maximum rolling time window of `2 days`.
 
 #### Cumulative time windows
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
-- `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
-- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the `current day` time window and letting it start at 2:00pm UTC.
-- `Current month`: Looks back at the current month starting on a configurable day of the month at a configurable hour and minute. This option represents a month-to-date time window and is only available for metric monitors.
+- {{< ui >}}Current hour{{< /ui >}}: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
+- {{< ui >}}Current day{{< /ui >}}: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the {{< ui >}}Current day{{< /ui >}} time window and letting it start at 2:00pm UTC.
+- {{< ui >}}Current month{{< /ui >}}: Looks back at the current month starting on a configurable day of the month at a configurable hour and minute. This option represents a month-to-date time window and is only available for metric monitors.
 
 {{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
 
-A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
+A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the {{< ui >}}Current month{{< /ui >}} resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of {{< ui >}}Current hour{{< /ui >}}, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
 
 ### Evaluation frequency
 
@@ -144,10 +146,10 @@ Datadog has two types of notifications (alert and warning). Monitors recover aut
 
 | Option                                   | Description                    |
 |------------------------------------------|--------------------------------|
-| Alert&nbsp;threshold&nbsp;**(required)** | The value used to trigger an alert notification. |
-| Warning&nbsp;threshold                   | The value used to trigger a warning notification. |
-| Alert&nbsp;recovery&nbsp;threshold       | An optional threshold to indicate an additional condition for alert recovery. |
-| Warning&nbsp;recovery&nbsp;threshold     | An optional threshold to indicate an additional condition for warning recovery. |
+| {{< ui >}}Alert threshold{{< /ui >}} (required) | The value used to trigger an alert notification. |
+| {{< ui >}}Warning threshold{{< /ui >}}                   | The value used to trigger a warning notification. |
+| {{< ui >}}Alert recovery threshold{{< /ui >}}       | An optional threshold to indicate an additional condition for alert recovery. |
+| {{< ui >}}Warning recovery threshold{{< /ui >}}     | An optional threshold to indicate an additional condition for warning recovery. |
 
 As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
 
@@ -203,39 +205,39 @@ If data is missing for `N` minutes, select an option from the dropdown menu:
 
 {{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:70%;">}}
 
-- `Evaluate as zero` / `Show last known status`
-- `Show NO DATA`
-- `Show NO DATA and notify`
-- `Show OK`.
+- {{< ui >}}Evaluate as zero{{< /ui >}} / {{< ui >}}Show last known status{{< /ui >}}
+- {{< ui >}}Show NO DATA{{< /ui >}}
+- {{< ui >}}Show NO DATA and notify{{< /ui >}}
+- {{< ui >}}Show OK{{< /ui >}}.
 
-The selected behavior is applied when a monitor's query does not return any data. Contrary to the `Do not notify` option, the missing data window is **not** configurable.
+The selected behavior is applied when a monitor's query does not return any data. Contrary to the {{< ui >}}Do not notify{{< /ui >}} option, the missing data window is **not** configurable.
 
 | Option                    | Monitor status & notification                                             |
 |---------------------------|---------------------------------------------------------------------------|
-| `Evaluate as zero`        | Empty result is replaced with zero and is compared to the alert/warning thresholds. For example, if the alert threshold is set to `> 10`, a zero would not trigger that condition, and the monitor status is set to `OK`.   |
-| `Show last known status`  | The last known status of the group or monitor is set.                        |
-| `Show NO DATA`            | Monitor status is set to `NO DATA`.                                       |
-| `Show NO DATA and notify` | Monitor status is set to `NO DATA` and a notification is sent out.        |
-| `Show OK`                 | Monitor is resolved and status is set to `OK`.                            |
+| {{< ui >}}Evaluate as zero{{< /ui >}}        | Empty result is replaced with zero and is compared to the alert/warning thresholds. For example, if the alert threshold is set to `> 10`, a zero would not trigger that condition, and the monitor status is set to `OK`.   |
+| {{< ui >}}Show last known status{{< /ui >}}  | The last known status of the group or monitor is set.                        |
+| {{< ui >}}Show NO DATA{{< /ui >}}            | Monitor status is set to `NO DATA`.                                       |
+| {{< ui >}}Show NO DATA and notify{{< /ui >}} | Monitor status is set to `NO DATA` and a notification is sent out.        |
+| {{< ui >}}Show OK{{< /ui >}}                 | Monitor is resolved and status is set to `OK`.                            |
 
-The `Evaluate as zero` and `Show last known status` options are displayed based on the query type:
+The {{< ui >}}Evaluate as zero{{< /ui >}} and {{< ui >}}Show last known status{{< /ui >}} options are displayed based on the query type:
 
-- **Evaluate as zero:** This option is available for monitors using `Count` queries without the `default_zero()` function.
-- **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
+- {{< ui >}}Evaluate as zero{{< /ui >}}: This option is available for monitors using `Count` queries without the `default_zero()` function.
+- {{< ui >}}Show last known status{{< /ui >}}: This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
 
 #### Auto resolve
 
-`[Never]`, `After 1 hour`, `After 2 hours` and so on. automatically resolve this event from a triggered state.
+{{< ui >}}[Never]{{< /ui >}}, {{< ui >}}After 1 hour{{< /ui >}}, {{< ui >}}After 2 hours{{< /ui >}} and so on. automatically resolve this event from a triggered state.
 
 Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state if data is still reporting. If data is still being submitted, the [renotify][2] feature can be utilized to let your team know when an issue is not resolved.
 
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
-In most cases this setting is not useful because you only want an alert to resolve after it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+In most cases this setting is not useful because you only want an alert to resolve after it is actually fixed. So, in general, it makes sense to leave this as {{< ui >}}[Never]{{< /ui >}} so alerts only resolve when the metric is above or below the set threshold.
 
 #### Group retention time
 
-You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours. For multi alert monitors, select **Remove the non-reporting group after `N (length of time)`**.
+You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours. For multi alert monitors, select {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
@@ -284,26 +286,26 @@ For more information on the configuration options for the notification message, 
 
 <div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
 
-1. Use the **Tags** dropdown to associate [tags][8] with your monitor.
-1. Use the **Teams** dropdown to associate [teams][9] with your monitor.
-1. Choose a **Priority**.
+1. Use the {{< ui >}}Tags{{< /ui >}} dropdown to associate [tags][8] with your monitor.
+1. Use the {{< ui >}}Teams{{< /ui >}} dropdown to associate [teams][9] with your monitor.
+1. Choose a {{< ui >}}Priority{{< /ui >}}.
 
 ### Set alert aggregation
 
-Alerts are grouped automatically based on your selection of the aggregation selected for your query (for example, `avg by service`). If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
+Alerts are grouped automatically based on your selection of the aggregation selected for your query (for example, `avg by service`). If the query has no grouping, it defaults to {{< ui >}}Simple Alert{{< /ui >}}. If the query is grouped by any dimension, grouping changes to {{< ui >}}Multi Alert{{< /ui >}}.
 
 {{< img src="/monitors/create/notification-aggregation.png" alt="Configurations options for monitor notification aggregation" style="width:100%;">}}
 
 #### Simple alert
 
-`Simple Alert` mode triggers a notification by aggregating over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions. For example, you might set up a monitor to notify you if the average CPU usage of all servers exceeds a certain threshold. If that threshold is met, you'll receive a single notification, regardless of the number of individual servers that met the threshold. This can be useful for monitoring broad system trends or behaviors.
+{{< ui >}}Simple Alert{{< /ui >}} mode triggers a notification by aggregating over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions. For example, you might set up a monitor to notify you if the average CPU usage of all servers exceeds a certain threshold. If that threshold is met, you'll receive a single notification, regardless of the number of individual servers that met the threshold. This can be useful for monitoring broad system trends or behaviors.
 
 
 {{< img src="/monitors/create/simple-alert.png" alt="Diagram showing how monitor notifications are sent in simple alert mode" style="width:90%;">}}
 
 #### Multi alert
 
-A `Multi Alert` monitor triggers individual notifications for each entity in a monitor that meets the alert threshold.
+A {{< ui >}}Multi Alert{{< /ui >}} monitor triggers individual notifications for each entity in a monitor that meets the alert threshold.
 
 {{< img src="/monitors/create/multi-alert.png" alt="Diagram of how monitor notifications are sent in multi alert mode" style="width:90%;">}}
 
@@ -315,7 +317,7 @@ When monitoring a large group of entities, multi alerts can lead to noisy monito
 
 {{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagram of how notifications are sent when set to specific dimensions in multi alerts" style="width:90%;">}}
 
-When aggregating notifications in `Multi Alert` mode, the dimensions that are not aggregated on become `Sub Groups` in the UI.
+When aggregating notifications in {{< ui >}}Multi Alert{{< /ui >}} mode, the dimensions that are not aggregated on become {{< ui >}}Sub Groups{{< /ui >}} in the UI.
 
 **Note**: If your metric is only reporting by `host` with no `service` tag, it is not detected by the monitor. Metrics with both `host` and `service` tags are detected by the monitor.
 
@@ -337,23 +339,23 @@ You can further restrict your monitor by specifying a list of [teams][17], [role
 ### Granular access controls
 
 Use [granular access controls][16] to limit the teams, roles, or users that can edit a monitor:
-1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
+1. While editing or configuring a monitor, find the {{< ui >}}Define permissions and audit notifications{{< /ui >}} section.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
-1. Click **Edit Access**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Click {{< ui >}}Edit Access{{< /ui >}}.
+1. Click {{< ui >}}Restrict Access{{< /ui >}}.
+1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Done**.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Done{{< /ui >}}.
 
 **Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a monitor with restricted access, follow the steps below:
-1. While viewing a monitor, click the **More** dropdown menu.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. While viewing a monitor, click the {{< ui >}}More{{< /ui >}} dropdown menu.
+1. Select {{< ui >}}Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Further reading
 

@@ -1,5 +1,6 @@
 ---
 title: Metric Type Modifiers
+description: "Use the as_count and as_rate in-app modifiers to switch metrics between count and rate representations."
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
@@ -78,7 +79,11 @@ Depending on the metric type you applied them to, the behavior differs:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-`GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on them.
+`GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on how a gauge is stored or displayed in the Metrics Explorer.
+
+**Note**: In monitors, applying `as_count()` to a gauge metric changes the evaluation path for rollup-dependent functions like `pct_change()`:
+- Without `as_count()`: the function is applied per-bucket and those values are summed over the evaluation window, which can produce large negative values for sparse gauges.
+- With `as_count()`: the timeseries is bucketed and aggregated before the function is applied, matching the intended window-level computation.
 
 {{% /tab %}}
 {{< /tabs >}}

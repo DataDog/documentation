@@ -117,6 +117,7 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default and require extra configuration in the AWS console. See [Which AWS services require additional setup beyond the core integration?][26] for a full list.
 5. **Wait for the polling interval.** Allow at least one collection cycle before investigating further. See [Expected metric delays](#expected-metric-delays) for timing by collection method.
 6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or organizational unit (OU) level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
+7. **Check for permissions boundaries.** A [permissions boundary][30] sets the maximum permissions a role can have. If the boundary does not include an action required by the Datadog integration, AWS returns `AccessDenied` for that action even when the integration role policy appears to grant it. In the AWS IAM console, open the integration role and check the **Permissions boundary** tab to see whether a boundary is attached.
 
 ### Wrong count of aws.elb.healthy_host_count
 
@@ -221,3 +222,4 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [27]: /integrations/amazon_elb/
 [28]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
 [29]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
+[30]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html

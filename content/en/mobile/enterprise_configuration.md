@@ -40,6 +40,11 @@ The mobile app supports all default MDM capabilities for [iOS][2] and [Android][
 **Default Value**: False <br>
 **Description**: Disable access to homescreen widgets (and instead display "disabled by your organization").
 
+`externalBrowserLoginPolicy`<br>
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: When set to `force`, uses the device's default browser to login to Datadog, instead of an embedded browser.
+
 To learn more about default capabilities, see your Mobile Device Management provider's documentation.
 
 ## Use cases
@@ -51,7 +56,7 @@ You can set `datadogDefaultLoginOrganizationPublicID` or `datadogDefaultLoginOrg
 
 `datadogDefaultLoginOrganizationPublicID` is available through the API.  
 
-`datadogDefaultLoginOrganizationUUID` is available by clicking **Log in to Mobile App** from **Personal Settings > My Organizations**.
+`datadogDefaultLoginOrganizationUUID` is available by clicking {{< ui >}}Log in to Mobile App{{< /ui >}} from {{< ui >}}Personal Settings{{< /ui >}} > {{< ui >}}My Organizations{{< /ui >}}.
 
 ### Preventing data leaks from your users
 If you are concerned about the risk of data leaks from users, you can disable copy/paste and screenshots through standard configurations (for [iOS][2] and [Android][3]). To further mitigate the risk of data leaks, the Datadog Mobile App offers the following features that you can enable at your discretion:  

@@ -13,8 +13,6 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
-
 Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
 
 ## Prerequisites
@@ -74,7 +72,7 @@ datadog:
    - `DD_ENV`
    - `DD_VERSION`
 3. Restart your service.
-4. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
+4. After the service starts, you can add and manage instrumentations from the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Live Debugger{{< /ui >}}][3] page.
 
 [201]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 

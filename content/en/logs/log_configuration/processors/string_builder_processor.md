@@ -28,7 +28,7 @@ The template is defined by both raw text and blocks with the syntax `%{attribute
 
 ## Setup
 
-Define the string builder processor on the [**Pipelines** page][1]:
+Define the string builder processor on the [{{< ui >}}Pipelines{{< /ui >}} page][1]:
 
 {{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 
@@ -139,7 +139,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following string builder
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                          |
 | `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                               |
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                               |
-| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
+| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `template` with an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
 
 ## Further reading

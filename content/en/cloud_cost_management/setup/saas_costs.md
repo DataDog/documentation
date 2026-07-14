@@ -1,7 +1,5 @@
 ---
-title: SaaS Cost Integrations
-is_beta: true
-private: true
+title: SaaS and AI Costs
 disable_toc: false
 aliases:
 - /cloud_cost_management/saas_costs
@@ -29,15 +27,24 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-SaaS Cost Integrations are in Preview.
-{{< /callout >}}
-
 ## Overview
 
-SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
+SaaS and AI Costs allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
 
-{{< partial name="cloud_cost/cost-integrations.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts" src="integrations_logos/snowflake_small.svg" alt="snowflake" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=temporalcloud#configure-your-saas-accounts" src="integrations_logos/temporal_small.svg" alt="temporal cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" src="integrations_logos/confluent-cloud_small.svg" alt="confluent cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts" src="integrations_logos/mongodb_small.svg" alt="mongodb" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts" src="integrations_logos/elastic-cloud_small.svg" alt="elastic cloud" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts" src="integrations_logos/fastly_small.svg" alt="fastly" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts" src="integrations_logos/twilio_small.svg" alt="twilio" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -47,7 +54,7 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click {{< ui >}}Configure{{< /ui >}} on a provider to collect cost data.
 
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, GitHub, Cursor, and Temporal Cloud" style="width:100%" >}}
 
 {{< tabs >}}
 
@@ -169,6 +176,55 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 3. Click {{< ui >}}Save{{< /ui >}}.
 
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
+
+**Note**: To track costs for both Anthropic Enterprise and platform accounts, repeat the setup steps to add a separate account entry for each API key type. Use the [Admin API key](https://docs.anthropic.com/en/api/administration-api) for standard platform usage, and the Enterprise Analytics API key for Anthropic Enterprise usage.
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+<div class="alert alert-warning">An Enterprise plan and team admin role are required to generate a Cursor Admin API key. Standard team plan accounts return access denied errors.</div>
+
+### 1. Generate an Admin API key
+
+Begin by getting an Admin API key from Cursor. This key allows access to usage and cost reports across your team.
+
+1. In the Cursor dashboard, navigate to **Settings > Advanced > Admin API Keys**.
+2. Create a new Admin API key and copy it to a secure location.
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, go to [**Integrations > Cursor**][101].
+2. On the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Account details{{< /ui >}}, paste in the {{< ui >}}Admin API Key{{< /ui >}} from Cursor.
+3. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `Cursor in Cloud Cost Management`.
+4. Click {{< ui >}}Save{{< /ui >}}.
+
+After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+[101]: https://app.datadoghq.com/integrations/cursor
+
+{{% /tab %}}
+
+{{% tab "Temporal Cloud" %}}
+
+<div class="alert alert-warning">A service account with the <strong>Finance Admin</strong> or <strong>Account Owner</strong> role is required to generate a Temporal Cloud Billing API key. The Metrics Read-Only and Account Admin roles cannot access the Billing API.</div>
+
+### 1. Generate a Billing API key
+
+1. In Temporal Cloud, navigate to **Settings > Service Accounts > Create Service Account**.
+2. Assign the service account the **Finance Admin** or **Account Owner** role.
+3. Generate an API key for the service account and copy it to a secure location. Temporal Cloud only shows the key once.
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, go to [**Integrations > Temporal Cloud Cost Management**][110].
+2. Click {{< ui >}}Install Integration{{< /ui >}}, then click {{< ui >}}Configure{{< /ui >}}.
+3. Click {{< ui >}}Add Account{{< /ui >}} and paste in the Billing API key from Temporal Cloud.
+4. Click {{< ui >}}Save{{< /ui >}}.
+
+After you save your configuration, Datadog begins polling the Temporal Cloud Billing API using this key, and populates metrics in your environment. Your Temporal Cloud cost data can be accessed in Cloud Cost Management within 25-30 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+[110]: https://app.datadoghq.com/integrations/temporal-cloud-costs
 
 {{% /tab %}}
 
@@ -543,12 +599,47 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `org_id` | The unique identifier of the Anthropic organization. |
 | `org_name` | A tag-normalized version of the Anthropic organization's name. |
 | `display_org_name` | The unaltered name of the organization. |
+| `org_type` | The type of Anthropic account (for example, `enterprise` or `platform`). |
 | `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
 | `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
 | `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
 | `token_type` | The category of tokens consumed.|
 | `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `billing_group` | The billing group within the Cursor organization to which the usage is attributed. |
+| `charge_type` | The category of the Cursor charge (for example, `fast_premium`, `slow_premium`). |
+| `hour` | The hour during which the usage was recorded, in UTC. |
+| `is_headless` | Indicates whether the usage was generated by a headless session, such as a background agent running outside the Cursor editor (`true` or `false`). |
+| `max_mode` | Indicates whether the request used Cursor Max, which routes queries to frontier models at higher cost (`true` or `false`). |
+| `user` | The email address of the Cursor user who incurred the cost. |
+
+{{% /tab %}}
+
+{{% tab "Temporal Cloud" %}}
+
+**Note**: Custom Namespace Tags configured in Temporal Cloud are surfaced as dynamic `temporal_tag_<key>` tags (for example, a Namespace tagged `tmprl_project` appears as `temporal_tag_tmprl_project`).
+
+| Tag Name | Tag Description |
+|---|---|
+| `namespace` | The Temporal Cloud Namespace to which the usage is attributed (for example, `replay-2025`). |
+| `billing_account` | The Temporal Cloud billing account associated with the charge. |
+| `billing_account_id` | The unique identifier of the Temporal Cloud billing account. |
+| `resource_type` | The type of resource generating the usage (for example, `Namespace`). |
+| `service_subcategory` | The category of usage driving the charge (for example, `Actions`, `Active Storage`, `Retained Storage`). |
+| `sku_id` | The unique identifier of the Temporal Cloud SKU associated with the charge (for example, `business-actions`, `business-active-storage`). |
+| `sku_meter` | The Temporal Cloud SKU meter used to calculate the charge (for example, `Actions`, `Active Storage`, `Retained Storage`). |
+| `charge_category` | The category of the Temporal Cloud charge (for example, `usage`). |
+| `pricing_unit` | The unit used to price the charge (for example, `GB/h`, `1 Million Actions`). |
+| `usage_unit` | The unit of usage measured for the charge (for example, `GB/h`, `1 Million Actions`). |
+| `unit_price` | The price per unit of usage. |
+| `invoice_id` | The unique identifier of the Temporal Cloud invoice associated with the charge. |
 
 {{% /tab %}}
 

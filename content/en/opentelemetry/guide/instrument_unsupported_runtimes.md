@@ -163,7 +163,7 @@ For more manual instrumentation patterns, see the [OpenTelemetry JS instrumentat
 
 After your application handles a few requests:
 
-1. Go to [**APM** > **Traces**][6] in Datadog.
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][6] in Datadog.
 2. Search for your service name.
 3. Confirm that traces appear with the expected spans and metadata.
 

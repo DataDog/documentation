@@ -44,13 +44,13 @@ DNS Monitoring provides visibility into DNS server performance to help you ident
 
 ## Queries
 
-On the **DNS** toggle in [**CNM > Analytics**][5], use the search bar to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port `53` so that all resulting dependencies match this **client → DNS server** format.
+On the {{< ui >}}DNS{{< /ui >}} toggle in [{{< ui >}}CNM{{< /ui >}} > {{< ui >}}Analytics{{< /ui >}}][5], use the search bar to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port `53` so that all resulting dependencies match this **client → DNS server** format.
 
 To narrow your search to a specific client, use client tags in the search bar to filter DNS traffic. By default, clients are grouped by the most common tags, with each row representing a service making DNS requests to a DNS server.
 
    {{< img src="network_performance_monitoring/dns_monitoring/dns_client_search_2.png" alt="The DNS monitoring page with client_service:web-store entered into the search bar and `network.dns_query` entered for View servers as" style="width:100%;">}}
 
-To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
+To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the {{< ui >}}Group by{{< /ui >}} dropdown menu:
 
    * `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
    * `host`: The host name of the DNS server.
@@ -64,7 +64,7 @@ To refine your search to a particular DNS server, filter the search bar by using
 
 There are three recommended queries at the top of the DNS page, similar to the [Network Analytics][4] page. These are static queries commonly used to investigate DNS health and view high-level DNS metrics. Use the recommended queries as a starting point to gain further insights into your DNS configuration and troubleshoot DNS issues. 
 
-You can hover over a recommended query to see a short description of what the results of the query mean. Click on the query to run the query, and click **Clear query** to remove the query. Each recommended query has its own set of recommended graphs as well; clearing the recommended query resets the graphs to their default settings. 
+You can hover over a recommended query to see a short description of what the results of the query mean. Click on the query to run the query, and click {{< ui >}}Clear query{{< /ui >}} to remove the query. Each recommended query has its own set of recommended graphs as well; clearing the recommended query resets the graphs to their default settings. 
 
 ## Metrics
 
@@ -86,15 +86,15 @@ The following DNS metrics are available:
 
 ## Table
 
-The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query. You can configure the columns in your table using the Customize gear icon (⚙️) at the top right of the table.
+The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query. You can configure the columns in your table using the {{< ui >}}Customize{{< /ui >}} gear icon (⚙️) at the top right of the table.
 
-Narrow down the traffic in your view with the **Filter Traffic** [options][3].
+Narrow down the traffic in your view with the {{< ui >}}Filter Traffic{{< /ui >}} [options][3].
 
 {{< img src="network_performance_monitoring/dns_monitoring/dns_table_view.png" alt="The CNM Analytics page showing the table view of DNS network traffic." >}}
 
 ## Sidepanel
 
-The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server's high number of incoming requests, response time, or failure rate is due to:
+The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the {{< ui >}}Flows{{< /ui >}}, {{< ui >}}Logs{{< /ui >}}, {{< ui >}}Traces{{< /ui >}}, and {{< ui >}}Processes{{< /ui >}} tabs to determine whether a DNS server's high number of incoming requests, response time, or failure rate is due to:
 
 * Heavy processes consuming the resources of the underlying infrastructure
 * Application errors in the code on the client side

@@ -19,7 +19,7 @@ Error Tracking processes errors collected from browser and mobile Datadog Log SD
 
 An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][6] to remap the stack trace to the correct attribute in Datadog.
 
-Your crash reports appear in [**Error Tracking**][2].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 
 ## Setup
 

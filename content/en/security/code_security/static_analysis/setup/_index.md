@@ -18,7 +18,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SAST in-app, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][1].
 
 ## Select where to run Static Code Analysis scans
 ### Scan with Datadog-hosted scanning
@@ -28,7 +28,7 @@ You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infras
 - [GitLab.com and GitLab Self-Managed][20]
 - [Azure DevOps][19]
 
-To get started, navigate to the [**Code Security** page][1].
+To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -85,7 +85,7 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 {{% tab "Other" %}}
 
 If you are using another source code management provider, configure Static Code Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the {{< ui >}}Code Security{{< /ui >}} page.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -270,10 +270,10 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
-[22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[22]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [27]: /security/code_security/static_analysis/configuration/
-[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/

@@ -8,6 +8,7 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
+site_support_id: fleet-automation-standard-features
 ---
 
 Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API.
@@ -93,6 +94,10 @@ The Agent sets the appropriate permissions for these files. No configuration fil
 Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool, not both. If you run a configuration management tool on an Agent that was upgraded through Fleet Automation, the tool reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][4] in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent upgrades to the latest available version.
 
 ## Troubleshooting
+
+### Newly released Agent version is not yet available for upgrade
+
+After a new Agent version is released, it can take up to 24 hours before it appears as an upgrade target in Fleet Automation. If a recently released version is missing from the upgrade picker, wait up to 24 hours and retry.
 
 ### Datadog Installer incompatible with Agent (pre-7.66)
 

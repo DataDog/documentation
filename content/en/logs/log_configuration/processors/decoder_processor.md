@@ -26,7 +26,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 
 1. Set the source attribute: Provide the attribute path that contains the encoded string, such as `encoded.base64`.
 1. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`.
-1. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
+1. For `Base16/Hex`: Choose the output format: {{< ui >}}string (UTF-8){{< /ui >}} or {{< ui >}}integer{{< /ui >}}.
 1. Set the target attribute: Enter the attribute path to store the decoded result.
 
 {{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Screenshot of the Decoder Processor configuration panel" style="width:80%;" >}}

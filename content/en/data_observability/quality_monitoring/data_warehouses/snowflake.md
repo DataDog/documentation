@@ -22,7 +22,9 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
-- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of the [IP Ranges][7] page.
+
+  <div class="alert alert-warning">IP ranges are different for each Datadog site. On the <a href="/api/latest/ip-ranges/">IP Ranges</a> page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
 
 ## Set up your account in Snowflake
 
@@ -193,6 +195,18 @@ When enabled, each task graph run appears as a trace in APM with individual task
    - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
    - For individual task spans, filter by `operation_name:snowflake.task`
 
+## Object tags
+
+Datadog ingests [Snowflake object tags][6] applied to your tables and attaches them to the corresponding table in Data Observability. Tags are read from `SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES` using the `SNOWFLAKE.GOVERNANCE_VIEWER` database role granted during setup, so no additional permissions are required.
+
+Ingested tags are available as attributes on the **Data Observability Metrics** data source, alongside `database`, `schema`, `table`, and `entity_id`. In the Metrics Explorer and dashboard widget editor, you can use them to:
+
+- Filter table metrics by a business dimension (for example, `data_source` or `data_domain`).
+- Group metrics by a tag value.
+- Drive template variables on dashboards.
+
+Datadog ingests up to 50 tags per table, which is Snowflake's documented limit. Tags are refreshed on each crawl, so changes in Snowflake appear after the next sync.
+
 ## Next steps
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
@@ -237,6 +251,8 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
-[3]: https://app.datadoghq.com/datasets/settings/integrations
+[3]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /monitors/types/data_observability/
+[6]: https://docs.snowflake.com/en/user-guide/object-tagging
+[7]: /api/latest/ip-ranges/

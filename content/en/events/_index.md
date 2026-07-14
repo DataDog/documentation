@@ -25,7 +25,7 @@ further_reading:
   text: "Ensure high service availability with Datadog Service Management"
 ---
 
-{{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
+{{< img src="events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## Overview
 

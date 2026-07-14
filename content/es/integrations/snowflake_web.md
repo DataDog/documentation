@@ -700,7 +700,7 @@ Documentación útil adicional, enlaces y artículos:
 [10]: images/custom_query.png
 [11]: images/snowflake_metrics.png
 [12]: https://docs.datadoghq.com/es/reference_tables/?tab=manualupload
-[13]: https://docs.datadoghq.com/es/service_management/events/explorer/
+[13]: https://docs.datadoghq.com/es/events/explorer/
 [14]: https://docs.snowflake.com/en/user-guide/views-introduction
 [15]: https://www.datadoghq.com/product/cloud-cost-management/
 [16]: https://docs.snowflake.com/en/user-guide/views-materialized

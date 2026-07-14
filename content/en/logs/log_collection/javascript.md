@@ -27,7 +27,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 ### Step 1 - Create a client token
 
-In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
+In Datadog, navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}New Client Tokens{{< /ui >}}][1]
 
 **Supported environments**: The browser logs SDK supports all modern desktop and mobile browsers, as well as Worker and Service Worker environments. See the [Browser Support][4] table.
 
@@ -131,6 +131,19 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 
 ```javascript
@@ -212,6 +225,17 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>

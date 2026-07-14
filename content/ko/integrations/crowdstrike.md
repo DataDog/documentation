@@ -102,7 +102,7 @@ CrowdStrike 통합에는 서비스 점검이 포함되어 있지 않습니다.
 도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 [1]: https://www.crowdstrike.com/
-[2]: https://docs.datadoghq.com/ko/service_management/events/explorer/
+[2]: https://docs.datadoghq.com/ko/events/explorer/
 [3]: https://supportportal.crowdstrike.com/
 [4]: https://falcon.crowdstrike.com/support/api-clients-and-keys
 [5]: https://app.datadoghq.com/integrations/crowdstrike

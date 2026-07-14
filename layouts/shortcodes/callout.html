@@ -1,5 +1,18 @@
 {{- $btn_hidden := (.Get "btn_hidden") | default "false" -}}
 {{- $header := .Get "header" -}}
+{{- $respect_site_support := (.Get "respect-site-support") | default "true" -}}
+{{- $unsupported := partial "site_support_banner/get_unsupported_regions.html" . -}}
+{{- $wrap := and (eq $respect_site_support "true") (gt (len $unsupported) 0) -}}
+{{- if $wrap -}}
+{{- $supported := slice -}}
+{{- range .Site.Params.allowedRegions -}}
+    {{- if not (in $unsupported .value) -}}
+        {{- $supported = $supported | append .value -}}
+    {{- end -}}
+{{- end -}}
+{{- $supported_csv := delimit $supported "," -}}
+<div class="d-none site-region-container" data-region="{{ $supported_csv }}">
+{{- end }}
 <div class="card callout-card mb-4">
 
     <div class="card-body d-flex flex-column">
@@ -19,3 +32,6 @@
         {{- end -}}
     </div>
 </div>
+{{- if $wrap }}
+</div>
+{{- end -}}

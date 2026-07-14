@@ -17,6 +17,8 @@ Use Observability Pipelines' Datadog Logs destination to send logs to Datadog Lo
 
 Configure the Datadog Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
+<div class="alert alert-info">Before routing logs through Observability Pipelines, review any indexes, pipelines, or exclusion filters that use the <code>datadog.pipelines:false</code> tag. For logs from a Datadog Agent source, the Datadog Logs destination sets <code>source_type</code> to <code>datadog_agent</code> (<code>@source_type:datadog_agent</code> in log search). Datadog then evaluates those logs as <code>datadog_agent</code> logs when deciding whether to apply the <code>datadog.pipelines:false</code> tag. To change this behavior before logs are delivered, use the <a href="/observability_pipelines/processors/edit_fields/">Edit Fields processor</a> or <a href="/observability_pipelines/processors/custom_processor/">Custom Processor</a> to remove the <code>source_type</code> attribute from the logs.</div>
+
 ### Optional settings
 
 After you select the Datadog Logs destination in the pipeline UI, you can configure these optional settings.
@@ -29,16 +31,16 @@ You can route logs to multiple Datadog organizations. After routing has been set
 
 {{< img src="observability_pipelines/destinations/multi_dd_orgs.png" alt="The Datadog Logs destination showing us1 and us3 org" style="width:45%;" >}}
 
-Click **Route to Multiple Organizations** to set up routing to multiple Datadog organizations.
+Click {{< ui >}}Route to Multiple Organizations{{< /ui >}} to set up routing to multiple Datadog organizations.
 
 - If you haven't added any organizations yet, enter organization details as described in the [Add a Datadog organization](#add-an-organization) section.
 - If you have already added organizations, you can:
   - Click on an organization in the table to edit or delete it.
   - Use the search bar to find a specific organization by name, filter query, or Datadog site, and then select the organization to edit or delete it.
   - [View metrics](#view-metrics-for-the-component-or-specific-organizations) for an organization.
-  - Click **Add organization** to route to another Datadog organization.
+  - Click {{< ui >}}Add organization{{< /ui >}} to route to another Datadog organization.
 
-**Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
+**Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization. This is the organization tied to the API key when you install the Worker.
 
 #### Add an organization
 
@@ -50,7 +52,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 1. Select the Datadog organization's site.
 1. Enter the identifier for the API key for that Datadog organization.
 	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 #### Buffering
 
@@ -69,7 +71,9 @@ There are no secret identifiers for this destination.
 
 {{% tab "Environment Variables" %}}
 
+<!-- vale Datadog.words_case_sensitive = NO -->
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+<!-- vale Datadog.words_case_sensitive = YES -->
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -84,9 +88,9 @@ To view metrics for the overall Datadog Logs destination:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select your pipeline.
-1. Click the cog on the **Datadog Logs** destination and select **View details**.
+1. Click the cog on the {{< ui >}}Datadog Logs{{< /ui >}} destination and select {{< ui >}}View details{{< /ui >}}.
 
-**Note**: The **Data dropped (intentional)** metric shows logs that didn't match any of the organizations' filters.
+**Note**: The {{< ui >}}Data dropped (intentional){{< /ui >}} metric shows logs that didn't match any of the organizations' filters.
 
 ### Organization-level metrics
 
@@ -94,12 +98,12 @@ To view metrics for a specific Datadog organization:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select your pipeline.
-1. Click the **Datadog Logs** destination so the organizations show up.
+1. Click the {{< ui >}}Datadog Logs{{< /ui >}} destination so the organizations show up.
   {{< img src="observability_pipelines/destinations/multi_dd_orgs_highlighted.png" alt="The Datadog Logs destination showing us1 and us3 org highlighted" style="width:45%;" >}}
 1. Click the organization you want to see metrics for.
-1. Click **View Health Metrics**.
+1. Click {{< ui >}}View Health Metrics{{< /ui >}}.
 
-Alternatively, you can click on **Review Configured Organizations** in the Datadog Logs destination, and click the graph icon in the **Metrics** column for the organization you are interested in.
+Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination. Then, click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization.
 
 ## How the destination works
 
@@ -111,7 +115,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 
-{{< site-region region="us,ap1,ap2" >}}
+{{< site-region region="us,ap1,ap2,uk1" >}}
 
 ## AWS PrivateLink
 
@@ -127,7 +131,9 @@ To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 
+<!-- vale Datadog.headings = NO -->
 ## Azure Private Link
+<!-- vale Datadog.headings = YES -->
 
 To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
 

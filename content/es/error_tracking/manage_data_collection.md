@@ -148,5 +148,5 @@ Cuando se aplica el muestreo dinámico, los siguientes pasos son recomendados:
 
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /es/error_tracking/troubleshooting/?tab=java#errors-are-not-found-in-error-tracking
-[4]: /es/service_management/events/
+[4]: /es/events/
 [5]: https://app.datadoghq.com/error-tracking/settings/rate-limits
