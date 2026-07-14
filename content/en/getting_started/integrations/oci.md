@@ -156,7 +156,7 @@ Use the {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} section to d
 
 On the {{< ui >}}Resource Collection{{< /ui >}} tab of the [Datadog OCI integration tile][3], click the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle. Resources are visible in the [Datadog Resource Catalog][7].
 
-To collect OCI resource change events, enable the {{< ui >}}Enable Resource Changes Collection{{< /ui >}} toggle. OCI resource change events are visible in the [Event Explorer][31].
+To collect OCI resource change events, turn on the {{< ui >}}Enable Resource Changes Collection{{< /ui >}} toggle. OCI resource change events are visible in the [Event Explorer][31].
 
 ## Get more from the Datadog platform
 
