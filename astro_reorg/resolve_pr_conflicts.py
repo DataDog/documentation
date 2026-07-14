@@ -389,7 +389,7 @@ def transform_diff_paths(diff_text: str) -> str:
 
 def ensure_label_exists(label: str, dry_run: bool) -> None:
     """Create the GitHub label if it doesn't already exist."""
-    existing = gh_json("label", "list", "--repo", REPO, "--json", "name")
+    existing = gh_json("label", "list", "--repo", REPO, "--search", label, "--json", "name")
     if any(l["name"] == label for l in existing):  # type: ignore[index]
         return
     if dry_run:
@@ -844,7 +844,7 @@ def main() -> None:
     ensure_label_exists(LABEL_MANUAL_REVIEW, args.dry_run)
     ensure_label_exists(LABEL_STALE, args.dry_run)
 
-    existing_labels = gh_json("label", "list", "--repo", REPO, "--json", "name")
+    existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
         print(f"Error: label {LABEL_WIP!r} does not exist in the repo. "
               f"Check that the label name is correct.", file=sys.stderr)
