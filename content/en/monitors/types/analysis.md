@@ -86,7 +86,7 @@ Analysis monitors use the same query interface as Notebook Analysis cells.
 2. **Filter your dataset**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 
-{{< img src="/monitors/monitor_types/dataset/dataset_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/analysis/analysis_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
 
 ## Set alert conditions
 
