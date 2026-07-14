@@ -124,6 +124,7 @@ LABEL_STALE = "has-astro-reorg-conflicts"
 LABEL_AUTOFIXED = "astro-reorg-autofixed"
 LABEL_AUTO_PR = "astro-reorg-auto-pr"
 LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
+LABEL_PROCESSED = "astro-reorg-processed"
 LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
@@ -621,11 +622,11 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
     print(f"\nPR #{pr_number}: {title}")
     print(f"  mergeable: {mergeable}")
 
-    # A fix PR was already opened for this one (or it was previously noted as
-    # stale) on a prior run — skip so we don't re-push the fix branch or post
-    # a duplicate comment.  This makes the whole script safe to re-run.
-    if any(l["name"] == LABEL_STALE for l in pr.get("labels", [])):
-        print(f"  Already handled ({LABEL_STALE}) — skipping.")
+    # Already processed on a prior run — skip regardless of other labels
+    # (including astro-reorg-help-requested). This makes the script safe to
+    # re-run without re-processing or double-commenting.
+    if any(l["name"] == LABEL_PROCESSED for l in pr.get("labels", [])):
+        print(f"  Already processed ({LABEL_PROCESSED}) — skipping.")
         return False
 
     if mergeable == "MERGEABLE":
@@ -699,6 +700,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
                 print("  Merge failed but no conflicts could be classified "
                       "— labeling for manual review.")
                 add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+                add_label(pr_number, LABEL_PROCESSED, dry_run)
                 return True
             print("  No conflicts found locally (GitHub mergeability may be stale).")
             return False
@@ -708,6 +710,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             # touch it — just label it so a human can resolve it manually.
             print("  Non-reorg conflicts present — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+            add_label(pr_number, LABEL_PROCESSED, dry_run)
             return True
 
         # All conflicts are reorg-caused.  Check staleness before attempting
@@ -722,6 +725,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             print(f"  PR is stale (no activity in >{STALE_DAYS} days) — "
                   "labeling and commenting without auto-fix.")
             add_label(pr_number, LABEL_STALE, dry_run)
+            add_label(pr_number, LABEL_PROCESSED, dry_run)
             post_comment(pr_number, STALE_COMMENT, dry_run)
             return True
 
@@ -733,6 +737,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             print("  Auto-fix failed or not applicable — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
             post_comment(pr_number, MANUAL_REVIEW_COMMENT, dry_run)
+        add_label(pr_number, LABEL_PROCESSED, dry_run)
         return True
 
     finally:
@@ -774,6 +779,7 @@ def get_open_prs(only: list[int] | None = None) -> list[dict]:
     return gh_json(  # type: ignore[return-value]
         "pr", "list", "--repo", REPO, "--state", "open",
         "--base", BASE_BRANCH,
+        "--search", f"-label:{LABEL_PROCESSED}",
         "--json", fields, "--limit", "300",
     )
 
@@ -850,6 +856,7 @@ def main() -> None:
     ensure_label_exists(LABEL_STALE, args.dry_run)
     ensure_label_exists(LABEL_AUTOFIXED, args.dry_run)
     ensure_label_exists(LABEL_AUTO_PR, args.dry_run)
+    ensure_label_exists(LABEL_PROCESSED, args.dry_run)
 
     existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
