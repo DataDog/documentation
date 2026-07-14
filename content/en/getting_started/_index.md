@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Introduction to Datadog's observability platform with guides for installation, configuration, and getting started with key features.
+description: Introduction to Datadog's observability platform with guides for setup, configuration, and getting started with key features.
 disable_sidebar: true
 aliases:
     - /overview
