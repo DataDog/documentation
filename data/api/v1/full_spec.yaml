@@ -1530,6 +1530,72 @@ components:
         - layout_type
         - widgets
       type: object
+    DashboardAvailableValuesEventsDataSource:
+      description: The events-based data source for the query.
+      enum:
+        - spans
+        - logs
+        - rum
+      example: spans
+      type: string
+      x-enum-varnames:
+        - SPANS
+        - LOGS
+        - RUM
+    DashboardAvailableValuesEventsQuery:
+      additionalProperties: false
+      description: Query for available values using an events-based data source (spans, logs, or rum).
+      properties:
+        data_source:
+          $ref: "#/components/schemas/DashboardAvailableValuesEventsDataSource"
+        group_by:
+          description: The fields to group by in the query.
+          items:
+            $ref: "#/components/schemas/DashboardAvailableValuesEventsQueryGroupByItems"
+          type: array
+        search:
+          $ref: "#/components/schemas/DashboardAvailableValuesEventsQuerySearch"
+      required:
+        - data_source
+        - search
+        - group_by
+      type: object
+    DashboardAvailableValuesEventsQueryGroupByItems:
+      additionalProperties: false
+      description: A field to group by in the available values query.
+      properties:
+        facet:
+          description: The facet to group by.
+          example: ""
+          type: string
+      required:
+        - facet
+      type: object
+    DashboardAvailableValuesEventsQuerySearch:
+      additionalProperties: false
+      description: The search filter for the query.
+      properties:
+        query:
+          description: The search query string.
+          example: ""
+          type: string
+      required:
+        - query
+      type: object
+    DashboardAvailableValuesMetricsQuery:
+      additionalProperties: false
+      description: Query for available values using the metrics data source.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionMetricDataSource"
+        query:
+          description: The metrics query string.
+          example: ""
+          type: string
+      required:
+        - data_source
+        - query
+      type: object
     DashboardBulkActionData:
       description: Dashboard bulk action request data.
       example: {"id": "123-abc-456", "type": "dashboard"}
@@ -1800,6 +1866,13 @@ components:
             type: string
           nullable: true
           type: array
+        available_values_query:
+          $ref: "#/components/schemas/DashboardTemplateVariableAvailableValuesQuery"
+        data_source_mappings:
+          additionalProperties:
+            type: string
+          description: A mapping from data source type to the variable value to use for that data source.
+          type: object
         default:
           deprecated: true
           description: (deprecated) The default value for the template variable on dashboard load. Cannot be used in conjunction with `defaults`.
@@ -1831,6 +1904,11 @@ components:
       required:
         - name
       type: object
+    DashboardTemplateVariableAvailableValuesQuery:
+      description: A query that dynamically computes the list of values available for this template variable.
+      oneOf:
+        - $ref: "#/components/schemas/DashboardAvailableValuesEventsQuery"
+        - $ref: "#/components/schemas/DashboardAvailableValuesMetricsQuery"
     DashboardTemplateVariablePreset:
       description: Template variables saved views.
       properties:
