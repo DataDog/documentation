@@ -3216,6 +3216,26 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
+    - name: Setup
+      url: infrastructure/end_user_device_monitoring/setup/
+      identifier: eudm_setup
+      parent: end_user_device_monitoring
+      weight: 1
+    - name: macOS
+      url: infrastructure/end_user_device_monitoring/setup/macos/
+      identifier: eudm_setup_macos
+      parent: eudm_setup
+      weight: 1
+    - name: Windows
+      url: infrastructure/end_user_device_monitoring/setup/windows/
+      identifier: eudm_setup_windows
+      parent: eudm_setup
+      weight: 2
+    - name: Linux
+      url: infrastructure/end_user_device_monitoring/setup/linux/
+      identifier: eudm_setup_linux
+      parent: eudm_setup
+      weight: 3
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts

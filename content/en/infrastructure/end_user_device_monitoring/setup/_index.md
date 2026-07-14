@@ -24,26 +24,17 @@ Managing employee devices at scale is difficult when performance issues, connect
 - macOS
 - Linux
 
-## Configure the Datadog Agent
+## Set up the Datadog Agent
 
-1. Confirm that you have received access to the Preview. If you have not received confirmation, [request access][12] and wait for approval before continuing.
+Confirm that you have received access to the Preview before continuing. If you have not received confirmation, [request access][12] and wait for approval.
 
-1. Install the Datadog Agent (v7.76 or later is required):
-   - [Windows installation instructions][1]
-   - [macOS installation instructions][2]
-   - [Linux installation instructions][3]
+<div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, devices are billed as hosts and do not appear in the End User Devices view.</div>
 
-1. In the main `datadog.yaml` configuration file, set the following parameter:
+Follow the setup instructions for your platform:
 
-   <div class="alert alert-danger">This parameter is required. Without it, devices are billed as hosts.</div>
-
-   {{< code-block lang="yaml" >}}
-infrastructure_mode: end_user_device
-{{< /code-block >}}
-
-1. Configure [Network Path][10] to see the hop-by-hop view of a traceroute from the End User Device to a specific destination.
-
-1. [Restart the Datadog Agent][4].
+- [macOS][14]
+- [Windows][15]
+- [Linux][16]
 
 ## Explore the App
 
@@ -74,16 +65,14 @@ To collect additional data from monitored devices, enable one or more of the fol
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/supported_platforms/windows/
-[2]: /agent/supported_platforms/osx/
-[3]: /agent/supported_platforms/linux/
-[4]: /agent/configuration/agent-commands/#restart-the-agent
 [5]: /infrastructure/process/
 [6]: /logs/
 [7]: /network_monitoring/network_path/setup
 [8]: /integrations/wlan/
 [9]: /integrations/wincrashdetect/
-[10]: /network_monitoring/network_path/setup/?tab=windows
 [11]: /infrastructure/end_user_device_monitoring/#key-capabilities
 [12]: https://www.datadoghq.com/product-preview/end-user-device-monitoring/
 [13]: /integrations/event-viewer/?tab=logs
+[14]: /infrastructure/end_user_device_monitoring/setup/macos/
+[15]: /infrastructure/end_user_device_monitoring/setup/windows/
+[16]: /infrastructure/end_user_device_monitoring/setup/linux/
