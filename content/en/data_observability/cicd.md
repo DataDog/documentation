@@ -96,7 +96,7 @@ Drift detection compares the current state of your data on the branch to a basel
 
 | Setting            | Description                                                                                                                                                                                                                                        |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CI Job Name`      | The name of the job that's triggered by pull requests, materializes dbt models for CI, and sends Open Lineage events to Datadog.                                                                                                                   |
+| `CI Job Name`      | The name of the job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog.                                                                                                                   |
 | `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when sending Open Lineage from the specified above job. See [Set the environment variables][7]. If you don't set this variable when sending Open Lineage events, you don't need to specify it here. |
 
 ## Further reading
