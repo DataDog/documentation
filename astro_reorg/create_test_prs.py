@@ -30,6 +30,8 @@ Testing the *unresolvable* conflict paths:
       classified reorg-caused but can't be replayed (manual-review fallback).
     - A base_edit on a top-level (never-moved) file surfaces as a plain
       non-reorg conflict, which is sent straight to manual review.
+
+View all test PRs: https://github.com/DataDog/documentation/pulls?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing
 """
 from __future__ import annotations
 
@@ -331,9 +333,6 @@ def create_pr(spec: dict, base: str) -> str | None:
     target = REPO_ROOT / spec["file"]
     print(f"\n=== {branch} ===")
 
-    if not target.exists():
-        die(f"target file does not exist: {spec['file']}")
-
     # Start from the frozen snapshot so the PR diff is just this change.
     if git("fetch", "origin", BRANCH_FROM).returncode != 0:
         die(f"git fetch origin {BRANCH_FROM} failed.")
@@ -341,6 +340,11 @@ def create_pr(spec: dict, base: str) -> str | None:
     checkout = git("checkout", "-b", branch, f"origin/{BRANCH_FROM}")
     if checkout.returncode != 0:
         die(f"could not create branch {branch}: {checkout.stderr.strip()}")
+
+    # Check after checkout: the file exists on BRANCH_FROM (pre-reorg) but not
+    # on the conflicting base branch (post-reorg), so the check must run here.
+    if not target.exists():
+        die(f"target file does not exist: {spec['file']}")
 
     # Optionally add a brand-new page at a pre-reorg path (content/...). The
     # resolver detects this as a "wrong-path addition" that belongs under hugo/.
