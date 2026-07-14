@@ -30302,6 +30302,146 @@ components:
       required:
         - data
       type: object
+    DatasetReportScheduleListResponse:
+      description: Response containing a list of report schedules for a published dataset.
+      properties:
+        data:
+          description: A list of report schedules for the dataset.
+          items:
+            $ref: "#/components/schemas/DatasetReportScheduleResponseData"
+          type: array
+        included:
+          description: Related resources included with the report schedules, such as authors.
+          items:
+            $ref: "#/components/schemas/ReportScheduleIncludedResource"
+          type: array
+      required:
+        - data
+      type: object
+    DatasetReportScheduleResourceType:
+      description: The type of resource targeted by a dataset report schedule.
+      enum:
+        - widget_dataset_list
+      example: widget_dataset_list
+      type: string
+      x-enum-varnames:
+        - WIDGET_DATASET_LIST
+    DatasetReportScheduleResponseAttributes:
+      description: The configuration and derived state of a report schedule for a published dataset.
+      properties:
+        cell_id:
+          description: The identifier of the notebook cell that published the dataset, or `null` if not set.
+          example: "sevhjcis"
+          nullable: true
+          type: string
+        dataset_id:
+          description: The identifier of the dataset, or `null` if not set.
+          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          nullable: true
+          type: string
+        description:
+          description: The description of the report.
+          example: "This is a scheduled notebook dataset report."
+          type: string
+        file_row_limit:
+          description: The maximum number of rows included in the attached CSV file, or `null` if not set.
+          example: 5000
+          format: int64
+          nullable: true
+          type: integer
+        inline_row_limit:
+          description: The maximum number of rows included inline in the email body, or `null` if not set.
+          example: 10
+          format: int64
+          nullable: true
+          type: integer
+        next_recurrence:
+          description: |-
+            The Unix timestamp, in milliseconds, of the next scheduled delivery, or
+            `null` if none is scheduled.
+          example: 1725859200000
+          format: int64
+          nullable: true
+          type: integer
+        notebook_id:
+          description: The identifier of the notebook containing the dataset cell, or `null` if not set.
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        recipients:
+          description: |-
+            The recipients of the report (email addresses, Slack channel references, or
+            Microsoft Teams channel references).
+          example:
+            - "test@datadoghq.com"
+          items:
+            description: |-
+              A single recipient (email address, Slack channel reference, or Microsoft
+              Teams channel reference).
+            type: string
+          type: array
+        resource_id:
+          description: The identifier of the widget containing the dataset.
+          example: "aaaabbbb-1111-2222-3333-444455556666"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/DatasetReportScheduleResourceType"
+        rrule:
+          description: The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string.
+          example: "DTSTART;TZID=America/New_York:20240912T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
+          type: string
+        status:
+          $ref: "#/components/schemas/ReportScheduleStatus"
+        timeframe:
+          description: The relative timeframe of data included in the report.
+          example: "calendar_day"
+          type: string
+        timezone:
+          description: The IANA time zone identifier the recurrence rule is evaluated in.
+          example: "America/New_York"
+          type: string
+        title:
+          description: The title of the report.
+          example: "My Cool Dataset Report"
+          type: string
+      required:
+        - status
+        - resource_id
+        - resource_type
+        - recipients
+        - rrule
+        - timezone
+        - title
+        - description
+        - timeframe
+        - file_row_limit
+        - inline_row_limit
+        - next_recurrence
+        - notebook_id
+        - cell_id
+        - dataset_id
+      type: object
+    DatasetReportScheduleResponseData:
+      description: The JSON:API data object representing a dataset report schedule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatasetReportScheduleResponseAttributes"
+        id:
+          description: The unique identifier of the dataset report schedule.
+          example: "e1234567-1234-1234-1234-123456789012"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ReportScheduleResponseRelationships"
+        type:
+          $ref: "#/components/schemas/ReportScheduleType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
     DatasetRequest:
       description: |-
         **Datasets Object Constraints**
@@ -47216,11 +47356,6 @@ components:
           description: An optional message shown to users when they declare an incident of this type.
           example: "Create an incident here"
           type: string
-        disable_out_of_the_box_postmortem_template:
-          default: false
-          description: Whether the out-of-the-box postmortem template is disabled for incidents of this type.
-          example: false
-          type: boolean
         editable_timestamps:
           default: false
           description: Whether responders can edit incident timestamps for incidents of this type.
@@ -71304,6 +71439,8 @@ components:
             $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerMetricLimit"
           maxItems: 100
           type: array
+        tracking_mode:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorTrackingMode"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorType"
         value_limit:
@@ -71318,6 +71455,7 @@ components:
         - type
         - include
         - limit_exceeded_action
+        - tracking_mode
         - value_limit
         - enabled
       type: object
@@ -71332,6 +71470,16 @@ components:
       x-enum-varnames:
         - DROP_TAG
         - DROP_EVENT
+    ObservabilityPipelineTagCardinalityLimitProcessorOverrideType:
+      description: How the override is applied. `limit_override` enforces a custom limit; `excluded` omits the metric or tag from cardinality tracking.
+      enum:
+        - limit_override
+        - excluded
+      example: limit_override
+      type: string
+      x-enum-varnames:
+        - LIMIT_OVERRIDE
+        - EXCLUDED
     ObservabilityPipelineTagCardinalityLimitProcessorPerMetricLimit:
       description: A cardinality override applied to a specific metric.
       properties:
@@ -71341,16 +71489,16 @@ components:
           description: The name of the metric this override applies to.
           example: "system.cpu.user"
           type: string
-        mode:
-          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerMetricMode"
+        override_type:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorOverrideType"
         per_tag_limits:
-          description: A list of per-tag cardinality overrides that apply within this metric. Must be omitted when `mode` is `excluded`.
+          description: A list of per-tag cardinality overrides that apply within this metric. Must be omitted when `override_type` is `excluded`.
           items:
             $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerTagLimit"
           maxItems: 50
           type: array
         value_limit:
-          description: The maximum number of distinct tag value combinations allowed for this metric. Required when `mode` is `tracked`. Must be omitted when `mode` is `excluded`.
+          description: The maximum number of distinct tag value combinations allowed for this metric. Required when `override_type` is `limit_override`. Must be omitted when `override_type` is `excluded`.
           example: 10000
           format: int64
           maximum: 1000000
@@ -71358,29 +71506,19 @@ components:
           type: integer
       required:
         - metric_name
-        - mode
+        - override_type
       type: object
-    ObservabilityPipelineTagCardinalityLimitProcessorPerMetricMode:
-      description: How the per-metric override is applied. `tracked` enforces a custom limit; `excluded` skips the metric entirely.
-      enum:
-        - tracked
-        - excluded
-      example: tracked
-      type: string
-      x-enum-varnames:
-        - TRACKED
-        - EXCLUDED
     ObservabilityPipelineTagCardinalityLimitProcessorPerTagLimit:
       description: A cardinality override for a specific tag key within a per-metric limit.
       properties:
-        mode:
-          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorPerTagMode"
+        override_type:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorOverrideType"
         tag_key:
           description: The tag key this override applies to.
           example: "host"
           type: string
         value_limit:
-          description: The maximum number of distinct values allowed for this tag. Required when `mode` is `limit_override`. Must be omitted when `mode` is `excluded`.
+          description: The maximum number of distinct values allowed for this tag. Required when `override_type` is `limit_override`. Must be omitted when `override_type` is `excluded`.
           example: 5000
           format: int64
           maximum: 1000000
@@ -71388,18 +71526,26 @@ components:
           type: integer
       required:
         - tag_key
+        - override_type
+      type: object
+    ObservabilityPipelineTagCardinalityLimitProcessorTrackingMode:
+      description: Controls whether the processor uses exact or probabilistic tag tracking.
+      properties:
+        mode:
+          $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessorTrackingModeMode"
+      required:
         - mode
       type: object
-    ObservabilityPipelineTagCardinalityLimitProcessorPerTagMode:
-      description: How the per-tag override is applied. `limit_override` enforces a custom limit on the tag; `excluded` skips the tag from cardinality tracking.
+    ObservabilityPipelineTagCardinalityLimitProcessorTrackingModeMode:
+      description: The cardinality tracking algorithm to use.
       enum:
-        - limit_override
-        - excluded
-      example: limit_override
+        - exact_fingerprint
+        - probabilistic
+      example: exact_fingerprint
       type: string
       x-enum-varnames:
-        - LIMIT_OVERRIDE
-        - EXCLUDED
+        - EXACT_FINGERPRINT
+        - PROBABILISTIC
     ObservabilityPipelineTagCardinalityLimitProcessorType:
       default: tag_cardinality_limit
       description: The processor type. The value must be `tag_cardinality_limit`.
@@ -76795,6 +76941,149 @@ components:
       required:
         - type
       type: object
+    PrintReportRequest:
+      description: Request body for initiating a print-only report.
+      properties:
+        data:
+          $ref: "#/components/schemas/PrintReportRequestData"
+      required:
+        - data
+      type: object
+    PrintReportRequestAttributes:
+      description: |-
+        The configuration for a print-only report. Specify exactly one of `timeframe` (for a
+        relative time window) or both `from_ts` and `to_ts` (for an absolute time range).
+      properties:
+        from_ts:
+          description: |-
+            The start of an absolute time range, as a Unix timestamp in milliseconds.
+            Required when `timeframe` is omitted.
+          example: 1780318800000
+          format: int64
+          type: integer
+        resource_id:
+          description: The identifier of the dashboard or integration dashboard to render.
+          example: "abc-def-ghi"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/ReportScheduleResourceType"
+        template_variables:
+          description: The dashboard template variables applied when rendering the report.
+          items:
+            $ref: "#/components/schemas/ReportScheduleTemplateVariable"
+          type: array
+        timeframe:
+          description: |-
+            A relative time window (for example `1w` or `calendar_month`). Mutually
+            exclusive with `from_ts` and `to_ts`.
+          example: "1w"
+          type: string
+        timezone:
+          description: The IANA time zone identifier used to evaluate the time window.
+          example: "America/New_York"
+          type: string
+        to_ts:
+          description: |-
+            The end of an absolute time range, as a Unix timestamp in milliseconds.
+            Required when `timeframe` is omitted.
+          example: 1780923600000
+          format: int64
+          type: integer
+      required:
+        - resource_id
+        - resource_type
+        - timezone
+        - template_variables
+      type: object
+    PrintReportRequestData:
+      description: The JSON:API data object for a print report request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PrintReportRequestAttributes"
+        type:
+          $ref: "#/components/schemas/PrintReportType"
+      required:
+        - type
+        - attributes
+      type: object
+    PrintReportResponse:
+      description: Response containing the initiated print-only report.
+      properties:
+        data:
+          $ref: "#/components/schemas/PrintReportResponseData"
+      required:
+        - data
+      type: object
+    PrintReportResponseAttributes:
+      description: The configuration and download URL for the initiated print-only report.
+      properties:
+        download_url:
+          description: The URL from which the rendered PDF report can be downloaded.
+          example: "https://app.datadoghq.com/..."
+          type: string
+        from_ts:
+          description: The start of the rendered time range, as a Unix timestamp in milliseconds.
+          example: 1780318800000
+          format: int64
+          type: integer
+        resource_id:
+          description: The identifier of the dashboard or integration dashboard.
+          example: "abc-def-ghi"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/ReportScheduleResourceType"
+        template_variables:
+          description: The dashboard template variables applied when rendering the report.
+          items:
+            $ref: "#/components/schemas/ReportScheduleTemplateVariable"
+          type: array
+        timeframe:
+          description: The relative time window used, if one was specified in the request.
+          example: "1w"
+          type: string
+        timezone:
+          description: The IANA time zone identifier used when rendering the report.
+          example: "America/New_York"
+          type: string
+        to_ts:
+          description: The end of the rendered time range, as a Unix timestamp in milliseconds.
+          example: 1780923600000
+          format: int64
+          type: integer
+      required:
+        - resource_id
+        - resource_type
+        - timezone
+        - template_variables
+        - from_ts
+        - to_ts
+        - download_url
+      type: object
+    PrintReportResponseData:
+      description: The JSON:API data object for a print-only report.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PrintReportResponseAttributes"
+        id:
+          description: The unique identifier of the report.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/PrintReportType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PrintReportType:
+      description: JSON:API resource type for a print-only report.
+      enum:
+        - report
+      example: report
+      type: string
+      x-enum-varnames:
+        - REPORT
     ProcessDataSource:
       default: process
       description: A data source for process-level infrastructure metrics.
@@ -88867,6 +89156,10 @@ components:
           description: A description of the critical asset.
           example: Production database servers handling PII
           type: string
+        editable:
+          description: Whether the critical asset is editable.
+          example: true
+          type: boolean
         enabled:
           description: Whether the critical asset is enabled.
           example: true
@@ -128657,6 +128950,57 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 68
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get the custom forecast for a budget.
+      operationId: GetCustomForecast
+      parameters:
+        - $ref: "#/components/parameters/BudgetID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        budget_uid: 00000000-0000-0000-0000-000000000001
+                        created_at: 1738258683590
+                        created_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+                        entries:
+                          - amount: 400
+                            month: 202501
+                            tag_filters:
+                              - tag_key: service
+                                tag_value: ec2
+                          - amount: 450
+                            month: 202502
+                            tag_filters:
+                              - tag_key: service
+                                tag_value: ec2
+                        updated_at: 1738258683590
+                        updated_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+                      id: 11111111-1111-1111-1111-111111111111
+                      type: custom_forecast
+              schema:
+                $ref: "#/components/schemas/CustomForecastResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a budget's custom forecast
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 69
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -169951,6 +170295,169 @@ paths:
       tags:
         - Rum Replay Heatmaps
       x-menu-order: 3
+  /api/v2/reporting/dataset/{dataset_id}/schedules:
+    get:
+      description: |-
+        Retrieve all report schedules for a given published dataset.
+        Returns report schedules belonging to the authenticated user's organization that target the specified dataset.
+        Requires the `generate_log_reports` or `manage_log_reports` permission.
+      operationId: ListDatasetReportSchedules
+      parameters:
+        - description: The identifier of the published dataset to retrieve report schedules for.
+          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          cell_id: "sevhjcis"
+                          dataset_id: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+                          description: "This is a scheduled notebook dataset report."
+                          file_row_limit: 5000
+                          inline_row_limit: 10
+                          next_recurrence: 1725859200000
+                          notebook_id: 1
+                          recipients:
+                            - "test@datadoghq.com"
+                          resource_id: "aaaabbbb-1111-2222-3333-444455556666"
+                          resource_type: widget_dataset_list
+                          rrule: "DTSTART;TZID=America/New_York:20240912T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
+                          status: active
+                          timeframe: "calendar_day"
+                          timezone: "America/New_York"
+                          title: "My Cool Dataset Report"
+                        id: "e1234567-1234-1234-1234-123456789012"
+                        relationships:
+                          author:
+                            data:
+                              id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                              type: users
+                        type: schedule
+                    included:
+                      - attributes:
+                          email: "user@example.com"
+                          name: "Example User"
+                        id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        type: users
+              schema:
+                $ref: "#/components/schemas/DatasetReportScheduleListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List dataset report schedules
+      tags:
+        - Report Schedules
+      x-menu-order: 8
+  /api/v2/reporting/print:
+    post:
+      description: |-
+        Initiate a one-off, print-only report for a dashboard or integration dashboard.
+        The report is rendered as a PDF and made available for download through the URL returned in the response.
+        Requires a reporting permission appropriate to the targeted resource type.
+      operationId: PrintReport
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resource_id: "abc-def-ghi"
+                      resource_type: dashboard
+                      template_variables:
+                        - name: "env"
+                          values:
+                            - "prod"
+                      timeframe: "1w"
+                      timezone: "America/New_York"
+                    type: report
+            schema:
+              $ref: "#/components/schemas/PrintReportRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        download_url: "https://app.datadoghq.com/..."
+                        from_ts: 1780318800000
+                        resource_id: "abc-def-ghi"
+                        resource_type: dashboard
+                        template_variables:
+                          - name: "env"
+                            values:
+                              - "prod"
+                        timeframe: "1w"
+                        timezone: "America/New_York"
+                        to_ts: 1780923600000
+                      id: "11111111-2222-3333-4444-555555555555"
+                      type: report
+              schema:
+                $ref: "#/components/schemas/PrintReportResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Print a report
+      tags:
+        - Report Schedules
+      x-codegen-request-body-name: body
+      x-menu-order: 9
   /api/v2/reporting/schedule:
     post:
       description: |-

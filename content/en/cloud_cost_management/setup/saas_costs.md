@@ -599,7 +599,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `org_id` | The unique identifier of the Anthropic organization. |
 | `org_name` | A tag-normalized version of the Anthropic organization's name. |
 | `display_org_name` | The unaltered name of the organization. |
-| `org_type` | The type of Anthropic account (for example, `enterprise`). Displays `N/A` for non-enterprise accounts. |
+| `org_type` | The type of Anthropic account (for example, `enterprise` or `platform`). |
 | `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
 | `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
