@@ -11,6 +11,9 @@ further_reading:
     - link: "/integrations/amazon_lambda/"
       tag: "Documentation"
       text: "AWS Lambda Integration"
+    - link: "/bits_ai/mcp_server/tools/#serverless_onboarding"
+      tag: 'Documentation'
+      text: 'Datadog MCP Server: serverless_onboarding tool'
 ---
 
 ## Overview
@@ -41,6 +44,36 @@ After you're done with instrumentation and you've set up telemetry collection, y
 - link errors of your Lambda functions to your source code
 - filter or scrub sensitive information from logs or traces
 
+## Set up with agentic onboarding
+
+Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI** — a standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server** — set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+{{< tabs >}}
+{{% tab "AI Setup CLI" %}}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{{% /tab %}}
+{{% tab "MCP server" %}}
+
+Use the Datadog MCP server's [`serverless_onboarding`][9] tool to set up monitoring for your Lambda functions with AI assistance. After you connect, try a prompt like:
+
+```
+Instrument my AWS Lambda functions with Datadog.
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -51,3 +84,4 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
+[9]: /bits_ai/mcp_server/tools/#serverless_onboarding
