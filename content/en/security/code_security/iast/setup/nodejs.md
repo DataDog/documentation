@@ -118,7 +118,7 @@ esbuild.build({
   entryPoints: ['app.js'],
   bundle: true,
   outfile: 'out.js',
-  sourcemap: true, // required for correct vulnearability location
+  sourcemap: true, // required for correct vulnerability location
   plugins: [ddPlugin],
   platform: 'node', // allows built-in modules to be required
   target: ['node18'],
