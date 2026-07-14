@@ -122,9 +122,9 @@ Notes:
 
 Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
 ```sql
-GRANT USE CATALOG ON CATALOG system TO `<client-id>`;
-GRANT USE SCHEMA ON CATALOG system TO `<client-id>`;
-GRANT SELECT ON CATALOG system TO `<client-id>`;
+GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 ```
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).

@@ -42,7 +42,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    - {{< ui >}}Databricks SQL access{{< /ui >}}
    - {{< ui >}}Admin access{{< /ui >}}: Grants the workspace administrator access that Datadog requires. This is equivalent to adding the service principal to the `admins` group.
 
-   <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration below.</div>
+   <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration.</div>
 
    <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 1. Click **Add**.
@@ -64,16 +64,16 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, client ID, and client secret." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Data Observability: Jobs Monitoring or [Cloud Cost Management][18], and powers [Data Observability: Quality Monitoring][21].
-   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless; Classic Warehouses are **NOT** supported. We recommend creating a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes to reduce cost.
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the service principal `CAN USE`.
    1. Grant the service principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the service principal's client ID (not its display name):
 
       ```sql
-      GRANT USE CATALOG ON CATALOG system TO `<client-id>`;
-      GRANT SELECT ON CATALOG system TO `<client-id>`;
-      GRANT USE SCHEMA ON CATALOG system TO `<client-id>`;
+      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
@@ -117,16 +117,16 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Data Observability: Jobs Monitoring or [Cloud Cost Management][18], and powers [Data Observability: Quality Monitoring][21].
-   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless; Classic Warehouses are **NOT** supported. We recommend creating a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes to reduce cost.
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. Use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes, to reduce cost.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
    1. Grant the token's principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the principal's client ID (not its display name):
 
       ```sql
-      GRANT USE CATALOG ON CATALOG system TO `<client-id>`;
-      GRANT SELECT ON CATALOG system TO `<client-id>`;
-      GRANT USE SCHEMA ON CATALOG system TO `<client-id>`;
+      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
