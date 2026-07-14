@@ -83,32 +83,6 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
-    - name: Preview AWS metric name filter
-      url: /api/latest/aws-integration/preview-aws-metric-name-filter/
-      identifier: aws-integration-preview-aws-metric-name-filter
-      parent: aws-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - PreviewAWSMetricNameFilter
-        unstable:
-          - v2
-        order: 20
-    - name: Get AWS metric name filter preview
-      url: /api/latest/aws-integration/get-aws-metric-name-filter-preview/
-      identifier: aws-integration-get-aws-metric-name-filter-preview
-      parent: aws-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetAWSMetricNameFilterPreview
-        unstable:
-          - v2
-        order: 19
     - name: Create AWS CCM config
       url: /api/latest/aws-integration/create-aws-ccm-config/
       identifier: aws-integration-create-aws-ccm-config
@@ -13016,6 +12990,58 @@ menu:
         unstable:
           - v2
         order: 51
+    - name: Create postmortem for an incident
+      url: /api/latest/incidents/create-postmortem-for-an-incident/
+      identifier: incidents-create-postmortem-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentPostmortem
+        unstable:
+          - v2
+        order: 58
+    - name: Update postmortem for an incident
+      url: /api/latest/incidents/update-postmortem-for-an-incident/
+      identifier: incidents-update-postmortem-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentPostmortem
+        unstable:
+          - v2
+        order: 59
+    - name: Get postmortem for an incident
+      url: /api/latest/incidents/get-postmortem-for-an-incident/
+      identifier: incidents-get-postmortem-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentPostmortem
+        unstable:
+          - v2
+        order: 57
+    - name: Delete postmortem for an incident
+      url: /api/latest/incidents/delete-postmortem-for-an-incident/
+      identifier: incidents-delete-postmortem-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentPostmortem
+        unstable:
+          - v2
+        order: 60
     - name: Delete an incident impact
       url: /api/latest/incidents/delete-an-incident-impact/
       identifier: incidents-delete-an-incident-impact

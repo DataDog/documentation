@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "status": "in_review"
+    },
+    "id": "00000000-0000-abcd-1000-000000000000",
+    "type": "incident_postmortems"
+  }
+}

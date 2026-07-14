@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "document_url": "https://app.datadoghq.com/notebook/123",
+      "title": "Postmortem for IR-123"
+    },
+    "type": "incident_postmortems"
+  }
+}
