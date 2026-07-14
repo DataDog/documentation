@@ -37,14 +37,14 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. As a **Databricks workspace admin**, go to {{< ui >}}Settings{{< /ui >}} by clicking your profile in the upper-right corner of the workspace.
 1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
 1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
+
+   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 1. Enter a name and enable the following workspace entitlements for the service principal:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
    - {{< ui >}}Admin access{{< /ui >}}: Grants the workspace administrator access that Datadog requires. This is equivalent to adding the service principal to the `admins` group.
 
    <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration.</div>
-
-   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 1. Click **Add**.
 
 1. Click on the name of your new service principal. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
@@ -72,8 +72,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
       ```sql
       GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
       GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
@@ -125,8 +125,8 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 
       ```sql
       GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
       GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
@@ -373,7 +373,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. In Databricks, on the cluster configuration page, click the {{< ui >}}Advanced options{{< /ui >}} toggle.
 2. At the bottom of the page, go to the {{< ui >}}Spark{{< /ui >}} tab.
-   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script-quoted.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
 
    In the {{< ui >}}Environment variables{{< /ui >}} textbox, provide the values for the init script parameters.
 
@@ -477,8 +477,8 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
    - Read access to the [system tables][27] within Unity Catalog. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
    ```sql
    GRANT USE CATALOG ON CATALOG system TO `<client-id>`;
-   GRANT SELECT ON CATALOG system TO `<client-id>`;
    GRANT USE SCHEMA ON CATALOG system TO `<client-id>`;
+   GRANT SELECT ON CATALOG system TO `<client-id>`;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
