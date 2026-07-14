@@ -29,7 +29,7 @@ Yes, you can exclude commits from specific people by using [exclusion filters][2
 
 ## Billing enrichment
 
-Billing enrichment correlates your billable-committer metrics with data from a [reference table][5] using the committer's email address, adding tags such as `vp_name` or `director_name` to your billing data. Use these tags to break down billing data by organizational structure.
+Billing enrichment correlates your billable-committer metrics with data from a [reference table][5], using the committer's email address as the join key. This adds tags such as `vp_name` or `director_name` to your billing data, so you can break down billing data by organizational structure.
 
 To set up billing enrichment:
 
