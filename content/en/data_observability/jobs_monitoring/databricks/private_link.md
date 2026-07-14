@@ -64,11 +64,11 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Set the secret's lifetime in days (maximum 730 days).
    1. Click **Generate**.
    1. Make the Databricks credentials available to the runner using **one** of the following methods:
-      - **Cloud secret storage** (AWS Secrets Manager, AWS Parameter Store, Azure Key Vault, or GCP Secret Manager): Store the credentials as a JSON blob:
+      - **Cloud secret storage** (AWS Secrets Manager, AWS Parameter Store, Azure Key Vault, or Google Cloud Secret Manager): Store the credentials as a JSON blob:
         ```json
         {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>"}
         ```
-        Make note of the secret path (AWS ARN, AKV URL, or GCP resource name). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
+        Make note of the secret path (AWS ARN, AKV URL, or Google Cloud resource name). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
       - **Environment variables**: Set `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` directly on the runner container or pod. When using this method, leave the **Secret Path** field blank in the integration tile.
 1. Provision workspace access and entitlements for the service principal. See [Permissions][11] for full details.
    1. Grant the service principal **Workspace Admin** privileges. This allows Datadog to manage init script installations and updates automatically. Alternatively, assign more [granular permissions][11] for monitoring jobs, clusters, and queries.
@@ -122,7 +122,7 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
     - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
-    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Azure Managed Identity][5], [AWS IAM Role][6], or [GCE Service Account][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
+    - Use cloud secret storage. Ensure an identity is assigned to the instance ([Azure Managed Identity][5], [AWS IAM Role][6], or [GCE Service Account][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either through the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
