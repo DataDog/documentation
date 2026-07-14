@@ -71,6 +71,17 @@ As you define the search query, the graph above the search fields updates.
     * {{< ui >}}Simple-Alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * {{< ui >}}Multi Alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
+### Filter with subqueries and Reference Tables
+
+Log monitors support [advanced log search][11], so you can scope alerts to curated datasets:
+
+- Use **subqueries** to filter monitor results against the results of a secondary query, for example to correlate across log sources or suppress noise from related events.
+- Use **Reference Table** joins to filter or enrich monitor results with external metadata, such as customer tier, region, or a curated list of IP addresses or accounts.
+
+To add a subquery or Reference Table join, use the {{< ui >}}Σ Modify Query{{< /ui >}} menu in the monitor configuration. You can also create a monitor directly from an advanced search in the [Log Explorer][4].
+
+For details on building these queries and their limits, see [Advanced Search][11].
+
 ### Set alert conditions
 
 Trigger when the query meets one of the following conditions compared to a threshold value:
@@ -143,3 +154,4 @@ Include a sample of 10 logs in the alert notification:
 [8]: /monitors/notify/
 [9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
 [10]: /logs/log_configuration/flex_logs/
+[11]: /logs/explorer/advanced_search/
