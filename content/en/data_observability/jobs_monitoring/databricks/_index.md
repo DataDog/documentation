@@ -40,7 +40,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. Enter a name and enable the following workspace entitlements for the service principal:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
-   - {{< ui >}}Admin access{{< /ui >}}: grants the workspace administrator access that Datadog requires. This is equivalent to adding the service principal to the `admins` group.
+   - {{< ui >}}Admin access{{< /ui >}}: Grants the workspace administrator access that Datadog requires. This is equivalent to adding the service principal to the `admins` group.
 
    <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration below.</div>
 
