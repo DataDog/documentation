@@ -32,19 +32,41 @@ git commit -m "Apply reorg"
 git push --set-upstream origin <your-branch-name>
 ```
 
-## Running the test
+### 4. Switch back to `jen.gilbert/astro-reorg-scripts`
+
+Switch back to the Astro reorg scripts branch:
 
 ```bash
-# 1. Create the four test PRs. Copy the --base-branch command from the output.
+git checkout jen.gilbert/astro-reorg-scripts
+```
+
+Revert any lingering (untracked) reorg changes:
+
+```bash
+python3 astro_reorg/local_rollback.py
+```
+
+## Running the test
+
+### 1. Create the test PRs
+
+Create the test PRs:
+
+```bash
 python3 astro_reorg/create_test_prs.py
+```
 
-# 2. Run the resolver against them (dry run by default).
+This script will output the commands you should use to execute a dry run and a real run of the automatic conflict resolution script.
+
+### 2. Execute a dry run
+
 python3 astro_reorg/resolve_pr_conflicts.py \
-  --base-branch mock-reorged-master-122011-conflict-<uuid>
+  --base-branch <PROVIDED_BRANCH_NAME>
 
-# 3. Run for real.
+### 3. Execute a real run
+
 python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run \
-  --base-branch mock-reorged-master-122011-conflict-<uuid>
+  --base-branch <PROVIDED_BRANCH_NAME>
 ```
 
 Expected outcomes: the wording-tweak PR gets an auto-fix; the other three get
