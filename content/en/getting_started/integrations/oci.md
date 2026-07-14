@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Use this guide to get started with monitoring your Oracle Cloud Infrastructure (OCI) environment. Datadog's QuickStart setup simplifies the integration process, automatically provisioning the infrastructure needed to collect metrics, logs, and resource data from your OCI tenancy.
+Use this guide to get started with monitoring your Oracle Cloud Infrastructure (OCI) environment. Datadog's QuickStart setup simplifies the integration process, automatically provisioning the infrastructure needed to collect metrics, logs, resource data, and OCI events from your OCI tenancy.
 
 {{% collapse-content title="Prerequisites" level="h4" expanded=false id="prerequisites" %}}
 
@@ -59,7 +59,8 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 2. Select or create a Datadog API key to use for the integration.
 3. Create a Datadog application key.
 4. Enable or disable logs using the toggle.
-5. Click {{< ui >}}Create OCI Stack{{< /ui >}}. This opens the Oracle Resource Manager in the OCI console to complete deployment.
+5. Enable or disable event collection using the toggle.
+6. Click {{< ui >}}Create OCI Stack{{< /ui >}}. This opens the Oracle Resource Manager in the OCI console to complete deployment.
 
    **Note**: Deploy this stack only once per tenancy.
 
@@ -155,6 +156,8 @@ Use the {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} section to d
 
 On the {{< ui >}}Resource Collection{{< /ui >}} tab of the [Datadog OCI integration tile][3], click the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle. Resources are visible in the [Datadog Resource Catalog][7].
 
+To collect OCI resource change events, turn on the {{< ui >}}Enable Resource Changes Collection{{< /ui >}} toggle. OCI resource change events are visible in the [Event Explorer][31].
+
 ## Get more from the Datadog platform
 
 ### Install the Agent for deeper visibility
@@ -234,3 +237,4 @@ Need help? Contact [Datadog support][28].
 [28]: /help/
 [29]: https://app.datadoghq.com/dash/integration/31744/oci-gpu-overview
 [30]: /account_management/rbac/permissions/#api-and-application-keys
+[31]: https://app.datadoghq.com/event/explorer

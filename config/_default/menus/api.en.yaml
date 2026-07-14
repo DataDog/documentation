@@ -83,6 +83,32 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
+    - name: Preview AWS metric name filter
+      url: /api/latest/aws-integration/preview-aws-metric-name-filter/
+      identifier: aws-integration-preview-aws-metric-name-filter
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewAWSMetricNameFilter
+        unstable:
+          - v2
+        order: 20
+    - name: Get AWS metric name filter preview
+      url: /api/latest/aws-integration/get-aws-metric-name-filter-preview/
+      identifier: aws-integration-get-aws-metric-name-filter-preview
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSMetricNameFilterPreview
+        unstable:
+          - v2
+        order: 19
     - name: Create AWS CCM config
       url: /api/latest/aws-integration/create-aws-ccm-config/
       identifier: aws-integration-create-aws-ccm-config
@@ -17091,6 +17117,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Print a report
+      url: /api/latest/report-schedules/print-a-report/
+      identifier: report-schedules-print-a-report
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PrintReport
+        unstable: []
+        order: 9
+    - name: List dataset report schedules
+      url: /api/latest/report-schedules/list-dataset-report-schedules/
+      identifier: report-schedules-list-dataset-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatasetReportSchedules
+        unstable: []
+        order: 8
     - name: Reporting And Sharing
       url: /api/latest/reporting-and-sharing/
       identifier: reporting-and-sharing
