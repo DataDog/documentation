@@ -3,7 +3,7 @@ name: "Check site-region usage for site support"
 on:
   pull_request:
     paths:
-      - 'content/en/**/*.md'
+      - 'hugo/content/en/**/*.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
@@ -27,7 +27,7 @@ jobs:
       - name: Get changed markdown files
         id: changed_files
         run: |
-          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'content/en/**/*.md' | xargs)
+          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'hugo/content/en/**/*.md' | xargs)
           echo "files=$FILES" >> $GITHUB_OUTPUT
 
       - name: Check for site-region at top of page with support language
