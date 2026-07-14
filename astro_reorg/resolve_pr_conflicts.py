@@ -749,7 +749,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
 # Entry point
 # ---------------------------------------------------------------------------
 
-def get_open_prs(only: list[int] | None = None) -> list[dict]:
+def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
     """Return open PRs targeting BASE_BRANCH, optionally filtered to specific numbers.
 
     The --base filter is what keeps a run scoped: in test mode only PRs opened
@@ -780,7 +780,7 @@ def get_open_prs(only: list[int] | None = None) -> list[dict]:
         "pr", "list", "--repo", REPO, "--state", "open",
         "--base", BASE_BRANCH,
         "--search", f"-label:{LABEL_PROCESSED}",
-        "--json", fields, "--limit", "300",
+        "--json", fields, "--limit", str(limit),
     )
 
 
@@ -799,9 +799,9 @@ def main() -> None:
         help="Only check this PR number (may be repeated).",
     )
     parser.add_argument(
-        "--limit", type=int, default=None, metavar="N",
-        help="Stop after acting on N PRs (auto-fixing or labeling). PRs needing "
-             "no action don't count. Use it to roll out gradually: start at 1, "
+        "--limit", type=int, required=True, metavar="N",
+        help="Fetch and act on at most N PRs. PRs needing no action don't count "
+             "toward the limit. Use it to roll out gradually: start at 1, "
              "review, then raise it.",
     )
     parser.add_argument(
@@ -817,7 +817,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if args.limit is not None and args.limit < 1:
+    if args.limit < 1:
         parser.error("--limit must be a positive integer.")
 
     if args.live and args.base_branch:
@@ -864,14 +864,13 @@ def main() -> None:
               f"Check that the label name is correct.", file=sys.stderr)
         sys.exit(1)
 
-    prs = get_open_prs(args.prs)
+    prs = get_open_prs(args.prs, limit=args.limit)
     print(f"Found {len(prs)} open PR(s) to check.")
-    if args.limit is not None:
-        print(f"Limit: will stop after acting on {args.limit} PR(s).")
+    print(f"Limit: will stop after acting on {args.limit} PR(s).")
 
     acted = 0
     for pr in prs:
-        if args.limit is not None and acted >= args.limit:
+        if acted >= args.limit:
             print(f"\nReached --limit of {args.limit} acted-on PR(s) — stopping.")
             break
         # Isolate failures: one PR raising (e.g. a transient gh/network error)

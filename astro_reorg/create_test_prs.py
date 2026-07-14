@@ -433,14 +433,15 @@ def main() -> None:
         print(f"  {url}")
 
     base_flag = f"--base-branch {conflicting_base}" if conflicting_base else "--live"
+    n = len(urls)
     print(
         f"\nView all test PRs:\n"
         f"  https://github.com/DataDog/documentation/pulls"
         f"?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing\n"
         f"\nDry-run conflict resolution (no changes made):\n"
-        f"  python3 astro_reorg/resolve_pr_conflicts.py {base_flag}\n"
+        f"  python3 astro_reorg/resolve_pr_conflicts.py {base_flag} --limit {n}\n"
         f"\nLive conflict resolution (applies fixes and labels):\n"
-        f"  python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run {base_flag}"
+        f"  python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run {base_flag} --limit {n}"
     )
 
 
