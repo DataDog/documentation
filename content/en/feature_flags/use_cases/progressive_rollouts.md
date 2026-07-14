@@ -10,7 +10,7 @@ description: Gradually roll out feature flags on a schedule with optional guardr
 ### Configure a progressive rollout
 
 1. Navigate to your feature flag and open **Targeting Rules & Rollouts** for the target environment.
-2. Click **Add Targeting Rule** and select **Add Rollout Steps** to create a multistep rollout
+2. Click **Add Targeting Rule** and select **Add Rollout Steps** to create a multistep rollout.
 3. Configure rollout steps:
    - Customize the percentage for each step, and add or delete steps as needed.
    - Change the delay between steps for a slower or faster rollout.
@@ -24,7 +24,6 @@ description: Gradually roll out feature flags on a schedule with optional guardr
 2. Click **Start Rollout** to kick off the progressive rollout.
 
 {{< img src="getting_started/feature_flags/start-progressive-rollout.png" alt="Multistep progressive rollout display." style="width:100%;" >}}
-
 
 After the rollout starts:
 

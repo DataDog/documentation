@@ -11,7 +11,6 @@ A **kill switch** is a Boolean feature flag where the default state is **on** (`
 
 Use a kill switch when you need to turn off risky or broken functionality in seconds from Datadog, without waiting for a deploy. During incidents, that gives operations and engineering a fast path to stop customer impact while the rest of the application keeps running.
 
-
 ## Set up a kill switch
 
 ### Step 1: Create a Boolean flag
@@ -21,7 +20,7 @@ Use a kill switch when you need to turn off risky or broken functionality in sec
 3. Mark the flag as **Permanent**.
 4. In the **Variants** section, click **Make Default** next to the **True** variant. This sets `true` as the value served to all subjects by default.
 
-{{< img src="feature_flags/kill_switch_make_default.png" alt="The Variants section of the create flag form, showing Boolean variants with Make Default highlighted next to the True variant." style="width:90%;" >}}
+    {{< img src="feature_flags/kill_switch_make_default.png" alt="The Variants section of the create flag form, showing Boolean variants with Make Default highlighted next to the True variant." style="width:90%;" >}}
 
 5. Save the flag.
 
@@ -89,7 +88,7 @@ When you need to disable the feature — for example, during a regression or to 
 
 - Use a fallback of `true` so the feature stays enabled if the flag is unavailable — you don't want the feature to accidentally turn off due to a connectivity issue.
 - Mark the flag as **Permanent**. Kill switches are intended to be long-lived, and marking them permanent prevents them from being flagged as [stale][2].
-- Test the kill switch in Staging before relying on it in Production.
+- Test the kill switch in staging before relying on it in production.
 - Use evaluation tracking to confirm the flag state during an incident.
 
 ## Further reading

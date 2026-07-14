@@ -16,7 +16,7 @@ A feature flag becomes **dynamic configuration** when you store application sett
 
 ## Next steps
 
-Once your flag is set up, you can use it as a foundation for more advanced workflows:
+After your flag is set up, you can use it as a foundation for more advanced workflows:
 
 - **Target by segment**: Use targeting rules to serve different configuration values to different user segments — for example, serving different sort defaults by region or subscription tier.
 - **Roll out gradually**: Use a [progressive rollout][3] to incrementally expose subjects to a new configuration variant, and roll back immediately if something goes wrong.
