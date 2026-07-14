@@ -110,25 +110,25 @@ However, CUPED is fundamentally model-free. It relies only on the fact that pre-
 
 CUPED at Datadog is not limited to mean-based metrics. The same framework reduces variance for mean, ratio, and percentile metrics, including metrics that target the tail of a distribution, such as the 95th percentile of page load time. This is an advantage over regression-based implementations of CUPED, which do not naturally extend to percentile metrics. CUPED can produce narrower intervals in fewer samples, including for latency and Core Web Vitals measurements that are naturally expressed as percentiles.
 
-## Frequently asked questions
+## Assumptions and interpretation
 
-### Does CUPED make modeling assumptions such as linear relationships, homoscedasticity, or no interactions?
+### Modeling assumptions
 
-No. The main assumption of CUPED is that the covariate means across variants are equal in expectation. The other assumptions it relies on are common to digital experimentation in general, such as no confounding through proper randomization, and sufficiently large samples for normality of the estimators by the central limit theorem.
+CUPED does not assume linear relationships, homoscedasticity, or the absence of interactions. Its main assumption is that the covariate means across variants are equal in expectation. The other assumptions are common to digital experimentation in general, such as no confounding through proper randomization, and samples large enough for the estimators to be approximately normal by the central limit theorem.
 
-### Should CUPED provide the same lift estimates, but with narrower confidence intervals?
+### Why CUPED lift estimates differ from non-CUPED estimates
 
-No. If CUPED and non-CUPED estimates were always the same, the variance, and therefore the confidence intervals, would be the same as well. The fact that CUPED and non-CUPED results differ is the exact mechanism that drives the reduced variance of CUPED.
+CUPED does not produce the same lift estimates with narrower confidence intervals. If CUPED and non-CUPED estimates were always identical, their variance, and therefore their confidence intervals, would also be identical. The difference between CUPED and non-CUPED results is the exact mechanism that drives CUPED's reduced variance.
 
-### If CUPED and non-CUPED results differ, which one should I trust?
+### Choosing between CUPED and non-CUPED results
 
-Use CUPED results when CUPED's weak assumptions are met: they have the same expectation as non-CUPED results, but with lower variance. Proper data management practices reduce the risk of assumption violations, and diagnostic checks can detect pre-experiment imbalance and dimensional sample ratio mismatch.
+Use CUPED results when CUPED's assumptions are met. They have the same expectation as non-CUPED results, but with lower variance. Proper data management practices reduce the risk of assumption violations, and diagnostic checks can detect pre-experiment imbalance and dimensional sample ratio mismatch.
 
-<div class="alert alert-info">Decide whether the decision is based on the CUPED or non-CUPED result before the experiment starts. This avoids selecting the result that best supports a preferred decision.</div>
+<div class="alert alert-info">Before the experiment starts, decide whether to base your decision on the CUPED or non-CUPED result. This avoids selecting the result that best supports a preferred outcome.</div>
 
-### Does CUPED correct for bias in an improperly randomized experiment?
+### CUPED and improperly randomized experiments
 
-No. CUPED assumes that the experiment is properly randomized, so it does not recover statistically valid estimates from systematically biased experiments. However, random covariate imbalances still arise in properly randomized experiments. CUPED corrects for these imbalances in the sense that the CUPED-adjusted estimates are *conditionally* unbiased for a specific observed covariate imbalance.
+CUPED does not correct for bias caused by improper randomization. It assumes the experiment is properly randomized, so it cannot recover statistically valid estimates from systematically biased experiments. Random covariate imbalances still arise in properly randomized experiments, and CUPED corrects for these: the CUPED-adjusted estimates are *conditionally* unbiased for a specific observed covariate imbalance.
 
 ## Further reading
 
