@@ -18,7 +18,7 @@ further_reading:
   text: 'Agent Filtering for Custom Metrics'
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< beta-callout url="#" btn_hidden="true" header="false" >}}
 Telemetry rules are in Preview. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
 {{< /beta-callout >}}
 
