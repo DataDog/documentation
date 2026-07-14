@@ -67,18 +67,17 @@ As you define the search query, the graph above the search fields updates.
    * **Third facet**: 5 top values
    * **Fourth facet**: 2 top values
 
-4. Configure the alerting grouping strategy (optional):
+4. Modify the query with additional options (optional):
+
+   Use the {{< ui >}}Σ Modify Query{{< /ui >}} menu to refine the query with:
+   * **Functions and formulas**: Transform and combine your query results. See [functions][11] and [formulas][12].
+   * **Advanced search**: Scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events. See [subqueries and Reference Table joins][13].
+
+   You can also create a monitor directly from an advanced search in the [Log Explorer][4].
+
+5. Configure the alerting grouping strategy (optional):
     * {{< ui >}}Simple-Alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * {{< ui >}}Multi Alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
-
-### Filter with subqueries and Reference Tables
-
-Log monitors support [advanced search][11], so you can scope alerts to curated datasets:
-
-- Use **subqueries** to filter monitor results against the results of a secondary query. For example, you can correlate across log sources or suppress noise from related events.
-- Use **Reference Table joins** to filter or enrich monitor results with external metadata. For example, you can use customer tier, region, or a curated list of IP addresses or accounts.
-
-To add a subquery or Reference Table join, use the {{< ui >}}Σ Modify Query{{< /ui >}} menu in the monitor configuration. You can also create a monitor directly from an advanced search in the [Log Explorer][4].
 
 ### Set alert conditions
 
@@ -152,4 +151,6 @@ Include a sample of 10 logs in the alert notification:
 [8]: /monitors/notify/
 [9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
 [10]: /logs/log_configuration/flex_logs/
-[11]: /logs/explorer/advanced_search/
+[11]: /logs/explorer/analytics/#functions
+[12]: /logs/explorer/analytics/#formulas
+[13]: /logs/explorer/advanced_search/
