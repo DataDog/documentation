@@ -36,7 +36,7 @@ You need the `governance_console_read` permission to view telemetry rules. To cr
 
 | Rule type | Telemetry type(s) | Applied at | Description |
 |---|---|---|---|
-| Tag Visibility and Enforcement | Metrics, Logs, Spans | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
+| Tag Visibility and Enforcement | Metrics, logs, spans | Ingest | Determines whether telemetry tags and values are compliant, and optionally drops non-compliant telemetry at ingest. |
 | Tag Indexing | Metrics | Ingest | Determines custom metric tags that should be indexed for a given metric. |
 | Metric Name Filtering | Metrics | Agent | Drops custom metrics of a given name directly in the Datadog Agent, prior to ingestion. |
 
