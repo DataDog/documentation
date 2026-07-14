@@ -23,7 +23,7 @@ further_reading:
 
 When you need to further refine the results of a log search, use [subqueries](#filter-logs-with-subqueries) to compare your results against a secondary group of logs, or filter your logs using data from your [Reference Tables](#filter-logs-based-on-reference-tables).
 
-These advanced search options are available in the Log Explorer and [log monitors][3], where they scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events.
+Advanced search options are available in the Log Explorer and [log monitors][3]. In log monitors, they scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events.
 
 ## Filter logs with subqueries
 
