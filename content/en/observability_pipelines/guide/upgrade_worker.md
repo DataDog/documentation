@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.18.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.19.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,42 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.19.0
+
+To upgrade to Worker version 2.19.0:
+
+- Docker: Run the `docker pull` command for the [2.19.0 image][49].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.19.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.19.0`.
+
+Worker version 2.19.0 gives you access to the following:
+
+#### New features
+
+- The OpenTelemetry source and destination now support traces pipelines.
+- The Custom Processor is now available in traces pipelines.
+- The Sensitive Data Scanner processor is now available in traces pipelines.
+- Live Capture now supports traces pipelines.
+
+#### Enhancements
+
+- A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
+- The Splunk TCP source now supports hot-reloading TLS certificates, so certificate rotations are applied without restarting the Worker.
+- The BYOC Logs destination now supports hot-reloading mTLS files.
+- The Worker now supports a configurable graceful shutdown limit.
+- The Amazon S3 destination now supports SSE-KMS encryption using the `server_side_encryption` and `ssekms_key_id` options.
+
+#### Fixes
+
+- Fixed an issue in the Reduce processor where a timestamp field whose name requires quoting in a path (for example, `"created.at"` or `"event-time"`) had its `_end` companion field silently dropped from the reduced event. The companion field is now placed correctly next to the base field.
+- Fixed a configuration reload issue. If a reload changed a component's type while keeping the same name, such as replacing a source named `X` with a processor named `X`, any downstream processor or destination still reading from `X` now reconnects to the new component.
+- Fixed an issue in the Syslog source (TCP mode) to handle over-length, length-prefixed message split across multiple reads.
+- Fixed an issue in the Logstash source to acknowledge only completed windows instead of sometimes sending a partial acknowledgment. Partial acknowledgments could confuse proxies that expect a single acknowledgment per window and cause errors on subsequent batches.
+- The Logstash source now rejects a window-size frame that arrives before the current window has received all of its advertised events, closing the connection with a fatal decode error instead of continuing.
+- Fixed the Syslog codec silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
+- Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` on inputs with lines of 65,535 bytes or more.
 
 ## Worker version 2.18.0
 
@@ -629,3 +665,4 @@ Worker version 2.7.0 gives you access to the following:
 [46]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.17.0
 [47]: /observability_pipelines/destinations/databricks/
 [48]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.18.0
+[49]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.19.0
