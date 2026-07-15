@@ -24,7 +24,7 @@ Telemetry rules are in Preview. If you see an issue or want to propose a new fea
 
 ## Overview
 
-Telemetry rules let Datadog admins govern characteristics of their metrics, logs, and spans from the Governance Console. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry.
+Telemetry rules let Datadog admins govern characteristics of their metrics, logs, and spans from the Governance Console. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry, which can improve usage and cost management.
 
 ## Prerequisites
 
