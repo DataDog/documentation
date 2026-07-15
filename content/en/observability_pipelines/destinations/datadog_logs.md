@@ -111,7 +111,7 @@ For [component metrics][7] and [destination buffer metrics][8] emitted by all de
 - The `component_type` tag is `datadog_logs` for Datadog Logs destination metrics.
 
 `pipelines.datadog_logs_reserved_attribute_conflicts_total`
-: **Description**: The number of conflicts encountered when relocating fields with semantic meaning to a Datadog reserved attribute. Available in Worker version 2.18 and later.
+: **Description**: The number of conflicts encountered when relocating fields with semantic meaning to a Datadog reserved attribute. Available in Worker version 2.18 and later. For example, the OpenTelemetry source decodes `{"message": "GET /api/users returned 404", "severity_text": "WARN", "attributes": {"status": 404, "http.method": "GET"}, "timestamp": "..."}`, which is then flattened (by a processor) into `{"message": "GET /api/users returned 404", "severity_text": "WARN", "status": 404, "http.method": "GET", "timestamp": "..."}`. Because `severity_text` in OpenTelemetry semantically maps to the reserved `status` attribute, which already exists, the existing `status` field is renamed to `_RESERVED_severity` to avoid being overridden: `{"message": "GET /api/users returned 404", "status": "WARN", "_RESERVED_severity": 404, "http.method": "GET", "timestamp": "..."}`.
 : **Metric type**: count
 
 ## How the destination works
