@@ -95,7 +95,7 @@ steps:
 | `dd-log-level` | Controls which firewall events are forwarded to Datadog. `ALLOW` logs all events; `BLOCK` logs only blocked events. | `ALLOW` |
 | `scfw-home` | Directory for SCFW's local cache. Point this at a cached directory to speed up verifier data fetches across runs. | — |
 | `on-warning` | Action that SCFW should take on warning-level findings: `ALLOW` or `BLOCK`. Defaults to `BLOCK` in non-interactive environments. | — |
-| `package-minimum-age` | Minimum age in hours a package must have before installation is allowed. | `24` |
+| `package-minimum-age` | Minimum age, in hours, that a package version must reach before installation is allowed. | `24` |
 | `dd-env` | Datadog environment tag attached to all forwarded firewall events. | `ci` |
 | `dd-log-attributes` | A JSON object of custom attributes to attach to all forwarded Datadog log events (for example, `'{"team":"security"}'`). | — |
 
