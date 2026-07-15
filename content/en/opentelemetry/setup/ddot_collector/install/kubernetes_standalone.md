@@ -72,7 +72,7 @@ See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-operator/README.md
 {{% /tab %}}
 {{% tab "Helm" %}}
-### Add the Open-Telemetry Helm Repository
+### Add the OpenTelemetry Helm repository
 
 To add the OpenTelemetry repository to your Helm repositories:
 
@@ -87,7 +87,7 @@ helm repo update
 ### Set up Datadog API key
 
 1. Get the Datadog [API key][2].
-1. Ensure the **DATADOG SITE** selected on the right (Current value: **{{< region-param key="dd_site_name" >}}**) corresponds to your [Datadog site][52].
+1. Confirm the **DATADOG SITE** selected on the right (Current value: **{{< region-param key="dd_site_name" >}}**) corresponds to your [Datadog site][52].
 1. Store the API key as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
@@ -151,7 +151,7 @@ spec:
 
 Replace `<CLUSTER_NAME>` with a name for your cluster.
 
-2. Add an OTLP receiver and the datadog exporter for all desired signals. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node:
+2. Add an OTLP receiver and the Datadog exporter for all desired signals. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node:
 
 {{< code-block lang="yaml" filename="node-collector.yaml" collapsible="true" >}}
 # [...]
@@ -259,7 +259,7 @@ spec:
     # K8S_NODE_NAME is added automatically by the operator
 {{< /code-block >}}
 
-4. (Optional) Collect container logs from the node's filesystem:
+4. (Optional) Collect container logs from the node's file system:
 
 <div class="alert alert-warning">Enabling log collection may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -833,7 +833,7 @@ spec:
 
 ### Run the application
 
-Redeploy your application to apply the changes made in the deployment manifest. Once the updated configuration is active, Unified Service Tagging will be fully enabled for your metrics, traces, and logs.
+Redeploy your application to apply the changes made in the deployment manifest. After the updated configuration is active, Unified Service Tagging is fully enabled for your metrics, traces, and logs.
 
 ## Explore observability data in Datadog
 
