@@ -1262,6 +1262,10 @@
     "description": "Delete the custom forecast for a budget.",
     "summary": "Delete a budget's custom forecast"
   },
+  "GetCustomForecast": {
+    "description": "Get the custom forecast for a budget.",
+    "summary": "Get a budget's custom forecast"
+  },
   "ListBudgets": {
     "description": "List budgets.",
     "summary": "List budgets"
@@ -4456,6 +4460,16 @@
     "summary": "Update replay heatmap snapshot",
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
+  },
+  "ListDatasetReportSchedules": {
+    "description": "Retrieve all report schedules for a given published dataset.\nReturns report schedules belonging to the authenticated user's organization that target the specified dataset.\nRequires the `generate_log_reports` or `manage_log_reports` permission.",
+    "summary": "List dataset report schedules"
+  },
+  "PrintReport": {
+    "description": "Initiate a one-off, print-only report for a dashboard or integration dashboard.\nThe report is rendered as a PDF and made available for download through the URL returned in the response.\nRequires a reporting permission appropriate to the targeted resource type.",
+    "summary": "Print a report",
+    "request_description": "",
+    "request_schema_description": "Request body for initiating a print-only report."
   },
   "CreateReportSchedule": {
     "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",

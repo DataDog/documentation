@@ -22,7 +22,9 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
-- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of the [IP Ranges][7] page.
+
+  <div class="alert alert-warning">IP ranges are different for each Datadog site. On the <a href="/api/latest/ip-ranges/">IP Ranges</a> page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
 
 ## Set up your account in Snowflake
 
@@ -253,3 +255,4 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /monitors/types/data_observability/
 [6]: https://docs.snowflake.com/en/user-guide/object-tagging
+[7]: /api/latest/ip-ranges/

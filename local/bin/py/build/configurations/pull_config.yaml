@@ -390,19 +390,6 @@
           options:
             dest_path: '/security/default_rules/'
 
-      - repo_name: infrastructure-resources
-        contents:
-        - action: pull-and-push-folder
-          branch: prod
-          globs:
-            - "generated/md/external/*.md"
-          options:
-            dest_dir: '/infrastructure/resource_catalog/'
-            path_to_remove: 'generated/md/external/'
-            front_matters:
-              disable_edit: true
-              exclude_headers_from_search: true
-
       - repo_name: datadog-agent
         contents:
         - action: pull-and-push-file
