@@ -177,8 +177,8 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[8]: /observability_pipelines/monitoring/metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [9]: /observability_pipelines/configuration/set_up_pipelines/
 [10]: /api/latest/observability-pipelines/
 [11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[12]: /observability_pipelines/monitoring/metrics/#destination-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics

@@ -129,7 +129,7 @@ For the [component metrics][13] and [destination buffer metrics][14] emitted by 
 ### Kafka metrics
 
 - Use the `component_id` tag to filter or group by individual components.
-- The `component_type` tag is `kafka` for these metrics.
+- The `component_type` tag is `kafka` for Kafka destination metrics.
 
 `pipelines.kafka_produced_messages_total`
 : **Description**: The number of messages produced to Kafka brokers.
@@ -181,5 +181,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [10]: /observability_pipelines/configuration/set_up_pipelines/
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[13]: /observability_pipelines/monitoring/metrics/#component-metrics
-[14]: /observability_pipelines/monitoring/metrics/#destination-buffer-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics//#destination-buffer-metrics

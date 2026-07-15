@@ -329,7 +329,7 @@ For the [component metrics][13] and [processor buffer metrics][14] emitted by al
 ### Sensitive Data Scanner metrics
 
 - Use the `component_id` tag to filter or group by individual components.
-- The `component_type` tag is `sensitive_data_scanner` for these metrics.
+- The `component_type` tag is `sensitive_data_scanner` for Sensitive Data Scanner processor metrics.
 
 `pipelines.sds_rule_matched_total`
 : **Description**: The number of events that matched a Sensitive Data Scanner rule. Tagged with the matching rule name.
@@ -356,7 +356,7 @@ For the [component metrics][13] and [processor buffer metrics][14] emitted by al
 : **Metric type**: count
 
 `pipelines.scanner.total_count`
-: **Description**: The number of Sensitive Data Scanner instances currently alive.
+: **Description**: The number of Sensitive Data Scanner processors currently running.
 : **Metric type**: gauge
 
 `pipelines.scanner.total_regexes`

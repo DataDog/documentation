@@ -44,9 +44,9 @@ All metrics are tagged with the following:
 `pipeline_name`
 : The name of the pipeline when it was last deployed or updated. Available in Worker version 2.18 and later.
 
-**Note**: Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` that starts with an underscore. To exclude them from your queries, filter with `!component_id:_*`.
-
-**Note**: Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
+**Notes**: 
+- Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` that starts with an underscore. To exclude them from your queries, filter with `!component_id:_*`.
+- Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
 ## Estimated usage metric
 
@@ -56,7 +56,7 @@ Observability Pipelines ingested bytes
 
 ## Host metrics
 
-These metrics describe the host running the Observability Pipelines Worker.
+These metrics provide information about the host running the Observability Pipelines Worker.
 
 Uptime
 : **Metric**: `pipelines.host.uptime`
@@ -72,7 +72,7 @@ Logical CPUs
 
 Load average
 : **Metric**: `pipelines.host.load1`, `pipelines.host.load5`, `pipelines.host.load15`
-: **Description:** The host's system load average over the last 1, 5, and 15 minutes. Load average is the number of processes that are running or waiting to run, and on Linux also includes processes blocked on uninterruptible I/O. Compare it against `pipelines.host.logical_cpus`: a value near the CPU count indicates full utilization, and a value above it indicates the host is oversubscribed. Not emitted on Windows.
+: **Description:** The host's system load average over the last 1, 5, and 15 minutes. Load average is the number of processes that are running or waiting to run, and on Linux also includes processes blocked on uninterruptible I/O. Compare the load average value against the `pipelines.host.logical_cpus` value: a load average value near the CPU count indicates full utilization, and a value above it indicates the host is oversubscribed. Not emitted on Workers running in Windows.
 
 Total memory
 : **Metric**: `pipelines.host.memory_total_bytes`
@@ -177,7 +177,7 @@ Bytes in
 
 Bytes out
 : **Metric**: `pipelines.component_sent_bytes_total`
-: **Description**: The number of raw bytes written to the destination's output, after any encoding or transformation.
+: **Description**: The number of raw bytes written to the destination's output, after encoding and transformations.
 : **Available for**: Destinations.
 
 Events included
@@ -217,13 +217,13 @@ Source lag time
 
 Utilization
 : **Metric**: `pipelines.utilization`
-: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value close to `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
+: **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value close to `1` indicates a component that is never idle, meaning that the component is likely a bottleneck in the processing topology that is creating backpressure. This might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
 : **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later.
-: **Available for**: The Remap (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
+: **Available for**: The Custom Processor (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, Remap to OCSF, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
 
 Send latency
 : **Metric**: `pipelines.source_send_latency_seconds`
@@ -287,17 +287,17 @@ These metrics are emitted by destinations that send data over HTTP, such as Data
 
 ## Adaptive concurrency metrics
 
-These metrics describe the adaptive concurrency controller, which automatically tunes how many in-flight HTTP requests a destination allows based on observed response times. They are emitted by destinations that send data over HTTP, including AWS-based destinations.
+These metrics provide information about the adaptive concurrency controller, which automatically tunes how many in-flight HTTP requests a destination allows based on observed response times. They are emitted by destinations that send data over HTTP, including AWS-based destinations.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the destination type.
 
 `pipelines.active_endpoints`
-: **Description**: The number of sink endpoints that are marked healthy.
+: **Description**: The number of destination endpoints that are marked healthy.
 : **Metric type**: gauge
 
 `pipelines.adaptive_concurrency_limit`
-: **Description**: The concurrency limit for HTTP requests to this destination, automatically adjusted by the adaptive concurrency controller based on observed response times.
+: **Description**: The concurrency limit for HTTP requests to this destination, automatically adjusted by the adaptive concurrency controller based on response times.
 : **Metric type**: distribution
 
 `pipelines.adaptive_concurrency_in_flight`
@@ -305,11 +305,11 @@ These metrics describe the adaptive concurrency controller, which automatically 
 : **Metric type**: distribution
 
 `pipelines.adaptive_concurrency_reached_limit`
-: **Description**: Whether the adaptive concurrency controller reached its computed limit (1) or not (0) during the last measurement interval.
+: **Description**: Whether the adaptive concurrency controller reached its computed limit (`1`) or not (`0`) during the last measurement interval.
 : **Metric type**: distribution
 
 `pipelines.adaptive_concurrency_back_pressure`
-: **Description**: Whether the adaptive concurrency controller detected back pressure (1) or not (0) during the last measurement interval.
+: **Description**: Whether the adaptive concurrency controller detected back pressure (`1`) or not (`0`) during the last measurement interval.
 : **Metric type**: distribution
 
 `pipelines.adaptive_concurrency_averaged_rtt`

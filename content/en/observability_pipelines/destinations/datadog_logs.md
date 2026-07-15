@@ -108,7 +108,7 @@ For the [component metrics][7] and [destination buffer metrics][8] emitted by al
 ### Datadog Logs metrics
 
 - Use the `component_id` tag to filter or group by individual components.
-- The `component_type` tag is `datadog_logs` for these metrics.
+- The `component_type` tag is `datadog_logs` for Datadog Logs destination metrics.
 
 `pipelines.datadog_logs_reserved_attribute_conflicts_total`
 : **Description**: The number of conflicts encountered when relocating fields with semantic meaning to a Datadog reserved attribute. Available in Worker version 2.18 and later.

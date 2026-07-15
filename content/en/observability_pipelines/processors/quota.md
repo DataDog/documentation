@@ -92,23 +92,23 @@ For the [component metrics][7] and [processor buffer metrics][8] emitted by all 
 - The `component_type` tag is `quota` for these metrics.
 
 `pipelines.quota_reached_events_total`
-: **Description**: The number of events dropped because they exceeded a configured quota limit.
+: **Description**: The number of events dropped because they were received after the configured quota limit was reached.
 : **Metric type**: count
 
 `pipelines.quota_reached_event_bytes_total`
-: **Description**: The number of bytes of events dropped because they exceeded a configured quota limit.
+: **Description**: The size, in bytes, of events dropped because they were received after the configured quota limit was reached.
 : **Metric type**: count
 
 `pipelines.quota_overflow_destination_sent_events_total`
-: **Description**: The number of events routed to a secondary overflow destination when a quota limit was exceeded.
+: **Description**: The number of events routed to a secondary overflow destination when a quota limit was reached.
 : **Metric type**: count
 
 `pipelines.quota_fill`
-: **Description**: The current fill level of a rate-limiting quota bucket, from 0 to 100.
+: **Description**: The current fill level of a rate-limiting quota bucket, value ranges from `0` to `100`.
 : **Metric type**: gauge
 
 `pipelines.quotas_usage`
-: **Description**: Aggregate fill level across all quota buckets, from 0 to 100.
+: **Description**: Aggregate fill level across all quota buckets, value ranges from `0` to `100`.
 : **Metric type**: gauge
 
 `pipelines.quota_limit_events`
