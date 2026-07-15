@@ -27,8 +27,8 @@ steps:
       version: '3.1.0'
       package-managers: npm,pip
 
-  # npm and pip commands are now transparently intercepted by SCFW.
-  # Malicious packages are blocked; clean installs proceed normally.
+  # npm and pip commands are inspected by SCFW before they run.
+# Flagged packages are blocked; other installs proceed normally.
   - run: pip install -r requirements.txt
   - run: npm install
 ```
