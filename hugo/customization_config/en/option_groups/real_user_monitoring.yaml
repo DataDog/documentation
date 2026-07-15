@@ -5,6 +5,13 @@ rum_sdk_platform_options:
   - id: react_native
 
 rum_sdk_platform_options_v2:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+  - id: flutter
+
+rum_sdk_platform_options_v3:
   - id: browser
   - id: android
     default: true
