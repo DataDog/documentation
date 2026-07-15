@@ -55,9 +55,9 @@ Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requir
 - [Remote Configuration][4] enabled in the Agent
 - (Recommended) [Source Code Integration][28] set up
 
-### Minimum tracer versions
+### Minimum SDK versions
 
-Live Debugger requires the following minimum tracer versions:
+Live Debugger requires the following minimum SDK versions:
 
 - [Java][6] ≥ 1.64.0
 - [Python][5] ≥ 4.11.0
@@ -71,12 +71,12 @@ Live Debugger requires the following minimum tracer versions:
 
 <div class="alert alert-info">To use Bits Live Debugger, see the <a href="/tracing/live_debugger/bits-live-debugger/">Bits Live Debugger</a> page for setup instructions.</div>
 
-For Java, Python, .NET, and Node.js services with a recent tracer version and all other requirements met, Live Debugger can be enabled from the [Live Debugger Settings page][26]. For other runtime languages or older tracer versions, see below for the configuration steps required to enable Live Debugger. Disabling Live Debugger for a service and environment can always be done from the [Live Debugger Settings page][26], regardless of runtime language or tracer version.
+For Java, Python, .NET, and Node.js services with a recent SDK version and all other requirements met, Live Debugger can be enabled from the [Live Debugger Settings page][26]. For other runtime languages or older SDK versions, see below for the configuration steps required to enable Live Debugger. Disabling Live Debugger for a service and environment can always be done from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
 {{< programming-lang lang="java" >}}
-**Requirement**: [Java tracer][6] version 1.64.0 or higher, running on JDK 8 or higher.
+**Requirement**: [Datadog Java SDK][6] version 1.64.0 or higher, running on JDK 8 or higher.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
 
@@ -94,7 +94,7 @@ java \
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-**Requirement**: [Python tracer (`ddtrace`)][5] version 4.11.0 or higher.
+**Requirement**: [Datadog Python SDK (`ddtrace`)][5] version 4.11.0 or higher.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
 
@@ -109,7 +109,7 @@ ddtrace-run python -m myapp.py
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
-**Requirement**: [.NET tracer][7] version 3.46.0 or higher.
+**Requirement**: [Datadog .NET SDK][7] version 3.46.0 or higher.
 
 Start your service with the following environment variables set:
 
@@ -122,7 +122,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
-**Requirement**: [Node.js tracer (`dd-trace-js`)][8] version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+**Requirement**: [Datadog Node.js SDK (`dd-trace-js`)][8] version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
 Start your service with the following environment variables set:
 
@@ -139,7 +139,7 @@ Ruby services must be enabled through environment variables. Auto-enablement fro
 
 **Requirements:**
 
-- [Ruby tracer (`ddtrace`)][9] version 2.35.0 or higher
+- [Datadog Ruby SDK (`ddtrace`)][9] version 2.35.0 or higher
 - Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
 - A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
 - `RAILS_ENV` or `RACK_ENV` set to `production`
@@ -159,7 +159,7 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< programming-lang lang="php" >}}
 PHP services must be enabled through environment variables. Auto-enablement from the Settings page is not available for PHP.
 
-**Requirement**: [PHP tracer (`dd-trace-php`)][10] version 1.21.0 or higher.
+**Requirement**: [Datadog PHP SDK (`dd-trace-php`)][10] version 1.21.0 or higher.
 
 Start your service with the following environment variables set:
 
@@ -177,7 +177,7 @@ Go services require enabling Live Debugger in both the Datadog Agent and the app
 **Requirements:**
 
 - [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
-- [Go tracer][22] version 2.9.0 or higher (or 1.74.6 or higher on the v1 line)
+- [Datadog Go SDK][22] version 2.9.0 or higher (or 1.74.6 or higher on the v1 line)
 - Linux kernel 5.17 or higher
 
 **Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
@@ -221,7 +221,7 @@ Each service and environment is in one of three modes on the Live Debugger Setti
 
 - **Automatic**: Live Debugger has not been set to Enabled or Disabled yet on this service and environment. This setting changes to **Enabled** automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to **Enabled** in advance.
 - **Enabled**: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
-- **Disabled**: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or tracer version.
+- **Disabled**: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or SDK version.
 
 ### Permissions
 
@@ -290,7 +290,7 @@ These redaction modes cannot be disabled, only switched, and Targeted Mode is ap
 
 #### Identifier-based redaction
 
-Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Additional language-specific redaction rules are built into each tracer.
+Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Additional language-specific redaction rules are built into each SDK.
 
 You can extend redaction behavior through:
 

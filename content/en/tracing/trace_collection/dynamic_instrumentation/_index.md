@@ -63,21 +63,21 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 Dynamic Instrumentation supports Java, Python, .NET, and PHP. Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. Select a service and environment to see its current status, then use the **Enable Dynamic Instrumentation** or **Disable Dynamic Instrumentation** action to change it.
 
-On supported tracer versions, you do not need to enable a service from the Settings page first. Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
+On supported SDK versions, you do not need to enable a service from the Settings page first. Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
 
 #### In-app enablement
 
-In-app enablement is supported on the following minimum tracer versions:
+In-app enablement is supported on the following minimum SDK versions:
 
 - [Java][18] ≥ 1.64.0
 - [Python][19] ≥ 4.11.0
 - [.NET][20] ≥ 3.46.0
 
-Datadog recommends keeping your tracer up to date to take advantage of in-app enablement.
+Datadog recommends keeping your SDK up to date to take advantage of in-app enablement.
 
 #### Manual enablement
 
-Manual enablement is required for PHP, and for older tracer versions of Java, Python, and .NET. You can also choose manual enablement on supported tracer versions if you prefer to manage enablement through environment variables, for example, to enable Dynamic Instrumentation in bulk across many services.
+Manual enablement is required for PHP, and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables, for example, to enable Dynamic Instrumentation in bulk across many services.
 
 Select your runtime for manual enablement instructions:
 
