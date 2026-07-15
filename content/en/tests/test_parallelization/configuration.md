@@ -25,19 +25,19 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 : Programming language.<br/>
 **CLI flag:** `--platform`<br/>
 **Default:** `ruby`<br/>
-**Supported values:** `ruby`, `python`
+**Supported values:** `ruby`, `python`, `javascript`
 
 `DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK`
 : Test framework.<br/>
 **CLI flag:** `--framework`<br/>
 **Default:** `rspec`<br/>
-**Supported values:** `rspec`, `minitest`, `pytest`
+**Supported values:** `rspec`, `minitest`, `pytest`, `jest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command for Ruby frameworks. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command for Ruby and JavaScript. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
-**Example:** `bundle exec rspec --profile`
+**Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`
 
 `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM`
 : Minimum CI node or worker count `ddtest` considers when planning.<br/>
@@ -82,11 +82,11 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION`
-: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, and pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest.<br/>
+: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and Jest configuration or Jests's default test matching.<br/>
 **CLI flag:** `--tests-location`<br/>
 **Alias:** `KNAPSACK_PRO_TEST_FILE_PATTERN`<br/>
 **Default:** Framework default<br/>
-**Example:** `custom/spec/**/*_spec.rb`, `tests/**/*_test.py`
+**Example:** `custom/spec/**/*_spec.rb`, `tests/**/*_test.py`, `packages/**/__tests__/**/*.test.ts`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN`
 : Glob pattern used to exclude test files from discovery.<br/>
@@ -152,7 +152,7 @@ If no split can meet the target, `ddtest` logs a warning. It selects the split w
 
 ## Custom test commands
 
-For Ruby frameworks, use `--command` to override the default test command:
+For Ruby frameworks and Jest, use `--command` to override the default test command:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bin/integration-tests"
@@ -164,6 +164,8 @@ Do not include the `--` separator in `--command`. If the command contains `--`, 
 
 For pytest, `ddtest` runs `python -m pytest` and appends selected test files. Use `PYTEST_ADDOPTS` to pass additional pytest flags. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
 
+For Jest, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present, so the `dd-trace` package must be installed in the project where `ddtest` runs.
+
 ## Pytest test discovery
 
 For pytest, `ddtest` discovers test files using this priority:
@@ -173,6 +175,20 @@ For pytest, `ddtest` discovers test files using this priority:
 3. The built-in pattern `**/{test_*,*_test}.py`.
 
 Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves the pattern to explicit file paths before invoking `python -m pytest`.
+
+## Jest test discovery and instrumentation
+
+For Jest, `ddtest` discovers test files with Jest's own `--listTests` command. It uses this priority:
+
+1. `--command` when set, with `--listTests` appended.
+2. The local executable `node_modules/.bin/jest` when present.
+3. `npx jest`.
+
+Jest uses its own configuration and default test matching for `--listTests`. When `--tests-location` is set, `ddtest` filters the file list returned by Jest after discovery. It does not pass `--tests-location` as Jest's `--testMatch`.
+
+Jest support uses suite-level Test Impact Analysis. `ddtest` works with test files and suites, not individual Jest tests, and executes selected files with `--runTestsByPath`.
+
+During execution, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless `NODE_OPTIONS` already loads `dd-trace/ci/init`.
 
 ## Worker environment variables
 

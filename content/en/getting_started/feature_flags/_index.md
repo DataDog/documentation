@@ -155,10 +155,10 @@ Add the OpenFeature SDK and Datadog OpenFeature provider dependencies:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.63.0'
 }
 {{< /code-block >}}
 
@@ -169,11 +169,10 @@ Enable the provider and start your application with the Java tracer:
 # The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
-
 java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< /code-block >}}
+
+To emit flag evaluation metrics, add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][9].
 
 Register the Datadog OpenFeature provider:
 
