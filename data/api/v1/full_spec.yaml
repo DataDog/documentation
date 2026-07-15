@@ -28128,6 +28128,42 @@ components:
     WidgetBackgroundColor:
       description: "Background color of the widget. Supported values are `white`, `blue`, `purple`, `pink`, `orange`, `yellow`, `green`, `gray`, `vivid_blue`, `vivid_purple`, `vivid_pink`, `vivid_orange`, `vivid_yellow`, `vivid_green`, and `transparent`."
       type: string
+    WidgetCalendarAlignedSpan:
+      description: Used for calendar-aligned time spans, such as the current month or previous year.
+      properties:
+        hide_incomplete_cost_data:
+          description: Whether to hide incomplete cost data in the widget.
+          type: boolean
+        offset:
+          description: Number of completed periods before the current period. 0 represents the current period.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        timezone:
+          description: Time zone used to align the calendar period.
+          example: UTC
+          type: string
+        type:
+          $ref: "#/components/schemas/WidgetCalendarAlignedSpanType"
+      required:
+        - type
+        - offset
+      type: object
+    WidgetCalendarAlignedSpanType:
+      description: Calendar-aligned time span type.
+      enum:
+        - daily
+        - weekly
+        - monthly
+        - yearly
+      example: daily
+      type: string
+      x-enum-varnames:
+        - DAILY
+        - WEEKLY
+        - MONTHLY
+        - YEARLY
     WidgetChangeType:
       description: Show the absolute or the relative change.
       enum:
@@ -28589,6 +28625,9 @@ components:
         - month_to_date
         - 1y
         - alert
+        - full_week
+        - full_month
+        - year_to_date
       example: 5m
       type: string
       x-enum-varnames:
@@ -28609,6 +28648,9 @@ components:
         - MONTH_TO_DATE
         - PAST_ONE_YEAR
         - ALERT
+        - FULL_WEEK
+        - FULL_MONTH
+        - YEAR_TO_DATE
     WidgetLiveSpanUnit:
       description: Unit of the time span.
       enum:
@@ -28992,6 +29034,7 @@ components:
         - $ref: "#/components/schemas/WidgetLegacyLiveSpan"
         - $ref: "#/components/schemas/WidgetNewLiveSpan"
         - $ref: "#/components/schemas/WidgetNewFixedSpan"
+        - $ref: "#/components/schemas/WidgetCalendarAlignedSpan"
     WidgetTimeWindows:
       description: Define a time window.
       enum:
