@@ -50,7 +50,7 @@ steps:
       dd-site: datadoghq.eu
 ```
 
-### With a cached `SCFW_HOME` directory
+### Cache the `SCFW_HOME` directory
 
 Caching `SCFW_HOME` avoids re-fetching verifier data on each run:
 
