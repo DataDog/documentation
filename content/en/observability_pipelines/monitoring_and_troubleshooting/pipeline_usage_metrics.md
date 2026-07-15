@@ -96,7 +96,7 @@ Bytes out
 
 ## Process metrics
 
-These metrics describe the Observability Pipelines Worker process.
+These metrics provide information about the Observability Pipelines Worker process.
 
 Uptime
 : **Metric**: `pipelines.uptime_seconds`
