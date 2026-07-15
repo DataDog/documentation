@@ -86867,6 +86867,11 @@ components:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
+        tags:
+          description: A list of tags associated with the schedule.
+          items:
+            type: string
+          type: array
         time_zone:
           description: The time zone in which this schedule operates.
           example: America/New_York
@@ -86990,6 +86995,231 @@ components:
       type: string
       x-enum-varnames:
         - MEMBERS
+    ScheduleOnCallResponderData:
+      description: Represents one position's (previous, current, or next) group of on-call responder shifts. Positions with no matching shift are omitted entirely from the response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataAttributes"
+        id:
+          description: Unique identifier of this responder group.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationships"
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataType"
+      required:
+        - type
+      type: object
+    ScheduleOnCallResponderDataAttributes:
+      description: Attributes for one position's (previous, current, or next) group of on-call responder shifts.
+      properties:
+        position:
+          $ref: "#/components/schemas/ScheduleTargetPosition"
+      type: object
+    ScheduleOnCallResponderDataRelationships:
+      description: Relationships for a single position's (previous, current, or next) responder group.
+      properties:
+        shifts:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShifts"
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShifts:
+      description: Defines the list of shifts satisfying this responder group's position. Multiple shifts occur when a schedule has multiple concurrent on-call responders at that position.
+      properties:
+        data:
+          description: Array of references to the shifts included in the response.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShiftsDataItems"
+          type: array
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShiftsDataItems:
+      description: Represents a reference to one of the shifts satisfying this responder group's position.
+      properties:
+        id:
+          description: Unique identifier of the shift.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShiftsDataItemsType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShiftsDataItemsType:
+      default: shifts
+      description: "Indicates that the related resource is of type `shifts`."
+      enum:
+        - shifts
+      example: shifts
+      type: string
+      x-enum-varnames:
+        - SHIFTS
+    ScheduleOnCallResponderDataType:
+      default: schedule_oncall_responder
+      description: Represents the resource type for a single position's (previous, current, or next) group of on-call responder shifts.
+      enum:
+        - schedule_oncall_responder
+      example: schedule_oncall_responder
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDER
+    ScheduleOnCallResponders:
+      description: Root object representing a schedule's on-call responders, grouped by position (previous, current, next), for a given point in time.
+      example:
+        data:
+          attributes:
+            scheduled_at: "2024-05-07T02:53:01.000000000Z"
+          id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400"
+          relationships:
+            responders:
+              data:
+                - id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                  type: schedule_oncall_responder
+            schedule:
+              data:
+                id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                type: schedules
+          type: schedule_oncall_responders
+        included:
+          - attributes:
+              position: current
+            id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+            relationships:
+              shifts:
+                data:
+                  - id: 00000000-0000-0000-0000-000000000000
+                    type: shifts
+            type: schedule_oncall_responder
+          - attributes:
+              end: "2024-05-08T02:53:01.000000000Z"
+              start: "2024-05-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: shifts
+          - attributes:
+              email: test@test.com
+              name: Test User
+              status: active
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersData"
+        included:
+          description: Related resources referenced in the responder groups' relationships, such as shifts, schedules, and users.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallRespondersIncluded"
+          type: array
+      type: object
+    ScheduleOnCallRespondersData:
+      description: The main data object representing a schedule's on-call responders lookup, including relationships and metadata.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataAttributes"
+        id:
+          description: Unique identifier of this on-call responders lookup.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationships"
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataType"
+      required:
+        - type
+      type: object
+    ScheduleOnCallRespondersDataAttributes:
+      description: Attributes for a schedule's on-call responders lookup.
+      properties:
+        scheduled_at:
+          description: The timestamp the responders were resolved at.
+          format: date-time
+          type: string
+      type: object
+    ScheduleOnCallRespondersDataRelationships:
+      description: Relationships for a schedule's on-call responders lookup, including the schedule and its responder groups.
+      properties:
+        responders:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsResponders"
+        schedule:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsSchedule"
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsResponders:
+      description: Defines the list of per-position (previous, current, next) responder groups for the schedule.
+      properties:
+        data:
+          description: Array of references to the responder groups included in the response.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsRespondersDataItems"
+          type: array
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsRespondersDataItems:
+      description: Represents a reference to one position's (previous, current, or next) responder group.
+      properties:
+        id:
+          description: Unique identifier of the responder group.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsRespondersDataItemsType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsRespondersDataItemsType:
+      default: schedule_oncall_responder
+      description: Identifies the resource type for a responder group linked to a schedule's on-call responders lookup.
+      enum:
+        - schedule_oncall_responder
+      example: schedule_oncall_responder
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDER
+    ScheduleOnCallRespondersDataRelationshipsSchedule:
+      description: Defines the relationship to the schedule this on-call responders lookup was performed for.
+      properties:
+        data:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsScheduleData"
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsScheduleData:
+      description: Represents a reference to the schedule this on-call responders lookup was performed for.
+      properties:
+        id:
+          description: Unique identifier of the schedule.
+          example: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d"
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsScheduleDataType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsScheduleDataType:
+      default: schedules
+      description: Identifies the resource type for the schedule associated with this on-call responders lookup.
+      enum:
+        - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+        - SCHEDULES
+    ScheduleOnCallRespondersDataType:
+      default: schedule_oncall_responders
+      description: Represents the resource type for a schedule's grouped on-call responders across the previous, current, and next positions.
+      enum:
+        - schedule_oncall_responders
+      example: schedule_oncall_responders
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDERS
+    ScheduleOnCallRespondersIncluded:
+      description: Represents a union of related resources included in the response, such as responder groups, shifts, schedules, and users.
+      oneOf:
+        - $ref: "#/components/schemas/ScheduleOnCallResponderData"
+        - $ref: "#/components/schemas/ShiftData"
+        - $ref: "#/components/schemas/ScheduleData"
+        - $ref: "#/components/schemas/User"
     ScheduleRequestDataAttributesLayersItemsMembersItems:
       description: |-
         Defines a single member within a schedule layer, including the reference to the underlying user.
@@ -162590,7 +162820,8 @@ paths:
           - on_call_write
   /api/v2/on-call/schedules/{schedule_id}/on-call:
     get:
-      description: "Retrieves the user who is on-call for the specified schedule at a given time."
+      deprecated: true
+      description: "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead."
       operationId: GetScheduleOnCallUser
       parameters:
         - description: "Specifies related resources to include in the response as a comma-separated list. Allowed value: `user`."
@@ -162650,6 +162881,102 @@ paths:
       tags:
         - On-Call
       x-menu-order: 11
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
+      x-sunset: "2027-02-01"
+  /api/v2/on-call/schedules/{schedule_id}/responders:
+    get:
+      description: "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position."
+      operationId: GetScheduleOnCallResponders
+      parameters:
+        - description: "Comma-separated list of included relationships to be returned. Allowed values: `schedule`, `responders`, `responders.shifts`, `responders.shifts.user`."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Comma-separated list of positions to retrieve. Allowed values: `previous`, `current`, `next`. Defaults to `current` if omitted."
+          in: query
+          name: filter[position]
+          schema:
+            example: previous,current,next
+            type: string
+        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted."
+          in: query
+          name: filter[at_ts]
+          schema:
+            example: "2025-05-07T02:53:01Z"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        scheduled_at: "2024-05-07T02:53:01.000000000Z"
+                      id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400"
+                      relationships:
+                        responders:
+                          data:
+                            - id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                              type: schedule_oncall_responder
+                        schedule:
+                          data:
+                            id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                            type: schedules
+                      type: schedule_oncall_responders
+                    included:
+                      - attributes:
+                          position: current
+                        id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                        relationships:
+                          shifts:
+                            data:
+                              - id: 00000000-0000-0000-0000-000000000000
+                                type: shifts
+                        type: schedule_oncall_responder
+                      - attributes:
+                          end: "2024-05-08T02:53:01.000000000Z"
+                          start: "2024-05-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: shifts
+              schema:
+                $ref: "#/components/schemas/ScheduleOnCallResponders"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get on-call responders for a schedule
+      tags:
+        - On-Call
+      x-menu-order: 22
       "x-permission":
         operator: AND
         permissions:
