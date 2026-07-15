@@ -27,6 +27,21 @@ Commits made by verified bots or through actions performed directly in the GitHu
 
 Yes, you can exclude commits from specific people by using [exclusion filters][2].
 
+## Billing enrichment
+
+Billing enrichment correlates your billable-committer metrics with data from a [reference table][5], using the committer's email address as the join key. This adds tags such as `vp_name` or `director_name` to your billing data, so you can break down billing data by organizational structure.
+
+To set up billing enrichment:
+
+1. Create a [reference table][5] that contains a column with committer email addresses, along with any additional columns you want to expose as tags (such as `vp_name`).
+2. In Datadog, go to [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Billing & Committers{{< /ui >}}][6].
+3. Turn on {{< ui >}}Enrich billing metrics{{< /ui >}}.
+4. Select the {{< ui >}}Reference table{{< /ui >}} to use.
+5. Select the {{< ui >}}Email key column{{< /ui >}}: the column in the reference table that contains the committer email address. Datadog uses this column to join billing data with the reference table.
+6. Select the {{< ui >}}Enrichment columns{{< /ui >}}: the columns from the reference table to expose as tags on billing metrics. Leave empty to include all columns.
+
+After billing enrichment is configured, the additional tags from the reference table appear alongside your existing billable-committer metrics.
+
 ## Deduplicating committers across email addresses
 
 In some cases, a single developer's commits can be split across multiple Git author emails. For example, a developer might set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold described above, each counts as a separate committer.
@@ -45,3 +60,5 @@ If your committer count looks higher than expected for GitHub repositories, chec
 [2]: /continuous_integration/guides/ingestion_control
 [3]: /integrations/github/
 [4]: https://app.datadoghq.com/integrations/github/
+[5]: /reference_tables/
+[6]: https://app.datadoghq.com/ci/settings/ci-cd/billing-committers
