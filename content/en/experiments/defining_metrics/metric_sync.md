@@ -61,7 +61,7 @@ export DD_APP_KEY=<DATADOG_APPLICATION_KEY>
 By default, the CLI sends requests to `datadoghq.com`. Set `DD_SITE` if your organization uses a different Datadog site:
 
 ```shell
-export DD_SITE=datadoghq.eu
+export DD_SITE={{< region-param key="dd_site" >}}
 ```
 
 ## Create a metric definition
@@ -107,7 +107,7 @@ metrics:
 
 ## Preview and sync changes
 
-Run `plan` before applying changes:
+To preview the changes before applying them, run `plan`:
 
 ```shell
 metric-sync plan ./metrics
@@ -121,7 +121,7 @@ After reviewing the plan, run `execute` to apply the changes:
 metric-sync execute ./metrics
 ```
 
-`execute` performs local validation, submits a Metric Sync write operation to Datadog, polls until the operation reaches a terminal state, and prints the result summary.
+`execute` performs local validation, submits a Metric Sync write operation to Datadog, polls the operation until it reaches a terminal state, and prints the result summary.
 
 You can also run:
 
@@ -132,43 +132,47 @@ metric-sync result <metric_sync_id>
 metric-sync version
 ```
 
-`validate` only checks the local YAML and does not call Datadog. `status` checks an operation by ID. `result` fetches the terminal plan or execute result. `version` prints build metadata.
+The commands do the following:
+
+- `validate`: Checks only the local YAML and does not call Datadog.
+- `status`: Checks an operation by ID.
+- `result`: Fetches the terminal plan or execute result.
+- `version`: Prints build metadata.
 
 ## YAML reference
 
 ### Sync tags and IDs
 
-The `sync_tag` is the ownership boundary for a set of metric definitions. Use a stable `sync_tag` for each repository, team, or metric domain you want to manage independently. For example, a growth team and a checkout team can sync metrics from different repositories by using different `sync_tag` values, such as `growth-metrics` and `checkout-metrics`.
+A `sync_tag` identifies the set of metric definitions that are managed together. Use a stable `sync_tag` for each repository, team, or metric domain that you want to manage independently. For example, a growth team and a checkout team can sync metrics from different repositories by using different `sync_tag` values, such as `growth-metrics` and `checkout-metrics`.
 
-Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations reference warehouse metric sources by `warehouse_metric_source_sync_id` and measures by `measure_sync_id`. The source ID is required because measure IDs are scoped to their warehouse metric source.
+Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_id`. Metric aggregations use `warehouse_metric_source_sync_id` to reference warehouse metric sources and `measure_sync_id` to reference measures. The source ID is required because measure IDs are scoped to their warehouse metric source.
 
 ### Top-level fields
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
 | `schema_version` | Yes | Must be `1`. |
-| `sync_tag` | Yes | Stable ownership key for this group of metric definitions. All files in one operation must use the same `sync_tag`. |
+| `sync_tag` | Yes | Stable ownership key for this group of metric definitions. All files in a single operation must use the same `sync_tag`.<br>Must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes. |
 | `reference_url` | No | URL to the source repository, runbook, or other reference for the synced metrics. |
 | `warehouse_connection_id` | Yes | Warehouse connection ID for the organization. |
-| `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties used by metrics. |
-| `metrics` | No | Experiment metrics to create, update, or take ownership of so future syncs manage them. |
+| `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties that metrics use. |
+| `metrics` | No | Experiment metrics to create, update, or manage in future syncs. |
 | `options` | No | Sync options such as certification and upgrade behavior. |
 
-`sync_tag` and `sync_id` values must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes.
 
 ### Options
 
 | Field | Default | Description |
 | ----- | ------- | ----------- |
-| `is_certified` | `true` | Marks synced metrics as certified. Because the default is `true`, syncing metrics with this option unchanged requires the Product Analytics Certified Metrics Write permission. Set to `false` to skip certification. |
-| `upgrade_mode` | `none` | Controls adoption of existing objects into sync ownership. Supported values are `none`, `by_id`, and `by_name`. |
+| `is_certified` | `true` | Marks synced metrics as certified. Because this option defaults to `true`, syncing metrics requires the Product Analytics Certified Metrics Write permission unless you set it to `false`. |
+| `upgrade_mode` | `none` | Controls whether existing objects are adopted into sync ownership. Supported values are `none`, `by_id`, and `by_name`. |
 | `force_delete` | `false` | Allows destructive deletes when supported by the API. |
 
 ### Warehouse metric sources
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
-| `sync_id` | Yes | Stable identifier for the source within this `sync_tag`. |
+| `sync_id` | Yes | Stable identifier for the source within this `sync_tag`.<br>Must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes. |
 | `existing_id` | No | Existing Datadog warehouse metric source ID to adopt or update. |
 | `name` | Yes | Display name in Datadog. |
 | `description` | No | Description for the source. |
@@ -195,10 +199,9 @@ Measures and properties share the same field shape:
 | `sync_id` | Yes | Stable identifier within the warehouse metric source. |
 | `name` | Yes | Display name in Datadog. |
 | `column_name` | Yes | SQL result column name. |
-| `column_type` | Yes | Column type. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
+| `column_type` | Yes | Required so Datadog can validate the column and show the correct metric configuration options. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
 | `description` | No | Description for the measure or property. |
 
-The `column_type` is required so Datadog can validate the column and show the correct metric configuration options.
 
 ### Metrics
 
@@ -214,7 +217,11 @@ The `column_type` is required so Datadog can validate the column and show the co
 | `reference_url` | No | Metric-specific reference URL. |
 | `guardrail_cutoff_threshold` | No | Optional guardrail cutoff threshold. |
 
-For `metric_type: simple`, add `simple_metric_aggregation`. For `metric_type: ratio`, add `ratio_metric_aggregation`. For `metric_type: percentile`, add `percentile_metric_aggregation`.
+Add the aggregation field that matches the metric type:
+
+- For `metric_type: simple`, add `simple_metric_aggregation`.
+- For `metric_type: ratio`, add `ratio_metric_aggregation`.
+- For `metric_type: percentile`, add `percentile_metric_aggregation`.
 
 ### Simple metric aggregation
 
@@ -239,6 +246,8 @@ Use `ratio_metric_aggregation` to define a metric as a numerator divided by a de
 | ----- | -------- | ----------- |
 | `numerator` | Yes | Simple metric aggregation used as the numerator. |
 | `denominator` | Yes | Simple metric aggregation used as the denominator. |
+
+Example ratio metric aggregation:
 
 ```yaml
 ratio_metric_aggregation:
@@ -290,7 +299,10 @@ property_filters:
       - US
 ```
 
-Supported operators are `IS` and `IS_NOT`. To reference a property from another sync tag, include `warehouse_metric_source_sync_tag`. To reference an existing Datadog property directly, use `warehouse_metric_property_id`.
+Supported operators are `IS` and `IS_NOT`. When referencing a property:
+
+- Include `warehouse_metric_source_sync_tag` to reference a property from another sync tag.
+- Use `warehouse_metric_property_id` to reference an existing Datadog property directly.
 
 ### Measure references
 
