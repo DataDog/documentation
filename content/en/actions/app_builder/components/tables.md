@@ -12,7 +12,14 @@ further_reading:
 - link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 

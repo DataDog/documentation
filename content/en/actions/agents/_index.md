@@ -14,7 +14,14 @@ further_reading:
 - link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
   text: "AI Credits"
+- link: "/incident_response/case_management/ai/custom_agents/"
+  tag: "Documentation"
+  text: "Case Management Integration with Bits Agent Builder"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Case Management integration is in Preview" >}}
+Automatically assign custom agents to work on your Cases.
+{{< /callout >}}
 
 ## Overview
 

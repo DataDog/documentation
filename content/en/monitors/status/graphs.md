@@ -105,12 +105,12 @@ The Transitions graph displays your monitor's state transitions over time, broke
 
 {{< img src="/monitors/status/graphs/non_reporting_transitions_1.png" alt="Transitions graph showing non reporting data" style="width:100%;" >}}
 
-Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate:
+Datadog keeps monitor groups in the UI for a retention period after they stop reporting, unless configured differently. For more information, see [Group retention time][1]. A dotted line in the graph can indicate:
 
 * A new group evaluated after monitor creation, shown as a dotted line from the start of the time period to when first evaluated.
 * A group that has stopped reporting, then started again, with a dotted line appearing from when it dropped out to when reporting resumes.
 
-**Note**: The non-reporting status is different from a "no data" status. Host monitors and service checks set to notify on missing data are available for 48 hours.
+**Note**: The non-reporting status is different from a "no data" status. For the retention period that applies to each monitor type, see [Group retention time][1].
 
 ## Further reading
 
