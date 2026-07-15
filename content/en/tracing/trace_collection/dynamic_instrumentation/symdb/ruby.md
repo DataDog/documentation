@@ -22,7 +22,7 @@ Autocomplete and search are in Preview.
 
 ## Installation
 
-Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
+Autocomplete and search are enabled automatically when you run your service with Dynamic Instrumentation enabled:
 
 1. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`.
 2. Specify `DD_SERVICE` and `DD_VERSION` [Unified Service Tags][5].
@@ -33,13 +33,20 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
   export DD_ENV=<YOUR_ENV>
   export DD_VERSION=<YOUR_VERSION>
   export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-  export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true
   bundle exec rails server
   ```
 
-After starting your service with the required features enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+After starting your service with Dynamic Instrumentation enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
 
 ## Additional notes
+
+### Disabling autocomplete and search
+
+To disable autocomplete and search for your service, set the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `false`:
+
+```shell
+export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=false
+```
 
 ### Forking servers
 
