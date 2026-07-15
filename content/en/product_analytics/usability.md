@@ -1,5 +1,6 @@
 ---
 title: Usability Issue Detection
+description: Detect friction in real user sessions and surface a ranked list of usability issues from Product Analytics funnels.
 disable_toc: false
 further_reading:
 - link: "/product_analytics/charts/funnel_analysis/"
@@ -21,7 +22,7 @@ Usability Issue Detection is in Preview. Complete the form to request access.
 
 ## Overview
 
-Usability Issue Detection reviews real user sessions, finds where users hit friction, and surfaces it as a ranked list of issues. Each issue includes a severity, a category, a session replay that shows the problem, and any related errors. An issue reflects user-visible friction, such as repeated attempts, abandonment, getting stuck, or looping off the intended path.
+Usability Issue Detection reviews real user sessions, finds where users hit friction, and surfaces it as a ranked list of issues. Each issue includes a severity, a category, a session replay that shows the problem, and any related errors. An issue reflects user-visible friction, such as repeated attempts, abandonment, getting stuck, or straying from the intended path.
 
 Detected issues fall into three categories:
 
@@ -56,7 +57,7 @@ You start an analysis from a saved Product Analytics funnel, either from the fun
 
 {{< img src="product_analytics/usability/choose-funnel.png" alt="The Choose funnel to run usability analysis from dialog listing saved funnel charts" style="width:100%;" >}}
 
-Both converted and dropped off sessions are analyzed, because a user who hits friction can still convert. It analyzes every session that matches the funnel criteria, and is not limited to a specific page or path.
+Both converted and dropped-off sessions are analyzed, because a user who hits friction can still convert. Datadog analyzes every session that matches the funnel criteria, and is not limited to a specific page or path.
 
 An analysis takes a few minutes to complete. When it finishes, detected issues appear in two places:
 
