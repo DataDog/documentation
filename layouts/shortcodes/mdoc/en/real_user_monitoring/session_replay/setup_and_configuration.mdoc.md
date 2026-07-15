@@ -545,7 +545,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the `startSessionReplayRecordingManually` parameter as shown below, and later call [`startSessionReplayRecording()`][32]. You can also use [`stopSessionReplayRecording()`][33] to stop the recording at any time.
+By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the `startSessionReplayRecordingManually` parameter, and later call [`startSessionReplayRecording()`][32]. You can also use [`stopSessionReplayRecording()`][33] to stop the recording at any time.
 
 {% tabs %}
 {% tab label="NPM" %}

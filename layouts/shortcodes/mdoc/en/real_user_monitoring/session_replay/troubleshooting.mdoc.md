@@ -35,7 +35,7 @@ Assets may not be available at the time of replay for the following reasons:
 - The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
 - The resource is blocked by the browser due to CORS (typically web-fonts).
    - The replay rendered on the `session-replay-datadoghq.com` sandbox domain and the asset requests are subject to cross-origin security checks by your browser. If the given asset is not authorized for the domain, your browser blocks the request.
-   - Allow `session-replay-datadoghq.com` through the [`Access-Control-Allow-Origin`][3] header for any font or image assets your website depends on to ensure these resources are accessible for the replay. For more information, see [Cross Origin Resource Sharing][4].
+   - Allow `session-replay-datadoghq.com` through the [`Access-Control-Allow-Origin`][3] header for any font or image assets your website depends on to help ensure these resources are accessible for the replay. For more information, see [Cross Origin Resource Sharing][4].
 
 ### CSS rules not properly applied/mouse hover not replayed
 
@@ -98,7 +98,7 @@ In this case, wait a few minutes and then reload the replay.
 
 On iOS, vector images are not supported in Session Replay and appear as "Unsupported image type" placeholders in the replay. To work around this, disable the "Preserve Vector Data" option in your asset catalog so that Xcode rasterizes the images, allowing them to be captured correctly. SF Symbols are also not supported.
 
-### The session replay rendering looks does not exactly mirror my application
+### The session replay rendering does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images.
 
 ### For sessions that are very short, I see a replay attached, but I'm unable to view the replay
