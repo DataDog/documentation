@@ -14,7 +14,7 @@ further_reading:
 
 The Supply Chain Firewall GitHub Action installs Datadog's [Supply Chain Firewall][1] (SCFW) and configures it to intercept supported package manager commands in all subsequent workflow steps. When active, SCFW inspects each supported package manager command before allowing it to run.
 
-This action supports Linux and macOS runners. Windows runners are not supported, as SCFW itself does not support Windows.
+<div class="alert alert-info">This action supports Linux and macOS runners only.</div>
 
 ## Usage
 
