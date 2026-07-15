@@ -47,7 +47,7 @@ steps:
       dd-codesec-logger: 'true'
       dd-api-key: ${{ secrets.DD_API_KEY }}
       dd-app-key: ${{ secrets.DD_APP_KEY }}
-      dd-site: datadoghq.eu
+      dd-site: {{< region-param key="dd_site" >}}
 ```
 
 ### Cache the `SCFW_HOME` directory
