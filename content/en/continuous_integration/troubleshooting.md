@@ -50,9 +50,7 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 
 ## Limitations on running jobs
 
-Only jobs in a `Running` state appear in CI Visibility while a pipeline is in progress. A job is reported when its runner starts executing it.
-
-Jobs in a `Pending`, `Queued`, or `Manual` state are not reported and do not appear until they start running. For example, a GitLab manual job that requires a trigger does not show up in CI Visibility until it is triggered and its runner begins execution.
+Jobs that have not started executing yet do not appear as running jobs in CI Visibility until their runner picks them up. This includes jobs in a `Pending`, `Queued`, or `Manual` state. For example, a GitLab manual job that requires a trigger does not show up in CI Visibility until it is triggered and its runner begins execution.
 
 ## Limitations on finished jobs from pipelines
 
