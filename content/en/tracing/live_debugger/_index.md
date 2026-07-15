@@ -283,8 +283,8 @@ Live Debugger data might contain sensitive information, especially when using th
 
 Live Debugger has two redaction modes:
 
-- **Strict Mode**: Redacts all values except numbers and Booleans.
-- **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+- **Strict Mode**: Redacts all values except numbers and Booleans. Bits Live Debugger is not available for service and environment combinations set to Strict Mode.
+- **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, and IPs. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
 These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common pre-production environments like `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
@@ -307,6 +307,8 @@ Bits Live Debugger is in Preview. Request access to join the waiting list.
 {{< /beta-callout >}}
 
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
+
+**Note**: Bits Live Debugger requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
 
 ## Impact on performance and billing
 
