@@ -394,7 +394,7 @@ The following table contains all available attributes:
 
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
-| `{{network_device.device_id}}`     | `canonical_id`, `name`, `description`, `model`, `vendor`, `device_type`, `os_name`, `os_version`, `os_hostname`, `ip_address`, `subnet`, `location`, `serial_number`, `version`, `product_name`, `sys_object_id`, `profile`, `status`, `ping_status`, `integration`, `namespace`, `tags`, `id_tags`, `integrations`|
+| `{{network_device.device_id}}`     | `canonical_id`, `description`, `device_type`, `id_tags`, `integrations`, `ip_address`, `location`, `model`, `name`, `namespace`, `os_hostname`, `os_name`, `os_version`, `ping_status`, `product_name`,  `profile`, `serial_number`, `status`, `subnet`, `sys_object_id`, `tags`, `vendor`, `version`|
 {{% /collapse-content %}}
 
 ### Matching attribute/tag variables
