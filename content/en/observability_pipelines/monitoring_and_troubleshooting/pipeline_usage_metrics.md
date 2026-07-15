@@ -44,7 +44,7 @@ All metrics are tagged with the following:
 `pipeline_name`
 : The name of the pipeline when it was last deployed or updated. Available in Worker version 2.18 and later.
 
-**Notes**: 
+**Notes**:
 - Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` that starts with an underscore. To exclude them from your queries, filter with `!component_id:_*`.
 - Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
@@ -223,7 +223,7 @@ Utilization
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
 : **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later.
-: **Available for**: The Custom Processor (VRL), Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, Remap to OCSF, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
+: **Available for**: The Custom Processor, Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, Remap to OCSF, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
 
 Send latency
 : **Metric**: `pipelines.source_send_latency_seconds`
