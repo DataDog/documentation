@@ -84,7 +84,7 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 
 ## Metrics
 
-For the [component metrics][7] and [processor buffer metrics][8] emitted by all processors, see the Observability Pipelines Metrics documentation.
+For [component metrics][7] and [processor buffer metrics][8] emitted by all processors, see the [Pipelines Usage Metrics][9] documentation.
 
 ### Quota metrics
 
@@ -131,3 +131,4 @@ For the [component metrics][7] and [processor buffer metrics][8] emitted by all 
 [6]: /observability_pipelines/search_syntax/logs/
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

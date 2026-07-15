@@ -74,7 +74,7 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 ## Metrics
 
-For the [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `aws_s3`.
+For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon S3 source metrics, add the tag `component_type:aws_s3`.
 
 ### Amazon S3 metrics
 
@@ -115,3 +115,4 @@ For the [component metrics][6] and [source buffer metrics][7] emitted by all sou
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

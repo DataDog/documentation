@@ -69,10 +69,13 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `sumo_logic`.
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, add the tag `component_type:sumo_logic`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

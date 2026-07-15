@@ -66,10 +66,13 @@ To set up this processor:
 2. Enter the name of the field you want to parse JSON on.<br>**Note**: The parsed JSON overwrites what was originally contained in the field.
 
 [1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `parse`.
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, add the tag `component_type:parse`.
 
 ## Further reading
 

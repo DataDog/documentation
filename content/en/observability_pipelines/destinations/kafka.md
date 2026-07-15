@@ -124,7 +124,7 @@ See the [librdkafka documentation][7] for more information and to ensure your va
 
 ## Metrics
 
-For the [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the Observability Pipelines Metrics documentation.
+For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation.
 
 ### Kafka metrics
 
@@ -182,4 +182,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[14]: /observability_pipelines/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics//#destination-buffer-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

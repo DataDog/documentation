@@ -88,7 +88,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics) emitted by all destinations, see the Pipelines Usage Metrics documentation. To filter or group by Elasticsearch destination metrics, add the tag `component_type:elasticsearch`.
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, add the tag `component_type:elasticsearch`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
@@ -98,3 +98,6 @@ For [component metrics](/observability_pipelines/monitoring_and_troubleshooting/
 [6]: /observability_pipelines/configuration/set_up_pipelines/
 [7]: /api/latest/observability-pipelines/
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

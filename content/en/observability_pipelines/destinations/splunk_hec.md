@@ -91,7 +91,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For the [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the Observability Pipelines Metrics documentation.
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
 
 ### Splunk HEC metrics
 
@@ -112,3 +112,4 @@ For the [component metrics][9] and [destination buffer metrics][10] emitted by a
 [8]: /observability_pipelines/sources/splunk_hec/
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

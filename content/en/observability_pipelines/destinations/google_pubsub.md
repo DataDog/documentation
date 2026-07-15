@@ -161,7 +161,7 @@ Common issues and fixes:
 
 ## Metrics
 
-For the [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `gcp_pubsub`.
+For [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google Pub/Sub destination metrics, add the tag `component_type:gcp_pubsub`.
 
 ### Event batching
 
@@ -182,3 +182,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [10]: /api/latest/observability-pipelines/
 [11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

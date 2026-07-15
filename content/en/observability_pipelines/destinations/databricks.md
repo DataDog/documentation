@@ -168,7 +168,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `databricks_zerobus`.
+For [component metrics][14] and [destination buffer metrics][15] emitted by all destinations, see the [Pipelines Usage Metrics][16] documentation. To filter or group by Databricks destination metrics, add the tag `component_type:databricks_zerobus`.
 
 [1]: https://docs.databricks.com/aws/en/ingestion/zerobus-overview
 [2]: https://docs.databricks.com/aws/en/schemas/create-schema
@@ -183,3 +183,6 @@ For the [component metrics](/observability_pipelines/monitoring_and_troubleshoot
 [11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
 [12]: /observability_pipelines/processors/custom_processor#setup
 [13]: /observability_pipelines/processors/custom_processor/#parse_timestamp
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

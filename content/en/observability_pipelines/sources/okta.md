@@ -94,7 +94,7 @@ After configuring the Amazon EventBridge, you can view your Okta logs in [Log Ex
 
 ## Metrics
 
-The Okta source uses the HTTP server source. For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `http_server`.
+The Okta source uses the HTTP server source. For [component metrics][7] and [source buffer metrics][8] emitted by all sources, see the [Pipelines Usage Metrics][9] documentation. To filter or group by HTTP Server source metrics, add the tag `component_type:http_server`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#secret-defaults
@@ -102,3 +102,6 @@ The Okta source uses the HTTP server source. For the [component metrics](/observ
 [4]: https://help.okta.com/en-us/content/topics/reports/log-streaming/add-aws-eb-log-stream.htm
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/logs
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

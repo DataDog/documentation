@@ -80,7 +80,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `datadog_archives_azure_blob`.
+For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, add the tag `component_type:datadog_archives_azure_blob`.
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
@@ -91,3 +91,6 @@ For the [component metrics](/observability_pipelines/monitoring_and_troubleshoot
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

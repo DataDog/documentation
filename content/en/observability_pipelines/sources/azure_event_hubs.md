@@ -181,4 +181,8 @@ DD_OP_SOURCE_KAFKA_SASL_PASSWORD=`"Endpoint=sb://<NAMESPACE>.servicebus.windows.
 
 ## Metrics
 
-The Azure Event Hubs source uses the Kafka source. For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `kafka`.
+The Azure Event Hubs source uses the Kafka source. For [component metrics][1] and [source buffer metrics][2] emitted by all sources, see the [Pipelines Usage Metrics][3] documentation. To filter or group by Kafka source metrics, add the tag `component_type:kafka`.
+
+[1]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -102,7 +102,7 @@ To convert a string timestamp to timestamp format:
 
 ## Metrics
 
-For the [component metrics][8] and [processor buffer metrics][9] emitted by all processors, see the Observability Pipelines Metrics documentation.
+For [component metrics][8] and [processor buffer metrics][9] emitted by all processors, see the [Pipelines Usage Metrics][10] documentation.
 
 ### Generate Metrics metrics
 
@@ -122,3 +122,4 @@ For the [component metrics][8] and [processor buffer metrics][9] emitted by all 
 [7]: /observability_pipelines/processors/custom_processor/#parse_timestamp
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

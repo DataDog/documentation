@@ -72,7 +72,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [destination buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics) emitted by all destinations, see the Observability Pipelines Metrics documentation. This destination emits metrics with the `component_type` tag set to `datadog_logs`.
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, add the tag `component_type:datadog_logs`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
@@ -80,3 +80,6 @@ For the [component metrics](/observability_pipelines/monitoring_and_troubleshoot
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

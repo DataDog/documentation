@@ -324,7 +324,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 ## Metrics
 
-For the [component metrics][13] and [processor buffer metrics][14] emitted by all processors, see the Observability Pipelines Metrics documentation.
+For [component metrics][13] and [processor buffer metrics][14] emitted by all processors, see the [Pipelines Usage Metrics][15] documentation.
 
 ### Sensitive Data Scanner metrics
 
@@ -381,3 +381,4 @@ For the [component metrics][13] and [processor buffer metrics][14] emitted by al
 [12]: /metrics/distributions/#enabling-advanced-query-functionality
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
