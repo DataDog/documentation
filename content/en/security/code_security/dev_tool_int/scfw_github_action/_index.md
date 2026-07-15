@@ -68,7 +68,7 @@ steps:
 
 ## How it works
 
-1. **Install**: The Supply Chain Firewall CLI is installed with `pipx` into an isolated Python environment so it does not interfere with the project's own dependencies.
+1. **Install**: The Supply Chain Firewall CLI is installed with `pipx` in an isolated Python environment so it does not interfere with the project's dependencies.
 
 2. **Wrap**: For each requested package manager, the action writes a thin wrapper script into a temporary directory and prepends that directory to `PATH`. All subsequent steps that invoke those package managers automatically go through Supply Chain Firewall.
 
