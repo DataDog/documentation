@@ -2332,6 +2332,16 @@
     "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
     "request_schema_description": "AWS CCM Config Create/Update Request body."
   },
+  "GetAWSMetricNameFilterPreview": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.",
+    "summary": "Get AWS metric name filter preview"
+  },
+  "PreviewAWSMetricNameFilter": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.\nThe filters are not persisted.",
+    "summary": "Preview AWS metric name filter",
+    "request_description": "The metric name filters to preview.",
+    "request_schema_description": "AWS metric name filter preview request body."
+  },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
     "summary": "List available namespaces"
@@ -4450,6 +4460,16 @@
     "summary": "Update replay heatmap snapshot",
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
+  },
+  "ListDatasetReportSchedules": {
+    "description": "Retrieve all report schedules for a given published dataset.\nReturns report schedules belonging to the authenticated user's organization that target the specified dataset.\nRequires the `generate_log_reports` or `manage_log_reports` permission.",
+    "summary": "List dataset report schedules"
+  },
+  "PrintReport": {
+    "description": "Initiate a one-off, print-only report for a dashboard or integration dashboard.\nThe report is rendered as a PDF and made available for download through the URL returned in the response.\nRequires a reporting permission appropriate to the targeted resource type.",
+    "summary": "Print a report",
+    "request_description": "",
+    "request_schema_description": "Request body for initiating a print-only report."
   },
   "CreateReportSchedule": {
     "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",
