@@ -17,7 +17,7 @@ Autocomplete and search are in Preview.
 ## Requirements
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- Tracing library [`dd-trace-rb`][6] TBD or higher is installed.
+- Tracing library [`dd-trace-rb`][6] 2.37.0 or higher is installed.
 - Ruby 2.7 or higher. On Ruby 2.6, parameter names are not available for autocomplete because the runtime does not expose them.
 
 ## Installation
