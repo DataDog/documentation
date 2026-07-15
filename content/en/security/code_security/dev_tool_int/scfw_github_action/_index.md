@@ -104,3 +104,9 @@ steps:
 | Output | Description |
 |--------|-------------|
 | `scfw-version` | The installed version of Supply Chain Firewall. |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/supply-chain-firewall
