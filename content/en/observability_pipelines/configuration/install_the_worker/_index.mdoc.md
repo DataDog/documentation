@@ -657,15 +657,18 @@ After updating the task definition, restart the ECS tasks to use the updated ima
 
 {% /if %}
 
-<!-- Docker -->
+<!-- Docker - Upgrade Worker -->
 {% if equals($platform, "docker") %}
 
 ## Upgrade the Worker
 
 To upgrade the Worker:
 
-1. Run `docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>`, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`.
-2. Run these commands to stop and remove the container:
+1. Run the following command, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+    ```
+    docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>
+    ```
+2. Run the following commands to stop and remove the container:
     ```
     docker stop <CONTAINER_NAME>
     ```
@@ -673,9 +676,11 @@ To upgrade the Worker:
     docker rm <CONTAINER_NAME>
     ```
 
+<!-- Docker - Upgrade Worker - Secrets Management -->
 {% if equals($secrets_source, "environment_variables") %}
-3. Run the following command to install the Worker:
-    ```shell
+
+3. Run the following command to install the updated Worker:
+    ```
     docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
         -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
         -e DD_SITE=<DATADOG_SITE> \
@@ -685,7 +690,7 @@ To upgrade the Worker:
         datadog/observability-pipelines-worker run
     ```
 
-    You must replace the placeholders with these values:
+    You must replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -698,9 +703,10 @@ To upgrade the Worker:
         - See [Environment Variables][7] for a list of destination environment variables.
 {% /if %}
 
+<!-- Docker - Upgrade Worker - Environment variables -->
 {% if equals($secrets_source, "secrets_management") %}
 
-3. Run the following command to install the Worker:
+3. Run the following command to install the updated Worker:
     ```
     docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
         -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -719,7 +725,7 @@ To upgrade the Worker:
 
 {% /if %}
 
-<!-- CloudFormation -->
+<!-- CloudFormation - Upgrade Worker -->
 {% if equals($platform, "cloudformation") %}
 
 ## Upgrade the Worker
@@ -823,7 +829,7 @@ image:
 
 ### Upgrade with the chart's default image tag
 
-Run these commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
+Run the following commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
 
 ```shell
 helm repo update
