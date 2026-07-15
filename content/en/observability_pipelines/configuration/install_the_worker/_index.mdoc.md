@@ -965,7 +965,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 - `config.`{% region-param key="dd_site" code=true /%}
 - `http-intake.`{% region-param key="dd_site" code=true /%}
 - `keys.`{% region-param key="dd_site" code=true /%}
-- `*.agent.datadoghq.com`
+- `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
 
@@ -977,7 +977,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 - `keys.`{% region-param key="dd_site" code=true /%}
 - `install.`{% region-param key="dd_site" code=true /%}
 - `yum.`{% region-param key="dd_site" code=true /%}
-- `*.agent.datadoghq.com`
+- `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
 
