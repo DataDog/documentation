@@ -72,7 +72,7 @@ steps:
 
 2. **Wrap**: For each requested package manager, the action writes a thin wrapper script to a temporary directory and prepends that directory to `PATH`. All subsequent steps that invoke those package managers are automatically routed through Supply Chain Firewall.
 
-   Each wrapper resolves the real binary at call time by removing its own directory from `PATH` before searching, then passes the resolved path to `scfw run --executable`. This helps ensure Supply Chain Firewall always calls the real binary and never re-invokes the wrapper.
+   Each wrapper resolves the real binary at call time by removing its own directory from `PATH` before searching for the binary, then passes the resolved path to `scfw run --executable`. This helps ensure that Supply Chain Firewall calls the real binary and does not re-invoke the wrapper.
 
    Activating a Python virtual environment (e.g., `source .venv/bin/activate`) shadows the Supply Chain Firewall wrappers for the remainder of that step. Use `scfw run pip install ...` explicitly for any commands run inside virtual environments.
 
