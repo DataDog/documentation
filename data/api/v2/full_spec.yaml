@@ -74156,6 +74156,86 @@ components:
         - MINUS_ID
         - NAME
         - MINUS_NAME
+    OrgGroupPolicySuggestionAttributes:
+      description: Attributes of an org group policy suggestion.
+      properties:
+        consensus_ratio:
+          description: The ratio of member orgs whose configuration agrees on the recommended value.
+          example: 0.75
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        policy_name:
+          description: The name of the suggested policy.
+          example: "monitor_timezone"
+          type: string
+        recommended_value:
+          description: The recommended value for the policy, based on member org consensus.
+          example: "UTC"
+        status:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionStatus"
+      required:
+        - policy_name
+        - status
+        - consensus_ratio
+        - recommended_value
+      type: object
+    OrgGroupPolicySuggestionData:
+      description: An org group policy suggestion resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionAttributes"
+        id:
+          description: The ID of the org group policy suggestion.
+          example: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OrgGroupPolicySuggestionListResponse:
+      description: Response containing a list of org group policy suggestions.
+      properties:
+        data:
+          description: An array of org group policy suggestions.
+          items:
+            $ref: "#/components/schemas/OrgGroupPolicySuggestionData"
+          type: array
+      required:
+        - data
+      type: object
+    OrgGroupPolicySuggestionRelationships:
+      description: Relationships of an org group policy suggestion.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      type: object
+    OrgGroupPolicySuggestionStatus:
+      description: The status of the policy suggestion.
+      enum:
+        - pending
+        - accepted
+        - dismissed
+      example: pending
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - ACCEPTED
+        - DISMISSED
+    OrgGroupPolicySuggestionType:
+      description: Org group policy suggestions resource type.
+      enum:
+        - org_group_policy_suggestions
+      example: org_group_policy_suggestions
+      type: string
+      x-enum-varnames:
+        - ORG_GROUP_POLICY_SUGGESTIONS
     OrgGroupPolicyType:
       description: Org group policies resource type.
       enum:
@@ -166408,6 +166488,65 @@ paths:
         operator: OR
         permissions:
           - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_policy_suggestions:
+    get:
+      description: List suggested organization group policies. Requires a filter on org group ID.
+      operationId: ListOrgGroupPolicySuggestions
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupPolicyFilterOrgGroupId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          consensus_ratio: 0.75
+                          policy_name: "monitor_timezone"
+                          recommended_value: "UTC"
+                          status: "pending"
+                        id: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+                        relationships:
+                          org_group:
+                            data:
+                              id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                              type: org_groups
+                        type: org_group_policy_suggestions
+              schema:
+                $ref: "#/components/schemas/OrgGroupPolicySuggestionListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List org group policy suggestions
+      tags: [Org Groups]
+      x-menu-order: 21
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

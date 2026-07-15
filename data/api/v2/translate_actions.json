@@ -4103,6 +4103,10 @@
     "request_description": "",
     "request_schema_description": "Request to update an org group policy override."
   },
+  "ListOrgGroupPolicySuggestions": {
+    "description": "List suggested organization group policies. Requires a filter on org group ID.",
+    "summary": "List org group policy suggestions"
+  },
   "ListOrgGroups": {
     "description": "List all organization groups that the requesting organization has access to.",
     "summary": "List org groups"
