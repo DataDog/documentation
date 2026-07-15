@@ -140,3 +140,4 @@ The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) serve
 [18]: /security/cloud_security_management/
 [19]: /security/code_security/dev_tool_int/mcp_server/
 [20]: /security/code_security/dev_tool_int/scfw_github_action/
+[21]: https://github.com/DataDog/guarddog
