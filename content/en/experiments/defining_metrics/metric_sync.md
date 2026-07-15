@@ -139,6 +139,56 @@ The commands do the following:
 - `result`: Fetches the terminal plan or execute result.
 - `version`: Prints build metadata.
 
+## GitHub Actions example
+
+The following workflow runs `plan` on pull requests and `execute` after changes merge to `main`:
+
+```yaml
+name: Sync Datadog experiment metrics
+
+on:
+  pull_request:
+    paths:
+      - "metrics/**/*.yaml"
+      - "metrics/**/*.yml"
+      - ".github/workflows/datadog-metric-sync.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "metrics/**/*.yaml"
+      - "metrics/**/*.yml"
+
+jobs:
+  plan:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Metric Sync CLI
+        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
+      - name: Plan metric changes
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        run: metric-sync plan ./metrics
+
+  execute:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Metric Sync CLI
+        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
+      - name: Apply metric changes
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        run: metric-sync execute ./metrics
+```
+
+Store your Datadog API and application keys as GitHub Actions secrets. If your organization uses a Datadog site other than `datadoghq.com`, add `DD_SITE` to the workflow environment.
+
 ## YAML reference
 
 ### Sync tags and IDs
@@ -158,7 +208,6 @@ Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_
 | `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties that metrics use. |
 | `metrics` | No | Experiment metrics to create, update, or manage in future syncs. |
 | `options` | No | Sync options such as certification and upgrade behavior. |
-
 
 ### Options
 
@@ -201,7 +250,6 @@ Measures and properties share the same field shape:
 | `column_name` | Yes | SQL result column name. |
 | `column_type` | Yes | Required so Datadog can validate the column and show the correct metric configuration options. Supported values are `STRING`, `INTEGER`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. |
 | `description` | No | Description for the measure or property. |
-
 
 ### Metrics
 
@@ -324,56 +372,6 @@ measure:
 ```
 
 To reference an existing Datadog measure directly, use `warehouse_metric_measure_id`.
-
-## GitHub Actions example
-
-The following workflow runs `plan` on pull requests and `execute` after changes merge to `main`:
-
-```yaml
-name: Sync Datadog experiment metrics
-
-on:
-  pull_request:
-    paths:
-      - "metrics/**/*.yaml"
-      - "metrics/**/*.yml"
-      - ".github/workflows/datadog-metric-sync.yml"
-  push:
-    branches:
-      - main
-    paths:
-      - "metrics/**/*.yaml"
-      - "metrics/**/*.yml"
-
-jobs:
-  plan:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Metric Sync CLI
-        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
-      - name: Plan metric changes
-        env:
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync plan ./metrics
-
-  execute:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Metric Sync CLI
-        run: curl -fsSL https://raw.githubusercontent.com/DataDog/experiments-metric-sync-cli/main/install.sh | sh
-      - name: Apply metric changes
-        env:
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-        run: metric-sync execute ./metrics
-```
-
-Store your Datadog API and application keys as GitHub Actions secrets. If your organization uses a Datadog site other than `datadoghq.com`, add `DD_SITE` to the workflow environment.
 
 ## Troubleshooting
 
