@@ -10528,6 +10528,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Get a budget's custom forecast
+      url: /api/latest/cloud-cost-management/get-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-get-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomForecast
+        unstable:
+          - v2
+        order: 69
     - name: Delete a budget's custom forecast
       url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
       identifier: cloud-cost-management-delete-a-budgets-custom-forecast
@@ -17104,6 +17117,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Print a report
+      url: /api/latest/report-schedules/print-a-report/
+      identifier: report-schedules-print-a-report
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PrintReport
+        unstable: []
+        order: 9
+    - name: List dataset report schedules
+      url: /api/latest/report-schedules/list-dataset-report-schedules/
+      identifier: report-schedules-list-dataset-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatasetReportSchedules
+        unstable: []
+        order: 8
     - name: Reporting And Sharing
       url: /api/latest/reporting-and-sharing/
       identifier: reporting-and-sharing
