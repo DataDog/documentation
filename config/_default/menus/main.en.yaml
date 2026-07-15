@@ -8085,7 +8085,7 @@ menu:
       identifier: dev_tool_int_scfw_github_action
       url: /security/code_security/dev_tool_int/scfw_github_action/
       parent: dev_tool_int
-      weight: 5
+      weight: 6
     - name: Tools Reference
       identifier: dev_tool_int_mcp_server_tools_reference
       url: /security/code_security/dev_tool_int/mcp_server/tools_reference/
