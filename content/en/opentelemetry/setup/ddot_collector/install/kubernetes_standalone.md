@@ -58,7 +58,8 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 helm repo update
 helm install opentelemetry-operator open-telemetry/opentelemetry-operator   \
      --set "manager.collectorImage.repository=datadog/ddot-collector"       \
-     --set "manager.collectorImage.tag={{< version key="agent_version" >}}"
+     --set "manager.collectorImage.tag={{< version key="agent_version" >}}" \
+     --set "manager.createRbacPermissions=true"
 ```
 
 {{% site-region region="gov,gov2" %}}
@@ -198,8 +199,8 @@ spec:
       kubelet_stats:
         auth_type: serviceAccount
         collection_interval: 15s
-        endpoint: ${env:OTEL_K8S_NODE_NAME}:10250
-        node: ${env:OTEL_K8S_NODE_NAME}
+        endpoint: ${env:K8S_NODE_NAME}:10250
+        node: ${env:K8S_NODE_NAME}
         metric_groups:
           - node
           - pod
@@ -208,6 +209,11 @@ spec:
     processors:
       infraattributes:
         cardinality: 2
+      resource/add-cluster-name:
+        attributes:
+          - key: k8s.cluster.name
+            value: ${env:DD_CLUSTER_NAME}
+            action: upsert
     connectors:
       datadog/connector:
         traces:
@@ -216,7 +222,7 @@ spec:
           compute_stats_by_span_kind: true
     extensions:
       health_check:
-        endpoint: "${env:OTEL_K8S_POD_IP}:13133"
+        endpoint: "${env:K8S_POD_IP}:13133"
     # [...]
     service:
       # [...]
@@ -224,30 +230,23 @@ spec:
       pipelines:
         logs:
           # [...]
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
         metrics:
           receivers: ['host_metrics', 'otlp', 'kubelet_stats', 'datadog/connector']
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           # [...]
         traces:
           # [...]
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog', 'datadog/connector']
   env:
     # [...]
-    - name: K8S_NODE_NAME
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    - name: K8S_NODE_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
     - name: K8S_POD_IP
       valueFrom:
         fieldRef:
           apiVersion: v1
           fieldPath: status.podIP
+    # K8S_NODE_NAME is added automatically by the operator
 {{< /code-block >}}
 
 {{% collapse-content title="Completed node-collector.yaml file" level="p" %}}
@@ -280,8 +279,8 @@ spec:
       kubelet_stats:
         auth_type: serviceAccount
         collection_interval: 15s
-        endpoint: ${env:OTEL_K8S_NODE_NAME}:10250
-        node: ${env:OTEL_K8S_NODE_NAME}
+        endpoint: ${env:K8S_NODE_NAME}:10250
+        node: ${env:K8S_NODE_NAME}
         metric_groups:
           - node
           - pod
@@ -289,7 +288,12 @@ spec:
           - volume
     processors:
       infraattributes:
-        cardinality: 1
+        cardinality: 2
+      resource/add-cluster-name:
+        attributes:
+          - key: k8s.cluster.name
+            value: ${env:DD_CLUSTER_NAME}
+            action: upsert
     connectors:
       datadog/connector:
         traces:
@@ -306,24 +310,24 @@ spec:
             flush_timeout: 10s
     extensions:
       health_check:
-        endpoint: "${env:OTEL_K8S_POD_IP}:13133"
+        endpoint: "${env:K8S_POD_IP}:13133"
     service:
       telemetry:
         resource:
-          k8s.cluster.name: <CLUSTER_NAME>
+          k8s.cluster.name: ${env:DD_CLUSTER_NAME}
       extensions: ['health_check']
       pipelines:
         logs:
           receivers: ['otlp']
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog']
         metrics:
           receivers: ['host_metrics', 'otlp', 'kubelet_stats', 'datadog/connector']
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog']
         traces:
           receivers: ['otlp']
-          processors: ['infraattributes']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog', 'datadog/connector']
   env:
     - name: DD_API_KEY
@@ -340,6 +344,14 @@ spec:
       value: datadog,pprof,zpages,prometheus
     - name: DD_OTEL_STANDALONE
       value: 'true'
+    - name: DD_CLUSTER_NAME
+      value: <CLUSTER_NAME>
+    - name: K8S_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    # K8S_NODE_NAME is added automatically by the operator
     # vvv Will no longer be necessary from 7.82.0 onwards vvv
     - name: DD_OTELCOLLECTOR_ENABLED
       value: 'true'
