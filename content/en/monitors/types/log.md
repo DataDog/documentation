@@ -67,11 +67,9 @@ As you define the search query, the graph above the search fields updates.
    * **Third facet**: 5 top values
    * **Fourth facet**: 2 top values
 
-4. Modify the query with additional options (optional):
-
-   Use the {{< ui >}}Σ Modify Query{{< /ui >}} menu to refine the query with:
+4. Optionally, use the {{< ui >}}Σ Modify Query{{< /ui >}} menu to refine the query with:
    * **Functions and formulas**: Transform and combine your query results. See [functions][11] and [formulas][12].
-   * **Advanced search**: Scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events. See [subqueries and Reference Table joins][13].
+   * **Advanced search**: Scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events. See [subqueries][13] and [Reference Tables][14].
 
    You can also create a monitor directly from an advanced search in the [Log Explorer][4].
 
@@ -153,4 +151,5 @@ Include a sample of 10 logs in the alert notification:
 [10]: /logs/log_configuration/flex_logs/
 [11]: /logs/explorer/analytics/#functions
 [12]: /logs/explorer/analytics/#formulas
-[13]: /logs/explorer/advanced_search/
+[13]: /logs/explorer/advanced_search/#filter-logs-with-subqueries
+[14]: /logs/explorer/advanced_search/#filter-logs-based-on-reference-tables
