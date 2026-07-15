@@ -151,9 +151,9 @@ instances:
 
 `single_endpoint_mode: true` is required for ClickHouse Cloud. It enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint.
 
-When enabled, the Agent queries system-table metrics (from `system.events`, `system.metrics`, `system.asynchronous_metrics`, and `system.errors`) across all nodes behind the endpoint using `clusterAllReplicas()`, and tags each resulting series with `clickhouse_node` so you can distinguish per-node data. This per-node collection requires Agent version 7.83.0 or later.
+When enabled, the Agent queries system-table metrics (from `system.events`, `system.metrics`, `system.asynchronous_metrics`, and `system.errors`) across all nodes behind the endpoint using `clusterAllReplicas()`. Each resulting series is tagged with `clickhouse_node` so you can distinguish per-node data. This per-node collection requires Agent version 7.83.0 or later.
 
-Without this setting, the Agent might reach a different node on each collection cycle. For cumulative per-node counters like `clickhouse.query.failed.count`, that inconsistency produces inaccurate values, because the counter isn't read from the same source each time.
+Without this setting, the Agent might reach a different node on each collection cycle. For cumulative per-node counters like `clickhouse.query.failed.count`, that inconsistency produces inaccurate values because the counter isn't read from the same source each time.
 
 ## Customizing the database identifier
 
