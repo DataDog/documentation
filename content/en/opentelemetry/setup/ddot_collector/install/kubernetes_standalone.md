@@ -249,6 +249,55 @@ spec:
     # K8S_NODE_NAME is added automatically by the operator
 {{< /code-block >}}
 
+4. (Optional) Collect container logs from the node's filesystem:
+
+<div class="alert alert-warning">Enabling log collection may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+
+The `filelog` receiver reads container logs from the node. Because the Operator does not mount host paths automatically, add the log directories as read-only volumes:
+
+{{< code-block lang="yaml" filename="node-collector.yaml" collapsible="true" >}}
+spec:
+  config:
+    receivers:
+      filelog:
+        include:
+          - /var/log/pods/*/*/*.log
+        # Exclude the Collector's own logs to avoid a feedback loop
+        exclude:
+          - /var/log/pods/*_node-collector-collector-*_*/otc-container/*.log
+        start_at: end
+        include_file_path: true
+        include_file_name: false
+        retry_on_failure:
+          enabled: true
+        operators:
+          - id: container-parser
+            type: container
+            max_log_size: 102400
+    # [...]
+    service:
+      # [...]
+      pipelines:
+        logs:
+          receivers: ['otlp', 'filelog']
+          # [...]
+  # Mount the node's log directories into the Collector pod (read-only)
+  volumes:
+    - name: varlogpods
+      hostPath:
+        path: /var/log/pods
+    - name: varlibdockercontainers
+      hostPath:
+        path: /var/lib/docker/containers
+  volumeMounts:
+    - name: varlogpods
+      mountPath: /var/log/pods
+      readOnly: true
+    - name: varlibdockercontainers
+      mountPath: /var/lib/docker/containers
+      readOnly: true
+{{< /code-block >}}
+
 {{% collapse-content title="Completed node-collector.yaml file" level="p" %}}
 Your `node-collector.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="node-collector.yaml" collapsible="false" >}}
@@ -286,6 +335,20 @@ spec:
           - pod
           - container
           - volume
+      filelog:
+        include:
+          - /var/log/pods/*/*/*.log
+        exclude:
+          - /var/log/pods/*_node-collector-collector-*_*/otc-container/*.log
+        start_at: end
+        include_file_path: true
+        include_file_name: false
+        retry_on_failure:
+          enabled: true
+        operators:
+          - id: container-parser
+            type: container
+            max_log_size: 102400
     processors:
       infraattributes:
         cardinality: 2
@@ -318,7 +381,7 @@ spec:
       extensions: ['health_check']
       pipelines:
         logs:
-          receivers: ['otlp']
+          receivers: ['otlp', 'filelog']
           processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog']
         metrics:
@@ -356,6 +419,21 @@ spec:
     - name: DD_OTELCOLLECTOR_ENABLED
       value: 'true'
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  # Mount the node's log directories for the filelog receiver (read-only)
+  volumes:
+    - name: varlogpods
+      hostPath:
+        path: /var/log/pods
+    - name: varlibdockercontainers
+      hostPath:
+        path: /var/lib/docker/containers
+  volumeMounts:
+    - name: varlogpods
+      mountPath: /var/log/pods
+      readOnly: true
+    - name: varlibdockercontainers
+      mountPath: /var/lib/docker/containers
+      readOnly: true
 {{< /code-block >}}
 
 Replace `<CLUSTER_NAME>` with a name for your cluster.
@@ -374,7 +452,7 @@ touch node-collector-values.yaml
 
 <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/values.yaml">values.yaml</a>.</div>
 
-2. Choose the deamonset mode and use DDOT as the collector:
+2. Choose the daemonset mode and use DDOT as the collector:
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 mode: daemonset
@@ -426,23 +504,27 @@ extraEnvs:
     value: 'true'
   - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
     value: datadog,pprof,zpages,prometheus
+  - name: DD_CLUSTER_NAME
+    value: <CLUSTER_NAME>
     # vvv Will no longer be necessary from 7.82.0 onwards vvv
   - name: DD_OTELCOLLECTOR_ENABLED
     value: 'true'
 {{< /code-block >}}
 
-3. Enable presets:
+4. Enable presets:
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 presets:
   hostMetrics:
+    enabled: true
+  kubeletMetrics:
     enabled: true
   logsCollection:
     enabled: true
     includeCollectorLogs: false
 {{< /code-block >}}
 
-4. Define pipelines for desired signals, with an OTLP receiver:
+5. Define pipelines for desired signals, with an OTLP receiver:
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 config:
@@ -467,34 +549,36 @@ config:
         exporters: ['datadog']
     telemetry:
       resource:
-        k8s.cluster.name: <CLUSTER_NAME>
+        k8s.cluster.name: ${env:DD_CLUSTER_NAME}
 {{< /code-block >}}
 
 Replace `<CLUSTER_NAME>` with a name for your cluster.
 
-4. (Optional) Enable additional Datadog features:
+6. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 config:
   # [...]
+  processors:
+    resource/add-cluster-name:
+      attributes:
+        - key: k8s.cluster.name
+          value: ${env:DD_CLUSTER_NAME}
+          action: upsert
   connectors:
     datadog/connector:
-      traces: {}
+      traces:
+        compute_top_level_by_span_kind: true
+        peer_tags_aggregation: true
+        compute_stats_by_span_kind: true
 
 {{< /code-block >}}
 
-5. (Optional) Collect pod labels and use them as attributes to attach to metrics, traces, and logs:
-
-<div class="alert alert-warning">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
-
-{{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
-{{< /code-block >}}
-
-{{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
+{{% collapse-content title="Completed node-collector-values.yaml file" level="p" %}}
 Your `node-collector-values.yaml` file should look something like this:
-{{< code-block lang="yaml" filename="collector-values.yaml" collapsible="false" >}}
+{{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="false" >}}
 mode: daemonset
 # vvv To be removed from 7.82.0 onwards vvv
 command:
@@ -506,13 +590,18 @@ image:
 presets:
   hostMetrics: # Add an hostmetrics receiver to the metrics pipeline
     enabled: true
+  kubeletMetrics: # Add a kubeletstats receiver to the metrics pipeline
+    enabled: true
   logsCollection: # Add a filelog receiver to the logs pipeline
     enabled: true
     includeCollectorLogs: false
 config:
   connectors:
     datadog/connector:
-      traces: {}
+      traces:
+        compute_top_level_by_span_kind: true
+        peer_tags_aggregation: true
+        compute_stats_by_span_kind: true
   exporters:
     datadog:
       api:
@@ -522,20 +611,17 @@ config:
         batch:
           flush_timeout: 10s
   extensions:
-    datadog:
-      api:
-        key: ${env:DD_API_KEY}
-        site: ${env:DD_SITE}
-      deployment_type: daemonset
-      installation_method: kubernetes
-    dogtel:
-      enable_metadata_collection: true
-      standalone_mode: true
     health_check:
+      # OTEL_K8S_POD_IP is injected automatically by the Collector Helm chart
       endpoint: ${env:OTEL_K8S_POD_IP}:13133
   processors:
     infraattributes:
-      cardinality: 1
+      cardinality: 2
+    resource/add-cluster-name:
+      attributes:
+        - key: k8s.cluster.name
+          value: ${env:DD_CLUSTER_NAME}
+          action: upsert
   receivers:
     otlp:
       protocols:
@@ -543,24 +629,15 @@ config:
           endpoint: 0.0.0.0:4317
         http:
           endpoint: 0.0.0.0:4318
-    prometheus:
-      config:
-        scrape_configs:
-          - job_name: otelcol
-            scrape_interval: 60s
-            static_configs:
-              - targets:
-                  - localhost:8888
   service:
     extensions:
       - health_check
-      - datadog
-      - dogtel
     pipelines:
       logs:
         receivers:
           - otlp
         processors:
+          - resource/add-cluster-name
           - infraattributes
         exporters:
           - datadog
@@ -568,8 +645,8 @@ config:
         receivers:
           - otlp
           - datadog/connector
-          - prometheus
         processors:
+          - resource/add-cluster-name
           - infraattributes
         exporters:
           - datadog
@@ -577,6 +654,7 @@ config:
         receivers:
           - otlp
         processors:
+          - resource/add-cluster-name
           - infraattributes
         exporters:
           - datadog
@@ -600,7 +678,7 @@ extraEnvs:
   - name: DD_OTEL_STANDALONE
     value: 'true'
   - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-    value: datadog,zpages,pprof
+    value: datadog,pprof,zpages,prometheus
   - name: DD_HOSTNAME
     valueFrom:
       fieldRef:
