@@ -186,7 +186,7 @@ You can filter and route logs based on `token_value: hec_token_one`.
 
 [Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
 
-When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
+When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20,000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
 A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
 
@@ -211,7 +211,7 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 
 #### Buffer metrics (when using Reference Tables)
 
-The `enrichment_table_buffer` is only enabled when enriching from a Reference Table.
+The Enrichment Table processor's buffer is only enabled when enriching from a Reference Table.
 
 To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 

@@ -166,7 +166,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, add the tag `component_type:amazon_s3_generic`.
+For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
 
 [1]: /logs/log_configuration/rehydrating/
 [2]: /observability_pipelines/destinations/datadog_archives/

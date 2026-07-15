@@ -74,7 +74,7 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 ## Metrics
 
-For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon S3 source metrics, add the tag `component_type:aws_s3`.
+For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon S3 source metrics, use the tag `component_type:aws_s3`.
 
 ### Amazon S3 metrics
 

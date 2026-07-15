@@ -161,7 +161,7 @@ Common issues and fixes:
 
 ## Metrics
 
-For [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google Pub/Sub destination metrics, add the tag `component_type:gcp_pubsub`.
+For [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google Pub/Sub destination metrics, use the tag `component_type:gcp_pubsub`.
 
 ### Event batching
 

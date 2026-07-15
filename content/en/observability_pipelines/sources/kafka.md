@@ -105,7 +105,7 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 
 ## Metrics
 
-For [component metrics][10] and [source buffer metrics][13] emitted by all sources, see the [Pipelines Usage Metrics][14] documentation.
+For [component metrics][10] and [source buffer metrics][11] emitted by all sources, see the [Pipelines Usage Metrics][12] documentation.
 
 ### Kafka metrics
 
@@ -117,27 +117,27 @@ For [component metrics][10] and [source buffer metrics][13] emitted by all sourc
 : **Metric type**: gauge
 
 `pipelines.kafka_consumed_messages_total`
-: **Description**: The number of messages consumed from Kafka brokers.
+: **Description**: The number of messages the Worker received from Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_consumed_messages_bytes_total`
-: **Description**: The number of message bytes consumed from Kafka brokers.
+: **Description**: The number of message bytes the Worker received from Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_requests_total`
-: **Description**: The number of requests sent to Kafka brokers.
+: **Description**: The number of requests the Worker sent to Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_requests_bytes_total`
-: **Description**: The number of bytes transmitted to Kafka brokers.
+: **Description**: The number of bytes the Worker sent to Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_responses_total`
-: **Description**: The number of responses received from Kafka brokers.
+: **Description**: The number of responses the Worker received from Kafka brokers after writing to them.
 : **Metric type**: count
 
 `pipelines.kafka_responses_bytes_total`
-: **Description**: The number of bytes received from Kafka brokers.
+: **Description**: The number of bytes the Worker received from Kafka brokers after writing to them.
 : **Metric type**: count
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
@@ -149,5 +149,5 @@ For [component metrics][10] and [source buffer metrics][13] emitted by all sourc
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

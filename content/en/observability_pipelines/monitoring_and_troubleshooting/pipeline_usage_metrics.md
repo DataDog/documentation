@@ -130,15 +130,15 @@ Data directory capacity bytes
 
 These metrics track Observability Pipelines Worker lifecycle events.
 
-Started
+Worker starts
 : **Metric**: `pipelines.started_total`
 : **Description:** The number of times the Worker instance has been started.
 
-Stopped
+Worker stops
 : **Metric**: `pipelines.stopped_total`
 : **Description:** The number of times the Worker instance has been stopped.
 
-Reloaded
+Worker reloads
 : **Metric**: `pipelines.reloaded_total`
 : **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
 
@@ -192,7 +192,7 @@ Event bytes included
 
 Errors
 : **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component. Depending on the component, this metric can carry an `error_code`, `error_type`, or `reason` tag that describes the error.
+: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
 : **Available for**: Sources, processors, and destinations.
 
 Data dropped intentionally or unintentionally
@@ -223,7 +223,8 @@ Utilization
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
 : **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later for Linux and MacOS.
-: **Available for**: The Custom Processor, Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, Remap to OCSF, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle log processors, and the Aggregate and Tag Cardinality Limit metrics processors.
+: **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
+: **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
 
 Send latency
 : **Metric**: `pipelines.source_send_latency_seconds`
@@ -237,7 +238,7 @@ Send batch latency
 
 ## HTTP server metrics
 
-These metrics are emitted by sources that receive data over HTTP, such as the Datadog Agent, HTTP/S Server, Splunk HEC, and OpenTelemetry sources.
+These metrics are emitted by sources that receive data over HTTP, such as the Datadog Agent, HTTP/S Server, OpenTelemetry, and Splunk HEC sources.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the source type.
@@ -258,17 +259,17 @@ These metrics are emitted by sources that receive data over HTTP, such as the Da
 
 These metrics are emitted by destinations that send data over HTTP, including:
 
+- CrowdStrike NG-SIEM
 - Datadog Logs
 - Datadog Metrics
 - Elasticsearch
-- OpenSearch
-- New Relic
-- Splunk HEC
-- Microsoft Sentinel
-- SentinelOne
-- CrowdStrike NG-SIEM
 - Google SecOps
 - HTTP Client destination
+- Microsoft Sentinel
+- New Relic
+- OpenSearch
+- SentinelOne
+- Splunk HEC
 
 **Note**: AWS-based destinations (such as Amazon S3, Amazon OpenSearch, and Amazon Security Lake) do not emit these metrics.
 

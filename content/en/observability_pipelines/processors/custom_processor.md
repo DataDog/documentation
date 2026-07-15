@@ -80,7 +80,7 @@ To set up this processor:
 
 ## Metrics
 
-For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Custom Processor metrics, add the tag `component_type:remap_vrl`.
+For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Custom Processor metrics, use the tag `component_type:remap_vrl`.
 
 ## Further reading
 

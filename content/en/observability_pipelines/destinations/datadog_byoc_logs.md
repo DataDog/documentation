@@ -72,7 +72,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, add the tag `component_type:datadog_logs`.
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, use the tag `component_type:datadog_logs`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

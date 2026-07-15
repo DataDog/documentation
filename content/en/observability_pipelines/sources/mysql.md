@@ -201,7 +201,7 @@ After you select the MySQL source in the pipeline UI:
 
 ## Metrics
 
-For [component metrics][5] and [source buffer metrics][6] emitted by all sources, see the [Pipelines Usage Metrics][7] documentation. To filter or group by database source metrics, add the tag `component_type:database`.
+For [component metrics][5] and [source buffer metrics][6] emitted by all sources, see the [Pipelines Usage Metrics][7] documentation. To filter or group by database source metrics, use the tag `component_type:database`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

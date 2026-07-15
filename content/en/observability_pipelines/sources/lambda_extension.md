@@ -31,7 +31,7 @@ Follow the instructions in [Instrument AWS Lambda applications][2] to set up the
 
 ## Metrics
 
-The Lambda Extension source uses the HTTP server source. For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. To filter or group by HTTP Server source metrics, add the tag `component_type:http_server`.
+For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. The Lambda Extension source uses the HTTP Server source. To filter or group by HTTP Server source metrics, use the tag `component_type:http_server`.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/extension/
 [2]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
