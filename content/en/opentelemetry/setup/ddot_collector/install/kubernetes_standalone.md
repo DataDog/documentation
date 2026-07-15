@@ -57,9 +57,9 @@ You can install the OpenTelemetry Operator in your cluster using the [OpenTeleme
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 helm install opentelemetry-operator open-telemetry/opentelemetry-operator   \
+     --set "manager.createRbacPermissions=true"                             \
      --set "manager.collectorImage.repository=datadog/ddot-collector"       \
-     --set "manager.collectorImage.tag={{< version key="agent_version" >}}" \
-     --set "manager.createRbacPermissions=true"
+     --set "manager.collectorImage.tag={{< version key="agent_version" >}}"
 ```
 
 {{% site-region region="gov,gov2" %}}
@@ -151,12 +151,22 @@ spec:
 
 Replace `<CLUSTER_NAME>` with a name for your cluster.
 
-2. Add an OTLP receiver and the datadog exporter for all desired signals:
+2. Add an OTLP receiver and the datadog exporter for all desired signals. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node:
 
 {{< code-block lang="yaml" filename="node-collector.yaml" collapsible="true" >}}
 # [...]
 spec:
   # [...]
+  # Publish the OTLP ports on the node's network interface
+  ports:
+    - name: otlp-grpc
+      port: 4317
+      protocol: TCP
+      hostPort: 4317
+    - name: otlp-http
+      port: 4318
+      protocol: TCP
+      hostPort: 4318
   config:
     receivers:
       otlp:
@@ -309,6 +319,16 @@ spec:
   # Deploy 1 instance per node, that will collect telemetry from that node's pods
   mode: daemonset
   command: ['otel-agent', 'run'] # Will no longer be necessary from 7.82.0 onwards
+  # Publish the OTLP ports on the node's network interface
+  ports:
+    - name: otlp-grpc
+      port: 4317
+      protocol: TCP
+      hostPort: 4317
+    - name: otlp-http
+      port: 4318
+      protocol: TCP
+      hostPort: 4318
   config:
     receivers:
       otlp:
@@ -476,6 +496,8 @@ command:
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-info">For FED, set <code>tag: {{< version key="agent_version" >}}-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
+
+<div class="alert alert-info">The Collector Helm chart publishes the OTLP ports on each node by default (<code>hostPort: 4317</code> for gRPC and <code>hostPort: 4318</code> for HTTP), so application pods can reach the Collector instance running on the same node. See <a href="#configure-the-application">Configure the application</a>.</div>
 
 3. Configure the Datadog exporter and API key secret:
 
@@ -764,7 +786,7 @@ public String getDate() {
 
 ### Configure the application
 
-Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
+Your application container must send data to the DDOT Collector running on the same node. Because the Collector publishes the OTLP ports on the node with `hostPort`, the application can reach the local Collector through the node's IP address (`status.hostIP`).
 
 If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application's Deployment manifest file:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
