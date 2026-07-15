@@ -88,6 +88,28 @@ A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessib
 
 See [Make a private Amazon Redshift Cluster publicly accessible][13] for more information about Redshift Clusters and public accessibility.
 
+### Amazon RDS DB instance
+
+An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if all of the following are true:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|It has `publicly_accessible` set to `true` in its connectivity configuration.|This setting makes the DB publicly accessible, meaning its DNS endpoint will resolve to the private IP address within its VPC, and a public IP address from outside the VPC. However, access to the cluster will still be controlled by a related security group. |
+|It's in a public [subnet][4].|-|
+|It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
+
+See [Fix connectivity to an RDS DB instance that uses a VPC's subnet][15] for more information about public access to an RDS DB Instance.
+
+### Amazon RDS DB snapshot
+
+An [RDS DB snapshot][16] (`aws_rds_db_snapshot`) is considered publicly accessible if:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|It has an attribute set to `"restore"` with an attribute value set to `"all"`.|If you set DB snapshot visibility to Public, all AWS accounts can restore a DB instance from your manual DB snapshot and have access to your data.|
+
+See [Sharing a DB snapshot][17] for more information.
+
 ### Amazon Elastic Load Balancer
 
 An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if all of the following are true:
@@ -355,6 +377,10 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [11]: https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html
 [12]: https://docs.aws.amazon.com/vpc/latest/userguide/security-groups.html
 [13]: https://repost.aws/knowledge-center/redshift-cluster-private-public
+[14]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.html
+[15]: https://repost.aws/knowledge-center/rds-connectivity-instance-subnet-vpc
+[16]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html
+[17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html
 [18]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses
 [19]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html
 [20]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html

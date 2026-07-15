@@ -34,7 +34,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Docker Container    |                   |                 |                | {{< X >}}          |
 | Container Image     |                   | {{< X >}}       |                | {{< X >}}          |
 
-**Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, S3, and ELB.
+**Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
 [1]: /security/cloud_security_management/setup/#cloud-security-threats
 [2]: /security/cloud_security_management/setup/#cloud-security-vulnerabilities
