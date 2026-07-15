@@ -46,6 +46,5 @@ Feature support is actively evolving. The following are not currently supported:
 - **Notebooks**: Log data from BYOC Logs cannot be used in Notebooks.
 - **Federated search**: Searching across multiple BYOC Logs clusters from a single query is not supported.
 - **LiveTail**: Real-time log streaming is not available for BYOC Logs indexes.
-- **Log context view**: Viewing surrounding logs in context is not yet supported.
 
 [1]: /api/latest/logs-restriction-queries/
