@@ -3,7 +3,7 @@ Pages using this partial must declare these filters:
 
 content_filters:
   - trait_id: platform
-    option_group_id: rum_sdk_platform_options_v2
+    option_group_id: rum_sdk_platform_options_v3
     label: "SDK"
 -->
 
