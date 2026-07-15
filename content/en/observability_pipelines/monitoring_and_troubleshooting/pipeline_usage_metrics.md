@@ -182,12 +182,12 @@ Bytes out
 
 Events included
 : **Metric**: `pipelines.included_events_total`
-: **Description**: The number of events that matched the processor's include clause and were processed. Events that do not match the include clause skip the processor and continue to the next component.
+: **Description**: The number of events that matched the processor's filter query and were processed. Events that do not match the filter query skip the processor and continue to the next component.
 : **Available for**: Processors.
 
 Event bytes included
 : **Metric**: `pipelines.included_event_bytes_total`
-: **Description**: The byte size of events that matched the processor's include clause and were processed.
+: **Description**: The byte size of events that matched the processor's filter query and were processed.
 : **Available for**: Processors.
 
 Errors
