@@ -79,7 +79,7 @@ To enable filtering:
 3. Enforce the rule by toggling **Filter data at ingest** under **Rule action**.
 4. Confirm filtering enforcement by entering and submitting the required text.
 
-The rule immediately begins to filter out non-compliant telemetry at ingest. You can review a sample of filtered telemetry at any time by opening the rule page and examining the graph or list underneath.
+The rule immediately begins to filter out non-compliant telemetry at ingest. Samples of non-compliant telemetry are recorded in the [Audit Trail](/account_management/audit_trail/). You can view these samples by navigating to the rule, then either scrolling through the table or clicking **View in Audit Trail**.
 
 {{< img src="account_management/governance_console/telemetry_rules/enforcing_telemetry_rule.mp4" alt="Enforcing a Tag Visibility rule and viewing filtered telemetry" video="true" style="width:100%;" >}}
 
