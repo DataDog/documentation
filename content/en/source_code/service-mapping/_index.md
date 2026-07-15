@@ -12,15 +12,15 @@ further_reading:
 
 ## Overview
 
-Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
+You can associate your APM [spans][3] with Git data to link a running application version with a particular repository and commit. This unlocks [source code features][4] in APM-powered products.
 
-For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog SDKs][1] automatically. For other languages and configurations, see [Other Languages](/source_code/service-mapping/other/).
+[Embed Git information](#embed-git-information-in-your-build-artifacts) in your deployed build artifacts to allow [Datadog SDKs][1] to read it and automatically attach `git.commit.sha` and `git.repository_url` tags to every span.
 
 <div class="alert alert-info">If you already have <a href="/tracing/">APM</a> set up, navigate to <a href="https://app.datadoghq.com/source-code/setup/apm">{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Link Source Code{{< /ui >}}</a> to configure the source code integration for your backend services.</div>
 
 ## Embed Git information in your build artifacts
 
-You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add the right tags to your APM service telemetry.
+You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add tags to your APM service telemetry.
 
 Select one of the following languages that support embedding git information:
 
@@ -57,3 +57,5 @@ If your build process is executed in CI within a Docker container, use a [named 
 
 [1]: /tracing/trace_collection/dd_libraries/
 [2]: https://docs.docker.com/build/concepts/context/#named-contexts
+[3]: /glossary/#span
+[4]: /source_code/features/

@@ -9,9 +9,8 @@ If the language your service is written in is not listed in the [Embed Git infor
 ## Prerequisites
 
 - [Datadog Agent][1] v7.35.0 or later is required.
-- If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
-## Tag telemetry with Git information
+## Tag telemetry by setting environment variables
 
 Set the `DD_GIT_COMMIT_SHA` and `DD_GIT_REPOSITORY_URL` environment variables on your application's deployment:
 

@@ -11,7 +11,6 @@ To embed Git information in your .NET build artifacts, follow the instructions f
 - [Datadog Agent][1] v7.35.0 or later is required.
 - The .NET client library version 2.24.1 or later is required.
 - Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
-- If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
 ## Containers
 

@@ -10,7 +10,6 @@ To embed Git information in your PHP build artifacts, follow the instructions fo
 
 - [Datadog Agent][1] v7.35.0 or later is required.
 - The PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.
-- If your CI build runs inside a Docker container, see [Build inside a Docker container](/source_code/service-mapping/#build-inside-a-docker-container) to make your `.git` folder available before building.
 
 ## Containers
 
