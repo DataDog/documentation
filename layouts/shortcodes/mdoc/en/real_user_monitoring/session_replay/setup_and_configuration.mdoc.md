@@ -734,6 +734,15 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 
 See [Privacy Options][2].
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+### Connect Session Replay to your third-party tools
+
+You can access the Session Replay URL to use in integrations, live from the browser where the session is taking place.
+See [Connect Session Replay to your third-party tools][30].
+{% /if %}
+<!-- end Browser -->
+
 [1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
 [2]: /session_replay/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
@@ -763,6 +772,7 @@ See [Privacy Options][2].
 [27]: https://reactnative.dev/architecture/landing-page
 [28]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum
 [29]: https://pub.dev/packages/datadog_session_replay
+[30]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
 [30]: /real_user_monitoring/browser/setup/
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
