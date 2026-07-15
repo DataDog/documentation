@@ -206,7 +206,7 @@ With `env:production`, `server: xyz.us-east-2.aws.clickhouse.cloud`, and `port: 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `dbm` | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
-| `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint, and collects standard system-table metrics per node (tagged with `clickhouse_node`) so per-node cumulative counters report accurate values. Per-node collection requires Agent version 7.83.0 or later. |
+| `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint. Also collects standard system-table metrics per node (tagged with `clickhouse_node`) so cumulative counters report accurate per-node values. Per-node collection requires Agent version 7.83.0 or later. |
 
 ### Database identifier
 
