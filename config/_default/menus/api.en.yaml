@@ -10857,6 +10857,30 @@ menu:
         unstable:
           - v2
         order: 43
+    - name: Update account filters
+      url: /api/latest/cloud-cost-management/update-account-filters/
+      identifier: cloud-cost-management-update-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostAccountFilters
+        unstable: []
+        order: 71
+    - name: Get account filters
+      url: /api/latest/cloud-cost-management/get-account-filters/
+      identifier: cloud-cost-management-get-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAccountFilters
+        unstable: []
+        order: 70
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -16402,6 +16426,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List org group policy suggestions
+      url: /api/latest/org-groups/list-org-group-policy-suggestions/
+      identifier: org-groups-list-org-group-policy-suggestions
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicySuggestions
+        unstable:
+          - v2
+        order: 21
     - name: Update an org group policy override
       url: /api/latest/org-groups/update-an-org-group-policy-override/
       identifier: org-groups-update-an-org-group-policy-override

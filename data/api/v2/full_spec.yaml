@@ -4048,6 +4048,86 @@ components:
             type: string
           type: array
       type: object
+    AccountFilters:
+      description: The account filters for a cloud account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersAttributes"
+        id:
+          description: The ID of the cloud account.
+          example: "123456789123"
+          type: string
+        type:
+          $ref: "#/components/schemas/AccountFiltersType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersAttributes:
+      description: Attributes for the account filters of a cloud account.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+        account_id:
+          description: The cloud account ID.
+          example: "123456789123"
+          type: string
+        cloud:
+          description: The cloud provider of the account, for example `aws`, `aws_cur2`, or `oci`.
+          example: "aws_cur2"
+          type: string
+      type: object
+    AccountFiltersPatchData:
+      description: Account filters patch data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersPatchRequest:
+      description: Account filters patch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFiltersPatchData"
+      required:
+        - data
+      type: object
+    AccountFiltersPatchRequestAttributes:
+      description: Attributes for an account filters patch request.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+      required:
+        - account_filters
+      type: object
+    AccountFiltersPatchRequestType:
+      default: account_filters_patch_request
+      description: Type of account filters patch request.
+      enum:
+        - account_filters_patch_request
+      example: account_filters_patch_request
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS_PATCH_REQUEST
+    AccountFiltersResponse:
+      description: Response containing the account filters for a cloud account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFilters"
+      type: object
+    AccountFiltersType:
+      default: account_filters
+      description: Type of account filters.
+      enum:
+        - account_filters
+      example: account_filters
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -74156,6 +74236,86 @@ components:
         - MINUS_ID
         - NAME
         - MINUS_NAME
+    OrgGroupPolicySuggestionAttributes:
+      description: Attributes of an org group policy suggestion.
+      properties:
+        consensus_ratio:
+          description: The ratio of member orgs whose configuration agrees on the recommended value.
+          example: 0.75
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        policy_name:
+          description: The name of the suggested policy.
+          example: "monitor_timezone"
+          type: string
+        recommended_value:
+          description: The recommended value for the policy, based on member org consensus.
+          example: "UTC"
+        status:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionStatus"
+      required:
+        - policy_name
+        - status
+        - consensus_ratio
+        - recommended_value
+      type: object
+    OrgGroupPolicySuggestionData:
+      description: An org group policy suggestion resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionAttributes"
+        id:
+          description: The ID of the org group policy suggestion.
+          example: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OrgGroupPolicySuggestionListResponse:
+      description: Response containing a list of org group policy suggestions.
+      properties:
+        data:
+          description: An array of org group policy suggestions.
+          items:
+            $ref: "#/components/schemas/OrgGroupPolicySuggestionData"
+          type: array
+      required:
+        - data
+      type: object
+    OrgGroupPolicySuggestionRelationships:
+      description: Relationships of an org group policy suggestion.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      type: object
+    OrgGroupPolicySuggestionStatus:
+      description: The status of the policy suggestion.
+      enum:
+        - pending
+        - accepted
+        - dismissed
+      example: pending
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - ACCEPTED
+        - DISMISSED
+    OrgGroupPolicySuggestionType:
+      description: Org group policy suggestions resource type.
+      enum:
+        - org_group_policy_suggestions
+      example: org_group_policy_suggestions
+      type: string
+      x-enum-varnames:
+        - ORG_GROUP_POLICY_SUGGESTIONS
     OrgGroupPolicyType:
       description: Org group policies resource type.
       enum:
@@ -127811,6 +127971,184 @@ paths:
       "x-permission":
         operator: OPEN
         permissions: []
+  /api/v2/cost/account_filters/{cloud_account_id}:
+    get:
+      description: Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: GetCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                include_accounts:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 70
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+    patch:
+      description: Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: UpdateCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Exclude new accounts and include specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        include_new_accounts: false
+                        included_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                    type: account_filters_patch_request
+              exclude_accounts:
+                summary: Include new accounts and exclude specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        excluded_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                        include_new_accounts: true
+                    type: account_filters_patch_request
+            schema:
+              $ref: "#/components/schemas/AccountFiltersPatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                exclude_accounts:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 71
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/anomalies:
     get:
       description: List detected Cloud Cost Management anomalies for the organization.
@@ -166408,6 +166746,65 @@ paths:
         operator: OR
         permissions:
           - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_policy_suggestions:
+    get:
+      description: List suggested organization group policies. Requires a filter on org group ID.
+      operationId: ListOrgGroupPolicySuggestions
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupPolicyFilterOrgGroupId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          consensus_ratio: 0.75
+                          policy_name: "monitor_timezone"
+                          recommended_value: "UTC"
+                          status: "pending"
+                        id: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+                        relationships:
+                          org_group:
+                            data:
+                              id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                              type: org_groups
+                        type: org_group_policy_suggestions
+              schema:
+                $ref: "#/components/schemas/OrgGroupPolicySuggestionListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List org group policy suggestions
+      tags: [Org Groups]
+      x-menu-order: 21
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

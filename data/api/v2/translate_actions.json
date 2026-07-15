@@ -1139,6 +1139,16 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "GetCostAccountFilters": {
+    "description": "Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Get account filters"
+  },
+  "UpdateCostAccountFilters": {
+    "description": "Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Update account filters",
+    "request_description": "",
+    "request_schema_description": "Account filters patch request."
+  },
   "ListCostAnomalies": {
     "description": "List detected Cloud Cost Management anomalies for the organization.",
     "summary": "List cost anomalies"
@@ -4102,6 +4112,10 @@
     "summary": "Update an org group policy override",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroupPolicySuggestions": {
+    "description": "List suggested organization group policies. Requires a filter on org group ID.",
+    "summary": "List org group policy suggestions"
   },
   "ListOrgGroups": {
     "description": "List all organization groups that the requesting organization has access to.",

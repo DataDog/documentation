@@ -9962,11 +9962,16 @@ menu:
       parent: pa_experiments_concepts
       identifier: pa_experiments_exposure_sql
       weight: 2
+    - name: SQL Template Variables
+      url: experiments/concepts/sql_template_variables
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_sql_template_variables
+      weight: 3
     - name: Cumulative Impact
       url: experiments/concepts/cumulative_impact
       parent: pa_experiments_concepts
       identifier: pa_experiments_cumulative_impact
-      weight: 3
+      weight: 4
     - name: Statistics
       url: experiments/statistics/
       parent: pa_experiments

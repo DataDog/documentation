@@ -77,6 +77,8 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
     - {{< ui >}}Data type{{< /ui >}}: **string**
     - {{< ui >}}Display name{{< /ui >}}: **Roles**
     - {{< ui >}}Variable name{{< /ui >}}: **roles**
+    - {{< ui >}}External name{{< /ui >}}: `roles.^[primary==true].value`
+    - {{< ui >}}External namespace{{< /ui >}}: `urn:ietf:params:scim:schemas:core:2.0:User`
     - For {{< ui >}}Enum{{< /ui >}}, select {{< ui >}}Define enumerated list of values{{< /ui >}} and add one entry per Datadog role, using the role name as the display name and the role UUID as the value. You can find a role's UUID in the role's URL on your [Organization Settings][9] page. Add any custom roles the same way.
 2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
 3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.

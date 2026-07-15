@@ -28,7 +28,7 @@ steps:
       package-managers: npm,pip
 
   # npm and pip commands are inspected by SCFW before they run.
-# Flagged packages are blocked; other installs proceed normally.
+  # Flagged packages are blocked; other installs proceed normally.
   - run: pip install -r requirements.txt
   - run: npm install
 ```
