@@ -59,7 +59,7 @@ To set up the rename field processor:
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. Depending on the configured action, this processor emits metrics with the `component_type` tag set to `add_fields`, `remove_fields`, or `rename_fields`.
+For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. Depending on the configured action, this processor emits metrics with the `component_type` tag set to `add_fields`, `remove_fields`, or `rename_fields`.
 
 ## Further reading
 

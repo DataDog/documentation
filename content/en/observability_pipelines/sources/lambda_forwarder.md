@@ -22,6 +22,6 @@ See [Datadog Forwarder][1] to learn more about it.
 
 ## Metrics
 
-The Lambda Forwarder source uses the HTTP/S Server source. For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring/metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `http_server`.
+The Lambda Forwarder source uses the HTTP/S Server source. For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [source buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics) emitted by all sources, see the Observability Pipelines Metrics documentation. This source emits metrics with the `component_type` tag set to `http_server`.
 
 [1]: /logs/guide/forwarder/?tab=cloudformation

@@ -110,5 +110,5 @@ For the [component metrics][9] and [destination buffer metrics][10] emitted by a
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [8]: /observability_pipelines/sources/splunk_hec/
-[9]: /observability_pipelines/monitoring/metrics/#component-metrics
-[10]: /observability_pipelines/monitoring/metrics/#destination-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics

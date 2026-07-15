@@ -52,6 +52,6 @@ The allowlist is stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VAR
 
 ## Metrics
 
-For the [component metrics](/observability_pipelines/monitoring/metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring/metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `add_env_vars`.
+For the [component metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics) and [processor buffer metrics](/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics) emitted by all processors, see the Observability Pipelines Metrics documentation. This processor emits metrics with the `component_type` tag set to `add_env_vars`.
 
 [1]: /observability_pipelines/search_syntax/logs/

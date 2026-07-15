@@ -120,5 +120,5 @@ For the [component metrics][8] and [processor buffer metrics][9] emitted by all 
 [5]: /observability_pipelines/search_syntax/logs/
 [6]: /observability_pipelines/processors/custom_processor/#setup
 [7]: /observability_pipelines/processors/custom_processor/#parse_timestamp
-[8]: /observability_pipelines/monitoring/metrics/#component-metrics
-[9]: /observability_pipelines/monitoring/metrics/#processor-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics

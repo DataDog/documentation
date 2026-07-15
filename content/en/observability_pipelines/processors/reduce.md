@@ -58,5 +58,5 @@ For the [component metrics][2] and [processor buffer metrics][3] emitted by all 
 : **Metric type**: count
 
 [1]: /observability_pipelines/search_syntax/logs/
-[2]: /observability_pipelines/monitoring/metrics/#component-metrics
-[3]: /observability_pipelines/monitoring/metrics/#processor-buffer-metrics
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics

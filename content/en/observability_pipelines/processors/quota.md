@@ -129,5 +129,5 @@ For the [component metrics][7] and [processor buffer metrics][8] emitted by all 
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
 [6]: /observability_pipelines/search_syntax/logs/
-[7]: /observability_pipelines/monitoring/metrics/#component-metrics
-[8]: /observability_pipelines/monitoring/metrics/#processor-buffer-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics

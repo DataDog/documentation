@@ -148,5 +148,5 @@ For the [component metrics][10] and [source buffer metrics][13] emitted by all s
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[10]: /observability_pipelines/monitoring/metrics/#component-metrics
-[13]: /observability_pipelines/monitoring/metrics/#source-buffer-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics

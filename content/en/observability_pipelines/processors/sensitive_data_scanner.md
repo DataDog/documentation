@@ -379,5 +379,5 @@ For the [component metrics][13] and [processor buffer metrics][14] emitted by al
 [10]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [11]: https://app.datadoghq.com/metric/explorer
 [12]: /metrics/distributions/#enabling-advanced-query-functionality
-[13]: /observability_pipelines/monitoring/metrics/#component-metrics
-[14]: /observability_pipelines/monitoring/metrics/#processor-buffer-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
