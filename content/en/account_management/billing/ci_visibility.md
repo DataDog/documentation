@@ -60,5 +60,5 @@ If your committer count looks higher than expected for GitHub repositories, chec
 [2]: /continuous_integration/guides/ingestion_control
 [3]: /integrations/github/
 [4]: https://app.datadoghq.com/integrations/github/
-[5]: /integrations/guide/reference-tables/
+[5]: /reference_tables/
 [6]: https://app.datadoghq.com/ci/settings/ci-cd/billing-committers
