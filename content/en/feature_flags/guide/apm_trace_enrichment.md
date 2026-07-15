@@ -97,7 +97,11 @@ tracer.init({
 No additional code configuration is needed. The `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED` environment variable enables span enrichment when the `DatadogProvider` initializes.
 
 {{< code-block lang="go" filename="main.go" >}}
+package main
+
 import (
+    "log"
+
     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
     ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
     "github.com/open-feature/go-sdk/openfeature"
