@@ -140,12 +140,12 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Findings Write`*
 
 `list_datadog_security_findings_automation_rules`
-: Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
+: Lists security findings automation rules of a given type (`mute`, `due_date`, or `ticket_creation`).
 : *Permissions required: `Security Pipelines Read`*
 
 `create_datadog_security_findings_automation_rule`
-: Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
-: *Permissions required: `Security Pipelines Write`*
+: Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), or `ticket_creation` (auto-create Jira or Case Management tickets).
+: *Permissions required: `Security Pipelines Write`, `Security Monitoring Findings Read`*
 
 `update_datadog_security_findings_automation_rule`
 : Updates an existing automation rule. Supports partial updates, so only the fields you provide change. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.

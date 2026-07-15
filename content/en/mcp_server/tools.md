@@ -1618,7 +1618,7 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 ### `list_datadog_security_findings_automation_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Pipelines Read`*\
-Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
+Lists security findings automation rules of a given type (`mute`, `due_date`, or `ticket_creation`).
 
 - List all mute automation rules for security findings.
 - Show me the ticket-creation rules.
@@ -1626,8 +1626,8 @@ Lists security findings automation rules of a given type (`mute`, `due_date`, `t
 
 ### `create_datadog_security_findings_automation_rule`
 *Toolset: **security***\
-*Permissions Required: `Security Pipelines Write`*\
-Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+*Permissions Required: `Security Pipelines Write` and `Security Monitoring Findings Read`*\
+Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), or `ticket_creation` (auto-create Jira or Case Management tickets).
 
 - Create a rule to automatically mute false-positive misconfiguration findings in staging.
 - Set 30-day remediation due dates for high-severity library vulnerabilities.
@@ -1647,7 +1647,7 @@ Updates an existing automation rule. Supports partial updates, so only the field
 *Permissions Required: `Security Pipelines Write`*\
 Permanently deletes a security findings automation rule by ID.
 
-- Delete the severity modifier rule `abc-123-def`.
+- Delete the due-date rule `abc-123-def`.
 - Remove the mute rule that is no longer needed.
 
 ### `reorder_datadog_security_findings_automation_rules`
