@@ -33,14 +33,14 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
 - Infrastructure:
-    - [Processes Explorer][7]
-    - [Serverless Explorer][8]
-    - [Kubernetes Explorer][9]
+    - [Processes Explorer][3]
+    - [Serverless Explorer][4]
+    - [Kubernetes Explorer][5]
 - APM:
-    - [Service Page][3]
-    - [Resource Page][4]
-    - [Profile Explorer][6]
-- [Database Explorer][5]
+    - [Service Page][6]
+    - [Resource Page][7]
+    - [Profile Explorer][8]
+- [Database Explorer][9]
 - [Real User Monitoring (RUM) Explorer][10]
 - [Synthetic Monitoring & Testing Explorer][15]
 - [Error Tracking issue side panel][13]
@@ -320,17 +320,16 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 [1]: https://app.datadoghq.com/logs
 [2]: https://app.datadoghq.com/apm/traces
-[3]: /tracing/services/service_page/
-[4]: /tracing/services/resource_page/
-[5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/explorer
-[7]: https://app.datadoghq.com/process
-[8]: https://app.datadoghq.com/functions
-[9]: https://app.datadoghq.com/orchestration/overview/pod
+[3]: https://app.datadoghq.com/process
+[4]: https://app.datadoghq.com/functions
+[5]: https://app.datadoghq.com/orchestration/overview/pod
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/
+[8]: https://app.datadoghq.com/profiling/explorer
+[9]: https://app.datadoghq.com/databases/list
 [10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /dashboards/graph_insights/watchdog_explains
 [15]: https://app.datadoghq.com/synthetics/explorer
-
