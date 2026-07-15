@@ -84,7 +84,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic pro
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not. Default: `false`.                                                                                        |
 | `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                     |
 | `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
-| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
+| `is_replace_missing` | Boolean | No       | If `true`, replaces all missing attributes of `expression` with 0. If `false`, skips the operation if an attribute is missing. Default: `false`. |
 
 
 ## Further reading

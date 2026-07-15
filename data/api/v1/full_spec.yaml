@@ -1904,6 +1904,67 @@ components:
       type: string
       x-enum-varnames:
         - DATA_PROJECTION
+    DatasetListQuery:
+      description: Query that lists the rows of a published dataset (a DDSQL query) without aggregation.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/DatasetListQueryDataSourceType"
+        dataset_id:
+          description: ID of the published dataset to query.
+          example: "abc-123-def"
+          type: string
+        dataset_provider:
+          $ref: "#/components/schemas/PublishedDatasetProvider"
+        filter:
+          description: Filter applied to the dataset's rows, using events-style search syntax.
+          example: "service:web-store"
+          type: string
+        limit:
+          description: Maximum number of rows to return from the dataset query.
+          format: int64
+          type: integer
+        sort:
+          $ref: "#/components/schemas/DatasetListQuerySort"
+      required:
+        - data_source
+        - dataset_provider
+        - dataset_id
+      type: object
+    DatasetListQueryDataSourceType:
+      description: Identifies this as a published-dataset list query.
+      enum:
+        - dataset
+      example: dataset
+      type: string
+      x-enum-varnames:
+        - DATASET
+    DatasetListQuerySort:
+      description: Sort configuration for a `DatasetListQuery`.
+      properties:
+        fields:
+          description: List of fields to sort the rows by, applied in order.
+          example:
+            - name: cpu_usage
+              order: desc
+          items:
+            $ref: "#/components/schemas/DatasetListQuerySortField"
+          type: array
+      required:
+        - fields
+      type: object
+    DatasetListQuerySortField:
+      description: A single sort directive for a `DatasetListQuery`.
+      properties:
+        name:
+          description: Name of the field to sort on.
+          example: duration
+          type: string
+        order:
+          $ref: "#/components/schemas/QuerySortOrder"
+      required:
+        - name
+        - order
+      type: object
     DeleteSharedDashboardResponse:
       description: Response containing token of deleted shared dashboard.
       properties:
@@ -4599,7 +4660,9 @@ components:
           type: integer
       type: object
     HostMapRequest:
-      description: Updated host map.
+      deprecated: true
+      description: >-
+        Deprecated - Legacy metric-based host map request. Use the infrastructure-backed (`request_type: infrastructure_hostmap`) or DDSQL (`request_type: data_projection`) format instead.
       properties:
         apm_query:
           $ref: "#/components/schemas/LogQueryDefinition"
@@ -4649,32 +4712,46 @@ components:
           description: The description of the widget.
           type: string
         group:
-          description: List of tag prefixes to group by.
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `group_by` (infrastructure) or a `group` dimension (DDSQL) inside `requests` instead.
           items:
             description: Tag prefixes.
             type: string
           type: array
         no_group_hosts:
-          description: Whether to show the hosts that don’t fit in a group.
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `no_group_hosts` inside `requests` instead.
           type: boolean
         no_metric_hosts:
-          description: Whether to show the hosts with no metrics.
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `no_metric_hosts` inside `requests` instead.
           type: boolean
         node_type:
           $ref: "#/components/schemas/WidgetNodeType"
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `node_type` inside `requests` instead.
         notes:
           description: Notes on the title.
           type: string
         requests:
           $ref: "#/components/schemas/HostMapWidgetDefinitionRequests"
         scope:
-          description: List of tags used to filter the map.
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `filter` inside `requests` instead.
           items:
             description: Tags.
             type: string
           type: array
         style:
           $ref: "#/components/schemas/HostMapWidgetDefinitionStyle"
+          deprecated: true
+          description: >-
+            Deprecated - Only used by the legacy metric-based format. Use `style` inside `requests` instead.
         title:
           description: Title of the widget.
           type: string
@@ -4689,20 +4766,33 @@ components:
         - type
         - requests
       type: object
+    HostMapWidgetDefinitionRequestType:
+      description: >-
+        Identifies which host map request format the sibling fields on `HostMapWidgetDefinitionRequests` describe: an infrastructure-backed request or a DDSQL published-dataset request.
+      enum:
+        - infrastructure_hostmap
+        - data_projection
+      example: infrastructure_hostmap
+      type: string
+      x-enum-varnames:
+        - INFRASTRUCTURE_HOSTMAP
+        - DATA_PROJECTION
     HostMapWidgetDefinitionRequests:
       description: >-
-        Query definition for the host map widget. Supports two mutually exclusive formats distinguished by the presence of `request_type`: the legacy metric-based format (`fill`/`size`) and the infrastructure-backed format (`request_type`, `node_type`, `enrichments`).
+        Query definition for the host map widget. Supports three mutually exclusive formats distinguished by `request_type`: the deprecated legacy metric-based format (`fill`/`size`, no `request_type`), the infrastructure-backed format (`request_type: infrastructure_hostmap`), and the DDSQL published-dataset format (`request_type: data_projection`).
       example: {}
       properties:
         child:
           $ref: "#/components/schemas/HostMapWidgetInfrastructureRequest"
+          description: Optional child entities for hierarchical visualization (for example, host → container). Only used by the infrastructure-backed format.
         conditional_formats:
           description: List of conditional formatting rules applied to fill values.
           items:
             $ref: "#/components/schemas/WidgetConditionalFormat"
           type: array
         enrichments:
-          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          description: >-
+            Metric or event queries joined to the entity set. Each formula specifies a visual dimension. Only used by the infrastructure-backed format.
           example:
             - formulas:
                 - dimension: fill
@@ -4717,17 +4807,25 @@ components:
           type: array
         fill:
           $ref: "#/components/schemas/HostMapRequest"
+          deprecated: true
+          description: >-
+            Deprecated - Legacy metric-based format. Use the infrastructure-backed (`request_type: infrastructure_hostmap`) or DDSQL (`request_type: data_projection`) format instead.
         filter:
-          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          description: >-
+            Filter string for the entity set in tag format (for example, `env:prod`). Only used by the infrastructure-backed format.
           example: "env:prod"
           type: string
         group_by:
           description: |-
             Defines how entities are grouped into tiles. The ordering of entries implies
-            the grouping hierarchy.
+            the grouping hierarchy. Only used by the infrastructure-backed format.
           items:
             $ref: "#/components/schemas/HostMapWidgetGroupBy"
           type: array
+        limit:
+          description: Maximum number of rows to return from the dataset query. Only used by the DDSQL format.
+          format: int64
+          type: integer
         no_group_hosts:
           description: Whether to hide entities that have no group assignment.
           type: boolean
@@ -4736,15 +4834,28 @@ components:
           type: boolean
         node_type:
           $ref: "#/components/schemas/HostMapWidgetNodeType"
+          description: Entity type to visualize. Only used by the infrastructure-backed format.
+        projection:
+          $ref: "#/components/schemas/HostMapWidgetProjection"
+          description: >-
+            Maps dataset columns to map dimensions (entity, optional parent for grouping, fill, size). Only used by the DDSQL format.
+        query:
+          $ref: "#/components/schemas/DatasetListQuery"
+          description: Published-dataset query. Only used by the DDSQL format.
         request_type:
-          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
+          $ref: "#/components/schemas/HostMapWidgetDefinitionRequestType"
         size:
           $ref: "#/components/schemas/HostMapRequest"
+          deprecated: true
+          description: >-
+            Deprecated - Legacy metric-based format. Use the infrastructure-backed (`request_type: infrastructure_hostmap`) or DDSQL (`request_type: data_projection`) format instead.
         style:
           $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
       type: object
     HostMapWidgetDefinitionStyle:
-      description: The style to apply to the widget.
+      deprecated: true
+      description: >-
+        Deprecated - The style to apply to the legacy metric-based host map widget. Use `HostMapWidgetInfrastructureStyle` instead.
       properties:
         fill_max:
           description: Max value to use to color the map.
@@ -4769,17 +4880,20 @@ components:
       x-enum-varnames:
         - HOSTMAP
     HostMapWidgetDimension:
-      description: Visual dimension driven by a formula in the infrastructure host map widget.
+      description: >-
+        Visual dimension for the host map widget. Used both by infrastructure-backed formulas and by DDSQL projection columns; `group` is only meaningful for DDSQL projection columns, where repeated entries define the grouping hierarchy.
       enum:
         - node
         - fill
         - size
+        - group
       example: node
       type: string
       x-enum-varnames:
         - NODE
         - FILL
         - SIZE
+        - GROUP
     HostMapWidgetFormula:
       description: |-
         Formula for the infrastructure host map widget that specifies both the expression
@@ -4964,6 +5078,54 @@ components:
         - CONTAINER
         - POD
         - CLUSTER
+    HostMapWidgetProjection:
+      description: >-
+        Projection for the DDSQL host map request. Maps dataset columns to map dimensions: `node` identifies the entity, repeated `group` entries define the grouping hierarchy (outermost first), and `fill`/`size` drive the tile color and size.
+      properties:
+        dimensions:
+          description: List of column-to-dimension mappings for the projection.
+          example:
+            - column: entity_id
+              dimension: node
+            - column: parent_id
+              dimension: group
+            - column: cpu_usage
+              dimension: fill
+          items:
+            $ref: "#/components/schemas/HostMapWidgetProjectionDimensionMapping"
+          type: array
+        type:
+          $ref: "#/components/schemas/HostMapWidgetProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    HostMapWidgetProjectionDimensionMapping:
+      description: Maps a dataset column to a host map visual dimension.
+      properties:
+        alias:
+          description: Alias used to label the column instead of its name.
+          type: string
+        column:
+          description: Source column name from the dataset.
+          example: entity_id
+          type: string
+        dimension:
+          $ref: "#/components/schemas/HostMapWidgetDimension"
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+      required:
+        - column
+        - dimension
+      type: object
+    HostMapWidgetProjectionType:
+      description: Type of the host map projection.
+      enum:
+        - hostmap
+      example: hostmap
+      type: string
+      x-enum-varnames:
+        - HOSTMAP
     HostMapWidgetScalarRequest:
       description: |-
         Scalar formula request for the infrastructure host map widget. Each formula specifies
@@ -8230,6 +8392,12 @@ components:
       type: object
     MetricsListResponse:
       description: Object listing all metric names stored by Datadog since a given time.
+      example:
+        from: "1571011200"
+        metrics:
+          - system.cpu.idle
+          - system.mem.free
+          - aws.ec2.cpuutilization
       properties:
         from:
           description: Time when the metrics were active, seconds since the Unix epoch.
@@ -11388,6 +11556,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11607,6 +11781,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11649,6 +11829,128 @@ components:
       type: string
       x-enum-varnames:
         - PUBLISHED
+    NotebookTemplateVariable:
+      additionalProperties: false
+      description: Notebook template variable.
+      properties:
+        available_values:
+          description: The list of values that the template variable drop-down is limited to.
+          example: ["my-host", "host1", "host2"]
+          items:
+            description: Template variable value.
+            minLength: 1
+            type: string
+          nullable: true
+          type: array
+          uniqueItems: true
+        available_values_query:
+          $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQuery"
+        data_source_mappings:
+          additionalProperties:
+            description: The value for the given data source.
+            type: string
+          description: Mapping of data source names to template variable values.
+          type: object
+        default:
+          deprecated: true
+          description: |-
+            (deprecated) The default value for the template variable on notebook load.
+            Cannot be used in conjunction with `defaults`.
+          example: my-host
+          nullable: true
+          type: string
+        defaults:
+          description: One or many default values for the template variable. Cannot be used in conjunction with `default`.
+          example: ["my-host-1", "my-host-2"]
+          items:
+            description: A default value for the template variable.
+            minLength: 1
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        placement:
+          description: The placement of the template variable in the notebook.
+          example: global
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
+          type: string
+        type:
+          description: The type of the template variable.
+          example: tag
+          type: string
+      required:
+        - name
+      type: object
+    NotebookTemplateVariableAvailableValuesQuery:
+      description: Query used to dynamically populate the list of available values for the template variable.
+      oneOf:
+        - $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryLogRumSpans"
+        - $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryMetrics"
+    NotebookTemplateVariableAvailableValuesQueryGroupBy:
+      additionalProperties: false
+      description: A group-by facet for an available values query.
+      properties:
+        facet:
+          description: The facet name to group by.
+          example: host
+          type: string
+      required:
+        - facet
+      type: object
+    NotebookTemplateVariableAvailableValuesQueryLogRumSpans:
+      additionalProperties: false
+      description: Available values query for logs, RUM, or spans data sources.
+      properties:
+        data_source:
+          description: The data source for the query. Must be one of `logs`, `rum`, or `spans`.
+          example: logs
+          type: string
+        group_by:
+          description: Group-by fields for the query.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQueryGroupBy"
+          type: array
+        search:
+          $ref: "#/components/schemas/NotebookTemplateVariableAvailableValuesQuerySearch"
+      required:
+        - data_source
+        - search
+        - group_by
+      type: object
+    NotebookTemplateVariableAvailableValuesQueryMetrics:
+      additionalProperties: false
+      description: Available values query for the metrics data source.
+      properties:
+        data_source:
+          description: The data source for the query. Must be `metrics`.
+          example: metrics
+          type: string
+        query:
+          description: The metrics query string.
+          example: "avg:system.cpu.user{*} by {host}"
+          type: string
+      required:
+        - data_source
+        - query
+      type: object
+    NotebookTemplateVariableAvailableValuesQuerySearch:
+      additionalProperties: false
+      description: Search parameters for an available values query.
+      properties:
+        query:
+          description: The search query string.
+          example: "service:web"
+          type: string
+      required:
+        - query
+      type: object
     NotebookTimeseriesCellAttributes:
       description: The attributes of a notebook `timeseries` cell.
       properties:
@@ -11714,6 +12016,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11790,6 +12098,12 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/NotebookStatus"
+        template_variables:
+          description: List of template variables for this notebook.
+          items:
+            $ref: "#/components/schemas/NotebookTemplateVariable"
+          nullable: true
+          type: array
         time:
           $ref: "#/components/schemas/NotebookGlobalTime"
       required:
@@ -11916,7 +12230,8 @@ components:
         The default option results in different behavior depending on the monitor query type.
         For monitors using Count queries, an empty monitor evaluation is treated as 0 and is compared to the threshold conditions.
         For monitors using any query type other than Count, for example Gauge, Measure, or Rate, the monitor shows the last known status.
-        This option is only available for APM Trace Analytics, Audit Trail, CI, Error Tracking, Event, Logs, and RUM monitors.
+        This option is available for APM Trace Analytics, Audit Trail, CI, Error Tracking, Event, Logs, and RUM monitors.
+        It is also required for metric monitors that use `scheduling_options.custom_schedule`.
       enum:
         - "default"
         - "show_no_data"
@@ -12735,12 +13050,22 @@ components:
         - type
         - requests
       type: object
+    PublishedDatasetProvider:
+      description: >-
+        Product page that published the dataset queried by a `DatasetListQuery`. `ddsql_query` is the only provider currently supported for host map widgets.
+      enum:
+        - ddsql_query
+      example: ddsql_query
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY
     QuerySortOrder:
       default: desc
       description: Direction of sort.
       enum:
         - asc
         - desc
+      example: asc
       type: string
       x-enum-varnames:
         - ASC
@@ -20237,6 +20562,10 @@ components:
           $ref: "#/components/schemas/SyntheticsTestOptionsHTTPVersion"
         ignoreServerCertificateError:
           description: Ignore server certificate error for browser tests.
+          type: boolean
+        ignore_certificate_validation:
+          description: |-
+            For SSL tests, whether or not the test should ignore certificate validation.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds) for browser tests.

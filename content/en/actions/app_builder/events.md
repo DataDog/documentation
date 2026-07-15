@@ -15,7 +15,14 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 UI components can trigger reactions on an {{< ui >}}Event{{< /ui >}}. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
 

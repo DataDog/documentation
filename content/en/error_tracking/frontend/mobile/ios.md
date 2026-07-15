@@ -364,6 +364,38 @@ configuration.site = [DDSite ap2];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .uk1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 #### Instrument your webviews (optional)
 
 Add the DatadogWebViewTracking module using your preferred dependency manager.

@@ -1,16 +1,22 @@
 ---
 title: Queries
 description: Populate apps with data from Datadog APIs and integrations using queries that connect UI components with backend actions.
-aliases:
-- /app_builder/queries
 disable_toc: false
 aliases:
+    - /app_builder/queries
     - /service_management/app_builder/queries
 further_reading:
 - link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 Queries are actions that populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 

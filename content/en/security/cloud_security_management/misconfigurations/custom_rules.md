@@ -56,6 +56,37 @@ To create a rule from scratch:
 
     {{< img src="security/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
 
+## Formatting the finding description
+
+The text you enter in {{< ui >}}Say what's happening{{< /ui >}} is displayed in the finding side panel. When you write it as Markdown using the following section headers, each section is shown in a dedicated area of the finding:
+
+| Header        | Where it appears in the finding                |
+|---------------|------------------------------------------------|
+| `Description` | **What Happened**                              |
+| `Rationale`   | **What Happened** (shown with the description) |
+| `Remediation` | **Remediation** section                        |
+| `References`  | Shown separately                               |
+
+For example:
+
+```markdown
+## Description
+Explain what the misconfiguration is.
+
+## Remediation
+Describe how to remediate it.
+```
+
+Keep the following in mind:
+
+- All sections are optional and can appear in any order. A typical message uses only `## Description` and `## Remediation`.
+- Use level-2 (`##`) headers for each section. Deeper headers (for example, `###`) are treated as sub-points within a section, not as new sections.
+- Header matching is case-insensitive, but the section names must match exactly (for example, `Remediation`, not `Fix`).
+- Give each section content. A header immediately followed by another header may not render as expected.
+- If none of these headers are present, the entire message is shown as the description.
+
+This formatting also applies to rules created with the [`datadog_cloud_configuration_rule`][7] Terraform resource, where the same content is set through the resource's `message` attribute.
+
 ## Tagging misconfigurations
 
 When you create, clone, or modify Cloud Security Misconfigurations compliance rules, you can specify tags to apply to misconfigurations so that you can group, filter, and search misconfigurations by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
@@ -82,3 +113,4 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [4]: /security/cloud_security_management/guide/writing_rego_rules/
 [5]: https://app.datadoghq.com/security/
 [6]: /infrastructure/resource_catalog/schema/
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule

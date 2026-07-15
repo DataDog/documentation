@@ -28,6 +28,8 @@ Supported test frameworks:
 
 - `testing` package
 
+<div class="alert alert-info">If you use Bazel to run Go tests, use the Datadog <a href="/tests/setup/bazel/go/">Bazel rules for Go tests</a>.</div>
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Go library:

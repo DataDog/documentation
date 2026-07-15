@@ -26,9 +26,9 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 <div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized and the Kubernetes Explorer related views may be empty.</div>
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
-
 ## Prerequisites
+
+This setup supports bare metal, VMs, and Kubernetes, including managed distributions such as Amazon EKS and Google GKE. Standard EKS is tested; EKS auto mode is not. This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.152.0 or later
 - A [Datadog API key][2]
@@ -161,7 +161,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -347,7 +346,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -575,7 +573,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -758,7 +755,7 @@ For a complete list of dimensions included in the recommended configuration, inc
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
-- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces and logs, `https://otlp.<YOUR_DD_SITE>/api/v2/otlpmetrics` for metrics.
+- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
 
 #### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
@@ -801,6 +798,16 @@ The `cumulativetodelta` processor converts cumulative metrics to delta temporali
 
 The configuration sends the Collector's own metrics back to its local OTLP receiver (`http://localhost:4318`). This routes the Collector's internal metrics through its own pipelines so they are enriched with resource attributes before being exported to Datadog.
 
+## OTLP intake limits
+
+Datadog enforces the following limits when ingesting OTLP data. Data that exceeds a limit is rejected or dropped as noted.
+
+**Payload size**
+: Each intake endpoint enforces a maximum payload size per request. Requests above the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit. For the payload size limit of each endpoint, see [Intake limits][8].
+
+**Histogram bucket count**
+: Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -811,4 +818,6 @@ The configuration sends the Collector's own metrics back to its local OTLP recei
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
+[7]: /opentelemetry/compatibility/
+[8]: /opentelemetry/setup/otlp_ingest/#intake-limits
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

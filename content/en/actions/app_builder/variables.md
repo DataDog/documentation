@@ -12,7 +12,14 @@ further_reading:
 - link: "/actions/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 If you want to encapsulate logic within your app, you can use state variables.
 

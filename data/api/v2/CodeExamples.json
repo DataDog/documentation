@@ -594,6 +594,13 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "ListDORADeployments": [
+    {
+      "group": "dora_metrics",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
   "CreateDORADeployment": [
     {
       "group": "dora_metrics",

@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. Contact your Datadog representative or support to enable this feature.
+This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
 </div>
 
 Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into your ClickHouse clusters by collecting query metrics, live query samples, and completed query records to help you resolve issues and optimize query performance across your entire fleet.
@@ -46,6 +46,12 @@ Database Monitoring collects the following data from ClickHouse:
 **Query completions**
 : Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling.
 
+**Explain plans**
+: Query execution plans, collected by running `EXPLAIN` against the tables referenced by queries observed in query completions, to help diagnose query performance. Only `SELECT` statements (including `WITH` queries) support explain plan collection. All collected data, including explain plans, is obfuscated. This collection requires `SELECT` access on the tables referenced by monitored queries, in addition to the system table access described in [Setup](#setup).
+
+**Parts and merges**
+: Storage health data, including active parts, detached parts, background merges, pending mutations, and replication queue depth, collected from `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings`. This helps identify storage and replication issues, such as stalled merges or a growing replication backlog.
+
 ## Setup
 
 ### Step 1: Grant Datadog Agent access
@@ -63,13 +69,32 @@ GRANT SELECT ON system.metrics TO datadog;
 GRANT SELECT ON system.events TO datadog;
 GRANT SELECT ON system.asynchronous_metrics TO datadog;
 GRANT SELECT ON system.parts TO datadog;
+GRANT SELECT ON system.detached_parts TO datadog;
+GRANT SELECT ON system.merges TO datadog;
+GRANT SELECT ON system.mutations TO datadog;
+GRANT SELECT ON system.replication_queue TO datadog;
+GRANT SELECT ON system.merge_tree_settings TO datadog;
 GRANT SELECT ON system.replicas TO datadog;
 GRANT SELECT ON system.dictionaries TO datadog;
 GRANT SELECT ON system.processes TO datadog;
 GRANT SELECT ON system.query_log TO datadog;
 ```
 
-The `system.processes` and `system.query_log` grants are required for DBM query collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+
+<div class="alert alert-info">
+The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do <strong>not</strong> grant the Agent access to your application data.
+</div>
+
+#### Optional: Grant access for explain plan collection
+
+Explain plan collection requires `SELECT` access on the tables referenced by monitored queries, not just the system tables above:
+
+```sql
+GRANT SELECT ON <database>.* TO datadog;
+```
+
+If this grant isn't provided, the Agent can't run `EXPLAIN` for queries against those tables. Query metrics, samples, and completions continue to work, but explain plans aren't collected for the affected queries, and Datadog displays a collection error for those queries.
 
 ### Step 2: Configure the Agent
 
