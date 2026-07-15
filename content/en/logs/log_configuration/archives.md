@@ -87,7 +87,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Datadog archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notes:**
@@ -236,9 +236,9 @@ Use this optional configuration step to:
 
 #### Define maximum scan size
 
-Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Archive Search or Rehydration on your Log Archives.
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Archive Search or Rehydration on your log archives.
 
-For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
+For archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
 
 **Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
@@ -445,7 +445,7 @@ Once your archive settings are successfully configured in your Datadog account, 
 
 However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
 
-After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page.
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding log archive is highlighted in the configuration page.
 
 {{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 

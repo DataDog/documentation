@@ -83,6 +83,32 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
+    - name: Preview AWS metric name filter
+      url: /api/latest/aws-integration/preview-aws-metric-name-filter/
+      identifier: aws-integration-preview-aws-metric-name-filter
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewAWSMetricNameFilter
+        unstable:
+          - v2
+        order: 20
+    - name: Get AWS metric name filter preview
+      url: /api/latest/aws-integration/get-aws-metric-name-filter-preview/
+      identifier: aws-integration-get-aws-metric-name-filter-preview
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSMetricNameFilterPreview
+        unstable:
+          - v2
+        order: 19
     - name: Create AWS CCM config
       url: /api/latest/aws-integration/create-aws-ccm-config/
       identifier: aws-integration-create-aws-ccm-config
@@ -10502,6 +10528,19 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Get a budget's custom forecast
+      url: /api/latest/cloud-cost-management/get-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-get-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomForecast
+        unstable:
+          - v2
+        order: 69
     - name: Delete a budget's custom forecast
       url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
       identifier: cloud-cost-management-delete-a-budgets-custom-forecast
@@ -10818,6 +10857,30 @@ menu:
         unstable:
           - v2
         order: 43
+    - name: Update account filters
+      url: /api/latest/cloud-cost-management/update-account-filters/
+      identifier: cloud-cost-management-update-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostAccountFilters
+        unstable: []
+        order: 71
+    - name: Get account filters
+      url: /api/latest/cloud-cost-management/get-account-filters/
+      identifier: cloud-cost-management-get-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAccountFilters
+        unstable: []
+        order: 70
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -13143,6 +13206,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined role
+      url: /api/latest/incidents/update-an-incident-user-defined-role/
+      identifier: incidents-update-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 60
+    - name: Get an incident user-defined role
+      url: /api/latest/incidents/get-an-incident-user-defined-role/
+      identifier: incidents-get-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 59
+    - name: Delete an incident user-defined role
+      url: /api/latest/incidents/delete-an-incident-user-defined-role/
+      identifier: incidents-delete-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 61
+    - name: Create an incident user-defined role
+      url: /api/latest/incidents/create-an-incident-user-defined-role/
+      identifier: incidents-create-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 58
+    - name: List incident user-defined roles
+      url: /api/latest/incidents/list-incident-user-defined-roles/
+      identifier: incidents-list-incident-user-defined-roles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedRoles
+        unstable:
+          - v2
+        order: 57
     - name: Update an incident user-defined field
       url: /api/latest/incidents/update-an-incident-user-defined-field/
       identifier: incidents-update-an-incident-user-defined-field
@@ -15805,6 +15933,18 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
+    - name: Get on-call responders for a schedule
+      url: /api/latest/on-call/get-on-call-responders-for-a-schedule/
+      identifier: on-call-get-on-call-responders-for-a-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallResponders
+        unstable: []
+        order: 22
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
@@ -16286,6 +16426,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List org group policy suggestions
+      url: /api/latest/org-groups/list-org-group-policy-suggestions/
+      identifier: org-groups-list-org-group-policy-suggestions
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicySuggestions
+        unstable:
+          - v2
+        order: 21
     - name: Update an org group policy override
       url: /api/latest/org-groups/update-an-org-group-policy-override/
       identifier: org-groups-update-an-org-group-policy-override
@@ -17078,6 +17231,30 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Print a report
+      url: /api/latest/report-schedules/print-a-report/
+      identifier: report-schedules-print-a-report
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PrintReport
+        unstable: []
+        order: 9
+    - name: List dataset report schedules
+      url: /api/latest/report-schedules/list-dataset-report-schedules/
+      identifier: report-schedules-list-dataset-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatasetReportSchedules
+        unstable: []
+        order: 8
     - name: Reporting And Sharing
       url: /api/latest/reporting-and-sharing/
       identifier: reporting-and-sharing

@@ -57,7 +57,7 @@ Once sensitive data in logs is sent to the Datadog platform, it may exist in a n
 
 * Datadog [Indexes][5] are where logs are stored in Datadog until they age out according to index retention. Focus should be on Datadog Indexes as other locations are less likely to be a compliance concern. Check [indexes filters][6] and [exclusion filters][7] to see if logs with sensitive data are indexed.
 
-* Log [Archives][8], which is where Datadog sends logs to be stored. Set up Archive Filters to see if your archive contains sensitive logs.
+* Log [Archives][8], which is where Datadog sends logs to be stored. Set up archive filters to see if your archive contains sensitive logs.
 
 * [Metrics generated from logs][9], which stores aggregated metrics. Sensitive data may have been discarded with this process. Check custom metrics filters to see if logs with sensitive data are processed.
 
