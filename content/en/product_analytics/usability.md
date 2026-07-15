@@ -22,7 +22,7 @@ Usability Issue Detection is in Preview. Complete the form to request access.
 
 ## Overview
 
-Usability Issue Detection reviews real user sessions, finds where users hit friction, and surfaces it as a ranked list of issues. Each issue includes a severity, a category, a session replay that shows the problem, and any related errors. An issue reflects user-visible friction, such as repeated attempts, abandonment, getting stuck, or straying from the intended path.
+Usability Issue Detection reviews real user sessions, finds where users experience friction, and surfaces it as a ranked list of issues. Each issue includes a severity, a category, a session replay that shows the problem, and any related errors. An issue reflects user-visible friction, such as repeated attempts, abandonment, getting stuck, or straying from the intended path.
 
 Detected issues fall into three categories:
 
