@@ -1,8 +1,3 @@
----
-build:
-  render: never
-  list: never
----
 {{< tabs >}}
 {{% tab "API Security" %}}
 

@@ -1,8 +1,3 @@
----
-build:
-  render: never
-  list: never
----
 {{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
@@ -110,6 +105,11 @@ These attributes are present on all security findings and describe the fundament
       <td><code>status</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>, <code>resolved</code>, <code>in-progress</code>.</td>
+    </tr>
+    <tr>
+      <td><code>time_to_acknowledge</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@time_to_acknowledge</code><br>Time in seconds between when the finding was first detected and when it was acknowledged through assignment or ticket creation.</td>
     </tr>
     <tr>
       <td><code>time_to_resolution</code></td>
@@ -1844,7 +1844,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -1978,7 +1978,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2112,7 +2112,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2246,7 +2246,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2380,7 +2380,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2514,7 +2514,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2694,7 +2694,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2828,7 +2828,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2962,7 +2962,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3096,7 +3096,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3230,7 +3230,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3364,7 +3364,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -4665,6 +4665,11 @@ Information specific to secret findings, such as the secret's validation status.
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code>is_git_history_only</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@secret.is_git_history_only</code><br><code>true</code> if the secret was found only in past commits and is not present at the branch <code>HEAD</code>, <code>false</code> if it is present in the current code.</td>
+    </tr>
     <tr>
       <td><code>validation_status</code></td>
       <td>string</td>
