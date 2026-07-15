@@ -132,11 +132,11 @@ For [component metrics][13] and [destination buffer metrics][14] emitted by all 
 - The `component_type` tag is `kafka` for Kafka destination metrics.
 
 `pipelines.kafka_produced_messages_total`
-: **Description**: The number of messages produced to Kafka brokers.
+: **Description**: The number of messages produced and sent to Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_produced_messages_bytes_total`
-: **Description**: The number of message bytes produced to Kafka brokers.
+: **Description**: The number of message bytes produced and sent to Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_queue_messages`
