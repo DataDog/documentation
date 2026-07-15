@@ -1,21 +1,19 @@
 ---
 
 title: Monitoring AWS Lambda Durable Functions
-description: Install and configure the Datadog Agent for AWS Lambda Durable Functions.
+description: Set up Datadog Serverless Monitoring for AWS Lambda Durable Functions.
 
 ---
 
-Datadog provides full visibility into the metrics, logs, and traces for AWS Lambda Durable Function executions. You can monitor your AWS Lambda Durable Functions alongside your other serverless compute services in a single, unified view. This enables you to spot bottlenecks and fix errors effectively.
+Datadog provides full visibility into the metrics, logs, and traces for AWS Lambda Durable Function executions. In a single view, you can monitor your AWS Lambda Durable Functions alongside your other serverless compute services to spot bottlenecks and fix errors.
 
-<div class="alert alert-info">
-<strong>Supported runtimes</strong>: Python, Node.js
-</div>
+**Supported runtimes:** Python, Node.js
 
 ## Setup
 
 ### Instrument your Lambda function
 
-1. Complete [the common steps for instrumenting a Lambda function][1]. Make sure the Datadog Lambda Library is installed and tracing is enabled, using at least the following versions:
+1. Follow [the steps for instrumenting a Lambda function][1]. Make sure the Datadog Lambda Library is installed and tracing is enabled. Use at least the following versions:
 
     - Datadog Lambda Extension: v98+
     - Datadog Python Lambda layer: v126+
@@ -31,14 +29,15 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
 
 Deploy the CloudFormation stack to your AWS account to forward durable execution status change events to Datadog:
 
-[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)][2]
+1. Log in to the AWS account and region where your durable functions run, then click **Launch Stack** to open the stack:
 
-1. Log in to the AWS account and region where your durable functions run, then open the stack created by the button above.
+   [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)][2]
+
 2. Provide your Datadog API key using exactly one of the following parameters:
 
-    - `DdApiKey`: your [Datadog API key][3] in plaintext.
-    - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key.
-    - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key.
+    - `DdApiKey`: your [Datadog API key][3] in plaintext
+    - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key
+    - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key
 
 3. Set `DdSite` to your [Datadog site][4]. The default is `datadoghq.com`.
 4. Optionally, restrict which events are forwarded:
