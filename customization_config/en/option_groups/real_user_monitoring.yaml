@@ -6,8 +6,8 @@ rum_sdk_platform_options:
 
 rum_sdk_platform_options_v2:
   - id: browser
-  - id: android
     default: true
+  - id: android
   - id: ios
   - id: react_native
   - id: flutter
@@ -20,8 +20,8 @@ rum_sdk_profiling_options:
 
 rum_session_replay_sdk_options:
   - id: browser
-  - id: android
     default: true
+  - id: android
   - id: ios
   - id: kotlin_multiplatform
   - id: maui
