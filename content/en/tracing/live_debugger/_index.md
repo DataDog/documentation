@@ -57,7 +57,7 @@ Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requir
 
 ### Minimum SDK versions
 
-Live Debugger requires the following minimum SDK versions:
+Live Debugger requires the following minimum Datadog SDK versions:
 
 - [Java][6] ≥ 1.64.0
 - [Python][5] ≥ 4.11.0
