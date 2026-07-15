@@ -7,7 +7,9 @@ description: Install and configure the Datadog Agent for AWS Lambda Durable Func
 
 Datadog provides full visibility into the metrics, logs, and traces for AWS Lambda Durable Function executions. You can monitor your AWS Lambda Durable Functions alongside your other serverless compute services in a single, unified view. This enables you to spot bottlenecks and fix errors effectively.
 
-Supported runtimes: Python, Node.js
+<div class="alert alert-info">
+<strong>Supported runtimes</strong>: Python, Node.js
+</div>
 
 ## Setup
 
