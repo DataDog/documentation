@@ -13,10 +13,10 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 Datadog offers two billing plans for host-based products, such as Infrastructure Monitoring, APM, and Database Monitoring:
 
-- **High watermark plan (HWMP)**: Datadog meters your host count each hour. At the end of the month, Datadog bills you on the maximum count (high-water mark) of the lower 99 percent of those hourly readings, excluding the top 1 percent to reduce the impact of short usage spikes on your bill. This plan is well-suited to environments with stable usage throughout the month.
+- **High watermark plan (HWMP)**: Datadog meters your host count each hour. At the end of the month, Datadog bills you on the maximum count (high-water mark) of the lower 99% of those hourly readings, excluding the top 1% to reduce the impact of short usage spikes on your bill. This plan is well-suited to environments with stable usage throughout the month.
 - **Hybrid monthly/hourly plan (MHP)**: You commit to a monthly minimum, and any host hours above that commitment are billed at an hourly rate. Because usage above the commitment is billed hourly, this plan is well-suited to ephemeral environments, such as autoscaling fleets or short-lived workloads.
 
-The following sections describe the most common pricing units for each product:
+The following sections describe the most common pricing units for each product.
 
 ## Infrastructure monitoring
 
