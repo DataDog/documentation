@@ -37,6 +37,19 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 ## Releases
 
+### v0.1.31 — 2026-07-08
+
+*Bundled in chart: `0.4.5`.*
+
+#### Changed
+- Fixes single-token phrase prefix queries on raw fields so `match_phrase_prefix` searches return all matching prefix terms instead of being capped by `max_expansions`.
+- Up to 3x faster intersection for selective terms queries with time range.
+#### Helm chart changes
+- Adds `indexer.volumeAttributesClass` and `searcher.volumeAttributesClass` values to provision Kubernetes `VolumeAttributesClass` resources for indexer and searcher persistent volumes. Use these values to tune volume attributes such as IOPS and throughput. This feature is disabled by default, requires Kubernetes 1.31 or later, and requires `driverName` when enabled.
+- Fixes the Kubernetes advertise address by setting `KUBERNETES_POD_IP` from the pod IP instead of the pod name.
+- Disables `serviceAccount.automountServiceAccountToken` by default to reduce token exposure on pods that do not need Kubernetes API access.
+- Enables `securityContext.readOnlyRootFilesystem` by default across workloads for defense-in-depth hardening.
+
 ### v0.1.30 — 2026-06-30
 
 *Bundled in chart: `0.4.3`.*

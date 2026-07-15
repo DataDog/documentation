@@ -120,7 +120,7 @@ After the initial sync completes, create a [Data Observability monitor][14] to s
 [5]: https://cloud.google.com/iam/docs/roles-permissions/monitoring#monitoring.viewer
 [6]: https://cloud.google.com/iam/docs/roles-permissions/cloudasset#cloudasset.viewer
 [7]: https://cloud.google.com/iam/docs/roles-permissions/browser#browser
-[8]: https://app.datadoghq.com/datasets/settings/integrations
+[8]: https://app.datadoghq.com/data-obs/settings/integrations
 [9]: https://cloud.google.com/monitoring/api/enable-api
 [10]: https://cloud.google.com/asset-inventory/docs/reference/rest
 [11]: https://cloud.google.com/compute/docs/reference/rest/v1

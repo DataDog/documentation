@@ -743,6 +743,10 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 
 Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
 
+### Restrict network access
+
+To control which networks can connect to the Datadog MCP Server, enable the [IP allowlist][68]. This prevents users from connecting to the MCP Server from unapproved origins, even if they have the required permissions.
+
 ## Authentication
 
 For most users, OAuth 2.0 is the recommended authentication method, and your MCP client handles it during setup. Use one of the header-based methods below only when you cannot complete the OAuth flow, for example on a server or in a CI environment.
@@ -934,3 +938,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
 [66]: /account_management/personal-access-tokens/
 [67]: /account_management/service-access-tokens/
+[68]: /account_management/org_settings/ip_allowlist/
