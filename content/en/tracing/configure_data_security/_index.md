@@ -397,10 +397,9 @@ apm_config:
 * `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
 * `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing one or more digits are replaced by "?".
 
-**Note**: If you are using the [Datadog Lambda Extension][2], set `DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_QUERY_STRING` and `DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS` instead.
+**Note**: If you are using the Datadog Lambda Extension, set `DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_QUERY_STRING` and `DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS` instead.
 
 [1]: /tracing/glossary/#spans
-[2]: /serverless/libraries_integrations/extension/
 {{% /tab %}}
 {{% tab "Stack Traces" %}}
 
