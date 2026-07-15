@@ -134,6 +134,10 @@ nav_sections:
         link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
+      - title: Experiments
+        link: experiments/
+        icon: experiment-wui
+        desc: Plan, run, and analyze A/B tests to measure the impact of product changes
   - nav_section:
     - name: 'Software Delivery'
     - navtiles:

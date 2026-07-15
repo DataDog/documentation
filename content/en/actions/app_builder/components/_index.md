@@ -18,7 +18,14 @@ further_reading:
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 

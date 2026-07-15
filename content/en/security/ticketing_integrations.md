@@ -102,7 +102,7 @@ The following steps set up bidirectional syncing with Jira and verify that setup
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}Jira{{< /ui >}}. The button opens a {{< ui >}}Jira Ticket{{< /ui >}} modal.
    3. Verify that the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section exists and bidirectional sync is enabled.
 
-{{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
+{{< img src="security/jira_modal-1.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
@@ -130,6 +130,8 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
    1. Open [any product supporting bidirectional ticket syncing][20].     
    2. Locate the ticketing dropdown option in the explorer or finding page and select {{< ui >}}ServiceNow{{< /ui >}}. The button opens a {{< ui >}}ServiceNow Ticket{{< /ui >}} modal.
    3. Verify that the bidirectional sync is enabled for the configured {{< ui >}}Instance{{< /ui >}} and {{< ui >}}Assignment Group{{< /ui >}}.
+
+{{< img src="security/servicenow_modal.png" alt="Modal used to create a ServiceNow ticket for a Security finding, with two-way sync and statuses mapping enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
@@ -234,6 +236,8 @@ The following steps create a bidirectional ticket for a Security finding.
 
 ### Manage bidirectional Case Management tickets
 
+**Note**: For help resolving bidirectional sync issues, see [Case Management troubleshooting][24].
+
 {{< tabs >}}
 
 {{% tab "Jira" %}}
@@ -242,11 +246,11 @@ Existing bidirectional Jira tickets are listed in the finding's {{< ui >}}Ticket
 
 Here's an example from a Static Code (SAST) finding:
 
-{{< img src="security/bidir-jira-existing.png" alt="finding with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing-1.png" alt="finding with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
 
 Hover over the Jira ticket to see its details.
 
-{{< img src="security/bidir-jira-existing-hover.png" alt="Mouseover state for pill in previous image. Modal with Jira ticket details." responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing-hover-1.png" alt="Mouseover state for pill in previous image. Modal with Jira ticket details." responsive="true" style="width:100%;">}}
 
 Details such as assignee and status are provided along with a timeline of the Jira issue and Datadog case changes.
 
@@ -261,7 +265,11 @@ In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is pro
 
 Existing bidirectional ServiceNow tickets are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.
 
-Hover over the ServiceNow ticket to see its details, including status, priority, and a timeline of changes synced between ServiceNow and Datadog.
+{{< img src="security/bidir-servicenow-existing.png" alt="Finding with an existing ServiceNow ticket: in the Next Steps section, under Tracking, a ServiceNow View incident pill." responsive="true" style="width:100%;">}}
+
+Hover over the ServiceNow ticket to see its details, including status and a timeline of changes synced between ServiceNow and Datadog.
+
+{{< img src="security/bidir-servicenow-existing-hover.png" alt="Tooltip over a ServiceNow ticket pill showing the incident number, status, and a timeline of changes synced between ServiceNow and Datadog." responsive="true" style="width:100%;">}}
 
 In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
@@ -340,4 +348,5 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
 [23]: /integrations/linear/
+[24]: /incident_response/case_management/troubleshooting/
 [30]: /security/assignee_management/

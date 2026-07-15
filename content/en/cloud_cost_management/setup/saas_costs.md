@@ -120,11 +120,11 @@ Notes:
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
 5. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
-Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
+Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
 ```sql
-GRANT USE CATALOG ON CATALOG system TO <service_principal>;
-GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
-GRANT SELECT ON CATALOG system TO <service_principal>;
+GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
+GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
+GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 ```
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
@@ -599,7 +599,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `org_id` | The unique identifier of the Anthropic organization. |
 | `org_name` | A tag-normalized version of the Anthropic organization's name. |
 | `display_org_name` | The unaltered name of the organization. |
-| `org_type` | The type of Anthropic account (for example, `enterprise`). Displays `N/A` for non-enterprise accounts. |
+| `org_type` | The type of Anthropic account (for example, `enterprise` or `platform`). |
 | `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
 | `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |

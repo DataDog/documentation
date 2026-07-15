@@ -92,7 +92,7 @@ sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 sudo tee /etc/yum.repos.d/datadog-security-cli.repo > /dev/null <<'EOF'
 [datadog-security-cli]
 name=Datadog Security CLI
-baseurl=https://yum.datadoghq.com/stable/datadog-security-cli/\$basearch/
+baseurl=https://yum.datadoghq.com/stable/datadog-security-cli/$basearch/
 enabled=1
 gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
