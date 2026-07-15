@@ -645,13 +645,13 @@ Depending on your use case, configure either an [Application Load Balancer][22] 
 
 ## Upgrade the Worker
 
-To upgrade the Worker, update the `image` field in your container definition to the new version, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+To upgrade the Worker, update the `image` field in your container definition, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
 
 ```json
 "image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
 ```
 
-After updating the task definition, restart the ECS tasks to use the updated image.
+Restart the ECS tasks to use the updated image.
 
 **Note**: If your container definition doesn't specify a version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
 
@@ -690,16 +690,16 @@ To upgrade the Worker:
         datadog/observability-pipelines-worker run
     ```
 
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<DATADOG_SITE>`: The [Datadog site][11].
     - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
         - See [Environment Variables][7] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
         - See [Environment Variables][7] for a list of destination environment variables.
 {% /if %}
 
@@ -715,7 +715,7 @@ To upgrade the Worker:
         datadog/observability-pipelines-worker run
     ```
 
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
