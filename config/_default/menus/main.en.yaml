@@ -7679,26 +7679,31 @@ menu:
       parent: security_platform
       identifier: automation_pipelines
       weight: 4
+    - name: Modify Severity Level
+      url: security/automation_pipelines/modify_severity
+      parent: automation_pipelines
+      identifier: automation_pipelines_modify_severity
+      weight: 10001
     - name: Mute
       url: security/automation_pipelines/mute
       parent: automation_pipelines
       identifier: automation_pipelines_mute
-      weight: 10001
-    - name: Add to Security Inbox
-      url: security/automation_pipelines/security_inbox
-      parent: automation_pipelines
-      identifier: automation_pipelines_inbox
       weight: 10002
     - name: Set Due Date Rules
       url: security/automation_pipelines/set_due_date
       parent: automation_pipelines
       identifier: automation_pipelines_due_date
       weight: 10003
+    - name: Add to Security Inbox
+      url: security/automation_pipelines/security_inbox
+      parent: automation_pipelines
+      identifier: automation_pipelines_inbox
+      weight: 10004
     - name: Create Tickets
       url: security/automation_pipelines/create_ticket
       parent: automation_pipelines
       identifier: automation_pipelines_create_ticket
-      weight: 10004
+      weight: 10005
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform

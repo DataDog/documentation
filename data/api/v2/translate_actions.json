@@ -3864,8 +3864,12 @@
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
   "GetScheduleOnCallUser": {
-    "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
+    "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
+  },
+  "GetScheduleOnCallResponders": {
+    "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
+    "summary": "Get on-call responders for a schedule"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",

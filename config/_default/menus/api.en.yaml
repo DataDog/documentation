@@ -15844,6 +15844,18 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
+    - name: Get on-call responders for a schedule
+      url: /api/latest/on-call/get-on-call-responders-for-a-schedule/
+      identifier: on-call-get-on-call-responders-for-a-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallResponders
+        unstable: []
+        order: 22
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user

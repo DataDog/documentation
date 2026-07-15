@@ -41,6 +41,7 @@ cascade:
     {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}AWS integration multi-account setup for Organizations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}AWS integration manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}Configure AWS metric name filters with the API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitor your AWS billing details{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Amazon Data Firehose{{< /nextlink >}}
