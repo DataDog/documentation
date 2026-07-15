@@ -256,7 +256,21 @@ These metrics are emitted by sources that receive data over HTTP, such as the Da
 
 ## HTTP client metrics
 
-These metrics are emitted by destinations that send data over HTTP, such as Datadog Logs, Datadog Metrics, Elasticsearch, OpenSearch, New Relic, Splunk HEC, Microsoft Sentinel, SentinelOne, CrowdStrike NG-SIEM, Google SecOps, and the HTTP Client destination. **Note**: AWS-based destinations (such as Amazon S3, Amazon OpenSearch, and Amazon Security Lake) do not emit these metrics.
+These metrics are emitted by destinations that send data over HTTP, including:
+
+- Datadog Logs
+- Datadog Metrics
+- Elasticsearch
+- OpenSearch
+- New Relic
+- Splunk HEC
+- Microsoft Sentinel
+- SentinelOne
+- CrowdStrike NG-SIEM
+- Google SecOps
+- HTTP Client destination
+
+**Note**: AWS-based destinations (such as Amazon S3, Amazon OpenSearch, and Amazon Security Lake) do not emit these metrics.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the destination type.
