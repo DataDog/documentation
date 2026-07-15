@@ -380,6 +380,23 @@ For Docs and Links you can also access a specific item with the following syntax
 ```
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="Query group by device_ip and device_namespace" level="h5" %}}
+
+If your monitor triggers an alert for each `device_ip` and `device_namespace`, then you can access any attribute of the network device.
+
+Network device metadata variables:
+- Device ID: `{{network_device.device_id}}`
+- Device namespace: `{{network_device.device_namespace}}`
+- Device type: `{{network_device.device_type}}`
+
+The following table contains all available attributes:
+
+| Variable syntax   | First level attributes |
+|-------------------|------------------------|
+| `{{network_device.device_id}}`     | `canonical_id`, `name`, `description`, `model`, `vendor`, `device_type`, `os_name`, `os_version`, `os_hostname`, `ip_address`, `subnet`, `location`, `serial_number`, `version`, `product_name`, `sys_object_id`, `profile`, `status`, `ping_status`, `integration`, `namespace`, `tags`, `id_tags`, `in`|
+{{% /collapse-content %}}
+
 ### Matching attribute/tag variables
 
 You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
