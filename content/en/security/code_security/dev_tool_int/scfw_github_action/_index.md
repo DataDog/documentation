@@ -97,7 +97,7 @@ steps:
 | `on-warning` | Action that SCFW should take on warning-level findings: `ALLOW` or `BLOCK`. Defaults to `BLOCK` in non-interactive environments. | — |
 | `package-minimum-age` | Minimum age in hours a package must have before installation is allowed. | `24` |
 | `dd-env` | Datadog environment tag attached to all forwarded firewall events. | `ci` |
-| `dd-log-attributes` | A JSON object of custom attributes to attach to all forwarded Datadog log events (e.g., `'{"team":"security"}'`). | — |
+| `dd-log-attributes` | A JSON object of custom attributes to attach to all forwarded Datadog log events (for example, `'{"team":"security"}'`). | — |
 
 ## Outputs
 
