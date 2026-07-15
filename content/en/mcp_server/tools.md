@@ -1045,6 +1045,70 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Product Analytics
+
+Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
+
+<div class="alert alert-info">The <code>product-analytics</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `search_product_analytics_events`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Finds Product Analytics views and actions matching a natural-language description using semantic search, including org-curated labeled actions.
+
+- Find the view and action for adding an item to the cart.
+- What's the event for completing checkout?
+
+### `search_product_analytics_org_entities`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Looks up org-specific Product Analytics entities by name or keyword (feature flags, context attribute keys, saved charts, and segments).
+
+- Find the segment for "power users".
+- What feature flags are available to filter Product Analytics data by?
+
+**Note**: Use the segment filter expression returned by this tool verbatim rather than constructing one manually.
+
+### `get_product_analytics_saved_chart`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` and `Product Analytics Saved Widgets Read`*\
+Retrieves the full definition of a saved Product Analytics chart by ID, including its query parameters, filters, and time interval. Use `search_product_analytics_org_entities` first to find the chart ID.
+
+- Load the saved chart `abc-123-def` and show me its query parameters.
+- Reproduce the "weekly retention" saved chart with an updated time range.
+
+### `aggregate_product_analytics_events`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates Product Analytics event data as a scalar or timeseries, supporting count, cardinality, average, sum, min, max, and percentile calculations with optional grouping.
+
+- How many sessions did we have today?
+- Show me daily active users over the past 30 days.
+
+### `run_product_analytics_journey`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs funnel, timeseries, scalar, list, and drop-off queries across a multi-step user journey, tracked at the user, session, or account level.
+
+- What's the conversion rate from viewing a product to completing checkout?
+- Show me the users who dropped off between adding to cart and checkout.
+
+### `run_product_analytics_pathway`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs a Sankey (pathway) analysis showing how users navigate between views, starting from a source view or leading to a target view.
+
+- What are the most common paths users take after landing on the home page?
+- Show me the pathways that lead to the checkout page.
+
+### `run_product_analytics_retention`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs retention queries on Product Analytics data as a cohort grid, retention curve, timeseries, or scalar value, tracked at the user or account level.
+
+- Show me the weekly retention grid for users who signed up in the last quarter.
+- What's the day-7 retention rate for users who joined in January?
+
 ## Profiling
 Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
 
@@ -1603,6 +1667,26 @@ Unblocks a previously denylisted entity by setting its expiration in the past.
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
 
+## Session Replay
+
+Tools for searching [Session Replay][69] recordings and summarizing session activity.
+
+### `search_replays`
+*Toolset: **session-replay***\
+*Permissions Required: `RUM Apps Read`*\
+Searches Session Replay recordings and returns matching sessions. Supports filtering by user identity, device, error count, or any RUM facet, and journey search for sessions that followed a specific sequence of views or actions.
+
+- Find replays of sessions with more than 2 errors in the last 24 hours.
+- Show me replays of users who followed the checkout journey but didn't complete it.
+
+### `get_replay_summary`
+*Toolset: **session-replay***\
+*Permissions Required: `RUM Apps Read` and `RUM Session Replay Read`*\
+Generates an AI-powered, time-based play-by-play of what a user did during a specific session replay—pages visited, actions taken, and key moments—organized into chapters. Typically called after `search_replays` to dive into a session of interest.
+
+- Summarize what happened in session `abc-123-def`.
+- Give me a play-by-play of the replay for the user who reported a checkout error.
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
@@ -1904,3 +1988,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [65]: /code_coverage/
 [66]: /delivery_performance/dora_metrics/
 [67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[68]: /product_analytics/
+[69]: /session_replay/
