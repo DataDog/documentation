@@ -25,7 +25,7 @@ Synthetic tests collect [metrics][1] that measure the following:
 
 The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (such as DNS resolution and TCP connection) correspond to the last request. 
 
-For example, an HTTP test with **Follow Redirects** selected loads Page A for a total of `35 ms`, which redirects to Page B, which loads for a total of `40 ms`, and redirects to Page C. The redirect timing is calculated as `35 ms + 40 ms = 75 ms` and the load time of Page C is split among all other timings including DNS resolution and TCP connection.
+For example, an HTTP test with {{< ui >}}Follow Redirects{{< /ui >}} selected loads Page A for a total of `35 ms`, which redirects to Page B, which loads for a total of `40 ms`, and redirects to Page C. The redirect timing is calculated as `35 ms + 40 ms = 75 ms` and the load time of Page C is split among all other timings including DNS resolution and TCP connection.
 
 For more information about follow redirects, see [HTTP Tests][2].
 

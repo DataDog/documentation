@@ -21,7 +21,7 @@ Tags are especially powerful when consistent across the Datadog platform. First-
 With these tags, you can:
 
 - Navigate seamlessly across metrics, traces, and logs with consistent tags
-- Filter your functions on the Serverless Homepage
+- Filter your functions on the {{< ui >}}Serverless Homepage{{< /ui >}}
 - View service data based on environment or version in a unified fashion within the Datadog app
 - Organize your service map by service and environment
 
@@ -52,7 +52,7 @@ Add the `version` tag to enable [Deployment Tracking][3].
 
 ## Organize your service map
 
-The [Service Map][4] groups services into maps by the `env` tag, and uses the `service` tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map. The color of the nodes represents the health of the associated monitors. Tag any monitor with the same `service` tag to associate.
+The [{{< ui >}}Service Map{{< /ui >}}][4] groups services into maps by the `env` tag, and uses the `service` tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the {{< ui >}}Service Map{{< /ui >}}. The color of the nodes represents the health of the associated monitors. Tag any monitor with the same `service` tag to associate.
 
 {{< img src="serverless/serverless_service_map.png" alt="Service Map" >}}
 

@@ -107,7 +107,7 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 
 ## Enterprise networking considerations
 
-By default, the scanner creates a new VPC during deployment. If your organization is using Terraform and has Service Control Policies (SCPs) that restrict VPC creation, use the [**custom VPC**][2] option during setup to use an existing VPC instead of creating a new one.
+By default, the scanner creates a new VPC during deployment. If your organization is using Terraform and has Service Control Policies (SCPs) that restrict VPC creation, use the [{{< ui >}}custom VPC{{< /ui >}}][2] option during setup to use an existing VPC instead of creating a new one.
 
 ## Further reading
 

@@ -26,14 +26,14 @@ Use the search bar to find a specific CVE or advisory ID (for example, `CVE-2025
 
 | Filter | Description |
 |--------|-------------|
-| **Severity** | Base severity score: critical, high, medium, low |
-| **Impacted** | Indicates whether any asset in your environment is affected |
-| **Exploit Available** | Indicates whether a public exploit has been published |
-| **CISA Known Exploit** | Indicates whether the CVE appears in the CISA KEV catalog |
-| **EPSS Score** | Exploit Prediction Scoring System probability |
-| **Ecosystem** | Package ecosystem: Maven, npm, PyPI, Go, and others |
+| {{< ui >}}Severity{{< /ui >}} | Base severity score: critical, high, medium, low |
+| {{< ui >}}Impacted{{< /ui >}} | Indicates whether any asset in your environment is affected |
+| {{< ui >}}Exploit Available{{< /ui >}} | Indicates whether a public exploit has been published |
+| {{< ui >}}CISA Known Exploit{{< /ui >}} | Indicates whether the CVE appears in the CISA KEV catalog |
+| {{< ui >}}EPSS Score{{< /ui >}} | Exploit Prediction Scoring System probability |
+| {{< ui >}}Ecosystem{{< /ui >}} | Package ecosystem: Maven, npm, PyPI, Go, and others |
 
-The **Impacted** filter is the fastest way to focus on CVEs that affect libraries detected in your repositories or running services.
+The {{< ui >}}Impacted{{< /ui >}} filter is the fastest way to focus on CVEs that affect libraries detected in your repositories or running services.
 
 ## CVE details panel
 
@@ -51,9 +51,9 @@ A description of the vulnerability sourced from the NVD and the advisory databas
 
 Datadog surfaces additional risk context alongside the base severity score:
 
-- **Exploit Available**: Indicates a public exploit exists for this vulnerability, with the date it became available.
-- **CISA Known Exploit**: Flags CVEs listed in the CISA Known Exploited Vulnerabilities catalog, with the date added.
-- **High Exploitation Risk (EPSS)**: Shows the EPSS probability score, which estimates the likelihood of exploitation in the wild within the next 30 days.
+- {{< ui >}}Exploit Available{{< /ui >}}: Indicates a public exploit exists for this vulnerability, with the date it became available.
+- {{< ui >}}CISA Known Exploit{{< /ui >}}: Flags CVEs listed in the CISA Known Exploited Vulnerabilities catalog, with the date added.
+- {{< ui >}}High Exploitation Risk (EPSS){{< /ui >}}: Shows the EPSS probability score, which estimates the likelihood of exploitation in the wild within the next 30 days.
 
 {{< img src="security/code_security/cve_explorer/advisory-risks.png" alt="Risk signals showing Exploit Available and EPSS score for a CVE" style="width:100%;" >}}
 

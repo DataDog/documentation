@@ -20,7 +20,7 @@ Las alertas de tasa de consumo están disponibles para los siguientes tipos de S
 - [SLOs basados en monitores][2] que solo se componen de tipos de monitores de métricas (monitores de métrica, integración, métrica de APM, anomalía, predicción o monitores outlier) y
 - [SLOs de fragmento de tiempo][7]
 
-{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Configuración de alertas para la tasa de consumo">}}
+{{< img src="service_level_objectives/burn_rate/slo-burn-rate-alert-v2.png" alt="Configuración de alertas para la tasa de consumo">}}
 
 ## Cómo funcionan las alertas para la tasa de consumo
 

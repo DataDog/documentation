@@ -5,6 +5,8 @@
 {{ $lang := .lang }}
 {{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
 {{ $endpoint_data := .endpoint_data }}
+{{ $endpoint_path := .endpoint_path }}
+{{ $method := .method }}
 {{ $api_v1_translate_actions := .api_v1_translate_actions }}
 {{ $api_v2_translate_actions := .api_v2_translate_actions }}
 
@@ -20,13 +22,17 @@
 {{ $action_data := index $translate_actions_datafile $operationId }}
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
+
+{{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
+{{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
+
 {{ $endpoint_slug := $section_header | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
 
 {{/* When the same operationId+summary exists in both v1 and v2, both versions share one endpoint page with version tabs. Disambiguate the records by linking to the tab anchor. */}}
 {{ $other_action := cond (eq $api_version "v1") (index $api_v2_translate_actions $operationId) (index $api_v1_translate_actions $operationId) }}
-{{ if and (ne $other_action nil) (eq $other_action.summary $section_header) }}
+{{ if and (ne $other_action nil) (eq ($other_action.summary | anchorize) ($section_header | anchorize)) }}
     {{ $tab_anchor := (print $section_header "-" $api_version) | anchorize }}
     {{ $full_url = print $full_url "#" $tab_anchor }}
     {{ $relpermalink = print $relpermalink "#" $tab_anchor }}

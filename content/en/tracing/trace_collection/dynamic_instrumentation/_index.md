@@ -55,7 +55,7 @@ The following permissions are required to use Dynamic Instrumentation:
 - One of the following write permissions:
   - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify instrumentations in any environment.
   - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
-- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the {{< ui >}}Capture method parameters and local variables{{< /ui >}} option.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
@@ -140,9 +140,9 @@ Metric instrumentations are automatically enabled on all service instances that 
 
 Dynamic Instrumentation supports the following metric types:
 
-- **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
-- **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
-- **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+- {{< ui >}}Count{{< /ui >}}: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- {{< ui >}}Gauge{{< /ui >}}: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- {{< ui >}}Histogram{{< /ui >}}: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 ### Creating dynamic spans
 
@@ -168,7 +168,6 @@ To create a dynamic span tag:
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
-
 
 You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].
 

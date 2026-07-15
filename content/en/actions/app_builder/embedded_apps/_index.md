@@ -8,7 +8,14 @@ further_reading:
 - link: "https://app.datadoghq.com/actions/action-catalog/"
   tag: "App"
   text: "Action Catalog"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 When you have Datadog App Builder apps embedded in your dashboards, you can take direct actions on your resources, and all of the relevant data and context is immediately available. Link your app with the dashboard's time frame and template variables to dynamically set the scope of the app's actions, which allows you to carry out actions in your environment at any needed scope.
 
@@ -16,11 +23,11 @@ When you have Datadog App Builder apps embedded in your dashboards, you can take
 
 Add a previously published app to your dashboard by dragging the {{< ui >}}App{{< /ui >}} widget type out of the dashboard's widget tray:
 
-{{< img src="/service_management/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
+{{< img src="/actions/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
 
 The App Editor modal appears, allowing you to select an app and provide it with a title:
 
-{{< img src="/service_management/app_builder/embedded_apps/app-editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
+{{< img src="/actions/app_builder/embedded_apps/app-editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
 
 ## Sync your app with dashboard template and time frame variables
 
@@ -28,7 +35,7 @@ You can link your app to template variables anywhere that supports template expr
 
 When you change the value of a template variable or time frame on the dashboard, the linked app elements update automatically. For example, when you select an `instance_id` value using the template variable dropdown or directly from a graph, the `instance_id` value is added to the app's filter. This allows you to perform actions on that specific instance:
 
-{{< img src="service_management/app_builder/embedded_apps/template_variables.mp4" alt="Selecting a template variable value from a graph" video="true">}}
+{{< img src="actions/app_builder/embedded_apps/template_variables.mp4" alt="Selecting a template variable value from a graph" video="true">}}
 
 
 ### Template variable examples

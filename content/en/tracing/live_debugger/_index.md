@@ -227,9 +227,9 @@ Each service and environment is in one of three modes on the Live Debugger Setti
 
 The following permissions are required to use Live Debugger:
 
-- **Live Debugger Read** (`live_debugger_read`) - Required to access the Live Debugger page.
-- **Live Debugger Write** (`live_debugger_write`) - Required to create or modify Debug Sessions and logpoints.
-- **Live Debugger Redaction Write** (`live_debugger_redaction_write`) - Required to change the [redaction mode][24] for captured data.
+- **Live Debugger Read** (`live_debugger_read`): Required to access the Live Debugger page.
+- **Live Debugger Write** (`live_debugger_write`): Required to create or modify Debug Sessions and logpoints.
+- **Live Debugger Redaction Write** (`live_debugger_redaction_write`): Required to change the [redaction mode][24] for captured data.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
 
@@ -255,8 +255,8 @@ Live Debugger.
 A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
 
 1. Start a Debug Session from one of the following locations:
-   - On the [Live Debugger page][13], click **Create Debug Session**.
-   - (Requires the [Code Origin][20] feature) In the [Trace Explorer][14], open a trace, locate the Code Origin section in the side panel, and click **Start Debug Session**.
+   - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}}.
+   - (Requires the [Code Origin][20] feature) In the [Trace Explorer][14], open a trace, locate the Code Origin section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
 2. Add a logpoint to begin collecting diagnostic data.
 3. Add, remove, or modify logpoints as needed during the session.
 
@@ -267,7 +267,7 @@ Debug Sessions expire automatically. You can also manually disable or re-enable 
 Logpoints are "non-breaking breakpoints" that specify where in the code to capture information, what data to include, and under what conditions. To add a logpoint for debugging:
 
 1. Go to the [Live Debugger page][13].
-2. Click **Create Debug Session**.
+2. Click {{< ui >}}Create Debug Session{{< /ui >}}.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [expression language][15].
 5. (Optional) Enable "Capture Variables" to collect all execution context (this feature is rate-limited to 1 execution per second).
@@ -277,7 +277,7 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. Live Debugger applies automatic mode- and identifier-based redaction to help protect sensitive data before captured data becomes available.
+Live Debugger data might contain sensitive information, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
 
 #### Mode-based redaction
 

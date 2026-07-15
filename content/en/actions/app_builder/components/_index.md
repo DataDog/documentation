@@ -5,20 +5,27 @@ disable_toc: true
 aliases:
     - /service_management/app_builder/components
 further_reading:
-- link: "/service_management/app_builder/tables/"
+- link: "/actions/app_builder/components/tables/"
   tag: "Documentation"
   text: "Tables"
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/expressions/"
+- link: "/actions/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
@@ -1322,16 +1329,16 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 <br>Do you have questions or feedback? Join the {{< ui >}}#app-builder{{< /ui >}} channel on the [Datadog Community Slack][5].
 
 
-[1]: /service_management/app_builder/events
+[1]: /actions/app_builder/events
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
 [5]: https://chat.datadoghq.com/
-[6]: /service_management/app_builder/components/tables/
-[7]: /service_management/app_builder/expressions
+[6]: /actions/app_builder/components/tables/
+[7]: /actions/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
-[9]: /service_management/app_builder/events/#state-functions
-[10]: /service_management/app_builder/components/custom_charts/
+[9]: /actions/app_builder/events/#state-functions
+[10]: /actions/app_builder/components/custom_charts/
 [11]: /actions/app_builder/components/react_renderer/
 [12]: /actions/app_builder/components/reusable_modules/
 [13]: /actions/app_builder/events/#events-and-reactions

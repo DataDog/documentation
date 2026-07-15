@@ -15,29 +15,56 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests. These experiments help you understand how new features affect business outcomes, user behavior, and application performance, so you can make confident, data-backed decisions about what to implement.
+Datadog Experiments is a composable platform for end-to-end experimentation. An experiment in Datadog consists of two components:
 
-Datadog Experiments consists of two components:
+1. A **randomized assignment** of [subjects][18] (typically users) to two or more variations—either from a [Datadog Feature Flag][1], or your randomization system of choice
+2. A set of **metrics** to compare between variants—computed either within Datadog or with warehouse native analytics.
 
-- An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments.
-- A statistical analysis of [Real User Monitoring (RUM)][2], [Product Analytics][3], and [warehouse][10] data to evaluate experiment results.
+To get started, select a link from the table below. Otherwise, read on to learn more about Datadog Experiments.
 
-## Getting started
+| Quick Links | |
+| :---- | :---- |
+| [Connect a data warehouse][13] | Set up Snowflake, BigQuery, Redshift, or Databricks for warehouse-native experiment analysis |
+| [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
+| [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
+| [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
+| [Analyze an experiment that's already been randomized][17] | Define exposure data in your warehouse when randomization runs outside Datadog Feature Flags |
 
-To start using Datadog Experiments, configure at least one of the following data sources:
+## Randomization
 
-- [Real User Monitoring (RUM)][2] for client-side and performance signals.
-- [Product Analytics][3] for user behavior and journey metrics.
-- [Data warehouse][10] for running experiment analysis directly in your warehouse using Snowflake, BigQuery, Redshift, or Databricks.
+Every experiment needs a way to assign subjects to a control or treatment variant. Datadog supports two approaches.
 
-After configuring a data source, follow these steps to launch your experiment:
+### Datadog Feature Flags
 
-1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. A feature flag is required to launch your experiment.
-1. **[Create a metric][4]** to evaluate your experiment.
-1. **[Create an experiment][5]** to define your hypothesis, choose an [analysis method][11], and optionally calculate a [sample size][8].
-1. **[Launch your experiment][7]** to see the impact of your change on business outcomes, user journey, and application performance.
+[Datadog Feature Flags][1] is the default way to randomize experiments. Create a flag, implement it with the [Feature Flags SDK][9], and pass a stable subject identifier as the `targetingKey` so the same user always receives the same variant. Datadog uses deterministic hashing to keep assignments consistent across sessions and devices.
 
-After your team has run several experiments against the same metric, use [Cumulative Impact][12] to see a noise-adjusted estimate of how much your experiments have moved that metric over time.
+When you [plan and launch an experiment][16], link it to a feature flag to define traffic splits, targeting rules, and rollout behavior. You can also create an experiment directly from a flag's detail page. To randomize by a unit other than user—for example, an organization—see [Subject Types][18].
+
+### Bring your own randomization
+
+If you randomize subjects outside Datadog—for example, with an in-house system—use [Exposure SQL Models][17] to tell Datadog who was exposed to each experiment and when. Exposure SQL Models query exposure records from your [connected warehouse][13] and map them to Datadog fields such as subject key, timestamp, experiment ID, and variant ID.
+
+Datadog deduplicates exposure data automatically: if a user appears in multiple variants for the same experiment, that user is excluded from the analysis. When exposures come from your warehouse instead of Feature Flags, metrics built on Datadog SDK events are not supported—you need [warehouse-native metrics][14].
+
+## Metrics
+
+Experiment metrics define what you measure to decide whether a change succeeded. Create at least one primary metric before launching an experiment, and add secondary metrics as guardrails for unintended effects on performance, engagement, or revenue.
+
+### Warehouse native mode
+
+In warehouse native mode, Datadog runs experiment analysis directly in Snowflake, BigQuery, Redshift, or Databricks. After you [connect your warehouse][13], create a **Metric SQL Model** that maps warehouse tables to Datadog, then define metrics from that model. Map each model to one or more [subject types][18] and specify a timestamp column so Datadog can join metric events to experiment exposures.
+
+Warehouse mode is required when you use [Exposure SQL Models][17] for randomization. It also suits teams whose source of truth for business metrics already lives in the warehouse.
+
+### Product Analytics and RUM
+
+For client-side experiments, build metrics from events collected by the [Real User Monitoring (RUM)][2] and [Product Analytics][3] SDKs. Define metrics from actions, views, sessions, and other event types, then choose an aggregation method such as count of events, count of unique users, or sum of a property.
+
+This path works when randomization runs through [Datadog Feature Flags][1] and you want to measure user behavior, funnel conversion, or application performance without querying a warehouse. Product Analytics and RUM metrics are available in near real time as experiments launch.
+
+## Statistics
+
+Datadog applies statistical analysis to compare variants and estimate lift. When you set up an experiment, choose an [analysis method][11]—sequential frequentist, fixed-sample frequentist, or Bayesian—and optionally run a [sample size calculation][8] to estimate how long the experiment needs to run. After results are in, use [Global Lift][19] to understand how a targeted experiment lift translates to impact on your company-wide metric total, and [Cumulative Impact][12] to aggregate noise-adjusted effects across many experiments on the same metric.
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
@@ -51,8 +78,15 @@ After your team has run several experiments against the same metric, use [Cumula
 [5]: /experiments/plan_and_launch_experiments
 [6]: /getting_started/feature_flags/#create-your-first-feature-flag
 [7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
-[8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
+[8]: /experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional
 [9]: /getting_started/feature_flags/#feature-flags-sdks
 [10]: /experiments/guide/
-[11]: /experiments/analysis_methods
-[12]: /experiments/cumulative_impact
+[11]: /experiments/statistics/analysis_methods
+[12]: /experiments/concepts/cumulative_impact
+[13]: /experiments/guide/connecting_a_data_warehouse/
+[14]: /experiments/defining_metrics/?tab=warehouse
+[15]: /experiments/defining_metrics/?tab=productanalyticsorum
+[16]: /experiments/plan_and_launch_experiments/
+[17]: /experiments/concepts/exposure_sql/
+[18]: /experiments/concepts/subject_types/
+[19]: /experiments/statistics/global_lift

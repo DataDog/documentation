@@ -94,5 +94,5 @@ Only *web applications* are supported. Azure Functions are not supported.
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/
 [6]: /security/application_security/policies/inapp_waf_rules/

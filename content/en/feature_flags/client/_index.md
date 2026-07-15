@@ -25,6 +25,7 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
   {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/flutter/" src="integrations_logos/flutter_large.svg" alt="Dart and Flutter" >}}
   {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
   {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
   {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
@@ -45,6 +46,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableExposureLogging`
 - **Android** (`dd-sdk-android-flags`): `trackExposures`
+- **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackExposures`
 - **iOS** (`DatadogFlags`): `trackExposures`
 - **React Native**: `trackExposures`
 - **Unity**: `trackExposures`
@@ -55,6 +57,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableFlagEvaluationTracking`
 - **Android** (`dd-sdk-android-flags`): `trackEvaluations`
+- **Dart and Flutter** (`datadog_flags`, `datadog_flags_flutter`): `trackEvaluations`
 - **iOS** (`DatadogFlags`): `trackEvaluations`
 - **React Native**: Not exposed
 - **Unity**: `trackEvaluations`
@@ -65,6 +68,7 @@ Default: `true`. Set to `false` to disable.
 
 - **Web** (`@datadog/openfeature-browser`): `enableRumFeatureFlagTracking`
 - **Android** (`dd-sdk-android-flags`): `rumIntegrationEnabled`
+- **Flutter** (`datadog_flags_flutter`): `rumIntegrationEnabled`
 - **iOS** (`DatadogFlags`): `rumIntegrationEnabled`
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed
@@ -90,7 +94,7 @@ See your platform's SDK page (select from the top of this page) for a concrete t
 ## Context attribute requirements
 
 <div class="alert alert-warning">
-Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will cause exposure events to be silently dropped.
+Evaluation context attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are <strong>not supported</strong> and can cause exposure events to be silently dropped.
 </div>
 
 Use flat attributes in your evaluation context:

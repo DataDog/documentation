@@ -2532,6 +2532,11 @@
           "title": "UTF-8 string with grapheme segmentation",
           "source": "floor(shannon_entropy(\"test123%456.\u0641\u0648\u0627\u0626\u062f.net.\", segmentation: \"grapheme\"), precision: 4)",
           "return": "3.9362"
+        },
+        {
+          "title": "UTF-8 emoji (7 Unicode scalar values) with grapheme segmentation",
+          "source": "shannon_entropy(\"\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66\", segmentation: \"grapheme\")",
+          "return": "0.0"
         }
       ],
       "deprecated": false,
@@ -4793,6 +4798,15 @@
           "type": [
             "string"
           ]
+        },
+        {
+          "name": "allow_lossy_string_coercion",
+          "description": "Whether to permit lossy coercion of `Boolean`, `Integer`, `Float`, and `Timestamp` values into protobuf `string` fields by stringifying the value. Defaults to `true` to preserve permissive behavior; set to `false` for strict, spec-compliant encoding (see the [protobuf JSON mapping](https://protobuf.dev/programming-guides/json/)).",
+          "required": false,
+          "type": [
+            "boolean"
+          ],
+          "default": true
         }
       ],
       "internal_failure_reasons": [
@@ -6737,6 +6751,46 @@
   ],
   "Object": [
     {
+      "anchor": "from_entries",
+      "name": "from_entries",
+      "category": "Object",
+      "description": "Converts array of key/value objects into an object.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The array of key/value objects to convert.",
+          "required": true,
+          "type": [
+            "array"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "object"
+        ],
+        "rules": [
+          "Returns an object composed from the array entries."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Manipulate empty array",
+          "source": "from_entries([])",
+          "return": "{}"
+        },
+        {
+          "title": "Manipulate array",
+          "source": "from_entries([{ \"key\": \"foo\", \"value\": \"bar\" }])",
+          "return": "{ \"foo\": \"bar\" }"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
       "anchor": "match_datadog_query",
       "name": "match_datadog_query",
       "category": "Object",
@@ -6895,6 +6949,52 @@
           "title": "Create an object from separate key and value arrays",
           "source": "object_from_array([1, 2, 3], keys: [\"one\", null, \"two\"])",
           "return": "{\"one\":1,\"two\":3}"
+        }
+      ],
+      "deprecated": false,
+      "pure": true
+    },
+    {
+      "anchor": "to_entries",
+      "name": "to_entries",
+      "category": "Object",
+      "description": "Converts JSON objects or arrays into array of objects.",
+      "notices": [],
+      "arguments": [
+        {
+          "name": "value",
+          "description": "The object or array to manipulate.",
+          "required": true,
+          "type": [
+            "object",
+            "array"
+          ]
+        }
+      ],
+      "internal_failure_reasons": [],
+      "return": {
+        "types": [
+          "array"
+        ],
+        "rules": [
+          "The return array has the same length as the input collection."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Manipulate empty object",
+          "source": "to_entries({})",
+          "return": "[]"
+        },
+        {
+          "title": "Manipulate object",
+          "source": "to_entries({ \"foo\": \"bar\"})",
+          "return": "[{ \"key\": \"foo\", \"value\": \"bar\" }]"
+        },
+        {
+          "title": "Manipulate array",
+          "source": "to_entries([1, 2])",
+          "return": "[{ \"key\": 0, \"value\": 1 }, { \"key\": 1, \"value\": 2 }]"
         }
       ],
       "deprecated": false,
@@ -8373,6 +8473,11 @@
           "title": "Parse using Regex (without capture groups)",
           "source": "parse_regex!(\"first group and second group.\", r'(\\w+) group', numeric_groups: true)",
           "return": "{\"0\":\"first group\",\"1\":\"first\"}"
+        },
+        {
+          "title": "Parse using Regex with variables",
+          "source": "variable = r'^(?P<host>[\\w\\.]+) - (?P<user>[\\w]+)';\nparse_regex!(\"8.7.6.5 - zorp\", variable)",
+          "return": "{\"host\":\"8.7.6.5\",\"user\":\"zorp\"}"
         }
       ],
       "deprecated": false,
@@ -8432,6 +8537,11 @@
           "title": "Parse using Regex (all matches)",
           "source": "parse_regex_all!(\"first group and second group.\", r'(?P<number>\\w+) group', numeric_groups: true)",
           "return": "[{\"0\":\"first group\",\"1\":\"first\",\"number\":\"first\"},{\"0\":\"second group\",\"1\":\"second\",\"number\":\"second\"}]"
+        },
+        {
+          "title": "Parse using Regex with variables",
+          "source": "variable = r'(?P<fruit>[\\w\\.]+) and (?P<veg>[\\w]+)';\nparse_regex_all!(\"apples and carrots, peaches and peas\", variable)",
+          "return": "[{\"fruit\":\"apples\",\"veg\":\"carrots\"},{\"fruit\":\"peaches\",\"veg\":\"peas\"}]"
         }
       ],
       "deprecated": false,

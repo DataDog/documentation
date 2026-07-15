@@ -6,16 +6,23 @@ aliases:
 - /service_management/app_builder/events
 disable_toc: false
 further_reading:
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
+site_support_id: app-builder
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 UI components can trigger reactions on an {{< ui >}}Event{{< /ui >}}. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
 
@@ -97,6 +104,6 @@ To see what state functions are available for a given component, see [Components
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
 
-[1]: /service_management/app_builder/components
+[1]: /actions/app_builder/components
 [2]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [8]: https://chat.datadoghq.com/

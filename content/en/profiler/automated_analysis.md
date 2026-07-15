@@ -138,5 +138,5 @@ Automated Analysis supports finding the following insights:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/profiling/explorer
-[2]: /bits_ai/bits_ai_dev_agent/
+[2]: /bits_ai/bits_code/
 
