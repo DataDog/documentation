@@ -14,15 +14,16 @@ Supported runtimes: Python, Node.js
 ### Instrument your Lambda function
 
 1. Complete [the common steps for instrumenting a Lambda function][1]. Make sure the Datadog Lambda Library is installed and tracing is enabled, using at least the following versions:
-  - Datadog Lambda Extension: v98+
-  - Datadog Python Lambda layer: v126+
-  - Datadog Node.js Lambda layer: v141+
+
+    - Datadog Lambda Extension: v98+
+    - Datadog Python Lambda layer: v126+
+    - Datadog Node.js Lambda layer: v141+
+
 2. Set the following environment variable on your Lambda function:
-  ```text
-   DD_LAMBDA_DURABLE_FUNCTION_LOG_BUFFER_SIZE=5
-  ```
 
-
+    ```text
+    DD_LAMBDA_DURABLE_FUNCTION_LOG_BUFFER_SIZE=5
+    ```
 
 ### Forward durable execution events
 
@@ -32,14 +33,17 @@ Deploy the CloudFormation stack to your AWS account to forward durable execution
 
 1. Log in to the AWS account and region where your durable functions run, then open the stack created by the button above.
 2. Provide your Datadog API key using exactly one of the following parameters:
-  - `DdApiKey`: your [Datadog API key][3] in plaintext.
-  - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key.
-  - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key.
+
+    - `DdApiKey`: your [Datadog API key][3] in plaintext.
+    - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key.
+    - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key.
+
 3. Set `DdSite` to your [Datadog site][4]. The default is `datadoghq.com`.
 4. Optionally, restrict which events are forwarded:
-  - `Statuses`: a comma-separated list of execution statuses to forward. Valid values are `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`. Leave this empty to forward all statuses.
-  - `FunctionArnFilter1` through `FunctionArnFilter5`: up to five unqualified Lambda function ARNs or EventBridge wildcard patterns, such as `arn:aws:lambda:us-east-2:123456789012:function:my-durable-*`. Do not include a version or alias suffix. Leave all five empty to forward events from every function in the region.
-  - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`-`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
+
+    - `Statuses`: a comma-separated list of execution statuses to forward. Valid values are `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`. Leave this empty to forward all statuses.
+    - `FunctionArnFilter1` through `FunctionArnFilter5`: up to five unqualified Lambda function ARNs or EventBridge wildcard patterns, such as `arn:aws:lambda:us-east-2:123456789012:function:my-durable-*`. Do not include a version or alias suffix. Leave all five empty to forward events from every function in the region.
+    - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`-`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
 5. Click **Create stack** and wait for the stack to finish creating.
 6. If your durable functions run in multiple AWS regions, repeat these steps in each region.
 
