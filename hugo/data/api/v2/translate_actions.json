@@ -6507,7 +6507,7 @@
     "request_schema_description": "Request object for creating a status page."
   },
   "ListDegradations": {
-    "description": "Lists all degradations for the organization. Optionally filter by status and page.",
+    "description": "Lists all degradations for the organization. Optionally filter by status, page, and source ID.",
     "summary": "List degradations"
   },
   "ListMaintenances": {

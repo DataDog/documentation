@@ -205615,7 +205615,7 @@ paths:
           - status_pages_settings_write
   /api/v2/statuspages/degradations:
     get:
-      description: Lists all degradations for the organization. Optionally filter by status and page.
+      description: Lists all degradations for the organization. Optionally filter by status, page, and source ID.
       operationId: ListDegradations
       parameters:
         - description: Optional page id filter.
@@ -205645,6 +205645,11 @@ paths:
         - description: "Optional degradation status filter. Supported values: investigating, identified, monitoring, resolved."
           in: query
           name: filter[status]
+          schema:
+            type: string
+        - description: "Optional source ID filter. Returns only degradations whose source matches this ID (e.g. an incident ID)."
+          in: query
+          name: filter[source_id]
           schema:
             type: string
         - description: "Sort order. Prefix with '-' for descending. Supported values: created_at, -created_at, modified_at, -modified_at."
