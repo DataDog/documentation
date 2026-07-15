@@ -4048,6 +4048,86 @@ components:
             type: string
           type: array
       type: object
+    AccountFilters:
+      description: The account filters for a cloud account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersAttributes"
+        id:
+          description: The ID of the cloud account.
+          example: "123456789123"
+          type: string
+        type:
+          $ref: "#/components/schemas/AccountFiltersType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersAttributes:
+      description: Attributes for the account filters of a cloud account.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+        account_id:
+          description: The cloud account ID.
+          example: "123456789123"
+          type: string
+        cloud:
+          description: The cloud provider of the account, for example `aws`, `aws_cur2`, or `oci`.
+          example: "aws_cur2"
+          type: string
+      type: object
+    AccountFiltersPatchData:
+      description: Account filters patch data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersPatchRequest:
+      description: Account filters patch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFiltersPatchData"
+      required:
+        - data
+      type: object
+    AccountFiltersPatchRequestAttributes:
+      description: Attributes for an account filters patch request.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+      required:
+        - account_filters
+      type: object
+    AccountFiltersPatchRequestType:
+      default: account_filters_patch_request
+      description: Type of account filters patch request.
+      enum:
+        - account_filters_patch_request
+      example: account_filters_patch_request
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS_PATCH_REQUEST
+    AccountFiltersResponse:
+      description: Response containing the account filters for a cloud account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFilters"
+      type: object
+    AccountFiltersType:
+      default: account_filters
+      description: Type of account filters.
+      enum:
+        - account_filters
+      example: account_filters
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -127811,6 +127891,184 @@ paths:
       "x-permission":
         operator: OPEN
         permissions: []
+  /api/v2/cost/account_filters/{cloud_account_id}:
+    get:
+      description: Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: GetCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                include_accounts:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 70
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+    patch:
+      description: Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: UpdateCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Exclude new accounts and include specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        include_new_accounts: false
+                        included_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                    type: account_filters_patch_request
+              exclude_accounts:
+                summary: Include new accounts and exclude specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        excluded_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                        include_new_accounts: true
+                    type: account_filters_patch_request
+            schema:
+              $ref: "#/components/schemas/AccountFiltersPatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                exclude_accounts:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 71
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/anomalies:
     get:
       description: List detected Cloud Cost Management anomalies for the organization.

@@ -10857,6 +10857,30 @@ menu:
         unstable:
           - v2
         order: 43
+    - name: Update account filters
+      url: /api/latest/cloud-cost-management/update-account-filters/
+      identifier: cloud-cost-management-update-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostAccountFilters
+        unstable: []
+        order: 71
+    - name: Get account filters
+      url: /api/latest/cloud-cost-management/get-account-filters/
+      identifier: cloud-cost-management-get-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAccountFilters
+        unstable: []
+        order: 70
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
