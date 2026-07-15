@@ -39,6 +39,8 @@ The following log features are supported:
 
 Feature support is actively evolving. The following are not currently supported:
 
+- **DDSQL**: Querying BYOC Logs data with DDSQL is not supported.
+- **Calculated fields**: Defining calculated fields on BYOC Logs data is not supported.
 - **SIEM**: Not available for BYOC Logs data.
 - **Watchdog**: Not available for BYOC Logs data.
 - **Notebooks**: Log data from BYOC Logs cannot be used in Notebooks.
