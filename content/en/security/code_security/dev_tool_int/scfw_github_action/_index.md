@@ -33,7 +33,7 @@ steps:
   - run: npm install
 ```
 
-### With Supply Chain Security integration
+### Configure the Supply Chain Security integration
 
 {{< callout url=https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc/viewform?edit_requested=true
  btn_hidden="false" header="Join the Preview!">}}
