@@ -76,7 +76,7 @@ steps:
 
    Activating a Python virtual environment, such as with `source .venv/bin/activate`, takes precedence over the Supply Chain Firewall wrappers for the remainder of that step. Use `scfw run pip install ...` explicitly for any commands that run inside virtual environments.
 
-3. **Configure**: Relevant environment variables (`DD_API_KEY`, `SCFW_HOME`, etc.) are written to `GITHUB_ENV` so they are available to all subsequent steps.
+3. **Configure**: Relevant environment variables, such as `DD_API_KEY` and `SCFW_HOME`, are written to `GITHUB_ENV` so they are available to subsequent steps.
 
    Environment variables written to `GITHUB_ENV` are accessible to all subsequent steps in the job, including any third-party actions that run after this one. If you supply `dd-api-key` or `dd-app-key`, audit the actions that follow in your workflow for suspicious behavior or signs of compromise.
 
