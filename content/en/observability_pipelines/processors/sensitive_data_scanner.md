@@ -288,6 +288,24 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 
 The Sensitive Data Scanner processor is CPU intensive. Use the following best practices to optimize performance.
 
+### Use the out-of-the-box dashboard to find rules in use
+
+Observability Pipelines includes an out-of-the-box **Observability Pipelines Overview** dashboard that includes a **Sensitive data found by Observability Pipelines** section. Use these widgets to see which scanning rules are actually matching data before you decide what to keep, tune, or remove. Rules that never match can be unnecessary overhead on CPU, and this dashboard is the fastest way to find them.
+
+To open the dashboard, go to [Dashboards][13] and select **Observability Pipelines Overview**. Use the template variables at the top (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) and the time selector to scope the view to a specific pipeline or Worker, and widen the time frame to avoid removing a rule that only matches occasionally.
+
+The most useful widgets for evaluating rule usage are:
+
+- **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with its match count over the selected time frame. Rules at or near zero are candidates for removal. Rules with high counts are actively protecting data and should be kept. This is the primary widget for deciding which rules are in use.
+- **Total count of logs containing sensitive data**: Shows the overall volume of matches across all rules, so you can gauge how much sensitive data the processor is catching and confirm the processor is working as expected before drilling into individual rules.
+- **Logs containing sensitive data by Pipeline**: Breaks matches down by `pipeline_id`, which helps you see whether a rule is needed everywhere or only on specific pipelines. A rule matching on one pipeline but not others may be a candidate to scope more narrowly.
+- **Logs containing sensitive data per host**: Breaks matches down by Worker host, useful for confirming coverage across your deployment and spotting hosts where a rule is or is not matching.
+- **Patterns containing sensitive information** and **List of logs containing sensitive data**: Show the log patterns and sample events where sensitive data was found, so you can verify a rule is matching the data you expect (and not producing false positives) before keeping it.
+
+After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
+
+**Note**: A zero match count means the rule did not match in the selected time frame, not that the rule is invalid. Before removing a rule, widen the time frame and confirm the data it scans for is absent, so you do not remove a rule that catches rare but important sensitive data.
+
 ### Only enable rules you need
 
 Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data Scanner processor to view how many matches each rule has had over the past 24 hours.
