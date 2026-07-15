@@ -2178,6 +2178,30 @@
     "request_description": "Incident user-defined field update payload.",
     "request_schema_description": "Request body for updating an incident user-defined field."
   },
+  "ListIncidentUserDefinedRoles": {
+    "description": "List all user-defined roles for incidents.",
+    "summary": "List incident user-defined roles"
+  },
+  "CreateIncidentUserDefinedRole": {
+    "description": "Create a new user-defined role for incidents.",
+    "summary": "Create an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for creating an incident user-defined role."
+  },
+  "DeleteIncidentUserDefinedRole": {
+    "description": "Delete an existing user-defined role for incidents.",
+    "summary": "Delete an incident user-defined role"
+  },
+  "GetIncidentUserDefinedRole": {
+    "description": "Retrieve a single user-defined role for incidents.",
+    "summary": "Get an incident user-defined role"
+  },
+  "UpdateIncidentUserDefinedRole": {
+    "description": "Update an existing user-defined role for incidents.",
+    "summary": "Update an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for updating an incident user-defined role."
+  },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
     "summary": "Import an incident",
@@ -3864,8 +3888,12 @@
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
   "GetScheduleOnCallUser": {
-    "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
+    "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
+  },
+  "GetScheduleOnCallResponders": {
+    "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
+    "summary": "Get on-call responders for a schedule"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",
