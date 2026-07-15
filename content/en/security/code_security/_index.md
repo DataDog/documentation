@@ -110,7 +110,7 @@ Supply Chain Security prevents malicious open source packages from entering your
 
 Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
 
-Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by [GuardDog](https://github.com/DataDog/guarddog)), known vulnerability advisories, and configurable recency thresholds. SCFW immediately blocks installation of flagged packages with a clear, actionable message on both developer laptops and [CI runners][20].
+Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by [GuardDog][21]), known vulnerability advisories, and configurable recency thresholds. If a package matches one of these checks, SCFW immediately blocks the installation and displays a clear, actionable message on developer laptops and [CI runners][20].
 
 In addition to protecting individual developer machines or CI pipelines, SCFW provides event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed.
 
