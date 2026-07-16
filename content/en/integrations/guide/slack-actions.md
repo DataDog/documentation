@@ -1,12 +1,12 @@
 ---
-title: Slack Commands
-description: "Utilize these Slack commands for the workspaces you have set up. Follow the [Slack integration documentation for setup.][1]"
+title: Slack Actions
+description: "Utilize these Slack actions for the workspaces you have set up. Follow the [Slack integration documentation for setup.][1]"
 
 ---
 
 ## Overview
 
-To run any Slack command, type /dd in any workspace with the Datadog App installed to pull up an action tray listing all actions you can take. Alternatively, directly type out the command.
+To run any Slack actions, type `/dd` in any workspace with the Datadog App installed to pull up an action tray listing all actions you can take. Alternatively, directly type out the action.
 
 ## Incidents
 Use the following keyboard shortcuts for incidents navigation. All commands can utilize `/dd in` as an alias for `/dd incident`. For more details, refer to [Incident documentation][2].
