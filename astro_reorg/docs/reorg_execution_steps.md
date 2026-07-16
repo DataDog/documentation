@@ -9,7 +9,7 @@
 ### 2. Publish the README
 
 - [ ] Publish [REPO_REORG.md](../../REPO_REORG.md) on master, so you can link to it.
-- [ ] Update the [`REPO_REORG_README_LINK` constant](../resolve_pr_conflicts.py#L121) in `resolve_pr_conflicts.py`, commit, and push.
+- [ ] Set the `REORG_README_BRANCH` constant in `resolve_pr_conflicts.py` to `"master"` (it defaults to the scripts branch), commit, and push. Leave `CONFIG_LINK_BRANCH` pointing at the scripts branch — the reorg deletes `astro_reorg/` from master, so that link must stay on a branch that retains it.
 
 ### 3. Announce the reorg
 
@@ -90,7 +90,7 @@ Announce the freeze in `#documentation` with a link to the reorg README.
    ```bash
    rm -rf astro_reorg/
    ```
-- [ ] Stage, commit, and push the result:
+- [ ] Stage and commit the result (the push happens in the next step):
    ```bash
    git add -A -- ':!astro/'
    git commit -m "Create hugo site folder"
@@ -103,11 +103,11 @@ git push -u origin jen.gilbert/hugo-site-folder &&
 gh pr create --base master --title "Create Hugo site folder" 
 ```
 
-### 5. Verify that the GitHub actions etc. are working, and make any necessary fixes
+### 6. Verify that the GitHub actions etc. are working, and make any necessary fixes
 
-### 6. Merge to master and verify the build
+### 7. Merge to master and verify the build
 
-### 7. Run the PR resolution script
+### 8. Run the PR resolution script
 
 Run the script in batches, building confidence before scaling up. The script defaults to a dry run against the mock base branch — pass `--live` to target real master, and `--no-dry-run` to apply changes.
 
@@ -128,11 +128,11 @@ Run the script in batches, building confidence before scaling up. The script def
 
 You can view [all processed PRs here](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-processed), regardless of their outcome.
 
-### 8. End the code freeze
+### 9. End the code freeze
 
-### 9. Post in #documentation and #docs-backroom
+### 10. Post in #documentation and #docs-backroom
 
-### 10. Monitor the queues
+### 11. Monitor the queues
 
 - [All processed PRs](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-processed)
 - [Fixed-and-closed PRs](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-autofixed)

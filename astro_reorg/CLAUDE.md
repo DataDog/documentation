@@ -6,7 +6,7 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 
 `astro_reorg/execute_reorg.py` implements the file and folder path changes, and updates any dependencies on those paths, such as GitHub actions, CODEOWNERS, and Husky workflows.
 
-`astro_reorg/helpers.py` contains shared utilities used by the other scripts (path manipulation, git/shell helpers, YAML config loading).
+`astro_reorg/helpers.py` contains utilities (path manipulation, git/shell helpers, YAML config loading) used by `validate_reorg.py`. The other scripts predate it and each define their own small helpers inline.
 
 `astro_reorg/local_rollback.py` functions as an "undo" action for the reorg: removes `hugo/` and restores `.gitignore`, `.github/`, and `.husky/` from git.
 

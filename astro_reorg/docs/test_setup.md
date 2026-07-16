@@ -2,10 +2,10 @@
 
 ## Prerequisites
 
-Two branches must exist on the remote (configured in `config.yaml` under `test:`):
+Two branches must exist on the remote, named in `config.yaml` under `test:`:
 
-- A non-reorged mock master branch for the mock contributors to branch from.
-- A reorged mock master branch that acts as a base for the PR. This usually doesn't need to be created, since we can just use `jen.gilbert/astro-reorg-scripts` as the base.
+- `branch_from` — a non-reorged snapshot of master that the mock contributor PRs are cut from. The scripts branch (`jen.gilbert/astro-reorg-scripts`) works and already exists, so you usually don't need to create this one.
+- `mock_reorged_master_branch` — a reorged stand-in for post-reorg master that the test PRs target and the resolver treats as the base. You create this below. It must have the reorg applied, so the scripts branch can't stand in for it.
 
 ## Setup steps
 
@@ -50,24 +50,35 @@ python3 astro_reorg/local_rollback.py
 
 ### 1. Create the test PRs
 
-Create the test PRs:
-
 ```bash
 python3 astro_reorg/create_test_prs.py
 ```
 
-This script will output the commands you should use to execute a dry run and a real run of the automatic conflict resolution script.
+This opens one PR per spec in `TEST_PRS`. Because some specs carry a `base_edit`, the script also builds a throwaway conflicting base branch (unique per run, so no force-push) and points every PR at it, so a single resolver run exercises both the clean auto-fixes and the manual-review fallbacks together. On completion it:
+
+- writes `test_pr_list.md` at the repo root, listing every PR and its expected outcome, and
+- prints the exact dry-run and real-run commands to use next, already filled in with the right `--base-branch` and `--limit`.
 
 ### 2. Execute a dry run
 
-python3 astro_reorg/resolve_pr_conflicts.py \
-  --base-branch <PROVIDED_BRANCH_NAME>
+Run the dry-run command printed by `create_test_prs.py`. It looks like:
+
+```bash
+python3 astro_reorg/resolve_pr_conflicts.py --base-branch <PRINTED_BRANCH> --limit <N>
+```
+
+`--limit` is required, so don't drop it.
 
 ### 3. Execute a real run
 
-python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run \
-  --base-branch <PROVIDED_BRANCH_NAME>
+Run the real-run command printed by `create_test_prs.py`. It looks like:
+
+```bash
+python3 astro_reorg/resolve_pr_conflicts.py --no-dry-run --base-branch <PRINTED_BRANCH> --limit <N>
 ```
 
-Expected outcomes: the wording-tweak PR gets an auto-fix; the other three get
-the `astro-reorg-manual-review` label.
+Expected outcomes (`test_pr_list.md` is the authoritative list):
+
+- **Auto-fixed** — original closed and replaced with a `[reorg fix]` PR (`astro-reorg-autofixed`): the wording-tweak PR and the new-page-with-nav PR.
+- **Skipped as WIP** — `astro-reorg-skip` label plus a comment: the `WORK IN PROGRESS` PR.
+- **Manual review** — `astro-reorg-manual-review` and `WORK IN PROGRESS` labels plus a comment: the non-reorg-conflict PR and the two unresolvable-reorg-conflict PRs.

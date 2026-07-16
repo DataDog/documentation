@@ -70,9 +70,15 @@ Auto-fix strategy (reorg-only PRs):
          `git am --3way`.  --3way falls back to a per-patch 3-way merge when
          context lines have drifted because master made unrelated edits between
          the PR's base and today.
-      5. Push as `reorg-fix/pr-<N>`, open a new PR for it, close the original
+      5. Push as `reorg-fix/pr-<N>`, open a new PR for it (whose body @mentions
+         the original author so they're notified immediately), close the original
          PR with a comment pointing to the fix PR, and label the original
          astro-reorg-autofixed.
+
+    If a run dies partway through step 5 (branch pushed and/or fix PR opened, but
+    the original never closed), a later run detects the existing branch/PR and
+    finishes the job rather than bailing — it never rebuilds or force-pushes an
+    existing fix branch, so a fix already in review is safe.
 
     PRs from forks cannot be auto-fixed (we don't have push access to the fork).
     They receive the astro-reorg-manual-review label.
@@ -117,8 +123,19 @@ _TEST_CONFIG = _config.get("test", {})
 TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
 REPO = "DataDog/documentation"
-MASTER_BRANCH_NAME = "jen.gilbert/astro-reorg-scripts"
-REPO_REORG_README_LINK = f"https://github.com/DataDog/documentation/blob/{MASTER_BRANCH_NAME}/REPO_REORG.md"
+
+# The author-facing comments link to two files that live on DIFFERENT branches
+# after the reorg, so they need separate branch constants — do not merge them.
+#
+# REORG_README_BRANCH: branch hosting REPO_REORG.md. Before the reorg lands this
+#   is the scripts branch; once REPO_REORG.md is published on master (see
+#   docs/reorg_execution_steps.md), set this to "master".
+# CONFIG_LINK_BRANCH: branch hosting astro_reorg/config.yaml. The reorg DELETES
+#   astro_reorg/ from master, so this link must point at a branch that RETAINS it
+#   (the scripts branch) — it can never be "master".
+REORG_README_BRANCH = "jen.gilbert/astro-reorg-scripts"
+CONFIG_LINK_BRANCH = "jen.gilbert/astro-reorg-scripts"
+REPO_REORG_README_LINK = f"https://github.com/DataDog/documentation/blob/{REORG_README_BRANCH}/REPO_REORG.md"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
 LABEL_STALE = "astro-reorg-stale"
 LABEL_AUTOFIXED = "astro-reorg-autofixed"
@@ -161,7 +178,7 @@ def build_manual_review_comment() -> str:
         "If you feel comfortable resolving the conflicts yourself:\n\n"
         "1. Resolve the conflicts. For a full list of repo files and folders and their updated location, "
         "see [the configuration file for the reorg script]"
-        f"(https://github.com/DataDog/documentation/blob/{MASTER_BRANCH_NAME}/astro_reorg/config.yaml).\n"
+        f"(https://github.com/DataDog/documentation/blob/{CONFIG_LINK_BRANCH}/astro_reorg/config.yaml).\n"
         f"2. When your PR is ready for merge, remove the `{LABEL_WIP}` label.\n"
         "3. Wait for the standard docs team approval before merging. "
         "Optionally, you can check the 'ready for merge' checkbox in the PR description "
@@ -203,14 +220,31 @@ def build_autofix_close_comment(new_pr_number: int | str) -> str:
     )
 
 
-def build_autofix_pr_body(original_pr_number: int | str, original_body: str) -> str:
-    """Body of the auto-generated fix PR."""
+def build_autofix_pr_body(
+    original_pr_number: int | str,
+    original_body: str,
+    author_login: str | None = None,
+) -> str:
+    """Body of the auto-generated fix PR.
+
+    When author_login is given, the body opens with an @mention so the original
+    author is notified the moment this PR is created. This matters because the
+    fix PR is opened before the original is closed: if a run is interrupted in
+    between, the @mention is the author's only signal that the fix exists.
+    """
+    mention = (
+        f"@{author_login} — the docs repo reorg created merge conflicts in your "
+        f"PR #{original_pr_number}. This is an auto-generated replacement with the "
+        f"file paths fixed; please use it instead of the original.\n\n"
+        if author_login else ""
+    )
     return (
         f"🤖 Auto-generated fix for #{original_pr_number}.\n\n"
+        f"{mention}"
         f"This PR replays the commits from #{original_pr_number} with file paths "
         f"translated to the post-reorg `hugo/` layout. The original commits "
         f"are preserved — same messages and authorship.\n\n"
-        f"The original PR (#{original_pr_number}) has been closed.\n\n"
+        f"The original PR (#{original_pr_number}) will be closed in favor of this one.\n\n"
         f"**Next steps:**\n\n"
         f"1. Verify that this PR looks correct in the browser.\n"
         f"2. Remove the `{LABEL_WIP}` label from this PR.\n"
@@ -536,9 +570,95 @@ def post_comment(pr_number: int, body: str, dry_run: bool) -> None:
     print(f"  Posted comment on PR #{pr_number}")
 
 
+def send_to_manual_review(pr_number: int, dry_run: bool) -> None:
+    """Route a PR to manual review, consistently, wherever we can't auto-fix.
+
+    Applies both the durable manual-review label (which excludes the PR from all
+    future runs) and WORK IN PROGRESS (which keeps it out of the docs team's
+    review queue until the author has resolved the conflicts), then comments once
+    explaining what to do. build_manual_review_comment() already tells the author
+    to remove the WORK IN PROGRESS label once the conflicts are resolved.
+
+    Used for every non-auto-fixable outcome: non-reorg conflicts, unclassifiable
+    merge failures, and failed replays.
+    """
+    add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+    add_label(pr_number, LABEL_WIP, dry_run)
+    post_comment(pr_number, build_manual_review_comment(), dry_run)
+
+
 # ---------------------------------------------------------------------------
 # Auto-fix
 # ---------------------------------------------------------------------------
+
+def find_open_fix_pr(fix_branch: str) -> dict | None:
+    """Return an open PR opened from fix_branch on a prior run, or None.
+
+    A run that dies after opening the fix PR but before closing the original
+    leaves this PR behind. Finding it lets a later run finish the job instead of
+    bailing to manual review.
+    """
+    prs = gh_json("pr", "list", "--repo", REPO, "--state", "open",
+                  "--head", fix_branch, "--json", "number,url")
+    return prs[0] if prs else None  # type: ignore[index]
+
+
+def fix_branch_on_origin(fix_branch: str) -> bool:
+    """True if fix_branch already exists on origin (pushed by a prior run)."""
+    return bool(git("ls-remote", "--heads", "origin", fix_branch).stdout.strip())
+
+
+def finalize_autofix(pr: dict, fix_branch: str, existing_fix_pr: dict | None) -> bool:
+    """Finish an auto-fix once the fix branch exists on origin: ensure the fix PR
+    is open and labeled, then close the original PR pointing at it and label the
+    original autofixed.
+
+    Kept separate from the branch-building steps so it can complete a run that
+    was interrupted partway through. It is idempotent: label adds are no-ops when
+    the label is already present, and the original PR is only ever closed once
+    (it is still open whenever we reach here, since a closed PR drops out of the
+    open-PR query). `existing_fix_pr` is a prior run's fix PR when one was already
+    opened; otherwise it is None and we open the PR now.
+    """
+    pr_number = pr["number"]
+
+    if existing_fix_pr:
+        new_pr_number = existing_fix_pr["number"]
+        print(f"  Reusing existing fix PR #{new_pr_number}: {existing_fix_pr['url']}")
+    else:
+        original_body = pr.get("body") or ""
+        author_login = (pr.get("author") or {}).get("login")
+        new_pr_body = build_autofix_pr_body(pr_number, original_body, author_login)
+        new_pr_title = f"[reorg fix] {pr['title']}"
+        pr_create = gh_run(
+            "pr", "create",
+            "--repo", REPO,
+            "--head", fix_branch,
+            "--base", pr["baseRefName"],
+            "--title", new_pr_title,
+            "--body", new_pr_body,
+        )
+        new_pr_url = pr_create.strip()
+        new_pr_number = int(new_pr_url.rstrip("/").split("/")[-1])
+        print(f"  Opened fix PR: {new_pr_url}")
+
+    # Labels are a set on GitHub's side, so re-adding an existing one is a
+    # harmless no-op — safe when finishing a run that applied some already.
+    add_label(int(new_pr_number), LABEL_WIP, dry_run=False)
+    add_label(int(new_pr_number), LABEL_AUTO_PR, dry_run=False)
+    # In test mode, keep the auto-created PR out of other teams' review queues by
+    # marking it "Do Not Merge". Never do this on real master.
+    if IS_TEST_MODE:
+        add_label(int(new_pr_number), DO_NOT_MERGE_LABEL, dry_run=False)
+
+    gh_run(
+        "pr", "close", str(pr_number), "--repo", REPO,
+        "--comment", build_autofix_close_comment(new_pr_number),
+    )
+    print(f"  Closed PR #{pr_number} with comment pointing to fix PR #{new_pr_number}")
+    add_label(pr_number, LABEL_AUTOFIXED, dry_run=False)
+    return True
+
 
 def attempt_fix(pr: dict, dry_run: bool) -> bool:
     """
@@ -610,11 +730,30 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 
     transformed = transform_diff_paths(patches)
 
+    fix_branch = f"reorg-fix/pr-{pr_number}"
+
+    # A prior run may have died partway through: the fix branch was pushed and/or
+    # the fix PR was opened, but the original PR was never closed. Detect that so
+    # we FINISH the interrupted job rather than bail to manual review — which
+    # would post a misleading "resolve it yourself" comment on a PR that already
+    # has a working fix. Both checks are read-only, so they're safe in dry-run.
+    existing_fix_pr = find_open_fix_pr(fix_branch)
+    branch_pushed = existing_fix_pr is not None or fix_branch_on_origin(fix_branch)
+
     if dry_run:
+        if existing_fix_pr:
+            print(f"  [dry-run] fix PR #{existing_fix_pr['number']} already exists — "
+                  f"would finish the interrupted auto-fix: label it, close "
+                  f"#{pr_number} pointing to it, and label it {LABEL_AUTOFIXED!r}.")
+            return True
+        if branch_pushed:
+            print(f"  [dry-run] fix branch {fix_branch!r} exists on origin with no open "
+                  f"PR — would open a PR from it and finish the auto-fix.")
+            return True
         # Count patches and show per-patch file summaries.
         subjects = [l[len("Subject: "):] for l in transformed.splitlines()
                     if l.startswith("Subject: ")]
-        print(f"  [dry-run] would apply {len(subjects)} commit(s) to reorg-fix/pr-{pr_number}:")
+        print(f"  [dry-run] would apply {len(subjects)} commit(s) to {fix_branch}:")
         for s in subjects[:10]:
             print(f"    {s}")
         if len(subjects) > 10:
@@ -628,17 +767,34 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
               f"and label it {LABEL_AUTOFIXED!r}")
         return True
 
-    fix_branch = f"reorg-fix/pr-{pr_number}"
+    # Finish an interrupted run without rebuilding (and never force-pushing) the
+    # branch, so a fix already in review is never clobbered.
+    if existing_fix_pr:
+        print(f"  Fix PR #{existing_fix_pr['number']} already exists — "
+              f"finishing the interrupted auto-fix.")
+        return finalize_autofix(pr, fix_branch, existing_fix_pr)
+    if branch_pushed:
+        print(f"  Fix branch {fix_branch!r} exists on origin but has no open PR — "
+              f"opening it and finishing the interrupted auto-fix.")
+        return finalize_autofix(pr, fix_branch, None)
+
     tmpdir = tempfile.mkdtemp(prefix=f"reorg_fix_{pr_number}_")
     try:
+        # A stale LOCAL branch can linger when a prior run's worktree was cleaned
+        # up but its branch wasn't (worktree removal doesn't delete the branch).
+        # We've already confirmed there's no fix PR and no origin branch, so any
+        # local reorg-fix/pr-<N> is a safe-to-drop leftover. Prune first so the
+        # delete isn't blocked by a registration for an already-deleted worktree.
+        git("worktree", "prune")
+        git("branch", "-D", fix_branch)  # no-op if it doesn't exist
+
         add_wt = git("worktree", "add", "-b", fix_branch, tmpdir, f"origin/{pr_base}")
         if add_wt.returncode != 0:
-            # Creating the branch failed — most likely a reorg-fix/pr-<N> branch
-            # from a prior run already exists.  We do NOT reset and reuse it:
-            # that could clobber a fix that's already in review.  Bail and let
-            # the PR fall back to manual review.
+            # Still couldn't create the branch (e.g. it's checked out in a
+            # lingering worktree we couldn't prune). Bail to manual review rather
+            # than risk clobbering anything.
             print(f"  could not create fix branch {fix_branch!r} "
-                  f"(may already exist) — leaving for manual review: "
+                  f"— leaving for manual review: "
                   f"{add_wt.stderr.strip()[:120]}", file=sys.stderr)
             return False
         worktree = Path(tmpdir)
@@ -655,49 +811,16 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 
         push = run(["git", "push", "origin", fix_branch], cwd=worktree)
         if push.returncode != 0:
-            # A reorg-fix/pr-<N> branch from a prior run already exists on
-            # origin.  We don't force-push (repo policy), and a fix PR for it
-            # most likely already exists, so bail to manual review rather than
-            # clobber it.
-            print(f"  push failed (fix branch may already exist): "
-                  f"{push.stderr.strip()[:120]}", file=sys.stderr)
-            return False
+            # The branch appeared on origin since our earlier check (a concurrent
+            # run, most likely). We don't force-push; finish via whatever is
+            # already there rather than clobber it.
+            print(f"  push failed (fix branch appeared on origin): "
+                  f"{push.stderr.strip()[:120]} — finishing via the existing branch.",
+                  file=sys.stderr)
+            return finalize_autofix(pr, fix_branch, find_open_fix_pr(fix_branch))
 
         print(f"  Pushed fix to branch {fix_branch!r}")
-
-        # Open a new PR for the fix branch so the author can preview, review,
-        # and merge it directly — then close the original conflicting PR.
-        original_body = pr.get("body") or ""
-        new_pr_body = build_autofix_pr_body(pr_number, original_body)
-        # We only reach this point on a real run; dry-run returned earlier.
-        new_pr_title = f"[reorg fix] {pr['title']}"
-        pr_create = gh_run(
-            "pr", "create",
-            "--repo", REPO,
-            "--head", fix_branch,
-            "--base", pr_base,
-            "--title", new_pr_title,
-            "--body", new_pr_body,
-        )
-        new_pr_url = pr_create.strip()
-        new_pr_number = new_pr_url.rstrip("/").split("/")[-1]
-        print(f"  Opened fix PR: {new_pr_url}")
-
-        add_label(int(new_pr_number), LABEL_WIP, dry_run=False)
-        add_label(int(new_pr_number), LABEL_AUTO_PR, dry_run=False)
-
-        # In test mode, keep the auto-created PR out of other teams' review
-        # queues by marking it "Do Not Merge". Never do this on real master.
-        if IS_TEST_MODE:
-            add_label(int(new_pr_number), DO_NOT_MERGE_LABEL, dry_run=False)
-
-        gh_run(
-            "pr", "close", str(pr_number), "--repo", REPO,
-            "--comment", build_autofix_close_comment(new_pr_number),
-        )
-        print(f"  Closed PR #{pr_number} with comment pointing to fix PR #{new_pr_number}")
-        add_label(pr_number, LABEL_AUTOFIXED, dry_run)
-        return True
+        return finalize_autofix(pr, fix_branch, None)
 
     finally:
         git("worktree", "remove", "--force", tmpdir)
@@ -807,7 +930,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
                 # real conflict.
                 print("  Merge failed but no conflicts could be classified "
                       "— labeling for manual review.")
-                add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+                send_to_manual_review(pr_number, dry_run)
                 return True
             print("  No conflicts found locally (GitHub mergeability may be stale).")
             return False
@@ -816,7 +939,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             # The PR has conflicts that are NOT from the reorg.  We must not
             # touch it — just label it so a human can resolve it manually.
             print("  Non-reorg conflicts present — labeling for manual review.")
-            add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+            send_to_manual_review(pr_number, dry_run)
             return True
 
         # All conflicts are reorg-caused.  Before attempting an auto-fix, skip
@@ -872,8 +995,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             return True
         # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
         print("  Auto-fix failed or not applicable — labeling for manual review.")
-        add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-        post_comment(pr_number, build_manual_review_comment(), dry_run)
+        send_to_manual_review(pr_number, dry_run)
         return True
 
     finally:
@@ -897,7 +1019,7 @@ def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
     # Only fields actually consumed below. Note baseRefOid/headRefOid are NOT
     # requested: `gh pr list` doesn't support them (only `gh pr view` does), and
     # nothing here uses them.
-    fields = ("number,title,body,labels,headRefName,"
+    fields = ("number,title,body,author,labels,headRefName,"
               "baseRefName,isCrossRepository,mergeable,updatedAt")
     if only:
         # Explicitly named PRs are an intentional override, but still guard

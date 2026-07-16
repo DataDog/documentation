@@ -7,13 +7,14 @@ How the conflict-resolution script decides what to do with each open PR after th
 | Label | Applied to | Meaning |
 |-------|-----------|---------|
 | `LABEL_NO_CONFLICTS` | original PR | PR merges cleanly after the reorg; ignored from then on. |
-| `LABEL_MANUAL_REVIEW` | original PR | Conflicts that can't be fixed automatically; queued for a person. Ignored from then on. |
+| `LABEL_MANUAL_REVIEW` | original PR | Conflicts that can't be fixed automatically; queued for a person. Ignored from then on. Applied together with `LABEL_WIP` and a comment (see [Sending a PR to manual review](#sending-a-pr-to-manual-review)). |
 | `LABEL_STALE` | original PR | PR had no activity for more than `STALE_DAYS`; skipped instead of auto-fixed. |
 | `LABEL_AUTOFIXED` | original PR | PR was auto-fixed; the original is closed and points to a new fix PR. |
 | `LABEL_AUTO_PR` | new fix PR | Marks the automatically created fix PR. |
 | `LABEL_HELP_REQUESTED` | original PR (added by the author) | The author is asking a person to step in on an already-processed PR they're still stuck on. The script leaves these PRs alone. |
 | `LABEL_WIP` | original PR (added by the author) | Author marked the PR as not ready; it gets a comment and is then skipped. |
 | `LABEL_SKIP` | original PR | Applied by the script after commenting on a work-in-progress PR, so later runs don't pick it up again. |
+| `LABEL_PROCESSED` | every PR the script acts on | Visibility aid so all reorg-affected PRs are findable with one filter, regardless of outcome. Not used for idempotency and deliberately absent from the query. |
 | `DO_NOT_MERGE_LABEL` | new fix PR (test runs only) | Keeps auto-created fix PRs out of other teams' review queues. |
 
 Key thresholds:
@@ -45,12 +46,12 @@ The script does a trial merge against the post-reorg base and sorts each conflic
 What happens next depends on what it found:
 
 #### 3a. No conflicts could actually be pinned down
-- If the trial merge failed but the script couldn't identify which files conflicted (an unusual case), it plays it safe and labels the PR `LABEL_MANUAL_REVIEW` rather than guessing.
+- If the trial merge failed but the script couldn't identify which files conflicted (an unusual case), it plays it safe and [sends the PR to manual review](#sending-a-pr-to-manual-review) rather than guessing.
 - If the trial merge was clean after all, GitHub's earlier "conflicting" status was probably out of date; the PR is skipped so a later run can reassess.
 
 #### 3b. Some conflicts are unrelated to the reorg
 
-The script never touches conflicts it didn't cause. It labels the PR `LABEL_MANUAL_REVIEW` and leaves it for a person.
+The script never touches conflicts it didn't cause. It [sends the PR to manual review](#sending-a-pr-to-manual-review) and leaves it for a person.
 
 #### 3c. All conflicts were caused by the reorg
 
@@ -62,8 +63,21 @@ Before fixing anything, the PR has to be "ready." These checks run in order.
 
 **Auto-fix** — If the PR is ready and every conflict came from the reorg, the script fixes it:
 - It replays the PR's commits onto a new fix branch with all file paths moved to the new `hugo/` layout, keeping the original authorship and commit messages.
-- If that succeeds, it opens a new fix PR (labeled `LABEL_AUTO_PR` and `LABEL_WIP`, plus `DO_NOT_MERGE_LABEL` on test runs), then closes the original PR with a comment linking to the fix and labels the original `LABEL_AUTOFIXED`. An auto-fixed PR carries only that one label.
-- If the fix can't be applied — for example the PR comes from a fork the script can't push to, or the replay fails — it labels the PR `LABEL_MANUAL_REVIEW` and posts a comment saying so.
+- If that succeeds, it opens a new fix PR (labeled `LABEL_AUTO_PR` and `LABEL_WIP`, plus `DO_NOT_MERGE_LABEL` on test runs), then closes the original PR with a comment linking to the fix and labels the original `LABEL_AUTOFIXED`. Every PR the script acts on — including this one — also receives `LABEL_PROCESSED`. The fix PR's description **@mentions the original author**, so they're notified the moment it's opened (which is before the original is closed — see [Resuming an interrupted fix](#resuming-an-interrupted-fix)).
+- If the fix can't be applied — for example the PR comes from a fork the script can't push to, or the replay fails — it [sends the PR to manual review](#sending-a-pr-to-manual-review).
+
+### Resuming an interrupted fix
+
+The auto-fix happens in stages: push the fix branch, open the fix PR, then close the original. If a run dies in between (a network blip, an interrupted process), a later run detects the partial state and **finishes the job** instead of bailing:
+
+- **Fix PR already open:** the script reuses it — re-applies its labels, then closes the original pointing at it and labels the original `LABEL_AUTOFIXED`.
+- **Fix branch pushed but no PR:** the script opens the PR from the existing branch, then finishes as above.
+
+It never rebuilds or force-pushes an existing fix branch, so a fix already in review is never clobbered. If it truly can't build the branch (for instance it's checked out in a lingering worktree), it falls back to [manual review](#sending-a-pr-to-manual-review). Because the fix PR's description @mentions the author, they learn about the fix even if the original close step never ran.
+
+### Sending a PR to manual review
+
+Every non-auto-fixable outcome (a non-reorg conflict, an unclassifiable merge failure, or a failed replay) is handled the same way: the script applies `LABEL_MANUAL_REVIEW` (which excludes the PR from all future runs), applies `LABEL_WIP` (which keeps it out of the docs team's review queue until the author acts), and posts a single comment explaining the situation. The comment tells the author to resolve the conflicts and then remove the `WORK IN PROGRESS` label, or to add `LABEL_HELP_REQUESTED` if they'd rather a person take over.
 
 ## Stale handling
 
