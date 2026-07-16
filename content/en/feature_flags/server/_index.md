@@ -17,15 +17,36 @@ further_reading:
 - link: "/feature_flags/implementation_patterns/serverless/"
   tag: "Documentation"
   text: "Serverless environments and Feature Flags"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language and use Remote Configuration to receive flag updates in real time.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language, receive Universal Flag Configuration (UFC), and evaluate flags locally.
 
-Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
-This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
+## Configuration delivery
+
+Agentless configuration delivery is the default in server SDK versions that support it. The SDK fetches UFC directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
+
+Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use Agent Remote Configuration instead. See [Server SDK Configuration Sources][6] for architecture, security, and operational details.
+
+| SDK | Minimum agentless version |
+|---|---|
+| Java (`dd-java-agent` and `dd-openfeature`) | 1.65.0 |
+| Node.js `dd-trace` v5 | 5.116.0 |
+| Node.js `dd-trace` v6 | 6.5.0 |
+
+<div class="alert alert-warning">The initial agentless releases support configuration delivery and local flag evaluation. They do not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. No-Agent deployments do not send those events.</div>
+
+Agentless delivery is available for Java and Node.js in the versions listed. Other server SDKs use Agent Remote Configuration until their language pages list an agentless minimum version.
+
+## Choose a language
+
+Select your language or framework to view SDK-specific setup instructions:
 
 {{< card-grid card_width="200px" >}}
   {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
@@ -37,33 +58,68 @@ This guide covers the common setup required for all server-side SDKs, including 
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
 
-For serverless runtimes, see [Serverless Environments][5] for the Agent-based architecture and limitations.
+For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, version requirements, and initial telemetry limitations.
 
 ## Prerequisites
 
-Before setting up server-side feature flags, ensure you have:
+All server SDKs require:
 
-- **Datadog Agent 7.55 or later** installed and running
-- **Datadog [API key][2]** configured
 - **APM tracing** [enabled in your application][4]
-- **Remote Configuration** enabled for your organization. Verify this in [{{< ui >}}Organization Settings{{< /ui >}}][3].
+- The language-specific tracer and OpenFeature provider versions listed on the SDK page
+- A Datadog [API key][2]
 
-## Agent configuration
+Source-specific requirements are:
 
-Server-side feature flags use [Remote Configuration][1] to deliver flag configurations to your application. Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
+| Source | Requirements |
+|---|---|
+| `agentless` (default where supported) | Configure `DD_API_KEY`, `DD_ENV`, and optionally `DD_SITE` in the application process. No Agent is required for flag configuration. |
+| `remote_config` | Datadog Agent 7.55 or later with Remote Configuration enabled, the API key configured on the Agent, and Remote Configuration enabled for your organization in [{{< ui >}}Organization Settings{{< /ui >}}][3]. |
 
-See the [Remote Configuration documentation][1] for detailed setup instructions across different deployment environments.
+## Agentless configuration
 
-### Polling interval
-
-The Agent polls Datadog for configuration updates at a configurable interval. This interval determines the average time between making a flag change in the UI and the change becoming available to your application.
+For Java 1.65.0 and Node.js 5.116.0 or 6.5.0, configure the application process:
 
 {{< code-block lang="bash" >}}
-# Optional: Configure polling interval (default: 60s)
+# Required: Enable the Feature Flags provider
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Required for direct configuration delivery
+DD_API_KEY=<DATADOG_API_KEY>
+DD_ENV=<YOUR_ENVIRONMENT>
+
+# Optional: Defaults to datadoghq.com
+DD_SITE=<DATADOG_SITE>
+
+# Optional: Agentless is the default
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+{{< /code-block >}}
+
+See the Java and Node.js pages for dependency versions and language-specific initialization.
+
+## Agent remote configuration
+
+Set the source explicitly to retain Agent-managed delivery:
+
+{{< code-block lang="bash" >}}
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_REMOTE_CONFIGURATION_ENABLED=true
+{{< /code-block >}}
+
+Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
+
+See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
+
+### Remote configuration polling interval
+
+The Agent polls Datadog for configuration updates at a configurable interval:
+
+{{< code-block lang="bash" >}}
+# Optional: Configure the Agent polling interval (default: 60s)
 DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=10s
 {{< /code-block >}}
 
-## Application configuration
+## Common application configuration
 
 Configure your application with the standard Datadog environment variables. These are common across all server-side SDKs:
 
@@ -73,10 +129,6 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 
-# Agent connection (if not using default localhost:8126)
-DD_AGENT_HOST=localhost
-DD_TRACE_AGENT_PORT=8126
-
 # Required: Enable the feature flagging provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
@@ -85,8 +137,6 @@ DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 {{< /code-block >}}
 
 <div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
-
-<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
 See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
@@ -148,3 +198,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
 [5]: /feature_flags/implementation_patterns/serverless/
+[6]: /feature_flags/concepts/configuration_sources/

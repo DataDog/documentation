@@ -17,19 +17,25 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Node.js tracer (`dd-trace`).
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default. Agent Remote Configuration remains available through explicit opt-in.
+
+<div class="alert alert-warning">Agentless mode in Node.js 5.116.0 and 6.5.0 supports configuration delivery and local flag evaluation. It does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. No-Agent deployments do not send those events.</div>
 
 ## Prerequisites
 
-Before setting up the Node.js Feature Flags SDK, ensure you have:
+Before setting up the Node.js Feature Flags SDK, verify these requirements:
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
-- **Datadog [API key][3]** configured on the Agent
-- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
+- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later for Feature Flags
+- **Agentless configuration delivery**: `dd-trace` version **5.116.0 or later on the v5 release line**, or **6.5.0 or later on the v6 release line**
+- **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled, only when `remote_config` is selected
+- **Datadog [API key][3]** configured in the application for agentless delivery, or on the Agent for Remote Configuration
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
@@ -40,24 +46,54 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 npm install dd-trace @openfeature/server-sdk
 ```
 
-Enable the provider with environment variables:
+If your application stays on the v5 release line, use `dd-trace@^5.116.0`. On the v6 release line, use `dd-trace@^6.5.0`.
+
+### Agentless configuration (default)
+
+Configure the application process with:
 
 ```shell
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Required: Enable Remote Configuration in the tracer
-DD_REMOTE_CONFIGURATION_ENABLED=true
+# Required for agentless configuration delivery
+DD_API_KEY=<YOUR_API_KEY>
+DD_ENV=<YOUR_ENVIRONMENT>
+
+# Optional: Defaults to datadoghq.com
+DD_SITE=<YOUR_DATADOG_SITE>
+
+# Optional: Agentless is the default
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+
+# Optional: Agentless polling controls
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS=30
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS=2
 
 # Optional: Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests.
+
+<div class="alert alert-warning">In Node.js 5.116.0 and 6.5.0, agentless mode supports flag evaluation. It does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events.</div>
+
+### Agent remote configuration
+
+To retain Agent-managed delivery, configure:
+
+```shell
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_REMOTE_CONFIGURATION_ENABLED=true
+```
+
+This mode requires Datadog Agent 7.55 or later with Remote Configuration enabled and the API key configured on the Agent.
 
 To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
@@ -71,11 +107,13 @@ tracer.init({
   experimental: {
     flaggingProvider: {
       enabled: true,
+      // Optional because agentless is the default.
+      configurationSource: 'agentless',
     }
   }
 });
 
-// setProviderAndWait resolves after Remote Configuration loads, so flags
+// setProviderAndWait resolves after the selected source loads, so flags
 // evaluate against real configuration data instead of default values.
 try {
   await OpenFeature.setProviderAndWait(tracer.openfeature);
@@ -107,7 +145,7 @@ Blocking startup until the provider is ready, as shown above, works well for mos
 
 ### Accepting default values before initialization
 
-When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
+When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until the selected configuration source loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
@@ -264,7 +302,7 @@ const priceMultiplier = await client.getNumberValue(
 
 ### Object flags
 
-For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
+For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful when multiple properties need to be provided together.
 
 ```javascript
 const defaultConfig = {

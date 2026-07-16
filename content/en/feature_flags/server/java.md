@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 <div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
@@ -24,9 +27,9 @@ See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server
 
 This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd-trace-java`) and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
+The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd-trace-java`) and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility. Starting in version 1.65.0, the SDK loads flag configuration directly from the Datadog-managed CDN by default. Agent Remote Configuration remains available through explicit opt-in.
 
-<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java SDK and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
+<div class="alert alert-warning">Java 1.65.0 agentless mode supports configuration delivery and local flag evaluation. It does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. No-Agent deployments do not send those events.</div>
 
 ## Compatibility requirements
 
@@ -34,15 +37,16 @@ The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java SDK** (`dd-java-agent`, added with `-javaagent`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
 - **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Agentless configuration delivery**: Version **1.65.0** or later for both `dd-java-agent` and `dd-openfeature`
 - **OpenFeature SDK**: Version **1.20.1** or later
-- **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
-- **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
+- **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled, only when `remote_config` is selected
+- **Datadog [API key][7]**: Configured in the application for agentless delivery, or on the Agent for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#install-and-configure-the-agent).
+Before you begin, choose a [configuration source][9]. Agentless is the default starting in Java 1.65.0 and does not require an Agent for flag configuration. Use `remote_config` to explicitly retain Agent-managed delivery.
 
 ## Installation
 
@@ -58,7 +62,7 @@ dependencies {
     implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.63.0'
+    implementation 'com.datadoghq:dd-openfeature:1.65.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -72,7 +76,7 @@ dependencies {
     implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.63.0")
+    implementation("com.datadoghq:dd-openfeature:1.65.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -93,7 +97,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.63.0</version>
+        <version>1.65.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -106,26 +110,9 @@ To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the
 
 ## Configuration
 
-If your Datadog Agent already has Remote Configuration enabled for other features (like Dynamic Instrumentation or Application Security), you can skip the Agent configuration and go directly to [Application configuration](#application-configuration).
+### Agentless configuration (default)
 
-### Agent configuration
-
-Configure your Datadog Agent to enable Remote Configuration:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-# Enable Remote Configuration
-remote_configuration:
-  enabled: true
-
-# Set your API key
-api_key: <YOUR_API_KEY>
-{{< /code-block >}}
-
-### Application configuration
-
-If your application already runs with `-javaagent:dd-java-agent.jar` and Remote Configuration is available, you only need to add the feature flagging variable (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the SDK download and JVM configuration steps.
-
-Configure your Java application with the required environment variables or system properties:
+Java 1.65.0 and later use agentless configuration delivery by default. Configure the API key, site, and environment in the application process. A Datadog Agent is not required for flag configuration.
 
 {{< tabs >}}
 {{% tab "Environment Variables" %}}
@@ -134,14 +121,22 @@ Configure your Java application with the required environment variables or syste
 # The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
+# Required for agentless configuration delivery
+export DD_API_KEY=<YOUR_API_KEY>
+export DD_ENV=<YOUR_ENVIRONMENT>
+
+# Optional: Defaults to datadoghq.com
+export DD_SITE=<YOUR_DATADOG_SITE>
+
+# Optional: Agentless is the default
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+
+# Optional: Agentless polling controls
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS=30
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS=2
 
 # Required: Service name
 export DD_SERVICE=<YOUR_SERVICE_NAME>
-
-# Required: Environment (e.g., prod, staging, dev)
-export DD_ENV=<YOUR_ENVIRONMENT>
 
 # Optional: Version
 export DD_VERSION=<YOUR_APP_VERSION>
@@ -153,21 +148,47 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 
 {{% tab "System Properties" %}}
 {{< code-block lang="bash" >}}
+# API keys are accepted from environment variables or files, not JVM system properties.
+export DD_API_KEY=<YOUR_API_KEY>
+
 java -javaagent:path/to/dd-java-agent.jar \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.env=<YOUR_ENVIRONMENT> \
+  -Ddd.site=<YOUR_DATADOG_SITE> \
+  -Ddd.feature.flags.configuration.source=agentless \
+  -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.version=<YOUR_APP_VERSION> \
   -jar your-application.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog feature flagging system starts automatically when the tracer is initialized with Remote Configuration available and the feature flagging provider enabled. No additional initialization code is required in your application.
+The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests.
 
-<div class="alert alert-danger">Feature flagging requires <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> and Remote Configuration connectivity. Without the provider setting, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
+<div class="alert alert-danger">Feature flagging requires <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without this setting, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 
-<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
+<div class="alert alert-warning">In Java 1.65.0, agentless mode supports flag evaluation but does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events.</div>
+
+### Agent remote configuration
+
+To retain Agent-managed delivery, set the source to `remote_config`:
+
+{{< code-block lang="bash" >}}
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+export DD_REMOTE_CONFIGURATION_ENABLED=true
+{{< /code-block >}}
+
+Configure your Datadog Agent to enable Remote Configuration:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+remote_configuration:
+  enabled: true
+
+api_key: <YOUR_API_KEY>
+{{< /code-block >}}
+
+Remote Configuration is enabled by default on Agent 7.47.0 and later. Agent 7.55 or later is required for Feature Flags.
 
 ### Add the Java tracer to the JVM
 
@@ -217,9 +238,9 @@ public class App {
 }
 {{< /code-block >}}
 
-Use `setProviderAndWait()` to block evaluation until the initial flag configuration is received from Remote Configuration. This helps ensure flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
+Use `setProviderAndWait()` to block evaluation until the selected configuration source provides the initial flag configuration. This makes flag values available before the application starts serving traffic. The default timeout is 30 seconds.
 
-`ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
+`ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if configuration delivery is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
 ### Asynchronous initialization
 
@@ -394,7 +415,7 @@ api.setProviderAndWait(new Provider(options));
 
 ### Configuration change events
 
-Listen for configuration updates from Remote Configuration:
+Listen for updates from the selected configuration source:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -557,7 +578,7 @@ In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfigurat
 
 ## Troubleshooting
 
-This guide follows the flag data path from the **Flagging Platform** (where flags are configured) through **Remote Configuration** and the **Datadog Agent** to the **Java SDK**, and back to the **Flagging Platform** (where evaluations and exposures appear). Work through each step in sequence to isolate where a problem originates.
+Follow the flag data path from the **Flagging Platform** through the selected configuration source to the **Java SDK**. Agentless and Remote Configuration have different prerequisites, so verify the active source before troubleshooting connectivity.
 
 ### 1. Flagging platform: Verify flag configuration
 
@@ -567,31 +588,26 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 2. The flag targets the **correct environment** (`DD_ENV`). Flags do not target specific services—they apply to all services within the enabled environment.
 3. Your `DD_ENV` value appears in [{{< ui >}}Feature Flag Environments{{< /ui >}}][5]. If it is absent, the environment has not received any flag traffic yet.
 
-### 2. Remote Configuration: Verify the path
+### 2. Verify the configuration source
 
-Remote Configuration delivers flag configurations from the Datadog backend to the Agent.
+#### Agentless
 
-1. **RC is enabled on the Agent**: Agent 7.47.0 and later enable Remote Configuration by default. If it has been disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
-2. **`DD_API_KEY` is valid on the Agent** and belongs to the target organization.
-3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Agent Site Issues][3].
-4. **Fleet Automation**: Open [{{< ui >}}Fleet Automation{{< /ui >}}][4], select the Agent your application connects to, and confirm Remote Configuration is active.
-5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
+1. Confirm both `dd-java-agent` and `dd-openfeature` are version 1.65.0 or later.
+2. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is unset or set to `agentless`.
+3. Confirm `DD_API_KEY`, `DD_ENV`, and `DD_SITE` are configured in the application process.
+4. Confirm the application can make outbound HTTPS requests to Datadog.
+5. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flagging agentless endpoint.
 
-### 3. Agent: Verify Agent health and connectivity
+#### Agent remote configuration
 
-1. **Agent is running and reachable**: See [APM Connection Errors][2] for steps to verify Agent connectivity from the tracer.
-2. **Agent version**: Feature flagging requires Agent 7.55 or later with EVP Proxy support.
-3. **EVP proxy is available**: Query the Agent's info endpoint and confirm the response includes `evp_proxy/v4/` and `v0.7/config` in the `endpoints` array:
-   ```bash
-   curl http://localhost:8126/info
-   ```
+1. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set in the application.
+2. Confirm Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
+3. Confirm Remote Configuration is enabled on the Agent. If it has been disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
+4. Confirm `DD_API_KEY` is valid on the Agent and belongs to the target organization.
+5. Confirm `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
+6. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
 
-   If the Agent logs show the following error, the Agent either started after the tracer connected or does not support EVP Proxy. In this case, check the Agent version and restart order.
-   ```
-   Cannot create backend API client since Agentless mode is disabled, and agent does not support EVP proxy
-   ```
-
-### 4. SDK: Verify Java SDK state
+### 3. Verify Java SDK state
 
 #### Enable debug logging
 
@@ -600,12 +616,6 @@ All feature flagging startup messages are emitted at DEBUG level. Set `DD_TRACE_
 ```
 [dd.trace] Feature Flagging system starting
 [dd.trace] Feature Flagging system started
-```
-
-Then confirm the EVP Proxy and config endpoints were discovered:
-
-```
-discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
 ```
 
 If these messages are absent, verify `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set and the tracer started correctly.
@@ -634,17 +644,17 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-A `PROVIDER_ERROR` or `PROVIDER_STALE` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+A `PROVIDER_ERROR` or `PROVIDER_STALE` event after a period of normal operation indicates a disruption in the selected configuration source.
 
 #### Provider not ready
 
-`PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from Remote Configuration. This state persists until the tracer receives its initial flag configuration payload from the Agent.
+`PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from the selected source.
 
 Common causes:
-- **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
+- **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first configuration arrives return `PROVIDER_NOT_READY`.
 - **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while waiting for the first configuration.
 
-Remote Configuration sync can take 30-60 seconds after publishing flags. If `PROVIDER_NOT_READY` persists beyond that, re-check steps 2 and 3.
+If `PROVIDER_NOT_READY` persists beyond the source's polling and initialization interval, re-check steps 2 and 3.
 
 #### Debug flag evaluations
 
@@ -667,7 +677,9 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 `TYPE_MISMATCH` is returned when the evaluation method does not match the flag's configured type. Use the correct method for each flag type: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
 
-### 5. Flagging platform: Verify data appears in Datadog
+### 4. Flagging telemetry
+
+<div class="alert alert-warning">Java 1.65.0 does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. Their absence in a no-Agent deployment is expected and does not indicate that configuration loading or local evaluation failed.</div>
 
 #### Flag evaluation metrics
 
@@ -675,10 +687,10 @@ Flag evaluation counts appear in Datadog as a `feature_flag.evaluations` counter
 
 #### Experiment exposures
 
-Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
+When using a delivery path that supports exposures, exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
-2. Verify the Agent's `DD_API_KEY` is correct and the Agent is receiving events.
+2. Verify the telemetry path's API key and connectivity.
 
 ## Further reading
 
@@ -692,3 +704,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [6]: /agent/configuration/agent-commands/
 [7]: /account_management/api-app-keys/#api-keys
 [8]: /feature_flags/guide/server_flag_evaluation_metrics/
+[9]: /feature_flags/concepts/configuration_sources/
